@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/fuhuadata.iml" filepath="$PROJECT_DIR$/fuhuadata.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fuhuadata-dao/fuhuadata-dao.iml" filepath="$PROJECT_DIR$/fuhuadata-dao/fuhuadata-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fuhuadata-domain/fuhuadata-domain.iml" filepath="$PROJECT_DIR$/fuhuadata-domain/fuhuadata-domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fuhuadata-manager/fuhuadata-manager.iml" filepath="$PROJECT_DIR$/fuhuadata-manager/fuhuadata-manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fuhuadata-service/fuhuadata-service.iml" filepath="$PROJECT_DIR$/fuhuadata-service/fuhuadata-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fuhuadata-web/fuhuadata-web.iml" filepath="$PROJECT_DIR$/fuhuadata-web/fuhuadata-web.iml" />
+    </modules>
+  </component>
+</project>

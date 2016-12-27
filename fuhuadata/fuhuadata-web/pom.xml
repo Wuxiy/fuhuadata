@@ -1,0 +1,214 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>fuhuadata</artifactId>
+    <groupId>com.fuhua</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <groupId>com.fuhua</groupId>
+  <artifactId>fuhuadata-web</artifactId>
+  <packaging>war</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>fuhuadata-web Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  <dependencies> 
+        <dependency>
+            <groupId>com.fuhua</groupId>
+            <artifactId>fuhuadata-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.tuckey</groupId>
+            <artifactId>urlrewritefilter</artifactId>
+        </dependency>
+        <!-- logging begin -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </dependency>
+        <!-- logging end -->
+
+        <!-- servlet jsp begin -->
+        <dependency> 
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jsp-api</artifactId>
+        </dependency>
+        <dependency>
+			    <groupId>javax.servlet</groupId>
+			    <artifactId>jstl</artifactId>
+		</dependency>
+        <!-- servlet jsp end -->
+        <!-- struts begin -->
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-spring-plugin</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javassist</groupId>
+            <artifactId>javassist</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-json-plugin</artifactId>
+        </dependency>
+        <!-- struts end -->
+
+        <!-- IBATIS begin -->
+        <dependency>
+            <groupId>org.apache.ibatis</groupId>
+            <artifactId>ibatis-sqlmap</artifactId>
+        </dependency>
+        <!-- IBATIS END -->
+
+        <!-- velocity begin -->
+        <dependency>
+            <groupId>velocity-tools</groupId>
+            <artifactId>velocity-tools</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+        </dependency>
+        <!-- velocity end -->
+
+        <!-- APAPCHE LANG BEGIN -->
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+        </dependency>
+        <!-- APAPCHE LANG END -->
+
+        <!-- apache commons begin -->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+        </dependency>
+        <!-- YUI Compressor -->
+        <dependency>
+            <groupId>yuicompressor</groupId>
+            <artifactId>yuicompressor</artifactId>
+            <version>2.4.7</version>
+        </dependency>
+        <dependency>
+            <groupId>net.bull.javamelody</groupId>
+            <artifactId>javamelody-core</artifactId>
+            <version>1.37.0</version>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+        </dependency> 
+    </dependencies>
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <!-- jetty插件 -->
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>maven-jetty-plugin</artifactId>
+                <version>6.1.25</version>
+                <configuration>
+                    <contextPath>/</contextPath>
+                    <scanIntervalSeconds>5</scanIntervalSeconds>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>tomcat-maven-plugin</artifactId>
+                <version>1.1</version>
+                <configuration>
+                    <port>80</port>
+                    <path>/</path>
+                    <uriEncoding>UTF-8</uriEncoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!-- war插件 -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.1</version>
+                <configuration>
+                    <warName>${project.artifactId}</warName>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <encoding>UTF-8</encoding>
+                    <verbose>true</verbose>  
+                    <fork>true</fork>  
+                    <executable>${JAVA8_HOME}</executable>  
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <profiles>
+        <profile>
+
+            <id>development</id>
+
+            <activation>
+            	<activeByDefault>true</activeByDefault>
+            </activation>
+
+            <properties>
+         
+
+                <fuhua.log.level>DEBUG</fuhua.log.level>
+                <system.log.path>d:/fuhualog</system.log.path>
+                <fuhua.log.additivity>true</fuhua.log.additivity>
+                <fuhua.struts.devMode>true</fuhua.struts.devMode>
+                <fuhua.domain.name>data.fuhua.com</fuhua.domain.name>
+                <jdsmy.jdbc.datasource.type>dbcp</jdsmy.jdbc.datasource.type>
+                <jdsmy.jdbc.driver>com.mysql.jdbc.Driver</jdsmy.jdbc.driver>
+                <jdsmy.jdbc.url>
+                     <![CDATA[jdbc:mysql://127.0.0.1:3306/fuhuadata?useUnicode=true&amp;characterEncoding=UTF8]]>
+                </jdsmy.jdbc.url>
+                <jdsmy.jdbc.username>root</jdsmy.jdbc.username>
+                <jdsmy.jdbc.password>root</jdsmy.jdbc.password>
+
+				
+                <!--.......................passport相关开始....................... -->
+                <!-- 前台登录cookie名 -->
+                <fuhua.login.cookie.name>_fuhua_</fuhua.login.cookie.name>
+                <!-- 前台登录cookie域名 -->
+                <fuhua.login.cookie.domain>data.fuhua.com</fuhua.login.cookie.domain>
+                <!-- 前台cookie密钥 -->
+                <fuhua.cookie.key>xLyhSVcQGix62o+t2fjZyx+bC+zQZCl2</fuhua.cookie.key>
+                <!-- 超时时间 -->
+                <fuhua.session.timeout>3600</fuhua.session.timeout>
+                <!-- 解密密钥 -->
+                <fuhua.passport.login.auth.key>8B6697227CBCA902B1A0925D40FAA00B353F2DF4359D2099</fuhua.passport.login.auth.key>
+                <fuhua.login.domain.name>passport.fuhua.com</fuhua.login.domain.name>
+                <!-- 登录地址 -->
+                <fuhua.login.address>http://${fuhua.login.domain.name}/login/login.jsp</fuhua.login.address>
+                <!--............................. passport相关结束...................... -->
+            </properties>
+        </profile>
+     </profiles>
+</project>
