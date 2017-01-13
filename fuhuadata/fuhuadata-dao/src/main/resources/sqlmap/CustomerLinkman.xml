@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CUSTOMERLINKMAN">
+   	<typeAlias alias="CustomerLinkman" type="com.fuhuadata.domain.CustomerLinkman"/>
+   	<typeAlias alias="QueryCustomerLinkman" type="com.fuhuadata.domain.query.QueryCustomerLinkman"/>
+	
+	<resultMap id="CUSTOMERLINKMAN-MAP" class="CustomerLinkman">
+					<result property="linkmanId" column="linkman_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="name" column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="linkPhone1" column="link_phone1" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="linkPhone2" column="link_phone2" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="lemail" column="lemail" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="posts" column="posts" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="responseArea" column="response_area" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="onJob" column="on_job" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="sex" column="sex" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="birthday" column="birthday" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+								<result property="nationality" column="nationality" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="influence" column="influence" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="exhibitionHabits" column="exhibition_habits" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="fancy" column="fancy" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="eatingHabits" column="eating_habits" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="faith" column="faith" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="isDefault" column="is_default" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="remarks" column="remarks" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="createUserId" column="create_user_id" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="createUserName" column="create_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="lastmodifyUserId" column="lastmodify_user_id" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="lastmodifyUserName" column="lastmodify_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="createTime" column="create_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+								<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+														</resultMap>
+	
+	<sql id="PAGE-COMMON">	
+		<dynamic prepend=" WHERE ">
+				<isNotNull prepend=" AND " property="linkmanId">
+			linkman_id = #linkmanId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="customerId">
+			customer_id = #customerId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="name">
+			name = #name#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="linkPhone1">
+			link_phone1 = #linkPhone1#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="linkPhone2">
+			link_phone2 = #linkPhone2#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="lemail">
+			lemail = #lemail#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="posts">
+			posts = #posts#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="responseArea">
+			response_area = #responseArea#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="onJob">
+			on_job = #onJob#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="sex">
+			sex = #sex#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="birthday">
+			birthday = #birthday#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="nationality">
+			nationality = #nationality#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="influence">
+			influence = #influence#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="exhibitionHabits">
+			exhibition_habits = #exhibitionHabits#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="fancy">
+			fancy = #fancy#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="eatingHabits">
+			eating_habits = #eatingHabits#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="faith">
+			faith = #faith#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="isDefault">
+			is_default = #isDefault#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="remarks">
+			remarks = #remarks#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createUserId">
+			create_user_id = #createUserId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createUserName">
+			create_user_name = #createUserName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="lastmodifyUserId">
+			lastmodify_user_id = #lastmodifyUserId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="lastmodifyUserName">
+			lastmodify_user_name = #lastmodifyUserName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createTime">
+			create_time = #createTime#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="modifyTime">
+			modify_time = #modifyTime#
+		</isNotNull>
+				</dynamic>
+	</sql>
+	
+	<sql id="QUERY-COMMON">	
+		<dynamic prepend=" WHERE ">
+				<isNotNull prepend=" AND " property="linkmanId">
+			linkman_id = #linkmanId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="customerId">
+			customer_id = #customerId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="name">
+			name = #name#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="linkPhone1">
+			link_phone1 = #linkPhone1#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="linkPhone2">
+			link_phone2 = #linkPhone2#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="lemail">
+			lemail = #lemail#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="posts">
+			posts = #posts#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="responseArea">
+			response_area = #responseArea#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="onJob">
+			on_job = #onJob#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="sex">
+			sex = #sex#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="birthday">
+			birthday = #birthday#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="nationality">
+			nationality = #nationality#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="influence">
+			influence = #influence#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="exhibitionHabits">
+			exhibition_habits = #exhibitionHabits#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="fancy">
+			fancy = #fancy#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="eatingHabits">
+			eating_habits = #eatingHabits#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="faith">
+			faith = #faith#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="isDefault">
+			is_default = #isDefault#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="remarks">
+			remarks = #remarks#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createUserId">
+			create_user_id = #createUserId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createUserName">
+			create_user_name = #createUserName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="lastmodifyUserId">
+			lastmodify_user_id = #lastmodifyUserId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="lastmodifyUserName">
+			lastmodify_user_name = #lastmodifyUserName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createTime">
+			create_time = #createTime#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="modifyTime">
+			modify_time = #modifyTime#
+		</isNotNull>
+				</dynamic>
+	</sql>
+	
+	<insert id="ADD" parameterClass="CustomerLinkman">
+		INSERT INTO 
+		customer_linkman(linkman_id,customer_id,name,link_phone1,link_phone2,lemail,posts,response_area,on_job,sex,birthday,nationality,influence,exhibition_habits,fancy,eating_habits,faith,is_default,remarks,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time) 
+		VALUES(#linkmanId#,#customerId#,#name#,#linkPhone1#,#linkPhone2#,#lemail#,#posts#,#responseArea#,#onJob#,#sex#,#birthday#,#nationality#,#influence#,#exhibitionHabits#,#fancy#,#eatingHabits#,#faith#,#isDefault#,#remarks#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
+		<selectKey resultClass="String" keyProperty="id">
+			SELECT @@IDENTITY AS ID
+		</selectKey>
+	</insert>
+	
+	<update id="UPDATE" parameterClass="CustomerLinkman">
+		UPDATE customer_linkman 
+		<dynamic prepend=" SET ">
+						<isNotEmpty prepend=", " property="linkmanId">linkman_id=#linkmanId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="customerId">customer_id=#customerId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="name">name=#name#</isNotEmpty>
+						<isNotEmpty prepend=", " property="linkPhone1">link_phone1=#linkPhone1#</isNotEmpty>
+						<isNotEmpty prepend=", " property="linkPhone2">link_phone2=#linkPhone2#</isNotEmpty>
+						<isNotEmpty prepend=", " property="lemail">lemail=#lemail#</isNotEmpty>
+						<isNotEmpty prepend=", " property="posts">posts=#posts#</isNotEmpty>
+						<isNotEmpty prepend=", " property="responseArea">response_area=#responseArea#</isNotEmpty>
+						<isNotEmpty prepend=", " property="onJob">on_job=#onJob#</isNotEmpty>
+						<isNotEmpty prepend=", " property="sex">sex=#sex#</isNotEmpty>
+						<isNotEmpty prepend=", " property="birthday">birthday=#birthday#</isNotEmpty>
+						<isNotEmpty prepend=", " property="nationality">nationality=#nationality#</isNotEmpty>
+						<isNotEmpty prepend=", " property="influence">influence=#influence#</isNotEmpty>
+						<isNotEmpty prepend=", " property="exhibitionHabits">exhibition_habits=#exhibitionHabits#</isNotEmpty>
+						<isNotEmpty prepend=", " property="fancy">fancy=#fancy#</isNotEmpty>
+						<isNotEmpty prepend=", " property="eatingHabits">eating_habits=#eatingHabits#</isNotEmpty>
+						<isNotEmpty prepend=", " property="faith">faith=#faith#</isNotEmpty>
+						<isNotEmpty prepend=", " property="isDefault">is_default=#isDefault#</isNotEmpty>
+						<isNotEmpty prepend=", " property="remarks">remarks=#remarks#</isNotEmpty>
+						<isNotEmpty prepend=", " property="createUserId">create_user_id=#createUserId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="createUserName">create_user_name=#createUserName#</isNotEmpty>
+						<isNotEmpty prepend=", " property="lastmodifyUserId">lastmodify_user_id=#lastmodifyUserId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="lastmodifyUserName">lastmodify_user_name=#lastmodifyUserName#</isNotEmpty>
+						<isNotEmpty prepend=", " property="createTime">create_time=#createTime#</isNotEmpty>
+						<isNotEmpty prepend=", " property="modifyTime">modify_time=#modifyTime#</isNotEmpty>
+					</dynamic>
+		WHERE linkman_id=#linkman_id#
+	</update>
+	
+	<delete id="DELETE-BY-ID" parameterClass="java.lang.String">
+		<![CDATA[
+			DELETE FROM customer_linkman WHERE linkman_id=#linkman_id#
+		]]>
+	</delete>
+	
+	<select id="GET-ALL" resultMap="CUSTOMERLINKMAN-MAP">
+		<![CDATA[
+			SELECT * FROM customer_linkman
+		]]>
+	</select>
+	
+	<select id="GET-BY-QUERY" resultMap="CUSTOMERLINKMAN-MAP" parameterClass="QueryCustomerLinkman">
+		<![CDATA[
+			SELECT * FROM customer_linkman
+		]]>
+		<isParameterPresent>   
+            <include refid="QUERY-COMMON" />   
+        </isParameterPresent>
+	</select>
+	
+	<select id="GET-BY-ID" resultMap="CUSTOMERLINKMAN-MAP" parameterClass="java.lang.String">
+		<![CDATA[
+			SELECT * FROM customer_linkman	WHERE linkman_id=#linkman_id#
+		]]>
+	</select>
+	
+	<select id="GET-PAGE" resultMap="CUSTOMERLINKMAN-MAP" parameterClass="QueryCustomerLinkman">
+		<![CDATA[
+			SELECT * FROM customer_linkman 
+		]]>
+		<isParameterPresent>   
+            <include refid="PAGE-COMMON" />   
+        </isParameterPresent>
+		LIMIT #startRow#,#pageSize#
+	</select>
+	
+	<select id="COUNT" resultClass="java.lang.Integer" parameterClass="QueryCustomerLinkman">
+		<![CDATA[
+			SELECT COUNT(linkman_id) FROM customer_linkman
+		]]>
+		<isParameterPresent>   
+            <include refid="PAGE-COMMON" />   
+        </isParameterPresent>
+	</select>
+</sqlMap>
