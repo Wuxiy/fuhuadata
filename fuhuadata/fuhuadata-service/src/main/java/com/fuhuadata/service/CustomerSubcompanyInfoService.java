@@ -3,8 +3,6 @@ import java.util.List;
 import com.fuhuadata.domain.query.QueryCustomerSubcompanyInfo;
 import com.fuhuadata.domain.CustomerSubcompanyInfo;
 import com.fuhuadata.domain.query.Result;
-import java.util.Map;
-import java.io.Serializable;
 
 /**
  * @author wangbo
@@ -24,7 +22,7 @@ public interface CustomerSubcompanyInfoService {
     /**
      * 按照主键id更新customerSubcompanyInfo，请重新new CustomerSubcompanyInfo 的更新对象，设置要更新的字段
 	 * 返回result，通过result.isSuccess()判断更新是否成功
-     * @paramid
+     * @param customer_sub_id
      * @param customerSubcompanyInfo
      * @return
      */
@@ -33,7 +31,7 @@ public interface CustomerSubcompanyInfoService {
     /**
      * 按照主键id 删除 记录
 	 * 返回result，通过result.isSuccess()判断删除是否成功
-     * @paramid
+     * @param customer_sub_id
      * @return
      */
     public Result deleteCustomerSubcompanyInfoById(String customer_sub_id);
@@ -51,7 +49,7 @@ public interface CustomerSubcompanyInfoService {
      * 通过主键id查询CustomerSubcompanyInfo
 	 * 返回result，通过result.isSuccess()判断服务调用是否成功
 	 * 通过result.getModel()得到查询的单条customerSubcompanyInfo信息
-     * @paramid
+     * @param customer_sub_id
      * @return
      */
     public Result<CustomerSubcompanyInfo> getCustomerSubcompanyInfoById(String customer_sub_id);

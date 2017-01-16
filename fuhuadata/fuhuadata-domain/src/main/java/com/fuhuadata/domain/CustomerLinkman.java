@@ -1,7 +1,6 @@
 package com.fuhuadata.domain;
 
 import java.util.Date;
-import com.fuhuadata.domain.query.PageBase;
 
 /**
  * @author wangbo

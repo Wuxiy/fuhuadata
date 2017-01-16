@@ -3,8 +3,6 @@ import java.util.List;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.QueryRecordLinkman;
 import com.fuhuadata.domain.RecordLinkman;
-import java.util.Map;
-import java.io.Serializable;
 
 /**
  * @author wangbo

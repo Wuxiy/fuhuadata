@@ -3,8 +3,6 @@ import java.util.List;
 import com.fuhuadata.domain.query.QuerySaleCustomer;
 import com.fuhuadata.domain.SaleCustomer;
 import com.fuhuadata.domain.query.Result;
-import java.util.Map;
-import java.io.Serializable;
 
 /**
  * @author wangbo
@@ -30,7 +28,7 @@ public interface SaleCustomerManager {
     /**
      * 按照主键id 删除 记录
 	 * 成功返回true，失败返回false
-     * @paramid
+     * @param customer_id
      * @return
      */
     public boolean deleteSaleCustomerById(String customer_id);
@@ -51,7 +49,7 @@ public interface SaleCustomerManager {
     /**
      * 通过主键id查询SaleCustomer
 	 * 查询不到返回NULL值
-     * @paramid
+     * @param customer_id
      * @return
      */
     public SaleCustomer getSaleCustomerById(String customer_id);

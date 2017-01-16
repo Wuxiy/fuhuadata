@@ -3,8 +3,6 @@ import java.util.List;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.CustomerVisitRecord;
 import com.fuhuadata.domain.query.QueryCustomerVisitRecord;
-import java.util.Map;
-import java.io.Serializable;
 
 /**
  * @author wangbo
@@ -21,7 +19,7 @@ public interface CustomerVisitRecordManager {
 	 /**
      * 按照主键id更新customerVisitRecord，请重新new CustomerVisitRecord 的更新对象，设置要更新的字段
 	 * 成功返回true，失败返回false
-     * @paramid
+     * @param visitrecord_id
      * @param customerVisitRecord
      * @return
      */
@@ -30,7 +28,7 @@ public interface CustomerVisitRecordManager {
     /**
      * 按照主键id 删除 记录
 	 * 成功返回true，失败返回false
-     * @paramid
+     * @param visitrecord_id
      * @return
      */
     public boolean deleteCustomerVisitRecordById(int visitrecord_id);
@@ -51,7 +49,7 @@ public interface CustomerVisitRecordManager {
     /**
      * 通过主键id查询CustomerVisitRecord
 	 * 查询不到返回NULL值
-     * @paramid
+     * @param visitrecord_id
      * @return
      */
     public CustomerVisitRecord getCustomerVisitRecordById(int visitrecord_id);

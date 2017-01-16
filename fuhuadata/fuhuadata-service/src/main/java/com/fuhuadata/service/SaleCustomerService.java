@@ -3,8 +3,6 @@ import java.util.List;
 import com.fuhuadata.domain.query.QuerySaleCustomer;
 import com.fuhuadata.domain.SaleCustomer;
 import com.fuhuadata.domain.query.Result;
-import java.util.Map;
-import java.io.Serializable;
 
 /**
  * @author wangbo
@@ -24,7 +22,7 @@ public interface SaleCustomerService {
     /**
      * 按照主键id更新saleCustomer，请重新new SaleCustomer 的更新对象，设置要更新的字段
 	 * 返回result，通过result.isSuccess()判断更新是否成功
-     * @paramid
+     * @param customer_id
      * @param saleCustomer
      * @return
      */
@@ -33,7 +31,7 @@ public interface SaleCustomerService {
     /**
      * 按照主键id 删除 记录
 	 * 返回result，通过result.isSuccess()判断删除是否成功
-     * @paramid
+     * @param customer_id
      * @return
      */
     public Result deleteSaleCustomerById(String customer_id);
@@ -51,7 +49,7 @@ public interface SaleCustomerService {
      * 通过主键id查询SaleCustomer
 	 * 返回result，通过result.isSuccess()判断服务调用是否成功
 	 * 通过result.getModel()得到查询的单条saleCustomer信息
-     * @paramid
+     * @param customer_id
      * @return
      */
     public Result<SaleCustomer> getSaleCustomerById(String customer_id);

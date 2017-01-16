@@ -3,8 +3,6 @@ import java.util.List;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.QueryCustomerLinkman;
 import com.fuhuadata.domain.CustomerLinkman;
-import java.util.Map;
-import java.io.Serializable;
 
 /**
  * @author wangbo
@@ -24,7 +22,7 @@ public interface CustomerLinkmanService {
     /**
      * 按照主键id更新customerLinkman，请重新new CustomerLinkman 的更新对象，设置要更新的字段
 	 * 返回result，通过result.isSuccess()判断更新是否成功
-     * @paramid
+     * @param linkman_id
      * @param customerLinkman
      * @return
      */
@@ -33,7 +31,7 @@ public interface CustomerLinkmanService {
     /**
      * 按照主键id 删除 记录
 	 * 返回result，通过result.isSuccess()判断删除是否成功
-     * @paramid
+     * @param linkman_id
      * @return
      */
     public Result deleteCustomerLinkmanById(String linkman_id);
@@ -51,7 +49,7 @@ public interface CustomerLinkmanService {
      * 通过主键id查询CustomerLinkman
 	 * 返回result，通过result.isSuccess()判断服务调用是否成功
 	 * 通过result.getModel()得到查询的单条customerLinkman信息
-     * @paramid
+     * @param linkman_id
      * @return
      */
     public Result<CustomerLinkman> getCustomerLinkmanById(String linkman_id);

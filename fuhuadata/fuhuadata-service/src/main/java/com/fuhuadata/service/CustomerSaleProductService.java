@@ -3,8 +3,6 @@ import java.util.List;
 import com.fuhuadata.domain.query.QueryCustomerSaleProduct;
 import com.fuhuadata.domain.CustomerSaleProduct;
 import com.fuhuadata.domain.query.Result;
-import java.util.Map;
-import java.io.Serializable;
 
 /**
  * @author wangbo

@@ -3,8 +3,6 @@ import java.util.List;
 import com.fuhuadata.domain.query.QueryCustomerSubcompanyInfo;
 import com.fuhuadata.domain.CustomerSubcompanyInfo;
 import com.fuhuadata.domain.query.Result;
-import java.util.Map;
-import java.io.Serializable;
 
 /**
  * @author wangbo
@@ -30,7 +28,7 @@ public interface CustomerSubcompanyInfoManager {
     /**
      * 按照主键id 删除 记录
 	 * 成功返回true，失败返回false
-     * @paramid
+     * @param customer_sub_id
      * @return
      */
     public boolean deleteCustomerSubcompanyInfoById(String customer_sub_id);
@@ -51,7 +49,7 @@ public interface CustomerSubcompanyInfoManager {
     /**
      * 通过主键id查询CustomerSubcompanyInfo
 	 * 查询不到返回NULL值
-     * @paramid
+     * @param customer_sub_id
      * @return
      */
     public CustomerSubcompanyInfo getCustomerSubcompanyInfoById(String customer_sub_id);
