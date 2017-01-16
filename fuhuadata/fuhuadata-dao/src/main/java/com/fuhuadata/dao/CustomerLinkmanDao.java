@@ -19,7 +19,7 @@ public interface CustomerLinkmanDao {
     
 	 /**
      * 按照主键id更新customerLinkman，成功返回1，使用接口时，请重新new CustomerLinkman 的更新对象，设置要更新的字段
-     * @paramid
+     * @param linkman_id
      * @param customerLinkman
      * @return
      */
@@ -27,7 +27,7 @@ public interface CustomerLinkmanDao {
     
 	 /**
      * 按照主键id 删除 记录，返回1为成功
-     * @paramid
+     * @param linkman_id
      * @return
      */
     public int deleteCustomerLinkmanById(String linkman_id);
@@ -47,7 +47,7 @@ public interface CustomerLinkmanDao {
     
     /**
      * 通过主键id查询CustomerLinkman，查询不到返回NULL值
-     * @paramid
+     * @param linkman_id
      * @return
      */
     public CustomerLinkman getCustomerLinkmanById(String linkman_id);

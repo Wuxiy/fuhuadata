@@ -19,7 +19,7 @@ public interface CustomerParentDao {
     
 	 /**
      * 按照主键id更新customerParent，成功返回1，使用接口时，请重新new CustomerParent 的更新对象，设置要更新的字段
-     * @paramid
+     * @param customer_id
      * @param customerParent
      * @return
      */
@@ -27,7 +27,7 @@ public interface CustomerParentDao {
     
 	 /**
      * 按照主键id 删除 记录，返回1为成功
-     * @paramid
+     * @param customer_id
      * @return
      */
     public int deleteCustomerParentById(String customer_id);
@@ -47,7 +47,7 @@ public interface CustomerParentDao {
     
     /**
      * 通过主键id查询CustomerParent，查询不到返回NULL值
-     * @paramid
+     * @param customer_id
      * @return
      */
     public CustomerParent getCustomerParentById(String customer_id);

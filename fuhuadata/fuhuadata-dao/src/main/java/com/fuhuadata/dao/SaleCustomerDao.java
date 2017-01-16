@@ -27,7 +27,7 @@ public interface SaleCustomerDao {
     
 	 /**
      * 按照主键id 删除 记录，返回1为成功
-     * @paramid
+     * @param customer_id
      * @return
      */
     public int deleteSaleCustomerById(String customer_id);
@@ -47,7 +47,7 @@ public interface SaleCustomerDao {
     
     /**
      * 通过主键id查询SaleCustomer，查询不到返回NULL值
-     * @paramid
+     * @param customer_id
      * @return
      */
     public SaleCustomer getSaleCustomerById(String customer_id);

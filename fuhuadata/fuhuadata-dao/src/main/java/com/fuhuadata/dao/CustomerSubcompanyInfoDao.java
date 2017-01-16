@@ -19,7 +19,7 @@ public interface CustomerSubcompanyInfoDao {
     
 	 /**
      * 按照主键id更新customerSubcompanyInfo，成功返回1，使用接口时，请重新new CustomerSubcompanyInfo 的更新对象，设置要更新的字段
-     * @paramid
+     * @param customer_sub_id
      * @param customerSubcompanyInfo
      * @return
      */
@@ -27,7 +27,7 @@ public interface CustomerSubcompanyInfoDao {
     
 	 /**
      * 按照主键id 删除 记录，返回1为成功
-     * @paramid
+     * @param customer_sub_id
      * @return
      */
     public int deleteCustomerSubcompanyInfoById(String customer_sub_id);
@@ -47,7 +47,7 @@ public interface CustomerSubcompanyInfoDao {
     
     /**
      * 通过主键id查询CustomerSubcompanyInfo，查询不到返回NULL值
-     * @paramid
+     * @param customer_sub_id
      * @return
      */
     public CustomerSubcompanyInfo getCustomerSubcompanyInfoById(String customer_sub_id);
