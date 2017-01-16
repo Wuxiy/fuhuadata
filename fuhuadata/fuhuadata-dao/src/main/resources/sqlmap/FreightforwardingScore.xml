@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="FREIGHTFORWARDINGSCORE">
+   	<typeAlias alias="FreightforwardingScore" type="com.fuhuadata.domain.FreightforwardingScore"/>
+   	<typeAlias alias="QueryFreightforwardingScore" type="com.fuhuadata.domain.query.QueryFreightforwardingScore"/>
+	
+	<resultMap id="FREIGHTFORWARDINGSCORE-MAP" class="FreightforwardingScore">
+					<result property="id" column="id" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="monthTime" column="month_time" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="serviceScore" column="service_score" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result property="priceScore" column="price_score" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result property="warehouseScore" column="warehouse_score" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result property="complaintsScore" column="complaints_score" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result property="totalScore" column="total_score" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result property="evaluationDetails" column="evaluation_details" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="remarks" column="remarks" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="modifyReason" column="modify_reason" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="evaluateTime" column="evaluate_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+								<result property="evaluateUserId" column="evaluate_user_id" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="evaluateUserName" column="evaluate_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="createUserId" column="create_user_id" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="createUserName" column="create_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="lastmodifyUserId" column="lastmodify_user_id" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="lastmodifyUserName" column="lastmodify_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="createTime" column="create_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+								<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+														</resultMap>
+	
+	<sql id="PAGE-COMMON">	
+		<dynamic prepend=" WHERE ">
+				<isNotNull prepend=" AND " property="id">
+			id = #id#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="customerId">
+			customer_id = #customerId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="monthTime">
+			month_time = #monthTime#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="serviceScore">
+			service_score = #serviceScore#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="priceScore">
+			price_score = #priceScore#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="warehouseScore">
+			warehouse_score = #warehouseScore#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="complaintsScore">
+			complaints_score = #complaintsScore#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="totalScore">
+			total_score = #totalScore#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="evaluationDetails">
+			evaluation_details = #evaluationDetails#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="remarks">
+			remarks = #remarks#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="modifyReason">
+			modify_reason = #modifyReason#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="evaluateTime">
+			evaluate_time = #evaluateTime#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="evaluateUserId">
+			evaluate_user_id = #evaluateUserId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="evaluateUserName">
+			evaluate_user_name = #evaluateUserName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createUserId">
+			create_user_id = #createUserId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createUserName">
+			create_user_name = #createUserName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="lastmodifyUserId">
+			lastmodify_user_id = #lastmodifyUserId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="lastmodifyUserName">
+			lastmodify_user_name = #lastmodifyUserName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createTime">
+			create_time = #createTime#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="modifyTime">
+			modify_time = #modifyTime#
+		</isNotNull>
+				</dynamic>
+	</sql>
+	
+	<sql id="QUERY-COMMON">	
+		<dynamic prepend=" WHERE ">
+				<isNotNull prepend=" AND " property="id">
+			id = #id#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="customerId">
+			customer_id = #customerId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="monthTime">
+			month_time = #monthTime#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="serviceScore">
+			service_score = #serviceScore#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="priceScore">
+			price_score = #priceScore#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="warehouseScore">
+			warehouse_score = #warehouseScore#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="complaintsScore">
+			complaints_score = #complaintsScore#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="totalScore">
+			total_score = #totalScore#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="evaluationDetails">
+			evaluation_details = #evaluationDetails#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="remarks">
+			remarks = #remarks#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="modifyReason">
+			modify_reason = #modifyReason#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="evaluateTime">
+			evaluate_time = #evaluateTime#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="evaluateUserId">
+			evaluate_user_id = #evaluateUserId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="evaluateUserName">
+			evaluate_user_name = #evaluateUserName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createUserId">
+			create_user_id = #createUserId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createUserName">
+			create_user_name = #createUserName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="lastmodifyUserId">
+			lastmodify_user_id = #lastmodifyUserId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="lastmodifyUserName">
+			lastmodify_user_name = #lastmodifyUserName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createTime">
+			create_time = #createTime#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="modifyTime">
+			modify_time = #modifyTime#
+		</isNotNull>
+				</dynamic>
+	</sql>
+	
+	<insert id="ADD" parameterClass="FreightforwardingScore">
+		INSERT INTO 
+		freightforwarding_score(id,customer_id,month_time,service_score,price_score,warehouse_score,complaints_score,total_score,evaluation_details,remarks,modify_reason,evaluate_time,evaluate_user_id,evaluate_user_name,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time) 
+		VALUES(#id#,#customerId#,#monthTime#,#serviceScore#,#priceScore#,#warehouseScore#,#complaintsScore#,#totalScore#,#evaluationDetails#,#remarks#,#modifyReason#,#evaluateTime#,#evaluateUserId#,#evaluateUserName#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
+		<selectKey resultClass="int" keyProperty="id">
+			SELECT @@IDENTITY AS ID
+		</selectKey>
+	</insert>
+	
+	<update id="UPDATE" parameterClass="FreightforwardingScore">
+		UPDATE freightforwarding_score 
+		<dynamic prepend=" SET ">
+						<isNotEmpty prepend=", " property="id">id=#id#</isNotEmpty>
+						<isNotEmpty prepend=", " property="customerId">customer_id=#customerId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="monthTime">month_time=#monthTime#</isNotEmpty>
+						<isNotEmpty prepend=", " property="serviceScore">service_score=#serviceScore#</isNotEmpty>
+						<isNotEmpty prepend=", " property="priceScore">price_score=#priceScore#</isNotEmpty>
+						<isNotEmpty prepend=", " property="warehouseScore">warehouse_score=#warehouseScore#</isNotEmpty>
+						<isNotEmpty prepend=", " property="complaintsScore">complaints_score=#complaintsScore#</isNotEmpty>
+						<isNotEmpty prepend=", " property="totalScore">total_score=#totalScore#</isNotEmpty>
+						<isNotEmpty prepend=", " property="evaluationDetails">evaluation_details=#evaluationDetails#</isNotEmpty>
+						<isNotEmpty prepend=", " property="remarks">remarks=#remarks#</isNotEmpty>
+						<isNotEmpty prepend=", " property="modifyReason">modify_reason=#modifyReason#</isNotEmpty>
+						<isNotEmpty prepend=", " property="evaluateTime">evaluate_time=#evaluateTime#</isNotEmpty>
+						<isNotEmpty prepend=", " property="evaluateUserId">evaluate_user_id=#evaluateUserId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="evaluateUserName">evaluate_user_name=#evaluateUserName#</isNotEmpty>
+						<isNotEmpty prepend=", " property="createUserId">create_user_id=#createUserId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="createUserName">create_user_name=#createUserName#</isNotEmpty>
+						<isNotEmpty prepend=", " property="lastmodifyUserId">lastmodify_user_id=#lastmodifyUserId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="lastmodifyUserName">lastmodify_user_name=#lastmodifyUserName#</isNotEmpty>
+						<isNotEmpty prepend=", " property="createTime">create_time=#createTime#</isNotEmpty>
+						<isNotEmpty prepend=", " property="modifyTime">modify_time=#modifyTime#</isNotEmpty>
+					</dynamic>
+		WHERE id=#id#
+	</update>
+	
+	<delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
+		<![CDATA[
+			DELETE FROM freightforwarding_score WHERE id=#id#
+		]]>
+	</delete>
+	
+	<select id="GET-ALL" resultMap="FREIGHTFORWARDINGSCORE-MAP">
+		<![CDATA[
+			SELECT * FROM freightforwarding_score
+		]]>
+	</select>
+	
+	<select id="GET-BY-QUERY" resultMap="FREIGHTFORWARDINGSCORE-MAP" parameterClass="QueryFreightforwardingScore">
+		<![CDATA[
+			SELECT * FROM freightforwarding_score
+		]]>
+		<isParameterPresent>   
+            <include refid="QUERY-COMMON" />   
+        </isParameterPresent>
+	</select>
+	
+	<select id="GET-BY-ID" resultMap="FREIGHTFORWARDINGSCORE-MAP" parameterClass="java.lang.Integer">
+		<![CDATA[
+			SELECT * FROM freightforwarding_score	WHERE id=#id#
+		]]>
+	</select>
+	
+	<select id="GET-PAGE" resultMap="FREIGHTFORWARDINGSCORE-MAP" parameterClass="QueryFreightforwardingScore">
+		<![CDATA[
+			SELECT * FROM freightforwarding_score 
+		]]>
+		<isParameterPresent>   
+            <include refid="PAGE-COMMON" />   
+        </isParameterPresent>
+		LIMIT #startRow#,#pageSize#
+	</select>
+	
+	<select id="COUNT" resultClass="java.lang.Integer" parameterClass="QueryFreightforwardingScore">
+		<![CDATA[
+			SELECT COUNT(id) FROM freightforwarding_score
+		]]>
+		<isParameterPresent>   
+            <include refid="PAGE-COMMON" />   
+        </isParameterPresent>
+	</select>
+</sqlMap>
