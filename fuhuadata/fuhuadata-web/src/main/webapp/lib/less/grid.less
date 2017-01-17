@@ -1,0 +1,133 @@
+//
+// Grid system
+// --------------------------------------------------
+
+
+// Container widths
+//
+// Set the container width, and override it for fixed navbars in media queries.
+
+.container {
+  .container-fixed();
+
+  @media (min-width: @screen-sm-min) {
+    width: @container-sm;
+  }
+  @media (min-width: @screen-md-min) {
+    width: @container-md;
+  }
+  @media (min-width: @screen-lg-min) {
+    width: @container-lg;
+  }
+}
+
+
+// Fluid container
+//
+// Utilizes the mixin meant for fixed width containers, but without any defined
+// width for fluid, full width layouts.
+
+.container-fluid {
+  .container-fixed();
+}
+
+
+// Row
+//
+// Rows contain and clear the floats of your columns.
+
+.row {
+  .make-row();
+}
+
+
+// Columns
+//
+// Common styles for small and large grid columns
+
+.make-grid-columns();
+
+
+// Extra small grid
+//
+// Columns, offsets, pushes, and pulls for extra small devices like
+// smartphones.
+
+.make-grid(xs);
+
+
+// Small grid
+//
+// Columns, offsets, pushes, and pulls for the small device range, from phones
+// to tablets.
+
+@media (min-width: @screen-sm-min) {
+  .make-grid(sm);
+}
+
+
+// Medium grid
+//
+// Columns, offsets, pushes, and pulls for the desktop device range.
+
+@media (min-width: @screen-md-min) {
+  .make-grid(md);
+}
+
+
+// Large grid
+//
+// Columns, offsets, pushes, and pulls for the large desktop device range.
+
+@media (min-width: @screen-lg-min) {
+  .make-grid(lg);
+}
+
+// Content
+.content {
+    border-radius: @border-radius-base;
+    background-color: #f7f7f7;
+}
+
+// Pagination-input
+.pagination-input {
+    display: inline-block!important;
+    width: 60px!important;
+} 
+
+// Shadow
+.shadow-out {  
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+.shadow-in {  
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16) inset;
+}
+
+// Footer
+.footer {
+    margin: 20px 15px 0 15px;
+    height: @footer-height;
+    line-height: @footer-height;
+    padding: 0 @footer-padding;
+    background-color: @footer-bg;
+    color: @footer-color;
+    border-radius: @border-radius-base @border-radius-base 0 0;
+    box-shadow: 0 0 15px #1f5a80 inset;
+    > small {
+      display: inline-block;
+      width: 100%;
+    }
+}
+
+
+// Dashboard-wrapper
+.dashboard-wrapper {
+    min-height: 600px;
+    padding: 0 20px;
+}
+
+
+// Not-null
+.not-null {
+    color: red;
+}
