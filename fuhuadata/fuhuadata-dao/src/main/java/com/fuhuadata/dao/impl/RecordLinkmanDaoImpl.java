@@ -13,7 +13,6 @@ import java.io.Serializable;
  * @date 2017-01-13 16:26:04
  */
 @SuppressWarnings("unchecked")
-@Component
 public class RecordLinkmanDaoImpl extends SqlMapClientTemplate implements RecordLinkmanDao {
 
     public static final String ADD = "RECORDLINKMAN.ADD";

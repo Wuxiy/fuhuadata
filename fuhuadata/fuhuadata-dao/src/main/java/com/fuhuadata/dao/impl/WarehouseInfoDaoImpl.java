@@ -11,7 +11,6 @@ import org.springframework.orm.ibatis.SqlMapClientTemplate;
  * @date 2017-01-16 17:17:06
  */
 @SuppressWarnings("unchecked")
-@Component
 public class WarehouseInfoDaoImpl extends SqlMapClientTemplate implements WarehouseInfoDao {
 
     public static final String ADD = "WAREHOUSEINFO.ADD";

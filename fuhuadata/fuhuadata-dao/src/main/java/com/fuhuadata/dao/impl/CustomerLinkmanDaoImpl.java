@@ -13,7 +13,6 @@ import java.io.Serializable;
  * @date 2017-01-13 16:10:56
  */
 @SuppressWarnings("unchecked")
-@Component
 public class CustomerLinkmanDaoImpl extends SqlMapClientTemplate implements CustomerLinkmanDao {
 
     public static final String ADD = "CUSTOMERLINKMAN.ADD";

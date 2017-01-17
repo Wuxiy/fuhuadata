@@ -36,6 +36,7 @@
              <property name = "prefix" value="/WEB-INF/views/"></property>
              <property name = "suffix" value = ".jsp"></property>
          </bean>-->
+
 		<!-- 配置Velocity视图解析器 -->
 		<bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
 			<!--线上环境设置为true-->
@@ -56,8 +57,9 @@
 			<property name="resourceLoaderPath" value="/"/>
 			<property name="configLocation" value="classpath:velocity.properties"/>
 		</bean>
-         
-         <!-- 上传文件的解析器 -->  
+
+
+	<!-- 上传文件的解析器 -->
 	     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
 	        <property name="defaultEncoding" value="utf-8"/>  
 	        <property name="maxUploadSize" value="10485760000"/>  

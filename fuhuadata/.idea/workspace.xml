@@ -26,7 +26,112 @@
     <favorites_list name="fuhuadata" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file leaf-file-name="FreightforwardingInfoServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/FreightforwardingInfoServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="13" column="3" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FreightforwardingScoreServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/FreightforwardingScoreServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="61">
+              <caret line="13" column="3" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FreightforwardingWarehouseRelationServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/FreightforwardingWarehouseRelationServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WarehouseInfoServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/WarehouseInfoServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="13" column="3" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="springmvc.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/resources/springmvc.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-275">
+              <caret line="19" column="28" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="web.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/webapp/WEB-INF/web.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="380">
+              <caret line="47" column="27" selection-start-line="47" selection-start-column="27" selection-end-line="47" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProduceFactoryInfoServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/ProduceFactoryInfoServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RecordLinkmanServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/RecordLinkmanServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SaleCustomerServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/SaleCustomerServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserAccountServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/UserAccountServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -44,26 +149,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/fuhuadata-web/src/main/java/com/fuhuadata/web/action/UserAccountAction.java" />
-        <option value="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/query/UserAccountQuery.java" />
-        <option value="$PROJECT_DIR$/fuhuadata-web/src/main/webapp/WEB-INF/views/userAccount/addUserAccount.jsp" />
-        <option value="$MAVEN_REPOSITORY$/org/springframework/spring-web/3.0.2.RELEASE/spring-web-3.0.2.RELEASE.jar!/org/springframework/web/bind/annotation/support/HandlerMethodInvoker.class" />
-        <option value="$PROJECT_DIR$/fuhuadata-web/src/main/java/com/fuhuadata/web/springmvc/UserAccountAction.java" />
-        <option value="$PROJECT_DIR$/fuhuadata-web/src/main/webapp/WEB-INF/views/userAccount/userAccountList.jsp" />
-        <option value="$PROJECT_DIR$/fuhuadata-web/src/main/webapp/WEB-INF/vm/userAccount/addUserAccount.vm" />
-        <option value="$PROJECT_DIR$/fuhuadata-web/src/main/webapp/WEB-INF/vm/userAccount/userAccountList.vm" />
-        <option value="$PROJECT_DIR$/fuhuadata-web/src/main/webapp/WEB-INF/vm/common/macro.vm" />
-        <option value="$PROJECT_DIR$/fuhuadata-web/src/main/resources/springmvc.xml" />
-        <option value="$PROJECT_DIR$/fuhuadata-web/src/main/resources/velocity.properties" />
-        <option value="$PROJECT_DIR$/fuhuadata-web/src/main/resources/log4j.xml" />
-        <option value="$PROJECT_DIR$/fuhuadata-web/src/main/webapp/WEB-INF/views/knowledgeBase/marketTrainList.jsp" />
-        <option value="$PROJECT_DIR$/fuhuadata-web/src/main/webapp/WEB-INF/views/knowledgeBase/processCostLiist.jsp" />
         <option value="$PROJECT_DIR$/fuhuadata-web/src/main/webapp/WEB-INF/views/knowledgeBase/productQeustionList.jsp" />
         <option value="$PROJECT_DIR$/fuhuadata-web/src/main/webapp/WEB-INF/views/knowledgeBase/exhibitionDynamicList.jsp" />
         <option value="$PROJECT_DIR$/fuhuadata-web/src/main/java/com/fuhuadata/web/springmvc/KnowledgeBaseAction.java" />
         <option value="$PROJECT_DIR$/fuhuadata-web/src/main/webapp/index.jsp" />
         <option value="$PROJECT_DIR$/fuhuadata-web/src/main/webapp/WEB-INF/vm/userAccount/exhibitionDynamicList.vm" />
         <option value="$PROJECT_DIR$/fuhuadata-web/src/main/webapp/WEB-INF/vm/knowledgeBase/exhibitionDynamicList.vm" />
+        <option value="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/FreightforwardingWarehouseRelationDao.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/query/QueryFreightforwardingWarehouseRelation.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/FreightforwardingWarehouseRelation.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/FreightforwardingWarehouseRelationService.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-web/src/main/resources/springmvc.xml" />
+        <option value="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/CustomerLinkmanDaoImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/CustomerParentDaoImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/CustomerPurchaseProductDaoImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/CustomerSaleProductDaoImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/CustomerSubcompanyInfoDaoImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/CustomerVisitRecordDaoImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/FreightforwardingInfoDaoImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/FreightforwardingScoreDaoImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/FreightforwardingWarehouseRelationDaoImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/ProduceFactoryInfoDaoImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/RecordLinkmanDaoImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/SaleCustomerDaoImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/WarehouseInfoDaoImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/CustomerLinkmanManagerImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/CustomerParentManagerImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/CustomerPurchaseProductManagerImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/CustomerSaleProductManagerImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/CustomerSubcompanyInfoManagerImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/CustomerVisitRecordManagerImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/FreightforwardingInfoManagerImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/FreightforwardingScoreManagerImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/FreightforwardingWarehouseRelationManagerImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/ProduceFactoryInfoManagerImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/RecordLinkmanManagerImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/SaleCustomerManagerImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/WarehouseInfoManagerImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/CustomerLinkmanServiceImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/CustomerParentServiceImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/CustomerPurchaseProductServiceImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/CustomerSaleProductServiceImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/CustomerSubcompanyInfoServiceImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/CustomerVisitRecordServiceImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/FreightforwardingInfoServiceImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/FreightforwardingScoreServiceImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/FreightforwardingWarehouseRelationServiceImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/ProduceFactoryInfoServiceImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/RecordLinkmanServiceImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/SaleCustomerServiceImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/WarehouseInfoServiceImpl.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-web/src/main/webapp/WEB-INF/web.xml" />
       </list>
     </option>
   </component>
@@ -268,6 +404,40 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fuhuadata" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fuhuadata" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fuhuadata-web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -879,6 +1049,53 @@
       <predefined_log_file id="idea.log" enabled="true" />
       <method />
     </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="GAPID_DISABLE_PCS" value="false" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="EXTRA_OPTIONS" value="" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="GAPID_DISABLE_PCS" value="false" />
+      </Profilers>
+      <method />
+    </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -902,7 +1119,85 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
     <configuration default="true" type="Cold Fusion runner description" factoryName="Cold Fusion" custom_browser="" web_path="">
+      <method />
+    </configuration>
+    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="myFilePath" />
+      <option name="GLUE" />
+      <option name="myNameFilter" />
+      <option name="myGeneratedName" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
@@ -952,6 +1247,72 @@
       </option>
       <option name="moduleName" value="" />
       <option name="trusted" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
+      <setting name="vmparams" value="" />
+      <setting name="cmdLine" value="run-app" />
+      <setting name="passParentEnv" value="true" />
+      <setting name="launchBrowser" value="true" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnitTestDiscovery" factoryName="JUnit Test Discovery" changeList="All">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
       <method />
     </configuration>
     <configuration default="true" type="JarApplication" factoryName="JAR Application">
@@ -1039,6 +1400,62 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNGTestDiscovery" factoryName="TestNG Test Discovery" changeList="All">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <node-interpreter>project</node-interpreter>
       <node-options />
@@ -1118,7 +1535,7 @@
       </MavenSettings>
       <method />
     </configuration>
-    <configuration default="false" name="fuhuadataserver" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.9" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="C:\Program Files\Java\jdk1.8.0_111\jre">
+    <configuration default="false" name="fuhuadataserver" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.0.29" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="D:\Program Files\Java\jdk1.8.0_20\jre">
       <option name="OPEN_IN_BROWSER" value="false" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
@@ -1228,10 +1645,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="119301000" />
+    <option name="totallyTimeSpent" value="122263000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="0" width="1931" height="1038" extended-state="0" />
+    <frame x="-8" y="0" width="1931" height="1038" extended-state="1" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1239,10 +1656,10 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.281909" sideWeight="0.1855724" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34406215" sideWeight="0.1855724" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930845" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1468897" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.281909" sideWeight="0.8144276" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1468897" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34406215" sideWeight="0.8144276" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -1298,254 +1715,450 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-beans/3.0.2.RELEASE/spring-beans-3.0.2.RELEASE.jar!/org/springframework/beans/factory/support/SimpleInstantiationStrategy.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/velocity/velocity/1.6.3/velocity-1.6.3-sources.jar!/org/apache/velocity/Template.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/velocity/velocity/1.6.3/velocity-1.6.3-sources.jar!/org/apache/velocity/runtime/resource/ResourceManagerImpl.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/velocity/velocity/1.6.3/velocity-1.6.3-sources.jar!/org/apache/velocity/runtime/VelocimacroFactory.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/velocity/velocity/1.6.3/velocity-1.6.3-sources.jar!/org/apache/velocity/runtime/RuntimeInstance.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/velocity/velocity/1.6.3/velocity-1.6.3-sources.jar!/org/apache/velocity/app/VelocityEngine.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context-support/3.0.2.RELEASE/spring-context-support-3.0.2.RELEASE.jar!/org/springframework/ui/velocity/VelocityEngineFactory.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="112" column="0" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/3.0.2.RELEASE/spring-webmvc-3.0.2.RELEASE-sources.jar!/org/springframework/web/servlet/view/velocity/VelocityConfigurer.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-beans/3.0.2.RELEASE/spring-beans-3.0.2.RELEASE.jar!/org/springframework/beans/factory/support/AbstractAutowireCapableBeanFactory.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="297" column="0" selection-start-line="297" selection-start-column="0" selection-end-line="297" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-beans/3.0.2.RELEASE/spring-beans-3.0.2.RELEASE.jar!/org/springframework/beans/factory/support/DefaultSingletonBeanRegistry.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="404">
-          <caret line="153" column="0" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-beans/3.0.2.RELEASE/spring-beans-3.0.2.RELEASE.jar!/org/springframework/beans/factory/support/AbstractBeanFactory.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-beans/3.0.2.RELEASE/spring-beans-3.0.2.RELEASE.jar!/org/springframework/beans/factory/support/DefaultListableBeanFactory.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="401" column="0" selection-start-line="401" selection-start-column="0" selection-end-line="401" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/3.0.2.RELEASE/spring-context-3.0.2.RELEASE.jar!/org/springframework/context/support/AbstractApplicationContext.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="228" column="0" selection-start-line="228" selection-start-column="0" selection-end-line="228" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/3.0.2.RELEASE/spring-webmvc-3.0.2.RELEASE-sources.jar!/org/springframework/web/servlet/HttpServletBean.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/3.0.2.RELEASE/spring-webmvc-3.0.2.RELEASE-sources.jar!/org/springframework/web/servlet/mvc/annotation/DefaultAnnotationHandlerMapping.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/3.0.2.RELEASE/spring-webmvc-3.0.2.RELEASE-sources.jar!/org/springframework/web/servlet/handler/AbstractUrlHandlerMapping.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/3.0.2.RELEASE/spring-webmvc-3.0.2.RELEASE-sources.jar!/org/springframework/web/servlet/handler/AbstractHandlerMapping.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/3.0.2.RELEASE/spring-webmvc-3.0.2.RELEASE-sources.jar!/org/springframework/web/servlet/view/AbstractTemplateView.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/3.0.2.RELEASE/spring-webmvc-3.0.2.RELEASE-sources.jar!/org/springframework/web/servlet/view/AbstractView.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/3.0.2.RELEASE/spring-webmvc-3.0.2.RELEASE-sources.jar!/org/springframework/web/servlet/FrameworkServlet.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/net/bull/javamelody/javamelody-core/1.37.0/javamelody-core-1.37.0-sources.jar!/net/bull/javamelody/MonitoringFilter.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/3.0.2.RELEASE/spring-web-3.0.2.RELEASE.jar!/org/springframework/web/filter/CharacterEncodingFilter.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="650">
-          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/3.0.2.RELEASE/spring-web-3.0.2.RELEASE.jar!/org/springframework/web/filter/OncePerRequestFilter.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="uml://JAVA/org.springframework.orm.ibatis.SqlMapClientTemplate">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>JAVA</ID>
-          <OriginalElement>org.springframework.orm.ibatis.SqlMapClientTemplate</OriginalElement>
-          <nodes>
-            <node x="" y="">org.springframework.orm.ibatis.SqlMapClientOperations</node>
-            <node x="" y="">org.springframework.jdbc.support.JdbcAccessor</node>
-            <node x="" y="">org.springframework.orm.ibatis.SqlMapClientTemplate</node>
-            <node x="" y="">org.springframework.beans.factory.InitializingBean</node>
-          </nodes>
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="195.0" y="104.0" />
-          <SelectedNodes />
-          <Categories />
-          <SCOPE>All</SCOPE>
-          <VISIBILITY>private</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/resources/sqlmap/UserAccount.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2530">
-          <caret line="8" column="56" selection-start-line="8" selection-start-column="56" selection-end-line="8" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-jdbc/3.0.2.RELEASE/spring-jdbc-3.0.2.RELEASE-sources.jar!/org/springframework/jdbc/support/JdbcAccessor.java" />
-    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/resources/sqlmap-config.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="9" column="45" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/UserAccountDaoImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/resources/spring/springbeans-dao.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="21" column="26" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-orm/3.0.2.RELEASE/spring-orm-3.0.2.RELEASE-sources.jar!/org/springframework/orm/ibatis/SqlMapClientFactoryBean.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-orm/3.0.2.RELEASE/spring-orm-3.0.2.RELEASE-sources.jar!/org/springframework/orm/ibatis/SqlMapClientTemplate.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/3.0.2.RELEASE/spring-webmvc-3.0.2.RELEASE-sources.jar!/org/springframework/web/servlet/mvc/annotation/AnnotationMethodHandlerAdapter.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/3.0.2.RELEASE/spring-webmvc-3.0.2.RELEASE-sources.jar!/org/springframework/web/servlet/DispatcherServlet.java" />
-    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/resources/springmvc.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="13" column="122" selection-start-line="13" selection-start-column="122" selection-end-line="13" selection-end-column="122" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/webapp/lib/css/bootstrap.css">
+    <entry file="file://$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/query/QueryFreightforwardingWarehouseRelation.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="35" selection-start-line="0" selection-start-column="35" selection-end-line="0" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/webapp/WEB-INF/views/knowledgeBase/processCostLiist.jsp">
+    <entry file="file://$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/FreightforwardingWarehouseRelation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="7" column="65" selection-start-line="7" selection-start-column="65" selection-end-line="7" selection-end-column="65" />
+        <state relative-caret-position="-438">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/webapp/WEB-INF/views/knowledgeBase/productQeustionList.jsp">
+    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/FreightforwardingWarehouseRelationManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="7" column="65" selection-start-line="7" selection-start-column="65" selection-end-line="7" selection-end-column="65" />
+        <state relative-caret-position="-900">
+          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/webapp/WEB-INF/views/knowledgeBase/marketTrainList.jsp">
+    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/FreightforwardingWarehouseRelationService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="34" column="8" selection-start-line="34" selection-start-column="8" selection-end-line="34" selection-end-column="8" />
+        <state relative-caret-position="212">
+          <caret line="72" column="14" selection-start-line="72" selection-start-column="14" selection-end-line="72" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fuhuadata-web/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="158" column="31" selection-start-line="158" selection-start-column="31" selection-end-line="158" selection-end-column="31" />
+        <state relative-caret-position="1628">
+          <caret line="163" column="39" selection-start-line="163" selection-start-column="39" selection-end-line="163" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/java/com/fuhuadata/web/springmvc/KnowledgeBaseAction.java">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="33" column="108" selection-start-line="33" selection-start-column="108" selection-end-line="33" selection-end-column="108" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/java/com/fuhuadata/web/springmvc/UserAccountAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="61" column="62" selection-start-line="61" selection-start-column="8" selection-end-line="61" selection-end-column="62" />
+        <state relative-caret-position="-3825">
+          <caret line="12" column="42" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/webapp/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="11" column="46" selection-start-line="11" selection-start-column="46" selection-end-line="11" selection-end-column="46" />
+        <state relative-caret-position="300">
+          <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/CustomerLinkmanDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="61">
+          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+          <folding>
+            <element signature="e#450#480#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/CustomerParentDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+          <folding>
+            <element signature="e#447#477#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/CustomerPurchaseProductDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+          <folding>
+            <element signature="e#474#504#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/CustomerSaleProductDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+          <folding>
+            <element signature="e#462#492#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/CustomerSubcompanyInfoDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+          <folding>
+            <element signature="e#471#501#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/CustomerVisitRecordDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+          <folding>
+            <element signature="e#462#492#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/FreightforwardingInfoDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+          <folding>
+            <element signature="e#417#447#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/FreightforwardingScoreDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+          <folding>
+            <element signature="e#420#450#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/FreightforwardingWarehouseRelationDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#456#486#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/ProduceFactoryInfoDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+          <folding>
+            <element signature="e#459#489#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/RecordLinkmanDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+          <folding>
+            <element signature="e#444#474#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/SaleCustomerDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+          <folding>
+            <element signature="e#441#471#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/UserAccountDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/WarehouseInfoDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+          <folding>
+            <element signature="e#393#423#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/CustomerLinkmanManagerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="15" column="75" selection-start-line="15" selection-start-column="75" selection-end-line="15" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/CustomerParentManagerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/CustomerPurchaseProductManagerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/CustomerSaleProductManagerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/CustomerSubcompanyInfoManagerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/CustomerVisitRecordManagerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/FreightforwardingInfoManagerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/FreightforwardingScoreManagerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/FreightforwardingWarehouseRelationManagerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/ProduceFactoryInfoManagerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/RecordLinkmanManagerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/SaleCustomerManagerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/UserAccountManagerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/WarehouseInfoManagerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/CustomerLinkmanServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/CustomerParentServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/CustomerPurchaseProductServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/CustomerSaleProductServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/CustomerSubcompanyInfoServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/CustomerVisitRecordServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/FreightforwardingInfoServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="13" column="3" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/FreightforwardingScoreServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="61">
+          <caret line="13" column="3" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/FreightforwardingWarehouseRelationServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/ProduceFactoryInfoServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/RecordLinkmanServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/SaleCustomerServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/UserAccountServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/WarehouseInfoServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="13" column="3" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/resources/springmvc.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-275">
+          <caret line="19" column="28" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/webapp/WEB-INF/web.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="42" column="46" selection-start-line="42" selection-start-column="46" selection-end-line="42" selection-end-column="46" />
+        <state relative-caret-position="380">
+          <caret line="47" column="27" selection-start-line="47" selection-start-column="27" selection-end-line="47" selection-end-column="27" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/webapp/WEB-INF/vm/userAccount/addUserAccount.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/webapp/WEB-INF/views/userAccount/addUserAccount.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/webapp/WEB-INF/views/userAccount/userAccountList.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="19" column="47" selection-start-line="19" selection-start-column="47" selection-end-line="19" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/webapp/WEB-INF/vm/userAccount/exhibitionList.vm" />
-    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/webapp/WEB-INF/views/knowledgeBase/exhibitionDynamicList.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="11" column="26" selection-start-line="0" selection-start-column="0" selection-end-line="298" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/webapp/WEB-INF/vm/userAccount/userAccountList.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="102" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="102" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/webapp/WEB-INF/vm/knowledgeBase/lib/js/tab.js" />
-    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/webapp/WEB-INF/vm/knowledgeBase/exhibitionDynamicList.vm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="6" column="49" selection-start-line="6" selection-start-column="49" selection-end-line="6" selection-end-column="49" />
         </state>
       </provider>
     </entry>

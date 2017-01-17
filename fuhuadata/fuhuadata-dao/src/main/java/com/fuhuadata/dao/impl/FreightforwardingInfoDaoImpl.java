@@ -11,7 +11,6 @@ import org.springframework.orm.ibatis.SqlMapClientTemplate;
  * @date 2017-01-16 15:25:40
  */
 @SuppressWarnings("unchecked")
-@Component
 public class FreightforwardingInfoDaoImpl extends SqlMapClientTemplate implements FreightforwardingInfoDao {
 
     public static final String ADD = "FREIGHTFORWARDINGINFO.ADD";

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
  * @author wangbo
  * @date 2017-01-16 17:17:06
  */
-@Component
 public class WarehouseInfoServiceImpl implements WarehouseInfoService {
 	
 	@Resource

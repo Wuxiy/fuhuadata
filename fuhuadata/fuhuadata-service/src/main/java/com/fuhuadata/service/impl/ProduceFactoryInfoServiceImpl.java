@@ -14,7 +14,6 @@ import java.io.Serializable;
  * @author wangbo
  * @date 2017-01-16 11:10:51
  */
-@Component
 public class ProduceFactoryInfoServiceImpl implements ProduceFactoryInfoService {
 	
 	@Resource

@@ -13,7 +13,6 @@ import java.io.Serializable;
  * @date 2017-01-12 13:51:34
  */
 @SuppressWarnings("unchecked")
-@Component
 public class CustomerPurchaseProductDaoImpl extends SqlMapClientTemplate implements CustomerPurchaseProductDao {
 
     public static final String ADD = "CUSTOMERPURCHASEPRODUCT.ADD";

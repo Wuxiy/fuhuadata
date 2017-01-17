@@ -13,7 +13,6 @@ import java.util.ArrayList;
  * @author wangbo
  * @date 2017-01-16 16:22:49
  */
-@Component
 public class FreightforwardingScoreManagerImpl implements FreightforwardingScoreManager {
 
 	@Resource

@@ -13,7 +13,6 @@ import java.util.ArrayList;
  * @author wangbo
  * @date 2017-01-12 11:49:51
  */
-@Component
 public class CustomerParentManagerImpl implements CustomerParentManager {
 
 	@Resource

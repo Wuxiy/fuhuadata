@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
  * @author wangbo
  * @date 2017-01-16 16:22:49
  */
-@Component
 public class FreightforwardingScoreServiceImpl implements FreightforwardingScoreService {
 	
 	@Resource

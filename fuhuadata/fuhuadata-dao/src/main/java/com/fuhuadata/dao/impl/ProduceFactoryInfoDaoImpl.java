@@ -13,7 +13,6 @@ import java.io.Serializable;
  * @date 2017-01-16 11:10:51
  */
 @SuppressWarnings("unchecked")
-@Component
 public class ProduceFactoryInfoDaoImpl extends SqlMapClientTemplate implements ProduceFactoryInfoDao {
 
     public static final String ADD = "PRODUCEFACTORYINFO.ADD";

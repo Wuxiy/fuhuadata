@@ -13,7 +13,6 @@ import java.util.ArrayList;
  * @author wangbo
  * @date 2017-01-13 16:10:56
  */
-@Component
 public class CustomerLinkmanManagerImpl implements CustomerLinkmanManager {
 
 	@Resource

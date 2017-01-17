@@ -13,7 +13,6 @@ import java.io.Serializable;
  * @date 2017-01-12 13:37:25
  */
 @SuppressWarnings("unchecked")
-@Component
 public class CustomerSubcompanyInfoDaoImpl extends SqlMapClientTemplate implements CustomerSubcompanyInfoDao {
 
     public static final String ADD = "CUSTOMERSUBCOMPANYINFO.ADD";

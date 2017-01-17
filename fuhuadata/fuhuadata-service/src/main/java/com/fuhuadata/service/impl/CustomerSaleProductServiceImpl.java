@@ -14,7 +14,6 @@ import java.io.Serializable;
  * @author wangbo
  * @date 2017-01-12 13:41:04
  */
-@Component
 public class CustomerSaleProductServiceImpl implements CustomerSaleProductService {
 	
 	@Resource

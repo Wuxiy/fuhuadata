@@ -14,7 +14,6 @@ import java.io.Serializable;
  * @author wangbo
  * @date 2017-01-12 11:49:51
  */
-@Component
 public class CustomerParentServiceImpl implements CustomerParentService {
 	
 	@Resource

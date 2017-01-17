@@ -13,7 +13,6 @@ import java.util.ArrayList;
  * @author wangbo
  * @date 2017-01-16 17:17:06
  */
-@Component
 public class WarehouseInfoManagerImpl implements WarehouseInfoManager {
 
 	@Resource

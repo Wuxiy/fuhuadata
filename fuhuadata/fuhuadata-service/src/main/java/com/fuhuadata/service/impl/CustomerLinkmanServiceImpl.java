@@ -14,7 +14,6 @@ import java.io.Serializable;
  * @author wangbo
  * @date 2017-01-13 16:10:56
  */
-@Component
 public class CustomerLinkmanServiceImpl implements CustomerLinkmanService {
 	
 	@Resource
