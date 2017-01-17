@@ -1,6 +1,6 @@
 package com.fuhuadata.domain.query;
 import java.util.Date;
-import com.fuhuadata.domain.query.PageBase;
+import java.math.BigDecimal;
 
 /**
  * @author wangbo
