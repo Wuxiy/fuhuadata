@@ -9,6 +9,7 @@
  <body>
  
  <a href="/userAccount/userAccountList">用户管理</a>
+ <a href="/knowledgeBase/exhibitionDynamicList">知识库</a>
  
  </body>
 </html>
