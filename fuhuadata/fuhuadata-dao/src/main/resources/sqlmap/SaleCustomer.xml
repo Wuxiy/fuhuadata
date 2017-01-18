@@ -56,12 +56,6 @@
 				<isNotNull prepend=" AND " property="customerId">
 			customer_id = #customerId#
 		</isNotNull>
-				<isNotNull prepend=" AND " property="property">
-			property = #property#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="propertyRemarks">
-			property_remarks = #propertyRemarks#
-		</isNotNull>
 				<isNotNull prepend=" AND " property="customerLevel">
 			customer_level = #customerLevel#
 		</isNotNull>
@@ -71,113 +65,14 @@
 				<isNotNull prepend=" AND " property="lostRemarks">
 			lost_remarks = #lostRemarks#
 		</isNotNull>
-				<isNotNull prepend=" AND " property="chinaBranchOffice">
-			china_branch_office = #chinaBranchOffice#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="chinaContract">
-			china_contract = #chinaContract#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="qualificationDocuments">
-			qualification_documents = #qualificationDocuments#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="saleRemarks">
-			sale_remarks = #saleRemarks#
-		</isNotNull>
 				<isNotNull prepend=" AND " property="opportunityType">
 			opportunity_type = #opportunityType#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="opportunitySources">
-			opportunity_sources = #opportunitySources#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="opportunityDescribe">
-			opportunity_describe = #opportunityDescribe#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="priceSensitive">
-			price_sensitive = #priceSensitive#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="loyalty">
-			loyalty = #loyalty#
 		</isNotNull>
 				<isNotNull prepend=" AND " property="cooperateTime">
 			cooperate_time = #cooperateTime#
 		</isNotNull>
-				<isNotNull prepend=" AND " property="procurementSeason">
-			procurement_season = #procurementSeason#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="affinity">
-			affinity = #affinity#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="activePeriod">
-			active_period = #activePeriod#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="cooperateRemarks">
-			cooperate_remarks = #cooperateRemarks#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="totalSaleMoney">
-			total_sale_money = #totalSaleMoney#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="lowestSaleMoney">
-			lowest_sale_money = #lowestSaleMoney#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="totalMaintenanceCosts">
-			total_maintenance_costs = #totalMaintenanceCosts#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="totalProfits">
-			total_profits = #totalProfits#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="factoryLocate">
-			factory_locate = #factoryLocate#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="factoryProductLine">
-			factory_product_line = #factoryProductLine#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="factoryProduct">
-			factory_product = #factoryProduct#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="documentRequire">
-			document_require = #documentRequire#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="shippingAgentRequire">
-			shipping_agent_require = #shippingAgentRequire#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="packageRequire">
-			package_require = #packageRequire#
-		</isNotNull>
 				<isNotNull prepend=" AND " property="goodsType">
 			goods_type = #goodsType#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="mianxiangqi">
-			mianxiangqi = #mianxiangqi#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="miantuiqi">
-			miantuiqi = #miantuiqi#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="transportFlag">
-			transport_flag = #transportFlag#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="batchFlag">
-			batch_flag = #batchFlag#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="presentationAddress">
-			presentation_address = #presentationAddress#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="createUserId">
-			create_user_id = #createUserId#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="createUserName">
-			create_user_name = #createUserName#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="lastmodifyUserId">
-			lastmodify_user_id = #lastmodifyUserId#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="lastmodifyUserName">
-			lastmodify_user_name = #lastmodifyUserName#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="createTime">
-			create_time = #createTime#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="modifyTime">
-			modify_time = #modifyTime#
 		</isNotNull>
 				</dynamic>
 	</sql>
@@ -402,9 +297,9 @@
 		<![CDATA[
 			SELECT * FROM sale_customer 
 		]]>
-		<isParameterPresent>   
+		<!--<isParameterPresent>
             <include refid="PAGE-COMMON" />   
-        </isParameterPresent>
+        </isParameterPresent>-->
 		LIMIT #startRow#,#pageSize#
 	</select>
 	
@@ -412,8 +307,8 @@
 		<![CDATA[
 			SELECT COUNT(customer_id) FROM sale_customer
 		]]>
-		<isParameterPresent>   
+		<!--<isParameterPresent>
             <include refid="PAGE-COMMON" />   
-        </isParameterPresent>
+        </isParameterPresent>-->
 	</select>
 </sqlMap>

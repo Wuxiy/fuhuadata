@@ -8,7 +8,7 @@
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url"
-			value="jdbc:mysql://192.168.30.120:3306/fuhuadata?useUnicode=true&amp;characterEncoding=UTF8" />
+			value="jdbc:mysql://127.0.0.1:3306/fuhuadata?useUnicode=true&amp;characterEncoding=UTF8" />
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 
@@ -39,4 +39,6 @@
 	<bean id="exhibitionInfoDao" class="com.fuhuadata.dao.impl.ExhibitionInfoDaoImpl"/>
 	<bean id="productProblemDao" class="com.fuhuadata.dao.impl.ProductProblemDaoImpl"/>
 	<bean id="customerEncyclopediaDao" class="com.fuhuadata.dao.impl.CustomerEncyclopediaDaoImpl"/>
+	<bean id="saleCustomerDao" class="com.fuhuadata.dao.impl.SaleCustomerDaoImpl"/>
+	<bean id="customerParentDao" class="com.fuhuadata.dao.impl.CustomerParentDaoImpl"/>
 </beans>

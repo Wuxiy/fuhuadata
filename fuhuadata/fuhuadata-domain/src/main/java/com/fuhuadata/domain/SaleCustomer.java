@@ -11,6 +11,9 @@ public class SaleCustomer{
 
     /**主键id**/
 	private String customerId;
+
+	/**父级客户**/
+	private CustomerParent customerParent;
 	
     /**企业性质,0工厂,1经销商2,分销商3,终端客户4,其他，格式如下:[2][3]**/
 	private String property;
@@ -137,6 +140,14 @@ public class SaleCustomer{
 	
 	
 	public SaleCustomer() {
+	}
+
+	public CustomerParent getCustomerParent() {
+		return customerParent;
+	}
+
+	public void setCustomerParent(CustomerParent customerParent) {
+		this.customerParent = customerParent;
 	}
 	
 	public String getCustomerId() {

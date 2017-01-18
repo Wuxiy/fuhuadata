@@ -8,4 +8,6 @@
 	<bean id="exhibitionInfoService" class="com.fuhuadata.service.impl.ExhibitionInfoServiceImpl"/>
 	<bean id="productProblemService" class="com.fuhuadata.service.impl.ProductProblemServiceImpl"/>
 	<bean id="customerEncyclopediaService" class="com.fuhuadata.service.impl.CustomerEncyclopediaServiceImpl"/>
+	<bean id="saleCustomerService" class="com.fuhuadata.service.impl.SaleCustomerServiceImpl" />
+	<bean id="customerParentService" class="com.fuhuadata.service.impl.CustomerParentServiceImpl"/>
 </beans>
