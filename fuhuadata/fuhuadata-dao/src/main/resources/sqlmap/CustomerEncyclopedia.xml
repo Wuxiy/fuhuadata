@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap>
+    <typeAlias alias="CustomerEncyclopedia" type="com.fuhuadata.domain.CustomerEncyclopedia"/>
+    <typeAlias alias="CustomerEncyclopediaQuery" type="com.fuhuadata.domain.query.CustomerEncyclopediaQuery"/>
+    
+    <resultMap id="CUSTOMERENCYCLOPEDIA-MAP" class="CustomerEncyclopedia">
+        <result column="ency_id" property="encyId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="company_name" property="companyName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="type" property="type" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="is_full" property="isFull" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="area" property="area" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="country" property="country" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="company_property" property="companyProperty" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="regist_fund" property="registFund" jdbcType="INTEGER" javaType="java.lang.String"/>
+        <result column="regist_addr" property="registAddr" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="business_scope" property="businessScope" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="create_user_id" property="createUserId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="create_user_name" property="createUserName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="create_time" property="createTime" jdbcType="DATETIME" javaType="java.sql.Date" />
+        <result column="lastmodify_user_id" property="lastmodifyUserId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="lastmodify_user_name" property="lastmodifyUserName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="modify_time" property="modifyTime" jdbcType="DATETIME" javaType="java.sql.Date"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="company_info" property="companyInfo" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+        <result column="develop_his" property="developHis" jdbcType="LONGVARCHAR" javaType="java.lang.String"/>
+        <result column="sell_network" property="sellNetwork" jdbcType="LONGVARCHAR" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="PAGE-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotNull prepend=" AND " property="companyName">
+                company_name = #companyName#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="type">
+                type = #type#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="area">
+                area = #area#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="country">
+                country = #country#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="companyProperty">
+                company_property = #companyProperty#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="searchKey">
+                company_name like concat('%',#companyName#,'%')
+            </isNotNull>
+        </dynamic>
+    </sql>
+
+    <insert id="ADD" parameterClass="CustomerEncyclopedia">
+        INSERT INTO
+        customer_encyclopedia (ency_id, company_name, type,
+        is_full, area, country,
+        company_property, regist_fund, regist_addr,
+        business_scope, create_user_id, create_user_name,
+        create_time, lastmodify_user_id, lastmodify_user_name,
+        modify_time, remarks, company_info,
+        develop_his, sell_network)
+        VALUES (#encyId#, #companyName#, #type#,
+        #isFull#, #area#, #country#,
+        #companyProperty#, #registFund#, #registAddr#,
+        #businessScope#, #createUserId#, #createUserName#,
+        #createTime#, #lastmodifyUserId#, #lastmodifyUserName#,
+        #modifyTime#, #remarks#, #companyInfo#,
+        #developHis#, #sellNetwork#)
+        <selectKey resultClass="int" keyProperty="encyId">
+            SELECT @@IDENTITY AS ency_id
+        </selectKey>
+    </insert>
+
+    <update id="UPDATE" parameterClass="CustomerEncyclopedia">
+            UPDATE customer_encyclopedia
+            <dynamic prepend=" SET ">
+                <isNotNull prepend=", " property="companyName">
+                    company_name = #companyName#
+                </isNotNull>
+                <isNotNull prepend=", " property="type">
+                    type = #type#
+                </isNotNull>
+                <isNotNull prepend=", " property="isFull">
+                    is_full = #isFull#
+                </isNotNull>
+                <isNotNull prepend=", " property="area">
+                    area = #area#
+                </isNotNull>
+                <isNotNull prepend=", " property="country">
+                    country = #country#
+                </isNotNull>
+                <isNotNull prepend=", " property="companyProperty">
+                    company_property = #companyProperty#
+                </isNotNull>
+                <isNotNull prepend=", " property="registFund">
+                    regist_fund = #registFund#
+                </isNotNull>
+                <isNotNull prepend=", " property="registAddr">
+                    regist_addr = #registAddr#
+                </isNotNull>
+                <isNotNull prepend=", " property="businessScope">
+                    business_scope = #businessScope#
+                </isNotNull>
+                <isNotNull prepend=", " property="createUserId">
+                    createUserId = #createUserId#
+                </isNotNull>
+                <isNotNull prepend=", " property="createUserName">
+                    create_user_name = #createUserName#
+                </isNotNull>
+                <isNotNull prepend=", " property="createTime">
+                    create_time = #createTime#
+                </isNotNull>
+                <isNotNull prepend=", " property="lastmodifyUserId">
+                    lastmodify_user_id = #lastmodifyUserId#
+                </isNotNull>
+                <isNotNull prepend=", " property="lastmodifyUserName">
+                    lastmodify_user_name = #lastmodifyUserName#
+                </isNotNull>
+                <isNotNull prepend=", " property="modifyTime">
+                    modify_time = #modifyTime#
+                </isNotNull>
+                <isNotNull prepend=", " property="remarks">
+                    remarks = #remarks#
+                </isNotNull>
+                <isNotNull prepend=", " property="companyInfo">
+                    company_info = #companyInfo#
+                </isNotNull>
+                <isNotNull prepend=", " property="developHis">
+                    develop_his = #developHis#
+                </isNotNull>
+                <isNotNull prepend=", " property="sellNetwork">
+                    sell_network = #sellNetwork#
+                </isNotNull>
+            </dynamic>
+              WHERE ency_id= #encyId#
+
+    </update>
+
+    <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
+        <![CDATA[
+        DELETE FROM customer_encyclopedia WHERE ency_id=#id#
+    ]]>
+    </delete>
+    <select id="GET-PAGE" resultMap="CUSTOMERENCYCLOPEDIA-MAP" parameterClass="CustomerEncyclopediaQuery">
+        <![CDATA[
+        SELECT * FROM customer_encyclopedia
+        ]]>
+        <isParameterPresent>
+            <include refid="PAGE-COMMON"/>
+        </isParameterPresent>
+        LIMIT #startRow#,#pageSize#
+    </select>
+
+    <select id="COUNT" resultClass="java.lang.Integer" parameterClass="CustomerEncyclopediaQuery">
+        <![CDATA[
+			SELECT COUNT(ency_id) FROM customer_encyclopedia
+		]]>
+        <isParameterPresent>
+            <include refid="PAGE-COMMON"/>
+        </isParameterPresent>
+    </select>
+</sqlMap>

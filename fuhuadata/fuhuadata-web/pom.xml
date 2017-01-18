@@ -65,6 +65,29 @@
         </dependency>
         <!-- struts end -->
 
+      <!-- aspectj begin -->
+      <dependency>
+          <groupId>org.aspectj</groupId>
+          <artifactId>aspectjrt</artifactId>
+          <version>1.6.9</version>
+      </dependency>
+      <dependency>
+          <groupId>org.aspectj</groupId>
+          <artifactId>aspectjweaver</artifactId>
+          <version>1.6.9</version>
+      </dependency>
+      <dependency>
+          <groupId>org.aspectj</groupId>
+          <artifactId>aspectjtools</artifactId>
+          <version>1.6.9</version>
+      </dependency>
+      <dependency>
+          <groupId>cglib</groupId>
+          <artifactId>cglib-nodep</artifactId>
+          <version>2.2</version>
+      </dependency>
+      <!-- aspectj end -->
+
         <!-- IBATIS begin -->
         <dependency>
             <groupId>org.apache.ibatis</groupId>
@@ -113,8 +136,13 @@
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
-        </dependency> 
-    </dependencies>
+        </dependency>
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-aop</artifactId>
+          <version>3.0.2.RELEASE</version>
+      </dependency>
+  </dependencies>
     <build>
         <finalName>${project.artifactId}</finalName>
         <resources>
@@ -187,7 +215,7 @@
                 <jdsmy.jdbc.datasource.type>dbcp</jdsmy.jdbc.datasource.type>
                 <jdsmy.jdbc.driver>com.mysql.jdbc.Driver</jdsmy.jdbc.driver>
                 <jdsmy.jdbc.url>
-                     <![CDATA[jdbc:mysql://127.0.0.1:3306/fuhuadata?useUnicode=true&amp;characterEncoding=UTF8]]>
+                     <![CDATA[jdbc:mysql://192.168.30.120:3306/fuhuadata?useUnicode=true&amp;characterEncoding=UTF8]]>
                 </jdsmy.jdbc.url>
                 <jdsmy.jdbc.username>root</jdsmy.jdbc.username>
                 <jdsmy.jdbc.password>root</jdsmy.jdbc.password>

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CUSTOMERSUBCOMPANYINFO">
+   	<typeAlias alias="CustomerSubcompanyInfo" type="com.fuhuadata.domain.CustomerSubcompanyInfo"/>
+   	<typeAlias alias="QueryCustomerSubcompanyInfo" type="com.fuhuadata.domain.query.QueryCustomerSubcompanyInfo"/>
+	
+	<resultMap id="CUSTOMERSUBCOMPANYINFO-MAP" class="CustomerSubcompanyInfo">
+					<result property="customerSubId" column="customer_sub_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="fullName" column="full_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="shortName" column="short_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="property" column="property" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="propertyRemarks" column="property_remarks" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="zhongxinbaoNumber" column="zhongxinbao_number" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="zhongxinbaoLevel" column="zhongxinbao_level" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="customerSubRemarks" column="customer_sub_remarks" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="createUserId" column="create_user_id" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="createUserName" column="create_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="lastmodifyUserId" column="lastmodify_user_id" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="lastmodifyUserName" column="lastmodify_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="createTime" column="create_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+								<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+														</resultMap>
+	
+	<sql id="PAGE-COMMON">	
+		<dynamic prepend=" WHERE ">
+				<isNotNull prepend=" AND " property="customerSubId">
+			customer_sub_id = #customerSubId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="customerId">
+			customer_id = #customerId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="fullName">
+			full_name = #fullName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="shortName">
+			short_name = #shortName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="property">
+			property = #property#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="propertyRemarks">
+			property_remarks = #propertyRemarks#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="zhongxinbaoNumber">
+			zhongxinbao_number = #zhongxinbaoNumber#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="zhongxinbaoLevel">
+			zhongxinbao_level = #zhongxinbaoLevel#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="customerSubRemarks">
+			customer_sub_remarks = #customerSubRemarks#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createUserId">
+			create_user_id = #createUserId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createUserName">
+			create_user_name = #createUserName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="lastmodifyUserId">
+			lastmodify_user_id = #lastmodifyUserId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="lastmodifyUserName">
+			lastmodify_user_name = #lastmodifyUserName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createTime">
+			create_time = #createTime#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="modifyTime">
+			modify_time = #modifyTime#
+		</isNotNull>
+				</dynamic>
+	</sql>
+	
+	<sql id="QUERY-COMMON">	
+		<dynamic prepend=" WHERE ">
+				<isNotNull prepend=" AND " property="customerSubId">
+			customer_sub_id = #customerSubId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="customerId">
+			customer_id = #customerId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="fullName">
+			full_name = #fullName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="shortName">
+			short_name = #shortName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="property">
+			property = #property#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="propertyRemarks">
+			property_remarks = #propertyRemarks#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="zhongxinbaoNumber">
+			zhongxinbao_number = #zhongxinbaoNumber#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="zhongxinbaoLevel">
+			zhongxinbao_level = #zhongxinbaoLevel#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="customerSubRemarks">
+			customer_sub_remarks = #customerSubRemarks#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createUserId">
+			create_user_id = #createUserId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createUserName">
+			create_user_name = #createUserName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="lastmodifyUserId">
+			lastmodify_user_id = #lastmodifyUserId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="lastmodifyUserName">
+			lastmodify_user_name = #lastmodifyUserName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createTime">
+			create_time = #createTime#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="modifyTime">
+			modify_time = #modifyTime#
+		</isNotNull>
+				</dynamic>
+	</sql>
+	
+	<insert id="ADD" parameterClass="CustomerSubcompanyInfo">
+		INSERT INTO 
+		customer_subcompany_info(customer_sub_id,customer_id,full_name,short_name,property,property_remarks,zhongxinbao_number,zhongxinbao_level,customer_sub_remarks,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time) 
+		VALUES(#customerSubId#,#customerId#,#fullName#,#shortName#,#property#,#propertyRemarks#,#zhongxinbaoNumber#,#zhongxinbaoLevel#,#customerSubRemarks#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
+		<selectKey resultClass="String" keyProperty="id">
+			SELECT @@IDENTITY AS ID
+		</selectKey>
+	</insert>
+	
+	<update id="UPDATE" parameterClass="CustomerSubcompanyInfo">
+		UPDATE customer_subcompany_info 
+		<dynamic prepend=" SET ">
+						<isNotEmpty prepend=", " property="customerSubId">customer_sub_id=#customerSubId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="customerId">customer_id=#customerId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="fullName">full_name=#fullName#</isNotEmpty>
+						<isNotEmpty prepend=", " property="shortName">short_name=#shortName#</isNotEmpty>
+						<isNotEmpty prepend=", " property="property">property=#property#</isNotEmpty>
+						<isNotEmpty prepend=", " property="propertyRemarks">property_remarks=#propertyRemarks#</isNotEmpty>
+						<isNotEmpty prepend=", " property="zhongxinbaoNumber">zhongxinbao_number=#zhongxinbaoNumber#</isNotEmpty>
+						<isNotEmpty prepend=", " property="zhongxinbaoLevel">zhongxinbao_level=#zhongxinbaoLevel#</isNotEmpty>
+						<isNotEmpty prepend=", " property="customerSubRemarks">customer_sub_remarks=#customerSubRemarks#</isNotEmpty>
+						<isNotEmpty prepend=", " property="createUserId">create_user_id=#createUserId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="createUserName">create_user_name=#createUserName#</isNotEmpty>
+						<isNotEmpty prepend=", " property="lastmodifyUserId">lastmodify_user_id=#lastmodifyUserId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="lastmodifyUserName">lastmodify_user_name=#lastmodifyUserName#</isNotEmpty>
+						<isNotEmpty prepend=", " property="createTime">create_time=#createTime#</isNotEmpty>
+						<isNotEmpty prepend=", " property="modifyTime">modify_time=#modifyTime#</isNotEmpty>
+					</dynamic>
+		WHERE customer_sub_id=#customer_sub_id#
+	</update>
+	
+	<delete id="DELETE-BY-ID" parameterClass="java.lang.String">
+		<![CDATA[
+			DELETE FROM customer_subcompany_info WHERE customer_sub_id=#customer_sub_id#
+		]]>
+	</delete>
+	
+	<select id="GET-ALL" resultMap="CUSTOMERSUBCOMPANYINFO-MAP">
+		<![CDATA[
+			SELECT * FROM customer_subcompany_info
+		]]>
+	</select>
+	
+	<select id="GET-BY-QUERY" resultMap="CUSTOMERSUBCOMPANYINFO-MAP" parameterClass="QueryCustomerSubcompanyInfo">
+		<![CDATA[
+			SELECT * FROM customer_subcompany_info
+		]]>
+		<isParameterPresent>   
+            <include refid="QUERY-COMMON" />   
+        </isParameterPresent>
+	</select>
+	
+	<select id="GET-BY-ID" resultMap="CUSTOMERSUBCOMPANYINFO-MAP" parameterClass="java.lang.String">
+		<![CDATA[
+			SELECT * FROM customer_subcompany_info	WHERE customer_sub_id=#customer_sub_id#
+		]]>
+	</select>
+	
+	<select id="GET-PAGE" resultMap="CUSTOMERSUBCOMPANYINFO-MAP" parameterClass="QueryCustomerSubcompanyInfo">
+		<![CDATA[
+			SELECT * FROM customer_subcompany_info 
+		]]>
+		<isParameterPresent>   
+            <include refid="PAGE-COMMON" />   
+        </isParameterPresent>
+		LIMIT #startRow#,#pageSize#
+	</select>
+	
+	<select id="COUNT" resultClass="java.lang.Integer" parameterClass="QueryCustomerSubcompanyInfo">
+		<![CDATA[
+			SELECT COUNT(customer_sub_id) FROM customer_subcompany_info
+		]]>
+		<isParameterPresent>   
+            <include refid="PAGE-COMMON" />   
+        </isParameterPresent>
+	</select>
+</sqlMap>

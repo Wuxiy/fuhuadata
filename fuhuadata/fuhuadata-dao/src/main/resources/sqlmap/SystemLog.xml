@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="SYSTEMLOG">
+    <typeAlias alias="SystemLog" type="com.fuhuadata.domain.SystemLog"/>
+    <typeAlias alias="SystemLogQuery" type="com.fuhuadata.domain.query.SystemLogQuery"/>
+    
+    <resultMap id="SYSTEMLOG-MAP" class="SystemLog">
+        <result property="logId" column="log_id" jdbcType="INT" javaType="java.lang.Integer"/>
+        <result property="userId" column="user_id" jdbcType="INT" javaType="java.lang.Integer"/>
+        <result property="userName" column="user_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="ip" column="ip" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="module" column="module" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="method" column="method" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="date" column="date" jdbcType="DATETIME" javaType="java.sql.Date"/>
+        <result property="responseDate" column="response_date" jdbcType="DATETIME" javaType="java.sql.Date"/>
+        <result property="commit" column="commit" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="parementers" column="parementers" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="remarks" column="remarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    </resultMap>
+    <sql id="PAGE_COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotNull prepend=" AND " property="logId">
+                log_id = #id#
+            </isNotNull>
+             <isNotNull prepend=" AND " property="userId">
+                 user_id=#userId#
+             </isNotNull>
+            <isNotNull prepend=" AND " property="userName">
+                user_name=#userName#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="ip">
+                ip like concat('%',#ip#,'%')
+            </isNotNull>
+            <isNotNull prepend=" AND " property="module">
+                module like concat('%',#module#,'%')
+            </isNotNull>
+            <isNotNull prepend=" AND " property="method">
+                method like concat('%',#method#,'%')
+            </isNotNull>
+            <isNotNull prepend=" AND " property="date">
+                date like concat('%',#date#,'%')
+            </isNotNull>
+            <isNotNull prepend=" AND " property="responseDate">
+                response_date like concat('%',#responseDate#,'%')
+            </isNotNull>
+            <isNotNull prepend=" AND " property="commit">
+                commit like concat('%',#commit#,'%')
+            </isNotNull>
+            <isNotNull prepend=" AND " property="searchKey">
+                user_name like concat('%',#searchKey#,'%')
+            </isNotNull>
+        </dynamic>
+    </sql>
+
+    <insert id="ADD" parameterClass="SystemLog">
+        INSERT INTO
+        fuhua_system_log
+        VALUES(#logId#,#userId#,#userName#,#ip#,#module#,#method#,#date#,#responseDate#,#commit#,#parementers#,#remarks#)
+        <selectKey resultClass="int" keyProperty="logId">
+            SELECT @@IDENTITY AS log_id
+        </selectKey>
+    </insert>
+
+    <select id="GET-PAGE" resultMap="SYSTEMLOG-MAP" parameterClass="SystemLogQuery">
+        <![CDATA[
+        SELECT * FROM fuhua_system_log
+       ]]>
+        <isParameterPresent>
+            <include refid="PAGE_COMMON"/>
+        </isParameterPresent>
+        LIMIT #startRow#,#pageSize#
+    </select>
+
+    <select id="COUNT" resultClass="java.lang.Integer" parameterClass="SystemLogQuery">
+        <![CDATA[
+        SELECT COUNT(*) FROM fuhua_system_log
+       ]]>
+        <isParameterPresent>
+            <include refid="PAGE_COMMON"/>
+        </isParameterPresent>
+    </select>
+</sqlMap>

@@ -1,7 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a7502f75-518a-43c7-a79d-9ea3a9a05f29" name="Default" comment="" />
+    <list default="true" id="a7502f75-518a-43c7-a79d-9ea3a9a05f29" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__cglib_cglib_nodep_2_2.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjrt_1_6_9.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjtools_1_6_9.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_6_9.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/ComponentCostDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/CustomerEncyclopediaDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/ExhibitionInfoDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/FreightCostDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/MarketTrainingDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/PortChargesCostDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/PreparationProcessCostDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/ProductProblemDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/SystemLogDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/CustomerEncyclopediaDaoImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/ExhibitionInfoDaoImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/MarketTrainingDaoImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/ProductProblemDaoImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/SystemLogDaoImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-dao/src/main/resources/sqlmap/ComponentCost.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-dao/src/main/resources/sqlmap/CustomerEncyclopedia.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-dao/src/main/resources/sqlmap/ExhibitionInfo.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-dao/src/main/resources/sqlmap/MarketTraining.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-dao/src/main/resources/sqlmap/PreparationProcessCost.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-dao/src/main/resources/sqlmap/ProductProblem.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-dao/src/main/resources/sqlmap/SystemLog.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/ComponentCost.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/CustomerEncyclopedia.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/ExhibitionInfo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/FreightCost.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/MarketTraining.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/PortChargesCost.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/PreparationProcessCost.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/ProductProblem.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/SystemLog.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/query/ComponentCostQuery.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/query/CustomerEncyclopediaQuery.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/query/ExhibitionInfoQuery.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/query/FreightCostQuery.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/query/MarketTrainingQuery.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/query/PortChargesCostQuery.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/query/PreparationProcessCostQuery.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/query/ProductProblemQuery.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/query/SystemLogQuery.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/ComponentCostManager.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/CustomerEncyclopediaManager.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/ExhibitionInfoManager.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/FreightCostManager.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/MarketTrainingManager.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/PortChargesCostManager.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/PreparationProcessCostManager.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/ProductProblemManager.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/SystemLogManager.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/CustomerEncyclopediaManagerImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/ExhibitionInfoManagerImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/MarketTrainingManagerImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/ProductProblemManagerImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/SystemLogManagerImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/ComponentCostService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/CustomerEncyclopediaService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/ExhibitionInfoService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/FreightCostService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/MarketTrainingService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/PortChargesCostService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/PreparationProcessCostService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/ProductProblemService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/SystemLogService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/CustomerEncyclopediaServiceImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/ExhibitionInfoServiceImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/MarketTrainingServiceImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/ProductProblemServiceImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/SystemLogServiceImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-web/src/main/java/com/fuhuadata/web/springmvc/CustomerEncyclopediaAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-web/src/main/java/com/fuhuadata/web/springmvc/ExhibitionInfoAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-web/src/main/java/com/fuhuadata/web/springmvc/MarketTrainingAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-web/src/main/java/com/fuhuadata/web/springmvc/ProductProblemAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-web/src/main/java/com/fuhuadata/web/util/SystemLogAnnotation.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fuhuadata-web/src/main/java/com/fuhuadata/web/util/SystemLogAspect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/fuhuadata_web_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/fuhuadata_web_war_exploded.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuhuadata-dao/src/main/resources/sqlmap-config.xml" afterPath="$PROJECT_DIR$/fuhuadata-dao/src/main/resources/sqlmap-config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuhuadata-web/fuhuadata-web.iml" afterPath="$PROJECT_DIR$/fuhuadata-web/fuhuadata-web.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuhuadata-web/pom.xml" afterPath="$PROJECT_DIR$/fuhuadata-web/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuhuadata-web/src/main/resources/spring-config.xml" afterPath="$PROJECT_DIR$/fuhuadata-web/src/main/resources/spring-config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuhuadata-web/src/main/resources/spring/springbeans-dao.xml" afterPath="$PROJECT_DIR$/fuhuadata-web/src/main/resources/spring/springbeans-dao.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuhuadata-web/src/main/resources/spring/springbeans-manager.xml" afterPath="$PROJECT_DIR$/fuhuadata-web/src/main/resources/spring/springbeans-manager.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuhuadata-web/src/main/resources/spring/springbeans-service.xml" afterPath="$PROJECT_DIR$/fuhuadata-web/src/main/resources/spring/springbeans-service.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+    </list>
     <ignored path="fuhuadata.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/fuhuadata-dao/target/" />
@@ -26,122 +117,7 @@
     <favorites_list name="fuhuadata" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="WarehouseInfoServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/WarehouseInfoServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="13" column="3" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="springmvc.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/resources/springmvc.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-275">
-              <caret line="19" column="28" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="web.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/webapp/WEB-INF/web.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="46" column="44" selection-start-line="46" selection-start-column="44" selection-end-line="46" selection-end-column="44" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WarehouseScoreDaoImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/WarehouseScoreDaoImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-469">
-              <caret line="20" column="66" selection-start-line="20" selection-start-column="66" selection-end-line="20" selection-end-column="66" />
-              <folding>
-                <element signature="e#447#477#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WarehouseScoreDao.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/WarehouseScoreDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="124">
-              <caret line="8" column="3" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WarehouseScore.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/WarehouseScore.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="3" column="28" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WarehouseScoreManagerImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/WarehouseScoreManagerImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="337">
-              <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WarehouseScoreManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/WarehouseScoreManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1301">
-              <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WarehouseScoreServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/WarehouseScoreServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="13" column="3" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WarehouseScoreService.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/WarehouseScoreService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="71" column="33" selection-start-line="71" selection-start-column="33" selection-end-line="71" selection-end-column="33" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -151,6 +127,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
       <projects_view />
@@ -159,22 +138,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/query/QueryFreightforwardingWarehouseRelation.java" />
-        <option value="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/FreightforwardingWarehouseRelation.java" />
-        <option value="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/FreightforwardingWarehouseRelationService.java" />
-        <option value="$PROJECT_DIR$/fuhuadata-web/src/main/resources/springmvc.xml" />
-        <option value="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/CustomerLinkmanDaoImpl.java" />
-        <option value="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/CustomerParentDaoImpl.java" />
-        <option value="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/CustomerPurchaseProductDaoImpl.java" />
-        <option value="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/CustomerSaleProductDaoImpl.java" />
-        <option value="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/CustomerSubcompanyInfoDaoImpl.java" />
-        <option value="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/CustomerVisitRecordDaoImpl.java" />
-        <option value="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/FreightforwardingInfoDaoImpl.java" />
-        <option value="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/FreightforwardingScoreDaoImpl.java" />
-        <option value="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/FreightforwardingWarehouseRelationDaoImpl.java" />
-        <option value="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/ProduceFactoryInfoDaoImpl.java" />
-        <option value="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/RecordLinkmanDaoImpl.java" />
-        <option value="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/SaleCustomerDaoImpl.java" />
         <option value="$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/WarehouseInfoDaoImpl.java" />
         <option value="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/CustomerLinkmanManagerImpl.java" />
         <option value="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/CustomerParentManagerImpl.java" />
@@ -210,6 +173,22 @@
         <option value="$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/WarehouseScoreManager.java" />
         <option value="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/WarehouseScoreServiceImpl.java" />
         <option value="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/WarehouseScoreService.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-web/pom.xml" />
+        <option value="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/knowledgeBase/SystemLog.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/query/knowledgeBaseQuery/SystemLogQuery.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/dao/knowledgeBaseDao/SystemLogDao.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/dao/knowledgeBaseDao/ProductProblemDao.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/query/SystemLogQuery.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/SystemLog.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/FreightCostService.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-dao/src/main/resources/sqlmap-config.xml" />
+        <option value="$PROJECT_DIR$/fuhuadata-web/src/main/resources/spring/springbeans-dao.xml" />
+        <option value="$PROJECT_DIR$/fuhuadata-web/src/main/resources/spring/springbeans-manager.xml" />
+        <option value="$PROJECT_DIR$/fuhuadata-web/src/main/resources/spring/springbeans-service.xml" />
+        <option value="$PROJECT_DIR$/fuhuadata-web/src/main/resources/spring-config.xml" />
+        <option value="$PROJECT_DIR$/fuhuadata-web/src/main/java/com/fuhuadata/web/util/SystemLogAnnotation.java" />
+        <option value="$PROJECT_DIR$/fuhuadata-web/src/main/java/com/fuhuadata/web/util/SystemLogAspect.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -229,12 +208,13 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="D:/Develop/apache-maven-3.3.9-bin" />
+        <option name="localRepository" value="C:\fuhua\maven\lib" />
+        <option name="mavenHome" value="$PROJECT_DIR$/../../../maven/apache-maven-3.3.9" />
+        <option name="userSettingsFile" value="C:\fuhua\maven\apache-maven-3.3.9\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
     <option name="enabledProfiles">
       <list>
-        <option value="artifactory" />
         <option value="development" />
       </list>
     </option>
@@ -246,6 +226,24 @@
         <PATH_ELEMENT>
           <option name="myItemId" value="" />
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="fuhuadata-web Maven Webapp" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="fuhuadata-web Maven Webapp" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Lifecycle" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$LifecycleNode" />
         </PATH_ELEMENT>
       </PATH>
       <PATH>
@@ -275,20 +273,11 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="width" value="1931" />
-    <option name="height" value="1038" />
+    <option name="x" value="-7" />
+    <option name="width" value="1370" />
+    <option name="height" value="735" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
-    <OptionsSetting value="true" id="Add" />
-    <OptionsSetting value="true" id="Remove" />
-    <OptionsSetting value="true" id="Checkout" />
-    <OptionsSetting value="true" id="Update" />
-    <OptionsSetting value="true" id="Status" />
-    <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="0" id="Add" />
-    <ConfirmationsSetting value="0" id="Remove" />
-  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
@@ -304,17 +293,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="fuhuadata" />
@@ -421,7 +402,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vm" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -444,40 +429,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -510,10 +461,6 @@
               <option name="myItemId" value="web" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="springmvc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -525,39 +472,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata-service" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata-service" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata-service" />
+              <option name="myItemId" value="fuhuadata-web" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -573,253 +488,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="service" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
+              <option name="myItemId" value="web" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata-service" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="service" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="impl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata-manager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata-manager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata-manager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata-manager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="impl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata-domain" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata-domain" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata-domain" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="domain" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata-domain" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="domain" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="query" />
+              <option name="myItemId" value="util" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -852,97 +525,13 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata-dao" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata-dao" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dao" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fuhuadata-dao" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dao" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="impl" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -953,13 +542,16 @@
     <property name="js.eslint.eslintPackage" value="" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Program Files\fuhua\fuhuadata\fuhuadata\fuhuadata-web\src\main\webapp\WEB-INF\vm\knowledgeBase" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\fuhua\GitProject\fuhuadata\fuhuadata\fuhuadata-web\src\main\java\com\fuhuadata\web\springmvc" />
+      <recent name="C:\fuhua\GitProject\fuhuadata\fuhuadata\fuhuadata-service\src\main\java\com\fuhuadata\service\impl" />
+      <recent name="C:\fuhua\GitProject\fuhuadata\fuhuadata\fuhuadata-manager\src\main\java\com\fuhuadata\manager\impl" />
+      <recent name="C:\fuhua\GitProject\fuhuadata\fuhuadata\fuhuadata-dao\src\main\resources\sqlmap" />
+      <recent name="C:\fuhua\GitProject\fuhuadata\fuhuadata\fuhuadata-dao\src\main\java\com\fuhuadata\dao\impl" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\fuhua\GitProject\fuhuadata\fuhuadata\fuhuadata-web\src\main\java\com\fuhuadata\web\util" />
       <recent name="D:\Program Files\fuhua\fuhuadata\fuhuadata\fuhuadata-web\src\main\webapp\WEB-INF\vm\knowledgeBase" />
-      <recent name="D:\Program Files\fuhua\fuhuadata\fuhuadata\fuhuadata-web\src\main\webapp\lib" />
-      <recent name="D:\idea_project20161110\fuhuadata\fuhuadata-web\src\main\webapp\WEB-INF\vm\userAccount" />
     </key>
   </component>
   <component name="RunManager" selected="Tomcat Server.fuhuadataserver">
@@ -1057,53 +649,6 @@
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" />
       <predefined_log_file id="idea.log" enabled="true" />
-      <method />
-    </configuration>
-    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
-      <module name="" />
-      <option name="DEPLOY" value="true" />
-      <option name="ARTIFACT_NAME" value="" />
-      <option name="PM_INSTALL_OPTIONS" value="" />
-      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
-      <option name="MODE" value="default_activity" />
-      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
-      <option name="FORCE_STOP_RUNNING_APP" value="true" />
-      <option name="DEBUGGER_TYPE" value="Java" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <Java />
-      <Profilers>
-        <option name="GAPID_DISABLE_PCS" value="false" />
-      </Profilers>
-      <option name="DEEP_LINK" value="" />
-      <option name="ACTIVITY_CLASS" value="" />
-      <method />
-    </configuration>
-    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
-      <module name="" />
-      <option name="TESTING_TYPE" value="0" />
-      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="EXTRA_OPTIONS" value="" />
-      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
-      <option name="FORCE_STOP_RUNNING_APP" value="true" />
-      <option name="DEBUGGER_TYPE" value="Java" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <Java />
-      <Profilers>
-        <option name="GAPID_DISABLE_PCS" value="false" />
-      </Profilers>
       <method />
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
@@ -1280,31 +825,12 @@
       <setting name="cmdLine" value="run-app" />
       <setting name="passParentEnv" value="true" />
       <setting name="launchBrowser" value="true" />
+      <setting name="launchBrowserUrl" value="" />
+      <setting name="depsClasspath" value="false" />
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <method />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="true" type="JUnitTestDiscovery" factoryName="JUnit Test Discovery" changeList="All">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -1343,6 +869,12 @@
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
       <envs />
       <method />
     </configuration>
@@ -1438,34 +970,6 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="true" type="TestNGTestDiscovery" factoryName="TestNG Test Discovery" changeList="All">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-      <method />
-    </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <node-interpreter>project</node-interpreter>
       <node-options />
@@ -1476,7 +980,7 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
-      <command value="run-script" />
+      <command value="run" />
       <scripts />
       <node-interpreter value="project" />
       <envs />
@@ -1496,14 +1000,14 @@
             <option name="checksumPolicy" value="NOT_SET" />
             <option name="failureBehavior" value="NOT_SET" />
             <option name="localRepository" value="" />
-            <option name="mavenHome" value="D:/Develop/apache-maven-3.3.9-bin" />
+            <option name="mavenHome" value="$PROJECT_DIR$/../../../maven/apache-maven-3.3.9" />
             <option name="nonRecursive" value="false" />
             <option name="outputLevel" value="INFO" />
             <option name="pluginUpdatePolicy" value="DEFAULT" />
             <option name="printErrorStackTraces" value="false" />
             <option name="threads" />
             <option name="usePluginRegistry" value="false" />
-            <option name="userSettingsFile" value="" />
+            <option name="userSettingsFile" value="C:\fuhua\maven\apache-maven-3.3.9\conf\settings.xml" />
             <option name="workOffline" value="false" />
           </MavenGeneralSettings>
         </option>
@@ -1545,11 +1049,11 @@
       </MavenSettings>
       <method />
     </configuration>
-    <configuration default="false" name="fuhuadataserver" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.0.29" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="D:\Program Files\Java\jdk1.8.0_20\jre">
+    <configuration default="false" name="fuhuadataserver" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.9" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="C:\Program Files\Java\jdk1.8.0_111\jre">
       <option name="OPEN_IN_BROWSER" value="false" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
-        <artifact name="fuhuadata-web:war">
+        <artifact name="fuhuadata-web:war exploded">
           <settings>
             <option name="CONTEXT_PATH" value="/" />
           </settings>
@@ -1613,7 +1117,11 @@
           <option name="PROGRAM_PARAMETERS" value="" />
         </SHUTDOWN>
       </ConfigurationWrapper>
-      <method />
+      <method>
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="fuhuadata-web:war exploded" />
+        </option>
+      </method>
     </configuration>
     <list size="2">
       <item index="0" class="java.lang.String" itemvalue="Maven.fuhuadata [validate]" />
@@ -1651,43 +1159,45 @@
       <workItem from="1482982707206" duration="1179000" />
       <workItem from="1484191879413" duration="8005000" />
       <workItem from="1484614831719" duration="9026000" />
+      <workItem from="1484703179820" duration="4824000" />
+      <workItem from="1484708073155" duration="1012000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="122627000" />
+    <option name="totallyTimeSpent" value="128463000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="0" width="1931" height="1038" extended-state="0" />
-    <editor active="true" />
+    <frame x="-7" y="0" width="1370" height="735" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34406215" sideWeight="0.1855724" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.19007634" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930845" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1468897" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34406215" sideWeight="0.8144276" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17557251" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.80992365" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29221117" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30152673" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3762486" sideWeight="0.8176594" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37603992" sideWeight="0.8176594" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930845" sideWeight="0.49582028" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.327787" sideWeight="0.49582028" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1725,460 +1235,378 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/CustomerLinkmanDaoImpl.java">
+    <entry file="file://$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/query/CustomerEncyclopediaQuery.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="61">
-          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
-          <folding>
-            <element signature="e#450#480#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/CustomerParentDaoImpl.java">
+    <entry file="file://$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/query/ExhibitionInfoQuery.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
-          <folding>
-            <element signature="e#447#477#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/CustomerPurchaseProductDaoImpl.java">
+    <entry file="file://$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/query/FreightCostQuery.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
-          <folding>
-            <element signature="e#474#504#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/CustomerSaleProductDaoImpl.java">
+    <entry file="file://$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/query/MarketTrainingQuery.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
-          <folding>
-            <element signature="e#462#492#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/CustomerSubcompanyInfoDaoImpl.java">
+    <entry file="file://$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/query/PortChargesCostQuery.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
-          <folding>
-            <element signature="e#471#501#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/CustomerVisitRecordDaoImpl.java">
+    <entry file="file://$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/query/PreparationProcessCostQuery.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
-          <folding>
-            <element signature="e#462#492#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/FreightforwardingInfoDaoImpl.java">
+    <entry file="file://$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/query/ProductProblemQuery.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
-          <folding>
-            <element signature="e#417#447#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/FreightforwardingScoreDaoImpl.java">
+    <entry file="file://$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/CustomerEncyclopedia.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
-          <folding>
-            <element signature="e#420#450#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-9">
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/FreightforwardingWarehouseRelationDaoImpl.java">
+    <entry file="file://$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/ExhibitionInfo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#456#486#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-9">
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/ProduceFactoryInfoDaoImpl.java">
+    <entry file="file://$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/FreightCost.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
-          <folding>
-            <element signature="e#459#489#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-9">
+          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/RecordLinkmanDaoImpl.java">
+    <entry file="file://$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/MarketTraining.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
-          <folding>
-            <element signature="e#444#474#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-9">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/SaleCustomerDaoImpl.java">
+    <entry file="file://$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/PortChargesCost.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
-          <folding>
-            <element signature="e#441#471#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="23">
+          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/UserAccountDaoImpl.java">
+    <entry file="file://$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/PreparationProcessCost.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="-9">
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/WarehouseInfoDaoImpl.java">
+    <entry file="file://$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/ProductProblem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
-          <folding>
-            <element signature="e#393#423#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-9">
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/CustomerLinkmanManagerImpl.java">
+    <entry file="file://$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/SystemLog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="15" column="75" selection-start-line="15" selection-start-column="75" selection-end-line="15" selection-end-column="75" />
+        <state relative-caret-position="19">
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/ComponentCost.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/query/SystemLogQuery.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/MarketTrainingDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/ComponentCostDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="17" lean-forward="false" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../testProject/fuhuadata/fuhuadata-domain/src/main/java/com/fuhuadata/service/ComponentCostService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/FreightCostService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/SystemLogManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/SystemLogDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/ExhibitionInfoDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/CustomerEncyclopediaDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/resources/sqlmap/ComponentCost.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/resources/sqlmap-config.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="16" column="49" lean-forward="false" selection-start-line="16" selection-start-column="49" selection-end-line="16" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/SystemLogManagerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/SystemLogServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/resources/spring/springbeans-manager.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="99" lean-forward="false" selection-start-line="10" selection-start-column="99" selection-end-line="10" selection-end-column="99" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/CustomerParentManagerImpl.java">
+    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/resources/spring/springbeans-service.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/CustomerPurchaseProductManagerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/CustomerSaleProductManagerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/CustomerSubcompanyInfoManagerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/CustomerVisitRecordManagerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/FreightforwardingInfoManagerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/FreightforwardingScoreManagerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/FreightforwardingWarehouseRelationManagerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/ProduceFactoryInfoManagerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/RecordLinkmanManagerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/SaleCustomerManagerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/UserAccountManagerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/WarehouseInfoManagerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/CustomerLinkmanServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/CustomerParentServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/CustomerPurchaseProductServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/CustomerSaleProductServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/CustomerSubcompanyInfoServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/CustomerVisitRecordServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/FreightforwardingInfoServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="13" column="3" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/FreightforwardingScoreServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="61">
-          <caret line="13" column="3" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/FreightforwardingWarehouseRelationServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/ProduceFactoryInfoServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/RecordLinkmanServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/SaleCustomerServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/UserAccountServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/WarehouseInfoServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="13" column="3" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
+        <state relative-caret-position="171">
+          <caret line="9" column="111" lean-forward="false" selection-start-line="9" selection-start-column="111" selection-end-line="9" selection-end-column="111" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/resources/springmvc.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-275">
-          <caret line="19" column="28" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
+        <state relative-caret-position="-903">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../maven/apache-maven-3.3.9/conf/settings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="273" column="28" lean-forward="false" selection-start-line="273" selection-start-column="28" selection-end-line="273" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/java/com/fuhuadata/web/springmvc/KnowledgeBaseAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="27" column="13" lean-forward="false" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/java/com/fuhuadata/web/springmvc/ProductProblemAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="39">
+          <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/java/com/fuhuadata/web/springmvc/CustomerEncyclopediaAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/java/com/fuhuadata/web/springmvc/ExhibitionInfoAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="26" column="13" lean-forward="false" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/java/com/fuhuadata/web/springmvc/UserAccountAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/java/com/fuhuadata/web/springmvc/MarketTrainingAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/resources/spring-config.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="17" column="76" lean-forward="false" selection-start-line="17" selection-start-column="61" selection-end-line="17" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-874">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/resources/velocity.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/resources/important.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/webapp/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/webapp/WEB-INF/web.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="46" column="44" selection-start-line="46" selection-start-column="44" selection-end-line="46" selection-end-column="44" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/impl/WarehouseScoreDaoImpl.java">
+    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/resources/spring/springbeans-dao.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-469">
-          <caret line="20" column="66" selection-start-line="20" selection-start-column="66" selection-end-line="20" selection-end-column="66" />
-          <folding>
-            <element signature="e#447#477#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="507">
+          <caret line="40" column="99" lean-forward="false" selection-start-line="40" selection-start-column="99" selection-end-line="40" selection-end-column="99" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-dao/src/main/java/com/fuhuadata/dao/WarehouseScoreDao.java">
+    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/java/com/fuhuadata/web/util/BaseAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="8" column="3" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
+        <state relative-caret-position="19">
+          <caret line="28" column="13" lean-forward="false" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/java/com/fuhuadata/web/util/SystemLogAspect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-152">
+          <caret line="25" column="13" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-domain/src/main/java/com/fuhuadata/domain/WarehouseScore.java">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="3" column="28" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="1064">
+          <caret line="242" column="25" lean-forward="false" selection-start-line="242" selection-start-column="25" selection-end-line="242" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/impl/WarehouseScoreManagerImpl.java">
+    <entry file="file://$PROJECT_DIR$/fuhuadata-web/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="209">
+          <caret line="82" column="19" lean-forward="false" selection-start-line="78" selection-start-column="5" selection-end-line="82" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-manager/src/main/java/com/fuhuadata/manager/WarehouseScoreManager.java">
+    <entry file="file://$PROJECT_DIR$/fuhuadata-web/src/main/java/com/fuhuadata/web/util/SystemLogAnnotation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1301">
-          <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/impl/WarehouseScoreServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="13" column="3" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fuhuadata-service/src/main/java/com/fuhuadata/service/WarehouseScoreService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="71" column="33" selection-start-line="71" selection-start-column="33" selection-end-line="71" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="209">
+          <caret line="11" column="11" lean-forward="false" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>

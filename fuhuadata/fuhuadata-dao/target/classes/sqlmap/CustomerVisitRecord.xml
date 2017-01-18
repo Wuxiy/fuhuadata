@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CUSTOMERVISITRECORD">
+   	<typeAlias alias="CustomerVisitRecord" type="com.fuhuadata.domain.CustomerVisitRecord"/>
+   	<typeAlias alias="QueryCustomerVisitRecord" type="com.fuhuadata.domain.query.QueryCustomerVisitRecord"/>
+	
+	<resultMap id="CUSTOMERVISITRECORD-MAP" class="CustomerVisitRecord">
+					<result property="visitrecordId" column="visitrecord_id" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="userId" column="user_id" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="userName" column="user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="startTime" column="start_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+								<result property="endTime" column="end_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+								<result property="activityType" column="activity_type" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="activityRemarks" column="activity_remarks" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="activityAddress" column="activity_address" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="activityExpense" column="activity_expense" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result property="visitRemarks" column="visit_remarks" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="activitySummary" column="activity_summary" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="createUserId" column="create_user_id" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="createUserName" column="create_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="lastmodifyUserId" column="lastmodify_user_id" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="lastmodifyUserName" column="lastmodify_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="createTime" column="create_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+								<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+														</resultMap>
+	
+	<sql id="PAGE-COMMON">	
+		<dynamic prepend=" WHERE ">
+				<isNotNull prepend=" AND " property="visitrecordId">
+			visitrecord_id = #visitrecordId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="customerId">
+			customer_id = #customerId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="userId">
+			user_id = #userId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="userName">
+			user_name = #userName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="startTime">
+			start_time = #startTime#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="endTime">
+			end_time = #endTime#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="activityType">
+			activity_type = #activityType#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="activityRemarks">
+			activity_remarks = #activityRemarks#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="activityAddress">
+			activity_address = #activityAddress#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="activityExpense">
+			activity_expense = #activityExpense#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="visitRemarks">
+			visit_remarks = #visitRemarks#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="activitySummary">
+			activity_summary = #activitySummary#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createUserId">
+			create_user_id = #createUserId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createUserName">
+			create_user_name = #createUserName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="lastmodifyUserId">
+			lastmodify_user_id = #lastmodifyUserId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="lastmodifyUserName">
+			lastmodify_user_name = #lastmodifyUserName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createTime">
+			create_time = #createTime#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="modifyTime">
+			modify_time = #modifyTime#
+		</isNotNull>
+				</dynamic>
+	</sql>
+	
+	<sql id="QUERY-COMMON">	
+		<dynamic prepend=" WHERE ">
+				<isNotNull prepend=" AND " property="visitrecordId">
+			visitrecord_id = #visitrecordId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="customerId">
+			customer_id = #customerId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="userId">
+			user_id = #userId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="userName">
+			user_name = #userName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="startTime">
+			start_time = #startTime#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="endTime">
+			end_time = #endTime#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="activityType">
+			activity_type = #activityType#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="activityRemarks">
+			activity_remarks = #activityRemarks#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="activityAddress">
+			activity_address = #activityAddress#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="activityExpense">
+			activity_expense = #activityExpense#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="visitRemarks">
+			visit_remarks = #visitRemarks#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="activitySummary">
+			activity_summary = #activitySummary#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createUserId">
+			create_user_id = #createUserId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createUserName">
+			create_user_name = #createUserName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="lastmodifyUserId">
+			lastmodify_user_id = #lastmodifyUserId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="lastmodifyUserName">
+			lastmodify_user_name = #lastmodifyUserName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createTime">
+			create_time = #createTime#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="modifyTime">
+			modify_time = #modifyTime#
+		</isNotNull>
+				</dynamic>
+	</sql>
+	
+	<insert id="ADD" parameterClass="CustomerVisitRecord">
+		INSERT INTO 
+		customer_visit_record(visitrecord_id,customer_id,user_id,user_name,start_time,end_time,activity_type,activity_remarks,activity_address,activity_expense,visit_remarks,activity_summary,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time) 
+		VALUES(#visitrecordId#,#customerId#,#userId#,#userName#,#startTime#,#endTime#,#activityType#,#activityRemarks#,#activityAddress#,#activityExpense#,#visitRemarks#,#activitySummary#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
+		<selectKey resultClass="int" keyProperty="id">
+			SELECT @@IDENTITY AS ID
+		</selectKey>
+	</insert>
+	
+	<update id="UPDATE" parameterClass="CustomerVisitRecord">
+		UPDATE customer_visit_record 
+		<dynamic prepend=" SET ">
+						<isNotEmpty prepend=", " property="visitrecordId">visitrecord_id=#visitrecordId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="customerId">customer_id=#customerId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="userId">user_id=#userId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="userName">user_name=#userName#</isNotEmpty>
+						<isNotEmpty prepend=", " property="startTime">start_time=#startTime#</isNotEmpty>
+						<isNotEmpty prepend=", " property="endTime">end_time=#endTime#</isNotEmpty>
+						<isNotEmpty prepend=", " property="activityType">activity_type=#activityType#</isNotEmpty>
+						<isNotEmpty prepend=", " property="activityRemarks">activity_remarks=#activityRemarks#</isNotEmpty>
+						<isNotEmpty prepend=", " property="activityAddress">activity_address=#activityAddress#</isNotEmpty>
+						<isNotEmpty prepend=", " property="activityExpense">activity_expense=#activityExpense#</isNotEmpty>
+						<isNotEmpty prepend=", " property="visitRemarks">visit_remarks=#visitRemarks#</isNotEmpty>
+						<isNotEmpty prepend=", " property="activitySummary">activity_summary=#activitySummary#</isNotEmpty>
+						<isNotEmpty prepend=", " property="createUserId">create_user_id=#createUserId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="createUserName">create_user_name=#createUserName#</isNotEmpty>
+						<isNotEmpty prepend=", " property="lastmodifyUserId">lastmodify_user_id=#lastmodifyUserId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="lastmodifyUserName">lastmodify_user_name=#lastmodifyUserName#</isNotEmpty>
+						<isNotEmpty prepend=", " property="createTime">create_time=#createTime#</isNotEmpty>
+						<isNotEmpty prepend=", " property="modifyTime">modify_time=#modifyTime#</isNotEmpty>
+					</dynamic>
+		WHERE visitrecord_id=#visitrecord_id#
+	</update>
+	
+	<delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
+		<![CDATA[
+			DELETE FROM customer_visit_record WHERE visitrecord_id=#visitrecord_id#
+		]]>
+	</delete>
+	
+	<select id="GET-ALL" resultMap="CUSTOMERVISITRECORD-MAP">
+		<![CDATA[
+			SELECT * FROM customer_visit_record
+		]]>
+	</select>
+	
+	<select id="GET-BY-QUERY" resultMap="CUSTOMERVISITRECORD-MAP" parameterClass="QueryCustomerVisitRecord">
+		<![CDATA[
+			SELECT * FROM customer_visit_record
+		]]>
+		<isParameterPresent>   
+            <include refid="QUERY-COMMON" />   
+        </isParameterPresent>
+	</select>
+	
+	<select id="GET-BY-ID" resultMap="CUSTOMERVISITRECORD-MAP" parameterClass="java.lang.Integer">
+		<![CDATA[
+			SELECT * FROM customer_visit_record	WHERE visitrecord_id=#visitrecord_id#
+		]]>
+	</select>
+	
+	<select id="GET-PAGE" resultMap="CUSTOMERVISITRECORD-MAP" parameterClass="QueryCustomerVisitRecord">
+		<![CDATA[
+			SELECT * FROM customer_visit_record 
+		]]>
+		<isParameterPresent>   
+            <include refid="PAGE-COMMON" />   
+        </isParameterPresent>
+		LIMIT #startRow#,#pageSize#
+	</select>
+	
+	<select id="COUNT" resultClass="java.lang.Integer" parameterClass="QueryCustomerVisitRecord">
+		<![CDATA[
+			SELECT COUNT(visitrecord_id) FROM customer_visit_record
+		]]>
+		<isParameterPresent>   
+            <include refid="PAGE-COMMON" />   
+        </isParameterPresent>
+	</select>
+</sqlMap>

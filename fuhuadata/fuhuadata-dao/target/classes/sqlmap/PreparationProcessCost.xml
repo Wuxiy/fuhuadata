@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="PREPARATIONPROCESSCOST">
+    <typeAlias alias="PreparationProcessCost" type="com.fuhuadata.domain.PreparationProcessCost"/>
+    <typeAlias alias="PreparationProcessCostQuery" type="com.fuhuadata.domain.query.PreparationProcessCostQuery"/>
+
+    <resultMap id="PREPARATIONPROCESSCOST-MAP" class="PreparationProcessCost">
+        <result column="mcost_id" property="mcostId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="type" property="type" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="cost_term" property="costTerm" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="unit_cost" property="unitCost" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="price_end" property="priceEnd" jdbcType="DATETIME" javaType="java.sql.Date"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="PAGE-COMMON">
+        <dynamic prepend=" WHERE " >
+            <isNotNull prepend=" AND " property="type">
+                type = #type#
+            </isNotNull>
+        </dynamic>
+    </sql>
+
+    <insert id="ADD" parameterClass="PreparationProcessCost">
+        INSERT INTO
+        preparation_process_cost (mcost_id, type, cost_term,
+        unit_cost, price_end, remarks)
+        VALUES (#mcostId#, #type#, #costTerm#,
+        #unitCost#, #priceEnd#, #remarks#)
+        <selectKey resultClass="int" keyProperty="mcostId">
+            SELECT @@IDENTITY AS mcost_id
+        </selectKey>
+    </insert>
+    <update id="UPDATE" parameterClass="PreparationProcessCost">
+        UPDATE preparation_process_cost
+        <dynamic prepend=" SET ">
+            <isNotNull prepend=", " property="costTerm">cost_term=#costTerm#</isNotNull>
+            <isNotNull prepend=", " property="unitCost">modify_time=#unitCost#</isNotNull>
+            <isNotNull prepend=", " property="priceEnd">price_end=#priceEnd#</isNotNull>
+            <isNotNull prepend=", " property="remarks">remarks = #remarks#</isNotNull>
+        </dynamic>
+        WHERE mcost_id=#mcostId#
+    </update>
+
+    <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
+        <![CDATA[
+            DELETE FROM preparation_process_cost WHERE mcost_id = #mcostId#
+        ]]>
+    </delete>
+
+    <select id="GET-PAGE" resultMap="PREPARATIONPROCESSCOST-MAP" parameterClass="PreparationProcessCostQuery">
+        <![CDATA[
+            SELECT * FROM preparation_process_cost
+        ]]>
+        <isParameterPresent>
+            <include refid="PAGE-COMMON"/>
+        </isParameterPresent>
+        LIMIT #startRow#,#pageSize#
+    </select>
+
+    <select id="COUNT" resultClass="java.lang.Integer" parameterClass="PreparationProcessCostQuery">
+        <![CDATA[
+            SELECT COUNT(id) FROM preparation_process_cost
+        ]]>
+        <isParameterPresent>
+            <include refid="PAGE-COMMON"/>
+        </isParameterPresent>
+    </select>
+</sqlMap>

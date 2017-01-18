@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="COMPONENTCOST">
+    <typeAlias alias="ComponentCost" type="com.fuhuadata.domain.ComponentCost"/>
+    <typeAlias alias="ComponentCostQuery" type="com.fuhuadata.domain.query.ComponentCostQuery"/>
+    <resultMap id="COMPONENTCOST-MAP" class="ComponentCost">
+        <result column="component_id" property="componentId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="component_name" property="componentName" jdbcType="VARCHAR" javaType="java.lang.String" />
+        <result column="consumption" property="consumption" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="suitable_product" property="suitableProduct" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="price_end" property="priceEnd" jdbcType="DATETIME" javaType="java.sql.Date"/>
+        <result column="unit_cost" property="unitCost" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="PAGE-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotNull prepend=" AND " property="componentName">
+                component_name = #componentName#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="suitableProduct">
+                suitable_product =  #suitableProduct#
+            </isNotNull>
+        </dynamic>
+    </sql>
+
+    <insert id="ADD" parameterClass="ComponentCost">
+        INSERT INTO
+        component_cost (component_id, component_name, consumption,
+        suitable_product, price_end, unit_cost,
+        remarks)
+        VALUES (#componentId#, #componentName#, #consumption#,
+        #suitableProduct#, #priceEnd#, #unitCost#,
+        #remarks#)
+        <selectKey  resultClass="int" keyProperty="componentId">
+            SELECT @@IDENTITY AS component_id
+        </selectKey>
+    </insert>
+
+    <update id="UPDATE" parameterClass="ComponentCost">
+        UPDATE component_cost
+        <dynamic prepend=" SET ">
+            <isNotNull prepend=", " property="consumption">consumption = #consumption#</isNotNull>
+            <isNotNull prepend=", " property="suitableProduct">suitable_product = #suitableProduct#</isNotNull>
+            <isNotNull prepend=", " property="unitCost">unit_cost = #unitCost#</isNotNull>
+            <isNotNull prepend=", " property="priceEnd">price_end = #priceEnd#</isNotNull>
+        </dynamic>
+        WHERE component_id = #componentId#
+    </update>
+
+    <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
+        <![CDATA[
+            DELETE FROM component_cost WHERE component_id=#componentId#
+        ]]>
+    </delete>
+
+    <select id="GET-PAGE" resultMap="COMPONENTCOST-MAP" parameterClass="ComponentCostQuery">
+        <![CDATA[
+            SELECT * FROM component_cost
+        ]]>
+        <isParameterPresent>
+            <include refid="PAGE-COMMON"/>
+        </isParameterPresent>
+        LIMIT #startRow#,#pageSize#
+    </select>
+
+    <select id="COUNT" resultClass="java.lang.Integer" parameterClass="ComponentCostQuery">
+        <![CDATA[
+            SELECT COUNT(id) FROM component_cost
+        ]]>
+        <isParameterPresent>
+            <include refid="PAGE-COMMON"/>
+        </isParameterPresent>
+    </select>
+</sqlMap>
