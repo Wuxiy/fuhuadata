@@ -4,4 +4,9 @@
 	default-autowire="byName">
 	
 	<bean id="userAccountManager" class="com.fuhuadata.manager.impl.UserAccountManagerImpl"/>
+	<bean id="systemLogManager" class="com.fuhuadata.manager.impl.SystemLogManagerImpl"/>
+	<bean id="marketTrainingManager" class="com.fuhuadata.manager.impl.MarketTrainingManagerImpl"/>
+	<bean id="exhibitionInfoManager" class="com.fuhuadata.manager.impl.ExhibitionInfoManagerImpl"/>
+	<bean id="customerEncyclopediaManager" class="com.fuhuadata.manager.impl.CustomerEncyclopediaManagerImpl"/>
+	<bean id="productProblemManager" class="com.fuhuadata.manager.impl.ProductProblemManagerImpl"/>
 </beans>

@@ -2,5 +2,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
 	default-autowire="byName">
-	<bean id="userAccountService" class="com.fuhuadata.service.impl.UserAccountServiceImpl"/>	
+	<bean id="userAccountService" class="com.fuhuadata.service.impl.UserAccountServiceImpl"/>
+	<bean id="systemLogService" class="com.fuhuadata.service.impl.SystemLogServiceImpl"/>
+	<bean id="marketTrainingService" class="com.fuhuadata.service.impl.MarketTrainingServiceImpl"/>
+	<bean id="exhibitionInfoService" class="com.fuhuadata.service.impl.ExhibitionInfoServiceImpl"/>
+	<bean id="productProblemService" class="com.fuhuadata.service.impl.ProductProblemServiceImpl"/>
+	<bean id="customerEncyclopediaService" class="com.fuhuadata.service.impl.CustomerEncyclopediaServiceImpl"/>
 </beans>
