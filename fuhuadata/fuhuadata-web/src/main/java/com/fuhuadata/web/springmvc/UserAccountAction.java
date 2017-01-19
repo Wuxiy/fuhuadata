@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
@@ -33,6 +34,7 @@ public class UserAccountAction{
 	 */
 	@SuppressWarnings("unused")
 	@RequestMapping(value="/userAccountList",method=RequestMethod.GET)
+	@SystemLogAnnotation(module = "用户管理",methods = "用户列表")
     public ModelAndView  userAccountList(){
 		Result<List<UserAccount>>  result = new Result<List<UserAccount>>();
 		try{

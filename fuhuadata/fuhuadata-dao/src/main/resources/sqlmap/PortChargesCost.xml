@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="PORTCHARGESCOST">
+    <typeAlias alias="PortChargesCost" type="com.fuhuadata.domain.PortChargesCost"/>
+    <typeAlias alias="PortChargesCostQuery" type="com.fuhuadata.domain.query.PortChargesCostQuery"/>
+
+    <resultMap id="PORTCHARGESCOST-MAP" class="PortChargesCost">
+        <result property="id" column="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="item" property="item" jdbcType="VARCHAR" javaType="java.lang.String" />
+        <result column="general_chemicals" property="generalChemicals" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="dangerous_product" property="dangerousProduct" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="PAGE-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotNull prepend=" AND " property="item">
+                item = #item#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="generalChemicals">
+                general_chemicals = #generalChemicals#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="dangerousProduct">
+                dangerous_product = #dangerousProduct#
+            </isNotNull>
+        </dynamic>
+    </sql>
+
+    <sql id="QUERY-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotNull prepend=" AND " property="item">
+                item = #item#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="generalChemicals">
+                general_chemicals = #generalChemicals#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="dangerousProduct">
+                dangerous_product = #dangerousProduct#
+            </isNotNull>
+        </dynamic>
+    </sql>
+
+    <insert id ="ADD" parameterClass="PortChargesCost">
+        INSERT INTO
+        port_charges_cost (item, general_chemicals, dangerous_product
+        )
+        VALUES (#item#, #generalChemicals#, #dangerousProduct#
+        )
+        <selectKey resultClass="int" keyProperty="id">
+            SELECT @@IDENTITY AS id
+        </selectKey>
+    </insert>
+
+    <update id="UPDATE" parameterClass="PortChargesCost">
+        UPDATE port_charges_cost
+        <dynamic prepend=" SET ">
+            <isNotNull prepend=", " property="generalChemicals">
+                general_chemicals = #generalChemicals#
+            </isNotNull>
+            <isNotNull prepend=", " property="dangerousProduct">
+                dangerous_product = #dangerousProduct#
+            </isNotNull>
+        </dynamic>
+        WHERE id = #id#
+    </update>
+
+
+    <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
+        <![CDATA[
+			DELETE FROM port_charges_cost WHERE id=#id#
+		]]>
+    </delete>
+
+    <select id="GET-PAGE" resultMap="PORTCHARGESCOST-MAP" parameterClass="PortChargesCostQuery">
+        <![CDATA[
+            SELECT * FROM port_charges_cost
+        ]]>
+        <isParameterPresent>
+            <include refid="PAGE-COMMON"/>
+        </isParameterPresent>
+        LIMIT #startRow#,#pageSize#
+    </select>
+
+    <select id="COUNT" resultClass="java.lang.Integer" parameterClass="PortChargesCostQuery">
+        <![CDATA[
+			SELECT COUNT(*) FROM port_charges_cost
+		]]>
+        <isParameterPresent>
+            <include refid="PAGE-COMMON"/>
+        </isParameterPresent>
+    </select>
+</sqlMap>

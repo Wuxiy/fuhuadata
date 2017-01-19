@@ -8,6 +8,8 @@ import com.fuhuadata.domain.query.PageBase;
  */
 public class PortChargesCostQuery extends PageBase {
 
+    private Integer id;
+
     private String item;//项目
 
     private String generalChemicals;//一般化工品
@@ -45,5 +47,13 @@ public class PortChargesCostQuery extends PageBase {
 
     public void setSearchKey(String searchKey) {
         this.searchKey = searchKey;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

@@ -1,6 +1,7 @@
 package com.fuhuadata.dao;
 
 import com.fuhuadata.domain.PreparationProcessCost;
+import com.fuhuadata.domain.query.PreparationProcessCostQuery;
 
 import java.util.List;
 
@@ -27,23 +28,23 @@ public interface PreparationProcessCostDao {
     /**
      * 按照主键id删除记录，成功返回1
      * @param id
-     * @return
-     */
-    public int deleteComponentCostById(int id);
 
+     * @return
+             */
+    public int deleteComponentCostById(int id);
     /**
      * 分页查询列表
      * Query(设置当前页数和当前页面行数）
-     * @param preparationProcessCost
+     * @param preparationProcessCostQuery
      * @return
      */
-    public List<PreparationProcessCost> getComponentCostsByPage(PreparationProcessCost preparationProcessCost);
+    public List<PreparationProcessCost> getPreparationProcessCostsByPage(PreparationProcessCostQuery preparationProcessCostQuery);
 
     /**
      * 查询总数
-     * @param preparationProcessCost
+     * @param preparationProcessCostQuery
      * @return
      */
-    public int count(PreparationProcessCost preparationProcessCost);
+    public int count(PreparationProcessCostQuery preparationProcessCostQuery);
 
 }

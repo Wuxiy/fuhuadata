@@ -1,6 +1,7 @@
 package com.fuhuadata.dao;
 
 import com.fuhuadata.domain.ComponentCost;
+import com.fuhuadata.domain.query.ComponentCostQuery;
 
 import java.util.List;
 
@@ -34,16 +35,16 @@ public interface ComponentCostDao {
     /**
      * 分页查询列表
      * Query(设置当前页数和当前页面行数）
-     * @param componentCost
+     * @param componentCostQuery
      * @return
      */
-    public List<ComponentCost> getComponentCostsByPage(ComponentCost componentCost);
+    public List<ComponentCost> getComponentCostsByPage(ComponentCostQuery componentCostQuery);
 
     /**
      * 查询总数
-     * @param componentCost
+     * @param componentCostQuery
      * @return
      */
-    public int count(ComponentCost componentCost);
+    public int count(ComponentCostQuery componentCostQuery);
 
 }
