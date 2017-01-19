@@ -7,7 +7,7 @@ Config 2.0/" "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
 		lazyLoadingEnabled="false" errorTracingEnabled="true" maxRequests="32"
 		maxSessions="10" useStatementNamespaces="true" />
 		
- <sqlMap resource="sqlmap/UserAccount.xml" />
+    <sqlMap resource="sqlmap/UserAccount.xml" />
 	<sqlMap resource="sqlmap/SystemLog.xml"/>
 	<sqlMap resource="sqlmap/MarketTraining.xml"/>
 	<sqlMap resource="sqlmap/ExhibitionInfo.xml"/>
@@ -15,11 +15,10 @@ Config 2.0/" "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
 	<sqlMap resource="sqlmap/ProductProblem.xml"/>
 	<sqlMap resource="sqlmap/PreparationProcessCost.xml"/>
 	<sqlMap resource="sqlmap/ComponentCost.xml"/>
-<<<<<<< HEAD
 	<sqlMap resource="sqlmap/FreightCost.xml"/>
 	<sqlMap resource="sqlmap/PortChargesCost.xml"/>
-=======
 	<sqlMap resource="sqlmap/SaleCustomer.xml"/>
 	<sqlMap resource="sqlmap/CustomerParent.xml"/>
->>>>>>> 614b590c99db89c4d938ece3c5a10cc99c832f99
+	<sqlMap resource="sqlmap/SaleCustomer.xml"/>
+	<sqlMap resource="sqlmap/CustomerParent.xml"/>
 </sqlMapConfig>

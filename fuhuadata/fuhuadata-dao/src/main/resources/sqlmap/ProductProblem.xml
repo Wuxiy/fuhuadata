@@ -21,7 +21,7 @@
         create_user_name, create_time, remarks
     </sql>
 
-    <sql id="PAGE-COMMOM">
+    <sql id="PAGE-COMMON">
         <dynamic prepend=" WHERE ">
             <isNotNull prepend=" AND " property="productType">
                 product_type = #productType#

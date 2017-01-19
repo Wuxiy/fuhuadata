@@ -4,13 +4,13 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-<<<<<<< HEAD
 import com.fuhuadata.web.util.SystemLogAnnotation;
-=======
 import com.fuhuadata.domain.SaleCustomer;
 import com.fuhuadata.domain.query.QuerySaleCustomer;
 import com.fuhuadata.service.SaleCustomerService;
->>>>>>> 614b590c99db89c4d938ece3c5a10cc99c832f99
+import com.fuhuadata.domain.SaleCustomer;
+import com.fuhuadata.domain.query.QuerySaleCustomer;
+import com.fuhuadata.service.SaleCustomerService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
