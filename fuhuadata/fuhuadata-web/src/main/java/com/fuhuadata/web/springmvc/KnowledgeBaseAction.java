@@ -26,10 +26,75 @@ import com.fuhuadata.service.UserAccountService;
  */
 @RequestMapping("/knowledgeBase/*")
 public class KnowledgeBaseAction {
+
+    /**
+     * 产品常见问题列表
+     * @return
+     */
+    @RequestMapping(value="/productQuestionList",method=RequestMethod.GET)
+    public ModelAndView productQuestionList(){return new ModelAndView("knowledgeBase/productQuestionList");}
+
+    /**
+     * 营销培训列表
+     * @return
+     */
+    @RequestMapping(value="/marketTrainList",method=RequestMethod.GET)
+    public ModelAndView marketTrainList(){return new ModelAndView("knowledgeBase/marketTrainList");}
+
+    /**
+     * 客户产品包装要求列表
+     * @return
+     */
+    @RequestMapping(value="/customerProductPackingList",method=RequestMethod.GET)
+    public ModelAndView customerProductPackingList(){return new ModelAndView("knowledgeBase/customerProductPackingList");}
+
+    /**
+     * 标准产品档案列表
+     * @return
+     */
+    @RequestMapping(value="/productArchivesList",method=RequestMethod.GET)
+    public ModelAndView productArchivesList(){return new ModelAndView("knowledgeBase/productArchivesList");}
+
+    /**
+     * 包材成本参考列表
+     * @return
+     */
+    @RequestMapping(value="/packingCostList",method=RequestMethod.GET)
+    public ModelAndView packingCostList(){return new ModelAndView("knowledgeBase/packingCostList");}
+
+    /**
+     * 加工成本列表
+     * @return
+     */
+    @RequestMapping(value="/processCostList",method=RequestMethod.GET)
+    public ModelAndView processCostList(){return new ModelAndView("knowledgeBase/processCostList");}
+
+    /**
+     * 百科列表
+     * @return
+     */
+    @RequestMapping(value="/encyclopediaList",method=RequestMethod.GET)
+    public ModelAndView encyclopediaList(){return new ModelAndView("knowledgeBase/encyclopediaList");}
+
+    /**
+     * 添加百科
+     * @return
+     */
+    @RequestMapping(value="/encyclopediaAdd",method=RequestMethod.GET)
+    public ModelAndView encyclopediaAdd(){return new ModelAndView("knowledgeBase/encyclopediaAdd");}
+
     /**
      * 展会动态列表
      * @return
      */
     @RequestMapping(value="/exhibitionDynamicList",method=RequestMethod.GET)
     public ModelAndView exhibitionDynamicList(){return new ModelAndView("knowledgeBase/exhibitionDynamicList");}
+
+    /**
+     * 展会添加
+     * @return
+     */
+    @RequestMapping(value="/exhibitionDynamicAdd",method=RequestMethod.GET)
+    public ModelAndView exhibitionDynamicAdd(){return new ModelAndView("knowledgeBase/exhibitionDynamicAdd");}
+
 }
