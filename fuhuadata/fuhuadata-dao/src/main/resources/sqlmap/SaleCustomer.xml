@@ -62,9 +62,6 @@
 				<isNotNull prepend=" AND " property="customerState">
 			customer_state = #customerState#
 		</isNotNull>
-				<isNotNull prepend=" AND " property="lostRemarks">
-			lost_remarks = #lostRemarks#
-		</isNotNull>
 				<isNotNull prepend=" AND " property="opportunityType">
 			opportunity_type = #opportunityType#
 		</isNotNull>
@@ -297,9 +294,9 @@
 		<![CDATA[
 			SELECT * FROM sale_customer 
 		]]>
-		<!--<isParameterPresent>
+		<isParameterPresent>
             <include refid="PAGE-COMMON" />   
-        </isParameterPresent>-->
+        </isParameterPresent>
 		LIMIT #startRow#,#pageSize#
 	</select>
 	
@@ -307,8 +304,8 @@
 		<![CDATA[
 			SELECT COUNT(customer_id) FROM sale_customer
 		]]>
-		<!--<isParameterPresent>
+		<isParameterPresent>
             <include refid="PAGE-COMMON" />   
-        </isParameterPresent>-->
+        </isParameterPresent>
 	</select>
 </sqlMap>

@@ -277,7 +277,7 @@
 										<tbody>
 											#foreach($saleCustomer in $SaleCustomers)
                                             <tr>
-                                                <td>${saleCustomer.customerId}</td>
+                                                <td>$!{saleCustomer.customerId}</td>
                                                 <td><a href="http://www.baidu.com" target="_blank">${saleCustomer.customerParent.FullName}</a></td>
                                                 <td>${saleCustomer.customerParent.shortName}</td>
                                                 <td lang="zh">${saleCustomer.customerParent.Country}</td>
