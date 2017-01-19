@@ -39,4 +39,6 @@
 	<bean id="exhibitionInfoDao" class="com.fuhuadata.dao.impl.ExhibitionInfoDaoImpl"/>
 	<bean id="productProblemDao" class="com.fuhuadata.dao.impl.ProductProblemDaoImpl"/>
 	<bean id="customerEncyclopediaDao" class="com.fuhuadata.dao.impl.CustomerEncyclopediaDaoImpl"/>
+	<bean id="saleCustomerDao" class="com.fuhuadata.dao.impl.SaleCustomerDaoImpl"/>
+	<bean id="customerParentDao" class="com.fuhuadata.dao.impl.CustomerParentDaoImpl"/>
 </beans>

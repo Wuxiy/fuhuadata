@@ -9,4 +9,6 @@
 	<bean id="exhibitionInfoManager" class="com.fuhuadata.manager.impl.ExhibitionInfoManagerImpl"/>
 	<bean id="customerEncyclopediaManager" class="com.fuhuadata.manager.impl.CustomerEncyclopediaManagerImpl"/>
 	<bean id="productProblemManager" class="com.fuhuadata.manager.impl.ProductProblemManagerImpl"/>
+	<bean id="saleCustomerManager" class="com.fuhuadata.manager.impl.SaleCustomerManagerImpl"/>
+	<bean id="customerParentManager" class="com.fuhuadata.manager.impl.CustomerParentManagerImpl"/>
 </beans>

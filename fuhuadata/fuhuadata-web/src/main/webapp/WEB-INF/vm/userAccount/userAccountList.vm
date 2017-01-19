@@ -13,8 +13,27 @@
     </td>
 </tr>
 #end
- <a href="/userAccount/addUserAccount">新增用户</a>
+     #foreach($saleCustomer in $SaleCustomers)
+     <tr>
+         <td>$!{saleCustomer.customer_id}</td>
+         <td><a href="http://www.baidu.com" target="_blank">${saleCustomer.parent.full_name}</a></td>
+         <td>${saleCustomer.parent.short_name}</td>
+         <td lang="zh">${saleCustomer.parent.country}</td>
+         <td lang="zh">${saleCustomer.customer_level}==0?"未知":${saleCustomer.customer_level}==1?"风险客户":${saleCustomer.customer_level}==2?"一般客户":${saleCustomer.customer_level}==3?"重要客户":${saleCustomer.customer_level}==4?"大客户":"战略客户"/td>
+         <td>${saleCustomer.zhongxinbao_level}==0?"未知":${saleCustomer.zhongxinbao_level}==1?"1A":${saleCustomer.zhongxinbao_level}==2?"2A":${saleCustomer.zhongxinbao_level}==3?"3A":"4A"</td>
+         <td>${saleCustomer.cooperate_time}</td>
+         <td lang="zh">${saleCustomer.cooperate_time}</td>
+         <td lang="zh">${saleCustomer.active_period}</td>
+         <td><a href="" data-toggle="modal" data-target="#details">${saleCustomer.active_period}</a></td>
+         <td>${saleCustomer.active_period}</td>
+         <td>${saleCustomer.active_period}</td>
+         <td>${saleCustomer.active_period}</td>
+         <td>${saleCustomer.active_period}</td>
+         <td lang="zh">${saleCustomer.customer_state}==0?"潜在客户":${saleCustomer.customer_state}==1?"合作客户":"已流失"</td>
+     </tr>
+     #end
+ <a href="/userAccount/addUserAccount">新增用户0</a>
  <a href="/userAccount/addUserAccount">新增用户2</a>
- <div>${message}</div>
+ <div>$!{message}</div>
  </body>
 </html>

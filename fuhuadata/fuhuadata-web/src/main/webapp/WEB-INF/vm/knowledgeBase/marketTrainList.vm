@@ -3,10 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>展会动态</title>
+    <title>营销培训</title>
     <link rel="stylesheet" type="text/css" href="/lib/css/bootstrap.css" />
     <script src="/lib/js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
     <script src="/lib/js/dropdown.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/lib/js/modal.js" type="text/javascript" charset="utf-8"></script>
     <script src="/lib/js/collapse.js" type="text/javascript" charset="utf-8"></script>
     <script src="/lib/js/transition.js" type="text/javascript" charset="utf-8"></script>
 </head>
@@ -126,7 +127,7 @@
             <span class="breadcrumb-unit pull-left">当前位置</span>
             <ul class="breadcrumb shadow-out">
                 <li><a href="">知识库</a></li>
-                <li class="active">展会动态</li>
+                <li class="active">百科</li>
             </ul>
         </div>
         <!--面包屑导结束-->
@@ -134,29 +135,38 @@
             <!--表格开始-->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a class="btn btn-xs btn-primary pull-right panel-heading-btn" href="/knowledgeBase/exhibitionDynamicAdd" data-toggle="modal">
+                    <button class="btn btn-xs btn-primary pull-right panel-heading-btn" href="" data-toggle="modal" data-target="#addTrain" data-keyboard="true">
                         <span class="glyphicon glyphicon-plus"></span>
                         新增
-                    </a>
+                    </button>
                     <h3 class="panel-title">
-                        展会动态
+                        营销培训
                     </h3>
                 </div>
                 <div class="panel-body clearfix">
                     <!--搜索框开始-->
                     <div class="form-horizontal">
-                        <div class="form-group ">
+                        <div class="form-group">
+                            <div class="col-xs-1 pull-right">
+                                <button type="button" class="btn btn-block btn-primary btn-xs">
+                                    搜索
+                                </button>
+                            </div>
+                            <div class="col-xs-2 pull-right">
+                                <input class="form-control" type="search" value="" placeholder="请输入标题"/>
+                            </div>
+                            <label class="col-xs-1 control-label pull-right">标题</label>
                             <div class="col-xs-2 pull-right">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="请输入关键词查找">
-                                    <div class="input-group-btn">
-                                        <button type="button" class="btn btn-primary btn-xs">
-                                            <span class="glyphicon glyphicon-search"></span>
-                                            搜索
-                                        </button>
-                                    </div>
+                                    <input class="form-control" type="search" value="" placeholder="请输入品类"/>
+                                    <span class="input-group-btn">
+												<button data-toggle="modal" data-target="#search" class="btn btn-xs btn-default" type="button">
+													<span class="glyphicon glyphicon-search"></span>
+												</button>
+											</span>
                                 </div>
                             </div>
+                            <label class="col-xs-1 control-label pull-right">品类</label>
                         </div>
                     </div>
                     <!--搜索框结束-->
@@ -164,96 +174,134 @@
                     <table class="table table-condensed table-bordered table-striped text-center">
                         <thead>
                         <tr>
-                            <th class="text-center ">编号</th>
-                            <th class="col-xs-2 text-center">展会名称</th>
-                            <th class="col-xs-1 text-center">主办方</th>
-                            <th class="col-xs-2 text-center">承办单位</th>
-                            <th class="text-center">国家</th>
-                            <th class="text-center">城市</th>
-                            <th class="col-xs-1 text-center">开始时间</th>
-                            <th class="col-xs-1 text-center">结束日期</th>
-                            <th class="col-xs-1 text-center">展会地址</th>
-                            <th class="col-xs-2 text-center">展会介绍</th>
-                            <th class="col-xs-1 text-center">展会介绍连接</th>
-                            <th class="text-center">创建人</th>
-                            <th class="col-xs-1 text-center">创建时间</th>
+                            <th class="col-xs-1 text-center">编号</th>
+                            <th class="col-xs-4 text-center">标题</th>
+                            <th class="col-xs-2 text-center">产品种类</th>
+                            <th class="col-xs-2 text-center">上传人</th>
+                            <th class="col-xs-2 text-center">上传时间</th>
+                            <th class="col-xs-1 text-center">可否下载</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td>1</td>
-                            <td>2016全国植保会</td>
-                            <td>全国农业技术推广服务中心</td>
-                            <td>江苏省植物保护站厦门市凤凰创意会展服务有限公司</td>
-                            <td>中国</td>
-                            <td>南京</td>
-                            <td>2016年11月25日</td>
-                            <td>2016年11月27日</td>
-                            <td>南京国际博览中心</td>
-                            <td>吸引来自全国30参展范围涉及农药原药、农药、肥料、植保机械及包装设备等，涵盖整个农化产业上、中、下游产品，是国内参展产品最齐全的大会。</td>
-                            <td><a href="http://www.1988.tv/zhanhui/2016qgzbh/about.html">点击进入</a></td>
+                            <td>草甘膦知识培训</td>
+                            <td>草甘膦</td>
                             <td>刘凯洋</td>
-                            <td>2016-10-12</td>
+                            <td>2016-10-10 18:00</td>
+                            <td><a href="">下载</a></td>
                         </tr>
                         <tr>
                             <td>2</td>
-                            <td>2016全国植保会</td>
-                            <td>全国农业技术推广服务中心</td>
-                            <td>江苏省植物保护站厦门市凤凰创意会展服务有限公司</td>
-                            <td>中国</td>
-                            <td>南京</td>
-                            <td>2016年11月25日</td>
-                            <td>2016年11月27日</td>
-                            <td>南京国际博览中心</td>
-                            <td>吸引来自全国30参展范围涉及农药原药、农药、肥料、植保机械及包装设备等，涵盖整个农化产业上、中、下游产品，是国内参展产品最齐全的大会。</td>
-                            <td><a href="http://www.1988.tv/zhanhui/2016qgzbh/about.html">点击进入</a></td>
+                            <td>草甘膦知识培训</td>
+                            <td>草甘膦</td>
                             <td>刘凯洋</td>
-                            <td>2016-10-12</td>
+                            <td>2016-10-10 18:00</td>
+                            <td><a href="">下载</a></td>
                         </tr>
                         <tr>
                             <td>3</td>
-                            <td>2016全国植保会</td>
-                            <td>全国农业技术推广服务中心</td>
-                            <td>江苏省植物保护站厦门市凤凰创意会展服务有限公司</td>
-                            <td>中国</td>
-                            <td>南京</td>
-                            <td>2016年11月25日</td>
-                            <td>2016年11月27日</td>
-                            <td>南京国际博览中心</td>
-                            <td>吸引来自全国30参展范围涉及农药原药、农药、肥料、植保机械及包装设备等，涵盖整个农化产业上、中、下游产品，是国内参展产品最齐全的大会。</td>
-                            <td><a href="http://www.1988.tv/zhanhui/2016qgzbh/about.html">点击进入</a></td>
+                            <td>草甘膦知识培训</td>
+                            <td>草甘膦</td>
                             <td>刘凯洋</td>
-                            <td>2016-10-12</td>
+                            <td>2016-10-10 18:00</td>
+                            <td><a href="">下载</a></td>
                         </tr>
                         <tr>
                             <td>4</td>
-                            <td>2016全国植保会</td>
-                            <td>全国农业技术推广服务中心</td>
-                            <td>江苏省植物保护站厦门市凤凰创意会展服务有限公司</td>
-                            <td>中国</td>
-                            <td>南京</td>
-                            <td>2016年11月25日</td>
-                            <td>2016年11月27日</td>
-                            <td>南京国际博览中心</td>
-                            <td></td>
-                            <td><a href="http://www.1988.tv/zhanhui/2016qgzbh/about.html">点击进入</a></td>
+                            <td>草甘膦知识培训</td>
+                            <td>草甘膦</td>
                             <td>刘凯洋</td>
-                            <td>2016-10-12</td>
+                            <td>2016-10-10 18:00</td>
+                            <td><a href="">下载</a></td>
                         </tr>
                         <tr>
                             <td>5</td>
-                            <td>2016全国植保会</td>
-                            <td>全国农业技术推广服务中心</td>
-                            <td>江苏省植物保护站厦门市凤凰创意会展服务有限公司</td>
-                            <td>中国</td>
-                            <td>南京</td>
-                            <td>2016年11月25日</td>
-                            <td>2016年11月27日</td>
-                            <td>南京国际博览中心</td>
-                            <td>吸引来自全国30参展范围涉及农药原药、农药、肥料、植保机械及包装设备等，涵盖整个农化产业上、中、下游产品，是国内参展产品最齐全的大会。</td>
-                            <td><a href="http://www.1988.tv/zhanhui/2016qgzbh/about.html">点击进入</a></td>
+                            <td>草甘膦知识培训</td>
+                            <td>草甘膦</td>
                             <td>刘凯洋</td>
-                            <td>2016-10-12</td>
+                            <td>2016-10-10 18:00</td>
+                            <td><a href="">下载</a></td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>草甘膦知识培训</td>
+                            <td>草甘膦</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10 18:00</td>
+                            <td><a href="">下载</a></td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>草甘膦知识培训</td>
+                            <td>草甘膦</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10 18:00</td>
+                            <td><a href="">下载</a></td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>草甘膦知识培训</td>
+                            <td>草甘膦</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10 18:00</td>
+                            <td><a href="">下载</a></td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>草甘膦知识培训</td>
+                            <td>草甘膦</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10 18:00</td>
+                            <td><a href="">下载</a></td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>草甘膦知识培训</td>
+                            <td>草甘膦</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10 18:00</td>
+                            <td><a href="">下载</a></td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td>草甘膦知识培训</td>
+                            <td>草甘膦</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10 18:00</td>
+                            <td><a href="">下载</a></td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td>草甘膦知识培训</td>
+                            <td>草甘膦</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10 18:00</td>
+                            <td><a href="">下载</a></td>
+                        </tr>
+                        <tr>
+                            <td>13</td>
+                            <td>草甘膦知识培训</td>
+                            <td>草甘膦</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10 18:00</td>
+                            <td><a href="">下载</a></td>
+                        </tr>
+                        <tr>
+                            <td>14</td>
+                            <td>草甘膦知识培训</td>
+                            <td>草甘膦</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10 18:00</td>
+                            <td><a href="">下载</a></td>
+                        </tr>
+                        <tr>
+                            <td>15</td>
+                            <td>草甘膦知识培训</td>
+                            <td>草甘膦</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10 18:00</td>
+                            <td><a href="">下载</a></td>
                         </tr>
                         </tbody>
                     </table>
@@ -287,5 +335,72 @@
         &copy; baswaAdmin 2014
     </small>
 </div>
+<!--添加模态框开始 -->
+<div class="modal fade" id="addTrain" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body ">
+                <form class="form-horizontal" action="">
+                    <div class="form-group ">
+                        <label class="col-xs-2 control-label">标题</label>
+                        <div class="col-xs-6">
+                            <input class="form-control" type="text"/>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-xs-2 control-label">产品名称</label>
+                        <div class="col-xs-4">
+                            <select class="form-control">
+                                <option value="" selected>草甘膦</option>
+                                <option value="">草胺膦</option>
+                                <option value="">化工品</option>
+                                <option value="">贸易品</option>
+                                <option value="">其他</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-4">
+                            <select class="form-control">
+                                <option value="" selected>全部</option>
+                                <option value="">草甘膦</option>
+                                <option value="">草甘膦原药</option>
+                                <option value="">草甘膦水剂</option>
+                                <option value="">草甘膦颗粒剂</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-xs-2 control-label" for="inputfile">附件</label>
+                        <div class="col-xs-6">
+                            <input class="form-control" id="inputfile" type="file"/>
+                        </div>
+                        <div class="col-xs-2">
+                            <button type="submit" class="btn btn-xs btn-primary btn-block">上传</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-3 col-xs-offset-3">
+                        <button type="button" class="btn btn-primary btn-block">
+                            完成
+                        </button>
+                    </div>
+                    <div class="col-xs-3">
+                        <button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--添加模态框结束 -->
+
 </body>
 </html>

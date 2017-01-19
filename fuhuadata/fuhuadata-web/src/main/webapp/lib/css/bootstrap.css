@@ -2071,7 +2071,7 @@ pre code {
 }
 .dashboard-wrapper {
   min-height: 600px;
-  padding: 0 20px;
+  padding: 20px 15px;
 }
 .not-null {
   color: red;
@@ -4528,6 +4528,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   margin: 5px 15px;
 }
 .breadcrumb-more > .breadcrumb {
+  margin-bottom: 0;
   border-radius: 4px 4px 0 0;
   background-color: #fbfbfb;
 }
@@ -5619,6 +5620,119 @@ button.close {
   background: transparent;
   border: 0;
   -webkit-appearance: none;
+}
+.tree ul,
+.tree dl,
+.tree ol {
+  list-style: none;
+}
+.tree li {
+  text-align: left;
+  white-space: nowrap;
+}
+.tree a {
+  display: inline-block;
+  padding-right: 5px;
+  color: #333333;
+}
+.tree .active a,
+.tree a:focus {
+  outline: 2px solid #333333;
+  background: #eeeeee;
+}
+.tree .branch,
+.tree .branch-node,
+.tree .leaf {
+  display: inline-block;
+  width: 21px;
+  height: 21px;
+  vertical-align: middle;
+  *vertical-align: middle;
+}
+.tree .tree-root {
+  padding: 5px;
+  margin-bottom: 0;
+  line-height: 21px;
+}
+.tree .tree-root .tree-branch {
+  padding: 0 0 0 18px;
+  background-image: url(../img/icon/line_conn.png);
+  background-position: 0 0;
+  background-repeat: repeat-y;
+}
+.tree .tree-root li > .branch-node {
+  background-image: url(../img/icon/metro.png);
+  background-position: -105px -21px;
+  background-repeat: no-repeat;
+}
+.tree .tree-root li > .branch-node.collapsed {
+  background-image: url(../img/icon/metro.png);
+  background-position: -126px -21px;
+  background-repeat: no-repeat;
+}
+.tree .tree-root > li:first-child > .branch-node {
+  background-image: url(../img/icon/metro.png);
+  background-position: -105px 0;
+  background-repeat: no-repeat;
+}
+.tree .tree-root > li:first-child > .branch-node.collapsed {
+  background-image: url(../img/icon/metro.png);
+  background-position: -126px 0;
+  background-repeat: no-repeat;
+}
+.tree .tree-root li:last-child > .branch-node {
+  background-image: url(../img/icon/metro.png);
+  background-position: -105px -42px;
+  background-repeat: no-repeat;
+}
+.tree .tree-root li:last-child > .branch-node.collapsed {
+  background-image: url(../img/icon/metro.png);
+  background-position: -126px -42px;
+  background-repeat: no-repeat;
+}
+.tree .tree-root > li:only-of-type > .branch-node {
+  background-image: url(../img/icon/metro.png);
+  background-position: -105px -63px;
+  background-repeat: no-repeat;
+}
+.tree .tree-root > li:only-of-type > .branch-node.collapsed {
+  background-image: url(../img/icon/metro.png);
+  background-position: -126px -63px;
+  background-repeat: no-repeat;
+}
+.tree .tree-root li > .branch {
+  background-image: url(../img/icon/metro.png);
+  background-position: -84px -21px;
+  background-repeat: no-repeat;
+}
+.tree .tree-root > li:first-child > .branch {
+  background-image: url(../img/icon/metro.png);
+  background-position: -84px 0;
+  background-repeat: no-repeat;
+}
+.tree .tree-root li:last-child > .branch {
+  background-image: url(../img/icon/metro.png);
+  background-position: -84px -42px;
+  background-repeat: no-repeat;
+}
+.tree .tree-root li:last-child > .tree-branch {
+  background-image: none;
+}
+.tree .tree-root .leaf {
+  margin-right: 2px;
+  background-image: url(../img/icon/metro.png);
+  background-position: -147px -42px;
+  background-repeat: no-repeat;
+}
+.tree .tree-root .branch-node + a > .leaf {
+  background-image: url(../img/icon/metro.png);
+  background-position: -147px -21px;
+  background-repeat: no-repeat;
+}
+.tree .tree-root .branch-node.collapsed + a > .leaf {
+  background-image: url(../img/icon/metro.png);
+  background-position: -147px 0;
+  background-repeat: no-repeat;
 }
 .modal-open {
   overflow: hidden;
