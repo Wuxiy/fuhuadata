@@ -19,6 +19,4 @@ Config 2.0/" "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
 	<sqlMap resource="sqlmap/PortChargesCost.xml"/>
 	<sqlMap resource="sqlmap/SaleCustomer.xml"/>
 	<sqlMap resource="sqlmap/CustomerParent.xml"/>
-	<sqlMap resource="sqlmap/SaleCustomer.xml"/>
-	<sqlMap resource="sqlmap/CustomerParent.xml"/>
 </sqlMapConfig>
