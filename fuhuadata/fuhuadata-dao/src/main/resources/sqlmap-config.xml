@@ -7,7 +7,7 @@ Config 2.0/" "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
 		lazyLoadingEnabled="false" errorTracingEnabled="true" maxRequests="32"
 		maxSessions="10" useStatementNamespaces="true" />
 		
- <sqlMap resource="sqlmap/UserAccount.xml" />
+    <sqlMap resource="sqlmap/UserAccount.xml" />
 	<sqlMap resource="sqlmap/SystemLog.xml"/>
 	<sqlMap resource="sqlmap/MarketTraining.xml"/>
 	<sqlMap resource="sqlmap/ExhibitionInfo.xml"/>
