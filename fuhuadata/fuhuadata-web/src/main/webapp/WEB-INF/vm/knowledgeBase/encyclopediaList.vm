@@ -1,9 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 
 <head>
     <meta charset="UTF-8">
-    <title>展会动态</title>
+    <title>百科</title>
     <link rel="stylesheet" type="text/css" href="/lib/css/bootstrap.css" />
     <script src="/lib/js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
     <script src="/lib/js/dropdown.js" type="text/javascript" charset="utf-8"></script>
@@ -126,7 +127,7 @@
             <span class="breadcrumb-unit pull-left">当前位置</span>
             <ul class="breadcrumb shadow-out">
                 <li><a href="">知识库</a></li>
-                <li class="active">展会动态</li>
+                <li class="active">百科</li>
             </ul>
         </div>
         <!--面包屑导结束-->
@@ -134,18 +135,26 @@
             <!--表格开始-->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a class="btn btn-xs btn-primary pull-right panel-heading-btn" href="/knowledgeBase/exhibitionDynamicAdd" data-toggle="modal">
+                    <a class="btn btn-xs btn-primary pull-right panel-heading-btn" href="/knowledgeBase/encyclopediaAdd" data-toggle="modal">
                         <span class="glyphicon glyphicon-plus"></span>
                         新增
                     </a>
                     <h3 class="panel-title">
-                        展会动态
+                        百科
                     </h3>
                 </div>
                 <div class="panel-body clearfix">
                     <!--搜索框开始-->
                     <div class="form-horizontal">
                         <div class="form-group ">
+                            <label class="col-xs-1 control-label">企业类型</label>
+                            <div class="col-xs-1">
+                                <select class="form-control">
+                                    <option value="">全部</option>
+                                    <option value="">客户</option>
+                                    <option value="">竟对</option>
+                                </select>
+                            </div>
                             <div class="col-xs-2 pull-right">
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="请输入关键词查找">
@@ -164,96 +173,182 @@
                     <table class="table table-condensed table-bordered table-striped text-center">
                         <thead>
                         <tr>
-                            <th class="text-center ">编号</th>
-                            <th class="col-xs-2 text-center">展会名称</th>
-                            <th class="col-xs-1 text-center">主办方</th>
-                            <th class="col-xs-2 text-center">承办单位</th>
-                            <th class="text-center">国家</th>
-                            <th class="text-center">城市</th>
-                            <th class="col-xs-1 text-center">开始时间</th>
-                            <th class="col-xs-1 text-center">结束日期</th>
-                            <th class="col-xs-1 text-center">展会地址</th>
-                            <th class="col-xs-2 text-center">展会介绍</th>
-                            <th class="col-xs-1 text-center">展会介绍连接</th>
-                            <th class="text-center">创建人</th>
+                            <th class="col-xs-1 text-center">编号</th>
+                            <th class="col-xs-3 text-center">企业全称</th>
+                            <th class="col-xs-1 text-center">企业简称</th>
+                            <th class="col-xs-1 text-center">企业类型</th>
+                            <th class="col-xs-1 text-center">完整度</th>
+                            <th class="col-xs-1 text-center">创建人</th>
                             <th class="col-xs-1 text-center">创建时间</th>
+                            <th class="col-xs-1 text-center">最后编辑人</th>
+                            <th class="col-xs-2 text-center">最后编辑时间</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td>1</td>
-                            <td>2016全国植保会</td>
-                            <td>全国农业技术推广服务中心</td>
-                            <td>江苏省植物保护站厦门市凤凰创意会展服务有限公司</td>
-                            <td>中国</td>
-                            <td>南京</td>
-                            <td>2016年11月25日</td>
-                            <td>2016年11月27日</td>
-                            <td>南京国际博览中心</td>
-                            <td>吸引来自全国30参展范围涉及农药原药、农药、肥料、植保机械及包装设备等，涵盖整个农化产业上、中、下游产品，是国内参展产品最齐全的大会。</td>
-                            <td><a href="http://www.1988.tv/zhanhui/2016qgzbh/about.html">点击进入</a></td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td>竟对</td>
+                            <td>78%</td>
                             <td>刘凯洋</td>
-                            <td>2016-10-12</td>
+                            <td>2016-10-10</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10</td>
                         </tr>
                         <tr>
                             <td>2</td>
-                            <td>2016全国植保会</td>
-                            <td>全国农业技术推广服务中心</td>
-                            <td>江苏省植物保护站厦门市凤凰创意会展服务有限公司</td>
-                            <td>中国</td>
-                            <td>南京</td>
-                            <td>2016年11月25日</td>
-                            <td>2016年11月27日</td>
-                            <td>南京国际博览中心</td>
-                            <td>吸引来自全国30参展范围涉及农药原药、农药、肥料、植保机械及包装设备等，涵盖整个农化产业上、中、下游产品，是国内参展产品最齐全的大会。</td>
-                            <td><a href="http://www.1988.tv/zhanhui/2016qgzbh/about.html">点击进入</a></td>
+                            <td><a href="encyclopedia_add.html">NUFARM</a></td>
+                            <td><a href="encyclopedia_add.html">NUFARM</a></td>
+                            <td>竟对</td>
+                            <td>90%</td>
                             <td>刘凯洋</td>
-                            <td>2016-10-12</td>
+                            <td>2016-10-10</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10</td>
                         </tr>
                         <tr>
                             <td>3</td>
-                            <td>2016全国植保会</td>
-                            <td>全国农业技术推广服务中心</td>
-                            <td>江苏省植物保护站厦门市凤凰创意会展服务有限公司</td>
-                            <td>中国</td>
-                            <td>南京</td>
-                            <td>2016年11月25日</td>
-                            <td>2016年11月27日</td>
-                            <td>南京国际博览中心</td>
-                            <td>吸引来自全国30参展范围涉及农药原药、农药、肥料、植保机械及包装设备等，涵盖整个农化产业上、中、下游产品，是国内参展产品最齐全的大会。</td>
-                            <td><a href="http://www.1988.tv/zhanhui/2016qgzbh/about.html">点击进入</a></td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td>竟对</td>
+                            <td>78%</td>
                             <td>刘凯洋</td>
-                            <td>2016-10-12</td>
+                            <td>2016-10-10</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10</td>
                         </tr>
                         <tr>
                             <td>4</td>
-                            <td>2016全国植保会</td>
-                            <td>全国农业技术推广服务中心</td>
-                            <td>江苏省植物保护站厦门市凤凰创意会展服务有限公司</td>
-                            <td>中国</td>
-                            <td>南京</td>
-                            <td>2016年11月25日</td>
-                            <td>2016年11月27日</td>
-                            <td>南京国际博览中心</td>
-                            <td></td>
-                            <td><a href="http://www.1988.tv/zhanhui/2016qgzbh/about.html">点击进入</a></td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td>竟对</td>
+                            <td>78%</td>
                             <td>刘凯洋</td>
-                            <td>2016-10-12</td>
+                            <td>2016-10-10</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10</td>
                         </tr>
                         <tr>
                             <td>5</td>
-                            <td>2016全国植保会</td>
-                            <td>全国农业技术推广服务中心</td>
-                            <td>江苏省植物保护站厦门市凤凰创意会展服务有限公司</td>
-                            <td>中国</td>
-                            <td>南京</td>
-                            <td>2016年11月25日</td>
-                            <td>2016年11月27日</td>
-                            <td>南京国际博览中心</td>
-                            <td>吸引来自全国30参展范围涉及农药原药、农药、肥料、植保机械及包装设备等，涵盖整个农化产业上、中、下游产品，是国内参展产品最齐全的大会。</td>
-                            <td><a href="http://www.1988.tv/zhanhui/2016qgzbh/about.html">点击进入</a></td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td>竟对</td>
+                            <td>78%</td>
                             <td>刘凯洋</td>
-                            <td>2016-10-12</td>
+                            <td>2016-10-10</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td>竟对</td>
+                            <td>78%</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td>竟对</td>
+                            <td>78%</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td>竟对</td>
+                            <td>78%</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td>竟对</td>
+                            <td>78%</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td>竟对</td>
+                            <td>78%</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10</td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td>竟对</td>
+                            <td>78%</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10</td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td>竟对</td>
+                            <td>78%</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10</td>
+                        </tr>
+                        <tr>
+                            <td>13</td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td>竟对</td>
+                            <td>78%</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10</td>
+                        </tr>
+                        <tr>
+                            <td>14</td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td>竟对</td>
+                            <td>78%</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10</td>
+                        </tr>
+                        <tr>
+                            <td>15</td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td>竟对</td>
+                            <td>78%</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10</td>
                         </tr>
                         </tbody>
                     </table>
