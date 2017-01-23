@@ -195,67 +195,24 @@
                             <td>刘凯洋</td>
                             <td>2016-10-12</td>
                         </tr>
+                            #foreach($exhibitionInfo in $exhibitionInfoList)
                         <tr>
-                            <td>2</td>
-                            <td>2016全国植保会</td>
-                            <td>全国农业技术推广服务中心</td>
-                            <td>江苏省植物保护站厦门市凤凰创意会展服务有限公司</td>
-                            <td>中国</td>
-                            <td>南京</td>
-                            <td>2016年11月25日</td>
-                            <td>2016年11月27日</td>
-                            <td>南京国际博览中心</td>
-                            <td>吸引来自全国30参展范围涉及农药原药、农药、肥料、植保机械及包装设备等，涵盖整个农化产业上、中、下游产品，是国内参展产品最齐全的大会。</td>
-                            <td><a href="http://www.1988.tv/zhanhui/2016qgzbh/about.html">点击进入</a></td>
-                            <td>刘凯洋</td>
-                            <td>2016-10-12</td>
+                            <td>${exhibitionInfo.exhibitionId}</td>
+                            <td>${exhibitionInfo.exhibitionName}</td>
+                            <td>${exhibitionInfo.sponsor}</td>
+                            <td>${exhibitionInfo.organizer}</td>
+                            <td>${exhibitionInfo.country}</td>
+                            <td>${exhibitionInfo.city}</td>
+                            <td lang="zh">${exhibitionInfo.startDate}</td>
+                            <td lang="zh">${exhibitionInfo.finishDate}</td>
+                            <td>${exhibitionInfo.exhibitionAddr}</td>
+                            <td>${exhibitionInfo.exhibitionInfo}</td>
+                            <td><a>${exhibitionInfo.exhibitionLink}</a></td>
+                            <td>${exhibitionInfo.creator}</td>
+                            <td lang="zh">${exhibitionInfo.createTime}</td>
                         </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>2016全国植保会</td>
-                            <td>全国农业技术推广服务中心</td>
-                            <td>江苏省植物保护站厦门市凤凰创意会展服务有限公司</td>
-                            <td>中国</td>
-                            <td>南京</td>
-                            <td>2016年11月25日</td>
-                            <td>2016年11月27日</td>
-                            <td>南京国际博览中心</td>
-                            <td>吸引来自全国30参展范围涉及农药原药、农药、肥料、植保机械及包装设备等，涵盖整个农化产业上、中、下游产品，是国内参展产品最齐全的大会。</td>
-                            <td><a href="http://www.1988.tv/zhanhui/2016qgzbh/about.html">点击进入</a></td>
-                            <td>刘凯洋</td>
-                            <td>2016-10-12</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>2016全国植保会</td>
-                            <td>全国农业技术推广服务中心</td>
-                            <td>江苏省植物保护站厦门市凤凰创意会展服务有限公司</td>
-                            <td>中国</td>
-                            <td>南京</td>
-                            <td>2016年11月25日</td>
-                            <td>2016年11月27日</td>
-                            <td>南京国际博览中心</td>
-                            <td></td>
-                            <td><a href="http://www.1988.tv/zhanhui/2016qgzbh/about.html">点击进入</a></td>
-                            <td>刘凯洋</td>
-                            <td>2016-10-12</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>2016全国植保会</td>
-                            <td>全国农业技术推广服务中心</td>
-                            <td>江苏省植物保护站厦门市凤凰创意会展服务有限公司</td>
-                            <td>中国</td>
-                            <td>南京</td>
-                            <td>2016年11月25日</td>
-                            <td>2016年11月27日</td>
-                            <td>南京国际博览中心</td>
-                            <td>吸引来自全国30参展范围涉及农药原药、农药、肥料、植保机械及包装设备等，涵盖整个农化产业上、中、下游产品，是国内参展产品最齐全的大会。</td>
-                            <td><a href="http://www.1988.tv/zhanhui/2016qgzbh/about.html">点击进入</a></td>
-                            <td>刘凯洋</td>
-                            <td>2016-10-12</td>
-                        </tr>
-                        </tbody>
+                            #end
+                    </tbody>
                     </table>
                     <!--表格结束-->
                     <!--分页导航开始-->

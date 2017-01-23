@@ -212,7 +212,7 @@
         </dynamic>
     </update>
 
-    <delete id="DELETE-BY-ID" parameterClass="java.lang.Internal">
+    <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
         <![CDATA[
             DELETE FROM packing_archives WHERE packing_id=#packingId#
         ]]>
