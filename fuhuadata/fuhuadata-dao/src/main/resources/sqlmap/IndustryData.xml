@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="INDUSTRYDATA">
+    <typeAlias alias="IndustryData" type="com.fuhuadata.domain.IndustryData"/>
+    <typeAlias alias="IndustryDataQuery" type="com.fuhuadata.domain.query.IndustryDataQuery"/>
+    
+    <resultMap id="INDUSTRYDATA-MAP" class="IndustryData">
+        <result column="id" property="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="year" property="year" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="business_name" property="businessName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="export_continent" property="exportContinent" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="export_gross" property="exportGross" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="sale_total" property="saleTotal" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result property="exportShare" column="export_share" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="export_country" property="exportCountry" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="average" property="average" jdbcType="REAL" javaType="java.lang.Float"/>
+        <result column="month" property="month" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="PAGE-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotNull prepend=" AND " property="id">
+                id = #id#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="year" >
+                year = #year#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="exportContinent">
+                export_continent = #exportContinent#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="exportCountry">
+                export_country = #exportCountry#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="businessName">
+                business_name = #businessName#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="exportGross">
+                export_gross = #exportGross#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="saleTotal">
+                sale_total = #saleTotal#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="average">
+                average = #average#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="month">
+                month= #month#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="exportShare">
+                export_share = #exportShare#
+            </isNotNull>
+        </dynamic>
+    </sql>
+
+    <sql id="QUERY-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotNull prepend=" AND " property="id">
+                id = #id#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="year" >
+                year = #year#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="exportContinent">
+                export_continent = #exportContinent#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="exportCountry">
+                export_country = #exportCountry#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="businessName">
+                business_name = #businessName#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="exportGross">
+                export_gross = #exportGross#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="saleTotal">
+                sale_total = #saleTotal#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="average">
+                average = #average#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="month">
+                month= #month#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="exportShare">
+                export_share = #exportShare#
+            </isNotNull>
+        </dynamic>
+    </sql>
+
+    <insert id="ADD" parameterClass="IndustryData">
+        INSERT INTO industry_data (id, year, business_name,
+        export_continent, export_gross, sale_total,
+        export_country, average, month,
+        export_share)
+        VALUES (#id#, #year#, #businessName#,
+        #exportContinent#, #exportGross#, #saleTotal#,
+        #exportCountry#, #average#, #month#,
+        #exportShare#)
+        <selectKey resultClass="int" keyProperty="id">
+            SELECT @@IDENTITY AS ID
+        </selectKey>
+    </insert>
+
+    <update id="UPDATE" parameterClass="IndustryData">
+        UPDATE industry_data
+        <dynamic prepend=" SET ">
+            <isNotNull prepend=", " property="year" >
+                year = #year#
+            </isNotNull>
+            <isNotNull prepend=", " property="exportContinent">
+                export_continent = #exportContinent#
+            </isNotNull>
+            <isNotNull prepend=", " property="exportCountry">
+                export_country = #exportCountry#
+            </isNotNull>
+            <isNotNull prepend=", " property="businessName">
+                business_name = #businessName#
+            </isNotNull>
+            <isNotNull prepend=", " property="exportGross">
+                export_gross = #exportGross#
+            </isNotNull>
+            <isNotNull prepend=", " property="saleTotal">
+                sale_total = #saleTotal#
+            </isNotNull>
+            <isNotNull prepend=", " property="average">
+                average = #average#
+            </isNotNull>
+            <isNotNull prepend=", " property="month">
+                month= #month#
+            </isNotNull>
+            <isNotNull prepend=", " property="exportShare">
+                export_share = #exportShare#
+            </isNotNull>
+        </dynamic>
+        WHERE id = #id#
+    </update>
+
+    <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
+        <![CDATA[
+			DELETE FROM industry_data WHERE id=#id#
+		]]>
+    </delete>
+
+    <select id="GET-PAGE" resultMap="INDUSTRYDATA-MAP" parameterClass="IndustryDataQuery">
+        <![CDATA[
+            SELECT * FROM industry_data
+        ]]>
+        <isParameterPresent>
+            <include refid="PAGE-COMMON"/>
+        </isParameterPresent>
+        LIMIT #startRow#,#pageSize#
+    </select>
+
+    <select id="COUNT" resultClass="java.lang.Integer" parameterClass="IndustryDataQuery">
+        <![CDATA[
+            SELECT COUNT(id) FROM industry_data
+        ]]>
+        <isParameterPresent>
+            <include refid="PAGE-COMMON"/>
+        </isParameterPresent>
+    </select>
+
+</sqlMap>

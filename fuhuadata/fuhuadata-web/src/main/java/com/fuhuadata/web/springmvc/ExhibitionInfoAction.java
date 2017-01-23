@@ -28,7 +28,7 @@ public class ExhibitionInfoAction {
     private final static Log log = LogFactory.getLog(ExhibitionInfoAction.class);
     @Resource
     private ExhibitionInfoService exhibitionInfoService = new ExhibitionInfoServiceImpl();
-    private Integer pageSize=10;
+    private Integer pageSize=5;
     private String page="1";
 
     @SuppressWarnings("unused")
@@ -48,7 +48,7 @@ public class ExhibitionInfoAction {
         }catch (Exception e){
             log.error("获取展会列表失败",e);
         }
-        ModelAndView model = new ModelAndView("exhibitionInfo/exhibitionInfoList","exhibitionInfoList",result.getModel());
+        ModelAndView model = new ModelAndView("knowledgeBase/exhibitionDynamicList","exhibitionInfoList",result.getModel());
         model.addObject("message","展会动态列表");
         return model;
     }
@@ -69,7 +69,7 @@ public class ExhibitionInfoAction {
         }catch (Exception e){
             log.error("查询获取展会信息失败",e);
         }
-        ModelAndView model = new ModelAndView("exhibitionInfo/exhibitionInfoList","exhibitionInfoList",result.getModel());
+        ModelAndView model = new ModelAndView("KexhibitionInfo/exhibitionInfoList","exhibitionInfoList",result.getModel());
         model.addObject("message","展会动态列表");
         return model;
     }
@@ -78,6 +78,7 @@ public class ExhibitionInfoAction {
     @SystemLogAnnotation(module = "知识库-展会动态",methods = "新增展会动态记录")
     @ResponseBody
     public ResultPojo doAddExhibitionInfo(@RequestBody ExhibitionInfo exhibitionInfo){
+
         try{
             Result<ExhibitionInfo> result = exhibitionInfoService.addExhibitionInfo(exhibitionInfo);
             return result.getResultPojo();

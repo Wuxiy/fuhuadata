@@ -1,10 +1,10 @@
 package com.fuhuadata.domain.query;
 
 /**
- * 行业数据
+ * 行业数据Query
  * Created by intanswer on 2017/1/19.
  */
-public class IndustryDataQuery {
+public class IndustryDataQuery extends PageBase{
     private Integer id;
 
     private String year;//年份

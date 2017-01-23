@@ -10,7 +10,7 @@
         <result column="type" property="type" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result column="cost_term" property="costTerm" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="unit_cost" property="unitCost" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="price_end" property="priceEnd" jdbcType="DATETIME" javaType="java.sql.Date"/>
+        <result column="price_end" property="priceEnd" jdbcType="TIMESTAMP" javaType="java.sql.Date"/>
         <result column="remarks" property="remarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>
 
