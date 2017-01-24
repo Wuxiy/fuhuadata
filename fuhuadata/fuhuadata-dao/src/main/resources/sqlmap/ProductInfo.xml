@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PRODUCTINFO">
+   	<typeAlias alias="ProductInfo" type="com.fuhuadata.domain.ProductInfo"/>
+   	<typeAlias alias="QueryProductInfo" type="com.fuhuadata.domain.query.QueryProductInfo"/>
+	
+	<resultMap id="PRODUCTINFO-MAP" class="ProductInfo">
+					<result property="productId" column="product_id" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="parentId" column="parent_id" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="parentName" column="parent_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="concentration" column="concentration" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result property="name" column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="brand" column="brand" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="saltType" column="salt_type" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="otherSaltName" column="other_salt_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="executeStandard" column="execute_standard" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="executeNumer" column="execute_numer" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="executeRemarks" column="execute_remarks" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="productFeature" column="product_feature" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="productRequire" column="product_require" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="processingComponents" column="processing_components" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="physicalProperities" column="physical_properities" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="productColor" column="product_color" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="packageInfo" column="package_info" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="productType" column="product_type" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="createUserId" column="create_user_id" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="createUserName" column="create_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="lastmodifyUserId" column="lastmodify_user_id" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="lastmodifyUserName" column="lastmodify_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="createTime" column="create_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+								<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+														</resultMap>
+	
+	<sql id="PAGE-COMMON">	
+		<dynamic prepend=" WHERE ">
+				<isNotNull prepend=" AND " property="productId">
+			product_id = #productId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="parentId">
+			parent_id = #parentId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="parentName">
+			parent_name = #parentName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="concentration">
+			concentration = #concentration#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="name">
+			name = #name#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="brand">
+			brand = #brand#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="saltType">
+			salt_type = #saltType#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="otherSaltName">
+			other_salt_name = #otherSaltName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="executeStandard">
+			execute_standard = #executeStandard#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="executeNumer">
+			execute_numer = #executeNumer#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="executeRemarks">
+			execute_remarks = #executeRemarks#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="productFeature">
+			product_feature = #productFeature#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="productRequire">
+			product_require = #productRequire#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="processingComponents">
+			processing_components = #processingComponents#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="physicalProperities">
+			physical_properities = #physicalProperities#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="productColor">
+			product_color = #productColor#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="packageInfo">
+			package_info = #packageInfo#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="productType">
+			product_type = #productType#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createUserId">
+			create_user_id = #createUserId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createUserName">
+			create_user_name = #createUserName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="lastmodifyUserId">
+			lastmodify_user_id = #lastmodifyUserId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="lastmodifyUserName">
+			lastmodify_user_name = #lastmodifyUserName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createTime">
+			create_time = #createTime#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="modifyTime">
+			modify_time = #modifyTime#
+		</isNotNull>
+				</dynamic>
+	</sql>
+	
+	<sql id="QUERY-COMMON">	
+		<dynamic prepend=" WHERE ">
+				<isNotNull prepend=" AND " property="productId">
+			product_id = #productId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="parentId">
+			parent_id = #parentId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="parentName">
+			parent_name = #parentName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="concentration">
+			concentration = #concentration#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="name">
+			name = #name#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="brand">
+			brand = #brand#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="saltType">
+			salt_type = #saltType#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="otherSaltName">
+			other_salt_name = #otherSaltName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="executeStandard">
+			execute_standard = #executeStandard#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="executeNumer">
+			execute_numer = #executeNumer#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="executeRemarks">
+			execute_remarks = #executeRemarks#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="productFeature">
+			product_feature = #productFeature#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="productRequire">
+			product_require = #productRequire#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="processingComponents">
+			processing_components = #processingComponents#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="physicalProperities">
+			physical_properities = #physicalProperities#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="productColor">
+			product_color = #productColor#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="packageInfo">
+			package_info = #packageInfo#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="productType">
+			product_type = #productType#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createUserId">
+			create_user_id = #createUserId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createUserName">
+			create_user_name = #createUserName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="lastmodifyUserId">
+			lastmodify_user_id = #lastmodifyUserId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="lastmodifyUserName">
+			lastmodify_user_name = #lastmodifyUserName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createTime">
+			create_time = #createTime#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="modifyTime">
+			modify_time = #modifyTime#
+		</isNotNull>
+				</dynamic>
+	</sql>
+	
+	<insert id="ADD" parameterClass="ProductInfo">
+		INSERT INTO 
+		product_info(product_id,parent_id,parent_name,concentration,name,brand,salt_type,other_salt_name,execute_standard,execute_numer,execute_remarks,product_feature,product_require,processing_components,physical_properities,product_color,package_info,product_type,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time) 
+		VALUES(#productId#,#parentId#,#parentName#,#concentration#,#name#,#brand#,#saltType#,#otherSaltName#,#executeStandard#,#executeNumer#,#executeRemarks#,#productFeature#,#productRequire#,#processingComponents#,#physicalProperities#,#productColor#,#packageInfo#,#productType#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
+		<selectKey resultClass="int" keyProperty="id">
+			SELECT @@IDENTITY AS ID
+		</selectKey>
+	</insert>
+	
+	<update id="UPDATE" parameterClass="ProductInfo">
+		UPDATE product_info 
+		<dynamic prepend=" SET ">
+						<isNotEmpty prepend=", " property="productId">product_id=#productId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="parentId">parent_id=#parentId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="parentName">parent_name=#parentName#</isNotEmpty>
+						<isNotEmpty prepend=", " property="concentration">concentration=#concentration#</isNotEmpty>
+						<isNotEmpty prepend=", " property="name">name=#name#</isNotEmpty>
+						<isNotEmpty prepend=", " property="brand">brand=#brand#</isNotEmpty>
+						<isNotEmpty prepend=", " property="saltType">salt_type=#saltType#</isNotEmpty>
+						<isNotEmpty prepend=", " property="otherSaltName">other_salt_name=#otherSaltName#</isNotEmpty>
+						<isNotEmpty prepend=", " property="executeStandard">execute_standard=#executeStandard#</isNotEmpty>
+						<isNotEmpty prepend=", " property="executeNumer">execute_numer=#executeNumer#</isNotEmpty>
+						<isNotEmpty prepend=", " property="executeRemarks">execute_remarks=#executeRemarks#</isNotEmpty>
+						<isNotEmpty prepend=", " property="productFeature">product_feature=#productFeature#</isNotEmpty>
+						<isNotEmpty prepend=", " property="productRequire">product_require=#productRequire#</isNotEmpty>
+						<isNotEmpty prepend=", " property="processingComponents">processing_components=#processingComponents#</isNotEmpty>
+						<isNotEmpty prepend=", " property="physicalProperities">physical_properities=#physicalProperities#</isNotEmpty>
+						<isNotEmpty prepend=", " property="productColor">product_color=#productColor#</isNotEmpty>
+						<isNotEmpty prepend=", " property="packageInfo">package_info=#packageInfo#</isNotEmpty>
+						<isNotEmpty prepend=", " property="productType">product_type=#productType#</isNotEmpty>
+						<isNotEmpty prepend=", " property="createUserId">create_user_id=#createUserId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="createUserName">create_user_name=#createUserName#</isNotEmpty>
+						<isNotEmpty prepend=", " property="lastmodifyUserId">lastmodify_user_id=#lastmodifyUserId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="lastmodifyUserName">lastmodify_user_name=#lastmodifyUserName#</isNotEmpty>
+						<isNotEmpty prepend=", " property="createTime">create_time=#createTime#</isNotEmpty>
+						<isNotEmpty prepend=", " property="modifyTime">modify_time=#modifyTime#</isNotEmpty>
+					</dynamic>
+		WHERE product_id=#product_id#
+	</update>
+	
+	<delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
+		<![CDATA[
+			DELETE FROM product_info WHERE product_id=#product_id#
+		]]>
+	</delete>
+	
+	<select id="GET-ALL" resultMap="PRODUCTINFO-MAP">
+		<![CDATA[
+			SELECT * FROM product_info
+		]]>
+	</select>
+	
+	<select id="GET-BY-QUERY" resultMap="PRODUCTINFO-MAP" parameterClass="QueryProductInfo">
+		<![CDATA[
+			SELECT * FROM product_info
+		]]>
+		<isParameterPresent>   
+            <include refid="QUERY-COMMON" />   
+        </isParameterPresent>
+	</select>
+	
+	<select id="GET-BY-ID" resultMap="PRODUCTINFO-MAP" parameterClass="java.lang.Integer">
+		<![CDATA[
+			SELECT * FROM product_info	WHERE product_id=#product_id#
+		]]>
+	</select>
+	
+	<select id="GET-PAGE" resultMap="PRODUCTINFO-MAP" parameterClass="QueryProductInfo">
+		<![CDATA[
+			SELECT * FROM product_info 
+		]]>
+		<isParameterPresent>   
+            <include refid="PAGE-COMMON" />   
+        </isParameterPresent>
+		LIMIT #startRow#,#pageSize#
+	</select>
+	
+	<select id="COUNT" resultClass="java.lang.Integer" parameterClass="QueryProductInfo">
+		<![CDATA[
+			SELECT COUNT(product_id) FROM product_info
+		]]>
+		<isParameterPresent>   
+            <include refid="PAGE-COMMON" />   
+        </isParameterPresent>
+	</select>
+</sqlMap>
