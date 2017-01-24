@@ -20,7 +20,7 @@ import java.util.List;
  * Created by intanswer on 2017/1/12.
  */
 @Controller
-@RequestMapping("/MarketTraining/*")
+@RequestMapping("/marketTraining/*")
 public class MarketTrainingAction {
 
     private final static Log log= LogFactory.getLog(MarketTrainingAction.class);
@@ -92,9 +92,5 @@ public class MarketTrainingAction {
         }
         return null;
     }
-
-
-
-
 
 }

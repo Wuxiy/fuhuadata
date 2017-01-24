@@ -55,8 +55,8 @@ public class ExhibitionInfoAction {
     }
 
     @RequestMapping(value = "/queryExhibitionInfoList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-展会动态",methods = "展会列表")
     @ResponseBody
+    @SystemLogAnnotation(module = "知识库-展会动态",methods = "展会列表")
     public ModelAndView queryExhibitionInfoList(@RequestBody ExhibitionInfoQuery exhibitionInfoQuery){
         Result<List<ExhibitionInfo>> result = new Result<List<ExhibitionInfo>>();
         try{

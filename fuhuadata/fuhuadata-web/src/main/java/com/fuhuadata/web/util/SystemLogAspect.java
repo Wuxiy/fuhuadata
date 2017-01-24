@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.fuhuadata.domain.SystemLog;
 import com.fuhuadata.service.SystemLogService;
 import com.fuhuadata.web.util.SystemLogAnnotation;
+import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
@@ -29,7 +30,7 @@ public class SystemLogAspect {
     private SystemLogService systemLogService;
 
     //配置接入点
-    @Pointcut("execution(* com.fuhuadata.web.springmvc.ExhibitionInfoAction.exhibitionInfoList())")
+    @Pointcut("execution(* com.fuhuadata.web.springmvc.*.*(..))")
     private void controllerAspect(){
         System.out.print("进入切面环绕通知");
     }//定义一个切入点
@@ -37,18 +38,46 @@ public class SystemLogAspect {
     @Around("controllerAspect()")
     public Object around(ProceedingJoinPoint pjp) throws Throwable {
         //系统日志实体对象
-        System.out.print("进入切面处理");
+        System.out.println("进入切面处理");
          SystemLog log = new SystemLog();
         //获取登录用户账户
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        String userName = (String) request.getSession().getAttribute("USER_ID");
+        //String userName = (String) request.getSession().getAttribute("USER_ID");
+        log.setUserId(0);
+        String userName = "test";
         log.setUserName(userName);
         //获取系统时间
         String time = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss").format(new Date());
-        log.setDate(java.sql.Date.valueOf(time));
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = sdf.parse(time);
+        log.setDate(date);//执行时间
 
         //获取客户端ip
-        String ip=request.getRemoteAddr();
+        String ip = request.getHeader("x-forwarded-for");
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("X-Real-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("X-Forwarded-For");
+        }
+        if(StringUtils.isNotBlank(ip)&&ip.indexOf(",")>0){
+            String[] ips = ip.split(",");
+            ip=ips[0];
+        }
+        if(StringUtils.isNotBlank(ip)&&ip.indexOf("，")>0){
+            String[] ips = ip.split("，");
+            ip=ips[0];
+        }
+        log.setIp(ip);
         //方法通知前获取时间
         long start = System.currentTimeMillis();
         // 拦截的实体类，就是当前正在执行的controller
@@ -57,6 +86,8 @@ public class SystemLogAspect {
         String methodName = pjp.getSignature().getName();
         // 拦截的方法参数
         Object[] args = pjp.getArgs();
+        //存放的方法参数
+        log.setParementers(args.toString());
         // 拦截的放参数类型
         Signature sig = pjp.getSignature();
         MethodSignature msig = null;
@@ -86,13 +117,13 @@ public class SystemLogAspect {
                     object = pjp.proceed();
                     long end = System.currentTimeMillis();
                     //将计算好的时间保存在实体中
-                    log.setResponseDate(java.sql.Date.valueOf(""+(end-start)));
+                    log.setResponseDate((int) (end-start));
                     log.setCommit("执行成功！");
                     //保存进数据库
                     systemLogService.addSystemLog(log);
                 } catch (Throwable e) {
                     long end = System.currentTimeMillis();
-                    log.setResponseDate(java.sql.Date.valueOf(""+(end-start)));
+                    log.setResponseDate((int) (end-start));
                     log.setCommit("执行失败");
                     systemLogService.addSystemLog(log);
                 }

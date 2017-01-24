@@ -16,7 +16,7 @@ public class SystemLogQuery extends PageBase {
     private String module;//执行的模块
     private String method;//执行的方法
     private Date date;//执行时间
-    private Date responseDate;//响应时间
+    private Integer responseDate;//响应时间
     private String commit;//执行描述
     private String parementers;//执行参数
     private String remarks;//备注
@@ -53,7 +53,7 @@ public class SystemLogQuery extends PageBase {
         return date;
     }
 
-    public Date getResponseDate() {
+    public Integer getResponseDate() {
         return responseDate;
     }
 
@@ -93,7 +93,7 @@ public class SystemLogQuery extends PageBase {
         this.date = date;
     }
 
-    public void setResponseDate(Date responseDate) {
+    public void setResponseDate(Integer responseDate) {
         this.responseDate = responseDate;
     }
 
