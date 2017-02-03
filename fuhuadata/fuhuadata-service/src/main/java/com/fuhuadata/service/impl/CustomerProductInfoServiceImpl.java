@@ -12,10 +12,8 @@ import org.springframework.stereotype.Component;
  * @author wangbo
  * @date 2017-02-03 15:51:13
  */
-@Component
 public class CustomerProductInfoServiceImpl implements CustomerProductInfoService {
-	
-	@Resource
+
     private CustomerProductInfoManager customerProductInfoManager;
     public Result<CustomerProductInfo> addCustomerProductInfo(CustomerProductInfo customerProductInfo) {
 		Result<CustomerProductInfo> result = new Result<CustomerProductInfo>();

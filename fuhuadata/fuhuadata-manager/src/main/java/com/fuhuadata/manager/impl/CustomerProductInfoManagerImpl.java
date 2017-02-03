@@ -13,10 +13,8 @@ import java.util.ArrayList;
  * @author wangbo
  * @date 2017-02-03 15:51:13
  */
-@Component
 public class CustomerProductInfoManagerImpl implements CustomerProductInfoManager {
 
-	@Resource
     private CustomerProductInfoDao customerProductInfoDao;
     
 
