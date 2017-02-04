@@ -1,0 +1,8 @@
+.DS_Store
+*/.DS_Store
+fuhuadata/.classpath
+fuhuadata/.*
+fuhuadata/.idea/
+fuhuadata/fuhuadata.iml
+*.iml
+
