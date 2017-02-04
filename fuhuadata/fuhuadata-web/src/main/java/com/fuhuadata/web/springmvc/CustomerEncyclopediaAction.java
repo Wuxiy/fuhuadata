@@ -46,7 +46,7 @@ public class CustomerEncyclopediaAction {
             log.error("获取企业百科列表失败",e);
         }
 
-        ModelAndView model= new ModelAndView("customerEncyclopedia/customerEncyclopediaList","customerEncyclopediaList",result.getModel());
+        ModelAndView model= new ModelAndView("knowledgeBase/customerEncyclopediaList","customerEncyclopediaList",result.getModel());
         model.addObject("message","企业百科列表");
         return model;
     }

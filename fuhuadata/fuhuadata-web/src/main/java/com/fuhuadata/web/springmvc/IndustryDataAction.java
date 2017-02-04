@@ -44,7 +44,7 @@ public class IndustryDataAction {
         }catch(Exception e){
             log.error("获取行业数据列表错误");
         }
-        ModelAndView model= new ModelAndView("industryData/industryDataList","industryDataList",result.getModel());
+        ModelAndView model= new ModelAndView("knowledgeBase/industryDataList","industryDataList",result.getModel());
         model.addObject("message","行业数据列表");
         return model;
     }

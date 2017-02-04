@@ -25,7 +25,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/exhibitionInfo/*")
-public class ExhibitionInfoAction {
+public class    ExhibitionInfoAction {
     private final static Log log = LogFactory.getLog(ExhibitionInfoAction.class);
     @Resource
     private ExhibitionInfoService exhibitionInfoService;

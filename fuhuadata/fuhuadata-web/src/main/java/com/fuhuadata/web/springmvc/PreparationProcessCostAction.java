@@ -46,7 +46,7 @@ public class PreparationProcessCostAction {
             log.error("获取加工成本列表错误",e);
         }
 
-        ModelAndView model= new ModelAndView("preparationProcessCost/preparationProcessCostList","preparationProcessCostList",result.getModel());
+        ModelAndView model= new ModelAndView("knowledgeBase/preparationProcessCostList","preparationProcessCostList",result.getModel());
         model.addObject("message","加工成本列表");
         return model;
     }

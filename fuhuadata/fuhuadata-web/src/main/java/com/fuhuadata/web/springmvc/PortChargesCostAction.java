@@ -45,7 +45,7 @@ public class PortChargesCostAction {
             log.error("获取港杂费成本列表错误",e);
 
         }
-        ModelAndView model= new ModelAndView("portChargesCost/portChargesCostList","portChargesCostList",result.getModel());
+        ModelAndView model= new ModelAndView("knowledgeBase/portChargesCostList","portChargesCostList",result.getModel());
         model.addObject("message","港杂费列表");
         return model;
     }
