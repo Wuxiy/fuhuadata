@@ -195,7 +195,7 @@
                             <td>刘凯洋</td>
                             <td>2016-10-12</td>
                         </tr>
-                            #foreach($exhibitionInfo in $exhibitionInfoList)
+                            #foreach($exhibitionInfo in $exhibitionInfos)
                         <tr>
                             <td>${exhibitionInfo.exhibitionId}</td>
                             <td>${exhibitionInfo.exhibitionName}</td>
