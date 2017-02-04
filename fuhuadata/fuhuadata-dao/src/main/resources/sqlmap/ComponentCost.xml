@@ -9,7 +9,7 @@
         <result column="component_name" property="componentName" jdbcType="VARCHAR" javaType="java.lang.String" />
         <result column="consumption" property="consumption" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="suitable_product" property="suitableProduct" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="price_end" property="priceEnd" jdbcType="TIMESTAMP" javaType="java.sql.Date"/>
+        <result column="price_end" property="priceEnd" jdbcType="DATETIME" javaType="java.sql.Timestamp"/>
         <result column="unit_cost" property="unitCost" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="remarks" property="remarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>
