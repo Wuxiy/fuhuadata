@@ -30,7 +30,7 @@ public class SystemLogAspect {
     private SystemLogService systemLogService;
 
     //配置接入点
-    @Pointcut("execution(* com.fuhuadata.web.springmvc.*.*(..))")
+    @Pointcut("execution(* com.fuhuadata.web.springmvc.ExhibitionInfoAction.exhibitionInfoList(..))")
     private void controllerAspect(){
         System.out.print("进入切面环绕通知");
     }//定义一个切入点

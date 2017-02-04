@@ -9,6 +9,13 @@
 	<bean id="exhibitionInfoManager" class="com.fuhuadata.manager.impl.ExhibitionInfoManagerImpl"/>
 	<bean id="customerEncyclopediaManager" class="com.fuhuadata.manager.impl.CustomerEncyclopediaManagerImpl"/>
 	<bean id="productProblemManager" class="com.fuhuadata.manager.impl.ProductProblemManagerImpl"/>
+	<bean id ="componentCostManager" class="com.fuhuadata.manager.impl.ComponentCostManagerImpl"/>
+	<bean id="freightCostManager" class="com.fuhuadata.manager.impl.FreightCostManagerImpl"/>
+	<bean id = "industryDataManager" class="com.fuhuadata.manager.impl.IndustryDataManagerImpl"/>
+	<bean id = "packingArchivesManager" class="com.fuhuadata.manager.impl.PackingArchivesManagerImpl"/>
+	<bean id = "portChargesCostManager" class="com.fuhuadata.manager.impl.PortChargesCostManagerImpl"/>
+	<bean id = "preparationProcessCostManager" class="com.fuhuadata.manager.impl.PreparationProcessCostManagerImpl"/>
 	<bean id="saleCustomerManager" class="com.fuhuadata.manager.impl.SaleCustomerManagerImpl"/>
 	<bean id="customerParentManager" class="com.fuhuadata.manager.impl.CustomerParentManagerImpl"/>
+
 </beans>

@@ -13,11 +13,7 @@
 	<!-- 启动spring注解,当自动扫描启动后,该配置可以去掉   
     <context:annotation-config /> -->
 
-
-
-
 	<import resource="spring/springbeans-dao.xml" />
 	<import resource="spring/springbeans-manager.xml" />
-
 	<import resource="spring/springbeans-service.xml" />
 </beans>

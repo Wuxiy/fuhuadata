@@ -28,7 +28,7 @@ import java.util.List;
 public class ExhibitionInfoAction {
     private final static Log log = LogFactory.getLog(ExhibitionInfoAction.class);
     @Resource
-    private ExhibitionInfoService exhibitionInfoService = new ExhibitionInfoServiceImpl();
+    private ExhibitionInfoService exhibitionInfoService;
     private Integer pageSize=5;
     private String page="1";
 
