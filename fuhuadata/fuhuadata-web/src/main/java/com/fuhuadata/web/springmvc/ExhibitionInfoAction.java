@@ -2,6 +2,7 @@ package com.fuhuadata.web.springmvc;
 
 
 import com.fuhuadata.domain.ExhibitionInfo;
+import com.fuhuadata.domain.SystemLog;
 import com.fuhuadata.domain.query.ExhibitionInfoQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
@@ -24,11 +25,11 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/exhibitionInfo/*")
-public class ExhibitionInfoAction {
+public class    ExhibitionInfoAction {
     private final static Log log = LogFactory.getLog(ExhibitionInfoAction.class);
     @Resource
-    private ExhibitionInfoService exhibitionInfoService = new ExhibitionInfoServiceImpl();
-    private Integer pageSize=10;
+    private ExhibitionInfoService exhibitionInfoService;
+    private Integer pageSize=5;
     private String page="1";
 
     @SuppressWarnings("unused")
@@ -48,14 +49,14 @@ public class ExhibitionInfoAction {
         }catch (Exception e){
             log.error("获取展会列表失败",e);
         }
-        ModelAndView model = new ModelAndView("exhibitionInfo/exhibitionInfoList","exhibitionInfoList",result.getModel());
+        ModelAndView model = new ModelAndView("knowledgeBase/exhibitionDynamicList","exhibitionInfoList",result.getModel());
         model.addObject("message","展会动态列表");
         return model;
     }
 
     @RequestMapping(value = "/queryExhibitionInfoList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-展会动态",methods = "展会列表")
     @ResponseBody
+    @SystemLogAnnotation(module = "知识库-展会动态",methods = "展会列表")
     public ModelAndView queryExhibitionInfoList(@RequestBody ExhibitionInfoQuery exhibitionInfoQuery){
         Result<List<ExhibitionInfo>> result = new Result<List<ExhibitionInfo>>();
         try{
@@ -69,7 +70,7 @@ public class ExhibitionInfoAction {
         }catch (Exception e){
             log.error("查询获取展会信息失败",e);
         }
-        ModelAndView model = new ModelAndView("exhibitionInfo/exhibitionInfoList","exhibitionInfoList",result.getModel());
+        ModelAndView model = new ModelAndView("KexhibitionInfo/exhibitionInfoList","exhibitionInfoList",result.getModel());
         model.addObject("message","展会动态列表");
         return model;
     }
@@ -78,6 +79,7 @@ public class ExhibitionInfoAction {
     @SystemLogAnnotation(module = "知识库-展会动态",methods = "新增展会动态记录")
     @ResponseBody
     public ResultPojo doAddExhibitionInfo(@RequestBody ExhibitionInfo exhibitionInfo){
+
         try{
             Result<ExhibitionInfo> result = exhibitionInfoService.addExhibitionInfo(exhibitionInfo);
             return result.getResultPojo();

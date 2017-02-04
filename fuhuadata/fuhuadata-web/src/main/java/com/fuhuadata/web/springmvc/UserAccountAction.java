@@ -4,6 +4,13 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.fuhuadata.web.util.SystemLogAnnotation;
+import com.fuhuadata.domain.SaleCustomer;
+import com.fuhuadata.domain.query.QuerySaleCustomer;
+import com.fuhuadata.service.SaleCustomerService;
+import com.fuhuadata.domain.SaleCustomer;
+import com.fuhuadata.domain.query.QuerySaleCustomer;
+import com.fuhuadata.service.SaleCustomerService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
@@ -25,6 +32,8 @@ public class UserAccountAction{
 	private final static Log log = LogFactory.getLog(UserAccountAction.class);
 	@Resource
 	private UserAccountService userAccountService;
+	@Resource
+	private SaleCustomerService saleCustomerService;
 	private Integer pageSize = 10;
 	private String page = "1";
 	/**
@@ -33,6 +42,7 @@ public class UserAccountAction{
 	 */
 	@SuppressWarnings("unused")
 	@RequestMapping(value="/userAccountList",method=RequestMethod.GET)
+	@SystemLogAnnotation(module = "用户管理",methods = "用户列表")
     public ModelAndView  userAccountList(){
 		Result<List<UserAccount>>  result = new Result<List<UserAccount>>();
 		try{

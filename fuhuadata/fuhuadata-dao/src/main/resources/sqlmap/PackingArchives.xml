@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="PACKINGARCHIVES">
+    <typeAlias alias="PackingArchives" type="com.fuhuadata.domain.PackingArchives"/>
+    <typeAlias alias="PackingArchivesQuery" type="com.fuhuadata.domain.query.PackingArchivesQuery"/>
+
+    <resultMap id="PACKINGARCHIVES-MAP" class="PackingArchives">
+        <result column="packing_id" property="packingId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="type" property="type" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="packing_type" property="packingType" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="pack_name" property="packName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="size" property="size" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="spec" property="spec" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="spec_unit" property="specUnit" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="quality" property="quality" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="quality_index" property="qualityIndex" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="quality_target_value" property="qualityTargetValue" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="unit_price" property="unitPrice" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="price_end_date" property="priceEndDate" jdbcType="DATETIME" javaType="java.sql.Timestamp"/>
+        <result column="suitable_type" property="suitableType" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="b_remarks" property="bRemarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="status" property="status" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="associated_packing_id" property="associatedPackingId" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="image_path" property="imagePath" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="PAGE-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotNull prepend=" AND " property="packingId">
+                packing_id=#packingId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="type">
+                type=#type#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="packingType">
+                packing_type=#packingType#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="packName">
+                pack_name=#packName#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="size">
+                size=#size#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="spec">
+                spec=#spec#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="specUnit">
+                spec_unit=#specUnit#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="quality">
+                quality=#quality#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="qualityIndex">
+                quality_index=#qualityIndex#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="qualityTargetValue">
+                quality_target_value=#qualityTargetValue#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="unitPrice">
+                unit_price=#unitPrice#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="priceEndDate">
+                price_end_date=#priceEndDate#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="suitableType">
+                suitable_type=#suitableType#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="bRemarks">
+                b_remarks=#bRemarks#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="status">
+                status=#status#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="associatedPackingId">
+                associated_packing_id=#associatedPackingId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="imagePath">
+                image_path=#imagePath#
+            </isNotNull>
+        </dynamic>
+    </sql>
+    <sql id="QUERY-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotNull prepend=" AND " property="packingId">
+                packing_id=#packingId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="type">
+                type=#type#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="packingType">
+                packing_type=#packingType#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="packName">
+                pack_name=#packName#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="size">
+                size=#size#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="spec">
+                spec=#spec#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="specUnit">
+                spec_unit=#specUnit#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="quality">
+                quality=#quality#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="qualityIndex">
+                quality_index=#qualityIndex#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="qualityTargetValue">
+                quality_target_value=#qualityTargetValue#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="unitPrice">
+                unit_price=#unitPrice#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="priceEndDate">
+                price_end_date=#priceEndDate#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="suitableType">
+                suitable_type=#suitableType#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="bRemarks">
+                b_remarks=#bRemarks#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="status">
+                status=#status#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="associatedPackingId">
+                associated_packing_id=#associatedPackingId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="imagePath">
+                image_path=#imagePath#
+            </isNotNull>
+        </dynamic>
+    </sql>
+    <insert id="ADD" parameterClass="PackingArchives">
+        INSERT INTO
+        packing_archives (packing_id, type, packing_type,
+        pack_name, size, spec,
+        spec_unit, quality, quality_index,
+        quality_target_value, unit_price, price_end_date,
+        suitable_type, b_remarks, status,
+        associated_packing_id, image_path
+        image_path
+        )
+        VALUES (#packingId#, #type#, #packingType#,
+        #packName#, #size#, #spec#,
+        #specUnit#, #quality#, #qualityIndex#,
+        #qualityTargetValue#, #unitPrice#, #priceEndDate#,
+        #suitableType#, #bRemarks#, #status#,
+        #associatedPackingId#, #imagePath#}
+        )
+        <selectKey resultClass="int" keyProperty="packingId">
+            SELECT @@IDENTITY AS packing_id
+        </selectKey>
+    </insert>
+
+    <update id="UPDATE" parameterClass="PackingArchives">
+        UPDATE packing_archives
+        <dynamic prepend=" SET ">
+            <isNotNull prepend=", " property="type">
+                type=#type#
+            </isNotNull>
+            <isNotNull prepend=", " property="packingType">
+                packing_type=#packingType#
+            </isNotNull>
+            <isNotNull prepend=", " property="packName">
+                pack_name=#packName#
+            </isNotNull>
+            <isNotNull prepend=", " property="size">
+                size=#size#
+            </isNotNull>
+            <isNotNull prepend=", " property="spec">
+                spec=#spec#
+            </isNotNull>
+            <isNotNull prepend=", " property="specUnit">
+                spec_unit=#specUnit#
+            </isNotNull>
+            <isNotNull prepend=", " property="quality">
+                quality=#quality#
+            </isNotNull>
+            <isNotNull prepend=", " property="qualityIndex">
+                quality_index=#qualityIndex#
+            </isNotNull>
+            <isNotNull prepend=", " property="qualityTargetValue">
+                quality_target_value=#qualityTargetValue#
+            </isNotNull>
+            <isNotNull prepend=", " property="unitPrice">
+                unit_price=#unitPrice#
+            </isNotNull>
+            <isNotNull prepend=", " property="priceEndDate">
+                price_end_date=#priceEndDate#
+            </isNotNull>
+            <isNotNull prepend=", " property="suitableType">
+                suitable_type=#suitableType#
+            </isNotNull>
+            <isNotNull prepend=", " property="bRemarks">
+                b_remarks=#bRemarks#
+            </isNotNull>
+            <isNotNull prepend=", " property="status">
+                status=#status#
+            </isNotNull>
+            <isNotNull prepend=", " property="associatedPackingId">
+                associated_packing_id=#associatedPackingId#
+            </isNotNull>
+            <isNotNull prepend=", " property="imagePath">
+                image_path=#imagePath#
+            </isNotNull>
+            WHERE packing_id = #packingId#
+        </dynamic>
+    </update>
+
+    <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
+        <![CDATA[
+            DELETE FROM packing_archives WHERE packing_id=#packingId#
+        ]]>
+    </delete>
+
+    <select id="GET-ALL" resultMap="PACKINGARCHIVES-MAP">
+        <![CDATA[
+			SELECT * FROM packing_archives
+		]]>
+    </select>
+
+    <select id="GET-BY-QUERY" resultMap="PACKINGARCHIVES-MAP" parameterClass="PackingArchivesQuery">
+        <![CDATA[
+			SELECT * FROM packing_archives
+		]]>
+        <isParameterPresent>
+            <include refid="QUERY-COMMON" />
+        </isParameterPresent>
+    </select>
+
+    <select id="GET-BY-ID" resultMap="PACKINGARCHIVES-MAP" parameterClass="java.lang.Integer">
+        <![CDATA[
+			SELECT * FROM packing_archives WHERE packing_id=#packingId#
+		]]>
+    </select>
+
+    <select id="GET-PAGE" resultMap="PACKINGARCHIVES-MAP" parameterClass="PackingArchivesQuery">
+        <![CDATA[
+			SELECT * FROM packing_archives
+		]]>
+        <isParameterPresent>
+            <include refid="PAGE-COMMON" />
+        </isParameterPresent>
+        LIMIT #startRow#,#pageSize#
+    </select>
+
+    <select id="COUNT" resultClass="java.lang.Integer" parameterClass="PackingArchivesQuery">
+        <![CDATA[
+			SELECT COUNT(packing_id) FROM packing_archives
+		]]>
+        <isParameterPresent>
+            <include refid="PAGE-COMMON" />
+        </isParameterPresent>
+    </select>
+</sqlMap>

@@ -1,6 +1,7 @@
 package com.fuhuadata.domain;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 /**
  * 展会动态

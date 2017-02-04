@@ -1,7 +1,7 @@
 package com.fuhuadata.domain;
 
 
-import java.sql.Date;
+import java.util.Date;
 
 /**系统日志监控用户操作
  * Created by intanswer on 2017/1/10.
@@ -14,7 +14,7 @@ public class SystemLog {
     private String module;//执行的模块
     private String method;//执行的方法
     private Date date;//执行时间
-    private Date responseDate;//响应时间
+    private Integer responseDate;//响应时间
     private String commit;//执行描述
     private String parementers;//执行参数
     private String remarks;//备注
@@ -51,7 +51,7 @@ public class SystemLog {
         return date;
     }
 
-    public Date getResponseDate() {
+    public Integer getResponseDate() {
         return responseDate;
     }
 
@@ -80,7 +80,7 @@ public class SystemLog {
     }
 
     public void setModule(String module) {
-        module = module;
+        this.module = module;
     }
 
     public void setMethod(String method) {
@@ -91,7 +91,7 @@ public class SystemLog {
         this.date = date;
     }
 
-    public void setResponseDate(Date responseDate) {
+    public void setResponseDate(Integer responseDate) {
         this.responseDate = responseDate;
     }
 

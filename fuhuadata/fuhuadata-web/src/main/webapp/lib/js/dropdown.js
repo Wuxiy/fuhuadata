@@ -14,7 +14,7 @@
   // =========================
 
   var backdrop = '.dropdown-backdrop'
-  var toggle   = '[data-toggle="dropdown"]'
+  var toggle   = '[data-toggle="dropdown"]'//定义开关属性
   var Dropdown = function (element) {
     $(element).on('click.bs.dropdown', this.toggle)
   }
@@ -27,11 +27,11 @@
     if ($this.is('.disabled, :disabled')) return
 
     var $parent  = getParent($this)
-    var isActive = $parent.hasClass('open')
+    var isActive = $parent.hasClass('open') //检查元素是否含有open类
 
     clearMenus()
 
-    if (!isActive) {
+    if (!isActive) {  //如果元素没有open类，执行以下语句
       if ('ontouchstart' in document.documentElement && !$parent.closest('.navbar-nav').length) {
         // if mobile we use a backdrop because click events don't delegate
         $('<div class="dropdown-backdrop"/>').insertAfter($(this)).on('click', clearMenus)
@@ -65,7 +65,7 @@
     if ($this.is('.disabled, :disabled')) return
 
     var $parent  = getParent($this)
-    var isActive = $parent.hasClass('open')
+    var isActive = $parent.hasClass('open')  
 
     if ((!isActive && e.which != 27) || (isActive && e.which == 27)) {
       if (e.which == 27) $parent.find(toggle).trigger('focus')
@@ -106,9 +106,9 @@
   }
 
   function getParent($this) {
-    var selector = $this.attr('data-target')
+    var selector = $this.attr('data-target')//获取元素的data-target属性值
 
-    if (!selector) {
+    if (!selector) {//如果没有这个属性，获取href属性值
       selector = $this.attr('href')
       selector = selector && /#[A-Za-z]/.test(selector) && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
     }

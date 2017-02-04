@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="FREIGHTCOST">
+    <typeAlias alias="FreightCost" type="com.fuhuadata.domain.FreightCost"/>
+    <typeAlias alias="FreightCostQuery" type="com.fuhuadata.domain.query.FreightCostQuery"/>
+
+    <resultMap id="FREIGHTCOST-MAP" class="FreightCost">
+        <result column="freight_id" property="freightId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="process_factory" property="processFactory" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="unit_cost" property="unitCost" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="departure_city" property="departureCity" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="destination_city" property="destinationCity" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="PAGE-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotNull prepend=" AND " property="freightId" >
+                freight_id = #freightId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="processFactory">
+                process_factory = #processFactory#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="unitCost">
+                unit_cost = #unit_cost#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="departureCity">
+                departure_city = #departureCity#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="destinationCity">
+                destination_city = #departureCity#
+            </isNotNull>
+            <isNotNull prepend="remarks" property="remarks">
+                remarks = #remarks#
+            </isNotNull>
+         </dynamic>
+    </sql>
+
+    <sql id="QUERY-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotNull prepend=" AND " property="freightId" >
+                freight_id = #freightId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="processFactory">
+                process_factory = #processFactory#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="unitCost">
+                unit_cost = #unit_cost#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="departureCity">
+                departure_city = #departureCity#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="destinationCity">
+                destination_city = #departureCity#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="remarks">
+                remarks = #remarks#
+            </isNotNull>
+        </dynamic>
+    </sql>
+
+    <insert id="ADD" parameterClass="FreightCost">
+        INSERT INTO
+        freight_cost (freight_id, process_factory, unit_cost,
+        departure_city, destination_city, remarks
+        )
+        VALUES (#freightId#, #processFactory#, #unitCost#,
+        #departureCity#, #destinationCity#, #remarks#
+        )
+        <selectKey resultClass="int" keyProperty="freightId">
+            SELECT @@IDENTITY AS freight_id
+        </selectKey>
+    </insert>
+    <update id="UPDATE" parameterClass="FreightCost">
+        UPDATE freight_cost
+        <dynamic prepend=" SET ">
+            <isNotNull prepend=", " property="processFactory">
+                process_factory = #processFactory#
+            </isNotNull>
+            <isNotNull prepend=", " property="unitCost">
+                unit_cost = #unit_cost#
+            </isNotNull>
+            <isNotNull prepend=", " property="departureCity">
+                departure_city = #departureCity#
+            </isNotNull>
+            <isNotNull prepend=", " property="destinationCity">
+                destination_city = #departureCity#
+            </isNotNull>
+            <isNotNull prepend=", " property="remarks">
+                remarks = #remarks#
+            </isNotNull>
+        </dynamic>
+        WHERE freight_id = #freightId#
+    </update>
+
+    <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
+        <![CDATA[
+            DELETE FROM freight_cost  WHERE freight_id = #freightId#
+        ]]>
+    </delete>
+
+    <select id="GET-PAGE" resultMap="FREIGHTCOST-MAP" parameterClass="FreightCostQuery">
+        <![CDATA[
+            SELECT * FROM freight_cost
+        ]]>
+        <isParameterPresent>
+            <include refid="PAGE-COMMON"/>
+        </isParameterPresent>
+        LIMIT #startRow#,#pageSize#
+    </select>
+
+    <select id="COUNT" resultClass="java.lang.Integer" parameterClass="FreightCostQuery">
+        <![CDATA[
+			SELECT COUNT(freight_id) FROM freight_cost
+		]]>
+        <isParameterPresent>
+            <include refid="PAGE-COMMON"/>
+        </isParameterPresent>
+    </select>
+</sqlMap>

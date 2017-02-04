@@ -8,4 +8,12 @@
 	<bean id="exhibitionInfoService" class="com.fuhuadata.service.impl.ExhibitionInfoServiceImpl"/>
 	<bean id="productProblemService" class="com.fuhuadata.service.impl.ProductProblemServiceImpl"/>
 	<bean id="customerEncyclopediaService" class="com.fuhuadata.service.impl.CustomerEncyclopediaServiceImpl"/>
+	<bean id ="componentCostService" class="com.fuhuadata.service.impl.ComponentCostServiceImpl"/>
+	<bean id="freightCostService" class="com.fuhuadata.service.impl.FreightCostServiceImpl"/>
+	<bean id = "industryDataService" class="com.fuhuadata.service.impl.IndustryDataServiceImpl"/>
+	<bean id = "packingArchivesService" class="com.fuhuadata.service.impl.PackingArchivesServiceImpl"/>
+	<bean id = "portChargesCostService" class="com.fuhuadata.service.impl.PortChargesCostServiceImpl"/>
+	<bean id = "preparationProcessCostService" class="com.fuhuadata.service.impl.PreparationProcessCostServiceImpl"/>
+	<bean id="saleCustomerService" class="com.fuhuadata.service.impl.SaleCustomerServiceImpl" />
+	<bean id="customerParentService" class="com.fuhuadata.service.impl.CustomerParentServiceImpl"/>
 </beans>

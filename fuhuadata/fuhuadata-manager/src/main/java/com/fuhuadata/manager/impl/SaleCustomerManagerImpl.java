@@ -1,5 +1,8 @@
 package com.fuhuadata.manager.impl;
 import java.util.List;
+
+import com.fuhuadata.dao.CustomerParentDao;
+import com.fuhuadata.domain.CustomerParent;
 import com.fuhuadata.domain.query.QuerySaleCustomer;
 import com.fuhuadata.domain.SaleCustomer;
 import com.fuhuadata.dao.SaleCustomerDao;
@@ -17,6 +20,8 @@ public class SaleCustomerManagerImpl implements SaleCustomerManager {
 
 	@Resource
     private SaleCustomerDao saleCustomerDao;
+	@Resource
+	private CustomerParentDao customerParentDao;
     
 
     public SaleCustomer addSaleCustomer(SaleCustomer saleCustomer) {
@@ -45,7 +50,11 @@ public class SaleCustomerManagerImpl implements SaleCustomerManager {
 		int totalItem = saleCustomerDao.count(querySaleCustomer);
 		;
 		if (totalItem > 0) {
-			result.addDefaultModel("SaleCustomers", saleCustomerDao.getSaleCustomersByPage(querySaleCustomer));		
+			List<SaleCustomer> saleCustomerList = saleCustomerDao.getSaleCustomersByPage(querySaleCustomer);
+			for(int i=0;i<saleCustomerList.size();i++){
+				saleCustomerList.get(i).setCustomerParent(customerParentDao.getCustomerParentById(saleCustomerList.get(i).getCustomerId()));
+			}
+			result.addDefaultModel("SaleCustomers", saleCustomerList);
 		} else {
 			result.addDefaultModel("SaleCustomers", new ArrayList<SaleCustomer>());
 		}

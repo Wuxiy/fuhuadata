@@ -5,6 +5,7 @@ package com.fuhuadata.domain;
  * Created by intanswer on 2017/1/17.
  */
 public class PortChargesCost {
+    private Integer id;
     private String item;//项目
 
     private String generalChemicals;//一般化工品
@@ -33,5 +34,13 @@ public class PortChargesCost {
 
     public void setDangerousProduct(String dangerousProduct) {
         this.dangerousProduct = dangerousProduct;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

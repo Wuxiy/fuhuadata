@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-     xmlns:context="http://www.springframework.org/schema/context"
-     xmlns:mvc="http://www.springframework.org/schema/mvc"
-     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
-         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
         
          <!-- 自动扫描,完成bean创建和依赖注入 -->
 	    <context:component-scan base-package="com.fuhuadata"/>
-	    
+
+		<!-- 使AspectJ注解起作用：自动为匹配的类生成代理对象 -->
+		<aop:aspectj-autoproxy proxy-target-class="true"/>
+		<bean id="systemLogAspect" class="com.fuhuadata.web.util.SystemLogAspect"/>
+
 	    <!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 --> 
 	    <bean id="messageAdapter" class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
 		       <property name="messageConverters">  

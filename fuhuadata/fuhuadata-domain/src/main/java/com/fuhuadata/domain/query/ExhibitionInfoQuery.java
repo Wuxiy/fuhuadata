@@ -1,8 +1,7 @@
 package com.fuhuadata.domain.query;
 
-import com.fuhuadata.domain.query.PageBase;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * 展会动态信息

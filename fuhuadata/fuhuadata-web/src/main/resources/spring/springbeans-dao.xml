@@ -39,4 +39,13 @@
 	<bean id="exhibitionInfoDao" class="com.fuhuadata.dao.impl.ExhibitionInfoDaoImpl"/>
 	<bean id="productProblemDao" class="com.fuhuadata.dao.impl.ProductProblemDaoImpl"/>
 	<bean id="customerEncyclopediaDao" class="com.fuhuadata.dao.impl.CustomerEncyclopediaDaoImpl"/>
+	<bean id ="componentCostDao" class="com.fuhuadata.dao.impl.ComponentCostDaoImpl"/>
+	<bean id="freightCostDao" class="com.fuhuadata.dao.impl.FreightCostDaoImpl"/>
+	<bean id = "industryDataDao" class="com.fuhuadata.dao.impl.IndustryDataDaoImpl"/>
+	<bean id = "packingArchivesDao" class="com.fuhuadata.dao.impl.PackingArchivesDaoImpl"/>
+	<bean id = "portChargesCostDao" class="com.fuhuadata.dao.impl.PortChargesCostDaoImpl"/>
+	<bean id = "preparationProcessCostDao" class="com.fuhuadata.dao.impl.PreparationProcessCostDaoImpl"/>
+	<bean id="saleCustomerDao" class="com.fuhuadata.dao.impl.SaleCustomerDaoImpl"/>
+	<bean id="customerParentDao" class="com.fuhuadata.dao.impl.CustomerParentDaoImpl"/>
+
 </beans>
