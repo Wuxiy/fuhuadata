@@ -71,8 +71,28 @@ public class FreightCostAction {
         return null;
     }
 
+    /**
+     * 条件查询
+     * @param freightCostQuery
+     * @return
+     */
+    @RequestMapping(value = "/queryFreightCostList",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "知识库-运费",methods = "条件查询")
     public ModelAndView queryFreightCostList(@RequestBody FreightCostQuery freightCostQuery){
-        return null;
+        Result<List<FreightCost>> result = new Result<List<FreightCost>>();
+        try{
+            freightCostQuery.setPageSize(pageSize);
+
+            if(freightCostQuery.getIndex()==0){
+                freightCostQuery.setIndex(Integer.valueOf(page.trim()));
+            }
+            result=freightCostService.getFreightCostsByPage(freightCostQuery);
+        }catch(Exception e){
+            log.error("条件查询运费失败",e);
+        }
+        ModelAndView model=new ModelAndView("knowledgeBase/freightCostList","freightCostList",result.getModel());
+        model.addObject("message","运费列表");
+        return model;
     }
 
 }

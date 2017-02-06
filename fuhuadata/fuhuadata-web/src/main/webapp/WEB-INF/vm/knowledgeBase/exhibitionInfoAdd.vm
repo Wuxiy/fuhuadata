@@ -238,7 +238,7 @@
 </body>
 <script type="text/javascript">
     $(function(){
-        $('#addexhibition .addbtn').on('clicl',function (e) {
+        $('#addexhibition .addbtn').on('click',function (e) {
             var form = $(e.currentTarget).parents('modal'),find('form');
             var data = {
                 exhibitionName:form.find('input')[0].value,
