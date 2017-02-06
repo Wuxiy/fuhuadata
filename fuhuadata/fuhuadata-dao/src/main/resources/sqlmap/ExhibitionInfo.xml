@@ -23,7 +23,7 @@
     <sql id="PAGE-COMMON">
         <dynamic prepend=" WHERE ">
             <isNotNull prepend=" AND " property="exhibitionName">
-                exhibition_name = #exhibitionName#
+                exhibition_name like concat('%',#exhibitionName#,'%')
             </isNotNull>
             <isNotNull prepend=" AND " property="country">
                 country = #country#

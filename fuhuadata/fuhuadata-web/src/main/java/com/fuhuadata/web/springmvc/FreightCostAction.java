@@ -48,7 +48,7 @@ public class FreightCostAction {
         }catch(Exception e){
             log.error("获取运费列表错误");
         }
-        ModelAndView model= new ModelAndView("knowledgeBase/freightCostList","freightCosts",result.getModel());
+        ModelAndView model= new ModelAndView("knowledgeBase/freightCostList","freightCostList",result.getModel());
         model.addObject("message","运费列表");
         return model;
     }
@@ -58,7 +58,7 @@ public class FreightCostAction {
         return new ModelAndView("knowledgeBase/addFreightCost");
     }
 
-    @RequestMapping(value = "/doAddFreightCost",method = RequestMethod.GET)
+    @RequestMapping(value = "/doAddFreightCost",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "知识库-运费",methods = "执行新增")
     @ResponseBody
     public ResultPojo doAddFreightCost(@RequestBody FreightCost freightCost){
@@ -68,6 +68,10 @@ public class FreightCostAction {
         }catch(Exception e){
             log.error("添加运费失败",e);
         }
+        return null;
+    }
+
+    public ModelAndView queryFreightCostList(@RequestBody FreightCostQuery freightCostQuery){
         return null;
     }
 

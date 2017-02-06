@@ -55,7 +55,7 @@ public class PackingArchivesAction {
     @SystemLogAnnotation(module = "知识库-包材档案",methods = "新增包材档案")
     public ModelAndView addPackingArchives(){return new ModelAndView("knowledgeBase/addPackingArchives");}
 
-    @RequestMapping(value = "/doAddPackingArchives",method = RequestMethod.GET)
+    @RequestMapping(value = "/doAddPackingArchives",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "知识库-包材档案",methods = "执行新增")
     @ResponseBody
     public ResultPojo doAddPackingArchives(@RequestBody PackingArchives packingArchives){

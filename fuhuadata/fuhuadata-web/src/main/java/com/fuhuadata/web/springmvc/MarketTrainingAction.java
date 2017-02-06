@@ -79,7 +79,7 @@ public class MarketTrainingAction {
 
     }
 
-    @RequestMapping(value = "/doAddMarketTraining",method = RequestMethod.GET)
+    @RequestMapping(value = "/doAddMarketTraining",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "知识库-营销培训",methods = "新增营销培训记录")
     @ResponseBody
     public ResultPojo doAddMarketTraining(@RequestBody MarketTraining marketTraining){
