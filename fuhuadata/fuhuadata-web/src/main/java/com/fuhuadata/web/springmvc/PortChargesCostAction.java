@@ -56,7 +56,7 @@ public class PortChargesCostAction {
     @SystemLogAnnotation(module = "知识库-港杂费",methods = "新增港杂费")
     public ModelAndView addPortChargesCost(){return new ModelAndView("knowledgeBase/addPortChargesCost");}
 
-    @RequestMapping(value = "/doAddPortChargesCost",method = RequestMethod.GET)
+    @RequestMapping(value = "/doAddPortChargesCost",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "知识库-港杂费",methods = "执行新增")
     @ResponseBody
     public ResultPojo doAddPortChargesCost(@RequestBody PortChargesCost portChargesCost){

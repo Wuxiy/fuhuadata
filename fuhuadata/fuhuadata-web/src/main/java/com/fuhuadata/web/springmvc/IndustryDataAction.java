@@ -58,7 +58,7 @@ public class IndustryDataAction {
         return new ModelAndView("knowledgeBase/addIndustryData");
     }
 
-    @RequestMapping(value = "/addIndustryData",method = RequestMethod.GET)
+    @RequestMapping(value = "/addIndustryData",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "知识库-行业数据",methods = "新增行业数据")
     @ResponseBody
     public ResultPojo doAddIndustryData(@RequestBody IndustryData industryData){
@@ -70,5 +70,7 @@ public class IndustryDataAction {
         }
         return null;
     }
+
+
 
 }

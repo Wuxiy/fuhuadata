@@ -53,16 +53,13 @@ public class    ExhibitionInfoAction {
     }
 
     @RequestMapping(value = "/queryExhibitionInfoList",method = RequestMethod.GET)
-    @ResponseBody
     @SystemLogAnnotation(module = "知识库-展会动态",methods = "展会列表")
     public ModelAndView queryExhibitionInfoList(@RequestBody ExhibitionInfoQuery exhibitionInfoQuery){
         Result<List<ExhibitionInfo>> result = new Result<List<ExhibitionInfo>>();
         try{
             exhibitionInfoQuery.setPageSize(pageSize);
-            try {
-                exhibitionInfoQuery.setIndex(Integer.valueOf(page));
-            }catch (Exception e){
-                exhibitionInfoQuery.setIndex(1);
+            if(exhibitionInfoQuery.getIndex()==0){
+                exhibitionInfoQuery.setIndex(Integer.valueOf(page.trim()));
             }
             result=exhibitionInfoService.getExhibitionInfosByPage(exhibitionInfoQuery);
         }catch (Exception e){
@@ -79,7 +76,7 @@ public class    ExhibitionInfoAction {
         return new ModelAndView("knowledgeBase/addExhibitionInfo");
     }
 
-    @RequestMapping(value = "/doAddExhibitionInfo",method = RequestMethod.GET)
+    @RequestMapping(value = "/doAddExhibitionInfo",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "知识库-展会动态",methods = "新增展会动态记录")
     @ResponseBody
     public ResultPojo doAddExhibitionInfo(@RequestBody ExhibitionInfo exhibitionInfo){

@@ -4,10 +4,8 @@ import com.fuhuadata.domain.PreparationProcessCost;
 import com.fuhuadata.domain.query.PreparationProcessCostQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
-import com.fuhuadata.service.CustomerEncyclopediaService;
 import com.fuhuadata.service.PreparationProcessCostService;
 import com.fuhuadata.web.util.SystemLogAnnotation;
-import jdk.nashorn.internal.ir.RuntimeNode;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
@@ -60,7 +58,7 @@ public class PreparationProcessCostAction {
     public ModelAndView addPreparationProcessCost(){
         return new ModelAndView("knowledgeBase/addPreparationProcessCost");
     }
-    @RequestMapping(value = "/doAddPreparationProcessCost",method = RequestMethod.GET)
+    @RequestMapping(value = "/doAddPreparationProcessCost",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "知识库-制剂加工费",methods = "执行新增")
     @ResponseBody
     public ResultPojo doAddPreparationProcessCost(@RequestBody PreparationProcessCost preparationProcessCost){

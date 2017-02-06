@@ -61,7 +61,7 @@ public class ProductProblemAction {
     @SystemLogAnnotation(module = "知识库-产品问题",methods = "新增产品问题")
     public ModelAndView addProductProblem(){return new ModelAndView("knowledgeBase/addProductProblem");}
 
-    @RequestMapping(value = "/doAddProductProblem",method = RequestMethod.GET)
+    @RequestMapping(value = "/doAddProductProblem",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "知识库-产品问题",methods = "执行新增")
     @ResponseBody
     public ResultPojo doAddProductProblem(@RequestBody ProductProblem productProblem){
