@@ -47,7 +47,7 @@ public class    ExhibitionInfoAction {
         }catch (Exception e){
             log.error("获取展会列表失败",e);
         }
-        ModelAndView model = new ModelAndView("knowledgeBase/exhibitionDynamicList","exhibitionInfos",result.getModel());
+        ModelAndView model = new ModelAndView("knowledgeBase/exhibitionInfoList","exhibitionInfoList",result.getModel());
         model.addObject("message","展会动态列表");
         return model;
     }
@@ -65,7 +65,7 @@ public class    ExhibitionInfoAction {
         }catch (Exception e){
             log.error("查询获取展会信息失败",e);
         }
-        ModelAndView model = new ModelAndView("knowledgeBase/exhibitionInfoList","exhibitionInfos",result.getModel());
+        ModelAndView model = new ModelAndView("knowledgeBase/exhibitionInfoList","exhibitionInfoList",result.getModel());
         model.addObject("message","展会动态列表");
         return model;
     }

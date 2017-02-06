@@ -47,7 +47,7 @@ public class PackingArchivesAction {
         }catch(Exception e){
             log.error("获取包材档案列表错误");
         }
-        ModelAndView model= new ModelAndView("knowledgeBase/packingArchivesList","packingArchives",result.getModel());
+        ModelAndView model= new ModelAndView("knowledgeBase/packingArchivesList","packingArchivesList",result.getModel());
         model.addObject("message","包材档案列表");
         return model;
     }

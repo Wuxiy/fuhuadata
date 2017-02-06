@@ -56,7 +56,7 @@ public class ComponentCostAction {
         } catch (Exception e) {
             log.error("获取知识库成分价格列表失败",e);
         }
-        ModelAndView model= new ModelAndView("knowledgeBase/componentCostList","componentCosts",result.getModel());
+        ModelAndView model= new ModelAndView("knowledgeBase/componentCostList","componentCostList",result.getModel());
         model.addObject("message","知识库成分列表");
         return model;
     }
@@ -103,7 +103,7 @@ public class ComponentCostAction {
         }catch(Exception e){
             log.error("条件查询失败",e);
         }
-        ModelAndView model = new ModelAndView("knowledgeBase/componentCostList","componentCosts",result.getModel());
+        ModelAndView model = new ModelAndView("knowledgeBase/componentCostList","componentCostList",result.getModel());
         model.addObject("message","成分价格列表");
         return model;
     }

@@ -50,7 +50,7 @@ public class MarketTrainingAction {
         }catch (Exception e){
             log.error("获取营销培训列表失败",e);
         }
-        ModelAndView model = new ModelAndView("knowledgeBase/marketTrainingList","marketTrainings",result.getModel());
+        ModelAndView model = new ModelAndView("knowledgeBase/marketTrainingList","marketTrainingList",result.getModel());
         model.addObject("message","营销培训列表");
         return model;
 

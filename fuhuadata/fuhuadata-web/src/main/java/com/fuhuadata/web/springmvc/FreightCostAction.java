@@ -48,7 +48,7 @@ public class FreightCostAction {
         }catch(Exception e){
             log.error("获取运费列表错误");
         }
-        ModelAndView model= new ModelAndView("knowledgeBase/freightCostList","freightCosts",result.getModel());
+        ModelAndView model= new ModelAndView("knowledgeBase/freightCostList","freightCostList",result.getModel());
         model.addObject("message","运费列表");
         return model;
     }

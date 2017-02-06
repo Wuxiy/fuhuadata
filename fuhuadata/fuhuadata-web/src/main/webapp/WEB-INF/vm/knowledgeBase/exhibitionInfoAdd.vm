@@ -26,6 +26,14 @@
                 <li><a href="">退出</a></li>
             </ul>
         </div>
+        <div class="pull-right breadcrumb-btn btn-group btn-group-xs navbar-btn">
+            <a href="#lang-en" class="btn btn-danger" onclick="window.lang.change('zh'); return false;">
+                中文
+            </a>
+            <a href="#lang-en" class="btn btn-primary" onclick="window.lang.change('en'); return false;">
+                English
+            </a>
+        </div>
         <ul id="nav-affix" class="nav nav-cards">
             <li class="shadow-in" title="客户信息">
                 <div id="collapseOne" class="list-group collapse">
@@ -72,14 +80,14 @@
             </li>
             <li class="active shadow-in" title="知识库">
                 <div id="collapseFive" class="list-group collapse">
-                    <a class="list-group-item" href="/knowledgeBase/productQuestionList">产品常见问题</a>
-                    <a class="list-group-item" href="/knowledgeBase/marketTrainList">营销培训</a>
+                    <a class="list-group-item" href="/productProblem/productProblemList">产品常见问题</a>
+                    <a class="list-group-item" href="/marketTraining/marketTrainingList">营销培训</a>
                     <a class="list-group-item" href="/knowledgeBase/customerProductPackingList">客户产品包装要求</a>
                     <a class="list-group-item" href="/knowledgeBase/productArchivesList">标准产品档案</a>
                     <a class="list-group-item" href="/knowledgeBase/packingCostList">包材成本参考</a>
                     <a class="list-group-item" href="/knowledgeBase/processCostList">加工成本参考</a>
                     <a class="list-group-item" href="/knowledgeBase/encyclopediaList">百科</a>
-                    <a class="list-group-item" href="/knowledgeBase/exhibitionDynamicList">展会动态</a>
+                    <a class="list-group-item" href="/exhibitionInfo/exhibitionInfoList">展会动态</a>
                     <a class="list-group-item" href="">其他</a>
                 </div>
                 <a data-toggle="collapse" href="#collapseFive" data-parent="#nav-affix">
@@ -130,7 +138,7 @@
                     </h3>
                 </div>
                 <div class="panel-body clearfix">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" id="addexhibition">
                         <div class="form-group ">
                             <label class="col-xs-1 control-label">展会名称</label>
                             <div class="col-xs-6">
@@ -206,7 +214,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-xs-2 col-xs-offset-4">
-                                <button class="btn btn-block btn-primary" type="submit">完成</button>
+                                <button class="btn btn-block btn-primary addbtn" type="submit">完成</button>
                             </div>
                             <div class="col-xs-2">
                                 <button class="btn btn-block btn-default" type="reset">重置</button>
@@ -228,5 +236,33 @@
 <script src="/lib/js/collapse.js" type="text/javascript" charset="utf-8"></script>
 <script src="/lib/js/transition.js" type="text/javascript" charset="utf-8"></script>
 </body>
+<script type="text/javascript">
+    $(function(){
+        $('#addexhibition .addbtn').on('clicl',function (e) {
+            var form = $(e.currentTarget).parents('modal'),find('form');
+            var data = {
+                exhibitionName:form.find('input')[0].value,
+                region:form.find('select')[0].value,
+                country:form.find('select')[1].value,
+                city:form.find('select')[2].value,
+                exhibitionAddr:form.find('input')[1].value,
+                startDate:form.find('input')[2].value,
+                finishDate:form.find('input')[3].value,
+                sponser:form.find('input')[4].value,
+                organier:form.find('input')[5].value,
+                exhibitionInfo:form.find('input')[6].value,
+                exhibition:form.find('input')[7].value,
+            }
+        })
 
+        $.ajax({
+            type:"post",
+            url:"exhibitionInfo/doAddExhibitionInfo",
+            data:JSON.stringify(data),
+            success:function (data) {
+                console.log(data);
+            }
+        })
+    })
+</script>
 </html>

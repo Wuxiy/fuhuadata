@@ -1,12 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
-    <title>展会动态</title>
+    <title>营销培训</title>
     <link rel="stylesheet" type="text/css" href="/lib/css/bootstrap.css" />
     <script src="/lib/js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
     <script src="/lib/js/dropdown.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/lib/js/modal.js" type="text/javascript" charset="utf-8"></script>
     <script src="/lib/js/collapse.js" type="text/javascript" charset="utf-8"></script>
     <script src="/lib/js/transition.js" type="text/javascript" charset="utf-8"></script>
 </head>
@@ -28,6 +29,14 @@
                 <li><a href="">修改密码</a></li>
                 <li><a href="">退出</a></li>
             </ul>
+        </div>
+        <div class="pull-right breadcrumb-btn btn-group btn-group-xs navbar-btn">
+            <a href="#lang-en" class="btn btn-danger" onclick="window.lang.change('zh'); return false;">
+                中文
+            </a>
+            <a href="#lang-en" class="btn btn-primary" onclick="window.lang.change('en'); return false;">
+                English
+            </a>
         </div>
         <ul id="nav-affix" class="nav nav-cards">
             <li class="shadow-in" title="客户信息">
@@ -79,14 +88,14 @@
             </li>
             <li class="active shadow-in" title="知识库">
                 <div id="collapseFive" class="list-group collapse">
-                    <a class="list-group-item" href="/knowledgeBase/productQuestionList">产品常见问题</a>
-                    <a class="list-group-item" href="/knowledgeBase/marketTrainList">营销培训</a>
+                    <a class="list-group-item" href="/productProblem/productProblemList">产品常见问题</a>
+                    <a class="list-group-item" href="/marketTraining/marketTrainingList">营销培训</a>
                     <a class="list-group-item" href="/knowledgeBase/customerProductPackingList">客户产品包装要求</a>
                     <a class="list-group-item" href="/knowledgeBase/productArchivesList">标准产品档案</a>
                     <a class="list-group-item" href="/knowledgeBase/packingCostList">包材成本参考</a>
                     <a class="list-group-item" href="/knowledgeBase/processCostList">加工成本参考</a>
                     <a class="list-group-item" href="/knowledgeBase/encyclopediaList">百科</a>
-                    <a class="list-group-item" href="/knowledgeBase/exhibitionDynamicList">展会动态</a>
+                    <a class="list-group-item" href="/exhibitionInfo/exhibitionInfoList">展会动态</a>
                     <a class="list-group-item" href="">其他</a>
                 </div>
                 <a data-toggle="collapse" href="#collapseFive" data-parent="#nav-affix">
@@ -126,7 +135,7 @@
             <span class="breadcrumb-unit pull-left">当前位置</span>
             <ul class="breadcrumb shadow-out">
                 <li><a href="">知识库</a></li>
-                <li class="active">展会动态</li>
+                <li class="active">百科</li>
             </ul>
         </div>
         <!--面包屑导结束-->
@@ -134,29 +143,38 @@
             <!--表格开始-->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a class="btn btn-xs btn-primary pull-right panel-heading-btn" href="/knowledgeBase/exhibitionDynamicAdd" data-toggle="modal">
+                    <button class="btn btn-xs btn-primary pull-right panel-heading-btn" href="" data-toggle="modal" data-target="#addTrain" data-keyboard="true">
                         <span class="glyphicon glyphicon-plus"></span>
                         新增
-                    </a>
+                    </button>
                     <h3 class="panel-title">
-                        展会动态
+                        营销培训
                     </h3>
                 </div>
                 <div class="panel-body clearfix">
                     <!--搜索框开始-->
                     <div class="form-horizontal">
-                        <div class="form-group ">
+                        <div class="form-group">
+                            <div class="col-xs-1 pull-right">
+                                <button type="button" class="btn btn-block btn-primary btn-xs">
+                                    搜索
+                                </button>
+                            </div>
+                            <div class="col-xs-2 pull-right">
+                                <input class="form-control" type="search" value="" placeholder="请输入标题"/>
+                            </div>
+                            <label class="col-xs-1 control-label pull-right">标题</label>
                             <div class="col-xs-2 pull-right">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="请输入关键词查找">
-                                    <div class="input-group-btn">
-                                        <button type="button" class="btn btn-primary btn-xs">
-                                            <span class="glyphicon glyphicon-search"></span>
-                                            搜索
-                                        </button>
-                                    </div>
+                                    <input class="form-control" type="search" value="" placeholder="请输入品类"/>
+                                    <span class="input-group-btn">
+												<button data-toggle="modal" data-target="#search" class="btn btn-xs btn-default" type="button">
+													<span class="glyphicon glyphicon-search"></span>
+												</button>
+											</span>
                                 </div>
                             </div>
+                            <label class="col-xs-1 control-label pull-right">品类</label>
                         </div>
                     </div>
                     <!--搜索框结束-->
@@ -164,55 +182,34 @@
                     <table class="table table-condensed table-bordered table-striped text-center">
                         <thead>
                         <tr>
-                            <th class="text-center ">编号</th>
-                            <th class="col-xs-2 text-center">展会名称</th>
-                            <th class="col-xs-1 text-center">主办方</th>
-                            <th class="col-xs-2 text-center">承办单位</th>
-                            <th class="text-center">国家</th>
-                            <th class="text-center">城市</th>
-                            <th class="col-xs-1 text-center">开始时间</th>
-                            <th class="col-xs-1 text-center">结束日期</th>
-                            <th class="col-xs-1 text-center">展会地址</th>
-                            <th class="col-xs-2 text-center">展会介绍</th>
-                            <th class="col-xs-1 text-center">展会介绍连接</th>
-                            <th class="text-center">创建人</th>
-                            <th class="col-xs-1 text-center">创建时间</th>
+                            <th class="col-xs-1 text-center">编号</th>
+                            <th class="col-xs-4 text-center">标题</th>
+                            <th class="col-xs-2 text-center">产品种类</th>
+                            <th class="col-xs-2 text-center">上传人</th>
+                            <th class="col-xs-2 text-center">上传时间</th>
+                            <th class="col-xs-1 text-center">可否下载</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td>1</td>
-                            <td>2016全国植保会</td>
-                            <td>全国农业技术推广服务中心</td>
-                            <td>江苏省植物保护站厦门市凤凰创意会展服务有限公司</td>
-                            <td>中国</td>
-                            <td>南京</td>
-                            <td>2016年11月25日</td>
-                            <td>2016年11月27日</td>
-                            <td>南京国际博览中心</td>
-                            <td>吸引来自全国30参展范围涉及农药原药、农药、肥料、植保机械及包装设备等，涵盖整个农化产业上、中、下游产品，是国内参展产品最齐全的大会。</td>
-                            <td><a href="http://www.1988.tv/zhanhui/2016qgzbh/about.html">点击进入</a></td>
+                            <td>草甘膦知识培训</td>
+                            <td>草甘膦</td>
                             <td>刘凯洋</td>
-                            <td>2016-10-12</td>
+                            <td>2016-10-10 18:00</td>
+                            <td><a href="">下载</a></td>
                         </tr>
-                            #foreach($exhibitionInfo in $exhibitionInfos)
+                        #foreach($marketTraining in $marketTrainingList)
                         <tr>
-                            <td>${exhibitionInfo.exhibitionId}</td>
-                            <td>${exhibitionInfo.exhibitionName}</td>
-                            <td>${exhibitionInfo.sponsor}</td>
-                            <td>${exhibitionInfo.organizer}</td>
-                            <td>${exhibitionInfo.country}</td>
-                            <td>${exhibitionInfo.city}</td>
-                            <td lang="zh">${exhibitionInfo.startDate}</td>
-                            <td lang="zh">${exhibitionInfo.finishDate}</td>
-                            <td>${exhibitionInfo.exhibitionAddr}</td>
-                            <td>${exhibitionInfo.exhibitionInfo}</td>
-                            <td><a>${exhibitionInfo.exhibitionLink}</a></td>
-                            <td>${exhibitionInfo.creator}</td>
-                            <td lang="zh">${exhibitionInfo.createTime}</td>
+                            <td>${marketTraining.tranId}</td>
+                            <td>${marketTraining.title}</td>
+                            <td>${marketTraining.productType}</td>
+                            <td>${marketTraining.userId}</td>
+                            <td>${marketTraining.uploadDate}</td>
+                            <td><a href="">下载</a></td>
                         </tr>
-                            #end
-                    </tbody>
+                        #end
+                        </tbody>
                     </table>
                     <!--表格结束-->
                     <!--分页导航开始-->
@@ -244,5 +241,72 @@
         &copy; baswaAdmin 2014
     </small>
 </div>
+<!--添加模态框开始 -->
+<div class="modal fade" id="addTrain" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body ">
+                <form class="form-horizontal" action="">
+                    <div class="form-group ">
+                        <label class="col-xs-2 control-label">标题</label>
+                        <div class="col-xs-6">
+                            <input class="form-control" type="text"/>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-xs-2 control-label">产品名称</label>
+                        <div class="col-xs-4">
+                            <select class="form-control">
+                                <option value="" selected>草甘膦</option>
+                                <option value="">草胺膦</option>
+                                <option value="">化工品</option>
+                                <option value="">贸易品</option>
+                                <option value="">其他</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-4">
+                            <select class="form-control">
+                                <option value="" selected>全部</option>
+                                <option value="">草甘膦</option>
+                                <option value="">草甘膦原药</option>
+                                <option value="">草甘膦水剂</option>
+                                <option value="">草甘膦颗粒剂</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-xs-2 control-label" for="inputfile">附件</label>
+                        <div class="col-xs-6">
+                            <input class="form-control" id="inputfile" type="file"/>
+                        </div>
+                        <div class="col-xs-2">
+                            <button type="submit" class="btn btn-xs btn-primary btn-block">上传</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-3 col-xs-offset-3">
+                        <button type="button" class="btn btn-primary btn-block">
+                            完成
+                        </button>
+                    </div>
+                    <div class="col-xs-3">
+                        <button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--添加模态框结束 -->
+
 </body>
 </html>
