@@ -73,7 +73,7 @@ public class MarketTrainingAction {
         }catch (Exception e){
             log.error("查询获取营销培训列表失败",e);
         }
-        ModelAndView model = new ModelAndView("marketTraining/marketTrainingList","marketTrainingList",result.getModel());
+        ModelAndView model = new ModelAndView("marketTraining/marketTrainingList","marketTrainings",result.getModel());
         model.addObject("message","营销培训列表");
         return model;
 
@@ -88,7 +88,6 @@ public class MarketTrainingAction {
             return result.getResultPojo();
         }catch (Exception e){
             log.error("添加营销培训信息出错");
-
         }
         return null;
     }

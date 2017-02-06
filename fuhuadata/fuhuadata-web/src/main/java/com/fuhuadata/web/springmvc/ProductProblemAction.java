@@ -8,13 +8,16 @@ package com.fuhuadata.web.springmvc;
 import com.fuhuadata.domain.ProductProblem;
 import com.fuhuadata.domain.query.ProductProblemQuery;
 import com.fuhuadata.domain.query.Result;
+import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.ProductProblemService;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -49,9 +52,30 @@ public class ProductProblemAction {
         }catch(Exception e){
             log.error("获取产品问题列表问题错误",e);
         }
+<<<<<<< HEAD
         ModelAndView model = new ModelAndView("knowledgeBase/productProblemList","productProblemList",result.getModel());
+=======
+        ModelAndView model = new ModelAndView("knowledgeBase/productProblemList","productProblems",result.getModel());
+>>>>>>> c81a65a58e5315b7880ca25f22d38b8ceb56e1f0
         model.addObject("message","产品问题列表");
         return model;
+    }
+
+    @RequestMapping(value = "/addProductProblem",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "知识库-产品问题",methods = "新增产品问题")
+    public ModelAndView addProductProblem(){return new ModelAndView("knowledgeBase/addProductProblem");}
+
+    @RequestMapping(value = "/doAddProductProblem",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "知识库-产品问题",methods = "执行新增")
+    @ResponseBody
+    public ResultPojo doAddProductProblem(@RequestBody ProductProblem productProblem){
+        try{
+            Result<ProductProblem> result = productProblemService.addProductProblem(productProblem);
+            return result.getResultPojo();
+        }catch(Exception e){
+            log.error("新增产品问题失败",e);
+        }
+        return null;
     }
 
 }

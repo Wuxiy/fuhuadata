@@ -1,6 +1,6 @@
 package com.fuhuadata.domain;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * 制剂加工成本

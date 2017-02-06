@@ -22,7 +22,7 @@ public class ComponentCostServiceImpl implements ComponentCostService {
     private ComponentCostManager componentCostManager;
 
     @Override
-    public Result addComponentCost(ComponentCost componentCost) {
+    public Result<ComponentCost> addComponentCost(ComponentCost componentCost) {
         Result<ComponentCost> result = new Result<ComponentCost>();
         try{
             result.addDefaultModel(componentCostManager.addComponentCost(componentCost));

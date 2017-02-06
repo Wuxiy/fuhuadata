@@ -3,13 +3,16 @@ package com.fuhuadata.web.springmvc;
 import com.fuhuadata.domain.IndustryData;
 import com.fuhuadata.domain.query.IndustryDataQuery;
 import com.fuhuadata.domain.query.Result;
+import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.IndustryDataService;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -44,9 +47,28 @@ public class IndustryDataAction {
         }catch(Exception e){
             log.error("获取行业数据列表错误");
         }
-        ModelAndView model= new ModelAndView("industryData/industryDataList","industryDataList",result.getModel());
+        ModelAndView model= new ModelAndView("knowledgeBase/industryDataList","industryDatas",result.getModel());
         model.addObject("message","行业数据列表");
         return model;
+    }
+
+    @RequestMapping(value = "/addIndustryData",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "知识库-行业数据",methods = "新增行业数据")
+    public ModelAndView addIndustryData(){
+        return new ModelAndView("knowledgeBase/addIndustryData");
+    }
+
+    @RequestMapping(value = "/addIndustryData",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "知识库-行业数据",methods = "新增行业数据")
+    @ResponseBody
+    public ResultPojo doAddIndustryData(@RequestBody IndustryData industryData){
+        try{
+            Result<IndustryData> result = industryDataService.addIndustryData(industryData);
+            return result.getResultPojo();
+        }catch(Exception e){
+            log.error("添加行业数据失败",e);
+        }
+        return null;
     }
 
 }

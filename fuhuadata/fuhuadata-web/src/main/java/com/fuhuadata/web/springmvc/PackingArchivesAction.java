@@ -3,13 +3,16 @@ package com.fuhuadata.web.springmvc;
 import com.fuhuadata.domain.PackingArchives;
 import com.fuhuadata.domain.query.PackingArchivesQuery;
 import com.fuhuadata.domain.query.Result;
+import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.PackingArchivesService;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -47,6 +50,22 @@ public class PackingArchivesAction {
         ModelAndView model= new ModelAndView("knowledgeBase/packingArchivesList","packingArchivesList",result.getModel());
         model.addObject("message","包材档案列表");
         return model;
+    }
+    @RequestMapping(value = "/addPackingArchives",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "知识库-包材档案",methods = "新增包材档案")
+    public ModelAndView addPackingArchives(){return new ModelAndView("knowledgeBase/addPackingArchives");}
+
+    @RequestMapping(value = "/doAddPackingArchives",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "知识库-包材档案",methods = "执行新增")
+    @ResponseBody
+    public ResultPojo doAddPackingArchives(@RequestBody PackingArchives packingArchives){
+        try{
+            Result<PackingArchives> result=packingArchivesService.addPackingArchives(packingArchives);
+            return result.getResultPojo();
+        }catch(Exception e){
+            log.error("添加包材档案失败");
+        }
+        return null;
     }
 
 }

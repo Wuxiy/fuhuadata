@@ -2,12 +2,10 @@ package com.fuhuadata.web.springmvc;
 
 
 import com.fuhuadata.domain.ExhibitionInfo;
-import com.fuhuadata.domain.SystemLog;
 import com.fuhuadata.domain.query.ExhibitionInfoQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.ExhibitionInfoService;
-import com.fuhuadata.service.impl.ExhibitionInfoServiceImpl;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -25,7 +23,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/exhibitionInfo/*")
-public class ExhibitionInfoAction {
+public class    ExhibitionInfoAction {
     private final static Log log = LogFactory.getLog(ExhibitionInfoAction.class);
     @Resource
     private ExhibitionInfoService exhibitionInfoService;
@@ -70,21 +68,26 @@ public class ExhibitionInfoAction {
         }catch (Exception e){
             log.error("查询获取展会信息失败",e);
         }
-        ModelAndView model = new ModelAndView("KexhibitionInfo/exhibitionInfoList","exhibitionInfoList",result.getModel());
+        ModelAndView model = new ModelAndView("knowledgeBase/exhibitionInfoList","exhibitionInfos",result.getModel());
         model.addObject("message","展会动态列表");
         return model;
+    }
+
+    @RequestMapping(value="/addExhibitionInfo",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "知识库-展会动态",methods = "新增展会动态")
+    public ModelAndView addExhibitionInfo(){
+        return new ModelAndView("knowledgeBase/addExhibitionInfo");
     }
 
     @RequestMapping(value = "/doAddExhibitionInfo",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "知识库-展会动态",methods = "新增展会动态记录")
     @ResponseBody
     public ResultPojo doAddExhibitionInfo(@RequestBody ExhibitionInfo exhibitionInfo){
-
         try{
             Result<ExhibitionInfo> result = exhibitionInfoService.addExhibitionInfo(exhibitionInfo);
             return result.getResultPojo();
         }catch (Exception e){
-            log.error("添加展会动态记录失败");
+            log.error("添加展会动态记录失败",e);
         }
         return null;
     }
