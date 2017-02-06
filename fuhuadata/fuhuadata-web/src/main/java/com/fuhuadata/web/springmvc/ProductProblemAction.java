@@ -49,7 +49,7 @@ public class ProductProblemAction {
         }catch(Exception e){
             log.error("获取产品问题列表问题错误",e);
         }
-        ModelAndView model = new ModelAndView("productProblem/productProblemList","productProblemList",result.getModel());
+        ModelAndView model = new ModelAndView("knowledgeBase/productProblemList","productProblemList",result.getModel());
         model.addObject("message","产品问题列表");
         return model;
     }
