@@ -37,6 +37,22 @@
         </dynamic>
     </sql>
 
+    <insert id="ADD" parameterClass="ExhibitionInfo">
+        insert into exhibition_info (exhibition_id, exhibition_name, sponsor,
+        organizer, region, country,
+        city, start_date, finish_date,
+        exhibition_addr, exhibition_link, creator,
+        create_time, exhibition_info)
+        values (#exhibitionId#, #exhibitionName#, #sponsor#,
+        #organizer#, #region#, #country#,
+        #city#, #startDate#, #finishDate#,
+        #exhibitionAddr#, #exhibitionLink#, #creator#,
+        #createTime#, #exhibitionInfo#)
+        <selectKey resultClass="int" keyProperty="exhibitionId">
+            SELECT @@IDENTITY AS exhibition_id
+        </selectKey>
+    </insert>
+
     <select id="GET-PAGE" resultMap="EXHIBITIONINFO-MAP" parameterClass="ExhibitionInfoQuery">
         <![CDATA[
         SELECT * FROM exhibition_info

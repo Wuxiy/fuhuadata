@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <title>展会新增</title>
     <link rel="stylesheet" type="text/css" href="/lib/css/bootstrap.css" />
-    <script type="text/javascript" src="/lib/js/jquery.min.js"/>
-    <script type="text/javascript" src="/lib/js/jquery-1.10.1.min.js"/>
+    <script type="text/javascript" src="/lib/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/lib/js/jquery-1.10.1.min.js"></script>
 </head>
 
 <body class="bg-page">
@@ -239,32 +239,29 @@
 <script src="/lib/js/transition.js" type="text/javascript" charset="utf-8"></script>
 </body>
 <script type="text/javascript">
-    $(function(){
-        $('#addexhibition .addbtn').on('click',function (e) {
-            var form = $(e.currentTarget).parents('modal'),find('form');
+    jQuery(function(){
+        jQuery('#addexhibition .addbtn').on('click',function (e) {
+            var form = jQuery(e.currentTarget).parents('.modal').find
+            ('form');
             var data = {
-                exhibitionName:form.find('input')[0].value,
-                region:form.find('select')[0].value,
-                country:form.find('select')[1].value,
-                city:form.find('select')[2].value,
-                exhibitionAddr:form.find('input')[1].value,
-                startDate:form.find('input')[2].value,
-                finishDate:form.find('input')[3].value,
-                sponser:form.find('input')[4].value,
-                organier:form.find('input')[5].value,
-                exhibitionInfo:form.find('input')[6].value,
-                exhibition:form.find('input')[7].value,
-            }
-        })
+                exhibitionName: "ya",
+                region:  "ya",
+                country:  "ya",
+                city:  "ya"
+            };
 
-        $.ajax({
-            type:"post",
-            url:"exhibitionInfo/doAddExhibitionInfo",
-            data:JSON.stringify(data),
-            success:function (data) {
-                console.log(data);
-            }
+            jQuery.ajax({
+                type: "post",
+                url: "doAddExhibitionInfo",
+                data: JSON.stringify(data),
+                success:function () {
+                    window.location.href="/exhibitionInfoList";
+
+                    }
+                })
+            })
+            alert("233");
+            return false;
         })
-    })
 </script>
 </html>

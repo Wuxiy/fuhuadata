@@ -75,4 +75,23 @@ public class ProductProblemAction {
         return null;
     }
 
+    @RequestMapping(value = "/queryProductProblemList",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "知识库-产品问题",methods = "条件查询")
+    public ModelAndView queryProductProblemList(@RequestBody ProductProblemQuery productProblemQuery){
+
+        Result<List<ProductProblem>> result = new Result<List<ProductProblem>>();
+        try{
+            productProblemQuery.setPageSize(pageSize);
+            if(productProblemQuery.getIndex()==0){
+                productProblemQuery.setIndex(Integer.valueOf(page.trim()));
+            }
+            result=productProblemService.getProductProblemsByPage(productProblemQuery);
+        }catch(Exception e){
+            log.error("条件查询错误",e);
+        }
+        ModelAndView model = new ModelAndView("knowledgeBase/productProblemList","productProblemList",result.getModel());
+        model.addObject("message","产品问题");
+        return model;
+    }
+
 }

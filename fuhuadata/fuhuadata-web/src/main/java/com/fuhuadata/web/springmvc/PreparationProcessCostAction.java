@@ -72,4 +72,27 @@ public class PreparationProcessCostAction {
         return null;
     }
 
+    /**
+     * 条件查询
+     * @param preparationProcessCostQuery
+     * @return
+     */
+    @RequestMapping(value = "/queryPreparationProcessCostList",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "知识库-制剂加工费",methods = "条件查询")
+    public ModelAndView queryPreparationProcessCostList(@RequestBody PreparationProcessCostQuery preparationProcessCostQuery){
+        Result<List<PreparationProcessCost>> result = new Result<List<PreparationProcessCost>>();
+        try{
+            preparationProcessCostQuery.setPageSize(pageSize);
+            if(preparationProcessCostQuery.getIndex()==0){
+                preparationProcessCostQuery.setIndex(Integer.valueOf(page.trim()));
+            }
+            result=preparationProcessCostService.getPreparationProcessCostsByPage(preparationProcessCostQuery);
+        }catch(Exception e){
+            log.error("制剂加工费查询失败",e);
+        }
+        ModelAndView model = new ModelAndView("knowledgeBase/preparationProcessCostList","preparationProcessCostList",result.getModel());
+        model.addObject("message","制剂加工成本");
+        return model;
+    }
+
 }

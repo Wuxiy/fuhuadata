@@ -48,7 +48,7 @@ public class PortChargesCostAction {
             log.error("获取港杂费成本列表错误",e);
 
         }
-        ModelAndView model= new ModelAndView("knowledgeBase/portChargesCostList","portChargesCosts",result.getModel());
+        ModelAndView model= new ModelAndView("knowledgeBase/portChargesCostList","portChargesCostList",result.getModel());
         model.addObject("message","港杂费列表");
         return model;
     }
@@ -67,5 +67,28 @@ public class PortChargesCostAction {
             log.error("添加港杂费失败",e);
         }
         return null;
+    }
+
+    /**
+     * 条件查询
+     * @param portChargesCostQuery
+     * @return
+     */
+    @RequestMapping(value = "/queryPortChargesCostList",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "知识库-港杂费",methods = "条件查询")
+    public ModelAndView queryPortChargesCostList(@RequestBody PortChargesCostQuery portChargesCostQuery){
+        Result<List<PortChargesCost>> result = new Result<List<PortChargesCost>>();
+        try{
+            portChargesCostQuery.setPageSize(pageSize);
+            if(portChargesCostQuery.getIndex()==0){
+                portChargesCostQuery.setIndex(Integer.valueOf(page.trim()));
+            }
+            result=portChargesCostService.getPortChargesCostsByPage(portChargesCostQuery);
+        }catch(Exception e){
+            log.error("港杂费查询失败",e);
+        }
+        ModelAndView model = new ModelAndView("knowledgeBase/portChargesCostList","portChargesCostList",result.getModel());
+        model.addObject("message","港杂费列表");
+        return model;
     }
 }
