@@ -73,7 +73,7 @@ public class    ExhibitionInfoAction {
     @RequestMapping(value="/addExhibitionInfo",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "知识库-展会动态",methods = "新增展会动态")
     public ModelAndView addExhibitionInfo(){
-        return new ModelAndView("knowledgeBase/addExhibitionInfo");
+        return new ModelAndView("knowledgeBase/exhibitionInfoAdd");
     }
 
     @RequestMapping(value = "/doAddExhibitionInfo",method = RequestMethod.POST)

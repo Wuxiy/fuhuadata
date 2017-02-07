@@ -41,12 +41,26 @@ public class KnowledgeBaseAction {
     @RequestMapping(value="/marketTrainingList",method=RequestMethod.GET)
     public ModelAndView marketTrainList(){return new ModelAndView("knowledgeBase/marketTrainingList");}
 
-    /**
+    /**阿姨
      * 客户产品包装要求列表
      * @return
      */
     @RequestMapping(value="/customerProductPackingList",method=RequestMethod.GET)
     public ModelAndView customerProductPackingList(){return new ModelAndView("knowledgeBase/customerProductPackingList");}
+
+    /**
+     * 客户产品包装要求详情
+     * @return
+     */
+    @RequestMapping(value="/customerProductPackingInfo",method=RequestMethod.GET)
+    public ModelAndView customerProductPackingInfo(){return new ModelAndView("knowledgeBase/customerProductPackingInfo");}
+
+    /**
+     * 客户产品包装要求新增
+     * @return
+     */
+    @RequestMapping(value="/AddcustomerProductPacking",method=RequestMethod.GET)
+    public ModelAndView AddcustomerProductPacking(){return new ModelAndView("knowledgeBase/customerProductPackingAdd");}
 
     /**
      * 标准产品档案列表

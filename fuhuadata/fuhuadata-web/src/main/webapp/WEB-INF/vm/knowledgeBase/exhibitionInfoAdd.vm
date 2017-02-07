@@ -6,8 +6,11 @@
     <meta charset="UTF-8">
     <title>展会新增</title>
     <link rel="stylesheet" type="text/css" href="/lib/css/bootstrap.css" />
-    <script type="text/javascript" src="/lib/js/jquery.min.js"/>
-    <script type="text/javascript" src="/lib/js/jquery-1.10.1.min.js"/>
+    <script type="text/javascript" src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/jquery-2.1.0.js" type="text/javascript"></script>
+    <script src="/lib/js/dropdown.js" type="text/javascript"></script>
+    <script src="/lib/js/collapse.js" type="text/javascript"></script>
+    <script src="/lib/js/transition.js" type="text/javascript"></script>
 </head>
 
 <body class="bg-page">
@@ -216,7 +219,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-xs-2 col-xs-offset-4">
-                                <button class="btn btn-block btn-primary addbtn" type="submit">完成</button>
+                                <button class="btn btn-block btn-primary addbtn">完成</button>
                             </div>
                             <div class="col-xs-2">
                                 <button class="btn btn-block btn-default" type="reset">重置</button>
@@ -233,38 +236,36 @@
         &copy; baswaAdmin 2014
     </small>
 </div>
-<script src="/lib/js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
-<script src="/lib/js/dropdown.js" type="text/javascript" charset="utf-8"></script>
-<script src="/lib/js/collapse.js" type="text/javascript" charset="utf-8"></script>
-<script src="/lib/js/transition.js" type="text/javascript" charset="utf-8"></script>
+
 </body>
 <script type="text/javascript">
-    $(function(){
-        $('#addexhibition .addbtn').on('clicl',function (e) {
-            var form = $(e.currentTarget).parents('modal'),find('form');
-            var data = {
-                exhibitionName:form.find('input')[0].value,
-                region:form.find('select')[0].value,
-                country:form.find('select')[1].value,
-                city:form.find('select')[2].value,
-                exhibitionAddr:form.find('input')[1].value,
-                startDate:form.find('input')[2].value,
-                finishDate:form.find('input')[3].value,
-                sponser:form.find('input')[4].value,
-                organier:form.find('input')[5].value,
-                exhibitionInfo:form.find('input')[6].value,
-                exhibition:form.find('input')[7].value,
-            }
-        })
+    jQuery(function(){
+        jQuery('#addexhibition .addbtn').on('click',function () {
 
-        $.ajax({
-            type:"post",
-            url:"exhibitionInfo/doAddExhibitionInfo",
-            data:JSON.stringify(data),
-            success:function (data) {
-                console.log(data);
-            }
+            var data = {
+                "exhibitionName": "test",
+                "exhibitionAddr": "test",
+
+                "sponser": "test",
+                "organier": "test",
+                "exhibitionInfo": "test",
+                "exhibition": "test"
+            };
+        console.log(data);
+
+            jQuery.ajax({
+                type:"POST",
+                url:"doAddExhibitionInfo",
+                dataType:"json",
+                contentType:"application/json",
+                data:JSON.stringify(data),
+                success:function(data){
+                    console.log(data);
+                }
+            })
+            return false;
         })
     })
+
 </script>
 </html>

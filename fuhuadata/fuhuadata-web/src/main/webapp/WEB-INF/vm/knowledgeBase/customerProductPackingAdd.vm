@@ -137,15 +137,6 @@
             <!--表格开始-->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <div class="btn-group btn-group-xs panel-heading-btn pull-right">
-                        <a class="btn btn-primary" href="AddcustomerProductPacking">
-                            <span class="glyphicon glyphicon-plus"></span>
-                            新增
-                        </a>
-                        <a class="btn btn-primary" href="">
-                            编辑
-                        </a>
-                    </div>
                     <h3 class="panel-title">
                         产品档案
                     </h3>
@@ -155,21 +146,21 @@
                         <div class="form-group">
                             <label class="col-xs-1 control-label">客户名称</label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" value="NUFARM" disabled />
+                                <input class="form-control" type="text" />
                             </div>
                             <label class="col-xs-1 control-label">加工厂</label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" value="杭州海辰" disabled />
+                                <input class="form-control" type="text"  />
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-xs-1 control-label">品类</label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" value="除草剂-草甘膦-水剂" disabled />
+                                <input class="form-control" type="text" />
                             </div>
                             <label class="col-xs-1 control-label">品名</label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" value="33%草甘膦异丙胺盐水剂" disabled />
+                                <input class="form-control" type="text" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -191,7 +182,7 @@
                         <div class="form-group ">
                             <label class="col-xs-1 control-label">执行标准</label>
                             <div class="col-xs-2">
-                                <select class="form-control" disabled>
+                                <select class="form-control">
                                     <option value="" selected>国际标准</option>
                                     <option value="">国家 标准</option>
                                     <option value="">行业标准</option>
@@ -201,7 +192,7 @@
                             </div>
                             <label class="col-xs-1 control-label">执行标准号</label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" disabled/>
+                                <input class="form-control" type="text" />
                             </div>
                         </div>
                         <!--加工成分表开始-->
@@ -220,27 +211,27 @@
                                     <tbody>
                                     <tr>
                                         <td>草甘膦94%以上原粉（95%）</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td><input class="form-control" type="text" /></td>
+                                        <td><input class="form-control" type="text" /></td>
+                                        <td><input class="form-control" type="text" /></td>
                                     </tr>
                                     <tr>
                                         <td>异丙胺</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td><input class="form-control" type="text" /></td>
+                                        <td><input class="form-control" type="text" /></td>
+                                        <td><input class="form-control" type="text" /></td>
                                     </tr>
                                     <tr>
                                         <td>助剂</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td><input class="form-control" type="text" /></td>
+                                        <td><input class="form-control" type="text" /></td>
+                                        <td><input class="form-control" type="text" /></td>
                                     </tr>
                                     <tr>
                                         <td>液氨</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td><input class="form-control" type="text" /></td>
+                                        <td><input class="form-control" type="text" /></td>
+                                        <td><input class="form-control" type="text" /></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -262,54 +253,53 @@
                                     <tbody>
                                     <tr>
                                         <td>外观</td>
-                                        <td class="text-muted">白色粉末</td>
-                                        <td></td>
+                                        <td><input class="form-control" type="text" /></td>
+                                        <td><input class="form-control" type="text" /></td>
                                     </tr>
                                     <tr>
                                         <td>草甘膦含量（g/L）</td>
-                                        <td class="text-muted">≥360g/L</td>
-                                        <td></td>
+                                        <td><input class="form-control" type="text" /></td>
+                                        <td><input class="form-control" type="text" /></td>
                                     </tr>
                                     <tr>
                                         <td>对应盐含量（g/L）</td>
-                                        <td class="text-muted"></td>
-                                        <td></td>
+                                        <td><input class="form-control" type="text" /></td>
+                                        <td><input class="form-control" type="text" /></td>
                                     </tr>
                                     <tr>
                                         <td>PH值</td>
-                                        <td class="text-muted">5.0-6.5</td>
-                                        <td></td>
+                                        <td><input class="form-control" type="text" /></td>
+                                        <td><input class="form-control" type="text" /></td>
                                     </tr>
                                     <tr>
                                         <td>稀释稳定性（20倍）</td>
-                                        <td class="text-muted">合格</td>
-                                        <td></td>
+                                        <td><input class="form-control" type="text" /></td>
+                                        <td><input class="form-control" type="text" /></td>
                                     </tr>
                                     <tr>
                                         <td>甲醛含量（g/Kg）</td>
-                                        <td class="text-muted">≤10 g/kg</td>
-                                        <td></td>
+                                        <td><input class="form-control" type="text" /></td>
+                                        <td><input class="form-control" type="text" /></td>
                                     </tr>
                                     <tr>
                                         <td>比重（20±3℃）</td>
-                                        <td class="text-muted">
-                                            <1.175</td>
-                                        <td></td>
+                                        <td><input class="form-control" type="text" /></td>
+                                        <td><input class="form-control" type="text" /></td>
                                     </tr>
                                     <tr>
                                         <td>低温稳定性</td>
-                                        <td class="text-muted">合格</td>
-                                        <td></td>
+                                        <td><input class="form-control" type="text" /></td>
+                                        <td><input class="form-control" type="text" /></td>
                                     </tr>
                                     <tr>
                                         <td>热稳定性</td>
-                                        <td class="text-muted">合格</td>
-                                        <td></td>
+                                        <td><input class="form-control" type="text" /></td>
+                                        <td><input class="form-control" type="text" /></td>
                                     </tr>
                                     <tr>
                                         <td>水不溶物</td>
-                                        <td class="text-muted">≤0.1%</td>
-                                        <td></td>
+                                        <td><input class="form-control" type="text" /></td>
+                                        <td><input class="form-control" type="text" /></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -322,6 +312,16 @@
                                 <textarea class="form-control" rows="4"></textarea>
                             </div>
                         </div>
+                        <!--底部按钮开始-->
+                        <div class="form-group">
+                            <div class="col-xs-2 col-xs-offset-4">
+                                <button class="btn btn-block btn-primary" type="submit">完成</button>
+                            </div>
+                            <div class="col-xs-2">
+                                <button class="btn btn-block btn-default" type="reset">重置</button>
+                            </div>
+                        </div>
+                        <!--底部按钮结束-->
                     </div>
                 </div>
             </div>
