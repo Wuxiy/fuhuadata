@@ -7,10 +7,14 @@
     <title>展会新增</title>
     <link rel="stylesheet" type="text/css" href="/lib/css/bootstrap.css" />
     <script type="text/javascript" src="/lib/js/jquery.min.js"></script>
+<<<<<<< HEAD
     <script src="/lib/js/jquery-2.1.0.js" type="text/javascript"></script>
     <script src="/lib/js/dropdown.js" type="text/javascript"></script>
     <script src="/lib/js/collapse.js" type="text/javascript"></script>
     <script src="/lib/js/transition.js" type="text/javascript"></script>
+=======
+    <script type="text/javascript" src="/lib/js/jquery-1.10.1.min.js"></script>
+>>>>>>> 74b7290eaef048f077fadf01130e48785a088cfb
 </head>
 
 <body class="bg-page">

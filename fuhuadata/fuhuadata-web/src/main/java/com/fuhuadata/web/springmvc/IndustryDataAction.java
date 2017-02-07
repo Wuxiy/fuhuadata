@@ -47,7 +47,7 @@ public class IndustryDataAction {
         }catch(Exception e){
             log.error("获取行业数据列表错误");
         }
-        ModelAndView model= new ModelAndView("knowledgeBase/industryDataList","industryDatas",result.getModel());
+        ModelAndView model= new ModelAndView("knowledgeBase/industryDataList","industryDataList",result.getModel());
         model.addObject("message","行业数据列表");
         return model;
     }
@@ -71,6 +71,25 @@ public class IndustryDataAction {
         return null;
     }
 
+
+
+    @RequestMapping(value = "/queryIndustryDataList",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "知识库-行业数据",methods = "条件查询")
+    public ModelAndView queryIndustryDataList(@RequestBody IndustryDataQuery industryDataQuery){
+        Result<List<IndustryData>> result = new Result<List<IndustryData>>();
+        try{
+            industryDataQuery.setPageSize(pageSize);
+            if(industryDataQuery.getIndex()==0){
+                industryDataQuery.setIndex(Integer.valueOf(page.trim()));
+            }
+            result=industryDataService.getIndustryDatasByPage(industryDataQuery);
+        }catch(Exception e){
+            log.error("条件查询行业数据失败",e);
+        }
+        ModelAndView model=new ModelAndView("knowledgeBase/industryDataList","industryDataList",result.getModel());
+        model.addObject("message","行业数据列表");
+        return  model;
+    }
 
 
 }

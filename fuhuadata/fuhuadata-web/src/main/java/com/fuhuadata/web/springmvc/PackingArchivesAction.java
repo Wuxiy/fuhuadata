@@ -6,6 +6,8 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.PackingArchivesService;
 import com.fuhuadata.web.util.SystemLogAnnotation;
+import com.sun.xml.internal.bind.InternalAccessorFactory;
+import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
@@ -66,6 +68,29 @@ public class PackingArchivesAction {
             log.error("添加包材档案失败");
         }
         return null;
+    }
+
+    /**
+     * 条件查询
+     * @param packingArchivesQuery
+     * @return
+     */
+    @RequestMapping(value = "/queryPackingArchivesList",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "知识库-包材档案",methods = "条件查询")
+    public ModelAndView queryPackingArchivesList(@RequestBody PackingArchivesQuery packingArchivesQuery){
+        Result<List<PackingArchives>> result = new Result<List<PackingArchives>>();
+        try{
+            packingArchivesQuery.setPageSize(pageSize);
+            if(packingArchivesQuery.getIndex()==0){
+                packingArchivesQuery.setIndex(Integer.valueOf(page.trim()));
+            }
+            result=packingArchivesService.getPackingArchivesByPage(packingArchivesQuery);
+        }catch(Exception e){
+            log.error("查询包材档案失败",e);
+        }
+        ModelAndView model = new ModelAndView("knowledgeBase/packingArchivesList","packingArchivesList",result.getModel());
+        model.addObject("message","包材档案列表");
+        return model;
     }
 
 }
