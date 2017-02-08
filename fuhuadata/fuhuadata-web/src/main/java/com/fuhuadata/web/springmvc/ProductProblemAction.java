@@ -48,7 +48,7 @@ public class ProductProblemAction {
             }catch(Exception e){
                 query.setIndex(1);
             }
-            result=productProblemService.getProductProblemsByPage(query);
+             result=productProblemService.getProductProblemsByPage(query);
         }catch(Exception e){
             log.error("获取产品问题列表问题错误",e);
         }

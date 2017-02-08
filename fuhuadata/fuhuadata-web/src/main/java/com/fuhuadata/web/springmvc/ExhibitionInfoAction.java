@@ -10,11 +10,13 @@ import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.text.ParseException;
 import java.util.List;
@@ -92,6 +94,24 @@ public class    ExhibitionInfoAction {
         }
         return null;
     }
+
+    @RequestMapping(value = "/Json",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "知识库-展会动态",methods = "执行新增")
+    @ResponseBody
+    public ResultPojo doAddExhibitionInfoJson(){
+        System.out.println("执行新增");
+        String jsonStr = ServletActionContext.getRequest().getParameter("info");
+        System.out.println(jsonStr);
+        try{
+            Result<ExhibitionInfo> result = exhibitionInfoService.addExhibitionInfo(null);
+            return result.getResultPojo();
+        }catch (Exception e){
+            log.error("添加展会动态记录失败",e);
+        }
+        return null;
+    }
+
+
 
     /**
      * 测试代码
