@@ -38,7 +38,7 @@
     </sql>
 
     <insert id="ADD" parameterClass="ExhibitionInfo">
-        insert into exhibition_info (exhibition_id, exhibition_name, sponsor,
+        insert into k_exhibition_info (exhibition_id, exhibition_name, sponsor,
         organizer, region, country,
         city, start_date, finish_date,
         exhibition_addr, exhibition_link, creator,
@@ -55,7 +55,7 @@
 
     <select id="GET-PAGE" resultMap="EXHIBITIONINFO-MAP" parameterClass="ExhibitionInfoQuery">
         <![CDATA[
-        SELECT * FROM exhibition_info
+        SELECT * FROM k_exhibition_info
         ]]>
         <isParameterPresent>
         <include refid="PAGE-COMMON"/>
@@ -65,7 +65,7 @@
 
     <select id="COUNT" resultClass="java.lang.Integer" parameterClass="ExhibitionInfoQuery">
         <![CDATA[
-        SELECT COUNT(*) FROM exhibition_info
+        SELECT COUNT(*) FROM k_exhibition_info
         ]]>
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>

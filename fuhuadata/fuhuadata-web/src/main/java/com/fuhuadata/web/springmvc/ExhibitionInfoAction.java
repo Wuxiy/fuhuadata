@@ -2,6 +2,7 @@ package com.fuhuadata.web.springmvc;
 
 
 import com.fuhuadata.domain.ExhibitionInfo;
+import com.fuhuadata.domain.SystemLog;
 import com.fuhuadata.domain.query.ExhibitionInfoQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
@@ -10,11 +11,13 @@ import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.text.ParseException;
 import java.util.List;
@@ -95,7 +98,7 @@ public class    ExhibitionInfoAction {
     }
 
 
-    
+
     /**
      * 测试代码
      * @return

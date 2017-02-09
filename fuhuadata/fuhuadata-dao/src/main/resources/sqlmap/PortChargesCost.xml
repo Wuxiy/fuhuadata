@@ -6,7 +6,7 @@
     <typeAlias alias="PortChargesCostQuery" type="com.fuhuadata.domain.query.PortChargesCostQuery"/>
 
     <resultMap id="PORTCHARGESCOST-MAP" class="PortChargesCost">
-        <result property="id" column="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result property="portId" column="port_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result column="item" property="item" jdbcType="VARCHAR" javaType="java.lang.String" />
         <result column="general_chemicals" property="generalChemicals" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="dangerous_product" property="dangerousProduct" jdbcType="VARCHAR" javaType="java.lang.String"/>
@@ -42,17 +42,17 @@
 
     <insert id ="ADD" parameterClass="PortChargesCost">
         INSERT INTO
-        port_charges_cost (item, general_chemicals, dangerous_product
+        k_port_charges_cost (item, general_chemicals, dangerous_product
         )
         VALUES (#item#, #generalChemicals#, #dangerousProduct#
         )
-        <selectKey resultClass="int" keyProperty="id">
-            SELECT @@IDENTITY AS id
+        <selectKey resultClass="int" keyProperty="portId">
+            SELECT @@IDENTITY AS port_id
         </selectKey>
     </insert>
 
     <update id="UPDATE" parameterClass="PortChargesCost">
-        UPDATE port_charges_cost
+        UPDATE k_port_charges_cost
         <dynamic prepend=" SET ">
             <isNotNull prepend=", " property="generalChemicals">
                 general_chemicals = #generalChemicals#
@@ -67,13 +67,13 @@
 
     <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
         <![CDATA[
-			DELETE FROM port_charges_cost WHERE id=#id#
+			DELETE FROM k_port_charges_cost WHERE id=#id#
 		]]>
     </delete>
 
     <select id="GET-PAGE" resultMap="PORTCHARGESCOST-MAP" parameterClass="PortChargesCostQuery">
         <![CDATA[
-            SELECT * FROM port_charges_cost
+            SELECT * FROM k_port_charges_cost
         ]]>
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>
@@ -83,7 +83,7 @@
 
     <select id="COUNT" resultClass="java.lang.Integer" parameterClass="PortChargesCostQuery">
         <![CDATA[
-			SELECT COUNT(*) FROM port_charges_cost
+			SELECT COUNT(*) FROM k_port_charges_cost
 		]]>
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>

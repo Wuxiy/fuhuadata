@@ -1,13 +1,17 @@
 package com.fuhuadata.domain;
 
+import com.fuhuadata.util.DateJsonDeserializer;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
 
 import java.util.Date;
+
 
 /**
  * 展会动态
  * Created by intanswer on 2017/1/13.
  */
-public class ExhibitionInfo {
+@SuppressWarnings("serial")
+public class ExhibitionInfo{
     private Integer exhibitionId;//展会id
 
     private String exhibitionName;
@@ -96,6 +100,7 @@ public class ExhibitionInfo {
         return startDate;
     }
 
+    @JsonDeserialize(using=DateJsonDeserializer.class)
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
@@ -104,6 +109,7 @@ public class ExhibitionInfo {
         return finishDate;
     }
 
+    @JsonDeserialize(using=DateJsonDeserializer.class)
     public void setFinishDate(Date finishDate) {
         this.finishDate = finishDate;
     }
@@ -136,6 +142,7 @@ public class ExhibitionInfo {
         return createTime;
     }
 
+    @JsonDeserialize(using=DateJsonDeserializer.class)
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }

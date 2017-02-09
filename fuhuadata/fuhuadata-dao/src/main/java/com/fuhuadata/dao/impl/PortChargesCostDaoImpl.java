@@ -18,13 +18,13 @@ public class PortChargesCostDaoImpl extends SqlMapClientTemplate implements Port
     public static final String COUNT="PORTCHARGESCOST.COUNT";
     @Override
     public PortChargesCost addPortChargesCost(PortChargesCost portChargesCost) {
-        portChargesCost.setId((Integer) this.insert(ADD,portChargesCost));
+        portChargesCost.setPortId((Integer) this.insert(ADD,portChargesCost));
         return portChargesCost;
     }
 
     @Override
     public int updatePortChargesCostById(int id, PortChargesCost portChargesCost) {
-        portChargesCost.setId(id);
+        portChargesCost.setPortId(id);
         return this.update(UPDATE,portChargesCost);
     }
 

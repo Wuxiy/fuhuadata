@@ -1,8 +1,6 @@
 package com.fuhuadata.web.util;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.Logger;
 
 import java.text.ParseException;

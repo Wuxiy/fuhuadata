@@ -7,14 +7,11 @@
     <title>展会新增</title>
     <link rel="stylesheet" type="text/css" href="/lib/css/bootstrap.css" />
     <script type="text/javascript" src="/lib/js/jquery.min.js"></script>
-
     <script src="/lib/js/jquery-2.1.0.js" type="text/javascript"></script>
     <script src="/lib/js/dropdown.js" type="text/javascript"></script>
     <script src="/lib/js/collapse.js" type="text/javascript"></script>
     <script src="/lib/js/transition.js" type="text/javascript"></script>
-
     <script type="text/javascript" src="/lib/js/jquery-2.1.0.js"></script>
-
 </head>
 
 <body class="bg-page">
@@ -245,21 +242,20 @@
 <script type="text/javascript">
     jQuery(function(){
         jQuery('#addexhibition .addbtn').on('click',function () {
-
             var data = {
-                "exhibitionName": "福华",
-                "exhibitionAddr": "天府广场",
-                "region":"area",
-                "country":"中国",
-                "city":"成都",
-                "startDate":"",
-                "finishDate":"",
-                "sponser": "通达",
-                "organier": "福斯达",
-                "exhibitionInfo": "展会动态",
-                "exhibitionLink": "123",
-                "creator":"Loyun",
-                "createTime":""
+                "exhibitionName": "test",
+                "sponsor": "test",
+                "city":"chengdu",
+                "region":"sichuan",
+                "country":"china",
+                "startDate":"2017-02-06 15:32:13",
+                "finishDate":"2017-02-06 15:32:13",
+                "creator":"wuxi",
+                "createTime":"2017-02-06 15:32:13",
+                "exhibitionLink":"http://www.baidu.com",
+                "exhibitionAddr": "test",
+                "organizer": "test",
+                "exhibitionInfo": "test"
             };
         console.log(data);
 
@@ -269,7 +265,7 @@
                 dataType:"json",
                 contentType:"application/json",
                 data:JSON.stringify(data),
-                success:function(data){
+                success:function(){
                     console.log(data);
                 }
             })
