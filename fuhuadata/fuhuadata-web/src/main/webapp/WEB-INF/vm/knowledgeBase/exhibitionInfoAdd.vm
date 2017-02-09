@@ -7,14 +7,14 @@
     <title>展会新增</title>
     <link rel="stylesheet" type="text/css" href="/lib/css/bootstrap.css" />
     <script type="text/javascript" src="/lib/js/jquery.min.js"></script>
-<<<<<<< HEAD
+
     <script src="/lib/js/jquery-2.1.0.js" type="text/javascript"></script>
     <script src="/lib/js/dropdown.js" type="text/javascript"></script>
     <script src="/lib/js/collapse.js" type="text/javascript"></script>
     <script src="/lib/js/transition.js" type="text/javascript"></script>
-=======
-    <script type="text/javascript" src="/lib/js/jquery-1.10.1.min.js"></script>
->>>>>>> 74b7290eaef048f077fadf01130e48785a088cfb
+
+    <script type="text/javascript" src="/lib/js/jquery-2.1.0.js"></script>
+
 </head>
 
 <body class="bg-page">
@@ -91,11 +91,11 @@
                 <div id="collapseFive" class="list-group collapse">
                     <a class="list-group-item" href="/productProblem/productProblemList">产品常见问题</a>
                     <a class="list-group-item" href="/marketTraining/marketTrainingList">营销培训</a>
-                    <a class="list-group-item" href="/knowledgeBase/customerProductPackingList">客户产品包装要求</a>
+                    <a class="list-group-item" href="/customerProductPacking/customerProductPackingList">客户产品包装要求</a>
                     <a class="list-group-item" href="/knowledgeBase/productArchivesList">标准产品档案</a>
-                    <a class="list-group-item" href="/knowledgeBase/packingCostList">包材成本参考</a>
+                    <a class="list-group-item" href="/packingArchives/packingArchivesList">包材成本参考</a>
                     <a class="list-group-item" href="/knowledgeBase/processCostList">加工成本参考</a>
-                    <a class="list-group-item" href="/knowledgeBase/encyclopediaList">百科</a>
+                    <a class="list-group-item" href="/customerEncyclopedia/customerEncyclopediaList">百科</a>
                     <a class="list-group-item" href="/exhibitionInfo/exhibitionInfoList">展会动态</a>
                     <a class="list-group-item" href="">其他</a>
                 </div>
@@ -247,13 +247,19 @@
         jQuery('#addexhibition .addbtn').on('click',function () {
 
             var data = {
-                "exhibitionName": "test",
-                "exhibitionAddr": "test",
-
-                "sponser": "test",
-                "organier": "test",
-                "exhibitionInfo": "test",
-                "exhibition": "test"
+                "exhibitionName": "福华",
+                "exhibitionAddr": "天府广场",
+                "region":"area",
+                "country":"中国",
+                "city":"成都",
+                "startDate":"",
+                "finishDate":"",
+                "sponser": "通达",
+                "organier": "福斯达",
+                "exhibitionInfo": "展会动态",
+                "exhibitionLink": "123",
+                "creator":"Loyun",
+                "createTime":""
             };
         console.log(data);
 

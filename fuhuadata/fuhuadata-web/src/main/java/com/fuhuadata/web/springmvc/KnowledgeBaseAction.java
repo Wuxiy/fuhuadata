@@ -32,7 +32,7 @@ public class KnowledgeBaseAction {
      * @return
      */
     @RequestMapping(value="/productProblem",method=RequestMethod.GET)
-    public ModelAndView productQuestionList(){return new ModelAndView("knowledgeBase/productProblem");}
+    public ModelAndView productQuestionList(){return new ModelAndView("knowledgeBase/productProblemList");}
 
     /**
      * 营销培训列表
