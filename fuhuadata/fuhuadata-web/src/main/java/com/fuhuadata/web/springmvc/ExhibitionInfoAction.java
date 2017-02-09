@@ -2,6 +2,7 @@ package com.fuhuadata.web.springmvc;
 
 
 import com.fuhuadata.domain.ExhibitionInfo;
+import com.fuhuadata.domain.SystemLog;
 import com.fuhuadata.domain.query.ExhibitionInfoQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
@@ -88,22 +89,6 @@ public class    ExhibitionInfoAction {
         System.out.println("执行新增");
         try{
             Result<ExhibitionInfo> result = exhibitionInfoService.addExhibitionInfo(exhibitionInfo);
-            return result.getResultPojo();
-        }catch (Exception e){
-            log.error("添加展会动态记录失败",e);
-        }
-        return null;
-    }
-
-    @RequestMapping(value = "/Json",method = RequestMethod.POST)
-    @SystemLogAnnotation(module = "知识库-展会动态",methods = "执行新增")
-    @ResponseBody
-    public ResultPojo doAddExhibitionInfoJson(){
-        System.out.println("执行新增");
-        String jsonStr = ServletActionContext.getRequest().getParameter("info");
-        System.out.println(jsonStr);
-        try{
-            Result<ExhibitionInfo> result = exhibitionInfoService.addExhibitionInfo(null);
             return result.getResultPojo();
         }catch (Exception e){
             log.error("添加展会动态记录失败",e);

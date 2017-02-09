@@ -242,23 +242,30 @@
 <script type="text/javascript">
     jQuery(function(){
         jQuery('#addexhibition .addbtn').on('click',function () {
-
             var data = {
                 "exhibitionName": "test",
+                "sponsor": "test",
+                "city":"chengdu",
+                "region":"sichuan",
+                "country":"china",
+                "startDate":"2017-02-06 15:32:13",
+                "finishDate":"2017-02-06 15:32:13",
+                "creator":"wuxi",
+                "createTime":"2017-02-06 15:32:13",
+                "exhibitionLink":"http://www.baidu.com",
                 "exhibitionAddr": "test",
-                "sponser": "test",
-                "organier": "test",
+                "organizer": "test",
                 "exhibitionInfo": "test"
             };
         console.log(data);
 
             jQuery.ajax({
                 type:"POST",
-                url:"Json",
+                url:"doAddExhibitionInfo",
                 dataType:"json",
                 contentType:"application/json",
-                data:{'info':data},
-                success:function(data){
+                data:JSON.stringify(data),
+                success:function(){
                     console.log(data);
                 }
             })

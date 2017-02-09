@@ -19,7 +19,7 @@
 		       <property name="messageConverters">  
 		           <list>  
 		               <!-- Support JSON -->   
-		               <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>  
+		               <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
 		           </list>  
 		       </property>  
 		 </bean>  
@@ -29,9 +29,9 @@
 		               <!-- Support JSON -->   
 		               <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>  
 		           </list>  
-		       </property>  
-		 </bean>  
-		 <!--  <context:annotation-config />  
+		       </property>
+		 </bean>
+		 <!--  <context:annotation-config />
     	 <mvc:annotation-driven /> -->
 	    
          <!-- 配置视图解析器 如何把handler 方法返回值解析为实际的物理视图 -->

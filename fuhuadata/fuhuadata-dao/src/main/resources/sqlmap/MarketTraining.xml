@@ -33,7 +33,7 @@
         </dynamic>
     </sql>
         <insert id="ADD" parameterClass="MarketTraining" >
-            insert into market_training (tran_id, product_id, title,
+            insert into k_market_training (tran_id, product_id, title,
             product_type, user_id, upload_date,
             download)
             values (#tranId#, #productId#, #title#,
@@ -46,7 +46,7 @@
 
     <select id="GET-PAGE" resultMap="MARKETTRAINING-MAP" parameterClass="MarketTrainingQuery">
         <![CDATA[
-        SELECT * FROM market_training
+        SELECT * FROM k_market_training
         ]]>
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>
@@ -56,7 +56,7 @@
 
     <select id="COUNT" resultClass="java.lang.Integer" parameterClass="MarketTrainingQuery">
         <![CDATA[
-        SELECT COUNT(*) FROM market_training
+        SELECT COUNT(*) FROM k_market_training
         ]]>
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>

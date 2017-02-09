@@ -24,7 +24,7 @@
 
     <insert id="ADD" parameterClass="PreparationProcessCost">
         INSERT INTO
-        preparation_process_cost (mcost_id, type, cost_term,
+        k_preparation_process_cost (mcost_id, type, cost_term,
         unit_cost, price_end, remarks)
         VALUES (#mcostId#, #type#, #costTerm#,
         #unitCost#, #priceEnd#, #remarks#)
@@ -33,7 +33,7 @@
         </selectKey>
     </insert>
     <update id="UPDATE" parameterClass="PreparationProcessCost">
-        UPDATE preparation_process_cost
+        UPDATE k_preparation_process_cost
         <dynamic prepend=" SET ">
             <isNotNull prepend=", " property="costTerm">cost_term=#costTerm#</isNotNull>
             <isNotNull prepend=", " property="unitCost">modify_time=#unitCost#</isNotNull>
@@ -45,13 +45,13 @@
 
     <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
         <![CDATA[
-            DELETE FROM preparation_process_cost WHERE mcost_id = #mcostId#
+            DELETE FROM k_preparation_process_cost WHERE mcost_id = #mcostId#
         ]]>
     </delete>
 
     <select id="GET-PAGE" resultMap="PREPARATIONPROCESSCOST-MAP" parameterClass="PreparationProcessCostQuery">
         <![CDATA[
-            SELECT * FROM preparation_process_cost
+            SELECT * FROM k_preparation_process_cost
         ]]>
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>
@@ -61,7 +61,7 @@
 
     <select id="COUNT" resultClass="java.lang.Integer" parameterClass="PreparationProcessCostQuery">
         <![CDATA[
-            SELECT COUNT(id) FROM preparation_process_cost
+            SELECT COUNT(id) FROM k_preparation_process_cost
         ]]>
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>
