@@ -56,6 +56,7 @@ public class    ExhibitionInfoAction {
         }
         ModelAndView model = new ModelAndView("knowledgeBase/exhibitionInfoList","exhibitionInfoList",result.getModel());
         model.addObject("message","展会动态列表");
+        model.addObject("queryCondition",null);
         return model;
     }
 
@@ -78,7 +79,7 @@ public class    ExhibitionInfoAction {
         return model;
     }
 
-    @RequestMapping(value = "/queryExhibitionInfo",method = RequestMethod.GET)
+    @RequestMapping(value = "/queryExhibitionInfo",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "知识库-展会动态",methods = "条件查询")
     public ModelAndView queryExhibitionInfo(String index,String exhibitionName){
         ExhibitionInfoQuery exhibitionInfoQuery = new ExhibitionInfoQuery();
@@ -127,40 +128,4 @@ public class    ExhibitionInfoAction {
         return null;
     }
 
-
-
-    /**
-     * 测试代码
-     * @return
-     */
-    @RequestMapping(value = "/test",method = RequestMethod.GET)
-    @ResponseBody
-    public ResultPojo doAddExhibitionInfoTest() throws ParseException {
-        System.out.print("执行新增");
-        //测试代码
-        ExhibitionInfo ex=new ExhibitionInfo();
-        ex.setExhibitionName("福华");
-        ex.setSponsor("通达");
-        ex.setOrganizer("福斯达");
-        ex.setCity("成都");
-        ex.setRegion("area");
-        ex.setCountry("china");
-        Date startDate = DateUtil.convertStringToDate("yyyy-MM-dd HH:mm:ss","2017-02-6 15:32:13");
-        ex.setStartDate(startDate);
-        ex.setFinishDate(startDate);
-        ex.setCreator("wuxi");
-        ex.setCreateTime(startDate);
-        ex.setExhibitionAddr("天府广场");
-        ex.setExhibitionInfo("展会动态");
-        ex.setExhibitionLink("123");
-        try{
-            Result<ExhibitionInfo> result = exhibitionInfoService.addExhibitionInfo(ex);
-            return result.getResultPojo();
-        }catch (Exception e){
-            log.error("添加展会动态记录失败",e);
-        }
-        return null;
-    }
-
-    
 }
