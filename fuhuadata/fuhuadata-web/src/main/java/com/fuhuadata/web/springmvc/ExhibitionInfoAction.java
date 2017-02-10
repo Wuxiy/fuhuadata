@@ -36,6 +36,7 @@ public class    ExhibitionInfoAction {
     private Integer pageSize=5;
     private String page="1";
 
+
     @SuppressWarnings("unused")
     @RequestMapping(value = "/exhibitionInfoList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "知识库-展会动态",methods = "展会列表")
@@ -161,7 +162,5 @@ public class    ExhibitionInfoAction {
         return null;
     }
 
-
-
-
+    
 }

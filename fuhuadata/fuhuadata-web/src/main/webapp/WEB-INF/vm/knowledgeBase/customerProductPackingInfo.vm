@@ -84,14 +84,14 @@
             </li>
             <li class="active shadow-in" title="知识库">
                 <div id="collapseFive" class="list-group collapse">
-                    <a class="list-group-item" href="faq_list.html">产品常见问题</a>
-                    <a class="list-group-item" href="train_list.html">营销培训</a>
-                    <a class="list-group-item" href="product_list.html">客户产品包装要求</a>
-                    <a class="list-group-item" href="product_list.html">标准产品档案</a>
-                    <a class="list-group-item" href="pack-price_list.html">包材成本参考</a>
-                    <a class="list-group-item" href="finished-cost_list.html">加工成本参考</a>
-                    <a class="list-group-item" href="encyclopedia_list.html">百科</a>
-                    <a class="list-group-item" href="expo_list.html">展会动态</a>
+                    <a class="list-group-item" href="/productProblem/productProblemList">产品常见问题</a>
+                    <a class="list-group-item" href="/marketTraining/marketTrainingList">营销培训</a>
+                    <a class="list-group-item" href="/customerProductPacking/customerProductPackingList">客户产品包装要求</a>
+                    <a class="list-group-item" href="/knowledgeBase/productArchivesList">标准产品档案</a>
+                    <a class="list-group-item" href="/packingArchives/packingArchivesList">包材成本参考</a>
+                    <a class="list-group-item" href="/knowledgeBase/processCostList">加工成本参考</a>
+                    <a class="list-group-item" href="/customerEncyclopedia/customerEncyclopediaList">百科</a>
+                    <a class="list-group-item" href="/exhibitionInfo/exhibitionInfoList">展会动态</a>
                     <a class="list-group-item" href="">其他</a>
                 </div>
                 <a data-toggle="collapse" href="#collapseFive" data-parent="#nav-affix">
@@ -137,15 +137,7 @@
             <!--表格开始-->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <div class="btn-group btn-group-xs panel-heading-btn pull-right">
-                        <a class="btn btn-primary" href="AddcustomerProductPacking">
-                            <span class="glyphicon glyphicon-plus"></span>
-                            新增
-                        </a>
-                        <a class="btn btn-primary" href="">
-                            编辑
-                        </a>
-                    </div>
+
                     <h3 class="panel-title">
                         产品档案
                     </h3>
