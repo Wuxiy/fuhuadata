@@ -100,7 +100,6 @@ public class ExhibitionInfo{
         return startDate;
     }
 
-    @JsonDeserialize(using=DateJsonDeserializer.class)
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
@@ -109,7 +108,6 @@ public class ExhibitionInfo{
         return finishDate;
     }
 
-    @JsonDeserialize(using=DateJsonDeserializer.class)
     public void setFinishDate(Date finishDate) {
         this.finishDate = finishDate;
     }

@@ -12,8 +12,8 @@
         <result column="region" property="region" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="country" property="country" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="city" property="city" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="start_date" property="startDate" jdbcType="DATETIME" javaType="java.sql.Timestamp"/>
-        <result column="finish_date" property="finishDate" jdbcType="DATETIME" javaType="java.sql.Timestamp"/>
+            <result column="start_date" property="startDate" jdbcType="DATE" javaType="java.sql.Date"/>
+        <result column="finish_date" property="finishDate" jdbcType="DATE" javaType="java.sql.Date"/>
         <result column="exhibition_addr" property="exhibitionAddr" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="exhibition_link" property="exhibitionLink" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="exhibitionInfo" column="exhibition_info" jdbcType="VARCHAR" javaType="java.lang.String"/>

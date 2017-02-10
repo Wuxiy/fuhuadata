@@ -59,7 +59,7 @@ public class    ExhibitionInfoAction {
     }
 
     @RequestMapping(value = "/queryExhibitionInfoList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-展会动态",methods = "展会列表")
+    @SystemLogAnnotation(module = "知识库-展会动态",methods = "条件查询")
     public ModelAndView queryExhibitionInfoList(@RequestBody ExhibitionInfoQuery exhibitionInfoQuery){
         Result<List<ExhibitionInfo>> result = new Result<List<ExhibitionInfo>>();
         try{
@@ -72,6 +72,35 @@ public class    ExhibitionInfoAction {
             log.error("查询获取展会信息失败",e);
         }
         ModelAndView model = new ModelAndView("knowledgeBase/exhibitionInfoList","exhibitionInfoList",result.getModel());
+        model.addObject("totalItem",result.getTotalItem());
+        model.addObject("message","展会动态列表");
+        return model;
+    }
+
+    @RequestMapping(value = "/queryExhibitionInfo",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "知识库-展会动态",methods = "条件查询")
+    public ModelAndView queryExhibitionInfo(String index,String exhibitionName){
+        ExhibitionInfoQuery exhibitionInfoQuery = new ExhibitionInfoQuery();
+        Result<List<ExhibitionInfo>> result = new Result<List<ExhibitionInfo>>();
+        try{
+            exhibitionInfoQuery.setPageSize(pageSize);
+            //out
+            System.out.println(index);
+            System.out.println(exhibitionName);
+            if(index==null){
+                exhibitionInfoQuery.setIndex(Integer.valueOf(page.trim()));
+            }else{
+            exhibitionInfoQuery.setIndex(Integer.valueOf(index.trim()));
+            }
+            exhibitionInfoQuery.setExhibitionName(exhibitionName);
+            result=exhibitionInfoService.getExhibitionInfosByPage(exhibitionInfoQuery);
+        }catch (Exception e){
+            log.error("条件查询获取展会信息失败",e);
+        }
+        ModelAndView model = new ModelAndView("knowledgeBase/exhibitionInfoList","exhibitionInfoList",result.getModel());
+        model.addObject("totalItem",result.getTotalItem());
+        if(exhibitionName!=null){
+        model.addObject("queryCondition",exhibitionInfoQuery);}
         model.addObject("message","展会动态列表");
         return model;
     }
@@ -81,6 +110,7 @@ public class    ExhibitionInfoAction {
     public ModelAndView addExhibitionInfo(){
         return new ModelAndView("knowledgeBase/exhibitionInfoAdd");
     }
+
 
     @RequestMapping(value = "/doAddExhibitionInfo",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "知识库-展会动态",methods = "执行新增")
