@@ -148,74 +148,74 @@
                         <div class="form-group ">
                             <label class="col-xs-1 control-label">展会名称</label>
                             <div class="col-xs-6">
-                                <textarea class="form-control" rows="2"></textarea>
+                                <textarea class="form-control" rows="2" id="exhibitionName"></textarea>
                             </div>
                         </div>
                         <div class="form-group ">
                             <label class="col-xs-1 control-label">地区分类</label>
                             <div class="col-xs-1">
-                                <select class="form-control">
-                                    <option value="">东亚</option>
-                                    <option value="">西欧</option>
-                                    <option value="">东欧</option>
-                                    <option value="">大洋洲</option>
-                                    <option value="">非洲</option>
-                                    <option value="">南美洲</option>
+                                <select class="form-control" name="items" id="region">
+                                    <option value="东亚">东亚</option>
+                                    <option value="西欧">西欧</option>
+                                    <option value="东欧">东欧</option>
+                                    <option value="大洋洲">大洋洲</option>
+                                    <option value="非洲">非洲</option>
+                                    <option value="南美洲">南美洲</option>
                                 </select>
                             </div>
                             <label class="pull-left control-label">国家</label>
                             <div class="col-xs-1">
-                                <select class="form-control">
-                                    <option value="">韩国</option>
-                                    <option value="">日本</option>
-                                    <option value="">朝鲜</option>
+                                <select class="form-control" id="country">
+                                    <option value="韩国">韩国</option>
+                                    <option value="日本">日本</option>
+                                    <option value="朝鲜">朝鲜</option>
                                 </select>
                             </div>
                             <label class="pull-left control-label">城市</label>
                             <div class="col-xs-1">
-                                <select class="form-control">
-                                    <option value="">成都</option>
-                                    <option value="">西藏</option>
-                                    <option value="">北京</option>
+                                <select class="form-control" id="city">
+                                    <option value="成都">成都</option>
+                                    <option value="西藏">西藏</option>
+                                    <option value="北京">北京</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-xs-1 control-label">详细地址</label>
                             <div class="col-xs-6">
-                                <textarea class="form-control" rows="3"></textarea>
+                                <textarea class="form-control" rows="3" id="exhibitionAddr"></textarea>
                             </div>
                         </div>
                         <div class="form-group ">
                             <label class="col-xs-1 control-label">开始时间</label>
                             <div class="col-xs-2">
-                                <input type="text" class="form-control" />
+                                <input type="date" class="form-control" id="startDate"/>
                             </div>
                             <label class="col-xs-1 control-label">结束时间</label>
                             <div class="col-xs-2">
-                                <input type="text" class="form-control" />
+                                <input type="date" class="form-control" id="finishDate"/>
                             </div>
                         </div>
                         <div class="form-group ">
                             <label class="col-xs-1 control-label">主办方</label>
                             <div class="col-xs-2">
-                                <input type="text" class="form-control" />
+                                <input type="text" class="form-control" id="sponsor"/>
                             </div>
                             <label class="col-xs-1 control-label">承办方</label>
                             <div class="col-xs-2">
-                                <input type="text" class="form-control" />
+                                <input type="text" class="form-control" id="organizer"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-xs-1 control-label">展会介绍</label>
                             <div class="col-xs-6">
-                                <textarea class="form-control" rows="4"></textarea>
+                                <textarea class="form-control" rows="4" id="exhibitionInfo"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-xs-1 control-label">展会链接</label>
                             <div class="col-xs-6">
-                                <textarea class="form-control" rows="2" placeholder="http://"></textarea>
+                                <textarea class="form-control" rows="2" placeholder="http://" id="exhibitionLink"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -240,24 +240,33 @@
 
 </body>
 <script type="text/javascript">
+
     jQuery(function(){
-        jQuery('#addexhibition .addbtn').on('click',function () {
+        jQuery('#addexhibition .addbtn').on('click',function (e) {
+            var date = new Date();
+            var year = date.getFullYear();
+            var month = date.getMonth()+1;
+            var day = date.getDate();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var createTime = year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second;
+            alert(createTime);
             var data = {
-                "exhibitionName": "test",
-                "sponsor": "test",
-                "city":"chengdu",
-                "region":"sichuan",
-                "country":"china",
-                "startDate":"2017-02-06",
-                "finishDate":"2017-02-06",
-                "creator":"wuxi",
-                "createTime":"2017-02-06 15:32:13",
-                "exhibitionLink":"http://www.baidu.com",
-                "exhibitionAddr": "test",
-                "organizer": "test",
-                "exhibitionInfo": "test"
+                "exhibitionName": jQuery('#exhibitionName').val(),
+                "sponsor":jQuery('#sponsor').val(),
+                "city":jQuery('#city').val(),
+                "region":jQuery('#region').val(),
+                "country":jQuery('#country').val(),
+                "startDate":jQuery('#startDate').val(),
+                "finishDate":jQuery('#finishDate').val(),
+                "creator":"test2",
+                "createTime":createTime,
+                "exhibitionLink":jQuery('#exhibitionLink').val(),
+                "exhibitionAddr": jQuery('#exhibitionAddr').val(),
+                "organizer": jQuery('#organizer').val(),
+                "exhibitionInfo": jQuery('#exhibitionInfo').val()
             };
-        console.log(data);
 
             jQuery.ajax({
                 type:"POST",

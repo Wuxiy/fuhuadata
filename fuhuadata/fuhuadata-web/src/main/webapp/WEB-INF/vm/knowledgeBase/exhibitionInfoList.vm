@@ -156,9 +156,9 @@
                         <div class="form-group ">
                             <div class="col-xs-2 pull-right">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="请输入关键词查找">
+                                    <input type="text" class="form-control" placeholder="请输入关键词查找" id="search">
                                     <div class="input-group-btn">
-                                        <button type="button" class="btn btn-primary btn-xs">
+                                        <button type="button" class="btn btn-primary btn-xs" onclick="test()">
                                             <span class="glyphicon glyphicon-search"></span>
                                             搜索
                                         </button>
@@ -225,7 +225,7 @@
                     <!--表格结束-->
                     <!--分页导航开始-->
                     <div class="form-group pull-left table-pagination">
-                        共<span>123</span>条记录，<span>130</span>页，跳转到第&nbsp;<input class="form-control pagination-input" type="number"/>&nbsp;页
+                        共<span></span>条记录，<span>130</span>页，跳转到第&nbsp;<input class="form-control pagination-input" type="number"/>&nbsp;页
                         <button class="btn btn-xs btn-primary">确定</button>
                     </div>
                     <ul class="pagination pull-right table-pagination">
@@ -253,4 +253,27 @@
     </small>
 </div>
 </body>
+<script type="text/javascript">
+
+    function test(){
+        var search = jQuery("#search").val();
+        var data = {
+            "index":1,
+            "exhibitionName":jQuery("#search").val()
+        }
+        alert(search);
+        jQuery.ajax({
+            type:"GET",
+            url:'queryExhibitionInfo',
+            dataType:"json",
+            data:data,
+            contentType:"application/json",
+            success:function(){
+                window.location.reload();
+                console.log("233");
+        }
+    })
+    }
+
+</script>
 </html>
