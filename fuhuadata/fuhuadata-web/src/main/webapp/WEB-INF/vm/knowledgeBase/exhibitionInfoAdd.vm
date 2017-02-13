@@ -251,7 +251,6 @@
             var minute = date.getMinutes();
             var second = date.getSeconds();
             var createTime = year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second;
-            alert(createTime);
             var data = {
                 "exhibitionName": jQuery('#exhibitionName').val(),
                 "sponsor":jQuery('#sponsor').val(),
@@ -275,7 +274,8 @@
                 contentType:"application/json",
                 data:JSON.stringify(data),
                 success:function(){
-                    console.log(data);
+                    alert("添加成功");
+                    location.reload();
                 }
             })
             return false;

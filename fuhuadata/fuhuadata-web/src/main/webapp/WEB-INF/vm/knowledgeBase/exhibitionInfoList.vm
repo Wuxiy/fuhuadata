@@ -187,7 +187,7 @@
                             <th class="col-xs-1 text-center">创建时间</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="a">
                         <tr>
                             <td>1</td>
                             <td>2016全国植保会</td>
@@ -254,19 +254,21 @@
 </div>
 </body>
 <script type="text/javascript">
+
     function test(){
+        var a = document.getElementById("a");
         var search = jQuery("#search").val();
         var data = {
             "index":"1",
             "exhibitionName":jQuery("#search").val()
         }
-        alert(search);
+        a.innerHTML = '';
         jQuery.ajax({
             type:"GET",
             url:'queryExhibitionInfo',
             data:data,
             success:function(){
-                console.log("233");
+                alert("查询成功");
         }
     })
     }
