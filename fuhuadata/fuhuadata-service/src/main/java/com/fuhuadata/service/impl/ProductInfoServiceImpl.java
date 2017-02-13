@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * @date 2017-01-24 10:45:54
  */
 public class ProductInfoServiceImpl implements ProductInfoService {
-	
+
     private ProductInfoManager productInfoManager;
     public Result<ProductInfo> addProductInfo(ProductInfo productInfo) {
 		Result<ProductInfo> result = new Result<ProductInfo>();
