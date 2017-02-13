@@ -1,0 +1,2 @@
+#set($title="Layout Test")
+Hello Velocity Layout!

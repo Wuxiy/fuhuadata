@@ -9,6 +9,7 @@
     <script src="/lib/js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
     <script src="/lib/js/dropdown.js" type="text/javascript" charset="utf-8"></script>
     <script src="/lib/js/collapse.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/lib/js/tab.js" type="text/javascript" charset="utf-8"></script>
     <script src="/lib/js/transition.js" type="text/javascript" charset="utf-8"></script>
 </head>
 
@@ -80,14 +81,14 @@
             </li>
             <li class="active shadow-in" title="知识库">
                 <div id="collapseFive" class="list-group collapse">
-                    <a class="list-group-item" href="/knowledgeBase/productQuestionList">产品常见问题</a>
-                    <a class="list-group-item" href="/knowledgeBase/marketTrainList">营销培训</a>
-                    <a class="list-group-item" href="/knowledgeBase/customerProductPackingList">客户产品包装要求</a>
+                    <a class="list-group-item" href="/productProblem/productProblemList">产品常见问题</a>
+                    <a class="list-group-item" href="/marketTraining/marketTrainingList">营销培训</a>
+                    <a class="list-group-item" href="/customerProductPacking/customerProductPackingList">客户产品包装要求</a>
                     <a class="list-group-item" href="/knowledgeBase/productArchivesList">标准产品档案</a>
-                    <a class="list-group-item" href="/knowledgeBase/packingCostList">包材成本参考</a>
+                    <a class="list-group-item" href="/packingArchives/packingArchivesList">包材成本参考</a>
                     <a class="list-group-item" href="/knowledgeBase/processCostList">加工成本参考</a>
-                    <a class="list-group-item" href="/knowledgeBase/encyclopediaList">百科</a>
-                    <a class="list-group-item" href="/knowledgeBase/exhibitionDynamicList">展会动态</a>
+                    <a class="list-group-item" href="/customerEncyclopedia/customerEncyclopediaList">百科</a>
+                    <a class="list-group-item" href="/exhibitionInfo/exhibitionInfoList">展会动态</a>
                     <a class="list-group-item" href="">其他</a>
                 </div>
                 <a data-toggle="collapse" href="#collapseFive" data-parent="#nav-affix">
@@ -198,217 +199,7 @@
                             <td>NUFARM</td>
                             <td>xxxx</td>
                             <td>草甘膦原药</td>
-                            <td><a href="products.html" target="_blank">95%草甘膦原药</a></td>
-                            <td>杭州海辰</td>
-                            <td><a href="packs.html" target="_blank">25KG</a></td>
-                            <td>编织袋</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>NUFARM</td>
-                            <td>xxxx</td>
-                            <td>草甘膦原药</td>
-                            <td><a href="products.html" target="_blank">95%草甘膦原药</a></td>
-                            <td>杭州海辰</td>
-                            <td><a href="packs.html" target="_blank">25KG</a></td>
-                            <td>编织袋</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>NUFARM</td>
-                            <td>xxxx</td>
-                            <td>草甘膦原药</td>
-                            <td><a href="products.html" target="_blank">95%草甘膦原药</a></td>
-                            <td>杭州海辰</td>
-                            <td><a href="packs.html" target="_blank">25KG</a></td>
-                            <td>编织袋</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>NUFARM</td>
-                            <td>xxxx</td>
-                            <td>草甘膦原药</td>
-                            <td><a href="products.html" target="_blank">95%草甘膦原药</a></td>
-                            <td>杭州海辰</td>
-                            <td><a href="packs.html" target="_blank">25KG</a></td>
-                            <td>编织袋</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>NUFARM</td>
-                            <td>xxxx</td>
-                            <td>草甘膦原药</td>
-                            <td><a href="products.html" target="_blank">95%草甘膦原药</a></td>
-                            <td>杭州海辰</td>
-                            <td><a href="packs.html" target="_blank">25KG</a></td>
-                            <td>编织袋</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>NUFARM</td>
-                            <td>xxxx</td>
-                            <td>草甘膦原药</td>
-                            <td><a href="products.html" target="_blank">95%草甘膦原药</a></td>
-                            <td>杭州海辰</td>
-                            <td><a href="packs.html" target="_blank">25KG</a></td>
-                            <td>编织袋</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>NUFARM</td>
-                            <td>xxxx</td>
-                            <td>草甘膦原药</td>
-                            <td><a href="products.html" target="_blank">95%草甘膦原药</a></td>
-                            <td>杭州海辰</td>
-                            <td><a href="packs.html" target="_blank">25KG</a></td>
-                            <td>编织袋</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>NUFARM</td>
-                            <td>xxxx</td>
-                            <td>草甘膦原药</td>
-                            <td><a href="products.html" target="_blank">95%草甘膦原药</a></td>
-                            <td>杭州海辰</td>
-                            <td><a href="packs.html" target="_blank">25KG</a></td>
-                            <td>编织袋</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>NUFARM</td>
-                            <td>xxxx</td>
-                            <td>草甘膦原药</td>
-                            <td><a href="products.html" target="_blank">95%草甘膦原药</a></td>
-                            <td>杭州海辰</td>
-                            <td><a href="packs.html" target="_blank">25KG</a></td>
-                            <td>编织袋</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>NUFARM</td>
-                            <td>xxxx</td>
-                            <td>草甘膦原药</td>
-                            <td><a href="products.html" target="_blank">95%草甘膦原药</a></td>
-                            <td>杭州海辰</td>
-                            <td><a href="packs.html" target="_blank">25KG</a></td>
-                            <td>编织袋</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>NUFARM</td>
-                            <td>xxxx</td>
-                            <td>草甘膦原药</td>
-                            <td><a href="products.html" target="_blank">95%草甘膦原药</a></td>
-                            <td>杭州海辰</td>
-                            <td><a href="packs.html" target="_blank">25KG</a></td>
-                            <td>编织袋</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>NUFARM</td>
-                            <td>xxxx</td>
-                            <td>草甘膦原药</td>
-                            <td><a href="products.html" target="_blank">95%草甘膦原药</a></td>
-                            <td>杭州海辰</td>
-                            <td><a href="packs.html" target="_blank">25KG</a></td>
-                            <td>编织袋</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>NUFARM</td>
-                            <td>xxxx</td>
-                            <td>草甘膦原药</td>
-                            <td><a href="products.html" target="_blank">95%草甘膦原药</a></td>
-                            <td>杭州海辰</td>
-                            <td><a href="packs.html" target="_blank">25KG</a></td>
-                            <td>编织袋</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>NUFARM</td>
-                            <td>xxxx</td>
-                            <td>草甘膦原药</td>
-                            <td><a href="products.html" target="_blank">95%草甘膦原药</a></td>
-                            <td>杭州海辰</td>
-                            <td><a href="packs.html" target="_blank">25KG</a></td>
-                            <td>编织袋</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>NUFARM</td>
-                            <td>xxxx</td>
-                            <td>草甘膦原药</td>
-                            <td><a href="products.html" target="_blank">95%草甘膦原药</a></td>
-                            <td>杭州海辰</td>
-                            <td><a href="packs.html" target="_blank">25KG</a></td>
-                            <td>编织袋</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>NUFARM</td>
-                            <td>xxxx</td>
-                            <td>草甘膦原药</td>
-                            <td><a href="products.html" target="_blank">95%草甘膦原药</a></td>
-                            <td>杭州海辰</td>
-                            <td><a href="packs.html" target="_blank">25KG</a></td>
-                            <td>编织袋</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>NUFARM</td>
-                            <td>xxxx</td>
-                            <td>草甘膦原药</td>
-                            <td><a href="products.html" target="_blank">95%草甘膦原药</a></td>
-                            <td>杭州海辰</td>
-                            <td><a href="packs.html" target="_blank">25KG</a></td>
-                            <td>编织袋</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>NUFARM</td>
-                            <td>xxxx</td>
-                            <td>草甘膦原药</td>
-                            <td><a href="products.html" target="_blank">95%草甘膦原药</a></td>
-                            <td>杭州海辰</td>
-                            <td><a href="packs.html" target="_blank">25KG</a></td>
-                            <td>编织袋</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>NUFARM</td>
-                            <td>xxxx</td>
-                            <td>草甘膦原药</td>
-                            <td><a href="products.html" target="_blank">95%草甘膦原药</a></td>
-                            <td>杭州海辰</td>
-                            <td><a href="packs.html" target="_blank">25KG</a></td>
-                            <td>编织袋</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>NUFARM</td>
-                            <td>xxxx</td>
-                            <td>草甘膦原药</td>
-                            <td><a href="products.html" target="_blank">95%草甘膦原药</a></td>
-                            <td>杭州海辰</td>
-                            <td><a href="packs.html" target="_blank">25KG</a></td>
-                            <td>编织袋</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>NUFARM</td>
-                            <td>xxxx</td>
-                            <td>草甘膦原药</td>
-                            <td><a href="products.html" target="_blank">95%草甘膦原药</a></td>
-                            <td>杭州海辰</td>
-                            <td><a href="packs.html" target="_blank">25KG</a></td>
-                            <td>编织袋</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>NUFARM</td>
-                            <td>xxxx</td>
-                            <td>草甘膦原药</td>
-                            <td><a href="products.html" target="_blank">95%草甘膦原药</a></td>
+                            <td><a href="infocustomerProductPacking" >95%草甘膦原药</a></td>
                             <td>杭州海辰</td>
                             <td><a href="packs.html" target="_blank">25KG</a></td>
                             <td>编织袋</td>

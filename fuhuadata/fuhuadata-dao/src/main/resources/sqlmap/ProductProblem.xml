@@ -13,7 +13,7 @@
         <result column="solution" property="solution" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="create_user_id" property="createUserId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result column="create_user_name" property="createUserName" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" javaType="java.sql.Date"/>
+        <result column="create_time" property="createTime" jdbcType="DATETIME" javaType="java.sql.Timestamp"/>
         <result column="remarks" property="remarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>
     <sql id="Base_Column_List" >
@@ -33,8 +33,8 @@
     </sql>
 
     <insert id="ADD" parameterClass="ProductProblem">
-        InSERT INTO
-        product_problem(problem_id, product_id, product_type,
+        INSERT INTO
+        k_product_problem(problem_id, product_id, product_type,
         problem_content, solution, create_user_id,
         create_user_name, create_time, remarks
         )
@@ -48,7 +48,7 @@
     </insert>
 
     <update id="UPDATE" parameterClass="ProductProblem">
-        UPDATE product_problem
+        UPDATE k_product_problem
         <dynamic prepend=" SET ">
             <isNotNull prepend=", " property="solution">solution = #solution#</isNotNull>
             <isNotNull prepend=", " property="remarks">remarks = #remarks#</isNotNull>
@@ -58,13 +58,13 @@
 
     <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
         <![CDATA[
-			DELETE FROM product_problem WHERE problem_id=#id#
+			DELETE FROM k_product_problem WHERE problem_id=#id#
 		]]>
     </delete>
 
     <select id="GET-PAGE" resultMap="PRODUCTPROBLEM-MAP" parameterClass="ProductProblemQuery">
         <![CDATA[
-			SELECT * FROM product_problem
+			SELECT * FROM k_product_problem
 		]]>
         <isParameterPresent>
             <include refid="PAGE-COMMON" />
@@ -74,7 +74,7 @@
 
     <select id="COUNT" resultClass="java.lang.Integer" parameterClass="ProductProblemQuery">
         <![CDATA[
-        SELECT COUNT(*) FROM product_problem
+        SELECT COUNT(*) FROM k_product_problem
         ]]>
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>

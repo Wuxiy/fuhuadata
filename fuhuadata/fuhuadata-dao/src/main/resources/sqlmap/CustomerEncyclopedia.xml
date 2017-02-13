@@ -18,10 +18,10 @@
         <result column="business_scope" property="businessScope" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="create_user_id" property="createUserId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result column="create_user_name" property="createUserName" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" javaType="java.sql.Date" />
+        <result column="create_time" property="createTime" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
         <result column="lastmodify_user_id" property="lastmodifyUserId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result column="lastmodify_user_name" property="lastmodifyUserName" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" javaType="java.sql.Date"/>
+        <result column="modify_time" property="modifyTime" jdbcType="DATETME" javaType="java.sql.Date"/>
         <result column="remarks" property="remarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="company_info" property="companyInfo" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
         <result column="develop_his" property="developHis" jdbcType="LONGVARCHAR" javaType="java.lang.String"/>
@@ -53,7 +53,7 @@
 
     <insert id="ADD" parameterClass="CustomerEncyclopedia">
         INSERT INTO
-        customer_encyclopedia (ency_id, company_name, type,
+        k_customer_encyclopedia (ency_id, company_name, type,
         is_full, area, country,
         company_property, regist_fund, regist_addr,
         business_scope, create_user_id, create_user_name,
@@ -73,7 +73,7 @@
     </insert>
 
     <update id="UPDATE" parameterClass="CustomerEncyclopedia">
-            UPDATE customer_encyclopedia
+            UPDATE k_customer_encyclopedia
             <dynamic prepend=" SET ">
                 <isNotNull prepend=", " property="companyName">
                     company_name = #companyName#
@@ -139,12 +139,12 @@
 
     <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
         <![CDATA[
-        DELETE FROM customer_encyclopedia WHERE ency_id=#id#
+        DELETE FROM k_customer_encyclopedia WHERE ency_id=#id#
     ]]>
     </delete>
     <select id="GET-PAGE" resultMap="CUSTOMERENCYCLOPEDIA-MAP" parameterClass="CustomerEncyclopediaQuery">
         <![CDATA[
-        SELECT * FROM customer_encyclopedia
+        SELECT * FROM k_customer_encyclopedia
         ]]>
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>
@@ -154,7 +154,7 @@
 
     <select id="COUNT" resultClass="java.lang.Integer" parameterClass="CustomerEncyclopediaQuery">
         <![CDATA[
-			SELECT COUNT(ency_id) FROM customer_encyclopedia
+			SELECT COUNT(ency_id) FROM k_customer_encyclopedia
 		]]>
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>

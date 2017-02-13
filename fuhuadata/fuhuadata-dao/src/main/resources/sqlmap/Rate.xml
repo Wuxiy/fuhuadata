@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="RATE">
+    <typeAlias alias="Rate" type="com.fuhuadata.domain.Rate"/>
+    <typeAlias alias="RateQuery" type="com.fuhuadata.domain.query.RateQuery"/>
+    <resultMap id="RATE-MAP" class="Rate">
+        <result column="rate_id" property="rateId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="type" property="type" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="kind" property="kind" jdbcType="VARCHAR" javaType="java.lang.String" />
+        <result column="rate" property="rate" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="term_of_validity" property="termofValidity" jdbcType="DATETIME" javaType="java.lang.Timestamp"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="PAGE-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotNull prepend=" AND " property="type">
+                type = #type#
+            </isNotNull>
+        </dynamic>
+    </sql>
+
+    <insert id="ADD" parameterClass="Rate">
+        INSERT INTO
+        k_knowledge_rate (rate_id, type, kind,
+        rate, term_of_validity, status)
+        VALUES (#rateId#, #type#, #remarks#,
+        #rate#, #termofValidity#, #remarks#,
+        #remarks#)
+        <selectKey  resultClass="int" keyProperty="rateId">
+            SELECT @@IDENTITY AS rate_id
+        </selectKey>
+    </insert>
+
+    <update id="UPDATE" parameterClass="Rate">
+        UPDATE k_knowledge_rate
+        <dynamic prepend=" SET ">
+            <isNotNull prepend=", " property="consumption">kind = #kind#</isNotNull>
+            <isNotNull prepend=", " property="suitableProduct">rate = #rate#</isNotNull>
+            <isNotNull prepend=", " property="unitCost">term_of_validity = #termofValidity#</isNotNull>
+            <isNotNull prepend=", " property="priceEnd">price_end = #remarks#</isNotNull>
+        </dynamic>
+        WHERE rate_id = #rateId#
+    </update>
+
+    <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
+        <![CDATA[
+            DELETE FROM k_knowledge_rate WHERE rate_id=#rateId#
+        ]]>
+    </delete>
+
+    <select id="GET-PAGE" resultMap="RATE-MAP" parameterClass="RateQuery">
+        <![CDATA[
+            SELECT * FROM k_knowledge_rate
+        ]]>
+        <isParameterPresent>
+            <include refid="PAGE-COMMON"/>
+        </isParameterPresent>
+        LIMIT #startRow#,#pageSize#
+    </select>
+
+    <select id="COUNT" resultClass="java.lang.Integer" parameterClass="RateQuery">
+        <![CDATA[
+            SELECT COUNT(id) FROM k_knowledge_rate
+        ]]>
+        <isParameterPresent>
+            <include refid="PAGE-COMMON"/>
+        </isParameterPresent>
+    </select>
+</sqlMap>

@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 
 <html>
 
@@ -33,6 +33,14 @@
                 <li><a href="">修改密码</a></li>
                 <li><a href="">退出</a></li>
             </ul>
+        </div>
+        <div class="pull-right breadcrumb-btn btn-group btn-group-xs navbar-btn">
+            <a href="#lang-en" class="btn btn-danger" onclick="window.lang.change('zh'); return false;">
+                中文
+            </a>
+            <a href="#lang-en" class="btn btn-primary" onclick="window.lang.change('en'); return false;">
+                English
+            </a>
         </div>
         <ul id="nav-affix" class="nav nav-cards">
             <li class="shadow-in" title="客户信息">
@@ -80,14 +88,14 @@
             </li>
             <li class="active shadow-in" title="知识库">
                 <div id="collapseFive" class="list-group collapse">
-                    <a class="list-group-item" href="/knowledgeBase/productQuestionList">产品常见问题</a>
-                    <a class="list-group-item" href="/knowledgeBase/marketTrainList">营销培训</a>
-                    <a class="list-group-item" href="/knowledgeBase/customerProductPackingList">客户产品包装要求</a>
+                    <a class="list-group-item" href="/productProblem/productProblemList">产品常见问题</a>
+                    <a class="list-group-item" href="/marketTraining/marketTrainingList">营销培训</a>
+                    <a class="list-group-item" href="/customerProductPacking/customerProductPackingList">客户产品包装要求</a>
                     <a class="list-group-item" href="/knowledgeBase/productArchivesList">标准产品档案</a>
-                    <a class="list-group-item" href="/knowledgeBase/packingCostList">包材成本参考</a>
+                    <a class="list-group-item" href="/packingArchives/packingArchivesList">包材成本参考</a>
                     <a class="list-group-item" href="/knowledgeBase/processCostList">加工成本参考</a>
-                    <a class="list-group-item" href="/knowledgeBase/encyclopediaList">百科</a>
-                    <a class="list-group-item" href="/knowledgeBase/exhibitionDynamicList">展会动态</a>
+                    <a class="list-group-item" href="/customerEncyclopedia/customerEncyclopediaList">百科</a>
+                    <a class="list-group-item" href="/exhibitionInfo/exhibitionInfoList">展会动态</a>
                     <a class="list-group-item" href="">其他</a>
                 </div>
                 <a data-toggle="collapse" href="#collapseFive" data-parent="#nav-affix">
@@ -214,84 +222,6 @@
                                     <td lang="zh">最低含盖克重（g）</td>
                                     <td>2.0</td>
                                     <td>0.75</td>
-                                    <td lang="zh">2016-10-10</td>
-                                    <td lang="zh">水剂</td>
-                                    <td><a href="" data-toggle="modal" data-target="#details"></a></td>
-                                    <td>有效</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td><a href="http://www.baidu.com" target="_blank">主材-瓶桶类</a></td>
-                                    <td>0.5L</td>
-                                    <td lang="zh">HDPE</td>
-                                    <td lang="zh">最低含盖克重（g）</td>
-                                    <td>5.0</td>
-                                    <td>1.00</td>
-                                    <td lang="zh">2016-10-10</td>
-                                    <td lang="zh">水剂</td>
-                                    <td><a href="" data-toggle="modal" data-target="#details"></a></td>
-                                    <td>有效</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td><a href="http://www.baidu.com" target="_blank">主材-瓶桶类</a></td>
-                                    <td>1L</td>
-                                    <td lang="zh">HDPE</td>
-                                    <td lang="zh">最低含盖克重（g）</td>
-                                    <td>5.0</td>
-                                    <td>1.00</td>
-                                    <td lang="zh">2016-10-10</td>
-                                    <td lang="zh">水剂</td>
-                                    <td><a href="" data-toggle="modal" data-target="#details"></a></td>
-                                    <td>有效</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td><a href="http://www.baidu.com" target="_blank">主材-瓶桶类</a></td>
-                                    <td>2L</td>
-                                    <td lang="zh">HDPE</td>
-                                    <td lang="zh">最低含盖克重（g）</td>
-                                    <td>10.0</td>
-                                    <td>1.75</td>
-                                    <td lang="zh">2016-10-10</td>
-                                    <td lang="zh">水剂</td>
-                                    <td><a href="" data-toggle="modal" data-target="#details"></a></td>
-                                    <td>有效</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td><a href="http://www.baidu.com" target="_blank">主材-瓶桶类</a></td>
-                                    <td>4L</td>
-                                    <td lang="zh">HDPE</td>
-                                    <td lang="zh">最低含盖克重（g）</td>
-                                    <td>10.0</td>
-                                    <td>1.75</td>
-                                    <td lang="zh">2016-10-10</td>
-                                    <td lang="zh">水剂</td>
-                                    <td><a href="" data-toggle="modal" data-target="#details"></a></td>
-                                    <td>有效</td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td><a href="http://www.baidu.com" target="_blank">主材-瓶桶类</a></td>
-                                    <td>20L</td>
-                                    <td lang="zh">HDPE</td>
-                                    <td lang="zh">最低含盖克重（g）</td>
-                                    <td>10.0</td>
-                                    <td>1.75</td>
-                                    <td lang="zh">2016-10-10</td>
-                                    <td lang="zh">水剂</td>
-                                    <td><a href="" data-toggle="modal" data-target="#details"></a></td>
-                                    <td>有效</td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td><a href="http://www.baidu.com" target="_blank">主材-瓶桶类</a></td>
-                                    <td>1250KG</td>
-                                    <td lang="zh">HDPE</td>
-                                    <td lang="zh">最低含盖克重（g）</td>
-                                    <td>10.0</td>
-                                    <td>1.75</td>
                                     <td lang="zh">2016-10-10</td>
                                     <td lang="zh">水剂</td>
                                     <td><a href="" data-toggle="modal" data-target="#details"></a></td>

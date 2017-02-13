@@ -1,6 +1,6 @@
 package com.fuhuadata.domain;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * 成分价格
@@ -74,6 +74,6 @@ public class ComponentCost {
     }
 
     public void setRemarks(String remarks) {
-        this.remarks = remarks == null ? null : remarks.trim();
+        this.remarks = remarks;
     }
 }

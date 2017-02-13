@@ -12,7 +12,7 @@
         <result property="ip" column="ip" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="module" column="module" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="method" column="method" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result property="date" column="date" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result property="date" column="date" jdbcType="DATETIME" javaType="java.sql.Timestamp"/>
         <result property="responseDate" column="response_date" jdbcType="INT" javaType="java.lang.Integer"/>
         <result property="commit" column="commit" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="parementers" column="parementers" jdbcType="VARCHAR" javaType="java.lang.String"/>

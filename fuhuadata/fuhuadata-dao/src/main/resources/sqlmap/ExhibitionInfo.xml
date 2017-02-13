@@ -12,18 +12,18 @@
         <result column="region" property="region" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="country" property="country" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="city" property="city" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="start_date" property="startDate" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
-        <result column="finish_date" property="finishDate" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <result column="start_date" property="startDate" jdbcType="DATE" javaType="java.sql.Date"/>
+        <result column="finish_date" property="finishDate" jdbcType="DATE" javaType="java.sql.Date"/>
         <result column="exhibition_addr" property="exhibitionAddr" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="exhibition_link" property="exhibitionLink" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="exhibitionInfo" column="exhibition_info" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="creator" property="creator" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="create_time" property="createTime" jdbcType="DATETIME" javaType="java.sql.Timestamp"/>
     </resultMap>
     <sql id="PAGE-COMMON">
         <dynamic prepend=" WHERE ">
             <isNotNull prepend=" AND " property="exhibitionName">
-                exhibition_name = #exhibitionName#
+                exhibition_name like concat('%',#exhibitionName#,'%')
             </isNotNull>
             <isNotNull prepend=" AND " property="country">
                 country = #country#
@@ -37,9 +37,25 @@
         </dynamic>
     </sql>
 
+    <insert id="ADD" parameterClass="ExhibitionInfo">
+        insert into k_exhibition_info (exhibition_id, exhibition_name, sponsor,
+        organizer, region, country,
+        city, start_date, finish_date,
+        exhibition_addr, exhibition_link, creator,
+        create_time, exhibition_info)
+        values (#exhibitionId#, #exhibitionName#, #sponsor#,
+        #organizer#, #region#, #country#,
+        #city#, #startDate#, #finishDate#,
+        #exhibitionAddr#, #exhibitionLink#, #creator#,
+        #createTime#, #exhibitionInfo#)
+        <selectKey resultClass="int" keyProperty="exhibitionId">
+            SELECT @@IDENTITY AS exhibition_id
+        </selectKey>
+    </insert>
+
     <select id="GET-PAGE" resultMap="EXHIBITIONINFO-MAP" parameterClass="ExhibitionInfoQuery">
         <![CDATA[
-        SELECT * FROM exhibition_info
+        SELECT * FROM k_exhibition_info
         ]]>
         <isParameterPresent>
         <include refid="PAGE-COMMON"/>
@@ -49,7 +65,7 @@
 
     <select id="COUNT" resultClass="java.lang.Integer" parameterClass="ExhibitionInfoQuery">
         <![CDATA[
-        SELECT COUNT(*) FROM exhibition_info
+        SELECT COUNT(*) FROM k_exhibition_info
         ]]>
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>

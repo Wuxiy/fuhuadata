@@ -10,6 +10,7 @@ import java.util.List;
  * Created by intanswer on 2017/1/13.
  */
 public interface ExhibitionInfoService {
+
     public Result<ExhibitionInfo> addExhibitionInfo(ExhibitionInfo exhibitionInfo);
 
     public Result<List<ExhibitionInfo>> getExhibitionInfosByPage(ExhibitionInfoQuery exhibitonInfoQuery);

@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -28,6 +28,14 @@
                 <li><a href="">修改密码</a></li>
                 <li><a href="">退出</a></li>
             </ul>
+        </div>
+        <div class="pull-right breadcrumb-btn btn-group btn-group-xs navbar-btn">
+            <a href="#lang-en" class="btn btn-danger" onclick="window.lang.change('zh'); return false;">
+                中文
+            </a>
+            <a href="#lang-en" class="btn btn-primary" onclick="window.lang.change('en'); return false;">
+                English
+            </a>
         </div>
         <ul id="nav-affix" class="nav nav-cards">
             <li class="shadow-in" title="客户信息">
@@ -79,14 +87,14 @@
             </li>
             <li class="active shadow-in" title="知识库">
                 <div id="collapseFive" class="list-group collapse">
-                    <a class="list-group-item" href="/knowledgeBase/productQuestionList">产品常见问题</a>
-                    <a class="list-group-item" href="/knowledgeBase/marketTrainList">营销培训</a>
-                    <a class="list-group-item" href="/knowledgeBase/customerProductPackingList">客户产品包装要求</a>
+                    <a class="list-group-item" href="/productProblem/productProblemList">产品常见问题</a>
+                    <a class="list-group-item" href="/marketTraining/marketTrainingList">营销培训</a>
+                    <a class="list-group-item" href="/customerProductPacking/customerProductPackingList">客户产品包装要求</a>
                     <a class="list-group-item" href="/knowledgeBase/productArchivesList">标准产品档案</a>
-                    <a class="list-group-item" href="/knowledgeBase/packingCostList">包材成本参考</a>
+                    <a class="list-group-item" href="/packingArchives/packingArchivesList">包材成本参考</a>
                     <a class="list-group-item" href="/knowledgeBase/processCostList">加工成本参考</a>
-                    <a class="list-group-item" href="/knowledgeBase/encyclopediaList">百科</a>
-                    <a class="list-group-item" href="/knowledgeBase/exhibitionDynamicList">展会动态</a>
+                    <a class="list-group-item" href="/customerEncyclopedia/customerEncyclopediaList">百科</a>
+                    <a class="list-group-item" href="/exhibitionInfo/exhibitionInfoList">展会动态</a>
                     <a class="list-group-item" href="">其他</a>
                 </div>
                 <a data-toggle="collapse" href="#collapseFive" data-parent="#nav-affix">
@@ -134,7 +142,7 @@
             <!--表格开始-->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a class="btn btn-xs btn-primary pull-right panel-heading-btn" href="/knowledgeBase/exhibitionDynamicAdd" data-toggle="modal">
+                    <a class="btn btn-xs btn-primary pull-right panel-heading-btn" href="/exhibitionInfo/addExhibitionInfo" data-toggle="modal">
                         <span class="glyphicon glyphicon-plus"></span>
                         新增
                     </a>
@@ -148,9 +156,9 @@
                         <div class="form-group ">
                             <div class="col-xs-2 pull-right">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="请输入关键词查找">
+                                    <input type="text" class="form-control" placeholder="请输入关键词查找" id="search">
                                     <div class="input-group-btn">
-                                        <button type="button" class="btn btn-primary btn-xs">
+                                        <button type="button" class="btn btn-primary btn-xs" onclick="test()">
                                             <span class="glyphicon glyphicon-search"></span>
                                             搜索
                                         </button>
@@ -207,7 +215,7 @@
                             <td lang="zh">${exhibitionInfo.finishDate}</td>
                             <td>${exhibitionInfo.exhibitionAddr}</td>
                             <td>${exhibitionInfo.exhibitionInfo}</td>
-                            <td><a>${exhibitionInfo.exhibitionLink}</a></td>
+                            <td><a href="${exhibitionInfo.exhibitionLink}">点击进入</a></td>
                             <td>${exhibitionInfo.creator}</td>
                             <td lang="zh">${exhibitionInfo.createTime}</td>
                         </tr>
@@ -217,7 +225,7 @@
                     <!--表格结束-->
                     <!--分页导航开始-->
                     <div class="form-group pull-left table-pagination">
-                        共<span>123</span>条记录，<span>130</span>页，跳转到第&nbsp;<input class="form-control pagination-input" type="number"/>&nbsp;页
+                        共<span></span>条记录，<span>130</span>页，跳转到第&nbsp;<input class="form-control pagination-input" type="number"/>&nbsp;页
                         <button class="btn btn-xs btn-primary">确定</button>
                     </div>
                     <ul class="pagination pull-right table-pagination">
@@ -245,4 +253,27 @@
     </small>
 </div>
 </body>
+<script type="text/javascript">
+
+    function test(){
+        var search = jQuery("#search").val();
+        var data = {
+            "index":1,
+            "exhibitionName":jQuery("#search").val()
+        }
+        alert(search);
+        jQuery.ajax({
+            type:"GET",
+            url:'queryExhibitionInfo',
+            dataType:"json",
+            data:data,
+            contentType:"application/json",
+            success:function(){
+                window.location.reload();
+                console.log("233");
+        }
+    })
+    }
+
+</script>
 </html>

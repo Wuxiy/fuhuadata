@@ -1,7 +1,7 @@
 package com.fuhuadata.domain;
 
 
-import java.util .Date;
+import java.util.Date;
 
 /**系统日志监控用户操作
  * Created by intanswer on 2017/1/10.

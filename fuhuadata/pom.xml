@@ -247,6 +247,14 @@
                 <version>2.2</version>
             </dependency>
             <!-- aspectj end -->
+            <!--joda-->
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>1.6.2</version>
+            </dependency>
+            <!--joda end-->
+
             <dependency>
                 <groupId>net.sf.json-lib</groupId>
                 <artifactId>json-lib</artifactId>

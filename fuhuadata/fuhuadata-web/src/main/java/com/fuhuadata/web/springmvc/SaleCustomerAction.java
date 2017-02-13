@@ -50,4 +50,5 @@ public class SaleCustomerAction {
         ModelAndView model = new ModelAndView("saleCustomer/saleCustomerList","SaleCustomers",result.getModel());
         return model;
     }
+
 }

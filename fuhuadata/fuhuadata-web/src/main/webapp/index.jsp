@@ -9,7 +9,7 @@
  <body>
  
  <a href="/userAccount/userAccountList">用户管理</a>
- <a href="/knowledgeBase/productQuestionList">知识库</a>
+ <a href="/productProblem/productProblemList">知识库</a>
  
  </body>
 </html>

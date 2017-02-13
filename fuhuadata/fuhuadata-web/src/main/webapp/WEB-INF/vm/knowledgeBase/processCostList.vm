@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 
 <html>
 
@@ -30,6 +30,14 @@
                 <li><a href="">修改密码</a></li>
                 <li><a href="">退出</a></li>
             </ul>
+        </div>
+        <div class="pull-right breadcrumb-btn btn-group btn-group-xs navbar-btn">
+            <a href="#lang-en" class="btn btn-danger" onclick="window.lang.change('zh'); return false;">
+                中文
+            </a>
+            <a href="#lang-en" class="btn btn-primary" onclick="window.lang.change('en'); return false;">
+                English
+            </a>
         </div>
         <ul id="nav-affix" class="nav nav-cards">
             <li class="shadow-in" title="客户信息">
@@ -77,14 +85,14 @@
             </li>
             <li class="active shadow-in" title="知识库">
                 <div id="collapseFive" class="list-group collapse">
-                    <a class="list-group-item" href="/knowledgeBase/productQuestionList">产品常见问题</a>
-                    <a class="list-group-item" href="/knowledgeBase/marketTrainList">营销培训</a>
-                    <a class="list-group-item" href="/knowledgeBase/customerProductPackingList">客户产品包装要求</a>
+                    <a class="list-group-item" href="/productProblem/productProblemList">产品常见问题</a>
+                    <a class="list-group-item" href="/marketTraining/marketTrainingList">营销培训</a>
+                    <a class="list-group-item" href="/customerProductPacking/customerProductPackingList">客户产品包装要求</a>
                     <a class="list-group-item" href="/knowledgeBase/productArchivesList">标准产品档案</a>
-                    <a class="list-group-item" href="/knowledgeBase/packingCostList">包材成本参考</a>
+                    <a class="list-group-item" href="/packingArchives/packingArchivesList">包材成本参考</a>
                     <a class="list-group-item" href="/knowledgeBase/processCostList">加工成本参考</a>
-                    <a class="list-group-item" href="/knowledgeBase/encyclopediaList">百科</a>
-                    <a class="list-group-item" href="/knowledgeBase/exhibitionDynamicList">展会动态</a>
+                    <a class="list-group-item" href="/customerEncyclopedia/customerEncyclopediaList">百科</a>
+                    <a class="list-group-item" href="/exhibitionInfo/exhibitionInfoList">展会动态</a>
                     <a class="list-group-item" href="">其他</a>
                 </div>
                 <a data-toggle="collapse" href="#collapseFive" data-parent="#nav-affix">
@@ -162,48 +170,6 @@
                                         <tbody>
                                         <tr>
                                             <td>200ML</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>500ML</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>1L</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>4L</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>5L</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>20L</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>100L</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>200L</td>
                                             <td></td>
                                             <td></td>
                                             <td></td>

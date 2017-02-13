@@ -9,7 +9,7 @@
         <result column="component_name" property="componentName" jdbcType="VARCHAR" javaType="java.lang.String" />
         <result column="consumption" property="consumption" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="suitable_product" property="suitableProduct" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="price_end" property="priceEnd" jdbcType="TIMESTAMP" javaType="java.sql.Date"/>
+        <result column="price_end" property="priceEnd" jdbcType="DATE" javaType="java.sql.Date"/>
         <result column="unit_cost" property="unitCost" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="remarks" property="remarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>
@@ -27,7 +27,7 @@
 
     <insert id="ADD" parameterClass="ComponentCost">
         INSERT INTO
-        component_cost (component_id, component_name, consumption,
+        k_component_cost (component_id, component_name, consumption,
         suitable_product, price_end, unit_cost,
         remarks)
         VALUES (#componentId#, #componentName#, #consumption#,
@@ -39,7 +39,7 @@
     </insert>
 
     <update id="UPDATE" parameterClass="ComponentCost">
-        UPDATE component_cost
+        UPDATE k_component_cost
         <dynamic prepend=" SET ">
             <isNotNull prepend=", " property="consumption">consumption = #consumption#</isNotNull>
             <isNotNull prepend=", " property="suitableProduct">suitable_product = #suitableProduct#</isNotNull>
@@ -51,13 +51,13 @@
 
     <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
         <![CDATA[
-            DELETE FROM component_cost WHERE component_id=#componentId#
+            DELETE FROM k_component_cost WHERE component_id=#componentId#
         ]]>
     </delete>
 
     <select id="GET-PAGE" resultMap="COMPONENTCOST-MAP" parameterClass="ComponentCostQuery">
         <![CDATA[
-            SELECT * FROM component_cost
+            SELECT * FROM k_component_cost
         ]]>
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>
@@ -67,7 +67,7 @@
 
     <select id="COUNT" resultClass="java.lang.Integer" parameterClass="ComponentCostQuery">
         <![CDATA[
-            SELECT COUNT(id) FROM component_cost
+            SELECT COUNT(id) FROM k_component_cost
         ]]>
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>

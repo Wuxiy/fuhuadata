@@ -16,4 +16,5 @@ public interface MarketTrainingService {
     public Result<List<MarketTraining>> getMarketTrainingsByPage(MarketTrainingQuery marketTrainingQuery);
 
     public Result<Integer> count(MarketTrainingQuery marketTrainingQuery);
+
 }

@@ -17,7 +17,7 @@
         <result column="quality_index" property="qualityIndex" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="quality_target_value" property="qualityTargetValue" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="unit_price" property="unitPrice" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="price_end_date" property="priceEndDate" jdbcType="TIMESTAMP" javaType="java.sql.Date"/>
+        <result column="price_end_date" property="priceEndDate" jdbcType="DATE" javaType="java.sql.Date"/>
         <result column="suitable_type" property="suitableType" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="b_remarks" property="bRemarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="status" property="status" jdbcType="VARCHAR" javaType="java.lang.String"/>
@@ -137,7 +137,7 @@
     </sql>
     <insert id="ADD" parameterClass="PackingArchives">
         INSERT INTO
-        packing_archives (packing_id, type, packing_type,
+        k_packing_archives (packing_id, type, packing_type,
         pack_name, size, spec,
         spec_unit, quality, quality_index,
         quality_target_value, unit_price, price_end_date,
@@ -158,7 +158,7 @@
     </insert>
 
     <update id="UPDATE" parameterClass="PackingArchives">
-        UPDATE packing_archives
+        UPDATE k_packing_archives
         <dynamic prepend=" SET ">
             <isNotNull prepend=", " property="type">
                 type=#type#
@@ -214,19 +214,19 @@
 
     <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
         <![CDATA[
-            DELETE FROM packing_archives WHERE packing_id=#packingId#
+            DELETE FROM k_packing_archives WHERE packing_id=#packingId#
         ]]>
     </delete>
 
     <select id="GET-ALL" resultMap="PACKINGARCHIVES-MAP">
         <![CDATA[
-			SELECT * FROM packing_archives
+			SELECT * FROM k_packing_archives
 		]]>
     </select>
 
     <select id="GET-BY-QUERY" resultMap="PACKINGARCHIVES-MAP" parameterClass="PackingArchivesQuery">
         <![CDATA[
-			SELECT * FROM packing_archives
+			SELECT * FROM k_packing_archives
 		]]>
         <isParameterPresent>
             <include refid="QUERY-COMMON" />
@@ -235,13 +235,13 @@
 
     <select id="GET-BY-ID" resultMap="PACKINGARCHIVES-MAP" parameterClass="java.lang.Integer">
         <![CDATA[
-			SELECT * FROM packing_archives WHERE packing_id=#packingId#
+			SELECT * FROM k_packing_archives WHERE packing_id=#packingId#
 		]]>
     </select>
 
     <select id="GET-PAGE" resultMap="PACKINGARCHIVES-MAP" parameterClass="PackingArchivesQuery">
         <![CDATA[
-			SELECT * FROM packing_archives
+			SELECT * FROM k_packing_archives
 		]]>
         <isParameterPresent>
             <include refid="PAGE-COMMON" />
@@ -251,7 +251,7 @@
 
     <select id="COUNT" resultClass="java.lang.Integer" parameterClass="PackingArchivesQuery">
         <![CDATA[
-			SELECT COUNT(packing_id) FROM packing_archives
+			SELECT COUNT(packing_id) FROM k_packing_archives
 		]]>
         <isParameterPresent>
             <include refid="PAGE-COMMON" />

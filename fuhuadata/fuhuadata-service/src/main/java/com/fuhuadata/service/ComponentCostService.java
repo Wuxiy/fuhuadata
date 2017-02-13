@@ -12,7 +12,7 @@ import java.util.List;
  * Created by intanswer on 2017/1/17.
  */
 public interface ComponentCostService {
-    public Result addComponentCost(ComponentCost componentCost);
+    public Result<ComponentCost> addComponentCost(ComponentCost componentCost);
 
     public Result updateComponentCostById(int id, ComponentCost componentCost);
 

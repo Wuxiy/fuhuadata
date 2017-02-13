@@ -31,17 +31,17 @@ public class KnowledgeBaseAction {
      * 产品常见问题列表
      * @return
      */
-    @RequestMapping(value="/productQuestionList",method=RequestMethod.GET)
-    public ModelAndView productQuestionList(){return new ModelAndView("knowledgeBase/productQuestionList");}
+    @RequestMapping(value="/productProblem",method=RequestMethod.GET)
+    public ModelAndView productQuestionList(){return new ModelAndView("knowledgeBase/productProblemList");}
 
     /**
      * 营销培训列表
      * @return
      */
-    @RequestMapping(value="/marketTrainList",method=RequestMethod.GET)
-    public ModelAndView marketTrainList(){return new ModelAndView("knowledgeBase/marketTrainList");}
+    @RequestMapping(value="/marketTrainingList",method=RequestMethod.GET)
+    public ModelAndView marketTrainList(){return new ModelAndView("knowledgeBase/marketTrainingList");}
 
-    /**
+    /**阿姨
      * 客户产品包装要求列表
      * @return
      */
@@ -49,11 +49,32 @@ public class KnowledgeBaseAction {
     public ModelAndView customerProductPackingList(){return new ModelAndView("knowledgeBase/customerProductPackingList");}
 
     /**
+     * 客户产品包装要求详情
+     * @return
+     */
+    @RequestMapping(value="/customerProductPackingInfo",method=RequestMethod.GET)
+    public ModelAndView customerProductPackingInfo(){return new ModelAndView("knowledgeBase/customerProductPackingInfo");}
+
+    /**
+     * 客户产品包装要求新增
+     * @return
+     */
+    @RequestMapping(value="/AddcustomerProductPacking",method=RequestMethod.GET)
+    public ModelAndView AddcustomerProductPacking(){return new ModelAndView("knowledgeBase/customerProductPackingAdd");}
+
+    /**
      * 标准产品档案列表
      * @return
      */
     @RequestMapping(value="/productArchivesList",method=RequestMethod.GET)
     public ModelAndView productArchivesList(){return new ModelAndView("knowledgeBase/productArchivesList");}
+
+    /**
+     * 标准产品档案新增
+     * @return
+     */
+    @RequestMapping(value="/productArchivesAdd",method=RequestMethod.GET)
+    public ModelAndView productArchivesAdd(){return new ModelAndView("knowledgeBase/productArchivesAdd");}
 
     /**
      * 包材成本参考列表
@@ -87,14 +108,14 @@ public class KnowledgeBaseAction {
      * 展会动态列表
      * @return
      */
-    @RequestMapping(value="/exhibitionDynamicList",method=RequestMethod.GET)
-    public ModelAndView exhibitionDynamicList(){return new ModelAndView("knowledgeBase/exhibitionDynamicList");}
+    @RequestMapping(value="/exhibitionInfoList",method=RequestMethod.GET)
+    public ModelAndView exhibitionDynamicList(){return new ModelAndView("knowledgeBase/exhibitionInfoList");}
 
     /**
      * 展会添加
      * @return
      */
-    @RequestMapping(value="/exhibitionDynamicAdd",method=RequestMethod.GET)
-    public ModelAndView exhibitionDynamicAdd(){return new ModelAndView("knowledgeBase/exhibitionDynamicAdd");}
+    @RequestMapping(value="/exhibitionInfoAdd",method=RequestMethod.GET)
+    public ModelAndView exhibitionDynamicAdd(){return new ModelAndView("knowledgeBase/exhibitionInfoAdd");}
 
 }

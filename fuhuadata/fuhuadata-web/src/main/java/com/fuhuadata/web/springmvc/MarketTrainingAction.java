@@ -50,7 +50,7 @@ public class MarketTrainingAction {
         }catch (Exception e){
             log.error("获取营销培训列表失败",e);
         }
-        ModelAndView model = new ModelAndView("marketTraining/marketTrainingList","marketTrainingList",result.getModel());
+        ModelAndView model = new ModelAndView("knowledgeBase/marketTrainingList","marketTrainingList",result.getModel());
         model.addObject("message","营销培训列表");
         return model;
 
@@ -73,13 +73,13 @@ public class MarketTrainingAction {
         }catch (Exception e){
             log.error("查询获取营销培训列表失败",e);
         }
-        ModelAndView model = new ModelAndView("marketTraining/marketTrainingList","marketTrainingList",result.getModel());
+        ModelAndView model = new ModelAndView("marketTraining/marketTrainingList","marketTrainings",result.getModel());
         model.addObject("message","营销培训列表");
         return model;
 
     }
 
-    @RequestMapping(value = "/doAddMarketTraining",method = RequestMethod.GET)
+    @RequestMapping(value = "/doAddMarketTraining",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "知识库-营销培训",methods = "新增营销培训记录")
     @ResponseBody
     public ResultPojo doAddMarketTraining(@RequestBody MarketTraining marketTraining){
@@ -88,9 +88,10 @@ public class MarketTrainingAction {
             return result.getResultPojo();
         }catch (Exception e){
             log.error("添加营销培训信息出错");
-
         }
         return null;
     }
+
+
 
 }
