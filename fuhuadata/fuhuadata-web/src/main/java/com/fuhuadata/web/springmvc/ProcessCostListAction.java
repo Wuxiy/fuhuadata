@@ -4,11 +4,13 @@ import com.fuhuadata.domain.ComponentCost;
 import com.fuhuadata.domain.FreightCost;
 import com.fuhuadata.domain.PortChargesCost;
 import com.fuhuadata.domain.PreparationProcessCost;
+import com.fuhuadata.domain.Rate;
 import com.fuhuadata.domain.query.*;
 import com.fuhuadata.service.ComponentCostService;
 import com.fuhuadata.service.FreightCostService;
 import com.fuhuadata.service.PortChargesCostService;
 import com.fuhuadata.service.PreparationProcessCostService;
+import com.fuhuadata.service.RateService;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -39,6 +41,8 @@ public class ProcessCostListAction {
     private ComponentCostService componentCostService;
     @Resource
     private FreightCostService freightCostService;
+    @Resource
+    private RateService rateService;
     private Integer pageSize=5;
     private String page="1";
 
@@ -332,6 +336,74 @@ public class ProcessCostListAction {
         }
         ModelAndView model=new ModelAndView("knowledgeBase/freightCostList","freightCostList",result.getModel());
         model.addObject("message","运费列表");
+        return model;
+    }
+
+    /**
+     * 费率列表
+     * return
+     */
+    @SuppressWarnings("unused")
+    @RequestMapping(value = "/rateList/",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "知识库-费率",methods = "费率列表")
+    public ModelAndView rateList(){
+        Result<List<Rate>> result = new Result<List<Rate>>();
+        try{
+            RateQuery query = new RateQuery();
+            query.setPageSize(pageSize);
+            try{
+                query.setIndex(Integer.valueOf(page));
+            }catch(Exception e){
+                query.setIndex(1);
+            }
+            result = rateService.getRatesByPage(query);
+        }catch(Exception e) {
+            log.error("获取费率列表失败", e);
+        }
+        ModelAndView model = new ModelAndView("knowledgeBase/processCostList","rates",result.getModel());
+        model.addObject("message","费率列表");
+        return model;
+    }
+
+    /**
+     * 费率add
+     * @param rate
+     * @return
+     */
+    @RequestMapping(value = "/doAddRate",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "知识库-费率",methods = "执行新增")
+    @ResponseBody
+    public ResultPojo doAddRate(@RequestBody Rate rate){
+        try{
+            Result<Rate> result = rateService.addRate(rate);
+            return result.getResultPojo();
+        }catch(Exception e){
+
+            log.error("添加费率失败",e);
+        }
+        return null;
+    }
+
+    /**
+     * 费率条件查询
+     * @param rateQuery
+     * @return
+     */
+    @RequestMapping(value = "/queryRate",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "知识库-费率",methods = "条件查询")
+    public ModelAndView queryRate(@RequestBody RateQuery rateQuery){
+        Result<List<Rate>> result = new Result<List<Rate>>();
+        try{
+            rateQuery.setPageSize(pageSize);
+            if(rateQuery.getIndex()==0){
+                rateQuery.setIndex(Integer.valueOf(page.trim()));
+            }
+            result=rateService.getRatesByPage(rateQuery);
+        }catch(Exception e){
+            log.error("费率查询失败",e);
+        }
+        ModelAndView model = new ModelAndView("knowledgeBase/processCostList","Rates",result.getModel());
+        model.addObject("message","费率");
         return model;
     }
 
