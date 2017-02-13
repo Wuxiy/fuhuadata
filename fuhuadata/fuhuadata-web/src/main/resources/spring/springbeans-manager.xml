@@ -11,6 +11,7 @@
 	<bean id="productProblemManager" class="com.fuhuadata.manager.impl.ProductProblemManagerImpl"/>
 	<bean id ="componentCostManager" class="com.fuhuadata.manager.impl.ComponentCostManagerImpl"/>
 	<bean id="freightCostManager" class="com.fuhuadata.manager.impl.FreightCostManagerImpl"/>
+	<bean id="rateManager" class="com.fuhuadata.manager.impl.RateManagerImpl"/>
 	<bean id = "industryDataManager" class="com.fuhuadata.manager.impl.IndustryDataManagerImpl"/>
 	<bean id = "packingArchivesManager" class="com.fuhuadata.manager.impl.PackingArchivesManagerImpl"/>
 	<bean id = "portChargesCostManager" class="com.fuhuadata.manager.impl.PortChargesCostManagerImpl"/>
