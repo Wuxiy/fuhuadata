@@ -5,6 +5,7 @@ import com.fuhuadata.domain.query.MarketTrainingQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.MarketTrainingManager;
 import com.fuhuadata.service.MarketTrainingService;
+import com.fuhuadata.service.SystemLogService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -33,7 +34,7 @@ public class MarketTrainingServiceImpl implements MarketTrainingService{
     public Result<List<MarketTraining>> getMarketTrainingsByPage(MarketTrainingQuery marketTrainingQuery) {
         Result<List<MarketTraining>> result = new Result<List<MarketTraining>>();
         try {
-         result=marketTrainingManager.getMarketTrainingsByPage(marketTrainingQuery);
+            result=marketTrainingManager.getMarketTrainingsByPage(marketTrainingQuery);
         } catch (Exception e) {
             result.setSuccess(false);
             log.error("分页获取营销培训信息失败",e);
@@ -51,5 +52,13 @@ public class MarketTrainingServiceImpl implements MarketTrainingService{
             log.error("查询营销培训数量失败",e);
         }
         return result;
+    }
+
+    public void setMarketTrainingManager(MarketTrainingManager marketTrainingManager) {
+        this.marketTrainingManager = marketTrainingManager;
+    }
+
+    public MarketTrainingManager getMarketTrainingManager(){
+        return this.marketTrainingManager;
     }
 }

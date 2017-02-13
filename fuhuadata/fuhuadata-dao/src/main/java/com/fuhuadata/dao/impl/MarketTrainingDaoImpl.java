@@ -23,7 +23,8 @@ public class MarketTrainingDaoImpl extends SqlMapClientTemplate implements Marke
 
     @Override
     public List<MarketTraining> getMarketTrainingsByPage(MarketTrainingQuery marketTrainingQuery) {
-        return this.queryForList(GET_PAGE,marketTrainingQuery);
+        List<MarketTraining> list=this.queryForList(GET_PAGE,marketTrainingQuery);
+        return list;
     }
 
     @Override

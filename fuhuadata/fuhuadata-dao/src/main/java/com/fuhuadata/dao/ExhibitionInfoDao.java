@@ -14,6 +14,10 @@ public interface ExhibitionInfoDao {
 
     public List<ExhibitionInfo> getExhibitionInfosByPage(ExhibitionInfoQuery exhibitonInfoQuery);
 
+    public int updateExhibitionInfoById(int id,ExhibitionInfo exhibitionInfo);
+
+    public int deleteExhibitionById(int id);
+
     public int count(ExhibitionInfoQuery exhibitionInfoQuery);
 
 }

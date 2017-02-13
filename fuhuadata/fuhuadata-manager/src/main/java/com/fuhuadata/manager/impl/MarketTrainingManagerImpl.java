@@ -6,6 +6,7 @@ import com.fuhuadata.domain.query.MarketTrainingQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.MarketTrainingManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,14 +27,15 @@ public class MarketTrainingManagerImpl implements MarketTrainingManager {
         marketTrainingQuery.setTotalItem(totalItem);
         if(totalItem > 0){
             result.addDefaultModel("MarketTrainings",marketTrainingDao.getMarketTrainingsByPage(marketTrainingQuery));
-        }else{
+        }else {
+            result.addDefaultModel("MarketTrainings",new ArrayList<MarketTraining>());
+        }
             //设置每页大小
             result.setPageSize(marketTrainingQuery.getPageSize());
             //设置当前页
             result.setIndex(marketTrainingQuery.getIndex());
             //设置总记录条数
             result.setTotalItem(totalItem);
-        }
         return result;
     }
 

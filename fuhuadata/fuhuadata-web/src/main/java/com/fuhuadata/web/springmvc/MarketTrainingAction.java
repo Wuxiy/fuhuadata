@@ -52,6 +52,9 @@ public class MarketTrainingAction {
         }
         ModelAndView model = new ModelAndView("knowledgeBase/marketTrainingList","marketTrainingList",result.getModel());
         model.addObject("message","营销培训列表");
+        model.addObject("totalItem",result.getTotalItem());
+        model.addObject("totalPage",result.getTotalPage());
+        model.addObject("query",null);
         return model;
 
     }

@@ -42,7 +42,8 @@ public class ProductProblemDaoImpl extends SqlMapClientTemplate implements Produ
 
     @Override
     public List<ProductProblem> getProductProblemsByPage(ProductProblemQuery productProblemQuery) {
-        return this.queryForList(GET_PAGE,productProblemQuery);
+        List<ProductProblem> list=this.queryForList(GET_PAGE,productProblemQuery);
+        return list;
     }
 
     @Override

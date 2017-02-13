@@ -24,8 +24,17 @@ public class ExhibitionInfoDaoImpl extends SqlMapClientTemplate implements Exhib
     @Override
     public List<ExhibitionInfo> getExhibitionInfosByPage(ExhibitionInfoQuery exhibitonInfoQuery) {
         List<ExhibitionInfo> list = this.queryForList(GET_PAGE,exhibitonInfoQuery);
-        System.out.print(list.get(1).getStartDate());
         return list;
+    }
+
+    @Override
+    public int updateExhibitionInfoById(int id, ExhibitionInfo exhibitionInfo) {
+        return 0;
+    }
+
+    @Override
+    public int deleteExhibitionById(int id) {
+        return 0;
     }
 
     @Override

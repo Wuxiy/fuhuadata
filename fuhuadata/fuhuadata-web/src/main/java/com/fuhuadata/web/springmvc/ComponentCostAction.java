@@ -78,7 +78,7 @@ public class ComponentCostAction {
     public ResultPojo doAddComponentCost(@RequestBody ComponentCost componentCost){
         try{
             Result<ComponentCost> result = componentCostService.addComponentCost(componentCost);
-            return result.getResultPojo();
+            return result.getResultPojo();//结果码,-1需要登录，0消息错误，1正确
         }catch(Exception e){
             log.error("添加成分价格错误");
         }
