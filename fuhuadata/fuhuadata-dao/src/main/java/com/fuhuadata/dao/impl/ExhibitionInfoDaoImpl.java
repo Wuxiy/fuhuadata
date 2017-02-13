@@ -15,6 +15,8 @@ public class ExhibitionInfoDaoImpl extends SqlMapClientTemplate implements Exhib
     private static final String ADD="EXHIBITIONINFO.ADD";
     private static final String GET_PAGE="EXHIBITIONINFO.GET-PAGE";
     private static final String COUNT="EXHIBITIONINFO.COUNT";
+    private static final String UPDATE="EXHIBITIONINFO.UPDATE";
+    private static final String DELETE_BY_ID="EXHIBITIONINFO.DELETE-BY-ID";
     @Override
     public ExhibitionInfo addExhibitionInfo(ExhibitionInfo exhibitionInfo) {
         exhibitionInfo.setExhibitionId((Integer) this.insert(ADD,exhibitionInfo));
@@ -29,12 +31,12 @@ public class ExhibitionInfoDaoImpl extends SqlMapClientTemplate implements Exhib
 
     @Override
     public int updateExhibitionInfoById(int id, ExhibitionInfo exhibitionInfo) {
-        return 0;
+        exhibitionInfo.setExhibitionId(id);
+        return this.update(UPDATE,exhibitionInfo);
     }
-
     @Override
     public int deleteExhibitionById(int id) {
-        return 0;
+        return this.update(DELETE_BY_ID,id);
     }
 
     @Override

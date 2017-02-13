@@ -32,7 +32,7 @@ public class IndustryDataAction {
     private String page="1";
     @SuppressWarnings("unused")
     @RequestMapping(value = "/industryDataList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-行业数据",methods = "查看列表")
+    @SystemLogAnnotation(module = "知识库-行业数据",methods = "list")
     public ModelAndView IndustryDataList(){
         Result<List<IndustryData>> result = new Result<List<IndustryData>>();
         try{
@@ -53,13 +53,13 @@ public class IndustryDataAction {
     }
 
     @RequestMapping(value = "/addIndustryData",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-行业数据",methods = "新增行业数据")
+    @SystemLogAnnotation(module = "知识库-行业数据",methods = "add")
     public ModelAndView addIndustryData(){
         return new ModelAndView("knowledgeBase/addIndustryData");
     }
 
     @RequestMapping(value = "/addIndustryData",method = RequestMethod.POST)
-    @SystemLogAnnotation(module = "知识库-行业数据",methods = "新增行业数据")
+    @SystemLogAnnotation(module = "知识库-行业数据",methods = "doAdd")
     @ResponseBody
     public ResultPojo doAddIndustryData(@RequestBody IndustryData industryData){
         try{
@@ -74,7 +74,7 @@ public class IndustryDataAction {
 
 
     @RequestMapping(value = "/queryIndustryDataList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-行业数据",methods = "条件查询")
+    @SystemLogAnnotation(module = "知识库-行业数据",methods = "query")
     public ModelAndView queryIndustryDataList(@RequestBody IndustryDataQuery industryDataQuery){
         Result<List<IndustryData>> result = new Result<List<IndustryData>>();
         try{

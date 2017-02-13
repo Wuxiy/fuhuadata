@@ -76,7 +76,7 @@ public class PackingArchivesAction {
      * @return
      */
     @RequestMapping(value = "/queryPackingArchivesList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-包材成本档案",methods = "条件查询")
+    @SystemLogAnnotation(module = "知识库-包材成本档案",methods = "query")
     public ModelAndView queryPackingArchivesList(@RequestBody PackingArchivesQuery packingArchivesQuery){
         Result<List<PackingArchives>> result = new Result<List<PackingArchives>>();
         try{

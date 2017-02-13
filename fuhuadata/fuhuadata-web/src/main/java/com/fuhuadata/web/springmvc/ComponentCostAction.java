@@ -39,7 +39,7 @@ public class ComponentCostAction {
      */
     @SuppressWarnings("unused")
     @RequestMapping(value = "/componentCostList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-成分价格",methods = "查看")
+    @SystemLogAnnotation(module = "知识库-成分价格",methods = "list")
     public ModelAndView componentCostList(){
         Result<List<ComponentCost>> result = new Result<List<ComponentCost>>();
 
@@ -61,7 +61,7 @@ public class ComponentCostAction {
         return model;
     }
     @RequestMapping(value = "/addComponentCost",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-成分价格",methods = "新增成分价格")
+    @SystemLogAnnotation(module = "知识库-成分价格",methods = "add")
     public ModelAndView addComponentCost(){
         return new ModelAndView("knowledgeBase/addComponentCost");
 
@@ -74,7 +74,7 @@ public class ComponentCostAction {
      */
     @RequestMapping(value="/doAddComponentCost",method = RequestMethod.POST)
     @ResponseBody
-    @SystemLogAnnotation(module = "知识库-成分价格",methods = "执行新增")
+    @SystemLogAnnotation(module = "知识库-成分价格",methods = "doAdd")
     public ResultPojo doAddComponentCost(@RequestBody ComponentCost componentCost){
         try{
             Result<ComponentCost> result = componentCostService.addComponentCost(componentCost);
@@ -91,7 +91,7 @@ public class ComponentCostAction {
      * @return
      */
     @RequestMapping(value = "/queryComponentCostList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-成分价格",methods = "条件查询")
+    @SystemLogAnnotation(module = "知识库-成分价格",methods = "query")
     public ModelAndView queryComponentCostList(@RequestBody ComponentCostQuery componentCostQuery){
         Result<List<ComponentCost>> result = new Result<List<ComponentCost>>();
         try{

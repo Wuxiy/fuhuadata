@@ -35,7 +35,7 @@ public class MarketTrainingAction {
      */
     @SuppressWarnings("unused")
     @RequestMapping(value = "/marketTrainingList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-营销培训",methods = "营销培训列表")
+    @SystemLogAnnotation(module = "知识库-营销培训",methods = "list")
     public ModelAndView marketTrainingList(){
         Result<List<MarketTraining>> result = new Result<List<MarketTraining>>();
         try{
@@ -61,7 +61,7 @@ public class MarketTrainingAction {
 
     @SuppressWarnings("unused")
     @RequestMapping(value = "/queryMarketTraining",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-营销培训",methods = "查询培训资料")
+    @SystemLogAnnotation(module = "知识库-营销培训",methods = "query")
     @ResponseBody
     public ModelAndView QuerymarketTraining(@RequestBody MarketTrainingQuery marketTrainingQuery){
         Result<List<MarketTraining>> result = new Result<List<MarketTraining>>();
@@ -83,7 +83,7 @@ public class MarketTrainingAction {
     }
 
     @RequestMapping(value = "/doAddMarketTraining",method = RequestMethod.POST)
-    @SystemLogAnnotation(module = "知识库-营销培训",methods = "新增营销培训记录")
+    @SystemLogAnnotation(module = "知识库-营销培训",methods = "doAdd")
     @ResponseBody
     public ResultPojo doAddMarketTraining(@RequestBody MarketTraining marketTraining){
         try{

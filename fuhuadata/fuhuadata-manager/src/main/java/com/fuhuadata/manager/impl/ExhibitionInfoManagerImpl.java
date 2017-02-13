@@ -7,6 +7,7 @@ import com.fuhuadata.manager.ExhibitionInfoManager;
 import com.fuhuadata.domain.query.Result;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,14 @@ public class ExhibitionInfoManagerImpl extends SqlMapClientTemplate implements E
     public ExhibitionInfo addExhibitionInfo(ExhibitionInfo exhibitionInfo) {
 
         return exhibitionInfoDao.addExhibitionInfo(exhibitionInfo);
+    }
+    public boolean updateExhibitionInfoById(int id,ExhibitionInfo exhibitionInfo){
+        return exhibitionInfoDao.updateExhibitionInfoById(id,exhibitionInfo)==1?true:false;
+    }
+
+    @Override
+    public boolean deleteExhibitionInfoById(int id) {
+        return exhibitionInfoDao.deleteExhibitionById(id)==1?true:false;
     }
 
     @Override

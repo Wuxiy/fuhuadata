@@ -44,6 +44,30 @@ public class ExhibitionInfoServiceImpl  implements ExhibitionInfoService{
     }
 
     @Override
+    public Result updateExhibitionInfoById(int id, ExhibitionInfo exhibitionInfo) {
+        Result result = new Result();
+        try{
+            result.setSuccess(exhibitionInfoManager.updateExhibitionInfoById(id,exhibitionInfo));
+        }catch(Exception e){
+            result.setSuccess(false);
+            log.error("更新展会动态信息错误",e);
+        }
+        return result;
+    }
+
+    @Override
+    public Result deleteExhibitionInfoById(int id) {
+        Result result = new Result();
+        try{
+            result.setSuccess(exhibitionInfoManager.deleteExhibitionInfoById(id));
+        }catch(Exception e){
+            result.setSuccess(false);
+            log.error("根据id删除展会动态信息出错",e);
+        }
+        return result;
+    }
+
+    @Override
     public Result<Integer> count(ExhibitionInfoQuery exhibitionInfoQuery) {
         Result<Integer> result = new Result<Integer>();
         try {

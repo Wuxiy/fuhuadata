@@ -33,7 +33,7 @@ public class FreightCostAction {
     private String page="1";
     @SuppressWarnings("unused")
     @RequestMapping(value = "/freightCostList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-运费",methods = "运费查看")
+    @SystemLogAnnotation(module = "知识库-运费",methods = "list")
     public ModelAndView freightCostList(){
         Result<List<FreightCost>> result = new Result<List<FreightCost>>();
         try{
@@ -53,13 +53,13 @@ public class FreightCostAction {
         return model;
     }
     @RequestMapping(value = "/addFreightCost",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-运费",methods = "新增运费")
+    @SystemLogAnnotation(module = "知识库-运费",methods = "add")
     public ModelAndView addFreightCost(){
         return new ModelAndView("knowledgeBase/addFreightCost");
     }
 
     @RequestMapping(value = "/doAddFreightCost",method = RequestMethod.POST)
-    @SystemLogAnnotation(module = "知识库-运费",methods = "执行新增")
+    @SystemLogAnnotation(module = "知识库-运费",methods = "doAdd")
     @ResponseBody
     public ResultPojo doAddFreightCost(@RequestBody FreightCost freightCost){
         try{
@@ -77,7 +77,7 @@ public class FreightCostAction {
      * @return
      */
     @RequestMapping(value = "/queryFreightCostList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-运费",methods = "条件查询")
+    @SystemLogAnnotation(module = "知识库-运费",methods = "query")
     public ModelAndView queryFreightCostList(@RequestBody FreightCostQuery freightCostQuery){
         Result<List<FreightCost>> result = new Result<List<FreightCost>>();
         try{

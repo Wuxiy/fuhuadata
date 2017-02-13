@@ -41,7 +41,7 @@ public class CustomerEncyclopediaAction {
      */
     @SuppressWarnings("unused")
     @RequestMapping(value = "/customerEncyclopediaList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-企业百科",methods = "百科列表")
+    @SystemLogAnnotation(module = "知识库-企业百科",methods = "list")
     public ModelAndView customerEncyclopediaList(){
         Result<List<CustomerEncyclopedia>> result = new Result<List<CustomerEncyclopedia>>();
         try{
@@ -65,7 +65,7 @@ public class CustomerEncyclopediaAction {
         return model;
     }
     @RequestMapping(value = "/addCustomerEncyclopedia",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-企业百科",methods = "新增企业百科")
+    @SystemLogAnnotation(module = "知识库-企业百科",methods = "add")
     public ModelAndView addCustomerEncyclopedia(){
         return new ModelAndView("knowledgeBase/addCustomerEncyclopedia");
     }
@@ -76,7 +76,7 @@ public class CustomerEncyclopediaAction {
      * @return
      */
     @RequestMapping(value = "/doAddCustomerEncyclopedia",method = RequestMethod.POST)
-    @SystemLogAnnotation(module = "知识库-客户百科",methods = "执行新增")
+    @SystemLogAnnotation(module = "知识库-客户百科",methods = "doAdd")
     @ResponseBody
      public ResultPojo doAddCustomerEncyclopedia(@RequestBody CustomerEncyclopedia customerEncyclopedia){
         //
@@ -95,7 +95,7 @@ public class CustomerEncyclopediaAction {
      * @return
      */
     @RequestMapping(value = "/queryCustomerEncyclopediaList",method = RequestMethod.POST)
-    @SystemLogAnnotation(module = "知识库-客户百科",methods = "条件查询")
+    @SystemLogAnnotation(module = "知识库-客户百科",methods = "query")
     public ModelAndView queryCustomerEncyclopediaList(String type,String companyName,String index){
         CustomerEncyclopediaQuery customerEncyclopediaQuery = new CustomerEncyclopediaQuery();
          Result<List<CustomerEncyclopedia>> result = new Result<List<CustomerEncyclopedia>>();
