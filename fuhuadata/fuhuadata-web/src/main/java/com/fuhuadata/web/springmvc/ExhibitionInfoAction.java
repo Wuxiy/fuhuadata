@@ -13,6 +13,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -130,17 +132,18 @@ public class    ExhibitionInfoAction {
             log.error("条件查询获取展会信息失败",e);
         }
         ResultPojo resultPojo=result.getResultPojo();
+
         return resultPojo;
     }
 
-    @RequestMapping(value="/addExhibitionInfo",method = RequestMethod.GET)
+    @RequestMapping(value="/addExhibitionInfo.do",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "知识库-展会动态",methods = "add")
     public ModelAndView addExhibitionInfo(){
         return new ModelAndView("knowledgeBase/exhibitionInfoAdd");
     }
 
 
-    @RequestMapping(value = "/doAddExhibitionInfo",method = RequestMethod.POST)
+    @RequestMapping(value = "/doAddExhibitionInfo.do",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "知识库-展会动态",methods = "doAdd")
     @ResponseBody
     public ResultPojo doAddExhibitionInfo(@RequestBody ExhibitionInfo exhibitionInfo){
@@ -154,7 +157,7 @@ public class    ExhibitionInfoAction {
         return null;
     }
 
-    @RequestMapping(value = "/deleteExhibitionInfo",method = RequestMethod.GET)
+    @RequestMapping(value = "/deleteExhibitionInfo.do",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "知识库-展会动态",methods ="delete" )
     @ResponseBody
     public ResultPojo deleteExhibitionInfo(int id){
@@ -167,7 +170,7 @@ public class    ExhibitionInfoAction {
         return null;
     }
 
-    @RequestMapping(value = "/doModifyExhibitionInfo",method =RequestMethod.GET)
+    @RequestMapping(value = "/doModifyExhibitionInfo.do",method =RequestMethod.GET)
     @SystemLogAnnotation(module = "知识库-展会动态",methods = "update")
     @ResponseBody
     public ResultPojo doModifyExhibitionInfo(@RequestBody ExhibitionInfo exhibitionInfo){
