@@ -132,7 +132,7 @@ public class    ExhibitionInfoAction {
             log.error("条件查询获取展会信息失败",e);
         }
         ResultPojo resultPojo=result.getResultPojo();
-
+        resultPojo.setPreObject(exhibitionInfoQuery);
         return resultPojo;
     }
 
