@@ -95,6 +95,16 @@ public class MarketTrainingAction {
         return null;
     }
 
+    public ResultPojo doModifyMarketTraining(@RequestBody MarketTraining marketTraining){
+        try{
+            int id=marketTraining.getTranId();
+            Result<MarketTraining> result = marketTrainingService.updateMarketTrainingById(id,marketTraining);
+        }catch(Exception e){
+
+        }
+        return null;
+    }
+
 
 
 }

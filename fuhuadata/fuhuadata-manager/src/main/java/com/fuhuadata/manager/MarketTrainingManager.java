@@ -14,6 +14,10 @@ public interface MarketTrainingManager {
 
     public MarketTraining addMarketTraining(MarketTraining marketTraining);
 
+    public boolean updateMarketTrainingById(int id,MarketTraining marketTraining);
+
+    public boolean deleteMarketTrainingById(int id);
+
     public Result<List<MarketTraining>> getMarketTrainingsByPage(MarketTrainingQuery marketTrainingQuery);
 
     public int count(MarketTrainingQuery marketTrainingQuery);

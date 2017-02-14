@@ -27,7 +27,7 @@
             <isNotNull prepend=" AND " property="uploadDate">
                 uploadDate = #uploadDate#
             </isNotNull>
-            <isNotNull prepend="AND" property="searchKey">
+            <isNotNull prepend=" AND " property="searchKey">
                 title like concat('%',#searchKey#,'%')
             </isNotNull>
         </dynamic>
@@ -43,6 +43,36 @@
                 SELECT @@IDENTITY AS tran_id
             </selectKey>
         </insert>
+
+    <update id="UPDATE" parameterClass="MarketTraining">
+        UPDATE k_market_training
+        <dynamic prepend=" SET ">
+            <isNotNull prepend=", " property="productId">
+                product_id = #productId#
+            </isNotNull>
+            <isNotNull prepend=", " property="title">
+                title = #title#
+            </isNotNull>
+            <isNotNull prepend=", " property="productType">
+                product_type like concat('%',#productType#,'%')
+            </isNotNull>
+            <isNotNull prepend=", " property="uploadDate">
+                uploadDate = #uploadDate#
+            </isNotNull>
+            <isNotNull prepend=", " property="userId">
+                user_id = #userId#
+            </isNotNull>
+            <isNotNull prepend=", " property="download">
+                download = #download#
+            </isNotNull>
+        </dynamic>
+    </update>
+
+    <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
+        <![CDATA[
+        DELETE FROM k_market_training WHERE tran_id=#tranId#
+        ]]>
+    </delete>
 
     <select id="GET-PAGE" resultMap="MARKETTRAINING-MAP" parameterClass="MarketTrainingQuery">
         <![CDATA[

@@ -20,6 +20,16 @@ public class MarketTrainingManagerImpl implements MarketTrainingManager {
     }
 
     @Override
+    public boolean updateMarketTrainingById(int id, MarketTraining marketTraining) {
+        return marketTrainingDao.updateMarketTrainingById(id,marketTraining)==1?true:false;
+    }
+
+    @Override
+    public boolean deleteMarketTrainingById(int id) {
+        return marketTrainingDao.deleteMarketTrainingById(id)==1?true:false;
+    }
+
+    @Override
     public Result<List<MarketTraining>> getMarketTrainingsByPage(MarketTrainingQuery marketTrainingQuery) {
         //事物操作封装返回结果
         Result<List<MarketTraining>> result = new Result<List<MarketTraining>>();
@@ -47,6 +57,7 @@ public class MarketTrainingManagerImpl implements MarketTrainingManager {
     public MarketTrainingDao getMarketTrainingDao(){
         return this.marketTrainingDao;
     }
+
     public void setMarketTrainingDao(MarketTrainingDao marketTrainingDao){
         this.marketTrainingDao=marketTrainingDao;
     }

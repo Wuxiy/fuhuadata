@@ -13,6 +13,10 @@ public interface MarketTrainingDao {
 
     public MarketTraining addMartketTraining(MarketTraining marketTraining);
 
+    public int updateMarketTrainingById(int id,MarketTraining marketTraining);
+
+    public int deleteMarketTrainingById(int id);
+
     public List<MarketTraining> getMarketTrainingsByPage(MarketTrainingQuery marketTrainingQuery);
 
     public int count(MarketTrainingQuery marketTrainingQuery);

@@ -165,7 +165,7 @@ public class UserAccountAction{
 	
 	/**
 	 * 获取json返回值
-	 * @param userAccount的json格式数据
+	 * @param
 	 * @return
 	 */
 	@RequestMapping(value="/getUserAccountJsonParam")

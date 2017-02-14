@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -99,10 +100,37 @@ public class    ExhibitionInfoAction {
         }
         ModelAndView model = new ModelAndView("knowledgeBase/exhibitionInfoList","exhibitionInfoList",result.getModel());
         model.addObject("totalItem",result.getTotalItem());
+        model.addObject("totalPage",result.getTotalPage());
         if(exhibitionName!=null){
         model.addObject("queryCondition",exhibitionInfoQuery);}
         model.addObject("message","展会动态列表");
         return model;
+    }
+
+
+    @RequestMapping(value = "/queryExhibitionInfoTest",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "知识库-展会动态",methods = "query")
+    @ResponseBody
+    public ResultPojo queryExhibitionInfoJson(String index,String exhibitionName){
+        ExhibitionInfoQuery exhibitionInfoQuery = new ExhibitionInfoQuery();
+        Result<List<ExhibitionInfo>> result = new Result<List<ExhibitionInfo>>();
+        try{
+            exhibitionInfoQuery.setPageSize(pageSize);
+            //out
+            System.out.println(index);
+            System.out.println(exhibitionName);
+            if(index==null){
+                exhibitionInfoQuery.setIndex(Integer.valueOf(page.trim()));
+            }else{
+                exhibitionInfoQuery.setIndex(Integer.valueOf(index.trim()));
+            }
+            exhibitionInfoQuery.setExhibitionName(exhibitionName);
+            result=exhibitionInfoService.getExhibitionInfosByPage(exhibitionInfoQuery);
+        }catch (Exception e){
+            log.error("条件查询获取展会信息失败",e);
+        }
+        ResultPojo resultPojo=result.getResultPojo();
+        return resultPojo;
     }
 
     @RequestMapping(value="/addExhibitionInfo",method = RequestMethod.GET)

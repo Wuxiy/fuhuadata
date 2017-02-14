@@ -13,6 +13,10 @@ public interface MarketTrainingService {
 
     public Result<MarketTraining> addMarketTraining(MarketTraining marketTraining);
 
+    public Result updateMarketTrainingById(int id,MarketTraining marketTraining);
+
+    public Result deleteMarketTrainingById(int id);
+
     public Result<List<MarketTraining>> getMarketTrainingsByPage(MarketTrainingQuery marketTrainingQuery);
 
     public Result<Integer> count(MarketTrainingQuery marketTrainingQuery);

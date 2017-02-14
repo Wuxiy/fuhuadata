@@ -31,6 +31,30 @@ public class MarketTrainingServiceImpl implements MarketTrainingService{
     }
 
     @Override
+    public Result updateMarketTrainingById(int id, MarketTraining marketTraining) {
+        Result result = new Result();
+        try{
+            result.setSuccess(marketTrainingManager.updateMarketTrainingById(id,marketTraining));
+        }catch(Exception e){
+            result.setSuccess(false);
+            log.error("更新营销培训信息错误",e);
+        }
+        return result;
+    }
+
+    @Override
+    public Result deleteMarketTrainingById(int id) {
+        Result result = new Result();
+        try{
+            result.setSuccess(marketTrainingManager.deleteMarketTrainingById(id));
+        }catch (Exception e){
+            result.setSuccess(false);
+            log.error("根据id删除营销培训错误",e);
+        }
+        return result;
+    }
+
+    @Override
     public Result<List<MarketTraining>> getMarketTrainingsByPage(MarketTrainingQuery marketTrainingQuery) {
         Result<List<MarketTraining>> result = new Result<List<MarketTraining>>();
         try {
