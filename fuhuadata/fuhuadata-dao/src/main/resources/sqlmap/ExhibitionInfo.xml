@@ -31,6 +31,12 @@
             <isNotNull prepend=" AND " property="city">
                 city = #city#
             </isNotNull>
+            <isNotNull prepend=" AND " property="startDate">
+                start_date = #startDate#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="finishDate">
+                finish_date = #finishDate#
+            </isNotNull>
             <isNotNull prepend=" AND " property="searchKey">
                 name like concat('%',#searchKey#,'%')
             </isNotNull>
@@ -52,6 +58,57 @@
             SELECT @@IDENTITY AS exhibition_id
         </selectKey>
     </insert>
+
+    <update id="UPDATE" parameterClass="ExhibitionInfo">
+        UPDATE k_exhibition_info
+        <dynamic prepend=" SET ">
+            <isNotNull prepend=", " property="exhibitionName">
+                exhibition_name = #exhibitionName#
+            </isNotNull>
+            <isNotNull prepend=", " property="sponsor">
+                sponsor = #sponsor#
+            </isNotNull>
+            <isNotNull prepend=", " property="organizer">
+                organizer = #organizer#
+            </isNotNull>
+            <isNotNull prepend=", " property="region">
+                region =#region#
+            </isNotNull>
+            <isNotNull prepend=", " property="country">
+                country = #country#
+            </isNotNull>
+            <isNotNull prepend=", " property="city">
+                city = #city#
+            </isNotNull>
+            <isNotNull prepend=", " property="startDate">
+                start_date = #startDate#
+            </isNotNull>
+            <isNotNull prepend=", " property="finishDate">
+                finish_date = #finishDate#
+            </isNotNull>
+            <isNotNull prepend=", " property="exhibitionAddr">
+                exhibition_addr = #exhibitionAddr#
+            </isNotNull>
+            <isNotNull prepend=", " property="exhibitionLink">
+                exhibition_link  = #exhibitionLink#
+            </isNotNull>
+            <isNotNull prepend=", " property="creator">
+                creator = #creator#
+            </isNotNull>
+            <isNotNull prepend=", " property="createTime">
+                create_time = #createTime#
+            </isNotNull>
+            <isNotNull prepend=", " property="exhibitionInfo">
+                exhibition_info = #exhibitionInfo#
+            </isNotNull>
+        </dynamic>
+    </update>
+
+    <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
+        <![CDATA[
+            DELETE FROM k_exhibition_info WHERE exhibition_id = #exhibitionId#
+        ]]>
+    </delete>
 
     <select id="GET-PAGE" resultMap="EXHIBITIONINFO-MAP" parameterClass="ExhibitionInfoQuery">
         <![CDATA[

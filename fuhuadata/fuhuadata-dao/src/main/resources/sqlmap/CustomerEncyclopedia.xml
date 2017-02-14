@@ -31,7 +31,7 @@
     <sql id="PAGE-COMMON">
         <dynamic prepend=" WHERE ">
             <isNotNull prepend=" AND " property="companyName">
-                company_name = #companyName#
+                company_name like concat('%',#companyName#,'%')
             </isNotNull>
             <isNotNull prepend=" AND " property="type">
                 type = #type#

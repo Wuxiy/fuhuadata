@@ -14,6 +14,10 @@ public interface ExhibitionInfoManager {
 
     public ExhibitionInfo addExhibitionInfo(ExhibitionInfo exhibitionInfo);
 
+    public boolean updateExhibitionInfoById(int id,ExhibitionInfo exhibitionInfo);
+
+    public boolean deleteExhibitionInfoById(int id);
+
     public Result<List<ExhibitionInfo>> getExhibitionInfosByPage(ExhibitionInfoQuery exhibitionInfoQuery);
 
     public int count(ExhibitionInfoQuery exhibitionInfoQuery);

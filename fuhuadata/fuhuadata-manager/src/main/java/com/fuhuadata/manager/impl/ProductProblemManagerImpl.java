@@ -65,4 +65,11 @@ public class ProductProblemManagerImpl implements ProductProblemManager {
     public int count(ProductProblemQuery productProblemQuery) {
         return productProblemDao.count(productProblemQuery);
     }
+
+    public void setProductProblemDao(ProductProblemDao productProblemDao) {
+        this.productProblemDao = productProblemDao;
+    }
+    public ProductProblemDao getProductProblemDao(){
+        return this.productProblemDao;
+    }
 }

@@ -41,7 +41,7 @@ public class CustomerEncyclopediaAction {
      */
     @SuppressWarnings("unused")
     @RequestMapping(value = "/customerEncyclopediaList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-企业百科",methods = "百科列表")
+    @SystemLogAnnotation(module = "知识库-企业百科",methods = "list")
     public ModelAndView customerEncyclopediaList(){
         Result<List<CustomerEncyclopedia>> result = new Result<List<CustomerEncyclopedia>>();
         try{
@@ -58,11 +58,14 @@ public class CustomerEncyclopediaAction {
         }
 
         ModelAndView model= new ModelAndView("knowledgeBase/encyclopediaList","customerEncyclopedias",result.getModel());
+        model.addObject("totalItem",result.getTotalItem());
+        model.addObject("totalPage",result.getTotalPage());
         model.addObject("message","企业百科列表");
+        model.addObject("query",null);
         return model;
     }
     @RequestMapping(value = "/addCustomerEncyclopedia",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-企业百科",methods = "新增企业百科")
+    @SystemLogAnnotation(module = "知识库-企业百科",methods = "add")
     public ModelAndView addCustomerEncyclopedia(){
         return new ModelAndView("knowledgeBase/addCustomerEncyclopedia");
     }
@@ -73,7 +76,7 @@ public class CustomerEncyclopediaAction {
      * @return
      */
     @RequestMapping(value = "/doAddCustomerEncyclopedia",method = RequestMethod.POST)
-    @SystemLogAnnotation(module = "知识库-客户百科",methods = "执行新增")
+    @SystemLogAnnotation(module = "知识库-客户百科",methods = "doAdd")
     @ResponseBody
      public ResultPojo doAddCustomerEncyclopedia(@RequestBody CustomerEncyclopedia customerEncyclopedia){
         //
@@ -88,23 +91,31 @@ public class CustomerEncyclopediaAction {
 
     /**
      * 条件查询
-     * @param customerEncyclopediaQuery
+     * @param
      * @return
      */
     @RequestMapping(value = "/queryCustomerEncyclopediaList",method = RequestMethod.POST)
-    @SystemLogAnnotation(module = "知识库-客户百科",methods = "条件查询")
-    public ModelAndView queryCustomerEncyclopediaList(@RequestBody CustomerEncyclopediaQuery customerEncyclopediaQuery){
+    @SystemLogAnnotation(module = "知识库-客户百科",methods = "query")
+    public ModelAndView queryCustomerEncyclopediaList(String type,String companyName,String index){
+        CustomerEncyclopediaQuery customerEncyclopediaQuery = new CustomerEncyclopediaQuery();
          Result<List<CustomerEncyclopedia>> result = new Result<List<CustomerEncyclopedia>>();
          try{
              customerEncyclopediaQuery.setPageSize(pageSize);
-             if(customerEncyclopediaQuery.getIndex()==0){
+             customerEncyclopediaQuery.setType(type);
+             customerEncyclopediaQuery.setCompanyName(companyName);
+             if(index==null){
                  customerEncyclopediaQuery.setIndex(Integer.valueOf(page.trim()));
+             }else{
+                 customerEncyclopediaQuery.setIndex(Integer.valueOf(index.trim()));
              }
              result=customerEncyclopediaService.getCustomerEncyclopediasByPage(customerEncyclopediaQuery);
          }catch(Exception e){
              log.error("条件查询客户百科失败",e);
          }
          ModelAndView model = new ModelAndView("knowledgeBase/customerEncyclopediaList","customerEncyclopedias",result.getModel());
+         model.addObject("totalItem",result.getTotalItem());//总记录数
+         model.addObject("totalPage",result.getTotalPage());//总页数
+         model.addObject("query",customerEncyclopediaQuery);//查询条件反写
          model.addObject("message","客户百科列表");
          return model;
     }

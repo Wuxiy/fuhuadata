@@ -187,7 +187,26 @@
                             <th class="col-xs-1 text-center">创建时间</th>
                         </tr>
                         </thead>
+<<<<<<< HEAD
                         <tbody id ="tb">
+=======
+                        <tbody id="a">
+                        <tr>
+                            <td>1</td>
+                            <td>2016全国植保会</td>
+                            <td>全国农业技术推广服务中心</td>
+                            <td>江苏省植物保护站厦门市凤凰创意会展服务有限公司</td>
+                            <td>中国</td>
+                            <td>南京</td>
+                            <td>2016年11月25日</td>
+                            <td>2016年11月27日</td>
+                            <td>南京国际博览中心</td>
+                            <td>吸引来自全国30参展范围涉及农药原药、农药、肥料、植保机械及包装设备等，涵盖整个农化产业上、中、下游产品，是国内参展产品最齐全的大会。</td>
+                            <td><a href="http://www.1988.tv/zhanhui/2016qgzbh/about.html">点击进入</a></td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-12</td>
+                        </tr>
+>>>>>>> 013138c414c6bbc1e0f248ac9093eaeca1f0e872
                             #foreach($exhibitionInfo in $exhibitionInfoList)
                         <tr>
                             <td>${exhibitionInfo.exhibitionId}</td>
@@ -243,25 +262,29 @@
 <script type="text/javascript">
 
     function test(){
+
         var t = document.getElementById("tb");
         t.innerHTML = '';
+
         var search = jQuery("#search").val();
         var data = {
-            "index":1,
+            "index":"1",
             "exhibitionName":jQuery("#search").val()
         }
-        alert(search);
+        a.innerHTML = '';
         jQuery.ajax({
             type:"GET",
             url:'queryExhibitionInfo',
-            dataType:"json",
             data:data,
-            contentType:"application/json",
             success:function(){
+
                 #foreach($exhibitionInfo in $exhibitionInfoList)
                     t.innerHTML += '<tr> <td>${exhibitionInfo.exhibitionId}</td> </tr>';
 
                 #end
+
+                alert("查询成功");
+
         }
     })
     }
