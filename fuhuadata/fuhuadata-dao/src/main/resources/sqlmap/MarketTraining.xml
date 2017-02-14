@@ -10,7 +10,7 @@
         <result column="title" property="title" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="product_type" property="productType" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="user_id" property="userId" jdbcType="VARCHAR" javaType="java.lang.String" />
-        <result column="upload_date" property="uploadDate" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+        <result column="upload_date" property="uploadDate" jdbcType="DATE" javaType="java.sql.Date" />
         <result column="download" property="download" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>
     <sql id="PAGE-COMMON">

@@ -9,7 +9,7 @@
         <result column="type" property="type" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result column="kind" property="kind" jdbcType="VARCHAR" javaType="java.lang.String" />
         <result column="rate" property="rate" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="term_of_validity" property="termofValidity" jdbcType="DATETIME" javaType="java.lang.Timestamp"/>
+        <result column="term_of_validity" property="termofValidity" jdbcType="DATE" javaType="java.sql.Date"/>
         <result column="remarks" property="remarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>
 
