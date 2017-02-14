@@ -10,6 +10,7 @@
 	<bean id="customerEncyclopediaService" class="com.fuhuadata.service.impl.CustomerEncyclopediaServiceImpl"/>
 	<bean id ="componentCostService" class="com.fuhuadata.service.impl.ComponentCostServiceImpl"/>
 	<bean id="freightCostService" class="com.fuhuadata.service.impl.FreightCostServiceImpl"/>
+	<bean id="rateService" class="com.fuhuadata.service.impl.RateServiceImpl"/>
 	<bean id = "industryDataService" class="com.fuhuadata.service.impl.IndustryDataServiceImpl"/>
 	<bean id = "packingArchivesService" class="com.fuhuadata.service.impl.PackingArchivesServiceImpl"/>
 	<bean id = "portChargesCostService" class="com.fuhuadata.service.impl.PortChargesCostServiceImpl"/>

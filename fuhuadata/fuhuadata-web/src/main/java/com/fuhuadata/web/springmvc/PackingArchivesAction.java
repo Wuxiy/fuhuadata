@@ -6,8 +6,6 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.PackingArchivesService;
 import com.fuhuadata.web.util.SystemLogAnnotation;
-import com.sun.xml.internal.bind.InternalAccessorFactory;
-import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;

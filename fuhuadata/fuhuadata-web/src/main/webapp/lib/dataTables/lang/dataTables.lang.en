@@ -1,0 +1,23 @@
+{
+    "emptyTable":     "<div class=\"cmn_warning tip\"><img src=\"/stylesheet/nsfocus_2014/images/blank.gif\" class=\"ico\">No Data</div>",
+    "info":           "Total _TOTAL_ records",
+    "infoEmpty":      "Total 0 records",
+    "infoFiltered":   "(filtered from _MAX_ total entries)",
+    "infoPostFix":    "",
+    "thousands":      ",",
+    "lengthMenu":     "Show _MENU_ entries",
+    "loadingRecords": "Loading...",
+    "processing":     "Processing...",
+    "search":         "Search:",
+    "zeroRecords":    "<div class=\"cmn_warning tip\"><img src=\"/stylesheet/nsfocus_2014/images/blank.gif\" class=\"ico\">No Data</div>",
+    "paginate": {
+        "first":      "First",
+        "last":       "Last",
+        "next":       "Next",
+        "previous":   "Previous"
+    },
+    "aria": {
+        "sortAscending":  ": activate to sort column ascending",
+        "sortDescending": ": activate to sort column descending"
+    }
+}

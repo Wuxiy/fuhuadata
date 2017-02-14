@@ -187,22 +187,7 @@
                             <th class="col-xs-1 text-center">创建时间</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>2016全国植保会</td>
-                            <td>全国农业技术推广服务中心</td>
-                            <td>江苏省植物保护站厦门市凤凰创意会展服务有限公司</td>
-                            <td>中国</td>
-                            <td>南京</td>
-                            <td>2016年11月25日</td>
-                            <td>2016年11月27日</td>
-                            <td>南京国际博览中心</td>
-                            <td>吸引来自全国30参展范围涉及农药原药、农药、肥料、植保机械及包装设备等，涵盖整个农化产业上、中、下游产品，是国内参展产品最齐全的大会。</td>
-                            <td><a href="http://www.1988.tv/zhanhui/2016qgzbh/about.html">点击进入</a></td>
-                            <td>刘凯洋</td>
-                            <td>2016-10-12</td>
-                        </tr>
+                        <tbody id ="tb">
                             #foreach($exhibitionInfo in $exhibitionInfoList)
                         <tr>
                             <td>${exhibitionInfo.exhibitionId}</td>
@@ -224,6 +209,8 @@
                     </table>
                     <!--表格结束-->
                     <!--分页导航开始-->
+                    #set($page_size = 6)
+
                     <div class="form-group pull-left table-pagination">
                         共<span></span>条记录，<span>130</span>页，跳转到第&nbsp;<input class="form-control pagination-input" type="number"/>&nbsp;页
                         <button class="btn btn-xs btn-primary">确定</button>
@@ -256,6 +243,8 @@
 <script type="text/javascript">
 
     function test(){
+        var t = document.getElementById("tb");
+        t.innerHTML = '';
         var search = jQuery("#search").val();
         var data = {
             "index":1,
@@ -269,8 +258,10 @@
             data:data,
             contentType:"application/json",
             success:function(){
-                window.location.reload();
-                console.log("233");
+                #foreach($exhibitionInfo in $exhibitionInfoList)
+                    t.innerHTML += '<tr> <td>${exhibitionInfo.exhibitionId}</td> </tr>';
+
+                #end
         }
     })
     }

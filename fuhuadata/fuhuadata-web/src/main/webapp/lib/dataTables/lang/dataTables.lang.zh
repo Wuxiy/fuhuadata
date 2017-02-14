@@ -1,0 +1,21 @@
+{
+  "emptyTable": "<div class=\"cmn_warning tip\"><img src=\"/stylesheet/nsfocus_2014/images/blank.gif\" class=\"ico\">无数据</div>",
+  "processing": "<div class=\"loading\"><span>数据加载中，请稍候...</span></div>",
+  "lengthMenu": "_MENU_ /页",
+  "zeroRecords": "<div class=\"cmn_warning tip\"><img src=\"/stylesheet/nsfocus_2014/images/blank.gif\" class=\"ico\">无数据</div>",
+  "loadingRecords": "处理中",
+  "info": "共_TOTAL_条记录",
+  "infoEmpty": "共0条",
+  "infoFiltered": "(从_MAX_条中筛选)",
+  "infoPostFix": "",
+  "infoPages": "页",
+  "infoPages": "_CUR_/_MENU_ 页",
+  "jumpToPage": "转到",
+  "search": "查询",
+  "paginate": {
+    "first": "首页",
+    "previous": "上一页",
+    "next": "下一页",
+    "last": "末页"
+  }
+}
