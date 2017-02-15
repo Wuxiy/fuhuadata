@@ -119,22 +119,28 @@
             "index":"1",
             "exhibitionName":jQuery("#search").val()
         }
-        a.innerHTML = '';
         jQuery.ajax({
             type:"GET",
             url:'queryExhibitionInfoTest',
             data:data,
-            success:function(){
+            success:function(data){
 
-                #foreach($exhibitionInfo in $exhibitionInfoList)
-                    t.innerHTML += '<tr> <td>${exhibitionInfo.exhibitionId}</td> </tr>';
+##                #foreach($exhibitionInfo in $exhibitionInfoList)
+##                    t.innerHTML += '<tr> <td>${exhibitionInfo.exhibitionId}</td> </tr>';
+##
+##                #end
+                jQuery("#a").html('');
+                var json=eval(data);//数组
+                var exhibitonInfoList=json.defaultObject;
+//                jQuery.each(json,function (index,item) {
+//                    var exhibitionName=exhibitonInfoList.
+//
+//                })
 
-                #end
+                alert(exhibitonInfoList);
 
-                alert("查询成功");
-
-        }
-    })
+      }
+   });
     }
 
 </script>
