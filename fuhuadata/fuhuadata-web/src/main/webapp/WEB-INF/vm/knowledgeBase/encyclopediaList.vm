@@ -1,4 +1,5 @@
- <!--表格开始-->
+<div class="col-xs-12">
+<!--表格开始-->
 <div class="panel panel-default">
     <div class="panel-heading">
         <a class="btn btn-xs btn-primary pull-right panel-heading-btn" href="/knowledgeBase/encyclopediaAdd" data-toggle="modal">
@@ -85,4 +86,4 @@
         <!--分页导航结束-->
     </div>
 </div>
-<!--表格结束-->
+</div>
