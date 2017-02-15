@@ -1,140 +1,123 @@
 #set($layout="layout/layout.vm")
 <div class="col-xs-12">
-    <!--表格开始-->
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <a class="btn btn-xs btn-primary pull-right panel-heading-btn" href="/exhibitionInfo/addExhibitionInfo" data-toggle="modal">
-                <span class="glyphicon glyphicon-plus"></span>
-                新增
-            </a>
-            <h3 class="panel-title">
-                展会动态
-            </h3>
-        </div>
-        <div class="panel-body clearfix">
-            <!--搜索框开始-->
-            <div class="form-horizontal">
-                <div class="form-group ">
-                    <div class="col-xs-2 pull-right">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入关键词查找" id="search">
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-primary btn-xs" onclick="test()">
-                                    <span class="glyphicon glyphicon-search"></span>
-                                    搜索
-                                </button>
+        <!--表格开始-->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a class="btn btn-xs btn-primary pull-right panel-heading-btn" href="/exhibitionInfo/addExhibitionInfo" data-toggle="modal">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    新增
+                </a>
+                <h3 class="panel-title">
+                    展会动态
+                </h3>
+            </div>
+            <div class="panel-body clearfix">
+                <!--搜索框开始-->
+                <div class="form-horizontal">
+                    <div class="form-group ">
+                        <div class="col-xs-2 pull-right">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="请输入关键词查找" id="search">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-primary btn-xs" onclick="test()">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                        搜索
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!--搜索框结束-->
-            <!--表格开始-->
-            <table class="table table-condensed table-bordered table-striped text-center">
-                <thead>
-                <tr>
-                    <th class="text-center ">编号</th>
-                    <th class="col-xs-2 text-center">展会名称</th>
-                    <th class="col-xs-1 text-center">主办方</th>
-                    <th class="col-xs-2 text-center">承办单位</th>
-                    <th class="text-center">国家</th>
-                    <th class="text-center">城市</th>
-                    <th class="col-xs-1 text-center">开始时间</th>
-                    <th class="col-xs-1 text-center">结束日期</th>
-                    <th class="col-xs-1 text-center">展会地址</th>
-                    <th class="col-xs-2 text-center">展会介绍</th>
-                    <th class="col-xs-1 text-center">展会介绍连接</th>
-                    <th class="text-center">创建人</th>
-                    <th class="col-xs-1 text-center">创建时间</th>
-                </tr>
-                </thead>
-                <tbody id ="tb">
-                <tbody id="a">
-                <tr>
-                    <td>1</td>
-                    <td>2016全国植保会</td>
-                    <td>全国农业技术推广服务中心</td>
-                    <td>江苏省植物保护站厦门市凤凰创意会展服务有限公司</td>
-                    <td>中国</td>
-                    <td>南京</td>
-                    <td>2016年11月25日</td>
-                    <td>2016年11月27日</td>
-                    <td>南京国际博览中心</td>
-                    <td>吸引来自全国30参展范围涉及农药原药、农药、肥料、植保机械及包装设备等，涵盖整个农化产业上、中、下游产品，是国内参展产品最齐全的大会。</td>
-                    <td><a href="http://www.1988.tv/zhanhui/2016qgzbh/about.html">点击进入</a></td>
-                    <td>刘凯洋</td>
-                    <td>2016-10-12</td>
-                </tr>
-                    #foreach($exhibitionInfo in $exhibitionInfoList)
-                <tr>
-                    <td>${exhibitionInfo.exhibitionId}</td>
-                    <td>${exhibitionInfo.exhibitionName}</td>
-                    <td>${exhibitionInfo.sponsor}</td>
-                    <td>${exhibitionInfo.organizer}</td>
-                    <td>${exhibitionInfo.country}</td>
-                    <td>${exhibitionInfo.city}</td>
-                    <td lang="zh">${exhibitionInfo.startDate}</td>
-                    <td lang="zh">${exhibitionInfo.finishDate}</td>
-                    <td>${exhibitionInfo.exhibitionAddr}</td>
-                    <td>${exhibitionInfo.exhibitionInfo}</td>
-                    <td><a href="${exhibitionInfo.exhibitionLink}">点击进入</a></td>
-                    <td>${exhibitionInfo.creator}</td>
-                    <td lang="zh">${exhibitionInfo.createTime}</td>
-                </tr>
-                    #end
-            </tbody>
-            </table>
-            <!--表格结束-->
-            <!--分页导航开始-->
-            #set($page_size = 6)
+                <!--搜索框结束-->
+                <!--表格开始-->
+                <table class="table table-condensed table-bordered table-striped text-center">
+                    <thead>
+                    <tr>
+                        <th class="text-center ">编号</th>
+                        <th class="col-xs-2 text-center">展会名称</th>
+                        <th class="col-xs-1 text-center">主办方</th>
+                        <th class="col-xs-2 text-center">承办单位</th>
+                        <th class="text-center">国家</th>
+                        <th class="text-center">城市</th>
+                        <th class="col-xs-1 text-center">开始时间</th>
+                        <th class="col-xs-1 text-center">结束日期</th>
+                        <th class="col-xs-1 text-center">展会地址</th>
+                        <th class="col-xs-2 text-center">展会介绍</th>
+                        <th class="col-xs-1 text-center">展会介绍连接</th>
+                        <th class="text-center">创建人</th>
+                        <th class="col-xs-1 text-center">创建时间</th>
+                    </tr>
+                    </thead>
+                    <tbody id="a">
+                        #foreach($exhibitionInfo in $exhibitionInfoList)
+                    <tr>
+                        <td>${exhibitionInfo.exhibitionId}</td>
+                        <td>${exhibitionInfo.exhibitionName}</td>
+                        <td>${exhibitionInfo.sponsor}</td>
+                        <td>${exhibitionInfo.organizer}</td>
+                        <td>${exhibitionInfo.country}</td>
+                        <td>${exhibitionInfo.city}</td>
+                        <td lang="zh">${exhibitionInfo.startDate}</td>
+                        <td lang="zh">${exhibitionInfo.finishDate}</td>
+                        <td>${exhibitionInfo.exhibitionAddr}</td>
+                        <td>${exhibitionInfo.exhibitionInfo}</td>
+                        <td><a href="${exhibitionInfo.exhibitionLink}">点击进入</a></td>
+                        <td>${exhibitionInfo.creator}</td>
+                        <td lang="zh">${exhibitionInfo.createTime}</td>
+                    </tr>
+                        #end
+                </tbody>
+                </table>
+                <!--表格结束-->
+                <!--分页导航开始-->
+                #set($page_size = 6)
 
-            <div class="form-group pull-left table-pagination">
-                共<span></span>条记录，<span>130</span>页，跳转到第&nbsp;<input class="form-control pagination-input" type="number"/>&nbsp;页
-                <button class="btn btn-xs btn-primary">确定</button>
+                <div class="form-group pull-left table-pagination">
+                    共<span></span>条记录，<span>130</span>页，跳转到第&nbsp;<input class="form-control pagination-input" type="number"/>&nbsp;页
+                    <button class="btn btn-xs btn-primary">确定</button>
+                </div>
+                <ul class="pagination pull-right table-pagination">
+                    <li class="disabled"><a href="#">上一页</a></li>
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">6</a></li>
+                    <li><a href="#">7</a></li>
+                    <li><a href="">&hellip;</a></li>
+                    <li><a href="#">下一页</a></li>
+                </ul>
+                <!--分页导航结束-->
             </div>
-            <ul class="pagination pull-right table-pagination">
-                <li class="disabled"><a href="#">上一页</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">6</a></li>
-                <li><a href="#">7</a></li>
-                <li><a href="">&hellip;</a></li>
-                <li><a href="#">下一页</a></li>
-            </ul>
         </div>
+        <!--表格结束-->
     </div>
-</div>
 <script type="text/javascript">
 
     function test(){
-
-        var t = document.getElementById("tb");
-        t.innerHTML = '';
-
+        var tbody = jQuery("#a");
         var search = jQuery("#search").val();
         var data = {
             "index":"1",
             "exhibitionName":jQuery("#search").val()
         }
-        a.innerHTML = '';
-        jQuery.ajax({
+        jQuery.get({
             type:"GET",
             url:'queryExhibitionInfoTest',
+            dataType:"json",
             data:data,
-            success:function(){
+            success:function(data){
+                var Item=jQuery("<tr></tr>");
+                //i表示在data中的索引位置，n表示包含的信息的对象
+                $.each(data,function(i,n){
+                    //获取对象中属性为optionsValue的值
 
-                #foreach($exhibitionInfo in $exhibitionInfoList)
-                    t.innerHTML += '<tr> <td>${exhibitionInfo.exhibitionId}</td> </tr>';
-
-                #end
-
-                alert("查询成功");
-
-        }
-    })
+                });
+            }
+        });
+        return false;
+    });
     }
 
 </script>
