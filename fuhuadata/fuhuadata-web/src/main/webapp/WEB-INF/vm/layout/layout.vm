@@ -18,7 +18,7 @@
 <body class="bg-page">
 <div class="container-fluid">
     <!--头部-->
-    #parse("vm/layout/header.vm")
+    #parse("layout/header.vm")
     <!--主要内容-->
     <div class="clearfix content shadow-out">
         <!--面包屑导航-->
@@ -38,7 +38,7 @@
     </div>
 </div>
     <!--脚部-->
-    #parse('vm/layout/footer.vm')
+    #parse('layout/footer.vm')
 </body>
 </html>
 

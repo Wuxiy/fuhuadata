@@ -272,6 +272,12 @@
                 <artifactId>velocity</artifactId>
                 <version>1.6.3</version>
             </dependency>
+
+            <dependency>
+                <groupId>commons-digester</groupId>
+                <artifactId>commons-digester</artifactId>
+                <version>2.1</version>
+            </dependency>
             <!-- velocity end -->
 
             <!-- APAPCHE LANG BEGIN -->
