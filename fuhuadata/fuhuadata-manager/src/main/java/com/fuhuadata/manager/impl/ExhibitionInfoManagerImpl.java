@@ -33,6 +33,21 @@ public class ExhibitionInfoManagerImpl extends SqlMapClientTemplate implements E
     }
 
     @Override
+    public ExhibitionInfo getExhibitionInfoById(int id) {
+        return exhibitionInfoDao.getExhibitionInfoById(id);
+    }
+
+    @Override
+    public List<ExhibitionInfo> getAllExhibitionInfos() {
+        return exhibitionInfoDao.getAllExhibitionInfos();
+    }
+
+    @Override
+    public List<ExhibitionInfo> getExhibitionInfosByQuery(ExhibitionInfoQuery exhibitionInfoQuery) {
+        return exhibitionInfoDao.getExhibitionInfosByQuery(exhibitionInfoQuery);
+    }
+
+    @Override
     public Result<List<ExhibitionInfo>> getExhibitionInfosByPage(ExhibitionInfoQuery exhibitionInfoQuery) {
         Result<List<ExhibitionInfo>> result = new Result<List<ExhibitionInfo>>();
         //统计查询总数

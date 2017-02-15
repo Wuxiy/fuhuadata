@@ -187,9 +187,7 @@
                             <th class="col-xs-1 text-center">创建时间</th>
                         </tr>
                         </thead>
-<<<<<<< HEAD
                         <tbody id ="tb">
-=======
                         <tbody id="a">
                         <tr>
                             <td>1</td>
@@ -206,7 +204,6 @@
                             <td>刘凯洋</td>
                             <td>2016-10-12</td>
                         </tr>
->>>>>>> 013138c414c6bbc1e0f248ac9093eaeca1f0e872
                             #foreach($exhibitionInfo in $exhibitionInfoList)
                         <tr>
                             <td>${exhibitionInfo.exhibitionId}</td>
@@ -274,7 +271,7 @@
         a.innerHTML = '';
         jQuery.ajax({
             type:"GET",
-            url:'queryExhibitionInfo',
+            url:'queryExhibitionInfoTest',
             data:data,
             success:function(){
 

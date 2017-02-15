@@ -13,12 +13,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -38,7 +35,7 @@ public class    ExhibitionInfoAction {
 
     @SuppressWarnings("unused")
     @RequestMapping(value = "/exhibitionInfoList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-展会动态",methods = "list")
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "list")
     public ModelAndView exhibitionInfoList(){
         Result<List<ExhibitionInfo>> result = new Result<List<ExhibitionInfo>>();
         try{
@@ -61,7 +58,7 @@ public class    ExhibitionInfoAction {
     }
 
     @RequestMapping(value = "/queryExhibitionInfoList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-展会动态",methods = "query")
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "query")
     public ModelAndView queryExhibitionInfoList(@RequestBody ExhibitionInfoQuery exhibitionInfoQuery){
         Result<List<ExhibitionInfo>> result = new Result<List<ExhibitionInfo>>();
         try{
@@ -81,7 +78,7 @@ public class    ExhibitionInfoAction {
     }
 
     @RequestMapping(value = "/queryExhibitionInfo",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-展会动态",methods = "query")
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "query")
     public ModelAndView queryExhibitionInfo(String index,String exhibitionName){
         ExhibitionInfoQuery exhibitionInfoQuery = new ExhibitionInfoQuery();
         Result<List<ExhibitionInfo>> result = new Result<List<ExhibitionInfo>>();
@@ -111,7 +108,7 @@ public class    ExhibitionInfoAction {
 
 
     @RequestMapping(value = "/queryExhibitionInfoTest",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-展会动态",methods = "query")
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "query")
     @ResponseBody
     public ResultPojo queryExhibitionInfoJson(String index,String exhibitionName){
         ExhibitionInfoQuery exhibitionInfoQuery = new ExhibitionInfoQuery();
@@ -136,15 +133,15 @@ public class    ExhibitionInfoAction {
         return resultPojo;
     }
 
-    @RequestMapping(value="/addExhibitionInfo.do",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-展会动态",methods = "add")
+    @RequestMapping(value="/addExhibitionInfo",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "add")
     public ModelAndView addExhibitionInfo(){
         return new ModelAndView("knowledgeBase/exhibitionInfoAdd");
     }
 
 
-    @RequestMapping(value = "/doAddExhibitionInfo.do",method = RequestMethod.POST)
-    @SystemLogAnnotation(module = "知识库-展会动态",methods = "doAdd")
+    @RequestMapping(value = "/doAddExhibitionInfo",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "doAdd")
     @ResponseBody
     public ResultPojo doAddExhibitionInfo(@RequestBody ExhibitionInfo exhibitionInfo){
         System.out.println("执行新增");
@@ -157,8 +154,8 @@ public class    ExhibitionInfoAction {
         return null;
     }
 
-    @RequestMapping(value = "/deleteExhibitionInfo.do",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-展会动态",methods ="delete" )
+    @RequestMapping(value = "/deleteExhibitionInfo",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods ="delete" )
     @ResponseBody
     public ResultPojo deleteExhibitionInfo(int id){
         try{
@@ -170,8 +167,19 @@ public class    ExhibitionInfoAction {
         return null;
     }
 
+    @RequestMapping(value = "/modifyExhibitionInfo",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods="update")
+    public ModelAndView modifyExhibitonInfo(int id){
+        try{
+            Result<ExhibitionInfo> result = new Result<ExhibitionInfo>();
+        }catch (Exception e){
+            log.error("获取展会信息失败",e);
+        }
+        return new ModelAndView("knowledgeBase/exhibitionInfoUpdate");
+    }
+
     @RequestMapping(value = "/doModifyExhibitionInfo.do",method =RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-展会动态",methods = "update")
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "doUpdate")
     @ResponseBody
     public ResultPojo doModifyExhibitionInfo(@RequestBody ExhibitionInfo exhibitionInfo){
         try{
@@ -180,6 +188,20 @@ public class    ExhibitionInfoAction {
             return result.getResultPojo();
         }catch(Exception e){
             log.error("修改展会动态错误",e);
+        }
+        return null;
+    }
+
+
+    @RequestMapping(value = "/getExhibitionInfoJson")
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "getInfoById")
+    @ResponseBody
+    public ExhibitionInfo getExhibitionInfoById(int id){
+        try{
+            Result<ExhibitionInfo> result = exhibitionInfoService.getExhibitionInfoById(id);
+            return result.getModel();
+         }catch(Exception e){
+            log.error("获取展会信息错误",e);
         }
         return null;
     }

@@ -43,6 +43,29 @@
         </dynamic>
     </sql>
 
+    <sql id="QUERY-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotNull prepend=" AND " property="exhibitionName">
+                exhibition_name like concat('%',#exhibitionName#,'%')
+            </isNotNull>
+            <isNotNull prepend=" AND " property="country">
+                country = #country#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="city">
+                city = #city#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="startDate">
+                start_date = #startDate#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="finishDate">
+                finish_date = #finishDate#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="searchKey">
+                name like concat('%',#searchKey#,'%')
+            </isNotNull>
+        </dynamic>
+    </sql>
+
     <insert id="ADD" parameterClass="ExhibitionInfo">
         insert into k_exhibition_info (exhibition_id, exhibition_name, sponsor,
         organizer, region, country,
@@ -109,6 +132,27 @@
             DELETE FROM k_exhibition_info WHERE exhibition_id = #exhibitionId#
         ]]>
     </delete>
+
+    <select id="GET-ALL" resultMap="EXHIBITIONINFO-MAP">
+        <![CDATA[
+            SELECT * FROM k_exhibition_info
+        ]]>
+    </select>
+
+    <select id="GET-BY-QUERY" resultMap="EXHIBITIONINFO-MAP" parameterClass="ExhibitionInfoQuery">
+        <![CDATA[
+            SELECT * FROM k_exhibition_info
+        ]]>
+        <isParameterPresent>
+            <include refid="QUERY-COMMON"/>
+        </isParameterPresent>
+    </select>
+
+    <select id="GET-BY-ID" resultMap="EXHIBITIONINFO-MAP" parameterClass="java.lang.Integer">
+        <![CDATA[
+            SELECT * FROM k_exhibition_info WHERE exhibition_id = #exhibitionId#
+        ]]>
+    </select>
 
     <select id="GET-PAGE" resultMap="EXHIBITIONINFO-MAP" parameterClass="ExhibitionInfoQuery">
         <![CDATA[

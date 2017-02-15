@@ -20,6 +20,12 @@ public interface ExhibitionInfoService {
 
     public Result deleteExhibitionInfoById(int id);
 
+    public List<ExhibitionInfo> getAllExhibitionInfos();
+
+    public Result<ExhibitionInfo> getExhibitionInfoById(int id);
+
+    public Result<List<ExhibitionInfo>> getExhibitionInfosByQuery(ExhibitionInfoQuery exhibitionInfoQuery);
+
     public  Result<Integer> count(ExhibitionInfoQuery exhibitionInfoQuery);
 
 

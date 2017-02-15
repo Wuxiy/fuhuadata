@@ -32,7 +32,7 @@ public class PackingArchivesAction {
     private String page="1";
     @SuppressWarnings("unused")
     @RequestMapping(value = "/packingArchivesList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-包材成本档案",methods = "成本档案列表")
+    @SystemLogAnnotation(module = "knowledgeBase/packingCostList",methods = "list")
     public ModelAndView packingArchivesList(){
         Result<List<PackingArchives>> result = new Result<List<PackingArchives>>();
         try{
@@ -52,11 +52,11 @@ public class PackingArchivesAction {
         return model;
     }
     @RequestMapping(value = "/addPackingArchives",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-包材成本档案",methods = "新增包材成本档案")
+    @SystemLogAnnotation(module = "knowledgeBase/packingCostList",methods = "add")
     public ModelAndView addPackingArchives(){return new ModelAndView("knowledgeBase/addPackingArchives");}
 
     @RequestMapping(value = "/doAddPackingArchives",method = RequestMethod.POST)
-    @SystemLogAnnotation(module = "知识库-包材成本档案",methods = "执行新增")
+    @SystemLogAnnotation(module = "knowledgeBase/packingCostList",methods = "doAdd")
     @ResponseBody
     public ResultPojo doAddPackingArchives(@RequestBody PackingArchives packingArchives){
         try{
@@ -74,7 +74,7 @@ public class PackingArchivesAction {
      * @return
      */
     @RequestMapping(value = "/queryPackingArchivesList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-包材成本档案",methods = "query")
+    @SystemLogAnnotation(module = "knowledgeBase/packingCostList",methods = "query")
     public ModelAndView queryPackingArchivesList(@RequestBody PackingArchivesQuery packingArchivesQuery){
         Result<List<PackingArchives>> result = new Result<List<PackingArchives>>();
         try{
@@ -89,6 +89,18 @@ public class PackingArchivesAction {
         ModelAndView model = new ModelAndView("knowledgeBase/packingArchivesList","packingArchivesList",result.getModel());
         model.addObject("message","包材成本档案列表");
         return model;
+    }
+    @RequestMapping(value="/getPackingArchivesById")
+    @SystemLogAnnotation(module = "knowledgeBase/packingArchivesList",methods = "getInfoById")
+    @ResponseBody
+    public PackingArchives getPackingArchivesById(int id){
+        try{
+            Result<PackingArchives> result = packingArchivesService.getPackingArchivesById(id);
+            return result.getModel();
+        }catch(Exception e){
+            log.error("获取成本档案信息错误",e);
+        }
+        return null;
     }
 
 }
