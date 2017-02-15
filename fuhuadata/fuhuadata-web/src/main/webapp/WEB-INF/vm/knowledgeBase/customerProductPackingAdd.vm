@@ -199,7 +199,7 @@
                         <div class="form-group ">
                             <label class="col-xs-1 control-label">加工成分</label>
                             <div class="col-xs-8">
-                                <table class="table table-condensed table-bordered text-center">
+                                <table class="table table-condensed table-bordered">
                                     <thead>
                                     <tr>
                                         <th class="text-center">原料</th>
