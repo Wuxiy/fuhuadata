@@ -43,13 +43,13 @@
          </bean>-->
 
 		<!-- 配置Velocity视图解析器 -->
-		<bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+		<bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
 			<!--线上环境设置为true-->
 			<property name="cache" value="false"/>
 			<property name="prefix" value="/WEB-INF/vm/" />
 			<property name="suffix" value=".vm"/>
 			<property name="contentType" value="text/html;charset=UTF-8"/>
-			<property name="toolboxConfigLocation" value="WEB-INF/velocity/toolbox.xml"/>
+			<!--<property name="toolboxConfigLocation" value="WEB-INF/velocity/toolbox.xml"/>-->
 			<property name="exposeSpringMacroHelpers" value="true" /><!--是否使用spring对宏定义的支持-->
 			<property name="exposeRequestAttributes" value="true" /><!--是否开放request属性-->
 			<property name="requestContextAttribute" value="rc"/><!--request属性引用名称-->
