@@ -55,7 +55,6 @@
 			<property name="requestContextAttribute" value="rc"/><!--request属性引用名称-->
 			<property name="dateToolAttribute" value="date" /><!--日期函数名称-->
 			<property name="numberToolAttribute" value="number" /><!--数字函数名称-->
-			<property name="viewClass" value="com.fuhuadata.web.velocity.VelocityToolbox20View"/>
 		</bean>
 
 		<!-- 配置Velocity引擎 -->
