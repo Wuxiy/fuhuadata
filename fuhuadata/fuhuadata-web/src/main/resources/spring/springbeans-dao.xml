@@ -8,9 +8,9 @@
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url"
-			value="jdbc:mysql://192.168.30.120:3306/fuhuadata?useUnicode=true&amp;characterEncoding=UTF8" />
+			value="jdbc:mysql://localhost:3306/fuhuadata?useUnicode=true&amp;characterEncoding=UTF8" />
 		<property name="username" value="root" />
-		<property name="password" value="root" />
+		<property name="password" value="1234" />
 
 		<property name="maxActive" value="30" />
 		<property name="initialSize" value="1" />
