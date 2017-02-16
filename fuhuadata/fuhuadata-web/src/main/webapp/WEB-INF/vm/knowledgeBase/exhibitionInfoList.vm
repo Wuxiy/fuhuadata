@@ -1,7 +1,11 @@
 #set($layout="layout/layout.vm")
 <div class="col-xs-12">
     <!--表格开始-->
+<<<<<<< HEAD
     <div  class="panel panel-default">
+=======
+    <div class="panel panel-default">
+>>>>>>> 9397adf836aa67fb82e40d394d163fecf8425113
         <div class="panel-heading">
             <a class="btn btn-xs btn-primary pull-right panel-heading-btn" href="/exhibitionInfo/addExhibitionInfo" data-toggle="modal">
                 <span class="glyphicon glyphicon-plus"></span>
@@ -30,6 +34,7 @@
             </div>
             <!--搜索框结束-->
             <!--表格开始-->
+<<<<<<< HEAD
             <table id="myTable" class="table table-condensed table-bordered table-striped">
                 <thead>
                 <tr>
@@ -49,6 +54,43 @@
                 </tr>
                 </thead>
                 <tbody id="a">
+=======
+            <table class="table table-condensed table-bordered table-striped text-center">
+                <thead>
+                <tr>
+                    <th class="text-center ">编号</th>
+                    <th class="col-xs-2 text-center">展会名称</th>
+                    <th class="col-xs-1 text-center">主办方</th>
+                    <th class="col-xs-2 text-center">承办单位</th>
+                    <th class="text-center">国家</th>
+                    <th class="text-center">城市</th>
+                    <th class="col-xs-1 text-center">开始时间</th>
+                    <th class="col-xs-1 text-center">结束日期</th>
+                    <th class="col-xs-1 text-center">展会地址</th>
+                    <th class="col-xs-2 text-center">展会介绍</th>
+                    <th class="col-xs-1 text-center">展会介绍连接</th>
+                    <th class="text-center">创建人</th>
+                    <th class="col-xs-1 text-center">创建时间</th>
+                </tr>
+                </thead>
+                <tbody id ="tb">
+                <tbody id="a">
+                <tr>
+                    <td>1</td>
+                    <td>2016全国植保会</td>
+                    <td>全国农业技术推广服务中心</td>
+                    <td>江苏省植物保护站厦门市凤凰创意会展服务有限公司</td>
+                    <td>中国</td>
+                    <td>南京</td>
+                    <td>2016年11月25日</td>
+                    <td>2016年11月27日</td>
+                    <td>南京国际博览中心</td>
+                    <td>吸引来自全国30参展范围涉及农药原药、农药、肥料、植保机械及包装设备等，涵盖整个农化产业上、中、下游产品，是国内参展产品最齐全的大会。</td>
+                    <td><a href="http://www.1988.tv/zhanhui/2016qgzbh/about.html">点击进入</a></td>
+                    <td>刘凯洋</td>
+                    <td>2016-10-12</td>
+                </tr>
+>>>>>>> 9397adf836aa67fb82e40d394d163fecf8425113
                     #foreach($exhibitionInfo in $exhibitionInfoList)
                 <tr>
                     <td>${exhibitionInfo.exhibitionId}</td>
@@ -88,6 +130,7 @@
                 <li><a href="">&hellip;</a></li>
                 <li><a href="#">下一页</a></li>
             </ul>
+<<<<<<< HEAD
             <!--分页导航结束-->
         </div>
     </div>
@@ -97,6 +140,47 @@
 jQuery(document).ready(function () {
     jQuery("#myTable").DataTable();
 })
+=======
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    function test(){
+
+        var t = document.getElementById("tb");
+        t.innerHTML = '';
+
+        var search = jQuery("#search").val();
+        var data = {
+            "index":"1",
+            "exhibitionName":jQuery("#search").val()
+        }
+        jQuery.ajax({
+            type:"GET",
+            url:'queryExhibitionInfoTest',
+            data:data,
+            success:function(data){
+
+##                #foreach($exhibitionInfo in $exhibitionInfoList)
+##                    t.innerHTML += '<tr> <td>${exhibitionInfo.exhibitionId}</td> </tr>';
+##
+##                #end
+                jQuery("#a").html('');
+                var json=eval(data);//数组
+                var exhibitonInfoList=json.defaultObject;
+//                jQuery.each(json,function (index,item) {
+//                    var exhibitionName=exhibitonInfoList.
+//
+//                })
+
+                alert(exhibitonInfoList);
+
+      }
+   });
+    }
+
+>>>>>>> 9397adf836aa67fb82e40d394d163fecf8425113
 </script>
 ##<script type="text/javascript">
 ##
