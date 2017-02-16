@@ -1,11 +1,9 @@
 #set($layout="layout/layout.vm")
+
+
 <div class="col-xs-12">
     <!--表格开始-->
-<<<<<<< HEAD
-    <div  class="panel panel-default">
-=======
     <div class="panel panel-default">
->>>>>>> 9397adf836aa67fb82e40d394d163fecf8425113
         <div class="panel-heading">
             <a class="btn btn-xs btn-primary pull-right panel-heading-btn" href="/exhibitionInfo/addExhibitionInfo" data-toggle="modal">
                 <span class="glyphicon glyphicon-plus"></span>
@@ -34,28 +32,7 @@
             </div>
             <!--搜索框结束-->
             <!--表格开始-->
-<<<<<<< HEAD
-            <table id="myTable" class="table table-condensed table-bordered table-striped">
-                <thead>
-                <tr>
-                    <th class="sorting">编号</th>
-                    <th class="sorting col-xs-2">展会名称</th>
-                    <th class="sorting col-xs-1">主办方</th>
-                    <th class="sorting col-xs-2">承办单位</th>
-                    <th class="sorting">国家</th>
-                    <th class="sorting">城市</th>
-                    <th class="sorting col-xs-1">开始时间</th>
-                    <th class="sorting col-xs-1">结束日期</th>
-                    <th class="col-xs-1">展会地址</th>
-                    <th class="col-xs-2">展会介绍</th>
-                    <th class="col-xs-1">展会介绍连接</th>
-                    <th class="text-center">创建人</th>
-                    <th class="col-xs-1">创建时间</th>
-                </tr>
-                </thead>
-                <tbody id="a">
-=======
-            <table class="table table-condensed table-bordered table-striped text-center">
+            <table id="example" class="table table-condensed table-bordered table-striped text-center" cellspacing="0"width="100%">
                 <thead>
                 <tr>
                     <th class="text-center ">编号</th>
@@ -90,25 +67,24 @@
                     <td>刘凯洋</td>
                     <td>2016-10-12</td>
                 </tr>
->>>>>>> 9397adf836aa67fb82e40d394d163fecf8425113
                     #foreach($exhibitionInfo in $exhibitionInfoList)
-                <tr>
-                    <td>${exhibitionInfo.exhibitionId}</td>
-                    <td>${exhibitionInfo.exhibitionName}</td>
-                    <td>${exhibitionInfo.sponsor}</td>
-                    <td>${exhibitionInfo.organizer}</td>
-                    <td>${exhibitionInfo.country}</td>
-                    <td>${exhibitionInfo.city}</td>
-                    <td lang="zh">${exhibitionInfo.startDate}</td>
-                    <td lang="zh">${exhibitionInfo.finishDate}</td>
-                    <td>${exhibitionInfo.exhibitionAddr}</td>
-                    <td>${exhibitionInfo.exhibitionInfo}</td>
-                    <td><a href="${exhibitionInfo.exhibitionLink}">点击进入</a></td>
-                    <td>${exhibitionInfo.creator}</td>
-                    <td lang="zh">${exhibitionInfo.createTime}</td>
-                </tr>
+                    <tr>
+                        <td>${exhibitionInfo.exhibitionId}</td>
+                        <td>${exhibitionInfo.exhibitionName}</td>
+                        <td>${exhibitionInfo.sponsor}</td>
+                        <td>${exhibitionInfo.organizer}</td>
+                        <td>${exhibitionInfo.country}</td>
+                        <td>${exhibitionInfo.city}</td>
+                        <td lang="zh">${exhibitionInfo.startDate}</td>
+                        <td lang="zh">${exhibitionInfo.finishDate}</td>
+                        <td>${exhibitionInfo.exhibitionAddr}</td>
+                        <td>${exhibitionInfo.exhibitionInfo}</td>
+                        <td><a href="${exhibitionInfo.exhibitionLink}">点击进入</a></td>
+                        <td>${exhibitionInfo.creator}</td>
+                        <td lang="zh">${exhibitionInfo.createTime}</td>
+                    </tr>
                     #end
-            </tbody>
+                </tbody>
             </table>
             <!--表格结束-->
             <!--分页导航开始-->
@@ -130,81 +106,36 @@
                 <li><a href="">&hellip;</a></li>
                 <li><a href="#">下一页</a></li>
             </ul>
-            <!--分页导航结束-->
-        </div>
-    </div>
-    <!--表格结束-->
-</div>
-<script type="text/javascript">
-jQuery(document).ready(function () {
-    jQuery("#myTable").DataTable();
-})
-
         </div>
     </div>
 </div>
 <script type="text/javascript">
+    $(document).ready(function() {
+        var selected = [];
 
-    function test(){
+        $("#example").DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": "scripts/ids-arrays.php",
+            "rowCallback": function( row, data ) {
+                if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                    $(row).addClass('selected');
+                }
+            }
+        });
 
-        var t = document.getElementById("tb");
-        t.innerHTML = '';
+        $('#example tbody').on('click', 'tr', function () {
+            var id = this.id;
+            var index = $.inArray(id, selected);
 
-        var search = jQuery("#search").val();
-        var data = {
-            "index":"1",
-            "exhibitionName":jQuery("#search").val()
-        }
-        jQuery.ajax({
-            type:"GET",
-            url:'queryExhibitionInfoTest',
-            data:data,
-            success:function(data){
+            if ( index === -1 ) {
+                selected.push( id );
+            } else {
+                selected.splice( index, 1 );
+            }
 
-##                #foreach($exhibitionInfo in $exhibitionInfoList)
-##                    t.innerHTML += '<tr> <td>${exhibitionInfo.exhibitionId}</td> </tr>';
-##
-##                #end
-                jQuery("#a").html('');
-                var json=eval(data);//数组
-                var exhibitonInfoList=json.defaultObject;
-//                jQuery.each(json,function (index,item) {
-//                    var exhibitionName=exhibitonInfoList.
-//
-//                })
-
-                alert(exhibitonInfoList);
-
-      }
-   });
-    }
+            $(this).toggleClass('selected');
+        } );
+    } );
 
 </script>
-##<script type="text/javascript">
-##
-##    function test(){
-##        var tbody = jQuery("#a");
-##        var search = jQuery("#search").val();
-##        var data = {
-##            "index":"1",
-##            "exhibitionName":jQuery("#search").val()
-##        }
-##        jQuery.get({
-##            type:"GET",
-##            url:'queryExhibitionInfoTest',
-##            dataType:"json",
-##            data:data,
-##            success:function(data){
-##                var Item=jQuery("<tr></tr>");
-##                //i表示在data中的索引位置，n表示包含的信息的对象
-##                $.each(data,function(i,n){
-##                    //获取对象中属性为optionsValue的值
-##
-##                });
-##            }
-##        });
-##        return false;
-##    });
-##    }
-##
-##</script>

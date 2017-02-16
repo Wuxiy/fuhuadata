@@ -38,8 +38,9 @@ public class    ExhibitionInfoAction {
     @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "list")
     public ModelAndView exhibitionInfoList(){
         Result<List<ExhibitionInfo>> result = new Result<List<ExhibitionInfo>>();
+        ExhibitionInfoQuery exhibitionInfoQuery = new ExhibitionInfoQuery();
         try{
-            ExhibitionInfoQuery exhibitionInfoQuery = new ExhibitionInfoQuery();
+
             exhibitionInfoQuery.setPageSize(pageSize);
             try {
                 exhibitionInfoQuery.setIndex(Integer.valueOf(page));
@@ -50,7 +51,9 @@ public class    ExhibitionInfoAction {
         }catch (Exception e){
             log.error("获取展会列表失败",e);
         }
-        ModelAndView model = new ModelAndView("knowledgeBase/exhibitionInfoList","exhibitionInfoList",result.getModel());
+        ResultPojo resultPojo=result.getResultPojo();
+        resultPojo.setPreObject(exhibitionInfoQuery);
+        ModelAndView model = new ModelAndView("knowledgeBase/test","result",resultPojo);
         model.addObject("totalItem",result.getTotalItem());
         model.addObject("message","展会动态列表");
         model.addObject("query",null);
@@ -70,9 +73,9 @@ public class    ExhibitionInfoAction {
         }catch (Exception e){
             log.error("查询获取展会信息失败",e);
         }
-        ModelAndView model = new ModelAndView("knowledgeBase/exhibitionInfoList","exhibitionInfoList",result.getModel());
-        model.addObject("totalItem",result.getTotalItem());
-        model.addObject("totalPage",result.getTotalPage());
+        ResultPojo resultPojo=result.getResultPojo();
+        resultPojo.setPreObject(exhibitionInfoQuery);
+        ModelAndView model = new ModelAndView("knowledgeBase/exhibitionInfoList","result",resultPojo);
         model.addObject("message","展会动态列表");
         return model;
     }
