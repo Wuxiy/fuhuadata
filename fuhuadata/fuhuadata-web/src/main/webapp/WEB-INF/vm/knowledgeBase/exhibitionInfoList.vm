@@ -130,7 +130,6 @@
                 <li><a href="">&hellip;</a></li>
                 <li><a href="#">下一页</a></li>
             </ul>
-<<<<<<< HEAD
             <!--分页导航结束-->
         </div>
     </div>
@@ -140,7 +139,7 @@
 jQuery(document).ready(function () {
     jQuery("#myTable").DataTable();
 })
-=======
+
         </div>
     </div>
 </div>
@@ -180,7 +179,6 @@ jQuery(document).ready(function () {
    });
     }
 
->>>>>>> 9397adf836aa67fb82e40d394d163fecf8425113
 </script>
 ##<script type="text/javascript">
 ##

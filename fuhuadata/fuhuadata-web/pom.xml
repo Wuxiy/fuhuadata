@@ -221,10 +221,10 @@
                 <jdsmy.jdbc.datasource.type>dbcp</jdsmy.jdbc.datasource.type>
                 <jdsmy.jdbc.driver>com.mysql.jdbc.Driver</jdsmy.jdbc.driver>
                 <jdsmy.jdbc.url>
-                     <![CDATA[jdbc:mysql://localhost:3306/fuhuadata?useUnicode=true&amp;characterEncoding=UTF8]]>
+                     <![CDATA[jdbc:mysql://192.168.30.120:3306/fuhuadata?useUnicode=true&amp;characterEncoding=UTF8]]>
                 </jdsmy.jdbc.url>
                 <jdsmy.jdbc.username>root</jdsmy.jdbc.username>
-                <jdsmy.jdbc.password>1234</jdsmy.jdbc.password>
+                <jdsmy.jdbc.password>root</jdsmy.jdbc.password>
 
 				
                 <!--.......................passport相关开始....................... -->

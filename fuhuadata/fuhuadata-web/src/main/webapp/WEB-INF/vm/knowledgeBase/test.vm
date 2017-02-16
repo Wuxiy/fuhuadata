@@ -89,22 +89,10 @@
             #set($page_size = 6)
             #set($page=$result.preObject)
             #showAdminPage($page)
-##            <div class="form-group pull-left table-pagination">
-##                共<span></span>条记录，<span>130</span>页，跳转到第&nbsp;<input class="form-control pagination-input" type="number"/>&nbsp;页
-##                <button class="btn btn-xs btn-primary">确定</button>
-##            </div>
-##            <ul class="pagination pull-right table-pagination">
-##                <li class="disabled"><a href="#">上一页</a></li>
-##                <li class="active"><a href="#">1</a></li>
-##                <li><a href="#">2</a></li>
-##                <li><a href="#">3</a></li>
-##                <li><a href="#">4</a></li>
-##                <li><a href="#">5</a></li>
-##                <li><a href="#">6</a></li>
-##                <li><a href="#">7</a></li>
-##                <li><a href="">&hellip;</a></li>
-##                <li><a href="#">下一页</a></li>
-##            </ul>
         </div>
     </div>
 </div>
+<script>
+    <
+
+</script>
