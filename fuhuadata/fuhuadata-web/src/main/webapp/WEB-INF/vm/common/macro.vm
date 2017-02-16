@@ -4,13 +4,10 @@
     <div class="row">
         <div class="col-xs-4">
             <div class="input-group">
-<<<<<<< HEAD
-                <span class="input-group-addon">共<span>123</span>条记录，<span><em>$!{page.totalPage}</em></span>页，跳转到第</span>
-                <input class="form-control" type="number" id="inputpage" value="$!page.index" placeholder="" maxlength="8" onkeyup="value=value.replace(/[^\d]/g, 1);" onafterpaste="value=value.replace(/[^\d]/g, 1);">
-=======
+
                 <span class="input-group-addon">共<span>$!{page.totalItem}</span>条记录，<span><em>$!{page.totalPage}</em></span>页，跳转到第</span>
                 <input class="form-control" type="text" id="inputpage" value="$!page.index" placeholder="" maxlength="8" onkeyup="value=value.replace(/[^\d]/g, 1);" onafterpaste="value=value.replace(/[^\d]/g, 1);">
->>>>>>> db97893c0499e1b89cdc1e3422c5d12efce0cdcf
+
                 <span class="input-group-addon">页</span>
                 <span class="input-group-btn">
                     <button type="button" class="btn btn-xs btn-primary" onclick="javascript:gotoPages(document.getElementById('inputpage').value==''?1:document.getElementById('inputpage').value)">跳转</button>
@@ -39,13 +36,11 @@
                         <li><a href="javascript:gotoPages($pageIndex)">$pageIndex</a></li>
                     #end
                 #end
-<<<<<<< HEAD
-                #if($!page.totalPage - $!page.index > $pagePos+1) li>&hellip;</li> #end ##显示后面的省略号
-=======
+
                 #if($!page.totalPage - $!page.index > $pagePos+1) <li>&hellip;</li> #end ##显示后面的省略号
->>>>>>> db97893c0499e1b89cdc1e3422c5d12efce0cdcf
                 #if($page.isNextPageAvailable()) ##显示后面的页
-                    <li><a href="javascript:gotoPages($page.getNextPage())">下一页</a></li>
+##                    <li><a href="javascript:gotoPages($page.getNextPage())">下一页</a></li>
+                    <li><a href="/exhibitionInfo/queryExhibitionInfo?index=$page.getNextPage()&exhibitionName=$page.getExhibitionName()">下一页</a></li>
                 ##                <li><a href="javascript:gotoPages($page.getTotalPage())" style="with:72px">末页</a></li>
                 #end
 

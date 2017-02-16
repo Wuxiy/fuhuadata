@@ -100,11 +100,9 @@ public class    ExhibitionInfoAction {
         }catch (Exception e){
             log.error("条件查询获取展会信息失败",e);
         }
-        ModelAndView model = new ModelAndView("knowledgeBase/exhibitionInfoList","exhibitionInfoList",result.getModel());
-        model.addObject("totalItem",result.getTotalItem());
-        model.addObject("totalPage",result.getTotalPage());
-        if(exhibitionName!=null){
-        model.addObject("queryCondition",exhibitionInfoQuery);}
+        ResultPojo resultPojo=result.getResultPojo();
+        resultPojo.setPreObject(exhibitionInfoQuery);
+        ModelAndView model = new ModelAndView("knowledgeBase/test","result",resultPojo);
         model.addObject("message","展会动态列表");
         return model;
     }

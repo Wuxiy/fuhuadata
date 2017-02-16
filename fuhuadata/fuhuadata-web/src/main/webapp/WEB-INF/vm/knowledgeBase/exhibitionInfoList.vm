@@ -1,11 +1,9 @@
 #set($layout="layout/layout.vm")
 <div class="col-xs-12">
     <!--表格开始-->
-<<<<<<< HEAD
+
     <div  class="panel panel-default">
-=======
-    <div class="panel panel-default">
->>>>>>> 9397adf836aa67fb82e40d394d163fecf8425113
+
         <div class="panel-heading">
             <a class="btn btn-xs btn-primary pull-right panel-heading-btn" href="/exhibitionInfo/addExhibitionInfo" data-toggle="modal">
                 <span class="glyphicon glyphicon-plus"></span>
@@ -34,7 +32,6 @@
             </div>
             <!--搜索框结束-->
             <!--表格开始-->
-<<<<<<< HEAD
             <table id="myTable" class="table table-condensed table-bordered table-striped">
                 <thead>
                 <tr>
@@ -54,8 +51,7 @@
                 </tr>
                 </thead>
                 <tbody id="a">
-=======
-            <table class="table table-condensed table-bordered table-striped text-center">
+                 <table class="table table-condensed table-bordered table-striped text-center">
                 <thead>
                 <tr>
                     <th class="text-center ">编号</th>
@@ -90,7 +86,7 @@
                     <td>刘凯洋</td>
                     <td>2016-10-12</td>
                 </tr>
->>>>>>> 9397adf836aa67fb82e40d394d163fecf8425113
+
                     #foreach($exhibitionInfo in $exhibitionInfoList)
                 <tr>
                     <td>${exhibitionInfo.exhibitionId}</td>

@@ -93,6 +93,34 @@
     </div>
 </div>
 <script>
-    <
+    function test(){
+        var exhibitionName=document.getElementById('search').value;
+        location.href='/exhibitionInfo/queryExhibitionInfo?exhibitionName='+exhibitionName;
+    }
+    function gotoPages(page){
+        var url = "queryExhibitionInfoTest";
+        var pars=page;
+        var myAjax = new Ajax.Updater('a',url,{
+            method :'get',
+            parameters: pars,
+            onFailure:reportError,
+            onLoading:loading,
+            onComplete:done
+        });
+        function loading()
+        {
+            $('loading').style.display = 'block';
+        }
+
+        function done()
+        {
+            $('loading').style.display = 'none';
+        }
+
+        function reportError(request)
+        {
+            alert('Sorry. There was an error.');
+        }
+    }
 
 </script>
