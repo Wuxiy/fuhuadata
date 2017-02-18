@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>联系人详情</title>
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css"/>
+    <script src="/lib/js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/lib/js/jquery-lang.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/lib/js/js.cookie.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/lib/js/langpack/nonDynamic.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        var lang = new Lang();
+        lang.init({
+            defaultLang: 'zh'
+        });
+    </script>
+</head>
+<body class="bg-page">
+<div class="container-fluid">
+    <!--头部-->
+    <nav class="navbar navbar-cards navbar-fixed-top">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                福华客户关系管理系统
+            </a>
+        </div>
+        <div class="navbar-btn btn-group btn-group-xs pull-right">
+            <button class="btn btn-primary"><span class="glyphicon glyphicon-envelope"></span></button>
+            <button class="btn btn-primary" lang="zh">业务员</button>
+            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+            <ul class="dropdown-menu pull-right">
+                <li><a href="" lang="zh">修改密码</a></li>
+                <li><a href="" lang="zh">退出</a></li>
+            </ul>
+        </div>
+        <div class="navbar-btn btn-group btn-group-xs pull-right">
+            <a href="#lang-en" class="btn btn-danger" onclick="window.lang.change('zh'); return false;">
+                中文
+            </a>
+            <a href="#lang-en" class="btn btn-primary" onclick="window.lang.change('en'); return false;">
+                English
+            </a>
+        </div>
+        <ul id="nav-affix" class="nav nav-cards">
+            <li class="active shadow-in">
+                <div id="collapseOne" class="list-group collapse">
+                    <a class="list-group-item" href="#" lang="zh">客户列表</a>
+                </div>
+                <a data-toggle="collapse" href="#collapseOne" data-parent="#nav-affix">
+                    <span class="glyphicon glyphicon-user"></span>
+                    <span lang="zh">客户信息</span>
+                    <b class="caret"></b>
+                </a>
+            </li>
+            <li class="shadow-in">
+                <div id="collapseTwo" class="list-group collapse">
+                    <a class="list-group-item" href="#" lang="zh">加工厂</a>
+                    <a class="list-group-item" href="#" lang="zh">货代</a>
+                </div>
+                <a data-toggle="collapse" href="#collapseTwo" data-parent="#nav-affix">
+                    <span class="glyphicon glyphicon-briefcase"></span>
+                    <span lang="zh">供应商信息</span>
+                    <b class="caret"></b>
+                </a>
+            </li>
+            <li class="shadow-in">
+                <div id="collapseThree" class="list-group collapse">
+                    <a class="list-group-item" href="#" lang="zh">商机</a>
+                    <a class="list-group-item" href="#" lang="zh">销售动态</a>
+                    <a class="list-group-item" href="#" lang="zh">费用与利润</a>
+                    <a class="list-group-item" href="#" lang="zh">客户维护</a>
+                    <a class="list-group-item" href="#" lang="zh">利润统计</a>
+                    <a class="list-group-item" href="#" lang="zh">我的历史订单</a>
+                </div>
+                <a data-toggle="collapse" href="#collapseThree" data-parent="#nav-affix">
+                    <span class="glyphicon glyphicon-stats"></span>
+                    <span lang="zh">销售统计</span>
+                    <b class="caret"></b>
+                </a>
+            </li>
+            <li class="shadow-in">
+                <div id="collapseFour" class="list-group collapse">
+                    <a class="list-group-item" href="#" lang="zh">市场数据</a>
+                </div>
+                <a data-toggle="collapse" href="#collapseFour" data-parent="#nav-affix">
+                    <span class="glyphicon glyphicon-list-alt"></span>
+                    <span lang="zh">行业数据</span>
+                    <b class="caret"></b>
+                </a>
+            </li>
+            <li class="shadow-in">
+                <div id="collapseFive" class="list-group collapse">
+                    <a class="list-group-item" href="faq_list.html" lang="zh">产品常见问题</a>
+                    <a class="list-group-item" href="train_list.html" lang="zh">营销培训</a>
+                    <a class="list-group-item" href="product_list.html" lang="zh">客户产品包装要求</a>
+                    <a class="list-group-item" href="product_list.html" lang="zh">标准产品档案</a>
+                    <a class="list-group-item" href="pack-price_list.html" lang="zh">包材成本参考</a>
+                    <a class="list-group-item" href="finished-cost_list.html" lang="zh">加工成本参考</a>
+                    <a class="list-group-item" href="encyclopedia_list.html" lang="zh">百科</a>
+                    <a class="list-group-item" href="expo_list.html" lang="zh">展会动态</a>
+                    <a class="list-group-item" href="" lang="zh">其他</a>
+                </div>
+                <a data-toggle="collapse" href="#collapseFive" data-parent="#nav-affix">
+                    <span class="glyphicon glyphicon-book"></span>
+                    <span lang="zh">知识库</span>
+                    <b class="caret"></b>
+                </a>
+            </li>
+            <li class="shadow-in">
+                <div id="collapseSix" class="list-group collapse">
+                    <a class="list-group-item" href="#" lang="zh">销售数据</a>
+                    <a class="list-group-item" href="#" lang="zh">成本费用</a>
+                    <a class="list-group-item" href="#" lang="zh">数据库</a>
+                </div>
+                <a data-toggle="collapse" href="#collapseSix" data-parent="#nav-affix">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                    <span lang="zh">决策支持</span>
+                    <b class="caret"></b>
+                </a>
+            </li>
+            <li class="shadow-in">
+                <div id="collapseSeven" class="list-group collapse">
+                    <a class="list-group-item" href="#" lang="zh">权限设置</a>
+                    <a class="list-group-item" href="#" lang="zh">数据字典维护</a>
+                </div>
+                <a data-toggle="collapse" href="#collapseSeven" data-parent="#nav-affix">
+                    <span class="glyphicon glyphicon-cog"></span>
+                    <span lang="zh">系统管理</span>
+                    <b class="caret"></b>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!--主要内容-->
+    <div class="clearfix content shadow-out">
+        <!--面包屑导航-->
+        <div class="breadcrumb-more">
+            <span class="breadcrumb-unit pull-left" lang="zh">当前位置</span>
+            <ul class="breadcrumb shadow-out">
+                <li><a href="" lang="zh">客户信息</a></li>
+                <li><a href="" lang="zh">客户列表</a></li>
+                <li><a href="" lang="zh">NUFARM</a></li>
+                <li class="active" lang="zh">Anna</li>
+            </ul>
+        </div>
+        <!--表格容器-->
+        <div class="dashboard-wrapper">
+            <div class="row">
+                <!--列表部分-->
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <button class="btn btn-xs btn-primary panel-heading-btn pull-right" lang="zh">
+                                编辑
+                            </button>
+                            <h3 class="panel-title" lang="zh">
+                                基本信息
+                            </h3>
+                        </div>
+                        <div class="panel-body clearfix">
+                            <!--表单-->
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="control-label col-xs-1" lang="zh">姓名</label>
+                                    <div class="col-xs-2">
+                                        <input type="text" class="form-control" value="Anna"/>
+                                    </div>
+                                    <label class="control-label col-xs-1" lang="zh">岗位</label>
+                                    <div class="col-xs-2">
+                                        <input type="text" class="form-control" value="销售"/>
+                                    </div>
+                                    <label class="control-label col-xs-1" lang="zh">负责区域</label>
+                                    <div class="col-xs-2">
+                                        <input type="text" class="form-control" value="华盛顿"/>
+                                    </div>
+                                    <label class="control-label col-xs-1" lang="zh">是否在职</label>
+                                    <div class="col-xs-2">
+                                        <select class="form-control">
+                                            <option value="" lang="zh">是</option>
+                                            <option value="" lang="zh">否</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-xs-1" lang="zh">性别</label>
+                                    <div class="col-xs-2">
+                                        <select class="form-control">
+                                            <option value="" lang="zh">女</option>
+                                            <option value="" lang="zh">男</option>
+                                        </select>
+                                    </div>
+                                    <label class="control-label col-xs-1" lang="zh">生日</label>
+                                    <div class="col-xs-2">
+                                        <input type="date" class="form-control" value=""/>
+                                    </div>
+                                    <label class="control-label col-xs-1" lang="zh">国籍</label>
+                                    <div class="col-xs-2">
+                                        <input type="text" class="form-control" value="美国"/>
+                                    </div>
+                                    <label class="control-label col-xs-1" lang="zh">影响力情况</label>
+                                    <div class="col-xs-2">
+                                        <input type="text" class="form-control" value="美国"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-xs-1" lang="zh">展会习惯</label>
+                                    <div class="col-xs-2">
+                                        <input type="text" class="form-control" value="活跃"/>
+                                    </div>
+                                    <label class="control-label col-xs-1" lang="zh">喜好</label>
+                                    <div class="col-xs-2">
+                                        <input type="text" class="form-control" value="高尔夫"/>
+                                    </div>
+                                    <label class="control-label col-xs-1"><span lang="zh">联系电话</span>1</label>
+                                    <div class="col-xs-2">
+                                        <input type="text" class="form-control" value="13888888888"/>
+                                    </div>
+                                    <label class="control-label col-xs-1"><span lang="zh">联系电话</span>2</label>
+                                    <div class="col-xs-2">
+                                        <input type="text" class="form-control" value="13888888888"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-xs-1" lang="zh">邮箱</label>
+                                    <div class="col-xs-2">
+                                        <input type="email" class="form-control" value="Anna@163.com"/>
+                                    </div>
+                                    <label class="control-label col-xs-1" lang="zh">饮食习惯</label>
+                                    <div class="col-xs-2">
+                                        <input type="text" class="form-control" value="素食"/>
+                                    </div>
+                                    <label class="control-label col-xs-1" lang="zh">宗教信仰</label>
+                                    <div class="col-xs-2">
+                                        <input type="text" class="form-control" value="基督教"/>
+                                    </div>
+                                    <label class="control-label col-xs-1" lang="zh">是否默认</label>
+                                    <div class="col-xs-2">
+                                        <select class="form-control">
+                                            <option value="" lang="zh">是</option>
+                                            <option value="" lang="zh">否</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-xs-1" lang="zh">备注</label>
+                                    <div class="col-xs-11">
+                                        <textarea class="form-control" rows="4"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title" lang="zh">
+                                沟通记录
+                            </h3>
+                        </div>
+                        <div class="panel-body clearfix">
+                            <!--表格-->
+                            <table class="table table-condensed table-bordered table-striped text-center">
+                                <caption class="text-right" lang="zh">金额单位：元</caption>
+                                <thead>
+                                <tr>
+                                    <th class="text-center" lang="zh">开始时间</th>
+                                    <th class="text-center" lang="zh">结束时间</th>
+                                    <th class="text-center" lang="zh">活动类型</th>
+                                    <th class="text-center" lang="zh">活动地点</th>
+                                    <th class="text-center" lang="zh">费用</th>
+                                    <th class="text-center" lang="zh">礼物赠送</th>
+                                    <th class="text-center" lang="zh">活动摘要</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>2015-10-10 10:00</td>
+                                    <td>2015-10-10 12:00</td>
+                                    <td>远程沟通</td>
+                                    <td></td>
+                                    <td>1000</td>
+                                    <td>成都特产</td>
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <!--分页导航-->
+                            <div class="form-group pull-left table-pagination">
+                                共<span>123</span>条记录，<span>130</span>页，跳转到第&nbsp;<input class="form-control pagination-input" type="number"/>&nbsp;页
+                                <button class="btn btn-xs btn-primary">确定</button>
+                            </div>
+                            <ul class="pagination pull-right table-pagination">
+                                <li class="disabled"><a href="#">上一页</a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#">6</a></li>
+                                <li><a href="#">7</a></li>
+                                <li><a href="">&hellip;</a></li>
+                                <li><a href="#">下一页</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--脚部-->
+<div class="footer">
+    <small>
+        &copy; baswaAdmin 2014
+    </small>
+</div>
+<script src="/lib/js/dropdown.js" type="text/javascript" charset="utf-8"></script>
+<script src="/lib/js/collapse.js" type="text/javascript" charset="utf-8"></script>
+<script src="/lib/js/modal.js" type="text/javascript" charset="utf-8"></script>
+<script src="/lib/js/transition.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

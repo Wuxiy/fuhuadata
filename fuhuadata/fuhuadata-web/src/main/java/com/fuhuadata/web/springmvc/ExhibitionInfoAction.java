@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -36,11 +35,12 @@ public class    ExhibitionInfoAction {
 
     @SuppressWarnings("unused")
     @RequestMapping(value = "/exhibitionInfoList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-展会动态",methods = "list")
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "list")
     public ModelAndView exhibitionInfoList(){
         Result<List<ExhibitionInfo>> result = new Result<List<ExhibitionInfo>>();
+        ExhibitionInfoQuery exhibitionInfoQuery = new ExhibitionInfoQuery();
         try{
-            ExhibitionInfoQuery exhibitionInfoQuery = new ExhibitionInfoQuery();
+
             exhibitionInfoQuery.setPageSize(pageSize);
             try {
                 exhibitionInfoQuery.setIndex(Integer.valueOf(page));
@@ -51,7 +51,9 @@ public class    ExhibitionInfoAction {
         }catch (Exception e){
             log.error("获取展会列表失败",e);
         }
-        ModelAndView model = new ModelAndView("knowledgeBase/exhibitionInfoList","exhibitionInfoList",result.getModel());
+        ResultPojo resultPojo=result.getResultPojo();
+        resultPojo.setPreObject(exhibitionInfoQuery);
+        ModelAndView model = new ModelAndView("knowledgeBase/test","result",resultPojo);
         model.addObject("totalItem",result.getTotalItem());
         model.addObject("message","展会动态列表");
         model.addObject("query",null);
@@ -59,7 +61,7 @@ public class    ExhibitionInfoAction {
     }
 
     @RequestMapping(value = "/queryExhibitionInfoList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-展会动态",methods = "query")
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "query")
     public ModelAndView queryExhibitionInfoList(@RequestBody ExhibitionInfoQuery exhibitionInfoQuery){
         Result<List<ExhibitionInfo>> result = new Result<List<ExhibitionInfo>>();
         try{
@@ -71,15 +73,15 @@ public class    ExhibitionInfoAction {
         }catch (Exception e){
             log.error("查询获取展会信息失败",e);
         }
-        ModelAndView model = new ModelAndView("knowledgeBase/exhibitionInfoList","exhibitionInfoList",result.getModel());
-        model.addObject("totalItem",result.getTotalItem());
-        model.addObject("totalPage",result.getTotalPage());
+        ResultPojo resultPojo=result.getResultPojo();
+        resultPojo.setPreObject(exhibitionInfoQuery);
+        ModelAndView model = new ModelAndView("knowledgeBase/exhibitionInfoList","result",resultPojo);
         model.addObject("message","展会动态列表");
         return model;
     }
 
     @RequestMapping(value = "/queryExhibitionInfo",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-展会动态",methods = "query")
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "query")
     public ModelAndView queryExhibitionInfo(String index,String exhibitionName){
         ExhibitionInfoQuery exhibitionInfoQuery = new ExhibitionInfoQuery();
         Result<List<ExhibitionInfo>> result = new Result<List<ExhibitionInfo>>();
@@ -98,18 +100,16 @@ public class    ExhibitionInfoAction {
         }catch (Exception e){
             log.error("条件查询获取展会信息失败",e);
         }
-        ModelAndView model = new ModelAndView("knowledgeBase/exhibitionInfoList","exhibitionInfoList",result.getModel());
-        model.addObject("totalItem",result.getTotalItem());
-        model.addObject("totalPage",result.getTotalPage());
-        if(exhibitionName!=null){
-        model.addObject("queryCondition",exhibitionInfoQuery);}
+        ResultPojo resultPojo=result.getResultPojo();
+        resultPojo.setPreObject(exhibitionInfoQuery);
+        ModelAndView model = new ModelAndView("knowledgeBase/test","result",resultPojo);
         model.addObject("message","展会动态列表");
         return model;
     }
 
 
     @RequestMapping(value = "/queryExhibitionInfoTest",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-展会动态",methods = "query")
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "query")
     @ResponseBody
     public ResultPojo queryExhibitionInfoJson(String index,String exhibitionName){
         ExhibitionInfoQuery exhibitionInfoQuery = new ExhibitionInfoQuery();
@@ -130,18 +130,19 @@ public class    ExhibitionInfoAction {
             log.error("条件查询获取展会信息失败",e);
         }
         ResultPojo resultPojo=result.getResultPojo();
+        resultPojo.setPreObject(exhibitionInfoQuery);
         return resultPojo;
     }
 
     @RequestMapping(value="/addExhibitionInfo",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-展会动态",methods = "add")
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "add")
     public ModelAndView addExhibitionInfo(){
         return new ModelAndView("knowledgeBase/exhibitionInfoAdd");
     }
 
 
     @RequestMapping(value = "/doAddExhibitionInfo",method = RequestMethod.POST)
-    @SystemLogAnnotation(module = "知识库-展会动态",methods = "doAdd")
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "doAdd")
     @ResponseBody
     public ResultPojo doAddExhibitionInfo(@RequestBody ExhibitionInfo exhibitionInfo){
         System.out.println("执行新增");
@@ -155,7 +156,7 @@ public class    ExhibitionInfoAction {
     }
 
     @RequestMapping(value = "/deleteExhibitionInfo",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-展会动态",methods ="delete" )
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods ="delete" )
     @ResponseBody
     public ResultPojo deleteExhibitionInfo(int id){
         try{
@@ -167,8 +168,19 @@ public class    ExhibitionInfoAction {
         return null;
     }
 
-    @RequestMapping(value = "/doModifyExhibitionInfo",method =RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-展会动态",methods = "update")
+    @RequestMapping(value = "/modifyExhibitionInfo",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods="update")
+    public ModelAndView modifyExhibitonInfo(int id){
+        try{
+            Result<ExhibitionInfo> result = new Result<ExhibitionInfo>();
+        }catch (Exception e){
+            log.error("获取展会信息失败",e);
+        }
+        return new ModelAndView("knowledgeBase/exhibitionInfoUpdate");
+    }
+
+    @RequestMapping(value = "/doModifyExhibitionInfo.do",method =RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "doUpdate")
     @ResponseBody
     public ResultPojo doModifyExhibitionInfo(@RequestBody ExhibitionInfo exhibitionInfo){
         try{
@@ -177,6 +189,20 @@ public class    ExhibitionInfoAction {
             return result.getResultPojo();
         }catch(Exception e){
             log.error("修改展会动态错误",e);
+        }
+        return null;
+    }
+
+
+    @RequestMapping(value = "/getExhibitionInfoJson")
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "getInfoById")
+    @ResponseBody
+    public ExhibitionInfo getExhibitionInfoById(int id){
+        try{
+            Result<ExhibitionInfo> result = exhibitionInfoService.getExhibitionInfoById(id);
+            return result.getModel();
+         }catch(Exception e){
+            log.error("获取展会信息错误",e);
         }
         return null;
     }

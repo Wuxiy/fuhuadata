@@ -3,7 +3,14 @@ package com.fuhuadata.domain.query;
 public class ResultPojo {
 	public int code;
 	public String message;
+	public Object preObject;
 	public Object defaultObject;
+	public Object getPreObject(){
+		return preObject;
+	}
+	public void setPreObject(Object preObject){
+		this.preObject=preObject;
+	}
 	public Object getDefaultObject() {
 		return defaultObject;
 	}
