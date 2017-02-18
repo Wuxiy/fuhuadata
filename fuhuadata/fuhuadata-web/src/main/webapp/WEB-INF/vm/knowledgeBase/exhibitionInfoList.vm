@@ -187,10 +187,9 @@
                             <th class="col-xs-1 text-center">创建时间</th>
                         </tr>
                         </thead>
-<<<<<<< HEAD
+
                         <tbody id ="tb">
-=======
-                        <tbody id="a">
+
                         <tr>
                             <td>1</td>
                             <td>2016全国植保会</td>
@@ -206,7 +205,7 @@
                             <td>刘凯洋</td>
                             <td>2016-10-12</td>
                         </tr>
->>>>>>> 013138c414c6bbc1e0f248ac9093eaeca1f0e872
+
                             #foreach($exhibitionInfo in $exhibitionInfoList)
                         <tr>
                             <td>${exhibitionInfo.exhibitionId}</td>
@@ -271,20 +270,31 @@
             "index":"1",
             "exhibitionName":jQuery("#search").val()
         }
-        a.innerHTML = '';
+
         jQuery.ajax({
             type:"GET",
-            url:'queryExhibitionInfo',
+            url:'queryExhibitionInfoTest',
             data:data,
-            success:function(){
+            success:function(data){
+                console.log(data.defaultObject);
+                var data = eval(data.defaultObject);
 
-                #foreach($exhibitionInfo in $exhibitionInfoList)
-                    t.innerHTML += '<tr> <td>${exhibitionInfo.exhibitionId}</td> </tr>';
-
-                #end
-
-                alert("查询成功");
-
+                for(var i = 0;i < data.length;i++){
+                    t.innerHTML += '<tr> ' +
+                            '<td>'+data[i].exhibitionId+'</td>' +
+                            ' <td>'+data[i].exhibitionName+'</td>' +
+                            ' <td>'+data[i].sponsor+'</td>' +
+                            ' <td>'+data[i].organizer+'</td>' +
+                            ' <td>'+data[i].country+'</td>' +
+                            ' <td>'+data[i].city+'</td>' +
+                            ' <td>'+data[i].startDate+'</td>' +
+                            ' <td>'+data[i].finishDate+'</td>' +
+                            ' <td>'+data[i].exhibitionAddr+'</td>' +
+                            ' <td>'+data[i].exhibitionInfo+'</td>' +
+                            ' <td><a href=\"'+data[i].exhibitionLink+'\">点击进入</a></td>' +
+                            ' <td>'+data[i].creator+'</td>' +
+                            ' <td>'+data[i].createTime+'</td> </tr>';
+                }
         }
     })
     }
