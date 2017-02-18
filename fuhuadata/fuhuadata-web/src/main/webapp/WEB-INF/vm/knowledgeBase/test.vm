@@ -30,7 +30,7 @@
             </div>
             <!--搜索框结束-->
             <!--表格开始-->
-            <table class="table table-condensed table-bordered table-striped text-center">
+            <table id="example"  class="display" cellspacing="0" width="100%">
                 <thead>
                 <tr>
                     <th class="text-center ">编号</th>
@@ -49,7 +49,7 @@
                 </tr>
                 </thead>
                 <tbody id ="tb">
-                <tbody id="a">
+
                 <tr>
                     <td>1</td>
                     <td>2016全国植保会</td>
@@ -65,34 +65,35 @@
                     <td>刘凯洋</td>
                     <td>2016-10-12</td>
                 </tr>
-                    #foreach($exhibitionInfo in $result.defaultObject)
-                    <tr>
-                        <td>${exhibitionInfo.exhibitionId}</td>
-                        <td>${exhibitionInfo.exhibitionName}</td>
-                        <td>${exhibitionInfo.sponsor}</td>
-                        <td>${exhibitionInfo.organizer}</td>
-                        <td>${exhibitionInfo.country}</td>
-                        <td>${exhibitionInfo.city}</td>
-                        <td lang="zh">${exhibitionInfo.startDate}</td>
-                        <td lang="zh">${exhibitionInfo.finishDate}</td>
-                        <td>${exhibitionInfo.exhibitionAddr}</td>
-                        <td>${exhibitionInfo.exhibitionInfo}</td>
-                        <td><a href="${exhibitionInfo.exhibitionLink}">点击进入</a></td>
-                        <td>${exhibitionInfo.creator}</td>
-                        <td lang="zh">${exhibitionInfo.createTime}</td>
-                    </tr>
-                    #end
                 </tbody>
             </table>
             <!--表格结束-->
             <!--分页导航开始-->
-            #set($page_size = 6)
-            #set($page=$result.preObject)
-            #showAdminPage($page)
         </div>
     </div>
 </div>
 <script>
+    $(document).ready(function() {
+        $('#example').dataTable( {
+            "ajax":'/exhibitionInfo/queryExhibitionInfoTest',
+            "columns":[
+                {"data":"exhibitionId"},
+                {"data":"exhibitionName"},
+                {"data":"sponsor"},
+                {"data":"organizer"},
+                {"data":"country"},
+                {"data":"city"},
+                {"data":"startDate"},
+                {"data":"finishDate"},
+                {"data":"exhibitionAddr"},
+                {"data":"exhibitionInfo"},
+                {"data":"exhibitionLink"},
+                {"data":"creator"},
+                {"data":"createTime"}
+            ]
+        } );
+    } );
+
     function test(){
         var exhibitionName=document.getElementById('search').value;
         location.href='/exhibitionInfo/queryExhibitionInfo?exhibitionName='+exhibitionName;
@@ -122,5 +123,6 @@
             alert('Sorry. There was an error.');
         }
     }
+
 
 </script>
