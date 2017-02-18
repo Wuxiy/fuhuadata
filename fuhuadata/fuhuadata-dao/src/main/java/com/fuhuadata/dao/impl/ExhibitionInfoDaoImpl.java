@@ -44,7 +44,7 @@ public class ExhibitionInfoDaoImpl extends SqlMapClientTemplate implements Exhib
 
     @Override
     public ExhibitionInfo getExhibitionInfoById(int id) {
-        return (ExhibitionInfo)this.queryForList(GET_BY_ID,id);
+        return (ExhibitionInfo)this.queryForObject(GET_BY_ID,id);
     }
 
     @Override

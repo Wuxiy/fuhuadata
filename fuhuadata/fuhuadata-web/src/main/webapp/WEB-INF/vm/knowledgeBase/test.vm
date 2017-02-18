@@ -30,7 +30,7 @@
             </div>
             <!--搜索框结束-->
             <!--表格开始-->
-            <table class="table table-condensed table-bordered table-striped text-center">
+            <table id="datatables" class="table table-condensed table-bordered table-striped text-center">
                 <thead>
                 <tr>
                     <th class="text-center ">编号</th>
@@ -92,35 +92,7 @@
         </div>
     </div>
 </div>
-<script>
-    function test(){
-        var exhibitionName=document.getElementById('search').value;
-        location.href='/exhibitionInfo/queryExhibitionInfo?exhibitionName='+exhibitionName;
-    }
-    function gotoPages(page){
-        var url = "queryExhibitionInfoTest";
-        var pars=page;
-        var myAjax = new Ajax.Updater('a',url,{
-            method :'get',
-            parameters: pars,
-            onFailure:reportError,
-            onLoading:loading,
-            onComplete:done
-        });
-        function loading()
-        {
-            $('loading').style.display = 'block';
-        }
 
-        function done()
-        {
-            $('loading').style.display = 'none';
-        }
-
-        function reportError(request)
-        {
-            alert('Sorry. There was an error.');
-        }
-    }
+<script type="text/javascript">
 
 </script>

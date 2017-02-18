@@ -29,7 +29,7 @@ public class    ExhibitionInfoAction {
     private final static Log log = LogFactory.getLog(ExhibitionInfoAction.class);
     @Resource
     private ExhibitionInfoService exhibitionInfoService;
-    private Integer pageSize=5;
+    private Integer pageSize=20;
     private String page="1";
 
 

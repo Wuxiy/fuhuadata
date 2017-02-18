@@ -135,12 +135,6 @@
 jQuery(document).ready(function () {
     jQuery("#myTable").DataTable();
 })
-
-        </div>
-    </div>
-</div>
-<script type="text/javascript">
-
     function test(){
 
         var t = document.getElementById("tb");
