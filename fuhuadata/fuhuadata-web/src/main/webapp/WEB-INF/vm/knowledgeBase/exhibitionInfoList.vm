@@ -28,8 +28,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+
             <!--搜索框结束-->
             <!--表格开始-->
             <table id="myTable" class="table table-condensed table-bordered table-striped">
@@ -70,7 +69,7 @@
                 </tr>
                 </thead>
                 <tbody id ="tb">
-                <tbody id="a">
+
                 <tr>
                     <td>1</td>
                     <td>2016全国植保会</td>
@@ -135,9 +134,12 @@
 jQuery(document).ready(function () {
     jQuery("#myTable").DataTable();
 })
+<<<<<<< HEAD
 </script>
 <script type="text/javascript">
 
+=======
+>>>>>>> 3a2ba5dc905c278970e8c02b472bfe2a7e5f832c
     function test(){
 
         var t = document.getElementById("tb");
@@ -148,56 +150,39 @@ jQuery(document).ready(function () {
             "index":"1",
             "exhibitionName":jQuery("#search").val()
         }
+
+
+
+
         jQuery.ajax({
             type:"GET",
             url:'queryExhibitionInfoTest',
             data:data,
             success:function(data){
 
-##                #foreach($exhibitionInfo in $exhibitionInfoList)
-##                    t.innerHTML += '<tr> <td>${exhibitionInfo.exhibitionId}</td> </tr>';
-##
-##                #end
-                jQuery("#a").html('');
-                var json=eval(data);//数组
-                var exhibitonInfoList=json.defaultObject;
-//                jQuery.each(json,function (index,item) {
-//                    var exhibitionName=exhibitonInfoList.
-//
-//                })
+                console.log(data.defaultObject);
+                var data = eval(data.defaultObject);
 
-                alert(exhibitonInfoList);
+                for(var i = 0;i < data.length;i++){
+                    t.innerHTML += '<tr> ' +
+                            '<td>'+data[i].exhibitionId+'</td>' +
+                            ' <td>'+data[i].exhibitionName+'</td>' +
+                            ' <td>'+data[i].sponsor+'</td>' +
+                            ' <td>'+data[i].organizer+'</td>' +
+                            ' <td>'+data[i].country+'</td>' +
+                            ' <td>'+data[i].city+'</td>' +
+                            ' <td>'+data[i].startDate+'</td>' +
+                            ' <td>'+data[i].finishDate+'</td>' +
+                            ' <td>'+data[i].exhibitionAddr+'</td>' +
+                            ' <td>'+data[i].exhibitionInfo+'</td>' +
+                            ' <td><a href=\"'+data[i].exhibitionLink+'\">点击进入</a></td>' +
+                            ' <td>'+data[i].creator+'</td>' +
+                            ' <td>'+data[i].createTime+'</td> </tr>';
+                }
+        }
+    })
 
-      }
-   });
     }
 
 </script>
-##<script type="text/javascript">
-##
-##    function test(){
-##        var tbody = jQuery("#a");
-##        var search = jQuery("#search").val();
-##        var data = {
-##            "index":"1",
-##            "exhibitionName":jQuery("#search").val()
-##        }
-##        jQuery.get({
-##            type:"GET",
-##            url:'queryExhibitionInfoTest',
-##            dataType:"json",
-##            data:data,
-##            success:function(data){
-##                var Item=jQuery("<tr></tr>");
-##                //i表示在data中的索引位置，n表示包含的信息的对象
-##                $.each(data,function(i,n){
-##                    //获取对象中属性为optionsValue的值
-##
-##                });
-##            }
-##        });
-##        return false;
-##    });
-##    }
-##
-##</script>
+

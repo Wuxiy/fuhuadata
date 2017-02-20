@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <title>CRM系统</title>
     <link rel="stylesheet" type="text/css" href="/lib/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/lib/dataTables/jquery-dataTables.css">
     <link rel="stylesheet" type="text/css" href="/lib/css/dataTables.bootstrap.css">
     <script src="/lib/js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
     <script src="/lib/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="/lib/js/jquery.dataTables.js" type="text/javascript" charset="utf-8"></script>
+
     <script src="/lib/js/dataTables.bootstrap.js" type="text/javascript" charset="utf-8"></script>
     <script src="/lib/js/jquery-lang.js" type="text/javascript" charset="utf-8"></script>
     <script src="/lib/js/js.cookie.js" type="text/javascript" charset="utf-8"></script>

@@ -1,4 +1,4 @@
-#macro(showAdminPage $page)
+#macro(showAdminPage $page $url)
     #if($page)
         #set($pagePos = 5) ##当前页的尾巴长度
     <div class="row">
@@ -40,7 +40,7 @@
                 #if($!page.totalPage - $!page.index > $pagePos+1) <li>&hellip;</li> #end ##显示后面的省略号
                 #if($page.isNextPageAvailable()) ##显示后面的页
 ##                    <li><a href="javascript:gotoPages($page.getNextPage())">下一页</a></li>
-                    <li><a href="/exhibitionInfo/queryExhibitionInfo?index=$page.getNextPage()&exhibitionName=$page.getExhibitionName()">下一页</a></li>
+                    <li><a href="/exhibitionInfo/queryExhibitionInfo?index=$!page.getNextPage()&exhibitionName=$!page.getExhibitionName()">下一页</a></li>
                 ##                <li><a href="javascript:gotoPages($page.getTotalPage())" style="with:72px">末页</a></li>
                 #end
 

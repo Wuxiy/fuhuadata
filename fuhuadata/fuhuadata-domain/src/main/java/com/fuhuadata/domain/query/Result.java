@@ -189,7 +189,7 @@ public class Result<T> extends PageBase implements Serializable {
 		resultPojo.code = this.code;
 		resultPojo.message = this.message;
 		//获取默认的对象
-		resultPojo.defaultObject = this.get();
+		resultPojo.data = this.get();
 		return resultPojo;
 	}
 
