@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <title>CRM系统</title>
     <link rel="stylesheet" type="text/css" href="/lib/css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="/lib/dataTables/jquery-dataTables.css">
-    <link rel="stylesheet" type="text/css" href="/lib/css/dataTables.bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/plug-ins/28e7751dbec/integration/bootstrap/3/dataTables.bootstrap.css" />
     <script src="/lib/js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
     <script src="/lib/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/lib/dataTables/dataTables.min.js" type="text/javascript" charset="UTF-8"></script>
-    <script src="/lib/js/dataTables.bootstrap.js" type="text/javascript" charset="utf-8"></script>
+    <script src="http://cdn.gbtags.com/datatables/1.10.5/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="http://cdn.datatables.net/plug-ins/28e7751dbec/integration/bootstrap/3/dataTables.bootstrap.js"></script>
     <script src="/lib/js/jquery-lang.js" type="text/javascript" charset="utf-8"></script>
     <script src="/lib/js/js.cookie.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">

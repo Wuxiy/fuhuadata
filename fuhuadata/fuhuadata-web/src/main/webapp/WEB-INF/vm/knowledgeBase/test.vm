@@ -12,25 +12,9 @@
             </h3>
         </div>
         <div class="panel-body clearfix">
-            <!--搜索框开始-->
-            <div class="form-horizontal">
-                <div class="form-group ">
-                    <div class="col-xs-2 pull-right">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入关键词查找" id="search">
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-primary btn-xs" onclick="test()">
-                                    <span class="glyphicon glyphicon-search"></span>
-                                    搜索
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--搜索框结束-->
+
             <!--表格开始-->
-            <table id="example"  class="display" cellspacing="0" width="100%">
+            <table id="example"  class="display table table-condensed table-bordered table-striped" cellspacing="0" width="100%">
                 <thead>
                 <tr>
                     <th class="text-center ">编号</th>
@@ -76,6 +60,7 @@
     $(document).ready(function() {
         $('#example').dataTable( {
             "ajax":'/exhibitionInfo/queryExhibitionInfoTest',
+
             "columns":[
                 {"data":"exhibitionId"},
                 {"data":"exhibitionName"},
@@ -90,7 +75,11 @@
                 {"data":"exhibitionLink"},
                 {"data":"creator"},
                 {"data":"createTime"}
-            ]
+            ],
+            "language": {
+                "url": '/lib/dataTables/lang/dataTables.lang.zh',
+                "searchPlaceholder": '关键字'
+            }
         } );
     } );
 
