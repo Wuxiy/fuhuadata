@@ -56,6 +56,7 @@
         </div>
     </div>
 </div>
+
 <script>
     $(document).ready(function() {
         $('#example').dataTable( {
@@ -83,10 +84,6 @@
         } );
     } );
 
-    function test(){
-        var exhibitionName=document.getElementById('search').value;
-        location.href='/exhibitionInfo/queryExhibitionInfo?exhibitionName='+exhibitionName;
-    }
     function gotoPages(page){
         var url = "queryExhibitionInfoTest";
         var pars=page;
@@ -102,16 +99,7 @@
             $('loading').style.display = 'block';
         }
 
-        function done()
-        {
-            $('loading').style.display = 'none';
-        }
-
-        function reportError(request)
-        {
-            alert('Sorry. There was an error.');
-        }
-    }
+<script type="text/javascript">
 
 
 </script>

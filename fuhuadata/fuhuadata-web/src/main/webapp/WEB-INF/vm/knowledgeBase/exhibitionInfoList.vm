@@ -134,12 +134,12 @@
 jQuery(document).ready(function () {
     jQuery("#myTable").DataTable();
 })
-
-        </div>
-    </div>
-</div>
+<<<<<<< HEAD
+</script>
 <script type="text/javascript">
 
+=======
+>>>>>>> 3a2ba5dc905c278970e8c02b472bfe2a7e5f832c
     function test(){
 
         var t = document.getElementById("tb");
