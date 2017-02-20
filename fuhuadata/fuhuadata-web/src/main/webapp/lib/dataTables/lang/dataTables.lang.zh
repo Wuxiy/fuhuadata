@@ -1,7 +1,7 @@
 {
   "emptyTable": "<div class=\"cmn_warning tip\"><img src=\"/stylesheet/nsfocus_2014/images/blank.gif\" class=\"ico\">无数据</div>",
   "processing": "<div class=\"loading\"><span>数据加载中，请稍候...</span></div>",
-  "lengthMenu": "_MENU_ /页",
+  "lengthMenu": "每 页_MENU_ 条/页",
   "zeroRecords": "<div class=\"cmn_warning tip\"><img src=\"/stylesheet/nsfocus_2014/images/blank.gif\" class=\"ico\">无数据</div>",
   "loadingRecords": "处理中",
   "info": "共_TOTAL_条记录",

@@ -17,19 +17,19 @@
             <table id="example"  class="display table table-condensed table-bordered table-striped" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th class="text-center ">编号</th>
-                    <th class="col-xs-2 text-center">展会名称</th>
-                    <th class="col-xs-1 text-center">主办方</th>
-                    <th class="col-xs-2 text-center">承办单位</th>
-                    <th class="text-center">国家</th>
-                    <th class="text-center">城市</th>
-                    <th class="col-xs-1 text-center">开始时间</th>
-                    <th class="col-xs-1 text-center">结束日期</th>
-                    <th class="col-xs-1 text-center">展会地址</th>
-                    <th class="col-xs-2 text-center">展会介绍</th>
-                    <th class="col-xs-1 text-center">展会介绍连接</th>
+                    <th class="text-center text-middle">编号</th>
+                    <th class="col-xs-2 text-center text-middle" >展会名称</th>
+                    <th class="col-xs-1 text-center text-middle">主办方</th>
+                    <th class="col-xs-2 text-center text-middle">承办单位</th>
+                    <th class="text-center text-middle">国家</th>
+                    <th class="text-center text-middle">城市</th>
+                    <th class="col-xs-1 text-center text-middle">开始时间</th>
+                    <th class="col-xs-1 text-center text-middle">结束日期</th>
+                    <th class="col-xs-1 text-center text-middle">展会地址</th>
+                    <th class="col-xs-2 text-center text-middle">展会介绍</th>
+                    <th class="col-xs-1 text-center text-middle">展会介绍连接</th>
                     <th class="text-center">创建人</th>
-                    <th class="col-xs-1 text-center">创建时间</th>
+                    <th class="col-xs-1 text-center text-middle">创建时间</th>
                 </tr>
                 </thead>
                 <tbody id ="tb">
@@ -57,11 +57,12 @@
     </div>
 </div>
 
-<script>
+<script type="text/javascript">
     $(document).ready(function() {
         $('#example').dataTable( {
             "ajax":'/exhibitionInfo/queryExhibitionInfoTest',
-
+            "pagingType":"full_numbers",
+            "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
             "columns":[
                 {"data":"exhibitionId"},
                 {"data":"exhibitionName"},
@@ -77,29 +78,20 @@
                 {"data":"creator"},
                 {"data":"createTime"}
             ],
+            "columnDefs":[
+                {
+                    "targets": 10,
+                    "render": function(data,type,row,meta){
+                        return '<a href="' + data + '" target="_blank">' + row.exhibitionLink + '</a>';
+                    }
+                }
+            ],
             "language": {
                 "url": '/lib/dataTables/lang/dataTables.lang.zh',
                 "searchPlaceholder": '关键字'
             }
         } );
     } );
-
-    function gotoPages(page){
-        var url = "queryExhibitionInfoTest";
-        var pars=page;
-        var myAjax = new Ajax.Updater('a',url,{
-            method :'get',
-            parameters: pars,
-            onFailure:reportError,
-            onLoading:loading,
-            onComplete:done
-        });
-        function loading()
-        {
-            $('loading').style.display = 'block';
-        }
-
-<script type="text/javascript">
 
 
 </script>
