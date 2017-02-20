@@ -3,6 +3,7 @@ package com.fuhuadata.dao;
 import com.fuhuadata.domain.PortChargesCost;
 import com.fuhuadata.domain.query.PortChargesCostQuery;
 
+import javax.sound.sampled.Port;
 import java.util.List;
 
 /**
@@ -32,6 +33,14 @@ public interface PortChargesCostDao {
      */
     public int deletePortChargesCostById(int id);
 
+    public List<PortChargesCost> getAllortChargesCosts();
+    /**
+     * 通过id获取港杂费信息
+     * @param id
+     * @return
+     */
+    public PortChargesCost getPortChargesCostById(int id);
+
     /**
      * 分页查询列表
      * Query(设置当前页数和当前页面行数）
@@ -41,10 +50,17 @@ public interface PortChargesCostDao {
     public List<PortChargesCost> getPortChargesCostsByPage(PortChargesCostQuery portChargesCostQuery);
 
     /**
+     * 查询列表，不包含分页查询
+     * @param portChargesCostQuery
+     * @return
+     */
+    public List<PortChargesCost> getPortChargesCostByQuery(PortChargesCostQuery portChargesCostQuery);
+    /**
      * 查询总数
      * @param portChargesCostQuery
      * @return
      */
     public int count(PortChargesCostQuery portChargesCostQuery);
+
 
 }

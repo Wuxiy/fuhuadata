@@ -10,6 +10,7 @@ import java.util.List;
  * Created by intanswer on 2017/1/17.
  */
 public interface FreightCostDao {
+
     /**
      * 新增FreightCost对象，返回FreightCost对象（设置了新生成的id）
      * @param freightCost
@@ -37,6 +38,8 @@ public interface FreightCostDao {
      * @return
      */
     public List<FreightCost> getFreightCostsByPage(FreightCostQuery freightCostQuery);
+
+    public List<FreightCost> getFreightCostByQuery(FreightCostQuery freightCostQuery);
 
     /**
      * 查询总数

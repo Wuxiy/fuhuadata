@@ -110,6 +110,15 @@
         LIMIT #startRow#,#pageSize#
     </select>
 
+    <select id="GET-BY-QUERY" resultMap="FREIGHTCOST-MAP" parameterClass="FreightCostQuery">
+        <![CDATA[
+            SELECT * FROM k_freight_cost
+        ]]>
+        <isParameterPresent>
+            <include refid="QUERY-COMMON"/>
+        </isParameterPresent>
+    </select>
+
     <select id="COUNT" resultClass="java.lang.Integer" parameterClass="FreightCostQuery">
         <![CDATA[
 			SELECT COUNT(freight_id) FROM k_freight_cost

@@ -48,6 +48,11 @@ public class FreightCostManagerImpl implements FreightCostManager{
     }
 
     @Override
+    public List<FreightCost> getFreightCostsByQuery(FreightCostQuery freightCostQuery) {
+        return freightCostDao.getFreightCostByQuery(freightCostQuery);
+    }
+
+    @Override
     public int count(FreightCostQuery freightCostQuery) {
         return freightCostDao.count(freightCostQuery);
     }

@@ -31,6 +31,8 @@ public interface FreightCostService  {
      */
     public Result<List<FreightCost>> getFreightCostsByPage(FreightCostQuery freightCostQuery);
 
+    public Result<List<FreightCost>> getFreightCostsByQuery(FreightCostQuery freightCostQuery);
+
     public Result<Integer> count(FreightCostQuery freightCostQuery);
 
 }

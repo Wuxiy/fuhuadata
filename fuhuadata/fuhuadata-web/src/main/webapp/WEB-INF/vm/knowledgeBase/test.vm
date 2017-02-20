@@ -30,11 +30,11 @@
             </div>
             <!--搜索框结束-->
             <!--表格开始-->
-<<<<<<< HEAD
+
             <table id="datatables" class="table table-condensed table-bordered table-striped text-center">
-=======
+
             <table id="example"  class="display" cellspacing="0" width="100%">
->>>>>>> 1e67d1b2be1dd4c4e917609954a6a02eafd158eb
+
                 <thead>
                 <tr>
                     <th class="text-center ">编号</th>
@@ -77,7 +77,7 @@
     </div>
 </div>
 
-<script>
+<script type="text/javascript">
     $(document).ready(function() {
         $('#example').dataTable( {
             "ajax":'/exhibitionInfo/queryExhibitionInfoTest',
@@ -98,23 +98,5 @@
             ]
         } );
     } );
-
-    function gotoPages(page){
-        var url = "queryExhibitionInfoTest";
-        var pars=page;
-        var myAjax = new Ajax.Updater('a',url,{
-            method :'get',
-            parameters: pars,
-            onFailure:reportError,
-            onLoading:loading,
-            onComplete:done
-        });
-        function loading()
-        {
-            $('loading').style.display = 'block';
-        }
-
-<script type="text/javascript">
-
 
 </script>

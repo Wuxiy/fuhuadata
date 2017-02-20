@@ -34,12 +34,12 @@ public class ComponentCostAction {
     private String page="1";
 
     /**
-     * 初始化页面
+     * list
      * @return
      */
     @SuppressWarnings("unused")
     @RequestMapping(value = "/componentCostList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-成分价格",methods = "list")
+    @SystemLogAnnotation(module = "knowledgeBase-componentCostList",methods = "list")
     public ModelAndView componentCostList(){
         Result<List<ComponentCost>> result = new Result<List<ComponentCost>>();
 

@@ -30,34 +30,37 @@ public class PortChargesCostAction {
     private PortChargesCostService portChargesCostService;
     private Integer pageSize = 10;
     private String page="1";
+
+    /**
+     * list
+     * @return
+     */
     @SuppressWarnings("unused")
     @RequestMapping(value = "/portChargesCostList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-港杂费",methods = "查看")
-    public ModelAndView portChargesCostList(){
+    @SystemLogAnnotation(module = "knowledgeBase-portChargesCost",methods = "list")
+    @ResponseBody
+    public ResultPojo portChargesCostList(){
         Result<List<PortChargesCost>> result = new Result<List<PortChargesCost>>();
         try{
             PortChargesCostQuery query = new PortChargesCostQuery();
-            query.setPageSize(pageSize);
-            try{
-                query.setIndex(Integer.valueOf(page.trim()));
-            }catch (Exception e){
-                query.setIndex(1);
-            }
-            result=portChargesCostService.getPortChargesCostsByPage(query);
+            result=portChargesCostService.getPortChargesCostsByQuery(query);
         }catch(Exception e){
             log.error("获取港杂费成本列表错误",e);
 
         }
-        ModelAndView model= new ModelAndView("knowledgeBase/portChargesCostList","portChargesCostList",result.getModel());
-        model.addObject("message","港杂费列表");
-        return model;
+      return result.getResultPojo();
     }
+
+    /**
+     * add
+     * @return
+     */
     @RequestMapping(value = "/addPortChargesCost",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-港杂费",methods = "新增港杂费")
+    @SystemLogAnnotation(module = "knowledgeBase-portChargesCost",methods = "add")
     public ModelAndView addPortChargesCost(){return new ModelAndView("knowledgeBase/addPortChargesCost");}
 
     @RequestMapping(value = "/doAddPortChargesCost",method = RequestMethod.POST)
-    @SystemLogAnnotation(module = "知识库-港杂费",methods = "执行新增")
+    @SystemLogAnnotation(module = "knowledgeBase-portChargesCost",methods = "doAdd")
     @ResponseBody
     public ResultPojo doAddPortChargesCost(@RequestBody PortChargesCost portChargesCost){
         try{
@@ -70,25 +73,69 @@ public class PortChargesCostAction {
     }
 
     /**
-     * 条件查询
-     * @param portChargesCostQuery
+     * 根据id获取json返回值
+     * @param id
      * @return
      */
-    @RequestMapping(value = "/queryPortChargesCostList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-港杂费",methods = "条件查询")
-    public ModelAndView queryPortChargesCostList(@RequestBody PortChargesCostQuery portChargesCostQuery){
-        Result<List<PortChargesCost>> result = new Result<List<PortChargesCost>>();
+    @RequestMapping(value = "/getPortChargesCostById")
+    @ResponseBody
+    @SystemLogAnnotation(module = "knowledgeBase-portChargesCost",methods = "getPortChargesCostJson")
+    public PortChargesCost getPortChargesCostById(int id){
         try{
-            portChargesCostQuery.setPageSize(pageSize);
-            if(portChargesCostQuery.getIndex()==0){
-                portChargesCostQuery.setIndex(Integer.valueOf(page.trim()));
-            }
-            result=portChargesCostService.getPortChargesCostsByPage(portChargesCostQuery);
+            Result<PortChargesCost> result = portChargesCostService.getPortChargesCostById(id);
+            return result.getModel();
         }catch(Exception e){
-            log.error("港杂费查询失败",e);
+            log.error("根据id获取港杂费信息错误",e);
         }
-        ModelAndView model = new ModelAndView("knowledgeBase/portChargesCostList","portChargesCostList",result.getModel());
-        model.addObject("message","港杂费列表");
-        return model;
+        return null;
     }
+
+    /**
+     * update
+     * @param id
+     * @return
+     */
+    @RequestMapping(value="/ModifyPortChargesCost")
+    @SystemLogAnnotation(module = "knowledgeBase-portChargesCost",methods="add")
+    public ModelAndView ModifyPortChargesCost(int id){
+        try{
+            Result<PortChargesCost> result=portChargesCostService.getPortChargesCostById(id);
+        }catch(Exception e){
+            log.error("获取港杂费信息错误",e);
+        }
+        return new ModelAndView("knowledgeBase/modifyPortChargesCost");
+    }
+
+    @RequestMapping(value="/doModifyPortChargesCost",method=RequestMethod.POST)
+    @SystemLogAnnotation(module = "knowledgeBase-portChargesCost",methods = "doAdd")
+    @ResponseBody
+    public ResultPojo doModifyPortChargesCost(@RequestBody PortChargesCost portChargesCost){
+        try{
+            Result<PortChargesCost> result = portChargesCostService.updatePortChargesCostById(portChargesCost.getPortId(),portChargesCost);
+            return result.getResultPojo();
+        }catch(Exception e){
+            log.error("修改港杂费信息错误",e);
+        }
+        return null;
+    }
+    /**
+     * delete
+     * @return
+     */
+    @SuppressWarnings("rawtypes")
+    @RequestMapping(value="/deletePortChargesCost",method=RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-portChargesCost",methods="delete")
+    @ResponseBody
+    public ResultPojo deletePortChargesCost(int id){
+        try{
+            Result result = portChargesCostService.deletePortChargesCostById(id);
+            return result.getResultPojo();
+        }catch(Exception e){
+            //打印日志
+            log.error("根据id删除港杂费信息错误",e);
+        }
+        return null;
+    }
+
+
 }

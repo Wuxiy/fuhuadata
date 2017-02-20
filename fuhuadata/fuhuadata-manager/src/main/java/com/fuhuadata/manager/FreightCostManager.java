@@ -46,6 +46,12 @@ public interface FreightCostManager {
     public Result<List<FreightCost>> getFreightCostsByPage(FreightCostQuery freightCostQuery);
 
     /**
+     * 查询列表
+     * @param freightCostQuery
+     * @return
+     */
+    public List<FreightCost> getFreightCostsByQuery(FreightCostQuery freightCostQuery);
+    /**
      * 查询总数
      * @param freightCostQuery
      * @return

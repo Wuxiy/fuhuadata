@@ -101,7 +101,6 @@ public class ExhibitionInfoServiceImpl  implements ExhibitionInfoService{
         Result<List<ExhibitionInfo>> result = new Result<List<ExhibitionInfo>>();
         try{
             result.addDefaultModel("ExhibitionInfos",exhibitionInfoManager.getExhibitionInfosByQuery(exhibitionInfoQuery));
-
         }catch(Exception e){
             result.setSuccess(false);
             log.error("查询展会信息失败",e);

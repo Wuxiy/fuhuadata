@@ -161,13 +161,6 @@
         <isParameterPresent>
         <include refid="PAGE-COMMON"/>
         </isParameterPresent>
-        <isNotNull property="orderField">
-            ORDER BY $orderField$
-            <isEqual property="isAsc" compareValue="false">
-                desc
-            </isEqual>
-        </isNotNull>
-
         LIMIT #startRow#,#pageSize#
     </select>
 

@@ -7,7 +7,6 @@ package com.fuhuadata.domain;
 public class PortChargesCost {
     private Integer portId;
     private String item;//项目
-
     private String generalChemicals;//一般化工品
 
     private String dangerousProduct;//危险品

@@ -69,6 +69,18 @@ public class FreightCostServiceImpl implements FreightCostService{
     }
 
     @Override
+    public Result<List<FreightCost>> getFreightCostsByQuery(FreightCostQuery freightCostQuery) {
+        Result<List<FreightCost>> result = new Result<List<FreightCost>>();
+        try{
+            result.addDefaultModel("FreightCosts",freightCostManager.getFreightCostsByQuery(freightCostQuery));
+        }catch(Exception e){
+            result.setSuccess(false);
+            log.error("查询运费成本信息错误",e);
+        }
+        return result;
+    }
+
+    @Override
     public Result<Integer> count(FreightCostQuery freightCostQuery) {
         Result<Integer> result = new Result<Integer>();
         try{
