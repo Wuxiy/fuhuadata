@@ -32,9 +32,17 @@ public class    ExhibitionInfoAction {
     private Integer pageSize=20;
     private String page="1";
 
-
+    /**
+     * init
+     * @return
+     */
+    @RequestMapping(value="/exhibitionInfoList")
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "into")
+    public ModelAndView exhibitionInfo(){
+        return new ModelAndView("knowledgeBase/exhibitionInfoList");
+    }
     @SuppressWarnings("unused")
-    @RequestMapping(value = "/exhibitionInfoList",method = RequestMethod.GET)
+    @RequestMapping(value = "/queryExhibitionInfoList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "list")
     @ResponseBody
     public ResultPojo exhibitionInfoList(){
