@@ -135,10 +135,7 @@
 jQuery(document).ready(function () {
     jQuery("#myTable").DataTable();
 })
-
-        </div>
-    </div>
-</div>
+</script>
 <script type="text/javascript">
 
     function test(){
