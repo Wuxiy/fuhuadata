@@ -1117,6 +1117,9 @@ mark,
 .text-right {
   text-align: right;
 }
+.text-middle{
+  vertical-align: middle !important;
+}
 .text-center {
   text-align: center;
 }
