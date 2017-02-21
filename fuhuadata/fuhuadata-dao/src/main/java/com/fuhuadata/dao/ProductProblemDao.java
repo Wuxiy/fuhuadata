@@ -32,6 +32,15 @@ public interface ProductProblemDao {
      */
     public int deleteProductProblemById(int id);
 
+    public ProductProblem getProductProblemById(int id);
+
+    /**
+     * 查询不带分页
+     * @param productProblemQuery
+     * @return
+     */
+    public List<ProductProblem> getProductProblemByQuery(ProductProblemQuery productProblemQuery);
+
     /**
      *  查询列表，包含分页查询，查询结果为空返回空的List对象
      * 查询分页信息，请设置

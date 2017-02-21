@@ -81,7 +81,7 @@
             SELECT * FROM k_port_charges_cost
         ]]>
         <isParameterPresent>
-            <include refid="PAGE-COMMON"/>
+            <include refid="QUERY-COMMON"/>
         </isParameterPresent>
     </select>
 

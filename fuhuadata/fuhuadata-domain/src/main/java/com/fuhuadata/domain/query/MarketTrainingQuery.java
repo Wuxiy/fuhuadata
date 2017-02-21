@@ -21,6 +21,8 @@ public class MarketTrainingQuery extends PageBase {
 
     private String userId;//用户id
 
+    private String userName;//用户姓名
+
     private Timestamp uploadDate;//上传日期
 
     private String download;//下载操作
@@ -90,5 +92,13 @@ public class MarketTrainingQuery extends PageBase {
 
     public void setSearchKey(String searchKey) {
         this.searchKey = searchKey;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

@@ -30,6 +30,13 @@ public interface FreightCostDao {
     public int deleteFreightCostById(int id);
 
     /**
+     * 查询不带分页
+     * @param id
+     * @return
+     */
+    public  FreightCost getFreightCostQueryById(int id);
+
+    /**
      * 查询列表，包含分页查询，查询结果为空返回空的List对象
      * 查询分页信息，请设置
      * Query(设置当前页数)

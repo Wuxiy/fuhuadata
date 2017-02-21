@@ -45,6 +45,19 @@ public class IndustryDataServiceImpl implements IndustryDataService{
     }
 
     @Override
+    public Result<List<IndustryData>> getIndustryDataByQuery(IndustryDataQuery industryDataQuery) {
+        Result<List<IndustryData>> result = new Result<List<IndustryData>>();
+        try {
+            result.addDefaultModel("IndustryDatas", industryDataManager.getIndustryDataByQuery(industryDataQuery));
+        } catch (Exception e) {
+            result.setSuccess(false);
+            // 打印日志
+            log.error("查询行业数据错误",e);
+        }
+        return result;
+    }
+
+    @Override
     public Result<Integer> count(IndustryDataQuery industryDataQuery) {
         Result<Integer> result = new Result<Integer>();
         try {

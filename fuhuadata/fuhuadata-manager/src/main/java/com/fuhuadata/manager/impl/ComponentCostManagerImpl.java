@@ -31,6 +31,16 @@ public class ComponentCostManagerImpl implements ComponentCostManager {
     }
 
     @Override
+    public ComponentCost getComponentCostById(int id) {
+        return componentCostDao.getComponentCostById(id);
+    }
+
+    @Override
+    public List<ComponentCost> getComponentCostByQuery(ComponentCostQuery componentCostQuery) {
+        return componentCostDao.getComponentCostsByQuery(componentCostQuery);
+    }
+
+    @Override
     public Result<List<ComponentCost>> getComponentCostsByPage(ComponentCostQuery componentCostQuery) {
         Result<List<ComponentCost>> result = new Result<List<ComponentCost>>();
         int totalItem = componentCostDao.count(componentCostQuery);

@@ -31,12 +31,19 @@ public class PortChargesCostAction {
     private Integer pageSize = 10;
     private String page="1";
 
+    @RequestMapping(value = "/portChargesCostList",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-portChargesCost",methods = "into")
+    @ResponseBody
+    public ModelAndView portChargesCost(){
+      return new ModelAndView("knowledgeBase/portChargesCostList");
+    }
+
     /**
      * list
      * @return
      */
     @SuppressWarnings("unused")
-    @RequestMapping(value = "/portChargesCostList",method = RequestMethod.GET)
+    @RequestMapping(value = "/queryPortChargesCostList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-portChargesCost",methods = "list")
     @ResponseBody
     public ResultPojo portChargesCostList(){

@@ -33,6 +33,20 @@ public interface CustomerEncyclopediaDao {
     public int deleteCustomerEncyclopediaById(int id);
 
     /**
+     * 根据id查询客户百科
+     * @param id
+     * @return
+     */
+    public CustomerEncyclopedia getCustomerEncyclopediaById(int id);
+
+    /**
+     * 查询不带分页
+     * @param customerEncyclopediaQuery
+     * @return
+     */
+    public List<CustomerEncyclopedia> getCustomerEncyclopediaByQuery(CustomerEncyclopediaQuery customerEncyclopediaQuery);
+
+    /**
      * 查询列表，包含分页查询，查询结果为空返回空的List对象
      * 查询分页信息，请设置
      * Query(设置当前页数)

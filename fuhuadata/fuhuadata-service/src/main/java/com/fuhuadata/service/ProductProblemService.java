@@ -31,6 +31,10 @@ public interface ProductProblemService {
      */
     public Result deleteProductProblemById(int id);
 
+    public Result<ProductProblem> getProductProblemById(int id);
+
+    public Result<List<ProductProblem>> getProductProblemByQuery(ProductProblemQuery productProblemQuery);
+
     /**
      * 查询列表，包含分页查询
      * 查询分页信息，请设置

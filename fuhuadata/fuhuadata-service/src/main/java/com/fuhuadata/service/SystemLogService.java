@@ -20,6 +20,7 @@ public interface SystemLogService {
      */
     public Result<SystemLog> addSystemLog(SystemLog systemLog) ;
 
+    public Result<List<SystemLog>> getSystemLogByQuery(SystemLogQuery systemLogQuery);
 
     /**
      * 查询列表，包含分页查询

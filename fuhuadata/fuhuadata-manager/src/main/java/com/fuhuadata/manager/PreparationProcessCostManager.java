@@ -17,6 +17,10 @@ public interface PreparationProcessCostManager {
 
     public boolean deletePreparationProcessCostByid(int id);
 
+    public PreparationProcessCost getPreparationProcessCostById( int id);
+
+    public List<PreparationProcessCost> getPreparationProcessCostByQuery(PreparationProcessCostQuery preparationProcessCostQuery);
+
     public Result<List<PreparationProcessCost>> getPreparationProcessCostsByPage(PreparationProcessCostQuery preparationProcessCostQuery);
 
     public int count(PreparationProcessCostQuery preparationProcessCostQuery);

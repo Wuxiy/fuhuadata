@@ -51,6 +51,29 @@
         </dynamic>
     </sql>
 
+    <sql id="QUERY-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotNull prepend=" AND " property="companyName">
+                company_name=#companyName#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="type">
+                type = #type#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="area">
+                area = #area#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="country">
+                country = #country#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="companyProperty">
+                company_property = #companyProperty#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="searchKey">
+                company_name like concat('%',#companyName#,'%')
+            </isNotNull>
+        </dynamic>
+    </sql>
+
     <insert id="ADD" parameterClass="CustomerEncyclopedia">
         INSERT INTO
         k_customer_encyclopedia (ency_id, company_name, type,
@@ -142,6 +165,22 @@
         DELETE FROM k_customer_encyclopedia WHERE ency_id=#id#
     ]]>
     </delete>
+
+    <select id="GET-BY-ID" resultMap="CUSTOMERENCYCLOPEDIA-MAP" parameterClass="java.lang.Integer">
+        <![CDATA[
+        SELECT * FROM k_customer_encyclopedia WHERE ency_id=#id#
+    ]]>
+    </select>
+
+    <select id="GET-BY-QUERY" resultMap="CUSTOMERENCYCLOPEDIA-MAP" parameterClass="CustomerEncyclopediaQuery">
+        <![CDATA[
+        SELECT * FROM k_customer_encyclopedia
+        ]]>
+        <isParameterPresent>
+            <include refid="QUERY-COMMON"/>
+        </isParameterPresent>
+    </select>
+
     <select id="GET-PAGE" resultMap="CUSTOMERENCYCLOPEDIA-MAP" parameterClass="CustomerEncyclopediaQuery">
         <![CDATA[
         SELECT * FROM k_customer_encyclopedia

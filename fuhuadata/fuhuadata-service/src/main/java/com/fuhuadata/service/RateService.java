@@ -22,6 +22,9 @@ public interface RateService {
     public Result<Rate> addRate(Rate rate);
     public Result updateRate(int id,Rate rate);
     public Result deleteRate(int id);
+    public Result<Rate> getRateById(int id);
+
+    public Result<List<Rate>> getRateByQuery(RateQuery rateQuery);
 
     /**
      * 查询列表，包含分页查询

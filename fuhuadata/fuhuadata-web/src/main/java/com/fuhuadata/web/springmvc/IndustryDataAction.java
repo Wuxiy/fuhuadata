@@ -30,36 +30,42 @@ public class IndustryDataAction {
     private IndustryDataService industryDataService;
     private Integer pageSize = 10;
     private String page="1";
+
+
+    /**
+     * init
+     * @return
+     */
     @SuppressWarnings("unused")
     @RequestMapping(value = "/industryDataList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-行业数据",methods = "list")
-    public ModelAndView IndustryDataList(){
+    @SystemLogAnnotation(module = "knowledgeBase-industryData",methods = "into")
+    public ModelAndView IndustryData(){
+        return new ModelAndView("knowledgeBase/industryDataList");
+    }
+
+    @SuppressWarnings("unused")
+    @RequestMapping(value = "/queryIndustryDataList",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-industryData",methods = "list")
+    @ResponseBody
+    public ResultPojo IndustryDataList(){
         Result<List<IndustryData>> result = new Result<List<IndustryData>>();
+        IndustryDataQuery industryDataQuery = new IndustryDataQuery();
         try{
-            IndustryDataQuery industryDataQuery = new IndustryDataQuery();
-            industryDataQuery.setPageSize(pageSize);
-            try{
-                industryDataQuery.setIndex(Integer.valueOf(page.trim()));
-            }catch(Exception e){
-                industryDataQuery.setIndex(1);
-            }
-            result=industryDataService.getIndustryDatasByPage(industryDataQuery);
+            result=industryDataService.getIndustryDataByQuery(industryDataQuery);
         }catch(Exception e){
             log.error("获取行业数据列表错误");
         }
-        ModelAndView model= new ModelAndView("knowledgeBase/industryDataList","industryDataList",result.getModel());
-        model.addObject("message","行业数据列表");
-        return model;
+        return result.getResultPojo();
     }
 
     @RequestMapping(value = "/addIndustryData",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-行业数据",methods = "add")
+    @SystemLogAnnotation(module = "knowledgeBase-industryData",methods = "add")
     public ModelAndView addIndustryData(){
         return new ModelAndView("knowledgeBase/addIndustryData");
     }
 
     @RequestMapping(value = "/addIndustryData",method = RequestMethod.POST)
-    @SystemLogAnnotation(module = "知识库-行业数据",methods = "doAdd")
+    @SystemLogAnnotation(module = "knowledgeBase-industryData",methods = "doAdd")
     @ResponseBody
     public ResultPojo doAddIndustryData(@RequestBody IndustryData industryData){
         try{
@@ -74,7 +80,7 @@ public class IndustryDataAction {
 
 
     @RequestMapping(value = "/queryIndustryDataList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-行业数据",methods = "query")
+    @SystemLogAnnotation(module = "knowledgeBase-industryData",methods = "query")
     public ModelAndView queryIndustryDataList(@RequestBody IndustryDataQuery industryDataQuery){
         Result<List<IndustryData>> result = new Result<List<IndustryData>>();
         try{

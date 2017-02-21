@@ -56,6 +56,37 @@ public class PreparationProcessCostServiceImpl implements PreparationProcessCost
     }
 
     @Override
+    public Result<PreparationProcessCost> getPreparationProcessCostById(int id) {
+        Result<PreparationProcessCost> result = new Result<PreparationProcessCost>();
+        try {
+            PreparationProcessCost preparationProcessCost = preparationProcessCostManager.getPreparationProcessCostById(id);
+            if(preparationProcessCost == null){
+                result.setSimpleErrorMsg(0, "当前制剂加工成本信息不存在，请重试");
+            }else{
+                result.addDefaultModel("PreparationProcessCosts", preparationProcessCost);
+            }
+        } catch (Exception e) {
+            result.setSuccess(false);
+            // 打印日志
+            log.error("根据id获取制剂加工成本信息错误",e);
+        }
+        return result;
+    }
+
+    @Override
+    public Result<List<PreparationProcessCost>> getPreparationProcessCostByQuery(PreparationProcessCostQuery preparationProcessCostQuery) {
+        Result<List<PreparationProcessCost>> result = new Result<List<PreparationProcessCost>>();
+        try {
+            result.addDefaultModel("PreparationProcessCosts", preparationProcessCostManager.getPreparationProcessCostByQuery(preparationProcessCostQuery));
+        } catch (Exception e) {
+            result.setSuccess(false);
+            // 打印日志
+            log.error("查询制剂加工成本信息错误",e);
+        }
+        return result;
+    }
+
+    @Override
     public Result<List<PreparationProcessCost>> getPreparationProcessCostsByPage(PreparationProcessCostQuery preparationProcessCostQuery) {
         Result<List<PreparationProcessCost>> result = new Result<List<PreparationProcessCost>>();
         try{

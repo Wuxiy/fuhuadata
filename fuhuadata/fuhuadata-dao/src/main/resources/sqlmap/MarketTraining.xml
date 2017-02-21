@@ -9,7 +9,8 @@
         <result column="product_id" property="productId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result column="title" property="title" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="product_type" property="productType" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="user_id" property="userId" jdbcType="VARCHAR" javaType="java.lang.String" />
+        <result column="user_id" property="userId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+        <result column="user_name" property="userName" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="upload_date" property="uploadDate" jdbcType="DATE" javaType="java.sql.Date" />
         <result column="download" property="download" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>
@@ -32,6 +33,14 @@
             </isNotNull>
         </dynamic>
     </sql>
+    <sql id="QUERY-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotNull prepend=" AND " property="userId">
+                user_id=#userId#
+            </isNotNull>
+        </dynamic>
+    </sql>
+
         <insert id="ADD" parameterClass="MarketTraining" >
             insert into k_market_training (tran_id, product_id, title,
             product_type, user_id, upload_date,
@@ -73,6 +82,21 @@
         DELETE FROM k_market_training WHERE tran_id=#tranId#
         ]]>
     </delete>
+
+    <select id="GET-BY-ID" resultMap="MARKETTRAINING-MAP" parameterClass="java.lang.Integer">
+        <![CDATA[
+        SELECT * FROM k_market_training WHERE tran_id = #id#
+        ]]>
+    </select>
+
+    <select id="GET-BY-QUERY" resultMap="MARKETTRAINING-MAP" parameterClass="MarketTrainingQuery">
+        <![CDATA[
+        SELECT * FROM k_market_training
+        ]]>
+        <isParameterPresent>
+            <include refid="QUERY-COMMON"/>
+        </isParameterPresent>
+    </select>
 
     <select id="GET-PAGE" resultMap="MARKETTRAINING-MAP" parameterClass="MarketTrainingQuery">
         <![CDATA[

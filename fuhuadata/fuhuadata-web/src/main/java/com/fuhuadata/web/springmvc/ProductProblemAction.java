@@ -31,39 +31,42 @@ public class ProductProblemAction {
     private ProductProblemService productProblemService;
     private Integer pageSize = 10 ;
     private String page = "1";
+
+    /**
+     * init
+     * @return
+     */
+    @RequestMapping(value = "/productProblemList")
+    @SystemLogAnnotation(module = "knowledgeBase-productProblem",methods = "into")
+    public ModelAndView productProblem(){
+      return new ModelAndView("knowledgeBase/productProblemList");
+    }
     /**
      * 产品问题列表
      * @return
      */
     @SuppressWarnings("unused")
-    @RequestMapping(value = "/productProblemList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-产品问题",methods = "列表查询")
-    public ModelAndView productProblemList(){
+    @RequestMapping(value = "/queryProductProblemList",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-productProblem",methods = "list")
+    @ResponseBody
+    public ResultPojo productProblemList(){
         Result<List<ProductProblem>> result = new Result<List<ProductProblem>>();
+        ProductProblemQuery query = new ProductProblemQuery();
         try{
-            ProductProblemQuery query = new ProductProblemQuery();
-            query.setPageSize(pageSize);
-            try{
-                query.setIndex(Integer.valueOf(page));
-            }catch(Exception e){
-                query.setIndex(1);
-            }
              result=productProblemService.getProductProblemsByPage(query);
         }catch(Exception e){
             log.error("获取产品问题列表问题错误",e);
         }
 
-        ModelAndView model = new ModelAndView("knowledgeBase/productProblemList","productProblemList",result.getModel());
-        model.addObject("message","产品问题列表");
-        return model;
+        return result.getResultPojo();
     }
 
     @RequestMapping(value = "/addProductProblem",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-产品问题",methods = "新增产品问题")
+    @SystemLogAnnotation(module = "knowledgeBase-productProblem",methods = "add")
     public ModelAndView addProductProblem(){return new ModelAndView("knowledgeBase/addProductProblem");}
 
     @RequestMapping(value = "/doAddProductProblem",method = RequestMethod.POST)
-    @SystemLogAnnotation(module = "知识库-产品问题",methods = "执行新增")
+    @SystemLogAnnotation(module = "knowledgeBase-productProblem",methods = "doAdd")
     @ResponseBody
     public ResultPojo doAddProductProblem(@RequestBody ProductProblem productProblem){
         try{
@@ -76,7 +79,7 @@ public class ProductProblemAction {
     }
 
     @RequestMapping(value = "/queryProductProblemList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-产品问题",methods = "条件查询")
+    @SystemLogAnnotation(module = "knowledgeBase-productProblem",methods = "query")
     public ModelAndView queryProductProblemList(@RequestBody ProductProblemQuery productProblemQuery){
 
         Result<List<ProductProblem>> result = new Result<List<ProductProblem>>();

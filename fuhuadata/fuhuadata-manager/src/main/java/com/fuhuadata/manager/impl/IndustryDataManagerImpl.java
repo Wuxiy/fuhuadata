@@ -20,6 +20,11 @@ public class IndustryDataManagerImpl implements IndustryDataManager {
     }
 
     @Override
+    public List<IndustryData> getIndustryDataByQuery(IndustryDataQuery industryDataQuery) {
+        return industryDataDao.getIndustryDataByQuery(industryDataQuery);
+    }
+
+    @Override
     public Result<List<IndustryData>> getIndustryDatasByPage(IndustryDataQuery industryDataQuery) {
         Result<List<IndustryData>> result = new Result<List<IndustryData>>();
         int totalItem = industryDataDao.count(industryDataQuery);

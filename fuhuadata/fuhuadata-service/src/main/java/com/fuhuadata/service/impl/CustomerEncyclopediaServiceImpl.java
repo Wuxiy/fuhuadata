@@ -54,6 +54,37 @@ public class CustomerEncyclopediaServiceImpl implements CustomerEncyclopediaServ
     }
 
     @Override
+    public Result<CustomerEncyclopedia> getCustomerEncyclopediaById(int id) {
+        Result<CustomerEncyclopedia> result = new Result<CustomerEncyclopedia>();
+        try {
+            CustomerEncyclopedia customerEncyclopedia = customerEncyclopediaManager.getCustomerEncyclopediaById(id);
+            if(customerEncyclopedia == null){
+                result.setSimpleErrorMsg(0, "当前客户百科信息不存在，请重试");
+            }else{
+                result.addDefaultModel("CustomerEncyclopedia", customerEncyclopedia);
+            }
+        } catch (Exception e) {
+            result.setSuccess(false);
+            // 打印日志
+            log.error("根据id获取客户百科信息错误",e);
+        }
+        return result;
+    }
+
+    @Override
+    public Result<List<CustomerEncyclopedia>> getCustomerEncyclopediaByQuery(CustomerEncyclopediaQuery customerEncyclopediaQuery) {
+        Result<List<CustomerEncyclopedia>> result = new Result<List<CustomerEncyclopedia>>();
+        try {
+            result.addDefaultModel("CustomerEncyclopedias", customerEncyclopediaManager.getCustomerEncyclopediaByQuery(customerEncyclopediaQuery));
+        } catch (Exception e) {
+            result.setSuccess(false);
+            // 打印日志
+            log.error("查询客户百科信息错误",e);
+        }
+        return result;
+    }
+
+    @Override
     public Result<List<CustomerEncyclopedia>> getCustomerEncyclopediasByPage(CustomerEncyclopediaQuery customerEncyclopediaQuery) {
         Result<List<CustomerEncyclopedia>> result = new Result<List<CustomerEncyclopedia>>();
         try{

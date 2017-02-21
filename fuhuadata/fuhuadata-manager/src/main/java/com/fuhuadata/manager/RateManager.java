@@ -19,6 +19,8 @@ public interface RateManager {
 
     public boolean deleteRateById(int id);
 
+    public List<Rate> getRateByQuery(RateQuery rateQuery);
+
     public Result<List<Rate>> getRatesByPage(RateQuery rateQuery);
 
     public int count(RateQuery rateQuery);

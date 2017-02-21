@@ -13,6 +13,8 @@ import java.util.List;
 public interface IndustryDataManager {
     public IndustryData addIndustryData(IndustryData industryData);
 
+    public List<IndustryData> getIndustryDataByQuery(IndustryDataQuery industryDataQuery);
+
     public Result<List<IndustryData>> getIndustryDatasByPage(IndustryDataQuery industryDataQuery);
 
     public int count(IndustryDataQuery industryDataQuery);

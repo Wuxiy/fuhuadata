@@ -30,27 +30,29 @@ public class PackingArchivesAction {
     private PackingArchivesService packingArchivesService;
     private Integer pageSize = 10;
     private String page="1";
+
     @SuppressWarnings("unused")
     @RequestMapping(value = "/packingArchivesList",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "into")
+    public ModelAndView packingArchives(){
+        return new ModelAndView("knowledgeBase/packingCostList");
+    }
+
+    @SuppressWarnings("unused")
+    @RequestMapping(value = "/queryPackingArchivesList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase/packingCostList",methods = "list")
-    public ModelAndView packingArchivesList(){
+    @ResponseBody
+    public ResultPojo packingArchivesList(){
         Result<List<PackingArchives>> result = new Result<List<PackingArchives>>();
+        PackingArchivesQuery query = new PackingArchivesQuery();
         try{
-            PackingArchivesQuery query = new PackingArchivesQuery();
-            query.setPageSize(pageSize);
-            try{
-                query.setIndex(Integer.valueOf(page.trim()));
-            }catch(Exception e){
-                query.setIndex(1);
-            }
-            result=packingArchivesService.getPackingArchivesByPage(query);
+            result=packingArchivesService.getPackingArchivesByQuery(query);
         }catch(Exception e){
             log.error("获取包材成本档案列表错误");
         }
-        ModelAndView model= new ModelAndView("knowledgeBase/packingCostList","packingArchivesList",result.getModel());
-        model.addObject("message","包材成本档案列表");
-        return model;
+        return result.getResultPojo();
     }
+
     @RequestMapping(value = "/addPackingArchives",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase/packingCostList",methods = "add")
     public ModelAndView addPackingArchives(){return new ModelAndView("knowledgeBase/addPackingArchives");}

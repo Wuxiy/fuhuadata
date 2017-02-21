@@ -37,6 +37,16 @@ public class CustomerEncyclopediaManagerImpl implements CustomerEncyclopediaMana
     }
 
     @Override
+    public CustomerEncyclopedia getCustomerEncyclopediaById(int id) {
+        return customerEncyclopediaDao.getCustomerEncyclopediaById(id);
+    }
+
+    @Override
+    public List<CustomerEncyclopedia> getCustomerEncyclopediaByQuery(CustomerEncyclopediaQuery customerEncyclopediaQuery) {
+        return customerEncyclopediaDao.getCustomerEncyclopediaByQuery(customerEncyclopediaQuery);
+    }
+
+    @Override
     public Result<List<CustomerEncyclopedia>> getCustomerEncyclopediasByPage(CustomerEncyclopediaQuery customerEncyclopediaQuery) {
         Result<List<CustomerEncyclopedia>> result = new Result<List<CustomerEncyclopedia>>();
         int totalItem = customerEncyclopediaDao.count(customerEncyclopediaQuery);

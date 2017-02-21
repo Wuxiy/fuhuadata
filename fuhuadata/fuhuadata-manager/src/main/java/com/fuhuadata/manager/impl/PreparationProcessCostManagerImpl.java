@@ -27,7 +27,17 @@ public class PreparationProcessCostManagerImpl implements PreparationProcessCost
 
     @Override
     public boolean deletePreparationProcessCostByid(int id) {
-        return preparationProcessCostDao.deleteComponentCostById(id) == 1 ? true : false;
+        return preparationProcessCostDao.deletePreparationProcessCostById(id) == 1 ? true : false;
+    }
+
+    @Override
+    public PreparationProcessCost getPreparationProcessCostById(int id) {
+        return preparationProcessCostDao.getPreparationProcessCostById(id);
+    }
+
+    @Override
+    public List<PreparationProcessCost> getPreparationProcessCostByQuery(PreparationProcessCostQuery preparationProcessCostQuery) {
+        return preparationProcessCostDao.getPreparationProcessCostByQuery(preparationProcessCostQuery);
     }
 
     @Override

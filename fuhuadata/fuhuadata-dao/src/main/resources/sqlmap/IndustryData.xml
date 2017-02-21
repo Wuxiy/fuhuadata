@@ -58,33 +58,6 @@
             <isNotNull prepend=" AND " property="id">
                 id = #id#
             </isNotNull>
-            <isNotNull prepend=" AND " property="year" >
-                year = #year#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="exportContinent">
-                export_continent = #exportContinent#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="exportCountry">
-                export_country = #exportCountry#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="businessName">
-                business_name = #businessName#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="exportGross">
-                export_gross = #exportGross#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="saleTotal">
-                sale_total = #saleTotal#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="average">
-                average = #average#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="month">
-                month= #month#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="exportShare">
-                export_share = #exportShare#
-            </isNotNull>
         </dynamic>
     </sql>
 
@@ -141,6 +114,21 @@
 			DELETE FROM d_industry_data WHERE id=#id#
 		]]>
     </delete>
+
+    <select id="GET-BY-QUERY" resultMap="INDUSTRYDATA-MAP" parameterClass="IndustryDataQuery">
+        <![CDATA[
+            SELECT * FROM d_industry_data
+        ]]>
+        <isParameterPresent>
+            <include refid="QUERY-COMMON"/>
+        </isParameterPresent>
+    </select>
+
+    <select id="GET-BY-ID" resultMap="INDUSTRYDATA-MAP" parameterClass="java.lang.Integer">
+        <![CDATA[
+            SELECT * FROM d_industry_data WHERE
+        ]]>
+    </select>
 
     <select id="GET-PAGE" resultMap="INDUSTRYDATA-MAP" parameterClass="IndustryDataQuery">
         <![CDATA[

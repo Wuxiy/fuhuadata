@@ -25,6 +25,17 @@
         </dynamic>
     </sql>
 
+    <sql id="QUERY-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotNull prepend=" AND " property="componentName">
+                component_name = #componentName#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="suitableProduct">
+                suitable_product =  #suitableProduct#
+            </isNotNull>
+        </dynamic>
+    </sql>
+
     <insert id="ADD" parameterClass="ComponentCost">
         INSERT INTO
         k_component_cost (component_id, component_name, consumption,
@@ -54,6 +65,21 @@
             DELETE FROM k_component_cost WHERE component_id=#componentId#
         ]]>
     </delete>
+
+    <select id="GET-BY-QUERY" resultMap="COMPONENTCOST-MAP" parameterClass="ComponentCostQuery">
+        <![CDATA[
+            SELECT * FROM k_component_cost
+        ]]>
+        <isParameterPresent>
+            <include refid="QUERY-COMMON"/>
+        </isParameterPresent>
+    </select>
+
+    <select id="GET-BY-ID" resultMap="COMPONENTCOST-MAP" parameterClass="java.lang.Integer">
+        <![CDATA[
+            SELECT * FROM k_component_cost WHERE component_id=#id#
+        ]]>
+    </select>
 
     <select id="GET-PAGE" resultMap="COMPONENTCOST-MAP" parameterClass="ComponentCostQuery">
         <![CDATA[

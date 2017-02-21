@@ -42,7 +42,9 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+
         $('#exhibition_table').dataTable( {
+
             "ajax":'/exhibitionInfo/queryExhibitionInfoList',
             "pagingType":"full_numbers",
             "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],

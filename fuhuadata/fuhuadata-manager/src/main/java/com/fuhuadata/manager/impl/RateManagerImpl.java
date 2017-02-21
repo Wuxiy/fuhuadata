@@ -31,6 +31,11 @@ public class RateManagerImpl implements RateManager{
     }
 
     @Override
+    public List<Rate> getRateByQuery(RateQuery rateQuery) {
+        return rateDao.getRateByQuery(rateQuery);
+    }
+
+    @Override
     public Result<List<Rate>> getRatesByPage(RateQuery rateQuery) {
         Result<List<Rate>> result = new Result<List<Rate>>();
         int totalItem = rateDao.count(rateQuery);

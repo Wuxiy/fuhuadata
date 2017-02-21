@@ -35,6 +35,8 @@ public interface FreightCostManager {
      */
     public boolean deleteFreightCostById(int id);
 
+    public FreightCost getFreightCostById(int id);
+
     /**
      * Query(设置当前页数)
      * Query(设置当前页面数据行数)
