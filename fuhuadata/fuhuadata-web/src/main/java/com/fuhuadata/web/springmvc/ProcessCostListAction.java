@@ -389,7 +389,8 @@ public class ProcessCostListAction {
      * @param rateQuery
      * @return
      */
-    @RequestMapping(value = "/queryRate",method = RequestMethod.GET)
+    @SuppressWarnings("unused")
+    @RequestMapping(value = "/queryRateTest",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "知识库-费率",methods = "条件查询")
     public ModelAndView queryRate(@RequestBody RateQuery rateQuery){
         Result<List<Rate>> result = new Result<List<Rate>>();

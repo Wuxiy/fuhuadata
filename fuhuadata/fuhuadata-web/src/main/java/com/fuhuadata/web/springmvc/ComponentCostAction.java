@@ -60,18 +60,17 @@ public class ComponentCostAction {
         }
         return result.getResultPojo();
     }
+
+    /**
+     * add
+     * @return
+     */
     @RequestMapping(value = "/addComponentCost",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "知识库-成分价格",methods = "add")
     public ModelAndView addComponentCost(){
         return new ModelAndView("knowledgeBase/addComponentCost");
 
     }
-
-    /**
-     * 新增component
-     * @param componentCost
-     * @return
-     */
     @RequestMapping(value="/doAddComponentCost",method = RequestMethod.POST)
     @ResponseBody
     @SystemLogAnnotation(module = "知识库-成分价格",methods = "doAdd")

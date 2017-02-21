@@ -78,7 +78,8 @@ public class ProductProblemAction {
         return null;
     }
 
-    @RequestMapping(value = "/queryProductProblemList",method = RequestMethod.GET)
+    @SuppressWarnings("unused")
+    @RequestMapping(value = "/queryProductProblemListTest",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-productProblem",methods = "query")
     public ModelAndView queryProductProblemList(@RequestBody ProductProblemQuery productProblemQuery){
 

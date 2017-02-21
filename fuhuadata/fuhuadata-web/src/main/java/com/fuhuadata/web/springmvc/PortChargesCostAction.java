@@ -36,7 +36,6 @@ public class PortChargesCostAction {
     public ModelAndView portChargesCost(){
       return new ModelAndView("knowledgeBase/portChargesCostList");
     }
-
     /**
      * list
      * @return

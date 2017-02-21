@@ -73,6 +73,7 @@ public class PackingArchivesAction {
      * @param packingArchivesQuery
      * @return
      */
+    @SuppressWarnings("unused")
     @RequestMapping(value = "/queryPackingArchivesListTest",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase/packingCostList",methods = "query")
     public ModelAndView queryPackingArchivesList(@RequestBody PackingArchivesQuery packingArchivesQuery){

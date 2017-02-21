@@ -42,7 +42,6 @@ public class FreightCostAction {
         return new ModelAndView("knowledgeBase/freightCostList");
     }
 
-    @SuppressWarnings("unused")
     @RequestMapping(value = "/queryFreightCostList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-freightCost",methods = "list")
     @ResponseBody
@@ -57,12 +56,15 @@ public class FreightCostAction {
        return result.getResultPojo();
     }
 
+    /**
+     * add
+     * @return
+     */
     @RequestMapping(value = "/addFreightCost",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-freightCost",methods = "add")
     public ModelAndView addFreightCost(){
         return new ModelAndView("knowledgeBase/addFreightCost");
     }
-
     @RequestMapping(value = "/doAddFreightCost",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-freightCost",methods = "doAdd")
     @ResponseBody
@@ -76,28 +78,5 @@ public class FreightCostAction {
         return null;
     }
 
-    /**
-     * 条件查询
-     * @param freightCostQuery
-     * @return
-     */
-    @RequestMapping(value = "/queryFreightCostList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "knowledgeBase-freightCost",methods = "query")
-    public ModelAndView queryFreightCostList(@RequestBody FreightCostQuery freightCostQuery){
-        Result<List<FreightCost>> result = new Result<List<FreightCost>>();
-        try{
-            freightCostQuery.setPageSize(pageSize);
-
-            if(freightCostQuery.getIndex()==0){
-                freightCostQuery.setIndex(Integer.valueOf(page.trim()));
-            }
-            result=freightCostService.getFreightCostsByPage(freightCostQuery);
-        }catch(Exception e){
-            log.error("条件查询运费失败",e);
-        }
-        ModelAndView model=new ModelAndView("knowledgeBase/freightCostList","freightCostList",result.getModel());
-        model.addObject("message","运费列表");
-        return model;
-    }
 
 }

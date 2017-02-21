@@ -43,7 +43,7 @@ public class CustomerEncyclopediaAction {
      * list
      * @return
      */
-    @RequestMapping(value = "/customerEncyclopediaList",method = RequestMethod.GET)
+    @RequestMapping(value = "/queryCustomerEncyclopediaList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "list")
     @ResponseBody
     public ResultPojo customerEncyclopediaList(){

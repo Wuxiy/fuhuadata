@@ -85,7 +85,8 @@ public class PreparationProcessCostAction {
      * @param preparationProcessCostQuery
      * @return
      */
-    @RequestMapping(value = "/queryPreparationProcessCostList",method = RequestMethod.GET)
+    @SuppressWarnings("unused")
+    @RequestMapping(value = "/queryPreparationProcessCostListTest",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-preparationProcessCost",methods = "query")
     public ModelAndView queryPreparationProcessCostList(@RequestBody PreparationProcessCostQuery preparationProcessCostQuery){
         Result<List<PreparationProcessCost>> result = new Result<List<PreparationProcessCost>>();

@@ -77,7 +77,8 @@ public class IndustryDataAction {
 
 
 
-    @RequestMapping(value = "/queryIndustryDataList",method = RequestMethod.GET)
+    @SuppressWarnings("unused")
+    @RequestMapping(value = "/queryIndustryDataListTest",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-industryData",methods = "query")
     public ModelAndView queryIndustryDataList(@RequestBody IndustryDataQuery industryDataQuery){
         Result<List<IndustryData>> result = new Result<List<IndustryData>>();

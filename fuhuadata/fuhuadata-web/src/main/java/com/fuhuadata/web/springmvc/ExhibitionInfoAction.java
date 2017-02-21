@@ -57,8 +57,7 @@ public class    ExhibitionInfoAction {
         return result.getResultPojo();
     }
 
-
-
+    @SuppressWarnings("unused")
     @RequestMapping(value = "/queryExhibitionInfoTest",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "query")
     @ResponseBody
