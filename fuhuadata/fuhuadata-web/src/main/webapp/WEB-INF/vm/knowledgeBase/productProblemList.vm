@@ -38,7 +38,7 @@
             </div>
             <!--搜索框结束-->
             <!--表格开始-->
-            <table class="table table-condensed table-bordered table-striped text-center">
+            <table id="productproblem_table" class="table table-condensed table-bordered table-striped text-center" cellspacing="0" width="100%">
                 <thead>
                 <tr>
                     <th class="col-xs-1 text-center">编号</th>
@@ -48,34 +48,10 @@
                     <th class="col-xs-2 text-center">备注</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <td>1</td>
-                    <td><a href="#FQLdetails" data-toggle="modal" data-target="#FQLdetails">用于抗农达作物的农达量对人类食用是安全的吗?特别是对人类的肠道菌群安全吗?</a></td>
-                    <td>草甘膦</td>
-                    <td>Kevin Folta（佛罗里达大学）：植物并非―浸泡‖在―农达‖中，或更确切地说，并非―浸泡‖在其活性成分草甘膦中。杂草出现时施用相对少量的草甘膦，它们就会死亡，不会与长出的抗草甘膦作物竞争。而且草甘膦对人类或任何其他动物无毒。</td>
-                    <td></td>
-                </tr>
-                </tbody>
+
             </table>
             <!--表格结束-->
-            <!--分页导航开始-->
-            <div class="form-group pull-left table-pagination">
-                共<span>123</span>条记录，<span>130</span>页，跳转到第&nbsp;<input class="form-control pagination-input" type="number"/>&nbsp;页
-                <button class="btn btn-xs btn-primary">确定</button>
-            </div>
-            <ul class="pagination pull-right table-pagination">
-                <li class="disabled"><a href="#">上一页</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">6</a></li>
-                <li><a href="#">7</a></li>
-                <li><a href="">&hellip;</a></li>
-                <li><a href="#">下一页</a></li>
-            </ul>
+
         </div>
     </div>
 </div>
@@ -175,3 +151,32 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#productproblem_table").dataTable(){
+            "ajax":"",
+            "pagingType":"full_numbers",
+            "lengthMenu":[[5, 10, 1 5, -1], [5, 10, 15, "All"]],
+            "columns":[
+                {"data":"problemId"},
+                {"data":"problemContent"},
+                {"data":"productType"},
+                {"data":"solution"},
+                {"data":"remarks"}
+            ],
+            "columnDefs":[
+                {
+                    "targets":1,
+                    "render":function(data,type,row){
+                        return '<a href="' + data + '" target="_blank">' + row. + '</a>';
+                    }
+                }
+            ],
+            "language": {
+                "url": '/lib/dataTables/lang/dataTables.lang.zh',
+                        "searchPlaceholder": '关键字'
+            }
+        }
+    })
+</script>

@@ -22,9 +22,9 @@ public interface MarketTrainingManager {
 
     public MarketTraining getMarketTrainingById(int id);
 
-    public List<ExhibitionInfo> getAllMarketTrainings();
+    public List<MarketTraining> getAllMarketTrainings();
 
-    public List<ExhibitionInfo> getMarketTrainingByQuery(ExhibitionInfoQuery exhibitionInfoQuery);
+    public List<MarketTraining> getMarketTrainingsByQuery(MarketTrainingQuery marketTrainingQuery);
 
     public Result<List<MarketTraining>> getMarketTrainingsByPage(MarketTrainingQuery marketTrainingQuery);
 
