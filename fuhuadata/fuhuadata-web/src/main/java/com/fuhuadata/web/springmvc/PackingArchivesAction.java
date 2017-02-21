@@ -31,14 +31,12 @@ public class PackingArchivesAction {
     private Integer pageSize = 10;
     private String page="1";
 
-    @SuppressWarnings("unused")
     @RequestMapping(value = "/packingArchivesList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "into")
     public ModelAndView packingArchives(){
         return new ModelAndView("knowledgeBase/packingCostList");
     }
 
-    @SuppressWarnings("unused")
     @RequestMapping(value = "/queryPackingArchivesList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase/packingCostList",methods = "list")
     @ResponseBody
@@ -75,7 +73,7 @@ public class PackingArchivesAction {
      * @param packingArchivesQuery
      * @return
      */
-    @RequestMapping(value = "/queryPackingArchivesList",method = RequestMethod.GET)
+    @RequestMapping(value = "/queryPackingArchivesListTest",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase/packingCostList",methods = "query")
     public ModelAndView queryPackingArchivesList(@RequestBody PackingArchivesQuery packingArchivesQuery){
         Result<List<PackingArchives>> result = new Result<List<PackingArchives>>();

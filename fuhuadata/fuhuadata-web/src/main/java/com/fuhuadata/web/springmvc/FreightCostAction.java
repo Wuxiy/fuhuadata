@@ -31,9 +31,21 @@ public class FreightCostAction {
     private FreightCostService freightCostService;
     private Integer pageSize = 10;
     private String page="1";
-    @SuppressWarnings("unused")
+
+    /**
+     * init
+     * @return
+     */
     @RequestMapping(value = "/freightCostList",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-freightCost",methods = "into")
+    public ModelAndView freightCost(){
+        return new ModelAndView("knowledgeBase/freightCostList");
+    }
+
+    @SuppressWarnings("unused")
+    @RequestMapping(value = "/queryFreightCostList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-freightCost",methods = "list")
+    @ResponseBody
     public ResultPojo freightCostList(){
         Result<List<FreightCost>> result = new Result<List<FreightCost>>();
         try{
@@ -44,14 +56,15 @@ public class FreightCostAction {
         }
        return result.getResultPojo();
     }
+
     @RequestMapping(value = "/addFreightCost",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-运费",methods = "add")
+    @SystemLogAnnotation(module = "knowledgeBase-freightCost",methods = "add")
     public ModelAndView addFreightCost(){
         return new ModelAndView("knowledgeBase/addFreightCost");
     }
 
     @RequestMapping(value = "/doAddFreightCost",method = RequestMethod.POST)
-    @SystemLogAnnotation(module = "知识库-运费",methods = "doAdd")
+    @SystemLogAnnotation(module = "knowledgeBase-freightCost",methods = "doAdd")
     @ResponseBody
     public ResultPojo doAddFreightCost(@RequestBody FreightCost freightCost){
         try{
@@ -69,7 +82,7 @@ public class FreightCostAction {
      * @return
      */
     @RequestMapping(value = "/queryFreightCostList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-运费",methods = "query")
+    @SystemLogAnnotation(module = "knowledgeBase-freightCost",methods = "query")
     public ModelAndView queryFreightCostList(@RequestBody FreightCostQuery freightCostQuery){
         Result<List<FreightCost>> result = new Result<List<FreightCost>>();
         try{

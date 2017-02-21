@@ -33,7 +33,6 @@ public class PortChargesCostAction {
 
     @RequestMapping(value = "/portChargesCostList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-portChargesCost",methods = "into")
-    @ResponseBody
     public ModelAndView portChargesCost(){
       return new ModelAndView("knowledgeBase/portChargesCostList");
     }
@@ -42,7 +41,6 @@ public class PortChargesCostAction {
      * list
      * @return
      */
-    @SuppressWarnings("unused")
     @RequestMapping(value = "/queryPortChargesCostList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-portChargesCost",methods = "list")
     @ResponseBody

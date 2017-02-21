@@ -47,7 +47,6 @@ public class ComponentCostAction {
      * list
      * @return
      */
-    @SuppressWarnings("unused")
     @RequestMapping(value = "/queryComponentCostList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-componentCostList",methods = "list")
     @ResponseBody
