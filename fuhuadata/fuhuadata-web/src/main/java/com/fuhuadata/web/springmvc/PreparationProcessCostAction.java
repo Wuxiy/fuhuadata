@@ -46,7 +46,6 @@ public class PreparationProcessCostAction {
      * list
      * @return
      */
-    @SuppressWarnings("unused")
     @RequestMapping(value = "/queryPreparationProcessCostList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-preparationProcessCost",methods = "list")
     @ResponseBody

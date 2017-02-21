@@ -14,7 +14,7 @@
         <result column="area" property="area" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="country" property="country" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="company_property" property="companyProperty" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="regist_fund" property="registFund" jdbcType="INTEGER" javaType="java.lang.String"/>
+        <result column="regist_fund" property="registFund" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result column="regist_addr" property="registAddr" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="business_scope" property="businessScope" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="create_user_id" property="createUserId" jdbcType="INTEGER" javaType="java.lang.Integer"/>

@@ -102,7 +102,7 @@
 
     <select id="COUNT" resultClass="java.lang.Integer" parameterClass="PreparationProcessCostQuery">
         <![CDATA[
-            SELECT COUNT(id) FROM k_preparation_process_cost
+            SELECT COUNT(mcost_id) FROM k_preparation_process_cost
         ]]>
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>

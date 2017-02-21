@@ -18,7 +18,7 @@ public class PreparationProcessCost {
 
     private Date priceEnd;//价格有效期
 
-    private BigDecimal processFactory;//加工产
+    private BigDecimal processFactory;//加工
 
     private BigDecimal charges;//水电气费
 
