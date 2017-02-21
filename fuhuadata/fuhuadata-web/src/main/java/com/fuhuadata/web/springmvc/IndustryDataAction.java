@@ -36,14 +36,12 @@ public class IndustryDataAction {
      * init
      * @return
      */
-    @SuppressWarnings("unused")
     @RequestMapping(value = "/industryDataList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-industryData",methods = "into")
     public ModelAndView IndustryData(){
         return new ModelAndView("knowledgeBase/industryDataList");
     }
 
-    @SuppressWarnings("unused")
     @RequestMapping(value = "/queryIndustryDataList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-industryData",methods = "list")
     @ResponseBody

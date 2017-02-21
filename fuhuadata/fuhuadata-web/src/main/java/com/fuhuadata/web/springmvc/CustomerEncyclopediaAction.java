@@ -40,10 +40,9 @@ public class CustomerEncyclopediaAction {
     }
 
     /**
-     * 百科列表
+     * list
      * @return
      */
-    @SuppressWarnings("unused")
     @RequestMapping(value = "/customerEncyclopediaList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "list")
     @ResponseBody
@@ -82,35 +81,6 @@ public class CustomerEncyclopediaAction {
         return null;
     }
 
-    /**
-     * 条件查询
-     * @param
-     * @return
-     */
-    @RequestMapping(value = "/queryCustomerEncyclopediaList",method = RequestMethod.POST)
-    @SystemLogAnnotation(module = "知识库-客户百科",methods = "query")
-    public ModelAndView queryCustomerEncyclopediaList(String type,String companyName,String index){
-        CustomerEncyclopediaQuery customerEncyclopediaQuery = new CustomerEncyclopediaQuery();
-         Result<List<CustomerEncyclopedia>> result = new Result<List<CustomerEncyclopedia>>();
-         try{
-             customerEncyclopediaQuery.setPageSize(pageSize);
-             customerEncyclopediaQuery.setType(type);
-             customerEncyclopediaQuery.setCompanyName(companyName);
-             if(index==null){
-                 customerEncyclopediaQuery.setIndex(Integer.valueOf(page.trim()));
-             }else{
-                 customerEncyclopediaQuery.setIndex(Integer.valueOf(index.trim()));
-             }
-             result=customerEncyclopediaService.getCustomerEncyclopediasByPage(customerEncyclopediaQuery);
-         }catch(Exception e){
-             log.error("条件查询客户百科失败",e);
-         }
-         ModelAndView model = new ModelAndView("knowledgeBase/customerEncyclopediaList","customerEncyclopedias",result.getModel());
-         model.addObject("totalItem",result.getTotalItem());//总记录数
-         model.addObject("totalPage",result.getTotalPage());//总页数
-         model.addObject("query",customerEncyclopediaQuery);//查询条件反写
-         model.addObject("message","客户百科列表");
-         return model;
-    }
+
 
 }
