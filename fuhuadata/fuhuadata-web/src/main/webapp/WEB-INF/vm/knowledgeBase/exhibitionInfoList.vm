@@ -14,7 +14,7 @@
         <div class="panel-body clearfix">
 
             <!--表格开始-->
-            <table id="example"  class="display table table-condensed table-bordered table-striped" cellspacing="0" width="100%">
+            <table id="exhibition_table"  class="display table table-condensed table-bordered table-striped" cellspacing="0" width="100%">
                 <thead>
                 <tr>
                     <th class="text-center text-middle">编号</th>
@@ -32,24 +32,7 @@
                     <th class="col-xs-1 text-center text-middle">创建时间</th>
                 </tr>
                 </thead>
-                <tbody id ="tb">
 
-                <tr>
-                    <td>1</td>
-                    <td>2016全国植保会</td>
-                    <td>全国农业技术推广服务中心</td>
-                    <td>江苏省植物保护站厦门市凤凰创意会展服务有限公司</td>
-                    <td>中国</td>
-                    <td>南京</td>
-                    <td>2016年11月25日</td>
-                    <td>2016年11月27日</td>
-                    <td>南京国际博览中心</td>
-                    <td>吸引来自全国30参展范围涉及农药原药、农药、肥料、植保机械及包装设备等，涵盖整个农化产业上、中、下游产品，是国内参展产品最齐全的大会。</td>
-                    <td><a href="http://www.1988.tv/zhanhui/2016qgzbh/about.html">点击进入</a></td>
-                    <td>刘凯洋</td>
-                    <td>2016-10-12</td>
-                </tr>
-                </tbody>
             </table>
             <!--表格结束-->
             <!--分页导航开始-->
@@ -59,8 +42,8 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#example').dataTable( {
-            "ajax":'/exhibitionInfo/queryExhibitionInfo',
+        $('#exhibition_table').dataTable( {
+            "ajax":'/exhibitionInfo/queryExhibitionInfoList',
             "pagingType":"full_numbers",
             "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
             "columns":[

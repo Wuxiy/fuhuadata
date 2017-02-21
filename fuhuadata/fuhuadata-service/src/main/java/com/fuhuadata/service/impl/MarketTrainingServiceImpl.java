@@ -55,6 +55,16 @@ public class MarketTrainingServiceImpl implements MarketTrainingService{
     }
 
     @Override
+    public Result getMarketTrainingById(int id) {
+        return null;
+    }
+
+    @Override
+    public Result<List<MarketTraining>> getAllMarketTrainings(MarketTrainingQuery marketTrainingQuery) {
+        return null;
+    }
+
+    @Override
     public Result<List<MarketTraining>> getMarketTrainingsByPage(MarketTrainingQuery marketTrainingQuery) {
         Result<List<MarketTraining>> result = new Result<List<MarketTraining>>();
         try {
@@ -74,6 +84,18 @@ public class MarketTrainingServiceImpl implements MarketTrainingService{
         } catch (Exception e) {
             result.setSuccess(false);
             log.error("查询营销培训数量失败",e);
+        }
+        return result;
+    }
+
+    @Override
+    public Result<List<MarketTraining>> getMarketTrainingsByQuery(MarketTrainingQuery marketTrainingQuery){
+        Result<List<MarketTraining>> result = new Result<List<MarketTraining>>();
+        try{
+            result.addDefaultModel("MarketTrainings",marketTrainingManager.getMarketTrainingsByQuery(marketTrainingQuery));
+        }catch(Exception e){
+            result.setSuccess(false);
+            log.error("查询失败",e);
         }
         return result;
     }

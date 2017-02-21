@@ -41,6 +41,7 @@ public class    ExhibitionInfoAction {
     public ModelAndView exhibitionInfo(){
         return new ModelAndView("knowledgeBase/exhibitionInfoList");
     }
+
     @SuppressWarnings("unused")
     @RequestMapping(value = "/queryExhibitionInfoList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "list")
@@ -56,8 +57,6 @@ public class    ExhibitionInfoAction {
         }
         return result.getResultPojo();
     }
-
-
 
     @RequestMapping(value = "/queryExhibitionInfoTest",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "query")

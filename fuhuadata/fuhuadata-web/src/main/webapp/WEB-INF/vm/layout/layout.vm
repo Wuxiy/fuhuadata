@@ -5,13 +5,12 @@
     <title>CRM系统</title>
     <link rel="stylesheet" type="text/css" href="/lib/css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="/lib/dataTables/dataTables.bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/lib/dataTables/jquery.dataTables.min.css"/>
     <script src="/lib/js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
     <script src="/lib/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
-
     <script src="/lib/dataTables/jquery.dataTables.min.js"></script>
     <script type="text/javascript" language="javascript" src="/lib/dataTables/dataTables.bootstrap.js"></script>
     <script type="text/javascript" language="javascript" src="/lib/dataTables/dataTables.bootstrap.min.js"></script>
-
     <script src="/lib/js/jquery-lang.js" type="text/javascript" charset="utf-8"></script>
     <script src="/lib/js/js.cookie.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
