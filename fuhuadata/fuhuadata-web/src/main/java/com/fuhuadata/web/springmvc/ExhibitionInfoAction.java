@@ -52,7 +52,7 @@ public class    ExhibitionInfoAction {
             //加入权限代码，设置查询条件
             result=exhibitionInfoService.getExhibitionInfosByQuery(exhibitionInfoQuery);
         }catch (Exception e){
-            log.error("展会动态列表",e);
+            log.error("获取展会动态列表错误",e);
         }
         return result.getResultPojo();
     }

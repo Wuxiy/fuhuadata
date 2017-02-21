@@ -56,6 +56,37 @@ public class FreightCostServiceImpl implements FreightCostService{
     }
 
     @Override
+    public Result<FreightCost> getFreightCostById(int id) {
+        Result<FreightCost> result = new Result<FreightCost>();
+        try {
+            FreightCost freightCost = freightCostManager.getFreightCostById(id);
+            if(freightCost == null){
+                result.setSimpleErrorMsg(0, "当前运费成本数据不存在，请重试");
+            }else{
+                result.addDefaultModel("FreightCosts", freightCost);
+            }
+        } catch (Exception e) {
+            result.setSuccess(false);
+            // 打印日志
+            log.error("根据id运费成本信息错误",e);
+        }
+        return result;
+    }
+
+    @Override
+    public Result<List<FreightCost>> getFreightCostByQuery(FreightCostQuery freightCostQuery) {
+        Result<List<FreightCost>> result = new Result<List<FreightCost>>();
+        try {
+            result.addDefaultModel("FreightCosts", freightCostManager.getFreightCostsByQuery(freightCostQuery));
+        } catch (Exception e) {
+            result.setSuccess(false);
+            // 打印日志
+            log.error("查询运费成本错误",e);
+        }
+        return result;
+    }
+
+    @Override
     public Result<List<FreightCost>> getFreightCostsByPage(FreightCostQuery freightCostQuery) {
         Result<List<FreightCost>> result = new Result<List<FreightCost>>();
         try{

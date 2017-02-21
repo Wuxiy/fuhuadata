@@ -56,6 +56,37 @@ public class ProductProblemServiceImpl implements ProductProblemService {
     }
 
     @Override
+    public Result<ProductProblem> getProductProblemById(int id) {
+        Result<ProductProblem> result = new Result<ProductProblem>();
+        try {
+            ProductProblem productProblem = productProblemManager.getProductProblemById(id);
+            if(productProblem == null){
+                result.setSimpleErrorMsg(0, "当前产品问题信息不存在，请重试");
+            }else{
+                result.addDefaultModel("ProductProblems", productProblem);
+            }
+        } catch (Exception e) {
+            result.setSuccess(false);
+            // 打印日志
+            log.error("根据id获取产品问题信息错误",e);
+        }
+        return result;
+    }
+
+    @Override
+    public Result<List<ProductProblem>> getProductProblemByQuery(ProductProblemQuery productProblemQuery) {
+        Result<List<ProductProblem>> result = new Result<List<ProductProblem>>();
+        try {
+            result.addDefaultModel("ProductProblems", productProblemManager.getProductProblemByQuery(productProblemQuery));
+        } catch (Exception e) {
+            result.setSuccess(false);
+            // 打印日志
+            log.error("查询产品问题列表错误",e);
+        }
+        return result;
+    }
+
+    @Override
     public Result<List<ProductProblem>> getProductProblemsByPage(ProductProblemQuery productProblemQuery) {
         Result<List<ProductProblem>> result = new Result<List<ProductProblem>>();
         try {

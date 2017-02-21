@@ -17,6 +17,7 @@ public interface SystemLogDao {
      */
     public SystemLog addSystemLog(SystemLog systemLog);
 
+    public List<SystemLog> getSystemLogByQuery(SystemLogQuery systemLogQuery);
     /**
      * 分页查询监控日志列表
      * @param systemLogQuery

@@ -17,6 +17,9 @@ public class PreparationProcessCostDaoImpl extends SqlMapClientTemplate implemen
     public  static final String DELETE_BY_ID="PREPARATIONPROCESSCOST.DELETE-BY-ID";
     public static final String GET_PAGE="PREPARATIONPROCESSCOST.GET-PAGE";
     public static final String COUNT="PREPARATIONPROCESSCOST.COUNT";
+    public static final String GET_BY_ID="PREPARATIONPROCESSCOST.GET-BY-ID";
+    public static final String GET_BY_QUERY="PREPARATIONPROCESSCOST.GET-BY-QUERY";
+
     @Override
     public PreparationProcessCost addComponentCost(PreparationProcessCost preparationProcessCost) {
         preparationProcessCost.setMcostId((Integer) this.insert(ADD,preparationProcessCost));
@@ -30,7 +33,17 @@ public class PreparationProcessCostDaoImpl extends SqlMapClientTemplate implemen
     }
 
     @Override
-    public int deleteComponentCostById(int id) {
+    public PreparationProcessCost getPreparationProcessCostById(int id) {
+        return (PreparationProcessCost)this.queryForObject(GET_BY_ID,id);
+    }
+
+    @Override
+    public List<PreparationProcessCost> getPreparationProcessCostByQuery(PreparationProcessCostQuery preparationProcessCostQuery) {
+        return this.queryForList(GET_BY_QUERY,preparationProcessCostQuery);
+    }
+
+    @Override
+    public int deletePreparationProcessCostById(int id) {
         return this.delete(DELETE_BY_ID,id);
     }
 

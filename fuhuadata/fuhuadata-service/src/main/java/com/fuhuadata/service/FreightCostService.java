@@ -18,6 +18,10 @@ public interface FreightCostService  {
 
     public Result deleteFreightCostById(int id);
 
+    public Result<FreightCost> getFreightCostById(int id);
+
+    public Result<List<FreightCost>> getFreightCostByQuery(FreightCostQuery freightCostQuery);
+
     /**
      * 查询列表，包含分页查询
      * 查询分页信息，请设置

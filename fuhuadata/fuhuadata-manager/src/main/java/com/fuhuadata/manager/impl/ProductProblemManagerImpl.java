@@ -35,6 +35,16 @@ public class ProductProblemManagerImpl implements ProductProblemManager {
         return productProblemDao.deleteProductProblemById(id) == 1 ? true:false;
     }
 
+    @Override
+    public ProductProblem getProductProblemById(int id) {
+        return productProblemDao.getProductProblemById(id);
+    }
+
+    @Override
+    public List<ProductProblem> getProductProblemByQuery(ProductProblemQuery productProblemQuery) {
+        return productProblemDao.getProductProblemByQuery(productProblemQuery);
+    }
+
     /**
      * 查询列表，包含分页查询
      * 查询分页信息，请设置

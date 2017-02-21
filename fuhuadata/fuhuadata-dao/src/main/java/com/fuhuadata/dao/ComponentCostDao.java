@@ -33,6 +33,20 @@ public interface ComponentCostDao {
     public int deleteComponentCostById(int id);
 
     /**
+     * 根据主键id获取ComponentCost
+     * @param id
+     * @return
+     */
+    public ComponentCost getComponentCostById(int id);
+
+    /**
+     * 查询不带分页
+     * @param componentCostQuery
+     * @return
+     */
+    public List<ComponentCost> getComponentCostsByQuery(ComponentCostQuery componentCostQuery);
+
+    /**
      * 分页查询列表
      * Query(设置当前页数和当前页面行数）
      * @param componentCostQuery

@@ -16,5 +16,7 @@ public interface IndustryDataService {
 
     public Result<List<IndustryData>> getIndustryDatasByPage(IndustryDataQuery industryDataQuery);
 
+    public Result<List<IndustryData>> getIndustryDataByQuery(IndustryDataQuery industryDataQuery);
+
     public Result<Integer> count(IndustryDataQuery industryDataQuery);
 }

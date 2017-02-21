@@ -22,6 +22,14 @@
         </dynamic>
     </sql>
 
+    <sql id="QUERY-COMMON">
+        <dynamic prepend=" WHERE " >
+            <isNotNull prepend=" AND " property="type">
+                type = #type#
+            </isNotNull>
+        </dynamic>
+    </sql>
+
     <insert id="ADD" parameterClass="PreparationProcessCost">
         INSERT INTO
         k_preparation_process_cost (mcost_id, type, cost_term,
@@ -48,6 +56,21 @@
             DELETE FROM k_preparation_process_cost WHERE mcost_id = #mcostId#
         ]]>
     </delete>
+
+    <select id="GET-BY-ID" resultMap="PREPARATIONPROCESSCOST-MAP" parameterClass="java.lang.Integer">
+        <![CDATA[
+        SELECT * FROM k_preparation_process_cost WHERE mcost_id = #id#
+        ]]>
+    </select>
+
+    <select id="GET-BY-QUERY" resultMap="PREPARATIONPROCESSCOST-MAP" parameterClass="PreparationProcessCostQuery">
+        <![CDATA[
+            SELECT * FROM k_preparation_process_cost
+        ]]>
+        <isParameterPresent>
+            <include refid="QUERY-COMMON"/>
+        </isParameterPresent>
+    </select>
 
     <select id="GET-PAGE" resultMap="PREPARATIONPROCESSCOST-MAP" parameterClass="PreparationProcessCostQuery">
         <![CDATA[

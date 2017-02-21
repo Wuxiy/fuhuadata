@@ -25,13 +25,22 @@ public interface PreparationProcessCostDao {
      */
     public int updatePreparationProcessCostById(int id, PreparationProcessCost preparationProcessCost);
 
+
     /**
      * 按照主键id删除记录，成功返回1
      * @param id
-
      * @return
              */
-    public int deleteComponentCostById(int id);
+    public int deletePreparationProcessCostById(int id);
+
+    public PreparationProcessCost getPreparationProcessCostById(int id);
+
+    /**
+     * 查询不带分页
+     * @param preparationProcessCostQuery
+     * @return
+     */
+    public List<PreparationProcessCost> getPreparationProcessCostByQuery(PreparationProcessCostQuery preparationProcessCostQuery);
     /**
      * 分页查询列表
      * Query(设置当前页数和当前页面行数）

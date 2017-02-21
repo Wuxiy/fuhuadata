@@ -82,7 +82,7 @@
 		]]>
 	</delete>
 	
-	<select id="GET-ALL" resultMap="USERACCOUNT-MAP">
+	<select id="GET-ALL" resultMap="USERACCOUNT-MAP">GET
 		<![CDATA[
 			SELECT * FROM fuhua_user_account
 		]]>

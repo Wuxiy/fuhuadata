@@ -33,6 +33,13 @@ public interface RateDao {
     public int deleteRateById(int id);
 
     /**
+     * 查询不带分页
+     * @param rateQuery
+     * @return
+     */
+    public List<Rate> getRateByQuery(RateQuery rateQuery);
+
+    /**
      * 分页查询列表
      * Query(设置当前页数和当前页面行数）
      * @param rateQuery

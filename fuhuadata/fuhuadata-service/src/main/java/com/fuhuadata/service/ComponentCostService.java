@@ -3,8 +3,6 @@ package com.fuhuadata.service;
 import com.fuhuadata.domain.ComponentCost;
 import com.fuhuadata.domain.query.ComponentCostQuery;
 import com.fuhuadata.domain.query.Result;
-
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -17,6 +15,10 @@ public interface ComponentCostService {
     public Result updateComponentCostById(int id, ComponentCost componentCost);
 
     public Result deleteComponentCostById(int id);
+
+    public Result<ComponentCost> getComponentCostById(int id);
+
+    public Result<List<ComponentCost>> getComponentCostByQuery(ComponentCostQuery componentCostQuery);
 
     public Result<List<ComponentCost>> getComponentCostsByPage(ComponentCostQuery componentCostQuery);
 

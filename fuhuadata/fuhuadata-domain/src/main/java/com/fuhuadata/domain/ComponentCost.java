@@ -1,5 +1,10 @@
 package com.fuhuadata.domain;
 
+import com.fuhuadata.util.DateJsonDeserializer;
+import com.fuhuadata.util.DateJsonSerializer;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import java.util.Date;
 
 /**
@@ -53,10 +58,12 @@ public class ComponentCost {
         this.suitableProduct = suitableProduct;
     }
 
+    @JsonSerialize(using= DateJsonSerializer.class)
     public Date getPriceEnd() {
         return priceEnd;
     }
 
+    @JsonDeserialize(using= DateJsonDeserializer.class)
     public void setPriceEnd(Date priceEnd) {
         this.priceEnd = priceEnd;
     }

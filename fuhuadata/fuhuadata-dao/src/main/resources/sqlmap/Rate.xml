@@ -21,6 +21,14 @@
         </dynamic>
     </sql>
 
+    <sql id="QUERY-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotNull prepend=" AND " property="type">
+                type = #type#
+            </isNotNull>
+        </dynamic>
+    </sql>
+
     <insert id="ADD" parameterClass="Rate">
         INSERT INTO
         k_knowledge_rate (rate_id, type, kind,
@@ -49,6 +57,21 @@
             DELETE FROM k_knowledge_rate WHERE rate_id=#rateId#
         ]]>
     </delete>
+
+    <select id="GET-BY-ID" resultMap="RATE-MAP" parameterClass="java.lang.Integer">
+        <![CDATA[
+            SELECT * FROM k_knowledge_rate WHERE rate_id=#rateId#
+        ]]>
+    </select>
+
+    <select id="GET-BY-QUERY" resultMap="RATE-MAP" parameterClass="RateQuery">
+        <![CDATA[
+            SELECT * FROM k_knowledge_rate
+        ]]>
+        <isParameterPresent>
+            <include refid="QUERY-COMMON"/>
+        </isParameterPresent>
+    </select>
 
     <select id="GET-PAGE" resultMap="RATE-MAP" parameterClass="RateQuery">
         <![CDATA[

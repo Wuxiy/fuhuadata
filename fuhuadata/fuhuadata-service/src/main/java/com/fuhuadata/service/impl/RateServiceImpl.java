@@ -58,6 +58,38 @@ public class RateServiceImpl implements RateService{
     }
 
     @Override
+    public Result<Rate> getRateById(int id) {
+//        Result<Rate> result = new Result<Rate>();
+//        try {
+//            Rate rate = rateManager.getRateById(id);
+//            if(rate == null){
+//                result.setSimpleErrorMsg(0, "当前用户数据不存在，请重试");
+//            }else{
+//                result.addDefaultModel("UserAccount", userAccount);
+//            }
+//        } catch (Exception e) {
+//            result.setSuccess(false);
+//            // 打印日志
+//            log.error("根据id获取用户信息错误",e);
+//        }
+//        return result;
+        return null;
+    }
+
+    @Override
+    public Result<List<Rate>> getRateByQuery(RateQuery rateQuery) {
+        Result<List<Rate>> result = new Result<List<Rate>>();
+        try {
+            result.addDefaultModel("Rates", rateManager.getRateByQuery(rateQuery));
+        } catch (Exception e) {
+            result.setSuccess(false);
+            // 打印日志
+            log.error("查询费率列表错误",e);
+        }
+        return result;
+    }
+
+    @Override
     public Result<List<Rate>> getRatesByPage(RateQuery rateQuery) {
         Result<List<Rate>> result = new Result<List<Rate>>();
         try{

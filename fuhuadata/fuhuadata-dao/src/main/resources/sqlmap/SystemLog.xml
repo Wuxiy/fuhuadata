@@ -18,7 +18,7 @@
         <result property="parementers" column="parementers" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="remarks" column="remarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>
-    <sql id="PAGE_COMMON">
+    <sql id="PAGE-COMMON">
         <dynamic prepend=" WHERE ">
             <isNotNull prepend=" AND " property="logId">
                 log_id = #id#
@@ -26,6 +26,41 @@
              <isNotNull prepend=" AND " property="userId">
                  user_id=#userId#
              </isNotNull>
+            <isNotNull prepend=" AND " property="userName">
+                user_name=#userName#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="ip">
+                ip like concat('%',#ip#,'%')
+            </isNotNull>
+            <isNotNull prepend=" AND " property="module">
+                module like concat('%',#module#,'%')
+            </isNotNull>
+            <isNotNull prepend=" AND " property="method">
+                method like concat('%',#method#,'%')
+            </isNotNull>
+            <isNotNull prepend=" AND " property="date">
+                date like concat('%',#date#,'%')
+            </isNotNull>
+            <isNotNull prepend=" AND " property="responseDate">
+                response_date like concat('%',#responseDate#,'%')
+            </isNotNull>
+            <isNotNull prepend=" AND " property="commit">
+                commit like concat('%',#commit#,'%')
+            </isNotNull>
+            <isNotNull prepend=" AND " property="searchKey">
+                user_name like concat('%',#searchKey#,'%')
+            </isNotNull>
+        </dynamic>
+    </sql>
+
+    <sql id="QUERY-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotNull prepend=" AND " property="logId">
+                log_id = #id#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="userId">
+                user_id=#userId#
+            </isNotNull>
             <isNotNull prepend=" AND " property="userName">
                 user_name=#userName#
             </isNotNull>
@@ -62,12 +97,27 @@
         </selectKey>
     </insert>
 
+    <select id="GET-BY-ID" resultMap="SYSTEMLOG-MAP" parameterClass="java.lang.Integer">
+        <![CDATA[
+        SELECT * FROM fuhua_system_log WHERE log_id = #id#
+       ]]>
+    </select>
+
+    <select id="GET-BY-QUERY" resultMap="SYSTEMLOG-MAP" parameterClass="SystemLogQuery">
+        <![CDATA[
+        SELECT * FROM fuhua_system_log
+       ]]>
+        <isParameterPresent>
+            <include refid="QUERY-COMMON"/>
+        </isParameterPresent>
+    </select>
+
     <select id="GET-PAGE" resultMap="SYSTEMLOG-MAP" parameterClass="SystemLogQuery">
         <![CDATA[
         SELECT * FROM fuhua_system_log
        ]]>
         <isParameterPresent>
-            <include refid="PAGE_COMMON"/>
+            <include refid="PAGE-COMMON"/>
         </isParameterPresent>
         LIMIT #startRow#,#pageSize#
     </select>
@@ -77,7 +127,7 @@
         SELECT COUNT(*) FROM fuhua_system_log
        ]]>
         <isParameterPresent>
-            <include refid="PAGE_COMMON"/>
+            <include refid="PAGE-COMMON"/>
         </isParameterPresent>
     </select>
 </sqlMap>

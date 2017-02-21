@@ -9,10 +9,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.CompletionService;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by intanswer on 2017/1/18.
@@ -56,6 +52,37 @@ public class ComponentCostServiceImpl implements ComponentCostService {
             result.setSuccess(false);
             //打印日志
             log.error("删除成分价格信息错误",e);
+        }
+        return result;
+    }
+
+    @Override
+    public Result<ComponentCost> getComponentCostById(int id) {
+        Result<ComponentCost> result = new Result<ComponentCost>();
+        try {
+            ComponentCost componentCost = componentCostManager.getComponentCostById(id);
+            if( componentCost== null){
+                result.setSimpleErrorMsg(0, "当前成分价格数据不存在，请重试");
+            }else{
+                result.addDefaultModel("componentCosts", componentCost);
+            }
+        } catch (Exception e) {
+            result.setSuccess(false);
+            // 打印日志
+            log.error("根据id获取成分价格信息错误",e);
+        }
+        return result;
+    }
+
+    @Override
+    public Result<List<ComponentCost>> getComponentCostByQuery(ComponentCostQuery componentCostQuery) {
+        Result<List<ComponentCost>> result = new Result<List<ComponentCost>>();
+        try {
+            result.addDefaultModel("ComponentCosts", componentCostManager.getComponentCostByQuery(componentCostQuery));
+        } catch (Exception e) {
+            result.setSuccess(false);
+            // 打印日志
+            log.error("查询成分价格信息错误",e);
         }
         return result;
     }
