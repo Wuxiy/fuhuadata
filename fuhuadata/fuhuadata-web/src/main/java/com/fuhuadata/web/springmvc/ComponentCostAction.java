@@ -1,7 +1,6 @@
 package com.fuhuadata.web.springmvc;
 
 import com.fuhuadata.domain.ComponentCost;
-import com.fuhuadata.domain.ExhibitionInfo;
 import com.fuhuadata.domain.query.ComponentCostQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;

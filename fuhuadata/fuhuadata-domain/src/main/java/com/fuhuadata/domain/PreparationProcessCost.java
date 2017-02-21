@@ -1,5 +1,6 @@
 package com.fuhuadata.domain;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -9,15 +10,31 @@ import java.util.Date;
 public class PreparationProcessCost {
     private Integer mcostId;
 
-    private Integer type;//水剂颗粒剂类型
+    private Integer type;//人工费或者杂费（0：人工费，1：杂费）
 
-    private String costTerm;//瓶型或费用型
+    private String costTerm;//主材规格
 
     private String unitCost;//单价
 
     private Date priceEnd;//价格有效期
 
+    private BigDecimal processFactory;//加工产
+
+    private BigDecimal charges;//水电气费
+
+    private BigDecimal profit; //利润
+
+    private BigDecimal managementFee;//管理费
+
+    private BigDecimal tax;//税金
+
+    private BigDecimal totalCost;  //费用合计
+
     private String remarks;//备注
+
+    public PreparationProcessCost() {
+    }
+
 
     public Integer getMcostId() {
         return mcostId;
@@ -67,4 +84,51 @@ public class PreparationProcessCost {
         this.remarks = remarks;
     }
 
+    public BigDecimal getProcessFactory() {
+        return processFactory;
+    }
+
+    public void setProcessFactory(BigDecimal processFactory) {
+        this.processFactory = processFactory;
+    }
+
+    public BigDecimal getCharges() {
+        return charges;
+    }
+
+    public void setCharges(BigDecimal charges) {
+        this.charges = charges;
+    }
+
+    public BigDecimal getProfit() {
+        return profit;
+    }
+
+    public void setProfit(BigDecimal profit) {
+        this.profit = profit;
+    }
+
+    public BigDecimal getManagementFee() {
+        return managementFee;
+    }
+
+    public void setManagementFee(BigDecimal managementFee) {
+        this.managementFee = managementFee;
+    }
+
+    public BigDecimal getTax() {
+        return tax;
+    }
+
+    public void setTax(BigDecimal tax) {
+        this.tax = tax;
+    }
+
+    public BigDecimal getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(BigDecimal totalCost) {
+        this.totalCost = totalCost;
+    }
 }

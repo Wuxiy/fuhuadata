@@ -13,6 +13,8 @@ public class CustomerEncyclopediaQuery extends PageBase {
 
     private String companyName;//企业全称
 
+    private String companyAbbreviation;//企业简称
+
     private String type;//企业类型
 
     private String isFull;//完整度
@@ -189,5 +191,13 @@ public class CustomerEncyclopediaQuery extends PageBase {
 
     public void setSearchKey(String searchKey) {
         this.searchKey = searchKey;
+    }
+
+    public String getCompanyAbbreviation() {
+        return companyAbbreviation;
+    }
+
+    public void setCompanyAbbreviation(String companyAbbreviation) {
+        this.companyAbbreviation = companyAbbreviation;
     }
 }

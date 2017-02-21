@@ -8,6 +8,7 @@
     <resultMap id="CUSTOMERENCYCLOPEDIA-MAP" class="CustomerEncyclopedia">
         <result column="ency_id" property="encyId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result column="company_name" property="companyName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="companyAbbreviation" column="company_abbreviation" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="type" property="type" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="is_full" property="isFull" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="area" property="area" jdbcType="VARCHAR" javaType="java.lang.String"/>

@@ -39,8 +39,6 @@ public class MarketTrainingAction {
     public ModelAndView marketTrainingList(){
         return new ModelAndView("knowledgeBase/marketTrainingList");
     }
-
-    @SuppressWarnings("unused")
     @RequestMapping(value = "/querymarketTrainingList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "知识库-营销培训",methods = "list")
     public ResultPojo querymarketTrainingList(){
@@ -55,7 +53,15 @@ public class MarketTrainingAction {
 
     }
 
-
+    /**
+     * add
+     * @return
+     */
+    @RequestMapping(value="/marketTrainingList")
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "add")
+    public ModelAndView addMarketTrainingList(){
+        return new ModelAndView("knowledgeBase/marketTrainingAdd");
+    }
     @RequestMapping(value = "/doAddMarketTraining",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "知识库-营销培训",methods = "doAdd")
     @ResponseBody
