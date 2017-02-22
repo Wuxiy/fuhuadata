@@ -77,14 +77,14 @@
 
     <insert id="ADD" parameterClass="CustomerEncyclopedia">
         INSERT INTO
-        k_customer_encyclopedia (ency_id, company_name, type,
+        k_customer_encyclopedia (ency_id, company_name,company_abbreviation,type,
         is_full, area, country,
         company_property, regist_fund, regist_addr,
         business_scope, create_user_id, create_user_name,
         create_time, lastmodify_user_id, lastmodify_user_name,
         modify_time, remarks, company_info,
         develop_his, sell_network)
-        VALUES (#encyId#, #companyName#, #type#,
+        VALUES (#encyId#, #companyName#,#companyAbbreviation#,#type#,
         #isFull#, #area#, #country#,
         #companyProperty#, #registFund#, #registAddr#,
         #businessScope#, #createUserId#, #createUserName#,
@@ -101,6 +101,9 @@
             <dynamic prepend=" SET ">
                 <isNotNull prepend=", " property="companyName">
                     company_name = #companyName#
+                </isNotNull>
+                <isNotNull prepend=", " property="companyAbbreviation">
+                    company_abbreviation=#companyAbbreviation#
                 </isNotNull>
                 <isNotNull prepend=", " property="type">
                     type = #type#

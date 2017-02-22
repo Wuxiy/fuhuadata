@@ -48,5 +48,6 @@
 	<bean id = "preparationProcessCostDao" class="com.fuhuadata.dao.impl.PreparationProcessCostDaoImpl"/>
 	<bean id="saleCustomerDao" class="com.fuhuadata.dao.impl.SaleCustomerDaoImpl"/>
 	<bean id="customerParentDao" class="com.fuhuadata.dao.impl.CustomerParentDaoImpl"/>
+	<bean id="productInfoDao" class="com.fuhuadata.dao.impl.ProductInfoDaoImpl"/>
 
 </beans>

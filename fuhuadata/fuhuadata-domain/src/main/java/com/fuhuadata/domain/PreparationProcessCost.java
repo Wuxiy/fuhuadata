@@ -18,7 +18,7 @@ public class PreparationProcessCost {
 
     private Date priceEnd;//价格有效期
 
-    private BigDecimal processFactory;//加工
+    private String processFactory;//加工厂
 
     private BigDecimal charges;//水电气费
 
@@ -84,13 +84,6 @@ public class PreparationProcessCost {
         this.remarks = remarks;
     }
 
-    public BigDecimal getProcessFactory() {
-        return processFactory;
-    }
-
-    public void setProcessFactory(BigDecimal processFactory) {
-        this.processFactory = processFactory;
-    }
 
     public BigDecimal getCharges() {
         return charges;
@@ -130,5 +123,13 @@ public class PreparationProcessCost {
 
     public void setTotalCost(BigDecimal totalCost) {
         this.totalCost = totalCost;
+    }
+
+    public String getProcessFactory() {
+        return processFactory;
+    }
+
+    public void setProcessFactory(String processFactory) {
+        this.processFactory = processFactory;
     }
 }

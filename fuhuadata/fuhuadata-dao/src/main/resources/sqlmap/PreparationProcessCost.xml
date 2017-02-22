@@ -11,7 +11,7 @@
         <result column="cost_term" property="costTerm" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="unit_cost" property="unitCost" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="price_end" property="priceEnd" jdbcType="DATE" javaType="java.sql.Date"/>
-        <result column="process_factory" property="processFactory" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+        <result column="process_factory" property="processFactory" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="charges" property="charges" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
         <result column="profit" property="profit" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
         <result column="management_fee" property="managementFee" jdbcType="DECIMAL" />
@@ -51,9 +51,9 @@
     <insert id="ADD" parameterClass="PreparationProcessCost">
         INSERT INTO
         k_preparation_process_cost (mcost_id, type, cost_term,
-        unit_cost, price_end, remarks)
+        unit_cost, price_end, remarks,process_factory,charges,profit,management_fee,tax,total_cost)
         VALUES (#mcostId#, #type#, #costTerm#,
-        #unitCost#, #priceEnd#, #remarks#)
+        #unitCost#, #priceEnd#, #remarks#,#processFactory#,#charges#,#profit#,#managementFee#,#tax#,#totalCost#)
         <selectKey resultClass="int" keyProperty="mcostId">
             SELECT @@IDENTITY AS mcost_id
         </selectKey>
@@ -62,9 +62,15 @@
         UPDATE k_preparation_process_cost
         <dynamic prepend=" SET ">
             <isNotNull prepend=", " property="costTerm">cost_term=#costTerm#</isNotNull>
-            <isNotNull prepend=", " property="unitCost">modify_time=#unitCost#</isNotNull>
+            <isNotNull prepend=", " property="unitCost">unitCost=#unitCost#</isNotNull>
             <isNotNull prepend=", " property="priceEnd">price_end=#priceEnd#</isNotNull>
             <isNotNull prepend=", " property="remarks">remarks = #remarks#</isNotNull>
+            <isNotNull prepend=", " property="processFactory">process_factory=#processFactory#</isNotNull>
+            <isNotNull prepend=", " property="charges">charges=#charges#</isNotNull>
+            <isNotNull prepend=", " property="profit">profit=#profit#</isNotNull>
+            <isNotNull prepend=", " property="managementFee">management_fee=#managementFee#</isNotNull>
+            <isNotNull prepend=", " property="tax">tax=#tax#</isNotNull>
+            <isNotNull prepend=", " property="totalCost">total_cost=#totalCost#</isNotNull>
         </dynamic>
         WHERE mcost_id=#mcostId#
     </update>
