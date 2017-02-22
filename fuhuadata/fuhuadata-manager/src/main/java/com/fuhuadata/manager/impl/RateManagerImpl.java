@@ -21,6 +21,11 @@ public class RateManagerImpl implements RateManager{
     }
 
     @Override
+    public Rate getRateById(int id) {
+        return null;
+    }
+
+    @Override
     public boolean updateRateById(int id, Rate rate) {
         return rateDao.updateRateById(id,rate) == 1 ? true:false;
     }
@@ -28,6 +33,11 @@ public class RateManagerImpl implements RateManager{
     @Override
     public boolean deleteRateById(int id) {
         return rateDao.deleteRateById(id) == 1 ? true : false;
+    }
+
+    @Override
+    public List<Rate> getAllRate() {
+        return null;
     }
 
     @Override
