@@ -451,7 +451,7 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <verbose>true</verbose>  
                     <fork>true</fork>  
-                    <executable>${JAVA8_HOME}</executable>  
+                    <executable>${JAVA8_HOME}</executable>
                 </configuration>
             </plugin>
             <plugin>

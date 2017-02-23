@@ -46,4 +46,6 @@ public class ProductInfoAction {
         }
         return result.getResultPojo();
     }
+
+
 }

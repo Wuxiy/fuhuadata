@@ -18,4 +18,5 @@
 	<bean id="saleCustomerService" class="com.fuhuadata.service.impl.SaleCustomerServiceImpl" />
 	<bean id="customerParentService" class="com.fuhuadata.service.impl.CustomerParentServiceImpl"/>
 	<bean id="productInfoService" class="com.fuhuadata.service.impl.ProductInfoServiceImpl"/>
+	<bean id="productCategoryService" class="com.fuhuadata.service.impl.ProductCategoryServiceImpl"/>
 </beans>

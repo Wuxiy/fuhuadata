@@ -53,7 +53,7 @@ public class PreparationProcessCostAction {
         Result<List<PreparationProcessCost>> result = new Result<List<PreparationProcessCost>>();
         PreparationProcessCostQuery query = new PreparationProcessCostQuery();
         try{
-            result= preparationProcessCostService.getPreparationProcessCostsByPage(query);
+            result= preparationProcessCostService.getPreparationProcessCostByQuery(query);
         }catch(Exception e){
             log.error("获取制剂加工费列表错误",e);
         }

@@ -56,6 +56,8 @@
             </table>
             <!--表格结束-->
             <!--分页导航开始-->
+            #set($page="10")
+            #showAdminPage($page)
         </div>
     </div>
 </div>
