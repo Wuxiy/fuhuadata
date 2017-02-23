@@ -16,4 +16,5 @@
 	<bean id = "preparationProcessCostService" class="com.fuhuadata.service.impl.PreparationProcessCostServiceImpl"/>
 	<bean id="saleCustomerService" class="com.fuhuadata.service.impl.SaleCustomerServiceImpl" />
 	<bean id="customerParentService" class="com.fuhuadata.service.impl.CustomerParentServiceImpl"/>
+	<bean id="userService" class="com.fuhuadata.service.impl.UserServiceImpl"/>
 </beans>

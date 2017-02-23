@@ -17,5 +17,5 @@
 	<bean id = "preparationProcessCostManager" class="com.fuhuadata.manager.impl.PreparationProcessCostManagerImpl"/>
 	<bean id="saleCustomerManager" class="com.fuhuadata.manager.impl.SaleCustomerManagerImpl"/>
 	<bean id="customerParentManager" class="com.fuhuadata.manager.impl.CustomerParentManagerImpl"/>
-
+	<bean id="userManager" class="com.fuhuadata.manager.impl.UserManagerImpl"/>
 </beans>

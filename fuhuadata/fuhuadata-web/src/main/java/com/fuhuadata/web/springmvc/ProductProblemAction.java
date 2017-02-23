@@ -36,7 +36,7 @@ public class ProductProblemAction {
      * @return
      */
     @SuppressWarnings("unused")
-    @RequestMapping(value = "/productProblemList",method = RequestMethod.GET)
+    @RequestMapping(value = "/productProblemList.do",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "知识库-产品问题",methods = "列表查询")
     public ModelAndView productProblemList(){
         Result<List<ProductProblem>> result = new Result<List<ProductProblem>>();
