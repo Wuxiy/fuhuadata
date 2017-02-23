@@ -38,56 +38,20 @@
             </div>
             <!--搜索框结束-->
             <!--表格开始-->
-            <table class="table table-condensed table-bordered table-striped text-center">
+            <table id="markettrain_table" class="table table-condensed table-bordered table-striped text-center" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th class="col-xs-1 text-center">编号</th>
-                    <th class="col-xs-4 text-center">标题</th>
-                    <th class="col-xs-2 text-center">产品种类</th>
-                    <th class="col-xs-2 text-center">上传人</th>
-                    <th class="col-xs-2 text-center">上传时间</th>
-                    <th class="col-xs-1 text-center">可否下载</th>
+                    <th class="col-xs-1 text-center text-middle">编号</th>
+                    <th class="col-xs-4 text-center text-middle">标题</th>
+                    <th class="col-xs-2 text-center text-middle">产品种类</th>
+                    <th class="col-xs-2 text-center text-middle">上传人</th>
+                    <th class="col-xs-2 text-center text-middle">上传时间</th>
+                    <th class="col-xs-1 text-center text-middle">可否下载</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>草甘膦知识培训</td>
-                    <td>草甘膦</td>
-                    <td>刘凯洋</td>
-                    <td>2016-10-10 18:00</td>
-                    <td><a href="">下载</a></td>
-                </tr>
-                #foreach($marketTraining in $marketTrainingList)
-                <tr>
-                    <td>${marketTraining.tranId}</td>
-                    <td>${marketTraining.title}</td>
-                    <td>${marketTraining.productType}</td>
-                    <td>${marketTraining.userId}</td>
-                    <td>${marketTraining.uploadDate}</td>
-                    <td><a href="">下载</a></td>
-                </tr>
-                #end
-                </tbody>
+
             </table>
             <!--表格结束-->
-            <!--分页导航开始-->
-            <div class="form-group pull-left table-pagination">
-                共<span>123</span>条记录，<span>130</span>页，跳转到第&nbsp;<input class="form-control pagination-input" type="number"/>&nbsp;页
-                <button class="btn btn-xs btn-primary">确定</button>
-            </div>
-            <ul class="pagination pull-right table-pagination">
-                <li class="disabled"><a href="#">上一页</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">6</a></li>
-                <li><a href="#">7</a></li>
-                <li><a href="">&hellip;</a></li>
-                <li><a href="#">下一页</a></li>
-            </ul>
         </div>
     </div>
 </div>
@@ -156,3 +120,32 @@
         </div>
     </div>
 </div>
+
+ <script type="text/javascript">
+     $(document).ready(function(){
+        $("#markettrain_table").dataTable({
+            "ajax":"querymarketTrainingList",
+            "pagingType":"full_numbers",
+            "columns":[
+                 {"data":"tranId"},
+                 {"data":"productId"},
+                 {"data":"title"},
+                 {"data":"userName"},
+                 {"data":"uploadDate"},
+                 {"data":"download"}
+             ],
+            "columnDefs":[
+                 {
+                     "targets":5,
+                     "render":function (data,type,row) {
+                         return '<a href="'+data+'" target="_blank">'+下载+'</a>';
+                     }
+                 }
+             ],
+            "language": {
+                 "url": '/lib/dataTables/lang/dataTables.lang.zh',
+                         "searchPlaceholder": '关键字'
+             }
+         })
+     })
+ </script>

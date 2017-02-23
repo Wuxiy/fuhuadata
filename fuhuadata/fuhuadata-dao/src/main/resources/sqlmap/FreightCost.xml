@@ -100,6 +100,12 @@
         ]]>
     </delete>
 
+    <select id="GET-BY-ID" resultMap="FREIGHTCOST-MAP" parameterClass="java.lang.Integer">
+        <![CDATA[
+            SELECT * FROM k_freight_cost WHERE freight_id = #freightId#
+        ]]>
+    </select>
+
     <select id="GET-PAGE" resultMap="FREIGHTCOST-MAP" parameterClass="FreightCostQuery">
         <![CDATA[
             SELECT * FROM k_freight_cost
@@ -108,6 +114,15 @@
             <include refid="PAGE-COMMON"/>
         </isParameterPresent>
         LIMIT #startRow#,#pageSize#
+    </select>
+
+    <select id="GET-BY-QUERY" resultMap="FREIGHTCOST-MAP" parameterClass="FreightCostQuery">
+        <![CDATA[
+            SELECT * FROM k_freight_cost
+        ]]>
+        <isParameterPresent>
+            <include refid="QUERY-COMMON"/>
+        </isParameterPresent>
     </select>
 
     <select id="COUNT" resultClass="java.lang.Integer" parameterClass="FreightCostQuery">

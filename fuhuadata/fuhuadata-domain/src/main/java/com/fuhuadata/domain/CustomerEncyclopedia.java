@@ -12,6 +12,8 @@ public class CustomerEncyclopedia {
 
         private String companyName;//企业全称
 
+        private String companyAbbreviation;//企业简称
+
         private String type;//企业类型
 
         private String isFull;//完整度
@@ -206,5 +208,13 @@ public class CustomerEncyclopedia {
 
     public void setCompanyInfo(String companyInfo) {
         this.companyInfo = companyInfo;
+    }
+
+    public String getCompanyAbbreviation() {
+        return companyAbbreviation;
+    }
+
+    public void setCompanyAbbreviation(String companyAbbreviation) {
+        this.companyAbbreviation = companyAbbreviation;
     }
 }

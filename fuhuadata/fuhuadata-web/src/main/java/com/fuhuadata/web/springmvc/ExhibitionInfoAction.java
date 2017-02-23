@@ -32,79 +32,31 @@ public class    ExhibitionInfoAction {
     private Integer pageSize=20;
     private String page="1";
 
+    /**
+     * init
+     * @return
+     */
+    @RequestMapping(value="/exhibitionInfoList")
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "into")
+    public ModelAndView exhibitionInfo(){
+        return new ModelAndView("knowledgeBase/exhibitionInfoList");
+    }
+
 
     @SuppressWarnings("unused")
-    @RequestMapping(value = "/exhibitionInfoList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "list")
-    public ModelAndView exhibitionInfoList(){
-        Result<List<ExhibitionInfo>> result = new Result<List<ExhibitionInfo>>();
-        ExhibitionInfoQuery exhibitionInfoQuery = new ExhibitionInfoQuery();
-        try{
-
-            exhibitionInfoQuery.setPageSize(pageSize);
-            try {
-                exhibitionInfoQuery.setIndex(Integer.valueOf(page));
-            }catch (Exception e){
-                exhibitionInfoQuery.setIndex(1);
-            }
-            result=exhibitionInfoService.getExhibitionInfosByPage(exhibitionInfoQuery);
-        }catch (Exception e){
-            log.error("获取展会列表失败",e);
-        }
-        ResultPojo resultPojo=result.getResultPojo();
-        resultPojo.setPreObject(exhibitionInfoQuery);
-        ModelAndView model = new ModelAndView("knowledgeBase/test","result",resultPojo);
-        model.addObject("totalItem",result.getTotalItem());
-        model.addObject("message","展会动态列表");
-        model.addObject("query",null);
-        return model;
-    }
-
     @RequestMapping(value = "/queryExhibitionInfoList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "query")
-    public ModelAndView queryExhibitionInfoList(@RequestBody ExhibitionInfoQuery exhibitionInfoQuery){
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "list")
+    @ResponseBody
+    public ResultPojo exhibitionInfoList(){
+        ExhibitionInfoQuery exhibitionInfoQuery = new ExhibitionInfoQuery();//封装权限等的查询条件
         Result<List<ExhibitionInfo>> result = new Result<List<ExhibitionInfo>>();
         try{
-            exhibitionInfoQuery.setPageSize(pageSize);
-            if(exhibitionInfoQuery.getIndex()==0){
-                exhibitionInfoQuery.setIndex(Integer.valueOf(page.trim()));
-            }
-            result=exhibitionInfoService.getExhibitionInfosByPage(exhibitionInfoQuery);
+            //加入权限代码，设置查询条件
+            result=exhibitionInfoService.getExhibitionInfosByQuery(exhibitionInfoQuery);
         }catch (Exception e){
-            log.error("查询获取展会信息失败",e);
+            log.error("获取展会动态列表错误",e);
         }
-        ResultPojo resultPojo=result.getResultPojo();
-        resultPojo.setPreObject(exhibitionInfoQuery);
-        ModelAndView model = new ModelAndView("knowledgeBase/exhibitionInfoList","result",resultPojo);
-        model.addObject("message","展会动态列表");
-        return model;
-    }
-
-    @RequestMapping(value = "/queryExhibitionInfo",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "query")
-    public ModelAndView queryExhibitionInfo(String index,String exhibitionName){
-        ExhibitionInfoQuery exhibitionInfoQuery = new ExhibitionInfoQuery();
-        Result<List<ExhibitionInfo>> result = new Result<List<ExhibitionInfo>>();
-        try{
-            exhibitionInfoQuery.setPageSize(pageSize);
-            //out
-            System.out.println(index);
-            System.out.println(exhibitionName);
-            if(index==null){
-                exhibitionInfoQuery.setIndex(Integer.valueOf(page.trim()));
-            }else{
-            exhibitionInfoQuery.setIndex(Integer.valueOf(index.trim()));
-            }
-            exhibitionInfoQuery.setExhibitionName(exhibitionName);
-            result=exhibitionInfoService.getExhibitionInfosByPage(exhibitionInfoQuery);
-        }catch (Exception e){
-            log.error("条件查询获取展会信息失败",e);
-        }
-        ResultPojo resultPojo=result.getResultPojo();
-        resultPojo.setPreObject(exhibitionInfoQuery);
-        ModelAndView model = new ModelAndView("knowledgeBase/test","result",resultPojo);
-        model.addObject("message","展会动态列表");
-        return model;
+        return result.getResultPojo();
     }
 
 
@@ -125,12 +77,11 @@ public class    ExhibitionInfoAction {
                 exhibitionInfoQuery.setIndex(Integer.valueOf(index.trim()));
             }
             exhibitionInfoQuery.setExhibitionName(exhibitionName);
-            result=exhibitionInfoService.getExhibitionInfosByPage(exhibitionInfoQuery);
+            result=exhibitionInfoService.getExhibitionInfosByQuery(exhibitionInfoQuery);
         }catch (Exception e){
             log.error("条件查询获取展会信息失败",e);
         }
         ResultPojo resultPojo=result.getResultPojo();
-        resultPojo.setPreObject(exhibitionInfoQuery);
         return resultPojo;
     }
 
@@ -192,7 +143,6 @@ public class    ExhibitionInfoAction {
         }
         return null;
     }
-
 
     @RequestMapping(value = "/getExhibitionInfoJson")
     @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "getInfoById")

@@ -7,8 +7,12 @@
     <resultMap id="RATE-MAP" class="Rate">
         <result column="rate_id" property="rateId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result column="type" property="type" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result property="currency" column="currency" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="kind" property="kind" jdbcType="VARCHAR" javaType="java.lang.String" />
-        <result column="rate" property="rate" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="other" property="other" jdbcType="VARCHAR" javaType="java.lang.String" />
+        <result column="gross_margin" property="grossMargin" jdbcType="VARCHAR" javaType="java.math.BigDecimal" />
+        <result column="rate_value" property="rateValue" jdbcType="VARCHAR" javaType="java.math.BigDecimal" />
+        <result column="rate" property="rate" jdbcType="VARCHAR" javaType="java.math.BigDecimal"/>
         <result column="term_of_validity" property="termofValidity" jdbcType="DATE" javaType="java.sql.Date"/>
         <result column="remarks" property="remarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>
@@ -18,15 +22,41 @@
             <isNotNull prepend=" AND " property="type">
                 type = #type#
             </isNotNull>
+            <isNotNull prepend=" AND" property="currency">
+                currency = #currency#
+            </isNotNull>
+            <isNotNull prepend=" ADD" property="kind">
+                kind =#kind#
+            </isNotNull>
+            <isNotNull prepend=" ADD" property="other">
+                other = #other#
+            </isNotNull>
+        </dynamic>
+    </sql>
+
+    <sql id="QUERY-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotNull prepend=" AND " property="type">
+                type = #type#
+            </isNotNull>
+            <isNotNull prepend=" AND" property="currency">
+                currency = #currency#
+            </isNotNull>
+            <isNotNull prepend=" ADD" property="kind">
+                kind =#kind#
+            </isNotNull>
+            <isNotNull prepend=" ADD" property="other">
+                other = #other#
+            </isNotNull>
         </dynamic>
     </sql>
 
     <insert id="ADD" parameterClass="Rate">
         INSERT INTO
-        k_knowledge_rate (rate_id, type, kind,
-        rate, term_of_validity, status)
-        VALUES (#rateId#, #type#, #remarks#,
-        #rate#, #termofValidity#, #remarks#,
+        k_knowledge_rate (rate_id, type, currency, kind, other,
+        rate, gross_margin, rate_value, term_of_validity, status)
+        VALUES (#rateId#, #type#, #currency#, #kind#, #other#,
+        #rate#, #grossMargin#, #rateValue#, #termofValidity#, #remarks#,
         #remarks#)
         <selectKey  resultClass="int" keyProperty="rateId">
             SELECT @@IDENTITY AS rate_id
@@ -36,10 +66,14 @@
     <update id="UPDATE" parameterClass="Rate">
         UPDATE k_knowledge_rate
         <dynamic prepend=" SET ">
-            <isNotNull prepend=", " property="consumption">kind = #kind#</isNotNull>
+            <isNotNull prepend=", " property="currency">currency = #currency#</isNotNull>
+            <isNotNull prepend=", " property="kind">kind = #kind#</isNotNull>
+            <isNotNull prepend=", " property="other">other = #other#</isNotNull>
             <isNotNull prepend=", " property="suitableProduct">rate = #rate#</isNotNull>
-            <isNotNull prepend=", " property="unitCost">term_of_validity = #termofValidity#</isNotNull>
-            <isNotNull prepend=", " property="priceEnd">price_end = #remarks#</isNotNull>
+            <isNotNull prepend=", " property="grossMargin">gross_margin = #grossMargin#</isNotNull>
+            <isNotNull prepend=", " property="rateValue">rate_value = #rateValue#</isNotNull>
+            <isNotNull prepend=", " property="termofValidity">term_of_validity = #termofValidity#</isNotNull>
+            <isNotNull prepend=", " property="remarks">price_end = #remarks#</isNotNull>
         </dynamic>
         WHERE rate_id = #rateId#
     </update>
@@ -49,6 +83,21 @@
             DELETE FROM k_knowledge_rate WHERE rate_id=#rateId#
         ]]>
     </delete>
+
+    <select id="GET-BY-ID" resultMap="RATE-MAP" parameterClass="java.lang.Integer">
+        <![CDATA[
+            SELECT * FROM k_knowledge_rate WHERE rate_id=#rateId#
+        ]]>
+    </select>
+
+    <select id="GET-BY-QUERY" resultMap="RATE-MAP" parameterClass="RateQuery">
+        <![CDATA[
+            SELECT * FROM k_knowledge_rate
+        ]]>
+        <isParameterPresent>
+            <include refid="QUERY-COMMON"/>
+        </isParameterPresent>
+    </select>
 
     <select id="GET-PAGE" resultMap="RATE-MAP" parameterClass="RateQuery">
         <![CDATA[
@@ -62,7 +111,7 @@
 
     <select id="COUNT" resultClass="java.lang.Integer" parameterClass="RateQuery">
         <![CDATA[
-            SELECT COUNT(id) FROM k_knowledge_rate
+            SELECT COUNT(rate_id) FROM k_knowledge_rate
         ]]>
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>

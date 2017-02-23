@@ -8,6 +8,7 @@ import com.fuhuadata.service.PortChargesCostService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import javax.sound.sampled.Port;
 import java.util.List;
 
 /**
@@ -26,6 +27,64 @@ public class PortChargesCostServiceImpl implements PortChargesCostService {
             result.setSuccess(false);
             //打印日志
             log.error("添加港杂费信息错误",e);
+        }
+        return result;
+    }
+
+    @Override
+    public Result updatePortChargesCostById(int id, PortChargesCost portChargesCost) {
+        Result result= new Result();
+        try{
+            result.setSuccess(portChargesCostManager.updatePortChargesCostById(id,portChargesCost));
+        }catch(Exception e){
+            result.setSuccess(false);
+            log.error("修改港杂费信息错误",e);
+        }
+        return result;
+    }
+
+    @Override
+    public Result deletePortChargesCostById(int id) {
+        Result result= new Result();
+        try{
+            result.setSuccess(portChargesCostManager.deletePortChargesCostById(id));
+        }catch(Exception e){
+            result.setSuccess(false);
+            log.error("根据id删除港杂费信息错误",e);
+        }
+        return result;
+    }
+
+    @Override
+    public Result<PortChargesCost> getPortChargesCostById(int id) {
+        Result<PortChargesCost> result = new Result<PortChargesCost>();
+        try{
+            PortChargesCost portChargesCost = portChargesCostManager.getPortChargesCostById(id);
+            if(portChargesCost == null){
+                result.setSimpleErrorMsg(0,"当前港杂费数据不存在，请重试");
+            }else{
+                result.addDefaultModel("PortChargesCost",portChargesCost);
+            }
+        }catch(Exception e){
+            result.setSuccess(false);
+            log.error("根据id获取港杂费数据错误",e);
+        }
+        return result;
+    }
+
+    @Override
+    public List<PortChargesCost> getAllPortChargesCosts() {
+        return portChargesCostManager.getAllPortChargesCosts();
+    }
+
+    @Override
+    public Result<List<PortChargesCost>> getPortChargesCostsByQuery(PortChargesCostQuery portChargesCostQuery) {
+        Result<List<PortChargesCost>> result = new Result<List<PortChargesCost>>();
+        try{
+            result.addDefaultModel("PortChargesCosts",portChargesCostManager.getPortChargesCostByQuery(portChargesCostQuery));
+        }catch(Exception e){
+            result.setSuccess(false);
+            log.error("查询港杂费信息错误",e);
         }
         return result;
     }

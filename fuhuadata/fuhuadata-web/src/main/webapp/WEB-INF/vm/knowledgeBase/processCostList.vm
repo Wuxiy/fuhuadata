@@ -1,5 +1,6 @@
  <div class="col-xs-12">
     <!--tab导航开始-->
+     
     <ul id="myTab" class="nav nav-tabs">
         <li class="active"><a href="#adEexpense" data-toggle="tab">制剂加工费</a></li>
         <li><a href="#freight" data-toggle="tab">国内运费</a></li>
@@ -10,88 +11,48 @@
     <div class="tab-content">
         <div id="adEexpense" class="tab-pane fade in active">
             <div class="row">
-                <div class="col-xs-7">
+                <div class="col-xs-12">
                     <!--制剂加工费表开始-->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a href="" class="btn btn-xs btn-primary panel-heading-btn pull-right">
-                                新增
-                            </a>
                             <h3 class="panel-title">
-                                水剂加工费
+                                人工费
                             </h3>
                         </div>
                         <div class="panel-body">
                             <table class="table table-bordered table-condensed text-center">
                                 <thead>
                                 <tr>
-                                    <th class="text-center col-xs-2">费用项</th>
-                                    <th class="text-center col-xs-2">单价（元/T）</th>
-                                    <th class="text-center col-xs-2">价格有效期</th>
-                                    <th class="text-center col-xs-6">备注</th>
+                                    <th class="text-center col-xs-2 text-middle">主材规格</th>
+                                    <th class="text-center col-xs-2 text-middle">单价（元/每千升或每吨）</th>
+                                    <th class="text-center col-xs-2 text-middle">价格有效期</th>
+                                    <th class="text-center col-xs-6 text-middle">备注</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td>200ML</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                                <tbody id="adEexpense1">
                                 </tbody>
                             </table>
                         </div>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a href="" class="btn btn-xs btn-primary panel-heading-btn pull-right">
-                                新增
-                            </a>
                             <h3 class="panel-title">
-                                颗粒剂加工费
+                                杂费
                             </h3>
                         </div>
                         <div class="panel-body">
                             <table class="table table-bordered table-condensed text-center">
                                 <thead>
                                 <tr>
-                                    <th class="text-center col-xs-2">费用项</th>
-                                    <th class="text-center col-xs-2">单价（元/T）</th>
-                                    <th class="text-center col-xs-2">价格有效期</th>
-                                    <th class="text-center col-xs-6">备注</th>
+                                    <th class="text-center col-xs-2 text-middle">加工厂</th>
+                                    <th class="text-center col-xs-2 text-middle">水、电、气费（元/吨）</th>
+                                    <th class="text-center col-xs-2 text-middle">利润（元/吨）</th>
+                                    <th class="text-center col-xs-2 text-middle">管理费（元/吨）</th>
+                                    <th class="text-center col-xs-2 text-middle">税金（元/吨）</th>
+                                    <th class="text-center col-xs-2 text-middle">费用合计</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td>水、电、气</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>利润</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>管理费</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>税金</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>加工费合计</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                                <tbody id="adEexpense2">
                                 </tbody>
                             </table>
                         </div>
@@ -117,42 +78,14 @@
                             <table class="table table-bordered table-condensed text-center">
                                 <thead>
                                 <tr>
-                                    <th class="text-center col-xs-2">加工厂</th>
-                                    <th class="text-center col-xs-2">起运城市</th>
-                                    <th class="text-center col-xs-2">目的城市</th>
-                                    <th class="text-center col-xs-2">单价（元/T（KL））</th>
-                                    <th class="text-center col-xs-4">备注</th>
+                                    <th class="text-center col-xs-2 text-middle">加工厂</th>
+                                    <th class="text-center col-xs-2 text-middle">起运城市</th>
+                                    <th class="text-center col-xs-2 text-middle">目的城市</th>
+                                    <th class="text-center col-xs-2 text-middle">单价（元/T（KL））</th>
+                                    <th class="text-center col-xs-4 text-middle">备注</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td>杭州海辰</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>杭州乐川</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>安徽银山</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>浙江菱化</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                                <tbody id="freight1">
                                 </tbody>
                             </table>
                         </div>
@@ -178,79 +111,15 @@
                             <table class="table table-bordered table-condensed text-center">
                                 <thead>
                                 <tr>
-                                    <th class="text-center col-xs-2">成分名称</th>
-                                    <th class="text-center col-xs-2">单耗（kg/T）</th>
-                                    <th class="text-center col-xs-2">单价（元/kg）</th>
-                                    <th class="text-center col-xs-2">价格有效期</th>
-                                    <th class="text-center col-xs-2">适合产品</th>
-                                    <th class="text-center col-xs-2">备注</th>
+                                    <th class="text-center col-xs-2 text-middle">成分名称</th>
+                                    <th class="text-center col-xs-2 text-middle">单耗（kg/T）</th>
+                                    <th class="text-center col-xs-2 text-middle">单价（元/kg）</th>
+                                    <th class="text-center col-xs-2 text-middle">价格有效期</th>
+                                    <th class="text-center col-xs-2 text-middle">适合产品</th>
+                                    <th class="text-center col-xs-2 text-middle">备注</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td>原粉</td>
-                                    <td>——</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>颗粒剂助剂A</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>颗粒剂助剂B</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>碳酸氢铵</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>填料</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>异丙胺</td>
-                                    <td>——</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>助剂</td>
-                                    <td>——</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>氨</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                                <tbody id="cost1">
                                 </tbody>
                             </table>
                         </div>
@@ -272,13 +141,13 @@
                                 港杂费参考价
                             </h3>
                         </div>
-                        <div class="panel-body">
+                        <div class="panel-body" id="portSurcharge1">
                             <table class="table table-bordered table-condensed text-center">
                                 <thead>
                                 <tr>
-                                    <th colspan="3" class="text-center col-xs-6">项目</th>
-                                    <th class="text-center col-xs-3">一般化工品</th>
-                                    <th class="text-center col-xs-3">危险品</th>
+                                    <th colspan="3" class="text-center col-xs-6 text-middle">项目</th>
+                                    <th class="text-center col-xs-3 text-middle">一般化工品</th>
+                                    <th class="text-center col-xs-3 text-middle">危险品</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -473,9 +342,6 @@
                     <!--费率表开始-->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a href="" class="btn btn-xs btn-primary panel-heading-btn pull-right">
-                                新增
-                            </a>
                             <h3 class="panel-title">
                                 币种&汇率
                             </h3>
@@ -484,33 +350,15 @@
                             <table class="table table-bordered table-condensed text-center">
                                 <thead>
                                 <tr>
-                                    <th class="text-center col-xs-2">币种</th>
-                                    <th class="text-center col-xs-2">汇率</th>
-                                    <th class="text-center col-xs-2">价有效期</th>
-                                    <th class="text-center col-xs-6">备注</th>
+                                    <th class="text-center col-xs-2 text-middle">币种</th>
+                                    <th class="text-center col-xs-2 text-middle">汇率</th>
+                                    <th class="text-center col-xs-2 text-middle">价有效期</th>
+                                    <th class="text-center col-xs-6 text-middle">备注</th>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="rate1">
                                 <tr>
                                     <td>人民币</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>澳元</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>美元</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>欧元</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -521,9 +369,6 @@
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a href="" class="btn btn-xs btn-primary panel-heading-btn pull-right">
-                                新增
-                            </a>
                             <h3 class="panel-title">
                                 毛利率
                             </h3>
@@ -538,15 +383,9 @@
                                     <th class="text-center col-xs-6">备注</th>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="rate2">
                                 <tr>
                                     <td>除草剂-草甘膦</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>除草剂-草铵膦</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -557,9 +396,6 @@
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a href="" class="btn btn-xs btn-primary panel-heading-btn pull-right">
-                                新增
-                            </a>
                             <h3 class="panel-title">
                                 其他费率
                             </h3>
@@ -574,31 +410,7 @@
                                     <th class="text-center col-xs-6">备注</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td>保险费费率</td>
-                                    <td>0.03%</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>信保费率</td>
-                                    <td>0.24%</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>资金利息费率</td>
-                                    <td>6%</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>税金销售费用比率</td>
-                                    <td>0.50%</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                                <tbody id="rate3">
                                 <tr>
                                     <td>管理费用比率</td>
                                     <td>0.20%</td>
@@ -615,3 +427,326 @@
         </div>
     </div>
 </div>
+ <script type="text/javascript">
+     var Adeexpense1 = document.getElementById("adEexpense1");
+     var Adeexpense2 = document.getElementById("adEexpense2");
+     var Freight = document.getElementById("freight1");
+     var Cost = document.getElementById("cost1");
+     var Portsurcharge = document.getElementById("portSurcharge1");
+     var Rate1 = document.getElementById("rate1");
+     var Rate2 = document.getElementById("rate2");
+     var Rate3 = document.getElementById("rate3");
+
+     $(document).ready(function () {
+         $('a[href="#adEexpense"]').tab('show');
+         jQuery.ajax({
+             type:"GET",
+             url:"/preparationProcessCost/queryPreparationProcessCostList",
+             success:function(result){
+                 var ResultData = eval(result.data);
+                 var ResultData1 = new Array();
+                 var ResultData2 = new Array();
+
+                 for(var i=0;i<ResultData.length;i++){
+                     if(ResultData[i].type == 0){
+                         ResultData1.push(ResultData[i]);
+                     }else{
+                         ResultData2.push(ResultData[i]);
+                     }
+                 }
+
+                 for(var j=0;j<ResultData1.length;j++){
+                     Adeexpense1.innerHTML += '<tr>'+
+                             '<td>'+ResultData1[j].costTerm+'</td>'+
+                             '<td>'+ResultData1[j].unitCost+'</td>'+
+                             '<td>'+ResultData1[j].priceEnd+'</td>'+
+                             '<td>'+ResultData1[j].remarks+'</td>'+
+                             '</tr>';
+                 }
+                 for(var k=0;k<ResultData2.length;k++){
+                     Adeexpense2.innerHTML += '<tr>'+
+                             '<td>'+ResultData2[k].processFactory+'</td>'+
+                             '<td>'+ResultData2[k].charges+'</td>'+
+                             '<td>'+ResultData2[k].profit+'</td>'+
+                             '<td>'+ResultData2[k].managementFee+'</td>'+
+                             '<td>'+ResultData2[k].tax+'</td>'+
+                             '<td>'+ResultData2[k].totalCost+'</td>'+
+                             '</tr>';
+                 }
+             }
+         })
+     })
+
+     $('a[href="#adEexpense"]').click(function () {
+         $('a[href="#adEexpense"]').tab('show');
+         jQuery.ajax({
+             type:"GET",
+             url:"/preparationProcessCost/queryPreparationProcessCostList",
+             success:function(result){
+                 Adeexpense1.innerHTML = '';
+                 Adeexpense2.innerHTML = '';
+                 var ResultData = eval(result.data);
+                 var ResultData1 = new Array();
+                 var ResultData2 = new Array();
+
+                 for(var i=0;i<ResultData.length;i++){
+                     if(ResultData[i].type == 0){
+                         ResultData1.push(ResultData[i]);
+                     }else{
+                         ResultData2.push(ResultData[i]);
+                     }
+                 }
+
+                 for(var j=0;j<ResultData1.length;j++){
+                     Adeexpense1.innerHTML += '<tr>'+
+                                    '<td>'+ResultData1[j].costTerm+'</td>'+
+                                    '<td>'+ResultData1[j].unitCost+'</td>'+
+                                    '<td>'+ResultData1[j].priceEnd+'</td>'+
+                                    '<td>'+ResultData1[j].remarks+'</td>'+
+                                     '</tr>';
+                 }
+                 for(var k=0;k<ResultData2.length;k++){
+                     Adeexpense2.innerHTML += '<tr>'+
+                                     '<td>'+ResultData2[k].processFactory+'</td>'+
+                                     '<td>'+ResultData2[k].charges+'</td>'+
+                                     '<td>'+ResultData2[k].profit+'</td>'+
+                                     '<td>'+ResultData2[k].managementFee+'</td>'+
+                                     '<td>'+ResultData2[k].tax+'</td>'+
+                                     '<td>'+ResultData2[k].totalCost+'</td>'+
+                                     '</tr>';
+                 }
+             }
+         })
+     });
+
+     $('a[href="#freight"]').click(function(){
+         $('a[href="#fright"]').tab('show');
+            jQuery.ajax({
+                url:'/freightCost/queryFreightCostList',
+                type:'GET',
+                data:'json',
+                success:function (result) {
+                    Freight.innerHTML = '';
+                    var ResultData = eval(result.data);
+                    for(var i=0;i<ResultData.length;i++){
+                        Freight.innerHTML += '<tr>'+
+                                '<td>'+ResultData[i].processFactory+'</td>'+
+                                '<td>'+ResultData[i].unitCost+'</td>'+
+                                '<td>'+ResultData[i].departureCity+'</td>'+
+                                '<td>'+ResultData[i].destinationCity+'</td>'+
+                                '<td>'+ResultData[i].remarks+'</td>'+
+                                '</tr>';
+                    }
+                }
+            })
+     });
+
+     $('a[href="#cost"]').click(function () {
+         $('a[href="#cost"]').tab('show');
+         jQuery.ajax({
+             url:'/componentCost/queryComponentCostList',
+             type:'GET',
+             success:function(result){
+                 Cost.innerHTML = '';
+                 var ResultData = eval(result.data);
+                 for(var i=0;i<ResultData.length;i++){
+                     Cost.innerHTML += '<tr>'+
+                             '<td>'+ResultData[i].componentName+'</td>'+
+                             '<td>'+ResultData[i].unitCost+'</td>'+
+                             '<td>'+ResultData[i].priceEnd+'</td>'+
+                             '<td>'+ResultData[i].suitableProduct+'</td>'+
+                             '<td>'+ResultData[i].consumption+'</td>'+
+                             '<td>'+ResultData[i].remarks+'</td>'+
+                             '</tr>';
+                 }
+         }
+         })
+     });
+
+     $('a[href="#portSurcharge"]').click(function () {
+         $('a[href="#portSurcharge"]').tab('show');
+         jQuery.ajax({
+             type:'GET',
+             url:'/portChargesCost/queryPortChargesCostList',
+
+             success:function (result) {
+
+                Portsurcharge.innerHTML = '';
+                 var ResultData = eval(result.data);
+                 Portsurcharge.innerHTML +=   '<table class="table table-bordered table-condensed text-center">'+
+                                    '<thead>'+
+                                    '<tr>'+
+                                    '<th colspan="3" class="text-center col-xs-6">项目</th>'+
+                                    '<th class="text-center col-xs-3">一般化工品</th>'+
+                                    '<th class="text-center col-xs-3">危险品</th>'+
+                                    '</tr>'+
+                                    '</thead>'+
+                                    '<tbody>'+
+                                    '<tr><td colspan="2" rowspan="2">订舱费（元/柜）</td>'+
+                                    '<td class="text-left">20GP</td>'+
+                                    '<td>'+ResultData[0].generalChemicals+'</td>'+
+                                    '<td>'+ResultData[0].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr><td class="text-left">20GP&HQ</td>'+
+                                     '<td>'+ResultData[1].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[1].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr><td rowspan="4">装箱费（元/柜）</td>'+
+                                    '<td rowspan="2">外港</td>'+
+                                    '<td class="text-left">20GP</td>'+
+                                     '<td>'+ResultData[2].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[2].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr><td class="text-left">40GP&HQ</td>'+
+                                     '<td>'+ResultData[3].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[3].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr><td rowspan="2">洋山港</td>'+
+                                    '<td class="text-left">20GP</td>'+
+                                     '<td>'+ResultData[4].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[4].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr><td class="text-left">40GP&HQ</td>'+
+                                     '<td>'+ResultData[5].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[5].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr><td colspan="3">文件费（元/票）</td>'+
+                                     '<td>'+ResultData[6].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[6].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr><td colspan="3">电放费（元/票）</td>'+
+                                     '<td>'+ResultData[7].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[7].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr><td colspan="3">改单费（元/票）'+'</td>'+
+                                     '<td>'+ResultData[8].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[8].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr>'+ '<td colspan="3">'+'快递费'+'</td>'+
+                                     '<td>'+ResultData[9].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[9].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr>'+ '<td colspan="3">'+'报关费（元/票）'+'</td>'+
+                                     '<td>'+ResultData[10].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[10].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr>'+ '<td colspan="3">'+'进仓费（卸货费）（元/吨）'+'</td>'+
+                                     '<td>'+ResultData[11].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[11].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr>'+ '<td colspan="2" rowspan="5">'+'打托费（托盘、打托、缠膜）（元/托）'+'</td>'+
+                                    '<td class="text-left">'+'普通托盘'+'</td>'+
+                                     '<td>'+ResultData[12].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[12].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr>'+ '<td class="text-left">'+'熏蒸托盘'+'</td>'+
+                                     '<td>'+ResultData[13].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[13].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr>'+ '<td class="text-left">'+'双面托'+'</td>'+
+                                     '<td>'+ResultData[14].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[14].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr>'+ '<td class="text-left">'+'CP3托盘'+'</td>'+
+                                     '<td>'+ResultData[15].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[15].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr>'+ '<td class="text-left">'+'塑料托盘'+'</td>'+
+                                     '<td>'+ResultData[16].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[16].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr>'+ '<td colspan="3">'+'垫板费（元/张）'+'</td>'+
+                                     '<td>'+ResultData[17].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[17].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr>'+ '<td colspan="3">纸板费（元/个）</td>'+
+                                     '<td>'+ResultData[18].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[18].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr> <td colspan="3">气囊费（元/个）</td>'+
+                                     '<td>'+ResultData[19].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[19].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr> <td colspan="3">唛头（元/张）（黑白打印，A4纸一半）</td>'+
+                                     '<td>'+ResultData[20].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[20].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr> <td colspan="3">拉网费（元/柜）</td>'+
+                                     '<td>'+ResultData[21].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[21].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr> <td colspan="3">紧固带费（元/柜）</td>'+
+                                     '<td>'+ResultData[22].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[22].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr> <td rowspan="2" colspan="2">抄条码费</td>'+
+                                    '<td class="text-left">600KG-1000KG包装（元/包）</td>'+
+                                     '<td>'+ResultData[23].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[23].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr> <td class="text-left">25KG包装（元/柜）</td>'+
+                                     '<td>'+ResultData[24].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[24].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr> <td colspan="3">封子费（元/柜）</td>'+
+                                     '<td>'+ResultData[25].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[25].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr> <td colspan="3">检查费（元/柜）</td>'+
+                                     '<td>'+ResultData[26].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[26].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr> <td colspan="3">美式门封（元/柜）</td>'+
+                                     '<td>'+ResultData[27].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[27].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr> <td rowspan="2" colspan="2">FOB操作费（元/柜）</td>'+
+                                    '<td class="text-left">20GP</td>'+
+                                     '<td>'+ResultData[28].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[28].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr> <td class="text-left">40GP&<hq></hq></td>'+
+                                     '<td>'+ResultData[29].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[29].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr> <td colspan="3">护条（元/个）</td>'+
+                                     '<td>'+ResultData[30].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[30].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr> <td colspan="3">护角（元/个）</td>'+
+                                     '<td>'+ResultData[31].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[31].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr> <td colspan="3">仓储费</td>'+
+                                     '<td>'+ResultData[32].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[32].dangerousProduct+'</td>'+'</tr>'+
+                                    '<tr> <td colspan="3">商检换单（元/票）</td>'+
+                                     '<td>'+ResultData[33].generalChemicals+'</td>'+
+                                     '<td>'+ResultData[33].dangerousProduct+'</td>'+'</tr>'+
+                                    '</tbody>';
+         }
+         })
+     })
+
+     $('a[href="#rate"]').click(function () {
+         $('a[href="#rate"]').tab('show');
+         jQuery.ajax({
+             type:'GET',
+             url:'/Rate/queryRateList',
+             success:function (result) {
+                 Rate1.innerHTML = '';
+                 Rate2.innerHTML = '';
+                 Rate3.innerHTML = '';
+                 var ResultData = eval(result.data);
+                 var ResultData1 = new Array();
+                 var ResultData2 = new Array();
+                 var ResultData3 = new Array();
+
+                 for(var i=0;i<ResultData.length;i++){
+                    if(ResultData[i].type == 0){
+                        ResultData1.push(ResultData[i]);
+                    }else if(ResultData[i].type == 1){
+                        ResultData2.push(ResultData[i]);
+                    }else{
+                        ResultData3.push(ResultData[i]);
+                    }
+                 }
+
+                 for(var j=0;j<ResultData1.length;j++){
+                     Rate1.innerHTML += '<tr>'+
+                             '<td>'+ResultData1[j].currency+'</td>'+
+                             '<td>'+ResultData1[j].rate+'</td>'+
+                             '<td>'+ResultData1[j].termofValidity+'</td>'+
+                             '<td>'+ResultData1[j].remarks+'</td>'+
+                             '</tr>';
+                 }
+
+                 for(var k=0;k<ResultData2.length;k++){
+                     Rate2.innerHTML += '<tr>'+
+                             '<td>'+ResultData2[k].kind+'</td>'+
+                             '<td>'+ResultData2[k].grossMargin+'</td>'+
+                             '<td>'+ResultData2[k].termofValidity+'</td>'+
+                             '<td>'+ResultData2[k].remarks+'</td>'+
+                             '</tr>';
+                 }
+
+                 for(var l=0;l<ResultData2.length;l++){
+                     Rate3.innerHTML += '<tr>'+
+                             '<td>'+ResultData3[l].other+'</td>'+
+                             '<td>'+ResultData3[l].rateValue+'</td>'+
+                             '<td>'+ResultData3[l].termofValidity+'</td>'+
+                             '<td>'+ResultData3[l].remarks+'</td>'+
+                             '</tr>';
+                 }
+             }
+         })
+     });
+ </script>

@@ -20,6 +20,11 @@ public class SystemLogManagerImpl implements SystemLogManager {
     }
 
     @Override
+    public List<SystemLog> getSystemLogByQuery(SystemLogQuery systemLogQuery) {
+        return systemLogDao.getSystemLogByQuery(systemLogQuery);
+    }
+
+    @Override
     public Result<List<SystemLog>> getSystemLogsByPage(SystemLogQuery systemLogQuery) {
         Result<List<SystemLog>> result = new Result<List<SystemLog>>();
         int totalItem=systemLogDao.count(systemLogQuery);

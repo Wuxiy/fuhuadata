@@ -41,7 +41,7 @@ public class KnowledgeBaseAction {
     @RequestMapping(value="/marketTrainingList",method=RequestMethod.GET)
     public ModelAndView marketTrainList(){return new ModelAndView("knowledgeBase/marketTrainingList");}
 
-    /**阿姨
+    /**
      * 客户产品包装要求列表
      * @return
      */

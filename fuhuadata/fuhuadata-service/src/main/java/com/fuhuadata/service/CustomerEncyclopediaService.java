@@ -37,6 +37,10 @@ public interface CustomerEncyclopediaService {
      */
     public Result deleteCustomerEncyclopediaById(int id);
 
+    public Result<CustomerEncyclopedia> getCustomerEncyclopediaById(int id);
+
+    public Result<List<CustomerEncyclopedia>> getCustomerEncyclopediaByQuery(CustomerEncyclopediaQuery customerEncyclopediaQuery);
+
     public Result<List<CustomerEncyclopedia>> getCustomerEncyclopediasByPage(CustomerEncyclopediaQuery customerEncyclopediaQuery);
 
     public Result<Integer> count(CustomerEncyclopediaQuery customerEncyclopediaQuery);

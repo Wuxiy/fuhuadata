@@ -33,17 +33,17 @@ public class MarketTrainingManagerImpl implements MarketTrainingManager {
 
     @Override
     public MarketTraining getMarketTrainingById(int id) {
-        return null;
+        return marketTrainingDao.getMarketTrainingById(id);
     }
 
     @Override
-    public List<ExhibitionInfo> getAllMarketTrainings() {
-        return null;
+    public List<MarketTraining> getAllMarketTrainings() {
+        return marketTrainingDao.getAllMarketTrainings();
     }
 
     @Override
-    public List<ExhibitionInfo> getMarketTrainingByQuery(ExhibitionInfoQuery exhibitionInfoQuery) {
-        return null;
+    public List<MarketTraining> getMarketTrainingsByQuery(MarketTrainingQuery marketTrainingQuery) {
+        return marketTrainingDao.getMarketTrainingsByQuery(marketTrainingQuery);
     }
 
     @Override

@@ -31,35 +31,42 @@ public class PreparationProcessCostAction {
     private Integer pageSize=5;
     private String page="1";
 
+    /**
+     * init
+     * @return
+     */
     @SuppressWarnings("unused")
     @RequestMapping(value = "/preparationProcessCostList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-制剂加工费",methods = "制剂加工费列表")
-    public ModelAndView preparationProcessCostList(){
+    @SystemLogAnnotation(module = "knowledgeBase-preparationProcessCost",methods = "into")
+    public ModelAndView preparationProcessCost(){
+        return new ModelAndView("knowledgeBase/preparationProcessCostList");
+    }
+
+    /**
+     * list
+     * @return
+     */
+    @RequestMapping(value = "/queryPreparationProcessCostList",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-preparationProcessCost",methods = "list")
+    @ResponseBody
+    public ResultPojo preparationProcessCostList(){
         Result<List<PreparationProcessCost>> result = new Result<List<PreparationProcessCost>>();
+        PreparationProcessCostQuery query = new PreparationProcessCostQuery();
         try{
-            PreparationProcessCostQuery query = new PreparationProcessCostQuery();
-            query.setPageSize(pageSize);
-            try{
-                query.setIndex(Integer.valueOf(page));
-            }catch(Exception e){
-                query.setIndex(1);
-            }
-            result= preparationProcessCostService.getPreparationProcessCostsByPage(query);
+            result= preparationProcessCostService.getPreparationProcessCostByQuery(query);
         }catch(Exception e){
             log.error("获取制剂加工费列表错误",e);
         }
-        ModelAndView model= new ModelAndView("knowledgeBase/preparationProcessCostList","preparationProcessCosts",result.getModel());
-        model.addObject("message","制剂加工费列表");
-        return model;
+        return result.getResultPojo();
     }
 
     @RequestMapping(value = "/addPreparationProcessCost",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-制剂加工费",methods = "新增制剂加工费")
+    @SystemLogAnnotation(module = "knowledgeBase-preparationProcessCost",methods = "add")
     public ModelAndView addPreparationProcessCost(){
         return new ModelAndView("knowledgeBase/addPreparationProcessCost");
     }
     @RequestMapping(value = "/doAddPreparationProcessCost",method = RequestMethod.POST)
-    @SystemLogAnnotation(module = "知识库-制剂加工费",methods = "执行新增")
+    @SystemLogAnnotation(module = "knowledgeBase-preparationProcessCost",methods = "doAdd")
     @ResponseBody
     public ResultPojo doAddPreparationProcessCost(@RequestBody PreparationProcessCost preparationProcessCost){
         try{
@@ -77,8 +84,9 @@ public class PreparationProcessCostAction {
      * @param preparationProcessCostQuery
      * @return
      */
-    @RequestMapping(value = "/queryPreparationProcessCostList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-制剂加工费",methods = "条件查询")
+    @SuppressWarnings("unused")
+    @RequestMapping(value = "/queryPreparationProcessCostListTest",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-preparationProcessCost",methods = "query")
     public ModelAndView queryPreparationProcessCostList(@RequestBody PreparationProcessCostQuery preparationProcessCostQuery){
         Result<List<PreparationProcessCost>> result = new Result<List<PreparationProcessCost>>();
         try{

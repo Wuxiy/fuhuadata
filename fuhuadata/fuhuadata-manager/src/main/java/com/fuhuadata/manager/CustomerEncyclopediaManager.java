@@ -29,6 +29,15 @@ public interface CustomerEncyclopediaManager {
      */
     public boolean deleteCustomerEncyclopediaById(int id);
 
+    public CustomerEncyclopedia getCustomerEncyclopediaById(int id);
+
+    /**
+     * 查询不带分页
+     * @param customerEncyclopediaQuery
+     * @return
+     */
+    public List<CustomerEncyclopedia> getCustomerEncyclopediaByQuery(CustomerEncyclopediaQuery customerEncyclopediaQuery);
+
     /**
      * 查询列表，包含分页查询，
      * 查询分页信息，请设置

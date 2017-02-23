@@ -32,6 +32,17 @@
         </dynamic>
     </sql>
 
+    <sql id="QUERY-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotNull prepend=" AND " property="createUserId">
+                create_user_id = #createUserId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="createUserName">
+                create_user_name =#createUserName#
+            </isNotNull>
+        </dynamic>
+    </sql>
+
     <insert id="ADD" parameterClass="ProductProblem">
         INSERT INTO
         k_product_problem(problem_id, product_id, product_type,
@@ -61,6 +72,21 @@
 			DELETE FROM k_product_problem WHERE problem_id=#id#
 		]]>
     </delete>
+
+    <select id="GET-BY-ID" resultMap="PRODUCTPROBLEM-MAP" parameterClass="java.lang.Integer">
+        <![CDATA[
+            SELECT * FROM k_product_problem WHERE problem_id=#id#
+        ]]>
+    </select>
+
+    <select id="GET-BY-QUERY" resultMap="PRODUCTPROBLEM-MAP" parameterClass="ProductProblemQuery">
+        <![CDATA[
+            SELECT * FROM k_product_problem
+        ]]>
+        <isNotParameterPresent>
+            <include refid="QUERY-COMMON"/>
+        </isNotParameterPresent>
+    </select>
 
     <select id="GET-PAGE" resultMap="PRODUCTPROBLEM-MAP" parameterClass="ProductProblemQuery">
         <![CDATA[

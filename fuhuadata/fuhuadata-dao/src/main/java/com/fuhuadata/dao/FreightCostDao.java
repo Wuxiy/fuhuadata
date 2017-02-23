@@ -10,6 +10,7 @@ import java.util.List;
  * Created by intanswer on 2017/1/17.
  */
 public interface FreightCostDao {
+
     /**
      * 新增FreightCost对象，返回FreightCost对象（设置了新生成的id）
      * @param freightCost
@@ -29,6 +30,13 @@ public interface FreightCostDao {
     public int deleteFreightCostById(int id);
 
     /**
+     * 查询不带分页
+     * @param id
+     * @return
+     */
+    public  FreightCost getFreightCostQueryById(int id);
+
+    /**
      * 查询列表，包含分页查询，查询结果为空返回空的List对象
      * 查询分页信息，请设置
      * Query(设置当前页数)
@@ -37,6 +45,8 @@ public interface FreightCostDao {
      * @return
      */
     public List<FreightCost> getFreightCostsByPage(FreightCostQuery freightCostQuery);
+
+    public List<FreightCost> getFreightCostByQuery(FreightCostQuery freightCostQuery);
 
     /**
      * 查询总数

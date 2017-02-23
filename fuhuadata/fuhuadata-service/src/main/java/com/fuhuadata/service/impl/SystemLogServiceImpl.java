@@ -38,6 +38,19 @@ class SystemLogServiceImpl implements SystemLogService{
         return result;
     }
 
+    @Override
+    public Result<List<SystemLog>> getSystemLogByQuery(SystemLogQuery systemLogQuery) {
+        Result<List<SystemLog>> result = new Result<List<SystemLog>>();
+        try {
+            result.addDefaultModel("SystemLogs", systemLogManager.getSystemLogByQuery(systemLogQuery));
+        } catch (Exception e) {
+            result.setSuccess(false);
+            // 打印日志
+            log.error("查询系统监控日志信息错误",e);
+        }
+        return result;
+    }
+
     /**
      * 查询列表，包含分页查询 查询分页信息，请设置 Query(设置当前页数) Query(设置当前页面数据行数)
      * 返回result，通过result.isSuccess()判断服务调用是否成功 通过result.getTotal()返回结果总数

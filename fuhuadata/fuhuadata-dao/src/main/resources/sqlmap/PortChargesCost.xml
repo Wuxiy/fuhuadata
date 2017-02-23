@@ -67,9 +67,23 @@
 
     <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
         <![CDATA[
-			DELETE FROM k_port_charges_cost WHERE id=#id#
+			DELETE FROM k_port_charges_cost WHERE portId=#id#
 		]]>
     </delete>
+
+    <select id="GET-ALL" resultMap="PORTCHARGESCOST-MAP" >
+        <![CDATA[
+			SELECT * FROM fuhua_user_account
+		]]>
+    </select>
+    <select id="GET-BY-QUERY" resultMap="PORTCHARGESCOST-MAP" parameterClass="PortChargesCostQuery">
+        <![CDATA[
+            SELECT * FROM k_port_charges_cost
+        ]]>
+        <isParameterPresent>
+            <include refid="QUERY-COMMON"/>
+        </isParameterPresent>
+    </select>
 
     <select id="GET-PAGE" resultMap="PORTCHARGESCOST-MAP" parameterClass="PortChargesCostQuery">
         <![CDATA[
@@ -79,6 +93,12 @@
             <include refid="PAGE-COMMON"/>
         </isParameterPresent>
         LIMIT #startRow#,#pageSize#
+    </select>
+
+    <select id="GET-BY-ID" resultMap="PORTCHARGESCOST-MAP" parameterClass="java.lang.Integer">
+        <![CDATA[
+			SELECT * FROM k_port_charges_cost WHERE port_id=#id#
+		]]>
     </select>
 
     <select id="COUNT" resultClass="java.lang.Integer" parameterClass="PortChargesCostQuery">

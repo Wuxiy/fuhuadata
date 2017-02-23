@@ -17,6 +17,8 @@ public interface SystemLogManager {
      */
     public SystemLog addSystemLog(SystemLog systemLog);
 
+    public List<SystemLog> getSystemLogByQuery(SystemLogQuery systemLogQuery);
+
     /**
      * 分页查询监控日志列表
      * 查询分页信息，请设置

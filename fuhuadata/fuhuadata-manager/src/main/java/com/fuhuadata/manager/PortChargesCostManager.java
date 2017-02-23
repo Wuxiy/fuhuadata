@@ -4,6 +4,7 @@ import com.fuhuadata.domain.PortChargesCost;
 import com.fuhuadata.domain.query.PortChargesCostQuery;
 import com.fuhuadata.domain.query.Result;
 
+import javax.sound.sampled.Port;
 import java.util.List;
 
 /**
@@ -18,6 +19,16 @@ public interface PortChargesCostManager {
      */
     public PortChargesCost addPortChargesCost(PortChargesCost portChargesCost);
 
+    public PortChargesCost getPortChargesCostById(int id);
+
+    public boolean updatePortChargesCostById(int id,PortChargesCost portChargesCost);
+
+    public boolean deletePortChargesCostById(int id);
+
+    public List<PortChargesCost> getAllPortChargesCosts();
+
+
+    public List<PortChargesCost> getPortChargesCostByQuery(PortChargesCostQuery portChargesCostQuery);
 
     /**
      * Query(设置当前页数)
@@ -35,8 +46,6 @@ public interface PortChargesCostManager {
      * @return
      */
     public int count(PortChargesCostQuery portChargesCostQuery);
-
-
 
 
 }

@@ -17,7 +17,13 @@ public interface MarketTrainingDao {
 
     public int deleteMarketTrainingById(int id);
 
+    public MarketTraining getMarketTrainingById(int id);
+
+    public List<MarketTraining> getAllMarketTrainings();
+
     public List<MarketTraining> getMarketTrainingsByPage(MarketTrainingQuery marketTrainingQuery);
+
+    public List<MarketTraining> getMarketTrainingsByQuery(MarketTrainingQuery marketTrainingQuery);
 
     public int count(MarketTrainingQuery marketTrainingQuery);
 }

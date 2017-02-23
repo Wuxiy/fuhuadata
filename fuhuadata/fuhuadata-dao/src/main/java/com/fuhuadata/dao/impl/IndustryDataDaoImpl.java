@@ -15,11 +15,16 @@ public class IndustryDataDaoImpl extends SqlMapClientTemplate implements Industr
     public static final String ADD="INDUSTRYDATA.ADD";
     public static final String GET_PAGE="INDUSTRYDATA.GET-PAGE";
     public static final String COUNT="INDUSTRYDATA.COUNT";
-
+    public static final String GET_BY_QUERY="INDUSTRYDATA.GET-BY-QUERY";
     @Override
     public IndustryData addIndustryData(IndustryData industryData) {
         industryData.setId((Integer) this.insert(ADD,industryData));
         return industryData;
+    }
+
+    @Override
+    public List<IndustryData> getIndustryDataByQuery(IndustryDataQuery industryDataQuery) {
+        return this.queryForList(GET_BY_QUERY,industryDataQuery);
     }
 
     @Override

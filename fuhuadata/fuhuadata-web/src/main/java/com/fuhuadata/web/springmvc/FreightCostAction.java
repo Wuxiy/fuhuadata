@@ -31,35 +31,42 @@ public class FreightCostAction {
     private FreightCostService freightCostService;
     private Integer pageSize = 10;
     private String page="1";
-    @SuppressWarnings("unused")
+
+    /**
+     * init
+     * @return
+     */
     @RequestMapping(value = "/freightCostList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-运费",methods = "list")
-    public ModelAndView freightCostList(){
+    @SystemLogAnnotation(module = "knowledgeBase-freightCost",methods = "into")
+    public ModelAndView freightCost(){
+        return new ModelAndView("knowledgeBase/freightCostList");
+    }
+
+    @RequestMapping(value = "/queryFreightCostList",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-freightCost",methods = "list")
+    @ResponseBody
+    public ResultPojo freightCostList(){
         Result<List<FreightCost>> result = new Result<List<FreightCost>>();
         try{
             FreightCostQuery freightCostQuery = new FreightCostQuery();
-            freightCostQuery.setPageSize(pageSize);
-            try{
-                freightCostQuery.setIndex(Integer.valueOf(page.trim()));
-            }catch(Exception e){
-                freightCostQuery.setIndex(1);
-            }
             result=freightCostService.getFreightCostsByPage(freightCostQuery);
         }catch(Exception e){
             log.error("获取运费列表错误");
         }
-        ModelAndView model= new ModelAndView("knowledgeBase/freightCostList","freightCostList",result.getModel());
-        model.addObject("message","运费列表");
-        return model;
+       return result.getResultPojo();
     }
+
+    /**
+     * add
+     * @return
+     */
     @RequestMapping(value = "/addFreightCost",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-运费",methods = "add")
+    @SystemLogAnnotation(module = "knowledgeBase-freightCost",methods = "add")
     public ModelAndView addFreightCost(){
         return new ModelAndView("knowledgeBase/addFreightCost");
     }
-
     @RequestMapping(value = "/doAddFreightCost",method = RequestMethod.POST)
-    @SystemLogAnnotation(module = "知识库-运费",methods = "doAdd")
+    @SystemLogAnnotation(module = "knowledgeBase-freightCost",methods = "doAdd")
     @ResponseBody
     public ResultPojo doAddFreightCost(@RequestBody FreightCost freightCost){
         try{
@@ -71,28 +78,5 @@ public class FreightCostAction {
         return null;
     }
 
-    /**
-     * 条件查询
-     * @param freightCostQuery
-     * @return
-     */
-    @RequestMapping(value = "/queryFreightCostList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-运费",methods = "query")
-    public ModelAndView queryFreightCostList(@RequestBody FreightCostQuery freightCostQuery){
-        Result<List<FreightCost>> result = new Result<List<FreightCost>>();
-        try{
-            freightCostQuery.setPageSize(pageSize);
-
-            if(freightCostQuery.getIndex()==0){
-                freightCostQuery.setIndex(Integer.valueOf(page.trim()));
-            }
-            result=freightCostService.getFreightCostsByPage(freightCostQuery);
-        }catch(Exception e){
-            log.error("条件查询运费失败",e);
-        }
-        ModelAndView model=new ModelAndView("knowledgeBase/freightCostList","freightCostList",result.getModel());
-        model.addObject("message","运费列表");
-        return model;
-    }
 
 }

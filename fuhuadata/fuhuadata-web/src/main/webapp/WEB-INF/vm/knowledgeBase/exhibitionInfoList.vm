@@ -1,9 +1,7 @@
 #set($layout="layout/layout.vm")
 <div class="col-xs-12">
     <!--表格开始-->
-
-    <div  class="panel panel-default">
-
+    <div class="panel panel-default">
         <div class="panel-heading">
             <a class="btn btn-xs btn-primary pull-right panel-heading-btn" href="/exhibitionInfo/addExhibitionInfo" data-toggle="modal">
                 <span class="glyphicon glyphicon-plus"></span>
@@ -14,175 +12,71 @@
             </h3>
         </div>
         <div class="panel-body clearfix">
-            <!--搜索框开始-->
-            <div class="form-horizontal">
-                <div class="form-group ">
-                    <div class="col-xs-2 pull-right">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="请输入关键词查找" id="search">
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-primary btn-xs" onclick="test()">
-                                    <span class="glyphicon glyphicon-search"></span>
-                                    搜索
-                                </button>
-                            </div>
-                        </div>
-                    </div>
 
-            <!--搜索框结束-->
             <!--表格开始-->
-            <table id="myTable" class="table table-condensed table-bordered table-striped">
+            <table id="exhibition_table"  class="display table table-condensed table-bordered table-striped" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th class="sorting">编号</th>
-                    <th class="sorting col-xs-2">展会名称</th>
-                    <th class="sorting col-xs-1">主办方</th>
-                    <th class="sorting col-xs-2">承办单位</th>
-                    <th class="sorting">国家</th>
-                    <th class="sorting">城市</th>
-                    <th class="sorting col-xs-1">开始时间</th>
-                    <th class="sorting col-xs-1">结束日期</th>
-                    <th class="col-xs-1">展会地址</th>
-                    <th class="col-xs-2">展会介绍</th>
-                    <th class="col-xs-1">展会介绍连接</th>
+                    <th class="text-center text-middle">编号</th>
+                    <th class="col-xs-2 text-center text-middle" >展会名称</th>
+                    <th class="col-xs-1 text-center text-middle">主办方</th>
+                    <th class="col-xs-2 text-center text-middle">承办单位</th>
+                    <th class="text-center text-middle">国家</th>
+                    <th class="text-center text-middle">城市</th>
+                    <th class="col-xs-1 text-center text-middle">开始时间</th>
+                    <th class="col-xs-1 text-center text-middle">结束日期</th>
+                    <th class="col-xs-1 text-center text-middle">展会地址</th>
+                    <th class="col-xs-2 text-center text-middle">展会介绍</th>
+                    <th class="col-xs-1 text-center text-middle">展会介绍连接</th>
                     <th class="text-center">创建人</th>
-                    <th class="col-xs-1">创建时间</th>
+                    <th class="col-xs-1 text-center text-middle">创建时间</th>
                 </tr>
                 </thead>
-                <tbody id="a">
-                 <table class="table table-condensed table-bordered table-striped text-center">
-                <thead>
-                <tr>
-                    <th class="text-center ">编号</th>
-                    <th class="col-xs-2 text-center">展会名称</th>
-                    <th class="col-xs-1 text-center">主办方</th>
-                    <th class="col-xs-2 text-center">承办单位</th>
-                    <th class="text-center">国家</th>
-                    <th class="text-center">城市</th>
-                    <th class="col-xs-1 text-center">开始时间</th>
-                    <th class="col-xs-1 text-center">结束日期</th>
-                    <th class="col-xs-1 text-center">展会地址</th>
-                    <th class="col-xs-2 text-center">展会介绍</th>
-                    <th class="col-xs-1 text-center">展会介绍连接</th>
-                    <th class="text-center">创建人</th>
-                    <th class="col-xs-1 text-center">创建时间</th>
-                </tr>
-                </thead>
-                <tbody id ="tb">
 
-                <tr>
-                    <td>1</td>
-                    <td>2016全国植保会</td>
-                    <td>全国农业技术推广服务中心</td>
-                    <td>江苏省植物保护站厦门市凤凰创意会展服务有限公司</td>
-                    <td>中国</td>
-                    <td>南京</td>
-                    <td>2016年11月25日</td>
-                    <td>2016年11月27日</td>
-                    <td>南京国际博览中心</td>
-                    <td>吸引来自全国30参展范围涉及农药原药、农药、肥料、植保机械及包装设备等，涵盖整个农化产业上、中、下游产品，是国内参展产品最齐全的大会。</td>
-                    <td><a href="http://www.1988.tv/zhanhui/2016qgzbh/about.html">点击进入</a></td>
-                    <td>刘凯洋</td>
-                    <td>2016-10-12</td>
-                </tr>
-
-                    #foreach($exhibitionInfo in $exhibitionInfoList)
-                <tr>
-                    <td>${exhibitionInfo.exhibitionId}</td>
-                    <td>${exhibitionInfo.exhibitionName}</td>
-                    <td>${exhibitionInfo.sponsor}</td>
-                    <td>${exhibitionInfo.organizer}</td>
-                    <td>${exhibitionInfo.country}</td>
-                    <td>${exhibitionInfo.city}</td>
-                    <td lang="zh">${exhibitionInfo.startDate}</td>
-                    <td lang="zh">${exhibitionInfo.finishDate}</td>
-                    <td>${exhibitionInfo.exhibitionAddr}</td>
-                    <td>${exhibitionInfo.exhibitionInfo}</td>
-                    <td><a href="${exhibitionInfo.exhibitionLink}">点击进入</a></td>
-                    <td>${exhibitionInfo.creator}</td>
-                    <td lang="zh">${exhibitionInfo.createTime}</td>
-                </tr>
-                    #end
-            </tbody>
             </table>
             <!--表格结束-->
             <!--分页导航开始-->
-            #set($page_size = 6)
-
-            <div class="form-group pull-left table-pagination">
-                共<span></span>条记录，<span>130</span>页，跳转到第&nbsp;<input class="form-control pagination-input" type="number"/>&nbsp;页
-                <button class="btn btn-xs btn-primary">确定</button>
-            </div>
-            <ul class="pagination pull-right table-pagination">
-                <li class="disabled"><a href="#">上一页</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">6</a></li>
-                <li><a href="#">7</a></li>
-                <li><a href="">&hellip;</a></li>
-                <li><a href="#">下一页</a></li>
-            </ul>
-            <!--分页导航结束-->
         </div>
     </div>
-    <!--表格结束-->
 </div>
+
 <script type="text/javascript">
-jQuery(document).ready(function () {
-    jQuery("#myTable").DataTable();
-})
-<<<<<<< HEAD
-</script>
-<script type="text/javascript">
+    $(document).ready(function() {
 
-=======
->>>>>>> 3a2ba5dc905c278970e8c02b472bfe2a7e5f832c
-    function test(){
+        $('#exhibition_table').dataTable( {
 
-        var t = document.getElementById("tb");
-        t.innerHTML = '';
-
-        var search = jQuery("#search").val();
-        var data = {
-            "index":"1",
-            "exhibitionName":jQuery("#search").val()
-        }
-
-
-
-
-        jQuery.ajax({
-            type:"GET",
-            url:'queryExhibitionInfoTest',
-            data:data,
-            success:function(data){
-
-                console.log(data.defaultObject);
-                var data = eval(data.defaultObject);
-
-                for(var i = 0;i < data.length;i++){
-                    t.innerHTML += '<tr> ' +
-                            '<td>'+data[i].exhibitionId+'</td>' +
-                            ' <td>'+data[i].exhibitionName+'</td>' +
-                            ' <td>'+data[i].sponsor+'</td>' +
-                            ' <td>'+data[i].organizer+'</td>' +
-                            ' <td>'+data[i].country+'</td>' +
-                            ' <td>'+data[i].city+'</td>' +
-                            ' <td>'+data[i].startDate+'</td>' +
-                            ' <td>'+data[i].finishDate+'</td>' +
-                            ' <td>'+data[i].exhibitionAddr+'</td>' +
-                            ' <td>'+data[i].exhibitionInfo+'</td>' +
-                            ' <td><a href=\"'+data[i].exhibitionLink+'\">点击进入</a></td>' +
-                            ' <td>'+data[i].creator+'</td>' +
-                            ' <td>'+data[i].createTime+'</td> </tr>';
+            "ajax":'/exhibitionInfo/queryExhibitionInfoList',
+            "pagingType":"full_numbers",
+            "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
+            "columns":[
+                {"data":"exhibitionId"},
+                {"data":"exhibitionName"},
+                {"data":"sponsor"},
+                {"data":"organizer"},
+                {"data":"country"},
+                {"data":"city"},
+                {"data":"startDate"},
+                {"data":"finishDate"},
+                {"data":"exhibitionAddr"},
+                {"data":"exhibitionInfo"},
+                {"data":"exhibitionLink"},
+                {"data":"creator"},
+                {"data":"createTime"}
+            ],
+            "columnDefs":[
+                {
+                    "targets": 10,
+                    "render": function(data,type,row,meta){
+                        return '<a href="' + data + '" target="_blank">' + row.exhibitionLink + '</a>';
+                    }
                 }
-        }
-    })
+            ],
+            "language": {
+                "url": '/lib/dataTables/lang/dataTables.lang.zh',
+                "searchPlaceholder": '关键字'
+            }
+        } );
+    } );
 
-    }
 
 </script>
-

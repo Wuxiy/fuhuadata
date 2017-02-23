@@ -22,6 +22,10 @@ public interface PreparationProcessCostService {
     public Result updatePreparationProcessCost(int id, PreparationProcessCost preparationProcessCost);
 
     public Result deletePreparationProcessCost(int id);
+
+    public Result<PreparationProcessCost> getPreparationProcessCostById(int id);
+
+    public Result<List<PreparationProcessCost>> getPreparationProcessCostByQuery(PreparationProcessCostQuery preparationProcessCostQuery);
     /**
      * 查询列表，包含分页查询
      * 查询分页信息，请设置

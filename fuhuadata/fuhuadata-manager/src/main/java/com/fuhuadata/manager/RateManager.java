@@ -15,9 +15,15 @@ public interface RateManager {
 
     public Rate addRate(Rate rate);
 
+    public Rate getRateById(int id);
+
     public boolean updateRateById(int id,Rate rate);
 
     public boolean deleteRateById(int id);
+
+    public List<Rate> getAllRate();
+
+    public List<Rate> getRateByQuery(RateQuery rateQuery);
 
     public Result<List<Rate>> getRatesByPage(RateQuery rateQuery);
 

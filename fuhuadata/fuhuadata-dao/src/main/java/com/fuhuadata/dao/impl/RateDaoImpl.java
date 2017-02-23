@@ -18,6 +18,8 @@ public class RateDaoImpl extends SqlMapClientTemplate implements RateDao{
     public static final String DELETE_BY_ID = "RATE.DELETE_BY_ID";
     public static final String GET_PAGE = "RATE.GET_PAGE";
     public static final String COUNT = "RATE.COUNT";
+    public static final String GET_BY_ID="RATE.GET-BY-ID";
+    public static final String GET_BY_QUERY="RATE.GET-BY-QUERY";
 
     @Override
     public Rate addRate(Rate rate){
@@ -34,6 +36,16 @@ public class RateDaoImpl extends SqlMapClientTemplate implements RateDao{
     @Override
     public int deleteRateById(int id){
         return this.delete(DELETE_BY_ID,id);
+    }
+
+    @Override
+    public Rate getRateById(int id) {
+        return (Rate)this.queryForObject(GET_BY_ID,id);
+    }
+
+    @Override
+    public List<Rate> getRateByQuery(RateQuery rateQuery) {
+        return this.queryForList(GET_BY_QUERY,rateQuery);
     }
 
     @Override
