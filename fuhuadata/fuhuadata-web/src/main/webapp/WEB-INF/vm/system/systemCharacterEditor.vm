@@ -1,0 +1,65 @@
+<!--副导航-->
+<div class="nav-deputy shadow-out clearfix">
+	<ul class="breadcrumb pull-right">
+		<li><span class="glyphicon glyphicon-map-marker"></span></li>
+		<li><a href="" lang="zh">系统管理</a></li>
+		<li><a href="" lang="zh">权限设置</a></li>
+		<li class="active" lang="zh">菜单权限编辑</li>
+	</ul>
+</div>
+<!--表格容器-->
+<div class="dashboard-wrapper">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title" lang="zh">菜单权限编辑表</h3>
+		</div>
+		<div class="panel-body">
+			<table class="table table-condensed table-bordered">
+				<thead>
+					<tr>
+						<th lang="zh"><input type="checkbox"value="" /></th>
+						<th class="col-xs-2" lang="zh">编号</th>
+						<th class="col-xs-4" lang="zh">菜单</th>
+						<th class="col-xs-6" lang="zh">功能权限</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td lang="zh"><input type="checkbox"value="" /></td>
+						<td>100010</td>
+						<td data-toggle="collapse" data-target="#sellMenu" lang="zh">销售统计</td>
+						<td>
+							<label class="checkbox-inline"><input type="checkbox" value="" />新增</label>
+							<label class="checkbox-inline"><input type="checkbox" value="" />修改</label>
+							<label class="checkbox-inline"><input type="checkbox" value="" />删除</label>
+						</td>
+					</tr>
+				</tbody>
+				<tbody id="sellMenu" class="collapse">
+					<tr>
+						<td lang="zh"><input type="checkbox"value="" /></td>
+						<td>1000101</td>
+						<td lang="zh">商机</td>
+						<td>
+							<label class="checkbox-inline"><input type="checkbox" value="" />新增</label>
+							<label class="checkbox-inline"><input type="checkbox" value="" />修改</label>
+							<label class="checkbox-inline"><input type="checkbox" value="" />删除</label>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td lang="zh"><input type="checkbox"value="" /></td>
+						<td>1000101</td>
+						<td lang="zh">销售动态</td>
+						<td>
+							<label class="checkbox-inline"><input type="checkbox" value="" />新增</label>
+							<label class="checkbox-inline"><input type="checkbox" value="" />修改</label>
+							<label class="checkbox-inline"><input type="checkbox" value="" />删除</label>
+						</td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

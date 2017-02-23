@@ -27,20 +27,7 @@
     #parse("layout/header.vm")
     <!--主要内容-->
     <div class="clearfix content shadow-out">
-        <!--面包屑导航-->
-        <div class="breadcrumb-more">
-            <span class="breadcrumb-unit pull-left" lang="zh">当前位置</span>
-            <ul class="breadcrumb shadow-out">
-                <li><a href="" lang="zh">客户信息</a></li>
-                <li class="active" lang="zh">Anna</li>
-            </ul>
-        </div>
-        <!--容器-->
-        <div class="dashboard-wrapper">
-            <div class="row">
-                $screen_content
-            </div>
-        </div>
+        $screen_content
     </div>
 </div>
     <!--脚部-->
