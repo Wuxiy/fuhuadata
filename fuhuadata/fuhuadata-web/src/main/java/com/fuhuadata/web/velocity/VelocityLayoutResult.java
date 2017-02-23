@@ -46,7 +46,7 @@ public class VelocityLayoutResult extends VelocityResult {
 	private Map<String, Object> velocityTools;
 	private Map<String, FuhuaUrl> velocityUrl;
 
-	
+
 	private void mergeContext(Context context) {
 		mergeUrl(context, velocityUrl);
 		merge(context, velocityTools);
@@ -66,7 +66,7 @@ public class VelocityLayoutResult extends VelocityResult {
 				String key = stringJdUrlEntry.getKey();
 				FuhuaUrl org = stringJdUrlEntry.getValue();
 				FuhuaUrl value = org.clone();
-				value.setFuhuaUrl(org); 
+				value.setFuhuaUrl(org);
 				context.put(key, value);
 			}
 		}
@@ -77,7 +77,7 @@ public class VelocityLayoutResult extends VelocityResult {
 		try {
 			doIt(finalLocation, invocation, null);
 		} catch (Exception e) {
-			
+
 			doIt(errorTemplate, invocation, e);
 		}
 	}
@@ -108,7 +108,7 @@ public class VelocityLayoutResult extends VelocityResult {
 				return;
 			}
 			Template t = getTemplate(stack, velocityManager.getVelocityEngine(), invocation, finalLocation, encoding);
-			
+
 			if (t != null) {
 				log.debug("vm.name==============" + t.getName());
 			}
@@ -120,7 +120,7 @@ public class VelocityLayoutResult extends VelocityResult {
 			StringWriter stringWriter = new StringWriter();
 			if(t!=null)
 				t.merge(context, stringWriter);
-			
+
 			context.put(KEY_SCREEN_CONTENT, stringWriter.toString());
 			Object obj = context.get(KEY_LAYOUT);
 			String layout = (obj == null) ? null : obj.toString();

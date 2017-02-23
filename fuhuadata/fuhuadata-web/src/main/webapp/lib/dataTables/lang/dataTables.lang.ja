@@ -1,0 +1,21 @@
+{
+  "emptyTable": "<div class=\"cmn_warning tip\"><img src=\"/stylesheet/nsfocus_2014/images/blank.gif\" class=\"ico\">データがありません</div>",
+  "loadingRecords": "処理中",
+  "processing": "処理中",
+  "lengthMenu": "_MENU_ /ページ",
+  "zeroRecords": "<div class=\"cmn_warning tip\"><img src=\"/stylesheet/nsfocus_2014/images/blank.gif\" class=\"ico\">データがありません</div>",
+  "loadingRecords": "処理中",
+  "info": "合計_TOTAL_レコード",
+  "infoEmpty": "合計0レコード",
+  "infoFiltered": "(_MAX_から選択)",
+  "infoPostFix": "",
+  "infoPages": "_CUR_/_MENU_ ページ",
+  "jumpToPage": "移動",
+  "search": "検索",
+  "paginate": {
+    "first": "ホーム",
+    "previous": "前のページ",
+    "next": "次へのページ",
+    "last": "ラスト"
+  }
+}

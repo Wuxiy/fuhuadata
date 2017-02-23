@@ -34,7 +34,7 @@ public class LoginAction {
             UserAccount userAccount=new UserAccount();
             userAccount.setAccount("fuhua");
             userAccount.setPassword("123");
-            result.setDefaultObject(userAccount);
+            result.setData(userAccount);
             Cookie cookie=new Cookie("loggedIn",System.currentTimeMillis()+"|"+account);
             cookie.setPath("/");
             response.addCookie(cookie);

@@ -32,7 +32,7 @@ public class KnowledgeBaseAction {
      * @return
      */
     @RequestMapping(value="/productProblem",method=RequestMethod.GET)
-    public ModelAndView productQuestionList(){return new ModelAndView("knowledgeBase/productProblem");}
+    public ModelAndView productQuestionList(){return new ModelAndView("knowledgeBase/productProblemList");}
 
     /**
      * 营销培训列表
@@ -41,7 +41,7 @@ public class KnowledgeBaseAction {
     @RequestMapping(value="/marketTrainingList",method=RequestMethod.GET)
     public ModelAndView marketTrainList(){return new ModelAndView("knowledgeBase/marketTrainingList");}
 
-    /**阿姨
+    /**
      * 客户产品包装要求列表
      * @return
      */

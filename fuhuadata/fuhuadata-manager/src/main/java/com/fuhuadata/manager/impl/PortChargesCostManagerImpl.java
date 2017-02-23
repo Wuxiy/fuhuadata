@@ -23,6 +23,31 @@ public class PortChargesCostManagerImpl implements PortChargesCostManager{
     }
 
     @Override
+    public PortChargesCost getPortChargesCostById(int id) {
+        return portChargesCostDao.getPortChargesCostById(id);
+    }
+
+    @Override
+    public boolean updatePortChargesCostById(int id, PortChargesCost portChargesCost) {
+        return portChargesCostDao.updatePortChargesCostById(id,portChargesCost)==1 ?true:false;
+    }
+
+    @Override
+    public boolean deletePortChargesCostById(int id) {
+        return portChargesCostDao.deletePortChargesCostById(id) ==1 ? true : false;
+    }
+
+    @Override
+    public List<PortChargesCost> getAllPortChargesCosts() {
+        return portChargesCostDao.getAllortChargesCosts();
+    }
+
+    @Override
+    public List<PortChargesCost> getPortChargesCostByQuery(PortChargesCostQuery portChargesCostQuery) {
+        return portChargesCostDao.getPortChargesCostByQuery(portChargesCostQuery);
+    }
+
+    @Override
     public Result<List<PortChargesCost>> getPortChargesCostsByPage(PortChargesCostQuery portChargesCostQuery) {
         Result<List<PortChargesCost>> result = new Result<List<PortChargesCost>>();
         int totalItem = portChargesCostDao.count(portChargesCostQuery);

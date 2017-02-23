@@ -16,6 +16,7 @@ public class SystemLogDaoImpl extends SqlMapClientTemplate implements SystemLogD
     public static final String ADD = "SYSTEMLOG.ADD";
     public static final String GET_PAGE="SYSTEMLOG.GET-PAGE";
     public static final String COUNT = "SYSTEMLOG.COUNT";
+    public static final String GET_BY_QUERY="SYSTEMLOG.GET-BY-QUERY";
 
     /**
      * 新增systemLog,返回systemLog对象（设置了新生成id）
@@ -26,6 +27,11 @@ public class SystemLogDaoImpl extends SqlMapClientTemplate implements SystemLogD
     public SystemLog addSystemLog(SystemLog systemLog) {
         systemLog.setLogId((Integer) this.insert(ADD,systemLog));
         return systemLog;
+    }
+
+    @Override
+    public List<SystemLog> getSystemLogByQuery(SystemLogQuery systemLogQuery) {
+        return this.queryForList(GET_BY_QUERY,systemLogQuery);
     }
 
     /**

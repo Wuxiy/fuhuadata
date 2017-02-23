@@ -247,6 +247,14 @@
                 <version>2.2</version>
             </dependency>
             <!-- aspectj end -->
+            <!--joda-->
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>1.6.2</version>
+            </dependency>
+            <!--joda end-->
+
             <dependency>
                 <groupId>net.sf.json-lib</groupId>
                 <artifactId>json-lib</artifactId>
@@ -263,6 +271,12 @@
                 <groupId>org.apache.velocity</groupId>
                 <artifactId>velocity</artifactId>
                 <version>1.6.3</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-digester</groupId>
+                <artifactId>commons-digester</artifactId>
+                <version>2.1</version>
             </dependency>
             <!-- velocity end -->
 
@@ -437,7 +451,7 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <verbose>true</verbose>  
                     <fork>true</fork>  
-                    <executable>${JAVA8_HOME}</executable>  
+                    <executable>${JAVA8_HOME}</executable>
                 </configuration>
             </plugin>
             <plugin>

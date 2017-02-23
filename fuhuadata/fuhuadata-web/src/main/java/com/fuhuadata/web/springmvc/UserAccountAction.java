@@ -59,6 +59,7 @@ public class UserAccountAction{
 			log.error("获取用户列表错误",e);
 		}
 		ModelAndView model = new ModelAndView("userAccount/userAccountList","userAccountList",result.getModel());
+		model.addObject("defaultObject",result.getResultPojo());
 		model.addObject("message","测试数据");
 		return model;
     }
@@ -165,7 +166,7 @@ public class UserAccountAction{
 	
 	/**
 	 * 获取json返回值
-	 * @param userAccount的json格式数据
+	 * @param
 	 * @return
 	 */
 	@RequestMapping(value="/getUserAccountJsonParam")

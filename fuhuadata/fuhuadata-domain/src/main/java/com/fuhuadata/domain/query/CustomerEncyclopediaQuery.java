@@ -2,7 +2,7 @@ package com.fuhuadata.domain.query;
 
 import com.fuhuadata.domain.query.PageBase;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * 客户百科信息
@@ -12,6 +12,8 @@ public class CustomerEncyclopediaQuery extends PageBase {
     private Integer encyId;//百科编号
 
     private String companyName;//企业全称
+
+    private String companyAbbreviation;//企业简称
 
     private String type;//企业类型
 
@@ -189,5 +191,13 @@ public class CustomerEncyclopediaQuery extends PageBase {
 
     public void setSearchKey(String searchKey) {
         this.searchKey = searchKey;
+    }
+
+    public String getCompanyAbbreviation() {
+        return companyAbbreviation;
+    }
+
+    public void setCompanyAbbreviation(String companyAbbreviation) {
+        this.companyAbbreviation = companyAbbreviation;
     }
 }

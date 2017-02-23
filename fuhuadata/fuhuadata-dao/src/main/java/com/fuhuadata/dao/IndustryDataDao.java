@@ -15,6 +15,8 @@ public interface IndustryDataDao {
 
     //public int updateIndustryDataById(int id,IndustryData industryData);
 
+    public List<IndustryData> getIndustryDataByQuery(IndustryDataQuery industryDataQuery);
+
     public List<IndustryData> getIndustryDatasByPage(IndustryDataQuery industryDataQuery);
 
     public int count(IndustryDataQuery industryDataQuery);

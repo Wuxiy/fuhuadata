@@ -58,38 +58,11 @@
             <isNotNull prepend=" AND " property="id">
                 id = #id#
             </isNotNull>
-            <isNotNull prepend=" AND " property="year" >
-                year = #year#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="exportContinent">
-                export_continent = #exportContinent#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="exportCountry">
-                export_country = #exportCountry#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="businessName">
-                business_name = #businessName#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="exportGross">
-                export_gross = #exportGross#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="saleTotal">
-                sale_total = #saleTotal#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="average">
-                average = #average#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="month">
-                month= #month#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="exportShare">
-                export_share = #exportShare#
-            </isNotNull>
         </dynamic>
     </sql>
 
     <insert id="ADD" parameterClass="IndustryData">
-        INSERT INTO industry_data (id, year, business_name,
+        INSERT INTO d_industry_data (id, year, business_name,
         export_continent, export_gross, sale_total,
         export_country, average, month,
         export_share)
@@ -103,7 +76,7 @@
     </insert>
 
     <update id="UPDATE" parameterClass="IndustryData">
-        UPDATE industry_data
+        UPDATE d_industry_data
         <dynamic prepend=" SET ">
             <isNotNull prepend=", " property="year" >
                 year = #year#
@@ -138,13 +111,28 @@
 
     <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
         <![CDATA[
-			DELETE FROM industry_data WHERE id=#id#
+			DELETE FROM d_industry_data WHERE id=#id#
 		]]>
     </delete>
 
+    <select id="GET-BY-QUERY" resultMap="INDUSTRYDATA-MAP" parameterClass="IndustryDataQuery">
+        <![CDATA[
+            SELECT * FROM d_industry_data
+        ]]>
+        <isParameterPresent>
+            <include refid="QUERY-COMMON"/>
+        </isParameterPresent>
+    </select>
+
+    <select id="GET-BY-ID" resultMap="INDUSTRYDATA-MAP" parameterClass="java.lang.Integer">
+        <![CDATA[
+            SELECT * FROM d_industry_data WHERE
+        ]]>
+    </select>
+
     <select id="GET-PAGE" resultMap="INDUSTRYDATA-MAP" parameterClass="IndustryDataQuery">
         <![CDATA[
-            SELECT * FROM industry_data
+            SELECT * FROM d_industry_data
         ]]>
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>
@@ -154,7 +142,7 @@
 
     <select id="COUNT" resultClass="java.lang.Integer" parameterClass="IndustryDataQuery">
         <![CDATA[
-            SELECT COUNT(id) FROM industry_data
+            SELECT COUNT(id) FROM d_industry_data
         ]]>
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>

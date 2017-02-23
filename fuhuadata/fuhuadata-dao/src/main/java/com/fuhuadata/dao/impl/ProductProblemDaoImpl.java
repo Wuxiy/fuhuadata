@@ -17,6 +17,8 @@ public class ProductProblemDaoImpl extends SqlMapClientTemplate implements Produ
     public static final String DELETE_BY_ID= "PRODUCTPROBLEM.DELETE-BY-ID";
     public static final String GET_PAGE = "PRODUCTPROBLEM.GET-PAGE";
     public static final String COUNT = "PRODUCTPROBLEM.COUNT";
+    public static final String GET_BY_ID="PRODUCTPROBLEM.GET-BY-ID";
+    public static final String GET_BY_QUERY="PRODUCTPROBLEM.GET-BY-QUERY";
 
     /**
      * 返回productProblem对象，设置了新生成的id
@@ -41,8 +43,19 @@ public class ProductProblemDaoImpl extends SqlMapClientTemplate implements Produ
     }
 
     @Override
+    public ProductProblem getProductProblemById(int id) {
+        return (ProductProblem)this.queryForObject(GET_BY_ID,id);
+    }
+
+    @Override
+    public List<ProductProblem> getProductProblemByQuery(ProductProblemQuery productProblemQuery) {
+        return this.queryForList(GET_BY_QUERY,productProblemQuery);
+    }
+
+    @Override
     public List<ProductProblem> getProductProblemsByPage(ProductProblemQuery productProblemQuery) {
-        return this.queryForList(GET_PAGE,productProblemQuery);
+        List<ProductProblem> list=this.queryForList(GET_PAGE,productProblemQuery);
+        return list;
     }
 
     @Override

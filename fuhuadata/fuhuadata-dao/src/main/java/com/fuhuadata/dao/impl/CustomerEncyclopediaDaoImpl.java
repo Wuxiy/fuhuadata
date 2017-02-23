@@ -17,6 +17,8 @@ public class CustomerEncyclopediaDaoImpl extends SqlMapClientTemplate implements
     public static final String DELETE = "CUSTOMERENCYCLOPEDIA.DELETE-BY-ID";
     public static final String GET_PAGE = "CUSTOMERENCYCLOPEDIA.GET-PAGE";
     public static final String COUNT = "CUSTOMERENCYCLOPEDIA.COUNT";
+    public static final String GET_BY_ID="CUSTOMERENCYCLOPEDIA.GET-BY-ID";
+    public static final String GET_BY_QUERY="CUSTOMERENCYCLOPEDIA.GET-BY-QUERY";
     @Override
     public CustomerEncyclopedia addCustomerEncyclopedia(CustomerEncyclopedia customerEncyclopedia) {
         customerEncyclopedia.setEncyId((Integer) this.insert(ADD,customerEncyclopedia));
@@ -32,6 +34,16 @@ public class CustomerEncyclopediaDaoImpl extends SqlMapClientTemplate implements
     @Override
     public int deleteCustomerEncyclopediaById(int id) {
         return this.delete(DELETE,id);
+    }
+
+    @Override
+    public CustomerEncyclopedia getCustomerEncyclopediaById(int id) {
+        return (CustomerEncyclopedia) this.queryForObject(GET_BY_ID,id);
+    }
+
+    @Override
+    public List<CustomerEncyclopedia> getCustomerEncyclopediaByQuery(CustomerEncyclopediaQuery customerEncyclopediaQuery) {
+        return this.queryForList(GET_BY_QUERY,customerEncyclopediaQuery);
     }
 
     @Override

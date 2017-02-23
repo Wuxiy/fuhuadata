@@ -31,6 +31,11 @@ public class FreightCostManagerImpl implements FreightCostManager{
     }
 
     @Override
+    public FreightCost getFreightCostById(int id) {
+        return freightCostDao.getFreightCostQueryById(id);
+    }
+
+    @Override
     public Result<List<FreightCost>> getFreightCostsByPage(FreightCostQuery freightCostQuery) {
         Result<List<FreightCost>> result = new Result<List<FreightCost>>();
         int totalItem = freightCostDao.count(freightCostQuery);
@@ -45,6 +50,11 @@ public class FreightCostManagerImpl implements FreightCostManager{
         result.setIndex(freightCostQuery.getIndex());
         result.setTotalItem(totalItem);
         return result;
+    }
+
+    @Override
+    public List<FreightCost> getFreightCostsByQuery(FreightCostQuery freightCostQuery) {
+        return freightCostDao.getFreightCostByQuery(freightCostQuery);
     }
 
     @Override

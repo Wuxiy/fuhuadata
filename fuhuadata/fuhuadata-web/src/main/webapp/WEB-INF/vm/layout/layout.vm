@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CRM系统</title>
+    <link rel="stylesheet" type="text/css" href="/lib/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/lib/dataTables/dataTables.bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/lib/dataTables/jquery.dataTables.min.css"/>
+    <script src="/lib/js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/lib/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/lib/dataTables/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="/lib/dataTables/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" language="javascript" src="/lib/dataTables/dataTables.bootstrap.min.js"></script>
+    <script src="/lib/js/jquery-lang.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/lib/js/js.cookie.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        var lang = new Lang();
+        lang.init({
+            defaultLang: 'zh'
+        });
+    </script>
+</head>
+<body class="bg-page">
+<div class="container-fluid">
+    <!--头部-->
+    #parse("layout/header.vm")
+    <!--主要内容-->
+    <div class="clearfix content shadow-out">
+        <!--面包屑导航-->
+        <div class="breadcrumb-more">
+            <span class="breadcrumb-unit pull-left" lang="zh">当前位置</span>
+            <ul class="breadcrumb shadow-out">
+                <li><a href="" lang="zh">客户信息</a></li>
+                <li class="active" lang="zh">Anna</li>
+            </ul>
+        </div>
+        <!--容器-->
+        <div class="dashboard-wrapper">
+            <div class="row">
+                $screen_content
+            </div>
+        </div>
+    </div>
+</div>
+    <!--脚部-->
+    #parse('layout/footer.vm')
+</body>
+</html>
+

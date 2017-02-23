@@ -12,8 +12,8 @@
         <result column="region" property="region" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="country" property="country" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="city" property="city" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="start_date" property="startDate" jdbcType="DATETIME" javaType="java.sql.Timestamp"/>
-        <result column="finish_date" property="finishDate" jdbcType="DATETIME" javaType="java.sql.Timestamp"/>
+            <result column="start_date" property="startDate" jdbcType="DATE" javaType="java.sql.Date"/>
+        <result column="finish_date" property="finishDate" jdbcType="DATE" javaType="java.sql.Date"/>
         <result column="exhibition_addr" property="exhibitionAddr" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="exhibition_link" property="exhibitionLink" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="exhibitionInfo" column="exhibition_info" jdbcType="VARCHAR" javaType="java.lang.String"/>
@@ -31,6 +31,35 @@
             <isNotNull prepend=" AND " property="city">
                 city = #city#
             </isNotNull>
+            <isNotNull prepend=" AND " property="startDate">
+                start_date = #startDate#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="finishDate">
+                finish_date = #finishDate#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="searchKey">
+                name like concat('%',#searchKey#,'%')
+            </isNotNull>
+        </dynamic>
+    </sql>
+
+    <sql id="QUERY-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotNull prepend=" AND " property="exhibitionName">
+                exhibition_name like concat('%',#exhibitionName#,'%')
+            </isNotNull>
+            <isNotNull prepend=" AND " property="country">
+                country = #country#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="city">
+                city = #city#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="startDate">
+                start_date = #startDate#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="finishDate">
+                finish_date = #finishDate#
+            </isNotNull>
             <isNotNull prepend=" AND " property="searchKey">
                 name like concat('%',#searchKey#,'%')
             </isNotNull>
@@ -38,7 +67,7 @@
     </sql>
 
     <insert id="ADD" parameterClass="ExhibitionInfo">
-        insert into exhibition_info (exhibition_id, exhibition_name, sponsor,
+        insert into k_exhibition_info (exhibition_id, exhibition_name, sponsor,
         organizer, region, country,
         city, start_date, finish_date,
         exhibition_addr, exhibition_link, creator,
@@ -53,9 +82,81 @@
         </selectKey>
     </insert>
 
+    <update id="UPDATE" parameterClass="ExhibitionInfo">
+        UPDATE k_exhibition_info
+        <dynamic prepend=" SET ">
+            <isNotNull prepend=", " property="exhibitionName">
+                exhibition_name = #exhibitionName#
+            </isNotNull>
+            <isNotNull prepend=", " property="sponsor">
+                sponsor = #sponsor#
+            </isNotNull>
+            <isNotNull prepend=", " property="organizer">
+                organizer = #organizer#
+            </isNotNull>
+            <isNotNull prepend=", " property="region">
+                region =#region#
+            </isNotNull>
+            <isNotNull prepend=", " property="country">
+                country = #country#
+            </isNotNull>
+            <isNotNull prepend=", " property="city">
+                city = #city#
+            </isNotNull>
+            <isNotNull prepend=", " property="startDate">
+                start_date = #startDate#
+            </isNotNull>
+            <isNotNull prepend=", " property="finishDate">
+                finish_date = #finishDate#
+            </isNotNull>
+            <isNotNull prepend=", " property="exhibitionAddr">
+                exhibition_addr = #exhibitionAddr#
+            </isNotNull>
+            <isNotNull prepend=", " property="exhibitionLink">
+                exhibition_link  = #exhibitionLink#
+            </isNotNull>
+            <isNotNull prepend=", " property="creator">
+                creator = #creator#
+            </isNotNull>
+            <isNotNull prepend=", " property="createTime">
+                create_time = #createTime#
+            </isNotNull>
+            <isNotNull prepend=", " property="exhibitionInfo">
+                exhibition_info = #exhibitionInfo#
+            </isNotNull>
+        </dynamic>
+    </update>
+
+    <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
+        <![CDATA[
+            DELETE FROM k_exhibition_info WHERE exhibition_id = #exhibitionId#
+        ]]>
+    </delete>
+
+    <select id="GET-ALL" resultMap="EXHIBITIONINFO-MAP">
+        <![CDATA[
+            SELECT * FROM k_exhibition_info
+        ]]>
+    </select>
+
+    <select id="GET-BY-QUERY" resultMap="EXHIBITIONINFO-MAP" parameterClass="ExhibitionInfoQuery">
+        <![CDATA[
+            SELECT * FROM k_exhibition_info
+        ]]>
+        <isParameterPresent>
+            <include refid="QUERY-COMMON"/>
+        </isParameterPresent>
+    </select>
+
+    <select id="GET-BY-ID" resultMap="EXHIBITIONINFO-MAP" parameterClass="java.lang.Integer">
+        <![CDATA[
+            SELECT * FROM k_exhibition_info WHERE exhibition_id = #exhibitionId#
+        ]]>
+    </select>
+
     <select id="GET-PAGE" resultMap="EXHIBITIONINFO-MAP" parameterClass="ExhibitionInfoQuery">
         <![CDATA[
-        SELECT * FROM exhibition_info
+        SELECT * FROM k_exhibition_info
         ]]>
         <isParameterPresent>
         <include refid="PAGE-COMMON"/>
@@ -65,7 +166,7 @@
 
     <select id="COUNT" resultClass="java.lang.Integer" parameterClass="ExhibitionInfoQuery">
         <![CDATA[
-        SELECT COUNT(*) FROM exhibition_info
+        SELECT COUNT(*) FROM k_exhibition_info
         ]]>
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>

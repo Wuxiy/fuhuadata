@@ -1,13 +1,19 @@
 package com.fuhuadata.domain;
 
+import com.fuhuadata.util.DateJsonDeserializer;
+import com.fuhuadata.util.DateJsonSerializer;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import java.util.Date;
+
 
 /**
  * 展会动态
  * Created by intanswer on 2017/1/13.
  */
-public class ExhibitionInfo {
+@SuppressWarnings("serial")
+public class ExhibitionInfo{
     private Integer exhibitionId;//展会id
 
     private String exhibitionName;
@@ -132,10 +138,12 @@ public class ExhibitionInfo {
         this.creator = creator;
     }
 
+    @JsonSerialize(using= DateJsonSerializer.class)
     public Date getCreateTime() {
         return createTime;
     }
 
+    @JsonDeserialize(using=DateJsonDeserializer.class)
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }

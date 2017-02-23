@@ -32,9 +32,20 @@
         </dynamic>
     </sql>
 
+    <sql id="QUERY-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotNull prepend=" AND " property="createUserId">
+                create_user_id = #createUserId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="createUserName">
+                create_user_name =#createUserName#
+            </isNotNull>
+        </dynamic>
+    </sql>
+
     <insert id="ADD" parameterClass="ProductProblem">
-        InSERT INTO
-        product_problem(problem_id, product_id, product_type,
+        INSERT INTO
+        k_product_problem(problem_id, product_id, product_type,
         problem_content, solution, create_user_id,
         create_user_name, create_time, remarks
         )
@@ -48,7 +59,7 @@
     </insert>
 
     <update id="UPDATE" parameterClass="ProductProblem">
-        UPDATE product_problem
+        UPDATE k_product_problem
         <dynamic prepend=" SET ">
             <isNotNull prepend=", " property="solution">solution = #solution#</isNotNull>
             <isNotNull prepend=", " property="remarks">remarks = #remarks#</isNotNull>
@@ -58,13 +69,28 @@
 
     <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
         <![CDATA[
-			DELETE FROM product_problem WHERE problem_id=#id#
+			DELETE FROM k_product_problem WHERE problem_id=#id#
 		]]>
     </delete>
 
+    <select id="GET-BY-ID" resultMap="PRODUCTPROBLEM-MAP" parameterClass="java.lang.Integer">
+        <![CDATA[
+            SELECT * FROM k_product_problem WHERE problem_id=#id#
+        ]]>
+    </select>
+
+    <select id="GET-BY-QUERY" resultMap="PRODUCTPROBLEM-MAP" parameterClass="ProductProblemQuery">
+        <![CDATA[
+            SELECT * FROM k_product_problem
+        ]]>
+        <isNotParameterPresent>
+            <include refid="QUERY-COMMON"/>
+        </isNotParameterPresent>
+    </select>
+
     <select id="GET-PAGE" resultMap="PRODUCTPROBLEM-MAP" parameterClass="ProductProblemQuery">
         <![CDATA[
-			SELECT * FROM product_problem
+			SELECT * FROM k_product_problem
 		]]>
         <isParameterPresent>
             <include refid="PAGE-COMMON" />
@@ -74,7 +100,7 @@
 
     <select id="COUNT" resultClass="java.lang.Integer" parameterClass="ProductProblemQuery">
         <![CDATA[
-        SELECT COUNT(*) FROM product_problem
+        SELECT COUNT(*) FROM k_product_problem
         ]]>
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>

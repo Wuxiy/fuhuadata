@@ -16,7 +16,9 @@ public class MarketTraining {
 
     private String productType;//产品类型
 
-    private String userId;//用户id
+    private Integer userId;//用户id
+
+    private String userName;//用户姓名
 
     private Date uploadDate;//上传日期
 
@@ -54,11 +56,11 @@ public class MarketTraining {
         this.productType = productType;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 

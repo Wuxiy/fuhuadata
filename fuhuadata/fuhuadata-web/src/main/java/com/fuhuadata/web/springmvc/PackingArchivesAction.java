@@ -6,8 +6,6 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.PackingArchivesService;
 import com.fuhuadata.web.util.SystemLogAnnotation;
-import com.sun.xml.internal.bind.InternalAccessorFactory;
-import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
@@ -21,7 +19,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 包材档案action
+ * 包材成本档案action
  * Created by intanswer on 2017/1/24.
  */
 @Controller
@@ -32,40 +30,40 @@ public class PackingArchivesAction {
     private PackingArchivesService packingArchivesService;
     private Integer pageSize = 10;
     private String page="1";
-    @SuppressWarnings("unused")
+
     @RequestMapping(value = "/packingArchivesList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-包材档案",methods = "档案列表")
-    public ModelAndView packingArchivesList(){
-        Result<List<PackingArchives>> result = new Result<List<PackingArchives>>();
-        try{
-            PackingArchivesQuery query = new PackingArchivesQuery();
-            query.setPageSize(pageSize);
-            try{
-                query.setIndex(Integer.valueOf(page.trim()));
-            }catch(Exception e){
-                query.setIndex(1);
-            }
-            result=packingArchivesService.getPackingArchivesByPage(query);
-        }catch(Exception e){
-            log.error("获取包材档案列表错误");
-        }
-        ModelAndView model= new ModelAndView("knowledgeBase/packingArchivesList","packingArchivesList",result.getModel());
-        model.addObject("message","包材档案列表");
-        return model;
+    @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "into")
+    public ModelAndView packingArchives(){
+        return new ModelAndView("knowledgeBase/packingCostList");
     }
+
+    @RequestMapping(value = "/queryPackingArchivesList",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase/packingCostList",methods = "list")
+    @ResponseBody
+    public ResultPojo packingArchivesList(){
+        Result<List<PackingArchives>> result = new Result<List<PackingArchives>>();
+        PackingArchivesQuery query = new PackingArchivesQuery();
+        try{
+            result=packingArchivesService.getPackingArchivesByQuery(query);
+        }catch(Exception e){
+            log.error("获取包材成本档案列表错误");
+        }
+        return result.getResultPojo();
+    }
+
     @RequestMapping(value = "/addPackingArchives",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-包材档案",methods = "新增包材档案")
+    @SystemLogAnnotation(module = "knowledgeBase/packingCostList",methods = "add")
     public ModelAndView addPackingArchives(){return new ModelAndView("knowledgeBase/addPackingArchives");}
 
     @RequestMapping(value = "/doAddPackingArchives",method = RequestMethod.POST)
-    @SystemLogAnnotation(module = "知识库-包材档案",methods = "执行新增")
+    @SystemLogAnnotation(module = "knowledgeBase/packingCostList",methods = "doAdd")
     @ResponseBody
     public ResultPojo doAddPackingArchives(@RequestBody PackingArchives packingArchives){
         try{
             Result<PackingArchives> result=packingArchivesService.addPackingArchives(packingArchives);
             return result.getResultPojo();
         }catch(Exception e){
-            log.error("添加包材档案失败");
+            log.error("添加包材成本档案失败");
         }
         return null;
     }
@@ -75,8 +73,9 @@ public class PackingArchivesAction {
      * @param packingArchivesQuery
      * @return
      */
-    @RequestMapping(value = "/queryPackingArchivesList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-包材档案",methods = "条件查询")
+    @SuppressWarnings("unused")
+    @RequestMapping(value = "/queryPackingArchivesListTest",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase/packingCostList",methods = "query")
     public ModelAndView queryPackingArchivesList(@RequestBody PackingArchivesQuery packingArchivesQuery){
         Result<List<PackingArchives>> result = new Result<List<PackingArchives>>();
         try{
@@ -86,11 +85,23 @@ public class PackingArchivesAction {
             }
             result=packingArchivesService.getPackingArchivesByPage(packingArchivesQuery);
         }catch(Exception e){
-            log.error("查询包材档案失败",e);
+            log.error("查询包材成本档案失败",e);
         }
         ModelAndView model = new ModelAndView("knowledgeBase/packingArchivesList","packingArchivesList",result.getModel());
-        model.addObject("message","包材档案列表");
+        model.addObject("message","包材成本档案列表");
         return model;
+    }
+    @RequestMapping(value="/getPackingArchivesById")
+    @SystemLogAnnotation(module = "knowledgeBase/packingArchivesList",methods = "getInfoById")
+    @ResponseBody
+    public PackingArchives getPackingArchivesById(int id){
+        try{
+            Result<PackingArchives> result = packingArchivesService.getPackingArchivesById(id);
+            return result.getModel();
+        }catch(Exception e){
+            log.error("获取成本档案信息错误",e);
+        }
+        return null;
     }
 
 }

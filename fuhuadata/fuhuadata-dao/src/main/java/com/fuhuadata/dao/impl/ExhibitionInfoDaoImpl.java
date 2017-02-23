@@ -15,6 +15,11 @@ public class ExhibitionInfoDaoImpl extends SqlMapClientTemplate implements Exhib
     private static final String ADD="EXHIBITIONINFO.ADD";
     private static final String GET_PAGE="EXHIBITIONINFO.GET-PAGE";
     private static final String COUNT="EXHIBITIONINFO.COUNT";
+    private static final String UPDATE="EXHIBITIONINFO.UPDATE";
+    private static final String DELETE_BY_ID="EXHIBITIONINFO.DELETE-BY-ID";
+    private static final String GET_ALl="EXHIBITIONINFO.GET-ALL";
+    private static final String GET_BY_ID="EXHIBITIONINFO.GET-BY-ID";
+    private static final String GET_BY_QUERY="EXHIBITIONINFO.GET-BY-QUERY";
     @Override
     public ExhibitionInfo addExhibitionInfo(ExhibitionInfo exhibitionInfo) {
         exhibitionInfo.setExhibitionId((Integer) this.insert(ADD,exhibitionInfo));
@@ -24,8 +29,32 @@ public class ExhibitionInfoDaoImpl extends SqlMapClientTemplate implements Exhib
     @Override
     public List<ExhibitionInfo> getExhibitionInfosByPage(ExhibitionInfoQuery exhibitonInfoQuery) {
         List<ExhibitionInfo> list = this.queryForList(GET_PAGE,exhibitonInfoQuery);
-        System.out.print(list.get(1).getStartDate());
         return list;
+    }
+
+    @Override
+    public List<ExhibitionInfo> getAllExhibitionInfos() {
+        return this.queryForList(GET_ALl);
+    }
+
+    @Override
+    public List<ExhibitionInfo> getExhibitionInfosByQuery(ExhibitionInfoQuery exhibitionInfoQuery) {
+        return queryForList(GET_BY_QUERY,exhibitionInfoQuery);
+    }
+
+    @Override
+    public ExhibitionInfo getExhibitionInfoById(int id) {
+        return (ExhibitionInfo)this.queryForObject(GET_BY_ID,id);
+    }
+
+    @Override
+    public int updateExhibitionInfoById(int id, ExhibitionInfo exhibitionInfo) {
+        exhibitionInfo.setExhibitionId(id);
+        return this.update(UPDATE,exhibitionInfo);
+    }
+    @Override
+    public int deleteExhibitionById(int id) {
+        return this.update(DELETE_BY_ID,id);
     }
 
     @Override

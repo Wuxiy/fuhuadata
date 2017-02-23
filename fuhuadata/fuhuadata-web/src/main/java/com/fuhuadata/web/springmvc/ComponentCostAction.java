@@ -1,7 +1,6 @@
 package com.fuhuadata.web.springmvc;
 
 import com.fuhuadata.domain.ComponentCost;
-import com.fuhuadata.domain.ExhibitionInfo;
 import com.fuhuadata.domain.query.ComponentCostQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
@@ -34,78 +33,55 @@ public class ComponentCostAction {
     private String page="1";
 
     /**
-     * 初始化页面
+     * init
      * @return
      */
-    @SuppressWarnings("unused")
-    @RequestMapping(value = "/componentCostList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-成分价格",methods = "查看")
-    public ModelAndView componentCostList(){
+    @RequestMapping(value = "/componentCostInfoList")
+    @SystemLogAnnotation(module = "knowledgeBase-componentCostInfo",methods = "into")
+    public ModelAndView componentCostInfo(){
+        return new ModelAndView("knowledgeBase/componentCostInfoList");
+    }
+
+    /**
+     * list
+     * @return
+     */
+    @RequestMapping(value = "/queryComponentCostList",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-componentCostList",methods = "list")
+    @ResponseBody
+    public ResultPojo componentCostList(){
+        ComponentCostQuery query=new ComponentCostQuery();
         Result<List<ComponentCost>> result = new Result<List<ComponentCost>>();
-
         try {
-            ComponentCostQuery query=new ComponentCostQuery();
-            query.setPageSize(pageSize);
-            try{
-                query.setIndex(Integer.valueOf(page.trim()));
-
-            }catch(Exception e){
-                query.setIndex(1);
-            }
-            result=componentCostService.getComponentCostsByPage(query);
+            result=componentCostService.getComponentCostByQuery(query);
         } catch (Exception e) {
             log.error("获取知识库成分价格列表失败",e);
         }
-        ModelAndView model= new ModelAndView("knowledgeBase/componentCostList","componentCostList",result.getModel());
-        model.addObject("message","知识库成分列表");
-        return model;
+        return result.getResultPojo();
     }
+
+    /**
+     * add
+     * @return
+     */
     @RequestMapping(value = "/addComponentCost",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-成分价格",methods = "新增成分价格")
+    @SystemLogAnnotation(module = "知识库-成分价格",methods = "add")
     public ModelAndView addComponentCost(){
         return new ModelAndView("knowledgeBase/addComponentCost");
 
     }
-
-    /**
-     * 新增component
-     * @param componentCost
-     * @return
-     */
     @RequestMapping(value="/doAddComponentCost",method = RequestMethod.POST)
     @ResponseBody
-    @SystemLogAnnotation(module = "知识库-成分价格",methods = "执行新增")
+    @SystemLogAnnotation(module = "知识库-成分价格",methods = "doAdd")
     public ResultPojo doAddComponentCost(@RequestBody ComponentCost componentCost){
         try{
             Result<ComponentCost> result = componentCostService.addComponentCost(componentCost);
-            return result.getResultPojo();
+            return result.getResultPojo();//结果码,-1需要登录，0消息错误，1正确
         }catch(Exception e){
             log.error("添加成分价格错误");
         }
         return null;
     }
 
-    /**
-     * 条件查询component
-     * @param componentCostQuery
-     * @return
-     */
-    @RequestMapping(value = "/queryComponentCostList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-成分价格",methods = "条件查询")
-    public ModelAndView queryComponentCostList(@RequestBody ComponentCostQuery componentCostQuery){
-        Result<List<ComponentCost>> result = new Result<List<ComponentCost>>();
-        try{
-            componentCostQuery.setPageSize(pageSize);
-            if(componentCostQuery.getIndex()==0){
-                componentCostQuery.setIndex(Integer.valueOf(page.trim()));
-            }
-            result=componentCostService.getComponentCostsByPage(componentCostQuery);
-        }catch(Exception e){
-            log.error("条件查询失败",e);
-        }
-        ModelAndView model = new ModelAndView("knowledgeBase/componentCostList","componentCostList",result.getModel());
-        model.addObject("message","成分价格列表");
-        return model;
-    }
 
 }

@@ -1,39 +1,56 @@
-#macro(showAdminPage $page)
+#macro(showAdminPage $page $url)
     #if($page)
-        #set($pagePos = 2) ##当前页的尾巴长度
-    <div class="pagination" id="pagination">
-        <ul>
-            #if($page.isPreviousPageAvailable()) ##如果能向上翻页
-                <li style="with:72px"><a href="javascript:gotoPages(1)">首页</a></li>
-                <li class="page-prev"><a href="javascript:gotoPages($page.getPreviousPage())">&lt;</a></li>
-            #end
-            #if($!page.index>$pagePos+2)
-                <li>…</li>
-            #end ##显示前面的省略号
-            #foreach($i in [$pagePos..1]) ##增加前面的尾巴
-                #if($!page.index - $i > 1)
-                    #set($pageIndex= $!page.index - $i)
-                    <li><a href="javascript:gotoPages($pageIndex)">$pageIndex</a></li>
+        #set($pagePos = 5) ##当前页的尾巴长度
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="input-group">
+
+                <span class="input-group-addon">共<span>$!{page.totalItem}</span>条记录，<span><em>$!{page.totalPage}</em></span>页，跳转到第</span>
+                <input class="form-control" type="text" id="inputpage" value="$!page.index" placeholder="" maxlength="8" onkeyup="value=value.replace(/[^\d]/g, 1);" onafterpaste="value=value.replace(/[^\d]/g, 1);">
+
+                <span class="input-group-addon">页</span>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-xs btn-primary" onclick="javascript:gotoPages(document.getElementById('inputpage').value==''?1:document.getElementById('inputpage').value)">跳转</button>
+                </span>
+            </div>
+        </div>
+        <div class="col-xs-4 text-ritht pull-right">
+            <ul class="pagination table-pagination" id="pagination">
+                #if($page.isPreviousPageAvailable()) ##如果能向上翻页
+                ##                <li style="with:72px"><a href="javascript:gotoPages(1)">首页</a></li>
+                    <li><a href="javascript:gotoPages($page.getPreviousPage())">上一页</a></li>
                 #end
-            #end
-            <li class="page-current"><a href="#">$!page.index</a></li>
-            #foreach($i in [1..$pagePos]) ##增加后面的尾巴
-                #if($!page.totalPage - $!page.index - $i > 0)
-                    #set($pageIndex= $!page.index + $!i)
-                    <li><a href="javascript:gotoPages($pageIndex)">$pageIndex</a></li>
+                #if($!page.index>$pagePos+2)
+                    <li>&hellip;</li>
+                #end ##显示前面的省略号
+                #foreach($i in [$pagePos..1]) ##增加前面的尾巴
+                    #if($!page.index - $i > 1)
+                        #set($pageIndex= $!page.index - $i)
+                        <li><a href="javascript:gotoPages($pageIndex)">$pageIndex</a></li>
+                    #end
                 #end
-            #end
-            #if($!page.totalPage - $!page.index > $pagePos+1) <li>…</li> #end ##显示后面的省略号
-            #if($page.isNextPageAvailable()) ##显示后面的页
-                <li class="page-next"><a href="javascript:gotoPages($page.getNextPage())">&gt;</a></li>
-                <li><a href="javascript:gotoPages($page.getTotalPage())" style="with:72px">末页</a></li>
-            #end
-            <li class="page-total">共<em>$!{page.totalPage}</em>页&nbsp;&nbsp;</li>
-            <li class="page-go">
-                第<input type="text" id="inputpage" value="$!page.index" placeholder="" maxlength="8" onkeyup="value=value.replace(/[^\d]/g, 1);" onafterpaste="value=value.replace(/[^\d]/g, 1);">页
-                <button type="button" class="gray-btn btn-go" onclick="javascript:gotoPages(document.getElementById('inputpage').value==''?1:document.getElementById('inputpage').value)">跳转</button>
-            </li>
-        </ul>
+                <li><a href="#">$!page.index</a></li>
+                #foreach($i in [1..$pagePos]) ##增加后面的尾巴
+                    #if($!page.totalPage - $!page.index - $i > 0)
+                        #set($pageIndex= $!page.index + $!i)
+                        <li><a href="javascript:gotoPages($pageIndex)">$pageIndex</a></li>
+                    #end
+                #end
+
+                #if($!page.totalPage - $!page.index > $pagePos+1) <li>&hellip;</li> #end ##显示后面的省略号
+                #if($page.isNextPageAvailable()) ##显示后面的页
+##                    <li><a href="javascript:gotoPages($page.getNextPage())">下一页</a></li>
+                    <li><a href="/exhibitionInfo/queryExhibitionInfo?index=$!page.getNextPage()&exhibitionName=$!page.getExhibitionName()">下一页</a></li>
+                ##                <li><a href="javascript:gotoPages($page.getTotalPage())" style="with:72px">末页</a></li>
+                #end
+
+            </ul>
+        </div>
     </div>
+##    <li class="page-total">共<em>$!{page.totalPage}</em>页&nbsp;&nbsp;</li>
+##    <li class="page-go">
+##        第<input type="text" id="inputpage" value="$!page.index" placeholder="" maxlength="8" onkeyup="value=value.replace(/[^\d]/g, 1);" onafterpaste="value=value.replace(/[^\d]/g, 1);">页
+##        <button type="button" class="gray-btn btn-go" onclick="javascript:gotoPages(document.getElementById('inputpage').value==''?1:document.getElementById('inputpage').value)">跳转</button>
+##    </li>
     #end
 #end

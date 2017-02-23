@@ -10,7 +10,8 @@
         
          <!-- 自动扫描,完成bean创建和依赖注入 -->
 	    <context:component-scan base-package="com.fuhuadata"/>
-
+		<!--启用默认Servlet
+	     <mvc:default-servlet-handler/>-->
 
 		<!-- 使AspectJ注解起作用：自动为匹配的类生成代理对象 -->
 		<aop:aspectj-autoproxy proxy-target-class="true"/>
@@ -21,7 +22,7 @@
 		       <property name="messageConverters">  
 		           <list>  
 		               <!-- Support JSON -->   
-		               <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>  
+		               <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
 		           </list>  
 		       </property>  
 		 </bean>  
@@ -31,9 +32,9 @@
 		               <!-- Support JSON -->   
 		               <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>  
 		           </list>  
-		       </property>  
-		 </bean>  
-		 <!--  <context:annotation-config />  
+		       </property>
+		 </bean>
+		 <!--  <context:annotation-config />
     	 <mvc:annotation-driven /> -->
 	    
          <!-- 配置视图解析器 如何把handler 方法返回值解析为实际的物理视图 -->
@@ -43,26 +44,33 @@
              <property name = "suffix" value = ".jsp"></property>
          </bean>-->
 
-		<!-- 配置Velocity视图解析器 -->
-		<bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+		<!-- 配置Velocity视图解析器 ，将后缀为vm的文件交给下面的Resolver处理-->
+		<bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
 			<!--线上环境设置为true-->
-			<property name="cache" value="false"/>
-			<property name="prefix" value="/WEB-INF/vm/" />
+			<property name="cache" value="false"/><!--是否缓存模板-->
+			<property name="prefix" value="/" />
 			<property name="suffix" value=".vm"/>
+			<property name="layoutUrl" value="layout/layout.vm"/><!--指定layout文件-->
 			<property name="contentType" value="text/html;charset=UTF-8"/>
-			<!--<property name="toolboxConfigLocation" value="WEB-INF/velocity/toolbox.xml"/>-->
+			<property name="toolboxConfigLocation" value="/WEB-INF/velocity/toolbox.xml"/>
 			<property name="exposeSpringMacroHelpers" value="true" /><!--是否使用spring对宏定义的支持-->
 			<property name="exposeRequestAttributes" value="true" /><!--是否开放request属性-->
 			<property name="requestContextAttribute" value="rc"/><!--request属性引用名称-->
+
+			<property name="layoutKey" value="layout"></property><!-- layoutKey设定模板文件键值，设定该值后就可以在vm文件中使用该键值设置模板路径-->
+			<property name="screenContentKey" value="screen_content" />
+
 			<property name="dateToolAttribute" value="date" /><!--日期函数名称-->
 			<property name="numberToolAttribute" value="number" /><!--数字函数名称-->
 		</bean>
 
 		<!-- 配置Velocity引擎 -->
 		<bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
-			<property name="resourceLoaderPath" value="/"/>
+			<property name="resourceLoaderPath" value="/WEB-INF/vm"/>
 			<property name="configLocation" value="classpath:velocity.properties"/>
 		</bean>
+
+
 
 
 	<!-- 上传文件的解析器 -->

@@ -35,6 +35,8 @@ public interface FreightCostManager {
      */
     public boolean deleteFreightCostById(int id);
 
+    public FreightCost getFreightCostById(int id);
+
     /**
      * Query(设置当前页数)
      * Query(设置当前页面数据行数)
@@ -45,6 +47,12 @@ public interface FreightCostManager {
      */
     public Result<List<FreightCost>> getFreightCostsByPage(FreightCostQuery freightCostQuery);
 
+    /**
+     * 查询列表
+     * @param freightCostQuery
+     * @return
+     */
+    public List<FreightCost> getFreightCostsByQuery(FreightCostQuery freightCostQuery);
     /**
      * 查询总数
      * @param freightCostQuery

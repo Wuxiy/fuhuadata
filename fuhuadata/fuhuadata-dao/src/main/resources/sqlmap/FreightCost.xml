@@ -62,7 +62,7 @@
 
     <insert id="ADD" parameterClass="FreightCost">
         INSERT INTO
-        freight_cost (freight_id, process_factory, unit_cost,
+        k_freight_cost (freight_id, process_factory, unit_cost,
         departure_city, destination_city, remarks
         )
         VALUES (#freightId#, #processFactory#, #unitCost#,
@@ -73,7 +73,7 @@
         </selectKey>
     </insert>
     <update id="UPDATE" parameterClass="FreightCost">
-        UPDATE freight_cost
+        UPDATE k_freight_cost
         <dynamic prepend=" SET ">
             <isNotNull prepend=", " property="processFactory">
                 process_factory = #processFactory#
@@ -96,13 +96,19 @@
 
     <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
         <![CDATA[
-            DELETE FROM freight_cost  WHERE freight_id = #freightId#
+            DELETE FROM k_freight_cost  WHERE freight_id = #freightId#
         ]]>
     </delete>
 
+    <select id="GET-BY-ID" resultMap="FREIGHTCOST-MAP" parameterClass="java.lang.Integer">
+        <![CDATA[
+            SELECT * FROM k_freight_cost WHERE freight_id = #freightId#
+        ]]>
+    </select>
+
     <select id="GET-PAGE" resultMap="FREIGHTCOST-MAP" parameterClass="FreightCostQuery">
         <![CDATA[
-            SELECT * FROM freight_cost
+            SELECT * FROM k_freight_cost
         ]]>
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>
@@ -110,9 +116,18 @@
         LIMIT #startRow#,#pageSize#
     </select>
 
+    <select id="GET-BY-QUERY" resultMap="FREIGHTCOST-MAP" parameterClass="FreightCostQuery">
+        <![CDATA[
+            SELECT * FROM k_freight_cost
+        ]]>
+        <isParameterPresent>
+            <include refid="QUERY-COMMON"/>
+        </isParameterPresent>
+    </select>
+
     <select id="COUNT" resultClass="java.lang.Integer" parameterClass="FreightCostQuery">
         <![CDATA[
-			SELECT COUNT(freight_id) FROM freight_cost
+			SELECT COUNT(freight_id) FROM k_freight_cost
 		]]>
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>

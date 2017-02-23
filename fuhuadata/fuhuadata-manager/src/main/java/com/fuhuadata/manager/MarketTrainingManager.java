@@ -1,6 +1,8 @@
 package com.fuhuadata.manager;
 
+import com.fuhuadata.domain.ExhibitionInfo;
 import com.fuhuadata.domain.MarketTraining;
+import com.fuhuadata.domain.query.ExhibitionInfoQuery;
 import com.fuhuadata.domain.query.MarketTrainingQuery;
 import com.fuhuadata.domain.query.Result;
 
@@ -13,6 +15,16 @@ import java.util.List;
 public interface MarketTrainingManager {
 
     public MarketTraining addMarketTraining(MarketTraining marketTraining);
+
+    public boolean updateMarketTrainingById(int id,MarketTraining marketTraining);
+
+    public boolean deleteMarketTrainingById(int id);
+
+    public MarketTraining getMarketTrainingById(int id);
+
+    public List<MarketTraining> getAllMarketTrainings();
+
+    public List<MarketTraining> getMarketTrainingsByQuery(MarketTrainingQuery marketTrainingQuery);
 
     public Result<List<MarketTraining>> getMarketTrainingsByPage(MarketTrainingQuery marketTrainingQuery);
 

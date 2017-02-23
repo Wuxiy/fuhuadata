@@ -11,9 +11,15 @@ import java.util.List;
  * Created by intanswer on 2017/1/12.
  */
 public class MarketTrainingDaoImpl extends SqlMapClientTemplate implements MarketTrainingDao {
-    public static final String ADD="MARKETTRAINING.ADD";
-    public static final String GET_PAGE="MARKETTRAINING.GET-PAGE";
-    public static final String COUNT="MARKETTRAINING.COUNT";
+
+    private static final String ADD="EXHIBITIONINFO.ADD";
+    private static final String GET_PAGE="EXHIBITIONINFO.GET-PAGE";
+    private static final String COUNT="EXHIBITIONINFO.COUNT";
+    private static final String UPDATE="EXHIBITIONINFO.UPDATE";
+    private static final String DELETE_BY_ID="EXHIBITIONINFO.DELETE-BY-ID";
+    private static final String GET_ALl="EXHIBITIONINFO.GET-ALL";
+    private static final String GET_BY_ID="EXHIBITIONINFO.GET-BY-ID";
+    private static final String GET_BY_QUERY="EXHIBITIONINFO.GET-BY-QUERY";
 
     @Override
     public MarketTraining addMartketTraining(MarketTraining marketTraining) {
@@ -22,8 +28,31 @@ public class MarketTrainingDaoImpl extends SqlMapClientTemplate implements Marke
     }
 
     @Override
+    public int updateMarketTrainingById(int id, MarketTraining marketTraining) {
+        marketTraining.setTranId(id);
+        return this.update(UPDATE,marketTraining);
+    }
+
+    @Override
+    public int deleteMarketTrainingById(int id) {
+        return this.delete(DELETE_BY_ID,id);
+    }
+
+    @Override
+    public MarketTraining getMarketTrainingById(int id){return (MarketTraining)this.queryForObject(GET_BY_ID,id);};
+
+    @Override
+    public List<MarketTraining> getAllMarketTrainings(){return this.queryForList(GET_ALl);}
+
+    @Override
+    public List<MarketTraining> getMarketTrainingsByQuery(MarketTrainingQuery marketTrainingQuery){
+        return queryForList(GET_BY_QUERY,marketTrainingQuery);
+    }
+
+    @Override
     public List<MarketTraining> getMarketTrainingsByPage(MarketTrainingQuery marketTrainingQuery) {
-        return this.queryForList(GET_PAGE,marketTrainingQuery);
+        List<MarketTraining> list=this.queryForList(GET_PAGE,marketTrainingQuery);
+        return list;
     }
 
     @Override

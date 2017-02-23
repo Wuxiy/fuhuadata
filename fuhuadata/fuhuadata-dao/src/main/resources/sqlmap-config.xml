@@ -18,6 +18,7 @@ Config 2.0/" "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
 	<sqlMap resource="sqlmap/PackingArchives.xml"/>
 	<sqlMap resource="sqlmap/IndustryData.xml"/>
 	<sqlMap resource="sqlmap/FreightCost.xml"/>
+	<sqlMap resource="sqlmap/Rate.xml"/>
 	<sqlMap resource="sqlmap/PortChargesCost.xml"/>
 	<sqlMap resource="sqlmap/SaleCustomer.xml"/>
 	<sqlMap resource="sqlmap/CustomerParent.xml"/>
