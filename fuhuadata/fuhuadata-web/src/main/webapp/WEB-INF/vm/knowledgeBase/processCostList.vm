@@ -1,5 +1,6 @@
  <div class="col-xs-12">
     <!--tab导航开始-->
+     
     <ul id="myTab" class="nav nav-tabs">
         <li class="active"><a href="#adEexpense" data-toggle="tab">制剂加工费</a></li>
         <li><a href="#freight" data-toggle="tab">国内运费</a></li>
@@ -29,12 +30,6 @@
                                 </tr>
                                 </thead>
                                 <tbody id="adEexpense1">
-                                <tr>
-                                    <td>200ML</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -91,13 +86,6 @@
                                 </tr>
                                 </thead>
                                 <tbody id="freight1">
-                                <tr>
-                                    <td>杭州海辰</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -132,22 +120,6 @@
                                 </tr>
                                 </thead>
                                 <tbody id="cost1">
-                                <tr>
-                                    <td>原粉</td>
-                                    <td>——</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>颗粒剂助剂A</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
                                 </tbody>
                             </table>
                         </div>
