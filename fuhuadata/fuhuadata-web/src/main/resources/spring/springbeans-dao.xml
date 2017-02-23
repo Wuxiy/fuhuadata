@@ -51,5 +51,6 @@
 	<bean id="userDao" class="com.fuhuadata.dao.impl.UserDaoImpl"/>
 	<bean id="productInfoDao" class="com.fuhuadata.dao.impl.ProductInfoDaoImpl"/>
 	<bean id="productCategoryDao" class="com.fuhuadata.dao.impl.ProductCategoryDaoImpl"/>
+	<bean id="packingCategoryDao" class="com.fuhuadata.dao.impl.PackingCategoryDaoImpl"/>
 
 </beans>

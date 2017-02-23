@@ -20,5 +20,5 @@
 	<bean id="userService" class="com.fuhuadata.service.impl.UserServiceImpl"/>
 	<bean id="productInfoService" class="com.fuhuadata.service.impl.ProductInfoServiceImpl"/>
 	<bean id="productCategoryService" class="com.fuhuadata.service.impl.ProductCategoryServiceImpl"/>
-
+	<bean id="packingCategoryService" class="com.fuhuadata.service.impl.PackingCategoryServiceImpl"/>
 </beans>

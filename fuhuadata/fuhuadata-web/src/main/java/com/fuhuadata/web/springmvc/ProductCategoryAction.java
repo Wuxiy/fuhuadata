@@ -111,7 +111,7 @@ public class ProductCategoryAction {
      */
     @RequestMapping(value = "/modify",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-ProductCategory",methods="update")
-    public ModelAndView modifyExhibitonInfo(int id){
+    public ModelAndView modifyProductCategory(int id){
         try{
             Result<ProductCategory> result = new Result<ProductCategory>();
         }catch (Exception e){

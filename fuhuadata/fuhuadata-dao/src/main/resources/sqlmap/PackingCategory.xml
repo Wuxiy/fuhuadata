@@ -2,5 +2,53 @@
 <!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
         "http://www.ibatis.com/dtd/sql-map-2.dtd">
 <sqlMap namespace="PACKINGCATEGORY">
+    <typeAlias alias="PackingCategory" type="com.fuhuadata.domain.PackingCategory"/>
+    <resultMap id="PACKINGCATEGORY-MAP" class="PackingCategory">
+            <result property="categoryId" column="category_id" jdbcType="INT" javaType="java.lang.Integer"/>
+            <result property="parentId" column="parent_id" jdbcType="INT" javaType="java.lang.Integer"/>
+            <result property="categoryName" column="category_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        category_id, parent_id, category_name
+    </sql>
+
+    <select id="GET-BY-ID" resultMap="PACKINGCATEGORY-MAP" parameterClass="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from p_packing_category
+        where category_id = #categoryId#
+    </select>
+    <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer" >
+        <![CDATA[
+        delete from p_packing_category
+        where category_id = #categoryId#
+        ]]>
+    </delete>
+    <insert id="ADD" parameterClass="PackingCategory" >
+        <![CDATA[
+        insert into p_packing_category (category_id, parent_id, category_name)
+        values (#categoryId#, #parentId#, #categoryName#)
+        ]]>
+        <selectKey resultClass="int" keyProperty="categoryId">
+            SELECT @@IDENTITY AS ID
+        </selectKey>
+    </insert>
+
+    <update id="UPDATE" parameterClass="PackingCategory" >
+        update p_packing_category
+        <dynamic prepend=" SET ">
+            <isNotNull prepend=", " property="categoryId">category_id=#categoryId#</isNotNull>
+            <isNotNull prepend=", " property="parentId">category_name=#categoryName#</isNotNull>
+            <isNotNull prepend=", " property="categoryName">category_name=#categoryName#</isNotNull>
+        </dynamic>
+    </update>
+
+    <select id="GET-ALL" resultMap="PACKINGCATEGORY-MAP">
+        <![CDATA[
+        SELECT * FROM p_packing_category
+        ]]>
+    </select>
+
 
 </sqlMap>
