@@ -9,6 +9,8 @@ import java.sql.Timestamp;
 public class UserAccount {
     private Integer id;
     private String name;
+	private String account;
+	private String password;
     private Timestamp createTime;
     private Timestamp modifyTime;
 	public Integer getId() {
@@ -34,5 +36,17 @@ public class UserAccount {
 	}
 	public void setModifyTime(Timestamp modifyTime) {
 		this.modifyTime = modifyTime;
+	}
+	public void setAccount(String account) {
+		this.account = account;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getAccount() {
+		return account;
+	}
+	public String getPassword() {
+		return password;
 	}
 }

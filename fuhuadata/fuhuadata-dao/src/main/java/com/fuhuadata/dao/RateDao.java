@@ -32,6 +32,8 @@ public interface RateDao {
      */
     public int deleteRateById(int id);
 
+    public Rate getRateById(int id);
+
     /**
      * 查询不带分页
      * @param rateQuery
