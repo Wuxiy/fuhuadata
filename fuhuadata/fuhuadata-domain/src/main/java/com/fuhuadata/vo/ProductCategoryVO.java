@@ -5,7 +5,7 @@ package com.fuhuadata.vo;
  * Created by intanswer on 2017/2/22.
  */
 public class ProductCategoryVO {
-    private int id;
+    private Integer id;
     private String parent;//父节点
     private String middle;//中间节点
     private String child;//子节点

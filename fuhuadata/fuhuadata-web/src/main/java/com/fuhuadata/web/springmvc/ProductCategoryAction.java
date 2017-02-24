@@ -5,6 +5,7 @@ import com.fuhuadata.domain.ProductCategory;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.ProductCategoryService;
+import com.fuhuadata.vo.ProductCategoryTree;
 import com.fuhuadata.vo.ProductCategoryVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
@@ -55,9 +56,10 @@ public class ProductCategoryAction {
     @SystemLogAnnotation(module = "knowledgeBase-ProductCategory",methods = "level")
     @ResponseBody
     public ResultPojo productCategoryLevel(){
-        Result<List<ProductCategoryVO>> result = new Result<List<ProductCategoryVO>>();
+        Result<List<ProductCategoryTree>> result = new Result<List<ProductCategoryTree>>();
         try{
-            result=productCategoryService.getProductCategoryByLevel();
+            //result=productCategoryService.getProductCategoryByLevel();
+            result=productCategoryService.getAllByTree();
         }catch(Exception e){
             log.error("分层获取产品树错误",e);
         }

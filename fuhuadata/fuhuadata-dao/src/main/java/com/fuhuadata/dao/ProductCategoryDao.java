@@ -1,6 +1,7 @@
 package com.fuhuadata.dao;
 
 import com.fuhuadata.domain.ProductCategory;
+import com.fuhuadata.vo.ProductCategoryTree;
 import com.fuhuadata.vo.ProductCategoryVO;
 
 import java.util.List;
@@ -16,7 +17,9 @@ public interface ProductCategoryDao {
 
     public int updateProductCategoryById(int id,ProductCategory productCategory);
 
-    public ProductCategory getProductCategoryById(int id);
+    public ProductCategoryTree getProductCategoryById(int id);
+
+    public List<ProductCategoryTree> getProductCategoryByParentId(int pid);
 
     public List<ProductCategory> getAll();
 

@@ -4,10 +4,12 @@ import com.fuhuadata.domain.ProductCategory;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.ProductCategoryManager;
 import com.fuhuadata.service.ProductCategoryService;
+import com.fuhuadata.vo.ProductCategoryTree;
 import com.fuhuadata.vo.ProductCategoryVO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -78,10 +80,33 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         return result;
     }
 
+    @Override
+    public Result<List<ProductCategoryTree>> getAllByTree() {
+        Result<List<ProductCategoryTree>> result=new Result<List<ProductCategoryTree>>();
+        List<ProductCategoryTree> list=productCategoryManager.getProductCategoryByPId(0);
+        int n=list.size();
+        for(int i=0;i<n;i++) {
+          System.out.println(recursiveTree(list.get(i).getCid()));
+        }
+        return result;
+    }
+
+    public ProductCategoryTree recursiveTree(int cid ){
+        ProductCategoryTree node=productCategoryManager.getProductCategoryById(cid);
+        List<ProductCategoryTree> childTreeNodes=productCategoryManager.getProductCategoryByPId(cid);
+        for(ProductCategoryTree child : childTreeNodes){
+            ProductCategoryTree n = recursiveTree(child.getCid()); //递归
+            node.getNodes().add(n);
+        }
+        return node;
+    }
+
     public void setProductCategoryManager(ProductCategoryManager productCategoryManager) {
         this.productCategoryManager = productCategoryManager;
     }
     public ProductCategoryManager getProductCategoryManager(){
         return this.productCategoryManager;
     }
+
+
 }

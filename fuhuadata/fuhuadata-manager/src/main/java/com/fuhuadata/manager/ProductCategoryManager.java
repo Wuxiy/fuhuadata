@@ -1,6 +1,7 @@
 package com.fuhuadata.manager;
 
 import com.fuhuadata.domain.ProductCategory;
+import com.fuhuadata.vo.ProductCategoryTree;
 import com.fuhuadata.vo.ProductCategoryVO;
 
 import java.util.List;
@@ -17,7 +18,11 @@ public interface ProductCategoryManager {
 
     public boolean deleteProductCategoryById(int id);
 
+    public ProductCategoryTree getProductCategoryById(int id);
+
     public List<ProductCategory> getAll();
+
+    public List<ProductCategoryTree> getProductCategoryByPId(int pid);
 
     public List<ProductCategoryVO> getProductCategoryByLevel();
 }

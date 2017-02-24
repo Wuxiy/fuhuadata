@@ -3,6 +3,7 @@ package com.fuhuadata.manager.impl;
 import com.fuhuadata.dao.ProductCategoryDao;
 import com.fuhuadata.domain.ProductCategory;
 import com.fuhuadata.manager.ProductCategoryManager;
+import com.fuhuadata.vo.ProductCategoryTree;
 import com.fuhuadata.vo.ProductCategoryVO;
 
 import java.util.List;
@@ -30,8 +31,18 @@ public class ProductCategoryManagerImpl implements ProductCategoryManager {
     }
 
     @Override
+    public ProductCategoryTree getProductCategoryById(int id) {
+        return productCategoryDao.getProductCategoryById(id);
+    }
+
+    @Override
     public List<ProductCategory> getAll() {
         return productCategoryDao.getAll();
+    }
+
+    @Override
+    public List<ProductCategoryTree> getProductCategoryByPId(int pid) {
+        return productCategoryDao.getProductCategoryByParentId(pid);
     }
 
     @Override

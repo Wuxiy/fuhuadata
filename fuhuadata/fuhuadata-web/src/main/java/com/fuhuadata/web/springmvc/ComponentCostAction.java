@@ -65,14 +65,14 @@ public class ComponentCostAction {
      * @return
      */
     @RequestMapping(value = "/addComponentCost",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-成分价格",methods = "add")
+    @SystemLogAnnotation(module = "knowledgeBase-componentCostInfo",methods = "add")
     public ModelAndView addComponentCost(){
         return new ModelAndView("knowledgeBase/addComponentCost");
 
     }
     @RequestMapping(value="/doAddComponentCost",method = RequestMethod.POST)
     @ResponseBody
-    @SystemLogAnnotation(module = "知识库-成分价格",methods = "doAdd")
+    @SystemLogAnnotation(module = "knowledgeBase-componentCostInfo",methods = "doAdd")
     public ResultPojo doAddComponentCost(@RequestBody ComponentCost componentCost){
         try{
             Result<ComponentCost> result = componentCostService.addComponentCost(componentCost);
@@ -90,7 +90,7 @@ public class ComponentCostAction {
      * @return
      */
     @RequestMapping(value="/getComponentCostById",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-成分价格",methods = "GET-BY-ID")
+    @SystemLogAnnotation(module = "knowledgeBase-componentCostInfo",methods = "GET-BY-ID")
     @ResponseBody
     public ComponentCost getComponentCostById(int id){
         try{

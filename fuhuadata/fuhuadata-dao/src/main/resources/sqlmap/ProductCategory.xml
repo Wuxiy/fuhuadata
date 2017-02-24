@@ -58,7 +58,7 @@
         ]]>
     </delete>
 
-    <select id="GET-BY-ID" parameterClass="java.lang.Integer">
+    <select id="GET-BY-ID" parameterClass="java.lang.Integer" resultClass="java.util.HashMap">
         <![CDATA[
             SELECT * FROM product_category WHERE id=#id#
         ]]>
@@ -78,7 +78,7 @@
       ]]>
     </select>
 
-    <select id="GET-BY-PID" resultMap="PRODUCTCATEGORY-MAP" parameterClass="java.lang.Integer">
+    <select id="GET-BY-PID" resultClass="java.util.HashMap" parameterClass="java.lang.Integer">
         <![CDATA[
             SELECT * FROM product_category WHERE parent_id=#parentId#
         ]]>
