@@ -84,4 +84,23 @@ public class ComponentCostAction {
     }
 
 
+    /**
+     * 根据id获取成分价格
+     * @param id
+     * @return
+     */
+    @RequestMapping(value="/getComponentCostById",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "知识库-成分价格",methods = "GET-BY-ID")
+    @ResponseBody
+    public ComponentCost getComponentCostById(int id){
+        try{
+            Result<ComponentCost> result=componentCostService.getComponentCostById(id);
+            return result.getModel();
+        }catch(Exception e){
+            log.error("根据id获取成分价格错误",e);
+        }
+        return null;
+    }
+
+
 }

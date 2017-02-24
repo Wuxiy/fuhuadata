@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PRODUCTCATEGORY">
+    <typeAlias alias="ProductCategory" type="com.fuhuadata.domain.ProductCategory"/>
+    <typeAlias alias="ProductCategoryVO" type="com.fuhuadata.vo.ProductCategoryVO"/>
+
+    <resultMap id="PRODUCTCATEGORY-MAP" class="ProductCategory">
+        <result property="id" column="id" jdbcType="INT" javaType="java.lang.Integer"/>
+        <result property="parentId" column="parent_id" jdbcType="INT" javaType="java.lang.Integer"/>
+        <result property="name" column="name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="QUERY-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotNull prepend=" AND " property="id">
+                id = #id#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="parentId">
+                parent_id=#parentId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="name">
+                name = #name#
+            </isNotNull>
+        </dynamic>
+    </sql>
+
+    <sql id="GET-COMMON">
+        select small.id AS id,big.name AS parent, mid.name AS middle, small.name AS child
+        from product_category big left join product_category mid
+        on mid.`parent_id` = big.id
+        left join product_category small
+        on small.parent_id = mid.`id`
+        where big.`parent_id`=0
+    </sql>
+    <insert id="ADD" parameterClass="ProductCategory">
+        INSERT INTO
+        product_category (id,parent_id,name)
+        VALUES(#id#,#parentId#,#name#)
+        <selectKey resultClass="int" keyProperty="id">
+            SELECT @@IDENTITY AS ID
+        </selectKey>
+    </insert>
+
+    <update id="UPDATE" parameterClass="ProductCategory">
+        UPDATE product_category
+        <dynamic prepend=" SET ">
+                <isNotNull prepend=", " property="parentId">parent_id=#parentId#</isNotNull>
+                <isNotNull prepend=", " property="name">name=#name#</isNotNull>
+        </dynamic>
+        WHERE id=#id#
+    </update>
+
+    <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
+        <![CDATA[
+            DELETE FROM product_category WHERE id=#id#
+        ]]>
+    </delete>
+
+    <select id="GET-BY-ID" parameterClass="java.lang.Integer">
+        <![CDATA[
+            SELECT * FROM product_category WHERE id=#id#
+        ]]>
+    </select>
+    <select id="GET-BY-LEVEL" resultClass="java.util.HashMap">
+        select small.id AS id,big.name AS parent, mid.name AS middle, small.name AS child
+        from product_category big left join product_category mid
+        on mid.`parent_id` = big.id
+        left join product_category small
+        on small.parent_id = mid.`id`
+        where big.`parent_id`=0
+    </select>
+
+    <select id="GET-ALL" resultMap="PRODUCTCATEGORY-MAP">
+      <![CDATA[
+            SELECT * FROM product_category
+      ]]>
+    </select>
+
+    <select id="GET-BY-PID" resultMap="PRODUCTCATEGORY-MAP" parameterClass="java.lang.Integer">
+        <![CDATA[
+            SELECT * FROM product_category WHERE parent_id=#parentId#
+        ]]>
+    </select>
+    
+    <select id="COUNT" resultClass="java.lang.Integer" >
+        <![CDATA[
+            SELECT COUNT(*) FROM (
+        ]]>
+        <include refid="GET-COMMON"/>
+        ) as productCategoryVo WHERE productCategoryVo.child is NOT NULL
+    </select>
+
+</sqlMap>

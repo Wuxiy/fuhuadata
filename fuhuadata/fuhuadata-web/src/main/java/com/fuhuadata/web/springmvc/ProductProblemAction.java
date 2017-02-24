@@ -36,7 +36,7 @@ public class ProductProblemAction {
      * init
      * @return
      */
-    @RequestMapping(value = "/productProblemList")
+    @RequestMapping(value = "/productProblemList.do")
     @SystemLogAnnotation(module = "knowledgeBase-productProblem",methods = "into")
     public ModelAndView productProblem(){
       return new ModelAndView("knowledgeBase/productProblemList");
@@ -45,7 +45,6 @@ public class ProductProblemAction {
      * 产品问题列表
      * @return
      */
-    @SuppressWarnings("unused")
     @RequestMapping(value = "/queryProductProblemList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-productProblem",methods = "list")
     @ResponseBody
