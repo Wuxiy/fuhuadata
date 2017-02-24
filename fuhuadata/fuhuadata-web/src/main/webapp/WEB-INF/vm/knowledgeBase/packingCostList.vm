@@ -1,92 +1,102 @@
- <!--树形导航开始-->
-<div class="col-xs-2">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title" lang="zh">
-                包材分类
-            </h3>
-        </div>
-        <div class="panel-body clearfix">
-            <!--树形菜单-->
-            <div class="tree">
-                <ul class="tree-root">
-                    <li>
-                        <span class="branch-node" data-toggle="collapse" data-target="#bNode1"></span><a href=""><span class="leaf"></span><span lang="zh">主材</span></a>
-                        <ul id="bNode1" class="tree-branch collapse in">
-                            <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">瓶桶类</span></a></li>
-                            <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">液袋</span></a></li>
-                            <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">颗粒剂内包装</span></a></li>
-                            <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">原药包装</span></a></li>
+<div class="nav-deputy shadow-out clearfix">
+    <ul class="breadcrumb pull-right">
+        <li><span class="glyphicon glyphicon-map-marker"></span></li>
+    </ul>
+</div>
+
+<div class="dashboard-wrapper">
+    <div class="row">
+        <!--树形导航开始-->
+        <div class="col-xs-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" lang="zh">
+                        包材分类
+                    </h3>
+                </div>
+                <div class="panel-body clearfix">
+                    <!--树形菜单-->
+                    <div class="tree">
+                        <ul class="tree-root">
+                            <li>
+                                <span class="branch-node" data-toggle="collapse" data-target="#bNode1"></span><a href=""><span class="leaf"></span><span lang="zh">主材</span></a>
+                                <ul id="bNode1" class="tree-branch collapse in">
+                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">瓶桶类</span></a></li>
+                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">液袋</span></a></li>
+                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">颗粒剂内包装</span></a></li>
+                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">原药包装</span></a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <span class="branch-node" data-toggle="collapse" data-target="#bNode2"></span><a href=""><span class="leaf"></span><span lang="zh">外包装</span></a>
+                                <ul id="bNode2" class="tree-branch collapse in">
+                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">无搬运孔纸箱</span></a></li>
+                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">带搬运孔纸箱</span></a></li>
+                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">纸板桶</span></a></li>
+                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">编织袋</span></a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <span class="branch-node" data-toggle="collapse" data-target="#bNode3"></span><a href=""><span class="leaf"></span><span lang="zh">其他</span></a>
+                                <ul id="bNode3" class="tree-branch collapse in">
+                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">塑料袋</span></a></li>
+                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">自封袋</span></a></li>
+                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">说明书</span></a></li>
+                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">封箱胶带</span></a></li>
+                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">标签</span></a></li>
+                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">收缩膜</span></a></li>
+                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">量杯</span></a></li>
+                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">箱贴</span></a></li>
+                                </ul>
+                            </li>
                         </ul>
-                    </li>
-                    <li>
-                        <span class="branch-node" data-toggle="collapse" data-target="#bNode2"></span><a href=""><span class="leaf"></span><span lang="zh">外包装</span></a>
-                        <ul id="bNode2" class="tree-branch collapse in">
-                            <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">无搬运孔纸箱</span></a></li>
-                            <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">带搬运孔纸箱</span></a></li>
-                            <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">纸板桶</span></a></li>
-                            <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">编织袋</span></a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <span class="branch-node" data-toggle="collapse" data-target="#bNode3"></span><a href=""><span class="leaf"></span><span lang="zh">其他</span></a>
-                        <ul id="bNode3" class="tree-branch collapse in">
-                            <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">塑料袋</span></a></li>
-                            <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">自封袋</span></a></li>
-                            <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">说明书</span></a></li>
-                            <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">封箱胶带</span></a></li>
-                            <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">标签</span></a></li>
-                            <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">收缩膜</span></a></li>
-                            <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">量杯</span></a></li>
-                            <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">箱贴</span></a></li>
-                        </ul>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
- <!--列表部分-->
-<div class="col-xs-10">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title" lang="zh">
-                包材成本参考
-            </h3>
-        </div>
-        <div class="panel-body clearfix">
-            <table class="table table-condensed table-bordered table-striped text-center">
-                <thead>
-                <tr>
-                    <th class="text-center" lang="zh">编号</th>
-                    <th class="text-center" lang="zh">包材类型</th>
-                    <th class="text-center" lang="zh">规格</th>
-                    <th class="text-center" lang="zh">材质</th>
-                    <th class="text-center" lang="zh">质量指标</th>
-                    <th class="text-center" lang="zh">质量指标数值</th>
-                    <th class="text-center" lang="zh">单价（元）</th>
-                    <th class="text-center" lang="zh">价格有效期</th>
-                    <th class="text-center" lang="zh">适用剂型</th>
-                    <th class="text-center" lang="zh">备注</th>
-                    <th class="text-center" lang="zh">状态</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>1</td>
-                    <td><a href="http://www.baidu.com" target="_blank">主材-瓶桶类</a></td>
-                    <td>0.2L</td>
-                    <td lang="zh">HDPE</td>
-                    <td lang="zh">最低含盖克重（g）</td>
-                    <td>2.0</td>
-                    <td>0.75</td>
-                    <td lang="zh">2016-10-10</td>
-                    <td lang="zh">水剂</td>
-                    <td><a href="" data-toggle="modal" data-target="#details"></a></td>
-                    <td>有效</td>
-                </tr>
-                </tbody>
-            </table>
+         <!--列表部分-->
+        <div class="col-xs-10">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" lang="zh">
+                        包材成本参考
+                    </h3>
+                </div>
+                <div class="panel-body clearfix">
+                    <table class="table table-condensed table-bordered table-striped text-center">
+                        <thead>
+                        <tr>
+                            <th class="text-center" lang="zh">编号</th>
+                            <th class="text-center" lang="zh">包材类型</th>
+                            <th class="text-center" lang="zh">规格</th>
+                            <th class="text-center" lang="zh">材质</th>
+                            <th class="text-center" lang="zh">质量指标</th>
+                            <th class="text-center" lang="zh">质量指标数值</th>
+                            <th class="text-center" lang="zh">单价（元）</th>
+                            <th class="text-center" lang="zh">价格有效期</th>
+                            <th class="text-center" lang="zh">适用剂型</th>
+                            <th class="text-center" lang="zh">备注</th>
+                            <th class="text-center" lang="zh">状态</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><a href="http://www.baidu.com" target="_blank">主材-瓶桶类</a></td>
+                            <td>0.2L</td>
+                            <td lang="zh">HDPE</td>
+                            <td lang="zh">最低含盖克重（g）</td>
+                            <td>2.0</td>
+                            <td>0.75</td>
+                            <td lang="zh">2016-10-10</td>
+                            <td lang="zh">水剂</td>
+                            <td><a href="" data-toggle="modal" data-target="#details"></a></td>
+                            <td>有效</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>

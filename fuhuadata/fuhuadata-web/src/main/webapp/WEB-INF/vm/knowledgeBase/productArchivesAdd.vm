@@ -1,4 +1,12 @@
- <div class="col-xs-12">
+<div class="nav-deputy shadow-out clearfix">
+    <ul class="breadcrumb pull-right">
+        <li><span class="glyphicon glyphicon-map-marker"></span></li>
+    </ul>
+</div>
+
+<div class="dashboard-wrapper">
+    <div class="row">
+        <div class="col-xs-12">
             <!--表格开始-->
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -122,6 +130,9 @@
         </div>
     </div>
 </div>
+    </div>
+</div>
+
 <!-- 模态框（Modal） -->
 <div class="modal fade" id="addField" tabindex="-1" data-backdrop="static" aria-hidden="true" data-keyboard="true">
     <div class="modal-dialog">

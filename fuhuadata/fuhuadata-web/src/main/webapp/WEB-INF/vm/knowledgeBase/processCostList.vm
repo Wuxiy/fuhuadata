@@ -1,17 +1,20 @@
- <div class="col-xs-12">
-    <!--tab导航开始-->
-     
-    <ul id="myTab" class="nav nav-tabs">
+<!--副导航-->
+<div class="nav-deputy shadow-out clearfix">
+    <ul id="myTab" class="nav nav-tabs pull-left">
         <li class="active"><a href="#adEexpense" data-toggle="tab">制剂加工费</a></li>
         <li><a href="#freight" data-toggle="tab">国内运费</a></li>
         <li><a href="#cost" data-toggle="tab">成分价格</a></li>
         <li><a href="#portSurcharge" data-toggle="tab">港杂费</a></li>
         <li><a href="#rate" data-toggle="tab">费率</a></li>
     </ul>
-    <div class="tab-content">
-        <div id="adEexpense" class="tab-pane fade in active">
-            <div class="row">
-                <div class="col-xs-12">
+    <ul class="breadcrumb pull-right">
+        <li><span class="glyphicon glyphicon-map-marker"></span></li>
+    </ul>
+</div>
+<div class="dashboard-wrapper">
+    <div class="row">
+        <div class="tab-content col-xs-7">
+            <div id="adEexpense" class="tab-pane fade in active">
                     <!--制剂加工费表开始-->
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -19,8 +22,8 @@
                                 人工费
                             </h3>
                         </div>
-                        <div class="panel-body">
-                            <table class="table table-bordered table-condensed text-center">
+                        <div class="panel-body clearfix">
+                            <table class="table table-bordered table-condensed table-striped text-center">
                                 <thead>
                                 <tr>
                                     <th class="text-center col-xs-2 text-middle">主材规格</th>
@@ -41,7 +44,7 @@
                             </h3>
                         </div>
                         <div class="panel-body">
-                            <table class="table table-bordered table-condensed text-center">
+                            <table class="table table-bordered table-condensed text-center table-striped">
                                 <thead>
                                 <tr>
                                     <th class="text-center col-xs-2 text-middle">加工厂</th>
@@ -58,24 +61,17 @@
                         </div>
                     </div>
                     <!--制剂加工费表结束-->
-                </div>
             </div>
-        </div>
-        <div id="freight" class="tab-pane fade">
-            <div class="row">
-                <div class="col-xs-7">
+            <div id="freight" class="tab-pane fade">
                     <!--运费维护表开始-->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a href="" class="btn btn-xs btn-primary panel-heading-btn pull-right">
-                                新增
-                            </a>
                             <h3 class="panel-title">
                                 运费维护
                             </h3>
                         </div>
                         <div class="panel-body">
-                            <table class="table table-bordered table-condensed text-center">
+                            <table class="table table-bordered table-condensed text-center table-striped">
                                 <thead>
                                 <tr>
                                     <th class="text-center col-xs-2 text-middle">加工厂</th>
@@ -91,24 +87,17 @@
                         </div>
                     </div>
                     <!--运费维护表结束-->
-                </div>
             </div>
-        </div>
-        <div id="cost" class="tab-pane fade">
-            <div class="row">
-                <div class="col-xs-7">
+            <div id="cost" class="tab-pane fade">
                     <!--成分价格表开始-->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a href="" class="btn btn-xs btn-primary panel-heading-btn pull-right">
-                                新增
-                            </a>
                             <h3 class="panel-title">
                                 成分价格
                             </h3>
                         </div>
                         <div class="panel-body">
-                            <table class="table table-bordered table-condensed text-center">
+                            <table class="table table-bordered table-condensed text-center table-striped">
                                 <thead>
                                 <tr>
                                     <th class="text-center col-xs-2 text-middle">成分名称</th>
@@ -125,220 +114,22 @@
                         </div>
                     </div>
                     <!--成分价格表结束-->
-                </div>
             </div>
-        </div>
-        <div id="portSurcharge" class="tab-pane fade">
-            <div class="row">
-                <div class="col-xs-7">
+            <div id="portSurcharge" class="tab-pane fade">
                     <!--港杂费参考表开始-->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a href="" class="btn btn-xs btn-primary panel-heading-btn pull-right">
-                                新增
-                            </a>
                             <h3 class="panel-title">
                                 港杂费参考价
                             </h3>
                         </div>
                         <div class="panel-body" id="portSurcharge1">
-                            <table class="table table-bordered table-condensed text-center">
-                                <thead>
-                                <tr>
-                                    <th colspan="3" class="text-center col-xs-6 text-middle">项目</th>
-                                    <th class="text-center col-xs-3 text-middle">一般化工品</th>
-                                    <th class="text-center col-xs-3 text-middle">危险品</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td colspan="2" rowspan="2">订舱费（元/柜）</td>
-                                    <td class="text-left">20GP</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-left">20GP&HQ</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td rowspan="4">装箱费（元/柜）</td>
-                                    <td rowspan="2">外港</td>
-                                    <td class="text-left">20GP</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-left">40GP&HQ</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td rowspan="2">洋山港</td>
-                                    <td class="text-left">20GP</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-left">40GP&HQ</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">文件费（元/票）</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">电放费（元/票）</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">改单费（元/票）</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">快递费</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">报关费（元/票）</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">进仓费（卸货费）（元/吨）</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" rowspan="5">打托费（托盘、打托、缠膜）（元/托）</td>
-                                    <td class="text-left">普通托盘</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-left">熏蒸托盘</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-left">双面托</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-left">CP3托盘</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-left">塑料托盘</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">垫板费（元/张）</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">纸板费（元/个）</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">气囊费（元/个）</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">唛头（元/张）（黑白打印，A4纸一半）</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">拉网费（元/柜）</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">紧固带费（元/柜）</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td rowspan="2" colspan="2">抄条码费</td>
-                                    <td class="text-left">600KG-1000KG包装（元/包）</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-left">25KG包装（元/柜）</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">封子费（元/柜）</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">检查费（元/柜）</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">美式门封（元/柜）</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td rowspan="2" colspan="2">FOB操作费（元/柜）</td>
-                                    <td class="text-left">20GP</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-left">40GP&<hq></hq></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">护条（元/个）</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">护角（元/个）</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">仓储费</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">商检换单（元/票）</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                </tbody>
-                            </table>
+
                         </div>
                     </div>
                     <!--港杂费参考表结束-->
-                </div>
             </div>
-        </div>
-        <div id="rate" class="tab-pane fade">
-            <div class="row">
-                <div class="col-xs-7">
+            <div id="rate" class="tab-pane fade">
                     <!--费率表开始-->
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -347,7 +138,7 @@
                             </h3>
                         </div>
                         <div class="panel-body">
-                            <table class="table table-bordered table-condensed text-center">
+                            <table class="table table-bordered table-condensed text-center table-striped">
                                 <thead>
                                 <tr>
                                     <th class="text-center col-xs-2 text-middle">币种</th>
@@ -374,7 +165,7 @@
                             </h3>
                         </div>
                         <div class="panel-body">
-                            <table class="table table-bordered table-condensed text-center">
+                            <table class="table table-bordered table-condensed text-center table-striped">
                                 <thead>
                                 <tr>
                                     <th class="text-center col-xs-2">产品种类</th>
@@ -401,7 +192,7 @@
                             </h3>
                         </div>
                         <div class="panel-body">
-                            <table class="table table-bordered table-condensed text-center">
+                            <table class="table table-bordered table-condensed text-center table-striped">
                                 <thead>
                                 <tr>
                                     <th class="text-center col-xs-2">费率项</th>
@@ -422,11 +213,85 @@
                         </div>
                     </div>
                     <!--费率表结束-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="costmodal" tabindex="-1"  aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h2 class="modal-title" >成分价格</h2>
+            </div>
+            <div class="modal-body">
+                <!--表格-->
+                <form class="form-horizontal" action="">
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">成分名称</label>
+                        <div class="col-lg-6">
+                        <input class="form-control" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">单耗</label>
+                        <div class="col-lg-3">
+                            <div class="input-group">
+                                <input class="form-control" type="text">
+                                <div class="input-group-btn">
+                                    <botton class="btn btn-xs btn-primary">(元/kg)</botton>
+                                </div>
+                            </div>
+                        </div>
+                        <label class="col-lg-2 control-label">单价</label>
+                        <div class="col-lg-3">
+                            <div class="input-group">
+                                <input class="form-control" type="text">
+                                <div class="input-group-btn">
+                                    <botton class="btn btn-xs btn-primary">(元/kg)</botton>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">价格有效期</label>
+                        <div class="col-lg-3">
+                            <input class="form-control" type="text">
+                        </div>
+                        <label class="col-lg-2 control-label">适合产品</label>
+                        <div class="col-lg-3">
+                            <input class="form-control" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">备注</label>
+                        <div class="col-xs-8">
+                            <textarea id="fqlElse" class="form-control"  rows="4"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-3 col-xs-offset-3">
+                        <button type="button" class="btn btn-primary btn-block">
+                            完成
+                        </button>
+                    </div>
+                    <div class="col-xs-3">
+                        <button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
  <script type="text/javascript">
      var Adeexpense1 = document.getElementById("adEexpense1");
      var Adeexpense2 = document.getElementById("adEexpense2");
@@ -457,7 +322,7 @@
 
                  for(var j=0;j<ResultData1.length;j++){
                      Adeexpense1.innerHTML += '<tr>'+
-                             '<td>'+ResultData1[j].costTerm+'</td>'+
+                             '<td><a href="" data-toggle="modal" data-target="#details" data-url="http">'+ResultData1[j].costTerm+'</a></td>'+
                              '<td>'+ResultData1[j].unitCost+'</td>'+
                              '<td>'+ResultData1[j].priceEnd+'</td>'+
                              '<td>'+ResultData1[j].remarks+'</td>'+
@@ -465,7 +330,7 @@
                  }
                  for(var k=0;k<ResultData2.length;k++){
                      Adeexpense2.innerHTML += '<tr>'+
-                             '<td>'+ResultData2[k].processFactory+'</td>'+
+                             '<td><a href="" data-toggle="modal" data-target="#details">'+ResultData2[k].processFactory+'</a></td>'+
                              '<td>'+ResultData2[k].charges+'</td>'+
                              '<td>'+ResultData2[k].profit+'</td>'+
                              '<td>'+ResultData2[k].managementFee+'</td>'+
@@ -499,7 +364,7 @@
 
                  for(var j=0;j<ResultData1.length;j++){
                      Adeexpense1.innerHTML += '<tr>'+
-                                    '<td>'+ResultData1[j].costTerm+'</td>'+
+                                    '<td><a href="" data-toggle="modal" data-target="#details">'+ResultData1[j].costTerm+'</a></td>'+
                                     '<td>'+ResultData1[j].unitCost+'</td>'+
                                     '<td>'+ResultData1[j].priceEnd+'</td>'+
                                     '<td>'+ResultData1[j].remarks+'</td>'+
@@ -507,7 +372,7 @@
                  }
                  for(var k=0;k<ResultData2.length;k++){
                      Adeexpense2.innerHTML += '<tr>'+
-                                     '<td>'+ResultData2[k].processFactory+'</td>'+
+                                     '<td><a href="" data-toggle="modal" data-target="#details">'+ResultData2[k].processFactory+'</a></td>'+
                                      '<td>'+ResultData2[k].charges+'</td>'+
                                      '<td>'+ResultData2[k].profit+'</td>'+
                                      '<td>'+ResultData2[k].managementFee+'</td>'+
@@ -530,7 +395,7 @@
                     var ResultData = eval(result.data);
                     for(var i=0;i<ResultData.length;i++){
                         Freight.innerHTML += '<tr>'+
-                                '<td>'+ResultData[i].processFactory+'</td>'+
+                                '<td><a href="" data-toggle="modal" data-target="#details">'+ResultData[i].processFactory+'</a></td>'+
                                 '<td>'+ResultData[i].unitCost+'</td>'+
                                 '<td>'+ResultData[i].departureCity+'</td>'+
                                 '<td>'+ResultData[i].destinationCity+'</td>'+
@@ -551,7 +416,7 @@
                  var ResultData = eval(result.data);
                  for(var i=0;i<ResultData.length;i++){
                      Cost.innerHTML += '<tr>'+
-                             '<td>'+ResultData[i].componentName+'</td>'+
+                             '<td><a href="" data-toggle="modal" data-target="#costmodal">'+ResultData[i].componentName+'</a></td>'+
                              '<td>'+ResultData[i].unitCost+'</td>'+
                              '<td>'+ResultData[i].priceEnd+'</td>'+
                              '<td>'+ResultData[i].suitableProduct+'</td>'+
@@ -722,7 +587,7 @@
 
                  for(var j=0;j<ResultData1.length;j++){
                      Rate1.innerHTML += '<tr>'+
-                             '<td>'+ResultData1[j].currency+'</td>'+
+                             '<td><a href="" data-toggle="modal" data-target="#details">'+ResultData1[j].currency+'</a></td>'+
                              '<td>'+ResultData1[j].rate+'</td>'+
                              '<td>'+ResultData1[j].termofValidity+'</td>'+
                              '<td>'+ResultData1[j].remarks+'</td>'+
@@ -731,7 +596,7 @@
 
                  for(var k=0;k<ResultData2.length;k++){
                      Rate2.innerHTML += '<tr>'+
-                             '<td>'+ResultData2[k].kind+'</td>'+
+                             '<td><a href="" data-toggle="modal" data-target="#details">'+ResultData2[k].kind+'</a></td>'+
                              '<td>'+ResultData2[k].grossMargin+'</td>'+
                              '<td>'+ResultData2[k].termofValidity+'</td>'+
                              '<td>'+ResultData2[k].remarks+'</td>'+
@@ -740,7 +605,7 @@
 
                  for(var l=0;l<ResultData2.length;l++){
                      Rate3.innerHTML += '<tr>'+
-                             '<td>'+ResultData3[l].other+'</td>'+
+                             '<td><a href="" data-toggle="modal" data-target="#details">'+ResultData3[l].other+'</a></td>'+
                              '<td>'+ResultData3[l].rateValue+'</td>'+
                              '<td>'+ResultData3[l].termofValidity+'</td>'+
                              '<td>'+ResultData3[l].remarks+'</td>'+
@@ -748,5 +613,9 @@
                  }
              }
          })
+     });
+
+     $('#costmodal').on('show.bs.modal',function(){
+
      });
  </script>

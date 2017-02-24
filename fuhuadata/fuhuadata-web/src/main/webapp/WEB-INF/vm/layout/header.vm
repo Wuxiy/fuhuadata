@@ -100,13 +100,14 @@
                 <b class="caret"></b>
             </a>
         </li>
-        <li class="shadow-in" title="系统管理">
+        <li class="shadow-in">
             <div id="collapseSeven" class="list-group collapse">
-                <a class="list-group-item" href="#">设置</a>
+                <a class="list-group-item" href="#" lang="zh">权限设置</a>
+                <a class="list-group-item" href="#" lang="zh">数据字典维护</a>
             </div>
-            <a data-toggle="collapse" href="#collapseSeven" data-parent="#nav-affix">
+            <a data-toggle="collapse" href="#collapseSeven" data-parent="#accordion">
                 <span class="glyphicon glyphicon-cog"></span>
-                系统管理
+                <span lang="zh">系统管理</span>
                 <b class="caret"></b>
             </a>
         </li>
