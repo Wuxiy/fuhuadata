@@ -3,7 +3,6 @@ package com.fuhuadata.manager.impl;
 import com.fuhuadata.dao.ProductCategoryDao;
 import com.fuhuadata.domain.ProductCategory;
 import com.fuhuadata.manager.ProductCategoryManager;
-import com.fuhuadata.vo.ProductCategoryTree;
 import com.fuhuadata.vo.ProductCategoryVO;
 
 import java.util.List;

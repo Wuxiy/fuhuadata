@@ -17,4 +17,10 @@ public interface PackingCategoryManager {
     public boolean deletePackingCategoryById(int id);
 
     public List<PackingCategory> getAll();
+
+    public List<PackingCategory> getPackingCategoryByPId(int id);
+
+    public PackingCategory getPackingCategoryById(int id);
+
+
 }

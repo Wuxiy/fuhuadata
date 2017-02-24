@@ -2,6 +2,7 @@ package com.fuhuadata.service;
 
 import com.fuhuadata.domain.PackingCategory;
 import com.fuhuadata.domain.query.Result;
+import com.fuhuadata.vo.CategoryTree;
 import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
 
 import java.util.List;
@@ -18,5 +19,7 @@ public interface PackingCategoryService {
     public Result deltePackingCategoryById(int id);
 
     public Result<List<PackingCategory>> getAll();
+
+    public Result<List<CategoryTree>> getAllByTree();
 
 }

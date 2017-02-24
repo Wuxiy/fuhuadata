@@ -1,7 +1,6 @@
 package com.fuhuadata.dao;
 
 import com.fuhuadata.domain.ProductCategory;
-import com.fuhuadata.vo.ProductCategoryTree;
 import com.fuhuadata.vo.ProductCategoryVO;
 
 import java.util.List;

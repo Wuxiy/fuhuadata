@@ -32,6 +32,16 @@ public class PackingCategoryManagerImpl implements PackingCategoryManager {
         return packingCategoryDao.getAll();
     }
 
+    @Override
+    public List<PackingCategory> getPackingCategoryByPId(int id) {
+        return packingCategoryDao.getPackingCategoryByParentId(id);
+    }
+
+    @Override
+    public PackingCategory getPackingCategoryById(int id) {
+        return packingCategoryDao.getPackingCategoryById(id);
+    }
+
     public void setPackingCategoryDao(PackingCategoryDao packingCategoryDao) {
         this.packingCategoryDao = packingCategoryDao;
     }

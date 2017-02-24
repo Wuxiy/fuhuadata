@@ -2,7 +2,7 @@ package com.fuhuadata.service;
 
 import com.fuhuadata.domain.ProductCategory;
 import com.fuhuadata.domain.query.Result;
-import com.fuhuadata.vo.ProductCategoryTree;
+import com.fuhuadata.vo.CategoryTree;
 import com.fuhuadata.vo.ProductCategoryVO;
 
 import java.util.List;
@@ -22,5 +22,5 @@ public interface ProductCategoryService {
 
     public Result<List<ProductCategory>> getAll();
 
-    public Result<List<ProductCategoryTree>> getAllByTree();
+    public Result<List<CategoryTree>> getAllByTree();
 }

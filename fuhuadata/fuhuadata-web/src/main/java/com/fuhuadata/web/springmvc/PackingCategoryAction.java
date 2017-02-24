@@ -6,6 +6,7 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.PackingArchivesService;
 import com.fuhuadata.service.PackingCategoryService;
+import com.fuhuadata.vo.CategoryTree;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -43,6 +44,22 @@ public class PackingCategoryAction {
             result=packingCategoryService.getAll();
         }catch(Exception e){
             log.error("获取包材树原目录错误",e);
+        }
+        return result.getResultPojo();
+    }
+    /**
+     * json目录树
+     * @return
+     */
+    @RequestMapping(value="/CategoryTree")
+    @SystemLogAnnotation(module = "knowledgeBase-PackingCategory",methods = "tree")
+    @ResponseBody
+    public ResultPojo packingCategoryTree(){
+        Result<List<CategoryTree>> result = new Result<List<CategoryTree>>();
+        try{
+            result=packingCategoryService.getAllByTree();
+        }catch(Exception e){
+            log.error("获取包材树json数据错误",e);
         }
         return result.getResultPojo();
     }

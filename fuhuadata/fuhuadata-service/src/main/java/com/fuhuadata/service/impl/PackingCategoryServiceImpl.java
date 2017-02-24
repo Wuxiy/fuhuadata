@@ -4,9 +4,11 @@ import com.fuhuadata.domain.PackingCategory;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.PackingCategoryManager;
 import com.fuhuadata.service.PackingCategoryService;
+import com.fuhuadata.vo.CategoryTree;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,6 +63,49 @@ public class PackingCategoryServiceImpl implements PackingCategoryService {
             log.error("获取包材目录树原数据错误",e);
         }
         return result;
+    }
+
+    @Override
+    public Result<List<CategoryTree>> getAllByTree() {
+        List<CategoryTree> tree=new ArrayList<CategoryTree>();
+        Result<List<CategoryTree>> result=new Result<List<CategoryTree>>();
+        List<PackingCategory> list=packingCategoryManager.getPackingCategoryByPId(0);
+        int n=list.size();
+        for(int i=0;i<n;i++) {
+            tree.add(recursiveTree(list.get(i).getCategoryId()));
+        }
+        result.addDefaultModel("CategoryTree",tree);
+        return result;
+    }
+
+    /**
+     * 递归方法
+     * @param cid
+     * @return
+     */
+    public CategoryTree recursiveTree(int cid ){
+        PackingCategory packingCategory=packingCategoryManager.getPackingCategoryById(cid);
+        //构造多children集合的list
+        CategoryTree node = new CategoryTree();
+        node.setCid(packingCategory.getCategoryId());
+        node.setCname(packingCategory.getCategoryName());
+        node.setPid(packingCategory.getParentId());
+        //获取当前节点的全部子节点
+        List<PackingCategory> list=packingCategoryManager.getPackingCategoryByPId(cid);
+
+        List<CategoryTree> childTreeNodes =new ArrayList<CategoryTree>();
+        for(int i=0;i<list.size();i++){
+            CategoryTree tree = new CategoryTree();
+            tree.setCid(list.get(i).getCategoryId());
+            tree.setPid(list.get(i).getParentId());
+            tree.setCname(list.get(i).getCategoryName());
+            childTreeNodes.add(tree);
+        }
+        for(CategoryTree child : childTreeNodes){
+            CategoryTree n = recursiveTree(child.getCid()); //递归
+            node.getNodes().add(n);
+        }
+        return node;
     }
 
     public PackingCategoryManager getPackingCategoryManager() {

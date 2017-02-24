@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * jsontree
+ * json_tree
  * Created by intanswer on 2017/2/24.
  */
-public class ProductCategoryTree implements Serializable {
+public class CategoryTree implements Serializable {
 
     private Integer cid;
     private Integer pid;
@@ -16,7 +16,7 @@ public class ProductCategoryTree implements Serializable {
 
     private List nodes =new ArrayList();
 
-    public ProductCategoryTree(){
+    public CategoryTree(){
 
     }
 

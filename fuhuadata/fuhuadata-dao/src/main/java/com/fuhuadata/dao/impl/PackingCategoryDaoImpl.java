@@ -14,6 +14,8 @@ public class PackingCategoryDaoImpl extends SqlMapClientTemplate implements Pack
     private static final String UPDATE="PACKINGCATEGORY.UPDATE";
     private static final String DELETE_BY_ID="PACKINGCATEGORY.DELETE-BY-ID";
     private static final String GET_ALL="PACKINGCATEGORY.GET-ALL";
+    private static final String GET_BY_PID="PACKINGCATEGORY.GET-BY-PID";
+    private static final String GET_BY_ID="PACKINGCATEGORY.GET-BY-ID";
     @Override
     public PackingCategory addPackingCategory(PackingCategory packingCategory) {
         packingCategory.setCategoryId((Integer)this.insert(ADD,packingCategory));
@@ -34,5 +36,15 @@ public class PackingCategoryDaoImpl extends SqlMapClientTemplate implements Pack
     @Override
     public List<PackingCategory> getAll() {
         return this.queryForList(GET_ALL);
+    }
+
+    @Override
+    public List<PackingCategory> getPackingCategoryByParentId(int id) {
+        return this.queryForList(GET_BY_PID,id);
+    }
+
+    @Override
+    public PackingCategory getPackingCategoryById(int id) {
+        return (PackingCategory) this.queryForObject(GET_BY_ID,id);
     }
 }

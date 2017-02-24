@@ -4,7 +4,7 @@ import com.fuhuadata.domain.ProductCategory;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.ProductCategoryManager;
 import com.fuhuadata.service.ProductCategoryService;
-import com.fuhuadata.vo.ProductCategoryTree;
+import com.fuhuadata.vo.CategoryTree;
 import com.fuhuadata.vo.ProductCategoryVO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -85,54 +85,43 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
      * @return
      */
     @Override
-    public Result<List<ProductCategoryTree>> getAllByTree() {
-
-        Result<List<ProductCategoryTree>> result=new Result<List<ProductCategoryTree>>();
-
+    public Result<List<CategoryTree>> getAllByTree() {
+        List<CategoryTree> tree=new ArrayList<CategoryTree>();
+        Result<List<CategoryTree>> result=new Result<List<CategoryTree>>();
         List<ProductCategory> list=productCategoryManager.getProductCategoryByPId(0);
-        //
-        System.out.println(list.size());
         int n=list.size();
         for(int i=0;i<n;i++) {
-            System.out.println(list.get(i).getId());
-            System.out.println(recursiveTree(list.get(i).getId()));
+            tree.add(recursiveTree(list.get(i).getId()));
         }
+        result.addDefaultModel("CategoryTree",tree);
         return result;
     }
 
     /**
-     * 递归
+     * 递归方法
      * @param cid
      * @return
      */
-    public ProductCategoryTree recursiveTree(int cid ){
+    public CategoryTree recursiveTree(int cid ){
         ProductCategory productCategory=productCategoryManager.getProductCategoryById(cid);
-        //
-        System.out.println(productCategory.getName());
         //构造多children集合的list
-        ProductCategoryTree node = new ProductCategoryTree();
+        CategoryTree node = new CategoryTree();
         node.setCid(productCategory.getId());
         node.setCname(productCategory.getName());
         node.setPid(productCategory.getParentId());
         //获取当前节点的全部子节点
         List<ProductCategory> list=productCategoryManager.getProductCategoryByPId(cid);
 
-        //输出子节点
-        for(int i=0;i<list.size();i++) {
-            System.out.println(list.get(i).getName());
-        }
-        System.out.println(list.size());
-
-        List<ProductCategoryTree> childTreeNodes =new ArrayList<ProductCategoryTree>(list.size());
-        System.out.println(childTreeNodes.size());
-        System.out.println(childTreeNodes.get(0).getCname());
+        List<CategoryTree> childTreeNodes =new ArrayList<CategoryTree>();
         for(int i=0;i<list.size();i++){
-            childTreeNodes.get(i).setCid(list.get(i).getId());
-            childTreeNodes.get(i).setPid(list.get(i).getParentId());
-            childTreeNodes.get(i).setCname(list.get(i).getName());
+            CategoryTree tree = new CategoryTree();
+            tree.setCid(list.get(i).getId());
+            tree.setPid(list.get(i).getParentId());
+            tree.setCname(list.get(i).getName());
+            childTreeNodes.add(tree);
         }
-        for(ProductCategoryTree child : childTreeNodes){
-            ProductCategoryTree n = recursiveTree(child.getCid()); //递归
+        for(CategoryTree child : childTreeNodes){
+            CategoryTree n = recursiveTree(child.getCid()); //递归
             node.getNodes().add(n);
         }
         return node;

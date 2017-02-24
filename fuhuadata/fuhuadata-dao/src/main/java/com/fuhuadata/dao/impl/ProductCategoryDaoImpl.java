@@ -2,7 +2,6 @@ package com.fuhuadata.dao.impl;
 
 import com.fuhuadata.dao.ProductCategoryDao;
 import com.fuhuadata.domain.ProductCategory;
-import com.fuhuadata.vo.ProductCategoryTree;
 import com.fuhuadata.vo.ProductCategoryVO;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 

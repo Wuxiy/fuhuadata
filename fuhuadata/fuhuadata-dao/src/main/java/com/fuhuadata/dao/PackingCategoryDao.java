@@ -5,7 +5,7 @@ import com.fuhuadata.domain.PackingCategory;
 import java.util.List;
 
 /**
- * 包材dao
+ * 包材分类树dao
  * Created by intanswer on 2017/2/23.
  */
 public interface PackingCategoryDao {
@@ -20,6 +20,10 @@ public interface PackingCategoryDao {
      * @return
      */
     public List<PackingCategory> getAll();
+
+    public List<PackingCategory> getPackingCategoryByParentId(int id);
+
+    public PackingCategory getPackingCategoryById(int id);
 
 
 }
