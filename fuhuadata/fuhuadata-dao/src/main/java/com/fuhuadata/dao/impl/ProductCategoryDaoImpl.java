@@ -37,12 +37,12 @@ public class ProductCategoryDaoImpl extends SqlMapClientTemplate implements Prod
     }
 
     @Override
-    public ProductCategoryTree getProductCategoryById(int id) {
-        return (ProductCategoryTree) this.queryForObject(GET_BY_ID,id);
+    public ProductCategory getProductCategoryById(int id) {
+        return (ProductCategory) this.queryForObject(GET_BY_ID,id);
     }
 
     @Override
-    public List<ProductCategoryTree> getProductCategoryByParentId(int pid) {
+    public List<ProductCategory> getProductCategoryByParentId(int pid) {
         return this.queryForList(GET_BY_PID,pid);
     }
 

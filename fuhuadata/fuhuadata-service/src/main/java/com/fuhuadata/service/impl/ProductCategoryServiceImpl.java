@@ -80,20 +80,57 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         return result;
     }
 
+    /**
+     * 构造递归json树
+     * @return
+     */
     @Override
     public Result<List<ProductCategoryTree>> getAllByTree() {
+
         Result<List<ProductCategoryTree>> result=new Result<List<ProductCategoryTree>>();
-        List<ProductCategoryTree> list=productCategoryManager.getProductCategoryByPId(0);
+
+        List<ProductCategory> list=productCategoryManager.getProductCategoryByPId(0);
+        //
+        System.out.println(list.size());
         int n=list.size();
         for(int i=0;i<n;i++) {
-          System.out.println(recursiveTree(list.get(i).getCid()));
+            System.out.println(list.get(i).getId());
+            System.out.println(recursiveTree(list.get(i).getId()));
         }
         return result;
     }
 
+    /**
+     * 递归
+     * @param cid
+     * @return
+     */
     public ProductCategoryTree recursiveTree(int cid ){
-        ProductCategoryTree node=productCategoryManager.getProductCategoryById(cid);
-        List<ProductCategoryTree> childTreeNodes=productCategoryManager.getProductCategoryByPId(cid);
+        ProductCategory productCategory=productCategoryManager.getProductCategoryById(cid);
+        //
+        System.out.println(productCategory.getName());
+        //构造多children集合的list
+        ProductCategoryTree node = new ProductCategoryTree();
+        node.setCid(productCategory.getId());
+        node.setCname(productCategory.getName());
+        node.setPid(productCategory.getParentId());
+        //获取当前节点的全部子节点
+        List<ProductCategory> list=productCategoryManager.getProductCategoryByPId(cid);
+
+        //输出子节点
+        for(int i=0;i<list.size();i++) {
+            System.out.println(list.get(i).getName());
+        }
+        System.out.println(list.size());
+
+        List<ProductCategoryTree> childTreeNodes =new ArrayList<ProductCategoryTree>(list.size());
+        System.out.println(childTreeNodes.size());
+        System.out.println(childTreeNodes.get(0).getCname());
+        for(int i=0;i<list.size();i++){
+            childTreeNodes.get(i).setCid(list.get(i).getId());
+            childTreeNodes.get(i).setPid(list.get(i).getParentId());
+            childTreeNodes.get(i).setCname(list.get(i).getName());
+        }
         for(ProductCategoryTree child : childTreeNodes){
             ProductCategoryTree n = recursiveTree(child.getCid()); //递归
             node.getNodes().add(n);

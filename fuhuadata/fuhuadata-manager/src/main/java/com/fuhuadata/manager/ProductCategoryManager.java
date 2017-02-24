@@ -18,11 +18,11 @@ public interface ProductCategoryManager {
 
     public boolean deleteProductCategoryById(int id);
 
-    public ProductCategoryTree getProductCategoryById(int id);
+    public ProductCategory getProductCategoryById(int id);
 
     public List<ProductCategory> getAll();
 
-    public List<ProductCategoryTree> getProductCategoryByPId(int pid);
+    public List<ProductCategory> getProductCategoryByPId(int pid);
 
     public List<ProductCategoryVO> getProductCategoryByLevel();
 }

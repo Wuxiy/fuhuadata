@@ -17,9 +17,9 @@ public interface ProductCategoryDao {
 
     public int updateProductCategoryById(int id,ProductCategory productCategory);
 
-    public ProductCategoryTree getProductCategoryById(int id);
+    public ProductCategory getProductCategoryById(int id);
 
-    public List<ProductCategoryTree> getProductCategoryByParentId(int pid);
+    public List<ProductCategory> getProductCategoryByParentId(int pid);
 
     public List<ProductCategory> getAll();
 

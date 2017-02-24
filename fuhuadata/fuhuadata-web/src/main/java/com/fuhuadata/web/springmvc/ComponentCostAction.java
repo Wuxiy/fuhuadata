@@ -94,9 +94,7 @@ public class ComponentCostAction {
     @ResponseBody
     public ResultPojo getComponentCostById(int id){
         try{
-            System.out.println(id);
             Result<ComponentCost> result=componentCostService.getComponentCostById(id);
-
             return result.getResultPojo();
         }catch(Exception e){
             log.error("根据id获取成分价格错误",e);

@@ -31,7 +31,7 @@ public class ProductCategoryManagerImpl implements ProductCategoryManager {
     }
 
     @Override
-    public ProductCategoryTree getProductCategoryById(int id) {
+    public ProductCategory getProductCategoryById(int id) {
         return productCategoryDao.getProductCategoryById(id);
     }
 
@@ -41,7 +41,7 @@ public class ProductCategoryManagerImpl implements ProductCategoryManager {
     }
 
     @Override
-    public List<ProductCategoryTree> getProductCategoryByPId(int pid) {
+    public List<ProductCategory> getProductCategoryByPId(int pid) {
         return productCategoryDao.getProductCategoryByParentId(pid);
     }
 
