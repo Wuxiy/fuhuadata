@@ -78,8 +78,10 @@
       ]]>
     </select>
 
-    <select id="GET-PARENT">
-
+    <select id="GET-BY-PID" resultMap="PRODUCTCATEGORY-MAP" parameterClass="java.lang.Integer">
+        <![CDATA[
+            SELECT * FROM product_category WHERE parent_id=#parentId#
+        ]]>
     </select>
     
     <select id="COUNT" resultClass="java.lang.Integer" >

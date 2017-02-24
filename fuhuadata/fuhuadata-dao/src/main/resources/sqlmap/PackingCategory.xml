@@ -50,5 +50,10 @@
         ]]>
     </select>
 
+    <select id="GET-BY-PID" parameterClass="java.lang.Integer" resultMap="PACKINGCATEGORY-MAP">
+        <![CDATA[
+        SELECT * FROM p_packing_category WHERE category_id = #categoryId#
+        ]]>
+    </select>
 
 </sqlMap>
