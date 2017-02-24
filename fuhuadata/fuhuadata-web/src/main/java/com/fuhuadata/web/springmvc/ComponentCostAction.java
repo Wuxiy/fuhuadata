@@ -92,10 +92,12 @@ public class ComponentCostAction {
     @RequestMapping(value="/getComponentCostById",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-componentCostInfo",methods = "GET-BY-ID")
     @ResponseBody
-    public ComponentCost getComponentCostById(int id){
+    public ResultPojo getComponentCostById(int id){
         try{
+            System.out.println(id);
             Result<ComponentCost> result=componentCostService.getComponentCostById(id);
-            return result.getModel();
+
+            return result.getResultPojo();
         }catch(Exception e){
             log.error("根据id获取成分价格错误",e);
         }

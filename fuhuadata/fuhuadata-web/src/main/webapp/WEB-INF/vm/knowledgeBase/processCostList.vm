@@ -346,7 +346,7 @@
                  var ResultData = eval(result.data);
                  for(var i=0;i<ResultData.length;i++){
                      Cost.innerHTML += '<tr>'+
-                             '<td><a href="" data-toggle="modal" data-target="#costmodal" class="componentId" data_url="/componentCost/getComponentCostById?'+ResultData[i].componentId+'">'+ResultData[i].componentName+'</a></td>'+
+                             '<td><a href="" data-toggle="modal" data-target="#costmodal" class="componentId" data_url="/componentCost/getComponentCostById?id='+ResultData[i].componentId+'">'+ResultData[i].componentName+'</a></td>'+
                              '<td>'+ResultData[i].consumption+'</td>'+
                              '<td>'+ResultData[i].unitCost+'</td>'+
                              '<td>'+ResultData[i].priceEnd+'</td>'+
