@@ -219,77 +219,7 @@
 </div>
 
 <div class="modal fade" id="costmodal" tabindex="-1"  aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
-                <h2 class="modal-title" >成分价格</h2>
-            </div>
-            <div class="modal-body">
-                <!--表格-->
-                <form class="form-horizontal" action="">
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">成分名称</label>
-                        <div class="col-lg-6">
-                        <input class="form-control" type="text">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">单耗</label>
-                        <div class="col-lg-3">
-                            <div class="input-group">
-                                <input class="form-control" type="text">
-                                <div class="input-group-btn">
-                                    <botton class="btn btn-xs btn-primary">(元/kg)</botton>
-                                </div>
-                            </div>
-                        </div>
-                        <label class="col-lg-2 control-label">单价</label>
-                        <div class="col-lg-3">
-                            <div class="input-group">
-                                <input class="form-control" type="text">
-                                <div class="input-group-btn">
-                                    <botton class="btn btn-xs btn-primary">(元/kg)</botton>
-                                </div>
-                            </div>
 
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">价格有效期</label>
-                        <div class="col-lg-3">
-                            <input class="form-control" type="text">
-                        </div>
-                        <label class="col-lg-2 control-label">适合产品</label>
-                        <div class="col-lg-3">
-                            <input class="form-control" type="text">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-xs-2 control-label">备注</label>
-                        <div class="col-xs-8">
-                            <textarea id="fqlElse" class="form-control"  rows="4"></textarea>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <div class="row">
-                    <div class="col-xs-3 col-xs-offset-3">
-                        <button type="button" class="btn btn-primary btn-block">
-                            完成
-                        </button>
-                    </div>
-                    <div class="col-xs-3">
-                        <button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
  <script type="text/javascript">
@@ -416,11 +346,11 @@
                  var ResultData = eval(result.data);
                  for(var i=0;i<ResultData.length;i++){
                      Cost.innerHTML += '<tr>'+
-                             '<td><a href="" data-toggle="modal" data-target="#costmodal">'+ResultData[i].componentName+'</a></td>'+
+                             '<td><a href="" data-toggle="modal" data-target="#costmodal" class="componentId" data_url="/componentCost/getComponentCostById?'+ResultData[i].componentId+'">'+ResultData[i].componentName+'</a></td>'+
+                             '<td>'+ResultData[i].consumption+'</td>'+
                              '<td>'+ResultData[i].unitCost+'</td>'+
                              '<td>'+ResultData[i].priceEnd+'</td>'+
                              '<td>'+ResultData[i].suitableProduct+'</td>'+
-                             '<td>'+ResultData[i].consumption+'</td>'+
                              '<td>'+ResultData[i].remarks+'</td>'+
                              '</tr>';
                  }
@@ -616,6 +546,69 @@
      });
 
      $('#costmodal').on('show.bs.modal',function(){
+        var url = $('.componentId').attr("data_url");
+        console.log(url);
+        jQuery.ajax({
+            type:'GET',
+            url:url,
+            success:function(result){
+                var ResuleData = eval(result.data);
+                var html = [];
+                 html += '<div class="modal-dialog">';
+                html +='<div class="modal-content">';
+                html +='<div class="modal-header">';
+                html +='<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>';
+                html +='<h2 class="modal-title" >成分价格</h2></div>';
+                html +='<div class="modal-body">';
+                html +='<form class="form-horizontal" action="">';
+                html +='<div class="form-group">';
+                html += '<label class="col-lg-2 control-label">成分名称</label>';
+                html +='<div class="col-lg-6">';
+                html +='<input class="form-control" type="text" value="'+ResuleData.componentName+'">';
+                html +='</div></div>';
+                html +='<div class="form-group">';
+                html +='<label class="col-lg-2 control-label">单耗</label>';
+                html +='<div class="col-lg-3">';
+                html +='<div class="input-group">';
+                html +='<input class="form-control" type="text" value="'+ResuleData.consumption+'">';
+                html +='<div class="input-group-btn">';
+                html +='<botton class="btn btn-xs btn-primary">(元/kg)</botton></div></div></div>';
+                html +='<label class="col-lg-2 control-label">单价</label>';
+                html +='<div class="col-lg-3">';
+                html +='<div class="input-group">';
+                html +='<input class="form-control" type="text" value="'+ResuleData.unitCost+'">';
+                html +='<div class="input-group-btn">';
+                html +='<botton class="btn btn-xs btn-primary">(元/kg)</botton>';
+                html +='</div></div></div></div>';
+                html +='<div class="form-group">';
+                html +='<label class="col-lg-2 control-label">价格有效期</label>';
+                html +='<div class="col-lg-3">';
+                html +='<input class="form-control" type="text" value="'+ResuleData.priceEnd+'">';
+                html +='</div>';
+                html +='<label class="col-lg-2 control-label">适合产品</label>';
+                html +='<div class="col-lg-3">';
+                html +='<input class="form-control" type="text" value="'+ResuleData.suitableProduct+'">';
+                html +='</div>';
+                html +='</div>';
+                html +='<div class="form-group">';
+                html +='<label class="col-xs-2 control-label">备注</label>';
+                html +='<div class="col-xs-8">';
+                html +='<textarea id="fqlElse" class="form-control"  rows="4">'+ResuleData.remarks+'</textarea>';
+                html +='</div>';
+                html +='</div>';
+                html +='</form>';
+                html += '</div>';
+                html +='<div class="modal-footer">';
+                html +='<div class="row">';
+                html +='<div class="col-xs-3 col-xs-offset-3">';
+                html +='<button type="button" class="btn btn-primary btn-block"> 完成 </button>';
+                html +='</div>';
+                html +='<div class="col-xs-3">';
+                html +='<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
+                html +='</div></div></div></div></div>';
 
+                $('#costmodal').html(html);
+            }
+        });
      });
  </script>
