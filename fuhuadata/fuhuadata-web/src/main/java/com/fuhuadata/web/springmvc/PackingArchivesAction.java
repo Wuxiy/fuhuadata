@@ -114,11 +114,27 @@ public class PackingArchivesAction {
             Result<PackingArchives> result = packingArchivesService.getPackingArchivesById(id);
             return result.getResultPojo();
         }catch(Exception e){
-            log.error("根据id获取成本档案信息错误",e);
+            log.error("根据id获取包材成本档案信息错误",e);
         }
         return null;
     }
 
-
+    /**
+     * 根据PId获取目录包材
+     * @param id
+     * @return
+     */
+    @RequestMapping(value="/getPackingArchivesByPId")
+    @SystemLogAnnotation(module = "knowledgeBase-packingArchives",methods = "GET-BY-PID")
+    @ResponseBody
+    public ResultPojo getPackingArchivesByPId(int id){
+        try{
+            Result<List<PackingArchives>> result = packingArchivesService.getPackingArchivesByPId(id);
+            return result.getResultPojo();
+        }catch(Exception e){
+            log.error("根据PId获取包材成本档案信息错误",e);
+        }
+        return null;
+    }
 
 }

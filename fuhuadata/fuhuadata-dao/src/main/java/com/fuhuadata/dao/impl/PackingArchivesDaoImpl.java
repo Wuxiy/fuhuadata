@@ -19,6 +19,7 @@ public class PackingArchivesDaoImpl extends SqlMapClientTemplate implements Pack
     public static final String GET_ALL = "PACKINGARCHIVES.GET-ALL";
     public static final String GET_BY_QUERY = "PACKINGARCHIVES.GET-BY-QUERY";
     public static final String GET_BY_ID = "PACKINGARCHIVES.GET-BY-ID";
+    public static final String GET_BY_PID="PACKINGARCHIVES.GET-BY-PID";
     public static final String GET_PAGE = "PACKINGARCHIVES.GET-PAGE";
     public static final String COUNT = "PACKINGARCHIVES.COUNT";
     @Override
@@ -51,6 +52,11 @@ public class PackingArchivesDaoImpl extends SqlMapClientTemplate implements Pack
     @Override
     public PackingArchives getPackingArchivesById(int id) {
         return (PackingArchives) this.queryForObject(GET_BY_ID,id);
+    }
+
+    @Override
+    public List<PackingArchives> getPackingArchivesByPId(int id) {
+        return this.queryForList(GET_BY_PID,id);
     }
 
     @Override

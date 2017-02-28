@@ -23,6 +23,8 @@ public interface PackingArchivesService {
 
     public Result<PackingArchives> getPackingArchivesById(int id);
 
+    public Result<List<PackingArchives>> getPackingArchivesByPId(int id);
+
     public Result<List<PackingArchives>> getPackingArchivesByPage(PackingArchivesQuery packingArchivesQuery);
 
     public Result<Integer> count(PackingArchivesQuery packingArchivesQuery);

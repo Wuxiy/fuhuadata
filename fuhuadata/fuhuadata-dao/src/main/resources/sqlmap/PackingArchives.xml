@@ -7,8 +7,8 @@
 
     <resultMap id="PACKINGARCHIVES-MAP" class="PackingArchives">
         <result column="packing_id" property="packingId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result column="type" property="type" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="packing_type" property="packingType" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="type" property="type" jdbcType="INT" javaType="java.lang.Integer"/>
+        <result column="packing_type" property="packingType" jdbcType="INT" javaType="java.lang.Integer"/>
         <result column="pack_name" property="packName" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="size" property="size" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="spec" property="spec" jdbcType="VARCHAR" javaType="java.lang.String"/>
@@ -235,8 +235,14 @@
 
     <select id="GET-BY-ID" resultMap="PACKINGARCHIVES-MAP" parameterClass="java.lang.Integer">
         <![CDATA[
-			SELECT * FROM k_packing_archives WHERE packing_id=#packingId#
+			SELECT * FROM k_packing_archives WHERE packing_id=#id#
 		]]>
+    </select>
+
+    <select id="GET-BY-PID" resultMap="PACKINGARCHIVES-MAP" parameterClass="java.lang.Integer">
+        <![CDATA[
+            SELECT * FROM k_packing_archives WHERE packing_type=#id#
+        ]]>
     </select>
 
     <select id="GET-PAGE" resultMap="PACKINGARCHIVES-MAP" parameterClass="PackingArchivesQuery">

@@ -8,9 +8,9 @@ import java.util.Date;
 public class PackingArchivesQuery extends PageBase{
     private Integer packingId;
 
-    private String type;//包材类型：内包材，外包材，辅材
+    private Integer type;//包材类型：内包材，外包材，辅材
 
-    private String packingType;//底层分层，主材-平桶类
+    private Integer packingType;//底层分层，主材-平桶类
 
     private String packName;//包材名称
 
@@ -49,21 +49,7 @@ public class PackingArchivesQuery extends PageBase{
         this.packingId = packingId;
     }
 
-    public String getType() {
-        return type;
-    }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getPackingType() {
-        return packingType;
-    }
-
-    public void setPackingType(String packingType) {
-        this.packingType = packingType;
-    }
 
     public String getPackName() {
         return packName;
@@ -175,5 +161,21 @@ public class PackingArchivesQuery extends PageBase{
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public Integer getPackingType() {
+        return packingType;
+    }
+
+    public void setPackingType(Integer packingType) {
+        this.packingType = packingType;
     }
 }
