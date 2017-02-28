@@ -17,39 +17,7 @@
                 <div class="panel-body clearfix">
                     <!--树形菜单-->
                     <div id="tree" class="tree">
-                        <ul class="tree-root">
-                            <li>
-                                <span class="branch-node" data-toggle="collapse" data-target="#bNode1"></span><a href=""><span class="leaf"></span><span lang="zh">主材</span></a>
-                                <ul id="bNode1" class="tree-branch collapse in">
-                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">瓶桶类</span></a></li>
-                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">液袋</span></a></li>
-                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">颗粒剂内包装</span></a></li>
-                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">原药包装</span></a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <span class="branch-node" data-toggle="collapse" data-target="#bNode2"></span><a href=""><span class="leaf"></span><span lang="zh">外包装</span></a>
-                                <ul id="bNode2" class="tree-branch collapse in">
-                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">无搬运孔纸箱</span></a></li>
-                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">带搬运孔纸箱</span></a></li>
-                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">纸板桶</span></a></li>
-                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">编织袋</span></a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <span class="branch-node" data-toggle="collapse" data-target="#bNode3"></span><a href=""><span class="leaf"></span><span lang="zh">其他</span></a>
-                                <ul id="bNode3" class="tree-branch collapse in">
-                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">塑料袋</span></a></li>
-                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">自封袋</span></a></li>
-                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">说明书</span></a></li>
-                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">封箱胶带</span></a></li>
-                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">标签</span></a></li>
-                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">收缩膜</span></a></li>
-                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">量杯</span></a></li>
-                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">箱贴</span></a></li>
-                                </ul>
-                            </li>
-                        </ul>
+
                     </div>
                 </div>
             </div>
