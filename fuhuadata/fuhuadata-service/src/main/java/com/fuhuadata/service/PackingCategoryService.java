@@ -3,7 +3,6 @@ package com.fuhuadata.service;
 import com.fuhuadata.domain.PackingCategory;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.vo.CategoryTree;
-import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
 
 import java.util.List;
 
