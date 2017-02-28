@@ -83,11 +83,11 @@ public class PortChargesCostAction {
      */
     @RequestMapping(value = "/getPortChargesCostById")
     @ResponseBody
-    @SystemLogAnnotation(module = "knowledgeBase-portChargesCost",methods = "getPortChargesCostJson")
-    public PortChargesCost getPortChargesCostById(int id){
+    @SystemLogAnnotation(module = "knowledgeBase-portChargesCost",methods = "GET-BY-ID")
+    public ResultPojo getPortChargesCostById(int id){
         try{
             Result<PortChargesCost> result = portChargesCostService.getPortChargesCostById(id);
-            return result.getModel();
+            return result.getResultPojo();
         }catch(Exception e){
             log.error("根据id获取港杂费信息错误",e);
         }

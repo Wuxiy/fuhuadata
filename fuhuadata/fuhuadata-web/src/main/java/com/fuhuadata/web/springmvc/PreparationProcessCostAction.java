@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import sun.security.pkcs11.Secmod;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -79,6 +80,24 @@ public class PreparationProcessCostAction {
         return null;
     }
 
+
+    /**
+     * 根据id获取详情
+     * @param id
+     * @return
+     */
+    @RequestMapping(value="/getPreparationProcessCostById",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-preparationProcessCost",methods = "GET-BY-ID")
+    @ResponseBody
+    public ResultPojo getPreparationProcessCostById(int id){
+        try{
+            Result<PreparationProcessCost> result = preparationProcessCostService.getPreparationProcessCostById(id);
+            return result.getResultPojo();
+        }catch(Exception e){
+            log.error("根据id获取制剂加工成本错误",e);
+        }
+        return null;
+    }
     /**
      * 条件查询
      * @param preparationProcessCostQuery

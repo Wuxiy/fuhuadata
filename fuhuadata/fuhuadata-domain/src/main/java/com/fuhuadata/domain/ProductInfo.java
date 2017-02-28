@@ -4,6 +4,7 @@ import java.util.Date;
 import java.math.BigDecimal;
 
 /**
+ * 标准产品档案
  * @author wangbo
  * @date 2017-01-24 10:45:54
  */
@@ -12,20 +13,27 @@ public class ProductInfo{
     /**标准产品id**/
 	private Integer productId;
 	
-    /**父产品id**/
-	private Integer parentId;
-	
-    /**父产品名称,第一级到父级路径的组合**/
-	private String parentName;
-	
-    /**产品浓度,和父级名称一起生成名称**/
-	private BigDecimal concentration;
-	
-    /**产品名称**/
+    /**一级产品id**/
+	private Integer bigCategoryId;
+
+	/**二级产品id**/
+	private Integer midCategoryId;
+
+	/**三级产品id**/
+	private Integer smallCategoryId;
+
+    /**品类,第一级到三级分类的组合**/
+	private String categoryName;
+
+	/**产品名称**/
 	private String name;
+
+	/**主计量单位**/
+	private String  measurementUnit;
 	
-    /**品牌**/
-	private String brand;
+    /**产品浓度含量,和父级名称一起生成名称**/
+	private BigDecimal concentration;
+
 	
     /**0无，1异丙胺盐，2铵盐，3钾盐，4二甲铵盐，5其他**/
 	private Integer saltType;
@@ -44,18 +52,13 @@ public class ProductInfo{
 	
     /**产品特点**/
 	private String productFeature;
-	
-    /**产品要求**/
-	private String productRequire;
-	
+
     /**加工成分,序列化数据格式**/
 	private String processingComponents;
 	
     /**理化指标,序列化数据格式**/
 	private String physicalProperities;
-	
-    /**颜色属性,序列化id**/
-	private String productColor;
+
 	
     /**包装信息,序列化id**/
 	private String packageInfo;
@@ -92,23 +95,7 @@ public class ProductInfo{
 	public void setProductId(Integer productId) {
 		this.productId = productId;
 	}
-	
-	public Integer getParentId() {
-		return parentId;
-	}
-	
-	public void setParentId(Integer parentId) {
-		this.parentId = parentId;
-	}
-	
-	public String getParentName() {
-		return parentName;
-	}
-	
-	public void setParentName(String parentName) {
-		this.parentName = parentName;
-	}
-	
+
 	public BigDecimal getConcentration() {
 		return concentration;
 	}
@@ -124,14 +111,7 @@ public class ProductInfo{
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public String getBrand() {
-		return brand;
-	}
-	
-	public void setBrand(String brand) {
-		this.brand = brand;
-	}
+
 	
 	public Integer getSaltType() {
 		return saltType;
@@ -181,14 +161,6 @@ public class ProductInfo{
 		this.productFeature = productFeature;
 	}
 	
-	public String getProductRequire() {
-		return productRequire;
-	}
-	
-	public void setProductRequire(String productRequire) {
-		this.productRequire = productRequire;
-	}
-	
 	public String getProcessingComponents() {
 		return processingComponents;
 	}
@@ -204,14 +176,7 @@ public class ProductInfo{
 	public void setPhysicalProperities(String physicalProperities) {
 		this.physicalProperities = physicalProperities;
 	}
-	
-	public String getProductColor() {
-		return productColor;
-	}
-	
-	public void setProductColor(String productColor) {
-		this.productColor = productColor;
-	}
+
 	
 	public String getPackageInfo() {
 		return packageInfo;
@@ -276,6 +241,44 @@ public class ProductInfo{
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
 	}
-	
 
+	public Integer getBigCategoryId() {
+		return bigCategoryId;
+	}
+
+	public void setBigCategoryId(Integer bigCategoryId) {
+		this.bigCategoryId = bigCategoryId;
+	}
+
+	public Integer getMidCategoryId() {
+		return midCategoryId;
+	}
+
+	public void setMidCategoryId(Integer midCategoryId) {
+		this.midCategoryId = midCategoryId;
+	}
+
+	public Integer getSmallCategoryId() {
+		return smallCategoryId;
+	}
+
+	public void setSmallCategoryId(Integer smallCategoryId) {
+		this.smallCategoryId = smallCategoryId;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+	public String getMeasurementUnit() {
+		return measurementUnit;
+	}
+
+	public void setMeasurementUnit(String measurementUnit) {
+		this.measurementUnit = measurementUnit;
+	}
 }

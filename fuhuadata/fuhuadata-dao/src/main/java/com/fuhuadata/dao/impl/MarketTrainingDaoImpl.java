@@ -12,14 +12,14 @@ import java.util.List;
  */
 public class MarketTrainingDaoImpl extends SqlMapClientTemplate implements MarketTrainingDao {
 
-    private static final String ADD="EXHIBITIONINFO.ADD";
-    private static final String GET_PAGE="EXHIBITIONINFO.GET-PAGE";
-    private static final String COUNT="EXHIBITIONINFO.COUNT";
-    private static final String UPDATE="EXHIBITIONINFO.UPDATE";
-    private static final String DELETE_BY_ID="EXHIBITIONINFO.DELETE-BY-ID";
-    private static final String GET_ALl="EXHIBITIONINFO.GET-ALL";
-    private static final String GET_BY_ID="EXHIBITIONINFO.GET-BY-ID";
-    private static final String GET_BY_QUERY="EXHIBITIONINFO.GET-BY-QUERY";
+    private static final String ADD="MARKETTRAINING.ADD";
+    private static final String GET_PAGE="MARKETTRAINING.GET-PAGE";
+    private static final String COUNT="MARKETTRAINING.COUNT";
+    private static final String UPDATE="MARKETTRAINING.UPDATE";
+    private static final String DELETE_BY_ID="MARKETTRAINING.DELETE-BY-ID";
+    private static final String GET_ALl="MARKETTRAINING.GET-ALL";
+    private static final String GET_BY_ID="MARKETTRAINING.GET-BY-ID";
+    private static final String GET_BY_QUERY="MARKETTRAINING.GET-BY-QUERY";
 
     @Override
     public MarketTraining addMartketTraining(MarketTraining marketTraining) {

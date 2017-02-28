@@ -135,8 +135,9 @@
  <script type="text/javascript">
      $(document).ready(function(){
         $("#markettrain_table").dataTable({
-            "ajax":"querymarketTrainingList",
+            "ajax":'/marketTraining/queryMarketTrainingList',
             "pagingType":"full_numbers",
+            "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
             "columns":[
                  {"data":"tranId"},
                  {"data":"productId"},
@@ -148,8 +149,8 @@
             "columnDefs":[
                  {
                      "targets":5,
-                     "render":function (data,type,row) {
-                         return '<a href="'+data+'" target="_blank">'+下载+'</a>';
+                     "render":function (data,type,row,meta) {
+                         return '<a href="'+data+'" target="_blank">'+row.download+'</a>';
                      }
                  }
              ],

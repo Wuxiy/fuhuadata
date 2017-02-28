@@ -53,7 +53,7 @@
                     </div>
                     <!--搜索框结束-->
                     <!--表格开始-->
-                    <table id="" class="table table-condensed table-bordered table-striped text-center" cellpadding="0">
+                    <table id="customer_encyclopedia_table" class="table table-condensed table-bordered table-striped text-center" cellpadding="0">
                         <thead>
                         <tr>
                             <th class="text-center">编号</th>
@@ -87,3 +87,4 @@
         </div>
     </div>
 </div>
+

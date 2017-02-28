@@ -84,25 +84,25 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $('#encyclopedia_table').dataTable({
-            "ajax":"",
+            "ajax":'queryCustomerEncyclopediaList',
             "pagingType":"full_numbers",
             "columns":[
                 {"data":"encyId"},
                 {"data":"companyName"},
-                {"data":null},
+                {"data":"companyAbbreviation"},
                 {"data":"type"},
                 {"data":"isFull"},
                 {"data":"createUserName"},
-                {"datat":"createTime"},
+                {"data":"createTime"},
                 {"data":"lastmodifyUserName"},
                 {"data":"modifyTime"}
             ],
             "columnDefs":[
                 {
                     "targets":5,
-                    "render":function (data,type,row) {
-                        return '<a href="'+data+'" target="_blank">'+下载+'</a>';
-                    }
+//                    "render":function (data,type,row) {
+//                        return '<a href="'+data+'" target="_blank">'+下载+'</a>';
+//                    }
                 }
             ],
             "language": {

@@ -79,4 +79,23 @@ public class FreightCostAction {
     }
 
 
+    /**
+     * 根据id获取详情
+     * @param id
+     * @return
+     */
+    @RequestMapping(value="/getFreightCostById",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-FreightCost",methods = "GET-BY-ID")
+    @ResponseBody
+    public ResultPojo getFreightCostById(int id){
+        try{
+            Result<FreightCost> result = freightCostService.getFreightCostById(id);
+            return result.getResultPojo();
+        }catch(Exception e){
+            log.error("根据id获取运费成本错误",e);
+        }
+        return null;
+    }
+
+
 }

@@ -1,6 +1,12 @@
 package com.fuhuadata.domain;
 
 
+import com.fuhuadata.util.DateJsonDeserializer;
+import com.fuhuadata.util.DateJsonSerializer;
+import org.codehaus.jackson.map.JsonSerializer;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import java.util.Date;
 
 /**
@@ -64,10 +70,12 @@ public class MarketTraining {
         this.userId = userId;
     }
 
+    @JsonSerialize(using = DateJsonSerializer.class)
     public Date getUploadDate() {
         return uploadDate;
     }
 
+    @JsonDeserialize(using = DateJsonDeserializer.class)
     public void setUploadDate(Date uploadDate) {
         this.uploadDate = uploadDate;
     }

@@ -39,8 +39,9 @@ public class MarketTrainingAction {
     public ModelAndView marketTrainingList(){
         return new ModelAndView("knowledgeBase/marketTrainingList");
     }
-    @RequestMapping(value = "/querymarketTrainingList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-营销培训",methods = "list")
+    @RequestMapping(value = "/queryMarketTrainingList",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "list")
+    @ResponseBody
     public ResultPojo querymarketTrainingList(){
         MarketTrainingQuery marketTrainingQuery = new MarketTrainingQuery();
         Result<List<MarketTraining>> result = new Result<List<MarketTraining>>();
@@ -57,13 +58,13 @@ public class MarketTrainingAction {
      * add
      * @return
      */
-    @RequestMapping(value="/marketTrainingList")
+    @RequestMapping(value="/addMarketTraining")
     @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "add")
     public ModelAndView addMarketTrainingList(){
         return new ModelAndView("knowledgeBase/marketTrainingAdd");
     }
     @RequestMapping(value = "/doAddMarketTraining",method = RequestMethod.POST)
-    @SystemLogAnnotation(module = "知识库-营销培训",methods = "doAdd")
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "doAdd")
     @ResponseBody
     public ResultPojo doAddMarketTraining(@RequestBody MarketTraining marketTraining){
         try{
@@ -75,12 +76,14 @@ public class MarketTrainingAction {
         return null;
     }
 
+
+    @RequestMapping(value = "/doModify",method = RequestMethod.POST)
     public ResultPojo doModifyMarketTraining(@RequestBody MarketTraining marketTraining){
         try{
             int id=marketTraining.getTranId();
             Result<MarketTraining> result = marketTrainingService.updateMarketTrainingById(id,marketTraining);
         }catch(Exception e){
-
+            log.error("更新市场营销培训信息失败",e);
         }
         return null;
     }

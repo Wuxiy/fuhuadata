@@ -36,7 +36,7 @@ public class CustomerEncyclopediaAction {
     @RequestMapping(value = "/customerEncyclopediaList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "into")
     public ModelAndView customerEncyclopedia(){
-        return new ModelAndView("knowledgeBase/customerEncyclopediaList");
+        return new ModelAndView("knowledgeBase/encyclopediaList");
     }
 
     /**
@@ -62,13 +62,13 @@ public class CustomerEncyclopediaAction {
      * @return
      */
     @RequestMapping(value = "/addCustomerEncyclopedia",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-企业百科",methods = "add")
+    @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "add")
     public ModelAndView addCustomerEncyclopedia(){
         return new ModelAndView("knowledgeBase/customerEncyclopediaAdd");
     }
 
     @RequestMapping(value = "/doAddCustomerEncyclopedia",method = RequestMethod.POST)
-    @SystemLogAnnotation(module = "知识库-客户百科",methods = "doAdd")
+    @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "doAdd")
     @ResponseBody
      public ResultPojo doAddCustomerEncyclopedia(@RequestBody CustomerEncyclopedia customerEncyclopedia){
         //
@@ -80,6 +80,8 @@ public class CustomerEncyclopediaAction {
         }
         return null;
     }
+
+
 
 
 
