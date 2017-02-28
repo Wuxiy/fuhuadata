@@ -1,6 +1,5 @@
 package com.fuhuadata.web.springmvc;
 
-import com.fuhuadata.domain.FreightCost;
 import com.fuhuadata.domain.PackingArchives;
 import com.fuhuadata.domain.query.PackingArchivesQuery;
 import com.fuhuadata.domain.query.Result;

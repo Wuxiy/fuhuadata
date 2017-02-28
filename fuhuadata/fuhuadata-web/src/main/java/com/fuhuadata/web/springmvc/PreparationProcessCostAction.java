@@ -122,4 +122,19 @@ public class PreparationProcessCostAction {
         return model;
     }
 
+    @RequestMapping(value = "/doModify",method=RequestMethod.POST)
+    @SystemLogAnnotation(module = "knowledgeBase-preparationProcessCost",methods="doUpdate")
+    @ResponseBody
+    public ResultPojo doModifyPreparationProcessCost(@RequestBody PreparationProcessCost preparationProcessCost){
+        try{
+            int id = preparationProcessCost.getMcostId();
+            Result<PreparationProcessCost> result = preparationProcessCostService.updatePreparationProcessCost(id,preparationProcessCost);
+            return result.getResultPojo();
+        }catch(Exception e){
+            log.error("修改制剂加工成本错误",e);
+        }
+        return null;
+    }
+
+
 }
