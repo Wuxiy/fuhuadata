@@ -163,10 +163,10 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-        $("#productproblem_table").dataTable(){
-            "ajax":"",
+        $("#productproblem_table").dataTable( {
+            "ajax":'/productProblem/queryProductProblemList',
             "pagingType":"full_numbers",
-            "lengthMenu":[[5, 10, 1 5, -1], [5, 10, 15, "All"]],
+            "lengthMenu":[[5, 10, 15, -1], [5, 10, 15, "All"]],
             "columns":[
                 {"data":"problemId"},
                 {"data":"problemContent"},
@@ -177,8 +177,8 @@
             "columnDefs":[
                 {
                     "targets":1,
-                    "render":function(data,type,row){
-                        return '<a href="' + data + '" target="_blank">' + row. + '</a>';
+                    "render":function(data,type,row,meta){
+                        return '<a href="' + data + '" target="_blank">' + row.solution+ '</a>';
                     }
                 }
             ],
@@ -186,6 +186,6 @@
                 "url": '/lib/dataTables/lang/dataTables.lang.zh',
                         "searchPlaceholder": '关键字'
             }
-        }
-    })
+        });
+    });
 </script>

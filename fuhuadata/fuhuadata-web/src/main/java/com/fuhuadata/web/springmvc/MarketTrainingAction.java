@@ -39,8 +39,9 @@ public class MarketTrainingAction {
     public ModelAndView marketTrainingList(){
         return new ModelAndView("knowledgeBase/marketTrainingList");
     }
-    @RequestMapping(value = "/querymarketTrainingList",method = RequestMethod.GET)
+    @RequestMapping(value = "/queryMarketTrainingList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "list")
+    @ResponseBody
     public ResultPojo querymarketTrainingList(){
         MarketTrainingQuery marketTrainingQuery = new MarketTrainingQuery();
         Result<List<MarketTraining>> result = new Result<List<MarketTraining>>();
@@ -57,7 +58,7 @@ public class MarketTrainingAction {
      * add
      * @return
      */
-    @RequestMapping(value="/marketTrainingList")
+    @RequestMapping(value="/addMarketTraining")
     @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "add")
     public ModelAndView addMarketTrainingList(){
         return new ModelAndView("knowledgeBase/marketTrainingAdd");
