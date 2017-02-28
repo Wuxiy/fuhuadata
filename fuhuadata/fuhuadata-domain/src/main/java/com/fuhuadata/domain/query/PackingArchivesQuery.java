@@ -1,5 +1,6 @@
 package com.fuhuadata.domain.query;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -26,7 +27,7 @@ public class PackingArchivesQuery extends PageBase{
 
     private String qualityTargetValue;//质量指标数值
 
-    private String unitPrice;//单价
+    private BigDecimal unitPrice;//单价
 
     private Date priceEndDate;//价格有效期  yyyy/mm/dd
 
@@ -34,7 +35,7 @@ public class PackingArchivesQuery extends PageBase{
 
     private String bRemarks;//备注
 
-    private String status;//状态
+    private Integer status;//状态 0:已禁用 1:已启用
 
     private String associatedPackingId;//关联包材（主材会有关联外包装和辅材）
 
@@ -107,14 +108,6 @@ public class PackingArchivesQuery extends PageBase{
         this.qualityTargetValue = qualityTargetValue;
     }
 
-    public String getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(String unitPrice) {
-        this.unitPrice = unitPrice;
-    }
-
     public Date getPriceEndDate() {
         return priceEndDate;
     }
@@ -137,14 +130,6 @@ public class PackingArchivesQuery extends PageBase{
 
     public void setbRemarks(String bRemarks) {
         this.bRemarks = bRemarks;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public String getAssociatedPackingId() {
@@ -177,5 +162,21 @@ public class PackingArchivesQuery extends PageBase{
 
     public void setPackingType(Integer packingType) {
         this.packingType = packingType;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public BigDecimal getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(BigDecimal unitPrice) {
+        this.unitPrice = unitPrice;
     }
 }

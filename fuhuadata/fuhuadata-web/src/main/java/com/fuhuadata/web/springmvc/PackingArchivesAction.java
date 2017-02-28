@@ -127,7 +127,7 @@ public class PackingArchivesAction {
     @RequestMapping(value="/getPackingArchivesByPId")
     @SystemLogAnnotation(module = "knowledgeBase-packingArchives",methods = "GET-BY-PID")
     @ResponseBody
-    public ResultPojo getPackingArchivesByPId(int id){
+    public ResultPojo getPackingArchivesByPId(Integer id){
         try{
             Result<List<PackingArchives>> result = packingArchivesService.getPackingArchivesByPId(id);
             return result.getResultPojo();
