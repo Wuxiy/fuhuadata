@@ -1,6 +1,11 @@
 package com.fuhuadata.domain;
 
 
+import com.fuhuadata.util.DateJsonDeserializer;
+import com.fuhuadata.util.DateJsonSerializer;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import java.util.Date;
 
 /**系统日志监控用户操作
@@ -47,6 +52,7 @@ public class SystemLog {
         return method;
     }
 
+    @JsonSerialize(using = DateJsonSerializer.class)
     public Date getDate() {
         return date;
     }
@@ -87,6 +93,7 @@ public class SystemLog {
         this.method = method;
     }
 
+    @JsonDeserialize(using = DateJsonDeserializer.class)
     public void setDate(Date date) {
         this.date = date;
     }

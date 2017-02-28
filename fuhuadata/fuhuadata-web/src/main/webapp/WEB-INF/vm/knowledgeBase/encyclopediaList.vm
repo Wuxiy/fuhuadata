@@ -93,7 +93,7 @@
                 {"data":"type"},
                 {"data":"isFull"},
                 {"data":"createUserName"},
-                {"datat":"createTime"},
+                {"data":"createTime"},
                 {"data":"lastmodifyUserName"},
                 {"data":"modifyTime"}
             ],

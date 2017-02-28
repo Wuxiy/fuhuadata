@@ -1,5 +1,12 @@
 package com.fuhuadata.domain;
 
+import com.fuhuadata.util.DateJsonDeserializer;
+import com.fuhuadata.util.DateJsonSerializer;
+import com.sun.xml.internal.ws.wsdl.writer.UsingAddressing;
+import org.codehaus.jackson.map.JsonSerializer;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import java.util.Date;
 
 /**
@@ -146,10 +153,12 @@ public class CustomerEncyclopedia {
             this.createUserName = createUserName ;
         }
 
+        @JsonSerialize(using = DateJsonSerializer.class)
         public Date getCreateTime() {
             return createTime;
         }
 
+        @JsonDeserialize(using = DateJsonDeserializer.class)
         public void setCreateTime(Date createTime) {
             this.createTime = createTime;
         }
@@ -170,10 +179,12 @@ public class CustomerEncyclopedia {
             this.lastmodifyUserName = lastmodifyUserName ;
         }
 
+        @JsonSerialize(using = DateJsonSerializer.class)
         public Date getModifyTime() {
             return modifyTime;
         }
 
+        @JsonDeserialize(using = DateJsonDeserializer.class)
         public void setModifyTime(Date modifyTime) {
             this.modifyTime = modifyTime;
         }
