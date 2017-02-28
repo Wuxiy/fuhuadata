@@ -47,7 +47,7 @@
                             <th class="text-center" lang="zh">状态</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="container">
                         <tr>
                             <td>1</td>
                             <td><a href="http://www.baidu.com" target="_blank">主材-瓶桶类</a></td>
@@ -71,5 +71,5 @@
 <script type="text/javascript" language="javascript" src="/lib/js/creatTree.js"></script>
 <script type="text/javascript">
     $('#tree').creatTree('/packingCategory/CategoryTree');
-    $('#tree').filtrateData('/packingArchives/getPackingArchivesById');
+    $('#tree').filtrateData('/packingArchives/getPackingArchivesByPId',"container","packingArchivesList");
 </script>

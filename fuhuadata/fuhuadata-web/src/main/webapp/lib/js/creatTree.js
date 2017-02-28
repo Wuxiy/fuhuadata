@@ -39,6 +39,7 @@
 // }(jQuery);
 
 (function( $ ) {
+    //动态生成树形菜单
     $.fn.creatTree = function(url) {
         var tree = this;
         tree.html('');
@@ -61,6 +62,7 @@
             })
         }
     };
+    //给树形菜单动态添加点击事件，并且获取数据，将数据渲染到表格或者表单
     $.fn.filtrateData = function(url,containerId,method){
         var $container = $('#'+containerId);
         this.on('click','li[id]>a',function(e){
@@ -70,17 +72,19 @@
             $.post(url,{id:id},function(data,status){
                 console.log(data);
                 $container.html('');
-                methods[method](data,$container);
+                //调用不同的渲染方法
+                methods[method](data.data,$container);
             })
             return false;
         });
         var methods={
+            //包材成本列表渲染方法
             packingArchivesList : function(getData,parent){
                 $.each(getData,function(n,item){
                     var tr = $('<tr></tr>');
-                    $(tr).append('<td>'+item.associatedPackingId+'</td><td>');
+                    $(tr).append('<td><a href="">'+item.packingId+'</a></td><td>'+item.packName+'</td><td>'+item.spec+'</td><td>'+item.quality+'</td><td>'+item.qualityIndex+'</td><td>'+item.qualityTargetValue+'</td><td>'+item.unitPrice+'</td><td>'+item.priceEndDate+'</td><td>'+item.suitableType+'</td><td>'+item.bRemarks+'</td><td>'+item.status+'</td>').appendTo(parent);
                 })
-        },
+        }
         }
     };
 })( jQuery );
