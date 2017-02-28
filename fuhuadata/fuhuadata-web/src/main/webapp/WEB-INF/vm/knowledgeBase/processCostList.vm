@@ -218,10 +218,14 @@
     </div>
 </div>
 
+<div class="modal fade" id="adEexpense1modal" tabindex="-1"  aria-hidden="true" data-backdrop="static"></div>
+<div class="modal fade" id="adEexpense1modal" tabindex="-1"  aria-hidden="true" data-backdrop="static"></div>
+<div class="modal fade" id="freight1modal" tabindex="-1"  aria-hidden="true" data-backdrop="static"></div>
+<div class="modal fade" id="modal" tabindex="-1"  aria-hidden="true" data-backdrop="static"></div>
 
-<div class="modal fade" id="costmodal" tabindex="-1"  aria-hidden="true" data-backdrop="static">
-
-</div>
+<div class="modal fade" id="rate1modal" tabindex="-1"  aria-hidden="true" data-backdrop="static"></div>
+<div class="modal fade" id="rate2modal" tabindex="-1"  aria-hidden="true" data-backdrop="static"></div>
+<div class="modal fade" id="rate3modal" tabindex="-1"  aria-hidden="true" data-backdrop="static"></div>
 
  <script type="text/javascript">
      var Adeexpense1 = document.getElementById("adEexpense1");
@@ -232,9 +236,9 @@
      var Rate1 = document.getElementById("rate1");
      var Rate2 = document.getElementById("rate2");
      var Rate3 = document.getElementById("rate3");
+     var modal = document.getElementById("modal");
 
      $(document).ready(function () {
-
 
          $('a[href="#adEexpense"]').tab('show');
          jQuery.ajax({
@@ -255,7 +259,7 @@
 
                  for (var j = 0; j < ResultData1.length; j++) {
                      Adeexpense1.innerHTML += '<tr>' +
-                             '<td><a href="" data-toggle="modal" data-target="#details" data-url="http">' + ResultData1[j].costTerm + '</a></td>' +
+                             '<td><a class="adEexpense1" data-url="/preparationProcessCost/getPreparationProcessCostById?id='+ResultData1[j].mcostId+'">' + ResultData1[j].costTerm + '</a></td>' +
                              '<td>' + ResultData1[j].unitCost + '</td>' +
                              '<td>' + ResultData1[j].priceEnd + '</td>' +
                              '<td>' + ResultData1[j].remarks + '</td>' +
@@ -263,7 +267,7 @@
                  }
                  for (var k = 0; k < ResultData2.length; k++) {
                      Adeexpense2.innerHTML += '<tr>' +
-                             '<td><a href="" data-toggle="modal" data-target="#details">' + ResultData2[k].processFactory + '</a></td>' +
+                             '<td><a class="adEexpense2" data-url="/preparationProcessCost/getPreparationProcessCostById?id='+ResultData1[k].mcostId+'">' + ResultData2[k].processFactory + '</a></td>' +
                              '<td>' + ResultData2[k].charges + '</td>' +
                              '<td>' + ResultData2[k].profit + '</td>' +
                              '<td>' + ResultData2[k].managementFee + '</td>' +
@@ -296,7 +300,7 @@
 
                      for (var j = 0; j < ResultData1.length; j++) {
                          Adeexpense1.innerHTML += '<tr>' +
-                                 '<td><a href="" data-toggle="modal" data-target="#details">' + ResultData1[j].costTerm + '</a></td>' +
+                                 '<td><a class="adEexpense1" data-url="/preparationProcessCost/getPreparationProcessCostById?id='+ResultData1[j].mcostId+'">' + ResultData1[j].costTerm + '</a></td>' +
                                  '<td>' + ResultData1[j].unitCost + '</td>' +
                                  '<td>' + ResultData1[j].priceEnd + '</td>' +
                                  '<td>' + ResultData1[j].remarks + '</td>' +
@@ -304,7 +308,7 @@
                      }
                      for (var k = 0; k < ResultData2.length; k++) {
                          Adeexpense2.innerHTML += '<tr>' +
-                                 '<td><a href="" data-toggle="modal" data-target="#details">' + ResultData2[k].processFactory + '</a></td>' +
+                                 '<td><a class="adEexpense2" data-url="/preparationProcessCost/getPreparationProcessCostById?id='+ResultData1[k].mcostId+'">' + ResultData2[k].processFactory + '</a></td>' +
                                  '<td>' + ResultData2[k].charges + '</td>' +
                                  '<td>' + ResultData2[k].profit + '</td>' +
                                  '<td>' + ResultData2[k].managementFee + '</td>' +
@@ -327,7 +331,7 @@
                      var ResultData = eval(result.data);
                      for (var i = 0; i < ResultData.length; i++) {
                          Freight.innerHTML += '<tr>' +
-                                 '<td><a href="" data-toggle="modal" data-target="#details">' + ResultData[i].processFactory + '</a></td>' +
+                                 '<td><a class="freight1" data_url="/freightCost/getFreightCostById?id='+ResultData[i].freightId+'">' + ResultData[i].processFactory + '</a></td>' +
                                  '<td>' + ResultData[i].unitCost + '</td>' +
                                  '<td>' + ResultData[i].departureCity + '</td>' +
                                  '<td>' + ResultData[i].destinationCity + '</td>' +
@@ -348,7 +352,7 @@
                      var ResultData = eval(result.data);
                      for (var i = 0; i < ResultData.length; i++) {
                          Cost.innerHTML += '<tr>' +
-                                 '<td><a class="componnentId" id="componnentId' + i + '"  data_url="/componentCost/getComponentCostById?id=' + ResultData[i].componentId + '">' + ResultData[i].componentName + '</a></td>' +
+                                 '<td><a class="componnentId" data_url="/componentCost/getComponentCostById?id=' + ResultData[i].componentId + '">' + ResultData[i].componentName + '</a></td>' +
                                  '<td>' + ResultData[i].consumption + '</td>' +
                                  '<td>' + ResultData[i].unitCost + '</td>' +
                                  '<td>' + ResultData[i].priceEnd + '</td>' +
@@ -519,7 +523,7 @@
 
                      for (var j = 0; j < ResultData1.length; j++) {
                          Rate1.innerHTML += '<tr>' +
-                                 '<td><a href="" data-toggle="modal" data-target="#details">' + ResultData1[j].currency + '</a></td>' +
+                                 '<td><a class="rate1" data_url="/Rate/getRateById?id='+ResultData[j].rateId+'">' + ResultData1[j].currency + '</a></td>' +
                                  '<td>' + ResultData1[j].rate + '</td>' +
                                  '<td>' + ResultData1[j].termofValidity + '</td>' +
                                  '<td>' + ResultData1[j].remarks + '</td>' +
@@ -528,7 +532,7 @@
 
                      for (var k = 0; k < ResultData2.length; k++) {
                          Rate2.innerHTML += '<tr>' +
-                                 '<td><a href="" data-toggle="modal" data-target="#details">' + ResultData2[k].kind + '</a></td>' +
+                                 '<td><a class="rate2" data_url="/Rate/getRateById?id='+ResultData[k].rateId+'">' + ResultData2[k].kind + '</a></td>' +
                                  '<td>' + ResultData2[k].grossMargin + '</td>' +
                                  '<td>' + ResultData2[k].termofValidity + '</td>' +
                                  '<td>' + ResultData2[k].remarks + '</td>' +
@@ -537,7 +541,7 @@
 
                      for (var l = 0; l < ResultData2.length; l++) {
                          Rate3.innerHTML += '<tr>' +
-                                 '<td><a href="" data-toggle="modal" data-target="#details">' + ResultData3[l].other + '</a></td>' +
+                                 '<td><a class="rate3" data_url="/Rate/getRateById?id='+ResultData[l].rateId+'">' + ResultData3[l].other + '</a></td>' +
                                  '<td>' + ResultData3[l].rateValue + '</td>' +
                                  '<td>' + ResultData3[l].termofValidity + '</td>' +
                                  '<td>' + ResultData3[l].remarks + '</td>' +
@@ -549,8 +553,201 @@
 
      })
 
+     $(document).on("click",".adEexpense1",function(){
+         var url = $(this).attr("data_url");
+         console.log(url);
+         modal.innerHTML = '';
+         jQuery.ajax({
+             type:'GET',
+             url:url,
+             success:function(result){
+                 var ResultData = eval(result.data);
+                 var html = [];
+                 html += '<div class="modal-dialog">';
+                 html +='<div class="modal-content">';
+                 html +='<div class="modal-header">';
+                 html +='<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>';
+                 html +='<h2 class="modal-title" >人工费</h2></div>';
+                 html +='<div class="modal-body">';
+                 html +='<form class="form-horizontal" action="">';
+                 html +='<div class="form-group">';
+                 html +='<label class="col-lg-2 control-label">主材规格</label>';
+                 html +='<div class="col-lg-6">';
+                 html +='<input class="form-control" type="text" value="'+ResultData.costTerm+'">';
+                 html +='</div></div>';
+                 html +='<div class="form-group">';
+                 html +='<label class="col-lg-2 control-label">单耗</label>';
+                 html +='<div class="col-lg-3">';
+                 html +='<div class="input-group">';
+                 html +='<input class="form-control" type="text" value="'+ResultData.consumption+'">';
+                 html +='<div class="input-group-btn">';
+                 html +='<botton class="btn btn-xs btn-primary">(元/kg)</botton></div></div></div>';
+                 html +='<label class="col-lg-2 control-label">价格有效期</label>';
+                 html +='<div class="col-lg-3">';
+                 html +='<input class="form-control" type="text" value="'+ResultData.priceEnd+'">';
+                 html +='</div></div>';
+                 html +='<div class="form-group">';
+                 html +='<label class="col-xs-2 control-label">备注</label>';
+                 html +='<div class="col-xs-8">';
+                 html +='<textarea id="fqlElse" class="form-control"  rows="4">'+ResultData.remarks+'</textarea>';
+                 html +='</div>';
+                 html +='</div>';
+                 html +='</form>';
+                 html += '</div>';
+                 html +='<div class="modal-footer">';
+                 html +='<div class="row">';
+                 html +='<div class="col-xs-3 col-xs-offset-3">';
+                 html +='<button type="button" class="btn btn-primary btn-block"> 完成 </button>';
+                 html +='</div>';
+                 html +='<div class="col-xs-3">';
+                 html +='<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
+                 html +='</div></div></div></div></div>';
+
+                 $('#modal').html(html);
+                 $('#modal').modal('show');
+             }
+         })
+     })
+
+     $(document).on("click",".adEexpense2",function(){
+         var url = $(this).attr("data_url");
+         console.log(url);
+         modal.innerHTML = '';
+         jQuery.ajax({
+             type:'GET',
+             url:url,
+             success:function(result){
+                 var ResultData = eval(result.data);
+                 var html = [];
+                 html += '<div class="modal-dialog">';
+                 html +='<div class="modal-content">';
+                 html +='<div class="modal-header">';
+                 html +='<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>';
+                 html +='<h2 class="modal-title" >杂费</h2></div>';
+                 html +='<div class="modal-body">';
+                 html +='<form class="form-horizontal" action="">';
+                 html +='<div class="form-group">';
+                 html += '<label class="col-lg-2 control-label">成分名称</label>';
+                 html +='<div class="col-lg-6">';
+                 html +='<input class="form-control" type="text" value="'+ResultData.processFactory+'">';
+                 html +='</div></div>';
+                 html +='<div class="form-group">';
+                 html +='<label class="col-lg-2 control-label">水、电、气费</label>';
+                 html +='<div class="col-lg-3">';
+                 html +='<div class="input-group">';
+                 html +='<input class="form-control" type="text" value="'+ResultData.charges+'">';
+                 html +='<div class="input-group-btn">';
+                 html +='<botton class="btn btn-xs btn-primary">(元/吨)</botton></div></div></div>';
+                 html +='<label class="col-lg-2 control-label">利润</label>';
+                 html +='<div class="col-lg-3">';
+                 html +='<div class="input-group">';
+                 html +='<input class="form-control" type="text" value="'+ResultData.profit+'">';
+                 html +='<div class="input-group-btn">';
+                 html +='<botton class="btn btn-xs btn-primary">(元/吨)</botton>';
+                 html +='</div></div></div></div>';
+                 html +='<div class="form-group">';
+                 html +='<label class="col-lg-2 control-label">管理费</label>';
+                 html +='<div class="col-lg-3">';
+                 html +='<div class="input-group">';
+                 html +='<input class="form-control" type="text" value="'+ResultData.charges+'">';
+                 html +='<div class="input-group-btn">';
+                 html +='<botton class="btn btn-xs btn-primary">(元/吨)</botton></div></div></div>';
+                 html +='<label class="col-lg-2 control-label">税金</label>';
+                 html +='<div class="col-lg-3">';
+                 html +='<div class="input-group">';
+                 html +='<input class="form-control" type="text" value="'+ResultData.profit+'">';
+                 html +='<div class="input-group-btn">';
+                 html +='<botton class="btn btn-xs btn-primary">(元/吨)</botton>';
+                 html +='</div></div></div></div>';
+                 html +='<div class="form-group">';
+                 html +='<label class="col-xs-2 control-label">费用合计</label>';
+                 html +='<div class="col-xs-8">';
+                 html +='<textarea id="fqlElse" class="form-control"  rows="4">'+ResultData.totalCost+'</textarea>';
+                 html +='</div>';
+                 html +='</div>';
+                 html +='</form>';
+                 html += '</div>';
+                 html +='<div class="modal-footer">';
+                 html +='<div class="row">';
+                 html +='<div class="col-xs-3 col-xs-offset-3">';
+                 html +='<button type="button" class="btn btn-primary btn-block"> 完成 </button>';
+                 html +='</div>';
+                 html +='<div class="col-xs-3">';
+                 html +='<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
+                 html +='</div></div></div></div></div>';
+
+                 $('#modal').html(html);
+                 $('#modal').modal('show');
+             }
+         })
+     })
+
+     $(document).on("click",".freight1",function(){
+         var url = $(this).attr("data_url");
+         console.log(url);
+         modal.innerHTML = '';
+         jQuery.ajax({
+             type: 'GET',
+             url: url,
+             success: function (result) {
+                 var ResuleData = eval(result.data);
+                 var html = [];
+                 html += '<div class="modal-dialog">';
+                 html += '<div class="modal-content">';
+                 html += '<div class="modal-header">';
+                 html += '<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>';
+                 html += '<h2 class="modal-title" >成分价格</h2></div>';
+                 html += '<div class="modal-body">';
+                 html += '<form class="form-horizontal" action="">';
+                 html += '<div class="form-group">';
+                 html += '<label class="col-lg-2 control-label">国内运费维护</label>';
+                 html += '<div class="col-lg-6">';
+                 html += '<input class="form-control" type="text" value="' + ResuleData.processFactory + '">';
+                 html += '</div></div>';
+                 html += '<div class="form-group">';
+                 html += '<label class="col-lg-2 control-label">单价</label>';
+                 html += '<div class="col-lg-3">';
+                 html += '<div class="input-group">';
+                 html += '<input class="form-control" type="text" value="' + ResuleData.unitCost + '">';
+                 html += '<div class="input-group-btn">';
+                 html += '<botton class="btn btn-xs btn-primary">(元/T)</botton></div></div></div>';
+                 html += '</div>';
+                 html += '<div class="form-group">';
+                 html += '<label class="col-lg-2 control-label">起运城市</label>';
+                 html += '<div class="col-lg-3">';
+                 html += '<input class="form-control" type="text" value="' + ResuleData.departureCity + '">';
+                 html += '</div>';
+                 html += '<label class="col-lg-2 control-label">目的城市</label>';
+                 html += '<div class="col-lg-3">';
+                 html += '<input class="form-control" type="text" value="' + ResuleData.destinationCity + '">';
+                 html += '</div>';
+                 html += '</div>';
+                 html += '<div class="form-group">';
+                 html += '<label class="col-xs-2 control-label">备注</label>';
+                 html += '<div class="col-xs-8">';
+                 html += '<textarea id="fqlElse" class="form-control"  rows="4">' + ResuleData.remarks + '</textarea>';
+                 html += '</div>';
+                 html += '</div>';
+                 html += '</form>';
+                 html += '</div>';
+                 html += '<div class="modal-footer">';
+                 html += '<div class="row">';
+                 html += '<div class="col-xs-3 col-xs-offset-3">';
+                 html += '<button type="button" class="btn btn-primary btn-block"> 完成 </button>';
+                 html += '</div>';
+                 html += '<div class="col-xs-3">';
+                 html += '<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
+                 html += '</div></div></div></div></div>';
+
+                 $('#modal').html(html);
+                 $('#modal').modal('show');
+             }
+         })
+     })
+
      $(document).on("click",".componnentId",function(){
          var url = $(this).attr("data_url");
+         modal.innerHTML = '';
          jQuery.ajax({
              type: 'GET',
              url: url,
@@ -610,11 +807,175 @@
                  html += '<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
                  html += '</div></div></div></div></div>';
 
-                 $('#costmodal').html(html);
-                 $('#costmodal').modal('show')
+                 $('#modal').html(html);
+                 $('#modal').modal('show');
              }
          })
      })
 
+     $(document).on("click",".rate1",function(){
+         var url = $(this).attr('data_url');
+         console.log(url);
+         modal.innerHTML = '';
+         jQuery.ajax({
+             type:'GET',
+             url:url,
+             success: function (result) {
+                 var ResuleData = eval(result.data);
+                 var html = [];
+                 html += '<div class="modal-dialog">';
+                 html += '<div class="modal-content">';
+                 html += '<div class="modal-header">';
+                 html += '<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>';
+                 html += '<h2 class="modal-title" >币种&汇率</h2></div>';
+                 html += '<div class="modal-body">';
+                 html += '<form class="form-horizontal" action="">';
+                 html += '<div class="form-group">';
+                 html += '<label class="col-lg-2 control-label">币种</label>';
+                 html += '<div class="col-lg-6">';
+                 html += '<input class="form-control" type="text" value="' + ResuleData.currency + '">';
+                 html += '</div></div>';
+                 html += '<div class="form-group">';
+                 html += '<label class="col-lg-2 control-label">汇率</label>';
+                 html += '<div class="col-lg-3">';
+                 html += '<input class="form-control" type="text" value="' + ResuleData.rate + '">';
+                 html += '</div>';
+                 html += '<label class="col-lg-2 control-label">有效期</label>';
+                 html += '<div class="col-lg-3">';
+                 html += '<input class="form-control" type="text" value="' + ResuleData. termofValidity+ '">';
+                 html += '</div>';
+                 html += '</div>';
+                 html += '<div class="form-group">';
+                 html += '<label class="col-xs-2 control-label">备注</label>';
+                 html += '<div class="col-xs-8">';
+                 html += '<textarea id="fqlElse" class="form-control"  rows="4">' + ResuleData.remarks + '</textarea>';
+                 html += '</div>';
+                 html += '</div>';
+                 html += '</form>';
+                 html += '</div>';
+                 html += '<div class="modal-footer">';
+                 html += '<div class="row">';
+                 html += '<div class="col-xs-3 col-xs-offset-3">';
+                 html += '<button type="button" class="btn btn-primary btn-block"> 完成 </button>';
+                 html += '</div>';
+                 html += '<div class="col-xs-3">';
+                 html += '<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
+                 html += '</div></div></div></div></div>';
+
+                 $('#modal').html(html);
+                 $('#modal').modal('show');
+             }
+         })
+     })
+
+     $(document).on("click",".rate2",function(){
+         var url = $(this).attr('data_url');
+         console.log(url);
+         modal.innerHTML = '';
+         jQuery.ajax({
+             type:'GET',
+             url:url,
+             success: function (result) {
+                 var ResuleData = eval(result.data);
+                 var html = [];
+                 html += '<div class="modal-dialog">';
+                 html += '<div class="modal-content">';
+                 html += '<div class="modal-header">';
+                 html += '<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>';
+                 html += '<h2 class="modal-title" >毛利率</h2></div>';
+                 html += '<div class="modal-body">';
+                 html += '<form class="form-horizontal" action="">';
+                 html += '<div class="form-group">';
+                 html += '<label class="col-lg-2 control-label">产品种类</label>';
+                 html += '<div class="col-lg-6">';
+                 html += '<input class="form-control" type="text" value="' + ResuleData.kind + '">';
+                 html += '</div></div>';
+                 html += '<div class="form-group">';
+                 html += '<label class="col-lg-2 control-label">毛利率</label>';
+                 html += '<div class="col-lg-3">';
+                 html += '<input class="form-control" type="text" value="' + ResuleData.grossMargin + '">';
+                 html += '</div>';
+                 html += '<label class="col-lg-2 control-label">有效期</label>';
+                 html += '<div class="col-lg-3">';
+                 html += '<input class="form-control" type="text" value="' + ResuleData. termofValidity+ '">';
+                 html += '</div>';
+                 html += '</div>';
+                 html += '<div class="form-group">';
+                 html += '<label class="col-xs-2 control-label">备注</label>';
+                 html += '<div class="col-xs-8">';
+                 html += '<textarea id="fqlElse" class="form-control"  rows="4">' + ResuleData.remarks + '</textarea>';
+                 html += '</div>';
+                 html += '</div>';
+                 html += '</form>';
+                 html += '</div>';
+                 html += '<div class="modal-footer">';
+                 html += '<div class="row">';
+                 html += '<div class="col-xs-3 col-xs-offset-3">';
+                 html += '<button type="button" class="btn btn-primary btn-block"> 完成 </button>';
+                 html += '</div>';
+                 html += '<div class="col-xs-3">';
+                 html += '<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
+                 html += '</div></div></div></div></div>';
+
+                 $('#modal').html(html);
+                 $('#modal').modal('show');
+             }
+         })
+     })
+
+     $(document).on("click",".rate3",function(){
+         var url = $(this).attr('data_url');
+         console.log(url);
+         modal.innerHTML = '';
+         jQuery.ajax({
+             type:'GET',
+             url:url,
+             success: function (result) {
+                 var ResuleData = eval(result.data);
+                 var html = [];
+                 html += '<div class="modal-dialog">';
+                 html += '<div class="modal-content">';
+                 html += '<div class="modal-header">';
+                 html += '<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>';
+                 html += '<h2 class="modal-title" >其他费率</h2></div>';
+                 html += '<div class="modal-body">';
+                 html += '<form class="form-horizontal" action="">';
+                 html += '<div class="form-group">';
+                 html += '<label class="col-lg-2 control-label">币种</label>';
+                 html += '<div class="col-lg-6">';
+                 html += '<input class="form-control" type="text" value="' + ResuleData.other + '">';
+                 html += '</div></div>';
+                 html += '<div class="form-group">';
+                 html += '<label class="col-lg-2 control-label">汇率</label>';
+                 html += '<div class="col-lg-3">';
+                 html += '<input class="form-control" type="text" value="' + ResuleData.rateValue + '">';
+                 html += '</div>';
+                 html += '<label class="col-lg-2 control-label">有效期</label>';
+                 html += '<div class="col-lg-3">';
+                 html += '<input class="form-control" type="text" value="' + ResuleData. termofValidity+ '">';
+                 html += '</div>';
+                 html += '</div>';
+                 html += '<div class="form-group">';
+                 html += '<label class="col-xs-2 control-label">备注</label>';
+                 html += '<div class="col-xs-8">';
+                 html += '<textarea id="fqlElse" class="form-control"  rows="4">' + ResuleData.remarks + '</textarea>';
+                 html += '</div>';
+                 html += '</div>';
+                 html += '</form>';
+                 html += '</div>';
+                 html += '<div class="modal-footer">';
+                 html += '<div class="row">';
+                 html += '<div class="col-xs-3 col-xs-offset-3">';
+                 html += '<button type="button" class="btn btn-primary btn-block"> 完成 </button>';
+                 html += '</div>';
+                 html += '<div class="col-xs-3">';
+                 html += '<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
+                 html += '</div></div></div></div></div>';
+
+                 $('#modal').html(html);
+                 $('#modal').modal('show');
+             }
+         })
+     })
 
  </script>
