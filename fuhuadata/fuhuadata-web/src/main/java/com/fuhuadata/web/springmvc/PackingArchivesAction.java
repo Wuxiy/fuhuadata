@@ -105,10 +105,10 @@ public class PackingArchivesAction {
      * @param id
      * @return
      */
-    @RequestMapping(value="/getPackingArchivesById")
+    @RequestMapping(value="/getPackingArchivesById",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-packingArchives",methods = "GET-BY-ID")
     @ResponseBody
-    public ResultPojo getPackingArchivesById(int id){
+    public ResultPojo getPackingArchivesById(Integer id){
         try{
             Result<PackingArchives> result = packingArchivesService.getPackingArchivesById(id);
             return result.getResultPojo();
