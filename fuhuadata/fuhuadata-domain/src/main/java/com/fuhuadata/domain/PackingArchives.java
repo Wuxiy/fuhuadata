@@ -1,5 +1,6 @@
 package com.fuhuadata.domain;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -9,9 +10,9 @@ import java.util.Date;
 public class PackingArchives {
     private Integer packingId;
 
-    private String type;//包材类型：内包材，外包材，辅材
+    private Integer type;//包材类型：内包材(1)，外包材(2)，辅材(3)
 
-    private String packingType;//底层分层，主材-平桶类
+    private Integer packingType;//底层分层，主材-平桶类
 
     private String packName;//包材名称
 
@@ -27,7 +28,7 @@ public class PackingArchives {
 
     private String qualityTargetValue;//质量指标数值
 
-    private String unitPrice;//单价
+    private BigDecimal unitPrice;//单价
 
     private Date priceEndDate;//价格有效期  yyyy/mm/dd
 
@@ -35,7 +36,7 @@ public class PackingArchives {
 
     private String bRemarks;//备注
 
-    private String status;//状态
+    private Integer status;//状态 0:已禁用  1:已启用
 
     private String associatedPackingId;//关联包材（主材会有关联外包装和辅材）
 
@@ -50,21 +51,6 @@ public class PackingArchives {
         this.packingId = packingId;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getPackingType() {
-        return packingType;
-    }
-
-    public void setPackingType(String packingType) {
-        this.packingType = packingType;
-    }
 
     public String getPackName() {
         return packName;
@@ -122,13 +108,6 @@ public class PackingArchives {
         this.qualityTargetValue = qualityTargetValue;
     }
 
-    public String getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(String unitPrice) {
-        this.unitPrice = unitPrice;
-    }
 
     public Date getPriceEndDate() {
         return priceEndDate;
@@ -154,13 +133,6 @@ public class PackingArchives {
         this.bRemarks = bRemarks;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     public String getAssociatedPackingId() {
         return associatedPackingId;
@@ -176,5 +148,37 @@ public class PackingArchives {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public Integer getPackingType() {
+        return packingType;
+    }
+
+    public void setPackingType(Integer packingType) {
+        this.packingType = packingType;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public BigDecimal getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(BigDecimal unitPrice) {
+        this.unitPrice = unitPrice;
     }
 }

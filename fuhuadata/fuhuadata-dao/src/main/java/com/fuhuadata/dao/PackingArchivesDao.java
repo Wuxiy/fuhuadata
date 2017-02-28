@@ -40,6 +40,13 @@ public interface PackingArchivesDao {
     public PackingArchives getPackingArchivesById(int id);
 
     /**
+     * 通过包材分类id查询包材成本档案列表
+     * @param id
+     * @return
+     */
+    public List<PackingArchives> getPackingArchivesByPId(int id);
+
+    /**
      * 查询列表，包含分页查询，查询结果为空返回空的List对象
      * 查询分页信息，请设置
      * Query(设置当前页数)

@@ -36,6 +36,11 @@ public class PackingArchivesManagerImpl implements PackingArchivesManager {
     }
 
     @Override
+    public List<PackingArchives> getPackingArchivesByPId(int id) {
+        return packingArchivesDao.getPackingArchivesByPId(id);
+    }
+
+    @Override
     public List<PackingArchives> getPackingArchivesByQuery(PackingArchivesQuery packingArchivesQuery) {
         return packingArchivesDao.getPackingArchivesByQuery(packingArchivesQuery);
     }

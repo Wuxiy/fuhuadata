@@ -7,6 +7,7 @@ import com.fuhuadata.manager.PackingArchivesManager;
 import com.fuhuadata.service.PackingArchivesService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -88,6 +89,18 @@ public class PackingArchivesServiceImpl implements PackingArchivesService {
             result.setSuccess(false);
             // 打印日志
             log.error("根据id获取包材档案错误",e);
+        }
+        return result;
+    }
+
+    @Override
+    public Result<List<PackingArchives>> getPackingArchivesByPId(int id) {
+        Result<List<PackingArchives>> result = new Result<List<PackingArchives>>();
+        try{
+            result.addDefaultModel("PackingArchives",packingArchivesManager.getPackingArchivesByPId(id));
+        }catch(Exception e){
+            result.setSuccess(false);
+            log.error("根据包材目录树获取包材错误",e);
         }
         return result;
     }

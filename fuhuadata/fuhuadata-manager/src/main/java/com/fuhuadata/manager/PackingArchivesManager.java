@@ -21,6 +21,8 @@ public interface PackingArchivesManager {
 
     public boolean deletePackingArchivesById(int id);
 
+    public List<PackingArchives> getPackingArchivesByPId(int id);
+
     public List<PackingArchives> getPackingArchivesByQuery(PackingArchivesQuery packingArchivesQuery);
 
     public Result<List<PackingArchives>> getPackingArchivesByPage(PackingArchivesQuery packingArchivesQuery);

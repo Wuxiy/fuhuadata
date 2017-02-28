@@ -7,8 +7,8 @@
 
     <resultMap id="PACKINGARCHIVES-MAP" class="PackingArchives">
         <result column="packing_id" property="packingId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result column="type" property="type" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="packing_type" property="packingType" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="type" property="type" jdbcType="INT" javaType="java.lang.Integer"/>
+        <result column="packing_type" property="packingType" jdbcType="INT" javaType="java.lang.Integer"/>
         <result column="pack_name" property="packName" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="size" property="size" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="spec" property="spec" jdbcType="VARCHAR" javaType="java.lang.String"/>
@@ -16,11 +16,11 @@
         <result column="quality" property="quality" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="quality_index" property="qualityIndex" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="quality_target_value" property="qualityTargetValue" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="unit_price" property="unitPrice" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="unit_price" property="unitPrice" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
         <result column="price_end_date" property="priceEndDate" jdbcType="DATE" javaType="java.sql.Date"/>
         <result column="suitable_type" property="suitableType" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="b_remarks" property="bRemarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="status" property="status" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="status" property="status" jdbcType="INT" javaType="java.lang.Integer"/>
         <result column="associated_packing_id" property="associatedPackingId" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="image_path" property="imagePath" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>
@@ -235,8 +235,14 @@
 
     <select id="GET-BY-ID" resultMap="PACKINGARCHIVES-MAP" parameterClass="java.lang.Integer">
         <![CDATA[
-			SELECT * FROM k_packing_archives WHERE packing_id=#packingId#
+			SELECT * FROM k_packing_archives WHERE packing_id=#id#
 		]]>
+    </select>
+
+    <select id="GET-BY-PID" resultMap="PACKINGARCHIVES-MAP" parameterClass="java.lang.Integer">
+        <![CDATA[
+            SELECT * FROM k_packing_archives WHERE packing_type=#id#
+        ]]>
     </select>
 
     <select id="GET-PAGE" resultMap="PACKINGARCHIVES-MAP" parameterClass="PackingArchivesQuery">
