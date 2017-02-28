@@ -40,23 +40,23 @@
 
 (function( $ ) {
     $.fn.creatTree = function(url) {
-        this.html('');
+        var tree = this;
+        tree.html('');
         var treeRoot = $('<ul class="tree-root"></ul>');
          $.get(url,function(data,status){
             if(status == 'success'){
-
                 creatBranch(data.data,treeRoot);
-                console.log(data.data);
+                tree.append(treeRoot);
             }
         });
         function creatBranch(getData,parent){
             $.each(getData,function(n,item){
+                var li = $('<li id="'+item.cid+'"></li>');
                 if(item.nodes.length > 0) {
-                    var li = $("<li></li>");
-                    $(li).append('<span class="branch-node" data-toggle="collapse" data-target="#t'+item.cid+'"></span><a href=""><span class="leaf"></span>'+item.cname+'</a>').append('<ul id="t'+item.pid+'" class="tree-branch collapse in"></ul>').appendTo(parent);
+                    $(li).append('<span class="branch-node" data-toggle="collapse" data-target="#t'+item.cid+'"></span><a href=""><span class="leaf"></span>'+item.cname+'</a>').append('<ul id="t'+item.cid+'" class="tree-branch collapse in"></ul>').appendTo(parent);
                     creatBranch(item.nodes, $(li).children("ul.tree-branch"));
                 }else{
-                    $("<li></li>").append('<span class="branch"></span><a href=""><span class="leaf"></span>'+item.cname+'</a>').appendTo(parent);
+                    $(li).append('<span class="branch"></span><a href=""><span class="leaf"></span>'+item.cname+'</a>').appendTo(parent);
                 }
             })
         }
