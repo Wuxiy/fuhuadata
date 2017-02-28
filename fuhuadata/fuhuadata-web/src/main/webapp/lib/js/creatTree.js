@@ -61,4 +61,26 @@
             })
         }
     };
+    $.fn.filtrateData = function(url,containerId,method){
+        var $container = $('#'+containerId);
+        this.on('click','li[id]>a',function(e){
+            e.preventDefault();
+            var id = $(e.target).parent('li').attr('id');
+            console.log(id);
+            $.post(url,{id:id},function(data,status){
+                console.log(data);
+                $container.html('');
+                methods[method](data,$container);
+            })
+            return false;
+        });
+        var methods={
+            packingArchivesList : function(getData,parent){
+                $.each(getData,function(n,item){
+                    var tr = $('<tr></tr>');
+                    $(tr).append('<td>'+item.associatedPackingId+'</td><td>');
+                })
+        },
+        }
+    };
 })( jQuery );

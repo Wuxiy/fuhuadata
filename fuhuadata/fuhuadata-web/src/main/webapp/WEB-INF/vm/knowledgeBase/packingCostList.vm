@@ -71,4 +71,5 @@
 <script type="text/javascript" language="javascript" src="/lib/js/creatTree.js"></script>
 <script type="text/javascript">
     $('#tree').creatTree('/packingCategory/CategoryTree');
+    $('#tree').filtrateData('/packingArchives/getPackingArchivesById');
 </script>
