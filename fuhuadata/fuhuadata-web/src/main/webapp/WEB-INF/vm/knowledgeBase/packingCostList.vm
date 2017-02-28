@@ -16,7 +16,7 @@
                 </div>
                 <div class="panel-body clearfix">
                     <!--树形菜单-->
-                    <div class="tree">
+                    <div id="tree" class="tree">
                         <ul class="tree-root">
                             <li>
                                 <span class="branch-node" data-toggle="collapse" data-target="#bNode1"></span><a href=""><span class="leaf"></span><span lang="zh">主材</span></a>
@@ -100,3 +100,7 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" language="javascript" src="/lib/js/creatTree.js"></script>
+<script type="text/javascript">
+    $('#tree').creatTree('http://localhost:8080/packingCategory/CategoryTree');
+</script>
