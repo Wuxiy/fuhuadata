@@ -43,7 +43,7 @@ public class    ExhibitionInfoAction {
     }
 
 
-    @SuppressWarnings("unused")
+
     @RequestMapping(value = "/queryExhibitionInfoList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "list")
     @ResponseBody
@@ -60,6 +60,7 @@ public class    ExhibitionInfoAction {
     }
 
 
+    @SuppressWarnings("unused")
     @RequestMapping(value = "/queryExhibitionInfoTest",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "query")
     @ResponseBody
@@ -96,7 +97,6 @@ public class    ExhibitionInfoAction {
     @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "doAdd")
     @ResponseBody
     public ResultPojo doAddExhibitionInfo(@RequestBody ExhibitionInfo exhibitionInfo){
-        System.out.println("执行新增");
         try{
             Result<ExhibitionInfo> result = exhibitionInfoService.addExhibitionInfo(exhibitionInfo);
             return result.getResultPojo();
@@ -144,8 +144,8 @@ public class    ExhibitionInfoAction {
         return null;
     }
 
-    @RequestMapping(value = "/getExhibitionInfoJson")
-    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "getInfoById")
+    @RequestMapping(value = "/getExhibitionInfoById")
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "GET-BY-ID")
     @ResponseBody
     public ExhibitionInfo getExhibitionInfoById(int id){
         try{

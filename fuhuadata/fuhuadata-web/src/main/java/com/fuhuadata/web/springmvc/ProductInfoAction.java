@@ -8,8 +8,11 @@ import com.fuhuadata.service.ProductInfoService;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.xpath.operations.Mod;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -47,5 +50,90 @@ public class ProductInfoAction {
         return result.getResultPojo();
     }
 
+    /**
+     * add
+     * @return
+     */
+    @RequestMapping(value="/add",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-productInfo",methods = "add")
+    public ModelAndView addProductInfo(){return new ModelAndView("knowledgeBase/productInfoAdd");}
 
-}
+    @RequestMapping(value="/doAdd",method=RequestMethod.POST)
+    public ResultPojo doAddProductInfo(@RequestBody ProductInfo productInfo){
+        try{
+            Result<ProductInfo> result = productInfoService.addProductInfo(productInfo);
+            return result.getResultPojo();
+        }catch(Exception e){
+            log.error("添加标准产品档案失败",e);
+        }
+        return null;
+    }
+
+    /**
+     * delete
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/delete",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-ProductInfo",methods ="delete" )
+    @ResponseBody
+    public ResultPojo deleteProductInfo(int id){
+        try{
+            Result result=productInfoService.deleteProductInfoById(id);
+            return result.getResultPojo();
+        }catch(Exception e){
+            log.error("根据id删除产品档案失败",e);
+        }
+        return null;
+    }
+
+    /**
+     * update
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "modify",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-ProductInfo",methods = "update")
+    public ModelAndView modifyProductInfo(int id){
+        try{
+            Result<ProductInfo> result = new Result<ProductInfo>();
+
+        }catch(Exception e){
+            log.error("获取产品档案信息失败",e);
+        }
+        return new ModelAndView("knowledgeBase/productInfoUpdate");
+    }
+    @RequestMapping(value = "doModify",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "knowledgeBase-ProductInfo",methods = "doUpdate")
+    @ResponseBody
+    public ResultPojo doModifyProductInfo(@RequestBody ProductInfo productInfo) {
+        try {
+            int id = productInfo.getProductId();
+            Result<ProductInfo> result = productInfoService.updateProductInfoById(id, productInfo);
+            return result.getResultPojo();
+        } catch (Exception e) {
+            log.error("修改产品档案失败", e);
+        }
+        return null;
+    }
+
+    /**
+     * get by id
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "getProductInfoById",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-ProductInfo",methods = "GET-BY-ID")
+    @ResponseBody
+    public ResultPojo getProductInfoById(int id){
+        try{
+            Result<ProductInfo> result = productInfoService.getProductInfoById(id);
+            return result.getResultPojo();
+        }catch(Exception e){
+            log.error("根据id获取产品档案失败",e);
+        }
+        return null;
+    }
+
+
+ }

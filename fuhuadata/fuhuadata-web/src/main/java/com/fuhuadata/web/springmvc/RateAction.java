@@ -79,5 +79,23 @@ public class RateAction {
         return null;
     }
 
+    /**
+     * 根据id获取详情
+     * @param id
+     * @return
+     */
+    @RequestMapping(value="/getRateById")
+    @SystemLogAnnotation(module = "knowledgeBase-rate",methods = "GET-BY-ID")
+    @ResponseBody
+    public ResultPojo getRateById(int id){
+        try{
+            Result<Rate> result = rateService.getRateById(id);
+            return result.getResultPojo();
+        }catch(Exception e){
+            log.error("根据id获取费率信息错误",e);
+        }
+        return null;
+    }
+
 
 }

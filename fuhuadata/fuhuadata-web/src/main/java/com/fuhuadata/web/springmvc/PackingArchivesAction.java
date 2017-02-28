@@ -1,5 +1,6 @@
 package com.fuhuadata.web.springmvc;
 
+import com.fuhuadata.domain.FreightCost;
 import com.fuhuadata.domain.PackingArchives;
 import com.fuhuadata.domain.query.PackingArchivesQuery;
 import com.fuhuadata.domain.query.Result;
@@ -31,6 +32,10 @@ public class PackingArchivesAction {
     private Integer pageSize = 10;
     private String page="1";
 
+    /**
+     * list
+     * @return
+     */
     @RequestMapping(value = "/packingArchivesList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "into")
     public ModelAndView packingArchives(){
@@ -38,7 +43,7 @@ public class PackingArchivesAction {
     }
 
     @RequestMapping(value = "/queryPackingArchivesList",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "knowledgeBase/packingCostList",methods = "list")
+    @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "list")
     @ResponseBody
     public ResultPojo packingArchivesList(){
         Result<List<PackingArchives>> result = new Result<List<PackingArchives>>();
@@ -51,12 +56,16 @@ public class PackingArchivesAction {
         return result.getResultPojo();
     }
 
+    /**
+     * add
+     * @return
+     */
     @RequestMapping(value = "/addPackingArchives",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "knowledgeBase/packingCostList",methods = "add")
+    @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "add")
     public ModelAndView addPackingArchives(){return new ModelAndView("knowledgeBase/addPackingArchives");}
 
     @RequestMapping(value = "/doAddPackingArchives",method = RequestMethod.POST)
-    @SystemLogAnnotation(module = "knowledgeBase/packingCostList",methods = "doAdd")
+    @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "doAdd")
     @ResponseBody
     public ResultPojo doAddPackingArchives(@RequestBody PackingArchives packingArchives){
         try{
@@ -75,7 +84,7 @@ public class PackingArchivesAction {
      */
     @SuppressWarnings("unused")
     @RequestMapping(value = "/queryPackingArchivesListTest",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "knowledgeBase/packingCostList",methods = "query")
+    @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "query")
     public ModelAndView queryPackingArchivesList(@RequestBody PackingArchivesQuery packingArchivesQuery){
         Result<List<PackingArchives>> result = new Result<List<PackingArchives>>();
         try{
@@ -91,17 +100,25 @@ public class PackingArchivesAction {
         model.addObject("message","包材成本档案列表");
         return model;
     }
+
+    /**
+     * 根据id获取详情
+     * @param id
+     * @return
+     */
     @RequestMapping(value="/getPackingArchivesById")
-    @SystemLogAnnotation(module = "knowledgeBase/packingArchivesList",methods = "getInfoById")
+    @SystemLogAnnotation(module = "knowledgeBase-packingArchives",methods = "GET-BY-ID")
     @ResponseBody
-    public PackingArchives getPackingArchivesById(int id){
+    public ResultPojo getPackingArchivesById(int id){
         try{
             Result<PackingArchives> result = packingArchivesService.getPackingArchivesById(id);
-            return result.getModel();
+            return result.getResultPojo();
         }catch(Exception e){
-            log.error("获取成本档案信息错误",e);
+            log.error("根据id获取成本档案信息错误",e);
         }
         return null;
     }
+
+
 
 }
