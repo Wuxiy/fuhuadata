@@ -140,10 +140,10 @@ public class ProductInfoAction {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/getProductInfoByPId",method = RequestMethod.GET)
+    @RequestMapping(value = "/getProductInfoByPId",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-ProductInfo",methods = "GET-BY-PID")
     @ResponseBody
-    public ResultPojo getProductInfoByPId(int id){
+    public ResultPojo getProductInfoByPId(Integer id){
         try{
             System.out.println(id);
             Result<List<ProductInfo>> result = productInfoService.getProductInfoByPId(id);

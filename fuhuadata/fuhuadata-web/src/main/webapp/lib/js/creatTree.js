@@ -46,7 +46,11 @@
                 })
              },
             //渲染标准产品档案
-
+            productArchivesList : function(getData,parent){
+                $.each(getData,function(n,item){
+                    console.log(item);
+                })
+             }
         }
     };
 })( jQuery );
