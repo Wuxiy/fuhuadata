@@ -1,5 +1,10 @@
 package com.fuhuadata.domain;
 
+import com.fuhuadata.util.DateJsonDeserializer;
+import com.fuhuadata.util.DateJsonSerializer;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import java.util.Date;
 import java.math.BigDecimal;
 
@@ -59,12 +64,7 @@ public class ProductInfo{
     /**理化指标,序列化数据格式**/
 	private String physicalProperities;
 
-	
-    /**包装信息,序列化id**/
-	private String packageInfo;
-	
-    /**类型，0为类目，1为产品**/
-	private Integer productType;
+
 	
     /**创建者id**/
 	private Integer createUserId;
@@ -178,22 +178,6 @@ public class ProductInfo{
 	}
 
 	
-	public String getPackageInfo() {
-		return packageInfo;
-	}
-	
-	public void setPackageInfo(String packageInfo) {
-		this.packageInfo = packageInfo;
-	}
-	
-	public Integer getProductType() {
-		return productType;
-	}
-	
-	public void setProductType(Integer productType) {
-		this.productType = productType;
-	}
-	
 	public Integer getCreateUserId() {
 		return createUserId;
 	}
@@ -225,19 +209,22 @@ public class ProductInfo{
 	public void setLastmodifyUserName(String lastmodifyUserName) {
 		this.lastmodifyUserName = lastmodifyUserName;
 	}
-	
+
+	@JsonSerialize(using = DateJsonSerializer.class)
 	public Date getCreateTime() {
 		return createTime;
 	}
-	
+	@JsonDeserialize(using = DateJsonDeserializer.class)
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
-	
+
+	@JsonSerialize(using = DateJsonSerializer.class)
 	public Date getModifyTime() {
 		return modifyTime;
 	}
-	
+
+	@JsonDeserialize(using = DateJsonDeserializer.class)
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
 	}
