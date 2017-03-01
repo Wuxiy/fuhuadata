@@ -56,6 +56,13 @@ public interface ProductInfoManager {
      */
     public ProductInfo getProductInfoById(int product_id);
 
+	/**
+	 * 根据产品分类查询
+	 * @param id
+	 * @return
+	 */
+	public List<ProductInfo> getProductInfoByPId(int id);
+
     /**
      * 查询列表，包含分页查询，
 	 * 查询分页信息，请设置

@@ -29,6 +29,13 @@ public interface ProductInfoDao {
      * @return
      */
     public int deleteProductInfoById(int product_id);
+
+	/**
+	 * 根据产品分类查询
+	 * @param id
+	 * @return
+	 */
+	public List<ProductInfo> getProductInfoByPId(int id);
     
 	 /**
      * 返回数据库所有记录，谨慎使用，最好不用

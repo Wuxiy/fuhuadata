@@ -92,7 +92,7 @@ public class ProductInfoAction {
      * @param id
      * @return
      */
-    @RequestMapping(value = "modify",method = RequestMethod.GET)
+    @RequestMapping(value = "/modify",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-ProductInfo",methods = "update")
     public ModelAndView modifyProductInfo(int id){
         try{
@@ -103,7 +103,7 @@ public class ProductInfoAction {
         }
         return new ModelAndView("knowledgeBase/productInfoUpdate");
     }
-    @RequestMapping(value = "doModify",method = RequestMethod.POST)
+    @RequestMapping(value = "/doModify",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-ProductInfo",methods = "doUpdate")
     @ResponseBody
     public ResultPojo doModifyProductInfo(@RequestBody ProductInfo productInfo) {
@@ -122,7 +122,7 @@ public class ProductInfoAction {
      * @param id
      * @return
      */
-    @RequestMapping(value = "getProductInfoById",method = RequestMethod.GET)
+    @RequestMapping(value = "/getProductInfoById",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-ProductInfo",methods = "GET-BY-ID")
     @ResponseBody
     public ResultPojo getProductInfoById(int id){
@@ -131,6 +131,25 @@ public class ProductInfoAction {
             return result.getResultPojo();
         }catch(Exception e){
             log.error("根据id获取产品档案失败",e);
+        }
+        return null;
+    }
+
+    /**
+     * get by PID
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/getProductInfoByPId",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "knowledgeBase-ProductInfo",methods = "GET-BY-PID")
+    @ResponseBody
+    public ResultPojo getProductInfoByPId(Integer id){
+        try{
+            System.out.println(id);
+            Result<List<ProductInfo>> result = productInfoService.getProductInfoByPId(id);
+            return result.getResultPojo();
+        }catch(Exception e){
+            log.error("根据产品分类获取产品档案失败",e);
         }
         return null;
     }

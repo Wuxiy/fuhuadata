@@ -3,14 +3,14 @@ import java.util.List;
 import com.fuhuadata.domain.ProductInfo;
 import com.fuhuadata.domain.query.QueryProductInfo;
 import com.fuhuadata.dao.ProductInfoDao;
-import javax.annotation.Resource;
-import org.springframework.stereotype.Component;
+
+
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 /**
  * @author wangbo
  * @date 2017-01-24 10:45:54
  */
-@SuppressWarnings("unchecked")
+
 public class ProductInfoDaoImpl extends SqlMapClientTemplate implements ProductInfoDao {
 
     public static final String ADD = "PRODUCTINFO.ADD";
@@ -19,6 +19,7 @@ public class ProductInfoDaoImpl extends SqlMapClientTemplate implements ProductI
     public static final String GET_ALL = "PRODUCTINFO.GET-ALL";
     public static final String GET_BY_QUERY = "PRODUCTINFO.GET-BY-QUERY";
     public static final String GET_BY_ID = "PRODUCTINFO.GET-BY-ID";
+    public static final String GET_BY_PID="PRODUCTINFO.GET-BY-PID";
     public static final String GET_PAGE = "PRODUCTINFO.GET-PAGE";
     public static final String COUNT = "PRODUCTINFO.COUNT";
     
@@ -35,7 +36,12 @@ public class ProductInfoDaoImpl extends SqlMapClientTemplate implements ProductI
     public int deleteProductInfoById(int product_id) {
     	return this.update(DELETE_BY_ID, product_id);
     }
-    
+
+    @Override
+    public List<ProductInfo> getProductInfoByPId(int id) {
+        return this.queryForList(GET_BY_PID,id);
+    }
+
     public List<ProductInfo> getAllProductInfos() {
     	return this.queryForList(GET_ALL);
     }

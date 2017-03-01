@@ -60,10 +60,22 @@ public class ProductInfoManagerImpl implements ProductInfoManager {
     public ProductInfo getProductInfoById(int product_id) {
     	return productInfoDao.getProductInfoById(product_id);
     }
-    
 
-    public int count(QueryProductInfo queryProductInfo) {
+	@Override
+	public List<ProductInfo> getProductInfoByPId(int id) {
+		System.out.println(id);
+		return productInfoDao.getProductInfoByPId(id);
+	}
+
+
+	public int count(QueryProductInfo queryProductInfo) {
     	return productInfoDao.count(queryProductInfo);
     }
-    
+
+	public void setProductInfoDao(ProductInfoDao productInfoDao) {
+		this.productInfoDao = productInfoDao;
+	}
+	public ProductInfoDao getProductInfoDao(){
+    	return this.productInfoDao;
+	}
 }
