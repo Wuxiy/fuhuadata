@@ -891,6 +891,7 @@ body {
   line-height: 1.5;
   color: #333333;
   background-color: #ffffff;
+  min-width: 1360px;
 }
 input,
 button,
@@ -2073,7 +2074,7 @@ pre code {
   width: 100%;
 }
 .dashboard-wrapper {
-  min-height: 600px;
+  min-height: 800px;
   padding: 20px 15px;
 }
 .not-null {
