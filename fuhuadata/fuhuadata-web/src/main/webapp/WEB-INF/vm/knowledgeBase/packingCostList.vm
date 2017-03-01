@@ -16,9 +16,7 @@
                 </div>
                 <div class="panel-body clearfix">
                     <!--树形菜单-->
-                    <div id="tree" class="tree">
-
-                    </div>
+                    <div id="tree" class="tree"></div>
                 </div>
             </div>
         </div>

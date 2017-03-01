@@ -64,6 +64,7 @@
     };
     //给树形菜单动态添加点击事件，并且获取数据，将数据渲染到表格或者表单
     $.fn.filtrateData = function(url,containerId,method){
+
         var $container = $('#'+containerId);
         this.on('click','li[id]>a',function(e){
             e.preventDefault();

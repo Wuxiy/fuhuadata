@@ -32,8 +32,7 @@
                                     <th class="text-center col-xs-6 text-middle">备注</th>
                                 </tr>
                                 </thead>
-                                <tbody id="adEexpense1">
-                                </tbody>
+                                <tbody id="adEexpense1"></tbody>
                             </table>
                         </div>
                     </div>
@@ -55,8 +54,7 @@
                                     <th class="text-center col-xs-2 text-middle">费用合计</th>
                                 </tr>
                                 </thead>
-                                <tbody id="adEexpense2">
-                                </tbody>
+                                <tbody id="adEexpense2"></tbody>
                             </table>
                         </div>
                     </div>
@@ -81,8 +79,7 @@
                                     <th class="text-center col-xs-4 text-middle">备注</th>
                                 </tr>
                                 </thead>
-                                <tbody id="freight1">
-                                </tbody>
+                                <tbody id="freight1"></tbody>
                             </table>
                         </div>
                     </div>
@@ -108,8 +105,7 @@
                                     <th class="text-center col-xs-2 text-middle test1">备注</th>
                                 </tr>
                                 </thead>
-                                <tbody id="cost1">
-                                </tbody>
+                                <tbody id="cost1"></tbody>
                             </table>
                         </div>
                     </div>
@@ -124,7 +120,6 @@
                             </h3>
                         </div>
                         <div class="panel-body" id="portSurcharge1">
-
                         </div>
                     </div>
                     <!--港杂费参考表结束-->
@@ -148,12 +143,6 @@
                                 </tr>
                                 </thead>
                                 <tbody id="rate1">
-                                <tr>
-                                    <td>人民币</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -259,7 +248,7 @@
 
                  for (var j = 0; j < ResultData1.length; j++) {
                      Adeexpense1.innerHTML += '<tr>' +
-                             '<td><a class="adEexpense1" data-url="/preparationProcessCost/getPreparationProcessCostById?id='+ResultData1[j].mcostId+'">' + ResultData1[j].costTerm + '</a></td>' +
+                             '<td><a class="adEexpense1" data_url="/preparationProcessCost/getPreparationProcessCostById?id='+ResultData1[j].mcostId+'">' + ResultData1[j].costTerm + '</a></td>' +
                              '<td>' + ResultData1[j].unitCost + '</td>' +
                              '<td>' + ResultData1[j].priceEnd + '</td>' +
                              '<td>' + ResultData1[j].remarks + '</td>' +
@@ -267,7 +256,7 @@
                  }
                  for (var k = 0; k < ResultData2.length; k++) {
                      Adeexpense2.innerHTML += '<tr>' +
-                             '<td><a class="adEexpense2" data-url="/preparationProcessCost/getPreparationProcessCostById?id='+ResultData1[k].mcostId+'">' + ResultData2[k].processFactory + '</a></td>' +
+                             '<td><a class="adEexpense2" data_url="/preparationProcessCost/getPreparationProcessCostById?id='+ResultData2[k].mcostId+'">' + ResultData2[k].processFactory + '</a></td>' +
                              '<td>' + ResultData2[k].charges + '</td>' +
                              '<td>' + ResultData2[k].profit + '</td>' +
                              '<td>' + ResultData2[k].managementFee + '</td>' +
@@ -300,7 +289,7 @@
 
                      for (var j = 0; j < ResultData1.length; j++) {
                          Adeexpense1.innerHTML += '<tr>' +
-                                 '<td><a class="adEexpense1" data-url="/preparationProcessCost/getPreparationProcessCostById?id='+ResultData1[j].mcostId+'">' + ResultData1[j].costTerm + '</a></td>' +
+                                 '<td><a class="adEexpense1" data_url="/preparationProcessCost/getPreparationProcessCostById?id='+ResultData1[j].mcostId+'">' + ResultData1[j].costTerm + '</a></td>' +
                                  '<td>' + ResultData1[j].unitCost + '</td>' +
                                  '<td>' + ResultData1[j].priceEnd + '</td>' +
                                  '<td>' + ResultData1[j].remarks + '</td>' +
@@ -308,7 +297,7 @@
                      }
                      for (var k = 0; k < ResultData2.length; k++) {
                          Adeexpense2.innerHTML += '<tr>' +
-                                 '<td><a class="adEexpense2" data-url="/preparationProcessCost/getPreparationProcessCostById?id='+ResultData1[k].mcostId+'">' + ResultData2[k].processFactory + '</a></td>' +
+                                 '<td><a class="adEexpense2" data_url="/preparationProcessCost/getPreparationProcessCostById?id='+ResultData2[k].mcostId+'">' + ResultData2[k].processFactory + '</a></td>' +
                                  '<td>' + ResultData2[k].charges + '</td>' +
                                  '<td>' + ResultData2[k].profit + '</td>' +
                                  '<td>' + ResultData2[k].managementFee + '</td>' +
@@ -523,7 +512,7 @@
 
                      for (var j = 0; j < ResultData1.length; j++) {
                          Rate1.innerHTML += '<tr>' +
-                                 '<td><a class="rate1" data_url="/Rate/getRateById?id='+ResultData[j].rateId+'">' + ResultData1[j].currency + '</a></td>' +
+                                 '<td><a class="rate1" data_url="/Rate/getRateById?id='+ResultData1[j].rateId+'">' + ResultData1[j].currency + '</a></td>' +
                                  '<td>' + ResultData1[j].rate + '</td>' +
                                  '<td>' + ResultData1[j].termofValidity + '</td>' +
                                  '<td>' + ResultData1[j].remarks + '</td>' +
@@ -532,7 +521,7 @@
 
                      for (var k = 0; k < ResultData2.length; k++) {
                          Rate2.innerHTML += '<tr>' +
-                                 '<td><a class="rate2" data_url="/Rate/getRateById?id='+ResultData[k].rateId+'">' + ResultData2[k].kind + '</a></td>' +
+                                 '<td><a class="rate2" data_url="/Rate/getRateById?id='+ResultData2[k].rateId+'">' + ResultData2[k].kind + '</a></td>' +
                                  '<td>' + ResultData2[k].grossMargin + '</td>' +
                                  '<td>' + ResultData2[k].termofValidity + '</td>' +
                                  '<td>' + ResultData2[k].remarks + '</td>' +
@@ -541,7 +530,7 @@
 
                      for (var l = 0; l < ResultData2.length; l++) {
                          Rate3.innerHTML += '<tr>' +
-                                 '<td><a class="rate3" data_url="/Rate/getRateById?id='+ResultData[l].rateId+'">' + ResultData3[l].other + '</a></td>' +
+                                 '<td><a class="rate3" data_url="/Rate/getRateById?id='+ResultData3[l].rateId+'">' + ResultData3[l].other + '</a></td>' +
                                  '<td>' + ResultData3[l].rateValue + '</td>' +
                                  '<td>' + ResultData3[l].termofValidity + '</td>' +
                                  '<td>' + ResultData3[l].remarks + '</td>' +
@@ -566,7 +555,7 @@
                  html += '<div class="modal-dialog">';
                  html +='<div class="modal-content">';
                  html +='<div class="modal-header">';
-                 html +='<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>';
+                 html +='<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';
                  html +='<h2 class="modal-title" >人工费</h2></div>';
                  html +='<div class="modal-body">';
                  html +='<form class="form-horizontal" action="">';
@@ -576,10 +565,10 @@
                  html +='<input class="form-control" type="text" value="'+ResultData.costTerm+'">';
                  html +='</div></div>';
                  html +='<div class="form-group">';
-                 html +='<label class="col-lg-2 control-label">单耗</label>';
+                 html +='<label class="col-lg-2 control-label">单价</label>';
                  html +='<div class="col-lg-3">';
                  html +='<div class="input-group">';
-                 html +='<input class="form-control" type="text" value="'+ResultData.consumption+'">';
+                 html +='<input class="form-control" type="text" value="'+ResultData.unitCost+'">';
                  html +='<div class="input-group-btn">';
                  html +='<botton class="btn btn-xs btn-primary">(元/kg)</botton></div></div></div>';
                  html +='<label class="col-lg-2 control-label">价格有效期</label>';
@@ -618,16 +607,17 @@
              url:url,
              success:function(result){
                  var ResultData = eval(result.data);
+                 console.log(ResultData);
                  var html = [];
                  html += '<div class="modal-dialog">';
                  html +='<div class="modal-content">';
                  html +='<div class="modal-header">';
-                 html +='<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>';
+                 html +='<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';
                  html +='<h2 class="modal-title" >杂费</h2></div>';
                  html +='<div class="modal-body">';
                  html +='<form class="form-horizontal" action="">';
                  html +='<div class="form-group">';
-                 html += '<label class="col-lg-2 control-label">成分名称</label>';
+                 html += '<label class="col-lg-2 control-label">加工厂</label>';
                  html +='<div class="col-lg-6">';
                  html +='<input class="form-control" type="text" value="'+ResultData.processFactory+'">';
                  html +='</div></div>';
@@ -649,13 +639,13 @@
                  html +='<label class="col-lg-2 control-label">管理费</label>';
                  html +='<div class="col-lg-3">';
                  html +='<div class="input-group">';
-                 html +='<input class="form-control" type="text" value="'+ResultData.charges+'">';
+                 html +='<input class="form-control" type="text" value="'+ResultData.managementFee+'">';
                  html +='<div class="input-group-btn">';
                  html +='<botton class="btn btn-xs btn-primary">(元/吨)</botton></div></div></div>';
                  html +='<label class="col-lg-2 control-label">税金</label>';
                  html +='<div class="col-lg-3">';
                  html +='<div class="input-group">';
-                 html +='<input class="form-control" type="text" value="'+ResultData.profit+'">';
+                 html +='<input class="form-control" type="text" value="'+ResultData.tax+'">';
                  html +='<div class="input-group-btn">';
                  html +='<botton class="btn btn-xs btn-primary">(元/吨)</botton>';
                  html +='</div></div></div></div>';
@@ -695,7 +685,7 @@
                  html += '<div class="modal-dialog">';
                  html += '<div class="modal-content">';
                  html += '<div class="modal-header">';
-                 html += '<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>';
+                 html += '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';
                  html += '<h2 class="modal-title" >成分价格</h2></div>';
                  html += '<div class="modal-body">';
                  html += '<form class="form-horizontal" action="">';
@@ -757,43 +747,43 @@
                  html += '<div class="modal-dialog">';
                  html += '<div class="modal-content">';
                  html += '<div class="modal-header">';
-                 html += '<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>';
+                 html += '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';
                  html += '<h2 class="modal-title" >成分价格</h2></div>';
                  html += '<div class="modal-body">';
                  html += '<form class="form-horizontal" action="">';
                  html += '<div class="form-group">';
                  html += '<label class="col-lg-2 control-label">成分名称</label>';
                  html += '<div class="col-lg-6">';
-                 html += '<input class="form-control" type="text" value="' + ResuleData.componentName + '">';
+                 html += '<input class="form-control" type="text" value="' + ResuleData.componentName + '" id="componentName">';
                  html += '</div></div>';
                  html += '<div class="form-group">';
                  html += '<label class="col-lg-2 control-label">单耗</label>';
                  html += '<div class="col-lg-3">';
                  html += '<div class="input-group">';
-                 html += '<input class="form-control" type="text" value="' + ResuleData.consumption + '">';
+                 html += '<input class="form-control" type="text" value="' + ResuleData.consumption + '" id="consumption">';
                  html += '<div class="input-group-btn">';
                  html += '<botton class="btn btn-xs btn-primary">(元/kg)</botton></div></div></div>';
                  html += '<label class="col-lg-2 control-label">单价</label>';
                  html += '<div class="col-lg-3">';
                  html += '<div class="input-group">';
-                 html += '<input class="form-control" type="text" value="' + ResuleData.unitCost + '">';
+                 html += '<input class="form-control" type="text" value="' + ResuleData.unitCost + '" id="unitCost">';
                  html += '<div class="input-group-btn">';
                  html += '<botton class="btn btn-xs btn-primary">(元/kg)</botton>';
                  html += '</div></div></div></div>';
                  html += '<div class="form-group">';
                  html += '<label class="col-lg-2 control-label">价格有效期</label>';
                  html += '<div class="col-lg-3">';
-                 html += '<input class="form-control" type="text" value="' + ResuleData.priceEnd + '">';
+                 html += '<input class="form-control" type="text" value="' + ResuleData.priceEnd + '" id="priceEnd">';
                  html += '</div>';
                  html += '<label class="col-lg-2 control-label">适合产品</label>';
                  html += '<div class="col-lg-3">';
-                 html += '<input class="form-control" type="text" value="' + ResuleData.suitableProduct + '">';
+                 html += '<input class="form-control" type="text" value="' + ResuleData.suitableProduct + '" id="suitableProduct">';
                  html += '</div>';
                  html += '</div>';
                  html += '<div class="form-group">';
                  html += '<label class="col-xs-2 control-label">备注</label>';
                  html += '<div class="col-xs-8">';
-                 html += '<textarea id="fqlElse" class="form-control"  rows="4">' + ResuleData.remarks + '</textarea>';
+                 html += '<textarea class="form-control"  rows="4" id="remarks">' + ResuleData.remarks + '</textarea>';
                  html += '</div>';
                  html += '</div>';
                  html += '</form>';
@@ -801,7 +791,7 @@
                  html += '<div class="modal-footer">';
                  html += '<div class="row">';
                  html += '<div class="col-xs-3 col-xs-offset-3">';
-                 html += '<button type="button" class="btn btn-primary btn-block"> 完成 </button>';
+                 html += '<button type="button" class="btn btn-primary btn-block" onclick="updateCost()"> 完成 </button>';
                  html += '</div>';
                  html += '<div class="col-xs-3">';
                  html += '<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
@@ -826,7 +816,7 @@
                  html += '<div class="modal-dialog">';
                  html += '<div class="modal-content">';
                  html += '<div class="modal-header">';
-                 html += '<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>';
+                 html += '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';
                  html += '<h2 class="modal-title" >币种&汇率</h2></div>';
                  html += '<div class="modal-body">';
                  html += '<form class="form-horizontal" action="">';
@@ -881,7 +871,7 @@
                  html += '<div class="modal-dialog">';
                  html += '<div class="modal-content">';
                  html += '<div class="modal-header">';
-                 html += '<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>';
+                 html += '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';
                  html += '<h2 class="modal-title" >毛利率</h2></div>';
                  html += '<div class="modal-body">';
                  html += '<form class="form-horizontal" action="">';
@@ -936,7 +926,7 @@
                  html += '<div class="modal-dialog">';
                  html += '<div class="modal-content">';
                  html += '<div class="modal-header">';
-                 html += '<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>';
+                 html += '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';
                  html += '<h2 class="modal-title" >其他费率</h2></div>';
                  html += '<div class="modal-body">';
                  html += '<form class="form-horizontal" action="">';
@@ -977,5 +967,30 @@
              }
          })
      })
+
+     function updateCost(){
+         var url = $(this).attr('data_url');
+         var data = {
+             "componentName":$('#componentName').val(),
+             "consumption":$('#consumption').val(),
+             "unitCost":$('#unitCost').val(),
+             "priceEnd":$('#priceEnd').val(),
+             "suitableProduct":$('#suitableProduct').val(),
+             "remarks":$('#remarks').val()
+         }
+         console.log(data);
+
+         jQuery.ajax({
+             type:'POST',
+             url:url,
+             data:JSON.stringify(data),
+             success:function(result){
+                 alert('修改成功');
+                 $('#modal').modal('hide');
+             }
+         })
+     }
+
+
 
  </script>
