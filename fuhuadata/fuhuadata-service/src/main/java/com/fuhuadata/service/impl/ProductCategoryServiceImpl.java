@@ -132,7 +132,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     }
 
 
-  
+
 
     @Override
     public Result<List<ProductCategory>> getAll() {
