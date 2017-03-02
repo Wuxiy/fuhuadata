@@ -116,32 +116,42 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
      * @return
      */
     public List<CategoryTree> getMiddle(List<ProductCategoryVO> list,List<CategoryTree> listRoot){
-        for(int w=0;w<list.size();w++) {
-            System.out.println(list.get(w).getParentId());
-        }
+
         try {
             for (int i = 0; i < listRoot.size(); i++) {
-                System.out.println(listRoot.get(i).getCname());
-                List<CategoryTree> clist = new ArrayList<CategoryTree>();
 
+                List<CategoryTree> clist = new ArrayList<CategoryTree>();
                 for (int n = 0; n < list.size(); n++) {
-                    System.out.println(list.get(n).getMiddleId());
-                    if(list.get(n).getMiddleId()==null) continue;
-                    else if (n==list.size()-1&&(list.get(n).getParentId().intValue() == listRoot.get(i).getCid().intValue()) && (list.get(n).getMiddleId().intValue() != list.get(n + 1).getMiddleId().intValue())) {
+                    if (list.get(n).getMiddleId() == null) continue;
+                    else if (n == list.size() - 1 && (list.get(n).getParentId().intValue() == listRoot.get(i).getCid().intValue()) && (list.get(n).getMiddleId().intValue() != list.get(n + 1).getMiddleId().intValue())) {
                         CategoryTree categoryTree = new CategoryTree();
                         categoryTree.setCid(list.get(n).getMiddleId());
                         categoryTree.setPid(list.get(n).getParentId());
                         categoryTree.setCname(list.get(n).getMiddle());
                         clist.add(categoryTree);
-                        System.out.println(categoryTree.getCname());
+                        System.out.println(list.get(n).getMiddle());
+                        System.out.println(categoryTree.getCid());
                     }
-                   else if ((list.get(n).getParentId().intValue() == listRoot.get(i).getCid().intValue()) && (list.get(n).getMiddleId().intValue() != list.get(n + 1).getMiddleId().intValue())) {
+                    else if (list.get(n + 1).getMiddleId() != null) {
+                        if (list.get(n).getParentId().intValue() == listRoot.get(i).getCid().intValue() && (list.get(n).getMiddleId().intValue() != list.get(n + 1).getMiddleId().intValue())) {
+                            CategoryTree categoryTree = new CategoryTree();
+                            categoryTree.setCid(list.get(n).getMiddleId());
+                            categoryTree.setPid(list.get(n).getParentId());
+                            categoryTree.setCname(list.get(n).getMiddle());
+                            clist.add(categoryTree);
+                            System.out.println(list.get(n).getMiddle());
+                            System.out.println(categoryTree.getCid());
+                        }
+
+                    }
+                    else if(list.get(n+1).getMiddleId()==null){
                         CategoryTree categoryTree = new CategoryTree();
                         categoryTree.setCid(list.get(n).getMiddleId());
                         categoryTree.setPid(list.get(n).getParentId());
                         categoryTree.setCname(list.get(n).getMiddle());
                         clist.add(categoryTree);
-                        System.out.println(categoryTree.getCname());
+                        System.out.println(list.get(n).getMiddle());
+                        System.out.println(categoryTree.getCid());
                     }
                 }
                 listRoot.get(i).setNodes(clist);
@@ -156,14 +166,14 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
      * 获取第三层
      * @return
      */
-
     public List<CategoryTree> getChild(List<ProductCategoryVO> list,List<CategoryTree> listRoot){
         try {
             for (int i = 0; i < listRoot.size(); i++) {
                 for (int n = 0; n < listRoot.get(i).getNodes().size(); n++) {
                     List<CategoryTree> clist = new ArrayList<CategoryTree>();
                     for (int m = 0; m < list.size(); m++)
-                        if ((list.get(m).getMiddleId().intValue() == listRoot.get(i).getNodes().get(n).getCid().intValue())) {
+                        if (list.get(m).getMiddleId() == null) continue;
+                        else if ((list.get(m).getMiddleId().intValue() == listRoot.get(i).getNodes().get(n).getCid().intValue())&&list.get(m).getChild()!=null) {
                             CategoryTree categoryTree = new CategoryTree();
                             categoryTree.setCid(list.get(m).getSmallId());
                             categoryTree.setPid(list.get(m).getSmallId());
