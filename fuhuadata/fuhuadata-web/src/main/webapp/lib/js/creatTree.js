@@ -24,18 +24,24 @@
     };
     //给树形菜单动态添加点击事件，并且获取数据，将数据渲染到表格或者表单
     $.fn.filtrateData = function(url,containerId,method){
-
+        //取得html容器
         var $container = $('#'+containerId);
+        //给树形菜单添加点击事件
         this.on('click','li[id]>a',function(e){
+            //阻止a的默认事件
             e.preventDefault();
             var id = $(e.target).parent('li').attr('id');
             console.log(id);
             $.post(url,{id:id},function(data,status){
-                console.log(data);
-                $container.html('');
-                //调用不同的渲染方法
-                methods[method](data.data,$container);
-            })
+                if(method=='packingArchivesList'){
+                    $container.html('');
+                    //调用不同的渲染方法
+                    methods[method](data.data,$container);
+                }else if(method=='productArchivesList'){
+                    methods[method](data.data);
+                }
+
+            });
             return false;
         });
         var methods={
@@ -47,11 +53,29 @@
                 })
              },
             //渲染标准产品档案
-            productArchivesList : function(getData,parent){
-                $.each(getData,function(n,item){
-                    console.log(item);
+            productArchivesList : function(getData){
+                $.each(getData,function(n,total){
+                    console.log(total);
+                    $.each(total,function(key,item){
+                        var $formControl=$('[name="'+ key +'"]');
+                        if($formControl.attr('type')=='radio'||$formControl.attr('type')=='checkbox'){
+                            var arr=[item];
+                            $formControl.val(arr);
+                        }else{
+                            $formControl.val(item);
+                        }
+                        // if($formControl[0].tagName=='INPUT'){
+                        //
+                        // }else if($formControl[0].tagName=='TBODY'){
+                        //     $.each(item,function(name,value){
+                        //         var $tr = $('<tr></tr>');
+                        //         $tr.append('<td name="'+name+'"></td>')
+                        //     })
+                        // }
+                    })
                 })
              }
         }
     };
 })( jQuery );
+
