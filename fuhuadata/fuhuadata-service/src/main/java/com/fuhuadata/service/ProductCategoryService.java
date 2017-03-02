@@ -18,7 +18,7 @@ public interface ProductCategoryService {
 
     public Result deleteProductCategoryById(int id);
 
-    public Result<List<ProductCategoryVO>> getProductCategoryByLevel();
+    public Result<List<CategoryTree>> getProductCategoryByLevel();
 
     public Result<List<ProductCategory>> getAll();
 

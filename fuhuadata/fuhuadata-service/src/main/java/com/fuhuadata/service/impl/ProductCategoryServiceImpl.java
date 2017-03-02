@@ -56,16 +56,127 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         return result;
     }
 
+    /**
+     * 连接查询再构造
+     * @return
+     */
     @Override
-    public Result<List<ProductCategoryVO>> getProductCategoryByLevel() {
-        Result<List<ProductCategoryVO>> result = new Result<List<ProductCategoryVO>>();
+    public Result<List<CategoryTree>> getProductCategoryByLevel() {
+        Result<List<CategoryTree>> result = new Result<List<CategoryTree>>();
         try{
-            result.addDefaultModel("ProductCategoryVO",productCategoryManager.getProductCategoryByLevel() );
+            List<ProductCategoryVO> list = productCategoryManager.getProductCategoryByLevel();
+            List<CategoryTree> listRoot =getRoot(list);
+            List<CategoryTree> listRoot2 = getMiddle(list,listRoot);
+            List<CategoryTree> listRoot3=getChild(list,listRoot2);
+            System.out.println(listRoot3.get(1).getNodes().get(1).getCname());
+            result.addDefaultModel("CategoryTree",listRoot3);
         }catch(Exception e){
             result.setSuccess(false);
             log.error("分层获取产品目录树错误");
         }
         return result;
+    }
+
+
+    /**
+     * 获取父节点
+     * @param list
+     * @return
+     */
+    public List<CategoryTree> getRoot(List<ProductCategoryVO> list){
+        List<CategoryTree> listRoot = new ArrayList<CategoryTree>();
+        try {
+            for (int i = 0; i < list.size(); i++) {
+
+                if(i==list.size()-1&&list.get(i-1).getParentId().intValue() != list.get(i).getParentId().intValue()){
+                    CategoryTree categoryTreeEnd= new CategoryTree();
+                    categoryTreeEnd.setPid(0);
+                    categoryTreeEnd.setCid(list.get(i).getParentId());
+                    categoryTreeEnd.setCname(list.get(i).getParent());
+                    listRoot.add(categoryTreeEnd);
+                }
+                else if (((list.get(i+1).getParentId()).intValue())!=(list.get(i).getParentId()).intValue() ) {
+                    CategoryTree categoryTree = new CategoryTree();
+                    categoryTree.setPid(0);
+                    categoryTree.setCid(list.get(i).getParentId());
+                    categoryTree.setCname(list.get(i).getParent());
+                    listRoot.add(categoryTree);
+                }
+            }
+        }catch(Exception e){
+            log.error("获取父节点失败",e);
+        }
+        for (int i=0;i<listRoot.size();i++){
+        System.out.println(listRoot.get(i).getCname());}
+        return listRoot;
+    }
+
+    /**
+     * 获取父节点下的子节点
+     * @return
+     */
+    public List<CategoryTree> getMiddle(List<ProductCategoryVO> list,List<CategoryTree> listRoot){
+        for(int w=0;w<list.size();w++) {
+            System.out.println(list.get(w).getParentId());
+        }
+        try {
+            for (int i = 0; i < listRoot.size(); i++) {
+                System.out.println(listRoot.get(i).getCname());
+                List<CategoryTree> clist = new ArrayList<CategoryTree>();
+
+                for (int n = 0; n < list.size(); n++) {
+                    System.out.println(list.get(n).getMiddleId());
+                    if(list.get(n).getMiddleId()==null) continue;
+                    else if (n==list.size()-1&&(list.get(n).getParentId().intValue() == listRoot.get(i).getCid().intValue()) && (list.get(n).getMiddleId().intValue() != list.get(n + 1).getMiddleId().intValue())) {
+                        CategoryTree categoryTree = new CategoryTree();
+                        categoryTree.setCid(list.get(n).getMiddleId());
+                        categoryTree.setPid(list.get(n).getParentId());
+                        categoryTree.setCname(list.get(n).getMiddle());
+                        clist.add(categoryTree);
+                        System.out.println(categoryTree.getCname());
+                    }
+                   else if ((list.get(n).getParentId().intValue() == listRoot.get(i).getCid().intValue()) && (list.get(n).getMiddleId().intValue() != list.get(n + 1).getMiddleId().intValue())) {
+                        CategoryTree categoryTree = new CategoryTree();
+                        categoryTree.setCid(list.get(n).getMiddleId());
+                        categoryTree.setPid(list.get(n).getParentId());
+                        categoryTree.setCname(list.get(n).getMiddle());
+                        clist.add(categoryTree);
+                        System.out.println(categoryTree.getCname());
+                    }
+                }
+                listRoot.get(i).setNodes(clist);
+            }
+        }catch(Exception e){
+            log.error("获取第二级失败",e);
+        }
+        return listRoot;
+    }
+
+    /**
+     * 获取第三层
+     * @return
+     */
+
+    public List<CategoryTree> getChild(List<ProductCategoryVO> list,List<CategoryTree> listRoot){
+        try {
+            for (int i = 0; i < listRoot.size(); i++) {
+                for (int n = 0; n < listRoot.get(i).getNodes().size(); n++) {
+                    List<CategoryTree> clist = new ArrayList<CategoryTree>();
+                    for (int m = 0; m < list.size(); m++)
+                        if ((list.get(m).getMiddleId().intValue() == listRoot.get(i).getNodes().get(n).getCid().intValue())) {
+                            CategoryTree categoryTree = new CategoryTree();
+                            categoryTree.setCid(list.get(m).getSmallId());
+                            categoryTree.setPid(list.get(m).getSmallId());
+                            categoryTree.setCname(list.get(m).getChild());
+                            clist.add(categoryTree);
+                        }
+                    listRoot.get(i).getNodes().get(n).setNodes(clist);
+                }
+            }
+        }catch(Exception e){
+            log.error("获取产品树第三级失败",e);
+        }
+        return listRoot;
     }
 
     @Override

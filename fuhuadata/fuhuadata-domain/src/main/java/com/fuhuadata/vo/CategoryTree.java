@@ -14,7 +14,7 @@ public class CategoryTree implements Serializable {
     private Integer pid;
     private String cname;
 
-    private List nodes =new ArrayList();
+    private List<CategoryTree> nodes =new ArrayList<CategoryTree>();
 
     public CategoryTree(){
 
@@ -44,11 +44,11 @@ public class CategoryTree implements Serializable {
         this.cname = cname;
     }
 
-    public List getNodes() {
+    public List<CategoryTree> getNodes() {
         return nodes;
     }
 
-    public void setNodes(List nodes) {
+    public void setNodes(List<CategoryTree> nodes) {
         this.nodes = nodes;
     }
 }

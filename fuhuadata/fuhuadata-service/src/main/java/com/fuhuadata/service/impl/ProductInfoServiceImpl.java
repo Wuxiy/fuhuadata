@@ -23,6 +23,7 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 			result.addDefaultModel(productInfoManager.addProductInfo(productInfo));			
 		} catch(Exception e) {
 			result.setSuccess(false);
+			log.error("新增产品档案错误",e);
 		}
 		return result;
     }
@@ -33,6 +34,7 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 			result.setSuccess(productInfoManager.updateProductInfoById(product_id, productInfo));
 		} catch(Exception e) {
 			result.setSuccess(false);
+			log.error("根据id更新产品档案信息错误",e);
 		}
 		return result;
     }
@@ -43,6 +45,7 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 			result.setSuccess(productInfoManager.deleteProductInfoById(product_id));
 		} catch(Exception e) {
 			result.setSuccess(false);
+			log.error("根据id删除产品档案信息错误",e);
 		}
 		return result;
     }	
@@ -53,6 +56,7 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 			result.addDefaultModel("${!className}s", productInfoManager.getProductInfosByQuery(queryProductInfo));
 		} catch(Exception e) {
 			result.setSuccess(false);
+			log.error("获取产品档案列表错误",e);
 		}
 		return result;	
     }
@@ -93,6 +97,7 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 			result = productInfoManager.getProductInfosByPage(queryProductInfo);
 		} catch(Exception e) {
 			result.setSuccess(false);
+			log.error("分页获取产品档案错误",e);
 		}
 		return result;	
     }
@@ -103,6 +108,7 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 			result.addDefaultModel(productInfoManager.count(queryProductInfo));
 		} catch(Exception e) {
 			result.setSuccess(false);
+			log.error("获取产品档案数量错误",e);
 		}
 		return result;	
     }

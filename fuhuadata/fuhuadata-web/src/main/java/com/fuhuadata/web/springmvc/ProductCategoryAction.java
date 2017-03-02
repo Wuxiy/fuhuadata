@@ -6,6 +6,7 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.ProductCategoryService;
 import com.fuhuadata.vo.CategoryTree;
+import com.fuhuadata.vo.ProductCategoryVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -57,13 +58,30 @@ public class ProductCategoryAction {
     public ResultPojo productCategoryLevel(){
         Result<List<CategoryTree>> result = new Result<List<CategoryTree>>();
         try{
-            //result=productCategoryService.getProductCategoryByLevel();
-            result=productCategoryService.getAllByTree();
+            result=productCategoryService.getProductCategoryByLevel();
         }catch(Exception e){
             log.error("获取产品树json数据错误",e);
         }
         return result.getResultPojo();
     }
+
+//    /**
+//     * json目录树
+//     * @return
+//     */
+//    @RequestMapping(value="/CategoryTree")
+//    @SystemLogAnnotation(module = "knowledgeBase-ProductCategory",methods = "level")
+//    @ResponseBody
+//    public ResultPojo productCategoryTree(){
+//        Result<List<CategoryTree>> result = new Result<List<CategoryTree>>();
+//        try{
+//            //result=productCategoryService.getProductCategoryByLevel();
+//            result=productCategoryService.getAllByTree();
+//        }catch(Exception e){
+//            log.error("获取产品树json数据错误",e);
+//        }
+//        return result.getResultPojo();
+//    }
 
     /**
      * add
