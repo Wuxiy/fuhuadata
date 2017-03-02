@@ -3,6 +3,7 @@ package com.fuhuadata.manager.impl;
 import com.fuhuadata.dao.PackingCategoryDao;
 import com.fuhuadata.domain.PackingCategory;
 import com.fuhuadata.manager.PackingCategoryManager;
+import com.fuhuadata.vo.PackingCategoryVO;
 
 import java.util.List;
 
@@ -35,6 +36,11 @@ public class PackingCategoryManagerImpl implements PackingCategoryManager {
     @Override
     public List<PackingCategory> getPackingCategoryByPId(int id) {
         return packingCategoryDao.getPackingCategoryByParentId(id);
+    }
+
+    @Override
+    public List<PackingCategoryVO> getAllByLevel() {
+        return packingCategoryDao.getAllByLevel();
     }
 
     @Override

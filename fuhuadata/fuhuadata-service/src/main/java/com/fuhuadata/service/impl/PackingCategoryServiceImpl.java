@@ -5,11 +5,11 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.PackingCategoryManager;
 import com.fuhuadata.service.PackingCategoryService;
 import com.fuhuadata.vo.CategoryTree;
+import com.fuhuadata.vo.PackingCategoryVO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by intanswer on 2017/2/23.
@@ -69,13 +69,59 @@ public class PackingCategoryServiceImpl implements PackingCategoryService {
     public Result<List<CategoryTree>> getAllByTree() {
         List<CategoryTree> tree=new ArrayList<CategoryTree>();
         Result<List<CategoryTree>> result=new Result<List<CategoryTree>>();
-        List<PackingCategory> list=packingCategoryManager.getPackingCategoryByPId(0);
-        int n=list.size();
-        for(int i=0;i<n;i++) {
-            tree.add(recursiveTree(list.get(i).getCategoryId()));
+        try {
+            List<PackingCategoryVO> list = packingCategoryManager.getAllByLevel();
+            result.addDefaultModel("CategoryTree", getAllNode(list));
+        }catch(Exception e){
+            result.setSuccess(false);
+            log.error("获取包材目录树错误",e);
         }
-        result.addDefaultModel("CategoryTree",tree);
         return result;
+    }
+
+
+    /**
+     * map构造list树
+     * @param list
+     * @return
+     */
+    public  List<CategoryTree> getAllNode(List<PackingCategoryVO> list){
+        Map<Integer, CategoryTree> map = new HashMap<Integer, CategoryTree>();
+        List<CategoryTree> root_list = new ArrayList<CategoryTree>();
+        try {
+            for (PackingCategoryVO vo : list) {
+                CategoryTree child = null;
+                CategoryTree parent = null;
+                //从三级判断
+                if (vo.getChildId() != null) {
+                    child = new CategoryTree();
+                    child.setCname(vo.getChildName());
+                    child.setPid(vo.getParentId());
+                    child.setCid(vo.getChildId());
+                }
+                parent = map.get(vo.getParentId());
+                if (parent == null) {
+                    parent = new CategoryTree();
+                    parent.setCid(vo.getParentId());
+                    parent.setPid(0);
+                    parent.setCname(vo.getParentName());
+                }
+                if (child != null) {
+                    parent.addChildNode(child);
+                }
+                map.put(parent.getCid(), parent);
+            }
+
+            Set<Map.Entry<Integer, CategoryTree>> entrys = map.entrySet();
+            for (Map.Entry<Integer, CategoryTree> entry : entrys) {
+                if (entry.getValue().getPid() == 0) {
+                    root_list.add(entry.getValue());
+                }
+            }
+        }catch (Exception e){
+            log.error("获取产品树方法错误",e);
+        }
+        return root_list;
     }
 
     /**

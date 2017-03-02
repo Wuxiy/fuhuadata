@@ -1,6 +1,7 @@
 package com.fuhuadata.dao;
 
 import com.fuhuadata.domain.PackingCategory;
+import com.fuhuadata.vo.PackingCategoryVO;
 
 import java.util.List;
 
@@ -20,6 +21,8 @@ public interface PackingCategoryDao {
      * @return
      */
     public List<PackingCategory> getAll();
+
+    public List<PackingCategoryVO> getAllByLevel();
 
     public List<PackingCategory> getPackingCategoryByParentId(int id);
 

@@ -1,6 +1,7 @@
 package com.fuhuadata.manager;
 
 import com.fuhuadata.domain.PackingCategory;
+import com.fuhuadata.vo.PackingCategoryVO;
 
 import java.util.List;
 
@@ -19,6 +20,8 @@ public interface PackingCategoryManager {
     public List<PackingCategory> getAll();
 
     public List<PackingCategory> getPackingCategoryByPId(int id);
+
+    public List<PackingCategoryVO> getAllByLevel();
 
     public PackingCategory getPackingCategoryById(int id);
 
