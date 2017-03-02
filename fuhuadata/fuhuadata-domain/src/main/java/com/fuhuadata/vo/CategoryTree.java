@@ -51,4 +51,16 @@ public class CategoryTree implements Serializable {
     public void setNodes(List<CategoryTree> nodes) {
         this.nodes = nodes;
     }
+
+    /**
+     * 添加当前节点的nodes
+     * @param categy
+     */
+    public void addChildNode(CategoryTree categy){
+        if(this.nodes == null){
+            this.nodes = new ArrayList<CategoryTree>();
+        }
+        this.nodes.add(categy);
+    }
+
 }

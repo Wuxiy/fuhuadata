@@ -9,8 +9,7 @@ import com.fuhuadata.vo.ProductCategoryVO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 产品目录树service
@@ -65,16 +64,75 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         Result<List<CategoryTree>> result = new Result<List<CategoryTree>>();
         try{
             List<ProductCategoryVO> list = productCategoryManager.getProductCategoryByLevel();
-            List<CategoryTree> listRoot =getRoot(list);
-            List<CategoryTree> listRoot2 = getMiddle(list,listRoot);
-            List<CategoryTree> listRoot3=getChild(list,listRoot2);
-            System.out.println(listRoot3.get(1).getNodes().get(1).getCname());
-            result.addDefaultModel("CategoryTree",listRoot3);
+//            List<CategoryTree> listRoot =getRoot(list);
+//            List<CategoryTree> listRoot2 = getMiddle(list,listRoot);
+//            List<CategoryTree> listRoot3=getChild(list,listRoot2);
+            result.addDefaultModel("CategoryTree",getAllNode(list));
         }catch(Exception e){
             result.setSuccess(false);
             log.error("分层获取产品目录树错误");
         }
         return result;
+    }
+
+    /**
+     * 结合map构造树形list
+     * @param list
+     * @return
+     */
+    public List<CategoryTree> getAllNode(List<ProductCategoryVO> list){
+        Map<Integer, CategoryTree> map = new HashMap<Integer, CategoryTree>();
+        List<CategoryTree> root_list = new ArrayList<CategoryTree>();
+        try {
+            for (ProductCategoryVO vo : list) {
+                CategoryTree small = null;
+                CategoryTree middle = null;
+                CategoryTree big = null;
+                //从三级判断
+                if (vo.getSmallId() != null) {
+                    small = new CategoryTree();
+                    small.setCname(vo.getChild());
+                    small.setPid(vo.getMiddleId());
+                    small.setCid(vo.getSmallId());
+                }
+                if (vo.getMiddleId() != null) {
+                    middle = map.get(vo.getMiddleId());
+                    if (middle == null) {
+                        middle = new CategoryTree();
+                        middle.setCid(vo.getMiddleId());
+                        middle.setPid(vo.getParentId());
+                        middle.setCname(vo.getMiddle());
+                    }
+                    if (small != null) {
+                        middle.addChildNode(small);
+                    }
+                    map.put(middle.getCid(), middle);
+                }
+
+                big = map.get(vo.getParentId());
+                if (big == null) {
+                    big = new CategoryTree();
+                    big.setCid(vo.getParentId());
+                    big.setPid(0);
+                    big.setCname(vo.getParent());
+                }
+                if (middle != null) {
+                    big.addChildNode(middle);
+                }
+                map.put(big.getCid(), big);
+            }
+
+            Set<Map.Entry<Integer, CategoryTree>> entrys = map.entrySet();
+            System.out.println(entrys);
+            for (Map.Entry<Integer, CategoryTree> entry : entrys) {
+                if (entry.getValue().getPid() == 0) {
+                    root_list.add(entry.getValue());
+                }
+            }
+        }catch (Exception e){
+            log.error("获取产品树方法错误",e);
+        }
+        return root_list;
     }
 
 
@@ -106,8 +164,6 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         }catch(Exception e){
             log.error("获取父节点失败",e);
         }
-        for (int i=0;i<listRoot.size();i++){
-        System.out.println(listRoot.get(i).getCname());}
         return listRoot;
     }
 
@@ -129,8 +185,6 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
                         categoryTree.setPid(list.get(n).getParentId());
                         categoryTree.setCname(list.get(n).getMiddle());
                         clist.add(categoryTree);
-                        System.out.println(list.get(n).getMiddle());
-                        System.out.println(categoryTree.getCid());
                     }
                     else if (list.get(n + 1).getMiddleId() != null) {
                         if (list.get(n).getParentId().intValue() == listRoot.get(i).getCid().intValue() && (list.get(n).getMiddleId().intValue() != list.get(n + 1).getMiddleId().intValue())) {
@@ -139,8 +193,6 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
                             categoryTree.setPid(list.get(n).getParentId());
                             categoryTree.setCname(list.get(n).getMiddle());
                             clist.add(categoryTree);
-                            System.out.println(list.get(n).getMiddle());
-                            System.out.println(categoryTree.getCid());
                         }
 
                     }
@@ -150,8 +202,6 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
                         categoryTree.setPid(list.get(n).getParentId());
                         categoryTree.setCname(list.get(n).getMiddle());
                         clist.add(categoryTree);
-                        System.out.println(list.get(n).getMiddle());
-                        System.out.println(categoryTree.getCid());
                     }
                 }
                 listRoot.get(i).setNodes(clist);
@@ -176,7 +226,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
                         else if ((list.get(m).getMiddleId().intValue() == listRoot.get(i).getNodes().get(n).getCid().intValue())&&list.get(m).getChild()!=null) {
                             CategoryTree categoryTree = new CategoryTree();
                             categoryTree.setCid(list.get(m).getSmallId());
-                            categoryTree.setPid(list.get(m).getSmallId());
+                            categoryTree.setPid(list.get(m).getMiddleId());
                             categoryTree.setCname(list.get(m).getChild());
                             clist.add(categoryTree);
                         }
