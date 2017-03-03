@@ -7,8 +7,8 @@
 
     <resultMap id="PACKINGARCHIVES-MAP" class="PackingArchives">
         <result column="packing_id" property="packingId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result column="type" property="type" jdbcType="INT" javaType="java.lang.Integer"/>
-        <result column="packing_type" property="packingType" jdbcType="INT" javaType="java.lang.Integer"/>
+        <result column="parent_id" property="parentId" jdbcType="INT" javaType="java.lang.Integer"/>
+        <result column="category_id" property="categoryId" jdbcType="INT" javaType="java.lang.Integer"/>
         <result column="pack_name" property="packName" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="size" property="size" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="spec" property="spec" jdbcType="VARCHAR" javaType="java.lang.String"/>
@@ -30,11 +30,11 @@
             <isNotNull prepend=" AND " property="packingId">
                 packing_id=#packingId#
             </isNotNull>
-            <isNotNull prepend=" AND " property="type">
-                type=#type#
+            <isNotNull prepend=" AND " property="parentId">
+                parent_id=#parentId#
             </isNotNull>
-            <isNotNull prepend=" AND " property="packingType">
-                packing_type=#packingType#
+            <isNotNull prepend=" AND " property="categoryId">
+                category_id=#categoryId#
             </isNotNull>
             <isNotNull prepend=" AND " property="packName">
                 pack_name=#packName#
@@ -85,11 +85,11 @@
             <isNotNull prepend=" AND " property="packingId">
                 packing_id=#packingId#
             </isNotNull>
-            <isNotNull prepend=" AND " property="type">
-                type=#type#
+            <isNotNull prepend=" AND " property="parentId">
+                parent_id=#parentId#
             </isNotNull>
-            <isNotNull prepend=" AND " property="packingType">
-                packing_type=#packingType#
+            <isNotNull prepend=" AND " property="categoryId">
+                category_id=#categoryId#
             </isNotNull>
             <isNotNull prepend=" AND " property="packName">
                 pack_name=#packName#
@@ -137,7 +137,7 @@
     </sql>
     <insert id="ADD" parameterClass="PackingArchives">
         INSERT INTO
-        k_packing_archives (packing_id, type, packing_type,
+        k_packing_archives (packing_id, parent_id, category_id,
         pack_name, size, spec,
         spec_unit, quality, quality_index,
         quality_target_value, unit_price, price_end_date,
@@ -145,7 +145,7 @@
         associated_packing_id, image_path
         image_path
         )
-        VALUES (#packingId#, #type#, #packingType#,
+        VALUES (#packingId#, #parentId#, #categoryId#,
         #packName#, #size#, #spec#,
         #specUnit#, #quality#, #qualityIndex#,
         #qualityTargetValue#, #unitPrice#, #priceEndDate#,
@@ -160,11 +160,11 @@
     <update id="UPDATE" parameterClass="PackingArchives">
         UPDATE k_packing_archives
         <dynamic prepend=" SET ">
-            <isNotNull prepend=", " property="type">
-                type=#type#
+            <isNotNull prepend=", " property="parentId">
+                parent_id=#parentId#
             </isNotNull>
-            <isNotNull prepend=", " property="packingType">
-                packing_type=#packingType#
+            <isNotNull prepend=", " property="categoryId">
+                category_id=#categoryId#
             </isNotNull>
             <isNotNull prepend=", " property="packName">
                 pack_name=#packName#
@@ -241,7 +241,7 @@
 
     <select id="GET-BY-PID" resultMap="PACKINGARCHIVES-MAP" parameterClass="java.lang.Integer">
         <![CDATA[
-            SELECT * FROM k_packing_archives WHERE packing_type=#id# OR type=#id#
+            SELECT * FROM k_packing_archives WHERE parent_id=#id# OR category_id=#id#
         ]]>
     </select>
 

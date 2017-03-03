@@ -122,6 +122,11 @@ public class PreparationProcessCostAction {
         return model;
     }
 
+    /**
+     * update
+     * @param preparationProcessCost
+     * @return
+     */
     @RequestMapping(value = "/doModify",method=RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-preparationProcessCost",methods="doUpdate")
     @ResponseBody

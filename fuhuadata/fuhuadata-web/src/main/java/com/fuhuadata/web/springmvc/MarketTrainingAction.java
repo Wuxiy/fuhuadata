@@ -1,6 +1,7 @@
 package com.fuhuadata.web.springmvc;
 
 import com.fuhuadata.domain.MarketTraining;
+import com.fuhuadata.domain.SystemLog;
 import com.fuhuadata.domain.query.MarketTrainingQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
@@ -76,8 +77,29 @@ public class MarketTrainingAction {
         return null;
     }
 
+    @SuppressWarnings("rawtypes")
+    @RequestMapping(value = "/delete",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "delete")
+    @ResponseBody
+    public ResultPojo delete(int id){
+        try{
+            Result result = marketTrainingService.deleteMarketTrainingById(id);
+            return result.getResultPojo();
+        }catch(Exception e){
+            log.error("根据id删除营销培训信息错误",e);
+        }
+        return null;
+    }
 
+
+    /**
+     * update
+     * @param marketTraining
+     * @return
+     */
     @RequestMapping(value = "/doModify",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "doUpdate")
+    @ResponseBody
     public ResultPojo doModifyMarketTraining(@RequestBody MarketTraining marketTraining){
         try{
             int id=marketTraining.getTranId();

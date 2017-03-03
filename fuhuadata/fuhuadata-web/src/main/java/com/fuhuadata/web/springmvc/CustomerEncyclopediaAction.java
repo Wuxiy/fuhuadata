@@ -81,7 +81,32 @@ public class CustomerEncyclopediaAction {
         return null;
     }
 
+    @RequestMapping(value = "/delete",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "delete")
+    @ResponseBody
+    public ResultPojo delete(int id){
+         try{
+             Result result = customerEncyclopediaService.deleteCustomerEncyclopediaById(id);
+             return result.getResultPojo();
+        }catch(Exception e){
+             log.error("根据ID删除客户百科信息错误",e);
+         }
+         return null;
+    }
 
+    @RequestMapping(value = "/doModify",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "doUpdate")
+    @ResponseBody
+    public ResultPojo update(@RequestBody CustomerEncyclopedia customerEncyclopedia){
+        try{
+            int id =customerEncyclopedia.getEncyId();
+            Result result = customerEncyclopediaService.updateCustomerEncyclopediaById(id,customerEncyclopedia);
+            return result.getResultPojo();
+        }catch(Exception e){
+            log.error("根据id更新客户信息错误",e);
+        }
+        return null;
+    }
 
 
 

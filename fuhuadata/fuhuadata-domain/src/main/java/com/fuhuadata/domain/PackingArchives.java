@@ -10,9 +10,9 @@ import java.util.Date;
 public class PackingArchives {
     private Integer packingId;
 
-    private Integer type;//包材类型：内包材(1)，外包材(2)，辅材(3)
+    private Integer parentId;//包材类型：内包材(1)，外包材(2)，辅材(3)
 
-    private Integer packingType;//底层分层，主材-平桶类
+    private Integer categoryId;//底层分层，主材-平桶类
 
     private String packName;//包材名称
 
@@ -150,21 +150,7 @@ public class PackingArchives {
         this.imagePath = imagePath;
     }
 
-    public Integer getType() {
-        return type;
-    }
 
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public Integer getPackingType() {
-        return packingType;
-    }
-
-    public void setPackingType(Integer packingType) {
-        this.packingType = packingType;
-    }
 
     public Integer getStatus() {
         return status;
@@ -180,5 +166,21 @@ public class PackingArchives {
 
     public void setUnitPrice(BigDecimal unitPrice) {
         this.unitPrice = unitPrice;
+    }
+
+    public Integer getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
+    }
+
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 }

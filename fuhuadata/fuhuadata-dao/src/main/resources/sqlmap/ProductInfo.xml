@@ -19,7 +19,6 @@
 								<result property="otherSaltName" column="other_salt_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="executeStandard" column="execute_standard" jdbcType="INT" javaType="java.lang.Integer" />
 								<result property="executeNumer" column="execute_numer" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="executeRemarks" column="execute_remarks" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="productFeature" column="product_feature" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="processingComponents" column="processing_components" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="physicalProperities" column="physical_properities" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -68,9 +67,6 @@
 		</isNotNull>
 				<isNotNull prepend=" AND " property="executeNumer">
 			execute_numer = #executeNumer#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="executeRemarks">
-			execute_remarks = #executeRemarks#
 		</isNotNull>
 				<isNotNull prepend=" AND " property="productFeature">
 			product_feature = #productFeature#
@@ -140,9 +136,6 @@
 			<isNotNull prepend=" AND " property="executeNumer">
 				execute_numer = #executeNumer#
 			</isNotNull>
-			<isNotNull prepend=" AND " property="executeRemarks">
-				execute_remarks = #executeRemarks#
-			</isNotNull>
 			<isNotNull prepend=" AND " property="productFeature">
 				product_feature = #productFeature#
 			</isNotNull>
@@ -175,8 +168,8 @@
 	
 	<insert id="ADD" parameterClass="ProductInfo">
 		INSERT INTO 
-		product_info(product_id,big_category_id,mid_category_id,small_category_id,category_name,measurement_unit,concentration,name,salt_type,other_salt_name,execute_standard,execute_numer,execute_remarks,product_feature,processing_components,physical_properities,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time)
-		VALUES(#productId#,#bigCategoryId#,#midCategoryId#,#smallCategoryId#,#categoryName#,#measurementUnit#,#concentration#,#name#,#saltType#,#otherSaltName#,#executeStandard#,#executeNumer#,#executeRemarks#,#productFeature#,#processingComponents#,#physicalProperities#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
+		product_info(product_id,big_category_id,mid_category_id,small_category_id,category_name,measurement_unit,concentration,name,salt_type,other_salt_name,execute_standard,execute_numer,product_feature,processing_components,physical_properities,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time)
+		VALUES(#productId#,#bigCategoryId#,#midCategoryId#,#smallCategoryId#,#categoryName#,#measurementUnit#,#concentration#,#name#,#saltType#,#otherSaltName#,#executeStandard#,#executeNumer#,#productFeature#,#processingComponents#,#physicalProperities#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
 		<selectKey resultClass="int" keyProperty="id">
 			SELECT @@IDENTITY AS ID
 		</selectKey>
@@ -197,7 +190,6 @@
 						<isNotEmpty prepend=", " property="otherSaltName">other_salt_name=#otherSaltName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="executeStandard">execute_standard=#executeStandard#</isNotEmpty>
 						<isNotEmpty prepend=", " property="executeNumer">execute_numer=#executeNumer#</isNotEmpty>
-						<isNotEmpty prepend=", " property="executeRemarks">execute_remarks=#executeRemarks#</isNotEmpty>
 						<isNotEmpty prepend=", " property="productFeature">product_feature=#productFeature#</isNotEmpty>
 						<isNotEmpty prepend=", " property="processingComponents">processing_components=#processingComponents#</isNotEmpty>
 						<isNotEmpty prepend=", " property="physicalProperities">physical_properities=#physicalProperities#</isNotEmpty>
@@ -240,7 +232,7 @@
 
 	<select id="GET-BY-PID" resultMap="PRODUCTINFO-MAP" parameterClass="java.lang.Integer">
 		<![CDATA[
-			SELECT * FROM product_info	WHERE big_category_id=#id# OR mid_category_id=#id# OR small_category_id = #id#
+			SELECT * FROM product_info	WHERE product_id=#id# OR big_category_id=#id# OR mid_category_id=#id# OR small_category_id = #id#
 		]]>
 	</select>
 

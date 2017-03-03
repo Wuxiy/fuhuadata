@@ -97,4 +97,23 @@ public class ProductProblemAction {
         return model;
     }
 
+    /**
+     * update
+     * @param productProblem
+     * @return
+     */
+    @RequestMapping(value = "/doModify",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "knowledgeBase-productProblem",methods = "doUpdate")
+    @ResponseBody
+    public ResultPojo doModifyProductProblem(@RequestBody ProductProblem productProblem){
+        try{
+            int id = productProblem.getProductId();
+            Result<ProductProblem> result = productProblemService.updateProductProblemById(id,productProblem);
+            return result.getResultPojo();
+        }catch(Exception e){
+            log.error("修改产品问题信息错误",e);
+        }
+        return null;
+    }
+
 }

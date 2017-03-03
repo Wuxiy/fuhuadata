@@ -83,7 +83,37 @@ public class ComponentCostAction {
         return null;
     }
 
+    /**
+     * update
+     * @param componentCost
+     * @return
+     */
+    @RequestMapping(value="/doModify",method = RequestMethod.POST)
+    @ResponseBody
+    @SystemLogAnnotation(module = "knowledgeBase-componentCostInfo",methods = "doUpdate")
+    public ResultPojo delete(@RequestBody ComponentCost componentCost){
+        try{
+            int id = componentCost.getComponentId();
+            Result result = componentCostService.updateComponentCostById(id,componentCost);
+            return result.getResultPojo();//结果码,-1需要登录，0消息错误，1正确
+        }catch(Exception e){
+            log.error("更新成分价格错误",e);
+        }
+        return null;
+    }
 
+    @RequestMapping(value="/delete",method = RequestMethod.GET)
+    @ResponseBody
+    @SystemLogAnnotation(module = "knowledgeBase-componentCostInfo",methods = "delete")
+    public ResultPojo doAddComponentCost(int id ){
+        try{
+            Result result = componentCostService.deleteComponentCostById(id);
+            return result.getResultPojo();//结果码,-1需要登录，0消息错误，1正确
+        }catch(Exception e){
+            log.error("根据id删除成分价格错误");
+        }
+        return null;
+    }
     /**
      * 根据id获取成分价格
      * @param id
