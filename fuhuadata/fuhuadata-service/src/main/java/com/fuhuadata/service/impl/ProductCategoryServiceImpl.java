@@ -10,6 +10,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.util.*;
+import java.util.concurrent.ExecutionException;
 
 /**
  * 产品目录树service
@@ -64,7 +65,8 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         Result<List<CategoryTree>> result = new Result<List<CategoryTree>>();
         try{
             List<ProductCategoryVO> list = productCategoryManager.getProductCategoryByLevel();
-            result.addDefaultModel("CategoryTree",getAllNode(list));
+            System.out.println(list.size());
+            result.addDefaultModel("CategoryTree",getAllNodes(list));
         }catch(Exception e){
             result.setSuccess(false);
             log.error("分层获取产品目录树错误");
@@ -72,25 +74,51 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         return result;
     }
 
+
     /**
-     * 结合map构造树形list
+     * map构造tree
      * @param list
      * @return
      */
-    public List<CategoryTree> getAllNode(List<ProductCategoryVO> list){
-        Map<Integer, CategoryTree> map = new HashMap<Integer, CategoryTree>();
+    public List<CategoryTree> getAllNodes(List<ProductCategoryVO> list){
+        Map<Integer,CategoryTree> map = new HashMap<Integer,CategoryTree>();
         List<CategoryTree> root_list = new ArrayList<CategoryTree>();
         try {
             for (ProductCategoryVO vo : list) {
+                CategoryTree product=null;
                 CategoryTree small = null;
                 CategoryTree middle = null;
                 CategoryTree big = null;
-                //从三级判断
+
+                if(vo.getProductId()!=null){
+                    product=new CategoryTree();
+                    product.setCid(vo.getProductId());
+                    product.setPid(vo.getSmallId());
+                    product.setCname(vo.getProductName());
+                }
                 if (vo.getSmallId() != null) {
-                    small = new CategoryTree();
-                    small.setCname(vo.getChild());
-                    small.setPid(vo.getMiddleId());
-                    small.setCid(vo.getSmallId());
+                    small=map.get(vo.getSmallId());
+                    if(small==null) {
+                        small = new CategoryTree();
+                        small.setCname(vo.getChild());
+                        small.setPid(vo.getMiddleId());
+                        small.setCid(vo.getSmallId());
+                        if(product!=null){
+                            small.addChildNode(product);
+                        }
+                    }else{
+                        //判断当前头结点是否存在product子节点
+                        boolean flag=false;
+                        for(int i=0;i<small.getNodes().size();i++){
+                            if(small.getNodes().get(i).getCid()==product.getCid()){
+                                flag=true;
+                            }
+                        }
+                        if(flag==false){
+                            small.addChildNode(product);
+                        }
+                    }
+                    map.put(small.getCid(),small);
                 }
                 if (vo.getMiddleId() != null) {
                     middle = map.get(vo.getMiddleId());
@@ -99,9 +127,20 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
                         middle.setCid(vo.getMiddleId());
                         middle.setPid(vo.getParentId());
                         middle.setCname(vo.getMiddle());
-                    }
-                    if (small != null) {
-                        middle.addChildNode(small);
+                        if (small != null) {
+                            middle.addChildNode(small);
+                        }
+                    }else{
+                        //判断当前头结点是否存在small子节点
+                        boolean flag=false;
+                        for(int i=0;i<middle.getNodes().size();i++){
+                            if(middle.getNodes().get(i).getCid()==small.getCid()){
+                                flag=true;
+                            }
+                        }
+                        if(flag==false){
+                            middle.addChildNode(small);
+                        }
                     }
                     map.put(middle.getCid(), middle);
                 }
@@ -112,9 +151,21 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
                     big.setCid(vo.getParentId());
                     big.setPid(0);
                     big.setCname(vo.getParent());
-                }
-                if (middle != null) {
-                    big.addChildNode(middle);
+                    if (middle != null) {
+                        big.addChildNode(middle);
+                    }
+                }else{
+                    //判断当前头结点是否存在middle子节点
+                    boolean flag=false;
+                    for(int i=0;i<big.getNodes().size();i++){
+                        if(big.getNodes().get(i).getCid()==middle.getCid()){
+                            flag=true;
+                        }
+                    }
+                    if(flag==false){
+                        big.addChildNode(middle);
+                    }
+
                 }
                 map.put(big.getCid(), big);
             }
@@ -125,12 +176,11 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
                     root_list.add(entry.getValue());
                 }
             }
-        }catch (Exception e){
-            log.error("获取产品树方法错误",e);
+        }catch(Exception e){
+            log.error("获取产品结构树错误",e);
         }
         return root_list;
     }
-
 
 
 
@@ -146,52 +196,57 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         return result;
     }
 
-    /**
-     * 构造递归json树
-     * @return
-     */
     @Override
     public Result<List<CategoryTree>> getAllByTree() {
-        List<CategoryTree> tree=new ArrayList<CategoryTree>();
-        Result<List<CategoryTree>> result=new Result<List<CategoryTree>>();
-        List<ProductCategory> list=productCategoryManager.getProductCategoryByPId(0);
-        int n=list.size();
-        for(int i=0;i<n;i++) {
-            tree.add(recursiveTree(list.get(i).getId()));
-        }
-        result.addDefaultModel("CategoryTree",tree);
-        return result;
+        return null;
     }
 
-    /**
-     * 递归方法
-     * @param cid
-     * @return
-     */
-    public CategoryTree recursiveTree(int cid ){
-            ProductCategory productCategory=productCategoryManager.getProductCategoryById(cid);
-            //构造多children集合的list
-            CategoryTree node = new CategoryTree();
-            node.setCid(productCategory.getId());
-            node.setCname(productCategory.getName());
-            node.setPid(productCategory.getParentId());
-            //获取当前节点的全部子节点
-            List<ProductCategory> list=productCategoryManager.getProductCategoryByPId(cid);
+//    /**
+//     * 构造递归json树
+//     * @return
+//     */
+//    @Override
+//    public Result<List<CategoryTree>> getAllByTree() {
+//        List<CategoryTree> tree=new ArrayList<CategoryTree>();
+//        Result<List<CategoryTree>> result=new Result<List<CategoryTree>>();
+//        List<ProductCategory> list=productCategoryManager.getProductCategoryByPId(0);
+//        int n=list.size();
+//        for(int i=0;i<n;i++) {
+//            tree.add(recursiveTree(list.get(i).getId()));
+//        }
+//        result.addDefaultModel("CategoryTree",tree);
+//        return result;
+//    }
 
-            List<CategoryTree> childTreeNodes =new ArrayList<CategoryTree>();
-            for(int i=0;i<list.size();i++){
-                CategoryTree tree = new CategoryTree();
-                tree.setCid(list.get(i).getId());
-                tree.setPid(list.get(i).getParentId());
-                tree.setCname(list.get(i).getName());
-                childTreeNodes.add(tree);
-            }
-            for(CategoryTree child : childTreeNodes){
-                CategoryTree n = recursiveTree(child.getCid()); //递归
-                node.getNodes().add(n);
-        }
-        return node;
-    }
+//    /**
+//     * 递归方法
+//     * @param cid
+//     * @return
+//     */
+//    public CategoryTree recursiveTree(int cid ){
+//            ProductCategory productCategory=productCategoryManager.getProductCategoryById(cid);
+//            //构造多children集合的list
+//            CategoryTree node = new CategoryTree();
+//            node.setCid(productCategory.getId());
+//            node.setCname(productCategory.getName());
+//            node.setPid(productCategory.getParentId());
+//            //获取当前节点的全部子节点
+//            List<ProductCategory> list=productCategoryManager.getProductCategoryByPId(cid);
+//
+//            List<CategoryTree> childTreeNodes =new ArrayList<CategoryTree>();
+//            for(int i=0;i<list.size();i++){
+//                CategoryTree tree = new CategoryTree();
+//                tree.setCid(list.get(i).getId());
+//                tree.setPid(list.get(i).getParentId());
+//                tree.setCname(list.get(i).getName());
+//                childTreeNodes.add(tree);
+//            }
+//            for(CategoryTree child : childTreeNodes){
+//                CategoryTree n = recursiveTree(child.getCid()); //递归
+//                node.getNodes().add(n);
+//        }
+//        return node;
+//    }
 
     public void setProductCategoryManager(ProductCategoryManager productCategoryManager) {
         this.productCategoryManager = productCategoryManager;
