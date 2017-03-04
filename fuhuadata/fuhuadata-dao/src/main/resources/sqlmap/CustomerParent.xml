@@ -3,7 +3,7 @@
         "http://www.ibatis.com/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="CUSTOMERPARENT">
-   	<typeAlias alias="CustomerParent" type="com.fuhuadata.domain.CustomerParent"/>
+   	<typeAlias alias="CustomerParent" type="com.fuhuadata.domain.CustomerBaseInfo"/>
    	<typeAlias alias="QueryCustomerParent" type="com.fuhuadata.domain.query.QueryCustomerParent"/>
 	
 	<resultMap id="CUSTOMERPARENT-MAP" class="CustomerParent">

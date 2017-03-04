@@ -6,7 +6,7 @@ import java.util.Date;
  * @author wangbo
  * @date 2017-01-12 11:49:51
  */
-public class CustomerParent{
+public class CustomerBaseInfo {
 
     /**客户信息总id**/
 	private String customerId;
@@ -90,7 +90,7 @@ public class CustomerParent{
 	private Date modifyTime;
 	
 	
-	public CustomerParent() {
+	public CustomerBaseInfo() {
 	}
 	
 	public String getCustomerId() {

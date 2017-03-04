@@ -1,15 +1,13 @@
 package com.fuhuadata.manager.impl;
 import java.util.List;
 
-import com.fuhuadata.dao.CustomerParentDao;
-import com.fuhuadata.domain.CustomerParent;
+import com.fuhuadata.dao.CustomerBaseInfoDao;
 import com.fuhuadata.domain.query.QuerySaleCustomer;
 import com.fuhuadata.domain.SaleCustomer;
 import com.fuhuadata.dao.SaleCustomerDao;
 import com.fuhuadata.manager.SaleCustomerManager;
 import com.fuhuadata.domain.query.Result;
 import javax.annotation.Resource;
-import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 
 /**
@@ -21,7 +19,7 @@ public class SaleCustomerManagerImpl implements SaleCustomerManager {
 	@Resource
     private SaleCustomerDao saleCustomerDao;
 	@Resource
-	private CustomerParentDao customerParentDao;
+	private CustomerBaseInfoDao customerParentDao;
     
 
     public SaleCustomer addSaleCustomer(SaleCustomer saleCustomer) {
