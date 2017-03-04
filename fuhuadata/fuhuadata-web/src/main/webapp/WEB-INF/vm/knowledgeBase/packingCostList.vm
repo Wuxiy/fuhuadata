@@ -24,6 +24,10 @@
         <div class="col-xs-10">
             <div class="panel panel-default">
                 <div class="panel-heading">
+                    <a class="btn btn-xs btn-primary pull-right panel-heading-btn" href="/knowledgeBase/packingCostAdd">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        新增
+                    </a>
                     <h3 class="panel-title" lang="zh">
                         包材成本参考
                     </h3>

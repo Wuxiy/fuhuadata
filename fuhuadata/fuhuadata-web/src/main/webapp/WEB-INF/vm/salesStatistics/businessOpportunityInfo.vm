@@ -1,0 +1,188 @@
+
+<div class="nav-deputy shadow-out clearfix">
+    <ul id="myTab" class="nav nav-tabs pull-left">
+        <li class="active"><a href="#Baseinfo" data-toggle="tab">基础信息</a></li>
+        <li><a href="#Packrelate" data-toggle="tab">跟进记录</a></li>
+    </ul>
+    <ul class="breadcrumb pull-right">
+        <li><span class="glyphicon glyphicon-map-marker"></span></li>
+    </ul>
+</div>
+    <div class="dashboard-wrapper">
+        <div class="row">
+            <div class="col-xs-12">
+                <!--基本信息-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="btn-group btn-group-xs panel-heading-btn pull-right">
+                            <button class="btn btn-primary">编辑</button>
+                            <a class="btn btn-primary" href="" target="_blank">报价</a>
+                        </div>
+                        <h3 class="panel-title" lang="zh">
+                            基本信息
+                        </h3>
+                    </div>
+                    <div class="panel-body clearfix">
+                        <div class="form-horizontal">
+                            <div class="form-group ">
+                                <label class="col-xs-1 control-label" lang="zh">商机名称</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="草甘膦原药采购" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">商机编号</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="000001" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">商机来源</label>
+                                <div class="col-xs-2">
+                                    <select class="form-control" disabled>
+                                        <option value="" selected lang="zh">展会</option>
+                                        <option value="" lang="zh">门户网站</option>
+                                        <option value="" lang="zh">农药店考察</option>
+                                        <option value="" lang="zh">客户介绍</option>
+                                        <option value="" lang="zh">主动联系</option>
+                                        <option value="" lang="zh">其他</option>
+                                    </select>
+                                </div>
+                                <label class="col-xs-1 control-label" lang="zh">商机状态</label>
+                                <div class="col-xs-2">
+                                    <select class="form-control" disabled>
+                                        <option value="" selected lang="zh">正常</option>
+                                        <option value="" lang="zh">失败</option>
+                                        <option value="" lang="zh">报价待转换</option>
+                                        <option value="" lang="zh">转化中</option>
+                                        <option value="" lang="zh">转化完成</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-xs-1 control-label" lang="zh">客户名称</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="NUFARM" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">企业性质</label>
+                                <div class="col-xs-2">
+                                    <select class="form-control" disabled>
+                                        <option value="" selected lang="zh">工厂</option>
+                                        <option value="" lang="zh">分销商</option>
+                                        <option value="" lang="zh">经销商</option>
+                                    </select>
+                                </div>
+                                <label class="col-xs-1 control-label" lang="zh">客户类型</label>
+                                <div class="col-xs-2">
+                                    <select class="form-control" disabled>
+                                        <option value="" lang="zh">潜在客户</option>
+                                        <option value="" lang="zh">风险客户</option>
+                                        <option value="" lang="zh">一般客户</option>
+                                        <option value="" lang="zh">重要客户</option>
+                                        <option value="" lang="zh">大客户</option>
+                                        <option value="" selected lang="zh">战略客户</option>
+                                    </select>
+                                </div>
+                                <label class="col-xs-1 control-label" lang="zh">信用评级</label>
+                                <div class="col-xs-2">
+                                    <select class="form-control" disabled>
+                                        <option value="" selected lang="zh">AAAA</option>
+                                        <option value="" lang="zh">AAA</option>
+                                        <option value="" lang="zh">AA</option>
+                                        <option value="" lang="zh">A</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-1 control-label" lang="zh">客户国别</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="US" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">联系人</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="miss" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">联系电话</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="138888" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">邮箱</label>
+                                <div class="col-xs-2"><input class="form-control" type="email" value="miss@163.com" disabled /></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-1 control-label" lang="zh">意向产品1</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="草甘膦" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">预计采购量1</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="100万吨" disabled /></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-1 control-label" lang="zh">意向产品2</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="草甘膦" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">预计采购量2</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="100万吨" disabled /></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-1 control-label" lang="zh">预计收益</label>
+                                <div class="col-xs-2">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" value="1000" disabled/>
+                                        <span class="input-group-addon">万元</span>
+                                    </div>
+                                </div>
+                                <label class="col-xs-1 control-label" lang="zh">状态</label>
+                                <div class="col-xs-2">
+                                    <select class="form-control">
+                                        <option value="" selected lang="zh">正常</option>
+                                        <option value="" lang="zh">失败</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-1 control-label" lang="zh">商机描述</label>
+                                <div class="col-xs-8">
+                                    <textarea class="form-control " rows="3" lang="zh" disabled>客户主要销售草甘膦系列产品，有原药采购需求</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-1 control-label" lang="zh">备注</label>
+                                <div class="col-xs-8">
+                                    <textarea class="form-control " rows="3" lang="zh" disabled></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-xs-1 control-label" lang="zh">业务员</label>
+                                <div class="col-xs-2"><input type="text" class="form-control" value="miss" disabled/></div>
+                                <label for="" class="col-xs-1 control-label" lang="zh">创建人</label>
+                                <div class="col-xs-2"><input type="text" class="form-control" value="miss" disabled/></div>
+                                <label for="" class="col-xs-1 control-label" lang="zh">创建日期</label>
+                                <div class="col-xs-2"><input type="data" class="form-control" value="2016-10-10" disabled/></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--商机跟进-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a data-toggle="modal" data-target="#updateProgress" class="btn btn-xs btn-primary panel-heading-btn pull-right" href="#" lang="zh">新增</a>
+                        <h3 class="panel-title" lang="zh">商机跟进</h3>
+                    </div>
+                    <div class="panel-body clearfix">
+                        <table class="table table-condensed table-bordered table-striped text-center">
+                            <thead>
+                            <tr>
+                                <th class="text-center" lang="zh">编号</th>
+                                <th class="text-center" lang="zh">跟进内容</th>
+                                <th class="text-center" lang="zh">跟进效果</th>
+                                <th class="text-center" lang="zh">商机阶段</th>
+                                <th class="text-center" lang="zh">创建人</th>
+                                <th class="text-center" lang="zh">创建时间</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>获取客户联系人和联系方式</td>
+                                <td>与联系人进行沟通约定时间洽谈</td>
+                                <td>线索跟进</td>
+                                <td>刘凯洋</td>
+                                <td>2016-10-10 18:00</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>与客户联系人洽谈</td>
+                                <td>确定客户对我们的产品感兴趣</td>
+                                <td>需求挖掘</td>
+                                <td>刘凯洋</td>
+                                <td>2016-10-10 18:00</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -31,6 +31,9 @@
             <isNotNull prepend=" AND " property="searchKey">
                 title like concat('%',#searchKey#,'%')
             </isNotNull>
+            <isNotNull prepend=" AND " property="userName">
+                user_name = #userName#
+            </isNotNull>
         </dynamic>
     </sql>
     <sql id="QUERY-COMMON">
@@ -43,10 +46,10 @@
 
         <insert id="ADD" parameterClass="MarketTraining" >
             insert into k_market_training (tran_id, product_id, title,
-            product_type, user_id, upload_date,
+            product_type, user_id, upload_date,user_name,
             download)
             values (#tranId#, #productId#, #title#,
-            #productType#, #userId#, #uploadDate#,
+            #productType#, #userId#, #uploadDate#,#userName#,
             #download#)
             <selectKey resultClass="int" keyProperty="tranId">
                 SELECT @@IDENTITY AS tran_id
@@ -70,6 +73,9 @@
             </isNotNull>
             <isNotNull prepend=", " property="userId">
                 user_id = #userId#
+            </isNotNull>
+            <isNotNull prepend=", " property="userName">
+                user_name = #userName#
             </isNotNull>
             <isNotNull prepend=", " property="download">
                 download = #download#

@@ -9,7 +9,7 @@
     <!--表格开始-->
             <div class="panel panel-default">
         <div class="panel-heading">
-            <button class="btn btn-xs btn-primary panel-heading-btn pull-right" data-toggle="modal" data-target="#FQLdetails" data-backdrop="static" data-keyboard="true">
+            <button class="btn btn-xs btn-primary panel-heading-btn pull-right" data-toggle="modal" data-target="#modal" data-backdrop="static" data-keyboard="true">
                 <span class="glyphicon glyphicon-plus"></span>
                 新增
             </button>
@@ -65,7 +65,7 @@
     </div>
 </div>
 <!--新增常见问题模态框开始 -->
-<div class="modal fade" id="FQLdetails" tabindex="-1"  aria-hidden="true" data-backdrop="static">
+<div class="modal fade" id="modal" tabindex="-1"  aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -78,13 +78,13 @@
                     <div class="form-group">
                         <label class="col-xs-2 control-label">问题内容</label>
                         <div class="col-xs-9">
-                            <textarea id="fqlTitle" class="form-control"  rows="3"></textarea>
+                            <textarea id="fqlTitle" class="form-control" rows="3" id="problemContent"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-xs-2 control-label">产品名称</label>
                         <div class="col-xs-4">
-                            <select id="fqlType" class="form-control">
+                            <select id="fqlType" class="form-control" id="productType">
                                 <option value="草甘膦" selected>草甘膦</option>
                                 <option value="草甘膦原药">草甘膦原药</option>
                                 <option value="草甘膦水剂">草甘膦水剂</option>
@@ -95,13 +95,13 @@
                     <div class="form-group">
                         <label class="col-xs-2 control-label">解决方案</label>
                         <div class="col-xs-9">
-                            <textarea id="fqlContent" class="form-control"  rows="7"></textarea>
+                            <textarea id="fqlContent" class="form-control" rows="7" id="solution"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-xs-2 control-label">备注</label>
                         <div class="col-xs-9">
-                            <textarea id="fqlElse" class="form-control"  rows="4"></textarea>
+                            <textarea id="fqlElse" class="form-control" rows="4" id="remarks"></textarea>
                         </div>
                     </div>
                 </form>
@@ -188,4 +188,6 @@
             }
         });
     });
+
+
 </script>

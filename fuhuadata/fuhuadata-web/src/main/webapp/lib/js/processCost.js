@@ -147,125 +147,13 @@ $(document).ready(function () {
 
                 Portsurcharge.innerHTML = '';
                 var ResultData = eval(result.data);
-                Portsurcharge.innerHTML += '<table class="table table-bordered table-condensed text-center">' +
-                    '<thead>' +
-                    '<tr>' +
-                    '<th colspan="3" class="text-center col-xs-6">项目</th>' +
-                    '<th class="text-center col-xs-3">一般化工品</th>' +
-                    '<th class="text-center col-xs-3">危险品</th>' +
-                    '</tr>' +
-                    '</thead>' +
-                    '<tbody>' +
-                    '<tr><td colspan="2" rowspan="2">订舱费（元/柜）</td>' +
-                    '<td class="text-left">20GP</td>' +
-                    '<td>' + ResultData[0].generalChemicals + '</td>' +
-                    '<td>' + ResultData[0].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr><td class="text-left">20GP&HQ</td>' +
-                    '<td>' + ResultData[1].generalChemicals + '</td>' +
-                    '<td>' + ResultData[1].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr><td rowspan="4">装箱费（元/柜）</td>' +
-                    '<td rowspan="2">外港</td>' +
-                    '<td class="text-left">20GP</td>' +
-                    '<td>' + ResultData[2].generalChemicals + '</td>' +
-                    '<td>' + ResultData[2].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr><td class="text-left">40GP&HQ</td>' +
-                    '<td>' + ResultData[3].generalChemicals + '</td>' +
-                    '<td>' + ResultData[3].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr><td rowspan="2">洋山港</td>' +
-                    '<td class="text-left">20GP</td>' +
-                    '<td>' + ResultData[4].generalChemicals + '</td>' +
-                    '<td>' + ResultData[4].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr><td class="text-left">40GP&HQ</td>' +
-                    '<td>' + ResultData[5].generalChemicals + '</td>' +
-                    '<td>' + ResultData[5].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr><td colspan="3">文件费（元/票）</td>' +
-                    '<td>' + ResultData[6].generalChemicals + '</td>' +
-                    '<td>' + ResultData[6].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr><td colspan="3">电放费（元/票）</td>' +
-                    '<td>' + ResultData[7].generalChemicals + '</td>' +
-                    '<td>' + ResultData[7].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr><td colspan="3">改单费（元/票）' + '</td>' +
-                    '<td>' + ResultData[8].generalChemicals + '</td>' +
-                    '<td>' + ResultData[8].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr>' + '<td colspan="3">' + '快递费' + '</td>' +
-                    '<td>' + ResultData[9].generalChemicals + '</td>' +
-                    '<td>' + ResultData[9].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr>' + '<td colspan="3">' + '报关费（元/票）' + '</td>' +
-                    '<td>' + ResultData[10].generalChemicals + '</td>' +
-                    '<td>' + ResultData[10].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr>' + '<td colspan="3">' + '进仓费（卸货费）（元/吨）' + '</td>' +
-                    '<td>' + ResultData[11].generalChemicals + '</td>' +
-                    '<td>' + ResultData[11].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr>' + '<td colspan="2" rowspan="5">' + '打托费（托盘、打托、缠膜）（元/托）' + '</td>' +
-                    '<td class="text-left">' + '普通托盘' + '</td>' +
-                    '<td>' + ResultData[12].generalChemicals + '</td>' +
-                    '<td>' + ResultData[12].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr>' + '<td class="text-left">' + '熏蒸托盘' + '</td>' +
-                    '<td>' + ResultData[13].generalChemicals + '</td>' +
-                    '<td>' + ResultData[13].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr>' + '<td class="text-left">' + '双面托' + '</td>' +
-                    '<td>' + ResultData[14].generalChemicals + '</td>' +
-                    '<td>' + ResultData[14].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr>' + '<td class="text-left">' + 'CP3托盘' + '</td>' +
-                    '<td>' + ResultData[15].generalChemicals + '</td>' +
-                    '<td>' + ResultData[15].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr>' + '<td class="text-left">' + '塑料托盘' + '</td>' +
-                    '<td>' + ResultData[16].generalChemicals + '</td>' +
-                    '<td>' + ResultData[16].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr>' + '<td colspan="3">' + '垫板费（元/张）' + '</td>' +
-                    '<td>' + ResultData[17].generalChemicals + '</td>' +
-                    '<td>' + ResultData[17].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr>' + '<td colspan="3">纸板费（元/个）</td>' +
-                    '<td>' + ResultData[18].generalChemicals + '</td>' +
-                    '<td>' + ResultData[18].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr> <td colspan="3">气囊费（元/个）</td>' +
-                    '<td>' + ResultData[19].generalChemicals + '</td>' +
-                    '<td>' + ResultData[19].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr> <td colspan="3">唛头（元/张）（黑白打印，A4纸一半）</td>' +
-                    '<td>' + ResultData[20].generalChemicals + '</td>' +
-                    '<td>' + ResultData[20].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr> <td colspan="3">拉网费（元/柜）</td>' +
-                    '<td>' + ResultData[21].generalChemicals + '</td>' +
-                    '<td>' + ResultData[21].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr> <td colspan="3">紧固带费（元/柜）</td>' +
-                    '<td>' + ResultData[22].generalChemicals + '</td>' +
-                    '<td>' + ResultData[22].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr> <td rowspan="2" colspan="2">抄条码费</td>' +
-                    '<td class="text-left">600KG-1000KG包装（元/包）</td>' +
-                    '<td>' + ResultData[23].generalChemicals + '</td>' +
-                    '<td>' + ResultData[23].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr> <td class="text-left">25KG包装（元/柜）</td>' +
-                    '<td>' + ResultData[24].generalChemicals + '</td>' +
-                    '<td>' + ResultData[24].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr> <td colspan="3">封子费（元/柜）</td>' +
-                    '<td>' + ResultData[25].generalChemicals + '</td>' +
-                    '<td>' + ResultData[25].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr> <td colspan="3">检查费（元/柜）</td>' +
-                    '<td>' + ResultData[26].generalChemicals + '</td>' +
-                    '<td>' + ResultData[26].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr> <td colspan="3">美式门封（元/柜）</td>' +
-                    '<td>' + ResultData[27].generalChemicals + '</td>' +
-                    '<td>' + ResultData[27].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr> <td rowspan="2" colspan="2">FOB操作费（元/柜）</td>' +
-                    '<td class="text-left">20GP</td>' +
-                    '<td>' + ResultData[28].generalChemicals + '</td>' +
-                    '<td>' + ResultData[28].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr> <td class="text-left">40GP&<hq></hq></td>' +
-                    '<td>' + ResultData[29].generalChemicals + '</td>' +
-                    '<td>' + ResultData[29].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr> <td colspan="3">护条（元/个）</td>' +
-                    '<td>' + ResultData[30].generalChemicals + '</td>' +
-                    '<td>' + ResultData[30].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr> <td colspan="3">护角（元/个）</td>' +
-                    '<td>' + ResultData[31].generalChemicals + '</td>' +
-                    '<td>' + ResultData[31].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr> <td colspan="3">仓储费</td>' +
-                    '<td>' + ResultData[32].generalChemicals + '</td>' +
-                    '<td>' + ResultData[32].dangerousProduct + '</td>' + '</tr>' +
-                    '<tr> <td colspan="3">商检换单（元/票）</td>' +
-                    '<td>' + ResultData[33].generalChemicals + '</td>' +
-                    '<td>' + ResultData[33].dangerousProduct + '</td>' + '</tr>' +
-                    '</tbody>';
+                for(var i = 0;i<ResultData.length;i++) {
+                    Portsurcharge.innerHTML += '<tr>' +
+                        '<td>' + ResultData[i].item + '</td>' +
+                        '<td>' + ResultData[i].generalChemicals + '</td>' +
+                        '<td>' + ResultData[i].dangerousProduct + '</td>' +
+                    '</tr>';
+                }
             }
         })
     })
@@ -346,23 +234,23 @@ $(document).on("click",".adEexpense1",function(){
             html +='<div class="form-group">';
             html +='<label class="col-lg-2 control-label">主材规格</label>';
             html +='<div class="col-lg-6">';
-            html +='<input class="form-control" type="text" value="'+ResultData.costTerm+'">';
+            html +='<input class="form-control" type="text" value="'+ResultData.costTerm+'" id="costTerm">';
             html +='</div></div>';
             html +='<div class="form-group">';
             html +='<label class="col-lg-2 control-label">单价</label>';
             html +='<div class="col-lg-3">';
             html +='<div class="input-group">';
-            html +='<input class="form-control" type="text" value="'+ResultData.unitCost+'">';
+            html +='<input class="form-control" type="text" value="'+ResultData.unitCost+'" id="unitCost">';
             html +='<div class="input-group-btn">';
             html +='<botton class="btn btn-xs btn-primary">(元/kg)</botton></div></div></div>';
             html +='<label class="col-lg-2 control-label">价格有效期</label>';
             html +='<div class="col-lg-3">';
-            html +='<input class="form-control" type="text" value="'+ResultData.priceEnd+'">';
+            html +='<input class="form-control" type="text" value="'+ResultData.priceEnd+'" id="priceEnd">';
             html +='</div></div>';
             html +='<div class="form-group">';
             html +='<label class="col-xs-2 control-label">备注</label>';
             html +='<div class="col-xs-8">';
-            html +='<textarea id="fqlElse" class="form-control"  rows="4">'+ResultData.remarks+'</textarea>';
+            html +='<textarea id="fqlElse" class="form-control"  rows="4" id="remarks">'+ResultData.remarks+'</textarea>';
             html +='</div>';
             html +='</div>';
             html +='</form>';
@@ -370,7 +258,7 @@ $(document).on("click",".adEexpense1",function(){
             html +='<div class="modal-footer">';
             html +='<div class="row">';
             html +='<div class="col-xs-3 col-xs-offset-3">';
-            html +='<button type="button" class="btn btn-primary btn-block"> 完成 </button>';
+            html +='<button type="button" class="btn btn-primary btn-block" data_url="" data_type="'+ResultData.type+'" onclick="updateadEexpense1()"> 完成 </button>';
             html +='</div>';
             html +='<div class="col-xs-3">';
             html +='<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
@@ -403,19 +291,19 @@ $(document).on("click",".adEexpense2",function(){
             html +='<div class="form-group">';
             html += '<label class="col-lg-2 control-label">加工厂</label>';
             html +='<div class="col-lg-6">';
-            html +='<input class="form-control" type="text" value="'+ResultData.processFactory+'">';
+            html +='<input class="form-control" type="text" value="'+ResultData.processFactory+'" id="processFactory">';
             html +='</div></div>';
             html +='<div class="form-group">';
             html +='<label class="col-lg-2 control-label">水、电、气费</label>';
             html +='<div class="col-lg-3">';
             html +='<div class="input-group">';
-            html +='<input class="form-control" type="text" value="'+ResultData.charges+'">';
+            html +='<input class="form-control" type="text" value="'+ResultData.charges+'" id="charges">';
             html +='<div class="input-group-btn">';
             html +='<botton class="btn btn-xs btn-primary">(元/吨)</botton></div></div></div>';
             html +='<label class="col-lg-2 control-label">利润</label>';
             html +='<div class="col-lg-3">';
             html +='<div class="input-group">';
-            html +='<input class="form-control" type="text" value="'+ResultData.profit+'">';
+            html +='<input class="form-control" type="text" value="'+ResultData.profit+'" id="profit">';
             html +='<div class="input-group-btn">';
             html +='<botton class="btn btn-xs btn-primary">(元/吨)</botton>';
             html +='</div></div></div></div>';
@@ -423,20 +311,20 @@ $(document).on("click",".adEexpense2",function(){
             html +='<label class="col-lg-2 control-label">管理费</label>';
             html +='<div class="col-lg-3">';
             html +='<div class="input-group">';
-            html +='<input class="form-control" type="text" value="'+ResultData.managementFee+'">';
+            html +='<input class="form-control" type="text" value="'+ResultData.managementFee+'" id="managementFee">';
             html +='<div class="input-group-btn">';
             html +='<botton class="btn btn-xs btn-primary">(元/吨)</botton></div></div></div>';
             html +='<label class="col-lg-2 control-label">税金</label>';
             html +='<div class="col-lg-3">';
             html +='<div class="input-group">';
-            html +='<input class="form-control" type="text" value="'+ResultData.tax+'">';
+            html +='<input class="form-control" type="text" value="'+ResultData.tax+'" id="tax">';
             html +='<div class="input-group-btn">';
             html +='<botton class="btn btn-xs btn-primary">(元/吨)</botton>';
             html +='</div></div></div></div>';
             html +='<div class="form-group">';
             html +='<label class="col-xs-2 control-label">费用合计</label>';
             html +='<div class="col-xs-8">';
-            html +='<textarea id="fqlElse" class="form-control"  rows="4">'+ResultData.totalCost+'</textarea>';
+            html +='<textarea id="fqlElse" class="form-control"  rows="4" id="totalCost">'+ResultData.totalCost+'</textarea>';
             html +='</div>';
             html +='</div>';
             html +='</form>';
@@ -444,7 +332,7 @@ $(document).on("click",".adEexpense2",function(){
             html +='<div class="modal-footer">';
             html +='<div class="row">';
             html +='<div class="col-xs-3 col-xs-offset-3">';
-            html +='<button type="button" class="btn btn-primary btn-block"> 完成 </button>';
+            html +='<button type="button" class="btn btn-primary btn-block" data_url="" data_type="'+ResultData.type+'" onclick="updateadEexpense2()"> 完成 </button>';
             html +='</div>';
             html +='<div class="col-xs-3">';
             html +='<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
@@ -476,30 +364,30 @@ $(document).on("click",".freight1",function(){
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">国内运费维护</label>';
             html += '<div class="col-lg-6">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.processFactory + '">';
+            html += '<input class="form-control" type="text" value="' + ResuleData.processFactory + '" id="processFactory">';
             html += '</div></div>';
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">单价</label>';
             html += '<div class="col-lg-3">';
             html += '<div class="input-group">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.unitCost + '">';
+            html += '<input class="form-control" type="text" value="' + ResuleData.unitCost + '" id="unitCost">';
             html += '<div class="input-group-btn">';
             html += '<botton class="btn btn-xs btn-primary">(元/T)</botton></div></div></div>';
             html += '</div>';
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">起运城市</label>';
             html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.departureCity + '">';
+            html += '<input class="form-control" type="text" value="' + ResuleData.departureCity + '" id="departureCity">';
             html += '</div>';
             html += '<label class="col-lg-2 control-label">目的城市</label>';
             html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.destinationCity + '">';
+            html += '<input class="form-control" type="text" value="' + ResuleData.destinationCity + '" id="destinationCity">';
             html += '</div>';
             html += '</div>';
             html += '<div class="form-group">';
             html += '<label class="col-xs-2 control-label">备注</label>';
             html += '<div class="col-xs-8">';
-            html += '<textarea id="fqlElse" class="form-control"  rows="4">' + ResuleData.remarks + '</textarea>';
+            html += '<textarea id="fqlElse" class="form-control"  rows="4" id="remarks">' + ResuleData.remarks + '</textarea>';
             html += '</div>';
             html += '</div>';
             html += '</form>';
@@ -507,7 +395,7 @@ $(document).on("click",".freight1",function(){
             html += '<div class="modal-footer">';
             html += '<div class="row">';
             html += '<div class="col-xs-3 col-xs-offset-3">';
-            html += '<button type="button" class="btn btn-primary btn-block"> 完成 </button>';
+            html += '<button type="button" class="btn btn-primary btn-block" onclick="updateFreight()"> 完成 </button>';
             html += '</div>';
             html += '<div class="col-xs-3">';
             html += '<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
@@ -607,22 +495,22 @@ $(document).on("click",".rate1",function(){
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">币种</label>';
             html += '<div class="col-lg-6">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.currency + '">';
+            html += '<input class="form-control" type="text" value="' + ResuleData.currency + '" id="currency">';
             html += '</div></div>';
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">汇率</label>';
             html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.rate + '">';
+            html += '<input class="form-control" type="text" value="' + ResuleData.rate + '" id="rate">';
             html += '</div>';
             html += '<label class="col-lg-2 control-label">有效期</label>';
             html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="text" value="' + ResuleData. termofValidity+ '">';
+            html += '<input class="form-control" type="text" value="' + ResuleData. termofValidity+ '" id="termofValidity">';
             html += '</div>';
             html += '</div>';
             html += '<div class="form-group">';
             html += '<label class="col-xs-2 control-label">备注</label>';
             html += '<div class="col-xs-8">';
-            html += '<textarea id="fqlElse" class="form-control"  rows="4">' + ResuleData.remarks + '</textarea>';
+            html += '<textarea id="fqlElse" class="form-control"  rows="4" id="remarks">' + ResuleData.remarks + '</textarea>';
             html += '</div>';
             html += '</div>';
             html += '</form>';
@@ -630,7 +518,7 @@ $(document).on("click",".rate1",function(){
             html += '<div class="modal-footer">';
             html += '<div class="row">';
             html += '<div class="col-xs-3 col-xs-offset-3">';
-            html += '<button type="button" class="btn btn-primary btn-block"> 完成 </button>';
+            html += '<button type="button" class="btn btn-primary btn-block" data_url="" data_type="'+ResultData.type+'" onclick="updaterate1()"> 完成 </button>';
             html += '</div>';
             html += '<div class="col-xs-3">';
             html += '<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
@@ -662,22 +550,22 @@ $(document).on("click",".rate2",function(){
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">产品种类</label>';
             html += '<div class="col-lg-6">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.kind + '">';
+            html += '<input class="form-control" type="text" value="' + ResuleData.kind + '" id="kind">';
             html += '</div></div>';
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">毛利率</label>';
             html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.grossMargin + '">';
+            html += '<input class="form-control" type="text" value="' + ResuleData.grossMargin + '" id="grossMargin">';
             html += '</div>';
             html += '<label class="col-lg-2 control-label">有效期</label>';
             html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="text" value="' + ResuleData. termofValidity+ '">';
+            html += '<input class="form-control" type="text" value="' + ResuleData. termofValidity+ '" id="termofValidity">';
             html += '</div>';
             html += '</div>';
             html += '<div class="form-group">';
             html += '<label class="col-xs-2 control-label">备注</label>';
             html += '<div class="col-xs-8">';
-            html += '<textarea id="fqlElse" class="form-control"  rows="4">' + ResuleData.remarks + '</textarea>';
+            html += '<textarea id="fqlElse" class="form-control"  rows="4" id="remarks">' + ResuleData.remarks + '</textarea>';
             html += '</div>';
             html += '</div>';
             html += '</form>';
@@ -685,7 +573,7 @@ $(document).on("click",".rate2",function(){
             html += '<div class="modal-footer">';
             html += '<div class="row">';
             html += '<div class="col-xs-3 col-xs-offset-3">';
-            html += '<button type="button" class="btn btn-primary btn-block"> 完成 </button>';
+            html += '<button type="button" class="btn btn-primary btn-block" data_url="" data_type="'+ResultData.type+'" onclick="updaterate2()"> 完成 </button>';
             html += '</div>';
             html += '<div class="col-xs-3">';
             html += '<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
@@ -717,22 +605,22 @@ $(document).on("click",".rate3",function(){
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">币种</label>';
             html += '<div class="col-lg-6">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.other + '">';
+            html += '<input class="form-control" type="text" value="' + ResuleData.other + '" id="other">';
             html += '</div></div>';
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">汇率</label>';
             html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.rateValue + '">';
+            html += '<input class="form-control" type="text" value="' + ResuleData.rateValue + '" id="rateValue">';
             html += '</div>';
             html += '<label class="col-lg-2 control-label">有效期</label>';
             html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="text" value="' + ResuleData. termofValidity+ '">';
+            html += '<input class="form-control" type="text" value="' + ResuleData. termofValidity+ '" id="termofValidity">';
             html += '</div>';
             html += '</div>';
             html += '<div class="form-group">';
             html += '<label class="col-xs-2 control-label">备注</label>';
             html += '<div class="col-xs-8">';
-            html += '<textarea id="fqlElse" class="form-control"  rows="4">' + ResuleData.remarks + '</textarea>';
+            html += '<textarea id="fqlElse" class="form-control"  rows="4" id="remarks">' + ResuleData.remarks + '</textarea>';
             html += '</div>';
             html += '</div>';
             html += '</form>';
@@ -740,7 +628,7 @@ $(document).on("click",".rate3",function(){
             html += '<div class="modal-footer">';
             html += '<div class="row">';
             html += '<div class="col-xs-3 col-xs-offset-3">';
-            html += '<button type="button" class="btn btn-primary btn-block"> 完成 </button>';
+            html += '<button type="button" class="btn btn-primary btn-block" data_url="" data_type="'+ResultData.type+'" onclick="updaterate3()"> 完成 </button>';
             html += '</div>';
             html += '<div class="col-xs-3">';
             html += '<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
@@ -751,6 +639,64 @@ $(document).on("click",".rate3",function(){
         }
     })
 })
+
+function updateadEexpense1(){
+    var url = $(this).attr('data_url');
+    var type = $(this).attr('data-type');
+    var data = {
+        "type":type,
+        "costTerm":$('#costTerm').val(),
+        "unitCost":$('#costTerm').val(),
+        "priceEnd":$('#costTerm').val(),
+        "remarks":$('#costTerm').val(),
+        "processFactory":null,
+        "charges":null,
+        "profit":null,
+        "managementFee":null,
+        "tax":null,
+        "totalCost":null
+    }
+    console.log(data);
+
+    jQuery.ajax({
+        type:'POST',
+        url:url,
+        data:JSON.stringify(data),
+        success:function(result){
+            alert('修改成功');
+            $('#modal').modal('hide');
+        }
+    })
+}
+
+function updateadEexpense2(){
+    var url = $(this).attr('data_url');
+    var type = $(this).attr('data-type');
+    var data = {
+        "type":type,
+        "processFactory":$('#processFactory').val(),
+        "charges":$('#charges').val(),
+        "profit":$('#profit').val(),
+        "managementFee":$('#managementFee').val(),
+        "tax":$('#tax').val(),
+        "totalCost":null,
+        "costTerm":null,
+        "unitCost":null,
+        "priceEnd":null,
+        "remarks":null
+    }
+    console.log(data);
+
+    jQuery.ajax({
+        type:'POST',
+        url:url,
+        data:JSON.stringify(data),
+        success:function(result){
+            alert('修改成功');
+            $('#modal').modal('hide');
+        }
+    })
+}
 
 function updateCost(){
     var url = $(this).attr('data_url');
@@ -773,4 +719,131 @@ function updateCost(){
             $('#modal').modal('hide');
         }
     })
+}
+
+function updateFreight(){
+    var url = $(this).attr('data_url');
+    var data = {
+        "processFactory":$('#processFactory').val(),
+        "unitCost":$('#unitCost').val(),
+        "departureCity":$('#departureCity').val(),
+        "destinationCity":$('#destinationCity').val(),
+        "remarks":$('#remarks').val()
+    }
+    console.log(data);
+
+    jQuery.ajax({
+        type:'POST',
+        url:url,
+        data:JSON.stringify(data),
+        success:function(result){
+            alert('修改成功');
+            $('#modal').modal('hide');
+        }
+    })
+}
+
+function updaterate1(){
+    var url = $(this).attr('data_url');
+    var type = $(this).attr('data_type');
+    var data = {
+        "type":type,
+        "currency":$("#currency").val(),
+        "rate":$("#rate").val(),
+        "termofValidity":$("#termofValidity").val(),
+        "remarks":$("#remarks").val(),
+        "kind":null,
+        "grossMargin":null,
+        "other":null,
+        "rateValue":null
+    }
+    console.log(data);
+
+
+    jQuery.ajax({
+        type:'POST',
+        url:url,
+        data:JSON.stringify(data),
+        success:function(result){
+            alert('修改成功');
+            $('#modal').modal('hide');
+        }
+    })
+}
+
+function updaterate2(){
+    var url = $(this).attr('data_url');
+    var type = $(this).attr('data_type');
+    var data = {
+        "type":type,
+        "currency":null,
+        "rate":null,
+        "termofValidity":$("#termofValidity").val(),
+        "remarks":$("#remarks").val(),
+        "kind":$("#kind").val(),
+        "grossMargin":$("#grossMargin").val(),
+        "other":null,
+        "rateValue":null
+    }
+    console.log(data);
+
+
+    jQuery.ajax({
+        type:'POST',
+        url:url,
+        data:JSON.stringify(data),
+        success:function(result){
+            alert('修改成功');
+            $('#modal').modal('hide');
+        }
+    })
+}
+
+function updaterate3(){
+    var url = $(this).attr('data_url');
+    var type = $(this).attr('data_type');
+    var data = {
+        "type":type,
+        "currency":null,
+        "rate":null,
+        "termofValidity":$("#termofValidity").val(),
+        "remarks":$("#remarks").val(),
+        "kind":null,
+        "grossMargin":null,
+        "other":$("#other").val(),
+        "rateValue":$("#rateValue").val()
+    }
+    console.log(data);
+
+
+    jQuery.ajax({
+        type:'POST',
+        url:url,
+        data:JSON.stringify(data),
+        success:function(result){
+            alert('修改成功');
+            $('#modal').modal('hide');
+        }
+    })
+}
+
+function updateportSurcharge(){
+    var url = $(this).attr('data_url');
+    var data = {
+        "item":$("#item").val(),
+        "generalChemicals":$("#generalChemicals").val(),
+        "dangerousProduct":$("#dangerousProduct").val()
+    }
+    console.log(data);
+
+    jQuery.ajax({
+        type:'POST',
+        url:url,
+        data:JSON.stringify(data),
+        success:function(result){
+            alert('修改成功');
+            $('#modal').modal('hide');
+        }
+    })
+
 }

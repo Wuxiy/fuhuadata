@@ -49,10 +49,11 @@
         </li>
         <li class="shadow-in" title="销售统计">
             <div id="collapseThree" class="list-group collapse">
-                <a class="list-group-item" href="#">商机</a>
-                <a class="list-group-item" href="#">销售动态</a>
+                <a class="list-group-item" href="/saleProcess/saleProcessList">销售流程</a>
                 <a class="list-group-item" href="#">费用与利润</a>
                 <a class="list-group-item" href="#">客户维护</a>
+                <a class="list-group-item" href="#">利润统计</a>
+                <a class="list-group-item" href="#">我的历史订单</a>
             </div>
             <a data-toggle="collapse" href="#collapseThree" data-parent="#nav-affix">
                 <span class="glyphicon glyphicon-stats"></span>

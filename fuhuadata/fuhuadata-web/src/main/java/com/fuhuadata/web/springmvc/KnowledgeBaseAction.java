@@ -84,6 +84,13 @@ public class KnowledgeBaseAction {
     public ModelAndView packingCostList(){return new ModelAndView("knowledgeBase/packingCostList");}
 
     /**
+     * 包材成本参Add
+     * @return
+     */
+    @RequestMapping(value="/packingCostAdd",method=RequestMethod.GET)
+    public ModelAndView packingCostAdd(){return new ModelAndView("knowledgeBase/packingCostAdd");}
+
+    /**
      * 加工成本列表
      * @return
      */
