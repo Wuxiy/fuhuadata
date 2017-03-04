@@ -1,14 +1,15 @@
 package com.fuhuadata.service;
 import java.util.List;
-import com.fuhuadata.domain.CustomerParent;
-import com.fuhuadata.domain.query.QueryCustomerParent;
+
+import com.fuhuadata.domain.CustomerBaseInfo;
+import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.domain.query.Result;
 
 /**
  * @author wangbo
  * @date 2017-01-12 11:49:51
  */
-public interface CustomerParentService {
+public interface CustomerBaseInfoService {
 
 	/**
 	 * 新增 customerParent
@@ -17,16 +18,16 @@ public interface CustomerParentService {
 	 * @param customerParent
 	 * @return
 	 */
-    public Result<CustomerParent> addCustomerParent(CustomerParent customerParent) ;
+    public Result<CustomerBaseInfo> addCustomerParent(CustomerBaseInfo customerParent) ;
  
     /**
-     * 按照主键id更新customerParent，请重新new CustomerParent 的更新对象，设置要更新的字段
+     * 按照主键id更新customerParent，请重新new CustomerBaseInfo 的更新对象，设置要更新的字段
 	 * 返回result，通过result.isSuccess()判断更新是否成功
      * @param customer_id
      * @param customerParent
      * @return
      */
-    public Result updateCustomerParentById(String customer_id, CustomerParent customerParent);
+    public Result updateCustomerParentById(String customer_id, CustomerBaseInfo customerParent);
 
     /**
      * 按照主键id 删除 记录
@@ -43,7 +44,7 @@ public interface CustomerParentService {
      * @param queryCustomerParent
      * @return
      */
-    public Result<List<CustomerParent>> getCustomerParentsByQuery(QueryCustomerParent queryCustomerParent);
+    public Result<List<CustomerBaseInfo>> getCustomerParentsByQuery(QueryCustomerBaseInfo queryCustomerParent);
 
     /**
      * 通过主键id查询CustomerParent
@@ -52,7 +53,7 @@ public interface CustomerParentService {
      * @param customer_id
      * @return
      */
-    public Result<CustomerParent> getCustomerParentById(String customer_id);
+    public Result<CustomerBaseInfo> getCustomerParentById(String customer_id);
 
     /**
      * 查询列表，包含分页查询
@@ -65,13 +66,13 @@ public interface CustomerParentService {
      * @param queryCustomerParent
      * @return
      */
-    public Result<List<CustomerParent>> getCustomerParentsByPage(QueryCustomerParent queryCustomerParent);
+    public Result<List<CustomerBaseInfo>> getCustomerParentsByPage(QueryCustomerBaseInfo queryCustomerParent);
 
     /**
      * 查询总数
      * @param queryCustomerParent
      * @return
      */
-    public Result<Integer> count(QueryCustomerParent queryCustomerParent);
+    public Result<Integer> count(QueryCustomerBaseInfo queryCustomerParent);
 	
 }

@@ -1,10 +1,9 @@
-package com.fuhuadata.domain;
+package com.fuhuadata.domain.query;
 
 /**
- * 产品规格型号
- * Created by intanswer on 2017/2/22.
+ * Created by intanswer on 2017/3/4.
  */
-public class ProductWare {
+public class QueryProductWare {
     private Integer wareId;//产品规格型号id
 
     private Integer productInfoId;//产品id
@@ -13,8 +12,8 @@ public class ProductWare {
 
     private String model;//型号
 
-    public ProductWare() {
-    }
+    private String searchKey;
+
 
     public Integer getWareId() {
         return wareId;
@@ -46,5 +45,13 @@ public class ProductWare {
 
     public void setModel(String model) {
         this.model = model;
+    }
+
+    public String getSearchKey() {
+        return searchKey;
+    }
+
+    public void setSearchKey(String searchKey) {
+        this.searchKey = searchKey;
     }
 }

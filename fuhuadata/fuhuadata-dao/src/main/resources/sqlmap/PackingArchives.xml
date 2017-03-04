@@ -7,8 +7,8 @@
 
     <resultMap id="PACKINGARCHIVES-MAP" class="PackingArchives">
         <result column="packing_id" property="packingId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result column="type" property="type" jdbcType="INT" javaType="java.lang.Integer"/>
-        <result column="packing_type" property="packingType" jdbcType="INT" javaType="java.lang.Integer"/>
+        <result column="big_category_id" property="bigCategoryId" jdbcType="INT" javaType="java.lang.Integer"/>
+        <result column="small_category_id" property="smallCategoryId" jdbcType="INT" javaType="java.lang.Integer"/>
         <result column="pack_name" property="packName" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="size" property="size" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="spec" property="spec" jdbcType="VARCHAR" javaType="java.lang.String"/>
@@ -17,6 +17,7 @@
         <result column="quality_index" property="qualityIndex" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="quality_target_value" property="qualityTargetValue" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="unit_price" property="unitPrice" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+        <result property="consumption" column="consumption" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
         <result column="price_end_date" property="priceEndDate" jdbcType="DATE" javaType="java.sql.Date"/>
         <result column="suitable_type" property="suitableType" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="b_remarks" property="bRemarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
@@ -30,11 +31,11 @@
             <isNotNull prepend=" AND " property="packingId">
                 packing_id=#packingId#
             </isNotNull>
-            <isNotNull prepend=" AND " property="type">
-                type=#type#
+            <isNotNull prepend=" AND " property="bigCategoryId">
+                big_category_id=#bigCategoryId#
             </isNotNull>
-            <isNotNull prepend=" AND " property="packingType">
-                packing_type=#packingType#
+            <isNotNull prepend=" AND " property="smallCategoryId">
+                small_cate_id=#smallCategoryId#
             </isNotNull>
             <isNotNull prepend=" AND " property="packName">
                 pack_name=#packName#
@@ -59,6 +60,9 @@
             </isNotNull>
             <isNotNull prepend=" AND " property="unitPrice">
                 unit_price=#unitPrice#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="consumption">
+                consumption= #consumption#
             </isNotNull>
             <isNotNull prepend=" AND " property="priceEndDate">
                 price_end_date=#priceEndDate#
@@ -85,11 +89,11 @@
             <isNotNull prepend=" AND " property="packingId">
                 packing_id=#packingId#
             </isNotNull>
-            <isNotNull prepend=" AND " property="type">
-                type=#type#
+            <isNotNull prepend=" AND " property="bigCategoryId">
+                big_category_id=#bigCategoryId#
             </isNotNull>
-            <isNotNull prepend=" AND " property="packingType">
-                packing_type=#packingType#
+            <isNotNull prepend=" AND " property="smallCategoryId">
+                small_cate_id=#smallCategoryId#
             </isNotNull>
             <isNotNull prepend=" AND " property="packName">
                 pack_name=#packName#
@@ -115,6 +119,9 @@
             <isNotNull prepend=" AND " property="unitPrice">
                 unit_price=#unitPrice#
             </isNotNull>
+            <isNotNull prepend=" AND " property="consumption">
+                consumption= #consumption#
+            </isNotNull>
             <isNotNull prepend=" AND " property="priceEndDate">
                 price_end_date=#priceEndDate#
             </isNotNull>
@@ -137,18 +144,18 @@
     </sql>
     <insert id="ADD" parameterClass="PackingArchives">
         INSERT INTO
-        k_packing_archives (packing_id, type, packing_type,
+        k_packing_archives (packing_id, big_category_id, small_cate_id,
         pack_name, size, spec,
         spec_unit, quality, quality_index,
-        quality_target_value, unit_price, price_end_date,
+        quality_target_value, unit_price,consumption, price_end_date,
         suitable_type, b_remarks, status,
         associated_packing_id, image_path
         image_path
         )
-        VALUES (#packingId#, #type#, #packingType#,
+        VALUES (#packingId#, #bigCategoryId#, #smallCategoryId#,
         #packName#, #size#, #spec#,
         #specUnit#, #quality#, #qualityIndex#,
-        #qualityTargetValue#, #unitPrice#, #priceEndDate#,
+        #qualityTargetValue#, #unitPrice#,#consumption#,#priceEndDate#,
         #suitableType#, #bRemarks#, #status#,
         #associatedPackingId#, #imagePath#}
         )
@@ -160,11 +167,11 @@
     <update id="UPDATE" parameterClass="PackingArchives">
         UPDATE k_packing_archives
         <dynamic prepend=" SET ">
-            <isNotNull prepend=", " property="type">
-                type=#type#
+            <isNotNull prepend=", " property="bigCategoryId">
+                big_category_id=#bigCategoryId#
             </isNotNull>
-            <isNotNull prepend=", " property="packingType">
-                packing_type=#packingType#
+            <isNotNull prepend=", " property="smallCategoryId">
+                small_cate_id=#smallCategoryId#
             </isNotNull>
             <isNotNull prepend=", " property="packName">
                 pack_name=#packName#
@@ -189,6 +196,9 @@
             </isNotNull>
             <isNotNull prepend=", " property="unitPrice">
                 unit_price=#unitPrice#
+            </isNotNull>
+            <isNotNull prepend=", " property="consumption">
+                consumption = #consumption#
             </isNotNull>
             <isNotNull prepend=", " property="priceEndDate">
                 price_end_date=#priceEndDate#
@@ -241,7 +251,7 @@
 
     <select id="GET-BY-PID" resultMap="PACKINGARCHIVES-MAP" parameterClass="java.lang.Integer">
         <![CDATA[
-            SELECT * FROM k_packing_archives WHERE packing_type=#id# OR type=#id#
+            SELECT * FROM k_packing_archives WHERE big_category_id=#id# OR small_category_id=#id#
         ]]>
     </select>
 

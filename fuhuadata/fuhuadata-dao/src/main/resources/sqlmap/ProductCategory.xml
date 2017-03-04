@@ -75,20 +75,24 @@
     </select>
     <select id="GET-BY-LEVEL" resultClass="ProductCategoryVO">
         <![CDATA[
-        select
-        big.id AS parentId,
-        big.name AS parent,
-        mid.id AS middleId,
-        mid.name AS middle,
-        small.id AS smallId,
-        small.name AS child
+                select
+          big.id AS parentId,
+          big.name AS parent,
+          mid.id AS middleId,
+          mid.name AS middle,
+          small.id AS smallId,
+          small.name AS child,
+        pi.product_id AS productId,
+        pi.`name` AS productName
         from
-        product_category big
-        left join product_category mid
-        on mid.`parent_id` = big.id
-        left join product_category small
-        on small.parent_id = mid.`id`
-        where big.`parent_id`=0
+          product_category big
+          left join product_category mid
+          on mid.`parent_id` = big.id
+          left join product_category small
+          on small.parent_id = mid.`id`
+        LEFT JOIN product_info pi
+        ON pi.small_category_id=small.id
+         where big.`parent_id`=0
         ]]>
     </select>
 

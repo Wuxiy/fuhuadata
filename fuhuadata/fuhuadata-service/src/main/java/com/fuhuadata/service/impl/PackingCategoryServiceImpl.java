@@ -124,35 +124,35 @@ public class PackingCategoryServiceImpl implements PackingCategoryService {
         return root_list;
     }
 
-    /**
-     * 递归方法
-     * @param cid
-     * @return
-     */
-    public CategoryTree recursiveTree(int cid ){
-        PackingCategory packingCategory=packingCategoryManager.getPackingCategoryById(cid);
-        //构造多children集合的list
-        CategoryTree node = new CategoryTree();
-        node.setCid(packingCategory.getCategoryId());
-        node.setCname(packingCategory.getCategoryName());
-        node.setPid(packingCategory.getParentId());
-        //获取当前节点的全部子节点
-        List<PackingCategory> list=packingCategoryManager.getPackingCategoryByPId(cid);
-
-        List<CategoryTree> childTreeNodes =new ArrayList<CategoryTree>();
-        for(int i=0;i<list.size();i++){
-            CategoryTree tree = new CategoryTree();
-            tree.setCid(list.get(i).getCategoryId());
-            tree.setPid(list.get(i).getParentId());
-            tree.setCname(list.get(i).getCategoryName());
-            childTreeNodes.add(tree);
-        }
-        for(CategoryTree child : childTreeNodes){
-            CategoryTree n = recursiveTree(child.getCid()); //递归
-            node.getNodes().add(n);
-        }
-        return node;
-    }
+//    /**
+//     * 递归方法
+//     * @param cid
+//     * @return
+//     */
+//    public CategoryTree recursiveTree(int cid ){
+//        PackingCategory packingCategory=packingCategoryManager.getPackingCategoryById(cid);
+//        //构造多children集合的list
+//        CategoryTree node = new CategoryTree();
+//        node.setCid(packingCategory.getCategoryId());
+//        node.setCname(packingCategory.getCategoryName());
+//        node.setPid(packingCategory.getParentId());
+//        //获取当前节点的全部子节点
+//        List<PackingCategory> list=packingCategoryManager.getPackingCategoryByPId(cid);
+//
+//        List<CategoryTree> childTreeNodes =new ArrayList<CategoryTree>();
+//        for(int i=0;i<list.size();i++){
+//            CategoryTree tree = new CategoryTree();
+//            tree.setCid(list.get(i).getCategoryId());
+//            tree.setPid(list.get(i).getParentId());
+//            tree.setCname(list.get(i).getCategoryName());
+//            childTreeNodes.add(tree);
+//        }
+//        for(CategoryTree child : childTreeNodes){
+//            CategoryTree n = recursiveTree(child.getCid()); //递归
+//            node.getNodes().add(n);
+//        }
+//        return node;
+//    }
 
     public PackingCategoryManager getPackingCategoryManager() {
         return packingCategoryManager;

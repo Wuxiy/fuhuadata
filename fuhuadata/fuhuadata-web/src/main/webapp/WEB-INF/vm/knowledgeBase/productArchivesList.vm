@@ -109,6 +109,7 @@
                                 <textarea name="productFeature" class="form-control" rows="3"></textarea>
                             </div>
                         </div>
+                    </div>
                         <div class="form-group">
                             <label class="col-xs-1 control-label">理化指标</label>
                             <div class="col-xs-8">
@@ -166,5 +167,5 @@
 <script type="text/javascript" language="javascript" src="/lib/js/creatTree.js"></script>
 <script type="text/javascript">
     $('#tree').creatTree('/productCategory/CategoryTree');
-    $('#tree').filtrateData('/productInfo/getProductInfoByPId','container','productArchivesList');
+    $('#tree').filtrateData('/productInfo/getProductInfoById','container','productArchivesList');
 </script>

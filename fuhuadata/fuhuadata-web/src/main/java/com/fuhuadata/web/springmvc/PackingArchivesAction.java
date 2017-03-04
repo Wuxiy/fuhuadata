@@ -5,9 +5,11 @@ import com.fuhuadata.domain.query.PackingArchivesQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.PackingArchivesService;
+import com.fuhuadata.vo.PackingArchivesVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.xpath.operations.Mod;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -77,6 +79,43 @@ public class PackingArchivesAction {
     }
 
     /**
+     * delete
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/delete",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "delete")
+    @ResponseBody
+    public ResultPojo delete(int id){
+        try{
+            Result result = packingArchivesService.deletePackingArchivesById(id);
+            return result.getResultPojo();
+        }catch(Exception e){
+            log.error("根据id删除包材成本档案错误",e);
+        }
+        return null;
+    }
+
+    /**
+     * update
+     * @param packingArchives
+     * @return
+     */
+    @RequestMapping(value = "/doModify",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "doUpdate")
+    @ResponseBody
+    public ResultPojo doModify(@RequestBody PackingArchives packingArchives){
+        try{
+            int id = packingArchives.getPackingId();
+            Result<PackingArchives> result = packingArchivesService.updatePackingArchivesById(id,packingArchives);
+            return result.getResultPojo();
+        }catch(Exception e){
+            log.error("修改包材成本档案错误",e);
+        }
+        return null;
+    }
+
+    /**
      * 条件查询
      * @param packingArchivesQuery
      * @return
@@ -110,7 +149,7 @@ public class PackingArchivesAction {
     @ResponseBody
     public ResultPojo getPackingArchivesById(Integer id){
         try{
-            Result<PackingArchives> result = packingArchivesService.getPackingArchivesById(id);
+            Result<PackingArchivesVO> result = packingArchivesService.getPackingArchivesById(id);
             return result.getResultPojo();
         }catch(Exception e){
             log.error("根据id获取包材成本档案信息错误",e);

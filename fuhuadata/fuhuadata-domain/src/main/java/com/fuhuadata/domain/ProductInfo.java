@@ -27,14 +27,14 @@ public class ProductInfo{
 	/**三级产品id**/
 	private Integer smallCategoryId;
 
-    /**品类,第一级到三级分类的组合**/
+    /**`**/
 	private String categoryName;
 
 	/**产品名称**/
 	private String name;
 
 	/**主计量单位**/
-	private String  measurementUnit;
+	private String  measurement;
 	
     /**产品浓度含量,和父级名称一起生成名称**/
 	private BigDecimal concentration;
@@ -261,11 +261,11 @@ public class ProductInfo{
 		this.categoryName = categoryName;
 	}
 
-	public String getMeasurementUnit() {
-		return measurementUnit;
+	public String getMeasurement() {
+		return measurement;
 	}
 
-	public void setMeasurementUnit(String measurementUnit) {
-		this.measurementUnit = measurementUnit;
+	public void setMeasurement(String measurement) {
+		this.measurement = measurement;
 	}
 }

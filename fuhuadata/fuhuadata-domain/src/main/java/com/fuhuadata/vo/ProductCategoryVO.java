@@ -11,6 +11,8 @@ public class ProductCategoryVO {
     private String middle;//中间节点
     private Integer smallId;
     private String child;//子节点
+    private Integer productId;
+    private String productName;
 
 
     public String getParent() {
@@ -60,5 +62,21 @@ public class ProductCategoryVO {
 
     public void setSmallId(Integer smallId) {
         this.smallId = smallId;
+    }
+
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 }

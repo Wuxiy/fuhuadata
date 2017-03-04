@@ -10,9 +10,9 @@ import java.util.Date;
 public class PackingArchives {
     private Integer packingId;
 
-    private Integer type;//包材类型：内包材(1)，外包材(2)，辅材(3)
+    private Integer bigCategoryId;//：内包材，外包材，辅材
 
-    private Integer packingType;//底层分层，主材-平桶类
+    private Integer smallCategoryId;//:主材-平桶类
 
     private String packName;//包材名称
 
@@ -29,6 +29,8 @@ public class PackingArchives {
     private String qualityTargetValue;//质量指标数值
 
     private BigDecimal unitPrice;//单价
+
+    private BigDecimal consumption;//单耗
 
     private Date priceEndDate;//价格有效期  yyyy/mm/dd
 
@@ -150,21 +152,7 @@ public class PackingArchives {
         this.imagePath = imagePath;
     }
 
-    public Integer getType() {
-        return type;
-    }
 
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public Integer getPackingType() {
-        return packingType;
-    }
-
-    public void setPackingType(Integer packingType) {
-        this.packingType = packingType;
-    }
 
     public Integer getStatus() {
         return status;
@@ -180,5 +168,29 @@ public class PackingArchives {
 
     public void setUnitPrice(BigDecimal unitPrice) {
         this.unitPrice = unitPrice;
+    }
+
+    public BigDecimal getConsumption() {
+        return consumption;
+    }
+
+    public void setConsumption(BigDecimal consumption) {
+        this.consumption = consumption;
+    }
+
+    public Integer getBigCategoryId() {
+        return bigCategoryId;
+    }
+
+    public void setBigCategoryId(Integer bigCategoryId) {
+        this.bigCategoryId = bigCategoryId;
+    }
+
+    public Integer getSmallCategoryId() {
+        return smallCategoryId;
+    }
+
+    public void setSmallCategoryId(Integer smallCategoryId) {
+        this.smallCategoryId = smallCategoryId;
     }
 }

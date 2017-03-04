@@ -3,6 +3,7 @@ package com.fuhuadata.service;
 import com.fuhuadata.domain.PackingArchives;
 import com.fuhuadata.domain.query.PackingArchivesQuery;
 import com.fuhuadata.domain.query.Result;
+import com.fuhuadata.vo.PackingArchivesVO;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public interface PackingArchivesService {
 
     public Result<List<PackingArchives>> getPackingArchivesByQuery(PackingArchivesQuery packingArchivesQuery);
 
-    public Result<PackingArchives> getPackingArchivesById(int id);
+    public Result<PackingArchivesVO> getPackingArchivesById(int id);
 
     public Result<List<PackingArchives>> getPackingArchivesByPId(int id);
 

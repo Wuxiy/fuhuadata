@@ -1,6 +1,7 @@
 package com.fuhuadata.web.springmvc;
 
 import com.fuhuadata.domain.FreightCost;
+import com.fuhuadata.domain.SystemLog;
 import com.fuhuadata.domain.query.FreightCostQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
@@ -78,6 +79,41 @@ public class FreightCostAction {
         return null;
     }
 
+    /**
+     * delete
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/delete",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-freightCost",methods = "delete")
+    @ResponseBody
+    public ResultPojo delete(int id){
+        try{
+            Result<FreightCost> result = freightCostService.deleteFreightCostById(id);
+            return result.getResultPojo();
+        }catch (Exception e){
+            log.error("根据id删除运费成本错误",e);
+        }
+        return null;
+    }
+
+    /**
+     * update
+     * @param freightCost
+     * @return
+     */
+    @RequestMapping(value = "/doModify",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "knowledgeBase-freightCost",methods = "doUpdate")
+    @ResponseBody
+    public ResultPojo  doModify(@RequestBody FreightCost freightCost){
+        try{
+            int id = freightCost.getFreightId();
+            Result<FreightCost> result = freightCostService.updateFreightCostById(id,freightCost);
+        }catch(Exception e){
+            log.error("更新运费成本错误",e);
+        }
+        return null;
+    }
 
     /**
      * 根据id获取详情

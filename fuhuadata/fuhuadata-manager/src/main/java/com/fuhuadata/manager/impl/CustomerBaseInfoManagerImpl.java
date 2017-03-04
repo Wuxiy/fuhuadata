@@ -1,33 +1,33 @@
 package com.fuhuadata.manager.impl;
-import com.fuhuadata.manager.CustomerParentManager;
+import com.fuhuadata.domain.CustomerBaseInfo;
+import com.fuhuadata.manager.CustomerBaseInfoManager;
 import java.util.List;
-import com.fuhuadata.domain.CustomerParent;
-import com.fuhuadata.dao.CustomerParentDao;
-import com.fuhuadata.domain.query.QueryCustomerParent;
+
+import com.fuhuadata.dao.CustomerBaseInfoDao;
+import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.domain.query.Result;
 import javax.annotation.Resource;
-import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 
 /**
  * @author wangbo
  * @date 2017-01-12 11:49:51
  */
-public class CustomerParentManagerImpl implements CustomerParentManager {
+public class CustomerBaseInfoManagerImpl implements CustomerBaseInfoManager {
 
 	@Resource
-    private CustomerParentDao customerParentDao;
+    private CustomerBaseInfoDao customerParentDao;
     
 
-    public CustomerParent addCustomerParent(CustomerParent customerParent) {
+    public CustomerBaseInfo addCustomerParent(CustomerBaseInfo customerParent) {
     	return customerParentDao.addCustomerParent(customerParent);
     }
     
-    public boolean updateCustomerParentById(String customer_id, CustomerParent customerParent) {
+    public boolean updateCustomerParentById(String customer_id, CustomerBaseInfo customerParent) {
     	return customerParentDao.updateCustomerParentById(customer_id, customerParent) == 1 ? true : false;
     }
     
-	public List<CustomerParent> getCustomerParentsByQuery(QueryCustomerParent queryCustomerParent) {
+	public List<CustomerBaseInfo> getCustomerParentsByQuery(QueryCustomerBaseInfo queryCustomerParent) {
 		return customerParentDao.getCustomerParentsByQuery(queryCustomerParent);
 	}
 
@@ -36,18 +36,18 @@ public class CustomerParentManagerImpl implements CustomerParentManager {
     }
     
     
-    public List<CustomerParent> getAllCustomerParents() {
+    public List<CustomerBaseInfo> getAllCustomerParents() {
     	return customerParentDao.getAllCustomerParents();
     }
     	
-    public Result<List<CustomerParent>> getCustomerParentsByPage(QueryCustomerParent queryCustomerParent) {
-		Result<List<CustomerParent>> result = new Result<List<CustomerParent>>();
+    public Result<List<CustomerBaseInfo>> getCustomerParentsByPage(QueryCustomerBaseInfo queryCustomerParent) {
+		Result<List<CustomerBaseInfo>> result = new Result<List<CustomerBaseInfo>>();
 		int totalItem = customerParentDao.count(queryCustomerParent);
 		;
 		if (totalItem > 0) {
 			result.addDefaultModel("CustomerParents", customerParentDao.getCustomerParentsByPage(queryCustomerParent));		
 		} else {
-			result.addDefaultModel("CustomerParents", new ArrayList<CustomerParent>());
+			result.addDefaultModel("CustomerParents", new ArrayList<CustomerBaseInfo>());
 		}
 		
 		result.setPageSize(queryCustomerParent.getPageSize());
@@ -58,12 +58,12 @@ public class CustomerParentManagerImpl implements CustomerParentManager {
     }
     	
     	
-    public CustomerParent getCustomerParentById(String customer_id) {
+    public CustomerBaseInfo getCustomerParentById(String customer_id) {
     	return customerParentDao.getCustomerParentById(customer_id);
     }
     
 
-    public int count(QueryCustomerParent queryCustomerParent) {
+    public int count(QueryCustomerBaseInfo queryCustomerParent) {
     	return customerParentDao.count(queryCustomerParent);
     }
     

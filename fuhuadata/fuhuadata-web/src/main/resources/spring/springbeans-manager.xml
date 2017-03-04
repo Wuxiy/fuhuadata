@@ -17,9 +17,10 @@
 	<bean id = "portChargesCostManager" class="com.fuhuadata.manager.impl.PortChargesCostManagerImpl"/>
 	<bean id = "preparationProcessCostManager" class="com.fuhuadata.manager.impl.PreparationProcessCostManagerImpl"/>
 	<bean id="saleCustomerManager" class="com.fuhuadata.manager.impl.SaleCustomerManagerImpl"/>
-	<bean id="customerParentManager" class="com.fuhuadata.manager.impl.CustomerParentManagerImpl"/>
+	<bean id="customerParentManager" class="com.fuhuadata.manager.impl.CustomerBaseInfoManagerImpl"/>
 	<bean id="userManager" class="com.fuhuadata.manager.impl.UserManagerImpl"/>
 	<bean id="productInfoManager" class="com.fuhuadata.manager.impl.ProductInfoManagerImpl"/>
 	<bean id="productCategoryManager" class="com.fuhuadata.manager.impl.ProductCategoryManagerImpl"/>
 	<bean id="packingCategoryManager" class="com.fuhuadata.manager.impl.PackingCategoryManagerImpl"/>
+	<bean id="productWareManager" class="com.fuhuadata.manager.impl.ProductWareManagerImpl"/>
 </beans>

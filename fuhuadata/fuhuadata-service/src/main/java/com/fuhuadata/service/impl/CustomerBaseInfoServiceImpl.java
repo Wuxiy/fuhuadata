@@ -1,25 +1,23 @@
 package com.fuhuadata.service.impl;
-import com.fuhuadata.manager.CustomerParentManager;
+import com.fuhuadata.domain.CustomerBaseInfo;
+import com.fuhuadata.manager.CustomerBaseInfoManager;
 import java.util.List;
-import com.fuhuadata.domain.CustomerParent;
-import com.fuhuadata.domain.query.QueryCustomerParent;
+
+import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.domain.query.Result;
-import com.fuhuadata.service.CustomerParentService;
+import com.fuhuadata.service.CustomerBaseInfoService;
 import javax.annotation.Resource;
-import org.springframework.stereotype.Component;
-import java.util.Map;
-import java.io.Serializable;
 
 /**
  * @author wangbo
  * @date 2017-01-12 11:49:51
  */
-public class CustomerParentServiceImpl implements CustomerParentService {
+public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 	
 	@Resource
-    private CustomerParentManager customerParentManager;
-    public Result<CustomerParent> addCustomerParent(CustomerParent customerParent) {
-		Result<CustomerParent> result = new Result<CustomerParent>();
+    private CustomerBaseInfoManager customerParentManager;
+    public Result<CustomerBaseInfo> addCustomerParent(CustomerBaseInfo customerParent) {
+		Result<CustomerBaseInfo> result = new Result<CustomerBaseInfo>();
 		try {
 			result.addDefaultModel(customerParentManager.addCustomerParent(customerParent));			
 		} catch(Exception e) {
@@ -28,7 +26,7 @@ public class CustomerParentServiceImpl implements CustomerParentService {
 		return result;
     }
     
-    public Result updateCustomerParentById(String customer_id, CustomerParent customerParent) {
+    public Result updateCustomerParentById(String customer_id, CustomerBaseInfo customerParent) {
 		Result result = new Result();
 		try {
 			result.setSuccess(customerParentManager.updateCustomerParentById(customer_id, customerParent));
@@ -48,8 +46,8 @@ public class CustomerParentServiceImpl implements CustomerParentService {
 		return result;
     }	
     	
-    public Result<List<CustomerParent>> getCustomerParentsByQuery(QueryCustomerParent queryCustomerParent) {
-		Result<List<CustomerParent>> result = new Result<List<CustomerParent>>();
+    public Result<List<CustomerBaseInfo>> getCustomerParentsByQuery(QueryCustomerBaseInfo queryCustomerParent) {
+		Result<List<CustomerBaseInfo>> result = new Result<List<CustomerBaseInfo>>();
 		try {
 			result.addDefaultModel("${!className}s", customerParentManager.getCustomerParentsByQuery(queryCustomerParent));
 		} catch(Exception e) {
@@ -58,14 +56,14 @@ public class CustomerParentServiceImpl implements CustomerParentService {
 		return result;	
     }
     	
-    public Result<CustomerParent> getCustomerParentById(String customer_id) {
-		Result<CustomerParent> result = new Result<CustomerParent>();
+    public Result<CustomerBaseInfo> getCustomerParentById(String customer_id) {
+		Result<CustomerBaseInfo> result = new Result<CustomerBaseInfo>();
 		try {		
-		    CustomerParent  customerParent = customerParentManager.getCustomerParentById(customer_id);
+		    CustomerBaseInfo customerParent = customerParentManager.getCustomerParentById(customer_id);
 		    if(customerParent == null){
 				result.setSimpleErrorMsg(0, "当前数据不存在，请重试");
 			}else{
-				result.addDefaultModel("CustomerParent", customerParent);
+				result.addDefaultModel("CustomerBaseInfo", customerParent);
 			}
 			
 		} catch(Exception e) {
@@ -75,8 +73,8 @@ public class CustomerParentServiceImpl implements CustomerParentService {
     }
     
 
-    public Result<List<CustomerParent>> getCustomerParentsByPage(QueryCustomerParent queryCustomerParent) {
-		Result<List<CustomerParent>> result = new Result<List<CustomerParent>>();
+    public Result<List<CustomerBaseInfo>> getCustomerParentsByPage(QueryCustomerBaseInfo queryCustomerParent) {
+		Result<List<CustomerBaseInfo>> result = new Result<List<CustomerBaseInfo>>();
 		try {		
 			result = customerParentManager.getCustomerParentsByPage(queryCustomerParent);
 		} catch(Exception e) {
@@ -85,7 +83,7 @@ public class CustomerParentServiceImpl implements CustomerParentService {
 		return result;	
     }
     	
-    public Result<Integer> count(QueryCustomerParent queryCustomerParent) {
+    public Result<Integer> count(QueryCustomerBaseInfo queryCustomerParent) {
 		Result<Integer> result = new Result<Integer>();
 		try {	
 			result.addDefaultModel(customerParentManager.count(queryCustomerParent));
