@@ -1,12 +1,16 @@
 package com.fuhuadata.service.impl;
 import java.util.List;
 
+import com.fuhuadata.dao.ProductWareDao;
+import com.fuhuadata.domain.ProductWare;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.ProductInfo;
 import com.fuhuadata.manager.ProductInfoManager;
+import com.fuhuadata.manager.ProductWareManager;
 import com.fuhuadata.service.ProductInfoService;
 import com.fuhuadata.domain.query.QueryProductInfo;
 
+import com.fuhuadata.vo.ProductInfoVO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -17,6 +21,7 @@ import org.apache.commons.logging.LogFactory;
 public class ProductInfoServiceImpl implements ProductInfoService {
 	private  final static Log log = LogFactory.getLog(ProductProblemServiceImpl.class);
     private ProductInfoManager productInfoManager;
+    private ProductWareManager productWareManager;
     public Result<ProductInfo> addProductInfo(ProductInfo productInfo) {
 		Result<ProductInfo> result = new Result<ProductInfo>();
 		try {
@@ -61,14 +66,17 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 		return result;	
     }
     	
-    public Result<ProductInfo> getProductInfoById(int product_id) {
-		Result<ProductInfo> result = new Result<ProductInfo>();
+    public Result<ProductInfoVO> getProductInfoById(int product_id) {
+		Result<ProductInfoVO> result = new Result<ProductInfoVO>();
 		try {		
 		    ProductInfo  productInfo = productInfoManager.getProductInfoById(product_id);
 		    if(productInfo == null){
 				result.setSimpleErrorMsg(0, "当前数据不存在，请重试");
 			}else{
-				result.addDefaultModel("ProductInfo", productInfo);
+		    	ProductInfoVO productInfoVO =new ProductInfoVO();
+		    	productInfoVO.setProductInfo(productInfo);
+		    	productInfoVO.setWares(productWareManager.getProductWareByPId(product_id));
+				result.addDefaultModel("ProductInfo", productInfoVO);
 			}
 			
 		} catch(Exception e) {
@@ -119,5 +127,13 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 
 	public ProductInfoManager getProductInfoManager(){
     	return this.productInfoManager;
+	}
+
+	public void setProductWareManager(ProductWareManager productWareManager) {
+		this.productWareManager = productWareManager;
+	}
+
+	public ProductWareManager getProductWareManager(){
+		return this.productWareManager;
 	}
 }

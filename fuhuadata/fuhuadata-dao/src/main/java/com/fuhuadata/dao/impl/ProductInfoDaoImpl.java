@@ -34,7 +34,7 @@ public class ProductInfoDaoImpl extends SqlMapClientTemplate implements ProductI
     }
     
     public int deleteProductInfoById(int product_id) {
-    	return this.update(DELETE_BY_ID, product_id);
+    	return this.delete(DELETE_BY_ID, product_id);
     }
 
     @Override

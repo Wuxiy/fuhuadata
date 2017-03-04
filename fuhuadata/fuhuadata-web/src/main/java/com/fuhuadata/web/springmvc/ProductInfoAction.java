@@ -5,6 +5,7 @@ import com.fuhuadata.domain.query.QueryProductInfo;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.ProductInfoService;
+import com.fuhuadata.vo.ProductInfoVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -59,6 +60,8 @@ public class ProductInfoAction {
     public ModelAndView addProductInfo(){return new ModelAndView("knowledgeBase/productInfoAdd");}
 
     @RequestMapping(value="/doAdd",method=RequestMethod.POST)
+    @SystemLogAnnotation(module = "knowledgeBase-productInfo",methods = "doAdd")
+    @ResponseBody
     public ResultPojo doAddProductInfo(@RequestBody ProductInfo productInfo){
         try{
             Result<ProductInfo> result = productInfoService.addProductInfo(productInfo);
@@ -122,12 +125,12 @@ public class ProductInfoAction {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/getProductInfoById",method = RequestMethod.GET)
+    @RequestMapping(value = "/getProductInfoById",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-ProductInfo",methods = "GET-BY-ID")
     @ResponseBody
-    public ResultPojo getProductInfoById(int id){
+    public ResultPojo getProductInfoById(Integer id){
         try{
-            Result<ProductInfo> result = productInfoService.getProductInfoById(id);
+            Result<ProductInfoVO> result = productInfoService.getProductInfoById(id.intValue());
             return result.getResultPojo();
         }catch(Exception e){
             log.error("根据id获取产品档案失败",e);

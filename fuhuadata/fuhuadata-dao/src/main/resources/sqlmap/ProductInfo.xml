@@ -13,7 +13,7 @@
 								<result property="smallCategoryId" column="small_category_id" jdbcType="INT" javaType="java.lang.Integer"/>
 								<result property="categoryName" column="category_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
 								<result property="name" column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="measurementUnit" column="measurement_unit" jdbcType="VARCHAR" javaType="java.lang.String"/>
+								<result property="measurement" column="measurement" jdbcType="VARCHAR" javaType="java.lang.String"/>
 								<result property="concentration" column="concentration" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
 								<result property="saltType" column="salt_type" jdbcType="INT" javaType="java.lang.Integer" />
 								<result property="otherSaltName" column="other_salt_name" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -53,8 +53,8 @@
 				<isNotNull prepend=" AND " property="name">
 			name = #name#
 		</isNotNull>
-				<isNotNull prepend=" AND " property="measurementUnit">
-					measurement_unit = #measurementUnit#
+				<isNotNull prepend=" AND " property="measurement">
+					measurement = #measurement#
 		</isNotNull>
 				<isNotNull prepend=" AND " property="saltType">
 			salt_type = #saltType#
@@ -121,8 +121,8 @@
 			<isNotNull prepend=" AND " property="name">
 				name = #name#
 			</isNotNull>
-			<isNotNull prepend=" AND " property="measurementUnit">
-				measurement_unit = #measurementUnit#
+			<isNotNull prepend=" AND " property="measurement">
+				measurement = #measurement#
 			</isNotNull>
 			<isNotNull prepend=" AND " property="saltType">
 				salt_type = #saltType#
@@ -168,8 +168,8 @@
 	
 	<insert id="ADD" parameterClass="ProductInfo">
 		INSERT INTO 
-		product_info(product_id,big_category_id,mid_category_id,small_category_id,category_name,measurement_unit,concentration,name,salt_type,other_salt_name,execute_standard,execute_numer,product_feature,processing_components,physical_properities,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time)
-		VALUES(#productId#,#bigCategoryId#,#midCategoryId#,#smallCategoryId#,#categoryName#,#measurementUnit#,#concentration#,#name#,#saltType#,#otherSaltName#,#executeStandard#,#executeNumer#,#productFeature#,#processingComponents#,#physicalProperities#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
+		product_info(product_id,big_category_id,mid_category_id,small_category_id,category_name,measurement,concentration,name,salt_type,other_salt_name,execute_standard,execute_numer,product_feature,processing_components,physical_properities,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time)
+		VALUES(#productId#,#bigCategoryId#,#midCategoryId#,#smallCategoryId#,#categoryName#,#measurement#,#concentration#,#name#,#saltType#,#otherSaltName#,#executeStandard#,#executeNumer#,#productFeature#,#processingComponents#,#physicalProperities#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
 		<selectKey resultClass="int" keyProperty="id">
 			SELECT @@IDENTITY AS ID
 		</selectKey>
@@ -185,7 +185,7 @@
 						<isNotEmpty prepend=", " property="categoryName">category_name=#categoryName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="concentration">concentration=#concentration#</isNotEmpty>
 						<isNotEmpty prepend=", " property="name">name=#name#</isNotEmpty>
-						<isNotEmpty prepend=", " property="measurementUnit">measurement_unit=#measurementUnit#</isNotEmpty>
+						<isNotEmpty prepend=", " property="measurement">measurement=#measurement#</isNotEmpty>
 						<isNotEmpty prepend=", " property="saltType">salt_type=#saltType#</isNotEmpty>
 						<isNotEmpty prepend=", " property="otherSaltName">other_salt_name=#otherSaltName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="executeStandard">execute_standard=#executeStandard#</isNotEmpty>
@@ -205,7 +205,7 @@
 	
 	<delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
 		<![CDATA[
-			DELETE FROM product_info WHERE product_id=#product_id#
+			DELETE FROM product_info WHERE product_id=#id#
 		]]>
 	</delete>
 	
