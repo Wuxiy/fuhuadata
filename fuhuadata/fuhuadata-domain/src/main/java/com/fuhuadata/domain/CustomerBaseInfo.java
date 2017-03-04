@@ -18,7 +18,7 @@ public class CustomerBaseInfo {
 	private String shortName;
 	
     /**企业类型,-1全部,0客户,1竞对**/
-	private Integer customerType;
+	private Integer company_type;
 	
     /**地区id**/
 	private Integer areaId;
@@ -48,13 +48,13 @@ public class CustomerBaseInfo {
 	private Integer zhongxinbaoLevel;
 	
     /**百科备注**/
-	private String parentRemarks;
+	private String remarks;
 	
     /**企业电话**/
 	private String enterprisePhone;
 	
     /**企业邮箱**/
-	private String enterpriseEmaill;
+	private String enterpriseEmail;
 	
     /**企业简介**/
 	private String enterpriseProfile;
@@ -73,14 +73,38 @@ public class CustomerBaseInfo {
 	
     /**创建者id**/
 	private Integer createUserId;
-	
+
+	/**1:战略客户,2:大客户 3:重要客户 4:一般客户 5:风险客户**/
+	private Integer customerLevel;
+
+	/**客户类型,1:合作 2:潜在 3:流失**/
+	private Integer customerType;
+
+	/**是否有中国分公司 0：无 1：有**/
+	private  Integer hasChiCompany;
+
+	/**是否有中方采购 0：无 1：有**/
+	private  Integer hasChiPurchase;
+
+	/**客户状态  0：流失 1：正常**/
+	private Integer customerStatus;
+
+	/**资质文件保存路径**/
+	private String qualificationsFileUrl;
+
     /**创建者姓名**/
 	private String createUserName;
-	
+
+	/**工厂位置**/
+	private String factoryLocation;
+
+	/**分销主要竞争对手**/
+	private String majorCompetitors;
+
     /**上一次修改者id**/
 	private Integer lastmodifyUserId;
-	
-    /**上一次修改者姓名**/
+
+	/**上一次修改者姓名**/
 	private String lastmodifyUserName;
 	
     /**创建时间**/
@@ -197,12 +221,12 @@ public class CustomerBaseInfo {
 		this.zhongxinbaoLevel = zhongxinbaoLevel;
 	}
 	
-	public String getParentRemarks() {
-		return parentRemarks;
+	public String getRemarks() {
+		return remarks;
 	}
 	
-	public void setParentRemarks(String parentRemarks) {
-		this.parentRemarks = parentRemarks;
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
 	}
 	
 	public String getEnterprisePhone() {
@@ -214,11 +238,11 @@ public class CustomerBaseInfo {
 	}
 	
 	public String getEnterpriseEmaill() {
-		return enterpriseEmaill;
+		return enterpriseEmail;
 	}
 	
-	public void setEnterpriseEmaill(String enterpriseEmaill) {
-		this.enterpriseEmaill = enterpriseEmaill;
+	public void setEnterpriseEmaill(String enterpriseEmail) {
+		this.enterpriseEmail = enterpriseEmail;
 	}
 	
 	public String getEnterpriseProfile() {
@@ -308,6 +332,77 @@ public class CustomerBaseInfo {
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
 	}
-	
+
+	public String getEnterpriseEmail() {
+		return enterpriseEmail;
+	}
+
+	public void setEnterpriseEmail(String enterpriseEmail) {
+		this.enterpriseEmail = enterpriseEmail;
+	}
+
+	public Integer getCustomerLevel() {
+		return customerLevel;
+	}
+
+	public void setCustomerLevel(Integer customerLevel) {
+		this.customerLevel = customerLevel;
+	}
+
+	public Integer getHasChiCompany() {
+		return hasChiCompany;
+	}
+
+	public void setHasChiCompany(Integer hasChiCompany) {
+		this.hasChiCompany = hasChiCompany;
+	}
+
+	public Integer getHasChiPurchase() {
+		return hasChiPurchase;
+	}
+
+	public void setHasChiPurchase(Integer hasChiPurchase) {
+		this.hasChiPurchase = hasChiPurchase;
+	}
+
+	public Integer getCustomerStatus() {
+		return customerStatus;
+	}
+
+	public void setCustomerStatus(Integer customerStatus) {
+		this.customerStatus = customerStatus;
+	}
+
+	public String getQualificationsFileUrl() {
+		return qualificationsFileUrl;
+	}
+
+	public void setQualificationsFileUrl(String qualificationsFileUrl) {
+		this.qualificationsFileUrl = qualificationsFileUrl;
+	}
+
+	public String getFactoryLocation() {
+		return factoryLocation;
+	}
+
+	public void setFactoryLocation(String factoryLocation) {
+		this.factoryLocation = factoryLocation;
+	}
+
+	public String getMajorCompetitors() {
+		return majorCompetitors;
+	}
+
+	public void setMajorCompetitors(String majorCompetitors) {
+		this.majorCompetitors = majorCompetitors;
+	}
+
+	public Integer getCompany_type() {
+		return company_type;
+	}
+
+	public void setCompany_type(Integer company_type) {
+		this.company_type = company_type;
+	}
 
 }

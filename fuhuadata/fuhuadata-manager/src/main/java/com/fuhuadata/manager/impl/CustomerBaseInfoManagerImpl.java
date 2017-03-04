@@ -4,7 +4,7 @@ import com.fuhuadata.manager.CustomerBaseInfoManager;
 import java.util.List;
 
 import com.fuhuadata.dao.CustomerBaseInfoDao;
-import com.fuhuadata.domain.query.QueryCustomerParent;
+import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.domain.query.Result;
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ public class CustomerBaseInfoManagerImpl implements CustomerBaseInfoManager {
     	return customerParentDao.updateCustomerParentById(customer_id, customerParent) == 1 ? true : false;
     }
     
-	public List<CustomerBaseInfo> getCustomerParentsByQuery(QueryCustomerParent queryCustomerParent) {
+	public List<CustomerBaseInfo> getCustomerParentsByQuery(QueryCustomerBaseInfo queryCustomerParent) {
 		return customerParentDao.getCustomerParentsByQuery(queryCustomerParent);
 	}
 
@@ -40,7 +40,7 @@ public class CustomerBaseInfoManagerImpl implements CustomerBaseInfoManager {
     	return customerParentDao.getAllCustomerParents();
     }
     	
-    public Result<List<CustomerBaseInfo>> getCustomerParentsByPage(QueryCustomerParent queryCustomerParent) {
+    public Result<List<CustomerBaseInfo>> getCustomerParentsByPage(QueryCustomerBaseInfo queryCustomerParent) {
 		Result<List<CustomerBaseInfo>> result = new Result<List<CustomerBaseInfo>>();
 		int totalItem = customerParentDao.count(queryCustomerParent);
 		;
@@ -63,7 +63,7 @@ public class CustomerBaseInfoManagerImpl implements CustomerBaseInfoManager {
     }
     
 
-    public int count(QueryCustomerParent queryCustomerParent) {
+    public int count(QueryCustomerBaseInfo queryCustomerParent) {
     	return customerParentDao.count(queryCustomerParent);
     }
     
