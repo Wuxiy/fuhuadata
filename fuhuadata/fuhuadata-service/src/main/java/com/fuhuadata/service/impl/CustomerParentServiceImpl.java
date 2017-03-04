@@ -4,17 +4,14 @@ import java.util.List;
 import com.fuhuadata.domain.CustomerParent;
 import com.fuhuadata.domain.query.QueryCustomerParent;
 import com.fuhuadata.domain.query.Result;
-import com.fuhuadata.service.CustomerParentService;
+import com.fuhuadata.service.CustomerBaseInfoService;
 import javax.annotation.Resource;
-import org.springframework.stereotype.Component;
-import java.util.Map;
-import java.io.Serializable;
 
 /**
  * @author wangbo
  * @date 2017-01-12 11:49:51
  */
-public class CustomerParentServiceImpl implements CustomerParentService {
+public class CustomerParentServiceImpl implements CustomerBaseInfoService {
 	
 	@Resource
     private CustomerParentManager customerParentManager;

@@ -8,7 +8,7 @@ import com.fuhuadata.domain.query.Result;
  * @author wangbo
  * @date 2017-01-12 11:49:51
  */
-public interface CustomerParentService {
+public interface CustomerBaseInfoService {
 
 	/**
 	 * 新增 customerParent
