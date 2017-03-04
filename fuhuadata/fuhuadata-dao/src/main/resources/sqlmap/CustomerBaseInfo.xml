@@ -210,7 +210,7 @@
 	
 	<insert id="ADD" parameterClass="CustomerBaseInfo">
 		INSERT INTO 
-		customer_parent(customer_id,full_name,short_name,customer_type,area_id,area,country_id,country,registered_funds,registered_address,management_scope,zhongxinbao_number,zhongxinbao_level,parent_remarks,enterprise_phone,enterprise_emaill,enterprise_profile,development_course,sales_network,custom_field,customer_completion,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time) 
+		customer_base_info(customer_id,full_name,short_name,customer_type,area_id,area,country_id,country,registered_funds,registered_address,management_scope,zhongxinbao_number,zhongxinbao_level,parent_remarks,enterprise_phone,enterprise_emaill,enterprise_profile,development_course,sales_network,custom_field,customer_completion,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time)
 		VALUES(#customerId#,#fullName#,#shortName#,#customerType#,#areaId#,#area#,#countryId#,#country#,#registeredFunds#,#registeredAddress#,#managementScope#,#zhongxinbaoNumber#,#zhongxinbaoLevel#,#parentRemarks#,#enterprisePhone#,#enterpriseEmaill#,#enterpriseProfile#,#developmentCourse#,#salesNetwork#,#customField#,#customerCompletion#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
 		<selectKey resultClass="String" keyProperty="id">
 			SELECT @@IDENTITY AS ID
@@ -218,7 +218,7 @@
 	</insert>
 	
 	<update id="UPDATE" parameterClass="CustomerBaseInfo">
-		UPDATE customer_parent 
+		UPDATE customer_base_info
 		<dynamic prepend=" SET ">
 						<isNotEmpty prepend=", " property="customerId">customer_id=#customerId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="fullName">full_name=#fullName#</isNotEmpty>
@@ -253,19 +253,19 @@
 	
 	<delete id="DELETE-BY-ID" parameterClass="java.lang.String">
 		<![CDATA[
-			DELETE FROM customer_parent WHERE customer_id=#customer_id#
+			DELETE FROM customer_base_info WHERE customer_id=#customer_id#
 		]]>
 	</delete>
 	
 	<select id="GET-ALL" resultMap="CUSTOMERBASEINFO-MAP">
 		<![CDATA[
-			SELECT * FROM customer_parent
+			SELECT * FROM customer_base_info
 		]]>
 	</select>
 	
 	<select id="GET-BY-QUERY" resultMap="CUSTOMERBASEINFO-MAP" parameterClass="QueryCustomerBaseInfo">
 		<![CDATA[
-			SELECT * FROM customer_parent
+			SELECT * FROM customer_base_info
 		]]>
 		<isParameterPresent>   
             <include refid="QUERY-COMMON" />   
@@ -274,13 +274,13 @@
 	
 	<select id="GET-BY-ID" resultMap="CUSTOMERBASEINFO-MAP" parameterClass="java.lang.String">
 		<![CDATA[
-			SELECT * FROM customer_parent	WHERE customer_id=#customer_id#
+			SELECT * FROM customer_base_info	WHERE customer_id=#customer_id#
 		]]>
 	</select>
 	
 	<select id="GET-PAGE" resultMap="CUSTOMERBASEINFO-MAP" parameterClass="QueryCustomerBaseInfo">
 		<![CDATA[
-			SELECT * FROM customer_parent 
+			SELECT * FROM customer_base_info
 		]]>
 		<isParameterPresent>   
             <include refid="PAGE-COMMON" />   
@@ -290,7 +290,7 @@
 	
 	<select id="COUNT" resultClass="java.lang.Integer" parameterClass="QueryCustomerBaseInfo">
 		<![CDATA[
-			SELECT COUNT(customer_id) FROM customer_parent
+			SELECT COUNT(customer_id) FROM customer_base_info
 		]]>
 		<isParameterPresent>   
             <include refid="PAGE-COMMON" />   
