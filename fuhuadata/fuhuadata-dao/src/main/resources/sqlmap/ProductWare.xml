@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="PRODUCTWARE">
+    <typeAlias alias="ProductWare" type="com.fuhuadata.domain.ProductWare"/>
+
+    <resultMap id="PRODUCTWARE-MAP" class="ProductWare" >
+        <result column="ware_id" property="wareId" jdbcType="INT" javaType="java.lang.Integer" />
+        <result column="product_info_id" property="productInfoId" jdbcType="INT" javaType="java.lang.Integer" />
+        <result column="specification" property="specification" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="model" property="model" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="QUERY_COMMON">
+        <dynamic prepend=" WHERE">
+            <isNotNull prepend=" AND " property="wareId">
+                ware_id = #wareId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="productInfoId">
+                product_info_id = #productInfoId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="specification">
+                specification = #specification#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="model">
+                model = #model#
+            </isNotNull>
+        </dynamic>
+    </sql>
+
+    <insert id="ADD" parameterClass="ProductWare">
+        insert into product_ware (ware_id, product_info_id, specification,
+        model)
+        values (#wareId#, #productInfoId#, #specification#,
+        #model#)
+    </insert>
+
+    <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
+        <![CDATA[
+			DELETE FROM product_ware WHERE ware_id=#id#
+		]]>
+    </delete>
+
+    <update id="UPDATE" parameterClass="ProductWare">
+        UPDATE　product_ware
+        <dynamic prepend=" SET ">
+                <isNotEmpty prepend=", " property="wareId">
+                    ware_id = #wareId#
+                </isNotEmpty>
+                <isNotEmpty prepend=", " property="productInfoId">
+                    product_info_id = #productInfoId#
+                </isNotEmpty>
+                <isNotEmpty prepend=", " property="specification">
+                    specification = #specification#
+                </isNotEmpty>
+                <isNotEmpty prepend=", " property="model">
+                    model = #model#
+                </isNotEmpty>
+        </dynamic>
+    </update>
+
+    <select id="GET-BY-ID" resultMap="PRODUCTWARE-MAP" parameterClass="java.lang.Integer">
+        <![CDATA[
+			SELECT * FROM product_ware	WHERE ware_id=#id#
+		]]>
+    </select>
+
+    <select id="GET-BY-PID" resultMap="PRODUCTWARE-MAP" parameterClass="java.lang.Integer">
+        <![CDATA[
+			SELECT * FROM product_ware	WHERE product_info_id=#id#
+		]]>
+    </select>
+
+    <select id="COUNT" resultClass="java.lang.Integer" parameterClass="java.lang.Integer">
+        <![CDATA[
+			SELECT COUNT(ware_id) FROM product_ware	WHERE product_info_id=#id#
+		]]>
+    </select>
+
+</sqlMap>

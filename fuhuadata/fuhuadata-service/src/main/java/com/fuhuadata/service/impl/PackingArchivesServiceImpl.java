@@ -5,6 +5,7 @@ import com.fuhuadata.domain.query.PackingArchivesQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.PackingArchivesManager;
 import com.fuhuadata.service.PackingArchivesService;
+import com.fuhuadata.vo.PackingArchivesVO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -75,15 +76,30 @@ public class PackingArchivesServiceImpl implements PackingArchivesService {
         return result;
     }
 
+    /**
+     * 获取主包材和关联包材
+     * @param id
+     * @return
+     */
     @Override
-    public Result<PackingArchives> getPackingArchivesById(int id) {
-        Result<PackingArchives> result = new Result<PackingArchives>();
+    public Result<PackingArchivesVO> getPackingArchivesById(int id) {
+        Result<PackingArchivesVO> result = new Result<PackingArchivesVO>();
         try {
+            PackingArchivesVO packingArchivesVO = new PackingArchivesVO();
             PackingArchives packingArchives = packingArchivesManager.getPackingArchivesById(id);
             if(packingArchives == null){
                 result.setSimpleErrorMsg(0, "当前包材档案数据不存在，请重试");
-            }else{
-                result.addDefaultModel("PackingArchives", packingArchives);
+            }else {
+                packingArchivesVO.setPack(packingArchives);
+                String ids = packingArchives.getAssociatedPackingId();
+                String[] idArray = ids.split(",");
+                if(idArray!=null&& idArray.length>0) {
+                    for (int i = 0; i < idArray.length; i++) {
+                        PackingArchives packingArchivesNode = packingArchivesManager.getPackingArchivesById(Integer.parseInt(idArray[i]));
+                        packingArchivesVO.addNodes(packingArchives);
+                    }
+                }
+                result.addDefaultModel("PackingArchives", packingArchivesVO);
             }
         } catch (Exception e) {
             result.setSuccess(false);

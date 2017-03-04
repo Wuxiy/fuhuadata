@@ -5,6 +5,7 @@ import com.fuhuadata.domain.query.PackingArchivesQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.PackingArchivesService;
+import com.fuhuadata.vo.PackingArchivesVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -148,7 +149,7 @@ public class PackingArchivesAction {
     @ResponseBody
     public ResultPojo getPackingArchivesById(Integer id){
         try{
-            Result<PackingArchives> result = packingArchivesService.getPackingArchivesById(id);
+            Result<PackingArchivesVO> result = packingArchivesService.getPackingArchivesById(id);
             return result.getResultPojo();
         }catch(Exception e){
             log.error("根据id获取包材成本档案信息错误",e);

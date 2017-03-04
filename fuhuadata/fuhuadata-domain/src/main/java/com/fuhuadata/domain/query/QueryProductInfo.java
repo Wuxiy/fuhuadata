@@ -27,7 +27,7 @@ public class QueryProductInfo extends PageBase {
 	private String name;
 
 	/**主计量单位**/
-	private String  measurementUnit;
+	private String  measurement;
 
 	/**产品浓度含量,和父级名称一起生成名称**/
 	private BigDecimal concentration;
@@ -273,11 +273,11 @@ public class QueryProductInfo extends PageBase {
 		this.categoryName = categoryName;
 	}
 
-	public String getMeasurementUnit() {
-		return measurementUnit;
+	public String getMeasurement() {
+		return measurement;
 	}
 
-	public void setMeasurementUnit(String measurementUnit) {
-		this.measurementUnit = measurementUnit;
+	public void setMeasurement(String measurement) {
+		this.measurement = measurement;
 	}
 }

@@ -22,4 +22,5 @@
 	<bean id="productInfoManager" class="com.fuhuadata.manager.impl.ProductInfoManagerImpl"/>
 	<bean id="productCategoryManager" class="com.fuhuadata.manager.impl.ProductCategoryManagerImpl"/>
 	<bean id="packingCategoryManager" class="com.fuhuadata.manager.impl.PackingCategoryManagerImpl"/>
+	<bean id="productWareManager" class="com.fuhuadata.manager.impl.ProductWareManagerImpl"/>
 </beans>

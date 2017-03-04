@@ -10,9 +10,9 @@ import java.util.Date;
 public class PackingArchives {
     private Integer packingId;
 
-    private Integer parentId;//包材类型：内包材(1)，外包材(2)，辅材(3)
+    private Integer bigCategoryId;//：内包材，外包材，辅材
 
-    private Integer categoryId;//底层分层，主材-平桶类
+    private Integer smallCategoryId;//:主材-平桶类
 
     private String packName;//包材名称
 
@@ -29,6 +29,8 @@ public class PackingArchives {
     private String qualityTargetValue;//质量指标数值
 
     private BigDecimal unitPrice;//单价
+
+    private BigDecimal consumption;//单耗
 
     private Date priceEndDate;//价格有效期  yyyy/mm/dd
 
@@ -168,19 +170,27 @@ public class PackingArchives {
         this.unitPrice = unitPrice;
     }
 
-    public Integer getParentId() {
-        return parentId;
+    public BigDecimal getConsumption() {
+        return consumption;
     }
 
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
+    public void setConsumption(BigDecimal consumption) {
+        this.consumption = consumption;
     }
 
-    public Integer getCategoryId() {
-        return categoryId;
+    public Integer getBigCategoryId() {
+        return bigCategoryId;
     }
 
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
+    public void setBigCategoryId(Integer bigCategoryId) {
+        this.bigCategoryId = bigCategoryId;
+    }
+
+    public Integer getSmallCategoryId() {
+        return smallCategoryId;
+    }
+
+    public void setSmallCategoryId(Integer smallCategoryId) {
+        this.smallCategoryId = smallCategoryId;
     }
 }
