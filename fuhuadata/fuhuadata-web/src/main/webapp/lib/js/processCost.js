@@ -216,7 +216,6 @@ $(document).ready(function () {
 
 $(document).on("click",".adEexpense1",function(){
     var url = $(this).attr("data_url");
-    console.log(url);
     modal.innerHTML = '';
     jQuery.ajax({
         type:'GET',
@@ -244,12 +243,12 @@ $(document).on("click",".adEexpense1",function(){
             html +='<div class="input-group-btn">';
             html +='<botton class="btn btn-xs btn-primary">(元/kg)</botton></div></div></div>';
             html +='<label class="col-lg-2 control-label">价格有效期</label>';
-            html +='<div class="col-lg-3">';
-            html +='<input class="form-control" type="text" value="'+ResultData.priceEnd+'" id="priceEnd">';
+            html +='<div class="col-lg-4">';
+            html +='<input class="form-control" type="date" value="'+ResultData.priceEnd+'" id="priceEnd">';
             html +='</div></div>';
             html +='<div class="form-group">';
             html +='<label class="col-xs-2 control-label">备注</label>';
-            html +='<div class="col-xs-8">';
+            html +='<div class="col-xs-9">';
             html +='<textarea id="fqlElse" class="form-control"  rows="4" id="remarks">'+ResultData.remarks+'</textarea>';
             html +='</div>';
             html +='</div>';
@@ -258,7 +257,7 @@ $(document).on("click",".adEexpense1",function(){
             html +='<div class="modal-footer">';
             html +='<div class="row">';
             html +='<div class="col-xs-3 col-xs-offset-3">';
-            html +='<button type="button" class="btn btn-primary btn-block" data_url="" data_type="'+ResultData.type+'" onclick="updateadEexpense1()"> 完成 </button>';
+            html +='<button type="button" class="btn btn-primary btn-block updateadEexpense1" data_url="/preparationProcessCost/doModify?id='+ResultData.mcostId+'" data_id="'+ResultData.mcostId+'" data_type="'+ResultData.type+'"> 完成 </button>';
             html +='</div>';
             html +='<div class="col-xs-3">';
             html +='<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
@@ -332,7 +331,7 @@ $(document).on("click",".adEexpense2",function(){
             html +='<div class="modal-footer">';
             html +='<div class="row">';
             html +='<div class="col-xs-3 col-xs-offset-3">';
-            html +='<button type="button" class="btn btn-primary btn-block" data_url="" data_type="'+ResultData.type+'" onclick="updateadEexpense2()"> 完成 </button>';
+            html +='<button type="button" class="btn btn-primary btn-block updateadEexpense2" data_url="/preparationProcessCost/doModify?id='+ResultData.mcostId+'" data_type="'+ResultData.type+'"> 完成 </button>';
             html +='</div>';
             html +='<div class="col-xs-3">';
             html +='<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
@@ -395,7 +394,7 @@ $(document).on("click",".freight1",function(){
             html += '<div class="modal-footer">';
             html += '<div class="row">';
             html += '<div class="col-xs-3 col-xs-offset-3">';
-            html += '<button type="button" class="btn btn-primary btn-block" onclick="updateFreight()"> 完成 </button>';
+            html += '<button type="button" class="btn btn-primary btn-block updateFreight" data_url="/freightCost/doModify?id='+ResuleData.freightId+'"> 完成 </button>';
             html += '</div>';
             html += '<div class="col-xs-3">';
             html += '<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
@@ -463,7 +462,7 @@ $(document).on("click",".componnentId",function(){
             html += '<div class="modal-footer">';
             html += '<div class="row">';
             html += '<div class="col-xs-3 col-xs-offset-3">';
-            html += '<button type="button" class="btn btn-primary btn-block" onclick="updateCost()"> 完成 </button>';
+            html += '<button type="button" class="btn btn-primary btn-block updateCost" data_url="/componentCost/doModify?id='+ResuleData.componentId+'"> 完成 </button>';
             html += '</div>';
             html += '<div class="col-xs-3">';
             html += '<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
@@ -504,7 +503,7 @@ $(document).on("click",".rate1",function(){
             html += '</div>';
             html += '<label class="col-lg-2 control-label">有效期</label>';
             html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="text" value="' + ResuleData. termofValidity+ '" id="termofValidity">';
+            html += '<input class="form-control" type="date" value="' + ResuleData. termofValidity+ '" id="termofValidity">';
             html += '</div>';
             html += '</div>';
             html += '<div class="form-group">';
@@ -518,7 +517,7 @@ $(document).on("click",".rate1",function(){
             html += '<div class="modal-footer">';
             html += '<div class="row">';
             html += '<div class="col-xs-3 col-xs-offset-3">';
-            html += '<button type="button" class="btn btn-primary btn-block" data_url="" data_type="'+ResultData.type+'" onclick="updaterate1()"> 完成 </button>';
+            html += '<button type="button" class="btn btn-primary btn-block updaterate1" data_url="/Rate/doModify?id='+ResuleData.rateId+'" data_type="'+ResultData.type+'"> 完成 </button>';
             html += '</div>';
             html += '<div class="col-xs-3">';
             html += '<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
@@ -573,7 +572,7 @@ $(document).on("click",".rate2",function(){
             html += '<div class="modal-footer">';
             html += '<div class="row">';
             html += '<div class="col-xs-3 col-xs-offset-3">';
-            html += '<button type="button" class="btn btn-primary btn-block" data_url="" data_type="'+ResultData.type+'" onclick="updaterate2()"> 完成 </button>';
+            html += '<button type="button" class="btn btn-primary btn-block updaterate2" data_url="/Rate/doModify?id='+ResuleData.rateId+'" data_type="'+ResultData.type+'"> 完成 </button>';
             html += '</div>';
             html += '<div class="col-xs-3">';
             html += '<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
@@ -628,7 +627,7 @@ $(document).on("click",".rate3",function(){
             html += '<div class="modal-footer">';
             html += '<div class="row">';
             html += '<div class="col-xs-3 col-xs-offset-3">';
-            html += '<button type="button" class="btn btn-primary btn-block" data_url="" data_type="'+ResultData.type+'" onclick="updaterate3()"> 完成 </button>';
+            html += '<button type="button" class="btn btn-primary btn-block updaterate3" data_url="/Rate/doModify?id='+ResuleData.rateId+'" data_type="'+ResultData.type+'"> 完成 </button>';
             html += '</div>';
             html += '<div class="col-xs-3">';
             html += '<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
@@ -640,11 +639,14 @@ $(document).on("click",".rate3",function(){
     })
 })
 
-function updateadEexpense1(){
-    var url = $(this).attr('data_url');
-    var type = $(this).attr('data-type');
+//更新
+
+$(document).on("click",".updateadEexpense1",function(){
+    var url = $(this).attr("data_url");
+    var type = $(this).attr("data_type");
     var data = {
         "type":type,
+
         "costTerm":$('#costTerm').val(),
         "unitCost":$('#costTerm').val(),
         "priceEnd":$('#costTerm').val(),
@@ -656,22 +658,25 @@ function updateadEexpense1(){
         "tax":null,
         "totalCost":null
     }
+    console.log(url);
     console.log(data);
 
     jQuery.ajax({
         type:'POST',
         url:url,
+        dataType:"json",
+        contentType:"application/json",
         data:JSON.stringify(data),
         success:function(result){
             alert('修改成功');
             $('#modal').modal('hide');
         }
     })
-}
+})
 
-function updateadEexpense2(){
+$(document).on("click",".updateadEexpense2",function(){
     var url = $(this).attr('data_url');
-    var type = $(this).attr('data-type');
+    var type = $(this).attr('data_type');
     var data = {
         "type":type,
         "processFactory":$('#processFactory').val(),
@@ -690,15 +695,17 @@ function updateadEexpense2(){
     jQuery.ajax({
         type:'POST',
         url:url,
+        dataType:"json",
+        contentType:"application/json",
         data:JSON.stringify(data),
         success:function(result){
             alert('修改成功');
             $('#modal').modal('hide');
         }
     })
-}
+})
 
-function updateCost(){
+$(document).on("click",".updateCost",function(){
     var url = $(this).attr('data_url');
     var data = {
         "componentName":$('#componentName').val(),
@@ -713,15 +720,17 @@ function updateCost(){
     jQuery.ajax({
         type:'POST',
         url:url,
+        dataType:"json",
+        contentType:"application/json",
         data:JSON.stringify(data),
         success:function(result){
             alert('修改成功');
             $('#modal').modal('hide');
         }
     })
-}
+})
 
-function updateFreight(){
+$(document).on("cilck",".updateFreight",function(){
     var url = $(this).attr('data_url');
     var data = {
         "processFactory":$('#processFactory').val(),
@@ -735,15 +744,17 @@ function updateFreight(){
     jQuery.ajax({
         type:'POST',
         url:url,
+        dataType:"json",
+        contentType:"application/json",
         data:JSON.stringify(data),
         success:function(result){
             alert('修改成功');
             $('#modal').modal('hide');
         }
     })
-}
+})
 
-function updaterate1(){
+$(document).on("click",".updaterate1",function(){
     var url = $(this).attr('data_url');
     var type = $(this).attr('data_type');
     var data = {
@@ -763,15 +774,17 @@ function updaterate1(){
     jQuery.ajax({
         type:'POST',
         url:url,
+        dataType:"json",
+        contentType:"application/json",
         data:JSON.stringify(data),
         success:function(result){
             alert('修改成功');
             $('#modal').modal('hide');
         }
     })
-}
+})
 
-function updaterate2(){
+$(document).on("click",".updaterate2",function(){
     var url = $(this).attr('data_url');
     var type = $(this).attr('data_type');
     var data = {
@@ -791,15 +804,17 @@ function updaterate2(){
     jQuery.ajax({
         type:'POST',
         url:url,
+        dataType:"json",
+        contentType:"application/json",
         data:JSON.stringify(data),
         success:function(result){
             alert('修改成功');
             $('#modal').modal('hide');
         }
     })
-}
+})
 
-function updaterate3(){
+$(document).on("click",".updaterate2",function(){
     var url = $(this).attr('data_url');
     var type = $(this).attr('data_type');
     var data = {
@@ -819,13 +834,16 @@ function updaterate3(){
     jQuery.ajax({
         type:'POST',
         url:url,
+        dataType:"json",
+        contentType:"application/json",
         data:JSON.stringify(data),
         success:function(result){
             alert('修改成功');
             $('#modal').modal('hide');
         }
     })
-}
+})
+
 
 function updateportSurcharge(){
     var url = $(this).attr('data_url');
