@@ -249,7 +249,7 @@ $(document).on("click",".adEexpense1",function(){
             html +='<div class="form-group">';
             html +='<label class="col-xs-2 control-label">备注</label>';
             html +='<div class="col-xs-9">';
-            html +='<textarea id="fqlElse" class="form-control"  rows="4" id="remarks">'+ResultData.remarks+'</textarea>';
+            html +='<textarea class="form-control"  rows="4" id="remarks">'+ResultData.remarks+'</textarea>';
             html +='</div>';
             html +='</div>';
             html +='</form>';
@@ -323,7 +323,7 @@ $(document).on("click",".adEexpense2",function(){
             html +='<div class="form-group">';
             html +='<label class="col-xs-2 control-label">费用合计</label>';
             html +='<div class="col-xs-8">';
-            html +='<textarea id="fqlElse" class="form-control"  rows="4" id="totalCost">'+ResultData.totalCost+'</textarea>';
+            html +='<textarea class="form-control"  rows="4" id="totalCost">'+ResultData.totalCost+'</textarea>';
             html +='</div>';
             html +='</div>';
             html +='</form>';
@@ -386,7 +386,7 @@ $(document).on("click",".freight1",function(){
             html += '<div class="form-group">';
             html += '<label class="col-xs-2 control-label">备注</label>';
             html += '<div class="col-xs-8">';
-            html += '<textarea id="fqlElse" class="form-control"  rows="4" id="remarks">' + ResuleData.remarks + '</textarea>';
+            html += '<textarea class="form-control"  rows="4" id="remarks">' + ResuleData.remarks + '</textarea>';
             html += '</div>';
             html += '</div>';
             html += '</form>';
@@ -413,7 +413,7 @@ $(document).on("click",".componnentId",function(){
         type: 'GET',
         url: url,
         success: function (result) {
-            var ResuleData = eval(result.data);
+            var ResultData = eval(result.data);
             var html = [];
             html += '<div class="modal-dialog">';
             html += '<div class="modal-content">';
@@ -425,36 +425,36 @@ $(document).on("click",".componnentId",function(){
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">成分名称</label>';
             html += '<div class="col-lg-6">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.componentName + '" id="componentName">';
+            html += '<input class="form-control" type="text" value="' + ResultData.componentName + '" id="componentName">';
             html += '</div></div>';
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">单耗</label>';
             html += '<div class="col-lg-3">';
             html += '<div class="input-group">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.consumption + '" id="consumption">';
+            html += '<input class="form-control" type="text" value="' + ResultData.consumption + '" id="consumption">';
             html += '<div class="input-group-btn">';
             html += '<botton class="btn btn-xs btn-primary">(元/kg)</botton></div></div></div>';
             html += '<label class="col-lg-2 control-label">单价</label>';
             html += '<div class="col-lg-3">';
             html += '<div class="input-group">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.unitCost + '" id="unitCost">';
+            html += '<input class="form-control" type="text" value="' + ResultData.unitCost + '" id="unitCost">';
             html += '<div class="input-group-btn">';
             html += '<botton class="btn btn-xs btn-primary">(元/kg)</botton>';
             html += '</div></div></div></div>';
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">价格有效期</label>';
             html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.priceEnd + '" id="priceEnd">';
+            html += '<input class="form-control" type="text" value="' + ResultData.priceEnd + '" id="priceEnd">';
             html += '</div>';
             html += '<label class="col-lg-2 control-label">适合产品</label>';
             html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.suitableProduct + '" id="suitableProduct">';
+            html += '<input class="form-control" type="text" value="' + ResultData.suitableProduct + '" id="suitableProduct">';
             html += '</div>';
             html += '</div>';
             html += '<div class="form-group">';
             html += '<label class="col-xs-2 control-label">备注</label>';
             html += '<div class="col-xs-8">';
-            html += '<textarea class="form-control"  rows="4" id="remarks">' + ResuleData.remarks + '</textarea>';
+            html += '<textarea class="form-control"  rows="4" id="remarks">' + ResultData.remarks + '</textarea>';
             html += '</div>';
             html += '</div>';
             html += '</form>';
@@ -462,7 +462,7 @@ $(document).on("click",".componnentId",function(){
             html += '<div class="modal-footer">';
             html += '<div class="row">';
             html += '<div class="col-xs-3 col-xs-offset-3">';
-            html += '<button type="button" class="btn btn-primary btn-block updateCost" data_url="/componentCost/doModify?id='+ResuleData.componentId+'"> 完成 </button>';
+            html += '<button type="button" class="btn btn-primary btn-block updateCost" data_url="/componentCost/doModify?id='+ResultData.componentId+'"> 完成 </button>';
             html += '</div>';
             html += '<div class="col-xs-3">';
             html += '<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
@@ -509,7 +509,7 @@ $(document).on("click",".rate1",function(){
             html += '<div class="form-group">';
             html += '<label class="col-xs-2 control-label">备注</label>';
             html += '<div class="col-xs-8">';
-            html += '<textarea id="fqlElse" class="form-control"  rows="4" id="remarks">' + ResuleData.remarks + '</textarea>';
+            html += '<textarea class="form-control"  rows="4" id="remarks">' + ResuleData.remarks + '</textarea>';
             html += '</div>';
             html += '</div>';
             html += '</form>';
@@ -564,7 +564,7 @@ $(document).on("click",".rate2",function(){
             html += '<div class="form-group">';
             html += '<label class="col-xs-2 control-label">备注</label>';
             html += '<div class="col-xs-8">';
-            html += '<textarea id="fqlElse" class="form-control"  rows="4" id="remarks">' + ResuleData.remarks + '</textarea>';
+            html += '<textarea class="form-control"  rows="4" id="remarks">' + ResuleData.remarks + '</textarea>';
             html += '</div>';
             html += '</div>';
             html += '</form>';
@@ -619,7 +619,7 @@ $(document).on("click",".rate3",function(){
             html += '<div class="form-group">';
             html += '<label class="col-xs-2 control-label">备注</label>';
             html += '<div class="col-xs-8">';
-            html += '<textarea id="fqlElse" class="form-control"  rows="4" id="remarks">' + ResuleData.remarks + '</textarea>';
+            html += '<textarea class="form-control"  rows="4" id="remarks">' + ResuleData.remarks + '</textarea>';
             html += '</div>';
             html += '</div>';
             html += '</form>';
@@ -651,7 +651,7 @@ $(document).on("click",".updateadEexpense1",function(){
         "priceEnd":$('#priceEnd').val(),
         "remarks":$('#remarks').val()
     }
-    console.log(url);
+
     console.log(data);
 
     jQuery.ajax({
@@ -660,7 +660,7 @@ $(document).on("click",".updateadEexpense1",function(){
         dataType:"json",
         contentType:"application/json",
         data:JSON.stringify(data),
-        success:function(result){
+        success:function(){
             alert('修改成功');
             $('#modal').modal('hide');
         }
