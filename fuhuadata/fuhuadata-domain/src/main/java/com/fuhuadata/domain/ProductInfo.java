@@ -2,6 +2,7 @@ package com.fuhuadata.domain;
 
 import com.fuhuadata.util.DateJsonDeserializer;
 import com.fuhuadata.util.DateJsonSerializer;
+import com.fuhuadata.util.JsonUtils;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
@@ -160,7 +161,7 @@ public class ProductInfo{
 	public void setProductFeature(String productFeature) {
 		this.productFeature = productFeature;
 	}
-	
+
 	public String getProcessingComponents() {
 		return processingComponents;
 	}

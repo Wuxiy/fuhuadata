@@ -10,7 +10,10 @@ import com.fuhuadata.manager.ProductWareManager;
 import com.fuhuadata.service.ProductInfoService;
 import com.fuhuadata.domain.query.QueryProductInfo;
 
+import com.fuhuadata.util.JsonUtils;
 import com.fuhuadata.vo.ProductInfoVO;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -73,6 +76,12 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 		    if(productInfo == null){
 				result.setSimpleErrorMsg(0, "当前数据不存在，请重试");
 			}else{
+		    	if(productInfo.getPhysicalProperities()!=null){
+					JSONArray jsonObject = JSONArray.fromObject(productInfo.getPhysicalProperities());
+					if(jsonObject.size()>0){
+						
+					}
+				}
 		    	ProductInfoVO productInfoVO =new ProductInfoVO();
 		    	productInfoVO.setProductInfo(productInfo);
 		    	productInfoVO.setWares(productWareManager.getProductWareByPId(product_id));

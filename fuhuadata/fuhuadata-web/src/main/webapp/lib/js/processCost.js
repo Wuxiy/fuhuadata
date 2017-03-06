@@ -660,7 +660,7 @@ $(document).on("click",".updateadEexpense1",function(){
         dataType:"json",
         contentType:"application/json",
         data:JSON.stringify(data),
-        success:function(){
+        success:function(data){
             alert('修改成功');
             $('#modal').modal('hide');
             location.reload();

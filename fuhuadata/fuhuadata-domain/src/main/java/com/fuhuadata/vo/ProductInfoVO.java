@@ -2,6 +2,7 @@ package com.fuhuadata.vo;
 
 import com.fuhuadata.domain.ProductInfo;
 import com.fuhuadata.domain.ProductWare;
+import com.fuhuadata.util.JsonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,4 +39,5 @@ public class ProductInfoVO {
         }
         this.wares.add(productWare);
     }
+
 }
