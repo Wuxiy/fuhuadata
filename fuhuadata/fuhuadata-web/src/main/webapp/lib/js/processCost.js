@@ -663,6 +663,7 @@ $(document).on("click",".updateadEexpense1",function(){
         success:function(){
             alert('修改成功');
             $('#modal').modal('hide');
+            location.reload();
         }
     })
 })
