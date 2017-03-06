@@ -645,18 +645,10 @@ $(document).on("click",".updateadEexpense1",function(){
     var url = $(this).attr("data_url");
     var type = $(this).attr("data_type");
     var data = {
-        "type":type,
-
         "costTerm":$('#costTerm').val(),
-        "unitCost":$('#costTerm').val(),
-        "priceEnd":$('#costTerm').val(),
-        "remarks":$('#costTerm').val(),
-        "processFactory":null,
-        "charges":null,
-        "profit":null,
-        "managementFee":null,
-        "tax":null,
-        "totalCost":null
+        "unitCost":$('#unitCost').val(),
+        "priceEnd":$('#priceEnd').val(),
+        "remarks":$('#remarks').val(),
     }
     console.log(url);
     console.log(data);

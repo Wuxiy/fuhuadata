@@ -130,9 +130,8 @@ public class PreparationProcessCostAction {
     @RequestMapping(value = "/doModify",method=RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-preparationProcessCost",methods="doUpdate")
     @ResponseBody
-    public ResultPojo doModifyPreparationProcessCost(@RequestBody PreparationProcessCost preparationProcessCost){
+    public ResultPojo doModifyPreparationProcessCost(int id,@RequestBody PreparationProcessCost preparationProcessCost){
         try{
-            int id = preparationProcessCost.getMcostId();
             Result<PreparationProcessCost> result = preparationProcessCostService.updatePreparationProcessCost(id,preparationProcessCost);
             return result.getResultPojo();
         }catch(Exception e){

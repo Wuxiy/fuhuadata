@@ -62,7 +62,7 @@
         UPDATE k_preparation_process_cost
         <dynamic prepend=" SET ">
             <isNotNull prepend=", " property="costTerm">cost_term=#costTerm#</isNotNull>
-            <isNotNull prepend=", " property="unitCost">unitCost=#unitCost#</isNotNull>
+            <isNotNull prepend=", " property="unitCost">unit_cost=#unitCost#</isNotNull>
             <isNotNull prepend=", " property="priceEnd">price_end=#priceEnd#</isNotNull>
             <isNotNull prepend=", " property="remarks">remarks = #remarks#</isNotNull>
             <isNotNull prepend=", " property="processFactory">process_factory=#processFactory#</isNotNull>
