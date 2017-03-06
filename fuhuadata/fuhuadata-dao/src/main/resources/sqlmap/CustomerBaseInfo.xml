@@ -20,7 +20,7 @@
 								<result property="managementScope" column="management_scope" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="zhongxinbaoNumber" column="zhongxinbao_number" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="zhongxinbaoLevel" column="zhongxinbao_level" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="parentRemarks" column="parent_remarks" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="remark" column="remark" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="enterprisePhone" column="enterprise_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="enterpriseEmaill" column="enterprise_emaill" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="enterpriseProfile" column="enterprise_profile" jdbcType="VARCHAR" javaType="java.lang.String" />

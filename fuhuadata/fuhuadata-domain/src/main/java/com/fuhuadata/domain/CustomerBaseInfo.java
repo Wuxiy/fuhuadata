@@ -48,7 +48,7 @@ public class CustomerBaseInfo {
 	private Integer zhongxinbaoLevel;
 	
     /**百科备注**/
-	private String remarks;
+	private String remark;
 	
     /**企业电话**/
 	private String enterprisePhone;
@@ -221,12 +221,12 @@ public class CustomerBaseInfo {
 		this.zhongxinbaoLevel = zhongxinbaoLevel;
 	}
 	
-	public String getRemarks() {
-		return remarks;
+	public String getRemark() {
+		return remark;
 	}
 	
-	public void setRemarks(String remarks) {
-		this.remarks = remarks;
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 	
 	public String getEnterprisePhone() {
