@@ -105,9 +105,8 @@ public class FreightCostAction {
     @RequestMapping(value = "/doModify",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-freightCost",methods = "doUpdate")
     @ResponseBody
-    public ResultPojo  doModify(@RequestBody FreightCost freightCost){
+    public ResultPojo  doModify(int id,@RequestBody FreightCost freightCost){
         try{
-            int id = freightCost.getFreightId();
             Result<FreightCost> result = freightCostService.updateFreightCostById(id,freightCost);
         }catch(Exception e){
             log.error("更新运费成本错误",e);
