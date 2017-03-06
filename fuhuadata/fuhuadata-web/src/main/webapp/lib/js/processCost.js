@@ -646,17 +646,10 @@ $(document).on("click",".updateadEexpense1",function(){
     var type = $(this).attr("data_type");
     var data = {
         "type":type,
-
         "costTerm":$('#costTerm').val(),
-        "unitCost":$('#costTerm').val(),
-        "priceEnd":$('#costTerm').val(),
-        "remarks":$('#costTerm').val(),
-        "processFactory":null,
-        "charges":null,
-        "profit":null,
-        "managementFee":null,
-        "tax":null,
-        "totalCost":null
+        "unitCost":$('#unitCost').val(),
+        "priceEnd":$('#priceEnd').val(),
+        "remarks":$('#remarks').val()
     }
     console.log(url);
     console.log(data);
@@ -683,12 +676,7 @@ $(document).on("click",".updateadEexpense2",function(){
         "charges":$('#charges').val(),
         "profit":$('#profit').val(),
         "managementFee":$('#managementFee').val(),
-        "tax":$('#tax').val(),
-        "totalCost":null,
-        "costTerm":null,
-        "unitCost":null,
-        "priceEnd":null,
-        "remarks":null
+        "tax":$('#tax').val()
     }
     console.log(data);
 
@@ -762,11 +750,7 @@ $(document).on("click",".updaterate1",function(){
         "currency":$("#currency").val(),
         "rate":$("#rate").val(),
         "termofValidity":$("#termofValidity").val(),
-        "remarks":$("#remarks").val(),
-        "kind":null,
-        "grossMargin":null,
-        "other":null,
-        "rateValue":null
+        "remarks":$("#remarks").val()
     }
     console.log(data);
 
@@ -789,14 +773,10 @@ $(document).on("click",".updaterate2",function(){
     var type = $(this).attr('data_type');
     var data = {
         "type":type,
-        "currency":null,
-        "rate":null,
         "termofValidity":$("#termofValidity").val(),
         "remarks":$("#remarks").val(),
         "kind":$("#kind").val(),
-        "grossMargin":$("#grossMargin").val(),
-        "other":null,
-        "rateValue":null
+        "grossMargin":$("#grossMargin").val()
     }
     console.log(data);
 
@@ -819,12 +799,8 @@ $(document).on("click",".updaterate2",function(){
     var type = $(this).attr('data_type');
     var data = {
         "type":type,
-        "currency":null,
-        "rate":null,
         "termofValidity":$("#termofValidity").val(),
-        "remarks":$("#remarks").val(),
-        "kind":null,
-        "grossMargin":null,
+        "remarks":$("#remarks").val()
         "other":$("#other").val(),
         "rateValue":$("#rateValue").val()
     }
