@@ -794,13 +794,13 @@ $(document).on("click",".updaterate2",function(){
     })
 })
 
-$(document).on("click",".updaterate2",function(){
+$(document).on("click",".updaterate3",function(){
     var url = $(this).attr('data_url');
     var type = $(this).attr('data_type');
     var data = {
         "type":type,
         "termofValidity":$("#termofValidity").val(),
-        "remarks":$("#remarks").val()
+        "remarks":$("#remarks").val(),
         "other":$("#other").val(),
         "rateValue":$("#rateValue").val()
     }
