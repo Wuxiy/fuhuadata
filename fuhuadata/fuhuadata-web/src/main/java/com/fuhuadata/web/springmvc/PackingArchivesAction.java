@@ -138,6 +138,24 @@ public class PackingArchivesAction {
         model.addObject("message","包材成本档案列表");
         return model;
     }
+//
+//    /**
+//     * 根据id获取详情
+//     * @param id
+//     * @return
+//     */
+//    @RequestMapping(value="/getPackingArchivesById",method = RequestMethod.POST)
+//    @SystemLogAnnotation(module = "knowledgeBase-packingArchives",methods = "GET-BY-ID")
+//    @ResponseBody
+//    public ResultPojo getPackingArchivesById(Integer id){
+//        try{
+//            Result<PackingArchivesVO> result = packingArchivesService.getPackingArchivesById(id);
+//            return result.getResultPojo();
+//        }catch(Exception e){
+//            log.error("根据id获取包材成本档案信息错误",e);
+//        }
+//        return null;
+//    }
 
     /**
      * 根据id获取详情
@@ -146,15 +164,15 @@ public class PackingArchivesAction {
      */
     @RequestMapping(value="/getPackingArchivesById",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-packingArchives",methods = "GET-BY-ID")
-    @ResponseBody
-    public ResultPojo getPackingArchivesById(Integer id){
+    public ModelAndView getPackingArchivesById(Integer id){
+        Result<PackingArchivesVO> result = new Result<PackingArchivesVO>();
         try{
-            Result<PackingArchivesVO> result = packingArchivesService.getPackingArchivesById(id);
-            return result.getResultPojo();
+            result= packingArchivesService.getPackingArchivesById(id);
         }catch(Exception e){
             log.error("根据id获取包材成本档案信息错误",e);
         }
-        return null;
+        ModelAndView model = new ModelAndView("knowledgeBase/packingCostInfo","packingArchives",result.getModel());
+        return model;
     }
 
     /**
