@@ -662,6 +662,7 @@ $(document).on("click",".updateadEexpense1",function(){
         data:JSON.stringify(data),
         success:function(){
             alert('修改成功');
+            location.reload();
             $('#modal').modal('hide');
         }
     })

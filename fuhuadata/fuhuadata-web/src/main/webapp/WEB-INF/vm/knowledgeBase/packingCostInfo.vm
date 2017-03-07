@@ -134,21 +134,21 @@
                     </div>
                     <div class="panel-body clearfix">
                         <table id="exhibition_table"  class="display table table-condensed table-bordered table-striped" cellspacing="0" width="100%">
-                        <thead>
-                        <tr>
-                            <th class="text-center"><input type="checkbox"></th>
-                            <th class="col-xs-2 text-center text-middle">包材类型编号</th>
-                            <th class="col-xs-2 text-center text-middle" >包材类型名称</th>
-                            <th class="col-xs-1 text-center text-middle">规格</th>
-                            <th class="col-xs-1 text-center text-middle">尺寸</th>
-                            <th class="col-xs-2 text-center text-middle">材质</th>
-                            <th class="col-xs-1 text-center text-middle">单价（元）</th>
-                            <th class="col-xs-1 text-center text-middle">单耗（每千升或每吨）</th>
-                            <th class="col-xs-1 text-center text-middle">状态</th>
-                        </tr>
-                        </thead>
+                            <thead>
+                            <tr>
+                                <th class="text-center"><input type="checkbox"></th>
+                                <th class="col-xs-2 text-center text-middle">包材类型编号</th>
+                                <th class="col-xs-2 text-center text-middle" >包材类型名称</th>
+                                <th class="col-xs-1 text-center text-middle">规格</th>
+                                <th class="col-xs-1 text-center text-middle">尺寸</th>
+                                <th class="col-xs-2 text-center text-middle">材质</th>
+                                <th class="col-xs-1 text-center text-middle">单价（元）</th>
+                                <th class="col-xs-1 text-center text-middle">单耗（每千升或每吨）</th>
+                                <th class="col-xs-1 text-center text-middle">状态</th>
+                            </tr>
+                            </thead>
 
-                    </table>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -201,4 +201,4 @@
 
 <script src="/lib/js/fileinput.js" type="text/javascript" charset="utf-8"></script>
 <script src="/lib/js/fileinput_locale_zh.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript" src="/lib/js/packingAdd.js"></script>
+<script type="text/javascript" src="/lib/js/packingCostInfo.js"></script>

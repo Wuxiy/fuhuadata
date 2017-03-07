@@ -63,7 +63,7 @@ public class PackingArchivesAction {
      */
     @RequestMapping(value = "/addPackingArchives",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "add")
-    public ModelAndView addPackingArchives(){return new ModelAndView("knowledgeBase/addPackingArchives");}
+    public ModelAndView addPackingArchives(){return new ModelAndView("knowledgeBase/packingCostAdd");}
 
     @RequestMapping(value = "/doAddPackingArchives",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "doAdd")

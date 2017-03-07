@@ -49,7 +49,7 @@
             packingArchivesList : function(getData,parent){
                 $.each(getData,function(n,item){
                     var tr = $('<tr></tr>');
-                    $(tr).append('<td><a href="">'+item.packingId+'</a></td><td>'+item.packName+'</td><td>'+item.spec+'</td><td>'+item.quality+'</td><td>'+item.qualityIndex+'</td><td>'+item.qualityTargetValue+'</td><td>'+item.unitPrice+'</td><td>'+item.priceEndDate+'</td><td>'+item.suitableType+'</td><td>'+item.bRemarks+'</td><td>'+item.status+'</td>').appendTo(parent);
+                    $(tr).append('<td>'+item.packingId+'</a></td><td><a href="/packingArchives/getDetails?id='+item.packingId+'">'+item.packName+'</a></td><td>'+item.spec+'</td><td>'+item.quality+'</td><td>'+item.qualityIndex+'</td><td>'+item.qualityTargetValue+'</td><td>'+item.unitPrice+'</td><td>'+item.priceEndDate+'</td><td>'+item.suitableType+'</td><td>'+item.bRemarks+'</td><td>'+item.status+'</td>').appendTo(parent);
                 })
              },
             //渲染标准产品档案
