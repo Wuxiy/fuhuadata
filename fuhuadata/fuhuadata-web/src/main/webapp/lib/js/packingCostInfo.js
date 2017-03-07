@@ -8,9 +8,11 @@ $(document).ready(function(){
     var trans = thisURL.split('?')[1];
     var id = trans.split('=')[1];
 
-    JQuery.ajax({
+    var url = '/packingArchives/getPackingArchivesById?id='+id;
+    console.log(url);
+    jQuery.ajax({
     	type:'GET',
-    	url:'',
+    	url:url,
     	success:function(result){
     		var ResultData = eval(result.data);
 
