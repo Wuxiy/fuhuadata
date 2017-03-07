@@ -138,24 +138,18 @@ public class PackingArchivesAction {
         model.addObject("message","包材成本档案列表");
         return model;
     }
-//
-//    /**
-//     * 根据id获取详情
-//     * @param id
-//     * @return
-//     */
-//    @RequestMapping(value="/getPackingArchivesById",method = RequestMethod.POST)
-//    @SystemLogAnnotation(module = "knowledgeBase-packingArchives",methods = "GET-BY-ID")
-//    @ResponseBody
-//    public ResultPojo getPackingArchivesById(Integer id){
-//        try{
-//            Result<PackingArchivesVO> result = packingArchivesService.getPackingArchivesById(id);
-//            return result.getResultPojo();
-//        }catch(Exception e){
-//            log.error("根据id获取包材成本档案信息错误",e);
-//        }
-//        return null;
-//    }
+
+
+
+    /**
+     * 进入详情页
+     * @return
+     */
+    @RequestMapping(value="/getDetails",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-packingArchives",methods = "details")
+    public ModelAndView getDetails(){
+        return  new ModelAndView("knowledgeBase/packingCostInfo");
+    }
 
     /**
      * 根据id获取详情
@@ -164,16 +158,17 @@ public class PackingArchivesAction {
      */
     @RequestMapping(value="/getPackingArchivesById",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-packingArchives",methods = "GET-BY-ID")
-    public ModelAndView getPackingArchivesById(Integer id){
-        Result<PackingArchivesVO> result = new Result<PackingArchivesVO>();
+    @ResponseBody
+    public ResultPojo getPackingArchivesById(Integer id){
         try{
-            result= packingArchivesService.getPackingArchivesById(id);
+            Result<PackingArchivesVO> result = packingArchivesService.getPackingArchivesById(id);
+            return result.getResultPojo();
         }catch(Exception e){
             log.error("根据id获取包材成本档案信息错误",e);
         }
-        ModelAndView model = new ModelAndView("knowledgeBase/packingCostInfo","packingArchives",result.getModel());
-        return model;
+        return null;
     }
+
 
     /**
      * 根据PId获取目录包材
