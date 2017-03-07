@@ -139,6 +139,18 @@ public class PackingArchivesAction {
         return model;
     }
 
+
+
+    /**
+     * 进入详情页
+     * @return
+     */
+    @RequestMapping(value="/getDetails",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-packingArchives",methods = "details")
+    public ModelAndView getDetails(){
+        return  new ModelAndView("knowledgeBase/packingCostInfo");
+    }
+
     /**
      * 根据id获取详情
      * @param id
@@ -156,6 +168,7 @@ public class PackingArchivesAction {
         }
         return null;
     }
+
 
     /**
      * 根据PId获取目录包材
