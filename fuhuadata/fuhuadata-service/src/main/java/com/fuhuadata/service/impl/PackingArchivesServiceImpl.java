@@ -92,8 +92,8 @@ public class PackingArchivesServiceImpl implements PackingArchivesService {
             }else {
                 packingArchivesVO.setPack(packingArchives);
                 String ids = packingArchives.getAssociatedPackingId();
+                if(ids!=null) {
                 String[] idArray = ids.split(",");
-                if(idArray!=null&& idArray.length>0) {
                     for (int i = 0; i < idArray.length; i++) {
                         PackingArchives packingArchivesNode = packingArchivesManager.getPackingArchivesById(Integer.parseInt(idArray[i]));
                         packingArchivesVO.addNodes(packingArchives);
