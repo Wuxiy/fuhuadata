@@ -3,7 +3,7 @@ import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.manager.CustomerBaseInfoManager;
 import java.util.List;
 
-import com.fuhuadata.domain.query.QueryCustomerParent;
+import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.service.CustomerBaseInfoService;
 import javax.annotation.Resource;
@@ -46,7 +46,7 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 		return result;
     }	
     	
-    public Result<List<CustomerBaseInfo>> getCustomerParentsByQuery(QueryCustomerParent queryCustomerParent) {
+    public Result<List<CustomerBaseInfo>> getCustomerParentsByQuery(QueryCustomerBaseInfo queryCustomerParent) {
 		Result<List<CustomerBaseInfo>> result = new Result<List<CustomerBaseInfo>>();
 		try {
 			result.addDefaultModel("${!className}s", customerParentManager.getCustomerParentsByQuery(queryCustomerParent));
@@ -73,7 +73,7 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
     }
     
 
-    public Result<List<CustomerBaseInfo>> getCustomerParentsByPage(QueryCustomerParent queryCustomerParent) {
+    public Result<List<CustomerBaseInfo>> getCustomerParentsByPage(QueryCustomerBaseInfo queryCustomerParent) {
 		Result<List<CustomerBaseInfo>> result = new Result<List<CustomerBaseInfo>>();
 		try {		
 			result = customerParentManager.getCustomerParentsByPage(queryCustomerParent);
@@ -83,7 +83,7 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 		return result;	
     }
     	
-    public Result<Integer> count(QueryCustomerParent queryCustomerParent) {
+    public Result<Integer> count(QueryCustomerBaseInfo queryCustomerParent) {
 		Result<Integer> result = new Result<Integer>();
 		try {	
 			result.addDefaultModel(customerParentManager.count(queryCustomerParent));

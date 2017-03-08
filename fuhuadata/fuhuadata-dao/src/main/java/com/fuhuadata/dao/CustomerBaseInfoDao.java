@@ -2,7 +2,7 @@ package com.fuhuadata.dao;
 import java.util.List;
 
 import com.fuhuadata.domain.CustomerBaseInfo;
-import com.fuhuadata.domain.query.QueryCustomerParent;
+import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 
 /**
  * @author wangbo
@@ -42,7 +42,7 @@ public interface CustomerBaseInfoDao {
      * @param queryCustomerParent
      * @return
      */
-    public List<CustomerBaseInfo> getCustomerParentsByQuery(QueryCustomerParent queryCustomerParent);
+    public List<CustomerBaseInfo> getCustomerParentsByQuery(QueryCustomerBaseInfo queryCustomerParent);
     
     /**
      * 通过主键id查询CustomerParent，查询不到返回NULL值
@@ -59,13 +59,13 @@ public interface CustomerBaseInfoDao {
      * @param queryCustomerParent
      * @return
      */
-    public List<CustomerBaseInfo> getCustomerParentsByPage(QueryCustomerParent queryCustomerParent);
+    public List<CustomerBaseInfo> getCustomerParentsByPage(QueryCustomerBaseInfo queryCustomerParent);
     	
 	 /**
      * 查询总数
      * @param queryCustomerParent
      * @return
      */
-    public int count(QueryCustomerParent queryCustomerParent);
+    public int count(QueryCustomerBaseInfo queryCustomerParent);
     		
 }

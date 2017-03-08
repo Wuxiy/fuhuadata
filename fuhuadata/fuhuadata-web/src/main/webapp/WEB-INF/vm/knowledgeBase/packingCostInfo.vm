@@ -1,0 +1,215 @@
+<div class="nav-deputy shadow-out clearfix">
+    <ul id="myTab" class="nav nav-tabs pull-left">
+        <li class="active"><a href="#Baseinfo" data-toggle="tab">基础信息</a></li>
+        <li class="relate"><a href="#Packrelate" data-toggle="tab">关联包材</a></li>
+    </ul>
+    <ul class="breadcrumb pull-right">
+        <li><span class="glyphicon glyphicon-map-marker"></span></li>
+    </ul>
+</div>
+<div class="dashboard-wrapper">
+    <div class="row">
+        <div class="tab-content col-xs-10">
+            <!--Baseinfo-->
+            <div id="Baseinfo" class="tab-pane fade in active">
+                <div class="panel panel-default">
+                    <div class="panel-heading" id="btn">
+                        <a class="btn btn-xs btn-primary pull-right panel-heading-btn" >
+                            编辑
+                        </a>
+                        <h3 class="panel-title">
+                            基础信息
+                        </h3>
+                    </div>
+                    <div class="panel-body clearfix">
+                        <form class="form-horizontal">
+                            <div class="form-group ">
+                                <label class="col-xs-1 control-label">包材类型名称</label>
+                                <div class="col-xs-3">
+                                    <input class="form-control" type="text" id="packName" disabled/>
+                                </div>
+                                <label class="col-xs-1 control-label">规格</label>
+                                <div class="col-xs-3">
+                                    <input class="form-control" type="text" id="spec" disabled/>
+                                </div>
+                                <label class="col-xs-1 control-label">尺寸</label>
+                                <div class="col-xs-3">
+                                    <input class="form-control" type="text" id="size" disabled/>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-xs-1 control-label">材质</label>
+                                <div class="col-xs-3">
+                                    <input class="form-control" type="text" id="quality" disabled/>
+                                </div>
+                                <label class="col-xs-1 control-label">质量指标</label>
+                                <div class="col-xs-3">
+                                    <input class="form-control" type="text" id="qualityIndex" disabled/>
+                                </div>
+                                <label class="col-xs-1 control-label">质量指标数值</label>
+                                <div class="col-xs-3">
+                                    <input class="form-control" type="text" id="qualityTargetValue" disabled/>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-xs-1 control-label">单价</label>
+                                <div class="col-xs-3">
+                                    <input type="text" class="form-control" id="unitPrice" disabled/>
+                                </div>
+                                <label class="col-xs-1 control-label">单耗</label>
+                                <div class="col-xs-3">
+                                    <input type="text" class="form-control" id="consumption" disabled/>
+                                </div>
+                                <label class="col-xs-1 control-label">价格有效期</label>
+                                <div class="col-xs-3">
+                                    <input type="date" class="form-control" id="priceEndDate" disabled/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-1 control-label">状态</label>
+                                <div class="col-xs-3">
+                                    <select class="form-control" name="items" id="status" disabled>
+                                        <option  value="1">已启用</option>
+                                        <option  value="0">已禁用</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-1 control-label">适用剂型</label>
+                                <div class="col-xs-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" class="suitableType" value="0"> 原药
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" class="suitableType" value="1"> 水剂
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" class="suitableType" value="2"> 颗粒剂（粉剂）
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-xs-1 control-label">备注</label>
+                                <div class="col-xs-11">
+                                    <textarea class="form-control" rows="4" id="bRemarks" disabled></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-xs-1 control-label">图片</label>
+                                <div class="col-xs-11">
+                                    <input id="file-5" class="file" type="file" multiple data-preview-file-type="any" data-upload-url="#" data-preview-file-icon="">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div id="Packrelate" class="tab-pane fade">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="btn-group btn-group-xs panel-heading-btn pull-right">
+                            <a class="btn btn-xs btn-primary panel-heading-btn" href="#addField" data-toggle="modal">
+                                <span class="glyphicon glyphicon-plus"></span>
+                                新增关联
+                            </a>
+                            <a class="btn btn-primary" href="">删除关联</a>
+                        </div>
+                        <h3 class="panel-title">
+                            关联包材
+                        </h3>
+                    </div>
+                    <div class="panel-body clearfix">
+                        <table  class="display table table-condensed table-bordered table-striped" >
+                            <thead>
+                            <tr>
+                                <th class="text-center"><input type="checkbox"></th>
+                                <th class="col-xs-2 text-center text-middle">包材类型编号</th>
+                                <th class="col-xs-2 text-center text-middle" >包材类型名称</th>
+                                <th class="col-xs-1 text-center text-middle">规格</th>
+                                <th class="col-xs-1 text-center text-middle">尺寸</th>
+                                <th class="col-xs-2 text-center text-middle">材质</th>
+                                <th class="col-xs-1 text-center text-middle">单价（元）</th>
+                                <th class="col-xs-1 text-center text-middle">单耗（每千升或每吨）</th>
+                                <th class="col-xs-1 text-center text-middle">状态</th>
+                            </tr>
+                            </thead>
+                            <tbody id="packing_relate_table">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="addField" tabindex="-1" data-backdrop="static" aria-hidden="true" data-keyboard="true" >
+    <div class="modal-dialog" style="width:1200px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body ">
+                <div class="col-xs-2">
+                    <div class="panel panel-default">
+                        <div class="panel-body clearfix">
+                            <!--树形菜单-->
+                            <div id="tree" class="tree"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-10">
+                    <div class="panel panel-default">
+                        <div class="panel-body clearfix">
+                            <table class="table table-condensed table-bordered table-striped text-center">
+                                <thead>
+                                <tr>
+                                    <th class="text-center"><input type="checkbox"></th>
+                                    <th class="col-xs-2 text-center text-middle">包材类型编号</th>
+                                    <th class="col-xs-2 text-center text-middle" >包材类型名称</th>
+                                    <th class="col-xs-1 text-center text-middle">规格</th>
+                                    <th class="col-xs-1 text-center text-middle">尺寸</th>
+                                    <th class="col-xs-2 text-center text-middle">材质</th>
+                                    <th class="col-xs-1 text-center text-middle">单价（元）</th>
+                                    <th class="col-xs-1 text-center text-middle">单耗（每千升或每吨）</th>
+                                    <th class="col-xs-1 text-center text-middle">状态</th>
+                                </tr>
+                                </thead>
+                                <tbody id="modal_relate_table">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-3 col-xs-offset-3">
+                        <button type="button" class="btn btn-primary btn-block">
+                            完成
+                        </button>
+                    </div>
+                    <div class="col-xs-3">
+                        <button type="button" class="btn btn-default btn-block" data-dismiss="modal">
+                            取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/lib/js/fileinput.js" type="text/javascript" charset="utf-8"></script>
+<script src="/lib/js/fileinput_locale_zh.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="/lib/js/packingCostInfo.js"></script>
+<script type="text/javascript" language="javascript" src="/lib/js/creatTree.js"></script>
+<script type="text/javascript">
+    $('#tree').creatTree('/packingCategory/CategoryTree');
+    $('#tree').filtrateData('/packingArchives/getPackingArchivesByPId',"modal_relate_table","packingInfoModal");
+
+</script>

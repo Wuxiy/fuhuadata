@@ -140,8 +140,8 @@
             "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
             "columns":[
                  {"data":"tranId"},
-                 {"data":"productId"},
                  {"data":"title"},
+                 {"data":"productType"},
                  {"data":"userName"},
                  {"data":"uploadDate"},
                  {"data":"download"}

@@ -70,6 +70,10 @@ public class MarketTraining {
         this.userId = userId;
     }
 
+    public String getUserName(){ return userName; }
+
+    public void setUserName(String userName){ this.userName = userName; }
+
     @JsonSerialize(using = DateJsonSerializer.class)
     public Date getUploadDate() {
         return uploadDate;

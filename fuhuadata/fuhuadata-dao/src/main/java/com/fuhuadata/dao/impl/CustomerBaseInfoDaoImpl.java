@@ -3,7 +3,7 @@ import java.util.List;
 
 import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.dao.CustomerBaseInfoDao;
-import com.fuhuadata.domain.query.QueryCustomerParent;
+import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
 /**
@@ -13,14 +13,14 @@ import org.springframework.orm.ibatis.SqlMapClientTemplate;
 @SuppressWarnings("unchecked")
 public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements CustomerBaseInfoDao {
 
-    public static final String ADD = "CUSTOMERPARENT.ADD";
-    public static final String UPDATE = "CUSTOMERPARENT.UPDATE";
-    public static final String DELETE_BY_ID = "CUSTOMERPARENT.DELETE-BY-ID";
-    public static final String GET_ALL = "CUSTOMERPARENT.GET-ALL";
-    public static final String GET_BY_QUERY = "CUSTOMERPARENT.GET-BY-QUERY";
-    public static final String GET_BY_ID = "CUSTOMERPARENT.GET-BY-ID";
-    public static final String GET_PAGE = "CUSTOMERPARENT.GET-PAGE";
-    public static final String COUNT = "CUSTOMERPARENT.COUNT";
+    public static final String ADD = "CUSTOMERBASEINFO.ADD";
+    public static final String UPDATE = "CUSTOMERBASEINFO.UPDATE";
+    public static final String DELETE_BY_ID = "CUSTOMERBASEINFO.DELETE-BY-ID";
+    public static final String GET_ALL = "CUSTOMERBASEINFO.GET-ALL";
+    public static final String GET_BY_QUERY = "CUSTOMERBASEINFO.GET-BY-QUERY";
+    public static final String GET_BY_ID = "CUSTOMERBASEINFO.GET-BY-ID";
+    public static final String GET_PAGE = "CUSTOMERBASEINFO.GET-PAGE";
+    public static final String COUNT = "CUSTOMERBASEINFO.COUNT";
     
     public CustomerBaseInfo addCustomerParent(CustomerBaseInfo customerParent) {
 		customerParent.setCustomerId((String) this.insert(ADD, customerParent));
@@ -30,8 +30,8 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
     public int updateCustomerParentById(String customer_id, CustomerBaseInfo customerParent) {
     	customerParent.setCustomerId(customer_id);
 		return this.update(UPDATE, customerParent);
-    }
-    
+}
+
     public int deleteCustomerParentById(String customer_id) {
     	return this.update(DELETE_BY_ID, customer_id);
     }
@@ -40,7 +40,7 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
     	return this.queryForList(GET_ALL);
     }
     	
-    public List<CustomerBaseInfo> getCustomerParentsByQuery(QueryCustomerParent queryCustomerParent) {
+    public List<CustomerBaseInfo> getCustomerParentsByQuery(QueryCustomerBaseInfo queryCustomerParent) {
     	return this.queryForList(GET_BY_QUERY, queryCustomerParent);
     }
     	
@@ -48,11 +48,11 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
     	return (CustomerBaseInfo) this.queryForObject(GET_BY_ID, customer_id);
     }
     
-    public List<CustomerBaseInfo> getCustomerParentsByPage(QueryCustomerParent queryCustomerParent) {
+    public List<CustomerBaseInfo> getCustomerParentsByPage(QueryCustomerBaseInfo queryCustomerParent) {
     	return this.queryForList(GET_PAGE, queryCustomerParent);
     }
-    	
-    public int count(QueryCustomerParent queryCustomerParent) {
+
+    public int count(QueryCustomerBaseInfo queryCustomerParent) {
     	return ((Integer) this.queryForObject(COUNT, queryCustomerParent)).intValue();
     }
 }

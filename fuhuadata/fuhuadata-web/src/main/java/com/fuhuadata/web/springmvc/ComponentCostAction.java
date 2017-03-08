@@ -91,9 +91,8 @@ public class ComponentCostAction {
     @RequestMapping(value="/doModify",method = RequestMethod.POST)
     @ResponseBody
     @SystemLogAnnotation(module = "knowledgeBase-componentCostInfo",methods = "doUpdate")
-    public ResultPojo delete(@RequestBody ComponentCost componentCost){
+    public ResultPojo delete(int id,@RequestBody ComponentCost componentCost){
         try{
-            int id = componentCost.getComponentId();
             Result result = componentCostService.updateComponentCostById(id,componentCost);
             return result.getResultPojo();//结果码,-1需要登录，0消息错误，1正确
         }catch(Exception e){

@@ -119,7 +119,17 @@
                                 港杂费参考价
                             </h3>
                         </div>
-                        <div class="panel-body" id="portSurcharge1">
+                        <div class="panel-body">
+                            <table class="table table-bordered table-condensed text-center table-striped">
+                                <thead>
+                                <tr>
+                                    <th class="text-center col-xs-6 text-middle test1">项目</th>
+                                    <th class="text-center col-xs-2 text-middle test1">一般化工品</th>
+                                    <th class="text-center col-xs-2 text-middle test1" >危险品</th>
+                                </tr>
+                                </thead>
+                                <tbody id="portSurcharge1"></tbody>
+                            </table>
                         </div>
                     </div>
                     <!--港杂费参考表结束-->
@@ -207,7 +217,6 @@
     </div>
 </div>
 
-//模态容器
 <div class="modal fade" id="modal" tabindex="-1"  aria-hidden="true" data-backdrop="static"></div>
 
 

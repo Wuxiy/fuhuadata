@@ -10,7 +10,11 @@ import com.fuhuadata.manager.ProductWareManager;
 import com.fuhuadata.service.ProductInfoService;
 import com.fuhuadata.domain.query.QueryProductInfo;
 
+import com.fuhuadata.util.JsonUtils;
+import com.fuhuadata.vo.PhysicalProperities;
 import com.fuhuadata.vo.ProductInfoVO;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -65,20 +69,40 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 		}
 		return result;	
     }
-    	
-    public Result<ProductInfoVO> getProductInfoById(int product_id) {
+
+	/**
+	 * 产品档案详情
+	 * @param product_id
+	 * @return
+	 */
+	public Result<ProductInfoVO> getProductInfoById(int product_id) {
 		Result<ProductInfoVO> result = new Result<ProductInfoVO>();
+		ProductInfoVO productInfoVO =new ProductInfoVO();
+
 		try {		
 		    ProductInfo  productInfo = productInfoManager.getProductInfoById(product_id);
+
 		    if(productInfo == null){
 				result.setSimpleErrorMsg(0, "当前数据不存在，请重试");
-			}else{
-		    	ProductInfoVO productInfoVO =new ProductInfoVO();
-		    	productInfoVO.setProductInfo(productInfo);
-		    	productInfoVO.setWares(productWareManager.getProductWareByPId(product_id));
-				result.addDefaultModel("ProductInfo", productInfoVO);
+			}else {
+				if (productInfo.getPhysicalProperities() != null) {
+					JSONArray json = JSONArray.fromObject(productInfo.getPhysicalProperities()); // 首先把字符串转成JSONArray对象
+					if (json.size() > 0) {
+						for (int i = 0; i < json.size(); i++) {
+							JSONObject job = json.getJSONObject(i);  // 遍历 jsonarray 数组，把每一个对象转成 json 对象
+							PhysicalProperities physicalProperities =new PhysicalProperities();
+							physicalProperities.setIndex((String) job.get("index"));
+							physicalProperities.setValue((String) job.get("value"));
+							physicalProperities.setRemarks((String) job.get("remarks"));
+							productInfoVO.addIndex(physicalProperities);
+						}
+					}
+
+					productInfoVO.setProductInfo(productInfo);
+					productInfoVO.setWares(productWareManager.getProductWareByPId(product_id));
+					result.addDefaultModel("ProductInfo", productInfoVO);
+				}
 			}
-			
 		} catch(Exception e) {
 			result.setSuccess(false);
 			log.error("根据id获取产品信息错误",e);

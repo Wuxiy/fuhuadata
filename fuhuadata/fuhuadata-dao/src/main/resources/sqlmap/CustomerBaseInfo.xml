@@ -2,11 +2,11 @@
 <!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
         "http://www.ibatis.com/dtd/sql-map-2.dtd">
 
-<sqlMap namespace="CUSTOMERPARENT">
-   	<typeAlias alias="CustomerParent" type="com.fuhuadata.domain.CustomerBaseInfo"/>
-   	<typeAlias alias="QueryCustomerParent" type="com.fuhuadata.domain.query.QueryCustomerParent"/>
+<sqlMap namespace="CUSTOMERBASEINFO">
+   	<typeAlias alias="CustomerBaseInfo" type="com.fuhuadata.domain.CustomerBaseInfo"/>
+   	<typeAlias alias="QueryCustomerBaseInfo" type="com.fuhuadata.domain.query.QueryCustomerBaseInfo"/>
 	
-	<resultMap id="CUSTOMERPARENT-MAP" class="CustomerParent">
+	<resultMap id="CUSTOMERBASEINFO-MAP" class="CustomerBaseInfo">
 					<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="fullName" column="full_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="shortName" column="short_name" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -20,7 +20,7 @@
 								<result property="managementScope" column="management_scope" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="zhongxinbaoNumber" column="zhongxinbao_number" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="zhongxinbaoLevel" column="zhongxinbao_level" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="parentRemarks" column="parent_remarks" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="remark" column="remark" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="enterprisePhone" column="enterprise_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="enterpriseEmaill" column="enterprise_emaill" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="enterpriseProfile" column="enterprise_profile" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -77,8 +77,8 @@
 				<isNotNull prepend=" AND " property="zhongxinbaoLevel">
 			zhongxinbao_level = #zhongxinbaoLevel#
 		</isNotNull>
-				<isNotNull prepend=" AND " property="parentRemarks">
-			parent_remarks = #parentRemarks#
+				<isNotNull prepend=" AND " property="remark">
+					remark = #remark#
 		</isNotNull>
 				<isNotNull prepend=" AND " property="enterprisePhone">
 			enterprise_phone = #enterprisePhone#
@@ -163,8 +163,8 @@
 				<isNotNull prepend=" AND " property="zhongxinbaoLevel">
 			zhongxinbao_level = #zhongxinbaoLevel#
 		</isNotNull>
-				<isNotNull prepend=" AND " property="parentRemarks">
-			parent_remarks = #parentRemarks#
+				<isNotNull prepend=" AND " property="remark">
+					remark = #remark#
 		</isNotNull>
 				<isNotNull prepend=" AND " property="enterprisePhone">
 			enterprise_phone = #enterprisePhone#
@@ -208,17 +208,17 @@
 				</dynamic>
 	</sql>
 	
-	<insert id="ADD" parameterClass="CustomerParent">
+	<insert id="ADD" parameterClass="CustomerBaseInfo">
 		INSERT INTO 
-		customer_parent(customer_id,full_name,short_name,customer_type,area_id,area,country_id,country,registered_funds,registered_address,management_scope,zhongxinbao_number,zhongxinbao_level,parent_remarks,enterprise_phone,enterprise_emaill,enterprise_profile,development_course,sales_network,custom_field,customer_completion,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time) 
-		VALUES(#customerId#,#fullName#,#shortName#,#customerType#,#areaId#,#area#,#countryId#,#country#,#registeredFunds#,#registeredAddress#,#managementScope#,#zhongxinbaoNumber#,#zhongxinbaoLevel#,#parentRemarks#,#enterprisePhone#,#enterpriseEmaill#,#enterpriseProfile#,#developmentCourse#,#salesNetwork#,#customField#,#customerCompletion#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
+		customer_base_info(customer_id,full_name,short_name,customer_type,area_id,area,country_id,country,registered_funds,registered_address,management_scope,zhongxinbao_number,zhongxinbao_level,parent_remarks,enterprise_phone,enterprise_emaill,enterprise_profile,development_course,sales_network,custom_field,customer_completion,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time)
+		VALUES(#customerId#,#fullName#,#shortName#,#customerType#,#areaId#,#area#,#countryId#,#country#,#registeredFunds#,#registeredAddress#,#managementScope#,#zhongxinbaoNumber#,#zhongxinbaoLevel#,#remark#,#enterprisePhone#,#enterpriseEmaill#,#enterpriseProfile#,#developmentCourse#,#salesNetwork#,#customField#,#customerCompletion#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
 		<selectKey resultClass="String" keyProperty="id">
 			SELECT @@IDENTITY AS ID
 		</selectKey>
 	</insert>
 	
-	<update id="UPDATE" parameterClass="CustomerParent">
-		UPDATE customer_parent 
+	<update id="UPDATE" parameterClass="CustomerBaseInfo">
+		UPDATE customer_base_info
 		<dynamic prepend=" SET ">
 						<isNotEmpty prepend=", " property="customerId">customer_id=#customerId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="fullName">full_name=#fullName#</isNotEmpty>
@@ -233,7 +233,7 @@
 						<isNotEmpty prepend=", " property="managementScope">management_scope=#managementScope#</isNotEmpty>
 						<isNotEmpty prepend=", " property="zhongxinbaoNumber">zhongxinbao_number=#zhongxinbaoNumber#</isNotEmpty>
 						<isNotEmpty prepend=", " property="zhongxinbaoLevel">zhongxinbao_level=#zhongxinbaoLevel#</isNotEmpty>
-						<isNotEmpty prepend=", " property="parentRemarks">parent_remarks=#parentRemarks#</isNotEmpty>
+						<isNotEmpty prepend=", " property="remark">parent_remarks=#remark#</isNotEmpty>
 						<isNotEmpty prepend=", " property="enterprisePhone">enterprise_phone=#enterprisePhone#</isNotEmpty>
 						<isNotEmpty prepend=", " property="enterpriseEmaill">enterprise_emaill=#enterpriseEmaill#</isNotEmpty>
 						<isNotEmpty prepend=", " property="enterpriseProfile">enterprise_profile=#enterpriseProfile#</isNotEmpty>
@@ -253,34 +253,34 @@
 	
 	<delete id="DELETE-BY-ID" parameterClass="java.lang.String">
 		<![CDATA[
-			DELETE FROM customer_parent WHERE customer_id=#customer_id#
+			DELETE FROM customer_base_info WHERE customer_id=#customer_id#
 		]]>
 	</delete>
 	
-	<select id="GET-ALL" resultMap="CUSTOMERPARENT-MAP">
+	<select id="GET-ALL" resultMap="CUSTOMERBASEINFO-MAP">
 		<![CDATA[
-			SELECT * FROM customer_parent
+			SELECT * FROM customer_base_info
 		]]>
 	</select>
 	
-	<select id="GET-BY-QUERY" resultMap="CUSTOMERPARENT-MAP" parameterClass="QueryCustomerParent">
+	<select id="GET-BY-QUERY" resultMap="CUSTOMERBASEINFO-MAP" parameterClass="QueryCustomerBaseInfo">
 		<![CDATA[
-			SELECT * FROM customer_parent
+			SELECT * FROM customer_base_info
 		]]>
 		<isParameterPresent>   
             <include refid="QUERY-COMMON" />   
         </isParameterPresent>
 	</select>
 	
-	<select id="GET-BY-ID" resultMap="CUSTOMERPARENT-MAP" parameterClass="java.lang.String">
+	<select id="GET-BY-ID" resultMap="CUSTOMERBASEINFO-MAP" parameterClass="java.lang.String">
 		<![CDATA[
-			SELECT * FROM customer_parent	WHERE customer_id=#customer_id#
+			SELECT * FROM customer_base_info	WHERE customer_id=#customer_id#
 		]]>
 	</select>
 	
-	<select id="GET-PAGE" resultMap="CUSTOMERPARENT-MAP" parameterClass="QueryCustomerParent">
+	<select id="GET-PAGE" resultMap="CUSTOMERBASEINFO-MAP" parameterClass="QueryCustomerBaseInfo">
 		<![CDATA[
-			SELECT * FROM customer_parent 
+			SELECT * FROM customer_base_info
 		]]>
 		<isParameterPresent>   
             <include refid="PAGE-COMMON" />   
@@ -288,9 +288,9 @@
 		LIMIT #startRow#,#pageSize#
 	</select>
 	
-	<select id="COUNT" resultClass="java.lang.Integer" parameterClass="QueryCustomerParent">
+	<select id="COUNT" resultClass="java.lang.Integer" parameterClass="QueryCustomerBaseInfo">
 		<![CDATA[
-			SELECT COUNT(customer_id) FROM customer_parent
+			SELECT COUNT(customer_id) FROM customer_base_info
 		]]>
 		<isParameterPresent>   
             <include refid="PAGE-COMMON" />   

@@ -63,7 +63,7 @@ public class PackingArchivesAction {
      */
     @RequestMapping(value = "/addPackingArchives",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "add")
-    public ModelAndView addPackingArchives(){return new ModelAndView("knowledgeBase/addPackingArchives");}
+    public ModelAndView addPackingArchives(){return new ModelAndView("knowledgeBase/packingCostAdd");}
 
     @RequestMapping(value = "/doAddPackingArchives",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "doAdd")
@@ -139,12 +139,24 @@ public class PackingArchivesAction {
         return model;
     }
 
+
+
+    /**
+     * 进入详情页
+     * @return
+     */
+    @RequestMapping(value="/getDetails",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-packingArchives",methods = "details")
+    public ModelAndView getDetails(){
+        return  new ModelAndView("knowledgeBase/packingCostInfo");
+    }
+
     /**
      * 根据id获取详情
      * @param id
      * @return
      */
-    @RequestMapping(value="/getPackingArchivesById",method = RequestMethod.POST)
+    @RequestMapping(value="/getPackingArchivesById",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-packingArchives",methods = "GET-BY-ID")
     @ResponseBody
     public ResultPojo getPackingArchivesById(Integer id){
@@ -156,6 +168,7 @@ public class PackingArchivesAction {
         }
         return null;
     }
+
 
     /**
      * 根据PId获取目录包材
