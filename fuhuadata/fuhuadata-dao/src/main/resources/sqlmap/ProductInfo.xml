@@ -5,6 +5,7 @@
 <sqlMap namespace="PRODUCTINFO">
    	<typeAlias alias="ProductInfo" type="com.fuhuadata.domain.ProductInfo"/>
    	<typeAlias alias="QueryProductInfo" type="com.fuhuadata.domain.query.QueryProductInfo"/>
+	<typeAlias alias="CustomerProductPackagingArchives" type="com.fuhuadata.vo.CustomerProductPackagingArchives"/>
 	
 	<resultMap id="PRODUCTINFO-MAP" class="ProductInfo">
 								<result property="productId" column="product_id" jdbcType="INT" javaType="java.lang.Integer" />
@@ -235,6 +236,8 @@
 			SELECT * FROM product_info	WHERE product_id=#id# OR big_category_id=#id# OR mid_category_id=#id# OR small_category_id = #id#
 		]]>
 	</select>
+
+
 
 	<select id="GET-PAGE" resultMap="PRODUCTINFO-MAP" parameterClass="QueryProductInfo">
 		<![CDATA[

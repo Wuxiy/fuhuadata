@@ -2,6 +2,7 @@ package com.fuhuadata.dao;
 import java.util.List;
 import com.fuhuadata.domain.CustomerProductInfo;
 import com.fuhuadata.domain.query.QueryCustomerProductInfo;
+import com.fuhuadata.vo.CustomerProductPackagingArchives;
 
 /**
  * @author wangbo
@@ -49,6 +50,12 @@ public interface CustomerProductInfoDao {
      * @return
      */
     public CustomerProductInfo getCustomerProductInfoById(int customer_product_id);
+
+	/**
+	 * 结合客户标准产品档案表和规格型号表查询客户包装要求信息
+	 * @return
+	 */
+	public List<CustomerProductPackagingArchives> getCustomerProductPackagingArchives();
         
 	 /**
      * 查询列表，包含分页查询，查询结果为空返回空的List对象

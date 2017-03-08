@@ -5,6 +5,7 @@ import com.fuhuadata.domain.query.QueryProductInfo;
 import com.fuhuadata.dao.ProductInfoDao;
 
 
+import com.fuhuadata.vo.CustomerProductPackagingArchives;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 /**
  * @author wangbo
@@ -22,6 +23,7 @@ public class ProductInfoDaoImpl extends SqlMapClientTemplate implements ProductI
     public static final String GET_BY_PID="PRODUCTINFO.GET-BY-PID";
     public static final String GET_PAGE = "PRODUCTINFO.GET-PAGE";
     public static final String COUNT = "PRODUCTINFO.COUNT";
+
     
     public ProductInfo addProductInfo(ProductInfo productInfo) {
 		productInfo.setProductId((Integer) this.insert(ADD, productInfo));
@@ -53,7 +55,9 @@ public class ProductInfoDaoImpl extends SqlMapClientTemplate implements ProductI
     public ProductInfo getProductInfoById(int product_id) {
     	return (ProductInfo) this.queryForObject(GET_BY_ID, product_id);
     }
-    
+
+
+
     public List<ProductInfo> getProductInfosByPage(QueryProductInfo queryProductInfo) {
     	return this.queryForList(GET_PAGE, queryProductInfo);
     }

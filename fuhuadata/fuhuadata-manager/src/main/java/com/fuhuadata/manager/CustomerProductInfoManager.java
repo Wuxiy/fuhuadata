@@ -3,6 +3,8 @@ import java.util.List;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.CustomerProductInfo;
 import com.fuhuadata.domain.query.QueryCustomerProductInfo;
+import com.fuhuadata.vo.CustomerProductPackagingArchives;
+
 import java.util.Map;
 import java.io.Serializable;
 
@@ -34,6 +36,12 @@ public interface CustomerProductInfoManager {
      * @return
      */
     public boolean deleteCustomerProductInfoById(int customer_product_id);
+
+	/**
+	 * 客户产品包装要求信息
+	 * @return
+	 */
+	public List<CustomerProductPackagingArchives> getCustomerProductPackagingArchives();
 
     /**
      * 返回数据库所有记录，谨慎使用，最好不用
