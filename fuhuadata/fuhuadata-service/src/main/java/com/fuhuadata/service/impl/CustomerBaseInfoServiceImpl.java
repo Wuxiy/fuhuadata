@@ -15,78 +15,78 @@ import javax.annotation.Resource;
 public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 	
 	@Resource
-    private CustomerBaseInfoManager customerParentManager;
-    public Result<CustomerBaseInfo> addCustomerParent(CustomerBaseInfo customerParent) {
+    private CustomerBaseInfoManager customerBaseInfoManager;
+    public Result<CustomerBaseInfo> addCustomerBaseInfo(CustomerBaseInfo customerBaseInfo) {
 		Result<CustomerBaseInfo> result = new Result<CustomerBaseInfo>();
 		try {
-			result.addDefaultModel(customerParentManager.addCustomerParent(customerParent));			
+			result.addDefaultModel(customerBaseInfoManager.addCustomerBaseInfo(customerBaseInfo));
 		} catch(Exception e) {
 			result.setSuccess(false);
 		}
 		return result;
     }
-    
-    public Result updateCustomerParentById(String customer_id, CustomerBaseInfo customerParent) {
+
+    public Result updateCustomerBaseInfoById(String customer_id, CustomerBaseInfo customerBaseInfo) {
 		Result result = new Result();
 		try {
-			result.setSuccess(customerParentManager.updateCustomerParentById(customer_id, customerParent));
+			result.setSuccess(customerBaseInfoManager.updateCustomerBaseInfoById(customer_id, customerBaseInfo));
 		} catch(Exception e) {
 			result.setSuccess(false);
 		}
 		return result;
     }
-    
-    public Result deleteCustomerParentById(String customer_id) {
+
+    public Result deleteCustomerBaseInfoById(String customer_id) {
 		Result result = new Result();
 		try {
-			result.setSuccess(customerParentManager.deleteCustomerParentById(customer_id));
+			result.setSuccess(customerBaseInfoManager.deleteCustomerBaseInfoById(customer_id));
 		} catch(Exception e) {
 			result.setSuccess(false);
 		}
 		return result;
-    }	
-    	
-    public Result<List<CustomerBaseInfo>> getCustomerParentsByQuery(QueryCustomerBaseInfo queryCustomerParent) {
+    }
+
+    public Result<List<CustomerBaseInfo>> getCustomerBaseInfoByQuery(QueryCustomerBaseInfo queryCustomerBaseInfo) {
 		Result<List<CustomerBaseInfo>> result = new Result<List<CustomerBaseInfo>>();
 		try {
-			result.addDefaultModel("${!className}s", customerParentManager.getCustomerParentsByQuery(queryCustomerParent));
+			result.addDefaultModel("${!className}s", customerBaseInfoManager.getCustomerBaseInfoByQuery(queryCustomerBaseInfo));
 		} catch(Exception e) {
 			result.setSuccess(false);
 		}
-		return result;	
+		return result;
     }
-    	
-    public Result<CustomerBaseInfo> getCustomerParentById(String customer_id) {
+
+    public Result<CustomerBaseInfo> getCustomerBaseInfoById(String customer_id) {
 		Result<CustomerBaseInfo> result = new Result<CustomerBaseInfo>();
-		try {		
-		    CustomerBaseInfo customerParent = customerParentManager.getCustomerParentById(customer_id);
-		    if(customerParent == null){
+		try {
+		    CustomerBaseInfo customerBaseInfo = customerBaseInfoManager.getCustomerBaseInfoById(customer_id);
+		    if(customerBaseInfo == null){
 				result.setSimpleErrorMsg(0, "当前数据不存在，请重试");
 			}else{
-				result.addDefaultModel("CustomerBaseInfo", customerParent);
+				result.addDefaultModel("CustomerBaseInfo", customerBaseInfo);
 			}
-			
-		} catch(Exception e) {
-			result.setSuccess(false);
-		}
-		return result;	
-    }
-    
 
-    public Result<List<CustomerBaseInfo>> getCustomerParentsByPage(QueryCustomerBaseInfo queryCustomerParent) {
-		Result<List<CustomerBaseInfo>> result = new Result<List<CustomerBaseInfo>>();
-		try {		
-			result = customerParentManager.getCustomerParentsByPage(queryCustomerParent);
 		} catch(Exception e) {
 			result.setSuccess(false);
 		}
-		return result;	
+		return result;
     }
-    	
-    public Result<Integer> count(QueryCustomerBaseInfo queryCustomerParent) {
+
+
+    public Result<List<CustomerBaseInfo>> getCustomerBaseInfoByPage(QueryCustomerBaseInfo queryCustomerBaseInfo) {
+		Result<List<CustomerBaseInfo>> result = new Result<List<CustomerBaseInfo>>();
+		try {
+			result = customerBaseInfoManager.getCustomerBaseInfoByPage(queryCustomerBaseInfo);
+		} catch(Exception e) {
+			result.setSuccess(false);
+		}
+		return result;
+    }
+
+    public Result<Integer> count(QueryCustomerBaseInfo queryCustomerBaseInfo) {
 		Result<Integer> result = new Result<Integer>();
-		try {	
-			result.addDefaultModel(customerParentManager.count(queryCustomerParent));
+		try {
+			result.addDefaultModel(customerBaseInfoManager.count(queryCustomerBaseInfo));
 		} catch(Exception e) {
 			result.setSuccess(false);
 		}

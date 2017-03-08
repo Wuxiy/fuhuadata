@@ -19,7 +19,7 @@ public class SaleCustomerManagerImpl implements SaleCustomerManager {
 	@Resource
     private SaleCustomerDao saleCustomerDao;
 	@Resource
-	private CustomerBaseInfoDao customerParentDao;
+	private CustomerBaseInfoDao customerBaseInfoDao;
     
 
     public SaleCustomer addSaleCustomer(SaleCustomer saleCustomer) {
@@ -50,7 +50,7 @@ public class SaleCustomerManagerImpl implements SaleCustomerManager {
 		if (totalItem > 0) {
 			List<SaleCustomer> saleCustomerList = saleCustomerDao.getSaleCustomersByPage(querySaleCustomer);
 			for(int i=0;i<saleCustomerList.size();i++){
-				saleCustomerList.get(i).setCustomerParent(customerParentDao.getCustomerParentById(saleCustomerList.get(i).getCustomerId()));
+				saleCustomerList.get(i).setCustomerBaseInfo(customerBaseInfoDao.getCustomerBaseInfoById(saleCustomerList.get(i).getCustomerId()));
 			}
 			result.addDefaultModel("SaleCustomers", saleCustomerList);
 		} else {

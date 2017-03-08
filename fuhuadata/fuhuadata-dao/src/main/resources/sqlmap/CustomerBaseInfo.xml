@@ -42,7 +42,7 @@
 			customer_id = #customerId#
 		</isNotNull>
 				<isNotNull prepend=" AND " property="fullName">
-			full_name = #fullName#
+			full_name like  '%$full_name$%'
 		</isNotNull>
 				<isNotNull prepend=" AND " property="shortName">
 			short_name = #shortName#

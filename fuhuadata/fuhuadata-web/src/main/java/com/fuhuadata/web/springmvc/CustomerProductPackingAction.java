@@ -1,23 +1,11 @@
 package com.fuhuadata.web.springmvc;
 
 
-import com.fuhuadata.domain.ExhibitionInfo;
-import com.fuhuadata.domain.query.ExhibitionInfoQuery;
-import com.fuhuadata.domain.query.Result;
-import com.fuhuadata.domain.query.ResultPojo;
-import com.fuhuadata.service.ExhibitionInfoService;
-import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.annotation.Resource;
-import java.util.Date;
-import java.text.ParseException;
-import java.util.List;
 
 /**
  * 客户产品包装要求action
