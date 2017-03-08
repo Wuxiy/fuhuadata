@@ -19,7 +19,7 @@
                     <div class="form-horizontal">
                         <div class="form-group">
                             <div class="col-xs-1 pull-right">
-                                <button type="button" class="btn btn-block btn-primary btn-xs">
+                                <button id ="button" type="button" class="btn btn-block btn-primary btn-xs">
                                 搜索
                             </button>
                             </div>
@@ -28,10 +28,10 @@
                             </div>
                             <label class="col-xs-1 control-label pull-right">产品名称</label>
                             <div class="col-xs-1 pull-right">
-                                <select class="form-control">
+                                <select id="factory_name" class="form-control">
                                     <option value="">全部</option>
-                                    <option value="">杭州海辰</option>
-                                    <option value="">杭州乐川</option>
+                                    <option value="1">杭州海辰</option>
+                                    <option value="2">杭州乐川</option>
                                 </select>
                             </div>
                             <label class="control-label col-xs-1 pull-right">加工厂</label>
@@ -69,7 +69,9 @@
                             <th class="text-center">型号</th>
                             <th class="text-center">主单位</th>
                             <th class="text-center">加工厂</th>
+                            <th class="text-center">加工厂编号</th>
                         </tr>
+                        </th>
                         </thead>
 
                     </table>
@@ -84,7 +86,7 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#customer_customer_packaging_table').dataTable( {
+        var table =$('#customer_customer_packaging_table').DataTable( {
             "ajax":'/customerProductPacking/queryCustomerProductPackingList',
             "pagingType":"full_numbers",
             "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
@@ -99,7 +101,8 @@
                 {"data":"specification"},
                 {"data":"model"},
                 {"data":"mainUnit"},
-                {"data":"factoryName"}
+                {"data":"factoryName"},
+                {"data":"factoryId"}
             ],
             "columnDefs":[
                 {
@@ -107,6 +110,10 @@
                     "render": function(data,type,row,meta){
                         return '<a href="' + data + '" target="_blank">' + row.customerProductName + '</a>';
                     }
+                },
+                {
+                    "targets": 11,
+                    "visible": false
                 }
             ],
             "language": {
@@ -114,7 +121,24 @@
                 "searchPlaceholder": '关键字'
             }
         } );
-        $(document).on("click",##)
+        $(document).on("click","#button",function(){
+
+           var args1 = $("#product_name").val();
+           var args2 = $("#customer_name").val();
+           console.log(args1);
+           var args3 = $("#factory_name").val();
+           console.log(args3);
+//           table.search(args1+" "+args2+" "+args3).draw(false);//保留分页，排序状态
+            table
+                    .column(1)
+                    .search(args2)
+                    .column(5)
+                    .search(args1)
+                    .column(11)
+                    .search(args3)
+                    .draw(false);
+
+        });
     } );
 
 
