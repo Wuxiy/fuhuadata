@@ -672,6 +672,10 @@
         </isParameterPresent>
 	</select>
 	
+	<select id="GET-PACKING" >
+
+	</select>
+	
 	<select id="GET-BY-ID" resultMap="CUSTOMERPRODUCTINFO-MAP" parameterClass="java.lang.Integer">
 		<![CDATA[
 			SELECT * FROM customer_product_info	WHERE customer_product_id=#customer_product_id#

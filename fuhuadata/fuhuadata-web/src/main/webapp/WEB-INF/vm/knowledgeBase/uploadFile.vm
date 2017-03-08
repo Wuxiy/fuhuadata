@@ -1,0 +1,14 @@
+<html>
+
+<body>
+<h1>Spring MVC multi files upload example</h1>
+
+<form method="POST" action="uploadFile" enctype="multipart/form-data">
+   <br> <input type="file" name="files" /><br/>
+   <br> <input type="file" name="files" /><br/>
+    <br><input type="file" name="files" /><br/>
+    <input type="submit" value="提交" />
+</form>
+
+</body>
+</html>
