@@ -2,8 +2,6 @@
  * Created by young on 2017/3/7.
  */
 
-$(document).ready(function(){
-
     $('#finish').hide();
     //分割url，获取上个页面传过来的id
     var thisURL = document.URL;
@@ -101,7 +99,6 @@ $(document).ready(function(){
         })
     })
 
-})
 
 
 //关联包材全选
@@ -152,7 +149,7 @@ $('#delete').on('click',function(){
     if(ids.length > 0){
         var msg = "确定要删除这些关联吗？";
         if(confirm(msg)){
-            var url = '';
+            var url = '' + id;
             var data = ids;
 
             jQuery.ajax({
@@ -183,7 +180,7 @@ $('#finish_relate').on('click',function(){
     if(ids.length > 0){
         var msg = "确认要为主材添加这些关联吗？";
         if(msg){
-            var url = '';
+            var url = '' + id;
             var data = ids;
 
             jQuery.ajax({
