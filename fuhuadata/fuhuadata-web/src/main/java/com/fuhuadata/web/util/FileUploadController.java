@@ -1,5 +1,7 @@
 package com.fuhuadata.web.util;
 
+import com.fuhuadata.domain.query.Result;
+import com.fuhuadata.domain.query.ResultPojo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
@@ -40,10 +42,8 @@ public class FileUploadController {
      * @return
      */
     @RequestMapping("/uploadFile")
-    public ModelAndView uploadFile(@RequestParam("files") MultipartFile[] files, HttpServletRequest request) {
-        System.out.println(files.length);
-//        System.out.println(files[1].getName());
-        System.out.println(files[0].getName());
+    public ResultPojo uploadFile(@RequestParam("files") MultipartFile[] files, HttpServletRequest request) {
+        Result result = new Result();
         String path=null;
         File tempFile=null;
         try {
@@ -73,9 +73,9 @@ public class FileUploadController {
         }catch(Exception e){
             log.error("文件上传错误",e);
         }
-        ModelAndView model = new ModelAndView("knowledgeBase/uploadFile");
-        model.addObject("message","保存成功");
-        return model;
+        ResultPojo  resultPojo= result.getResultPojo();
+        resultPojo.setData(tempFile);
+        return resultPojo;
     }
 
     // 多文件上传

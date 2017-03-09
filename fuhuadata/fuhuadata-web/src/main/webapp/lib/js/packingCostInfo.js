@@ -71,7 +71,7 @@ $(document).ready(function(){
 
 //编辑完成保存
     $('#finish').on('click',function(){
-        var url = '';
+        var url = 'packingArchives/doModify';
         var data = {
             "packName": jQuery('#packName').val(),
             "spec": jQuery('#spec').val(),
@@ -152,7 +152,7 @@ $('#delete').on('click',function(){
     if(ids.length > 0){
         var msg = "确定要删除这些关联吗？";
         if(confirm(msg)){
-            var url = '';
+            var url = 'deleteRelation';
             var data = ids;
 
             jQuery.ajax({
@@ -183,9 +183,9 @@ $('#finish_relate').on('click',function(){
     if(ids.length > 0){
         var msg = "确认要为主材添加这些关联吗？";
         if(msg){
-            var url = '';
+            var url = 'addRelation';
             var data = ids;
-
+            console.log(ids);
             jQuery.ajax({
                 url:url,
                 type:'POST',
