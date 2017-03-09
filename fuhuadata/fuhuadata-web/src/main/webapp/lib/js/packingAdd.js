@@ -11,13 +11,19 @@
     var names = document.getElementById('packName');
     names.value = name;
 
+
+    var checkboxarr = '';
     var imgpath;
+    var ids = new Array();
 
-if(bid != 1){
-    $('.relate').hide();
-}
+    //根据包材类型获取关联包材的展示
+    if(bid != 1){
+        $('.relate').hide();
+    }
 
 
+
+//图片上传
 
 $("#file").fileinput({
     language: 'zh', //设置语言
@@ -45,6 +51,17 @@ $("#file").fileinput({
         imgpath = data.response.data;
     });
 
+$("input[name='check']").each(function(index,element){
+    checkboxarr += $(this).val() + ",";
+})
+
+$('#add_relate').on('click',function(){
+    $("input[name='modal_cellcheckbox']:checked").each(function(){
+        ids.push($(this).val());
+    });
+    $('#addField').modal('hide');
+})
+
 $('.packingAdd').on('click',function(){
     var url = "/packingArchives/addPackingArchives"
     var data = {
@@ -53,13 +70,14 @@ $('.packingAdd').on('click',function(){
         "size": jQuery('#size').val(),
         "quality": jQuery('#quality').val(),
         "qualityIndex": jQuery('#qualityIndex').val(),
-        "qualityTargetValue": jQuery('#exhibitionName').val(),
+        "qualityTargetValue": jQuery('#qualityTargetValue').val(),
         "unitPrice": jQuery('#unitPrice').val(),
         "consumption": jQuery('#consumption').val(),
         "priceEndDate": jQuery('#priceEndDate').val(),
         "status": jQuery('#status').val(),
-        "suitableType": "1",
+        "suitableType": checkboxarr,
         "imgpath":imgpath,
+        "ids":ids,
         "bremarks": jQuery('#bremarks').val(),
     }
     console.log(data);
