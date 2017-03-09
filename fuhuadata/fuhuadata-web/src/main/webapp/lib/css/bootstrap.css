@@ -2077,6 +2077,20 @@ pre code {
   min-height: 800px;
   padding: 20px 15px;
 }
+.view-HD-lg {
+  max-width: 1360px;
+}
+.view-HD-md {
+  max-width: 1000px;
+}
+.view-HD-sm {
+  max-width: 800px;
+}
+.tree-container {
+  height: 500px;
+  overflow-y: scroll;
+  overflow-x: auto;
+}
 .not-null {
   color: red;
 }
