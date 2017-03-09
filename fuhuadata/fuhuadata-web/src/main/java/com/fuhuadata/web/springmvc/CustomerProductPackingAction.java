@@ -1,11 +1,14 @@
 package com.fuhuadata.web.springmvc;
 
 
+import com.fuhuadata.domain.CustomerProductInfo;
 import com.fuhuadata.domain.ExhibitionInfo;
 import com.fuhuadata.domain.query.ExhibitionInfoQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
+import com.fuhuadata.service.CustomerProductInfoService;
 import com.fuhuadata.service.ExhibitionInfoService;
+import com.fuhuadata.vo.CustomerProductPackagingArchives;
 import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
@@ -28,13 +31,18 @@ import java.util.List;
 @RequestMapping("/customerProductPacking/*")
 public class CustomerProductPackingAction {
 
+    private final static Log log=LogFactory.getLog(CustomerProductPackingAction.class);
+
+    @Resource
+    private CustomerProductInfoService customerProductInfoService;
+
     /**
      * 客户产品包装要求列表
      * @return
      */
     @SuppressWarnings("unused")
     @RequestMapping(value="/customerProductPackingList",method=RequestMethod.GET)
-    @SystemLogAnnotation(module = "知识库-客户产品包装要求",methods = "包装要求列表")
+    @SystemLogAnnotation(module = "knowledgeBase-customerProductPackaging  ",methods = "into")
     public ModelAndView customerProductPackingList(){return new ModelAndView("knowledgeBase/customerProductPackingList");}
 
     /**
@@ -44,4 +52,16 @@ public class CustomerProductPackingAction {
     @RequestMapping(value="/infocustomerProductPacking",method=RequestMethod.GET)
     public ModelAndView infocustomerProductPacking(){return new ModelAndView("knowledgeBase/customerProductPackingInfo");}
 
+    @RequestMapping(value = "/queryCustomerProductPackingList",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-customerProductPackaging",methods = "list")
+    @ResponseBody
+    public ResultPojo getCustomerProductPackagingArchives() {
+        try {
+            Result<List<CustomerProductPackagingArchives>> result = customerProductInfoService.getCustomerProductPackagingArchives();
+            return result.getResultPojo();
+        } catch (Exception e) {
+            log.error("获取客户产品包装要求错误",e);
+        }
+        return null;
+    }
 }

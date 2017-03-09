@@ -1,11 +1,17 @@
 package com.fuhuadata.service.impl;
 import java.util.List;
+import java.util.Locale;
+
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.CustomerProductInfo;
 import com.fuhuadata.service.CustomerProductInfoService;
 import com.fuhuadata.domain.query.QueryCustomerProductInfo;
 import com.fuhuadata.manager.CustomerProductInfoManager;
 import javax.annotation.Resource;
+
+import com.fuhuadata.vo.CustomerProductPackagingArchives;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,6 +21,7 @@ import org.springframework.stereotype.Component;
 public class CustomerProductInfoServiceImpl implements CustomerProductInfoService {
 
     private CustomerProductInfoManager customerProductInfoManager;
+    private static final Log log = LogFactory.getLog(CustomerProductInfoServiceImpl.class);
     public Result<CustomerProductInfo> addCustomerProductInfo(CustomerProductInfo customerProductInfo) {
 		Result<CustomerProductInfo> result = new Result<CustomerProductInfo>();
 		try {
@@ -43,9 +50,22 @@ public class CustomerProductInfoServiceImpl implements CustomerProductInfoServic
 			result.setSuccess(false);
 		}
 		return result;
-    }	
-    	
-    public Result<List<CustomerProductInfo>> getCustomerProductInfosByQuery(QueryCustomerProductInfo queryCustomerProductInfo) {
+    }
+
+	@Override
+	public Result<List<CustomerProductPackagingArchives>> getCustomerProductPackagingArchives() {
+    	Result<List<CustomerProductPackagingArchives>> result = new Result<List<CustomerProductPackagingArchives>>();
+    	try{
+    		result.addDefaultModel("CustomerProductPackagingArchives",customerProductInfoManager.getCustomerProductPackagingArchives());
+
+		}catch(Exception e){
+    		result.setSuccess(false);
+    		log.error("获取客户产品包装要求错误",e);
+		}
+		return result;
+	}
+
+	public Result<List<CustomerProductInfo>> getCustomerProductInfosByQuery(QueryCustomerProductInfo queryCustomerProductInfo) {
 		Result<List<CustomerProductInfo>> result = new Result<List<CustomerProductInfo>>();
 		try {
 			result.addDefaultModel("${!className}s", customerProductInfoManager.getCustomerProductInfosByQuery(queryCustomerProductInfo));
@@ -91,5 +111,12 @@ public class CustomerProductInfoServiceImpl implements CustomerProductInfoServic
 		}
 		return result;	
     }
-	
+
+	public void setCustomerProductInfoManager(CustomerProductInfoManager customerProductInfoManager) {
+		this.customerProductInfoManager = customerProductInfoManager;
+	}
+
+	public CustomerProductInfoManager getCustomerProductInfoManager(){
+    	return this.customerProductInfoManager;
+	}
 }

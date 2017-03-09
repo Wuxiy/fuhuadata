@@ -66,26 +66,28 @@
             },
             //渲染标准产品档案
             productArchivesList : function(getData){
-                $.each(getData,function(n,total){
-                    console.log(total);
-                    $.each(total,function(key,item){
-                        var $formControl=$('[name="'+ key +'"]');
-                        if($formControl.attr('type')=='radio'||$formControl.attr('type')=='checkbox'){
-                            var arr=[item];
-                            $formControl.val(arr);
-                        }else{
-                            $formControl.val(item);
-                        }
-                        // if($formControl[0].tagName=='INPUT'){
-                        //
-                        // }else if($formControl[0].tagName=='TBODY'){
-                        //     $.each(item,function(name,value){
-                        //         var $tr = $('<tr></tr>');
-                        //         $tr.append('<td name="'+name+'"></td>')
-                        //     })
-                        // }
-                    })
-                })
+                $.each(getData.productInfo,function(key,item){
+                    console.log(item);
+                    var formControl=$('[name="'+ key +'"]');
+                    if(formControl.attr('type')=='radio'||formControl.attr('type')=='checkbox'){
+                        var arr=[item];
+                        formControl.val(arr);
+                    }else {
+                        formControl.val(item);
+                    }
+                });
+                var wTbody = $('[name="wares"]');
+                wTbody.html('');
+                $.each(getData.wares,function(key,item){
+                    var tr = $("<tr></tr>");
+                    tr.append('<td>'+item.specification+'</td><td>'+item.model+'</td>').appendTo(wTbody);
+                });
+                var iTbody = $('[name="physicalProperities"]');
+                iTbody.html('');
+                $.each(getData.index,function(key,item){
+                    var tr = $("<tr></tr>");
+                    tr.append('<td><input class="form-control" type="text" value="'+item.index+'"></td><td><input class="form-control" type="text" value="'+item.value+'"></td><td><input class="form-control" type="text" value="'+item.remarks+'"/></td>').appendTo(iTbody);
+                });
              }
         }
     };

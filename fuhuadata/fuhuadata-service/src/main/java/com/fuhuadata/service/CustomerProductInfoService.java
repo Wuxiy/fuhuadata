@@ -3,6 +3,7 @@ import java.util.List;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.CustomerProductInfo;
 import com.fuhuadata.domain.query.QueryCustomerProductInfo;
+import com.fuhuadata.vo.CustomerProductPackagingArchives;
 
 /**
  * @author wangbo
@@ -35,6 +36,12 @@ public interface CustomerProductInfoService {
      * @return
      */
     public Result deleteCustomerProductInfoById(int customer_product_id);
+
+	/**
+	 * 客户产品包装要求
+	 * @return
+	 */
+	public Result<List<CustomerProductPackagingArchives>> getCustomerProductPackagingArchives();
     
     /**
      * 查询列表，此接口不包含分页查询
