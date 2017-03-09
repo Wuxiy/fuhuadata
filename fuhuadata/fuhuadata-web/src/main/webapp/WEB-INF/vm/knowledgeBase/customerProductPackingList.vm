@@ -11,37 +11,6 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         客户产品包装要求
-<<<<<<< HEAD
-                        <!--搜索框开始-->
-                        <div class="form-horizontal">
-                            <div class="form-group">
-                                <div class="col-xs-1 pull-right">
-                                    <button type="button" class="btn btn-block btn-primary btn-xs">
-                                        搜索
-                                    </button>
-                                </div>
-                                <div class="col-xs-2 pull-right">
-                                    <input class="form-control" type="search" value="" placeholder="请输入产品名称"/>
-                                </div>
-                                <label class="col-xs-1 control-label pull-right">产品名称</label>
-                                <div class="col-xs-1 pull-right">
-                                    <select class="form-control">
-                                        <option value="">全部</option>
-                                        <option value="">杭州海辰</option>
-                                        <option value="">杭州乐川</option>
-                                    </select>
-                                </div>
-                                <label class="control-label col-xs-1 pull-right">加工厂</label>
-                                <div class="col-xs-2 pull-right">
-                                    <div class="input-group">
-                                        <input class="form-control" type="search" value="" placeholder="请输入品类"/>
-                                        <span class="input-group-btn">
-                                                <button data-toggle="modal" data-target="#search" class="btn btn-xs btn-default" type="button">
-                                                    <span class="glyphicon glyphicon-search"></span>
-                                                </button>
-                                            </span>
-                                    </div>
-=======
                     </h3>
                 </div>
                 <div class="panel-body clearfix">
@@ -55,9 +24,9 @@
                             </button>
                             </div>
                             <div class="col-xs-2 pull-right">
-                                <input id="product_name" class="form-control" type="search" value="" placeholder="请输入产品名称"/>
+                                <input id="customer_product_name" class="form-control" type="search" value="" placeholder="请输入产品名称"/>
                             </div>
-                            <label class="col-xs-1 control-label pull-right">产品名称</label>
+                            <label class="col-xs-1 control-label pull-right">客户商品名</label>
                             <div class="col-xs-1 pull-right">
                                 <select id="factory_name" class="form-control">
                                     <option value="">全部</option>
@@ -68,61 +37,22 @@
                             <label class="control-label col-xs-1 pull-right">加工厂</label>
                             <div class="col-xs-2 pull-right">
                                 <div class="input-group">
-                                    <input id="category" class="form-control" type="search" value="" placeholder="请输入品类"/>
+                                    <input id="product_name" class="form-control" type="search" value="" placeholder="请输入产品名称"/>
                                     <span class="input-group-btn">
                                         <button data-toggle="modal" class="btn btn-xs btn-default" data-target="#tSearch" type="button">
                                             <span class="glyphicon glyphicon-search"></span>
                                         </button>
                                     </span>
->>>>>>> dfcd8437d233130064b3dd4cc16a763331d9205c
                                 </div>
-                                <label class="col-xs-1 control-label pull-right">品类</label>
-                                <div class="col-xs-2 pull-right">
-                                    <input class="form-control" type="search" placeholder="请输入客户名称"/>
-                                </div>
-                                <label class="control-label col-xs-1 pull-right">客户名称</label>
                             </div>
-<<<<<<< HEAD
-                        </div>
-                        <!--搜索框结束-->
-                        <!--表格开始-->
-                        <table id="customer_encyclopedia_table" class="table table-condensed table-bordered table-striped text-center" cellpadding="0">
-                            <thead>
-                            <tr>
-                                <th class="text-center">编号</th>
-                                <th class="text-center">客户名称</th>
-                                <th class="text-center">产品序列号</th>
-                                <th class="text-center">产品类型</th>
-                                <th class="text-center">品名</th>
-                                <th class="text-center">加工厂名称</th>
-                                <th class="text-center">包装要求</th>
-                                <th class="text-center">包装材质</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>NUFARM</td>
-                                <td>xxxx</td>
-                                <td>草甘膦原药</td>
-                                <td><a href="infocustomerProductPacking" >95%草甘膦原药</a></td>
-                                <td>杭州海辰</td>
-                                <td><a href="packs.html" target="_blank">25KG</a></td>
-                                <td>编织袋</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <!--表格结束-->
-
-=======
-                            <label class="col-xs-1 control-label pull-right">品类</label>
+                            <label class="col-xs-1 control-label pull-right">产品名称</label>
                             <div class="col-xs-2 pull-right">
                                 <input id="customer_name" class="form-control" type="search" placeholder="请输入客户名称"/>
                             </div>
                             <label class="control-label col-xs-1 pull-right">客户名称</label>
                         </div>
                     </div>
-                    </table>
+
                     <!--搜索框结束-->
                     <!--表格开始-->
                     <table id="customer_customer_packaging_table" class="table table-condensed table-bordered table-striped text-center" cellpadding="0">
@@ -146,9 +76,6 @@
 
                     </table>
                     <!--表格结束-->
->>>>>>> dfcd8437d233130064b3dd4cc16a763331d9205c
-
-                    </h3>
                 </div>
                 <div class="panel-body clearfix"></div>
             </div>
@@ -184,7 +111,7 @@
         e.preventDefault();
         console.log(e.target);
         var tarEltext = $(e.target).text();
-        $('#category').val(tarEltext);
+        $('#product_name').val(tarEltext);
     });
     $(document).ready(function() {
         var table =$('#customer_customer_packaging_table').DataTable( {
@@ -228,12 +155,12 @@
            var args2 = $("#customer_name").val();
            console.log(args1);
            var args3 = $("#factory_name").val();
-           var args4 = $("#category").val();
+           var args4 = $("#customer_product_name").val();
            console.log(args3);
             table
                     .column(1)
                     .search(args2)
-                    .column(4)
+                    .column(2)
                     .search(args4)
                     .column(5)
                     .search(args1)
