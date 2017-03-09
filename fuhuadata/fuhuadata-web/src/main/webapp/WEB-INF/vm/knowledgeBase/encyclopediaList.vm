@@ -24,10 +24,10 @@
             <div class="form-group ">
                 <label class="col-xs-1 control-label">企业类型</label>
                 <div class="col-xs-1">
-                    <select class="form-control">
+                    <select class="form-control" onchange="selectType(this)">
                         <option value="">全部</option>
-                        <option value="">客户</option>
-                        <option value="">竟对</option>
+                        <option value="0">客户</option>
+                        <option value="1">竟对</option>
                     </select>
                 </div>
                 <div class="col-xs-2 pull-right">

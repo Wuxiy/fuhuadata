@@ -1,16 +1,25 @@
 package com.fuhuadata.web.util;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.net.BindException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * File Upload
@@ -19,6 +28,7 @@ import java.util.Date;
 @Controller
 @RequestMapping(value = "/upload/*")
 public class FileUploadController {
+    private static final Log log = LogFactory.getLog(FileUploadController.class);
 
     @RequestMapping(value = "into",method = RequestMethod.GET)
     public ModelAndView upload(){
@@ -29,37 +39,96 @@ public class FileUploadController {
      * @param files
      * @return
      */
-    @RequestMapping(value="/uploadFile", method= RequestMethod.POST)
-    public ModelAndView uploadFile(@RequestParam("files") MultipartFile[] files, HttpServletRequest request)
-        throws IllegalStateException, IOException {
+    @RequestMapping("/uploadFile")
+    public ModelAndView uploadFile(@RequestParam("files") MultipartFile[] files, HttpServletRequest request) {
 
         System.out.println(files.length);
-        for (MultipartFile file : files) {
+//        System.out.println(files[1].getName());
+        System.out.println(files[0].getName());
+        String path=null;
+        File tempFile=null;
+        try {
+            for (MultipartFile file : files) {
 
-            if (file.isEmpty()) {
-                continue; //next pls
-            }
-            try {
-                String path = request.getSession().getServletContext().getRealPath("images/");//保存在服务器
-                System.out.println(path);
-                String fileName = file.getOriginalFilename();
-                File tempFile = new File(path, new Date().getTime() + String.valueOf(fileName));
-                System.out.println(tempFile);
-                if (!tempFile.getParentFile().exists()) {
-                    tempFile.getParentFile().mkdir();
+                if (file.isEmpty()) {
+                    continue; //next pls
                 }
-                if (!tempFile.exists()) {
-                    tempFile.createNewFile();
-                }
-                file.transferTo(tempFile);
+                try {
+                    path = request.getSession().getServletContext().getRealPath("images/");//保存在服务器
+                    System.out.println(path);
+                    String fileName = file.getOriginalFilename();
+                    tempFile = new File(path, new Date().getTime() + String.valueOf(fileName));
+                    System.out.println(tempFile);
+                    if (!tempFile.getParentFile().exists()) {
+                        tempFile.getParentFile().mkdir();
+                    }
+                    if (!tempFile.exists()) {
+                        tempFile.createNewFile();
+                    }
+                    file.transferTo(tempFile);
 
-            } catch (IOException e) {
-                e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
+        }catch(Exception e){
+            log.error("文件上传错误",e);
         }
         ModelAndView model = new ModelAndView("knowledgeBase/uploadFile");
         model.addObject("message","保存成功");
         return model;
+    }
+
+    // 多文件上传
+    @RequestMapping(value = "/uploadFile2", method = RequestMethod.POST)
+    public ModelAndView fileUpload(HttpServletRequest request,
+                                   HttpServletResponse response, BindException errors)
+            throws Exception {
+
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+        Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+
+        System.out.println(fileMap.size());
+
+        String ctxPath = request.getSession().getServletContext().getRealPath(
+                "/")
+                + "\\" + "images\\";
+
+        File file = new File(ctxPath);
+        if (!file.exists()) {
+            file.mkdir();
+        }
+        String fileName = null;
+        for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {
+            // 上传文件名
+            // System.out.println("key: " + entity.getKey());
+            MultipartFile mf = entity.getValue();
+            fileName = mf.getOriginalFilename();
+            File uploadFile = new File(ctxPath + fileName);
+            FileCopyUtils.copy(mf.getBytes(), uploadFile);
+        }
+        request.setAttribute("files", loadFiles(request));
+        return new ModelAndView("/knowledgeBase/uploadFile");
+    }
+
+    // @ModelAttribute("files")//此属性用于初始类时调用,但上传文件后不能时时反应上传文件个数,不适合动态数据
+    public List<String> loadFiles(HttpServletRequest request) {
+        List<String> files = new ArrayList<String>();
+        String ctxPath = request.getSession().getServletContext().getRealPath(
+                "/")
+                + "\\" + "images\\";
+        File file = new File(ctxPath);
+        if (file.exists()) {
+            File[] fs = file.listFiles();
+            String fname = null;
+            for (File f : fs) {
+                fname = f.getName();
+                if (f.isFile()) {
+                    files.add(fname);
+                }
+            }
+        }
+        return files;
     }
 
 }
