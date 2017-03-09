@@ -14,9 +14,12 @@
             <div id="Baseinfo" class="tab-pane fade in active">
                 <div class="panel panel-default">
                     <div class="panel-heading" id="btn">
-                        <button type="button" class="btn btn-primary btn-block packingAdd">
+                        <a class="btn btn-xs btn-primary pull-right panel-heading-btn" id="edit">
+                            编辑
+                        </a>
+                        <a class="btn btn-xs btn-primary pull-right panel-heading-btn" id="finish">
                             完成
-                        </button>
+                        </a>
                         <h3 class="panel-title">
                             基础信息
                         </h3>
@@ -26,51 +29,51 @@
                             <div class="form-group ">
                                 <label class="col-xs-1 control-label">包材类型名称</label>
                                 <div class="col-xs-3">
-                                    <input class="form-control" type="text" id="packName" disabled/>
+                                    <input class="form-control cell_edit" type="text" id="packName" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label">规格</label>
-                                <div class="col-xs-3">
-                                    <input class="form-control" type="text" id="spec"/>
+                                <div class="col-xs-3 ">
+                                    <input class="form-control cell_edit" type="text" id="spec" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label">尺寸</label>
                                 <div class="col-xs-3">
-                                    <input class="form-control" type="text" id="size"/>
+                                    <input class="form-control cell_edit" type="text" id="size" disabled/>
                                 </div>
                             </div>
                             <div class="form-group ">
                                 <label class="col-xs-1 control-label">材质</label>
                                 <div class="col-xs-3">
-                                    <input class="form-control" type="text" id="quality"/>
+                                    <input class="form-control cell_edit" type="text" id="quality" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label">质量指标</label>
                                 <div class="col-xs-3">
-                                    <input class="form-control" type="text" id="qualityIndex"/>
+                                    <input class="form-control cell_edit" type="text" id="qualityIndex" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label">质量指标数值</label>
                                 <div class="col-xs-3">
-                                    <input class="form-control" type="text" id="qualityTargetValue"/>
+                                    <input class="form-control cell_edit" type="text" id="qualityTargetValue" disabled/>
                                 </div>
                             </div>
                             <div class="form-group ">
                                 <label class="col-xs-1 control-label">单价</label>
                                 <div class="col-xs-3">
-                                    <input type="text" class="form-control" id="unitPrice"/>
+                                    <input type="text" class="form-control cell_edit" id="unitPrice" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label">单耗</label>
                                 <div class="col-xs-3">
-                                    <input type="text" class="form-control" id="consumption"/>
+                                    <input type="text" class="form-control cell_edit" id="consumption" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label">价格有效期</label>
                                 <div class="col-xs-3">
-                                    <input type="date" class="form-control" id="priceEndDate"/>
+                                    <input type="date" class="form-control cell_edit" id="priceEndDate" disabled/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-xs-1 control-label">状态</label>
                                 <div class="col-xs-3">
-                                    <select class="form-control" name="items" id="status">
-                                        <option value="东亚" value="1">已启用</option>
-                                        <option value="西欧" value="0">已禁用</option>
+                                    <select class="form-control cell_edit" name="items" id="status" disabled>
+                                        <option  value="1">已启用</option>
+                                        <option  value="0">已禁用</option>
                                     </select>
                                 </div>
                             </div>
@@ -78,28 +81,27 @@
                                 <label class="col-xs-1 control-label">适用剂型</label>
                                 <div class="col-xs-4">
                                     <label class="checkbox-inline">
-                                        <input type="checkbox"> 原药
+                                        <input type="checkbox" class="suitableType cell_edit" value="0"> 原药
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox"> 水剂
+                                        <input type="checkbox" class="suitableType cell_edit" value="1"> 水剂
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox"> 颗粒剂（粉剂）
+                                        <input type="checkbox" class="suitableType cell_edit" value="2"> 颗粒剂（粉剂）
                                     </label>
                                 </div>
                             </div>
                             <div class="form-group ">
                                 <label class="col-xs-1 control-label">备注</label>
                                 <div class="col-xs-11">
-                                    <textarea class="form-control" rows="4" id="bremarks"></textarea>
+                                    <textarea class="form-control cell_edit" rows="4" id="bRemarks" disabled></textarea>
                                 </div>
                             </div>
                             <div class="form-group ">
                                 <label class="col-xs-1 control-label">图片</label>
-                                <div class="col-xs-10">
-                                    <input id="file" name="file" type="file" multiple class="projectfile" data-overwrite-initial="false" data-min-file-count="1">
+                                <div class="col-xs-11">
+                                    <input id="file-5" class="file" type="file" multiple data-preview-file-type="any" data-upload-url="#" data-preview-file-icon="">
                                 </div>
-
                             </div>
                         </form>
                     </div>
@@ -113,28 +115,31 @@
                                 <span class="glyphicon glyphicon-plus"></span>
                                 新增关联
                             </a>
+                            <a class="btn btn-primary" id="delete">删除关联</a>
                         </div>
                         <h3 class="panel-title">
                             关联包材
                         </h3>
                     </div>
                     <div class="panel-body clearfix">
-                        <table id="exhibition_table"  class="display table table-condensed table-bordered table-striped" cellspacing="0" width="100%">
-                        <thead>
-                        <tr>
-                            <th class="text-center"><input type="checkbox"></th>
-                            <th class="col-xs-2 text-center text-middle">包材类型编号</th>
-                            <th class="col-xs-2 text-center text-middle" >包材类型名称</th>
-                            <th class="col-xs-1 text-center text-middle">规格</th>
-                            <th class="col-xs-1 text-center text-middle">尺寸</th>
-                            <th class="col-xs-2 text-center text-middle">材质</th>
-                            <th class="col-xs-1 text-center text-middle">单价（元）</th>
-                            <th class="col-xs-1 text-center text-middle">单耗（每千升或每吨）</th>
-                            <th class="col-xs-1 text-center text-middle">状态</th>
-                        </tr>
-                        </thead>
+                        <table  class="display table table-condensed table-bordered table-striped" >
+                            <thead>
+                            <tr>
+                                <th class="text-center"><input type="checkbox" id="checkAll" onclick="checkAll()"></th>
+                                <th class="col-xs-2 text-center text-middle">包材类型编号</th>
+                                <th class="col-xs-2 text-center text-middle" >包材类型名称</th>
+                                <th class="col-xs-1 text-center text-middle">规格</th>
+                                <th class="col-xs-1 text-center text-middle">尺寸</th>
+                                <th class="col-xs-2 text-center text-middle">材质</th>
+                                <th class="col-xs-1 text-center text-middle">单价（元）</th>
+                                <th class="col-xs-1 text-center text-middle">单耗（每千升或每吨）</th>
+                                <th class="col-xs-1 text-center text-middle">状态</th>
+                            </tr>
+                            </thead>
+                            <tbody id="packing_relate_table">
 
-                    </table>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -204,7 +209,7 @@
 
 <script src="/lib/js/fileinput.js" type="text/javascript" charset="utf-8"></script>
 <script src="/lib/js/fileinput_locale_zh.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript" src="/lib/js/packingAdd.js"></script>
+<script type="text/javascript" src="/lib/js/packingCostInfo.js"></script>
 <script type="text/javascript" language="javascript" src="/lib/js/creatTree.js"></script>
 <script type="text/javascript">
     $('#tree').creatTree('/packingCategory/CategoryTree');

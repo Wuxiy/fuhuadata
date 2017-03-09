@@ -2,7 +2,6 @@
  * Created by young on 2017/3/6.
  */
 
-$(function () {
     var thisURL = document.URL;
     var ni = thisURL.split('?')[1];
     var names = ni.split('&')[0];
@@ -12,40 +11,13 @@ $(function () {
     var names = document.getElementById('packName');
     names.value = name;
 
-    if(bid != 1){
-        $('.relate').hide();
-    }
+    var imgpath;
 
-    $('.packingAdd').on('click',function(){
-        var url = "/packingArchives/addPackingArchives"
-        var data = {
-            "packName": jQuery('#packName').val(),
-            "spec": jQuery('#spec').val(),
-            "size": jQuery('#size').val(),
-            "quality": jQuery('#quality').val(),
-            "qualityIndex": jQuery('#qualityIndex').val(),
-            "qualityTargetValue": jQuery('#exhibitionName').val(),
-            "unitPrice": jQuery('#unitPrice').val(),
-            "consumption": jQuery('#consumption').val(),
-            "priceEndDate": jQuery('#priceEndDate').val(),
-            "status": jQuery('#status').val(),
-            "suitableType": "1",
-            "bremarks": jQuery('#bremarks').val(),
-        }
-        console.log(data);
-        jQuery.ajax({
-            type:"POST",
-            url:url,
-            dataType:"json",
-            contentType:"application/json",
-            data:JSON.stringify(data),
-            success:function(){
-                alert("添加成功");
-                location.reload();
-            }
-        })
-    })
-})
+if(bid != 1){
+    $('.relate').hide();
+}
+
+
 
 $("#file").fileinput({
     language: 'zh', //设置语言
@@ -70,7 +42,39 @@ $("#file").fileinput({
         {
             alert('处理成功');
         }
+        imgpath = data.response.data;
     });
+
+$('.packingAdd').on('click',function(){
+    var url = "/packingArchives/addPackingArchives"
+    var data = {
+        "packName": jQuery('#packName').val(),
+        "spec": jQuery('#spec').val(),
+        "size": jQuery('#size').val(),
+        "quality": jQuery('#quality').val(),
+        "qualityIndex": jQuery('#qualityIndex').val(),
+        "qualityTargetValue": jQuery('#exhibitionName').val(),
+        "unitPrice": jQuery('#unitPrice').val(),
+        "consumption": jQuery('#consumption').val(),
+        "priceEndDate": jQuery('#priceEndDate').val(),
+        "status": jQuery('#status').val(),
+        "suitableType": "1",
+        "imgpath":imgpath,
+        "bremarks": jQuery('#bremarks').val(),
+    }
+    console.log(data);
+    /*jQuery.ajax({
+        type:"POST",
+        url:url,
+        dataType:"json",
+        contentType:"application/json",
+        data:JSON.stringify(data),
+        success:function(){
+            alert("添加成功");
+            location.reload();
+        }
+    })*/
+})
 
 $("img[class='file-preview-image']").each(function(){
     var url = $(this).attr('src');
