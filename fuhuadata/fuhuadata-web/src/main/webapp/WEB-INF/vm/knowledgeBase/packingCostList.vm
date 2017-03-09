@@ -24,10 +24,10 @@
         <div class="col-xs-10">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a class="btn btn-xs btn-primary pull-right panel-heading-btn" href="/packingArchives/addPackingArchives?id=1">
+                    <button class="btn btn-xs btn-primary pull-right panel-heading-btn" data_url="/packingArchives/addPackingArchives?" onclick="Add()" id="add">
                     <span class="glyphicon glyphicon-plus"></span>
                     新增
-                </a>
+                </button>
                     <h3 class="panel-title" lang="zh">
                         包材成本参考
                     </h3>
@@ -37,7 +37,7 @@
                         <thead>
                         <tr>
                             <th class="text-center" lang="zh">编号</th>
-                            <th class="text-center" lang="zh">包材类型</th>
+                            <th class="text-center" lang="zh">包材类型名称</th>
                             <th class="text-center" lang="zh">规格</th>
                             <th class="text-center" lang="zh">材质</th>
                             <th class="text-center" lang="zh">质量指标</th>
@@ -50,19 +50,6 @@
                         </tr>
                         </thead>
                         <tbody id="container">
-                        <tr>
-                            <td>1</td>
-                            <td><a href="http://www.baidu.com" target="_blank">主材-瓶桶类</a></td>
-                            <td>0.2L</td>
-                            <td lang="zh">HDPE</td>
-                            <td lang="zh">最低含盖克重（g）</td>
-                            <td>2.0</td>
-                            <td>0.75</td>
-                            <td lang="zh">2016-10-10</td>
-                            <td lang="zh">水剂</td>
-                            <td><a href="" data-toggle="modal" data-target="#details"></a></td>
-                            <td>有效</td>
-                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -74,4 +61,16 @@
 <script type="text/javascript">
     $('#tree').creatTree('/packingCategory/CategoryTree');
     $('#tree').filtrateData('/packingArchives/getPackingArchivesByPId',"container","packingArchivesList");
+
+    function Add(){
+        var names = $('.packName');
+        var name = 'name=' + names[0].innerText;
+        var bids = names[0].href;
+        var bid = bids.split('&')[1];
+        var data_url = $('#add').attr('data_url');
+        var url = data_url + name + '&' + bid;
+
+        window.location.href = url;
+
+    }
 </script>

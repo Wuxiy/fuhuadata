@@ -2,6 +2,7 @@ package com.fuhuadata.web.springmvc;
 
 import com.fuhuadata.domain.SaleCustomer;
 import com.fuhuadata.domain.query.Result;
+import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.SaleCustomerService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -50,5 +51,7 @@ public class SaleCustomerAction {
         ModelAndView model = new ModelAndView("saleCustomer/saleCustomerList","SaleCustomers",result.getModel());
         return model;
     }
+
+
 
 }

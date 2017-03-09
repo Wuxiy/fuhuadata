@@ -10,5 +10,27 @@
     <input type="submit" value="提交" />
 </form>
 
+
+<h2>上传多个文件 实例</h2>
+
+<form action="uploadFile2" method="post"
+      enctype="multipart/form-data">
+    <p>
+        选择文件:<input type="file" name="files">
+    <p>
+        选择文件:<input type="file" name="files">
+    <p>
+        选择文件:<input type="file" name="files">
+    <p>
+        <input type="submit" value="提交">
+</form>
+
 </body>
+<script type="text/javascript">
+    $("input[name='files']").each(function(){
+        var url = $(this).attr("value");
+
+        console.log(url);
+    })
+</script>
 </html>

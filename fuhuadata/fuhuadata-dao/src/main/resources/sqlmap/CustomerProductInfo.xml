@@ -5,6 +5,7 @@
 <sqlMap namespace="CUSTOMERPRODUCTINFO">
    	<typeAlias alias="CustomerProductInfo" type="com.fuhuadata.domain.CustomerProductInfo"/>
    	<typeAlias alias="QueryCustomerProductInfo" type="com.fuhuadata.domain.query.QueryCustomerProductInfo"/>
+	<typeAlias alias="CustomerProductPackagingArchives" type="com.fuhuadata.vo.CustomerProductPackagingArchives"/>
 	
 	<resultMap id="CUSTOMERPRODUCTINFO-MAP" class="CustomerProductInfo">
 					<result property="customerProductId" column="customer_product_id" jdbcType="INT" javaType="java.lang.Integer" />
@@ -672,13 +673,30 @@
         </isParameterPresent>
 	</select>
 	
-	<select id="GET-PACKING" >
-
-	</select>
-	
 	<select id="GET-BY-ID" resultMap="CUSTOMERPRODUCTINFO-MAP" parameterClass="java.lang.Integer">
 		<![CDATA[
 			SELECT * FROM customer_product_info	WHERE customer_product_id=#customer_product_id#
+		]]>
+	</select>
+
+	<select id="GET-CUSTOMER-PRODUCT-PACKAGING" resultClass="CustomerProductPackagingArchives">
+		<![CDATA[
+				SELECT
+				a.customer_id as customerId,
+				a.customer_product_id as customerProductId,
+				a.`name` AS customerProductName,
+				b.product_id AS categorySerialNumber,
+				b.category_name AS categoryName,
+				b.name AS productName,
+				a.brand as brand,
+				c.specification AS specification,
+				c.model AS model,
+				a.main_product_unit AS mainUnit,
+				a.factory_id AS factoryId,
+				a.factory_name AS factoryName
+				FROM customer_product_info a
+				LEFT JOIN product_info b on a.product_id = b.product_id
+				LEFT JOIN product_ware c on c.product_info_id = b.product_id
 		]]>
 	</select>
 	

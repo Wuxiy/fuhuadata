@@ -1,7 +1,10 @@
 package com.fuhuadata.dao;
 import java.util.List;
+
+import com.fuhuadata.domain.ProductCategory;
 import com.fuhuadata.domain.ProductInfo;
 import com.fuhuadata.domain.query.QueryProductInfo;
+import com.fuhuadata.vo.CustomerProductPackagingArchives;
 
 /**
  * @author wangbo
@@ -56,6 +59,8 @@ public interface ProductInfoDao {
      * @return
      */
     public ProductInfo getProductInfoById(int product_id);
+
+
         
 	 /**
      * 查询列表，包含分页查询，查询结果为空返回空的List对象

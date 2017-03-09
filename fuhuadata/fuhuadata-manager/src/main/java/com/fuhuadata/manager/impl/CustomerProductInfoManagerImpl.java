@@ -6,6 +6,8 @@ import com.fuhuadata.domain.CustomerProductInfo;
 import com.fuhuadata.domain.query.QueryCustomerProductInfo;
 import com.fuhuadata.manager.CustomerProductInfoManager;
 import javax.annotation.Resource;
+
+import com.fuhuadata.vo.CustomerProductPackagingArchives;
 import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 
@@ -33,9 +35,14 @@ public class CustomerProductInfoManagerImpl implements CustomerProductInfoManage
     public boolean deleteCustomerProductInfoById(int customer_product_id) {
     	return customerProductInfoDao.deleteCustomerProductInfoById(customer_product_id) == 1 ? true : false;
     }
-    
-    
-    public List<CustomerProductInfo> getAllCustomerProductInfos() {
+
+	@Override
+	public List<CustomerProductPackagingArchives> getCustomerProductPackagingArchives() {
+		return customerProductInfoDao.getCustomerProductPackagingArchives();
+	}
+
+
+	public List<CustomerProductInfo> getAllCustomerProductInfos() {
     	return customerProductInfoDao.getAllCustomerProductInfos();
     }
     	
@@ -65,5 +72,12 @@ public class CustomerProductInfoManagerImpl implements CustomerProductInfoManage
     public int count(QueryCustomerProductInfo queryCustomerProductInfo) {
     	return customerProductInfoDao.count(queryCustomerProductInfo);
     }
-    
+
+	public void setCustomerProductInfoDao(CustomerProductInfoDao customerProductInfoDao) {
+		this.customerProductInfoDao = customerProductInfoDao;
+	}
+
+	public CustomerProductInfoDao getCustomerProductInfoDao(){
+    	return this.customerProductInfoDao;
+	}
 }

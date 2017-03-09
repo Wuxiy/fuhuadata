@@ -11,6 +11,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         客户产品包装要求
+<<<<<<< HEAD
                         <!--搜索框开始-->
                         <div class="form-horizontal">
                             <div class="form-group">
@@ -40,6 +41,40 @@
                                                 </button>
                                             </span>
                                     </div>
+=======
+                    </h3>
+                </div>
+                <div class="panel-body clearfix">
+                    <!--搜索框开始-->
+                    <table border="0" cellspacing="0" cellpadding="0">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-xs-1 pull-right">
+                                <button id ="button" type="button" class="btn btn-block btn-primary btn-xs">
+                                搜索
+                            </button>
+                            </div>
+                            <div class="col-xs-2 pull-right">
+                                <input id="product_name" class="form-control" type="search" value="" placeholder="请输入产品名称"/>
+                            </div>
+                            <label class="col-xs-1 control-label pull-right">产品名称</label>
+                            <div class="col-xs-1 pull-right">
+                                <select id="factory_name" class="form-control">
+                                    <option value="">全部</option>
+                                    <option value="1">杭州海辰</option>
+                                    <option value="2">杭州乐川</option>
+                                </select>
+                            </div>
+                            <label class="control-label col-xs-1 pull-right">加工厂</label>
+                            <div class="col-xs-2 pull-right">
+                                <div class="input-group">
+                                    <input id="category" class="form-control" type="search" value="" placeholder="请输入品类"/>
+                                    <span class="input-group-btn">
+                                        <button data-toggle="modal" class="btn btn-xs btn-default" data-target="#tSearch" type="button">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+>>>>>>> dfcd8437d233130064b3dd4cc16a763331d9205c
                                 </div>
                                 <label class="col-xs-1 control-label pull-right">品类</label>
                                 <div class="col-xs-2 pull-right">
@@ -47,6 +82,7 @@
                                 </div>
                                 <label class="control-label col-xs-1 pull-right">客户名称</label>
                             </div>
+<<<<<<< HEAD
                         </div>
                         <!--搜索框结束-->
                         <!--表格开始-->
@@ -78,6 +114,39 @@
                         </table>
                         <!--表格结束-->
 
+=======
+                            <label class="col-xs-1 control-label pull-right">品类</label>
+                            <div class="col-xs-2 pull-right">
+                                <input id="customer_name" class="form-control" type="search" placeholder="请输入客户名称"/>
+                            </div>
+                            <label class="control-label col-xs-1 pull-right">客户名称</label>
+                        </div>
+                    </div>
+                    </table>
+                    <!--搜索框结束-->
+                    <!--表格开始-->
+                    <table id="customer_customer_packaging_table" class="table table-condensed table-bordered table-striped text-center" cellpadding="0">
+                        <thead>
+                        <tr>
+                            <th class="text-center">编号</th>
+                            <th class="text-center">客户名称</th>
+                            <th class="text-center">客户商品名</th>
+                            <th class="text-center">品类序列号</th>
+                            <th class="text-center">品类</th>
+                            <th class="text-center">产品名称</th>
+                            <th class="text-center">品牌</th>
+                            <th class="text-center">规格</th>
+                            <th class="text-center">型号</th>
+                            <th class="text-center">主单位</th>
+                            <th class="text-center">加工厂</th>
+                            <th class="text-center">加工厂编号</th>
+                        </tr>
+                        </th>
+                        </thead>
+
+                    </table>
+                    <!--表格结束-->
+>>>>>>> dfcd8437d233130064b3dd4cc16a763331d9205c
 
                     </h3>
                 </div>
@@ -87,4 +156,91 @@
         </div>
     </div>
 </div>
+
+<!--modal-->
+<div class="modal fade" id="tSearch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body well" style="max-height: 200px; overflow-y: scroll; overflow-x: scroll;">
+                <div id="tree" class="tree">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" language="javascript" src="/lib/js/creatTree.js"></script>
+<script type="text/javascript">
+
+    $('#tree').creatTree('/productCategory/CategoryTree');
+    $('#modal').on('dblclick','a.cNode',function (e) {
+        e.preventDefault();
+        console.log(e.target);
+        var tarEltext = $(e.target).text();
+        $('#category').val(tarEltext);
+    });
+    $(document).ready(function() {
+        var table =$('#customer_customer_packaging_table').DataTable( {
+            "ajax":'/customerProductPacking/queryCustomerProductPackingList',
+            "pagingType":"full_numbers",
+            "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
+            "columns":[
+                {"data":"customerProductId"},
+                {"data":null},
+                {"data":"customerProductName"},
+                {"data":"categorySerialNumber"},
+                {"data":"categoryName"},
+                {"data":"productName"},
+                {"data":"brand"},
+                {"data":"specification"},
+                {"data":"model"},
+                {"data":"mainUnit"},
+                {"data":"factoryName"},
+                {"data":"factoryId"}
+            ],
+            "columnDefs":[
+                {
+                    "targets": 2,
+                    "render": function(data,type,row,meta){
+                        return '<a href="' + data + '" target="_blank">' + row.customerProductName + '</a>';
+                    }
+                },
+                {
+                    "targets": 11,
+                    "visible": false
+                }
+            ],
+            "language": {
+                "url": '/lib/dataTables/lang/dataTables.lang.zh',
+                "searchPlaceholder": '关键字'
+            }
+        } );
+        $(document).on("click","#button",function(){
+
+           var args1 = $("#product_name").val();
+           var args2 = $("#customer_name").val();
+           console.log(args1);
+           var args3 = $("#factory_name").val();
+           console.log(args3);
+            table
+                    .column(1)
+                    .search(args2)
+                    .column(5)
+                    .search(args1)
+                    .column(11)
+                    .search(args3)
+                    .draw(false);
+
+        });
+    } );
+
+
+</script>
 

@@ -59,7 +59,7 @@
                                         <th class="text-center col-xs-4" lang="zh">型号</th>
                                     </tr>
                                     </thead>
-                                    <tbody name="">
+                                    <tbody name="wares">
                                     </tbody>
                                 </table>
                             </div>
@@ -98,10 +98,6 @@
                             <div class="col-xs-2">
                                 <input name="executeNumer" class="form-control" type="text"/>
                             </div>
-                            <label class="col-xs-1 control-label">备注说明</label>
-                            <div class="col-xs-2">
-                                <input name="executeRemarks" class="form-control" type="text"/>
-                            </div>
                         </div>
                         <div class="form-group">
                             <label for="" class="col-xs-1 control-label" lang="zh">产品特点</label>
@@ -109,10 +105,9 @@
                                 <textarea name="productFeature" class="form-control" rows="3"></textarea>
                             </div>
                         </div>
-                    </div>
                         <div class="form-group">
                             <label class="col-xs-1 control-label">理化指标</label>
-                            <div class="col-xs-8">
+                            <div class="col-xs-6">
                                 <table class="table table-condensed table-bordered table-striped text-center">
                                     <thead>
                                     <tr>
@@ -121,43 +116,13 @@
                                         <th class="text-center col-xs-4" lang="zh">备注</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td><input class="form-control" type="text"/></td>
-                                        <td><input class="form-control" type="text"/></td>
-                                        <td><input class="form-control" type="text"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input class="form-control" type="text"/></td>
-                                        <td><input class="form-control" type="text"/></td>
-                                        <td><input class="form-control" type="text"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input class="form-control" type="text"/></td>
-                                        <td><input class="form-control" type="text"/></td>
-                                        <td><input class="form-control" type="text"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input class="form-control" type="text"/></td>
-                                        <td><input class="form-control" type="text"/></td>
-                                        <td><input class="form-control" type="text"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input class="form-control" type="text"/></td>
-                                        <td><input class="form-control" type="text"/></td>
-                                        <td><input class="form-control" type="text"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input class="form-control" type="text"/></td>
-                                        <td><input class="form-control" type="text"/></td>
-                                        <td><input class="form-control" type="text"/></td>
-                                    </tr>
+                                    <tbody name="physicalProperities">
+
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </from>
-
                 </div>
             </div>
         </div>

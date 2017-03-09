@@ -8,7 +8,7 @@ public class CustomerProductPackagingArchives {
     private String customerId;
 //    private String customer;//客户名称
     private String customerProductId;//客户商品id
-    private Integer customerProductName;//客户商品名
+    private String customerProductName;//客户商品名
     private String categorySerialNumber;//品类序列号
     private String categoryName;//品类
     private String productName;//产品名称
@@ -67,13 +67,6 @@ public class CustomerProductPackagingArchives {
         this.customerProductId = customerProductId;
     }
 
-    public Integer getCustomerProductName() {
-        return customerProductName;
-    }
-
-    public void setCustomerProductName(Integer customerProductName) {
-        this.customerProductName = customerProductName;
-    }
 
     public String getCategorySerialNumber() {
         return categorySerialNumber;
@@ -113,5 +106,13 @@ public class CustomerProductPackagingArchives {
 
     public void setSpecification(String specification) {
         this.specification = specification;
+    }
+
+    public String getCustomerProductName() {
+        return customerProductName;
+    }
+
+    public void setCustomerProductName(String customerProductName) {
+        this.customerProductName = customerProductName;
     }
 }
