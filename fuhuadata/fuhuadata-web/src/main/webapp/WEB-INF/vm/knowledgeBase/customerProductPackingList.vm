@@ -107,7 +107,7 @@
 <script type="text/javascript">
 
     $('#tree').creatTree('/productCategory/CategoryTree');
-    $('#modal').on('dblclick','a.cNode',function (e) {
+    $(document).on('click','a.cNode',function (e) {
         e.preventDefault();
         console.log(e.target);
         var tarEltext = $(e.target).text();
@@ -155,10 +155,13 @@
            var args2 = $("#customer_name").val();
            console.log(args1);
            var args3 = $("#factory_name").val();
+           var args4 = $("#category").val();
            console.log(args3);
             table
                     .column(1)
                     .search(args2)
+                    .column(4)
+                    .search(args4)
                     .column(5)
                     .search(args1)
                     .column(11)

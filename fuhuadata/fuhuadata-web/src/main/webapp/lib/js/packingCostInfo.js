@@ -102,7 +102,24 @@
 
 
 //关联包材全选
-function checkAll() {
+$('#checkAll').on('click',function(){
+    var checkAll = $('#checkAll'),
+        allCheckbox = $("input[name='cellcheckbox']");
+
+    //监听全选框变化
+    checkAll.change(function(){
+        if (checkAll.prop("checked")) {
+            allCheckbox.each(function(){
+                $(this).prop('checked',true);
+            });
+        } else {
+            allCheckbox.each(function(){
+                $(this).prop('checked',false);
+            });
+        }
+    });
+})
+/*function checkAll() {
     var checkAll = $('#checkAll'),
         allCheckbox = $("input[name='cellcheckbox']");
 
@@ -118,7 +135,7 @@ function checkAll() {
             });
         }
     });
-}
+}*/
 
 $('#modal_checkAll').on('click',function(){
     var checkAll = $('#modal_checkAll'),
