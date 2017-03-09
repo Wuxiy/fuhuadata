@@ -53,7 +53,7 @@
                 $.each(getData,function(n,item){
                     var tr = $('<tr></tr>');
                     console.log(item);
-                    $(tr).append('<td>'+item.packingId+'</td><td><a href="/packingArchives/getDetails?id='+item.packingId+'&bid='+item.bigCategoryId+'">'+item.packName+'</a></td><td>'+item.spec+'</td><td>'+item.quality+'</td><td>'+item.qualityIndex+'</td><td>'+item.qualityTargetValue+'</td><td>'+item.unitPrice+'</td><td>'+item.priceEndDate+'</td><td>'+item.suitableType+'</td><td>'+item.bRemarks+'</td><td>'+item.status+'</td>').appendTo(parent);
+                    $(tr).append('<td>'+item.packingId+'</td><td><a href="/packingArchives/getDetails?id='+item.packingId+'&bid='+item.bigCategoryId+'" class="packName">'+item.packName+'</a></td><td>'+item.spec+'</td><td>'+item.quality+'</td><td>'+item.qualityIndex+'</td><td>'+item.qualityTargetValue+'</td><td>'+item.unitPrice+'</td><td>'+item.priceEndDate+'</td><td>'+item.suitableType+'</td><td>'+item.bRemarks+'</td><td>'+item.status+'</td>').appendTo(parent);
                 })
              },
             //渲染包材详情modal列表
@@ -61,7 +61,7 @@
                 $.each(getData,function(n,item){
                     var tr = $('<tr></tr>');
                     console.log(item);
-                    $(tr).append('<td><input type="checkbox"></td><td>'+item.packingId+'</td><td>'+item.packName+'</td><td>'+item.spec+'</td><td>'+item.size+'</td><td>'+item.quality+'</td><td>'+item.unitPrice+'</td><td>'+item.consumption+'</td><td>'+item.status+'</td>').appendTo(parent);
+                    $(tr).append('<td><input type="checkbox" value="'+item.packingId+'" name="modal_cellcheckbox"/></td><td>'+item.packingId+'</td><td>'+item.packName+'</td><td>'+item.spec+'</td><td>'+item.size+'</td><td>'+item.quality+'</td><td>'+item.unitPrice+'</td><td>'+item.consumption+'</td><td>'+item.status+'</td>').appendTo(parent);
                 })
             },
             //渲染标准产品档案

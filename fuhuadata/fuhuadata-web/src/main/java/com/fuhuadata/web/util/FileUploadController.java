@@ -30,7 +30,7 @@ public class FileUploadController {
      * @return
      */
     @RequestMapping(value="/uploadFile", method= RequestMethod.POST)
-    public ModelAndView uploadFile(@RequestParam("files") MultipartFile[] files, HttpServletRequest request)
+    public ModelAndView uploadFile(@RequestParam("file") MultipartFile[] files, HttpServletRequest request)
         throws IllegalStateException, IOException {
 
         System.out.println(files.length);

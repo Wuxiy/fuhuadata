@@ -1971,7 +1971,7 @@
             if (!self.isUploadable || self.isDisabled) {
                 content = '<button type="submit" title="' + self.uploadTitle + '"class="' + css + '"' + status + '>' + self.uploadIcon + self.uploadLabel + '</button>';
             } else {
-                content = '<a href="' + self.uploadUrl + '" title="' + self.uploadTitle + '" class="' + css + '"' + status + '>' + self.uploadIcon + self.uploadLabel + '</a>';
+                content = '<a href="' + self.uploadUrl + '" title="' + self.uploadTitle + '" class="' + css + '"' + status + ' id="update">' + self.uploadIcon + self.uploadLabel + '</a>';
             }
             return content;
         }
