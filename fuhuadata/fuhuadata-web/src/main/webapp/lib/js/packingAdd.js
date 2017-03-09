@@ -51,7 +51,6 @@ $("#file").fileinput({
     language: 'zh', //设置语言
     uploadUrl: '/upload/uploadFile', // you must set a valid URL here else you will get an error
     allowedFileExtensions : ['jpg', 'png','gif'],
-
     overwriteInitial: false,
     maxFileSize: 1000,
     maxFilesNum: 10,
@@ -62,7 +61,16 @@ $("#file").fileinput({
     slugCallback: function(filename) {
         return filename.replace('(', '_').replace(']', '_');
     }
-});
+}).on("filebatchselected", function(event, files) {
+    console.log('233');
+
+}).on("fileuploaded", function(event, data) {
+        console.log('233');
+        if(data.response)
+        {
+            alert('处理成功');
+        }
+    });
 
 $("img[class='file-preview-image']").each(function(){
     var url = $(this).attr('src');
