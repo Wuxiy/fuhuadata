@@ -11,10 +11,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.xpath.operations.Mod;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -115,6 +112,47 @@ public class PackingArchivesAction {
         return null;
     }
 
+    /**
+     * add relate
+     */
+    @RequestMapping(value="/addRelation",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "addRelation")
+    @ResponseBody
+    public ResultPojo addRelation(String ids){
+        try{
+            PackingArchives packingArchives = new PackingArchives();
+            packingArchives.setAssociatedPackingId(ids);
+            int id=1;
+            Result result = packingArchivesService.updatePackingArchivesById(id,packingArchives);
+            return result.getResultPojo();
+        }catch(Exception e){
+            log.error("更新主材关联失败",e);
+        }
+        return null;
+    }
+
+
+    /**
+     * delete relate
+     */
+    @RequestMapping(value="/deleteRelation",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "deleteRelation")
+    @ResponseBody
+    public ResultPojo deleteRelation(@RequestBody String ids){
+        try{
+            PackingArchives packingArchives = new PackingArchives();
+            System.out.println(ids);
+            String idss=ids.toString();
+            int id=1;
+            String pids = packingArchivesService.getPackingArchivesById(1).getModel().getPack().getAssociatedPackingId();
+            packingArchives.setAssociatedPackingId(idss);
+            Result result = packingArchivesService.updatePackingArchivesById(id,packingArchives);
+            return result.getResultPojo();
+        }catch(Exception e){
+            log.error("更新主材关联失败",e);
+        }
+        return null;
+    }
     /**
      * 条件查询
      * @param packingArchivesQuery

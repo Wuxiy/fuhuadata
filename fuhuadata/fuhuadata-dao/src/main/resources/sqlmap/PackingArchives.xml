@@ -218,8 +218,8 @@
             <isNotNull prepend=", " property="imagePath">
                 image_path=#imagePath#
             </isNotNull>
-            WHERE packing_id = #packingId#
         </dynamic>
+        WHERE packing_id = #packingId#
     </update>
 
     <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
