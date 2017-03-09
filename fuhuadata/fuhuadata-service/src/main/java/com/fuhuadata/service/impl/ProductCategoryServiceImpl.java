@@ -81,7 +81,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
      * @return
      */
     public List<CategoryTree> getAllNodes(List<ProductCategoryVO> list){
-        Map<Integer,CategoryTree> map = new HashMap<Integer,CategoryTree>();
+        Map<String,CategoryTree> map = new HashMap<String,CategoryTree>();
         List<CategoryTree> root_list = new ArrayList<CategoryTree>();
         try {
             for (ProductCategoryVO vo : list) {
@@ -89,7 +89,6 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
                 CategoryTree small = null;
                 CategoryTree middle = null;
                 CategoryTree big = null;
-
                 if(vo.getProductId()!=null){
                     product=new CategoryTree();
                     product.setCid(vo.getProductId());
@@ -149,7 +148,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
                 if (big == null) {
                     big = new CategoryTree();
                     big.setCid(vo.getParentId());
-                    big.setPid(0);
+                    big.setPid("0");
                     big.setCname(vo.getParent());
                     if (middle != null) {
                         big.addChildNode(middle);
@@ -170,9 +169,9 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
                 map.put(big.getCid(), big);
             }
 
-            Set<Map.Entry<Integer, CategoryTree>> entrys = map.entrySet();
-            for (Map.Entry<Integer, CategoryTree> entry : entrys) {
-                if (entry.getValue().getPid() == 0) {
+            Set<Map.Entry<String, CategoryTree>> entrys = map.entrySet();
+            for (Map.Entry<String, CategoryTree> entry : entrys) {
+                if (entry.getValue().getPid() .equals("0")) {
                     root_list.add(entry.getValue());
                 }
             }

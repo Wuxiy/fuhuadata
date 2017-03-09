@@ -13,23 +13,26 @@ public class CustomerBaseInfo {
 	
     /**企业全称**/
 	private String fullName;
-	
-    /**企业简称**/
+
+	/**企业性质**/
+	private Integer enterprise_nature;
+
+	/**企业简称**/
 	private String shortName;
 	
     /**企业类型,-1全部,0客户,1竞对**/
 	private Integer company_type;
-	
-    /**地区id**/
+
+	/**地区id**/
 	private Integer areaId;
-	
-    /**地区分类,例如北美洲**/
+
+	/**地区分类,例如北美洲**/
 	private String area;
-	
-    /**国家分类id**/
+
+	/**国家分类id**/
 	private Integer countryId;
-	
-    /**国家,例如美国**/
+
+	/**国家,例如美国**/
 	private String country;
 	
     /**注册资金**/
@@ -76,6 +79,7 @@ public class CustomerBaseInfo {
 
 	/**1:战略客户,2:大客户 3:重要客户 4:一般客户 5:风险客户**/
 	private Integer customerLevel;
+
 
 	/**客户类型,1:合作 2:潜在 3:流失**/
 	private Integer customerType;
@@ -403,6 +407,14 @@ public class CustomerBaseInfo {
 
 	public void setCompany_type(Integer company_type) {
 		this.company_type = company_type;
+	}
+
+	public Integer getEnterprise_nature() {
+		return enterprise_nature;
+	}
+
+	public void setEnterprise_nature(Integer enterprise_nature) {
+		this.enterprise_nature = enterprise_nature;
 	}
 
 }

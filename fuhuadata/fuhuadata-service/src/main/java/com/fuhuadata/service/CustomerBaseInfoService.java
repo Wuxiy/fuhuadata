@@ -12,22 +12,22 @@ import com.fuhuadata.domain.query.Result;
 public interface CustomerBaseInfoService {
 
 	/**
-	 * 新增 customerParent
+	 * 新增 customerBaseInfo
 	 * 返回result，通过result.isSuccess()判断服务调用是否成功
-	 * 通过result.getModel()得到新增 customerParent
-	 * @param customerParent
+	 * 通过result.getModel()得到新增 customerBaseInfo
+	 * @param customerBaseInfo
 	 * @return
 	 */
-    public Result<CustomerBaseInfo> addCustomerParent(CustomerBaseInfo customerParent) ;
+    public Result<CustomerBaseInfo> addCustomerBaseInfo(CustomerBaseInfo customerBaseInfo) ;
  
     /**
-     * 按照主键id更新customerParent，请重新new CustomerBaseInfo 的更新对象，设置要更新的字段
+     * 按照主键id更新customerBaseInfo，请重新new CustomerBaseInfo 的更新对象，设置要更新的字段
 	 * 返回result，通过result.isSuccess()判断更新是否成功
      * @param customer_id
-     * @param customerParent
+     * @param customerBaseInfo
      * @return
      */
-    public Result updateCustomerParentById(String customer_id, CustomerBaseInfo customerParent);
+    public Result updateCustomerBaseInfoById(String customer_id, CustomerBaseInfo customerBaseInfo);
 
     /**
      * 按照主键id 删除 记录
@@ -35,25 +35,25 @@ public interface CustomerBaseInfoService {
      * @param customer_id
      * @return
      */
-    public Result deleteCustomerParentById(String customer_id);
+    public Result deleteCustomerBaseInfoById(String customer_id);
     
     /**
      * 查询列表，此接口不包含分页查询
 	 * 返回result，通过result.isSuccess()判断服务调用是否成功
 	 * 通过result.getModel()得到列表信息
-     * @param queryCustomerParent
+     * @param queryCustomerBaseInfo
      * @return
      */
-    public Result<List<CustomerBaseInfo>> getCustomerParentsByQuery(QueryCustomerBaseInfo queryCustomerParent);
+    public Result<List<CustomerBaseInfo>> getCustomerBaseInfoByQuery(QueryCustomerBaseInfo queryCustomerBaseInfo);
 
     /**
-     * 通过主键id查询CustomerParent
+     * 通过主键id查询CustomerBaseInfo
 	 * 返回result，通过result.isSuccess()判断服务调用是否成功
-	 * 通过result.getModel()得到查询的单条customerParent信息
+	 * 通过result.getModel()得到查询的单条customerBaseInfo信息
      * @param customer_id
      * @return
      */
-    public Result<CustomerBaseInfo> getCustomerParentById(String customer_id);
+    public Result<CustomerBaseInfo> getCustomerBaseInfoById(String customer_id);
 
     /**
      * 查询列表，包含分页查询
@@ -63,16 +63,16 @@ public interface CustomerBaseInfoService {
 	 * 返回result，通过result.isSuccess()判断服务调用是否成功
 	 * 通过result.getTotal()返回结果总数
 	 * 通过result.getModel()得到查询的单页列表信息
-     * @param queryCustomerParent
+     * @param queryCustomerBaseInfo
      * @return
      */
-    public Result<List<CustomerBaseInfo>> getCustomerParentsByPage(QueryCustomerBaseInfo queryCustomerParent);
+    public Result<List<CustomerBaseInfo>> getCustomerBaseInfoByPage(QueryCustomerBaseInfo queryCustomerBaseInfo);
 
     /**
      * 查询总数
-     * @param queryCustomerParent
+     * @param queryCustomerBaseInfo
      * @return
      */
-    public Result<Integer> count(QueryCustomerBaseInfo queryCustomerParent);
+    public Result<Integer> count(QueryCustomerBaseInfo queryCustomerBaseInfo);
 	
 }

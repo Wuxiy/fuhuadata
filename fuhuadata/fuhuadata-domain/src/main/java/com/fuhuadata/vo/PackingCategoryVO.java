@@ -5,18 +5,11 @@ package com.fuhuadata.vo;
  * Created by intanswer on 2017/3/2.
  */
 public class PackingCategoryVO {
-    private Integer parentId;
+    private String parentId;
     private String parentName;
-    private Integer childId;
+    private String childId;
     private String childName;
 
-    public Integer getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
-    }
 
     public String getParentName() {
         return parentName;
@@ -26,11 +19,19 @@ public class PackingCategoryVO {
         this.parentName = parentName;
     }
 
-    public Integer getChildId() {
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
+
+    public String getChildId() {
         return childId;
     }
 
-    public void setChildId(Integer childId) {
+    public void setChildId(String childId) {
         this.childId = childId;
     }
 
