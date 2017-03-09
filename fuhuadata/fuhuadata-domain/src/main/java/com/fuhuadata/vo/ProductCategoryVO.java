@@ -5,13 +5,13 @@ package com.fuhuadata.vo;
  * Created by intanswer on 2017/2/22.
  */
 public class ProductCategoryVO {
-    private Integer parentId;
+    private String parentId;
     private String parent;//父节点
-    private Integer middleId;
+    private String middleId;
     private String middle;//中间节点
-    private Integer smallId;
+    private String smallId;
     private String child;//子节点
-    private Integer productId;
+    private String productId;
     private String productName;
 
 
@@ -39,36 +39,35 @@ public class ProductCategoryVO {
         this.child = child;
     }
 
-
-    public Integer getParentId() {
+    public String getParentId() {
         return parentId;
     }
 
-    public void setParentId(Integer parentId) {
+    public void setParentId(String parentId) {
         this.parentId = parentId;
     }
 
-    public Integer getMiddleId() {
+    public String getMiddleId() {
         return middleId;
     }
 
-    public void setMiddleId(Integer middleId) {
+    public void setMiddleId(String middleId) {
         this.middleId = middleId;
     }
 
-    public Integer getSmallId() {
+    public String getSmallId() {
         return smallId;
     }
 
-    public void setSmallId(Integer smallId) {
+    public void setSmallId(String smallId) {
         this.smallId = smallId;
     }
 
-    public Integer getProductId() {
+    public String getProductId() {
         return productId;
     }
 
-    public void setProductId(Integer productId) {
+    public void setProductId(String productId) {
         this.productId = productId;
     }
 

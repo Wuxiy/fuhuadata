@@ -1,9 +1,25 @@
 package com.fuhuadata.web.springmvc;
 
+import com.fuhuadata.domain.CustomerBaseInfo;
+import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
+import com.fuhuadata.domain.query.Result;
+import com.fuhuadata.domain.query.ResultPojo;
+import com.fuhuadata.service.CustomerAreaService;
+import com.fuhuadata.service.CustomerBaseInfoService;
+import com.fuhuadata.vo.CategoryTree;
 import com.fuhuadata.web.util.SystemLogAnnotation;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by hexingfu on 2017/3/8.
@@ -11,10 +27,50 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/customerBaseInfo/*")
 public class CustomerBaseInfoAction {
-    @RequestMapping("/customerListPageInit")
-    @SystemLogAnnotation(module = "customerInfo-customerList",methods = "into")
-    public ModelAndView init(){
 
-        return new ModelAndView();
+    private final static Log log = LogFactory.getLog(CustomerBaseInfoAction.class);
+
+    @Autowired
+    private CustomerBaseInfoService customerBaseInfoService;
+    @Autowired
+    private CustomerAreaService  customerAreaService;
+
+    /**
+     * 客户信息列表页入口
+     * @param  customerType 1:合作 2:潜在 3:流失
+     * @return
+     */
+    @RequestMapping("/customerListPageInit")
+    @SystemLogAnnotation(module = "customerInfo-customerList",methods = "customerListPageInit")
+    public ModelAndView init(Integer customerType){
+        return new ModelAndView("customerInfo/customerList").addObject("customerType",customerType);
     }
+    @ResponseBody
+    @RequestMapping(value = "/initAreaCategoryTree",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "customerInfo-customerList",methods = "initAreaCategoryTree")
+    public ResultPojo initAreaCategoryTree(){
+        try{
+            Result<List<CategoryTree>> result = customerAreaService.getAllCustomerAreaList();
+            return result.getResultPojo();
+        }catch (Exception e){
+
+            log.error("初始化客户地区目录树失败",e);
+        }
+        return null;
+    }
+
+
+    @RequestMapping(value = "/countCustomerList",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "customerInfo-customerList",methods = "countCustomerList")
+    @ResponseBody
+    public ResultPojo countCustomerList(@RequestBody QueryCustomerBaseInfo queryCustomerBaseInfo){
+        try{
+            Result<Integer> result = customerBaseInfoService.count(queryCustomerBaseInfo);
+            return result.getResultPojo();
+        }catch (Exception e){
+            log.error("统计客户列表总条目数失败",e);
+        }
+        return null;
+    }
+
 }

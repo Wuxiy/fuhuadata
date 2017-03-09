@@ -31,7 +31,6 @@
             //阻止a的默认事件
             e.preventDefault();
             var id = $(e.target).parent('li').attr('id');
-            console.log(id);
             $.post(url,{id:id},function(data,status){
                 if(method=='packingArchivesList'){
                     $container.html('');
@@ -55,7 +54,6 @@
             //渲染标准产品档案
             productArchivesList : function(getData){
                 $.each(getData,function(n,total){
-                    console.log(total);
                     $.each(total,function(key,item){
                         var $formControl=$('[name="'+ key +'"]');
                         if($formControl.attr('type')=='radio'||$formControl.attr('type')=='checkbox'){
