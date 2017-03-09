@@ -14,9 +14,12 @@
             <div id="Baseinfo" class="tab-pane fade in active">
                 <div class="panel panel-default">
                     <div class="panel-heading" id="btn">
-                        <a class="btn btn-xs btn-primary pull-right panel-heading-btn" >
+                        <button class="btn btn-xs btn-primary pull-right panel-heading-btn" id="edit">
                             编辑
-                        </a>
+                        </button>
+                        <button class="btn btn-xs btn-primary pull-right panel-heading-btn" id="finish">
+                            完成
+                        </button>
                         <h3 class="panel-title">
                             基础信息
                         </h3>
@@ -26,49 +29,49 @@
                             <div class="form-group ">
                                 <label class="col-xs-1 control-label">包材类型名称</label>
                                 <div class="col-xs-3">
-                                    <input class="form-control" type="text" id="packName" disabled/>
+                                    <input class="form-control cell_edit" type="text" id="packName" name="cell_edit" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label">规格</label>
                                 <div class="col-xs-3">
-                                    <input class="form-control" type="text" id="spec" disabled/>
+                                    <input class="form-control cell_edit" type="text" id="spec" name="cell_edit" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label">尺寸</label>
                                 <div class="col-xs-3">
-                                    <input class="form-control" type="text" id="size" disabled/>
+                                    <input class="form-control cell_edit" type="text" id="size" name="cell_edit" disabled/>
                                 </div>
                             </div>
                             <div class="form-group ">
                                 <label class="col-xs-1 control-label">材质</label>
                                 <div class="col-xs-3">
-                                    <input class="form-control" type="text" id="quality" disabled/>
+                                    <input class="form-control cell_edit" type="text" id="quality" name="cell_edit" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label">质量指标</label>
                                 <div class="col-xs-3">
-                                    <input class="form-control" type="text" id="qualityIndex" disabled/>
+                                    <input class="form-control cell_edit" type="text" id="qualityIndex" name="cell_edit" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label">质量指标数值</label>
                                 <div class="col-xs-3">
-                                    <input class="form-control" type="text" id="qualityTargetValue" disabled/>
+                                    <input class="form-control cell_edit" type="text" id="qualityTargetValue" name="cell_edit" disabled/>
                                 </div>
                             </div>
                             <div class="form-group ">
                                 <label class="col-xs-1 control-label">单价</label>
                                 <div class="col-xs-3">
-                                    <input type="text" class="form-control" id="unitPrice" disabled/>
+                                    <input type="text" class="form-control cell_edit" id="unitPrice" name="cell_edit" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label">单耗</label>
                                 <div class="col-xs-3">
-                                    <input type="text" class="form-control" id="consumption" disabled/>
+                                    <input type="text" class="form-control cell_edit" id="consumption" name="cell_edit" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label">价格有效期</label>
                                 <div class="col-xs-3">
-                                    <input type="date" class="form-control" id="priceEndDate" disabled/>
+                                    <input type="date" class="form-control cell_edit" id="priceEndDate" name="cell_edit" disabled/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-xs-1 control-label">状态</label>
                                 <div class="col-xs-3">
-                                    <select class="form-control" name="items" id="status" disabled>
+                                    <select class="form-control cell_edit" id="status" name="cell_edit" disabled>
                                         <option  value="1">已启用</option>
                                         <option  value="0">已禁用</option>
                                     </select>
@@ -78,20 +81,20 @@
                                 <label class="col-xs-1 control-label">适用剂型</label>
                                 <div class="col-xs-4">
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" class="suitableType" value="0"> 原药
+                                        <input type="checkbox" class="suitableType cell_edit" value="0" name="cell_edit" disabled> 原药
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" class="suitableType" value="1"> 水剂
+                                        <input type="checkbox" class="suitableType cell_edit" value="1" name="cell_edit" disabled> 水剂
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" class="suitableType" value="2"> 颗粒剂（粉剂）
+                                        <input type="checkbox" class="suitableType cell_edit" value="2" name="cell_edit" disabled> 颗粒剂（粉剂）
                                     </label>
                                 </div>
                             </div>
                             <div class="form-group ">
                                 <label class="col-xs-1 control-label">备注</label>
                                 <div class="col-xs-11">
-                                    <textarea class="form-control" rows="4" id="bRemarks" disabled></textarea>
+                                    <textarea class="form-control cell_edit" rows="4" id="bRemarks" name="cell_edit" disabled></textarea>
                                 </div>
                             </div>
                             <div class="form-group ">
@@ -112,7 +115,7 @@
                                 <span class="glyphicon glyphicon-plus"></span>
                                 新增关联
                             </a>
-                            <a class="btn btn-primary" href="">删除关联</a>
+                            <button class="btn btn-primary" id="delete">删除关联</button>
                         </div>
                         <h3 class="panel-title">
                             关联包材
@@ -122,7 +125,7 @@
                         <table  class="display table table-condensed table-bordered table-striped" >
                             <thead>
                             <tr>
-                                <th class="text-center"><input type="checkbox"></th>
+                                <th class="text-center"><input type="checkbox" id="checkAll" onclick="checkAll()"></th>
                                 <th class="col-xs-2 text-center text-middle">包材类型编号</th>
                                 <th class="col-xs-2 text-center text-middle" >包材类型名称</th>
                                 <th class="col-xs-1 text-center text-middle">规格</th>
@@ -168,7 +171,7 @@
                             <table class="table table-condensed table-bordered table-striped text-center">
                                 <thead>
                                 <tr>
-                                    <th class="text-center"><input type="checkbox"></th>
+                                    <th class="text-center"><input type="checkbox" id="modal_checkAll"></th>
                                     <th class="col-xs-2 text-center text-middle">包材类型编号</th>
                                     <th class="col-xs-2 text-center text-middle" >包材类型名称</th>
                                     <th class="col-xs-1 text-center text-middle">规格</th>
@@ -189,7 +192,7 @@
             <div class="modal-footer">
                 <div class="row">
                     <div class="col-xs-3 col-xs-offset-3">
-                        <button type="button" class="btn btn-primary btn-block">
+                        <button type="button" class="btn btn-primary btn-block" id="finish_relate">
                             完成
                         </button>
                     </div>
@@ -211,5 +214,4 @@
 <script type="text/javascript">
     $('#tree').creatTree('/packingCategory/CategoryTree');
     $('#tree').filtrateData('/packingArchives/getPackingArchivesByPId',"modal_relate_table","packingInfoModal");
-
 </script>

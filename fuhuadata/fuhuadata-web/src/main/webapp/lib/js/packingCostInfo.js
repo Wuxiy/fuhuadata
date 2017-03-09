@@ -3,6 +3,8 @@
  */
 
 $(document).ready(function(){
+
+    $('#finish').hide();
     //分割url，获取上个页面传过来的id
     var thisURL = document.URL;
     var trans = thisURL.split('?')[1];
@@ -15,7 +17,6 @@ $(document).ready(function(){
         $('.relate').hide();
     }
 
-    $('#packName').val("233");
     var url = '/packingArchives/getPackingArchivesById?id='+id;
     jQuery.ajax({
     	type:'GET',
@@ -40,7 +41,7 @@ $(document).ready(function(){
 
             for(var i=0;i<node.length;i++){
                 table.innerHTML += '<tr>'+
-                        '<td class="text-center"><input type="checkbox"></td>'+
+                        '<td class="text-center"><input type="checkbox" name="cellcheckbox" value="'+node[i].packingId+'" /></td>'+
                         '<td class="col-xs-2 text-center text-middle">'+node[i].packingId+'</td>'+
                         '<td class="col-xs-2 text-center text-middle">'+node[i].packName+'</td>'+
                         '<td class="col-xs-1 text-center text-middle">'+node[i].spec+'</td>'+
@@ -53,4 +54,152 @@ $(document).ready(function(){
             }
     	}
     })
+
+
+//编辑
+    $('#edit').on('click',function(){
+        var celledit = $(".cell_edit");
+        console.log(celledit.length);
+
+        celledit.each(function(){
+            $(this).prop('disabled',false);
+        })
+        if($('#finish').hide()){
+            $('#finish').show();
+        }
+    })
+
+//编辑完成保存
+    $('#finish').on('click',function(){
+        var url = '';
+        var data = {
+            "packName": jQuery('#packName').val(),
+            "spec": jQuery('#spec').val(),
+            "size": jQuery('#size').val(),
+            "quality": jQuery('#quality').val(),
+            "qualityIndex": jQuery('#qualityIndex').val(),
+            "qualityTargetValue": jQuery('#exhibitionName').val(),
+            "unitPrice": jQuery('#unitPrice').val(),
+            "consumption": jQuery('#consumption').val(),
+            "priceEndDate": jQuery('#priceEndDate').val(),
+            "status": jQuery('#status').val(),
+            "suitableType": "1",
+            "bremarks": jQuery('#bremarks').val(),
+        }
+
+        console.log(data);
+        jQuery.ajax({
+            type:"POST",
+            url:url,
+            dataType:"json",
+            contentType:"application/json",
+            data:JSON.stringify(data),
+            success:function(){
+                alert("添加成功");
+                location.reload();
+            }
+        })
+    })
+
 })
+
+
+//关联包材全选
+function checkAll() {
+    var checkAll = $('#checkAll'),
+        allCheckbox = $("input[name='cellcheckbox']");
+
+    //监听全选框变化
+    checkAll.change(function(){
+        if (checkAll.prop("checked")) {
+            allCheckbox.each(function(){
+                    $(this).prop('checked',true);
+            });
+        } else {
+            allCheckbox.each(function(){
+                    $(this).prop('checked',false);
+            });
+        }
+    });
+}
+
+$('#modal_checkAll').on('click',function(){
+    var checkAll = $('#modal_checkAll'),
+        allCheckbox = $("input[name='modal_cellcheckbox']");
+
+    //监听全选框变化
+    checkAll.change(function(){
+        if (checkAll.prop("checked")) {
+            allCheckbox.each(function(){
+                $(this).prop('checked',true);
+            });
+        } else {
+            allCheckbox.each(function(){
+                $(this).prop('checked',false);
+            });
+        }
+    });
+})
+
+//批量删除
+$('#delete').on('click',function(){
+    var ids = new Array();
+    $("input[name='cellcheckbox']:checked").each(function(){
+        ids.push($(this).val());
+    })
+    console.log(ids);
+
+    if(ids.length > 0){
+        var msg = "确定要删除这些关联吗？";
+        if(confirm(msg)){
+            var url = '';
+            var data = ids;
+
+            jQuery.ajax({
+                url:url,
+                type:'POST',
+                dataType:"json",
+                contentType:"application/json",
+                data:JSON.stringify(data),
+                success:function(){
+                    alert("批量删除成功");
+                    location.reload();
+                }
+            })
+        }
+    }else{
+        alert("还未选择需要删除的关联！");
+    }
+})
+
+//添加关联
+$('#finish_relate').on('click',function(){
+    var ids = new Array();
+    $("input[name='cellcheckbox']:checked").each(function(){
+        ids.push($(this).val());
+    })
+    console.log(ids);
+
+    if(ids.length > 0){
+        var msg = "确认要为主材添加这些关联吗？";
+        if(msg){
+            var url = '';
+            var data = ids;
+
+            jQuery.ajax({
+                url:url,
+                type:'POST',
+                dataType:"json",
+                contentType:"application/json",
+                data:JSON.stringify(data),
+                success:function(){
+                    alert("添加关联成功！");
+                    location.reload();
+                }
+            })
+        }
+    }else{
+        alert('还未选择要添加的关联');
+    }
+})
+

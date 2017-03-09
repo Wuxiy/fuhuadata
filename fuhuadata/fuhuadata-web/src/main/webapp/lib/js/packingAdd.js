@@ -2,31 +2,19 @@
  * Created by young on 2017/3/6.
  */
 
-$(document).ready(function(){
+$(function () {
+    var thisURL = document.URL;
+    var ni = thisURL.split('?')[1];
+    var names = ni.split('&')[0];
+    var bids = ni.split('&')[1];
+    var name = decodeURI(names.split('=')[1]);
+    var bid = bids.split('=')[1];
+    var names = document.getElementById('packName');
+    names.value = name;
 
-    var btn = '';
-    if(a){
-        btn = '<a class="btn btn-xs btn-primary pull-right panel-heading-btn packingAdd" href="">完成</a>';
-    }else{
-        btn = '<a class="btn btn-xs btn-primary pull-right panel-heading-btn" href="">编辑</a>'
+    if(bid != 1){
+        $('.relate').hide();
     }
-    return btn;
-    $('#btn').append(btn);
-
-    $(".file").fileinput({
-        uploadUrl: '#', // you must set a valid URL here else you will get an error
-        allowedFileExtensions : ['jpg', 'png','gif'],
-        overwriteInitial: false,
-        showPreview : true, //是否显示预览
-        maxFileSize: 1000,
-        maxFilesNum: 10,
-        maxImageWidth: 280,//图片的最大宽度
-        maxImageHeight: 280,//图片的最大高度
-        //allowedFileTypes: ['image', 'video', 'flash'],
-        slugCallback: function(filename) {
-            return filename.replace('(', '_').replace(']', '_');
-        }
-    });
 
     $('.packingAdd').on('click',function(){
         var url = "/packingArchives/addPackingArchives"
@@ -59,5 +47,44 @@ $(document).ready(function(){
     })
 })
 
+$("#file").fileinput({
+    language: 'zh', //设置语言
+    uploadUrl: '/upload/uploadFile', // you must set a valid URL here else you will get an error
+    allowedFileExtensions : ['jpg', 'png','gif'],
+
+    overwriteInitial: false,
+    maxFileSize: 1000,
+    maxFilesNum: 10,
+    maxImageWidth: 280,//图片的最大宽度
+    maxImageHeight: 280,//图片的最大高度
+    //allowedFileTypes: ['image', 'video', 'flash'],
+    enctype: 'multipart/form-data',
+    slugCallback: function(filename) {
+        return filename.replace('(', '_').replace(']', '_');
+    }
+});
+
+$("img[class='file-preview-image']").each(function(){
+    var url = $(this).attr('src');
+    console.log(url);
+})
+
+$('#modal_checkAll').on('click',function(){
+    var checkAll = $('#modal_checkAll'),
+        allCheckbox = $("input[name='modal_cellcheckbox']");
+
+    //监听全选框变化
+    checkAll.change(function(){
+        if (checkAll.prop("checked")) {
+            allCheckbox.each(function(){
+                $(this).prop('checked',true);
+            });
+        } else {
+            allCheckbox.each(function(){
+                $(this).prop('checked',false);
+            });
+        }
+    });
+})
 
 

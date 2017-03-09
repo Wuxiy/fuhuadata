@@ -41,7 +41,6 @@ public class FileUploadController {
      */
     @RequestMapping("/uploadFile")
     public ModelAndView uploadFile(@RequestParam("files") MultipartFile[] files, HttpServletRequest request) {
-
         System.out.println(files.length);
 //        System.out.println(files[1].getName());
         System.out.println(files[0].getName());

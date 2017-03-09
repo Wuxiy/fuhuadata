@@ -26,4 +26,11 @@
 </form>
 
 </body>
+<script type="text/javascript">
+    $("input[name='files']").each(function(){
+        var url = $(this).attr("value");
+
+        console.log(url);
+    })
+</script>
 </html>
