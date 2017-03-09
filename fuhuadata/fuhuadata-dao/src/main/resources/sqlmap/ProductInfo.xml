@@ -182,7 +182,7 @@
 						<isNotEmpty prepend=", " property="productId">product_id=#productId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="bigCategoryId">big_category_id=#bigCategoryId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="midCategoryId">mid_category_id=#midCategoryId#</isNotEmpty>
-						<isNotEmpty prepend=", " property="smallCateoryId">small_category_id=#smallCateoryId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="smallCateoryId">small_category_id=#smallCategoryId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="categoryName">category_name=#categoryName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="concentration">concentration=#concentration#</isNotEmpty>
 						<isNotEmpty prepend=", " property="name">name=#name#</isNotEmpty>
@@ -201,7 +201,7 @@
 						<isNotEmpty prepend=", " property="createTime">create_time=#createTime#</isNotEmpty>
 						<isNotEmpty prepend=", " property="modifyTime">modify_time=#modifyTime#</isNotEmpty>
 					</dynamic>
-		WHERE product_id=#product_id#
+		WHERE product_id=#productId#
 	</update>
 	
 	<delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
