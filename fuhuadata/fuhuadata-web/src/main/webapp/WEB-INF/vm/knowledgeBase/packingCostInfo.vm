@@ -14,12 +14,18 @@
             <div id="Baseinfo" class="tab-pane fade in active">
                 <div class="panel panel-default">
                     <div class="panel-heading" id="btn">
+<<<<<<< HEAD
                         <a class="btn btn-xs btn-primary pull-right panel-heading-btn" id="edit">
                             编辑
                         </a>
                         <a class="btn btn-xs btn-primary pull-right panel-heading-btn" id="finish">
                             完成
                         </a>
+=======
+                        <a class="btn btn-xs btn-primary pull-right panel-heading-btn" >
+                            编辑
+                        </a>
+>>>>>>> d4dffe2947211b95eab163f9c3352b8e4692da8b
                         <h3 class="panel-title">
                             基础信息
                         </h3>
@@ -29,6 +35,7 @@
                             <div class="form-group ">
                                 <label class="col-xs-1 control-label">包材类型名称</label>
                                 <div class="col-xs-3">
+<<<<<<< HEAD
                                     <input class="form-control cell_edit" type="text" id="packName" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label">规格</label>
@@ -38,11 +45,23 @@
                                 <label class="col-xs-1 control-label">尺寸</label>
                                 <div class="col-xs-3">
                                     <input class="form-control cell_edit" type="text" id="size" disabled/>
+=======
+                                    <input class="form-control" type="text" id="packName" disabled/>
+                                </div>
+                                <label class="col-xs-1 control-label">规格</label>
+                                <div class="col-xs-3">
+                                    <input class="form-control" type="text" id="spec" disabled/>
+                                </div>
+                                <label class="col-xs-1 control-label">尺寸</label>
+                                <div class="col-xs-3">
+                                    <input class="form-control" type="text" id="size" disabled/>
+>>>>>>> d4dffe2947211b95eab163f9c3352b8e4692da8b
                                 </div>
                             </div>
                             <div class="form-group ">
                                 <label class="col-xs-1 control-label">材质</label>
                                 <div class="col-xs-3">
+<<<<<<< HEAD
                                     <input class="form-control cell_edit" type="text" id="quality" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label">质量指标</label>
@@ -52,11 +71,23 @@
                                 <label class="col-xs-1 control-label">质量指标数值</label>
                                 <div class="col-xs-3">
                                     <input class="form-control cell_edit" type="text" id="qualityTargetValue" disabled/>
+=======
+                                    <input class="form-control" type="text" id="quality" disabled/>
+                                </div>
+                                <label class="col-xs-1 control-label">质量指标</label>
+                                <div class="col-xs-3">
+                                    <input class="form-control" type="text" id="qualityIndex" disabled/>
+                                </div>
+                                <label class="col-xs-1 control-label">质量指标数值</label>
+                                <div class="col-xs-3">
+                                    <input class="form-control" type="text" id="qualityTargetValue" disabled/>
+>>>>>>> d4dffe2947211b95eab163f9c3352b8e4692da8b
                                 </div>
                             </div>
                             <div class="form-group ">
                                 <label class="col-xs-1 control-label">单价</label>
                                 <div class="col-xs-3">
+<<<<<<< HEAD
                                     <input type="text" class="form-control cell_edit" id="unitPrice" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label">单耗</label>
@@ -66,12 +97,27 @@
                                 <label class="col-xs-1 control-label">价格有效期</label>
                                 <div class="col-xs-3">
                                     <input type="date" class="form-control cell_edit" id="priceEndDate" disabled/>
+=======
+                                    <input type="text" class="form-control" id="unitPrice" disabled/>
+                                </div>
+                                <label class="col-xs-1 control-label">单耗</label>
+                                <div class="col-xs-3">
+                                    <input type="text" class="form-control" id="consumption" disabled/>
+                                </div>
+                                <label class="col-xs-1 control-label">价格有效期</label>
+                                <div class="col-xs-3">
+                                    <input type="date" class="form-control" id="priceEndDate" disabled/>
+>>>>>>> d4dffe2947211b95eab163f9c3352b8e4692da8b
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-xs-1 control-label">状态</label>
                                 <div class="col-xs-3">
+<<<<<<< HEAD
                                     <select class="form-control cell_edit" name="items" id="status" disabled>
+=======
+                                    <select class="form-control" name="items" id="status" disabled>
+>>>>>>> d4dffe2947211b95eab163f9c3352b8e4692da8b
                                         <option  value="1">已启用</option>
                                         <option  value="0">已禁用</option>
                                     </select>
@@ -81,6 +127,7 @@
                                 <label class="col-xs-1 control-label">适用剂型</label>
                                 <div class="col-xs-4">
                                     <label class="checkbox-inline">
+<<<<<<< HEAD
                                         <input type="checkbox" class="suitableType cell_edit" value="0"> 原药
                                     </label>
                                     <label class="checkbox-inline">
@@ -88,13 +135,26 @@
                                     </label>
                                     <label class="checkbox-inline">
                                         <input type="checkbox" class="suitableType cell_edit" value="2"> 颗粒剂（粉剂）
+=======
+                                        <input type="checkbox" class="suitableType" value="0"> 原药
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" class="suitableType" value="1"> 水剂
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" class="suitableType" value="2"> 颗粒剂（粉剂）
+>>>>>>> d4dffe2947211b95eab163f9c3352b8e4692da8b
                                     </label>
                                 </div>
                             </div>
                             <div class="form-group ">
                                 <label class="col-xs-1 control-label">备注</label>
                                 <div class="col-xs-11">
+<<<<<<< HEAD
                                     <textarea class="form-control cell_edit" rows="4" id="bRemarks" disabled></textarea>
+=======
+                                    <textarea class="form-control" rows="4" id="bRemarks" disabled></textarea>
+>>>>>>> d4dffe2947211b95eab163f9c3352b8e4692da8b
                                 </div>
                             </div>
                             <div class="form-group ">
@@ -115,7 +175,11 @@
                                 <span class="glyphicon glyphicon-plus"></span>
                                 新增关联
                             </a>
+<<<<<<< HEAD
                             <a class="btn btn-primary" id="delete">删除关联</a>
+=======
+                            <a class="btn btn-primary" href="">删除关联</a>
+>>>>>>> d4dffe2947211b95eab163f9c3352b8e4692da8b
                         </div>
                         <h3 class="panel-title">
                             关联包材
@@ -125,7 +189,11 @@
                         <table  class="display table table-condensed table-bordered table-striped" >
                             <thead>
                             <tr>
+<<<<<<< HEAD
                                 <th class="text-center"><input type="checkbox" id="checkAll" onclick="checkAll()"></th>
+=======
+                                <th class="text-center"><input type="checkbox"></th>
+>>>>>>> d4dffe2947211b95eab163f9c3352b8e4692da8b
                                 <th class="col-xs-2 text-center text-middle">包材类型编号</th>
                                 <th class="col-xs-2 text-center text-middle" >包材类型名称</th>
                                 <th class="col-xs-1 text-center text-middle">规格</th>
@@ -171,7 +239,11 @@
                             <table class="table table-condensed table-bordered table-striped text-center">
                                 <thead>
                                 <tr>
+<<<<<<< HEAD
                                     <th class="text-center"><input type="checkbox" id="modal_checkAll"></th>
+=======
+                                    <th class="text-center"><input type="checkbox"></th>
+>>>>>>> d4dffe2947211b95eab163f9c3352b8e4692da8b
                                     <th class="col-xs-2 text-center text-middle">包材类型编号</th>
                                     <th class="col-xs-2 text-center text-middle" >包材类型名称</th>
                                     <th class="col-xs-1 text-center text-middle">规格</th>
@@ -192,7 +264,11 @@
             <div class="modal-footer">
                 <div class="row">
                     <div class="col-xs-3 col-xs-offset-3">
+<<<<<<< HEAD
                         <button type="button" class="btn btn-primary btn-block" id="finish_relate">
+=======
+                        <button type="button" class="btn btn-primary btn-block">
+>>>>>>> d4dffe2947211b95eab163f9c3352b8e4692da8b
                             完成
                         </button>
                     </div>

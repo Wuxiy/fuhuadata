@@ -140,6 +140,7 @@ public class PackingArchivesAction {
     @ResponseBody
     public ResultPojo deleteRelation(int id,@RequestBody String ids){
         try{
+            System.out.println(id);
             PackingArchives packingArchives = new PackingArchives();
             System.out.println(ids);
             String idss=ids.toString();
