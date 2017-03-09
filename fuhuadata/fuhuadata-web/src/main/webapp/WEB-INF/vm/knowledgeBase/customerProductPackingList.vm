@@ -39,10 +39,10 @@
                                 <div class="input-group">
                                     <input id="category" class="form-control" type="search" value="" placeholder="请输入品类"/>
                                     <span class="input-group-btn">
-                                                <button data-toggle="modal" data-target="#search" class="btn btn-xs btn-default" type="button">
-                                                    <span class="glyphicon glyphicon-search"></span>
-                                                </button>
-                                            </span>
+                                        <button data-toggle="modal" class="btn btn-xs btn-default" data-target="#tSearch" type="button">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
                                 </div>
                             </div>
                             <label class="col-xs-1 control-label pull-right">品类</label>
@@ -84,7 +84,35 @@
     </div>
 </div>
 
+<!--modal-->
+<div class="modal fade" id="tSearch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body well" style="max-height: 200px; overflow-y: scroll; overflow-x: scroll;">
+                <div id="tree" class="tree">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" language="javascript" src="/lib/js/creatTree.js"></script>
 <script type="text/javascript">
+
+    $('#tree').creatTree('/productCategory/CategoryTree');
+    $('#modal').on('dblclick','a.cNode',function (e) {
+        e.preventDefault();
+        console.log(e.target);
+        var tarEltext = $(e.target).text();
+        $('#category').val(tarEltext);
+    });
     $(document).ready(function() {
         var table =$('#customer_customer_packaging_table').DataTable( {
             "ajax":'/customerProductPacking/queryCustomerProductPackingList',
@@ -128,7 +156,6 @@
            console.log(args1);
            var args3 = $("#factory_name").val();
            console.log(args3);
-//           table.search(args1+" "+args2+" "+args3).draw(false);//保留分页，排序状态
             table
                     .column(1)
                     .search(args2)
