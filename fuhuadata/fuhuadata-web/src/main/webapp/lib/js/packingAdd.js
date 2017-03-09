@@ -61,7 +61,7 @@ $("#file").fileinput({
     slugCallback: function(filename) {
         return filename.replace('(', '_').replace(']', '_');
     }
-}).on("filebatchselected", function(event, files) {
+}).on("filebatchselected", function(event, file) {
     console.log('233');
 
 }).on("fileuploaded", function(event, data) {

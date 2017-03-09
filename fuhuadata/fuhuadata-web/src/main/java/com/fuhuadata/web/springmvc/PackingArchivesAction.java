@@ -138,13 +138,12 @@ public class PackingArchivesAction {
     @RequestMapping(value="/deleteRelation",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "deleteRelation")
     @ResponseBody
-    public ResultPojo deleteRelation(@RequestBody String ids){
+    public ResultPojo deleteRelation(int id,@RequestBody String ids){
         try{
             PackingArchives packingArchives = new PackingArchives();
             System.out.println(ids);
             String idss=ids.toString();
-            int id=1;
-            String pids = packingArchivesService.getPackingArchivesById(1).getModel().getPack().getAssociatedPackingId();
+            String pids = packingArchivesService.getPackingArchivesById(id).getModel().getPack().getAssociatedPackingId();
             packingArchives.setAssociatedPackingId(idss);
             Result result = packingArchivesService.updatePackingArchivesById(id,packingArchives);
             return result.getResultPojo();

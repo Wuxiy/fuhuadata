@@ -9,6 +9,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -42,7 +43,8 @@ public class FileUploadController {
      * @return
      */
     @RequestMapping("/uploadFile")
-    public ResultPojo uploadFile(@RequestParam("files") MultipartFile[] files, HttpServletRequest request) {
+    @ResponseBody
+    public ResultPojo uploadFile(@RequestParam("file") MultipartFile[] files, HttpServletRequest request) {
         Result result = new Result();
         String path=null;
         File tempFile=null;
