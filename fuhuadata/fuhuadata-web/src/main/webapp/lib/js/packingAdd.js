@@ -97,6 +97,7 @@ $("input[id='file-1']").fileinput({
         obj1.path = data.response.data;
         obj1.name = $('#imagname1').val();
         arr.push(obj1);
+        console.log(arr);
     });
 
 $("input[id='file-2']").fileinput({
@@ -127,6 +128,7 @@ $("input[id='file-2']").fileinput({
     obj2.path = data.response.data;
     obj2.name = $('#imagname2').val();
     arr.push(obj2);
+    console.log(arr);
 });
 
 $("input[id='file-3']").fileinput({
@@ -160,6 +162,7 @@ $("input[id='file-3']").fileinput({
 });
 
 //适用产品类型checkbox
+
 function checkboxArr() {
     var checkboxarr = [];
     var a;
@@ -167,6 +170,7 @@ function checkboxArr() {
         a =  $(this).val() + ",";
         checkboxarr.push(a);
     })
+    checkboxarr.
     return checkboxarr;
 }
 
@@ -180,7 +184,7 @@ $('#add_relate').on('click',function(){
 
 //新增完成
 $('.packingAdd').on('click',function(){
-    var url = "/packingArchives/addPackingArchives"
+    var url = "/packingArchives/doAddPackingArchives"
     var data = {
         "bigCategoryId":bid,
         "smallCategoryId":sid,
@@ -190,7 +194,7 @@ $('.packingAdd').on('click',function(){
         "quality": jQuery('#quality').val(),
         "qualityIndex": jQuery('#qualityIndex').val(),
         "qualityTargetValue": jQuery('#qualityTargetValue').val(),
-        "unitPrice": jQuery('#unitPrice').val(),
+        "unitPrice": jQuery('#unitPrice').val().toString(),
         "consumption": jQuery('#consumption').val(),
         "priceEndDate": jQuery('#priceEndDate').val(),
         "status": jQuery('#status').val(),
@@ -200,7 +204,7 @@ $('.packingAdd').on('click',function(){
         "bremarks": jQuery('#bremarks').val(),
     }
     console.log(data);
-    /*jQuery.ajax({
+    jQuery.ajax({
         type:"POST",
         url:url,
         dataType:"json",
@@ -210,7 +214,7 @@ $('.packingAdd').on('click',function(){
             alert("添加成功");
             location.reload();
         }
-    })*/
+    })
 })
 
 //全选框

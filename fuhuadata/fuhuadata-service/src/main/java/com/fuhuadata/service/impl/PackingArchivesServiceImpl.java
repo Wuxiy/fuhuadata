@@ -5,10 +5,12 @@ import com.fuhuadata.domain.query.PackingArchivesQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.PackingArchivesManager;
 import com.fuhuadata.service.PackingArchivesService;
+import com.fuhuadata.vo.ImagePathVO;
 import com.fuhuadata.vo.PackingArchivesVO;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -21,7 +23,17 @@ public class PackingArchivesServiceImpl implements PackingArchivesService {
     @Override
     public Result<PackingArchives> addPackingArchives(PackingArchives packingArchives) {
         Result<PackingArchives> result = new Result<PackingArchives>();
+
         try {
+            String ids=packingArchives.getAssociatedPackingId();
+            System.out.println(ids);
+            ids=ids.replace("[","");
+            ids=ids.replace("]","");
+            ids=ids.replace("\"","");
+            packingArchives.setAssociatedPackingId(ids);
+            if(packingArchives.getImagePath().equals("[]")){
+                packingArchives.setImagePath("");
+            }
             result.addDefaultModel(packingArchivesManager.addPackingArchives(packingArchives));
         } catch (Exception e) {
             result.setSuccess(false);
@@ -91,6 +103,20 @@ public class PackingArchivesServiceImpl implements PackingArchivesService {
                 result.setSimpleErrorMsg(0, "当前包材档案数据不存在，请重试");
             }else {
                 packingArchivesVO.setPack(packingArchives);
+                String imagePath = packingArchives.getImagePath();
+                if(imagePath!=null){
+                    JSONArray json = JSONArray.fromObject(imagePath); // 首先把字符串转成JSONArray对象
+                    if (json.size() > 0) {
+                        for (int i = 0; i < json.size(); i++) {
+                            JSONObject job = json.getJSONObject(i);  // 遍历 jsonarray 数组，把每一个对象转成 json 对象
+                            ImagePathVO imagePathVO =new ImagePathVO();
+                            imagePathVO.setName((String) job.get("name"));
+                            imagePathVO.setPath((String)job.get("path"));
+                            packingArchivesVO.addImagePath(imagePathVO);
+                        }
+                    }
+
+                }
                 String ids = packingArchives.getAssociatedPackingId();
                 if(ids != null) {
                     String[] idArray = ids.split(",");

@@ -66,8 +66,13 @@
                                 <label class="col-xs-1 control-label">状态</label>
                                 <div class="col-xs-3">
                                     <select class="form-control" name="items" id="status">
+<<<<<<< HEAD
+                                        <option  value="1">已启用</option>
+                                        <option  value="0">已禁用</option>
+=======
                                         <option value="1">已启用</option>
                                         <option value="0">已禁用</option>
+>>>>>>> 64e85014c5c20b987dd4347690b41781b65ca1ae
                                     </select>
                                 </div>
                             </div>
