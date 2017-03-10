@@ -26,8 +26,8 @@
     	success:function(result){
     		var ResultData = result.data;
     		var node = ResultData.nodes;
-            var preList = eval(ResultData.pack.imagePath);
-
+            var reData = eval(ResultData.pack.imagePath);
+            var preList = new Array();
             var arr = [ResultData.pack.suitableType];
             $('#packName').val(ResultData.pack.packName);
             $('#spec').val(ResultData.pack.spec);
@@ -58,12 +58,14 @@
                         '</tr>';
             }
 
-            for(var j=0;j<preList.length;j++){
-
+            for(var j=0;j<reData.length;j++){
+                var array_element = reData[j];
+                console.log(array_element);
+                preList[i] = "<img src=\"/eim/upload/getIMG.do?savePath="+array_element.path+"&name="+array_element.name+"\" class=\"file-preview-image\">";
             }
 
-            /*$('#testlogo').fileinput({
-                uploadUrl: '/eim/upload/uploadFile.do',
+            $('#testlogo').fileinput({
+                uploadUrl: '',
                 uploadAsync:true,
                 showCaption: true,
                 showUpload: true,//是否显示上传按钮
@@ -75,7 +77,6 @@
                 maxFileCount: 10,
                 initialPreviewShowDelete:true,
                 msgFilesTooMany: "选择上传的文件数量 超过允许的最大数值！",
-                initialPreview: previewJson,
                 previewFileIcon: '<i class="fa fa-file"></i>',
                 allowedPreviewTypes: ['image'],
                 previewFileIconSettings: {
@@ -86,7 +87,6 @@
                     'zip': '<i class="fa fa-file-archive-o text-muted"></i>',
                     'sql': '<i class="fa fa-file-word-o text-primary"></i>',
                 },
-                initialPreviewConfig: preConfigList
             }).off('filepreupload').on('filepreupload', function() {
             // alert(data.url);
             }).on("fileuploaded", function(event, outData) {
@@ -94,7 +94,7 @@
                 var result = outData.response.id;
             // 对应的input 赋值
                 $('#htestlogo').val(result).change();
-            });*/
+            });
     	}
     })
 

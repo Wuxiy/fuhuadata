@@ -170,7 +170,7 @@ function checkboxArr() {
         a =  $(this).val() + ",";
         checkboxarr.push(a);
     })
-    checkboxarr.
+
     return checkboxarr;
 }
 
