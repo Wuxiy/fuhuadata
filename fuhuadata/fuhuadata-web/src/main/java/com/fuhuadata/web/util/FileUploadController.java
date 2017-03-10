@@ -96,7 +96,6 @@ public class FileUploadController {
         org.springframework.util.MultiValueMap<String,MultipartFile> fileMap1=multipartRequest.getMultiFileMap();
         System.out.println(fileMap.size());
         System.out.println(fileMap1.size());
-
         String ctxPath = request.getSession().getServletContext().getRealPath(
                 "/")
                 + "\\" + "images\\";
