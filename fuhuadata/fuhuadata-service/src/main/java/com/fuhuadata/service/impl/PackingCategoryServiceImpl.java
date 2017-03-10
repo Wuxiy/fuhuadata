@@ -86,7 +86,7 @@ public class PackingCategoryServiceImpl implements PackingCategoryService {
      * @return
      */
     public  List<CategoryTree> getAllNode(List<PackingCategoryVO> list){
-        Map<Integer, CategoryTree> map = new HashMap<Integer, CategoryTree>();
+        Map<String, CategoryTree> map = new HashMap<String, CategoryTree>();
         List<CategoryTree> root_list = new ArrayList<CategoryTree>();
         try {
             for (PackingCategoryVO vo : list) {
@@ -103,7 +103,7 @@ public class PackingCategoryServiceImpl implements PackingCategoryService {
                 if (parent == null) {
                     parent = new CategoryTree();
                     parent.setCid(vo.getParentId());
-                    parent.setPid(0);
+                    parent.setPid("0");
                     parent.setCname(vo.getParentName());
                 }
                 if (child != null) {
@@ -112,9 +112,9 @@ public class PackingCategoryServiceImpl implements PackingCategoryService {
                 map.put(parent.getCid(), parent);
             }
 
-            Set<Map.Entry<Integer, CategoryTree>> entrys = map.entrySet();
-            for (Map.Entry<Integer, CategoryTree> entry : entrys) {
-                if (entry.getValue().getPid() == 0) {
+            Set<Map.Entry<String, CategoryTree>> entrys = map.entrySet();
+            for (Map.Entry<String, CategoryTree> entry : entrys) {
+                if (entry.getValue().getPid() .equals("0")) {
                     root_list.add(entry.getValue());
                 }
             }

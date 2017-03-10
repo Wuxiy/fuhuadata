@@ -24,9 +24,9 @@
                             </button>
                             </div>
                             <div class="col-xs-2 pull-right">
-                                <input id="product_name" class="form-control" type="search" value="" placeholder="请输入产品名称"/>
+                                <input id="customer_product_name" class="form-control" type="search" value="" placeholder="请输入产品名称"/>
                             </div>
-                            <label class="col-xs-1 control-label pull-right">产品名称</label>
+                            <label class="col-xs-1 control-label pull-right">客户商品名</label>
                             <div class="col-xs-1 pull-right">
                                 <select id="factory_name" class="form-control">
                                     <option value="">全部</option>
@@ -37,7 +37,7 @@
                             <label class="control-label col-xs-1 pull-right">加工厂</label>
                             <div class="col-xs-2 pull-right">
                                 <div class="input-group">
-                                    <input id="category" class="form-control" type="search" value="" placeholder="请输入品类"/>
+                                    <input id="product_name" class="form-control" type="search" value="" placeholder="请输入产品名称"/>
                                     <span class="input-group-btn">
                                         <button data-toggle="modal" class="btn btn-xs btn-default" data-target="#tSearch" type="button">
                                             <span class="glyphicon glyphicon-search"></span>
@@ -45,14 +45,14 @@
                                     </span>
                                 </div>
                             </div>
-                            <label class="col-xs-1 control-label pull-right">品类</label>
+                            <label class="col-xs-1 control-label pull-right">产品名称</label>
                             <div class="col-xs-2 pull-right">
                                 <input id="customer_name" class="form-control" type="search" placeholder="请输入客户名称"/>
                             </div>
                             <label class="control-label col-xs-1 pull-right">客户名称</label>
                         </div>
                     </div>
-                    </table>
+
                     <!--搜索框结束-->
                     <!--表格开始-->
                     <table id="customer_customer_packaging_table" class="table table-condensed table-bordered table-striped text-center" cellpadding="0">
@@ -76,8 +76,8 @@
 
                     </table>
                     <!--表格结束-->
-
                 </div>
+                <div class="panel-body clearfix"></div>
             </div>
             <!--表格结束-->
         </div>
@@ -107,11 +107,11 @@
 <script type="text/javascript">
 
     $('#tree').creatTree('/productCategory/CategoryTree');
-    $('#modal').on('dblclick','a.cNode',function (e) {
+    $(document).on('click','a.cNode',function (e) {
         e.preventDefault();
         console.log(e.target);
         var tarEltext = $(e.target).text();
-        $('#category').val(tarEltext);
+        $('#product_name').val(tarEltext);
     });
     $(document).ready(function() {
         var table =$('#customer_customer_packaging_table').DataTable( {
@@ -155,10 +155,13 @@
            var args2 = $("#customer_name").val();
            console.log(args1);
            var args3 = $("#factory_name").val();
+           var args4 = $("#customer_product_name").val();
            console.log(args3);
             table
                     .column(1)
                     .search(args2)
+                    .column(2)
+                    .search(args4)
                     .column(5)
                     .search(args1)
                     .column(11)

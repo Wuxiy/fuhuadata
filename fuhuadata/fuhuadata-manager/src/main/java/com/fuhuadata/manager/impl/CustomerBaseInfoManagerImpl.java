@@ -16,55 +16,55 @@ import java.util.ArrayList;
 public class CustomerBaseInfoManagerImpl implements CustomerBaseInfoManager {
 
 	@Resource
-    private CustomerBaseInfoDao customerParentDao;
+    private CustomerBaseInfoDao customerBaseInfoDao;
     
 
-    public CustomerBaseInfo addCustomerParent(CustomerBaseInfo customerParent) {
-    	return customerParentDao.addCustomerParent(customerParent);
+    public CustomerBaseInfo addCustomerBaseInfo(CustomerBaseInfo customerBaseInfo) {
+    	return customerBaseInfoDao.addCustomerBaseInfo(customerBaseInfo);
     }
     
-    public boolean updateCustomerParentById(String customer_id, CustomerBaseInfo customerParent) {
-    	return customerParentDao.updateCustomerParentById(customer_id, customerParent) == 1 ? true : false;
+    public boolean updateCustomerBaseInfoById(String customer_id, CustomerBaseInfo customerBaseInfo) {
+    	return customerBaseInfoDao.updateCustomerBaseInfoById(customer_id, customerBaseInfo) == 1 ? true : false;
     }
     
-	public List<CustomerBaseInfo> getCustomerParentsByQuery(QueryCustomerBaseInfo queryCustomerParent) {
-		return customerParentDao.getCustomerParentsByQuery(queryCustomerParent);
+	public List<CustomerBaseInfo> getCustomerBaseInfoByQuery(QueryCustomerBaseInfo queryCustomerBaseInfo) {
+		return customerBaseInfoDao.getCustomerBaseInfosByQuery(queryCustomerBaseInfo);
 	}
 
-    public boolean deleteCustomerParentById(String customer_id) {
-    	return customerParentDao.deleteCustomerParentById(customer_id) == 1 ? true : false;
+    public boolean deleteCustomerBaseInfoById(String customer_id) {
+    	return customerBaseInfoDao.deleteCustomerBaseInfoById(customer_id) == 1 ? true : false;
     }
     
     
-    public List<CustomerBaseInfo> getAllCustomerParents() {
-    	return customerParentDao.getAllCustomerParents();
+    public List<CustomerBaseInfo> getAllCustomerBaseInfos() {
+    	return customerBaseInfoDao.getAllCustomerBaseInfos();
     }
     	
-    public Result<List<CustomerBaseInfo>> getCustomerParentsByPage(QueryCustomerBaseInfo queryCustomerParent) {
+    public Result<List<CustomerBaseInfo>> getCustomerBaseInfoByPage(QueryCustomerBaseInfo queryCustomerBaseInfo) {
 		Result<List<CustomerBaseInfo>> result = new Result<List<CustomerBaseInfo>>();
-		int totalItem = customerParentDao.count(queryCustomerParent);
+		int totalItem = customerBaseInfoDao.count(queryCustomerBaseInfo);
 		;
 		if (totalItem > 0) {
-			result.addDefaultModel("CustomerParents", customerParentDao.getCustomerParentsByPage(queryCustomerParent));		
+			result.addDefaultModel("CustomerBaseInfos", customerBaseInfoDao.getCustomerBaseInfoByPage(queryCustomerBaseInfo));
 		} else {
-			result.addDefaultModel("CustomerParents", new ArrayList<CustomerBaseInfo>());
+			result.addDefaultModel("CustomerBaseInfos", new ArrayList<CustomerBaseInfo>());
 		}
 		
-		result.setPageSize(queryCustomerParent.getPageSize());
-		result.setIndex(queryCustomerParent.getIndex());
+		result.setPageSize(queryCustomerBaseInfo.getPageSize());
+		result.setIndex(queryCustomerBaseInfo.getIndex());
 		result.setTotalItem(totalItem);
 		
 		return result;
     }
     	
     	
-    public CustomerBaseInfo getCustomerParentById(String customer_id) {
-    	return customerParentDao.getCustomerParentById(customer_id);
+    public CustomerBaseInfo getCustomerBaseInfoById(String customer_id) {
+    	return customerBaseInfoDao.getCustomerBaseInfoById(customer_id);
     }
     
 
-    public int count(QueryCustomerBaseInfo queryCustomerParent) {
-    	return customerParentDao.count(queryCustomerParent);
+    public int count(QueryCustomerBaseInfo queryCustomerBaseInfo) {
+    	return customerBaseInfoDao.count(queryCustomerBaseInfo);
     }
     
 }

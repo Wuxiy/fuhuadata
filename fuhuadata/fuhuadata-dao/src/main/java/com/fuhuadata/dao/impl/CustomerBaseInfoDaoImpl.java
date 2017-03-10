@@ -22,37 +22,37 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
     public static final String GET_PAGE = "CUSTOMERBASEINFO.GET-PAGE";
     public static final String COUNT = "CUSTOMERBASEINFO.COUNT";
     
-    public CustomerBaseInfo addCustomerParent(CustomerBaseInfo customerParent) {
-		customerParent.setCustomerId((String) this.insert(ADD, customerParent));
-    	return customerParent;
+    public CustomerBaseInfo addCustomerBaseInfo(CustomerBaseInfo customerBaseInfo) {
+		customerBaseInfo.setCustomerId((String) this.insert(ADD, customerBaseInfo));
+    	return customerBaseInfo;
     }
     
-    public int updateCustomerParentById(String customer_id, CustomerBaseInfo customerParent) {
-    	customerParent.setCustomerId(customer_id);
-		return this.update(UPDATE, customerParent);
+    public int updateCustomerBaseInfoById(String customer_id, CustomerBaseInfo customerBaseInfo) {
+    	customerBaseInfo.setCustomerId(customer_id);
+		return this.update(UPDATE, customerBaseInfo);
 }
 
-    public int deleteCustomerParentById(String customer_id) {
+    public int deleteCustomerBaseInfoById(String customer_id) {
     	return this.update(DELETE_BY_ID, customer_id);
     }
     
-    public List<CustomerBaseInfo> getAllCustomerParents() {
+    public List<CustomerBaseInfo> getAllCustomerBaseInfos() {
     	return this.queryForList(GET_ALL);
     }
     	
-    public List<CustomerBaseInfo> getCustomerParentsByQuery(QueryCustomerBaseInfo queryCustomerParent) {
-    	return this.queryForList(GET_BY_QUERY, queryCustomerParent);
+    public List<CustomerBaseInfo> getCustomerBaseInfosByQuery(QueryCustomerBaseInfo queryCustomerBaseInfo) {
+    	return this.queryForList(GET_BY_QUERY, queryCustomerBaseInfo);
     }
     	
-    public CustomerBaseInfo getCustomerParentById(String customer_id) {
+    public CustomerBaseInfo getCustomerBaseInfoById(String customer_id) {
     	return (CustomerBaseInfo) this.queryForObject(GET_BY_ID, customer_id);
     }
     
-    public List<CustomerBaseInfo> getCustomerParentsByPage(QueryCustomerBaseInfo queryCustomerParent) {
-    	return this.queryForList(GET_PAGE, queryCustomerParent);
+    public List<CustomerBaseInfo> getCustomerBaseInfoByPage(QueryCustomerBaseInfo queryCustomerBaseInfo) {
+    	return this.queryForList(GET_PAGE, queryCustomerBaseInfo);
     }
 
-    public int count(QueryCustomerBaseInfo queryCustomerParent) {
-    	return ((Integer) this.queryForObject(COUNT, queryCustomerParent)).intValue();
+    public int count(QueryCustomerBaseInfo queryCustomerBaseInfo) {
+    	return ((Integer) this.queryForObject(COUNT, queryCustomerBaseInfo)).intValue();
     }
 }

@@ -10,8 +10,8 @@ import java.util.List;
  */
 public class CategoryTree implements Serializable {
 
-    private Integer cid;
-    private Integer pid;
+    private String cid;
+    private String pid;
     private String cname;
 
     private List<CategoryTree> nodes =new ArrayList<CategoryTree>();
@@ -20,19 +20,19 @@ public class CategoryTree implements Serializable {
 
     }
 
-    public Integer getCid() {
+    public String getCid() {
         return cid;
     }
 
-    public void setCid(Integer cid) {
+    public void setCid(String cid) {
         this.cid = cid;
     }
 
-    public Integer getPid() {
+    public String getPid() {
         return pid;
     }
 
-    public void setPid(Integer pid) {
+    public void setPid(String pid) {
         this.pid = pid;
     }
 

@@ -171,7 +171,7 @@
                             <table class="table table-condensed table-bordered table-striped text-center">
                                 <thead>
                                 <tr>
-                                    <th class="text-center"><input type="checkbox" id="modal_checkAll"></th
+                                    <th class="text-center"><input type="checkbox" id="modal_checkAll"></th>
                                     <th class="col-xs-2 text-center text-middle">包材类型编号</th>
                                     <th class="col-xs-2 text-center text-middle" >包材类型名称</th>
                                     <th class="col-xs-1 text-center text-middle">规格</th>

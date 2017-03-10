@@ -26,5 +26,6 @@ Config 2.0/" "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
 	<sqlMap resource="sqlmap/PackingCategory.xml"/>
 	<sqlMap resource="sqlmap/ProductInfo.xml"/>
 	<sqlMap resource="sqlmap/ProductWare.xml"/>
+	<sqlMap resource="sqlmap/CustomerAreaCategory.xml"/>
 	<sqlMap resource="sqlmap/CustomerProductInfo.xml"/>
 </sqlMapConfig>
