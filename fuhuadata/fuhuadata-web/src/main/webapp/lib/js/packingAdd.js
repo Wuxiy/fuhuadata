@@ -6,8 +6,11 @@
     var ni = thisURL.split('?')[1];
     var names = ni.split('&')[0];
     var bids = ni.split('&')[1];
+    var sids = ni.split('&')[2];
     var name = decodeURI(names.split('=')[1]);
     var bid = bids.split('=')[1];
+    var sid = sids.split('=')[1];
+    console.log(sid);
     var names = document.getElementById('packName');
     names.value = name;
 
@@ -95,7 +98,6 @@ $("input[id='file-1']").fileinput({
         obj1.path = data.response.data;
         obj1.name = $('#imagname1').val();
         arr.push(obj1);
-        console.log(arr);
     });
 
 $("input[id='file-2']").fileinput({
@@ -126,7 +128,6 @@ $("input[id='file-2']").fileinput({
     obj2.path = data.response.data;
     obj2.name = $('#imagname2').val();
     arr.push(obj2);
-    console.log(arr);
 });
 
 $("input[id='file-3']").fileinput({
@@ -157,7 +158,6 @@ $("input[id='file-3']").fileinput({
     obj3.path = data.response.data;
     obj3.name = $('#imagname3').val();
     arr.push(obj3);
-    console.log(arr);
 });
 
 //适用产品类型checkbox
@@ -177,6 +177,8 @@ $('#add_relate').on('click',function(){
 $('.packingAdd').on('click',function(){
     var url = "/packingArchives/addPackingArchives"
     var data = {
+        "bigCategoryId":bid,
+        "smallCategoryId":sid,
         "packName": jQuery('#packName').val(),
         "spec": jQuery('#spec').val(),
         "size": jQuery('#size').val(),
