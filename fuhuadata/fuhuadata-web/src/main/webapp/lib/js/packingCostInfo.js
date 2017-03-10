@@ -107,6 +107,7 @@ $("input[name='cellcheckbox']").each(function(){
         if($('#finish').hide()){
             $('#finish').show();
         }
+
     })
 
 //编辑完成保存
