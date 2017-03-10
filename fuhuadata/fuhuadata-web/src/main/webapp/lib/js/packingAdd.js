@@ -13,7 +13,9 @@
 
 
     var checkboxarr = '';
-    var imgpath;
+    var imgpaths;
+    var imgnames;
+    var imgpath = {imgpaths:imgnames};
     var ids = new Array();
 
     //根据包材类型获取关联包材的展示
@@ -25,15 +27,15 @@
 
 //图片上传
 
-$("#file").fileinput({
+$("input[name='file']").fileinput({
     language: 'zh', //设置语言
     uploadUrl: '/upload/uploadFile', // you must set a valid URL here else you will get an error
     allowedFileExtensions : ['jpg', 'png','gif'],
     overwriteInitial: false,
     maxFileSize: 1000,
     maxFilesNum: 10,
-    maxImageWidth: 280,//图片的最大宽度
-    maxImageHeight: 280,//图片的最大高度
+    maxImageWidth: 100,//图片的最大宽度
+    maxImageHeight: 100,//图片的最大高度
     //allowedFileTypes: ['image', 'video', 'flash'],
     enctype: 'multipart/form-data',
     slugCallback: function(filename) {
@@ -48,13 +50,15 @@ $("#file").fileinput({
         {
             alert('处理成功');
         }
-        imgpath = data.response.data;
+        imgpaths.push(data.response.data);
     });
 
+//适用产品类型checkbox
 $("input[name='check']").each(function(index,element){
     checkboxarr += $(this).val() + ",";
 })
 
+//新增添加关联
 $('#add_relate').on('click',function(){
     $("input[name='modal_cellcheckbox']:checked").each(function(){
         ids.push($(this).val());
@@ -62,6 +66,7 @@ $('#add_relate').on('click',function(){
     $('#addField').modal('hide');
 })
 
+//新增完成
 $('.packingAdd').on('click',function(){
     var url = "/packingArchives/addPackingArchives"
     var data = {
@@ -94,11 +99,7 @@ $('.packingAdd').on('click',function(){
     })*/
 })
 
-$("img[class='file-preview-image']").each(function(){
-    var url = $(this).attr('src');
-    console.log(url);
-})
-
+//全选框
 $('#modal_checkAll').on('click',function(){
     var checkAll = $('#modal_checkAll'),
         allCheckbox = $("input[name='modal_cellcheckbox']");

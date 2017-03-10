@@ -81,13 +81,13 @@
                                 <label class="col-xs-1 control-label">适用剂型</label>
                                 <div class="col-xs-4">
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" class="suitableType cell_edit" value="0"> 原药
+                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="0"> 原药
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" class="suitableType cell_edit" value="1"> 水剂
+                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="1"> 水剂
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" class="suitableType cell_edit" value="2"> 颗粒剂（粉剂）
+                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="2"> 颗粒剂（粉剂）
                                     </label>
                                 </div>
                             </div>

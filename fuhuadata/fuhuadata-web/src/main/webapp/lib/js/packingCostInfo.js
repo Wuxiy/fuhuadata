@@ -11,6 +11,10 @@
     var bid = trans.split('=')[2];
     var table = document.getElementById('packing_relate_table');
 
+    var checkboxarr = '';
+    var imgpath;
+    var Ids = new Array();
+
     if(bid != 1){
         $('.relate').hide();
     }
@@ -53,6 +57,44 @@
     	}
     })
 
+
+//图片上传
+
+$("#file").fileinput({
+    language: 'zh', //设置语言
+    uploadUrl: '/upload/uploadFile', // you must set a valid URL here else you will get an error
+    allowedFileExtensions : ['jpg', 'png','gif'],
+    overwriteInitial: false,
+    maxFileSize: 1000,
+    maxFilesNum: 10,
+    maxImageWidth: 280,//图片的最大宽度
+    maxImageHeight: 280,//图片的最大高度
+    //allowedFileTypes: ['image', 'video', 'flash'],
+    enctype: 'multipart/form-data',
+    slugCallback: function(filename) {
+        return filename.replace('(', '_').replace(']', '_');
+    }
+}).on("filebatchselected", function(event, file) {
+    console.log('233');
+
+}).on("fileuploaded", function(event, data) {
+    console.log('233');
+    if(data.response)
+    {
+        alert('处理成功');
+    }
+    imgpath = data.response.data;
+});
+
+//适用产品类型checkbox
+$("input[name='check']").each(function(index,element){
+    checkboxarr += $(this).val() + ",";
+})
+
+//关联数组Ids
+$("input[name='cellcheckbox']").each(function(){
+    Ids.push($(this).val());
+});
 
 //编辑
     $('#edit').on('click',function(){
@@ -119,23 +161,6 @@ $('#checkAll').on('click',function(){
         }
     });
 })
-/*function checkAll() {
-    var checkAll = $('#checkAll'),
-        allCheckbox = $("input[name='cellcheckbox']");
-
-    //监听全选框变化
-    checkAll.change(function(){
-        if (checkAll.prop("checked")) {
-            allCheckbox.each(function(){
-                    $(this).prop('checked',true);
-            });
-        } else {
-            allCheckbox.each(function(){
-                    $(this).prop('checked',false);
-            });
-        }
-    });
-}*/
 
 $('#modal_checkAll').on('click',function(){
     var checkAll = $('#modal_checkAll'),
