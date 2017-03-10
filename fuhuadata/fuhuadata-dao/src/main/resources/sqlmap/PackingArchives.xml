@@ -144,20 +144,19 @@
     </sql>
     <insert id="ADD" parameterClass="PackingArchives">
         INSERT INTO
-        k_packing_archives (packing_id, big_category_id, small_cate_id,
+        k_packing_archives (packing_id, big_category_id, small_category_id,
         pack_name, size, spec,
         spec_unit, quality, quality_index,
         quality_target_value, unit_price,consumption, price_end_date,
         suitable_type, b_remarks, status,
         associated_packing_id, image_path
-        image_path
         )
         VALUES (#packingId#, #bigCategoryId#, #smallCategoryId#,
         #packName#, #size#, #spec#,
         #specUnit#, #quality#, #qualityIndex#,
         #qualityTargetValue#, #unitPrice#,#consumption#,#priceEndDate#,
         #suitableType#, #bRemarks#, #status#,
-        #associatedPackingId#, #imagePath#}
+        #associatedPackingId#, #imagePath#
         )
         <selectKey resultClass="int" keyProperty="packingId">
             SELECT @@IDENTITY AS packing_id

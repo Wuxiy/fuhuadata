@@ -66,8 +66,8 @@
                                 <label class="col-xs-1 control-label">状态</label>
                                 <div class="col-xs-3">
                                     <select class="form-control" name="items" id="status">
-                                        <option value="东亚" value="1">已启用</option>
-                                        <option value="西欧" value="0">已禁用</option>
+                                        <option  value="1">已启用</option>
+                                        <option  value="0">已禁用</option>
                                     </select>
                                 </div>
                             </div>

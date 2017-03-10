@@ -1,5 +1,7 @@
 package com.fuhuadata.domain;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -28,9 +30,9 @@ public class PackingArchives {
 
     private String qualityTargetValue;//质量指标数值
 
-    private BigDecimal unitPrice;//单价
+    private BigDecimal unitPrice=null;//单价
 
-    private BigDecimal consumption;//单耗
+    private BigDecimal consumption=null;//单耗
 
     private Date priceEndDate;//价格有效期  yyyy/mm/dd
 

@@ -175,7 +175,7 @@ $('#add_relate').on('click',function(){
 
 //新增完成
 $('.packingAdd').on('click',function(){
-    var url = "/packingArchives/addPackingArchives"
+    var url = "/packingArchives/doAddPackingArchives"
     var data = {
         "packName": jQuery('#packName').val(),
         "spec": jQuery('#spec').val(),
@@ -183,17 +183,17 @@ $('.packingAdd').on('click',function(){
         "quality": jQuery('#quality').val(),
         "qualityIndex": jQuery('#qualityIndex').val(),
         "qualityTargetValue": jQuery('#qualityTargetValue').val(),
-        "unitPrice": jQuery('#unitPrice').val(),
+        "unitPrice": jQuery('#unitPrice').val().toString(),
         "consumption": jQuery('#consumption').val(),
         "priceEndDate": jQuery('#priceEndDate').val(),
         "status": jQuery('#status').val(),
         "suitableType": checkboxarr,
-        "image":arr,
-        "ids":ids,
-        "bremarks": jQuery('#bremarks').val(),
+        "imagePath":arr.toString(),
+        "associatedPackingId":ids.toString(),
+        "bRemarks": jQuery('#bremarks').val(),
     }
     console.log(data);
-    /*jQuery.ajax({
+    jQuery.ajax({
         type:"POST",
         url:url,
         dataType:"json",
@@ -203,7 +203,7 @@ $('.packingAdd').on('click',function(){
             alert("添加成功");
             location.reload();
         }
-    })*/
+    })
 })
 
 //全选框
