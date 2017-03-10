@@ -98,6 +98,7 @@ $("input[id='file-1']").fileinput({
         obj1.path = data.response.data;
         obj1.name = $('#imagname1').val();
         arr.push(obj1);
+        console.log(arr);
     });
 
 $("input[id='file-2']").fileinput({
@@ -128,6 +129,7 @@ $("input[id='file-2']").fileinput({
     obj2.path = data.response.data;
     obj2.name = $('#imagname2').val();
     arr.push(obj2);
+    console.log(arr);
 });
 
 $("input[id='file-3']").fileinput({
@@ -161,7 +163,7 @@ $("input[id='file-3']").fileinput({
 });
 
 //适用产品类型checkbox
-$("input[name='check']").each(function(index,element){
+$("input[name='check']:checked").each(function(index,element){
     checkboxarr += $(this).val() + ",";
 })
 
@@ -190,8 +192,8 @@ $('.packingAdd').on('click',function(){
         "priceEndDate": jQuery('#priceEndDate').val(),
         "status": jQuery('#status').val(),
         "suitableType": checkboxarr,
-        "imagePath":arr.toString(),
-        "associatedPackingId":ids.toString(),
+        "imagePath":JSON.stringify(arr),
+        "associatedPackingId":JSON.stringify(ids),
         "bRemarks": jQuery('#bremarks').val(),
     }
     console.log(data);

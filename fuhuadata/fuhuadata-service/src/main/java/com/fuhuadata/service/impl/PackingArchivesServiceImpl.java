@@ -23,7 +23,17 @@ public class PackingArchivesServiceImpl implements PackingArchivesService {
     @Override
     public Result<PackingArchives> addPackingArchives(PackingArchives packingArchives) {
         Result<PackingArchives> result = new Result<PackingArchives>();
+
         try {
+            String ids=packingArchives.getAssociatedPackingId();
+            System.out.println(ids);
+            ids=ids.replace("[","");
+            ids=ids.replace("]","");
+            ids=ids.replace("\"","");
+            packingArchives.setAssociatedPackingId(ids);
+            if(packingArchives.getImagePath().equals("[]")){
+                packingArchives.setImagePath("");
+            }
             result.addDefaultModel(packingArchivesManager.addPackingArchives(packingArchives));
         } catch (Exception e) {
             result.setSuccess(false);

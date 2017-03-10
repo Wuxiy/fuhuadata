@@ -62,6 +62,7 @@
     $('#tree').creatTree('/packingCategory/CategoryTree');
     $('#tree').filtrateData('/packingArchives/getPackingArchivesByPId',"container","packingArchivesList");
 
+
     function Add(){
         var names = $('.packName');
         var name = 'name=' + names[0].innerText;
