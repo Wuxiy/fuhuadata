@@ -100,7 +100,8 @@
                             <div class="form-group ">
                                 <label class="col-xs-1 control-label">图片</label>
                                 <div class="col-xs-11">
-                                    <input id="file-5" class="file" type="file" multiple data-preview-file-type="any" data-upload-url="#" data-preview-file-icon="">
+                                    <input id="testlogo" type="file" name="icoFile" class="file-loading" />
+                                    <input type="text" name="htestlogo" id="htestlogo" onchange="addFile(this)" >
                                 </div>
                             </div>
                         </form>

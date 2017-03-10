@@ -26,6 +26,7 @@
     	success:function(result){
     		var ResultData = result.data;
     		var node = ResultData.nodes;
+            var preList = eval(ResultData.pack.imagePath);
 
             var arr = [ResultData.pack.suitableType];
             $('#packName').val(ResultData.pack.packName);
@@ -41,6 +42,8 @@
             $('#bRemarks').val(ResultData.pack.bRemarks);
             $('.suitableType').val(arr);
 
+
+
             for(var i=0;i<node.length;i++){
                 table.innerHTML += '<tr>'+
                         '<td class="text-center"><input type="checkbox" name="cellcheckbox" value="'+node[i].packingId+'" /></td>'+
@@ -54,13 +57,51 @@
                         '<td class="col-xs-1 text-center text-middle">'+node[i].status+'</td>'
                         '</tr>';
             }
+
+            for(var j=0;j<preList.length;j++){
+
+            }
+
+            /*$('#testlogo').fileinput({
+                uploadUrl: '/eim/upload/uploadFile.do',
+                uploadAsync:true,
+                showCaption: true,
+                showUpload: true,//是否显示上传按钮
+                showRemove: false,//是否显示删除按钮
+                showCaption: true,//是否显示输入框
+                showPreview:true,
+                showCancel:true,
+                dropZoneEnabled: false,
+                maxFileCount: 10,
+                initialPreviewShowDelete:true,
+                msgFilesTooMany: "选择上传的文件数量 超过允许的最大数值！",
+                initialPreview: previewJson,
+                previewFileIcon: '<i class="fa fa-file"></i>',
+                allowedPreviewTypes: ['image'],
+                previewFileIconSettings: {
+                    'docx': '<i class="fa fa-file-word-o text-primary"></i>',
+                    'xlsx': '<i class="fa fa-file-excel-o text-success"></i>',
+                    'pptx': '<i class="fa fa-file-powerpoint-o text-danger"></i>',
+                    'pdf': '<i class="fa fa-file-pdf-o text-danger"></i>',
+                    'zip': '<i class="fa fa-file-archive-o text-muted"></i>',
+                    'sql': '<i class="fa fa-file-word-o text-primary"></i>',
+                },
+                initialPreviewConfig: preConfigList
+            }).off('filepreupload').on('filepreupload', function() {
+            // alert(data.url);
+            }).on("fileuploaded", function(event, outData) {
+            //文件上传成功后返回的数据， 此处我只保存返回文件的id
+                var result = outData.response.id;
+            // 对应的input 赋值
+                $('#htestlogo').val(result).change();
+            });*/
     	}
     })
 
 
 //图片上传
 
-$("#file").fileinput({
+/*$("#file").fileinput({
     language: 'zh', //设置语言
     uploadUrl: '/upload/uploadFile', // you must set a valid URL here else you will get an error
     allowedFileExtensions : ['jpg', 'png','gif'],
@@ -84,10 +125,10 @@ $("#file").fileinput({
         alert('处理成功');
     }
     imgpath = data.response.data;
-});
+});*/
 
 //适用产品类型checkbox
-$("input[name='check']").each(function(index,element){
+$("input[name='check']:checked").each(function(index,element){
     checkboxarr += $(this).val() + ",";
 })
 
@@ -119,12 +160,14 @@ $("input[name='cellcheckbox']").each(function(){
             "size": jQuery('#size').val(),
             "quality": jQuery('#quality').val(),
             "qualityIndex": jQuery('#qualityIndex').val(),
-            "qualityTargetValue": jQuery('#exhibitionName').val(),
+            "qualityTargetValue": jQuery('#qualityTargetValue').val(),
             "unitPrice": jQuery('#unitPrice').val(),
             "consumption": jQuery('#consumption').val(),
             "priceEndDate": jQuery('#priceEndDate').val(),
             "status": jQuery('#status').val(),
-            "suitableType": "1",
+            "suitableType": checkboxarr,
+            "image":arr,
+            "ids":ids,
             "bremarks": jQuery('#bremarks').val(),
         }
 
@@ -187,7 +230,6 @@ $('#delete').on('click',function(){
     $("input[name='cellcheckbox']:checked").each(function(){
         ids.push($(this).val());
     })
-    console.log(ids);
 
     if(ids.length > 0){
         var msg = "确定要删除这些关联吗？";
@@ -218,7 +260,6 @@ $('#finish_relate').on('click',function(){
     $("input[name='modal_cellcheckbox']:checked").each(function(){
         ids.push($(this).val());
     })
-    console.log(ids);
 
     if(ids.length > 0){
         var msg = "确认要为主材添加这些关联吗？";
@@ -242,4 +283,39 @@ $('#finish_relate').on('click',function(){
         alert('还未选择要添加的关联');
     }
 })
+
+
+/*$('#testlogo').fileinput({
+    uploadUrl: '/eim/upload/uploadFile.do',
+    uploadAsync:true,
+    showCaption: true,
+    showUpload: true,//是否显示上传按钮
+    showRemove: false,//是否显示删除按钮
+    showCaption: true,//是否显示输入框
+    showPreview:true,
+    showCancel:true,
+    dropZoneEnabled: false,
+    maxFileCount: 10,
+    initialPreviewShowDelete:true,
+    msgFilesTooMany: "选择上传的文件数量 超过允许的最大数值！",
+    initialPreview: previewJson,
+    previewFileIcon: '<i class="fa fa-file"></i>',
+    allowedPreviewTypes: ['image'],
+    previewFileIconSettings: {
+        'docx': '<i class="fa fa-file-word-o text-primary"></i>',
+        'xlsx': '<i class="fa fa-file-excel-o text-success"></i>',
+        'pptx': '<i class="fa fa-file-powerpoint-o text-danger"></i>',
+        'pdf': '<i class="fa fa-file-pdf-o text-danger"></i>',
+        'zip': '<i class="fa fa-file-archive-o text-muted"></i>',
+        'sql': '<i class="fa fa-file-word-o text-primary"></i>',
+    },
+    initialPreviewConfig: preConfigList
+}).off('filepreupload').on('filepreupload', function() {
+// alert(data.url);
+}).on("fileuploaded", function(event, outData) {
+//文件上传成功后返回的数据， 此处我只保存返回文件的id
+    var result = outData.response.id;
+// 对应的input 赋值
+    $('#htestlogo').val(result).change();
+});*/
 

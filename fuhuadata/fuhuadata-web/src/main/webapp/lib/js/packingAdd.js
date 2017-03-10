@@ -17,7 +17,6 @@
     var img = $("input[name='file']");
     var imgnames =$("input[name='imagname']");
 
-    var checkboxarr = '';
     var obj1 = {},obj2 = {},obj3 = {};
     var arr = [];
     var ids = new Array();
@@ -161,9 +160,15 @@ $("input[id='file-3']").fileinput({
 });
 
 //适用产品类型checkbox
-$("input[name='check']").each(function(index,element){
-    checkboxarr += $(this).val() + ",";
-})
+function checkboxArr() {
+    var checkboxarr = [];
+    var a;
+    $("input[name='check']:checked").each(function(){
+        a =  $(this).val() + ",";
+        checkboxarr.push(a);
+    })
+    return checkboxarr;
+}
 
 //新增添加关联
 $('#add_relate').on('click',function(){
@@ -189,7 +194,7 @@ $('.packingAdd').on('click',function(){
         "consumption": jQuery('#consumption').val(),
         "priceEndDate": jQuery('#priceEndDate').val(),
         "status": jQuery('#status').val(),
-        "suitableType": checkboxarr,
+        "suitableType": checkboxArr(),
         "image":arr,
         "ids":ids,
         "bremarks": jQuery('#bremarks').val(),
