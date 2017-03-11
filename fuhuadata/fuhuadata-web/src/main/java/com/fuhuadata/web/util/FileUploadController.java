@@ -49,7 +49,6 @@ public class FileUploadController {
         Result result = new Result();
         String path=null;
         File tempFile=null;
-       // MultipartFile[] fileList = request.get
         System.out.println(files.length);
         try {
             for (MultipartFile file : files) {
@@ -94,47 +93,25 @@ public class FileUploadController {
 
         Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
         org.springframework.util.MultiValueMap<String,MultipartFile> fileMap1=multipartRequest.getMultiFileMap();
-        System.out.println(fileMap.size());
-        System.out.println(fileMap1.size());
-        String ctxPath = request.getSession().getServletContext().getRealPath(
-                "/")
-                + "\\" + "images\\";
+            List<MultipartFile> files = fileMap1.get("files");
+            if (files != null) {
+                for (MultipartFile file : files) {
+                    String path = request.getSession().getServletContext().getRealPath("images/");//保存在服务器
+                    String fileName = file.getOriginalFilename();
+                    File tempFile = new File(path, fileName);
+                    System.out.println(tempFile);
+                    if (!tempFile.getParentFile().exists()) {
+                        tempFile.getParentFile().mkdir();
+                    }
+                    if (!tempFile.exists()) {
+                        tempFile.createNewFile();
+                        file.transferTo(tempFile);
+                    }
 
-        File file = new File(ctxPath);
-        if (!file.exists()) {
-            file.mkdir();
-        }
-        String fileName = null;
-        for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {
-            // 上传文件名
-            // System.out.println("key: " + entity.getKey());
-            MultipartFile mf = entity.getValue();
-            fileName = mf.getOriginalFilename();
-            File uploadFile = new File(ctxPath + fileName);
-            FileCopyUtils.copy(mf.getBytes(), uploadFile);
-        }
-        request.setAttribute("files", loadFiles(request));
+                }
+            }
         return new ModelAndView("/knowledgeBase/uploadFile");
     }
 
-    // @ModelAttribute("files")//此属性用于初始类时调用,但上传文件后不能时时反应上传文件个数,不适合动态数据
-    public List<String> loadFiles(HttpServletRequest request) {
-        List<String> files = new ArrayList<String>();
-        String ctxPath = request.getSession().getServletContext().getRealPath(
-                "/")
-                + "\\" + "images\\";
-        File file = new File(ctxPath);
-        if (file.exists()) {
-            File[] fs = file.listFiles();
-            String fname = null;
-            for (File f : fs) {
-                fname = f.getName();
-                if (f.isFile()) {
-                    files.add(fname);
-                }
-            }
-        }
-        return files;
-    }
 
 }

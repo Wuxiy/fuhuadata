@@ -2,6 +2,7 @@ package com.fuhuadata.service.impl;
 import java.util.List;
 
 import com.fuhuadata.dao.ProductWareDao;
+import com.fuhuadata.domain.ComponentCost;
 import com.fuhuadata.domain.ProductWare;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.ProductInfo;
@@ -97,7 +98,19 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 							productInfoVO.addIndex(physicalProperities);
 						}
 					}
-
+					if(productInfo.getProcessingComponents()!=null){
+						JSONArray cJson= JSONArray.fromObject(productInfo.getProcessingComponents());
+						if(cJson.size()>0){
+							for(int i=0;i<cJson.size();i++) {
+								JSONObject cjob = cJson.getJSONObject(i);
+								ComponentCost componentCost = new ComponentCost();
+								componentCost.setComponentName((String)cjob.get("componentName"));
+								componentCost.setConsumption((String)cjob.get("consumption"));
+								componentCost.setRemarks((String) cjob.get("remarks"));
+								productInfoVO.addProcessingComponents(componentCost);
+							}
+						}
+					}
 					productInfoVO.setProductInfo(productInfo);
 					productInfoVO.setWares(productWareManager.getProductWareByPId(product_id));
 					result.addDefaultModel("ProductInfo", productInfoVO);

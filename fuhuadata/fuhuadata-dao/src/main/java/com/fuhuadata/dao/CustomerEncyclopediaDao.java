@@ -23,21 +23,21 @@ public interface CustomerEncyclopediaDao {
      * @param customerEncyclopedia
      * @return
      */
-    public int updateCustomerEncyclopediaById(int id, CustomerEncyclopedia customerEncyclopedia);
+    public int updateCustomerEncyclopediaById(String id, CustomerEncyclopedia customerEncyclopedia);
 
     /**
      * 根据主键id删除记录，成功删除返回1
      * @param id
      * @return
      */
-    public int deleteCustomerEncyclopediaById(int id);
+    public int deleteCustomerEncyclopediaById(String id);
 
     /**
      * 根据id查询客户百科
      * @param id
      * @return
      */
-    public CustomerEncyclopedia getCustomerEncyclopediaById(int id);
+    public CustomerEncyclopedia getCustomerEncyclopediaById(String id);
 
     /**
      * 查询不带分页

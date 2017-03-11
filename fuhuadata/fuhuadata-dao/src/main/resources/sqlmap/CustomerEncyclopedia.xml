@@ -6,7 +6,7 @@
     <typeAlias alias="CustomerEncyclopediaQuery" type="com.fuhuadata.domain.query.CustomerEncyclopediaQuery"/>
     
     <resultMap id="CUSTOMERENCYCLOPEDIA-MAP" class="CustomerEncyclopedia">
-        <result column="ency_id" property="encyId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="ency_id" property="encyId" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="company_name" property="companyName" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="companyAbbreviation" column="company_abbreviation" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="type" property="type" jdbcType="VARCHAR" javaType="java.lang.String"/>
@@ -164,13 +164,13 @@
 
     </update>
 
-    <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
+    <delete id="DELETE-BY-ID" parameterClass="java.lang.String">
         <![CDATA[
         DELETE FROM k_customer_encyclopedia WHERE ency_id=#id#
     ]]>
     </delete>
 
-    <select id="GET-BY-ID" resultMap="CUSTOMERENCYCLOPEDIA-MAP" parameterClass="java.lang.Integer">
+    <select id="GET-BY-ID" resultMap="CUSTOMERENCYCLOPEDIA-MAP" parameterClass="java.lang.String">
         <![CDATA[
         SELECT * FROM k_customer_encyclopedia WHERE ency_id=#id#
     ]]>
