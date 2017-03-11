@@ -353,7 +353,7 @@
         },
         defaultPreviewTypes = ['image', 'html', 'text', 'video', 'audio', 'flash', 'object'],
         defaultPreviewSettings = {
-            image: {width: "auto", height: "160px"},
+            image: {width: "213", height: "160px"},
             html: {width: "213px", height: "160px"},
             text: {width: "160px", height: "160px"},
             video: {width: "213px", height: "160px"},
@@ -1971,7 +1971,7 @@
             if (!self.isUploadable || self.isDisabled) {
                 content = '<button type="submit" title="' + self.uploadTitle + '"class="' + css + '"' + status + '>' + self.uploadIcon + self.uploadLabel + '</button>';
             } else {
-                content = '<a href="' + self.uploadUrl + '" title="' + self.uploadTitle + '" class="' + css + '"' + status + ' id="update">' + self.uploadIcon + self.uploadLabel + '</a>';
+                content = '<a href="' + self.uploadUrl + '"  class="' + css + ' update"' + status + ' data-toggle="tooltip" title="如需要编辑图片名称请先编辑">' + self.uploadIcon + self.uploadLabel + '</a>';
             }
             return content;
         }

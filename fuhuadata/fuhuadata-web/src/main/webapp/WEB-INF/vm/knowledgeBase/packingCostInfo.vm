@@ -81,13 +81,13 @@
                                 <label class="col-xs-1 control-label">适用剂型</label>
                                 <div class="col-xs-4">
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" class="suitableType cell_edit" value="0"> 原药
+                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="0"> 原药
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" class="suitableType cell_edit" value="1"> 水剂
+                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="1"> 水剂
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" class="suitableType cell_edit" value="2"> 颗粒剂（粉剂）
+                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="2"> 颗粒剂（粉剂）
                                     </label>
                                 </div>
                             </div>
@@ -100,7 +100,8 @@
                             <div class="form-group ">
                                 <label class="col-xs-1 control-label">图片</label>
                                 <div class="col-xs-11">
-                                    <input id="file-5" class="file" type="file" multiple data-preview-file-type="any" data-upload-url="#" data-preview-file-icon="">
+                                    <input id="testlogo" type="file" name="icoFile" class="file-loading" />
+                                    <input type="text" name="htestlogo" id="htestlogo" onchange="addFile(this)" >
                                 </div>
                             </div>
                         </form>
@@ -171,7 +172,7 @@
                             <table class="table table-condensed table-bordered table-striped text-center">
                                 <thead>
                                 <tr>
-                                    <th class="text-center"><input type="checkbox" id="modal_checkAll"></th
+                                    <th class="text-center"><input type="checkbox" id="modal_checkAll"></th>
                                     <th class="col-xs-2 text-center text-middle">包材类型编号</th>
                                     <th class="col-xs-2 text-center text-middle" >包材类型名称</th>
                                     <th class="col-xs-1 text-center text-middle">规格</th>

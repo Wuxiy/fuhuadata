@@ -62,13 +62,16 @@
     $('#tree').creatTree('/packingCategory/CategoryTree');
     $('#tree').filtrateData('/packingArchives/getPackingArchivesByPId',"container","packingArchivesList");
 
+
     function Add(){
         var names = $('.packName');
         var name = 'name=' + names[0].innerText;
         var bids = names[0].href;
+        console.log(bids);
         var bid = bids.split('&')[1];
+        var sid = bids.split('&')[2];
         var data_url = $('#add').attr('data_url');
-        var url = data_url + name + '&' + bid;
+        var url = data_url + name + '&' + bid + '&' + sid;
 
         window.location.href = url;
 

@@ -66,8 +66,13 @@
                                 <label class="col-xs-1 control-label">状态</label>
                                 <div class="col-xs-3">
                                     <select class="form-control" name="items" id="status">
-                                        <option value="东亚" value="1">已启用</option>
-                                        <option value="西欧" value="0">已禁用</option>
+<<<<<<< HEAD
+                                        <option  value="1">已启用</option>
+                                        <option  value="0">已禁用</option>
+=======
+                                        <option value="1">已启用</option>
+                                        <option value="0">已禁用</option>
+>>>>>>> 64e85014c5c20b987dd4347690b41781b65ca1ae
                                     </select>
                                 </div>
                             </div>
@@ -93,11 +98,52 @@
                             </div>
                             <div class="form-group ">
                                 <label class="col-xs-1 control-label">图片</label>
-                                <div class="col-xs-11">
-                                    <input id="file" name="file" type="file" multiple class="projectfile" data-overwrite-initial="false" data-min-file-count="1">
+                                <div class="col-xs-5 ">
+                                    <input id="file-1" name="file" type="file" multiple class="projectfile" data-overwrite-initial="false" data-min-file-count="1">
                                 </div>
-
+                                <div class="col-xs-5 col-xs-offset-1">
+                                    <input id="file-2" name="file" type="file" multiple class="projectfile" data-overwrite-initial="false" data-min-file-count="1">
+                                </div>
+                                #*<div class="col-xs-3 col-xs-offset-1">
+                                    <input id="file-2" name="file" type="file" multiple class="projectfile" data-overwrite-initial="false" data-min-file-count="1">
+                                </div>*#
                             </div>
+                            <div class="form-group">
+                                <div class="col-xs-5 col-xs-offset-1">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" value="" name="imagname" id="imagname1">
+                                        <div class="input-group-btn">
+                                            <botton class="btn btn-xs btn-primary">编辑图片名称</botton>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-5 col-xs-offset-1">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" value="" name="imagname" id="imagname2">
+                                        <div class="input-group-btn">
+                                            <botton class="btn btn-xs btn-primary">编辑图片名称</botton>
+                                        </div>
+                                    </div>
+                                </div>
+                                #*<div class="col-xs-3 col-xs-offset-1">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" value="" name="imagname" id="imagname3">
+                                        <div class="input-group-btn">
+                                            <botton class="btn btn-xs btn-primary">编辑图片名称</botton>
+                                        </div>
+                                    </div>
+                                </div>*#
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="panel-body clearfix">
+                        <form class="form-horizontal">
+
+                        </form>
+                    </div>
+                    <div class="panel-body clearfix">
+                        <form class="form-horizontal">
                             <div class="form-group">
                                 <div class="col-xs-2 col-xs-offset-4">
                                     <a class="btn btn-block btn-primary packingAdd">完成</a>
@@ -138,7 +184,9 @@
                             <th class="col-xs-1 text-center text-middle">状态</th>
                         </tr>
                         </thead>
+                        <tbody id="add_tbody">
 
+                        </tbody>
                     </table>
                     </div>
                 </div>

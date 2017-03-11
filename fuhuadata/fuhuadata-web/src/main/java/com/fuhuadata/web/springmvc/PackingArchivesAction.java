@@ -6,10 +6,11 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.PackingArchivesService;
 import com.fuhuadata.vo.PackingArchivesVO;
+import com.fuhuadata.web.util.StringUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.xpath.operations.Mod;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -118,12 +119,16 @@ public class PackingArchivesAction {
     @RequestMapping(value="/addRelation",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "addRelation")
     @ResponseBody
-    public ResultPojo addRelation(String ids){
+    public ResultPojo addRelation(int id,@RequestBody String[] ids){
+        Result result = new Result();
         try{
             PackingArchives packingArchives = new PackingArchives();
-            packingArchives.setAssociatedPackingId(ids);
-            int id=1;
-            Result result = packingArchivesService.updatePackingArchivesById(id,packingArchives);
+            String[] ids1 = packingArchivesService.getPackingArchivesById(id).getModel().getPack().getAssociatedPackingId().split(",");
+            String[] idsArray = StringUtil.union(ids1,ids);
+            String str = StringUtils.join(idsArray,",");
+            System.out.println(str);
+            packingArchives.setAssociatedPackingId(str);
+            result = packingArchivesService.updatePackingArchivesById(id,packingArchives);
             return result.getResultPojo();
         }catch(Exception e){
             log.error("更新主材关联失败",e);
@@ -138,15 +143,18 @@ public class PackingArchivesAction {
     @RequestMapping(value="/deleteRelation",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "deleteRelation")
     @ResponseBody
-    public ResultPojo deleteRelation(int id,@RequestBody String ids){
+    public ResultPojo deleteRelation(int id,@RequestBody String[] ids){
+        Result result = new Result();
         try{
             System.out.println(id);
             PackingArchives packingArchives = new PackingArchives();
-            System.out.println(ids);
-            String idss=ids.toString();
-            String pids = packingArchivesService.getPackingArchivesById(id).getModel().getPack().getAssociatedPackingId();
-            packingArchives.setAssociatedPackingId(idss);
-            Result result = packingArchivesService.updatePackingArchivesById(id,packingArchives);
+            System.out.println(ids.length);
+            String[] ids1 = packingArchivesService.getPackingArchivesById(id).getModel().getPack().getAssociatedPackingId().split(",");
+            String[] idsArray = StringUtil.minus(ids1,ids);
+            String str = StringUtils.join(idsArray,",");
+            System.out.println(str);
+            packingArchives.setAssociatedPackingId(str);
+            result = packingArchivesService.updatePackingArchivesById(id,packingArchives);
             return result.getResultPojo();
         }catch(Exception e){
             log.error("更新主材关联失败",e);

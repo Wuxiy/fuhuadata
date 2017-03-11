@@ -2,6 +2,7 @@ package com.fuhuadata.web.util;
 
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
+import org.apache.commons.collections.map.MultiValueMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
@@ -48,6 +49,8 @@ public class FileUploadController {
         Result result = new Result();
         String path=null;
         File tempFile=null;
+       // MultipartFile[] fileList = request.get
+        System.out.println(files.length);
         try {
             for (MultipartFile file : files) {
 
@@ -57,8 +60,9 @@ public class FileUploadController {
                 try {
                     path = request.getSession().getServletContext().getRealPath("images/");//保存在服务器
                     System.out.println(path);
+
                     String fileName = file.getOriginalFilename();
-                    tempFile = new File(path, new Date().getTime() + String.valueOf(fileName));
+                    tempFile = new File(path,fileName);
                     System.out.println(tempFile);
                     if (!tempFile.getParentFile().exists()) {
                         tempFile.getParentFile().mkdir();
@@ -87,10 +91,11 @@ public class FileUploadController {
             throws Exception {
 
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+
         Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
-
+        org.springframework.util.MultiValueMap<String,MultipartFile> fileMap1=multipartRequest.getMultiFileMap();
         System.out.println(fileMap.size());
-
+        System.out.println(fileMap1.size());
         String ctxPath = request.getSession().getServletContext().getRealPath(
                 "/")
                 + "\\" + "images\\";

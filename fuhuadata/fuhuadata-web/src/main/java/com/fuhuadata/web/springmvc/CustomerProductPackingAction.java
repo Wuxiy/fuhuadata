@@ -5,7 +5,6 @@ import com.fuhuadata.domain.query.ExhibitionInfoQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.CustomerProductInfoService;
-import com.fuhuadata.service.ExhibitionInfoService;
 import com.fuhuadata.vo.CustomerProductPackagingArchives;
 import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
@@ -16,11 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.annotation.Resource;
 import java.util.List;
-
-
 /**
  * 客户产品包装要求action
  * Created by wuxi on 2017/1/13.
