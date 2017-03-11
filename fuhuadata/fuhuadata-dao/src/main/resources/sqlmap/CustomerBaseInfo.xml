@@ -270,7 +270,7 @@
 			SELECT * FROM customer_base_info	WHERE customer_id=#customer_id#
 		]]>
 	</select>
-	
+
 	<select id="GET-PAGE" resultClass="CustomerBaseInfo" parameterClass="QueryCustomerBaseInfo">
 
 			SELECT

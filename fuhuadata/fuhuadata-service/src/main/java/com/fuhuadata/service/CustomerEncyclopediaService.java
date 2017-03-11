@@ -27,7 +27,7 @@ public interface CustomerEncyclopediaService {
      * @param customerEncyclopedia
      * @return
      */
-    public Result updateCustomerEncyclopediaById(int id, CustomerEncyclopedia customerEncyclopedia);
+    public Result updateCustomerEncyclopediaById(String id, CustomerEncyclopedia customerEncyclopedia);
 
     /**
      * 按照主键id删除记录
@@ -35,9 +35,9 @@ public interface CustomerEncyclopediaService {
      * @param id
      * @return
      */
-    public Result deleteCustomerEncyclopediaById(int id);
+    public Result deleteCustomerEncyclopediaById(String id);
 
-    public Result<CustomerEncyclopedia> getCustomerEncyclopediaById(int id);
+    public Result<CustomerEncyclopedia> getCustomerEncyclopediaById(String id);
 
     public Result<List<CustomerEncyclopedia>> getCustomerEncyclopediaByQuery(CustomerEncyclopediaQuery customerEncyclopediaQuery);
 

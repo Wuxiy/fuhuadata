@@ -30,7 +30,7 @@ public class CustomerEncyclopediaServiceImpl implements CustomerEncyclopediaServ
     }
 
     @Override
-    public Result updateCustomerEncyclopediaById(int id, CustomerEncyclopedia customerEncyclopedia) {
+    public Result updateCustomerEncyclopediaById(String id, CustomerEncyclopedia customerEncyclopedia) {
         Result result = new Result();
         try{
             result.setSuccess(customerEncyclopediaManager.updateCustomerEncyclopediaById(id,customerEncyclopedia));
@@ -42,7 +42,7 @@ public class CustomerEncyclopediaServiceImpl implements CustomerEncyclopediaServ
     }
 
     @Override
-    public Result deleteCustomerEncyclopediaById(int id) {
+    public Result deleteCustomerEncyclopediaById(String id) {
         Result result = new Result();
         try{
             result.setSuccess(customerEncyclopediaManager.deleteCustomerEncyclopediaById(id));
@@ -54,7 +54,7 @@ public class CustomerEncyclopediaServiceImpl implements CustomerEncyclopediaServ
     }
 
     @Override
-    public Result<CustomerEncyclopedia> getCustomerEncyclopediaById(int id) {
+    public Result<CustomerEncyclopedia> getCustomerEncyclopediaById(String id) {
         Result<CustomerEncyclopedia> result = new Result<CustomerEncyclopedia>();
         try {
             CustomerEncyclopedia customerEncyclopedia = customerEncyclopediaManager.getCustomerEncyclopediaById(id);

@@ -19,7 +19,7 @@ public interface CustomerEncyclopediaManager {
      */
     public CustomerEncyclopedia addCustomerEncyclopedia(CustomerEncyclopedia customerEncyclopedia);
 
-    public boolean updateCustomerEncyclopediaById(int id, CustomerEncyclopedia customerEncyclopedia);
+    public boolean updateCustomerEncyclopediaById(String id, CustomerEncyclopedia customerEncyclopedia);
 
 
     /**
@@ -27,9 +27,9 @@ public interface CustomerEncyclopediaManager {
      * @param id
      * @return
      */
-    public boolean deleteCustomerEncyclopediaById(int id);
+    public boolean deleteCustomerEncyclopediaById(String id);
 
-    public CustomerEncyclopedia getCustomerEncyclopediaById(int id);
+    public CustomerEncyclopedia getCustomerEncyclopediaById(String id);
 
     /**
      * 查询不带分页

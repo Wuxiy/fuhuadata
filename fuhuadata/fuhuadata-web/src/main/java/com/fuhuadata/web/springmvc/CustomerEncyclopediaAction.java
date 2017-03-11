@@ -84,7 +84,7 @@ public class CustomerEncyclopediaAction {
     @RequestMapping(value = "/delete",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "delete")
     @ResponseBody
-    public ResultPojo delete(int id){
+    public ResultPojo delete(String id){
          try{
              Result result = customerEncyclopediaService.deleteCustomerEncyclopediaById(id);
              return result.getResultPojo();
@@ -99,7 +99,7 @@ public class CustomerEncyclopediaAction {
     @ResponseBody
     public ResultPojo update(@RequestBody CustomerEncyclopedia customerEncyclopedia){
         try{
-            int id =customerEncyclopedia.getEncyId();
+            String id =customerEncyclopedia.getEncyId();
             Result result = customerEncyclopediaService.updateCustomerEncyclopediaById(id,customerEncyclopedia);
             return result.getResultPojo();
         }catch(Exception e){
