@@ -5,14 +5,24 @@ import java.util.Date;
  * @author wangbo
  * @date 2017-01-12 11:49:51
  */
-public class QueryCustomerBaseInfo extends PageBase {
-
+public class QueryCustomerBaseInfo  {
+	private int startRow;
+	private int pageSize;
     /**客户信息总id**/
 	private String customerId;
 	
     /**企业全称**/
 	private String fullName;
-	
+
+	/**企业性质 1：工厂 2：经销商 3：分销商 4：终端客户 5：其他**/
+	private Integer enterpriseNature;
+
+	/**1:战略客户,2:大客户 3:重要客户 4:一般客户 5:风险客户**/
+	private Integer customerLevel;
+
+	/*客户状态  0：流失 1：正常*/
+	private Integer customerStatus;
+
     /**企业简称**/
 	private String shortName;
 	
@@ -20,17 +30,20 @@ public class QueryCustomerBaseInfo extends PageBase {
 	private Integer customerType;
 	
     /**地区id**/
-	private Integer areaId;
+	private String areaId;
 	
     /**地区分类,例如北美洲**/
 	private String area;
 	
-    /**国家分类id**/
-	private Integer countryId;
+    /**大区分类id**/
+	private String areaClassId;
 	
-    /**国家,例如美国**/
+    /**大区分类,如：亚太区**/
+	private String areaClassName;
+	/*国家id*/
+	private String countryId;
+	/*国家*/
 	private String country;
-	
     /**注册资金**/
 	private String registeredFunds;
 	
@@ -121,38 +134,8 @@ public class QueryCustomerBaseInfo extends PageBase {
 		this.customerType = customerType;
 	}
 	
-	public Integer getAreaId() {
-		return areaId;
-	}
-	
-	public void setAreaId(Integer areaId) {
-		this.areaId = areaId;
-	}
-	
-	public String getArea() {
-		return area;
-	}
-	
-	public void setArea(String area) {
-		this.area = area;
-	}
-	
-	public Integer getCountryId() {
-		return countryId;
-	}
-	
-	public void setCountryId(Integer countryId) {
-		this.countryId = countryId;
-	}
-	
-	public String getCountry() {
-		return country;
-	}
-	
-	public void setCountry(String country) {
-		this.country = country;
-	}
-	
+
+
 	public String getRegisteredFunds() {
 		return registeredFunds;
 	}
@@ -304,6 +287,92 @@ public class QueryCustomerBaseInfo extends PageBase {
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
 	}
-	
 
+	public Integer getEnterpriseNature() {
+		return enterpriseNature;
+	}
+
+	public void setEnterpriseNature(Integer enterpriseNature) {
+		this.enterpriseNature = enterpriseNature;
+	}
+
+	public Integer getCustomerLevel() {
+		return customerLevel;
+	}
+
+	public void setCustomerLevel(Integer customerLevel) {
+		this.customerLevel = customerLevel;
+	}
+
+	public Integer getCustomerStatus() {
+		return customerStatus;
+	}
+
+	public void setCustomerStatus(Integer customerStatus) {
+		this.customerStatus = customerStatus;
+	}
+
+	public String getAreaId() {
+		return areaId;
+	}
+
+	public void setAreaId(String areaId) {
+		this.areaId = areaId;
+	}
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
+
+	public String getAreaClassId() {
+		return areaClassId;
+	}
+
+	public void setAreaClassId(String areaClassId) {
+		this.areaClassId = areaClassId;
+	}
+
+	public String getAreaClassName() {
+		return areaClassName;
+	}
+
+	public void setAreaClassName(String areaClassName) {
+		this.areaClassName = areaClassName;
+	}
+
+	public int getStartRow() {
+		return startRow;
+	}
+
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public String getCountryId() {
+		return countryId;
+	}
+
+	public void setCountryId(String countryId) {
+		this.countryId = countryId;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
 }

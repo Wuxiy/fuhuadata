@@ -88,6 +88,7 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 		try {
 			result.addDefaultModel(customerBaseInfoManager.count(queryCustomerBaseInfo));
 		} catch(Exception e) {
+			e.printStackTrace();
 			result.setSuccess(false);
 		}
 		return result;	

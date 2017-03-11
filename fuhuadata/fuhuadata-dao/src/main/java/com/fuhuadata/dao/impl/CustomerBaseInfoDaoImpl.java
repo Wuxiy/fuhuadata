@@ -4,6 +4,7 @@ import java.util.List;
 import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.dao.CustomerBaseInfoDao;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
+import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
 /**
@@ -21,7 +22,8 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
     public static final String GET_BY_ID = "CUSTOMERBASEINFO.GET-BY-ID";
     public static final String GET_PAGE = "CUSTOMERBASEINFO.GET-PAGE";
     public static final String COUNT = "CUSTOMERBASEINFO.COUNT";
-    
+    public static final String COUNT_ORDER = "CUSTOMERBASEINFO.countOrderByCustomer";
+
     public CustomerBaseInfo addCustomerBaseInfo(CustomerBaseInfo customerBaseInfo) {
 		customerBaseInfo.setCustomerId((String) this.insert(ADD, customerBaseInfo));
     	return customerBaseInfo;
@@ -54,5 +56,14 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
 
     public int count(QueryCustomerBaseInfo queryCustomerBaseInfo) {
     	return ((Integer) this.queryForObject(COUNT, queryCustomerBaseInfo)).intValue();
+    }
+
+    public CustomerBaseInfo countOrderByCustomer(String customerId) {
+        try {
+            return (CustomerBaseInfo)this.queryForObject(COUNT_ORDER,customerId);
+        } catch (DataAccessException e) {
+           e.printStackTrace();
+        }
+        return null;
     }
 }

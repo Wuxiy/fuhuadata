@@ -44,8 +44,14 @@ public class CustomerAreaServiceImpl implements CustomerAreaService{
         }
 
         List<CategoryTree> list =  new ArrayList<CategoryTree>(tree_map.values());
+        CategoryTree root = new CategoryTree();
+        root.setCid("0");
+        root.setCname("全部");
+        root.setNodes(list);
+        List<CategoryTree> result_list = new ArrayList<CategoryTree>();
+        result_list.add(root);
         Result<List<CategoryTree>> result = new Result<List<CategoryTree>>();
-        result.addDefaultModel(list);
+        result.addDefaultModel(result_list);
         return result;
     }
 }

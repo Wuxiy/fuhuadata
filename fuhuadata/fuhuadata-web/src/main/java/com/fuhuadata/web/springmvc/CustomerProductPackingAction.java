@@ -1,8 +1,4 @@
 package com.fuhuadata.web.springmvc;
-
-
-<<<<<<< HEAD
-=======
 import com.fuhuadata.domain.CustomerProductInfo;
 import com.fuhuadata.domain.ExhibitionInfo;
 import com.fuhuadata.domain.query.ExhibitionInfoQuery;
@@ -12,12 +8,18 @@ import com.fuhuadata.service.CustomerProductInfoService;
 import com.fuhuadata.service.ExhibitionInfoService;
 import com.fuhuadata.vo.CustomerProductPackagingArchives;
 import com.fuhuadata.web.util.DateUtil;
->>>>>>> dfcd8437d233130064b3dd4cc16a763331d9205c
 import com.fuhuadata.web.util.SystemLogAnnotation;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.annotation.Resource;
+import java.util.List;
+
 
 /**
  * 客户产品包装要求action
@@ -28,7 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/customerProductPacking/*")
 public class CustomerProductPackingAction {
 
-    private final static Log log=LogFactory.getLog(CustomerProductPackingAction.class);
+    private final static Log log= LogFactory.getLog(CustomerProductPackingAction.class);
 
     @Resource
     private CustomerProductInfoService customerProductInfoService;
@@ -38,7 +40,7 @@ public class CustomerProductPackingAction {
      * @return
      */
     @SuppressWarnings("unused")
-    @RequestMapping(value="/customerProductPackingList",method=RequestMethod.GET)
+    @RequestMapping(value="/customerProductPackingList",method= RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerProductPackaging  ",methods = "into")
     public ModelAndView customerProductPackingList(){return new ModelAndView("knowledgeBase/customerProductPackingList");}
 

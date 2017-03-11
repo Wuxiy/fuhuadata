@@ -1,5 +1,6 @@
 package com.fuhuadata.domain;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -50,7 +51,7 @@ public class CustomerBaseInfo {
     /**中信保信用评级,0未知,1:1A,2:2A,3:3A,4:4A**/
 	private Integer zhongxinbaoLevel;
 	
-    /**百科备注**/
+    /**备注**/
 	private String remark;
 	
     /**企业电话**/
@@ -80,6 +81,14 @@ public class CustomerBaseInfo {
 	/**1:战略客户,2:大客户 3:重要客户 4:一般客户 5:风险客户**/
 	private Integer customerLevel;
 
+	/*开始合作时间*/
+	private String startCooperationTime;
+
+	/*合作持续时间（月）*/
+	private String cooperationDuration;
+
+	/*活跃周期*/
+	private String activePeriod;
 
 	/**客户类型,1:合作 2:潜在 3:流失**/
 	private Integer customerType;
@@ -116,8 +125,17 @@ public class CustomerBaseInfo {
 	
     /**修改时间**/
 	private Date modifyTime;
-	
-	
+	/*合同总金额*/
+	private BigDecimal totalMoney;
+	/*已回款金额*/
+	private BigDecimal payMoney;
+	/*最低销售价*/
+	private BigDecimal minPrice;
+	/*维护费*/
+	private BigDecimal maintenanceFee;
+	/*净利润*/
+	private BigDecimal netProfit;
+
 	public CustomerBaseInfo() {
 	}
 	
@@ -417,4 +435,67 @@ public class CustomerBaseInfo {
 		this.enterprise_nature = enterprise_nature;
 	}
 
+	public String getStartCooperationTime() {
+		return startCooperationTime;
+	}
+
+	public void setStartCooperationTime(String startCooperationTime) {
+		this.startCooperationTime = startCooperationTime;
+	}
+
+	public String getCooperationDuration() {
+		return cooperationDuration;
+	}
+
+	public void setCooperationDuration(String cooperationDuration) {
+		this.cooperationDuration = cooperationDuration;
+	}
+
+	public String getActivePeriod() {
+		return activePeriod;
+	}
+
+	public void setActivePeriod(String activePeriod) {
+		this.activePeriod = activePeriod;
+	}
+
+	public BigDecimal getTotalMoney() {
+		return totalMoney;
+	}
+
+	public void setTotalMoney(BigDecimal totalMoney) {
+		this.totalMoney = totalMoney;
+	}
+
+	public BigDecimal getPayMoney() {
+		return payMoney;
+	}
+
+	public void setPayMoney(BigDecimal payMoney) {
+		this.payMoney = payMoney;
+	}
+
+	public BigDecimal getMinPrice() {
+		return minPrice;
+	}
+
+	public void setMinPrice(BigDecimal minPrice) {
+		this.minPrice = minPrice;
+	}
+
+	public BigDecimal getMaintenanceFee() {
+		return maintenanceFee;
+	}
+
+	public void setMaintenanceFee(BigDecimal maintenanceFee) {
+		this.maintenanceFee = maintenanceFee;
+	}
+
+	public BigDecimal getNetProfit() {
+		return netProfit;
+	}
+
+	public void setNetProfit(BigDecimal netProfit) {
+		this.netProfit = netProfit;
+	}
 }

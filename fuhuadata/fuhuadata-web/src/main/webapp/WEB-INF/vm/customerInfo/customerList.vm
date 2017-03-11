@@ -35,43 +35,42 @@
 						<form class="form-group">
 							<div class="input-group">
 								<span class="input-group-addon" lang="zh">客户全称</span>
-								<input class="form-control" type="text" value="" />
+								<input class="form-control" type="text" id="fullName" value="" />
 								<span class="input-group-addon" lang="zh">企业性质</span>
-								<select class="form-control">
+								<select class="form-control" id="enterpriseNature">
 									<option value="" selected lang="zh">全部</option>
-									<option value="" lang="zh">加工厂</option>
-									<option value="" lang="zh">分销商</option>
-									<option value="" lang="zh">经销商</option>
-									<option value="" lang="zh">终端客户</option>
-									<option value="" lang="zh">其他</option>
+									<option value="1" lang="zh">加工厂</option>
+									<option value="2" lang="zh">分销商</option>
+									<option value="3" lang="zh">经销商</option>
+									<option value="4" lang="zh">终端客户</option>
+									<option value="5" lang="zh">其他</option>
 								</select>
-								<span class="input-group-addon" lang="zh">信用评级</span>
-								<select class="form-control">
+								<span class="input-group-addon" lang="zh" >信用评级</span>
+								<select class="form-control" id="zhongxinbaoLevel">
 									<option value="" selected lang="zh">全部</option>
-									<option value="" lang="zh">A</option>
-									<option value="" lang="zh">AA</option>
-									<option value="" lang="zh">AAA</option>
-									<option value="" lang="zh">AAAA</option>
+									<option value="1" lang="zh">A</option>
+									<option value="2" lang="zh">AA</option>
+									<option value="3" lang="zh">AAA</option>
+									<option value="4" lang="zh">AAAA</option>
 								</select>
 								<span class="input-group-addon" lang="zh">客户级别</span>
-								<select class="form-control">
+								<select class="form-control" id="customerLevel">
 									<option value="" selected lang="zh">全部</option>
-									<option value="" lang="zh">潜在客户</option>
-									<option value="" lang="zh">风险客户</option>
-									<option value="" lang="zh">一般客户</option>
-									<option value="" lang="zh">重要客户</option>
-									<option value="" lang="zh">大客户</option>
-									<option value="" lang="zh">战略客户</option>
+									<option value="1" lang="zh">战略客户</option>
+                                    <option value="2" lang="zh">大客户</option>
+                                    <option value="3" lang="zh">重要客户</option>
+                                    <option value="4" lang="zh">一般客户</option>
+                                    <option value="5" lang="zh">风险客户</option>
 								</select>
-								<span class="input-group-addon" lang="zh">客户状态</span>
-								<select class="form-control">
+								<span class="input-group-addon" lang="zh" >客户状态</span>
+								<select class="form-control" id="customerStatus">
 									<option value="" selected lang="zh">全部</option>
-									<option value="" lang="zh">正常</option>
-									<option value="" lang="zh">易流失</option>
+									<option value="1" lang="zh">正常</option>
+									<option value="0" lang="zh">易流失</option>
 								</select>
 								<div class="input-group-btn">
 									<button class="btn btn-xs btn-primary" type="reset">重置</button>
-									<button class="btn btn-xs btn-primary" type="button">搜索</button>
+									<button class="btn btn-xs btn-primary" id="submit" type="button">搜索</button>
 								</div>
 							</div>
 						</form>
@@ -99,7 +98,7 @@
 								<th lang="zh">备注</th>
 							</tr>
 							</thead>
-							<tbody>
+							<tbody id="append_container">
 							<tr>
 								<td>02011010</td>
 								<td><a href="customerDetails.html" target="_blank">NUFARM</a></td>
@@ -169,15 +168,88 @@
 </div>
 
 <input type="hidden" id="customerType" value="${customerType}" />
-
 <script type="text/javascript" src="/lib/js/pagination/pagination.js"></script>
 <link rel="stylesheet" type="text/css" href="/lib/js/pagination/pagination.css" />
 <script type="text/javascript" language="javascript" src="/lib/js/creatTree.js"></script>
 <script type="text/javascript">
-	$(function(){
+	var pageSize = 2;//分页步长
+    var click_node ={oneLevelId:0,twoLevelId:0};//接收目录树点击节点的id及其父id
+    click_node.serach = function(){
+        serach();
+	}
+    $(function(){
+		//生成地区目录树
         $('#tree').creatTree('/customerBaseInfo/initAreaCategoryTree');
-       /* $('#tree').filtrateData('/packingArchives/getPackingArchivesByPId',"container","packingArchivesList");*/
-	});
+        //目录树节点绑定点击事件
+        $('#tree').bindClickForCusArea(click_node);
+		//搜索按钮绑定事件
+		$("#submit").click(function(){
+            serach();
+		});
+		//默认查询数据
+        serach();
+    });
+	//查询按钮提交数据
+	function serach(){
+		var total = getListCount();
+        getDataList(0);
+        $("#pagination").pagination(total,{
+            items_per_page : pageSize,
+            num_edge_entries : 3,
+            num_display_entries : 10,
+            callback:getDataList
+        });
+	}
+	var customerLevelList = ['战略客户','大客户' ,'重要客户' ,'一般客户' ,'风险客户'];
+	//根据页码获取列表数据
+	function getDataList(pageNum,jq){
+        jQuery.ajax({
+            url:'/customerBaseInfo/queryCustomerPageList',
+            dataType:'json',
+            data:{
+				customerType:$("#customerType").val(),
+                areaClassId:click_node.oneLevelId,
+                areaId:click_node.twoLevelId,
+                fullName:$("#fullName").val(),
+                enterpriseNature:$("#enterpriseNature").val(),
+                zhongxinbaoLevel:$("#zhongxinbaoLevel").val(),
+                customerLevel:$("#customerLevel").val(),
+                customerStatus:$("#customerStatus").val(),
+                startRow:pageNum*pageSize,
+                pageSize:pageSize
+            },
+            async:true,
+            method:'POST',
+            success:function(data){
+				var list = data.data;
+				var _html = '';
+				for(var i=0;i<list.length;i++){
+					var customer = list[i];
+                    _html += '<tr>';
+                    _html += '	<td>'+customer.customerId+'</td>';
+                    _html += '  <td><a href="" target="_blank">'+customer.fullName+'</a></td>';
+                    _html += '  <td>'+customer.shortName+'</td>';
+                    _html += '  <td lang="zh">'+customer.country+'</td>';
+                    _html += '  <td lang="zh">'+customerLevelList[customer.customerLevel-1]+'</td>';
+                    _html += '  <td>'+customer.zhongxinbaoLevel+'A</td>';
+                    _html += '  <td>'+customer.startCooperationTime+'</td>';
+                    _html += '  <td lang="zh">'+customer.cooperationDuration+'</td>';
+                    _html += '  <td lang="zh">'+customer.activePeriod+'</td>';
+                    _html += '  <td><a href="" data-toggle="modal" data-target="#details">'+customer.totalMoney+'</a></td>';
+                    _html +='   <td>'+customer.payMoney+'</td>';
+                    _html +='   <td>'+customer.minPrice+'</td>';
+                    _html +='   <td>'+customer.maintenanceFee+'</td>';
+                    _html +='   <td>'+customer.netProfit+'</td>';
+                    _html +='   <td lang="zh">'+(customer.customerStatus==0?"易流失":"正常")+'</td>';
+                    _html +='   <td>'+customer.lastmodifyUserName+'</td>';
+                    _html +='   <td>'+customer.remark+'</td>';
+                    _html +='   </tr>';
+				}
+				$("#append_container").html(_html);
+            }
+        });
+	}
+
     /*分页插件参数
     参数名	描述	参数值
     maxentries	总条目数	必选参数，整数
@@ -192,23 +264,24 @@
     prev_show_always	是否显示“前一页”分页按钮	布尔型，可选参数，默认为true，即显示“前一页”按钮
     next_show_always	是否显示“下一页”分页按钮	布尔型，可选参数，默认为true，即显示“下一页”按钮
     callback	回调函数	默认无执行效果*/
-	$(function(){
-		$("#pagination").pagination(100,{
-            items_per_page : 10,
-			num_edge_entries : 1,
-			num_display_entries : 3
-		});
-	});
+
     /**
 	 * 获取列表数据总条目数
      */
 	function getListCount(){
 		var total = 0;
-		JQuery.ajax({
+        jQuery.ajax({
 			url:'/customerBaseInfo/countCustomerList',
 			dataType:'JSON',
 			data:{
-
+                customerType:$("#customerType").val(),
+                areaClassId:click_node.oneLevelId,
+                areaId:click_node.twoLevelId,
+                fullName:$("#fullName").val(),
+                enterpriseNature:$("#enterpriseNature").val(),
+                zhongxinbaoLevel:$("#zhongxinbaoLevel").val(),
+                customerLevel:$("#customerLevel").val(),
+                customerStatus:$("#customerStatus").val(),
 			},
 			async:false,
 			method:'POST',

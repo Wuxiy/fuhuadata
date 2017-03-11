@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -63,9 +64,22 @@ public class CustomerBaseInfoAction {
     @RequestMapping(value = "/countCustomerList",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "customerInfo-customerList",methods = "countCustomerList")
     @ResponseBody
-    public ResultPojo countCustomerList(@RequestBody QueryCustomerBaseInfo queryCustomerBaseInfo){
+    public ResultPojo countCustomerList( QueryCustomerBaseInfo queryCustomerBaseInfo){
         try{
             Result<Integer> result = customerBaseInfoService.count(queryCustomerBaseInfo);
+            return result.getResultPojo();
+        }catch (Exception e){
+            log.error("统计客户列表总条目数失败",e);
+        }
+        return null;
+    }
+
+    @RequestMapping(value = "/queryCustomerPageList",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "customerInfo-customerList",methods = "queryCustomerPageList")
+    @ResponseBody
+    public ResultPojo queryCustomerPageList(HttpServletRequest req,QueryCustomerBaseInfo queryCustomerBaseInfo){
+        try{
+            Result<List<CustomerBaseInfo>> result = customerBaseInfoService.getCustomerBaseInfoByPage(queryCustomerBaseInfo);
             return result.getResultPojo();
         }catch (Exception e){
             log.error("统计客户列表总条目数失败",e);

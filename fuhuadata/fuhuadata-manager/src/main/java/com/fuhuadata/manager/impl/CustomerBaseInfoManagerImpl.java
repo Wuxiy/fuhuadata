@@ -1,6 +1,8 @@
 package com.fuhuadata.manager.impl;
 import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.manager.CustomerBaseInfoManager;
+
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.fuhuadata.dao.CustomerBaseInfoDao;
@@ -42,18 +44,36 @@ public class CustomerBaseInfoManagerImpl implements CustomerBaseInfoManager {
     	
     public Result<List<CustomerBaseInfo>> getCustomerBaseInfoByPage(QueryCustomerBaseInfo queryCustomerBaseInfo) {
 		Result<List<CustomerBaseInfo>> result = new Result<List<CustomerBaseInfo>>();
-		int totalItem = customerBaseInfoDao.count(queryCustomerBaseInfo);
-		;
-		if (totalItem > 0) {
+		/*int totalItem = customerBaseInfoDao.count(queryCustomerBaseInfo);*/
+		/*if (queryCustomerBaseInfo.getTotalItem() > 0) {
 			result.addDefaultModel("CustomerBaseInfos", customerBaseInfoDao.getCustomerBaseInfoByPage(queryCustomerBaseInfo));
 		} else {
 			result.addDefaultModel("CustomerBaseInfos", new ArrayList<CustomerBaseInfo>());
+		}*/
+		List<CustomerBaseInfo> customerList =  customerBaseInfoDao.getCustomerBaseInfoByPage(queryCustomerBaseInfo);
+		if(customerList!=null && customerList.size()>0){
+			//查询订单汇总信息
+			for(CustomerBaseInfo c:customerList){
+				CustomerBaseInfo order_count = customerBaseInfoDao.countOrderByCustomer(c.getCustomerId());
+				if(order_count!=null){
+					c.setTotalMoney(order_count.getTotalMoney());
+					c.setMaintenanceFee(order_count.getMaintenanceFee());
+					c.setMinPrice(order_count.getMinPrice());
+					c.setNetProfit(order_count.getNetProfit());
+					c.setPayMoney(order_count.getPayMoney());
+				}else{
+					BigDecimal default_val = new BigDecimal(0);
+					c.setTotalMoney(default_val);
+					c.setMaintenanceFee(default_val);
+					c.setMinPrice(default_val);
+					c.setNetProfit(default_val);
+					c.setPayMoney(default_val);
+				}
+			}
+		}else{
+			customerList =new ArrayList<CustomerBaseInfo>();
 		}
-		
-		result.setPageSize(queryCustomerBaseInfo.getPageSize());
-		result.setIndex(queryCustomerBaseInfo.getIndex());
-		result.setTotalItem(totalItem);
-		
+		result.addDefaultModel("CustomerBaseInfos", customerList);
 		return result;
     }
     	

@@ -5,7 +5,7 @@
 <sqlMap namespace="CUSTOMERBASEINFO">
    	<typeAlias alias="CustomerBaseInfo" type="com.fuhuadata.domain.CustomerBaseInfo"/>
    	<typeAlias alias="QueryCustomerBaseInfo" type="com.fuhuadata.domain.query.QueryCustomerBaseInfo"/>
-	
+
 	<resultMap id="CUSTOMERBASEINFO-MAP" class="CustomerBaseInfo">
 					<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="fullName" column="full_name" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -34,177 +34,170 @@
 								<result property="lastmodifyUserName" column="lastmodify_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="createTime" column="create_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
 								<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
-														</resultMap>
-	
-	<sql id="PAGE-COMMON">	
+								<result property="totalMoney" column="totalMoney" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result property="minPrice" column="minPrice" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result property="maintenanceFee" column="maintenanceFee" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result property="payMoney" column="payMoney" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+	</resultMap>
+
+	<sql id="PAGE-COMMON">
 		<dynamic prepend=" WHERE ">
-				<isNotNull prepend=" AND " property="customerId">
+				<isNotEmpty prepend=" AND " property="customerId">
 			customer_id = #customerId#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="fullName">
-			full_name like  '%$full_name$%'
-		</isNotNull>
-				<isNotNull prepend=" AND " property="shortName">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="fullName">
+			full_name like  '%$fullName$%'
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="shortName">
 			short_name = #shortName#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="customerType">
+		</isNotEmpty>
+			<isNotEmpty prepend="and" property="enterpriseNature">
+				enterprise_nature=#enterpriseNature#
+			</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="customerType">
 			customer_type = #customerType#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="areaId">
-			area_id = #areaId#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="area">
-			area = #area#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="countryId">
-			country_id = #countryId#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="country">
-			country = #country#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="registeredFunds">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="registeredFunds">
 			registered_funds = #registeredFunds#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="registeredAddress">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="registeredAddress">
 			registered_address = #registeredAddress#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="managementScope">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="managementScope">
 			management_scope = #managementScope#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="zhongxinbaoNumber">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="zhongxinbaoNumber">
 			zhongxinbao_number = #zhongxinbaoNumber#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="zhongxinbaoLevel">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="zhongxinbaoLevel">
 			zhongxinbao_level = #zhongxinbaoLevel#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="remark">
-					remark = #remark#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="enterprisePhone">
+		</isNotEmpty>
+
+				<isNotEmpty prepend=" AND " property="enterprisePhone">
 			enterprise_phone = #enterprisePhone#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="enterpriseEmaill">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="enterpriseEmaill">
 			enterprise_emaill = #enterpriseEmaill#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="enterpriseProfile">
-			enterprise_profile = #enterpriseProfile#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="developmentCourse">
-			development_course = #developmentCourse#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="salesNetwork">
-			sales_network = #salesNetwork#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="customField">
-			custom_field = #customField#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="customerCompletion">
-			customer_completion = #customerCompletion#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="createUserId">
+		</isNotEmpty>
+			<isNotEmpty prepend="and" property="customerLevel">
+				customer_level=#customerLevel#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="customerStatus">
+				customer_status=#customerStatus#
+			</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="createUserId">
 			create_user_id = #createUserId#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="createUserName">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="createUserName">
 			create_user_name = #createUserName#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="lastmodifyUserId">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="lastmodifyUserId">
 			lastmodify_user_id = #lastmodifyUserId#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="lastmodifyUserName">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="lastmodifyUserName">
 			lastmodify_user_name = #lastmodifyUserName#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="createTime">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="createTime">
 			create_time = #createTime#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="modifyTime">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="modifyTime">
 			modify_time = #modifyTime#
-		</isNotNull>
+		</isNotEmpty>
 				</dynamic>
 	</sql>
 	
 	<sql id="QUERY-COMMON">	
 		<dynamic prepend=" WHERE ">
-				<isNotNull prepend=" AND " property="customerId">
+				<isNotEmpty prepend=" AND " property="customerId">
 			customer_id = #customerId#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="fullName">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="fullName">
 			full_name = #fullName#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="shortName">
+		</isNotEmpty>
+			<isNotEmpty prepend="and" property="enterpriseNature">
+				enterprise_nature=#enterpriseNature#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="">
+				customer_level=#customerLevel#
+			</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="shortName">
 			short_name = #shortName#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="customerType">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="customerType">
 			customer_type = #customerType#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="areaId">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="areaId">
 			area_id = #areaId#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="area">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="area">
 			area = #area#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="countryId">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="countryId">
 			country_id = #countryId#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="country">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="country">
 			country = #country#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="registeredFunds">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="registeredFunds">
 			registered_funds = #registeredFunds#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="registeredAddress">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="registeredAddress">
 			registered_address = #registeredAddress#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="managementScope">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="managementScope">
 			management_scope = #managementScope#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="zhongxinbaoNumber">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="zhongxinbaoNumber">
 			zhongxinbao_number = #zhongxinbaoNumber#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="zhongxinbaoLevel">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="zhongxinbaoLevel">
 			zhongxinbao_level = #zhongxinbaoLevel#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="remark">
+		</isNotEmpty>
+			<isNotEmpty prepend="and" property="customerStatus">
+				customer_status=#customerStatus#
+			</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="remark">
 					remark = #remark#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="enterprisePhone">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="enterprisePhone">
 			enterprise_phone = #enterprisePhone#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="enterpriseEmaill">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="enterpriseEmaill">
 			enterprise_emaill = #enterpriseEmaill#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="enterpriseProfile">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="enterpriseProfile">
 			enterprise_profile = #enterpriseProfile#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="developmentCourse">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="developmentCourse">
 			development_course = #developmentCourse#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="salesNetwork">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="salesNetwork">
 			sales_network = #salesNetwork#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="customField">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="customField">
 			custom_field = #customField#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="customerCompletion">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="customerCompletion">
 			customer_completion = #customerCompletion#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="createUserId">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="createUserId">
 			create_user_id = #createUserId#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="createUserName">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="createUserName">
 			create_user_name = #createUserName#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="lastmodifyUserId">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="lastmodifyUserId">
 			lastmodify_user_id = #lastmodifyUserId#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="lastmodifyUserName">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="lastmodifyUserName">
 			lastmodify_user_name = #lastmodifyUserName#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="createTime">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="createTime">
 			create_time = #createTime#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="modifyTime">
+		</isNotEmpty>
+				<isNotEmpty prepend=" AND " property="modifyTime">
 			modify_time = #modifyTime#
-		</isNotNull>
+		</isNotEmpty>
 				</dynamic>
 	</sql>
 	
@@ -257,43 +250,91 @@
 		]]>
 	</delete>
 	
-	<select id="GET-ALL" resultMap="CUSTOMERBASEINFO-MAP">
+	<select id="GET-ALL" resultClass="CustomerBaseInfo">
 		<![CDATA[
 			SELECT * FROM customer_base_info
 		]]>
 	</select>
-	
-	<select id="GET-BY-QUERY" resultMap="CUSTOMERBASEINFO-MAP" parameterClass="QueryCustomerBaseInfo">
+
+	<select id="GET-BY-QUERY" resultClass="CustomerBaseInfo" parameterClass="QueryCustomerBaseInfo">
 		<![CDATA[
 			SELECT * FROM customer_base_info
 		]]>
-		<isParameterPresent>   
-            <include refid="QUERY-COMMON" />   
+		<isParameterPresent>
+            <include refid="QUERY-COMMON" />
         </isParameterPresent>
 	</select>
-	
-	<select id="GET-BY-ID" resultMap="CUSTOMERBASEINFO-MAP" parameterClass="java.lang.String">
+
+	<select id="GET-BY-ID" resultClass="CustomerBaseInfo" parameterClass="java.lang.String">
 		<![CDATA[
 			SELECT * FROM customer_base_info	WHERE customer_id=#customer_id#
 		]]>
 	</select>
 	
-	<select id="GET-PAGE" resultMap="CUSTOMERBASEINFO-MAP" parameterClass="QueryCustomerBaseInfo">
-		<![CDATA[
-			SELECT * FROM customer_base_info
-		]]>
+	<select id="GET-PAGE" resultClass="CustomerBaseInfo" parameterClass="QueryCustomerBaseInfo">
+
+			SELECT
+				base.customer_id   customerId,
+				base.full_name fullName,
+				base.short_name shortName,
+				base.country ,
+				base.customer_level customerLevel,
+				base.zhongxinbao_level zhongxinbaoLevel,
+				base.start_cooperation_time startCooperationTime,
+				base.cooperation_duration cooperationDuration,
+				base.active_period activePeriod,
+				base.customer_status customerStatus,
+				base.lastmodify_user_name lastmodifyUserName,
+				base.remark
+			FROM customer_base_info base
+			<isNotEqual property="areaClassId" compareValue="0" prepend=",">
+				p_area_code pac,
+				p_areaclass pa
+			</isNotEqual>
+
+
 		<isParameterPresent>   
             <include refid="PAGE-COMMON" />   
         </isParameterPresent>
+		<isNotEqual property="areaClassId" compareValue="0">
+			and pac.`areaclass_id` = pa.`areaclass_id` and customer_area_id = pac.`areaid`
+			and pa.`areaclass_id`=#areaClassId#
+			<isNotEqual property="areaClassId" compareValue="0">
+			and	customer_area_id = #areaId#
+			</isNotEqual>
+		</isNotEqual>
 		LIMIT #startRow#,#pageSize#
 	</select>
 	
 	<select id="COUNT" resultClass="java.lang.Integer" parameterClass="QueryCustomerBaseInfo">
-		<![CDATA[
-			SELECT COUNT(customer_id) FROM customer_base_info
-		]]>
-		<isParameterPresent>   
+		SELECT COUNT(customer_id) FROM customer_base_info
+		<isNotEqual property="areaClassId" compareValue="0" prepend=",">
+			p_area_code pac,
+			p_areaclass pa
+		</isNotEqual>
+
+		<isParameterPresent>
             <include refid="PAGE-COMMON" />   
         </isParameterPresent>
+		<isNotEqual property="areaClassId" compareValue="0">
+			and pac.`areaclass_id` = pa.`areaclass_id` and customer_area_id = pac.`areaid`
+			and pa.`areaclass_id`=#areaClassId#
+			<isNotEqual property="areaClassId" compareValue="0">
+			and	customer_area_id = #areaId#
+			</isNotEqual>
+		</isNotEqual>
+
+	</select>
+
+	<select id="countOrderByCustomer" resultClass="CustomerBaseInfo" parameterClass="java.lang.String">
+		select
+		ifnull(sum(ifnull(amount_payable,0)),0) totalMoney,
+		ifnull(sum(ifnull(floor_price,0)),0) minPrice,
+		ifnull(sum(ifnull(maintenance_fee,0)),0) maintenanceFee,
+		ifnull(sum(ifnull(net_profit,0)),0) netProfit,
+		ifnull(sum(ifnull(actual_amount_paid,0)),0) payMoney
+		from  business_order
+		where customer_id = #customerId#
+		and staus = 2
 	</select>
 </sqlMap>
