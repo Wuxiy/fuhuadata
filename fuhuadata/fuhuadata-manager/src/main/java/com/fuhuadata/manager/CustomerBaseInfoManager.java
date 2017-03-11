@@ -1,6 +1,7 @@
 package com.fuhuadata.manager;
 import java.util.List;
 
+import com.fuhuadata.domain.CountCustomersOrderProduct;
 import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.domain.query.Result;
@@ -73,5 +74,12 @@ public interface CustomerBaseInfoManager {
      * @return
      */
     public int count(QueryCustomerBaseInfo queryCustomerBaseInfo);
+
+	/**
+	 * 根据客户id统计其购买产品明细清单
+	 * @param customerId
+	 * @return
+	 */
+	public List<CountCustomersOrderProduct> countOrderProduct(String customerId);
 	
 }

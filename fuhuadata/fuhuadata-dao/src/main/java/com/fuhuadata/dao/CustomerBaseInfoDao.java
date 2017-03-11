@@ -1,6 +1,7 @@
 package com.fuhuadata.dao;
 import java.util.List;
 
+import com.fuhuadata.domain.CountCustomersOrderProduct;
 import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 
@@ -74,5 +75,12 @@ public interface CustomerBaseInfoDao {
 	 * @return
 	 */
 	public CustomerBaseInfo countOrderByCustomer(String customerId);
+
+	/**
+	 * 根据客户id汇总产品购买信息
+	 * @param customerId
+	 * @return
+	 */
+	public List<CountCustomersOrderProduct> countOrderProduct(String customerId);
     		
 }

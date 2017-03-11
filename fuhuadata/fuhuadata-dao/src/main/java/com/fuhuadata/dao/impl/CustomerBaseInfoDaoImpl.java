@@ -1,17 +1,18 @@
 package com.fuhuadata.dao.impl;
 import java.util.List;
 
+import com.fuhuadata.domain.CountCustomersOrderProduct;
 import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.dao.CustomerBaseInfoDao;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author wangbo
  * @date 2017-01-12 11:49:51
  */
-@SuppressWarnings("unchecked")
 public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements CustomerBaseInfoDao {
 
     public static final String ADD = "CUSTOMERBASEINFO.ADD";
@@ -23,6 +24,7 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
     public static final String GET_PAGE = "CUSTOMERBASEINFO.GET-PAGE";
     public static final String COUNT = "CUSTOMERBASEINFO.COUNT";
     public static final String COUNT_ORDER = "CUSTOMERBASEINFO.countOrderByCustomer";
+    public static final String COUNT_ORDER_PRODUCT = "CUSTOMERBASEINFO.countOrderProduct";
 
     public CustomerBaseInfo addCustomerBaseInfo(CustomerBaseInfo customerBaseInfo) {
 		customerBaseInfo.setCustomerId((String) this.insert(ADD, customerBaseInfo));
@@ -63,6 +65,15 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
             return (CustomerBaseInfo)this.queryForObject(COUNT_ORDER,customerId);
         } catch (DataAccessException e) {
            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<CountCustomersOrderProduct> countOrderProduct(String customerId) {
+        try {
+            return (List<CountCustomersOrderProduct>) this.queryForObject(COUNT_ORDER_PRODUCT,customerId);
+        } catch (DataAccessException e) {
+            e.printStackTrace();
         }
         return null;
     }

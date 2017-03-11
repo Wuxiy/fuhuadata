@@ -5,7 +5,7 @@
 <sqlMap namespace="CUSTOMERBASEINFO">
    	<typeAlias alias="CustomerBaseInfo" type="com.fuhuadata.domain.CustomerBaseInfo"/>
    	<typeAlias alias="QueryCustomerBaseInfo" type="com.fuhuadata.domain.query.QueryCustomerBaseInfo"/>
-
+	<typeAlias alias="CountCustomersOrderProduct" type="com.fuhuadata.domain.CountCustomersOrderProduct"/>
 	<resultMap id="CUSTOMERBASEINFO-MAP" class="CustomerBaseInfo">
 					<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="fullName" column="full_name" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -286,6 +286,7 @@
 				base.customer_status customerStatus,
 				base.lastmodify_user_name lastmodifyUserName,
 				base.remark
+				base.loss_reason lossReason
 			FROM customer_base_info base
 			<isNotEqual property="areaClassId" compareValue="0" prepend=",">
 				p_area_code pac,
@@ -336,5 +337,23 @@
 		from  business_order
 		where customer_id = #customerId#
 		and staus = 2
+	</select>
+
+	<select id="countOrderProduct" resultClass="CountCustomersOrderProduct" parameterClass="java.lang.String">
+		SELECT
+			op.`customer_product_name` productName,
+			p.`category_name` categoryName,
+			sum(op.`min_price`*op.`main_product_amount`) totalMinPrice,
+			sum(op.`main_product_amount`)  totalSaleNum,
+			SUM(op.contract_price*op.`main_product_amount`) totalSaleMoney
+			p.measurement
+		from  business_order o,business_order_product op,product_info p
+			where
+			o.`order_id` = op.`order_id`
+			and op.`product_id` = p.`product_id`
+			and transform_state=1
+			and o.staus = 2
+			o.`customer_id` = #customerId#
+		group by op.archive_product_id
 	</select>
 </sqlMap>

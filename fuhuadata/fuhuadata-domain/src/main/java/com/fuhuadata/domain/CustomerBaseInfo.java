@@ -135,10 +135,20 @@ public class CustomerBaseInfo {
 	private BigDecimal maintenanceFee;
 	/*净利润*/
 	private BigDecimal netProfit;
+	//客户流失原因
+	private String lossReason;
 
 	public CustomerBaseInfo() {
 	}
-	
+
+	public String getLossReason() {
+		return lossReason;
+	}
+
+	public void setLossReason(String lossReason) {
+		this.lossReason = lossReason;
+	}
+
 	public String getCustomerId() {
 		return customerId;
 	}

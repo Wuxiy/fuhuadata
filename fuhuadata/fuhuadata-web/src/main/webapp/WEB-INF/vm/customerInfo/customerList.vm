@@ -223,28 +223,30 @@
             success:function(data){
 				var list = data.data;
 				var _html = '';
-				for(var i=0;i<list.length;i++){
-					var customer = list[i];
-                    _html += '<tr>';
-                    _html += '	<td>'+customer.customerId+'</td>';
-                    _html += '  <td><a href="" target="_blank">'+customer.fullName+'</a></td>';
-                    _html += '  <td>'+customer.shortName+'</td>';
-                    _html += '  <td lang="zh">'+customer.country+'</td>';
-                    _html += '  <td lang="zh">'+customerLevelList[customer.customerLevel-1]+'</td>';
-                    _html += '  <td>'+customer.zhongxinbaoLevel+'A</td>';
-                    _html += '  <td>'+customer.startCooperationTime+'</td>';
-                    _html += '  <td lang="zh">'+customer.cooperationDuration+'</td>';
-                    _html += '  <td lang="zh">'+customer.activePeriod+'</td>';
-                    _html += '  <td><a href="" data-toggle="modal" data-target="#details">'+customer.totalMoney+'</a></td>';
-                    _html +='   <td>'+customer.payMoney+'</td>';
-                    _html +='   <td>'+customer.minPrice+'</td>';
-                    _html +='   <td>'+customer.maintenanceFee+'</td>';
-                    _html +='   <td>'+customer.netProfit+'</td>';
-                    _html +='   <td lang="zh">'+(customer.customerStatus==0?"易流失":"正常")+'</td>';
-                    _html +='   <td>'+customer.lastmodifyUserName+'</td>';
-                    _html +='   <td>'+customer.remark+'</td>';
-                    _html +='   </tr>';
-				}
+				if(list && list!='' && list!='null'){
+                    for(var i=0;i<list.length;i++){
+                        var customer = list[i];
+                        _html += '<tr>';
+                        _html += '	<td>'+customer.customerId+'</td>';
+                        _html += '  <td><a href="" target="_blank">'+customer.fullName+'</a></td>';
+                        _html += '  <td>'+customer.shortName+'</td>';
+                        _html += '  <td lang="zh">'+customer.country+'</td>';
+                        _html += '  <td lang="zh">'+customerLevelList[customer.customerLevel-1]+'</td>';
+                        _html += '  <td>'+customer.zhongxinbaoLevel+'A</td>';
+                        _html += '  <td>'+customer.startCooperationTime+'</td>';
+                        _html += '  <td lang="zh">'+customer.cooperationDuration+'</td>';
+                        _html += '  <td lang="zh">'+customer.activePeriod+'</td>';
+                        _html += '  <td><a href="" data-toggle="modal" data-target="#details">'+customer.totalMoney+'</a></td>';
+                        _html +='   <td>'+customer.payMoney+'</td>';
+                        _html +='   <td>'+customer.minPrice+'</td>';
+                        _html +='   <td>'+customer.maintenanceFee+'</td>';
+                        _html +='   <td>'+customer.netProfit+'</td>';
+                        _html +='   <td lang="zh">'+(customer.customerStatus==0?"易流失":"正常")+'</td>';
+                        _html +='   <td>'+customer.lastmodifyUserName+'</td>';
+                        _html +='   <td>'+customer.remark+'</td>';
+                        _html +='   </tr>';
+                    }
+                }
 				$("#append_container").html(_html);
             }
         });

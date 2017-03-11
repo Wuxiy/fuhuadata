@@ -1,4 +1,6 @@
 package com.fuhuadata.service.impl;
+import com.fuhuadata.dao.CustomerBaseInfoDao;
+import com.fuhuadata.domain.CountCustomersOrderProduct;
 import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.manager.CustomerBaseInfoManager;
 import java.util.List;
@@ -6,6 +8,8 @@ import java.util.List;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.service.CustomerBaseInfoService;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.annotation.Resource;
 
 /**
@@ -13,9 +17,10 @@ import javax.annotation.Resource;
  * @date 2017-01-12 11:49:51
  */
 public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
-	
-	@Resource
+
+	@Autowired
     private CustomerBaseInfoManager customerBaseInfoManager;
+
     public Result<CustomerBaseInfo> addCustomerBaseInfo(CustomerBaseInfo customerBaseInfo) {
 		Result<CustomerBaseInfo> result = new Result<CustomerBaseInfo>();
 		try {
@@ -93,5 +98,8 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 		}
 		return result;	
     }
-	
+
+	public List<CountCustomersOrderProduct> countOrderProduct(String customerId) {
+		return customerBaseInfoManager.countOrderProduct(customerId);
+	}
 }

@@ -1,4 +1,5 @@
 package com.fuhuadata.manager.impl;
+import com.fuhuadata.domain.CountCustomersOrderProduct;
 import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.manager.CustomerBaseInfoManager;
 
@@ -86,5 +87,9 @@ public class CustomerBaseInfoManagerImpl implements CustomerBaseInfoManager {
     public int count(QueryCustomerBaseInfo queryCustomerBaseInfo) {
     	return customerBaseInfoDao.count(queryCustomerBaseInfo);
     }
-    
+
+	@Override
+	public List<CountCustomersOrderProduct> countOrderProduct(String customerId) {
+		return customerBaseInfoDao.countOrderProduct(customerId);
+	}
 }
