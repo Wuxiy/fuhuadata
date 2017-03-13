@@ -28,7 +28,6 @@ public class PackingArchivesServiceImpl implements PackingArchivesService {
 
         try {
             String ids=packingArchives.getAssociatedPackingId();
-            System.out.println(ids);
             ids=ids.replace("[","");
             ids=ids.replace("]","");
             ids=ids.replace("\"","");
@@ -36,6 +35,8 @@ public class PackingArchivesServiceImpl implements PackingArchivesService {
             if(packingArchives.getImagePath().equals("[]")){
                 packingArchives.setImagePath("");
             }
+            String suitableType=packingArchives.getSuitableType();
+            packingArchives.setSuitableType( suitableType.replace("[","").replace("]","").replace("\"",""));
             result.addDefaultModel(packingArchivesManager.addPackingArchives(packingArchives));
         } catch (Exception e) {
             result.setSuccess(false);
