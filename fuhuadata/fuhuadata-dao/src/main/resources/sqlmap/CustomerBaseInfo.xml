@@ -285,7 +285,7 @@
 				base.active_period activePeriod,
 				base.customer_status customerStatus,
 				base.lastmodify_user_name lastmodifyUserName,
-				base.remark
+				base.remark,
 				base.loss_reason lossReason
 			FROM customer_base_info base
 			<isNotEqual property="areaClassId" compareValue="0" prepend=",">
@@ -331,8 +331,8 @@
 		select
 		ifnull(sum(ifnull(amount_payable,0)),0) totalMoney,
 		ifnull(sum(ifnull(floor_price,0)),0) minPrice,
-		ifnull(sum(ifnull(maintenance_fee,0)),0) maintenanceFee,
-		ifnull(sum(ifnull(net_profit,0)),0) netProfit,
+		ifnull(sum(ifnull(,0)),0) maintenanceFee,
+		ifnull(sum(ifnull(net_promaintenance_feefit,0)),0) netProfit,
 		ifnull(sum(ifnull(actual_amount_paid,0)),0) payMoney
 		from  business_order
 		where customer_id = #customerId#

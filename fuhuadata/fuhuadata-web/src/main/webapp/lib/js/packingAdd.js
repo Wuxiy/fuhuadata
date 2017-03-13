@@ -179,7 +179,27 @@ $('#add_relate').on('click',function(){
     $("input[name='modal_cellcheckbox']:checked").each(function(){
         ids.push($(this).val());
     });
-    $('#addField').modal('hide');
+
+    if(ids.length > 0){
+        var msg = "确认要为主材添加这些关联吗？";
+        if(msg){
+            var url = '';
+            var data = ids;
+            jQuery.ajax({
+                url:url,
+                type:'POST',
+                dataType:"json",
+                contentType:"application/json",
+                data:JSON.stringify(data),
+                success:function(){
+                    alert("添加关联成功！");
+                    location.reload();
+                }
+            })
+        }
+    }else{
+        alert('还未选择要添加的关联');
+    }
 })
 
 //新增完成
@@ -203,7 +223,6 @@ $('.packingAdd').on('click',function(){
         "ids":ids,
         "bremarks": jQuery('#bremarks').val(),
     }
-    console.log(data);
     jQuery.ajax({
         type:"POST",
         url:url,

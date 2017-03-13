@@ -27,27 +27,28 @@
     	url:url,
     	success:function(result){
     		var ResultData = result.data;
-    		var node = ResultData.nodes;
-            var reData = eval(ResultData.pack.imagePath);
-            var preList = new Array();
-            var arr = [ResultData.pack.suitableType];
-            $('#packName').val(ResultData.pack.packName);
-            $('#spec').val(ResultData.pack.spec);
-            $('#size').val(ResultData.pack.size);
-            $('#quality').val(ResultData.pack.quality);
-            $('#qualityIndex').val(ResultData.pack.qualityIndex);
-            $('#qualityTargetValue').val(ResultData.pack.qualityTargetValue);
-            $('#unitPrice').val(ResultData.pack.unitPrice);
-            $('#consumption').val(ResultData.pack.consumption);
-            $('#priceEndDate').val(ResultData.pack.priceEndDate);
-            $('#status').val(ResultData.pack.status);
-            $('#bRemarks').val(ResultData.pack.bRemarks);
-            $('.suitableType').val(arr);
 
+            if(ResultData.pack){
+                var pack = ResultData.pack;
+                var arr = [pack.suitableType];
+                $('#packName').val(pack.packName);
+                $('#spec').val(pack.spec);
+                $('#size').val(pack.size);
+                $('#quality').val(pack.quality);
+                $('#qualityIndex').val(pack.qualityIndex);
+                $('#qualityTargetValue').val(pack.qualityTargetValue);
+                $('#unitPrice').val(pack.unitPrice);
+                $('#consumption').val(pack.consumption);
+                $('#priceEndDate').val(pack.priceEndDate);
+                $('#status').val(pack.status);
+                $('#bRemarks').val(pack.bRemarks);
+                $('.suitableType').val(arr);
+            }
 
-
-            for(var i=0;i<node.length;i++){
-                table.innerHTML += '<tr>'+
+            if(ResultData.nodes){
+                var node = ResultData.nodes;
+                for(var i=0;i<node.length;i++){
+                    table.innerHTML += '<tr>'+
                         '<td class="text-center"><input type="checkbox" name="cellcheckbox" value="'+node[i].packingId+'" /></td>'+
                         '<td class="col-xs-2 text-center text-middle">'+node[i].packingId+'</td>'+
                         '<td class="col-xs-2 text-center text-middle">'+node[i].packName+'</td>'+
@@ -57,13 +58,18 @@
                         '<td class="col-xs-1 text-center text-middle">'+node[i].unitPrice+'</td>'+
                         '<td class="col-xs-1 text-center text-middle">'+node[i].consumption+'</td>'+
                         '<td class="col-xs-1 text-center text-middle">'+node[i].status+'</td>'
-                        '</tr>';
+                    '</tr>';
+                }
             }
 
-            for(var j=0;j<reData.length;j++){
-                var array_element = reData[j];
-                console.log(array_element);
-                preList[i] = "<img src=\"/eim/upload/getIMG.do?savePath="+array_element.path+"&name="+array_element.name+"\" class=\"file-preview-image\">";
+            if(ResultData.imagePath){
+                var reData = ResultData.imagePath;
+                var preList = new Array();
+                for(var j=0;j<reData.length;j++){
+                    var array_element = reData[j];
+                    console.log(array_element);
+                    preList[i] = "<img src="+array_element.path+" &name="+array_element.name+"\" class=\"file-preview-image\">";
+                }
             }
 
             $('#testlogo').fileinput({
