@@ -118,13 +118,18 @@ public class PageBase {
 			return pageSize;
 		}
 
-		/**
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+
+	/**
 		 * 设置分页大小
 		 * @param pageSize
 		 * 
 		 */
 		public void setPageSize(int pageSize) {
 			this.pageSize = pageSize;
+
 			repaginate();
 		}
 

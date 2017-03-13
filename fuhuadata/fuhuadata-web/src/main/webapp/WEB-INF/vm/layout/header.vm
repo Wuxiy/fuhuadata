@@ -25,9 +25,9 @@
     <ul id="nav-affix" class="nav nav-cards">
         <li class="shadow-in" title="客户信息">
             <div id="collapseOne" class="list-group collapse">
-                <a class="list-group-item" href="/saleCustomer/saleCustomerCooperationList">合作客户</a>
-                <a class="list-group-item" href="/saleCustomer/saleCustomerPotentialList">潜在客户</a>
-                <a class="list-group-item" href="/saleCustomer/saleCustomerRunOffList">流失客户</a>
+                <a class="list-group-item" href="/customerBaseInfo/customerListPageInit?customerType=1">合作客户</a>
+                <a class="list-group-item" href="/customerBaseInfo/customerListPageInit?customerType=2">潜在客户</a>
+                <a class="list-group-item" href="/customerBaseInfo/customerListPageInit?customerType=3">流失客户</a>
             </div>
             <a data-toggle="collapse" href="#collapseOne" data-parent="#nav-affix">
                 <span class="glyphicon glyphicon-user"></span>

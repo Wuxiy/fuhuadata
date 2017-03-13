@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class CustomerEncyclopedia {
 
-        private Integer encyId;//百科编号
+        private String encyId;//百科编号
 
         private String companyName;//企业全称
 
@@ -55,13 +55,6 @@ public class CustomerEncyclopedia {
 
         private String remarks;//备注
 
-        public Integer getEncyId() {
-            return encyId;
-        }
-
-        public void setEncyId(Integer encyId) {
-            this.encyId = encyId;
-        }
 
         public String getCompanyName() {
             return companyName;
@@ -225,5 +218,13 @@ public class CustomerEncyclopedia {
 
     public void setCompanyAbbreviation(String companyAbbreviation) {
         this.companyAbbreviation = companyAbbreviation;
+    }
+
+    public String getEncyId() {
+        return encyId;
+    }
+
+    public void setEncyId(String encyId) {
+        this.encyId = encyId;
     }
 }

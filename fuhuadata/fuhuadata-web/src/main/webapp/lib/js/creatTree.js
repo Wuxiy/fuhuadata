@@ -22,6 +22,28 @@
             })
         }
     };
+    $.fn.bindClickForCusArea = function(obj){
+        //给树形菜单添加点击事件
+        this.on('click','li[id]>a',function(e){
+            //阻止a的默认事件
+            e.preventDefault();
+            var id = $(e.target).parent('li').attr('id');
+            if(id=='0'){
+                //点击的是全部
+                obj.oneLevelId = 0;
+                obj.twoLevelId = 0;
+            }else if ($(e.target).parent('li').parent('ul').parent('ul').hasClass('tree-root')){
+                //说明当前点击的是二级目录
+                obj.oneLevelId = id;
+                obj.twoLevelId = 0;
+            }else{
+                //当前点击的是子目录，需要查出父id
+                obj.twoLevelId = id;
+                obj.oneLevelId = $(e.target).parent('li').parent('ul').parent('li').attr('id');
+            }
+            obj.serach();
+        });
+    };
     //给树形菜单动态添加点击事件，并且获取数据，将数据渲染到表格或者表单
     $.fn.filtrateData = function(url,containerId,method){
         //取得html容器

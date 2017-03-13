@@ -1,12 +1,14 @@
-<!--副导航-->
 <div class="nav-deputy shadow-out clearfix">
-	<ul class="breadcrumb pull-right">
-		<li><span class="glyphicon glyphicon-map-marker"></span></li>
-		<li><a href="">客户信息</a></li>
-		<li class="active">流失客户</li>
-	</ul>
+    <ul class="nav nav-tabs pull-left">
+        <li class="active"><a href="#cooperative" data-toggle="tab" lang="zh">合作客户</a></li>
+        <li><a href="#potential" data-toggle="tab" lang="zh">潜在客户</a></li>
+        <li><a href="#lossing" data-toggle="tab" lang="zh">流失客户</a></li>
+    </ul>
+    <ul class="breadcrumb pull-right">
+        <li><span class="glyphicon glyphicon-map-marker"></span></li>
+    </ul>
 </div>
-<!--内容-->
+<!--tab内容-->
 <div class="dashboard-wrapper">
     <div class="row">
         <div class="col-xs-2">
@@ -16,153 +18,279 @@
                         地区分类
                     </h3>
                 </div>
-                <div class="panel-body tree-container clearfix">
+                <div class="panel-body clearfix">
                     <!--树形菜单-->
-                    <div class="tree">
-                        <ul class="tree-root">
-                            <li>
-                                <span class="branch-node" data-toggle="collapse" data-target="#bNode1"></span><a href=""><span class="leaf"></span><span lang="zh">拉美区</span></a>
-                                <ul id="bNode1" class="tree-branch collapse in">
-                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">墨西哥</span></a></li>
-                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">乌拉圭</span></a></li>
-                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">秘鲁</span></a></li>
-                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">哥伦比亚</span></a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <span class="branch-node" data-toggle="collapse" data-target="#bNode2"></span><a href=""><span class="leaf"></span><span lang="zh">亚太区</span></a>
-                                <ul id="bNode2" class="tree-branch collapse in">
-                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">韩国</span></a></li>
-                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">日本</span></a></li>
-                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">朝鲜</span></a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <span class="branch-node" data-toggle="collapse" data-target="#bNode3"></span><a href=""><span class="leaf"></span><span lang="zh">欧非区</span></a>
-                                <ul id="bNode3" class="tree-branch collapse in">
-                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">加纳</span></a></li>
-                                    <li><span class="branch"></span><a href=""><span class="leaf"></span><span lang="zh">南非</span></a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
+                    <div class="tree" id="tree"></div>
                 </div>
             </div>
         </div>
         <div class="col-xs-10 tab-content">
-            <!--流失客户页-->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title" lang="zh">流失客户列表</h3>
-                </div>
-                <div class="panel-body clearfix">
-                    <!--搜索&筛选控件-->
-                    <form class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon" lang="zh">客户全称</span>
-                            <input class="form-control" type="text" value="" />
-                            <span class="input-group-addon" lang="zh">企业性质</span>
-                            <select class="form-control">
-                                <option value="" selected lang="zh">全部</option>
-                                <option value="" lang="zh">加工厂</option>
-                                <option value="" lang="zh">分销商</option>
-                                <option value="" lang="zh">经销商</option>
-                                <option value="" lang="zh">终端客户</option>
-                                <option value="" lang="zh">其他</option>
-                            </select>
-                            <span class="input-group-addon" lang="zh">信用评级</span>
-                            <select class="form-control">
-                                <option value="" selected lang="zh">全部</option>
-                                <option value="" lang="zh">A</option>
-                                <option value="" lang="zh">AA</option>
-                                <option value="" lang="zh">AAA</option>
-                                <option value="" lang="zh">AAAA</option>
-                            </select>
-                            <span class="input-group-addon" lang="zh">客户级别</span>
-                            <select class="form-control">
-                                <option value="" selected lang="zh">全部</option>
-                                <option value="" lang="zh">潜在客户</option>
-                                <option value="" lang="zh">风险客户</option>
-                                <option value="" lang="zh">一般客户</option>
-                                <option value="" lang="zh">重要客户</option>
-                                <option value="" lang="zh">大客户</option>
-                                <option value="" lang="zh">战略客户</option>
-                            </select>
-                            <span class="input-group-addon" lang="zh">失败原因</span>
-                            <input class="form-control" type="text" value="" />
-                            <div class="input-group-btn">
-                                <button class="btn btn-xs btn-primary" type="reset">重置</button>
-                                <button class="btn btn-xs btn-primary" type="button">搜索</button>
-                            </div>
-                        </div>
-                    </form>
-                    <!--表格-->
-                    <table class="table table-condensed table-bordered table-striped">
-                        <caption class="text-right" lang="zh">金额单位：万元</caption>
-                        <thead>
-                        <tr>
-                            <th class="sorting" lang="zh">客户编号</th>
-                            <th class="sorting" lang="zh">客户全称</th>
-                            <th class="sorting" lang="zh">客户简称</th>
-                            <th lang="zh">国家</th>
-                            <th class="sorting" lang="zh">信用评级</th>
-                            <th class="sorting" lang="zh">开始合作时间</th>
-                            <th class="sorting" lang="zh">合作时间</th>
-                            <th class="sorting" lang="zh">总销售额</th>
-                            <th class="sorting" lang="zh">总最低销售限价</th>
-                            <th class="sorting" lang="zh">总维护费用</th>
-                            <th class="sorting" lang="zh">净利润</th>
-                            <th lang="zh">业务员</th>
-                            <th lang="zh">流失原因分析</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>02011010</td>
-                            <td><a href="customerDetails.html" target="_blank">NUFARM</a></td>
-                            <td>NUFARM</td>
-                            <td lang="zh">美国</td>
-                            <td>A</td>
-                            <td>2016-7-7</td>
-                            <td lang="zh">12个月</td>
-                            <td><a href="" data-toggle="modal" data-target="#details">10000.00</a></td>
-                            <td>10000.00</td>
-                            <td>10000.00</td>
-                            <td>10000.00</td>
-                            <td>刘凯</td>
-                            <td>客户转向润丰</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <!--分页导航-->
-                    <div class="row">
-                        <div class="col-xs-4">
+            <div id="cooperative" class="tab-pane fade in active">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" lang="zh">流失客户列表</h3>
+                    </div>
+                    <div class="panel-body clearfix">
+                        <!--搜索&筛选控件-->
+                        <form class="form-group">
                             <div class="input-group">
-                                <span class="input-group-addon">共<span>123</span>条记录，<span>130</span>页，跳转到第</span>
-                                <input class="form-control" type="number"/>
-                                <span class="input-group-addon">页</span>
-                                <span class="input-group-btn">
-													<button class="btn btn-xs btn-primary">跳转</button>
-												</span>
+                                <span class="input-group-addon" lang="zh">客户全称</span>
+                                <input class="form-control" type="text" id="fullName" value="" />
+                                <span class="input-group-addon" lang="zh">企业性质</span>
+                                <select class="form-control" id="enterpriseNature">
+                                    <option value="" selected lang="zh">全部</option>
+                                    <option value="1" lang="zh">加工厂</option>
+                                    <option value="2" lang="zh">分销商</option>
+                                    <option value="3" lang="zh">经销商</option>
+                                    <option value="4" lang="zh">终端客户</option>
+                                    <option value="5" lang="zh">其他</option>
+                                </select>
+                                <span class="input-group-addon" lang="zh" >信用评级</span>
+                                <select class="form-control" id="zhongxinbaoLevel">
+                                    <option value="" selected lang="zh">全部</option>
+                                    <option value="1" lang="zh">A</option>
+                                    <option value="2" lang="zh">AA</option>
+                                    <option value="3" lang="zh">AAA</option>
+                                    <option value="4" lang="zh">AAAA</option>
+                                </select>
+                                <span class="input-group-addon" lang="zh">客户级别</span>
+                                <select class="form-control" id="customerLevel">
+                                    <option value="" selected lang="zh">全部</option>
+                                    <option value="1" lang="zh">战略客户</option>
+                                    <option value="2" lang="zh">大客户</option>
+                                    <option value="3" lang="zh">重要客户</option>
+                                    <option value="4" lang="zh">一般客户</option>
+                                    <option value="5" lang="zh">风险客户</option>
+                                </select>
+                                <span class="input-group-addon" lang="zh" >客户状态</span>
+                                <select class="form-control" id="customerStatus">
+                                    <option value="" selected lang="zh">全部</option>
+                                    <option value="1" lang="zh">正常</option>
+                                    <option value="0" lang="zh">易流失</option>
+                                </select>
+                                <div class="input-group-btn">
+                                    <button class="btn btn-xs btn-primary" type="reset">重置</button>
+                                    <button class="btn btn-xs btn-primary" id="submit" type="button">搜索</button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xs-4 text-right pull-right">
-                            <ul class="pagination table-pagination">
-                                <li class="disabled"><a href="#">上一页</a></li>
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">6</a></li>
-                                <li><a href="#">7</a></li>
-                                <li><a href="">&hellip;</a></li>
-                                <li><a href="#">下一页</a></li>
-                            </ul>
-                        </div>
+                        </form>
+                        <!--表格-->
+                        <table class="table table-condensed table-bordered table-striped">
+                            <caption class="text-right" lang="zh">金额单位：万元</caption>
+                            <thead>
+                            <tr>
+                                <th class="sorting" lang="zh">客户编号</th>
+                                <th class="sorting" lang="zh">客户全称</th>
+                                <th class="sorting" lang="zh">客户简称</th>
+                                <th lang="zh">国家</th>
+                                <th lang="zh">客户级别</th>
+                                <th class="sorting" lang="zh">信用评级</th>
+                                <th class="sorting" lang="zh">开始合作时间</th>
+                                <th class="sorting" lang="zh">合作时间</th>
+                                <th class="sorting" lang="zh">活跃周期</th>
+                                <th class="sorting" lang="zh">合同总金额</th>
+                                <th class="sorting" lang="zh">已回款金额</th>
+                                <th class="sorting" lang="zh">总最低销售限价</th>
+                                <th class="sorting" lang="zh">总维护费用</th>
+                                <th class="sorting" lang="zh">净利润</th>
+                                <th lang="zh">客户状态</th>
+                                <th lang="zh">业务员</th>
+                                <th lang="zh">流失原因分析</th>
+                            </tr>
+                            </thead>
+                            <tbody id="append_container">
+                            <tr>
+                                <td>02011010</td>
+                                <td><a href="customerDetails.html" target="_blank">NUFARM</a></td>
+                                <td>NUFARM</td>
+                                <td lang="zh">美国</td>
+                                <td lang="zh">一般客户</td>
+                                <td>A</td>
+                                <td>2016-7-7</td>
+                                <td lang="zh">3个月</td>
+                                <td lang="zh">12个月</td>
+                                <td><a href="" data-toggle="modal" data-target="#details">10000.00</a></td>
+                                <td>10000.00</td>
+                                <td>10000.00</td>
+                                <td>10000.00</td>
+                                <td>10000.00</td>
+                                <td lang="zh">正常</td>
+                                <td>刘凯彦</td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div id="pagination" class="pagination"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<!--详情模态框-->
+<div class="modal fade" id="details" tabindex="-1"  aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--表格-->
+                <table class="table table-condensed table-bordered text-center table-pagination">
+                    <caption class="text-right" lang="zh">单位：万元</caption>
+                    <thead>
+                    <tr>
+                        <th class="text-center" lang="zh">产品名称</th>
+                        <th class="text-center" lang="zh">产品种类</th>
+                        <th class="text-center" lang="zh">总销售量</th>
+                        <th class="text-center" lang="zh">总销售额</th>
+                        <th class="text-center" lang="zh">总最低销售限价</th>
+                        <th class="text-center" lang="zh">总利润</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>草甘膦95%原药</td>
+                        <td>草甘膦原药</td>
+                        <td>100000KG</td>
+                        <td>1000</td>
+                        <td>100</td>
+                        <td>100</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="customerType" value="${customerType}" />
+<script type="text/javascript" src="/lib/js/pagination/pagination.js"></script>
+<link rel="stylesheet" type="text/css" href="/lib/js/pagination/pagination.css" />
+<script type="text/javascript" language="javascript" src="/lib/js/creatTree.js"></script>
+<script type="text/javascript">
+    var pageSize = 2;//分页步长
+    var click_node ={oneLevelId:0,twoLevelId:0};//接收目录树点击节点的id及其父id
+    click_node.serach = function(){
+        serach();
+    }
+    $(function(){
+        //生成地区目录树
+        $('#tree').creatTree('/customerBaseInfo/initAreaCategoryTree');
+        //目录树节点绑定点击事件
+        $('#tree').bindClickForCusArea(click_node);
+        //搜索按钮绑定事件
+        $("#submit").click(function(){
+            serach();
+        });
+        //默认查询数据
+        serach();
+    });
+    //查询按钮提交数据
+    function serach(){
+        var total = getListCount();
+        getDataList(0);
+        $("#pagination").pagination(total,{
+            items_per_page : pageSize,
+            num_edge_entries : 3,
+            num_display_entries : 10,
+            callback:getDataList
+        });
+    }
+    var customerLevelList = ['战略客户','大客户' ,'重要客户' ,'一般客户' ,'风险客户'];
+    //根据页码获取列表数据
+    function getDataList(pageNum,jq){
+        jQuery.ajax({
+            url:'/customerBaseInfo/queryCustomerPageList',
+            dataType:'json',
+            data:{
+                customerType:$("#customerType").val(),
+                areaClassId:click_node.oneLevelId,
+                areaId:click_node.twoLevelId,
+                fullName:$("#fullName").val(),
+                enterpriseNature:$("#enterpriseNature").val(),
+                zhongxinbaoLevel:$("#zhongxinbaoLevel").val(),
+                customerLevel:$("#customerLevel").val(),
+                customerStatus:$("#customerStatus").val(),
+                startRow:pageNum*pageSize,
+                pageSize:pageSize
+            },
+            async:true,
+            method:'POST',
+            success:function(data){
+                var list = data.data;
+                var _html = '';
+                if(list && list!='' && list!='null') {
+                    for (var i = 0; i < list.length; i++) {
+                        var customer = list[i];
+                        _html += '<tr>';
+                        _html += '	<td>' + customer.customerId + '</td>';
+                        _html += '  <td><a href="" target="_blank">' + customer.fullName + '</a></td>';
+                        _html += '  <td>' + customer.shortName + '</td>';
+                        _html += '  <td lang="zh">' + customer.country + '</td>';
+                        _html += '  <td lang="zh">' + customerLevelList[customer.customerLevel - 1] + '</td>';
+                        _html += '  <td>' + customer.zhongxinbaoLevel + 'A</td>';
+                        _html += '  <td>' + customer.startCooperationTime + '</td>';
+                        _html += '  <td lang="zh">' + customer.cooperationDuration + '</td>';
+                        _html += '  <td lang="zh">' + customer.activePeriod + '</td>';
+                        _html += '  <td><a href="" data-toggle="modal" data-target="#details">' + customer.totalMoney + '</a></td>';
+                        _html += '   <td>' + customer.payMoney + '</td>';
+                        _html += '   <td>' + customer.minPrice + '</td>';
+                        _html += '   <td>' + customer.maintenanceFee + '</td>';
+                        _html += '   <td>' + customer.netProfit + '</td>';
+                        _html += '   <td lang="zh">' + (customer.customerStatus == 0 ? "易流失" : "正常") + '</td>';
+                        _html += '   <td>' + customer.lastmodifyUserName + '</td>';
+                        _html += '   <td>' + customer.lossReason + '</td>';
+                        _html += '   </tr>';
+                    }
+                }
+                $("#append_container").html(_html);
+            }
+        });
+    }
+
+    /*分页插件参数
+    参数名	描述	参数值
+    maxentries	总条目数	必选参数，整数
+    items_per_page	每页显示的条目数	可选参数，默认是10
+    num_display_entries	连续分页主体部分显示的分页条目数	可选参数，默认是10
+    current_page	当前选中的页面	可选参数，默认是0，表示第1页
+    num_edge_entries	两侧显示的首尾分页的条目数	可选参数，默认是0
+    link_to	分页的链接	字符串，可选参数，默认是"#"
+    prev_text	“前一页”分页按钮上显示的文字	字符串参数，可选，默认是"Prev"
+    next_text	“下一页”分页按钮上显示的文字	字符串参数，可选，默认是"Next"
+    ellipse_text	省略的页数用什么文字表示	可选字符串参数，默认是"..."
+    prev_show_always	是否显示“前一页”分页按钮	布尔型，可选参数，默认为true，即显示“前一页”按钮
+    next_show_always	是否显示“下一页”分页按钮	布尔型，可选参数，默认为true，即显示“下一页”按钮
+    callback	回调函数	默认无执行效果*/
+
+    /**
+     * 获取列表数据总条目数
+     */
+    function getListCount(){
+        var total = 0;
+        jQuery.ajax({
+            url:'/customerBaseInfo/countCustomerList',
+            dataType:'JSON',
+            data:{
+                customerType:$("#customerType").val(),
+                areaClassId:click_node.oneLevelId,
+                areaId:click_node.twoLevelId,
+                fullName:$("#fullName").val(),
+                enterpriseNature:$("#enterpriseNature").val(),
+                zhongxinbaoLevel:$("#zhongxinbaoLevel").val(),
+                customerLevel:$("#customerLevel").val(),
+                customerStatus:$("#customerStatus").val(),
+            },
+            async:false,
+            method:'POST',
+            success:function(data){
+                total = data.data;
+            }
+        });
+        return total;
+    }
+</script>

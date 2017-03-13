@@ -1,5 +1,6 @@
 package com.fuhuadata.vo;
 
+import com.fuhuadata.domain.ComponentCost;
 import com.fuhuadata.domain.ProductInfo;
 import com.fuhuadata.domain.ProductWare;
 
@@ -17,6 +18,8 @@ public class ProductInfoVO {
     private List<ProductWare> wares;//规格型号
 
     private List<PhysicalProperities> index;//理化指标json
+
+    private List<ComponentCost> processingComponents;//加工成分
 
 
     public ProductInfo getProductInfo() {
@@ -56,5 +59,19 @@ public class ProductInfoVO {
         this.index.add(physicalProperities);
     }
 
+    public List<ComponentCost> getProcessingComponents() {
+        return processingComponents;
+    }
+
+    public void setProcessingComponents(List<ComponentCost> processingComponents) {
+        this.processingComponents = processingComponents;
+    }
+
+    public void addProcessingComponents(ComponentCost componentCost){
+        if(processingComponents == null){
+            this.processingComponents=new ArrayList<ComponentCost>();
+        }
+        this.processingComponents.add(componentCost);
+    }
 
 }

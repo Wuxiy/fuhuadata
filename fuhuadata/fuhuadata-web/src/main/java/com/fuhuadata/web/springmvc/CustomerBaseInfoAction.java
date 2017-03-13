@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -30,7 +31,7 @@ public class CustomerBaseInfoAction {
 
     private final static Log log = LogFactory.getLog(CustomerBaseInfoAction.class);
 
-    @Autowired
+    @Resource
     private CustomerBaseInfoService customerBaseInfoService;
     @Autowired
     private CustomerAreaService  customerAreaService;
@@ -43,7 +44,14 @@ public class CustomerBaseInfoAction {
     @RequestMapping("/customerListPageInit")
     @SystemLogAnnotation(module = "customerInfo-customerList",methods = "customerListPageInit")
     public ModelAndView init(Integer customerType){
-        return new ModelAndView("customerInfo/customerList").addObject("customerType",customerType);
+        if(customerType==1){
+            return new ModelAndView("customerInfo/customerList").addObject("customerType",customerType);
+        }else if(customerType==2){
+            return new ModelAndView("customerInfo/customerPotentialList").addObject("customerType",customerType);
+        }else if(customerType==3){
+            return new ModelAndView("customerInfo/customerRunOffList").addObject("customerType",customerType);
+        }
+        return null;
     }
     @ResponseBody
     @RequestMapping(value = "/initAreaCategoryTree",method = RequestMethod.GET)
@@ -63,7 +71,7 @@ public class CustomerBaseInfoAction {
     @RequestMapping(value = "/countCustomerList",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "customerInfo-customerList",methods = "countCustomerList")
     @ResponseBody
-    public ResultPojo countCustomerList(@RequestBody QueryCustomerBaseInfo queryCustomerBaseInfo){
+    public ResultPojo countCustomerList( QueryCustomerBaseInfo queryCustomerBaseInfo){
         try{
             Result<Integer> result = customerBaseInfoService.count(queryCustomerBaseInfo);
             return result.getResultPojo();
@@ -72,5 +80,33 @@ public class CustomerBaseInfoAction {
         }
         return null;
     }
+
+    @RequestMapping(value = "/queryCustomerPageList",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "customerInfo-customerList",methods = "queryCustomerPageList")
+    @ResponseBody
+    public ResultPojo queryCustomerPageList(QueryCustomerBaseInfo queryCustomerBaseInfo){
+        try{
+            Result<List<CustomerBaseInfo>> result = customerBaseInfoService.getCustomerBaseInfoByPage(queryCustomerBaseInfo);
+            return result.getResultPojo();
+        }catch (Exception e){
+            log.error("查询客户列表数据失败",e);
+        }
+        return null;
+    }
+
+    @RequestMapping(value = "/showCustomerOrderProductDetail",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "customerInfo-customerList",methods = "showCustomerOrderProductDetail")
+    @ResponseBody
+    public ResultPojo showCustomerOrderProductDetail(String customerId){
+        try{
+            ResultPojo pojo = new  ResultPojo();
+            pojo.setData(customerBaseInfoService.countOrderProduct(customerId));
+            return pojo;
+        }catch (Exception e){
+            log.error("统计客户购买产品列表明细失败",e);
+        }
+        return null;
+    }
+
 
 }

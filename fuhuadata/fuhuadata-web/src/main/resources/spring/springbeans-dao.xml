@@ -24,6 +24,10 @@
 		<property name="useTransactionAwareDataSource" value="true" />
 	</bean>
 
+	<bean id="sqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+
 
 	<!-- ÊÂÎñÅäÖÃ -->
 	<bean id="transactionManager"

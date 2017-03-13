@@ -27,17 +27,17 @@ public class CustomerEncyclopediaManagerImpl implements CustomerEncyclopediaMana
      * @return
      */
     @Override
-    public boolean updateCustomerEncyclopediaById(int id, CustomerEncyclopedia customerEncyclopedia) {
+    public boolean updateCustomerEncyclopediaById(String id, CustomerEncyclopedia customerEncyclopedia) {
         return customerEncyclopediaDao.updateCustomerEncyclopediaById(id,customerEncyclopedia)==1? true:false;
     }
 
     @Override
-    public boolean deleteCustomerEncyclopediaById(int id) {
+    public boolean deleteCustomerEncyclopediaById(String id) {
         return customerEncyclopediaDao.deleteCustomerEncyclopediaById(id) == 1 ? true:false;
     }
 
     @Override
-    public CustomerEncyclopedia getCustomerEncyclopediaById(int id) {
+    public CustomerEncyclopedia getCustomerEncyclopediaById(String id) {
         return customerEncyclopediaDao.getCustomerEncyclopediaById(id);
     }
 

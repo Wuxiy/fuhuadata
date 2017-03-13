@@ -21,23 +21,23 @@ public class CustomerEncyclopediaDaoImpl extends SqlMapClientTemplate implements
     public static final String GET_BY_QUERY="CUSTOMERENCYCLOPEDIA.GET-BY-QUERY";
     @Override
     public CustomerEncyclopedia addCustomerEncyclopedia(CustomerEncyclopedia customerEncyclopedia) {
-        customerEncyclopedia.setEncyId((Integer) this.insert(ADD,customerEncyclopedia));
+        customerEncyclopedia.setEncyId((String) this.insert(ADD,customerEncyclopedia));
         return customerEncyclopedia;
     }
 
     @Override
-    public int updateCustomerEncyclopediaById(int id, CustomerEncyclopedia customerEncyclopedia) {
+    public int updateCustomerEncyclopediaById(String id, CustomerEncyclopedia customerEncyclopedia) {
         customerEncyclopedia.setEncyId(id);
         return this.update(UPDATE,customerEncyclopedia);
     }
 
     @Override
-    public int deleteCustomerEncyclopediaById(int id) {
+    public int deleteCustomerEncyclopediaById(String id) {
         return this.delete(DELETE,id);
     }
 
     @Override
-    public CustomerEncyclopedia getCustomerEncyclopediaById(int id) {
+    public CustomerEncyclopedia getCustomerEncyclopediaById(String id) {
         return (CustomerEncyclopedia) this.queryForObject(GET_BY_ID,id);
     }
 
