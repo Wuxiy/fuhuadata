@@ -6,9 +6,11 @@
     //分割url，获取上个页面传过来的id
     var thisURL = document.URL;
     var trans = thisURL.split('?')[1];
-    var trans2 = trans.split('&')[0];
-    var id = trans2.split('=')[1];
-    var bid = trans.split('=')[2];
+    var trans1 = trans.split('&')[0];
+    var trans2 = trans.split('&')[1];
+    var id = trans1.split('=')[1];
+    var bid = trans2.split('=')[1];
+    console.log(bid);
     var table = document.getElementById('packing_relate_table');
 
     var checkboxarr = '';
