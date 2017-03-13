@@ -167,7 +167,7 @@ public class PackingArchivesAction {
             PackingArchives packingArchives = new PackingArchives();
             System.out.println(ids.length);
             String[] ids1 = packingArchivesService.getPackingArchivesById(id).getModel().getPack().getAssociatedPackingId().split(",");
-            String[] idsArray = StringUtil.minus(ids1,ids);
+            String[] idsArray = StringUtil.minus(ids1,ids);//取交集
             String str = StringUtils.join(idsArray,",");
             System.out.println(str);
             packingArchives.setAssociatedPackingId(str);

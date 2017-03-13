@@ -3,6 +3,7 @@ package com.fuhuadata.dao.impl;
 import com.fuhuadata.dao.CustomerEncyclopediaDao;
 import com.fuhuadata.domain.CustomerEncyclopedia;
 import com.fuhuadata.domain.query.CustomerEncyclopediaQuery;
+import com.fuhuadata.vo.CustomerEncyVO;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
 import java.util.List;
@@ -37,12 +38,12 @@ public class CustomerEncyclopediaDaoImpl extends SqlMapClientTemplate implements
     }
 
     @Override
-    public CustomerEncyclopedia getCustomerEncyclopediaById(String id) {
-        return (CustomerEncyclopedia) this.queryForObject(GET_BY_ID,id);
+    public CustomerEncyVO getCustomerEncyclopediaById(String id) {
+        return (CustomerEncyVO) this.queryForObject(GET_BY_ID,id);
     }
 
     @Override
-    public List<CustomerEncyclopedia> getCustomerEncyclopediaByQuery(CustomerEncyclopediaQuery customerEncyclopediaQuery) {
+    public List<CustomerEncyVO> getCustomerEncyclopediaByQuery(CustomerEncyclopediaQuery customerEncyclopediaQuery) {
         return this.queryForList(GET_BY_QUERY,customerEncyclopediaQuery);
     }
 

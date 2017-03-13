@@ -5,6 +5,7 @@ import com.fuhuadata.domain.query.CustomerEncyclopediaQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.CustomerEncyclopediaManager;
 import com.fuhuadata.service.CustomerEncyclopediaService;
+import com.fuhuadata.vo.CustomerEncyVO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -54,10 +55,10 @@ public class CustomerEncyclopediaServiceImpl implements CustomerEncyclopediaServ
     }
 
     @Override
-    public Result<CustomerEncyclopedia> getCustomerEncyclopediaById(String id) {
-        Result<CustomerEncyclopedia> result = new Result<CustomerEncyclopedia>();
+    public Result<CustomerEncyVO> getCustomerEncyclopediaById(String id) {
+        Result<CustomerEncyVO> result = new Result<CustomerEncyVO>();
         try {
-            CustomerEncyclopedia customerEncyclopedia = customerEncyclopediaManager.getCustomerEncyclopediaById(id);
+            CustomerEncyVO customerEncyclopedia = customerEncyclopediaManager.getCustomerEncyclopediaById(id);
             if(customerEncyclopedia == null){
                 result.setSimpleErrorMsg(0, "当前客户百科信息不存在，请重试");
             }else{
@@ -72,8 +73,8 @@ public class CustomerEncyclopediaServiceImpl implements CustomerEncyclopediaServ
     }
 
     @Override
-    public Result<List<CustomerEncyclopedia>> getCustomerEncyclopediaByQuery(CustomerEncyclopediaQuery customerEncyclopediaQuery) {
-        Result<List<CustomerEncyclopedia>> result = new Result<List<CustomerEncyclopedia>>();
+    public Result<List<CustomerEncyVO>> getCustomerEncyclopediaByQuery(CustomerEncyclopediaQuery customerEncyclopediaQuery) {
+        Result<List<CustomerEncyVO>> result = new Result<List<CustomerEncyVO>>();
         try {
             result.addDefaultModel("CustomerEncyclopedias", customerEncyclopediaManager.getCustomerEncyclopediaByQuery(customerEncyclopediaQuery));
         } catch (Exception e) {
