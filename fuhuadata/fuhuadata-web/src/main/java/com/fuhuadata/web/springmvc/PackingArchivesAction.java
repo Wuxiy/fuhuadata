@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -124,9 +125,8 @@ public class PackingArchivesAction {
         try{
             PackingArchives packingArchives = new PackingArchives();
             String[] ids1 = packingArchivesService.getPackingArchivesById(id).getModel().getPack().getAssociatedPackingId().split(",");
-            String[] idsArray = StringUtil.union(ids1,ids);
+            String[] idsArray = StringUtil.union(ids1,ids);//取并集
             String str = StringUtils.join(idsArray,",");
-            System.out.println(str);
             packingArchives.setAssociatedPackingId(str);
             result = packingArchivesService.updatePackingArchivesById(id,packingArchives);
             return result.getResultPojo();
@@ -134,6 +134,24 @@ public class PackingArchivesAction {
             log.error("更新主材关联失败",e);
         }
         return null;
+    }
+
+    /**
+     * GET BY IDS
+     * @param ids
+     * @return
+     */
+    @RequestMapping(value = "getByIds",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "GET-BY-IDS")
+    @ResponseBody
+    public ResultPojo getByIds(@RequestBody String[] ids){
+        Result<List<PackingArchives>> result=new Result<List<PackingArchives>>();
+        try{
+            result=packingArchivesService.getPakcingArchivesByIds(ids);
+        }catch(Exception e){
+            log.error("根据ids获取包材档案错误",e);
+        }
+        return result.getResultPojo();
     }
 
 

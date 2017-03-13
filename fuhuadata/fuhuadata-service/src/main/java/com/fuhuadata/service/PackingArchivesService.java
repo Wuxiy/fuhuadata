@@ -24,6 +24,8 @@ public interface PackingArchivesService {
 
     public Result<PackingArchivesVO> getPackingArchivesById(int id);
 
+    public Result<List<PackingArchives>> getPakcingArchivesByIds(String[] ids);
+
     public Result<List<PackingArchives>> getPackingArchivesByPId(int id);
 
     public Result<List<PackingArchives>> getPackingArchivesByPage(PackingArchivesQuery packingArchivesQuery);
