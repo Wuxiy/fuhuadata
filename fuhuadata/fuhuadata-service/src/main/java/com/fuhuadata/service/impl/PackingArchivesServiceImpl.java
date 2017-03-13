@@ -7,11 +7,13 @@ import com.fuhuadata.manager.PackingArchivesManager;
 import com.fuhuadata.service.PackingArchivesService;
 import com.fuhuadata.vo.ImagePathVO;
 import com.fuhuadata.vo.PackingArchivesVO;
+import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -133,6 +135,25 @@ public class PackingArchivesServiceImpl implements PackingArchivesService {
             result.setSuccess(false);
             // 打印日志
             log.error("根据id获取包材档案错误",e);
+        }
+        return result;
+    }
+
+    @Override
+    public Result<List<PackingArchives>> getPakcingArchivesByIds(String[] ids) {
+        Result<List<PackingArchives>> result = new Result<List<PackingArchives>>();
+        try{
+            List<PackingArchives> list = new ArrayList<PackingArchives>();
+            if(ids!=null){
+                for(int i=0;i<ids.length;i++){
+                    PackingArchives packingArchives = new PackingArchives();
+                    packingArchives=packingArchivesManager.getPackingArchivesById(Integer.parseInt(ids[i]));
+                    list.add(packingArchives);
+                }
+                result.addDefaultModel(list);
+            }
+        }catch(Exception e){
+            log.error("根据ids获取包材信息错误",e);
         }
         return result;
     }

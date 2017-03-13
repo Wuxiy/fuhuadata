@@ -199,7 +199,7 @@ $('.packingAdd').on('click',function(){
         "priceEndDate": jQuery('#priceEndDate').val(),
         "status": jQuery('#status').val(),
         "suitableType": checkboxArr(),
-        "image":arr,
+        "image":JSON.stringify(arr),
         "ids":ids,
         "bremarks": jQuery('#bremarks').val(),
     }
