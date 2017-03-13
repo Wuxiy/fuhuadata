@@ -167,7 +167,7 @@ function checkboxArr() {
     var checkboxarr = [];
     var a;
     $("input[name='check']:checked").each(function(){
-        a =  $(this).val() + ",";
+        a =  $(this).val();
         checkboxarr.push(a);
     })
     JSON.stringify(checkboxarr);
