@@ -4,92 +4,51 @@
 <sqlMap namespace="CUSTOMERENCYCLOPEDIA">
     <typeAlias alias="CustomerEncyclopedia" type="com.fuhuadata.domain.CustomerEncyclopedia"/>
     <typeAlias alias="CustomerEncyclopediaQuery" type="com.fuhuadata.domain.query.CustomerEncyclopediaQuery"/>
+    <typeAlias alias="CustomerEncyVO" type="com.fuhuadata.vo.CustomerEncyVO"/>
     
     <resultMap id="CUSTOMERENCYCLOPEDIA-MAP" class="CustomerEncyclopedia">
         <result column="ency_id" property="encyId" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="company_name" property="companyName" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result property="companyAbbreviation" column="company_abbreviation" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="type" property="type" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="is_full" property="isFull" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="area" property="area" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="country" property="country" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="company_property" property="companyProperty" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="regist_fund" property="registFund" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result column="regist_addr" property="registAddr" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="business_scope" property="businessScope" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="create_user_id" property="createUserId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result column="create_user_name" property="createUserName" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="create_time" property="createTime" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
         <result column="lastmodify_user_id" property="lastmodifyUserId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result column="lastmodify_user_name" property="lastmodifyUserName" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="modify_time" property="modifyTime" jdbcType="DATETME" javaType="java.sql.Date"/>
-        <result column="remarks" property="remarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="company_info" property="companyInfo" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
         <result column="develop_his" property="developHis" jdbcType="LONGVARCHAR" javaType="java.lang.String"/>
         <result column="sell_network" property="sellNetwork" jdbcType="LONGVARCHAR" javaType="java.lang.String"/>
+        <result property="customFiled" column="custom_field" jdbcType="LONGVARCHAR" javaType="java.lang.String"/>
     </resultMap>
 
     <sql id="PAGE-COMMON">
         <dynamic prepend=" WHERE ">
-            <isNotNull prepend=" AND " property="companyName">
-                company_name like concat('%',#companyName#,'%')
-            </isNotNull>
-            <isNotNull prepend=" AND " property="type">
-                type = #type#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="area">
-                area = #area#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="country">
-                country = #country#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="companyProperty">
-                company_property = #companyProperty#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="searchKey">
-                company_name like concat('%',#companyName#,'%')
-            </isNotNull>
+            <isNotNull prepend=" AND " property="customerId">
+                customer_id = #customerId#
+        </isNotNull>
         </dynamic>
     </sql>
 
     <sql id="QUERY-COMMON">
         <dynamic prepend=" WHERE ">
-            <isNotNull prepend=" AND " property="companyName">
-                company_name=#companyName#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="type">
-                type = #type#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="area">
-                area = #area#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="country">
-                country = #country#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="companyProperty">
-                company_property = #companyProperty#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="searchKey">
-                company_name like concat('%',#companyName#,'%')
+            <isNotNull prepend=" AND " property="customerId">
+                customer_id=#customerId#
             </isNotNull>
         </dynamic>
     </sql>
 
     <insert id="ADD" parameterClass="CustomerEncyclopedia">
         INSERT INTO
-        k_customer_encyclopedia (ency_id, company_name,company_abbreviation,type,
-        is_full, area, country,
-        company_property, regist_fund, regist_addr,
-        business_scope, create_user_id, create_user_name,
+        k_customer_encyclopedia (ency_id, customer_id,
+        is_full,create_user_id, create_user_name,
         create_time, lastmodify_user_id, lastmodify_user_name,
-        modify_time, remarks, company_info,
+        modify_time, custom_field, company_info,
         develop_his, sell_network)
-        VALUES (#encyId#, #companyName#,#companyAbbreviation#,#type#,
-        #isFull#, #area#, #country#,
-        #companyProperty#, #registFund#, #registAddr#,
-        #businessScope#, #createUserId#, #createUserName#,
+        VALUES (#encyId#, #customerId#,
+        #isFull#,#createUserId#, #createUserName#,
         #createTime#, #lastmodifyUserId#, #lastmodifyUserName#,
-        #modifyTime#, #remarks#, #companyInfo#,
+        #modifyTime#, #customField#, #companyInfo#,
         #developHis#, #sellNetwork#)
         <selectKey resultClass="int" keyProperty="encyId">
             SELECT @@IDENTITY AS ency_id
@@ -99,35 +58,11 @@
     <update id="UPDATE" parameterClass="CustomerEncyclopedia">
             UPDATE k_customer_encyclopedia
             <dynamic prepend=" SET ">
-                <isNotNull prepend=", " property="companyName">
-                    company_name = #companyName#
-                </isNotNull>
-                <isNotNull prepend=", " property="companyAbbreviation">
-                    company_abbreviation=#companyAbbreviation#
-                </isNotNull>
-                <isNotNull prepend=", " property="type">
-                    type = #type#
+                <isNotNull prepend=", " property="customerId">
+                    company_id = #customerId#
                 </isNotNull>
                 <isNotNull prepend=", " property="isFull">
                     is_full = #isFull#
-                </isNotNull>
-                <isNotNull prepend=", " property="area">
-                    area = #area#
-                </isNotNull>
-                <isNotNull prepend=", " property="country">
-                    country = #country#
-                </isNotNull>
-                <isNotNull prepend=", " property="companyProperty">
-                    company_property = #companyProperty#
-                </isNotNull>
-                <isNotNull prepend=", " property="registFund">
-                    regist_fund = #registFund#
-                </isNotNull>
-                <isNotNull prepend=", " property="registAddr">
-                    regist_addr = #registAddr#
-                </isNotNull>
-                <isNotNull prepend=", " property="businessScope">
-                    business_scope = #businessScope#
                 </isNotNull>
                 <isNotNull prepend=", " property="createUserId">
                     createUserId = #createUserId#
@@ -147,8 +82,8 @@
                 <isNotNull prepend=", " property="modifyTime">
                     modify_time = #modifyTime#
                 </isNotNull>
-                <isNotNull prepend=", " property="remarks">
-                    remarks = #remarks#
+                <isNotNull prepend=", " property="customField">
+                    custom_field = #customField#
                 </isNotNull>
                 <isNotNull prepend=", " property="companyInfo">
                     company_info = #companyInfo#
@@ -170,19 +105,60 @@
     ]]>
     </delete>
 
-    <select id="GET-BY-ID" resultMap="CUSTOMERENCYCLOPEDIA-MAP" parameterClass="java.lang.String">
+    <select id="GET-BY-ID" resultClass="CustomerEncyVO" parameterClass="java.lang.String">
         <![CDATA[
-        SELECT * FROM k_customer_encyclopedia WHERE ency_id=#id#
+                SELECT
+            b.full_name AS fullName,
+            b.short_name AS shortName,
+            b.company_type AS companyType,
+            b.customer_area AS customerArea,
+            b.country,
+            b.enterprise_nature AS enterpriseNature,
+            b.registered_funds AS registeredFund,
+            b.registered_address AS registeredAddr,
+            b.management_scope AS managementScope,
+            a.ency_id AS encyId,
+            a.customer_id AS customerId,
+            a.is_full AS isFull,
+            a.create_user_id AS createUserId,
+            a.create_user_name AS createUserName,
+            a.create_time AS createTime,
+            a.lastmodify_user_id AS lastmodifyUserId,
+            a.lastmodify_user_name AS lastmodifyUserName,
+            a.modify_time AS modifyTime,
+            a.custom_field AS customField,
+            a.company_info AS companyInfo,
+            a.develop_his AS developHis,
+            a.sell_network AS sallNetwork
+        FROM
+            k_customer_encyclopedia a
+        LEFT JOIN customer_base_info b ON a.customer_id = b.customer_id
+        WHERE a.ency_id=#id#
     ]]>
     </select>
 
-    <select id="GET-BY-QUERY" resultMap="CUSTOMERENCYCLOPEDIA-MAP" parameterClass="CustomerEncyclopediaQuery">
+    <select id="GET-BY-QUERY" resultClass="CustomerEncyVO" parameterClass="CustomerEncyclopediaQuery">
         <![CDATA[
-        SELECT * FROM k_customer_encyclopedia
+        SELECT
+            b.full_name AS fullName,
+            b.short_name AS shortName,
+            b.company_type AS companyType,
+            a.ency_id AS encyId,
+            a.customer_id AS customerId,
+            a.is_full AS isFull,
+            a.create_user_id AS createUserId,
+            a.create_user_name AS createUserName,
+            a.create_time AS createTime,
+            a.lastmodify_user_id AS lastmodifyUserId,
+            a.lastmodify_user_name AS lastmodifyUserName,
+            a.modify_time AS modifyTime,
+            a.custom_field AS customField,
+            a.company_info AS companyInfo,
+            a.develop_his AS developHis,
+            a.sell_network AS sallNetwork
+        FROM k_customer_encyclopedia a
+        LEFT JOIN customer_base_info b ON a.customer_id=b.customer_id
         ]]>
-        <isParameterPresent>
-            <include refid="QUERY-COMMON"/>
-        </isParameterPresent>
     </select>
 
     <select id="GET-PAGE" resultMap="CUSTOMERENCYCLOPEDIA-MAP" parameterClass="CustomerEncyclopediaQuery">

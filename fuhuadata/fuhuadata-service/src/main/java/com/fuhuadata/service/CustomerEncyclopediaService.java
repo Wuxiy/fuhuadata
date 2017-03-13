@@ -3,6 +3,7 @@ package com.fuhuadata.service;
 import com.fuhuadata.domain.CustomerEncyclopedia;
 import com.fuhuadata.domain.query.CustomerEncyclopediaQuery;
 import com.fuhuadata.domain.query.Result;
+import com.fuhuadata.vo.CustomerEncyVO;
 
 import java.util.List;
 
@@ -37,9 +38,9 @@ public interface CustomerEncyclopediaService {
      */
     public Result deleteCustomerEncyclopediaById(String id);
 
-    public Result<CustomerEncyclopedia> getCustomerEncyclopediaById(String id);
+    public Result<CustomerEncyVO> getCustomerEncyclopediaById(String id);
 
-    public Result<List<CustomerEncyclopedia>> getCustomerEncyclopediaByQuery(CustomerEncyclopediaQuery customerEncyclopediaQuery);
+    public Result<List<CustomerEncyVO>> getCustomerEncyclopediaByQuery(CustomerEncyclopediaQuery customerEncyclopediaQuery);
 
     public Result<List<CustomerEncyclopedia>> getCustomerEncyclopediasByPage(CustomerEncyclopediaQuery customerEncyclopediaQuery);
 

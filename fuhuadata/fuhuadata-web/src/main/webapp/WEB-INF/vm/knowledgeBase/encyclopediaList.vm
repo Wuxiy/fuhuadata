@@ -88,9 +88,9 @@
             "pagingType":"full_numbers",
             "columns":[
                 {"data":"encyId"},
-                {"data":"companyName"},
-                {"data":"companyAbbreviation"},
-                {"data":"type"},
+                {"data":"fullName"},
+                {"data":"shortName"},
+                {"data":"companyType"},
                 {"data":"isFull"},
                 {"data":"createUserName"},
                 {"data":"createTime"},

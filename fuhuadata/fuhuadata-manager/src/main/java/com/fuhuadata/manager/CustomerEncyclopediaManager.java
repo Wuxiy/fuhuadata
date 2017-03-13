@@ -3,6 +3,7 @@ package com.fuhuadata.manager;
 import com.fuhuadata.domain.CustomerEncyclopedia;
 import com.fuhuadata.domain.query.CustomerEncyclopediaQuery;
 import com.fuhuadata.domain.query.Result;
+import com.fuhuadata.vo.CustomerEncyVO;
 
 import java.util.List;
 
@@ -29,14 +30,14 @@ public interface CustomerEncyclopediaManager {
      */
     public boolean deleteCustomerEncyclopediaById(String id);
 
-    public CustomerEncyclopedia getCustomerEncyclopediaById(String id);
+    public CustomerEncyVO getCustomerEncyclopediaById(String id);
 
     /**
      * 查询不带分页
      * @param customerEncyclopediaQuery
      * @return
      */
-    public List<CustomerEncyclopedia> getCustomerEncyclopediaByQuery(CustomerEncyclopediaQuery customerEncyclopediaQuery);
+    public List<CustomerEncyVO> getCustomerEncyclopediaByQuery(CustomerEncyclopediaQuery customerEncyclopediaQuery);
 
     /**
      * 查询列表，包含分页查询，
