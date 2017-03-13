@@ -218,9 +218,9 @@ $('.packingAdd').on('click',function(){
         "consumption": jQuery('#consumption').val(),
         "priceEndDate": jQuery('#priceEndDate').val(),
         "status": jQuery('#status').val(),
-        "suitableType": checkboxArr(),
+        "suitableType": JSON.stringify(checkboxArr()),
         "image":JSON.stringify(arr),
-        "ids":ids,
+        "ids":JSON.stringify(ids),
         "bremarks": jQuery('#bremarks').val(),
     }
     jQuery.ajax({
