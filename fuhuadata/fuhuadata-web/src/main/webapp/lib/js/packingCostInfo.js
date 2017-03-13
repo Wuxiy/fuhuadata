@@ -30,7 +30,15 @@
 
             if(ResultData.pack){
                 var pack = ResultData.pack;
-                var arr = [pack.suitableType];
+                var arr = pack.suitableType;
+                var arr2 = arr.split(',');
+                $.each(arr2,function(index,suitname){
+                    $("input[name='check']").each(function(){
+                        if($(this).val() == suitname){
+                            $(this).attr('checked',true);
+                        }
+                    })
+                })
                 $('#packName').val(pack.packName);
                 $('#spec').val(pack.spec);
                 $('#size').val(pack.size);
@@ -42,7 +50,6 @@
                 $('#priceEndDate').val(pack.priceEndDate);
                 $('#status').val(pack.status);
                 $('#bRemarks').val(pack.bRemarks);
-                $('.suitableType').val(arr);
             }
 
             if(ResultData.nodes){
@@ -69,11 +76,13 @@
                     var array_element = reData[j];
                     console.log(array_element);
                     preList[i] = "<img src="+array_element.path+" &name="+array_element.name+"\" class=\"file-preview-image\">";
+                    console.log(preList[i]);
                 }
             }
 
+            var previewJson = preList;
             $('#testlogo').fileinput({
-                uploadUrl: '',
+                uploadUrl: '/upload/uploadFile',
                 uploadAsync:true,
                 showCaption: true,
                 showUpload: true,//是否显示上传按钮
@@ -85,6 +94,7 @@
                 maxFileCount: 10,
                 initialPreviewShowDelete:true,
                 msgFilesTooMany: "选择上传的文件数量 超过允许的最大数值！",
+                initialPreview: previewJson,
                 previewFileIcon: '<i class="fa fa-file"></i>',
                 allowedPreviewTypes: ['image'],
                 previewFileIconSettings: {
