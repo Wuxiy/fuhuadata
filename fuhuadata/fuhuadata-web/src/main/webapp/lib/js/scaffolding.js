@@ -2,60 +2,6 @@
  * Created by Think on 2017/3/13.
  */
 (function($){
-    $(function(){
-
-        //定义变量
-        var id;
-        var preData={
-            u:'www.baidu.com',
-            t:'post',
-            d:{id:'110'},
-            upCB:function(){
-
-            }
-        };
-        var edit = '[data-form-btn="edit"]';
-        var save =  '[data-form-btn="save"]';
-        var cancel = '[data-form-btn="cancel"]';
-        var add = '[data-form-btn="add"]';
-        var del = '[data-form-btn="del"]';
-//				console.log(edit+'<br/>'+save+'<br/>'+cancel);
-
-
-        //--初始化页面
-        init(preData);
-        //启用编辑
-        listenEv({type:'click',el:edit,lisCB:saveEdit});
-        //启用保存
-        listenEv({
-            type:'click',
-            el:save,
-            lisCB:saveEdit,
-            upObj:{
-                u:'wwww.baidu.c',
-                t:'post',
-                d:{id:'123'},
-                upCB:function(){
-
-                }
-            }
-        });
-        //启用取消
-        listenEv({type:'click',el:cancel,lisCB:saveEdit});
-        //启用添加
-        listenEv({
-            type:'click',
-            el:add,
-            lisCB:addEl,
-            addObj:{
-                place:'',
-            }
-        });
-        //启用删除
-        listenEv({type:'click',el:del,lisCB:delEl});
-
-    });
-
 
     //初始化方法
     function init(obj){
