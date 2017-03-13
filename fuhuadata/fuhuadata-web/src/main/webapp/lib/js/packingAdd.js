@@ -170,7 +170,7 @@ function checkboxArr() {
         a =  $(this).val() + ",";
         checkboxarr.push(a);
     })
-
+    JSON.stringify(checkboxarr);
     return checkboxarr;
 }
 
@@ -223,6 +223,7 @@ $('.packingAdd').on('click',function(){
         "ids":JSON.stringify(ids),
         "bremarks": jQuery('#bremarks').val(),
     }
+    console.log(data);
     jQuery.ajax({
         type:"POST",
         url:url,
