@@ -28,6 +28,7 @@
             //阻止a的默认事件
             e.preventDefault();
             var id = $(e.target).parent('li').attr('id');
+            //取得被点击节点的id
             if(id=='0'){
                 //点击的是全部
                 obj.oneLevelId = 0;
@@ -122,7 +123,7 @@
                 iTbody.html('');
                 $.each(getData.index,function(key,item){
                     var tr = $("<tr></tr>");
-                    tr.append('<td><input class="form-control" type="text" value="'+item.index+'"></td><td><input class="form-control" type="text" value="'+item.value+'"></td><td><input class="form-control" type="text" value="'+item.remarks+'"/></td>').appendTo(iTbody);
+                    tr.append('<td><input class="form-control" type="text" disabled value="'+item.index+'"></td><td><input class="form-control" type="text" disabled value="'+item.value+'"></td><td><input class="form-control" type="text" disabled value="'+item.remarks+'"/></td>').appendTo(iTbody);
                 });
              }
         }

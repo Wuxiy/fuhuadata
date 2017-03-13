@@ -1,9 +1,4 @@
 <div class="nav-deputy shadow-out clearfix">
-	<ul class="nav nav-tabs pull-left">
-		<li class="active"><a href="#cooperative" data-toggle="tab" lang="zh">合作客户</a></li>
-		<li><a href="#potential" data-toggle="tab" lang="zh">潜在客户</a></li>
-		<li><a href="#lossing" data-toggle="tab" lang="zh">流失客户</a></li>
-	</ul>
 	<ul class="breadcrumb pull-right">
 		<li><span class="glyphicon glyphicon-map-marker"></span></li>
 	</ul>
@@ -18,7 +13,7 @@
 						地区分类
 					</h3>
 				</div>
-				<div class="panel-body clearfix">
+				<div class="panel-body tree-container clearfix">
 					<!--树形菜单-->
 					<div class="tree" id="tree"></div>
 				</div>
@@ -101,7 +96,7 @@
 							<tbody id="append_container">
 							<tr>
 								<td>02011010</td>
-								<td><a href="customerDetails.html" target="_blank">NUFARM</a></td>
+								<td><a href="customerDetails.vm" target="_blank">NUFARM</a></td>
 								<td>NUFARM</td>
 								<td lang="zh">美国</td>
 								<td lang="zh">一般客户</td>
@@ -152,12 +147,12 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>草甘膦95%原药</td>
-                        <td>草甘膦原药</td>
-                        <td>100000KG</td>
-                        <td>1000</td>
-                        <td>100</td>
-                        <td>100</td>
+                        <td id="">草甘膦95%原药</td>
+                        <td id="">草甘膦原药</td>
+                        <td id="">100000KG</td>
+                        <td id="">1000</td>
+                        <td id="">100</td>
+                        <td id="">100</td>
                     </tr>
                     </tbody>
                 </table>
@@ -168,9 +163,9 @@
 </div>
 
 <input type="hidden" id="customerType" value="${customerType}" />
-<script type="text/javascript" src="/lib/js/pagination/pagination.js"></script>
-<link rel="stylesheet" type="text/css" href="/lib/js/pagination/pagination.css" />
-<script type="text/javascript" language="javascript" src="/lib/js/creatTree.js"></script>
+<script type="text/javascript" src="${request.contextPath}/lib/js/pagination/pagination.js"></script>
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/js/pagination/pagination.css" />
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript">
 	var pageSize = 2;//分页步长
     var click_node ={oneLevelId:0,twoLevelId:0};//接收目录树点击节点的id及其父id
@@ -179,7 +174,7 @@
 	}
     $(function(){
 		//生成地区目录树
-        $('#tree').creatTree('/customerBaseInfo/initAreaCategoryTree');
+        $('#tree').creatTree('${request.contextPath}/customerBaseInfo/initAreaCategoryTree');
         //目录树节点绑定点击事件
         $('#tree').bindClickForCusArea(click_node);
 		//搜索按钮绑定事件
@@ -188,6 +183,7 @@
 		});
 		//默认查询数据
         serach();
+
     });
 	//查询按钮提交数据
 	function serach(){
@@ -204,7 +200,7 @@
 	//根据页码获取列表数据
 	function getDataList(pageNum,jq){
         jQuery.ajax({
-            url:'/customerBaseInfo/queryCustomerPageList',
+            url:'${request.contextPath}/customerBaseInfo/queryCustomerPageList',
             dataType:'json',
             data:{
 				customerType:$("#customerType").val(),
@@ -248,6 +244,39 @@
                     }
                 }
 				$("#append_container").html(_html);
+
+				//点击a为modal添加数据
+                var modalDetails = '[data-target="#details"]';
+                console.log($(modalDetails));
+                $(modalDetails).on('click.modalData',function(e){
+                    var el = $(e.target);
+                    var modalId = el.data('target');
+                    var customerId = el.parents('tr').children('td').first().text();
+                    console.log(customerId);
+                    jQuery.ajax({
+                        url:'/customerBaseInfo/showCustomerOrderProductDetail',
+                        dataType:'json',
+                        data:{
+                            customerId: customerId
+                        },
+                        async:true,
+                        type:'POST',
+                        success:function(result){
+                            var data = result.data;
+                            var container = $(modalId).find('tbody');
+                            container.html('');
+                            if(data!=null){
+                               jQuery.each(data,function (n,item) {
+								   var tr = $('<tr></tr>');
+                                   tr.append('<td>'+item.productName+'</td><td>'+item.categoryName+'</td><td>'+item.totalSaleNum+'</td><td>'+item.totalSaleMoney+'</td><td>'+item.totalMinPrice+'</td><td>'+item.totalProfit+'</td>').appendTo(container);
+                               })
+                            }else{
+                                var tr = $('<tr></tr>');
+                                tr.append('<td colspan="6">没有数据</td>').appendTo(container);
+                            }
+                        }
+                    })
+                });
             }
         });
 	}
@@ -273,7 +302,7 @@
 	function getListCount(){
 		var total = 0;
         jQuery.ajax({
-			url:'/customerBaseInfo/countCustomerList',
+			url:'${request.contextPath}/customerBaseInfo/countCustomerList',
 			dataType:'JSON',
 			data:{
                 customerType:$("#customerType").val(),
@@ -293,4 +322,6 @@
 		});
 		return total;
 	}
+
+
 </script>

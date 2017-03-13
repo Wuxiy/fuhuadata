@@ -125,7 +125,7 @@
                         <tbody>
                         <tr>
                             <td>02011010</td>
-                            <td><a href="customerDetails.html" target="_blank">NUFARM</a></td>
+                            <td><a href="customerDetails.vm" target="_blank">NUFARM</a></td>
                             <td>NUFARM</td>
                             <td lang="zh">美国</td>
                             <td>AAA</td>

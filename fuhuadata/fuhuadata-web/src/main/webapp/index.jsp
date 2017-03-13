@@ -1,15 +1,21 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%
+  String basePath=request.getContextPath();
+ %>
  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
  <html style="height: 100%;">
  <head>
   <meta charset="UTF-8">
   <title lang="zh">登录</title>
-  <script type="text/javascript" src="/lib/js/jquery-2.1.0.js"></script>
-  <script type="text/javascript" src="/lib/js/commons/log_in.js"></script>
-  <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.css"/>
+  <script type="text/javascript" src="<%=basePath%>/lib/js/jquery-2.1.0.js"></script>
+  <script type="text/javascript">
+   var basePath = '<%=basePath%>';
+  </script>
+  <script type="text/javascript" src="<%=basePath%>/lib/js/commons/log_in.js"></script>
+  <link rel="stylesheet" type="text/css" href="<%=basePath%>/lib/css/bootstrap.css"/>
  </head>
- <body class="bg-page" style="background: url(lib/img/logoBg.jpg) no-repeat 100% 100%; height: 100%;">
+ <body class="bg-page" style="background: url(<%=basePath%>/lib/img/logoBg.jpg) no-repeat 100% 100%; height: 100%;">
  <div class="bg-warning">
   <div class="col-xs-4">
    <h1 class="logo" style="color: #fff; font-size: 40px; font-weight: bold;">CRM</h1>
