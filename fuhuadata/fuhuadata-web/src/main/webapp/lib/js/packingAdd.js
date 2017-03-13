@@ -167,10 +167,9 @@ function checkboxArr() {
     var checkboxarr = [];
     var a;
     $("input[name='check']:checked").each(function(){
-        a =  $(this).val() + ",";
+        a =  $(this).val();
         checkboxarr.push(a);
     })
-    JSON.stringify(checkboxarr);
     return checkboxarr;
 }
 
@@ -219,9 +218,9 @@ $('.packingAdd').on('click',function(){
         "priceEndDate": jQuery('#priceEndDate').val(),
         "status": jQuery('#status').val(),
         "suitableType": JSON.stringify(checkboxArr()),
-        "image":JSON.stringify(arr),
-        "ids":JSON.stringify(ids),
-        "bremarks": jQuery('#bremarks').val(),
+        "imagePath":JSON.stringify(arr),
+        "associatedPackingId":JSON.stringify(ids),
+        "bRemarks": jQuery('#bremarks').val(),
     }
     console.log(data);
     jQuery.ajax({
