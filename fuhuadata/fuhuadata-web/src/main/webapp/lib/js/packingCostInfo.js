@@ -74,9 +74,9 @@
                 var preList = new Array();
                 for(var j=0;j<reData.length;j++){
                     var array_element = reData[j];
-                    console.log(array_element);
-                    preList[i] = "<img src="+array_element.path+" &name="+array_element.name+"\" class=\"file-preview-image\">";
-                    console.log(preList[i]);
+                    console.log(array_element.path);
+                    preList[j] = "<img src='"+array_element.path+"' class=\"file-preview-image\">";
+                    console.log(preList[j]);
                 }
             }
 

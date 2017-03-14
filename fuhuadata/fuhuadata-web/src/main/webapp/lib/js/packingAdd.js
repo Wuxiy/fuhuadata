@@ -133,7 +133,7 @@ $("input[id='file-2']").fileinput({
 
 $("input[id='file-3']").fileinput({
     language: 'zh', //设置语言
-    uploadUrl: '/upload/uploadFile', // you must set a valid URL here else you will get an error
+    uploadUrl: '${request.contextPath}/upload/uploadFile', // you must set a valid URL here else you will get an error
     allowedFileExtensions : ['jpg', 'png','gif'],
     overwriteInitial: false,
     maxFileSize: 1000,
@@ -203,7 +203,7 @@ $('#add_relate').on('click',function(){
 
 //新增完成
 $('.packingAdd').on('click',function(){
-    var url = "/packingArchives/doAddPackingArchives"
+    var url = '/packingArchives/doAddPackingArchives';
     var data = {
         "bigCategoryId":bid,
         "smallCategoryId":sid,

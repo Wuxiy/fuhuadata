@@ -74,11 +74,19 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-        var table = $('#encyclopedia_table').dataTable({
+
+
+        var table = $('#encyclopedia_table').DataTable({
             "ajax":'${request.contextPath}queryCustomerEncyclopediaList',
             "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
             "dom": 'tiprl',//自定义显示项
-            "lengthChange": false,
+            "lengthChange": false,//是否允许用户自定义显示数量
+            "bPaginate": true, //翻页功能
+            "bFilter": false, //列筛序功能
+            "searching": true,//本地搜索
+            "ordering": true, //排序功能
+            "Info": true,//页脚信息
+            "autoWidth": true,//自动宽度
             "pagingType":"full_numbers",
             "columns":[
                 {"data":"encyId"},
@@ -108,12 +116,12 @@
 
         //自定义搜索
         $('#type').on('keyup click', function () {
-            var type = $("#type").val();
+            var type = $("#type").val()
             table.search(type, false, false).draw();
         });
 
         $('#search').on('keyup click', function () {
-            var search = $("#search").val();
+            var search = $("#search").val()
             table.search(search, false, false).draw();
         });
     })
