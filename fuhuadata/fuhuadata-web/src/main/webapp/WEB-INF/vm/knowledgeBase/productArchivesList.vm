@@ -166,9 +166,15 @@
     </div>
 </div>
 
-<script type="text/javascript" language="javascript" src="/lib/js/creatTree.js"></script>
-<script type="text/javascript" language="javascript" src="/lib/js/scaffolding.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/scaffolding.js"></script>
 <script type="text/javascript">
+<<<<<<< HEAD
+=======
+    $('#tree').creatTree('${request.contextPath}/productCategory/CategoryTree');
+    $('#tree').filtrateData('${request.contextPath}/productInfo/getProductInfoById','container','productArchivesList');
+
+>>>>>>> c5fffe402edc7ae2c9d61d75adde82636f653de3
 (function ($) {
     $(function () {
         $('#tree').creatTree(${request.contextPath}'/productCategory/CategoryTree');

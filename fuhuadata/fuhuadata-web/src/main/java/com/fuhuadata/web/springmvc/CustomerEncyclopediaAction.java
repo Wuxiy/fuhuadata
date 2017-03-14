@@ -5,6 +5,7 @@ import com.fuhuadata.domain.query.CustomerEncyclopediaQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.CustomerEncyclopediaService;
+import com.fuhuadata.vo.CustomerEncyVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -47,7 +48,7 @@ public class CustomerEncyclopediaAction {
     @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "list")
     @ResponseBody
     public ResultPojo customerEncyclopediaList(){
-        Result<List<CustomerEncyclopedia>> result = new Result<List<CustomerEncyclopedia>>();
+        Result<List<CustomerEncyVO>> result = new Result<List<CustomerEncyVO>>();
         try{
             CustomerEncyclopediaQuery query = new CustomerEncyclopediaQuery();
             result=customerEncyclopediaService.getCustomerEncyclopediaByQuery(query);
@@ -107,6 +108,21 @@ public class CustomerEncyclopediaAction {
         }
         return null;
     }
+
+    @RequestMapping(value = "/getById",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "GET-BY-ID")
+    @ResponseBody
+    public ResultPojo getById(String id){
+        try{
+            Result result = customerEncyclopediaService.getCustomerEncyclopediaById(id);
+            return result.getResultPojo();
+        }catch(Exception e){
+            log.error("根据ID获取客户百科信息错误",e);
+        }
+        return null;
+    }
+
+
 
 
 

@@ -21,7 +21,7 @@
                             <div class="col-xs-1 pull-right">
                                 <button id ="button" type="button" class="btn btn-block btn-primary btn-xs">
                                 搜索
-                            </button>
+                                </button>
                             </div>
                             <div class="col-xs-2 pull-right">
                                 <input id="customer_product_name" class="form-control" type="search" value="" placeholder="请输入产品名称"/>
@@ -103,7 +103,7 @@
 </div>
 
 
-<script type="text/javascript" language="javascript" src="/lib/js/creatTree.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript">
 
     $('#tree').creatTree('/productCategory/CategoryTree');
@@ -115,7 +115,7 @@
     });
     $(document).ready(function() {
         var table =$('#customer_customer_packaging_table').DataTable( {
-            "ajax":'/customerProductPacking/queryCustomerProductPackingList',
+            "ajax":'${request.contextPath}/customerProductPacking/queryCustomerProductPackingList',
             "pagingType":"full_numbers",
             "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
             "columns":[
@@ -145,7 +145,7 @@
                 }
             ],
             "language": {
-                "url": '/lib/dataTables/lang/dataTables.lang.zh',
+                "url": '${request.contextPath}/lib/dataTables/lang/dataTables.lang.zh',
                 "searchPlaceholder": '关键字'
             }
         } );

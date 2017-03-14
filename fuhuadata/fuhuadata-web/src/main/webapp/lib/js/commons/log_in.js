@@ -10,9 +10,9 @@ function loginAction() {
     var password=$('#password').val();
 
     var data={'account':account,'password':password};
-    $.post("account/login.action",data,function(result) {
+    $.post(basePath+"/account/login.action",data,function(result) {
         if(result.code==1){
-            location.href="/productProblem/productProblemList.do";
+            location.href=basePath+"/productProblem/productProblemList.do";
         }else{
             $('#login').text(result.message);
         }

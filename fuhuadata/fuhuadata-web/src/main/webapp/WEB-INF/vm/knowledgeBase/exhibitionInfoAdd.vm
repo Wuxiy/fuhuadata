@@ -134,7 +134,7 @@
 
             jQuery.ajax({
                 type:"POST",
-                url:"doAddExhibitionInfo",
+                url:"${request.contextPath}/doAddExhibitionInfo",
                 dataType:"json",
                 contentType:"application/json",
                 data:JSON.stringify(data),

@@ -103,6 +103,9 @@
                                     <input id="testlogo" type="file" name="icoFile" class="file-loading" />
                                     <input type="text" name="htestlogo" id="htestlogo" onchange="addFile(this)" >
                                 </div>
+                                <div id="imge">
+
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -208,12 +211,12 @@
     </div>
 </div>
 
-<script src="/lib/js/fileinput.js" type="text/javascript" charset="utf-8"></script>
-<script src="/lib/js/fileinput_locale_zh.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript" src="/lib/js/packingCostInfo.js"></script>
-<script type="text/javascript" language="javascript" src="/lib/js/creatTree.js"></script>
+<script src="${request.contextPath}/lib/js/fileinput.js" type="text/javascript" charset="utf-8"></script>
+<script src="${request.contextPath}/lib/js/fileinput_locale_zh.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="${request.contextPath}/lib/js/packingCostInfo.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript">
-    $('#tree').creatTree('/packingCategory/CategoryTree');
-    $('#tree').filtrateData('/packingArchives/getPackingArchivesByPId',"modal_relate_table","packingInfoModal");
+    $('#tree').creatTree('${request.contextPath}/packingCategory/CategoryTree');
+    $('#tree').filtrateData('${request.contextPath}/packingArchives/getPackingArchivesByPId',"modal_relate_table","packingInfoModal");
 
 </script>

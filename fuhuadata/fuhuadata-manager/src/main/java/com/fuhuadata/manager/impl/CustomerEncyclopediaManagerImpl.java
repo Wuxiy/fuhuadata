@@ -5,6 +5,7 @@ import com.fuhuadata.domain.CustomerEncyclopedia;
 import com.fuhuadata.domain.query.CustomerEncyclopediaQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.CustomerEncyclopediaManager;
+import com.fuhuadata.vo.CustomerEncyVO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,12 +38,12 @@ public class CustomerEncyclopediaManagerImpl implements CustomerEncyclopediaMana
     }
 
     @Override
-    public CustomerEncyclopedia getCustomerEncyclopediaById(String id) {
+    public CustomerEncyVO getCustomerEncyclopediaById(String id) {
         return customerEncyclopediaDao.getCustomerEncyclopediaById(id);
     }
 
     @Override
-    public List<CustomerEncyclopedia> getCustomerEncyclopediaByQuery(CustomerEncyclopediaQuery customerEncyclopediaQuery) {
+    public List<CustomerEncyVO> getCustomerEncyclopediaByQuery(CustomerEncyclopediaQuery customerEncyclopediaQuery) {
         return customerEncyclopediaDao.getCustomerEncyclopediaByQuery(customerEncyclopediaQuery);
     }
 

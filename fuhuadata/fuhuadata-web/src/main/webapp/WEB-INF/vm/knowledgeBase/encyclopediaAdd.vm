@@ -105,13 +105,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-xs-2 col-xs-offset-4">
-                        <button class="btn btn-block btn-primary" type="submit">完成</button>
-                    </div>
-                    <div class="col-xs-2">
-                        <button class="btn btn-block btn-default" type="reset">重置</button>
-                    </div>
+                <div class="col-xs-2 col-xs-offset-4">
+                    <button class="btn btn-block btn-primary" type="submit">完成</button>
                 </div>
+                <div class="col-xs-2">
+                    <button class="btn btn-block btn-default" type="reset">重置</button>
+                </div>
+            </div>
             </form>
         </div>
     </div>
@@ -147,7 +147,7 @@
             <div class="modal-footer">
                 <div class="row">
                     <div class="col-xs-3 col-xs-offset-3">
-                        <button type="button" class="btn btn-primary btn-block">
+                        <button type="button" class="btn btn-primary btn-block" id="submit">
                             完成
                         </button>
                     </div>
@@ -161,3 +161,7 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $('#submit')
+</script>

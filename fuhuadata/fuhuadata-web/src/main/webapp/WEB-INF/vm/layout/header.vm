@@ -1,3 +1,6 @@
+<script type="text/javascript">
+    var basePath ="${request.contextPath}";
+</script>
 <!--头部开始-->
 <nav class="navbar navbar-cards navbar-fixed-top">
     <div class="navbar-header">
@@ -25,9 +28,9 @@
     <ul id="nav-affix" class="nav nav-cards">
         <li class="shadow-in" title="客户信息">
             <div id="collapseOne" class="list-group collapse">
-                <a class="list-group-item" href="/customerBaseInfo/customerListPageInit?customerType=1">合作客户</a>
-                <a class="list-group-item" href="/customerBaseInfo/customerListPageInit?customerType=2">潜在客户</a>
-                <a class="list-group-item" href="/customerBaseInfo/customerListPageInit?customerType=3">流失客户</a>
+                <a class="list-group-item" href="${request.contextPath}/customerBaseInfo/customerListPageInit?customerType=1">合作客户</a>
+                <a class="list-group-item" href="${request.contextPath}/customerBaseInfo/customerListPageInit?customerType=2">潜在客户</a>
+                <a class="list-group-item" href="${request.contextPath}/customerBaseInfo/customerListPageInit?customerType=3">流失客户</a>
             </div>
             <a data-toggle="collapse" href="#collapseOne" data-parent="#nav-affix">
                 <span class="glyphicon glyphicon-user"></span>
@@ -72,14 +75,14 @@
         </li>
         <li class="active shadow-in" title="知识库">
             <div id="collapseFive" class="list-group collapse">
-                <a class="list-group-item" href="/productProblem/productProblemList">产品常见问题</a>
-                <a class="list-group-item" href="/marketTraining/marketTrainingList">营销培训</a>
-                <a class="list-group-item" href="/customerProductPacking/customerProductPackingList">客户产品包装要求</a>
-                <a class="list-group-item" href="/knowledgeBase/productArchivesList">标准产品档案</a>
-                <a class="list-group-item" href="/packingArchives/packingArchivesList">包材成本参考</a>
-                <a class="list-group-item" href="/knowledgeBase/processCostList">加工成本参考</a>
-                <a class="list-group-item" href="/customerEncyclopedia/customerEncyclopediaList">百科</a>
-                <a class="list-group-item" href="/exhibitionInfo/exhibitionInfoList">展会动态</a>
+                <a class="list-group-item" href="${request.contextPath}/productProblem/productProblemList">产品常见问题</a>
+                <a class="list-group-item" href="${request.contextPath}/marketTraining/marketTrainingList">营销培训</a>
+                <a class="list-group-item" href="${request.contextPath}/customerProductPacking/customerProductPackingList">客户产品包装要求</a>
+                <a class="list-group-item" href="${request.contextPath}/knowledgeBase/productArchivesList">标准产品档案</a>
+                <a class="list-group-item" href="${request.contextPath}/packingArchives/packingArchivesList">包材成本参考</a>
+                <a class="list-group-item" href="${request.contextPath}/knowledgeBase/processCostList">加工成本参考</a>
+                <a class="list-group-item" href="${request.contextPath}/customerEncyclopedia/customerEncyclopediaList">百科</a>
+                <a class="list-group-item" href="${request.contextPath}/exhibitionInfo/exhibitionInfoList">展会动态</a>
                 <a class="list-group-item" href="">其他</a>
             </div>
             <a data-toggle="collapse" href="#collapseFive" data-parent="#nav-affix">

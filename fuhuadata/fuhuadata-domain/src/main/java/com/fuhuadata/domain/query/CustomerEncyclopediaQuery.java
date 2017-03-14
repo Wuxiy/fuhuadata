@@ -1,6 +1,10 @@
 package com.fuhuadata.domain.query;
 
 import com.fuhuadata.domain.query.PageBase;
+import com.fuhuadata.util.DateJsonDeserializer;
+import com.fuhuadata.util.DateJsonSerializer;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import java.util.Date;
 
@@ -9,27 +13,20 @@ import java.util.Date;
  * Created by intanswer on 2017/1/13.
  */
 public class CustomerEncyclopediaQuery extends PageBase {
-    private Integer encyId;//百科编号
 
-    private String companyName;//企业全称
+    private String encyId;//百科编号
 
-    private String companyAbbreviation;//企业简称
+    private String customerId;//企业id
 
-    private String type;//企业类型
+    private String companyInfo;//企业简介
 
     private String isFull;//完整度
 
-    private String area;//所属片区
+    private String developHis;//企业发展历程
 
-    private String country;//国家
+    private String sellNetwork;//销售网络
 
-    private String companyProperty;//企业性质
-
-    private Integer registFund;//注册资金
-
-    private String registAddr;//注册地址
-
-    private String businessScope;//经营范围
+    private String customField;//自定义信息json串
 
     private Integer createUserId;//创建人id
 
@@ -45,88 +42,7 @@ public class CustomerEncyclopediaQuery extends PageBase {
 
     private String remarks;//备注
 
-    private String searchKey;//
 
-
-    public Integer getEncyId() {
-        return encyId;
-    }
-
-    public void setEncyId(Integer encyId) {
-        this.encyId = encyId;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getIsFull() {
-        return isFull;
-    }
-
-    public void setIsFull(String isFull) {
-        this.isFull = isFull;
-    }
-
-    public String getArea() {
-        return area;
-    }
-
-    public void setArea(String area) {
-        this.area = area;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getCompanyProperty() {
-        return companyProperty;
-    }
-
-    public void setCompanyProperty(String companyProperty) {
-        this.companyProperty = companyProperty;
-    }
-
-    public Integer getRegistFund() {
-        return registFund;
-    }
-
-    public void setRegistFund(Integer registFund) {
-        this.registFund = registFund;
-    }
-
-    public String getRegistAddr() {
-        return registAddr;
-    }
-
-    public void setRegistAddr(String registAddr) {
-        this.registAddr = registAddr;
-    }
-
-    public String getBusinessScope() {
-        return businessScope;
-    }
-
-    public void setBusinessScope(String businessScope) {
-        this.businessScope = businessScope;
-    }
 
     public Integer getCreateUserId() {
         return createUserId;
@@ -141,13 +57,15 @@ public class CustomerEncyclopediaQuery extends PageBase {
     }
 
     public void setCreateUserName(String createUserName) {
-        this.createUserName = createUserName;
+        this.createUserName = createUserName ;
     }
 
+    @JsonSerialize(using = DateJsonSerializer.class)
     public Date getCreateTime() {
         return createTime;
     }
 
+    @JsonDeserialize(using = DateJsonDeserializer.class)
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
@@ -165,13 +83,15 @@ public class CustomerEncyclopediaQuery extends PageBase {
     }
 
     public void setLastmodifyUserName(String lastmodifyUserName) {
-        this.lastmodifyUserName = lastmodifyUserName;
+        this.lastmodifyUserName = lastmodifyUserName ;
     }
 
+    @JsonSerialize(using = DateJsonSerializer.class)
     public Date getModifyTime() {
         return modifyTime;
     }
 
+    @JsonDeserialize(using = DateJsonDeserializer.class)
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
     }
@@ -181,23 +101,63 @@ public class CustomerEncyclopediaQuery extends PageBase {
     }
 
     public void setRemarks(String remarks) {
-        this.remarks = remarks;
+        this.remarks = remarks ;
+    }
+
+    public String getSellNetwork() {
+        return sellNetwork;
+    }
+
+    public void setSellNetwork(String sellNetwork) {
+        this.sellNetwork = sellNetwork;
+    }
+
+    public String getDevelopHis() {
+        return developHis;
+    }
+
+    public void setDevelopHis(String developHis) {
+        this.developHis = developHis;
+    }
+
+    public String getCompanyInfo() {
+        return companyInfo;
+    }
+
+    public void setCompanyInfo(String companyInfo) {
+        this.companyInfo = companyInfo;
+    }
+
+    public String getEncyId() {
+        return encyId;
+    }
+
+    public void setEncyId(String encyId) {
+        this.encyId = encyId;
+    }
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
 
-    public String getSearchKey() {
-        return searchKey;
+    public String getIsFull() {
+        return isFull;
     }
 
-    public void setSearchKey(String searchKey) {
-        this.searchKey = searchKey;
+    public void setIsFull(String isFull) {
+        this.isFull = isFull;
     }
 
-    public String getCompanyAbbreviation() {
-        return companyAbbreviation;
+    public String getCustomField() {
+        return customField;
     }
 
-    public void setCompanyAbbreviation(String companyAbbreviation) {
-        this.companyAbbreviation = companyAbbreviation;
+    public void setCustomField(String customField) {
+        this.customField = customField;
     }
 }
