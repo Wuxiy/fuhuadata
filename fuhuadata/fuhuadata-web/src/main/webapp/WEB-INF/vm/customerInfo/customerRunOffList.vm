@@ -1,9 +1,9 @@
 <div class="nav-deputy shadow-out clearfix">
-    <ul class="nav nav-tabs pull-left">
+   #* <ul class="nav nav-tabs pull-left">
         <li class="active"><a href="#cooperative" data-toggle="tab" lang="zh">合作客户</a></li>
         <li><a href="#potential" data-toggle="tab" lang="zh">潜在客户</a></li>
         <li><a href="#lossing" data-toggle="tab" lang="zh">流失客户</a></li>
-    </ul>
+    </ul>*#
     <ul class="breadcrumb pull-right">
         <li><span class="glyphicon glyphicon-map-marker"></span></li>
     </ul>
@@ -168,9 +168,9 @@
 </div>
 
 <input type="hidden" id="customerType" value="${customerType}" />
-<script type="text/javascript" src="/lib/js/pagination/pagination.js"></script>
-<link rel="stylesheet" type="text/css" href="/lib/js/pagination/pagination.css" />
-<script type="text/javascript" language="javascript" src="/lib/js/creatTree.js"></script>
+<script type="text/javascript" src="${request.contextPath}/lib/js/pagination/pagination.js"></script>
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/js/pagination/pagination.css" />
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript">
     var pageSize = 2;//分页步长
     var click_node ={oneLevelId:0,twoLevelId:0};//接收目录树点击节点的id及其父id
@@ -179,7 +179,7 @@
     }
     $(function(){
         //生成地区目录树
-        $('#tree').creatTree('/customerBaseInfo/initAreaCategoryTree');
+        $('#tree').creatTree('${request.contextPath}/customerBaseInfo/initAreaCategoryTree');
         //目录树节点绑定点击事件
         $('#tree').bindClickForCusArea(click_node);
         //搜索按钮绑定事件
@@ -204,7 +204,7 @@
     //根据页码获取列表数据
     function getDataList(pageNum,jq){
         jQuery.ajax({
-            url:'/customerBaseInfo/queryCustomerPageList',
+            url:'${request.contextPath}/customerBaseInfo/queryCustomerPageList',
             dataType:'json',
             data:{
                 customerType:$("#customerType").val(),
@@ -273,7 +273,7 @@
     function getListCount(){
         var total = 0;
         jQuery.ajax({
-            url:'/customerBaseInfo/countCustomerList',
+            url:'${request.contextPath}/customerBaseInfo/countCustomerList',
             dataType:'JSON',
             data:{
                 customerType:$("#customerType").val(),

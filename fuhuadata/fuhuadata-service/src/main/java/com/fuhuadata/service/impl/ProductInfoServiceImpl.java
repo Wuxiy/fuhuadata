@@ -79,42 +79,43 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 	public Result<ProductInfoVO> getProductInfoById(int product_id) {
 		Result<ProductInfoVO> result = new Result<ProductInfoVO>();
 		ProductInfoVO productInfoVO =new ProductInfoVO();
-
 		try {		
 		    ProductInfo  productInfo = productInfoManager.getProductInfoById(product_id);
 
 		    if(productInfo == null){
 				result.setSimpleErrorMsg(0, "当前数据不存在，请重试");
 			}else {
-				if (productInfo.getPhysicalProperities() != null) {
-					JSONArray json = JSONArray.fromObject(productInfo.getPhysicalProperities()); // 首先把字符串转成JSONArray对象
-					if (json.size() > 0) {
-						for (int i = 0; i < json.size(); i++) {
-							JSONObject job = json.getJSONObject(i);  // 遍历 jsonarray 数组，把每一个对象转成 json 对象
-							PhysicalProperities physicalProperities =new PhysicalProperities();
-							physicalProperities.setIndex((String) job.get("index"));
-							physicalProperities.setValue((String) job.get("value"));
-							physicalProperities.setRemarks((String) job.get("remarks"));
-							productInfoVO.addIndex(physicalProperities);
-						}
-					}
-					if(productInfo.getProcessingComponents()!=null){
-						JSONArray cJson= JSONArray.fromObject(productInfo.getProcessingComponents());
-						if(cJson.size()>0){
-							for(int i=0;i<cJson.size();i++) {
-								JSONObject cjob = cJson.getJSONObject(i);
-								ComponentCost componentCost = new ComponentCost();
-								componentCost.setComponentName((String)cjob.get("componentName"));
-								componentCost.setConsumption((String)cjob.get("consumption"));
-								componentCost.setRemarks((String) cjob.get("remarks"));
-								productInfoVO.addProcessingComponents(componentCost);
+		    	if(productInfo.getMidCategoryId()!=8) {
+					if (productInfo.getPhysicalProperities() != null && productInfo.getPhysicalProperities().length() > 0) {
+						JSONArray json = JSONArray.fromObject(productInfo.getPhysicalProperities()); // 首先把字符串转成JSONArray对象
+						if (json.size() > 0) {
+							for (int i = 0; i < json.size(); i++) {
+								JSONObject job = json.getJSONObject(i);  // 遍历 jsonarray 数组，把每一个对象转成 json 对象
+								PhysicalProperities physicalProperities = new PhysicalProperities();
+								physicalProperities.setIndex((String) job.get("index"));
+								physicalProperities.setValue((String) job.get("value"));
+								physicalProperities.setRemarks((String) job.get("remarks"));
+								productInfoVO.addIndex(physicalProperities);
 							}
 						}
 					}
+					if (productInfo.getProcessingComponents() != null && productInfo.getProcessingComponents().length() > 0) {
+							JSONArray cJson = JSONArray.fromObject(productInfo.getProcessingComponents());
+							if (cJson.size() > 0) {
+								for (int i = 0; i < cJson.size(); i++) {
+									JSONObject cjob = cJson.getJSONObject(i);
+									ComponentCost componentCost = new ComponentCost();
+									componentCost.setComponentName((String) cjob.get("componentName"));
+									componentCost.setConsumption((String) cjob.get("consumption"));
+									componentCost.setRemarks((String) cjob.get("remarks"));
+									productInfoVO.addProcessingComponents(componentCost);
+								}
+							}
+						}
+				}
 					productInfoVO.setProductInfo(productInfo);
 					productInfoVO.setWares(productWareManager.getProductWareByPId(product_id));
 					result.addDefaultModel("ProductInfo", productInfoVO);
-				}
 			}
 		} catch(Exception e) {
 			result.setSuccess(false);
