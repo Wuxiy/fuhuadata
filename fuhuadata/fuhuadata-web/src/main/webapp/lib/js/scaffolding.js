@@ -4,7 +4,7 @@
 (function($){
 
     //初始化方法
-    function init(obj){
+    function initPage(){
         //禁用表单控件
         var formEl=$('.panel-edit .form-control, .panel-edit input[type="checkbox"], .panel-edit input[type="radio"]');
         formEl.attr('disabled','disabled');
@@ -15,8 +15,9 @@
         upDown(obj);
     }
 
-    //--获取数据&&提交数据
-    //**这里用延迟对象来做
+    /**
+     * 获取和提交数据
+     */
     function upDown(obj){
         //参数：type,url,data,callBack
         var u,t,d,c;
@@ -188,5 +189,13 @@
         $(tarEl).remove();
     }
 
+    //渲染包材档案列表
+    function packingAchivesList(getData){
+        $.each(getData,function(n,item){
+            var tr = $('<tr></tr>');
+            console.log(item);
+            $(tr).append('<td>'+item.packingId+'</td><td><a href="/packingArchives/getDetails?id='+item.packingId+'&bid='+item.bigCategoryId+'&sid='+item.smallCategoryId+'" class="packName">'+item.packName+'</a></td><td>'+item.spec+'</td><td>'+item.quality+'</td><td>'+item.qualityIndex+'</td><td>'+item.qualityTargetValue+'</td><td>'+item.unitPrice+'</td><td>'+item.priceEndDate+'</td><td>'+item.suitableType+'</td><td>'+item.bRemarks+'</td><td>'+item.status+'</td>').appendTo(parent);
+        })
+    }
 
 })(jQuery);

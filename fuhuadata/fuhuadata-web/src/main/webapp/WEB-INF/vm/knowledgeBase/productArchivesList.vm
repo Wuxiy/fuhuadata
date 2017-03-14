@@ -135,10 +135,49 @@
 <script type="text/javascript" language="javascript" src="/lib/js/creatTree.js"></script>
 <script type="text/javascript" language="javascript" src="/lib/js/scaffolding.js"></script>
 <script type="text/javascript">
+(function ($) {
     $('#tree').creatTree('/productCategory/CategoryTree');
     $('#tree').filtrateData('/productInfo/getProductInfoById','container','productArchivesList');
-
-(function ($) {
+    jQuery.ajax({
+        url:'/productInfo/getProductInfoById',
+        type:'POST',
+        data:{id:1011001}
+    }).done(function (data) {
+        var getData = data.data;
+        jQuery.each(getData,function(n,total){
+            jQuery.each(total,function(key,item){
+                var $formControl=$('[name="'+ key +'"]');
+                if($formControl.attr('type')=='radio'||$formControl.attr('type')=='checkbox'){
+                    var arr=[item];
+                        $formControl.val(arr);
+                }else{
+                        $formControl.val(item);
+                }
+            })
+        });
+        jQuery.each(getData.productInfo,function(key,item){
+            console.log(item);
+            var formControl=$('[name="'+ key +'"]');
+            if(formControl.attr('type')=='radio'||formControl.attr('type')=='checkbox'){
+                var arr=[item];
+                formControl.val(arr);
+            }else {
+                formControl.val(item);
+            }
+        });
+        var wTbody = $('[name="wares"]');
+        wTbody.html('');
+        jQuery.each(getData.wares,function(key,item){
+            var tr = $("<tr></tr>");
+            tr.append('<td>'+item.specification+'</td><td>'+item.model+'</td>').appendTo(wTbody);
+        });
+        var iTbody = $('[name="physicalProperities"]');
+        iTbody.html('');
+        jQuery.each(getData.index,function(key,item){
+            var tr = $("<tr></tr>");
+            tr.append('<td><input class="form-control" type="text" disabled value="'+item.index+'"></td><td><input class="form-control" type="text" disabled value="'+item.value+'"></td><td><input class="form-control" type="text" disabled value="'+item.remarks+'"/></td>').appendTo(iTbody);
+        });
+    })
 //    $('button:contains("保存")').on('click.putIn',function(e){
 //        e.stopPropagation();
 //        var content = $(this).parents('.panel').find('.panel-body');

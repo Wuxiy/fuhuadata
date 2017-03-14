@@ -58,9 +58,26 @@
     </div>
 </div>
 <script type="text/javascript" language="javascript" src="/lib/js/creatTree.js"></script>
+<script type="text/javascript" language="javascript" src="/lib/js/scaffolding.js"></script>
 <script type="text/javascript">
-    $('#tree').creatTree('/packingCategory/CategoryTree');
-    $('#tree').filtrateData('/packingArchives/getPackingArchivesByPId',"container","packingArchivesList");
+
+    $(function(){
+        $('#tree').creatTree('/packingCategory/CategoryTree');
+        $('#tree').filtrateData('/packingArchives/getPackingArchivesByPId',"container","packingArchivesList");
+        jQuery.ajax({
+            url: '/packingArchives/getPackingArchivesByPId',
+            type:'POST',
+            data:{id:1}
+        }).done(function (data) {
+            var getData = data.data;
+            jQuery.each(getData,function(n,item){
+                var parent  = $('#container');
+                var tr = '<tr><td>'+item.packingId+'</td><td><a href="/packingArchives/getDetails?id='+item.packingId+'&bid='+item.bigCategoryId+'&sid='+item.smallCategoryId+'" class="packName">'+item.packName+'</a></td><td>'+item.spec+'</td><td>'+item.quality+'</td><td>'+item.qualityIndex+'</td><td>'+item.qualityTargetValue+'</td><td>'+item.unitPrice+'</td><td>'+item.priceEndDate+'</td><td>'+item.suitableType+'</td><td>'+item.bRemarks+'</td><td>'+item.status+'</td></tr>';
+                console.log(item);
+                $(tr).appendTo(parent);
+            })
+        })
+    })
 
 
     function Add(){
@@ -76,4 +93,6 @@
         window.location.href = url;
 
     }
+
+
 </script>
