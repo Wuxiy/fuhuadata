@@ -24,7 +24,7 @@ public class CustomerPurchaseProduct{
 	private String productName;
 	
     /**年需求量**/
-	private String annualDemands;
+	private BigDecimal annualDemands;
 	
     /**平均单价，美元计**/
 	private BigDecimal averagePrice;
@@ -117,15 +117,15 @@ public class CustomerPurchaseProduct{
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-	
-	public String getAnnualDemands() {
+
+	public BigDecimal getAnnualDemands() {
 		return annualDemands;
 	}
-	
-	public void setAnnualDemands(String annualDemands) {
+
+	public void setAnnualDemands(BigDecimal annualDemands) {
 		this.annualDemands = annualDemands;
 	}
-	
+
 	public BigDecimal getAveragePrice() {
 		return averagePrice;
 	}

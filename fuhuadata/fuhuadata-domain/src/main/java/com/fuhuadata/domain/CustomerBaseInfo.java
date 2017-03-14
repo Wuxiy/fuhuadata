@@ -15,8 +15,6 @@ public class CustomerBaseInfo {
     /**企业全称**/
 	private String fullName;
 
-	/**企业性质**/
-	private Integer enterprise_nature;
 
 	/**企业简称**/
 	private String shortName;
@@ -486,13 +484,6 @@ public class CustomerBaseInfo {
 		this.company_type = company_type;
 	}
 
-	public Integer getEnterprise_nature() {
-		return enterprise_nature;
-	}
-
-	public void setEnterprise_nature(Integer enterprise_nature) {
-		this.enterprise_nature = enterprise_nature;
-	}
 
 	public String getStartCooperationTime() {
 		return startCooperationTime;
