@@ -24,7 +24,7 @@
         <div class="col-xs-10">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <button class="btn btn-xs btn-primary pull-right panel-heading-btn" data_url="/packingArchives/addPackingArchives?" onclick="Add()" id="add">
+                    <button class="btn btn-xs btn-primary pull-right panel-heading-btn" data_url="${request.contextPath}/packingArchives/addPackingArchives?" onclick="Add()" id="add">
                     <span class="glyphicon glyphicon-plus"></span>
                     新增
                 </button>
@@ -73,7 +73,7 @@
         var data_url = $('#add').attr('data_url');
         var url = data_url + name + '&' + bid + '&' + sid;
 
-        window.location.href = url;
+        window.location.href = ${request.contextPath}+url;
 
     }
 </script>
