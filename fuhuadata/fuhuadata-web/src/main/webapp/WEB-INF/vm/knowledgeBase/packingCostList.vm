@@ -57,10 +57,10 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" language="javascript" src="/lib/js/creatTree.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript">
-    $('#tree').creatTree('/packingCategory/CategoryTree');
-    $('#tree').filtrateData('/packingArchives/getPackingArchivesByPId',"container","packingArchivesList");
+    $('#tree').creatTree('${request.contextPath}/packingCategory/CategoryTree');
+    $('#tree').filtrateData('${request.contextPath}/packingArchives/getPackingArchivesByPId',"container","packingArchivesList");
 
 
     function Add(){

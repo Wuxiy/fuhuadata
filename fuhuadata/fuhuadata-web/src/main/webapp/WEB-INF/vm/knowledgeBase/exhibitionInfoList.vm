@@ -54,7 +54,7 @@
 
         $('#exhibition_table').dataTable( {
 
-            "ajax":'/exhibitionInfo/queryExhibitionInfoList',
+            "ajax":'${request.contextPath}/exhibitionInfo/queryExhibitionInfoList',
             "pagingType":"full_numbers",
             "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
             "columns":[

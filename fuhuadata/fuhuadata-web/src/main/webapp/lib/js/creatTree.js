@@ -74,8 +74,11 @@
             packingArchivesList : function(getData,parent){
                 $.each(getData,function(n,item){
                     var tr = $('<tr></tr>');
+                    var arr = item.suitableType;
+                    var arr2 = arr.split(',');
                     console.log(item);
-                    $(tr).append('<td>'+item.packingId+'</td><td><a href="/packingArchives/getDetails?id='+item.packingId+'&bid='+item.bigCategoryId+'&sid='+item.smallCategoryId+'" class="packName">'+item.packName+'</a></td><td>'+item.spec+'</td><td>'+item.quality+'</td><td>'+item.qualityIndex+'</td><td>'+item.qualityTargetValue+'</td><td>'+item.unitPrice+'</td><td>'+item.priceEndDate+'</td><td>'+item.suitableType+'</td><td>'+item.bRemarks+'</td><td>'+item.status+'</td>').appendTo(parent);
+
+                    $(tr).append('<td>'+item.packingId+'</td><td><a href="/packingArchives/getDetails?id='+item.packingId+'&bid='+item.bigCategoryId+'&sid='+item.smallCategoryId+'" class="packName">'+item.packName+'</a></td><td>'+item.spec+'</td><td>'+item.quality+'</td><td>'+item.qualityIndex+'</td><td>'+item.qualityTargetValue+'</td><td>'+item.unitPrice+'</td><td>'+item.priceEndDate+'</td><td>'+arr2+'</td><td>'+item.bRemarks+'</td><td>'+item.status+'</td>').appendTo(parent);
                 })
              },
             //渲染包材详情modal列表

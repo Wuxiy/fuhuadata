@@ -10,7 +10,7 @@
 <!--表格开始-->
 <div class="panel panel-default">
     <div class="panel-heading">
-        <a class="btn btn-xs btn-primary pull-right panel-heading-btn" href="/knowledgeBase/encyclopediaAdd" data-toggle="modal">
+        <a class="btn btn-xs btn-primary pull-right panel-heading-btn" href="${request.contextPath}/knowledgeBase/encyclopediaAdd" data-toggle="modal">
             <span class="glyphicon glyphicon-plus"></span>
             新增
         </a>
@@ -22,24 +22,15 @@
         <!--搜索框开始-->
         <div class="form-horizontal">
             <div class="form-group ">
-                <label class="col-xs-1 control-label">企业类型</label>
-                <div class="col-xs-1">
-                    <select class="form-control" onchange="selectType(this)">
-                        <option value="">全部</option>
+                <div class="col-xs-2 pull-right">
+                    <input id="search" class="form-control" type="search" value="" placeholder="请输入关键词搜素"/>
+                </div>
+                <label class="col-xs-1 control-label pull-left">企业类型</label>
+                <div class="col-xs-1 pull-left">
+                    <select class="form-control" id="type" onchange="selectType(this)">
                         <option value="0">客户</option>
                         <option value="1">竟对</option>
                     </select>
-                </div>
-                <div class="col-xs-2 pull-right">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="请输入关键词查找">
-                        <div class="input-group-btn">
-                            <button type="button" class="btn btn-primary btn-xs">
-                                <span class="glyphicon glyphicon-search"></span>
-                                搜索
-                            </button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -83,8 +74,19 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-        $('#encyclopedia_table').dataTable({
-            "ajax":'queryCustomerEncyclopediaList',
+
+
+        var table = $('#encyclopedia_table').DataTable({
+            "ajax":'${request.contextPath}queryCustomerEncyclopediaList',
+            "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
+            "dom": 'tiprl',//自定义显示项
+            "lengthChange": false,//是否允许用户自定义显示数量
+            "bPaginate": true, //翻页功能
+            "bFilter": false, //列筛序功能
+            "searching": true,//本地搜索
+            "ordering": true, //排序功能
+            "Info": true,//页脚信息
+            "autoWidth": true,//自动宽度
             "pagingType":"full_numbers",
             "columns":[
                 {"data":"encyId"},
@@ -99,10 +101,10 @@
             ],
             "columnDefs":[
                 {
-                    "targets":5,
-//                    "render":function (data,type,row) {
-//                        return '<a href="'+data+'" target="_blank">'+下载+'</a>';
-//                    }
+                    "targets":1,
+                    "render":function (data,type,row) {
+                        return '<a href="'+data+'" target="_blank">'+row.fullName+'</a>';
+                    }
                 }
             ],
             "language": {
@@ -110,5 +112,17 @@
                 "searchPlaceholder": '关键字'
             }
         })
+
+
+        //自定义搜索
+        $('#type').on('keyup click', function () {
+            var type = $("#type").val()
+            table.search(type, false, false).draw();
+        });
+
+        $('#search').on('keyup click', function () {
+            var search = $("#search").val()
+            table.search(search, false, false).draw();
+        });
     })
 </script>

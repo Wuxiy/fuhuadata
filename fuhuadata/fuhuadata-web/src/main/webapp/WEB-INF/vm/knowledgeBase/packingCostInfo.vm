@@ -103,6 +103,9 @@
                                     <input id="testlogo" type="file" name="icoFile" class="file-loading" />
                                     <input type="text" name="htestlogo" id="htestlogo" onchange="addFile(this)" >
                                 </div>
+                                <div id="imge">
+
+                                </div>
                             </div>
                         </form>
                     </div>
