@@ -45,30 +45,26 @@ public class CustomerBaseInfoManagerImpl implements CustomerBaseInfoManager {
     	
     public Result<List<CustomerBaseInfo>> getCustomerBaseInfoByPage(QueryCustomerBaseInfo queryCustomerBaseInfo) {
 		Result<List<CustomerBaseInfo>> result = new Result<List<CustomerBaseInfo>>();
-		/*int totalItem = customerBaseInfoDao.count(queryCustomerBaseInfo);*/
-		/*if (queryCustomerBaseInfo.getTotalItem() > 0) {
-			result.addDefaultModel("CustomerBaseInfos", customerBaseInfoDao.getCustomerBaseInfoByPage(queryCustomerBaseInfo));
-		} else {
-			result.addDefaultModel("CustomerBaseInfos", new ArrayList<CustomerBaseInfo>());
-		}*/
 		List<CustomerBaseInfo> customerList =  customerBaseInfoDao.getCustomerBaseInfoByPage(queryCustomerBaseInfo);
-		if(customerList!=null && customerList.size()>0){
-			//查询订单汇总信息
-			for(CustomerBaseInfo c:customerList){
-				CustomerBaseInfo order_count = customerBaseInfoDao.countOrderByCustomer(c.getCustomerId());
-				if(order_count!=null){
-					c.setTotalMoney(order_count.getTotalMoney());
-					c.setMaintenanceFee(order_count.getMaintenanceFee());
-					c.setMinPrice(order_count.getMinPrice());
-					c.setNetProfit(order_count.getNetProfit());
-					c.setPayMoney(order_count.getPayMoney());
-				}else{
-					BigDecimal default_val = new BigDecimal(0);
-					c.setTotalMoney(default_val);
-					c.setMaintenanceFee(default_val);
-					c.setMinPrice(default_val);
-					c.setNetProfit(default_val);
-					c.setPayMoney(default_val);
+		if(customerList!=null && customerList.size()>0 ){
+			//如果当前查询的数据列表为合作客户或流失客户，则查询订单汇总信息
+			if(queryCustomerBaseInfo.getCustomerType()!=2){
+				for(CustomerBaseInfo c:customerList){
+					CustomerBaseInfo order_count = customerBaseInfoDao.countOrderByCustomer(c.getCustomerId());
+					if(order_count!=null){
+						c.setTotalMoney(order_count.getTotalMoney());
+						c.setMaintenanceFee(order_count.getMaintenanceFee());
+						c.setMinPrice(order_count.getMinPrice());
+						c.setNetProfit(order_count.getNetProfit());
+						c.setPayMoney(order_count.getPayMoney());
+					}else{
+						BigDecimal default_val = new BigDecimal(0);
+						c.setTotalMoney(default_val);
+						c.setMaintenanceFee(default_val);
+						c.setMinPrice(default_val);
+						c.setNetProfit(default_val);
+						c.setPayMoney(default_val);
+					}
 				}
 			}
 		}else{

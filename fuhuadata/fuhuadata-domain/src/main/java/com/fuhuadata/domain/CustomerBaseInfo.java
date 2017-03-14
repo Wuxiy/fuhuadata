@@ -121,10 +121,10 @@ public class CustomerBaseInfo {
 	private String lastmodifyUserName;
 	
     /**创建时间**/
-	private Date createTime;
+	private String createTime;
 	
     /**修改时间**/
-	private Date modifyTime;
+	private String modifyTime;
 	/*合同总金额*/
 	private BigDecimal totalMoney;
 	/*已回款金额*/
@@ -137,8 +137,57 @@ public class CustomerBaseInfo {
 	private BigDecimal netProfit;
 	//客户流失原因
 	private String lossReason;
-
+	//机会描述
+	private String opportunityDescrible;
+	//默认联系人
+	private String linkManName;
+	//默认联系人email
+	private String linkManEmail;
+	//企业性质
+	private String enterpriseNature;
+	//其他性质
+	private String otherEnterpriseNature;
 	public CustomerBaseInfo() {
+	}
+
+	public String getOtherEnterpriseNature() {
+		return otherEnterpriseNature;
+	}
+
+	public void setOtherEnterpriseNature(String otherEnterpriseNature) {
+		this.otherEnterpriseNature = otherEnterpriseNature;
+	}
+
+	public String getEnterpriseNature() {
+		return enterpriseNature;
+	}
+
+	public void setEnterpriseNature(String enterpriseNature) {
+		this.enterpriseNature = enterpriseNature;
+	}
+
+	public String getOpportunityDescrible() {
+		return opportunityDescrible;
+	}
+
+	public void setOpportunityDescrible(String opportunityDescrible) {
+		this.opportunityDescrible = opportunityDescrible;
+	}
+
+	public String getLinkManName() {
+		return linkManName;
+	}
+
+	public void setLinkManName(String linkManName) {
+		this.linkManName = linkManName;
+	}
+
+	public String getLinkManEmail() {
+		return linkManEmail;
+	}
+
+	public void setLinkManEmail(String linkManEmail) {
+		this.linkManEmail = linkManEmail;
 	}
 
 	public String getLossReason() {
@@ -348,20 +397,20 @@ public class CustomerBaseInfo {
 	public void setLastmodifyUserName(String lastmodifyUserName) {
 		this.lastmodifyUserName = lastmodifyUserName;
 	}
-	
-	public Date getCreateTime() {
+
+	public String getCreateTime() {
 		return createTime;
 	}
-	
-	public void setCreateTime(Date createTime) {
+
+	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
-	
-	public Date getModifyTime() {
+
+	public String getModifyTime() {
 		return modifyTime;
 	}
-	
-	public void setModifyTime(Date modifyTime) {
+
+	public void setModifyTime(String modifyTime) {
 		this.modifyTime = modifyTime;
 	}
 

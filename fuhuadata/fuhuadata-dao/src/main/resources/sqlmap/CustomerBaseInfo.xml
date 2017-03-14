@@ -103,10 +103,13 @@
 				<isNotEmpty prepend=" AND " property="modifyTime">
 			modify_time = #modifyTime#
 		</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="opportunityDescrible">
+				opportunity_describle like  '%opportunityDescrible%'
+			</isNotEmpty>
 				</dynamic>
 	</sql>
 	
-	<sql id="QUERY-COMMON">	
+	<sql id="QUERY-COMMON">
 		<dynamic prepend=" WHERE ">
 				<isNotEmpty prepend=" AND " property="customerId">
 			customer_id = #customerId#
@@ -286,8 +289,26 @@
 				base.customer_status customerStatus,
 				base.lastmodify_user_name lastmodifyUserName,
 				base.remark,
-				base.loss_reason lossReason
+				base.loss_reason lossReason,
+				base.opportunity_describle opportunityDescrible,
+				base.create_user_name createUserName,
+				base.create_time createTime,
+				base.other_enterprise_nature otherEnterpriseNature,
+				base.enterprise_nature enterpriseNature
+				<isEqual property="customerType" compareValue="2" prepend=",">
+					 lm.name linkManName,
+					 lm.lemail linkManEmail
+				</isEqual>
+				<isNotEqual property="customerType" compareValue="2" prepend=",">
+					'' linkManName,
+					'' linkManEmail
+				</isNotEqual>
+
 			FROM customer_base_info base
+			<isEqual property="customerType" compareValue="2">
+				<!--如果查询潜在客户，则关联查询联系人信息-->
+				left join customer_linkman lm on base.customer_id = lm.customer_id and is_default = 1
+			</isEqual>
 			<isNotEqual property="areaClassId" compareValue="0" prepend=",">
 				p_area_code pac,
 				p_areaclass pa
@@ -344,6 +365,7 @@
 			op.`customer_product_name` productName,
 			p.`category_name` categoryName,
 			sum(op.`min_price`*op.`main_product_amount`) totalMinPrice,
+
 			sum(op.`main_product_amount`)  totalSaleNum,
 			SUM(op.contract_price*op.`main_product_amount`) totalSaleMoney
 			p.measurement
