@@ -2118,10 +2118,21 @@ th {
 .table > thead > tr > td,
 .table > tbody > tr > td,
 .table > tfoot > tr > td {
+  position: relative;
   padding: 8px;
   line-height: 1.5;
   vertical-align: middle;
   border-top: 1px solid #dddddd;
+}
+.table > thead > tr > th > .close,
+.table > tbody > tr > th > .close,
+.table > tfoot > tr > th > .close,
+.table > thead > tr > td > .close,
+.table > tbody > tr > td > .close,
+.table > tfoot > tr > td > .close {
+  position: absolute;
+  top: 6px;
+  right: -18px;
 }
 .table > thead > tr > th {
   vertical-align: bottom;

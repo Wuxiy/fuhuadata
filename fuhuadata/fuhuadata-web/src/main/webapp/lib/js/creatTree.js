@@ -50,7 +50,7 @@
         //取得html容器
         var $container = $('#'+containerId);
         //给树形菜单添加点击事件
-        this.on('click','li[id]>a',function(e){
+        this.on('click.getData','li[id]>a',function(e){
             //阻止a的默认事件
             e.preventDefault();
             var id = $(e.target).parent('li').attr('id');
@@ -118,9 +118,15 @@
                 });
                 var iTbody = $('[name="physicalProperities"]');
                 iTbody.html('');
-                $.each(getData.index,function(key,item){
+                jQuery.each(getData.index,function(key,item){
                     var tr = $("<tr></tr>");
-                    tr.append('<td><input class="form-control" type="text" disabled value="'+item.index+'"></td><td><input class="form-control" type="text" disabled value="'+item.value+'"></td><td><input class="form-control" type="text" disabled value="'+item.remarks+'"/></td>').appendTo(iTbody);
+                    tr.append('<td><input class="form-control" type="text" disabled value="'+item.index+'"></td><td><input class="form-control" type="text" disabled value="'+item.value+'"></td><td style="position: relative"><input class="form-control" type="text" disabled value="'+item.remarks+'"/><button type="button" class="close hidden" data-form-btn="del" data-form-target="tr" style="position: absolute;top:6px;right:-15px;">×</button></td>').appendTo(iTbody);
+                });
+                var pTbody = $('[name="processingComponents"]');
+                pTbody.html('');
+                jQuery.each(getData.processingComponents,function(key,item){
+                    var tr = $("<tr></tr>");
+                    tr.append('<td><input class="form-control" type="text" disabled value="'+item.componentName+'"></td><td><input class="form-control" type="text" disabled value="'+item.consumption+'"></td><td style="position: relative"><input class="form-control" type="text" disabled value="'+item.remarks+'"/><button type="button" class="close hidden" data-form-btn="del" data-form-target="tr" style="position: absolute;top:6px;right:-15px;">×</button></td>').appendTo(pTbody);
                 });
              }
         }
