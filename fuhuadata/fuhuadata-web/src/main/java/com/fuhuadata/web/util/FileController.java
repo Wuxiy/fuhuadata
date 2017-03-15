@@ -121,16 +121,14 @@ public class FileController {
                                    HttpServletResponse response, BindException errors)
             throws Exception {
         Result result = new Result();
-        List<ImagePathVO> list = new ArrayList<ImagePathVO>();
+        List<File> formFile = new ArrayList<File>();
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-
         Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
         System.out.println(fileMap.get("file"));
         org.springframework.util.MultiValueMap<String,MultipartFile> fileMap1=multipartRequest.getMultiFileMap();
             List<MultipartFile> files = fileMap1.get("file");
            // System.out.println(files.size());
             if (files != null) {
-                ImagePathVO imagePathVO = new ImagePathVO();
                 for (MultipartFile file : files) {
                     String path = request.getSession().getServletContext().getRealPath("images/");//保存在服务器
                     String fileName = file.getOriginalFilename();
@@ -143,12 +141,10 @@ public class FileController {
                         tempFile.createNewFile();
                         file.transferTo(tempFile);
                     }
-                    imagePathVO.setPath(tempFile.getPath());
-                    imagePathVO.setName(tempFile.getName());
-                    list.add(imagePathVO);
+                    formFile.add(tempFile);
                 }
             }
-            result.addDefaultModel(list);
+            result.addDefaultModel(formFile);
           return result.getResultPojo();
     }
 
