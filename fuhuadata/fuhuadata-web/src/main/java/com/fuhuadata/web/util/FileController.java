@@ -115,7 +115,7 @@ public class FileController {
     }
 
     // 多文件上传
-    @RequestMapping(value = "/uploadFileALL", method = RequestMethod.POST)
+    @RequestMapping(value = "/uploadFileAll", method = RequestMethod.POST)
     @ResponseBody
     public ResultPojo fileUpload(HttpServletRequest request,
                                    HttpServletResponse response, BindException errors)
@@ -125,9 +125,10 @@ public class FileController {
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 
         Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+        System.out.println(fileMap.get("file"));
         org.springframework.util.MultiValueMap<String,MultipartFile> fileMap1=multipartRequest.getMultiFileMap();
-            List<MultipartFile> files = fileMap1.get("files");
-            System.out.println(files.size());
+            List<MultipartFile> files = fileMap1.get("file");
+           // System.out.println(files.size());
             if (files != null) {
                 ImagePathVO imagePathVO = new ImagePathVO();
                 for (MultipartFile file : files) {
