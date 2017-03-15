@@ -6,14 +6,9 @@
    	<typeAlias alias="CustomerBaseInfo" type="com.fuhuadata.domain.CustomerBaseInfo"/>
    	<typeAlias alias="QueryCustomerBaseInfo" type="com.fuhuadata.domain.query.QueryCustomerBaseInfo"/>
 	<typeAlias alias="CountCustomersOrderProduct" type="com.fuhuadata.domain.CountCustomersOrderProduct"/>
-<<<<<<< HEAD
 	<typeAlias alias="CustomerBaseInfoVO" type="com.fuhuadata.vo.CustomerBaseInfoVO"/>
 	<typeAlias alias="CustomerMakeProduct" type="com.fuhuadata.domain.CustomerMakeProduct"/>
-
 	<resultMap id="CUSTOMERBASEINFO-MAP" class="CustomerBaseInfo">
-=======
-	<resultMap id="customerBaseInfoMap" class="CustomerBaseInfo">
->>>>>>> 2169c53f603aac8feaff7b610f23c28074486a8a
 					<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="fullName" column="full_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="shortName" column="short_name" jdbcType="VARCHAR" javaType="java.lang.String" />
