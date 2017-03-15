@@ -72,8 +72,50 @@ public class FileController {
         return resultPojo;
     }
 
+    /**
+     *
+     * @param files
+     * @return
+     */
+    @RequestMapping(value = "/uploadFile2",method = RequestMethod.POST)
+    @ResponseBody
+    public ResultPojo uploadFile2(@RequestParam(value="file") MultipartFile[] files, HttpServletRequest request) {
+        Result result = new Result();
+        String path=null;
+        File tempFile=null;
+        System.out.println(files.length);
+        try {
+            for(MultipartFile file:files) {
+                if (!file.isEmpty()) {
+                    try {
+                        path = request.getSession().getServletContext().getRealPath("images/");//保存在服务器
+                        System.out.println(path);
+
+                        String fileName = file.getOriginalFilename();
+                        tempFile = new File(path, fileName);
+                        System.out.println(tempFile);
+                        if (!tempFile.getParentFile().exists()) {
+                            tempFile.getParentFile().mkdir();
+                        }
+                        if (!tempFile.exists()) {
+                            tempFile.createNewFile();
+                        }
+                        file.transferTo(tempFile);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }catch(Exception e){
+            log.error("文件上传错误",e);
+        }
+        ResultPojo  resultPojo= result.getResultPojo();
+        resultPojo.setData(tempFile);
+        return resultPojo;
+    }
+
     // 多文件上传
-    @RequestMapping(value = "/uploadFile2", method = RequestMethod.POST)
+    @RequestMapping(value = "/uploadFileALL", method = RequestMethod.POST)
     @ResponseBody
     public ResultPojo fileUpload(HttpServletRequest request,
                                    HttpServletResponse response, BindException errors)
@@ -85,6 +127,7 @@ public class FileController {
         Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
         org.springframework.util.MultiValueMap<String,MultipartFile> fileMap1=multipartRequest.getMultiFileMap();
             List<MultipartFile> files = fileMap1.get("files");
+            System.out.println(files.size());
             if (files != null) {
                 ImagePathVO imagePathVO = new ImagePathVO();
                 for (MultipartFile file : files) {
