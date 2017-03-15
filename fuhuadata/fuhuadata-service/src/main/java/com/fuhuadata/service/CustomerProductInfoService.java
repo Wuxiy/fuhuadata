@@ -42,8 +42,10 @@ public interface CustomerProductInfoService {
 	 * @return
 	 */
 	public Result<List<CustomerProductPackagingArchives>> getCustomerProductPackagingArchives();
-    
-    /**
+
+	public Result<List<CustomerProductPackagingArchives>> getCustomerProductPackagingArchivesById(String customerId);
+
+	/**
      * 查询列表，此接口不包含分页查询
 	 * 返回result，通过result.isSuccess()判断服务调用是否成功
 	 * 通过result.getModel()得到列表信息

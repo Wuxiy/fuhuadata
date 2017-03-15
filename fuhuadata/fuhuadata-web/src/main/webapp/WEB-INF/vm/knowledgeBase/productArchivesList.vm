@@ -145,7 +145,6 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/scaffolding.js"></script>
 <script type="text/javascript">
 
-
 (function ($) {
     $(function () {
         $('#tree').creatTree('${request.contextPath}/productCategory/CategoryTree');

@@ -41,6 +41,9 @@ public class CustomerProductInfoManagerImpl implements CustomerProductInfoManage
 		return customerProductInfoDao.getCustomerProductPackagingArchives();
 	}
 
+	public List<CustomerProductPackagingArchives> getCustomerProductPackingArchivesById(String customerId){
+    	return customerProductInfoDao.getCustomerProductPackingArchivesById(customerId);
+	}
 
 	public List<CustomerProductInfo> getAllCustomerProductInfos() {
     	return customerProductInfoDao.getAllCustomerProductInfos();

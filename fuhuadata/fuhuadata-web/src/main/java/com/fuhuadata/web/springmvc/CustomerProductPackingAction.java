@@ -59,4 +59,20 @@ public class CustomerProductPackingAction {
         }
         return null;
     }
+
+
+    @RequestMapping(value = "/getCustomerProductInfoById",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-customerProductPackaging",methods = "getCustomerProductInfoById")
+    @ResponseBody
+    public ResultPojo getCustomerProductInfoById(String customerId) {
+        try {
+            Result<List<CustomerProductPackagingArchives>> result = customerProductInfoService.getCustomerProductPackagingArchivesById(customerId);
+            return result.getResultPojo();
+        } catch (Exception e) {
+            log.error("获取客户产品包装要求错误",e);
+        }
+        return null;
+    }
+
+
 }

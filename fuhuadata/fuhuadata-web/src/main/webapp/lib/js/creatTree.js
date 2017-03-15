@@ -130,7 +130,7 @@
                         });
                     }
                     if(getData.index!=null){
-                        iTbody.siblings().remove();
+                        Tbody.siblings().remove();
                         jQuery.each(getData.index,function(key,item){
                             var tr = $("<tr></tr>");
                             tr.append('<td><input class="form-control" type="text" disabled value="'+item.index+'"></td><td><input class="form-control" type="text" disabled value="'+item.value+'"></td><td style="position: relative"><input class="form-control" type="text" disabled value="'+item.remarks+'"/><button type="button" class="close hidden" data-form-btn="del" data-form-target="tr" style="position: absolute;top:6px;right:-15px;">×</button></td>').appendTo(iTbody);

@@ -3,17 +3,24 @@
 <body>
 <h1>Spring MVC multi files upload example</h1>
 
-<form method="POST" action="uploadFile" enctype="multipart/form-data">
-   <br> <input type="file" name="file" /><br/>
-   <br> <input type="file" name="file" /><br/>
-    <br><input type="file" name="file" /><br/>
-    <input type="submit" value="提交" />
+<form method="POST" id="uploadForm" enctype="multipart/form-data">
+   <br> <input type="file" name="file" id="uploadFile"/><br/>
+    <input type="button" id="btnUpload" value="确定"  onclick="Asubmit()"/>
 </form>
 
+<form name="form1" id="form1" enctype="multipart/form-data">
+    <p>name:<input type="text" name="file" ></p>
+    <p>gender:<input type="radio" name="file" value="1">male <input type="radio" name="file" value="2">female</p>
+    <p>photo:<input type="file" name="file" id="photo1"></p>
+    <p>photo:<input type="file" name="file" id="photo2"></p>
+    <p>photo:<input type="file" name="file" id="photo3"></p>
+    <p><input type="button" name="b1" value="submit" onclick="fsubmit()"></p>
+</form>
+<div id="result"></div>
 
 <h2>上传多个文件 实例</h2>
 
-<form action="uploadFile2" method="post"
+<form action="uploadFileAll" method="post"
       enctype="multipart/form-data">
     <p>
         选择文件:<input type="file" name="files">
@@ -32,5 +39,45 @@
 
         console.log(url);
     })
+
+    function fsubmit(){
+        var data = new FormData($('#form1')[0]);
+        console.log(data);
+        jQuery.ajax({
+            url: 'uploadFileAll',
+            type: 'POST',
+            data: data,
+            dataType: 'JSON',
+            cache: false,
+            processData: false,
+            contentType: false,
+            success:function (result) {
+                console.log(result);
+                var Result = '';
+                Result += '<img src="' + result.data  + '" width="100">';
+                $('#result').html(Result);
+            }
+        });
+        return false;
+    }
+
+    function Asubmit() {
+        /*var data = {
+            "imgPath":imgpath
+        }*/
+
+        jQuery.ajax({
+            url:'uploadFile',
+            data:new FormData($('#uploadForm')[0]),
+            type:'POST',
+            processData:false,
+            contentType:false,
+            cache: false,
+            success:function (result) {
+                console.log(result);
+            }
+        })
+    }
+
 </script>
 </html>

@@ -2,11 +2,10 @@ package com.fuhuadata.web.util;
 
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
-import org.apache.commons.collections.map.MultiValueMap;
+import com.fuhuadata.vo.ImagePathVO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -18,7 +17,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.BindException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -28,8 +26,8 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value = "/upload/*")
-public class FileUploadController {
-    private static final Log log = LogFactory.getLog(FileUploadController.class);
+public class FileController {
+    private static final Log log = LogFactory.getLog(FileController.class);
 
     @RequestMapping(value = "into",method = RequestMethod.GET)
     public ModelAndView upload(){
@@ -37,39 +35,75 @@ public class FileUploadController {
     }
     /**
      *
+     * @param file
+     * @return
+     */
+    @RequestMapping(value = "/uploadFile",method = RequestMethod.POST)
+    @ResponseBody
+    public ResultPojo uploadFile(@RequestParam(value="file") MultipartFile file, HttpServletRequest request) {
+        Result result = new Result();
+        String path=null;
+        File tempFile=null;
+        try {
+                if (!file.isEmpty()) {
+                    try {
+                        path = request.getSession().getServletContext().getRealPath("images/");//保存在服务器
+                        System.out.println(path);
+
+                        String fileName = file.getOriginalFilename();
+                        tempFile = new File(path, fileName);
+                        System.out.println(tempFile);
+                        if (!tempFile.getParentFile().exists()) {
+                            tempFile.getParentFile().mkdir();
+                        }
+                        if (!tempFile.exists()) {
+                            tempFile.createNewFile();
+                        }
+                        file.transferTo(tempFile);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+        }catch(Exception e){
+            log.error("文件上传错误",e);
+        }
+        ResultPojo  resultPojo= result.getResultPojo();
+        resultPojo.setData(tempFile);
+        return resultPojo;
+    }
+
+    /**
+     *
      * @param files
      * @return
      */
-    @RequestMapping("/uploadFile")
+    @RequestMapping(value = "/uploadFile2",method = RequestMethod.POST)
     @ResponseBody
-    public ResultPojo uploadFile(@RequestParam("file") MultipartFile[] files, HttpServletRequest request) {
+    public ResultPojo uploadFile2(@RequestParam(value="file") MultipartFile[] files, HttpServletRequest request) {
         Result result = new Result();
         String path=null;
         File tempFile=null;
         System.out.println(files.length);
         try {
-            for (MultipartFile file : files) {
+            for(MultipartFile file:files) {
+                if (!file.isEmpty()) {
+                    try {
+                        path = request.getSession().getServletContext().getRealPath("images/");//保存在服务器
+                        System.out.println(path);
 
-                if (file.isEmpty()) {
-                    continue; //next pls
-                }
-                try {
-                    path = request.getSession().getServletContext().getRealPath("images/");//保存在服务器
-                    System.out.println(path);
-
-                    String fileName = file.getOriginalFilename();
-                    tempFile = new File(path,fileName);
-                    System.out.println(tempFile);
-                    if (!tempFile.getParentFile().exists()) {
-                        tempFile.getParentFile().mkdir();
+                        String fileName = file.getOriginalFilename();
+                        tempFile = new File(path, fileName);
+                        System.out.println(tempFile);
+                        if (!tempFile.getParentFile().exists()) {
+                            tempFile.getParentFile().mkdir();
+                        }
+                        if (!tempFile.exists()) {
+                            tempFile.createNewFile();
+                        }
+                        file.transferTo(tempFile);
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                    if (!tempFile.exists()) {
-                        tempFile.createNewFile();
-                    }
-                    file.transferTo(tempFile);
-
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
         }catch(Exception e){
@@ -81,16 +115,19 @@ public class FileUploadController {
     }
 
     // 多文件上传
-    @RequestMapping(value = "/uploadFile2", method = RequestMethod.POST)
-    public ModelAndView fileUpload(HttpServletRequest request,
+    @RequestMapping(value = "/uploadFileAll", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultPojo fileUpload(HttpServletRequest request,
                                    HttpServletResponse response, BindException errors)
             throws Exception {
-
+        Result result = new Result();
+        List<File> formFile = new ArrayList<File>();
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-
         Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+        System.out.println(fileMap.get("file"));
         org.springframework.util.MultiValueMap<String,MultipartFile> fileMap1=multipartRequest.getMultiFileMap();
-            List<MultipartFile> files = fileMap1.get("files");
+            List<MultipartFile> files = fileMap1.get("file");
+           // System.out.println(files.size());
             if (files != null) {
                 for (MultipartFile file : files) {
                     String path = request.getSession().getServletContext().getRealPath("images/");//保存在服务器
@@ -104,10 +141,11 @@ public class FileUploadController {
                         tempFile.createNewFile();
                         file.transferTo(tempFile);
                     }
-
+                    formFile.add(tempFile);
                 }
             }
-        return new ModelAndView("/knowledgeBase/uploadFile");
+            result.addDefaultModel(formFile);
+          return result.getResultPojo();
     }
 
     @RequestMapping(value = "/deleteFile",method = RequestMethod.POST)
