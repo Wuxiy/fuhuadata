@@ -134,7 +134,6 @@ public class CustomerBaseInfoAction {
         Result<CustomerBaseInfoVO> result = new Result<CustomerBaseInfoVO>();
         try{
           result=customerBaseInfoService.getCustomerInfoById(customerId);
-          //System.out.println(result.getResultPojo().getData());
         }catch (Exception e){
             result.setSuccess(false);
             log.error("统计客户购买产品列表明细失败",e);

@@ -7,6 +7,7 @@ import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 客户基本信息view
@@ -129,8 +130,8 @@ public class CustomerBaseInfoVO {
 
     private Date modifyTimeEn;//编辑时间
 
-    ///*产品产能*/
-    //private List<CustomerMakeProduct> customerMakeProduct;
+    /*产品产能*/
+    private List<CustomerMakeProduct> customerMakeProduct;
 
 
     public String getSellNetwork() {
@@ -482,5 +483,13 @@ public class CustomerBaseInfoVO {
 
     public void setCompanyType(Integer companyType) {
         this.companyType = companyType;
+    }
+
+    public List<CustomerMakeProduct> getCustomerMakeProduct() {
+        return customerMakeProduct;
+    }
+
+    public void setCustomerMakeProduct(List<CustomerMakeProduct> customerMakeProduct) {
+        this.customerMakeProduct = customerMakeProduct;
     }
 }
