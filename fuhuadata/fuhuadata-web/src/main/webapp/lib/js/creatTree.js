@@ -50,7 +50,7 @@
         //取得html容器
         var $container = $('#'+containerId);
         //给树形菜单添加点击事件
-        this.on('click','li[id]>a',function(e){
+        this.on('click.getData','li[id]>a',function(e){
             //阻止a的默认事件
             e.preventDefault();
             var id = $(e.target).parent('li').attr('id');
@@ -78,7 +78,7 @@
                     var arr2 = arr.split(',');
                     console.log(item);
 
-                    $(tr).append('<td>'+item.packingId+'</td><td><a href="/packingArchives/getDetails?id='+item.packingId+'&bid='+item.bigCategoryId+'&sid='+item.smallCategoryId+'" class="packName">'+item.packName+'</a></td><td>'+item.spec+'</td><td>'+item.quality+'</td><td>'+item.qualityIndex+'</td><td>'+item.qualityTargetValue+'</td><td>'+item.unitPrice+'</td><td>'+item.priceEndDate+'</td><td>'+arr2+'</td><td>'+item.bRemarks+'</td><td>'+item.status+'</td>').appendTo(parent);
+                    $(tr).append('<td>'+item.packingId+'</td><td><a href="${request.contextPath}/packingArchives/getDetails?id='+item.packingId+'&bid='+item.bigCategoryId+'&sid='+item.smallCategoryId+'" class="packName">'+item.packName+'</a></td><td>'+item.spec+'</td><td>'+item.quality+'</td><td>'+item.qualityIndex+'</td><td>'+item.qualityTargetValue+'</td><td>'+item.unitPrice+'</td><td>'+item.priceEndDate+'</td><td>'+arr2+'</td><td>'+item.bRemarks+'</td><td>'+item.status+'</td>').appendTo(parent);
                 })
              },
             //渲染包材详情modal列表
@@ -121,9 +121,15 @@
                 });
                 var iTbody = $('[name="physicalProperities"]');
                 iTbody.html('');
-                $.each(getData.index,function(key,item){
+                jQuery.each(getData.index,function(key,item){
                     var tr = $("<tr></tr>");
-                    tr.append('<td><input class="form-control" type="text" disabled value="'+item.index+'"></td><td><input class="form-control" type="text" disabled value="'+item.value+'"></td><td><input class="form-control" type="text" disabled value="'+item.remarks+'"/></td>').appendTo(iTbody);
+                    tr.append('<td><input class="form-control" type="text" disabled value="'+item.index+'"></td><td><input class="form-control" type="text" disabled value="'+item.value+'"></td><td style="position: relative"><input class="form-control" type="text" disabled value="'+item.remarks+'"/><button type="button" class="close hidden" data-form-btn="del" data-form-target="tr" style="position: absolute;top:6px;right:-15px;">×</button></td>').appendTo(iTbody);
+                });
+                var pTbody = $('[name="processingComponents"]');
+                pTbody.html('');
+                jQuery.each(getData.processingComponents,function(key,item){
+                    var tr = $("<tr></tr>");
+                    tr.append('<td><input class="form-control" type="text" disabled value="'+item.componentName+'"></td><td><input class="form-control" type="text" disabled value="'+item.consumption+'"></td><td style="position: relative"><input class="form-control" type="text" disabled value="'+item.remarks+'"/><button type="button" class="close hidden" data-form-btn="del" data-form-target="tr" style="position: absolute;top:6px;right:-15px;">×</button></td>').appendTo(pTbody);
                 });
              }
         }

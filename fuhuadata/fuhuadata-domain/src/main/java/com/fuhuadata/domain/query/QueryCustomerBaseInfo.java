@@ -100,7 +100,16 @@ public class QueryCustomerBaseInfo  {
 	
     /**修改时间**/
 	private Date modifyTime;
-	
+	//机会描述
+	private String opportunityDescrible;
+
+	public String getOpportunityDescrible() {
+		return opportunityDescrible;
+	}
+
+	public void setOpportunityDescrible(String opportunityDescrible) {
+		this.opportunityDescrible = opportunityDescrible;
+	}
 
 	public String getCustomerId() {
 		return customerId;

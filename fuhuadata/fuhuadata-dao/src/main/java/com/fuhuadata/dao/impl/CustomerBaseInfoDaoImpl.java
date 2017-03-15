@@ -4,7 +4,9 @@ import java.util.List;
 import com.fuhuadata.domain.CountCustomersOrderProduct;
 import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.dao.CustomerBaseInfoDao;
+import com.fuhuadata.domain.CustomerMakeProduct;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
+import com.fuhuadata.vo.CustomerBaseInfoVO;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
@@ -25,6 +27,8 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
     public static final String COUNT = "CUSTOMERBASEINFO.COUNT";
     public static final String COUNT_ORDER = "CUSTOMERBASEINFO.countOrderByCustomer";
     public static final String COUNT_ORDER_PRODUCT = "CUSTOMERBASEINFO.countOrderProduct";
+    private static final String GET_CUSTOMER_BASEINFO="CUSTOMERBASEINFO.GET-CUSTOMER-BASEINFO";
+    private static final String GET_RPODUCT_BY_ID="CUSTOMERBASEINFO.GET-PRODUCT-BY-ID";
 
     public CustomerBaseInfo addCustomerBaseInfo(CustomerBaseInfo customerBaseInfo) {
 		customerBaseInfo.setCustomerId((String) this.insert(ADD, customerBaseInfo));
@@ -51,7 +55,25 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
     public CustomerBaseInfo getCustomerBaseInfoById(String customer_id) {
     	return (CustomerBaseInfo) this.queryForObject(GET_BY_ID, customer_id);
     }
-    
+
+    @Override
+    public CustomerBaseInfoVO getCustomerInfoById(String id) {
+        try {
+            CustomerBaseInfoVO customerBaseInfoVO = (CustomerBaseInfoVO) this.queryForObject(GET_CUSTOMER_BASEINFO,id);
+            System.out.println(customerBaseInfoVO);
+            System.out.println("nihao wuxi");
+            return customerBaseInfoVO;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<CustomerMakeProduct> getCustomerMakeProductById(String id) {
+        return this.queryForList(GET_RPODUCT_BY_ID,id);
+    }
+
     public List<CustomerBaseInfo> getCustomerBaseInfoByPage(QueryCustomerBaseInfo queryCustomerBaseInfo) {
     	return this.queryForList(GET_PAGE, queryCustomerBaseInfo);
     }

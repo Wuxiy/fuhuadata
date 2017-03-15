@@ -6,7 +6,7 @@ package com.fuhuadata.vo;
  */
 public class CustomerProductPackagingArchives {
     private String customerId;
-//    private String customer;//客户名称
+    private String customerName;//客户名称
     private String customerProductId;//客户商品id
     private String customerProductName;//客户商品名
     private String categorySerialNumber;//品类序列号
@@ -114,5 +114,13 @@ public class CustomerProductPackagingArchives {
 
     public void setCustomerProductName(String customerProductName) {
         this.customerProductName = customerProductName;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 }

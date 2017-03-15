@@ -3,8 +3,10 @@ import java.util.List;
 
 import com.fuhuadata.domain.CountCustomersOrderProduct;
 import com.fuhuadata.domain.CustomerBaseInfo;
+import com.fuhuadata.domain.CustomerMakeProduct;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.domain.query.Result;
+import com.fuhuadata.vo.CustomerBaseInfoVO;
 
 /**
  * @author wangbo
@@ -55,6 +57,9 @@ public interface CustomerBaseInfoManager {
      * @return
      */
     public CustomerBaseInfo getCustomerBaseInfoById(String customer_id);
+
+	public CustomerBaseInfoVO getCustomerInfoById(String id);
+
 
     /**
      * 查询列表，包含分页查询，

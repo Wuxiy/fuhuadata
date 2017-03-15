@@ -23,33 +23,35 @@
         </div>
         <!--列表部分-->
         <div class="col-xs-10">
-            <div class="panel panel-default panel-edit">
+            <div class="panel panel-default">
                 <div class="panel-heading">
-                    <button data-form-btn="edit" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
+                    <button id="disTree" data-form-btn="edit" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
                         编辑
                     </button>
                     <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden">
                         <button data-form-btn="cancel" class="btn" lang="zh">取消</button>
-                        <button data-form-btn="save" class="btn btn-primary" lang="zh">保存</button>
+                        <button id="productInfo" data-form-btn="save" class="btn btn-primary" lang="zh">保存</button>
                     </div>
                     <h3 class="panel-title" lang="zh">
                         标准产品档案
                     </h3>
                 </div>
-                <div class="panel-body clearfix">
+                <div id="container" class="panel-body panel-edit clearfix">
                     <from class="form-horizontal">
                         <div class="form-group">
                             <label class="col-xs-1 control-label">品类</label>
                             <div class="col-xs-2">
-                                <input name="categoryName" class="form-control" type="text"/>
+                                <input name="categoryName" class="form-control noEdit" type="text"/>
                             </div>
                             <label class="col-xs-1 control-label">品名</label>
                             <div class="col-xs-2">
-                                <input name="name" class="form-control" type="text"/>
+                                <input name="name" class="form-control noEdit" type="text"/>
                             </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-xs-1 control-label">主计量单位</label>
                             <div class="col-xs-2">
-                                <input name="measurementUnit" class="form-control" type="text"/>
+                                <input name="measurementUnit" class="form-control noEdit" type="text"/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -82,8 +84,9 @@
                                 <label class="radio-inline"><input name="saltType" type="radio" value="2">铵盐</label>
                                 <label class="radio-inline"><input name="saltType" type="radio" value="3">钾盐</label>
                                 <label class="radio-inline"><input name="saltType" type="radio" value="4">二钾铵盐</label>
-                                <label class="radio-inline"><input name="saltType" type="radio" value="5">其他<input class="form-control hidden" name="otherSaltName" type="text"></label>
+                                <label class="radio-inline"><input class="else" name="saltType" type="radio" value="5">其他</label>
                             </div>
+                            <div class="pull-left"><input class="form-control elseInput hidden" name="otherSaltName" type="text"></div>
                         </div>
                         <div class="form-group">
                             <label class="col-xs-1 control-label">执行标准</label>
@@ -109,6 +112,30 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-xs-1 control-label">加工成份</label>
+                            <div class="col-xs-6">
+                                <table class="table table-condensed table-bordered table-striped text-center">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center col-xs-4" lang="zh">原料</th>
+                                        <th class="text-center col-xs-4" lang="zh">单耗（kg/KL）</th>
+                                        <th class="text-center col-xs-4" lang="zh">备注</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody name="processingComponents">
+
+                                    </tbody>
+                                    <tfoot class="editView hidden">
+                                    <tr>
+                                        <td colspan="7">
+                                            <button id="addProItem" data-form-btn="add" class="btn btn-xs btn-link hidden" type="button" lang="zh">继续添加</button>
+                                        </td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-xs-1 control-label">理化指标</label>
                             <div class="col-xs-6">
                                 <table class="table table-condensed table-bordered table-striped text-center">
@@ -122,6 +149,13 @@
                                     <tbody name="physicalProperities">
 
                                     </tbody>
+                                    <tfoot class="editView hidden">
+                                    <tr>
+                                        <td colspan="7">
+                                            <button id="addIndexItem" data-form-btn="add" class="btn btn-xs btn-link hidden" type="button" lang="zh">继续添加</button>
+                                        </td>
+                                    </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -132,64 +166,163 @@
     </div>
 </div>
 
-<script type="text/javascript" language="javascript" src="/lib/js/creatTree.js"></script>
-<script type="text/javascript" language="javascript" src="/lib/js/scaffolding.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/scaffolding.js"></script>
 <script type="text/javascript">
-    $('#tree').creatTree('/productCategory/CategoryTree');
-    $('#tree').filtrateData('/productInfo/getProductInfoById','container','productArchivesList');
+<<<<<<< HEAD
+=======
+    $('#tree').creatTree('${request.contextPath}/productCategory/CategoryTree');
+    $('#tree').filtrateData('${request.contextPath}/productInfo/getProductInfoById','container','productArchivesList');
 
+>>>>>>> c5fffe402edc7ae2c9d61d75adde82636f653de3
 (function ($) {
-//    $('button:contains("保存")').on('click.putIn',function(e){
-//        e.stopPropagation();
-//        var content = $(this).parents('.panel').find('.panel-body');
-//        var upData = {
-//            'productFeature': content.find('[name="productFeature"]').val(),
-//            'modifyTime': getTime(),
-//            'productId': $('a:contains('+content.find('[name="name"]').val()+')').parent('li').attr('id'),
-//            'saltType': content.find('[name="saltType"]').val(),
-//            'executeNumer' : content.find('[name="executeNumer"]').val(),
-//            'physicalProperities' : getPPList(),
-//            'executeStandard' : content.find('[name="executeStandard"]').val()
-//        };
-//        console.log(upData);
-//        function getPPList() {
-//            var p = content.find('[name="physicalProperities"]').find('tr');
-//            var arr = [];
-//            p.each(function(){
-//                var obj = {};
-//                $(this).find('td').each(function(n,td){
-//                     if(n==0){
-//                         obj.index = $(td).children('input').val();
-//                     }else if (n==1){
-//                         obj.value = $(td).children('input').val();
-//                     }else {
-//                         obj.remarks = $(td).children('input').val();
-//                     }
-//                });
-//                arr.push(obj);
-//            })
-//           return JSON.stringify(arr);
-//        };
-//        function getTime(){
-//            var time = new Date();
-//            var year = time.getFullYear();
-//            var month = parseInt(time.getMonth())+1;
-//            var day = time.getDate();
-//            var hours = parseInt(time.getHours());
-//            var minutes = parseInt(time.getMinutes());
-//            var seconds = parseInt(time.getSeconds());
-//            var newTime;
-//            return newTime = year+'-'+month+'-'+day+' '+hours+':'+minutes+':'+seconds;
-//        };
-//        jQuery.ajax({
-//            'url':'/productInfo/doModify',
-//            'type':'post',
-//            'data':JSON.stringify(upData),
-//            'contentType':"application/json",
-//            'success':function () {
-//                console.log('success');
-//            }
-//        });
-//    })
-})(jQuery);
+    $(function () {
+        $('#tree').creatTree(${request.contextPath}'/productCategory/CategoryTree');
+        $('#tree').filtrateData(${request.contextPath}'/productInfo/getProductInfoById','container','productArchivesList');
+        //初始数据
+        productInfoForm({id:1011001});
+        //数据提交
+        $(document).on('click.upData','#productInfo',upProductInfo);
+        $(document).on('click.disbled','#disTree',function () {
+
+        });
+
+        //添加row
+        $(document).on('click.add','#addIndexItem',function () {
+            var tr = $('<tr><td><input class="form-control" type="text" value=""></td><td><input class="form-control" type="text" value=""></td><td style="position: relative"><input class="form-control" type="text" value=""/><button type="button" class="close" data-form-btn="del" data-form-target="tr" style="position: absolute;top:6px;right:-15px;">×</button></td></tr>');
+            tr.appendTo('[name="physicalProperities"]');
+        });
+        $(document).on('click.add','#addProItem',function () {
+            var tr = $('<tr><td><input class="form-control" type="text" value=""></td><td><input class="form-control" type="text" value=""></td><td style="position: relative"><input class="form-control" type="text" value=""/><button type="button" class="close" data-form-btn="del" data-form-target="tr" style="position: absolute;top:6px;right:-15px;">×</button></td></tr>');
+            tr.appendTo('[name="processingComponents"]');
+        });
+    })
+
+    /**
+     *productInfo
+     */
+    function productInfoForm(data) {
+        jQuery.ajax({
+            url:'/productInfo/getProductInfoById',
+            type:'POST',
+            data:data
+        }).done(function(data){
+            var getData = data.data;
+            jQuery.each(getData,function(n,total){
+                jQuery.each(total,function(key,item){
+                    var formControl=$('[name="'+ key +'"]');
+                    if(formControl.attr('type')=='radio'||formControl.attr('type')=='checkbox'){
+                        var arr=[item];
+                            formControl.val(arr);
+                    }else{
+                            formControl.val(item);
+                    }
+                })
+            });
+            jQuery.each(getData.productInfo,function(key,item){
+                console.log(item);
+                var formControl=$('[name="'+ key +'"]');
+                if(formControl.attr('type')=='radio'||formControl.attr('type')=='checkbox'){
+                    var arr=[item];
+                    formControl.val(arr);
+                }else {
+                    formControl.val(item);
+                }
+            });
+            var wTbody = $('[name="wares"]');
+            wTbody.html('');
+            jQuery.each(getData.wares,function(key,item){
+                var tr = $("<tr></tr>");
+                tr.append('<td>'+item.specification+'</td><td>'+item.model+'</td>').appendTo(wTbody);
+            });
+            var iTbody = $('[name="physicalProperities"]');
+            iTbody.html('');
+            jQuery.each(getData.index,function(key,item){
+                var tr = $("<tr></tr>");
+                tr.append('<td><input class="form-control" type="text" disabled value="'+item.index+'"></td><td><input class="form-control" type="text" disabled value="'+item.value+'"></td><td style="position: relative"><input class="form-control" type="text" disabled value="'+item.remarks+'"/><button type="button" class="close hidden" data-form-btn="del" data-form-target="tr" style="position: absolute;top:6px;right:-15px;">×</button></td>').appendTo(iTbody);
+            });
+            var pTbody = $('[name="processingComponents"]');
+            pTbody.html('');
+            jQuery.each(getData.processingComponents,function(key,item){
+                var tr = $("<tr></tr>");
+                tr.append('<td><input class="form-control" type="text" disabled value="'+item.componentName+'"></td><td><input class="form-control" type="text" disabled value="'+item.consumption+'"></td><td style="position: relative"><input class="form-control" type="text" disabled value="'+item.remarks+'"/><button type="button" class="close hidden" data-form-btn="del" data-form-target="tr" style="position: absolute;top:6px;right:-15px;">×</button></td>').appendTo(pTbody);
+            });
+        });
+    }
+
+    /**
+     * productInfo up data
+     */
+   function upProductInfo(e){
+        e.stopPropagation();
+        var content = $('#container');
+        var upData = {
+            'productFeature': content.find('[name="productFeature"]').val(),
+            'modifyTime': getTime(),
+            'productId': $('a:contains('+content.find('[name="name"]').val()+')').parent('li').attr('id'),
+            'saltType': content.find('[name="saltType"]').val(),
+            'executeNumer' : content.find('[name="executeNumer"]').val(),
+            'physicalProperities' : getPPTable(),
+            'processingComponents' : getPCTable(),
+            'executeStandard' : content.find('[name="executeStandard"]').val()
+        };
+        console.log(upData);
+        function getPPTable() {
+            var p = content.find('[name="physicalProperities"]').find('tr');
+            var arr = [];
+            p.each(function(){
+                var obj = {};
+                $(this).find('td').each(function(n,td){
+                     if(n==0){
+                         obj.index = $(td).children('input').val();
+                     }else if (n==1){
+                         obj.value = $(td).children('input').val();
+                     }else {
+                         obj.remarks = $(td).children('input').val();
+                     }
+                });
+                arr.push(obj);
+            })
+           return JSON.stringify(arr);
+        };
+        function getPCTable() {
+            var p = content.find('[name="processingComponents"]').find('tr');
+            var arr = [];
+            p.each(function(){
+                var obj = {};
+                $(this).find('td').each(function(n,td){
+                    if(n==0){
+                        obj.componentName = $(td).children('input').val();
+                    }else if (n==1){
+                        obj.consumption = $(td).children('input').val();
+                    }else {
+                        obj.remarks = $(td).children('input').val();
+                    }
+                });
+                arr.push(obj);
+            })
+            return JSON.stringify(arr);
+        };
+        function getTime(){
+            var time = new Date();
+            var year = time.getFullYear();
+            var month = parseInt(time.getMonth())+1;
+            var day = time.getDate();
+            var hours = parseInt(time.getHours());
+            var minutes = parseInt(time.getMinutes());
+            var seconds = parseInt(time.getSeconds());
+            var newTime;
+            return newTime = year+'-'+month+'-'+day+' '+hours+':'+minutes+':'+seconds;
+        };
+        jQuery.ajax({
+            'url':${request.contextPath}'/productInfo/doModify',
+            'type':'post',
+            'data':JSON.stringify(upData),
+            'contentType':"application/json"
+        }).done(function(){
+            alert('保存成功');
+        });
+    }
+
+    })(jQuery);
 </script>

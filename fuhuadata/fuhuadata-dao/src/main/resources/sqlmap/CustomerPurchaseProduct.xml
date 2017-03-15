@@ -12,7 +12,7 @@
 								<result property="year" column="year" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="productId" column="product_id" jdbcType="INT" javaType="java.lang.Integer" />
 								<result property="productName" column="product_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="annualDemands" column="annual_demands" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="annualDemands" column="annual_demands" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
 								<result property="averagePrice" column="average_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
 								<result property="supplier1" column="supplier1" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="purchaseAmount1" column="purchase_amount1" jdbcType="VARCHAR" javaType="java.lang.String" />

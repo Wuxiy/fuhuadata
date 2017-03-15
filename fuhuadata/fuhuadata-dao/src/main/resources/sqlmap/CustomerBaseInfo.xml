@@ -6,39 +6,65 @@
    	<typeAlias alias="CustomerBaseInfo" type="com.fuhuadata.domain.CustomerBaseInfo"/>
    	<typeAlias alias="QueryCustomerBaseInfo" type="com.fuhuadata.domain.query.QueryCustomerBaseInfo"/>
 	<typeAlias alias="CountCustomersOrderProduct" type="com.fuhuadata.domain.CountCustomersOrderProduct"/>
+<<<<<<< HEAD
+	<typeAlias alias="CustomerBaseInfoVO" type="com.fuhuadata.vo.CustomerBaseInfoVO"/>
+	<typeAlias alias="CustomerMakeProduct" type="com.fuhuadata.domain.CustomerMakeProduct"/>
+
 	<resultMap id="CUSTOMERBASEINFO-MAP" class="CustomerBaseInfo">
+=======
+	<resultMap id="customerBaseInfoMap" class="CustomerBaseInfo">
+>>>>>>> 2169c53f603aac8feaff7b610f23c28074486a8a
 					<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="fullName" column="full_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="shortName" column="short_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="customerType" column="customer_type" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="areaId" column="area_id" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="area" column="area" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="countryId" column="country_id" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="country" column="country" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="registeredFunds" column="registered_funds" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="registeredAddress" column="registered_address" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="managementScope" column="management_scope" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="zhongxinbaoNumber" column="zhongxinbao_number" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="zhongxinbaoLevel" column="zhongxinbao_level" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="remark" column="remark" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="enterprisePhone" column="enterprise_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="enterpriseEmaill" column="enterprise_emaill" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="enterpriseProfile" column="enterprise_profile" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="developmentCourse" column="development_course" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="salesNetwork" column="sales_network" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="customField" column="custom_field" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="customerCompletion" column="customer_completion" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="createUserId" column="create_user_id" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="createUserName" column="create_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="lastmodifyUserId" column="lastmodify_user_id" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="lastmodifyUserName" column="lastmodify_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="createTime" column="create_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
-								<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
-								<result property="totalMoney" column="totalMoney" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-								<result property="minPrice" column="minPrice" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-								<result property="maintenanceFee" column="maintenanceFee" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-								<result property="payMoney" column="payMoney" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+					<result property="fullName" column="full_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="shortName" column="short_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="enterpriseNature" column="enterprise_nature" jdbcType="INT" javaType="java.lang.Integer" />
+					<result property="customerType" column="customer_type" jdbcType="INT" javaType="java.lang.Integer" />
+					<result property="areaId" column="area_id" jdbcType="INT" javaType="java.lang.Integer" />
+					<result property="area" column="area" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="countryId" column="country_id" jdbcType="INT" javaType="java.lang.Integer" />
+					<result property="country" column="country" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="registeredFunds" column="registered_funds" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="registeredAddress" column="registered_address" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="managementScope" column="management_scope" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="zhongxinbaoNumber" column="zhongxinbao_number" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="zhongxinbaoLevel" column="zhongxinbao_level" jdbcType="INT" javaType="java.lang.Integer" />
+					<result property="remark" column="remark" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="enterprisePhone" column="enterprise_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="enterpriseEmaill" column="enterprise_emaill" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="enterpriseProfile" column="enterprise_profile" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="developmentCourse" column="development_course" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="salesNetwork" column="sales_network" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="customField" column="custom_field" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="customerCompletion" column="customer_completion" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="createUserId" column="create_user_id" jdbcType="INT" javaType="java.lang.Integer" />
+					<result property="customerLevel" column="customer_level" jdbcType="INT" javaType="java.lang.Integer" />
+					<result property="startCooperationTime" column="start_cooperation_time" jdbcType="DATE" javaType="java.lang.String" />
+					<result property="cooperationDuration" column="cooperation_duration" jdbcType="INT" javaType="java.lang.String" />
+					<result property="activePeriod" column="active_period" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="customerType" column="customer_type" jdbcType="INT" javaType="java.lang.Integer" />
+					<result property="hasChiCompany" column="has_chi_company" jdbcType="INT" javaType="java.lang.Integer" />
+					<result property="hasChiPurchase" column="has_chi_purchase" jdbcType="INT" javaType="java.lang.Integer" />
+					<result property="customerStatus" column="customer_status" jdbcType="INT" javaType="java.lang.Integer" />
+					<result property="qualificationsFileUrl" column="qualifications_file_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="factoryLocation" column="factory_location" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="majorCompetitors" column="major_competitors" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="createUserName" column="create_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="lastmodifyUserId" column="lastmodify_user_id" jdbcType="INT" javaType="java.lang.Integer" />
+					<result property="lastmodifyUserName" column="lastmodify_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="createTime" column="create_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+					<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+					<result property="totalMoney" column="totalMoney" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+					<result property="minPrice" column="minPrice" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+					<result property="maintenanceFee" column="maintenanceFee" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+					<result property="payMoney" column="payMoney" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+					<result property="netProfit" column="net_profit" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+					<result property="lossReason" column="loss_reason" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="opportunityDescrible" column="opportunity_describle" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="linkManName" column="link_man_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="linkManEmail" column="link_man_email" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="otherEnterpriseNature" column="other_enterprise_nature" jdbcType="VARCHAR" javaType="java.lang.String" />
 	</resultMap>
+
 
 	<sql id="PAGE-COMMON">
 		<dynamic prepend=" WHERE ">
@@ -103,10 +129,13 @@
 				<isNotEmpty prepend=" AND " property="modifyTime">
 			modify_time = #modifyTime#
 		</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="opportunityDescrible">
+				opportunity_describle like  '%opportunityDescrible%'
+			</isNotEmpty>
 				</dynamic>
 	</sql>
 	
-	<sql id="QUERY-COMMON">	
+	<sql id="QUERY-COMMON">
 		<dynamic prepend=" WHERE ">
 				<isNotEmpty prepend=" AND " property="customerId">
 			customer_id = #customerId#
@@ -271,6 +300,66 @@
 		]]>
 	</select>
 
+	<select id="GET-CUSTOMER-BASEINFO" resultClass="CustomerBaseInfoVO" parameterClass="java.lang.String">
+		<![CDATA[
+		SELECT
+			base.customer_id customerId,
+			base.full_name fullName,
+			base.enterprise_nature enterpriseNature,
+			base.short_name shortName,
+			base.company_type companyType,
+			base.customer_area_id areaId,
+			base.customer_area area,
+			base.country_id countryId,
+			base.country country,
+			base.registered_funds registeredFunds,
+			base.registered_address registeredAddress,
+			base.management_scope managementScope,
+			base.zhongxinbao_number zhongxinbaoNumber,
+			base.zhongxinbao_level zhongxinbaoLevel,
+			base.remark remark,
+			base.opportunity_source opportunitySource,
+			base.other_opportunity otherOpportunity,
+			base.opportunity_describle opportunityDescrible,
+			base.enterprise_phone enterprisePhone,
+			base.enterprise_emaill enterpriseEmail,
+			base.customer_completion customerCompletion,
+			base.create_user_id createUserId,
+			base.create_user_name createUserName,
+			base.customer_level customerLevel,
+			base.customer_type customerType,
+			base.has_chi_company hasChiCompany,
+			base.has_chi_purchase hasChiPurchase,
+			base.customer_status customerStatus,
+			base.qualifications_file_url qualificationsFileUrl,
+			base.factory_location factoryLocation,
+			base.major_competitors majorCompetitors,
+			base.create_time createTime,
+			en.ency_id encyId,
+			en.company_info companyInfo,
+			en.is_full isFull,
+			en.develop_his developHis,
+			en.sell_network sellNetwork,
+			en.custom_field customField,
+			en.lastmodify_user_id lastmodifyUserIdEn,
+			en.lastmodify_user_name lastmodifyUserNameEn,
+			en.modify_time modifyTimeEn
+			FROM
+				customer_base_info base
+			LEFT JOIN k_customer_encyclopedia en
+			ON base.customer_id = en.customer_id
+
+			WHERE
+				base.customer_id ='fh123456'
+	]]>
+	</select>
+	
+	<select id="GET-PRODUCT-BY-ID" resultClass="CustomerMakeProduct" parameterClass="java.lang.String">
+		<![CDATA[
+		SELECT id,product_name AS productName,production FROM customer_make_products WHERE customer_id = 'fh123456'
+	]]>
+	</select>
+
 	<select id="GET-PAGE" resultClass="CustomerBaseInfo" parameterClass="QueryCustomerBaseInfo">
 
 			SELECT
@@ -286,8 +375,26 @@
 				base.customer_status customerStatus,
 				base.lastmodify_user_name lastmodifyUserName,
 				base.remark,
-				base.loss_reason lossReason
+				base.loss_reason lossReason,
+				base.opportunity_describle opportunityDescrible,
+				base.create_user_name createUserName,
+				base.create_time createTime,
+				base.other_enterprise_nature otherEnterpriseNature,
+				base.enterprise_nature enterpriseNature
+				<isEqual property="customerType" compareValue="2" prepend=",">
+					 lm.name linkManName,
+					 lm.lemail linkManEmail
+				</isEqual>
+				<isNotEqual property="customerType" compareValue="2" prepend=",">
+					'' linkManName,
+					'' linkManEmail
+				</isNotEqual>
+
 			FROM customer_base_info base
+			<isEqual property="customerType" compareValue="2">
+				<!--如果查询潜在客户，则关联查询联系人信息-->
+				left join customer_linkman lm on base.customer_id = lm.customer_id and is_default = 1
+			</isEqual>
 			<isNotEqual property="areaClassId" compareValue="0" prepend=",">
 				p_area_code pac,
 				p_areaclass pa
@@ -344,6 +451,7 @@
 			op.`customer_product_name` productName,
 			p.`category_name` categoryName,
 			sum(op.`min_price`*op.`main_product_amount`) totalMinPrice,
+
 			sum(op.`main_product_amount`)  totalSaleNum,
 			SUM(op.contract_price*op.`main_product_amount`) totalSaleMoney
 			p.measurement
