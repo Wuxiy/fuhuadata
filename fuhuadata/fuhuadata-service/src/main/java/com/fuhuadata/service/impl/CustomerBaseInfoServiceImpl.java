@@ -106,6 +106,7 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 			result = customerBaseInfoManager.getCustomerBaseInfoByPage(queryCustomerBaseInfo);
 		} catch(Exception e) {
 			result.setSuccess(false);
+			result.setMessage(e.getMessage());
 		}
 		return result;
     }

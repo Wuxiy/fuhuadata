@@ -103,7 +103,7 @@
 </div>
 
 
-<script type="text/javascript" language="javascript" src="/lib/js/creatTree.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript">
 
     $('#tree').creatTree('/productCategory/CategoryTree');
@@ -145,7 +145,7 @@
                 }
             ],
             "language": {
-                "url": '/lib/dataTables/lang/dataTables.lang.zh',
+                "url": '${request.contextPath}/lib/dataTables/lang/dataTables.lang.zh',
                 "searchPlaceholder": '关键字'
             }
         } );

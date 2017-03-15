@@ -247,12 +247,12 @@
 
 				//点击a为modal添加数据
                 var modalDetails = '[data-target="#details"]';
-                console.log($(modalDetails));
+//                console.log($(modalDetails));
                 $(modalDetails).on('click.modalData',function(e){
                     var el = $(e.target);
                     var modalId = el.data('target');
                     var customerId = el.parents('tr').children('td').first().text();
-                    console.log(customerId);
+//                    console.log(customerId);
                     jQuery.ajax({
                         url:'/customerBaseInfo/showCustomerOrderProductDetail',
                         dataType:'json',

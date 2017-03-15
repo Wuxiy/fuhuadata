@@ -1,3 +1,6 @@
+<script type="text/javascript">
+    var basePath ="${request.contextPath}";
+</script>
 <!--头部开始-->
 <nav class="navbar navbar-cards navbar-fixed-top">
     <div class="navbar-header">
