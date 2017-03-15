@@ -9,9 +9,9 @@
 </form>
 
 <form name="form1" id="form1" enctype="multipart/form-data">
-    <p>name:<input type="text" name="name" ></p>
-    <p>gender:<input type="radio" name="gender" value="1">male <input type="radio" name="gender" value="2">female</p>
-    <p>photo:<input type="file" name="photo" id="photo"></p>
+    <p>name:<input type="text" name="file" ></p>
+    <p>gender:<input type="radio" name="file" value="1">male <input type="radio" name="file" value="2">female</p>
+    <p>photo:<input type="file" name="file" id="photo3"></p>
     <p><input type="button" name="b1" value="submit" onclick="fsubmit()"></p>
 </form>
 <div id="result"></div>
@@ -48,13 +48,13 @@
             dataType: 'JSON',
             cache: false,
             processData: false,
-            contentType: false
-        }).done(function(ret){
-                var result = '';
-                result += 'name=' + ret['name'] + '<br>';
-                result += 'gender=' + ret['gender'] + '<br>';
-                result += '<img src="' + ret['photo']  + '" width="100">';
-                $('#result').html(result);
+            contentType: false,
+            success:function (result) {
+                console.log(result);
+                var Result = '';
+                Result += '<img src="' + result.data  + '" width="100">';
+                $('#result').html(Result);
+            }
         });
         return false;
     }
