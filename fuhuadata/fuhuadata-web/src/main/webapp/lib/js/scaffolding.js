@@ -17,21 +17,33 @@ $(document).on('click.edit',editBtn,saveEdit);
 $(document).on('click.save',saveBtn,saveEdit);
 $(document).on('click.cancel',cancelBtn,saveEdit);
 $(document).on('click.del',delBtn,delEl);
-$(document).on('change.select',saltType,radioChecked)
+
 //单选按钮的其他选项
 function radioChecked(e){
     var el = $(e.target);
     var radioGroup = $('[name="'+el.attr("name")+'"]');
-    var val = radioGroup.filter('.else').val();//else的值
-    var selectedVal = radioGroup.filter(':checked');
+    var elseSelected = radioGroup.filter('.else');
     var targetEl = el.parents('.form-group').find('.elseInput');
-    if(selectedVal.val()==val){
+    if(elseSelected.prop('checked')){
         console.log(el.prop('checked'));
         targetEl.removeClass('hidden');
-    }else if(selectedVal.val()!=val){
+    }else{
         targetEl.addClass('hidden');
     }
 }
+// function radioChecked(e){
+//     var el = $(e.target);
+//     var radioGroup = $('[name="'+el.attr("name")+'"]');
+//     var val = radioGroup.filter('.else').val();
+//     var selectedVal = radioGroup.filter(':checked');
+//     var targetEl = el.parents('.form-group').find('.elseInput');
+//     if(selectedVal.val()==val){
+//         console.log(el.prop('checked'));
+//         targetEl.removeClass('hidden');
+//     }else if(selectedVal.val()!=val){
+//         targetEl.addClass('hidden');
+//     }
+// }
 
 
 /**

@@ -102,6 +102,16 @@
                         }else {
                             formControl.val(item);
                         }
+                        if(key=='saltType'){
+                            var elseSelected = formControl.filter('.else');
+                            var targetEl = formControl.parents('.form-group').find('.elseInput');
+                            if(elseSelected.prop('checked')){
+                                console.log(formControl.prop('checked'));
+                                targetEl.removeClass('hidden');
+                            }else{
+                                targetEl.addClass('hidden');
+                            }
+                        }
                     }
                 });
                 //表格处理
@@ -123,6 +133,7 @@
                     pTextarea.find('textarea').val(textProcessingComponents).end().appendTo(pTbody);
                     iTbody.siblings().add(pTbody.siblings()).remove();
                 }else{
+                    iTbody.siblings().add(pTbody.siblings()).remove();
                     if(getData.wares!=null){
                         jQuery.each(getData.wares,function(key,item){
                             var tr = $("<tr></tr>");
@@ -130,13 +141,11 @@
                         });
                     }
                     if(getData.index!=null){
-                        Tbody.siblings().remove();
+                        iTbody.siblings().remove();
                         jQuery.each(getData.index,function(key,item){
                             var tr = $("<tr></tr>");
                             tr.append('<td><input class="form-control" type="text" disabled value="'+item.index+'"></td><td><input class="form-control" type="text" disabled value="'+item.value+'"></td><td style="position: relative"><input class="form-control" type="text" disabled value="'+item.remarks+'"/><button type="button" class="close hidden" data-form-btn="del" data-form-target="tr" style="position: absolute;top:6px;right:-15px;">×</button></td>').appendTo(iTbody);
                         });
-                        iThead.insertBefore(iTbody);
-                        iTfoot.insertAfter(iTbody);
                     }
                     if(getData.processingComponents!=null){
                         pTbody.siblings().remove();
@@ -144,10 +153,11 @@
                             var tr = $("<tr></tr>");
                             tr.append('<td><input class="form-control" type="text" disabled value="'+item.componentName+'"></td><td><input class="form-control" type="text" disabled value="'+item.consumption+'"></td><td style="position: relative"><input class="form-control" type="text" disabled value="'+item.remarks+'"/><button type="button" class="close hidden" data-form-btn="del" data-form-target="tr" style="position: absolute;top:6px;right:-15px;">×</button></td>').appendTo(pTbody);
                         });
-                        pThead.insertBefore(pTbody);
-                        pTfoot.insertAfter(pTbody);
                     }
-
+                    iThead.insertBefore(iTbody);
+                    iTfoot.insertAfter(iTbody);
+                    pThead.insertBefore(pTbody);
+                    pTfoot.insertAfter(pTbody);
                 }
              }
         }

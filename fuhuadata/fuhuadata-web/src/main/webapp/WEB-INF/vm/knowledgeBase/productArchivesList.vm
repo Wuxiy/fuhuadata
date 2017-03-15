@@ -84,7 +84,7 @@
                                 <label class="radio-inline"><input name="saltType" type="radio" value="2">铵盐</label>
                                 <label class="radio-inline"><input name="saltType" type="radio" value="3">钾盐</label>
                                 <label class="radio-inline"><input name="saltType" type="radio" value="4">二钾铵盐</label>
-                                <label class="radio-inline" style="position: relative"><input class="else" name="saltType" type="radio" value="5" >其他<input class="form-control elseInput hidden" name="otherSaltName" type="text" style="position: absolute;right: -210px;top:0;width: 200px;" placeholder="请输入其他盐类"></label>
+                                <label class="radio-inline" style="position: relative"><input class="else" name="saltType" type="radio" value="5">其他<input class="form-control elseInput hidden" name="otherSaltName" type="text" style="position: absolute;right: -210px;top:0;width: 200px;" placeholder="请输入其他盐类"></label>
                             </div>
                         </div>
                         <div class="form-group">
@@ -141,12 +141,15 @@
     </div>
 </div>
 
+
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/scaffolding.js"></script>
 <script type="text/javascript">
 
 (function ($) {
     $(function () {
+
+
         $('#tree').creatTree('${request.contextPath}/productCategory/CategoryTree');
         $('#tree').filtrateData('${request.contextPath}/productInfo/getProductInfoById','container','productArchivesList');
         //初始数据
@@ -163,6 +166,7 @@
             var tr = $('<tr><td><input class="form-control" type="text" value=""></td><td><input class="form-control" type="text" value=""></td><td style="position: relative"><input class="form-control" type="text" value=""/><button type="button" class="close" data-form-btn="del" data-form-target="tr" style="position: absolute;top:6px;right:-15px;">×</button></td></tr>');
             tr.appendTo('[name="processingComponents"]');
         });
+        $(document).on('click.del',saltType,radioChecked);
 
     })
 
@@ -186,6 +190,16 @@
                         formControl.val(arr);
                     }else {
                         formControl.val(item);
+                    }
+                    if(key=='saltType'){
+                        var elseSelected = formControl.filter('.else');
+                        var targetEl = formControl.parents('.form-group').find('.elseInput');
+                        if(elseSelected.prop('checked')){
+                            console.log(formControl.prop('checked'));
+                            targetEl.removeClass('hidden');
+                        }else{
+                            targetEl.addClass('hidden');
+                        }
                     }
                 }
             });
@@ -219,18 +233,18 @@
                         var tr = $("<tr></tr>");
                         tr.append('<td><input class="form-control" type="text" disabled value="'+item.index+'"></td><td><input class="form-control" type="text" disabled value="'+item.value+'"></td><td style="position: relative"><input class="form-control" type="text" disabled value="'+item.remarks+'"/><button type="button" class="close hidden" data-form-btn="del" data-form-target="tr" style="position: absolute;top:6px;right:-15px;">×</button></td>').appendTo(iTbody);
                     });
-                    iThead.insertBefore(iTbody);
-                    iTfoot.insertAfter(iTbody);
                 }
                 if(getData.processingComponents!=null){
                     jQuery.each(getData.processingComponents,function(key,item){
                         var tr = $("<tr></tr>");
                         tr.append('<td><input class="form-control" type="text" disabled value="'+item.componentName+'"></td><td><input class="form-control" type="text" disabled value="'+item.consumption+'"></td><td style="position: relative"><input class="form-control" type="text" disabled value="'+item.remarks+'"/><button type="button" class="close hidden" data-form-btn="del" data-form-target="tr" style="position: absolute;top:6px;right:-15px;">×</button></td>').appendTo(pTbody);
                     });
-                    pThead.insertBefore(pTbody);
-                    pTfoot.insertAfter(pTbody);
-                }
 
+                }
+                iThead.insertBefore(iTbody);
+                iTfoot.insertAfter(iTbody);
+                pThead.insertBefore(pTbody);
+                pTfoot.insertAfter(pTbody);
             }
         });
     }
