@@ -13,6 +13,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -122,6 +123,8 @@ public class CustomerBaseInfoAction {
         return null;
     }
 
+
+
     /**
      * 客户基本信息详情
      * @param customerId
@@ -130,7 +133,7 @@ public class CustomerBaseInfoAction {
     @RequestMapping(value = "/showCostomerBaseInfoDetails",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "customerInfo-customerList",methods = "showCostomerBaseInfoDetails")
     @ResponseBody
-    public ResultPojo showCostomerBaseInfoDetails(String customerId){
+    public ModelAndView showCostomerBaseInfoDetails(String customerId){
         Result<CustomerBaseInfoVO> result = new Result<CustomerBaseInfoVO>();
         try{
           result=customerBaseInfoService.getCustomerInfoById(customerId);
@@ -139,6 +142,8 @@ public class CustomerBaseInfoAction {
             result.setSuccess(false);
             log.error("统计客户购买产品列表明细失败",e);
         }
-        return result.getResultPojo();
+        ModelAndView model = new ModelAndView("customerInfo/customerDetails");
+        model.addObject("CustomerBaseInfo",result.getResultPojo());
+        return model;
     }
 }
