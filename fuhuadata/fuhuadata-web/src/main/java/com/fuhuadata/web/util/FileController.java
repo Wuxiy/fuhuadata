@@ -2,6 +2,7 @@ package com.fuhuadata.web.util;
 
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
+import com.fuhuadata.vo.ImagePathVO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.net.BindException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -72,16 +74,19 @@ public class FileController {
 
     // 多文件上传
     @RequestMapping(value = "/uploadFile2", method = RequestMethod.POST)
-    public ModelAndView fileUpload(HttpServletRequest request,
+    @ResponseBody
+    public ResultPojo fileUpload(HttpServletRequest request,
                                    HttpServletResponse response, BindException errors)
             throws Exception {
-
+        Result result = new Result();
+        List<ImagePathVO> list = new ArrayList<ImagePathVO>();
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 
         Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
         org.springframework.util.MultiValueMap<String,MultipartFile> fileMap1=multipartRequest.getMultiFileMap();
             List<MultipartFile> files = fileMap1.get("files");
             if (files != null) {
+                ImagePathVO imagePathVO = new ImagePathVO();
                 for (MultipartFile file : files) {
                     String path = request.getSession().getServletContext().getRealPath("images/");//保存在服务器
                     String fileName = file.getOriginalFilename();
@@ -94,10 +99,13 @@ public class FileController {
                         tempFile.createNewFile();
                         file.transferTo(tempFile);
                     }
-
+                    imagePathVO.setPath(tempFile.getPath());
+                    imagePathVO.setName(tempFile.getName());
+                    list.add(imagePathVO);
                 }
             }
-        return new ModelAndView("/knowledgeBase/uploadFile");
+            result.addDefaultModel(list);
+          return result.getResultPojo();
     }
 
     @RequestMapping(value = "/deleteFile",method = RequestMethod.POST)
