@@ -91,46 +91,74 @@
             },
             //渲染标准产品档案
             productArchivesList : function(getData){
-                $.each(getData,function(n,total){
-                    $.each(total,function(key,item){
-                        var $formControl=$('[name="'+ key +'"]');
-                        if($formControl.attr('type')=='radio'||$formControl.attr('type')=='checkbox'){
+                //表单处理
+                jQuery.each(getData.productInfo,function(key,item){
+                    if(key!='physicalProperities'&& key!='processingComponents'){
+                        var formControl=$('[name="'+ key +'"]');
+                        // console.log(key);
+                        if(formControl.attr('type')=='radio'||formControl.attr('type')=='checkbox'){
                             var arr=[item];
-                            $formControl.val(arr);
-                        }else{
-                            $formControl.val(item);
+                            formControl.val(arr);
+                        }else {
+                            formControl.val(item);
                         }
-                    })
-                });
-
-                $.each(getData.productInfo,function(key,item){
-                    console.log(item);
-                    var formControl=$('[name="'+ key +'"]');
-                    if(formControl.attr('type')=='radio'||formControl.attr('type')=='checkbox'){
-                        var arr=[item];
-                        formControl.val(arr);
-                    }else {
-                        formControl.val(item);
+                        if(key=='saltType'){
+                            var elseSelected = formControl.filter('.else');
+                            var targetEl = formControl.parents('.form-group').find('.elseInput');
+                            if(elseSelected.prop('checked')){
+                                console.log(formControl.prop('checked'));
+                                targetEl.removeClass('hidden');
+                            }else{
+                                targetEl.addClass('hidden');
+                            }
+                        }
                     }
                 });
+                //表格处理
                 var wTbody = $('[name="wares"]');
-                wTbody.html('');
-                $.each(getData.wares,function(key,item){
-                    var tr = $("<tr></tr>");
-                    tr.append('<td>'+item.specification+'</td><td>'+item.model+'</td>').appendTo(wTbody);
-                });
                 var iTbody = $('[name="physicalProperities"]');
-                iTbody.html('');
-                jQuery.each(getData.index,function(key,item){
-                    var tr = $("<tr></tr>");
-                    tr.append('<td><input class="form-control" type="text" disabled value="'+item.index+'"></td><td><input class="form-control" type="text" disabled value="'+item.value+'"></td><td style="position: relative"><input class="form-control" type="text" disabled value="'+item.remarks+'"/><button type="button" class="close hidden" data-form-btn="del" data-form-target="tr" style="position: absolute;top:6px;right:-15px;">×</button></td>').appendTo(iTbody);
-                });
                 var pTbody = $('[name="processingComponents"]');
-                pTbody.html('');
-                jQuery.each(getData.processingComponents,function(key,item){
-                    var tr = $("<tr></tr>");
-                    tr.append('<td><input class="form-control" type="text" disabled value="'+item.componentName+'"></td><td><input class="form-control" type="text" disabled value="'+item.consumption+'"></td><td style="position: relative"><input class="form-control" type="text" disabled value="'+item.remarks+'"/><button type="button" class="close hidden" data-form-btn="del" data-form-target="tr" style="position: absolute;top:6px;right:-15px;">×</button></td>').appendTo(pTbody);
-                });
+                var iThead = $('<thead><tr><th class="text-center col-xs-4" lang="zh">指标</th><th class="text-center col-xs-4" lang="zh">值</th><th class="text-center col-xs-4" lang="zh">备注</th></tr></thead>');
+                var iTfoot = $('<tfoot class="editView hidden"><tr><td colspan="3"><button id="addIndexItem" data-form-btn="add" class="btn btn-xs btn-link hidden" type="button" lang="zh">继续添加</button></td></tr></tfoot>');
+                var pThead = $('<thead><tr><th class="text-center col-xs-4" lang="zh">原料</th><th class="text-center col-xs-4" lang="zh">单耗（kg/KL）</th><th class="text-center col-xs-4" lang="zh">备注</th></tr></thead>');
+                var pTfoot = $('<tfoot class="editView hidden"><tr><td colspan="3"><button id="addProItem" data-form-btn="add" class="btn btn-xs btn-link hidden" type="button" lang="zh">继续添加</button></td></tr></tfoot>');
+
+                wTbody.add(iTbody).add(pTbody).html('');
+                if(getData.productInfo.midCategoryId==8){
+                    var textIndex = getData.productInfo.physicalProperities;
+                    var textProcessingComponents = getData.productInfo.processingComponents;
+                    var iTextarea = $('<tr><td colspan="3"><textarea class="form-control" rows="3" disabled></textarea></td></tr>');
+                    var pTextarea = $('<tr><td colspan="3"><textarea class="form-control" rows="3" disabled></textarea></td></tr>');
+                     iTextarea.find('textarea').val(textIndex).end().appendTo(iTbody);
+                    pTextarea.find('textarea').val(textProcessingComponents).end().appendTo(pTbody);
+                    iTbody.siblings().add(pTbody.siblings()).remove();
+                }else{
+                    iTbody.siblings().add(pTbody.siblings()).remove();
+                    if(getData.wares!=null){
+                        jQuery.each(getData.wares,function(key,item){
+                            var tr = $("<tr></tr>");
+                            tr.append('<td>'+item.specification+'</td><td>'+item.model+'</td>').appendTo(wTbody);
+                        });
+                    }
+                    if(getData.index!=null){
+                        iTbody.siblings().remove();
+                        jQuery.each(getData.index,function(key,item){
+                            var tr = $("<tr></tr>");
+                            tr.append('<td><input class="form-control" type="text" disabled value="'+item.index+'"></td><td><input class="form-control" type="text" disabled value="'+item.value+'"></td><td style="position: relative"><input class="form-control" type="text" disabled value="'+item.remarks+'"/><button type="button" class="close hidden" data-form-btn="del" data-form-target="tr" style="position: absolute;top:6px;right:-15px;">×</button></td>').appendTo(iTbody);
+                        });
+                    }
+                    if(getData.processingComponents!=null){
+                        pTbody.siblings().remove();
+                        jQuery.each(getData.processingComponents,function(key,item){
+                            var tr = $("<tr></tr>");
+                            tr.append('<td><input class="form-control" type="text" disabled value="'+item.componentName+'"></td><td><input class="form-control" type="text" disabled value="'+item.consumption+'"></td><td style="position: relative"><input class="form-control" type="text" disabled value="'+item.remarks+'"/><button type="button" class="close hidden" data-form-btn="del" data-form-target="tr" style="position: absolute;top:6px;right:-15px;">×</button></td>').appendTo(pTbody);
+                        });
+                    }
+                    iThead.insertBefore(iTbody);
+                    iTfoot.insertAfter(iTbody);
+                    pThead.insertBefore(pTbody);
+                    pTfoot.insertAfter(pTbody);
+                }
              }
         }
     };

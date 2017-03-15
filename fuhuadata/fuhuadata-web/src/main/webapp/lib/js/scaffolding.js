@@ -7,7 +7,7 @@ var editBtn = '[data-form-btn="edit"]';
 var saveBtn = '[data-form-btn="save"]';
 var cancelBtn = '[data-form-btn="cancel"]';
 var delBtn = '[data-form-btn="del"]';
-var elseOption = '.else';
+var saltType = '[name="saltType"]';
 
 
 //初始化
@@ -17,18 +17,33 @@ $(document).on('click.edit',editBtn,saveEdit);
 $(document).on('click.save',saveBtn,saveEdit);
 $(document).on('click.cancel',cancelBtn,saveEdit);
 $(document).on('click.del',delBtn,delEl);
-$(document).on('change.select',elseOption,elseSelected)
-//其他被选中时，显示的文本框
-function elseSelected(e){
+
+//单选按钮的其他选项
+function radioChecked(e){
     var el = $(e.target);
+    var radioGroup = $('[name="'+el.attr("name")+'"]');
+    var elseSelected = radioGroup.filter('.else');
     var targetEl = el.parents('.form-group').find('.elseInput');
-    if(el.get(0).checked||el.find('option:selected').text()=='其他'||el.val()){
-        console.log(el.get(0).checked);
+    if(elseSelected.prop('checked')){
+        console.log(el.prop('checked'));
         targetEl.removeClass('hidden');
     }else{
         targetEl.addClass('hidden');
     }
 }
+// function radioChecked(e){
+//     var el = $(e.target);
+//     var radioGroup = $('[name="'+el.attr("name")+'"]');
+//     var val = radioGroup.filter('.else').val();
+//     var selectedVal = radioGroup.filter(':checked');
+//     var targetEl = el.parents('.form-group').find('.elseInput');
+//     if(selectedVal.val()==val){
+//         console.log(el.prop('checked'));
+//         targetEl.removeClass('hidden');
+//     }else if(selectedVal.val()!=val){
+//         targetEl.addClass('hidden');
+//     }
+// }
 
 
 /**
