@@ -9,7 +9,6 @@
 </form>
 
 <form name="form1" id="form1" enctype="multipart/form-data">
-<<<<<<< HEAD
     <p>name:<input type="text" name="file" ></p>
     <p>gender:<input type="radio" name="file" value="1">male <input type="radio" name="file" value="2">female</p>
     <p>photo:<input type="file" name="file" id="photo1"></p>
@@ -45,7 +44,7 @@
         var data = new FormData($('#form1')[0]);
         console.log(data);
         jQuery.ajax({
-            url: 'uploadFile',
+            url: 'uploadFile2',
             type: 'POST',
             data: data,
             dataType: 'JSON',
