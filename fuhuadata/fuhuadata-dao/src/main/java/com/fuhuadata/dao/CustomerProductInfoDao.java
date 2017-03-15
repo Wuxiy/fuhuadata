@@ -56,6 +56,13 @@ public interface CustomerProductInfoDao {
 	 * @return
 	 */
 	public List<CustomerProductPackagingArchives> getCustomerProductPackagingArchives();
+
+	/**
+	 * 根据id获取客户产品要求
+	 * @param customerId
+	 * @return
+	 */
+	public List<CustomerProductPackagingArchives> getCustomerProductPackingArchivesById(String customerId);
         
 	 /**
      * 查询列表，包含分页查询，查询结果为空返回空的List对象
