@@ -7,6 +7,7 @@ import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.CustomerAreaService;
 import com.fuhuadata.service.CustomerBaseInfoService;
 import com.fuhuadata.vo.CategoryTree;
+import com.fuhuadata.vo.CustomerBaseInfoVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -108,5 +109,36 @@ public class CustomerBaseInfoAction {
         return null;
     }
 
+    @RequestMapping(value = "/showCustomerBaseInfo",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "customerInfo-customerList",methods = "showCustomerBaseInfo")
+    public ModelAndView showCustomerBaseInfo(Integer customerType){
+        if(customerType==1){
+            return new ModelAndView("customerInfo/customerDetails").addObject("customerType",customerType);
+        }else if(customerType==2){
+            return new ModelAndView("customerInfo/customerDetails").addObject("customerType",customerType);
+        }else if(customerType==3){
+            return new ModelAndView("customerInfo/customerDetails").addObject("customerType",customerType);
+        }
+        return null;
+    }
 
+    /**
+     * 客户基本信息详情
+     * @param customerId
+     * @return
+     */
+    @RequestMapping(value = "/showCostomerBaseInfoDetails",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "customerInfo-customerList",methods = "showCostomerBaseInfoDetails")
+    @ResponseBody
+    public ResultPojo showCostomerBaseInfoDetails(String customerId){
+        Result<CustomerBaseInfoVO> result = new Result<CustomerBaseInfoVO>();
+        try{
+          result=customerBaseInfoService.getCustomerInfoById(customerId);
+          //System.out.println(result.getResultPojo().getData());
+        }catch (Exception e){
+            result.setSuccess(false);
+            log.error("统计客户购买产品列表明细失败",e);
+        }
+        return result.getResultPojo();
+    }
 }

@@ -8,7 +8,10 @@ import java.util.List;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.service.CustomerBaseInfoService;
+import com.fuhuadata.vo.CustomerBaseInfoVO;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import sun.rmi.runtime.Log;
 
 import javax.annotation.Resource;
 
@@ -17,6 +20,7 @@ import javax.annotation.Resource;
  * @date 2017-01-12 11:49:51
  */
 public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
+	private static final org.apache.commons.logging.Log log = LogFactory.getLog(CustomerBaseInfoService.class);
 
 	@Autowired
     private CustomerBaseInfoManager customerBaseInfoManager;
@@ -77,8 +81,26 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 		return result;
     }
 
+	@Override
+	public Result<CustomerBaseInfoVO> getCustomerInfoById(String id) {
+		Result<CustomerBaseInfoVO> result = new Result<CustomerBaseInfoVO>();
+		try {
+			CustomerBaseInfoVO customerBaseInfoVO = customerBaseInfoManager.getCustomerInfoById(id);
+			if(customerBaseInfoVO == null){
+				result.setSimpleErrorMsg(0, "当前数据不存在，请重试");
+			}else{
+				result.addDefaultModel("CustomerBaseInfo", customerBaseInfoVO);
+			}
 
-    public Result<List<CustomerBaseInfo>> getCustomerBaseInfoByPage(QueryCustomerBaseInfo queryCustomerBaseInfo) {
+		} catch(Exception e) {
+			result.setSuccess(false);
+			log.error("客户基本信息显示错误",e);
+		}
+		return result;
+	}
+
+
+	public Result<List<CustomerBaseInfo>> getCustomerBaseInfoByPage(QueryCustomerBaseInfo queryCustomerBaseInfo) {
 		Result<List<CustomerBaseInfo>> result = new Result<List<CustomerBaseInfo>>();
 		try {
 			result = customerBaseInfoManager.getCustomerBaseInfoByPage(queryCustomerBaseInfo);

@@ -1,6 +1,7 @@
 package com.fuhuadata.manager.impl;
 import com.fuhuadata.domain.CountCustomersOrderProduct;
 import com.fuhuadata.domain.CustomerBaseInfo;
+import com.fuhuadata.domain.CustomerMakeProduct;
 import com.fuhuadata.manager.CustomerBaseInfoManager;
 
 import java.math.BigDecimal;
@@ -9,6 +10,8 @@ import java.util.List;
 import com.fuhuadata.dao.CustomerBaseInfoDao;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.domain.query.Result;
+import com.fuhuadata.vo.CustomerBaseInfoVO;
+
 import javax.annotation.Resource;
 import java.util.ArrayList;
 
@@ -82,9 +85,29 @@ public class CustomerBaseInfoManagerImpl implements CustomerBaseInfoManager {
     public CustomerBaseInfo getCustomerBaseInfoById(String customer_id) {
     	return customerBaseInfoDao.getCustomerBaseInfoById(customer_id);
     }
-    
 
-    public int count(QueryCustomerBaseInfo queryCustomerBaseInfo) {
+	/**
+	 * 获取客户基本信息
+	 * @param id
+	 * @return
+	 */
+	@Override
+	public CustomerBaseInfoVO getCustomerInfoById(String id) {
+		CustomerBaseInfoVO customerBaseInfoVO = customerBaseInfoDao.getCustomerInfoById(id);
+		//System.out.println(customerBaseInfoVO.getCountry());
+		//if(customerBaseInfoVO!=null) {
+		List<CustomerMakeProduct> customerMakeProduct =customerBaseInfoDao.getCustomerMakeProductById(id);
+		System.out.println(customerMakeProduct.size());
+		//}
+
+		return customerBaseInfoVO;
+	}
+
+	@Override
+
+
+
+	public int count(QueryCustomerBaseInfo queryCustomerBaseInfo) {
     	return customerBaseInfoDao.count(queryCustomerBaseInfo);
     }
 

@@ -5,6 +5,7 @@ import com.fuhuadata.domain.CountCustomersOrderProduct;
 import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.domain.query.Result;
+import com.fuhuadata.vo.CustomerBaseInfoVO;
 
 /**
  * @author wangbo
@@ -55,6 +56,13 @@ public interface CustomerBaseInfoService {
      * @return
      */
     public Result<CustomerBaseInfo> getCustomerBaseInfoById(String customer_id);
+
+	/**
+	 * 客户基本信息
+	 * @param id
+	 * @return
+	 */
+	public Result<CustomerBaseInfoVO> getCustomerInfoById(String id);
 
     /**
      * 查询列表，包含分页查询

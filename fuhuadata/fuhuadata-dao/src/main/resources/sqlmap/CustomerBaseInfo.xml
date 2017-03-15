@@ -6,6 +6,9 @@
    	<typeAlias alias="CustomerBaseInfo" type="com.fuhuadata.domain.CustomerBaseInfo"/>
    	<typeAlias alias="QueryCustomerBaseInfo" type="com.fuhuadata.domain.query.QueryCustomerBaseInfo"/>
 	<typeAlias alias="CountCustomersOrderProduct" type="com.fuhuadata.domain.CountCustomersOrderProduct"/>
+	<typeAlias alias="CustomerBaseInfoVO" type="com.fuhuadata.vo.CustomerBaseInfoVO"/>
+	<typeAlias alias="CustomerMakeProduct" type="com.fuhuadata.domain.CustomerMakeProduct"/>
+
 	<resultMap id="CUSTOMERBASEINFO-MAP" class="CustomerBaseInfo">
 					<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="fullName" column="full_name" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -39,6 +42,7 @@
 								<result property="maintenanceFee" column="maintenanceFee" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
 								<result property="payMoney" column="payMoney" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
 	</resultMap>
+
 
 	<sql id="PAGE-COMMON">
 		<dynamic prepend=" WHERE ">
@@ -269,6 +273,66 @@
 		<![CDATA[
 			SELECT * FROM customer_base_info	WHERE customer_id=#customer_id#
 		]]>
+	</select>
+
+	<select id="GET-CUSTOMER-BASEINFO" resultClass="CustomerBaseInfoVO" parameterClass="java.lang.String">
+		<![CDATA[
+		SELECT
+			base.customer_id customerId,
+			base.full_name fullName,
+			base.enterprise_nature enterpriseNature,
+			base.short_name shortName,
+			base.company_type companyType,
+			base.customer_area_id areaId,
+			base.customer_area area,
+			base.country_id countryId,
+			base.country country,
+			base.registered_funds registeredFunds,
+			base.registered_address registeredAddress,
+			base.management_scope managementScope,
+			base.zhongxinbao_number zhongxinbaoNumber,
+			base.zhongxinbao_level zhongxinbaoLevel,
+			base.remark remark,
+			base.opportunity_source opportunitySource,
+			base.other_opportunity otherOpportunity,
+			base.opportunity_describle opportunityDescrible,
+			base.enterprise_phone enterprisePhone,
+			base.enterprise_emaill enterpriseEmail,
+			base.customer_completion customerCompletion,
+			base.create_user_id createUserId,
+			base.create_user_name createUserName,
+			base.customer_level customerLevel,
+			base.customer_type customerType,
+			base.has_chi_company hasChiCompany,
+			base.has_chi_purchase hasChiPurchase,
+			base.customer_status customerStatus,
+			base.qualifications_file_url qualificationsFileUrl,
+			base.factory_location factoryLocation,
+			base.major_competitors majorCompetitors,
+			base.create_time createTime,
+			en.ency_id encyId,
+			en.company_info companyInfo,
+			en.is_full isFull,
+			en.develop_his developHis,
+			en.sell_network sellNetwork,
+			en.custom_field customField,
+			en.lastmodify_user_id lastmodifyUserIdEn,
+			en.lastmodify_user_name lastmodifyUserNameEn,
+			en.modify_time modifyTimeEn
+			FROM
+				customer_base_info base
+			LEFT JOIN k_customer_encyclopedia en
+			ON base.customer_id = en.customer_id
+
+			WHERE
+				base.customer_id ='fh123456'
+	]]>
+	</select>
+	
+	<select id="GET-PRODUCT-BY-ID" resultClass="CustomerMakeProduct" parameterClass="java.lang.String">
+		<![CDATA[
+		SELECT id,product_name AS productName,production FROM customer_make_products WHERE customer_id = 'fh123456'
+	]]>
 	</select>
 
 	<select id="GET-PAGE" resultClass="CustomerBaseInfo" parameterClass="QueryCustomerBaseInfo">

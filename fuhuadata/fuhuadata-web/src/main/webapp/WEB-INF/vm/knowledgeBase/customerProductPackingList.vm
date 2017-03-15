@@ -120,7 +120,7 @@
             "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
             "columns":[
                 {"data":"customerProductId"},
-                {"data":null},
+                {"data":"customerName"},
                 {"data":"customerProductName"},
                 {"data":"categorySerialNumber"},
                 {"data":"categoryName"},

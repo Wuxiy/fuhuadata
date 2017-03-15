@@ -2,11 +2,9 @@ package com.fuhuadata.web.util;
 
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
-import org.apache.commons.collections.map.MultiValueMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -17,8 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.net.BindException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -28,8 +24,8 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value = "/upload/*")
-public class FileUploadController {
-    private static final Log log = LogFactory.getLog(FileUploadController.class);
+public class FileController {
+    private static final Log log = LogFactory.getLog(FileController.class);
 
     @RequestMapping(value = "into",method = RequestMethod.GET)
     public ModelAndView upload(){
@@ -37,41 +33,35 @@ public class FileUploadController {
     }
     /**
      *
-     * @param files
+     * @param file
      * @return
      */
     @RequestMapping("/uploadFile")
     @ResponseBody
-    public ResultPojo uploadFile(@RequestParam("file") MultipartFile[] files, HttpServletRequest request) {
+    public ResultPojo uploadFile(@RequestParam(value="file") MultipartFile file, HttpServletRequest request) {
         Result result = new Result();
         String path=null;
         File tempFile=null;
-        System.out.println(files.length);
         try {
-            for (MultipartFile file : files) {
+                if (!file.isEmpty()) {
+                    try {
+                        path = request.getSession().getServletContext().getRealPath("images/");//保存在服务器
+                        System.out.println(path);
 
-                if (file.isEmpty()) {
-                    continue; //next pls
-                }
-                try {
-                    path = request.getSession().getServletContext().getRealPath("images/");//保存在服务器
-                    System.out.println(path);
-
-                    String fileName = file.getOriginalFilename();
-                    tempFile = new File(path,fileName);
-                    System.out.println(tempFile);
-                    if (!tempFile.getParentFile().exists()) {
-                        tempFile.getParentFile().mkdir();
+                        String fileName = file.getOriginalFilename();
+                        tempFile = new File(path, fileName);
+                        System.out.println(tempFile);
+                        if (!tempFile.getParentFile().exists()) {
+                            tempFile.getParentFile().mkdir();
+                        }
+                        if (!tempFile.exists()) {
+                            tempFile.createNewFile();
+                        }
+                        file.transferTo(tempFile);
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                    if (!tempFile.exists()) {
-                        tempFile.createNewFile();
-                    }
-                    file.transferTo(tempFile);
-
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
-            }
         }catch(Exception e){
             log.error("文件上传错误",e);
         }
