@@ -3,7 +3,7 @@
 <body>
 <h1>Spring MVC multi files upload example</h1>
 
-<form method="POST" enctype="multipart/form-data">
+<form method="POST" id="uploadForm" enctype="multipart/form-data">
    <br> <input type="file" name="file" id="uploadFile"/><br/>
     <input type="button" id="btnUpload" value="确定"  onclick="Asubmit()"/>
 </form>
@@ -60,15 +60,16 @@
     }
 
     function Asubmit() {
-        var files = $('#uploadFile').val();
         /*var data = {
             "imgPath":imgpath
         }*/
 
         jQuery.ajax({
-            url:'uploadFile2',
-            data:files,
+            url:'uploadFile',
+            data:new FormData($('#uploadForm')[0]),
             type:'POST',
+            processData:false,
+            contentType:false,
             cache: false,
             success:function (result) {
                 console.log(result);
