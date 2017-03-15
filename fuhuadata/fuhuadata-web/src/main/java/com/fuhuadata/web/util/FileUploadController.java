@@ -43,7 +43,7 @@ public class FileUploadController {
      * @param files
      * @return
      */
-    @RequestMapping("/uploadFile")
+    @RequestMapping(value = "/uploadFile",method = RequestMethod.POST)
     @ResponseBody
     public ResultPojo uploadFile(@RequestParam("file") MultipartFile[] files, HttpServletRequest request) {
         Result result = new Result();
