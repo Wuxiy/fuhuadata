@@ -17,9 +17,8 @@ $(document).on('click.save',saveBtn,saveEdit);
 $(document).on('click.cancel',cancelBtn,saveEdit);
 $(document).on('click.del',delBtn,delEl);
 $(document).on('click.del',saltType,radioChecked);
-
-
-
+// $('.else:checked').parents('.form-group').find('.elseInput').show();
+// $('.else:not(:checked)').parents('.form-group').find('.elseInput').hide();
 /**
  *单选按钮的他选项
  */
@@ -35,19 +34,6 @@ function radioChecked(e){
         targetEl.addClass('hidden');
     }
 }
-// function radioChecked(e){
-//     var el = $(e.target);
-//     var radioGroup = $('[name="'+el.attr("name")+'"]');
-//     var val = radioGroup.filter('.else').val();
-//     var selectedVal = radioGroup.filter(':checked');
-//     var targetEl = el.parents('.form-group').find('.elseInput');
-//     if(selectedVal.val()==val){
-//         console.log(el.prop('checked'));
-//         targetEl.removeClass('hidden');
-//     }else if(selectedVal.val()!=val){
-//         targetEl.addClass('hidden');
-//     }
-// }
 
 
 /**
@@ -60,13 +46,7 @@ function init(){
     formBtn.addClass('hidden');//操作按钮隐藏
 }
 
-/**
- *input通用渲染
- */
-function rendererData(obj){
-    //循环数据取值，并将值赋给有相同name的标签
 
-}
 
 /**
  *编辑&保存&删除
