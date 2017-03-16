@@ -104,6 +104,8 @@ public class CustomerBaseInfoVO {
     /**工厂位置**/
     private String factoryLocation;
 
+    private String productLine;
+
     /**分销主要竞争对手**/
     private String majorCompetitors;
 
@@ -491,5 +493,13 @@ public class CustomerBaseInfoVO {
 
     public void setCustomerMakeProduct(List<CustomerMakeProduct> customerMakeProduct) {
         this.customerMakeProduct = customerMakeProduct;
+    }
+
+    public String getProductLine() {
+        return productLine;
+    }
+
+    public void setProductLine(String productLine) {
+        this.productLine = productLine;
     }
 }

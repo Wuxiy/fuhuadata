@@ -127,6 +127,11 @@ public class CustomerMakeProductServiceImpl implements CustomerMakeProductServic
         return result;
     }
 
+    /**
+     * 客户基本信息更新
+     * @param customerMakeProducts
+     * @return
+     */
     @Override
     public Result updateCustomerMakeProducts(CustomerMakeProduct[] customerMakeProducts) {
         Result result = new Result();

@@ -329,6 +329,7 @@
 			base.qualifications_file_url qualificationsFileUrl,
 			base.factory_location factoryLocation,
 			base.major_competitors majorCompetitors,
+			base.production_line productLine,
 			base.create_time createTime,
 			en.ency_id encyId,
 			en.company_info companyInfo,
