@@ -25,7 +25,7 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
     public static final String COUNT = "CUSTOMERBASEINFO.COUNT";
     public static final String COUNT_ORDER = "CUSTOMERBASEINFO.countOrderByCustomer";
     public static final String COUNT_ORDER_PRODUCT = "CUSTOMERBASEINFO.countOrderProduct";
-
+    public static final String QUERY_COOPERATION = "CUSTOMERBASEINFO.queryCooperationByCid";
     public CustomerBaseInfo addCustomerBaseInfo(CustomerBaseInfo customerBaseInfo) {
 		customerBaseInfo.setCustomerId((String) this.insert(ADD, customerBaseInfo));
     	return customerBaseInfo;
@@ -71,7 +71,16 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
 
     public List<CountCustomersOrderProduct> countOrderProduct(String customerId) {
         try {
-            return (List<CountCustomersOrderProduct>) this.queryForObject(COUNT_ORDER_PRODUCT,customerId);
+            return  this.queryForList(COUNT_ORDER_PRODUCT,customerId);
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public CustomerBaseInfo queryCooperationByCid(String customerId){
+        try {
+            return (CustomerBaseInfo)this.queryForObject(QUERY_COOPERATION,customerId);
         } catch (DataAccessException e) {
             e.printStackTrace();
         }

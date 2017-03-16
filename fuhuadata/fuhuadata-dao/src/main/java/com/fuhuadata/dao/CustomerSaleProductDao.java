@@ -9,14 +9,20 @@ import java.io.Serializable;
  * @author wangbo
  * @date 2017-01-12 13:41:04
  */
-public interface CustomerSaleProductDao {
+public interface CustomerSaleProductDao  {
 	/**
 	 * 新增 customerSaleProduct,返回customerSaleProduct对象(设置了新生成id)
 	 * @param customerSaleProduct
 	 * @return
 	 */
     public CustomerSaleProduct addCustomerSaleProduct(CustomerSaleProduct customerSaleProduct);
-    
+
+	/**
+	 * 批量插入客户销售产品
+	 * @param customerSaleProducts
+	 * @return
+	 */
+	public boolean batchInsert(List<CustomerSaleProduct> customerSaleProducts);
 	 /**
      * 按照主键id更新customerSaleProduct，成功返回1，使用接口时，请重新new CustomerSaleProduct 的更新对象，设置要更新的字段
      * @param id

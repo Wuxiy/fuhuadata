@@ -82,5 +82,12 @@ public interface CustomerBaseInfoService {
 	 * @return
 	 */
 	public List<CountCustomersOrderProduct> countOrderProduct(String customerId);
+
+	/**
+	 * 根据客户id查询合作情况
+	 * @param customerId
+	 * @return
+	 */
+	public CustomerBaseInfo queryCooperationByCid(String customerId);
 	
 }
