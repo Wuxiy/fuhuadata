@@ -130,24 +130,36 @@ public class CustomerBaseInfoAction {
 
 
     /**
+     * 进入详情页
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/intoCustomerBaseInfoDetails",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "customerInfo-customerList",methods = "intoCostomerBaseInfoDetails")
+    public ModelAndView intoCustomerBaseInfoDetails(){
+        ModelAndView model = new ModelAndView("customerInfo/customerDetails");
+        return model;
+    }
+
+    /**
      * 客户基本信息详情
      * @param customerId
      * @return
      */
-    @RequestMapping(value = "/showCostomerBaseInfoDetails",method = RequestMethod.GET)
+    @RequestMapping(value = "/showCustomerBaseInfoDetails",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "customerInfo-customerList",methods = "showCostomerBaseInfoDetails")
-    public ModelAndView showCostomerBaseInfoDetails(String customerId){
+    @ResponseBody
+    public ResultPojo showCustomerBaseInfoDetails(String customerId){
         Result<CustomerBaseInfoVO> result = new Result<CustomerBaseInfoVO>();
         try{
-          result=customerBaseInfoService.getCustomerInfoById(customerId);
+            result=customerBaseInfoService.getCustomerInfoById(customerId);
         }catch (Exception e){
             result.setSuccess(false);
             log.error("获取客户基本信息错误",e);
         }
-        ModelAndView model = new ModelAndView("customerInfo/customerDetails");
-        model.addObject("CustomerBaseInfo",result.getResultPojo());
-        return model;
+        return result.getResultPojo();
     }
+
 
     /**
      * update
