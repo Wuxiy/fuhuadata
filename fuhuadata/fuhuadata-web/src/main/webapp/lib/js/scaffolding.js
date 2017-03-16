@@ -9,7 +9,6 @@ var cancelBtn = '[data-form-btn="cancel"]';
 var delBtn = '[data-form-btn="del"]';
 var saltType = '[name="saltType"]';
 
-
 //初始化
 init();
 //启用功能按钮
@@ -17,8 +16,13 @@ $(document).on('click.edit',editBtn,saveEdit);
 $(document).on('click.save',saveBtn,saveEdit);
 $(document).on('click.cancel',cancelBtn,saveEdit);
 $(document).on('click.del',delBtn,delEl);
+$(document).on('click.del',saltType,radioChecked);
 
-//单选按钮的其他选项
+
+
+/**
+ *单选按钮的他选项
+ */
 function radioChecked(e){
     var el = $(e.target);
     var radioGroup = $('[name="'+el.attr("name")+'"]');

@@ -41,6 +41,7 @@ public class ProductInfoServiceImpl implements ProductInfoService {
     public Result updateProductInfoById(int product_id, ProductInfo productInfo) {
 		Result result = new Result();
 		try {
+			String str=productInfo.getProcessingComponents();
 			result.setSuccess(productInfoManager.updateProductInfoById(product_id, productInfo));
 		} catch(Exception e) {
 			result.setSuccess(false);

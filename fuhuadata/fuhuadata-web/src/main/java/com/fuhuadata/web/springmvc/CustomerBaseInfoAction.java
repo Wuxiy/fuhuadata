@@ -134,9 +134,8 @@ public class CustomerBaseInfoAction {
      * @param customerId
      * @return
      */
-    @RequestMapping(value = "/showCostomerBaseInfoDetails",method = RequestMethod.POST)
+    @RequestMapping(value = "/showCostomerBaseInfoDetails",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "customerInfo-customerList",methods = "showCostomerBaseInfoDetails")
-    @ResponseBody
     public ModelAndView showCostomerBaseInfoDetails(String customerId){
         Result<CustomerBaseInfoVO> result = new Result<CustomerBaseInfoVO>();
         try{

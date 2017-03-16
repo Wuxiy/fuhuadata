@@ -166,7 +166,6 @@
             var tr = $('<tr><td><input class="form-control" type="text" value=""></td><td><input class="form-control" type="text" value=""></td><td style="position: relative"><input class="form-control" type="text" value=""/><button type="button" class="close" data-form-btn="del" data-form-target="tr" style="position: absolute;top:6px;right:-15px;">×</button></td></tr>');
             tr.appendTo('[name="processingComponents"]');
         });
-        $(document).on('click.del',saltType,radioChecked);
 
     })
 
