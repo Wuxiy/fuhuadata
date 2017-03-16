@@ -63,9 +63,9 @@ function init(){
 /**
  *input通用渲染
  */
-function rendererData(result){
+function rendererData(obj){
     //循环数据取值，并将值赋给有相同name的标签
-    var data = result;
+
 }
 
 /**
@@ -96,60 +96,6 @@ function saveEdit(e){
     }
 }
 
-// function addEl(e){
-//     var el = $(e.target);
-//     elName= el.data('form-target');
-//     el = $('[data-name="'+elName+'"]').slice(0,1);
-//     pl = $('[data-place="'+elName+'"]');
-//     //添加不同元素的特殊处理
-//     var newEl,formTar,delBtn;
-//     delBtn= $('<button type="button" class="close" data-form-btn="del">&times;</button>').css('fontSize','24px');
-//     newEl = el.clone().removeAttr('data-name');
-//     var addFromGroup = function(){
-//         formTar = 'form-group';
-//         delBtn.data('form-target',formTar);
-//         newEl.find('input').val('');
-//         newEl.append('<div class="pull-left"></div>').find('.pull-left').append(delBtn);
-//         pl.before(newEl);
-//     }
-//     var addTr = function(){
-//         formTar = 'tr';
-//         delBtn.css({
-//             'position':'absolute',
-//             'right':'-25px',
-//             'top':'3px'
-//         }).data('form-target',formTar);
-//         newEl.find('input').val('');
-//         newEl.find('td').last().css('position','relative').append(delBtn);
-//         pl.before(newEl);
-//     }
-//     var addTbody = function(){
-//         var count = 0;
-//         count++;
-//         formTar = 'tbody';
-//         delBtn.css({
-//             'position':'absolute',
-//             'left':'-25px'
-//         }).data('form-target',formTar);
-//         newEl.find('tr').slice(2,-1).remove().find('input').val('');
-//         var newBtn = newEl.find('[data-form-target]').data('form-target')+count;
-//         console.log(newBtn);
-//         newEl.find('tr').first().find('th').first().css('position','relative').append(delBtn);
-//         newEl.find('[data-name]').attr('data-name',newBtn);
-//         newEl.find('[data-place]').attr('data-place',newBtn);
-//         newEl.find('[data-form-target]').attr('data-form-target',newBtn);
-//         pl.before(newEl);
-//     }
-//     if(el.is('.form-group')){
-//         addFromGroup();
-//     }else if(el.is('tr')){
-//         addTr();
-//     }else if(el.is('tbody')){
-//         addTbody();
-//     }
-//
-// }
-
 /**
  * 删除
  */
@@ -160,40 +106,20 @@ function delEl(e){
     $(tarEl).remove();
 }
 
-    //渲染标准产品档案列表
-    // function productInfo (data) {
-    //     var getData = data.data;
-    //     jQuery.each(getData,function(n,total){
-    //         jQuery.each(total,function(key,item){
-    //             var $formControl=$('[name="'+ key +'"]');
-    //             if($formControl.attr('type')=='radio'||$formControl.attr('type')=='checkbox'){
-    //                 var arr=[item];
-    //                 $formControl.val(arr);
-    //             }else{
-    //                 $formControl.val(item);
-    //             }
-    //         })
-    //     });
-    //     jQuery.each(getData.productInfo,function(key,item){
-    //         console.log(item);
-    //         var formControl=$('[name="'+ key +'"]');
-    //         if(formControl.attr('type')=='radio'||formControl.attr('type')=='checkbox'){
-    //             var arr=[item];
-    //             formControl.val(arr);
-    //         }else {
-    //             formControl.val(item);
-    //         }
-    //     });
-    //     var wTbody = $('[name="wares"]');
-    //     wTbody.html('');
-    //     jQuery.each(getData.wares,function(key,item){
-    //         var tr = $("<tr></tr>");
-    //         tr.append('<td>'+item.specification+'</td><td>'+item.model+'</td>').appendTo(wTbody);
-    //     });
-    //     var iTbody = $('[name="physicalProperities"]');
-    //     iTbody.html('');
-    //     jQuery.each(getData.index,function(key,item){
-    //         var tr = $("<tr></tr>");
-    //         tr.append('<td><input class="form-control" type="text" disabled value="'+item.index+'"></td><td><input class="form-control" type="text" disabled value="'+item.value+'"></td><td><input class="form-control" type="text" disabled value="'+item.remarks+'"/></td>').appendTo(iTbody);
-    //     });
-    // }
+/**
+ * 取得url中的参数
+ */
+function GetRequest() {
+    //url例子：XXX.aspx?ID=" + ID + "&Name=" + Name；
+    var url = location.search; //获取url中"?"符以及其后的字串
+    var theRequest = new Object();
+    if(url.indexOf("?") != -1)//url中存在问号，也就说有参数。
+    {
+        var str = url.substr(1);
+        strs = str.split("&");
+        for (var i = 0; i < strs.length; i++) {
+            theRequest[strs[i].split("=")[0]] = decodeURIComponent(strs[i].split("=")[1]);
+        }
+    }
+    return theRequest;
+}

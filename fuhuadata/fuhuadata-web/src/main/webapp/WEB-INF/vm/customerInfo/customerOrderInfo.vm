@@ -1,0 +1,429 @@
+<div class="clearfix content shadow-out">
+    <!--副导航-->
+    <div class="nav-deputy shadow-out clearfix">
+        <ul class="nav nav-tabs pull-left">
+            <li><a href="">基本信息</a></li>
+            <li><a href="" >市场信息</a></li>
+            <li><a href="" >联系人</a></li>
+            <li class="active"><a href="" >产品要求</a></li>
+            <li><a href="" >订单信息</a></li>
+            <li><a href="" >订单默认要求</a></li>
+            <li><a href="" >沟通记录</a></li>
+            <li><a href="" >公司别名（子公司信息）</a></li>
+            <li><a href="" >关联数据</a></li>
+        </ul>
+        <ul class="breadcrumb pull-right">
+            <li><span class="glyphicon glyphicon-map-marker"></span></li>
+            <li><a href="">合作客户</a></li>
+            <li class="active">{变量}</li>
+        </ul>
+    </div>
+    <!--表格容器-->
+    <div class="dashboard-wrapper">
+        <div class="row">
+            <!--订单信息导航data-spy="affix"-->
+            <div class="col-xs-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" lang="zh">
+                            导航
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="list-group">
+                            <a href="" class="list-group-item" lang="zh">订单记录</a>
+                            <a href="" class="list-group-item" lang="zh">调价记录</a>
+                            <a href="" class="list-group-item" lang="zh">延付款记录</a>
+                            <a href="" class="list-group-item" lang="zh">合同取消记录</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-10">
+                <!--订单记录表-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" lang="zh">
+                            订单记录表
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon" lang="zh">销售组织</span>
+                                        <select class="form-control">
+                                            <option value="" lang="zh">全部</option>
+                                            <option value="" lang="zh">通达</option>
+                                            <option value="" lang="zh">FH</option>
+                                        </select>
+                                        <span class="input-group-addon" lang="zh">外销合同号</span>
+                                        <input class="form-control" type="text" value="" />
+                                        <span class="input-group-addon" lang="zh">付款方式</span>
+                                        <select class="form-control">
+                                            <option value="" lang="zh">预付</option>
+                                            <option value="" lang="zh">账期</option>
+                                            <option value="" lang="zh">补贴</option>
+                                            <option value="" lang="zh">其他</option>
+                                        </select>
+                                        <span class="input-group-addon" lang="zh">开始日期</span>
+                                        <input class="form-control" type="date" value="" />
+                                        <span class="input-group-addon" lang="zh">结束日期</span>
+                                        <input class="form-control" type="date" value="" />
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-xs btn-primary" type="button">搜索</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-condensed table-bordered table-striped text-center">
+                            <caption class="text-right" lang="zh">金额单位：万元</caption>
+                            <thead>
+                            <tr>
+                                <th class="text-center" lang="zh">编号</th>
+                                <th class="text-center" lang="zh">销售组织</th>
+                                <th class="text-center" lang="zh">订单编号</th>
+                                <th class="text-center" lang="zh">外销合同号</th>
+                                <th class="text-center" lang="zh">合同总金额</th>
+                                <th class="text-center" lang="zh">合同成本价</th>
+                                <th class="text-center" lang="zh">是否投诉</th>
+                                <th class="text-center" lang="zh">是否调价</th>
+                                <th class="text-center" lang="zh">利润</th>
+                                <th class="text-center" lang="zh">付款方式</th>
+                                <th class="text-center" lang="zh">是否质押</th>
+                                <th class="text-center" lang="zh">合同时间</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>000001</td>
+                                <td>通达</td>
+                                <td><a href="" target="_blank">00001</a></td>
+                                <td><a href="" target="_blank">LSFH/FH20160701-K</a></td>
+                                <td>2000</td>
+                                <td>1000</td>
+                                <td>否</td>
+                                <td>是</td>
+                                <td>1000</td>
+                                <td>预付款</td>
+                                <td>否</td>
+                                <td>2016-10-10</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!--分页导航-->
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">共<span>123</span>条记录，<span>130</span>页，跳转到第</span>
+                                    <input class="form-control" type="number"/>
+                                    <span class="input-group-addon">页</span>
+                                    <span class="input-group-btn">
+															<button class="btn btn-xs btn-primary">跳转</button>
+														</span>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 text-right pull-right">
+                                <ul class="pagination table-pagination">
+                                    <li class="disabled"><a href="#">上一页</a></li>
+                                    <li class="active"><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#">6</a></li>
+                                    <li><a href="#">7</a></li>
+                                    <li><a href="">&hellip;</a></li>
+                                    <li><a href="#">下一页</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--调价记录表-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" lang="zh">
+                            调价记录表
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon" lang="zh">调价方式</span>
+                                        <select class="form-control">
+                                            <option value="" lang="zh">全部</option>
+                                            <option value="" lang="zh">上调</option>
+                                            <option value="" lang="zh">下调</option>
+                                        </select>
+                                        <span class="input-group-addon" lang="zh">外销合同号</span>
+                                        <input class="form-control" type="text" value="" />
+                                        <span class="input-group-addon" lang="zh">付款方式</span>
+                                        <select class="form-control">
+                                            <option value="" lang="zh">预付</option>
+                                            <option value="" lang="zh">账期</option>
+                                            <option value="" lang="zh">补贴</option>
+                                            <option value="" lang="zh">其他</option>
+                                        </select>
+                                        <span class="input-group-addon" lang="zh">开始日期</span>
+                                        <input class="form-control" type="date" value="" />
+                                        <span class="input-group-addon" lang="zh">结束日期</span>
+                                        <input class="form-control" type="date" value="" />
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-xs btn-primary" type="button">搜索</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-condensed table-bordered table-striped text-center">
+                            <caption class="text-right" lang="zh">金额单位：元</caption>
+                            <thead>
+                            <tr>
+                                <th class="text-center" lang="zh">编号</th>
+                                <th class="text-center" lang="zh">外销合同号</th>
+                                <th class="text-center" lang="zh">调价单价金额</th>
+                                <th class="text-center" lang="zh">合同总价变更</th>
+                                <th class="text-center" lang="zh">调价原因</th>
+                                <th class="text-center" lang="zh">操作人</th>
+                                <th class="text-center" lang="zh">调价日期</th>
+                                <th class="text-center" lang="zh">备注</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><a href="" target="_blank">00001</a></td>
+                                <td class="text-danger">+0.05</td>
+                                <td class="text-danger">+1000</td>
+                                <td>市场价格上涨</td>
+                                <td>刘凯洋</td>
+                                <td>2016-10-10</td>
+
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><a href="" target="_blank">00001</a></td>
+                                <td class="text-success">-0.05</td>
+                                <td class="text-success">-1000</td>
+                                <td>市场价格上涨</td>
+                                <td>刘凯洋</td>
+                                <td>2016-10-10</td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!--分页导航-->
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">共<span>123</span>条记录，<span>130</span>页，跳转到第</span>
+                                    <input class="form-control" type="number"/>
+                                    <span class="input-group-addon">页</span>
+                                    <span class="input-group-btn">
+															<button class="btn btn-xs btn-primary">跳转</button>
+														</span>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 text-right pull-right">
+                                <ul class="pagination table-pagination">
+                                    <li class="disabled"><a href="#">上一页</a></li>
+                                    <li class="active"><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#">6</a></li>
+                                    <li><a href="#">7</a></li>
+                                    <li><a href="">&hellip;</a></li>
+                                    <li><a href="#">下一页</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--延付款记录表-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" lang="zh">
+                            延付款记录表
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon" lang="zh">付款方式</span>
+                                        <select class="form-control">
+                                            <option value="" lang="zh">预付</option>
+                                            <option value="" lang="zh">账期</option>
+                                            <option value="" lang="zh">补贴</option>
+                                            <option value="" lang="zh">其他</option>
+                                        </select>
+                                        <span class="input-group-addon" lang="zh">外销合同号</span>
+                                        <input class="form-control" type="text" value="" />
+                                        <span class="input-group-addon" lang="zh">发票号</span>
+                                        <input class="form-control" type="text" value="" />
+                                        <span class="input-group-addon" lang="zh">应付款日期</span>
+                                        <input class="form-control" type="date" value="" />
+                                        <span class="input-group-addon" lang="zh">实付款日期</span>
+                                        <input class="form-control" type="date" value="" />
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-xs btn-primary" type="button">搜索</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-condensed table-bordered table-striped text-center">
+                            <caption class="text-right" lang="zh">金额单位：万元</caption>
+                            <thead>
+                            <tr>
+                                <th class="text-center" lang="zh">编号</th>
+                                <th class="text-center" lang="zh">外销合同号</th>
+                                <th class="text-center" lang="zh">付款方式</th>
+                                <th class="text-center" lang="zh">发票号</th>
+                                <th class="text-center" lang="zh">应付款时间</th>
+                                <th class="text-center" lang="zh">实付款时间</th>
+                                <th class="text-center" lang="zh">延付款天数</th>
+                                <th class="text-center" lang="zh">还未付款金额</th>
+                                <th class="text-center" lang="zh">备注</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><a href="" target="_blank">00001</a></td>
+                                <td>账期支付</td>
+
+                                <td>2016-10-10</td>
+                                <td>2016-11-11</td>
+                                <td>5</td>
+                                <td>15</td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!--分页导航-->
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">共<span>123</span>条记录，<span>130</span>页，跳转到第</span>
+                                    <input class="form-control" type="number"/>
+                                    <span class="input-group-addon">页</span>
+                                    <span class="input-group-btn">
+															<button class="btn btn-xs btn-primary">跳转</button>
+														</span>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 text-right pull-right">
+                                <ul class="pagination table-pagination">
+                                    <li class="disabled"><a href="#">上一页</a></li>
+                                    <li class="active"><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#">6</a></li>
+                                    <li><a href="#">7</a></li>
+                                    <li><a href="">&hellip;</a></li>
+                                    <li><a href="#">下一页</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--合同取消记录-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" lang="zh">
+                            合同取消记录表
+                        </h3>
+                    </div>
+                    <div class="panel-body clearfix">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-xs-9 pull-right">
+                                    <div class="input-group">
+                                        <span class="input-group-addon" lang="zh">外销合同号</span>
+                                        <input class="form-control" type="text" value="" />
+                                        <span class="input-group-addon" lang="zh">取消原因</span>
+                                        <input class="form-control" type="text" value="" />
+                                        <span class="input-group-addon" lang="zh">开始日期</span>
+                                        <input class="form-control" type="date" value="" />
+                                        <span class="input-group-addon" lang="zh">结束日期</span>
+                                        <input class="form-control" type="date" value="" />
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-xs btn-primary" type="button">搜索</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-condensed table-bordered table-striped text-center">
+                            <thead>
+                            <tr>
+                                <th class="text-center" lang="zh">编号</th>
+                                <th class="text-center" lang="zh">外销合同号</th>
+                                <th class="text-center" lang="zh">合同取消日期</th>
+                                <th class="text-center" lang="zh">取消原因</th>
+                                <th class="text-center" lang="zh">备注</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+
+
+
+
+                            </tr>
+                            <tr>
+                                <td>2</td>
+
+
+
+
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!--分页导航-->
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">共<span>123</span>条记录，<span>130</span>页，跳转到第</span>
+                                    <input class="form-control" type="number"/>
+                                    <span class="input-group-addon">页</span>
+                                    <span class="input-group-btn">
+															<button class="btn btn-xs btn-primary">跳转</button>
+														</span>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 text-right pull-right">
+                                <ul class="pagination table-pagination">
+                                    <li class="disabled"><a href="#">上一页</a></li>
+                                    <li class="active"><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#">6</a></li>
+                                    <li><a href="#">7</a></li>
+                                    <li><a href="">&hellip;</a></li>
+                                    <li><a href="#">下一页</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
