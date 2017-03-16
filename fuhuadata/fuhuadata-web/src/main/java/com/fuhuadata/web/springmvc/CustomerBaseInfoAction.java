@@ -187,5 +187,4 @@ public class CustomerBaseInfoAction {
         return null;
     }
 
-
 }
