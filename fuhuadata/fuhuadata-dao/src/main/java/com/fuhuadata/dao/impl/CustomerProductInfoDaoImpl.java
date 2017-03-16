@@ -5,6 +5,7 @@ import com.fuhuadata.domain.CustomerProductInfo;
 import com.fuhuadata.domain.query.QueryCustomerProductInfo;
 import javax.annotation.Resource;
 
+import com.fuhuadata.vo.CustomerBaseInfoVO;
 import com.fuhuadata.vo.CustomerProductPackagingArchives;
 import org.springframework.stereotype.Component;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
@@ -24,6 +25,7 @@ public class CustomerProductInfoDaoImpl extends SqlMapClientTemplate implements 
     public static final String GET_PAGE = "CUSTOMERPRODUCTINFO.GET-PAGE";
     public static final String COUNT = "CUSTOMERPRODUCTINFO.COUNT";
     public static final String GET_CUSTOMER_PRODUCT_PACKAGING="CUSTOMERPRODUCTINFO.GET-CUSTOMER-PRODUCT-PACKAGING";
+    public static final String GET_CUSTOMER_PRODUCT_REQUIRE_BY_ID="CUSTOMERPRODUCTINFO.GET-CUSTOMER-PRODUCT-REQUIRE-BY-ID";
     
     public CustomerProductInfo addCustomerProductInfo(CustomerProductInfo customerProductInfo) {
 		customerProductInfo.setCustomerProductId((Integer) this.insert(ADD, customerProductInfo));
@@ -54,6 +56,10 @@ public class CustomerProductInfoDaoImpl extends SqlMapClientTemplate implements 
     @Override
     public List<CustomerProductPackagingArchives> getCustomerProductPackagingArchives() {
             return this.queryForList(GET_CUSTOMER_PRODUCT_PACKAGING);
+    }
+
+    public List<CustomerProductPackagingArchives> getCustomerProductPackingArchivesById(String customerId){
+        return this.queryForList(GET_CUSTOMER_PRODUCT_REQUIRE_BY_ID,customerId);
     }
 
     public List<CustomerProductInfo> getCustomerProductInfosByPage(QueryCustomerProductInfo queryCustomerProductInfo) {

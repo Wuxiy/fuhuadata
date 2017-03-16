@@ -43,6 +43,8 @@ public interface CustomerProductInfoManager {
 	 */
 	public List<CustomerProductPackagingArchives> getCustomerProductPackagingArchives();
 
+	public List<CustomerProductPackagingArchives> getCustomerProductPackingArchivesById(String customerId);
+
     /**
      * 返回数据库所有记录，谨慎使用，最好不用
      * @return

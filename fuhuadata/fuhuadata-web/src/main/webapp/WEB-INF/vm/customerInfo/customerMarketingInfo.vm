@@ -1,0 +1,345 @@
+<div class="clearfix content shadow-out">
+    <!--副导航-->
+    <div class="nav-deputy shadow-out clearfix">
+        <ul class="nav nav-tabs pull-left">
+            <li><a href="">基本信息</a></li>
+            <li class="active"><a href="" >市场信息</a></li>
+            <li><a href="" >联系人</a></li>
+            <li><a href="" >产品要求</a></li>
+            <li><a href="" >订单信息</a></li>
+            <li><a href="" >订单默认要求</a></li>
+            <li><a href="" >沟通记录</a></li>
+            <li><a href="" >公司别名（子公司信息）</a></li>
+            <li><a href="" >关联数据</a></li>
+        </ul>
+        <ul class="breadcrumb pull-right">
+            <li><span class="glyphicon glyphicon-map-marker"></span></li>
+            <li><a href="">合作客户</a></li>
+            <li class="active">{变量}</li>
+        </ul>
+    </div>
+    <!--表格容器-->
+    <div class="dashboard-wrapper">
+        <div class="row">
+            <div class="col-xs-10">
+                <!--采购产品表-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <button data-toggle="modal" data-target="#cusPro" class="btn btn-xs btn-primary panel-heading-btn pull-right" lang="zh">
+                            新增
+                        </button>
+                        <h3 class="panel-title" lang="zh">
+                            采购产品
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <!--筛选-->
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-xs-2">
+                                    <select class="form-control">
+                                        <option value="">2013</option>
+                                        <option value="">2014</option>
+                                        <option value="">2015</option>
+                                        <option value="">2016</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!--表格-->
+                        <table class="table table-condensed table-bordered table-striped text-center">
+                            <tbody>
+                            <tr>
+                                <th class="text-center" lang="zh">采购产品</th>
+                                <th class="text-center" lang="zh">草甘膦95%原药</th>
+                                <th class="text-center" lang="zh">年需求量</th>
+                                <th class="text-center">10000T</th>
+                                <th class="text-center" lang="zh">平均单价（美元）</th>
+                                <th class="text-center">2.13</th>
+                            </tr>
+                            <tr>
+                                <td><span lang="zh">供应商</span>1</td>
+                                <td lang="zh">福华</td>
+                                <td lang="zh">年采购量</td>
+                                <td>5000T</td>
+                                <td lang="zh">单价</td>
+                                <td>2.12</td>
+                            </tr>
+                            <tr>
+                                <td><span lang="zh">供应商</span>2</td>
+                                <td lang="zh">润丰</td>
+                                <td lang="zh">年采购量</td>
+                                <td>5000T</td>
+                                <td lang="zh">单价</td>
+                                <td>2.12</td>
+                            </tr>
+                            <tr>
+                                <td><span lang="zh">供应商</span>3</td>
+                                <td lang="zh">中化</td>
+                                <td lang="zh">年采购量</td>
+                                <td>5000T</td>
+                                <td lang="zh">单价</td>
+                                <td>2.12</td>
+                            </tr>
+                            </tbody>
+                            <tbody>
+                            <tr>
+                                <th class="text-center" lang="zh">采购产品</th>
+                                <th class="text-center" lang="zh">草甘膦95%原药</th>
+                                <th class="text-center" lang="zh">年需求量</th>
+                                <th class="text-center">10000T</th>
+                                <th class="text-center" lang="zh">平均单价（美元）</th>
+                                <th class="text-center">2.13</th>
+                            </tr>
+                            <tr>
+                                <td><span lang="zh">供应商</span>1</td>
+                                <td lang="zh">福华</td>
+                                <td lang="zh">年采购量</td>
+                                <td>5000T</td>
+                                <td lang="zh">单价</td>
+                                <td>2.12</td>
+                            </tr>
+                            <tr>
+                                <td><span lang="zh">供应商</span>2</td>
+                                <td lang="zh">润丰</td>
+                                <td lang="zh">年采购量</td>
+                                <td>5000T</td>
+                                <td lang="zh">单价</td>
+                                <td>2.12</td>
+                            </tr>
+                            <tr>
+                                <td><span lang="zh">供应商</span>3</td>
+                                <td lang="zh">中化</td>
+                                <td lang="zh">年采购量</td>
+                                <td>5000T</td>
+                                <td lang="zh">单价</td>
+                                <td>2.12</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--销售产品表-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <button class="btn btn-xs btn-primary panel-heading-btn pull-right" lang="zh">
+                            新增
+                        </button>
+                        <h3 class="panel-title" lang="zh">
+                            销售产品
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <!--筛选-->
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-xs-2">
+                                    <select class="form-control">
+                                        <option value="">2013</option>
+                                        <option value="">2014</option>
+                                        <option value="">2015</option>
+                                        <option value="">2016</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!--表格-->
+                        <table class="table table-condensed table-bordered table-striped text-center">
+                            <tbody>
+                            <tr>
+                                <th class="text-center" lang="zh">销售产品</th>
+                                <th class="text-center" lang="zh">草甘膦</th>
+                                <th class="text-center" lang="zh">品牌</th>
+                                <th class="text-center">NUFARM</th>
+                                <th class="text-center" lang="zh">营销方式</th>
+                                <th class="text-center">产品组合</th>
+                            </tr>
+                            <tr>
+                                <td lang="zh">年销售量</td>
+                                <td>20000T</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><span lang="zh">销售目的国</span>1</td>
+                                <td lang="zh">美国</td>
+                                <td lang="zh">年销售量</td>
+                                <td>5000T</td>
+                                <td lang="zh">所占市场份额</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><span lang="zh">销售目的国</span>2</td>
+                                <td lang="zh">美国</td>
+                                <td lang="zh">年销售量</td>
+                                <td>5000T</td>
+                                <td lang="zh">所占市场份额</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><span lang="zh">销售目的国</span>3</td>
+                                <td lang="zh">美国</td>
+                                <td lang="zh">年销售量</td>
+                                <td>5000T</td>
+                                <td lang="zh">所占市场份额</td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                            <tbody>
+                            <tr>
+                                <th class="text-center" lang="zh">销售产品</th>
+                                <th class="text-center" lang="zh">草甘膦</th>
+                                <th class="text-center" lang="zh">品牌</th>
+                                <th class="text-center">NUFARM</th>
+                                <th class="text-center" lang="zh">营销方式</th>
+                                <th class="text-center">产品组合</th>
+                            </tr>
+                            <tr>
+                                <td lang="zh">年销售量</td>
+                                <td>20000T</td>
+
+
+
+
+                            </tr>
+                            <tr>
+                                <td><span lang="zh">销售目的国</span>1</td>
+                                <td lang="zh">美国</td>
+                                <td lang="zh">年销售量</td>
+                                <td>5000T</td>
+                                <td lang="zh">所占市场份额</td>
+
+                            </tr>
+                            <tr>
+                                <td><span lang="zh">销售目的国</span>2</td>
+                                <td lang="zh">美国</td>
+                                <td lang="zh">年销售量</td>
+                                <td>5000T</td>
+                                <td lang="zh">所占市场份额</td>
+
+                            </tr>
+                            <tr>
+                                <td><span lang="zh">销售目的国</span>3</td>
+                                <td lang="zh">美国</td>
+                                <td lang="zh">年销售量</td>
+                                <td>5000T</td>
+                                <td lang="zh">所占市场份额</td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--合作情况-->
+                <div class="panel panel-default panel-edit">
+                    <div class="panel-heading">
+                        <button data-form-btn="edit" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
+                            编辑
+                        </button>
+                        <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden">
+                            <button data-form-btn="cancel" class="btn" lang="zh">取消</button>
+                            <button data-form-btn="save" class="btn btn-primary" lang="zh">保存</button>
+                        </div>
+                        <h3 class="panel-title" lang="zh">
+                            合作情况
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <!--表单-->
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="control-label col-xs-3" lang="zh">价格敏感度</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" /></div>
+                                <label class="control-label col-xs-2" lang="zh">忠诚度</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" /></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-3" lang="zh">开始合作时间</label>
+                                <div class="col-xs-2"><input class="form-control" type="date" value="2016-12-12" /></div>
+                                <label class="control-label col-xs-2" lang="zh">合作时间</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="36个月" /></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-3" lang="zh">采购季节</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="每年3-5月" /></div>
+                                <label class="control-label col-xs-2" lang="zh">活跃周期</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="12个月" /></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-3" lang="zh">合作紧密度（福华是否独家供应）</label>
+                                <div class="col-xs-2">
+                                    <select class="form-control" >
+                                        <option value="" selected lang="zh">是</option>
+                                        <option value="" lang="zh">否</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-3" lang="zh">备注</label>
+                                <div class="col-xs-8"><textarea class="form-control" rows="3" ></textarea></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--modal-->
+        <div class="modal fade" id="cusPro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title">
+                            年份：<span>2016</span>
+                        </h4>
+                    </div>
+                    <div class="modal-body" style="padding: 15px 30px;">
+                        <table class="table table-condensed table-bordered table-striped text-center">
+                            <tbody data-name="proCon">
+                            <tr>
+                                <th class="text-center" lang="zh">采购产品</th>
+                                <th><input class="form-control" type="text" /></th>
+                                <th class="text-center" lang="zh">年需求量</th>
+                                <th><input class="form-control" type="text" /></th>
+                                <th class="text-center" lang="zh">平均单价（美元）</th>
+                                <th><input class="form-control" type="text" /></th>
+                            </tr>
+                            <tr data-name="proItem">
+                                <td><span lang="zh">供应商</span>1</td>
+                                <td><input class="form-control" type="text" /></td>
+                                <td lang="zh">年采购量</td>
+                                <td><input class="form-control" type="text" /></td>
+                                <td lang="zh">单价</td>
+                                <td><input class="form-control" type="text" /></td>
+                            </tr>
+                            <tr data-place="proItem">
+                                <td colspan="7">
+                                    <button data-form-btn="add" data-form-target="proItem" class="btn btn-xs btn-link" type="button" lang="zh">添加供应商</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot data-place="proCon" style="display: none;"></tfoot>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-xs-2 col-xs-offset-3">
+                            <button data-form-btn="add" data-form-target="proCon" type="button" class="btn btn-block btn-primary continueAdd" lang="zh">继续添加产品</button>
+                        </div>
+                        <div class="col-xs-2">
+                            <button type="button" class="btn btn-block btn-primary" data-dismiss="modal" lang="zh">完成</button>
+                        </div>
+                        <div class="col-xs-2">
+                            <button type="button" class="btn btn-block btn-default" data-dismiss="modal" lang="zh">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

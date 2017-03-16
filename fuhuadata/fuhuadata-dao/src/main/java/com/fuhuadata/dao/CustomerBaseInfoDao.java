@@ -3,7 +3,9 @@ import java.util.List;
 
 import com.fuhuadata.domain.CountCustomersOrderProduct;
 import com.fuhuadata.domain.CustomerBaseInfo;
+import com.fuhuadata.domain.CustomerMakeProduct;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
+import com.fuhuadata.vo.CustomerBaseInfoVO;
 
 /**
  * @author wangbo
@@ -51,6 +53,20 @@ public interface CustomerBaseInfoDao {
      * @return
      */
     public CustomerBaseInfo getCustomerBaseInfoById(String customer_id);
+
+	/**
+	 * 客户基本信息
+	 * @param customerId
+	 * @return
+	 */
+	public CustomerBaseInfoVO getCustomerInfoById(String customerId);
+
+	/**
+	 * 获取客户产品产能
+	 * @param customerId
+	 * @return
+	 */
+	public List<CustomerMakeProduct> getCustomerMakeProductById(String customerId);
         
 	 /**
      * 查询列表，包含分页查询，查询结果为空返回空的List对象

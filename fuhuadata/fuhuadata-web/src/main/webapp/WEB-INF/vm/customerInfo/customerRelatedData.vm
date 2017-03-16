@@ -1,0 +1,85 @@
+<div class="clearfix content shadow-out">
+    <!--副导航-->
+    <div class="nav-deputy shadow-out clearfix">
+        <ul class="nav nav-tabs pull-left">
+            <li><a href="">基本信息</a></li>
+            <li><a href="" >市场信息</a></li>
+            <li><a href="" >联系人</a></li>
+            <li><a href="" >产品要求</a></li>
+            <li><a href="" >订单信息</a></li>
+            <li><a href="" >订单默认要求</a></li>
+            <li><a href="" >沟通记录</a></li>
+            <li><a href="" >公司别名（子公司信息）</a></li>
+            <li class="active"><a href="" >关联数据</a></li>
+        </ul>
+        <ul class="breadcrumb pull-right">
+            <li><span class="glyphicon glyphicon-map-marker"></span></li>
+            <li><a href="">合作客户</a></li>
+            <li class="active">{变量}</li>
+        </ul>
+    </div>
+    <!--表格容器-->
+    <div class="dashboard-wrapper">
+        <div class="row">
+            <!--导航-->
+            <div class="col-xs-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" lang="zh">
+                            导航
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="list-group">
+                            <a href="" class="list-group-item" lang="zh">海关数据</a>
+                            <a href="" class="list-group-item" lang="zh">病虫害数据</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-10">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" lang="zh">
+                            海关数据表
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-condensed table-bordered table-striped text-center">
+                            <thead>
+                            <tr>
+                                <th class="text-center" lang="zh">企业名称</th>
+                                <th class="text-center" lang="zh">所属国家</th>
+                                <th class="text-center" lang="zh">产品类型</th>
+                                <th class="text-center" lang="zh">交易类型</th>
+                                <th class="text-center" lang="zh">交易量</th>
+                                <th class="text-center" lang="zh">交易金额</th>
+                                <th class="text-center" lang="zh">平均单价</th>
+                                <th class="text-center" lang="zh">该国交易总量</th>
+                                <th class="text-center" lang="zh">交易量占比</th>
+                                <th class="text-center" lang="zh">图表</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>FUHUA</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

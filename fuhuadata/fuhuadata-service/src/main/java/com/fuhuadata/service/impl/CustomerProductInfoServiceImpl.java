@@ -65,6 +65,17 @@ public class CustomerProductInfoServiceImpl implements CustomerProductInfoServic
 		return result;
 	}
 
+	public Result<List<CustomerProductPackagingArchives>> getCustomerProductPackagingArchivesById(String customerId) {
+		Result<List<CustomerProductPackagingArchives>> result = new Result<List<CustomerProductPackagingArchives>>();
+		try{
+			result.addDefaultModel("CustomerProductPackagingArchives",customerProductInfoManager.getCustomerProductPackingArchivesById(customerId));
+		}catch(Exception e){
+			result.setSuccess(false);
+			log.error("获取客户产品包装要求错误",e);
+		}
+		return result;
+	}
+
 	public Result<List<CustomerProductInfo>> getCustomerProductInfosByQuery(QueryCustomerProductInfo queryCustomerProductInfo) {
 		Result<List<CustomerProductInfo>> result = new Result<List<CustomerProductInfo>>();
 		try {

@@ -171,7 +171,7 @@ $("input[name='cellcheckbox']").each(function(){
 
 //编辑完成保存
     $('#finish').on('click',function(){
-        var url = 'packingArchives/doModify';
+        var url = basePath+'/packingArchives/doModify';
         var data = {
             "packName": jQuery('#packName').val(),
             "spec": jQuery('#spec').val(),

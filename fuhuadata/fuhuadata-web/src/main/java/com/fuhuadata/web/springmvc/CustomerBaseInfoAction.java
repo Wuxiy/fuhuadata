@@ -1,17 +1,21 @@
 package com.fuhuadata.web.springmvc;
 
 import com.fuhuadata.domain.CustomerBaseInfo;
+import com.fuhuadata.domain.CustomerMakeProduct;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.CustomerAreaService;
 import com.fuhuadata.service.CustomerBaseInfoService;
+import com.fuhuadata.service.CustomerMakeProductService;
 import com.fuhuadata.vo.CategoryTree;
+import com.fuhuadata.vo.CustomerBaseInfoVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,6 +39,8 @@ public class CustomerBaseInfoAction {
     private CustomerBaseInfoService customerBaseInfoService;
     @Autowired
     private CustomerAreaService  customerAreaService;
+    @Autowired
+    private CustomerMakeProductService customerMakeProductService;
 
     /**
      * 客户信息列表页入口
@@ -108,5 +114,77 @@ public class CustomerBaseInfoAction {
         return null;
     }
 
+    @RequestMapping(value = "/showCustomerBaseInfo",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "customerInfo-customerList",methods = "showCustomerBaseInfo")
+    public ModelAndView showCustomerBaseInfo(Integer customerType){
+        if(customerType==1){
+            return new ModelAndView("customerInfo/customerDetails").addObject("customerType",customerType);
+        }else if(customerType==2){
+            return new ModelAndView("customerInfo/customerDetails").addObject("customerType",customerType);
+        }else if(customerType==3){
+            return new ModelAndView("customerInfo/customerDetails").addObject("customerType",customerType);
+        }
+        return null;
+    }
+
+
+
+    /**
+     * 进入详情页
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/intoCustomerBaseInfoDetails",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "customerInfo-customerList",methods = "intoCostomerBaseInfoDetails")
+    public ModelAndView intoCustomerBaseInfoDetails(){
+        ModelAndView model = new ModelAndView("customerInfo/customerBasicInfo");
+        return model;
+    }
+
+    /**
+     * 客户基本信息详情
+     * @param customerId
+     * @return
+     */
+    @RequestMapping(value = "/showCustomerBaseInfoDetails",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "customerInfo-customerList",methods = "showCostomerBaseInfoDetails")
+    @ResponseBody
+    public ResultPojo showCustomerBaseInfoDetails(String customerId){
+        Result<CustomerBaseInfoVO> result = new Result<CustomerBaseInfoVO>();
+        try{
+            result=customerBaseInfoService.getCustomerInfoById(customerId);
+        }catch (Exception e){
+            result.setSuccess(false);
+            log.error("获取客户基本信息错误",e);
+        }
+        return result.getResultPojo();
+    }
+
+
+    /**
+     * update
+     * @param customerBaseInfo
+     * @param customerMakeProducts
+     * @return
+     */
+    @RequestMapping(value = "/updateCustomerBaseInfo",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "customerInfo-customerList",methods = "updateCustomerBaseInfo")
+    @ResponseBody
+    public ResultPojo updateCustomerBaseInfo(@RequestBody CustomerBaseInfo customerBaseInfo, CustomerMakeProduct[] customerMakeProducts){
+      Result result = new Result();
+        try{
+            String id=customerBaseInfo.getCustomerId();
+            result=customerBaseInfoService.updateCustomerBaseInfoById(id,customerBaseInfo);
+        }catch (Exception e){
+            log.error("更新客户基本信息出错",e);
+        }
+        try{
+            result=customerMakeProductService.updateCustomerMakeProducts(customerMakeProducts);
+            result.getResultPojo().setMessage("客户产品产能更新成功");
+        }catch(Exception e){
+            log.error("更新客户产品产能信息出错",e);
+        }
+        return null;
+    }
 
 }
