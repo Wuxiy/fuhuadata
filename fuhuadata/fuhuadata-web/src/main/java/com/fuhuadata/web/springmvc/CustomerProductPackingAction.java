@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import java.util.List;
 /**
- * 客户产品包装要求action
+ * 客户产品要求action
  * Created by wuxi on 2017/1/13.
  */
 
@@ -59,6 +59,16 @@ public class CustomerProductPackingAction {
         }
         return null;
     }
+
+
+    /**
+     *客户信息页面客户产品要求
+     * @return
+     */
+    @SuppressWarnings("unused")
+    @RequestMapping(value="/intoCustomerProductInfo",method= RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-customerProductPackaging  ",methods = "into")
+    public ModelAndView intoCustomerProductInfo(){return new ModelAndView("customerInfo/customerProductRequest");}
 
 
     @RequestMapping(value = "/getCustomerProductInfoById",method = RequestMethod.GET)

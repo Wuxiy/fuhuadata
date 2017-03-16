@@ -137,7 +137,7 @@ public class CustomerBaseInfoAction {
     @RequestMapping(value = "/intoCustomerBaseInfoDetails",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "customerInfo-customerList",methods = "intoCostomerBaseInfoDetails")
     public ModelAndView intoCustomerBaseInfoDetails(){
-        ModelAndView model = new ModelAndView("customerInfo/customerDetails");
+        ModelAndView model = new ModelAndView("customerInfo/customerBasicInfo");
         return model;
     }
 
