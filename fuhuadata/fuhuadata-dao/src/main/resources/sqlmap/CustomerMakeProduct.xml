@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="CUSTOMERMAKEPRODUCT">
+    <typeAlias alias="CustomerMakeProduct" type="com.fuhuadata.domain.CustomerMakeProduct"/>
+    <typeAlias alias="CustomerMakeProductQuery" type="com.fuhuadata.domain.query.CustomerMakeProductQuery"/>
+    <resultMap id="CUSTOMERMAKEPRODUCT-MAP" class="CustomerMakeProduct">
+        <result column="id" property="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="customer_id" property="customerId" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="product_name" property="productName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="production" property="production" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="PAGE-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotNull prepend=" AND " property="id">
+                id = #id#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="customerId">
+                customer_id = #customerId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="productName">
+                product_name = #productName#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="production">
+                production = #production#
+            </isNotNull>
+        </dynamic>
+    </sql>
+
+    <sql id="QUERY-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotNull prepend=" AND " property="id">
+                id = #id#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="customerId">
+                customer_id = #customerId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="productName">
+                product_name = #productName#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="production">
+                production = #production#
+            </isNotNull>
+        </dynamic>
+    </sql>
+
+    <insert id="ADD" parameterClass="CustomerMakeProduct">
+        <![CDATA[
+        insert into customer_make_products (id, customer_id, product_name,
+        production)
+        values (#id#, #customerId#, #productName#,
+        #production#)
+        ]]>
+        <selectKey resultClass="int" keyProperty="id">
+            SELECT @@IDENTITY AS ID
+        </selectKey>
+    </insert>
+    
+    <update id="UPDATE" parameterClass="CustomerMakeProduct">
+        UPDATE customer_make_products
+        <dynamic prepend=" SET ">
+            <isNotNull prepend=", " property="id">
+                id = #id#
+            </isNotNull>
+            <isNotNull prepend=", " property="customerId">
+                customer_id = #customerId#
+            </isNotNull>
+            <isNotNull prepend=", " property="productName">
+                product_name = #productName#
+            </isNotNull>
+            <isNotNull prepend=", " property="production">
+                production = #production#
+            </isNotNull>
+        </dynamic>
+    </update>
+
+    <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
+        <![CDATA[
+            DELETE FROM customer_make_products WHERE id = #id#
+        ]]>
+    </delete>
+
+    <delete id="DELETE-BY-IDS" parameterClass="java.util.List">
+            DELETE
+            from customer_make_products
+            where id in
+            <iterate conjunction="," open="(" close=")">
+                #[]#
+            </iterate>
+    </delete>
+    
+    <insert id="BATCH-ADD" parameterClass="java.util.List">
+            <![CDATA[
+            INSERT INTO customer_make_products
+            (id, customer_id, product_name,production) values
+            ]]>
+            <iterate conjunction=",">
+                <![CDATA[
+                (#[].id#,#[].customerId#,#[].productName#,
+                #[].production#)
+                ]]>
+            </iterate>
+</insert>
+
+    <select id="GET-BY-CUSTOMERID" resultMap="CUSTOMERMAKEPRODUCT-MAP" parameterClass="java.lang.String">
+        <![CDATA[
+            SELECT * FROM customer_make_products WHERE customer_id = #customerId#
+        ]]>
+    </select>
+
+    <select id="GET-BY-QUERY" resultMap="CUSTOMERMAKEPRODUCT-MAP" parameterClass="CustomerMakeProductQuery">
+        <![CDATA[
+        SELECT * FROM customer_make_products
+    ]]>
+        <isParameterPresent>
+            <include refid="QUERY-COMMON" />
+        </isParameterPresent>
+        LIMIT #startRow#,#pageSize#
+    </select>
+
+    <select id="COUNT" resultClass="java.lang.Integer" parameterClass="CustomerMakeProductQuery">
+        <![CDATA[
+        SELECT COUNT(id) FROM customer_make_products
+        ]]>
+        <isParameterPresent>
+            <include refid="QUERY-COMMON"/>
+        </isParameterPresent>
+    </select>
+</sqlMap>

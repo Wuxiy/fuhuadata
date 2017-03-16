@@ -348,7 +348,7 @@
 	]]>
 	</select>
 	
-	<select id="GET-PRODUCT-BY-ID" resultClass="CustomerMakeProduct" parameterClass="string">
+	<select id="GET-PRODUCT-BY-ID" resultClass="CustomerMakeProduct" parameterClass="java.lang.String">
 		<![CDATA[
 		SELECT id,product_name AS productName,production FROM customer_make_products WHERE customer_id = 'fh123456'
 	]]>

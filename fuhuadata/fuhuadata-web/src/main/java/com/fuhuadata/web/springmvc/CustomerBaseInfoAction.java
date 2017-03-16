@@ -1,11 +1,13 @@
 package com.fuhuadata.web.springmvc;
 
 import com.fuhuadata.domain.CustomerBaseInfo;
+import com.fuhuadata.domain.CustomerMakeProduct;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.CustomerAreaService;
 import com.fuhuadata.service.CustomerBaseInfoService;
+import com.fuhuadata.service.CustomerMakeProductService;
 import com.fuhuadata.vo.CategoryTree;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
@@ -37,6 +39,8 @@ public class CustomerBaseInfoAction {
     private CustomerBaseInfoService customerBaseInfoService;
     @Autowired
     private CustomerAreaService  customerAreaService;
+    @Autowired
+    private CustomerMakeProductService customerMakeProductService;
 
     /**
      * 客户信息列表页入口
@@ -139,10 +143,38 @@ public class CustomerBaseInfoAction {
           result=customerBaseInfoService.getCustomerInfoById(customerId);
         }catch (Exception e){
             result.setSuccess(false);
-            log.error("统计客户购买产品列表明细失败",e);
+            log.error("获取客户基本信息错误",e);
         }
         ModelAndView model = new ModelAndView("customerInfo/customerDetails");
         model.addObject("CustomerBaseInfo",result.getResultPojo());
         return model;
     }
+
+    /**
+     * update
+     * @param customerBaseInfo
+     * @param customerMakeProducts
+     * @return
+     */
+    @RequestMapping(value = "/updateCustomerBaseInfo",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "customerInfo-customerList",methods = "updateCustomerBaseInfo")
+    @ResponseBody
+    public ResultPojo updateCustomerBaseInfo(@RequestBody CustomerBaseInfo customerBaseInfo, CustomerMakeProduct[] customerMakeProducts){
+      Result result = new Result();
+        try{
+            String id=customerBaseInfo.getCustomerId();
+            result=customerBaseInfoService.updateCustomerBaseInfoById(id,customerBaseInfo);
+        }catch (Exception e){
+            log.error("更新客户基本信息出错",e);
+        }
+        try{
+            result=customerMakeProductService.updateCustomerMakeProducts(customerMakeProducts);
+            result.getResultPojo().setMessage("客户产品产能更新成功");
+        }catch(Exception e){
+            log.error("更新客户产品产能信息出错",e);
+        }
+        return null;
+    }
+
+
 }
