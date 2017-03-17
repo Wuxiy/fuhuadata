@@ -6,10 +6,9 @@
    	<typeAlias alias="CustomerBaseInfo" type="com.fuhuadata.domain.CustomerBaseInfo"/>
    	<typeAlias alias="QueryCustomerBaseInfo" type="com.fuhuadata.domain.query.QueryCustomerBaseInfo"/>
 	<typeAlias alias="CountCustomersOrderProduct" type="com.fuhuadata.domain.CountCustomersOrderProduct"/>
-<<<<<<< HEAD
-=======
 	<typeAlias alias="CustomerBaseInfoVO" type="com.fuhuadata.vo.CustomerBaseInfoVO"/>
 	<typeAlias alias="CustomerMakeProduct" type="com.fuhuadata.domain.CustomerMakeProduct"/>
+
 	<resultMap id="CUSTOMERBASEINFO-MAP" class="CustomerBaseInfo">
 					<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="fullName" column="full_name" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -63,7 +62,6 @@
 	</resultMap>
 
 
->>>>>>> 29c4b59d7e689990750e41a3a57981f919230258
 	<sql id="PAGE-COMMON">
 		<dynamic prepend=" WHERE ">
 				<isNotEmpty prepend=" AND " property="customerId">
