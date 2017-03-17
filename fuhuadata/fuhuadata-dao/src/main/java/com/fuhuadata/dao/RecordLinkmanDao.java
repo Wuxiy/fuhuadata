@@ -61,6 +61,13 @@ public interface RecordLinkmanDao {
      * @return
      */
     public List<RecordLinkman> getRecordLinkmansByPage(QueryRecordLinkman queryRecordLinkman);
+
+	/**
+	 * 根据联系人id返回联系人访问记录列表
+	 * @param linkmanId
+	 * @return
+	 */
+	public List<RecordLinkman> getRecordLinkmanByLinkmanId(String linkmanId);
     	
 	 /**
      * 查询总数

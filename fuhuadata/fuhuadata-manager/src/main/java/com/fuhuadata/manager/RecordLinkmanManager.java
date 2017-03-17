@@ -37,6 +37,8 @@ public interface RecordLinkmanManager {
      * 返回数据库所有记录，谨慎使用，最好不用
      * @return
      */
+
+
     public List<RecordLinkman> getAllRecordLinkmans();
     
 	/**
@@ -45,6 +47,8 @@ public interface RecordLinkmanManager {
      * @return
      */    	
     public List<RecordLinkman> getRecordLinkmansByQuery(QueryRecordLinkman queryRecordLinkman);
+
+    public List<RecordLinkman> getRecordLinkmanByLinkmanId(String linkmanId);
 
     /**
      * 通过主键id查询RecordLinkman
@@ -65,6 +69,7 @@ public interface RecordLinkmanManager {
      * @return
      */
     public Result<List<RecordLinkman>> getRecordLinkmansByPage(QueryRecordLinkman queryRecordLinkman);
+
 
     /**
      * 查询总数
