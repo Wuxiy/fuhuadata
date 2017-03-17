@@ -297,13 +297,6 @@ public class CustomerBaseInfoVO {
         this.enterprisePhone = enterprisePhone;
     }
 
-    public String getEnterpriseEmaill() {
-        return enterpriseEmail;
-    }
-
-    public void setEnterpriseEmaill(String enterpriseEmail) {
-        this.enterpriseEmail = enterpriseEmail;
-    }
 
     public String getCustomField() {
         return customField;

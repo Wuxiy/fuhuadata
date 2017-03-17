@@ -26,7 +26,7 @@
 					<result property="zhongxinbaoLevel" column="zhongxinbao_level" jdbcType="INT" javaType="java.lang.Integer" />
 					<result property="remark" column="remark" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="enterprisePhone" column="enterprise_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
-					<result property="enterpriseEmaill" column="enterprise_emaill" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="enterpriseEmail" column="enterprise_email" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="enterpriseProfile" column="enterprise_profile" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="developmentCourse" column="development_course" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="salesNetwork" column="sales_network" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -98,8 +98,8 @@
 				<isNotEmpty prepend=" AND " property="enterprisePhone">
 			enterprise_phone = #enterprisePhone#
 		</isNotEmpty>
-				<isNotEmpty prepend=" AND " property="enterpriseEmaill">
-			enterprise_emaill = #enterpriseEmaill#
+				<isNotEmpty prepend=" AND " property="enterpriseEmail">
+			enterprise_email = #enterpriseEmail#
 		</isNotEmpty>
 			<isNotEmpty prepend="and" property="customerLevel">
 				customer_level=#customerLevel#
@@ -187,8 +187,8 @@
 				<isNotEmpty prepend=" AND " property="enterprisePhone">
 			enterprise_phone = #enterprisePhone#
 		</isNotEmpty>
-				<isNotEmpty prepend=" AND " property="enterpriseEmaill">
-			enterprise_emaill = #enterpriseEmaill#
+				<isNotEmpty prepend=" AND " property="enterpriseEmail">
+			enterprise_email = #enterpriseEmail#
 		</isNotEmpty>
 				<isNotEmpty prepend=" AND " property="enterpriseProfile">
 			enterprise_profile = #enterpriseProfile#
@@ -228,8 +228,8 @@
 	
 	<insert id="ADD" parameterClass="CustomerBaseInfo">
 		INSERT INTO 
-		customer_base_info(customer_id,full_name,short_name,customer_type,area_id,area,country_id,country,registered_funds,registered_address,management_scope,zhongxinbao_number,zhongxinbao_level,parent_remarks,enterprise_phone,enterprise_emaill,enterprise_profile,development_course,sales_network,custom_field,customer_completion,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time)
-		VALUES(#customerId#,#fullName#,#shortName#,#customerType#,#areaId#,#area#,#countryId#,#country#,#registeredFunds#,#registeredAddress#,#managementScope#,#zhongxinbaoNumber#,#zhongxinbaoLevel#,#remark#,#enterprisePhone#,#enterpriseEmaill#,#enterpriseProfile#,#developmentCourse#,#salesNetwork#,#customField#,#customerCompletion#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
+		customer_base_info(customer_id,full_name,short_name,customer_type,area_id,area,country_id,country,registered_funds,registered_address,management_scope,zhongxinbao_number,zhongxinbao_level,parent_remarks,enterprise_phone,enterprise_email,enterprise_profile,development_course,sales_network,custom_field,customer_completion,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time)
+		VALUES(#customerId#,#fullName#,#shortName#,#customerType#,#areaId#,#area#,#countryId#,#country#,#registeredFunds#,#registeredAddress#,#managementScope#,#zhongxinbaoNumber#,#zhongxinbaoLevel#,#remark#,#enterprisePhone#,#enterpriseEmail#,#enterpriseProfile#,#developmentCourse#,#salesNetwork#,#customField#,#customerCompletion#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
 		<selectKey resultClass="String" keyProperty="id">
 			SELECT @@IDENTITY AS ID
 		</selectKey>
@@ -252,7 +252,7 @@
 						<isNotEmpty prepend=", " property="zhongxinbaoLevel">zhongxinbao_level=#zhongxinbaoLevel#</isNotEmpty>
 						<isNotEmpty prepend=", " property="remark">parent_remarks=#remark#</isNotEmpty>
 						<isNotEmpty prepend=", " property="enterprisePhone">enterprise_phone=#enterprisePhone#</isNotEmpty>
-						<isNotEmpty prepend=", " property="enterpriseEmaill">enterprise_emaill=#enterpriseEmaill#</isNotEmpty>
+						<isNotEmpty prepend=", " property="enterpriseEmail">enterprise_email=#enterpriseEmail#</isNotEmpty>
 						<isNotEmpty prepend=", " property="enterpriseProfile">enterprise_profile=#enterpriseProfile#</isNotEmpty>
 						<isNotEmpty prepend=", " property="developmentCourse">development_course=#developmentCourse#</isNotEmpty>
 						<isNotEmpty prepend=", " property="salesNetwork">sales_network=#salesNetwork#</isNotEmpty>
@@ -342,7 +342,7 @@
 			base.other_opportunity otherOpportunity,
 			base.opportunity_describle opportunityDescrible,
 			base.enterprise_phone enterprisePhone,
-			base.enterprise_emaill enterpriseEmail,
+			base.enterprise_email enterpriseEmail,
 			base.customer_completion customerCompletion,
 			base.lastmodify_user_id lastmodifyUserId,
 			base.lastmodify_user_name lastmodifyUserName,

@@ -24,4 +24,6 @@
 	<bean id="customerProductInfoService" class="com.fuhuadata.service.impl.CustomerProductInfoServiceImpl"/>
 	<bean id="customerMakeProductService" class="com.fuhuadata.service.impl.CustomerMakeProductServiceImpl"/>
 	<bean id="customerLinkmanService" class="com.fuhuadata.service.impl.CustomerLinkmanServiceImpl"/>
+	<bean id="customerPurchaseProductService" class="com.fuhuadata.service.impl.CustomerPurchaseProductServiceImpl"/>
+	<bean id="customerSaleProductService" class="com.fuhuadata.service.impl.CustomerSaleProductServiceImpl"/>
 </beans>
