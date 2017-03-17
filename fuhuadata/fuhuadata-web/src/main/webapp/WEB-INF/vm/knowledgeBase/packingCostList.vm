@@ -57,20 +57,13 @@
         </div>
     </div>
 </div>
-<<<<<<< HEAD
-<script type="text/javascript" language="javascript" src="/lib/js/creatTree.js"></script>
-<script type="text/javascript" language="javascript" src="/lib/js/scaffolding.js"></script>
-<script type="text/javascript">
-=======
+
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/scaffolding.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript">
-    $('#tree').creatTree('${request.contextPath}/packingCategory/CategoryTree');
-    $('#tree').filtrateData('${request.contextPath}/packingArchives/getPackingArchivesByPId',"container","packingArchivesList");
->>>>>>> c5fffe402edc7ae2c9d61d75adde82636f653de3
-
     $(function(){
-        $('#tree').creatTree('/packingCategory/CategoryTree');
-        $('#tree').filtrateData('/packingArchives/getPackingArchivesByPId',"container","packingArchivesList");
+        $('#tree').creatTree('${request.contextPath}/packingCategory/CategoryTree');
+        $('#tree').filtrateData('${request.contextPath}/packingArchives/getPackingArchivesByPId',"container","packingArchivesList");
         jQuery.ajax({
             url:'/packingArchives/getPackingArchivesByPId',
             type:'POST',
@@ -87,8 +80,8 @@
         var sid = bids.split('&')[2];
         var data_url = $('#add').attr('data_url');
         var url = data_url + name + '&' + bid + '&' + sid;
-
-        window.location.href = ${request.contextPath}+url;
+        console.log(url);
+        window.location.href = url;
 
     }
 

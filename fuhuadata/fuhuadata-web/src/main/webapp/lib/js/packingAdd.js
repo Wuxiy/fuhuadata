@@ -31,6 +31,30 @@
 
 //图片上传
 
+function fsubmit(){
+    var data = new FormData($('#form1')[0]);
+    console.log(data);
+    jQuery.ajax({
+        url: '/upload/uploadFileAll',
+        type: 'POST',
+        data: data,
+        dataType: 'JSON',
+        cache: false,
+        processData: false,
+        contentType: false,
+        success:function (result) {
+            console.log(result);
+            $.each(result.data,function(i,item){
+                console.log(item);
+                $('.filename').eq(i).attr('data-url',item);
+                $('.fileimg').eq(i).attr('src',item);
+            })
+
+        }
+    });
+    return false;
+}
+
 /*function imag(){
     img.each(function(){
         $("input[name='file']").fileinput({
@@ -69,7 +93,7 @@
 
 }*/
 
-$("input[id='file-1']").fileinput({
+/*$("input[id='file-1']").fileinput({
     language: 'zh', //设置语言
     uploadUrl: '/upload/uploadFile', // you must set a valid URL here else you will get an error
     allowedFileExtensions : ['jpg', 'png','gif'],
@@ -98,9 +122,9 @@ $("input[id='file-1']").fileinput({
         obj1.name = $('#imagname1').val();
         arr.push(obj1);
         console.log(arr);
-    });
+    });*/
 
-$("input[id='file-2']").fileinput({
+/*$("input[id='file-2']").fileinput({
     language: 'zh', //设置语言
     uploadUrl: '/upload/uploadFile', // you must set a valid URL here else you will get an error
     allowedFileExtensions : ['jpg', 'png','gif'],
@@ -159,7 +183,7 @@ $("input[id='file-3']").fileinput({
     obj3.path = data.response.data;
     obj3.name = $('#imagname3').val();
     arr.push(obj3);
-});
+});*/
 
 //适用产品类型checkbox
 
@@ -172,6 +196,9 @@ function checkboxArr() {
     })
     return checkboxarr;
 }
+
+//图片JSON
+
 
 //新增添加关联
 $('#add_relate').on('click',function(){
