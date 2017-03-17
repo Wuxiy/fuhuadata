@@ -62,8 +62,6 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript">
 
-<script type="text/javascript">
-
     $(function(){
         $('#tree').creatTree('${request.contextPath}/packingCategory/CategoryTree');
         $('#tree').filtrateData('${request.contextPath}/packingArchives/getPackingArchivesByPId',"container","packingArchivesList");
