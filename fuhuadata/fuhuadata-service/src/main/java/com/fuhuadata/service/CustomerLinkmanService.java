@@ -54,6 +54,13 @@ public interface CustomerLinkmanService {
      */
     public Result<CustomerLinkman> getCustomerLinkmanById(String linkman_id);
 
+	/**
+	 * 根据客户id查询客户联系人列表
+	 * @param customerId
+	 * @return
+	 */
+	public Result<List<CustomerLinkman>> getCustomerLinkmanByCustomerId(String customerId);
+
     /**
      * 查询列表，包含分页查询
 	 * 查询分页信息，请设置

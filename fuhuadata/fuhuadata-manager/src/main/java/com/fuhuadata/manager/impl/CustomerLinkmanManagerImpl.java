@@ -61,9 +61,14 @@ public class CustomerLinkmanManagerImpl implements CustomerLinkmanManager {
     public CustomerLinkman getCustomerLinkmanById(String linkman_id) {
     	return customerLinkmanDao.getCustomerLinkmanById(linkman_id);
     }
-    
 
-    public int count(QueryCustomerLinkman queryCustomerLinkman) {
+	@Override
+	public List<CustomerLinkman> getCustomerLinkmanByCustomerId(String customerId) {
+		return customerLinkmanDao.getCustomerLinkmanByCustomerId(customerId);
+	}
+
+
+	public int count(QueryCustomerLinkman queryCustomerLinkman) {
     	return customerLinkmanDao.count(queryCustomerLinkman);
     }
     

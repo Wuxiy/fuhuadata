@@ -261,6 +261,12 @@
 			SELECT * FROM customer_linkman	WHERE linkman_id=#linkman_id#
 		]]>
 	</select>
+
+	<select id="GET-BY-CUSTOMER-ID" resultMap="CUSTOMERLINKMAN-MAP"parameterClass="java.lang.String">
+		<![CDATA[
+			SELECT * FROM customer_linkman	WHERE customer_id=#customerId#
+	]]>
+	</select>
 	
 	<select id="GET-PAGE" resultMap="CUSTOMERLINKMAN-MAP" parameterClass="QueryCustomerLinkman">
 		<![CDATA[

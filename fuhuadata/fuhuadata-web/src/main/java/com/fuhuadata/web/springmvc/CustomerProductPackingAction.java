@@ -1,12 +1,8 @@
 package com.fuhuadata.web.springmvc;
-import com.fuhuadata.domain.CustomerProductInfo;
-import com.fuhuadata.domain.ExhibitionInfo;
-import com.fuhuadata.domain.query.ExhibitionInfoQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.CustomerProductInfoService;
 import com.fuhuadata.vo.CustomerProductPackagingArchives;
-import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

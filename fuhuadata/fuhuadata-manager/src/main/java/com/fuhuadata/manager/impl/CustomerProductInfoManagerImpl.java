@@ -1,14 +1,14 @@
 package com.fuhuadata.manager.impl;
 import java.util.List;
+
+import com.fuhuadata.domain.CustomerProductArchives;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.dao.CustomerProductInfoDao;
-import com.fuhuadata.domain.CustomerProductInfo;
-import com.fuhuadata.domain.query.QueryCustomerProductInfo;
+import com.fuhuadata.domain.query.QueryCustomerProductArchives;
 import com.fuhuadata.manager.CustomerProductInfoManager;
-import javax.annotation.Resource;
 
 import com.fuhuadata.vo.CustomerProductPackagingArchives;
-import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 
 /**
@@ -20,16 +20,16 @@ public class CustomerProductInfoManagerImpl implements CustomerProductInfoManage
     private CustomerProductInfoDao customerProductInfoDao;
     
 
-    public CustomerProductInfo addCustomerProductInfo(CustomerProductInfo customerProductInfo) {
-    	return customerProductInfoDao.addCustomerProductInfo(customerProductInfo);
+    public CustomerProductArchives addCustomerProductInfo(CustomerProductArchives customerProductArchives) {
+    	return customerProductInfoDao.addCustomerProductInfo(customerProductArchives);
     }
     
-    public boolean updateCustomerProductInfoById(int customer_product_id, CustomerProductInfo customerProductInfo) {
-    	return customerProductInfoDao.updateCustomerProductInfoById(customer_product_id, customerProductInfo) == 1 ? true : false;
+    public boolean updateCustomerProductInfoById(int customer_product_id, CustomerProductArchives customerProductArchives) {
+    	return customerProductInfoDao.updateCustomerProductInfoById(customer_product_id, customerProductArchives) == 1 ? true : false;
     }
     
-	public List<CustomerProductInfo> getCustomerProductInfosByQuery(QueryCustomerProductInfo queryCustomerProductInfo) {
-		return customerProductInfoDao.getCustomerProductInfosByQuery(queryCustomerProductInfo);
+	public List<CustomerProductArchives> getCustomerProductInfosByQuery(QueryCustomerProductArchives queryCustomerProductArchives) {
+		return customerProductInfoDao.getCustomerProductInfosByQuery(queryCustomerProductArchives);
 	}
 
     public boolean deleteCustomerProductInfoById(int customer_product_id) {
@@ -45,35 +45,35 @@ public class CustomerProductInfoManagerImpl implements CustomerProductInfoManage
     	return customerProductInfoDao.getCustomerProductPackingArchivesById(customerId);
 	}
 
-	public List<CustomerProductInfo> getAllCustomerProductInfos() {
+	public List<CustomerProductArchives> getAllCustomerProductInfos() {
     	return customerProductInfoDao.getAllCustomerProductInfos();
     }
     	
-    public Result<List<CustomerProductInfo>> getCustomerProductInfosByPage(QueryCustomerProductInfo queryCustomerProductInfo) {
-		Result<List<CustomerProductInfo>> result = new Result<List<CustomerProductInfo>>();
-		int totalItem = customerProductInfoDao.count(queryCustomerProductInfo);
+    public Result<List<CustomerProductArchives>> getCustomerProductInfosByPage(QueryCustomerProductArchives queryCustomerProductArchives) {
+		Result<List<CustomerProductArchives>> result = new Result<List<CustomerProductArchives>>();
+		int totalItem = customerProductInfoDao.count(queryCustomerProductArchives);
 		;
 		if (totalItem > 0) {
-			result.addDefaultModel("CustomerProductInfos", customerProductInfoDao.getCustomerProductInfosByPage(queryCustomerProductInfo));		
+			result.addDefaultModel("CustomerProductInfos", customerProductInfoDao.getCustomerProductInfosByPage(queryCustomerProductArchives));
 		} else {
-			result.addDefaultModel("CustomerProductInfos", new ArrayList<CustomerProductInfo>());
+			result.addDefaultModel("CustomerProductInfos", new ArrayList<CustomerProductArchives>());
 		}
 		
-		result.setPageSize(queryCustomerProductInfo.getPageSize());
-		result.setIndex(queryCustomerProductInfo.getIndex());
+		result.setPageSize(queryCustomerProductArchives.getPageSize());
+		result.setIndex(queryCustomerProductArchives.getIndex());
 		result.setTotalItem(totalItem);
 		
 		return result;
     }
     	
     	
-    public CustomerProductInfo getCustomerProductInfoById(int customer_product_id) {
+    public CustomerProductArchives getCustomerProductInfoById(int customer_product_id) {
     	return customerProductInfoDao.getCustomerProductInfoById(customer_product_id);
     }
     
 
-    public int count(QueryCustomerProductInfo queryCustomerProductInfo) {
-    	return customerProductInfoDao.count(queryCustomerProductInfo);
+    public int count(QueryCustomerProductArchives queryCustomerProductArchives) {
+    	return customerProductInfoDao.count(queryCustomerProductArchives);
     }
 
 	public void setCustomerProductInfoDao(CustomerProductInfoDao customerProductInfoDao) {

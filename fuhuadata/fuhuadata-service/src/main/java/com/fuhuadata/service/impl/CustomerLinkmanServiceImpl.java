@@ -6,6 +6,9 @@ import com.fuhuadata.domain.query.QueryCustomerLinkman;
 import com.fuhuadata.manager.CustomerLinkmanManager;
 import com.fuhuadata.domain.CustomerLinkman;
 import javax.annotation.Resource;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 import java.util.Map;
 import java.io.Serializable;
@@ -15,7 +18,7 @@ import java.io.Serializable;
  * @date 2017-01-13 16:10:56
  */
 public class CustomerLinkmanServiceImpl implements CustomerLinkmanService {
-	
+	private static final Log log = LogFactory.getLog(CustomerLinkmanServiceImpl.class);
 	@Resource
     private CustomerLinkmanManager customerLinkmanManager;
     public Result<CustomerLinkman> addCustomerLinkman(CustomerLinkman customerLinkman) {
@@ -73,9 +76,25 @@ public class CustomerLinkmanServiceImpl implements CustomerLinkmanService {
 		}
 		return result;	
     }
-    
 
-    public Result<List<CustomerLinkman>> getCustomerLinkmansByPage(QueryCustomerLinkman queryCustomerLinkman) {
+	/**
+	 * 查询客户联系人列表
+	 * @param customerId
+	 * @return
+	 */
+	@Override
+	public Result<List<CustomerLinkman>> getCustomerLinkmanByCustomerId(String customerId) {
+		Result<List<CustomerLinkman>> result = new Result<List<CustomerLinkman>>();
+		try {
+			result.addDefaultModel("customerLinkmen",customerLinkmanManager.getCustomerLinkmanByCustomerId(customerId)) ;
+		} catch(Exception e) {
+			result.setSuccess(false);
+		}
+		return result;
+	}
+
+
+	public Result<List<CustomerLinkman>> getCustomerLinkmansByPage(QueryCustomerLinkman queryCustomerLinkman) {
 		Result<List<CustomerLinkman>> result = new Result<List<CustomerLinkman>>();
 		try {		
 			result = customerLinkmanManager.getCustomerLinkmansByPage(queryCustomerLinkman);

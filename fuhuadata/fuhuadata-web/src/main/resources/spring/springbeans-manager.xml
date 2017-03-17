@@ -25,4 +25,5 @@
 	<bean id="productWareManager" class="com.fuhuadata.manager.impl.ProductWareManagerImpl"/>
 	<bean id="customerProductInfoManager" class="com.fuhuadata.manager.impl.CustomerProductInfoManagerImpl"/>
 	<bean id="customerMakeProductManager" class="com.fuhuadata.manager.impl.CustomerMakeProductManagerImpl"/>
+	<bean id="customerLinkmanManager" class="com.fuhuadata.manager.impl.CustomerLinkmanManagerImpl"/>
 </beans>

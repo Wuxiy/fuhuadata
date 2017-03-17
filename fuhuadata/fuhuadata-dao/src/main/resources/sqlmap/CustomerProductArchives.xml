@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CUSTOMERPRODUCTARCHIVES">
+   	<typeAlias alias="CustomerProductArchives" type="com.fuhuadata.domain.CustomerProductArchives"/>
+   	<typeAlias alias="QueryCustomerProductArchives" type="com.fuhuadata.domain.query.QueryCustomerProductArchives"/>
+	<typeAlias alias="CustomerProductPackagingArchives" type="com.fuhuadata.vo.CustomerProductPackagingArchives"/>
+	
+	<resultMap id="CUSTOMERPRODUCTARCHIVES-MAP" class="CustomerProductArchives">
+								<result property="id" column="id" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="productId" column="product_id" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="orderId" column="order_id" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="name" column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result column="customer_product_name" property="customerProductName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+								<result property="brand" column="brand" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="mainProductAmount" column="main_product_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result property="mainProductUnit" column="main_product_unit" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="subProductAmount" column="sub_product_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result property="subProductUnit" column="sub_product_unit" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="convertRate" column="convert_rate" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result property="priceType" column="price_type" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="advisePrice" column="advise_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result property="purchasePrice" column="purchase_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result property="deliveryTime" column="delivery_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+								<result property="InternalTransportMode" column="Internal_transport_mode" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="InternalTransportPrice" column="Internal_transport_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result property="factoryId" column="factory_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="factoryName" column="factory_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+
+								<result column="composition_cost" property="compositionCost" jdbcType="VARCHAR" />
+								<result column="pakage_other_requirement" property="pakageOtherRequirement" jdbcType="VARCHAR" />
+								<result column="additional_price" property="additionalPrice" jdbcType="DECIMAL" />
+								<result column="consumption" property="consumption" jdbcType="DECIMAL" />
+								<result column="img_info" property="imgInfo" jdbcType="VARCHAR" />
+								<result column="pakage_info" property="pakageInfo" jdbcType="VARCHAR" />
+								<result column="material_info" property="materialInfo" jdbcType="VARCHAR" />
+
+								<result property="straightEmployingWay" column="straight_employing_way" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="straightEmployingScale" column="straight_employing_scale" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result property="straightEmployingStandard" column="straight_employing_standard" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="potentialEmployingWay" column="potential_employing_way" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="potentialEmployingScale" column="potential_employing_scale" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result property="potentialEmployingStandard" column="potential_employing_standard" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="documentaryType" column="documentary_type" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="documentaryRequire" column="documentary_require" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="otherDocumentaryRequire" column="other_documentary_require" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="shippingAgentRequire" column="shipping_agent_require" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="packageRequire" column="package_require" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="goodsType" column="goods_type" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="mianxiangqi" column="mianxiangqi" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="miantuiqi" column="miantuiqi" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="cupboardType" column="cupboard_type" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="cupboardPerNumber" column="cupboard_per_number" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="cupboardNumber" column="cupboard_number" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="oceanFreight" column="ocean_freight" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result property="portSurcharge" column="port_surcharge" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result property="taxFree" column="tax_free" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result column="gross_margin" property="grossMargin" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+								<result property="otherCost" column="other_cost" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result property="minSellPrice" column="min_sell_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result property="contractPrice" column="contract_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result column="transform_state" property="transformState" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+
+								<result property="createUserId" column="create_user_id" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="createUserName" column="create_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="lastmodifyUserId" column="lastmodify_user_id" jdbcType="INT" javaType="java.lang.Integer" />
+								<result property="lastmodifyUserName" column="lastmodify_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="createTime" column="create_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+								<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+														</resultMap>
+	
+	<sql id="PAGE-COMMON">	
+		<dynamic prepend=" WHERE ">
+				<isNotNull prepend=" AND " property="id">
+				id = #id#
+		</isNotNull>
+			<isNotNull prepend=" AND " property="orderId">
+				order_id = #orderId#
+			</isNotNull>
+				<isNotNull prepend=" AND " property="productId">
+			product_id = #productId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="customerId">
+			customer_id = #customerId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="name">
+			name = #name#
+		</isNotNull>
+			<isNotNull prepend=" AND " property="customerProductName">
+				customer_name = #customerName#
+			</isNotNull>
+				<isNotNull prepend=" AND " property="brand">
+			brand = #brand#
+		</isNotNull>
+
+				<isNotNull prepend=" AND " property="mainProductAmount">
+			main_product_amount = #mainProductAmount#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="mainProductUnit">
+			main_product_unit = #mainProductUnit#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="subProductAmount">
+			sub_product_amount = #subProductAmount#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="subProductUnit">
+			sub_product_unit = #subProductUnit#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="convertRate">
+			convert_rate = #convertRate#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="priceType">
+			price_type = #priceType#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="advisePrice">
+			advise_price = #advisePrice#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="purchasePrice">
+			purchase_price = #purchasePrice#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="deliveryTime">
+			delivery_time = #deliveryTime#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="InternalTransportMode">
+			Internal_transport_mode = #InternalTransportMode#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="InternalTransportPrice">
+			Internal_transport_price = #InternalTransportPrice#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="factoryId">
+			factory_id = #factoryId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="factoryName">
+			factory_name = #factoryName#
+		</isNotNull>
+			<isNotNull prepend=" AND " property="compositionCost">
+				composition_cost = #compositionCost#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="pakageOtherRequirement">
+				pakage_other_requirement = #pakageOtherRequirement#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="additionalPrice">
+				additional_price = #additionalPrice#
+			</isNotNull>
+
+			<isNotNull prepend=" AND " property="consumption">
+				consumption = #consumption#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="imgInfo">
+				img_info = #imgInfo#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="pakageInfo">
+				pakage_info = #pakageInfo#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="materialInfo">
+				material_info = #materialInfo#
+			</isNotNull>
+				<isNotNull prepend=" AND " property="straightEmployingWay">
+			straight_employing_way = #straightEmployingWay#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="straightEmployingScale">
+			straight_employing_scale = #straightEmployingScale#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="straightEmployingStandard">
+			straight_employing_standard = #straightEmployingStandard#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="potentialEmployingWay">
+			potential_employing_way = #potentialEmployingWay#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="potentialEmployingScale">
+			potential_employing_scale = #potentialEmployingScale#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="potentialEmployingStandard">
+			potential_employing_standard = #potentialEmployingStandard#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="documentaryType">
+			documentary_type = #documentaryType#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="documentaryRequire">
+			documentary_require = #documentaryRequire#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="otherDocumentaryRequire">
+			other_documentary_require = #otherDocumentaryRequire#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="shippingAgentRequire">
+			shipping_agent_require = #shippingAgentRequire#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="packageRequire">
+			package_require = #packageRequire#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="goodsType">
+			goods_type = #goodsType#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="mianxiangqi">
+			mianxiangqi = #mianxiangqi#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="miantuiqi">
+			miantuiqi = #miantuiqi#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="cupboardType">
+			cupboard_type = #cupboardType#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="cupboardPerNumber">
+			cupboard_per_number = #cupboardPerNumber#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="cupboardNumber">
+			cupboard_number = #cupboardNumber#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="oceanFreight">
+			ocean_freight = #oceanFreight#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="portSurcharge">
+			port_surcharge = #portSurcharge#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="taxFree">
+			tax_free = #taxFree#
+		</isNotNull>
+			<isNotNull prepend=" AND " property="grossMargin">
+				gross_margin = #grossMargin#
+			</isNotNull>
+				<isNotNull prepend=" AND " property="otherCost">
+			other_cost = #otherCost#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="minSellPrice">
+			min_sell_price = #minSellPrice#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="contractPrice">
+			contract_price = #contractPrice#
+		</isNotNull>
+			<isNotNull prepend=" AND " property="transformState">
+				transform_state = #transformState#
+			</isNotNull>
+				<isNotNull prepend=" AND " property="createUserId">
+			create_user_id = #createUserId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createUserName">
+			create_user_name = #createUserName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="lastmodifyUserId">
+			lastmodify_user_id = #lastmodifyUserId#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="lastmodifyUserName">
+			lastmodify_user_name = #lastmodifyUserName#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="createTime">
+			create_time = #createTime#
+		</isNotNull>
+				<isNotNull prepend=" AND " property="modifyTime">
+			modify_time = #modifyTime#
+		</isNotNull>
+				</dynamic>
+	</sql>
+	
+	<sql id="QUERY-COMMON">
+		<dynamic prepend=" WHERE ">
+			<isNotNull prepend=" AND " property="id">
+				id = #id#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="orderId">
+				order_id = #orderId#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="productId">
+				product_id = #productId#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="customerId">
+				customer_id = #customerId#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="name">
+				name = #name#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="customerProductName">
+				customer_product_name = #customerProductName#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="brand">
+				brand = #brand#
+			</isNotNull>
+
+			<isNotNull prepend=" AND " property="mainProductAmount">
+				main_product_amount = #mainProductAmount#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="mainProductUnit">
+				main_product_unit = #mainProductUnit#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="subProductAmount">
+				sub_product_amount = #subProductAmount#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="subProductUnit">
+				sub_product_unit = #subProductUnit#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="convertRate">
+				convert_rate = #convertRate#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="priceType">
+				price_type = #priceType#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="advisePrice">
+				advise_price = #advisePrice#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="purchasePrice">
+				purchase_price = #purchasePrice#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="deliveryTime">
+				delivery_time = #deliveryTime#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="InternalTransportMode">
+				Internal_transport_mode = #InternalTransportMode#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="InternalTransportPrice">
+				Internal_transport_price = #InternalTransportPrice#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="factoryId">
+				factory_id = #factoryId#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="factoryName">
+				factory_name = #factoryName#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="compositionCost">
+				composition_cost = #compositionCost#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="pakageOtherRequirement">
+				pakage_other_requirement = #pakageOtherRequirement#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="additionalPrice">
+				additional_price = #additionalPrice#
+			</isNotNull>
+
+			<isNotNull prepend=" AND " property="consumption">
+				consumption = #consumption#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="imgInfo">
+				img_info = #imgInfo#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="pakageInfo">
+				pakage_info = #pakageInfo#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="materialInfo">
+				material_info = #materialInfo#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="straightEmployingWay">
+				straight_employing_way = #straightEmployingWay#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="straightEmployingScale">
+				straight_employing_scale = #straightEmployingScale#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="straightEmployingStandard">
+				straight_employing_standard = #straightEmployingStandard#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="potentialEmployingWay">
+				potential_employing_way = #potentialEmployingWay#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="potentialEmployingScale">
+				potential_employing_scale = #potentialEmployingScale#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="potentialEmployingStandard">
+				potential_employing_standard = #potentialEmployingStandard#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="documentaryType">
+				documentary_type = #documentaryType#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="documentaryRequire">
+				documentary_require = #documentaryRequire#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="otherDocumentaryRequire">
+				other_documentary_require = #otherDocumentaryRequire#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="shippingAgentRequire">
+				shipping_agent_require = #shippingAgentRequire#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="packageRequire">
+				package_require = #packageRequire#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="goodsType">
+				goods_type = #goodsType#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="mianxiangqi">
+				mianxiangqi = #mianxiangqi#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="miantuiqi">
+				miantuiqi = #miantuiqi#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="cupboardType">
+				cupboard_type = #cupboardType#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="cupboardPerNumber">
+				cupboard_per_number = #cupboardPerNumber#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="cupboardNumber">
+				cupboard_number = #cupboardNumber#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="oceanFreight">
+				ocean_freight = #oceanFreight#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="portSurcharge">
+				port_surcharge = #portSurcharge#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="taxFree">
+				tax_free = #taxFree#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="grossMargin">
+				gross_margin = #grossMargin#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="otherCost">
+				other_cost = #otherCost#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="minSellPrice">
+				min_sell_price = #minSellPrice#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="contractPrice">
+				contract_price = #contractPrice#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="transformState">
+				transform_state = #transformState#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="createUserId">
+				create_user_id = #createUserId#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="createUserName">
+				create_user_name = #createUserName#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="lastmodifyUserId">
+				lastmodify_user_id = #lastmodifyUserId#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="lastmodifyUserName">
+				lastmodify_user_name = #lastmodifyUserName#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="createTime">
+				create_time = #createTime#
+			</isNotNull>
+			<isNotNull prepend=" AND " property="modifyTime">
+				modify_time = #modifyTime#
+			</isNotNull>
+		</dynamic>
+	</sql>
+	
+	<insert id="ADD" parameterClass="CustomerProductArchives">
+		insert into customer_product_archives (id, order_id, product_id,
+		customer_id, name, customer_product_name,
+		brand, main_product_amount, main_product_unit,
+		sub_product_amount, sub_product_unit, convert_rate,
+		price_type, advise_price, purchase_price,
+		delivery_time, Internal_transport_mode,
+		Internal_transport_price, factory_id, factory_name,
+		straight_employing_way, straight_employing_scale,
+		straight_employing_standard, potential_employing_way,
+		potential_employing_scale, potential_employing_standard,
+		documentary_type, documentary_require, other_documentary_require,
+		shipping_agent_require, package_require, goods_type,
+		mianxiangqi, miantuiqi, cupboard_type,
+		cupboard_per_number, cupboard_number, ocean_freight,
+		port_surcharge, tax_free, gross_margin,
+		other_cost, min_sell_price, contract_price,
+		transform_state, composition_cost, pakage_other_requirement,
+		additional_price, consumption, img_info,
+		pakage_info, material_info, create_user_id,
+		create_user_name, lastmodify_user_id, lastmodify_user_name,
+		create_time, modify_time)
+		values (#id#, #orderId#, #productId#,
+		#customerId#, #name#, #customerProductName#,
+		#brand#, #mainProductAmount#, #mainProductUnit#,
+		#subProductAmount#, #subProductUnit#, #convertRate#,
+		#priceType#, #advisePrice#, #purchasePrice#,
+		#deliveryTime#, #internalTransportMode#,
+		#internalTransportPrice#, #factoryId#, #factoryName#,
+		#straightEmployingWay#, #straightEmployingScale#,
+		#straightEmployingStandard#, #potentialEmployingWay#,
+		#potentialEmployingScale#, #potentialEmployingStandard#,
+		#documentaryType#, #documentaryRequire#, #otherDocumentaryRequire#,
+		#shippingAgentRequire#, #packageRequire#, #goodsType#,
+		#mianxiangqi#, #miantuiqi#, #cupboardType#,
+		#cupboardPerNumber#, #cupboardNumber#, #oceanFreight#,
+		#portSurcharge#, #taxFree#, #grossMargin#,
+		#otherCost#, #minSellPrice#, #contractPrice#,
+		#transformState#, #compositionCost#, #pakageOtherRequirement#,
+		#additionalPrice#, #consumption#, #imgInfo#,
+		#pakageInfo#, #materialInfo#, #createUserId#,
+		#createUserName#, #lastmodifyUserId#, #lastmodifyUserName#,
+		#createTime#, #modifyTime#)
+		<selectKey resultClass="int" keyProperty="id">
+			SELECT @@IDENTITY AS ID
+		</selectKey>
+	</insert>
+	
+	<update id="UPDATE" parameterClass="CustomerProductArchives">
+		UPDATE  customer_product_archives
+		<dynamic prepend=" SET ">
+						<isNotEmpty prepend=", " property="id">id=#id#</isNotEmpty>
+						<isNotEmpty prepend=", " property="productId">product_id=#productId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="orderId">order_id = #orderId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="customerId">customer_id=#customerId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="customerProductName"> customer_product_name = #customerProductName#</isNotEmpty>
+						<isNotEmpty prepend=", " property="name">name=#name#</isNotEmpty>
+						<isNotEmpty prepend=", " property="brand">brand=#brand#</isNotEmpty>
+						<isNotEmpty prepend=", " property="mainProductAmount">main_product_amount=#mainProductAmount#</isNotEmpty>
+						<isNotEmpty prepend=", " property="mainProductUnit">main_product_unit=#mainProductUnit#</isNotEmpty>
+						<isNotEmpty prepend=", " property="subProductAmount">sub_product_amount=#subProductAmount#</isNotEmpty>
+						<isNotEmpty prepend=", " property="subProductUnit">sub_product_unit=#subProductUnit#</isNotEmpty>
+						<isNotEmpty prepend=", " property="convertRate">convert_rate=#convertRate#</isNotEmpty>
+						<isNotEmpty prepend=", " property="priceType">price_type=#priceType#</isNotEmpty>
+						<isNotEmpty prepend=", " property="advisePrice">advise_price=#advisePrice#</isNotEmpty>
+						<isNotEmpty prepend=", " property="purchasePrice">purchase_price=#purchasePrice#</isNotEmpty>
+						<isNotEmpty prepend=", " property="deliveryTime">delivery_time=#deliveryTime#</isNotEmpty>
+						<isNotEmpty prepend=", " property="InternalTransportMode">Internal_transport_mode=#InternalTransportMode#</isNotEmpty>
+						<isNotEmpty prepend=", " property="InternalTransportPrice">Internal_transport_price=#InternalTransportPrice#</isNotEmpty>
+						<isNotEmpty prepend=", " property="factoryId">factory_id=#factoryId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="factoryName">factory_name=#factoryName#</isNotEmpty>
+						<isNotEmpty prepend=", " property="compositionCost">composition_cost = #compositionCost#</isNotEmpty>
+						<isNotEmpty prepend=", " property="pakageOtherRequirement">pakage_other_requirement = #pakageOtherRequirement#</isNotEmpty>
+						<isNotEmpty prepend=", " property="additionalPrice">additional_price = #additionalPrice#</isNotEmpty>
+						<isNotEmpty prepend=", " property="consumption">consumption = #consumption#</isNotEmpty>
+						<isNotEmpty prepend=", " property="imgInfo">img_info = #imgInfo#</isNotEmpty>
+						<isNotEmpty prepend=", " property="pakageInfo">pakage_info = #pakageInfo#</isNotEmpty>
+						<isNotEmpty prepend=", " property="materialInfo">material_info = #materialInfo#</isNotEmpty>
+						<isNotEmpty prepend=", " property="straightEmployingWay">straight_employing_way=#straightEmployingWay#</isNotEmpty>
+						<isNotEmpty prepend=", " property="straightEmployingScale">straight_employing_scale=#straightEmployingScale#</isNotEmpty>
+						<isNotEmpty prepend=", " property="straightEmployingStandard">straight_employing_standard=#straightEmployingStandard#</isNotEmpty>
+						<isNotEmpty prepend=", " property="potentialEmployingWay">potential_employing_way=#potentialEmployingWay#</isNotEmpty>
+						<isNotEmpty prepend=", " property="potentialEmployingScale">potential_employing_scale=#potentialEmployingScale#</isNotEmpty>
+						<isNotEmpty prepend=", " property="potentialEmployingStandard">potential_employing_standard=#potentialEmployingStandard#</isNotEmpty>
+						<isNotEmpty prepend=", " property="documentaryType">documentary_type=#documentaryType#</isNotEmpty>
+						<isNotEmpty prepend=", " property="documentaryRequire">documentary_require=#documentaryRequire#</isNotEmpty>
+						<isNotEmpty prepend=", " property="otherDocumentaryRequire">other_documentary_require=#otherDocumentaryRequire#</isNotEmpty>
+						<isNotEmpty prepend=", " property="shippingAgentRequire">shipping_agent_require=#shippingAgentRequire#</isNotEmpty>
+						<isNotEmpty prepend=", " property="packageRequire">package_require=#packageRequire#</isNotEmpty>
+						<isNotEmpty prepend=", " property="goodsType">goods_type=#goodsType#</isNotEmpty>
+						<isNotEmpty prepend=", " property="mianxiangqi">mianxiangqi=#mianxiangqi#</isNotEmpty>
+						<isNotEmpty prepend=", " property="miantuiqi">miantuiqi=#miantuiqi#</isNotEmpty>
+						<isNotEmpty prepend=", " property="cupboardType">cupboard_type=#cupboardType#</isNotEmpty>
+						<isNotEmpty prepend=", " property="cupboardPerNumber">cupboard_per_number=#cupboardPerNumber#</isNotEmpty>
+						<isNotEmpty prepend=", " property="cupboardNumber">cupboard_number=#cupboardNumber#</isNotEmpty>
+						<isNotEmpty prepend=", " property="oceanFreight">ocean_freight=#oceanFreight#</isNotEmpty>
+						<isNotEmpty prepend=", " property="portSurcharge">port_surcharge=#portSurcharge#</isNotEmpty>
+						<isNotEmpty prepend=", " property="taxFree">tax_free=#taxFree#</isNotEmpty>
+						<isNotEmpty prepend=", " property="grossMargin">gross_margin = #grossMargin#</isNotEmpty>
+						<isNotEmpty prepend=", " property="otherCost">other_cost=#otherCost#</isNotEmpty>
+						<isNotEmpty prepend=", " property="minSellPrice">min_sell_price=#minSellPrice#</isNotEmpty>
+						<isNotEmpty prepend=", " property="contractPrice">contract_price=#contractPrice#</isNotEmpty>
+						<isNotEmpty prepend=", " property="transformState">transform_state = #transformState#</isNotEmpty>
+						<isNotEmpty prepend=", " property="createUserId">create_user_id=#createUserId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="createUserName">create_user_name=#createUserName#</isNotEmpty>
+						<isNotEmpty prepend=", " property="lastmodifyUserId">lastmodify_user_id=#lastmodifyUserId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="lastmodifyUserName">lastmodify_user_name=#lastmodifyUserName#</isNotEmpty>
+						<isNotEmpty prepend=", " property="createTime">create_time=#createTime#</isNotEmpty>
+						<isNotEmpty prepend=", " property="modifyTime">modify_time=#modifyTime#</isNotEmpty>
+					</dynamic>
+		WHERE customer_product_id=#customer_product_id#
+	</update>
+	
+	<delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
+		<![CDATA[
+			DELETE FROM customer_product_archives WHERE customer_product_id=#customer_product_id#
+		]]>
+	</delete>
+	
+	<select id="GET-ALL" resultMap="CUSTOMERPRODUCTARCHIVES-MAP">
+		<![CDATA[
+			SELECT * FROM customer_product_archives
+		]]>
+	</select>
+	
+	<select id="GET-BY-QUERY" resultMap="CUSTOMERPRODUCTARCHIVES-MAP" parameterClass="QueryCustomerProductArchives">
+		<![CDATA[
+			SELECT * FROM customer_product_archives
+		]]>
+		<isParameterPresent>   
+            <include refid="QUERY-COMMON" />   
+        </isParameterPresent>
+	</select>
+	
+	<select id="GET-BY-ID" resultMap="CUSTOMERPRODUCTARCHIVES-MAP" parameterClass="java.lang.Integer">
+		<![CDATA[
+			SELECT * FROM customer_product_archives	WHERE id=#id#
+		]]>
+	</select>
+
+	<select id="GET-CUSTOMER-PRODUCT-PACKAGING" resultClass="CustomerProductPackagingArchives">
+		<![CDATA[
+				SELECT
+				a.id as customerProductId,
+				a.customer_id as customerId,
+				base.full_name as customerName,
+				a.customer_product_name AS customerProductName,
+				a.name AS productName,
+				b.product_id AS categorySerialNumber,
+				b.category_name AS categoryName,
+				a.brand as brand,
+				c.specification AS specification,
+				c.model AS model,
+				a.main_product_unit AS mainUnit,
+				a.factory_id AS factoryId,
+				a.factory_name AS factoryName
+				FROM customer_product_archives a
+				LEFT JOIN customer_base_info base on base.customer_id = a.customer_id
+				LEFT JOIN product_info b on a.product_id = b.product_id
+				LEFT JOIN product_ware c on c.product_info_id = b.product_id
+		]]>
+	</select>
+
+	<select id="GET-CUSTOMER-PRODUCT-REQUIRE-BY-ID" resultClass="CustomerProductPackagingArchives" parameterClass="java.lang.String">
+		<![CDATA[
+			SELECT
+				a.id as customerProductId,
+				a.customer_id as customerId,
+				base.full_name as customerName,
+				a.customer_product_name AS customerProductName,
+				b.product_id AS categorySerialNumber,
+				b.category_name AS categoryName,
+				a.product_name AS productName,
+				a.brand as brand,
+				c.specification AS specification,
+				c.model AS model,
+				a.main_product_unit AS mainUnit,
+				a.factory_id AS factoryId,
+				a.factory_name AS factoryName
+				FROM customer_product_archives a
+				LEFT JOIN customer_base_info base on base.customer_id = a.customer_id
+				LEFT JOIN product_info b on a.product_id = b.product_id
+				LEFT JOIN product_ware c on c.product_info_id = b.product_id
+				WHERE a.customer_id = #customerId#
+		]]>
+	</select>
+	
+	<select id="GET-PAGE" resultMap="CUSTOMERPRODUCTARCHIVES-MAP" parameterClass="QueryCustomerProductArchives">
+		<![CDATA[
+			SELECT * FROM customer_product_archives
+		]]>
+		<isParameterPresent>   
+            <include refid="PAGE-COMMON" />   
+        </isParameterPresent>
+		LIMIT #startRow#,#pageSize#
+	</select>
+	
+	<select id="COUNT" resultClass="java.lang.Integer" parameterClass="QueryCustomerProductArchives">
+		<![CDATA[
+			SELECT COUNT(id) FROM customer_product_archives
+		]]>
+		<isParameterPresent>   
+            <include refid="PAGE-COMMON" />   
+        </isParameterPresent>
+	</select>
+</sqlMap>

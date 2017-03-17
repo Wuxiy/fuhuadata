@@ -1,7 +1,8 @@
 package com.fuhuadata.dao;
 import java.util.List;
-import com.fuhuadata.domain.CustomerProductInfo;
-import com.fuhuadata.domain.query.QueryCustomerProductInfo;
+
+import com.fuhuadata.domain.CustomerProductArchives;
+import com.fuhuadata.domain.query.QueryCustomerProductArchives;
 import com.fuhuadata.vo.CustomerProductPackagingArchives;
 
 /**
@@ -10,19 +11,19 @@ import com.fuhuadata.vo.CustomerProductPackagingArchives;
  */
 public interface CustomerProductInfoDao {
 	/**
-	 * 新增 customerProductInfo,返回customerProductInfo对象(设置了新生成id)
-	 * @param customerProductInfo
+	 * 新增 customerProductArchives,返回customerProductInfo对象(设置了新生成id)
+	 * @param customerProductArchives
 	 * @return
 	 */
-    public CustomerProductInfo addCustomerProductInfo(CustomerProductInfo customerProductInfo);
+    public CustomerProductArchives addCustomerProductInfo(CustomerProductArchives customerProductArchives);
     
 	 /**
-     * 按照主键id更新customerProductInfo，成功返回1，使用接口时，请重新new CustomerProductInfo 的更新对象，设置要更新的字段
+     * 按照主键id更新customerProductInfo，成功返回1，使用接口时，请重新new QueryCustomerProductArchives 的更新对象，设置要更新的字段
      * @param customer_product_id
-     * @param customerProductInfo
+     * @param customerProductArchives
      * @return
      */
-    public int updateCustomerProductInfoById(int customer_product_id, CustomerProductInfo customerProductInfo);
+    public int updateCustomerProductInfoById(int customer_product_id, CustomerProductArchives customerProductArchives);
     
 	 /**
      * 按照主键id 删除 记录，返回1为成功
@@ -35,21 +36,21 @@ public interface CustomerProductInfoDao {
      * 返回数据库所有记录，谨慎使用，最好不用
      * @return
      */
-    public List<CustomerProductInfo> getAllCustomerProductInfos();
+    public List<CustomerProductArchives> getAllCustomerProductInfos();
     
     /**
      * 查询列表，此接口不包含分页查询，查询结果为空返回空的List对象
-     * @param queryCustomerProductInfo
+     * @param queryCustomerProductArchives
      * @return
      */
-    public List<CustomerProductInfo> getCustomerProductInfosByQuery(QueryCustomerProductInfo queryCustomerProductInfo);
+    public List<CustomerProductArchives> getCustomerProductInfosByQuery(QueryCustomerProductArchives queryCustomerProductArchives);
     
     /**
      * 通过主键id查询CustomerProductInfo，查询不到返回NULL值
      * @param customer_product_id
      * @return
      */
-    public CustomerProductInfo getCustomerProductInfoById(int customer_product_id);
+    public CustomerProductArchives getCustomerProductInfoById(int customer_product_id);
 
 	/**
 	 * 结合客户标准产品档案表和规格型号表查询客户包装要求信息
@@ -69,16 +70,16 @@ public interface CustomerProductInfoDao {
 	 * 查询分页信息，请设置
 	 * Query(设置当前页数)
 	 * Query(设置当前页面数据行数)
-     * @param queryCustomerProductInfo
+     * @param queryCustomerProductArchives
      * @return
      */
-    public List<CustomerProductInfo> getCustomerProductInfosByPage(QueryCustomerProductInfo queryCustomerProductInfo);
+    public List<CustomerProductArchives> getCustomerProductInfosByPage(QueryCustomerProductArchives queryCustomerProductArchives);
     	
 	 /**
      * 查询总数
-     * @param queryCustomerProductInfo
+     * @param queryCustomerProductArchives
      * @return
      */
-    public int count(QueryCustomerProductInfo queryCustomerProductInfo);
+    public int count(QueryCustomerProductArchives queryCustomerProductArchives);
     		
 }

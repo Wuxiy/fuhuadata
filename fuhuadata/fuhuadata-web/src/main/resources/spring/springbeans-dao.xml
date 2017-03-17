@@ -59,4 +59,5 @@
 	<bean id="productWareDao" class="com.fuhuadata.dao.impl.ProductWareDaoImpl"/>
 	<bean id="customerProductInfoDao" class="com.fuhuadata.dao.impl.CustomerProductInfoDaoImpl"/>
 	<bean id="customerMakeProductDao" class="com.fuhuadata.dao.impl.CustomerMakeProductDaoImpl"/>
+	<bean id="linkmanDao" class="com.fuhuadata.dao.impl.CustomerLinkmanDaoImpl"/>
 </beans>

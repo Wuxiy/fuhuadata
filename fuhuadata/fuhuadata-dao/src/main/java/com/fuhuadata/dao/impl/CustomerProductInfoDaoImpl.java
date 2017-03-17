@@ -1,56 +1,54 @@
 package com.fuhuadata.dao.impl;
 import java.util.List;
 import com.fuhuadata.dao.CustomerProductInfoDao;
-import com.fuhuadata.domain.CustomerProductInfo;
-import com.fuhuadata.domain.query.QueryCustomerProductInfo;
-import javax.annotation.Resource;
+import com.fuhuadata.domain.CustomerProductArchives;
+import com.fuhuadata.domain.query.QueryCustomerProductArchives;
 
-import com.fuhuadata.vo.CustomerBaseInfoVO;
 import com.fuhuadata.vo.CustomerProductPackagingArchives;
-import org.springframework.stereotype.Component;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 /**
+ * 客户产品档案
  * @author wangbo
  * @date 2017-02-03 15:51:13
  */
 @SuppressWarnings("unchecked")
 public class CustomerProductInfoDaoImpl extends SqlMapClientTemplate implements CustomerProductInfoDao {
 
-    public static final String ADD = "CUSTOMERPRODUCTINFO.ADD";
-    public static final String UPDATE = "CUSTOMERPRODUCTINFO.UPDATE";
-    public static final String DELETE_BY_ID = "CUSTOMERPRODUCTINFO.DELETE-BY-ID";
-    public static final String GET_ALL = "CUSTOMERPRODUCTINFO.GET-ALL";
-    public static final String GET_BY_QUERY = "CUSTOMERPRODUCTINFO.GET-BY-QUERY";
-    public static final String GET_BY_ID = "CUSTOMERPRODUCTINFO.GET-BY-ID";
-    public static final String GET_PAGE = "CUSTOMERPRODUCTINFO.GET-PAGE";
-    public static final String COUNT = "CUSTOMERPRODUCTINFO.COUNT";
-    public static final String GET_CUSTOMER_PRODUCT_PACKAGING="CUSTOMERPRODUCTINFO.GET-CUSTOMER-PRODUCT-PACKAGING";
-    public static final String GET_CUSTOMER_PRODUCT_REQUIRE_BY_ID="CUSTOMERPRODUCTINFO.GET-CUSTOMER-PRODUCT-REQUIRE-BY-ID";
+    public static final String ADD = "CUSTOMERPRODUCTARCHIVES.ADD";
+    public static final String UPDATE = "CUSTOMERPRODUCTARCHIVES.UPDATE";
+    public static final String DELETE_BY_ID = "CUSTOMERPRODUCTARCHIVES.DELETE-BY-ID";
+    public static final String GET_ALL = "CUSTOMERPRODUCTARCHIVES.GET-ALL";
+    public static final String GET_BY_QUERY = "CUSTOMERPRODUCTARCHIVES.GET-BY-QUERY";
+    public static final String GET_BY_ID = "CUSTOMERPRODUCTARCHIVES.GET-BY-ID";
+    public static final String GET_PAGE = "CUSTOMERPRODUCTARCHIVES.GET-PAGE";
+    public static final String COUNT = "CUSTOMERPRODUCTARCHIVES.COUNT";
+    public static final String GET_CUSTOMER_PRODUCT_PACKAGING="CUSTOMERPRODUCTARCHIVES.GET-CUSTOMER-PRODUCT-PACKAGING";
+    public static final String GET_CUSTOMER_PRODUCT_REQUIRE_BY_ID="CUSTOMERPRODUCTARCHIVES.GET-CUSTOMER-PRODUCT-REQUIRE-BY-ID";
     
-    public CustomerProductInfo addCustomerProductInfo(CustomerProductInfo customerProductInfo) {
-		customerProductInfo.setCustomerProductId((Integer) this.insert(ADD, customerProductInfo));
-    	return customerProductInfo;
+    public CustomerProductArchives addCustomerProductInfo(CustomerProductArchives customerProductArchives) {
+		customerProductArchives.setId((Integer) this.insert(ADD, customerProductArchives));
+    	return customerProductArchives;
     }
     
-    public int updateCustomerProductInfoById(int customer_product_id, CustomerProductInfo customerProductInfo) {
-    	customerProductInfo.setCustomerProductId(customer_product_id);
-		return this.update(UPDATE, customerProductInfo);
+    public int updateCustomerProductInfoById(int customer_product_id, CustomerProductArchives customerProductArchives) {
+    	customerProductArchives.setId(customer_product_id);
+		return this.update(UPDATE, customerProductArchives);
     }
     
     public int deleteCustomerProductInfoById(int customer_product_id) {
     	return this.update(DELETE_BY_ID, customer_product_id);
     }
     
-    public List<CustomerProductInfo> getAllCustomerProductInfos() {
+    public List<CustomerProductArchives> getAllCustomerProductInfos() {
     	return this.queryForList(GET_ALL);
     }
     	
-    public List<CustomerProductInfo> getCustomerProductInfosByQuery(QueryCustomerProductInfo queryCustomerProductInfo) {
-    	return this.queryForList(GET_BY_QUERY, queryCustomerProductInfo);
+    public List<CustomerProductArchives> getCustomerProductInfosByQuery(QueryCustomerProductArchives queryCustomerProductArchives) {
+    	return this.queryForList(GET_BY_QUERY, queryCustomerProductArchives);
     }
     	
-    public CustomerProductInfo getCustomerProductInfoById(int customer_product_id) {
-    	return (CustomerProductInfo) this.queryForObject(GET_BY_ID, customer_product_id);
+    public CustomerProductArchives getCustomerProductInfoById(int customer_product_id) {
+    	return (CustomerProductArchives) this.queryForObject(GET_BY_ID, customer_product_id);
     }
 
     @Override
@@ -62,11 +60,11 @@ public class CustomerProductInfoDaoImpl extends SqlMapClientTemplate implements 
         return this.queryForList(GET_CUSTOMER_PRODUCT_REQUIRE_BY_ID,customerId);
     }
 
-    public List<CustomerProductInfo> getCustomerProductInfosByPage(QueryCustomerProductInfo queryCustomerProductInfo) {
-    	return this.queryForList(GET_PAGE, queryCustomerProductInfo);
+    public List<CustomerProductArchives> getCustomerProductInfosByPage(QueryCustomerProductArchives queryCustomerProductArchives) {
+    	return this.queryForList(GET_PAGE, queryCustomerProductArchives);
     }
     	
-    public int count(QueryCustomerProductInfo queryCustomerProductInfo) {
-    	return ((Integer) this.queryForObject(COUNT, queryCustomerProductInfo)).intValue();
+    public int count(QueryCustomerProductArchives queryCustomerProductArchives) {
+    	return ((Integer) this.queryForObject(COUNT, queryCustomerProductArchives)).intValue();
     }
 }

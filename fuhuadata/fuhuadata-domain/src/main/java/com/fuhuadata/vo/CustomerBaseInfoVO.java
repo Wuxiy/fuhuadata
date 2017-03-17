@@ -21,7 +21,7 @@ public class CustomerBaseInfoVO {
     /**企业全称**/
     private String fullName;
 
-    /**企业性质**/
+    /**企业性质 1：工厂 2：分销商 3：经销商 4：终端客户 5：其他**/
     private Integer enterpriseNature;
 
     /**企业简称**/
@@ -78,7 +78,7 @@ public class CustomerBaseInfoVO {
     private String customerCompletion;
 
     /**创建者id**/
-    private Integer createUserId;
+    private Integer lastmodifyUserId;
 
     /**1:战略客户,2:大客户 3:重要客户 4:一般客户 5:风险客户**/
     private Integer customerLevel;
@@ -99,7 +99,7 @@ public class CustomerBaseInfoVO {
     private String qualificationsFileUrl;
 
     /**创建者姓名**/
-    private String createUserName;
+    private String lastmodifyUserName;
 
     /**工厂位置**/
     private String factoryLocation;
@@ -321,22 +321,6 @@ public class CustomerBaseInfoVO {
         this.customerCompletion = customerCompletion;
     }
 
-    public Integer getCreateUserId() {
-        return createUserId;
-    }
-
-    public void setCreateUserId(Integer createUserId) {
-        this.createUserId = createUserId;
-    }
-
-    public String getCreateUserName() {
-        return createUserName;
-    }
-
-    public void setCreateUserName(String createUserName) {
-        this.createUserName = createUserName;
-    }
-
     @JsonSerialize(using = DateJsonSerializer.class)
     public Date getCreateTime() {
         return createTime;
@@ -501,5 +485,21 @@ public class CustomerBaseInfoVO {
 
     public void setProductLine(String productLine) {
         this.productLine = productLine;
+    }
+
+    public Integer getLastmodifyUserId() {
+        return lastmodifyUserId;
+    }
+
+    public void setLastmodifyUserId(Integer lastmodifyUserId) {
+        this.lastmodifyUserId = lastmodifyUserId;
+    }
+
+    public String getLastmodifyUserName() {
+        return lastmodifyUserName;
+    }
+
+    public void setLastmodifyUserName(String lastmodifyUserName) {
+        this.lastmodifyUserName = lastmodifyUserName;
     }
 }

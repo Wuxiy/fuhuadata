@@ -1,8 +1,9 @@
 package com.fuhuadata.service;
 import java.util.List;
+
+import com.fuhuadata.domain.CustomerProductArchives;
 import com.fuhuadata.domain.query.Result;
-import com.fuhuadata.domain.CustomerProductInfo;
-import com.fuhuadata.domain.query.QueryCustomerProductInfo;
+import com.fuhuadata.domain.query.QueryCustomerProductArchives;
 import com.fuhuadata.vo.CustomerProductPackagingArchives;
 
 /**
@@ -12,22 +13,22 @@ import com.fuhuadata.vo.CustomerProductPackagingArchives;
 public interface CustomerProductInfoService {
 
 	/**
-	 * 新增 customerProductInfo
+	 * 新增 customerProductArchives
 	 * 返回result，通过result.isSuccess()判断服务调用是否成功
-	 * 通过result.getModel()得到新增 customerProductInfo
-	 * @param customerProductInfo
+	 * 通过result.getModel()得到新增 customerProductArchives
+	 * @param customerProductArchives
 	 * @return
 	 */
-    public Result<CustomerProductInfo> addCustomerProductInfo(CustomerProductInfo customerProductInfo) ;
+    public Result<CustomerProductArchives> addCustomerProductInfo(CustomerProductArchives customerProductArchives) ;
  
     /**
-     * 按照主键id更新customerProductInfo，请重新new CustomerProductInfo 的更新对象，设置要更新的字段
+     * 按照主键id更新customerProductInfo，请重新new QueryCustomerProductArchives 的更新对象，设置要更新的字段
 	 * 返回result，通过result.isSuccess()判断更新是否成功
      * @param customer_product_id
-     * @param customerProductInfo
+     * @param customerProductArchives
      * @return
      */
-    public Result updateCustomerProductInfoById(int customer_product_id, CustomerProductInfo customerProductInfo);
+    public Result updateCustomerProductInfoById(int customer_product_id, CustomerProductArchives customerProductArchives);
 
     /**
      * 按照主键id 删除 记录
@@ -49,10 +50,10 @@ public interface CustomerProductInfoService {
      * 查询列表，此接口不包含分页查询
 	 * 返回result，通过result.isSuccess()判断服务调用是否成功
 	 * 通过result.getModel()得到列表信息
-     * @param queryCustomerProductInfo
+     * @param queryCustomerProductArchives
      * @return
      */
-    public Result<List<CustomerProductInfo>> getCustomerProductInfosByQuery(QueryCustomerProductInfo queryCustomerProductInfo);
+    public Result<List<CustomerProductArchives>> getCustomerProductInfosByQuery(QueryCustomerProductArchives queryCustomerProductArchives);
 
     /**
      * 通过主键id查询CustomerProductInfo
@@ -61,7 +62,7 @@ public interface CustomerProductInfoService {
      * @param customer_product_id
      * @return
      */
-    public Result<CustomerProductInfo> getCustomerProductInfoById(int customer_product_id);
+    public Result<CustomerProductArchives> getCustomerProductInfoById(int customer_product_id);
 
     /**
      * 查询列表，包含分页查询
@@ -71,16 +72,16 @@ public interface CustomerProductInfoService {
 	 * 返回result，通过result.isSuccess()判断服务调用是否成功
 	 * 通过result.getTotal()返回结果总数
 	 * 通过result.getModel()得到查询的单页列表信息
-     * @param queryCustomerProductInfo
+     * @param queryCustomerProductArchives
      * @return
      */
-    public Result<List<CustomerProductInfo>> getCustomerProductInfosByPage(QueryCustomerProductInfo queryCustomerProductInfo);
+    public Result<List<CustomerProductArchives>> getCustomerProductInfosByPage(QueryCustomerProductArchives queryCustomerProductArchives);
 
     /**
      * 查询总数
-     * @param queryCustomerProductInfo
+     * @param queryCustomerProductArchives
      * @return
      */
-    public Result<Integer> count(QueryCustomerProductInfo queryCustomerProductInfo);
+    public Result<Integer> count(QueryCustomerProductArchives queryCustomerProductArchives);
 	
 }
