@@ -95,6 +95,11 @@ public class CustomerEncyclopediaAction {
          return null;
     }
 
+    /**
+     * 更新百科信息
+     * @param customerEncyclopedia
+     * @return
+     */
     @RequestMapping(value = "/doModify",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "doUpdate")
     @ResponseBody

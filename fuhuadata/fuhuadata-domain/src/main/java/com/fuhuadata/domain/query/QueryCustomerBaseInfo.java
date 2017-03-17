@@ -66,7 +66,7 @@ public class QueryCustomerBaseInfo  {
 	private String enterprisePhone;
 	
     /**企业邮箱**/
-	private String enterpriseEmaill;
+	private String enterpriseEmail;
 	
     /**企业简介**/
 	private String enterpriseProfile;
@@ -200,14 +200,7 @@ public class QueryCustomerBaseInfo  {
 	public void setEnterprisePhone(String enterprisePhone) {
 		this.enterprisePhone = enterprisePhone;
 	}
-	
-	public String getEnterpriseEmaill() {
-		return enterpriseEmaill;
-	}
-	
-	public void setEnterpriseEmaill(String enterpriseEmaill) {
-		this.enterpriseEmaill = enterpriseEmaill;
-	}
+
 	
 	public String getEnterpriseProfile() {
 		return enterpriseProfile;
@@ -383,5 +376,13 @@ public class QueryCustomerBaseInfo  {
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+
+	public String getEnterpriseEmail() {
+		return enterpriseEmail;
+	}
+
+	public void setEnterpriseEmail(String enterpriseEmail) {
+		this.enterpriseEmail = enterpriseEmail;
 	}
 }

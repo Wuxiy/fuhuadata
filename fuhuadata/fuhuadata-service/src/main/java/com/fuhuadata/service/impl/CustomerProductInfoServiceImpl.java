@@ -1,18 +1,15 @@
 package com.fuhuadata.service.impl;
 import java.util.List;
-import java.util.Locale;
 
+import com.fuhuadata.domain.CustomerProductArchives;
+import com.fuhuadata.domain.query.QueryCustomerProductArchives;
 import com.fuhuadata.domain.query.Result;
-import com.fuhuadata.domain.CustomerProductInfo;
 import com.fuhuadata.service.CustomerProductInfoService;
-import com.fuhuadata.domain.query.QueryCustomerProductInfo;
 import com.fuhuadata.manager.CustomerProductInfoManager;
-import javax.annotation.Resource;
 
 import com.fuhuadata.vo.CustomerProductPackagingArchives;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.stereotype.Component;
 
 /**
  * @author wangbo
@@ -22,20 +19,20 @@ public class CustomerProductInfoServiceImpl implements CustomerProductInfoServic
 
     private CustomerProductInfoManager customerProductInfoManager;
     private static final Log log = LogFactory.getLog(CustomerProductInfoServiceImpl.class);
-    public Result<CustomerProductInfo> addCustomerProductInfo(CustomerProductInfo customerProductInfo) {
-		Result<CustomerProductInfo> result = new Result<CustomerProductInfo>();
+    public Result<CustomerProductArchives> addCustomerProductInfo(CustomerProductArchives customerProductArchives) {
+		Result<CustomerProductArchives> result = new Result<CustomerProductArchives>();
 		try {
-			result.addDefaultModel(customerProductInfoManager.addCustomerProductInfo(customerProductInfo));			
+			result.addDefaultModel(customerProductInfoManager.addCustomerProductInfo(customerProductArchives));
 		} catch(Exception e) {
 			result.setSuccess(false);
 		}
 		return result;
     }
     
-    public Result updateCustomerProductInfoById(int customer_product_id, CustomerProductInfo customerProductInfo) {
+    public Result updateCustomerProductInfoById(int customer_product_id, CustomerProductArchives customerProductArchives) {
 		Result result = new Result();
 		try {
-			result.setSuccess(customerProductInfoManager.updateCustomerProductInfoById(customer_product_id, customerProductInfo));
+			result.setSuccess(customerProductInfoManager.updateCustomerProductInfoById(customer_product_id, customerProductArchives));
 		} catch(Exception e) {
 			result.setSuccess(false);
 		}
@@ -76,24 +73,24 @@ public class CustomerProductInfoServiceImpl implements CustomerProductInfoServic
 		return result;
 	}
 
-	public Result<List<CustomerProductInfo>> getCustomerProductInfosByQuery(QueryCustomerProductInfo queryCustomerProductInfo) {
-		Result<List<CustomerProductInfo>> result = new Result<List<CustomerProductInfo>>();
+	public Result<List<CustomerProductArchives>> getCustomerProductInfosByQuery(QueryCustomerProductArchives queryCustomerProductArchives) {
+		Result<List<CustomerProductArchives>> result = new Result<List<CustomerProductArchives>>();
 		try {
-			result.addDefaultModel("${!className}s", customerProductInfoManager.getCustomerProductInfosByQuery(queryCustomerProductInfo));
+			result.addDefaultModel("${!className}s", customerProductInfoManager.getCustomerProductInfosByQuery(queryCustomerProductArchives));
 		} catch(Exception e) {
 			result.setSuccess(false);
 		}
 		return result;	
     }
     	
-    public Result<CustomerProductInfo> getCustomerProductInfoById(int customer_product_id) {
-		Result<CustomerProductInfo> result = new Result<CustomerProductInfo>();
+    public Result<CustomerProductArchives> getCustomerProductInfoById(int customer_product_id) {
+		Result<CustomerProductArchives> result = new Result<CustomerProductArchives>();
 		try {		
-		    CustomerProductInfo  customerProductInfo = customerProductInfoManager.getCustomerProductInfoById(customer_product_id);
-		    if(customerProductInfo == null){
+		    CustomerProductArchives customerProductArchives = customerProductInfoManager.getCustomerProductInfoById(customer_product_id);
+		    if(customerProductArchives == null){
 				result.setSimpleErrorMsg(0, "当前数据不存在，请重试");
 			}else{
-				result.addDefaultModel("CustomerProductInfo", customerProductInfo);
+				result.addDefaultModel("QueryCustomerProductArchives", customerProductArchives);
 			}
 			
 		} catch(Exception e) {
@@ -103,20 +100,20 @@ public class CustomerProductInfoServiceImpl implements CustomerProductInfoServic
     }
     
 
-    public Result<List<CustomerProductInfo>> getCustomerProductInfosByPage(QueryCustomerProductInfo queryCustomerProductInfo) {
-		Result<List<CustomerProductInfo>> result = new Result<List<CustomerProductInfo>>();
+    public Result<List<CustomerProductArchives>> getCustomerProductInfosByPage(QueryCustomerProductArchives queryCustomerProductArchives) {
+		Result<List<CustomerProductArchives>> result = new Result<List<CustomerProductArchives>>();
 		try {		
-			result = customerProductInfoManager.getCustomerProductInfosByPage(queryCustomerProductInfo);
+			result = customerProductInfoManager.getCustomerProductInfosByPage(queryCustomerProductArchives);
 		} catch(Exception e) {
 			result.setSuccess(false);
 		}
 		return result;	
     }
     	
-    public Result<Integer> count(QueryCustomerProductInfo queryCustomerProductInfo) {
+    public Result<Integer> count(QueryCustomerProductArchives queryCustomerProductArchives) {
 		Result<Integer> result = new Result<Integer>();
 		try {	
-			result.addDefaultModel(customerProductInfoManager.count(queryCustomerProductInfo));
+			result.addDefaultModel(customerProductInfoManager.count(queryCustomerProductArchives));
 		} catch(Exception e) {
 			result.setSuccess(false);
 		}

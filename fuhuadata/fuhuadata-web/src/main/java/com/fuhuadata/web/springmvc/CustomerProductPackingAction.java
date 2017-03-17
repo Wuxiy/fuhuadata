@@ -1,12 +1,8 @@
 package com.fuhuadata.web.springmvc;
-import com.fuhuadata.domain.CustomerProductInfo;
-import com.fuhuadata.domain.ExhibitionInfo;
-import com.fuhuadata.domain.query.ExhibitionInfoQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.CustomerProductInfoService;
 import com.fuhuadata.vo.CustomerProductPackagingArchives;
-import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -18,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import java.util.List;
 /**
- * 客户产品包装要求action
+ * 客户产品要求action
  * Created by wuxi on 2017/1/13.
  */
 
@@ -59,6 +55,16 @@ public class CustomerProductPackingAction {
         }
         return null;
     }
+
+
+    /**
+     *客户信息页面客户产品要求
+     * @return
+     */
+    @SuppressWarnings("unused")
+    @RequestMapping(value="/intoCustomerProductInfo",method= RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-customerProductPackaging  ",methods = "into")
+    public ModelAndView intoCustomerProductInfo(){return new ModelAndView("customerInfo/customerProductRequest");}
 
 
     @RequestMapping(value = "/getCustomerProductInfoById",method = RequestMethod.GET)

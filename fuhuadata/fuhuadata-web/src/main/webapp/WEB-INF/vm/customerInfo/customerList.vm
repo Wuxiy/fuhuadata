@@ -183,7 +183,6 @@
 		});
 		//默认查询数据
         serach();
-
     });
 	//查询按钮提交数据
 	function serach(){
@@ -224,7 +223,7 @@
                         var customer = list[i];
                         _html += '<tr>';
                         _html += '	<td>'+customer.customerId+'</td>';
-                        _html += '  <td><a href="" target="_blank">'+customer.fullName+'</a></td>';
+                        _html += '  <td><a href="${request.contextPath}/customerBaseInfo/intoCustomerBaseInfoDetails?customerId='+customer.customerId+'" target="_blank">'+customer.fullName+'</a></td>';
                         _html += '  <td>'+customer.shortName+'</td>';
                         _html += '  <td lang="zh">'+customer.country+'</td>';
                         _html += '  <td lang="zh">'+customerLevelList[customer.customerLevel-1]+'</td>';

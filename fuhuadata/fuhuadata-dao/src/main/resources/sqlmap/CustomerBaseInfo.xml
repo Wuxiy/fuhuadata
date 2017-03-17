@@ -8,6 +8,7 @@
 	<typeAlias alias="CountCustomersOrderProduct" type="com.fuhuadata.domain.CountCustomersOrderProduct"/>
 	<typeAlias alias="CustomerBaseInfoVO" type="com.fuhuadata.vo.CustomerBaseInfoVO"/>
 	<typeAlias alias="CustomerMakeProduct" type="com.fuhuadata.domain.CustomerMakeProduct"/>
+
 	<resultMap id="CUSTOMERBASEINFO-MAP" class="CustomerBaseInfo">
 					<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="fullName" column="full_name" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -25,7 +26,7 @@
 					<result property="zhongxinbaoLevel" column="zhongxinbao_level" jdbcType="INT" javaType="java.lang.Integer" />
 					<result property="remark" column="remark" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="enterprisePhone" column="enterprise_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
-					<result property="enterpriseEmaill" column="enterprise_emaill" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="enterpriseEmail" column="enterprise_email" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="enterpriseProfile" column="enterprise_profile" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="developmentCourse" column="development_course" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="salesNetwork" column="sales_network" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -97,8 +98,8 @@
 				<isNotEmpty prepend=" AND " property="enterprisePhone">
 			enterprise_phone = #enterprisePhone#
 		</isNotEmpty>
-				<isNotEmpty prepend=" AND " property="enterpriseEmaill">
-			enterprise_emaill = #enterpriseEmaill#
+				<isNotEmpty prepend=" AND " property="enterpriseEmail">
+			enterprise_email = #enterpriseEmail#
 		</isNotEmpty>
 			<isNotEmpty prepend="and" property="customerLevel">
 				customer_level=#customerLevel#
@@ -186,8 +187,8 @@
 				<isNotEmpty prepend=" AND " property="enterprisePhone">
 			enterprise_phone = #enterprisePhone#
 		</isNotEmpty>
-				<isNotEmpty prepend=" AND " property="enterpriseEmaill">
-			enterprise_emaill = #enterpriseEmaill#
+				<isNotEmpty prepend=" AND " property="enterpriseEmail">
+			enterprise_email = #enterpriseEmail#
 		</isNotEmpty>
 				<isNotEmpty prepend=" AND " property="enterpriseProfile">
 			enterprise_profile = #enterpriseProfile#
@@ -227,8 +228,8 @@
 	
 	<insert id="ADD" parameterClass="CustomerBaseInfo">
 		INSERT INTO 
-		customer_base_info(customer_id,full_name,short_name,customer_type,area_id,area,country_id,country,registered_funds,registered_address,management_scope,zhongxinbao_number,zhongxinbao_level,parent_remarks,enterprise_phone,enterprise_emaill,enterprise_profile,development_course,sales_network,custom_field,customer_completion,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time)
-		VALUES(#customerId#,#fullName#,#shortName#,#customerType#,#areaId#,#area#,#countryId#,#country#,#registeredFunds#,#registeredAddress#,#managementScope#,#zhongxinbaoNumber#,#zhongxinbaoLevel#,#remark#,#enterprisePhone#,#enterpriseEmaill#,#enterpriseProfile#,#developmentCourse#,#salesNetwork#,#customField#,#customerCompletion#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
+		customer_base_info(customer_id,full_name,short_name,customer_type,area_id,area,country_id,country,registered_funds,registered_address,management_scope,zhongxinbao_number,zhongxinbao_level,parent_remarks,enterprise_phone,enterprise_email,enterprise_profile,development_course,sales_network,custom_field,customer_completion,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time)
+		VALUES(#customerId#,#fullName#,#shortName#,#customerType#,#areaId#,#area#,#countryId#,#country#,#registeredFunds#,#registeredAddress#,#managementScope#,#zhongxinbaoNumber#,#zhongxinbaoLevel#,#remark#,#enterprisePhone#,#enterpriseEmail#,#enterpriseProfile#,#developmentCourse#,#salesNetwork#,#customField#,#customerCompletion#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
 		<selectKey resultClass="String" keyProperty="id">
 			SELECT @@IDENTITY AS ID
 		</selectKey>
@@ -237,7 +238,6 @@
 	<update id="UPDATE" parameterClass="CustomerBaseInfo">
 		UPDATE customer_base_info
 		<dynamic prepend=" SET ">
-						<isNotEmpty prepend=", " property="customerId">customer_id=#customerId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="fullName">full_name=#fullName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="shortName">short_name=#shortName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="customerType">customer_type=#customerType#</isNotEmpty>
@@ -252,7 +252,7 @@
 						<isNotEmpty prepend=", " property="zhongxinbaoLevel">zhongxinbao_level=#zhongxinbaoLevel#</isNotEmpty>
 						<isNotEmpty prepend=", " property="remark">parent_remarks=#remark#</isNotEmpty>
 						<isNotEmpty prepend=", " property="enterprisePhone">enterprise_phone=#enterprisePhone#</isNotEmpty>
-						<isNotEmpty prepend=", " property="enterpriseEmaill">enterprise_emaill=#enterpriseEmaill#</isNotEmpty>
+						<isNotEmpty prepend=", " property="enterpriseEmail">enterprise_email=#enterpriseEmail#</isNotEmpty>
 						<isNotEmpty prepend=", " property="enterpriseProfile">enterprise_profile=#enterpriseProfile#</isNotEmpty>
 						<isNotEmpty prepend=", " property="developmentCourse">development_course=#developmentCourse#</isNotEmpty>
 						<isNotEmpty prepend=", " property="salesNetwork">sales_network=#salesNetwork#</isNotEmpty>
@@ -264,6 +264,15 @@
 						<isNotEmpty prepend=", " property="lastmodifyUserName">lastmodify_user_name=#lastmodifyUserName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="createTime">create_time=#createTime#</isNotEmpty>
 						<isNotEmpty prepend=", " property="modifyTime">modify_time=#modifyTime#</isNotEmpty>
+						<isNotEmpty prepend=", " property="priceSensitivity">price_sensitivity=#priceSensitivity#</isNotEmpty>
+						<isNotEmpty prepend=", " property="loyalty">loyalty=#loyalty#</isNotEmpty>
+						<isNotEmpty prepend=", " property="startCooperationTime">start_cooperation_time=#startCooperationTime#</isNotEmpty>
+						<isNotEmpty prepend=", " property="cooperationDuration">cooperation_duration=#cooperationDuration#</isNotEmpty>
+						<isNotEmpty prepend=", " property="purchasingSeason">purchasing_season=#purchasingSeason#</isNotEmpty>
+						<isNotEmpty prepend=", " property="activePeriod">active_period=#activePeriod#</isNotEmpty>
+						<isNotEmpty prepend=", " property="isFuhuaExclusive">is_fuhua_exclusive=#isFuhuaExclusive#</isNotEmpty>
+						<isNotEmpty prepend=", " property="cooperationRemark">cooperation_remark=#cooperationRemark#</isNotEmpty>
+
 					</dynamic>
 		WHERE customer_id=#customer_id#
 	</update>
@@ -278,6 +287,22 @@
 		<![CDATA[
 			SELECT * FROM customer_base_info
 		]]>
+	</select>
+
+	<select id="queryCooperationByCid" resultClass="CustomerBaseInfo" parameterClass="java.lang.String">
+		select
+				price_sensitivity priceSensitivity,
+				loyalty,
+				start_cooperation_time startCooperationTime,
+				cooperation_duration  cooperationDuration,
+				purchasing_season purchasingSeason,
+				active_period activePeriod,
+				is_fuhua_exclusive isFuhuaExclusive,
+				cooperation_remark  cooperationRemark,
+		from
+				customer_base_info
+		where
+				customer_id=#customerId#
 	</select>
 
 	<select id="GET-BY-QUERY" resultClass="CustomerBaseInfo" parameterClass="QueryCustomerBaseInfo">
@@ -298,7 +323,7 @@
 	<select id="GET-CUSTOMER-BASEINFO" resultClass="CustomerBaseInfoVO" parameterClass="java.lang.String">
 		<![CDATA[
 		SELECT
-			base.customer_id customerId,
+			base.customer_id as customerId,
 			base.full_name fullName,
 			base.enterprise_nature enterpriseNature,
 			base.short_name shortName,
@@ -317,10 +342,10 @@
 			base.other_opportunity otherOpportunity,
 			base.opportunity_describle opportunityDescrible,
 			base.enterprise_phone enterprisePhone,
-			base.enterprise_emaill enterpriseEmail,
+			base.enterprise_email enterpriseEmail,
 			base.customer_completion customerCompletion,
-			base.create_user_id createUserId,
-			base.create_user_name createUserName,
+			base.lastmodify_user_id lastmodifyUserId,
+			base.lastmodify_user_name lastmodifyUserName,
 			base.customer_level customerLevel,
 			base.customer_type customerType,
 			base.has_chi_company hasChiCompany,
@@ -329,6 +354,7 @@
 			base.qualifications_file_url qualificationsFileUrl,
 			base.factory_location factoryLocation,
 			base.major_competitors majorCompetitors,
+			base.production_line productLine,
 			base.create_time createTime,
 			en.ency_id encyId,
 			en.company_info companyInfo,
@@ -343,9 +369,8 @@
 				customer_base_info base
 			LEFT JOIN k_customer_encyclopedia en
 			ON base.customer_id = en.customer_id
-
 			WHERE
-				base.customer_id ='fh123456'
+				base.customer_id = 'fh123456'
 	]]>
 	</select>
 	
@@ -378,7 +403,7 @@
 				base.enterprise_nature enterpriseNature
 				<isEqual property="customerType" compareValue="2" prepend=",">
 					 lm.name linkManName,
-					 lm.lemail linkManEmail
+					 lm.lemail linkManEmaiL
 				</isEqual>
 				<isNotEqual property="customerType" compareValue="2" prepend=",">
 					'' linkManName,

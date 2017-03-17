@@ -1,0 +1,69 @@
+<div class="clearfix content shadow-out">
+    <!--副导航-->
+    <div class="nav-deputy shadow-out clearfix">
+        <ul class="nav nav-tabs pull-left">
+            <li><a href="">基本信息</a></li>
+            <li><a href="" >市场信息</a></li>
+            <li><a href="" >联系人</a></li>
+            <li class="active"><a href="" >产品要求</a></li>
+            <li><a href="" >订单信息</a></li>
+            <li><a href="" >订单默认要求</a></li>
+            <li><a href="" >沟通记录</a></li>
+            <li><a href="" >公司别名（子公司信息）</a></li>
+            <li><a href="" >关联数据</a></li>
+        </ul>
+        <ul class="breadcrumb pull-right">
+            <li><span class="glyphicon glyphicon-map-marker"></span></li>
+            <li><a href="">合作客户</a></li>
+            <li class="active">{变量}</li>
+        </ul>
+    </div>
+    <!--表格容器-->
+    <div class="dashboard-wrapper">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <button class="btn btn-xs btn-primary panel-heading-btn pull-right" lang="zh">新增</button>
+                        <h3 class="panel-title" lang="zh">
+                            产品要求
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <!--表格-->
+                        <table class="table table-condensed table-bordered table-striped text-center">
+                            <thead>
+                            <tr>
+                                <th class="text-center" lang="zh">客户商品名</th>
+                                <th class="text-center" lang="zh">产品序列号</th>
+                                <th class="text-center" lang="zh">品类</th>
+                                <th class="text-center" lang="zh">产品名称</th>
+                                <th class="text-center" lang="zh">品牌</th>
+                                <th class="text-center" lang="zh">规格</th>
+                                <th class="text-center" lang="zh">型号</th>
+                                <th class="text-center" lang="zh">主单位</th>
+                                <th class="text-center" lang="zh">加工厂</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><a href="" target="_blank">74.7%草甘膦颗粒剂</a></td>
+                                <td>4xx1501-0014</td>
+                                <td>除草剂-草甘膦-水剂</td>
+                                <td>41%草甘膦异丙铵盐水剂</td>
+
+                                <td>1L*10瓶/箱</td>
+                                <td>无</td>
+                                <td>千升</td>
+                                <td>杭州海辰</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

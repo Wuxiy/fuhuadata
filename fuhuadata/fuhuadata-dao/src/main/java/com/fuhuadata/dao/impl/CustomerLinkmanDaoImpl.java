@@ -23,6 +23,7 @@ public class CustomerLinkmanDaoImpl extends SqlMapClientTemplate implements Cust
     public static final String GET_BY_ID = "CUSTOMERLINKMAN.GET-BY-ID";
     public static final String GET_PAGE = "CUSTOMERLINKMAN.GET-PAGE";
     public static final String COUNT = "CUSTOMERLINKMAN.COUNT";
+    public static final String GET_BY_CUSTOMER_ID="CUSTOMERLINKMAN.GET-BY-CUSTOMER-ID";
     
     public CustomerLinkman addCustomerLinkman(CustomerLinkman customerLinkman) {
 		customerLinkman.setLinkmanId((String) this.insert(ADD, customerLinkman));
@@ -49,7 +50,13 @@ public class CustomerLinkmanDaoImpl extends SqlMapClientTemplate implements Cust
     public CustomerLinkman getCustomerLinkmanById(String linkman_id) {
     	return (CustomerLinkman) this.queryForObject(GET_BY_ID, linkman_id);
     }
-    
+
+    @Override
+    public List<CustomerLinkman> getCustomerLinkmanByCustomerId(String customerId) {
+        return this.queryForList(GET_BY_CUSTOMER_ID,customerId);
+
+    }
+
     public List<CustomerLinkman> getCustomerLinkmansByPage(QueryCustomerLinkman queryCustomerLinkman) {
     	return this.queryForList(GET_PAGE, queryCustomerLinkman);
     }

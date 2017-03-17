@@ -1,52 +1,33 @@
-package com.fuhuadata.domain.query;
+package com.fuhuadata.domain;
+
 import java.util.Date;
 import java.math.BigDecimal;
 
 /**
- * @author wangbo
- * @date 2017-02-03 15:51:13
+ * 客户产品档案
+ * @author wuxi
+ * @date
  */
-public class QueryCustomerProductInfo extends PageBase {
+public class CustomerProductArchives {
 
     /**客户产品id**/
-	private Integer customerProductId;
+	private Integer id;
 	
     /**标准产品id**/
 	private Integer productId;
-	
-    /**品类id**/
-	private Integer productCategoryId;
-	
-    /**品类名称**/
-	private String productCategoryName;
-	
-    /**主键id**/
+	/**订单id**/
+	private Integer orderId;
+
+    /**客户编号id**/
 	private String customerId;
-	
-    /**产品浓度,和种类一起生成名称**/
-	private BigDecimal concentration;
-	
+
     /**产品名称**/
 	private String name;
-	
+
+	private String customerProductName;
     /**品牌**/
 	private String brand;
-	
-    /**0无，1异丙胺盐，2铵盐，3钾盐，4二甲铵盐，5其他**/
-	private Integer saltType;
-	
-    /**其他盐类名称**/
-	private String otherSaltName;
-	
-    /**执行标准，-1全部，0国家标准，1国内标准，2行业标准，3福华通达企业标准，4其他**/
-	private Integer executeStandard;
-	
-    /**执行标准号**/
-	private String executeNumer;
-	
-    /**执行标准备注说明**/
-	private String executeRemarks;
-	
+
     /**主产品数量**/
 	private BigDecimal mainProductAmount;
 	
@@ -85,73 +66,7 @@ public class QueryCustomerProductInfo extends PageBase {
 	
     /**加工厂名称**/
 	private String factoryName;
-	
-    /**人工费**/
-	private BigDecimal labourCost;
-	
-    /**内包装要求**/
-	private String insidePackageRequire;
-	
-    /**内包装要求单位，0L,1KG**/
-	private Integer insidePackageRequireUnit;
-	
-    /**内包装要求名称【和外包装名称、产品名称判断唯一类型】**/
-	private String insidePackageRequireName;
-	
-    /**外包装要求**/
-	private String outsidePackageRequire;
-	
-    /**外包装要求单位，0瓶,1袋**/
-	private Integer outsidePackageRequireUnit;
-	
-    /**外包装要求名称【和内包装名称、产品名称判断唯一类型】**/
-	private String outsidePackageRequireName;
-	
-    /**标准内包装id**/
-	private Integer insidePackageId;
-	
-    /**标准内包装名称**/
-	private String insidePackageName;
-	
-    /**标准内包装信息,json格式化数据**/
-	private String insidePackageInfo;
-	
-    /**标准内包装价格**/
-	private BigDecimal insidePackagePrice;
-	
-    /**标准外包装id**/
-	private Integer outsidePackageId;
-	
-    /**标准外包装名称**/
-	private String outsidePackageName;
-	
-    /**标准外包装信息**/
-	private String outsidePackageInfo;
-	
-    /**标准外包装价格**/
-	private BigDecimal outsidePackagePrice;
-	
-    /**标准辅材id信息,json格式序列化**/
-	private String subPackageInfo;
-	
-    /**标准辅材价格**/
-	private BigDecimal subPackagePrice;
-	
-    /**加工成分,序列化数据格式**/
-	private String processingComponents;
-	
-    /**加工成分费用**/
-	private BigDecimal processingPrice;
-	
-    /**理化指标,序列化数据格式**/
-	private String physicalProperities;
-	
-    /**颜色属性,序列化id**/
-	private String productColor;
-	
-    /**图片信息**/
-	private String imageInfo;
-	
+
     /**明佣计费方式,0从价，1从量，2无**/
 	private Integer straightEmployingWay;
 	
@@ -185,7 +100,7 @@ public class QueryCustomerProductInfo extends PageBase {
     /**装箱要求**/
 	private String packageRequire;
 	
-    /**货物类型，0普通，1危险品**/
+    /**出运货物货物类型，0普通，1危险品**/
 	private Integer goodsType;
 	
     /**免用箱期**/
@@ -211,6 +126,9 @@ public class QueryCustomerProductInfo extends PageBase {
 	
     /**出口退税率**/
 	private BigDecimal taxFree;
+
+	/**毛利率**/
+	private BigDecimal grossMargin;
 	
     /**其他费用单价**/
 	private BigDecimal otherCost;
@@ -220,8 +138,36 @@ public class QueryCustomerProductInfo extends PageBase {
 	
     /**合同单价**/
 	private BigDecimal contractPrice;
-	
-    /**创建者id**/
+
+	/**转化状态 0未未转化，1已转化**/
+	private Integer transformState;
+
+
+	/**加工成分及费用json**/
+	private String compositionCost;
+
+	/**包装其他要求**/
+	private String pakageOtherRequirement;
+
+	/**附加单价**/
+	private BigDecimal additionalPrice;
+
+	/**单耗**/
+	private BigDecimal consumption;
+
+	/**包装图片要求**/
+	private String imgInfo;
+
+	/**包装要求**/
+	private String pakageInfo;
+
+	/**包材要求**/
+	private String materialInfo;
+
+
+
+
+	/**创建者id**/
 	private Integer createUserId;
 	
     /**创建者姓名**/
@@ -238,16 +184,84 @@ public class QueryCustomerProductInfo extends PageBase {
 	
     /**修改时间**/
 	private Date modifyTime;
-	
 
-	public Integer getCustomerProductId() {
-		return customerProductId;
+
+
+	public Integer getId() {
+		return id;
 	}
-	
-	public void setCustomerProductId(Integer customerProductId) {
-		this.customerProductId = customerProductId;
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
-	
+
+	public String getCustomerProductName() {
+		return customerProductName;
+	}
+
+	public void setCustomerProductName(String customerProductName) {
+		this.customerProductName = customerProductName;
+	}
+
+	public String getCompositionCost() {
+		return compositionCost;
+	}
+
+	public void setCompositionCost(String compositionCost) {
+		this.compositionCost = compositionCost;
+	}
+
+	public String getPakageOtherRequirement() {
+		return pakageOtherRequirement;
+	}
+
+	public void setPakageOtherRequirement(String pakageOtherRequirement) {
+		this.pakageOtherRequirement = pakageOtherRequirement;
+	}
+
+	public BigDecimal getAdditionalPrice() {
+		return additionalPrice;
+	}
+
+	public void setAdditionalPrice(BigDecimal additionalPrice) {
+		this.additionalPrice = additionalPrice;
+	}
+
+	public BigDecimal getConsumption() {
+		return consumption;
+	}
+
+	public void setConsumption(BigDecimal consumption) {
+		this.consumption = consumption;
+	}
+
+	public String getImgInfo() {
+		return imgInfo;
+	}
+
+	public void setImgInfo(String imgInfo) {
+		this.imgInfo = imgInfo;
+	}
+
+	public String getPakageInfo() {
+		return pakageInfo;
+	}
+
+	public void setPakageInfo(String pakageInfo) {
+		this.pakageInfo = pakageInfo;
+	}
+
+	public String getMaterialInfo() {
+		return materialInfo;
+	}
+
+	public void setMaterialInfo(String materialInfo) {
+		this.materialInfo = materialInfo;
+	}
+
+	public CustomerProductArchives() {
+	}
+
 	public Integer getProductId() {
 		return productId;
 	}
@@ -256,36 +270,13 @@ public class QueryCustomerProductInfo extends PageBase {
 		this.productId = productId;
 	}
 	
-	public Integer getProductCategoryId() {
-		return productCategoryId;
-	}
-	
-	public void setProductCategoryId(Integer productCategoryId) {
-		this.productCategoryId = productCategoryId;
-	}
-	
-	public String getProductCategoryName() {
-		return productCategoryName;
-	}
-	
-	public void setProductCategoryName(String productCategoryName) {
-		this.productCategoryName = productCategoryName;
-	}
-	
+
 	public String getCustomerId() {
 		return customerId;
 	}
 	
 	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
-	}
-	
-	public BigDecimal getConcentration() {
-		return concentration;
-	}
-	
-	public void setConcentration(BigDecimal concentration) {
-		this.concentration = concentration;
 	}
 	
 	public String getName() {
@@ -303,46 +294,7 @@ public class QueryCustomerProductInfo extends PageBase {
 	public void setBrand(String brand) {
 		this.brand = brand;
 	}
-	
-	public Integer getSaltType() {
-		return saltType;
-	}
-	
-	public void setSaltType(Integer saltType) {
-		this.saltType = saltType;
-	}
-	
-	public String getOtherSaltName() {
-		return otherSaltName;
-	}
-	
-	public void setOtherSaltName(String otherSaltName) {
-		this.otherSaltName = otherSaltName;
-	}
-	
-	public Integer getExecuteStandard() {
-		return executeStandard;
-	}
-	
-	public void setExecuteStandard(Integer executeStandard) {
-		this.executeStandard = executeStandard;
-	}
-	
-	public String getExecuteNumer() {
-		return executeNumer;
-	}
-	
-	public void setExecuteNumer(String executeNumer) {
-		this.executeNumer = executeNumer;
-	}
-	
-	public String getExecuteRemarks() {
-		return executeRemarks;
-	}
-	
-	public void setExecuteRemarks(String executeRemarks) {
-		this.executeRemarks = executeRemarks;
-	}
+
 	
 	public BigDecimal getMainProductAmount() {
 		return mainProductAmount;
@@ -447,183 +399,7 @@ public class QueryCustomerProductInfo extends PageBase {
 	public void setFactoryName(String factoryName) {
 		this.factoryName = factoryName;
 	}
-	
-	public BigDecimal getLabourCost() {
-		return labourCost;
-	}
-	
-	public void setLabourCost(BigDecimal labourCost) {
-		this.labourCost = labourCost;
-	}
-	
-	public String getInsidePackageRequire() {
-		return insidePackageRequire;
-	}
-	
-	public void setInsidePackageRequire(String insidePackageRequire) {
-		this.insidePackageRequire = insidePackageRequire;
-	}
-	
-	public Integer getInsidePackageRequireUnit() {
-		return insidePackageRequireUnit;
-	}
-	
-	public void setInsidePackageRequireUnit(Integer insidePackageRequireUnit) {
-		this.insidePackageRequireUnit = insidePackageRequireUnit;
-	}
-	
-	public String getInsidePackageRequireName() {
-		return insidePackageRequireName;
-	}
-	
-	public void setInsidePackageRequireName(String insidePackageRequireName) {
-		this.insidePackageRequireName = insidePackageRequireName;
-	}
-	
-	public String getOutsidePackageRequire() {
-		return outsidePackageRequire;
-	}
-	
-	public void setOutsidePackageRequire(String outsidePackageRequire) {
-		this.outsidePackageRequire = outsidePackageRequire;
-	}
-	
-	public Integer getOutsidePackageRequireUnit() {
-		return outsidePackageRequireUnit;
-	}
-	
-	public void setOutsidePackageRequireUnit(Integer outsidePackageRequireUnit) {
-		this.outsidePackageRequireUnit = outsidePackageRequireUnit;
-	}
-	
-	public String getOutsidePackageRequireName() {
-		return outsidePackageRequireName;
-	}
-	
-	public void setOutsidePackageRequireName(String outsidePackageRequireName) {
-		this.outsidePackageRequireName = outsidePackageRequireName;
-	}
-	
-	public Integer getInsidePackageId() {
-		return insidePackageId;
-	}
-	
-	public void setInsidePackageId(Integer insidePackageId) {
-		this.insidePackageId = insidePackageId;
-	}
-	
-	public String getInsidePackageName() {
-		return insidePackageName;
-	}
-	
-	public void setInsidePackageName(String insidePackageName) {
-		this.insidePackageName = insidePackageName;
-	}
-	
-	public String getInsidePackageInfo() {
-		return insidePackageInfo;
-	}
-	
-	public void setInsidePackageInfo(String insidePackageInfo) {
-		this.insidePackageInfo = insidePackageInfo;
-	}
-	
-	public BigDecimal getInsidePackagePrice() {
-		return insidePackagePrice;
-	}
-	
-	public void setInsidePackagePrice(BigDecimal insidePackagePrice) {
-		this.insidePackagePrice = insidePackagePrice;
-	}
-	
-	public Integer getOutsidePackageId() {
-		return outsidePackageId;
-	}
-	
-	public void setOutsidePackageId(Integer outsidePackageId) {
-		this.outsidePackageId = outsidePackageId;
-	}
-	
-	public String getOutsidePackageName() {
-		return outsidePackageName;
-	}
-	
-	public void setOutsidePackageName(String outsidePackageName) {
-		this.outsidePackageName = outsidePackageName;
-	}
-	
-	public String getOutsidePackageInfo() {
-		return outsidePackageInfo;
-	}
-	
-	public void setOutsidePackageInfo(String outsidePackageInfo) {
-		this.outsidePackageInfo = outsidePackageInfo;
-	}
-	
-	public BigDecimal getOutsidePackagePrice() {
-		return outsidePackagePrice;
-	}
-	
-	public void setOutsidePackagePrice(BigDecimal outsidePackagePrice) {
-		this.outsidePackagePrice = outsidePackagePrice;
-	}
-	
-	public String getSubPackageInfo() {
-		return subPackageInfo;
-	}
-	
-	public void setSubPackageInfo(String subPackageInfo) {
-		this.subPackageInfo = subPackageInfo;
-	}
-	
-	public BigDecimal getSubPackagePrice() {
-		return subPackagePrice;
-	}
-	
-	public void setSubPackagePrice(BigDecimal subPackagePrice) {
-		this.subPackagePrice = subPackagePrice;
-	}
-	
-	public String getProcessingComponents() {
-		return processingComponents;
-	}
-	
-	public void setProcessingComponents(String processingComponents) {
-		this.processingComponents = processingComponents;
-	}
-	
-	public BigDecimal getProcessingPrice() {
-		return processingPrice;
-	}
-	
-	public void setProcessingPrice(BigDecimal processingPrice) {
-		this.processingPrice = processingPrice;
-	}
-	
-	public String getPhysicalProperities() {
-		return physicalProperities;
-	}
-	
-	public void setPhysicalProperities(String physicalProperities) {
-		this.physicalProperities = physicalProperities;
-	}
-	
-	public String getProductColor() {
-		return productColor;
-	}
-	
-	public void setProductColor(String productColor) {
-		this.productColor = productColor;
-	}
-	
-	public String getImageInfo() {
-		return imageInfo;
-	}
-	
-	public void setImageInfo(String imageInfo) {
-		this.imageInfo = imageInfo;
-	}
-	
+
 	public Integer getStraightEmployingWay() {
 		return straightEmployingWay;
 	}
@@ -855,6 +631,29 @@ public class QueryCustomerProductInfo extends PageBase {
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
 	}
-	
 
+
+	public Integer getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
+	}
+
+	public BigDecimal getGrossMargin() {
+		return grossMargin;
+	}
+
+	public void setGrossMargin(BigDecimal grossMargin) {
+		this.grossMargin = grossMargin;
+	}
+
+	public Integer getTransformState() {
+		return transformState;
+	}
+
+	public void setTransformState(Integer transformState) {
+		this.transformState = transformState;
+	}
 }

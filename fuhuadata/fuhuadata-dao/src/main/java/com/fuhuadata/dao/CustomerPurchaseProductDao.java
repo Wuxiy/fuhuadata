@@ -16,7 +16,13 @@ public interface CustomerPurchaseProductDao {
 	 * @return
 	 */
     public CustomerPurchaseProduct addCustomerPurchaseProduct(CustomerPurchaseProduct customerPurchaseProduct);
-    
+
+	/**
+	 * 批量插入customerPurchaseProduct
+	 * @param customerPurchaseProducts
+	 * @return
+	 */
+	public boolean batchInsert(List<CustomerPurchaseProduct> customerPurchaseProducts);
 	 /**
      * 按照主键id更新customerPurchaseProduct，成功返回1，使用接口时，请重新new CustomerPurchaseProduct 的更新对象，设置要更新的字段
      * @param id

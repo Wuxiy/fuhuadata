@@ -1,0 +1,115 @@
+<div class="clearfix content shadow-out">
+    <!--副导航-->
+    <div class="nav-deputy shadow-out clearfix">
+        <ul class="nav nav-tabs pull-left">
+            <li><a href="">基本信息</a></li>
+            <li><a href="" >市场信息</a></li>
+            <li><a href="" >联系人</a></li>
+            <li><a href="" >产品要求</a></li>
+            <li><a href="" >订单信息</a></li>
+            <li><a href="" >订单默认要求</a></li>
+            <li class="active"><a href="" >沟通记录</a></li>
+            <li><a href="" >公司别名（子公司信息）</a></li>
+            <li><a href="" >关联数据</a></li>
+        </ul>
+        <ul class="breadcrumb pull-right">
+            <li><span class="glyphicon glyphicon-map-marker"></span></li>
+            <li><a href="">合作客户</a></li>
+            <li class="active">{变量}</li>
+        </ul>
+    </div>
+    <!--表格容器-->
+    <div class="dashboard-wrapper">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default view-HD-lg">
+                    <div class="panel-heading">
+                        <button class="panel-heading-btn btn btn-primary btn-xs pull-right">新增</button>
+                        <h3 class="panel-title" lang="zh">沟通记录表</h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-condensed table-bordered table-striped text-center">
+                            <caption class="text-right" lang="zh">金额单位：元</caption>
+                            <thead>
+                            <tr>
+                                <th class="text-center" lang="zh">开始时间</th>
+                                <th class="text-center" lang="zh">结束时间</th>
+                                <th class="text-center" lang="zh">活动类型</th>
+                                <th class="text-center" lang="zh">活动地点</th>
+                                <th class="text-center" lang="zh">费用</th>
+                                <th class="text-center" lang="zh">拜访对象</th>
+                                <th class="text-center" lang="zh">礼物赠送</th>
+                                <th class="text-center" lang="zh">活动摘要</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>2015-10-10 10:00</td>
+                                <td>2015-10-10 12:00</td>
+                                <td>远程沟通</td>
+
+                                <td>1000</td>
+
+
+
+                            </tr>
+                            <tr>
+                                <td>2015-10-10 10:00</td>
+                                <td>2015-10-10 12:00</td>
+                                <td>出差拜访</td>
+                                <td>华盛顿</td>
+                                <td>2000</td>
+
+                                <td>成都特产</td>
+
+                            </tr>
+                            <tr>
+                                <td>2015-10-10 10:00</td>
+                                <td>2015-10-10 12:00</td>
+                                <td>远程沟通</td>
+
+                                <td>1000</td>
+
+                                <td>成都特产</td>
+
+                            </tr>
+                            <tr>
+                                <td>2015-10-10 10:00</td>
+                                <td>2015-10-10 12:00</td>
+                                <td>展会邀请</td>
+                                <td>南京</td>
+                                <td>1900</td>
+
+
+
+                            </tr>
+                            <tr>
+                                <td>2015-10-10 10:00</td>
+                                <td>2015-10-10 12:00</td>
+                                <td>展会邀请</td>
+                                <td>南京</td>
+                                <td>1900</td>
+
+
+
+                            </tr>
+                            <tr>
+                                <td>2015-10-10 10:00</td>
+                                <td>2015-10-10 12:00</td>
+                                <td>展会邀请</td>
+                                <td>南京</td>
+                                <td>1900</td>
+
+
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -27,6 +27,7 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
     public static final String COUNT = "CUSTOMERBASEINFO.COUNT";
     public static final String COUNT_ORDER = "CUSTOMERBASEINFO.countOrderByCustomer";
     public static final String COUNT_ORDER_PRODUCT = "CUSTOMERBASEINFO.countOrderProduct";
+    public static final String QUERY_COOPERATION = "CUSTOMERBASEINFO.queryCooperationByCid";
     private static final String GET_CUSTOMER_BASEINFO="CUSTOMERBASEINFO.GET-CUSTOMER-BASEINFO";
     private static final String GET_RPODUCT_BY_ID="CUSTOMERBASEINFO.GET-PRODUCT-BY-ID";
 
@@ -57,11 +58,11 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
     }
 
     @Override
-    public CustomerBaseInfoVO getCustomerInfoById(String id) {
+    public CustomerBaseInfoVO getCustomerInfoById(String customerId) {
+        System.out.println(customerId);
         try {
-            CustomerBaseInfoVO customerBaseInfoVO = (CustomerBaseInfoVO) this.queryForObject(GET_CUSTOMER_BASEINFO,id);
+            CustomerBaseInfoVO customerBaseInfoVO = (CustomerBaseInfoVO) this.queryForObject(GET_CUSTOMER_BASEINFO,customerId);
             System.out.println(customerBaseInfoVO);
-            System.out.println("nihao wuxi");
             return customerBaseInfoVO;
         }catch(Exception e){
             e.printStackTrace();
@@ -70,8 +71,8 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
     }
 
     @Override
-    public List<CustomerMakeProduct> getCustomerMakeProductById(String id) {
-        return this.queryForList(GET_RPODUCT_BY_ID,id);
+    public List<CustomerMakeProduct> getCustomerMakeProductById(String customerId) {
+        return this.queryForList(GET_RPODUCT_BY_ID,customerId);
     }
 
     public List<CustomerBaseInfo> getCustomerBaseInfoByPage(QueryCustomerBaseInfo queryCustomerBaseInfo) {
@@ -93,7 +94,16 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
 
     public List<CountCustomersOrderProduct> countOrderProduct(String customerId) {
         try {
-            return (List<CountCustomersOrderProduct>) this.queryForObject(COUNT_ORDER_PRODUCT,customerId);
+            return  this.queryForList(COUNT_ORDER_PRODUCT,customerId);
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public CustomerBaseInfo queryCooperationByCid(String customerId){
+        try {
+            return (CustomerBaseInfo)this.queryForObject(QUERY_COOPERATION,customerId);
         } catch (DataAccessException e) {
             e.printStackTrace();
         }

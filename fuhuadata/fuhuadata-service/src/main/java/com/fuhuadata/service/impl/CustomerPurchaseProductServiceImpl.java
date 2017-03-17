@@ -1,4 +1,5 @@
 package com.fuhuadata.service.impl;
+import com.fuhuadata.dao.CustomerPurchaseProductDao;
 import com.fuhuadata.manager.CustomerPurchaseProductManager;
 import java.util.List;
 import com.fuhuadata.domain.query.Result;
@@ -6,6 +7,8 @@ import com.fuhuadata.domain.CustomerPurchaseProduct;
 import com.fuhuadata.domain.query.QueryCustomerPurchaseProduct;
 import com.fuhuadata.service.CustomerPurchaseProductService;
 import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.Map;
 import java.io.Serializable;
@@ -18,6 +21,9 @@ public class CustomerPurchaseProductServiceImpl implements CustomerPurchaseProdu
 	
 	@Resource
     private CustomerPurchaseProductManager customerPurchaseProductManager;
+	@Autowired
+	private CustomerPurchaseProductDao customerPurchaseProductDao;
+
     public Result<CustomerPurchaseProduct> addCustomerPurchaseProduct(CustomerPurchaseProduct customerPurchaseProduct) {
 		Result<CustomerPurchaseProduct> result = new Result<CustomerPurchaseProduct>();
 		try {
@@ -27,7 +33,9 @@ public class CustomerPurchaseProductServiceImpl implements CustomerPurchaseProdu
 		}
 		return result;
     }
-    
+	public boolean batchInsert( List<CustomerPurchaseProduct> customerPurchaseProducts){
+		return customerPurchaseProductDao.batchInsert(customerPurchaseProducts);
+	}
     public Result updateCustomerPurchaseProductById(int id, CustomerPurchaseProduct customerPurchaseProduct) {
 		Result result = new Result();
 		try {

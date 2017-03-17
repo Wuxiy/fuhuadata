@@ -90,11 +90,12 @@ public class CustomerBaseInfoManagerImpl implements CustomerBaseInfoManager {
 	@Override
 	public CustomerBaseInfoVO getCustomerInfoById(String id) {
 		CustomerBaseInfoVO customerBaseInfoVO = customerBaseInfoDao.getCustomerInfoById(id);
-		//System.out.println(customerBaseInfoVO.getCountry());
-		//if(customerBaseInfoVO!=null) {
+
+		if(customerBaseInfoVO!=null) {
 		List<CustomerMakeProduct> customerMakeProduct =customerBaseInfoDao.getCustomerMakeProductById(id);
 		System.out.println(customerMakeProduct.size());
-		//}
+		customerBaseInfoVO.setCustomerMakeProduct(customerMakeProduct);
+		}
 
 		return customerBaseInfoVO;
 	}

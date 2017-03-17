@@ -1,0 +1,440 @@
+<div class="clearfix content shadow-out">
+    <!--副导航-->
+    <div class="nav-deputy shadow-out clearfix">
+        <ul id="deputyNav" class="nav nav-tabs pull-left">
+            <li class="active"><a href="${request.contextPath}/customerBaseInfo/intoCustomerBaseInfoDetails">基本信息</a></li>
+            <li><a href="" >市场信息</a></li>
+            <li><a href="" >联系人</a></li>
+            <li><a href="" >产品要求</a></li>
+            <li><a href="" >订单信息</a></li>
+            <li><a href="" >订单默认要求</a></li>
+            <li><a href="" >沟通记录</a></li>
+            <li><a href="" >公司别名（子公司信息）</a></li>
+            <li><a href="" >关联数据</a></li>
+        </ul>
+        <ul class="breadcrumb pull-right">
+            <li><span class="glyphicon glyphicon-map-marker"></span></li>
+            <li><a href="">合作客户</a></li>
+            <li class="active">{变量}</li>
+        </ul>
+    </div>
+    <!--表格容器-->
+    <div class="dashboard-wrapper">
+        <div class="row">
+            <div class="col-xs-12">
+                <!--客户基本信息-->
+                <div class="panel panel-default panel-edit view-HD-lg">
+                    <div class="panel-heading">
+                        <button data-form-btn="edit" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
+                            编辑
+                        </button>
+                        <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden">
+                            <button data-form-btn="cancel" class="btn" lang="zh">取消</button>
+                            <button id="customerBasic" data-form-btn="save" class="btn btn-primary" lang="zh">保存</button>
+                        </div>
+                        <h3 class="panel-title" lang="zh">
+                            客户基本信息
+                        </h3>
+                    </div>
+                    <div class="panel-body clearfix">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" lang="zh">
+                                    客户编号
+                                </label>
+                                <div class="col-xs-2">
+                                    <input id="customerId" class="form-control noEdit" type="text" value="02011010" />
+                                </div>
+                                <label class="control-label col-xs-1" lang="zh">
+                                    客户全称<sup class="not-null editView hidden">*</sup>
+                                </label>
+                                <div class="col-xs-2">
+                                    <input id="fullName" class="form-control" type="text" value="NUFARM" />
+                                </div>
+                                <label class="control-label col-xs-1" lang="zh">
+                                    客户简称
+                                </label>
+                                <div class="col-xs-2">
+                                    <input id="shortName" class="form-control" type="text" value="NUFARM" />
+                                </div>
+                                <label class="control-label col-xs-1" lang="zh">
+                                    地区分类
+                                </label>
+                                <div class="col-xs-2">
+                                    <select id="areaId" class="form-control">
+                                        <option value="-1" lang="zh">请选择</option>
+                                        <option value="0" lang="zh">亚太地区</option>
+                                        <option value="1" lang="zh">欧非地区</option>
+                                        <option value="2" lang="zh">拉美地区</option>
+                                        <option value="3" lang="zh">国内</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" lang="zh">
+                                    国家
+                                </label>
+                                <div class="col-xs-2">
+                                    <select id="countryId" id="contry" class="form-control">
+                                        <option value="" lang="zh">请先选择地区</option>
+                                    </select>
+                                </div>
+                                <label class="control-label col-xs-1" lang="zh">
+                                    中信保编码
+                                </label>
+                                <div class="col-xs-2">
+                                    <input id="zhongxinbaoNumber" class="form-control" type="text" value="12345" />
+                                </div>
+                                <label class="control-label col-xs-1" lang="zh">
+                                    信用评级
+                                </label>
+                                <div class="col-xs-2">
+                                    <div class="input-group">
+                                        <select id="zhongxinbaoLevel" class="form-control">
+                                            <option value="1">A</option>
+                                            <option value="2">AA</option>
+                                            <option value="3">AAA</option>
+                                            <option value="4">AAAA</option>
+                                            <option value="" lang="zh">无</option>
+                                        </select>
+                                        <span class="input-group-addon"><a href="http://www.sinosure.com.cn/sinosure/index.html" target="_blank">快速查询</a></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" lang="zh">
+                                    企业性质
+                                </label>
+                                <div class="col-xs-6">
+                                    <label class="checkbox-inline">
+                                        <input name="enterpriseNature" type="checkbox" value="1" />
+                                        <span lang="zh">工厂</span>
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input name="enterpriseNature" type="checkbox" value="2" />
+                                        <span lang="zh">经销商</span>
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input name="enterpriseNature" type="checkbox" value="3" />
+                                        <span lang="zh">分销商</span>
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input name="enterpriseNature" type="checkbox" value="4" />
+                                        <span lang="zh">终端客户</span>
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input name="enterpriseNature" class="else" type="checkbox" value="5"/>
+                                        <span lang="zh">其他</span>
+                                    </label>
+                                    <span class="form-inline">
+                                        <input id="enterpriseNature" class="form-inline form-control elseInput" type="text" value="" placeholder="请输入企业性质" lang="zh"/>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" lang="zh">
+                                    注册资金
+                                </label>
+                                <div class="col-xs-2">
+                                    <div class="input-group">
+                                        <input id="registeredFunds" class="form-control" type="text" value="5000万" />
+                                        <span class="input-group-addon">$</span>
+                                    </div>
+                                </div>
+                                <label class="control-label col-xs-1" lang="zh">
+                                    企业电话
+                                </label>
+                                <div class="col-xs-2">
+                                    <input id="enterprisePhone" class="form-control" type="tel" value="18381659396" />
+                                </div>
+                                <label class="control-label col-xs-1" lang="zh">
+                                    企业邮箱
+                                </label>
+                                <div class="col-xs-2">
+                                    <input id="enterpriseEmail" class="form-control" type="email" value="nufarm@163.com" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" lang="zh">
+                                    注册地址
+                                </label>
+                                <div class="col-xs-8">
+                                    <textarea id="registeredAddress" class="form-control" rows="2" >美国</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" lang="zh">
+                                    经营范围
+                                </label>
+                                <div class="col-xs-8">
+                                    <textarea id="managementScope" class="form-control" rows="2" >草甘膦、澳虎、锐必达</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" lang="zh">
+                                    是否有中国分公司
+                                </label>
+                                <div class="col-xs-2">
+                                    <select id="hasChiCompany" class="form-control" >
+                                        <option value="1" lang="zh" selected>有</option>
+                                        <option value="0" lang="zh">无</option>
+                                    </select>
+                                </div>
+                                <label class="control-label col-xs-1 text-left" lang="zh">
+                                    是否有中方采购
+                                </label>
+                                <div class="col-xs-2">
+                                    <select id="hasChiPurchase" class="form-control" >
+                                        <option value="1" lang="zh" selected>有</option>
+                                        <option value="0" lang="zh">无</option>
+                                    </select>
+                                </div>
+                                <label class="control-label col-xs-1" lang="zh">
+                                    客户类型
+                                </label>
+                                <div class="col-xs-2">
+                                    <select id="customerLevel" class="form-control" >
+                                        <option value="1" lang="zh" selected>战略客户</option>
+                                        <option value="2" lang="zh">大客户</option>
+                                        <option value="3" lang="zh">重要客户</option>
+                                        <option value="4" lang="zh">一般客户</option>
+                                        <option value="5" lang="zh">风险客户</option>
+                                    </select>
+                                </div>
+                                <label class="control-label col-xs-1" lang="zh">
+                                    客户状态
+                                </label>
+                                <div class="col-xs-2">
+                                    <select id="customerType" class="form-control" >
+                                        <option value="1" lang="zh" selected>合作</option>
+                                        <option value="2" lang="zh" selected>潜在</option>
+                                        <option value="3" lang="zh" selected>流失</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group j-file">
+                                <label class="control-label col-xs-1" lang="zh">资质文件<span class="count">1</span></label>
+                                <div class="col-xs-3">
+                                    <div class="input-group">
+                                        <p class="form-control j-inputFile"></p><input class="hidden" type="file"/>
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-xs btn-primary editView hidden j-upFile" lang="zh" type="button">上传</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-2 col-xs-offset-1">
+                                    <button class="btn-link editView hidden j-addFile" type="button">继续添加资质文件</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" lang="zh">
+                                    工厂位置
+                                </label>
+                                <div class="col-xs-5">
+                                    <textarea id="factoryLocation" class="form-control" rows="2" ></textarea>
+                                </div>
+                                <label class="control-label col-xs-1" lang="zh">
+                                    生产线
+                                </label>
+                                <div class="col-xs-5">
+                                    <textarea id="productLine" class="form-control" rows="2" ></textarea>
+                                </div>
+                            </div>
+                            <div name="customerMakeProduct" class="form-group">
+                                <label class="control-label col-xs-1">
+                                    生产产品<span class="count">1</span>
+                                </label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" type="text" />
+                                </div>
+                                <label class="control-label col-xs-1">
+                                    <span lang="zh">产能</span>
+                                </label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" type="text" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-2 col-xs-offset-1">
+                                    <button data-form-btn='add' id='addPro' class="btn-link editView hidden" type="button">继续添加产品</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" lang="zh">
+                                    分销主要竞争对手
+                                </label>
+                                <div class="col-xs-8">
+                                    <textarea id="majorCompetitors" class="form-control" rows="4" ></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" lang="zh">
+                                    备注
+                                </label>
+                                <div class="col-xs-8">
+                                    <textarea id="remark" class="form-control" rows="4" ></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" lang="zh">
+                                    机会来源<sup class="not-null editView hidden">*</sup>
+                                </label>
+                                <div class="col-xs-2">
+                                    <select id="otherOpportunity" class="form-control else">
+                                        <option selected="" value="——选择机会来源——">——选择机会来源——</option>
+                                        <option value="1">展会</option>
+                                        <option value="2">门户网站</option>
+                                        <option value="3">农药店考察</option>
+                                        <option value="4">客户介绍</option>
+                                        <option value="5">主动联系</option>
+                                        <option class="else" value="6">其他</option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-2 elseInput hidden">
+                                    <input id="" class="form-control" type="text" placeholder="输入机会来源" lang="zh"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" lang="zh">
+                                    机会描述<sup class="not-null editView hidden">*</sup>
+                                </label>
+                                <div class="col-xs-8">
+                                    <textarea id="opportunityDescrible" class="form-control" rows="4" placeholder="描述客户发展机会" lang="zh"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group editHide">
+                                <label class="control-label col-xs-1" lang="zh">
+                                    修改人
+                                </label>
+                                <div class="col-xs-2">
+                                    <input id="createUserName" class="form-control noEdit" disabled value="">
+                                </div>
+                                <label class="control-label col-xs-1" lang="zh">
+                                    修改时间
+                                </label>
+                                <div class="col-xs-2">
+                                    <input id="createTime"class="form-control noEdit" disabled value="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--客户百科-->
+                <div class="panel panel-default panel-edit view-HD-lg">
+                    <div class="panel-heading">
+                        <button data-form-btn="edit" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
+                            编辑
+                        </button>
+                        <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden">
+                            <button data-form-btn="cancel" class="btn" lang="zh">取消</button>
+                            <button id="addEncyclopedia" data-form-btn="save" class="btn btn-primary" lang="zh">保存</button>
+                        </div>
+                        <h3 class="panel-title" lang="zh">
+                            客户百科
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" lang="zh">
+                                    企业简介
+                                </label>
+                                <div class="col-xs-8">
+                                    <textarea id="companyInfo"class="form-control" rows="4" >纽发姆在澳大利亚、新西兰、美洲、欧洲和亚洲等地拥有生产基地和销售机构，全球2600多名员工共同致力于向广大农民和经销商提供高质量的农药产品和一流的市场技术支持，纽发姆目前在全球共登记了约2100多个农药产品，并向100多个国家销售</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" lang="zh">
+                                    发展历程
+                                </label>
+                                <div class="col-xs-8">
+                                    <textarea id="developHis" class="form-control" rows="4" >纽发姆在澳大利亚、新西兰、美洲、欧洲和亚洲等地拥有生产基地和销售机构，全球2600多名员工共同致力于向广大农民和经销商提供高质量的农药产品和一流的市场技术支持，纽发姆目前在全球共登记了约2100多个农药产品，并向100多个国家销售</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" lang="zh">
+                                    销售网络
+                                </label>
+                                <div class="col-xs-8">
+                                    <textarea id="sellNetwork" class="form-control" rows="4" >纽发姆在澳大利亚、新西兰、美洲、欧洲和亚洲等地拥有生产基地和销售机构，全球2600多名员工共同致力于向广大农民和经销商提供高质量的农药产品和一流的市场技术支持，纽发姆目前在全球共登记了约2100多个农药产品，并向100多个国家销售</textarea>
+                                </div>
+                            </div>
+                            <div name="customField" class="form-group">
+                            <label name="customField-title" class="control-label col-xs-1" lang="zh">
+                                自定义字段1
+                            </label>
+                            <div class="col-xs-8">
+                                <textarea  name="customField-text" class="form-control" rows="4" ></textarea>
+                            </div>
+                        </div>
+                            <div class="form-group editHide">
+                                <label class="control-label col-xs-1" lang="zh">
+                                    最后编辑人
+                                </label>
+                                <div class="col-xs-2">
+                                    <input id="lastmodifyUserNameEn" class="form-control noEdit" disabled value="">
+                                </div>
+                                <label class="control-label col-xs-1" lang="zh">
+                                    编辑时间
+                                </label>
+                                <div class="col-xs-2">
+                                    <input id="modifyTimeEn"class="form-control noEdit" disabled value="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/scaffolding.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customerInfo.js"></script>
+<script>
+    $(function () {
+        //获取初始数据
+        getData('/customerBaseInfo/showCustomerBaseInfoDetails','POST',GetRequest(),customerBasicInfo);
+        //保存地址的参数
+        var urlArg = location.search;
+        $('#deputyNav').find('a').attr('href',function(i,val){
+            console.log(val+urlArg);
+            return val+urlArg;
+        });
+        //添加产品
+        $(document).on('click.add','#addPro',function () {
+            var row = '';
+                row += '<div name="customerMakeProduct" class="form-group" style="position:relative;">';
+                row += '<label class="col-xs-1 control-label" style="position: relative">生产产品</label>';
+                row += '<div class="col-xs-2"><input class="form-control" type="text" value=""></div>';
+                row += '<label class="col-xs-1  control-label">产能</label>';
+                row += '<div class="col-xs-2"><input class="form-control" type="text" value=""></div>';
+                row += '</div>';
+            $('#addPro').parents('.form-group').before(row);
+            reorderPro();
+        });
+        //
+        $(document).on('change.view','[name="enterpriseNature"]',radioChecked);
+//        $(document).on('change.view','[name="otherOpportunity"]',selectElse);
+
+        //客户基本信息提交
+        $(document).on('click.up','#customerBasic',function(){
+            upData('/customerBaseInfo/updateCustomerBaseInfo','POST',customerBasicFormObj(),"application/json");
+        });
+        //客户百科提交
+        $(document).on('click.up','#addEncyclopedia',function(){
+            upData('','POST',customerEncyclopediaObj());
+        });
+    })
+    /**
+     * 生产产品重排序
+     */
+    function reorderPro(){
+        $('[name="customerMakeProduct"]').find('label:first-child').html(function (n,old) {
+            if(n!=0){
+                return '<button type="button" class="close" data-form-btn="del" data-form-target="form-group" style="position: absolute;top: 3px;left: 24px;">×</button>生产产品' + parseInt(n+1);
+            }
+        });
+    }
+</script>

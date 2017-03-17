@@ -1,0 +1,73 @@
+<div class="clearfix content shadow-out">
+    <!--副导航-->
+    <div class="nav-deputy shadow-out clearfix">
+        <ul class="nav nav-tabs pull-left">
+            <li><a href="">基本信息</a></li>
+            <li><a href="" >市场信息</a></li>
+            <li class="active"><a href="" >联系人</a></li>
+            <li><a href="" >产品要求</a></li>
+            <li><a href="" >订单信息</a></li>
+            <li><a href="" >订单默认要求</a></li>
+            <li><a href="" >沟通记录</a></li>
+            <li><a href="" >公司别名（子公司信息）</a></li>
+            <li><a href="" >关联数据</a></li>
+        </ul>
+        <ul class="breadcrumb pull-right">
+            <li><span class="glyphicon glyphicon-map-marker"></span></li>
+            <li><a href="">合作客户</a></li>
+            <li class="active">{变量}</li>
+        </ul>
+    </div>
+    <!--表格容器-->
+    <div class="dashboard-wrapper">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default view-HD-lg">
+                    <div class="panel-heading">
+                        <button class="btn btn-xs btn-primary panel-heading-btn pull-right" lang="zh">新增</button>
+                        <h3 class="panel-title" lang="zh">
+                            联系人
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <!--表格-->
+                        <table class="table table-condensed table-bordered table-striped text-center">
+                            <thead>
+                            <tr>
+                                <th class="text-center" lang="zh">编号</th>
+                                <th class="text-center" lang="zh">姓名</th>
+                                <th class="text-center" lang="zh">岗位</th>
+                                <th class="text-center" lang="zh">是否在职</th>
+                                <th class="text-center" lang="zh">负责区域</th>
+                                <th class="text-center" lang="zh">性别</th>
+                                <th class="text-center" lang="zh">国籍</th>
+                                <th class="text-center" lang="zh">联系电话</th>
+                                <th class="text-center" lang="zh">邮件</th>
+                                <th class="text-center" lang="zh">是否默认</th>
+                                <th class="text-center" lang="zh">备注</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>000002</td>
+                                <td><a href="customerContacts.html" target="_blank">Anna</a></td>
+                                <td>销售</td>
+                                <td>是</td>
+                                <td>华盛顿</td>
+                                <td>女</td>
+                                <td>美国</td>
+                                <td>13888888888</td>
+                                <td>Anna@163.com</td>
+                                <td>是</td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

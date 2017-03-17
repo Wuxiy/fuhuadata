@@ -5,9 +5,9 @@ package com.fuhuadata.vo;
  * Created by intanswer on 2017/3/7.
  */
 public class CustomerProductPackagingArchives {
+    private String customerProductId;//客户商品id
     private String customerId;
     private String customerName;//客户名称
-    private String customerProductId;//客户商品id
     private String customerProductName;//客户商品名
     private String categorySerialNumber;//品类序列号
     private String categoryName;//品类

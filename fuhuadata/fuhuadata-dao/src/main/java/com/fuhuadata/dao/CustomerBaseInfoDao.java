@@ -56,17 +56,17 @@ public interface CustomerBaseInfoDao {
 
 	/**
 	 * 客户基本信息
-	 * @param id
+	 * @param customerId
 	 * @return
 	 */
-	public CustomerBaseInfoVO getCustomerInfoById(String id);
+	public CustomerBaseInfoVO getCustomerInfoById(String customerId);
 
 	/**
 	 * 获取客户产品产能
-	 * @param id
+	 * @param customerId
 	 * @return
 	 */
-	public List<CustomerMakeProduct> getCustomerMakeProductById(String id);
+	public List<CustomerMakeProduct> getCustomerMakeProductById(String customerId);
         
 	 /**
      * 查询列表，包含分页查询，查询结果为空返回空的List对象
@@ -90,6 +90,7 @@ public interface CustomerBaseInfoDao {
 	 * @param customerId
 	 * @return
 	 */
+
 	public CustomerBaseInfo countOrderByCustomer(String customerId);
 
 	/**
@@ -98,5 +99,11 @@ public interface CustomerBaseInfoDao {
 	 * @return
 	 */
 	public List<CountCustomersOrderProduct> countOrderProduct(String customerId);
-    		
+
+	/**
+	 * 根据客户id获取合作情况
+	 * @param customerId
+	 * @return
+	 */
+	public CustomerBaseInfo queryCooperationByCid(String customerId);
 }

@@ -1,0 +1,63 @@
+<div class="clearfix content shadow-out">
+    <!--副导航-->
+    <div class="nav-deputy shadow-out clearfix">
+        <ul class="nav nav-tabs pull-left">
+            <li><a href="">基本信息</a></li>
+            <li><a href="" >市场信息</a></li>
+            <li class="active"><a href="" >联系人</a></li>
+            <li><a href="" >产品要求</a></li>
+            <li><a href="" >订单信息</a></li>
+            <li><a href="" >订单默认要求</a></li>
+            <li><a href="" >沟通记录</a></li>
+            <li><a href="" >公司别名（子公司信息）</a></li>
+            <li><a href="" >关联数据</a></li>
+        </ul>
+        <ul class="breadcrumb pull-right">
+            <li><span class="glyphicon glyphicon-map-marker"></span></li>
+            <li><a href="">合作客户</a></li>
+            <li class="active">{变量}</li>
+        </ul>
+    </div>
+    <!--表格容器-->
+    <div class="dashboard-wrapper">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default view-HD-lg">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" lang="zh">
+                            公司别名（子公司信息）表
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-condensed table-bordered table-striped text-center">
+                            <thead>
+                            <tr>
+                                <th class="text-center" lang="zh">编号</th>
+                                <th class="text-center" lang="zh">企业全称</th>
+                                <th class="text-center" lang="zh">企业简称</th>
+                                <th class="text-center" lang="zh">企业性质</th>
+                                <th class="text-center" lang="zh">中信保编号</th>
+                                <th class="text-center" lang="zh">中信保信用评级</th>
+                                <th class="text-center" lang="zh">备注</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><a data-toggle="modal" data-target="#entInfo" href="" >福华通达农药科技有限公司</a></td>
+                                <td>福华通达</td>
+                                <td>加工厂、经销商</td>
+                                <td>11111111</td>
+                                <td>AAAA</td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

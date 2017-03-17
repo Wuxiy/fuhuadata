@@ -51,6 +51,8 @@ public interface CustomerLinkmanDao {
      * @return
      */
     public CustomerLinkman getCustomerLinkmanById(String linkman_id);
+
+    public List<CustomerLinkman> getCustomerLinkmanByCustomerId(String customerId);
         
 	 /**
      * 查询列表，包含分页查询，查询结果为空返回空的List对象

@@ -54,6 +54,8 @@ public interface CustomerLinkmanManager {
      */
     public CustomerLinkman getCustomerLinkmanById(String linkman_id);
 
+	public List<CustomerLinkman> getCustomerLinkmanByCustomerId(String customerId);
+
     /**
      * 查询列表，包含分页查询，
 	 * 查询分页信息，请设置

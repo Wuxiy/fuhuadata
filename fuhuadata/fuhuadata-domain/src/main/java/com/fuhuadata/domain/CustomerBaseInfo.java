@@ -79,14 +79,9 @@ public class CustomerBaseInfo {
 	/**1:战略客户,2:大客户 3:重要客户 4:一般客户 5:风险客户**/
 	private Integer customerLevel;
 
-	/*开始合作时间*/
-	private String startCooperationTime;
-
-	/*合作持续时间（月）*/
-	private String cooperationDuration;
 
 	/*活跃周期*/
-	private String activePeriod;
+	private Integer activePeriod;
 
 	/**客户类型,1:合作 2:潜在 3:流失**/
 	private Integer customerType;
@@ -145,271 +140,143 @@ public class CustomerBaseInfo {
 	private String enterpriseNature;
 	//其他性质
 	private String otherEnterpriseNature;
+	//价格敏感度
+	private String priceSensitivity;
+	//忠诚度
+	private String loyalty;
+	//开始合作时间
+	private String startCooperationTime;
+	//合作时长（月）
+	private Integer cooperationDuration;
+	//采购季节
+	private String purchasingSeason;
+
+	//合作紧密度（福华是否独家供应） 0:否 1:是
+	private Integer isFuhuaExclusive;
+	//合作情况备注
+	private String cooperationRemark;
+
 	public CustomerBaseInfo() {
-	}
-
-	public String getOtherEnterpriseNature() {
-		return otherEnterpriseNature;
-	}
-
-	public void setOtherEnterpriseNature(String otherEnterpriseNature) {
-		this.otherEnterpriseNature = otherEnterpriseNature;
-	}
-
-	public String getEnterpriseNature() {
-		return enterpriseNature;
-	}
-
-	public void setEnterpriseNature(String enterpriseNature) {
-		this.enterpriseNature = enterpriseNature;
-	}
-
-	public String getOpportunityDescrible() {
-		return opportunityDescrible;
-	}
-
-	public void setOpportunityDescrible(String opportunityDescrible) {
-		this.opportunityDescrible = opportunityDescrible;
-	}
-
-	public String getLinkManName() {
-		return linkManName;
-	}
-
-	public void setLinkManName(String linkManName) {
-		this.linkManName = linkManName;
-	}
-
-	public String getLinkManEmail() {
-		return linkManEmail;
-	}
-
-	public void setLinkManEmail(String linkManEmail) {
-		this.linkManEmail = linkManEmail;
-	}
-
-	public String getLossReason() {
-		return lossReason;
-	}
-
-	public void setLossReason(String lossReason) {
-		this.lossReason = lossReason;
 	}
 
 	public String getCustomerId() {
 		return customerId;
 	}
-	
+
 	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
 	}
-	
+
 	public String getFullName() {
 		return fullName;
 	}
-	
+
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}
-	
+
 	public String getShortName() {
 		return shortName;
 	}
-	
+
 	public void setShortName(String shortName) {
 		this.shortName = shortName;
 	}
-	
-	public Integer getCustomerType() {
-		return customerType;
+
+	public Integer getCompany_type() {
+		return company_type;
 	}
-	
-	public void setCustomerType(Integer customerType) {
-		this.customerType = customerType;
+
+	public void setCompany_type(Integer company_type) {
+		this.company_type = company_type;
 	}
-	
+
 	public Integer getAreaId() {
 		return areaId;
 	}
-	
+
 	public void setAreaId(Integer areaId) {
 		this.areaId = areaId;
 	}
-	
+
 	public String getArea() {
 		return area;
 	}
-	
+
 	public void setArea(String area) {
 		this.area = area;
 	}
-	
+
 	public Integer getCountryId() {
 		return countryId;
 	}
-	
+
 	public void setCountryId(Integer countryId) {
 		this.countryId = countryId;
 	}
-	
+
 	public String getCountry() {
 		return country;
 	}
-	
+
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	
+
 	public String getRegisteredFunds() {
 		return registeredFunds;
 	}
-	
+
 	public void setRegisteredFunds(String registeredFunds) {
 		this.registeredFunds = registeredFunds;
 	}
-	
+
 	public String getRegisteredAddress() {
 		return registeredAddress;
 	}
-	
+
 	public void setRegisteredAddress(String registeredAddress) {
 		this.registeredAddress = registeredAddress;
 	}
-	
+
 	public String getManagementScope() {
 		return managementScope;
 	}
-	
+
 	public void setManagementScope(String managementScope) {
 		this.managementScope = managementScope;
 	}
-	
+
 	public String getZhongxinbaoNumber() {
 		return zhongxinbaoNumber;
 	}
-	
+
 	public void setZhongxinbaoNumber(String zhongxinbaoNumber) {
 		this.zhongxinbaoNumber = zhongxinbaoNumber;
 	}
-	
+
 	public Integer getZhongxinbaoLevel() {
 		return zhongxinbaoLevel;
 	}
-	
+
 	public void setZhongxinbaoLevel(Integer zhongxinbaoLevel) {
 		this.zhongxinbaoLevel = zhongxinbaoLevel;
 	}
-	
+
 	public String getRemark() {
 		return remark;
 	}
-	
+
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	
+
 	public String getEnterprisePhone() {
 		return enterprisePhone;
 	}
-	
+
 	public void setEnterprisePhone(String enterprisePhone) {
 		this.enterprisePhone = enterprisePhone;
-	}
-	
-	public String getEnterpriseEmaill() {
-		return enterpriseEmail;
-	}
-	
-	public void setEnterpriseEmaill(String enterpriseEmail) {
-		this.enterpriseEmail = enterpriseEmail;
-	}
-	
-	public String getEnterpriseProfile() {
-		return enterpriseProfile;
-	}
-	
-	public void setEnterpriseProfile(String enterpriseProfile) {
-		this.enterpriseProfile = enterpriseProfile;
-	}
-	
-	public String getDevelopmentCourse() {
-		return developmentCourse;
-	}
-	
-	public void setDevelopmentCourse(String developmentCourse) {
-		this.developmentCourse = developmentCourse;
-	}
-	
-	public String getSalesNetwork() {
-		return salesNetwork;
-	}
-	
-	public void setSalesNetwork(String salesNetwork) {
-		this.salesNetwork = salesNetwork;
-	}
-	
-	public String getCustomField() {
-		return customField;
-	}
-	
-	public void setCustomField(String customField) {
-		this.customField = customField;
-	}
-	
-	public String getCustomerCompletion() {
-		return customerCompletion;
-	}
-	
-	public void setCustomerCompletion(String customerCompletion) {
-		this.customerCompletion = customerCompletion;
-	}
-	
-	public Integer getCreateUserId() {
-		return createUserId;
-	}
-	
-	public void setCreateUserId(Integer createUserId) {
-		this.createUserId = createUserId;
-	}
-	
-	public String getCreateUserName() {
-		return createUserName;
-	}
-	
-	public void setCreateUserName(String createUserName) {
-		this.createUserName = createUserName;
-	}
-	
-	public Integer getLastmodifyUserId() {
-		return lastmodifyUserId;
-	}
-	
-	public void setLastmodifyUserId(Integer lastmodifyUserId) {
-		this.lastmodifyUserId = lastmodifyUserId;
-	}
-	
-	public String getLastmodifyUserName() {
-		return lastmodifyUserName;
-	}
-	
-	public void setLastmodifyUserName(String lastmodifyUserName) {
-		this.lastmodifyUserName = lastmodifyUserName;
-	}
-
-	public String getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
-	}
-
-	public String getModifyTime() {
-		return modifyTime;
-	}
-
-	public void setModifyTime(String modifyTime) {
-		this.modifyTime = modifyTime;
 	}
 
 	public String getEnterpriseEmail() {
@@ -420,12 +287,76 @@ public class CustomerBaseInfo {
 		this.enterpriseEmail = enterpriseEmail;
 	}
 
+	public String getEnterpriseProfile() {
+		return enterpriseProfile;
+	}
+
+	public void setEnterpriseProfile(String enterpriseProfile) {
+		this.enterpriseProfile = enterpriseProfile;
+	}
+
+	public String getDevelopmentCourse() {
+		return developmentCourse;
+	}
+
+	public void setDevelopmentCourse(String developmentCourse) {
+		this.developmentCourse = developmentCourse;
+	}
+
+	public String getSalesNetwork() {
+		return salesNetwork;
+	}
+
+	public void setSalesNetwork(String salesNetwork) {
+		this.salesNetwork = salesNetwork;
+	}
+
+	public String getCustomField() {
+		return customField;
+	}
+
+	public void setCustomField(String customField) {
+		this.customField = customField;
+	}
+
+	public String getCustomerCompletion() {
+		return customerCompletion;
+	}
+
+	public void setCustomerCompletion(String customerCompletion) {
+		this.customerCompletion = customerCompletion;
+	}
+
+	public Integer getCreateUserId() {
+		return createUserId;
+	}
+
+	public void setCreateUserId(Integer createUserId) {
+		this.createUserId = createUserId;
+	}
+
 	public Integer getCustomerLevel() {
 		return customerLevel;
 	}
 
 	public void setCustomerLevel(Integer customerLevel) {
 		this.customerLevel = customerLevel;
+	}
+
+	public Integer getActivePeriod() {
+		return activePeriod;
+	}
+
+	public void setActivePeriod(Integer activePeriod) {
+		this.activePeriod = activePeriod;
+	}
+
+	public Integer getCustomerType() {
+		return customerType;
+	}
+
+	public void setCustomerType(Integer customerType) {
+		this.customerType = customerType;
 	}
 
 	public Integer getHasChiCompany() {
@@ -460,6 +391,14 @@ public class CustomerBaseInfo {
 		this.qualificationsFileUrl = qualificationsFileUrl;
 	}
 
+	public String getCreateUserName() {
+		return createUserName;
+	}
+
+	public void setCreateUserName(String createUserName) {
+		this.createUserName = createUserName;
+	}
+
 	public String getFactoryLocation() {
 		return factoryLocation;
 	}
@@ -476,37 +415,36 @@ public class CustomerBaseInfo {
 		this.majorCompetitors = majorCompetitors;
 	}
 
-	public Integer getCompany_type() {
-		return company_type;
+	public Integer getLastmodifyUserId() {
+		return lastmodifyUserId;
 	}
 
-	public void setCompany_type(Integer company_type) {
-		this.company_type = company_type;
+	public void setLastmodifyUserId(Integer lastmodifyUserId) {
+		this.lastmodifyUserId = lastmodifyUserId;
 	}
 
-
-	public String getStartCooperationTime() {
-		return startCooperationTime;
+	public String getLastmodifyUserName() {
+		return lastmodifyUserName;
 	}
 
-	public void setStartCooperationTime(String startCooperationTime) {
-		this.startCooperationTime = startCooperationTime;
+	public void setLastmodifyUserName(String lastmodifyUserName) {
+		this.lastmodifyUserName = lastmodifyUserName;
 	}
 
-	public String getCooperationDuration() {
-		return cooperationDuration;
+	public String getCreateTime() {
+		return createTime;
 	}
 
-	public void setCooperationDuration(String cooperationDuration) {
-		this.cooperationDuration = cooperationDuration;
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
 	}
 
-	public String getActivePeriod() {
-		return activePeriod;
+	public String getModifyTime() {
+		return modifyTime;
 	}
 
-	public void setActivePeriod(String activePeriod) {
-		this.activePeriod = activePeriod;
+	public void setModifyTime(String modifyTime) {
+		this.modifyTime = modifyTime;
 	}
 
 	public BigDecimal getTotalMoney() {
@@ -547,5 +485,109 @@ public class CustomerBaseInfo {
 
 	public void setNetProfit(BigDecimal netProfit) {
 		this.netProfit = netProfit;
+	}
+
+	public String getLossReason() {
+		return lossReason;
+	}
+
+	public void setLossReason(String lossReason) {
+		this.lossReason = lossReason;
+	}
+
+	public String getOpportunityDescrible() {
+		return opportunityDescrible;
+	}
+
+	public void setOpportunityDescrible(String opportunityDescrible) {
+		this.opportunityDescrible = opportunityDescrible;
+	}
+
+	public String getLinkManName() {
+		return linkManName;
+	}
+
+	public void setLinkManName(String linkManName) {
+		this.linkManName = linkManName;
+	}
+
+	public String getLinkManEmail() {
+		return linkManEmail;
+	}
+
+	public void setLinkManEmail(String linkManEmail) {
+		this.linkManEmail = linkManEmail;
+	}
+
+	public String getEnterpriseNature() {
+		return enterpriseNature;
+	}
+
+	public void setEnterpriseNature(String enterpriseNature) {
+		this.enterpriseNature = enterpriseNature;
+	}
+
+	public String getOtherEnterpriseNature() {
+		return otherEnterpriseNature;
+	}
+
+	public void setOtherEnterpriseNature(String otherEnterpriseNature) {
+		this.otherEnterpriseNature = otherEnterpriseNature;
+	}
+
+	public String getPriceSensitivity() {
+		return priceSensitivity;
+	}
+
+	public void setPriceSensitivity(String priceSensitivity) {
+		this.priceSensitivity = priceSensitivity;
+	}
+
+	public String getLoyalty() {
+		return loyalty;
+	}
+
+	public void setLoyalty(String loyalty) {
+		this.loyalty = loyalty;
+	}
+
+	public String getStartCooperationTime() {
+		return startCooperationTime;
+	}
+
+	public void setStartCooperationTime(String startCooperationTime) {
+		this.startCooperationTime = startCooperationTime;
+	}
+
+	public Integer getCooperationDuration() {
+		return cooperationDuration;
+	}
+
+	public void setCooperationDuration(Integer cooperationDuration) {
+		this.cooperationDuration = cooperationDuration;
+	}
+
+	public String getPurchasingSeason() {
+		return purchasingSeason;
+	}
+
+	public void setPurchasingSeason(String purchasingSeason) {
+		this.purchasingSeason = purchasingSeason;
+	}
+
+	public Integer getIsFuhuaExclusive() {
+		return isFuhuaExclusive;
+	}
+
+	public void setIsFuhuaExclusive(Integer isFuhuaExclusive) {
+		this.isFuhuaExclusive = isFuhuaExclusive;
+	}
+
+	public String getCooperationRemark() {
+		return cooperationRemark;
+	}
+
+	public void setCooperationRemark(String cooperationRemark) {
+		this.cooperationRemark = cooperationRemark;
 	}
 }
