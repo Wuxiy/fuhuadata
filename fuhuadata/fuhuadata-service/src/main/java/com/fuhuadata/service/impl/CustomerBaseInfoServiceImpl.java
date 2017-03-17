@@ -25,6 +25,9 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 	@Autowired
     private CustomerBaseInfoManager customerBaseInfoManager;
 
+	@Autowired
+	private CustomerBaseInfoDao customerBaseInfoDao;
+
     public Result<CustomerBaseInfo> addCustomerBaseInfo(CustomerBaseInfo customerBaseInfo) {
 		Result<CustomerBaseInfo> result = new Result<CustomerBaseInfo>();
 		try {
@@ -124,5 +127,9 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 
 	public List<CountCustomersOrderProduct> countOrderProduct(String customerId) {
 		return customerBaseInfoManager.countOrderProduct(customerId);
+	}
+
+	public CustomerBaseInfo queryCooperationByCid(String customerId) {
+		return customerBaseInfoDao.queryCooperationByCid(customerId);
 	}
 }

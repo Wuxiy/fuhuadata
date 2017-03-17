@@ -18,7 +18,13 @@ public interface CustomerPurchaseProductService {
 	 * @return
 	 */
     public Result<CustomerPurchaseProduct> addCustomerPurchaseProduct(CustomerPurchaseProduct customerPurchaseProduct) ;
- 
+
+	/**
+	 * 批量插入 customerPurchaseProduct
+	 * @param customerPurchaseProducts
+	 * @return
+	 */
+	public boolean batchInsert( List<CustomerPurchaseProduct> customerPurchaseProducts);
     /**
      * 按照主键id更新customerPurchaseProduct，请重新new CustomerPurchaseProduct 的更新对象，设置要更新的字段
 	 * 返回result，通过result.isSuccess()判断更新是否成功

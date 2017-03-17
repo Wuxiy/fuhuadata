@@ -1,5 +1,7 @@
 package com.fuhuadata.dao.impl;
 import java.util.List;
+
+import com.fuhuadata.dao.BaseDao;
 import com.fuhuadata.domain.query.QueryCustomerSaleProduct;
 import com.fuhuadata.dao.CustomerSaleProductDao;
 import com.fuhuadata.domain.CustomerSaleProduct;
@@ -13,7 +15,7 @@ import java.io.Serializable;
  * @date 2017-01-12 13:41:04
  */
 @SuppressWarnings("unchecked")
-public class CustomerSaleProductDaoImpl extends SqlMapClientTemplate implements CustomerSaleProductDao {
+public class CustomerSaleProductDaoImpl extends BaseDao implements CustomerSaleProductDao {
 
     public static final String ADD = "CUSTOMERSALEPRODUCT.ADD";
     public static final String UPDATE = "CUSTOMERSALEPRODUCT.UPDATE";
@@ -28,7 +30,11 @@ public class CustomerSaleProductDaoImpl extends SqlMapClientTemplate implements 
 		customerSaleProduct.setId((Integer) this.insert(ADD, customerSaleProduct));
     	return customerSaleProduct;
     }
-    
+
+    public boolean batchInsert(List<CustomerSaleProduct> customerSaleProducts) {
+       return this.batch(ADD,customerSaleProducts);
+    }
+
     public int updateCustomerSaleProductById(int id, CustomerSaleProduct customerSaleProduct) {
     	customerSaleProduct.setId(id);
 		return this.update(UPDATE, customerSaleProduct);

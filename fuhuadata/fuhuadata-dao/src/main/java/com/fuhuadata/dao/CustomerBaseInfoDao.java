@@ -90,6 +90,7 @@ public interface CustomerBaseInfoDao {
 	 * @param customerId
 	 * @return
 	 */
+
 	public CustomerBaseInfo countOrderByCustomer(String customerId);
 
 	/**
@@ -98,5 +99,11 @@ public interface CustomerBaseInfoDao {
 	 * @return
 	 */
 	public List<CountCustomersOrderProduct> countOrderProduct(String customerId);
-    		
+
+	/**
+	 * 根据客户id获取合作情况
+	 * @param customerId
+	 * @return
+	 */
+	public CustomerBaseInfo queryCooperationByCid(String customerId);
 }

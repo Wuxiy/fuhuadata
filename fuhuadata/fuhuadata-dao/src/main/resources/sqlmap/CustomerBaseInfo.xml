@@ -6,6 +6,8 @@
    	<typeAlias alias="CustomerBaseInfo" type="com.fuhuadata.domain.CustomerBaseInfo"/>
    	<typeAlias alias="QueryCustomerBaseInfo" type="com.fuhuadata.domain.query.QueryCustomerBaseInfo"/>
 	<typeAlias alias="CountCustomersOrderProduct" type="com.fuhuadata.domain.CountCustomersOrderProduct"/>
+<<<<<<< HEAD
+=======
 	<typeAlias alias="CustomerBaseInfoVO" type="com.fuhuadata.vo.CustomerBaseInfoVO"/>
 	<typeAlias alias="CustomerMakeProduct" type="com.fuhuadata.domain.CustomerMakeProduct"/>
 	<resultMap id="CUSTOMERBASEINFO-MAP" class="CustomerBaseInfo">
@@ -61,6 +63,7 @@
 	</resultMap>
 
 
+>>>>>>> 29c4b59d7e689990750e41a3a57981f919230258
 	<sql id="PAGE-COMMON">
 		<dynamic prepend=" WHERE ">
 				<isNotEmpty prepend=" AND " property="customerId">
@@ -237,7 +240,6 @@
 	<update id="UPDATE" parameterClass="CustomerBaseInfo">
 		UPDATE customer_base_info
 		<dynamic prepend=" SET ">
-						<isNotEmpty prepend=", " property="customerId">customer_id=#customerId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="fullName">full_name=#fullName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="shortName">short_name=#shortName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="customerType">customer_type=#customerType#</isNotEmpty>
@@ -264,6 +266,15 @@
 						<isNotEmpty prepend=", " property="lastmodifyUserName">lastmodify_user_name=#lastmodifyUserName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="createTime">create_time=#createTime#</isNotEmpty>
 						<isNotEmpty prepend=", " property="modifyTime">modify_time=#modifyTime#</isNotEmpty>
+						<isNotEmpty prepend=", " property="priceSensitivity">price_sensitivity=#priceSensitivity#</isNotEmpty>
+						<isNotEmpty prepend=", " property="loyalty">loyalty=#loyalty#</isNotEmpty>
+						<isNotEmpty prepend=", " property="startCooperationTime">start_cooperation_time=#startCooperationTime#</isNotEmpty>
+						<isNotEmpty prepend=", " property="cooperationDuration">cooperation_duration=#cooperationDuration#</isNotEmpty>
+						<isNotEmpty prepend=", " property="purchasingSeason">purchasing_season=#purchasingSeason#</isNotEmpty>
+						<isNotEmpty prepend=", " property="activePeriod">active_period=#activePeriod#</isNotEmpty>
+						<isNotEmpty prepend=", " property="isFuhuaExclusive">is_fuhua_exclusive=#isFuhuaExclusive#</isNotEmpty>
+						<isNotEmpty prepend=", " property="cooperationRemark">cooperation_remark=#cooperationRemark#</isNotEmpty>
+
 					</dynamic>
 		WHERE customer_id=#customer_id#
 	</update>
@@ -278,6 +289,22 @@
 		<![CDATA[
 			SELECT * FROM customer_base_info
 		]]>
+	</select>
+
+	<select id="queryCooperationByCid" resultClass="CustomerBaseInfo" parameterClass="java.lang.String">
+		select
+				price_sensitivity priceSensitivity,
+				loyalty,
+				start_cooperation_time startCooperationTime,
+				cooperation_duration  cooperationDuration,
+				purchasing_season purchasingSeason,
+				active_period activePeriod,
+				is_fuhua_exclusive isFuhuaExclusive,
+				cooperation_remark  cooperationRemark,
+		from
+				customer_base_info
+		where
+				customer_id=#customerId#
 	</select>
 
 	<select id="GET-BY-QUERY" resultClass="CustomerBaseInfo" parameterClass="QueryCustomerBaseInfo">
