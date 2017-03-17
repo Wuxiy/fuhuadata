@@ -194,7 +194,7 @@
                         var elseSelected = formControl.filter('.else');
                         var targetEl = formControl.parents('.form-group').find('.elseInput');
                         if(elseSelected.prop('checked')){
-                            console.log(formControl.prop('checked'));
+                            console.log(elseSelected.prop('checked'));
                             targetEl.removeClass('hidden');
                         }else{
                             targetEl.addClass('hidden');

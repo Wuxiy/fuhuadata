@@ -403,7 +403,7 @@
 				base.enterprise_nature enterpriseNature
 				<isEqual property="customerType" compareValue="2" prepend=",">
 					 lm.name linkManName,
-					 lm.lemail linkManEmail
+					 lm.lemail linkManEmaiL
 				</isEqual>
 				<isNotEqual property="customerType" compareValue="2" prepend=",">
 					'' linkManName,

@@ -16,25 +16,41 @@ $(document).on('click.edit',editBtn,saveEdit);
 $(document).on('click.save',saveBtn,saveEdit);
 $(document).on('click.cancel',cancelBtn,saveEdit);
 $(document).on('click.del',delBtn,delEl);
-$(document).on('click.del',saltType,radioChecked);
+$(document).on('change.view',saltType,radioChecked);
+
+
 // $('.else:checked').parents('.form-group').find('.elseInput').show();
 // $('.else:not(:checked)').parents('.form-group').find('.elseInput').hide();
 /**
- *单选按钮的他选项
+ *checkbox其他选项
  */
 function radioChecked(e){
     var el = $(e.target);
     var radioGroup = $('[name="'+el.attr("name")+'"]');
     var elseSelected = radioGroup.filter('.else');
     var targetEl = el.parents('.form-group').find('.elseInput');
+    console.log(elseSelected.prop('checked'));
     if(elseSelected.prop('checked')){
-        console.log(el.prop('checked'));
+
         targetEl.removeClass('hidden');
     }else{
         targetEl.addClass('hidden');
     }
 }
 
+/**
+ *selected其他选项
+ */
+// function selectElse(e){
+//     var el = $(e.target);
+//     var elseSelected = el.find('.else');
+//     var targetEl = el.parents('.form-group').find('.elseInput');
+//     if(elseSelected.prop('selected')){
+//         targetEl.removeClass('hidden');
+//     }else{
+//         targetEl.addClass('hidden');
+//     }
+// }
 
 /**
  * 初始化
@@ -103,3 +119,4 @@ function GetRequest() {
     }
     return theRequest;
 }
+

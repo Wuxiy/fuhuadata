@@ -57,16 +57,11 @@
         </div>
     </div>
 </div>
-<<<<<<< HEAD
+
 <script type="text/javascript" language="javascript" src="/lib/js/creatTree.js"></script>
 <script type="text/javascript" language="javascript" src="/lib/js/scaffolding.js"></script>
-<script type="text/javascript">
-=======
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript">
-    $('#tree').creatTree('${request.contextPath}/packingCategory/CategoryTree');
-    $('#tree').filtrateData('${request.contextPath}/packingArchives/getPackingArchivesByPId',"container","packingArchivesList");
->>>>>>> c5fffe402edc7ae2c9d61d75adde82636f653de3
 
     $(function(){
         $('#tree').creatTree('/packingCategory/CategoryTree');
