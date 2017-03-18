@@ -70,7 +70,7 @@ function imgArr(){
     $('.filename').each(function(){
         var objt ={
             "name":$(this).val(),
-            "imgpath":$(this).attr('data-url'),
+            "path":$(this).attr('data-url'),
         };
         arr.push(objt);
     })
