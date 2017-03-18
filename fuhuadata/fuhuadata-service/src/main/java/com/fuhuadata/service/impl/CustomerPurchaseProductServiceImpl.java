@@ -59,7 +59,7 @@ public class CustomerPurchaseProductServiceImpl implements CustomerPurchaseProdu
     public Result<List<CustomerPurchaseProduct>> getCustomerPurchaseProductsByQuery(QueryCustomerPurchaseProduct queryCustomerPurchaseProduct) {
 		Result<List<CustomerPurchaseProduct>> result = new Result<List<CustomerPurchaseProduct>>();
 		try {
-			result.addDefaultModel("${!className}s", customerPurchaseProductManager.getCustomerPurchaseProductsByQuery(queryCustomerPurchaseProduct));
+			result.addDefaultModel(customerPurchaseProductManager.getCustomerPurchaseProductsByQuery(queryCustomerPurchaseProduct));
 		} catch(Exception e) {
 			result.setSuccess(false);
 		}

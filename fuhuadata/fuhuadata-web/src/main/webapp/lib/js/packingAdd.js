@@ -15,12 +15,8 @@
     names.value = name;
 
     var img = $("input[name='file']");
-    var imgnames =$("input[name='imagname']");
 
-    var obj1 = {},obj2 = {},obj3 = {};
-    var arr = [];
-    var ids = new Array();
-
+    var addTbody = document.getElementById('add_tbody');
 
     //根据包材类型获取关联包材的展示
     if(bid != 1){
@@ -73,7 +69,7 @@ function imgArr(){
     $('.filename').each(function(){
         var objt ={
             "name":$(this).val(),
-            "imgpath":$(this).attr('data-url')
+            "path":$(this).attr('data-url'),
         };
         arr.push(objt);
     })
@@ -82,24 +78,38 @@ function imgArr(){
 
 //新增添加关联
 $('#add_relate').on('click',function(){
+    var ids = new Array();
     $("input[name='modal_cellcheckbox']:checked").each(function(){
         ids.push($(this).val());
     });
-
+    $('#addField').modal('hide');
     if(ids.length > 0){
         var msg = "确认要为主材添加这些关联吗？";
         if(msg){
-            var url = '';
-            var data = ids;
+            var url = basePath+'/packingArchives/getByIds';
             jQuery.ajax({
                 url:url,
                 type:'POST',
                 dataType:"json",
                 contentType:"application/json",
-                data:JSON.stringify(data),
-                success:function(){
+                data:JSON.stringify(ids),
+                success:function(result){
+                    console.log(result);
                     alert("添加关联成功！");
-                    location.reload();
+                    for(var i=0;i<result.data.length;i++){
+                        addTbody.innerHTML += '<tr>'+
+                            '<td class="text-center"><input type="checkbox" name="cellcheckbox" value="'+result.data[i].packingId+'" /></td>'+
+                            '<td class="col-xs-2 text-center text-middle">'+result.data[i].packingId+'</td>'+
+                            '<td class="col-xs-2 text-center text-middle">'+result.data[i].packName+'</td>'+
+                            '<td class="col-xs-1 text-center text-middle">'+result.data[i].spec+'</td>'+
+                            '<td class="col-xs-1 text-center text-middle">'+result.data[i].size+'</td>'+
+                            '<td class="col-xs-2 text-center text-middle">'+result.data[i].quality+'</td>'+
+                            '<td class="col-xs-1 text-center text-middle">'+result.data[i].unitPrice+'</td>'+
+                            '<td class="col-xs-1 text-center text-middle">'+result.data[i].consumption+'</td>'+
+                            '<td class="col-xs-1 text-center text-middle">'+result.data[i].status+'</td>'
+                        '</tr>';
+                    }
+
                 }
             })
         }
@@ -107,6 +117,14 @@ $('#add_relate').on('click',function(){
         alert('还未选择要添加的关联');
     }
 })
+
+function Ids() {
+    var ids = new Array();
+    $("input[name='cellcheckbox']").each(function(){
+        ids.push($(this).val());
+    });
+    return JSON.stringify(ids);
+}
 
 //新增完成
 $('.packingAdd').on('click',function(){
@@ -126,7 +144,7 @@ $('.packingAdd').on('click',function(){
         "status": jQuery('#status').val(),
         "suitableType": JSON.stringify(checkboxArr()),
         "imagePath":imgArr(),
-        "associatedPackingId":JSON.stringify(ids),
+        "associatedPackingId":Ids(),
         "bRemarks": jQuery('#bremarks').val(),
     }
     console.log(data);

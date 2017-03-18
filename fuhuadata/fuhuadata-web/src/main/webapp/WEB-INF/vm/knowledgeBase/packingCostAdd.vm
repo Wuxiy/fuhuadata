@@ -265,8 +265,6 @@
     </div>
 </div>
 
-<script src="${request.contextPath}/lib/js/fileinput.js" type="text/javascript" charset="utf-8"></script>
-<script src="${request.contextPath}/lib/js/fileinput_locale_zh.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/packingAdd.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/scaffolding.js"></script>

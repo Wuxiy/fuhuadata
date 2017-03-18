@@ -14,15 +14,26 @@
 								<result property="productName" column="product_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="brand" column="brand" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="marketingMethod" column="marketing_method" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="yearSales" column="year_sales" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="destinationCountry" column="destination_country" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="mainPruchaser" column="main_pruchaser" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="yearSalesTotal" column="year_sales_total" jdbcType="VARCHAR" javaType="java.lang.String" />
+
+								<result property="yearSales1" column="year_sales1" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="yearSales2" column="year_sales2" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="yearSales3" column="year_sales3" jdbcType="VARCHAR" javaType="java.lang.String" />
+
+								<result property="destinationCountry1" column="destination_country1" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="destinationCountry2" column="destination_country2" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="destinationCountry3" column="destination_country3" jdbcType="VARCHAR" javaType="java.lang.String" />
+
+								<result property="marketShare1" column="market_share1" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="marketShare2" column="market_share2" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="marketShare3" column="market_share3" jdbcType="VARCHAR" javaType="java.lang.String" />
+
 								<result property="createUserId" column="create_user_id" jdbcType="INT" javaType="java.lang.Integer" />
 								<result property="createUserName" column="create_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="lastmodifyUserId" column="lastmodify_user_id" jdbcType="INT" javaType="java.lang.Integer" />
 								<result property="lastmodifyUserName" column="lastmodify_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="createTime" column="create_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
-								<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+								<result property="createTime" column="create_time" jdbcType="DATETIME" javaType="java.lang.String" />
+								<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.lang.String" />
 														</resultMap>
 	
 	<sql id="PAGE-COMMON">	
@@ -133,8 +144,18 @@
 	
 	<insert id="ADD" parameterClass="CustomerSaleProduct">
 		INSERT INTO 
-		customer_sale_product(id,customer_id,year,product_id,product_name,brand,marketing_method,year_sales,destination_country,main_pruchaser,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time) 
-		VALUES(#id#,#customerId#,#year#,#productId#,#productName#,#brand#,#marketingMethod#,#yearSales#,#destinationCountry#,#mainPruchaser#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
+		customer_sale_product(
+							id,customer_id,year,product_id,product_name,brand,marketing_method,year_sales_total,
+							destination_country1,destination_country2,destination_country3,
+							year_sales1,year_sales2,year_sales3,
+							market_share1,market_share2,market_share3,
+							create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time)
+		VALUES(
+							#id#,#customerId#,#year#,#productId#,#productName#,#brand#,#marketingMethod#,#yearSalesTotal#,
+							#destinationCountry1#,#destinationCountry2#,#destinationCountry3#,
+							#yearSales1#,#yearSales2#,#yearSales3#,
+							#marketShare1#,#marketShare2#,#marketShare3#,
+							#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
 		<selectKey resultClass="int" keyProperty="id">
 			SELECT @@IDENTITY AS ID
 		</selectKey>

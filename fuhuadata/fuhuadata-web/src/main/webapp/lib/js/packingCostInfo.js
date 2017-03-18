@@ -2,6 +2,7 @@
  * Created by young on 2017/3/7.
  */
 
+    $('.form-btn').hide();
     $('#finish').hide();
     //分割url，获取上个页面传过来的id
     var thisURL = document.URL;
@@ -14,20 +15,17 @@
     var table = document.getElementById('packing_relate_table');
     var imgContent = document.getElementById('imgContent');
 
-    var checkboxarr = '';
-    var imgpath;
-    var Ids = new Array();
-
     if(bid != 1){
         $('.relate').hide();
     }
 
+$(document).ready(function(){
     var url = '/packingArchives/getPackingArchivesById?id='+id;
     jQuery.ajax({
-    	type:'GET',
-    	url:url,
-    	success:function(result){
-    		var ResultData = result.data;
+        type:'GET',
+        url:url,
+        success:function(result){
+            var ResultData = result.data;
 
             if(ResultData.pack){
                 var pack = ResultData.pack;
@@ -71,58 +69,72 @@
             }
 
             if(ResultData.imagePath){
+                $('.form-btn').show();
                 var reData = ResultData.imagePath;
                 for(var j=0;j<reData.length;j++){
                     imgContent.innerHTML += '<div class="col-xs-3">'+
                         '<img src="../'+reData[j].path+'" class="fileimg" width="300px" height="200px" style="margin-bottom:2%">'+
                         '<input type="file" name="file" style="margin-bottom:2%"><div>'+
-                        '<input type="text" name="file" class="filename" style="margin-bottom:2%" value="'+reData[j].name+'">'+
+                        '<input type="text" name="file" class="filename" data-url="'+reData[j].path+'" style="margin-bottom:2%" value="'+reData[j].name+'">'+
                         '</div>'+
                         '</div>';
                 }
             }
 
-    	}
+        }
     })
-
+})
 
 //图片上传
 
-/*$("#file").fileinput({
-    language: 'zh', //设置语言
-    uploadUrl: '/upload/uploadFile', // you must set a valid URL here else you will get an error
-    allowedFileExtensions : ['jpg', 'png','gif'],
-    overwriteInitial: false,
-    maxFileSize: 1000,
-    maxFilesNum: 10,
-    maxImageWidth: 280,//图片的最大宽度
-    maxImageHeight: 280,//图片的最大高度
-    //allowedFileTypes: ['image', 'video', 'flash'],
-    enctype: 'multipart/form-data',
-    slugCallback: function(filename) {
-        return filename.replace('(', '_').replace(']', '_');
-    }
-}).on("filebatchselected", function(event, file) {
-    console.log('233');
+function fsubmit(){
+    var data = new FormData($('#form1')[0]);
+    console.log(data);
+    jQuery.ajax({
+        url: basePath+'/upload/uploadFileAll',
+        type: 'POST',
+        data: data,
+        dataType: 'JSON',
+        cache: false,
+        processData: false,
+        contentType: false,
+        success:function (result) {
+            console.log(result);
+            $.each(result.data,function(i,item){
+                console.log(item);
+                $('.filename').eq(i).attr('data-url',item);
+                $('.fileimg').eq(i).attr('src',"../"+basePath+item);
+            })
 
-}).on("fileuploaded", function(event, data) {
-    console.log('233');
-    if(data.response)
-    {
-        alert('处理成功');
-    }
-    imgpath = data.response.data;
-});*/
+        }
+    });
+    return false;
+}
+
+//图片JSON
+function imgArr(){
+    var arr=[];
+    $('.filename').each(function(){
+        var objt ={
+            "name":$(this).val(),
+            "path":$(this).attr('data-url')
+        };
+        arr.push(objt);
+    })
+    return JSON.stringify(arr);
+}
+
 
 //适用产品类型checkbox
-$("input[name='check']:checked").each(function(index,element){
-    checkboxarr += $(this).val() + ",";
-})
-
-//关联数组Ids
-$("input[name='cellcheckbox']").each(function(){
-    Ids.push($(this).val());
-});
+function checkboxArr() {
+    var checkboxarr = [];
+    var a;
+    $("input[name='check']:checked").each(function(){
+        a =  $(this).val();
+        checkboxarr.push(a);
+    })
+    return checkboxarr;
+}
 
 //编辑
     $('#edit').on('click',function(){
@@ -142,6 +154,7 @@ $("input[name='cellcheckbox']").each(function(){
     $('#finish').on('click',function(){
         var url = basePath+'/packingArchives/doModify';
         var data = {
+            "packingId":id,
             "packName": jQuery('#packName').val(),
             "spec": jQuery('#spec').val(),
             "size": jQuery('#size').val(),
@@ -152,10 +165,10 @@ $("input[name='cellcheckbox']").each(function(){
             "consumption": jQuery('#consumption').val(),
             "priceEndDate": jQuery('#priceEndDate').val(),
             "status": jQuery('#status').val(),
-            "suitableType": checkboxarr,
-            "image":arr,
-            "ids":ids,
-            "bremarks": jQuery('#bremarks').val(),
+            "suitableType": JSON.stringify(checkboxArr()),
+            "imagePath":imgArr(),
+            "associatedPackingId":Ids(),
+            "bRemarks": jQuery('#bRemarks').val(),
         }
 
         console.log(data);
@@ -166,13 +179,19 @@ $("input[name='cellcheckbox']").each(function(){
             contentType:"application/json",
             data:JSON.stringify(data),
             success:function(){
-                alert("添加成功");
+                alert("保存成功");
                 location.reload();
             }
         })
     })
 
-
+function Ids() {
+    var ids = new Array();
+    $("input[name='cellcheckbox']").each(function(){
+        ids.push($(this).val());
+    });
+    return JSON.stringify(ids);
+}
 
 //关联包材全选
 $('#checkAll').on('click',function(){
@@ -221,7 +240,7 @@ $('#delete').on('click',function(){
     if(ids.length > 0){
         var msg = "确定要删除这些关联吗？";
         if(confirm(msg)){
-            var url = 'deleteRelation?id=' + id;
+            var url = basePath + 'deleteRelation?id=' + id;
             var data = ids;
 
             jQuery.ajax({
@@ -251,7 +270,7 @@ $('#finish_relate').on('click',function(){
     if(ids.length > 0){
         var msg = "确认要为主材添加这些关联吗？";
         if(msg){
-            var url = 'addRelation?id=' + id;
+            var url = basePath + 'addRelation?id=' + id;
             var data = ids;
             console.log(ids);
             jQuery.ajax({
@@ -272,37 +291,5 @@ $('#finish_relate').on('click',function(){
 })
 
 
-/*$('#testlogo').fileinput({
-    uploadUrl: '/eim/upload/uploadFile.do',
-    uploadAsync:true,
-    showCaption: true,
-    showUpload: true,//是否显示上传按钮
-    showRemove: false,//是否显示删除按钮
-    showCaption: true,//是否显示输入框
-    showPreview:true,
-    showCancel:true,
-    dropZoneEnabled: false,
-    maxFileCount: 10,
-    initialPreviewShowDelete:true,
-    msgFilesTooMany: "选择上传的文件数量 超过允许的最大数值！",
-    initialPreview: previewJson,
-    previewFileIcon: '<i class="fa fa-file"></i>',
-    allowedPreviewTypes: ['image'],
-    previewFileIconSettings: {
-        'docx': '<i class="fa fa-file-word-o text-primary"></i>',
-        'xlsx': '<i class="fa fa-file-excel-o text-success"></i>',
-        'pptx': '<i class="fa fa-file-powerpoint-o text-danger"></i>',
-        'pdf': '<i class="fa fa-file-pdf-o text-danger"></i>',
-        'zip': '<i class="fa fa-file-archive-o text-muted"></i>',
-        'sql': '<i class="fa fa-file-word-o text-primary"></i>',
-    },
-    initialPreviewConfig: preConfigList
-}).off('filepreupload').on('filepreupload', function() {
-// alert(data.url);
-}).on("fileuploaded", function(event, outData) {
-//文件上传成功后返回的数据， 此处我只保存返回文件的id
-    var result = outData.response.id;
-// 对应的input 赋值
-    $('#htestlogo').val(result).change();
-});*/
+
 

@@ -8,11 +8,14 @@ import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.CustomerAreaService;
 import com.fuhuadata.service.CustomerBaseInfoService;
 import com.fuhuadata.service.CustomerMakeProductService;
+import com.fuhuadata.util.JsonUtils;
 import com.fuhuadata.vo.CategoryTree;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
+import com.fuhuadata.web.util.CustomerBaseInfoDO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hexingfu on 2017/3/8.
@@ -162,18 +166,19 @@ public class CustomerBaseInfoAction {
 
     /**
      * update
-     * @param customerBaseInfo
-     * @param customerMakeProducts
+     * @param
      * @return
      */
     @RequestMapping(value = "/updateCustomerBaseInfo",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "customerInfo-customerList",methods = "updateCustomerBaseInfo")
     @ResponseBody
-    public ResultPojo updateCustomerBaseInfo(@RequestBody CustomerBaseInfo customerBaseInfo, @RequestBody  CustomerMakeProduct[] customerMakeProducts){
-      Result result = new Result();
+    public ResultPojo updateCustomerBaseInfo(@RequestBody CustomerBaseInfoDO customerBaseInfoDO){
+        Result result = new Result();
+        CustomerBaseInfoVO customerBaseInfoVO = customerBaseInfoDO.getCustomerBaseInfoVO();
+        CustomerMakeProduct[] customerMakeProducts = customerBaseInfoDO.getCustomerMakeProducts();
         try{
-            String id=customerBaseInfo.getCustomerId();
-            result=customerBaseInfoService.updateCustomerBaseInfoById(id,customerBaseInfo);
+            String id=customerBaseInfoVO.getCustomerId();
+          //  result=customerBaseInfoService.updateCustomerBaseInfoById(id,customerBaseInfo);
         }catch (Exception e){
             log.error("更新客户基本信息出错",e);
         }

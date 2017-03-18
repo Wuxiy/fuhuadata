@@ -45,6 +45,16 @@ public class MarketInfoAction {
      */
     @RequestMapping("/entrance")
     public ModelAndView entrance(String customerId){
+        return  new ModelAndView("/customerInfo/customerMarketingInfo").addObject("customerId",customerId);
+    }
+    /**
+     * 客户信息-市场信息入口方法
+     * @param customerId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/init")
+    public ResultPojo init(String customerId){
         //盛装返回数据集
         Map<String,Object> rmap = new HashMap<String,Object>();
         //默认查询今年的数据
@@ -70,7 +80,9 @@ public class MarketInfoAction {
         }
         //查询合作情况
         rmap.put("cooperation",this.customerBaseInfoService.queryCooperationByCid(customerId));
-        return  new ModelAndView("/customerInfo/customerMarketingInfo").addObject("data",rmap);
+        ResultPojo pojo = new ResultPojo();
+        pojo.setData(rmap);
+        return pojo;
     }
 
     /**
@@ -81,9 +93,7 @@ public class MarketInfoAction {
     @ResponseBody
     @RequestMapping("/getCPPListByCidAndYear")
     public ResultPojo getCPPListByCidAndYear(QueryCustomerPurchaseProduct query){
-        ResultPojo pojo = new ResultPojo();
-        pojo.setData(this.customerPurchaseProductService.getCustomerPurchaseProductsByQuery(query));
-        return pojo;
+        return this.customerPurchaseProductService.getCustomerPurchaseProductsByQuery(query).getResultPojo();
     }
     /**
      * 根据年份和客户id获取销售产品列表
@@ -93,9 +103,7 @@ public class MarketInfoAction {
     @ResponseBody
     @RequestMapping("/getSaleProductListByCidAndYear")
     public ResultPojo getSaleProductListByCidAndYear(QueryCustomerSaleProduct query){
-        ResultPojo pojo = new ResultPojo();
-        pojo.setData(this.customerSaleProductService.getCustomerSaleProductsByQuery(query));
-        return pojo;
+        return this.customerSaleProductService.getCustomerSaleProductsByQuery(query).getResultPojo();
     }
 
     /**
@@ -108,6 +116,18 @@ public class MarketInfoAction {
     public ResultPojo addCPPList(List<CustomerPurchaseProduct> cpps){
         ResultPojo pojo = new ResultPojo();
         pojo.setData(this.customerPurchaseProductService.batchInsert(cpps));
+        return pojo;
+    }
+    /**
+     * 批量插入客户销售产品
+     * @param csps
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/addCSPList")
+    public ResultPojo addCSPList(List<CustomerSaleProduct> csps){
+        ResultPojo pojo = new ResultPojo();
+        pojo.setData(this.customerSaleProductService.batchInsert(csps));
         return pojo;
     }
 

@@ -140,7 +140,7 @@ public class PackingArchivesAction {
      * @param ids
      * @return
      */
-    @RequestMapping(value = "getByIds",method = RequestMethod.GET)
+    @RequestMapping(value = "getByIds",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "GET-BY-IDS")
     @ResponseBody
     public ResultPojo getByIds(@RequestBody String[] ids){
@@ -167,9 +167,9 @@ public class PackingArchivesAction {
             PackingArchives packingArchives = new PackingArchives();
             System.out.println(ids.length);
             String[] ids1 = packingArchivesService.getPackingArchivesById(id).getModel().getPack().getAssociatedPackingId().split(",");
-            String[] idsArray = StringUtil.minus(ids1,ids);//取交集
+            String[] idsArray = StringUtil.minus(ids1,ids);//取差集
             String str = StringUtils.join(idsArray,",");
-            System.out.println(str);
+            System.out.println("123"+str);
             packingArchives.setAssociatedPackingId(str);
             result = packingArchivesService.updatePackingArchivesById(id,packingArchives);
             return result.getResultPojo();

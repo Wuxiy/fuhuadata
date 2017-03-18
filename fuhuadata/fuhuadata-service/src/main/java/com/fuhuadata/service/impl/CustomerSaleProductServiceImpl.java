@@ -1,11 +1,15 @@
 package com.fuhuadata.service.impl;
 import java.util.List;
+
+import com.fuhuadata.dao.CustomerSaleProductDao;
 import com.fuhuadata.domain.query.QueryCustomerSaleProduct;
 import com.fuhuadata.service.CustomerSaleProductService;
 import com.fuhuadata.manager.CustomerSaleProductManager;
 import com.fuhuadata.domain.CustomerSaleProduct;
 import com.fuhuadata.domain.query.Result;
 import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.Map;
 import java.io.Serializable;
@@ -18,6 +22,8 @@ public class CustomerSaleProductServiceImpl implements CustomerSaleProductServic
 	
 	@Resource
     private CustomerSaleProductManager customerSaleProductManager;
+	@Autowired
+	private CustomerSaleProductDao customerSaleProductDao;
     public Result<CustomerSaleProduct> addCustomerSaleProduct(CustomerSaleProduct customerSaleProduct) {
 		Result<CustomerSaleProduct> result = new Result<CustomerSaleProduct>();
 		try {
@@ -27,8 +33,13 @@ public class CustomerSaleProductServiceImpl implements CustomerSaleProductServic
 		}
 		return result;
     }
-    
-    public Result updateCustomerSaleProductById(int id, CustomerSaleProduct customerSaleProduct) {
+
+	@Override
+	public boolean batchInsert(List<CustomerSaleProduct> customerSaleProducts) {
+		return customerSaleProductDao.batchInsert(customerSaleProducts);
+	}
+
+	public Result updateCustomerSaleProductById(int id, CustomerSaleProduct customerSaleProduct) {
 		Result result = new Result();
 		try {
 			result.setSuccess(customerSaleProductManager.updateCustomerSaleProductById(id, customerSaleProduct));
@@ -51,7 +62,7 @@ public class CustomerSaleProductServiceImpl implements CustomerSaleProductServic
     public Result<List<CustomerSaleProduct>> getCustomerSaleProductsByQuery(QueryCustomerSaleProduct queryCustomerSaleProduct) {
 		Result<List<CustomerSaleProduct>> result = new Result<List<CustomerSaleProduct>>();
 		try {
-			result.addDefaultModel("${!className}s", customerSaleProductManager.getCustomerSaleProductsByQuery(queryCustomerSaleProduct));
+			result.addDefaultModel(customerSaleProductManager.getCustomerSaleProductsByQuery(queryCustomerSaleProduct));
 		} catch(Exception e) {
 			result.setSuccess(false);
 		}
