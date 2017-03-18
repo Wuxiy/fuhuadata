@@ -3,11 +3,13 @@
  */
 
 /**
- * 全局变量
+ * 给href绑定参数
  */
-//url参数
 var urlArg = location.search;
-
+$('#deputyNav').find('a').attr('href',function(i,val){
+    console.log(val+urlArg);
+    return val+urlArg;
+});
 /**
  *获取数据
  */
@@ -46,16 +48,16 @@ function upData(url,type,data,contentType){
  */
 function customerBasicInfo(result){
     var getData = result.data;
-    $('#country').val(getData.country);
-    $('#fullName').val(getData.fullName);
-    $('#areaId').val(getData.areaId);
-    $('#shortName').val(getData.shortName);
-    $('#managementScope').val(getData.managementScope);
-    $('#enterpriseNature').val(getData.enterpriseNature);
-    $('#opportunityDescrible').val(getData.opportunityDescrible);
-    $('#otherOpportunity').val(getData.otherOpportunity);
-    $('#majorCompetitors').val(getData.majorCompetitors);
-    $('#hasChiPurchase').val(getData.hasChiPurchase);
+    $('#country').val(getData.country);//国家
+    $('#fullName').val(getData.fullName);//客户全称
+    $('#areaId').val(getData.areaId);//地区分类
+    $('#shortName').val(getData.shortName);//客户简称
+    $('#managementScope').val(getData.managementScope);//经营范围
+    $('#enterpriseNature').val(getData.enterpriseNature);//企业性质
+    $('#opportunityDescrible').val(getData.opportunityDescrible);//机会描述
+    $('#otherOpportunity').val(getData.otherOpportunity);//其他机会来源
+    $('#majorCompetitors').val(getData.majorCompetitors);//分销主要竞争对手
+    $('#hasChiPurchase').val(getData.hasChiPurchase);//
     $('#zhongxinbaoLevel').val(getData.zhongxinbaoLevel);
     $('#enterpriseEmaill').val(getData.enterpriseEmaill);
     $('#opportunitySource').val(getData.opportunitySource);
@@ -174,7 +176,7 @@ function customerBasicFormObj() {
             "companyType": $('#createUserId').val(),
             "isFull": $('#isFull').val()
         },
-        customerMakeProducts:[ ]
+        customerMakeProducts:[ ],
     };
     function customerMakeProductData() {
         
@@ -182,7 +184,20 @@ function customerBasicFormObj() {
     return data;
 }
 
-
+/**
+ * 基本信息页百科上传数据
+ */
+function customerEncyclopediaObj(){
+    var data = {
+        "companyInfo": $('[name="companyInfo"]').val(),
+        "developHis": $('[name="developHis"]').val(),
+        "sellNetwork": $('[name="sellNetwork"]').val(),
+        "customField": $('[name="customField"]').val(),
+        // "lastmodifyUserIdEn": ,
+        "modifyTimeEn": getTime()//最后编辑时间
+    };
+    return data;
+}
 
 /**
  * 市场信心页处理数据
@@ -259,19 +274,59 @@ function pop(result){
     var coop = data.cooperation;
 
 }
+
 /**
- * 基本信息页百科上传数据
+ *采购产品上传对象
  */
-function customerEncyclopediaObj(){
-    var data = {
-        "companyInfo": $('[name="companyInfo"]').val(),
-        "developHis": $('[name="developHis"]').val(),
-        "sellNetwork": $('[name="sellNetwork"]').val(),
-        "customField": $('[name="customField"]').val(),
-        // "lastmodifyUserIdEn": ,
-        "modifyTimeEn": getTime()//最后编辑时间
-    };
-    return data;
+function cppsObj() {
+    var table = $('#table');
+    var cpps = [];
+    table.find('tbody').each(function(){
+        var $this = $(this);
+        var obj = {};
+        obj.year = $('#year').val();
+        obj.productName = $this.find('[name="productName"]').val();
+        obj.annualDemands = $this.find('[name="annualDemands"]').val();
+        obj.averagePrice = $this.find('[name="averagePrice"]').val();
+        obj.supplier1 = $this.find('[name="supplier1"]').val();
+        obj.purchaseAmount1 = $this.find('[name="purchaseAmount1"]').val();
+        obj.averagePrice1 = $this.find('[name="averagePrice1"]').val();
+        obj.supplier2 = $this.find('[name="supplier2"]').val();
+        obj.purchaseAmount2 = $this.find('[name="purchaseAmount2"]').val();
+        obj.averagePrice2 = $this.find('[name="averagePrice2"]').val();
+        obj.supplier3 = $this.find('[name="supplier3"]').val();
+        obj.purchaseAmount3 = $this.find('[name="purchaseAmount3"]').val();
+        obj.averagePrice3 = $this.find('[name="averagePrice3"]').val();
+        cpps.push(obj);
+    });
+    return JSON.stringify(cpps);
+}
+
+/**
+ *销售产品上传对象
+ */
+function cspsObj() {
+    var table = $('#table');
+    var csps = [];
+    table.find('tbody').each(function(){
+        var $this = $(this);
+        var obj = {};
+        obj.year = $('#year').val();
+        obj.productName = $this.find('[name="productName"]').val();
+        obj.annualDemands = $this.find('[name="annualDemands"]').val();
+        obj.averagePrice = $this.find('[name="averagePrice"]').val();
+        obj.supplier1 = $this.find('[name="supplier1"]').val();
+        obj.purchaseAmount1 = $this.find('[name="purchaseAmount1"]').val();
+        obj.averagePrice1 = $this.find('[name="averagePrice1"]').val();
+        obj.supplier2 = $this.find('[name="supplier2"]').val();
+        obj.purchaseAmount2 = $this.find('[name="purchaseAmount2"]').val();
+        obj.averagePrice2 = $this.find('[name="averagePrice2"]').val();
+        obj.supplier3 = $this.find('[name="supplier3"]').val();
+        obj.purchaseAmount3 = $this.find('[name="purchaseAmount3"]').val();
+        obj.averagePrice3 = $this.find('[name="averagePrice3"]').val();
+        cpps.push(obj);
+    });
+    return JSON.stringify(csps);
 }
 
 /**
@@ -287,7 +342,7 @@ function getTime(){
     var seconds = parseInt(time.getSeconds());
     var newTime ;
     return newTime = year+'-'+month+'-'+day+' '+hours+':'+minutes+':'+seconds;
-};
+}
 
 /**
  * 处理数组对象

@@ -397,11 +397,6 @@
         //获取初始数据
         getData('/customerBaseInfo/showCustomerBaseInfoDetails','POST',GetRequest(),customerBasicInfo);
 
-        $('#deputyNav').find('a').attr('href',function(i,val){
-            console.log(val+urlArg);
-            return val+urlArg;
-        });
-
         //添加产品
         $(document).on('click.add','#addPro',function () {
             var row = '';
