@@ -9,7 +9,7 @@
 </div>
 <div class="dashboard-wrapper">
     <div class="row">
-        <div class="tab-content col-xs-10">
+        <div class="tab-content col-xs-11">
             <!--Baseinfo-->
             <div id="Baseinfo" class="tab-pane fade in active">
                 <div class="panel panel-default">
@@ -25,7 +25,7 @@
                         </h3>
                     </div>
                     <div class="panel-body clearfix">
-                        <form class="form-horizontal">
+                        <div class="form-horizontal">
                             <div class="form-group ">
                                 <label class="col-xs-1 control-label">包材类型名称</label>
                                 <div class="col-xs-3">
@@ -97,17 +97,24 @@
                                     <textarea class="form-control cell_edit" rows="4" id="bRemarks" disabled></textarea>
                                 </div>
                             </div>
-                            <div class="form-group ">
-                                <label class="col-xs-1 control-label">图片</label>
-                                <div class="col-xs-11">
-                                    <input id="testlogo" type="file" name="icoFile" class="file-loading" />
-                                    <input type="text" name="htestlogo" id="htestlogo" onchange="addFile(this)" >
-                                </div>
-                                <div id="imge">
+                            <form name="form1" id="form1" enctype="multipart/form-data" class="form-btn">
+                                <div class="form-group ">
+                                    <label class="col-xs-1 control-label">图片</label>
+                                    <div id="imgContent" class="col-xs-11">
 
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="form-group form-btn">
+                                <div class="col-xs-1 col-xs-offset-1">
+                                    <div class="btn-group btn-group-xs" disabled>
+                                        <button id="addImg" data-form-btn="add" class="btn btn-default" type="button" lang="zh">继续添加</button>
+                                        <input class="btn btn-primary" type="button" name="b1" value="上传" onclick="fsubmit()">
+                                    </div>
                                 </div>
                             </div>
-                        </form>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -211,12 +218,17 @@
     </div>
 </div>
 
-<script src="${request.contextPath}/lib/js/fileinput.js" type="text/javascript" charset="utf-8"></script>
-<script src="${request.contextPath}/lib/js/fileinput_locale_zh.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/packingCostInfo.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/scaffolding.js"></script>
 <script type="text/javascript">
     $('#tree').creatTree('${request.contextPath}/packingCategory/CategoryTree');
     $('#tree').filtrateData('${request.contextPath}/packingArchives/getPackingArchivesByPId',"modal_relate_table","packingInfoModal");
 
+    $('#addImg').click(function () {
+        var btn = $(this);
+        var div = $('<div class="col-xs-3" style="position: relative;"><button type="button" class="close" data-form-btn="del" data-form-target="col-xs-3" style="position: absolute;top:3px;left:0;">×</button><img src="" class="fileimg" width="300px" height="200px" style="margin-bottom:2%"><input type="file" name="file" style="margin-bottom:2%"><div class="caption"><input type="text" name="file" class="filename" style="margin-bottom:2%"></div></div>');
+        console.log(div);
+        div.appendTo('#imgContent');
+    })
 </script>

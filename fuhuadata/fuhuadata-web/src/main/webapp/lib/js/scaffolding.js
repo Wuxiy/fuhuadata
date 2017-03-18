@@ -25,10 +25,9 @@ $(document).on('change.view',saltType,radioChecked);
  *checkbox其他选项
  */
 function radioChecked(e){
-    var el = $(e.target);
-    var radioGroup = $('[name="'+el.attr("name")+'"]');
+    var radioGroup = $('[name="'+e.attr("name")+'"]');
     var elseSelected = radioGroup.filter('.else');
-    var targetEl = el.parents('.form-group').find('.elseInput');
+    var targetEl = e.parents('.form-group').find('.elseInput');
     console.log(elseSelected.prop('checked'));
     if(elseSelected.prop('checked')){
 

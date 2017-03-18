@@ -3,7 +3,7 @@
     <div class="nav-deputy shadow-out clearfix">
         <ul id="deputyNav" class="nav nav-tabs pull-left">
             <li class="active"><a href="${request.contextPath}/customerBaseInfo/intoCustomerBaseInfoDetails">基本信息</a></li>
-            <li><a href="" >市场信息</a></li>
+            <li><a href="${request.contextPath}/customerPurchaseProduct/entrance" >市场信息</a></li>
             <li><a href="" >联系人</a></li>
             <li><a href="" >产品要求</a></li>
             <li><a href="" >订单信息</a></li>
@@ -396,12 +396,12 @@
     $(function () {
         //获取初始数据
         getData('/customerBaseInfo/showCustomerBaseInfoDetails','POST',GetRequest(),customerBasicInfo);
-        //保存地址的参数
-        var urlArg = location.search;
+
         $('#deputyNav').find('a').attr('href',function(i,val){
             console.log(val+urlArg);
             return val+urlArg;
         });
+
         //添加产品
         $(document).on('click.add','#addPro',function () {
             var row = '';
@@ -414,8 +414,13 @@
             $('#addPro').parents('.form-group').before(row);
             reorderPro();
         });
-        //
-        $(document).on('change.view','[name="enterpriseNature"]',radioChecked);
+
+        //选择其他选项，切换显示
+        $(document).on('change.view','[name="enterpriseNature"]',function (e) {
+            var thisEl = $(this);
+            thisE.focus().blur();
+            radioChecked(thisEl);
+        });
 //        $(document).on('change.view','[name="otherOpportunity"]',selectElse);
 
         //客户基本信息提交
@@ -427,6 +432,7 @@
             upData('','POST',customerEncyclopediaObj());
         });
     })
+
     /**
      * 生产产品重排序
      */
