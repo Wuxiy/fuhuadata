@@ -136,7 +136,7 @@ function customerBasicInfo(result){
  */
 function customerBasicFormObj() {
     var data = {
-        customerBaseInfoVO:{
+        customerBaseInfo:{
             "country": $('#country').val(),
             "fullName": $('#fullName').val(),
             "areaId": $('#areaId').val(),
@@ -154,7 +154,7 @@ function customerBasicFormObj() {
             "customerStatus": $('#customerMakeProduct').val(),
             "qualificationsFileUrl": $('#qualificationsFileUrl').val(),
             "factoryLocation": $('#factoryLocation').val(),
-            "lastmodifyUserNameEn": $('#lastmodifyUserNameEn').val(),
+            "lastmodifyUserName": $('#lastmodifyUserName').val(),
             "enterprisePhone": $('#enterprisePhone').val(),
             "zhongxinbaoNumber": $('#zhongxinbaoNumber').val(),
             "customerCompletion": $('#customerCompletion').val(),

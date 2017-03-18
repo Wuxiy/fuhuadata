@@ -8,7 +8,7 @@ import com.fuhuadata.vo.CustomerBaseInfoVO;
  * Created by intanswer on 2017/3/18.
  */
 public class CustomerBaseInfoDO {
-    private CustomerBaseInfoVO customerBaseInfoVO;
+    private CustomerBaseInfo customerBaseInfo;
 
     private CustomerMakeProduct[] customerMakeProducts;
 
@@ -20,11 +20,11 @@ public class CustomerBaseInfoDO {
         this.customerMakeProducts = customerMakeProducts;
     }
 
-    public CustomerBaseInfoVO getCustomerBaseInfoVO() {
-        return customerBaseInfoVO;
+    public CustomerBaseInfo getCustomerBaseInfo() {
+        return customerBaseInfo;
     }
 
-    public void setCustomerBaseInfoVO(CustomerBaseInfoVO customerBaseInfoVO) {
-        this.customerBaseInfoVO = customerBaseInfoVO;
+    public void setCustomerBaseInfo(CustomerBaseInfo customerBaseInfo) {
+        this.customerBaseInfo = customerBaseInfo;
     }
 }

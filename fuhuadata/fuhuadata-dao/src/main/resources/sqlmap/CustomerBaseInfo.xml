@@ -240,12 +240,15 @@
 		<dynamic prepend=" SET ">
 						<isNotEmpty prepend=", " property="fullName">full_name=#fullName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="shortName">short_name=#shortName#</isNotEmpty>
-						<isNotEmpty prepend=", " property="customerType">customer_type=#customerType#</isNotEmpty>
 						<isNotEmpty prepend=", " property="areaId">area_id=#areaId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="area">area=#area#</isNotEmpty>
 						<isNotEmpty prepend=", " property="countryId">country_id=#countryId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="country">country=#country#</isNotEmpty>
+						<isNotEmpty prepend=", " property="companyType">company_type=#companyType#</isNotEmpty>
+						<isNotEmpty prepend=", " property="enterpriseNature">enterprise_nature=#enterpriseNature#</isNotEmpty>
+						<isNotEmpty prepend=", " property="otherEnterpriseNature">other_enterpriseNature=#otherEnterpriseNature#</isNotEmpty>
 						<isNotEmpty prepend=", " property="registeredFunds">registered_funds=#registeredFunds#</isNotEmpty>
+
 						<isNotEmpty prepend=", " property="registeredAddress">registered_address=#registeredAddress#</isNotEmpty>
 						<isNotEmpty prepend=", " property="managementScope">management_scope=#managementScope#</isNotEmpty>
 						<isNotEmpty prepend=", " property="zhongxinbaoNumber">zhongxinbao_number=#zhongxinbaoNumber#</isNotEmpty>
@@ -253,11 +256,21 @@
 						<isNotEmpty prepend=", " property="remark">parent_remarks=#remark#</isNotEmpty>
 						<isNotEmpty prepend=", " property="enterprisePhone">enterprise_phone=#enterprisePhone#</isNotEmpty>
 						<isNotEmpty prepend=", " property="enterpriseEmail">enterprise_email=#enterpriseEmail#</isNotEmpty>
-						<isNotEmpty prepend=", " property="enterpriseProfile">enterprise_profile=#enterpriseProfile#</isNotEmpty>
-						<isNotEmpty prepend=", " property="developmentCourse">development_course=#developmentCourse#</isNotEmpty>
-						<isNotEmpty prepend=", " property="salesNetwork">sales_network=#salesNetwork#</isNotEmpty>
-						<isNotEmpty prepend=", " property="customField">custom_field=#customField#</isNotEmpty>
+						<isNotEmpty prepend=", " property="customerLevel">customer_level=#customerLevel#</isNotEmpty>
+						<isNotEmpty prepend=", " property="customerType">customer_type=#customerType#</isNotEmpty>
 						<isNotEmpty prepend=", " property="customerCompletion">customer_completion=#customerCompletion#</isNotEmpty>
+
+						<isNotEmpty prepend=", " property="majorCompetitors">major_competitors = #majorCompetitors#</isNotEmpty>
+						<isNotEmpty prepend=", " property="opportunitySource">opportunity_source=#opportunitySource#</isNotEmpty>
+						<isNotEmpty prepend=", " property="opportunityDescrible">opportunity_describle=#opportunityDescrible#</isNotEmpty>
+						<isNotEmpty prepend=", " property="otherOpportunity">other_opportunity=#otherOpportunity#</isNotEmpty>
+						<isNotEmpty prepend=", " property="hasChiCompany">has_chi_company=#hasChiCompany#</isNotEmpty>
+						<isNotEmpty prepend=", " property="hasChiPurchase">has_chi_purchase=#hasChiPurchase#</isNotEmpty>
+						<isNotEmpty prepend=", " property="customerStatus">customer_status=#customerStatus#</isNotEmpty>
+						<isNotEmpty prepend=", " property="lossReason">loss_reason=#lossReason#</isNotEmpty>
+						<isNotEmpty prepend=", " property="qualificationsFileUrl">qualifications_file_url=#qualificationsFileUrl#</isNotEmpty>
+						<isNotEmpty prepend=", " property="factoryLocation">factory_location=#factoryLocation#</isNotEmpty>
+
 						<isNotEmpty prepend=", " property="createUserId">create_user_id=#createUserId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="createUserName">create_user_name=#createUserName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="lastmodifyUserId">lastmodify_user_id=#lastmodifyUserId#</isNotEmpty>
@@ -268,11 +281,12 @@
 						<isNotEmpty prepend=", " property="loyalty">loyalty=#loyalty#</isNotEmpty>
 						<isNotEmpty prepend=", " property="startCooperationTime">start_cooperation_time=#startCooperationTime#</isNotEmpty>
 						<isNotEmpty prepend=", " property="cooperationDuration">cooperation_duration=#cooperationDuration#</isNotEmpty>
+
 						<isNotEmpty prepend=", " property="purchasingSeason">purchasing_season=#purchasingSeason#</isNotEmpty>
 						<isNotEmpty prepend=", " property="activePeriod">active_period=#activePeriod#</isNotEmpty>
 						<isNotEmpty prepend=", " property="isFuhuaExclusive">is_fuhua_exclusive=#isFuhuaExclusive#</isNotEmpty>
 						<isNotEmpty prepend=", " property="cooperationRemark">cooperation_remark=#cooperationRemark#</isNotEmpty>
-
+						<isNotEmpty prepend=", " property="productionLine">production_line = #productionLine#</isNotEmpty>
 					</dynamic>
 		WHERE customer_id=#customer_id#
 	</update>

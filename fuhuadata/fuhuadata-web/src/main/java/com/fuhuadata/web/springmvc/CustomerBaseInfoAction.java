@@ -174,11 +174,11 @@ public class CustomerBaseInfoAction {
     @ResponseBody
     public ResultPojo updateCustomerBaseInfo(@RequestBody CustomerBaseInfoDO customerBaseInfoDO){
         Result result = new Result();
-        CustomerBaseInfoVO customerBaseInfoVO = customerBaseInfoDO.getCustomerBaseInfoVO();
+        CustomerBaseInfo customerBaseInfo = customerBaseInfoDO.getCustomerBaseInfo();
         CustomerMakeProduct[] customerMakeProducts = customerBaseInfoDO.getCustomerMakeProducts();
         try{
-            String id=customerBaseInfoVO.getCustomerId();
-          //  result=customerBaseInfoService.updateCustomerBaseInfoById(id,customerBaseInfo);
+            String id=customerBaseInfo.getCustomerId();
+            result=customerBaseInfoService.updateCustomerBaseInfoById(id,customerBaseInfo);
         }catch (Exception e){
             log.error("更新客户基本信息出错",e);
         }

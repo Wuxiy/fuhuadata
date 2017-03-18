@@ -33,7 +33,7 @@ public class CustomerBaseInfo {
 
 	/**国家,例如美国**/
 	private String country;
-	
+
     /**注册资金**/
 	private String registeredFunds;
 	
@@ -57,16 +57,20 @@ public class CustomerBaseInfo {
 	
     /**企业邮箱**/
 	private String enterpriseEmail;
-	
+
+	/**生产线**/
+	private String productLine;
+
+	//企业百科信息
     /**企业简介**/
 	private String enterpriseProfile;
-	
+
     /**发展历程**/
 	private String developmentCourse;
-	
+
     /**销售网络**/
 	private String salesNetwork;
-	
+
     /**自定义字段,json序列化字段**/
 	private String customField;
 	
@@ -115,7 +119,7 @@ public class CustomerBaseInfo {
 	
     /**创建时间**/
 	private String createTime;
-	
+
     /**修改时间**/
 	private String modifyTime;
 	/*合同总金额*/
@@ -130,6 +134,10 @@ public class CustomerBaseInfo {
 	private BigDecimal netProfit;
 	//客户流失原因
 	private String lossReason;
+	//潜在客户机会来源 1:展会，2：门户网站 3：农药店考察 4：客户介绍 5：主动联系 6：其他
+	private Integer opportunitySource;
+	//其他机会来源
+	private String otherOpportunity;
 	//机会描述
 	private String opportunityDescrible;
 	//默认联系人
@@ -589,5 +597,29 @@ public class CustomerBaseInfo {
 
 	public void setCooperationRemark(String cooperationRemark) {
 		this.cooperationRemark = cooperationRemark;
+	}
+
+	public Integer getOpportunitySource() {
+		return opportunitySource;
+	}
+
+	public void setOpportunitySource(Integer opportunitySource) {
+		this.opportunitySource = opportunitySource;
+	}
+
+	public String getOtherOpportunity() {
+		return otherOpportunity;
+	}
+
+	public void setOtherOpportunity(String otherOpportunity) {
+		this.otherOpportunity = otherOpportunity;
+	}
+
+	public String getProductLine() {
+		return productLine;
+	}
+
+	public void setProductLine(String productLine) {
+		this.productLine = productLine;
 	}
 }
