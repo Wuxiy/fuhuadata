@@ -55,7 +55,7 @@ public class PackingArchivesServiceImpl implements PackingArchivesService {
             if(ids!=null&&ids.length()>0) {
                 packingArchives.setAssociatedPackingId(ids.replace("[", "").replace("]", "").replace("\"", ""));
             }
-            if(packingArchives.getImagePath().equals("[]")){
+            if(packingArchives.getImagePath()!=null&&packingArchives.getImagePath().equals("[]")){
                 packingArchives.setImagePath("");
             }
             String suitableType=packingArchives.getSuitableType();
