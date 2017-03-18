@@ -174,22 +174,20 @@ public class CustomerBaseInfoAction {
     @ResponseBody
     public ResultPojo updateCustomerBaseInfo(@RequestBody CustomerBaseInfoDO customerBaseInfoDO){
         Result result = new Result();
-        System.out.println(customerBaseInfoDO.getCustomerBaseInfoVO());
-        //System.out.println(customerBaseInfoDO.get("customerMakeProducts"));
-        //System.out.println(models.get("customerBaseInfo"));
-        //models.get("customerBaseInfo").
-        //try{
-        //    String id=customerBaseInfo.getCustomerId();
-        //    result=customerBaseInfoService.updateCustomerBaseInfoById(id,customerBaseInfo);
-        //}catch (Exception e){
-        //    log.error("更新客户基本信息出错",e);
-        //}
-        //try{
-        //    result=customerMakeProductService.updateCustomerMakeProducts(customerMakeProducts);
-        //    result.getResultPojo().setMessage("客户产品产能更新成功");
-        //}catch(Exception e){
-        //    log.error("更新客户产品产能信息出错",e);
-        //}
+        CustomerBaseInfoVO customerBaseInfoVO = customerBaseInfoDO.getCustomerBaseInfoVO();
+        CustomerMakeProduct[] customerMakeProducts = customerBaseInfoDO.getCustomerMakeProducts();
+        try{
+            String id=customerBaseInfoVO.getCustomerId();
+          //  result=customerBaseInfoService.updateCustomerBaseInfoById(id,customerBaseInfo);
+        }catch (Exception e){
+            log.error("更新客户基本信息出错",e);
+        }
+        try{
+            result=customerMakeProductService.updateCustomerMakeProducts(customerMakeProducts);
+            result.getResultPojo().setMessage("客户产品产能更新成功");
+        }catch(Exception e){
+            log.error("更新客户产品产能信息出错",e);
+        }
         return null;
     }
 
