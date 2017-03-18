@@ -32,8 +32,8 @@
 								<result property="createUserName" column="create_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="lastmodifyUserId" column="lastmodify_user_id" jdbcType="INT" javaType="java.lang.Integer" />
 								<result property="lastmodifyUserName" column="lastmodify_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="createTime" column="create_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
-								<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+								<result property="createTime" column="create_time" jdbcType="DATETIME" javaType="java.lang.String" />
+								<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.lang.String" />
 														</resultMap>
 	
 	<sql id="PAGE-COMMON">	
