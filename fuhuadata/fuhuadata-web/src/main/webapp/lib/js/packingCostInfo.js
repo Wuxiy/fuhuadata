@@ -117,7 +117,7 @@ function imgArr(){
     $('.filename').each(function(){
         var objt ={
             "name":$(this).val(),
-            "imgpath":$(this).attr('data-url')
+            "path":$(this).attr('data-url')
         };
         arr.push(objt);
     })
@@ -154,6 +154,7 @@ function checkboxArr() {
     $('#finish').on('click',function(){
         var url = basePath+'/packingArchives/doModify';
         var data = {
+            "packingId":id,
             "packName": jQuery('#packName').val(),
             "spec": jQuery('#spec').val(),
             "size": jQuery('#size').val(),
@@ -167,7 +168,7 @@ function checkboxArr() {
             "suitableType": JSON.stringify(checkboxArr()),
             "imagePath":imgArr(),
             "associatedPackingId":Ids(),
-            "bremarks": jQuery('#bRemarks').val(),
+            "bRemarks": jQuery('#bRemarks').val(),
         }
 
         console.log(data);
@@ -178,7 +179,7 @@ function checkboxArr() {
             contentType:"application/json",
             data:JSON.stringify(data),
             success:function(){
-                alert("添加成功");
+                alert("保存成功");
                 location.reload();
             }
         })
@@ -290,37 +291,5 @@ $('#finish_relate').on('click',function(){
 })
 
 
-/*$('#testlogo').fileinput({
-    uploadUrl: '/eim/upload/uploadFile.do',
-    uploadAsync:true,
-    showCaption: true,
-    showUpload: true,//是否显示上传按钮
-    showRemove: false,//是否显示删除按钮
-    showCaption: true,//是否显示输入框
-    showPreview:true,
-    showCancel:true,
-    dropZoneEnabled: false,
-    maxFileCount: 10,
-    initialPreviewShowDelete:true,
-    msgFilesTooMany: "选择上传的文件数量 超过允许的最大数值！",
-    initialPreview: previewJson,
-    previewFileIcon: '<i class="fa fa-file"></i>',
-    allowedPreviewTypes: ['image'],
-    previewFileIconSettings: {
-        'docx': '<i class="fa fa-file-word-o text-primary"></i>',
-        'xlsx': '<i class="fa fa-file-excel-o text-success"></i>',
-        'pptx': '<i class="fa fa-file-powerpoint-o text-danger"></i>',
-        'pdf': '<i class="fa fa-file-pdf-o text-danger"></i>',
-        'zip': '<i class="fa fa-file-archive-o text-muted"></i>',
-        'sql': '<i class="fa fa-file-word-o text-primary"></i>',
-    },
-    initialPreviewConfig: preConfigList
-}).off('filepreupload').on('filepreupload', function() {
-// alert(data.url);
-}).on("fileuploaded", function(event, outData) {
-//文件上传成功后返回的数据， 此处我只保存返回文件的id
-    var result = outData.response.id;
-// 对应的input 赋值
-    $('#htestlogo').val(result).change();
-});*/
+
 

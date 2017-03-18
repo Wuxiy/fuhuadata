@@ -51,6 +51,13 @@ public class PackingArchivesServiceImpl implements PackingArchivesService {
     public Result updatePackingArchivesById(int id, PackingArchives packingArchives) {
         Result result = new Result();
         try {
+            String ids=packingArchives.getAssociatedPackingId();
+            packingArchives.setAssociatedPackingId(ids.replace("[","").replace("]","").replace("\"",""));
+            if(packingArchives.getImagePath().equals("[]")){
+                packingArchives.setImagePath("");
+            }
+            String suitableType=packingArchives.getSuitableType();
+            packingArchives.setSuitableType( suitableType.replace("[","").replace("]","").replace("\"",""));
             result.setSuccess(packingArchivesManager.updatePackingArchivesById(id, packingArchives));
         } catch (Exception e) {
             result.setSuccess(false);

@@ -86,14 +86,14 @@ $('#add_relate').on('click',function(){
     /*if(ids.length > 0){
         var msg = "确认要为主材添加这些关联吗？";
         if(msg){
-            var url = '';
+            var url = basePath+'/packingArchives/getByIds';
             var data = ids;
             jQuery.ajax({
                 url:url,
                 type:'POST',
                 dataType:"json",
                 contentType:"application/json",
-                data:JSON.stringify(data),
+                data:JSON.stringify(ids),
                 success:function(){
                     alert("添加关联成功！");
                     location.reload();
@@ -127,7 +127,7 @@ $('.packingAdd').on('click',function(){
         "bRemarks": jQuery('#bremarks').val(),
     }
     console.log(data);
-    /*jQuery.ajax({
+    jQuery.ajax({
         type:"POST",
         url:url,
         dataType:"json",
@@ -137,7 +137,7 @@ $('.packingAdd').on('click',function(){
             alert("添加成功");
             location.reload();
         }
-    })*/
+    })
 })
 
 //全选框
