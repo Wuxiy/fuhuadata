@@ -75,7 +75,7 @@ $(document).ready(function(){
                     imgContent.innerHTML += '<div class="col-xs-3">'+
                         '<img src="../'+reData[j].path+'" class="fileimg" width="300px" height="200px" style="margin-bottom:2%">'+
                         '<input type="file" name="file" style="margin-bottom:2%"><div>'+
-                        '<input type="text" name="file" class="filename" style="margin-bottom:2%" value="'+reData[j].name+'">'+
+                        '<input type="text" name="file" class="filename" data-url="'+reData[j].path+'" style="margin-bottom:2%" value="'+reData[j].name+'">'+
                         '</div>'+
                         '</div>';
                 }
