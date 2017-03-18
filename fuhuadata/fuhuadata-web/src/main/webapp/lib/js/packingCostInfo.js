@@ -12,6 +12,7 @@
     var bid = trans2.split('=')[1];
     console.log(bid);
     var table = document.getElementById('packing_relate_table');
+    var imgContent = document.getElementById('imgContent');
 
     var checkboxarr = '';
     var imgpath;
@@ -71,48 +72,16 @@
 
             if(ResultData.imagePath){
                 var reData = ResultData.imagePath;
-                var preList = new Array();
                 for(var j=0;j<reData.length;j++){
-                    var array_element = reData[j];
-                    console.log(array_element.path);
-                    preList[j] = "<img src='"+array_element.path+"' class=\"file-preview-image\">";
-                    console.log(preList[j]);
+                    imgContent.innerHTML += '<div class="col-xs-3">'+
+                        '<img src="../'+reData[j].path+'" class="fileimg" width="300px" height="200px" style="margin-bottom:2%">'+
+                        '<input type="file" name="file" style="margin-bottom:2%"><div>'+
+                        '<input type="text" name="file" class="filename" style="margin-bottom:2%" value="'+reData[j].name+'">'+
+                        '</div>'+
+                        '</div>';
                 }
             }
 
-            var previewJson = preList;
-            $('#testlogo').fileinput({
-                uploadUrl: '/upload/uploadFile',
-                uploadAsync:true,
-                showCaption: true,
-                showUpload: true,//是否显示上传按钮
-                showRemove: false,//是否显示删除按钮
-                showCaption: true,//是否显示输入框
-                showPreview:true,
-                showCancel:true,
-                dropZoneEnabled: false,
-                maxFileCount: 10,
-                initialPreviewShowDelete:true,
-                msgFilesTooMany: "选择上传的文件数量 超过允许的最大数值！",
-                initialPreview: previewJson,
-                previewFileIcon: '<i class="fa fa-file"></i>',
-                allowedPreviewTypes: ['image'],
-                previewFileIconSettings: {
-                    'docx': '<i class="fa fa-file-word-o text-primary"></i>',
-                    'xlsx': '<i class="fa fa-file-excel-o text-success"></i>',
-                    'pptx': '<i class="fa fa-file-powerpoint-o text-danger"></i>',
-                    'pdf': '<i class="fa fa-file-pdf-o text-danger"></i>',
-                    'zip': '<i class="fa fa-file-archive-o text-muted"></i>',
-                    'sql': '<i class="fa fa-file-word-o text-primary"></i>',
-                },
-            }).off('filepreupload').on('filepreupload', function() {
-            // alert(data.url);
-            }).on("fileuploaded", function(event, outData) {
-            //文件上传成功后返回的数据， 此处我只保存返回文件的id
-                var result = outData.response.id;
-            // 对应的input 赋值
-                $('#htestlogo').val(result).change();
-            });
     	}
     })
 
