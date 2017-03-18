@@ -29,9 +29,11 @@ function getData(url,type,data,callBack){
  */
 function upData(url,type,data,contentType){
     console.log(data);
+    JSON.stringify(data.customerMakeProducts);
     $.ajax({
         url:url,
         type:type,
+        dataType:"json",
         data:JSON.stringify(data),
         contentType:contentType
     }).done(function () {

@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hexingfu on 2017/3/8.
@@ -162,15 +163,18 @@ public class CustomerBaseInfoAction {
 
     /**
      * update
-     * @param customerBaseInfo
-     * @param customerMakeProducts
+     * @param
+     * @param
      * @return
      */
     @RequestMapping(value = "/updateCustomerBaseInfo",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "customerInfo-customerList",methods = "updateCustomerBaseInfo")
     @ResponseBody
-    public ResultPojo updateCustomerBaseInfo(@RequestBody CustomerBaseInfo customerBaseInfo, @RequestBody  CustomerMakeProduct[] customerMakeProducts){
+    public ResultPojo updateCustomerBaseInfo(@RequestBody Map<String, Object> models){
+
       Result result = new Result();
+        CustomerBaseInfo customerBaseInfo =null;
+        CustomerMakeProduct[] customerMakeProducts=null;
         try{
             String id=customerBaseInfo.getCustomerId();
             result=customerBaseInfoService.updateCustomerBaseInfoById(id,customerBaseInfo);
