@@ -16,8 +16,7 @@
 
     var img = $("input[name='file']");
 
-    var ids = new Array();
-
+    var addTbody = document.getElementById('add_tbody');
 
     //根据包材类型获取关联包材的展示
     if(bid != 1){
@@ -79,30 +78,41 @@ function imgArr(){
 
 //新增添加关联
 $('#add_relate').on('click',function(){
+    var ids = new Array();
     $("input[name='modal_cellcheckbox']:checked").each(function(){
         ids.push($(this).val());
     });
     $('#addField').modal('hide');
-    /*if(ids.length > 0){
+    if(ids.length > 0){
         var msg = "确认要为主材添加这些关联吗？";
         if(msg){
             var url = basePath+'/packingArchives/getByIds';
-            var data = ids;
             jQuery.ajax({
                 url:url,
                 type:'POST',
                 dataType:"json",
                 contentType:"application/json",
                 data:JSON.stringify(ids),
-                success:function(){
+                success:function(result){
+                    console.log(result);
                     alert("添加关联成功！");
-                    location.reload();
+                    addTbody.innerHTML += '<tr>'+
+                        '<td class="text-center"><input type="checkbox" name="cellcheckbox" value="'+node[i].packingId+'" /></td>'+
+                        '<td class="col-xs-2 text-center text-middle">'+node[i].packingId+'</td>'+
+                        '<td class="col-xs-2 text-center text-middle">'+node[i].packName+'</td>'+
+                        '<td class="col-xs-1 text-center text-middle">'+node[i].spec+'</td>'+
+                        '<td class="col-xs-1 text-center text-middle">'+node[i].size+'</td>'+
+                        '<td class="col-xs-2 text-center text-middle">'+node[i].quality+'</td>'+
+                        '<td class="col-xs-1 text-center text-middle">'+node[i].unitPrice+'</td>'+
+                        '<td class="col-xs-1 text-center text-middle">'+node[i].consumption+'</td>'+
+                        '<td class="col-xs-1 text-center text-middle">'+node[i].status+'</td>'
+                    '</tr>';
                 }
             })
         }
     }else{
         alert('还未选择要添加的关联');
-    }*/
+    }
 })
 
 //新增完成
