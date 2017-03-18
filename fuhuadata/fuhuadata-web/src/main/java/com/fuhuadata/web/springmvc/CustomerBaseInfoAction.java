@@ -8,11 +8,14 @@ import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.CustomerAreaService;
 import com.fuhuadata.service.CustomerBaseInfoService;
 import com.fuhuadata.service.CustomerMakeProductService;
+import com.fuhuadata.util.JsonUtils;
 import com.fuhuadata.vo.CategoryTree;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
+import com.fuhuadata.web.util.CustomerBaseInfoDO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -164,29 +167,29 @@ public class CustomerBaseInfoAction {
     /**
      * update
      * @param
-     * @param
      * @return
      */
     @RequestMapping(value = "/updateCustomerBaseInfo",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "customerInfo-customerList",methods = "updateCustomerBaseInfo")
     @ResponseBody
-    public ResultPojo updateCustomerBaseInfo(@RequestBody Map<String, Object> models){
-
-      Result result = new Result();
-        CustomerBaseInfo customerBaseInfo =null;
-        CustomerMakeProduct[] customerMakeProducts=null;
-        try{
-            String id=customerBaseInfo.getCustomerId();
-            result=customerBaseInfoService.updateCustomerBaseInfoById(id,customerBaseInfo);
-        }catch (Exception e){
-            log.error("更新客户基本信息出错",e);
-        }
-        try{
-            result=customerMakeProductService.updateCustomerMakeProducts(customerMakeProducts);
-            result.getResultPojo().setMessage("客户产品产能更新成功");
-        }catch(Exception e){
-            log.error("更新客户产品产能信息出错",e);
-        }
+    public ResultPojo updateCustomerBaseInfo(@RequestBody CustomerBaseInfoDO customerBaseInfoDO){
+        Result result = new Result();
+        System.out.println(customerBaseInfoDO.getCustomerBaseInfoVO());
+        //System.out.println(customerBaseInfoDO.get("customerMakeProducts"));
+        //System.out.println(models.get("customerBaseInfo"));
+        //models.get("customerBaseInfo").
+        //try{
+        //    String id=customerBaseInfo.getCustomerId();
+        //    result=customerBaseInfoService.updateCustomerBaseInfoById(id,customerBaseInfo);
+        //}catch (Exception e){
+        //    log.error("更新客户基本信息出错",e);
+        //}
+        //try{
+        //    result=customerMakeProductService.updateCustomerMakeProducts(customerMakeProducts);
+        //    result.getResultPojo().setMessage("客户产品产能更新成功");
+        //}catch(Exception e){
+        //    log.error("更新客户产品产能信息出错",e);
+        //}
         return null;
     }
 
