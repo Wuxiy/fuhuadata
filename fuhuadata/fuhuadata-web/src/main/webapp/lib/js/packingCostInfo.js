@@ -152,7 +152,7 @@ function checkboxArr() {
 
 //编辑完成保存
     $('#finish').on('click',function(){
-        var url = basePath+'/packingArchives/doModify';
+        var url = basePath+'/packingArchives/doModify'+id;
         var data = {
             "packingId":id,
             "packName": jQuery('#packName').val(),
