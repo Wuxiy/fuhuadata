@@ -81,9 +81,7 @@ public class MarketInfoAction {
     @ResponseBody
     @RequestMapping("/getCPPListByCidAndYear")
     public ResultPojo getCPPListByCidAndYear(QueryCustomerPurchaseProduct query){
-        ResultPojo pojo = new ResultPojo();
-        pojo.setData(this.customerPurchaseProductService.getCustomerPurchaseProductsByQuery(query));
-        return pojo;
+        return this.customerPurchaseProductService.getCustomerPurchaseProductsByQuery(query).getResultPojo();
     }
     /**
      * 根据年份和客户id获取销售产品列表
@@ -93,9 +91,7 @@ public class MarketInfoAction {
     @ResponseBody
     @RequestMapping("/getSaleProductListByCidAndYear")
     public ResultPojo getSaleProductListByCidAndYear(QueryCustomerSaleProduct query){
-        ResultPojo pojo = new ResultPojo();
-        pojo.setData(this.customerSaleProductService.getCustomerSaleProductsByQuery(query));
-        return pojo;
+        return this.customerSaleProductService.getCustomerSaleProductsByQuery(query).getResultPojo();
     }
 
     /**

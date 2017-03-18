@@ -62,7 +62,7 @@ public class CustomerSaleProductServiceImpl implements CustomerSaleProductServic
     public Result<List<CustomerSaleProduct>> getCustomerSaleProductsByQuery(QueryCustomerSaleProduct queryCustomerSaleProduct) {
 		Result<List<CustomerSaleProduct>> result = new Result<List<CustomerSaleProduct>>();
 		try {
-			result.addDefaultModel("${!className}s", customerSaleProductManager.getCustomerSaleProductsByQuery(queryCustomerSaleProduct));
+			result.addDefaultModel(customerSaleProductManager.getCustomerSaleProductsByQuery(queryCustomerSaleProduct));
 		} catch(Exception e) {
 			result.setSuccess(false);
 		}
