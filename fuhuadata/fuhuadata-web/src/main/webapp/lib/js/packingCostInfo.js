@@ -2,6 +2,7 @@
  * Created by young on 2017/3/7.
  */
 
+    $('.form-btn').hide();
     $('#finish').hide();
     //分割url，获取上个页面传过来的id
     var thisURL = document.URL;
@@ -22,12 +23,13 @@
         $('.relate').hide();
     }
 
+$(document).ready(function(){
     var url = '/packingArchives/getPackingArchivesById?id='+id;
     jQuery.ajax({
-    	type:'GET',
-    	url:url,
-    	success:function(result){
-    		var ResultData = result.data;
+        type:'GET',
+        url:url,
+        success:function(result){
+            var ResultData = result.data;
 
             if(ResultData.pack){
                 var pack = ResultData.pack;
@@ -71,6 +73,7 @@
             }
 
             if(ResultData.imagePath){
+                $('.form-btn').show();
                 var reData = ResultData.imagePath;
                 for(var j=0;j<reData.length;j++){
                     imgContent.innerHTML += '<div class="col-xs-3">'+
@@ -82,9 +85,9 @@
                 }
             }
 
-    	}
+        }
     })
-
+})
 
 //图片上传
 
