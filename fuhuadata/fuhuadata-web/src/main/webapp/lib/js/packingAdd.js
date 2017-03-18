@@ -76,12 +76,35 @@ function imgArr(){
     return JSON.stringify(arr);
 }
 
+//添加关联时比较数组，删除重复项
+function mergeArray(arr1, arr2){
+    var temp = []; //临时数组1
+    var temparray = [];//临时数组2
+    for (var i = 0; i < arr2.length; i++) {
+        temp[arr2[i]] = true;
+    };
+    for (var i = 0; i < arr1.length; i++) {
+        if (!temp[arr1[i]]) {
+            temparray.push(arr1[i]);
+        }
+    }
+    return temparray;
+}
+
 //新增添加关联
 $('#add_relate').on('click',function(){
+    var ids1 = new Array();
+    var ids2 = new Array();
     var ids = new Array();
     $("input[name='modal_cellcheckbox']:checked").each(function(){
-        ids.push($(this).val());
+        ids1.push($(this).val());
     });
+    $("input[name='cellcheckbox']").each(function(){
+        ids2.push($(this).val());
+    });
+
+    ids = mergeArray(ids1,ids2);
+    console.log(ids);
     $('#addField').modal('hide');
     if(ids.length > 0){
         var msg = "确认要为主材添加这些关联吗？";
@@ -94,7 +117,6 @@ $('#add_relate').on('click',function(){
                 contentType:"application/json",
                 data:JSON.stringify(ids),
                 success:function(result){
-                    console.log(result);
                     alert("添加关联成功！");
                     for(var i=0;i<result.data.length;i++){
                         addTbody.innerHTML += '<tr>'+
