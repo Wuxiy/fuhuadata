@@ -276,6 +276,51 @@
 					</dynamic>
 		WHERE customer_id=#customer_id#
 	</update>
+
+	<update id="UPDATE-BASEINFO" parameterClass="CustomerBaseInfo">
+		UPDATE customer_base_info
+		<dynamic prepend=" SET ">
+			<isNotEmpty prepend=", " property="fullName">full_name=#fullName#</isNotEmpty>
+			<isNotEmpty prepend=", " property="shortName">short_name=#shortName#</isNotEmpty>
+			<isNotEmpty prepend=", " property="customerType">customer_type=#customerType#</isNotEmpty>
+			<isNotEmpty prepend=", " property="areaId">area_id=#areaId#</isNotEmpty>
+			<isNotEmpty prepend=", " property="area">area=#area#</isNotEmpty>
+			<isNotEmpty prepend=", " property="countryId">country_id=#countryId#</isNotEmpty>
+			<isNotEmpty prepend=", " property="country">country=#country#</isNotEmpty>
+			<isNotEmpty prepend=", " property="companyType">company_type=#companyType#</isNotEmpty>
+
+
+			<isNotEmpty prepend=", " property="registeredFunds">registered_funds=#registeredFunds#</isNotEmpty>
+			<isNotEmpty prepend=", " property="">registered_address=#registeredAddress#</isNotEmpty>
+			<isNotEmpty prepend=", " property="managementregisteredAddressScope">management_scope=#managementScope#</isNotEmpty>
+			<isNotEmpty prepend=", " property="zhongxinbaoNumber">zhongxinbao_number=#zhongxinbaoNumber#</isNotEmpty>
+			<isNotEmpty prepend=", " property="zhongxinbaoLevel">zhongxinbao_level=#zhongxinbaoLevel#</isNotEmpty>
+			<isNotEmpty prepend=", " property="remark">parent_remarks=#remark#</isNotEmpty>
+			<isNotEmpty prepend=", " property="enterprisePhone">enterprise_phone=#enterprisePhone#</isNotEmpty>
+			<isNotEmpty prepend=", " property="enterpriseEmail">enterprise_email=#enterpriseEmail#</isNotEmpty>
+			<isNotEmpty prepend=", " property="enterpriseNature">enterprise_nature=#enterpriseNature#</isNotEmpty>
+			<isNotEmpty prepend=", " property="opportunitySource">opportunity_source=#opportunitySource#</isNotEmpty>
+
+			<isNotEmpty prepend=", " property="customerCompletion">customer_completion=#customerCompletion#</isNotEmpty>
+			<isNotEmpty prepend=", " property="createUserId">create_user_id=#createUserId#</isNotEmpty>
+			<isNotEmpty prepend=", " property="createUserName">create_user_name=#createUserName#</isNotEmpty>
+			<isNotEmpty prepend=", " property="lastmodifyUserId">lastmodify_user_id=#lastmodifyUserId#</isNotEmpty>
+			<isNotEmpty prepend=", " property="lastmodifyUserName">lastmodify_user_name=#lastmodifyUserName#</isNotEmpty>
+			<isNotEmpty prepend=", " property="createTime">create_time=#createTime#</isNotEmpty>
+			<isNotEmpty prepend=", " property="modifyTime">modify_time=#modifyTime#</isNotEmpty>
+
+			<isNotEmpty prepend=", " property="priceSensitivity">price_sensitivity=#priceSensitivity#</isNotEmpty>
+			<isNotEmpty prepend=", " property="loyalty">loyalty=#loyalty#</isNotEmpty>
+			<isNotEmpty prepend=", " property="startCooperationTime">start_cooperation_time=#startCooperationTime#</isNotEmpty>
+			<isNotEmpty prepend=", " property="cooperationDuration">cooperation_duration=#cooperationDuration#</isNotEmpty>
+			<isNotEmpty prepend=", " property="purchasingSeason">purchasing_season=#purchasingSeason#</isNotEmpty>
+			<isNotEmpty prepend=", " property="activePeriod">active_period=#activePeriod#</isNotEmpty>
+			<isNotEmpty prepend=", " property="isFuhuaExclusive">is_fuhua_exclusive=#isFuhuaExclusive#</isNotEmpty>
+			<isNotEmpty prepend=", " property="cooperationRemark">cooperation_remark=#cooperationRemark#</isNotEmpty>
+
+		</dynamic>
+		WHERE customer_id=#customer_id#
+	</update>
 	
 	<delete id="DELETE-BY-ID" parameterClass="java.lang.String">
 		<![CDATA[
@@ -298,7 +343,7 @@
 				purchasing_season purchasingSeason,
 				active_period activePeriod,
 				is_fuhua_exclusive isFuhuaExclusive,
-				cooperation_remark  cooperationRemark,
+				cooperation_remark  cooperationRemark
 		from
 				customer_base_info
 		where
