@@ -45,6 +45,16 @@ public class MarketInfoAction {
      */
     @RequestMapping("/entrance")
     public ModelAndView entrance(String customerId){
+        return  new ModelAndView("/customerInfo/customerMarketingInfo").addObject("customerId",customerId);
+    }
+    /**
+     * 客户信息-市场信息入口方法
+     * @param customerId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/init")
+    public ResultPojo init(String customerId){
         //盛装返回数据集
         Map<String,Object> rmap = new HashMap<String,Object>();
         //默认查询今年的数据
@@ -70,7 +80,9 @@ public class MarketInfoAction {
         }
         //查询合作情况
         rmap.put("cooperation",this.customerBaseInfoService.queryCooperationByCid(customerId));
-        return  new ModelAndView("/customerInfo/customerMarketingInfo").addObject("data",rmap);
+        ResultPojo pojo = new ResultPojo();
+        pojo.setData(rmap);
+        return pojo;
     }
 
     /**

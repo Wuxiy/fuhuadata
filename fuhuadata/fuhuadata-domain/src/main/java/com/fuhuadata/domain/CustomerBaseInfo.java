@@ -11,14 +11,14 @@ public class CustomerBaseInfo {
 
     /**客户信息总id**/
 	private String customerId;
-	
+
     /**企业全称**/
 	private String fullName;
 
 
 	/**企业简称**/
 	private String shortName;
-	
+
     /**企业类型,-1全部,0客户,1竞对**/
 	private Integer company_type;
 
@@ -36,25 +36,25 @@ public class CustomerBaseInfo {
 
     /**注册资金**/
 	private String registeredFunds;
-	
+
     /**注册地址**/
 	private String registeredAddress;
-	
+
     /**经营范围**/
 	private String managementScope;
-	
+
     /**中信保编号**/
 	private String zhongxinbaoNumber;
-	
+
     /**中信保信用评级,0未知,1:1A,2:2A,3:3A,4:4A**/
 	private Integer zhongxinbaoLevel;
-	
+
     /**备注**/
 	private String remark;
-	
+
     /**企业电话**/
 	private String enterprisePhone;
-	
+
     /**企业邮箱**/
 	private String enterpriseEmail;
 
@@ -62,6 +62,7 @@ public class CustomerBaseInfo {
 	private String productLine;
 
 	//企业百科信息
+
     /**企业简介**/
 	private String enterpriseProfile;
 
@@ -73,10 +74,10 @@ public class CustomerBaseInfo {
 
     /**自定义字段,json序列化字段**/
 	private String customField;
-	
+
     /**企业信息完成度**/
 	private String customerCompletion;
-	
+
     /**创建者id**/
 	private Integer createUserId;
 
@@ -116,7 +117,7 @@ public class CustomerBaseInfo {
 
 	/**上一次修改者姓名**/
 	private String lastmodifyUserName;
-	
+
     /**创建时间**/
 	private String createTime;
 

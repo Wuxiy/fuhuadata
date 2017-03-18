@@ -52,9 +52,11 @@ public class PackingArchivesServiceImpl implements PackingArchivesService {
         Result result = new Result();
         try {
             String ids=packingArchives.getAssociatedPackingId();
+
             if(ids!=null&&ids.length()>0) {
                 packingArchives.setAssociatedPackingId(ids.replace("[", "").replace("]", "").replace("\"", ""));
             }
+
             if(packingArchives.getImagePath()!=null&&packingArchives.getImagePath().equals("[]")){
                 packingArchives.setImagePath("");
             }
