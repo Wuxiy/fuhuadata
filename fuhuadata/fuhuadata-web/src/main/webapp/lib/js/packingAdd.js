@@ -79,15 +79,15 @@ function imgArr(){
 
 //新增添加关联
 $('#add_relate').on('click',function(){
+    var ids = new Array();
     $("input[name='modal_cellcheckbox']:checked").each(function(){
         ids.push($(this).val());
     });
     $('#addField').modal('hide');
-    /*if(ids.length > 0){
+    if(ids.length > 0){
         var msg = "确认要为主材添加这些关联吗？";
         if(msg){
             var url = basePath+'/packingArchives/getByIds';
-            var data = ids;
             jQuery.ajax({
                 url:url,
                 type:'POST',
@@ -102,7 +102,7 @@ $('#add_relate').on('click',function(){
         }
     }else{
         alert('还未选择要添加的关联');
-    }*/
+    }
 })
 
 //新增完成
