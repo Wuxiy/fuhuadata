@@ -2,8 +2,11 @@
  * Created by Think on 2017/3/16.
  */
 
-
-
+/**
+ * 全局变量
+ */
+//url参数
+var urlArg = location.search;
 
 /**
  *获取数据
@@ -37,7 +40,7 @@ function upData(url,type,data,contentType){
 }
 
 /**
- *customerBasicInfo deal with
+ *基本信息页处理数据
  */
 function customerBasicInfo(result){
     var getData = result.data;
@@ -56,7 +59,7 @@ function customerBasicInfo(result){
     $('#opportunitySource').val(getData.opportunitySource);
     $('#customerMakeProduct').val(getData.customerMakeProduct);
     $('#qualificationsFileUrl').val(getData.qualificationsFileUrl);
-    $('#factoryLocation');
+    $('#factoryLocation').val(getData.factoryLocation);
     $('#lastmodifyUserNameEn').val(getData.lastmodifyUserNameEn);
     $('#enterprisePhone').val(getData.enterprisePhone);
     $('#zhongxinbaoNumber').val(getData.zhongxinbaoNumber);
@@ -127,7 +130,7 @@ function customerBasicInfo(result){
 }
 
 /**
- *customerBasicInfo get
+ * 基本信息页上传数据
  */
 function customerBasicFormObj() {
     var data = {
@@ -177,6 +180,86 @@ function customerBasicFormObj() {
     return data;
 }
 
+
+
+/**
+ * 市场信心页处理数据
+ */
+function pop(result){
+    var data = result.data;
+    var cpps = $('#cpps');
+    var csps = $('#csps');
+    cpps.html('');
+    csps.html('');
+    //采购产品
+    $.each(data.cpps,function(n,item){
+        var tbody = '';
+        tbody += '<tbody>';
+        tbody += '<tr><th>采购产品</th>';
+        tbody += '<th>'+item.productName+'</th>';
+        tbody += '<th>年需求量</th>';
+        tbody += '<th>'+item.annualDemands+'</th>';
+        tbody += '<th>平均单价(美元)</th>';
+        tbody += '<th>'+item.averagePrice+'</th></tr>';
+        tbody += '<tr><td>供应商1</td>'
+        tbody += '<td>'+item.supplier1+'</td>';
+        tbody += '<td>年采购量</td>'
+        tbody += '<td>'+item.purchaseAmount1+'</td>';
+        tbody += '<td>平均单价</td>';
+        tbody += '<td>'+item.averagePrice1+'</td></tr>';
+        tbody += '<tr><td>供应商2</td>'
+        tbody += '<td>'+item.supplier2+'</td>';
+        tbody += '<td>年采购量</td>'
+        tbody += '<td>'+item.purchaseAmount2+'</td>';
+        tbody += '<td>平均单价</td>';
+        tbody += '<td>'+item.averagePrice2+'</td></tr>';
+        tbody += '<tr><td>供应商3</td>'
+        tbody += '<td>'+item.supplier3+'</td>';
+        tbody += '<td>年采购量</td>'
+        tbody += '<td>'+item.purchaseAmount3+'</td>';
+        tbody += '<td>平均单价</td>';
+        tbody += '<td>'+item.averagePrice3+'</td></tr></tbody>';
+        cpps.append(tbody);
+    });
+    //销售产品
+    $.each(data.csps,function(n,item){
+        var tbody = '';
+        tbody += '<tbody>';
+        tbody += '<tr><th>销售产品</th>';
+        tbody += '<th>'+item.productName+'</th>';
+        tbody += '<th>年销售量</th>';
+        tbody += '<th>'+item.yearSales+'</th>';
+        tbody += '<th>品牌</th>';
+        tbody += '<th>'+item.brand+'</th>';
+        tbody += '<th>营销手段</th>';
+        tbody += '<th>'+item.marketingMethod+'</th></tr>';
+        tbody += '<tr><td>销售目的国1</td>'
+        tbody += '<td>'+item.destinationCountry+'</td>';
+        tbody += '<td>年销售量</td>'
+        tbody += '<td>'+item.purchaseAmount1+'</td>';
+        tbody += '<td>所占市场份额</td>';
+        tbody += '<td>'+item.averagePrice1+'</td></tr>';
+        tbody += '<tr><td>销售目的国2</td>'
+        tbody += '<td>'+item.supplier2+'</td>';
+        tbody += '<td>年销售量</td>'
+        tbody += '<td>'+item.purchaseAmount2+'</td>';
+        tbody += '<td>所占市场份额</td>';
+        tbody += '<td>'+item.averagePrice2+'</td></tr>';
+        tbody += '<tr><td>销售目的国3</td>'
+        tbody += '<td>'+item.supplier3+'</td>';
+        tbody += '<td>年销售量</td>'
+        tbody += '<td>'+item.purchaseAmount3+'</td>';
+        tbody += '<td>所占市场份额</td>';
+        tbody += '<td>'+item.averagePrice3+'</td></tr></tbody>';
+        cpps.append(tbody);
+    });
+    //合作情况
+    var coop = data.cooperation;
+
+}
+/**
+ * 基本信息页百科上传数据
+ */
 function customerEncyclopediaObj(){
     var data = {
         "companyInfo": $('[name="companyInfo"]').val(),
@@ -186,8 +269,12 @@ function customerEncyclopediaObj(){
         // "lastmodifyUserIdEn": ,
         "modifyTimeEn": getTime()//最后编辑时间
     };
+    return data;
 }
 
+/**
+ *获取当前时间
+ */
 function getTime(){
     var time = new Date();
     var year = time.getFullYear();
@@ -199,3 +286,10 @@ function getTime(){
     var newTime ;
     return newTime = year+'-'+month+'-'+day+' '+hours+':'+minutes+':'+seconds;
 };
+
+/**
+ * 处理数组对象
+ */
+function arr() {
+
+}
