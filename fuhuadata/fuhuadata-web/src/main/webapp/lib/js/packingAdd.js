@@ -16,8 +16,7 @@
 
     var img = $("input[name='file']");
 
-    var ids = new Array();
-
+    var addTbody = document.getElementById('add_tbody');
 
     //根据包材类型获取关联包材的展示
     if(bid != 1){
@@ -94,9 +93,23 @@ $('#add_relate').on('click',function(){
                 dataType:"json",
                 contentType:"application/json",
                 data:JSON.stringify(ids),
-                success:function(){
+                success:function(result){
+                    console.log(result);
                     alert("添加关联成功！");
-                    location.reload();
+                    for(var i=0;i<result.data.length;i++){
+                        addTbody.innerHTML += '<tr>'+
+                            '<td class="text-center"><input type="checkbox" name="cellcheckbox" value="'+result.data[i].packingId+'" /></td>'+
+                            '<td class="col-xs-2 text-center text-middle">'+result.data[i].packingId+'</td>'+
+                            '<td class="col-xs-2 text-center text-middle">'+result.data[i].packName+'</td>'+
+                            '<td class="col-xs-1 text-center text-middle">'+result.data[i].spec+'</td>'+
+                            '<td class="col-xs-1 text-center text-middle">'+result.data[i].size+'</td>'+
+                            '<td class="col-xs-2 text-center text-middle">'+result.data[i].quality+'</td>'+
+                            '<td class="col-xs-1 text-center text-middle">'+result.data[i].unitPrice+'</td>'+
+                            '<td class="col-xs-1 text-center text-middle">'+result.data[i].consumption+'</td>'+
+                            '<td class="col-xs-1 text-center text-middle">'+result.data[i].status+'</td>'
+                        '</tr>';
+                    }
+
                 }
             })
         }
@@ -104,6 +117,14 @@ $('#add_relate').on('click',function(){
         alert('还未选择要添加的关联');
     }
 })
+
+function Ids() {
+    var ids = new Array();
+    $("input[name='cellcheckbox']").each(function(){
+        ids.push($(this).val());
+    });
+    return JSON.stringify(ids);
+}
 
 //新增完成
 $('.packingAdd').on('click',function(){
@@ -123,7 +144,7 @@ $('.packingAdd').on('click',function(){
         "status": jQuery('#status').val(),
         "suitableType": JSON.stringify(checkboxArr()),
         "imagePath":imgArr(),
-        "associatedPackingId":JSON.stringify(ids),
+        "associatedPackingId":Ids(),
         "bRemarks": jQuery('#bremarks').val(),
     }
     console.log(data);

@@ -69,10 +69,10 @@ public class CustomerPurchaseProduct{
 	private String lastmodifyUserName;
 	
     /**创建时间**/
-	private Date createTime;
+	private String createTime;
 	
     /**修改时间**/
-	private Date modifyTime;
+	private String modifyTime;
 	
 	
 	public CustomerPurchaseProduct() {
@@ -237,22 +237,20 @@ public class CustomerPurchaseProduct{
 	public void setLastmodifyUserName(String lastmodifyUserName) {
 		this.lastmodifyUserName = lastmodifyUserName;
 	}
-	
-	public Date getCreateTime() {
+
+	public String getCreateTime() {
 		return createTime;
 	}
-	
-	public void setCreateTime(Date createTime) {
+
+	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
-	
-	public Date getModifyTime() {
+
+	public String getModifyTime() {
 		return modifyTime;
 	}
-	
-	public void setModifyTime(Date modifyTime) {
+
+	public void setModifyTime(String modifyTime) {
 		this.modifyTime = modifyTime;
 	}
-	
-
 }

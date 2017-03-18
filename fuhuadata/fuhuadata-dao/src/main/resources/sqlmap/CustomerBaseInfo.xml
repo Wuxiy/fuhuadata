@@ -343,7 +343,7 @@
 				purchasing_season purchasingSeason,
 				active_period activePeriod,
 				is_fuhua_exclusive isFuhuaExclusive,
-				cooperation_remark  cooperationRemark,
+				cooperation_remark  cooperationRemark
 		from
 				customer_base_info
 		where
