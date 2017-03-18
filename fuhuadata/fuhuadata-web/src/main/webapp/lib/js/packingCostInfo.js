@@ -117,7 +117,7 @@ function imgArr(){
     $('.filename').each(function(){
         var objt ={
             "name":$(this).val(),
-            "imgpath":$(this).attr('data-url')
+            "path":$(this).attr('data-url')
         };
         arr.push(objt);
     })
@@ -152,7 +152,7 @@ function checkboxArr() {
 
 //编辑完成保存
     $('#finish').on('click',function(){
-        var url = basePath+'/packingArchives/doModify';
+        var url = basePath+'/packingArchives/doModify'+id;
         var data = {
             "packName": jQuery('#packName').val(),
             "spec": jQuery('#spec').val(),
@@ -167,7 +167,7 @@ function checkboxArr() {
             "suitableType": JSON.stringify(checkboxArr()),
             "imagePath":imgArr(),
             "associatedPackingId":Ids(),
-            "bremarks": jQuery('#bRemarks').val(),
+            "bRemarks": jQuery('#bRemarks').val(),
         }
 
         console.log(data);
