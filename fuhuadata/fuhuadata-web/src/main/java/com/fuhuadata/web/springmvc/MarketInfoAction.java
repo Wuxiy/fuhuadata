@@ -110,6 +110,18 @@ public class MarketInfoAction {
         pojo.setData(this.customerPurchaseProductService.batchInsert(cpps));
         return pojo;
     }
+    /**
+     * 批量插入客户销售产品
+     * @param csps
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/addCSPList")
+    public ResultPojo addCSPList(List<CustomerSaleProduct> csps){
+        ResultPojo pojo = new ResultPojo();
+        pojo.setData(this.customerSaleProductService.batchInsert(csps));
+        return pojo;
+    }
 
     /**
      * 修改客户合作情况信息
