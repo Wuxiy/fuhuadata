@@ -28,8 +28,8 @@ function getData(url,type,data,callBack){
  * 提交数据
  */
 function upData(url,type,data,contentType){
-    console.log(data);
     JSON.stringify(data.customerMakeProducts);
+    console.log(JSON.stringify(data));
     $.ajax({
         url:url,
         type:type,
@@ -136,7 +136,7 @@ function customerBasicInfo(result){
  */
 function customerBasicFormObj() {
     var data = {
-        customerBaseInfo:{
+        customerBaseInfoVO:{
             "country": $('#country').val(),
             "fullName": $('#fullName').val(),
             "areaId": $('#areaId').val(),
