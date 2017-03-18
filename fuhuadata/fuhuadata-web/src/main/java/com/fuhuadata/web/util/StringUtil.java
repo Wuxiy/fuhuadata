@@ -20,6 +20,9 @@ public class StringUtil {
                 list.remove(str);
             }
         }
+        for(int i = 0;i<list.size();i++) {
+            System.out.println(list.get(i).toString());
+        }
         String[] result = new String[0];
         return list.toArray(result);
     }
