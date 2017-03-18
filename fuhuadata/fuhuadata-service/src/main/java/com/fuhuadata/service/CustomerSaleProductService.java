@@ -18,7 +18,8 @@ public interface CustomerSaleProductService {
 	 * @return
 	 */
     public Result<CustomerSaleProduct> addCustomerSaleProduct(CustomerSaleProduct customerSaleProduct) ;
- 
+
+	public boolean batchInsert(List<CustomerSaleProduct> customerSaleProducts);
     /**
      * 按照主键id更新customerSaleProduct，请重新new CustomerSaleProduct 的更新对象，设置要更新的字段
 	 * 返回result，通过result.isSuccess()判断更新是否成功
