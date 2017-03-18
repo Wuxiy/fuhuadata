@@ -1,9 +1,9 @@
 <div class="clearfix content shadow-out">
     <!--副导航-->
     <div class="nav-deputy shadow-out clearfix">
-        <ul class="nav nav-tabs pull-left">
-            <li><a href="">基本信息</a></li>
-            <li class="active"><a href="" >市场信息</a></li>
+        <ul id="deputyNav" class="nav nav-tabs pull-left">
+            <li><a href="${request.contextPath}/customerBaseInfo/intoCustomerBaseInfoDetails">基本信息</a></li>
+            <li class="active"><a href="${request.contextPath}/customerPurchaseProduct/entrance" >市场信息</a></li>
             <li><a href="" >联系人</a></li>
             <li><a href="" >产品要求</a></li>
             <li><a href="" >订单信息</a></li>
@@ -25,7 +25,7 @@
                 <!--采购产品表-->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <button data-toggle="modal" data-target="#cusPro" class="btn btn-xs btn-primary panel-heading-btn pull-right" lang="zh">
+                        <button id="add_cpps" data-toggle="modal" data-target="#cusPro" class="btn btn-xs btn-primary panel-heading-btn pull-right" lang="zh">
                             新增
                         </button>
                         <h3 class="panel-title" lang="zh">
@@ -48,81 +48,51 @@
                         </div>
                         <!--表格-->
                         <table id="cpps" class="table table-condensed table-bordered table-striped text-center">
-                            <tbody>
-                            <tr>
-                                <th class="text-center" lang="zh">采购产品</th>
-                                <th class="text-center" lang="zh">草甘膦95%原药</th>
-                                <th class="text-center" lang="zh">年需求量</th>
-                                <th class="text-center">10000T</th>
-                                <th class="text-center" lang="zh">平均单价（美元）</th>
-                                <th class="text-center">2.13</th>
-                            </tr>
-                            <tr>
-                                <td><span lang="zh">供应商</span>1</td>
-                                <td lang="zh">福华</td>
-                                <td lang="zh">年采购量</td>
-                                <td>5000T</td>
-                                <td lang="zh">单价</td>
-                                <td>2.12</td>
-                            </tr>
-                            <tr>
-                                <td><span lang="zh">供应商</span>2</td>
-                                <td lang="zh">润丰</td>
-                                <td lang="zh">年采购量</td>
-                                <td>5000T</td>
-                                <td lang="zh">单价</td>
-                                <td>2.12</td>
-                            </tr>
-                            <tr>
-                                <td><span lang="zh">供应商</span>3</td>
-                                <td lang="zh">中化</td>
-                                <td lang="zh">年采购量</td>
-                                <td>5000T</td>
-                                <td lang="zh">单价</td>
-                                <td>2.12</td>
-                            </tr>
-                            </tbody>
-                            <tbody>
-                            <tr>
-                                <th class="text-center" lang="zh">采购产品</th>
-                                <th class="text-center" lang="zh">草甘膦95%原药</th>
-                                <th class="text-center" lang="zh">年需求量</th>
-                                <th class="text-center">10000T</th>
-                                <th class="text-center" lang="zh">平均单价（美元）</th>
-                                <th class="text-center">2.13</th>
-                            </tr>
-                            <tr>
-                                <td><span lang="zh">供应商</span>1</td>
-                                <td lang="zh">福华</td>
-                                <td lang="zh">年采购量</td>
-                                <td>5000T</td>
-                                <td lang="zh">单价</td>
-                                <td>2.12</td>
-                            </tr>
-                            <tr>
-                                <td><span lang="zh">供应商</span>2</td>
-                                <td lang="zh">润丰</td>
-                                <td lang="zh">年采购量</td>
-                                <td>5000T</td>
-                                <td lang="zh">单价</td>
-                                <td>2.12</td>
-                            </tr>
-                            <tr>
-                                <td><span lang="zh">供应商</span>3</td>
-                                <td lang="zh">中化</td>
-                                <td lang="zh">年采购量</td>
-                                <td>5000T</td>
-                                <td lang="zh">单价</td>
-                                <td>2.12</td>
-                            </tr>
-                            </tbody>
+
+                                <tbody>
+                                    #foreach( $cppsTbody in $cpps )
+                                <tr>
+                                    <th class="text-center" lang="zh">采购产品</th>
+                                    <th class="text-center" lang="zh">$cppsTbody.productName</th>
+                                    <th class="text-center" lang="zh">年需求量</th>
+                                    <th class="text-center">$cppsTbody.annualDemands</th>
+                                    <th class="text-center" lang="zh">平均单价（美元）</th>
+                                    <th class="text-center">$cppsTbody.averagePrice</th>
+                                </tr>
+                                <tr>
+                                    <td><span lang="zh">供应商</span>1</td>
+                                    <td lang="zh">$cppsTbody.supplier1</td>
+                                    <td lang="zh">年采购量</td>
+                                    <td>$cppsTbody.purchaseAmount1</td>
+                                    <td lang="zh">单价</td>
+                                    <td>$cppsTbody.averagePrice1</td>
+                                </tr>
+                                <tr>
+                                    <td><span lang="zh">供应商</span>2</td>
+                                    <td lang="zh">$cppsTbody.supplier2</td>
+                                    <td lang="zh">年采购量</td>
+                                    <td>$cppsTbody.purchaseAmount2</td>
+                                    <td lang="zh">单价</td>
+                                    <td>$cppsTbody.averagePrice2</td>
+                                </tr>
+                                <tr>
+                                    <td><span lang="zh">供应商</span>3</td>
+                                    <td lang="zh">$cppsTbody.supplier3</td>
+                                    <td lang="zh">年采购量</td>
+                                    <td>$cppsTbody.purchaseAmount3</td>
+                                    <td lang="zh">单价</td>
+                                    <td>$cppsTbody.averagePrice3</td>
+                                </tr>
+                                    #end
+                                </tbody>
+
                         </table>
                     </div>
                 </div>
                 <!--销售产品表-->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <button class="btn btn-xs btn-primary panel-heading-btn pull-right" lang="zh">
+                        <button id="add_csps" class="btn btn-xs btn-primary panel-heading-btn pull-right" lang="zh">
                             新增
                         </button>
                         <h3 class="panel-title" lang="zh">
@@ -294,11 +264,16 @@
                             &times;
                         </button>
                         <h4 class="modal-title">
-                            年份：<span>2016</span>
+                            <label for="" class="control-label col-xs-1">年份</label>
+                            <div class="col-xs-2">
+                                <select id="year">
+
+                                </select>
+                            </div>
                         </h4>
                     </div>
                     <div class="modal-body" style="padding: 15px 30px;">
-                        <table class="table table-condensed table-bordered table-striped text-center">
+                        <table  id="table"class="table table-condensed table-bordered table-striped text-center">
                             <tbody data-name="proCon">
                             <tr>
                                 <th class="text-center" lang="zh">采购产品</th>
@@ -308,29 +283,39 @@
                                 <th class="text-center" lang="zh">平均单价（美元）</th>
                                 <th><input class="form-control" type="text" /></th>
                             </tr>
-                            <tr data-name="proItem">
-                                <td><span lang="zh">供应商</span>1</td>
+                            <tr>
+                                <td>供应商1</td>
                                 <td><input class="form-control" type="text" /></td>
                                 <td lang="zh">年采购量</td>
                                 <td><input class="form-control" type="text" /></td>
                                 <td lang="zh">单价</td>
                                 <td><input class="form-control" type="text" /></td>
                             </tr>
-                            <tr data-place="proItem">
-                                <td colspan="7">
-                                    <button data-form-btn="add" data-form-target="proItem" class="btn btn-xs btn-link" type="button" lang="zh">添加供应商</button>
-                                </td>
+                            <tr>
+                                <td>供应商2</td>
+                                <td><input class="form-control" type="text" /></td>
+                                <td lang="zh">年采购量</td>
+                                <td><input class="form-control" type="text" /></td>
+                                <td lang="zh">单价</td>
+                                <td><input class="form-control" type="text" /></td>
+                            </tr>
+                            <tr>
+                                <td>供应商3</td>
+                                <td><input class="form-control" type="text" /></td>
+                                <td lang="zh">年采购量</td>
+                                <td><input class="form-control" type="text" /></td>
+                                <td lang="zh">单价</td>
+                                <td><input class="form-control" type="text" /></td>
                             </tr>
                             </tbody>
-                            <tfoot data-place="proCon" style="display: none;"></tfoot>
                         </table>
                     </div>
                     <div class="modal-footer">
                         <div class="col-xs-2 col-xs-offset-3">
-                            <button data-form-btn="add" data-form-target="proCon" type="button" class="btn btn-block btn-primary continueAdd" lang="zh">继续添加产品</button>
+                            <button data-form-btn="add" data-form-target="proCon" type="button" class="btn btn-block btn-primary" lang="zh">继续添加产品</button>
                         </div>
                         <div class="col-xs-2">
-                            <button type="button" class="btn btn-block btn-primary" data-dismiss="modal" lang="zh">完成</button>
+                            <button id="cpps_up" data-form-btn="complete" type="button" class="btn btn-block btn-primary" data-dismiss="modal" lang="zh">完成</button>
                         </div>
                         <div class="col-xs-2">
                             <button type="button" class="btn btn-block btn-default" data-dismiss="modal" lang="zh">取消</button>
@@ -345,23 +330,100 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customerInfo.js"></script>
 <script>
     $(function () {
-        $('#cpps_year,#csps_year').html(function (n,old) {
+        //给select添加年份，从2014年到当前
+        $('#cpps_year,#csps_year,#year').html(function (n,old) {
             old = '';
            var nowDate = new Date();
            var nowYear = nowDate.getFullYear();
            console.log(typeof nowYear);
-            var options = '';
+           var options = '';
            for(var i=2014;i<=nowYear;i++){
-               options += '<option value="'+i+'">'+i+'<option>';
+               options += '<option value="'+i+'">'+i+'</option>';
             }
             return options;
         })
+
         //切换年份刷新数据
-        $(document).on('change.year','#year',function (e) {
+        $(document).on('change.year','#cpps_year,#csps_year',function (e) {
             var selYear = $(e.target).val();
             var data = {year:selYear};
             getData('','POST',data,pop);
         })
+
+        //点击新增改变modal样式和属性
+        $(document).on('click.addCpps','#add_cpps',function(){
+            var modal = $('#cusPro');
+            var comBtn = $('[data-form-btn="complete"]');
+            $('#table').html('');
+            var tbody = '';
+            tbody += '<tbody>';
+            tbody += '<tr><th>采购产品</th>';
+            tbody += '<th><input class="form-control" type="text" value=""></th>';
+            tbody += '<th>年需求量</th>';
+            tbody += '<th><input class="form-control" type="text" value=""></th>';
+            tbody += '<th>平均单价(美元)</th>';
+            tbody += '<th><input class="form-control" type="text" value=""></th></tr>';
+            tbody += '<tr><td>供应商1</td>'
+            tbody += '<td><input class="form-control" type="text" value=""></td>';
+            tbody += '<td>年采购量</td>'
+            tbody += '<td><input class="form-control" type="text" value=""></td>';
+            tbody += '<td>平均单价</td>';
+            tbody += '<td><input class="form-control" type="text" value=""></td></tr>';
+            tbody += '<tr><td>供应商2</td>'
+            tbody += '<td><input class="form-control" type="text" value=""></td>';
+            tbody += '<td>年采购量</td>'
+            tbody += '<td><input class="form-control" type="text" value=""></td>';
+            tbody += '<td>平均单价</td>';
+            tbody += '<td><input class="form-control" type="text" value=""></td></tr>';
+            tbody += '<tr><td>供应商3</td>'
+            tbody += '<td><input class="form-control" type="text" value=""></td>';
+            tbody += '<td>年采购量</td>'
+            tbody += '<td><input class="form-control" type="text" value=""></td>';
+            tbody += '<td>平均单价</td>';
+            tbody += '<td><input class="form-control" type="text" value=""></td></tr></tbody>';
+            $('#table').append(tbody);
+            comBtn.attr('id','cpps_up');//变更完成按钮
+    });
+        $(document).on('click.addCsps','#add_csps',function(){
+            var modal = $('#cusPro');
+            var comBtn = $('[data-form-btn="complete"]');
+            $('#table').html('');
+            var tbody = '';
+            tbody += '<tbody>';
+            tbody += '<tr><th>销售产品</th>';
+            tbody += '<th><input class="form-control" type="text" value=""></th>';
+            tbody += '<th>年销售量</th>';
+            tbody += '<th><input class="form-control" type="text" value=""></th>';
+            tbody += '<th>品牌</th>';
+            tbody += '<th><input class="form-control" type="text" value=""></th>';
+            tbody += '<th>营销手段</th>';
+            tbody += '<th><input class="form-control" type="text" value=""></th></tr>';
+            tbody += '<tr><td>销售目的国1</td>'
+            tbody += '<td><input class="form-control" type="text" value=""></td>';
+            tbody += '<td>年销售量</td>'
+            tbody += '<td><input class="form-control" type="text" value=""></td>';
+            tbody += '<td colspan="2">所占市场份额</td>';
+            tbody += '<td colspan="2"><input class="form-control" type="text" value=""></td></tr>';
+            tbody += '<tr><td>销售目的国2</td>'
+            tbody += '<td><input class="form-control" type="text" value=""></td>';
+            tbody += '<td>年销售量</td>'
+            tbody += '<td><input class="form-control" type="text" value=""></td>';
+            tbody += '<td colspan="2">所占市场份额</td>';
+            tbody += '<td colspan="2"><input class="form-control" type="text" value=""></td></tr>';
+            tbody += '<tr><td>销售目的国3</td>'
+            tbody += '<td><input class="form-control" type="text" value=""></td>';
+            tbody += '<td>年销售量</td>'
+            tbody += '<td><input class="form-control" type="text" value=""></td>';
+            tbody += '<td colspan="2">所占市场份额</td>';
+            tbody += '<td colspan="2"><input class="form-control" type="text" value=""></td></tr></tbody>';
+            $('#table').append(tbody);
+            comBtn.attr('id','csps_up');//变更完成按钮
+        });
+
+        //点击完成按钮提交
+//        $(document).on('click.csps_up','#csps_up',function(){
+//            upData('','POST',,"application/json")
+//        }
 
     })
 </script>
