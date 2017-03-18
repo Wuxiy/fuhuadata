@@ -15,10 +15,6 @@
     var table = document.getElementById('packing_relate_table');
     var imgContent = document.getElementById('imgContent');
 
-    var checkboxarr = '';
-    var imgpath;
-    var Ids = new Array();
-
     if(bid != 1){
         $('.relate').hide();
     }
@@ -91,41 +87,54 @@ $(document).ready(function(){
 
 //图片上传
 
-/*$("#file").fileinput({
-    language: 'zh', //设置语言
-    uploadUrl: '/upload/uploadFile', // you must set a valid URL here else you will get an error
-    allowedFileExtensions : ['jpg', 'png','gif'],
-    overwriteInitial: false,
-    maxFileSize: 1000,
-    maxFilesNum: 10,
-    maxImageWidth: 280,//图片的最大宽度
-    maxImageHeight: 280,//图片的最大高度
-    //allowedFileTypes: ['image', 'video', 'flash'],
-    enctype: 'multipart/form-data',
-    slugCallback: function(filename) {
-        return filename.replace('(', '_').replace(']', '_');
-    }
-}).on("filebatchselected", function(event, file) {
-    console.log('233');
+function fsubmit(){
+    var data = new FormData($('#form1')[0]);
+    console.log(data);
+    jQuery.ajax({
+        url: basePath+'/upload/uploadFileAll',
+        type: 'POST',
+        data: data,
+        dataType: 'JSON',
+        cache: false,
+        processData: false,
+        contentType: false,
+        success:function (result) {
+            console.log(result);
+            $.each(result.data,function(i,item){
+                console.log(item);
+                $('.filename').eq(i).attr('data-url',item);
+                $('.fileimg').eq(i).attr('src',"../"+basePath+item);
+            })
 
-}).on("fileuploaded", function(event, data) {
-    console.log('233');
-    if(data.response)
-    {
-        alert('处理成功');
-    }
-    imgpath = data.response.data;
-});*/
+        }
+    });
+    return false;
+}
+
+//图片JSON
+function imgArr(){
+    var arr=[];
+    $('.filename').each(function(){
+        var objt ={
+            "name":$(this).val(),
+            "imgpath":$(this).attr('data-url')
+        };
+        arr.push(objt);
+    })
+    return JSON.stringify(arr);
+}
+
 
 //适用产品类型checkbox
-$("input[name='check']:checked").each(function(index,element){
-    checkboxarr += $(this).val() + ",";
-})
-
-//关联数组Ids
-$("input[name='cellcheckbox']").each(function(){
-    Ids.push($(this).val());
-});
+function checkboxArr() {
+    var checkboxarr = [];
+    var a;
+    $("input[name='check']:checked").each(function(){
+        a =  $(this).val();
+        checkboxarr.push(a);
+    })
+    return checkboxarr;
+}
 
 //编辑
     $('#edit').on('click',function(){
@@ -155,10 +164,10 @@ $("input[name='cellcheckbox']").each(function(){
             "consumption": jQuery('#consumption').val(),
             "priceEndDate": jQuery('#priceEndDate').val(),
             "status": jQuery('#status').val(),
-            "suitableType": checkboxarr,
-            "image":arr,
-            "ids":ids,
-            "bremarks": jQuery('#bremarks').val(),
+            "suitableType": JSON.stringify(checkboxArr()),
+            "imagePath":imgArr(),
+            "associatedPackingId":Ids(),
+            "bremarks": jQuery('#bRemarks').val(),
         }
 
         console.log(data);
@@ -175,7 +184,13 @@ $("input[name='cellcheckbox']").each(function(){
         })
     })
 
-
+function Ids() {
+    var ids = new Array();
+    $("input[name='cellcheckbox']").each(function(){
+        ids.push($(this).val());
+    });
+    return JSON.stringify(ids);
+}
 
 //关联包材全选
 $('#checkAll').on('click',function(){

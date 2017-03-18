@@ -15,10 +15,7 @@
     names.value = name;
 
     var img = $("input[name='file']");
-    var imgnames =$("input[name='imagname']");
 
-    var obj1 = {},obj2 = {},obj3 = {};
-    var arr = [];
     var ids = new Array();
 
 
@@ -73,7 +70,7 @@ function imgArr(){
     $('.filename').each(function(){
         var objt ={
             "name":$(this).val(),
-            "imgpath":$(this).attr('data-url')
+            "imgpath":$(this).attr('data-url'),
         };
         arr.push(objt);
     })
@@ -85,8 +82,8 @@ $('#add_relate').on('click',function(){
     $("input[name='modal_cellcheckbox']:checked").each(function(){
         ids.push($(this).val());
     });
-
-    if(ids.length > 0){
+    $('#addField').modal('hide');
+    /*if(ids.length > 0){
         var msg = "确认要为主材添加这些关联吗？";
         if(msg){
             var url = '';
@@ -105,7 +102,7 @@ $('#add_relate').on('click',function(){
         }
     }else{
         alert('还未选择要添加的关联');
-    }
+    }*/
 })
 
 //新增完成
@@ -130,7 +127,7 @@ $('.packingAdd').on('click',function(){
         "bRemarks": jQuery('#bremarks').val(),
     }
     console.log(data);
-    jQuery.ajax({
+    /*jQuery.ajax({
         type:"POST",
         url:url,
         dataType:"json",
@@ -140,7 +137,7 @@ $('.packingAdd').on('click',function(){
             alert("添加成功");
             location.reload();
         }
-    })
+    })*/
 })
 
 //全选框
