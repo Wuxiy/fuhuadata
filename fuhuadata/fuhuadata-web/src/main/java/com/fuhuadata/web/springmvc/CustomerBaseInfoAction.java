@@ -169,7 +169,7 @@ public class CustomerBaseInfoAction {
     @RequestMapping(value = "/updateCustomerBaseInfo",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "customerInfo-customerList",methods = "updateCustomerBaseInfo")
     @ResponseBody
-    public ResultPojo updateCustomerBaseInfo(@RequestBody CustomerBaseInfo customerBaseInfo, CustomerMakeProduct[] customerMakeProducts){
+    public ResultPojo updateCustomerBaseInfo(@RequestBody CustomerBaseInfo customerBaseInfo, @RequestBody  CustomerMakeProduct[] customerMakeProducts){
       Result result = new Result();
         try{
             String id=customerBaseInfo.getCustomerId();
