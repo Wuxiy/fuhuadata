@@ -73,9 +73,20 @@ public class RecordLinkmanServiceImpl implements RecordLinkmanService {
 		}
 		return result;	
     }
-    
 
-    public Result<List<RecordLinkman>> getRecordLinkmansByPage(QueryRecordLinkman queryRecordLinkman) {
+	@Override
+	public Result<List<RecordLinkman>> getRecordLinkmanByLinkmanId(String linkmanId) {
+		Result<List<RecordLinkman>> result = new Result<List<RecordLinkman>>();
+		try {
+			result.addDefaultModel("recordLinkmen",recordLinkmanManager.getRecordLinkmanByLinkmanId(linkmanId));
+		} catch(Exception e) {
+			result.setSuccess(false);
+		}
+		return result;
+	}
+
+
+	public Result<List<RecordLinkman>> getRecordLinkmansByPage(QueryRecordLinkman queryRecordLinkman) {
 		Result<List<RecordLinkman>> result = new Result<List<RecordLinkman>>();
 		try {		
 			result = recordLinkmanManager.getRecordLinkmansByPage(queryRecordLinkman);

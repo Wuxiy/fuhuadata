@@ -26,4 +26,5 @@
 	<bean id="customerLinkmanService" class="com.fuhuadata.service.impl.CustomerLinkmanServiceImpl"/>
 	<bean id="customerPurchaseProductService" class="com.fuhuadata.service.impl.CustomerPurchaseProductServiceImpl"/>
 	<bean id="customerSaleProductService" class="com.fuhuadata.service.impl.CustomerSaleProductServiceImpl"/>
+	<bean id="recordLinkmanService" class="com.fuhuadata.service.impl.RecordLinkmanServiceImpl"/>
 </beans>

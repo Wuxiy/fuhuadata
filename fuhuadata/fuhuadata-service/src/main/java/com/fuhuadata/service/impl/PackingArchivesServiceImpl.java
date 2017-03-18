@@ -107,7 +107,7 @@ public class PackingArchivesServiceImpl implements PackingArchivesService {
             }else {
                 packingArchivesVO.setPack(packingArchives);
                 String imagePath = packingArchives.getImagePath();
-                if(imagePath!=null){
+                if(imagePath!=null&&imagePath.length()>0){
                     JSONArray json = JSONArray.fromObject(imagePath); // 首先把字符串转成JSONArray对象
                     if (json.size() > 0) {
                         for (int i = 0; i < json.size(); i++) {

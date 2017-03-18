@@ -70,7 +70,7 @@ public class MarketInfoAction {
         }
         //查询合作情况
         rmap.put("cooperation",this.customerBaseInfoService.queryCooperationByCid(customerId));
-        return  new ModelAndView("").addObject("data",rmap);
+        return  new ModelAndView("/customerInfo/customerMarketingInfo").addObject("data",rmap);
     }
 
     /**

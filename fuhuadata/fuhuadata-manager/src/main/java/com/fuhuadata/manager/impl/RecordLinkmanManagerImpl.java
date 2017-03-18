@@ -31,7 +31,12 @@ public class RecordLinkmanManagerImpl implements RecordLinkmanManager {
 		return recordLinkmanDao.getRecordLinkmansByQuery(queryRecordLinkman);
 	}
 
-    public boolean deleteRecordLinkmanById(int id) {
+	@Override
+	public List<RecordLinkman> getRecordLinkmanByLinkmanId(String linkmanId) {
+		return recordLinkmanDao.getRecordLinkmanByLinkmanId(linkmanId);
+	}
+
+	public boolean deleteRecordLinkmanById(int id) {
     	return recordLinkmanDao.deleteRecordLinkmanById(id) == 1 ? true : false;
     }
     

@@ -32,7 +32,7 @@ function upData(url,type,data,contentType){
     $.ajax({
         url:url,
         type:type,
-        data:data,
+        data:JSON.stringify(data),
         contentType:contentType
     }).done(function () {
         alert('提交成功');

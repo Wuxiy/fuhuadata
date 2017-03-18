@@ -54,6 +54,13 @@ public interface RecordLinkmanService {
      */
     public Result<RecordLinkman> getRecordLinkmanById(int id);
 
+	/**
+	 * 根据联系人id查找其沟通记录
+	 * @param linkmanId
+	 * @return
+	 */
+	public Result<List<RecordLinkman>> getRecordLinkmanByLinkmanId(String linkmanId);
+
     /**
      * 查询列表，包含分页查询
 	 * 查询分页信息，请设置

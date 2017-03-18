@@ -159,7 +159,13 @@
         </isParameterPresent>
 		LIMIT #startRow#,#pageSize#
 	</select>
-	
+
+	<select id="GET-BY-LINKMAN-ID" resultMap="RECORDLINKMAN-MAP" parameterClass="java.lang.String">
+		<![CDATA[
+			SELECT * FROM record_linkman WHERE linkman_id = #linkmanId#
+		]]>
+	</select>
+
 	<select id="COUNT" resultClass="java.lang.Integer" parameterClass="QueryRecordLinkman">
 		<![CDATA[
 			SELECT COUNT(id) FROM record_linkman

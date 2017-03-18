@@ -28,7 +28,7 @@ import java.util.Map;
 @RequestMapping(value = "/upload/*")
 public class FileController {
     private static final Log log = LogFactory.getLog(FileController.class);
-
+    private static final String  upoadURI = "images/";
     @RequestMapping(value = "into",method = RequestMethod.GET)
     public ModelAndView upload(){
         return new ModelAndView("knowledgeBase/uploadFile");
@@ -47,7 +47,7 @@ public class FileController {
         try {
                 if (!file.isEmpty()) {
                     try {
-                        path = request.getSession().getServletContext().getRealPath("images/");//保存在服务器
+                        path = request.getSession().getServletContext().getRealPath(upoadURI);//保存在服务器
                         System.out.println(path);
 
                         String fileName = file.getOriginalFilename();
@@ -68,7 +68,7 @@ public class FileController {
             log.error("文件上传错误",e);
         }
         ResultPojo  resultPojo= result.getResultPojo();
-        resultPojo.setData(tempFile);
+        resultPojo.setData(upoadURI+tempFile.getName());
         return resultPojo;
     }
 
@@ -79,14 +79,14 @@ public class FileController {
                                    HttpServletResponse response, BindException errors)
             throws Exception {
         Result result = new Result();
-        List<File> formFile = new ArrayList<File>();
+        List<String> fileURIs = new ArrayList<String>();
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
         org.springframework.util.MultiValueMap<String,MultipartFile> fileMap1=multipartRequest.getMultiFileMap();
             List<MultipartFile> files = fileMap1.get("file");
             if (files != null) {
                 for (MultipartFile file : files) {
-                    String path = request.getSession().getServletContext().getRealPath("images/");//保存在服务器
+                    String path = request.getSession().getServletContext().getRealPath(upoadURI);//保存在服务器
                     String fileName = file.getOriginalFilename();
                     File tempFile = new File(path, fileName);
                     System.out.println(tempFile);
@@ -97,10 +97,10 @@ public class FileController {
                         tempFile.createNewFile();
                         file.transferTo(tempFile);
                     }
-                    formFile.add(tempFile);
+                    fileURIs.add(upoadURI+tempFile.getName());
                 }
             }
-            result.addDefaultModel(formFile);
+            result.addDefaultModel(fileURIs);
           return result.getResultPojo();
     }
 

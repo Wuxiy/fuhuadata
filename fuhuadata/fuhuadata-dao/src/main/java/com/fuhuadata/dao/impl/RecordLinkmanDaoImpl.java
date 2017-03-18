@@ -23,6 +23,7 @@ public class RecordLinkmanDaoImpl extends SqlMapClientTemplate implements Record
     public static final String GET_BY_ID = "RECORDLINKMAN.GET-BY-ID";
     public static final String GET_PAGE = "RECORDLINKMAN.GET-PAGE";
     public static final String COUNT = "RECORDLINKMAN.COUNT";
+    public static final String GET_BY_LINKMAN_ID="RECORDLINKMAN.GET-BY-LINKMAN-ID";
     
     public RecordLinkman addRecordLinkman(RecordLinkman recordLinkman) {
 		recordLinkman.setId((Integer) this.insert(ADD, recordLinkman));
@@ -53,7 +54,12 @@ public class RecordLinkmanDaoImpl extends SqlMapClientTemplate implements Record
     public List<RecordLinkman> getRecordLinkmansByPage(QueryRecordLinkman queryRecordLinkman) {
     	return this.queryForList(GET_PAGE, queryRecordLinkman);
     }
-    	
+
+    @Override
+    public List<RecordLinkman> getRecordLinkmanByLinkmanId(String linkmanId) {
+        return this.queryForList(GET_BY_LINKMAN_ID,linkmanId);
+    }
+
     public int count(QueryRecordLinkman queryRecordLinkman) {
     	return ((Integer) this.queryForObject(COUNT, queryRecordLinkman)).intValue();
     }

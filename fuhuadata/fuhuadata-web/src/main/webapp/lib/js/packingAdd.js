@@ -31,135 +31,29 @@
 
 //图片上传
 
-/*function imag(){
-    img.each(function(){
-        $("input[name='file']").fileinput({
-            language: 'zh', //设置语言
-            uploadUrl: '/upload/uploadFile', // you must set a valid URL here else you will get an error
-            allowedFileExtensions : ['jpg', 'png','gif'],
-            overwriteInitial: false,
-            maxFileSize: 1000,
-            maxFilesNum: 10,
-            maxImageWidth: 100,//图片的最大宽度
-            maxImageHeight: 100,//图片的最大高度
-            //allowedFileTypes: ['image', 'video', 'flash'],
-            enctype: 'multipart/form-data',
-            slugCallback: function(filename) {
-                console.log(filename);
+function fsubmit(){
+    var data = new FormData($('#form1')[0]);
+    console.log(data);
+    jQuery.ajax({
+        url: basePath+'/upload/uploadFileAll',
+        type: 'POST',
+        data: data,
+        dataType: 'JSON',
+        cache: false,
+        processData: false,
+        contentType: false,
+        success:function (result) {
+            console.log(result);
+            $.each(result.data,function(i,item){
+                console.log(item);
+                $('.filename').eq(i).attr('data-url',item);
+                $('.fileimg').eq(i).attr('src',"../"+basePath+item);
+            })
 
-                return filename.replace('(', '_').replace(']', '_');
-            }
-        }).on("filebatchselected", function(event, file) {
-            console.log('233');
-
-        }).on("fileuploaded", function(event, data) {
-
-            if(data.response)
-            {
-                alert('处理成功');
-            }
-            obj.path = data.response.data;
-            imgnames.each(function(){
-               obj.name = $(this).val();
-            });
-            arr.push(obj);
-            console.log(arr);
-        });
-    })
-
-}*/
-
-$("input[id='file-1']").fileinput({
-    language: 'zh', //设置语言
-    uploadUrl: '/upload/uploadFile', // you must set a valid URL here else you will get an error
-    allowedFileExtensions : ['jpg', 'png','gif'],
-    overwriteInitial: false,
-    maxFileSize: 1000,
-    maxFilesNum: 10,
-    maxImageWidth: 100,//图片的最大宽度
-    maxImageHeight: 100,//图片的最大高度
-    //allowedFileTypes: ['image', 'video', 'flash'],
-    enctype: 'multipart/form-data',
-    slugCallback: function(filename) {
-        console.log(filename);
-        $('#imagname1').val(filename);
-        return filename.replace('(', '_').replace(']', '_');
-    }
-}).on("filebatchselected", function(event, file) {
-    console.log('233');
-
-}).on("fileuploaded", function(event, data) {
-
-        if(data.response)
-        {
-            alert('处理成功');
         }
-        obj1.path = data.response.data;
-        obj1.name = $('#imagname1').val();
-        arr.push(obj1);
-        console.log(arr);
     });
-
-$("input[id='file-2']").fileinput({
-    language: 'zh', //设置语言
-    uploadUrl: '/upload/uploadFile', // you must set a valid URL here else you will get an error
-    allowedFileExtensions : ['jpg', 'png','gif'],
-    overwriteInitial: false,
-    maxFileSize: 1000,
-    maxFilesNum: 10,
-    maxImageWidth: 100,//图片的最大宽度
-    maxImageHeight: 100,//图片的最大高度
-    //allowedFileTypes: ['image', 'video', 'flash'],
-    enctype: 'multipart/form-data',
-    slugCallback: function(filename) {
-        console.log(filename);
-        $('#imagname2').val(filename);
-        return filename.replace('(', '_').replace(']', '_');
-    }
-}).on("filebatchselected", function(event, file) {
-    console.log('233');
-
-}).on("fileuploaded", function(event, data) {
-
-    if(data.response)
-    {
-        alert('处理成功');
-    }
-    obj2.path = data.response.data;
-    obj2.name = $('#imagname2').val();
-    arr.push(obj2);
-    console.log(arr);
-});
-
-$("input[id='file-3']").fileinput({
-    language: 'zh', //设置语言
-    uploadUrl: '${request.contextPath}/upload/uploadFile', // you must set a valid URL here else you will get an error
-    allowedFileExtensions : ['jpg', 'png','gif'],
-    overwriteInitial: false,
-    maxFileSize: 1000,
-    maxFilesNum: 10,
-    maxImageWidth: 100,//图片的最大宽度
-    maxImageHeight: 100,//图片的最大高度
-    //allowedFileTypes: ['image', 'video', 'flash'],
-    enctype: 'multipart/form-data',
-    slugCallback: function(filename) {
-        console.log(filename);
-        $('#imagname3').val(filename);
-        return filename.replace('(', '_').replace(']', '_');
-    }
-}).on("filebatchselected", function(event, file) {
-    console.log('233');
-
-}).on("fileuploaded", function(event, data) {
-
-    if(data.response)
-    {
-        alert('处理成功');
-    }
-    obj3.path = data.response.data;
-    obj3.name = $('#imagname3').val();
-    arr.push(obj3);
-});
+    return false;
+}
 
 //适用产品类型checkbox
 
@@ -171,6 +65,19 @@ function checkboxArr() {
         checkboxarr.push(a);
     })
     return checkboxarr;
+}
+
+//图片JSON
+function imgArr(){
+    var arr=[];
+    $('.filename').each(function(){
+        var objt ={
+            "name":$(this).val(),
+            "imgpath":$(this).attr('data-url')
+        };
+        arr.push(objt);
+    })
+    return JSON.stringify(arr);
 }
 
 //新增添加关联
@@ -203,7 +110,7 @@ $('#add_relate').on('click',function(){
 
 //新增完成
 $('.packingAdd').on('click',function(){
-    var url = '/packingArchives/doAddPackingArchives';
+    var url = basePath+'/packingArchives/doAddPackingArchives';
     var data = {
         "bigCategoryId":bid,
         "smallCategoryId":sid,
@@ -218,7 +125,7 @@ $('.packingAdd').on('click',function(){
         "priceEndDate": jQuery('#priceEndDate').val(),
         "status": jQuery('#status').val(),
         "suitableType": JSON.stringify(checkboxArr()),
-        "imagePath":JSON.stringify(arr),
+        "imagePath":imgArr(),
         "associatedPackingId":JSON.stringify(ids),
         "bRemarks": jQuery('#bremarks').val(),
     }
