@@ -140,7 +140,7 @@ public class PackingArchivesAction {
      * @param ids
      * @return
      */
-    @RequestMapping(value = "getByIds",method = RequestMethod.GET)
+    @RequestMapping(value = "getByIds",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "GET-BY-IDS")
     @ResponseBody
     public ResultPojo getByIds(@RequestBody String[] ids){
