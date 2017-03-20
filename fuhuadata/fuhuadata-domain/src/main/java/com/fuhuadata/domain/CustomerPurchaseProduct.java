@@ -1,12 +1,13 @@
 package com.fuhuadata.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.math.BigDecimal;
 /**
  * @author wangbo
  * @date 2017-01-12 13:51:34
  */
-public class CustomerPurchaseProduct{
+public class CustomerPurchaseProduct implements Serializable{
 
     /**主键id**/
 	private Integer id;
