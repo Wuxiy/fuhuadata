@@ -12,17 +12,17 @@
 								<result property="year" column="year" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="productId" column="product_id" jdbcType="INT" javaType="java.lang.Integer" />
 								<result property="productName" column="product_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="annualDemands" column="annual_demands" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-								<result property="averagePrice" column="average_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result property="annualDemands" column="annual_demands" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="averagePrice" column="average_price" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="supplier1" column="supplier1" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="purchaseAmount1" column="purchase_amount1" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="averagePrice1" column="average_price1" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result property="averagePrice1" column="average_price1" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="supplier2" column="supplier2" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="purchaseAmount2" column="purchase_amount2" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="averagePrice2" column="average_price2" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result property="averagePrice2" column="average_price2" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="supplier3" column="supplier3" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="purchaseAmount3" column="purchase_amount3" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="averagePrice3" column="average_price3" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result property="averagePrice3" column="average_price3" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="createUserId" column="create_user_id" jdbcType="INT" javaType="java.lang.Integer" />
 								<result property="createUserName" column="create_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="lastmodifyUserId" column="lastmodify_user_id" jdbcType="INT" javaType="java.lang.Integer" />
