@@ -22,7 +22,7 @@ import java.io.Serializable;
  * @date 2017-01-12 13:51:34
  */
 @SuppressWarnings("unchecked")
-public class CustomerPurchaseProductDaoImpl  implements CustomerPurchaseProductDao {
+public class CustomerPurchaseProductDaoImpl extends BaseDao<CustomerPurchaseProduct>  implements CustomerPurchaseProductDao {
 
     public static final String ADD = "CUSTOMERPURCHASEPRODUCT.ADD";
     public static final String UPDATE = "CUSTOMERPURCHASEPRODUCT.UPDATE";
@@ -40,7 +40,7 @@ public class CustomerPurchaseProductDaoImpl  implements CustomerPurchaseProductD
     }
 
     public boolean batchInsert( List<CustomerPurchaseProduct> customerPurchaseProducts) {
-       return BaseDao.batch(sqlMapClientTemplate,ADD,customerPurchaseProducts);
+       return this.batch(sqlMapClientTemplate,ADD,customerPurchaseProducts);
     }
 
     public int updateCustomerPurchaseProductById(int id, CustomerPurchaseProduct customerPurchaseProduct) {

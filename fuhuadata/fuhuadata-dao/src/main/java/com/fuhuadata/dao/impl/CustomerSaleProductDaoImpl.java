@@ -17,7 +17,7 @@ import java.io.Serializable;
  * @date 2017-01-12 13:41:04
  */
 @SuppressWarnings("unchecked")
-public class CustomerSaleProductDaoImpl  implements CustomerSaleProductDao {
+public class CustomerSaleProductDaoImpl extends BaseDao<CustomerSaleProduct> implements CustomerSaleProductDao {
 
     public static final String ADD = "CUSTOMERSALEPRODUCT.ADD";
     public static final String UPDATE = "CUSTOMERSALEPRODUCT.UPDATE";
@@ -35,7 +35,7 @@ public class CustomerSaleProductDaoImpl  implements CustomerSaleProductDao {
     }
 
     public boolean batchInsert(List<CustomerSaleProduct> customerSaleProducts) {
-       return BaseDao.batch(sqlMapClientTemplate,ADD,customerSaleProducts);
+       return this.batch(sqlMapClientTemplate,ADD,customerSaleProducts);
     }
 
     public int updateCustomerSaleProductById(int id, CustomerSaleProduct customerSaleProduct) {
