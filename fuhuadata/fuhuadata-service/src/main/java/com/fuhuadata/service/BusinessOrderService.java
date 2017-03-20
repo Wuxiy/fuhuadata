@@ -1,4 +1,4 @@
-package com.fuhuadata.dao;
+package com.fuhuadata.service;
 
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
@@ -6,9 +6,9 @@ import com.fuhuadata.domain.query.QueryBusinessOrder;
 import java.util.List;
 
 /**
- * Created by hexingfu on 2017/3/17.
+ * Created by hexingfu on 2017/3/18.
  */
-public interface BusinessOrderDao {
+public interface BusinessOrderService {
 
     public int count(QueryBusinessOrder queryBusinessOrder);
 
@@ -18,5 +18,4 @@ public interface BusinessOrderDao {
      * @return
      */
     public List<BusinessOrder> getOrderLisPageByQuery(QueryBusinessOrder queryBusinessOrder);
-
 }

@@ -23,7 +23,7 @@
                             <div class="form-group ">
                                 <label class="col-xs-1 control-label">包材类型名称</label>
                                 <div class="col-xs-3">
-                                    <input class="form-control" type="text" id="packName" disabled/>
+                                    <input class="form-control" type="text" id="packName"/>
                                 </div>
                                 <label class="col-xs-1 control-label">规格</label>
                                 <div class="col-xs-3">

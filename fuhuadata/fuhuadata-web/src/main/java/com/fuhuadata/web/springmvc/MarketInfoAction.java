@@ -13,6 +13,7 @@ import com.fuhuadata.service.CustomerSaleProductService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,7 +28,7 @@ import java.util.Map;
  * Created by hexingfu on 2017/3/14.
  */
 @Controller
-@RequestMapping("/customerPurchaseProduct/*")
+@RequestMapping("/customerMarketInfo/*")
 public class MarketInfoAction {
 
     private final static Logger log = Logger.getLogger(MarketInfoAction.class);
@@ -113,7 +114,7 @@ public class MarketInfoAction {
      */
     @ResponseBody
     @RequestMapping("/addCPPList")
-    public ResultPojo addCPPList(List<CustomerPurchaseProduct> cpps){
+    public ResultPojo addCPPList(@RequestBody List<CustomerPurchaseProduct> cpps){
         ResultPojo pojo = new ResultPojo();
         pojo.setData(this.customerPurchaseProductService.batchInsert(cpps));
         return pojo;
@@ -125,7 +126,7 @@ public class MarketInfoAction {
      */
     @ResponseBody
     @RequestMapping("/addCSPList")
-    public ResultPojo addCSPList(List<CustomerSaleProduct> csps){
+    public ResultPojo addCSPList(@RequestBody  List<CustomerSaleProduct> csps){
         ResultPojo pojo = new ResultPojo();
         pojo.setData(this.customerSaleProductService.batchInsert(csps));
         return pojo;

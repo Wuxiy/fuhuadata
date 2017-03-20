@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 public class BusinessOrder implements Serializable{
 
     private String orderId;//订单编号
-    private String nc_order_id;//NC外销合同号
+    private String ncOrderId;//NC外销合同号
     private String businessId;//商机编号
     private String customerId;//客户编号
     private String customerDutyParagraph;//客户税号
@@ -66,12 +66,12 @@ public class BusinessOrder implements Serializable{
         this.orderId = orderId;
     }
 
-    public String getNc_order_id() {
-        return nc_order_id;
+    public String getNcOrderId() {
+        return ncOrderId;
     }
 
-    public void setNc_order_id(String nc_order_id) {
-        this.nc_order_id = nc_order_id;
+    public void setNcOrderId(String ncOrderId) {
+        this.ncOrderId = ncOrderId;
     }
 
     public String getBusinessId() {
