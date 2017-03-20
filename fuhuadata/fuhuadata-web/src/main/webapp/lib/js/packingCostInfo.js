@@ -133,7 +133,7 @@ function checkboxArr() {
         a =  $(this).val();
         checkboxarr.push(a);
     })
-    return checkboxarr;
+    return JSON.stringify(checkboxarr);
 }
 
 //编辑
@@ -165,7 +165,7 @@ function checkboxArr() {
             "consumption": jQuery('#consumption').val(),
             "priceEndDate": jQuery('#priceEndDate').val(),
             "status": jQuery('#status').val(),
-            "suitableType": JSON.stringify(checkboxArr()),
+            "suitableType": checkboxArr(),
             "imagePath":imgArr(),
             "associatedPackingId":Ids(),
             "bRemarks": jQuery('#bRemarks').val(),
