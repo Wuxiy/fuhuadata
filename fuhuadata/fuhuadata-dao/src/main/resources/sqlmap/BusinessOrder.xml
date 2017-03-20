@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="BusinessOrder">
+    <typeAlias alias="BusinessOrder" type="com.fuhuadata.domain.BusinessOrder"/>
+    <typeAlias alias="QueryBusinessOrder" type="com.fuhuadata.domain.query.QueryBusinessOrder"/>
+
+    <sql id="QUERY-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotEmpty prepend=" AND " property="componentName">
+                component_name = #componentName#
+            </isNotEmpty>
+            <isNotNull prepend=" AND " property="suitableProduct">
+                suitable_product =  #suitableProduct#
+            </isNotNull>
+        </dynamic>
+    </sql>
+
+    <select id="count" parameterClass="QueryBusinessOrder" resultClass="java.lang.Integer">
+        select count(*) from business_order
+        <isParameterPresent>
+            <include refid="QUERY-COMMON"/>
+        </isParameterPresent>
+    </select>
+
+    <select id="" parameterClass="QueryBusinessOrder" resultClass="BusinessOrder">
+
+    </select>
+
+
+</sqlMap>

@@ -3,8 +3,13 @@
     <div class="nav-deputy shadow-out clearfix">
         <ul id="deputyNav" class="nav nav-tabs pull-left">
             <li><a href="${request.contextPath}/customerBaseInfo/intoCustomerBaseInfoDetails">基本信息</a></li>
+<<<<<<< HEAD
             <li class="active"><a href="${request.contextPath}/customerPurchaseProduct/entrance" >市场信息</a></li>
             <li><a href="${request.contextPath}/customerLinkman//intoCustomerLinkmanInfo" >联系人</a></li>
+=======
+            <li class="active"><a href="${request.contextPath}/customerMarketInfo/entrance" >市场信息</a></li>
+            <li><a href="" >联系人</a></li>
+>>>>>>> d81b2b5abb8ddaa249b3bd75a0c0bd39d68b63b2
             <li><a href="" >产品要求</a></li>
             <li><a href="" >订单信息</a></li>
             <li><a href="" >订单默认要求</a></li>
@@ -99,7 +104,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-3" lang="zh">采购季节</label>
-                                <div class="col-xs-2"><input id="purchasingSeason" class="form-control" type="text" value="每年3-5月" /></div>
+                                <div class="col-xs-2"><input id="purchasingSeason" class="form-control" type="text" value="" /></div>
                                 <label class="control-label col-xs-2" lang="zh">活跃周期</label>
                                 <div class="col-xs-2"><input id="activePeriod" class="form-control" type="text" value="" /></div>
                             </div>
@@ -149,7 +154,7 @@
                             <button data-form-btn="add" data-form-target="proCon" type="button" class="btn btn-block btn-primary" lang="zh">继续添加产品</button>
                         </div>
                         <div class="col-xs-2">
-                            <button id="cpps_up" data-form-btn="complete" type="button" class="btn btn-block btn-primary" data-dismiss="modal" lang="zh">完成</button>
+                            <button id="cpps_up" data-form-btn="complete" type="button" class="btn btn-block btn-primary" lang="zh">完成</button>
                         </div>
                         <div class="col-xs-2">
                             <button type="button" class="btn btn-block btn-default" data-dismiss="modal" lang="zh">取消</button>
@@ -160,13 +165,14 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/common/common.js"></script>
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/common/ajax.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerMarketingAjax.js"></script>
 <script>
     $(function () {
         //获取数据
-        getData('${request.contextPath}/customerPurchaseProduct/init','POST',GetRequest(),pop);
+        getData('${request.contextPath}/customerMarketInfo/init','POST',GetRequest(),pop);
         //给select添加年份，从2014年到当前
         $('#cpps_year,#csps_year,#year').html(function (n,old) {
             old = '';
@@ -183,99 +189,107 @@
         $(document).on('change.year','#cpps_year',function (e) {
             var year = $(e.target).val();
             var cusId = GetRequest().customerId;
-            console.log(cusId);
             var data = {
                 year:year,
                 customerId:cusId
             };
-            getData('${request.contextPath}/customerPurchaseProduct/getCPPListByCidAndYear','POST',data,cpps);
+            getData('${request.contextPath}/customerMarketInfo/getCPPListByCidAndYear','POST',data,cpps);
         });
         //切换销售年份刷新数据
         $(document).on('change.year','#csps_year',function (e) {
             var year = $(e.target).val();
             var cusId = GetRequest().customerId;
-            console.log(cusId);
             var data = {
                 year:year,
                 customerId:cusId
             };
-            getData('${request.contextPath}/customerPurchaseProduct/getSaleProductListByCidAndYear','POST',data,csps);
+            getData('${request.contextPath}/customerMarketInfo/getSaleProductListByCidAndYear','POST',data,csps);
         });
-        //点击新增改变modal样式和属性
+        //构造采购产品modal
         $(document).on('click.addCpps','#add_cpps',function(){
-            var modal = $('#cusPro');
             var comBtn = $('[data-form-btn="complete"]');
             $('#table').html('');
-            var tbody = '';
-            tbody += '<tbody name="cppsTbody">';
-            tbody += '<tr><th>采购产品</th>';
-            tbody += '<th><input class="form-control" type="text" value=""></th>';
-            tbody += '<th>年需求量</th>';
-            tbody += '<th><input class="form-control" type="text" value=""></th>';
-            tbody += '<th>平均单价(美元)</th>';
-            tbody += '<th><input class="form-control" type="text" value=""></th></tr>';
-            tbody += '<tr><td>供应商1</td>'
-            tbody += '<td><input class="form-control" type="text" value=""></td>';
-            tbody += '<td>年采购量</td>'
-            tbody += '<td><input class="form-control" type="text" value=""></td>';
-            tbody += '<td>平均单价</td>';
-            tbody += '<td><input class="form-control" type="text" value=""></td></tr>';
-            tbody += '<tr><td>供应商2</td>'
-            tbody += '<td><input class="form-control" type="text" value=""></td>';
-            tbody += '<td>年采购量</td>'
-            tbody += '<td><input class="form-control" type="text" value=""></td>';
-            tbody += '<td>平均单价</td>';
-            tbody += '<td><input class="form-control" type="text" value=""></td></tr>';
-            tbody += '<tr><td>供应商3</td>'
-            tbody += '<td><input class="form-control" type="text" value=""></td>';
-            tbody += '<td>年采购量</td>'
-            tbody += '<td><input class="form-control" type="text" value=""></td>';
-            tbody += '<td>平均单价</td>';
-            tbody += '<td><input class="form-control" type="text" value=""></td></tr></tbody>';
-            $('#table').append(tbody);
+            $('#table').append(cppsTable());
             comBtn.attr('id','cpps_up');//变更完成按钮
     });
+        //构造销售产品modal
         $(document).on('click.addCsps','#add_csps',function(){
-            var modal = $('#cusPro');
             var comBtn = $('[data-form-btn="complete"]');
             $('#table').html('');
+            $('#table').append(cspsTable());
+            comBtn.attr('id','csps_up');//变更完成按钮
+        });
+        //客户采购产品批量提交
+        $(document).on('click.up','#cpps_up',function() {
+            upData('${request.contextPath}/customerMarketInfo/addCPPList','POST',cppsObj(),"application/json");
+        })
+        //客户销售产品批量提交
+        $(document).on('click.up','#csps_up',function() {
+            upData('${request.contextPath}/customerMarketInfo/addCSPList','POST',cspsObj(),"application/json");
+        })
+
+        //构造销售产品表格
+        function cspsTable(){
             var tbody = '';
             tbody += '<tbody name="cspsTbody">';
             tbody += '<tr><th>销售产品</th>';
-            tbody += '<th><input class="form-control" type="text" value=""></th>';
+            tbody += '<th><input name="productName" class="form-control" type="text" value=""></th>';
             tbody += '<th>年销售量</th>';
-            tbody += '<th><input class="form-control" type="text" value=""></th>';
+            tbody += '<th><input name="yearSalesTotal" class="form-control" type="text" value=""></th>';
             tbody += '<th>品牌</th>';
-            tbody += '<th><input class="form-control" type="text" value=""></th>';
+            tbody += '<th><input name="brand" class="form-control" type="text" value=""></th>';
             tbody += '<th>营销手段</th>';
-            tbody += '<th><input class="form-control" type="text" value=""></th></tr>';
+            tbody += '<th><input name="marketingMethod" class="form-control" type="text" value=""></th></tr>';
             tbody += '<tr><td>销售目的国1</td>'
-            tbody += '<td><input class="form-control" type="text" value=""></td>';
+            tbody += '<td><input name="destinationCountry1" class="form-control" type="text" value=""></td>';
             tbody += '<td>年销售量</td>'
-            tbody += '<td><input class="form-control" type="text" value=""></td>';
+            tbody += '<td><input name="yearSales1" class="form-control" type="text" value=""></td>';
             tbody += '<td colspan="2">所占市场份额</td>';
-            tbody += '<td colspan="2"><input class="form-control" type="text" value=""></td></tr>';
+            tbody += '<td colspan="2"><input name="marketShare1" class="form-control" type="text" value=""></td></tr>';
             tbody += '<tr><td>销售目的国2</td>'
-            tbody += '<td><input class="form-control" type="text" value=""></td>';
+            tbody += '<td><input name="destinationCountry2" class="form-control" type="text" value=""></td>';
             tbody += '<td>年销售量</td>'
-            tbody += '<td><input class="form-control" type="text" value=""></td>';
+            tbody += '<td><input name="yearSales2" class="form-control" type="text" value=""></td>';
             tbody += '<td colspan="2">所占市场份额</td>';
-            tbody += '<td colspan="2"><input class="form-control" type="text" value=""></td></tr>';
+            tbody += '<td colspan="2"><input name="marketShare2" class="form-control" type="text" value=""></td></tr>';
             tbody += '<tr><td>销售目的国3</td>'
-            tbody += '<td><input class="form-control" type="text" value=""></td>';
+            tbody += '<td><input name="destinationCountry3" class="form-control" type="text" value=""></td>';
             tbody += '<td>年销售量</td>'
-            tbody += '<td><input class="form-control" type="text" value=""></td>';
+            tbody += '<td><input name="yearSales3" class="form-control" type="text" value=""></td>';
             tbody += '<td colspan="2">所占市场份额</td>';
-            tbody += '<td colspan="2"><input class="form-control" type="text" value=""></td></tr></tbody>';
-            $('#table').append(tbody);
-            comBtn.attr('id','csps_up');//变更完成按钮
-        });
-
-        //点击完成按钮提交
-//        $(document).on('click.csps_up','#csps_up',function(){
-//            upData('','POST',,"application/json")
-//        }
-
+            tbody += '<td colspan="2"><input name="marketShare3" class="form-control" type="text" value=""></td></tr></tbody>';
+            return tbody;
+        }
+        //构造采购产品表格
+        function cppsTable() {
+            var tbody = '';
+            tbody += '<tbody name="cppsTbody">';
+            tbody += '<tr><th>采购产品</th>';
+            tbody += '<th><input name="productName" class="form-control" type="text" value=""></th>';
+            tbody += '<th>年需求量</th>';
+            tbody += '<th><input name="annualDemands" class="form-control" type="text" value=""></th>';
+            tbody += '<th>平均单价(美元)</th>';
+            tbody += '<th><input name="averagePrice" class="form-control" type="text" value=""></th></tr>';
+            tbody += '<tr><td>供应商1</td>'
+            tbody += '<td><input name="supplier1" class="form-control" type="text" value=""></td>';
+            tbody += '<td>年采购量</td>'
+            tbody += '<td><input name="purchaseAmount1" class="form-control" type="text" value=""></td>';
+            tbody += '<td>平均单价</td>';
+            tbody += '<td><input name="averagePrice1" class="form-control" type="text" value=""></td></tr>';
+            tbody += '<tr><td>供应商2</td>'
+            tbody += '<td><input name="supplier2" class="form-control" type="text" value=""></td>';
+            tbody += '<td>年采购量</td>'
+            tbody += '<td><input name="purchaseAmount2" class="form-control" type="text" value=""></td>';
+            tbody += '<td>平均单价</td>';
+            tbody += '<td><input name="averagePrice2" class="form-control" type="text" value=""></td></tr>';
+            tbody += '<tr><td>供应商3</td>'
+            tbody += '<td><input name="supplier3" class="form-control" type="text" value=""></td>';
+            tbody += '<td>年采购量</td>'
+            tbody += '<td><input name="purchaseAmount3" class="form-control" type="text" value=""></td>';
+            tbody += '<td>平均单价</td>';
+            tbody += '<td><input name="averagePrice3" class="form-control" type="text" value=""></td></tr></tbody>';
+            return tbody;
+        }
     })
 </script>
 

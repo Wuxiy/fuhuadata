@@ -1,7 +1,9 @@
 /**
- * 市场信心页处理数据
+ * 获取数据
  */
+//市场信息页面所有数据
 function pop(result){
+    // console.log(result);
     var data = result;
     //获取采购产品
     cpps(data);
@@ -19,9 +21,7 @@ function pop(result){
     $('#cooperationDuration').val(coop.cooperationDuration);//合作时间
 }
 
-/**
- * 采购产品获取数据
- */
+//客户采购产品
 function cpps(result){
     var data;
     //对data的层级进行判断
@@ -64,9 +64,7 @@ function cpps(result){
     });
 }
 
-/**
- * 销售产品获取数据
- */
+//客户销售产品
 function csps(result) {
     var data;
     //对data的层级进行判断
@@ -88,21 +86,21 @@ function csps(result) {
         tbody += '<td class="text-center">'+item.brand+'</td>';
         tbody += '<th class="text-center">营销手段</th>';
         tbody += '<td class="text-center">'+item.marketingMethod+'</td></tr>';
-        tbody += '<tr><td>销售目的国1</td>'
+        tbody += '<tr><td>销售目的国1</td>';
         tbody += '<td>'+item.destinationCountry1+'</td>';
-        tbody += '<td>年销售量</td>'
+        tbody += '<td>年销售量</td>';
         tbody += '<td>'+item.yearSales1+'</td>';
         tbody += '<td colspan="2">所占市场份额</td>';
         tbody += '<td colspan="2">'+item.marketShare1+'</td></tr>';
-        tbody += '<tr><td>销售目的国2</td>'
+        tbody += '<tr><td>销售目的国2</td>';
         tbody += '<td>'+item.destinationCountry2+'</td>';
-        tbody += '<td>年销售量</td>'
+        tbody += '<td>年销售量</td>';
         tbody += '<td>'+item.yearSales2+'</td>';
         tbody += '<td colspan="2">所占市场份额</td>';
         tbody += '<td colspan="2">'+item.marketShare2+'</td></tr>';
-        tbody += '<tr><td>销售目的国3</td>'
+        tbody += '<tr><td>销售目的国3</td>';
         tbody += '<td>'+item.destinationCountry3+'</td>';
-        tbody += '<td>年销售量</td>'
+        tbody += '<td>年销售量</td>';
         tbody += '<td>'+item.yearSales3+'</td>';
         tbody += '<td colspan="2">所占市场份额</td>';
         tbody += '<td colspan="2">'+item.marketShare3+'</td></tr></tbody>';
@@ -112,19 +110,22 @@ function csps(result) {
 }
 
 /**
- *采购产品上传对象
+ * 上传数据
  */
+//客户采购产品批量上传
 function cppsObj() {
     var table = $('#table');
     var cpps = [];
-    table.find('tbody').each(function(){
+    table.find('[name="cppsTbody"]').each(function(){
         var $this = $(this);
+        // console.log($this);
         var obj = {};
         obj.year = $('#year').val();
+        obj.customerId = GetRequest().customerId;
         obj.productName = $this.find('[name="productName"]').val();
         obj.annualDemands = $this.find('[name="annualDemands"]').val();
         obj.averagePrice = $this.find('[name="averagePrice"]').val();
-        obj.supplier1 = $this.find('[name="supplier1"]').val();
+        obj.marketingMethod = $this.find('[name="marketingMethod"]').val();
         obj.purchaseAmount1 = $this.find('[name="purchaseAmount1"]').val();
         obj.averagePrice1 = $this.find('[name="averagePrice1"]').val();
         obj.supplier2 = $this.find('[name="supplier2"]').val();
@@ -135,32 +136,32 @@ function cppsObj() {
         obj.averagePrice3 = $this.find('[name="averagePrice3"]').val();
         cpps.push(obj);
     });
+    console.log(JSON.stringify(cpps));
     return JSON.stringify(cpps);
 }
 
-/**
- *销售产品上传对象
- */
+//客户销售产品批量上传
 function cspsObj() {
     var table = $('#table');
     var csps = [];
-    table.find('tbody').each(function(){
+    table.find('[name="cspsTbody"]').each(function(){
         var $this = $(this);
         var obj = {};
         obj.year = $('#year').val();
+        obj.customerId = GetRequest().customerId;
         obj.productName = $this.find('[name="productName"]').val();
-        obj.annualDemands = $this.find('[name="annualDemands"]').val();
-        obj.averagePrice = $this.find('[name="averagePrice"]').val();
-        obj.supplier1 = $this.find('[name="supplier1"]').val();
-        obj.purchaseAmount1 = $this.find('[name="purchaseAmount1"]').val();
-        obj.averagePrice1 = $this.find('[name="averagePrice1"]').val();
-        obj.supplier2 = $this.find('[name="supplier2"]').val();
-        obj.purchaseAmount2 = $this.find('[name="purchaseAmount2"]').val();
-        obj.averagePrice2 = $this.find('[name="averagePrice2"]').val();
-        obj.supplier3 = $this.find('[name="supplier3"]').val();
-        obj.purchaseAmount3 = $this.find('[name="purchaseAmount3"]').val();
-        obj.averagePrice3 = $this.find('[name="averagePrice3"]').val();
-        cpps.push(obj);
+        obj.yearSalesTotal = $this.find('[name="yearSalesTotal"]').val();
+        obj.brand = $this.find('[name="brand"]').val();
+        obj.destinationCountry1 = $this.find('[name="destinationCountry1"]').val();
+        obj.yearSales1 = $this.find('[name="yearSales1"]').val();
+        obj.marketShare1 = $this.find('[name="marketShare1"]').val();
+        obj.destinationCountry2 = $this.find('[name="destinationCountry1"]').val();
+        obj.yearSales2 = $this.find('[name="yearSales1"]').val();
+        obj.marketShare2 = $this.find('[name="marketShare1"]').val();
+        obj.destinationCountry3 = $this.find('[name="destinationCountry1"]').val();
+        obj.yearSales3 = $this.find('[name="yearSales1"]').val();
+        obj.marketShare3 = $this.find('[name="marketShare1"]').val();
+        csps.push(obj);
     });
     return JSON.stringify(csps);
 }
