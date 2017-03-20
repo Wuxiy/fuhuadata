@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.ibatis.sqlmap.client.SqlMapExecutor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.SqlMapClientCallback;
 import org.springframework.stereotype.Component;
@@ -21,7 +22,7 @@ import java.io.Serializable;
  * @date 2017-01-12 13:51:34
  */
 @SuppressWarnings("unchecked")
-public class CustomerPurchaseProductDaoImpl extends BaseDao implements CustomerPurchaseProductDao {
+public class CustomerPurchaseProductDaoImpl  implements CustomerPurchaseProductDao {
 
     public static final String ADD = "CUSTOMERPURCHASEPRODUCT.ADD";
     public static final String UPDATE = "CUSTOMERPURCHASEPRODUCT.UPDATE";
@@ -31,42 +32,43 @@ public class CustomerPurchaseProductDaoImpl extends BaseDao implements CustomerP
     public static final String GET_BY_ID = "CUSTOMERPURCHASEPRODUCT.GET-BY-ID";
     public static final String GET_PAGE = "CUSTOMERPURCHASEPRODUCT.GET-PAGE";
     public static final String COUNT = "CUSTOMERPURCHASEPRODUCT.COUNT";
-    
+    @Autowired
+    private SqlMapClientTemplate sqlMapClientTemplate;
     public CustomerPurchaseProduct addCustomerPurchaseProduct(CustomerPurchaseProduct customerPurchaseProduct) {
-		customerPurchaseProduct.setId((Integer) this.insert(ADD, customerPurchaseProduct));
+		customerPurchaseProduct.setId((Integer) sqlMapClientTemplate.insert(ADD, customerPurchaseProduct));
     	return customerPurchaseProduct;
     }
 
     public boolean batchInsert( List<CustomerPurchaseProduct> customerPurchaseProducts) {
-       return this.batch(ADD,customerPurchaseProducts);
+       return BaseDao.batch(sqlMapClientTemplate,ADD,customerPurchaseProducts);
     }
 
     public int updateCustomerPurchaseProductById(int id, CustomerPurchaseProduct customerPurchaseProduct) {
     	customerPurchaseProduct.setId(id);
-		return this.update(UPDATE, customerPurchaseProduct);
+		return sqlMapClientTemplate.update(UPDATE, customerPurchaseProduct);
     }
     
     public int deleteCustomerPurchaseProductById(int id) {
-    	return this.update(DELETE_BY_ID, id);
+    	return sqlMapClientTemplate.update(DELETE_BY_ID, id);
     }
     
     public List<CustomerPurchaseProduct> getAllCustomerPurchaseProducts() {
-    	return this.queryForList(GET_ALL);
+    	return sqlMapClientTemplate.queryForList(GET_ALL);
     }
     	
     public List<CustomerPurchaseProduct> getCustomerPurchaseProductsByQuery(QueryCustomerPurchaseProduct queryCustomerPurchaseProduct) {
-    	return this.queryForList(GET_BY_QUERY, queryCustomerPurchaseProduct);
+    	return sqlMapClientTemplate.queryForList(GET_BY_QUERY, queryCustomerPurchaseProduct);
     }
     	
     public CustomerPurchaseProduct getCustomerPurchaseProductById(int id) {
-    	return (CustomerPurchaseProduct) this.queryForObject(GET_BY_ID, id);
+    	return (CustomerPurchaseProduct) sqlMapClientTemplate.queryForObject(GET_BY_ID, id);
     }
     
     public List<CustomerPurchaseProduct> getCustomerPurchaseProductsByPage(QueryCustomerPurchaseProduct queryCustomerPurchaseProduct) {
-    	return this.queryForList(GET_PAGE, queryCustomerPurchaseProduct);
+    	return sqlMapClientTemplate.queryForList(GET_PAGE, queryCustomerPurchaseProduct);
     }
     	
     public int count(QueryCustomerPurchaseProduct queryCustomerPurchaseProduct) {
-    	return ((Integer) this.queryForObject(COUNT, queryCustomerPurchaseProduct)).intValue();
+    	return ((Integer) sqlMapClientTemplate.queryForObject(COUNT, queryCustomerPurchaseProduct)).intValue();
     }
 }

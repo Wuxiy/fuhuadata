@@ -11,12 +11,12 @@ import java.util.List;
 /**
  * Created by hexingfu on 2017/3/15.
  */
-public class BaseDao extends SqlMapClientTemplate{
-    public boolean batch(String statement, List<?> list){
+public class BaseDao {
+    public static boolean batch(SqlMapClientTemplate sqlMapClientTemplate,String statement, List<?> list){
         final List<?> objs = list;
         final String stmt = statement;
         try {
-            this.execute(new SqlMapClientCallback<Object>() {
+            sqlMapClientTemplate.execute(new SqlMapClientCallback<Object>() {
                 public Object doInSqlMapClient(SqlMapExecutor executor) throws SQLException {
                     executor.startBatch();
                     for(int i=0;i<objs.size();i++){
