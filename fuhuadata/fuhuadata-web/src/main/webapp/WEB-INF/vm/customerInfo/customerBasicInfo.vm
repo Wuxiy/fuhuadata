@@ -25,12 +25,12 @@
                 <!--客户基本信息-->
                 <div class="panel panel-default panel-edit view-HD-lg">
                     <div class="panel-heading">
-                        <button data-form-btn="edit" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
+                        <button id="editCustomerBasic" data-form-btn="edit" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
                             编辑
                         </button>
                         <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden">
-                            <button data-form-btn="cancel" class="btn" lang="zh">取消</button>
-                            <button id="customerBasic" data-form-btn="save" class="btn btn-primary" lang="zh">保存</button>
+                            <button id="cancelCustomerBasic" data-form-btn="cancel" class="btn" lang="zh">取消</button>
+                            <button id="saveCustomerBasic" data-form-btn="save" class="btn btn-primary" lang="zh">保存</button>
                         </div>
                         <h3 class="panel-title" lang="zh">
                             客户基本信息
@@ -137,7 +137,7 @@
                                 </label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input id="registeredFunds" class="form-control" type="text" value="5000万" />
+                                        <input id="registeredFunds" class="form-control" type="text" value="" />
                                         <span class="input-group-addon">$</span>
                                     </div>
                                 </div>
@@ -145,13 +145,13 @@
                                     企业电话
                                 </label>
                                 <div class="col-xs-2">
-                                    <input id="enterprisePhone" class="form-control" type="tel" value="18381659396" />
+                                    <input id="enterprisePhone" class="form-control" type="tel" value="" />
                                 </div>
                                 <label class="control-label col-xs-1" lang="zh">
                                     企业邮箱
                                 </label>
                                 <div class="col-xs-2">
-                                    <input id="enterpriseEmail" class="form-control" type="email" value="nufarm@163.com" />
+                                    <input id="enterpriseEmail" class="form-control" type="email" value="" />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -159,7 +159,7 @@
                                     注册地址
                                 </label>
                                 <div class="col-xs-8">
-                                    <textarea id="registeredAddress" class="form-control" rows="2" >美国</textarea>
+                                    <textarea id="registeredAddress" class="form-control" rows="2" ></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -167,7 +167,7 @@
                                     经营范围
                                 </label>
                                 <div class="col-xs-8">
-                                    <textarea id="managementScope" class="form-control" rows="2" >草甘膦、澳虎、锐必达</textarea>
+                                    <textarea id="managementScope" class="form-control" rows="2" ></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -212,22 +212,22 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group j-file">
-                                <label class="control-label col-xs-1" lang="zh">资质文件<span class="count">1</span></label>
-                                <div class="col-xs-3">
-                                    <div class="input-group">
-                                        <p class="form-control j-inputFile"></p><input class="hidden" type="file"/>
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-xs btn-primary editView hidden j-upFile" lang="zh" type="button">上传</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-2 col-xs-offset-1">
-                                    <button class="btn-link editView hidden j-addFile" type="button">继续添加资质文件</button>
-                                </div>
-                            </div>
+##                            <div class="form-group">
+##                                <label class="control-label col-xs-1" lang="zh">资质文件</label>
+##                                <div class="col-xs-3">
+##                                    <div class="input-group">
+##                                        <input type="file"/>
+##                                        <div class="input-group-btn">
+##                                            <button class="btn btn-xs btn-primary editView hidden" lang="zh" type="button">上传</button>
+##                                        </div>
+##                                    </div>
+##                                </div>
+##                            </div>
+##                            <div class="form-group">
+##                                <div class="col-xs-2 col-xs-offset-1">
+##                                    <button class="btn-link editView hidden j-addFile" type="button">继续添加资质文件</button>
+##                                </div>
+##                            </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-1" lang="zh">
                                     工厂位置
@@ -242,20 +242,7 @@
                                     <textarea id="productLine" class="form-control" rows="2" ></textarea>
                                 </div>
                             </div>
-                            <div name="customerMakeProduct" class="form-group">
-                                <label class="control-label col-xs-1">
-                                    生产产品<span class="count">1</span>
-                                </label>
-                                <div class="col-xs-2">
-                                    <input class="form-control" type="text" />
-                                </div>
-                                <label class="control-label col-xs-1">
-                                    <span lang="zh">产能</span>
-                                </label>
-                                <div class="col-xs-2">
-                                    <input class="form-control" type="text" />
-                                </div>
-                            </div>
+##                            这里添加客户生产产品
                             <div class="form-group">
                                 <div class="col-xs-2 col-xs-offset-1">
                                     <button data-form-btn='add' id='addPro' class="btn-link editView hidden" type="button">继续添加产品</button>
@@ -282,7 +269,7 @@
                                     机会来源<sup class="not-null editView hidden">*</sup>
                                 </label>
                                 <div class="col-xs-2">
-                                    <select id="otherOpportunity" class="form-control else">
+                                    <select id="opportunitySource" class="form-control else">
                                         <option selected="" value="——选择机会来源——">——选择机会来源——</option>
                                         <option value="1">展会</option>
                                         <option value="2">门户网站</option>
@@ -293,7 +280,7 @@
                                     </select>
                                 </div>
                                 <div class="col-xs-2 elseInput hidden">
-                                    <input id="" class="form-control" type="text" placeholder="输入机会来源" lang="zh"/>
+                                    <input id="otherOpportunity" class="form-control" type="text" placeholder="输入机会来源" lang="zh"/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -306,13 +293,13 @@
                             </div>
                             <div class="form-group editHide">
                                 <label class="control-label col-xs-1" lang="zh">
-                                    修改人
+                                    最后编辑人
                                 </label>
                                 <div class="col-xs-2">
                                     <input id="createUserName" class="form-control noEdit" disabled value="">
                                 </div>
                                 <label class="control-label col-xs-1" lang="zh">
-                                    修改时间
+                                    编辑时间
                                 </label>
                                 <div class="col-xs-2">
                                     <input id="createTime"class="form-control noEdit" disabled value="">
@@ -342,7 +329,7 @@
                                     企业简介
                                 </label>
                                 <div class="col-xs-8">
-                                    <textarea id="companyInfo"class="form-control" rows="4" >纽发姆在澳大利亚、新西兰、美洲、欧洲和亚洲等地拥有生产基地和销售机构，全球2600多名员工共同致力于向广大农民和经销商提供高质量的农药产品和一流的市场技术支持，纽发姆目前在全球共登记了约2100多个农药产品，并向100多个国家销售</textarea>
+                                    <textarea id="companyInfo"class="form-control" rows="4" ></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -350,7 +337,7 @@
                                     发展历程
                                 </label>
                                 <div class="col-xs-8">
-                                    <textarea id="developHis" class="form-control" rows="4" >纽发姆在澳大利亚、新西兰、美洲、欧洲和亚洲等地拥有生产基地和销售机构，全球2600多名员工共同致力于向广大农民和经销商提供高质量的农药产品和一流的市场技术支持，纽发姆目前在全球共登记了约2100多个农药产品，并向100多个国家销售</textarea>
+                                    <textarea id="developHis" class="form-control" rows="4" ></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -358,17 +345,51 @@
                                     销售网络
                                 </label>
                                 <div class="col-xs-8">
-                                    <textarea id="sellNetwork" class="form-control" rows="4" >纽发姆在澳大利亚、新西兰、美洲、欧洲和亚洲等地拥有生产基地和销售机构，全球2600多名员工共同致力于向广大农民和经销商提供高质量的农药产品和一流的市场技术支持，纽发姆目前在全球共登记了约2100多个农药产品，并向100多个国家销售</textarea>
+                                    <textarea id="sellNetwork" class="form-control" rows="4" ></textarea>
                                 </div>
                             </div>
-                            <div name="customField" class="form-group">
-                            <label name="customField-title" class="control-label col-xs-1" lang="zh">
-                                自定义字段1
-                            </label>
-                            <div class="col-xs-8">
-                                <textarea  name="customField-text" class="form-control" rows="4" ></textarea>
+##                            这里添加自定义字段
+                            <div class="form-group">
+                                <div class="col-xs-2 col-xs-offset-1">
+                                    <button data-form-btn='add' data-target="#addCustomField" data-toggle="modal" class="btn-link editView hidden" type="button">添加自定义字段</button>
+                                </div>
                             </div>
-                        </div>
+##                           customeField  modal
+                            <div class="modal fade" id="addCustomField" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-horizontal">
+                                                <div class="form-group">
+                                                    <label for="" class="control-label col-xs-2">名称</label>
+                                                    <div class="col-xs-4">
+                                                        <input type="text" class="form-control" value="">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="" class="control-label col-xs-2">内容</label>
+                                                    <div class="col-xs-9">
+                                                        <textarea class="form-control" name="" rows="8" value=""></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="col-xs-2 col-xs-offset-4">
+                                                <button data-form-btn="complete" type="button" class="btn btn-block btn-primary" data-dismiss="modal" lang="zh">完成</button>
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <button type="button" class="btn btn-block btn-default" data-dismiss="modal" lang="zh">取消</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group editHide">
                                 <label class="control-label col-xs-1" lang="zh">
                                     最后编辑人
@@ -390,52 +411,8 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/scaffolding.js"></script>
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customerInfo.js"></script>
-<script>
-    $(function () {
-        //获取初始数据
-        getData('/customerBaseInfo/showCustomerBaseInfoDetails','POST',GetRequest(),customerBasicInfo);
-
-        //添加产品
-        $(document).on('click.add','#addPro',function () {
-            var row = '';
-                row += '<div name="customerMakeProduct" class="form-group" style="position:relative;">';
-                row += '<label class="col-xs-1 control-label" style="position: relative">生产产品</label>';
-                row += '<div class="col-xs-2"><input class="form-control" type="text" value=""></div>';
-                row += '<label class="col-xs-1  control-label">产能</label>';
-                row += '<div class="col-xs-2"><input class="form-control" type="text" value=""></div>';
-                row += '</div>';
-            $('#addPro').parents('.form-group').before(row);
-            reorderPro();
-        });
-
-        //选择其他选项，切换显示
-        $(document).on('change.view','[name="enterpriseNature"]',function (e) {
-            var thisEl = $(this);
-            thisE.focus().blur();
-            radioChecked(thisEl);
-        });
-//        $(document).on('change.view','[name="otherOpportunity"]',selectElse);
-
-        //客户基本信息提交
-        $(document).on('click.up','#customerBasic',function(){
-            upData('/customerBaseInfo/updateCustomerBaseInfo','POST',customerBasicFormObj(),"application/json");
-        });
-        //客户百科提交
-        $(document).on('click.up','#addEncyclopedia',function(){
-            upData('','POST',customerEncyclopediaObj());
-        });
-    })
-
-    /**
-     * 生产产品重排序
-     */
-    function reorderPro(){
-        $('[name="customerMakeProduct"]').find('label:first-child').html(function (n,old) {
-            if(n!=0){
-                return '<button type="button" class="close" data-form-btn="del" data-form-target="form-group" style="position: absolute;top: 3px;left: 24px;">×</button>生产产品' + parseInt(n+1);
-            }
-        });
-    }
-</script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerBasicAjax.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerBasicInteraction.js"></script>
