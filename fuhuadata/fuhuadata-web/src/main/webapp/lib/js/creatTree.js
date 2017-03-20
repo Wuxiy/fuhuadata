@@ -53,6 +53,11 @@
         this.on('click.getData','li[id]>a',function(e){
             //阻止a的默认事件
             e.preventDefault();
+
+            var p = $(e.target).parents('.tree-root');
+            p.find('.active').removeClass('active');
+            var nowEl = $(e.target).parent('li');
+            nowEl.addClass('active');
             var id = $(e.target).parent('li').attr('id');
             $.post(url,{id:id},function(data,status){
                 if(method=='packingArchivesList'){
@@ -76,7 +81,7 @@
                     var tr = $('<tr></tr>');
                     var arr = item.suitableType;
                     var arr2 = arr.split(',');
-                    console.log(item);
+                    /*console.log(item);*/
 
                     $(tr).append('<td>'+item.packingId+'</td><td><a href="${request.contextPath}/packingArchives/getDetails?id='+item.packingId+'&bid='+item.bigCategoryId+'&sid='+item.smallCategoryId+'" class="packName">'+item.packName+'</a></td><td>'+item.spec+'</td><td>'+item.quality+'</td><td>'+item.qualityIndex+'</td><td>'+item.qualityTargetValue+'</td><td>'+item.unitPrice+'</td><td>'+item.priceEndDate+'</td><td>'+arr2+'</td><td>'+item.bRemarks+'</td><td>'+item.status+'</td>').appendTo(parent);
                 })
@@ -85,7 +90,7 @@
             packingInfoModal : function(getData,parent){
                 $.each(getData,function(n,item){
                     var tr = $('<tr></tr>');
-                    console.log(item);
+                    /*console.log(item);*/
                     $(tr).append('<td><input type="checkbox" value="'+item.packingId+'" name="modal_cellcheckbox"/></td><td>'+item.packingId+'</td><td>'+item.packName+'</td><td>'+item.spec+'</td><td>'+item.size+'</td><td>'+item.quality+'</td><td>'+item.unitPrice+'</td><td>'+item.consumption+'</td><td>'+item.status+'</td>').appendTo(parent);
                 })
             },
@@ -106,7 +111,7 @@
                             var elseSelected = formControl.filter('.else');
                             var targetEl = formControl.parents('.form-group').find('.elseInput');
                             if(elseSelected.prop('checked')){
-                                console.log(formControl.prop('checked'));
+                                /*console.log(formControl.prop('checked'));*/
                                 targetEl.removeClass('hidden');
                             }else{
                                 targetEl.addClass('hidden');

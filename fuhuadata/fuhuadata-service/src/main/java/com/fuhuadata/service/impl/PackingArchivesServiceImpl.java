@@ -7,7 +7,6 @@ import com.fuhuadata.manager.PackingArchivesManager;
 import com.fuhuadata.service.PackingArchivesService;
 import com.fuhuadata.vo.ImagePathVO;
 import com.fuhuadata.vo.PackingArchivesVO;
-import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.commons.logging.Log;

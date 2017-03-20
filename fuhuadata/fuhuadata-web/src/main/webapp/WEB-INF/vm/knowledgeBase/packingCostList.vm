@@ -74,11 +74,20 @@
 
     function Add(){
         var names = $('.packName');
-        var name = 'name=' + names[0].innerText;
-        var bids = names[0].href;
-        console.log(bids);
-        var bid = bids.split('&')[1];
-        var sid = bids.split('&')[2];
+        var name = 'name=' + "";
+        if(names.length>0){
+            var name = 'name=' + names[0].innerText;
+        }
+        var ids = $("li[class='active']").attr('id');
+        console.log(ids);
+        var bid,sid;
+        if(ids ==1||ids ==2||ids ==3){
+            bid = 'bid=' + ids;
+            sid = 'sid=' + $("li[class='active'] li:first").attr('id');
+        }else{
+            sid = 'sid=' + ids;
+            bid = 'bid=' + $("li[class='active']").parent().parent().attr('id');
+        }
         var data_url = $('#add').attr('data_url');
         var url = data_url + name + '&' + bid + '&' + sid;
         console.log(url);
@@ -94,7 +103,6 @@
         jQuery.each(getData,function(n,item){
             var parent  = $('#container');
             var tr = '<tr><td>'+item.packingId+'</td><td><a href="/packingArchives/getDetails?id='+item.packingId+'&bid='+item.bigCategoryId+'&sid='+item.smallCategoryId+'" class="packName">'+item.packName+'</a></td><td>'+item.spec+'</td><td>'+item.quality+'</td><td>'+item.qualityIndex+'</td><td>'+item.qualityTargetValue+'</td><td>'+item.unitPrice+'</td><td>'+item.priceEndDate+'</td><td>'+item.suitableType+'</td><td>'+item.bRemarks+'</td><td>'+item.status+'</td></tr>';
-            console.log(item);
             $(tr).appendTo(parent);
         })
     }

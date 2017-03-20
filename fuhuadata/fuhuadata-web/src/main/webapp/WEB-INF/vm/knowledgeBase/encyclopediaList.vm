@@ -77,7 +77,7 @@
 
 
         var table = $('#encyclopedia_table').DataTable({
-            "ajax":'${request.contextPath}queryCustomerEncyclopediaList',
+            "ajax":basePath + 'queryCustomerEncyclopediaList',
             "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
             "dom": 'tiprl',//自定义显示项
             "lengthChange": false,//是否允许用户自定义显示数量

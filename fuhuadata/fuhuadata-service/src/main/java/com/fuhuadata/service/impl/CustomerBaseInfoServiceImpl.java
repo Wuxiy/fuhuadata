@@ -11,9 +11,6 @@ import com.fuhuadata.service.CustomerBaseInfoService;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import sun.rmi.runtime.Log;
-
-import javax.annotation.Resource;
 
 /**
  * @author wangbo
