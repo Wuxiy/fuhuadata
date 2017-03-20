@@ -1,6 +1,7 @@
 /**
- * 市场信心页处理数据
+ * 获取数据
  */
+//市场信息页面所有数据
 function pop(result){
     // console.log(result);
     var data = result;
@@ -20,9 +21,7 @@ function pop(result){
     $('#cooperationDuration').val(coop.cooperationDuration);//合作时间
 }
 
-/**
- * 采购产品获取数据
- */
+//客户采购产品
 function cpps(result){
     var data;
     //对data的层级进行判断
@@ -65,9 +64,7 @@ function cpps(result){
     });
 }
 
-/**
- * 销售产品获取数据
- */
+//客户销售产品
 function csps(result) {
     var data;
     //对data的层级进行判断
@@ -113,14 +110,15 @@ function csps(result) {
 }
 
 /**
- *采购产品上传对象
+ * 上传数据
  */
+//客户采购产品批量上传
 function cppsObj() {
     var table = $('#table');
     var cpps = [];
     table.find('[name="cppsTbody"]').each(function(){
         var $this = $(this);
-        console.log($this);
+        // console.log($this);
         var obj = {};
         obj.year = $('#year').val();
         obj.customerId = GetRequest().customerId;
@@ -140,12 +138,9 @@ function cppsObj() {
     });
     console.log(JSON.stringify(cpps));
     return JSON.stringify(cpps);
-    // return cpps;
 }
 
-/**
- *销售产品上传对象
- */
+//客户销售产品批量上传
 function cspsObj() {
     var table = $('#table');
     var csps = [];
