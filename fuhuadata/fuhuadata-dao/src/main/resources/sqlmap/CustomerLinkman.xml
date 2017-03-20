@@ -5,6 +5,7 @@
 <sqlMap namespace="CUSTOMERLINKMAN">
    	<typeAlias alias="CustomerLinkman" type="com.fuhuadata.domain.CustomerLinkman"/>
    	<typeAlias alias="QueryCustomerLinkman" type="com.fuhuadata.domain.query.QueryCustomerLinkman"/>
+	<typeAlias alias="CustomerLinkmanVO" type="com.fuhuadata.vo.CustomerLinkmanVO"/>
 	
 	<resultMap id="CUSTOMERLINKMAN-MAP" class="CustomerLinkman">
 					<result property="linkmanId" column="linkman_id" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -262,11 +263,18 @@
 		]]>
 	</select>
 
-	<select id="GET-BY-CUSTOMER-ID" resultMap="CUSTOMERLINKMAN-MAP"parameterClass="java.lang.String">
+	<select id="GET-BY-CUSTOMER-ID" resultMap="CUSTOMERLINKMAN-MAP" parameterClass="java.lang.String">
 		<![CDATA[
 			SELECT * FROM customer_linkman	WHERE customer_id=#customerId#
 	]]>
 	</select>
+
+	<select id="GET-IS-DEFAULT" resultMap="CUSTOMERLINKMAN-MAP" parameterClass="java.lang.String">
+		<![CDATA[
+			SELECT * FROM customer_linkman WHERE customer_id = #customerId# AND is_default = 1
+	]]>
+	</select>
+
 	
 	<select id="GET-PAGE" resultMap="CUSTOMERLINKMAN-MAP" parameterClass="QueryCustomerLinkman">
 		<![CDATA[

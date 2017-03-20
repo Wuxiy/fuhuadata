@@ -4,6 +4,7 @@ import com.fuhuadata.domain.CustomerLinkman;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.CustomerLinkmanService;
+import com.fuhuadata.vo.CustomerLinkmanVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -43,6 +44,7 @@ public class CustomerLinkmanAction {
     @SystemLogAnnotation(module = "customerInfo-customerContacts",methods = "getCustomerLinkmanByCustomerId")
     @ResponseBody
     public ResultPojo getCustomerLinkmanByCustomerId(String customerId){
+        System.out.println(customerId);
         try{
             Result<List<CustomerLinkman>> result = customerLinkmanService.getCustomerLinkmanByCustomerId(customerId);
             return result.getResultPojo();
@@ -73,6 +75,7 @@ public class CustomerLinkmanAction {
 
     @RequestMapping(value="updateById",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "customerInfo-customerContacts",methods = "updateById")
+    @ResponseBody
     public ResultPojo updateCustomerLinkmanById(@RequestBody CustomerLinkman customerLinkman){
         Result result = new Result();
         try{
@@ -83,6 +86,52 @@ public class CustomerLinkmanAction {
         }
         return result.getResultPojo();
     }
+
+
+    /**
+     * 详情页
+     * @param linkmanId
+     * @return
+     */
+    @RequestMapping(value="getCustomerLinkmanDetailsById",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "customerInfo-customerContacts",methods = "getCustomerLinkmanDetailsById")
+    @ResponseBody
+    public ResultPojo getCustomerLinkmanDetailsById(String linkmanId){
+        Result<CustomerLinkmanVO> result = new Result<CustomerLinkmanVO>();
+        try{
+            result=customerLinkmanService.getCustomerLinkmanDetailsById(linkmanId);
+        }catch(Exception e){
+            log.error("根据联系人id获取详情失败",e);
+        }
+        return result.getResultPojo();
+    }
+
+    /**
+     * 详情页
+     * @param customerId
+     * @return
+     */
+    @RequestMapping(value="getCustomerLinkmanDetailsById",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "customerInfo-customerContacts",methods = "getCustomerLinkmanDefaultByCustomerId")
+    @ResponseBody
+    public ResultPojo getCustomerLinkmanDefaultByCustomerId(String customerId){
+        Result<CustomerLinkman> result = new Result<CustomerLinkman>();
+        try{
+            result=customerLinkmanService.getCustomerLinkmanDefaultByCustomerId(customerId);
+        }catch(Exception e){
+            log.error("根据客户id获取默认联系人错误",e);
+        }
+        if(result.getResultPojo().getData()==null){
+            result.getResultPojo().setMessage("当前客户无默认联系人");
+        }
+        else{
+            result.getResultPojo().setMessage("当前客户已有默认联系人，确认更换？");
+        }
+        return result.getResultPojo();
+    }
+
+
+
 
 
 

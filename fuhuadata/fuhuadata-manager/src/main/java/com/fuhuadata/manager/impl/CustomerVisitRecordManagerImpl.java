@@ -61,9 +61,19 @@ public class CustomerVisitRecordManagerImpl implements CustomerVisitRecordManage
     public CustomerVisitRecord getCustomerVisitRecordById(int visitrecord_id) {
     	return customerVisitRecordDao.getCustomerVisitRecordById(visitrecord_id);
     }
-    
 
-    public int count(QueryCustomerVisitRecord queryCustomerVisitRecord) {
+	@Override
+	public List<CustomerVisitRecord> getCustomerVisitRecordByCustomerId(String customerId) {
+		return customerVisitRecordDao.getCustomerVisitRecordByCustomerId(customerId);
+	}
+
+	@Override
+	public List<CustomerVisitRecord> getCustomerVisitRecordByLinkmanId(String linkmanId) {
+		return customerVisitRecordDao.getCustomerVisitRecordByLinkmanId(linkmanId);
+	}
+
+
+	public int count(QueryCustomerVisitRecord queryCustomerVisitRecord) {
     	return customerVisitRecordDao.count(queryCustomerVisitRecord);
     }
     

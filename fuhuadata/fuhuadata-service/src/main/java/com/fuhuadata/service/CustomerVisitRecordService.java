@@ -35,6 +35,20 @@ public interface CustomerVisitRecordService {
      * @return
      */
     public Result deleteCustomerVisitRecordById(int visitrecord_id);
+
+	/**
+	 * 根据客户id返回关于客户的沟通记录
+	 * @param customerId
+	 * @return
+	 */
+	public Result<List<CustomerVisitRecord>> getCustomerVisitRecordByCustomerId(String customerId);
+
+	/**
+	 * 根据联系人id返回关于联系人的沟通记录
+	 * @param linkmanId
+	 * @return
+	 */
+	public Result<List<CustomerVisitRecord>> getCustomerVisitRecordByLinkmanId(String linkmanId);
     
     /**
      * 查询列表，此接口不包含分页查询

@@ -54,6 +54,20 @@ public interface CustomerVisitRecordManager {
      */
     public CustomerVisitRecord getCustomerVisitRecordById(int visitrecord_id);
 
+	/**
+	 * 根据客户id返回关于客户的沟通记录
+	 * @param customerId
+	 * @return
+	 */
+	public List<CustomerVisitRecord> getCustomerVisitRecordByCustomerId(String customerId);
+
+	/**
+	 * 根据联系人id返回关于联系人的沟通记录
+	 * @param linkmanId
+	 * @return
+	 */
+	public List<CustomerVisitRecord> getCustomerVisitRecordByLinkmanId(String linkmanId);
+
     /**
      * 查询列表，包含分页查询，
 	 * 查询分页信息，请设置

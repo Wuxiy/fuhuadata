@@ -31,6 +31,13 @@ public interface CustomerLinkmanDao {
      * @return
      */
     public int deleteCustomerLinkmanById(String linkman_id);
+
+	/**
+	 * 根据客户id查找客户默认联系人
+	 * @param customerId
+	 * @return
+	 */
+	public CustomerLinkman getCustomerLinkmanDefaultByCustomerId(String customerId);
     
 	 /**
      * 返回数据库所有记录，谨慎使用，最好不用

@@ -3,6 +3,8 @@ import java.util.List;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.QueryCustomerLinkman;
 import com.fuhuadata.domain.CustomerLinkman;
+import com.fuhuadata.vo.CustomerLinkmanVO;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author wangbo
@@ -55,11 +57,25 @@ public interface CustomerLinkmanService {
     public Result<CustomerLinkman> getCustomerLinkmanById(String linkman_id);
 
 	/**
+	 * 根据联系人id获取详情（包含沟通记录）
+	 * @param linkmanId
+	 * @return
+	 */
+	public Result<CustomerLinkmanVO> getCustomerLinkmanDetailsById(String linkmanId);
+
+	/**
 	 * 根据客户id查询客户联系人列表
 	 * @param customerId
 	 * @return
 	 */
 	public Result<List<CustomerLinkman>> getCustomerLinkmanByCustomerId(String customerId);
+
+	/**
+	 * 根据客户id查找客户默认联系人
+	 * @param customerId
+	 * @return
+	 */
+	public Result<CustomerLinkman> getCustomerLinkmanDefaultByCustomerId(String customerId);
 
     /**
      * 查询列表，包含分页查询

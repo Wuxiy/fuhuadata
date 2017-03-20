@@ -6,6 +6,9 @@ import com.fuhuadata.manager.CustomerVisitRecordManager;
 import com.fuhuadata.domain.CustomerVisitRecord;
 import com.fuhuadata.domain.query.QueryCustomerVisitRecord;
 import javax.annotation.Resource;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 import java.util.Map;
 import java.io.Serializable;
@@ -15,7 +18,8 @@ import java.io.Serializable;
  * @date 2017-01-13 16:22:04
  */
 public class CustomerVisitRecordServiceImpl implements CustomerVisitRecordService {
-	
+
+	private static final Log log= LogFactory.getLog(CustomerVisitRecordServiceImpl.class);
 	@Resource
     private CustomerVisitRecordManager customerVisitRecordManager;
     public Result<CustomerVisitRecord> addCustomerVisitRecord(CustomerVisitRecord customerVisitRecord) {
@@ -44,11 +48,36 @@ public class CustomerVisitRecordServiceImpl implements CustomerVisitRecordServic
 			result.setSuccess(customerVisitRecordManager.deleteCustomerVisitRecordById(visitrecord_id));
 		} catch(Exception e) {
 			result.setSuccess(false);
+			log.error("",e);
 		}
 		return result;
-    }	
-    	
-    public Result<List<CustomerVisitRecord>> getCustomerVisitRecordsByQuery(QueryCustomerVisitRecord queryCustomerVisitRecord) {
+    }
+
+	@Override
+	public Result<List<CustomerVisitRecord>> getCustomerVisitRecordByCustomerId(String customerId) {
+		Result<List<CustomerVisitRecord>> result = new Result<List<CustomerVisitRecord>>();
+		try {
+			result.addDefaultModel("CustomerVisitRecords", customerVisitRecordManager.getCustomerVisitRecordByCustomerId(customerId));
+		} catch(Exception e) {
+			result.setSuccess(false);
+			log.error("根据客户id获取沟通记录错误",e);
+		}
+		return result;
+	}
+
+	@Override
+	public Result<List<CustomerVisitRecord>> getCustomerVisitRecordByLinkmanId(String linkmanId) {
+		Result<List<CustomerVisitRecord>> result = new Result<List<CustomerVisitRecord>>();
+		try {
+			result.addDefaultModel("CustomerVisitRecords", customerVisitRecordManager.getCustomerVisitRecordByLinkmanId(linkmanId));
+		} catch(Exception e) {
+			result.setSuccess(false);
+			log.error("根据联系人id获取沟通记录错误",e);
+		}
+		return result;
+	}
+
+	public Result<List<CustomerVisitRecord>> getCustomerVisitRecordsByQuery(QueryCustomerVisitRecord queryCustomerVisitRecord) {
 		Result<List<CustomerVisitRecord>> result = new Result<List<CustomerVisitRecord>>();
 		try {
 			result.addDefaultModel("${!className}s", customerVisitRecordManager.getCustomerVisitRecordsByQuery(queryCustomerVisitRecord));

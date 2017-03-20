@@ -1,10 +1,11 @@
-package com.fuhuadata.web.util;
+package com.fuhuadata.vo;
 
 import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.domain.CustomerMakeProduct;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
 
 /**
+ * 客户基本信息更新新增返回
  * Created by intanswer on 2017/3/18.
  */
 public class CustomerBaseInfoDO {
@@ -14,6 +15,10 @@ public class CustomerBaseInfoDO {
 
     public CustomerMakeProduct[] getCustomerMakeProducts() {
         return customerMakeProducts;
+    }
+
+    public CustomerBaseInfoDO(CustomerBaseInfo customerBaseInfo) {
+        this.customerBaseInfo = customerBaseInfo;
     }
 
     public void setCustomerMakeProducts(CustomerMakeProduct[] customerMakeProducts) {
