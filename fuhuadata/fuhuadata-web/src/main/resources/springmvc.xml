@@ -30,8 +30,8 @@
 		       <property name="messageConverters">  
 		           <list>  
 		               <!-- Support JSON -->   
-		               <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>  
-		           </list>  
+		               <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
+				   </list>
 		       </property>
 		 </bean>
 		 <!--  <context:annotation-config />
