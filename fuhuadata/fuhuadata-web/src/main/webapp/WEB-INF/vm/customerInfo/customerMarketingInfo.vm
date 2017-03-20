@@ -37,62 +37,18 @@
                         <div class="form-horizontal">
                             <div class="form-group">
                                 <div class="col-xs-2">
-                                    <select id="cpps_year" class="form-control">
-                                        <option value="">2013</option>
-                                        <option value="">2014</option>
-                                        <option value="">2015</option>
-                                        <option value="">2016</option>
-                                    </select>
+                                    <select id="cpps_year" class="form-control"></select>
                                 </div>
                             </div>
                         </div>
                         <!--表格-->
-                        <table id="cpps" class="table table-condensed table-bordered table-striped text-center">
-
-                                <tbody>
-                                    #foreach( $cppsTbody in $cpps )
-                                <tr>
-                                    <th class="text-center" lang="zh">采购产品</th>
-                                    <th class="text-center" lang="zh">$cppsTbody.productName</th>
-                                    <th class="text-center" lang="zh">年需求量</th>
-                                    <th class="text-center">$cppsTbody.annualDemands</th>
-                                    <th class="text-center" lang="zh">平均单价（美元）</th>
-                                    <th class="text-center">$cppsTbody.averagePrice</th>
-                                </tr>
-                                <tr>
-                                    <td><span lang="zh">供应商</span>1</td>
-                                    <td lang="zh">$cppsTbody.supplier1</td>
-                                    <td lang="zh">年采购量</td>
-                                    <td>$cppsTbody.purchaseAmount1</td>
-                                    <td lang="zh">单价</td>
-                                    <td>$cppsTbody.averagePrice1</td>
-                                </tr>
-                                <tr>
-                                    <td><span lang="zh">供应商</span>2</td>
-                                    <td lang="zh">$cppsTbody.supplier2</td>
-                                    <td lang="zh">年采购量</td>
-                                    <td>$cppsTbody.purchaseAmount2</td>
-                                    <td lang="zh">单价</td>
-                                    <td>$cppsTbody.averagePrice2</td>
-                                </tr>
-                                <tr>
-                                    <td><span lang="zh">供应商</span>3</td>
-                                    <td lang="zh">$cppsTbody.supplier3</td>
-                                    <td lang="zh">年采购量</td>
-                                    <td>$cppsTbody.purchaseAmount3</td>
-                                    <td lang="zh">单价</td>
-                                    <td>$cppsTbody.averagePrice3</td>
-                                </tr>
-                                    #end
-                                </tbody>
-
-                        </table>
+                        <table id="cpps" class="table table-condensed table-bordered table-striped text-center"></table>
                     </div>
                 </div>
                 <!--销售产品表-->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <button id="add_csps" class="btn btn-xs btn-primary panel-heading-btn pull-right" lang="zh">
+                        <button id="add_csps" data-toggle="modal" data-target="#cusPro" class="btn btn-xs btn-primary panel-heading-btn pull-right" lang="zh">
                             新增
                         </button>
                         <h3 class="panel-title" lang="zh">
@@ -104,102 +60,12 @@
                         <div class="form-horizontal">
                             <div class="form-group">
                                 <div class="col-xs-2">
-                                    <select id="csps_year" class="form-control">
-                                        <option value="">2013</option>
-                                        <option value="">2014</option>
-                                        <option value="">2015</option>
-                                        <option value="">2016</option>
-                                    </select>
+                                    <select id="csps_year" class="form-control"></select>
                                 </div>
                             </div>
                         </div>
                         <!--表格-->
-                        <table id="csps" class="table table-condensed table-bordered table-striped text-center">
-                            <tbody>
-                            <tr>
-                                <th class="text-center" lang="zh">销售产品</th>
-                                <th class="text-center" lang="zh">草甘膦</th>
-                                <th class="text-center" lang="zh">品牌</th>
-                                <th class="text-center">NUFARM</th>
-                                <th class="text-center" lang="zh">营销方式</th>
-                                <th class="text-center">产品组合</th>
-                            </tr>
-                            <tr>
-                                <td lang="zh">年销售量</td>
-                                <td>20000T</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td><span lang="zh">销售目的国</span>1</td>
-                                <td lang="zh">美国</td>
-                                <td lang="zh">年销售量</td>
-                                <td>5000T</td>
-                                <td lang="zh">所占市场份额</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td><span lang="zh">销售目的国</span>2</td>
-                                <td lang="zh">美国</td>
-                                <td lang="zh">年销售量</td>
-                                <td>5000T</td>
-                                <td lang="zh">所占市场份额</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td><span lang="zh">销售目的国</span>3</td>
-                                <td lang="zh">美国</td>
-                                <td lang="zh">年销售量</td>
-                                <td>5000T</td>
-                                <td lang="zh">所占市场份额</td>
-                                <td></td>
-                            </tr>
-                            </tbody>
-                            <tbody>
-                            <tr>
-                                <th class="text-center" lang="zh">销售产品</th>
-                                <th class="text-center" lang="zh">草甘膦</th>
-                                <th class="text-center" lang="zh">品牌</th>
-                                <th class="text-center">NUFARM</th>
-                                <th class="text-center" lang="zh">营销方式</th>
-                                <th class="text-center">产品组合</th>
-                            </tr>
-                            <tr>
-                                <td lang="zh">年销售量</td>
-                                <td>20000T</td>
-
-
-
-
-                            </tr>
-                            <tr>
-                                <td><span lang="zh">销售目的国</span>1</td>
-                                <td lang="zh">美国</td>
-                                <td lang="zh">年销售量</td>
-                                <td>5000T</td>
-                                <td lang="zh">所占市场份额</td>
-
-                            </tr>
-                            <tr>
-                                <td><span lang="zh">销售目的国</span>2</td>
-                                <td lang="zh">美国</td>
-                                <td lang="zh">年销售量</td>
-                                <td>5000T</td>
-                                <td lang="zh">所占市场份额</td>
-
-                            </tr>
-                            <tr>
-                                <td><span lang="zh">销售目的国</span>3</td>
-                                <td lang="zh">美国</td>
-                                <td lang="zh">年销售量</td>
-                                <td>5000T</td>
-                                <td lang="zh">所占市场份额</td>
-
-                            </tr>
-                            </tbody>
-                        </table>
+                        <table id="csps" class="table table-condensed table-bordered table-striped text-center"></table>
                     </div>
                 </div>
                 <!--合作情况-->
@@ -221,34 +87,34 @@
                         <div id="cooperation" class="form-horizontal">
                             <div class="form-group">
                                 <label class="control-label col-xs-3" lang="zh">价格敏感度</label>
-                                <div class="col-xs-2"><input id="" class="form-control" type="text" value="" /></div>
+                                <div class="col-xs-2"><input id="priceSensitivity" class="form-control" type="text" value="" /></div>
                                 <label class="control-label col-xs-2" lang="zh">忠诚度</label>
-                                <div class="col-xs-2"><input class="form-control" type="text" value="" /></div>
+                                <div class="col-xs-2"><input id="loyalty" class="form-control" type="text" value="" /></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-3" lang="zh">开始合作时间</label>
-                                <div class="col-xs-2"><input class="form-control" type="date" value="2016-12-12" /></div>
+                                <div class="col-xs-2"><input id="startCooperationTime" class="form-control" type="date" value="" /></div>
                                 <label class="control-label col-xs-2" lang="zh">合作时间</label>
-                                <div class="col-xs-2"><input class="form-control" type="text" value="36个月" /></div>
+                                <div class="col-xs-2"><input id="cooperationDuration" class="form-control" type="text" value="" /></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-3" lang="zh">采购季节</label>
-                                <div class="col-xs-2"><input class="form-control" type="text" value="每年3-5月" /></div>
+                                <div class="col-xs-2"><input id="purchasingSeason" class="form-control" type="text" value="每年3-5月" /></div>
                                 <label class="control-label col-xs-2" lang="zh">活跃周期</label>
-                                <div class="col-xs-2"><input class="form-control" type="text" value="12个月" /></div>
+                                <div class="col-xs-2"><input id="activePeriod" class="form-control" type="text" value="" /></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-3" lang="zh">合作紧密度（福华是否独家供应）</label>
                                 <div class="col-xs-2">
-                                    <select class="form-control" >
-                                        <option value="" selected lang="zh">是</option>
-                                        <option value="" lang="zh">否</option>
+                                    <select id="isFuhuaExclusive" class="form-control" >
+                                        <option value="1" selected lang="zh">是</option>
+                                        <option value="0" lang="zh">否</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-3" lang="zh">备注</label>
-                                <div class="col-xs-8"><textarea class="form-control" rows="3" ></textarea></div>
+                                <div class="col-xs-8"><textarea id="cooperationRemark" class="form-control" rows="3" ></textarea></div>
                             </div>
                         </div>
                     </div>
@@ -263,52 +129,20 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             &times;
                         </button>
-                        <h4 class="modal-title">
-                            <label for="" class="control-label col-xs-1">年份</label>
-                            <div class="col-xs-2">
-                                <select id="year">
-
-                                </select>
-                            </div>
-                        </h4>
                     </div>
-                    <div class="modal-body" style="padding: 15px 30px;">
-                        <table  id="table"class="table table-condensed table-bordered table-striped text-center">
-                            <tbody data-name="proCon">
-                            <tr>
-                                <th class="text-center" lang="zh">采购产品</th>
-                                <th><input class="form-control" type="text" /></th>
-                                <th class="text-center" lang="zh">年需求量</th>
-                                <th><input class="form-control" type="text" /></th>
-                                <th class="text-center" lang="zh">平均单价（美元）</th>
-                                <th><input class="form-control" type="text" /></th>
-                            </tr>
-                            <tr>
-                                <td>供应商1</td>
-                                <td><input class="form-control" type="text" /></td>
-                                <td lang="zh">年采购量</td>
-                                <td><input class="form-control" type="text" /></td>
-                                <td lang="zh">单价</td>
-                                <td><input class="form-control" type="text" /></td>
-                            </tr>
-                            <tr>
-                                <td>供应商2</td>
-                                <td><input class="form-control" type="text" /></td>
-                                <td lang="zh">年采购量</td>
-                                <td><input class="form-control" type="text" /></td>
-                                <td lang="zh">单价</td>
-                                <td><input class="form-control" type="text" /></td>
-                            </tr>
-                            <tr>
-                                <td>供应商3</td>
-                                <td><input class="form-control" type="text" /></td>
-                                <td lang="zh">年采购量</td>
-                                <td><input class="form-control" type="text" /></td>
-                                <td lang="zh">单价</td>
-                                <td><input class="form-control" type="text" /></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    <div class="modal-body">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-xs-2">
+                                    <select class="form-control" id="year"></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <table  id="table"class="table table-condensed table-bordered table-striped text-center"></table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <div class="col-xs-2 col-xs-offset-3">
@@ -326,10 +160,13 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/scaffolding.js"></script>
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customerInfo.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/common/common.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/common/ajax.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerMarketingAjax.js"></script>
 <script>
     $(function () {
+        //获取数据
+        getData('${request.contextPath}/customerPurchaseProduct/init','POST',GetRequest(),pop);
         //给select添加年份，从2014年到当前
         $('#cpps_year,#csps_year,#year').html(function (n,old) {
             old = '';
@@ -342,21 +179,35 @@
             }
             return options;
         })
-
-        //切换年份刷新数据
-        $(document).on('change.year','#cpps_year,#csps_year',function (e) {
-            var selYear = $(e.target).val();
-            var data = {year:selYear};
-            getData('','POST',data,pop);
-        })
-
+        //切换采购年份刷新数据
+        $(document).on('change.year','#cpps_year',function (e) {
+            var year = $(e.target).val();
+            var cusId = GetRequest().customerId;
+            console.log(cusId);
+            var data = {
+                year:year,
+                customerId:cusId
+            };
+            getData('${request.contextPath}/customerPurchaseProduct/getCPPListByCidAndYear','POST',data,cpps);
+        });
+        //切换销售年份刷新数据
+        $(document).on('change.year','#csps_year',function (e) {
+            var year = $(e.target).val();
+            var cusId = GetRequest().customerId;
+            console.log(cusId);
+            var data = {
+                year:year,
+                customerId:cusId
+            };
+            getData('${request.contextPath}/customerPurchaseProduct/getSaleProductListByCidAndYear','POST',data,csps);
+        });
         //点击新增改变modal样式和属性
         $(document).on('click.addCpps','#add_cpps',function(){
             var modal = $('#cusPro');
             var comBtn = $('[data-form-btn="complete"]');
             $('#table').html('');
             var tbody = '';
-            tbody += '<tbody>';
+            tbody += '<tbody name="cppsTbody">';
             tbody += '<tr><th>采购产品</th>';
             tbody += '<th><input class="form-control" type="text" value=""></th>';
             tbody += '<th>年需求量</th>';
@@ -389,7 +240,7 @@
             var comBtn = $('[data-form-btn="complete"]');
             $('#table').html('');
             var tbody = '';
-            tbody += '<tbody>';
+            tbody += '<tbody name="cspsTbody">';
             tbody += '<tr><th>销售产品</th>';
             tbody += '<th><input class="form-control" type="text" value=""></th>';
             tbody += '<th>年销售量</th>';
