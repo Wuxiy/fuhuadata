@@ -111,7 +111,7 @@ public class CustomerLinkmanAction {
      * @param customerId
      * @return
      */
-    @RequestMapping(value="getCustomerLinkmanDetailsById",method = RequestMethod.POST)
+    @RequestMapping(value="getCustomerLinkmanDefaultByCustomerId",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "customerInfo-customerContacts",methods = "getCustomerLinkmanDefaultByCustomerId")
     @ResponseBody
     public ResultPojo getCustomerLinkmanDefaultByCustomerId(String customerId){
