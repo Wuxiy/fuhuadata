@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hexingfu on 2017/3/14.
@@ -76,9 +79,7 @@ public class MarketInfoAction {
             rmap.put("csps",qscp_rs.getModel());
         }
         //查询合作情况
-        ArrayList coos = new ArrayList();
-        coos.add(this.customerBaseInfoService.queryCooperationByCid(customerId));
-        rmap.put("cooperation",coos);
+        rmap.put("cooperation",this.customerBaseInfoService.queryCooperationByCid(customerId));
         ResultPojo pojo = new ResultPojo();
         pojo.setData(rmap);
         return pojo;

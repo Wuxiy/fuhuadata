@@ -1,5 +1,6 @@
 package com.fuhuadata.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -7,7 +8,7 @@ import java.util.Date;
  * @author wangbo
  * @date 2017-01-12 11:49:51
  */
-public class CustomerBaseInfo {
+public class CustomerBaseInfo implements Serializable{
 
     /**客户信息总id**/
 	private String customerId;
