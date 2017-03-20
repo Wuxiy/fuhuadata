@@ -1,12 +1,16 @@
 package com.fuhuadata.service.impl;
 import java.util.List;
+
+import com.fuhuadata.domain.CustomerVisitRecord;
 import com.fuhuadata.domain.query.Result;
+import com.fuhuadata.manager.CustomerVisitRecordManager;
 import com.fuhuadata.service.CustomerLinkmanService;
 import com.fuhuadata.domain.query.QueryCustomerLinkman;
 import com.fuhuadata.manager.CustomerLinkmanManager;
 import com.fuhuadata.domain.CustomerLinkman;
 import javax.annotation.Resource;
 
+import com.fuhuadata.vo.CustomerLinkmanVO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
@@ -21,6 +25,9 @@ public class CustomerLinkmanServiceImpl implements CustomerLinkmanService {
 	private static final Log log = LogFactory.getLog(CustomerLinkmanServiceImpl.class);
 	@Resource
     private CustomerLinkmanManager customerLinkmanManager;
+
+	@Resource
+	private CustomerVisitRecordManager customerVisitRecordManager;
     public Result<CustomerLinkman> addCustomerLinkman(CustomerLinkman customerLinkman) {
 		Result<CustomerLinkman> result = new Result<CustomerLinkman>();
 		try {
@@ -73,9 +80,31 @@ public class CustomerLinkmanServiceImpl implements CustomerLinkmanService {
 			
 		} catch(Exception e) {
 			result.setSuccess(false);
+			log.error("根据客户id获取联系人错误",e);
 		}
 		return result;	
     }
+
+	@Override
+	public Result<CustomerLinkmanVO> getCustomerLinkmanDetailsById(String linkmanId) {
+    	Result<CustomerLinkmanVO> result = new Result<CustomerLinkmanVO>();
+    	CustomerLinkmanVO customerLinkmanVO = new CustomerLinkmanVO();
+    	try{
+    		customerLinkmanVO.setCustomerLinkman(customerLinkmanManager.getCustomerLinkmanById(linkmanId));
+
+		}catch(Exception e){
+    		result.setSuccess(false);
+    		log.error("根据联系人id获取详情错误",e);
+		}
+		try {
+			customerLinkmanVO.setCustomerVisitRecords(customerVisitRecordManager.getCustomerVisitRecordByLinkmanId(linkmanId));
+			result.addDefaultModel("CustomerLinkmanDetails",customerLinkmanVO);
+		}catch(Exception e){
+			result.setSuccess(false);
+			log.error("根据联系人id获取沟通记录错误",e);
+		}
+		return result;
+	}
 
 	/**
 	 * 查询客户联系人列表
@@ -89,6 +118,19 @@ public class CustomerLinkmanServiceImpl implements CustomerLinkmanService {
 			result.addDefaultModel("customerLinkmen",customerLinkmanManager.getCustomerLinkmanByCustomerId(customerId)) ;
 		} catch(Exception e) {
 			result.setSuccess(false);
+			log.error("error",e);
+		}
+		return result;
+	}
+
+	@Override
+	public Result<CustomerLinkman> getCustomerLinkmanDefaultByCustomerId(String customerId) {
+		Result<CustomerLinkman> result = new Result<CustomerLinkman>();
+		try {
+			result.addDefaultModel(customerLinkmanManager.getCustomerLinkmanDefaultByCustomerId(customerId));
+		} catch(Exception e) {
+			result.setSuccess(false);
+			log.error("根据客户ID查找默认联系人错误",e);
 		}
 		return result;
 	}

@@ -31,9 +31,9 @@ public class RecordLinkmanAction {
     @RequestMapping(value = "getRecordLinkmanByLinkmanId",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "customerInfo-recordLinkman",methods = "getRecordLinkmanByLinkmanId")
     @ResponseBody
-    public ResultPojo getRecordLinkmanByLinkmanId(String LinkmanId){
+    public ResultPojo getRecordLinkmanByLinkmanId(String linkmanId){
         try{
-            Result<List<RecordLinkman>> result = recordLinkmanService.getRecordLinkmanByLinkmanId(LinkmanId);
+            Result<List<RecordLinkman>> result = recordLinkmanService.getRecordLinkmanByLinkmanId(linkmanId);
             return result.getResultPojo();
         }catch (Exception e){
             log.error("根据联系人id获取沟通记录出错",e);

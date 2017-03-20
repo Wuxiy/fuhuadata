@@ -205,6 +205,22 @@
 			SELECT * FROM customer_visit_record	WHERE visitrecord_id=#visitrecord_id#
 		]]>
 	</select>
+
+	<select id="GET-BY-CUSTOMER-ID" resultMap="CUSTOMERVISITRECORD-MAP" parameterClass="java.lang.String">
+		<![CDATA[
+			SELECT * FROM customer_visit_record	WHERE customer_id=#customerId#
+	]]>
+	</select>
+
+	<select id="GET-BY-LINKMAN-ID" resultMap="CUSTOMERVISITRECORD-MAP" parameterClass="java.lang.String">
+		<![CDATA[
+					SELECT c.*
+		FROM customer_linkman a
+		LEFT JOIN record_linkman b ON a.linkman_id = b.linkman_id
+		LEFT JOIN customer_visit_record c on b.visit_record_id = c.visitrecord_id
+		WHERE a.linkman_id = #linkmanId#
+	]]>
+	</select>
 	
 	<select id="GET-PAGE" resultMap="CUSTOMERVISITRECORD-MAP" parameterClass="QueryCustomerVisitRecord">
 		<![CDATA[

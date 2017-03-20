@@ -54,6 +54,13 @@ public interface CustomerLinkmanManager {
      */
     public CustomerLinkman getCustomerLinkmanById(String linkman_id);
 
+	/**
+	 * 根据客户id查找客户默认联系人
+	 * @param customerId
+	 * @return
+	 */
+	public CustomerLinkman getCustomerLinkmanDefaultByCustomerId(String customerId);
+
 	public List<CustomerLinkman> getCustomerLinkmanByCustomerId(String customerId);
 
     /**

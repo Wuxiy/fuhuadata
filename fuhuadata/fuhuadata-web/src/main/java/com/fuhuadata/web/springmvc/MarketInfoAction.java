@@ -19,10 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by hexingfu on 2017/3/14.
@@ -114,9 +111,13 @@ public class MarketInfoAction {
      */
     @ResponseBody
     @RequestMapping("/addCPPList")
-    public ResultPojo addCPPList(@RequestBody List<CustomerPurchaseProduct> cpps){
+    public ResultPojo addCPPList(@RequestBody CustomerPurchaseProduct[] cpps){
         ResultPojo pojo = new ResultPojo();
-        pojo.setData(this.customerPurchaseProductService.batchInsert(cpps));
+        List<CustomerPurchaseProduct> list = new ArrayList<CustomerPurchaseProduct>();
+        for(CustomerPurchaseProduct cpp:cpps){
+            list.add(cpp);
+        }
+        pojo.setData(this.customerPurchaseProductService.batchInsert(list));
         return pojo;
     }
     /**
@@ -126,9 +127,13 @@ public class MarketInfoAction {
      */
     @ResponseBody
     @RequestMapping("/addCSPList")
-    public ResultPojo addCSPList(@RequestBody  List<CustomerSaleProduct> csps){
+    public ResultPojo addCSPList(@RequestBody  CustomerSaleProduct[] csps){
         ResultPojo pojo = new ResultPojo();
-        pojo.setData(this.customerSaleProductService.batchInsert(csps));
+        List<CustomerSaleProduct> list = new ArrayList<CustomerSaleProduct>();
+        for(CustomerSaleProduct csp:csps){
+            list.add(csp);
+        }
+        pojo.setData(this.customerSaleProductService.batchInsert(list));
         return pojo;
     }
 

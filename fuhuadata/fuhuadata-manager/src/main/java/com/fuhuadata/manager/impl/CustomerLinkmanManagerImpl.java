@@ -63,6 +63,11 @@ public class CustomerLinkmanManagerImpl implements CustomerLinkmanManager {
     }
 
 	@Override
+	public CustomerLinkman getCustomerLinkmanDefaultByCustomerId(String customerId) {
+		return customerLinkmanDao.getCustomerLinkmanDefaultByCustomerId(customerId);
+	}
+
+	@Override
 	public List<CustomerLinkman> getCustomerLinkmanByCustomerId(String customerId) {
 		return customerLinkmanDao.getCustomerLinkmanByCustomerId(customerId);
 	}

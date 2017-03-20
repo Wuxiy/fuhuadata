@@ -23,6 +23,8 @@ public class CustomerVisitRecordDaoImpl extends SqlMapClientTemplate implements 
     public static final String GET_BY_ID = "CUSTOMERVISITRECORD.GET-BY-ID";
     public static final String GET_PAGE = "CUSTOMERVISITRECORD.GET-PAGE";
     public static final String COUNT = "CUSTOMERVISITRECORD.COUNT";
+    public static final String GET_BY_CUSTOMER_ID="CUSTOMERVISITRECORD.GET-BY-CUSTOMER-ID";
+    public static final String GET_BY_LINKMAN_ID="CUSTOMERVISITRECORD.GET-BY-LINKMAN-ID";
     
     public CustomerVisitRecord addCustomerVisitRecord(CustomerVisitRecord customerVisitRecord) {
 		customerVisitRecord.setVisitrecordId((Integer) this.insert(ADD, customerVisitRecord));
@@ -49,7 +51,17 @@ public class CustomerVisitRecordDaoImpl extends SqlMapClientTemplate implements 
     public CustomerVisitRecord getCustomerVisitRecordById(int visitrecord_id) {
     	return (CustomerVisitRecord) this.queryForObject(GET_BY_ID, visitrecord_id);
     }
-    
+
+    @Override
+    public List<CustomerVisitRecord> getCustomerVisitRecordByCustomerId(String customerId) {
+        return this.queryForList(GET_BY_CUSTOMER_ID,customerId);
+    }
+
+    @Override
+    public List<CustomerVisitRecord> getCustomerVisitRecordByLinkmanId(String linkmanId) {
+        return this.queryForList(GET_BY_LINKMAN_ID,linkmanId);
+    }
+
     public List<CustomerVisitRecord> getCustomerVisitRecordsByPage(QueryCustomerVisitRecord queryCustomerVisitRecord) {
     	return this.queryForList(GET_PAGE, queryCustomerVisitRecord);
     }

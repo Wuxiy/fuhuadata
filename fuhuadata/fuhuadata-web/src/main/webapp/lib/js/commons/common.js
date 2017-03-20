@@ -116,6 +116,7 @@ function GetRequest() {
             theRequest[strs[i].split("=")[0]] = decodeURIComponent(strs[i].split("=")[1]);
         }
     }
+    console.log(theRequest);
     return theRequest;
 }
 

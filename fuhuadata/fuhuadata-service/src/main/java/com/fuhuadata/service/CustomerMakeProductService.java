@@ -43,5 +43,5 @@ public interface CustomerMakeProductService {
 
     public Result<Integer> count(CustomerMakeProductQuery customerMakeProductQuery);
 
-    public Result updateCustomerMakeProducts(CustomerMakeProduct[] customerMakeProducts);
+    public Result updateCustomerMakeProducts(String customerId,CustomerMakeProduct[] customerMakeProducts);
 }

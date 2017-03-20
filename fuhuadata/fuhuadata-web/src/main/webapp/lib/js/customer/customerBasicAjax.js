@@ -91,7 +91,7 @@ function customFieldData(getData){
 //用户基本信息
 function customerBasicFormObj() {
     var data = {
-        customerBaseInfoVO:{
+        customerBaseInfo:{
             "country": $('#country').val(),
             "fullName": $('#fullName').val(),
             "areaId": $('#areaId').val(),

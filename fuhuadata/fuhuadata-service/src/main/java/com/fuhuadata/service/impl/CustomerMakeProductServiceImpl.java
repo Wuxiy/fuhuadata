@@ -133,15 +133,19 @@ public class CustomerMakeProductServiceImpl implements CustomerMakeProductServic
      * @return
      */
     @Override
-    public Result updateCustomerMakeProducts(CustomerMakeProduct[] customerMakeProducts) {
+    public Result updateCustomerMakeProducts(String id,CustomerMakeProduct[] customerMakeProducts) {
         Result result = new Result();
         List<Integer> list = new ArrayList<Integer>();
         boolean flag = false;
         List<CustomerMakeProduct> customerMakeProductsList = new ArrayList<CustomerMakeProduct>();
-        if(customerMakeProducts!=null&&customerMakeProducts.length>0) {
-            for(int i=0;i<customerMakeProducts.length;i++){
-                list.add(customerMakeProducts[i].getId());
+        List<CustomerMakeProduct> customerMakeProductsBefore=customerMakeProductManager.getCustomerMakeProductById(id);
+        if(customerMakeProductsBefore!=null&&customerMakeProductsBefore.size()>0) {
+            for(int i=0;i<customerMakeProductsBefore.size();i++){
+                list.add(customerMakeProductsBefore.get(i).getId());
             }
+
+        }
+        if(customerMakeProducts!=null&&customerMakeProducts.length>0){
             customerMakeProductsList =  Arrays.asList(customerMakeProducts);
         }
         try{
