@@ -146,7 +146,7 @@
                     </div>
                     <div class="modal-footer">
                         <div class="col-xs-2 col-xs-offset-3">
-                            <button data-form-btn="add" data-form-target="proCon" type="button" class="btn btn-block btn-primary" lang="zh">继续添加产品</button>
+                            <button id="addMore" data-form-btn="add"  type="button" class="btn btn-block btn-primary" lang="zh">继续添加产品</button>
                         </div>
                         <div class="col-xs-2">
                             <button id="cpps_up" data-form-btn="complete" type="button" class="btn btn-block btn-primary" lang="zh">完成</button>
@@ -168,19 +168,23 @@
     $(function () {
         //获取数据
         getData('${request.contextPath}/customerMarketInfo/init','POST',GetRequest(),pop);
-        //给select添加年份，从2014年到当前
+
+        /**
+         * 功能按钮
+         */
+        //构造下拉选择框
         $('#cpps_year,#csps_year,#year').html(function (n,old) {
             old = '';
-           var nowDate = new Date();
-           var nowYear = nowDate.getFullYear();
-           console.log(typeof nowYear);
-           var options = '';
-           for(var i=2014;i<=nowYear;i++){
-               options += '<option value="'+i+'">'+i+'</option>';
+            var nowDate = new Date();
+            var nowYear = nowDate.getFullYear();
+            console.log(typeof nowYear);
+            var options = '';
+            for(var i=2014;i<=nowYear;i++){
+                options += '<option value="'+i+'">'+i+'</option>';
             }
             return options;
         })
-        //切换采购年份刷新数据
+        //筛选客户采购产品
         $(document).on('change.year','#cpps_year',function (e) {
             var year = $(e.target).val();
             var cusId = GetRequest().customerId;
@@ -190,7 +194,7 @@
             };
             getData('${request.contextPath}/customerMarketInfo/getCPPListByCidAndYear','POST',data,cpps);
         });
-        //切换销售年份刷新数据
+        //筛选客户销售产品
         $(document).on('change.year','#csps_year',function (e) {
             var year = $(e.target).val();
             var cusId = GetRequest().customerId;
@@ -200,20 +204,45 @@
             };
             getData('${request.contextPath}/customerMarketInfo/getSaleProductListByCidAndYear','POST',data,csps);
         });
-        //构造采购产品modal
+        //构造客户采购模态
         $(document).on('click.addCpps','#add_cpps',function(){
             var comBtn = $('[data-form-btn="complete"]');
-            $('#table').html('');
-            $('#table').append(cppsTable());
+            $('#table').html('');//清空表格
+            $('#table').append(cppsTable());//重新填充表格
             comBtn.attr('id','cpps_up');//变更完成按钮
     });
-        //构造销售产品modal
+        //构造客户销售模态
         $(document).on('click.addCsps','#add_csps',function(){
             var comBtn = $('[data-form-btn="complete"]');
-            $('#table').html('');
-            $('#table').append(cspsTable());
+            $('#table').html('');//清空表格
+            $('#table').append(cspsTable());//重新填充表格
             comBtn.attr('id','csps_up');//变更完成按钮
         });
+        //客户采购，或客户销售继续添加
+        $(document).on('click.add','#addMore',function(){
+            var table = $('#table');
+            var colspanN = table.find('tr').first().find('th').length;
+            alert(colspanN);
+            var comBtn = $('[data-form-btn="complete"]');
+            var tbody;
+            var delBtn = "";//删除按钮
+            delBtn += '<tr>';
+            delBtn += '<td colspan="'+colspanN+'"><button class="btn btn-default btn-xs btn-block" data-form-btn="del" data-form-target="tbody">';
+            delBtn += '<span class="glyphicon glyphicon-trash"></span>';
+            delBtn += '</button></td></tr>';
+            //判断完成按钮的id
+            if(comBtn.attr('id')=='cpps_up'){
+                tbody = cppsTable();//构造tbody
+                console.log(delBtn);
+                $(tbody).append(delBtn).appendTo(table);//给表格插入删除按钮
+//                table.append($(tbody));//插入更改过后的tbody
+            }else{
+                tbody = cspsTable();
+                $(tbody).append(delBtn);//给表格插入删除按钮
+                table.append($(tbody));//插入更改过后的tbody
+            }
+        })
+
         //客户采购产品批量提交
         $(document).on('click.up','#cpps_up',function() {
             upData('${request.contextPath}/customerMarketInfo/addCPPList','POST',cppsObj(),"application/json");
