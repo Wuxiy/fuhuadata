@@ -201,7 +201,25 @@
 
 	<select id="GET-BY-CUSTOMER-ID" resultMap="CUSTOMERVISITRECORD-MAP" parameterClass="java.lang.String">
 		<![CDATA[
-			SELECT * FROM customer_visit_record	WHERE customer_id=#customerId#
+			SELECT
+			a.visitrecord_id,
+			a.start_time,
+			a.end_time,
+			a.activity_type,
+			a.activity_expense,
+			a.activity_address,
+			a.activity_summary,
+			GROUP_CONCAT(b.linkman_id),
+			GROUP_CONCAT(c.`name`),
+			GROUP_CONCAT(b.activity_gift)
+		FROM
+			customer_visit_record a
+		LEFT JOIN record_linkman b ON b.visit_record_id = a.visitrecord_id
+		LEFT JOIN customer_linkman c ON c.linkman_id = b.linkman_id
+		WHERE
+			a.customer_id = #customreId#
+		GROUP BY
+			a.visitrecord_id
 	]]>
 	</select>
 
