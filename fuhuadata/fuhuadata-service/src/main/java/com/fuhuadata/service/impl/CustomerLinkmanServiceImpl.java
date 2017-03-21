@@ -44,6 +44,7 @@ public class CustomerLinkmanServiceImpl implements CustomerLinkmanService {
 			result.setSuccess(customerLinkmanManager.updateCustomerLinkmanById(linkman_id, customerLinkman));
 		} catch(Exception e) {
 			result.setSuccess(false);
+			log.error("根据id更新联系人信息错误",e);
 		}
 		return result;
     }
