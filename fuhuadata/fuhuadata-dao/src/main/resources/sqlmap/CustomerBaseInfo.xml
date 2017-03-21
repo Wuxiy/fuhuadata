@@ -472,7 +472,7 @@
 		select
 		ifnull(sum(ifnull(amount_payable,0)),0) totalMoney,
 		ifnull(sum(ifnull(floor_price,0)),0) minPrice,
-		ifnull(sum(ifnull(,0)),0) maintenanceFee,
+		ifnull(sum(ifnull(maintenance_fee,0)),0) maintenanceFee,
 		ifnull(sum(ifnull(net_promaintenance_feefit,0)),0) netProfit,
 		ifnull(sum(ifnull(actual_amount_paid,0)),0) payMoney
 		from  business_order

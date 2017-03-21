@@ -11,8 +11,8 @@ function customerContactsList(result){
     if(ResultData){
         for(var i=0;i<ResultData.length;i++)
         ContactsList.innerHTML += '<tr>'+
-            '<td><a href="'+ResultData[i].linkmanId+'" target="_blank">'+ResultData[i].linkmanId+'</a></td>'+
-            '<td>'+ResultData[i].name+'</td>'+
+            '<td>'+ResultData[i].linkmanId+'</td>'+
+            '<td><a href="'+basePath+'/customerLinkman/intoCustomerLinkmanInfo?linkmanId='+ResultData[i].linkmanId+'">'+ResultData[i].name+'</a></td>'+
             '<td>'+ResultData[i].posts+'</td>'+
             '<td>'+ResultData[i].onJob+'</td>'+
             '<td>'+ResultData[i].responseArea+'</td>'+
@@ -20,8 +20,9 @@ function customerContactsList(result){
             '<td>'+ResultData[i].nationality+'</td>'+
             '<td>'+ResultData[i].linkPhone1+'</td>'+
             '<td>'+ResultData[i].lemail+'</td>'+
-            '<td>'+ResultData[i].isDefault+'</td>'+
+            '<td>'+ResultData[i].isDefault +'</td>'+
             '<td>'+ResultData[i].remarks+'</td>'+
             '</tr>';
     }
 }
+
