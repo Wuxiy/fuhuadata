@@ -288,7 +288,7 @@
 						<isNotEmpty prepend=", " property="cooperationRemark">cooperation_remark=#cooperationRemark#</isNotEmpty>
 						<isNotEmpty prepend=", " property="productionLine">production_line = #productionLine#</isNotEmpty>
 					</dynamic>
-		WHERE customer_id=#customer_id#
+		WHERE customer_id=#customerId#
 	</update>
 
 	<delete id="DELETE-BY-ID" parameterClass="java.lang.String">
@@ -472,7 +472,7 @@
 		select
 		ifnull(sum(ifnull(amount_payable,0)),0) totalMoney,
 		ifnull(sum(ifnull(floor_price,0)),0) minPrice,
-		ifnull(sum(ifnull(,0)),0) maintenanceFee,
+		ifnull(sum(ifnull(maintenance_fee,0)),0) maintenanceFee,
 		ifnull(sum(ifnull(net_promaintenance_feefit,0)),0) netProfit,
 		ifnull(sum(ifnull(actual_amount_paid,0)),0) payMoney
 		from  business_order

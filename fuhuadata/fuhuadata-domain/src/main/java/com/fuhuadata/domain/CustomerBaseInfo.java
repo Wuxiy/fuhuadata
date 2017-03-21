@@ -165,8 +165,17 @@ public class CustomerBaseInfo implements Serializable{
 	private Integer isFuhuaExclusive;
 	//合作情况备注
 	private String cooperationRemark;
-
+	//产品线
+	private String productionLine;
 	public CustomerBaseInfo() {
+	}
+
+	public String getProductionLine() {
+		return productionLine;
+	}
+
+	public void setProductionLine(String productionLine) {
+		this.productionLine = productionLine;
 	}
 
 	public String getCustomerId() {
