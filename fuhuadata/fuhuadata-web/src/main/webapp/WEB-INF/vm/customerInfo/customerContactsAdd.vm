@@ -138,7 +138,6 @@
             "remarks":$('#remarks').val()
         }
         console.log(data);
-        return JSON.stringify(data);
 
         jQuery.ajax({
             url:url,
