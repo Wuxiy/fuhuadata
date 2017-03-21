@@ -76,7 +76,7 @@
                         </button>
                         <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden">
                             <button data-form-btn="cancel" class="btn" lang="zh">取消</button>
-                            <button data-form-btn="save" class="btn btn-primary" lang="zh">保存</button>
+                            <button id="cooperation_up" data-form-btn="save" class="btn btn-primary" lang="zh">保存</button>
                         </div>
                         <h3 class="panel-title" lang="zh">
                             合作情况
@@ -160,6 +160,7 @@
         </div>
     </div>
 </div>
+<input type="hidden" id="customerId" value="${customerId}">
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
@@ -179,11 +180,11 @@
             var nowYear = nowDate.getFullYear();
             console.log(typeof nowYear);
             var options = '';
-            for(var i=2014;i<=nowYear;i++){
+            for(var i=nowYear;i>=2014;i--){
                 options += '<option value="'+i+'">'+i+'</option>';
             }
             return options;
-        })
+        }).val(new Date().getFullYear());//默认为今年
         //筛选客户采购产品
         $(document).on('change.year','#cpps_year',function (e) {
             var year = $(e.target).val();
@@ -218,7 +219,7 @@
             $('#table').append(cspsTable());//重新填充表格
             comBtn.attr('id','csps_up');//变更完成按钮
         });
-        //客户采购，或客户销售继续添加
+        //继续添加采购产品或者销售产品
         $(document).on('click.add','#addMore',function(){
             var table = $('#table');
             var colspanN = table.find('tr').first().find('th').length;
@@ -227,31 +228,35 @@
             var tbody;
             var delBtn = "";//删除按钮
             delBtn += '<tr>';
-            delBtn += '<td colspan="'+colspanN+'"><button class="btn btn-default btn-xs btn-block" data-form-btn="del" data-form-target="tbody">';
-            delBtn += '<span class="glyphicon glyphicon-trash"></span>';
+            delBtn += '<td colspan="'+colspanN+'">';
+            delBtn += '<button class="btn btn-default btn-xs btn-block" data-form-btn="del" data-form-target="tbody">删除';
             delBtn += '</button></td></tr>';
             //判断完成按钮的id
             if(comBtn.attr('id')=='cpps_up'){
                 tbody = cppsTable();//构造tbody
                 console.log(delBtn);
-                $(tbody).append(delBtn).appendTo(table);//给表格插入删除按钮
-//                table.append($(tbody));//插入更改过后的tbody
+                $(tbody).append(delBtn).appendTo(table);//插入到表格
             }else{
                 tbody = cspsTable();
-                $(tbody).append(delBtn);//给表格插入删除按钮
-                table.append($(tbody));//插入更改过后的tbody
+                $(tbody).append(delBtn).appendTo(table);
             }
-        })
+        });
 
         //客户采购产品批量提交
         $(document).on('click.up','#cpps_up',function() {
-            upData('${request.contextPath}/customerMarketInfo/addCPPList','POST',cppsObj(),"application/json");
-        })
+            upData('${request.contextPath}/customerMarketInfo/addCPPList','POST',cppsObj(),'application/json');
+            //改变年份，刷新页面
+            $('#cpps_year').val($('#year').val());
+        });
         //客户销售产品批量提交
         $(document).on('click.up','#csps_up',function() {
-            upData('${request.contextPath}/customerMarketInfo/addCSPList','POST',cspsObj(),"application/json");
-        })
-
+            upData('${request.contextPath}/customerMarketInfo/addCSPList','POST',cspsObj(),'application/json');
+            $('#cpps_year').val($('#year').val());
+        });
+        //客户合作情况提交
+        $(document).on('click.up','#cooperation_up',function() {
+            upData('${request.contextPath}/customerMarketInfo/updateCooperationInfo','POST',cooperationObj(),'application/x-www-form-urlencoded; charset=UTF-8');
+        });
         //构造销售产品表格
         function cspsTable(){
             var tbody = '';

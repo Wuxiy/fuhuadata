@@ -28,7 +28,7 @@ function cpps(result){
     if(result instanceof Array){
         data = result;//取第一层
     }else{
-        data = result.csps;//取第二层
+        data = result.cpps;//取第二层
     }
     var cpps = $('#cpps');
     cpps.html('');
@@ -125,7 +125,7 @@ function cppsObj() {
         obj.productName = $this.find('[name="productName"]').val();
         obj.annualDemands = $this.find('[name="annualDemands"]').val();
         obj.averagePrice = $this.find('[name="averagePrice"]').val();
-        obj.marketingMethod = $this.find('[name="marketingMethod"]').val();
+        obj.supplier1 = $this.find('[name="supplier1"]').val();
         obj.purchaseAmount1 = $this.find('[name="purchaseAmount1"]').val();
         obj.averagePrice1 = $this.find('[name="averagePrice1"]').val();
         obj.supplier2 = $this.find('[name="supplier2"]').val();
@@ -152,6 +152,7 @@ function cspsObj() {
         obj.productName = $this.find('[name="productName"]').val();
         obj.yearSalesTotal = $this.find('[name="yearSalesTotal"]').val();
         obj.brand = $this.find('[name="brand"]').val();
+        obj.marketingMethod = $this.find('[name="marketingMethod"]').val();
         obj.destinationCountry1 = $this.find('[name="destinationCountry1"]').val();
         obj.yearSales1 = $this.find('[name="yearSales1"]').val();
         obj.marketShare1 = $this.find('[name="marketShare1"]').val();
@@ -164,4 +165,20 @@ function cspsObj() {
         csps.push(obj);
     });
     return JSON.stringify(csps);
+}
+
+//客户合作情况上传
+function cooperationObj(){
+    var obj = {};
+    obj.customerId = $('#customerId').val();
+    obj.priceSensitivity=$('#priceSensitivity').val();
+    obj.loyalty=$('#loyalty').val();
+    obj.startCooperationTime=$('#startCooperationTime').val();
+    obj.cooperationDuration=$('#cooperationDuration').val();
+    obj.purchasingSeason=$('#purchasingSeason').val();
+    obj.activePeriod=$('#activePeriod').val();
+    obj.isFuhuaExclusive=$('#isFuhuaExclusive').val();
+    obj.cooperationRemark=$('#cooperationRemark').val();
+    console.log(obj);
+    return obj;
 }

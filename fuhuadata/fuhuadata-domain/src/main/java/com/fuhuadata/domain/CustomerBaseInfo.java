@@ -21,7 +21,7 @@ public class CustomerBaseInfo implements Serializable{
 	private String shortName;
 
     /**企业类型,-1全部,0客户,1竞对**/
-	private Integer company_type;
+	private Integer companyType;
 
 	/**地区id**/
 	private Integer areaId;
@@ -165,8 +165,17 @@ public class CustomerBaseInfo implements Serializable{
 	private Integer isFuhuaExclusive;
 	//合作情况备注
 	private String cooperationRemark;
-
+	//产品线
+	private String productionLine;
 	public CustomerBaseInfo() {
+	}
+
+	public String getProductionLine() {
+		return productionLine;
+	}
+
+	public void setProductionLine(String productionLine) {
+		this.productionLine = productionLine;
 	}
 
 	public String getCustomerId() {
@@ -193,12 +202,12 @@ public class CustomerBaseInfo implements Serializable{
 		this.shortName = shortName;
 	}
 
-	public Integer getCompany_type() {
-		return company_type;
+	public Integer getCompanyType() {
+		return companyType;
 	}
 
-	public void setCompany_type(Integer company_type) {
-		this.company_type = company_type;
+	public void setCompanyType(Integer companyType) {
+		this.companyType = companyType;
 	}
 
 	public Integer getAreaId() {
