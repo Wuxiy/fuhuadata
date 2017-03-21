@@ -8,6 +8,7 @@ import com.fuhuadata.vo.CustomerLinkmanVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.regexp.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,9 +30,9 @@ public class CustomerLinkmanAction {
     @Autowired
     private CustomerLinkmanService customerLinkmanService;
 
-    @RequestMapping(value="/intoCustomerLinkmanInfo",method = RequestMethod.GET)
+    @RequestMapping(value="/intoCustomerLinkmanList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "customerInfo-customerContacts",methods = "into")
-    public ModelAndView intoCustomerLinkmanInfo(){
+    public ModelAndView intoCustomerLinkmanList(){
         return new ModelAndView("customerInfo/customerContacts");
     }
 
@@ -87,6 +88,17 @@ public class CustomerLinkmanAction {
         return result.getResultPojo();
     }
 
+    /**
+     * 进入详情页
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "intoCustomerLinkmanInfo",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "customerInfo-customerContacts",methods = "intoCustomerLinkmanInfo")
+    public ModelAndView intoCustomerLinkmanInfo(){
+        ModelAndView model = new ModelAndView("customerInfo/customerContactsInfo");
+        return model;
+    }
 
     /**
      * 详情页

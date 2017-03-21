@@ -3,5 +3,5 @@
  */
 
 $(document).ready(function(){
-    getData(basePath+'/customerLinkman/getCustomerLinkmanByCustomerId','POST',GetRequest(),customerContactsList);
+    getData(basePath + '/customerLinkman/getCustomerLinkmanByCustomerId','POST',GetRequest(),customerContactsList);
 })
