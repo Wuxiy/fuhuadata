@@ -11,7 +11,7 @@ $(document).ready(function(){
     $(document).on('click.up','#save',function(){
         //提交数据
         upData(basePath+'/customerLinkman/updateById','POST',updateContactsInfo(),"application/json");
-        location.reload();
+
     });
     //客户基本信息取消提交
     $(document).on('click.cancel','#cancel',function(){
@@ -24,7 +24,6 @@ function customerContactsInfo(result) {
     console.log(result);
     var customerLinkman = result.customerLinkman;
     var customerVisitRecords = result.linkmanVisitRecordVOS;
-    console.log(customerVisitRecords.activityType)
     var visitRecordsTable = document.getElementById('visitRecordsTable');
     if(customerLinkman){
         $('#name').attr('data-id',customerLinkman.linkmanId);

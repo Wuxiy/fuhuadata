@@ -12,8 +12,8 @@
                         编辑
                     </button>
                     <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden">
-                        <button id="cancel" data-form-btn="cancel" class="btn" lang="zh">取消</button>
-                        <button id="save" data-form-btn="save" class="btn btn-primary" lang="zh">保存</button>
+                        <a id="cancel" data-form-btn="cancel" class="btn" lang="zh">取消</a>
+                        <a id="save" data-form-btn="save" class="btn btn-primary" lang="zh">保存</a>
                     </div>
                     <h3 class="panel-title">
                         基础信息
