@@ -18,7 +18,6 @@ $(document).on('click.cancel',cancelBtn,saveEdit);
 $(document).on('click.del',delBtn,delEl);
 $(document).on('change.view',saltType,radioChecked);
 
-
 // $('.else:checked').parents('.form-group').find('.elseInput').show();
 // $('.else:not(:checked)').parents('.form-group').find('.elseInput').hide();
 /**
@@ -90,6 +89,10 @@ function saveEdit(e){
         panelTree.fadeIn();
     }
 }
+
+/**
+ * 新增
+ */
 
 /**
  * 删除

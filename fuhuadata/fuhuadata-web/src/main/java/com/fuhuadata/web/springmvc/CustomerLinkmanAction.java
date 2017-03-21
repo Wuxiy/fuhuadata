@@ -56,6 +56,18 @@ public class CustomerLinkmanAction {
     }
 
     /**
+     * 进入新增页
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "intoCustomerLinkmanAdd",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "customerInfo-customerContacts",methods = "intoCustomerLinkmanAdd")
+    public ModelAndView intoCustomerLinkmanAdd(){
+        ModelAndView model = new ModelAndView("customerInfo/customerContactsAdd");
+        return model;
+    }
+
+    /**
      * add
      * @param customerLinkman
      * @return

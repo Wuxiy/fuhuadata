@@ -1,0 +1,155 @@
+<div class="nav-deputy shadow-out clearfix">
+    <ul class="breadcrumb pull-right">
+        <li><span class="glyphicon glyphicon-map-marker"></span></li>
+    </ul>
+</div>
+<div class="dashboard-wrapper">
+    <div class="row">
+        <div class="tab-content col-xs-10">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        基础信息
+                    </h3>
+                </div>
+                <div class="panel-body clearfix">
+                    <div class="form-horizontal">
+                        <div class="form-group ">
+                            <label class="col-xs-1 control-label">姓名</label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="name"/>
+                            </div>
+                            <label class="col-xs-1 control-label">岗位</label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="posts"/>
+                            </div>
+                            <label class="col-xs-1 control-label">负责区域</label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="responseArea"/>
+                            </div>
+                            <label class="col-xs-1 control-label">是否在职</label>
+                            <div class="col-xs-2">
+                                <select class="form-control" name="items" id="onJob">
+                                    <option  value="1">是</option>
+                                    <option  value="0">否</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="col-xs-1 control-label">性别</label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="sex"/>
+                            </div>
+                            <label class="col-xs-1 control-label">生日</label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="birthday"/>
+                            </div>
+                            <label class="col-xs-1 control-label">国籍</label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="nationality"/>
+                            </div>
+                            <label class="col-xs-1 control-label">影响力情况</label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="influence"/>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="col-xs-1 control-label">展会习惯</label>
+                            <div class="col-xs-2">
+                                <input type="text" class="form-control" id="exhibitionHabits"/>
+                            </div>
+                            <label class="col-xs-1 control-label">喜好</label>
+                            <div class="col-xs-2">
+                                <input type="text" class="form-control" id="fancy"/>
+                            </div>
+                            <label class="col-xs-1 control-label">联系电话1</label>
+                            <div class="col-xs-2">
+                                <input type="text" class="form-control" id="linkPhone1"/>
+                            </div>
+                            <label class="col-xs-1 control-label">联系电话2</label>
+                            <div class="col-xs-2">
+                                <input type="text" class="form-control" id="linkPhone2"/>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="col-xs-1 control-label">邮箱</label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="lemail"/>
+                            </div>
+                            <label class="col-xs-1 control-label">饮食</label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="eatingHabits"/>
+                            </div>
+                            <label class="col-xs-1 control-label">宗教信仰</label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="faith"/>
+                            </div>
+                            <label class="col-xs-1 control-label">是否默认</label>
+                            <div class="col-xs-2">
+                                <select class="form-control" name="items" id="isDefault">
+                                    <option  value="1">是</option>
+                                    <option  value="0">否</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="col-xs-1 control-label">备注</label>
+                            <div class="col-xs-11">
+                                <textarea class="form-control" rows="4" id="remarks"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-2 col-xs-offset-4">
+                                <a class="btn btn-block btn-primary packingAdd" id="finishAdd">完成</a>
+                            </div>
+                            <div class="col-xs-2">
+                                <button class="btn btn-block btn-default" type="reset">重置</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#finishAdd').click(function () {
+        var id = document.URL.split('?')[1].split('=')[1];
+        var url = basePath + '/customerLinkman/add';
+        var data = {
+            "customerId":id,
+            "name":$('#name').val(),
+            "posts":$('#posts').val(),
+            "responseArea":$('#responseArea').val(),
+            "onJob":$('#onJob').val(),
+            "sex":$('#sex').val(),
+            "birthday":$('#birthday').val(),
+            "nationality":$('#nationality').val(),
+            "influence":$('#influence').val(),
+            "exhibitionHabits":$('#exhibitionHabits').val(),
+            "fancy":$('#fancy').val(),
+            "linkPhone1":$('#linkPhone1').val(),
+            "linkPhone2":$('#linkPhone2').val(),
+            "lemail":$('#lemail').val(),
+            "eatingHabits":$('#eatingHabits').val(),
+            "faith":$('#faith').val(),
+            "isDefault":$('#isDefault').val(),
+            "remarks":$('#remarks').val()
+        }
+        console.log(data);
+        return JSON.stringify(data);
+
+        jQuery.ajax({
+            url:url,
+            type:'POST',
+            data:JSON.stringify(data),
+            dataType:"json",
+            contentType:"application/json",
+            success:function(){
+                alert("新增成功!");
+                window.location.href = basePath + '/customerLinkman/intoCustomerLinkmanList';
+            }
+        })
+    })
+</script>
