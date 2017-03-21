@@ -4,6 +4,8 @@ import com.fuhuadata.dao.CustomerVisitRecordDao;
 import com.fuhuadata.domain.CustomerVisitRecord;
 import com.fuhuadata.domain.query.QueryCustomerVisitRecord;
 import javax.annotation.Resource;
+
+import com.fuhuadata.vo.LinkmanVisitRecordVO;
 import org.springframework.stereotype.Component;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import java.util.Map;
@@ -58,7 +60,7 @@ public class CustomerVisitRecordDaoImpl extends SqlMapClientTemplate implements 
     }
 
     @Override
-    public List<CustomerVisitRecord> getCustomerVisitRecordByLinkmanId(String linkmanId) {
+    public List<LinkmanVisitRecordVO> getCustomerVisitRecordByLinkmanId(String linkmanId) {
         return this.queryForList(GET_BY_LINKMAN_ID,linkmanId);
     }
 

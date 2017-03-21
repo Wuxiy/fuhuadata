@@ -5,6 +5,7 @@
 <sqlMap namespace="CUSTOMERVISITRECORD">
    	<typeAlias alias="CustomerVisitRecord" type="com.fuhuadata.domain.CustomerVisitRecord"/>
    	<typeAlias alias="QueryCustomerVisitRecord" type="com.fuhuadata.domain.query.QueryCustomerVisitRecord"/>
+	<typeAlias alias="LinkmanVisitRecordVO" type="com.fuhuadata.vo.LinkmanVisitRecordVO"/>
 	
 	<resultMap id="CUSTOMERVISITRECORD-MAP" class="CustomerVisitRecord">
 					<result property="visitrecordId" column="visitrecord_id" jdbcType="INT" javaType="java.lang.Integer" />
@@ -204,17 +205,17 @@
 	]]>
 	</select>
 
-	<select id="GET-BY-LINKMAN-ID" resultMap="CUSTOMERVISITRECORD-MAP" parameterClass="java.lang.String">
+	<select id="GET-BY-LINKMAN-ID" resultClass="LinkmanVisitRecordVO" parameterClass="java.lang.String">
 		<![CDATA[
 				SELECT
-				b.linkman_id,
-				b.activity_expens,
-				b.activity_gift,
-				c.start_time,
-				c.end_time,
-				c.activity_type,
-				c.activity_address,
-				c.activity_summary
+			b.linkman_id linkmanId,
+			b.activity_expens activityExpens,
+			b.activity_gift activityGift,
+			c.start_time startTime,
+			c.end_time endTime,
+			c.activity_type activityType,
+			c.activity_address activityAddress,
+			c.activity_summary activitySummary
 			FROM
 				record_linkman b
 			LEFT JOIN customer_visit_record c ON b.visit_record_id = c.visitrecord_id

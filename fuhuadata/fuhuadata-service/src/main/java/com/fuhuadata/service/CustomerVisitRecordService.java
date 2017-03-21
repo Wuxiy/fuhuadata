@@ -3,6 +3,7 @@ import java.util.List;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.CustomerVisitRecord;
 import com.fuhuadata.domain.query.QueryCustomerVisitRecord;
+import com.fuhuadata.vo.LinkmanVisitRecordVO;
 
 /**
  * @author wangbo
@@ -48,7 +49,7 @@ public interface CustomerVisitRecordService {
 	 * @param linkmanId
 	 * @return
 	 */
-	public Result<List<CustomerVisitRecord>> getCustomerVisitRecordByLinkmanId(String linkmanId);
+	public Result<List<LinkmanVisitRecordVO>> getCustomerVisitRecordByLinkmanId(String linkmanId);
     
     /**
      * 查询列表，此接口不包含分页查询
