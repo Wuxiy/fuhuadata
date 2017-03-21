@@ -141,18 +141,21 @@ public class CustomerMakeProductServiceImpl implements CustomerMakeProductServic
         List<CustomerMakeProduct> customerMakeProductsBefore=customerMakeProductManager.getCustomerMakeProductById(id);
         if(customerMakeProductsBefore!=null&&customerMakeProductsBefore.size()>0) {
             for(int i=0;i<customerMakeProductsBefore.size();i++){
+                System.out.println(customerMakeProductsBefore.get(i).getId());
                 list.add(customerMakeProductsBefore.get(i).getId());
             }
 
         }
         if(customerMakeProducts!=null&&customerMakeProducts.length>0){
+            System.out.println(customerMakeProducts[1].getProduction());
             customerMakeProductsList =  Arrays.asList(customerMakeProducts);
         }
         try{
-            flag=customerMakeProductManager.deleteCustomerMakeProductByIds(list);
-            if(flag) {
-                result.setSuccess(customerMakeProductManager.addCustomerMakeProducts(customerMakeProductsList));
+            if(list!=null&&list.size()>0) {
+                flag = customerMakeProductManager.deleteCustomerMakeProductByIds(list);
             }
+            System.out.println(flag);
+            result.setSuccess(customerMakeProductManager.addCustomerMakeProducts(customerMakeProductsList));
         }catch(Exception e){
             result.setSuccess(false);
             log.error("更新客户产品产能信息出错",e);

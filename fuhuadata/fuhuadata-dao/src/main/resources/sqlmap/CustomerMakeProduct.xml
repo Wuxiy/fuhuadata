@@ -90,7 +90,7 @@
             </iterate>
     </delete>
     
-    <insert id="BATCH-ADD" parameterClass="java.util.List">
+    <update id="BATCH-ADD" parameterClass="java.util.List">
             <![CDATA[
             INSERT INTO customer_make_products
             (id, customer_id, product_name,production) values
@@ -101,7 +101,8 @@
                 #[].production#)
                 ]]>
             </iterate>
-</insert>
+
+</update>
 
     <select id="GET-BY-CUSTOMERID" resultMap="CUSTOMERMAKEPRODUCT-MAP" parameterClass="java.lang.String">
         <![CDATA[

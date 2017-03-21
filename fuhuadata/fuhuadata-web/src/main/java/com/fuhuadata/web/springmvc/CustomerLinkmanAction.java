@@ -107,7 +107,7 @@ public class CustomerLinkmanAction {
     }
 
     /**
-     * 详情页
+     * 获取默认联系人
      * @param customerId
      * @return
      */

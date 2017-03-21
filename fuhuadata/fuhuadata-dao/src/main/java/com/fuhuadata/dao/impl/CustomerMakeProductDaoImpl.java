@@ -44,7 +44,7 @@ public class CustomerMakeProductDaoImpl extends SqlMapClientTemplate implements 
 
     @Override
     public int addCustomerMakeProducts(List<CustomerMakeProduct> customerMakeProducts) {
-        return ((Integer) this.insert(BATCH_ADD,customerMakeProducts)).intValue();
+        return  this.update(BATCH_ADD,customerMakeProducts);
     }
 
     @Override

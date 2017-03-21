@@ -2,7 +2,6 @@ package com.fuhuadata.vo;
 
 import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.domain.CustomerMakeProduct;
-import com.fuhuadata.vo.CustomerBaseInfoVO;
 
 /**
  * 客户基本信息更新新增返回
@@ -17,8 +16,7 @@ public class CustomerBaseInfoDO {
         return customerMakeProducts;
     }
 
-    public CustomerBaseInfoDO(CustomerBaseInfo customerBaseInfo) {
-        this.customerBaseInfo = customerBaseInfo;
+    public CustomerBaseInfoDO( ) {
     }
 
     public void setCustomerMakeProducts(CustomerMakeProduct[] customerMakeProducts) {

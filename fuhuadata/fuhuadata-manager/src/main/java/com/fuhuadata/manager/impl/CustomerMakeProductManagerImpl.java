@@ -6,6 +6,7 @@ import com.fuhuadata.domain.query.CustomerMakeProductQuery;
 import com.fuhuadata.manager.CustomerMakeProductManager;
 
 import javax.annotation.Resource;
+import javax.mail.Flags;
 import java.util.List;
 
 /**
@@ -31,12 +32,16 @@ public class CustomerMakeProductManagerImpl implements CustomerMakeProductManage
 
     @Override
     public boolean deleteCustomerMakeProductByIds(List<Integer> list) {
-        return customerMakeProductDao.deleteCustomerMakeProductByIds(list) == 1 ?true:false;
+        int flag=customerMakeProductDao.deleteCustomerMakeProductByIds(list);
+        return flag==list.size()?true :false;
     }
 
     @Override
     public boolean addCustomerMakeProducts(List<CustomerMakeProduct> customerMakeProducts) {
-        return customerMakeProductDao.addCustomerMakeProducts(customerMakeProducts)==1?true:false;
+
+       boolean flag = customerMakeProductDao.addCustomerMakeProducts(customerMakeProducts)==customerMakeProducts.size()?true:false;
+        System.out.println(flag);
+        return flag;
     }
 
     @Override

@@ -184,7 +184,7 @@ public class CustomerBaseInfoAction {
         }catch(Exception e){
             log.error("更新客户产品产能信息出错",e);
         }
-        return null;
+        return result.getResultPojo();
     }
 
 }
