@@ -74,7 +74,6 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerContactsAjax.js"></script>
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerContactsAction.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerContactsList.js"></script>
 
 

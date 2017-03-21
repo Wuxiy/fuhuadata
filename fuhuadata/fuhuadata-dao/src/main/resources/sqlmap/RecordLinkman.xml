@@ -7,18 +7,18 @@
    	<typeAlias alias="QueryRecordLinkman" type="com.fuhuadata.domain.query.QueryRecordLinkman"/>
 	
 	<resultMap id="RECORDLINKMAN-MAP" class="RecordLinkman">
-					<result property="id" column="id" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="visitRecordId" column="visit_record_id" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="linkmanId" column="linkman_id" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="activityExpens" column="activity_expens" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-								<result property="activityGift" column="activity_gift" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="createUserId" column="create_user_id" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="createUserName" column="create_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="lastmodifyUserId" column="lastmodify_user_id" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="lastmodifyUserName" column="lastmodify_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="createTime" column="create_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
-								<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
-														</resultMap>
+		<result property="id" column="id" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="visitRecordId" column="visit_record_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="linkmanId" column="linkman_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="activityExpens" column="activity_expens" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+		<result property="activityGift" column="activity_gift" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="createUserId" column="create_user_id" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="createUserName" column="create_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="lastmodifyUserId" column="lastmodify_user_id" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="lastmodifyUserName" column="lastmodify_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="createTime" column="create_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+		<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+	</resultMap>
 	
 	<sql id="PAGE-COMMON">	
 		<dynamic prepend=" WHERE ">

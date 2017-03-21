@@ -6,102 +6,109 @@
 <div class="dashboard-wrapper">
     <div class="row">
         <div class="tab-content col-xs-10">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    基础信息
-                </h3>
-            </div>
-            <div class="panel-body clearfix">
-                <div class="form-horizontal">
-                    <div class="form-group ">
-                        <label class="col-xs-1 control-label">姓名</label>
-                        <div class="col-xs-2">
-                            <input class="form-control" type="text" id="name"/>
-                        </div>
-                        <label class="col-xs-1 control-label">岗位</label>
-                        <div class="col-xs-2">
-                            <input class="form-control" type="text" id="posts"/>
-                        </div>
-                        <label class="col-xs-1 control-label">负责区域</label>
-                        <div class="col-xs-2">
-                            <input class="form-control" type="text" id="responseArea"/>
-                        </div>
-                        <label class="col-xs-1 control-label">是否在职</label>
-                        <div class="col-xs-2">
-                            <select class="form-control" name="items" id="onJob">
-                                <option  value="1">是</option>
-                                <option  value="0">否</option>
-                            </select>
-                        </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <button id="edit" data-form-btn="edit" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
+                        编辑
+                    </button>
+                    <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden">
+                        <button id="cancel" data-form-btn="cancel" class="btn" lang="zh">取消</button>
+                        <button id="save" data-form-btn="save" class="btn btn-primary" lang="zh">保存</button>
                     </div>
-                    <div class="form-group ">
-                        <label class="col-xs-1 control-label">性别</label>
-                        <div class="col-xs-2">
-                            <input class="form-control" type="text" id="sex"/>
+                    <h3 class="panel-title">
+                        基础信息
+                    </h3>
+                </div>
+                <div class="panel-body clearfix">
+                    <div class="form-horizontal">
+                        <div class="form-group ">
+                            <label class="col-xs-1 control-label">姓名</label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="name" disabled/>
+                            </div>
+                            <label class="col-xs-1 control-label">岗位</label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="posts" disabled/>
+                            </div>
+                            <label class="col-xs-1 control-label">负责区域</label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="responseArea" disabled/>
+                            </div>
+                            <label class="col-xs-1 control-label">是否在职</label>
+                            <div class="col-xs-2">
+                                <select class="form-control" name="items" id="onJob" disabled>
+                                    <option  value="1">是</option>
+                                    <option  value="0">否</option>
+                                </select>
+                            </div>
                         </div>
-                        <label class="col-xs-1 control-label">生日</label>
-                        <div class="col-xs-2">
-                            <input class="form-control" type="text" id="birthday"/>
+                        <div class="form-group ">
+                            <label class="col-xs-1 control-label">性别</label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="sex" disabled/>
+                            </div>
+                            <label class="col-xs-1 control-label">生日</label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="birthday" disabled/>
+                            </div>
+                            <label class="col-xs-1 control-label">国籍</label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="nationality" disabled/>
+                            </div>
+                            <label class="col-xs-1 control-label">影响力情况</label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="influence" disabled/>
+                            </div>
                         </div>
-                        <label class="col-xs-1 control-label">国籍</label>
-                        <div class="col-xs-2">
-                            <input class="form-control" type="text" id="nationality"/>
+                        <div class="form-group ">
+                            <label class="col-xs-1 control-label">展会习惯</label>
+                            <div class="col-xs-2">
+                                <input type="text" class="form-control" id="exhibitionHabits" disabled/>
+                            </div>
+                            <label class="col-xs-1 control-label">喜好</label>
+                            <div class="col-xs-2">
+                                <input type="text" class="form-control" id="fancy" disabled/>
+                            </div>
+                            <label class="col-xs-1 control-label">联系电话1</label>
+                            <div class="col-xs-2">
+                                <input type="text" class="form-control" id="linkPhone1" disabled/>
+                            </div>
+                            <label class="col-xs-1 control-label">联系电话2</label>
+                            <div class="col-xs-2">
+                                <input type="text" class="form-control" id="linkPhone2" disabled/>
+                            </div>
                         </div>
-                        <label class="col-xs-1 control-label">影响力情况</label>
-                        <div class="col-xs-2">
-                            <input class="form-control" type="text" id="influence"/>
+                        <div class="form-group ">
+                            <label class="col-xs-1 control-label">邮箱</label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="lemail" disabled/>
+                            </div>
+                            <label class="col-xs-1 control-label">饮食</label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="eatingHabits" disabled/>
+                            </div>
+                            <label class="col-xs-1 control-label">宗教信仰</label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="faith" disabled/>
+                            </div>
+                            <label class="col-xs-1 control-label">是否默认</label>
+                            <div class="col-xs-2">
+                                <select class="form-control" name="items" id="isDefault" disabled>
+                                    <option  value="1">是</option>
+                                    <option  value="0">否</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group ">
-                        <label class="col-xs-1 control-label">展会习惯</label>
-                        <div class="col-xs-2">
-                            <input type="text" class="form-control" id="exhibitionHabits"/>
-                        </div>
-                        <label class="col-xs-1 control-label">喜好</label>
-                        <div class="col-xs-2">
-                            <input type="text" class="form-control" id="fancy"/>
-                        </div>
-                        <label class="col-xs-1 control-label">联系电话1</label>
-                        <div class="col-xs-2">
-                            <input type="text" class="form-control" id="linkPhone1"/>
-                        </div>
-                        <label class="col-xs-1 control-label">联系电话2</label>
-                        <div class="col-xs-2">
-                            <input type="text" class="form-control" id="linkPhone2"/>
-                        </div>
-                    </div>
-                    <div class="form-group ">
-                        <label class="col-xs-1 control-label">邮箱</label>
-                        <div class="col-xs-2">
-                            <input class="form-control" type="text" id="lemail"/>
-                        </div>
-                        <label class="col-xs-1 control-label">饮食</label>
-                        <div class="col-xs-2">
-                            <input class="form-control" type="text" id="eatingHabits"/>
-                        </div>
-                        <label class="col-xs-1 control-label">宗教信仰</label>
-                        <div class="col-xs-2">
-                            <input class="form-control" type="text" id="faith"/>
-                        </div>
-                        <label class="col-xs-1 control-label">是否默认</label>
-                        <div class="col-xs-2">
-                            <select class="form-control" name="items" id="isDefault">
-                                <option  value="1">是</option>
-                                <option  value="0">否</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group ">
-                        <label class="col-xs-1 control-label">备注</label>
-                        <div class="col-xs-11">
-                            <textarea class="form-control" rows="4" id="remarks"></textarea>
+                        <div class="form-group ">
+                            <label class="col-xs-1 control-label">备注</label>
+                            <div class="col-xs-11">
+                                <textarea class="form-control" rows="4" id="remarks" disabled></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
         <div class="tab-content col-xs-10">
             <div class="panel panel-default">
                 <div class="panel-heading">
