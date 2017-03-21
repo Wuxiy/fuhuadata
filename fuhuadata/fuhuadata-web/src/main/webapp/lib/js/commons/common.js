@@ -116,7 +116,16 @@ function GetRequest() {
             theRequest[strs[i].split("=")[0]] = decodeURIComponent(strs[i].split("=")[1]);
         }
     }
-    console.log(theRequest);
+    // console.log(theRequest);
     return theRequest;
 }
 
+/**
+ * 多modal处理
+ */
+
+// 通过该方法来为每次弹出的模态框设置最新的zIndex值，从而使最新的modal显示在最前面
+$(document).on('show.bs.modal', '.modal', function (e) {
+    var zIndex = 1040 + (10 * $('.modal:visible').length);
+    $(this).css('z-index', zIndex);
+});

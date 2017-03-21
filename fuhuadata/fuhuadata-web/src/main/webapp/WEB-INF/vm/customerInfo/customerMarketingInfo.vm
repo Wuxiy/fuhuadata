@@ -3,13 +3,8 @@
     <div class="nav-deputy shadow-out clearfix">
         <ul id="deputyNav" class="nav nav-tabs pull-left">
             <li><a href="${request.contextPath}/customerBaseInfo/intoCustomerBaseInfoDetails">基本信息</a></li>
-<<<<<<< HEAD
             <li class="active"><a href="${request.contextPath}/customerPurchaseProduct/entrance" >市场信息</a></li>
-            <li><a href="${request.contextPath}/customerLinkman//intoCustomerLinkmanInfo" >联系人</a></li>
-=======
-            <li class="active"><a href="${request.contextPath}/customerMarketInfo/entrance" >市场信息</a></li>
-            <li><a href="" >联系人</a></li>
->>>>>>> d81b2b5abb8ddaa249b3bd75a0c0bd39d68b63b2
+            <li><a href="${request.contextPath}/customerLinkman/intoCustomerLinkmanList" >联系人</a></li>
             <li><a href="" >产品要求</a></li>
             <li><a href="" >订单信息</a></li>
             <li><a href="" >订单默认要求</a></li>
@@ -81,7 +76,7 @@
                         </button>
                         <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden">
                             <button data-form-btn="cancel" class="btn" lang="zh">取消</button>
-                            <button data-form-btn="save" class="btn btn-primary" lang="zh">保存</button>
+                            <button id="cooperation_up" data-form-btn="save" class="btn btn-primary" lang="zh">保存</button>
                         </div>
                         <h3 class="panel-title" lang="zh">
                             合作情况
@@ -126,7 +121,7 @@
                 </div>
             </div>
         </div>
-        <!--modal-->
+        <!--批量添加modal-->
         <div class="modal fade" id="cusPro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -163,9 +158,27 @@
                 </div>
             </div>
         </div>
+        <!--树形菜单modal-->
+        <div class="modal fade" id="treeModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" style="margin-top: 300px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                    </div>
+                    <div class="modal-body well" style="max-height: 300px; overflow-y: scroll; overflow-x: scroll;">
+##                        这里插入树形菜单
+                        <div id="tree" class="tree"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+<input type="hidden" id="customerId" value="${customerId}">
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerMarketingAjax.js"></script>
@@ -173,7 +186,8 @@
     $(function () {
         //获取数据
         getData('${request.contextPath}/customerMarketInfo/init','POST',GetRequest(),pop);
-
+        //创建树形菜单
+        $('#tree').creatTree('/productCategory/CategoryTree');
         /**
          * 功能按钮
          */
@@ -184,11 +198,11 @@
             var nowYear = nowDate.getFullYear();
             console.log(typeof nowYear);
             var options = '';
-            for(var i=2014;i<=nowYear;i++){
+            for(var i=nowYear;i>=2014;i--){
                 options += '<option value="'+i+'">'+i+'</option>';
             }
             return options;
-        })
+        }).val(new Date().getFullYear());//默认为今年
         //筛选客户采购产品
         $(document).on('change.year','#cpps_year',function (e) {
             var year = $(e.target).val();
@@ -223,39 +237,57 @@
             $('#table').append(cspsTable());//重新填充表格
             comBtn.attr('id','csps_up');//变更完成按钮
         });
-        //客户采购，或客户销售继续添加
+        //继续添加采购产品或者销售产品
         $(document).on('click.add','#addMore',function(){
             var table = $('#table');
             var colspanN = table.find('tr').first().find('th').length;
-            alert(colspanN);
+//            alert(colspanN);
             var comBtn = $('[data-form-btn="complete"]');
             var tbody;
             var delBtn = "";//删除按钮
             delBtn += '<tr>';
-            delBtn += '<td colspan="'+colspanN+'"><button class="btn btn-default btn-xs btn-block" data-form-btn="del" data-form-target="tbody">';
-            delBtn += '<span class="glyphicon glyphicon-trash"></span>';
+            delBtn += '<td colspan="'+colspanN+'">';
+            delBtn += '<button class="btn btn-default btn-xs btn-block" data-form-btn="del" data-form-target="tbody">删除';
             delBtn += '</button></td></tr>';
             //判断完成按钮的id
             if(comBtn.attr('id')=='cpps_up'){
                 tbody = cppsTable();//构造tbody
                 console.log(delBtn);
-                $(tbody).append(delBtn).appendTo(table);//给表格插入删除按钮
-//                table.append($(tbody));//插入更改过后的tbody
+                $(tbody).append(delBtn).appendTo(table);//插入到表格
             }else{
                 tbody = cspsTable();
-                $(tbody).append(delBtn);//给表格插入删除按钮
-                table.append($(tbody));//插入更改过后的tbody
+                $(tbody).append(delBtn).appendTo(table);
             }
-        })
+        });
 
         //客户采购产品批量提交
         $(document).on('click.up','#cpps_up',function() {
-            upData('${request.contextPath}/customerMarketInfo/addCPPList','POST',cppsObj(),"application/json");
-        })
+            upData('${request.contextPath}/customerMarketInfo/addCPPList','POST',cppsObj(),'application/json');
+            //改变年份，刷新页面
+            $('#cpps_year').val($('#year').val());
+        });
         //客户销售产品批量提交
         $(document).on('click.up','#csps_up',function() {
-            upData('${request.contextPath}/customerMarketInfo/addCSPList','POST',cspsObj(),"application/json");
+            upData('${request.contextPath}/customerMarketInfo/addCSPList','POST',cspsObj(),'application/json');
+            $('#cpps_year').val($('#year').val());
+        });
+        //客户合作情况提交
+        $(document).on('click.up','#cooperation_up',function() {
+            upData('${request.contextPath}/customerMarketInfo/updateCooperationInfo','POST',cooperationObj(),'application/x-www-form-urlencoded; charset=UTF-8');
+        });
+        var selectedPName;
+        $(document).on('focus','input[name="productName"]',function (e) {
+            selectedPName = $(e.target);
+            selectedPName.next('.input-group-btn').find('[data-toggle="modal"]').triggerHandler('.bs.modal.data-api');
         })
+        $(document).on('click','#tree a',function (e) {
+            e.preventDefault();
+        })
+        $(document).on('dblclick','#tree a',function (e) {
+            var txt = $(e.target).text();
+
+        })
+
 
         //构造销售产品表格
         function cspsTable(){
@@ -294,7 +326,10 @@
             var tbody = '';
             tbody += '<tbody name="cppsTbody">';
             tbody += '<tr><th>采购产品</th>';
-            tbody += '<th><input name="productName" class="form-control" type="text" value=""></th>';
+            tbody += '<th><div class="input-group"><input name="productName" class="form-control" type="text" value="">';
+            tbody += '<span class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal">';
+            tbody += '<span class="glyphicon glyphicon-search"></span>';
+            tbody += '</button></span></div></th>';
             tbody += '<th>年需求量</th>';
             tbody += '<th><input name="annualDemands" class="form-control" type="text" value=""></th>';
             tbody += '<th>平均单价(美元)</th>';

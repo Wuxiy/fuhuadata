@@ -123,7 +123,7 @@
                             <th class="text-center" lang="zh">活动摘要</th>
                         </tr>
                         </thead>
-                        <tbody id="contactsList">
+                        <tbody id="visitRecordsTable">
                         <tr>
                             <td>000002</td>
                             <td>Anna</td>
@@ -158,5 +158,4 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerContactsAdd.js"></script>
-
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerContactsInfo.js"></script>

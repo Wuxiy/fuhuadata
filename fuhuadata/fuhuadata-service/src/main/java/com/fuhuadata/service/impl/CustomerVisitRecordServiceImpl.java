@@ -7,6 +7,7 @@ import com.fuhuadata.domain.CustomerVisitRecord;
 import com.fuhuadata.domain.query.QueryCustomerVisitRecord;
 import javax.annotation.Resource;
 
+import com.fuhuadata.vo.LinkmanVisitRecordVO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
@@ -66,10 +67,10 @@ public class CustomerVisitRecordServiceImpl implements CustomerVisitRecordServic
 	}
 
 	@Override
-	public Result<List<CustomerVisitRecord>> getCustomerVisitRecordByLinkmanId(String linkmanId) {
-		Result<List<CustomerVisitRecord>> result = new Result<List<CustomerVisitRecord>>();
+	public Result<List<LinkmanVisitRecordVO>> getCustomerVisitRecordByLinkmanId(String linkmanId) {
+		Result<List<LinkmanVisitRecordVO>> result = new Result<List<LinkmanVisitRecordVO>>();
 		try {
-			result.addDefaultModel("CustomerVisitRecords", customerVisitRecordManager.getCustomerVisitRecordByLinkmanId(linkmanId));
+			result.addDefaultModel("LinkmanVisitRecords", customerVisitRecordManager.getCustomerVisitRecordByLinkmanId(linkmanId));
 		} catch(Exception e) {
 			result.setSuccess(false);
 			log.error("根据联系人id获取沟通记录错误",e);

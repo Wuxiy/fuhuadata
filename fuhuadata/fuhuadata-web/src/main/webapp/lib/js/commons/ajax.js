@@ -22,7 +22,6 @@ function upData(url,type,data,contentType){
     $.ajax({
         url:url,
         type:type,
-        dataType:"json",
         data:data,
         contentType:contentType
     }).done(function () {

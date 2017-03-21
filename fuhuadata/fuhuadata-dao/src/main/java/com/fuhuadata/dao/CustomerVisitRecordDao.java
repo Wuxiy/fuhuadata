@@ -2,6 +2,8 @@ package com.fuhuadata.dao;
 import java.util.List;
 import com.fuhuadata.domain.CustomerVisitRecord;
 import com.fuhuadata.domain.query.QueryCustomerVisitRecord;
+import com.fuhuadata.vo.LinkmanVisitRecordVO;
+
 import java.util.Map;
 import java.io.Serializable;
 
@@ -64,7 +66,7 @@ public interface CustomerVisitRecordDao {
 	 * @param linkmanId
 	 * @return
 	 */
-    public List<CustomerVisitRecord> getCustomerVisitRecordByLinkmanId(String linkmanId);
+    public List<LinkmanVisitRecordVO> getCustomerVisitRecordByLinkmanId(String linkmanId);
         
 	 /**
      * 查询列表，包含分页查询，查询结果为空返回空的List对象

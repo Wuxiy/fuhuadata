@@ -168,23 +168,23 @@ public class CustomerBaseInfoAction {
     @SystemLogAnnotation(module = "customerInfo-customerList",methods = "updateCustomerBaseInfo")
     @ResponseBody
     public ResultPojo updateCustomerBaseInfo(@RequestBody CustomerBaseInfoDO customerBaseInfoDO){
-        Result result = new Result();
+        ResultPojo resultPojo = new ResultPojo();
         CustomerBaseInfo customerBaseInfo = customerBaseInfoDO.getCustomerBaseInfo();
         String id=customerBaseInfo.getCustomerId();
         CustomerMakeProduct[] customerMakeProducts = customerBaseInfoDO.getCustomerMakeProducts();
         try{
-
-            result=customerBaseInfoService.updateCustomerBaseInfoById(id,customerBaseInfo);
+            customerBaseInfoService.updateCustomerBaseInfoById(id,customerBaseInfo);
+            try{
+                customerMakeProductService.updateCustomerMakeProducts(id,customerMakeProducts);
+            }catch(Exception e){
+                log.error("更新客户产品产能信息出错",e);
+            }
+            resultPojo.setCode(1);
+            resultPojo.setMessage("客户产品基本信息更新成功");
         }catch (Exception e){
             log.error("更新客户基本信息出错",e);
         }
-        try{
-            result=customerMakeProductService.updateCustomerMakeProducts(id,customerMakeProducts);
-            result.getResultPojo().setMessage("客户产品产能更新成功");
-        }catch(Exception e){
-            log.error("更新客户产品产能信息出错",e);
-        }
-        return result.getResultPojo();
+        return resultPojo;
     }
 
 }

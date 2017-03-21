@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @date 2017-01-12 11:49:51
  */
 public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
-	private static final org.apache.commons.logging.Log log = LogFactory.getLog(CustomerBaseInfoService.class);
+	private static final org.apache.commons.logging.Log log = LogFactory.getLog(CustomerBaseInfoServiceImpl.class);
 
 	@Autowired
     private CustomerBaseInfoManager customerBaseInfoManager;
@@ -41,6 +41,7 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 			result.setSuccess(customerBaseInfoManager.updateCustomerBaseInfoById(customer_id, customerBaseInfo));
 		} catch(Exception e) {
 			result.setSuccess(false);
+			log.error("根据客户id更新客户基本信息错误",e);
 		}
 		return result;
     }
