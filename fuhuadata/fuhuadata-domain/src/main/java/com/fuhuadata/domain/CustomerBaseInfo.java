@@ -21,7 +21,7 @@ public class CustomerBaseInfo implements Serializable{
 	private String shortName;
 
     /**企业类型,-1全部,0客户,1竞对**/
-	private Integer companyType;
+	private Integer company_type;
 
 	/**地区id**/
 	private Integer areaId;
@@ -193,12 +193,12 @@ public class CustomerBaseInfo implements Serializable{
 		this.shortName = shortName;
 	}
 
-	public Integer getCompanyType() {
-		return companyType;
+	public Integer getCompany_type() {
+		return company_type;
 	}
 
-	public void setCompanyType(Integer companyType) {
-		this.companyType = companyType;
+	public void setCompany_type(Integer company_type) {
+		this.company_type = company_type;
 	}
 
 	public Integer getAreaId() {
