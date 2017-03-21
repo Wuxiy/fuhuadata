@@ -21,11 +21,11 @@ public interface CustomerBaseInfoDao {
     
 	 /**
      * 按照主键id更新customerBaseInfo，成功返回1，使用接口时，请重新new CustomerBaseInfo 的更新对象，设置要更新的字段
-     * @param customer_id
+     * @param customerId
      * @param customerBaseInfo
      * @return
      */
-    public int updateCustomerBaseInfoById(String customer_id, CustomerBaseInfo customerBaseInfo);
+    public int updateCustomerBaseInfoById(String customerId, CustomerBaseInfo customerBaseInfo);
     
 	 /**
      * 按照主键id 删除 记录，返回1为成功
