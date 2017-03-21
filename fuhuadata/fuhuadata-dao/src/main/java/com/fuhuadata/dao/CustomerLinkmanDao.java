@@ -33,6 +33,13 @@ public interface CustomerLinkmanDao {
     public int deleteCustomerLinkmanById(String linkman_id);
 
 	/**
+	 * 根据客户id获取联系人IdMax
+	 * @param customerId
+	 * @return
+	 */
+	public String getMaxLinkmanIdByCustomerId(String customerId);
+
+	/**
 	 * 根据客户id查找客户默认联系人
 	 * @param customerId
 	 * @return

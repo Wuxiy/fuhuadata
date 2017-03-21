@@ -8,7 +8,6 @@ import com.fuhuadata.vo.CustomerLinkmanVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.regexp.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,7 +36,7 @@ public class CustomerLinkmanAction {
     }
 
     /**
-     *
+     * get by customerId
      * @param customerId
      * @return
      */
@@ -55,6 +54,25 @@ public class CustomerLinkmanAction {
         return null;
 
     }
+
+    /**
+     * add
+     * @param customerLinkman
+     * @return
+     */
+    @RequestMapping(value="add",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "customerInfo-customerContacts",methods = "addCustomerLinkman")
+    @ResponseBody
+    public ResultPojo addCustomerLinkmanById(@RequestBody CustomerLinkman customerLinkman){
+        Result result = new Result();
+        try{
+            result=customerLinkmanService.addCustomerLinkman(customerLinkman);
+        }catch(Exception e){
+            log.error("新增联系人错误",e);
+        }
+        return result.getResultPojo();
+    }
+
 
     /**
      * delete
@@ -76,7 +94,7 @@ public class CustomerLinkmanAction {
 
     /**
      * update
-     * @param id
+     * @param customerLinkman
      * @return
      */
     @RequestMapping(value="updateById",method = RequestMethod.POST)

@@ -1,12 +1,15 @@
 package com.fuhuadata.manager.impl;
 import java.util.List;
+
+
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.QueryCustomerLinkman;
 import com.fuhuadata.manager.CustomerLinkmanManager;
 import com.fuhuadata.dao.CustomerLinkmanDao;
 import com.fuhuadata.domain.CustomerLinkman;
+import com.fuhuadata.util.StringUtil;
+
 import javax.annotation.Resource;
-import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 
 /**
@@ -20,6 +23,9 @@ public class CustomerLinkmanManagerImpl implements CustomerLinkmanManager {
     
 
     public CustomerLinkman addCustomerLinkman(CustomerLinkman customerLinkman) {
+    	//设置字符串主键
+    	String linkmanId = customerLinkmanDao.getMaxLinkmanIdByCustomerId(customerLinkman.getCustomerId());
+    	customerLinkman.setLinkmanId(StringUtil.increment(linkmanId,3));
     	return customerLinkmanDao.addCustomerLinkman(customerLinkman);
     }
     
