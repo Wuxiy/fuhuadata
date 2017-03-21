@@ -75,7 +75,7 @@
                             编辑
                         </button>
                         <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden">
-                            <button data-form-btn="cancel" class="btn" lang="zh">取消</button>
+                            <button id="cooperation_cl" data-form-btn="cancel" class="btn" lang="zh">取消</button>
                             <button id="cooperation_up" data-form-btn="save" class="btn btn-primary" lang="zh">保存</button>
                         </div>
                         <h3 class="panel-title" lang="zh">
@@ -206,7 +206,7 @@
         //筛选客户采购产品
         $(document).on('change.year','#cpps_year',function (e) {
             var year = $(e.target).val();
-            var cusId = GetRequest().customerId;
+            var cusId = $('#customerId').customerId;
             var data = {
                 year:year,
                 customerId:cusId
@@ -263,29 +263,41 @@
         //客户采购产品批量提交
         $(document).on('click.up','#cpps_up',function() {
             upData('${request.contextPath}/customerMarketInfo/addCPPList','POST',cppsObj(),'application/json');
-            //改变年份，刷新页面
-            $('#cpps_year').val($('#year').val());
+            //刷新
+            getData('${request.contextPath}/customerMarketInfo/init','POST',GetRequest(),pop);
+
         });
         //客户销售产品批量提交
         $(document).on('click.up','#csps_up',function() {
             upData('${request.contextPath}/customerMarketInfo/addCSPList','POST',cspsObj(),'application/json');
-            $('#cpps_year').val($('#year').val());
+            //刷新
+            getData('${request.contextPath}/customerMarketInfo/init','POST',GetRequest(),pop);
         });
         //客户合作情况提交
         $(document).on('click.up','#cooperation_up',function() {
             upData('${request.contextPath}/customerMarketInfo/updateCooperationInfo','POST',cooperationObj(),'application/x-www-form-urlencoded; charset=UTF-8');
+            //刷新
+            getData('${request.contextPath}/customerMarketInfo/init','POST',GetRequest(),pop);
         });
+        //客户合作情况取消
+        $(document).on('click','#cooperation_cl',function () {
+            //刷新
+            getData('${request.contextPath}/customerMarketInfo/init','POST',GetRequest(),pop);
+        })
+        //双击文本添加到指定文本框
         var selectedPName;
-        $(document).on('focus','input[name="productName"]',function (e) {
-            selectedPName = $(e.target);
-            selectedPName.next('.input-group-btn').find('[data-toggle="modal"]').triggerHandler('.bs.modal.data-api');
+        $(document).on('click','[data-target="#treeModal"]',function (e) {
+            selectedPName = $(e.target).parents('.input-group').find('input');
+//            console.log(selectedPName);
         })
         $(document).on('click','#tree a',function (e) {
             e.preventDefault();
         })
-        $(document).on('dblclick','#tree a',function (e) {
+        $(document).on('dblclick','#tree a.cNode',function (e) {
+            var close = $(e.target).parents('.modal').find('.close');
             var txt = $(e.target).text();
-
+            selectedPName.val(txt);
+            close.click();
         })
 
 
@@ -294,7 +306,10 @@
             var tbody = '';
             tbody += '<tbody name="cspsTbody">';
             tbody += '<tr><th>销售产品</th>';
-            tbody += '<th><input name="productName" class="form-control" type="text" value=""></th>';
+            tbody += '<th><div class="input-group"><input name="productName" class="form-control" type="text" value="" disabled>';
+            tbody += '<span class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal">';
+            tbody += '<span class="glyphicon glyphicon-search"></span>';
+            tbody += '</button></span></div></th>';
             tbody += '<th>年销售量</th>';
             tbody += '<th><input name="yearSalesTotal" class="form-control" type="text" value=""></th>';
             tbody += '<th>品牌</th>';
@@ -326,7 +341,7 @@
             var tbody = '';
             tbody += '<tbody name="cppsTbody">';
             tbody += '<tr><th>采购产品</th>';
-            tbody += '<th><div class="input-group"><input name="productName" class="form-control" type="text" value="">';
+            tbody += '<th><div class="input-group"><input name="productName" class="form-control" type="text" value="" disabled>';
             tbody += '<span class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal">';
             tbody += '<span class="glyphicon glyphicon-search"></span>';
             tbody += '</button></span></div></th>';

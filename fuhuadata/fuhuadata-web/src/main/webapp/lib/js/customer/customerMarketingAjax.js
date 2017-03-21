@@ -121,7 +121,7 @@ function cppsObj() {
         // console.log($this);
         var obj = {};
         obj.year = $('#year').val();
-        obj.customerId = GetRequest().customerId;
+        obj.customerId = $('#customerId').val();
         obj.productName = $this.find('[name="productName"]').val();
         obj.annualDemands = $this.find('[name="annualDemands"]').val();
         obj.averagePrice = $this.find('[name="averagePrice"]').val();
@@ -148,7 +148,7 @@ function cspsObj() {
         var $this = $(this);
         var obj = {};
         obj.year = $('#year').val();
-        obj.customerId = GetRequest().customerId;
+        obj.customerId = $('#customerId').val();
         obj.productName = $this.find('[name="productName"]').val();
         obj.yearSalesTotal = $this.find('[name="yearSalesTotal"]').val();
         obj.brand = $this.find('[name="brand"]').val();
@@ -163,6 +163,7 @@ function cspsObj() {
         obj.yearSales3 = $this.find('[name="yearSales1"]').val();
         obj.marketShare3 = $this.find('[name="marketShare1"]').val();
         csps.push(obj);
+        console.log(csps);
     });
     return JSON.stringify(csps);
 }
