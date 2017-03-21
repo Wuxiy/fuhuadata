@@ -5,6 +5,7 @@
 <sqlMap namespace="CUSTOMERVISITRECORD">
    	<typeAlias alias="CustomerVisitRecord" type="com.fuhuadata.domain.CustomerVisitRecord"/>
    	<typeAlias alias="QueryCustomerVisitRecord" type="com.fuhuadata.domain.query.QueryCustomerVisitRecord"/>
+	<typeAlias alias="LinkmanVisitRecordVO" type="com.fuhuadata.vo.LinkmanVisitRecordVO"/>
 	
 	<resultMap id="CUSTOMERVISITRECORD-MAP" class="CustomerVisitRecord">
 					<result property="visitrecordId" column="visitrecord_id" jdbcType="INT" javaType="java.lang.Integer" />
@@ -17,7 +18,6 @@
 								<result property="activityRemarks" column="activity_remarks" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="activityAddress" column="activity_address" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="activityExpense" column="activity_expense" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-								<result property="visitRemarks" column="visit_remarks" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="activitySummary" column="activity_summary" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="createUserId" column="create_user_id" jdbcType="INT" javaType="java.lang.Integer" />
 								<result property="createUserName" column="create_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -58,9 +58,6 @@
 		</isNotNull>
 				<isNotNull prepend=" AND " property="activityExpense">
 			activity_expense = #activityExpense#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="visitRemarks">
-			visit_remarks = #visitRemarks#
 		</isNotNull>
 				<isNotNull prepend=" AND " property="activitySummary">
 			activity_summary = #activitySummary#
@@ -118,9 +115,6 @@
 				<isNotNull prepend=" AND " property="activityExpense">
 			activity_expense = #activityExpense#
 		</isNotNull>
-				<isNotNull prepend=" AND " property="visitRemarks">
-			visit_remarks = #visitRemarks#
-		</isNotNull>
 				<isNotNull prepend=" AND " property="activitySummary">
 			activity_summary = #activitySummary#
 		</isNotNull>
@@ -147,8 +141,8 @@
 	
 	<insert id="ADD" parameterClass="CustomerVisitRecord">
 		INSERT INTO 
-		customer_visit_record(visitrecord_id,customer_id,user_id,user_name,start_time,end_time,activity_type,activity_remarks,activity_address,activity_expense,visit_remarks,activity_summary,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time) 
-		VALUES(#visitrecordId#,#customerId#,#userId#,#userName#,#startTime#,#endTime#,#activityType#,#activityRemarks#,#activityAddress#,#activityExpense#,#visitRemarks#,#activitySummary#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
+		customer_visit_record(visitrecord_id,customer_id,user_id,user_name,start_time,end_time,activity_type,activity_address,activity_expense,visit_remarks,activity_summary,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time)
+		VALUES(#visitrecordId#,#customerId#,#userId#,#userName#,#startTime#,#endTime#,#activityType#,#activityAddress#,#activityExpense#,#visitRemarks#,#activitySummary#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
 		<selectKey resultClass="int" keyProperty="id">
 			SELECT @@IDENTITY AS ID
 		</selectKey>
@@ -167,7 +161,6 @@
 						<isNotEmpty prepend=", " property="activityRemarks">activity_remarks=#activityRemarks#</isNotEmpty>
 						<isNotEmpty prepend=", " property="activityAddress">activity_address=#activityAddress#</isNotEmpty>
 						<isNotEmpty prepend=", " property="activityExpense">activity_expense=#activityExpense#</isNotEmpty>
-						<isNotEmpty prepend=", " property="visitRemarks">visit_remarks=#visitRemarks#</isNotEmpty>
 						<isNotEmpty prepend=", " property="activitySummary">activity_summary=#activitySummary#</isNotEmpty>
 						<isNotEmpty prepend=", " property="createUserId">create_user_id=#createUserId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="createUserName">create_user_name=#createUserName#</isNotEmpty>
@@ -212,13 +205,22 @@
 	]]>
 	</select>
 
-	<select id="GET-BY-LINKMAN-ID" resultMap="CUSTOMERVISITRECORD-MAP" parameterClass="java.lang.String">
+	<select id="GET-BY-LINKMAN-ID" resultClass="LinkmanVisitRecordVO" parameterClass="java.lang.String">
 		<![CDATA[
-					SELECT c.*
-		FROM customer_linkman a
-		LEFT JOIN record_linkman b ON a.linkman_id = b.linkman_id
-		LEFT JOIN customer_visit_record c on b.visit_record_id = c.visitrecord_id
-		WHERE a.linkman_id = #linkmanId#
+				SELECT
+			b.linkman_id linkmanId,
+			b.activity_expens activityExpens,
+			b.activity_gift activityGift,
+			c.start_time startTime,
+			c.end_time endTime,
+			c.activity_type activityType,
+			c.activity_address activityAddress,
+			c.activity_summary activitySummary
+			FROM
+				record_linkman b
+			LEFT JOIN customer_visit_record c ON b.visit_record_id = c.visitrecord_id
+			WHERE
+				b.linkman_id = #linkmanId#
 	]]>
 	</select>
 	

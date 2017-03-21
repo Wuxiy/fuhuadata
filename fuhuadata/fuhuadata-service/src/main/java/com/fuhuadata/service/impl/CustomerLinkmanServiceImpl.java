@@ -97,7 +97,7 @@ public class CustomerLinkmanServiceImpl implements CustomerLinkmanService {
     		log.error("根据联系人id获取详情错误",e);
 		}
 		try {
-			customerLinkmanVO.setCustomerVisitRecords(customerVisitRecordManager.getCustomerVisitRecordByLinkmanId(linkmanId));
+			customerLinkmanVO.setLinkmanVisitRecordVOS(customerVisitRecordManager.getCustomerVisitRecordByLinkmanId(linkmanId));
 			result.addDefaultModel("CustomerLinkmanDetails",customerLinkmanVO);
 		}catch(Exception e){
 			result.setSuccess(false);

@@ -15,8 +15,8 @@
 					<result property="shortName" column="short_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="enterpriseNature" column="enterprise_nature" jdbcType="INT" javaType="java.lang.Integer" />
 					<result property="customerType" column="customer_type" jdbcType="INT" javaType="java.lang.Integer" />
-					<result property="areaId" column="area_id" jdbcType="INT" javaType="java.lang.Integer" />
-					<result property="area" column="area" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="areaId" column="customer_area_id" jdbcType="INT" javaType="java.lang.Integer" />
+					<result property="area" column="customer_area" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="countryId" column="country_id" jdbcType="INT" javaType="java.lang.Integer" />
 					<result property="country" column="country" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="registeredFunds" column="registered_funds" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -152,10 +152,10 @@
 			customer_type = #customerType#
 		</isNotEmpty>
 				<isNotEmpty prepend=" AND " property="areaId">
-			area_id = #areaId#
+					customer_area_id = #areaId#
 		</isNotEmpty>
 				<isNotEmpty prepend=" AND " property="area">
-			area = #area#
+			customer_area = #area#
 		</isNotEmpty>
 				<isNotEmpty prepend=" AND " property="countryId">
 			country_id = #countryId#
@@ -228,7 +228,7 @@
 	
 	<insert id="ADD" parameterClass="CustomerBaseInfo">
 		INSERT INTO 
-		customer_base_info(customer_id,full_name,short_name,customer_type,area_id,area,country_id,country,registered_funds,registered_address,management_scope,zhongxinbao_number,zhongxinbao_level,parent_remarks,enterprise_phone,enterprise_email,enterprise_profile,development_course,sales_network,custom_field,customer_completion,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time)
+		customer_base_info(customer_id,full_name,short_name,customer_type,customer_area_id,customer_area,country_id,country,registered_funds,registered_address,management_scope,zhongxinbao_number,zhongxinbao_level,remark,enterprise_phone,enterprise_email,enterprise_profile,development_course,sales_network,custom_field,customer_completion,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time)
 		VALUES(#customerId#,#fullName#,#shortName#,#customerType#,#areaId#,#area#,#countryId#,#country#,#registeredFunds#,#registeredAddress#,#managementScope#,#zhongxinbaoNumber#,#zhongxinbaoLevel#,#remark#,#enterprisePhone#,#enterpriseEmail#,#enterpriseProfile#,#developmentCourse#,#salesNetwork#,#customField#,#customerCompletion#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
 		<selectKey resultClass="String" keyProperty="id">
 			SELECT @@IDENTITY AS ID
@@ -240,8 +240,8 @@
 		<dynamic prepend=" SET ">
 						<isNotEmpty prepend=", " property="fullName">full_name=#fullName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="shortName">short_name=#shortName#</isNotEmpty>
-						<isNotEmpty prepend=", " property="areaId">area_id=#areaId#</isNotEmpty>
-						<isNotEmpty prepend=", " property="area">area=#area#</isNotEmpty>
+						<isNotEmpty prepend=", " property="areaId">customer_area_id=#areaId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="area">customer_area=#area#</isNotEmpty>
 						<isNotEmpty prepend=", " property="countryId">country_id=#countryId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="country">country=#country#</isNotEmpty>
 						<isNotEmpty prepend=", " property="companyType">company_type=#companyType#</isNotEmpty>
@@ -253,7 +253,7 @@
 						<isNotEmpty prepend=", " property="managementScope">management_scope=#managementScope#</isNotEmpty>
 						<isNotEmpty prepend=", " property="zhongxinbaoNumber">zhongxinbao_number=#zhongxinbaoNumber#</isNotEmpty>
 						<isNotEmpty prepend=", " property="zhongxinbaoLevel">zhongxinbao_level=#zhongxinbaoLevel#</isNotEmpty>
-						<isNotEmpty prepend=", " property="remark">parent_remarks=#remark#</isNotEmpty>
+						<isNotEmpty prepend=", " property="remark">remark=#remark#</isNotEmpty>
 						<isNotEmpty prepend=", " property="enterprisePhone">enterprise_phone=#enterprisePhone#</isNotEmpty>
 						<isNotEmpty prepend=", " property="enterpriseEmail">enterprise_email=#enterpriseEmail#</isNotEmpty>
 						<isNotEmpty prepend=", " property="customerLevel">customer_level=#customerLevel#</isNotEmpty>

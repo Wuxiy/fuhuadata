@@ -33,7 +33,7 @@ function customerBasicInfo(result){
     $('#countryId').val(getData.countryId);
     $('#remark').val(getData.remark);
     $('#hasChiCompany').val(getData.hasChiCompany);
-    $('#productLine').val(getData.productLine);
+    $('#productionLine').val(getData.productLine);
     $('#encyId').val(getData.encyId);
     $('#customerId').val(getData.customerId);
     $('#createUserId').val(getData.createUserId);
@@ -121,7 +121,7 @@ function customerBasicFormObj() {
             "countryId": $('#countryId').val(),
             "remark": $('#remark').val(),
             "hasChiCompany": $('#hasChiCompany').val(),
-            "productLine": $('#productLine').val(),
+            "productionLine": $('#productLine').val(),
             "encyId": $('#encyId').val(),
             "customerId": $('#customerId').val(),
             "createUserId": $('#createUserId').val(),

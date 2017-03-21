@@ -13,7 +13,7 @@ import java.util.List;
 public class CustomerLinkmanVO {
     private CustomerLinkman customerLinkman;
 
-    private List<CustomerVisitRecord> customerVisitRecords;
+    private List<LinkmanVisitRecordVO> linkmanVisitRecordVOS;
 
     public CustomerLinkman getCustomerLinkman() {
         return customerLinkman;
@@ -23,18 +23,20 @@ public class CustomerLinkmanVO {
         this.customerLinkman = customerLinkman;
     }
 
-    public List<CustomerVisitRecord> getCustomerVisitRecords() {
-        return customerVisitRecords;
-    }
 
-    public void addCustomerVisitRecord(CustomerVisitRecord customerVisitRecord){
-        if(this.customerVisitRecords==null){
-            this.customerVisitRecords=new ArrayList<CustomerVisitRecord>();
+    public void addlinkmanVisitRecordVO(LinkmanVisitRecordVO linkmanVisitRecordVO){
+        if(this.linkmanVisitRecordVOS==null){
+            this.linkmanVisitRecordVOS=new ArrayList<LinkmanVisitRecordVO>();
         }
-        this.customerVisitRecords.add(customerVisitRecord);
+        this.linkmanVisitRecordVOS.add(linkmanVisitRecordVO);
     }
 
-    public void setCustomerVisitRecords(List<CustomerVisitRecord> customerVisitRecords) {
-        this.customerVisitRecords = customerVisitRecords;
+
+    public List<LinkmanVisitRecordVO> getLinkmanVisitRecordVOS() {
+        return linkmanVisitRecordVOS;
+    }
+
+    public void setLinkmanVisitRecordVOS(List<LinkmanVisitRecordVO> linkmanVisitRecordVOS) {
+        this.linkmanVisitRecordVOS = linkmanVisitRecordVOS;
     }
 }

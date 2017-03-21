@@ -6,6 +6,8 @@ import com.fuhuadata.manager.CustomerVisitRecordManager;
 import com.fuhuadata.domain.CustomerVisitRecord;
 import com.fuhuadata.domain.query.QueryCustomerVisitRecord;
 import javax.annotation.Resource;
+
+import com.fuhuadata.vo.LinkmanVisitRecordVO;
 import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 
@@ -68,7 +70,7 @@ public class CustomerVisitRecordManagerImpl implements CustomerVisitRecordManage
 	}
 
 	@Override
-	public List<CustomerVisitRecord> getCustomerVisitRecordByLinkmanId(String linkmanId) {
+	public List<LinkmanVisitRecordVO> getCustomerVisitRecordByLinkmanId(String linkmanId) {
 		return customerVisitRecordDao.getCustomerVisitRecordByLinkmanId(linkmanId);
 	}
 
