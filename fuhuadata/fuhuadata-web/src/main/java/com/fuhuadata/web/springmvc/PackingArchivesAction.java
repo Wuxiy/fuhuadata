@@ -6,7 +6,7 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.PackingArchivesService;
 import com.fuhuadata.vo.PackingArchivesVO;
-import com.fuhuadata.web.util.StringUtil;
+import com.fuhuadata.util.StringUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;

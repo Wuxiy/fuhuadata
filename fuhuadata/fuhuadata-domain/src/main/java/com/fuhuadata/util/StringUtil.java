@@ -1,4 +1,4 @@
-package com.fuhuadata.web.util;
+package com.fuhuadata.util;
 
 import java.util.*;
 
@@ -101,4 +101,28 @@ public class StringUtil {
         String[] result = new String[0];
         return strList.toArray(result);
     }
+
+
+    /**
+     *
+     * @param str
+     * @param digits
+     * @return
+     */
+    public static String increment(String str,int digits){
+        String numStr = str.substring(str.length()-digits,str.length());
+        int num = Integer.valueOf(numStr)+1;
+        String numConStr=String.valueOf(num);
+        StringBuffer sb = new StringBuffer();
+        //补全前面缺失的0
+        for(int i = 0;i<digits-numConStr.length();i++){
+            sb.append("0");
+        }if(numConStr.length()<=digits){
+            numStr=sb.toString()+numConStr;
+        }else{
+            numStr="无可用序列";
+        }
+        return numStr;
+    }
+
 }
