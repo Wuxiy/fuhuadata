@@ -11,7 +11,7 @@ $(document).ready(function(){
     $(document).on('click.up','#save',function(){
         //提交数据
         upData(basePath+'/customerLinkman/updateById','POST',updateContactsInfo(),"application/json");
-        location.reload();
+
     });
     //客户基本信息取消提交
     $(document).on('click.cancel','#cancel',function(){
