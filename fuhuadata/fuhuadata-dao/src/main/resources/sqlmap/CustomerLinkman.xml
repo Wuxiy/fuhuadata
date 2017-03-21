@@ -207,31 +207,31 @@
 	<update id="UPDATE" parameterClass="CustomerLinkman">
 		UPDATE customer_linkman 
 		<dynamic prepend=" SET ">
-						<isNotEmpty prepend=", " property="linkmanId">linkman_id=#linkmanId#</isNotEmpty>
-						<isNotEmpty prepend=", " property="customerId">customer_id=#customerId#</isNotEmpty>
-						<isNotEmpty prepend=", " property="name">name=#name#</isNotEmpty>
-						<isNotEmpty prepend=", " property="linkPhone1">link_phone1=#linkPhone1#</isNotEmpty>
-						<isNotEmpty prepend=", " property="linkPhone2">link_phone2=#linkPhone2#</isNotEmpty>
-						<isNotEmpty prepend=", " property="lemail">lemail=#lemail#</isNotEmpty>
-						<isNotEmpty prepend=", " property="posts">posts=#posts#</isNotEmpty>
-						<isNotEmpty prepend=", " property="responseArea">response_area=#responseArea#</isNotEmpty>
-						<isNotEmpty prepend=", " property="onJob">on_job=#onJob#</isNotEmpty>
-						<isNotEmpty prepend=", " property="sex">sex=#sex#</isNotEmpty>
-						<isNotEmpty prepend=", " property="birthday">birthday=#birthday#</isNotEmpty>
-						<isNotEmpty prepend=", " property="nationality">nationality=#nationality#</isNotEmpty>
-						<isNotEmpty prepend=", " property="influence">influence=#influence#</isNotEmpty>
-						<isNotEmpty prepend=", " property="exhibitionHabits">exhibition_habits=#exhibitionHabits#</isNotEmpty>
-						<isNotEmpty prepend=", " property="fancy">fancy=#fancy#</isNotEmpty>
-						<isNotEmpty prepend=", " property="eatingHabits">eating_habits=#eatingHabits#</isNotEmpty>
-						<isNotEmpty prepend=", " property="faith">faith=#faith#</isNotEmpty>
-						<isNotEmpty prepend=", " property="isDefault">is_default=#isDefault#</isNotEmpty>
-						<isNotEmpty prepend=", " property="remarks">remarks=#remarks#</isNotEmpty>
-						<isNotEmpty prepend=", " property="createUserId">create_user_id=#createUserId#</isNotEmpty>
-						<isNotEmpty prepend=", " property="createUserName">create_user_name=#createUserName#</isNotEmpty>
-						<isNotEmpty prepend=", " property="lastmodifyUserId">lastmodify_user_id=#lastmodifyUserId#</isNotEmpty>
-						<isNotEmpty prepend=", " property="lastmodifyUserName">lastmodify_user_name=#lastmodifyUserName#</isNotEmpty>
-						<isNotEmpty prepend=", " property="createTime">create_time=#createTime#</isNotEmpty>
-						<isNotEmpty prepend=", " property="modifyTime">modify_time=#modifyTime#</isNotEmpty>
+						<isNotNull prepend=", " property="linkmanId">linkman_id=#linkmanId#</isNotNull>
+						<isNotNull prepend=", " property="customerId">customer_id=#customerId#</isNotNull>
+						<isNotNull prepend=", " property="name">name=#name#</isNotNull>
+						<isNotNull prepend=", " property="linkPhone1">link_phone1=#linkPhone1#</isNotNull>
+						<isNotNull prepend=", " property="linkPhone2">link_phone2=#linkPhone2#</isNotNull>
+						<isNotNull prepend=", " property="lemail">lemail=#lemail#</isNotNull>
+						<isNotNull prepend=", " property="posts">posts=#posts#</isNotNull>
+						<isNotNull prepend=", " property="responseArea">response_area=#responseArea#</isNotNull>
+						<isNotNull prepend=", " property="onJob">on_job=#onJob#</isNotNull>
+						<isNotNull prepend=", " property="sex">sex=#sex#</isNotNull>
+						<isNotNull prepend=", " property="birthday">birthday=#birthday#</isNotNull>
+						<isNotNull prepend=", " property="nationality">nationality=#nationality#</isNotNull>
+						<isNotNull prepend=", " property="influence">influence=#influence#</isNotNull>
+						<isNotNull prepend=", " property="exhibitionHabits">exhibition_habits=#exhibitionHabits#</isNotNull>
+						<isNotNull prepend=", " property="fancy">fancy=#fancy#</isNotNull>
+						<isNotNull prepend=", " property="eatingHabits">eating_habits=#eatingHabits#</isNotNull>
+						<isNotNull prepend=", " property="faith">faith=#faith#</isNotNull>
+						<isNotNull prepend=", " property="isDefault">is_default=#isDefault#</isNotNull>
+						<isNotNull prepend=", " property="remarks">remarks=#remarks#</isNotNull>
+						<isNotNull prepend=", " property="createUserId">create_user_id=#createUserId#</isNotNull>
+						<isNotNull prepend=", " property="createUserName">create_user_name=#createUserName#</isNotNull>
+						<isNotNull prepend=", " property="lastmodifyUserId">lastmodify_user_id=#lastmodifyUserId#</isNotNull>
+						<isNotNull prepend=", " property="lastmodifyUserName">lastmodify_user_name=#lastmodifyUserName#</isNotNull>
+						<isNotNull prepend=", " property="createTime">create_time=#createTime#</isNotNull>
+						<isNotNull prepend=", " property="modifyTime">modify_time=#modifyTime#</isNotNull>
 					</dynamic>
 		WHERE linkman_id=#linkmanId#
 	</update>
