@@ -5,16 +5,16 @@ $(document).ready(function(){
     getData(basePath + '/customerLinkman/getCustomerLinkmanDetailsById','POST',GetRequest(),customerContactsInfo);
 
     //编辑联系人基本信息
-    $(document).on('click.edit','editCustomerBasic',function () {
+    $(document).on('click.edit','#edit',function () {
     });
     //联系人基本信息提交
-    $(document).on('click.up','#saveCustomerBasic',function(){
+    $(document).on('click.up','#save',function(){
         //提交数据
-        upData(basePath+'/customerLinkman/','POST',updateContactsInfo(),"application/json");
+        upData(basePath+'/customerLinkman/updateById','POST',updateContactsInfo(),"application/json");
         location.reload();
     });
     //客户基本信息取消提交
-    $(document).on('click.cancel','#cancelCustomerBasic',function(){
+    $(document).on('click.cancel','#cancel',function(){
         location.reload();
     });
 })
@@ -27,6 +27,7 @@ function customerContactsInfo(result) {
     console.log(customerVisitRecords.activityType)
     var visitRecordsTable = document.getElementById('visitRecordsTable');
     if(customerLinkman){
+        $('#name').attr('data-id',customerLinkman.linkmanId);
         $('#name').val(customerLinkman.name);
         $('#posts').val(customerLinkman.posts);
         $('#responseArea').val(customerLinkman.responseArea);
@@ -43,7 +44,7 @@ function customerContactsInfo(result) {
         $('#eatingHabits').val(customerLinkman.eatingHabits);
         $('#faith').val(customerLinkman.faith);
         $('#isDefault').val(customerLinkman.isDefault);
-        $('#lemail').val(customerLinkman.remarks);
+        $('#remarks').val(customerLinkman.remarks);
     }
     if(customerVisitRecords){
         for(var i=0;i<customerVisitRecords.length;i++){
@@ -61,5 +62,25 @@ function customerContactsInfo(result) {
 
 //提交上传
 function updateContactsInfo() {
-
+    var data = {
+        "linkmanId":$('#name').attr('data-id'),
+        "posts":$('#posts').val(),
+        "responseArea":$('#responseArea').val(),
+        "onJob":$('#onJob').val(),
+        "sex":$('#sex').val(),
+        "birthday":$('#birthday').val(),
+        "nationality":$('#nationality').val(),
+        "influence":$('#influence').val(),
+        "exhibitionHabits":$('#exhibitionHabits').val(),
+        "fancy":$('#fancy').val(),
+        "linkPhone1":$('#linkPhone1').val(),
+        "linkPhone2":$('#linkPhone2').val(),
+        "lemail":$('#lemail').val(),
+        "eatingHabits":$('#eatingHabits').val(),
+        "faith":$('#faith').val(),
+        "isDefault":$('#isDefault').val(),
+        "remarks":$('#remarks').val()
+    }
+    console.log(data);
+    return JSON.stringify(data);
 }

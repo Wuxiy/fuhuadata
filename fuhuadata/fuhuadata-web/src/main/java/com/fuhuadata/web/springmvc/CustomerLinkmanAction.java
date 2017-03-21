@@ -74,6 +74,11 @@ public class CustomerLinkmanAction {
         return result.getResultPojo();
     }
 
+    /**
+     * update
+     * @param id
+     * @return
+     */
     @RequestMapping(value="updateById",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "customerInfo-customerContacts",methods = "updateById")
     @ResponseBody
