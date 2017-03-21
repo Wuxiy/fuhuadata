@@ -59,9 +59,6 @@ public class CustomerBaseInfo implements Serializable{
     /**企业邮箱**/
 	private String enterpriseEmail;
 
-	/**生产线**/
-	private String productionLine;
-
 	//企业百科信息
 
     /**企业简介**/
@@ -170,13 +167,6 @@ public class CustomerBaseInfo implements Serializable{
 	public CustomerBaseInfo() {
 	}
 
-	public String getProductionLine() {
-		return productionLine;
-	}
-
-	public void setProductionLine(String productionLine) {
-		this.productionLine = productionLine;
-	}
 
 	public String getCustomerId() {
 		return customerId;
@@ -202,16 +192,6 @@ public class CustomerBaseInfo implements Serializable{
 		this.shortName = shortName;
 	}
 
-<<<<<<< HEAD
-=======
-	public Integer getCompanyType() {
-		return companyType;
-	}
-
-	public void setCompanyType(Integer companyType) {
-		this.companyType = companyType;
-	}
->>>>>>> 21f0191881ca05cfc92764c01f4a8934d781ea72
 
 	public Integer getAreaId() {
 		return areaId;
