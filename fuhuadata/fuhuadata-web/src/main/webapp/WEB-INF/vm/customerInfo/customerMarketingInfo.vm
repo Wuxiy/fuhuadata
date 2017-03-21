@@ -122,7 +122,7 @@
                 </div>
             </div>
         </div>
-        <!--modal-->
+        <!--批量添加modal-->
         <div class="modal fade" id="cusPro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -159,10 +159,27 @@
                 </div>
             </div>
         </div>
+        <!--树形菜单modal-->
+        <div class="modal fade" id="treeModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" style="margin-top: 300px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                    </div>
+                    <div class="modal-body well" style="max-height: 300px; overflow-y: scroll; overflow-x: scroll;">
+##                        这里插入树形菜单
+                        <div id="tree" class="tree"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <input type="hidden" id="customerId" value="${customerId}">
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerMarketingAjax.js"></script>
@@ -170,7 +187,8 @@
     $(function () {
         //获取数据
         getData('${request.contextPath}/customerMarketInfo/init','POST',GetRequest(),pop);
-
+        //创建树形菜单
+        $('#tree').creatTree('/productCategory/CategoryTree');
         /**
          * 功能按钮
          */
@@ -224,7 +242,7 @@
         $(document).on('click.add','#addMore',function(){
             var table = $('#table');
             var colspanN = table.find('tr').first().find('th').length;
-            alert(colspanN);
+//            alert(colspanN);
             var comBtn = $('[data-form-btn="complete"]');
             var tbody;
             var delBtn = "";//删除按钮
@@ -258,6 +276,20 @@
         $(document).on('click.up','#cooperation_up',function() {
             upData('${request.contextPath}/customerMarketInfo/updateCooperationInfo','POST',cooperationObj(),'application/x-www-form-urlencoded; charset=UTF-8');
         });
+        var selectedPName;
+        $(document).on('focus','input[name="productName"]',function (e) {
+            selectedPName = $(e.target);
+            selectedPName.next('.input-group-btn').find('[data-toggle="modal"]').triggerHandler('.bs.modal.data-api');
+        })
+        $(document).on('click','#tree a',function (e) {
+            e.preventDefault();
+        })
+        $(document).on('dblclick','#tree a',function (e) {
+            var txt = $(e.target).text();
+
+        })
+
+
         //构造销售产品表格
         function cspsTable(){
             var tbody = '';
@@ -295,7 +327,10 @@
             var tbody = '';
             tbody += '<tbody name="cppsTbody">';
             tbody += '<tr><th>采购产品</th>';
-            tbody += '<th><input name="productName" class="form-control" type="text" value=""></th>';
+            tbody += '<th><div class="input-group"><input name="productName" class="form-control" type="text" value="">';
+            tbody += '<span class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal">';
+            tbody += '<span class="glyphicon glyphicon-search"></span>';
+            tbody += '</button></span></div></th>';
             tbody += '<th>年需求量</th>';
             tbody += '<th><input name="annualDemands" class="form-control" type="text" value=""></th>';
             tbody += '<th>平均单价(美元)</th>';
