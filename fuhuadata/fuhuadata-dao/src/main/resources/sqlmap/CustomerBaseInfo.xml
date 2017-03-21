@@ -370,6 +370,7 @@
 			base.major_competitors majorCompetitors,
 			base.production_line productLine,
 			base.create_time createTime,
+			base.modify_time modifyTime,
 			en.ency_id encyId,
 			en.company_info companyInfo,
 			en.is_full isFull,

@@ -92,6 +92,7 @@ public class CustomerBaseInfo implements Serializable{
 	/**是否有中国分公司 0：无 1：有**/
 	private  Integer hasChiCompany;
 
+
 	/**是否有中方采购 0：无 1：有**/
 	private  Integer hasChiPurchase;
 
