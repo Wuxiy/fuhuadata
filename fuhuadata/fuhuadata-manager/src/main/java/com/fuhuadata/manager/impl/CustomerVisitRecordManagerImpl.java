@@ -1,5 +1,8 @@
 package com.fuhuadata.manager.impl;
 import java.util.List;
+
+import com.fuhuadata.dao.RecordLinkmanDao;
+import com.fuhuadata.domain.RecordLinkman;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.dao.CustomerVisitRecordDao;
 import com.fuhuadata.manager.CustomerVisitRecordManager;
@@ -7,8 +10,9 @@ import com.fuhuadata.domain.CustomerVisitRecord;
 import com.fuhuadata.domain.query.QueryCustomerVisitRecord;
 import javax.annotation.Resource;
 
-import com.fuhuadata.vo.LinkmanVisitRecordVO;
-import org.springframework.stereotype.Component;
+import com.fuhuadata.vo.CustomerVisitRecordVO;
+import com.fuhuadata.vo.VisitRecordVO;
+
 import java.util.ArrayList;
 
 /**
@@ -19,13 +23,21 @@ public class CustomerVisitRecordManagerImpl implements CustomerVisitRecordManage
 
 	@Resource
     private CustomerVisitRecordDao customerVisitRecordDao;
+
+	@Resource
+	private RecordLinkmanDao recordLinkmanDao;
     
 
     public CustomerVisitRecord addCustomerVisitRecord(CustomerVisitRecord customerVisitRecord) {
     	return customerVisitRecordDao.addCustomerVisitRecord(customerVisitRecord);
     }
-    
-    public boolean updateCustomerVisitRecordById(int visitrecord_id, CustomerVisitRecord customerVisitRecord) {
+
+	@Override
+	public boolean addVisitRecord(CustomerVisitRecordVO customerVisitRecordVO) {
+		return false;
+	}
+
+	public boolean updateCustomerVisitRecordById(int visitrecord_id, CustomerVisitRecord customerVisitRecord) {
     	return customerVisitRecordDao.updateCustomerVisitRecordById(visitrecord_id, customerVisitRecord) == 1 ? true : false;
     }
     
@@ -65,12 +77,12 @@ public class CustomerVisitRecordManagerImpl implements CustomerVisitRecordManage
     }
 
 	@Override
-	public List<CustomerVisitRecord> getCustomerVisitRecordByCustomerId(String customerId) {
+	public List<VisitRecordVO> getCustomerVisitRecordByCustomerId(String customerId) {
 		return customerVisitRecordDao.getCustomerVisitRecordByCustomerId(customerId);
 	}
 
 	@Override
-	public List<LinkmanVisitRecordVO> getCustomerVisitRecordByLinkmanId(String linkmanId) {
+	public List<VisitRecordVO> getCustomerVisitRecordByLinkmanId(String linkmanId) {
 		return customerVisitRecordDao.getCustomerVisitRecordByLinkmanId(linkmanId);
 	}
 

@@ -2,10 +2,7 @@ package com.fuhuadata.dao;
 import java.util.List;
 import com.fuhuadata.domain.CustomerVisitRecord;
 import com.fuhuadata.domain.query.QueryCustomerVisitRecord;
-import com.fuhuadata.vo.LinkmanVisitRecordVO;
-
-import java.util.Map;
-import java.io.Serializable;
+import com.fuhuadata.vo.VisitRecordVO;
 
 /**
  * @author wangbo
@@ -59,14 +56,14 @@ public interface CustomerVisitRecordDao {
 	 * @param customerId
 	 * @return
 	 */
-	public List<CustomerVisitRecord> getCustomerVisitRecordByCustomerId(String customerId);
+	public List<VisitRecordVO> getCustomerVisitRecordByCustomerId(String customerId);
 
 	/**
 	 * 根据联系人id返回关于联系人的沟通记录
 	 * @param linkmanId
 	 * @return
 	 */
-    public List<LinkmanVisitRecordVO> getCustomerVisitRecordByLinkmanId(String linkmanId);
+    public List<VisitRecordVO> getCustomerVisitRecordByLinkmanId(String linkmanId);
         
 	 /**
      * 查询列表，包含分页查询，查询结果为空返回空的List对象

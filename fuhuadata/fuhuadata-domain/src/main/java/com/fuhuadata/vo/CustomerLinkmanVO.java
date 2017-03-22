@@ -1,7 +1,6 @@
 package com.fuhuadata.vo;
 
 import com.fuhuadata.domain.CustomerLinkman;
-import com.fuhuadata.domain.CustomerVisitRecord;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +12,7 @@ import java.util.List;
 public class CustomerLinkmanVO {
     private CustomerLinkman customerLinkman;
 
-    private List<LinkmanVisitRecordVO> linkmanVisitRecordVOS;
+    private List<VisitRecordVO> visitRecordVOS;
 
     public CustomerLinkman getCustomerLinkman() {
         return customerLinkman;
@@ -24,19 +23,19 @@ public class CustomerLinkmanVO {
     }
 
 
-    public void addlinkmanVisitRecordVO(LinkmanVisitRecordVO linkmanVisitRecordVO){
-        if(this.linkmanVisitRecordVOS==null){
-            this.linkmanVisitRecordVOS=new ArrayList<LinkmanVisitRecordVO>();
+    public void addlinkmanVisitRecordVO(VisitRecordVO visitRecordVO){
+        if(this.visitRecordVOS ==null){
+            this.visitRecordVOS =new ArrayList<VisitRecordVO>();
         }
-        this.linkmanVisitRecordVOS.add(linkmanVisitRecordVO);
+        this.visitRecordVOS.add(visitRecordVO);
     }
 
 
-    public List<LinkmanVisitRecordVO> getLinkmanVisitRecordVOS() {
-        return linkmanVisitRecordVOS;
+    public List<VisitRecordVO> getVisitRecordVOS() {
+        return visitRecordVOS;
     }
 
-    public void setLinkmanVisitRecordVOS(List<LinkmanVisitRecordVO> linkmanVisitRecordVOS) {
-        this.linkmanVisitRecordVOS = linkmanVisitRecordVOS;
+    public void setVisitRecordVOS(List<VisitRecordVO> visitRecordVOS) {
+        this.visitRecordVOS = visitRecordVOS;
     }
 }

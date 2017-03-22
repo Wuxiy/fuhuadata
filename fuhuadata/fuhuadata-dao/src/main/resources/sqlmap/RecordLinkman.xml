@@ -8,7 +8,7 @@
 	
 	<resultMap id="RECORDLINKMAN-MAP" class="RecordLinkman">
 		<result property="id" column="id" jdbcType="INT" javaType="java.lang.Integer" />
-		<result property="visitRecordId" column="visit_record_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="visitRecordId" column="visit_record_id" jdbcType="INT" javaType="java.lang.Integer" />
 		<result property="linkmanId" column="linkman_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="activityExpens" column="activity_expens" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
 		<result property="activityGift" column="activity_gift" jdbcType="VARCHAR" javaType="java.lang.String" />

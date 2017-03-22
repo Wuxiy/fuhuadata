@@ -1,7 +1,6 @@
 package com.fuhuadata.service.impl;
 import java.util.List;
 
-import com.fuhuadata.domain.CustomerVisitRecord;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.CustomerVisitRecordManager;
 import com.fuhuadata.service.CustomerLinkmanService;
@@ -13,9 +12,6 @@ import javax.annotation.Resource;
 import com.fuhuadata.vo.CustomerLinkmanVO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.stereotype.Component;
-import java.util.Map;
-import java.io.Serializable;
 
 /**
  * @author wangbo
@@ -100,7 +96,7 @@ public class CustomerLinkmanServiceImpl implements CustomerLinkmanService {
     		log.error("根据联系人id获取详情错误",e);
 		}
 		try {
-			customerLinkmanVO.setLinkmanVisitRecordVOS(customerVisitRecordManager.getCustomerVisitRecordByLinkmanId(linkmanId));
+			customerLinkmanVO.setVisitRecordVOS(customerVisitRecordManager.getCustomerVisitRecordByLinkmanId(linkmanId));
 			result.addDefaultModel("CustomerLinkmanDetails",customerLinkmanVO);
 		}catch(Exception e){
 			result.setSuccess(false);

@@ -4,10 +4,13 @@ import com.fuhuadata.domain.CustomerVisitRecord;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.CustomerVisitRecordService;
+import com.fuhuadata.vo.CustomerVisitRecordVO;
+import com.fuhuadata.vo.VisitRecordVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -48,7 +51,7 @@ public class CustomerVisitRecordAction {
     @SystemLogAnnotation(module = "CustomerInfo-CustomerVisitRecord",methods = "getByCustomerId")
     @ResponseBody
     public ResultPojo getCustomerVisitRecordByCustomerId(String customerId){
-        Result<List<CustomerVisitRecord>> result = new Result<List<CustomerVisitRecord>>();
+        Result<List<VisitRecordVO>> result = new Result<List<VisitRecordVO>>();
         try{
             result = customerVisitRecordService.getCustomerVisitRecordByCustomerId(customerId);
         }catch(Exception e){
@@ -57,6 +60,27 @@ public class CustomerVisitRecordAction {
         }
         return result.getResultPojo();
     }
+
+    /**
+     * add
+     * @param
+     * @return
+     */
+    @RequestMapping(value="/addCustomerVisitRecord",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "CustomerInfo-CustomerVisitRecord",methods = "addCustomerVisitRecord")
+    @ResponseBody
+    public ResultPojo addCustomerVisitRecord(@RequestBody CustomerVisitRecordVO customerVisitRecordVO){
+        Result result = new Result();
+        try{
+             result=customerVisitRecordService.addVisitRecord(customerVisitRecordVO);
+        }catch(Exception e){
+            result.setSuccess(false);
+            log.error("新增客户记录错误",e);
+        }
+        return result.getResultPojo();
+    }
+
+
 
 
 }

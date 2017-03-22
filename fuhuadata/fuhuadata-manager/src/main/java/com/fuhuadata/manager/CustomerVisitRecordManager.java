@@ -3,7 +3,8 @@ import java.util.List;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.CustomerVisitRecord;
 import com.fuhuadata.domain.query.QueryCustomerVisitRecord;
-import com.fuhuadata.vo.LinkmanVisitRecordVO;
+import com.fuhuadata.vo.CustomerVisitRecordVO;
+import com.fuhuadata.vo.VisitRecordVO;
 
 /**
  * @author wangbo
@@ -16,6 +17,8 @@ public interface CustomerVisitRecordManager {
 	 * @return
 	 */
     public CustomerVisitRecord addCustomerVisitRecord(CustomerVisitRecord customerVisitRecord) ;
+
+    public boolean addVisitRecord(CustomerVisitRecordVO customerVisitRecordVO);
     
 	 /**
      * 按照主键id更新customerVisitRecord，请重新new CustomerVisitRecord 的更新对象，设置要更新的字段
@@ -60,14 +63,14 @@ public interface CustomerVisitRecordManager {
 	 * @param customerId
 	 * @return
 	 */
-	public List<CustomerVisitRecord> getCustomerVisitRecordByCustomerId(String customerId);
+	public List<VisitRecordVO> getCustomerVisitRecordByCustomerId(String customerId);
 
 	/**
 	 * 根据联系人id返回关于联系人的沟通记录
 	 * @param linkmanId
 	 * @return
 	 */
-	public List<LinkmanVisitRecordVO> getCustomerVisitRecordByLinkmanId(String linkmanId);
+	public List<VisitRecordVO> getCustomerVisitRecordByLinkmanId(String linkmanId);
 
     /**
      * 查询列表，包含分页查询，
