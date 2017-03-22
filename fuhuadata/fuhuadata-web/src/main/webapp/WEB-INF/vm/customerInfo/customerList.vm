@@ -146,14 +146,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td id="">草甘膦95%原药</td>
-                        <td id="">草甘膦原药</td>
-                        <td id="">100000KG</td>
-                        <td id="">1000</td>
-                        <td id="">100</td>
-                        <td id="">100</td>
-                    </tr>
+
                     </tbody>
                 </table>
             </div>
@@ -313,7 +306,7 @@
                 customerLevel:$("#customerLevel").val(),
                 customerStatus:$("#customerStatus").val(),
 			},
-			async:false,
+			async:false,//同步加载
 			method:'POST',
 			success:function(data){
                 total = data.data;

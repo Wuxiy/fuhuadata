@@ -8,7 +8,6 @@ function getData(url,type,data,callBack){
         data:data
     }).done(function (result) {
         var data = result.data;
-        // console.log(result);
         callBack(data);
     }).fail(function(){
         console.log('没有获取到数据');

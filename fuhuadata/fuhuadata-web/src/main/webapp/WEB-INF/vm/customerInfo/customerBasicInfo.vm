@@ -3,7 +3,7 @@
     <div class="nav-deputy shadow-out clearfix">
         <ul id="deputyNav" class="nav nav-tabs pull-left">
             <li class="active"><a href="${request.contextPath}/customerBaseInfo/intoCustomerBaseInfoDetails">基本信息</a></li>
-            <li><a href="${request.contextPath}/customerPurchaseProduct/entrance" >市场信息</a></li>
+            <li><a href="${request.contextPath}/customerMarketInfo/entrance" >市场信息</a></li>
             <li><a href="${request.contextPath}/customerLinkman/intoCustomerLinkmanList" >联系人</a></li>
             <li><a href="" >产品要求</a></li>
             <li><a href="" >订单信息</a></li>
@@ -296,13 +296,13 @@
                                     最后编辑人
                                 </label>
                                 <div class="col-xs-2">
-                                    <input id="createUserName" class="form-control noEdit" disabled value="">
+                                    <input id="lastmodifyUserName" class="form-control noEdit" disabled value="">
                                 </div>
                                 <label class="control-label col-xs-1" lang="zh">
                                     编辑时间
                                 </label>
                                 <div class="col-xs-2">
-                                    <input id="createTime"class="form-control noEdit" disabled value="">
+                                    <input id="modifyTime"class="form-control noEdit" disabled value="">
                                 </div>
                             </div>
                         </div>
@@ -351,7 +351,7 @@
 ##                            这里添加自定义字段
                             <div class="form-group">
                                 <div class="col-xs-2 col-xs-offset-1">
-                                    <button data-form-btn='add' data-target="#addCustomField" data-toggle="modal" class="btn-link editView hidden" type="button">添加自定义字段</button>
+                                    <button id="addFiled" data-form-btn='add' data-target="#addCustomField" data-toggle="modal" class="btn-link editView hidden" type="button">添加自定义字段</button>
                                 </div>
                             </div>
 ##                           customeField  modal
@@ -412,6 +412,7 @@
     </div>
 </div>
 <input type="hidden" id="customerId" value="${customerId}">
+<input type="hidden" id="encyId" value="">
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>

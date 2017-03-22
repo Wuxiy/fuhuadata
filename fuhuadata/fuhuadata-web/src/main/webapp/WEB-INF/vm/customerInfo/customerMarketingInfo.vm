@@ -3,7 +3,7 @@
     <div class="nav-deputy shadow-out clearfix">
         <ul id="deputyNav" class="nav nav-tabs pull-left">
             <li><a href="${request.contextPath}/customerBaseInfo/intoCustomerBaseInfoDetails">基本信息</a></li>
-            <li class="active"><a href="${request.contextPath}/customerPurchaseProduct/entrance" >市场信息</a></li>
+            <li class="active"><a href="${request.contextPath}/customerMarketInfo/entrance" >市场信息</a></li>
             <li><a href="${request.contextPath}/customerLinkman/intoCustomerLinkmanList" >联系人</a></li>
             <li><a href="" >产品要求</a></li>
             <li><a href="" >订单信息</a></li>

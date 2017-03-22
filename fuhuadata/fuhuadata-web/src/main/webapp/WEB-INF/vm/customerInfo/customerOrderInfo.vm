@@ -60,13 +60,6 @@
                                         </select>
                                         <span class="input-group-addon" lang="zh">外销合同号</span>
                                         <input class="form-control" type="text" value="" />
-                                        <span class="input-group-addon" lang="zh">付款方式</span>
-                                        <select class="form-control">
-                                            <option value="" lang="zh">预付</option>
-                                            <option value="" lang="zh">账期</option>
-                                            <option value="" lang="zh">补贴</option>
-                                            <option value="" lang="zh">其他</option>
-                                        </select>
                                         <span class="input-group-addon" lang="zh">开始日期</span>
                                         <input class="form-control" type="date" value="" />
                                         <span class="input-group-addon" lang="zh">结束日期</span>
@@ -91,26 +84,12 @@
                                 <th class="text-center" lang="zh">是否投诉</th>
                                 <th class="text-center" lang="zh">是否调价</th>
                                 <th class="text-center" lang="zh">利润</th>
-                                <th class="text-center" lang="zh">付款方式</th>
                                 <th class="text-center" lang="zh">是否质押</th>
                                 <th class="text-center" lang="zh">合同时间</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>000001</td>
-                                <td>通达</td>
-                                <td><a href="" target="_blank">00001</a></td>
-                                <td><a href="" target="_blank">LSFH/FH20160701-K</a></td>
-                                <td>2000</td>
-                                <td>1000</td>
-                                <td>否</td>
-                                <td>是</td>
-                                <td>1000</td>
-                                <td>预付款</td>
-                                <td>否</td>
-                                <td>2016-10-10</td>
-                            </tr>
+
                             </tbody>
                         </table>
                         <!--分页导航-->
@@ -162,13 +141,6 @@
                                         </select>
                                         <span class="input-group-addon" lang="zh">外销合同号</span>
                                         <input class="form-control" type="text" value="" />
-                                        <span class="input-group-addon" lang="zh">付款方式</span>
-                                        <select class="form-control">
-                                            <option value="" lang="zh">预付</option>
-                                            <option value="" lang="zh">账期</option>
-                                            <option value="" lang="zh">补贴</option>
-                                            <option value="" lang="zh">其他</option>
-                                        </select>
                                         <span class="input-group-addon" lang="zh">开始日期</span>
                                         <input class="form-control" type="date" value="" />
                                         <span class="input-group-addon" lang="zh">结束日期</span>
@@ -203,17 +175,7 @@
                                 <td>市场价格上涨</td>
                                 <td>刘凯洋</td>
                                 <td>2016-10-10</td>
-
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td><a href="" target="_blank">00001</a></td>
-                                <td class="text-success">-0.05</td>
-                                <td class="text-success">-1000</td>
-                                <td>市场价格上涨</td>
-                                <td>刘凯洋</td>
-                                <td>2016-10-10</td>
-
+                                <td></td>
                             </tr>
                             </tbody>
                         </table>
@@ -225,8 +187,8 @@
                                     <input class="form-control" type="number"/>
                                     <span class="input-group-addon">页</span>
                                     <span class="input-group-btn">
-															<button class="btn btn-xs btn-primary">跳转</button>
-														</span>
+                                        <button class="btn btn-xs btn-primary">跳转</button>
+                                    </span>
                                 </div>
                             </div>
                             <div class="col-xs-4 text-right pull-right">
@@ -258,13 +220,6 @@
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     <div class="input-group">
-                                        <span class="input-group-addon" lang="zh">付款方式</span>
-                                        <select class="form-control">
-                                            <option value="" lang="zh">预付</option>
-                                            <option value="" lang="zh">账期</option>
-                                            <option value="" lang="zh">补贴</option>
-                                            <option value="" lang="zh">其他</option>
-                                        </select>
                                         <span class="input-group-addon" lang="zh">外销合同号</span>
                                         <input class="form-control" type="text" value="" />
                                         <span class="input-group-addon" lang="zh">发票号</span>
@@ -286,7 +241,6 @@
                             <tr>
                                 <th class="text-center" lang="zh">编号</th>
                                 <th class="text-center" lang="zh">外销合同号</th>
-                                <th class="text-center" lang="zh">付款方式</th>
                                 <th class="text-center" lang="zh">发票号</th>
                                 <th class="text-center" lang="zh">应付款时间</th>
                                 <th class="text-center" lang="zh">实付款时间</th>
@@ -299,13 +253,12 @@
                             <tr>
                                 <td>1</td>
                                 <td><a href="" target="_blank">00001</a></td>
-                                <td>账期支付</td>
-
+                                <td></td>
                                 <td>2016-10-10</td>
                                 <td>2016-11-11</td>
                                 <td>5</td>
                                 <td>15</td>
-
+                                <td></td>
                             </tr>
                             </tbody>
                         </table>
@@ -317,8 +270,8 @@
                                     <input class="form-control" type="number"/>
                                     <span class="input-group-addon">页</span>
                                     <span class="input-group-btn">
-															<button class="btn btn-xs btn-primary">跳转</button>
-														</span>
+                                        <button class="btn btn-xs btn-primary">跳转</button>
+                                    </span>
                                 </div>
                             </div>
                             <div class="col-xs-4 text-right pull-right">
@@ -376,20 +329,6 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>1</td>
-
-
-
-
-                            </tr>
-                            <tr>
-                                <td>2</td>
-
-
-
-
-                            </tr>
                             </tbody>
                         </table>
                         <!--分页导航-->
@@ -400,8 +339,8 @@
                                     <input class="form-control" type="number"/>
                                     <span class="input-group-addon">页</span>
                                     <span class="input-group-btn">
-															<button class="btn btn-xs btn-primary">跳转</button>
-														</span>
+                                        <button class="btn btn-xs btn-primary">跳转</button>
+                                    </span>
                                 </div>
                             </div>
                             <div class="col-xs-4 text-right pull-right">

@@ -1,3 +1,7 @@
+/**
+ * Created by huxiangyang on 2017/3/13.
+ */
+
 $(function () {
     //获取初始数据
     getData(basePath+'/customerBaseInfo/showCustomerBaseInfoDetails','POST',GetRequest(),customerBasicInfo);
@@ -42,7 +46,7 @@ $(function () {
     //客户百科提交
     $(document).on('click.up','#addEncyclopedia',function(){
         //提交数据
-        upData('','POST',customerEncyclopediaObj());
+        upData(basePath+'/customerEncyclopedia/doModify','POST',customerEncyclopediaObj(),"application/json");
         //重新获取数据
         getData(basePath+'/customerBaseInfo/showCustomerBaseInfoDetails','POST',GetRequest(),customerBasicInfo);
     });

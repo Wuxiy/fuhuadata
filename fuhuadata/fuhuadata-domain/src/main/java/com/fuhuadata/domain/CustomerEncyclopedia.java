@@ -151,4 +151,12 @@ public class CustomerEncyclopedia {
     public void setIsFull(String isFull) {
         this.isFull = isFull;
     }
+
+    public String getCustomField() {
+        return customField;
+    }
+
+    public void setCustomField(String customField) {
+        this.customField = customField;
+    }
 }

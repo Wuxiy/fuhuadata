@@ -1,62 +1,63 @@
 /**
+ * Created by huxiangyang on 2017/3/13.
+ */
+
+/**
  *数据加载
  */
  //基本信息页
 function customerBasicInfo(result){
     var getData = result;
-    $('#country').val(getData.country);//国家
-    $('#fullName').val(getData.fullName);//客户全称
-    $('#areaId').val(getData.areaId);//地区分类
-    $('#shortName').val(getData.shortName);//客户简称
-    $('#managementScope').val(getData.managementScope);//经营范围
-    $('#enterpriseNature').val(getData.enterpriseNature);//企业性质
-    $('#opportunityDescrible').val(getData.opportunityDescrible);//机会描述
-    $('#otherOpportunity').val(getData.otherOpportunity);//其他机会来源
-    $('#majorCompetitors').val(getData.majorCompetitors);//分销主要竞争对手
-    $('#hasChiPurchase').val(getData.hasChiPurchase);
-    $('#zhongxinbaoLevel').val(getData.zhongxinbaoLevel);
-    $('#enterpriseEmaill').val(getData.enterpriseEmaill);
-    $('#opportunitySource').val(getData.opportunitySource);
-    $('#qualificationsFileUrl').val(getData.qualificationsFileUrl);
-    $('#factoryLocation').val(getData.factoryLocation);
-    $('#lastmodifyUserNameEn').val(getData.lastmodifyUserNameEn);
-    $('#enterprisePhone').val(getData.enterprisePhone);
+    console.log(getData);
+    //客户基本信息
+    $('#customerId').val(getData.customerId);
+    $('#fullName').val(getData.fullName);
+    $('#shortName').val(getData.shortName);
+    $('#areaId').val(getData.areaId);
+    $('#countryId').val(getData.countryId);
+
     $('#zhongxinbaoNumber').val(getData.zhongxinbaoNumber);
-    $('#customerCompletion').val(getData.customerCompletion);
+    $('#zhongxinbaoLevel').val(getData.zhongxinbaoLevel);
+    $('[name="enterpriseNature"]').val([getData.enterpriseNature]);//企业性质
+    $('#registeredFunds').val(getData.registeredFunds);
+    $('#enterprisePhone').val(getData.enterprisePhone);
+
     $('#enterpriseEmail').val(getData.enterpriseEmail);
     $('#registeredAddress').val(getData.registeredAddress);
-    $('#registeredFunds').val(getData.registeredFunds);
-    $('#customerType').val(getData.customerType);
-    $('#createTime').val(getData.createTime);
-    $('#customerLevel').val(getData.customerLevel);
-    $('#area').val(getData.area);
-    $('#countryId').val(getData.countryId);
-    $('#remark').val(getData.remark);
+    $('#managementScope').val(getData.managementScope);
     $('#hasChiCompany').val(getData.hasChiCompany);
-    $('#productionLine').val(getData.productLine);
+    $('#hasChiPurchase').val(getData.hasChiPurchase);
+
+    $('#customerLevel').val(getData.customerLevel);
+    $('#customerType').val(getData.customerType);
+    $('#factoryLocation').val(getData.factoryLocation);
+    $('#productLine').val(getData.productLine);
+    $('#majorCompetitors').val(getData.majorCompetitors);
+
+    $('#remark').val(getData.remark);
+    $('#opportunitySource').val(getData.opportunitySource);
+    $('#otherOpportunity').val(getData.otherOpportunity);
+    $('#opportunityDescrible').val(getData.opportunityDescrible);
+    $('#lastmodifyUserName').val(getData.lastmodifyUserName);
+
+    $('#modifyTime').val(getData.modifyTime);
+    customerMakeProductData(getData.customerMakeProduct);//客户生产产品
+    //百科信息
     $('#encyId').val(getData.encyId);
-    $('#customerId').val(getData.customerId);
-    $('#createUserId').val(getData.createUserId);
-    $('#isFull').val(getData.isFull);
     $('#companyInfo').val(getData.companyInfo);
     $('#developHis').val(getData.developHis);
     $('#sellNetwork').val(getData.sellNetwork);
-    $('#customField').val(getData.customField);
+    $('#lastmodifyUserNameEn').val(getData.lastmodifyUserNameEn);
     $('#modifyTimeEn').val(getData.modifyTimeEn);
 
-    //获取企业性质
-    $('[name="enterpriseNature"]').val([getData.enterpriseNature]);
+    customFieldData(getData.customField);//百科自定义字段
 
-    //获取客户生产产品
-    customerMakeProductData(getData.customerMakeProducts);
-
-    //获取自定义字段
-    customFieldData(getData.customField);
-    console.log(getData);
 }
 //客户生产产品
 function customerMakeProductData(getData){
-
+    // console.log(getData);
+    //每次添加前，先删除页面上旧的数据
+    $('[name="customerMakeProduct"]').remove();
     $.each(getData,function (n,item) {
         var location = $('#addPro').parents('.form-group');
         var row = '';
@@ -72,17 +73,18 @@ function customerMakeProductData(getData){
 }
 //自定义字段
 function customFieldData(getData){
-    if(getData instanceof Array){
-        $.each(getData, function (n,item) {
-            var location = $('#addCustomField').parents('.form-group');
-            var row = '';
-            row += '<div name="customField" class="form-group">';
-            row += '<label name="name" class="control-label col-xs-1" lang="zh">'+item.name+'</label>';
-            row += '<div class="col-xs-8"><textarea  name="content" class="form-control" rows="4" value="'+item.content+'"></textarea></div>';
-            row += '</div>';
-            location.before(row);
-        });
-    }
+    $('[name="customField"]').remove();
+    var getData = $.parseJSON(getData);
+    console.log(getData);
+    $.each(getData, function (n,item) {
+        var location = $('#addFiled').parents('.form-group');
+        var row = '';
+        row += '<div name="customField" class="form-group">';
+        row += '<label name="name" class="control-label col-xs-1" lang="zh">'+item.name+'</label>';
+        row += '<div class="col-xs-8"><textarea disabled name="value" class="form-control" rows="4">'+item.value+'</textarea></div>';
+        row += '</div>';
+        location.before(row);
+    });
 }
 
 /**
@@ -92,41 +94,38 @@ function customFieldData(getData){
 function customerBasicFormObj() {
     var data = {
         customerBaseInfo:{
-            "country": $('#country').val(),
+            "customerId": $('#customerId').val(),
             "fullName": $('#fullName').val(),
-            "areaId": $('#areaId').val(),
             "shortName": $('#shortName').val(),
-            "managementScope": $('#managementScope').val(),
-            "enterpriseNature": $('#enterpriseNature').val(),
-            "opportunityDescrible": $('#opportunityDescrible').val(),
-            "otherOpportunity": $('#otherOpportunity').val(),
-            "majorCompetitors": $('#majorCompetitors').val(),
-            "hasChiPurchase": $('#hasChiPurchase').val(),
-            "zhongxinbaoLevel": $('#zhongxinbaoLevel').val(),
-            "enterpriseEmaill": $('#enterpriseEmaill').val(),
-            "opportunitySource": $('#opportunitySource').val(),
-            "customerStatus": $('#customerStatus').val(),
-            "qualificationsFileUrl": $('#qualificationsFileUrl').val(),
-            "factoryLocation": $('#factoryLocation').val(),
-            "lastmodifyUserNameEn": $('#lastmodifyUserNameEn').val(),
-            "enterprisePhone": $('#enterprisePhone').val(),
+            "areaId": $('#areaId').val(),
+            "countryId": $('#countryId').val(),
+
             "zhongxinbaoNumber": $('#zhongxinbaoNumber').val(),
-            "customerCompletion": $('#customerCompletion').val(),
+            "zhongxinbaoLevel": $('#zhongxinbaoLevel').val(),
+            "enterpriseNature": $('[name="enterpriseNature"]').val(),
+            "registeredFunds": $('#registeredFunds').val(),
+            "enterprisePhone": $('#enterprisePhone').val(),
+
             "enterpriseEmail": $('#enterpriseEmail').val(),
             "registeredAddress": $('#registeredAddress').val(),
-            "registeredFunds": $('#registeredFunds').val(),
-            "customerType": $('#customerType').val(),
-            "customerLevel": $('#customerLevel').val(),
-            "area": $('#area').val(),
-            "countryId": $('#countryId').val(),
-            "remark": $('#remark').val(),
+            "managementScope": $('#managementScope').val(),
             "hasChiCompany": $('#hasChiCompany').val(),
-            "productionLine": $('#productLine').val(),
-            "encyId": $('#encyId').val(),
-            "customerId": $('#customerId').val(),
-            "createUserId": $('#createUserId').val(),
-            "companyType": $('#companyType').val(),
-            "isFull": $('#isFull').val()
+            "hasChiPurchase": $('#hasChiPurchase').val(),
+
+            "customerLevel": $('#customerLevel').val(),
+            "customerType": $('#customerType').val(),
+            "factoryLocation": $('#factoryLocation').val(),
+            "productLine": $('#productLine').val(),
+            "majorCompetitors": $('#majorCompetitors').val(),
+
+            "remark": $('#remark').val(),
+            "opportunitySource": $('#opportunitySource').val(),
+            "otherOpportunity": $('#otherOpportunity').val(),
+            "opportunityDescrible": $('#opportunityDescrible').val(),
+            "lastmodifyUserName": $('#lastmodifyUserName').val(),
+
+            "modifyTime": getTime()
+
         },
         customerMakeProducts:customerMakeProductObj()
     };
@@ -148,13 +147,16 @@ function customerMakeProductObj() {
 //客户百科
 function customerEncyclopediaObj(){
     var data = {
-        "companyInfo": $('[name="companyInfo"]').val(),
-        "developHis": $('[name="developHis"]').val(),
-        "sellNetwork": $('[name="sellNetwork"]').val(),
-        "customField": customFieldObj(),
+        "encyId":$('#encyId').val(),
+        "customerId":$('#customerId').val(),
+        "companyInfo": $('#companyInfo').val(),
+        "developHis": $('#developHis').val(),
+        "sellNetwork": $('#sellNetwork').val(),
+        "customField": customFieldObj(),//客户自定义字段
         // "lastmodifyUserIdEn": ,
-        "modifyTimeEn": getTime()
+        "modifyTime": getTime()
     };
+    console.log(JSON.stringify(data))
     return JSON.stringify(data);
 }
 //客户百科自定义字段
@@ -163,9 +165,9 @@ function customFieldObj(){
     $('[name="customField"]').each(function () {
         var $this = $(this);
         var obj = {};
-        obj.production = $this.find('[name="name"]').text();
-        obj.productName = $this.find('[name="productName"]').val();
+        obj.name = $this.find('[name="name"]').text();
+        obj.value = $this.find('[name="value"]').val();
         arr.push(obj);
     });
-    return arr;
+    return JSON.stringify(arr);
 }

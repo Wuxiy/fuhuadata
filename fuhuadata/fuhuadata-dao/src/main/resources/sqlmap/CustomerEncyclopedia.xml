@@ -59,7 +59,7 @@
             UPDATE k_customer_encyclopedia
             <dynamic prepend=" SET ">
                 <isNotNull prepend=", " property="customerId">
-                    company_id = #customerId#
+                    customer_id = #customerId#
                 </isNotNull>
                 <isNotNull prepend=", " property="isFull">
                     is_full = #isFull#

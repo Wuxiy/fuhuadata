@@ -3,6 +3,7 @@ package com.fuhuadata.vo;
 import com.fuhuadata.domain.CustomerMakeProduct;
 import com.fuhuadata.util.DateJsonDeserializer;
 import com.fuhuadata.util.DateJsonSerializer;
+import com.sun.xml.internal.ws.wsdl.writer.UsingAddressing;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
@@ -111,6 +112,8 @@ public class CustomerBaseInfoVO {
 
     /**创建时间**/
     private Date createTime;
+
+    private Date modifyTime;
 
 
     /*百科信息*/
@@ -494,5 +497,15 @@ public class CustomerBaseInfoVO {
 
     public void setLastmodifyUserName(String lastmodifyUserName) {
         this.lastmodifyUserName = lastmodifyUserName;
+    }
+
+    @JsonSerialize(using = DateJsonSerializer.class)
+    public Date getModifyTime() {
+        return modifyTime;
+    }
+
+    @JsonDeserialize(using = DateJsonDeserializer.class)
+    public void setModifyTime(Date modifyTime) {
+        this.modifyTime = modifyTime;
     }
 }
