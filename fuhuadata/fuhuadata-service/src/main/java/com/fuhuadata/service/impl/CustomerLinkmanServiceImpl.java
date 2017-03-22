@@ -28,12 +28,14 @@ public class CustomerLinkmanServiceImpl implements CustomerLinkmanService {
 
 	@Resource
 	private CustomerVisitRecordManager customerVisitRecordManager;
+
     public Result<CustomerLinkman> addCustomerLinkman(CustomerLinkman customerLinkman) {
 		Result<CustomerLinkman> result = new Result<CustomerLinkman>();
 		try {
 			result.addDefaultModel(customerLinkmanManager.addCustomerLinkman(customerLinkman));			
 		} catch(Exception e) {
 			result.setSuccess(false);
+			log.error("新增客户联系人错误",e);
 		}
 		return result;
     }
