@@ -19,9 +19,6 @@
             <isNotEmpty prepend=" AND " property="ncOrderId">
                 nc_order_id =  #ncOrderId#
             </isNotEmpty>
-            <isNotEmpty prepend=" AND " property="status">
-                status =  #status#
-            </isNotEmpty>
             <isNotEmpty prepend=" AND " property="startTime">
                 <![CDATA[
                      deal_time  >=  #startTime#
@@ -53,7 +50,7 @@
         </isParameterPresent>
     </select>
 
-    <select id="count" parameterClass="QueryBusinessOrder" resultClass="BusinessOrder">
+    <select id="count" parameterClass="QueryBusinessOrder" resultClass="java.lang.Integer">
         select count(*) from business_order
         <isParameterPresent>
             <include refid="QUERY-COMMON"/>

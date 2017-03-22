@@ -28,7 +28,7 @@ public class CustomerBaseInfoOrderAction {
 
     @RequestMapping("/entrance")
     public ModelAndView entrance(String customerId){
-        return new ModelAndView().addObject("customerId",customerId);
+        return new ModelAndView("customerInfo/customerOrderInfo").addObject("customerId",customerId);
     }
     @ResponseBody
     @RequestMapping("/initSaleOrganizationTree")
