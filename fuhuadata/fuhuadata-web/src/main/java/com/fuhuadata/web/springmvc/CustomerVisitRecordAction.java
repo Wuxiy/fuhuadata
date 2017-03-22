@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -25,6 +26,17 @@ public class CustomerVisitRecordAction {
     private final static Log log = LogFactory.getLog(CustomerVisitRecordAction.class);
     @Resource
     private CustomerVisitRecordService customerVisitRecordService;
+
+    /**
+     * list
+     * @param
+     * @return
+     */
+    @RequestMapping(value="/intocustomerVisitRecordList",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "customerInfo-customerVisitRecord",methods = "into")
+    public ModelAndView intocustomerVisitRecordList(){
+        return new ModelAndView("customerInfo/customerVisitRecordList");
+    }
 
     /**
      * 根据客户id获取沟通记录
