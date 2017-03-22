@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="Organization">
+    <typeAlias alias="Organization" type="com.fuhuadata.domain.Organization"/>
+    <typeAlias alias="QueryOrganization" type="com.fuhuadata.domain.query.QueryOrganization"/>
+
+
+    <sql id="QUERY-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotEmpty prepend=" AND " property="orgId">
+                org_id = #orgId#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="parentId">
+                parent_id =  #parentId#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="name">
+                name =  #name#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="ncId">
+                nc_id =  #ncId#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="isSaleRole">
+                is_sale_role =  #isSaleRole#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="likeName">
+                name like   '%$likeName$%'
+            </isNotEmpty>
+        </dynamic>
+    </sql>
+
+    <select id="getOrganizationListByQuery" parameterClass="QueryOrganization" resultClass="Organization">
+        select
+                org_id orgId,
+                parent_id parentId,
+                name,
+                nc_id ncId,
+                is_sale_role isSaleRole,
+                create_time createTime
+        from
+                p_organization
+        <isParameterPresent>
+            <include refid="QUERY-COMMON"/>
+        </isParameterPresent>
+    </select>
+
+
+
+</sqlMap>

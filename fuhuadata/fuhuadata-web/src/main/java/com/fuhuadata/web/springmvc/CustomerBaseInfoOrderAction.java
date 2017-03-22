@@ -1,8 +1,10 @@
 package com.fuhuadata.web.springmvc;
 
 import com.fuhuadata.domain.query.QueryBusinessOrder;
+import com.fuhuadata.domain.query.QueryOrganization;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.BusinessOrderService;
+import com.fuhuadata.service.OrganizationService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,13 +23,22 @@ public class CustomerBaseInfoOrderAction {
 
     @Autowired
     private BusinessOrderService businessOrderService;
+    @Autowired
+    private OrganizationService organizationService;
 
     @RequestMapping("/entrance")
     public ModelAndView entrance(String customerId){
-        //初始化销售组织
         return new ModelAndView().addObject("customerId",customerId);
     }
-
+    @ResponseBody
+    @RequestMapping("/initSaleOrganizationTree")
+    public ResultPojo initSaleOrganizationTree(){
+        QueryOrganization qoz = new QueryOrganization();
+        qoz.setIsSaleRole(1);
+        ResultPojo pojo = new ResultPojo();
+        pojo.setData(organizationService.getOrganizationTreeByQuery(qoz));
+        return pojo;
+    }
 
     @ResponseBody
     @RequestMapping("/count")

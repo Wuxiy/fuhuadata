@@ -37,6 +37,7 @@ public class BusinessOrder implements Serializable{
     private Integer transportFlag;//是否可转运,0是，1否
     private Integer partialShipmentFalg;//是否可分批出运
     private Integer staus;//订单状态：-1：报价失败  0：报价中 1：已转化成订单 2：数据已上报到NC
+    private String dealTime;//nc系统合同签订时间
     private String deliverInfo;//交单地址等信息 json格式
     private String expressInfo;//寄件信息 json格式
     private String dueTime;//应付款时间
@@ -57,6 +58,14 @@ public class BusinessOrder implements Serializable{
     private String lastmodifyUserName;//上一次修改者姓名
     private String createTime;//创建时间
     private String modifyTime;//创建时间
+
+    public String getDealTime() {
+        return dealTime;
+    }
+
+    public void setDealTime(String dealTime) {
+        this.dealTime = dealTime;
+    }
 
     public String getOrderId() {
         return orderId;

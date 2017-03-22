@@ -10,6 +10,36 @@ public class QueryBusinessOrder {
     private String endTime;//查询合同签定时间结束范围
     private Integer startRow;//分页起始行标
     private Integer pageSize;//分页步长
+    private String orderBy;//排序
+    private String sortFiled;//排序字段
+    private int sortType;//排序方向，0：正序 1：倒序
+
+    public String getOrderBy() {
+        if(sortFiled!=null && !sortFiled.equals("")){
+            return sortFiled + (sortType==0 ? "asc" : "desc");
+        }
+        return orderBy;
+    }
+
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
+    }
+
+    public String getSortFiled() {
+        return sortFiled;
+    }
+
+    public void setSortFiled(String sortFiled) {
+        this.sortFiled = sortFiled;
+    }
+
+    public int getSortType() {
+        return sortType;
+    }
+
+    public void setSortType(int sortType) {
+        this.sortType = sortType;
+    }
 
     public Integer getStartRow() {
         return startRow;
