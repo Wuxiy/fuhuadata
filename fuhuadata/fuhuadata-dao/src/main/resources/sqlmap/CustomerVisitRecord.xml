@@ -5,7 +5,7 @@
 <sqlMap namespace="CUSTOMERVISITRECORD">
    	<typeAlias alias="CustomerVisitRecord" type="com.fuhuadata.domain.CustomerVisitRecord"/>
    	<typeAlias alias="QueryCustomerVisitRecord" type="com.fuhuadata.domain.query.QueryCustomerVisitRecord"/>
-	<typeAlias alias="LinkmanVisitRecordVO" type="com.fuhuadata.vo.LinkmanVisitRecordVO"/>
+	<typeAlias alias="VisitRecordVO" type="com.fuhuadata.vo.VisitRecordVO"/>
 	
 	<resultMap id="CUSTOMERVISITRECORD-MAP" class="CustomerVisitRecord">
 					<result property="visitrecordId" column="visitrecord_id" jdbcType="INT" javaType="java.lang.Integer" />
@@ -199,17 +199,35 @@
 		]]>
 	</select>
 
-	<select id="GET-BY-CUSTOMER-ID" resultMap="CUSTOMERVISITRECORD-MAP" parameterClass="java.lang.String">
+	<select id="GET-BY-CUSTOMER-ID" resultClass="VisitRecordVO" parameterClass="java.lang.String">
 		<![CDATA[
-			SELECT * FROM customer_visit_record	WHERE customer_id=#customerId#
+				SELECT
+			a.visitrecord_id visitRecordId,
+			a.start_time startTime,
+			a.end_time endTime,
+			a.activity_type activityType,
+			a.activity_expense activityExpens,
+			a.activity_address activityAddress,
+			a.activity_summary activitySummary,
+			GROUP_CONCAT(b.linkman_id) linkmanId,
+			GROUP_CONCAT(c.`name`) name,
+			GROUP_CONCAT(b.activity_gift) activityGift
+		FROM
+			customer_visit_record a
+		LEFT JOIN record_linkman b ON b.visit_record_id = a.visitrecord_id
+		LEFT JOIN customer_linkman c ON c.linkman_id = b.linkman_id
+		WHERE
+			a.customer_id = #fh123456#
+		GROUP BY
+			a.visitrecord_id
 	]]>
 	</select>
 
-	<select id="GET-BY-LINKMAN-ID" resultClass="LinkmanVisitRecordVO" parameterClass="java.lang.String">
+	<select id="GET-BY-LINKMAN-ID" resultClass="VisitRecordVO" parameterClass="java.lang.String">
 		<![CDATA[
 				SELECT
 			b.linkman_id linkmanId,
-			b.activity_expens activityExpens,
+			c.activity_expense activityExpens,
 			b.activity_gift activityGift,
 			c.start_time startTime,
 			c.end_time endTime,

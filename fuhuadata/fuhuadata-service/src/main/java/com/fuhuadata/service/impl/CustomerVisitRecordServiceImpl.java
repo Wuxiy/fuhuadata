@@ -1,18 +1,22 @@
 package com.fuhuadata.service.impl;
+import java.security.interfaces.RSAKey;
 import java.util.List;
+
+import com.fuhuadata.dao.RecordLinkmanDao;
+import com.fuhuadata.domain.RecordLinkman;
 import com.fuhuadata.domain.query.Result;
+import com.fuhuadata.manager.RecordLinkmanManager;
 import com.fuhuadata.service.CustomerVisitRecordService;
 import com.fuhuadata.manager.CustomerVisitRecordManager;
 import com.fuhuadata.domain.CustomerVisitRecord;
 import com.fuhuadata.domain.query.QueryCustomerVisitRecord;
 import javax.annotation.Resource;
 
-import com.fuhuadata.vo.LinkmanVisitRecordVO;
+import com.fuhuadata.vo.CustomerVisitRecordVO;
+import com.fuhuadata.vo.VisitRecordVO;
+import jdk.jfr.events.ExceptionThrownEvent;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.stereotype.Component;
-import java.util.Map;
-import java.io.Serializable;
 
 /**
  * @author wangbo
@@ -23,6 +27,8 @@ public class CustomerVisitRecordServiceImpl implements CustomerVisitRecordServic
 	private static final Log log= LogFactory.getLog(CustomerVisitRecordServiceImpl.class);
 	@Resource
     private CustomerVisitRecordManager customerVisitRecordManager;
+	@Resource
+	private RecordLinkmanManager recordLinkmanManager;
     public Result<CustomerVisitRecord> addCustomerVisitRecord(CustomerVisitRecord customerVisitRecord) {
 		Result<CustomerVisitRecord> result = new Result<CustomerVisitRecord>();
 		try {
@@ -32,8 +38,44 @@ public class CustomerVisitRecordServiceImpl implements CustomerVisitRecordServic
 		}
 		return result;
     }
-    
-    public Result updateCustomerVisitRecordById(int visitrecord_id, CustomerVisitRecord customerVisitRecord) {
+
+	@Override
+	public Result addVisitRecord(CustomerVisitRecordVO customerVisitRecordVO) {
+    	Result result = new Result();
+		CustomerVisitRecord addCustomerVisitRecord = new CustomerVisitRecord();
+		boolean flag = false;
+    	try {
+
+			CustomerVisitRecord customerVisitRecord = customerVisitRecordVO.getCustomerVisitRecord();
+			 addCustomerVisitRecord= customerVisitRecordManager.addCustomerVisitRecord(customerVisitRecord);
+		}catch(Exception e) {
+    		result.setSuccess(false);
+    		log.error("新增客户沟通记录错误",e);
+		}
+		try{
+			if(addCustomerVisitRecord!=null) {
+				flag =true;
+				RecordLinkman[] recordLinkman = customerVisitRecordVO.getRecordLinkmen();
+				for (int i = 0; i < recordLinkman.length; i++) {
+					recordLinkman[i].setVisitRecordId(addCustomerVisitRecord.getVisitrecordId());
+					recordLinkman[i].setActivityExpens(addCustomerVisitRecord.getActivityExpense());
+					recordLinkman[i].setCreateUserId(addCustomerVisitRecord.getCreateUserId());
+					recordLinkman[i].setCreateUserName(addCustomerVisitRecord.getCreateUserName());
+					recordLinkman[i].setCreateUserName(addCustomerVisitRecord.getCreateUserName());
+					recordLinkman[i].setModifyTime(addCustomerVisitRecord.getModifyTime());
+					recordLinkman[i].setLastmodifyUserId(addCustomerVisitRecord.getLastmodifyUserId());
+					recordLinkman[i].setLastmodifyUserName(addCustomerVisitRecord.getLastmodifyUserName());
+				}
+				recordLinkmanManager.addRecordLinkman(recordLinkman[1]);
+			}
+		}catch(Exception e){
+    		result.setSuccess(false);
+    		log.error("新增联系人沟通记录错误",e);
+		}
+		return result;
+	}
+
+	public Result updateCustomerVisitRecordById(int visitrecord_id, CustomerVisitRecord customerVisitRecord) {
 		Result result = new Result();
 		try {
 			result.setSuccess(customerVisitRecordManager.updateCustomerVisitRecordById(visitrecord_id, customerVisitRecord));
@@ -55,8 +97,8 @@ public class CustomerVisitRecordServiceImpl implements CustomerVisitRecordServic
     }
 
 	@Override
-	public Result<List<CustomerVisitRecord>> getCustomerVisitRecordByCustomerId(String customerId) {
-		Result<List<CustomerVisitRecord>> result = new Result<List<CustomerVisitRecord>>();
+	public Result<List<VisitRecordVO>> getCustomerVisitRecordByCustomerId(String customerId) {
+		Result<List<VisitRecordVO>> result = new Result<List<VisitRecordVO>>();
 		try {
 			result.addDefaultModel("CustomerVisitRecords", customerVisitRecordManager.getCustomerVisitRecordByCustomerId(customerId));
 		} catch(Exception e) {
@@ -67,8 +109,8 @@ public class CustomerVisitRecordServiceImpl implements CustomerVisitRecordServic
 	}
 
 	@Override
-	public Result<List<LinkmanVisitRecordVO>> getCustomerVisitRecordByLinkmanId(String linkmanId) {
-		Result<List<LinkmanVisitRecordVO>> result = new Result<List<LinkmanVisitRecordVO>>();
+	public Result<List<VisitRecordVO>> getCustomerVisitRecordByLinkmanId(String linkmanId) {
+		Result<List<VisitRecordVO>> result = new Result<List<VisitRecordVO>>();
 		try {
 			result.addDefaultModel("LinkmanVisitRecords", customerVisitRecordManager.getCustomerVisitRecordByLinkmanId(linkmanId));
 		} catch(Exception e) {

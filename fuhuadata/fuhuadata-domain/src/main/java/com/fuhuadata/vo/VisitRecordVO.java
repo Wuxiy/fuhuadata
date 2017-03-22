@@ -9,11 +9,13 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * 联系人沟通记录
+ * 沟通记录
  * Created by intanswer on 2017/3/21.
  */
-public class LinkmanVisitRecordVO {
+public class VisitRecordVO {
+    private Integer visitRecordId;
     private String linkmanId;//联系人id
+    private String name;//拜访对象
     private BigDecimal activityExpens;//活动费用
     private String activityGift;//活动礼物
     private Date  startTime;//开始时间
@@ -90,5 +92,22 @@ public class LinkmanVisitRecordVO {
 
     public void setActivityExpens(BigDecimal activityExpens) {
         this.activityExpens = activityExpens;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getVisitRecordId() {
+        return visitRecordId;
+    }
+
+    public void setVisitRecordId(Integer visitRecordId) {
+        this.visitRecordId = visitRecordId;
     }
 }

@@ -24,7 +24,6 @@ function customerContactsInfo(result) {
     console.log(result);
     var customerLinkman = result.customerLinkman;
     var customerVisitRecords = result.linkmanVisitRecordVOS;
-    console.log(customerVisitRecords.activityType)
     var visitRecordsTable = document.getElementById('visitRecordsTable');
     if(customerLinkman){
         $('#name').attr('data-id',customerLinkman.linkmanId);
@@ -64,6 +63,7 @@ function customerContactsInfo(result) {
 function updateContactsInfo() {
     var data = {
         "linkmanId":$('#name').attr('data-id'),
+        "name":$('#name').val(),
         "posts":$('#posts').val(),
         "responseArea":$('#responseArea').val(),
         "onJob":$('#onJob').val(),

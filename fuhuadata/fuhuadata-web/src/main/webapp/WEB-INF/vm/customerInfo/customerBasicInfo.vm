@@ -8,7 +8,7 @@
             <li><a href="" >产品要求</a></li>
             <li><a href="{$requset.contextPath}customerBaseInfoOrder/entrance" >订单信息</a></li>
             <li><a href="" >订单默认要求</a></li>
-            <li><a href="" >沟通记录</a></li>
+            <li><a href="${request.contextPath}/customerVisitRecord/intocustomerVisitRecordList" >沟通记录</a></li>
             <li><a href="" >公司别名（子公司信息）</a></li>
             <li><a href="" >关联数据</a></li>
         </ul>

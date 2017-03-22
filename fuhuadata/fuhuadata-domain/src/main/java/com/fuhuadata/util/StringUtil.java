@@ -110,6 +110,7 @@ public class StringUtil {
      * @return
      */
     public static String increment(String str,int digits){
+        String preStr=str.substring(0,str.length()-digits);
         String numStr = str.substring(str.length()-digits,str.length());
         int num = Integer.valueOf(numStr)+1;
         String numConStr=String.valueOf(num);
@@ -122,7 +123,7 @@ public class StringUtil {
         }else{
             numStr="无可用序列";
         }
-        return numStr;
+        return preStr+numStr;
     }
 
 }

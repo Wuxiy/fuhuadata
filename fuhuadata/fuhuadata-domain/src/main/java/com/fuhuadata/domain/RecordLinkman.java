@@ -13,7 +13,7 @@ public class RecordLinkman{
 	private Integer id;
 	
     /**拜访记录id**/
-	private String visitRecordId;
+	private Integer visitRecordId;
 	
     /**客户联系人ID**/
 	private String linkmanId;
@@ -53,14 +53,7 @@ public class RecordLinkman{
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	public String getVisitRecordId() {
-		return visitRecordId;
-	}
-	
-	public void setVisitRecordId(String visitRecordId) {
-		this.visitRecordId = visitRecordId;
-	}
+
 	
 	public String getLinkmanId() {
 		return linkmanId;
@@ -133,6 +126,13 @@ public class RecordLinkman{
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
 	}
-	
 
+
+	public Integer getVisitRecordId() {
+		return visitRecordId;
+	}
+
+	public void setVisitRecordId(Integer visitRecordId) {
+		this.visitRecordId = visitRecordId;
+	}
 }

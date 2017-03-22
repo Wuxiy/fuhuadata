@@ -7,25 +7,48 @@
 
     <sql id="QUERY-COMMON">
         <dynamic prepend=" WHERE ">
-            <isNotEmpty prepend=" AND " property="componentName">
-                component_name = #componentName#
+            <isNotEmpty prepend=" AND " property="saleOrganizationId">
+                sale_organization_id = #saleOrganizationId#
             </isNotEmpty>
-            <isNotNull prepend=" AND " property="suitableProduct">
-                suitable_product =  #suitableProduct#
-            </isNotNull>
+            <isNotEmpty prepend=" AND " property="ncOrderId">
+                nc_order_id =  #ncOrderId#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="startTime">
+                <![CDATA[
+                     deal_time  >=  #startTime#
+                ]]>
+            </isNotEmpty>
         </dynamic>
     </sql>
 
-    <select id="count" parameterClass="QueryBusinessOrder" resultClass="java.lang.Integer">
+    <select id="query_page" parameterClass="QueryBusinessOrder" resultClass="BusinessOrder">
+        select
+                sale_organization_name saleOrganizationName,
+                order_id orderId,
+                nc_order_id ncOrderId,
+                amount_payable amountPayable,
+                floor_price floorPrice,
+                is_complaint isComplaint,
+                is_modify_price isModifyPrice,
+                net_profit netProfit,
+                is_pledge isPledge,
+                deal_time dealTime
+        from
+                business_order
+        <isParameterPresent>
+            <include refid="QUERY-COMMON"/>
+            <isNotEmpty prepend=" AND " property="orderBy">
+                order by $orderBy$
+            </isNotEmpty>
+            limit #startRow#,#pageSize#
+        </isParameterPresent>
+    </select>
+
+    <select id="count" parameterClass="QueryBusinessOrder" resultClass="BusinessOrder">
         select count(*) from business_order
         <isParameterPresent>
             <include refid="QUERY-COMMON"/>
         </isParameterPresent>
     </select>
-
-    <select id="" parameterClass="QueryBusinessOrder" resultClass="BusinessOrder">
-
-    </select>
-
 
 </sqlMap>

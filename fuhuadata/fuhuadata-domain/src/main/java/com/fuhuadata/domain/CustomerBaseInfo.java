@@ -99,6 +99,7 @@ public class CustomerBaseInfo implements Serializable{
 	/**客户状态  0：流失 1：正常**/
 	private Integer customerStatus;
 
+
 	/**资质文件保存路径**/
 	private String qualificationsFileUrl;
 
