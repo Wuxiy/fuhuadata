@@ -24,12 +24,18 @@ public class RecordLinkmanDaoImpl extends SqlMapClientTemplate implements Record
     public static final String GET_PAGE = "RECORDLINKMAN.GET-PAGE";
     public static final String COUNT = "RECORDLINKMAN.COUNT";
     public static final String GET_BY_LINKMAN_ID="RECORDLINKMAN.GET-BY-LINKMAN-ID";
+    public static final String ADD_BATCH = "RECORDLINKMAN.BATCH-ADD";
     
     public RecordLinkman addRecordLinkman(RecordLinkman recordLinkman) {
 		recordLinkman.setId((Integer) this.insert(ADD, recordLinkman));
     	return recordLinkman;
     }
-    
+
+    @Override
+    public int addRecordLinkmen(List<RecordLinkman> recordLinkmen) {
+        return (Integer) this.queryForObject(ADD_BATCH,recordLinkmen);
+    }
+
     public int updateRecordLinkmanById(int id, RecordLinkman recordLinkman) {
     	recordLinkman.setId(id);
 		return this.update(UPDATE, recordLinkman);

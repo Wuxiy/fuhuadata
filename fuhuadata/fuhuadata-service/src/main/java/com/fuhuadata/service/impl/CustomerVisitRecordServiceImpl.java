@@ -1,5 +1,6 @@
 package com.fuhuadata.service.impl;
 import java.security.interfaces.RSAKey;
+import java.util.Arrays;
 import java.util.List;
 
 import com.fuhuadata.dao.RecordLinkmanDao;
@@ -39,6 +40,11 @@ public class CustomerVisitRecordServiceImpl implements CustomerVisitRecordServic
 		return result;
     }
 
+	/**
+	 * 客户沟通记录新增
+	 * @param customerVisitRecordVO
+	 * @return
+	 */
 	@Override
 	public Result addVisitRecord(CustomerVisitRecordVO customerVisitRecordVO) {
     	Result result = new Result();
@@ -66,12 +72,13 @@ public class CustomerVisitRecordServiceImpl implements CustomerVisitRecordServic
 					recordLinkman[i].setLastmodifyUserId(addCustomerVisitRecord.getLastmodifyUserId());
 					recordLinkman[i].setLastmodifyUserName(addCustomerVisitRecord.getLastmodifyUserName());
 				}
-				recordLinkmanManager.addRecordLinkman(recordLinkman[1]);
+				flag=recordLinkmanManager.addRecordLinkmen(Arrays.asList(recordLinkman));
 			}
 		}catch(Exception e){
     		result.setSuccess(false);
     		log.error("新增联系人沟通记录错误",e);
 		}
+		result.setSuccess(flag);
 		return result;
 	}
 

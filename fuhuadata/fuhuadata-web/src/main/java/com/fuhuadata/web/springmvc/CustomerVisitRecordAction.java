@@ -78,9 +78,5 @@ public class CustomerVisitRecordAction {
         }
         return result.getResultPojo();
     }
-
-
-
-
 }
 
