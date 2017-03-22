@@ -94,25 +94,6 @@
 							</tr>
 							</thead>
 							<tbody id="append_container">
-							<tr>
-								<td>02011010</td>
-								<td><a href="customerDetails.vm" target="_blank">NUFARM</a></td>
-								<td>NUFARM</td>
-								<td lang="zh">美国</td>
-								<td lang="zh">一般客户</td>
-								<td>A</td>
-								<td>2016-7-7</td>
-								<td lang="zh">3个月</td>
-								<td lang="zh">12个月</td>
-								<td><a href="" data-toggle="modal" data-target="#details">10000.00</a></td>
-								<td>10000.00</td>
-								<td>10000.00</td>
-								<td>10000.00</td>
-								<td>10000.00</td>
-								<td lang="zh">正常</td>
-								<td>刘凯彦</td>
-								<td></td>
-							</tr>
 							</tbody>
 						</table>
                         <div id="pagination" class="pagination"></div>

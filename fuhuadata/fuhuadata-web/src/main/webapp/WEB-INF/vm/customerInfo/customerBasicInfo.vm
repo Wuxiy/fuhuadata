@@ -6,7 +6,7 @@
             <li><a href="${request.contextPath}/customerMarketInfo/entrance" >市场信息</a></li>
             <li><a href="${request.contextPath}/customerLinkman/intoCustomerLinkmanList" >联系人</a></li>
             <li><a href="" >产品要求</a></li>
-            <li><a href="" >订单信息</a></li>
+            <li><a href="{$requset.contextPath}customerBaseInfoOrder/entrance" >订单信息</a></li>
             <li><a href="" >订单默认要求</a></li>
             <li><a href="" >沟通记录</a></li>
             <li><a href="" >公司别名（子公司信息）</a></li>
@@ -43,19 +43,19 @@
                                     客户编号
                                 </label>
                                 <div class="col-xs-2">
-                                    <input id="customerId" class="form-control noEdit" type="text" value="02011010" />
+                                    <input id="customerId" class="form-control noEdit" type="text" value="" />
                                 </div>
                                 <label class="control-label col-xs-1" lang="zh">
                                     客户全称<sup class="not-null editView hidden">*</sup>
                                 </label>
                                 <div class="col-xs-2">
-                                    <input id="fullName" class="form-control" type="text" value="NUFARM" />
+                                    <input id="fullName" class="form-control" type="text" value="" />
                                 </div>
                                 <label class="control-label col-xs-1" lang="zh">
                                     客户简称
                                 </label>
                                 <div class="col-xs-2">
-                                    <input id="shortName" class="form-control" type="text" value="NUFARM" />
+                                    <input id="shortName" class="form-control" type="text" value="" />
                                 </div>
                                 <label class="control-label col-xs-1" lang="zh">
                                     地区分类
@@ -83,7 +83,7 @@
                                     中信保编码
                                 </label>
                                 <div class="col-xs-2">
-                                    <input id="zhongxinbaoNumber" class="form-control" type="text" value="12345" />
+                                    <input id="zhongxinbaoNumber" class="form-control" type="text" value="" />
                                 </div>
                                 <label class="control-label col-xs-1" lang="zh">
                                     信用评级
@@ -412,7 +412,6 @@
     </div>
 </div>
 <input type="hidden" id="customerId" value="${customerId}">
-<input type="hidden" id="encyId" value="">
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
