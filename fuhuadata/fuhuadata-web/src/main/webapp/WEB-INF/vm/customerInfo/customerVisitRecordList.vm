@@ -4,11 +4,11 @@
         <ul class="nav nav-tabs pull-left">
             <li><a href="${request.contextPath}/customerBaseInfo/intoCustomerBaseInfoDetails">基本信息</a></li>
             <li><a href="${request.contextPath}/customerPurchaseProduct/entrance" >市场信息</a></li>
-            <li class="active"><a href="${request.contextPath}/customerLinkman/intoCustomerLinkmanList" >联系人</a></li>
+            <li><a href="${request.contextPath}/customerLinkman/intoCustomerLinkmanList" >联系人</a></li>
             <li><a href="" >产品要求</a></li>
             <li><a href="" >订单信息</a></li>
             <li><a href="" >订单默认要求</a></li>
-            <li><a href="${request.contextPath}/customerVisitRecord/intocustomerVisitRecordList" >沟通记录</a></li>
+            <li class="active"><a href="${request.contextPath}/customerVisitRecord/intocustomerVisitRecordList" >沟通记录</a></li>
             <li><a href="" >公司别名（子公司信息）</a></li>
             <li><a href="" >关联数据</a></li>
         </ul>
@@ -26,7 +26,7 @@
                     <div class="panel-heading">
                         <button data-url="/customerLinkman/intoCustomerLinkmanAdd?customerId=" class="btn btn-xs btn-primary panel-heading-btn pull-right" lang="zh" id="add" onclick="Add()">新增</button>
                         <h3 class="panel-title" lang="zh">
-                            联系人
+                            沟通记录
                         </h3>
                     </div>
                     <div class="panel-body">
@@ -34,20 +34,17 @@
                         <table class="table table-condensed table-bordered table-striped text-center">
                             <thead>
                             <tr>
-                                <th class="text-center" lang="zh">编号</th>
-                                <th class="text-center" lang="zh">姓名</th>
-                                <th class="text-center" lang="zh">岗位</th>
-                                <th class="text-center" lang="zh">是否在职</th>
-                                <th class="text-center" lang="zh">负责区域</th>
-                                <th class="text-center" lang="zh">性别</th>
-                                <th class="text-center" lang="zh">国籍</th>
-                                <th class="text-center" lang="zh">联系电话</th>
-                                <th class="text-center" lang="zh">邮件</th>
-                                <th class="text-center" lang="zh">是否默认</th>
-                                <th class="text-center" lang="zh">备注</th>
+                                <th class="text-center" lang="zh">开始时间</th>
+                                <th class="text-center" lang="zh">结束时间</th>
+                                <th class="text-center" lang="zh">活动类型</th>
+                                <th class="text-center" lang="zh">活动地点</th>
+                                <th class="text-center" lang="zh">费用(元)</th>
+                                <th class="text-center" lang="zh">拜访对象</th>
+                                <th class="text-center" lang="zh">礼物赠送</th>
+                                <th class="text-center" lang="zh">活动摘要</th>
                             </tr>
                             </thead>
-                            <tbody id="contactsList">
+                            <tbody id="visitList">
                             <tr>
                                 <td>000002</td>
                                 <td><a href="customerContacts.html" target="_blank">Anna</a></td>
@@ -57,9 +54,6 @@
                                 <td>女</td>
                                 <td>美国</td>
                                 <td>13888888888</td>
-                                <td>Anna@163.com</td>
-                                <td>是</td>
-                                <td>是</td>
                             </tr>
                             </tbody>
                         </table>
@@ -73,7 +67,7 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerContactsList.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerVisitRecordList.js"></script>
 <script type="text/javascript">
     function Add(){
         var id = document.URL.split('?')[1].split('=')[1];

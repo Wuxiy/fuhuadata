@@ -30,16 +30,15 @@ public class CustomerVisitRecordAction {
     @Resource
     private CustomerVisitRecordService customerVisitRecordService;
 
-
     /**
      * into
      * @param customerId
      * @return
      */
-    @RequestMapping(value="/intoCustomerVisitRecord",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "CustomerInfo-CustomerVisitRecord",methods = "intoCustomerVisitRecord")
-    public ModelAndView intoCustomerVisitRecord(String customerId){
-       return new ModelAndView("customerInfo/customerCommunicationRecord");
+    @RequestMapping(value="/intocustomerVisitRecordList",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "customerInfo-customerVisitRecord",methods = "into")
+    public ModelAndView intocustomerVisitRecordList(){
+        return new ModelAndView("customerInfo/customerVisitRecordList");
     }
 
     /**
