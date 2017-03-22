@@ -3,6 +3,7 @@ package com.fuhuadata.service.impl;
 import com.fuhuadata.dao.OrganizationDao;
 import com.fuhuadata.domain.Organization;
 import com.fuhuadata.domain.query.QueryOrganization;
+import com.fuhuadata.service.OrganizationService;
 import com.fuhuadata.vo.CategoryTree;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
