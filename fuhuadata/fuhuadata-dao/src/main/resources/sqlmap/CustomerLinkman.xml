@@ -8,32 +8,32 @@
 	<typeAlias alias="CustomerLinkmanVO" type="com.fuhuadata.vo.CustomerLinkmanVO"/>
 	
 	<resultMap id="CUSTOMERLINKMAN-MAP" class="CustomerLinkman">
-					<result property="linkmanId" column="linkman_id" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="name" column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="linkPhone1" column="link_phone1" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="linkPhone2" column="link_phone2" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="lemail" column="lemail" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="posts" column="posts" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="responseArea" column="response_area" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="onJob" column="on_job" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="sex" column="sex" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="birthday" column="birthday" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
-								<result property="nationality" column="nationality" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="influence" column="influence" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="exhibitionHabits" column="exhibition_habits" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="fancy" column="fancy" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="eatingHabits" column="eating_habits" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="faith" column="faith" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="isDefault" column="is_default" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="remarks" column="remarks" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="createUserId" column="create_user_id" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="createUserName" column="create_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="lastmodifyUserId" column="lastmodify_user_id" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="lastmodifyUserName" column="lastmodify_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="createTime" column="create_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
-								<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
-														</resultMap>
+		<result property="linkmanId" column="linkman_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="name" column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="linkPhone1" column="link_phone1" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="linkPhone2" column="link_phone2" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="lemail" column="lemail" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="posts" column="posts" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="responseArea" column="response_area" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="onJob" column="on_job" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="sex" column="sex" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="birthday" column="birthday" jdbcType="DATE" javaType="java.sql.Date" />
+		<result property="nationality" column="nationality" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="influence" column="influence" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="exhibitionHabits" column="exhibition_habits" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="fancy" column="fancy" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="eatingHabits" column="eating_habits" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="faith" column="faith" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="isDefault" column="is_default" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="remarks" column="remarks" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="createUserId" column="create_user_id" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="createUserName" column="create_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="lastmodifyUserId" column="lastmodify_user_id" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="lastmodifyUserName" column="lastmodify_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="createTime" column="create_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+		<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+	</resultMap>
 	
 	<sql id="PAGE-COMMON">	
 		<dynamic prepend=" WHERE ">
@@ -199,8 +199,8 @@
 		INSERT INTO 
 		customer_linkman(linkman_id,customer_id,name,link_phone1,link_phone2,lemail,posts,response_area,on_job,sex,birthday,nationality,influence,exhibition_habits,fancy,eating_habits,faith,is_default,remarks,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time) 
 		VALUES(#linkmanId#,#customerId#,#name#,#linkPhone1#,#linkPhone2#,#lemail#,#posts#,#responseArea#,#onJob#,#sex#,#birthday#,#nationality#,#influence#,#exhibitionHabits#,#fancy#,#eatingHabits#,#faith#,#isDefault#,#remarks#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
-		<selectKey resultClass="String" keyProperty="id">
-			SELECT @@IDENTITY AS ID
+		<selectKey resultClass="String" keyProperty="linkmanId">
+			SELECT @@IDENTITY AS linkman_id
 		</selectKey>
 	</insert>
 	

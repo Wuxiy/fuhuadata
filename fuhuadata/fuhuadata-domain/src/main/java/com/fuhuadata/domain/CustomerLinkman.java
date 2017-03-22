@@ -172,11 +172,10 @@ public class CustomerLinkman{
 		this.sex = sex;
 	}
 
-	@JsonSerialize(using = DateJsonSerializer.class)
 	public Date getBirthday() {
 		return birthday;
 	}
-	@JsonDeserialize(using = DateJsonDeserializer.class)
+
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
