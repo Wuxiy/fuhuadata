@@ -32,9 +32,9 @@
                     <div class="panel-body">
                         <div class="list-group">
                             <a href="" class="list-group-item" lang="zh">订单记录</a>
-                            <a href="" class="list-group-item" lang="zh">调价记录</a>
-                            <a href="" class="list-group-item" lang="zh">延付款记录</a>
-                            <a href="" class="list-group-item" lang="zh">合同取消记录</a>
+                            <a href="" class="list-group-item hidden" lang="zh">调价记录</a>
+                            <a href="" class="list-group-item hidden" lang="zh">延付款记录</a>
+                            <a href="" class="list-group-item hidden" lang="zh">合同取消记录</a>
                         </div>
                     </div>
                 </div>
@@ -122,7 +122,7 @@
                     </div>
                 </div>
                 <!--调价记录表-->
-                <div class="panel panel-default">
+                <div class="panel panel-default hidden">
                     <div class="panel-heading">
                         <h3 class="panel-title" lang="zh">
                             调价记录表
@@ -209,7 +209,7 @@
                     </div>
                 </div>
                 <!--延付款记录表-->
-                <div class="panel panel-default">
+                <div class="panel panel-default hidden">
                     <div class="panel-heading">
                         <h3 class="panel-title" lang="zh">
                             延付款记录表

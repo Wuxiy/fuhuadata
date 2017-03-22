@@ -6,7 +6,7 @@
             <li><a href="${request.contextPath}/customerMarketInfo/entrance" >市场信息</a></li>
             <li><a href="${request.contextPath}/customerLinkman/intoCustomerLinkmanList" >联系人</a></li>
             <li><a href="" >产品要求</a></li>
-            <li><a href="{$requset.contextPath}customerBaseInfoOrder/entrance" >订单信息</a></li>
+            <li><a href="{$requset.contextPath}/customerBaseInfoOrder/entrance" >订单信息</a></li>
             <li><a href="" >订单默认要求</a></li>
             <li><a href="${request.contextPath}/customerVisitRecord/intocustomerVisitRecordList" >沟通记录</a></li>
             <li><a href="" >公司别名（子公司信息）</a></li>
@@ -411,9 +411,10 @@
         </div>
     </div>
 </div>
-<input type="hidden" id="customerId" value="${customerId}">
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
+<input type="hidden" id="customerID" value=${customerId}>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerBasicAjax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerBasicInteraction.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
+

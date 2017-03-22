@@ -5,7 +5,6 @@
 $(function () {
     //获取初始数据
     getData(basePath+'/customerBaseInfo/showCustomerBaseInfoDetails','POST',GetRequest(),customerBasicInfo);
-
     //添加产品
     $(document).on('click.add','#addPro',function () {
         var row = '';
