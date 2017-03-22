@@ -15,6 +15,14 @@ public interface RecordLinkmanManager {
 	 * @return
 	 */
     public RecordLinkman addRecordLinkman(RecordLinkman recordLinkman) ;
+
+
+	/**
+	 * 批量新增
+	 * @param recordLinkmen
+	 * @return
+	 */
+	public boolean addRecordLinkmen(List<RecordLinkman> recordLinkmen);
     
 	 /**
      * 按照主键id更新recordLinkman，请重新new RecordLinkman 的更新对象，设置要更新的字段

@@ -22,8 +22,13 @@ public class RecordLinkmanManagerImpl implements RecordLinkmanManager {
     public RecordLinkman addRecordLinkman(RecordLinkman recordLinkman) {
     	return recordLinkmanDao.addRecordLinkman(recordLinkman);
     }
-    
-    public boolean updateRecordLinkmanById(int id, RecordLinkman recordLinkman) {
+
+	@Override
+	public boolean addRecordLinkmen(List<RecordLinkman> recordLinkmen) {
+		return recordLinkmanDao.addRecordLinkmen(recordLinkmen)==recordLinkmen.size()?true : false;
+	}
+
+	public boolean updateRecordLinkmanById(int id, RecordLinkman recordLinkman) {
     	return recordLinkmanDao.updateRecordLinkmanById(id, recordLinkman) == 1 ? true : false;
     }
     

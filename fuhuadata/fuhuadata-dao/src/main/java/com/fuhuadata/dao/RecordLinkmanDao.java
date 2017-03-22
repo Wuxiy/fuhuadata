@@ -2,6 +2,8 @@ package com.fuhuadata.dao;
 import java.util.List;
 import com.fuhuadata.domain.query.QueryRecordLinkman;
 import com.fuhuadata.domain.RecordLinkman;
+import com.sun.prism.impl.Disposer;
+
 import java.util.Map;
 import java.io.Serializable;
 
@@ -16,6 +18,8 @@ public interface RecordLinkmanDao {
 	 * @return
 	 */
     public RecordLinkman addRecordLinkman(RecordLinkman recordLinkman);
+
+    public int addRecordLinkmen(List<RecordLinkman> recordLinkmen);
     
 	 /**
      * 按照主键id更新recordLinkman，成功返回1，使用接口时，请重新new RecordLinkman 的更新对象，设置要更新的字段

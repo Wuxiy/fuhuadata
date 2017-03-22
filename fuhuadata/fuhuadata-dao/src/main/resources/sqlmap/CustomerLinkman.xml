@@ -235,7 +235,7 @@
 					</dynamic>
 		WHERE linkman_id=#linkmanId#
 	</update>
-	
+
 	<delete id="DELETE-BY-ID" parameterClass="java.lang.String">
 		<![CDATA[
 			DELETE FROM customer_linkman WHERE  linkman_id=#linkman_id#

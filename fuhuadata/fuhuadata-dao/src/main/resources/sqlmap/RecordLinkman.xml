@@ -104,7 +104,23 @@
 			SELECT @@IDENTITY AS ID
 		</selectKey>
 	</insert>
-	
+
+	<update id="BATCH-ADD" parameterClass="java.util.List">
+		<![CDATA[
+            INSERT INTO customer_linkman
+            (id, visit_record_id, linkman_id,activity_expens,activity_gift,create_user_id,
+            create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time) values
+            ]]>
+		<iterate conjunction=",">
+			<![CDATA[
+                (#[].id#,#[].visitRecordId#,#[].linkmanId#,
+                #[].activityExpens#,#[].activityGift#,#[].createUserId#,#[].createUserName#,
+                #[].lastmodifyUserId#,#[].lastmodifyUserName#,#[].createTime#,#[].modifyTime#)
+                ]]>
+		</iterate>
+
+	</update>
+
 	<update id="UPDATE" parameterClass="RecordLinkman">
 		UPDATE record_linkman 
 		<dynamic prepend=" SET ">
@@ -149,6 +165,7 @@
 			SELECT * FROM record_linkman WHERE id=#id#
 		]]>
 	</select>
+
 	
 	<select id="GET-PAGE" resultMap="RECORDLINKMAN-MAP" parameterClass="QueryRecordLinkman">
 		<![CDATA[
