@@ -7,11 +7,20 @@
 
     <sql id="QUERY-COMMON">
         <dynamic prepend=" WHERE ">
+            <isNotEmpty prepend=" AND " property="customerId">
+                customer_id = #customerId#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="status">
+                status = #status#
+            </isNotEmpty>
             <isNotEmpty prepend=" AND " property="saleOrganizationId">
                 sale_organization_id = #saleOrganizationId#
             </isNotEmpty>
             <isNotEmpty prepend=" AND " property="ncOrderId">
                 nc_order_id =  #ncOrderId#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="status">
+                status =  #status#
             </isNotEmpty>
             <isNotEmpty prepend=" AND " property="startTime">
                 <![CDATA[

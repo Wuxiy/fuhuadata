@@ -478,7 +478,7 @@
 		ifnull(sum(ifnull(actual_amount_paid,0)),0) payMoney
 		from  business_order
 		where customer_id = #customerId#
-		and staus = 2
+		and staus = 3
 	</select>
 
 	<select id="countOrderProduct" resultClass="CountCustomersOrderProduct" parameterClass="java.lang.String">
@@ -486,7 +486,7 @@
 			op.`customer_product_name` productName,
 			p.`category_name` categoryName,
 			sum(op.`min_price`*op.`main_product_amount`) totalMinPrice,
-
+			sum(op.`main_product_amount`)  totalSaleNum,
 			sum(op.`main_product_amount`)  totalSaleNum,
 			SUM(op.contract_price*op.`main_product_amount`) totalSaleMoney
 			p.measurement
@@ -495,7 +495,7 @@
 			o.`order_id` = op.`order_id`
 			and op.`product_id` = p.`product_id`
 			and transform_state=1
-			and o.staus = 2
+			and o.staus = 3
 			o.`customer_id` = #customerId#
 		group by op.archive_product_id
 	</select>

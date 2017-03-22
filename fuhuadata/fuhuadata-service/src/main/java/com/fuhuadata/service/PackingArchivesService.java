@@ -8,6 +8,7 @@ import com.fuhuadata.vo.PackingArchivesVO;
 import java.util.List;
 
 /**
+ *
  * Created by intanswer on 2017/1/23.
  */
 public interface PackingArchivesService {
