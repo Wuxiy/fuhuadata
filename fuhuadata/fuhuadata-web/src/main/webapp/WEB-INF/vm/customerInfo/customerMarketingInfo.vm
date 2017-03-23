@@ -1,17 +1,7 @@
 <div class="clearfix content shadow-out">
     <!--副导航-->
     <div class="nav-deputy shadow-out clearfix">
-        <ul id="deputyNav" class="nav nav-tabs pull-left">
-            <li><a href="${request.contextPath}/customerBaseInfo/intoCustomerBaseInfoDetails">基本信息</a></li>
-            <li class="active"><a href="${request.contextPath}/customerMarketInfo/entrance" >市场信息</a></li>
-            <li><a href="${request.contextPath}/customerLinkman/intoCustomerLinkmanList" >联系人</a></li>
-            <li><a href="" >产品要求</a></li>
-            <li><a href="${request.contextPath}/customerBaseInfoOrder/entrance" >订单信息</a></li>
-            <li><a href="" >订单默认要求</a></li>
-            <li><a href="${request.contextPath}/customerVisitRecord/intocustomerVisitRecordList" >沟通记录</a></li>
-            <li><a href="" >公司别名（子公司信息）</a></li>
-            <li><a href="" >关联数据</a></li>
-        </ul>
+        #deputyNav(2);
         <ul class="breadcrumb pull-right">
             <li><span class="glyphicon glyphicon-map-marker"></span></li>
             <li><a href="">合作客户</a></li>
@@ -261,23 +251,28 @@
         });
 
         //客户采购产品批量提交
-        $(document).on('click.up','#cpps_up',function() {
-            upData('${request.contextPath}/customerMarketInfo/addCPPList','POST',cppsObj(),'application/json');
-            //刷新
-            getData('${request.contextPath}/customerMarketInfo/init','POST',GetRequest(),pop);
-
+        $(document).on('click.up','#cpps_up',function(e) {
+            var notNull = $(e.target).parents('.modal').find('input[required ]').val();
+            if(notNull!='' || notNull!=null){
+                upData('${request.contextPath}/customerMarketInfo/addCPPList','POST',cppsObj(),'application/json');
+            }else{
+                alert('请完善表单');
+                return false;
+            }
         });
         //客户销售产品批量提交
         $(document).on('click.up','#csps_up',function() {
-            upData('${request.contextPath}/customerMarketInfo/addCSPList','POST',cspsObj(),'application/json');
-            //刷新
-            getData('${request.contextPath}/customerMarketInfo/init','POST',GetRequest(),pop);
+            var notNull = $(e.target).parents('.modal').find('input[required ]').val();
+            if(notNull!='' && notNull!=null){
+                upData('${request.contextPath}/customerMarketInfo/addCSPList','POST',cspsObj(),'application/json');
+            }else{
+                alert('请完善表单');
+                return false;
+            }
         });
         //客户合作情况提交
         $(document).on('click.up','#cooperation_up',function() {
             upData('${request.contextPath}/customerMarketInfo/updateCooperationInfo','POST',cooperationObj(),'application/x-www-form-urlencoded; charset=UTF-8');
-            //刷新
-            getData('${request.contextPath}/customerMarketInfo/init','POST',GetRequest(),pop);
         });
         //客户合作情况取消
         $(document).on('click','#cooperation_cl',function () {
@@ -305,13 +300,13 @@
         function cspsTable(){
             var tbody = '';
             tbody += '<tbody name="cspsTbody">';
-            tbody += '<tr><th>销售产品</th>';
-            tbody += '<th><div class="input-group"><input name="productName" class="form-control" type="text" value="" disabled>';
+            tbody += '<tr><th>销售产品<sup class="not-null">*</sup></th>';
+            tbody += '<th><div class="input-group"><input name="productName" class="form-control" type="text" value="" disabled required>';
             tbody += '<span class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal">';
             tbody += '<span class="glyphicon glyphicon-search"></span>';
             tbody += '</button></span></div></th>';
-            tbody += '<th>年销售量</th>';
-            tbody += '<th><input name="yearSalesTotal" class="form-control" type="text" value=""></th>';
+            tbody += '<th>年销售量<sup class="not-null">*</sup></th>';
+            tbody += '<th><input name="yearSalesTotal" class="form-control" type="text" value="" required></th>';
             tbody += '<th>品牌</th>';
             tbody += '<th><input name="brand" class="form-control" type="text" value=""></th>';
             tbody += '<th>营销手段</th>';
@@ -340,21 +335,21 @@
         function cppsTable() {
             var tbody = '';
             tbody += '<tbody name="cppsTbody">';
-            tbody += '<tr><th>采购产品</th>';
-            tbody += '<th><div class="input-group"><input name="productName" class="form-control" type="text" value="" disabled>';
+            tbody += '<tr><th>采购产品<sup class="not-null">*</sup></th>';
+            tbody += '<th><div class="input-group"><input name="productName" class="form-control" type="text" value="" disabled required>';
             tbody += '<span class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal">';
             tbody += '<span class="glyphicon glyphicon-search"></span>';
             tbody += '</button></span></div></th>';
-            tbody += '<th>年需求量</th>';
-            tbody += '<th><input name="annualDemands" class="form-control" type="text" value=""></th>';
-            tbody += '<th>平均单价(美元)</th>';
-            tbody += '<th><input name="averagePrice" class="form-control" type="text" value=""></th></tr>';
-            tbody += '<tr><td>供应商1</td>'
-            tbody += '<td><input name="supplier1" class="form-control" type="text" value=""></td>';
-            tbody += '<td>年采购量</td>'
-            tbody += '<td><input name="purchaseAmount1" class="form-control" type="text" value=""></td>';
-            tbody += '<td>平均单价</td>';
-            tbody += '<td><input name="averagePrice1" class="form-control" type="text" value=""></td></tr>';
+            tbody += '<th>年需求量<sup class="not-null">*</sup></th>';
+            tbody += '<th><input name="annualDemands" class="form-control" type="text" value="" required></th>';
+            tbody += '<th>平均单价(美元)<sup class="not-null">*</sup></th>';
+            tbody += '<th><input name="averagePrice" class="form-control" type="text" value="" required></th></tr>';
+            tbody += '<tr><td>供应商1<sup class="not-null">*</sup></td>'
+            tbody += '<td><input name="supplier1" class="form-control" type="text" value="" required></td>';
+            tbody += '<td>年采购量<sup class="not-null">*</sup></td>'
+            tbody += '<td><input name="purchaseAmount1" class="form-control" type="text" value="" required></td>';
+            tbody += '<td>平均单价<sup class="not-null">*</sup></td>';
+            tbody += '<td><input name="averagePrice1" class="form-control" type="text" value="" required></td></tr>';
             tbody += '<tr><td>供应商2</td>'
             tbody += '<td><input name="supplier2" class="form-control" type="text" value=""></td>';
             tbody += '<td>年采购量</td>'

@@ -1,17 +1,7 @@
 <div class="clearfix content shadow-out">
     <!--副导航-->
     <div class="nav-deputy shadow-out clearfix">
-        <ul id="deputyNav" class="nav nav-tabs pull-left">
-            <li><a href="${request.contextPath}/customerBaseInfo/intoCustomerBaseInfoDetails">基本信息</a></li>
-            <li><a href="${request.contextPath}/customerMarketInfo/entrance" >市场信息</a></li>
-            <li><a href="${request.contextPath}/customerLinkman/intoCustomerLinkmanList" >联系人</a></li>
-            <li class="active"><a href="" >产品要求</a></li>
-            <li><a href="{$requset.contextPath}/customerBaseInfoOrder/entrance" >订单信息</a></li>
-            <li><a href="" >订单默认要求</a></li>
-            <li><a href="" >沟通记录</a></li>
-            <li><a href="" >公司别名（子公司信息）</a></li>
-            <li><a href="" >关联数据</a></li>
-        </ul>
+        #deputyNav(5);
         <ul class="breadcrumb pull-right">
             <li><span class="glyphicon glyphicon-map-marker"></span></li>
             <li><a href="">合作客户</a></li>
@@ -49,27 +39,27 @@
                     </div>
                     <div class="panel-body">
                         <div class="form-horizontal">
-                            <div class="form-group">
-                                <div class="col-xs-12">
+                            <form class="form-group">
+                                <div class="col-xs-8 pull-right">
                                     <div class="input-group">
                                         <span class="input-group-addon" lang="zh">销售组织</span>
-                                        <select class="form-control">
-                                            <option value="" lang="zh">全部</option>
-                                            <option value="" lang="zh">通达</option>
-                                            <option value="" lang="zh">FH</option>
-                                        </select>
+                                        <input id="oSaleOrganizationId" type="text" class="form-control" value="" disabled>
+                                        <span class="input-group-btn"><button data-toggle="modal" data-target="#treeModal" class="btn btn-xs btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button></span>
                                         <span class="input-group-addon" lang="zh">外销合同号</span>
-                                        <input class="form-control" type="text" value="" />
+                                        <input id="oNcOrderId" class="form-control" type="text" value="" />
                                         <span class="input-group-addon" lang="zh">开始日期</span>
-                                        <input class="form-control" type="date" value="" />
+                                        <input id="oStartTime" class="form-control" type="date" value="" />
                                         <span class="input-group-addon" lang="zh">结束日期</span>
-                                        <input class="form-control" type="date" value="" />
+                                        <input id="oEndTime" class="form-control" type="date" value="" />
                                         <div class="input-group-btn">
-                                            <button class="btn btn-xs btn-primary" type="button">搜索</button>
+                                            <button class="btn btn-xs btn-primary" type="reset">重置</button>
+                                        </div>
+                                        <div class="input-group-btn">
+                                            <button id="oSubmit" class="btn btn-xs btn-primary" type="button">搜索</button>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                         <table class="table table-condensed table-bordered table-striped text-center">
                             <caption class="text-right" lang="zh">金额单位：万元</caption>
@@ -88,37 +78,38 @@
                                 <th class="text-center" lang="zh">合同时间</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="oTbody">
 
                             </tbody>
                         </table>
                         <!--分页导航-->
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <div class="input-group">
-                                    <span class="input-group-addon">共<span>123</span>条记录，<span>130</span>页，跳转到第</span>
-                                    <input class="form-control" type="number"/>
-                                    <span class="input-group-addon">页</span>
-                                    <span class="input-group-btn">
-															<button class="btn btn-xs btn-primary">跳转</button>
-														</span>
-                                </div>
-                            </div>
-                            <div class="col-xs-4 text-right pull-right">
-                                <ul class="pagination table-pagination">
-                                    <li class="disabled"><a href="#">上一页</a></li>
-                                    <li class="active"><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li><a href="#">6</a></li>
-                                    <li><a href="#">7</a></li>
-                                    <li><a href="">&hellip;</a></li>
-                                    <li><a href="#">下一页</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        <div id="oPagination" class="pagination"></div>
+##                        <div class="row">
+##                            <div class="col-xs-4">
+##                                <div class="input-group">
+##                                    <span class="input-group-addon">共<span>123</span>条记录，<span>130</span>页，跳转到第</span>
+##                                    <input class="form-control" type="number"/>
+##                                    <span class="input-group-addon">页</span>
+##                                    <span class="input-group-btn">
+##                                        <button class="btn btn-xs btn-primary">跳转</button>
+##                                    </span>
+##                                </div>
+##                            </div>
+##                            <div class="col-xs-4 text-right pull-right">
+##                                <ul class="pagination table-pagination">
+##                                    <li class="disabled"><a href="#">上一页</a></li>
+##                                    <li class="active"><a href="#">1</a></li>
+##                                    <li><a href="#">2</a></li>
+##                                    <li><a href="#">3</a></li>
+##                                    <li><a href="#">4</a></li>
+##                                    <li><a href="#">5</a></li>
+##                                    <li><a href="#">6</a></li>
+##                                    <li><a href="#">7</a></li>
+##                                    <li><a href="">&hellip;</a></li>
+##                                    <li><a href="#">下一页</a></li>
+##                                </ul>
+##                            </div>
+##                        </div>
                     </div>
                 </div>
                 <!--调价记录表-->
@@ -292,7 +283,7 @@
                     </div>
                 </div>
                 <!--合同取消记录-->
-                <div class="panel panel-default">
+                <div class="panel panel-default hidden">
                     <div class="panel-heading">
                         <h3 class="panel-title" lang="zh">
                             合同取消记录表
@@ -364,9 +355,131 @@
         </div>
     </div>
 </div>
+##销售组织树
+<div class="modal fade" id="treeModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body well" style="max-height: 300px; overflow-y: scroll; overflow-x: scroll;">
+                ##这里插入树形菜单
+                <div id="tree" class="tree"></div>
+            </div>
+        </div>
+    </div>
+</div>
 <script type="text/javascript" src="${request.contextPath}/lib/js/pagination/pagination.js"></script>
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/js/pagination/pagination.css" />
+<script type="text/javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
+<script type="text/javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
+<script type="text/javascript" src="${request.contextPath}/lib/js/customer/customerOrderAjax.js"></script>
+<script type="text/javascript">
+    var pageSize = 2;//分页步长
+
+    $(function(){
+##        getData('${request.contextPath}customerBaseInfoOrder/getListByPage','POST',GetRequest(),)
+        //生成地区目录树
+        $('#tree').creatTree('${request.contextPath}/customerBaseInfoOrder/initSaleOrganizationTree');
+        //搜索按钮绑定事件
+        $("#oSubmit").click(function(){
+            serach();
+        });
+        //双击文本添加到指定文本框
+        var selectedPName;
+        $(document).on('click','[data-target="#treeModal"]',function (e) {
+            selectedPName = $(e.target).parents('.input-group').find('input[disabled]');
+//            console.log(selectedPName);
+        })
+        $(document).on('click','#tree a',function (e) {
+            e.preventDefault();
+        })
+        $(document).on('dblclick','#tree a.cNode',function (e) {
+            var close = $(e.target).parents('.modal').find('.close');
+            var txt = $(e.target).text();
+            var id = $(e.target).parent('li').attr('id');
+            selectedPName.val(txt);
+            selectedPName.data('saleOrganizationId',id);
+            close.click();
+        })
+//        默认查询数据
+//        serach();
+    });
+    //查询按钮提交数据
+    function serach(){
+        var total = getListCount();
+        getDataList(0);
+        $("#oPagination").pagination(total,{
+            items_per_page : pageSize,
+            num_edge_entries : 3,
+            num_display_entries : 10,
+            callback:getDataList
+        });
+    }
+    //根据页码获取列表数据
+    function getDataList(pageNum,jq){
+        jQuery.ajax({
+            url:'${request.contextPath}/customerBaseInfoOrder/getListByPage',
+            dataType:'json',
+            data:{
+                saleOrganizationId:$('#oSaleOrganizationId').data('saleOrganizationId'),
+                ncOrderId:$('#oNcOrderId').val(),
+                startTime:$('#oStartTime').val(),
+                endTime:$('#oEndTime').val(),
+                startRow:pageNum*pageSize,
+                pageSize:pageSize
+            },
+            async:true,
+            type:'POST'
+        }).done(function (result) {
+            var data = result.data;
+            customerOrderHis(data);
+        });
+    }
+
+    /*分页插件参数
+    参数名	描述	参数值
+    maxentries	总条目数	必选参数，整数
+    items_per_page	每页显示的条目数	可选参数，默认是10
+    num_display_entries	连续分页主体部分显示的分页条目数	可选参数，默认是10
+    current_page	当前选中的页面	可选参数，默认是0，表示第1页
+    num_edge_entries	两侧显示的首尾分页的条目数	可选参数，默认是0
+    link_to	分页的链接	字符串，可选参数，默认是"#"
+    prev_text	“前一页”分页按钮上显示的文字	字符串参数，可选，默认是"Prev"
+    next_text	“下一页”分页按钮上显示的文字	字符串参数，可选，默认是"Next"
+    ellipse_text	省略的页数用什么文字表示	可选字符串参数，默认是"..."
+    prev_show_always	是否显示“前一页”分页按钮	布尔型，可选参数，默认为true，即显示“前一页”按钮
+    next_show_always	是否显示“下一页”分页按钮	布尔型，可选参数，默认为true，即显示“下一页”按钮
+    callback	回调函数	默认无执行效果*/
+
+    /**
+     * 获取列表数据总条目数
+     */
+    function getListCount(){
+        var total = 0;
+        jQuery.ajax({
+            url:'${request.contextPath}/customerBaseInfo/countCustomerList',
+            dataType:'JSON',
+            data:{
+                saleOrganizationId:$('#oSaleOrganizationId').val(),
+                ncOrderId:$('#oNcOrderId').val(),
+                startTime:$('#oStartTime').val(),
+                endTime:$('#oEndTime').val(),
+            },
+            async:false,//同步加载
+            method:'POST',
+            success:function(data){
+                total = data.data;
+            }
+        });
+        return total;
+    }
+
+
+</script>
 
 
 
