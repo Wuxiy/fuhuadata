@@ -6,12 +6,15 @@ $(document).ready(function(){
     getData(basePath + '/customerSubcompanyInfo/getCustomerSubcompanyInfosByCustomerId','POST',GetRequest(),anotherNamerList);
 
     //新增提交
-    $(document).on('click.up','#addVisit',function(){
+    $(document).on('click.up','#addanothername',function(){
         //提交数据
         upData(basePath+'/customerSubcompanyInfo/addCustomerSubcompanyInfo','POST',addAnotherName(),"application/json");
         /*location.reload();*/
     });
 })
+
+var id = document.URL.split('?')[1];
+var sid = id.split('=')[1];
 
 //渲染List
 function anotherNamerList(result) {
@@ -40,7 +43,8 @@ $(document).on('click','.otherNameinfo',function(){
         type:'POST',
         url:url,
         success:function(result){
-            var ResultData = result;
+            var ResultData = result.data;
+
             var arr = ResultData.property.split(',');
             $.each(arr,function(index,suitname){
                 $("input[name='check']").each(function(){
@@ -52,17 +56,46 @@ $(document).on('click','.otherNameinfo',function(){
                         }
                 })
             })
-            $('#packName').val(ResultData.fullName);
-            $('#spec').val(ResultData.shortName);
-            $('#size').val(ResultData.zhongxinbaoNumber);
-            $('#quality').val(ResultData.zhongxinbaoLevel);
-            $('#qualityIndex').val(ResultData.customerSubRemarks);
+            $('#fullName').val(ResultData.fullName);
+            $('#shortName').val(ResultData.shortName);
+            $('#zhongxinbaoNumber').val(ResultData.zhongxinbaoNumber);
+            $('#zhongxinbaoLevel').val(ResultData.zhongxinbaoLevel);
+            $('#customerSubRemarks').val(ResultData.customerSubRemarks);
 
             $('#addFieldinfo').modal('show');
         }
     })
 })
 
-function addAnotherName() {
 
+
+function addAnotherName() {
+    var data = {
+        "customerId":sid,
+        "fullName":getDateTime($('#fullName').val()),
+        "shortName":getDateTime($('#shortName').val()),
+        "zhongxinbaoNumber":$('#zhongxinbaoNumber').val(),
+        "zhongxinbaoLevel":$('#zhongxinbaoLevel').val(),
+        "customerSubRemarks":$('#customerSubRemarks').val(),
+        "property":checkboxArr(),
+        "propertyRemarks":$('#propertyRemarks').val()
+    }
 }
+
+function checkboxArr() {
+    var checkboxarr = [];
+    var a;
+    $("input[name='checkAdd']:checked").each(function(){
+        a =  $(this).val();
+        checkboxarr.push(a);
+    })
+    return JSON.stringify(checkboxarr);
+}
+
+$(document).on('click','input[name="checkAdd"]',function(){
+    if($(this).val() == 4){
+        $('#propertyRemarks').attr('disabled',false);
+    }else{
+        $('#propertyRemarks').attr('disabled',true);
+    }
+})
