@@ -104,3 +104,29 @@
         ><a href="" >关联数据</a></li>
     </ul>
 #end
+
+#macro(orderRequestNav $num)
+    <div class="col-xs-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title" lang="zh">
+                    导航
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div class="list-group">
+                    <a href="" class="list-group-item
+                     #if($num == 1)
+                     active
+                     #end
+                     " lang="zh">单据要求</a>
+                    <a href="" class="list-group-item
+                    #if($num == 2)
+                     active
+                     #end
+                    " lang="zh">订舱出运要求</a>
+                </div>
+            </div>
+        </div>
+    </div>
+#end

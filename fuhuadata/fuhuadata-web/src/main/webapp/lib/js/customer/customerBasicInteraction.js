@@ -19,10 +19,11 @@ $(function () {
     });
 
     //选择其他选项，切换显示(需修改)
-    $(document).on('change.view','[name="enterpriseNature"]',function (e) {
-        var thisEl = $(e.target);
-        thisE.focus().blur();
-        radioChecked(thisEl);
+    $(document).on('change.view','[name="enterpriseNature"]',function () {
+        var thiEl = this;
+        // var thisEl = $(e.target);
+        // thisEl.focus().blur();
+        // radioChecked(thisEl);
     });
 
     //编辑客户基本信息
