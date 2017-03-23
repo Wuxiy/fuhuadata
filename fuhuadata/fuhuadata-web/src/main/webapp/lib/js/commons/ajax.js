@@ -2,6 +2,7 @@
  *获取数据
  */
 function getData(url,type,data,callBack){
+    console.log(data);
     $.ajax({
         url:url,
         type:type,

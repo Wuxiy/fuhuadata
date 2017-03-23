@@ -252,23 +252,35 @@
 
         //客户采购产品批量提交
         $(document).on('click.up','#cpps_up',function(e) {
-            var notNull = $(e.target).parents('.modal').find('input[required ]').val();
-            if(notNull!='' || notNull!=null){
+            var isUp=true;
+            var notNull = $(e.target).parents('.modal').find('input[required ]');
+            notNull.each(function () {
+                thisVal = $(this).val();
+                if(thisVal==''|| thisVal==null){
+                    alert('请完善表单');
+                    isUp = false;
+                    return false;
+                }
+            });
+            if(isUp){
                 upData('${request.contextPath}/customerMarketInfo/addCPPList','POST',cppsObj(),'application/json');
-            }else{
-                alert('请完善表单');
-                return false;
-            }
+            };
         });
         //客户销售产品批量提交
-        $(document).on('click.up','#csps_up',function() {
-            var notNull = $(e.target).parents('.modal').find('input[required ]').val();
-            if(notNull!='' && notNull!=null){
+        $(document).on('click.up','#csps_up',function(e) {
+            var isUp=true;
+            var notNull = $(e.target).parents('.modal').find('input[required ]');
+            notNull.each(function () {
+                thisVal = $(this).val();
+                if(thisVal==''|| thisVal==null){
+                    alert('请完善表单');
+                    isUp = false;
+                    return false;
+                }
+            });
+            if(isUp){
                 upData('${request.contextPath}/customerMarketInfo/addCSPList','POST',cspsObj(),'application/json');
-            }else{
-                alert('请完善表单');
-                return false;
-            }
+            };
         });
         //客户合作情况提交
         $(document).on('click.up','#cooperation_up',function() {
