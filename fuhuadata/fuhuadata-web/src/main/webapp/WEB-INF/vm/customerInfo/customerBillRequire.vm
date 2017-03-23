@@ -1,7 +1,7 @@
 <div class="clearfix content shadow-out">
     <!--副导航-->
     <div class="nav-deputy shadow-out clearfix">
-        #deputyNav(6);
+        #deputyNav(6)
         <ul class="breadcrumb pull-right">
             <li><span class="glyphicon glyphicon-map-marker"></span></li>
             <li><a href="">合作客户</a></li>
@@ -12,30 +12,23 @@
     <div class="dashboard-wrapper">
         <div class="row">
             <!--导航-->
-            #orderRequestNav(1);
+            #orderRequestNav(1)
             <div class="col-xs-10">
                 <!--单据要求-->
                 <div class="panel panel-default panel-edit view-HD-md">
                     <div class="panel-heading">
                         <div class="input-group panel-heading-btn col-xs-8 pull-right">
-                            <span class="input-group-addon bg-success" lang="zh">产品种类</span>
+                            <span class="input-group-addon" lang="zh">产品种类</span>
                             <select class="form-control">
                                 <option value="">41%草甘膦异丙铵盐水剂-1L*10</option>
                                 <option value="">74%草甘膦异丙铵盐颗粒剂050KG*10</option>
                                 <option value="">95%草甘膦原药-25KG</option>
                             </select>
-                            <span class="input-group-addon bg-success" lang="zh">单据类型</span>
+                            <span class="input-group-addon" lang="zh">单据类型</span>
                             <select class="form-control">
                                 <option value="">信用证条款单据</option>
                                 <option value="">非信用证条款单据</option>
                             </select>
-                            <div class="input-group-btn">
-                                <button class="btn btn-primary btn-xs editInfo">编辑</button>
-                            </div>
-                            <div class="input-group-btn hidden">
-                                <button class="btn btn-xs editOff" lang="zh">取消</button>
-                                <button class="btn btn-xs btn-primary editSave" lang="zh">保存</button>
-                            </div>
                         </div>
                         <h3 class="panel-title" lang="zh">
                             单据要求
