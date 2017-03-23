@@ -96,7 +96,7 @@
         #if($num == 8)
             class="active"
         #end
-        ><a href="" >公司别名（子公司信息）</a></li>
+        ><a href="${request.contextPath}/customerSubcompanyInfo/intoCustomerSubcompanyInfo" >公司别名（子公司信息）</a></li>
         <li
         #if($num == 9)
             class="active"
