@@ -339,7 +339,7 @@
 		SELECT
 			base.customer_id as customerId,
 			base.full_name fullName,
-			base.enterprise_nature enterpriseNature,
+			GROUP_CONCAT(nature.nature) enterpriseNature,
 			base.short_name shortName,
 			base.company_type companyType,
 			base.customer_area_id areaId,
@@ -386,6 +386,7 @@
 			ON base.customer_id = en.customer_id
 			WHERE
 				base.customer_id = 'fh123456'
+			GROUP BY base.customer_id
 	]]>
 	</select>
 	
