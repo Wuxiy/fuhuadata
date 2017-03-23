@@ -30,7 +30,7 @@ public class CustomerBaseInfoOrderRequireAction {
      */
     @RequestMapping("/billRequireEntrance")
     public ModelAndView billRequireEntrance(String customerId){
-        return new ModelAndView("customerIndo/customerBillRequire").addObject("customerId",customerId);
+        return new ModelAndView("customerInfo/customerBillRequire").addObject("customerId",customerId);
     }
 
     /**
@@ -40,7 +40,7 @@ public class CustomerBaseInfoOrderRequireAction {
      */
     @RequestMapping("/transportRequireEntrance")
     public ModelAndView transportRequireEntrance(String customerId){
-        return new ModelAndView("customerIndo/customerTransportRequire").addObject("customerId",customerId);
+        return new ModelAndView("customerInfo/customerTransportRequire").addObject("customerId",customerId);
     }
     @ResponseBody
     @RequestMapping("/getBillRequireList")
