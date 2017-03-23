@@ -57,7 +57,7 @@
 	<bean id="productCategoryDao" class="com.fuhuadata.dao.impl.ProductCategoryDaoImpl"/>
 	<bean id="packingCategoryDao" class="com.fuhuadata.dao.impl.PackingCategoryDaoImpl"/>
 	<bean id="productWareDao" class="com.fuhuadata.dao.impl.ProductWareDaoImpl"/>
-	<bean id="customerProductInfoDao" class="com.fuhuadata.dao.impl.CustomerProductInfoDaoImpl"/>
+	<bean id="customerProductInfoDao" class="com.fuhuadata.dao.impl.CustomerProductArchivesDaoImpl"/>
 	<bean id="customerMakeProductDao" class="com.fuhuadata.dao.impl.CustomerMakeProductDaoImpl"/>
 	<bean id="linkmanDao" class="com.fuhuadata.dao.impl.CustomerLinkmanDaoImpl"/>
 	<bean id="customerPurchaseProductDao" class="com.fuhuadata.dao.impl.CustomerPurchaseProductDaoImpl"/>

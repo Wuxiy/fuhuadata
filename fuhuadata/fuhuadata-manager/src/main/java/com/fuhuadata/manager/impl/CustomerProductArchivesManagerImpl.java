@@ -3,9 +3,9 @@ import java.util.List;
 
 import com.fuhuadata.domain.CustomerProductArchives;
 import com.fuhuadata.domain.query.Result;
-import com.fuhuadata.dao.CustomerProductInfoDao;
+import com.fuhuadata.dao.CustomerProductArchivesDao;
 import com.fuhuadata.domain.query.QueryCustomerProductArchives;
-import com.fuhuadata.manager.CustomerProductInfoManager;
+import com.fuhuadata.manager.CustomerProductArchivesManager;
 
 import com.fuhuadata.vo.CustomerProductPackagingArchives;
 
@@ -15,9 +15,9 @@ import java.util.ArrayList;
  * @author wangbo
  * @date 2017-02-03 15:51:13
  */
-public class CustomerProductInfoManagerImpl implements CustomerProductInfoManager {
+public class CustomerProductArchivesManagerImpl implements CustomerProductArchivesManager {
 
-    private CustomerProductInfoDao customerProductInfoDao;
+    private CustomerProductArchivesDao customerProductInfoDao;
     
 
     public CustomerProductArchives addCustomerProductInfo(CustomerProductArchives customerProductArchives) {
@@ -76,11 +76,11 @@ public class CustomerProductInfoManagerImpl implements CustomerProductInfoManage
     	return customerProductInfoDao.count(queryCustomerProductArchives);
     }
 
-	public void setCustomerProductInfoDao(CustomerProductInfoDao customerProductInfoDao) {
+	public void setCustomerProductInfoDao(CustomerProductArchivesDao customerProductInfoDao) {
 		this.customerProductInfoDao = customerProductInfoDao;
 	}
 
-	public CustomerProductInfoDao getCustomerProductInfoDao(){
+	public CustomerProductArchivesDao getCustomerProductInfoDao(){
     	return this.customerProductInfoDao;
 	}
 }

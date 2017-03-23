@@ -1,7 +1,7 @@
 package com.fuhuadata.web.springmvc;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
-import com.fuhuadata.service.CustomerProductInfoService;
+import com.fuhuadata.service.CustomerProductArchivesService;
 import com.fuhuadata.vo.CustomerProductPackagingArchives;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
@@ -25,7 +25,7 @@ public class CustomerProductPackingAction {
     private final static Log log= LogFactory.getLog(CustomerProductPackingAction.class);
 
     @Resource
-    private CustomerProductInfoService customerProductInfoService;
+    private CustomerProductArchivesService customerProductInfoService;
 
     /**
      * 客户产品包装要求列表

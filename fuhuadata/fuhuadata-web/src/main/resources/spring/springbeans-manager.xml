@@ -23,7 +23,7 @@
 	<bean id="productCategoryManager" class="com.fuhuadata.manager.impl.ProductCategoryManagerImpl"/>
 	<bean id="packingCategoryManager" class="com.fuhuadata.manager.impl.PackingCategoryManagerImpl"/>
 	<bean id="productWareManager" class="com.fuhuadata.manager.impl.ProductWareManagerImpl"/>
-	<bean id="customerProductInfoManager" class="com.fuhuadata.manager.impl.CustomerProductInfoManagerImpl"/>
+	<bean id="customerProductInfoManager" class="com.fuhuadata.manager.impl.CustomerProductArchivesManagerImpl"/>
 	<bean id="customerMakeProductManager" class="com.fuhuadata.manager.impl.CustomerMakeProductManagerImpl"/>
 	<bean id="customerLinkmanManager" class="com.fuhuadata.manager.impl.CustomerLinkmanManagerImpl"/>
 	<bean id="customerPurchaseProductManager" class="com.fuhuadata.manager.impl.CustomerPurchaseProductManagerImpl"/>

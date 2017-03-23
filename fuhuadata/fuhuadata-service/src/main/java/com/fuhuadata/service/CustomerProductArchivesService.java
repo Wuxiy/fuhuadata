@@ -10,7 +10,7 @@ import com.fuhuadata.vo.CustomerProductPackagingArchives;
  * @author wangbo
  * @date 2017-02-03 15:51:13
  */
-public interface CustomerProductInfoService {
+public interface CustomerProductArchivesService {
 
 	/**
 	 * 新增 customerProductArchives
