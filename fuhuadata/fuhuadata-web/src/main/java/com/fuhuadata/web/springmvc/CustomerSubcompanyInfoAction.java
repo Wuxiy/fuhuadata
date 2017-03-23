@@ -38,6 +38,11 @@ public class CustomerSubcompanyInfoAction {
     }
 
 
+    /**
+     * list
+     * @param customerId
+     * @return
+     */
     @RequestMapping(value="/getCustomerSubcompanyInfosByCustomerId",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "customerInfo-CustomerSubcompanyInfo",methods = "getByCustomerId")
     @ResponseBody
@@ -53,6 +58,11 @@ public class CustomerSubcompanyInfoAction {
     }
 
 
+    /**
+     * get by id
+     * @param customerSubId
+     * @return
+     */
     @RequestMapping(value="/getCustomerSubcompanyInfoById",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "customerInfo-CustomerSubcompanyInfo",methods = "getById")
     @ResponseBody
@@ -67,6 +77,11 @@ public class CustomerSubcompanyInfoAction {
         return result.getResultPojo();
     }
 
+    /**
+     * do add
+     * @param customerSubcompanyInfo
+     * @return
+     */
     @RequestMapping(value="/addCustomerSubcompanyInfo",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "customerInfo-CustomerSubcompanyInfo",methods = "doAdd")
     @ResponseBody
