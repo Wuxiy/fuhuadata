@@ -37,7 +37,23 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 
     public Result updateCustomerBaseInfoById(String customer_id, CustomerBaseInfo customerBaseInfo) {
 		Result result = new Result();
+
+		try{
+			result.setSuccess(customerBaseInfoManager.deleteCustomerEnterpriceNatureByCustomerId(customer_id));
+		}catch(Exception e){
+			result.setSuccess(false);
+			log.error("根据客户id删除客户性质出错",e);
+			return result;
+		}
+		try{
+			//String
+			//
+			//result.setSuccess();
+		}catch(Exception e){
+
+		}
 		try {
+
 			result.setSuccess(customerBaseInfoManager.updateCustomerBaseInfoById(customer_id, customerBaseInfo));
 		} catch(Exception e) {
 			result.setSuccess(false);
