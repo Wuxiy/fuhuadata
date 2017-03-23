@@ -7,7 +7,7 @@
    	<typeAlias alias="QueryCustomerSubcompanyInfo" type="com.fuhuadata.domain.query.QueryCustomerSubcompanyInfo"/>
 	
 	<resultMap id="CUSTOMERSUBCOMPANYINFO-MAP" class="CustomerSubcompanyInfo">
-					<result property="customerSubId" column="customer_sub_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="customerSubId" column="customer_sub_id" jdbcType="INT" javaType="java.lang.Integer" />
 								<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="fullName" column="full_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="shortName" column="short_name" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -128,8 +128,8 @@
 		INSERT INTO 
 		customer_subcompany_info(customer_sub_id,customer_id,full_name,short_name,property,property_remarks,zhongxinbao_number,zhongxinbao_level,customer_sub_remarks,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time) 
 		VALUES(#customerSubId#,#customerId#,#fullName#,#shortName#,#property#,#propertyRemarks#,#zhongxinbaoNumber#,#zhongxinbaoLevel#,#customerSubRemarks#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
-		<selectKey resultClass="String" keyProperty="id">
-			SELECT @@IDENTITY AS ID
+		<selectKey resultClass="String" keyProperty="customerSubId">
+			SELECT @@IDENTITY AS customer_sub_id
 		</selectKey>
 	</insert>
 	
@@ -179,6 +179,18 @@
 	<select id="GET-BY-ID" resultMap="CUSTOMERSUBCOMPANYINFO-MAP" parameterClass="java.lang.String">
 		<![CDATA[
 			SELECT * FROM customer_subcompany_info	WHERE customer_sub_id=#customer_sub_id#
+		]]>
+	</select>
+
+	<select id="GET-BY-CUSTOMER-ID" resultMap="CUSTOMERSUBCOMPANYINFO-MAP" parameterClass="java.lang.String">
+		<![CDATA[
+			SELECT * FROM customer_subcompany_info WHERE customer_id = #customerId#
+		]]>
+	</select>
+
+	<select id="GET-MAX-SUBID-BY-CUSTOMERID" resultClass="java.lang.String" parameterClass="java.lang.String">
+		<![CDATA[
+			SELECT max(customer_sub_id) FROM customer_subcompany_info WHERE customer_id = #customerId#
 		]]>
 	</select>
 	

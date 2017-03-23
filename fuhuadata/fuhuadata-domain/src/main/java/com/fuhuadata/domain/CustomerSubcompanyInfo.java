@@ -9,7 +9,7 @@ import java.util.Date;
 public class CustomerSubcompanyInfo{
 
     /**客户子公司id**/
-	private String customerSubId;
+	private Integer customerSubId;
 	
     /**客户id**/
 	private String customerId;
@@ -56,14 +56,7 @@ public class CustomerSubcompanyInfo{
 	
 	public CustomerSubcompanyInfo() {
 	}
-	
-	public String getCustomerSubId() {
-		return customerSubId;
-	}
-	
-	public void setCustomerSubId(String customerSubId) {
-		this.customerSubId = customerSubId;
-	}
+
 	
 	public String getCustomerId() {
 		return customerId;
@@ -176,6 +169,13 @@ public class CustomerSubcompanyInfo{
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
 	}
-	
 
+
+	public Integer getCustomerSubId() {
+		return customerSubId;
+	}
+
+	public void setCustomerSubId(Integer customerSubId) {
+		this.customerSubId = customerSubId;
+	}
 }

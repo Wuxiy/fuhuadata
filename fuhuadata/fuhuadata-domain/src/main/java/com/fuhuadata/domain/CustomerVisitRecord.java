@@ -103,11 +103,12 @@ public class CustomerVisitRecord{
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
+
+	@JsonSerialize(using = DateJsonSerializer.class)
 	public Date getStartTime() {
 		return startTime;
 	}
-	
+	@JsonDeserialize(using = DateJsonDeserializer.class)
 	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}

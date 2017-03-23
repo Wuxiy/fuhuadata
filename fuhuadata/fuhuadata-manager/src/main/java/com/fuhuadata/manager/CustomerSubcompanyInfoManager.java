@@ -23,7 +23,7 @@ public interface CustomerSubcompanyInfoManager {
      * @param customerSubcompanyInfo
      * @return
      */
-    public boolean updateCustomerSubcompanyInfoById(String customer_sub_id, CustomerSubcompanyInfo customerSubcompanyInfo);
+    public boolean updateCustomerSubcompanyInfoById(int customer_sub_id, CustomerSubcompanyInfo customerSubcompanyInfo);
 
     /**
      * 按照主键id 删除 记录
@@ -31,7 +31,7 @@ public interface CustomerSubcompanyInfoManager {
      * @param customer_sub_id
      * @return
      */
-    public boolean deleteCustomerSubcompanyInfoById(String customer_sub_id);
+    public boolean deleteCustomerSubcompanyInfoById(int customer_sub_id);
 
     /**
      * 返回数据库所有记录，谨慎使用，最好不用
@@ -52,7 +52,15 @@ public interface CustomerSubcompanyInfoManager {
      * @param customer_sub_id
      * @return
      */
-    public CustomerSubcompanyInfo getCustomerSubcompanyInfoById(String customer_sub_id);
+    public CustomerSubcompanyInfo getCustomerSubcompanyInfoById(int customer_sub_id);
+
+
+	/**
+	 * 根据客户id获取子公司列表
+	 * @param customerId
+	 * @return
+	 */
+	public List<CustomerSubcompanyInfo> getCustomerSubcompanyInfoByCustomerId(String customerId);
 
     /**
      * 查询列表，包含分页查询，

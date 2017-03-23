@@ -65,4 +65,5 @@
 	<bean id="recordLinkmanDao" class="com.fuhuadata.dao.impl.RecordLinkmanDaoImpl"/>
 	<bean id="customerLinkmanDao" class="com.fuhuadata.dao.impl.CustomerLinkmanDaoImpl"/>
 	<bean id="customerVisitRecordDao" class="com.fuhuadata.dao.impl.CustomerVisitRecordDaoImpl"/>
+	<bean id="customerSubcompanyInfoDao" class="com.fuhuadata.dao.impl.CustomerSubcompanyInfoDaoImpl"/>
 </beans>

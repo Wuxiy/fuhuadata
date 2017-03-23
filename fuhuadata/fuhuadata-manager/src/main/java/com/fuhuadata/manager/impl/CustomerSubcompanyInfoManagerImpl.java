@@ -23,7 +23,7 @@ public class CustomerSubcompanyInfoManagerImpl implements CustomerSubcompanyInfo
     	return customerSubcompanyInfoDao.addCustomerSubcompanyInfo(customerSubcompanyInfo);
     }
     
-    public boolean updateCustomerSubcompanyInfoById(String customer_sub_id, CustomerSubcompanyInfo customerSubcompanyInfo) {
+    public boolean updateCustomerSubcompanyInfoById(int customer_sub_id, CustomerSubcompanyInfo customerSubcompanyInfo) {
     	return customerSubcompanyInfoDao.updateCustomerSubcompanyInfoById(customer_sub_id, customerSubcompanyInfo) == 1 ? true : false;
     }
     
@@ -31,7 +31,7 @@ public class CustomerSubcompanyInfoManagerImpl implements CustomerSubcompanyInfo
 		return customerSubcompanyInfoDao.getCustomerSubcompanyInfosByQuery(queryCustomerSubcompanyInfo);
 	}
 
-    public boolean deleteCustomerSubcompanyInfoById(String customer_sub_id) {
+    public boolean deleteCustomerSubcompanyInfoById(int customer_sub_id) {
     	return customerSubcompanyInfoDao.deleteCustomerSubcompanyInfoById(customer_sub_id) == 1 ? true : false;
     }
     
@@ -58,13 +58,25 @@ public class CustomerSubcompanyInfoManagerImpl implements CustomerSubcompanyInfo
     }
     	
     	
-    public CustomerSubcompanyInfo getCustomerSubcompanyInfoById(String customer_sub_id) {
+    public CustomerSubcompanyInfo getCustomerSubcompanyInfoById(int customer_sub_id) {
     	return customerSubcompanyInfoDao.getCustomerSubcompanyInfoById(customer_sub_id);
     }
-    
 
-    public int count(QueryCustomerSubcompanyInfo queryCustomerSubcompanyInfo) {
+	/**
+	 * 根据客户id获取子公司列表
+	 * @param customerId
+	 * @return
+	 */
+	@Override
+	public List<CustomerSubcompanyInfo> getCustomerSubcompanyInfoByCustomerId(String customerId) {
+		return customerSubcompanyInfoDao.getCustomerSubcompanyInfoByCustomerId(customerId);
+	}
+
+
+	public int count(QueryCustomerSubcompanyInfo queryCustomerSubcompanyInfo) {
     	return customerSubcompanyInfoDao.count(queryCustomerSubcompanyInfo);
     }
+
+
     
 }

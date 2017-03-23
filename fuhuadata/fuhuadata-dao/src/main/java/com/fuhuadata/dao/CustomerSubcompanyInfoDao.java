@@ -23,14 +23,14 @@ public interface CustomerSubcompanyInfoDao {
      * @param customerSubcompanyInfo
      * @return
      */
-    public int updateCustomerSubcompanyInfoById(String customer_sub_id, CustomerSubcompanyInfo customerSubcompanyInfo);
+    public int updateCustomerSubcompanyInfoById(int customer_sub_id, CustomerSubcompanyInfo customerSubcompanyInfo);
     
 	 /**
      * 按照主键id 删除 记录，返回1为成功
      * @param customer_sub_id
      * @return
      */
-    public int deleteCustomerSubcompanyInfoById(String customer_sub_id);
+    public int deleteCustomerSubcompanyInfoById(int customer_sub_id);
     
 	 /**
      * 返回数据库所有记录，谨慎使用，最好不用
@@ -50,8 +50,16 @@ public interface CustomerSubcompanyInfoDao {
      * @param customer_sub_id
      * @return
      */
-    public CustomerSubcompanyInfo getCustomerSubcompanyInfoById(String customer_sub_id);
-        
+    public CustomerSubcompanyInfo getCustomerSubcompanyInfoById(int customer_sub_id);
+
+    public String getMaxCustomerSubIdByCustomerId(String customerId);
+
+	/**
+	 * 返回客户的子公司
+	 * @param customerId
+	 * @return
+	 */
+	public List<CustomerSubcompanyInfo> getCustomerSubcompanyInfoByCustomerId(String customerId);
 	 /**
      * 查询列表，包含分页查询，查询结果为空返回空的List对象
 	 * 查询分页信息，请设置

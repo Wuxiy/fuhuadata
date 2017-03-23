@@ -6,6 +6,9 @@ import com.fuhuadata.service.CustomerSubcompanyInfoService;
 import com.fuhuadata.manager.CustomerSubcompanyInfoManager;
 import com.fuhuadata.domain.query.Result;
 import javax.annotation.Resource;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 import java.util.Map;
 import java.io.Serializable;
@@ -15,6 +18,7 @@ import java.io.Serializable;
  * @date 2017-01-12 13:37:25
  */
 public class CustomerSubcompanyInfoServiceImpl implements CustomerSubcompanyInfoService {
+	private static final Log log = LogFactory.getLog(CustomerSubcompanyInfoServiceImpl.class);
 	
 	@Resource
     private CustomerSubcompanyInfoManager customerSubcompanyInfoManager;
@@ -22,13 +26,14 @@ public class CustomerSubcompanyInfoServiceImpl implements CustomerSubcompanyInfo
 		Result<CustomerSubcompanyInfo> result = new Result<CustomerSubcompanyInfo>();
 		try {
 			result.addDefaultModel(customerSubcompanyInfoManager.addCustomerSubcompanyInfo(customerSubcompanyInfo));			
-		} catch(Exception e) {
+		} catch(Exception e) {;
 			result.setSuccess(false);
+			log.error("新增客户子公司错误",e);
 		}
 		return result;
     }
     
-    public Result updateCustomerSubcompanyInfoById(String customer_sub_id, CustomerSubcompanyInfo customerSubcompanyInfo) {
+    public Result updateCustomerSubcompanyInfoById(int customer_sub_id, CustomerSubcompanyInfo customerSubcompanyInfo) {
 		Result result = new Result();
 		try {
 			result.setSuccess(customerSubcompanyInfoManager.updateCustomerSubcompanyInfoById(customer_sub_id, customerSubcompanyInfo));
@@ -37,13 +42,26 @@ public class CustomerSubcompanyInfoServiceImpl implements CustomerSubcompanyInfo
 		}
 		return result;
     }
-    
-    public Result deleteCustomerSubcompanyInfoById(String customer_sub_id) {
+
+	@Override
+	public Result<List<CustomerSubcompanyInfo>> getCustomerSubcompanyInfoByCustomerId(String customerId) {
+		Result<List<CustomerSubcompanyInfo>> result = new Result<List<CustomerSubcompanyInfo>>();
+		try{
+			result.addDefaultModel("CustomerSubcompanyInfos",customerSubcompanyInfoManager.getCustomerSubcompanyInfoByCustomerId(customerId));
+		}catch(Exception e){
+			result.setSuccess(false);
+			log.error("根据客户ID获取子公司列表错误",e);
+		}
+		return result;
+	}
+
+	public Result deleteCustomerSubcompanyInfoById(int customer_sub_id) {
 		Result result = new Result();
 		try {
 			result.setSuccess(customerSubcompanyInfoManager.deleteCustomerSubcompanyInfoById(customer_sub_id));
 		} catch(Exception e) {
 			result.setSuccess(false);
+			log.error("根据id删除客户子公司信息错误",e);
 		}
 		return result;
     }	
@@ -58,7 +76,7 @@ public class CustomerSubcompanyInfoServiceImpl implements CustomerSubcompanyInfo
 		return result;	
     }
     	
-    public Result<CustomerSubcompanyInfo> getCustomerSubcompanyInfoById(String customer_sub_id) {
+    public Result<CustomerSubcompanyInfo> getCustomerSubcompanyInfoById(int customer_sub_id) {
 		Result<CustomerSubcompanyInfo> result = new Result<CustomerSubcompanyInfo>();
 		try {		
 		    CustomerSubcompanyInfo  customerSubcompanyInfo = customerSubcompanyInfoManager.getCustomerSubcompanyInfoById(customer_sub_id);
@@ -67,9 +85,9 @@ public class CustomerSubcompanyInfoServiceImpl implements CustomerSubcompanyInfo
 			}else{
 				result.addDefaultModel("CustomerSubcompanyInfo", customerSubcompanyInfo);
 			}
-			
 		} catch(Exception e) {
 			result.setSuccess(false);
+			log.error("根据id获取子公司详情错误",e);
 		}
 		return result;	
     }

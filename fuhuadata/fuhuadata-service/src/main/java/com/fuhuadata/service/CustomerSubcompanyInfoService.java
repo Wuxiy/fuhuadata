@@ -26,7 +26,14 @@ public interface CustomerSubcompanyInfoService {
      * @param customerSubcompanyInfo
      * @return
      */
-    public Result updateCustomerSubcompanyInfoById(String customer_sub_id, CustomerSubcompanyInfo customerSubcompanyInfo);
+    public Result updateCustomerSubcompanyInfoById(int customer_sub_id, CustomerSubcompanyInfo customerSubcompanyInfo);
+
+	/**
+	 * 根据客户id获取子公司列表
+	 * @param customerId
+	 * @return
+	 */
+	public Result<List<CustomerSubcompanyInfo>> getCustomerSubcompanyInfoByCustomerId(String customerId);
 
     /**
      * 按照主键id 删除 记录
@@ -34,7 +41,7 @@ public interface CustomerSubcompanyInfoService {
      * @param customer_sub_id
      * @return
      */
-    public Result deleteCustomerSubcompanyInfoById(String customer_sub_id);
+    public Result deleteCustomerSubcompanyInfoById(int customer_sub_id);
     
     /**
      * 查询列表，此接口不包含分页查询
@@ -52,7 +59,7 @@ public interface CustomerSubcompanyInfoService {
      * @param customer_sub_id
      * @return
      */
-    public Result<CustomerSubcompanyInfo> getCustomerSubcompanyInfoById(String customer_sub_id);
+    public Result<CustomerSubcompanyInfo> getCustomerSubcompanyInfoById(int customer_sub_id);
 
     /**
      * 查询列表，包含分页查询
