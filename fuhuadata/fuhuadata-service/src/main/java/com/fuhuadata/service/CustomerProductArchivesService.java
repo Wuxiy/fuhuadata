@@ -83,5 +83,20 @@ public interface CustomerProductArchivesService {
      * @return
      */
     public Result<Integer> count(QueryCustomerProductArchives queryCustomerProductArchives);
+
+	/**
+	 * 查询用户产品档案单据要求
+	 * @param customerId
+	 * @return
+	 */
+	public List<CustomerProductArchives> getCustomerBillRequirement(String customerId);
+
+
+	/**
+	 * 查询用户产品档案订舱出运要求
+	 * @param customerId
+	 * @return
+	 */
+	public List<CustomerProductArchives> getCustomerTransportRequirement(String customerId);
 	
 }
