@@ -1,7 +1,7 @@
 <div class="clearfix content shadow-out">
     <!--副导航-->
     <div class="nav-deputy shadow-out clearfix">
-        #deputyNav(8);
+        #deputyNav(8)
         <ul class="breadcrumb pull-right">
             <li><span class="glyphicon glyphicon-map-marker"></span></li>
             <li><a href="">合作客户</a></li>
@@ -107,7 +107,7 @@
                                             <input type="checkbox" name="check" class="suitableType cell_edit" value="3"> 终端客户
                                         </label>
                                         <label class="checkbox-inline">
-                                            <input type="checkbox" name="check" class="suitableType cell_edit" value="4"> 其他
+                                            <input type="checkbox" name="check" class="suitableType cell_edit" id="other" value="4"> 其他
                                         </label>
                                     </div>
                                     <div class="col-xs-4 col-xs-offset-1">
@@ -144,7 +144,7 @@
 </div>
 
 <div class="modal fade" id="addFieldadd" tabindex="-1" data-backdrop="static" aria-hidden="true" data-keyboard="true" >
-    <div class="modal-dialog" style="width:800px;">
+    <div class="modal-dialog" style="width:1000px;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -159,11 +159,11 @@
                                 <div class="form-group ">
                                     <label class="col-xs-1 control-label">企业全称</label>
                                     <div class="col-xs-4">
-                                        <input class="form-control" type="datetime-local" id="fullNameAdd"/>
+                                        <input class="form-control" type="text" id="fullNameAdd"/>
                                     </div>
                                     <label class="col-xs-1 control-label col-xs-offset-1">企业简称</label>
                                     <div class="col-xs-4">
-                                        <input class="form-control" type="datetime-local" id="shortNameAdd"/>
+                                        <input class="form-control" type="text" id="shortNameAdd"/>
                                     </div>
                                 </div>
                                 <div class="form-group ">
@@ -198,7 +198,7 @@
                                             <input type="checkbox" name="checkAdd" class="suitableType cell_edit" value="3"> 终端客户
                                         </label>
                                         <label class="checkbox-inline">
-                                            <input type="checkbox" name="checkAdd" class="suitableType cell_edit" value="4"> 其他
+                                            <input type="checkbox" name="checkAdd" class="suitableType cell_edit" id="otherAdd" value="4"> 其他
                                         </label>
                                     </div>
                                     <div class="col-xs-4 col-xs-offset-1">

@@ -20,6 +20,8 @@ public interface CustomerBaseInfoDao {
 	 */
     public CustomerBaseInfo addCustomerBaseInfo(CustomerBaseInfo customerBaseInfo);
 
+    public int deleteCustomerEnterpriceNatureByCustomerId(String customerId);
+
     public int batchAddNature(List<CustomerEnterpriceNature> customerEnterpriceNatures);
     
 	 /**

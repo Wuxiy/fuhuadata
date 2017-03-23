@@ -163,13 +163,10 @@ public class PackingArchivesAction {
     public ResultPojo deleteRelation(int id,@RequestBody String[] ids){
         Result result = new Result();
         try{
-            System.out.println(id);
             PackingArchives packingArchives = new PackingArchives();
-            System.out.println(ids.length);
             String[] ids1 = packingArchivesService.getPackingArchivesById(id).getModel().getPack().getAssociatedPackingId().split(",");
             String[] idsArray = StringUtil.minus(ids1,ids);//取差集
             String str = StringUtils.join(idsArray,",");
-            System.out.println("123"+str);
             packingArchives.setAssociatedPackingId(str);
             result = packingArchivesService.updatePackingArchivesById(id,packingArchives);
             return result.getResultPojo();

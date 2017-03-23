@@ -165,7 +165,6 @@
                 var list = data.data;
                 var _html = '';
                 if(list && list!='' && list!='null') {
-                    var enterpriseNature = ['','工厂','分销商','经销商','终端客户','其他'];
                     for (var i = 0; i < list.length; i++) {
                         var customer = list[i];
                         _html += '<tr>';
@@ -174,11 +173,7 @@
                         _html += '  <td>' + customer.shortName + '</td>';
                         _html += '  <td lang="zh">' + customer.country + '</td>';
                         _html += '  <td>' + customer.zhongxinbaoLevel + 'A</td>';
-                        if(customer.zhongxinbaoLevel && customer.zhongxinbaoLevel!=5){
-                            _html += '  <td>' + enterpriseNature[customer.enterpriseNature] + '</td>';
-                        }else{
-                            _html += '  <td>' + customer.otherEnterpriseNature + '</td>';
-                        }
+                        _html += '  <td>' + customer.fullEnterpriseNature + '</td>';
                         _html += '  <td lang="zh">' + customer.linkManName + '</td>';
                         _html += '  <td lang="zh">' + customer.linkManEmail + '</td>';
                         _html += '  <td lang="zh">' + customer.opportunityDescrible + '</td>';

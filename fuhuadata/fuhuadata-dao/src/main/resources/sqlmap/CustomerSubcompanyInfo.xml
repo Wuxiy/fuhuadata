@@ -152,7 +152,7 @@
 						<isNotNull prepend=", " property="createTime">create_time=#createTime#</isNotNull>
 						<isNotNull prepend=", " property="modifyTime">modify_time=#modifyTime#</isNotNull>
 					</dynamic>
-		WHERE customer_sub_id=#customer_sub_id#
+		WHERE customer_sub_id=#customerSubId#
 	</update>
 	
 	<delete id="DELETE-BY-ID" parameterClass="java.lang.String">

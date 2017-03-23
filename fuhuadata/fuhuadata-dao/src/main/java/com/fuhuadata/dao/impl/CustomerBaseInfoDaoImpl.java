@@ -32,10 +32,16 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
     private static final String GET_CUSTOMER_BASEINFO="CUSTOMERBASEINFO.GET-CUSTOMER-BASEINFO";
     private static final String GET_RPODUCT_BY_ID="CUSTOMERBASEINFO.GET-PRODUCT-BY-ID";
     private static final String BATCH_ADD_NATURE="CUSTOMERBASEINFO.BATCH-ADD-NATURE";
+    private static final String DELETE_NATURE_BY_CUSTOMERID="CUSTOMERBASEINFO.DELETE-NATURE-BY-CUSTOMERID";
 
     public CustomerBaseInfo addCustomerBaseInfo(CustomerBaseInfo customerBaseInfo) {
 		customerBaseInfo.setCustomerId((String) this.insert(ADD, customerBaseInfo));
     	return customerBaseInfo;
+    }
+
+    @Override
+    public int deleteCustomerEnterpriceNatureByCustomerId(String customerId) {
+        return this.delete(DELETE_NATURE_BY_CUSTOMERID,customerId);
     }
 
     /**
