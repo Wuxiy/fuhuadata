@@ -280,7 +280,6 @@
 			SELECT max(linkman_id) FROM customer_linkman WHERE customer_id = #customerId#
 		]]>
 	</select>
-
 	
 	<select id="GET-PAGE" resultMap="CUSTOMERLINKMAN-MAP" parameterClass="QueryCustomerLinkman">
 		<![CDATA[

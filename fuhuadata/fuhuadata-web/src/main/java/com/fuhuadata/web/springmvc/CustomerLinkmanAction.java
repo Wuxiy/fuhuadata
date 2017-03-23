@@ -169,17 +169,12 @@ public class CustomerLinkmanAction {
             log.error("根据客户id获取默认联系人错误",e);
         }
         if(result.getResultPojo().getData()==null){
-            result.getResultPojo().setMessage("当前客户无默认联系人");
+            result.getResultPojo().setMessage("当前客户无默认联系人,请设置默认联系人");
         }
         else{
             result.getResultPojo().setMessage("当前客户已有默认联系人，确认更换？");
         }
         return result.getResultPojo();
     }
-
-
-
-
-
 
 }

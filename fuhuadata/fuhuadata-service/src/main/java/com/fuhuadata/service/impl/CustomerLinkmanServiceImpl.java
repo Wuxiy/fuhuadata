@@ -25,10 +25,26 @@ public class CustomerLinkmanServiceImpl implements CustomerLinkmanService {
 	@Resource
 	private CustomerVisitRecordManager customerVisitRecordManager;
 
+	/**
+	 * 新增客户联系人
+	 * @param customerLinkman
+	 * @return
+	 */
     public Result<CustomerLinkman> addCustomerLinkman(CustomerLinkman customerLinkman) {
 		Result<CustomerLinkman> result = new Result<CustomerLinkman>();
 		try {
-			result.addDefaultModel(customerLinkmanManager.addCustomerLinkman(customerLinkman));			
+			//判断客户有无默认联系人
+			CustomerLinkman customerLinkmanDefault=customerLinkmanManager.getCustomerLinkmanDefaultByCustomerId(customerLinkman.getCustomerId());
+			//默认联系人替换
+			if(customerLinkmanDefault!=null&&customerLinkman.getIsDefault()==1){
+				customerLinkmanDefault.setIsDefault(0);
+				customerLinkmanManager.updateCustomerLinkmanById(customerLinkmanDefault.getLinkmanId(),customerLinkmanDefault);
+			}
+			else if(customerLinkmanDefault==null&&customerLinkman.getIsDefault()==0) {
+				result.setMessage("必须为该客户设置默认联系人");
+				return result;
+			}
+			result.addDefaultModel(customerLinkmanManager.addCustomerLinkman(customerLinkman));
 		} catch(Exception e) {
 			result.setSuccess(false);
 			log.error("新增客户联系人错误",e);
