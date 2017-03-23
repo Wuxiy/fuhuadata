@@ -24,7 +24,12 @@
             <div class="col-xs-12">
                 <div class="panel panel-default view-HD-lg">
                     <div class="panel-heading">
-                        <button data-url="/customerLinkman/intoCustomerLinkmanAdd?customerId=" class="btn btn-xs btn-primary panel-heading-btn pull-right" lang="zh" id="add" onclick="Add()">新增</button>
+                        <div class="btn-group btn-group-xs panel-heading-btn pull-right">
+                            <a class="btn btn-xs btn-primary panel-heading-btn" id="add">
+                                <span class="glyphicon glyphicon-plus"></span>
+                                新增
+                            </a>
+                        </div>
                         <h3 class="panel-title" lang="zh">
                             沟通记录
                         </h3>
@@ -57,6 +62,102 @@
                             </tr>
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="addField" tabindex="-1" data-backdrop="static" aria-hidden="true" data-keyboard="true" >
+    <div class="modal-dialog" style="width:800px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body ">
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body clearfix">
+                            <div class="form-horizontal">
+                                <div class="form-group ">
+                                    <label class="col-xs-1 control-label">开始时间</label>
+                                    <div class="col-xs-4">
+                                        <input class="form-control" type="datetime-local" id="startTime"/>
+                                    </div>
+                                    <label class="col-xs-1 control-label col-xs-offset-1">结束时间</label>
+                                    <div class="col-xs-4">
+                                        <input class="form-control" type="datetime-local" id="endTime"/>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="col-xs-1 control-label">活动地点</label>
+                                    <div class="col-xs-4">
+                                        <input class="form-control" type="text" id="activityAddress"/>
+                                    </div>
+                                    <label class="col-xs-1 control-label col-xs-offset-1">费用(元)</label>
+                                    <div class="col-xs-4">
+                                        <input class="form-control" type="text" id="activityExpense"/>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="col-xs-1 control-label">活动类型</label>
+                                    <div class="col-xs-4">
+                                        <select class="form-control" name="items" id="activityType">
+                                            <option  value="0">远程沟通</option>
+                                            <option  value="1">出差拜访</option>
+                                            <option  value="2">展会邀请</option>
+                                            <option  value="3">工厂参观</option>
+                                            <option  value="4">商务宴请</option>
+                                            <option  value="5">其他(备注内容)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-4 col-xs-offset-1">
+                                        <input class="form-control" type="text" id="activityRemarks" disabled/>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="col-xs-1 control-label">姓名</label>
+                                    <div class="col-xs-11">
+                                        <table class="table table-condensed table-bordered table-striped text-center">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center" lang="zh"><input type="checkbox" id="checkAll">是否拜访</th>
+                                                <th class="text-center" lang="zh">联系人</th>
+                                                <th class="text-center" lang="zh">赠送礼物</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="modalContactList">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-1 control-label">活动摘要</label>
+                                    <div class="col-xs-11">
+                                        <textarea class="form-control" rows="4" id="activitySummary"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-3 col-xs-offset-3">
+                        <a type="button" class="btn btn-primary btn-block" id="addVisit">
+                            完成
+                        </a>
+                    </div>
+                    <div class="col-xs-3">
+                        <button type="button" class="btn btn-default btn-block" data-dismiss="modal">
+                            取消
+                        </button>
                     </div>
                 </div>
             </div>
