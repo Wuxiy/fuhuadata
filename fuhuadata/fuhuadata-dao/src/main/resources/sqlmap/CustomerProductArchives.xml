@@ -638,4 +638,29 @@
             <include refid="PAGE-COMMON" />   
         </isParameterPresent>
 	</select>
+
+	<select id="GET-CUSTOMER-BILL-REQUIREMENT" resultClass="CustomerProductArchives" parameterClass="java.lang.String">
+		select
+				name,
+				documentary_require documentaryRequire ,
+				other_documentary_require otherDocumentaryRequire
+		from
+				customer_product_archives
+		where
+				customer_id=#customerId#
+	</select>
+
+	<select id="GET-CUSTOMER-TRANSPORT-REQUIREMENT" resultClass="CustomerProductArchives" parameterClass="java.lang.String">
+		select
+				name,
+				shipping_agent_require shippingAgentRequire ,
+				package_require packageRequire,
+				goods_type goodsType,
+				mianxiangqi,
+				miantuiqi
+		from
+				customer_product_archives
+		where
+		customer_id=#customerId#
+	</select>
 </sqlMap>

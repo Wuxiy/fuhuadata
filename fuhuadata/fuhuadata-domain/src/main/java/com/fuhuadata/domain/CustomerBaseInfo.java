@@ -20,9 +20,6 @@ public class CustomerBaseInfo implements Serializable{
 	/**企业简称**/
 	private String shortName;
 
-    /**企业类型,-1全部,0客户,1竞对**/
-	private Integer companyType;
-
 	/**地区id**/
 	private Integer areaId;
 
@@ -610,15 +607,6 @@ public class CustomerBaseInfo implements Serializable{
 
 	public void setOtherOpportunity(String otherOpportunity) {
 		this.otherOpportunity = otherOpportunity;
-	}
-
-
-	public Integer getCompanyType() {
-		return companyType;
-	}
-
-	public void setCompanyType(Integer companyType) {
-		this.companyType = companyType;
 	}
 
 	public String getProductionLine() {

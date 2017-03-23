@@ -23,7 +23,10 @@ public class CustomerBaseInfoVO {
     private String fullName;
 
     /**企业性质 1：工厂 2：分销商 3：经销商 4：终端客户 5：其他**/
-    private Integer enterpriseNature;
+    //多选1,2,3
+    private String enterpriseNature;
+
+    private String otherEnterpriceNature;
 
     /**企业简称**/
     private String shortName;
@@ -451,13 +454,6 @@ public class CustomerBaseInfoVO {
     //    this.customerMakeProduct = customerMakeProduct;
     //}
 
-    public Integer getEnterpriseNature() {
-        return enterpriseNature;
-    }
-
-    public void setEnterpriseNature(Integer enterpriseNature) {
-        this.enterpriseNature = enterpriseNature;
-    }
 
     public Integer getCompanyType() {
         return companyType;
@@ -507,5 +503,21 @@ public class CustomerBaseInfoVO {
     @JsonDeserialize(using = DateJsonDeserializer.class)
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
+    }
+
+    public String getEnterpriseNature() {
+        return enterpriseNature;
+    }
+
+    public void setEnterpriseNature(String enterpriseNature) {
+        this.enterpriseNature = enterpriseNature;
+    }
+
+    public String getOtherEnterpriceNature() {
+        return otherEnterpriceNature;
+    }
+
+    public void setOtherEnterpriceNature(String otherEnterpriceNature) {
+        this.otherEnterpriceNature = otherEnterpriceNature;
     }
 }

@@ -24,7 +24,8 @@ public class CustomerProductArchivesDaoImpl extends SqlMapClientTemplate impleme
     public static final String COUNT = "CUSTOMERPRODUCTARCHIVES.COUNT";
     public static final String GET_CUSTOMER_PRODUCT_PACKAGING="CUSTOMERPRODUCTARCHIVES.GET-CUSTOMER-PRODUCT-PACKAGING";
     public static final String GET_CUSTOMER_PRODUCT_REQUIRE_BY_ID="CUSTOMERPRODUCTARCHIVES.GET-CUSTOMER-PRODUCT-REQUIRE-BY-ID";
-    
+    public static final String GET_CUSTOMER_BILL_REQUIREMENT = "CUSTOMERPRODUCTARCHIVES.GET-CUSTOMER-BILL-REQUIREMENT";
+    public static final String GET_CUSTOMER_TRANSPORT_REQUIREMENT = "CUSTOMERPRODUCTARCHIVES.GET-CUSTOMER-TRANSPORT-REQUIREMENT";
     public CustomerProductArchives addCustomerProductInfo(CustomerProductArchives customerProductArchives) {
 		customerProductArchives.setId((Integer) this.insert(ADD, customerProductArchives));
     	return customerProductArchives;
@@ -48,7 +49,7 @@ public class CustomerProductArchivesDaoImpl extends SqlMapClientTemplate impleme
     }
     	
     public CustomerProductArchives getCustomerProductInfoById(int customer_product_id) {
-    	return (CustomerProductArchives) this.queryForObject(GET_BY_ID, customer_product_id);
+        return (CustomerProductArchives) this.queryForObject(GET_BY_ID, customer_product_id);
     }
 
     @Override
@@ -66,5 +67,15 @@ public class CustomerProductArchivesDaoImpl extends SqlMapClientTemplate impleme
     	
     public int count(QueryCustomerProductArchives queryCustomerProductArchives) {
     	return ((Integer) this.queryForObject(COUNT, queryCustomerProductArchives)).intValue();
+    }
+
+    @Override
+    public List<CustomerProductArchives> getCustomerBillRequirement(String customerId) {
+        return this.queryForList(GET_CUSTOMER_BILL_REQUIREMENT,customerId);
+    }
+
+    @Override
+    public List<CustomerProductArchives> getCustomerTransportRequirement(String customerId) {
+        return this.queryForList(GET_CUSTOMER_TRANSPORT_REQUIREMENT,customerId);
     }
 }

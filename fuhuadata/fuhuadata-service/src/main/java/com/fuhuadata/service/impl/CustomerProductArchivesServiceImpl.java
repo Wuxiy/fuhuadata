@@ -1,6 +1,7 @@
 package com.fuhuadata.service.impl;
 import java.util.List;
 
+import com.fuhuadata.dao.CustomerProductArchivesDao;
 import com.fuhuadata.domain.CustomerProductArchives;
 import com.fuhuadata.domain.query.QueryCustomerProductArchives;
 import com.fuhuadata.domain.query.Result;
@@ -10,6 +11,7 @@ import com.fuhuadata.manager.CustomerProductArchivesManager;
 import com.fuhuadata.vo.CustomerProductPackagingArchives;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author wangbo
@@ -17,7 +19,10 @@ import org.apache.commons.logging.LogFactory;
  */
 public class CustomerProductArchivesServiceImpl implements CustomerProductArchivesService {
 
+	@Autowired
     private CustomerProductArchivesManager customerProductInfoManager;
+	@Autowired
+	private CustomerProductArchivesDao customerProductArchivesDao;
     private static final Log log = LogFactory.getLog(CustomerProductArchivesServiceImpl.class);
     public Result<CustomerProductArchives> addCustomerProductInfo(CustomerProductArchives customerProductArchives) {
 		Result<CustomerProductArchives> result = new Result<CustomerProductArchives>();
@@ -120,11 +125,13 @@ public class CustomerProductArchivesServiceImpl implements CustomerProductArchiv
 		return result;	
     }
 
-	public void setCustomerProductInfoManager(CustomerProductArchivesManager customerProductInfoManager) {
-		this.customerProductInfoManager = customerProductInfoManager;
+	@Override
+	public List<CustomerProductArchives> getCustomerBillRequirement(String customerId) {
+		return customerProductArchivesDao.getCustomerBillRequirement(customerId);
 	}
 
-	public CustomerProductArchivesManager getCustomerProductInfoManager(){
-    	return this.customerProductInfoManager;
+	@Override
+	public List<CustomerProductArchives> getCustomerTransportRequirement(String customerId) {
+		return customerProductArchivesDao.getCustomerTransportRequirement(customerId);
 	}
 }
