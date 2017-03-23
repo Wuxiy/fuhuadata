@@ -142,8 +142,10 @@ public class CustomerBaseInfo implements Serializable{
 	private String linkManName;
 	//默认联系人email
 	private String linkManEmail;
-	//企业性质
+	//企业性质 id
 	private String enterpriseNature;
+	//企业性质集合名称，多个性质逗号分隔
+	private String fullEnterpriseNature;
 	//其他性质
 	private String otherEnterpriseNature;
 	//价格敏感度
@@ -191,7 +193,13 @@ public class CustomerBaseInfo implements Serializable{
 		this.shortName = shortName;
 	}
 
+	public String getFullEnterpriseNature() {
+		return fullEnterpriseNature;
+	}
 
+	public void setFullEnterpriseNature(String fullEnterpriseNature) {
+		this.fullEnterpriseNature = fullEnterpriseNature;
+	}
 
 	public Integer getAreaId() {
 		return areaId;

@@ -86,7 +86,7 @@
         #if($num == 6)
             class="active"
         #end
-        ><a href="" >订单默认要求</a></li>
+        ><a href="${request.contextPath}/customerBaseInfoOrderRequire/billRequireEntrance" >订单默认要求</a></li>
         <li
         #if($num == 7)
             class="active"
