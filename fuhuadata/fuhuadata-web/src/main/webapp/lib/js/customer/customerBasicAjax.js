@@ -7,7 +7,6 @@
  */
  //基本信息页
 function customerBasicInfo(result){
-
     var getData = result;
     console.log(getData);
     //客户基本信息
