@@ -9,7 +9,7 @@ $(document).ready(function(){
     $(document).on('click.up','#addVisit',function(){
         //提交数据
         upData(basePath+'/customerVisitRecord/addCustomerVisitRecord','POST',addVisit(),"application/json");
-
+        location.reload();
     });
 })
 var id = document.URL.split('?')[1];

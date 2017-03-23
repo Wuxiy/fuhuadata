@@ -4,6 +4,13 @@
 
 $(document).ready(function(){
     getData(basePath + '/customerSubcompanyInfo/getCustomerSubcompanyInfosByCustomerId','POST',GetRequest(),anotherNamerList);
+
+    //新增提交
+    $(document).on('click.up','#addVisit',function(){
+        //提交数据
+        upData(basePath+'/customerSubcompanyInfo/addCustomerSubcompanyInfo','POST',addAnotherName(),"application/json");
+        /*location.reload();*/
+    });
 })
 
 //渲染List
@@ -55,3 +62,7 @@ $(document).on('click','.otherNameinfo',function(){
         }
     })
 })
+
+function addAnotherName() {
+
+}
