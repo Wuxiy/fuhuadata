@@ -116,6 +116,14 @@ $(document).on('change','input[name="cellcheckbox"]',function(){
     }
 })
 
+$(document).on('click','#activityType',function(){
+    if($(this).val() == 5){
+        $('#activityRemarks').attr('disabled',false);
+    }else{
+        $('#activityRemarks').attr('disabled',true);
+    }
+})
+
 //获取datetime
 function getDateTime(datetime){
     var date = datetime.split('T')[0];
