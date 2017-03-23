@@ -78,8 +78,8 @@ $(document).on('click','.otherNameinfo',function(){
 function addAnotherName() {
     var data = {
         "customerId":sid,
-        "fullName":getDateTime($('#fullNameAdd').val()),
-        "shortName":getDateTime($('#shortNameAdd').val()),
+        "fullName":$('#fullNameAdd').val(),
+        "shortName":$('#shortNameAdd').val(),
         "zhongxinbaoNumber":$('#zhongxinbaoNumberAdd').val(),
         "zhongxinbaoLevel":$('#zhongxinbaoLevelAdd').val(),
         "customerSubRemarks":$('#customerSubRemarksAdd').val(),
@@ -100,8 +100,8 @@ function checkboxAdd() {
     return JSON.stringify(checkboxarr);
 }
 
-$(document).on('click','input[name="checkAdd"]',function(){
-    if($(this).val() == 4){
+$(document).on('click','#otherAdd',function(){
+    if($(this).prop('checked')){
         $('#propertyRemarksAdd').attr('disabled',false);
     }else{
         $('#propertyRemarksAdd').attr('disabled',true);
@@ -113,8 +113,8 @@ $(document).on('click','input[name="checkAdd"]',function(){
 function updateInfo() {
     var data = {
         "customerId":sid,
-        "fullName":getDateTime($('#fullName').val()),
-        "shortName":getDateTime($('#shortName').val()),
+        "fullName":$('#fullName').val(),
+        "shortName":$('#shortName').val(),
         "zhongxinbaoNumber":$('#zhongxinbaoNumber').val(),
         "zhongxinbaoLevel":$('#zhongxinbaoLevel').val(),
         "customerSubRemarks":$('#customerSubRemarks').val(),
@@ -135,8 +135,8 @@ function checkboxArr() {
     return JSON.stringify(checkboxarr);
 }
 
-$(document).on('click','input[name="check"]',function(){
-    if($(this).val() == 4){
+$(document).on('change','#other',function(){
+    if($(this).prop('checked')){
         $('#propertyRemarks').attr('disabled',false);
     }else{
         $('#propertyRemarks').attr('disabled',true);
