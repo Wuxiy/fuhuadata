@@ -33,7 +33,7 @@ public class RecordLinkmanDaoImpl extends SqlMapClientTemplate implements Record
 
     @Override
     public int addRecordLinkmen(List<RecordLinkman> recordLinkmen) {
-        return (Integer) this.queryForObject(ADD_BATCH,recordLinkmen);
+        return (Integer) this.update(ADD_BATCH,recordLinkmen);
     }
 
     public int updateRecordLinkmanById(int id, RecordLinkman recordLinkman) {

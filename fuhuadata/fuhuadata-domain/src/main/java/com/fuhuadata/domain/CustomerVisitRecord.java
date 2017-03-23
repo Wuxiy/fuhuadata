@@ -1,5 +1,10 @@
 package com.fuhuadata.domain;
 
+import com.fuhuadata.util.DateJsonDeserializer;
+import com.fuhuadata.util.DateJsonSerializer;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import java.util.Date;
 import java.math.BigDecimal;
 
@@ -106,11 +111,13 @@ public class CustomerVisitRecord{
 	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
-	
+
+	@JsonSerialize(using = DateJsonSerializer.class)
 	public Date getEndTime() {
 		return endTime;
 	}
-	
+
+	@JsonDeserialize(using = DateJsonDeserializer.class)
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
 	}
@@ -146,7 +153,7 @@ public class CustomerVisitRecord{
 	public void setActivityExpense(BigDecimal activityExpense) {
 		this.activityExpense = activityExpense;
 	}
-	
+
 	public String getVisitRemarks() {
 		return visitRemarks;
 	}
@@ -194,19 +201,23 @@ public class CustomerVisitRecord{
 	public void setLastmodifyUserName(String lastmodifyUserName) {
 		this.lastmodifyUserName = lastmodifyUserName;
 	}
-	
+
+	@JsonSerialize(using = DateJsonSerializer.class)
 	public Date getCreateTime() {
 		return createTime;
 	}
-	
+
+	@JsonDeserialize(using = DateJsonDeserializer.class)
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
-	
+
+	@JsonSerialize(using = DateJsonSerializer.class)
 	public Date getModifyTime() {
 		return modifyTime;
 	}
-	
+
+	@JsonDeserialize(using = DateJsonDeserializer.class)
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
 	}

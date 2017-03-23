@@ -5,6 +5,7 @@ import com.fuhuadata.dao.BusinessOrderDao;
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +23,12 @@ public class BusinessOrderDaoImpl  implements BusinessOrderDao {
     private SqlMapClientTemplate sqlMapClientTemplate;
     @Override
     public int count(QueryBusinessOrder queryBusinessOrder) {
-        return (Integer)sqlMapClientTemplate.queryForObject(COUNT,queryBusinessOrder);
+        try {
+            return (Integer)sqlMapClientTemplate.queryForObject(COUNT,queryBusinessOrder);
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     @Override
