@@ -340,6 +340,7 @@
 			base.customer_id as customerId,
 			base.full_name fullName,
 			GROUP_CONCAT(nature.nature) enterpriseNature,
+			base.other_enterprise_nature otherEnterpriceNature,
 			base.short_name shortName,
 			base.company_type companyType,
 			base.customer_area_id areaId,
