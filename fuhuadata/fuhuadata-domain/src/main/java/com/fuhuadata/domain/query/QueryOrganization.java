@@ -7,7 +7,6 @@ import java.util.Date;
  * @Created：2017-03-21
  * @Author hexingfu
  * @Version:1.0
- * @Description:POrganization
 */
 public class QueryOrganization implements Serializable {
         

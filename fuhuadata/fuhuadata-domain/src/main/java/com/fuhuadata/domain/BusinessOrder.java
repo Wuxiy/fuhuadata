@@ -44,7 +44,7 @@ public class BusinessOrder implements Serializable{
     private BigDecimal amountPayable;//应付款金额
     private BigDecimal floorPrice;//最低销售价
     private BigDecimal maintenanceFee;//维护费
-    private BigDecimal net_profit;//净利润
+    private BigDecimal netProfit;//净利润
     private String actualPaymentTime;//实际付款时间
     private BigDecimal actualAmountPaid;//实际付款金额
     private BigDecimal unpaidAmount;//未付金额
@@ -347,12 +347,12 @@ public class BusinessOrder implements Serializable{
         this.maintenanceFee = maintenanceFee;
     }
 
-    public BigDecimal getNet_profit() {
-        return net_profit;
+    public BigDecimal getNetProfit() {
+        return netProfit;
     }
 
-    public void setNet_profit(BigDecimal net_profit) {
-        this.net_profit = net_profit;
+    public void setNetProfit(BigDecimal netProfit) {
+        this.netProfit = netProfit;
     }
 
     public String getActualPaymentTime() {
