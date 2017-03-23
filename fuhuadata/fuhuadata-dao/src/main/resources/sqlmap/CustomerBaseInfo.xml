@@ -335,6 +335,66 @@
 		]]>
 	</select>
 
+	<select id="GET-PAGE" resultClass="CustomerBaseInfo" parameterClass="QueryCustomerBaseInfo">
+
+		SELECT
+		base.customer_id   customerId,
+		base.full_name fullName,
+		base.short_name shortName,
+		base.country ,
+		base.customer_level customerLevel,
+		base.zhongxinbao_level zhongxinbaoLevel,
+		base.start_cooperation_time startCooperationTime,
+		base.cooperation_duration cooperationDuration,
+		base.active_period activePeriod,
+		base.customer_status customerStatus,
+		base.lastmodify_user_name lastmodifyUserName,
+		base.remark,
+		base.loss_reason lossReason,
+		base.opportunity_describle opportunityDescrible,
+		base.create_user_name createUserName,
+		base.create_time createTime,
+		base.other_enterprise_nature otherEnterpriseNature,
+		base.full_enterprise_nature fullEnterpriseNature
+		<isEqual property="customerType" compareValue="2" prepend=",">
+			lm.name linkManName,
+			lm.lemail linkManEmaiL
+		</isEqual>
+		<isNotEqual property="customerType" compareValue="2" prepend=",">
+			'' linkManName,
+			'' linkManEmail
+		</isNotEqual>
+
+		FROM customer_base_info base
+		<isEqual property="customerType" compareValue="2">
+			<!--如果查询潜在客户，则关联查询联系人信息-->
+			left join customer_linkman lm on base.customer_id = lm.customer_id and is_default = 1
+		</isEqual>
+		<isNotEqual property="areaClassId" compareValue="0" prepend=",">
+			p_area_code pac,
+			p_areaclass pa
+		</isNotEqual>
+		<isNotEmpty prepend="," property="enterpriseNature">
+			(select * from customer_enterprise_nature where nature=#enterpriseNature#) nature
+		</isNotEmpty>
+
+		<isParameterPresent>
+			<include refid="PAGE-COMMON" />
+		</isParameterPresent>
+		<isNotEmpty prepend="and" property="enterpriseNature">
+			nature.customer_id=base.customer_id
+		</isNotEmpty>
+
+		<isNotEqual property="areaClassId" compareValue="0">
+			and pac.`areaclass_id` = pa.`areaclass_id` and customer_area_id = pac.`areaid`
+			and pa.`areaclass_id`=#areaClassId#
+			<isNotEqual property="areaClassId" compareValue="0">
+				and	customer_area_id = #areaId#
+			</isNotEqual>
+		</isNotEqual>
+		LIMIT #startRow#,#pageSize#
+	</select>
+
 	<select id="GET-CUSTOMER-BASEINFO" resultClass="CustomerBaseInfoVO" parameterClass="java.lang.String">
 		<![CDATA[
 		SELECT
@@ -393,69 +453,18 @@
 			GROUP BY base.customer_id
 	]]>
 	</select>
-	
+
 	<select id="GET-PRODUCT-BY-ID" resultClass="CustomerMakeProduct" parameterClass="java.lang.String">
 		<![CDATA[
 		SELECT id,product_name AS productName,production FROM customer_make_products WHERE customer_id = 'fh123456'
 	]]>
 	</select>
 
-	<select id="GET-PAGE" resultClass="CustomerBaseInfo" parameterClass="QueryCustomerBaseInfo">
-
-			SELECT
-				base.customer_id   customerId,
-				base.full_name fullName,
-				base.short_name shortName,
-				base.country ,
-				base.customer_level customerLevel,
-				base.zhongxinbao_level zhongxinbaoLevel,
-				base.start_cooperation_time startCooperationTime,
-				base.cooperation_duration cooperationDuration,
-				base.active_period activePeriod,
-				base.customer_status customerStatus,
-				base.lastmodify_user_name lastmodifyUserName,
-				base.remark,
-				base.loss_reason lossReason,
-				base.opportunity_describle opportunityDescrible,
-				base.create_user_name createUserName,
-				base.create_time createTime,
-				base.other_enterprise_nature otherEnterpriseNature,
-				base.enterprise_nature enterpriseNature
-				<isEqual property="customerType" compareValue="2" prepend=",">
-					 lm.name linkManName,
-					 lm.lemail linkManEmaiL
-				</isEqual>
-				<isNotEqual property="customerType" compareValue="2" prepend=",">
-					'' linkManName,
-					'' linkManEmail
-				</isNotEqual>
-
-			FROM customer_base_info base
-			<isEqual property="customerType" compareValue="2">
-				<!--如果查询潜在客户，则关联查询联系人信息-->
-				left join customer_linkman lm on base.customer_id = lm.customer_id and is_default = 1
-			</isEqual>
-			<isNotEqual property="areaClassId" compareValue="0" prepend=",">
-				p_area_code pac,
-				p_areaclass pa
-			</isNotEqual>
-
-
-		<isParameterPresent>   
-            <include refid="PAGE-COMMON" />   
-        </isParameterPresent>
-		<isNotEqual property="areaClassId" compareValue="0">
-			and pac.`areaclass_id` = pa.`areaclass_id` and customer_area_id = pac.`areaid`
-			and pa.`areaclass_id`=#areaClassId#
-			<isNotEqual property="areaClassId" compareValue="0">
-			and	customer_area_id = #areaId#
-			</isNotEqual>
-		</isNotEqual>
-		LIMIT #startRow#,#pageSize#
-	</select>
-	
 	<select id="COUNT" resultClass="java.lang.Integer" parameterClass="QueryCustomerBaseInfo">
-		SELECT COUNT(customer_id) FROM customer_base_info
+		SELECT COUNT(base.customer_id) FROM customer_base_info base
+		<isNotEmpty prepend="," property="enterpriseNature">
+			(select * from customer_enterprise_nature where nature=#enterpriseNature#) nature
+		</isNotEmpty>
 		<isNotEqual property="areaClassId" compareValue="0" prepend=",">
 			p_area_code pac,
 			p_areaclass pa
@@ -464,6 +473,9 @@
 		<isParameterPresent>
             <include refid="PAGE-COMMON" />   
         </isParameterPresent>
+		<isNotEmpty prepend="and" property="enterpriseNature">
+			nature.customer_id=base.customer_id
+		</isNotEmpty>
 		<isNotEqual property="areaClassId" compareValue="0">
 			and pac.`areaclass_id` = pa.`areaclass_id` and customer_area_id = pac.`areaid`
 			and pa.`areaclass_id`=#areaClassId#
@@ -479,7 +491,7 @@
 		ifnull(sum(ifnull(amount_payable,0)),0) totalMoney,
 		ifnull(sum(ifnull(floor_price,0)),0) minPrice,
 		ifnull(sum(ifnull(maintenance_fee,0)),0) maintenanceFee,
-		ifnull(sum(ifnull(net_promaintenance_feefit,0)),0) netProfit,
+		ifnull(sum(ifnull(net_profit,0)),0) netProfit,
 		ifnull(sum(ifnull(actual_amount_paid,0)),0) payMoney
 		from  business_order
 		where customer_id = #customerId#
