@@ -16,7 +16,7 @@ function anotherNamerList(result) {
     for(var i=0;i<ResultData.length;i++){
         AnotherNameList.innerHTML += '<tr>'+
                                         '<td>'+ResultData[i].customerSubId+'</td>'+
-                                        '<td><a class="otherNameinfo" data_url="'+basePath+'/customerSubcompanyInfo/getCustomerSubcompanyInfoById?id='+ResultData[i].customerSubId+'">'+ResultData[i].fullName+'</a></td>'+
+                                        '<td><a class="otherNameinfo" data_url="'+basePath+'/customerSubcompanyInfo/getCustomerSubcompanyInfoById?customerSubId='+ResultData[i].customerSubId+'">'+ResultData[i].fullName+'</a></td>'+
                                         '<td>'+ResultData[i].shortName+'</td>'+
                                         '<td>'+ResultData[i].property+'</td>'+
                                         '<td>'+ResultData[i].zhongxinbaoNumber+'</td>'+
