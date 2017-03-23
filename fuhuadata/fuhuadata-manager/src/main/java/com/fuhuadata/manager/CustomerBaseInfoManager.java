@@ -3,6 +3,7 @@ import java.util.List;
 
 import com.fuhuadata.domain.CountCustomersOrderProduct;
 import com.fuhuadata.domain.CustomerBaseInfo;
+import com.fuhuadata.domain.CustomerEnterpriceNature;
 import com.fuhuadata.domain.CustomerMakeProduct;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.domain.query.Result;
@@ -19,8 +20,10 @@ public interface CustomerBaseInfoManager {
 	 * @return
 	 */
     public CustomerBaseInfo addCustomerBaseInfo(CustomerBaseInfo customerBaseInfo) ;
-    
-	 /**
+
+	public boolean batchAddNature(List<CustomerEnterpriceNature> customerEnterpriceNatures);
+
+	/**
      * 按照主键id更新customerBaseInfo，请重新new CustomerBaseInfo 的更新对象，设置要更新的字段
 	 * 成功返回true，失败返回false
      * @paramid

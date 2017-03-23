@@ -8,12 +8,12 @@
 	<typeAlias alias="CountCustomersOrderProduct" type="com.fuhuadata.domain.CountCustomersOrderProduct"/>
 	<typeAlias alias="CustomerBaseInfoVO" type="com.fuhuadata.vo.CustomerBaseInfoVO"/>
 	<typeAlias alias="CustomerMakeProduct" type="com.fuhuadata.domain.CustomerMakeProduct"/>
+	<typeAlias alias="CustomerEnterpriceNature" type="com.fuhuadata.domain.CustomerEnterpriceNature"/>
 
 	<resultMap id="CUSTOMERBASEINFO-MAP" class="CustomerBaseInfo">
 					<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="fullName" column="full_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="shortName" column="short_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-					<result property="enterpriseNature" column="enterprise_nature" jdbcType="INT" javaType="java.lang.Integer" />
 					<result property="customerType" column="customer_type" jdbcType="INT" javaType="java.lang.Integer" />
 					<result property="areaId" column="customer_area_id" jdbcType="INT" javaType="java.lang.Integer" />
 					<result property="area" column="customer_area" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -27,10 +27,6 @@
 					<result property="remark" column="remark" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="enterprisePhone" column="enterprise_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="enterpriseEmail" column="enterprise_email" jdbcType="VARCHAR" javaType="java.lang.String" />
-					<result property="enterpriseProfile" column="enterprise_profile" jdbcType="VARCHAR" javaType="java.lang.String" />
-					<result property="developmentCourse" column="development_course" jdbcType="VARCHAR" javaType="java.lang.String" />
-					<result property="salesNetwork" column="sales_network" jdbcType="VARCHAR" javaType="java.lang.String" />
-					<result property="customField" column="custom_field" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="customerCompletion" column="customer_completion" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="createUserId" column="create_user_id" jdbcType="INT" javaType="java.lang.Integer" />
 					<result property="customerLevel" column="customer_level" jdbcType="INT" javaType="java.lang.Integer" />
@@ -73,9 +69,6 @@
 				<isNotEmpty prepend=" AND " property="shortName">
 			short_name = #shortName#
 		</isNotEmpty>
-			<isNotEmpty prepend="and" property="enterpriseNature">
-				enterprise_nature=#enterpriseNature#
-			</isNotEmpty>
 				<isNotEmpty prepend=" AND " property="customerType">
 			customer_type = #customerType#
 		</isNotEmpty>
@@ -139,9 +132,6 @@
 				<isNotEmpty prepend=" AND " property="fullName">
 			full_name = #fullName#
 		</isNotEmpty>
-			<isNotEmpty prepend="and" property="enterpriseNature">
-				enterprise_nature=#enterpriseNature#
-			</isNotEmpty>
 			<isNotEmpty prepend="and" property="">
 				customer_level=#customerLevel#
 			</isNotEmpty>
@@ -245,7 +235,6 @@
 						<isNotEmpty prepend=", " property="countryId">country_id=#countryId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="country">country=#country#</isNotEmpty>
 						<isNotEmpty prepend=", " property="companyType">company_type=#companyType#</isNotEmpty>
-						<isNotEmpty prepend=", " property="enterpriseNature">enterprise_nature=#enterpriseNature#</isNotEmpty>
 						<isNotEmpty prepend=", " property="otherEnterpriseNature">other_enterpriseNature=#otherEnterpriseNature#</isNotEmpty>
 						<isNotEmpty prepend=", " property="registeredFunds">registered_funds=#registeredFunds#</isNotEmpty>
 
@@ -289,6 +278,18 @@
 						<isNotEmpty prepend=", " property="productionLine">production_line = #productionLine#</isNotEmpty>
 					</dynamic>
 		WHERE customer_id=#customerId#
+	</update>
+
+	<update id="BATCH-ADD-NATURE" parameterClass="java.util.List">
+		<![CDATA[
+            INSERT INTO customer_enterprise_nature
+            (id,customer_id,nature) values
+            ]]>
+		<iterate conjunction=",">
+			<![CDATA[
+                (#[].id#,#[].customerId#,#[].nature#)
+                ]]>
+		</iterate>
 	</update>
 
 	<delete id="DELETE-BY-ID" parameterClass="java.lang.String">

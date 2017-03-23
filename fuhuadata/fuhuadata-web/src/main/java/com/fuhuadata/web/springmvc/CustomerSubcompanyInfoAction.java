@@ -94,4 +94,23 @@ public class CustomerSubcompanyInfoAction {
         }
         return result.getResultPojo();
     }
+
+    /**
+     *  do update
+     * @param customerSubcompanyInfo
+     * @return
+     */
+    @RequestMapping(value="/updateCustomerSubcompanyInfoById",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "customerInfo-CustomerSubcompanyInfo",methods = "Update")
+    @ResponseBody
+    public ResultPojo updateCustomerSubcompanyInfo(@RequestBody CustomerSubcompanyInfo customerSubcompanyInfo){
+        Result<CustomerSubcompanyInfo> result = new Result<CustomerSubcompanyInfo>();
+        try{
+            result=customerSubcompanyInfoService.updateCustomerSubcompanyInfoById (customerSubcompanyInfo.getCustomerSubId(),customerSubcompanyInfo);
+        }catch(Exception e){
+            result.setSuccess(false);
+            log.error("根据id更新子公司信息错误",e);
+        }
+        return result.getResultPojo();
+    }
 }

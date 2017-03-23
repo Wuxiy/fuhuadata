@@ -4,6 +4,7 @@ import java.util.List;
 import com.fuhuadata.domain.CountCustomersOrderProduct;
 import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.dao.CustomerBaseInfoDao;
+import com.fuhuadata.domain.CustomerEnterpriceNature;
 import com.fuhuadata.domain.CustomerMakeProduct;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
@@ -30,12 +31,23 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
     public static final String QUERY_COOPERATION = "CUSTOMERBASEINFO.queryCooperationByCid";
     private static final String GET_CUSTOMER_BASEINFO="CUSTOMERBASEINFO.GET-CUSTOMER-BASEINFO";
     private static final String GET_RPODUCT_BY_ID="CUSTOMERBASEINFO.GET-PRODUCT-BY-ID";
+    private static final String BATCH_ADD_NATURE="CUSTOMERBASEINFO.BATCH-ADD-NATURE";
 
     public CustomerBaseInfo addCustomerBaseInfo(CustomerBaseInfo customerBaseInfo) {
 		customerBaseInfo.setCustomerId((String) this.insert(ADD, customerBaseInfo));
     	return customerBaseInfo;
     }
-    
+
+    /**
+     * 批量更新企业性质
+     * @param customerEnterpriceNatures
+     * @return
+     */
+    @Override
+    public int batchAddNature(List<CustomerEnterpriceNature> customerEnterpriceNatures) {
+        return this.update(BATCH_ADD_NATURE,customerEnterpriceNatures);
+    }
+
     public int updateCustomerBaseInfoById(String customerId, CustomerBaseInfo customerBaseInfo) {
     	customerBaseInfo.setCustomerId(customerId);
 		return this.update(UPDATE, customerBaseInfo);

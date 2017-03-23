@@ -3,6 +3,7 @@ import java.util.List;
 
 import com.fuhuadata.domain.CountCustomersOrderProduct;
 import com.fuhuadata.domain.CustomerBaseInfo;
+import com.fuhuadata.domain.CustomerEnterpriceNature;
 import com.fuhuadata.domain.CustomerMakeProduct;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
@@ -18,6 +19,8 @@ public interface CustomerBaseInfoDao {
 	 * @return
 	 */
     public CustomerBaseInfo addCustomerBaseInfo(CustomerBaseInfo customerBaseInfo);
+
+    public int batchAddNature(List<CustomerEnterpriceNature> customerEnterpriceNatures);
     
 	 /**
      * 按照主键id更新customerBaseInfo，成功返回1，使用接口时，请重新new CustomerBaseInfo 的更新对象，设置要更新的字段

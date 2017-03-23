@@ -136,21 +136,21 @@
 	<update id="UPDATE" parameterClass="CustomerSubcompanyInfo">
 		UPDATE customer_subcompany_info 
 		<dynamic prepend=" SET ">
-						<isNotEmpty prepend=", " property="customerSubId">customer_sub_id=#customerSubId#</isNotEmpty>
-						<isNotEmpty prepend=", " property="customerId">customer_id=#customerId#</isNotEmpty>
-						<isNotEmpty prepend=", " property="fullName">full_name=#fullName#</isNotEmpty>
-						<isNotEmpty prepend=", " property="shortName">short_name=#shortName#</isNotEmpty>
-						<isNotEmpty prepend=", " property="property">property=#property#</isNotEmpty>
-						<isNotEmpty prepend=", " property="propertyRemarks">property_remarks=#propertyRemarks#</isNotEmpty>
-						<isNotEmpty prepend=", " property="zhongxinbaoNumber">zhongxinbao_number=#zhongxinbaoNumber#</isNotEmpty>
-						<isNotEmpty prepend=", " property="zhongxinbaoLevel">zhongxinbao_level=#zhongxinbaoLevel#</isNotEmpty>
-						<isNotEmpty prepend=", " property="customerSubRemarks">customer_sub_remarks=#customerSubRemarks#</isNotEmpty>
-						<isNotEmpty prepend=", " property="createUserId">create_user_id=#createUserId#</isNotEmpty>
-						<isNotEmpty prepend=", " property="createUserName">create_user_name=#createUserName#</isNotEmpty>
-						<isNotEmpty prepend=", " property="lastmodifyUserId">lastmodify_user_id=#lastmodifyUserId#</isNotEmpty>
-						<isNotEmpty prepend=", " property="lastmodifyUserName">lastmodify_user_name=#lastmodifyUserName#</isNotEmpty>
-						<isNotEmpty prepend=", " property="createTime">create_time=#createTime#</isNotEmpty>
-						<isNotEmpty prepend=", " property="modifyTime">modify_time=#modifyTime#</isNotEmpty>
+						<isNotNull prepend=", " property="customerSubId">customer_sub_id=#customerSubId#</isNotNull>
+						<isNotNull prepend=", " property="customerId">customer_id=#customerId#</isNotNull>
+						<isNotNull prepend=", " property="fullName">full_name=#fullName#</isNotNull>
+						<isNotNull prepend=", " property="shortName">short_name=#shortName#</isNotNull>
+						<isNotNull prepend=", " property="property">property=#property#</isNotNull>
+						<isNotNull prepend=", " property="propertyRemarks">property_remarks=#propertyRemarks#</isNotNull>
+						<isNotNull prepend=", " property="zhongxinbaoNumber">zhongxinbao_number=#zhongxinbaoNumber#</isNotNull>
+						<isNotNull prepend=", " property="zhongxinbaoLevel">zhongxinbao_level=#zhongxinbaoLevel#</isNotNull>
+						<isNotNull prepend=", " property="customerSubRemarks">customer_sub_remarks=#customerSubRemarks#</isNotNull>
+						<isNotNull prepend=", " property="createUserId">create_user_id=#createUserId#</isNotNull>
+						<isNotNull prepend=", " property="createUserName">create_user_name=#createUserName#</isNotNull>
+						<isNotNull prepend=", " property="lastmodifyUserId">lastmodify_user_id=#lastmodifyUserId#</isNotNull>
+						<isNotNull prepend=", " property="lastmodifyUserName">lastmodify_user_name=#lastmodifyUserName#</isNotNull>
+						<isNotNull prepend=", " property="createTime">create_time=#createTime#</isNotNull>
+						<isNotNull prepend=", " property="modifyTime">modify_time=#modifyTime#</isNotNull>
 					</dynamic>
 		WHERE customer_sub_id=#customer_sub_id#
 	</update>

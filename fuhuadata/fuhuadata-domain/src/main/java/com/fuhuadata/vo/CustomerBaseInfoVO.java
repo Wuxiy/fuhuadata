@@ -26,6 +26,7 @@ public class CustomerBaseInfoVO {
     //多选1,2,3
     private String enterpriseNature;
 
+    /**其他企业性质**/
     private String otherEnterpriceNature;
 
     /**企业简称**/

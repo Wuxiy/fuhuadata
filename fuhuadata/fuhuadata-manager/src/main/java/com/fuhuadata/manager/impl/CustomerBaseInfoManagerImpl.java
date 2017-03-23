@@ -1,6 +1,7 @@
 package com.fuhuadata.manager.impl;
 import com.fuhuadata.domain.CountCustomersOrderProduct;
 import com.fuhuadata.domain.CustomerBaseInfo;
+import com.fuhuadata.domain.CustomerEnterpriceNature;
 import com.fuhuadata.domain.CustomerMakeProduct;
 import com.fuhuadata.manager.CustomerBaseInfoManager;
 
@@ -28,8 +29,11 @@ public class CustomerBaseInfoManagerImpl implements CustomerBaseInfoManager {
     public CustomerBaseInfo addCustomerBaseInfo(CustomerBaseInfo customerBaseInfo) {
     	return customerBaseInfoDao.addCustomerBaseInfo(customerBaseInfo);
     }
-    
-    public boolean updateCustomerBaseInfoById(String customer_id, CustomerBaseInfo customerBaseInfo) {
+
+	public boolean batchAddNature(List<CustomerEnterpriceNature> customerEnterpriceNatures){
+    	return customerBaseInfoDao.batchAddNature(customerEnterpriceNatures)==customerEnterpriceNatures.size()?true :false;
+	}
+	public boolean updateCustomerBaseInfoById(String customer_id, CustomerBaseInfo customerBaseInfo) {
     	return customerBaseInfoDao.updateCustomerBaseInfoById(customer_id, customerBaseInfo) == 1 ? true : false;
     }
     

@@ -39,6 +39,7 @@ public class CustomerSubcompanyInfoServiceImpl implements CustomerSubcompanyInfo
 			result.setSuccess(customerSubcompanyInfoManager.updateCustomerSubcompanyInfoById(customer_sub_id, customerSubcompanyInfo));
 		} catch(Exception e) {
 			result.setSuccess(false);
+			log.error("根据id更新子公司错误",e);
 		}
 		return result;
     }

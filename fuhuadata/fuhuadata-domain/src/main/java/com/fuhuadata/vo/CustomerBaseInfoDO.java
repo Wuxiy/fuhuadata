@@ -10,7 +10,7 @@ import com.fuhuadata.domain.CustomerMakeProduct;
 public class CustomerBaseInfoDO {
     private CustomerBaseInfo customerBaseInfo;
 
-    private CustomerMakeProduct[] customerMakeProducts;
+   private CustomerMakeProduct[] customerMakeProducts;
 
     public CustomerMakeProduct[] getCustomerMakeProducts() {
         return customerMakeProducts;
