@@ -128,7 +128,7 @@
             <div class="modal-footer">
                 <div class="row">
                     <div class="col-xs-3 col-xs-offset-3">
-                        <a type="button" class="btn btn-primary btn-block" id="addVisit">
+                        <a type="button" class="btn btn-primary btn-block" id="updateinfo">
                             完成
                         </a>
                     </div>
