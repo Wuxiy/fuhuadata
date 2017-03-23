@@ -24,7 +24,7 @@ import java.util.List;
  * Created by intanswer on 2017/3/20.
  */
 @Controller
-@RequestMapping("/customerVisitRecord/*")
+    @RequestMapping("/customerVisitRecord/*")
 public class CustomerVisitRecordAction {
     private final static Log log = LogFactory.getLog(CustomerVisitRecordAction.class);
     @Resource
@@ -32,7 +32,6 @@ public class CustomerVisitRecordAction {
 
     /**
      * into
-     * @param customerId
      * @return
      */
     @RequestMapping(value="/intocustomerVisitRecordList",method = RequestMethod.GET)

@@ -54,3 +54,53 @@
 ##    </li>
     #end
 #end
+
+#macro(deputyNav $num)
+    <ul id="deputyNav" class="nav nav-tabs pull-left">
+        <li
+        #if($num == 1)
+            class="active"
+        #end
+        ><a href="${request.contextPath}/customerBaseInfo/intoCustomerBaseInfoDetails">基本信息</a></li>
+        <li
+        #if($num == 2)
+            class="active"
+        #end
+        ><a href="${request.contextPath}/customerMarketInfo/entrance" >市场信息</a></li>
+        <li
+        #if($num == 3)
+            class="active"
+        #end
+        ><a href="${request.contextPath}/customerLinkman/intoCustomerLinkmanList" >联系人</a></li>
+        <li
+        #if($num == 4)
+            class="active"
+        #end
+        ><a href="" >产品要求</a></li>
+        <li
+        #if($num == 5)
+            class="active"
+        #end
+        ><a href="${request.contextPath}/customerBaseInfoOrder/entrance" >订单信息</a></li>
+        <li
+        #if($num == 6)
+            class="active"
+        #end
+        ><a href="" >订单默认要求</a></li>
+        <li
+        #if($num == 7)
+            class="active"
+        #end
+        ><a href="${request.contextPath}/customerVisitRecord/intocustomerVisitRecordList" >沟通记录</a></li>
+        <li
+        #if($num == 8)
+            class="active"
+        #end
+        ><a href="" >公司别名（子公司信息）</a></li>
+        <li
+        #if($num == 9)
+            class="active"
+        #end
+        ><a href="" >关联数据</a></li>
+    </ul>
+#end

@@ -50,33 +50,39 @@ public class CustomerVisitRecordServiceImpl implements CustomerVisitRecordServic
     	Result result = new Result();
 		CustomerVisitRecord addCustomerVisitRecord = new CustomerVisitRecord();
 		boolean flag = false;
-    	try {
+		try {
+			try {
 
-			CustomerVisitRecord customerVisitRecord = customerVisitRecordVO.getCustomerVisitRecord();
-			 addCustomerVisitRecord= customerVisitRecordManager.addCustomerVisitRecord(customerVisitRecord);
-		}catch(Exception e) {
-    		result.setSuccess(false);
-    		log.error("新增客户沟通记录错误",e);
-		}
-		try{
-			if(addCustomerVisitRecord!=null) {
-				flag =true;
-				RecordLinkman[] recordLinkman = customerVisitRecordVO.getRecordLinkmen();
-				for (int i = 0; i < recordLinkman.length; i++) {
-					recordLinkman[i].setVisitRecordId(addCustomerVisitRecord.getVisitrecordId());
-					recordLinkman[i].setActivityExpens(addCustomerVisitRecord.getActivityExpense());
-					recordLinkman[i].setCreateUserId(addCustomerVisitRecord.getCreateUserId());
-					recordLinkman[i].setCreateUserName(addCustomerVisitRecord.getCreateUserName());
-					recordLinkman[i].setCreateUserName(addCustomerVisitRecord.getCreateUserName());
-					recordLinkman[i].setModifyTime(addCustomerVisitRecord.getModifyTime());
-					recordLinkman[i].setLastmodifyUserId(addCustomerVisitRecord.getLastmodifyUserId());
-					recordLinkman[i].setLastmodifyUserName(addCustomerVisitRecord.getLastmodifyUserName());
+				CustomerVisitRecord customerVisitRecord = customerVisitRecordVO.getCustomerVisitRecord();
+				addCustomerVisitRecord = customerVisitRecordManager.addCustomerVisitRecord(customerVisitRecord);
+			} catch (Exception e) {
+				result.setSuccess(false);
+				log.error("新增客户沟通记录错误", e);
+			}
+			try {
+				if (addCustomerVisitRecord != null) {
+					flag = true;
+					RecordLinkman[] recordLinkman = customerVisitRecordVO.getRecordLinkmen();
+					for (int i = 0; i < recordLinkman.length; i++) {
+						recordLinkman[i].setVisitRecordId(addCustomerVisitRecord.getVisitrecordId());
+						recordLinkman[i].setActivityExpens(addCustomerVisitRecord.getActivityExpense());
+						recordLinkman[i].setCreateUserId(addCustomerVisitRecord.getCreateUserId());
+						recordLinkman[i].setCreateUserName(addCustomerVisitRecord.getCreateUserName());
+						recordLinkman[i].setCreateUserName(addCustomerVisitRecord.getCreateUserName());
+						recordLinkman[i].setCreateTime(addCustomerVisitRecord.getCreateTime());
+						recordLinkman[i].setModifyTime(addCustomerVisitRecord.getModifyTime());
+						recordLinkman[i].setLastmodifyUserId(addCustomerVisitRecord.getLastmodifyUserId());
+						recordLinkman[i].setLastmodifyUserName(addCustomerVisitRecord.getLastmodifyUserName());
+					}
+					flag = recordLinkmanManager.addRecordLinkmen(Arrays.asList(recordLinkman));
 				}
-				flag=recordLinkmanManager.addRecordLinkmen(Arrays.asList(recordLinkman));
+			} catch (Exception e) {
+				result.setSuccess(false);
+				log.error("新增联系人沟通记录错误", e);
 			}
 		}catch(Exception e){
-    		result.setSuccess(false);
-    		log.error("新增联系人沟通记录错误",e);
+			result.setSuccess(false);
+			log.error("新增沟通记录错误",e);
 		}
 		result.setSuccess(flag);
 		return result;

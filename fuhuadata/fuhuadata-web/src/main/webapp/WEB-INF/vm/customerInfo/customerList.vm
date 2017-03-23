@@ -191,6 +191,7 @@
             method:'POST',
             success:function(data){
 				var list = data.data;
+//				console.log(list);
 				var _html = '';
 				if(list && list!='' && list!='null'){
                     for(var i=0;i<list.length;i++){
@@ -227,7 +228,7 @@
                     var customerId = el.parents('tr').children('td').first().text();
 //                    console.log(customerId);
                     jQuery.ajax({
-                        url:'/customerBaseInfo/showCustomerOrderProductDetail',
+                        url:'${request.contextPath}/customerBaseInfo/showCustomerOrderProductDetail',
                         dataType:'json',
                         data:{
                             customerId: customerId

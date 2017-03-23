@@ -7,6 +7,6 @@
  */
 var urlPar = location.search;
 $('#deputyNav').find('a').attr('href',function(i,val){
-    console.log(val+urlPar);
+    // console.log(val+urlPar);
     return val+urlPar;
 });
