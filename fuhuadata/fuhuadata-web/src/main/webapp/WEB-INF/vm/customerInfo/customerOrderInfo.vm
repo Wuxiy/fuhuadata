@@ -43,7 +43,8 @@
                                 <div class="col-xs-8 pull-right">
                                     <div class="input-group">
                                         <span class="input-group-addon" lang="zh">销售组织</span>
-                                        <input id="oSaleOrganizationId" type="text" class="form-control" value="" disabled>
+                                        <input id="oSaleOrganizationId" type="text" style="display:none" value="">
+                                        <input id="oSaleOrganizationName" type="text" class="form-control" value="" disabled>
                                         <span class="input-group-btn"><button data-toggle="modal" data-target="#treeModal" class="btn btn-xs btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button></span>
                                         <span class="input-group-addon" lang="zh">外销合同号</span>
                                         <input id="oNcOrderId" class="form-control" type="text" value="" />
@@ -389,24 +390,19 @@
             serach();
         });
         //双击文本添加到指定文本框
-        var selectedPName;
-        $(document).on('click','[data-target="#treeModal"]',function (e) {
-            selectedPName = $(e.target).parents('.input-group').find('input[disabled]');
-//            console.log(selectedPName);
-        })
         $(document).on('click','#tree a',function (e) {
             e.preventDefault();
         })
-        $(document).on('dblclick','#tree a.cNode',function (e) {
+        $(document).on('dblclick','#tree a',function (e) {
             var close = $(e.target).parents('.modal').find('.close');
             var txt = $(e.target).text();
             var id = $(e.target).parent('li').attr('id');
-            selectedPName.val(txt);
-            selectedPName.data('saleOrganizationId',id);
+            $('#oSaleOrganizationId').val(id);
+            $('#oSaleOrganizationName').val(txt);
             close.click();
         })
 //        默认查询数据
-//        serach();
+        serach();
     });
     //查询按钮提交数据
     function serach(){
@@ -425,7 +421,7 @@
             url:'${request.contextPath}/customerBaseInfoOrder/getListByPage',
             dataType:'json',
             data:{
-                saleOrganizationId:$('#oSaleOrganizationId').data('saleOrganizationId'),
+                saleOrganizationId:$('#oSaleOrganizationId').val(),
                 ncOrderId:$('#oNcOrderId').val(),
                 startTime:$('#oStartTime').val(),
                 endTime:$('#oEndTime').val(),
@@ -461,7 +457,7 @@
     function getListCount(){
         var total = 0;
         jQuery.ajax({
-            url:'${request.contextPath}/customerBaseInfo/countCustomerList',
+            url:'${request.contextPath}/customerBaseInfoOrder/count',
             dataType:'JSON',
             data:{
                 saleOrganizationId:$('#oSaleOrganizationId').val(),

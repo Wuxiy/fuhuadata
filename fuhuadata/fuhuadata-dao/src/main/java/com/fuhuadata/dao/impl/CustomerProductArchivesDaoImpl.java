@@ -1,6 +1,6 @@
 package com.fuhuadata.dao.impl;
 import java.util.List;
-import com.fuhuadata.dao.CustomerProductInfoDao;
+import com.fuhuadata.dao.CustomerProductArchivesDao;
 import com.fuhuadata.domain.CustomerProductArchives;
 import com.fuhuadata.domain.query.QueryCustomerProductArchives;
 
@@ -12,7 +12,7 @@ import org.springframework.orm.ibatis.SqlMapClientTemplate;
  * @date 2017-02-03 15:51:13
  */
 @SuppressWarnings("unchecked")
-public class CustomerProductInfoDaoImpl extends SqlMapClientTemplate implements CustomerProductInfoDao {
+public class CustomerProductArchivesDaoImpl extends SqlMapClientTemplate implements CustomerProductArchivesDao {
 
     public static final String ADD = "CUSTOMERPRODUCTARCHIVES.ADD";
     public static final String UPDATE = "CUSTOMERPRODUCTARCHIVES.UPDATE";

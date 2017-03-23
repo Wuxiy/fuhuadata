@@ -4,8 +4,8 @@ import java.util.List;
 import com.fuhuadata.domain.CustomerProductArchives;
 import com.fuhuadata.domain.query.QueryCustomerProductArchives;
 import com.fuhuadata.domain.query.Result;
-import com.fuhuadata.service.CustomerProductInfoService;
-import com.fuhuadata.manager.CustomerProductInfoManager;
+import com.fuhuadata.service.CustomerProductArchivesService;
+import com.fuhuadata.manager.CustomerProductArchivesManager;
 
 import com.fuhuadata.vo.CustomerProductPackagingArchives;
 import org.apache.commons.logging.Log;
@@ -15,10 +15,10 @@ import org.apache.commons.logging.LogFactory;
  * @author wangbo
  * @date 2017-02-03 15:51:13
  */
-public class CustomerProductInfoServiceImpl implements CustomerProductInfoService {
+public class CustomerProductArchivesServiceImpl implements CustomerProductArchivesService {
 
-    private CustomerProductInfoManager customerProductInfoManager;
-    private static final Log log = LogFactory.getLog(CustomerProductInfoServiceImpl.class);
+    private CustomerProductArchivesManager customerProductInfoManager;
+    private static final Log log = LogFactory.getLog(CustomerProductArchivesServiceImpl.class);
     public Result<CustomerProductArchives> addCustomerProductInfo(CustomerProductArchives customerProductArchives) {
 		Result<CustomerProductArchives> result = new Result<CustomerProductArchives>();
 		try {
@@ -120,11 +120,11 @@ public class CustomerProductInfoServiceImpl implements CustomerProductInfoServic
 		return result;	
     }
 
-	public void setCustomerProductInfoManager(CustomerProductInfoManager customerProductInfoManager) {
+	public void setCustomerProductInfoManager(CustomerProductArchivesManager customerProductInfoManager) {
 		this.customerProductInfoManager = customerProductInfoManager;
 	}
 
-	public CustomerProductInfoManager getCustomerProductInfoManager(){
+	public CustomerProductArchivesManager getCustomerProductInfoManager(){
     	return this.customerProductInfoManager;
 	}
 }

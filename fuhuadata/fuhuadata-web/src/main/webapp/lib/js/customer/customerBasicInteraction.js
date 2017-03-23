@@ -19,10 +19,11 @@ $(function () {
     });
 
     //选择其他选项，切换显示(需修改)
-    $(document).on('change.view','[name="enterpriseNature"]',function (e) {
-        var thisEl = $(this);
-        thisE.focus().blur();
-        radioChecked(thisEl);
+    $(document).on('change.view','[name="enterpriseNature"]',function () {
+        var thiEl = this;
+        // var thisEl = $(e.target);
+        // thisEl.focus().blur();
+        // radioChecked(thisEl);
     });
 
     //编辑客户基本信息
@@ -34,8 +35,6 @@ $(function () {
     $(document).on('click.up','#saveCustomerBasic',function(){
         //提交数据
         upData(basePath+'/customerBaseInfo/updateCustomerBaseInfo','POST',customerBasicFormObj(),"application/json");
-        //重新获取数据
-        getData(basePath+'/customerBaseInfo/showCustomerBaseInfoDetails','POST',GetRequest(),customerBasicInfo);
     });
     //客户基本信息取消提交
     $(document).on('click.cancel','#cancelCustomerBasic',function(){
@@ -46,8 +45,6 @@ $(function () {
     $(document).on('click.up','#addEncyclopedia',function(){
         //提交数据
         upData(basePath+'/customerEncyclopedia/doModify','POST',customerEncyclopediaObj(),"application/json");
-        //重新获取数据
-        getData(basePath+'/customerBaseInfo/showCustomerBaseInfoDetails','POST',GetRequest(),customerBasicInfo);
     });
 });
 

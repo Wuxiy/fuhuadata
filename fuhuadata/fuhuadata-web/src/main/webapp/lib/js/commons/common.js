@@ -29,7 +29,6 @@ function radioChecked(e){
     var targetEl = e.parents('.form-group').find('.elseInput');
     console.log(elseSelected.prop('checked'));
     if(elseSelected.prop('checked')){
-
         targetEl.removeClass('hidden');
     }else{
         targetEl.addClass('hidden');

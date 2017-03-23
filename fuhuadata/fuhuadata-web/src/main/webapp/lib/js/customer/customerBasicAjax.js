@@ -115,7 +115,7 @@ function customerBasicFormObj() {
             "customerLevel": $('#customerLevel').val(),
             "customerType": $('#customerType').val(),
             "factoryLocation": $('#factoryLocation').val(),
-            "productLine": $('#productLine').val(),
+            "productionLine": $('#productLine').val(),
             "majorCompetitors": $('#majorCompetitors').val(),
 
             "remark": $('#remark').val(),
@@ -129,6 +129,7 @@ function customerBasicFormObj() {
         },
         customerMakeProducts:customerMakeProductObj()
     };
+    console.log(JSON.stringify(data));
     return JSON.stringify(data);
 }
 //客户生产产品
