@@ -56,6 +56,7 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 					CustomerEnterpriceNature customerEnterpriceNature = new CustomerEnterpriceNature();
 					customerEnterpriceNature.setCustomerId(customer_id);
 					customerEnterpriceNature.setNature(Integer.parseInt(str[i]));
+					customerEnterpriceNature.setType(1);
 					list.add(customerEnterpriceNature);
 				}
 				customerBaseInfoManager.batchAddNature(list);

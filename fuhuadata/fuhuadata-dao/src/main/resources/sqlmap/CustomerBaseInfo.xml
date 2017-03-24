@@ -61,6 +61,7 @@
 		<result property="id" column="id" jdbcType="INT" javaType="java.lang.Integer"/>
 		<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String"/>
 		<result property="nature" column="nature" jdbcType="INT" javaType="java.lang.Integer"/>
+		<result property="type" column="type" jdbcType="INT" javaType="java.lang.Integer"/>
 	</resultMap>
 
 
@@ -300,11 +301,11 @@
 	<update id="BATCH-ADD-NATURE" parameterClass="java.util.List">
 		<![CDATA[
             INSERT INTO customer_enterprise_nature
-            (id,customer_id,nature) values
+            (id,customer_id,nature,type) values
             ]]>
 		<iterate conjunction=",">
 			<![CDATA[
-                (#[].id#,#[].customerId#,#[].nature#)
+                (#[].id#,#[].customerId#,#[].nature#,#[].type#)
                 ]]>
 		</iterate>
 	</update>

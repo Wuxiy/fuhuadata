@@ -1,7 +1,10 @@
 package com.fuhuadata.service.impl;
 import java.util.List;
+
+import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.domain.query.QueryCustomerSubcompanyInfo;
 import com.fuhuadata.domain.CustomerSubcompanyInfo;
+import com.fuhuadata.manager.CustomerBaseInfoManager;
 import com.fuhuadata.service.CustomerSubcompanyInfoService;
 import com.fuhuadata.manager.CustomerSubcompanyInfoManager;
 import com.fuhuadata.domain.query.Result;
@@ -22,6 +25,8 @@ public class CustomerSubcompanyInfoServiceImpl implements CustomerSubcompanyInfo
 	
 	@Resource
     private CustomerSubcompanyInfoManager customerSubcompanyInfoManager;
+	@Resource
+	private CustomerBaseInfoManager customerBaseInfoManager;
     public Result<CustomerSubcompanyInfo> addCustomerSubcompanyInfo(CustomerSubcompanyInfo customerSubcompanyInfo) {
 		Result<CustomerSubcompanyInfo> result = new Result<CustomerSubcompanyInfo>();
 		try {
@@ -113,5 +118,5 @@ public class CustomerSubcompanyInfoServiceImpl implements CustomerSubcompanyInfo
 		}
 		return result;	
     }
-	
+
 }
