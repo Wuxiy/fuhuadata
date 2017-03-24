@@ -76,7 +76,7 @@
         #if($num == 4)
             class="active"
         #end
-        ><a href="" >产品要求</a></li>
+        ><a href="${request.contextPath}/customerProductPacking/intoCustomerProductInfo" >产品要求</a></li>
         <li
         #if($num == 5)
             class="active"
