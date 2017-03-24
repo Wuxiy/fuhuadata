@@ -41,7 +41,7 @@ public class CustomerSubcompanyInfoManagerImpl implements CustomerSubcompanyInfo
     	boolean flag = false;
     	try{
     		sqlMapClient.startTransaction();
-    		customerBaseInfoDao.deleteCustomerEnterpriceNatureByCustomerId(customerSubcompanyInfo.getCustomerId());
+    		customerBaseInfoDao.deleteCustomerEnterpriceNatureByCustomerId(String.valueOf(customerSubcompanyInfo.getCustomerSubId()));
     		customerBaseInfoDao.batchAddNature(list);
 			flag = customerSubcompanyInfoDao.updateCustomerSubcompanyInfoById(customerSubcompanyInfo.getCustomerSubId(), customerSubcompanyInfo)==1?true:false;
 			sqlMapClient.commitTransaction();

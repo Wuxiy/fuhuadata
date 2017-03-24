@@ -3,6 +3,8 @@ import java.util.List;
 
 import com.fuhuadata.domain.CountCustomersOrderProduct;
 import com.fuhuadata.domain.CustomerBaseInfo;
+import com.fuhuadata.domain.CustomerEnterpriceNature;
+import com.fuhuadata.domain.CustomerMakeProduct;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
@@ -21,15 +23,15 @@ public interface CustomerBaseInfoService {
 	 * @return
 	 */
     public Result<CustomerBaseInfo> addCustomerBaseInfo(CustomerBaseInfo customerBaseInfo) ;
+
+    public Result updateCustomerBaseInfoById(String customerId,CustomerBaseInfo customerBaseInfo);
  
     /**
      * 按照主键id更新customerBaseInfo，请重新new CustomerBaseInfo 的更新对象，设置要更新的字段
 	 * 返回result，通过result.isSuccess()判断更新是否成功
-     * @param customer_id
-     * @param customerBaseInfo
      * @return
      */
-    public Result updateCustomerBaseInfoById(String customer_id, CustomerBaseInfo customerBaseInfo);
+    public Result updateCustomerBaseInfo(List<CustomerEnterpriceNature> customerEnterpriceNatures, List<CustomerMakeProduct> customerMakeProducts ,CustomerBaseInfo customerBaseInfo);
 
     /**
      * 按照主键id 删除 记录

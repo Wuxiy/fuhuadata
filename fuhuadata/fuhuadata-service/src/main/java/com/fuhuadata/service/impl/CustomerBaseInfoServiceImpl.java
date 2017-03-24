@@ -3,6 +3,7 @@ import com.fuhuadata.dao.CustomerBaseInfoDao;
 import com.fuhuadata.domain.CountCustomersOrderProduct;
 import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.domain.CustomerEnterpriceNature;
+import com.fuhuadata.domain.CustomerMakeProduct;
 import com.fuhuadata.manager.CustomerBaseInfoManager;
 
 import java.util.ArrayList;
@@ -38,41 +39,26 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 		return result;
     }
 
-    public Result updateCustomerBaseInfoById(String customer_id, CustomerBaseInfo customerBaseInfo) {
-		Result result = new Result();
-		try{
-			result.setSuccess(customerBaseInfoManager.deleteCustomerEnterpriceNatureByCustomerId(customer_id));
+	@Override
+	public Result updateCustomerBaseInfoById(String customerId, CustomerBaseInfo customerBaseInfo) {
+    	Result result = new Result();
+    	try{
+    		result.setSuccess(customerBaseInfoManager.updateCustomerBaseInfoById(customerId,customerBaseInfo));
+    		return result;
 		}catch(Exception e){
-			result.setSuccess(false);
-			log.error("根据客户id删除客户性质出错",e);
-			return result;
+    		result.setSuccess(false);
+    		log.error("根据id更新客户最基本信息错误",e);
 		}
-		try{
-			String fullCustomerNature = customerBaseInfo.getFullEnterpriseNature();
-			String[] str =fullCustomerNature.split(",");
-			List<CustomerEnterpriceNature> list = new ArrayList<CustomerEnterpriceNature>();
-			if(str!=null && str.length>0) {
-				for (int i = 0; i < str.length; i++) {
-					CustomerEnterpriceNature customerEnterpriceNature = new CustomerEnterpriceNature();
-					customerEnterpriceNature.setCustomerId(customer_id);
-					customerEnterpriceNature.setNature(Integer.parseInt(str[i]));
-					customerEnterpriceNature.setType(1);
-					list.add(customerEnterpriceNature);
-				}
-				customerBaseInfoManager.batchAddNature(list);
-			}
-		}catch(Exception e){
-			result.setSuccess(false);
-			log.error("新增客户企业性质出错",e);
-			return result;
-		}
-		try {
+		return null;
+	}
 
-			result.setSuccess(customerBaseInfoManager.updateCustomerBaseInfoById(customer_id, customerBaseInfo));
+	public Result updateCustomerBaseInfo(List<CustomerEnterpriceNature> customerEnterpriceNatures, List<CustomerMakeProduct> customerMakeProducts , CustomerBaseInfo customerBaseInfo) {
+		Result result = new Result();
+		try {
+			result.setSuccess(customerBaseInfoManager.updateCustomerBaseInfo(customerEnterpriceNatures,customerMakeProducts,customerBaseInfo));
 		} catch(Exception e) {
 			result.setSuccess(false);
 			log.error("根据客户id更新客户基本信息错误",e);
-			return result;
 		}
 		return result;
     }

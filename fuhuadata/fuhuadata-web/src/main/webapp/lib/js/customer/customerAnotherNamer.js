@@ -165,7 +165,7 @@ function checkboxArr() {
     var obj;
     $("input[name='check']:checked").each(function(){
         obj = {
-            "customerId": "fh104",
+            "customerId":$('#fullName').attr('data-id'),
             "type": "2",
             "nature": $(this).val()
         }
