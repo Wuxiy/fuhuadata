@@ -45,7 +45,6 @@ public class CustomerLinkmanManagerImpl implements CustomerLinkmanManager {
 			CustomerLinkman customerLinkmandefault = customerLinkmanDao.getCustomerLinkmanDefaultByCustomerId(customerLinkman.getCustomerId());
 			if(customerLinkmandefault!=null&&customerLinkman.getIsDefault()==1){
 				customerLinkmandefault.setIsDefault(0);
-				System.out.println(customerLinkmandefault.getIsDefault());
 				customerLinkmanDao.updateCustomerLinkmanById(customerLinkmandefault.getLinkmanId(),customerLinkmandefault);
 				flag=customerLinkmanDao.updateCustomerLinkmanById(linkman_id,customerLinkman)==1?true:false;
 			}

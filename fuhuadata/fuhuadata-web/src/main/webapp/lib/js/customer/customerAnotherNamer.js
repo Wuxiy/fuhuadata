@@ -171,7 +171,7 @@ function checkboxArr() {
         }
         checkboxarr.push(obj);
     })
-    return JSON.stringify(checkboxarr);
+    return checkboxarr;
 }
 
 $(document).on('change','#other',function(){
