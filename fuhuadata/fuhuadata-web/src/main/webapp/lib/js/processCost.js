@@ -32,7 +32,7 @@ $(document).ready(function () {
 
             for (var j = 0; j < ResultData1.length; j++) {
                 Adeexpense1.innerHTML += '<tr>' +
-                    '<td><a class="adEexpense1" data_url="'+basePath+'"/preparationProcessCost/getPreparationProcessCostById?id='+ResultData1[j].mcostId+'">' + ResultData1[j].costTerm + '</a></td>' +
+                    '<td><a class="adEexpense1" data_url="'+basePath+'/preparationProcessCost/getPreparationProcessCostById?id='+ResultData1[j].mcostId+'">' + ResultData1[j].costTerm + '</a></td>' +
                     '<td>' + ResultData1[j].unitCost + '</td>' +
                     '<td>' + ResultData1[j].priceEnd + '</td>' +
                     '<td>' + ResultData1[j].remarks + '</td>' +
@@ -40,7 +40,7 @@ $(document).ready(function () {
             }
             for (var k = 0; k < ResultData2.length; k++) {
                 Adeexpense2.innerHTML += '<tr>' +
-                    '<td><a class="adEexpense2" data_url="'+basePath+'"/preparationProcessCost/getPreparationProcessCostById?id='+ResultData2[k].mcostId+'">' + ResultData2[k].processFactory + '</a></td>' +
+                    '<td><a class="adEexpense2" data_url="'+basePath+'/preparationProcessCost/getPreparationProcessCostById?id='+ResultData2[k].mcostId+'">' + ResultData2[k].processFactory + '</a></td>' +
                     '<td>' + ResultData2[k].charges + '</td>' +
                     '<td>' + ResultData2[k].profit + '</td>' +
                     '<td>' + ResultData2[k].managementFee + '</td>' +
@@ -73,7 +73,7 @@ $(document).ready(function () {
 
                 for (var j = 0; j < ResultData1.length; j++) {
                     Adeexpense1.innerHTML += '<tr>' +
-                        '<td><a class="adEexpense1" data_url="'+basePath+'"/preparationProcessCost/getPreparationProcessCostById?id='+ResultData1[j].mcostId+'">' + ResultData1[j].costTerm + '</a></td>' +
+                        '<td><a class="adEexpense1" data_url="'+basePath+'/preparationProcessCost/getPreparationProcessCostById?id='+ResultData1[j].mcostId+'">' + ResultData1[j].costTerm + '</a></td>' +
                         '<td>' + ResultData1[j].unitCost + '</td>' +
                         '<td>' + ResultData1[j].priceEnd + '</td>' +
                         '<td>' + ResultData1[j].remarks + '</td>' +
@@ -81,7 +81,7 @@ $(document).ready(function () {
                 }
                 for (var k = 0; k < ResultData2.length; k++) {
                     Adeexpense2.innerHTML += '<tr>' +
-                        '<td><a class="adEexpense2" data_url="'+basePath+'"/preparationProcessCost/getPreparationProcessCostById?id='+ResultData2[k].mcostId+'">' + ResultData2[k].processFactory + '</a></td>' +
+                        '<td><a class="adEexpense2" data_url="'+basePath+'/preparationProcessCost/getPreparationProcessCostById?id='+ResultData2[k].mcostId+'">' + ResultData2[k].processFactory + '</a></td>' +
                         '<td>' + ResultData2[k].charges + '</td>' +
                         '<td>' + ResultData2[k].profit + '</td>' +
                         '<td>' + ResultData2[k].managementFee + '</td>' +
@@ -104,7 +104,7 @@ $(document).ready(function () {
                 var ResultData = eval(result.data);
                 for (var i = 0; i < ResultData.length; i++) {
                     Freight.innerHTML += '<tr>' +
-                        '<td><a class="freight1" data_url="'+basePath+'"/freightCost/getFreightCostById?id='+ResultData[i].freightId+'">' + ResultData[i].processFactory + '</a></td>' +
+                        '<td><a class="freight1" data_url="'+basePath+'/freightCost/getFreightCostById?id='+ResultData[i].freightId+'">' + ResultData[i].processFactory + '</a></td>' +
                         '<td>' + ResultData[i].unitCost + '</td>' +
                         '<td>' + ResultData[i].departureCity + '</td>' +
                         '<td>' + ResultData[i].destinationCity + '</td>' +
@@ -125,7 +125,7 @@ $(document).ready(function () {
                 var ResultData = eval(result.data);
                 for (var i = 0; i < ResultData.length; i++) {
                     Cost.innerHTML += '<tr>' +
-                        '<td><a class="componnentId" data_url="'+basePath+'"/componentCost/getComponentCostById?id=' + ResultData[i].componentId + '">' + ResultData[i].componentName + '</a></td>' +
+                        '<td><a class="componnentId" data_url="'+basePath+'/componentCost/getComponentCostById?id=' + ResultData[i].componentId + '">' + ResultData[i].componentName + '</a></td>' +
                         '<td>' + ResultData[i].consumption + '</td>' +
                         '<td>' + ResultData[i].unitCost + '</td>' +
                         '<td>' + ResultData[i].priceEnd + '</td>' +
@@ -184,7 +184,7 @@ $(document).ready(function () {
 
                 for (var j = 0; j < ResultData1.length; j++) {
                     Rate1.innerHTML += '<tr>' +
-                        '<td><a class="rate1" data_url="'+basePath+'"/Rate/getRateById?id='+ResultData1[j].rateId+'">' + ResultData1[j].currency + '</a></td>' +
+                        '<td><a class="rate1" data_url="'+basePath+'/Rate/getRateById?id='+ResultData1[j].rateId+'">' + ResultData1[j].currency + '</a></td>' +
                         '<td>' + ResultData1[j].rate + '</td>' +
                         '<td>' + ResultData1[j].termofValidity + '</td>' +
                         '<td>' + ResultData1[j].remarks + '</td>' +
@@ -193,7 +193,7 @@ $(document).ready(function () {
 
                 for (var k = 0; k < ResultData2.length; k++) {
                     Rate2.innerHTML += '<tr>' +
-                        '<td><a class="rate2" data_url="'+basePath+'"/Rate/getRateById?id='+ResultData2[k].rateId+'">' + ResultData2[k].kind + '</a></td>' +
+                        '<td><a class="rate2" data_url="'+basePath+'/Rate/getRateById?id='+ResultData2[k].rateId+'">' + ResultData2[k].kind + '</a></td>' +
                         '<td>' + ResultData2[k].grossMargin + '</td>' +
                         '<td>' + ResultData2[k].termofValidity + '</td>' +
                         '<td>' + ResultData2[k].remarks + '</td>' +
@@ -202,7 +202,7 @@ $(document).ready(function () {
 
                 for (var l = 0; l < ResultData2.length; l++) {
                     Rate3.innerHTML += '<tr>' +
-                        '<td><a class="rate3" data_url="'+basePath+'"/Rate/getRateById?id='+ResultData3[l].rateId+'">' + ResultData3[l].other + '</a></td>' +
+                        '<td><a class="rate3" data_url="'+basePath+'/Rate/getRateById?id='+ResultData3[l].rateId+'">' + ResultData3[l].other + '</a></td>' +
                         '<td>' + ResultData3[l].rateValue + '</td>' +
                         '<td>' + ResultData3[l].termofValidity + '</td>' +
                         '<td>' + ResultData3[l].remarks + '</td>' +
@@ -216,11 +216,13 @@ $(document).ready(function () {
 
 $(document).on("click",".adEexpense1",function(){
     var url = $(this).attr("data_url");
+    console.log(url);
     modal.innerHTML = '';
     jQuery.ajax({
         type:'GET',
         url:url,
         success:function(result){
+            console.log(result);
             var ResultData = eval(result.data);
             var html = [];
             html += '<div class="modal-dialog">';
@@ -257,7 +259,7 @@ $(document).on("click",".adEexpense1",function(){
             html +='<div class="modal-footer">';
             html +='<div class="row">';
             html +='<div class="col-xs-3 col-xs-offset-3">';
-            html +='<button type="button" class="btn btn-primary btn-block updateadEexpense1" data_url="'+basePath+'"/preparationProcessCost/doModify?id='+ResultData.mcostId+'" data_id="'+ResultData.mcostId+'" data_type="'+ResultData.type+'"> 完成 </button>';
+            html +='<button type="button" class="btn btn-primary btn-block updateadEexpense1" data_url="'+basePath+'/preparationProcessCost/doModify?id='+ResultData.mcostId+'" data_id="'+ResultData.mcostId+'" data_type="'+ResultData.type+'"> 完成 </button>';
             html +='</div>';
             html +='<div class="col-xs-3">';
             html +='<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
@@ -331,7 +333,7 @@ $(document).on("click",".adEexpense2",function(){
             html +='<div class="modal-footer">';
             html +='<div class="row">';
             html +='<div class="col-xs-3 col-xs-offset-3">';
-            html +='<button type="button" class="btn btn-primary btn-block updateadEexpense2" data_url="'+basePath+'"/preparationProcessCost/doModify?id='+ResultData.mcostId+'" data_type="'+ResultData.type+'"> 完成 </button>';
+            html +='<button type="button" class="btn btn-primary btn-block updateadEexpense2" data_url="'+basePath+'/preparationProcessCost/doModify?id='+ResultData.mcostId+'" data_type="'+ResultData.type+'"> 完成 </button>';
             html +='</div>';
             html +='<div class="col-xs-3">';
             html +='<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
@@ -394,7 +396,7 @@ $(document).on("click",".freight1",function(){
             html += '<div class="modal-footer">';
             html += '<div class="row">';
             html += '<div class="col-xs-3 col-xs-offset-3">';
-            html += '<button type="button" class="btn btn-primary btn-block updateFreight" data_url="'+basePath+'"/freightCost/doModify?id='+ResuleData.freightId+'"> 完成 </button>';
+            html += '<button type="button" class="btn btn-primary btn-block updateFreight" data_url="'+basePath+'/freightCost/doModify?id='+ResuleData.freightId+'"> 完成 </button>';
             html += '</div>';
             html += '<div class="col-xs-3">';
             html += '<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
@@ -462,7 +464,7 @@ $(document).on("click",".componnentId",function(){
             html += '<div class="modal-footer">';
             html += '<div class="row">';
             html += '<div class="col-xs-3 col-xs-offset-3">';
-            html += '<button type="button" class="btn btn-primary btn-block updateCost" data_url="'+basePath+'"/componentCost/doModify?id='+ResultData.componentId+'"> 完成 </button>';
+            html += '<button type="button" class="btn btn-primary btn-block updateCost" data_url="'+basePath+'/componentCost/doModify?id='+ResultData.componentId+'"> 完成 </button>';
             html += '</div>';
             html += '<div class="col-xs-3">';
             html += '<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
@@ -517,7 +519,7 @@ $(document).on("click",".rate1",function(){
             html += '<div class="modal-footer">';
             html += '<div class="row">';
             html += '<div class="col-xs-3 col-xs-offset-3">';
-            html += '<button type="button" class="btn btn-primary btn-block updaterate1" data_url="'+basePath+'"/Rate/doModify?id='+ResuleData.rateId+'" data_type="'+ResultData.type+'"> 完成 </button>';
+            html += '<button type="button" class="btn btn-primary btn-block updaterate1" data_url="'+basePath+'/Rate/doModify?id='+ResuleData.rateId+'" data_type="'+ResultData.type+'"> 完成 </button>';
             html += '</div>';
             html += '<div class="col-xs-3">';
             html += '<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
@@ -572,7 +574,7 @@ $(document).on("click",".rate2",function(){
             html += '<div class="modal-footer">';
             html += '<div class="row">';
             html += '<div class="col-xs-3 col-xs-offset-3">';
-            html += '<button type="button" class="btn btn-primary btn-block updaterate2" data_url="'+basePath+'"/Rate/doModify?id='+ResuleData.rateId+'" data_type="'+ResultData.type+'"> 完成 </button>';
+            html += '<button type="button" class="btn btn-primary btn-block updaterate2" data_url="'+basePath+'/Rate/doModify?id='+ResuleData.rateId+'" data_type="'+ResultData.type+'"> 完成 </button>';
             html += '</div>';
             html += '<div class="col-xs-3">';
             html += '<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
@@ -627,7 +629,7 @@ $(document).on("click",".rate3",function(){
             html += '<div class="modal-footer">';
             html += '<div class="row">';
             html += '<div class="col-xs-3 col-xs-offset-3">';
-            html += '<button type="button" class="btn btn-primary btn-block updaterate3" data_url="'+basePath+'"/Rate/doModify?id='+ResuleData.rateId+'" data_type="'+ResultData.type+'"> 完成 </button>';
+            html += '<button type="button" class="btn btn-primary btn-block updaterate3" data_url="'+basePath+'/Rate/doModify?id='+ResuleData.rateId+'" data_type="'+ResultData.type+'"> 完成 </button>';
             html += '</div>';
             html += '<div class="col-xs-3">';
             html += '<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
