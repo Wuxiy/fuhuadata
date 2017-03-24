@@ -62,6 +62,17 @@ public class CustomerBaseInfoManagerImpl implements CustomerBaseInfoManager {
 			flag =  customerBaseInfoDao.updateCustomerBaseInfoById(customerBaseInfo.getCustomerId(), customerBaseInfo) == 1 ? true : false;
 		}catch(Exception e){
 			e.printStackTrace();
+			try{
+				sqlMapClient.getCurrentConnection().rollback();
+			}catch(Exception e1){
+				e1.printStackTrace();
+			}
+		}finally {
+			try{
+				sqlMapClient.endTransaction();
+			}catch (Exception e2){
+				e2.printStackTrace();
+			}
 		}
 		return flag;
     }

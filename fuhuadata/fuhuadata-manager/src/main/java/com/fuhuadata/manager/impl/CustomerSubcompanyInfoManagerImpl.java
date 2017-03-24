@@ -47,6 +47,17 @@ public class CustomerSubcompanyInfoManagerImpl implements CustomerSubcompanyInfo
 			sqlMapClient.commitTransaction();
 		}catch(Exception e){
     		e.printStackTrace();
+    		try{
+    			sqlMapClient.getCurrentConnection().rollback();
+			}catch(Exception e1){
+    			e1.printStackTrace();
+			}
+		}finally {
+			try{
+				sqlMapClient.endTransaction();
+			}catch(Exception e2){
+				e2.printStackTrace();
+			}
 		}
 		return flag;
     }
