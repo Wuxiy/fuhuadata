@@ -8,9 +8,13 @@ import com.fuhuadata.manager.CustomerLinkmanManager;
 import com.fuhuadata.dao.CustomerLinkmanDao;
 import com.fuhuadata.domain.CustomerLinkman;
 import com.fuhuadata.util.StringUtil;
+import com.ibatis.sqlmap.client.SqlMapClient;
+import com.ibatis.sqlmap.engine.mapping.sql.Sql;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * @author wangbo
@@ -20,6 +24,9 @@ public class CustomerLinkmanManagerImpl implements CustomerLinkmanManager {
 
 	@Resource
     private CustomerLinkmanDao customerLinkmanDao;
+
+	@Autowired
+	private SqlMapClient sqlMapClient;
     
 
     public CustomerLinkman addCustomerLinkman(CustomerLinkman customerLinkman) {
@@ -30,7 +37,36 @@ public class CustomerLinkmanManagerImpl implements CustomerLinkmanManager {
     }
     
     public boolean updateCustomerLinkmanById(String linkman_id, CustomerLinkman customerLinkman) {
-    	return customerLinkmanDao.updateCustomerLinkmanById(linkman_id, customerLinkman) == 1 ? true : false;
+    	boolean flag = false;
+    	try{
+			sqlMapClient.startTransaction();//事务开始
+			CustomerLinkman customerLinkmandefault = customerLinkmanDao.getCustomerLinkmanDefaultByCustomerId(customerLinkman.getCustomerId());
+			if(customerLinkmandefault!=null&&customerLinkman.getIsDefault()==1){
+				customerLinkmandefault.setIsDefault(0);
+				customerLinkmanDao.updateCustomerLinkmanById(customerLinkmandefault.getLinkmanId(),customerLinkmandefault);
+			}
+			if(customerLinkmandefault==null) {
+				customerLinkman.setIsDefault(1);
+				flag = customerLinkmanDao.updateCustomerLinkmanById(linkman_id, customerLinkman) == 1 ? true : false;
+			}
+			sqlMapClient.commitTransaction();//事务提交
+
+		}catch(Exception e){
+    		e.printStackTrace();
+    		try{
+				sqlMapClient.getCurrentConnection().rollback();//事务回滚
+			}catch(Exception e2){
+    			e2.printStackTrace();
+			}
+		}finally {
+			try {
+				sqlMapClient.endTransaction();//事务结束
+			}catch(Exception e3){
+				e3.printStackTrace();
+			}
+		}
+		return flag;
+
     }
     
 	public List<CustomerLinkman> getCustomerLinkmansByQuery(QueryCustomerLinkman queryCustomerLinkman) {
