@@ -63,6 +63,7 @@ function customerContactsInfo(result) {
 //提交上传
 function updateContactsInfo() {
     var data = {
+        "customerId":$('#isDefault').attr('data-id'),
         "linkmanId":$('#name').attr('data-id'),
         "name":$('#name').val(),
         "posts":$('#posts').val(),
