@@ -78,20 +78,22 @@ $(document).on('click','.otherNameinfo',function(){
 //Add function
 function addAnotherName() {
     var data = {
-        "customerId":sid,
-        "fullName":$('#fullNameAdd').val(),
-        "shortName":$('#shortNameAdd').val(),
-        "zhongxinbaoNumber":$('#zhongxinbaoNumberAdd').val(),
-        "zhongxinbaoLevel":$('#zhongxinbaoLevelAdd').val(),
-        "customerSubRemarks":$('#customerSubRemarksAdd').val(),
-        "property":checkboxAdd(),
-        "propertyRemarks":$('#propertyRemarks').val(),
-        "createTime": getTime(),
-        "createUserId": 2,
-        "createUserName":"杨洋",
-        "modifyTime":"2017-03-02 11:44:49",
-        "lastmodifyUserId": 1,
-        "lastmodifyUserName": "胡向阳"
+        "customerSubcompanyInfo":{
+            "customerId":sid,
+            "fullName":$('#fullNameAdd').val(),
+            "shortName":$('#shortNameAdd').val(),
+            "zhongxinbaoNumber":$('#zhongxinbaoNumberAdd').val(),
+            "zhongxinbaoLevel":$('#zhongxinbaoLevelAdd').val(),
+            "customerSubRemarks":$('#customerSubRemarksAdd').val(),
+            "propertyRemarks":$('#propertyRemarks').val(),
+            "createTime": getTime(),
+            "createUserId": 2,
+            "createUserName":"杨洋",
+            "modifyTime":"2017-03-02 11:44:49",
+            "lastmodifyUserId": 1,
+            "lastmodifyUserName": "胡向阳"
+        },
+        "customerEnterpriceNatures":checkboxAdd()
     }
     console.log(data);
     return JSON.stringify(data);
@@ -99,10 +101,14 @@ function addAnotherName() {
 
 function checkboxAdd() {
     var checkboxarr = [];
-    var a;
+    var obj;
     $("input[name='checkAdd']:checked").each(function(){
-        a =  $(this).val();
-        checkboxarr.push(a);
+        obj = {
+            "customerId": "fh104",
+            "type": "2",
+            "nature": $(this).val()
+        }
+        checkboxarr.push(obj);
     })
     return JSON.stringify(checkboxarr);
 }
@@ -119,14 +125,16 @@ $(document).on('click','#otherAdd',function(){
 //edit function
 function updateInfo() {
     var data = {
-        "customerSubId":$('#fullName').attr('data-id'),
-        "fullName":$('#fullName').val(),
-        "shortName":$('#shortName').val(),
-        "zhongxinbaoNumber":$('#zhongxinbaoNumber').val(),
-        "zhongxinbaoLevel":$('#zhongxinbaoLevel').val(),
-        "customerSubRemarks":$('#customerSubRemarks').val(),
-        "property":checkboxArr(),
-        "propertyRemarks":$('#propertyRemarks').val()
+        "customerSubcompanyInfo":{
+            "customerSubId":$('#fullName').attr('data-id'),
+            "fullName":$('#fullName').val(),
+            "shortName":$('#shortName').val(),
+            "zhongxinbaoNumber":$('#zhongxinbaoNumber').val(),
+            "zhongxinbaoLevel":$('#zhongxinbaoLevel').val(),
+            "customerSubRemarks":$('#customerSubRemarks').val(),
+            "propertyRemarks":$('#propertyRemarks').val()
+        },
+        "customerEnterpriceNatures":checkboxArr()
     }
     console.log(data);
     return JSON.stringify(data);
@@ -134,10 +142,14 @@ function updateInfo() {
 
 function checkboxArr() {
     var checkboxarr = [];
-    var a;
+    var obj;
     $("input[name='check']:checked").each(function(){
-        a =  $(this).val();
-        checkboxarr.push(a);
+        obj = {
+            "customerId": "fh104",
+            "type": "2",
+            "nature": $(this).val()
+        }
+        checkboxarr.push(obj);
     })
     return JSON.stringify(checkboxarr);
 }
