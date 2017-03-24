@@ -28,18 +28,27 @@ function anotherNamerList(result) {
     var AnotherNameList = document.getElementById('anotherNameList');
     console.log(ResultData);
     AnotherNameList.innerHTML = '';
-    var arr1 = [{"id":0,"value":"工厂"},{"id":1,"value":"经销商"},{"id":2,"value":"分销商"},{"id":3,"value":"终端客户"}]
+
     for(var i=0;i<ResultData.length;i++){
         AnotherNameList.innerHTML += '<tr>'+
                                         '<td>'+ResultData[i].customerSubId+'</td>'+
                                         '<td><a class="otherNameinfo" data_url="'+basePath+'/customerSubcompanyInfo/getCustomerSubcompanyInfoById?customerSubId='+ResultData[i].customerSubId+'">'+ResultData[i].fullName+'</a></td>'+
                                         '<td>'+ResultData[i].shortName+'</td>'+
-                                        '<td>'+ResultData[i].property+'</td>'+
+                                        '<td>'+replace(ResultData[i].property,ResultData[i].propertyRemarks)+'</td>'+
                                         '<td>'+ResultData[i].zhongxinbaoNumber+'</td>'+
                                         '<td>'+ResultData[i].zhongxinbaoLevel+'</td>'+
                                         '<td>'+ResultData[i].customerSubRemarks+'</td>'+
                                         '</tr>';
     }
+}
+
+function replace(arr1,arr2) {
+    console.log(arr1);
+    if(arr1.indexOf('其他')){
+        arr1 = arr1.replace('其他',arr2);
+    }
+    return arr1;
+    console.log(arr1);
 }
 
 //详情
