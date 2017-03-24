@@ -36,10 +36,28 @@ function anotherNamerList(result) {
                                         '<td>'+ResultData[i].shortName+'</td>'+
                                         '<td>'+replace(ResultData[i].property,ResultData[i].propertyRemarks)+'</td>'+
                                         '<td>'+ResultData[i].zhongxinbaoNumber+'</td>'+
-                                        '<td>'+ResultData[i].zhongxinbaoLevel+'</td>'+
+                                        '<td>'+replacelevel(ResultData[i].zhongxinbaoLevel)+'</td>'+
                                         '<td>'+ResultData[i].customerSubRemarks+'</td>'+
                                         '</tr>';
     }
+}
+
+function replacelevel(arr) {
+    switch (arr){
+        case 1:
+            arr = 'A';
+            break;
+        case 2:
+            arr = 'AA';
+            break;
+        case 3:
+            arr = 'AAA';
+            break;
+        case 4:
+            arr = 'AAAA';
+            break;
+    }
+    return arr;
 }
 
 function replace(arr1,arr2) {
