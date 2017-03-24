@@ -168,16 +168,18 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerContactsInfo.js"></script>
 <script type="text/javascript">
     $('#isDefault').change(function(){
+        var newName = $('#name').val();
         var id = $(this).attr('data-id');
         var url = basePath + '/customerLinkman/getCustomerLinkmanDefaultByCustomerId?customerId=' + id;
-        console.log(url);
 
         if($(this).val() == 1){
             jQuery.ajax({
                 type:"POST",
                 url:url,
                 success:function(result){
-                    alert(result.message);
+                    var name = result.data.name;
+                    var msg = '当前默认联系人是' + name + '，更改后的联系人为' + newName;
+                    alert(msg);
                 }
             })
         }
