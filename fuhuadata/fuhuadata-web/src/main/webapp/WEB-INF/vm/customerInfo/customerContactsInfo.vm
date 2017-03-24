@@ -166,3 +166,20 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerContactsInfo.js"></script>
+<script type="text/javascript">
+    $('#isDefault').change(function(){
+        var id = $(this).attr('data-id');
+        var url = basePath + '/customerLinkman/getCustomerLinkmanDefaultByCustomerId?customerId=' + id;
+        console.log(url);
+
+        if($(this).val() == 1){
+            jQuery.ajax({
+                type:"POST",
+                url:url,
+                success:function(result){
+                    alert(result.message);
+                }
+            })
+        }
+    })
+</script>

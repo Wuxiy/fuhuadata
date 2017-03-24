@@ -43,6 +43,7 @@ function customerContactsInfo(result) {
         $('#eatingHabits').val(customerLinkman.eatingHabits);
         $('#faith').val(customerLinkman.faith);
         $('#isDefault').val(customerLinkman.isDefault);
+        $('#isDefault').attr('data-id',customerLinkman.customerId);
         $('#remarks').val(customerLinkman.remarks);
     }
     if(customerVisitRecords){
