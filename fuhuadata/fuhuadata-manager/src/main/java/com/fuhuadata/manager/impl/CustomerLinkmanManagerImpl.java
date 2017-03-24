@@ -1,4 +1,5 @@
 package com.fuhuadata.manager.impl;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 
@@ -10,6 +11,7 @@ import com.fuhuadata.domain.CustomerLinkman;
 import com.fuhuadata.util.StringUtil;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.ibatis.sqlmap.engine.mapping.sql.Sql;
+import com.sun.scenario.effect.impl.state.LinearConvolveKernel;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Resource;
@@ -43,11 +45,16 @@ public class CustomerLinkmanManagerImpl implements CustomerLinkmanManager {
 			CustomerLinkman customerLinkmandefault = customerLinkmanDao.getCustomerLinkmanDefaultByCustomerId(customerLinkman.getCustomerId());
 			if(customerLinkmandefault!=null&&customerLinkman.getIsDefault()==1){
 				customerLinkmandefault.setIsDefault(0);
+				System.out.println(customerLinkmandefault.getIsDefault());
 				customerLinkmanDao.updateCustomerLinkmanById(customerLinkmandefault.getLinkmanId(),customerLinkmandefault);
+				flag=customerLinkmanDao.updateCustomerLinkmanById(linkman_id,customerLinkman)==1?true:false;
 			}
-			if(customerLinkmandefault==null) {
+			else if(customerLinkmandefault==null||customerLinkman.getLinkmanId()==customerLinkmandefault.getLinkmanId()) {
 				customerLinkman.setIsDefault(1);
 				flag = customerLinkmanDao.updateCustomerLinkmanById(linkman_id, customerLinkman) == 1 ? true : false;
+			}
+			 else{
+				flag=customerLinkmanDao.updateCustomerLinkmanById(linkman_id,customerLinkman)==1?true:false;
 			}
 			sqlMapClient.commitTransaction();//事务提交
 

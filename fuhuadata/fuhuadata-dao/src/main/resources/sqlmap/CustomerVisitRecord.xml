@@ -206,6 +206,7 @@
 			a.start_time startTime,
 			a.end_time endTime,
 			a.activity_type activityType,
+			a.activity_remarks activityRemarks,
 			a.activity_expense activityExpens,
 			a.activity_address activityAddress,
 			a.activity_summary activitySummary,
