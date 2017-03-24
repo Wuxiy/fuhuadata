@@ -95,19 +95,19 @@
                                     <label class="col-xs-1 control-label">企业性质</label>
                                     <div class="col-xs-5">
                                         <label class="checkbox-inline">
-                                            <input type="checkbox" name="check" class="suitableType cell_edit" value="0"> 工厂
+                                            <input type="checkbox" name="check" class="suitableType cell_edit" value="0" data-text="工厂"> 工厂
                                         </label>
                                         <label class="checkbox-inline">
-                                            <input type="checkbox" name="check" class="suitableType cell_edit" value="1"> 经销商
+                                            <input type="checkbox" name="check" class="suitableType cell_edit" value="1" data-text="经销商"> 经销商
                                         </label>
                                         <label class="checkbox-inline">
-                                            <input type="checkbox" name="check" class="suitableType cell_edit" value="2"> 分销商
+                                            <input type="checkbox" name="check" class="suitableType cell_edit" value="2" data-text="分销商"> 分销商
                                         </label>
                                         <label class="checkbox-inline">
-                                            <input type="checkbox" name="check" class="suitableType cell_edit" value="3"> 终端客户
+                                            <input type="checkbox" name="check" class="suitableType cell_edit" value="3" data-text="终端客户"> 终端客户
                                         </label>
                                         <label class="checkbox-inline">
-                                            <input type="checkbox" name="check" class="suitableType cell_edit" id="other" value="4"> 其他
+                                            <input type="checkbox" name="check" class="suitableType cell_edit" id="other" value="4" data-text="其他"> 其他
                                         </label>
                                     </div>
                                     <div class="col-xs-4 col-xs-offset-1">
@@ -186,19 +186,19 @@
                                     <label class="col-xs-1 control-label">企业性质</label>
                                     <div class="col-xs-5">
                                         <label class="checkbox-inline">
-                                            <input type="checkbox" name="checkAdd" class="suitableType cell_edit" value="0"> 工厂
+                                            <input type="checkbox" name="checkAdd" class="suitableType cell_edit" value="0" data-text="工厂"> 工厂
                                         </label>
                                         <label class="checkbox-inline">
-                                            <input type="checkbox" name="checkAdd" class="suitableType cell_edit" value="1"> 经销商
+                                            <input type="checkbox" name="checkAdd" class="suitableType cell_edit" value="1" data-text="经销商"> 经销商
                                         </label>
                                         <label class="checkbox-inline">
-                                            <input type="checkbox" name="checkAdd" class="suitableType cell_edit" value="2"> 分销商
+                                            <input type="checkbox" name="checkAdd" class="suitableType cell_edit" value="2" data-text="分销商"> 分销商
                                         </label>
                                         <label class="checkbox-inline">
-                                            <input type="checkbox" name="checkAdd" class="suitableType cell_edit" value="3"> 终端客户
+                                            <input type="checkbox" name="checkAdd" class="suitableType cell_edit" value="3" data-text="终端客户"> 终端客户
                                         </label>
                                         <label class="checkbox-inline">
-                                            <input type="checkbox" name="checkAdd" class="suitableType cell_edit" id="otherAdd" value="4"> 其他
+                                            <input type="checkbox" name="checkAdd" class="suitableType cell_edit" id="otherAdd" value="4" data-text="其他"> 其他
                                         </label>
                                     </div>
                                     <div class="col-xs-4 col-xs-offset-1">

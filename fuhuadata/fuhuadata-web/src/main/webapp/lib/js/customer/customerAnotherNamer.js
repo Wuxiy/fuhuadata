@@ -28,7 +28,7 @@ function anotherNamerList(result) {
     var AnotherNameList = document.getElementById('anotherNameList');
     console.log(ResultData);
     AnotherNameList.innerHTML = '';
-
+    var arr1 = [{"id":0,"value":"工厂"},{"id":1,"value":"经销商"},{"id":2,"value":"分销商"},{"id":3,"value":"终端客户"}]
     for(var i=0;i<ResultData.length;i++){
         AnotherNameList.innerHTML += '<tr>'+
                                         '<td>'+ResultData[i].customerSubId+'</td>'+
@@ -87,6 +87,7 @@ function addAnotherName() {
             "customerSubRemarks":$('#customerSubRemarksAdd').val(),
             "propertyRemarks":$('#propertyRemarks').val(),
             "createTime": getTime(),
+            "property":checkboxAddtext(),
             "createUserId": 2,
             "createUserName":"杨洋",
             "modifyTime":"2017-03-02 11:44:49",
@@ -99,18 +100,25 @@ function addAnotherName() {
     return JSON.stringify(data);
 }
 
-function checkboxAdd() {
-    var checkboxarr = [];
-    var obj;
+function checkboxAddtext(){
+    var arr = "";
     $("input[name='checkAdd']:checked").each(function(){
-        obj = {
-            "customerId": "fh104",
-            "type": "2",
-            "nature": $(this).val()
-        }
-        checkboxarr.push(obj);
+        var a = $(this).attr('data-text');
+        arr += a;
     })
-    return JSON.stringify(checkboxarr);
+    console.log(arr);
+    return JSON.stringify(arr);
+}
+
+function checkboxAdd() {
+    var a = [];
+    var b;
+    $("input[name='checkAdd']:checked").each(function(){
+        a.push($(this).attr('data-text'));
+    })
+    b = a.join(',');
+    console.log(b);
+    return b;
 }
 
 $(document).on('click','#otherAdd',function(){
@@ -132,12 +140,24 @@ function updateInfo() {
             "zhongxinbaoNumber":$('#zhongxinbaoNumber').val(),
             "zhongxinbaoLevel":$('#zhongxinbaoLevel').val(),
             "customerSubRemarks":$('#customerSubRemarks').val(),
+            "property":checkboxtext(),
             "propertyRemarks":$('#propertyRemarks').val()
         },
         "customerEnterpriceNatures":checkboxArr()
     }
     console.log(data);
     return JSON.stringify(data);
+}
+
+function checkboxtext(){
+    var a = [];
+    var b;
+    $("input[name='check']:checked").each(function(){
+       a.push($(this).attr('data-text'));
+    })
+    b = a.join(',');
+    console.log(b);
+    return b;
 }
 
 function checkboxArr() {
