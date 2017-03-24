@@ -30,6 +30,11 @@ public class CustomerBaseInfoManagerImpl implements CustomerBaseInfoManager {
     	return customerBaseInfoDao.addCustomerBaseInfo(customerBaseInfo);
     }
 
+	@Override
+	public boolean deleteCustomerEnterpriceNatureByCustomerId(String customerId) {
+		return customerBaseInfoDao.deleteCustomerEnterpriceNatureByCustomerId(customerId)==0?false:true;
+	}
+
 	public boolean batchAddNature(List<CustomerEnterpriceNature> customerEnterpriceNatures){
     	return customerBaseInfoDao.batchAddNature(customerEnterpriceNatures)==customerEnterpriceNatures.size()?true :false;
 	}

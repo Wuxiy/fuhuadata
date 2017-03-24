@@ -56,6 +56,12 @@
 					<result property="linkManEmail" column="link_man_email" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="otherEnterpriseNature" column="other_enterprise_nature" jdbcType="VARCHAR" javaType="java.lang.String" />
 	</resultMap>
+	
+	<resultMap id="CUSTOMERENTERPRICENATURE-MAP" class="CustomerEnterpriceNature">
+		<result property="id" column="id" jdbcType="INT" javaType="java.lang.Integer"/>
+		<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String"/>
+		<result property="nature" column="nature" jdbcType="INT" javaType="java.lang.Integer"/>
+	</resultMap>
 
 
 	<sql id="PAGE-COMMON">
@@ -279,6 +285,17 @@
 					</dynamic>
 		WHERE customer_id=#customerId#
 	</update>
+	
+	<select id="GET-NATURE-BY-CUSTOMERID" resultMap="CUSTOMERENTERPRICENATURE-MAP" parameterClass="java.lang.String">
+		<![CDATA[
+			SELECT * FROM customer_enterprise_nature WHERE customer_id = #customerId#
+	]]>
+	</select>
+
+	<delete id="DELETE-NATURE-BY-CUSTOMERID" parameterClass="java.lang.String">
+		DELETE FROM customer_enterprise_nature
+		where customer_id = #customerId#
+	</delete>
 
 	<update id="BATCH-ADD-NATURE" parameterClass="java.util.List">
 		<![CDATA[
