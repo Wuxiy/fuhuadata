@@ -9,12 +9,12 @@ $(document).ready(function(){
     $(document).on('click.up','#addanothername',function(){
         //提交数据
         upData(basePath+'/customerSubcompanyInfo/addCustomerSubcompanyInfo','POST',addAnotherName(),"application/json");
-        /*location.reload();*/
+        location.reload();
     });
     //更新提交
     $(document).on('click.up','#updateinfo',function(){
         //提交数据
-        upData(basePath+'/customerSubcompanyInfo/addCustomerSubcompanyInfo','POST',updateInfo(),"application/json");
+        upData(basePath+'/customerSubcompanyInfo/updateCustomerSubcompanyInfoById','POST',updateInfo(),"application/json");
         /*location.reload();*/
     });
 })
@@ -62,6 +62,7 @@ $(document).on('click','.otherNameinfo',function(){
                         }
                 })
             })
+            $('#fullName').attr('data-id',ResultData.customerSubId),
             $('#fullName').val(ResultData.fullName);
             $('#shortName').val(ResultData.shortName);
             $('#zhongxinbaoNumber').val(ResultData.zhongxinbaoNumber);
@@ -84,7 +85,13 @@ function addAnotherName() {
         "zhongxinbaoLevel":$('#zhongxinbaoLevelAdd').val(),
         "customerSubRemarks":$('#customerSubRemarksAdd').val(),
         "property":checkboxAdd(),
-        "propertyRemarks":$('#propertyRemarks').val()
+        "propertyRemarks":$('#propertyRemarks').val(),
+        "createTime": getTime(),
+        "createUserId": 2,
+        "createUserName":"杨洋",
+        "modifyTime":"2017-03-02 11:44:49",
+        "lastmodifyUserId": 1,
+        "lastmodifyUserName": "胡向阳"
     }
     console.log(data);
     return JSON.stringify(data);
@@ -112,7 +119,7 @@ $(document).on('click','#otherAdd',function(){
 //edit function
 function updateInfo() {
     var data = {
-        "customerId":sid,
+        "customerSubId":$('#fullName').attr('data-id'),
         "fullName":$('#fullName').val(),
         "shortName":$('#shortName').val(),
         "zhongxinbaoNumber":$('#zhongxinbaoNumber').val(),
