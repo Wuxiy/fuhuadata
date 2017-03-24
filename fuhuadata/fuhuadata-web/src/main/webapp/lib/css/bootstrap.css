@@ -5310,10 +5310,10 @@ a.list-group-item-danger.active:focus {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 .panel-body {
-  padding: 10px;
+  padding: 15px;
 }
 .panel-heading {
-  padding: 10px 10px;
+  padding: 15px 15px;
   border-bottom: 1px solid transparent;
   border-top-right-radius: 1px;
   border-top-left-radius: 1px;
@@ -5338,7 +5338,7 @@ a.list-group-item-danger.active:focus {
   color: inherit;
 }
 .panel-footer {
-  padding: 10px 10px;
+  padding: 15px 15px;
   background-color: #f5f5f5;
   border-top: 1px solid #dddddd;
   border-bottom-right-radius: 1px;
@@ -5379,8 +5379,8 @@ a.list-group-item-danger.active:focus {
 .panel > .table caption,
 .panel > .table-responsive > .table caption,
 .panel > .panel-collapse > .table caption {
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 .panel > .table:first-child,
 .panel > .table-responsive:first-child > .table:first-child {
@@ -5736,7 +5736,7 @@ button.close {
   padding-right: 5px;
   color: #333333;
 }
-.tree .active>a,
+.tree .active a,
 .tree a:focus {
   outline: 2px solid #333333;
   background: #eeeeee;

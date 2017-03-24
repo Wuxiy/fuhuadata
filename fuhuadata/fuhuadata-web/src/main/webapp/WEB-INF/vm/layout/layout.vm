@@ -13,14 +13,14 @@
     <script src="${request.contextPath}/lib/dataTables/jquery.dataTables.min.js"></script>
     <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/dataTables/dataTables.bootstrap.js"></script>
     <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/dataTables/dataTables.bootstrap.min.js"></script>
-    <script src="${request.contextPath}/lib/js/jquery-lang.js" type="text/javascript" charset="utf-8"></script>
-    <script src="${request.contextPath}/lib/js/js.cookie.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript">
-        var lang = new Lang();
-        lang.init({
-            defaultLang: 'zh'
-        });
-    </script>
+##    <script src="${request.contextPath}/lib/js/jquery-lang.js" type="text/javascript" charset="utf-8"></script>
+##    <script src="${request.contextPath}/lib/js/js.cookie.js" type="text/javascript" charset="utf-8"></script>
+##    <script type="text/javascript">
+##        var lang = new Lang();
+##        lang.init({
+##            defaultLang: 'zh'
+##        });
+##    </script>
 </head>
 <body class="bg-page">
 <div class="container-fluid">

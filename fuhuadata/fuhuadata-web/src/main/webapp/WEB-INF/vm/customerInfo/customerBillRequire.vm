@@ -19,16 +19,7 @@
                     <div class="panel-heading">
                         <div class="input-group panel-heading-btn col-xs-8 pull-right">
                             <span class="input-group-addon" lang="zh">产品种类</span>
-                            <select class="form-control">
-                                <option value="">41%草甘膦异丙铵盐水剂-1L*10</option>
-                                <option value="">74%草甘膦异丙铵盐颗粒剂050KG*10</option>
-                                <option value="">95%草甘膦原药-25KG</option>
-                            </select>
-                            <span class="input-group-addon" lang="zh">单据类型</span>
-                            <select class="form-control">
-                                <option value="">信用证条款单据</option>
-                                <option value="">非信用证条款单据</option>
-                            </select>
+                            <select id="name" class="form-control"></select>
                         </div>
                         <h3 class="panel-title" lang="zh">
                             单据要求
@@ -38,19 +29,26 @@
                         <table class="table table-condensed table-bordered table-striped text-right">
                             <tbody>
                             <tr>
-                                <td class="col-xs-4" lang="zh">出具海运提单或货代提单</td>
+                                <td class="col-xs-4" lang="zh"><label for="">出具海运提单</label></td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input type="checkbox" /></label>
+                                        <label><input id="oceanBillOfLading" type="checkbox" /></label>
                                     </div>
                                 </td>
-
+                            </tr>
+                            <tr>
+                                <td class="col-xs-4" lang="zh">出具货运提单</td>
+                                <td class="text-left">
+                                    <div class="checkbox col-xs-3">
+                                        <label><input id="freightBillOfLading" type="checkbox" /></label>
+                                    </div>
+                                </td>
                             </tr>
                             <tr>
                                 <td lang="zh">是否需要发票</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input type="checkbox" /></label>
+                                        <label><input id="invoice" type="checkbox" /></label>
                                     </div>
                                 </td>
 
@@ -59,7 +57,7 @@
                                 <td lang="zh">是否需要箱单</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input type="checkbox" /></label>
+                                        <label><input id="packingLise" type="checkbox" /></label>
                                     </div>
                                 </td>
 
@@ -68,7 +66,10 @@
                                 <td lang="zh">是否需要质检单</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input type="checkbox" /></label>
+                                        <label><input id="qualityPolicy" type="checkbox" /></label>
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <input id="qualityPolicyTxt" type="text" class="form-control">
                                     </div>
                                 </td>
                             </tr>
@@ -76,7 +77,7 @@
                                 <td lang="zh">是否需要保单</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input type="checkbox" /></label>
+                                        <label><input id="warranty" type="checkbox" /></label>
                                     </div>
                                 </td>
 
@@ -85,18 +86,18 @@
                                 <td lang="zh">是否出COO</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-12">
-                                        <label><input type="checkbox" />商检局</label>
-                                        <label><input type="radio" name="inspection"/>FORM A</label>
-                                        <label><input type="radio" name="inspection"/>FORM E</label>
-                                        <label><input type="radio" name="inspection"/>FORM P</label>
-                                        <label><input type="radio" name="inspection"/>FORM AU</label>
+                                        <label><input name="coo" type="radio" value="CIATB"/>商检局</label>
+                                        <label><input name="CIATB" type="radio" value="a"/>FORM A</label>
+                                        <label><input name="CIATB" type="radio" value="e"/>FORM E</label>
+                                        <label><input name="CIATB" type="radio" value="p"/>FORM P</label>
+                                        <label><input name="CIATB" type="radio" value="au"/>FORM AU</label>
                                     </div>
                                     <div class="checkbox col-xs-12">
-                                        <label><input type="checkbox" />贸促会</label>
+                                        <label><input name="coo" type="radio" value="CCPIT"/>贸促会</label>
                                     </div>
                                     <div class="checkbox col-xs-2">
-                                        <label><input type="checkbox" />普通</label>
-                                        <input class="form-control" type="text" />
+                                        <label><input name="coo" type="radio" value="general"/>普通</label>
+                                        <input id="general" class="form-control" type="text" />
                                     </div>
                                 </td>
 
@@ -105,7 +106,7 @@
                                 <td lang="zh">是否需要危包证</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input type="checkbox" /></label>
+                                        <label><input id="dangerousPackage" type="checkbox" /></label>
                                     </div>
                                 </td>
 
@@ -114,7 +115,7 @@
                                 <td lang="zh">是否需要受益人证明</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input type="checkbox" /></label>
+                                        <label><input id="favoree" type="checkbox" /></label>
                                     </div>
                                 </td>
 
@@ -123,7 +124,7 @@
                                 <td lang="zh">是否出熏蒸证书</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input type="checkbox" /></label>
+                                        <label><input id="fumigation" type="checkbox" /></label>
                                     </div>
                                 </td>
 
@@ -132,7 +133,7 @@
                                 <td lang="zh">是否需要MSDS</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input type="checkbox" /></label>
+                                        <label><input id="MSDS" type="checkbox" /></label>
                                     </div>
                                 </td>
 
@@ -141,12 +142,12 @@
                                 <td lang="zh">提单是否电放</td>
                                 <td class="form-group text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input type="checkbox" value="1" checked /><span lang="zh">直接电放</span></label>
+                                        <label><input name="telexRelease" type="radio" value="0" checked /><span lang="zh">直接电放</span></label>
                                     </div>
                                     <div class="checkbox col-xs-3">
-                                        <label><input type="checkbox" value="1" checked /><span lang="zh">正本出后电放</span></label>
+                                        <label><input name="telexRelease" type="radio" value="1" checked /><span lang="zh">正本出后电放</span></label>
                                     </div>
-                                    <div class="col-xs-3"><input class="form-control" type="text" value="" placeholder="输入放单目的港" lang="zh" /></div>
+                                    <div class="col-xs-3"><input id="telexReleaseTxt" class="form-control" type="text" value="" placeholder="输入放单目的港" lang="zh" /></div>
                                 </td>
 
                             </tr>
@@ -154,7 +155,7 @@
                                 <td lang="zh">是否需要银行交单</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input type="checkbox" /></label>
+                                        <label><input id="tenderDocument" type="checkbox" /></label>
                                     </div>
                                 </td>
 
@@ -163,7 +164,7 @@
                                 <td lang="zh">是否需要做第三方检测，并出具检测报告</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input type="checkbox" /></label>
+                                        <label><input id="examiningReport" type="checkbox" /></label>
                                     </div>
                                 </td>
 
@@ -172,7 +173,7 @@
                                 <td lang="zh">是否需要Packing Declaration</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input type="checkbox" /></label>
+                                        <label><input id="packingDeclaration" type="checkbox" /></label>
                                     </div>
                                 </td>
 
@@ -181,7 +182,7 @@
                                 <td lang="zh">是否需要Import Container Weight Declaration</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input type="checkbox" /></label>
+                                        <label><input id="ICWD" type="checkbox" /></label>
                                     </div>
                                 </td>
 
@@ -190,25 +191,7 @@
                                 <td>是否需要Manufacturer's Certificate</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input type="checkbox" /></label>
-                                    </div>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>是否需要IMPORT CONTAINER WEIGHT DECLARATION</td>
-                                <td class="text-left">
-                                    <div class="checkbox col-xs-3">
-                                        <label><input type="checkbox" /></label>
-                                    </div>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>是否需要Manufacturer's Certificate</td>
-                                <td class="text-left">
-                                    <div class="checkbox col-xs-3">
-                                        <label><input type="checkbox" /></label>
+                                        <label><input id="MC" type="checkbox" /></label>
                                     </div>
                                 </td>
                             </tr>
@@ -228,5 +211,123 @@
         </div>
     </div>
 </div>
+<input type="hidden" value=${customerId}>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
+<script>
+    $(function () {
+        var orderData;                                 //定义获取的数据
+        var optionNames = '';                          //定义产品种类集合
+        //var optionTypes = '';                         //定义单据类型集合
+        var newData = [];                              //定义新数据
+        var name = $('#name');                         //定义产品种类select控件
+        var documentaryType = $('documentaryType');    //定义单据类型select控件
+        //为获取的数据赋值
+        jQuery.ajax({
+            url:'${request.contextPath}/customerBaseInfoOrderRequire/getBillRequireList',
+            type:'POST',
+            data:GetRequest(),
+            async:false
+        }).done(function (result) {
+            orderData = result.data;
+        }).fail(function(result){
+            console.log('error:'+result.status);
+        });
+        //console.log(orderData);
+        //为新数据、产品种类、单据类型赋值
+        jQuery.each(orderData,function (n,item) {
+            var obj = {};
+            obj.name = item.name;
+            //obj.documentaryType = item.documentaryType;
+            obj.documentaryRequire = item.documentaryRequire;
+            obj.otherDocumentaryRequire = item.otherDocumentaryRequire;
+            obj.shippingAgentRequire = item.shippingAgentRequire;
+            obj.packageRequire = item.packageRequire;
+            obj.goodsType = obj.goodsType;
+            obj.mianxiangqi = obj.mianxiangqi;
+            obj.miantuiqi = obj.miantuiqi;
+            optionNames += '<option value="'+item.name+'"></option>';
+            //optionTypes += '<option value="'+item.documentaryType+'"></option>';
+            newData.push(obj);
+        });
+        //渲染产品种类select
+        name.append(optionNames);
+        //渲染单据类型select
+        //documentaryType.append(optionTypes);
+
+        $(document).on('change.screen','#name',function () {
+            var obj = {};
+            obj.name = name.val();
+            //obj.documentaryType = documentaryType.val();
+            screenData(obj,newData);
+        })
+
+    })
+
+function screenData(obj,data){
+    jQuery.each(data,function (n,item) {
+        if(obj.name == item.name){
+            //渲染数据
+            customerBillRequire(item);
+            //退出循环
+            return false;
+        }else {
+            //跳过，进行下一次循环
+            return true;
+        }
+    })
+}
+/**
+ *单据要求数据处理
+ */
+function customerBillRequire(data) {
+    $('#otherDocumentaryRequire').val(data.otherDocumentaryRequire);
+    var require = jQuery.parseJSON(data.documentaryRequire);
+
+    $('#oceanBillOfLading').prop('checked',require.oceanBillOfLading);
+    $('#freightBillOfLading').prop('checked',require.freightBillOfLading);
+    $('#invoice').prop('checked',require.invoice);
+    $('#packingLise').prop('checked',require.packingLise);
+    $('#warranty').prop('checked',require.warranty);
+    $('#dangerousPackage').prop('checked',require.dangerousPackage);
+    $('#favoree').prop('checked',require.favoree);
+    $('#fumigation').prop('checked',require.fumigation);
+    $('#MSDS').prop('checked',require.MSDS);
+    $('#tenderDocument').prop('checked',require.tenderDocument);
+    $('#examiningReport').prop('checked',require.examiningReport);
+    $('#packingDeclaration').prop('checked',require.packingDeclaration);
+    $('#ICWD').prop('checked',require.ICWD);
+    $('#MC').prop('checked',require.MC);
+
+    if(require.qualityPolicy && require.qualityPolicy!='' && require.qualityPolicy!=null){
+        var qua = jQuery.parseJSON(require.qualityPolicy);
+        $('#qualityPolicy').prop('checked',qua.selected);
+        $('#qualityPolicyTxt').val(qua.value);
+    }
+
+    if(require.COO && require.COO!='' && require.COO!=null){
+        var coo = jQuery.parseJSON(require.COO);
+        $('input').filter('[name="coo"]').val([coo.selected]);//单选
+        if($('#'+qua.selected).length!=0){
+            $('#'+qua.selected).val(coo.value);
+        }
+    }
+    if(require.telexRelease && require.telexRelease!='' && require.telexRelease!=null){
+        var telex = jQuery.parseJSON(require.telexRelease);
+        $('input').filter('[name="cotelexRelease"]').val([telex.selected]);//单选
+        $('#telexReleaseTxt').val(telex.value);
+    }
+}
+/**
+ *订舱出运要求数据处理
+ */
+function  customerTransportRequire(data) {
+    $('#shippingAgentRequire').val(data.shippingAgentRequire);
+    $('#goodsType').val(data.goodsType);
+    $('#mianxiangqi').val(data.mianxiangqi);
+    $('#miantuiqi').val(data.miantuiqi);
+}
+</script>
 
 
