@@ -2,7 +2,7 @@
  * Created by Loyun on 2017/3/20.
  */
 $(document).ready(function(){
-    getData(basePath + '/customerLinkman/getCustomerLinkmanDetailsById','POST',GetRequest(),customerContactsInfo());
+    getData(basePath + '/customerLinkman/getCustomerLinkmanDetailsById','POST',GetRequest(),customerContactsInfo);
 
     //编辑联系人基本信息
     $(document).on('click.edit','#edit',function () {
@@ -23,7 +23,7 @@ $(document).ready(function(){
 function customerContactsInfo(result) {
     console.log(result);
     var customerLinkman = result.customerLinkman;
-    var customerVisitRecords = result.linkmanVisitRecordVOS;
+    var customerVisitRecords = result.visitRecordVOS;
     var visitRecordsTable = document.getElementById('visitRecordsTable');
     if(customerLinkman){
         $('#name').attr('data-id',customerLinkman.linkmanId);
