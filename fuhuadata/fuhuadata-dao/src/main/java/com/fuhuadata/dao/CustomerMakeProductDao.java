@@ -18,10 +18,10 @@ public interface CustomerMakeProductDao {
 
     /**
      * 批量删除
-     * @param list
+     * @param customerId
      * @return
      */
-    public int deleteCustomerMakeProductByIds(List<Integer> list);
+    public int deleteCustomerMakeProductByCustomerId(String customerId);
 
     /**
      * 批量增加

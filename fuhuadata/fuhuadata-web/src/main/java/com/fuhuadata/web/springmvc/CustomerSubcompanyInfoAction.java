@@ -120,6 +120,7 @@ public class CustomerSubcompanyInfoAction {
             result.setSuccess(false);
             log.error("根据id更新子公司信息错误",e);
         }
+        result.setMessage("更新子公司信息成功");
         return result.getResultPojo();
     }
 }

@@ -14,7 +14,7 @@ public class CustomerMakeProductDaoImpl extends SqlMapClientTemplate implements 
     public static final String ADD = "CUSTOMERMAKEPRODUCT.ADD";
     public static final String UPDATE = "CUSTOMERMAKEPRODUCT.UPDATE";
     public static final String DELETE_BY_ID = "CUSTOMERMAKEPRODUCT.DELETE-BY-ID";
-    public static final String DELETE_BY_IDS = "CUSTOMERMAKEPRODUCT.DELETE-BY-IDS";
+    public static final String DELETE_BY_CUSTOMERID = "CUSTOMERMAKEPRODUCT.DELETE-BY-CUSTOMERID";
     public static final String GET_BY_QUERY = "CUSTOMERMAKEPRODUCT.GET-BY-QUERY";
     public static final String GET_BY_ID = "CUSTOMERMAKEPRODUCT.GET-BY-ID";
     public static final String COUNT = "CUSTOMERMAKEPRODUCT.COUNT";
@@ -38,8 +38,8 @@ public class CustomerMakeProductDaoImpl extends SqlMapClientTemplate implements 
     }
 
     @Override
-    public int deleteCustomerMakeProductByIds(List<Integer> list) {
-        return this.delete(DELETE_BY_IDS,list);
+    public int deleteCustomerMakeProductByCustomerId(String customerId) {
+        return this.delete(DELETE_BY_CUSTOMERID,customerId);
     }
 
     @Override

@@ -18,10 +18,10 @@ public interface CustomerMakeProductManager {
 
     /**
      * 批量删除
-     * @param list
+     * @param customerId
      * @return
      */
-    public boolean deleteCustomerMakeProductByIds(List<Integer> list);
+    public boolean deleteCustomerMakeProductByCustomerId(String customerId);
 
     /**
      * 批量增加

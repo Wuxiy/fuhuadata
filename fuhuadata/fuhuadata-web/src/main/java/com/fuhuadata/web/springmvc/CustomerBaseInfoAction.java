@@ -1,6 +1,7 @@
 package com.fuhuadata.web.springmvc;
 
 import com.fuhuadata.domain.CustomerBaseInfo;
+import com.fuhuadata.domain.CustomerEnterpriceNature;
 import com.fuhuadata.domain.CustomerMakeProduct;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.domain.query.Result;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -168,23 +170,20 @@ public class CustomerBaseInfoAction {
     @SystemLogAnnotation(module = "customerInfo-customerList",methods = "updateCustomerBaseInfo")
     @ResponseBody
     public ResultPojo updateCustomerBaseInfo(@RequestBody CustomerBaseInfoDO customerBaseInfoDO){
-        ResultPojo resultPojo = new ResultPojo();
+        Result result = new Result();
         CustomerBaseInfo customerBaseInfo = customerBaseInfoDO.getCustomerBaseInfo();
-        String id=customerBaseInfo.getCustomerId();
         CustomerMakeProduct[] customerMakeProducts = customerBaseInfoDO.getCustomerMakeProducts();
+        CustomerEnterpriceNature[] customerEnterpriceNatures = customerBaseInfoDO.getCustomerEnterpriceNatures();
         try{
-            customerBaseInfoService.updateCustomerBaseInfoById(id,customerBaseInfo);
-            try{
-                customerMakeProductService.updateCustomerMakeProducts(id,customerMakeProducts);
+            List<CustomerEnterpriceNature> list1 = Arrays.asList(customerEnterpriceNatures);
+            List<CustomerMakeProduct> list2 = Arrays.asList(customerMakeProducts);
+            result =  customerBaseInfoService.updateCustomerBaseInfo(list1,list2,customerBaseInfo);
             }catch(Exception e){
-                log.error("更新客户产品产能信息出错",e);
+                result.setSuccess(false);
+                log.error("更新客户信息错误");
             }
-            resultPojo.setCode(1);
-            resultPojo.setMessage("客户产品基本信息更新成功");
-        }catch (Exception e){
-            log.error("更新客户基本信息出错",e);
-        }
-        return resultPojo;
+            result.setMessage("更新客户信息成功");
+            return result.getResultPojo();
     }
 
 }

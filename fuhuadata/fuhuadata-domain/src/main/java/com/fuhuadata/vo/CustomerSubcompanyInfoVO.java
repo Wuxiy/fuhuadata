@@ -12,6 +12,9 @@ public class CustomerSubcompanyInfoVO {
 
     private CustomerEnterpriceNature[] customerEnterpriceNatures;//子公司企业性质
 
+    public CustomerSubcompanyInfoVO() {
+    }
+
     public CustomerSubcompanyInfo getCustomerSubcompanyInfo() {
         return customerSubcompanyInfo;
     }

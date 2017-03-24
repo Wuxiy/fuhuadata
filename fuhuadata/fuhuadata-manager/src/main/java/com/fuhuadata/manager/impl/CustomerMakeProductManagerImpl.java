@@ -31,9 +31,8 @@ public class CustomerMakeProductManagerImpl implements CustomerMakeProductManage
     }
 
     @Override
-    public boolean deleteCustomerMakeProductByIds(List<Integer> list) {
-        int flag=customerMakeProductDao.deleteCustomerMakeProductByIds(list);
-        return flag==list.size()?true :false;
+    public boolean deleteCustomerMakeProductByCustomerId(String customerId) {
+        return  customerMakeProductDao.deleteCustomerMakeProductByCustomerId(customerId)==0?false:true;
     }
 
     @Override
