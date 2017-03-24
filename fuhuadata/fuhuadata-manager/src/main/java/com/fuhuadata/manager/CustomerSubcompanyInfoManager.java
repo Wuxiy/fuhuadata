@@ -1,5 +1,7 @@
 package com.fuhuadata.manager;
 import java.util.List;
+
+import com.fuhuadata.domain.CustomerEnterpriceNature;
 import com.fuhuadata.domain.query.QueryCustomerSubcompanyInfo;
 import com.fuhuadata.domain.CustomerSubcompanyInfo;
 import com.fuhuadata.domain.query.Result;
@@ -23,7 +25,7 @@ public interface CustomerSubcompanyInfoManager {
      * @param customerSubcompanyInfo
      * @return
      */
-    public boolean updateCustomerSubcompanyInfoById(int customer_sub_id, CustomerSubcompanyInfo customerSubcompanyInfo);
+    public boolean updateCustomerSubcompanyInfoById(List<CustomerEnterpriceNature> list, CustomerSubcompanyInfo customerSubcompanyInfo);
 
     /**
      * 按照主键id 删除 记录

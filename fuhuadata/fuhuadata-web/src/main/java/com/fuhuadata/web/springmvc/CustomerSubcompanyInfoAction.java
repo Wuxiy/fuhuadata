@@ -1,9 +1,11 @@
 package com.fuhuadata.web.springmvc;
 
+import com.fuhuadata.domain.CustomerEnterpriceNature;
 import com.fuhuadata.domain.CustomerSubcompanyInfo;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.CustomerSubcompanyInfoService;
+import com.fuhuadata.vo.CustomerSubcompanyInfoVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -14,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -97,16 +102,20 @@ public class CustomerSubcompanyInfoAction {
 
     /**
      *  do update
-     * @param customerSubcompanyInfo
+     * @param customerSubcompanyInfoVO
      * @return
      */
     @RequestMapping(value="/updateCustomerSubcompanyInfoById",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "customerInfo-CustomerSubcompanyInfo",methods = "Update")
     @ResponseBody
-    public ResultPojo updateCustomerSubcompanyInfo(@RequestBody CustomerSubcompanyInfo customerSubcompanyInfo){
+    public ResultPojo updateCustomerSubcompanyInfo(@RequestBody CustomerSubcompanyInfoVO customerSubcompanyInfoVO){
         Result<CustomerSubcompanyInfo> result = new Result<CustomerSubcompanyInfo>();
+        List<CustomerEnterpriceNature> list = new ArrayList<CustomerEnterpriceNature>();
         try{
-            result=customerSubcompanyInfoService.updateCustomerSubcompanyInfoById (customerSubcompanyInfo.getCustomerSubId(),customerSubcompanyInfo);
+            list = Arrays.asList(customerSubcompanyInfoVO.getCustomerEnterpriceNatures());
+            if(list!=null&&list.size()>0&&customerSubcompanyInfoVO.getCustomerSubcompanyInfo()!=null) {
+                result = customerSubcompanyInfoService.updateCustomerSubcompanyInfoById(list, customerSubcompanyInfoVO.getCustomerSubcompanyInfo());
+            }
         }catch(Exception e){
             result.setSuccess(false);
             log.error("根据id更新子公司信息错误",e);
