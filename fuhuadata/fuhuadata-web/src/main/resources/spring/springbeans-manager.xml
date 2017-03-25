@@ -31,4 +31,6 @@
 	<bean id="recordLinkmanManager" class="com.fuhuadata.manager.impl.RecordLinkmanManagerImpl"/>
 	<bean id="customerVisitRecordManager" class="com.fuhuadata.manager.impl.CustomerVisitRecordManagerImpl"/>
 	<bean id="customerSubcompanyInfoManager" class="com.fuhuadata.manager.impl.CustomerSubcompanyInfoManagerImpl"/>
+	<bean id="businessInfoManager" class="com.fuhuadata.manager.impl.BusinessInfoManagerImpl"/>
+	<bean id="businessRecordManager" class="com.fuhuadata.manager.impl.BusinessRecordManagerImpl"/>
 </beans>

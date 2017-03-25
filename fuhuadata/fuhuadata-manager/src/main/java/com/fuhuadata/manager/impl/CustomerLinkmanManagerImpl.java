@@ -13,6 +13,7 @@ import com.ibatis.sqlmap.client.SqlMapClient;
 import com.ibatis.sqlmap.engine.mapping.sql.Sql;
 import com.sun.scenario.effect.impl.state.LinearConvolveKernel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -27,51 +28,51 @@ public class CustomerLinkmanManagerImpl implements CustomerLinkmanManager {
 	@Resource
     private CustomerLinkmanDao customerLinkmanDao;
 
-	@Autowired
-	private SqlMapClient sqlMapClient;
-    
 
+
+	/**
+	 *  do add
+	 * @param customerLinkman
+	 * @return
+	 */
+	@Transactional
     public CustomerLinkman addCustomerLinkman(CustomerLinkman customerLinkman) {
-    	//设置字符串主键
-    	String linkmanId = customerLinkmanDao.getMaxLinkmanIdByCustomerId(customerLinkman.getCustomerId());
-    	customerLinkman.setLinkmanId(StringUtil.increment(linkmanId,3));
-    	return customerLinkmanDao.addCustomerLinkman(customerLinkman);
-    }
-    
-    public boolean updateCustomerLinkmanById(String linkman_id, CustomerLinkman customerLinkman) {
-    	boolean flag = false;
-    	try{
-			sqlMapClient.startTransaction();//事务开始
+		try {
 			CustomerLinkman customerLinkmandefault = customerLinkmanDao.getCustomerLinkmanDefaultByCustomerId(customerLinkman.getCustomerId());
-			if(customerLinkmandefault!=null&&customerLinkman.getIsDefault()==1){
+			//设置字符串主键
+			String linkmanId = customerLinkmanDao.getMaxLinkmanIdByCustomerId(customerLinkman.getCustomerId());
+			customerLinkman.setLinkmanId(StringUtil.increment(linkmanId, 3));
+			if (customerLinkmandefault != null && customerLinkman.getIsDefault() == 1) {
 				customerLinkmandefault.setIsDefault(0);
-				customerLinkmanDao.updateCustomerLinkmanById(customerLinkmandefault.getLinkmanId(),customerLinkmandefault);
-				flag=customerLinkmanDao.updateCustomerLinkmanById(linkman_id,customerLinkman)==1?true:false;
+				customerLinkmanDao.updateCustomerLinkmanById(customerLinkmandefault.getLinkmanId(), customerLinkmandefault);
+				customerLinkman = customerLinkmanDao.addCustomerLinkman(customerLinkman);
+			} else if (customerLinkmandefault == null) {
+				customerLinkman.setIsDefault(1);
+				customerLinkman = customerLinkmanDao.addCustomerLinkman(customerLinkman);
+			} else {
+				customerLinkman = customerLinkmanDao.addCustomerLinkman(customerLinkman);
 			}
-			else if(customerLinkmandefault==null||customerLinkman.getLinkmanId()==customerLinkmandefault.getLinkmanId()) {
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+    	return customerLinkman;
+    }
+
+    @Transactional
+    public boolean updateCustomerLinkmanById(String linkman_id, CustomerLinkman customerLinkman) {
+    		boolean flag = false;
+			CustomerLinkman customerLinkmandefault = customerLinkmanDao.getCustomerLinkmanDefaultByCustomerId(customerLinkman.getCustomerId());
+			if (customerLinkmandefault != null && customerLinkman.getIsDefault() == 1) {
+				customerLinkmandefault.setIsDefault(0);
+				customerLinkmanDao.updateCustomerLinkmanById(customerLinkmandefault.getLinkmanId(), customerLinkmandefault);
+				flag = customerLinkmanDao.updateCustomerLinkmanById(linkman_id, customerLinkman) == 1 ? true : false;
+			} else if (customerLinkmandefault == null || customerLinkman.getLinkmanId() == customerLinkmandefault.getLinkmanId()) {
 				customerLinkman.setIsDefault(1);
 				flag = customerLinkmanDao.updateCustomerLinkmanById(linkman_id, customerLinkman) == 1 ? true : false;
+			} else {
+				flag = customerLinkmanDao.updateCustomerLinkmanById(linkman_id, customerLinkman) == 1 ? true : false;
 			}
-			 else{
-				flag=customerLinkmanDao.updateCustomerLinkmanById(linkman_id,customerLinkman)==1?true:false;
-			}
-			sqlMapClient.commitTransaction();//事务提交
-
-		}catch(Exception e){
-    		e.printStackTrace();
-    		try{
-				sqlMapClient.getCurrentConnection().rollback();//事务回滚
-			}catch(Exception e2){
-    			e2.printStackTrace();
-			}
-		}finally {
-			try {
-				sqlMapClient.endTransaction();//事务结束
-			}catch(Exception e3){
-				e3.printStackTrace();
-			}
-		}
-		return flag;
+			return flag;
 
     }
     

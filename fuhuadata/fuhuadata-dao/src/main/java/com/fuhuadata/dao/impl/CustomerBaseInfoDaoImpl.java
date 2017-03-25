@@ -8,6 +8,7 @@ import com.fuhuadata.domain.CustomerEnterpriceNature;
 import com.fuhuadata.domain.CustomerMakeProduct;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
+import com.ibatis.sqlmap.client.SqlMapClient;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
@@ -34,6 +35,8 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
     private static final String BATCH_ADD_NATURE="CUSTOMERBASEINFO.BATCH-ADD-NATURE";
     private static final String DELETE_NATURE_BY_CUSTOMERID="CUSTOMERBASEINFO.DELETE-NATURE-BY-CUSTOMERID";
 
+
+
     public CustomerBaseInfo addCustomerBaseInfo(CustomerBaseInfo customerBaseInfo) {
 		customerBaseInfo.setCustomerId((String) this.insert(ADD, customerBaseInfo));
     	return customerBaseInfo;
@@ -45,7 +48,7 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
     }
 
     /**
-     * 批量更新企业性质
+     * 批量新增企业性质
      * @param customerEnterpriceNatures
      * @return
      */

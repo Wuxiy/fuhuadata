@@ -15,6 +15,7 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -30,8 +31,6 @@ public class CustomerBaseInfoManagerImpl implements CustomerBaseInfoManager {
 
 	@Resource
 	private CustomerMakeProductDao customerMakeProductDao;
-	@Autowired
-	private SqlMapClient sqlMapClient;
     
 
     public CustomerBaseInfo addCustomerBaseInfo(CustomerBaseInfo customerBaseInfo) {
@@ -50,30 +49,16 @@ public class CustomerBaseInfoManagerImpl implements CustomerBaseInfoManager {
 	public boolean updateCustomerBaseInfoById(String customerId,CustomerBaseInfo customerBaseInfo){
 		return customerBaseInfoDao.updateCustomerBaseInfoById(customerId,customerBaseInfo)==1?true : false;
 	}
+	@Transactional
 	public boolean updateCustomerBaseInfo(List<CustomerEnterpriceNature> customerEnterpriceNatures, List<CustomerMakeProduct> customerMakeProducts , CustomerBaseInfo customerBaseInfo) {
 		boolean flag= false;
-		try{
-			//事务处理
-			sqlMapClient.startTransaction();
+
 			customerBaseInfoDao.deleteCustomerEnterpriceNatureByCustomerId(customerBaseInfo.getCustomerId());
 			customerBaseInfoDao.batchAddNature(customerEnterpriceNatures);
 			customerMakeProductDao.deleteCustomerMakeProductByCustomerId(customerBaseInfo.getCustomerId());
 			customerMakeProductDao.addCustomerMakeProducts(customerMakeProducts);
 			flag =  customerBaseInfoDao.updateCustomerBaseInfoById(customerBaseInfo.getCustomerId(), customerBaseInfo) == 1 ? true : false;
-		}catch(Exception e){
-			e.printStackTrace();
-			try{
-				sqlMapClient.getCurrentConnection().rollback();
-			}catch(Exception e1){
-				e1.printStackTrace();
-			}
-		}finally {
-			try{
-				sqlMapClient.endTransaction();
-			}catch (Exception e2){
-				e2.printStackTrace();
-			}
-		}
+
 		return flag;
     }
     

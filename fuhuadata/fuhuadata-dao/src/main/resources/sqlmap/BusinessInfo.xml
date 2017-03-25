@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="BUSINESSINFO">
+    <typeAlias alias="BusinessInfo" type="com.fuhuadata.domain.BusinessInfo"/>
+    <typeAlias alias="QueryBusinessInfo" type="com.fuhuadata.domain.query.QueryBusinessInfo"/>
+    <resultMap id="BUSINESSINFO-MAP" class="BusinessInfo">
+        <result column="business_id" jdbcType="VARCHAR" property="businessId" javaType="java.lang.String"/>
+        <result column="customer_id" jdbcType="VARCHAR" property="customerId" javaType="java.lang.String"/>
+        <result column="business_name" jdbcType="VARCHAR" property="businessName" javaType="java.lang.String"/>
+        <result column="customer_name" jdbcType="VARCHAR" property="customerName" javaType="java.lang.String"/>
+        <result column="business_from" jdbcType="INTEGER" property="businessFrom" javaType="java.lang.Integer"/>
+        <result column="business_state" jdbcType="INTEGER" property="businessState" javaType="java.lang.Integer"/>
+        <result column="expect_income" jdbcType="DECIMAL" property="expectIncome" javaType="java.math.BigDecimal"/>
+        <result column="deadline" jdbcType="DATE" property="deadline" javaType="java.sql.Date"/>
+        <result column="Intentional_products" jdbcType="VARCHAR" property="intentionalProducts" javaType="java.lang.String"/>
+        <result column="business_describe" jdbcType="VARCHAR" property="businessDescribe" javaType="java.lang.String"/>
+        <result column="business_remarks" jdbcType="VARCHAR" property="businessRemarks" javaType="java.lang.String"/>
+        <result column="fail_reason" jdbcType="VARCHAR" property="failReason" javaType="java.lang.String"/>
+        <result column="create_user_id" jdbcType="INTEGER" property="createUserId" javaType="java.lang.Integer"/>
+        <result column="create_user_name" jdbcType="VARCHAR" property="createUserName" javaType="java.lang.String"/>
+        <result column="lastmodify_user_id" jdbcType="INTEGER" property="lastmodifyUserId" javaType="java.lang.Integer"/>
+        <result column="lastmodify_user_name" jdbcType="VARCHAR" property="lastmodifyUserName" javaType="java.lang.String"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" javaType="java.sql.Timestamp"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" javaType="java.sql.Timestamp"/>
+    </resultMap>
+
+    <sql id="PAGE-COMMON">
+        <dynamic prepend=" WHERE">
+            <isNotNull prepend=" AND " property="businessId">
+                business_id = #businessId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="customerId">
+                customer_id = #customerId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="businessName">
+                business_name = #businessName#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="customerName">
+                customer_name = #customerName#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="businessFrom">
+                business_from = #businessFrom#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="businessState">
+                business_state = #businessState#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="expectIncome">
+                expect_income = #expectIncome#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="deadline">
+                deadline = #deadline#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="intentionalProducts">
+                Intentional_products = #intentionalProducts#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="businessDescribe">
+                business_describe = #businessDescribe#
+              </isNotNull>
+            <isNotNull prepend=" AND " property="businessRemarks">
+                business_remarks = #businessRemarks#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="failReason">
+                fail_reason = #failReason#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="createUserId">
+                create_user_id = #createUserId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="createUserName">
+                create_user_name = #createUserName#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="lastmodifyUserId">
+                lastmodify_user_id = #lastmodifyUserId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="lastmodifyUserName">
+                lastmodify_user_name = #lastmodifyUserName#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="createTime">
+                create_time = #createTime#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="modifyTime">
+                modify_time = #modifyTime#
+            </isNotNull>
+        </dynamic>
+    </sql>
+
+    <sql id="QUERY-COMMON">
+        <dynamic prepend=" WHERE">
+            <isNotNull prepend=" AND " property="businessId">
+                business_id = #businessId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="customerId">
+                customer_id = #customerId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="businessName">
+                business_name = #businessName#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="customerName">
+                customer_name = #customerName#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="businessFrom">
+                business_from = #businessFrom#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="businessState">
+                business_state = #businessState#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="expectIncome">
+                expect_income = #expectIncome#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="deadline">
+                deadline = #deadline#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="intentionalProducts">
+                Intentional_products = #intentionalProducts#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="businessDescribe">
+                business_describe = #businessDescribe#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="businessRemarks">
+                business_remarks = #businessRemarks#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="failReason">
+                fail_reason = #failReason#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="createUserId">
+                create_user_id = #createUserId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="createUserName">
+                create_user_name = #createUserName#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="lastmodifyUserId">
+                lastmodify_user_id = #lastmodifyUserId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="lastmodifyUserName">
+                lastmodify_user_name = #lastmodifyUserName#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="createTime">
+                create_time = #createTime#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="modifyTime">
+                modify_time = #modifyTime#
+            </isNotNull>
+        </dynamic>
+    </sql>
+
+    <insert id="ADD" parameterClass="BusinessInfo">
+        insert into business_info (business_id, customer_id, business_name,
+        customer_name, business_from, business_state,
+        expect_income, deadline, Intentional_products,
+        business_describe, business_remarks, fail_reason,
+        create_user_id, create_user_name, lastmodify_user_id,
+        lastmodify_user_name, create_time, modify_time
+        )
+        values (#businessId#, #customerId#, #businessName#,
+        #customerName#, #businessFrom#, #businessState#,
+        #expectIncome#, #deadline#, #intentionalProducts#,
+        #businessDescribe#, #businessRemarks#, #failReason#,
+        #createUserId#, #createUserName#, #lastmodifyUserId#,
+        #lastmodifyUserName#, #createTime#, #modifyTime#
+        )
+    </insert>
+
+    <update id="UPDATE" parameterClass="BusinessInfo">
+        UPDATE business_info
+        <dynamic prepend=" SET ">
+            <isNotNull prepend=", " property="businessId">
+                business_id = #businessId#
+            </isNotNull>
+            <isNotNull prepend=", " property="customerId">
+                customer_id = #customerId#
+            </isNotNull>
+            <isNotNull prepend=", " property="businessName">
+                business_name = #businessName#
+            </isNotNull>
+            <isNotNull prepend=", " property="customerName">
+                customer_name = #customerName#
+            </isNotNull>
+            <isNotNull prepend=", " property="businessFrom">
+                business_from = #businessFrom#
+            </isNotNull>
+            <isNotNull prepend=", " property="businessState">
+                business_state = #businessState#
+            </isNotNull>
+            <isNotNull prepend=", " property="expectIncome">
+                expect_income = #expectIncome#
+            </isNotNull>
+            <isNotNull prepend=", " property="deadline">
+                deadline = #deadline#
+            </isNotNull>
+            <isNotNull prepend=", " property="intentionalProducts">
+                Intentional_products = #intentionalProducts#
+            </isNotNull>
+            <isNotNull prepend=", " property="businessDescribe">
+                business_describe = #businessDescribe#
+            </isNotNull>
+            <isNotNull prepend=", " property="businessRemarks">
+                business_remarks = #businessRemarks#
+            </isNotNull>
+            <isNotNull prepend=", " property="failReason">
+                fail_reason = #failReason#
+            </isNotNull>
+            <isNotNull prepend=", " property="createUserId">
+                create_user_id = #createUserId#
+            </isNotNull>
+            <isNotNull prepend=", " property="createUserName">
+                create_user_name = #createUserName#
+            </isNotNull>
+            <isNotNull prepend=", " property="lastmodifyUserId">
+                lastmodify_user_id = #lastmodifyUserId#
+            </isNotNull>
+            <isNotNull prepend=" , " property="lastmodifyUserName">
+                lastmodify_user_name = #lastmodifyUserName#
+            </isNotNull>
+            <isNotNull prepend=", " property="createTime">
+                create_time = #createTime#
+            </isNotNull>
+            <isNotNull prepend=", " property="modifyTime">
+                modify_time = #modifyTime#
+            </isNotNull>
+        </dynamic>
+    </update>
+
+    <delete id="DELETE-BY-ID" parameterClass="java.lang.String">
+        <![CDATA[
+           DELETE FROM business_info WHERE business_id=#businessId#
+    ]]>
+    </delete>
+
+
+    <select id="GET-BY-ID" resultMap="BUSINESSINFO-MAP" parameterClass="java.lang.String">
+        <![CDATA[
+            SELECT * FROM business_info WHERE business_id=#businessId#
+    ]]>
+    </select>
+
+    <select id="GET-BY-CUSTOMERID" resultMap="BUSINESSINFO-MAP" parameterClass="java.lang.String">
+        <![CDATA[
+            SELECT * FROM business_info WHERE customer_id=#customerId#
+    ]]>
+    </select>
+
+    <select id="GET-BY-QUERY" resultMap="BUSINESSINFO-MAP" parameterClass="QueryBusinessInfo">
+        <![CDATA[
+            SELECT * FROM business_info
+    ]]>
+        <isParameterPresent>
+            <include refid="QUERY-COMMON"/>
+        </isParameterPresent>
+    </select>
+
+    <select id="GET-PAGE" resultMap="BUSINESSINFO-MAP" parameterClass="QueryBusinessInfo">
+        <![CDATA[
+            SELECT * FROM business_info
+    ]]>
+        <isParameterPresent>
+            <include refid="PAGE-COMMON"/>
+        </isParameterPresent>
+        LIMIT #startRow#,#pageSize#
+    </select>
+
+    <select id="COUNT" resultClass="java.lang.Integer" parameterClass="QueryBusinessInfo">
+        <![CDATA[
+            SELECT COUNT(*) FROM business_info
+    ]]>
+        <isParameterPresent>
+            <include refid="PAGE-COMMON"/>
+        </isParameterPresent>
+    </select>
+</sqlMap>
