@@ -11,6 +11,7 @@ function pop(result){
     csps(data);
     //获取合作情况
     var coop = data.cooperation;
+
     $('#priceSensitivity').val(coop.priceSensitivity);//价格敏感度
     $('#purchasingSeason').val(coop.purchasingSeason);//采购季节
     $('#isFuhuaExclusive').val(coop.isFuhuaExclusive);//合作紧密度

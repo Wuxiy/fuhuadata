@@ -63,7 +63,7 @@ $(function () {
     //客户基本信息取消提交
     $(document).on('click.cancel','#cancelCustomerBasic',function(){
         //重新获取数据
-        getData(basePath+'/customerBaseInfo/showCustomerBaseInfoDetails','POST',GetRequest(),customerBasicInfo);
+        location.reload();
     });
     $(document).on('click.edit','#editEncyclopedia',function () {
         //添加删除按钮
