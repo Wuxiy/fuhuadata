@@ -9,9 +9,16 @@ $(document).ready(function(){
     });
     //联系人基本信息提交
     $(document).on('click.up','#save',function(){
-        //提交数据
-        upData(basePath+'/customerLinkman/updateById','POST',updateContactsInfo(),"application/json");
-
+        var notnull = $('.notnull');
+        notnull.each(function(){
+            var val = $(this).val();
+            if(val == ''||val == null){
+                alert('请完善表单必填项');
+                return false;
+            }else{
+                upData(basePath+'/customerLinkman/updateById','POST',updateContactsInfo(),"application/json");
+            }
+        })
     });
     //客户基本信息取消提交
     $(document).on('click.cancel','#cancel',function(){

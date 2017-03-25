@@ -8,14 +8,37 @@ $(document).ready(function(){
     //新增提交
     $(document).on('click.up','#addanothername',function(){
         //提交数据
-        upData(basePath+'/customerSubcompanyInfo/addCustomerSubcompanyInfo','POST',addAnotherName(),"application/json");
-        location.reload();
+        var fullNameAdd = $('#fullNameAdd').val();
+        var xingzhiAdd = $("input[name='checkAdd']:checked");
+        var propertyRemarksAdd = $('#propertyRemarksAdd').val();
+        if(fullNameAdd == ''||xingzhiAdd.length<0){
+            alert('请完善表单必填项');
+            return false;
+        }else if($("#other:checked")&&propertyRemarksAdd == ''){
+            alert('请输入企业性质备注');
+            return false;
+        }else{
+            upData(basePath+'/customerSubcompanyInfo/addCustomerSubcompanyInfo','POST',addAnotherName(),"application/json");
+            location.reload();
+        }
     });
     //更新提交
     $(document).on('click.up','#updateinfo',function(){
         //提交数据
-        upData(basePath+'/customerSubcompanyInfo/updateCustomerSubcompanyInfoById','POST',updateInfo(),"application/json");
-        /*location.reload();*/
+        var fullName = $('#fullName').val();
+        var xingzhi = $("input[name='check']:checked");
+        var propertyRemarks = $('#propertyRemarks').val();
+        if(fullName == ''||xingzhi.length<0){
+            alert('请完善表单必填项');
+            return false;
+        }else if($("#otherAdd:checked")&&propertyRemarks == ''){
+            alert('请输入企业性质必填项');
+            return false;
+        }else{
+            upData(basePath+'/customerSubcompanyInfo/updateCustomerSubcompanyInfoById','POST',updateInfo(),"application/json");
+            /*location.reload();*/
+        }
+
     });
 })
 
@@ -121,27 +144,41 @@ function addAnotherName() {
             "lastmodifyUserId": 1,
             "lastmodifyUserName": "胡向阳"
         },
-        "customerEnterpriceNatures":checkboxAdd()
+        "customerEnterpriceNatures":checkboxarrAdd()
     }
     console.log(data);
     return JSON.stringify(data);
 }
-
+/*
 function checkboxAddtext(){
     var arr = "";
     $("input[name='checkAdd']:checked").each(function(){
-        var a = $(this).attr('data-text');
+        var a = $(this).attr('data-textAdd');
         arr += a;
     })
     console.log(arr);
     return JSON.stringify(arr);
+}*/
+
+function checkboxarrAdd() {
+    var checkboxarrAdd= [];
+    var obj;
+    $("input[name='checkAdd']:checked").each(function(){
+        obj = {
+            "customerId":sid,
+            "type": "2",
+            "nature": $(this).val()
+        }
+        checkboxarrAdd.push(obj);
+    })
+    return checkboxarrAdd;
 }
 
-function checkboxAdd() {
+function checkboxAddtext() {
     var a = [];
     var b;
     $("input[name='checkAdd']:checked").each(function(){
-        a.push($(this).attr('data-text'));
+        a.push($(this).attr('data-textAdd'));
     })
     b = a.join(',');
     console.log(b);

@@ -65,7 +65,7 @@
                         <div class="panel-body clearfix">
                             <div class="form-horizontal">
                                 <div class="form-group ">
-                                    <label class="col-xs-1 control-label">开始时间</label>
+                                    <label class="col-xs-1 control-label">开始时间<sup class="not-null">*</sup></label>
                                     <div class="col-xs-4">
                                         <input class="form-control" type="datetime-local" id="startTime"/>
                                     </div>
@@ -79,13 +79,13 @@
                                     <div class="col-xs-4">
                                         <input class="form-control" type="text" id="activityAddress"/>
                                     </div>
-                                    <label class="col-xs-1 control-label col-xs-offset-1">费用(元)</label>
+                                    <label class="col-xs-1 control-label col-xs-offset-1">费用(元)<sup class="not-null">*</sup></label>
                                     <div class="col-xs-4">
                                         <input class="form-control" type="text" id="activityExpense"/>
                                     </div>
                                 </div>
                                 <div class="form-group ">
-                                    <label class="col-xs-1 control-label">活动类型</label>
+                                    <label class="col-xs-1 control-label">活动类型<sup class="not-null">*</sup></label>
                                     <div class="col-xs-4">
                                         <select class="form-control" name="items" id="activityType">
                                             <option  value="0">远程沟通</option>

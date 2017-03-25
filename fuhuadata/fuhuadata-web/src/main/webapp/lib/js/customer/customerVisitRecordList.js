@@ -8,8 +8,21 @@ $(document).ready(function(){
     //新增提交
     $(document).on('click.up','#addVisit',function(){
         //提交数据
-        upData(basePath+'/customerVisitRecord/addCustomerVisitRecord','POST',addVisit(),"application/json");
-        location.reload();
+        var startTime = $('#startTime').val();
+        var activityExpense = $('#activityExpense').val();
+        var activityType = $('#activityType').val();
+        var activityRemarks = $('#activityRemarks').val();
+        if(startTime == ''||activityExpense == ''||activityType == ''){
+            alert('请完善表单必填项');
+            return false;
+        }else if(activityType == 5 && activityRemarks == ''){
+            alert('请填写其他活动类型备注');
+            return false;
+        }else{
+            upData(basePath+'/customerVisitRecord/addCustomerVisitRecord','POST',addVisit(),"application/json");
+            location.reload();
+        }
+
     });
 })
 var id = document.URL.split('?')[1];
