@@ -66,7 +66,7 @@
         $('#tree').creatTree('${request.contextPath}/packingCategory/CategoryTree');
         $('#tree').filtrateData('${request.contextPath}/packingArchives/getPackingArchivesByPId',"container","packingArchivesList");
         jQuery.ajax({
-            url:'/packingArchives/getPackingArchivesByPId',
+            url:'${request.contextPath}/packingArchives/getPackingArchivesByPId',
             type:'POST',
             data:{id:1}
         }).done(packingArchivesList);
@@ -103,7 +103,7 @@
 
         jQuery.each(ResultData,function(n,item){
             var parent  = $('#container');
-            var tr = '<tr><td>'+item.packingId+'</td><td><a href="/packingArchives/getDetails?id='+item.packingId+'&bid='+item.bigCategoryId+'&sid='+item.smallCategoryId+'" class="packName">'+item.packName+'</a></td><td>'+item.spec+'</td><td>'+item.quality+'</td><td>'+item.qualityIndex+'</td><td>'+item.qualityTargetValue+'</td><td>'+item.unitPrice+'</td><td>'+item.priceEndDate+'</td><td>'+replace(item.suitableType)+'</td><td>'+item.bRemarks+'</td><td>'+item.status+'</td></tr>';
+            var tr = '<tr><td>'+item.packingId+'</td><td><a href="${request.contextPath}/packingArchives/getDetails?id='+item.packingId+'&bid='+item.bigCategoryId+'&sid='+item.smallCategoryId+'" class="packName">'+item.packName+'</a></td><td>'+item.spec+'</td><td>'+item.quality+'</td><td>'+item.qualityIndex+'</td><td>'+item.qualityTargetValue+'</td><td>'+item.unitPrice+'</td><td>'+item.priceEndDate+'</td><td>'+replace(item.suitableType)+'</td><td>'+item.bRemarks+'</td><td>'+item.status+'</td></tr>';
             $(tr).appendTo(parent);
         })
     }
