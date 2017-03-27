@@ -642,6 +642,7 @@
 	<select id="GET-CUSTOMER-BILL-REQUIREMENT" resultClass="CustomerProductArchives" parameterClass="java.lang.String">
 		select
 				name,
+				product_id productId,
 				documentary_require documentaryRequire ,
 				other_documentary_require otherDocumentaryRequire
 		from
@@ -653,6 +654,7 @@
 	<select id="GET-CUSTOMER-TRANSPORT-REQUIREMENT" resultClass="CustomerProductArchives" parameterClass="java.lang.String">
 		select
 				name,
+				product_id productId,
 				shipping_agent_require shippingAgentRequire ,
 				package_require packageRequire,
 				goods_type goodsType,

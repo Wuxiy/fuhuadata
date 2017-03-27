@@ -17,7 +17,7 @@
                 <!--单据要求-->
                 <div class="panel panel-default panel-edit view-HD-md">
                     <div class="panel-heading">
-                        <div class="input-group panel-heading-btn col-xs-8 pull-right">
+                        <div class="input-group panel-heading-btn col-xs-4 pull-right">
                             <span class="input-group-addon" lang="zh">产品种类</span>
                             <select id="name" class="form-control"></select>
                         </div>
@@ -65,11 +65,11 @@
                             <tr>
                                 <td lang="zh">是否需要质检单</td>
                                 <td class="text-left">
-                                    <div class="checkbox col-xs-3">
+                                    <div class="checkbox col-xs-2">
                                         <label><input id="qualityPolicy" type="checkbox" /></label>
                                     </div>
-                                    <div class="col-xs-3">
-                                        <input id="qualityPolicyTxt" type="text" class="form-control">
+                                    <div class="col-xs-4">
+                                        <input id="qualityPolicyTxt" type="text" class="form-control" placeholder="请输入公司抬头">
                                     </div>
                                 </td>
                             </tr>
@@ -85,22 +85,25 @@
                             <tr>
                                 <td lang="zh">是否出COO</td>
                                 <td class="text-left">
-                                    <div class="checkbox col-xs-12">
-                                        <label><input name="coo" type="radio" value="CIATB"/>商检局</label>
-                                        <label><input name="CIATB" type="radio" value="a"/>FORM A</label>
-                                        <label><input name="CIATB" type="radio" value="e"/>FORM E</label>
-                                        <label><input name="CIATB" type="radio" value="p"/>FORM P</label>
-                                        <label><input name="CIATB" type="radio" value="au"/>FORM AU</label>
+                                    <div class=" col-xs-2">
+                                        <label class="checkbox-inline"><input name="coo" type="checkbox" value="CIATB"/>商检局</label>
                                     </div>
-                                    <div class="checkbox col-xs-12">
-                                        <label><input name="coo" type="radio" value="CCPIT"/>贸促会</label>
+                                    <div class="col-xs-10">
+                                        <label class="radio-inline"><input name="CIATB" type="radio" value="a"/>FORM A</label>
+                                        <label class="radio-inline"><input name="CIATB" type="radio" value="e"/>FORM E</label>
+                                        <label class="radio-inline"><input name="CIATB" type="radio" value="p"/>FORM P</label>
+                                        <label class="radio-inline"><input name="CIATB" type="radio" value="au"/>FORM AU</label>
                                     </div>
-                                    <div class="checkbox col-xs-2">
-                                        <label><input name="coo" type="radio" value="general"/>普通</label>
-                                        <input id="general" class="form-control" type="text" />
+                                    <div class="col-xs-12">
+                                        <label class="checkbox-inline" style="padding-top: 3px"><input name="coo" type="checkbox" value="CCPIT"/>贸促会</label>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <label class="checkbox-inline" style="padding-top: 3px"><input name="coo" type="checkbox" value="general" />普通</label>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <input id="general" class="form-control" type="text" placeholder="请输入公司抬头"/>
                                     </div>
                                 </td>
-
                             </tr>
                             <tr>
                                 <td lang="zh">是否需要危包证</td>
@@ -141,13 +144,13 @@
                             <tr>
                                 <td lang="zh">提单是否电放</td>
                                 <td class="form-group text-left">
-                                    <div class="checkbox col-xs-3">
-                                        <label><input name="telexRelease" type="radio" value="0" checked /><span lang="zh">直接电放</span></label>
+                                    <div class="checkbox col-xs-2">
+                                        <label><input name="telexRelease" type="checkbox" value="0" /><span lang="zh">直接电放</span></label>
                                     </div>
                                     <div class="checkbox col-xs-3">
-                                        <label><input name="telexRelease" type="radio" value="1" checked /><span lang="zh">正本出后电放</span></label>
+                                        <label><input name="telexRelease" type="checkbox" value="1" /><span lang="zh">正本出后电放</span></label>
                                     </div>
-                                    <div class="col-xs-3"><input id="telexReleaseTxt" class="form-control" type="text" value="" placeholder="输入放单目的港" lang="zh" /></div>
+                                    <div class="col-xs-4"><input id="telexReleaseTxt" class="form-control" type="text" value="" placeholder="输入放单目的港" lang="zh" /></div>
                                 </td>
 
                             </tr>
@@ -200,8 +203,8 @@
                         <div class="form-horizontal">
                             <div class="form-group">
                                 <label class="control-label col-xs-2" lang="zh">其他单据要求</label>
-                                <div class="col-xs-8">
-                                    <textarea class="form-control" rows="3" placeholder="多个单据请以（、）隔开" lang="zh"></textarea>
+                                <div class="col-xs-10">
+                                    <textarea id="otherDocumentaryRequire" class="form-control" rows="3" placeholder="多个单据请以（、）隔开" lang="zh"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -211,7 +214,7 @@
         </div>
     </div>
 </div>
-<input type="hidden" value=${customerId}>
+<input type="hidden" value=''>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
@@ -247,7 +250,7 @@
             obj.goodsType = obj.goodsType;
             obj.mianxiangqi = obj.mianxiangqi;
             obj.miantuiqi = obj.miantuiqi;
-            optionNames += '<option value="'+item.name+'"></option>';
+            optionNames += '<option value="'+item.name+'">'+item.name+'</option>';
             //optionTypes += '<option value="'+item.documentaryType+'"></option>';
             newData.push(obj);
         });
@@ -255,14 +258,23 @@
         name.append(optionNames);
         //渲染单据类型select
         //documentaryType.append(optionTypes);
-
+        var obj = {};
+        obj.name = name.val();
+        //obj.documentaryType = documentaryType.val();
+        screenData(obj,newData);
         $(document).on('change.screen','#name',function () {
             var obj = {};
             obj.name = name.val();
             //obj.documentaryType = documentaryType.val();
             screenData(obj,newData);
-        })
+        });
 
+//        $(document).('click.exclusion','[name="coo"]',function () {
+//            var allCh = $('input').filter('[name="coo"]');
+//            var theEl = $(this);
+//            allCh.prop('checked',false);
+//            theEl.prop('checked',true);
+//        })
     })
 
 function screenData(obj,data){
@@ -289,6 +301,8 @@ function customerBillRequire(data) {
     $('#freightBillOfLading').prop('checked',require.freightBillOfLading);
     $('#invoice').prop('checked',require.invoice);
     $('#packingLise').prop('checked',require.packingLise);
+    $('#qualityPolicy').prop('checked',require.qualityPolicy);
+    $('#qualityPolicyTxt').val(require.qualityPolicyTxt);
     $('#warranty').prop('checked',require.warranty);
     $('#dangerousPackage').prop('checked',require.dangerousPackage);
     $('#favoree').prop('checked',require.favoree);
@@ -300,22 +314,26 @@ function customerBillRequire(data) {
     $('#ICWD').prop('checked',require.ICWD);
     $('#MC').prop('checked',require.MC);
 
-    if(require.qualityPolicy && require.qualityPolicy!='' && require.qualityPolicy!=null){
-        var qua = jQuery.parseJSON(require.qualityPolicy);
-        $('#qualityPolicy').prop('checked',qua.selected);
-        $('#qualityPolicyTxt').val(qua.value);
-    }
-
+//    if(require.qualityPolicy && require.qualityPolicy!='' && require.qualityPolicy!=null){
+//        var qua = jQuery.parseJSON(require.qualityPolicy);
+//        $('#qualityPolicy').prop('checked',qua.selected);
+//        $('#qualityPolicyTxt').val(qua.value);
+//    }
     if(require.COO && require.COO!='' && require.COO!=null){
-        var coo = jQuery.parseJSON(require.COO);
+//        var coo = jQuery.parseJSON(require.COO);
+        var coo = require.COO;
         $('input').filter('[name="coo"]').val([coo.selected]);//单选
-        if($('#'+qua.selected).length!=0){
-            $('#'+qua.selected).val(coo.value);
+        if(coo.selected=='general'){
+            $('#'+coo.selected).val(coo.value);
+        }else if(coo.selected=='CIATB'){
+            $('[name="'+coo.selected+'"]').val([coo.value]);
         }
+
     }
     if(require.telexRelease && require.telexRelease!='' && require.telexRelease!=null){
-        var telex = jQuery.parseJSON(require.telexRelease);
-        $('input').filter('[name="cotelexRelease"]').val([telex.selected]);//单选
+//        var telex = jQuery.parseJSON(require.telexRelease);
+        var telex = require.telexRelease;
+        $('input').filter('[name="telexRelease"]').val([telex.selected]);//单选
         $('#telexReleaseTxt').val(telex.value);
     }
 }

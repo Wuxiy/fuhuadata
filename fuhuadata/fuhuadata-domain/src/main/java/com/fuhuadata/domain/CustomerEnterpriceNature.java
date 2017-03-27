@@ -12,7 +12,9 @@ public class CustomerEnterpriceNature {
 
     private Integer nature;//企业性质 1：工厂 2：分销商 3：经销商 4：终端客户 5：其他
 
+
     private Integer type;//企业类型 1：客户 2：子公司
+
 
     public Integer getId() {
         return id;
