@@ -106,7 +106,7 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript">
 
-    $('#tree').creatTree('/productCategory/CategoryTree');
+    $('#tree').creatTree(basePath+'/productCategory/CategoryTree');
     $(document).on('click','a.cNode',function (e) {
         e.preventDefault();
         console.log(e.target);
@@ -115,7 +115,7 @@
     });
     $(document).ready(function() {
         var table =$('#customer_customer_packaging_table').DataTable( {
-            "ajax":'${request.contextPath}/customerProductPacking/queryCustomerProductPackingList',
+            "ajax":basePath+'/customerProductPacking/queryCustomerProductPackingList',
             "pagingType":"full_numbers",
             "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
             "columns":[
@@ -145,7 +145,7 @@
                 }
             ],
             "language": {
-                "url": '${request.contextPath}/lib/dataTables/lang/dataTables.lang.zh',
+                "url": basePath+'/lib/dataTables/lang/dataTables.lang.zh',
                 "searchPlaceholder": '关键字'
             }
         } );
