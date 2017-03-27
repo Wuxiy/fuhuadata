@@ -122,3 +122,6 @@
         </div>
     </div>
 #end
+
+#macro(saleNav $num)
+#end

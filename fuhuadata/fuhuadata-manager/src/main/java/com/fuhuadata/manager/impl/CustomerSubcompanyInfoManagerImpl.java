@@ -11,10 +11,6 @@ import com.fuhuadata.manager.CustomerSubcompanyInfoManager;
 import com.fuhuadata.domain.query.Result;
 import javax.annotation.Resource;
 
-import com.ibatis.sqlmap.client.SqlMapClient;
-import com.sun.xml.internal.fastinfoset.algorithm.FloatEncodingAlgorithm;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;

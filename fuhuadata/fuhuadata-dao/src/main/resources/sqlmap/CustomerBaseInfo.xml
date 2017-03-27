@@ -445,6 +445,7 @@
 			base.has_chi_company hasChiCompany,
 			base.has_chi_purchase hasChiPurchase,
 			base.customer_status customerStatus,
+			base.loss_reason lossReason,
 			base.qualifications_file_url qualificationsFileUrl,
 			base.factory_location factoryLocation,
 			base.major_competitors majorCompetitors,

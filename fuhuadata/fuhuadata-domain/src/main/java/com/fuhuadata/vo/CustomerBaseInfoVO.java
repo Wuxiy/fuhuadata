@@ -3,7 +3,6 @@ package com.fuhuadata.vo;
 import com.fuhuadata.domain.CustomerMakeProduct;
 import com.fuhuadata.util.DateJsonDeserializer;
 import com.fuhuadata.util.DateJsonSerializer;
-import com.sun.xml.internal.ws.wsdl.writer.UsingAddressing;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
@@ -99,6 +98,8 @@ public class CustomerBaseInfoVO {
 
     /**客户状态  0：流失 1：正常**/
     private Integer customerStatus;
+
+    private String lossReason;
 
     /**资质文件保存路径**/
     private String qualificationsFileUrl;
@@ -520,5 +521,13 @@ public class CustomerBaseInfoVO {
 
     public void setOtherEnterpriceNature(String otherEnterpriceNature) {
         this.otherEnterpriceNature = otherEnterpriceNature;
+    }
+
+    public String getLossReason() {
+        return lossReason;
+    }
+
+    public void setLossReason(String lossReason) {
+        this.lossReason = lossReason;
     }
 }
