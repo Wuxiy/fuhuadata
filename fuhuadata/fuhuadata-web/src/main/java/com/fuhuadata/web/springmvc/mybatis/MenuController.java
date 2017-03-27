@@ -15,7 +15,7 @@ public class MenuController extends BaseTreeableController<Menu, Integer> {
 
     @RequestMapping(value = {"", "init"}, method = RequestMethod.GET)
     public String mian() {
-        return "systemMenu";
+        return "system/systemMenu";
     }
 
 }
