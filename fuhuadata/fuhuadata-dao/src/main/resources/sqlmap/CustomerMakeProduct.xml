@@ -89,6 +89,12 @@
                 #[]#
             </iterate>
     </delete>
+
+    <delete id="DELETE-BY-CUSTOMERID" parameterClass="java.lang.String">
+        <![CDATA[
+             DELETE FROM customer_make_products WHERE customer_id = #customerId#
+        ]]>
+    </delete>
     
     <update id="BATCH-ADD" parameterClass="java.util.List">
             <![CDATA[

@@ -1,4 +1,5 @@
 package com.fuhuadata.manager.impl;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 
@@ -8,9 +9,15 @@ import com.fuhuadata.manager.CustomerLinkmanManager;
 import com.fuhuadata.dao.CustomerLinkmanDao;
 import com.fuhuadata.domain.CustomerLinkman;
 import com.fuhuadata.util.StringUtil;
+import com.ibatis.sqlmap.client.SqlMapClient;
+import com.ibatis.sqlmap.engine.mapping.sql.Sql;
+import com.sun.scenario.effect.impl.state.LinearConvolveKernel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * @author wangbo
@@ -20,17 +27,53 @@ public class CustomerLinkmanManagerImpl implements CustomerLinkmanManager {
 
 	@Resource
     private CustomerLinkmanDao customerLinkmanDao;
-    
 
+
+
+	/**
+	 *  do add
+	 * @param customerLinkman
+	 * @return
+	 */
+	@Transactional
     public CustomerLinkman addCustomerLinkman(CustomerLinkman customerLinkman) {
-    	//设置字符串主键
-    	String linkmanId = customerLinkmanDao.getMaxLinkmanIdByCustomerId(customerLinkman.getCustomerId());
-    	customerLinkman.setLinkmanId(StringUtil.increment(linkmanId,3));
-    	return customerLinkmanDao.addCustomerLinkman(customerLinkman);
+		try {
+			CustomerLinkman customerLinkmandefault = customerLinkmanDao.getCustomerLinkmanDefaultByCustomerId(customerLinkman.getCustomerId());
+			//设置字符串主键
+			String linkmanId = customerLinkmanDao.getMaxLinkmanIdByCustomerId(customerLinkman.getCustomerId());
+			customerLinkman.setLinkmanId(StringUtil.increment(linkmanId, 3));
+			if (customerLinkmandefault != null && customerLinkman.getIsDefault() == 1) {
+				customerLinkmandefault.setIsDefault(0);
+				customerLinkmanDao.updateCustomerLinkmanById(customerLinkmandefault.getLinkmanId(), customerLinkmandefault);
+				customerLinkman = customerLinkmanDao.addCustomerLinkman(customerLinkman);
+			} else if (customerLinkmandefault == null) {
+				customerLinkman.setIsDefault(1);
+				customerLinkman = customerLinkmanDao.addCustomerLinkman(customerLinkman);
+			} else {
+				customerLinkman = customerLinkmanDao.addCustomerLinkman(customerLinkman);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+    	return customerLinkman;
     }
-    
+
+    @Transactional
     public boolean updateCustomerLinkmanById(String linkman_id, CustomerLinkman customerLinkman) {
-    	return customerLinkmanDao.updateCustomerLinkmanById(linkman_id, customerLinkman) == 1 ? true : false;
+    		boolean flag = false;
+			CustomerLinkman customerLinkmandefault = customerLinkmanDao.getCustomerLinkmanDefaultByCustomerId(customerLinkman.getCustomerId());
+			if (customerLinkmandefault != null && customerLinkman.getIsDefault() == 1) {
+				customerLinkmandefault.setIsDefault(0);
+				customerLinkmanDao.updateCustomerLinkmanById(customerLinkmandefault.getLinkmanId(), customerLinkmandefault);
+				flag = customerLinkmanDao.updateCustomerLinkmanById(linkman_id, customerLinkman) == 1 ? true : false;
+			} else if (customerLinkmandefault == null || customerLinkman.getLinkmanId() == customerLinkmandefault.getLinkmanId()) {
+				customerLinkman.setIsDefault(1);
+				flag = customerLinkmanDao.updateCustomerLinkmanById(linkman_id, customerLinkman) == 1 ? true : false;
+			} else {
+				flag = customerLinkmanDao.updateCustomerLinkmanById(linkman_id, customerLinkman) == 1 ? true : false;
+			}
+			return flag;
+
     }
     
 	public List<CustomerLinkman> getCustomerLinkmansByQuery(QueryCustomerLinkman queryCustomerLinkman) {

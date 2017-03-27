@@ -1,4 +1,5 @@
 package com.fuhuadata.manager.impl;
+import com.fuhuadata.dao.CustomerMakeProductDao;
 import com.fuhuadata.domain.CountCustomersOrderProduct;
 import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.domain.CustomerEnterpriceNature;
@@ -12,6 +13,9 @@ import com.fuhuadata.dao.CustomerBaseInfoDao;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
+import com.ibatis.sqlmap.client.SqlMapClient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -24,17 +28,38 @@ public class CustomerBaseInfoManagerImpl implements CustomerBaseInfoManager {
 
 	@Resource
     private CustomerBaseInfoDao customerBaseInfoDao;
+
+	@Resource
+	private CustomerMakeProductDao customerMakeProductDao;
     
 
     public CustomerBaseInfo addCustomerBaseInfo(CustomerBaseInfo customerBaseInfo) {
     	return customerBaseInfoDao.addCustomerBaseInfo(customerBaseInfo);
     }
 
+	@Override
+	public boolean deleteCustomerEnterpriceNatureByCustomerId(String customerId) {
+		return customerBaseInfoDao.deleteCustomerEnterpriceNatureByCustomerId(customerId)==0?false:true;
+	}
+
 	public boolean batchAddNature(List<CustomerEnterpriceNature> customerEnterpriceNatures){
     	return customerBaseInfoDao.batchAddNature(customerEnterpriceNatures)==customerEnterpriceNatures.size()?true :false;
 	}
-	public boolean updateCustomerBaseInfoById(String customer_id, CustomerBaseInfo customerBaseInfo) {
-    	return customerBaseInfoDao.updateCustomerBaseInfoById(customer_id, customerBaseInfo) == 1 ? true : false;
+
+	public boolean updateCustomerBaseInfoById(String customerId,CustomerBaseInfo customerBaseInfo){
+		return customerBaseInfoDao.updateCustomerBaseInfoById(customerId,customerBaseInfo)==1?true : false;
+	}
+	@Transactional
+	public boolean updateCustomerBaseInfo(List<CustomerEnterpriceNature> customerEnterpriceNatures, List<CustomerMakeProduct> customerMakeProducts , CustomerBaseInfo customerBaseInfo) {
+		boolean flag= false;
+
+			customerBaseInfoDao.deleteCustomerEnterpriceNatureByCustomerId(customerBaseInfo.getCustomerId());
+			customerBaseInfoDao.batchAddNature(customerEnterpriceNatures);
+			customerMakeProductDao.deleteCustomerMakeProductByCustomerId(customerBaseInfo.getCustomerId());
+			customerMakeProductDao.addCustomerMakeProducts(customerMakeProducts);
+			flag =  customerBaseInfoDao.updateCustomerBaseInfoById(customerBaseInfo.getCustomerId(), customerBaseInfo) == 1 ? true : false;
+
+		return flag;
     }
     
 	public List<CustomerBaseInfo> getCustomerBaseInfoByQuery(QueryCustomerBaseInfo queryCustomerBaseInfo) {

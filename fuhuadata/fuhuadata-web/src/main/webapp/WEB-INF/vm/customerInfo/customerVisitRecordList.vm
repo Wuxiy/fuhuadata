@@ -1,7 +1,7 @@
 <div class="clearfix content shadow-out">
     <!--副导航-->
     <div class="nav-deputy shadow-out clearfix">
-        #deputyNav(7);
+        #deputyNav(7)
         <ul class="breadcrumb pull-right">
             <li><span class="glyphicon glyphicon-map-marker"></span></li>
             <li><a href="">合作客户</a></li>
@@ -40,16 +40,7 @@
                             </tr>
                             </thead>
                             <tbody id="visitList">
-                            <tr>
-                                <td>000002</td>
-                                <td><a href="customerContacts.html" target="_blank">Anna</a></td>
-                                <td>销售</td>
-                                <td>是</td>
-                                <td>华盛顿</td>
-                                <td>女</td>
-                                <td>美国</td>
-                                <td>13888888888</td>
-                            </tr>
+
                             </tbody>
                         </table>
                     </div>
@@ -74,7 +65,7 @@
                         <div class="panel-body clearfix">
                             <div class="form-horizontal">
                                 <div class="form-group ">
-                                    <label class="col-xs-1 control-label">开始时间</label>
+                                    <label class="col-xs-1 control-label">开始时间<sup class="not-null">*</sup></label>
                                     <div class="col-xs-4">
                                         <input class="form-control" type="datetime-local" id="startTime"/>
                                     </div>
@@ -88,13 +79,13 @@
                                     <div class="col-xs-4">
                                         <input class="form-control" type="text" id="activityAddress"/>
                                     </div>
-                                    <label class="col-xs-1 control-label col-xs-offset-1">费用(元)</label>
+                                    <label class="col-xs-1 control-label col-xs-offset-1">费用(元)<sup class="not-null">*</sup></label>
                                     <div class="col-xs-4">
                                         <input class="form-control" type="text" id="activityExpense"/>
                                     </div>
                                 </div>
                                 <div class="form-group ">
-                                    <label class="col-xs-1 control-label">活动类型</label>
+                                    <label class="col-xs-1 control-label">活动类型<sup class="not-null">*</sup></label>
                                     <div class="col-xs-4">
                                         <select class="form-control" name="items" id="activityType">
                                             <option  value="0">远程沟通</option>

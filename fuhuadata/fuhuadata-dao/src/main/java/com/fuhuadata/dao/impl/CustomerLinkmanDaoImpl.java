@@ -4,6 +4,8 @@ import com.fuhuadata.domain.query.QueryCustomerLinkman;
 import com.fuhuadata.dao.CustomerLinkmanDao;
 import com.fuhuadata.domain.CustomerLinkman;
 import javax.annotation.Resource;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
 import org.springframework.stereotype.Component;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import java.util.Map;

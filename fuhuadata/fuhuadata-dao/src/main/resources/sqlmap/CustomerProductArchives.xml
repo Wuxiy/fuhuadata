@@ -605,7 +605,7 @@
 				a.customer_product_name AS customerProductName,
 				b.product_id AS categorySerialNumber,
 				b.category_name AS categoryName,
-				a.product_name AS productName,
+				a.`name` AS productName,
 				a.brand as brand,
 				c.specification AS specification,
 				c.model AS model,

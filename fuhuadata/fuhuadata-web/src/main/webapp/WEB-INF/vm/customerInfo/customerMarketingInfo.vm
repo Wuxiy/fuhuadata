@@ -1,7 +1,7 @@
 <div class="clearfix content shadow-out">
     <!--副导航-->
     <div class="nav-deputy shadow-out clearfix">
-        #deputyNav(2);
+        #deputyNav(2)
         <ul class="breadcrumb pull-right">
             <li><span class="glyphicon glyphicon-map-marker"></span></li>
             <li><a href="">合作客户</a></li>
@@ -166,7 +166,7 @@
         </div>
     </div>
 </div>
-<input type="hidden" id="customerId" value="${customerId}">
+<input type="hidden" id="customerId" value="">
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>

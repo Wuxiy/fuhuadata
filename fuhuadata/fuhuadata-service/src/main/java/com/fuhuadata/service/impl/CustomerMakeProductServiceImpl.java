@@ -56,10 +56,10 @@ public class CustomerMakeProductServiceImpl implements CustomerMakeProductServic
     }
 
     @Override
-    public Result deleteCustomerMakeProductByIds(List<Integer> list) {
+    public Result deleteCustomerMakeProductByCustomerId(String customerId) {
         Result result = new Result();
         try{
-            result.setSuccess(customerMakeProductManager.deleteCustomerMakeProductByIds(list));
+            result.setSuccess(customerMakeProductManager.deleteCustomerMakeProductByCustomerId(customerId));
         }catch(Exception e){
             result.setSuccess(false);
             log.error("批量删除客户产能信息出错",e);
@@ -135,27 +135,14 @@ public class CustomerMakeProductServiceImpl implements CustomerMakeProductServic
     @Override
     public Result updateCustomerMakeProducts(String id,CustomerMakeProduct[] customerMakeProducts) {
         Result result = new Result();
-        List<Integer> list = new ArrayList<Integer>();
+        List<CustomerMakeProduct> list = new ArrayList<CustomerMakeProduct>();
         boolean flag = false;
-        List<CustomerMakeProduct> customerMakeProductsList = new ArrayList<CustomerMakeProduct>();
-        List<CustomerMakeProduct> customerMakeProductsBefore=customerMakeProductManager.getCustomerMakeProductById(id);
-        if(customerMakeProductsBefore!=null&&customerMakeProductsBefore.size()>0) {
-            for(int i=0;i<customerMakeProductsBefore.size();i++){
-                System.out.println(customerMakeProductsBefore.get(i).getId());
-                list.add(customerMakeProductsBefore.get(i).getId());
-            }
-
-        }
-        if(customerMakeProducts!=null&&customerMakeProducts.length>0){
-            System.out.println(customerMakeProducts[1].getProduction());
-            customerMakeProductsList =  Arrays.asList(customerMakeProducts);
-        }
         try{
+            list=Arrays.asList(customerMakeProducts);
             if(list!=null&&list.size()>0) {
-                flag = customerMakeProductManager.deleteCustomerMakeProductByIds(list);
+                flag = customerMakeProductManager.deleteCustomerMakeProductByCustomerId(id);
             }
-            System.out.println(flag);
-            result.setSuccess(customerMakeProductManager.addCustomerMakeProducts(customerMakeProductsList));
+            result.setSuccess(customerMakeProductManager.addCustomerMakeProducts(list));
         }catch(Exception e){
             result.setSuccess(false);
             log.error("更新客户产品产能信息出错",e);

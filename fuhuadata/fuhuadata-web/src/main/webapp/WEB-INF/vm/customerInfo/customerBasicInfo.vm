@@ -1,7 +1,7 @@
 <div class="clearfix content shadow-out">
     <!--副导航-->
     <div class="nav-deputy shadow-out clearfix">
-        #deputyNav(1);
+        #deputyNav(1)
         <ul class="breadcrumb pull-right">
             <li><span class="glyphicon glyphicon-map-marker"></span></li>
             <li><a href="">合作客户</a></li>
@@ -113,11 +113,11 @@
                                         <span lang="zh">终端客户</span>
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input name="enterpriseNature" class="else" type="checkbox" value="5"/>
+                                        <input data-target="#otherEnterpriceNature" name="enterpriseNature" class="else" type="checkbox" value="5"/>
                                         <span lang="zh">其他</span>
                                     </label>
                                     <span class="form-inline">
-                                        <input id="enterpriseNature" class="form-inline form-control elseInput" type="text" value="" placeholder="请输入企业性质" lang="zh"/>
+                                        <input id="otherEnterpriceNature" class="form-inline form-control hidden" type="text" value="" placeholder="请输入企业性质" lang="zh"/>
                                     </span>
                                 </div>
                             </div>
@@ -195,7 +195,7 @@
                                     客户状态
                                 </label>
                                 <div class="col-xs-2">
-                                    <select id="customerType" class="form-control" >
+                                    <select id="customerType" data-target="#opportunity" class="form-control" >
                                         <option value="1" lang="zh" selected>合作</option>
                                         <option value="2" lang="zh" selected>潜在</option>
                                         <option value="3" lang="zh" selected>流失</option>
@@ -254,33 +254,35 @@
                                     <textarea id="remark" class="form-control" rows="4" ></textarea>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-xs-1" lang="zh">
-                                    机会来源<sup class="not-null editView hidden">*</sup>
-                                </label>
-                                <div class="col-xs-2">
-                                    <select id="opportunitySource" class="form-control else">
-                                        <option selected="" value="——选择机会来源——">——选择机会来源——</option>
-                                        <option value="1">展会</option>
-                                        <option value="2">门户网站</option>
-                                        <option value="3">农药店考察</option>
-                                        <option value="4">客户介绍</option>
-                                        <option value="5">主动联系</option>
-                                        <option class="else" value="6">其他</option>
-                                    </select>
+                            <fieldset id="opportunity" class="hidden">
+                                <div class="form-group">
+                                    <label class="control-label col-xs-1" lang="zh">
+                                        机会来源<sup class="not-null editView hidden">*</sup>
+                                    </label>
+                                    <div class="col-xs-2">
+                                        <select id="opportunitySource" data-target="#otherOpportunity" class="form-control else">
+                                            <option selected >——选择机会来源——</option>
+                                            <option value="1">展会</option>
+                                            <option value="2">门户网站</option>
+                                            <option value="3">农药店考察</option>
+                                            <option value="4">客户介绍</option>
+                                            <option value="5">主动联系</option>
+                                            <option class="else" value="6">其他</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <input id="otherOpportunity" class="form-control hidden" type="text" placeholder="输入机会来源" lang="zh"/>
+                                    </div>
                                 </div>
-                                <div class="col-xs-2 elseInput hidden">
-                                    <input id="otherOpportunity" class="form-control" type="text" placeholder="输入机会来源" lang="zh"/>
+                                <div class="form-group">
+                                    <label class="control-label col-xs-1" lang="zh">
+                                        机会描述<sup class="not-null editView hidden">*</sup>
+                                    </label>
+                                    <div class="col-xs-8">
+                                        <textarea id="opportunityDescrible" class="form-control" rows="4" placeholder="描述客户发展机会" lang="zh"></textarea>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-xs-1" lang="zh">
-                                    机会描述<sup class="not-null editView hidden">*</sup>
-                                </label>
-                                <div class="col-xs-8">
-                                    <textarea id="opportunityDescrible" class="form-control" rows="4" placeholder="描述客户发展机会" lang="zh"></textarea>
-                                </div>
-                            </div>
+                            </fieldset>
                             <div class="form-group editHide">
                                 <label class="control-label col-xs-1" lang="zh">
                                     最后编辑人
@@ -301,7 +303,7 @@
                 <!--客户百科-->
                 <div class="panel panel-default panel-edit view-HD-lg">
                     <div class="panel-heading">
-                        <button data-form-btn="edit" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
+                        <button id="editEncyclopedia" data-form-btn="edit" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
                             编辑
                         </button>
                         <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden">
@@ -353,25 +355,10 @@
                                                 &times;
                                             </button>
                                         </div>
-                                        <div class="modal-body">
-                                            <div class="form-horizontal">
-                                                <div class="form-group">
-                                                    <label for="" class="control-label col-xs-2">名称</label>
-                                                    <div class="col-xs-4">
-                                                        <input type="text" class="form-control" value="">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="" class="control-label col-xs-2">内容</label>
-                                                    <div class="col-xs-9">
-                                                        <textarea class="form-control" name="" rows="8" value=""></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <div id="filedContainer" class="modal-body"></div>
                                         <div class="modal-footer">
                                             <div class="col-xs-2 col-xs-offset-4">
-                                                <button data-form-btn="complete" type="button" class="btn btn-block btn-primary" data-dismiss="modal" lang="zh">完成</button>
+                                                <button id="up_cf" data-form-btn="complete" type="button" class="btn btn-block btn-primary" data-dismiss="modal" lang="zh">完成</button>
                                             </div>
                                             <div class="col-xs-2">
                                                 <button type="button" class="btn btn-block btn-default" data-dismiss="modal" lang="zh">取消</button>
@@ -407,4 +394,35 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerBasicAjax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerBasicInteraction.js"></script>
+<script>
+    var obj = {
+        "documentaryRequire": {
+            "oceanBillOfLading": true,
+            "freightBillOfLading": true,
+            "invoice": false,
+            "packingLise": false,
+            "qualityPolicy": false,
+            "warranty": true,
+            "COO": {
+                "selected": "CIATB",
+                "value": "a"
+            },
+            "dangerousPackage": true,
+            "favoree": "1",
+            "fumigation": "1",
+            "MSDS": "1",
+            "telexRelease": {
+                "selected": "1",
+                "value": "text"
+            },
+            "tenderDocument": "1",
+            "examiningReport": "1",
+            "packingDeclaration": "1",
+            "ICWD": "1",
+            "MC": true
+        }
+    };
+    var jsonString = JSON.stringify(obj);
+    console.log(jsonString);
+</script>
 

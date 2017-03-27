@@ -1,5 +1,7 @@
 package com.fuhuadata.service;
 import java.util.List;
+
+import com.fuhuadata.domain.CustomerEnterpriceNature;
 import com.fuhuadata.domain.query.QueryCustomerSubcompanyInfo;
 import com.fuhuadata.domain.CustomerSubcompanyInfo;
 import com.fuhuadata.domain.query.Result;
@@ -22,11 +24,11 @@ public interface CustomerSubcompanyInfoService {
     /**
      * 按照主键id更新customerSubcompanyInfo，请重新new CustomerSubcompanyInfo 的更新对象，设置要更新的字段
 	 * 返回result，通过result.isSuccess()判断更新是否成功
-     * @param customer_sub_id
+     * @param
      * @param customerSubcompanyInfo
      * @return
      */
-    public Result updateCustomerSubcompanyInfoById(int customer_sub_id, CustomerSubcompanyInfo customerSubcompanyInfo);
+    public Result updateCustomerSubcompanyInfoById(List<CustomerEnterpriceNature> list, CustomerSubcompanyInfo customerSubcompanyInfo);
 
 	/**
 	 * 根据客户id获取子公司列表

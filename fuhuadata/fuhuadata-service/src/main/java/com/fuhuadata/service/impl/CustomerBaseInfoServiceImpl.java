@@ -2,7 +2,11 @@ package com.fuhuadata.service.impl;
 import com.fuhuadata.dao.CustomerBaseInfoDao;
 import com.fuhuadata.domain.CountCustomersOrderProduct;
 import com.fuhuadata.domain.CustomerBaseInfo;
+import com.fuhuadata.domain.CustomerEnterpriceNature;
+import com.fuhuadata.domain.CustomerMakeProduct;
 import com.fuhuadata.manager.CustomerBaseInfoManager;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
@@ -35,10 +39,23 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 		return result;
     }
 
-    public Result updateCustomerBaseInfoById(String customer_id, CustomerBaseInfo customerBaseInfo) {
+	@Override
+	public Result updateCustomerBaseInfoById(String customerId, CustomerBaseInfo customerBaseInfo) {
+    	Result result = new Result();
+    	try{
+    		result.setSuccess(customerBaseInfoManager.updateCustomerBaseInfoById(customerId,customerBaseInfo));
+    		return result;
+		}catch(Exception e){
+    		result.setSuccess(false);
+    		log.error("根据id更新客户最基本信息错误",e);
+		}
+		return null;
+	}
+
+	public Result updateCustomerBaseInfo(List<CustomerEnterpriceNature> customerEnterpriceNatures, List<CustomerMakeProduct> customerMakeProducts , CustomerBaseInfo customerBaseInfo) {
 		Result result = new Result();
 		try {
-			result.setSuccess(customerBaseInfoManager.updateCustomerBaseInfoById(customer_id, customerBaseInfo));
+			result.setSuccess(customerBaseInfoManager.updateCustomerBaseInfo(customerEnterpriceNatures,customerMakeProducts,customerBaseInfo));
 		} catch(Exception e) {
 			result.setSuccess(false);
 			log.error("根据客户id更新客户基本信息错误",e);

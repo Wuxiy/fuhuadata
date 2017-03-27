@@ -8,8 +8,21 @@ $(document).ready(function(){
     //新增提交
     $(document).on('click.up','#addVisit',function(){
         //提交数据
-        upData(basePath+'/customerVisitRecord/addCustomerVisitRecord','POST',addVisit(),"application/json");
-        location.reload();
+        var startTime = $('#startTime').val();
+        var activityExpense = $('#activityExpense').val();
+        var activityType = $('#activityType').val();
+        var activityRemarks = $('#activityRemarks').val();
+        if(startTime == ''||activityExpense == ''||activityType == ''){
+            alert('请完善表单必填项');
+            return false;
+        }else if(activityType == 5 && activityRemarks == ''){
+            alert('请填写其他活动类型备注');
+            return false;
+        }else{
+            upData(basePath+'/customerVisitRecord/addCustomerVisitRecord','POST',addVisit(),"application/json");
+            location.reload();
+        }
+
     });
 })
 var id = document.URL.split('?')[1];
@@ -31,7 +44,7 @@ function visitList(result) {
         visitList.innerHTML += '<tr>'+
                                 '<td>'+ResultData[i].startTime+'</td>'+
                                 '<td>'+ResultData[i].endTime+'</td>'+
-                                '<td>'+ResultData[i].activityType+'</td>'+
+                                '<td>'+replace(ResultData[i].activityType,ResultData[i].activityRemarks)+'</td>'+
                                 '<td>'+ResultData[i].activityAddress+'</td>'+
                                 '<td>'+ResultData[i].activityExpens+'</td>'+
                                 '<td>'+ResultData[i].name+'</td>'+
@@ -41,6 +54,31 @@ function visitList(result) {
     }
 }
 
+function replace(arr1,arr2){
+        switch (arr1){
+            case 0:
+                arr1 ='远程沟通';
+                break;
+            case 1:
+                arr1 = '出差拜访';
+                break;
+            case 2:
+                arr1 = '展会邀请';
+                break;
+            case 3:
+                arr1 = '工厂参观';
+                break;
+            case 4:
+                arr1 = '商务宴请';
+                break;
+            case 5:
+                arr1 = arr2;
+                break;
+        }
+    return arr1;
+}
+
+//modal list
 function modalContact(result) {
     var modalContactList = document.getElementById('modalContactList');
     var ResultData = result;

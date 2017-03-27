@@ -21,6 +21,7 @@ public class VisitRecordVO {
     private Date  startTime;//开始时间
     private Date endTime;//结束时间
     private Integer activityType;//活动类型：0远程沟通，1出差拜访，2展会邀请，3工厂参观，4商务宴请，5其他（备注内容）
+    private String activityRemarks;//活动类型备注
     private String activityAddress;//活动地址
     private String activitySummary;//活动摘要
 
@@ -109,5 +110,13 @@ public class VisitRecordVO {
 
     public void setVisitRecordId(Integer visitRecordId) {
         this.visitRecordId = visitRecordId;
+    }
+
+    public String getActivityRemarks() {
+        return activityRemarks;
+    }
+
+    public void setActivityRemarks(String activityRemarks) {
+        this.activityRemarks = activityRemarks;
     }
 }

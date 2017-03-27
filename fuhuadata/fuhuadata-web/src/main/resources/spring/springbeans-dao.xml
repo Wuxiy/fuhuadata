@@ -37,6 +37,13 @@
 		</property>
 	</bean>
 
+
+
+
+
+
+
+
 	<bean id="userAccountDao" class="com.fuhuadata.dao.impl.UserAccountDaoImpl" />
 	<bean id="systemLogDao" class="com.fuhuadata.dao.impl.SystemLogDaoImpl"/>
 	<bean id="marketTrainingDao" class="com.fuhuadata.dao.impl.MarketTrainingDaoImpl"/>
@@ -66,4 +73,6 @@
 	<bean id="customerLinkmanDao" class="com.fuhuadata.dao.impl.CustomerLinkmanDaoImpl"/>
 	<bean id="customerVisitRecordDao" class="com.fuhuadata.dao.impl.CustomerVisitRecordDaoImpl"/>
 	<bean id="customerSubcompanyInfoDao" class="com.fuhuadata.dao.impl.CustomerSubcompanyInfoDaoImpl"/>
+	<bean id="businessInfoDao" class="com.fuhuadata.dao.impl.BusinessInfoDaoImpl"/>
+	<bean id="businessRecordDao" class="com.fuhuadata.dao.impl.BusinessRecordDaoImpl"/>
 </beans>

@@ -8,7 +8,7 @@
  //基本信息页
 function customerBasicInfo(result){
     var getData = result;
-    console.log(getData);
+    // console.log(getData);
     //客户基本信息
     $('#customerId').val(getData.customerId);
     $('#fullName').val(getData.fullName);
@@ -18,30 +18,34 @@ function customerBasicInfo(result){
 
     $('#zhongxinbaoNumber').val(getData.zhongxinbaoNumber);
     $('#zhongxinbaoLevel').val(getData.zhongxinbaoLevel);
-    $('[name="enterpriseNature"]').val([getData.enterpriseNature]);//企业性质
+    if(getData.enterpriseNature && getData.enterpriseNature!='' && getData.enterpriseNature!=null){
+        $('[name="enterpriseNature"]').val(getData.enterpriseNature.split(','));//企业性质
+    }
+    $('#otherEnterpriceNature').val(getData.otherEnterpriceNature);
     $('#registeredFunds').val(getData.registeredFunds);
-    $('#enterprisePhone').val(getData.enterprisePhone);
 
+    $('#enterprisePhone').val(getData.enterprisePhone);
     $('#enterpriseEmail').val(getData.enterpriseEmail);
     $('#registeredAddress').val(getData.registeredAddress);
     $('#managementScope').val(getData.managementScope);
     $('#hasChiCompany').val(getData.hasChiCompany);
-    $('#hasChiPurchase').val(getData.hasChiPurchase);
 
+    $('#hasChiPurchase').val(getData.hasChiPurchase);
     $('#customerLevel').val(getData.customerLevel);
     $('#customerType').val(getData.customerType);
     $('#factoryLocation').val(getData.factoryLocation);
     $('#productLine').val(getData.productLine);
-    $('#majorCompetitors').val(getData.majorCompetitors);
 
+    $('#majorCompetitors').val(getData.majorCompetitors);
     $('#remark').val(getData.remark);
     $('#opportunitySource').val(getData.opportunitySource);
     $('#otherOpportunity').val(getData.otherOpportunity);
     $('#opportunityDescrible').val(getData.opportunityDescrible);
-    $('#lastmodifyUserName').val(getData.lastmodifyUserName);
 
+    $('#lastmodifyUserName').val(getData.lastmodifyUserName);
     $('#modifyTime').val(getData.modifyTime);
     customerMakeProductData(getData.customerMakeProduct);//客户生产产品
+
     //百科信息
     $('#encyId').val(getData.encyId);
     $('#companyInfo').val(getData.companyInfo);
@@ -75,7 +79,7 @@ function customerMakeProductData(getData){
 function customFieldData(getData){
     $('[name="customField"]').remove();
     var getData = $.parseJSON(getData);
-    console.log(getData);
+    // console.log(getData);
     $.each(getData, function (n,item) {
         var location = $('#addFiled').parents('.form-group');
         var row = '';
@@ -102,9 +106,9 @@ function customerBasicFormObj() {
 
             "zhongxinbaoNumber": $('#zhongxinbaoNumber').val(),
             "zhongxinbaoLevel": $('#zhongxinbaoLevel').val(),
-            "enterpriseNature": $('[name="enterpriseNature"]').val(),
             "registeredFunds": $('#registeredFunds').val(),
             "enterprisePhone": $('#enterprisePhone').val(),
+            "otherEnterpriceNature": $('#otherEnterpriceNature').val(),
 
             "enterpriseEmail": $('#enterpriseEmail').val(),
             "registeredAddress": $('#registeredAddress').val(),
@@ -127,6 +131,7 @@ function customerBasicFormObj() {
             "modifyTime": getTime()
 
         },
+        customerEnterpriceNatures:customerEnterpriceNatureObj(),
         customerMakeProducts:customerMakeProductObj()
     };
     console.log(JSON.stringify(data));
@@ -135,16 +140,32 @@ function customerBasicFormObj() {
 //客户生产产品
 function customerMakeProductObj() {
     var arr = [];
-    $('[name="customerMakeProducts"]').each(function () {
+    $('[name="customerMakeProduct"]').each(function () {
         var $this = $(this);
         var obj = {};
-        obj.id = $this.attr('id');
+        if($this.attr('id') && $this.attr('id')!='' && $this.attr('id')!=null){
+            obj.id = $this.attr('id');
+        }
         obj.production = $this.find('[name="production"]').val();
         obj.productName = $this.find('[name="productName"]').val();
         arr.push(obj);
     });
     return arr;
 }
+//企业性质
+function customerEnterpriceNatureObj() {
+    var arr = [];
+    $('[name="enterpriseNature"]').filter(':checked').each(function () {
+        var obj = {};
+        obj.customerId = $('#customerId').val();
+        obj.type = 1;
+        obj.nature = $(this).val();
+        arr.push(obj);
+    });
+    return arr;
+}
+
+
 //客户百科
 function customerEncyclopediaObj(){
     var data = {
@@ -157,7 +178,7 @@ function customerEncyclopediaObj(){
         // "lastmodifyUserIdEn": ,
         "modifyTime": getTime()
     };
-    console.log(JSON.stringify(data))
+    // console.log(JSON.stringify(data))
     return JSON.stringify(data);
 }
 //客户百科自定义字段

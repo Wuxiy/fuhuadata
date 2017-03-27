@@ -1,7 +1,7 @@
 <div class="clearfix content shadow-out">
     <!--副导航-->
     <div class="nav-deputy shadow-out clearfix">
-        #deputyNav(6);
+        #deputyNav(6)
         <ul class="breadcrumb pull-right">
             <li><span class="glyphicon glyphicon-map-marker"></span></li>
             <li><a href="">合作客户</a></li>
@@ -12,7 +12,7 @@
     <div class="dashboard-wrapper">
         <div class="row">
             <!--导航-->
-            #orderRequestNav(2);
+            #orderRequestNav(2)
             <div class="col-xs-10">
                 <!--订舱出运要求-->
                 <div class="panel panel-default panel-edit view-HD-md">
@@ -202,5 +202,8 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 
 

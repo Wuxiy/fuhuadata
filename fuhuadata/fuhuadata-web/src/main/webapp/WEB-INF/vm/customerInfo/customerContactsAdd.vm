@@ -15,9 +15,9 @@
                 <div class="panel-body clearfix">
                     <div class="form-horizontal">
                         <div class="form-group ">
-                            <label class="col-xs-1 control-label">姓名</label>
+                            <label class="col-xs-1 control-label">姓名<sup class="not-null">*</sup></label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" id="name"/>
+                                <input class="form-control notnull" type="text" id="name"/>
                             </div>
                             <label class="col-xs-1 control-label">岗位</label>
                             <div class="col-xs-2">
@@ -27,18 +27,21 @@
                             <div class="col-xs-2">
                                 <input class="form-control" type="text" id="responseArea"/>
                             </div>
-                            <label class="col-xs-1 control-label">是否在职</label>
+                            <label class="col-xs-1 control-label">是否在职<sup class="not-null">*</sup></label>
                             <div class="col-xs-2">
-                                <select class="form-control" name="items" id="onJob">
+                                <select class="form-control notnull" name="items" id="onJob">
                                     <option  value="1">是</option>
                                     <option  value="0">否</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group ">
-                            <label class="col-xs-1 control-label">性别</label>
+                            <label class="col-xs-1 control-label">性别<sup class="not-null">*</sup></label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" id="sex"/>
+                                <select class="form-control notnull" name="items" id="sex">
+                                    <option  value="0">男</option>
+                                    <option  value="1">女</option>
+                                </select>
                             </div>
                             <label class="col-xs-1 control-label">生日</label>
                             <div class="col-xs-2">
@@ -84,9 +87,9 @@
                             <div class="col-xs-2">
                                 <input class="form-control" type="text" id="faith"/>
                             </div>
-                            <label class="col-xs-1 control-label">是否默认</label>
+                            <label class="col-xs-1 control-label">是否默认<sup class="not-null">*</sup></label>
                             <div class="col-xs-2">
-                                <select class="form-control" name="items" id="isDefault">
+                                <select class="form-control notnull" name="items" id="isDefault">
                                     <option  value="1">是</option>
                                     <option  value="0">否</option>
                                 </select>
@@ -117,48 +120,60 @@
     $('#finishAdd').click(function () {
         var id = document.URL.split('?')[1].split('=')[1];
         var url = basePath + '/customerLinkman/add';
-        var data = {
-            "customerId":id,
-            "name":$('#name').val(),
-            "posts":$('#posts').val(),
-            "responseArea":$('#responseArea').val(),
-            "onJob":$('#onJob').val(),
-            "sex":$('#sex').val(),
-            "birthday":$('#birthday').val(),
-            "nationality":$('#nationality').val(),
-            "influence":$('#influence').val(),
-            "exhibitionHabits":$('#exhibitionHabits').val(),
-            "fancy":$('#fancy').val(),
-            "linkPhone1":$('#linkPhone1').val(),
-            "linkPhone2":$('#linkPhone2').val(),
-            "lemail":$('#lemail').val(),
-            "eatingHabits":$('#eatingHabits').val(),
-            "faith":$('#faith').val(),
-            "isDefault":$('#isDefault').val(),
-            "remarks":$('#remarks').val(),
-            "createUserId":1,
-            "createUserName":"杨洋",
-            "lastmodifyUserId":1,
-            "lastmodifyUserName":"杨洋",
-            "createTime":"2017-03-20 17:42:29",
-            "modifyTime":"2017-03-20 17:42:29"
-        }
-        console.log(data);
-
-        jQuery.ajax({
-            url:url,
-            type:'POST',
-            data:JSON.stringify(data),
-            dataType:"json",
-            contentType:"application/json",
-            success:function(result){
-                if(result.code == 1){
-                    alert("新增成功!");
-                    window.location.href = basePath + '/customerLinkman/intoCustomerLinkmanList?customerId=' + id;
-                }else {
-                    alert("新增失败！");
+        var notnull = $('.notnull');
+        var add = true;
+        notnull.each(function () {
+            var val = $(this).val();
+            if(val == ''||val == null){
+                alert('请完善表单必填项');
+                add = false;
+                return false;
+            }else {
+                var data = {
+                    "customerId":id,
+                    "name":$('#name').val(),
+                    "posts":$('#posts').val(),
+                    "responseArea":$('#responseArea').val(),
+                    "onJob":$('#onJob').val(),
+                    "sex":$('#sex').val(),
+                    "birthday":$('#birthday').val(),
+                    "nationality":$('#nationality').val(),
+                    "influence":$('#influence').val(),
+                    "exhibitionHabits":$('#exhibitionHabits').val(),
+                    "fancy":$('#fancy').val(),
+                    "linkPhone1":$('#linkPhone1').val(),
+                    "linkPhone2":$('#linkPhone2').val(),
+                    "lemail":$('#lemail').val(),
+                    "eatingHabits":$('#eatingHabits').val(),
+                    "faith":$('#faith').val(),
+                    "isDefault":$('#isDefault').val(),
+                    "remarks":$('#remarks').val(),
+                    "createUserId":1,
+                    "createUserName":"杨洋",
+                    "lastmodifyUserId":1,
+                    "lastmodifyUserName":"杨洋",
+                    "createTime":"2017-03-20 17:42:29",
+                    "modifyTime":"2017-03-20 17:42:29"
                 }
+                console.log(data);
+
+                jQuery.ajax({
+                    url:url,
+                    type:'POST',
+                    data:JSON.stringify(data),
+                    dataType:"json",
+                    contentType:"application/json",
+                    success:function(result){
+                        if(result.code == 1){
+                            alert("新增成功!");
+                            window.location.href = basePath + '/customerLinkman/intoCustomerLinkmanList?customerId=' + id;
+                        }else {
+                            alert("新增失败！");
+                        }
+                    }
+                })
             }
         })
+
     })
 </script>

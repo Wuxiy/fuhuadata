@@ -1,7 +1,7 @@
 <div class="clearfix content shadow-out">
     <!--副导航-->
     <div class="nav-deputy shadow-out clearfix">
-        #deputyNav(3);
+        #deputyNav(3)
         <ul class="breadcrumb pull-right">
             <li><span class="glyphicon glyphicon-map-marker"></span></li>
             <li><a href="">合作客户</a></li>
@@ -38,19 +38,7 @@
                             </tr>
                             </thead>
                             <tbody id="contactsList">
-                            <tr>
-                                <td>000002</td>
-                                <td><a href="customerContacts.html" target="_blank">Anna</a></td>
-                                <td>销售</td>
-                                <td>是</td>
-                                <td>华盛顿</td>
-                                <td>女</td>
-                                <td>美国</td>
-                                <td>13888888888</td>
-                                <td>Anna@163.com</td>
-                                <td>是</td>
-                                <td>是</td>
-                            </tr>
+
                             </tbody>
                         </table>
                     </div>

@@ -1,7 +1,11 @@
 package com.fuhuadata.service.impl;
 import java.util.List;
+
+import com.fuhuadata.domain.CustomerBaseInfo;
+import com.fuhuadata.domain.CustomerEnterpriceNature;
 import com.fuhuadata.domain.query.QueryCustomerSubcompanyInfo;
 import com.fuhuadata.domain.CustomerSubcompanyInfo;
+import com.fuhuadata.manager.CustomerBaseInfoManager;
 import com.fuhuadata.service.CustomerSubcompanyInfoService;
 import com.fuhuadata.manager.CustomerSubcompanyInfoManager;
 import com.fuhuadata.domain.query.Result;
@@ -22,6 +26,8 @@ public class CustomerSubcompanyInfoServiceImpl implements CustomerSubcompanyInfo
 	
 	@Resource
     private CustomerSubcompanyInfoManager customerSubcompanyInfoManager;
+	@Resource
+	private CustomerBaseInfoManager customerBaseInfoManager;
     public Result<CustomerSubcompanyInfo> addCustomerSubcompanyInfo(CustomerSubcompanyInfo customerSubcompanyInfo) {
 		Result<CustomerSubcompanyInfo> result = new Result<CustomerSubcompanyInfo>();
 		try {
@@ -33,10 +39,10 @@ public class CustomerSubcompanyInfoServiceImpl implements CustomerSubcompanyInfo
 		return result;
     }
     
-    public Result updateCustomerSubcompanyInfoById(int customer_sub_id, CustomerSubcompanyInfo customerSubcompanyInfo) {
+    public Result updateCustomerSubcompanyInfoById(List<CustomerEnterpriceNature> list, CustomerSubcompanyInfo customerSubcompanyInfo) {
 		Result result = new Result();
 		try {
-			result.setSuccess(customerSubcompanyInfoManager.updateCustomerSubcompanyInfoById(customer_sub_id, customerSubcompanyInfo));
+			result.setSuccess(customerSubcompanyInfoManager.updateCustomerSubcompanyInfoById(list, customerSubcompanyInfo));
 		} catch(Exception e) {
 			result.setSuccess(false);
 			log.error("根据id更新子公司错误",e);
@@ -113,5 +119,5 @@ public class CustomerSubcompanyInfoServiceImpl implements CustomerSubcompanyInfo
 		}
 		return result;	
     }
-	
+
 }

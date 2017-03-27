@@ -2,7 +2,7 @@
  *获取数据
  */
 function getData(url,type,data,callBack){
-    console.log(data);
+    // console.log(data);
     $.ajax({
         url:url,
         type:type,
@@ -10,8 +10,8 @@ function getData(url,type,data,callBack){
     }).done(function (result) {
         var data = result.data;
         callBack(data);
-    }).fail(function(){
-        console.log('没有获取到数据');
+    }).fail(function(result){
+        console.log('error:'+result.status);
     });
 }
 
@@ -24,8 +24,14 @@ function upData(url,type,data,contentType){
         type:type,
         data:data,
         contentType:contentType
-    }).done(function () {
-        alert('提交成功');
+    }).done(function (result) {
+        if(result.status==200){
+            alert('提交成功');
+        }
+        location.reload();
+    }).fail(function (result) {
+        alert('请重新提交');
+        console.log('error:'+result.status);
     });
 }
 

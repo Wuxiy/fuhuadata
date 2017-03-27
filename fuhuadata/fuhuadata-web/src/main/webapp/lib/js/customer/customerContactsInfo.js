@@ -2,16 +2,23 @@
  * Created by Loyun on 2017/3/20.
  */
 $(document).ready(function(){
-    getData(basePath + '/customerLinkman/getCustomerLinkmanDetailsById','POST',GetRequest(),customerContactsInfo());
+    getData(basePath + '/customerLinkman/getCustomerLinkmanDetailsById','POST',GetRequest(),customerContactsInfo);
 
     //编辑联系人基本信息
     $(document).on('click.edit','#edit',function () {
     });
     //联系人基本信息提交
     $(document).on('click.up','#save',function(){
-        //提交数据
-        upData(basePath+'/customerLinkman/updateById','POST',updateContactsInfo(),"application/json");
-
+        var notnull = $('.notnull');
+        notnull.each(function(){
+            var val = $(this).val();
+            if(val == ''||val == null){
+                alert('请完善表单必填项');
+                return false;
+            }else{
+                upData(basePath+'/customerLinkman/updateById','POST',updateContactsInfo(),"application/json");
+            }
+        })
     });
     //客户基本信息取消提交
     $(document).on('click.cancel','#cancel',function(){
@@ -23,7 +30,7 @@ $(document).ready(function(){
 function customerContactsInfo(result) {
     console.log(result);
     var customerLinkman = result.customerLinkman;
-    var customerVisitRecords = result.linkmanVisitRecordVOS;
+    var customerVisitRecords = result.visitRecordVOS;
     var visitRecordsTable = document.getElementById('visitRecordsTable');
     if(customerLinkman){
         $('#name').attr('data-id',customerLinkman.linkmanId);
@@ -43,6 +50,7 @@ function customerContactsInfo(result) {
         $('#eatingHabits').val(customerLinkman.eatingHabits);
         $('#faith').val(customerLinkman.faith);
         $('#isDefault').val(customerLinkman.isDefault);
+        $('#isDefault').attr('data-id',customerLinkman.customerId);
         $('#remarks').val(customerLinkman.remarks);
     }
     if(customerVisitRecords){
@@ -62,6 +70,7 @@ function customerContactsInfo(result) {
 //提交上传
 function updateContactsInfo() {
     var data = {
+        "customerId":$('#isDefault').attr('data-id'),
         "linkmanId":$('#name').attr('data-id'),
         "name":$('#name').val(),
         "posts":$('#posts').val(),

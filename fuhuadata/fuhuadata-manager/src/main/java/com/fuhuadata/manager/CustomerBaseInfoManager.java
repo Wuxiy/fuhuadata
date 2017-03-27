@@ -21,6 +21,8 @@ public interface CustomerBaseInfoManager {
 	 */
     public CustomerBaseInfo addCustomerBaseInfo(CustomerBaseInfo customerBaseInfo) ;
 
+	public boolean deleteCustomerEnterpriceNatureByCustomerId(String customerId);
+
 	public boolean batchAddNature(List<CustomerEnterpriceNature> customerEnterpriceNatures);
 
 	/**
@@ -30,7 +32,16 @@ public interface CustomerBaseInfoManager {
      * @param customerBaseInfo
      * @return
      */
-    public boolean updateCustomerBaseInfoById(String customer_id, CustomerBaseInfo customerBaseInfo);
+	public boolean updateCustomerBaseInfoById(String customerId,CustomerBaseInfo customerBaseInfo);
+
+	/**
+	 * 更新客户信息包括产品产能和企业性质
+	 * @param customerEnterpriceNatures
+	 * @param customerMakeProducts
+	 * @param customerBaseInfo
+	 * @return
+	 */
+    public boolean updateCustomerBaseInfo(List<CustomerEnterpriceNature> customerEnterpriceNatures, List<CustomerMakeProduct> customerMakeProducts , CustomerBaseInfo customerBaseInfo);
 
     /**
      * 按照主键id 删除 记录
