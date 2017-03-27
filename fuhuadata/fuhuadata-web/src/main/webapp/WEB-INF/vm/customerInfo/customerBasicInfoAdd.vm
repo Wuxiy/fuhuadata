@@ -342,9 +342,7 @@
                         </h3>
                     </div>
                     <div class="panel-body">
-                        <div class="form-horizontal">
-
-                        </div>
+                        <div class="form-horizontal"></div>
                     </div>
                 </div>
             </div>
