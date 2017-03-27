@@ -471,6 +471,7 @@ table.dataTable td {
     text-align: center;
   }
 
+
 @media screen and (max-width: 1000px) {
   .dataTables_wrapper .dataTables_paginate {
     margin-top: 0px; /*解决小窗口下分页下移的问题*/
@@ -480,3 +481,14 @@ table.dataTable td {
     margin-top: 0.5em;
   }
 }
+
+  @media screen and (max-width: 1000px) {
+    .dataTables_wrapper .dataTables_paginate {
+      margin-top: 0px;/*解决小窗口下分页下移的问题*/
+    }
+
+    .dataTables_wrapper .dataTables_filter {
+      margin-top: 0.5em;
+    }
+  }
+

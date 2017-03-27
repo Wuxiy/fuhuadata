@@ -1,7 +1,6 @@
 package com.fuhuadata.util;
 
 import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.DeserializationContext;
 import org.codehaus.jackson.map.JsonDeserializer;
 
@@ -16,8 +15,7 @@ import java.util.Date;
 public class DateJsonDeserializer extends JsonDeserializer<Date> {
     public static final SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     public Date deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
-            throws IOException,JsonProcessingException
-    {
+            throws IOException {
         try
         {
             return format.parse(jsonParser.getText());

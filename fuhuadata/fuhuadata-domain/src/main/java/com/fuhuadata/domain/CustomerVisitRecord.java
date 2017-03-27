@@ -1,5 +1,6 @@
 package com.fuhuadata.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fuhuadata.util.DateJsonDeserializer;
 import com.fuhuadata.util.DateJsonSerializer;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
@@ -25,11 +26,14 @@ public class CustomerVisitRecord{
 	
     /**业务员名称**/
 	private String userName;
-	
+
+
     /**开始时间**/
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date startTime;
 	
     /**结束时间**/
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date endTime;
 	
     /**活动类型：0远程沟通，1出差拜访，2展会邀请，3工厂参观，4商务宴请，5其他（备注内容）**/
@@ -63,9 +67,11 @@ public class CustomerVisitRecord{
 	private String lastmodifyUserName;
 	
     /**创建时间**/
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date createTime;
 	
     /**修改时间**/
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date modifyTime;
 	
 	
@@ -104,21 +110,18 @@ public class CustomerVisitRecord{
 		this.userName = userName;
 	}
 
-	@JsonSerialize(using = DateJsonSerializer.class)
 	public Date getStartTime() {
 		return startTime;
 	}
-	@JsonDeserialize(using = DateJsonDeserializer.class)
+
 	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
 
-	@JsonSerialize(using = DateJsonSerializer.class)
 	public Date getEndTime() {
 		return endTime;
 	}
 
-	@JsonDeserialize(using = DateJsonDeserializer.class)
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
 	}
@@ -203,22 +206,18 @@ public class CustomerVisitRecord{
 		this.lastmodifyUserName = lastmodifyUserName;
 	}
 
-	@JsonSerialize(using = DateJsonSerializer.class)
 	public Date getCreateTime() {
 		return createTime;
 	}
 
-	@JsonDeserialize(using = DateJsonDeserializer.class)
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 
-	@JsonSerialize(using = DateJsonSerializer.class)
 	public Date getModifyTime() {
 		return modifyTime;
 	}
 
-	@JsonDeserialize(using = DateJsonDeserializer.class)
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
 	}

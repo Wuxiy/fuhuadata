@@ -24,10 +24,11 @@
         <mysql.connector.version>5.1.5</mysql.connector.version>
         <mybatis.version>3.4.1</mybatis.version>
         <mybatis.spring.version>1.3.0</mybatis.spring.version>
-        <mapper.version>3.3.6</mapper.version>
+        <mapper.version>3.3.9</mapper.version>
         <pagehelper.version>4.1.4</pagehelper.version>
         <slf4j.version>1.6.1</slf4j.version>
         <junit.version>4.4</junit.version>
+        <tomcat.maven.version>2.2</tomcat.maven.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 

@@ -1,5 +1,6 @@
 package com.fuhuadata.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fuhuadata.util.DateJsonDeserializer;
 import com.fuhuadata.util.DateJsonSerializer;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
@@ -30,8 +31,10 @@ public class BusinessRecord {
 
     private String lastmodifyUserName;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date modifyTime;
 
     public Integer getId() {
@@ -106,22 +109,18 @@ public class BusinessRecord {
         this.lastmodifyUserName = lastmodifyUserName;
     }
 
-    @JsonSerialize(using = DateJsonSerializer.class)
     public Date getCreateTime() {
         return createTime;
     }
 
-    @JsonDeserialize(using = DateJsonDeserializer.class)
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
-    @JsonSerialize(using = DateJsonSerializer.class)
     public Date getModifyTime() {
         return modifyTime;
     }
 
-    @JsonDeserialize(using = DateJsonDeserializer.class)
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
     }

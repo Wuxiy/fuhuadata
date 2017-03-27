@@ -1,5 +1,6 @@
 package com.fuhuadata.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fuhuadata.util.DateJsonDeserializer;
 import com.fuhuadata.util.DateJsonSerializer;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
@@ -28,8 +29,10 @@ public class ExhibitionInfo{
 
     private String city;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date finishDate;
 
     private String exhibitionAddr;
@@ -38,6 +41,7 @@ public class ExhibitionInfo{
 
     private String creator;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     private String exhibitionInfo;//展会介绍
@@ -138,12 +142,10 @@ public class ExhibitionInfo{
         this.creator = creator;
     }
 
-    @JsonSerialize(using= DateJsonSerializer.class)
     public Date getCreateTime() {
         return createTime;
     }
 
-    @JsonDeserialize(using=DateJsonDeserializer.class)
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }

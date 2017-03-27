@@ -1,5 +1,6 @@
 package com.fuhuadata.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fuhuadata.util.DateJsonDeserializer;
 import com.fuhuadata.util.DateJsonSerializer;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
@@ -18,7 +19,9 @@ public class VisitRecordVO {
     private String name;//拜访对象
     private BigDecimal activityExpens;//活动费用
     private String activityGift;//活动礼物
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date  startTime;//开始时间
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endTime;//结束时间
     private Integer activityType;//活动类型：0远程沟通，1出差拜访，2展会邀请，3工厂参观，4商务宴请，5其他（备注内容）
     private String activityRemarks;//活动类型备注
@@ -42,23 +45,19 @@ public class VisitRecordVO {
         this.activityGift = activityGift;
     }
 
-    @JsonSerialize(using = DateJsonSerializer.class)
     public Date getStartTime() {
         return startTime;
     }
 
-    @JsonDeserialize(using = DateJsonDeserializer.class)
     public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    @JsonSerialize(using = DateJsonSerializer.class)
     public Date getEndTime() {
         return endTime;
     }
 
 
-    @JsonDeserialize(using = DateJsonDeserializer.class)
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
