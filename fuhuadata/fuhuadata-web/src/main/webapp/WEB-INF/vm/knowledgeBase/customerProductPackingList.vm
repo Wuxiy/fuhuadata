@@ -15,27 +15,45 @@
                 </div>
                 <div class="panel-body clearfix">
                     <!--搜索框开始-->
-                    <table border="0" cellspacing="0" cellpadding="0">
-                    <div class="form-horizontal">
+                    <form class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon" lang="zh">客户名称</span>
+                            <input class="form-control" id="customer_name" type="search" placeholder="请输入客户名称"/>
+                            <span class="input-group-addon" lang="zh">客户商品名</span>
+                            <input class="form-control" id="customer_product_name" type="search" value="" placeholder="请输入客户商品名称"/>
+                            <span class="input-group-addon" lang="zh" >产品名称</span>
+                            <input id="product_name" class="form-control" type="search" value="" placeholder="请输入产品名称"/>
+                            <span class="input-group-btn">
+                                        <button data-toggle="modal" class="btn btn-xs btn-default" data-target="#tSearch" type="button">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                            <span class="input-group-addon" lang="zh">品牌</span>
+                            <input class="form-control" id="brand" type="search" value="" placeholder="请输入品牌"/>
+                            <span class="input-group-addon" lang="zh" >加工厂</span>
+                            <select class="form-control" id="factory_name">
+                                <option value="">全部</option>
+                                <option value="1">杭州海辰</option>
+                                <option value="2">杭州乐川</option>
+                            </select>
+                            <div class="input-group-btn">
+                                <button class="btn btn-xs btn-primary" type="reset">重置</button>
+                                <button class="btn btn-xs btn-primary" id="button" type="button">搜索</button>
+                            </div>
+                        </div>
+                    </form>
+                    #*<div class="form-horizontal">
                         <div class="form-group">
-                            <div class="col-xs-1 pull-right">
-                                <button id ="button" type="button" class="btn btn-block btn-primary btn-xs">
-                                搜索
-                                </button>
+                            <label class="control-label col-xs-1 pull-left">客户名称</label>
+                            <div class="col-xs-1 ">
+                                <input id="customer_name" class="form-control" type="search" placeholder="请输入客户名称"/>
                             </div>
-                            <div class="col-xs-2 pull-right">
-                                <input id="customer_product_name" class="form-control" type="search" value="" placeholder="请输入产品名称"/>
+                            <label class="col-xs-1 control-label ">客户商品名</label>
+                            <div class="col-xs-1 ">
+                                <input id="customer_product_name" class="form-control" type="search" value="" placeholder="请输入客户商品名称"/>
                             </div>
-                            <label class="col-xs-1 control-label pull-right">客户商品名</label>
-                            <div class="col-xs-1 pull-right">
-                                <select id="factory_name" class="form-control">
-                                    <option value="">全部</option>
-                                    <option value="1">杭州海辰</option>
-                                    <option value="2">杭州乐川</option>
-                                </select>
-                            </div>
-                            <label class="control-label col-xs-1 pull-right">加工厂</label>
-                            <div class="col-xs-2 pull-right">
+                            <label class="col-xs-1 control-label ">产品名称</label>
+                            <div class="col-xs-1 ">
                                 <div class="input-group">
                                     <input id="product_name" class="form-control" type="search" value="" placeholder="请输入产品名称"/>
                                     <span class="input-group-btn">
@@ -45,13 +63,25 @@
                                     </span>
                                 </div>
                             </div>
-                            <label class="col-xs-1 control-label pull-right">产品名称</label>
-                            <div class="col-xs-2 pull-right">
-                                <input id="customer_name" class="form-control" type="search" placeholder="请输入客户名称"/>
+                            <label class="col-xs-1 control-label ">品牌</label>
+                            <div class="col-xs-1 ">
+                                <input id="brand" class="form-control" type="search" value="" placeholder="请输入品牌"/>
                             </div>
-                            <label class="control-label col-xs-1 pull-right">客户名称</label>
+                            <label class="control-label col-xs-1 ">加工厂</label>
+                            <div class="col-xs-1">
+                                <select id="factory_name" class="form-control">
+                                    <option value="">全部</option>
+                                    <option value="1">杭州海辰</option>
+                                    <option value="2">杭州乐川</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-1 pull-right">
+                                <button id ="button" type="button" class="btn btn-block btn-primary btn-xs">
+                                搜索
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    </div>*#
 
                     <!--搜索框结束-->
                     <!--表格开始-->
@@ -87,13 +117,13 @@
 <!--modal-->
 <div class="modal fade" id="tSearch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
-        <div class="modal-content">
+        <div class="modal-content" style="width:400px;">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     &times;
                 </button>
             </div>
-            <div class="modal-body well" style="max-height: 200px; overflow-y: scroll; overflow-x: scroll;">
+            <div class="modal-body well" style="max-height: 300px; overflow-y: scroll; overflow-x: scroll;">
                 <div id="tree" class="tree">
 
                 </div>
@@ -153,10 +183,9 @@
 
            var args1 = $("#product_name").val();
            var args2 = $("#customer_name").val();
-           console.log(args1);
            var args3 = $("#factory_name").val();
            var args4 = $("#customer_product_name").val();
-           console.log(args3);
+           var arag5 = $("#brand").val();
             table
                     .column(1)
                     .search(args2)
@@ -164,6 +193,8 @@
                     .search(args4)
                     .column(5)
                     .search(args1)
+                    .column(6)
+                    .search(arag5)
                     .column(11)
                     .search(args3)
                     .draw(false);

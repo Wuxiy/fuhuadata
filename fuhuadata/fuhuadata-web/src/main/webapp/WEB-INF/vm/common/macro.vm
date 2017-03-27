@@ -124,4 +124,21 @@
 #end
 
 #macro(saleNav $num)
+    <ul id="saleNav" class="nav nav-tabs pull-left">
+        <li
+            #if($num == 1)
+                class="active"
+            #end
+        ><a href="">商机</a></li>
+        <li
+            #if($num == 2)
+                    class="active"
+            #end
+        ><a href="">报价</a></li>
+        <li
+            #if($num == 3)
+                    class="active"
+            #end
+        ><a href="">订单</a></li>
+    </ul>
 #end

@@ -20,7 +20,7 @@
     }
 
 $(document).ready(function(){
-    var url = '/packingArchives/getPackingArchivesById?id='+id;
+    var url = basePath+'/packingArchives/getPackingArchivesById?id='+id;
     jQuery.ajax({
         type:'GET',
         url:url,
@@ -103,7 +103,7 @@ function fsubmit(){
             $.each(result.data,function(i,item){
                 console.log(item);
                 $('.filename').eq(i).attr('data-url',item);
-                $('.fileimg').eq(i).attr('src',"../"+basePath+item);
+                $('.fileimg').eq(i).attr('src',basePath+"/"+item);
             })
 
         }

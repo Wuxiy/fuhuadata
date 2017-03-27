@@ -150,8 +150,8 @@
     $(function () {
 
 
-        $('#tree').creatTree('${request.contextPath}/productCategory/CategoryTree');
-        $('#tree').filtrateData('${request.contextPath}/productInfo/getProductInfoById','container','productArchivesList');
+        $('#tree').creatTree(basePath+'/productCategory/CategoryTree');
+        $('#tree').filtrateData(basePath+'/productInfo/getProductInfoById','container','productArchivesList');
         //初始数据
         productInfoForm({id:1011001});
         //数据提交
@@ -174,7 +174,7 @@
      */
     function productInfoForm(data) {
         jQuery.ajax({
-            url:'/productInfo/getProductInfoById',
+            url:basePath+'/productInfo/getProductInfoById',
             type:'POST',
             data:data
         }).done(function(data){
@@ -323,7 +323,7 @@
             return newTime = year+'-'+month+'-'+day+' '+hours+':'+minutes+':'+seconds;
         };
         jQuery.ajax({
-            'url':${request.contextPath}'/productInfo/doModify',
+            'url':basePath+'/productInfo/doModify',
             'type':'post',
             'data':JSON.stringify(upData),
             'contentType':"application/json"
