@@ -1,32 +1,37 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.fuhua</groupId>
-  <artifactId>fuhuadata</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <modules>
+    <groupId>com.fuhua</groupId>
+    <artifactId>fuhuadata</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <modules>
         <module>fuhuadata-domain</module>
         <module>fuhuadata-dao</module>
         <module>fuhuadata-manager</module>
         <module>fuhuadata-service</module>
         <module>fuhuadata-web</module>
-  </modules>
-  <name>fuhuadata</name>
-  <url>http://maven.apache.org</url>
+    </modules>
+    <name>fuhuadata</name>
+    <url>http://maven.apache.org</url>
 
-  <properties>
+    <properties>
         <fuhuadata-common.version>1.0</fuhuadata-common.version>
         <fuhuadata.version>0.0.1-SNAPSHOT</fuhuadata.version>
+        <spring.version>4.3.2.RELEASE</spring.version>
         <jackson.version>1.5.5</jackson.version>
         <mysql.connector.version>5.1.5</mysql.connector.version>
+        <mybatis.version>3.4.1</mybatis.version>
+        <mybatis.spring.version>1.3.0</mybatis.spring.version>
+        <mapper.version>3.3.6</mapper.version>
+        <pagehelper.version>4.1.4</pagehelper.version>
         <slf4j.version>1.6.1</slf4j.version>
         <junit.version>4.4</junit.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+    </properties>
 
-   <dependencyManagement>
+    <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>com.fuhua</groupId>
@@ -64,11 +69,6 @@
                 <artifactId>slf4j-log4j12</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
-            <dependency>
-                <groupId>joda-time</groupId>
-                <artifactId>joda-time</artifactId>
-                <version>1.6.2</version>
-            </dependency>
             <!-- logging end -->
 
             <!-- servlet jsp begin -->
@@ -85,10 +85,10 @@
                 <scope>provided</scope>
             </dependency>
             <dependency>
-			    <groupId>javax.servlet</groupId>
-			    <artifactId>jstl</artifactId>
-			    <version>1.2</version>
-			</dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>jstl</artifactId>
+                <version>1.2</version>
+            </dependency>
             <!-- servlet jsp end -->
 
             <!-- 数据库连接池 begin -->
@@ -115,23 +115,23 @@
                 <artifactId>struts2-spring-plugin</artifactId>
                 <version>2.3.15.1</version>
                 <exclusions>
-			       <exclusion>  
-			         <artifactId>spring-beans</artifactId>
-			         <groupId>org.springframework</groupId>
-			       </exclusion>
-			       <exclusion>
-			          <artifactId>spring-core</artifactId>
-			          <groupId>org.springframework</groupId>
-			        </exclusion>
-			        <exclusion>
-			           <artifactId>spring-context</artifactId>
-			           <groupId>org.springframework</groupId>
-			        </exclusion>
-			        <exclusion>
-			            <artifactId>spring-web</artifactId>
-			            <groupId>org.springframework</groupId>
-			        </exclusion>
-		    	</exclusions>
+                    <exclusion>
+                        <artifactId>spring-beans</artifactId>
+                        <groupId>org.springframework</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>spring-core</artifactId>
+                        <groupId>org.springframework</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>spring-context</artifactId>
+                        <groupId>org.springframework</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>spring-web</artifactId>
+                        <groupId>org.springframework</groupId>
+                    </exclusion>
+                </exclusions>
                 <!-- <version>2.2.1</version> -->
             </dependency>
             <dependency>
@@ -152,77 +152,125 @@
                 <artifactId>ibatis-sqlmap</artifactId>
                 <version>2.3.4.726</version>
             </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-2-spring</artifactId>
+                <version>1.0.3</version>
+            </dependency>
             <!-- IBATIS END -->
 
+            <!-- mybatis begin -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatis.spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>tk.mybatis</groupId>
+                <artifactId>mapper</artifactId>
+                <version>${mapper.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>javax.persistence</groupId>
+                        <artifactId>persistence-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>javax.persistence</groupId>
+                <artifactId>persistence-api</artifactId>
+                <version>1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper</artifactId>
+                <version>4.1.6</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.jsqlparser</groupId>
+                <artifactId>jsqlparser</artifactId>
+                <version>0.9.5</version>
+            </dependency>
+
             <!-- spring begin -->
-            <!-- spring需要的jar包 -->  
-	        <dependency>  
-	            <groupId>org.springframework</groupId>  
-	            <artifactId>spring-context</artifactId>  
-	            <version>3.0.2.RELEASE</version>  
-	            <type>jar</type>  
-	        </dependency>  
-	  
-	        <dependency>  
-	            <groupId>org.springframework</groupId>  
-	            <artifactId>spring-core</artifactId>  
-	            <version>3.0.2.RELEASE</version>   
-	            <type>jar</type>  
-	        </dependency>
-	  
-	        <dependency>  
-	            <groupId>org.springframework</groupId>  
-	            <artifactId>spring-beans</artifactId>  
-	            <version>3.0.2.RELEASE</version>
-	            <type>jar</type>  
-	        </dependency>  
-	  
-	        <dependency>  
-	            <groupId>org.springframework</groupId>  
-	            <artifactId>spring-webmvc</artifactId>  
-	            <version>3.0.2.RELEASE</version>
-	            <type>jar</type>  
-	        </dependency>  
-	  
-	        <dependency>  
-	            <groupId>org.springframework</groupId>  
-	            <artifactId>spring-orm</artifactId>  
-	            <version>3.0.2.RELEASE</version>  
-	            <type>jar</type>  
-	        </dependency>  
-	        
-	        <dependency>
+            <!-- spring需要的jar包 -->
+            <dependency>
                 <groupId>org.springframework</groupId>
-                <artifactId>spring-aop</artifactId>
-                <version>3.0.2.RELEASE</version>  
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+                <type>jar</type>
             </dependency>
-            
-             <dependency>
-			    <groupId>org.springframework</groupId>
-			    <artifactId>spring-aspects</artifactId>
-			    <version>3.0.2.RELEASE</version>
-			</dependency>
-			
-		   <!-- <dependency>
+            <dependency>
                 <groupId>org.springframework</groupId>
-                <artifactId>spring</artifactId>
-                <version>2.5.6</version>
+                <artifactId>spring-context-support</artifactId>
+                <version>${spring.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+                <type>jar</type>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${spring.version}</version>
+                <type>jar</type>
+            </dependency>
+
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-webmvc</artifactId>
-                <version>2.5.6</version>
+                <version>${spring.version}</version>
+                <type>jar</type>
             </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-orm</artifactId>
+                <version>${spring.version}</version>
+                <type>jar</type>
+            </dependency>
+
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-aop</artifactId>
-                <version>2.5.6</version>
+                <version>${spring.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-aspects</artifactId>
-                <version>2.5.6</version>
-            </dependency> -->
+                <version>${spring.version}</version>
+            </dependency>
+
+            <!-- <dependency>
+                 <groupId>org.springframework</groupId>
+                 <artifactId>spring</artifactId>
+                 <version>2.5.6</version>
+             </dependency>
+             <dependency>
+                 <groupId>org.springframework</groupId>
+                 <artifactId>spring-webmvc</artifactId>
+                 <version>2.5.6</version>
+             </dependency>
+             <dependency>
+                 <groupId>org.springframework</groupId>
+                 <artifactId>spring-aop</artifactId>
+                 <version>2.5.6</version>
+             </dependency>
+             <dependency>
+                 <groupId>org.springframework</groupId>
+                 <artifactId>spring-aspects</artifactId>
+                 <version>2.5.6</version>
+             </dependency> -->
             <!-- spring end -->
 
             <!-- aspectj begin -->
@@ -270,7 +318,7 @@
             <dependency>
                 <groupId>org.apache.velocity</groupId>
                 <artifactId>velocity</artifactId>
-                <version>1.6.3</version>
+                <version>1.7</version>
             </dependency>
 
             <dependency>
@@ -303,6 +351,11 @@
                 <groupId>org.codehaus.jackson</groupId>
                 <artifactId>jackson-jaxrs</artifactId>
                 <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.8.2</version>
             </dependency>
             <!-- JSON END -->
 
@@ -360,98 +413,107 @@
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>11.0.1</version>
+                <version>20.0</version>
             </dependency>
-			<dependency>
-					<groupId>sns.u.soa.common.rpc</groupId>
-					<artifactId>sns-u-soa-common-rpc</artifactId>
-					<version>1.0.2-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>yuicompressor</groupId>
-				<artifactId>yuicompressor</artifactId>
-				<version>2.4.7</version>
-			</dependency>
-			<dependency>
-				<groupId>com.thoughtworks.xstream</groupId>
-				<artifactId>xstream</artifactId>
-				<version>1.3.1</version>
-			</dependency>
-			<dependency>
-			    <groupId>org.springframework</groupId>
-			    <artifactId>spring-test</artifactId>
-			    <version>4.1.4.RELEASE</version>
-			     <scope>test</scope>
-			</dependency>
-	        <!-- CXF开始 -->
-	        <dependency>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-rt-frontend-jaxws</artifactId>
-				<version>2.2.4</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-rt-transports-http</artifactId>
-				<version>2.2.4</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-rt-ws-rm</artifactId>
-				<version>2.2.4</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-rt-ws-security</artifactId>
-				<version>2.2.4</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-rt-ws-addr</artifactId>
-				<version>2.2.4</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-rt-ws-policy</artifactId>
-				<version>2.2.4</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-common-utilities</artifactId>
-				<version>2.2.4</version>
-			</dependency>
-			<!-- CXF结束-->
-             
-		    <dependency>
-    			<groupId>org.owasp.antisamy</groupId>
-    			<artifactId>antisamy</artifactId>
-    			<version>1.4.4</version>
-		   </dependency>
-		   
-		   <dependency>
-		   		<groupId>org.apache.poi</groupId>
-   				<artifactId>poi</artifactId>
-    			<version>3.9</version>
-		   </dependency>
-		   <dependency>  
-			  <groupId>org.apache.httpcomponents</groupId>  
-			  <artifactId>httpcomponents-client</artifactId>  
-			  <version>4.3</version>  
-			</dependency>  
+            <dependency>
+                <groupId>sns.u.soa.common.rpc</groupId>
+                <artifactId>sns-u-soa-common-rpc</artifactId>
+                <version>1.0.2-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>yuicompressor</groupId>
+                <artifactId>yuicompressor</artifactId>
+                <version>2.4.7</version>
+            </dependency>
+            <dependency>
+                <groupId>com.thoughtworks.xstream</groupId>
+                <artifactId>xstream</artifactId>
+                <version>1.3.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- CXF开始 -->
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-frontend-jaxws</artifactId>
+                <version>2.2.4</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-transports-http</artifactId>
+                <version>2.2.4</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring-web</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-ws-rm</artifactId>
+                <version>2.2.4</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-ws-security</artifactId>
+                <version>2.2.4</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-ws-addr</artifactId>
+                <version>2.2.4</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-ws-policy</artifactId>
+                <version>2.2.4</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-common-utilities</artifactId>
+                <version>2.2.4</version>
+            </dependency>
+            <!-- CXF结束-->
+
+            <dependency>
+                <groupId>org.owasp.antisamy</groupId>
+                <artifactId>antisamy</artifactId>
+                <version>1.4.4</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>3.9</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpcomponents-client</artifactId>
+                <version>4.3</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>  
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
-                    <verbose>true</verbose>  
-                    <fork>true</fork>  
-                    <executable>${JAVA8_HOME}</executable>
+                    <verbose>true</verbose>
+                    <fork>true</fork>
+                    <compilerArgs>
+                        <arg>-XDignore.symbol.file</arg>
+                    </compilerArgs>
+                    <!--<executable>${JAVA8_HOME}</executable>-->
                 </configuration>
             </plugin>
             <plugin>
