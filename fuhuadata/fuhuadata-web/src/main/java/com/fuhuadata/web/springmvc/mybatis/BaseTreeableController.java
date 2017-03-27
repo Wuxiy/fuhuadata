@@ -38,7 +38,7 @@ public abstract class BaseTreeableController<E extends BaseEntity<ID> & Treeable
     @RequestMapping(value = "ajax/load", method = RequestMethod.GET)
     @ResponseBody
     public ResultPojo load(HttpServletRequest request,
-                           @RequestParam(value = "async", defaultValue = "true") boolean async,
+                           @RequestParam(value = "async", defaultValue = "true" ) boolean async,
                            @RequestParam(value = "searchName", required = false) String searchName,
                            @RequestParam(value = "parentId", required = false) ID parentId) {
 
