@@ -1,18 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>fuhuadata</artifactId>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>fuhuadata</artifactId>
+        <groupId>com.fuhua</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
     <groupId>com.fuhua</groupId>
+    <artifactId>fuhuadata-web</artifactId>
+    <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
-  </parent>
-  <groupId>com.fuhua</groupId>
-  <artifactId>fuhuadata-web</artifactId>
-  <packaging>war</packaging>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>fuhuadata-web Maven Webapp</name>
-  <url>http://maven.apache.org</url>
-  <dependencies> 
+    <name>fuhuadata-web Maven Webapp</name>
+    <url>http://maven.apache.org</url>
+    <dependencies>
         <dependency>
             <groupId>com.fuhua</groupId>
             <artifactId>fuhuadata-service</artifactId>
@@ -33,7 +33,7 @@
         <!-- logging end -->
 
         <!-- servlet jsp begin -->
-        <dependency> 
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
         </dependency>
@@ -42,9 +42,9 @@
             <artifactId>jsp-api</artifactId>
         </dependency>
         <dependency>
-			    <groupId>javax.servlet</groupId>
-			    <artifactId>jstl</artifactId>
-		</dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
         <!-- servlet jsp end -->
         <!-- struts begin -->
         <dependency>
@@ -65,28 +65,28 @@
         </dependency>
         <!-- struts end -->
 
-      <!-- aspectj begin -->
-      <dependency>
-          <groupId>org.aspectj</groupId>
-          <artifactId>aspectjrt</artifactId>
-          <version>1.6.9</version>
-      </dependency>
-      <dependency>
-          <groupId>org.aspectj</groupId>
-          <artifactId>aspectjweaver</artifactId>
-          <version>1.6.9</version>
-      </dependency>
-      <dependency>
-          <groupId>org.aspectj</groupId>
-          <artifactId>aspectjtools</artifactId>
-          <version>1.6.9</version>
-      </dependency>
-      <dependency>
-          <groupId>cglib</groupId>
-          <artifactId>cglib-nodep</artifactId>
-          <version>2.2</version>
-      </dependency>
-      <!-- aspectj end -->
+        <!-- aspectj begin -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.6.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.6.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjtools</artifactId>
+            <version>1.6.9</version>
+        </dependency>
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib-nodep</artifactId>
+            <version>2.2</version>
+        </dependency>
+        <!-- aspectj end -->
 
         <!-- IBATIS begin -->
         <dependency>
@@ -96,6 +96,10 @@
         <!-- IBATIS END -->
 
         <!-- velocity begin -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+        </dependency>
         <dependency>
             <groupId>velocity-tools</groupId>
             <artifactId>velocity-tools</artifactId>
@@ -122,11 +126,11 @@
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
         </dependency>
-          <dependency>
-              <groupId>commons-digester</groupId>
-              <artifactId>commons-digester</artifactId>
-              <version>2.1</version>
-          </dependency>
+        <dependency>
+            <groupId>commons-digester</groupId>
+            <artifactId>commons-digester</artifactId>
+            <version>2.1</version>
+        </dependency>
 
         <!-- YUI Compressor -->
         <dependency>
@@ -143,12 +147,11 @@
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
         </dependency>
-      <dependency>
-          <groupId>org.springframework</groupId>
-          <artifactId>spring-aop</artifactId>
-          <version>3.0.2.RELEASE</version>
-      </dependency>
-  </dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+        </dependency>
+    </dependencies>
     <build>
         <finalName>${project.artifactId}</finalName>
         <resources>
@@ -194,9 +197,9 @@
                     <source>1.6</source>
                     <target>1.6</target>
                     <encoding>UTF-8</encoding>
-                    <verbose>true</verbose>  
-                    <fork>true</fork>  
-                    <executable>${JAVA8_HOME}</executable>  
+                    <verbose>true</verbose>
+                    <fork>true</fork>
+                    <executable>${JAVA8_HOME}</executable>
                 </configuration>
             </plugin>
         </plugins>
@@ -207,26 +210,26 @@
             <id>development</id>
 
             <activation>
-            	<activeByDefault>true</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
 
             <properties>
-         
+
 
                 <fuhua.log.level>DEBUG</fuhua.log.level>
-                <system.log.path>d:/fuhualog</system.log.path>
+                <system.log.path>w:/fuhualog</system.log.path>
                 <fuhua.log.additivity>true</fuhua.log.additivity>
                 <fuhua.struts.devMode>true</fuhua.struts.devMode>
                 <fuhua.domain.name>data.fuhua.com</fuhua.domain.name>
                 <jdsmy.jdbc.datasource.type>dbcp</jdsmy.jdbc.datasource.type>
                 <jdsmy.jdbc.driver>com.mysql.jdbc.Driver</jdsmy.jdbc.driver>
                 <jdsmy.jdbc.url>
-                     <![CDATA[jdbc:mysql://192.168.30.120:3306/fuhuadata?useUnicode=true&amp;characterEncoding=UTF8]]>
+                    <![CDATA[jdbc:mysql://192.168.30.120:3306/fuhuadata?useUnicode=true&amp;characterEncoding=UTF8]]>
                 </jdsmy.jdbc.url>
                 <jdsmy.jdbc.username>root</jdsmy.jdbc.username>
                 <jdsmy.jdbc.password>root</jdsmy.jdbc.password>
 
-				
+
                 <!--.......................passport相关开始....................... -->
                 <!-- 前台登录cookie名 -->
                 <fuhua.login.cookie.name>_fuhua_</fuhua.login.cookie.name>
@@ -237,12 +240,13 @@
                 <!-- 超时时间 -->
                 <fuhua.session.timeout>3600</fuhua.session.timeout>
                 <!-- 解密密钥 -->
-                <fuhua.passport.login.auth.key>8B6697227CBCA902B1A0925D40FAA00B353F2DF4359D2099</fuhua.passport.login.auth.key>
+                <fuhua.passport.login.auth.key>8B6697227CBCA902B1A0925D40FAA00B353F2DF4359D2099
+                </fuhua.passport.login.auth.key>
                 <fuhua.login.domain.name>passport.fuhua.com</fuhua.login.domain.name>
                 <!-- 登录地址 -->
                 <fuhua.login.address>http://${fuhua.login.domain.name}/login/login.jsp</fuhua.login.address>
                 <!--............................. passport相关结束...................... -->
             </properties>
         </profile>
-     </profiles>
+    </profiles>
 </project>

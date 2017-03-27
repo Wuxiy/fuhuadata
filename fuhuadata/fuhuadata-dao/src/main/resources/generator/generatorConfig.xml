@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- 配置文件路径 -->
+    <properties resource="config.properties"/>
+
+    <!-- mysql 驱动地址 -->
+    <!--<classPathEntry location="${drive.class.path}"/>-->
+
+    <context id="dev" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!-- mapper 插件配置 -->
+        <plugin type="${mapper.plugin}">
+            <property name="mappers" value="${mapper.Mapper}"/>
+        </plugin>
+
+        <!-- 数据库连接信息 -->
+        <jdbcConnection driverClass="${jdbc.driverClass}"
+                        connectionURL="${jdbc.url}"
+                        userId="${jdbc.user}"
+                        password="${jdbc.password}">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- 生成的 model 实体文件的包路径 -->
+        <javaModelGenerator targetPackage="${model.package}" targetProject="${target.project}">
+            <!-- 生成的包名中是否包含数据库 schema 名 -->
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- 生成的 sqlmap xml 文件的路径 -->
+        <sqlMapGenerator targetPackage="${xml.mapper.package}" targetProject="${xml.target.project}/sqlmap">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!-- 生成 dao 或 mapper 接口文件的包路径 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="${mapper.package}" targetProject="${target.project}">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <table tableName="p_menu" domainObjectName="Menu">
+            <generatedKey column="menu_id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>
+
+    </context>
+</generatorConfiguration>
