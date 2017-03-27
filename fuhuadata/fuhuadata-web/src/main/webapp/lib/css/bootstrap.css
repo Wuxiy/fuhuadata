@@ -5740,6 +5740,7 @@ button.close {
 .tree a:focus {
   outline: 2px solid #333333;
   background: #eeeeee;
+  outline-offset: -2px;
 }
 .tree .branch,
 .tree .branch-node,
