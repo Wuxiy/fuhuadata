@@ -11,10 +11,8 @@ import com.fuhuadata.manager.CustomerSubcompanyInfoManager;
 import com.fuhuadata.domain.query.Result;
 import javax.annotation.Resource;
 
-import com.ibatis.sqlmap.client.SqlMapClient;
-import com.sun.xml.internal.fastinfoset.algorithm.FloatEncodingAlgorithm;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 
 /**
@@ -29,36 +27,17 @@ public class CustomerSubcompanyInfoManagerImpl implements CustomerSubcompanyInfo
 	@Resource
 	private CustomerBaseInfoDao customerBaseInfoDao;
 
-	@Autowired
-	private SqlMapClient sqlMapClient;
-    
 
     public CustomerSubcompanyInfo addCustomerSubcompanyInfo(CustomerSubcompanyInfo customerSubcompanyInfo) {
     	return customerSubcompanyInfoDao.addCustomerSubcompanyInfo(customerSubcompanyInfo);
     }
-    
+
+    @Transactional
     public boolean updateCustomerSubcompanyInfoById(List<CustomerEnterpriceNature> list, CustomerSubcompanyInfo customerSubcompanyInfo) {
-    	boolean flag = false;
-    	try{
-    		sqlMapClient.startTransaction();
-    		customerBaseInfoDao.deleteCustomerEnterpriceNatureByCustomerId(String.valueOf(customerSubcompanyInfo.getCustomerSubId()));
-    		customerBaseInfoDao.batchAddNature(list);
-			flag = customerSubcompanyInfoDao.updateCustomerSubcompanyInfoById(customerSubcompanyInfo.getCustomerSubId(), customerSubcompanyInfo)==1?true:false;
-			sqlMapClient.commitTransaction();
-		}catch(Exception e){
-    		e.printStackTrace();
-    		try{
-    			sqlMapClient.getCurrentConnection().rollback();
-			}catch(Exception e1){
-    			e1.printStackTrace();
-			}
-		}finally {
-			try{
-				sqlMapClient.endTransaction();
-			}catch(Exception e2){
-				e2.printStackTrace();
-			}
-		}
+		boolean flag = false;
+		customerBaseInfoDao.deleteCustomerEnterpriceNatureByCustomerId(String.valueOf(customerSubcompanyInfo.getCustomerSubId()));
+		customerBaseInfoDao.batchAddNature(list);
+		flag = customerSubcompanyInfoDao.updateCustomerSubcompanyInfoById(customerSubcompanyInfo.getCustomerSubId(), customerSubcompanyInfo)==1?true:false;
 		return flag;
     }
     

@@ -394,4 +394,35 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerBasicAjax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerBasicInteraction.js"></script>
+<script>
+    var obj = {
+        "documentaryRequire": {
+            "oceanBillOfLading": true,
+            "freightBillOfLading": true,
+            "invoice": false,
+            "packingLise": false,
+            "qualityPolicy": false,
+            "warranty": true,
+            "COO": {
+                "selected": "CIATB",
+                "value": "a"
+            },
+            "dangerousPackage": true,
+            "favoree": "1",
+            "fumigation": "1",
+            "MSDS": "1",
+            "telexRelease": {
+                "selected": "1",
+                "value": "text"
+            },
+            "tenderDocument": "1",
+            "examiningReport": "1",
+            "packingDeclaration": "1",
+            "ICWD": "1",
+            "MC": true
+        }
+    };
+    var jsonString = JSON.stringify(obj);
+    console.log(jsonString);
+</script>
 

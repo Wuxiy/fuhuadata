@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 
 import com.fuhuadata.vo.CustomerVisitRecordVO;
 import com.fuhuadata.vo.VisitRecordVO;
+import com.ibatis.sqlmap.client.SqlMapClient;
 
 import java.util.ArrayList;
 

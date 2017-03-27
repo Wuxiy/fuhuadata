@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="BUSINESSRECORD">
+    <typeAlias alias="BusinessRecord" type="com.fuhuadata.domain.BusinessRecord"/>
+    <typeAlias alias="QueryBusinessRecord" type="com.fuhuadata.domain.query.QueryBusinessRecord"/>
+
+    <resultMap id="BUSINESSRECORD-MAP" class="BusinessRecord">
+        <result column="id" property="id" jdbcType="INT" javaType="java.lang.Integer"/>
+        <result column="business_id" property="businessId" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="follow_content" property="followContent" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="follow_effect" property="followEffect" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="business_process" property="businessProcess" jdbcType="INT" javaType="java.lang.Integer"/>
+        <result column="create_user_id" property="createUserId" jdbcType="INT" javaType="java.lang.Integer"/>
+        <result column="create_user_name" property="createUserName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="lastmodify_user_id" property="lastmodifyUserId" jdbcType="INT" javaType="java.lang.Integer"/>
+        <result column="lastmodify_user_name" property="lastmodifyUserName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+    </resultMap>
+
+    <sql id="PAGE-COMMON">
+        <dynamic prepend=" WHERE">
+            <isNotNull prepend=" AND " property="id">
+                id = #id#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="businessId">
+                business_id  = #businessId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="followContent">
+                follow_content  = #followContent#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="followEffect">
+                follow_effect  = #followEffect#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="businessProcess">
+                business_process  = #businessProcess#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="createUserId">
+                create_user_id  = #createUserId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="createUserName">
+                create_user_name  = #createUserName#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="lastmodifyUserId">
+                lastmodify_user_id  = #lastmodifyUserId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="lastmodifyUserName">
+                lastmodify_user_name  = #lastmodifyUserName#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="createTime">
+                create_time  = #createTime#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="modifyTime">
+                modify_time  = #modifyTime#
+            </isNotNull>
+        </dynamic>
+    </sql>
+
+    <sql id="QUERY-COMMON">
+        <dynamic prepend=" WHERE">
+            <isNotNull prepend=" AND " property="id">
+                id = #id#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="businessId">
+                business_id  = #businessId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="followContent">
+                follow_content  = #followContent#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="followEffect">
+                follow_effect  = #followEffect#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="businessProcess">
+                business_process  = #businessProcess#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="createUserId">
+                create_user_id  = #createUserId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="createUserName">
+                create_user_name  = #createUserName#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="lastmodifyUserId">
+                lastmodify_user_id  = #lastmodifyUserId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="lastmodifyUserName">
+                lastmodify_user_name  = #lastmodifyUserName#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="createTime">
+                create_time  = #createTime#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="modifyTime">
+                modify_time  = #modifyTime#
+            </isNotNull>
+        </dynamic>
+    </sql>
+
+    <insert id="ADD" parameterClass="BusinessRecord">
+        insert into business_record (id, business_id, follow_content,
+        follow_effect, business_process, create_user_id,
+        create_user_name, lastmodify_user_id, lastmodify_user_name,
+        create_time, modify_time)
+        values (#id#, #businessId#, #followContent#,
+        #followEffect#, #businessProcess#, #createUserId#,
+        #createUserName#, #lastmodifyUserId#, #lastmodifyUserName#,
+        #createTime#, #modifyTime#)
+    </insert>
+
+    <update id="UPDATE" parameterClass="BusinessRecord">
+        <dynamic prepend=" WHERE">
+            <isNotNull prepend=", " property="id">
+                id = #id#
+            </isNotNull>
+            <isNotNull prepend=", " property="businessId">
+                business_id  = #businessId#
+            </isNotNull>
+            <isNotNull prepend=", " property="followContent">
+                follow_content  = #followContent#
+            </isNotNull>
+            <isNotNull prepend=", " property="followEffect">
+                follow_effect  = #followEffect#
+            </isNotNull>
+            <isNotNull prepend=", " property="businessProcess">
+                business_process  = #businessProcess#
+            </isNotNull>
+            <isNotNull prepend=", " property="createUserId">
+                create_user_id  = #createUserId#
+            </isNotNull>
+            <isNotNull prepend=", " property="createUserName">
+                create_user_name  = #createUserName#
+            </isNotNull>
+            <isNotNull prepend=", " property="lastmodifyUserId">
+                lastmodify_user_id  = #lastmodifyUserId#
+            </isNotNull>
+            <isNotNull prepend=", " property="lastmodifyUserName">
+                lastmodify_user_name  = #lastmodifyUserName#
+            </isNotNull>
+            <isNotNull prepend=", " property="createTime">
+                create_time  = #createTime#
+            </isNotNull>
+            <isNotNull prepend=", " property="modifyTime">
+                modify_time  = #modifyTime#
+            </isNotNull>
+        </dynamic>
+    </update>
+
+    <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
+        <![CDATA[
+            DELETE * FROM  business_record WHERE id=#id#
+    ]]>
+    </delete>
+
+    <select id="GET-BY-ID" resultMap="BUSINESSRECORD-MAP" parameterClass="java.lang.Integer">
+        <![CDATA[
+            SELECT * FROM  business_record WHERE id=#id#
+    ]]>
+    </select>
+
+    <select id="GET-BY-BUSINESSID" resultMap="BUSINESSRECORD-MAP" parameterClass="java.lang.String">
+        <![CDATA[
+            SELECT * FROM  business_record WHERE business_id=#businessId#
+    ]]>
+    </select>
+
+    <select id="GET-BY-QUERY" resultMap="BUSINESSRECORD-MAP" parameterClass="QueryBusinessRecord">
+        <![CDATA[
+            SELECT * FROM business_record
+    ]]>
+        <isParameterPresent>
+            <include refid="QUERY-COMMON"/>
+        </isParameterPresent>
+    </select>
+
+    <select id="GET-PAGE" resultMap="BUSINESSRECORD-MAP" parameterClass="QueryBusinessRecord">
+        <![CDATA[
+            SELECT * FROM business_record
+    ]]>
+        <isParameterPresent>
+            <include refid="PAGE-COMMON"/>
+        </isParameterPresent>
+        LIMIT #startRow#,#pageSize#
+    </select>
+
+    <select id="COUNT" resultClass="java.lang.Integer" parameterClass="QueryBusinessInfo">
+        <![CDATA[
+            SELECT COUNT(*) FROM business_record
+    ]]>
+        <isParameterPresent>
+            <include refid="PAGE-COMMON"/>
+        </isParameterPresent>
+    </select>
+
+</sqlMap>

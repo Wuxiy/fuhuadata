@@ -182,7 +182,6 @@ public class CustomerBaseInfoAction {
                 result.setSuccess(false);
                 log.error("更新客户信息错误");
             }
-            result.setMessage("更新客户信息成功");
             return result.getResultPojo();
     }
 
