@@ -40,6 +40,19 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
     }
 
 	@Override
+	public Result<CustomerBaseInfoVO> addCustomerBaseInfo(List<CustomerEnterpriceNature> customerEnterpriceNatures, List<CustomerMakeProduct> customerMakeProducts, CustomerBaseInfo customerBaseInfo) {
+		Result<CustomerBaseInfoVO> result = new Result<CustomerBaseInfoVO>();
+		try {
+			result.addDefaultModel(customerBaseInfoManager.addCustomerBaseInfo(customerEnterpriceNatures,customerMakeProducts,customerBaseInfo));
+		} catch(Exception e) {
+			result.setSuccess(false);
+			log.error("新增潜在客户基本信息出错",e);
+		}
+		return result;
+	}
+
+
+	@Override
 	public Result updateCustomerBaseInfoById(String customerId, CustomerBaseInfo customerBaseInfo) {
     	Result result = new Result();
     	try{
@@ -58,7 +71,7 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 			result.setSuccess(customerBaseInfoManager.updateCustomerBaseInfo(customerEnterpriceNatures,customerMakeProducts,customerBaseInfo));
 		} catch(Exception e) {
 			result.setSuccess(false);
-			log.error("根据客户id更新客户基本信息错误",e);
+			log.error("根据客户id更新客户信息错误",e);
 		}
 		return result;
     }

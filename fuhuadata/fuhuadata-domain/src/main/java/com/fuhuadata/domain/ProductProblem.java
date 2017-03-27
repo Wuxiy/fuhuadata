@@ -1,5 +1,7 @@
 package com.fuhuadata.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 /**
@@ -21,6 +23,7 @@ public class ProductProblem {
 
     private String createUserName;//创建人姓名
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;//创建时间
 
     private String remarks;//备注

@@ -1,5 +1,6 @@
 package com.fuhuadata.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fuhuadata.domain.CustomerMakeProduct;
 import com.fuhuadata.util.DateJsonDeserializer;
 import com.fuhuadata.util.DateJsonSerializer;
@@ -116,8 +117,10 @@ public class CustomerBaseInfoVO {
     private String majorCompetitors;
 
     /**创建时间**/
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date modifyTime;
 
 
@@ -138,6 +141,8 @@ public class CustomerBaseInfoVO {
 
     private String lastmodifyUserNameEn;//最后编辑人姓名
 
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date modifyTimeEn;//编辑时间
 
     /*产品产能*/
@@ -322,12 +327,10 @@ public class CustomerBaseInfoVO {
         this.customerCompletion = customerCompletion;
     }
 
-    @JsonSerialize(using = DateJsonSerializer.class)
     public Date getCreateTime() {
         return createTime;
     }
 
-    @JsonDeserialize(using = DateJsonDeserializer.class)
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
@@ -414,12 +417,10 @@ public class CustomerBaseInfoVO {
         this.lastmodifyUserNameEn = lastmodifyUserNameEn;
     }
 
-    @JsonSerialize(using = DateJsonSerializer.class)
     public Date getModifyTimeEn() {
         return modifyTimeEn;
     }
 
-    @JsonDeserialize(using = DateJsonDeserializer.class)
     public void setModifyTimeEn(Date modifyTimeEn) {
         this.modifyTimeEn = modifyTimeEn;
     }
@@ -497,12 +498,10 @@ public class CustomerBaseInfoVO {
         this.lastmodifyUserName = lastmodifyUserName;
     }
 
-    @JsonSerialize(using = DateJsonSerializer.class)
     public Date getModifyTime() {
         return modifyTime;
     }
 
-    @JsonDeserialize(using = DateJsonDeserializer.class)
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
     }

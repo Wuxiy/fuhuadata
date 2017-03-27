@@ -1,5 +1,6 @@
 package com.fuhuadata.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fuhuadata.util.DateJsonDeserializer;
 import com.fuhuadata.util.DateJsonSerializer;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
@@ -16,6 +17,7 @@ public class ComponentCost {
 
     private String componentName;//成分名称
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date priceEnd;//价格有效期
 
     private String unitCost;//单价
@@ -58,12 +60,10 @@ public class ComponentCost {
         this.suitableProduct = suitableProduct;
     }
 
-    @JsonSerialize(using= DateJsonSerializer.class)
     public Date getPriceEnd() {
         return priceEnd;
     }
 
-    @JsonDeserialize(using= DateJsonDeserializer.class)
     public void setPriceEnd(Date priceEnd) {
         this.priceEnd = priceEnd;
     }

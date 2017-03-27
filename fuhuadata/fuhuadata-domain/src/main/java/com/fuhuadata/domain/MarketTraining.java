@@ -1,6 +1,7 @@
 package com.fuhuadata.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fuhuadata.util.DateJsonDeserializer;
 import com.fuhuadata.util.DateJsonSerializer;
 import org.codehaus.jackson.map.JsonSerializer;
@@ -26,6 +27,7 @@ public class MarketTraining {
 
     private String userName;//用户姓名
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date uploadDate;//上传日期
 
     private String download;//下载操作
@@ -74,12 +76,10 @@ public class MarketTraining {
 
     public void setUserName(String userName){ this.userName = userName; }
 
-    @JsonSerialize(using = DateJsonSerializer.class)
     public Date getUploadDate() {
         return uploadDate;
     }
 
-    @JsonDeserialize(using = DateJsonDeserializer.class)
     public void setUploadDate(Date uploadDate) {
         this.uploadDate = uploadDate;
     }

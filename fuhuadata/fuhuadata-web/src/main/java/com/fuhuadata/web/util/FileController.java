@@ -2,7 +2,6 @@ package com.fuhuadata.web.util;
 
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
-import com.fuhuadata.vo.ImagePathVO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;

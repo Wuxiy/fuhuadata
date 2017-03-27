@@ -24,7 +24,8 @@ public class BusinessInfoDaoImpl extends SqlMapClientTemplate implements Busines
 
     @Override
     public BusinessInfo addBusinessInfo(BusinessInfo businessInfo) {
-        businessInfo.setBusinessId((String)this.insert(ADD,businessInfo));
+        this.insert(ADD, businessInfo);
+        System.out.println(businessInfo.getDeadline());
         return businessInfo;
     }
 
