@@ -177,6 +177,7 @@ public class BusinessInfo {
     }
 
     public void setCreateTime(Date createTime) {
+
         this.createTime = createTime;
     }
 

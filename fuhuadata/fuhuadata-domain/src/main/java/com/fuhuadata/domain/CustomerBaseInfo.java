@@ -165,11 +165,20 @@ public class CustomerBaseInfo implements Serializable{
 	private Integer isFuhuaExclusive;
 	//合作情况备注
 	private String cooperationRemark;
+	//其他企业性质
+	private String otherEnterpriceNature;
 	//产品线
 	private String productionLine;
 	public CustomerBaseInfo() {
 	}
 
+	public String getOtherEnterpriceNature() {
+		return otherEnterpriceNature;
+	}
+
+	public void setOtherEnterpriceNature(String otherEnterpriceNature) {
+		this.otherEnterpriceNature = otherEnterpriceNature;
+	}
 
 	public String getCustomerId() {
 		return customerId;
