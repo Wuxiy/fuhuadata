@@ -1,5 +1,10 @@
 package com.fuhuadata.domain;
 
+import com.fuhuadata.util.DateJsonDeserializer;
+import com.fuhuadata.util.DateJsonSerializer;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -172,18 +177,22 @@ public class BusinessInfo {
         this.lastmodifyUserName = lastmodifyUserName;
     }
 
+    @JsonSerialize(using = DateJsonSerializer.class)
     public Date getCreateTime() {
         return createTime;
     }
 
+    @JsonDeserialize(using = DateJsonDeserializer.class)
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
+    @JsonSerialize(using = DateJsonSerializer.class)
     public Date getModifyTime() {
         return modifyTime;
     }
 
+    @JsonDeserialize(using = DateJsonDeserializer.class)
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
     }
