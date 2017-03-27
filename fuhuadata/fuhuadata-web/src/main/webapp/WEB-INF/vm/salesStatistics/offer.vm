@@ -24,10 +24,10 @@
         <div class="tab-content col-xs-10">
             <div class="nav-deputy shadow-out clearfix" style="margin-bottom: 10px; ">
                 <ul id="myTab" class="nav nav-tabs pull-left">
-                <li class="active"><a href="#businessOpportunity" data-toggle="tab">商机</a></li>
-                <li><a href="#offer" data-toggle="tab">报价</a></li>
-                <li><a href="#order" data-toggle="tab">订单</a></li>
-            </ul>
+                    <li class="active"><a href="#businessOpportunity" data-toggle="tab">商机</a></li>
+                    <li><a href="#offer" data-toggle="tab">报价</a></li>
+                    <li><a href="#order" data-toggle="tab">订单</a></li>
+                </ul>
                 <div class="panel-heading">
                     <div class="btn-group btn-group-xs panel-heading-btn pull-right">
                         <a class="btn btn-xs btn-primary panel-heading-btn" href="" data-toggle="modal">
