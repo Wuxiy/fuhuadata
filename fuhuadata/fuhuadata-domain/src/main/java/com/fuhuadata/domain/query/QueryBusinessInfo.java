@@ -8,6 +8,9 @@ import java.util.Date;
  */
 public class QueryBusinessInfo {
 
+    private int startRow;
+    private int pageSize;
+
     private String businessId;//商机id
 
     private String customerId;//客户id
@@ -186,5 +189,21 @@ public class QueryBusinessInfo {
 
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
+    }
+
+    public int getStartRow() {
+        return startRow;
+    }
+
+    public void setStartRow(int startRow) {
+        this.startRow = startRow;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 }
