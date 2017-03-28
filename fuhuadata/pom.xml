@@ -528,6 +528,7 @@
                     <compilerArgs>
                         <arg>-XDignore.symbol.file</arg>
                     </compilerArgs>
+
                     <!--<executable>${JAVA8_HOME}</executable>-->
                 </configuration>
             </plugin>
@@ -543,7 +544,7 @@
                 <artifactId>maven-source-plugin</artifactId>
                 <version>2.0.4</version>
                 <configuration>
-                    <includePom>true</includePom>
+
                 </configuration>
                 <executions>
                     <execution>

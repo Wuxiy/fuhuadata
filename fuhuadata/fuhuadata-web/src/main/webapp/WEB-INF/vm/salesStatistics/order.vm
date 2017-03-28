@@ -23,236 +23,18 @@
         <!--列表部分-->
         <div class="tab-content col-xs-10">
             <div class="nav-deputy shadow-out clearfix" style="margin-bottom: 10px; ">
-                <ul id="myTab" class="nav nav-tabs pull-left">
-                    <li class="active"><a href="#businessOpportunity" data-toggle="tab">商机</a></li>
-                    <li><a href="#offer" data-toggle="tab">报价</a></li>
-                    <li><a href="#order" data-toggle="tab">订单</a></li>
-                </ul>
+                #saleNav(3)
                 <div class="panel-heading">
                     <div class="btn-group btn-group-xs panel-heading-btn pull-right">
                         <a class="btn btn-xs btn-primary panel-heading-btn" href="" data-toggle="modal">
                             <span class="glyphicon glyphicon-plus"></span>
                             新增商机
                         </a>
-                        <a class="btn btn-primary" href="">直接下单</a>
+                        <a class="btn btn-primary" href="">直接报价</a>
                     </div>
                 </div>
             </div>
-            <div id="businessOpportunity" class="tab-pane fade in active">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title" lang="zh">
-                            商机列表
-                        </h3>
-                    </div>
-                    <div class="panel-body clearfix">
-                        <!--搜索&筛选控件-->
-                        <div class="form-horizontal">
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <!--搜索栏-->
-                                    <div class="input-group">
-                                        <span class="input-group-addon" lang="zh">客户名称</span>
-                                        <select class="form-control">
-                                            <option value="" lang="zh">NUFARM</option>
-                                            <option value="" lang="zh">ADC</option>
-                                        </select>
-                                        <span class="input-group-addon" lang="zh">商机来源</span>
-                                        <select class="form-control">
-                                            <option value="" lang="zh">展会</option>
-                                            <option value="" lang="zh">门户网站</option>
-                                            <option value="" lang="zh">农药店考察</option>
-                                            <option value="" lang="zh">客户介绍</option>
-                                            <option value="" lang="zh">主动联系</option>
-                                            <option value="" lang="zh">其他</option>
-                                        </select>
-                                        <span class="input-group-addon" lang="zh">商机状态</span>
-                                        <select class="form-control">
-                                            <option value="" lang="zh">待报价</option>
-                                            <option value="" lang="zh">失败</option>
-                                            <option value="" lang="zh">已转化</option>
-                                            <option value="" lang="zh">全部</option>
-                                        </select>
-                                        <span class="input-group-addon" lang="zh">客户类型</span>
-                                        <select class="form-control">
-                                            <option value="" lang="zh">潜在客户</option>
-                                            <option value="" lang="zh">风险客户</option>
-                                            <option value="" lang="zh">一般客户</option>
-                                            <option value="" lang="zh">重要客户</option>
-                                            <option value="" lang="zh">大客户</option>
-                                            <option value="" lang="zh">战略客户</option>
-                                        </select>
-                                        <span class="input-group-addon" lang="zh">企业性质</span>
-                                        <select class="form-control">
-                                            <option value="" lang="zh">工厂</option>
-                                            <option value="" lang="zh">分销商</option>
-                                            <option value="" lang="zh">经销商</option>
-                                        </select>
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-xs btn-primary" type="button">搜索</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--表格-->
-                        <table class="table table-condensed table-bordered table-striped text-center">
-                            <caption class="text-right"><span lang="zh">金额单位：万元</span></caption>
-                            <thead>
-                            <tr>
-                                <th class="text-center" lang="zh">编号</th>
-                                <th class="text-center" lang="zh">商机名称</th>
-                                <th class="text-center" lang="zh">客户名称</th>
-                                <th class="text-center" lang="zh">客户类型</th>
-                                <th class="text-center" lang="zh">企业类型</th>
-                                <th class="text-center" lang="zh">开始时间</th>
-                                <th class="text-center" lang="zh">剩余时间(日)</th>
-                                <th class="text-center" lang="zh">商机来源</th>
-                                <th class="text-center" lang="zh">预计收益</th>
-                                <th class="text-center" lang="zh">状态</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>00001</td>
-                                <td><a href="" target="_blank">草甘膦原药采购</a></td>
-                                <td>NUFARM</td>
-                                <td>战略客户</td>
-                                <td>经销商</td>
-                                <td>客户主要销售草甘膦系列产品，有原药采购需求</td>
-                                <td>门店考察</td>
-                                <td>80</td>
-                                <td>100</td>
-                                <td>正常</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <!--分页导航-->
-                        <div class="form-group pull-left table-pagination">
-                            共<span>123</span>条记录，<span>130</span>页，跳转到第&nbsp;<input class="form-control pagination-input" type="number"/>&nbsp;页
-                            <button class="btn btn-xs btn-primary">确定</button>
-                        </div>
-                        <ul class="pagination pull-right table-pagination">
-                            <li class="disabled"><a href="#">上一页</a></li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">6</a></li>
-                            <li><a href="#">7</a></li>
-                            <li><a href="">&hellip;</a></li>
-                            <li><a href="#">下一页</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div id="offer" class="tab-pane fade">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title" lang="zh">
-                            报价列表
-                        </h3>
-                    </div>
-                    <div class="panel-body clearfix">
-                        <!--搜索&筛选控件-->
-                        <div class="form-horizontal">
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <!--搜索栏-->
-                                    <div class="input-group">
-                                        <span class="input-group-addon" lang="zh">客户名称</span>
-                                        <select class="form-control">
-                                            <option value="" lang="zh">NUFARM</option>
-                                            <option value="" lang="zh">ADC</option>
-                                        </select>
-                                        <span class="input-group-addon" lang="zh">订单编号</span>
-                                        <input class="form-control" type="text" value="" />
-                                        <span class="input-group-addon" lang="zh">订单状态</span>
-                                        <select class="form-control">
-                                            <option value="" lang="zh">待下单</option>
-                                            <option value="" lang="zh">失败</option>
-                                            <option value="" lang="zh">全部</option>
-                                            <option value="" lang="zh">已下单</option>
-                                        </select>
-                                        <span class="input-group-addon" lang="zh">客户类型</span>
-                                        <select class="form-control">
-                                            <option value="" lang="zh">潜在客户</option>
-                                            <option value="" lang="zh">风险客户</option>
-                                            <option value="" lang="zh">一般客户</option>
-                                            <option value="" lang="zh">重要客户</option>
-                                            <option value="" lang="zh">大客户</option>
-                                            <option value="" lang="zh">战略客户</option>
-                                        </select>
-                                        <span class="input-group-addon" lang="zh">企业性质</span>
-                                        <select class="form-control">
-                                            <option value="" lang="zh">工厂</option>
-                                            <option value="" lang="zh">分销商</option>
-                                            <option value="" lang="zh">经销商</option>
-                                            <option value="" lang="zh">终端客户</option>
-                                            <option value="" lang="zh">其他</option>
-                                        </select>
-                                        <span class="input-group-addon" lang="zh">合同总金额</span>
-                                        <input class="form-control" type="text" value="" />
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-xs btn-primary" type="button">搜索</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--表格-->
-                        <table class="table table-condensed table-bordered table-striped text-center">
-                            <caption class="text-right"><span lang="zh">金额单位：万元</span></caption>
-                            <thead>
-                            <tr>
-                                <th class="text-center" lang="zh">订单编号</th>
-                                <th class="text-center" lang="zh">商机编号</th>
-                                <th class="text-center" lang="zh">客户名称</th>
-                                <th class="text-center" lang="zh">客户类型</th>
-                                <th class="text-center" lang="zh">企业性质</th>
-                                <th class="text-center" lang="zh">订单总价</th>
-                                <th class="text-center" lang="zh">订单产品</th>
-                                <th class="text-center" lang="zh">备注</th>
-                                <th class="text-center" lang="zh">状态</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>00001</td>
-                                <td><a href="" target="_blank">草甘膦原药采购</a></td>
-                                <td>NUFARM</td>
-                                <td>战略客户</td>
-                                <td>经销商</td>
-                                <td>客户主要销售草甘膦系列产品，有原药采购需求</td>
-                                <td>门店考察</td>
-                                <td>100</td>
-                                <td>正常</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <!--分页导航-->
-                        <div class="form-group pull-left table-pagination">
-                            共<span>123</span>条记录，<span>130</span>页，跳转到第&nbsp;<input class="form-control pagination-input" type="number"/>&nbsp;页
-                            <button class="btn btn-xs btn-primary">确定</button>
-                        </div>
-                        <ul class="pagination pull-right table-pagination">
-                            <li class="disabled"><a href="#">上一页</a></li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">6</a></li>
-                            <li><a href="#">7</a></li>
-                            <li><a href="">&hellip;</a></li>
-                            <li><a href="#">下一页</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div id="order" class="tab-pane fade">
-                <div class="panel panel-default">
+            <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title" lang="zh">
                             订单列表
@@ -325,7 +107,7 @@
                                 <th class="text-center" lang="zh">状态</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="oderList">
                             <tr>
                                 <td>00001</td>
                                 <td><a href="" target="_blank">草甘膦原药采购</a></td>
@@ -340,25 +122,9 @@
                             </tbody>
                         </table>
                         <!--分页导航-->
-                        <div class="form-group pull-left table-pagination">
-                            共<span>123</span>条记录，<span>130</span>页，跳转到第&nbsp;<input class="form-control pagination-input" type="number"/>&nbsp;页
-                            <button class="btn btn-xs btn-primary">确定</button>
-                        </div>
-                        <ul class="pagination pull-right table-pagination">
-                            <li class="disabled"><a href="#">上一页</a></li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">6</a></li>
-                            <li><a href="#">7</a></li>
-                            <li><a href="">&hellip;</a></li>
-                            <li><a href="#">下一页</a></li>
-                        </ul>
+                        <div id="pagination" class="pagination"></div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 </div>
@@ -368,5 +134,107 @@
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/js/pagination/pagination.css" />
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript">
+    var pageSize = 3;
+    var click_node ={oneLevelId:0,twoLevelId:0};//接收目录树点击节点的id及其父id
+    click_node.serach = function(){
+        serach();
+    }
 
+    $(document).ready(function(){
+        //生成地区目录树
+        $('#tree').creatTree('/customerBaseInfo/initAreaCategoryTree');
+        //目录树节点绑定点击事件
+        $('#tree').bindClickForCusArea(click_node);
+        //搜索按钮绑定事件
+        $("#submit").click(function(){
+            serach();
+        });
+        //默认查询数据
+        serach();
+    })
+
+    //查询按钮提交数据
+    function serach(){
+        var total = getListCount();
+        getDataList(0);
+        $("#pagination").pagination(total,{
+            items_per_page : pageSize,
+            num_edge_entries : 3,
+            num_display_entries : 10,
+            callback:getDataList
+        });
+    }
+    var businessOpportunity = ['工厂','分销商' ,'经销商' ,'终端客户' ,'其他'];
+    //根据页码获取列表数据
+    function getDataList(pageNum,jq){
+        jQuery.ajax({
+            url: basePath + '',
+            dataType:'json',
+            data:{
+                areaClassId:click_node.oneLevelId,
+                areaId:click_node.twoLevelId,
+                startRow:pageNum*pageSize,
+                pageSize:pageSize
+            },
+            async:true,
+            method:'POST',
+            success:function(data){
+                var ResultData = data.data;
+                var _html = '';
+                for(var i=0;i<ResultData.length;i++){
+                    _html += '<tr>';
+                    _html += '	<td>'+ResultData[i].name+'</td>';
+                    _html += '  <td><a href="">'+ResultData[i].name+'</a></td>';
+                    _html += '  <td>'+ResultData[i].name+'</td>';
+                    _html += '  <td lang="zh">'+ResultData[i].name+'</td>';
+                    _html += '  <td lang="zh">'+ResultData[i].name+'</td>';
+                    _html += '  <td>'+ResultData[i].name+'A</td>';
+                    _html += '  <td>'+ResultData[i].name+'</td>';
+                    _html += '  <td lang="zh">'+ResultData[i].name+'</td>';
+                    _html += '  <td lang="zh">'+(ResultData[i].name==0?"否":"是")+'</td>';
+                    _html +='   <td>'+(ResultData[i].name==0?"否":"是")+'</td>';
+                    _html +='   <td>'+ResultData[i].name+'</td>';
+                    _html +='   <td>'+ResultData[i].name+'</td>';
+                    _html +='   </tr>';
+                }
+                $("#oderList").html(_html);
+            }
+        });
+    }
+
+    /*分页插件参数
+    参数名	描述	参数值
+    maxentries	总条目数	必选参数，整数
+    items_per_page	每页显示的条目数	可选参数，默认是10
+    num_display_entries	连续分页主体部分显示的分页条目数	可选参数，默认是10
+    current_page	当前选中的页面	可选参数，默认是0，表示第1页
+    num_edge_entries	两侧显示的首尾分页的条目数	可选参数，默认是0
+    link_to	分页的链接	字符串，可选参数，默认是"#"
+    prev_text	“前一页”分页按钮上显示的文字	字符串参数，可选，默认是"Prev"
+    next_text	“下一页”分页按钮上显示的文字	字符串参数，可选，默认是"Next"
+    ellipse_text	省略的页数用什么文字表示	可选字符串参数，默认是"..."
+    prev_show_always	是否显示“前一页”分页按钮	布尔型，可选参数，默认为true，即显示“前一页”按钮
+    next_show_always	是否显示“下一页”分页按钮	布尔型，可选参数，默认为true，即显示“下一页”按钮
+    callback	回调函数	默认无执行效果*/
+
+    /**
+     * 获取列表数据总条目数
+     */
+    function getListCount(){
+        var total = 0;
+        jQuery.ajax({
+            url:basePath + '',
+            dataType:'JSON',
+            data:{
+                areaClassId:click_node.oneLevelId,
+                areaId:click_node.twoLevelId,
+            },
+            async:false,
+            method:'POST',
+            success:function(data){
+                total = data.data;
+            }
+        });
+        return total;
+    }
 </script>
