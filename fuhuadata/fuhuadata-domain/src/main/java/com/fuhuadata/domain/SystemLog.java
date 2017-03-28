@@ -1,6 +1,7 @@
 package com.fuhuadata.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fuhuadata.util.DateJsonDeserializer;
 import com.fuhuadata.util.DateJsonSerializer;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
@@ -18,6 +19,8 @@ public class SystemLog {
     private String ip;//操作ip
     private String module;//执行的模块
     private String method;//执行的方法
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date date;//执行时间
     private Integer responseDate;//响应时间
     private String commit;//执行描述
@@ -52,7 +55,6 @@ public class SystemLog {
         return method;
     }
 
-    @JsonSerialize(using = DateJsonSerializer.class)
     public Date getDate() {
         return date;
     }
@@ -93,7 +95,6 @@ public class SystemLog {
         this.method = method;
     }
 
-    @JsonDeserialize(using = DateJsonDeserializer.class)
     public void setDate(Date date) {
         this.date = date;
     }

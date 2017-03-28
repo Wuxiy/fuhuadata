@@ -4,7 +4,9 @@ import com.fuhuadata.domain.BusinessInfo;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.BusinessInfoService;
+import com.fuhuadata.vo.BusinessInfoVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import java.util.List;
 
 /**
  * 商机信息
@@ -20,8 +23,40 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/businessInfo/*")
 public class BusinessInfoAction {
+    private final static org.apache.commons.logging.Log log = LogFactory.getLog(BusinessInfoAction.class);
     @Autowired
     private BusinessInfoService businessInfoService;
+
+
+
+
+    /**
+     * into
+     * @return
+     */
+    @RequestMapping(value="/intoBusinessInfo",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "into")
+    public ModelAndView intoBusinessInfo(){
+        return new ModelAndView("/businessInfo");
+    }
+
+    /**
+     * list
+     * @param businessInfoVO
+     * @return
+     */
+    @RequestMapping(value = "/queryBusinessInfoPageList",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "queryBusinessInfoPageList")
+    @ResponseBody
+    public ResultPojo queryBusinessInfoPageList(@RequestBody BusinessInfoVO businessInfoVO){
+        try{
+            Result<List<BusinessInfoVO>> result = businessInfoService.getBusinessInfoByPage(businessInfoVO);
+            return result.getResultPojo();
+        }catch (Exception e){
+            log.error("分页条件查询商机列表数据失败",e);
+        }
+        return null;
+    }
 
 
     /**

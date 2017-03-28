@@ -1,0 +1,105 @@
+ <!--副导航-->
+<div class="nav-deputy shadow-out clearfix">
+    <ul class="breadcrumb pull-right">
+        <li><span class="glyphicon glyphicon-map-marker"></span></li>
+        <li>
+            <a href="" lang="zh">系统管理</a>
+        </li>
+        <li class="active" lang="zh">菜单管理</li>
+    </ul>
+</div>
+<!--表格容器-->
+<div class="dashboard-wrapper">
+    <div class="col-xs-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title" lang="zh">菜单列表</h3>
+            </div>
+            <div id="menuAside" class="panel-body tree-container"></div>
+        </div>
+    </div>
+    <div class="col-xs-10  view-HD-lg">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <button class="btn btn-xs btn-primary pull-right panel-heading-btn">新增</button>
+                <h3 class="panel-title" lang="zh">菜单管理</h3>
+            </div>
+            <div class="panel-body panel-edit">
+                <div class="row">
+                    <div class="col-xs-12 form-horizontal">
+                        <!--表单-->
+                        <div class="form-group">
+                            <label for="" class="control-label col-xs-1" lang="zh">菜单编码</label>
+                            <div class="col-xs-2">
+                                <input type="text" class="form-control" />
+                            </div>
+                            <label for="" class="control-label col-xs-1" lang="zh">上一级菜单</label>
+                            <div class="col-xs-2">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" />
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-xs btn-default dropdown-toggle" data-toggle="modal" data-target="#treeModal" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                                    </div>
+                                </div>
+                            </div>
+##                            modal
+                            <div class="modal fade" id="treeModal" tabindex="-1"  aria-hidden="true" data-backdrop="static">
+                                <div class="modal-dialog" style="width: 400px">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                        </div>
+                                        <div id="menuModal" class="modal-body">
+                                            <div class="input-group" data-stopPropagation="true">
+                                                <input type="text" class="form-control notDisabled" placeholder="请输入关键词查找" lang="zh" />
+                                                <div class="input-group-btn"><button class="btn btn-xs btn-primary" type="submit"><span class="glyphicon glyphicon-search"></span></button></div>
+                                            </div>
+                                            <hr />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group text-right">
+                            <label for="" class="control-label col-xs-1" lang="zh">菜单名称</label>
+                            <div class="col-xs-2"><input type="text" class="form-control" value="" /></div>
+                            <label for="" class="control-label col-xs-1" lang="zh">页面路径</label>
+                            <div class="col-xs-2"><input class="form-control" type="text" value="" /></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label col-xs-1" lang="zh">菜单顺序</label>
+                            <div class="col-xs-2"><input class="form-control" type="text" value="" /></div>
+                            <label for="" class="control-label col-xs-1" lang="zh">启用状态</label>
+                            <div class="col-xs-2">
+                                <select class="form-control">
+                                    <option value="" lang="zh">已启用</option>
+                                    <option value="" lang="zh">已禁用</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
+<script>
+    var tree = $('<div class="tree"></div>');
+    var modalTree = $('<div class="tree"></div>');
+    modalTree.creatTree('${request.contextPath}/sys/menu/ajax/load');
+    tree.creatTree('${request.contextPath}/sys/menu/ajax/load');
+    $('#menuAside').append(tree);
+    $('.panel-edit').find('input').not('.notDisabled').filter('.form-control').attr('disabled','disabled');
+    $('#menuModal').append(modalTree);
+    $(document).on('click','.tree a',function (e) {
+        e.preventDefault();
+        var thisEl = $(this);
+        var par = thisEl.parents('.tree');
+        par.find('li').removeClass('active');
+        thisEl.parent('li').addClass('active');
+    })
+</script>

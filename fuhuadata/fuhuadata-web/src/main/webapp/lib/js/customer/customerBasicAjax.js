@@ -66,10 +66,10 @@ function customerMakeProductData(getData){
         var location = $('#addPro').parents('.form-group');
         var row = '';
         row += '<div id="'+item.id+'" name="customerMakeProduct" class="form-group">';
-        row += '<label class="col-xs-1 control-label">生产产品'+item.id+'</label>';
-        row += '<div class="col-xs-2"><input class="form-control" type="text" disabled value="'+item.productName+'"></div>';
+        row += '<label class="col-xs-1 control-label">生产产品</label>';
+        row += '<div class="col-xs-2"><input name="productName" class="form-control" type="text" disabled value="'+item.productName+'"></div>';
         row += '<label class="col-xs-1 control-label">产能</label>';
-        row += '<div class="col-xs-2"><input class="form-control" type="text" disabled value="'+item.production+'"></div>';
+        row += '<div class="col-xs-2"><input name="production" class="form-control" type="text" disabled value="'+item.production+'"></div>';
         row += '</div>';
         location.before(row);
     });

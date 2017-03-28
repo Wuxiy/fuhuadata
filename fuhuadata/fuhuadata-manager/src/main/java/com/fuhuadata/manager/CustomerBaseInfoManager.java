@@ -21,6 +21,8 @@ public interface CustomerBaseInfoManager {
 	 */
     public CustomerBaseInfo addCustomerBaseInfo(CustomerBaseInfo customerBaseInfo) ;
 
+    public CustomerBaseInfoVO addCustomerBaseInfo(List<CustomerEnterpriceNature> customerEnterpriceNatures, List<CustomerMakeProduct> customerMakeProducts , CustomerBaseInfo customerBaseInfo);
+
 	public boolean deleteCustomerEnterpriceNatureByCustomerId(String customerId);
 
 	public boolean batchAddNature(List<CustomerEnterpriceNature> customerEnterpriceNatures);

@@ -51,7 +51,6 @@ $(function () {
 
     //编辑客户基本信息
     $(document).on('click.edit','editCustomerBasic',function () {
-        //生产产品重排序
         addDelBtn('customerMakeProduct','form-group');
     });
     //客户基本信息提交
@@ -104,6 +103,17 @@ $(function () {
         upData(basePath+'/customerEncyclopedia/doModify','POST',customerEncyclopediaObj(),"application/json");
         delDelBtn();
     });
+    $(document).on('change','#customerType',function () {
+        var $this = $(this);
+        if($this.val()==3){
+           $('#showReasons').click();
+           var container = $('#reasons').find('.modal-body .form-group');
+           var content = '';
+           content += '<label class="control-label col-xs-2">流失原因分析</label>';
+           content += '<div class="col-xs-9"><textarea class="form-control" rows="8"></textarea></div>';
+           container.html('').append(content);
+        }
+    })
 
 });
 

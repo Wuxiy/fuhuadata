@@ -31,10 +31,32 @@ public class CustomerBaseInfoManagerImpl implements CustomerBaseInfoManager {
 
 	@Resource
 	private CustomerMakeProductDao customerMakeProductDao;
-    
 
-    public CustomerBaseInfo addCustomerBaseInfo(CustomerBaseInfo customerBaseInfo) {
-    	return customerBaseInfoDao.addCustomerBaseInfo(customerBaseInfo);
+
+	/**
+	 * 一般客户新增
+	 * @param customerBaseInfo
+	 * @return
+	 */
+	@Override
+	public CustomerBaseInfo addCustomerBaseInfo(CustomerBaseInfo customerBaseInfo) {
+		return customerBaseInfoDao.addCustomerBaseInfo(customerBaseInfo);
+	}
+
+	/**
+	 * 潜在客户新增，包括产品产能和企业性质
+	 * @param customerEnterpriceNatures
+	 * @param customerMakeProducts
+	 * @param customerBaseInfo
+	 * @return
+	 */
+	@Transactional
+    public CustomerBaseInfoVO addCustomerBaseInfo(List<CustomerEnterpriceNature> customerEnterpriceNatures, List<CustomerMakeProduct> customerMakeProducts , CustomerBaseInfo customerBaseInfo) {
+		customerBaseInfoDao.batchAddNature(customerEnterpriceNatures);
+		customerMakeProductDao.addCustomerMakeProducts(customerMakeProducts);
+		customerBaseInfoDao.addCustomerBaseInfo(customerBaseInfo);
+		return customerBaseInfoDao.getCustomerInfoById(customerBaseInfo.getCustomerId());
+
     }
 
 	@Override
@@ -52,7 +74,6 @@ public class CustomerBaseInfoManagerImpl implements CustomerBaseInfoManager {
 	@Transactional
 	public boolean updateCustomerBaseInfo(List<CustomerEnterpriceNature> customerEnterpriceNatures, List<CustomerMakeProduct> customerMakeProducts , CustomerBaseInfo customerBaseInfo) {
 		boolean flag= false;
-
 			customerBaseInfoDao.deleteCustomerEnterpriceNatureByCustomerId(customerBaseInfo.getCustomerId());
 			customerBaseInfoDao.batchAddNature(customerEnterpriceNatures);
 			customerMakeProductDao.deleteCustomerMakeProductByCustomerId(customerBaseInfo.getCustomerId());

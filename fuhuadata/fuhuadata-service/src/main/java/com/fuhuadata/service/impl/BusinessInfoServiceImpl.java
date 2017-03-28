@@ -5,6 +5,7 @@ import com.fuhuadata.domain.query.QueryBusinessInfo;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.BusinessInfoManager;
 import com.fuhuadata.service.BusinessInfoService;
+import com.fuhuadata.vo.BusinessInfoVO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +94,18 @@ public class BusinessInfoServiceImpl implements BusinessInfoService {
         }catch(Exception e){
             result.setSuccess(false);
             log.error("条件查询商机列表出错",e);
+        }
+        return result;
+    }
+
+    @Override
+    public Result<List<BusinessInfoVO>> getBusinessInfoByPage(BusinessInfoVO businessInfoVO) {
+        Result<List<BusinessInfoVO>> result = new Result<List<BusinessInfoVO>>();
+        try{
+            result.addDefaultModel("BusinessInfos",businessInfoManager.getBusinessInfoByPage(businessInfoVO));
+        }catch(Exception e){
+            result.setSuccess(false);
+            log.error("分页条件查询商机列表出错",e);
         }
         return result;
     }

@@ -24,6 +24,16 @@ public interface CustomerBaseInfoService {
 	 */
     public Result<CustomerBaseInfo> addCustomerBaseInfo(CustomerBaseInfo customerBaseInfo) ;
 
+	/**
+	 * 潜在客户新增
+	 * @param customerEnterpriceNatures
+	 * @param customerMakeProducts
+	 * @param customerBaseInfo
+	 * @return
+	 */
+	public Result<CustomerBaseInfoVO> addCustomerBaseInfo(List<CustomerEnterpriceNature> customerEnterpriceNatures, List<CustomerMakeProduct> customerMakeProducts ,CustomerBaseInfo customerBaseInfo);
+
+
     public Result updateCustomerBaseInfoById(String customerId,CustomerBaseInfo customerBaseInfo);
  
     /**

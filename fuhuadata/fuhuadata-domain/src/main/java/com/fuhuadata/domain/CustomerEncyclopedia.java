@@ -1,5 +1,6 @@
 package com.fuhuadata.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fuhuadata.util.DateJsonDeserializer;
 import com.fuhuadata.util.DateJsonSerializer;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
@@ -31,12 +32,14 @@ public class CustomerEncyclopedia {
 
         private String createUserName;//创建人姓名
 
+         @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         private Date createTime;//创建时间
 
         private Integer lastmodifyUserId;//最后编辑人id
 
         private String lastmodifyUserName;//最后编辑人姓名
 
+        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         private Date modifyTime;//最后编辑时间
 
         private String remarks;//备注
@@ -59,12 +62,12 @@ public class CustomerEncyclopedia {
             this.createUserName = createUserName ;
         }
 
-        @JsonSerialize(using = DateJsonSerializer.class)
+
         public Date getCreateTime() {
             return createTime;
         }
 
-        @JsonDeserialize(using = DateJsonDeserializer.class)
+
         public void setCreateTime(Date createTime) {
             this.createTime = createTime;
         }
@@ -85,12 +88,10 @@ public class CustomerEncyclopedia {
             this.lastmodifyUserName = lastmodifyUserName ;
         }
 
-        @JsonSerialize(using = DateJsonSerializer.class)
         public Date getModifyTime() {
             return modifyTime;
         }
 
-        @JsonDeserialize(using = DateJsonDeserializer.class)
         public void setModifyTime(Date modifyTime) {
             this.modifyTime = modifyTime;
         }

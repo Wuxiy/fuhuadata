@@ -393,7 +393,7 @@
 			p_areaclass pa
 		</isNotEqual>
 		<isNotEmpty prepend="," property="enterpriseNature">
-			(select * from customer_enterprise_nature where type=1 and nature=#enterpriseNature#) nature
+			(select * from customer_enterprise_nature where nature=#enterpriseNature#) nature
 		</isNotEmpty>
 
 		<isParameterPresent>
@@ -445,7 +445,7 @@
 			base.has_chi_company hasChiCompany,
 			base.has_chi_purchase hasChiPurchase,
 			base.customer_status customerStatus,
-			base.loss_reason lossReason,
+
 			base.qualifications_file_url qualificationsFileUrl,
 			base.factory_location factoryLocation,
 			base.major_competitors majorCompetitors,
@@ -466,7 +466,7 @@
 			LEFT JOIN k_customer_encyclopedia en
 			ON base.customer_id = en.customer_id
 			LEFT JOIN customer_enterprise_nature nature
-			ON nature.customer_id=base.customer_id and nature.type=1
+			ON nature.customer_id=base.customer_id
 			WHERE
 				base.customer_id = 'fh123456'
 			GROUP BY base.customer_id
@@ -482,7 +482,7 @@
 	<select id="COUNT" resultClass="java.lang.Integer" parameterClass="QueryCustomerBaseInfo">
 		SELECT COUNT(base.customer_id) FROM customer_base_info base
 		<isNotEmpty prepend="," property="enterpriseNature">
-			(select * from customer_enterprise_nature where nature=#enterpriseNature# and type=1) nature
+			(select * from customer_enterprise_nature where nature=#enterpriseNature#) nature
 		</isNotEmpty>
 		<isNotEqual property="areaClassId" compareValue="0" prepend=",">
 			p_area_code pac,
@@ -490,10 +490,10 @@
 		</isNotEqual>
 
 		<isParameterPresent>
-            <include refid="PAGE-COMMON" />   
+            <include refid="PAGE-COMMON" />
         </isParameterPresent>
 		<isNotEmpty prepend="and" property="enterpriseNature">
-			nature.customer_id=base.customer_id and nature.type=1
+			nature.customer_id=base.customer_id
 		</isNotEmpty>
 		<isNotEqual property="areaClassId" compareValue="0">
 			and pac.`areaclass_id` = pa.`areaclass_id` and customer_area_id = pac.`areaid`

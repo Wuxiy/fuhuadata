@@ -15,33 +15,22 @@
             #orderRequestNav(2)
             <div class="col-xs-10">
                 <!--订舱出运要求-->
-                <div class="panel panel-default panel-edit view-HD-md">
+                <div class="panel panel-default view-HD-md">
                     <div class="panel-heading">
                         <div class="input-group panel-heading-btn pull-right col-xs-4">
-                            <span class="input-group-addon bg-success" lang="zh">产品种类</span>
-                            <select class="form-control">
-                                <option value="">41%草甘膦异丙铵盐水剂-1L*10</option>
-                                <option value="">74%草甘膦异丙铵盐颗粒剂050KG*10</option>
-                                <option value="">95%草甘膦原药-25KG</option>
-                            </select>
-                            <div class="input-group-btn">
-                                <button class="btn btn-primary btn-xs editInfo">编辑</button>
-                            </div>
-                            <div class="input-group-btn hidden">
-                                <button class="btn btn-xs editOff" lang="zh">取消</button>
-                                <button class="btn btn-xs btn-primary editSave" lang="zh">保存</button>
-                            </div>
+                            <span class="input-group-addon" lang="zh">产品种类</span>
+                            <select id="name" class="form-control"></select>
                         </div>
                         <h3 class="panel-title" lang="zh">
                             订舱出运要求
                         </h3>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body panel-edit">
                         <div class="form-horizontal">
                             <div class="form-group">
                                 <label class="control-label col-xs-2" lang="zh">对船运公司要求</label>
                                 <div class="col-xs-10">
-                                    <textarea cols="3" class="form-control" placeholder="指定的船运公司，或者禁用的船运公司"  lang="zh"></textarea>
+                                    <textarea id="shippingAgentRequire" cols="3" class="form-control" placeholder="指定的船运公司，或者禁用的船运公司"  lang="zh"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -53,18 +42,19 @@
                                         <tr>
                                             <td lang="zh">打托（缠膜）</td>
                                             <td class="text-left">
-                                                <label class="checkbox-inline"><input type="checkbox" />免熏蒸托盘</label>
-                                                <label class="checkbox-inline"><input type="checkbox" />熏蒸托盘</label>
-                                                <label class="checkbox-inline"><input type="checkbox" />塑料托盘</label>
-                                                <label class="checkbox-inline"><input type="checkbox" />订制托盘</label>
+                                                <div class="col-xs-12">
+                                                    <label class="checkbox-inline"><input name="fullyClose" type="checkbox" value="0"/>免熏蒸托盘</label>
+                                                    <label class="checkbox-inline"><input name="fullyClose" type="checkbox" value="1"/>熏蒸托盘</label>
+                                                    <label class="checkbox-inline"><input name="fullyClose" type="checkbox" value="2"/>塑料托盘</label>
+                                                    <label class="checkbox-inline"><input name="fullyClose" type="checkbox" value="3"/>订制托盘</label>
+                                                </div>
                                             </td>
-
                                         </tr>
                                         <tr>
                                             <td lang="zh">帖唛</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input type="checkbox" /></label>
+                                                    <label><input id="postLabel" type="checkbox" /></label>
                                                 </div>
                                             </td>
 
@@ -73,7 +63,7 @@
                                             <td lang="zh">垫板</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input type="checkbox" /></label>
+                                                    <label><input id="basePlate" type="checkbox" /></label>
                                                 </div>
                                             </td>
 
@@ -82,7 +72,7 @@
                                             <td lang="zh">纸板</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input type="checkbox" /></label>
+                                                    <label><input id="paperboard" type="checkbox" /></label>
                                                 </div>
                                             </td>
 
@@ -91,7 +81,7 @@
                                             <td lang="zh">气囊</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input type="checkbox" /></label>
+                                                    <label><input id="airSac" type="checkbox" /></label>
                                                 </div>
                                             </td>
 
@@ -100,7 +90,7 @@
                                             <td lang="zh">拉网</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input type="checkbox" /></label>
+                                                    <label><input id="seine" type="checkbox" /></label>
                                                 </div>
                                             </td>
 
@@ -109,7 +99,7 @@
                                             <td lang="zh">紧固带</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input type="checkbox" /></label>
+                                                    <label><input id="fasteningWith" type="checkbox" /></label>
                                                 </div>
                                             </td>
 
@@ -118,7 +108,7 @@
                                             <td lang="zh">抄条码</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input type="checkbox" /></label>
+                                                    <label><input id="copyTheBarcode" type="checkbox" /></label>
                                                 </div>
                                             </td>
 
@@ -127,7 +117,7 @@
                                             <td lang="zh">美式门封</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input type="checkbox" /></label>
+                                                    <label><input id="theOrdinaryAmerican" type="checkbox" /></label>
                                                 </div>
                                             </td>
 
@@ -136,7 +126,7 @@
                                             <td lang="zh">护条</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input type="checkbox" /></label>
+                                                    <label><input id="joint" type="checkbox" /></label>
                                                 </div>
                                             </td>
 
@@ -145,7 +135,7 @@
                                             <td lang="zh">护角</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input type="checkbox" /></label>
+                                                    <label><input id="bead" type="checkbox" /></label>
                                                 </div>
                                             </td>
 
@@ -154,13 +144,13 @@
                                             <td lang="zh">是否需要监装</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input type="checkbox" />商检</label>
+                                                    <label><input name="inspectionOfStorage" type="checkbox" value="0"/>商检</label>
                                                 </div>
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input type="checkbox" />法检</label>
+                                                    <label><input name="inspectionOfStorage" type="checkbox" value="1"/>法检</label>
                                                 </div>
                                                 <div class="col-xs-3">
-                                                    <input type="text" class="form-control" placeholder="输入机构名称"/>
+                                                    <input id="inspectionOfStorage" type="text" class="form-control" placeholder="输入机构名称"/>
                                                 </div>
                                             </td>
                                         </tr>
@@ -168,7 +158,7 @@
                                             <td lang="zh">吨桶是否铁丝固定</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input type="checkbox" />法检</label>
+                                                    <label><input id="wireMeshFixedGuard" type="checkbox" /></label>
                                                 </div>
                                             </td>
                                         </tr>
@@ -178,20 +168,20 @@
                                 <div class="form-group">
                                     <label class="control-label col-xs-2" lang="zh">出运货物</label>
                                     <div class="radio col-xs-1">
-                                        <label ><input type="radio" name="typeOfGoods" value="0" /><span lang="zh">普货</span</label>
+                                        <label ><input type="radio" name="goodsType" value="0" /><span lang="zh">普货</span</label>
                                     </div>
                                     <div class="radio col-xs-2">
-                                        <label ><input type="radio" name="typeOfGoods" value="1" /><span lang="zh">危险品</span></label>
+                                        <label ><input type="radio" name="goodsType" value="1" /><span lang="zh">危险品</span></label>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-xs-2"><span lang="zh">免箱期</span>（<span lang="zh">天</span>）</label>
                                     <div class="col-xs-2">
-                                        <input class="form-control" type="text" value="" />
+                                        <input id="mianxiangqi" class="form-control" type="text" value="" />
                                     </div>
                                     <label class="control-label col-xs-2"><span lang="zh">免堆期</span>（<span lang="zh">天</span>）</label>
                                     <div class="col-xs-2">
-                                        <input class="form-control" type="text" value="" />
+                                        <input id="miantuiqi" class="form-control" type="text" value="" />
                                     </div>
                                 </div>
                             </div>
@@ -205,5 +195,59 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerOrderRequire.js"></script>
+<script>
+    $(function () {
+        var orderData;                                 //定义获取的数据
+        var optionNames = '';                          //定义产品种类集合
+        //var optionTypes = '';                         //定义单据类型集合
+        var newData = [];                              //定义新数据
+        var name = $('#name');                         //定义产品种类select控件
+        var documentaryType = $('documentaryType');    //定义单据类型select控件
+        //为获取的数据赋值
+        jQuery.ajax({
+            url:'${request.contextPath}/customerBaseInfoOrderRequire/getTransportRequireList',
+            type:'POST',
+            data:GetRequest(),
+            async:false
+        }).done(function (result) {
+            orderData = result.data;
+        }).fail(function(result){
+            console.log('error:'+result.status);
+        });
+        //console.log(orderData);
+        //为新数据、产品种类、单据类型赋值
+        jQuery.each(orderData,function (n,item) {
+            var obj = {};
+            obj.name = item.name;
+            //obj.documentaryType = item.documentaryType;
+            obj.productId = item.productId;
+            obj.shippingAgentRequire = item.shippingAgentRequire;
+            obj.packageRequire = item.packageRequire;
+            obj.goodsType = item.goodsType;
+            obj.mianxiangqi = item.mianxiangqi;
+            obj.miantuiqi = item.miantuiqi;
+            optionNames += '<option value="'+item.productId+'">'+item.name+'</option>';
+            newData.push(obj);
+        });
+        //渲染产品种类select
+        name.append(optionNames);
+        //渲染单据类型select
+        var obj = {};
+        obj.productId = name.val();
+        screenData(obj,newData,customerTransportRequire);
+        $(document).on('change.screen','#name',function () {
+            var obj = {};
+            obj.productId = name.val();
+            screenData(obj,newData,customerTransportRequire);
+        });
 
+//        $(document).('click.exclusion','[name="coo"]',function () {
+//            var allCh = $('input').filter('[name="coo"]');
+//            var theEl = $(this);
+//            allCh.prop('checked',false);
+//            theEl.prop('checked',true);
+//        })
+    })
+</script>
 

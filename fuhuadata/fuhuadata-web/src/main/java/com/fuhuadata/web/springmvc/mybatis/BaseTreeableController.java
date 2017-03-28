@@ -6,6 +6,7 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.mybatis.BaseTreeableService;
 import com.fuhuadata.vo.BaseTreeVo;
+import com.fuhuadata.web.util.SystemLogAnnotation;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -38,7 +39,7 @@ public abstract class BaseTreeableController<E extends BaseEntity<ID> & Treeable
     @RequestMapping(value = "ajax/load", method = RequestMethod.GET)
     @ResponseBody
     public ResultPojo load(HttpServletRequest request,
-                           @RequestParam(value = "async", defaultValue = "true") boolean async,
+                           @RequestParam(value = "async", defaultValue = "true" ) boolean async,
                            @RequestParam(value = "searchName", required = false) String searchName,
                            @RequestParam(value = "parentId", required = false) ID parentId) {
 
@@ -102,6 +103,17 @@ public abstract class BaseTreeableController<E extends BaseEntity<ID> & Treeable
         Result<List<BaseTreeVo<ID>>> result = new Result<List<BaseTreeVo<ID>>>(true);
         result.addDefaultModel(convertToTreeList(nodes, rootIds));
 
+        return result.getResultPojo();
+    }
+
+    @RequestMapping(value = "ajax/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    @SystemLogAnnotation(module = "baseTreeable",methods = "ajaxGetById")
+    public ResultPojo ajaxGet(@PathVariable("id") ID id) {
+        E node = baseService.get(id);
+
+        Result<E> result = new Result<E>(true);
+        result.addDefaultModel(node);
         return result.getResultPojo();
     }
 

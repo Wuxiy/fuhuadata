@@ -1,6 +1,5 @@
 package com.fuhuadata.dao;
 
-import com.fuhuadata.domain.CustomerPurchaseProduct;
 import com.ibatis.sqlmap.client.SqlMapExecutor;
 import org.springframework.orm.ibatis.SqlMapClientCallback;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;

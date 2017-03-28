@@ -136,8 +136,11 @@ public class CustomerBaseInfoAction {
      */
     @RequestMapping(value = "/intoCustomerBaseInfoDetails",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "customerInfo-customerList",methods = "intoCostomerBaseInfoDetails")
-    public ModelAndView intoCustomerBaseInfoDetails(){
-        ModelAndView model = new ModelAndView("customerInfo/customerBasicInfo");
+    public ModelAndView intoCustomerBaseInfoDetails(String customerId){
+        if(customerId==null || customerId.trim().equals("")){
+            customerId = "";
+        }
+        ModelAndView model = new ModelAndView("customerInfo/customerBasicInfo").addObject("customerId",customerId);
         return model;
     }
 
@@ -183,6 +186,30 @@ public class CustomerBaseInfoAction {
                 log.error("更新客户信息错误");
             }
             return result.getResultPojo();
+    }
+
+    /**
+     * doAdd,潜在客户新增
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/doAddCustomerBaseInfo",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "customerInfo-customerList",methods = "doAddCustomerBaseInfo")
+    @ResponseBody
+    public ResultPojo doAddCustomerBaseInfo(@RequestBody CustomerBaseInfoDO customerBaseInfoDO){
+        Result result = new Result();
+        CustomerBaseInfo customerBaseInfo = customerBaseInfoDO.getCustomerBaseInfo();
+        CustomerMakeProduct[] customerMakeProducts = customerBaseInfoDO.getCustomerMakeProducts();
+        CustomerEnterpriceNature[] customerEnterpriceNatures = customerBaseInfoDO.getCustomerEnterpriceNatures();
+        try{
+            List<CustomerEnterpriceNature> list1 = Arrays.asList(customerEnterpriceNatures);
+            List<CustomerMakeProduct> list2 = Arrays.asList(customerMakeProducts);
+            result =  customerBaseInfoService.addCustomerBaseInfo(list1,list2,customerBaseInfo);
+        }catch(Exception e){
+            result.setSuccess(false);
+            log.error("新增客户基本信息错误");
+        }
+        return result.getResultPojo();
     }
 
 }

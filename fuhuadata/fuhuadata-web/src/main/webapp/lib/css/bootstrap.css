@@ -5736,10 +5736,11 @@ button.close {
   padding-right: 5px;
   color: #333333;
 }
-.tree .active a,
+.tree .active>a,
 .tree a:focus {
   outline: 2px solid #333333;
   background: #eeeeee;
+  outline-offset: -2px;
 }
 .tree .branch,
 .tree .branch-node,
