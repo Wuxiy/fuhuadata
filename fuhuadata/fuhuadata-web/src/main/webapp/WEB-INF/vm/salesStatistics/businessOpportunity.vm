@@ -48,10 +48,7 @@
                                     <!--搜索栏-->
                                     <div class="input-group">
                                         <span class="input-group-addon" lang="zh">客户名称</span>
-                                        <select class="form-control" id="customerName">
-                                            <option value="" lang="zh">NUFARM</option>
-                                            <option value="" lang="zh">ADC</option>
-                                        </select>
+                                        <input class="form-control" id="customerName" />
                                         <span class="input-group-addon" lang="zh">商机来源</span>
                                         <select class="form-control" id="businessFrom">
                                             <option value="0" lang="zh">展会</option>
@@ -65,11 +62,10 @@
                                         <select class="form-control" id="businessState">
                                             <option value="0" lang="zh">待报价</option>
                                             <option value="1" lang="zh">失败</option>
-                                            <option value="2" lang="zh">已转化</option>\
+                                            <option value="2" lang="zh">已转化</option>
                                         </select>
                                         <span class="input-group-addon" lang="zh">客户类型</span>
                                         <select class="form-control" id="customerLevel">
-                                            <option value="0" lang="zh">潜在客户</option>
                                             <option value="5" lang="zh">风险客户</option>
                                             <option value="4" lang="zh">一般客户</option>
                                             <option value="3" lang="zh">重要客户</option>
@@ -160,11 +156,6 @@
         var total = getListCount();
         getDataList(0);
         $("#pagination").pagination(total,{
-            customerName:$('#customerName').val(),
-            businessFrom:$('#businessFrom').val(),
-            businessState:$('#businessState').val(),
-            customerLevel:$('#customerLevel').val(),
-            enterpriseNature:$('#enterpriseNature').val(),
             items_per_page : pageSize,
             num_edge_entries : 3,
             num_display_entries : 10,
@@ -181,7 +172,11 @@
             url: basePath + '',
             dataType:'json',
             data:{
-
+                customerName:$('#customerName').val(),
+                businessFrom:$('#businessFrom').val(),
+                businessState:$('#businessState').val(),
+                customerLevel:$('#customerLevel').val(),
+                enterpriseNature:$('#enterpriseNature').val(),
                 areaClassId:click_node.oneLevelId,
                 areaId:click_node.twoLevelId,
                 startRow:pageNum*pageSize,

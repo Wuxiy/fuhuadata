@@ -160,8 +160,10 @@
             callback:getDataList
         });
     }
+
     var customerLevelList = ['战略客户','大客户' ,'重要客户' ,'一般客户' ,'风险客户'];
     var businessOpportunity = ['工厂','分销商' ,'经销商' ,'终端客户' ,'其他'];
+    var businessState = ['待报价','失败','已转化'];
     //根据页码获取列表数据
     function getDataList(pageNum,jq){
         jQuery.ajax({
