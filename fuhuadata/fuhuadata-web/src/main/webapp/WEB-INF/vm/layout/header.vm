@@ -51,7 +51,7 @@
         </li>
         <li class="shadow-in" title="销售统计">
             <div id="collapseThree" class="list-group collapse">
-                <a class="list-group-item" href="/saleProcess/saleProcessList">销售流程</a>
+                <a class="list-group-item" href="${request.contextPath}/businessInfo/intoBusinessInfo">销售流程</a>
                 <a class="list-group-item" href="#">费用与利润</a>
                 <a class="list-group-item" href="#">客户维护</a>
                 <a class="list-group-item" href="#">利润统计</a>

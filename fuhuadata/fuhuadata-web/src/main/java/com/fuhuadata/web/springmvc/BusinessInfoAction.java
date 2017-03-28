@@ -35,7 +35,7 @@ public class BusinessInfoAction {
     @RequestMapping(value="/intoBusinessInfo",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "into")
     public ModelAndView intoBusinessInfo(){
-        return new ModelAndView("/businessInfo");
+        return new ModelAndView("/salesStatistics/businessOpportunity");
     }
 
     /**
