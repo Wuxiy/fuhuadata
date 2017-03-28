@@ -9,8 +9,6 @@ var cancelBtn = '[data-form-btn="cancel"]';
 var delBtn = '[data-form-btn="del"]';
 var saltType = '[name="saltType"]';
 
-//初始化
-init();
 //启用功能按钮
 $(document).on('click.edit',editBtn,saveEdit);
 $(document).on('click.save',saveBtn,saveEdit);
@@ -36,18 +34,18 @@ function radioChecked(e){
 }
 
 /**
- *selected其他选项
+ *控制显示与隐藏
  */
-// function selectElse(e){
-//     var el = $(e.target);
-//     var elseSelected = el.find('.else');
-//     var targetEl = el.parents('.form-group').find('.elseInput');
-//     if(elseSelected.prop('selected')){
-//         targetEl.removeClass('hidden');
-//     }else{
-//         targetEl.addClass('hidden');
-//     }
-// }
+function controlSOrH(el) {
+    var el = $(el);
+    var tarEl = $(el.data('target'));
+    var isNot = el.prop('checked')||el.prop('selected');
+    if(isNot){
+        tarEl.removeClass('hidden');
+    }else{
+        tarEl.addClass('hidden');
+    }
+}
 
 /**
  * 初始化

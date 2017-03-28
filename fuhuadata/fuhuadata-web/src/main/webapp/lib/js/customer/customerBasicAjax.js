@@ -10,11 +10,11 @@ function customerBasicInfo(result){
     var getData = result;
     // console.log(getData);
     //客户基本信息
-    $('#customerId').val(getData.customerId);
+    $('[name="customerId"]').val(getData.customerId);
     $('#fullName').val(getData.fullName);
     $('#shortName').val(getData.shortName);
-    $('#areaId').val(getData.areaId);
-    $('#countryId').val(getData.countryId);
+    $('#areaId').val((getData.areaId ? -1 : getData.areaId));
+    $('#countryId').val((getData.countryId ? -1 : getData.countryId));
 
     $('#zhongxinbaoNumber').val(getData.zhongxinbaoNumber);
     $('#zhongxinbaoLevel').val(getData.zhongxinbaoLevel);
@@ -56,6 +56,11 @@ function customerBasicInfo(result){
 
     customFieldData(getData.customField);//百科自定义字段
 
+    controlSOrH('#showOpportunity');
+    controlSOrH('#showOtherOpportunity');
+    controlSOrH('#showFactory');
+    controlSOrH('#showMajorCompetitorsGroup');
+    controlSOrH('#showOtherEnterpriceNature');
 }
 //客户生产产品
 function customerMakeProductData(getData){
