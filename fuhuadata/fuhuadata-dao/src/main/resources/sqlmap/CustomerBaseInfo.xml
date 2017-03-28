@@ -17,7 +17,7 @@
 					<result property="customerType" column="customer_type" jdbcType="INT" javaType="java.lang.Integer" />
 					<result property="areaId" column="customer_area_id" jdbcType="INT" javaType="java.lang.Integer" />
 					<result property="area" column="customer_area" jdbcType="VARCHAR" javaType="java.lang.String" />
-					<result property="countryId" column="country_id" jdbcType="INT" javaType="java.lang.Integer" />
+					<result property="countryId" column="country_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="country" column="country" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="registeredFunds" column="registered_funds" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="registeredAddress" column="registered_address" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -468,14 +468,14 @@
 			LEFT JOIN customer_enterprise_nature nature
 			ON nature.customer_id=base.customer_id
 			WHERE
-				base.customer_id = 'fh123456'
+				base.customer_id = #customerId#
 			GROUP BY base.customer_id
 	]]>
 	</select>
 
 	<select id="GET-PRODUCT-BY-ID" resultClass="CustomerMakeProduct" parameterClass="java.lang.String">
 		<![CDATA[
-		SELECT id,product_name AS productName,production FROM customer_make_products WHERE customer_id = 'fh123456'
+		SELECT id,product_name AS productName,production FROM customer_make_products WHERE customer_id = #customerId#
 	]]>
 	</select>
 

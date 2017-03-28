@@ -42,7 +42,7 @@ public class CustomerBaseInfoVO {
     private String area;
 
     /**国家分类id**/
-    private Integer countryId;
+    private String countryId;
 
     /**国家,例如美国**/
     private String country;
@@ -236,14 +236,6 @@ public class CustomerBaseInfoVO {
 
     public void setArea(String area) {
         this.area = area;
-    }
-
-    public Integer getCountryId() {
-        return countryId;
-    }
-
-    public void setCountryId(Integer countryId) {
-        this.countryId = countryId;
     }
 
     public String getCountry() {
@@ -528,5 +520,13 @@ public class CustomerBaseInfoVO {
 
     public void setLossReason(String lossReason) {
         this.lossReason = lossReason;
+    }
+
+    public String getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(String countryId) {
+        this.countryId = countryId;
     }
 }
