@@ -56,72 +56,72 @@
 #end
 
 #macro(deputyNav $num)
-    #if(${customerId}=='')
+    #if($!{customerType}==2)
     <ul id="deputyNav" class="nav nav-tabs pull-left">
         <li
             #if($num == 1)
                     class="active"
             #end
-        ><a href="${request.contextPath}/customerBaseInfo/intoCustomerBaseInfoDetails?customerId=${customerId}">基本信息</a></li>
+        ><a href="${request.contextPath}/customerBaseInfo/intoCustomerBaseInfoDetails?customerType=$!{customerType}&customerId=$!{customerId}">基本信息</a></li>
         <li
             #if($num == 2)
                     class="active"
             #end
-        ><a href="${request.contextPath}/customerMarketInfo/entrance?customerId=${customerId}" >市场信息</a></li>
+        ><a href="${request.contextPath}/customerMarketInfo/entrance?customerType=$!{customerType}&customerId=$!{customerId}" >市场信息</a></li>
         <li
             #if($num == 3)
                     class="active"
             #end
-        ><a href="${request.contextPath}/customerLinkman/intoCustomerLinkmanList?customerId=${customerId}" >联系人</a></li>
+        ><a href="${request.contextPath}/customerLinkman/intoCustomerLinkmanList?customerType=$!{customerType}&customerId=$!{customerId}" >联系人</a></li>
             <li
         #if($num == 4)
                 class="active"
         #end
-        ><a href="${request.contextPath}/customerProductPacking/intoCustomerProductInfo?customerId=${customerId}" >产品要求</a></li>
+        ><a href="${request.contextPath}/customerProductPacking/intoCustomerProductInfo?customerType=$!{customerType}&customerId=$!{customerId}" >产品要求</a></li>
     </ul>
     #end
-    #if(${customerId}!='')
+    #if($!{customerType}==1||$!{customerType}==2)
     <ul id="deputyNav" class="nav nav-tabs pull-left">
         <li
             #if($num == 1)
                     class="active"
             #end
-        ><a href="${request.contextPath}/customerBaseInfo/intoCustomerBaseInfoDetails?customerId=${customerId}">基本信息</a></li>
+        ><a href="${request.contextPath}/customerBaseInfo/intoCustomerBaseInfoDetails?customerType=$!{customerType}&customerId=$!{customerId}">基本信息</a></li>
         <li
             #if($num == 2)
                     class="active"
             #end
-        ><a href="${request.contextPath}/customerMarketInfo/entrance?customerId=${customerId}" >市场信息</a></li>
+        ><a href="${request.contextPath}/customerMarketInfo/entrance?customerType=$!{customerType}&customerId=$!{customerId}" >市场信息</a></li>
         <li
             #if($num == 3)
                     class="active"
             #end
-        ><a href="${request.contextPath}/customerLinkman/intoCustomerLinkmanList?customerId=${customerId}" >联系人</a></li>
+        ><a href="${request.contextPath}/customerLinkman/intoCustomerLinkmanList?customerType=$!{customerType}&customerId=$!{customerId}" >联系人</a></li>
         <li
             #if($num == 4)
                     class="active"
             #end
-        ><a href="${request.contextPath}/customerProductPacking/intoCustomerProductInfo?customerId=${customerId}" >产品要求</a></li>
+        ><a href="${request.contextPath}/customerProductPacking/intoCustomerProductInfo?customerType=$!{customerType}&customerId=$!{customerId}" >产品要求</a></li>
         <li
             #if($num == 5)
                     class="active"
             #end
-        ><a href="${request.contextPath}/customerBaseInfoOrder/entrance?customerId=${customerId}" >订单信息</a></li>
+        ><a href="${request.contextPath}/customerBaseInfoOrder/entrance?customerType=$!{customerType}&customerId=$!{customerId}" >订单信息</a></li>
         <li
             #if($num == 6)
                     class="active"
             #end
-        ><a href="${request.contextPath}/customerBaseInfoOrderRequire/billRequireEntrance?customerId=${customerId}" >订单默认要求</a></li>
+        ><a href="${request.contextPath}/customerBaseInfoOrderRequire/billRequireEntrance?customerType=$!{customerType}&customerId=$!{customerId}" >订单默认要求</a></li>
         <li
             #if($num == 7)
                     class="active"
             #end
-        ><a href="${request.contextPath}/customerVisitRecord/intocustomerVisitRecordList?customerId=${customerId}" >沟通记录</a></li>
+        ><a href="${request.contextPath}/customerVisitRecord/intocustomerVisitRecordList?customerType=$!{customerType}&customerId=$!{customerId}" >沟通记录</a></li>
         <li
             #if($num == 8)
                     class="active"
             #end
-        ><a href="${request.contextPath}/customerSubcompanyInfo/intoCustomerSubcompanyInfo?customerId=${customerId}" >公司别名（子公司信息）</a></li>
+        ><a href="${request.contextPath}/customerSubcompanyInfo/intoCustomerSubcompanyInfo?customerType=$!{customerType}&customerId=$!{customerId}" >公司别名（子公司信息）</a></li>
         <li
             #if($num == 9)
                     class="active"
