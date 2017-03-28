@@ -34,8 +34,8 @@ public class CustomerProductPackingAction {
     @SuppressWarnings("unused")
     @RequestMapping(value="/customerProductPackingList",method= RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerProductPackaging  ",methods = "into")
-    public ModelAndView customerProductPackingList(String customerId){
-        return new ModelAndView("knowledgeBase/customerProductPackingList").addObject("customerId",customerId);
+    public ModelAndView customerProductPackingList(){
+        return new ModelAndView("knowledgeBase/customerProductPackingList");
     }
 
     /**
@@ -66,7 +66,9 @@ public class CustomerProductPackingAction {
     @SuppressWarnings("unused")
     @RequestMapping(value="/intoCustomerProductInfo",method= RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerProductPackaging  ",methods = "into")
-    public ModelAndView intoCustomerProductInfo(){return new ModelAndView("customerInfo/customerProductRequest");}
+    public ModelAndView intoCustomerProductInfo(String customerId){
+        return new ModelAndView("customerInfo/customerProductRequest").addObject("customerId",customerId);
+    }
 
 
     @RequestMapping(value = "/getCustomerProductInfoById",method = RequestMethod.GET)

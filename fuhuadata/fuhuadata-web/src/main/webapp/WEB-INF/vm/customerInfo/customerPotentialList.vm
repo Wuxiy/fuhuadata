@@ -28,7 +28,7 @@
             <div id="cooperative" class="tab-pane fade in active">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <a href="${request.contextPath}/customerBaseInfo/intoCustomerBaseInfoDetails" target="_blank" class="btn btn-xs btn-primary panel-heading-btn pull-right">新增</a>
+                        <a href="${request.contextPath}/customerBaseInfo/doAddCustomerBaseInfo" target="_blank" class="btn btn-xs btn-primary panel-heading-btn pull-right">新增</a>
                         <h3 class="panel-title" lang="zh">潜在客户列表</h3>
                     </div>
                     <div class="panel-body clearfix">
