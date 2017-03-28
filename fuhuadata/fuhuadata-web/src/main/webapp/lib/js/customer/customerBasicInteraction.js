@@ -43,7 +43,7 @@ $(function () {
         $('#customerType').val('2').attr('disabled','disabled');
         $('button').filter(editBtn).remove();
         $('.editHide').addClass('hidden');
-        $('#deputyNav').children('li').slice(4).remove();
+        // $('#deputyNav').children('li').slice(4).remove();
         $('.editView').removeClass('hidden');
         var finishBtn = '';
         finishBtn += '<div class="form-group">';
