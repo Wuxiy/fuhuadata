@@ -168,22 +168,24 @@
     var businessState = ['待报价','失败','已转化'];
     //根据页码获取列表数据
     function getDataList(pageNum,jq){
+        var data = {
+            customerName:$('#customerName').val(),
+            businessFrom:$('#businessFrom').val(),
+            businessState:$('#businessState').val(),
+            customerLevel:$('#customerLevel').val(),
+            enterpriseNature:$('#enterpriseNature').val(),
+            areaClassId:click_node.oneLevelId,
+            areaId:click_node.twoLevelId,
+            startRow:pageNum*pageSize,
+            pageSize:pageSize
+        };
         jQuery.ajax({
             url: basePath + '/businessInfo/queryBusinessInfoPageList',
             dataType:'json',
-            data:{
-                customerName:$('#customerName').val(),
-                businessFrom:$('#businessFrom').val(),
-                businessState:$('#businessState').val(),
-                customerLevel:$('#customerLevel').val(),
-                enterpriseNature:$('#enterpriseNature').val(),
-                areaClassId:click_node.oneLevelId,
-                areaId:click_node.twoLevelId,
-                startRow:pageNum*pageSize,
-                pageSize:pageSize
-            },
             async:true,
             method:'POST',
+            contentType:"application/json",
+            data:JSON.stringify(data),
             success:function(data){
                 var ResultData = data.data;
                 var _html = '';
@@ -226,21 +228,23 @@
      */
     function getListCount(){
         var total = 0;
+        var data = {
+            areaClassId:click_node.oneLevelId,
+            areaId:click_node.twoLevelId,
+            fullName:$("#fullName").val(),
+            customerName:$('#customerName').val(),
+            businessFrom:$('#businessFrom').val(),
+            businessState:$('#businessState').val(),
+            customerLevel:$('#customerLevel').val(),
+            enterpriseNature:$('#enterpriseNature').val(),
+        }
         jQuery.ajax({
             url:basePath + '/businessInfo/countBusinessList',
             dataType:'JSON',
-            data:{
-                areaClassId:click_node.oneLevelId,
-                areaId:click_node.twoLevelId,
-                fullName:$("#fullName").val(),
-                customerName:$('#customerName').val(),
-                businessFrom:$('#businessFrom').val(),
-                businessState:$('#businessState').val(),
-                customerLevel:$('#customerLevel').val(),
-                enterpriseNature:$('#enterpriseNature').val(),
-            },
             async:false,
             method:'POST',
+            contentType:"application/json",
+            data:JSON.stringify(data),
             success:function(data){
                 total = data.data;
             }
