@@ -129,7 +129,7 @@
             #if($num == 1)
                 class="active"
             #end
-        ><a href="">商机</a></li>
+        ><a href="${request.contextPath}/businessInfo/intoBusinessInfo/">商机</a></li>
         <li
             #if($num == 2)
                     class="active"
