@@ -36,8 +36,8 @@ public class CustomerVisitRecordAction {
      */
     @RequestMapping(value="/intocustomerVisitRecordList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "customerInfo-customerVisitRecord",methods = "into")
-    public ModelAndView intocustomerVisitRecordList(){
-        return new ModelAndView("customerInfo/customerVisitRecordList");
+    public ModelAndView intocustomerVisitRecordList(String customerId){
+        return new ModelAndView("customerInfo/customerVisitRecordList").addObject("customerId",customerId);
     }
 
     /**
