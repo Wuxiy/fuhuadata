@@ -51,6 +51,7 @@
                                         <input class="form-control" id="customerName" />
                                         <span class="input-group-addon" lang="zh">商机来源</span>
                                         <select class="form-control" id="businessFrom">
+                                            <option value="" selected lang="zh">全部</option>
                                             <option value="0" lang="zh">展会</option>
                                             <option value="1" lang="zh">门户网站</option>
                                             <option value="2" lang="zh">农药店考察</option>
@@ -60,12 +61,14 @@
                                         </select>
                                         <span class="input-group-addon" lang="zh">商机状态</span>
                                         <select class="form-control" id="businessState">
+                                            <option value="" selected lang="zh">全部</option>
                                             <option value="0" lang="zh">待报价</option>
                                             <option value="1" lang="zh">失败</option>
                                             <option value="2" lang="zh">已转化</option>
                                         </select>
                                         <span class="input-group-addon" lang="zh">客户类型</span>
                                         <select class="form-control" id="customerLevel">
+                                            <option value="" selected lang="zh">全部</option>
                                             <option value="5" lang="zh">风险客户</option>
                                             <option value="4" lang="zh">一般客户</option>
                                             <option value="3" lang="zh">重要客户</option>
@@ -74,6 +77,7 @@
                                         </select>
                                         <span class="input-group-addon" lang="zh">企业性质</span>
                                         <select class="form-control" id="enterpriseNature">
+                                            <option value="" selected lang="zh">全部</option>
                                             <option value="1" lang="zh">工厂</option>
                                             <option value="2" lang="zh">分销商</option>
                                             <option value="3" lang="zh">经销商</option>
