@@ -56,6 +56,23 @@ public class BusinessInfoAction {
         return null;
     }
 
+    /**
+     * count
+     * @param businessInfoVO
+     * @return
+     */
+    @RequestMapping(value = "/countBusinessList",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "countBusinessList")
+    @ResponseBody
+    public ResultPojo countBusinessList(@RequestBody BusinessInfoVO businessInfoVO){
+        try{
+            Result<Integer> result = businessInfoService.count(businessInfoVO);
+            return result.getResultPojo();
+        }catch (Exception e){
+            log.error("查询商机列表数量错误",e);
+        }
+        return null;
+    }
 
     /**
      * add

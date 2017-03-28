@@ -52,7 +52,7 @@ public class BusinessInfoManagerImpl implements BusinessInfoManager {
     }
 
     @Override
-    public int count(QueryBusinessInfo queryBusinessInfo) {
-        return businessInfoDao.count(queryBusinessInfo);
+    public int count(BusinessInfoVO businessInfoVO) {
+        return businessInfoDao.count(businessInfoVO);
     }
 }

@@ -60,7 +60,7 @@ public class BusinessInfoDaoImpl extends SqlMapClientTemplate implements Busines
         return this.queryForList(GET_PAGE,businessInfoVO);
     }
 
-    public int count(QueryBusinessInfo queryBusinessInfo){
-        return ((Integer) this.queryForObject(COUNT,queryBusinessInfo)).intValue();
+    public int count(BusinessInfoVO businessInfoVO){
+        return ((Integer) this.queryForObject(COUNT,businessInfoVO)).intValue();
     }
 }

@@ -26,5 +26,5 @@ public interface BusinessInfoService {
 
     public Result<List<BusinessInfoVO>> getBusinessInfoByPage(BusinessInfoVO businessInfoVO);
 
-    public Result<Integer> count(QueryBusinessInfo queryBusinessInfo);
+    public Result<Integer> count(BusinessInfoVO businessInfoVO);
 }

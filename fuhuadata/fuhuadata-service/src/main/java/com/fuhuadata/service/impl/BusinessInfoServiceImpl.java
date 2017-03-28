@@ -111,10 +111,10 @@ public class BusinessInfoServiceImpl implements BusinessInfoService {
     }
 
     @Override
-    public Result<Integer> count(QueryBusinessInfo queryBusinessInfo) {
+    public Result<Integer> count(BusinessInfoVO businessInfoVO) {
         Result<Integer> result = new Result<Integer>();
         try{
-            result.addDefaultModel(businessInfoManager.count(queryBusinessInfo));
+            result.addDefaultModel(businessInfoManager.count(businessInfoVO));
         }catch(Exception e){
             result.setSuccess(false);
             log.error("条件查询商机数量出错",e);

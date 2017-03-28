@@ -239,12 +239,22 @@
         LIMIT #startRow#,#pageSize#
     </select>
 
-    <select id="COUNT" resultClass="java.lang.Integer" parameterClass="QueryBusinessInfo">
+    <select id="COUNT" resultClass="java.lang.Integer" parameterClass="BusinessInfoVO">
         <![CDATA[
-            SELECT COUNT(*) FROM business_info
+            SELECT COUNT(a.business_id)
+        FROM
+            business_info a
+        LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
     ]]>
+        <isNotEmpty prepend=", " property="enterpriseNature">
+            (select * from customer_enterprise_nature where nature=#enterpriseNature#) nature
+        </isNotEmpty>
+
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>
         </isParameterPresent>
+        <isNotEmpty prepend=" AND " property="enterpriseNature">
+            nature.customer_id=base.customer_id
+        </isNotEmpty>
     </select>
 </sqlMap>
