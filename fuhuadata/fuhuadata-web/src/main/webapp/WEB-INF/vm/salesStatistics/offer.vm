@@ -48,17 +48,13 @@
                                     <!--搜索栏-->
                                     <div class="input-group">
                                         <span class="input-group-addon" lang="zh">客户名称</span>
-                                        <select class="form-control">
-                                            <option value="" lang="zh">NUFARM</option>
-                                            <option value="" lang="zh">ADC</option>
-                                        </select>
+                                        <input class="form-control" id="customerName" />
                                         <span class="input-group-addon" lang="zh">订单编号</span>
                                         <input class="form-control" type="text" value="" />
                                         <span class="input-group-addon" lang="zh">订单状态</span>
                                         <select class="form-control">
                                             <option value="" lang="zh">待下单</option>
                                             <option value="" lang="zh">失败</option>
-                                            <option value="" lang="zh">全部</option>
                                             <option value="" lang="zh">已下单</option>
                                         </select>
                                         <span class="input-group-addon" lang="zh">客户类型</span>

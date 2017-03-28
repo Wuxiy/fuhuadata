@@ -169,7 +169,7 @@
     //根据页码获取列表数据
     function getDataList(pageNum,jq){
         jQuery.ajax({
-            url: basePath + '',
+            url: basePath + '/businessInfo/queryBusinessInfoPageList',
             dataType:'json',
             data:{
                 customerName:$('#customerName').val(),
@@ -227,7 +227,7 @@
     function getListCount(){
         var total = 0;
         jQuery.ajax({
-            url:basePath + '',
+            url:basePath + '/businessInfo/countBusinessList',
             dataType:'JSON',
             data:{
                 areaClassId:click_node.oneLevelId,
