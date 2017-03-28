@@ -17,6 +17,7 @@ public class BusinessInfoVO {
     private String  businessId;
     private String businessName;
 
+    private String customerId;
     private String customerName;
 
     /**1:战略客户,2:大客户 3:重要客户 4:一般客户 5:风险客户**/
@@ -132,5 +133,13 @@ public class BusinessInfoVO {
 
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 }

@@ -4,6 +4,7 @@
 <sqlMap namespace="BUSINESSINFO">
     <typeAlias alias="BusinessInfo" type="com.fuhuadata.domain.BusinessInfo"/>
     <typeAlias alias="QueryBusinessInfo" type="com.fuhuadata.domain.query.QueryBusinessInfo"/>
+    <typeAlias alias="BusinessInfoVO" type="com.fuhuadata.vo.BusinessInfoVO"/>
     <resultMap id="BUSINESSINFO-MAP" class="BusinessInfo">
         <result column="business_id" jdbcType="VARCHAR" property="businessId" javaType="java.lang.String"/>
         <result column="customer_id" jdbcType="VARCHAR" property="customerId" javaType="java.lang.String"/>
@@ -27,8 +28,8 @@
 
     <sql id="PAGE-COMMON">
         <dynamic prepend=" WHERE">
-           <isNotNull prepend=" AND " property=" customerName">
-               base.customer_name = #customerName#
+           <isNotNull prepend=" AND " property="customerName">
+               a.customer_name = #customerName#
            </isNotNull>
             <isNotNull prepend=" AND " property="businessFrom">
                 a.business_from = #businessFrom#
@@ -207,10 +208,11 @@
         </isParameterPresent>
     </select>
 
-    <select id="GET-PAGE" resultMap="BUSINESSINFO-MAP" parameterClass="QueryBusinessInfo">
+    <select id="GET-PAGE" resultClass="BusinessInfoVO" parameterClass="BusinessInfoVO">
         <![CDATA[
                     SELECT
             a.business_id businessId,
+            a.customer_id customerId,
             a.business_name businessName,
             a.customer_name customerName,
             base.customer_level customerLevel,
@@ -222,7 +224,7 @@
             a.business_state businessState
         FROM
             business_info a
-        LEFT JOIN customer_base_info base ON base.customer_id = a.business_id
+        LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
     ]]>
         <isNotEmpty prepend=", " property="enterpriseNature">
             (select * from customer_enterprise_nature where nature=#enterpriseNature#) nature
