@@ -29,8 +29,10 @@ public class CustomerBaseInfoOrderRequireAction {
      * @return
      */
     @RequestMapping("/billRequireEntrance")
-    public ModelAndView billRequireEntrance(String customerId){
-        return new ModelAndView("customerInfo/customerBillRequire").addObject("customerId",customerId);
+    public ModelAndView billRequireEntrance(String customerId,String customerType){
+        return new ModelAndView("customerInfo/customerBillRequire")
+                .addObject("customerType",customerType)
+                .addObject("customerId",customerId);
     }
 
     /**
@@ -39,8 +41,10 @@ public class CustomerBaseInfoOrderRequireAction {
      * @return
      */
     @RequestMapping("/transportRequireEntrance")
-    public ModelAndView transportRequireEntrance(String customerId){
-        return new ModelAndView("customerInfo/customerTransportRequire").addObject("customerId",customerId);
+    public ModelAndView transportRequireEntrance(String customerId,String customerType){
+        return new ModelAndView("customerInfo/customerTransportRequire")
+                .addObject("customerType",customerType)
+                .addObject("customerId",customerId);
     }
     @ResponseBody
     @RequestMapping("/getBillRequireList")

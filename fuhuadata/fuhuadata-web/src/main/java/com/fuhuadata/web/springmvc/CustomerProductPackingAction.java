@@ -32,10 +32,13 @@ public class CustomerProductPackingAction {
      * @return
      */
     @SuppressWarnings("unused")
+
     @RequestMapping(value="/customerProductPackingList",method= RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerProductPackaging  ",methods = "into")
-    public ModelAndView customerProductPackingList(String customerId){
-        return new ModelAndView("knowledgeBase/customerProductPackingList").addObject("customerId",customerId);
+    public ModelAndView customerProductPackingList(String customerId,String customerType){
+        return new ModelAndView("knowledgeBase/customerProductPackingList")
+                .addObject("customerId",customerId)
+                .addObject("customerType",customerType);
     }
 
     /**
