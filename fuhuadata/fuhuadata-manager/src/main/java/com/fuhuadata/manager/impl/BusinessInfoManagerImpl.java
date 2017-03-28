@@ -4,6 +4,7 @@ import com.fuhuadata.dao.BusinessInfoDao;
 import com.fuhuadata.domain.BusinessInfo;
 import com.fuhuadata.domain.query.QueryBusinessInfo;
 import com.fuhuadata.manager.BusinessInfoManager;
+import com.fuhuadata.vo.BusinessInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -43,6 +44,11 @@ public class BusinessInfoManagerImpl implements BusinessInfoManager {
     @Override
     public List<BusinessInfo> getBusinessInfoByQuery(QueryBusinessInfo queryBusinessInfo) {
         return businessInfoDao.getBusinessInfoByQuery(queryBusinessInfo);
+    }
+
+    @Override
+    public List<BusinessInfoVO> getBusinessInfoByPage(BusinessInfoVO businessInfoVO) {
+        return businessInfoDao.getBusinessInfoByPage(businessInfoVO);
     }
 
     @Override

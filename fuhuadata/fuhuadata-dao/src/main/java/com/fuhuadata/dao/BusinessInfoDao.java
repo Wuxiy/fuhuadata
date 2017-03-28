@@ -2,6 +2,7 @@ package com.fuhuadata.dao;
 
 import com.fuhuadata.domain.BusinessInfo;
 import com.fuhuadata.domain.query.QueryBusinessInfo;
+import com.fuhuadata.vo.BusinessInfoVO;
 
 
 import java.util.List;
@@ -23,5 +24,7 @@ public interface BusinessInfoDao {
 
     public List<BusinessInfo> getBusinessInfoByQuery(QueryBusinessInfo queryBusinessInfo);
 
-    public int count(QueryBusinessInfo queryBusinessInfo);
+    public List<BusinessInfoVO> getBusinessInfoByPage(BusinessInfoVO businessInfoVO);
+
+     public int count(QueryBusinessInfo queryBusinessInfo);
 }

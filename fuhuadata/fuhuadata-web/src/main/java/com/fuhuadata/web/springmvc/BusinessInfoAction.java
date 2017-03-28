@@ -1,11 +1,10 @@
 package com.fuhuadata.web.springmvc;
 
 import com.fuhuadata.domain.BusinessInfo;
-import com.fuhuadata.domain.query.QueryBusinessInfo;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.BusinessInfoService;
-import com.fuhuadata.service.BusinessRecordService;
+import com.fuhuadata.vo.BusinessInfoVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import sun.rmi.runtime.Log;
-
 import java.util.List;
 
 /**
@@ -32,8 +29,9 @@ public class BusinessInfoAction {
 
 
 
+
     /**
-     * add
+     * into
      * @return
      */
     @RequestMapping(value="/intoBusinessInfo",method = RequestMethod.GET)
@@ -42,15 +40,20 @@ public class BusinessInfoAction {
         return new ModelAndView("/businessInfo");
     }
 
+    /**
+     * list
+     * @param businessInfoVO
+     * @return
+     */
     @RequestMapping(value = "/queryBusinessInfoPageList",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "queryBusinessInfoPageList")
     @ResponseBody
-    public ResultPojo queryBusinessInfoPageList(@RequestBody QueryBusinessInfo queryBusinessInfo){
+    public ResultPojo queryBusinessInfoPageList(@RequestBody BusinessInfoVO businessInfoVO){
         try{
-            Result<List<BusinessInfo>> result = businessInfoService.getBusinessInfoByQuery(queryBusinessInfo);
+            Result<List<BusinessInfoVO>> result = businessInfoService.getBusinessInfoByPage(businessInfoVO);
             return result.getResultPojo();
         }catch (Exception e){
-            log.error("查询商机列表数据失败",e);
+            log.error("分页条件查询商机列表数据失败",e);
         }
         return null;
     }

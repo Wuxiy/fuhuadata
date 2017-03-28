@@ -3,6 +3,7 @@ package com.fuhuadata.service;
 import com.fuhuadata.domain.BusinessInfo;
 import com.fuhuadata.domain.query.QueryBusinessInfo;
 import com.fuhuadata.domain.query.Result;
+import com.fuhuadata.vo.BusinessInfoVO;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -22,6 +23,8 @@ public interface BusinessInfoService {
     public Result<List<BusinessInfo>> getBusinessInfoByCustomerId(String customerId);
 
     public Result<List<BusinessInfo>> getBusinessInfoByQuery(QueryBusinessInfo queryBusinessInfo);
+
+    public Result<List<BusinessInfoVO>> getBusinessInfoByPage(BusinessInfoVO businessInfoVO);
 
     public Result<Integer> count(QueryBusinessInfo queryBusinessInfo);
 }
