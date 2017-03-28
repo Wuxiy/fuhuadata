@@ -3,7 +3,7 @@
         "http://www.ibatis.com/dtd/sql-map-2.dtd">
 <sqlMap namespace="BusinessOrder">
     <typeAlias alias="BusinessOrder" type="com.fuhuadata.domain.BusinessOrder"/>
-    <typeAlias alias="QueryBusinessOrder" type="com.fuhuadata.domain.query.QueryBusinessOrder"/>
+        <typeAlias alias="QueryBusinessOrder" type="com.fuhuadata.domain.query.QueryBusinessOrder"/>
 
     <sql id="QUERY-COMMON">
         <dynamic prepend=" WHERE ">

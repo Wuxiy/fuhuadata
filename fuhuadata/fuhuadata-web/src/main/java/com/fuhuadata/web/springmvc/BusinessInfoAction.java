@@ -28,8 +28,6 @@ public class BusinessInfoAction {
     private BusinessInfoService businessInfoService;
 
 
-
-
     /**
      * into
      * @return

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
+ * 商机报价基本信息
  * Created by hexingfu on 2017/3/16.
  */
 public class BusinessOrder implements Serializable{
