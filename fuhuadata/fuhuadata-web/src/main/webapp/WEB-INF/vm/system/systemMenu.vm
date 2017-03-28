@@ -101,6 +101,5 @@
         var par = thisEl.parents('.tree');
         par.find('li').removeClass('active');
         thisEl.parent('li').addClass('active');
-
     })
 </script>

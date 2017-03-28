@@ -3,6 +3,7 @@ package com.fuhuadata.dao.impl;
 import com.fuhuadata.dao.BusinessInfoDao;
 import com.fuhuadata.domain.BusinessInfo;
 import com.fuhuadata.domain.query.QueryBusinessInfo;
+import com.fuhuadata.vo.BusinessInfoVO;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
 import java.util.List;
@@ -52,6 +53,11 @@ public class BusinessInfoDaoImpl extends SqlMapClientTemplate implements Busines
     @Override
     public List<BusinessInfo> getBusinessInfoByQuery(QueryBusinessInfo queryBusinessInfo) {
         return this.queryForList(GET_BY_QUERY,queryBusinessInfo);
+    }
+
+    @Override
+    public List<BusinessInfoVO> getBusinessInfoByPage(BusinessInfoVO businessInfoVO) {
+        return this.queryForList(GET_PAGE,businessInfoVO);
     }
 
     public int count(QueryBusinessInfo queryBusinessInfo){

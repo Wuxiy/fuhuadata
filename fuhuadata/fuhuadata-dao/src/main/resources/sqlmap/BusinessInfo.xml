@@ -27,59 +27,17 @@
 
     <sql id="PAGE-COMMON">
         <dynamic prepend=" WHERE">
-            <isNotNull prepend=" AND " property="businessId">
-                business_id = #businessId#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="customerId">
-                customer_id = #customerId#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="businessName">
-                business_name = #businessName#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="customerName">
-                customer_name = #customerName#
-            </isNotNull>
+           <isNotNull prepend=" AND " property=" customerName">
+               base.customer_name = #customerName#
+           </isNotNull>
             <isNotNull prepend=" AND " property="businessFrom">
-                business_from = #businessFrom#
+                a.business_from = #businessFrom#
             </isNotNull>
             <isNotNull prepend=" AND " property="businessState">
-                business_state = #businessState#
+                a.business_state = #businessState#
             </isNotNull>
-            <isNotNull prepend=" AND " property="expectIncome">
-                expect_income = #expectIncome#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="deadline">
-                deadline = #deadline#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="intentionalProducts">
-                Intentional_products = #intentionalProducts#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="businessDescribe">
-                business_describe = #businessDescribe#
-              </isNotNull>
-            <isNotNull prepend=" AND " property="businessRemarks">
-                business_remarks = #businessRemarks#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="failReason">
-                fail_reason = #failReason#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="createUserId">
-                create_user_id = #createUserId#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="createUserName">
-                create_user_name = #createUserName#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="lastmodifyUserId">
-                lastmodify_user_id = #lastmodifyUserId#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="lastmodifyUserName">
-                lastmodify_user_name = #lastmodifyUserName#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="createTime">
-                create_time = #createTime#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="modifyTime">
-                modify_time = #modifyTime#
+            <isNotNull prepend=" AND " property="customerLevel">
+                base.customer_level = #customerLevel#
             </isNotNull>
         </dynamic>
     </sql>
@@ -218,6 +176,7 @@
                 modify_time = #modifyTime#
             </isNotNull>
         </dynamic>
+        WHERE business_id = #businessId#
     </update>
 
     <delete id="DELETE-BY-ID" parameterClass="java.lang.String">
@@ -250,11 +209,31 @@
 
     <select id="GET-PAGE" resultMap="BUSINESSINFO-MAP" parameterClass="QueryBusinessInfo">
         <![CDATA[
-            SELECT * FROM business_info
+                    SELECT
+            a.business_id businessId,
+            a.business_name businessName,
+            a.customer_name customerName,
+            base.customer_level customerLevel,
+            base.full_enterprise_nature enterpriseNature,
+            a.create_time createTime,
+            DATEDIFF(a.deadline,CURDATE()) remainDays,
+            a.business_from businessFrom,
+            a.expect_income expectIncome,
+            a.business_state businessState
+        FROM
+            business_info a
+        LEFT JOIN customer_base_info base ON base.customer_id = a.business_id
     ]]>
+        <isNotEmpty prepend=", " property="enterpriseNature">
+            (select * from customer_enterprise_nature where nature=#enterpriseNature#) nature
+        </isNotEmpty>
+
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>
         </isParameterPresent>
+        <isNotEmpty prepend=" AND " property="enterpriseNature">
+            nature.customer_id=base.customer_id
+        </isNotEmpty>
         LIMIT #startRow#,#pageSize#
     </select>
 

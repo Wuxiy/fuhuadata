@@ -108,9 +108,6 @@
 
     <update id="UPDATE" parameterClass="BusinessRecord">
         <dynamic prepend=" WHERE">
-            <isNotNull prepend=", " property="id">
-                id = #id#
-            </isNotNull>
             <isNotNull prepend=", " property="businessId">
                 business_id  = #businessId#
             </isNotNull>
@@ -142,6 +139,7 @@
                 modify_time  = #modifyTime#
             </isNotNull>
         </dynamic>
+       WHERE id = #id#
     </update>
 
     <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
