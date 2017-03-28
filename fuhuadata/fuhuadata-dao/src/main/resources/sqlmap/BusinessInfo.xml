@@ -218,6 +218,7 @@
                 modify_time = #modifyTime#
             </isNotNull>
         </dynamic>
+        WHERE business_id = #businessId#
     </update>
 
     <delete id="DELETE-BY-ID" parameterClass="java.lang.String">
@@ -250,7 +251,20 @@
 
     <select id="GET-PAGE" resultMap="BUSINESSINFO-MAP" parameterClass="QueryBusinessInfo">
         <![CDATA[
-            SELECT * FROM business_info
+                    SELECT
+            a.business_id businessId,
+            a.business_name businessName,
+            a.customer_name customerName,
+            base.customer_level customerLevel,
+            base.full_enterprise_nature enterpriseNature,
+            a.create_time createTime,
+            DATEDIFF(a.deadline,CURDATE()) remainDays,
+            a.business_from businessFrom,
+            a.expect_income expectIncome,
+            a.business_state businessState
+        FROM
+            business_info a
+        LEFT JOIN customer_base_info base ON base.customer_id = a.business_id
     ]]>
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>

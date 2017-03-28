@@ -1,5 +1,6 @@
 package com.fuhuadata.domain.mybatis;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fuhuadata.domain.plugin.Treeable;
 
 import javax.persistence.*;
@@ -59,6 +60,7 @@ public class Menu extends BaseEntity<Integer> implements Treeable<Integer> {
         this.menuId = id;
     }
 
+    @JsonIgnore
     @Override
     public Integer getId() {
         return menuId;
@@ -82,6 +84,7 @@ public class Menu extends BaseEntity<Integer> implements Treeable<Integer> {
         return this.name;
     }
 
+    @JsonIgnore
     @Override
     public String getIcon() {
         throw new UnsupportedOperationException("Not supported yet.");
@@ -140,6 +143,7 @@ public class Menu extends BaseEntity<Integer> implements Treeable<Integer> {
         this.parentIds = parentIds;
     }
 
+    @JsonIgnore
     @Override
     public String getSeparator() {
         return ",";
@@ -150,6 +154,7 @@ public class Menu extends BaseEntity<Integer> implements Treeable<Integer> {
         return getParentIds() + getId() + getSeparator();
     }
 
+    @JsonIgnore
     @Override
     public Integer getWeight() {
         return this.orderIndex;
@@ -160,31 +165,37 @@ public class Menu extends BaseEntity<Integer> implements Treeable<Integer> {
         this.orderIndex = weight;
     }
 
+    @JsonIgnore
     @Override
     public boolean isRoot() {
         return getParentId() != null && getParentId() == 0;
     }
 
+    @JsonIgnore
     @Override
     public boolean isLeaf() {
         return !isRoot() && !isHasChildren();
     }
 
+    @JsonIgnore
     @Override
     public boolean isHasChildren() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @JsonIgnore
     @Override
     public String getRootDefaultIcon() {
         return null;
     }
 
+    @JsonIgnore
     @Override
     public String getBranchDefaultIcon() {
         return null;
     }
 
+    @JsonIgnore
     @Override
     public String getLeafDefaultIcon() {
         return null;

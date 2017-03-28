@@ -188,4 +188,28 @@ public class CustomerBaseInfoAction {
             return result.getResultPojo();
     }
 
+    /**
+     * doAdd,潜在客户新增
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/doAddCustomerBaseInfo",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "customerInfo-customerList",methods = "doAddCustomerBaseInfo")
+    @ResponseBody
+    public ResultPojo doAddCustomerBaseInfo(@RequestBody CustomerBaseInfoDO customerBaseInfoDO){
+        Result result = new Result();
+        CustomerBaseInfo customerBaseInfo = customerBaseInfoDO.getCustomerBaseInfo();
+        CustomerMakeProduct[] customerMakeProducts = customerBaseInfoDO.getCustomerMakeProducts();
+        CustomerEnterpriceNature[] customerEnterpriceNatures = customerBaseInfoDO.getCustomerEnterpriceNatures();
+        try{
+            List<CustomerEnterpriceNature> list1 = Arrays.asList(customerEnterpriceNatures);
+            List<CustomerMakeProduct> list2 = Arrays.asList(customerMakeProducts);
+            result =  customerBaseInfoService.addCustomerBaseInfo(list1,list2,customerBaseInfo);
+        }catch(Exception e){
+            result.setSuccess(false);
+            log.error("新增客户基本信息错误");
+        }
+        return result.getResultPojo();
+    }
+
 }

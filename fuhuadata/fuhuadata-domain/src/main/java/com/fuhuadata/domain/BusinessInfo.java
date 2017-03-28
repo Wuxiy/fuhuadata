@@ -1,9 +1,6 @@
 package com.fuhuadata.domain;
 
-import com.fuhuadata.util.DateJsonDeserializer;
-import com.fuhuadata.util.DateJsonSerializer;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -27,6 +24,7 @@ public class BusinessInfo {
 
     private BigDecimal expectIncome;//预计收益
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date deadline;//预计截止时间
 
     private String intentionalProducts;//意向产品及购买
@@ -45,8 +43,10 @@ public class BusinessInfo {
 
     private String lastmodifyUserName;//上一次修改者姓名
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;//创建时间
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date modifyTime;//修改时间
 
     public String getBusinessId() {
@@ -177,23 +177,18 @@ public class BusinessInfo {
         this.lastmodifyUserName = lastmodifyUserName;
     }
 
-    @JsonSerialize(using = DateJsonSerializer.class)
     public Date getCreateTime() {
         return createTime;
     }
 
-    @JsonDeserialize(using = DateJsonDeserializer.class)
     public void setCreateTime(Date createTime) {
 
         this.createTime = createTime;
     }
-
-    @JsonSerialize(using = DateJsonSerializer.class)
     public Date getModifyTime() {
         return modifyTime;
     }
 
-    @JsonDeserialize(using = DateJsonDeserializer.class)
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
     }

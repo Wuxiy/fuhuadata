@@ -83,7 +83,6 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
         System.out.println(customerId);
         try {
             CustomerBaseInfoVO customerBaseInfoVO = (CustomerBaseInfoVO) this.queryForObject(GET_CUSTOMER_BASEINFO,customerId);
-            System.out.println(customerBaseInfoVO);
             return customerBaseInfoVO;
         }catch(Exception e){
             e.printStackTrace();
