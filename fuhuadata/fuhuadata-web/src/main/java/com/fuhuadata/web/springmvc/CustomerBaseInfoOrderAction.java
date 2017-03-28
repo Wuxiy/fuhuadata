@@ -30,6 +30,7 @@ public class CustomerBaseInfoOrderAction {
     public ModelAndView entrance(String customerId){
         return new ModelAndView("customerInfo/customerOrderInfo").addObject("customerId",customerId);
     }
+
     @ResponseBody
     @RequestMapping("/initSaleOrganizationTree")
     public ResultPojo initSaleOrganizationTree(){

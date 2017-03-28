@@ -34,7 +34,9 @@ public class CustomerProductPackingAction {
     @SuppressWarnings("unused")
     @RequestMapping(value="/customerProductPackingList",method= RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerProductPackaging  ",methods = "into")
-    public ModelAndView customerProductPackingList(){return new ModelAndView("knowledgeBase/customerProductPackingList");}
+    public ModelAndView customerProductPackingList(String customerId){
+        return new ModelAndView("knowledgeBase/customerProductPackingList").addObject("customerId",customerId);
+    }
 
     /**
      * 新增客户产品包装详情
