@@ -48,40 +48,41 @@
                                     <!--搜索栏-->
                                     <div class="input-group">
                                         <span class="input-group-addon" lang="zh">客户名称</span>
-                                        <select class="form-control">
+                                        <select class="form-control" id="customerName">
                                             <option value="" lang="zh">NUFARM</option>
                                             <option value="" lang="zh">ADC</option>
                                         </select>
                                         <span class="input-group-addon" lang="zh">商机来源</span>
-                                        <select class="form-control">
-                                            <option value="" lang="zh">展会</option>
-                                            <option value="" lang="zh">门户网站</option>
-                                            <option value="" lang="zh">农药店考察</option>
-                                            <option value="" lang="zh">客户介绍</option>
-                                            <option value="" lang="zh">主动联系</option>
-                                            <option value="" lang="zh">其他</option>
+                                        <select class="form-control" id="businessFrom">
+                                            <option value="0" lang="zh">展会</option>
+                                            <option value="1" lang="zh">门户网站</option>
+                                            <option value="2" lang="zh">农药店考察</option>
+                                            <option value="3" lang="zh">客户介绍</option>
+                                            <option value="4" lang="zh">主动联系</option>
+                                            <option value="5" lang="zh">其他</option>
                                         </select>
                                         <span class="input-group-addon" lang="zh">商机状态</span>
-                                        <select class="form-control">
-                                            <option value="" lang="zh">待报价</option>
-                                            <option value="" lang="zh">失败</option>
-                                            <option value="" lang="zh">已转化</option>
-                                            <option value="" lang="zh">全部</option>
+                                        <select class="form-control" id="businessState">
+                                            <option value="0" lang="zh">待报价</option>
+                                            <option value="1" lang="zh">失败</option>
+                                            <option value="2" lang="zh">已转化</option>\
                                         </select>
                                         <span class="input-group-addon" lang="zh">客户类型</span>
-                                        <select class="form-control">
-                                            <option value="" lang="zh">潜在客户</option>
-                                            <option value="" lang="zh">风险客户</option>
-                                            <option value="" lang="zh">一般客户</option>
-                                            <option value="" lang="zh">重要客户</option>
-                                            <option value="" lang="zh">大客户</option>
-                                            <option value="" lang="zh">战略客户</option>
+                                        <select class="form-control" id="customerLevel">
+                                            <option value="0" lang="zh">潜在客户</option>
+                                            <option value="5" lang="zh">风险客户</option>
+                                            <option value="4" lang="zh">一般客户</option>
+                                            <option value="3" lang="zh">重要客户</option>
+                                            <option value="2" lang="zh">大客户</option>
+                                            <option value="1" lang="zh">战略客户</option>
                                         </select>
                                         <span class="input-group-addon" lang="zh">企业性质</span>
-                                        <select class="form-control">
-                                            <option value="" lang="zh">工厂</option>
-                                            <option value="" lang="zh">分销商</option>
-                                            <option value="" lang="zh">经销商</option>
+                                        <select class="form-control" id="enterpriseNature">
+                                            <option value="1" lang="zh">工厂</option>
+                                            <option value="2" lang="zh">分销商</option>
+                                            <option value="3" lang="zh">经销商</option>
+                                            <option value="4" lang="zh">终端客户</option>
+                                            <option value="5" lang="zh">其他</option>
                                         </select>
                                         <div class="input-group-btn">
                                             <button class="btn btn-xs btn-primary" type="button">搜索</button>
@@ -159,20 +160,28 @@
         var total = getListCount();
         getDataList(0);
         $("#pagination").pagination(total,{
+            customerName:$('#customerName').val(),
+            businessFrom:$('#businessFrom').val(),
+            businessState:$('#businessState').val(),
+            customerLevel:$('#customerLevel').val(),
+            enterpriseNature:$('#enterpriseNature').val(),
             items_per_page : pageSize,
             num_edge_entries : 3,
             num_display_entries : 10,
             callback:getDataList
         });
     }
+    var businessFrom = ['展会','门户网站','农药店考察','客户介绍','主动联系','其他']
     var customerLevelList = ['战略客户','大客户' ,'重要客户' ,'一般客户' ,'风险客户'];
     var businessOpportunity = ['工厂','分销商' ,'经销商' ,'终端客户' ,'其他'];
+    var businessState = ['待报价','失败','已转化'];
     //根据页码获取列表数据
     function getDataList(pageNum,jq){
         jQuery.ajax({
             url: basePath + '',
             dataType:'json',
             data:{
+
                 areaClassId:click_node.oneLevelId,
                 areaId:click_node.twoLevelId,
                 startRow:pageNum*pageSize,
@@ -188,13 +197,13 @@
                     _html += '	<td>'+ResultData[i].businessId+'</td>';
                     _html += '  <td><a href="">'+ResultData[i].businessName+'</a></td>';
                     _html += '  <td>'+ResultData[i].customerName+'</td>';
-                    _html += '  <td lang="zh">'+customerLevelList[ResultData[i].name]+'</td>';
-                    _html += '  <td lang="zh">'+businessOpportunity[ResultData[i].name]+'</td>';
-                    _html += '  <td>'+ResultData[i].name+'A</td>';
-                    _html += '  <td>'+ResultData[i].name+'</td>';
-                    _html += '  <td lang="zh">'+ResultData[i].name+'</td>';
-                    _html += '  <td lang="zh">'+ResultData[i].name+'</td>';
-                    _html +='   <td>'+ResultData[i].name+'</td>';
+                    _html += '  <td lang="zh">'+customerLevelList[ResultData[i].customerLevel-1]+'</td>';
+                    _html += '  <td lang="zh">'+businessOpportunity[ResultData[i].enterpriseNature-1]+'</td>';
+                    _html += '  <td>'+ResultData[i].createTime+'A</td>';
+                    _html += '  <td>'+ResultData[i].remainDays+'</td>';
+                    _html += '  <td lang="zh">'+businessFrom[ResultData[i].businessFrom]+'</td>';
+                    _html += '  <td lang="zh">'+ResultData[i].expectIncome+'</td>';
+                    _html +='   <td>'+businessState[ResultData[i].businessState]+'</td>';
                     _html +='   </tr>';
                 }
                 $("#businessOpportunityList").html(_html);
@@ -226,14 +235,14 @@
             url:basePath + '',
             dataType:'JSON',
             data:{
-                customerType:$("#customerType").val(),
                 areaClassId:click_node.oneLevelId,
                 areaId:click_node.twoLevelId,
                 fullName:$("#fullName").val(),
-                enterpriseNature:$("#enterpriseNature").val(),
-                zhongxinbaoLevel:$("#zhongxinbaoLevel").val(),
-                customerLevel:$("#customerLevel").val(),
-                customerStatus:$("#customerStatus").val(),
+                customerName:$('#customerName').val(),
+                businessFrom:$('#businessFrom').val(),
+                businessState:$('#businessState').val(),
+                customerLevel:$('#customerLevel').val(),
+                enterpriseNature:$('#enterpriseNature').val(),
             },
             async:false,
             method:'POST',
