@@ -38,7 +38,7 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
 
 
     public CustomerBaseInfo addCustomerBaseInfo(CustomerBaseInfo customerBaseInfo) {
-		customerBaseInfo.setCustomerId((String) this.insert(ADD, customerBaseInfo));
+		customerBaseInfo.setCustomerId((String)this.insert(ADD, customerBaseInfo));
     	return customerBaseInfo;
     }
 

@@ -218,8 +218,8 @@
 	<insert id="ADD" parameterClass="CustomerBaseInfo">
 		INSERT INTO 
 		customer_base_info(full_name,short_name,customer_type,customer_area_id,customer_area,country_id,country,registered_funds,registered_address,management_scope,zhongxinbao_number,zhongxinbao_level,remark,enterprise_phone,enterprise_email,customer_completion,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time)
-		VALUES(#fullName#,#shortName#,#customerType#,#areaId#,#area#,#countryId#,#country#,#registeredFunds#,#registeredAddress#,#managementScope#,#zhongxinbaoNumber#,#zhongxinbaoLevel#,#remark#,#enterprisePhone#,#enterpriseEmail#,#customerCompletion#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
-		<selectKey resultClass="INTEGER" keyProperty="customerId">
+		VALUES(#fullName#,#shortName#,#customerType#,#areaId#,#area#,#countryId#,#country#,#registeredFunds#,#registeredAddress#,#managementScope#,#zhongxinbaoNumber#,#zhongxinbaoLevel#,#remark#,#enterprisePhone#,#enterpriseEmail#,#customerCompletion#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,now(),now())
+		<selectKey resultClass="java.lang.String" keyProperty="customerId">
 			SELECT @@IDENTITY AS ID
 		</selectKey>
 	</insert>

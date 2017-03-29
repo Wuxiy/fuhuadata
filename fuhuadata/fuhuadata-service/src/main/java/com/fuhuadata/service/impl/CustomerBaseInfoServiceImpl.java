@@ -6,6 +6,7 @@ import com.fuhuadata.domain.CustomerEnterpriceNature;
 import com.fuhuadata.domain.CustomerMakeProduct;
 import com.fuhuadata.manager.CustomerBaseInfoManager;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.service.CustomerBaseInfoService;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -43,6 +45,13 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 	public Result<CustomerBaseInfoVO> addCustomerBaseInfo(List<CustomerEnterpriceNature> customerEnterpriceNatures, List<CustomerMakeProduct> customerMakeProducts, CustomerBaseInfo customerBaseInfo) {
 		Result<CustomerBaseInfoVO> result = new Result<CustomerBaseInfoVO>();
 		try {
+			//计算百科信息完整度
+			calculateCompletion(customerBaseInfo);
+			//设置操作人信息，临时处理，登录机制做好后更新此处代码
+			customerBaseInfo.setCreateUserId(1);
+			customerBaseInfo.setCreateUserName("admin");
+			customerBaseInfo.setLastmodifyUserId(1);
+			customerBaseInfo.setLastmodifyUserName("admin");
 			result.addDefaultModel(customerBaseInfoManager.addCustomerBaseInfo(customerEnterpriceNatures,customerMakeProducts,customerBaseInfo));
 		} catch(Exception e) {
 			result.setSuccess(false);
@@ -50,8 +59,38 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 		}
 		return result;
 	}
-
-
+	//计算百科信息完整度
+	private void calculateCompletion(CustomerBaseInfo customerBaseInfo){
+		int total = 12;//百科页面除了自定义字段外的所有总字段数量
+		int complete_num = 0;
+		if(StringUtils.isNotBlank(customerBaseInfo.getFullName())){
+			complete_num++;
+		}
+		if(StringUtils.isNotBlank(customerBaseInfo.getShortName())){
+			complete_num++;
+		}
+		if(StringUtils.isNotBlank(customerBaseInfo.getArea())){
+			complete_num++;
+		}
+		if(StringUtils.isNotBlank(customerBaseInfo.getCountry())){
+			complete_num++;
+		}
+		if(StringUtils.isNotBlank(customerBaseInfo.getFullEnterpriseNature())){
+			complete_num++;
+		}
+		if(StringUtils.isNotBlank(customerBaseInfo.getRegisteredFunds())){
+			complete_num++;
+		}
+		if(StringUtils.isNotBlank(customerBaseInfo.getRegisteredAddress())){
+			complete_num++;
+		}
+		if(StringUtils.isNotBlank(customerBaseInfo.getManagementScope())){
+			complete_num++;
+		}
+		float num= (float)complete_num*100/total;
+		DecimalFormat df = new DecimalFormat("0.00");//格式化小数
+		customerBaseInfo.setCustomerCompletion(df.format(num));
+	}
 	@Override
 	public Result updateCustomerBaseInfoById(String customerId, CustomerBaseInfo customerBaseInfo) {
     	Result result = new Result();
