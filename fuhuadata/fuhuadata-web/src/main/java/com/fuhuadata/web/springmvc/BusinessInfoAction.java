@@ -3,6 +3,7 @@ package com.fuhuadata.web.springmvc;
 import com.fuhuadata.domain.BusinessInfo;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
+import com.fuhuadata.service.BCodeService;
 import com.fuhuadata.service.BusinessInfoService;
 import com.fuhuadata.vo.BusinessInfoVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
@@ -27,6 +28,8 @@ public class BusinessInfoAction {
     @Autowired
     private BusinessInfoService businessInfoService;
 
+    @Autowired
+    private BCodeService bCodeService;
 
     /**
      * into
@@ -35,7 +38,8 @@ public class BusinessInfoAction {
     @RequestMapping(value="/intoBusinessInfo",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "into")
     public ModelAndView intoBusinessInfo(){
-        return new ModelAndView("/salesStatistics/businessOpportunity");
+        String businessId = bCodeService.getNextBusinessCode();
+        return new ModelAndView("/salesStatistics/businessOpportunity").addObject("businessId",businessId);
     }
 
     /**
