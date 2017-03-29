@@ -134,7 +134,9 @@ function customerBasicFormObj() {
             "opportunityDescrible": $('#opportunityDescrible').val(),
             "lastmodifyUserName": $('#lastmodifyUserName').val(),
 
-            "modifyTime": getTime()
+            "modifyTime": getTime(),
+            "areaName": $('#areaId').text(),
+            "countryName": $('#countryId').text()
 
         },
         customerEnterpriceNatures:customerEnterpriceNatureObj(),

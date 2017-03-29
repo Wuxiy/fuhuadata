@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <!--基本信息-->
-                <div class="panel panel-default">
+                <div class="panel panel-default view-HD-lg">
                     <div class="panel-heading">
                         <h3 class="panel-title" lang="zh">
                             基本信息
@@ -22,32 +22,28 @@
                             <div class="form-group ">
                                 <label class="col-xs-1 control-label" lang="zh">订单编号</label>
                                 <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">商机编号</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
                                 <label class="col-xs-1 control-label" lang="zh">客户名称</label>
                                 <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
                                 <label class="col-xs-1 control-label" lang="zh">客户税号</label>
                                 <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
-                                <label class="col-xs-1 control-label" lang="zh">客户国别</label>
-                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
                             </div>
                             <div class="form-group ">
-                                <label class="col-xs-1 control-label" lang="zh">客户电话</label>
+                                <label class="col-xs-1 control-label" lang="zh">中信保编码</label>
                                 <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
-                                <label class="col-xs-1 control-label" lang="zh">邮箱</label>
+                                <label class="col-xs-1 control-label" lang="zh">注册资金</label>
                                 <div class="col-xs-2"><input class="form-control" type="email" value="" disabled /></div>
-                                <label class="col-xs-1 control-label" lang="zh">收票客户</label>
+                                <label class="col-xs-1 control-label" lang="zh">企业电话</label>
                                 <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
-                                <label class="col-xs-1 control-label" lang="zh">销售组织</label>
-                                <div class="col-xs-2">
-                                    <select class="form-control" >
-                                        <option value="" lang="zh">对接NC</option>
-                                    </select>
-                                </div>
+                                <label class="col-xs-1 control-label" lang="zh">企业邮箱</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
                             </div>
                             <div class="form-group">
-                                <label class="col-xs-1 control-label" lang="zh">业务员</label>
+                                <label class="col-xs-1 control-label" lang="zh">企业性质</label>
                                 <div class="col-xs-2">
                                     <select class="form-control" >
-                                        <option value="" lang="zh">对接NC</option>
+                                        <option value="" lang="zh">收票客户</option>
                                     </select>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">部门</label>
