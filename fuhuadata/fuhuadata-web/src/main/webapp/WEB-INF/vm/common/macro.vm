@@ -56,7 +56,7 @@
 #end
 
 #macro(deputyNav $num)
-    #if($!{customerType}==2)
+    #if($!{customerType}==2 && $!{customerId}!='')
     <ul id="deputyNav" class="nav nav-tabs pull-left">
         <li
             #if($num == 1)
@@ -73,14 +73,14 @@
                     class="active"
             #end
         ><a href="${request.contextPath}/customerLinkman/intoCustomerLinkmanList?customerType=$!{customerType}&customerId=$!{customerId}" >联系人</a></li>
-            <li
-        #if($num == 4)
-                class="active"
-        #end
-        ><a href="${request.contextPath}/customerProductPacking/intoCustomerProductInfo?customerType=$!{customerType}&customerId=$!{customerId}" >产品要求</a></li>
+        <li
+            #if($num == 8)
+                    class="active"
+            #end
+        ><a href="${request.contextPath}/customerSubcompanyInfo/intoCustomerSubcompanyInfo?customerType=$!{customerType}&customerId=$!{customerId}" >公司别名（子公司信息）</a></li>
     </ul>
     #end
-    #if($!{customerType}==1||$!{customerType}==2)
+    #if($!{customerType}==1||$!{customerType}==3)
     <ul id="deputyNav" class="nav nav-tabs pull-left">
         <li
             #if($num == 1)
@@ -141,8 +141,8 @@
             </div>
             <div class="panel-body">
                 <div id="asideNav" class="list-group">
-                    <a href="${request.contextPath}/customerBaseInfoOrderRequire/billRequireEntrance${customerId}" class="list-group-item #if($num == 1) active #end " lang="zh">单据要求</a>
-                    <a href="${request.contextPath}/customerBaseInfoOrderRequire/transportRequireEntrance${customerId}" class="list-group-item #if($num == 2) active #end " lang="zh">订舱出运要求</a>
+                    <a href="${request.contextPath}/customerBaseInfoOrderRequire/billRequireEntrance?customerType=$!{customerType}&customerId=${customerId}" class="list-group-item #if($num == 1) active #end " lang="zh">单据要求</a>
+                    <a href="${request.contextPath}/customerBaseInfoOrderRequire/transportRequireEntrance?customerType=$!{customerType}&customerId=${customerId}" class="list-group-item #if($num == 2) active #end " lang="zh">订舱出运要求</a>
                 </div>
             </div>
         </div>

@@ -32,7 +32,7 @@ function customerBasicInfo(result){
 
     $('#hasChiPurchase').val(getData.hasChiPurchase);
     $('#customerLevel').val(getData.customerLevel);
-    $('#customerType').val(getData.customerType);
+    $('[name="customerType"]').val(getData.customerType);
     $('#factoryLocation').val(getData.factoryLocation);
     $('#productLine').val(getData.productLine);
 
@@ -53,8 +53,9 @@ function customerBasicInfo(result){
     $('#sellNetwork').val(getData.sellNetwork);
     $('#lastmodifyUserNameEn').val(getData.lastmodifyUserNameEn);
     $('#modifyTimeEn').val(getData.modifyTimeEn);
-
-    customFieldData(getData.customField);//百科自定义字段
+    if(getData.customField && getData.customField!='' && getData.customField!=null){
+        customFieldData(getData.customField);//百科自定义字段
+    }
 
     controlSOrH('#showOpportunity');
     controlSOrH('#showOtherOpportunity');
@@ -163,7 +164,7 @@ function customerEnterpriceNatureObj() {
     $('[name="enterpriseNature"]').filter(':checked').each(function () {
         var obj = {};
         obj.customerId = $('#customerId').val();
-        obj.type = 1;
+        obj.type = 3;
         obj.nature = $(this).val();
         arr.push(obj);
     });
