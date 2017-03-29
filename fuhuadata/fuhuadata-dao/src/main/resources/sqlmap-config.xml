@@ -39,4 +39,5 @@ Config 2.0/" "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
 	<sqlMap resource="sqlmap/CustomerSubcompanyInfo.xml"/>
 	<sqlMap resource="sqlmap/BusinessInfo.xml"/>
 	<sqlMap resource="sqlmap/BusinessRecord.xml"/>
+	<sqlMap resource="sqlmap/Bcode.xml"/>
 </sqlMapConfig>

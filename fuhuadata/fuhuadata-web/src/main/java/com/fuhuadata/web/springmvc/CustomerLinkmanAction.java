@@ -31,8 +31,9 @@ public class CustomerLinkmanAction {
 
     @RequestMapping(value="/intoCustomerLinkmanList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "customerInfo-customerContacts",methods = "into")
-    public ModelAndView intoCustomerLinkmanList(){
-        return new ModelAndView("customerInfo/customerContacts");
+    public ModelAndView intoCustomerLinkmanList(String customerId,String customerType){
+        return new ModelAndView("customerInfo/customerContacts").addObject("customerId",customerId)
+                .addObject("customerType",customerType);
     }
 
     /**
@@ -62,8 +63,8 @@ public class CustomerLinkmanAction {
      */
     @RequestMapping(value = "intoCustomerLinkmanAdd",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "customerInfo-customerContacts",methods = "intoCustomerLinkmanAdd")
-    public ModelAndView intoCustomerLinkmanAdd(){
-        ModelAndView model = new ModelAndView("customerInfo/customerContactsAdd");
+    public ModelAndView intoCustomerLinkmanAdd(String customerId){
+        ModelAndView model = new ModelAndView("customerInfo/customerContactsAdd").addObject("customerId",customerId);
         return model;
     }
 
@@ -130,8 +131,8 @@ public class CustomerLinkmanAction {
      */
     @RequestMapping(value = "intoCustomerLinkmanInfo",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "customerInfo-customerContacts",methods = "intoCustomerLinkmanInfo")
-    public ModelAndView intoCustomerLinkmanInfo(){
-        ModelAndView model = new ModelAndView("customerInfo/customerContactsInfo");
+    public ModelAndView intoCustomerLinkmanInfo(String customerId){
+        ModelAndView model = new ModelAndView("customerInfo/customerContactsInfo").addObject("customerId",customerId);
         return model;
     }
 

@@ -4,12 +4,14 @@ import com.fuhuadata.domain.ProductInfo;
 import com.fuhuadata.domain.query.QueryProductInfo;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
+import com.fuhuadata.service.BCodeService;
 import com.fuhuadata.service.ProductInfoService;
 import com.fuhuadata.vo.ProductInfoVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.xpath.operations.Mod;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +32,9 @@ public class ProductInfoAction {
     private final static Log log= LogFactory.getLog(ProductInfoAction.class);
     @Resource
     private ProductInfoService productInfoService;
+
+    @Autowired
+    private BCodeService bCodeService;
 
     @RequestMapping(value="/show")
     @SystemLogAnnotation(module = "knowledgeBase-productInfo",methods = "into")
@@ -57,7 +62,9 @@ public class ProductInfoAction {
      */
     @RequestMapping(value="/add",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-productInfo",methods = "add")
-    public ModelAndView addProductInfo(){return new ModelAndView("knowledgeBase/productInfoAdd");}
+    public ModelAndView addProductInfo(ProductInfo productInfo){
+        int  productId = (Integer.valueOf(bCodeService.getNextStandardProductCode(productInfo))).intValue();
+        return new ModelAndView("knowledgeBase/productInfoAdd").addObject("productId",productId);}
 
     @RequestMapping(value="/doAdd",method=RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-productInfo",methods = "doAdd")

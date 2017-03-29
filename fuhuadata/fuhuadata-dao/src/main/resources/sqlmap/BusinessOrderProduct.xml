@@ -49,23 +49,24 @@
         <result column="tax_free" property="taxFree" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
         <result column="gross_margin" property="grossMargin" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
         <result column="other_cost" property="otherCost" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
-        <result column="min_price" property="minPrice" jdbcType="DECIMAL" />
-        <result column="contract_price" property="contractPrice" jdbcType="DECIMAL" />
-        <result column="transform_state" property="transformState" jdbcType="INTEGER" />
-        <result column="composition_cost" property="compositionCost" jdbcType="VARCHAR" />
-        <result column="pakage_other_requirement" property="pakageOtherRequirement" jdbcType="VARCHAR" />
-        <result column="additional_price" property="additionalPrice" jdbcType="DECIMAL" />
-        <result column="consumption" property="consumption" jdbcType="DECIMAL" />
-        <result column="img_info" property="imgInfo" jdbcType="VARCHAR" />
-        <result column="pakage_info" property="pakageInfo" jdbcType="VARCHAR" />
-        <result column="material_info" property="materialInfo" jdbcType="VARCHAR" />
-        <result column="create_user_id" property="createUserId" jdbcType="INTEGER" />
-        <result column="create_user_name" property="createUserName" jdbcType="VARCHAR" />
-        <result column="lastmodify_user_id" property="lastmodifyUserId" jdbcType="INTEGER" />
-        <result column="lastmodify_user_name" property="lastmodifyUserName" jdbcType="VARCHAR" />
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+        <result column="min_price" property="minPrice" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+        <result column="contract_price" property="contractPrice" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+        <result column="transform_state" property="transformState" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="composition_cost" property="compositionCost" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="pakage_other_requirement" property="pakageOtherRequirement" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="additional_price" property="additionalPrice" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+        <result column="consumption" property="consumption" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+        <result column="img_info" property="imgInfo" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="pakage_info" property="pakageInfo" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="material_info" property="materialInfo" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="create_user_id" property="createUserId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="create_user_name" property="createUserName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="lastmodify_user_id" property="lastmodifyUserId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="lastmodify_user_name" property="lastmodifyUserName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
     </resultMap>
+
     <sql id="abatorgenerated_Example_Where_Clause" >
         <iterate property="oredCriteria" conjunction="or" prepend="where" removeFirstPrepend="iterate" >
             <isEqual property="oredCriteria[].valid" compareValue="true" >

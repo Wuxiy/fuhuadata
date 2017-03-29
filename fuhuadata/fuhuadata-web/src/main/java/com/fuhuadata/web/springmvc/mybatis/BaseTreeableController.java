@@ -57,7 +57,7 @@ public abstract class BaseTreeableController<E extends BaseEntity<ID> & Treeable
             Example searchExample = new Example(entityClass);
             searchExample.createCriteria().andLike("name", "%" + searchName + "%");
             searchExample.setOrderByClause(defaultOrderBy);
-            nodes = baseService.getAllByExample(searchExample);
+            nodes = baseService.listByExample(searchExample);
             // 找出这些符合条件节点的子节点
             children = baseService.findChildren(nodes, example);
             // 移除所有的子节点，留下的都是第一级的父节点
@@ -93,7 +93,7 @@ public abstract class BaseTreeableController<E extends BaseEntity<ID> & Treeable
                 // 异步，查询下一级子节点
                 Example.Criteria criteria = example.createCriteria();
                 criteria.andEqualTo("parentId", parentId);
-                children = baseService.getAllByExample(example);
+                children = baseService.listByExample(example);
                 nodes.addAll(children);
             }
         }
@@ -129,15 +129,22 @@ public abstract class BaseTreeableController<E extends BaseEntity<ID> & Treeable
         return result.getResultPojo();
     }
 
-    @RequestMapping(value = "/ajax/add", method = RequestMethod.POST)
+    @RequestMapping(value = {"/ajax/add", "/ajax/update"}, method = RequestMethod.POST)
     @ResponseBody
     public ResultPojo ajaxAddChild(E node) {
+        Result<Integer> result = new Result<Integer>(true);
+
+        if (node == null) {
+            result.setSuccess(false);
+            result.setMessage("记录不存在");
+            return result.getResultPojo();
+        }
+
         ID parentId = node.getParentId();
         E parent = baseService.get(parentId);
 
         int id = baseService.appendChild(parent, node);
 
-        Result<Integer> result = new Result<Integer>(true);
         result.addDefaultModel(id);
         return result.getResultPojo();
     }

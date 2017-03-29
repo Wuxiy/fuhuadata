@@ -10,11 +10,11 @@ function customerBasicInfo(result){
     var getData = result;
     // console.log(getData);
     //客户基本信息
-    $('#customerId').val(getData.customerId);
+    $('[name="customerId"]').val(getData.customerId);
     $('#fullName').val(getData.fullName);
     $('#shortName').val(getData.shortName);
-    $('#areaId').val(getData.areaId);
-    $('#countryId').val(getData.countryId);
+    $('#areaId').val((getData.areaId ? -1 : getData.areaId));
+    $('#countryId').val((getData.countryId ? -1 : getData.countryId));
 
     $('#zhongxinbaoNumber').val(getData.zhongxinbaoNumber);
     $('#zhongxinbaoLevel').val(getData.zhongxinbaoLevel);
@@ -32,7 +32,7 @@ function customerBasicInfo(result){
 
     $('#hasChiPurchase').val(getData.hasChiPurchase);
     $('#customerLevel').val(getData.customerLevel);
-    $('#customerType').val(getData.customerType);
+    $('[name="customerType"]').val(getData.customerType);
     $('#factoryLocation').val(getData.factoryLocation);
     $('#productLine').val(getData.productLine);
 
@@ -53,9 +53,15 @@ function customerBasicInfo(result){
     $('#sellNetwork').val(getData.sellNetwork);
     $('#lastmodifyUserNameEn').val(getData.lastmodifyUserNameEn);
     $('#modifyTimeEn').val(getData.modifyTimeEn);
+    if(getData.customField && getData.customField!='' && getData.customField!=null){
+        customFieldData(getData.customField);//百科自定义字段
+    }
 
-    customFieldData(getData.customField);//百科自定义字段
-
+    controlSOrH('#showOpportunity');
+    controlSOrH('#showOtherOpportunity');
+    controlSOrH('#showFactory');
+    controlSOrH('#showMajorCompetitorsGroup');
+    controlSOrH('#showOtherEnterpriceNature');
 }
 //客户生产产品
 function customerMakeProductData(getData){
@@ -128,7 +134,9 @@ function customerBasicFormObj() {
             "opportunityDescrible": $('#opportunityDescrible').val(),
             "lastmodifyUserName": $('#lastmodifyUserName').val(),
 
-            "modifyTime": getTime()
+            "modifyTime": getTime(),
+            "area": $('#areaId').find(':selected').text(),
+            "country": $('#countryId').find(':selected').text()
 
         },
         customerEnterpriceNatures:customerEnterpriceNatureObj(),
@@ -158,7 +166,7 @@ function customerEnterpriceNatureObj() {
     $('[name="enterpriseNature"]').filter(':checked').each(function () {
         var obj = {};
         obj.customerId = $('#customerId').val();
-        obj.type = 1;
+        obj.type = 3;
         obj.nature = $(this).val();
         arr.push(obj);
     });

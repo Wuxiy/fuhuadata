@@ -17,7 +17,7 @@
 					<result property="customerType" column="customer_type" jdbcType="INT" javaType="java.lang.Integer" />
 					<result property="areaId" column="customer_area_id" jdbcType="INT" javaType="java.lang.Integer" />
 					<result property="area" column="customer_area" jdbcType="VARCHAR" javaType="java.lang.String" />
-					<result property="countryId" column="country_id" jdbcType="INT" javaType="java.lang.Integer" />
+					<result property="countryId" column="country_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="country" column="country" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="registeredFunds" column="registered_funds" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="registeredAddress" column="registered_address" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -187,15 +187,7 @@
 				<isNotEmpty prepend=" AND " property="enterpriseEmail">
 			enterprise_email = #enterpriseEmail#
 		</isNotEmpty>
-				<isNotEmpty prepend=" AND " property="enterpriseProfile">
-			enterprise_profile = #enterpriseProfile#
-		</isNotEmpty>
-				<isNotEmpty prepend=" AND " property="developmentCourse">
-			development_course = #developmentCourse#
-		</isNotEmpty>
-				<isNotEmpty prepend=" AND " property="salesNetwork">
-			sales_network = #salesNetwork#
-		</isNotEmpty>
+
 				<isNotEmpty prepend=" AND " property="customField">
 			custom_field = #customField#
 		</isNotEmpty>
@@ -225,9 +217,9 @@
 	
 	<insert id="ADD" parameterClass="CustomerBaseInfo">
 		INSERT INTO 
-		customer_base_info(customer_id,full_name,short_name,customer_type,customer_area_id,customer_area,country_id,country,registered_funds,registered_address,management_scope,zhongxinbao_number,zhongxinbao_level,remark,enterprise_phone,enterprise_email,enterprise_profile,development_course,sales_network,custom_field,customer_completion,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time)
-		VALUES(#customerId#,#fullName#,#shortName#,#customerType#,#areaId#,#area#,#countryId#,#country#,#registeredFunds#,#registeredAddress#,#managementScope#,#zhongxinbaoNumber#,#zhongxinbaoLevel#,#remark#,#enterprisePhone#,#enterpriseEmail#,#enterpriseProfile#,#developmentCourse#,#salesNetwork#,#customField#,#customerCompletion#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
-		<selectKey resultClass="String" keyProperty="id">
+		customer_base_info(full_name,short_name,customer_type,customer_area_id,customer_area,country_id,country,registered_funds,registered_address,management_scope,zhongxinbao_number,zhongxinbao_level,remark,enterprise_phone,enterprise_email,customer_completion,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time)
+		VALUES(#fullName#,#shortName#,#customerType#,#areaId#,#area#,#countryId#,#country#,#registeredFunds#,#registeredAddress#,#managementScope#,#zhongxinbaoNumber#,#zhongxinbaoLevel#,#remark#,#enterprisePhone#,#enterpriseEmail#,#customerCompletion#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
+		<selectKey resultClass="INTEGER" keyProperty="customerId">
 			SELECT @@IDENTITY AS ID
 		</selectKey>
 	</insert>
@@ -468,14 +460,14 @@
 			LEFT JOIN customer_enterprise_nature nature
 			ON nature.customer_id=base.customer_id
 			WHERE
-				base.customer_id = 'fh123456'
+				base.customer_id = #customerId#
 			GROUP BY base.customer_id
 	]]>
 	</select>
 
 	<select id="GET-PRODUCT-BY-ID" resultClass="CustomerMakeProduct" parameterClass="java.lang.String">
 		<![CDATA[
-		SELECT id,product_name AS productName,production FROM customer_make_products WHERE customer_id = 'fh123456'
+		SELECT id,product_name AS productName,production FROM customer_make_products WHERE customer_id = #customerId#
 	]]>
 	</select>
 

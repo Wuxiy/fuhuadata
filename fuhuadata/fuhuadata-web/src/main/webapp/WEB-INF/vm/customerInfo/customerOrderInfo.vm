@@ -372,11 +372,12 @@
         </div>
     </div>
 </div>
+<input id="customerId" type="hidden" value='${customerId}'>
 <script type="text/javascript" src="${request.contextPath}/lib/js/pagination/pagination.js"></script>
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/js/pagination/pagination.css" />
 <script type="text/javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
-<script type="text/javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
+##<script type="text/javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/customer/customerOrderAjax.js"></script>
 <script type="text/javascript">
     var pageSize = 2;//分页步长

@@ -41,23 +41,23 @@ public abstract class BaseServiceImpl<E extends BaseEntity<ID>, ID extends Seria
         return baseMapper.selectOne(entity);
     }
 
-    public List<E> getAll(E entity) {
+    public List<E> list(E entity) {
         return baseMapper.select(entity);
     }
 
-    public List<E> getAll() {
+    public List<E> list() {
         return baseMapper.selectAll();
     }
 
-    public List<E> getAllByExample(Object example) {
+    public List<E> listByExample(Object example) {
         return baseMapper.selectByExample(example);
     }
 
-    public int add(E entity) {
+    public int save(E entity) {
         return baseMapper.insert(entity);
     }
 
-    public int addSelective(E entity) {
+    public int saveSelective(E entity) {
         return baseMapper.insertSelective(entity);
     }
 

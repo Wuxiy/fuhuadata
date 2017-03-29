@@ -214,13 +214,14 @@
         </div>
     </div>
 </div>
-<input type="hidden" value=''>
+<input id="customerId" type="hidden" value='${customerId}'>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
+##<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerOrderRequire.js"></script>
 <script>
     $(function () {
+        init();
         var orderData;                                 //定义获取的数据
         var optionNames = '';                          //定义产品种类集合
         var newData = [];                              //定义新数据

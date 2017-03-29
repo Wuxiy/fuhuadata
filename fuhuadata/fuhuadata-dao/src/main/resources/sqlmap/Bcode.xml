@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Bcode" >
+  <typeAlias alias="Bcode" type="com.fuhuadata.domain.BCode"/>
+  <typeAlias alias="QueryBCode" type="com.fuhuadata.domain.query.QueryBCode"/>
+  <resultMap id="BCodeResultMap" class="com.fuhuadata.domain.BCode" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="c_type" property="cType" jdbcType="TINYINT" />
+    <result column="need_reset" property="needReset" jdbcType="TINYINT" />
+    <result column="c_date" property="cDate" jdbcType="DATE" />
+    <result column="current_val" property="currentVal" jdbcType="INTEGER" />
+    <result column="last_modify_time" property="lastModifyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <insert id="insertBcode" parameterClass="Bcode">
+    insert into
+              b_code (c_type, need_reset, c_date, current_val)
+    values (#cType#, #needReset#, #cDate#, #currentVal#)
+    <selectKey  resultClass="int" keyProperty="id">
+      SELECT @@IDENTITY AS id
+    </selectKey>
+  </insert>
+
+  <select id="getBcodeByQuery" resultMap="BCodeResultMap" parameterClass="QueryBCode" >
+    select id, c_type, need_reset, c_date, current_val, last_modify_time
+    from b_code
+    where 1=1
+    <isNotEmpty prepend="and" property="id">
+        id=#id#
+    </isNotEmpty>
+
+    <isNotEmpty prepend="and" property="cType">
+      c_type = #cType#
+    </isNotEmpty>
+
+    <isNotEmpty prepend="and" property="needReset">
+      need_reset = #needReset#
+    </isNotEmpty>
+
+    <isNotEmpty prepend="and" property="cDate">
+      c_date = #cDate#
+    </isNotEmpty>
+
+  </select>
+
+  <update id="setCurrentVal" parameterClass="Bcode">
+    update b_code set current_val = #currentVal# where id = #id# and
+    (
+     ( need_reset=1 and  c_date=DATE_FORMAT(NOW(),'%Y-%m-%d'))
+     or need_reset=0
+     )
+  </update>
+
+</sqlMap>

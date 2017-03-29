@@ -15,15 +15,15 @@ public interface BaseService<E extends BaseEntity<ID>, ID extends Serializable> 
 
     E get(E entity);
 
-    List<E> getAll(E entity);
+    List<E> list(E entity);
 
-    List<E> getAll();
+    List<E> list();
 
-    List<E> getAllByExample(Object example);
+    List<E> listByExample(Object example);
 
-    int add(E entity);
+    int save(E entity);
 
-    int addSelective(E entity);
+    int saveSelective(E entity);
 
     int update(E entity);
 

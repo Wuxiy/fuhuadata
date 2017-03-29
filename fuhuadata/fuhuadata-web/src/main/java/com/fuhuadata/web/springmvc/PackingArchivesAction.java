@@ -4,6 +4,7 @@ import com.fuhuadata.domain.PackingArchives;
 import com.fuhuadata.domain.query.PackingArchivesQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
+import com.fuhuadata.service.BCodeService;
 import com.fuhuadata.service.PackingArchivesService;
 import com.fuhuadata.vo.PackingArchivesVO;
 import com.fuhuadata.util.StringUtil;
@@ -11,6 +12,7 @@ import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,6 +30,9 @@ public class PackingArchivesAction {
     private final static Log log= LogFactory.getLog(PackingArchivesAction.class);
     @Resource
     private PackingArchivesService packingArchivesService;
+
+    @Autowired
+    private BCodeService bCodeService;
     private Integer pageSize = 10;
     private String page="1";
 
@@ -38,6 +43,7 @@ public class PackingArchivesAction {
     @RequestMapping(value = "/packingArchivesList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "into")
     public ModelAndView packingArchives(){
+
         return new ModelAndView("knowledgeBase/packingCostList");
     }
 
@@ -61,7 +67,9 @@ public class PackingArchivesAction {
      */
     @RequestMapping(value = "/addPackingArchives",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "add")
-    public ModelAndView addPackingArchives(){return new ModelAndView("knowledgeBase/packingCostAdd");}
+    public ModelAndView addPackingArchives(PackingArchives packingArchives){
+        int packId = Integer.valueOf(bCodeService.getNextPackagingMaterialCode(packingArchives));
+        return new ModelAndView("knowledgeBase/packingCostAdd").addObject("packId",packId);}
 
     @RequestMapping(value = "/doAddPackingArchives",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "doAdd")

@@ -166,14 +166,15 @@
         </div>
     </div>
 </div>
-<input type="hidden" id="customerId" value="">
+<input id="customerId" type="hidden" value='${customerId}'>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
+##<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerMarketingAjax.js"></script>
 <script>
     $(function () {
+        init();
         //获取数据
         getData('${request.contextPath}/customerMarketInfo/init','POST',GetRequest(),pop);
         //创建树形菜单

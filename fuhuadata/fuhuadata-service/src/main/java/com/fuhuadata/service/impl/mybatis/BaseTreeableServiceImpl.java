@@ -3,6 +3,7 @@ package com.fuhuadata.service.impl.mybatis;
 import com.fuhuadata.domain.mybatis.BaseEntity;
 import com.fuhuadata.domain.plugin.Treeable;
 import com.fuhuadata.service.mybatis.BaseTreeableService;
+import com.google.common.base.Objects;
 import tk.mybatis.mapper.entity.Example;
 
 import java.io.Serializable;
@@ -20,7 +21,12 @@ public abstract class BaseTreeableServiceImpl<E extends BaseEntity<ID> & Treeabl
     public int appendChild(E parent, E child) {
         child.setParentId(parent.getId());
         child.setParentIds(parent.makeSelfAsNewParentIds());
-        return add(child);
+
+        // 不能修改 id 为 0
+        if (child.getId() != null && Objects.equal(child.getId(), 0)) {
+            return updateSelective(child);
+        }
+        return save(child);
     }
 
     @Override
@@ -32,7 +38,7 @@ public abstract class BaseTreeableServiceImpl<E extends BaseEntity<ID> & Treeabl
         Example idsExam = new Example(entityClass);
         idsExam.createCriteria().andIn("menuId", parentIds);
         idsExam.setOrderByClause(example.getOrderByClause());
-        List<E> parents = getAllByExample(idsExam);
+        List<E> parents = listByExample(idsExam);
 
         return findChildren(parents, example);
     }
@@ -49,6 +55,6 @@ public abstract class BaseTreeableServiceImpl<E extends BaseEntity<ID> & Treeabl
                     .andLike("parentIds", parent.makeSelfAsNewParentIds() + "%"));
         }
 
-        return getAllByExample(example);
+        return listByExample(example);
     }
 }
