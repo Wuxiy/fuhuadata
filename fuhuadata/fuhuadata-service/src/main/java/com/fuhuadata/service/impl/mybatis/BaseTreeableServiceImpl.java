@@ -20,7 +20,7 @@ public abstract class BaseTreeableServiceImpl<E extends BaseEntity<ID> & Treeabl
     public int appendChild(E parent, E child) {
         child.setParentId(parent.getId());
         child.setParentIds(parent.makeSelfAsNewParentIds());
-        return add(child);
+        return save(child);
     }
 
     @Override
@@ -32,7 +32,7 @@ public abstract class BaseTreeableServiceImpl<E extends BaseEntity<ID> & Treeabl
         Example idsExam = new Example(entityClass);
         idsExam.createCriteria().andIn("menuId", parentIds);
         idsExam.setOrderByClause(example.getOrderByClause());
-        List<E> parents = getAllByExample(idsExam);
+        List<E> parents = listByExample(idsExam);
 
         return findChildren(parents, example);
     }
@@ -49,6 +49,6 @@ public abstract class BaseTreeableServiceImpl<E extends BaseEntity<ID> & Treeabl
                     .andLike("parentIds", parent.makeSelfAsNewParentIds() + "%"));
         }
 
-        return getAllByExample(example);
+        return listByExample(example);
     }
 }

@@ -12,4 +12,8 @@ public abstract class BaseEntity<ID extends Serializable> {
 
     public abstract ID getId();
 
+    @Override
+    public String toString() {
+        return "BaseEntity{}";
+    }
 }
