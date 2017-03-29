@@ -1,0 +1,237 @@
+<div class="clearfix content shadow-out">
+    <!--副导航-->
+    <div class="nav-deputy shadow-out clearfix">
+        <ul class="breadcrumb pull-right">
+            <li><span class="glyphicon glyphicon-map-marker"></span></li>
+            <li><a href="">合作客户</a></li>
+            <li class="active">{变量}</li>
+        </ul>
+    </div>
+    <div class="dashboard-wrapper">
+        <div class="row">
+            <div class="col-xs-12">
+                <!--基本信息-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" lang="zh">
+                            基本信息
+                        </h3>
+                    </div>
+                    <div class="panel-body clearfix">
+                        <div class="form-horizontal">
+                            <div class="form-group ">
+                                <label class="col-xs-1 control-label" lang="zh">订单编号</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">客户名称</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">客户税号</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">客户国别</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-xs-1 control-label" lang="zh">客户电话</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">邮箱</label>
+                                <div class="col-xs-2"><input class="form-control" type="email" value="" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">收票客户</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">销售组织</label>
+                                <div class="col-xs-2">
+                                    <select class="form-control" >
+                                        <option value="" lang="zh">对接NC</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-1 control-label" lang="zh">业务员</label>
+                                <div class="col-xs-2">
+                                    <select class="form-control" >
+                                        <option value="" lang="zh">对接NC</option>
+                                    </select>
+                                </div>
+                                <label class="col-xs-1 control-label" lang="zh">部门</label>
+                                <div class="col-xs-2">
+                                    <select class="form-control" >
+                                        <option value="" lang="zh">对接NC</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-1 control-label" lang="zh">目的港<sup class="not-null">*</sup></label>
+                                <div class="col-xs-2">
+                                    <select class="form-control" >
+                                        <option value="" lang="zh">对接NC</option>
+                                    </select>
+                                </div>
+                                <label class="col-xs-1 control-label" lang="zh">起运港<sup class="not-null">*</sup></label>
+                                <div class="col-xs-2">
+                                    <select class="form-control" >
+                                        <option value="" lang="zh">对接NC</option>
+                                    </select>
+                                </div>
+                                <label class="col-xs-1 control-label" lang="zh">收款协议<sup class="not-null">*</sup></label>
+                                <div class="col-xs-2">
+                                    <select class="form-control" >
+                                        <option value="" lang="zh">对接NC</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-1 control-label" lang="zh">贸易方式<sup class="not-null">*</sup></label>
+                                <div class="col-xs-2">
+                                    <select class="form-control" >
+                                        <option value="" lang="zh">对接NC</option>
+                                    </select>
+                                </div>
+                                <label class="col-xs-1 control-label" lang="zh">贸易术语<sup class="not-null">*</sup></label>
+                                <div class="col-xs-2">
+                                    <select class="form-control" >
+                                        <option value="" lang="zh">对接NC</option>
+                                    </select>
+                                </div>
+                                <label class="col-xs-1 control-label" lang="zh">币种<sup class="not-null">*</sup></label>
+                                <div class="col-xs-2">
+                                    <select class="form-control" >
+                                        <option value="" lang="zh">对接NC</option>
+                                    </select>
+                                </div>
+                                <label class="col-xs-1 control-label" lang="zh">贸易国别<sup class="not-null">*</sup></label>
+                                <div class="col-xs-2">
+                                    <select class="form-control" >
+                                        <option value="" lang="zh">对接NC</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-1 control-label" lang="zh">保险费率<sup class="not-null">*</sup></label>
+                                <div class="col-xs-2">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" value="" />
+                                        <span class="input-group-addon">%</span>
+                                    </div>
+                                </div>
+                                <label class="col-xs-1 control-label" lang="zh">信保费率<sup class="not-null">*</sup></label>
+                                <div class="col-xs-2">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" value="" />
+                                        <span class="input-group-addon">%</span>
+                                    </div>
+                                </div>
+                                <label class="col-xs-1 control-label" lang="zh">资金费率<sup class="not-null">*</sup></label>
+                                <div class="col-xs-2">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" value="" />
+                                        <span class="input-group-addon">%</span>
+                                    </div>
+                                </div>
+                                <label class="col-xs-1 control-label" lang="zh">汇损费率<sup class="not-null">*</sup></label>
+                                <div class="col-xs-2">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" value="" />
+                                        <span class="input-group-addon">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-1 control-label" lang="zh">销售费用率<sup class="not-null">*</sup></label>
+                                <div class="col-xs-2">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" value="" />
+                                        <span class="input-group-addon">%</span>
+                                    </div>
+                                </div>
+                                <label class="col-xs-1 control-label" lang="zh">管理费用率<sup class="not-null">*</sup></label>
+                                <div class="col-xs-2">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" value="" />
+                                        <span class="input-group-addon">%</span>
+                                    </div>
+                                </div>
+                                <label class="col-xs-1 control-label" lang="zh">毛利率<sup class="not-null">*</sup></label>
+                                <div class="col-xs-2">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" value="" />
+                                        <span class="input-group-addon">%</span>
+                                    </div>
+                                </div>
+                                <label class="col-xs-1 control-label" lang="zh">保险赔付率<sup class="not-null">*</sup></label>
+                                <div class="col-xs-2">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" value="" />
+                                        <span class="input-group-addon">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-1 control-label" lang="zh">是否可以转运</label>
+                                <div class="col-xs-2">
+                                    <select class="form-control">
+                                        <option value="" selected lang="zh">是</option>
+                                        <option value="" lang="zh">否</option>
+                                    </select>
+                                </div>
+                                <label class="col-xs-1 control-label" lang="zh">是否可以分批出运</label>
+                                <div class="col-xs-2">
+                                    <select class="form-control">
+                                        <option value="" selected lang="zh">是</option>
+                                        <option value="" lang="zh">否</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--产品信息-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a data-toggle="modal" data-target="#updateProgress" class="btn btn-xs btn-primary panel-heading-btn pull-right" href="#" lang="zh">新增</a>
+                        <h3 class="panel-title" lang="zh">产品信息</h3>
+                    </div>
+                    <div class="panel-body clearfix">
+                        <table class="table table-condensed table-bordered table-striped text-center">
+                            <thead>
+                            <tr>
+                                <th class="text-center" lang="zh">产品序列号</th>
+                                <th class="text-center" lang="zh">品名</th>
+                                <th class="text-center" lang="zh">品类</th>
+                                <th class="text-center" lang="zh">品牌</th>
+                                <th class="text-center" lang="zh">包装要求</th>
+                                <th class="text-center" lang="zh">产品数量</th>
+                                <th class="text-center" lang="zh">整柜数量</th>
+                                <th class="text-center" lang="zh">柜型</th>
+                                <th class="text-center" lang="zh">柜数</th>
+                                <th class="text-center" lang="zh">内部供货单位</th>
+                                <th class="text-center" lang="zh">内部结算单价（元/KG（L））</th>
+                                <th class="text-center" lang="zh">交货时间</th>
+                                <th class="text-center" lang="zh">成本价（元/KG（L））</th>
+                                <th class="text-center" lang="zh">单据要求</th>
+                                <th class="text-center" lang="zh">订舱出运要求</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>4xx1501-0014</td>
+                                <td><a href="../knowledge/products.html" target="_blank">41%草甘膦异丙铵盐水剂-1L*10</a></td>
+                                <td>除草剂-草甘膦-水剂</td>
+                                <td>福华通达</td>
+                                <td>1L*10</td>
+                                <td>1000KL</td>
+                                <td>30</td>
+                                <td>20GP</td>
+                                <td>100</td>
+                                <td>福华通达</td>
+                                <td></td>
+                                <td>2016-10-10</td>
+                                <td><a data-toggle="modal" data-target="#costPrice" href="">2000.00</a></td>
+                                <td><a href="">查看</a></td>
+                                <td><a href="">查看</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
