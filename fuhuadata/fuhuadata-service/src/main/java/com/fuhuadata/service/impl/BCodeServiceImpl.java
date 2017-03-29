@@ -45,6 +45,13 @@ public class BCodeServiceImpl implements BCodeService {
         return PREFIX_BUSINESS + getToday() + code;
     }
 
+    /*public  static void main(String[] args){
+        FileSystemXmlApplicationContext context = new FileSystemXmlApplicationContext("fuhuadata/fuhuadata-web/src/main/resources/spring-config.xml");
+        BCodeService s = (BCodeService)context.getBean(BCodeService.class);
+        for(int i=1;i<=100;i++){
+            System.out.println(s.getNextOrderCode());
+        }
+    }*/
     @Override
     public String getNextOrderCode() {
         int indx = bCodeManager.getNextOrderCode();

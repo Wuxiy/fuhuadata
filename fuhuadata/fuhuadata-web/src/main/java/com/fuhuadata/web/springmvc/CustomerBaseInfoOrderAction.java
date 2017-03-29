@@ -27,9 +27,12 @@ public class CustomerBaseInfoOrderAction {
     private OrganizationService organizationService;
 
     @RequestMapping("/entrance")
-    public ModelAndView entrance(String customerId){
-        return new ModelAndView("customerInfo/customerOrderInfo").addObject("customerId",customerId);
+    public ModelAndView entrance(String customerId,String customerType){
+        return new ModelAndView("customerInfo/customerOrderInfo")
+                .addObject("customerType",customerType)
+                .addObject("customerId",customerId);
     }
+
     @ResponseBody
     @RequestMapping("/initSaleOrganizationTree")
     public ResultPojo initSaleOrganizationTree(){

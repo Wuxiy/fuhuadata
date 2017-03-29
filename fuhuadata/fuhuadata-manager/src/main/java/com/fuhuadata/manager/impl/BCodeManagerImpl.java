@@ -23,21 +23,34 @@ public class BCodeManagerImpl implements BCodeManager {
     @Autowired
     private BCodeDao bCodeDao;
 
-    public synchronized int getNextBusinessCode() {
-        return this.getNeedResetNext(1);
+    private Object BUSINESS_LOCK = new Object();
+    private Object ORDER_LOCK = new Object();
+    private Object STANDARD_PRODUCT_LOCK = new Object();
+    private Object PACKAGING_MATERIAL_LOCK = new Object();
+
+    public int getNextBusinessCode() {
+        synchronized (BUSINESS_LOCK){
+            return this.getNeedResetNext(1);
+        }
     }
 
-    public synchronized int getNextOrderCode() {
-        return this.getNeedResetNext(2);
+    public int getNextOrderCode() {
+        synchronized (ORDER_LOCK){
+            return this.getNeedResetNext(2);
+        }
     }
 
-    public synchronized int getNextStandardProductCode() {
-        return this.getNotNeedResetNext(3);
+    public  int getNextStandardProductCode() {
+        synchronized (STANDARD_PRODUCT_LOCK){
+            return this.getNotNeedResetNext(3);
+        }
     }
 
     @Override
-    public synchronized int getNextPackagingMaterialCode() {
-        return this.getNotNeedResetNext(4);
+    public  int getNextPackagingMaterialCode() {
+        synchronized (PACKAGING_MATERIAL_LOCK){
+            return this.getNotNeedResetNext(4);
+        }
     }
 
     private String getFormateToday(){

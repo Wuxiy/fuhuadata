@@ -40,10 +40,10 @@ $(function () {
 
     //新增页面——customerId为空字符串说明是新增页面
     if($('#customerId').val()==''){
-        $('#customerType').val('2').attr('disabled','disabled');
+        $('[name="customerType"]').val('2').attr('disabled','disabled');
         $('button').filter(editBtn).remove();
         $('.editHide').addClass('hidden');
-        $('#deputyNav').children('li').slice(4).remove();
+        // $('#deputyNav').children('li').slice(4).remove();
         $('.editView').removeClass('hidden');
         var finishBtn = '';
         finishBtn += '<div class="form-group">';
@@ -55,17 +55,19 @@ $(function () {
         $('.form-horizontal').append(finishBtn);
         $(document).on('click.up','#upData',function () {
             $.ajax({
-                url:'',
+                url:basePath+'/customerBaseInfo/doAddCustomerBaseInfo',
                 type:'POST',
+                contentType:"application/json",
                 data: customerBasicFormObj()
             }).done(function (result) {
-                console.log(result.message);
+                console.log(result.data);
+                // var customerId = result.data.customerId;
+                $('#linkPot').attr('href','/customerBaseInfo/intoCustomerBaseInfoDetails?customerType=2&customerId=').click();
             })
         });
         $(document).on('click.reset','#resetForm',function () {
            location.reload();
-        })
-
+        });
     }else if($('#customerId').val()!=''){
         init();
         //获取初始数据
@@ -77,7 +79,42 @@ $(function () {
         //客户基本信息提交
         $(document).on('click.up','#saveCustomerBasic',function(){
             //提交数据
+            // var inputNotNull = true;
+            // $('input.notNull').each(function () {
+            //    var $this = $(this);
+            //    if($this.val()==''){
+            //        inputNotNull = false;
+            //        return false;
+            //    }else {
+            //        return true;
+            //    }
+            // });
+            // var selectNotNull = true;
+            // $('select.notNull').each(function () {
+            //    var $this = $(this);
+            //    if($this.val()==''||$this.val()=='-1'){
+            //        selectNotNull=false;
+            //        return false;
+            //    }else {
+            //        return true;
+            //    }
+            // });
+            // var checkboxNotNull = false;
+            // $('.notNull[name="enterpriseNature"]').each(function () {
+            //     var $this = $(this);
+            //     if($this.prop('checked')!=false){
+            //         checkboxNotNull = true;
+            //         return false;
+            //     }else {
+            //         return true;
+            //     }
+            // });
+            // if(inputNotNull && selectNotNull && checkboxNotNull){
+            // }else {
+            //     alert('请完善表单');
+            // }
             upData(basePath+'/customerBaseInfo/updateCustomerBaseInfo','POST',customerBasicFormObj(),"application/json");
+
             delDelBtn();
         });
         //客户基本信息取消提交
@@ -165,7 +202,7 @@ $(function () {
     controlSOrH('#showMajorCompetitorsGroup');
     controlSOrH('#showOtherEnterpriceNature');
 
-    $(document).on('change.view','#customerType',function () {
+    $(document).on('change.view','[name="customerType"]',function () {
         controlSOrH('#showOpportunity');
     });
     $(document).on('change.view','#opportunitySource',function () {

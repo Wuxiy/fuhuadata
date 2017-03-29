@@ -37,8 +37,10 @@ public class CustomerSubcompanyInfoAction {
 
     @RequestMapping(value = "/intoCustomerSubcompanyInfo",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "customerInfo-CustomerSubcompanyInfo",methods = "into")
-    public ModelAndView intoCustomerSubcompanyInfo(String customerId){
-        return new ModelAndView("customerInfo/customerAnotherNamer").addObject("customerId",customerId);
+    public ModelAndView intoCustomerSubcompanyInfo(String customerId,String customerType){
+        return new ModelAndView("customerInfo/customerAnotherNamer")
+                .addObject("customerType",customerType)
+                .addObject("customerId",customerId);
     }
 
 

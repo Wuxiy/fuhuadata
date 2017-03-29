@@ -16,6 +16,7 @@ public interface BCodeService {
      */
     public String getNextOrderCode();
 
+
     /**
      *
      * @return 下一个标准产品编号
@@ -24,7 +25,7 @@ public interface BCodeService {
 
     /**
      *
-     * @return 下一个包材后缀序号
+     * @return 下一个包材后缀编号
      */
     public String getNextPackagingMaterialCode(PackingArchives packingArchives);
 

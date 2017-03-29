@@ -39,7 +39,7 @@
                                     客户全称<sup class="not-null editView hidden">*</sup>
                                 </label>
                                 <div class="col-xs-2">
-                                    <input id="fullName" class="form-control" type="text" value="" />
+                                    <input id="fullName" class="form-control notNull" type="text" value="" />
                                 </div>
                                 <label class="control-label col-xs-1" lang="zh">
                                     客户简称
@@ -51,7 +51,7 @@
                                     地区分类<sup class="not-null editView hidden">*</sup>
                                 </label>
                                 <div class="col-xs-2">
-                                    <select id="areaId" class="form-control">
+                                    <select id="areaId" class="form-control notNull">
                                         <option lang="zh" value="-1" selected>——请选择地区——</option>
                                     </select>
                                 </div>
@@ -61,7 +61,7 @@
                                     国家<sup class="not-null editView hidden">*</sup>
                                 </label>
                                 <div class="col-xs-2">
-                                    <select id="countryId" id="contry" class="form-control">
+                                    <select id="countryId" class="form-control notNull">
                                         <option lang="zh" value="-1" selected>——请优先选择地区——</option>
                                     </select>
                                 </div>
@@ -93,23 +93,23 @@
                                 </label>
                                 <div class="col-xs-6">
                                     <label class="checkbox-inline">
-                                        <input id="showFactory" data-target="#factory" name="enterpriseNature" class="else" type="checkbox" value="1" />
+                                        <input id="showFactory" data-target="#factory" name="enterpriseNature" class="else notNull" type="checkbox" value="1" />
                                         <span lang="zh">工厂</span>
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input name="enterpriseNature" type="checkbox" value="2" />
+                                        <input name="enterpriseNature" class="notNull" type="checkbox" value="2" />
                                         <span lang="zh">经销商</span>
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input id="showMajorCompetitorsGroup" data-target="#majorCompetitorsGroup" name="enterpriseNature" class="else" type="checkbox" value="3" />
+                                        <input id="showMajorCompetitorsGroup" data-target="#majorCompetitorsGroup" name="enterpriseNature" class="else notNull" type="checkbox" value="3" />
                                         <span lang="zh">分销商</span>
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input name="enterpriseNature" type="checkbox" value="4" />
+                                        <input name="enterpriseNature" class="notNull" type="checkbox" value="4" />
                                         <span lang="zh">终端客户</span>
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input id="showOtherEnterpriceNature" data-target="#otherEnterpriceNature" name="enterpriseNature" class="else" type="checkbox" value="5"/>
+                                        <input id="showOtherEnterpriceNature" data-target="#otherEnterpriceNature" name="enterpriseNature" class="else notNull" type="checkbox" value="5"/>
                                         <span lang="zh">其他</span>
                                     </label>
                                     <span class="form-inline">
@@ -192,9 +192,9 @@
                                     客户状态
                                 </label>
                                 <div class="col-xs-2">
-                                    <select id="customerType" class="form-control" >
+                                    <select name="customerType" class="form-control" >
                                         <option value="1" lang="zh" >合作</option>
-                                        <option id="showOpportunity" data-target="#opportunity" value="2" lang="zh" selected>潜在</option>
+                                        <option id="showOpportunity" data-target="#opportunity" value="2" lang="zh">潜在</option>
                                         <option value="3" lang="zh" >流失</option>
                                     </select>
                                     <button id="showReasons" data-toggle="modal" data-target="#reasons" type="button" style="display: none;"></button>
@@ -286,10 +286,10 @@
                             <fieldset id="opportunity" class="hidden">
                                 <div class="form-group">
                                     <label class="control-label col-xs-1" lang="zh">
-                                        机会来源<sup class="not-null editView">*</sup>
+                                        机会来源<sup class="not-null editView hidden">*</sup>
                                     </label>
                                     <div class="col-xs-2">
-                                        <select id="opportunitySource" class="form-control else">
+                                        <select id="opportunitySource" class="form-control else notNull">
                                             <option value="-1" selected lang="zh">——请选择机会来源——</option>
                                             <option value="1">展会</option>
                                             <option value="2">门户网站</option>
@@ -308,7 +308,7 @@
                                         机会描述<sup class="not-null editView hidden">*</sup>
                                     </label>
                                     <div class="col-xs-8">
-                                        <textarea id="opportunityDescrible" class="form-control" rows="4" placeholder="描述客户发展机会" lang="zh"></textarea>
+                                        <textarea id="opportunityDescrible" class="form-control notNull" rows="4" placeholder="描述客户发展机会" lang="zh"></textarea>
                                     </div>
                                 </div>
                             </fieldset>
@@ -413,12 +413,13 @@
         </div>
     </div>
 </div>
-<input id="customerId" type="hidden" value='${customerId}'>
-<input type="hidden" id="customerType" value="${customerType}" />
+<a id="linkPot" href="" class="hidden"></a>
+<input id="customerId" type="hidden" value='$!{customerId}'>
+<input type="hidden" id="customerType" value="$!{customerType}" />
 <input id="encyId" type="hidden" value="">
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
+##<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerBasicAjax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerBasicInteraction.js"></script>
 

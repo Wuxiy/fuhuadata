@@ -7,5 +7,5 @@
  */
 $('#deputyNav,#asideNav').find('a').attr('href',function(i,val){
     // console.log(val+urlPar);
-    return val+'?customer'+$('#customer').val();
+    return val+'?customer='+$('#customerId').val();
 });
