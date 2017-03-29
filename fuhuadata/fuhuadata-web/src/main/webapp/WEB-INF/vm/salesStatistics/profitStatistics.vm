@@ -1,0 +1,244 @@
+<!--副导航-->
+<div class="nav-deputy shadow-out clearfix">
+    <ul id="myTab" class="nav nav-tabs pull-left">
+        <li class="active"><a href="#adEexpense" data-toggle="tab">按地区</a></li>
+        <li><a href="#freight" data-toggle="tab">按客户</a></li>
+        <li><a href="#cost" data-toggle="tab">按业务员</a></li>
+        <li><a href="#rate" data-toggle="tab">按产品</a></li>
+    </ul>
+    <ul class="breadcrumb pull-right">
+        <li><span class="glyphicon glyphicon-map-marker"></span></li>
+    </ul>
+</div>
+<div class="dashboard-wrapper">
+    <div class="row">
+        <div class="tab-content col-xs-7">
+            <div id="adEexpense" class="tab-pane fade in active">
+                <!--制剂加工费表开始-->
+                <div class="panel panel-default">
+                    <div class="panel-body clearfix">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <!--搜索栏-->
+                                    <div class="input-group">
+                                        <span class="input-group-addon" lang="zh">地区分类排名</span>
+                                        <select class="form-control" id="customerLevel">
+                                            <option value="" selected lang="zh">全部</option>
+                                            <option value="5" lang="zh">风险客户</option>
+                                            <option value="4" lang="zh">一般客户</option>
+                                            <option value="3" lang="zh">重要客户</option>
+                                            <option value="2" lang="zh">大客户</option>
+                                            <option value="1" lang="zh">战略客户</option>
+                                        </select>
+                                        <span class="input-group-addon" lang="zh">开始时间</span>
+                                        <input class="form-control" id="customerName" />
+                                        <span class="input-group-addon" lang="zh">结束时间</span>
+                                        <input class="form-control" id="customerName" />
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-xs btn-primary" id="submit" type="button">搜索</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-bordered table-condensed table-striped text-center">
+                            <caption class="text-right"><span lang="zh">金额单位：万元</span></caption>
+                            <thead>
+                            <tr>
+                                <th class="text-center col-xs-2 text-middle">编号</th>
+                                <th class="text-center col-xs-2 text-middle">地区分类</th>
+                                <th class="text-center col-xs-2 text-middle">销售额</th>
+                                <th class="text-center col-xs-6 text-middle">销售最低限价</th>
+                                <th class="text-center col-xs-6 text-middle">营销成本</th>
+                                <th class="text-center col-xs-6 text-middle">净利润</th>
+                                <th class="text-center col-xs-6 text-middle">排名</th>
+                                <th class="text-center col-xs-6 text-middle">地区内国家排名明细</th>
+                            </tr>
+                            </thead>
+                            <tbody id="adEexpense1"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id="freight" class="tab-pane fade">
+                <!--运费维护表开始-->
+                <div class="panel panel-default">
+                    <div class="panel-body clearfix">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <!--搜索栏-->
+                                    <div class="input-group">
+                                        <span class="input-group-addon" lang="zh">开始时间</span>
+                                        <input class="form-control" id="customerName" />
+                                        <span class="input-group-addon" lang="zh">结束时间</span>
+                                        <input class="form-control" id="customerName" />
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-xs btn-primary" id="submit" type="button">搜索</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-bordered table-condensed text-center table-striped">
+                            <caption class="text-right"><span lang="zh">金额单位：万元</span></caption>
+                            <thead>
+                            <tr>
+                                <th class="text-center col-xs-2 text-middle">编号</th>
+                                <th class="text-center col-xs-2 text-middle">客户全称</th>
+                                <th class="text-center col-xs-2 text-middle">国家</th>
+                                <th class="text-center col-xs-2 text-middle">地区分类</th>
+                                <th class="text-center col-xs-4 text-middle">销售额</th>
+                                <th class="text-center col-xs-2 text-middle">销售最低限价</th>
+                                <th class="text-center col-xs-4 text-middle">营销成本</th>
+                                <th class="text-center col-xs-2 text-middle">净利润</th>
+                                <th class="text-center col-xs-4 text-middle">排名</th>
+                                <th class="text-center col-xs-2 text-middle">业务员</th>
+                            </tr>
+                            </thead>
+                            <tbody id=""></tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--运费维护表结束-->
+            </div>
+            <div id="cost" class="tab-pane fade">
+                <!--运费维护表开始-->
+                <div class="panel panel-default">
+                    <div class="panel-body clearfix">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <!--搜索栏-->
+                                    <div class="input-group">
+                                        <span class="input-group-addon" lang="zh">开始时间</span>
+                                        <input class="form-control" id="customerName" />
+                                        <span class="input-group-addon" lang="zh">结束时间</span>
+                                        <input class="form-control" id="customerName" />
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-xs btn-primary" id="submit" type="button">搜索</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-bordered table-condensed text-center table-striped">
+                            <caption class="text-right"><span lang="zh">金额单位：万元</span></caption>
+                            <thead>
+                            <tr>
+                                <th class="text-center col-xs-2 text-middle">编号</th>
+                                <th class="text-center col-xs-2 text-middle">业务员</th>
+                                <th class="text-center col-xs-2 text-middle">国家</th>
+                                <th class="text-center col-xs-4 text-middle">销售额</th>
+                                <th class="text-center col-xs-2 text-middle">销售最低限价</th>
+                                <th class="text-center col-xs-4 text-middle">营销成本</th>
+                                <th class="text-center col-xs-2 text-middle">净利润</th>
+                                <th class="text-center col-xs-4 text-middle">排名</th>
+                                <th class="text-center col-xs-2 text-middle">客户利润明细</th>
+                            </tr>
+                            </thead>
+                            <tbody id=""></tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--运费维护表结束-->
+            </div>
+            <div id="rate" class="tab-pane fade">
+                <!--运费维护表开始-->
+                <div class="panel panel-default">
+                    <div class="panel-body clearfix">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <!--搜索栏-->
+                                    <div class="input-group">
+                                        <span class="input-group-addon" lang="zh">开始时间</span>
+                                        <input class="form-control" id="customerName" />
+                                        <span class="input-group-addon" lang="zh">结束时间</span>
+                                        <input class="form-control" id="customerName" />
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-xs btn-primary" id="submit" type="button">搜索</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-bordered table-condensed text-center table-striped">
+                            <caption class="text-right"><span lang="zh">金额单位：万元</span></caption>
+                            <thead>
+                            <tr>
+                                <th class="text-center col-xs-2 text-middle">编号</th>
+                                <th class="text-center col-xs-2 text-middle">产品名称</th>
+                                <th class="text-center col-xs-2 text-middle">产品种类</th>
+                                <th class="text-center col-xs-2 text-middle">销售量</th>
+                                <th class="text-center col-xs-4 text-middle">销售额</th>
+                                <th class="text-center col-xs-2 text-middle">销售最低限价</th>
+                                <th class="text-center col-xs-4 text-middle">营销成本</th>
+                                <th class="text-center col-xs-2 text-middle">净利润</th>
+                                <th class="text-center col-xs-4 text-middle">排名</th>
+                                <th class="text-center col-xs-2 text-middle">毛利率（%）</th>
+                            </tr>
+                            </thead>
+                            <tbody id=""></tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--运费维护表结束-->
+            </div>
+        </div>
+    </div>
+</div>
+
+//模态框
+<div class="modal fade" id="addField" tabindex="-1" data-backdrop="static" aria-hidden="true" data-keyboard="true" >
+    <div class="modal-dialog" style="width:1200px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body ">
+                <div class="col-xs-10">
+                    <div class="panel panel-default">
+                        <div class="panel-body clearfix">
+                            <table class="table table-condensed table-bordered table-striped text-center">
+                                <caption class="text-right"><span lang="zh">金额单位：万元</span></caption>
+                                <thead>
+                                <tr>
+                                    <th class="col-xs-2 text-center text-middle">编号</th>
+                                    <th class="col-xs-2 text-center text-middle" >国家</th>
+                                    <th class="col-xs-1 text-center text-middle">地区分类</th>
+                                    <th class="col-xs-1 text-center text-middle">销售额</th>
+                                    <th class="col-xs-2 text-center text-middle">销售最低限价</th>
+                                    <th class="col-xs-1 text-center text-middle">营销成本</th>
+                                    <th class="col-xs-2 text-center text-middle">净利润</th>
+                                    <th class="col-xs-1 text-center text-middle">排名</th>
+                                </tr>
+                                </thead>
+                                <tbody id="">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-3 col-xs-offset-3">
+                        <a type="button" class="btn btn-primary btn-block" id="">
+                            完成
+                        </a>
+                    </div>
+                    <div class="col-xs-3">
+                        <button type="button" class="btn btn-default btn-block" data-dismiss="modal">
+                            取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

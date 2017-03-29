@@ -1,0 +1,221 @@
+<div class="nav-deputy shadow-out clearfix">
+    <ul class="breadcrumb pull-right">
+        <li><span class="glyphicon glyphicon-map-marker"></span></li>
+    </ul>
+</div>
+
+<div class="dashboard-wrapper">
+    <div class="row">
+        <!--树形导航开始-->
+        <div class="col-xs-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" lang="zh">
+                        地区分类
+                    </h3>
+                </div>
+                <div class="panel-body clearfix">
+                    <!--树形菜单-->
+                    <div id="tree" class="tree"></div>
+                </div>
+            </div>
+        </div>
+        <!--列表部分-->
+        <div class="tab-content col-xs-10">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" lang="zh">
+                        费用和利润
+                    </h3>
+                </div>
+                <div class="panel-body clearfix">
+                    <!--搜索&筛选控件-->
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <!--搜索栏-->
+                                <div class="input-group">
+                                    <span class="input-group-addon" lang="zh">合同号</span>
+                                    <input class="form-control" id="customerName" />
+                                    <span class="input-group-addon" lang="zh">销售组织</span>
+                                    <input class="form-control" id="customerName" />
+                                    <span class="input-group-addon" lang="zh">客户名称</span>
+                                    <input class="form-control" id="customerName" />
+                                    <span class="input-group-addon" lang="zh">开始时间</span>
+                                    <input class="form-control" id="customerName" />
+                                    <span class="input-group-addon" lang="zh">结束时间</span>
+                                    <input class="form-control" id="customerName" />
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-xs btn-primary" id="submit" type="button">搜索</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--表格-->
+                    <table class="table table-condensed table-bordered table-striped text-center">
+                        <caption class="text-right"><span lang="zh">金额单位：万元</span></caption>
+                        <thead>
+                        <tr>
+                            <th class="text-center" lang="zh">编号</th>
+                            <th class="text-center" lang="zh">销售组织</th>
+                            <th class="text-center" lang="zh">外销合同号</th>
+                            <th class="text-center" lang="zh">客户名称</th>
+                            <th class="text-center" lang="zh">国家</th>
+                            <th class="text-center" lang="zh">合同成本价</th>
+                            <th class="text-center" lang="zh">合同总金额</th>
+                            <th class="text-center" lang="zh">利润</th>
+                            <th class="text-center" lang="zh">合同时间</th>
+                            <th class="text-center" lang="zh">是否投诉</th>
+                            <th class="text-center" lang="zh">是否调价</th>
+                        </tr>
+                        </thead>
+                        <tbody id="">
+                        <tr>
+                            <td>00001</td>
+                            <td><a href="">草甘膦原药采购</a></td>
+                            <td>NUFARM</td>
+                            <td>战略客户</td>
+                            <td>经销商</td>
+                            <td>客户主要销售草甘膦系列产品，有原药采购需求</td>
+                            <td>门店考察</td>
+                            <td>80</td>
+                            <td>100</td>
+                            <td>80</td>
+                            <td>100</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!--分页导航-->
+                    <div id="pagination" class="pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="${request.contextPath}/lib/js/pagination/pagination.js"></script>
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/js/pagination/pagination.css" />
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
+<script type="text/javascript">
+    var pageSize = 3;
+    var click_node ={oneLevelId:0,twoLevelId:0};//接收目录树点击节点的id及其父id
+    click_node.serach = function(){
+        serach();
+    }
+
+    $(document).ready(function(){
+        //生成地区目录树
+        $('#tree').creatTree('/customerBaseInfo/initAreaCategoryTree');
+        //目录树节点绑定点击事件
+        $('#tree').bindClickForCusArea(click_node);
+        //搜索按钮绑定事件
+        $("#submit").click(function(){
+            serach();
+        });
+        //默认查询数据
+        serach();
+    })
+
+    //查询按钮提交数据
+    function serach(){
+        var total = getListCount();
+        getDataList(0);
+        $("#pagination").pagination(total,{
+            items_per_page : pageSize,
+            num_edge_entries : 3,
+            num_display_entries : 10,
+            callback:getDataList
+        });
+    }
+    var businessFrom = ['展会','门户网站','农药店考察','客户介绍','主动联系','其他']
+    var customerLevelList = ['战略客户','大客户' ,'重要客户' ,'一般客户' ,'风险客户'];
+    var businessOpportunity = ['工厂','分销商' ,'经销商' ,'终端客户' ,'其他'];
+    var businessState = ['待报价','失败','已转化'];
+    //根据页码获取列表数据
+    function getDataList(pageNum,jq){
+        var data = {
+            customerName:$('#customerName').val(),
+            businessFrom:$('#businessFrom').val(),
+            businessState:$('#businessState').val(),
+            customerLevel:$('#customerLevel').val(),
+            enterpriseNature:$('#enterpriseNature').val(),
+            areaClassId:click_node.oneLevelId,
+            areaId:click_node.twoLevelId,
+            startRow:pageNum*pageSize,
+            pageSize:pageSize
+        };
+        jQuery.ajax({
+            url: basePath + '/businessInfo/queryBusinessInfoPageList',
+            dataType:'json',
+            async:true,
+            method:'POST',
+            contentType:"application/json",
+            data:JSON.stringify(data),
+            success:function(data){
+                var ResultData = data.data;
+                var _html = '';
+                for(var i=0;i<ResultData.length;i++){
+                    _html += '<tr>';
+                    _html += '	<td>'+ResultData[i].businessId+'</td>';
+                    _html += '  <td><a href="">'+ResultData[i].businessName+'</a></td>';
+                    _html += '  <td>'+ResultData[i].customerName+'</td>';
+                    _html += '  <td lang="zh">'+customerLevelList[ResultData[i].customerLevel-1]+'</td>';
+                    _html += '  <td lang="zh">'+businessOpportunity[ResultData[i].enterpriseNature-1]+'</td>';
+                    _html += '  <td>'+ResultData[i].createTime+'A</td>';
+                    _html += '  <td>'+ResultData[i].remainDays+'</td>';
+                    _html += '  <td lang="zh">'+businessFrom[ResultData[i].businessFrom]+'</td>';
+                    _html += '  <td lang="zh">'+ResultData[i].expectIncome+'</td>';
+                    _html +='   <td>'+businessState[ResultData[i].businessState]+'</td>';
+                    _html +='   </tr>';
+                }
+                $("#businessOpportunityList").html(_html);
+            }
+        });
+    }
+
+    /*分页插件参数
+    参数名	描述	参数值
+    maxentries	总条目数	必选参数，整数
+    items_per_page	每页显示的条目数	可选参数，默认是10
+    num_display_entries	连续分页主体部分显示的分页条目数	可选参数，默认是10
+    current_page	当前选中的页面	可选参数，默认是0，表示第1页
+    num_edge_entries	两侧显示的首尾分页的条目数	可选参数，默认是0
+    link_to	分页的链接	字符串，可选参数，默认是"#"
+    prev_text	“前一页”分页按钮上显示的文字	字符串参数，可选，默认是"Prev"
+    next_text	“下一页”分页按钮上显示的文字	字符串参数，可选，默认是"Next"
+    ellipse_text	省略的页数用什么文字表示	可选字符串参数，默认是"..."
+    prev_show_always	是否显示“前一页”分页按钮	布尔型，可选参数，默认为true，即显示“前一页”按钮
+    next_show_always	是否显示“下一页”分页按钮	布尔型，可选参数，默认为true，即显示“下一页”按钮
+    callback	回调函数	默认无执行效果*/
+
+    /**
+     * 获取列表数据总条目数
+     */
+    function getListCount(){
+        var total = 0;
+        var data = {
+            areaClassId:click_node.oneLevelId,
+            areaId:click_node.twoLevelId,
+            fullName:$("#fullName").val(),
+            customerName:$('#customerName').val(),
+            businessFrom:$('#businessFrom').val(),
+            businessState:$('#businessState').val(),
+            customerLevel:$('#customerLevel').val(),
+            enterpriseNature:$('#enterpriseNature').val(),
+        }
+        jQuery.ajax({
+            url:basePath + '/businessInfo/countBusinessList',
+            dataType:'JSON',
+            async:false,
+            method:'POST',
+            contentType:"application/json",
+            data:JSON.stringify(data),
+            success:function(data){
+                total = data.data;
+            }
+        });
+        return total;
+    }
+</script>
