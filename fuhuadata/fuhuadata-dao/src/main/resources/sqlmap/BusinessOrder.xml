@@ -5,20 +5,20 @@
     <typeAlias alias="BusinessOrder" type="com.fuhuadata.domain.BusinessOrder"/>
         <typeAlias alias="QueryBusinessOrder" type="com.fuhuadata.domain.query.QueryBusinessOrder"/>
 
-    <sql id="QUERY-COMMON">
+    <sql id="ORDER-PAGE-COMMON">
         <dynamic prepend=" WHERE ">
             <isNotEmpty prepend=" AND " property="customerId">
-                customer_id = #customerId#
+                base.short_name = #customerName#
             </isNotEmpty>
-            <isNotEmpty prepend=" AND " property="status">
-                status = #status#
-            </isNotEmpty>
+            <isNotNull prepend=" AND " property="orderStatus">
+                a.staus = #orderStatus#
+            </isNotNull>
             <isNotEmpty prepend=" AND " property="saleOrganizationId">
                 sale_organization_id = #saleOrganizationId#
             </isNotEmpty>
-            <isNotEmpty prepend=" AND " property="ncOrderId">
-                nc_order_id =  #ncOrderId#
-            </isNotEmpty>
+            <isNotNull prepend=" AND " property="customerLevel">
+                base.customer_level = #customerLevel#
+            </isNotNull>
             <isNotEmpty prepend=" AND " property="startTime">
                 <![CDATA[
                      deal_time  >=  #startTime#
@@ -27,22 +27,311 @@
         </dynamic>
     </sql>
 
-    <select id="query_page" parameterClass="QueryBusinessOrder" resultClass="BusinessOrder">
-        select
-                sale_organization_name saleOrganizationName,
-                order_id orderId,
-                nc_order_id ncOrderId,
-                amount_payable amountPayable,
-                floor_price floorPrice,
-                is_complaint isComplaint,
-                is_modify_price isModifyPrice,
-                net_profit netProfit,
-                is_pledge isPledge,
-                deal_time dealTime
-        from
-                business_order
+    <sql id="OFFER-PAGE-COMMON">
+            <dynamic prepend=" WHERE">
+                <isNotNull prepend=" AND " property="customerName">
+                    base.short_name = #customerName#
+                </isNotNull>
+                <isNotNull prepend=" AND " property="orderStatus">
+                    a.staus = #orderStatus#
+                </isNotNull>
+                <isNotNull prepend=" AND " property="orderId">
+                    a.order_id = #orderId#
+                </isNotNull>
+                <isNotNull prepend=" AND " property="customerLevel">
+                    base.customer_level = #customerLevel#
+                </isNotNull>
+            </dynamic>
+    </sql>
+
+    <update id="UPDATE" parameterClass="BusinessOrder" >
+        update business_order
+        <dynamic prepend="set" >
+            <isNotNull prepend=", " property="ncOrderId" >
+                nc_order_id = #ncOrderId#
+            </isNotNull>
+            <isNotNull prepend=", " property="businessId" >
+                business_id = #businessId#
+            </isNotNull>
+            <isNotNull prepend=", " property="customerId" >
+                customer_id = #customerId#
+            </isNotNull>
+            <isNotNull prepend=", " property="customerDutyParagraph" >
+                customer_duty_paragraph = #customerDutyParagraph#
+            </isNotNull>
+            <isNotNull prepend=", " property="billToCustomer" >
+                bill_to_customer = #billToCustomer#
+            </isNotNull>
+            <isNotNull prepend=", " property="salesManId" >
+                sales_man_id = #salesManId#
+            </isNotNull>
+            <isNotNull prepend=", " property="salesManName" >
+                sales_man_name = #salesManName#
+            </isNotNull>
+            <isNotNull prepend=", " property="departmentId" >
+                department_id = #departmentId#
+            </isNotNull>
+            <isNotNull prepend=", " property="saleOrganizationId" >
+                sale_organization_id = #saleOrganizationId:VARCHAR#
+            </isNotNull>
+            <isNotNull prepend=", " property="saleOrganizationName" >
+                sale_organization_name = #saleOrganizationName#
+            </isNotNull>
+            <isNotNull prepend=", " property="destinationPort" >
+                destination_port = #destinationPort#
+            </isNotNull>
+            <isNotNull prepend=", " property="shipmentPort" >
+                shipment_port = #shipmentPort#
+            </isNotNull>
+            <isNotNull prepend=", " property="collectionAgreement" >
+                collection_agreement = #collectionAgreement#
+            </isNotNull>
+            <isNotNull prepend=", " property="tradeType" >
+                trade_type = #tradeType#
+            </isNotNull>
+            <isNotNull prepend=", " property="tradeTerm" >
+                trade_term = #tradeTerm#
+            </isNotNull>
+            <isNotNull prepend=", " property="currency" >
+                currency = #currency#
+            </isNotNull>
+            <isNotNull prepend=", " property="tradeCountry" >
+                trade_country = #tradeCountry#
+            </isNotNull>
+            <isNotNull prepend=", " property="premiumRate" >
+                premium_rate = #premiumRate#
+            </isNotNull>
+            <isNotNull prepend=", " property="guaranteeRate" >
+                guarantee_rate = #guaranteeRate#
+            </isNotNull>
+            <isNotNull prepend=", " property="discountRate" >
+                discount_rate = #discountRate#
+            </isNotNull>
+            <isNotNull prepend=", " property="lossRate" >
+                loss_rate = #lossRate#
+            </isNotNull>
+            <isNotNull prepend=", " property="saleRate" >
+                sale_rate = #saleRate#
+            </isNotNull>
+            <isNotNull prepend=", " property="managementRate" >
+                management_rate = #managementRate#
+            </isNotNull>
+            <isNotNull prepend=", " property="grossRate" >
+                gross_rate = #grossRate#
+            </isNotNull>
+            <isNotNull prepend=", " property="creditRate" >
+                credit_rate = #creditRate#
+            </isNotNull>
+            <isNotNull prepend=", " property="transportFlag" >
+                transport_flag = #transportFlag#
+            </isNotNull>
+            <isNotNull prepend=", " property="partialShipmentFalg" >
+                partial_shipment_falg = #partialShipmentFalg#
+            </isNotNull>
+            <isNotNull prepend=", " property="staus" >
+                staus = #staus#
+            </isNotNull>
+            <isNotNull prepend=", " property="dealTime" >
+                deal_time = #dealTime#
+            </isNotNull>
+            <isNotNull prepend="," property="deliverInfo" >
+                deliver_info = #deliverInfo:VARCHAR#
+            </isNotNull>
+            <isNotNull prepend=", " property="expressInfo" >
+                express_info = #expressInfo#
+            </isNotNull>
+            <isNotNull prepend=", " property="dueTime" >
+                due_time = #dueTime:DATE#
+            </isNotNull>
+            <isNotNull prepend=", " property="amountPayable" >
+                amount_payable = #amountPayable#
+            </isNotNull>
+            <isNotNull prepend=", " property="floorPrice" >
+                floor_price = #floorPrice#
+            </isNotNull>
+            <isNotNull prepend=", " property="maintenanceFee" >
+                maintenance_fee = #maintenanceFee#
+            </isNotNull>
+            <isNotNull prepend=", " property="netProfit" >
+                net_profit = #netProfit#
+            </isNotNull>
+            <isNotNull prepend=", " property="actualPaymentTime" >
+                actual_payment_time = #actualPaymentTime#
+            </isNotNull>
+            <isNotNull prepend=", " property="actualAmountPaid" >
+                actual_amount_paid = #actualAmountPaid#
+            </isNotNull>
+            <isNotNull prepend=", " property="unpaidAmount" >
+                unpaid_amount = #unpaidAmount#
+            </isNotNull>
+            <isNotNull prepend="," property="isComplaint" >
+                is_complaint = #isComplaint#
+            </isNotNull>
+            <isNotNull prepend="," property="isPledge" >
+                is_pledge = #isPledge:TINYINT#
+            </isNotNull>
+            <isNotNull prepend="," property="isModifyPrice" >
+                is_modify_price = #isModifyPrice#
+            </isNotNull>
+            <isNotNull prepend="," property="claimAmount" >
+                claim_amount = #claimAmount#
+            </isNotNull>
+            <isNotNull prepend="," property="createUserId" >
+                create_user_id = #createUserId#
+            </isNotNull>
+            <isNotNull prepend="," property="createUserName" >
+                create_user_name = #createUserName#
+            </isNotNull>
+            <isNotNull prepend="," property="lastmodifyUserId" >
+                lastmodify_user_id = #lastmodifyUserId#
+            </isNotNull>
+            <isNotNull prepend="," property="lastmodifyUserName" >
+                lastmodify_user_name = #lastmodifyUserName#
+            </isNotNull>
+            <isNotNull prepend="," property="createTime" >
+                create_time = #createTime#
+            </isNotNull>
+            <isNotNull prepend="," property="modifyTime" >
+                modify_time = #modifyTime#
+            </isNotNull>
+        </dynamic>
+        where order_id = #orderId#
+    </update>
+
+    <insert id="ADD" parameterClass="BusinessOrder" >
+       <![CDATA[
+        insert into business_order (order_id, nc_order_id, business_id, customer_id,
+        customer_duty_paragraph, bill_to_customer, sales_man_id, sales_man_name, department_id,
+        sale_organization_id, sale_organization_name, destination_port, shipment_port,
+        collection_agreement, trade_type, trade_term, currency, trade_country, premium_rate,
+        guarantee_rate, discount_rate, loss_rate, sale_rate, management_rate, gross_rate, credit_rate,
+        transport_flag, partial_shipment_falg, staus, deal_time, deliver_info, express_info, due_time,
+        amount_payable, floor_price, maintenance_fee, net_profit, actual_payment_time,
+        actual_amount_paid, unpaid_amount, is_complaint, is_pledge, is_modify_price, claim_amount,
+        create_user_id, create_user_name, lastmodify_user_id, lastmodify_user_name, create_time,
+        modify_time)
+        values (#orderId#, #ncOrderId#, #businessId#, #customerId#,
+        #customerDutyParagraph#, #billToCustomer#, #salesManId#,
+        #salesManName#, #departmentId#, #saleOrganizationId#,
+        #saleOrganizationName#, #destinationPort#, #shipmentPort#,
+        #collectionAgreement#, #tradeType#, #tradeTerm#, #currency#,
+        #tradeCountry#, #premiumRate#, #guaranteeRate#,
+        #discountRate#, #lossRate#, #saleRate#, #managementRate#,
+        #grossRate#, #creditRate#, #transportFlag#,
+        #partialShipmentFalg#, #staus#, #dealTime#, #deliverInfo#,
+        #expressInfo#, #dueTime#, #amountPayable#, #floorPrice#,
+        #maintenanceFee#, #netProfit#, #actualPaymentTime#,
+        #actualAmountPaid#, #unpaidAmount#, #isComplaint#, #isPledge#,
+        #isModifyPrice#, #claimAmount#, #createUserId#,
+        #createUserName#, #lastmodifyUserId#, #lastmodifyUserName#,
+        #createTime#, #modifyTime#)
+    ]]>
+    </insert>
+
+    <select id="GET-BY-ID" resultMap="" parameterClass="java.lang.String" >
+        <![CDATA[
+        select order_id, nc_order_id, business_id, customer_id, customer_duty_paragraph,
+        bill_to_customer, sales_man_id, sales_man_name, department_id, sale_organization_id,
+        sale_organization_name, destination_port, shipment_port, collection_agreement, trade_type,
+        trade_term, currency, trade_country, premium_rate, guarantee_rate, discount_rate, loss_rate,
+        sale_rate, management_rate, gross_rate, credit_rate, transport_flag, partial_shipment_falg,
+        staus, deal_time, deliver_info, express_info, due_time, amount_payable, floor_price,
+        maintenance_fee, net_profit, actual_payment_time, actual_amount_paid, unpaid_amount,
+        is_complaint, is_pledge, is_modify_price, claim_amount, create_user_id, create_user_name,
+        lastmodify_user_id, lastmodify_user_name, create_time, modify_time
+        from fuhuadata..business_order
+        where order_id = #orderId:VARCHAR#
+    ]]>
+    </select>
+
+    <update id="UPDATE-ORDER-STATUS" parameterClass="BusinessOrder">
+        update business_order
+        <dynamic prepend="set" >
+            <isNotNull prepend=", " property="failureAnalysis" >
+                failur_analysis = #failureAnalysis#
+            </isNotNull>
+            <isNotNull prepend=", " property="staus" >
+                staus = #staus#
+            </isNotNull>
+            <isNotNull prepend="," property="lastmodifyUserId" >
+                lastmodify_user_id = #lastmodifyUserId#
+            </isNotNull>
+            <isNotNull prepend="," property="lastmodifyUserName" >
+                lastmodify_user_name = #lastmodifyUserName#
+            </isNotNull>
+            <isNotNull prepend="," property="modifyTime" >
+                modify_time = #modifyTime#
+            </isNotNull>
+        </dynamic>
+        where order_id = #orderId#
+    </update>
+
+    <select id="OFFER-PAGE-COMMON"  parameterClass="QueryBusinessOrder" resultClass="QueryBusinessOrder">
+        <![CDATA[
+            SELECT
+            a.order_id orderId,
+            a.business_id businessId,
+            base.short_name customerName,
+            base.customer_level customerLevel,
+            base.full_enterprise_nature enterpriseNature,
+            a.amount_payable orderPrice,
+            GROUP_CONCAT(b.`name`) AS orderProduct,
+            a.staus orderStatus
+        FROM
+            business_order a
+        LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
+        LEFT JOIN customer_enterprise_nature nature ON nature.customer_id = a.customer_id
+        LEFT JOIN business_order_product b ON b.order_id = a.order_id
+        GROUP BY a.order_id
+    ]]>
+        <isNotEmpty prepend=", " property="enterpriseNature">
+            (select * from customer_enterprise_nature where nature=#enterpriseNature#) nature
+        </isNotEmpty>
+
+        <isParameterPresent>
+            <include refid="PAGE-COMMON"/>
+            <isNotEmpty prepend=" AND " property="enterpriseNature">
+                nature.customer_id=base.customer_id
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="orderBy">
+                order by $orderBy$
+            </isNotEmpty>
+            LIMIT #startRow#,#pageSize#
+        </isParameterPresent>
+    </select>
+
+    <delete id="DELETE-BY-ID" parameterClass="java.lang.String">
+        <![CDATA[
+        select from business_order where order_id = #orderId#
+    ]]>
+    </delete>
+
+    <select id="ORDER-PAGE-COMMON" parameterClass="QueryBusinessOrder" resultClass="BusinessOrder">
+                SELECT
+                    a.order_id orderId,
+                    a.business_id businessId,
+                    a.sale_organization_id saleOrganizationId,
+                    a.nc_order_id ncOrderId,
+                    base.short_name customerName,
+                    base.country country,
+                    a.amount_payable amountPayable,
+                    a.floor_price floorPrice,
+                    a.is_complaint isComplaint,
+                    a.is_modify_price isModifyPrice,
+                    a.staus orderStatus,
+                    a.deal_time dealTime
+                FROM
+                business_order a
+                LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
+        <isNotEmpty prepend=", " property="enterpriseNature">
+            (select * from customer_enterprise_nature where nature=#enterpriseNature#) nature
+        </isNotEmpty>
+
         <isParameterPresent>
             <include refid="QUERY-COMMON"/>
+            <isNotEmpty prepend=" AND " property="enterpriseNature">
+                nature.customer_id=base.customer_id
+            </isNotEmpty>
             <isNotEmpty prepend=" AND " property="orderBy">
                 order by $orderBy$
             </isNotEmpty>

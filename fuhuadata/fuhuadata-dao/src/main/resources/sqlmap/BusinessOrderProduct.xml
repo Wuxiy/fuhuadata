@@ -67,172 +67,28 @@
         <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
     </resultMap>
 
-    <sql id="abatorgenerated_Example_Where_Clause" >
-        <iterate property="oredCriteria" conjunction="or" prepend="where" removeFirstPrepend="iterate" >
-            <isEqual property="oredCriteria[].valid" compareValue="true" >
-                (
-                <iterate prepend="and" property="oredCriteria[].criteriaWithoutValue" conjunction="and" >
-                    $oredCriteria[].criteriaWithoutValue[]$
-                </iterate>
-                <iterate prepend="and" property="oredCriteria[].criteriaWithSingleValue" conjunction="and" >
-                    $oredCriteria[].criteriaWithSingleValue[].condition$
-                    #oredCriteria[].criteriaWithSingleValue[].value#
-                </iterate>
-                <iterate prepend="and" property="oredCriteria[].criteriaWithListValue" conjunction="and" >
-                    $oredCriteria[].criteriaWithListValue[].condition$
-                    <iterate property="oredCriteria[].criteriaWithListValue[].values" open="(" close=")" conjunction="," >
-                        #oredCriteria[].criteriaWithListValue[].values[]#
-                    </iterate>
-                </iterate>
-                <iterate prepend="and" property="oredCriteria[].criteriaWithBetweenValue" conjunction="and" >
-                    $oredCriteria[].criteriaWithBetweenValue[].condition$
-                    #oredCriteria[].criteriaWithBetweenValue[].values[0]# and
-                    #oredCriteria[].criteriaWithBetweenValue[].values[1]#
-                </iterate>
-                )
-            </isEqual>
-        </iterate>
+    <sql id="Base_Column_List">
+        id, order_id, archive_product_id, product_id, customer_id, name, customer_product_name,
+        brand, main_product_amount, main_product_unit, sub_product_amount, sub_product_unit,
+        convert_rate, price_type, advise_price, purchase_price, delivery_time, Internal_transport_mode,
+        Internal_transport_price, factory_id, factory_name, straight_employing_way, straight_employing_scale,
+        straight_employing_standard, potential_employing_way, potential_employing_scale,
+        potential_employing_standard, documentary_type, documentary_require, other_documentary_require,
+        shipping_agent_require, package_require, goods_type, mianxiangqi, miantuiqi, cupboard_type,
+        cupboard_per_number, cupboard_number, ocean_freight, port_surcharge, tax_free, gross_margin,
+        other_cost, min_price, contract_price, transform_state, composition_cost, pakage_other_requirement,
+        additional_price, consumption, img_info, pakage_info, material_info, create_user_id,
+        create_user_name, lastmodify_user_id, lastmodify_user_name, create_time, modify_time
     </sql>
-    <select id="abatorgenerated_selectByPrimaryKey" resultMap="abatorgenerated_BusinessOrderProductResult" parameterClass="com.fh.model.BusinessOrderProduct" >
-        select id, order_id, archive_product_id, product_id, customer_id, name, customer_product_name,
-        brand, main_product_amount, main_product_unit, sub_product_amount, sub_product_unit,
-        convert_rate, price_type, advise_price, purchase_price, delivery_time,
-        Internal_transport_mode, Internal_transport_price, factory_id, factory_name,
-        straight_employing_way, straight_employing_scale, straight_employing_standard,
-        potential_employing_way, potential_employing_scale, potential_employing_standard,
-        documentary_type, documentary_require, other_documentary_require, shipping_agent_require,
-        package_require, goods_type, mianxiangqi, miantuiqi, cupboard_type, cupboard_per_number,
-        cupboard_number, ocean_freight, port_surcharge, tax_free, gross_margin, other_cost, min_price,
-        contract_price, transform_state, composition_cost, pakage_other_requirement, additional_price,
-        consumption, img_info, pakage_info, material_info, create_user_id, create_user_name,
-        lastmodify_user_id, lastmodify_user_name, create_time, modify_time
-        from fuhuadata..business_order_product
-        where id = #id:INTEGER#
-    </select>
-    <select id="abatorgenerated_selectByExample" resultMap="abatorgenerated_BusinessOrderProductResult" parameterClass="com.fh.model.BusinessOrderProductExample" >
-        select id, order_id, archive_product_id, product_id, customer_id, name, customer_product_name,
-        brand, main_product_amount, main_product_unit, sub_product_amount, sub_product_unit,
-        convert_rate, price_type, advise_price, purchase_price, delivery_time,
-        Internal_transport_mode, Internal_transport_price, factory_id, factory_name,
-        straight_employing_way, straight_employing_scale, straight_employing_standard,
-        potential_employing_way, potential_employing_scale, potential_employing_standard,
-        documentary_type, documentary_require, other_documentary_require, shipping_agent_require,
-        package_require, goods_type, mianxiangqi, miantuiqi, cupboard_type, cupboard_per_number,
-        cupboard_number, ocean_freight, port_surcharge, tax_free, gross_margin, other_cost, min_price,
-        contract_price, transform_state, composition_cost, pakage_other_requirement, additional_price,
-        consumption, img_info, pakage_info, material_info, create_user_id, create_user_name,
-        lastmodify_user_id, lastmodify_user_name, create_time, modify_time
-        from fuhuadata..business_order_product
-        <isParameterPresent >
-            <include refid="fuhuadata__business_order_product.abatorgenerated_Example_Where_Clause" />
-            <isNotNull property="orderByClause" >
-                order by $orderByClause$
-            </isNotNull>
-        </isParameterPresent>
-    </select>
-    <delete id="abatorgenerated_deleteByPrimaryKey" parameterClass="com.fh.model.BusinessOrderProduct" >
-        delete from fuhuadata..business_order_product
-        where id = #id:INTEGER#
-    </delete>
-    <delete id="abatorgenerated_deleteByExample" parameterClass="com.fh.model.BusinessOrderProductExample" >
-        delete from fuhuadata..business_order_product
-        <include refid="fuhuadata__business_order_product.abatorgenerated_Example_Where_Clause" />
-    </delete>
-    <insert id="abatorgenerated_insert" parameterClass="com.fh.model.BusinessOrderProduct" >
-        insert into fuhuadata..business_order_product (id, order_id, archive_product_id, product_id,
-        customer_id, name, customer_product_name, brand, main_product_amount, main_product_unit,
-        sub_product_amount, sub_product_unit, convert_rate, price_type, advise_price, purchase_price,
-        delivery_time, Internal_transport_mode, Internal_transport_price, factory_id, factory_name,
-        straight_employing_way, straight_employing_scale, straight_employing_standard,
-        potential_employing_way, potential_employing_scale, potential_employing_standard,
-        documentary_type, documentary_require, other_documentary_require, shipping_agent_require,
-        package_require, goods_type, mianxiangqi, miantuiqi, cupboard_type, cupboard_per_number,
-        cupboard_number, ocean_freight, port_surcharge, tax_free, gross_margin, other_cost, min_price,
-        contract_price, transform_state, composition_cost, pakage_other_requirement, additional_price,
-        consumption, img_info, pakage_info, material_info, create_user_id, create_user_name,
-        lastmodify_user_id, lastmodify_user_name, create_time, modify_time)
-        values (#id:INTEGER#, #orderId:VARCHAR#, #archiveProductId:INTEGER#, #productId:INTEGER#,
-        #customerId:VARCHAR#, #name:VARCHAR#, #customerProductName:VARCHAR#, #brand:VARCHAR#,
-        #mainProductAmount:DECIMAL#, #mainProductUnit:INTEGER#, #subProductAmount:DECIMAL#,
-        #subProductUnit:INTEGER#, #convertRate:DECIMAL#, #priceType:INTEGER#, #advisePrice:DECIMAL#,
-        #purchasePrice:DECIMAL#, #deliveryTime:TIMESTAMP#, #internalTransportMode:INTEGER#,
-        #internalTransportPrice:DECIMAL#, #factoryId:VARCHAR#, #factoryName:VARCHAR#,
-        #straightEmployingWay:INTEGER#, #straightEmployingScale:DECIMAL#,
-        #straightEmployingStandard:VARCHAR#, #potentialEmployingWay:INTEGER#,
-        #potentialEmployingScale:DECIMAL#, #potentialEmployingStandard:VARCHAR#,
-        #documentaryType:INTEGER#, #documentaryRequire:VARCHAR#, #otherDocumentaryRequire:VARCHAR#,
-        #shippingAgentRequire:VARCHAR#, #packageRequire:VARCHAR#, #goodsType:INTEGER#,
-        #mianxiangqi:INTEGER#, #miantuiqi:INTEGER#, #cupboardType:INTEGER#,
-        #cupboardPerNumber:INTEGER#, #cupboardNumber:INTEGER#, #oceanFreight:DECIMAL#,
-        #portSurcharge:DECIMAL#, #taxFree:DECIMAL#, #grossMargin:DECIMAL#, #otherCost:DECIMAL#,
-        #minPrice:DECIMAL#, #contractPrice:DECIMAL#, #transformState:INTEGER#,
-        #compositionCost:VARCHAR#, #pakageOtherRequirement:VARCHAR#, #additionalPrice:DECIMAL#,
-        #consumption:DECIMAL#, #imgInfo:VARCHAR#, #pakageInfo:VARCHAR#, #materialInfo:VARCHAR#,
-        #createUserId:INTEGER#, #createUserName:VARCHAR#, #lastmodifyUserId:INTEGER#,
-        #lastmodifyUserName:VARCHAR#, #createTime:TIMESTAMP#, #modifyTime:TIMESTAMP#)
-    </insert>
-    <update id="abatorgenerated_updateByPrimaryKey" parameterClass="com.fh.model.BusinessOrderProduct" >
-        update fuhuadata..business_order_product
-        set order_id = #orderId:VARCHAR#,
-        archive_product_id = #archiveProductId:INTEGER#,
-        product_id = #productId:INTEGER#,
-        customer_id = #customerId:VARCHAR#,
-        name = #name:VARCHAR#,
-        customer_product_name = #customerProductName:VARCHAR#,
-        brand = #brand:VARCHAR#,
-        main_product_amount = #mainProductAmount:DECIMAL#,
-        main_product_unit = #mainProductUnit:INTEGER#,
-        sub_product_amount = #subProductAmount:DECIMAL#,
-        sub_product_unit = #subProductUnit:INTEGER#,
-        convert_rate = #convertRate:DECIMAL#,
-        price_type = #priceType:INTEGER#,
-        advise_price = #advisePrice:DECIMAL#,
-        purchase_price = #purchasePrice:DECIMAL#,
-        delivery_time = #deliveryTime:TIMESTAMP#,
-        Internal_transport_mode = #internalTransportMode:INTEGER#,
-        Internal_transport_price = #internalTransportPrice:DECIMAL#,
-        factory_id = #factoryId:VARCHAR#,
-        factory_name = #factoryName:VARCHAR#,
-        straight_employing_way = #straightEmployingWay:INTEGER#,
-        straight_employing_scale = #straightEmployingScale:DECIMAL#,
-        straight_employing_standard = #straightEmployingStandard:VARCHAR#,
-        potential_employing_way = #potentialEmployingWay:INTEGER#,
-        potential_employing_scale = #potentialEmployingScale:DECIMAL#,
-        potential_employing_standard = #potentialEmployingStandard:VARCHAR#,
-        documentary_type = #documentaryType:INTEGER#,
-        documentary_require = #documentaryRequire:VARCHAR#,
-        other_documentary_require = #otherDocumentaryRequire:VARCHAR#,
-        shipping_agent_require = #shippingAgentRequire:VARCHAR#,
-        package_require = #packageRequire:VARCHAR#,
-        goods_type = #goodsType:INTEGER#,
-        mianxiangqi = #mianxiangqi:INTEGER#,
-        miantuiqi = #miantuiqi:INTEGER#,
-        cupboard_type = #cupboardType:INTEGER#,
-        cupboard_per_number = #cupboardPerNumber:INTEGER#,
-        cupboard_number = #cupboardNumber:INTEGER#,
-        ocean_freight = #oceanFreight:DECIMAL#,
-        port_surcharge = #portSurcharge:DECIMAL#,
-        tax_free = #taxFree:DECIMAL#,
-        gross_margin = #grossMargin:DECIMAL#,
-        other_cost = #otherCost:DECIMAL#,
-        min_price = #minPrice:DECIMAL#,
-        contract_price = #contractPrice:DECIMAL#,
-        transform_state = #transformState:INTEGER#,
-        composition_cost = #compositionCost:VARCHAR#,
-        pakage_other_requirement = #pakageOtherRequirement:VARCHAR#,
-        additional_price = #additionalPrice:DECIMAL#,
-        consumption = #consumption:DECIMAL#,
-        img_info = #imgInfo:VARCHAR#,
-        pakage_info = #pakageInfo:VARCHAR#,
-        material_info = #materialInfo:VARCHAR#,
-        create_user_id = #createUserId:INTEGER#,
-        create_user_name = #createUserName:VARCHAR#,
-        lastmodify_user_id = #lastmodifyUserId:INTEGER#,
-        lastmodify_user_name = #lastmodifyUserName:VARCHAR#,
-        create_time = #createTime:TIMESTAMP#,
-        modify_time = #modifyTime:TIMESTAMP#
-        where id = #id:INTEGER#
-    </update>
+
+    <sql id="PAGE-COMMON">
+
+    </sql>
+
+
+
+
+
     <update id="abatorgenerated_updateByPrimaryKeySelective" parameterClass="com.fh.model.BusinessOrderProduct" >
         update fuhuadata..business_order_product
         <dynamic prepend="set" >

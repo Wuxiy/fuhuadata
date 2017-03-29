@@ -38,6 +38,7 @@ public class BusinessOrder implements Serializable{
     private Integer transportFlag;//是否可转运,0是，1否
     private Integer partialShipmentFalg;//是否可分批出运
     private Integer staus;//订单状态：-1：报价失败  0：报价中 1：已转化成订单 2：数据已上报到NC
+    private String failureAnalysis;//失败原因分析
     private String dealTime;//nc系统合同签订时间
     private String deliverInfo;//交单地址等信息 json格式
     private String expressInfo;//寄件信息 json格式
@@ -50,10 +51,10 @@ public class BusinessOrder implements Serializable{
     private BigDecimal actualAmountPaid;//实际付款金额
     private BigDecimal unpaidAmount;//未付金额
     private Integer isComplaint;//是否投诉 0:否 1：是
-    private Integer isPledge;//'是否质押 0:否 1：是',
+    private Integer isPledge;//是否质押 0:否 1：是
     private Integer isModifyPrice;//'是否调价0:否 1：是
-    private BigDecimal claimAmount;//索赔金额'
-    private Integer createUserId;//'创建者id'
+    private BigDecimal claimAmount;//索赔金额
+    private Integer createUserId;//'创建者id
     private String createUserName;//创建者姓名
     private Integer lastmodifyUserId;//上一次修改者id
     private String lastmodifyUserName;//上一次修改者姓名
@@ -458,5 +459,13 @@ public class BusinessOrder implements Serializable{
 
     public void setModifyTime(String modifyTime) {
         this.modifyTime = modifyTime;
+    }
+
+    public String getFailureAnalysis() {
+        return failureAnalysis;
+    }
+
+    public void setFailureAnalysis(String failureAnalysis) {
+        this.failureAnalysis = failureAnalysis;
     }
 }
