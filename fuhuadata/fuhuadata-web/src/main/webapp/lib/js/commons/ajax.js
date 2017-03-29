@@ -28,7 +28,7 @@ function upData(url,type,data,contentType){
         if(result.status==200){
             alert('提交成功');
         }
-        location.reload();
+        // location.reload();
     }).fail(function (result) {
         alert('请重新提交');
         console.log('error:'+result.status);

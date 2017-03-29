@@ -135,8 +135,8 @@ function customerBasicFormObj() {
             "lastmodifyUserName": $('#lastmodifyUserName').val(),
 
             "modifyTime": getTime(),
-            "areaName": $('#areaId').text(),
-            "countryName": $('#countryId').text()
+            "area": $('#areaId').find(':selected').text(),
+            "country": $('#countryId').find(':selected').text()
 
         },
         customerEnterpriceNatures:customerEnterpriceNatureObj(),
