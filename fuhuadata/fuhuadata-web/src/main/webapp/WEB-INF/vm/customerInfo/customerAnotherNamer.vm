@@ -181,6 +181,9 @@
                                             <option  value="1">A</option>
                                         </select>
                                     </div>
+                                    <div class="col-xs-1">
+                                        <a href="http://www.sinosure.com.cn/sinosure/index.html">快速查询</a>
+                                    </div>
                                 </div>
                                 <div class="form-group ">
                                     <label class="col-xs-1 control-label">企业性质<sup class="not-null">*</sup></label>

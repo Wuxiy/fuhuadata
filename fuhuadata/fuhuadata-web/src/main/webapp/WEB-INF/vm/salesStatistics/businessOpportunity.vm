@@ -30,7 +30,7 @@
                             <span class="glyphicon glyphicon-plus"></span>
                             新增商机
                         </a>
-                        <a class="btn btn-primary" href="">直接报价</a>
+                        <a class="btn btn-primary" href="">新增报价</a>
                     </div>
                 </div>
             </div>
@@ -85,7 +85,7 @@
                                             <option value="5" lang="zh">其他</option>
                                         </select>
                                         <div class="input-group-btn">
-                                            <button class="btn btn-xs btn-primary" type="button">搜索</button>
+                                            <button class="btn btn-xs btn-primary" id="submit" type="button">搜索</button>
                                         </div>
                                     </div>
                                 </div>

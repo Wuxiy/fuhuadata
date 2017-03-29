@@ -48,44 +48,38 @@
                                     <!--搜索栏-->
                                     <div class="input-group">
                                         <span class="input-group-addon" lang="zh">客户名称</span>
-                                        <select class="form-control">
-                                            <option value="" lang="zh">NUFARM</option>
-                                            <option value="" lang="zh">ADC</option>
-                                        </select>
+                                        <input class="form-control" id="customerName"/>
                                         <span class="input-group-addon" lang="zh">销售组织</span>
-                                        <select class="form-control">
-                                            <option value="" lang="zh">全部</option>
-                                            <option value="" lang="zh">通达</option>
-                                            <option value="" lang="zh">FH</option>
-                                        </select>
+                                        <input class="form-control" id=""/>
                                         <span class="input-group-addon" lang="zh">订单状态</span>
-                                        <select class="form-control">
-                                            <option value="" lang="zh">待下单</option>
-                                            <option value="" lang="zh">失败</option>
-                                            <option value="" lang="zh">全部</option>
-                                            <option value="" lang="zh">已下单</option>
+                                        <select class="form-control" id="">
+                                            <option value="" selected lang="zh">全部</option>
+                                            <option value="0" lang="zh">待下单</option>
+                                            <option value="1" lang="zh">失败</option>
+                                            <option value="2" lang="zh">已下单</option>
                                         </select>
                                         <span class="input-group-addon" lang="zh">客户类型</span>
-                                        <select class="form-control">
-                                            <option value="" lang="zh">潜在客户</option>
-                                            <option value="" lang="zh">风险客户</option>
-                                            <option value="" lang="zh">一般客户</option>
-                                            <option value="" lang="zh">重要客户</option>
-                                            <option value="" lang="zh">大客户</option>
-                                            <option value="" lang="zh">战略客户</option>
+                                        <select class="form-control" id="customerLevel">
+                                            <option value="" selected lang="zh">全部</option>
+                                            <option value="5" lang="zh">风险客户</option>
+                                            <option value="4" lang="zh">一般客户</option>
+                                            <option value="3" lang="zh">重要客户</option>
+                                            <option value="2" lang="zh">大客户</option>
+                                            <option value="1" lang="zh">战略客户</option>
                                         </select>
                                         <span class="input-group-addon" lang="zh">企业性质</span>
-                                        <select class="form-control">
-                                            <option value="" lang="zh">工厂</option>
-                                            <option value="" lang="zh">分销商</option>
-                                            <option value="" lang="zh">经销商</option>
-                                            <option value="" lang="zh">终端客户</option>
-                                            <option value="" lang="zh">其他</option>
+                                        <select class="form-control" id="enterpriseNature">
+                                            <option value="" selected lang="zh">全部</option>
+                                            <option value="1" lang="zh">工厂</option>
+                                            <option value="2" lang="zh">分销商</option>
+                                            <option value="3" lang="zh">经销商</option>
+                                            <option value="4" lang="zh">终端客户</option>
+                                            <option value="5" lang="zh">其他</option>
                                         </select>
                                         <span class="input-group-addon" lang="zh">合同总金额</span>
                                         <input class="form-control" type="text" value="" />
                                         <div class="input-group-btn">
-                                            <button class="btn btn-xs btn-primary" type="button">搜索</button>
+                                            <button class="btn btn-xs btn-primary" id="submit" type="button">搜索</button>
                                         </div>
                                     </div>
                                 </div>

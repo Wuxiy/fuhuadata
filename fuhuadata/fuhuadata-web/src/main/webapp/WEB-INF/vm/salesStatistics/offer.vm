@@ -51,33 +51,35 @@
                                         <input class="form-control" id="customerName" />
                                         <span class="input-group-addon" lang="zh">订单编号</span>
                                         <input class="form-control" type="text" value="" />
-                                        <span class="input-group-addon" lang="zh">订单状态</span>
-                                        <select class="form-control">
-                                            <option value="" lang="zh">待下单</option>
-                                            <option value="" lang="zh">失败</option>
-                                            <option value="" lang="zh">已下单</option>
+                                        <span class="input-group-addon" lang="zh">商机状态</span>
+                                        <select class="form-control" id="businessState">
+                                            <option value="" selected lang="zh">全部</option>
+                                            <option value="0" lang="zh">待下单</option>
+                                            <option value="1" lang="zh">失败</option>
+                                            <option value="2" lang="zh">已下单</option>
                                         </select>
                                         <span class="input-group-addon" lang="zh">客户类型</span>
-                                        <select class="form-control">
-                                            <option value="" lang="zh">潜在客户</option>
-                                            <option value="" lang="zh">风险客户</option>
-                                            <option value="" lang="zh">一般客户</option>
-                                            <option value="" lang="zh">重要客户</option>
-                                            <option value="" lang="zh">大客户</option>
-                                            <option value="" lang="zh">战略客户</option>
+                                        <select class="form-control" id="customerLevel">
+                                            <option value="" selected lang="zh">全部</option>
+                                            <option value="5" lang="zh">风险客户</option>
+                                            <option value="4" lang="zh">一般客户</option>
+                                            <option value="3" lang="zh">重要客户</option>
+                                            <option value="2" lang="zh">大客户</option>
+                                            <option value="1" lang="zh">战略客户</option>
                                         </select>
                                         <span class="input-group-addon" lang="zh">企业性质</span>
-                                        <select class="form-control">
-                                            <option value="" lang="zh">工厂</option>
-                                            <option value="" lang="zh">分销商</option>
-                                            <option value="" lang="zh">经销商</option>
-                                            <option value="" lang="zh">终端客户</option>
-                                            <option value="" lang="zh">其他</option>
+                                        <select class="form-control" id="enterpriseNature">
+                                            <option value="" selected lang="zh">全部</option>
+                                            <option value="1" lang="zh">工厂</option>
+                                            <option value="2" lang="zh">分销商</option>
+                                            <option value="3" lang="zh">经销商</option>
+                                            <option value="4" lang="zh">终端客户</option>
+                                            <option value="5" lang="zh">其他</option>
                                         </select>
                                         <span class="input-group-addon" lang="zh">合同总金额</span>
                                         <input class="form-control" type="text" value="" />
                                         <div class="input-group-btn">
-                                            <button class="btn btn-xs btn-primary" type="button">搜索</button>
+                                            <button class="btn btn-xs btn-primary" id="submit" type="button">搜索</button>
                                         </div>
                                     </div>
                                 </div>
@@ -159,7 +161,7 @@
 
     var customerLevelList = ['战略客户','大客户' ,'重要客户' ,'一般客户' ,'风险客户'];
     var businessOpportunity = ['工厂','分销商' ,'经销商' ,'终端客户' ,'其他'];
-    var businessState = ['待报价','失败','已转化'];
+    var businessState = ['待下单','失败','已下单'];
     //根据页码获取列表数据
     function getDataList(pageNum,jq){
         jQuery.ajax({
@@ -181,12 +183,12 @@
                     _html += '	<td>'+ResultData[i].name+'</td>';
                     _html += '  <td><a href="">'+ResultData[i].name+'</a></td>';
                     _html += '  <td>'+ResultData[i].name+'</td>';
-                    _html += '  <td lang="zh">'+customerLevelList[ResultData[i].name]+'</td>';
-                    _html += '  <td lang="zh">'+businessOpportunity[ResultData[i].name]+'</td>';
+                    _html += '  <td lang="zh">'+customerLevelList[ResultData[i].customerLevel-1]+'</td>';
+                    _html += '  <td lang="zh">'+businessOpportunity[ResultData[i].enterpriseNature-1]+'</td>';
                     _html += '  <td>'+ResultData[i].name+'A</td>';
                     _html += '  <td>'+ResultData[i].name+'</td>';
                     _html += '  <td lang="zh">'+ResultData[i].name+'</td>';
-                    _html += '  <td lang="zh">'+ResultData[i].name+'</td>';
+                    _html += '  <td lang="zh">'+businessState[ResultData[i].name]+'</td>';
                     _html +='   </tr>';
                 }
                 $("#offerList").html(_html);

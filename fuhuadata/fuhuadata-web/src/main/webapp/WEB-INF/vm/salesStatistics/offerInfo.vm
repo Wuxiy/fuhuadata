@@ -1,0 +1,160 @@
+
+<div class="nav-deputy shadow-out clearfix">
+    <ul class="breadcrumb pull-right">
+        <li><span class="glyphicon glyphicon-map-marker"></span></li>
+    </ul>
+</div>
+<div class="dashboard-wrapper">
+    <div class="row">
+        <div class="tab-content col-xs-12">
+            <!--基本信息-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <button id="edit" data-form-btn="edit" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
+                            编辑
+                        </button>
+                        <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden">
+                            <a id="cancel" data-form-btn="cancel" class="btn" lang="zh">取消</a>
+                            <a id="save" data-form-btn="save" class="btn btn-primary" lang="zh">保存</a>
+                        </div>
+                        <h3 class="panel-title" lang="zh">
+                            基本信息
+                        </h3>
+                    </div>
+                    <div class="panel-body clearfix">
+                        <div class="form-horizontal">
+                            <div class="form-group ">
+                                <label class="col-xs-1 control-label" lang="zh">订单编号</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">商机编号</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">客户名称</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">客户税号</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-1 control-label" lang="zh">中信保编码</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">注册资金</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">企业电话</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">企业邮箱</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="col-xs-1 control-label" lang="zh">企业性质</label>
+                                <div class="col-xs-2">
+                                    <select class="form-control" disabled>
+                                        <option value="" selected lang="zh">工厂</option>
+                                        <option value="" lang="zh">分销商</option>
+                                        <option value="" lang="zh">经销商</option>
+                                    </select>
+                                </div>
+                                <label class="col-xs-1 control-label" lang="zh">售票客户</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">业务员</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">部门</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-1 control-label" lang="zh">销售组织</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">目的港<sup class="not-null">*</sup></label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">起运港<sup class="not-null">*</sup></label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">收款协议<sup class="not-null">*</sup></label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-1 control-label" lang="zh">贸易方式<sup class="not-null">*</sup></label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">贸易术语<sup class="not-null">*</sup></label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">币种<sup class="not-null">*</sup></label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">币易国别<sup class="not-null">*</sup></label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-1 control-label" lang="zh">保险费率（%）<sup class="not-null">*</sup></label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">信保费率（%）<sup class="not-null">*</sup></label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">资金利率（%）<sup class="not-null">*</sup></label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">汇损费率（%）<sup class="not-null">*</sup></label>
+                                <div class="col-xs-2"><input class="form-control" type="email" value="" disabled /></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-1 control-label" lang="zh">是否可转运</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">是否可分批出运</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">状态</label>
+                                <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                <label class="col-xs-1 control-label" lang="zh">信保赔付率（%）<sup class="not-null">*</sup></label>
+                                <div class="col-xs-2"><input class="form-control" type="email" value="" disabled /></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <div class="tab-content col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <button  class="btn btn-xs btn-primary panel-heading-btn pull-right" lang="zh">新增</button>
+                    <h3 class="panel-title">
+                        产品信息
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <!--表格-->
+                    <table class="table table-condensed table-bordered table-striped text-center">
+                        <thead>
+                        <tr>
+                            <th class="text-center" lang="zh">产品序列号</th>
+                            <th class="text-center" lang="zh">品名</th>
+                            <th class="text-center" lang="zh">品类</th>
+                            <th class="text-center" lang="zh">品牌</th>
+                            <th class="text-center" lang="zh">包装规格</th>
+                            <th class="text-center" lang="zh">产品数量</th>
+                            <th class="text-center" lang="zh">整柜数量</th>
+                            <th class="text-center" lang="zh">柜型</th>
+                            <th class="text-center" lang="zh">柜数</th>
+                            <th class="text-center" lang="zh">交货时间</th>
+                            <th class="text-center" lang="zh">最低销售价（元/KG（L)）</th>
+                            <th class="text-center" lang="zh">单据要求</th>
+                            <th class="text-center" lang="zh">订舱出运要求</th>
+                        </tr>
+                        </thead>
+                        <tbody id="">
+                        <tr>
+                            <td>000002</td>
+                            <td>Anna</td>
+                            <td>销售</td>
+                            <td>是</td>
+                            <td>华盛顿</td>
+                            <td>女</td>
+                            <td>美国</td>
+                            <td>000002</td>
+                            <td>Anna</td>
+                            <td>销售</td>
+                            <td>是</td>
+                            <td>华盛顿</td>
+                            <td>女</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
