@@ -19,6 +19,10 @@ public abstract class BaseTreeableServiceImpl<E extends BaseEntity<ID> & Treeabl
 
     @Override
     public int appendChild(E parent, E child) {
+        if (parent == null) {
+            parent = getRoot();
+        }
+
         child.setParentId(parent.getId());
         child.setParentIds(parent.makeSelfAsNewParentIds());
 

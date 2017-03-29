@@ -22,6 +22,13 @@ public interface BaseTreeableService<E extends BaseEntity<ID> & Treeable<ID>, ID
     E getRoot();
 
     /**
+     * 获取下一个菜单顺序
+     * @param parentId
+     * @return
+     */
+    int countNextIndex(ID parentId);
+
+    /**
      * 新建子节点
      *
      * @param parent
@@ -29,6 +36,10 @@ public interface BaseTreeableService<E extends BaseEntity<ID> & Treeable<ID>, ID
      */
     int appendChild(E parent, E child);
 
+    /**
+     * 删除节点，同时删除子节点
+     * @param self
+     */
     void deleteSelfAndChildren(E self);
 
     /**

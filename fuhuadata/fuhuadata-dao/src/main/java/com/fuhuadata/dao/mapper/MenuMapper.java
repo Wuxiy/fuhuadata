@@ -12,4 +12,8 @@ import org.apache.ibatis.annotations.Param;
 public interface MenuMapper extends BaseMapper<Menu,Integer> {
 
     void deleteSelfAndChildren(@Param("parentId") Integer parentId, @Param("parents") String parents);
+
+    int countNextIndex(@Param("parentId") Integer parentId);
+
+    Menu getMenu(@Param("id") Integer id);
 }

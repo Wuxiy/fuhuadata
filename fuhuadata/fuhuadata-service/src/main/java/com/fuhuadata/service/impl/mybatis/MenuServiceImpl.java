@@ -17,12 +17,27 @@ public class MenuServiceImpl extends BaseTreeableServiceImpl<Menu, Integer>
     public Menu getRoot() {
         Menu menu = new Menu();
         menu.setMenuId(0);
+        menu.setParentIds("");
         menu.setName("全部");
         return menu;
     }
 
     @Override
+    public Menu get(Integer id) {
+        return getMenuMapper().getMenu(id);
+    }
+
+    @Override
+    public int countNextIndex(Integer parentId) {
+        return getMenuMapper().countNextIndex(parentId);
+    }
+
+    @Override
     public void deleteSelfAndChildren(Menu self) {
         ((MenuMapper) baseMapper).deleteSelfAndChildren(self.getId(), self.makeSelfAsNewParentIds());
+    }
+
+    private MenuMapper getMenuMapper() {
+        return (MenuMapper) baseMapper;
     }
 }

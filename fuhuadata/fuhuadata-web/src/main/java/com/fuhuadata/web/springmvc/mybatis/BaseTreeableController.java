@@ -106,6 +106,16 @@ public abstract class BaseTreeableController<E extends BaseEntity<ID> & Treeable
         return result.getResultPojo();
     }
 
+    @RequestMapping(value = "/ajax/next", method = RequestMethod.GET)
+    @ResponseBody
+    public ResultPojo ajaxCountNextIndex(@RequestParam(value = "parentId") ID parentId) {
+        int nextIndex = baseService.countNextIndex(parentId);
+
+        Result<Integer> result = new Result<Integer>(true);
+        result.addDefaultModel(nextIndex);
+        return result.getResultPojo();
+    }
+
     @RequestMapping(value = "ajax/{id}", method = RequestMethod.GET)
     @ResponseBody
     @SystemLogAnnotation(module = "baseTreeable",methods = "ajaxGetById")
