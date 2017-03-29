@@ -234,7 +234,7 @@
 						<isNotEmpty prepend=", " property="countryId">country_id=#countryId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="country">country=#country#</isNotEmpty>
 						<isNotEmpty prepend=", " property="companyType">company_type=#companyType#</isNotEmpty>
-						<isNotEmpty prepend=", " property="otherEnterpriseNature">other_enterpriseNature=#otherEnterpriseNature#</isNotEmpty>
+						<isNotEmpty prepend=", " property="otherEnterpriseNature">other_enterprise_nature=#otherEnterpriseNature#</isNotEmpty>
 						<isNotEmpty prepend=", " property="registeredFunds">registered_funds=#registeredFunds#</isNotEmpty>
 
 						<isNotEmpty prepend=", " property="registeredAddress">registered_address=#registeredAddress#</isNotEmpty>

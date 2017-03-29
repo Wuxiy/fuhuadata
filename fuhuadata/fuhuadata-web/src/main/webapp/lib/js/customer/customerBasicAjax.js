@@ -15,6 +15,8 @@ function customerBasicInfo(result){
     $('#shortName').val(getData.shortName);
     $('#areaId').val((getData.areaId ? -1 : getData.areaId));
     $('#countryId').val((getData.countryId ? -1 : getData.countryId));
+    $('#area').val(getData.area);
+    $('#country').val(getData.country);
 
     $('#zhongxinbaoNumber').val(getData.zhongxinbaoNumber);
     $('#zhongxinbaoLevel').val(getData.zhongxinbaoLevel);
@@ -136,7 +138,8 @@ function customerBasicFormObj() {
 
             "modifyTime": getTime(),
             "area": $('#areaId').find(':selected').text(),
-            "country": $('#countryId').find(':selected').text()
+            "country": $('#countryId').find(':selected').text(),
+            "fullEnterpriseNature":sCustomerEnterpriceNature(),
 
         },
         customerEnterpriceNatures:customerEnterpriceNatureObj(),
@@ -154,6 +157,7 @@ function customerMakeProductObj() {
         if($this.attr('id') && $this.attr('id')!='' && $this.attr('id')!=null){
             obj.id = $this.attr('id');
         }
+        obj.customerId=$('#customerId').val();
         obj.production = $this.find('[name="production"]').val();
         obj.productName = $this.find('[name="productName"]').val();
         arr.push(obj);
@@ -166,13 +170,21 @@ function customerEnterpriceNatureObj() {
     $('[name="enterpriseNature"]').filter(':checked').each(function () {
         var obj = {};
         obj.customerId = $('#customerId').val();
-        obj.type = 3;
+        obj.type = 1;
         obj.nature = $(this).val();
         arr.push(obj);
     });
     return arr;
 }
-
+//企业性质字符传
+function sCustomerEnterpriceNature() {
+    var sName = '';
+    $('[name="enterpriseNature"]').filter(':checked').each(function () {
+        var $this = $(this);
+        sName += $this.next('span').text() +',';
+    });
+    return sName.slice('0','-1');
+}
 
 //客户百科
 function customerEncyclopediaObj(){

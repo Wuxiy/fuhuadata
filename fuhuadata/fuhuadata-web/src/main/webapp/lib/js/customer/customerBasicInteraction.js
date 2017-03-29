@@ -7,6 +7,7 @@ $(function () {
     $.ajax({
         url:basePath+'/customerBaseInfo/initAreaCategoryTree',
         type:'GET'
+        // async:false
     }).done(function (result) {
         var data = result.data[0].nodes;
         var areaId = $('#areaId');
@@ -61,8 +62,9 @@ $(function () {
                 data: customerBasicFormObj()
             }).done(function (result) {
                 console.log(result.data);
-                // var customerId = result.data.customerId;
-                $('#linkPot').attr('href','/customerBaseInfo/intoCustomerBaseInfoDetails?customerType=2&customerId=').click();
+                var customerId = result.data.customerId;
+                $('#linkPot').attr('href','/customerBaseInfo/intoCustomerBaseInfoDetails?customerType=2&customerId='+ result.data.customerId);
+                document.getElementById('linkPot').click();
             })
         });
         $(document).on('click.reset','#resetForm',function () {
@@ -114,7 +116,6 @@ $(function () {
             //     alert('请完善表单');
             // }
             upData(basePath+'/customerBaseInfo/updateCustomerBaseInfo','POST',customerBasicFormObj(),"application/json");
-
             delDelBtn();
         });
         //客户基本信息取消提交
