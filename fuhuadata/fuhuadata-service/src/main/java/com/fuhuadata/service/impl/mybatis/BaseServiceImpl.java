@@ -108,4 +108,12 @@ public abstract class BaseServiceImpl<E extends BaseEntity<ID>, ID extends Seria
     public int delete(E entity) {
         return baseMapper.delete(entity);
     }
+
+    protected E newEntity() {
+        try {
+            return entityClass.newInstance();
+        } catch (Exception e) {
+            throw new IllegalStateException("can not instantiated entity : " + this.entityClass, e);
+        }
+    }
 }

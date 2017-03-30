@@ -18,6 +18,15 @@ public abstract class BaseTreeableServiceImpl<E extends BaseEntity<ID> & Treeabl
         extends BaseServiceImpl<E, ID> implements BaseTreeableService<E, ID> {
 
     @Override
+    public E getRoot() {
+        E entity = newEntity();
+        entity.setId((ID) Integer.valueOf(0));
+        entity.setParentIds("");
+        entity.setName("全部");
+        return null;
+    }
+
+    @Override
     public ID appendChild(E parent, E child) {
         if (parent == null) {
             parent = getRoot();
@@ -166,4 +175,5 @@ public abstract class BaseTreeableServiceImpl<E extends BaseEntity<ID> & Treeabl
         String newSourceChildrenParentIds = source.makeSelfAsNewParentIds();
         return updateChildrenParentIds(newSourceChildrenParentIds, oldSourceChildrenParentIds);
     }
+
 }
