@@ -36,7 +36,7 @@ public class QueryBusinessOrder {
     private String sortFiled;//排序字段
     private int sortType;//排序方向，0：正序 1：倒序
     //订单状态  订单状态：-2：报价失败，-1：订单取消  0：报价中 1：已转化成订单 2：数据已上报到NC，3：已签约
-    private String orderStatus;
+    private String status;
     public String getCustomerId() {
         return customerId;
     }
@@ -121,12 +121,12 @@ public class QueryBusinessOrder {
         this.endTime = endTime;
     }
 
-    public String getOrderStatus() {
-        return orderStatus;
+    public String getStatus() {
+        return status;
     }
 
-    public void setOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getCustomerName() {

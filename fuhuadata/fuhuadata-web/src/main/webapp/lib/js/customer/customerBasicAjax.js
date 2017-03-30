@@ -9,24 +9,24 @@
 function customerBasicInfo(result){
     var getData = result;
     // console.log(getData);
+
     //客户基本信息
     $('[name="customerId"]').val(getData.customerId);
-    $('#fullName').val(getData.fullName);
+    $('[name="fullName"]').val(getData.fullName);
     $('#shortName').val(getData.shortName);
-    // $('#areaId').val(getData.areaId);
-    // $('#countryId').val(getData.countryId);
-    // $('#area').val(getData.area);
-    // $('#country').val(getData.country);
-
     var areaId = $('#areaId');
     var countryId = $('#countryId');
+
     //获取国家树数据
     var areaData =  getAreaData();
+
     //给地区下拉框赋值
     areaId.val(getData.areaId);
     var areaIdVal = areaId.val();
+
     //根据地区下拉框赋值创建国家下拉框
     creatCountrySelected(areaData,areaIdVal,countryId);
+
     //给国家下拉框赋值
     countryId.val(getData.countryId);
 

@@ -4,16 +4,22 @@
 
 $(function () {
 
-    //获取地区和国家数据
-    var areaData = getAreaData();
+    //创建面包屑导航
+    $('#location').append(createCrumbsD());
+
+    //设置title标题
+    var title = $('#pTitle').text()+'——'+$('#sTitle').text();
+    $('#hTitle').text(iGetInnerText(title));
+
     //创建地区下拉框
+    var areaData = getAreaData();
     creatAreaSelected(areaData,$('#areaId'));
     $(document).on('change.screen','#areaId',function () {
         var areaId = $('#areaId');
         var countryId = $('#countryId');
-        //取得地区下拉框的值
-        var areaIdVal = areaId.val();
+
         //根据地区下拉框赋值创建国家下拉框
+        var areaIdVal = areaId.val();
         creatCountrySelected(areaData,areaIdVal,countryId);
     });
 
