@@ -18,7 +18,7 @@ public class QueryBusinessOrder {
     private Integer customerLevel;//客户类型
     private String enterpriseNature;//企业性质
     private String orderProduct;//订单产品
-    private BigDecimal amountPayable;//订单总价
+    private BigDecimal amountPayable;//合同总价
     private BigDecimal floorPrice;//合同成本价
     private String saleOrganizationId;//销售组织id
     private String saleOrganizationName;//销售组织name

@@ -3,9 +3,12 @@
  */
 
 $(document).ready(function(){
-    getData(basePath + '','POST',GetRequest(),businessopportunityinfo);
+    getData(basePath + '/businessInfo/updateBusinessInfoById','POST',GetRequest(),businessopportunityinfo);
 })
 
 function businessopportunityinfo(result) {
+    var ResultData = result.data;
+    console.log(ResultData);
+
 
 }

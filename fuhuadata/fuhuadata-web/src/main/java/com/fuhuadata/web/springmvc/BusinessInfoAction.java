@@ -112,6 +112,17 @@ public class BusinessInfoAction {
     }
 
     /**
+     * into info
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/intoBusinessOpportunityInfo",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "intoinfo")
+    @ResponseBody
+    public ModelAndView intoBusinessOpportunityInfo(){
+        return new ModelAndView("/salesStatistics/businessOpportunityInfo");
+    }
+    /**
      * get by id
      * @param businessId
      * @return
