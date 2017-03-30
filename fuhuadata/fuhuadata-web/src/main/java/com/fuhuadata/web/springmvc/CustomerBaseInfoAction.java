@@ -141,12 +141,13 @@ public class CustomerBaseInfoAction {
      */
     @RequestMapping(value = "/intoCustomerBaseInfoDetails",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "customerInfo-customerList",methods = "intoCostomerBaseInfoDetails")
-    public ModelAndView intoCustomerBaseInfoDetails(String customerId,String customerType){
+    public ModelAndView intoCustomerBaseInfoDetails(String customerId,String customerType,String fullName){
         if(customerId==null || customerId.trim().equals("")){
             customerId = "";
         }
         ModelAndView model = new ModelAndView("customerInfo/customerBasicInfo").addObject("customerId",customerId)
-                .addObject("customerType",customerType);
+                .addObject("customerType",customerType)
+                .addObject("fullName",fullName);
         return model;
     }
 
