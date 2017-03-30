@@ -5,6 +5,8 @@ import com.fuhuadata.domain.mybatis.Menu;
 import com.fuhuadata.service.mybatis.MenuService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>User: wangjie
  * <p>Date: 3/23/2017
@@ -35,6 +37,16 @@ public class MenuServiceImpl extends BaseTreeableServiceImpl<Menu, Integer>
     @Override
     public void deleteSelfAndChildren(Menu self) {
         ((MenuMapper) baseMapper).deleteSelfAndChildren(self.getId(), self.makeSelfAsNewParentIds());
+    }
+
+    @Override
+    public int updateChildrenParentIds(String newChildrenParentIds, String oldChildrenParentIds) {
+        return getMenuMapper().updateChildrenParentIds(newChildrenParentIds, oldChildrenParentIds);
+    }
+
+    @Override
+    public List<Menu> listSelfAndNextSiblings(Integer parentId, int weight) {
+        return getMenuMapper().listSelfAndNextSiblings(parentId, weight);
     }
 
     private MenuMapper getMenuMapper() {

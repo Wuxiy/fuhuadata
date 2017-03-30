@@ -51,6 +51,12 @@
         </property>
     </bean>
 
+    <!-- 批量操作 sqlSession, 可安全的在 dao 文件中共享 -->
+    <bean id="sqlSessionBatch" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory" />
+        <constructor-arg index="1" value="BATCH" />
+    </bean>
+
 	<!-- 事务配置 -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
