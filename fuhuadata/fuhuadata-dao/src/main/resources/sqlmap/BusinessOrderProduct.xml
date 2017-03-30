@@ -5,522 +5,218 @@
     <typeAlias alias="BusinessOrderProduct" type="com.fuhuadata.domain.BusinessOrderProduct"/>
     <typeAlias alias="QueryBusinessOrderProduct" type="com.fuhuadata.domain.query.QueryBusinessOrderProduct"/>
 
-    <resultMap id="BUSINESSORDERPRODUCT-MAP" class="BusinessOrderProduct" >
-        <result column="id" property="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result column="order_id" property="orderId" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="archive_product_id" property="archiveProductId" jdbcType="INTEGER" javaType="java.lang.String"/>
-        <result column="product_id" property="productId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result column="customer_id" property="customerId" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="name" property="name" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="customer_product_name" property="customerProductName" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="brand" property="brand" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="main_product_amount" property="mainProductAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
-        <result column="main_product_unit" property="mainProductUnit" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result column="sub_product_amount" property="subProductAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
-        <result column="sub_product_unit" property="subProductUnit" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result column="convert_rate" property="convertRate" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
-        <result column="price_type" property="priceType" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result column="advise_price" property="advisePrice" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
-        <result column="purchase_price" property="purchasePrice" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
-        <result column="delivery_time" property="deliveryTime" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
-        <result column="Internal_transport_mode" property="internalTransportMode" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result column="Internal_transport_price" property="internalTransportPrice" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
-        <result column="factory_id" property="factoryId" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="factory_name" property="factoryName" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="straight_employing_way" property="straightEmployingWay" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result column="straight_employing_scale" property="straightEmployingScale" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
-        <result column="straight_employing_standard" property="straightEmployingStandard" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="potential_employing_way" property="potentialEmployingWay" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result column="potential_employing_scale" property="potentialEmployingScale" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
-        <result column="potential_employing_standard" property="potentialEmployingStandard" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="documentary_type" property="documentaryType" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result column="documentary_require" property="documentaryRequire" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="other_documentary_require" property="otherDocumentaryRequire" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="shipping_agent_require" property="shippingAgentRequire" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="package_require" property="packageRequire" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="goods_type" property="goodsType" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result column="mianxiangqi" property="mianxiangqi" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result column="miantuiqi" property="miantuiqi" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result column="cupboard_type" property="cupboardType" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result column="cupboard_per_number" property="cupboardPerNumber" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result column="cupboard_number" property="cupboardNumber" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result column="ocean_freight" property="oceanFreight" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
-        <result column="port_surcharge" property="portSurcharge" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
-        <result column="tax_free" property="taxFree" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
-        <result column="gross_margin" property="grossMargin" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
-        <result column="other_cost" property="otherCost" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
-        <result column="min_price" property="minPrice" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
-        <result column="contract_price" property="contractPrice" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
-        <result column="transform_state" property="transformState" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result column="composition_cost" property="compositionCost" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="pakage_other_requirement" property="pakageOtherRequirement" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="additional_price" property="additionalPrice" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
-        <result column="consumption" property="consumption" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
-        <result column="img_info" property="imgInfo" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="pakage_info" property="pakageInfo" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="material_info" property="materialInfo" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="create_user_id" property="createUserId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result column="create_user_name" property="createUserName" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="lastmodify_user_id" property="lastmodifyUserId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result column="lastmodify_user_name" property="lastmodifyUserName" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
-        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
-    </resultMap>
+    <insert id="insertBasic" parameterClass="BusinessOrderProduct">
+        insert into business_order_product(
+            order_id,archive_product_id,product_id,customs_clearance_id,customs_clearance_name,customer_id,name,
+            customer_product_name,brand,main_product_amount,main_product_unit,sub_product_amount,sub_product_unit,
+            convert_rate,price_type,advise_price,purchase_price,delivery_time,factory_id,factory_name,straight_employing_way,
+            straight_employing_scale,straight_employing_standard,potential_employing_way,potential_employing_scale,potential_employing_standard,
+            tax_type,tax_free,other_cost,composition_cost
+        )
+        values(
+        #orderId#,#archiveProductId#,#productId#,#customsClearanceId#,#customsClearanceName#,#customerId#,#name#,
+        #customerProductName#,#brand#,#mainProductAmount#,#mainProductUnit#,#subProductAmount#,#sub_ProductUnit#,
+        #convertRate#,#priceType#,#advisePrice#,#purchasePrice#,#deliveryTime#,#factoryId#,#factoryName#,#straightEmployingWay#,
+        #straightEmployingScale#,#straightEmployingStandard#,#potentialEmployingWay#,#potentialEmployingScale#,#potentialEmployingStandard#,
+        #taxType#,#taxFree#,#otherCost#,#compositionCost#
+        )
+        <selectKey resultClass="java.lang.Integer" keyProperty="id">
+            SELECT @@IDENTITY AS ID
+        </selectKey>
+    </insert>
 
-    <sql id="Base_Column_List">
-        id, order_id, archive_product_id, product_id, customer_id, name, customer_product_name,
-        brand, main_product_amount, main_product_unit, sub_product_amount, sub_product_unit,
-        convert_rate, price_type, advise_price, purchase_price, delivery_time, Internal_transport_mode,
-        Internal_transport_price, factory_id, factory_name, straight_employing_way, straight_employing_scale,
-        straight_employing_standard, potential_employing_way, potential_employing_scale,
-        potential_employing_standard, documentary_type, documentary_require, other_documentary_require,
-        shipping_agent_require, package_require, goods_type, mianxiangqi, miantuiqi, cupboard_type,
-        cupboard_per_number, cupboard_number, ocean_freight, port_surcharge, tax_free, gross_margin,
-        other_cost, min_price, contract_price, transform_state, composition_cost, pakage_other_requirement,
-        additional_price, consumption, img_info, pakage_info, material_info, create_user_id,
-        create_user_name, lastmodify_user_id, lastmodify_user_name, create_time, modify_time
-    </sql>
-
-    <sql id="PAGE-COMMON">
-
-    </sql>
-
-
-
-
-
-    <update id="abatorgenerated_updateByPrimaryKeySelective" parameterClass="com.fh.model.BusinessOrderProduct" >
-        update fuhuadata..business_order_product
-        <dynamic prepend="set" >
-            <isNotNull prepend="," property="orderId" >
-                order_id = #orderId:VARCHAR#
+    <update id="update" parameterClass="BusinessOrderProduct">
+        update business_order_product
+        <dynamic prepend="set">
+            <isNotNull prepend="," property="orderId">
+                order_id = #orderId#
             </isNotNull>
-            <isNotNull prepend="," property="archiveProductId" >
-                archive_product_id = #archiveProductId:INTEGER#
+            <isNotNull prepend="," property="archiveProductId">
+                archive_product_id = #archiveProductId#
             </isNotNull>
-            <isNotNull prepend="," property="productId" >
-                product_id = #productId:INTEGER#
+            <isNotNull prepend="," property="productId">
+                product_id = #productId#
             </isNotNull>
-            <isNotNull prepend="," property="customerId" >
-                customer_id = #customerId:VARCHAR#
+            <isNotNull prepend="," property="customsClearanceId">
+                customs_clearance_id = #customsClearanceId#
             </isNotNull>
-            <isNotNull prepend="," property="name" >
-                name = #name:VARCHAR#
+            <isNotNull prepend="," property="customsClearanceName">
+                customs_clearance_name = #customsClearanceName#
             </isNotNull>
-            <isNotNull prepend="," property="customerProductName" >
-                customer_product_name = #customerProductName:VARCHAR#
+            <isNotNull prepend="," property="customerId">
+                customer_id = #customerId#
             </isNotNull>
-            <isNotNull prepend="," property="brand" >
-                brand = #brand:VARCHAR#
+            <isNotNull prepend="," property="name">
+                name = #name#
             </isNotNull>
-            <isNotNull prepend="," property="mainProductAmount" >
-                main_product_amount = #mainProductAmount:DECIMAL#
+            <isNotNull prepend="," property="customerProductName">
+                customer_product_name = #customerProductName#
             </isNotNull>
-            <isNotNull prepend="," property="mainProductUnit" >
-                main_product_unit = #mainProductUnit:INTEGER#
+            <isNotNull prepend="," property="brand">
+                brand = #brand#
             </isNotNull>
-            <isNotNull prepend="," property="subProductAmount" >
-                sub_product_amount = #subProductAmount:DECIMAL#
+            <isNotNull prepend="," property="mainProductAmount">
+                main_product_amount = #mainProductAmount#
             </isNotNull>
-            <isNotNull prepend="," property="subProductUnit" >
-                sub_product_unit = #subProductUnit:INTEGER#
+            <isNotNull prepend="," property="mainProductUnit">
+                main_product_unit = #mainProductUnit#
             </isNotNull>
-            <isNotNull prepend="," property="convertRate" >
-                convert_rate = #convertRate:DECIMAL#
+            <isNotNull prepend="," property="subProductAmount">
+                sub_product_amount = #subProductAmount#
             </isNotNull>
-            <isNotNull prepend="," property="priceType" >
-                price_type = #priceType:INTEGER#
+            <isNotNull prepend="," property="subProductUnit">
+                sub_product_unit = #subProductUnit#
             </isNotNull>
-            <isNotNull prepend="," property="advisePrice" >
-                advise_price = #advisePrice:DECIMAL#
+            <isNotNull prepend="," property="convertRate">
+                convert_rate = #convertRate#
             </isNotNull>
-            <isNotNull prepend="," property="purchasePrice" >
-                purchase_price = #purchasePrice:DECIMAL#
+            <isNotNull prepend="," property="priceType">
+                price_type = #priceType#
             </isNotNull>
-            <isNotNull prepend="," property="deliveryTime" >
-                delivery_time = #deliveryTime:TIMESTAMP#
+            <isNotNull prepend="," property="advisePrice">
+                advise_price = #advisePrice#
             </isNotNull>
-            <isNotNull prepend="," property="internalTransportMode" >
-                Internal_transport_mode = #internalTransportMode:INTEGER#
+            <isNotNull prepend="," property="purchasePrice">
+                purchase_price = #purchasePrice#
             </isNotNull>
-            <isNotNull prepend="," property="internalTransportPrice" >
-                Internal_transport_price = #internalTransportPrice:DECIMAL#
+            <isNotNull prepend="," property="deliveryTime">
+                delivery_time = #deliveryTime#
             </isNotNull>
-            <isNotNull prepend="," property="factoryId" >
-                factory_id = #factoryId:VARCHAR#
+            <isNotNull prepend="," property="internalTransportMode">
+                Internal_transport_mode = #internalTransportMode#
             </isNotNull>
-            <isNotNull prepend="," property="factoryName" >
-                factory_name = #factoryName:VARCHAR#
+            <isNotNull prepend="," property="internalTransportPrice">
+                Internal_transport_price = #internalTransportPrice#
             </isNotNull>
-            <isNotNull prepend="," property="straightEmployingWay" >
-                straight_employing_way = #straightEmployingWay:INTEGER#
+            <isNotNull prepend="," property="factoryId">
+                factory_id = #factoryId#
             </isNotNull>
-            <isNotNull prepend="," property="straightEmployingScale" >
-                straight_employing_scale = #straightEmployingScale:DECIMAL#
+            <isNotNull prepend="," property="factoryName">
+                factory_name = #factoryName#
             </isNotNull>
-            <isNotNull prepend="," property="straightEmployingStandard" >
-                straight_employing_standard = #straightEmployingStandard:VARCHAR#
+            <isNotNull prepend="," property="straightEmployingWay">
+                straight_employing_way = #straightEmployingWay#
             </isNotNull>
-            <isNotNull prepend="," property="potentialEmployingWay" >
-                potential_employing_way = #potentialEmployingWay:INTEGER#
+            <isNotNull prepend="," property="straightEmployingScale">
+                straight_employing_scale = #straightEmployingScale#
             </isNotNull>
-            <isNotNull prepend="," property="potentialEmployingScale" >
-                potential_employing_scale = #potentialEmployingScale:DECIMAL#
+            <isNotNull prepend="," property="straightEmployingStandard">
+                straight_employing_standard = #straightEmployingStandard#
             </isNotNull>
-            <isNotNull prepend="," property="potentialEmployingStandard" >
-                potential_employing_standard = #potentialEmployingStandard:VARCHAR#
+            <isNotNull prepend="," property="potentialEmployingWay">
+                potential_employing_way = #potentialEmployingWay#
             </isNotNull>
-            <isNotNull prepend="," property="documentaryType" >
-                documentary_type = #documentaryType:INTEGER#
+            <isNotNull prepend="," property="potentialEmployingScale">
+                potential_employing_scale = #potentialEmployingScale#
             </isNotNull>
-            <isNotNull prepend="," property="documentaryRequire" >
-                documentary_require = #documentaryRequire:VARCHAR#
+            <isNotNull prepend="," property="potentialEmployingStandard">
+                potential_employing_standard = #potentialEmployingStandard#
             </isNotNull>
-            <isNotNull prepend="," property="otherDocumentaryRequire" >
-                other_documentary_require = #otherDocumentaryRequire:VARCHAR#
+            <isNotNull prepend="," property="documentaryType">
+                documentary_type = #documentaryType#
             </isNotNull>
-            <isNotNull prepend="," property="shippingAgentRequire" >
-                shipping_agent_require = #shippingAgentRequire:VARCHAR#
+            <isNotNull prepend="," property="documentaryRequire">
+                documentary_require = #documentaryRequire#
             </isNotNull>
-            <isNotNull prepend="," property="packageRequire" >
-                package_require = #packageRequire:VARCHAR#
+            <isNotNull prepend="," property="otherDocumentaryRequire">
+                other_documentary_require = #otherDocumentaryRequire#
             </isNotNull>
-            <isNotNull prepend="," property="goodsType" >
-                goods_type = #goodsType:INTEGER#
+            <isNotNull prepend="," property="shippingAgentRequire">
+                shipping_agent_require = #shippingAgentRequire#
             </isNotNull>
-            <isNotNull prepend="," property="mianxiangqi" >
-                mianxiangqi = #mianxiangqi:INTEGER#
+            <isNotNull prepend="," property="packageRequire">
+                package_require = #packageRequire#
             </isNotNull>
-            <isNotNull prepend="," property="miantuiqi" >
-                miantuiqi = #miantuiqi:INTEGER#
+            <isNotNull prepend="," property="goodsType">
+                goods_type = #goodsType#
             </isNotNull>
-            <isNotNull prepend="," property="cupboardType" >
-                cupboard_type = #cupboardType:INTEGER#
+            <isNotNull prepend="," property="mianxiangqi">
+                mianxiangqi = #mianxiangqi#
             </isNotNull>
-            <isNotNull prepend="," property="cupboardPerNumber" >
-                cupboard_per_number = #cupboardPerNumber:INTEGER#
+            <isNotNull prepend="," property="miantuiqi">
+                miantuiqi = #miantuiqi#
             </isNotNull>
-            <isNotNull prepend="," property="cupboardNumber" >
-                cupboard_number = #cupboardNumber:INTEGER#
+            <isNotNull prepend="," property="cupboardType">
+                cupboard_type = #cupboardType#
             </isNotNull>
-            <isNotNull prepend="," property="oceanFreight" >
-                ocean_freight = #oceanFreight:DECIMAL#
+            <isNotNull prepend="," property="cupboardPerNumber">
+                cupboard_per_number = #cupboardPerNumber#
             </isNotNull>
-            <isNotNull prepend="," property="portSurcharge" >
-                port_surcharge = #portSurcharge:DECIMAL#
+            <isNotNull prepend="," property="cupboardNumber">
+                cupboard_number = #cupboardNumber#
             </isNotNull>
-            <isNotNull prepend="," property="taxFree" >
-                tax_free = #taxFree:DECIMAL#
+            <isNotNull prepend="," property="oceanFreight">
+                ocean_freight = #oceanFreight#
             </isNotNull>
-            <isNotNull prepend="," property="grossMargin" >
-                gross_margin = #grossMargin:DECIMAL#
+            <isNotNull prepend="," property="portSurcharge">
+                port_surcharge = #portSurcharge#
             </isNotNull>
-            <isNotNull prepend="," property="otherCost" >
-                other_cost = #otherCost:DECIMAL#
+            <isNotNull prepend="," property="taxType">
+                tax_type = #taxType:TINYINT#
             </isNotNull>
-            <isNotNull prepend="," property="minPrice" >
-                min_price = #minPrice:DECIMAL#
+            <isNotNull prepend="," property="taxFree">
+                tax_free = #taxFree#
             </isNotNull>
-            <isNotNull prepend="," property="contractPrice" >
-                contract_price = #contractPrice:DECIMAL#
+            <isNotNull prepend="," property="grossMargin">
+                gross_margin = #grossMargin#
             </isNotNull>
-            <isNotNull prepend="," property="transformState" >
-                transform_state = #transformState:INTEGER#
+            <isNotNull prepend="," property="otherCost">
+                other_cost = #otherCost#
             </isNotNull>
-            <isNotNull prepend="," property="compositionCost" >
-                composition_cost = #compositionCost:VARCHAR#
+            <isNotNull prepend="," property="minPrice">
+                min_price = #minPrice#
             </isNotNull>
-            <isNotNull prepend="," property="pakageOtherRequirement" >
-                pakage_other_requirement = #pakageOtherRequirement:VARCHAR#
+            <isNotNull prepend="," property="contractPrice">
+                contract_price = #contractPrice#
             </isNotNull>
-            <isNotNull prepend="," property="additionalPrice" >
-                additional_price = #additionalPrice:DECIMAL#
+            <isNotNull prepend="," property="transformState">
+                transform_state = #transformState#
             </isNotNull>
-            <isNotNull prepend="," property="consumption" >
-                consumption = #consumption:DECIMAL#
+            <isNotNull prepend="," property="compositionCost">
+                composition_cost = #compositionCost#
             </isNotNull>
-            <isNotNull prepend="," property="imgInfo" >
-                img_info = #imgInfo:VARCHAR#
+            <isNotNull prepend="," property="pakageOtherRequirement">
+                pakage_other_requirement = #pakageOtherRequirement#
             </isNotNull>
-            <isNotNull prepend="," property="pakageInfo" >
-                pakage_info = #pakageInfo:VARCHAR#
+            <isNotNull prepend="," property="additionalPrice">
+                additional_price = #additionalPrice#
             </isNotNull>
-            <isNotNull prepend="," property="materialInfo" >
-                material_info = #materialInfo:VARCHAR#
+            <isNotNull prepend="," property="consumption">
+                consumption = #consumption#
             </isNotNull>
-            <isNotNull prepend="," property="createUserId" >
-                create_user_id = #createUserId:INTEGER#
+            <isNotNull prepend="," property="mainPackingId">
+                main_packing_id = #mainPackingId#
             </isNotNull>
-            <isNotNull prepend="," property="createUserName" >
-                create_user_name = #createUserName:VARCHAR#
+            <isNotNull prepend="," property="imgInfo">
+                img_info = #imgInfo#
             </isNotNull>
-            <isNotNull prepend="," property="lastmodifyUserId" >
-                lastmodify_user_id = #lastmodifyUserId:INTEGER#
+            <isNotNull prepend="," property="pakageInfo">
+                pakage_info = #pakageInfo#
             </isNotNull>
-            <isNotNull prepend="," property="lastmodifyUserName" >
-                lastmodify_user_name = #lastmodifyUserName:VARCHAR#
+            <isNotNull prepend="," property="materialInfo">
+                material_info = #materialInfo#
             </isNotNull>
-            <isNotNull prepend="," property="createTime" >
-                create_time = #createTime:TIMESTAMP#
+            <isNotNull prepend="," property="createUserId">
+                create_user_id = #createUserId#
             </isNotNull>
-            <isNotNull prepend="," property="modifyTime" >
-                modify_time = #modifyTime:TIMESTAMP#
+            <isNotNull prepend="," property="createUserName">
+                create_user_name = #createUserName#
+            </isNotNull>
+            <isNotNull prepend="," property="lastmodifyUserId">
+                lastmodify_user_id = #lastmodifyUserId#
+            </isNotNull>
+            <isNotNull prepend="," property="lastmodifyUserName">
+                lastmodify_user_name = #lastmodifyUserName#
+            </isNotNull>
+            <isNotNull prepend="," property="createTime">
+                create_time = #createTime#
+            </isNotNull>
+            <isNotNull prepend="," property="modifyTime">
+                modify_time = #modifyTime#
             </isNotNull>
         </dynamic>
-        where id = #id:INTEGER#
+        where id = #id#
     </update>
-    <select id="abatorgenerated_countByExample" parameterClass="com.fh.model.BusinessOrderProductExample" resultClass="java.lang.Integer" >
-        select count(*) from fuhuadata..business_order_product
-        <include refid="fuhuadata__business_order_product.abatorgenerated_Example_Where_Clause" />
-    </select>
-    <update id="abatorgenerated_updateByExampleSelective" >
-        update fuhuadata..business_order_product
-        <dynamic prepend="set" >
-            <isNotNull prepend="," property="record.id" >
-                id = #record.id:INTEGER#
-            </isNotNull>
-            <isNotNull prepend="," property="record.orderId" >
-                order_id = #record.orderId:VARCHAR#
-            </isNotNull>
-            <isNotNull prepend="," property="record.archiveProductId" >
-                archive_product_id = #record.archiveProductId:INTEGER#
-            </isNotNull>
-            <isNotNull prepend="," property="record.productId" >
-                product_id = #record.productId:INTEGER#
-            </isNotNull>
-            <isNotNull prepend="," property="record.customerId" >
-                customer_id = #record.customerId:VARCHAR#
-            </isNotNull>
-            <isNotNull prepend="," property="record.name" >
-                name = #record.name:VARCHAR#
-            </isNotNull>
-            <isNotNull prepend="," property="record.customerProductName" >
-                customer_product_name = #record.customerProductName:VARCHAR#
-            </isNotNull>
-            <isNotNull prepend="," property="record.brand" >
-                brand = #record.brand:VARCHAR#
-            </isNotNull>
-            <isNotNull prepend="," property="record.mainProductAmount" >
-                main_product_amount = #record.mainProductAmount:DECIMAL#
-            </isNotNull>
-            <isNotNull prepend="," property="record.mainProductUnit" >
-                main_product_unit = #record.mainProductUnit:INTEGER#
-            </isNotNull>
-            <isNotNull prepend="," property="record.subProductAmount" >
-                sub_product_amount = #record.subProductAmount:DECIMAL#
-            </isNotNull>
-            <isNotNull prepend="," property="record.subProductUnit" >
-                sub_product_unit = #record.subProductUnit:INTEGER#
-            </isNotNull>
-            <isNotNull prepend="," property="record.convertRate" >
-                convert_rate = #record.convertRate:DECIMAL#
-            </isNotNull>
-            <isNotNull prepend="," property="record.priceType" >
-                price_type = #record.priceType:INTEGER#
-            </isNotNull>
-            <isNotNull prepend="," property="record.advisePrice" >
-                advise_price = #record.advisePrice:DECIMAL#
-            </isNotNull>
-            <isNotNull prepend="," property="record.purchasePrice" >
-                purchase_price = #record.purchasePrice:DECIMAL#
-            </isNotNull>
-            <isNotNull prepend="," property="record.deliveryTime" >
-                delivery_time = #record.deliveryTime:TIMESTAMP#
-            </isNotNull>
-            <isNotNull prepend="," property="record.internalTransportMode" >
-                Internal_transport_mode = #record.internalTransportMode:INTEGER#
-            </isNotNull>
-            <isNotNull prepend="," property="record.internalTransportPrice" >
-                Internal_transport_price = #record.internalTransportPrice:DECIMAL#
-            </isNotNull>
-            <isNotNull prepend="," property="record.factoryId" >
-                factory_id = #record.factoryId:VARCHAR#
-            </isNotNull>
-            <isNotNull prepend="," property="record.factoryName" >
-                factory_name = #record.factoryName:VARCHAR#
-            </isNotNull>
-            <isNotNull prepend="," property="record.straightEmployingWay" >
-                straight_employing_way = #record.straightEmployingWay:INTEGER#
-            </isNotNull>
-            <isNotNull prepend="," property="record.straightEmployingScale" >
-                straight_employing_scale = #record.straightEmployingScale:DECIMAL#
-            </isNotNull>
-            <isNotNull prepend="," property="record.straightEmployingStandard" >
-                straight_employing_standard = #record.straightEmployingStandard:VARCHAR#
-            </isNotNull>
-            <isNotNull prepend="," property="record.potentialEmployingWay" >
-                potential_employing_way = #record.potentialEmployingWay:INTEGER#
-            </isNotNull>
-            <isNotNull prepend="," property="record.potentialEmployingScale" >
-                potential_employing_scale = #record.potentialEmployingScale:DECIMAL#
-            </isNotNull>
-            <isNotNull prepend="," property="record.potentialEmployingStandard" >
-                potential_employing_standard = #record.potentialEmployingStandard:VARCHAR#
-            </isNotNull>
-            <isNotNull prepend="," property="record.documentaryType" >
-                documentary_type = #record.documentaryType:INTEGER#
-            </isNotNull>
-            <isNotNull prepend="," property="record.documentaryRequire" >
-                documentary_require = #record.documentaryRequire:VARCHAR#
-            </isNotNull>
-            <isNotNull prepend="," property="record.otherDocumentaryRequire" >
-                other_documentary_require = #record.otherDocumentaryRequire:VARCHAR#
-            </isNotNull>
-            <isNotNull prepend="," property="record.shippingAgentRequire" >
-                shipping_agent_require = #record.shippingAgentRequire:VARCHAR#
-            </isNotNull>
-            <isNotNull prepend="," property="record.packageRequire" >
-                package_require = #record.packageRequire:VARCHAR#
-            </isNotNull>
-            <isNotNull prepend="," property="record.goodsType" >
-                goods_type = #record.goodsType:INTEGER#
-            </isNotNull>
-            <isNotNull prepend="," property="record.mianxiangqi" >
-                mianxiangqi = #record.mianxiangqi:INTEGER#
-            </isNotNull>
-            <isNotNull prepend="," property="record.miantuiqi" >
-                miantuiqi = #record.miantuiqi:INTEGER#
-            </isNotNull>
-            <isNotNull prepend="," property="record.cupboardType" >
-                cupboard_type = #record.cupboardType:INTEGER#
-            </isNotNull>
-            <isNotNull prepend="," property="record.cupboardPerNumber" >
-                cupboard_per_number = #record.cupboardPerNumber:INTEGER#
-            </isNotNull>
-            <isNotNull prepend="," property="record.cupboardNumber" >
-                cupboard_number = #record.cupboardNumber:INTEGER#
-            </isNotNull>
-            <isNotNull prepend="," property="record.oceanFreight" >
-                ocean_freight = #record.oceanFreight:DECIMAL#
-            </isNotNull>
-            <isNotNull prepend="," property="record.portSurcharge" >
-                port_surcharge = #record.portSurcharge:DECIMAL#
-            </isNotNull>
-            <isNotNull prepend="," property="record.taxFree" >
-                tax_free = #record.taxFree:DECIMAL#
-            </isNotNull>
-            <isNotNull prepend="," property="record.grossMargin" >
-                gross_margin = #record.grossMargin:DECIMAL#
-            </isNotNull>
-            <isNotNull prepend="," property="record.otherCost" >
-                other_cost = #record.otherCost:DECIMAL#
-            </isNotNull>
-            <isNotNull prepend="," property="record.minPrice" >
-                min_price = #record.minPrice:DECIMAL#
-            </isNotNull>
-            <isNotNull prepend="," property="record.contractPrice" >
-                contract_price = #record.contractPrice:DECIMAL#
-            </isNotNull>
-            <isNotNull prepend="," property="record.transformState" >
-                transform_state = #record.transformState:INTEGER#
-            </isNotNull>
-            <isNotNull prepend="," property="record.compositionCost" >
-                composition_cost = #record.compositionCost:VARCHAR#
-            </isNotNull>
-            <isNotNull prepend="," property="record.pakageOtherRequirement" >
-                pakage_other_requirement = #record.pakageOtherRequirement:VARCHAR#
-            </isNotNull>
-            <isNotNull prepend="," property="record.additionalPrice" >
-                additional_price = #record.additionalPrice:DECIMAL#
-            </isNotNull>
-            <isNotNull prepend="," property="record.consumption" >
-                consumption = #record.consumption:DECIMAL#
-            </isNotNull>
-            <isNotNull prepend="," property="record.imgInfo" >
-                img_info = #record.imgInfo:VARCHAR#
-            </isNotNull>
-            <isNotNull prepend="," property="record.pakageInfo" >
-                pakage_info = #record.pakageInfo:VARCHAR#
-            </isNotNull>
-            <isNotNull prepend="," property="record.materialInfo" >
-                material_info = #record.materialInfo:VARCHAR#
-            </isNotNull>
-            <isNotNull prepend="," property="record.createUserId" >
-                create_user_id = #record.createUserId:INTEGER#
-            </isNotNull>
-            <isNotNull prepend="," property="record.createUserName" >
-                create_user_name = #record.createUserName:VARCHAR#
-            </isNotNull>
-            <isNotNull prepend="," property="record.lastmodifyUserId" >
-                lastmodify_user_id = #record.lastmodifyUserId:INTEGER#
-            </isNotNull>
-            <isNotNull prepend="," property="record.lastmodifyUserName" >
-                lastmodify_user_name = #record.lastmodifyUserName:VARCHAR#
-            </isNotNull>
-            <isNotNull prepend="," property="record.createTime" >
-                create_time = #record.createTime:TIMESTAMP#
-            </isNotNull>
-            <isNotNull prepend="," property="record.modifyTime" >
-                modify_time = #record.modifyTime:TIMESTAMP#
-            </isNotNull>
-        </dynamic>
-        <isParameterPresent >
-            <include refid="fuhuadata__business_order_product.abatorgenerated_Example_Where_Clause" />
-        </isParameterPresent>
-    </update>
-    <update id="abatorgenerated_updateByExample" >
-        update fuhuadata..business_order_product
-        set id = #record.id:INTEGER#,
-        order_id = #record.orderId:VARCHAR#,
-        archive_product_id = #record.archiveProductId:INTEGER#,
-        product_id = #record.productId:INTEGER#,
-        customer_id = #record.customerId:VARCHAR#,
-        name = #record.name:VARCHAR#,
-        customer_product_name = #record.customerProductName:VARCHAR#,
-        brand = #record.brand:VARCHAR#,
-        main_product_amount = #record.mainProductAmount:DECIMAL#,
-        main_product_unit = #record.mainProductUnit:INTEGER#,
-        sub_product_amount = #record.subProductAmount:DECIMAL#,
-        sub_product_unit = #record.subProductUnit:INTEGER#,
-        convert_rate = #record.convertRate:DECIMAL#,
-        price_type = #record.priceType:INTEGER#,
-        advise_price = #record.advisePrice:DECIMAL#,
-        purchase_price = #record.purchasePrice:DECIMAL#,
-        delivery_time = #record.deliveryTime:TIMESTAMP#,
-        Internal_transport_mode = #record.internalTransportMode:INTEGER#,
-        Internal_transport_price = #record.internalTransportPrice:DECIMAL#,
-        factory_id = #record.factoryId:VARCHAR#,
-        factory_name = #record.factoryName:VARCHAR#,
-        straight_employing_way = #record.straightEmployingWay:INTEGER#,
-        straight_employing_scale = #record.straightEmployingScale:DECIMAL#,
-        straight_employing_standard = #record.straightEmployingStandard:VARCHAR#,
-        potential_employing_way = #record.potentialEmployingWay:INTEGER#,
-        potential_employing_scale = #record.potentialEmployingScale:DECIMAL#,
-        potential_employing_standard = #record.potentialEmployingStandard:VARCHAR#,
-        documentary_type = #record.documentaryType:INTEGER#,
-        documentary_require = #record.documentaryRequire:VARCHAR#,
-        other_documentary_require = #record.otherDocumentaryRequire:VARCHAR#,
-        shipping_agent_require = #record.shippingAgentRequire:VARCHAR#,
-        package_require = #record.packageRequire:VARCHAR#,
-        goods_type = #record.goodsType:INTEGER#,
-        mianxiangqi = #record.mianxiangqi:INTEGER#,
-        miantuiqi = #record.miantuiqi:INTEGER#,
-        cupboard_type = #record.cupboardType:INTEGER#,
-        cupboard_per_number = #record.cupboardPerNumber:INTEGER#,
-        cupboard_number = #record.cupboardNumber:INTEGER#,
-        ocean_freight = #record.oceanFreight:DECIMAL#,
-        port_surcharge = #record.portSurcharge:DECIMAL#,
-        tax_free = #record.taxFree:DECIMAL#,
-        gross_margin = #record.grossMargin:DECIMAL#,
-        other_cost = #record.otherCost:DECIMAL#,
-        min_price = #record.minPrice:DECIMAL#,
-        contract_price = #record.contractPrice:DECIMAL#,
-        transform_state = #record.transformState:INTEGER#,
-        composition_cost = #record.compositionCost:VARCHAR#,
-        pakage_other_requirement = #record.pakageOtherRequirement:VARCHAR#,
-        additional_price = #record.additionalPrice:DECIMAL#,
-        consumption = #record.consumption:DECIMAL#,
-        img_info = #record.imgInfo:VARCHAR#,
-        pakage_info = #record.pakageInfo:VARCHAR#,
-        material_info = #record.materialInfo:VARCHAR#,
-        create_user_id = #record.createUserId:INTEGER#,
-        create_user_name = #record.createUserName:VARCHAR#,
-        lastmodify_user_id = #record.lastmodifyUserId:INTEGER#,
-        lastmodify_user_name = #record.lastmodifyUserName:VARCHAR#,
-        create_time = #record.createTime:TIMESTAMP#,
-        modify_time = #record.modifyTime:TIMESTAMP#
-        <isParameterPresent >
-            <include refid="fuhuadata__business_order_product.abatorgenerated_Example_Where_Clause" />
-        </isParameterPresent>
-    </update>
+    
+
 </sqlMap>

@@ -247,7 +247,6 @@
 						<isNotEmpty prepend=", " property="customerLevel">customer_level=#customerLevel#</isNotEmpty>
 						<isNotEmpty prepend=", " property="customerType">customer_type=#customerType#</isNotEmpty>
 						<isNotEmpty prepend=", " property="customerCompletion">customer_completion=#customerCompletion#</isNotEmpty>
-
 						<isNotEmpty prepend=", " property="majorCompetitors">major_competitors = #majorCompetitors#</isNotEmpty>
 						<isNotEmpty prepend=", " property="opportunitySource">opportunity_source=#opportunitySource#</isNotEmpty>
 						<isNotEmpty prepend=", " property="opportunityDescrible">opportunity_describle=#opportunityDescrible#</isNotEmpty>
@@ -258,7 +257,6 @@
 						<isNotEmpty prepend=", " property="lossReason">loss_reason=#lossReason#</isNotEmpty>
 						<isNotEmpty prepend=", " property="qualificationsFileUrl">qualifications_file_url=#qualificationsFileUrl#</isNotEmpty>
 						<isNotEmpty prepend=", " property="factoryLocation">factory_location=#factoryLocation#</isNotEmpty>
-
 						<isNotEmpty prepend=", " property="createUserId">create_user_id=#createUserId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="createUserName">create_user_name=#createUserName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="lastmodifyUserId">lastmodify_user_id=#lastmodifyUserId#</isNotEmpty>
@@ -269,7 +267,6 @@
 						<isNotEmpty prepend=", " property="loyalty">loyalty=#loyalty#</isNotEmpty>
 						<isNotEmpty prepend=", " property="startCooperationTime">start_cooperation_time=#startCooperationTime#</isNotEmpty>
 						<isNotEmpty prepend=", " property="cooperationDuration">cooperation_duration=#cooperationDuration#</isNotEmpty>
-
 						<isNotEmpty prepend=", " property="purchasingSeason">purchasing_season=#purchasingSeason#</isNotEmpty>
 						<isNotEmpty prepend=", " property="activePeriod">active_period=#activePeriod#</isNotEmpty>
 						<isNotEmpty prepend=", " property="isFuhuaExclusive">is_fuhua_exclusive=#isFuhuaExclusive#</isNotEmpty>
