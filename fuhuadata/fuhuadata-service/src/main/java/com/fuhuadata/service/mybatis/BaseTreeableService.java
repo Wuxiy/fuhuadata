@@ -22,13 +22,23 @@ public interface BaseTreeableService<E extends BaseEntity<ID> & Treeable<ID>, ID
     E getRoot();
 
     /**
+     * 获取下一个菜单顺序
+     * @param parentId
+     * @return
+     */
+    int countNextIndex(ID parentId);
+
+    /**
      * 新建子节点
-     *
-     * @param parent
+     *  @param parent
      * @param child
      */
-    int appendChild(E parent, E child);
+    ID appendChild(E parent, E child);
 
+    /**
+     * 删除节点，同时删除子节点
+     * @param self
+     */
     void deleteSelfAndChildren(E self);
 
     /**
@@ -48,5 +58,31 @@ public interface BaseTreeableService<E extends BaseEntity<ID> & Treeable<ID>, ID
      * @return
      */
     List<E> findChildren(List<E> parents, Example example);
+
+    /**
+     * 移动节点
+     * @param source
+     * @param target
+     * @param moveType
+     */
+    void move(E source, E target, String moveType);
+
+    /**
+     * 移动节点
+     * @param sourceId
+     * @param targetId
+     * @param moveType
+     */
+    void move(ID sourceId, ID targetId, String moveType);
+
+    /**
+     * 更新
+     * @param newChildrenParentIds
+     * @param oldChildrenParentIds
+     * @return
+     */
+    int updateChildrenParentIds(String newChildrenParentIds, String oldChildrenParentIds);
+
+    List<E> listSelfAndNextSiblings(ID parentId, int weight);
 
 }

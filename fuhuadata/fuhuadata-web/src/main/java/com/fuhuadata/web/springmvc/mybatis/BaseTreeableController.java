@@ -39,7 +39,7 @@ public abstract class BaseTreeableController<E extends BaseEntity<ID> & Treeable
     @RequestMapping(value = "ajax/load", method = RequestMethod.GET)
     @ResponseBody
     public ResultPojo load(HttpServletRequest request,
-                           @RequestParam(value = "async", defaultValue = "true" ) boolean async,
+                           @RequestParam(value = "async", defaultValue = "false" ) boolean async,
                            @RequestParam(value = "searchName", required = false) String searchName,
                            @RequestParam(value = "parentId", required = false) ID parentId) {
 
@@ -106,6 +106,16 @@ public abstract class BaseTreeableController<E extends BaseEntity<ID> & Treeable
         return result.getResultPojo();
     }
 
+    @RequestMapping(value = "/ajax/next", method = RequestMethod.GET)
+    @ResponseBody
+    public ResultPojo ajaxCountNextIndex(@RequestParam(value = "parentId") ID parentId) {
+        int nextIndex = baseService.countNextIndex(parentId);
+
+        Result<Integer> result = new Result<Integer>(true);
+        result.addDefaultModel(nextIndex);
+        return result.getResultPojo();
+    }
+
     @RequestMapping(value = "ajax/{id}", method = RequestMethod.GET)
     @ResponseBody
     @SystemLogAnnotation(module = "baseTreeable",methods = "ajaxGetById")
@@ -132,7 +142,7 @@ public abstract class BaseTreeableController<E extends BaseEntity<ID> & Treeable
     @RequestMapping(value = {"/ajax/add", "/ajax/update"}, method = RequestMethod.POST)
     @ResponseBody
     public ResultPojo ajaxAddChild(E node) {
-        Result<Integer> result = new Result<Integer>(true);
+        Result<ID> result = new Result<ID>(true);
 
         if (node == null) {
             result.setSuccess(false);
@@ -143,9 +153,18 @@ public abstract class BaseTreeableController<E extends BaseEntity<ID> & Treeable
         ID parentId = node.getParentId();
         E parent = baseService.get(parentId);
 
-        int id = baseService.appendChild(parent, node);
+        ID id = baseService.appendChild(parent, node);
 
         result.addDefaultModel(id);
+        return result.getResultPojo();
+    }
+
+    @RequestMapping("/ajax/move")
+    @ResponseBody
+    public ResultPojo ajaxMove(@RequestParam("sid") ID sourceId, @RequestParam("tid") ID targetId) {
+        baseService.move(sourceId, targetId, "prev");
+
+        Result<Boolean> result = new Result<Boolean>(true);
         return result.getResultPojo();
     }
 

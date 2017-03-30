@@ -27,24 +27,28 @@
                             <div class="form-horizontal">
                                 <div class="form-group ">
                                     <label class="col-xs-1 control-label" lang="zh">商机名称<sup class="not-null">*</sup></label>
-                                    <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                    <div class="col-xs-2">
+                                        <input class="form-control" type="text" value="" id="businessName" disabled />
+                                    </div>
                                     <label class="col-xs-1 control-label" lang="zh">商机编号</label>
-                                    <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                    <div class="col-xs-2">
+                                        <input class="form-control" type="text" value="" id="businessId" disabled />
+                                    </div>
                                     <label class="col-xs-1 control-label" lang="zh">商机来源<sup class="not-null">*</sup></label>
                                     <div class="col-xs-2">
-                                        <select class="form-control" disabled>
-                                            <option value="" selected lang="zh">展会</option>
-                                            <option value="" lang="zh">门户网站</option>
-                                            <option value="" lang="zh">农药店考察</option>
-                                            <option value="" lang="zh">客户介绍</option>
-                                            <option value="" lang="zh">主动联系</option>
-                                            <option value="" lang="zh">其他</option>
+                                        <select class="form-control" id="businessFrom" disabled>
+                                            <option value="0" selected lang="zh">展会</option>
+                                            <option value="1" lang="zh">门户网站</option>
+                                            <option value="2" lang="zh">农药店考察</option>
+                                            <option value="3" lang="zh">客户介绍</option>
+                                            <option value="4" lang="zh">主动联系</option>
+                                            <option value="5" lang="zh">其他</option>
                                         </select>
                                     </div>
                                     <label class="col-xs-1 control-label" lang="zh">商机状态</label>
                                     <div class="col-xs-2">
-                                        <select class="form-control" disabled>
-                                            <option value="" selected lang="zh">正常</option>
+                                        <select class="form-control" id="businessState" disabled>
+                                            <option value="" lang="zh">正常</option>
                                             <option value="" lang="zh">失败</option>
                                             <option value="" lang="zh">报价待转换</option>
                                             <option value="" lang="zh">转化中</option>
@@ -54,24 +58,28 @@
                                 </div>
                                 <div class="form-group ">
                                     <label class="col-xs-1 control-label" lang="zh">客户名称<sup class="not-null">*</sup></label>
-                                    <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                    <div class="col-xs-2">
+                                        <input class="form-control" type="text" value="" id="customerName" disabled />
+                                    </div>
                                     <label class="col-xs-1 control-label" lang="zh">企业性质</label>
                                     <div class="col-xs-2">
-                                        <select class="form-control" disabled>
-                                            <option value="" selected lang="zh">工厂</option>
-                                            <option value="" lang="zh">分销商</option>
-                                            <option value="" lang="zh">经销商</option>
+                                        <select class="form-control" id="enterpriseNature" disabled>
+                                            <option value="1" selected lang="zh">工厂</option>
+                                            <option value="2" lang="zh">分销商</option>
+                                            <option value="3" lang="zh">经销商</option>
+                                            <option value="4" lang="zh">终端客户</option>
+                                            <option value="5" lang="zh">其他</option>
                                         </select>
                                     </div>
                                     <label class="col-xs-1 control-label" lang="zh">客户类型</label>
                                     <div class="col-xs-2">
-                                        <select class="form-control" disabled>
+                                        <select class="form-control" id="customerLevel" disabled>
                                             <option value="" lang="zh">潜在客户</option>
-                                            <option value="" lang="zh">风险客户</option>
-                                            <option value="" lang="zh">一般客户</option>
-                                            <option value="" lang="zh">重要客户</option>
-                                            <option value="" lang="zh">大客户</option>
-                                            <option value="" selected lang="zh">战略客户</option>
+                                            <option value="5" lang="zh">风险客户</option>
+                                            <option value="4" lang="zh">一般客户</option>
+                                            <option value="3" lang="zh">重要客户</option>
+                                            <option value="2" lang="zh">大客户</option>
+                                            <option value="1" selected lang="zh">战略客户</option>
                                         </select>
                                     </div>
                                     <label class="col-xs-1 control-label" lang="zh">信用评级</label>
@@ -86,25 +94,41 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="col-xs-1 control-label" lang="zh">客户国别</label>
-                                    <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                    <div class="col-xs-2">
+                                        <input class="form-control" type="text" value="" disabled />
+                                    </div>
                                     <label class="col-xs-1 control-label" lang="zh">联系人</label>
-                                    <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                    <div class="col-xs-2">
+                                        <input class="form-control" type="text" value="" disabled />
+                                    </div>
                                     <label class="col-xs-1 control-label" lang="zh">联系电话</label>
-                                    <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                    <div class="col-xs-2">
+                                        <input class="form-control" type="text" value="" disabled />
+                                    </div>
                                     <label class="col-xs-1 control-label" lang="zh">邮箱</label>
-                                    <div class="col-xs-2"><input class="form-control" type="email" value="" disabled /></div>
+                                    <div class="col-xs-2">
+                                        <input class="form-control" type="email" value="" disabled />
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-xs-1 control-label" lang="zh">意向产品1</label>
-                                    <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                    <div class="col-xs-2">
+                                        <input class="form-control" type="text" value="" disabled />
+                                    </div>
                                     <label class="col-xs-1 control-label" lang="zh">预计采购量1</label>
-                                    <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                    <div class="col-xs-2">
+                                        <input class="form-control" type="text" value="" disabled />
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-xs-1 control-label" lang="zh">意向产品2</label>
-                                    <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                    <div class="col-xs-2">
+                                        <input class="form-control" type="text" value="" disabled />
+                                    </div>
                                     <label class="col-xs-1 control-label" lang="zh">预计采购量2</label>
-                                    <div class="col-xs-2"><input class="form-control" type="text" value="" disabled /></div>
+                                    <div class="col-xs-2">
+                                        <input class="form-control" type="text" value="" disabled />
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-xs-1 control-label" lang="zh">预计收益</label>
@@ -136,11 +160,17 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="col-xs-1 control-label" lang="zh">业务员</label>
-                                    <div class="col-xs-2"><input type="text" class="form-control" value="" disabled/></div>
+                                    <div class="col-xs-2">
+                                        <input type="text" class="form-control" value="" disabled/>
+                                    </div>
                                     <label for="" class="col-xs-1 control-label" lang="zh">创建人</label>
-                                    <div class="col-xs-2"><input type="text" class="form-control" value="" disabled/></div>
+                                    <div class="col-xs-2">
+                                        <input type="text" class="form-control" value="" disabled/>
+                                    </div>
                                     <label for="" class="col-xs-1 control-label" lang="zh">创建日期</label>
-                                    <div class="col-xs-2"><input type="data" class="form-control" value="" disabled/></div>
+                                    <div class="col-xs-2">
+                                        <input type="data" class="form-control" value="" disabled/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -194,4 +224,15 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerAnotherNamer.js"></script>
+<script type="text/javascript" lang="javascript">
+    $(document).ready(function(){
+        getData(basePath + '','POST',GetRequest(),businessInfo);
+    })
+
+    function businessInfo(result) {
+        var ResultData = result.data;
+        console.log(ResultData);
+
+
+    }
+</script>

@@ -51,6 +51,9 @@ public class BusinessInfoAction {
     @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "queryBusinessInfoPageList")
     @ResponseBody
     public ResultPojo queryBusinessInfoPageList(@RequestBody BusinessInfoVO businessInfoVO){
+        if(businessInfoVO.getCustomerName()==null||"".equals(businessInfoVO.getCustomerName())){
+            businessInfoVO.setCustomerName(null);
+        }
         try{
             Result<List<BusinessInfoVO>> result = businessInfoService.getBusinessInfoByPage(businessInfoVO);
             return result.getResultPojo();
@@ -85,7 +88,8 @@ public class BusinessInfoAction {
     @RequestMapping(value="/AddBusinessInfo",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "intoAdd")
     public ModelAndView intoAddBusinessInfo(){
-        return new ModelAndView("/businessInfoAdd").addObject("businessId","sj000001");
+        String businessId = bCodeService.getNextBusinessCode();
+        return new ModelAndView("/businessInfoAdd").addObject("businessId",businessId);
     }
 
 

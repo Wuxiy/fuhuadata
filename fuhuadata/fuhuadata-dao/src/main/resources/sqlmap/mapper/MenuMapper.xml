@@ -7,6 +7,7 @@
         -->
         <id column="menu_id" jdbcType="INTEGER" property="menuId"/>
         <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
+        <result column="parent_name" jdbcType="VARCHAR" property="parentName"/>
         <result column="parent_ids" jdbcType="VARCHAR" property="parentIds"/>
         <result column="menu_name" jdbcType="VARCHAR" property="name"/>
         <result column="url" jdbcType="VARCHAR" property="url"/>
@@ -15,7 +16,44 @@
         <result column="order_index" jdbcType="INTEGER" property="orderIndex"/>
     </resultMap>
 
+    <sql id="menuColumns">
+        m.menu_id,
+        m.menu_name,
+        m.parent_id,
+        (SELECT p.menu_name FROM p_menu p WHERE p.menu_id=m.parent_id) parent_name,
+        m.parent_ids,
+        m.url,
+        m.backup,
+        m.enablestate,
+        m.order_index
+    </sql>
+
+    <select id="getMenu" resultMap="BaseResultMap">
+        SELECT
+        <include refid="menuColumns"/>
+        FROM p_menu m
+        WHERE m.menu_id=#{id}
+    </select>
+
     <delete id="deleteSelfAndChildren">
         DELETE FROM p_menu WHERE parent_id=#{parentId} OR parent_ids LIKE CONCAT(#{parents}, '%')
     </delete>
+
+    <select id="countNextIndex" resultType="java.lang.Integer">
+        select case when max(order_index) is null then 1 else (max(order_index) + 1) end
+        from p_menu where parent_id = #{parentId}
+    </select>
+
+    <update id="updateChildrenParentIds">
+        UPDATE p_menu SET parent_ids=(#{newParentIds} || SUBSTRING(parent_ids, LENGTH(#{oldParentIds})+1))
+        WHERE parent_ids LIKE CONCAT(#{oldParentIds}, '%')
+    </update>
+
+    <select id="listSelfAndNextSiblings" resultMap="BaseResultMap">
+        SELECT
+        <include refid="menuColumns"/>
+        FROM p_menu m
+        WHERE m.parent_id = #{parentId} AND m.order_index &gt;= #{weight}
+        ORDER BY m.order_index ASC
+    </select>
 </mapper>

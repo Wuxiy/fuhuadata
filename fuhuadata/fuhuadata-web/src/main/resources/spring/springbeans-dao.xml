@@ -51,6 +51,12 @@
         </property>
     </bean>
 
+    <!-- 批量操作 sqlSession, 可安全的在 dao 文件中共享 -->
+    <bean id="sqlSessionBatch" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory" />
+        <constructor-arg index="1" value="BATCH" />
+    </bean>
+
 	<!-- 事务配置 -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -95,4 +101,5 @@
 	<bean id="customerSubcompanyInfoDao" class="com.fuhuadata.dao.impl.CustomerSubcompanyInfoDaoImpl"/>
 	<bean id="businessInfoDao" class="com.fuhuadata.dao.impl.BusinessInfoDaoImpl"/>
 	<bean id="businessRecordDao" class="com.fuhuadata.dao.impl.BusinessRecordDaoImpl"/>
+	<bean id="businessOrderDao" class="com.fuhuadata.dao.impl.BusinessOrderDaoImpl"/>
 </beans>

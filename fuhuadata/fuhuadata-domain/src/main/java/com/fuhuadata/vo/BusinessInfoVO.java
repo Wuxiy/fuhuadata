@@ -14,6 +14,11 @@ public class BusinessInfoVO {
     private int startRow;
     private int pageSize;
 
+    /**地区id**/
+    private String areaId;
+    /**大区分类id**/
+    private String areaClassId;
+
     private String  businessId;
     private String businessName;
 
@@ -141,5 +146,21 @@ public class BusinessInfoVO {
 
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
+    }
+
+    public String getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(String areaId) {
+        this.areaId = areaId;
+    }
+
+    public String getAreaClassId() {
+        return areaClassId;
+    }
+
+    public void setAreaClassId(String areaClassId) {
+        this.areaClassId = areaClassId;
     }
 }

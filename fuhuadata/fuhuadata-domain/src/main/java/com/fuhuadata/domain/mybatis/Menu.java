@@ -21,6 +21,9 @@ public class Menu extends BaseEntity<Integer> implements Treeable<Integer> {
     @Column(name = "parent_id")
     private Integer parentId;
 
+    @Transient
+    private String parentName;
+
     /**
      * 上级菜单ids
      */
@@ -213,5 +216,13 @@ public class Menu extends BaseEntity<Integer> implements Treeable<Integer> {
                 ", enablestate=" + enablestate +
                 ", orderIndex=" + orderIndex +
                 '}';
+    }
+
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
     }
 }
