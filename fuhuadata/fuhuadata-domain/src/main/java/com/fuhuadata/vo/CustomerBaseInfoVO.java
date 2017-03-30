@@ -19,6 +19,8 @@ public class CustomerBaseInfoVO {
     /**客户信息总id**/
     private String customerId;
 
+    private String ncId;
+
     /**企业全称**/
     private String fullName;
 
@@ -528,5 +530,13 @@ public class CustomerBaseInfoVO {
 
     public void setCountryId(String countryId) {
         this.countryId = countryId;
+    }
+
+    public String getNcId() {
+        return ncId;
+    }
+
+    public void setNcId(String ncId) {
+        this.ncId = ncId;
     }
 }

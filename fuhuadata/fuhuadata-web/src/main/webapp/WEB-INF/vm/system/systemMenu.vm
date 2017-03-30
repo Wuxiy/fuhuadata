@@ -38,7 +38,7 @@
                                 <div class="input-group">
                                     <input id="parentName" type="text" class="form-control" />
                                     <div class="input-group-btn">
-                                        <button disabled class="btn btn-xs btn-default dropdown-toggle" data-toggle="modal" data-target="#treeModal" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                                        <button id="searchingBtn" class="btn btn-xs btn-default dropdown-toggle" data-toggle="modal" data-target="#treeModal" type="submit"><span class="glyphicon glyphicon-search"></span></button>
                                     </div>
                                 </div>
                             </div>
@@ -70,8 +70,6 @@
                             <div class="col-xs-2"><input id="Url" class="form-control" type="text" value="" /></div>
                         </div>
                         <div class="form-group">
-                            <label for="" class="control-label col-xs-1" lang="zh">菜单顺序</label>
-                            <div class="col-xs-2"><input id="orderIndex" class="form-control" type="text" value="" /></div>
                             <label for="" class="control-label col-xs-1" lang="zh">启用状态</label>
                             <div class="col-xs-2">
                                 <select id="enablestate" class="form-control">
@@ -95,50 +93,120 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script>
     $(function () {
+
+        //创建树菜单
         var tree = $('<div class="tree"></div>');
         var modalTree = $('<div class="tree"></div>');
         modalTree.creatTree('${request.contextPath}/sys/menu/ajax/load');
         tree.creatTree('${request.contextPath}/sys/menu/ajax/load');
         $('#menuAside').append(tree);
+        $('#menuModal').append(modalTree).find('[id]').each(function () {
+
+            //因为id重复了，这里给menuModal中的所有的id加一个后缀
+           $(this).attr('id',function (i,old) {
+                return old + 'm';
+            })
+        });
+
+        //给menuAside树添加更改顺序按钮
+        var upDownBtn = '<div class="btn-group btn-group-xs">'+
+                '<button name="upwardBtn" class="btn"><span class="glyphicon glyphicon-arrow-up"></span></button>'+
+                '<button name="downWardBtn" class="btn"><span class="glyphicon glyphicon-arrow-down"></span></button></div>';
+        $('#menuAside').find('a').append(upDownBtn);
+        $(document).on('click.moveUp','[name="upwardBtn"]',function () {
+            var thisId = $(this).parents('li').attr('id');
+            var prevId = $(this).parents('li').prev('li').attr('id');
+            var obj = {
+                prev:prevId,
+                id:thisId
+            };
+            replaceIndex(obj);
+        });
+        $(document).on('click.moveUp','[name="downWardBtn"]',function () {
+            var thisId = $(this).parents('li').attr('id');
+            var nextId = $(this).parents('li').next('li').attr('id');
+            var obj = {
+                next:nextId,
+                id:thisId
+            };
+            replaceIndex(obj);
+        });
+
+        function replaceIndex (data) {
+            jQuery.ajax({
+                url:'',
+                type:'POST',
+                data:data
+            }).done(function () {
+                location.reload();
+            });
+        }
+
         $('.panel-edit').find('input').not('.notDisabled').filter('.form-control').attr('disabled','disabled');
-        $('#menuModal').append(modalTree);
+
         $(document).on('click.tree','#menuAside .tree a',function (e) {
             e.preventDefault();
+
+            //更改样式
             var thisEl = $(this);
             var par = thisEl.parents('.tree');
             par.find('li').removeClass('active');
             thisEl.parent('li').addClass('active');
-            jQuery.ajax({
-                url:'/sys/menu/ajax/'+thisEl.parent('li').attr('id'),
-                type:'GET'
-            }).done(renderMenu);
+
+            //添加数据
+            var thisId = thisEl.parent('li').attr('id');
+            getMenuDetails(thisId,renderMenu);
+
         });
+        $(document).on('click.tree','#menuModal .tree a',function (e) {
+            e.preventDefault();
+            var thisId = thisEl.parent('li').attr('id').slice('0','-1');
+            //更改样式
+            var tarEl = $('#'+thisId);
+            var par = tarEl.parents('.tree');
+            par.find('li').removeClass('active');
+            tarEl.addClass('active');
+
+            //添加数据
+            getMenuDetails(thisId,renderMenu);
+        });
+        function getMenuDetails(id,callback){
+            jQuery.ajax({
+                url:'/sys/menu/ajax/'+id,
+                type:'GET'
+            }).done(callback);
+        }
 
         $(document).on('click.up','#addMenuItem',function () {
+
             var thisEl = $(this);
+            thisEl.addClass('hidden');
+            $('#btnGroup').removeClass('hidden');
             $('input,button','.panel-body').not('.notEdit').removeAttr('disabled');
+            $(document).off('.tree');
+
+            //以当前节点的id和name作为父节点的id和name
             $('#parentName').val($('#name').val());
             $('#parentId').val($('#menuId').val());
             $('#name').val('');
             $('#menuId').val('');
             $('#Url').val('');
+
 //            $('#orderIndex').val('');
-            var obj = {};
-            obj.parentName = $('#parentName').val();
-            obj.parentId = $('#parentId').val();
-            jQuery.ajax({
-                url:'',
-                type:'POST',
-                data:obj
-            }).done(function (result) {
-                if(result.data && result.data!='' && result.data!=null){
-                    var data = result.data;
-                    $('#orderIndex').val(data.orderIndex);
-                }
-            });
-            $(document).off('.tree');
-            $('#btnGroup').removeClass('hidden');
-            thisEl.addClass('hidden');
+//            var obj = {};
+//            obj.parentName = $('#parentName').val();
+//            obj.parentId = $('#parentId').val();
+//            jQuery.ajax({
+//                url:'',
+//                type:'POST',
+//                data:obj
+//            }).done(function (result) {
+//                if(result.data && result.data!='' && result.data!=null){
+//                    var data = result.data;
+//                    $('#orderIndex').val(data.orderIndex);
+//                }
+//            });
+
         });
 
         $(document).on('click.up','#save',function () {
@@ -166,8 +234,9 @@
         function refreshTree(){
 
         }
-        function renderMenu(result,p){
-            if(result.data && result.data!='' && result.data!=null){
+
+        function renderMenu(result){
+            if(result.data!=null && result.data.length>0){
                 var data = result.data;
                 $('#menuId').val(data.menuId);
                 $('#parentId').val(data.parentId);
@@ -178,6 +247,18 @@
 //                $('#parentName').val(thisEl.parent('li').parents('li').children('a').text());
             }
         }
+        function renderMenuM(result){ //这是modal中的树菜单渲染的数据
+            if(result.data!=null && result.data.length>0){
+                var data = result.data;
+                $('#menuId').val('');
+                $('#parentId').val(data.menuId);
+                $('#name').val('');
+                $('#Url').val('');
+                $('#enablestate').val('');
+
+            }
+        }
+
     })
 
 </script>

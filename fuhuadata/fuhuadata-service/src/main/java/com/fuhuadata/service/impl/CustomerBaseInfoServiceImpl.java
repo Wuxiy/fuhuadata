@@ -47,6 +47,8 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 		try {
 			//计算百科信息完整度
 			calculateCompletion(customerBaseInfo);
+			//新增潜在客户默认为客户关系,非竞对关系
+			customerBaseInfo.setCompanyType(0);
 			//设置操作人信息，临时处理，登录机制做好后更新此处代码
 			customerBaseInfo.setCreateUserId(1);
 			customerBaseInfo.setCreateUserName("admin");

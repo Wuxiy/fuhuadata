@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
         "http://www.ibatis.com/dtd/sql-map-2.dtd">
-<sqlMap namespace="BusinessOrder">
+<sqlMap namespace="BUSINESSORDER">
     <typeAlias alias="BusinessOrder" type="com.fuhuadata.domain.BusinessOrder"/>
-        <typeAlias alias="QueryBusinessOrder" type="com.fuhuadata.domain.query.QueryBusinessOrder"/>
+    <typeAlias alias="QueryBusinessOrder" type="com.fuhuadata.domain.query.QueryBusinessOrder"/>
+    <sql id="QUERY-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotEmpty prepend=" AND " property="customerId">
+                customer_id = #customerId#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="status">
+                status = #status#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="saleOrganizationId">
+                sale_organization_id = #saleOrganizationId#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="ncOrderId">
+                nc_order_id =  #ncOrderId#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="startTime">
+                <![CDATA[
+                     deal_time  >=  #startTime#
+                ]]>
+            </isNotEmpty>
+        </dynamic>
+    </sql>
 
 <!--    <sql id="ORDER-PAGE-COMMON">
         <dynamic prepend=" WHERE ">
@@ -28,22 +49,21 @@
     </sql>
 
     <sql id="OFFER-PAGE-COMMON">
-            <dynamic prepend=" WHERE">
-                <isNotNull prepend=" AND " property="customerName">
-                    base.short_name = #customerName#
-                </isNotNull>
-                <isNotNull prepend=" AND " property="orderStatus">
-                    a.staus = #orderStatus#
-                </isNotNull>
-                <isNotNull prepend=" AND " property="orderId">
-                    a.order_id = #orderId#
-                </isNotNull>
-                <isNotNull prepend=" AND " property="customerLevel">
-                    base.customer_level = #customerLevel#
-                </isNotNull>
-            </dynamic>
+        <dynamic prepend=" WHERE">
+            <isNotNull prepend=" AND " property="customerName">
+                base.short_name = #customerName#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="orderStatus">
+                a.staus = #orderStatus#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="orderId">
+                a.order_id = #orderId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="customerLevel">
+                base.customer_level = #customerLevel#
+            </isNotNull>
+        </dynamic>
     </sql>
-
     <update id="UPDATE" parameterClass="BusinessOrder" >
         update business_order
         <dynamic prepend="set" >
@@ -72,7 +92,7 @@
                 department_id = #departmentId#
             </isNotNull>
             <isNotNull prepend=", " property="saleOrganizationId" >
-                sale_organization_id = #saleOrganizationId:VARCHAR#
+                sale_organization_id = #saleOrganizationId#
             </isNotNull>
             <isNotNull prepend=", " property="saleOrganizationName" >
                 sale_organization_name = #saleOrganizationName#
@@ -135,13 +155,13 @@
                 deal_time = #dealTime#
             </isNotNull>
             <isNotNull prepend="," property="deliverInfo" >
-                deliver_info = #deliverInfo:VARCHAR#
+                deliver_info = #deliverInfo#
             </isNotNull>
             <isNotNull prepend=", " property="expressInfo" >
                 express_info = #expressInfo#
             </isNotNull>
             <isNotNull prepend=", " property="dueTime" >
-                due_time = #dueTime:DATE#
+                due_time = #dueTime#
             </isNotNull>
             <isNotNull prepend=", " property="amountPayable" >
                 amount_payable = #amountPayable#
@@ -168,7 +188,7 @@
                 is_complaint = #isComplaint#
             </isNotNull>
             <isNotNull prepend="," property="isPledge" >
-                is_pledge = #isPledge:TINYINT#
+                is_pledge = #isPledge#
             </isNotNull>
             <isNotNull prepend="," property="isModifyPrice" >
                 is_modify_price = #isModifyPrice#
@@ -197,9 +217,8 @@
         </dynamic>
         where order_id = #orderId#
     </update>
-
     <insert id="ADD" parameterClass="BusinessOrder" >
-       <![CDATA[
+
         insert into business_order (order_id, nc_order_id, business_id, customer_id,
         customer_duty_paragraph, bill_to_customer, sales_man_id, sales_man_name, department_id,
         sale_organization_id, sale_organization_name, destination_port, shipment_port,
@@ -225,10 +244,10 @@
         #isModifyPrice#, #claimAmount#, #createUserId#,
         #createUserName#, #lastmodifyUserId#, #lastmodifyUserName#,
         #createTime#, #modifyTime#)
-    ]]>
+
     </insert>
 
-    <select id="GET-BY-ID" resultMap="" parameterClass="java.lang.String" >
+    <select id="GET-BY-ID" resultClass="BusinessOrder" parameterClass="java.lang.String" >
         <![CDATA[
         select order_id, nc_order_id, business_id, customer_id, customer_duty_paragraph,
         bill_to_customer, sales_man_id, sales_man_name, department_id, sale_organization_id,
@@ -239,12 +258,12 @@
         maintenance_fee, net_profit, actual_payment_time, actual_amount_paid, unpaid_amount,
         is_complaint, is_pledge, is_modify_price, claim_amount, create_user_id, create_user_name,
         lastmodify_user_id, lastmodify_user_name, create_time, modify_time
-        from fuhuadata..business_order
-        where order_id = #orderId:VARCHAR#
+        from business_order
+        where order_id = #orderId#
     ]]>
     </select>
 
-    <update id="UPDATE-ORDER-STATUS" parameterClass="BusinessOrder">
+    <update id="UPDATE-OFFER-STATUS" parameterClass="BusinessOrder">
         update business_order
         <dynamic prepend="set" >
             <isNotNull prepend=", " property="failureAnalysis" >
@@ -266,7 +285,7 @@
         where order_id = #orderId#
     </update>
 
-    <select id="OFFER-PAGE-COMMON"  parameterClass="QueryBusinessOrder" resultClass="QueryBusinessOrder">
+    <select id="OFFER-GET-PAGE"  parameterClass="QueryBusinessOrder" resultClass="QueryBusinessOrder">
         <![CDATA[
             SELECT
             a.order_id orderId,
@@ -274,7 +293,7 @@
             base.short_name customerName,
             base.customer_level customerLevel,
             base.full_enterprise_nature enterpriseNature,
-            a.amount_payable orderPrice,
+            a.amount_payable amountPayable,
             GROUP_CONCAT(b.`name`) AS orderProduct,
             a.staus orderStatus
         FROM
@@ -289,49 +308,111 @@
         </isNotEmpty>
 
         <isParameterPresent>
-            <include refid="PAGE-COMMON"/>
+            <include refid="OFFER-PAGE-COMMON"/>
             <isNotEmpty prepend=" AND " property="enterpriseNature">
                 nature.customer_id=base.customer_id
             </isNotEmpty>
             <isNotEmpty prepend=" AND " property="orderBy">
                 order by $orderBy$
             </isNotEmpty>
+            <isNotEqual property="areaClassId" compareValue="0">
+                and base.customer_area_id = #areaClassId#
+                <isNotEqual property="areaClassId" compareValue="0">
+                    and	base.country_id = #areaId#
+                </isNotEqual>
+            </isNotEqual>
             LIMIT #startRow#,#pageSize#
         </isParameterPresent>
     </select>
 
     <delete id="DELETE-BY-ID" parameterClass="java.lang.String">
         <![CDATA[
-        select from business_order where order_id = #orderId#
+        delete from business_order where order_id = #orderId#
     ]]>
     </delete>
 
-    <select id="ORDER-PAGE-COMMON" parameterClass="QueryBusinessOrder" resultClass="BusinessOrder">
-                SELECT
-                    a.order_id orderId,
-                    a.business_id businessId,
-                    a.sale_organization_id saleOrganizationId,
-                    a.nc_order_id ncOrderId,
-                    base.short_name customerName,
-                    base.country country,
-                    a.amount_payable amountPayable,
-                    a.floor_price floorPrice,
-                    a.is_complaint isComplaint,
-                    a.is_modify_price isModifyPrice,
-                    a.staus orderStatus,
-                    a.deal_time dealTime
-                FROM
-                business_order a
-                LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
+    <select id="ORDER-GET-PAGE" parameterClass="QueryBusinessOrder" resultClass="QueryBusinessOrder">
+        SELECT
+        a.order_id orderId,
+        a.business_id businessId,
+        a.sale_organization_name saleOrganizationName,
+        a.nc_order_id ncOrderId,
+        base.short_name customerName,
+        base.country country,
+        a.amount_payable amountPayable,
+        a.floor_price floorPrice,
+        a.is_complaint isComplaint,
+        a.is_modify_price isModifyPrice,
+        a.staus orderStatus,
+        a.deal_time dealTime
+        FROM
+        business_order a
+        LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
         <isNotEmpty prepend=", " property="enterpriseNature">
             (select * from customer_enterprise_nature where nature=#enterpriseNature#) nature
         </isNotEmpty>
-
         <isParameterPresent>
-            <include refid="QUERY-COMMON"/>
+            <include refid="ORDER-PAGE-COMMON"/>
             <isNotEmpty prepend=" AND " property="enterpriseNature">
                 nature.customer_id=base.customer_id
             </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="orderBy">
+                order by $orderBy$
+            </isNotEmpty>
+            limit #startRow#,#pageSize#
+        </isParameterPresent>
+    </select>
+
+    <select id="COUNT-ORDER" parameterClass="QueryBusinessOrder" resultClass="java.lang.Integer">
+        select count(*) from business_order a
+        LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
+        <isNotEmpty prepend=", " property="enterpriseNature">
+            (select * from customer_enterprise_nature where nature=#enterpriseNature#) nature
+        </isNotEmpty>
+        <isParameterPresent>
+            <include refid="ORDER-PAGE-COMMON"/>
+            <isNotEmpty prepend=" AND " property="enterpriseNature">
+                nature.customer_id=base.customer_id
+            </isNotEmpty>
+        </isParameterPresent>
+    </select>
+
+
+    <select id="COUNT-OFFER" parameterClass="QueryBusinessOrder" resultClass="java.lang.Integer">
+        select count(*)
+        FROM
+        business_order a
+        LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
+        LEFT JOIN customer_enterprise_nature nature ON nature.customer_id = a.customer_id
+        LEFT JOIN business_order_product b ON b.order_id = a.order_id
+        GROUP BY a.order_id
+        <isNotEmpty prepend=", " property="enterpriseNature">
+            (select * from customer_enterprise_nature where nature=#enterpriseNature#) nature
+        </isNotEmpty>
+        <isParameterPresent>
+            <include refid="OFFER-PAGE-COMMON"/>
+            <isNotEmpty prepend=" AND " property="enterpriseNature">
+                nature.customer_id=base.customer_id
+            </isNotEmpty>
+        </isParameterPresent>
+    </select>
+
+    <select id="query_page" parameterClass="QueryBusinessOrder" resultClass="BusinessOrder">
+        select
+        sale_organization_name saleOrganizationName,
+        order_id orderId,
+        nc_order_id ncOrderId,
+        amount_payable amountPayable,
+        floor_price floorPrice,
+        is_complaint isComplaint,
+        is_modify_price isModifyPrice,
+        net_profit netProfit,
+        is_pledge isPledge,
+        deal_time dealTime
+        from
+        business_order
+        <isParameterPresent>
+            <include refid="QUERY-COMMON"/>
             <isNotEmpty prepend=" AND " property="orderBy">
                 order by $orderBy$
             </isNotEmpty>
@@ -344,6 +425,10 @@
         <isParameterPresent>
             <include refid="QUERY-COMMON"/>
         </isParameterPresent>
+<<<<<<< HEAD
     </select>-->
+=======
+>>>>>>> 771a68c3e1bae07ff1dcc5adcf38def945d4962c
 
+    </select>
 </sqlMap>

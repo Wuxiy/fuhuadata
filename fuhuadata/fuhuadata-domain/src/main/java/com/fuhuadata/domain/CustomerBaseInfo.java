@@ -13,6 +13,8 @@ public class CustomerBaseInfo implements Serializable{
     /**客户信息总id**/
 	private String customerId;
 
+	private String ncId;
+
     /**企业全称**/
 	private String fullName;
 
@@ -149,7 +151,7 @@ public class CustomerBaseInfo implements Serializable{
 	//企业性质集合名称，多个性质逗号分隔
 	private String fullEnterpriseNature;
 	//其他性质
-	private String otherEnterpriseNature;
+	private String otherEnterpriceNature;
 	//价格敏感度
 	private String priceSensitivity;
 	//忠诚度
@@ -165,8 +167,6 @@ public class CustomerBaseInfo implements Serializable{
 	private Integer isFuhuaExclusive;
 	//合作情况备注
 	private String cooperationRemark;
-	//其他企业性质
-	private String otherEnterpriceNature;
 	//产品线
 	private String productionLine;
 	public CustomerBaseInfo() {
@@ -540,13 +540,6 @@ public class CustomerBaseInfo implements Serializable{
 		this.enterpriseNature = enterpriseNature;
 	}
 
-	public String getOtherEnterpriseNature() {
-		return otherEnterpriseNature;
-	}
-
-	public void setOtherEnterpriseNature(String otherEnterpriseNature) {
-		this.otherEnterpriseNature = otherEnterpriseNature;
-	}
 
 	public String getPriceSensitivity() {
 		return priceSensitivity;
@@ -642,5 +635,13 @@ public class CustomerBaseInfo implements Serializable{
 
 	public void setCountryId(String countryId) {
 		this.countryId = countryId;
+	}
+
+	public String getNcId() {
+		return ncId;
+	}
+
+	public void setNcId(String ncId) {
+		this.ncId = ncId;
 	}
 }

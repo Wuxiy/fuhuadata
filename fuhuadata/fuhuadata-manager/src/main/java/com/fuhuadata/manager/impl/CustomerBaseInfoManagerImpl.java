@@ -52,6 +52,7 @@ public class CustomerBaseInfoManagerImpl implements CustomerBaseInfoManager {
 	 */
 	@Transactional
     public CustomerBaseInfoVO addCustomerBaseInfo(List<CustomerEnterpriceNature> customerEnterpriceNatures, List<CustomerMakeProduct> customerMakeProducts , CustomerBaseInfo customerBaseInfo) {
+		System.out.println(customerBaseInfo.getOtherEnterpriceNature()+"1111111111");
 		CustomerBaseInfo cbi = customerBaseInfoDao.addCustomerBaseInfo(customerBaseInfo);
 		System.out.println(cbi.getCustomerId());
 		for(CustomerEnterpriceNature cen:customerEnterpriceNatures){

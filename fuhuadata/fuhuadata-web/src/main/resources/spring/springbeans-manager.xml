@@ -33,4 +33,5 @@
 	<bean id="customerSubcompanyInfoManager" class="com.fuhuadata.manager.impl.CustomerSubcompanyInfoManagerImpl"/>
 	<bean id="businessInfoManager" class="com.fuhuadata.manager.impl.BusinessInfoManagerImpl"/>
 	<bean id="businessRecordManager" class="com.fuhuadata.manager.impl.BusinessRecordManagerImpl"/>
+	<bean id="businessOrderManager" class="com.fuhuadata.manager.impl.BusinessOrderManagerImpl"/>
 </beans>

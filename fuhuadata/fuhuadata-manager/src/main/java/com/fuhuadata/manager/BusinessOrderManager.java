@@ -1,16 +1,15 @@
-package com.fuhuadata.dao;
+package com.fuhuadata.manager;
 
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
 
-import javax.management.Query;
 import java.util.List;
 
 /**
- * Created by hexingfu on 2017/3/17.
+ * 报价订单
+ * Created by intanswer on 2017/3/29.
  */
-public interface BusinessOrderDao {
-
+public interface BusinessOrderManager {
 
     /**
      * add
@@ -24,15 +23,7 @@ public interface BusinessOrderDao {
      * @param businessOrder
      * @return
      */
-    public int updateBusinessOrderByOrderId(BusinessOrder businessOrder);
-
-
-    /**
-     * delete by orderId
-     * @param orderId
-     * @return
-     */
-    public int deleteBusinessOrderByOrderId(String orderId);
+    public boolean updateBusinessOrderByOrderId(BusinessOrder businessOrder);
 
 
     /**
@@ -40,7 +31,7 @@ public interface BusinessOrderDao {
      * @param businessOrder
      * @return
      */
-    public int updateOfferStatus(BusinessOrder businessOrder);
+    public boolean updateOfferStatus(BusinessOrder businessOrder);
 
 
     /**
@@ -76,20 +67,5 @@ public interface BusinessOrderDao {
      * @return
      */
     public List<QueryBusinessOrder> getOrderListPageByQuery(QueryBusinessOrder queryBusinessOrder);
-
-
-    /**
-     * 客户订单信息
-     * @param queryBusinessOrder
-     * @return
-     */
-    public int count(QueryBusinessOrder queryBusinessOrder);
-
-    /**
-     * 分页获取订单列表
-     * @param queryBusinessOrder
-     * @return
-     */
-    public List<BusinessOrder> getOrderLisPageByQuery(QueryBusinessOrder queryBusinessOrder);
 
 }

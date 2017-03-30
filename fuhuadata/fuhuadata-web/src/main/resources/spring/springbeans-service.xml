@@ -31,4 +31,5 @@
 	<bean id="customerSubcompanyInfoService" class="com.fuhuadata.service.impl.CustomerSubcompanyInfoServiceImpl"/>
 	<bean id="businessInfoService" class="com.fuhuadata.service.impl.BusinessInfoServiceImpl"/>
 	<bean id="businessRecordService" class="com.fuhuadata.service.impl.BusinessRecordServiceImpl"/>
+	<bean id="businessOrderService" class="com.fuhuadata.service.impl.BusinessOrderServiceImpl"/>
 </beans>
