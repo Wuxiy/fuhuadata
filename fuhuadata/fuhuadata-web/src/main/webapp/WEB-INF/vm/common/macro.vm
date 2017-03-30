@@ -55,6 +55,12 @@
     #end
 #end
 
+#macro(location)
+    <ul id="location" class="breadcrumb pull-right">
+        <li><span class="glyphicon glyphicon-map-marker"></span></li>
+    </ul>
+#end
+
 #macro(deputyNav $num)
     #if($!{customerType}==2 && $!{customerId}!='')
     <ul id="deputyNav" class="nav nav-tabs pull-left">

@@ -4,12 +4,14 @@
         var tree = this;
         tree.html('');
         var treeRoot = $('<ul class="tree-root"></ul>');
-         $.get(url,function(data,status){
-            if(status == 'success'){
-                creatBranch(data.data,treeRoot);
-                tree.append(treeRoot);
-            }
-        });
+         $.ajax({
+             url:url,
+             type:'GET',
+             async:false    //这里是同步请求
+         }).done(function(result){
+             creatBranch(result.data,treeRoot);
+             tree.append(treeRoot);
+         });
         function creatBranch(getData,parent){
             $.each(getData,function(n,item){
                 var li = $('<li id="'+item.cid+'"></li>');

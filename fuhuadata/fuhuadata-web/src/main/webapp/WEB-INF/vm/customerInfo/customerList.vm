@@ -1,7 +1,5 @@
 <div class="nav-deputy shadow-out clearfix">
-	<ul class="breadcrumb pull-right">
-		<li><span class="glyphicon glyphicon-map-marker"></span></li>
-	</ul>
+    #location()
 </div>
 <!--tab内容-->
 <div class="dashboard-wrapper">

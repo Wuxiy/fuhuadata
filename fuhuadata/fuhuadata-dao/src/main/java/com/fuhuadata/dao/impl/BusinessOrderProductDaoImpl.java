@@ -24,7 +24,7 @@ public class BusinessOrderProductDaoImpl implements BusinessOrderProductDao {
     }
 
     public int updateBusinessOrderProduct(BusinessOrderProduct businessOrderProduct)throws Exception {
-        return sqlMapClient.update();
+        return sqlMapClient.update("",businessOrderProduct);
     }
 
     public int count(QueryBusinessOrderProduct queryBusinessOrderProduct) {

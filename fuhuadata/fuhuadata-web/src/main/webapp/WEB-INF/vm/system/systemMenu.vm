@@ -36,9 +36,9 @@
                             <label for="" class="control-label col-xs-1" lang="zh">上一级菜单</label>
                             <div class="col-xs-2">
                                 <div class="input-group">
-                                    <input id="parentName" type="text" class="form-control" />
+                                    <input id="parentName" type="text" class="form-control notEdit" />
                                     <div class="input-group-btn">
-                                        <button id="searchingBtn" class="btn btn-xs btn-default dropdown-toggle" data-toggle="modal" data-target="#treeModal" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                                        <button id="searchingBtn" disabled class="btn btn-xs btn-default dropdown-toggle" data-toggle="modal" data-target="#treeModal" type="submit"><span class="glyphicon glyphicon-search"></span></button>
                                     </div>
                                 </div>
                             </div>
@@ -95,30 +95,19 @@
     $(function () {
 
         //创建树菜单
-        var tree = $('<div class="tree"></div>');
-        var modalTree = $('<div class="tree"></div>');
-        modalTree.creatTree('${request.contextPath}/sys/menu/ajax/load');
-        tree.creatTree('${request.contextPath}/sys/menu/ajax/load');
-        $('#menuAside').append(tree);
-        $('#menuModal').append(modalTree).find('[id]').each(function () {
-
-            //因为id重复了，这里给menuModal中的所有的id加一个后缀
-           $(this).attr('id',function (i,old) {
-                return old + 'm';
-            })
-        });
+        creatTrees();
 
         //给menuAside树添加更改顺序按钮
         var upDownBtn = '<div class="btn-group btn-group-xs">'+
-                '<button name="upwardBtn" class="btn"><span class="glyphicon glyphicon-arrow-up"></span></button>'+
-                '<button name="downWardBtn" class="btn"><span class="glyphicon glyphicon-arrow-down"></span></button></div>';
-        $('#menuAside').find('a').append(upDownBtn);
+                '<span name="upwardBtn" class="glyphicon glyphicon-arrow-up"></span>'+
+                '<span name="downWardBtn" class="glyphicon glyphicon-arrow-down"></span></div>';
+//        $('#menuAside').find('a').append(upDownBtn);
         $(document).on('click.moveUp','[name="upwardBtn"]',function () {
             var thisId = $(this).parents('li').attr('id');
             var prevId = $(this).parents('li').prev('li').attr('id');
             var obj = {
-                prev:prevId,
-                id:thisId
+                tid:prevId,
+                sid:thisId
             };
             replaceIndex(obj);
         });
@@ -126,8 +115,8 @@
             var thisId = $(this).parents('li').attr('id');
             var nextId = $(this).parents('li').next('li').attr('id');
             var obj = {
-                next:nextId,
-                id:thisId
+                tid:thisId,
+                sid:nextId
             };
             replaceIndex(obj);
         });
@@ -142,9 +131,10 @@
             });
         }
 
-        $('.panel-edit').find('input').not('.notDisabled').filter('.form-control').attr('disabled','disabled');
+        forbiddenForm();
 
-        $(document).on('click.tree','#menuAside .tree a',function (e) {
+        //侧边菜单树
+        $(document).on('click.tree.s','#menuAside .tree a',function (e) {
             e.preventDefault();
 
             //更改样式
@@ -158,107 +148,108 @@
             getMenuDetails(thisId,renderMenu);
 
         });
-        $(document).on('click.tree','#menuModal .tree a',function (e) {
+
+        //modal菜单树
+        $(document).on('click.tree.m','#menuModal .tree a',function (e) {
             e.preventDefault();
-            var thisId = thisEl.parent('li').attr('id').slice('0','-1');
-            //更改样式
-            var tarEl = $('#'+thisId);
-            var par = tarEl.parents('.tree');
-            par.find('li').removeClass('active');
-            tarEl.addClass('active');
+            var thisId = $(this).parent('li').attr('id').slice('0','-1');
+            var thisTxt = $(this).text();
+            var close = $('#treeModal').find('.close');
 
             //添加数据
-            getMenuDetails(thisId,renderMenu);
+            if(thisId && thisId!=0){
+                $('#parentName').val(thisTxt);
+                $('#parentId').val(thisId);
+            }
+
+            //关闭modal
+            close.click();
         });
+
+        //添加
+        $(document).on('click.up','#addMenuItem',function () {
+            var thisEl = $(this);
+            thisEl.addClass('hidden');
+            $('#btnGroup').removeClass('hidden');
+            $('input,#searchingBtn','.panel-body').not('.notEdit').removeAttr('disabled');
+            $(document).off('.tree.s');
+            $('#menuAside').parents('.panel').fadeOut();
+
+            //以当前节点的id和name作为父节点的id和name
+            if($('#menuId').val()!=''){
+                $('#parentName').val($('#name').val());
+                $('#parentId').val($('#menuId').val());
+            }
+            $('#name,#menuId,#Url').val('');
+        });
+
+        //保存
+        $(document).on('click.up','#save',function () {
+            var menuData = setMenuObj();
+            console.log(menuData);
+
+            jQuery.ajax({
+                url:'/sys/menu/ajax/add',
+                type:'POST',
+                data:menuData
+            }).done(function (result) {
+                console.log(result);
+                var thisId = result.data;
+                creatTrees();
+                getMenuDetails(thisId,renderMenu);
+            });
+
+            $('#addMenuItem').removeClass('hidden');
+            $('#btnGroup').addClass('hidden');
+            $('#menuAside').parents('.panel').fadeIn();
+            forbiddenForm();
+            $(document).on('.tree.s');
+        });
+
+        function setMenuObj() {
+            var obj = {
+                parentId : ($('#parentId').val()=='' ? 0:$('#parentId').val()),
+                name : $('#name').val(),
+                url : $('#Url').val(),
+                enablestate : $('#enablestate').val()
+            };
+            return obj;
+        }
+        function forbiddenForm() {
+            $('input,#searchingBtn','.panel-edit').not('.notDisabled').attr('disabled','disabled');
+        }
         function getMenuDetails(id,callback){
             jQuery.ajax({
                 url:'/sys/menu/ajax/'+id,
                 type:'GET'
             }).done(callback);
         }
-
-        $(document).on('click.up','#addMenuItem',function () {
-
-            var thisEl = $(this);
-            thisEl.addClass('hidden');
-            $('#btnGroup').removeClass('hidden');
-            $('input,button','.panel-body').not('.notEdit').removeAttr('disabled');
-            $(document).off('.tree');
-
-            //以当前节点的id和name作为父节点的id和name
-            $('#parentName').val($('#name').val());
-            $('#parentId').val($('#menuId').val());
-            $('#name').val('');
-            $('#menuId').val('');
-            $('#Url').val('');
-
-//            $('#orderIndex').val('');
-//            var obj = {};
-//            obj.parentName = $('#parentName').val();
-//            obj.parentId = $('#parentId').val();
-//            jQuery.ajax({
-//                url:'',
-//                type:'POST',
-//                data:obj
-//            }).done(function (result) {
-//                if(result.data && result.data!='' && result.data!=null){
-//                    var data = result.data;
-//                    $('#orderIndex').val(data.orderIndex);
-//                }
-//            });
-
-        });
-
-        $(document).on('click.up','#save',function () {
-            var obj = {};
-            obj.parentName = $('#parentName').val();
-            obj.parentId = $('#parentId').val();
-            obj.name = $('#name').val();
-            obj.url = $('#Url').val();
-            obj.enablestate = $('#enablestate').val();
-            obj.orderIndex = $('#orderIndex').val();
-            jQuery.ajax({
-                url:'/sys/menu/ajax/add',
-                type:'POST',
-                data:obj
-            }).done(function (result) {
-                console.log(result);
-                jQuery.ajax({
-                    url:'/sys/menu/ajax/'+result.data,
-                    type:'GET'
-                }).done(renderMenu);
-            });
-            $('#addMenuItem').removeClass('hidden');
-            $('#btnGroup').addClass('hidden');
-        });
-        function refreshTree(){
-
-        }
-
         function renderMenu(result){
-            if(result.data!=null && result.data.length>0){
+            $('#menuId,#parentId,#name,#Url,#parentName').val('');
+            if(result.data!=null){
                 var data = result.data;
                 $('#menuId').val(data.menuId);
                 $('#parentId').val(data.parentId);
                 $('#name').val(data.name);
                 $('#Url').val(data.url);
                 $('#enablestate').val(data.enablestate);
-                $('#orderIndex').val(data.orderIndex);
-//                $('#parentName').val(thisEl.parent('li').parents('li').children('a').text());
+                $('#parentName').val(data.parentName);
             }
         }
-        function renderMenuM(result){ //这是modal中的树菜单渲染的数据
-            if(result.data!=null && result.data.length>0){
-                var data = result.data;
-                $('#menuId').val('');
-                $('#parentId').val(data.menuId);
-                $('#name').val('');
-                $('#Url').val('');
-                $('#enablestate').val('');
+        function creatTrees() {
+            var tree = $('<div class="tree"></div>');
+            var modalTree = $('<div class="tree"></div>');
+            modalTree.creatTree('${request.contextPath}/sys/menu/ajax/load?async=false');
+            tree.creatTree('${request.contextPath}/sys/menu/ajax/load?async=false');
+            $('#menuAside').html('').append(tree);
+            $('#menuModal').html('').append(modalTree).find('[id]').each(function () {
 
-            }
+                //因为id重复了，这里给menuModal中的所有的id加一个后缀
+                $(this).attr('id',function (i,old) {
+                    return old + 'm';
+                })
+            });
         }
-
     })
 
 </script>

@@ -20,10 +20,8 @@ function customerBasicInfo(result){
 
     var areaId = $('#areaId');
     var countryId = $('#countryId');
-    //获取地区树数据
+    //获取国家树数据
     var areaData =  getAreaData();
-    //创建地区下拉框
-    creatAreaSelected(areaData,areaId);
     //给地区下拉框赋值
     areaId.val(getData.areaId);
     var areaIdVal = areaId.val();

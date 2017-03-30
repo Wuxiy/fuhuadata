@@ -6,6 +6,8 @@ $(function () {
 
     //获取地区和国家数据
     var areaData = getAreaData();
+    //创建地区下拉框
+    creatAreaSelected(areaData,$('#areaId'));
     $(document).on('change.screen','#areaId',function () {
         var areaId = $('#areaId');
         var countryId = $('#countryId');
@@ -20,7 +22,6 @@ $(function () {
         $('[name="customerType"]').val('2').attr('disabled','disabled');
         $('button').filter(editBtn).remove();
         $('.editHide').addClass('hidden');
-        // $('#deputyNav').children('li').slice(4).remove();
         $('.editView').removeClass('hidden');
         var finishBtn = '';
         finishBtn += '<div class="form-group">';
@@ -56,41 +57,6 @@ $(function () {
         });
         //客户基本信息提交
         $(document).on('click.up','#saveCustomerBasic',function(){
-            //提交数据
-            // var inputNotNull = true;
-            // $('input.notNull').each(function () {
-            //    var $this = $(this);
-            //    if($this.val()==''){
-            //        inputNotNull = false;
-            //        return false;
-            //    }else {
-            //        return true;
-            //    }
-            // });
-            // var selectNotNull = true;
-            // $('select.notNull').each(function () {
-            //    var $this = $(this);
-            //    if($this.val()==''||$this.val()=='-1'){
-            //        selectNotNull=false;
-            //        return false;
-            //    }else {
-            //        return true;
-            //    }
-            // });
-            // var checkboxNotNull = false;
-            // $('.notNull[name="enterpriseNature"]').each(function () {
-            //     var $this = $(this);
-            //     if($this.prop('checked')!=false){
-            //         checkboxNotNull = true;
-            //         return false;
-            //     }else {
-            //         return true;
-            //     }
-            // });
-            // if(inputNotNull && selectNotNull && checkboxNotNull){
-            // }else {
-            //     alert('请完善表单');
-            // }
             upData(basePath+'/customerBaseInfo/updateCustomerBaseInfo','POST',customerBasicFormObj(),"application/json");
             delDelBtn();
         });
