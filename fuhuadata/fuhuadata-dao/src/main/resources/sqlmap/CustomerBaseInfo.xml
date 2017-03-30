@@ -12,6 +12,7 @@
 
 	<resultMap id="CUSTOMERBASEINFO-MAP" class="CustomerBaseInfo">
 					<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="ncId" column="nc_id" jdbcType="VARCHAR" javaType="java.lang.String"/>
 					<result property="fullName" column="full_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="shortName" column="short_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="customerType" column="customer_type" jdbcType="INT" javaType="java.lang.Integer" />
@@ -54,7 +55,7 @@
 					<result property="opportunityDescrible" column="opportunity_describle" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="linkManName" column="link_man_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="linkManEmail" column="link_man_email" jdbcType="VARCHAR" javaType="java.lang.String" />
-					<result property="otherEnterpriseNature" column="other_enterprise_nature" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="otherEnterpriceNature" column="other_enterprise_nature" jdbcType="VARCHAR" javaType="java.lang.String" />
 	</resultMap>
 	
 	<resultMap id="CUSTOMERENTERPRICENATURE-MAP" class="CustomerEnterpriceNature">
@@ -216,9 +217,40 @@
 	</sql>
 	
 	<insert id="ADD" parameterClass="CustomerBaseInfo">
-		INSERT INTO 
-		customer_base_info(full_name,short_name,customer_type,customer_area_id,customer_area,country_id,country,registered_funds,registered_address,management_scope,zhongxinbao_number,zhongxinbao_level,remark,enterprise_phone,enterprise_email,customer_completion,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time)
-		VALUES(#fullName#,#shortName#,#customerType#,#areaId#,#area#,#countryId#,#country#,#registeredFunds#,#registeredAddress#,#managementScope#,#zhongxinbaoNumber#,#zhongxinbaoLevel#,#remark#,#enterprisePhone#,#enterpriseEmail#,#customerCompletion#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,now(),now())
+		insert into customer_base_info (nc_id, full_name,
+		short_name, company_type, customer_area_id,
+		customer_area, country_id, country,
+		full_enterprise_nature, other_enterprise_nature,
+		registered_funds, registered_address, management_scope,
+		zhongxinbao_number, zhongxinbao_level, enterprise_phone,
+		enterprise_email, customer_completion, customer_level,
+		customer_type, opportunity_source, other_opportunity,
+		opportunity_describle, has_chi_company, has_chi_purchase,
+		customer_status, loss_reason, qualifications_file_url,
+		factory_location, major_competitors, remark,
+		create_user_id, create_user_name, lastmodify_user_id,
+		lastmodify_user_name, create_time, modify_time,
+		price_sensitivity, loyalty, start_cooperation_time,
+		cooperation_duration, purchasing_season,
+		active_period, is_fuhua_exclusive, cooperation_remark,
+		production_line)
+		values (#ncId#, #fullName#,
+		#shortName#, #companyType#, #areaId#,
+		#area#, #countryId#, #country#,
+		#fullEnterpriseNature#, #otherEnterpriceNature#,
+		#registeredFunds#, #registeredAddress#, #managementScope#,
+		#zhongxinbaoNumber#, #zhongxinbaoLevel#, #enterprisePhone#,
+		#enterpriseEmail#, #customerCompletion#, #customerLevel#,
+		#customerType#, #opportunitySource#, #otherOpportunity#,
+		#opportunityDescrible#, #hasChiCompany#, #hasChiPurchase#,
+		#customerStatus#, #lossReason#, #qualificationsFileUrl#,
+		#factoryLocation#, #majorCompetitors#, #remark#,
+		#createUserId#, #createUserName#, #lastmodifyUserId#,
+		#lastmodifyUserName#, now(), now(),
+		#priceSensitivity#, #loyalty#, #startCooperationTime#,
+		#cooperationDuration#, #purchasingSeason#,
+		#activePeriod#, #isFuhuaExclusive#, #cooperationRemark#,
+		#productionLine#)
 		<selectKey resultClass="java.lang.String" keyProperty="customerId">
 			SELECT @@IDENTITY AS ID
 		</selectKey>
@@ -234,7 +266,7 @@
 						<isNotEmpty prepend=", " property="countryId">country_id=#countryId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="country">country=#country#</isNotEmpty>
 						<isNotEmpty prepend=", " property="companyType">company_type=#companyType#</isNotEmpty>
-						<isNotEmpty prepend=", " property="otherEnterpriseNature">other_enterprise_nature=#otherEnterpriseNature#</isNotEmpty>
+						<isNotEmpty prepend=", " property="otherEnterpriseNature">other_enterprise_nature=#otherEnterpriceNature#</isNotEmpty>
 						<isNotEmpty prepend=", " property="registeredFunds">registered_funds=#registeredFunds#</isNotEmpty>
 
 						<isNotEmpty prepend=", " property="registeredAddress">registered_address=#registeredAddress#</isNotEmpty>

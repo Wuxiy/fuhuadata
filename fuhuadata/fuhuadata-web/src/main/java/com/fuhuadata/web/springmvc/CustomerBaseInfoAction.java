@@ -13,6 +13,7 @@ import com.fuhuadata.vo.CategoryTree;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
 import com.fuhuadata.vo.CustomerBaseInfoDO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
+import com.thoughtworks.xstream.core.util.CustomObjectInputStream;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -178,6 +179,7 @@ public class CustomerBaseInfoAction {
     public ResultPojo updateCustomerBaseInfo(@RequestBody CustomerBaseInfoDO customerBaseInfoDO){
         Result result = new Result();
         CustomerBaseInfo customerBaseInfo = customerBaseInfoDO.getCustomerBaseInfo();
+
         CustomerMakeProduct[] customerMakeProducts = customerBaseInfoDO.getCustomerMakeProducts();
         CustomerEnterpriceNature[] customerEnterpriceNatures = customerBaseInfoDO.getCustomerEnterpriceNatures();
         try{
@@ -202,6 +204,7 @@ public class CustomerBaseInfoAction {
     public ResultPojo doAddCustomerBaseInfo(@RequestBody CustomerBaseInfoDO customerBaseInfoDO){
         Result result = new Result();
         CustomerBaseInfo customerBaseInfo = customerBaseInfoDO.getCustomerBaseInfo();
+        System.out.println(customerBaseInfo.getOtherEnterpriceNature()+"1111111111");
         CustomerMakeProduct[] customerMakeProducts = customerBaseInfoDO.getCustomerMakeProducts();
         CustomerEnterpriceNature[] customerEnterpriceNatures = customerBaseInfoDO.getCustomerEnterpriceNatures();
         try{

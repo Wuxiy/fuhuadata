@@ -1,6 +1,7 @@
 package com.fuhuadata.domain.query;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * Created by hexingfu on 2017/3/18.
@@ -12,9 +13,15 @@ public class QueryBusinessOrder {
     private Integer customerLevel;//客户类型
     private String enterpriseNature;//企业性质
     private String orderProduct;//订单产品
-    private BigDecimal orderPrice;//订单总价
+    private BigDecimal amountPayable;//订单总价
+    private BigDecimal floorPrice;//合同成本价
     private String saleOrganizationId;//销售组织id
+    private String saleOrganizationName;//销售组织name
     private String ncOrderId;//nc系统合同号
+    private String country;//国家
+    private Integer isComplaint;//是否投诉
+    private Date dealTime;//合同时间
+    private Integer isModifyPrice;//是否调价
     private String startTime;//查询合同签定时间开始范围
     private String endTime;//查询合同签定时间结束范围
     private Integer startRow;//分页起始行标
@@ -156,11 +163,59 @@ public class QueryBusinessOrder {
         this.orderProduct = orderProduct;
     }
 
-    public BigDecimal getOrderPrice() {
-        return orderPrice;
+    public BigDecimal getAmountPayable() {
+        return amountPayable;
     }
 
-    public void setOrderPrice(BigDecimal orderPrice) {
-        this.orderPrice = orderPrice;
+    public void setAmountPayable(BigDecimal amountPayable) {
+        this.amountPayable = amountPayable;
+    }
+
+    public BigDecimal getFloorPrice() {
+        return floorPrice;
+    }
+
+    public void setFloorPrice(BigDecimal floorPrice) {
+        this.floorPrice = floorPrice;
+    }
+
+    public String getSaleOrganizationName() {
+        return saleOrganizationName;
+    }
+
+    public void setSaleOrganizationName(String saleOrganizationName) {
+        this.saleOrganizationName = saleOrganizationName;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public Date getDealTime() {
+        return dealTime;
+    }
+
+    public void setDealTime(Date dealTime) {
+        this.dealTime = dealTime;
+    }
+
+    public Integer getIsComplaint() {
+        return isComplaint;
+    }
+
+    public void setIsComplaint(Integer isComplaint) {
+        this.isComplaint = isComplaint;
+    }
+
+    public Integer getIsModifyPrice() {
+        return isModifyPrice;
+    }
+
+    public void setIsModifyPrice(Integer isModifyPrice) {
+        this.isModifyPrice = isModifyPrice;
     }
 }

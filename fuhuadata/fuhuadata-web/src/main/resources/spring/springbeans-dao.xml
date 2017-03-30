@@ -95,4 +95,5 @@
 	<bean id="customerSubcompanyInfoDao" class="com.fuhuadata.dao.impl.CustomerSubcompanyInfoDaoImpl"/>
 	<bean id="businessInfoDao" class="com.fuhuadata.dao.impl.BusinessInfoDaoImpl"/>
 	<bean id="businessRecordDao" class="com.fuhuadata.dao.impl.BusinessRecordDaoImpl"/>
+	<bean id="businessOrderDao" class="com.fuhuadata.dao.impl.BusinessOrderDaoImpl"/>
 </beans>
