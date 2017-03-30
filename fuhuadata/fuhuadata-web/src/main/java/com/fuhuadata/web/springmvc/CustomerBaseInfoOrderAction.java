@@ -27,9 +27,10 @@ public class CustomerBaseInfoOrderAction {
     private OrganizationService organizationService;
 
     @RequestMapping("/entrance")
-    public ModelAndView entrance(String customerId,String customerType){
+    public ModelAndView entrance(String customerId,String customerType,String fullName){
         return new ModelAndView("customerInfo/customerOrderInfo")
                 .addObject("customerType",customerType)
+                .addObject("fullName",fullName)
                 .addObject("customerId",customerId);
     }
 

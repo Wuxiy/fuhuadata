@@ -67,9 +67,10 @@ public class CustomerProductPackingAction {
     @SuppressWarnings("unused")
     @RequestMapping(value="/intoCustomerProductInfo",method= RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerProductPackaging  ",methods = "into")
-    public ModelAndView intoCustomerProductInfo(String customerId,String customerType){
+    public ModelAndView intoCustomerProductInfo(String customerId,String customerType,String fullName){
         return new ModelAndView("customerInfo/customerProductRequest")
                 .addObject("customerType",customerType)
+                .addObject("fullName",fullName)
                 .addObject("customerId",customerId);
     }
 

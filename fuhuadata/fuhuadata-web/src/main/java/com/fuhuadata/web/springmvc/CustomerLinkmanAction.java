@@ -31,8 +31,9 @@ public class CustomerLinkmanAction {
 
     @RequestMapping(value="/intoCustomerLinkmanList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "customerInfo-customerContacts",methods = "into")
-    public ModelAndView intoCustomerLinkmanList(String customerId,String customerType){
+    public ModelAndView intoCustomerLinkmanList(String customerId,String customerType,String fullName){
         return new ModelAndView("customerInfo/customerContacts").addObject("customerId",customerId)
+                .addObject("fullName",fullName)
                 .addObject("customerType",customerType);
     }
 
