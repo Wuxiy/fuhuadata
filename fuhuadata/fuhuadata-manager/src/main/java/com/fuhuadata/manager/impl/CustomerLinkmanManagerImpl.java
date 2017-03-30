@@ -39,9 +39,6 @@ public class CustomerLinkmanManagerImpl implements CustomerLinkmanManager {
     public CustomerLinkman addCustomerLinkman(CustomerLinkman customerLinkman) {
 		try {
 			CustomerLinkman customerLinkmandefault = customerLinkmanDao.getCustomerLinkmanDefaultByCustomerId(customerLinkman.getCustomerId());
-			//设置字符串主键
-			String linkmanId = customerLinkmanDao.getMaxLinkmanIdByCustomerId(customerLinkman.getCustomerId());
-			customerLinkman.setLinkmanId(StringUtil.increment(linkmanId, 3));
 			if (customerLinkmandefault != null && customerLinkman.getIsDefault() == 1) {
 				customerLinkmandefault.setIsDefault(0);
 				customerLinkmanDao.updateCustomerLinkmanById(customerLinkmandefault.getLinkmanId(), customerLinkmandefault);
