@@ -51,6 +51,9 @@ public class BusinessInfoAction {
     @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "queryBusinessInfoPageList")
     @ResponseBody
     public ResultPojo queryBusinessInfoPageList(@RequestBody BusinessInfoVO businessInfoVO){
+        if(businessInfoVO.getCustomerName()==null||"".equals(businessInfoVO.getCustomerName())){
+            businessInfoVO.setCustomerName(null);
+        }
         try{
             Result<List<BusinessInfoVO>> result = businessInfoService.getBusinessInfoByPage(businessInfoVO);
             return result.getResultPojo();
