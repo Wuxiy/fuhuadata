@@ -178,8 +178,8 @@
             businessState:$('#businessState').val(),
             customerLevel:$('#customerLevel').val(),
             enterpriseNature:$('#enterpriseNature').val(),
-            areaClassId:click_node.oneLevelId,
-            areaId:click_node.twoLevelId,
+            /*areaClassId:click_node.oneLevelId,
+            areaId:click_node.twoLevelId,*/
             startRow:pageNum*pageSize,
             pageSize:pageSize
         };
@@ -199,7 +199,7 @@
                     _html += '  <td><a href="">'+ResultData[i].businessName+'</a></td>';
                     _html += '  <td>'+ResultData[i].customerName+'</td>';
                     _html += '  <td lang="zh">'+customerLevelList[ResultData[i].customerLevel-1]+'</td>';
-                    _html += '  <td lang="zh">'+businessOpportunity[ResultData[i].enterpriseNature-1]+'</td>';
+                    _html += '  <td lang="zh">'+ResultData[i].enterpriseNature+'</td>';
                     _html += '  <td>'+ResultData[i].createTime+'A</td>';
                     _html += '  <td>'+ResultData[i].remainDays+'</td>';
                     _html += '  <td lang="zh">'+businessFrom[ResultData[i].businessFrom]+'</td>';
@@ -233,14 +233,13 @@
     function getListCount(){
         var total = 0;
         var data = {
-            areaClassId:click_node.oneLevelId,
-            areaId:click_node.twoLevelId,
-            fullName:$("#fullName").val(),
+            /*areaClassId:click_node.oneLevelId,
+            areaId:click_node.twoLevelId,*/
             customerName:$('#customerName').val(),
             businessFrom:$('#businessFrom').val(),
             businessState:$('#businessState').val(),
             customerLevel:$('#customerLevel').val(),
-            enterpriseNature:$('#enterpriseNature').val(),
+            enterpriseNature:$('#enterpriseNature').val()
         }
         jQuery.ajax({
             url:basePath + '/businessInfo/countBusinessList',

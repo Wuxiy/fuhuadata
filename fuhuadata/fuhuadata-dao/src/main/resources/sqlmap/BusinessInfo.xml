@@ -233,6 +233,7 @@
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>
         </isParameterPresent>
+
         <isNotEmpty prepend=" AND " property="enterpriseNature">
             nature.customer_id=base.customer_id
         </isNotEmpty>
@@ -254,7 +255,7 @@
             <include refid="PAGE-COMMON"/>
         </isParameterPresent>
         <isNotEmpty prepend=" AND " property="enterpriseNature">
-            nature.customer_id=base.customer_id
+        nature.customer_id=base.customer_id
         </isNotEmpty>
     </select>
 </sqlMap>

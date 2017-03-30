@@ -5,7 +5,7 @@
     <typeAlias alias="BusinessOrder" type="com.fuhuadata.domain.BusinessOrder"/>
         <typeAlias alias="QueryBusinessOrder" type="com.fuhuadata.domain.query.QueryBusinessOrder"/>
 
-    <sql id="ORDER-PAGE-COMMON">
+<!--    <sql id="ORDER-PAGE-COMMON">
         <dynamic prepend=" WHERE ">
             <isNotEmpty prepend=" AND " property="customerId">
                 base.short_name = #customerName#
@@ -344,6 +344,6 @@
         <isParameterPresent>
             <include refid="QUERY-COMMON"/>
         </isParameterPresent>
-    </select>
+    </select>-->
 
 </sqlMap>
