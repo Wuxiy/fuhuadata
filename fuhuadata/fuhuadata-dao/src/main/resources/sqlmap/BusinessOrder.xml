@@ -26,7 +26,7 @@
         </dynamic>
     </sql>
 
-<!--    <sql id="ORDER-PAGE-COMMON">
+    <sql id="ORDER-PAGE-COMMON">
         <dynamic prepend=" WHERE ">
             <isNotEmpty prepend=" AND " property="customerId">
                 base.short_name = #customerName#
@@ -449,10 +449,6 @@
         <isParameterPresent>
             <include refid="QUERY-COMMON"/>
         </isParameterPresent>
-<<<<<<< HEAD
-    </select>-->
-=======
->>>>>>> 771a68c3e1bae07ff1dcc5adcf38def945d4962c
-
     </select>
+
 </sqlMap>
