@@ -30,6 +30,7 @@ public abstract class BaseTreeableServiceImpl<E extends BaseEntity<ID> & Treeabl
         if (child.getId() != null && Objects.equal(child.getId(), 0)) {
             return updateSelective(child);
         }
+        child.setWeight(countNextIndex(parent.getId()));
         return save(child);
     }
 
