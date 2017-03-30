@@ -239,7 +239,7 @@
 
         <isNotEqual property="areaClassId" compareValue="0">
             and base.customer_area_id = #areaClassId#
-            <isNotEqual property="areaClassId" compareValue="0">
+            <isNotEqual property="areaId" compareValue="0">
                 and	base.country_id = #areaId#
             </isNotEqual>
         </isNotEqual>
@@ -257,7 +257,6 @@
         <isNotEmpty prepend=", " property="enterpriseNature">
             (select * from customer_enterprise_nature where nature=#enterpriseNature#) nature
         </isNotEmpty>
-
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>
         </isParameterPresent>
