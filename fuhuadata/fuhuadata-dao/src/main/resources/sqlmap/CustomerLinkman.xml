@@ -199,7 +199,7 @@
 		INSERT INTO 
 		customer_linkman(linkman_id,customer_id,name,link_phone1,link_phone2,lemail,posts,response_area,on_job,sex,birthday,nationality,influence,exhibition_habits,fancy,eating_habits,faith,is_default,remarks,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time) 
 		VALUES(#linkmanId#,#customerId#,#name#,#linkPhone1#,#linkPhone2#,#lemail#,#posts#,#responseArea#,#onJob#,#sex#,#birthday#,#nationality#,#influence#,#exhibitionHabits#,#fancy#,#eatingHabits#,#faith#,#isDefault#,#remarks#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
-		<selectKey resultClass="String" keyProperty="linkmanId">
+		<selectKey resultClass="java.lang.String" keyProperty="linkmanId">
 			SELECT @@IDENTITY AS linkman_id
 		</selectKey>
 	</insert>

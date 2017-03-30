@@ -55,7 +55,7 @@
 					<result property="opportunityDescrible" column="opportunity_describle" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="linkManName" column="link_man_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="linkManEmail" column="link_man_email" jdbcType="VARCHAR" javaType="java.lang.String" />
-					<result property="otherEnterpriceNature" column="other_enterprise_nature" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="otherEnterpriseNature" column="other_enterprise_nature" jdbcType="VARCHAR" javaType="java.lang.String" />
 	</resultMap>
 	
 	<resultMap id="CUSTOMERENTERPRICENATURE-MAP" class="CustomerEnterpriceNature">
@@ -237,7 +237,7 @@
 		values (#ncId#, #fullName#,
 		#shortName#, #companyType#, #areaId#,
 		#area#, #countryId#, #country#,
-		#fullEnterpriseNature#, #otherEnterpriceNature#,
+		#fullEnterpriseNature#, #otherEnterpriseNature#,
 		#registeredFunds#, #registeredAddress#, #managementScope#,
 		#zhongxinbaoNumber#, #zhongxinbaoLevel#, #enterprisePhone#,
 		#enterpriseEmail#, #customerCompletion#, #customerLevel#,
@@ -409,10 +409,6 @@
 			<!--如果查询潜在客户，则关联查询联系人信息-->
 			left join customer_linkman lm on base.customer_id = lm.customer_id and is_default = 1
 		</isEqual>
-		<isNotEqual property="areaClassId" compareValue="0" prepend=",">
-			p_area_code pac,
-			p_areaclass pa
-		</isNotEqual>
 		<isNotEmpty prepend="," property="enterpriseNature">
 			(select * from customer_enterprise_nature where nature=#enterpriseNature#) nature
 		</isNotEmpty>
@@ -423,14 +419,13 @@
 		<isNotEmpty prepend="and" property="enterpriseNature">
 			nature.customer_id=base.customer_id
 		</isNotEmpty>
-
-		<isNotEqual property="areaClassId" compareValue="0">
-			and pac.`areaclass_id` = pa.`areaclass_id` and customer_area_id = pac.`areaid`
-			and pa.`areaclass_id`=#areaClassId#
-			<isNotEqual property="areaId" compareValue="0">
-				and	customer_area_id = #areaId#
-			</isNotEqual>
+		<isNotEqual prepend="and" property="areaClassId" compareValue="0">
+			customer_area_id=#areaClassId#
 		</isNotEqual>
+		<isNotEqual property="areaId" compareValue="0">
+			and	country_id = #areaId#
+		</isNotEqual>
+
 		LIMIT #startRow#,#pageSize#
 	</select>
 
@@ -440,7 +435,7 @@
 			base.customer_id as customerId,
 			base.full_name fullName,
 			GROUP_CONCAT(nature.nature) enterpriseNature,
-			base.other_enterprise_nature otherEnterpriceNature,
+			base.other_enterprise_nature otherEnterpriseNature,
 			base.short_name shortName,
 			base.company_type companyType,
 			base.customer_area_id areaId,
@@ -505,10 +500,7 @@
 		<isNotEmpty prepend="," property="enterpriseNature">
 			(select * from customer_enterprise_nature where nature=#enterpriseNature#) nature
 		</isNotEmpty>
-		<isNotEqual property="areaClassId" compareValue="0" prepend=",">
-			p_area_code pac,
-			p_areaclass pa
-		</isNotEqual>
+
 
 		<isParameterPresent>
             <include refid="PAGE-COMMON" />
@@ -516,12 +508,11 @@
 		<isNotEmpty prepend="and" property="enterpriseNature">
 			nature.customer_id=base.customer_id
 		</isNotEmpty>
-		<isNotEqual property="areaClassId" compareValue="0">
-			and pac.`areaclass_id` = pa.`areaclass_id` and customer_area_id = pac.`areaid`
-			and pa.`areaclass_id`=#areaClassId#
-			<isNotEqual property="areaClassId" compareValue="0">
-			and	customer_area_id = #areaId#
-			</isNotEqual>
+		<isNotEqual prepend="and" property="areaClassId" compareValue="0">
+			customer_area_id=#areaClassId#
+		</isNotEqual>
+		<isNotEqual property="areaId" compareValue="0">
+			and	country_id = #areaId#
 		</isNotEqual>
 
 	</select>
