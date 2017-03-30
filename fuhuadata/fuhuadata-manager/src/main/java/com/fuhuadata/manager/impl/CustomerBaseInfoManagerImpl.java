@@ -52,7 +52,6 @@ public class CustomerBaseInfoManagerImpl implements CustomerBaseInfoManager {
 	 */
 	@Transactional
     public CustomerBaseInfoVO addCustomerBaseInfo(List<CustomerEnterpriceNature> customerEnterpriceNatures, List<CustomerMakeProduct> customerMakeProducts , CustomerBaseInfo customerBaseInfo) {
-		System.out.println(customerBaseInfo.getOtherEnterpriceNature()+"1111111111");
 		CustomerBaseInfo cbi = customerBaseInfoDao.addCustomerBaseInfo(customerBaseInfo);
 		System.out.println(cbi.getCustomerId());
 		for(CustomerEnterpriceNature cen:customerEnterpriceNatures){
@@ -83,9 +82,13 @@ public class CustomerBaseInfoManagerImpl implements CustomerBaseInfoManager {
 	public boolean updateCustomerBaseInfo(List<CustomerEnterpriceNature> customerEnterpriceNatures, List<CustomerMakeProduct> customerMakeProducts , CustomerBaseInfo customerBaseInfo) {
 		boolean flag= false;
 			customerBaseInfoDao.deleteCustomerEnterpriceNatureByCustomerId(customerBaseInfo.getCustomerId());
-			customerBaseInfoDao.batchAddNature(customerEnterpriceNatures);
+			if(customerEnterpriceNatures!=null && customerEnterpriceNatures.size()>0){
+				customerBaseInfoDao.batchAddNature(customerEnterpriceNatures);
+			}
 			customerMakeProductDao.deleteCustomerMakeProductByCustomerId(customerBaseInfo.getCustomerId());
-			customerMakeProductDao.addCustomerMakeProducts(customerMakeProducts);
+			if(customerMakeProducts!=null && customerMakeProducts.size()>0){
+				customerMakeProductDao.addCustomerMakeProducts(customerMakeProducts);
+			}
 			flag =  customerBaseInfoDao.updateCustomerBaseInfoById(customerBaseInfo.getCustomerId(), customerBaseInfo) == 1 ? true : false;
 
 		return flag;

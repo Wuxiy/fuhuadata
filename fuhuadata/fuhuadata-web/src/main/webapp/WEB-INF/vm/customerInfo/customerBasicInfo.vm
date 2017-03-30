@@ -2,11 +2,7 @@
     <!--副导航-->
     <div class="nav-deputy shadow-out clearfix">
         #deputyNav(1)
-        <ul class="breadcrumb pull-right">
-            <li><span class="glyphicon glyphicon-map-marker"></span></li>
-            <li><a href="">合作客户</a></li>
-            <li class="active">{变量}</li>
-        </ul>
+        #breadcrumb()
     </div>
     <!--表格容器-->
     <div class="dashboard-wrapper">
@@ -22,8 +18,8 @@
                             <button id="cancelCustomerBasic" data-form-btn="cancel" class="btn" lang="zh">取消</button>
                             <button id="saveCustomerBasic" data-form-btn="save" class="btn btn-primary" lang="zh">保存</button>
                         </div>
-                        <h3 class="panel-title" lang="zh">
-                            客户基本信息
+                        <h3 id="sTitle" class="panel-title" lang="zh">
+                            基本信息
                         </h3>
                     </div>
                     <div class="panel-body clearfix">
@@ -39,7 +35,7 @@
                                     客户全称<sup class="not-null editView hidden">*</sup>
                                 </label>
                                 <div class="col-xs-2">
-                                    <input id="fullName" class="form-control notNull" type="text" value="" />
+                                    <input name="fullName" class="form-control notNull" type="text" value="" />
                                 </div>
                                 <label class="control-label col-xs-1" lang="zh">
                                     客户简称
@@ -416,10 +412,11 @@
 <a id="linkPot" href="" class="hidden"></a>
 <input id="customerId" type="hidden" value='$!{customerId}'>
 <input type="hidden" id="customerType" value="$!{customerType}" />
+<input type="hidden" id="fullName" value="$!{fullName}" />
 <input id="encyId" type="hidden" value="">
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
-##<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerBasicAjax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerBasicInteraction.js"></script>
 

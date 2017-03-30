@@ -2,11 +2,7 @@
     <!--副导航-->
     <div class="nav-deputy shadow-out clearfix">
         #deputyNav(8)
-        <ul class="breadcrumb pull-right">
-            <li><span class="glyphicon glyphicon-map-marker"></span></li>
-            <li><a href="">合作客户</a></li>
-            <li class="active">{变量}</li>
-        </ul>
+        #breadcrumb()
     </div>
     <!--表格容器-->
     <div class="dashboard-wrapper">
@@ -236,8 +232,11 @@
         </div>
     </div>
 </div>
-
+<h3 id="sTitle" class="hidden">子公司信息</h3>
+<input id="customerId" type="hidden" value='$!{customerId}'>
+<input type="hidden" id="customerType" value="$!{customerType}" />
+<input type="hidden" id="fullNameTitle" value="$!{fullName}" />
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
-##<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerAnotherNamer.js"></script>

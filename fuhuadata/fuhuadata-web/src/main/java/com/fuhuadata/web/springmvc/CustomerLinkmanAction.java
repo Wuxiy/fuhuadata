@@ -31,8 +31,9 @@ public class CustomerLinkmanAction {
 
     @RequestMapping(value="/intoCustomerLinkmanList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "customerInfo-customerContacts",methods = "into")
-    public ModelAndView intoCustomerLinkmanList(String customerId,String customerType){
+    public ModelAndView intoCustomerLinkmanList(String customerId,String customerType,String fullName){
         return new ModelAndView("customerInfo/customerContacts").addObject("customerId",customerId)
+                .addObject("fullName",fullName)
                 .addObject("customerType",customerType);
     }
 
@@ -79,6 +80,11 @@ public class CustomerLinkmanAction {
     public ResultPojo addCustomerLinkmanById(@RequestBody CustomerLinkman customerLinkman){
         Result result = new Result();
         try{
+            //
+            customerLinkman.setCreateUserId(0);
+            customerLinkman.setCreateUserName("admin");
+            customerLinkman.setLastmodifyUserId(0);
+            customerLinkman.setLastmodifyUserName("admin");
             result=customerLinkmanService.addCustomerLinkman(customerLinkman);
         }catch(Exception e){
             log.error("新增联系人错误",e);

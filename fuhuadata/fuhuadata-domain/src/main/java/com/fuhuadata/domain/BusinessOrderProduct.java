@@ -21,7 +21,10 @@ public class BusinessOrderProduct {
 
     /**标准产品id**/
     private Integer productId;
-
+    /**报关产品编码**/
+    private String customsClearanceId;
+    /**报关产品名称**/
+    private String customsClearanceName;
     /**客户id**/
     private String customerId;
 
@@ -133,6 +136,9 @@ public class BusinessOrderProduct {
     /**出口退税率**/
     private BigDecimal taxFree;
 
+    /**出口退税方式1:按销售价退税 2：按采购价 3：不退税**/
+    private Integer taxType;
+
     /**毛利率**/
     private BigDecimal grossMargin;
 
@@ -188,6 +194,40 @@ public class BusinessOrderProduct {
     /**修改时间**/
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date modifyTime;
+    /**主包材id**/
+    private Integer mainPackingId;
+
+    public Integer getMainPackingId() {
+        return mainPackingId;
+    }
+
+    public void setMainPackingId(Integer mainPackingId) {
+        this.mainPackingId = mainPackingId;
+    }
+
+    public Integer getTaxType() {
+        return taxType;
+    }
+
+    public void setTaxType(Integer taxType) {
+        this.taxType = taxType;
+    }
+
+    public String getCustomsClearanceId() {
+        return customsClearanceId;
+    }
+
+    public void setCustomsClearanceId(String customsClearanceId) {
+        this.customsClearanceId = customsClearanceId;
+    }
+
+    public String getCustomsClearanceName() {
+        return customsClearanceName;
+    }
+
+    public void setCustomsClearanceName(String customsClearanceName) {
+        this.customsClearanceName = customsClearanceName;
+    }
 
     public Integer getId() {
         return id;

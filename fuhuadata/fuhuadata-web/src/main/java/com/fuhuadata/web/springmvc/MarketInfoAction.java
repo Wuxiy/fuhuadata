@@ -42,9 +42,10 @@ public class MarketInfoAction {
      * @return
      */
     @RequestMapping("/entrance")
-    public ModelAndView entrance(String customerId,String customerType){
+    public ModelAndView entrance(String customerId,String customerType,String fullName){
         return  new ModelAndView("/customerInfo/customerMarketingInfo").addObject("customerId",customerId)
-                .addObject("customerType",customerType);
+                .addObject("customerType",customerType)
+                .addObject("fullName",fullName);
     }
     /**
      * 客户信息-市场信息入口方法

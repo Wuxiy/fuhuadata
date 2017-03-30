@@ -4,12 +4,14 @@
         var tree = this;
         tree.html('');
         var treeRoot = $('<ul class="tree-root"></ul>');
-         $.get(url,function(data,status){
-            if(status == 'success'){
-                creatBranch(data.data,treeRoot);
-                tree.append(treeRoot);
-            }
-        });
+         $.ajax({
+             url:url,
+             type:'GET',
+             async:false    //这里是同步请求
+         }).done(function(result){
+             creatBranch(result.data,treeRoot);
+             tree.append(treeRoot);
+         });
         function creatBranch(getData,parent){
             $.each(getData,function(n,item){
                 var li = $('<li id="'+item.cid+'"></li>');
@@ -33,13 +35,13 @@
                 //点击的是全部
                 obj.oneLevelId = 0;
                 obj.twoLevelId = 0;
-            }else if ($(e.target).parent('li').parent('ul').parent('ul').hasClass('tree-root')){
+            }else if ($(e.target).parent('li').parent('ul').parent('li').attr("id")=='0'){
                 //说明当前点击的是二级目录
                 obj.oneLevelId = id;
                 obj.twoLevelId = 0;
             }else{
                 //当前点击的是子目录，需要查出父id
-                obj.twoLevelId = id;
+                    obj.twoLevelId = id;
                 obj.oneLevelId = $(e.target).parent('li').parent('ul').parent('li').attr('id');
             }
             obj.serach();
