@@ -7,6 +7,11 @@ import java.util.Date;
  * Created by hexingfu on 2017/3/18.
  */
 public class QueryBusinessOrder {
+
+    /**地区id**/
+    private String areaId;
+    /**大区分类id**/
+    private String areaClassId;
     private String orderId;//订单编号
     private String customerId;//客户id
     private String customerName;//客户名称
@@ -217,5 +222,21 @@ public class QueryBusinessOrder {
 
     public void setIsModifyPrice(Integer isModifyPrice) {
         this.isModifyPrice = isModifyPrice;
+    }
+
+    public String getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(String areaId) {
+        this.areaId = areaId;
+    }
+
+    public String getAreaClassId() {
+        return areaClassId;
+    }
+
+    public void setAreaClassId(String areaClassId) {
+        this.areaClassId = areaClassId;
     }
 }

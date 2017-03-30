@@ -315,6 +315,12 @@
             <isNotEmpty prepend=" AND " property="orderBy">
                 order by $orderBy$
             </isNotEmpty>
+            <isNotEqual property="areaClassId" compareValue="0">
+                and base.customer_area_id = #areaClassId#
+                <isNotEqual property="areaClassId" compareValue="0">
+                    and	base.country_id = #areaId#
+                </isNotEqual>
+            </isNotEqual>
             LIMIT #startRow#,#pageSize#
         </isParameterPresent>
     </select>

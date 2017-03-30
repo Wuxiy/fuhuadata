@@ -11,6 +11,11 @@ public class QueryBusinessInfo {
     private int startRow;
     private int pageSize;
 
+    /**地区id**/
+    private String areaId;
+    /**大区分类id**/
+    private String areaClassId;
+
     private String businessId;//商机id
 
     private String customerId;//客户id
@@ -205,5 +210,21 @@ public class QueryBusinessInfo {
 
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public String getAreaClassId() {
+        return areaClassId;
+    }
+
+    public void setAreaClassId(String areaClassId) {
+        this.areaClassId = areaClassId;
+    }
+
+    public String getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(String areaId) {
+        this.areaId = areaId;
     }
 }

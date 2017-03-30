@@ -236,6 +236,14 @@
         <isNotEmpty prepend=" AND " property="enterpriseNature">
             nature.customer_id=base.customer_id
         </isNotEmpty>
+
+        <isNotEqual property="areaClassId" compareValue="0">
+            and base.customer_area_id = #areaClassId#
+            <isNotEqual property="areaClassId" compareValue="0">
+                and	base.country_id = #areaId#
+            </isNotEqual>
+        </isNotEqual>
+
         LIMIT #startRow#,#pageSize#
     </select>
 
@@ -253,6 +261,12 @@
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>
         </isParameterPresent>
+        <isNotEqual property="areaClassId" compareValue="0">
+            and base.customer_area_id = #areaClassId#
+            <isNotEqual property="areaClassId" compareValue="0">
+                and	base.country_id = #areaId#
+            </isNotEqual>
+        </isNotEqual>
         <isNotEmpty prepend=" AND " property="enterpriseNature">
             nature.customer_id=base.customer_id
         </isNotEmpty>
