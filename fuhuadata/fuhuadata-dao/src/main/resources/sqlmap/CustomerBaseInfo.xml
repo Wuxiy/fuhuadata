@@ -55,7 +55,7 @@
 					<result property="opportunityDescrible" column="opportunity_describle" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="linkManName" column="link_man_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="linkManEmail" column="link_man_email" jdbcType="VARCHAR" javaType="java.lang.String" />
-					<result property="otherEnterpriceNature" column="other_enterprise_nature" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="otherEnterpriseNature" column="other_enterprise_nature" jdbcType="VARCHAR" javaType="java.lang.String" />
 	</resultMap>
 	
 	<resultMap id="CUSTOMERENTERPRICENATURE-MAP" class="CustomerEnterpriceNature">
@@ -237,7 +237,7 @@
 		values (#ncId#, #fullName#,
 		#shortName#, #companyType#, #areaId#,
 		#area#, #countryId#, #country#,
-		#fullEnterpriseNature#, #otherEnterpriceNature#,
+		#fullEnterpriseNature#, #otherEnterpriseNature#,
 		#registeredFunds#, #registeredAddress#, #managementScope#,
 		#zhongxinbaoNumber#, #zhongxinbaoLevel#, #enterprisePhone#,
 		#enterpriseEmail#, #customerCompletion#, #customerLevel#,
@@ -419,7 +419,7 @@
 		<isNotEmpty prepend="and" property="enterpriseNature">
 			nature.customer_id=base.customer_id
 		</isNotEmpty>
-		<isNotEqual property="areaClassId" compareValue="0">
+		<isNotEqual prepend="and" property="areaClassId" compareValue="0">
 			customer_area_id=#areaClassId#
 		</isNotEqual>
 		<isNotEqual property="areaId" compareValue="0">
@@ -435,7 +435,7 @@
 			base.customer_id as customerId,
 			base.full_name fullName,
 			GROUP_CONCAT(nature.nature) enterpriseNature,
-			base.other_enterprise_nature otherEnterpriceNature,
+			base.other_enterprise_nature otherEnterpriseNature,
 			base.short_name shortName,
 			base.company_type companyType,
 			base.customer_area_id areaId,
@@ -508,7 +508,7 @@
 		<isNotEmpty prepend="and" property="enterpriseNature">
 			nature.customer_id=base.customer_id
 		</isNotEmpty>
-		<isNotEqual property="areaClassId" compareValue="0">
+		<isNotEqual prepend="and" property="areaClassId" compareValue="0">
 			customer_area_id=#areaClassId#
 		</isNotEqual>
 		<isNotEqual property="areaId" compareValue="0">

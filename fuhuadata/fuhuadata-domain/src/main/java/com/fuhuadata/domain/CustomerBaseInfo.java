@@ -151,7 +151,7 @@ public class CustomerBaseInfo implements Serializable{
 	//企业性质集合名称，多个性质逗号分隔
 	private String fullEnterpriseNature;
 	//其他性质
-	private String otherEnterpriceNature;
+	private String otherEnterpriseNature;
 	//价格敏感度
 	private String priceSensitivity;
 	//忠诚度
@@ -172,12 +172,12 @@ public class CustomerBaseInfo implements Serializable{
 	public CustomerBaseInfo() {
 	}
 
-	public String getOtherEnterpriceNature() {
-		return otherEnterpriceNature;
+	public String getOtherEnterpriseNature() {
+		return otherEnterpriseNature;
 	}
 
-	public void setOtherEnterpriceNature(String otherEnterpriceNature) {
-		this.otherEnterpriceNature = otherEnterpriceNature;
+	public void setOtherEnterpriseNature(String otherEnterpriseNature) {
+		this.otherEnterpriseNature = otherEnterpriseNature;
 	}
 
 	public String getCustomerId() {

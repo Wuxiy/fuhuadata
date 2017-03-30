@@ -204,7 +204,7 @@ public class CustomerBaseInfoAction {
     public ResultPojo doAddCustomerBaseInfo(@RequestBody CustomerBaseInfoDO customerBaseInfoDO){
         Result result = new Result();
         CustomerBaseInfo customerBaseInfo = customerBaseInfoDO.getCustomerBaseInfo();
-        System.out.println(customerBaseInfo.getOtherEnterpriceNature()+"1111111111");
+       /* System.out.println(customerBaseInfo.getOtherEnterpriseNature()+"1111111111");*/
         CustomerMakeProduct[] customerMakeProducts = customerBaseInfoDO.getCustomerMakeProducts();
         CustomerEnterpriceNature[] customerEnterpriceNatures = customerBaseInfoDO.getCustomerEnterpriceNatures();
         try{
