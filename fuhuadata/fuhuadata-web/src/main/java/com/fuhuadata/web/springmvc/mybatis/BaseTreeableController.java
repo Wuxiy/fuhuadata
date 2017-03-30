@@ -39,7 +39,7 @@ public abstract class BaseTreeableController<E extends BaseEntity<ID> & Treeable
     @RequestMapping(value = "ajax/load", method = RequestMethod.GET)
     @ResponseBody
     public ResultPojo load(HttpServletRequest request,
-                           @RequestParam(value = "async", defaultValue = "true" ) boolean async,
+                           @RequestParam(value = "async", defaultValue = "false" ) boolean async,
                            @RequestParam(value = "searchName", required = false) String searchName,
                            @RequestParam(value = "parentId", required = false) ID parentId) {
 
@@ -142,7 +142,7 @@ public abstract class BaseTreeableController<E extends BaseEntity<ID> & Treeable
     @RequestMapping(value = {"/ajax/add", "/ajax/update"}, method = RequestMethod.POST)
     @ResponseBody
     public ResultPojo ajaxAddChild(E node) {
-        Result<Integer> result = new Result<Integer>(true);
+        Result<ID> result = new Result<ID>(true);
 
         if (node == null) {
             result.setSuccess(false);
@@ -153,7 +153,7 @@ public abstract class BaseTreeableController<E extends BaseEntity<ID> & Treeable
         ID parentId = node.getParentId();
         E parent = baseService.get(parentId);
 
-        int id = baseService.appendChild(parent, node);
+        ID id = baseService.appendChild(parent, node);
 
         result.addDefaultModel(id);
         return result.getResultPojo();

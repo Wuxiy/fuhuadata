@@ -30,11 +30,10 @@ public interface BaseTreeableService<E extends BaseEntity<ID> & Treeable<ID>, ID
 
     /**
      * 新建子节点
-     *
-     * @param parent
+     *  @param parent
      * @param child
      */
-    int appendChild(E parent, E child);
+    ID appendChild(E parent, E child);
 
     /**
      * 删除节点，同时删除子节点
