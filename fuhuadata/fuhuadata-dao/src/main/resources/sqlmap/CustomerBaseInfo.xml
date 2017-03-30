@@ -409,10 +409,6 @@
 			<!--如果查询潜在客户，则关联查询联系人信息-->
 			left join customer_linkman lm on base.customer_id = lm.customer_id and is_default = 1
 		</isEqual>
-		<isNotEqual property="areaClassId" compareValue="0" prepend=",">
-			p_area_code pac,
-			p_areaclass pa
-		</isNotEqual>
 		<isNotEmpty prepend="," property="enterpriseNature">
 			(select * from customer_enterprise_nature where nature=#enterpriseNature#) nature
 		</isNotEmpty>
@@ -423,14 +419,13 @@
 		<isNotEmpty prepend="and" property="enterpriseNature">
 			nature.customer_id=base.customer_id
 		</isNotEmpty>
-
 		<isNotEqual property="areaClassId" compareValue="0">
-			and pac.`areaclass_id` = pa.`areaclass_id` and customer_area_id = pac.`areaid`
-			and pa.`areaclass_id`=#areaClassId#
-			<isNotEqual property="areaId" compareValue="0">
-				and	customer_area_id = #areaId#
-			</isNotEqual>
+			customer_area_id=#areaClassId#
 		</isNotEqual>
+		<isNotEqual property="areaId" compareValue="0">
+			and	country_id = #areaId#
+		</isNotEqual>
+
 		LIMIT #startRow#,#pageSize#
 	</select>
 
@@ -505,10 +500,7 @@
 		<isNotEmpty prepend="," property="enterpriseNature">
 			(select * from customer_enterprise_nature where nature=#enterpriseNature#) nature
 		</isNotEmpty>
-		<isNotEqual property="areaClassId" compareValue="0" prepend=",">
-			p_area_code pac,
-			p_areaclass pa
-		</isNotEqual>
+
 
 		<isParameterPresent>
             <include refid="PAGE-COMMON" />
@@ -517,11 +509,10 @@
 			nature.customer_id=base.customer_id
 		</isNotEmpty>
 		<isNotEqual property="areaClassId" compareValue="0">
-			and pac.`areaclass_id` = pa.`areaclass_id` and customer_area_id = pac.`areaid`
-			and pa.`areaclass_id`=#areaClassId#
-			<isNotEqual property="areaClassId" compareValue="0">
-			and	customer_area_id = #areaId#
-			</isNotEqual>
+			customer_area_id=#areaClassId#
+		</isNotEqual>
+		<isNotEqual property="areaId" compareValue="0">
+			and	country_id = #areaId#
 		</isNotEqual>
 
 	</select>
