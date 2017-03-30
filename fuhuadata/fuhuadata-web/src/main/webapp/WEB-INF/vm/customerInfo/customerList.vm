@@ -1,5 +1,5 @@
 <div class="nav-deputy shadow-out clearfix">
-    #location()
+    #breadcrumb()
 </div>
 <!--tab内容-->
 <div class="dashboard-wrapper">

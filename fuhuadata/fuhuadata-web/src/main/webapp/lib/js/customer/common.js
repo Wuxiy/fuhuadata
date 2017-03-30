@@ -20,7 +20,7 @@ function createCrumbsD() {
     }else{
         s = '<li><a href="/customerBaseInfo/customerListPageInit?customerType=3">流失客户</a></li>';
     }
-    var t = '<li id="pTitle" class="active">'+$('#fullName').val()+'</li>';
+    var t = '<li id="pTitle" class="active">'+($('#fullName').val()==''?'新增':$('#fullName').val())+'</li>';
     return f+s+t;
 }
 function createCrumbsAnother() {
