@@ -114,10 +114,11 @@ public class CustomerSubcompanyInfoAction {
         Result<CustomerSubcompanyInfo> result = new Result<CustomerSubcompanyInfo>();
         List<CustomerEnterpriceNature> list = new ArrayList<CustomerEnterpriceNature>();
         try{
-            list = Arrays.asList(customerSubcompanyInfoVO.getCustomerEnterpriceNatures());
-            if(list!=null&&list.size()>0&&customerSubcompanyInfoVO.getCustomerSubcompanyInfo()!=null) {
-                result = customerSubcompanyInfoService.updateCustomerSubcompanyInfoById(list, customerSubcompanyInfoVO.getCustomerSubcompanyInfo());
+            CustomerEnterpriceNature[] customerEnterpriceNatures = customerSubcompanyInfoVO.getCustomerEnterpriceNatures();
+            if(customerEnterpriceNatures!=null && customerEnterpriceNatures.length>0) {
+                list = Arrays.asList(customerSubcompanyInfoVO.getCustomerEnterpriceNatures());
             }
+            result = customerSubcompanyInfoService.updateCustomerSubcompanyInfoById(list, customerSubcompanyInfoVO.getCustomerSubcompanyInfo());
         }catch(Exception e){
             result.setSuccess(false);
             log.error("根据id更新子公司信息错误",e);

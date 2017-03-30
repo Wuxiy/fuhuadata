@@ -16,6 +16,7 @@ import com.fuhuadata.web.util.SystemLogAnnotation;
 import com.thoughtworks.xstream.core.util.CustomObjectInputStream;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.aspectj.org.eclipse.jdt.internal.compiler.ast.ArrayReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -183,8 +185,14 @@ public class CustomerBaseInfoAction {
         CustomerMakeProduct[] customerMakeProducts = customerBaseInfoDO.getCustomerMakeProducts();
         CustomerEnterpriceNature[] customerEnterpriceNatures = customerBaseInfoDO.getCustomerEnterpriceNatures();
         try{
-            List<CustomerEnterpriceNature> list1 = Arrays.asList(customerEnterpriceNatures);
-            List<CustomerMakeProduct> list2 = Arrays.asList(customerMakeProducts);
+            List<CustomerEnterpriceNature> list1 = new ArrayList<CustomerEnterpriceNature>();
+            if(customerEnterpriceNatures!=null&&customerEnterpriceNatures.length>0) {
+                list1=Arrays.asList(customerEnterpriceNatures);
+            }
+            List<CustomerMakeProduct> list2 = new ArrayList<CustomerMakeProduct>();
+            if(customerMakeProducts !=null && customerMakeProducts.length>0){
+               list2= Arrays.asList(customerMakeProducts);
+            }
             result =  customerBaseInfoService.updateCustomerBaseInfo(list1,list2,customerBaseInfo);
             }catch(Exception e){
                 result.setSuccess(false);
@@ -204,12 +212,17 @@ public class CustomerBaseInfoAction {
     public ResultPojo doAddCustomerBaseInfo(@RequestBody CustomerBaseInfoDO customerBaseInfoDO){
         Result result = new Result();
         CustomerBaseInfo customerBaseInfo = customerBaseInfoDO.getCustomerBaseInfo();
-        System.out.println(customerBaseInfo.getOtherEnterpriceNature()+"1111111111");
         CustomerMakeProduct[] customerMakeProducts = customerBaseInfoDO.getCustomerMakeProducts();
         CustomerEnterpriceNature[] customerEnterpriceNatures = customerBaseInfoDO.getCustomerEnterpriceNatures();
         try{
-            List<CustomerEnterpriceNature> list1 = Arrays.asList(customerEnterpriceNatures);
-            List<CustomerMakeProduct> list2 = Arrays.asList(customerMakeProducts);
+            List<CustomerEnterpriceNature> list1 = new ArrayList<CustomerEnterpriceNature>();
+            if(customerEnterpriceNatures!=null&&customerEnterpriceNatures.length>0) {
+                list1=Arrays.asList(customerEnterpriceNatures);
+            }
+            List<CustomerMakeProduct> list2 = new ArrayList<CustomerMakeProduct>();
+            if(customerMakeProducts !=null && customerMakeProducts.length>0){
+                list2= Arrays.asList(customerMakeProducts);
+            }
             result =  customerBaseInfoService.addCustomerBaseInfo(list1,list2,customerBaseInfo);
         }catch(Exception e){
             result.setSuccess(false);
