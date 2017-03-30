@@ -43,4 +43,17 @@
         select case when max(order_index) is null then 1 else (max(order_index) + 1) end
         from p_menu where parent_id = #{parentId}
     </select>
+
+    <update id="updateChildrenParentIds">
+        UPDATE p_menu SET parent_ids=(#{newParentIds} || SUBSTRING(parent_ids, LENGTH(#{oldParentIds})+1))
+        WHERE parent_ids LIKE CONCAT(#{oldParentIds}, '%')
+    </update>
+
+    <select id="listSelfAndNextSiblings" resultMap="BaseResultMap">
+        SELECT
+        <include refid="menuColumns"/>
+        FROM p_menu m
+        WHERE m.parent_id = #{parentId} AND m.order_index &gt;= #{weight}
+        ORDER BY m.order_index ASC
+    </select>
 </mapper>

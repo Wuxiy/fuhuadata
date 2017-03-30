@@ -159,6 +159,15 @@ public abstract class BaseTreeableController<E extends BaseEntity<ID> & Treeable
         return result.getResultPojo();
     }
 
+    @RequestMapping("/ajax/move")
+    @ResponseBody
+    public ResultPojo ajaxMove(@RequestParam("sid") ID sourceId, @RequestParam("tid") ID targetId) {
+        baseService.move(sourceId, targetId, "prev");
+
+        Result<Boolean> result = new Result<Boolean>(true);
+        return result.getResultPojo();
+    }
+
     /**
      * 将扁平的 List 转换为树结构
      * @param items 包含父节点的集合

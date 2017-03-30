@@ -60,4 +60,30 @@ public interface BaseTreeableService<E extends BaseEntity<ID> & Treeable<ID>, ID
      */
     List<E> findChildren(List<E> parents, Example example);
 
+    /**
+     * 移动节点
+     * @param source
+     * @param target
+     * @param moveType
+     */
+    void move(E source, E target, String moveType);
+
+    /**
+     * 移动节点
+     * @param sourceId
+     * @param targetId
+     * @param moveType
+     */
+    void move(ID sourceId, ID targetId, String moveType);
+
+    /**
+     * 更新
+     * @param newChildrenParentIds
+     * @param oldChildrenParentIds
+     * @return
+     */
+    int updateChildrenParentIds(String newChildrenParentIds, String oldChildrenParentIds);
+
+    List<E> listSelfAndNextSiblings(ID parentId, int weight);
+
 }

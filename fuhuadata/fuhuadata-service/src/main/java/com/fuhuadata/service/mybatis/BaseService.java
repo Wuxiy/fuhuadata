@@ -27,7 +27,11 @@ public interface BaseService<E extends BaseEntity<ID>, ID extends Serializable> 
 
     int update(E entity);
 
+    int update(List<E> entices);
+
     int updateSelective(E entity);
+
+    int updateBatch(List<E> entices);
 
     int delete(ID id);
 
