@@ -430,7 +430,7 @@
 		<isNotEqual property="areaClassId" compareValue="0">
 			and pac.`areaclass_id` = pa.`areaclass_id` and customer_area_id = pac.`areaid`
 			and pa.`areaclass_id`=#areaClassId#
-			<isNotEqual property="areaClassId" compareValue="0">
+			<isNotEqual property="areaId" compareValue="0">
 				and	customer_area_id = #areaId#
 			</isNotEqual>
 		</isNotEqual>

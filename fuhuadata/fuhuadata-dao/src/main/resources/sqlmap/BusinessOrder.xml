@@ -317,7 +317,7 @@
             </isNotEmpty>
             <isNotEqual property="areaClassId" compareValue="0">
                 and base.customer_area_id = #areaClassId#
-                <isNotEqual property="areaClassId" compareValue="0">
+                <isNotEqual property="areaId" compareValue="0">
                     and	base.country_id = #areaId#
                 </isNotEqual>
             </isNotEqual>
@@ -359,6 +359,12 @@
             <isNotEmpty prepend=" AND " property="orderBy">
                 order by $orderBy$
             </isNotEmpty>
+            <isNotEqual property="areaClassId" compareValue="0">
+                and base.customer_area_id = #areaClassId#
+                <isNotEqual property="areaId" compareValue="0">
+                    and	base.country_id = #areaId#
+                </isNotEqual>
+            </isNotEqual>
             limit #startRow#,#pageSize#
         </isParameterPresent>
     </select>
@@ -374,6 +380,12 @@
             <isNotEmpty prepend=" AND " property="enterpriseNature">
                 nature.customer_id=base.customer_id
             </isNotEmpty>
+            <isNotEqual property="areaClassId" compareValue="0">
+                and base.customer_area_id = #areaClassId#
+                <isNotEqual property="areaId" compareValue="0">
+                    and	base.country_id = #areaId#
+                </isNotEqual>
+            </isNotEqual>
         </isParameterPresent>
     </select>
 
@@ -390,6 +402,12 @@
             (select * from customer_enterprise_nature where nature=#enterpriseNature#) nature
         </isNotEmpty>
         <isParameterPresent>
+            <isNotEqual property="areaClassId" compareValue="0">
+                and base.customer_area_id = #areaClassId#
+                <isNotEqual property="areaId" compareValue="0">
+                    and	base.country_id = #areaId#
+                </isNotEqual>
+            </isNotEqual>
             <include refid="OFFER-PAGE-COMMON"/>
             <isNotEmpty prepend=" AND " property="enterpriseNature">
                 nature.customer_id=base.customer_id
@@ -412,6 +430,12 @@
         from
         business_order
         <isParameterPresent>
+            <isNotEqual property="areaClassId" compareValue="0">
+                and base.customer_area_id = #areaClassId#
+                <isNotEqual property="areaId" compareValue="0">
+                    and	base.country_id = #areaId#
+                </isNotEqual>
+            </isNotEqual>
             <include refid="QUERY-COMMON"/>
             <isNotEmpty prepend=" AND " property="orderBy">
                 order by $orderBy$
