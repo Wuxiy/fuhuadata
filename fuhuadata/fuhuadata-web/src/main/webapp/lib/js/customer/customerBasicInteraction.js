@@ -3,40 +3,16 @@
  */
 
 $(function () {
-    //select——国家&地区联动下拉框
-    $.ajax({
-        url:basePath+'/customerBaseInfo/initAreaCategoryTree',
-        type:'GET'
-        // async:false
-    }).done(function (result) {
-        var data = result.data[0].nodes;
+
+    //获取地区和国家数据
+    var areaData = getAreaData();
+    $(document).on('change.screen','#areaId',function () {
         var areaId = $('#areaId');
         var countryId = $('#countryId');
-        var options = '';
-        $.each(data,function (n,area) {
-            options += '<option value="'+area.cid+'">'+area.cname+'</option>';
-        });
-        areaId.append(options);
-        $(document).on('change.screen','#areaId',function () {
-            var val = $(this).val();
-            $.each(data,function (n,area) {
-                var options = '';
-                if(val!=0 && val==area.cid){
-                    options += '<option value="0" selected lang="zh">——请选择国家——</option>';
-                    $.each(area.nodes,function (n,state) {
-                        options += '<option value="'+state.cid+'">'+state.cname+'</option>';
-                    });
-                    countryId.html(options);
-                    return false;
-                }else if(val=='-1'){
-                    options += '<option value="0" selected lang="zh">——请优先选择地区——</option>';
-                    countryId.html(options);
-                    return false;
-                }else {
-                    return true;
-                }
-            });
-        });
+        //取得地区下拉框的值
+        var areaIdVal = areaId.val();
+        //根据地区下拉框赋值创建国家下拉框
+        creatCountrySelected(areaData,areaIdVal,countryId);
     });
 
     //新增页面——customerId为空字符串说明是新增页面

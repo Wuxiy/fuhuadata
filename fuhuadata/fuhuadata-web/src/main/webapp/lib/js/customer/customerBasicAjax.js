@@ -13,10 +13,24 @@ function customerBasicInfo(result){
     $('[name="customerId"]').val(getData.customerId);
     $('#fullName').val(getData.fullName);
     $('#shortName').val(getData.shortName);
-    $('#areaId').val((getData.areaId ? -1 : getData.areaId));
-    $('#countryId').val((getData.countryId ? -1 : getData.countryId));
-    $('#area').val(getData.area);
-    $('#country').val(getData.country);
+    // $('#areaId').val(getData.areaId);
+    // $('#countryId').val(getData.countryId);
+    // $('#area').val(getData.area);
+    // $('#country').val(getData.country);
+
+    var areaId = $('#areaId');
+    var countryId = $('#countryId');
+    //获取地区树数据
+    var areaData =  getAreaData();
+    //创建地区下拉框
+    creatAreaSelected(areaData,areaId);
+    //给地区下拉框赋值
+    areaId.val(getData.areaId);
+    var areaIdVal = areaId.val();
+    //根据地区下拉框赋值创建国家下拉框
+    creatCountrySelected(areaData,areaIdVal,countryId);
+    //给国家下拉框赋值
+    countryId.val(getData.countryId);
 
     $('#zhongxinbaoNumber').val(getData.zhongxinbaoNumber);
     $('#zhongxinbaoLevel').val(getData.zhongxinbaoLevel);
@@ -212,4 +226,47 @@ function customFieldObj(){
         arr.push(obj);
     });
     return JSON.stringify(arr);
+}
+/**
+ * 动态创建联动下拉框
+ */
+//获取数据
+function getAreaData() {
+    var data;
+    $.ajax({
+        url:basePath+'/customerBaseInfo/initAreaCategoryTree',
+        type:'GET',
+        async:false
+    }).done(function (result) {
+        data = result.data[0].nodes;
+    });
+    return data;
+}
+//创建地区下拉框
+function creatAreaSelected(data,el) {
+    var options = '';
+    $.each(data,function (n,area) {
+        options += '<option value="'+area.cid+'">'+area.cname+'</option>';
+    });
+    el.append(options);
+}
+//创建国家下拉框
+function creatCountrySelected(data,val,el) {
+    $.each(data,function (n,area) {
+        var options = '';
+        if(val!=0 && val==area.cid){
+            options += '<option value="0" selected lang="zh">——请选择国家——</option>';
+            $.each(area.nodes,function (n,state) {
+                options += '<option value="'+state.cid+'">'+state.cname+'</option>';
+            });
+            el.html(options);
+            return false;
+        }else if(val=='-1'){
+            options += '<option value="0" selected lang="zh">——请优先选择地区——</option>';
+            el.html(options);
+            return false;
+        }else {
+            return true;
+        }
+    });
 }
