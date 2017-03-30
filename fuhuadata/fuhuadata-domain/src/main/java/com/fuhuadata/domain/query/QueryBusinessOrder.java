@@ -13,6 +13,7 @@ public class QueryBusinessOrder {
     /**大区分类id**/
     private String areaClassId;
     private String orderId;//订单编号
+    private String businessId;//商机编号
     private String customerId;//客户id
     private String customerName;//客户名称
     private Integer customerLevel;//客户类型
@@ -238,5 +239,13 @@ public class QueryBusinessOrder {
 
     public void setAreaClassId(String areaClassId) {
         this.areaClassId = areaClassId;
+    }
+
+    public String getBusinessId() {
+        return businessId;
+    }
+
+    public void setBusinessId(String businessId) {
+        this.businessId = businessId;
     }
 }
