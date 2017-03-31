@@ -51,10 +51,6 @@
         </selectKey>
     </insert>
 
-    <insert id="ADD-SUITABLE-PRODUCT" parameterClass="ProductComponent">
-
-    </insert>
-
     <update id="ADD-SUITABLE-PRODUCT" parameterClass="java.util.List">
         <![CDATA[
             INSERT INTO customer_make_products

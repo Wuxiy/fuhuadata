@@ -26,10 +26,6 @@
         </dynamic>
     </sql>
 
-<<<<<<< HEAD
-=======
-
->>>>>>> edb9a04b79b5e4e620470075187947e723989011
     <sql id="ORDER-PAGE-COMMON">
         <dynamic prepend=" WHERE ">
             <isNotEmpty prepend=" AND " property="customerId">

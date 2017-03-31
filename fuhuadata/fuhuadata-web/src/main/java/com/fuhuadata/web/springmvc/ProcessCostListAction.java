@@ -1,10 +1,6 @@
 package com.fuhuadata.web.springmvc;
 
-import com.fuhuadata.domain.ComponentCost;
-import com.fuhuadata.domain.FreightCost;
-import com.fuhuadata.domain.PortChargesCost;
-import com.fuhuadata.domain.PreparationProcessCost;
-import com.fuhuadata.domain.Rate;
+import com.fuhuadata.domain.*;
 import com.fuhuadata.domain.query.*;
 import com.fuhuadata.service.ComponentCostService;
 import com.fuhuadata.service.FreightCostService;
@@ -22,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -230,7 +227,7 @@ public class ProcessCostListAction {
     @SystemLogAnnotation(module = "知识库-成分价格",methods = "执行新增")
     public ResultPojo doAddComponentCost(@RequestBody ComponentCost componentCost){
         try{
-            Result<ComponentCost> result = componentCostService.addComponentCost(componentCost);
+            Result<ComponentCost> result = componentCostService.addComponentCost(componentCost,new ArrayList<ProductComponent>());
             return result.getResultPojo();
         }catch(Exception e){
             log.error("添加成分价格错误");
