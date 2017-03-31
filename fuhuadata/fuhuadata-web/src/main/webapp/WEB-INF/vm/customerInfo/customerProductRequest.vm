@@ -2,11 +2,7 @@
     <!--副导航-->
     <div class="nav-deputy shadow-out clearfix">
         #deputyNav(4)
-        <ul class="breadcrumb pull-right">
-            <li><span class="glyphicon glyphicon-map-marker"></span></li>
-            <li><a href="">合作客户</a></li>
-            <li class="active">{变量}</li>
-        </ul>
+        #breadcrumb()
     </div>
     <!--表格容器-->
     <div class="dashboard-wrapper">
@@ -14,7 +10,7 @@
             <div class="col-xs-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title" lang="zh">
+                        <h3 id="sTitle" class="panel-title" lang="zh">
                             产品要求
                         </h3>
                     </div>
@@ -44,33 +40,12 @@
         </div>
     </div>
 </div>
-<input id="customerId" type="hidden" value='${customerId}'>
+<input id="customerId" type="hidden" value='$!{customerId}'>
+<input id="customerType" type="hidden" value='$!{customerType}'>
+<input id="fullName" type="hidden" value='$!{fullName}'>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
-##<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        getData(basePath + '/customerProductPacking/getCustomerProductInfoById','GET',GetRequest(),ProductRequestList);
-    })
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerProductRequest.js"></script>
 
-    function ProductRequestList(result) {
-        var ResultData = result;
-        console.log(ResultData);
-
-        var productRequestList = document.getElementById('productRequestList');
-        for(var i=0;i<ResultData.length;i++){
-            productRequestList.innerHTML += '<tr>'+
-                    '<td><a href="">'+ResultData[i].customerProductName+'</a></td>'+
-                    '<td>'+ResultData[i].categorySerialNumber+'</td>'+
-                    '<td>'+ResultData[i].categoryName+'</td>'+
-                    '<td>'+ResultData[i].productName+'</td>'+
-                    '<td>'+ResultData[i].brand+'</td>'+
-                    '<td>'+ResultData[i].specification+'</td>'+
-                    '<td>'+ResultData[i].model+'</td>'+
-                    '<td>'+ResultData[i].mainUnit+'</td>'+
-                    '<td>'+ResultData[i].factoryName+'</td>'+
-                    '</tr>';
-        }
-    }
-</script>
 

@@ -3,6 +3,14 @@
  */
 
 $(document).ready(function(){
+
+    //创建面包屑导航
+    $('#location').append(createCrumbsD());
+
+    //设置title标题
+    var title = $('#pTitle').text()+'——'+$('#sTitle').text();
+    $('#hTitle').text(iGetInnerText(title));
+
     getData(basePath + '/customerVisitRecord/getCustomerVisitRecordByCustomerId','POST',GetRequest(),visitList);
 
     //新增提交

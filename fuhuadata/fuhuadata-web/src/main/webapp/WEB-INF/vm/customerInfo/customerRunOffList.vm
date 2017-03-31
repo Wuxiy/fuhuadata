@@ -1,12 +1,5 @@
 <div class="nav-deputy shadow-out clearfix">
-   #* <ul class="nav nav-tabs pull-left">
-        <li class="active"><a href="#cooperative" data-toggle="tab" lang="zh">合作客户</a></li>
-        <li><a href="#potential" data-toggle="tab" lang="zh">潜在客户</a></li>
-        <li><a href="#lossing" data-toggle="tab" lang="zh">流失客户</a></li>
-    </ul>*#
-    <ul class="breadcrumb pull-right">
-        <li><span class="glyphicon glyphicon-map-marker"></span></li>
-    </ul>
+   #breadcrumb()
 </div>
 <!--tab内容-->
 <div class="dashboard-wrapper">
@@ -28,7 +21,7 @@
             <div id="cooperative" class="tab-pane fade in active">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title" lang="zh">流失客户列表</h3>
+                        <h3 id="sTitle" class="panel-title" lang="zh">流失客户列表</h3>
                     </div>
                     <div class="panel-body clearfix">
                         <!--搜索&筛选控件-->
@@ -168,10 +161,13 @@
 </div>
 
 <input type="hidden" id="customerType" value="${customerType}" />
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerListCommon.js"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/pagination/pagination.js"></script>
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/js/pagination/pagination.css" />
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript">
+
     var pageSize = 2;//分页步长
     var click_node ={oneLevelId:0,twoLevelId:0};//接收目录树点击节点的id及其父id
     click_node.serach = function(){
@@ -228,7 +224,7 @@
                         var customer = list[i];
                         _html += '<tr>';
                         _html += '	<td>' + customer.customerId + '</td>';
-                        _html += '  <td><a href="${request.contextPath}/customerBaseInfo/intoCustomerBaseInfoDetails?customerType=3&customerId='+customer.customerId+'" target="_blank">' + customer.fullName + '</a></td>';
+                        _html += '  <td><a href="${request.contextPath}/customerBaseInfo/intoCustomerBaseInfoDetails?customerType=3&customerId='+customer.customerId+'&fullName='+customer.fullName+'" target="_blank">' + customer.fullName + '</a></td>';
                         _html += '  <td>' + customer.shortName + '</td>';
                         _html += '  <td lang="zh">' + customer.country + '</td>';
                         _html += '  <td lang="zh">' + customerLevelList[customer.customerLevel - 1] + '</td>';

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>CRM系统</title>
+    <title id="hTitle">CRM系统</title>
     <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/css/fileinput.css" />
     <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/dataTables/dataTables.bootstrap.css" />
