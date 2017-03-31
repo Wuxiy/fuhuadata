@@ -38,8 +38,7 @@ public class BusinessInfoAction {
     @RequestMapping(value="/intoBusinessInfo",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "into")
     public ModelAndView intoBusinessInfo(){
-        String businessId = bCodeService.getNextBusinessCode();
-        return new ModelAndView("/salesStatistics/businessOpportunity").addObject("businessId",businessId);
+        return new ModelAndView("/salesStatistics/businessOpportunity");
     }
 
     /**
@@ -110,6 +109,7 @@ public class BusinessInfoAction {
         }
         return result.getResultPojo();
     }
+
 
     /**
      * get by id

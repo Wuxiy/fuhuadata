@@ -5,6 +5,7 @@
     <typeAlias alias="BusinessInfo" type="com.fuhuadata.domain.BusinessInfo"/>
     <typeAlias alias="QueryBusinessInfo" type="com.fuhuadata.domain.query.QueryBusinessInfo"/>
     <typeAlias alias="BusinessInfoVO" type="com.fuhuadata.vo.BusinessInfoVO"/>
+
     <resultMap id="BUSINESSINFO-MAP" class="BusinessInfo">
         <result column="business_id" jdbcType="VARCHAR" property="businessId" javaType="java.lang.String"/>
         <result column="customer_id" jdbcType="VARCHAR" property="customerId" javaType="java.lang.String"/>
