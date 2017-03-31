@@ -26,11 +26,8 @@
         </dynamic>
     </sql>
 
-<<<<<<< HEAD
-<sql id="ORDER-PAGE-COMMON">
-=======
+
     <sql id="ORDER-PAGE-COMMON">
->>>>>>> 7880a0296e0e59a87dd7bf1e78feb3093145b93a
         <dynamic prepend=" WHERE ">
             <isNotEmpty prepend=" AND " property="customerId">
                 base.short_name = #customerName#
