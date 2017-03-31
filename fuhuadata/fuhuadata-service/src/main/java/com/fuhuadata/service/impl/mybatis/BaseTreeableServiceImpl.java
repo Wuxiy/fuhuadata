@@ -23,7 +23,7 @@ public abstract class BaseTreeableServiceImpl<E extends BaseEntity<ID> & Treeabl
         entity.setId((ID) Integer.valueOf(0));
         entity.setParentIds("");
         entity.setName("全部");
-        return null;
+        return entity;
     }
 
     @Override
