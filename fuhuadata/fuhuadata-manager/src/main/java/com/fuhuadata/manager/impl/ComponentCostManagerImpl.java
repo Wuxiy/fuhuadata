@@ -2,11 +2,11 @@ package com.fuhuadata.manager.impl;
 
 import com.fuhuadata.dao.ComponentCostDao;
 import com.fuhuadata.domain.ComponentCost;
-import com.fuhuadata.domain.ProductComponent;
+import com.fuhuadata.domain.KProductComponent;
 import com.fuhuadata.domain.query.ComponentCostQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.ComponentCostManager;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,14 +18,20 @@ import java.util.List;
 public class ComponentCostManagerImpl implements ComponentCostManager {
     private ComponentCostDao componentCostDao;
     @Override
-    public ComponentCost addComponentCost(ComponentCost componentCost, List<ProductComponent> productComponents) {
-        componentCostDao.addSuitableProduct(productComponents);
+    @Transactional
+    public ComponentCost addComponentCost(ComponentCost componentCost, List<KProductComponent> KProductComponents) {
+        componentCostDao.addSuitableProduct(KProductComponents);
         return componentCostDao.addComponentCost(componentCost);
     }
 
     @Override
-    public boolean updateComponentCostById(int id, ComponentCost componentCost) {
-        return componentCostDao.updateComponentCostById(id,componentCost) == 1 ? true:false;
+    @Transactional
+    public boolean updateComponentCostById(ComponentCost componentCost,List<KProductComponent> KProductComponents) {
+        boolean flag = false;
+        componentCostDao.deleteProductComponentCostById(componentCost.getComponentId());
+        componentCostDao.addSuitableProduct(KProductComponents);
+        flag= componentCostDao.updateComponentCostById(componentCost.getComponentId(),componentCost) == 1 ? true:false;
+        return flag;
     }
 
     @Override

@@ -1,11 +1,12 @@
 package com.fuhuadata.web.springmvc;
 
 import com.fuhuadata.domain.ComponentCost;
-import com.fuhuadata.domain.ProductComponent;
+import com.fuhuadata.domain.KProductComponent;
 import com.fuhuadata.domain.query.ComponentCostQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.ComponentCostService;
+import com.fuhuadata.vo.ComponentCostVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -75,32 +78,45 @@ public class ComponentCostAction {
     @RequestMapping(value="/doAddComponentCost",method = RequestMethod.POST)
     @ResponseBody
     @SystemLogAnnotation(module = "knowledgeBase-componentCostInfo",methods = "doAdd")
-    public ResultPojo doAddComponentCost(@RequestBody ComponentCost componentCost){
+    public ResultPojo doAddComponentCost(@RequestBody ComponentCostVO componentCostVO){
+        ComponentCost componentCost = componentCostVO.getComponentCost();
+        KProductComponent[] KProductComponents = componentCostVO.getKProductComponents();
+        Result result = new Result();
+        List<KProductComponent> list  = new ArrayList<KProductComponent>();
         try{
-            Result<ComponentCost> result = componentCostService.addComponentCost(componentCost,new ArrayList<ProductComponent>());
-            return result.getResultPojo();//结果码,-1需要登录，0消息错误，1正确
+            if(KProductComponents !=null&& KProductComponents.length>0) {
+                list= Arrays.asList(KProductComponents);
+            }
+            result = componentCostService.addComponentCost(componentCost, list);
         }catch(Exception e){
             log.error("添加成分价格错误");
         }
-        return null;
+        return result.getResultPojo();//结果码,-1需要登录，0消息错误，1正确
     }
 
     /**
      * update
-     * @param componentCost
+     * @param componentCostVO
      * @return
      */
     @RequestMapping(value="/doModify",method = RequestMethod.POST)
     @ResponseBody
     @SystemLogAnnotation(module = "knowledgeBase-componentCostInfo",methods = "doUpdate")
-    public ResultPojo delete(int id,@RequestBody ComponentCost componentCost){
+    public ResultPojo delete(@RequestBody ComponentCostVO componentCostVO){
+        ComponentCost componentCost = componentCostVO.getComponentCost();
+        KProductComponent[] KProductComponents = componentCostVO.getKProductComponents();
+        Result result = new Result();
+        List<KProductComponent> list  = new ArrayList<KProductComponent>();
         try{
-            Result result = componentCostService.updateComponentCostById(id,componentCost);
-            return result.getResultPojo();//结果码,-1需要登录，0消息错误，1正确
+            if(KProductComponents !=null&& KProductComponents.length>0) {
+                list= Arrays.asList(KProductComponents);
+            }
+            result = componentCostService.updateComponentCostById(componentCost, list);
+
         }catch(Exception e){
             log.error("更新成分价格错误",e);
         }
-        return null;
+        return result.getResultPojo();//结果码,-1需要登录，0消息错误，1正确
     }
 
     @RequestMapping(value="/delete",method = RequestMethod.GET)

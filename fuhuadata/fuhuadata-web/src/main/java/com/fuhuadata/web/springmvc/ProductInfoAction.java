@@ -1,11 +1,14 @@
 package com.fuhuadata.web.springmvc;
 
+import com.fuhuadata.dao.ProductInfoDao;
+import com.fuhuadata.domain.ProductComponent;
 import com.fuhuadata.domain.ProductInfo;
 import com.fuhuadata.domain.query.QueryProductInfo;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.BCodeService;
 import com.fuhuadata.service.ProductInfoService;
+import com.fuhuadata.vo.ProductInfoDO;
 import com.fuhuadata.vo.ProductInfoVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
@@ -20,6 +23,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -69,9 +75,16 @@ public class ProductInfoAction {
     @RequestMapping(value="/doAdd",method=RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-productInfo",methods = "doAdd")
     @ResponseBody
-    public ResultPojo doAddProductInfo(@RequestBody ProductInfo productInfo){
+    public ResultPojo doAddProductInfo(@RequestBody ProductInfoDO productInfoDO){
+        ProductInfo productInfo = productInfoDO.getProductInfo();
+        ProductComponent[] productComponents  = productInfoDO.getProductComponents();
+        Result<ProductInfo> result = new Result<ProductInfo>();
+        List<ProductComponent> list = new ArrayList<ProductComponent>();
         try{
-            Result<ProductInfo> result = productInfoService.addProductInfo(productInfo);
+            if(productComponents!=null&&productComponents.length>0) {
+              list= Arrays.asList(productComponents);
+            }
+            result = productInfoService.addProductInfo(productInfo,list);
             return result.getResultPojo();
         }catch(Exception e){
             log.error("添加标准产品档案失败",e);
@@ -113,18 +126,24 @@ public class ProductInfoAction {
         }
         return new ModelAndView("knowledgeBase/productInfoUpdate");
     }
+
     @RequestMapping(value = "/doModify",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-ProductInfo",methods = "doUpdate")
     @ResponseBody
-    public ResultPojo doModifyProductInfo(@RequestBody ProductInfo productInfo) {
-        try {
-            int id = productInfo.getProductId();
-            Result<ProductInfo> result = productInfoService.updateProductInfoById(id, productInfo);
-            return result.getResultPojo();
+    public ResultPojo doModifyProductInfo(@RequestBody ProductInfoDO productInfoDO) {
+        ProductInfo productInfo = productInfoDO.getProductInfo();
+        ProductComponent[] productComponents  = productInfoDO.getProductComponents();
+        Result<ProductInfo> result = new Result<ProductInfo>();
+        List<ProductComponent> list = new ArrayList<ProductComponent>();
+        try{
+            if(productComponents!=null&&productComponents.length>0) {
+                list= Arrays.asList(productComponents);
+            }
+            result = productInfoService.updateProductInfoById(productInfo.getProductId(),productInfo,list);
         } catch (Exception e) {
             log.error("修改产品档案失败", e);
         }
-        return null;
+        return result.getResultPojo();
     }
 
     /**

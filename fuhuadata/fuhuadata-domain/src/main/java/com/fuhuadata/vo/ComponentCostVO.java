@@ -1,16 +1,16 @@
 package com.fuhuadata.vo;
 
 import com.fuhuadata.domain.ComponentCost;
-import com.fuhuadata.domain.ProductComponent;
+import com.fuhuadata.domain.KProductComponent;
 
 /**
  * Created by intanswer on 2017/3/31.
  */
 public class ComponentCostVO {
 
-    private ComponentCost componentCost;
+    private ComponentCost componentCost;//成分价格
 
-    private ProductComponent[] productComponents;
+    private KProductComponent[] KProductComponents;//适用产品分类
 
     public ComponentCost getComponentCost() {
         return componentCost;
@@ -20,11 +20,11 @@ public class ComponentCostVO {
         this.componentCost = componentCost;
     }
 
-    public ProductComponent[] getProductComponents() {
-        return productComponents;
+    public KProductComponent[] getKProductComponents() {
+        return KProductComponents;
     }
 
-    public void setProductComponents(ProductComponent[] productComponents) {
-        this.productComponents = productComponents;
+    public void setKProductComponents(KProductComponent[] KProductComponents) {
+        this.KProductComponents = KProductComponents;
     }
 }

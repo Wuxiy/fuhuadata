@@ -209,6 +209,26 @@
 			DELETE FROM product_info WHERE product_id=#id#
 		]]>
 	</delete>
+
+	<delete id="DELETE-PROCESSING-COMPONENTS-BY-ID" parameterClass="java.lang.Integer">
+		<![CDATA[
+			DELETE FROM product_component WHERE product_id=#productId#
+		]]>
+	</delete>
+
+	<update id="ADD-PRODUCT-PROCESSING-COMPONENTS" parameterClass="java.util.List">
+		<![CDATA[
+            INSERT INTO product_component
+            (id,product_id,component_id,consumption,remark) values
+            ]]>
+		<iterate conjunction=",">
+			<![CDATA[
+                (#[].id#,#[].productId#,#[].componentId#,
+                #[].consumption#,#[].remark#
+             )
+               ]]>
+		</iterate>
+	</update>
 	
 	<select id="GET-ALL" resultMap="PRODUCTINFO-MAP">
 		<![CDATA[

@@ -227,7 +227,7 @@ public class ProcessCostListAction {
     @SystemLogAnnotation(module = "知识库-成分价格",methods = "执行新增")
     public ResultPojo doAddComponentCost(@RequestBody ComponentCost componentCost){
         try{
-            Result<ComponentCost> result = componentCostService.addComponentCost(componentCost,new ArrayList<ProductComponent>());
+            Result<ComponentCost> result = componentCostService.addComponentCost(componentCost,new ArrayList<KProductComponent>());
             return result.getResultPojo();
         }catch(Exception e){
             log.error("添加成分价格错误");

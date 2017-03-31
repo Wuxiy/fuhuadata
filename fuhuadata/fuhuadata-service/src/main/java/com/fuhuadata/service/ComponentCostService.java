@@ -1,7 +1,7 @@
 package com.fuhuadata.service;
 
 import com.fuhuadata.domain.ComponentCost;
-import com.fuhuadata.domain.ProductComponent;
+import com.fuhuadata.domain.KProductComponent;
 import com.fuhuadata.domain.query.ComponentCostQuery;
 import com.fuhuadata.domain.query.Result;
 import java.util.List;
@@ -11,9 +11,9 @@ import java.util.List;
  * Created by intanswer on 2017/1/17.
  */
 public interface ComponentCostService {
-    public Result<ComponentCost> addComponentCost(ComponentCost componentCost, List<ProductComponent> productComponents);
+    public Result<ComponentCost> addComponentCost(ComponentCost componentCost, List<KProductComponent> KProductComponents);
 
-    public Result updateComponentCostById(int id, ComponentCost componentCost);
+    public Result updateComponentCostById(ComponentCost componentCost,List<KProductComponent> KProductComponents);
 
     public Result deleteComponentCostById(int id);
 

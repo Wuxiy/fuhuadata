@@ -1,5 +1,7 @@
 package com.fuhuadata.manager;
 import java.util.List;
+
+import com.fuhuadata.domain.ProductComponent;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.ProductInfo;
 import com.fuhuadata.domain.query.QueryProductInfo;
@@ -16,7 +18,7 @@ public interface ProductInfoManager {
 	 * @param productInfo
 	 * @return
 	 */
-    public ProductInfo addProductInfo(ProductInfo productInfo) ;
+    public ProductInfo addProductInfo(ProductInfo productInfo, List<ProductComponent> productComponents) ;
     
 	 /**
      * 按照主键id更新productInfo，请重新new ProductInfo 的更新对象，设置要更新的字段
@@ -25,7 +27,7 @@ public interface ProductInfoManager {
      * @param productInfo
      * @return
      */
-    public boolean updateProductInfoById(int product_id, ProductInfo productInfo);
+    public boolean updateProductInfoById(int product_id,ProductInfo productInfo,List<ProductComponent> productComponents);
 
     /**
      * 按照主键id 删除 记录

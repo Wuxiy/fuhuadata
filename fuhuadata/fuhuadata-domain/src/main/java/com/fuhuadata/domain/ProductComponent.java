@@ -1,19 +1,21 @@
 package com.fuhuadata.domain;
 
+import java.math.BigDecimal;
+
 /**
- * 成分产品
+ * 标准产品加工成分表
  * Created by intanswer on 2017/3/31.
  */
 public class ProductComponent {
-    private Integer id;//主键id
+    private Integer id;
 
-    private Integer componentId;//成分id
+    private Integer productId;
 
-    private String consumption;//单耗
+    private Integer componentId;
 
-    private Integer productCategoryId;//产品分类id
+    private BigDecimal consumption;
 
-    private String categoryFullName;//产品分类全路径
+    private String remark;
 
     public Integer getId() {
         return id;
@@ -21,6 +23,14 @@ public class ProductComponent {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 
     public Integer getComponentId() {
@@ -31,28 +41,19 @@ public class ProductComponent {
         this.componentId = componentId;
     }
 
-    public String getConsumption() {
+    public BigDecimal getConsumption() {
         return consumption;
     }
 
-    public void setConsumption(String consumption) {
+    public void setConsumption(BigDecimal consumption) {
         this.consumption = consumption;
     }
 
-
-    public String getCategoryFullName() {
-        return categoryFullName;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setCategoryFullName(String categoryFullName) {
-        this.categoryFullName = categoryFullName;
-    }
-
-    public Integer getProductCategoryId() {
-        return productCategoryId;
-    }
-
-    public void setProductCategoryId(Integer productCategoryId) {
-        this.productCategoryId = productCategoryId;
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

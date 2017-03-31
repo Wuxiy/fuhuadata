@@ -1,7 +1,7 @@
 package com.fuhuadata.dao;
 
 import com.fuhuadata.domain.ComponentCost;
-import com.fuhuadata.domain.ProductComponent;
+import com.fuhuadata.domain.KProductComponent;
 import com.fuhuadata.domain.query.ComponentCostQuery;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public interface ComponentCostDao {
     public ComponentCost addComponentCost(ComponentCost componentCost);
 
 
-    public int addSuitableProduct(List<ProductComponent> productComponents);
+    public int addSuitableProduct(List<KProductComponent> KProductComponents);
 
     /**
      * 按照主键id更新，成功返回1
@@ -35,6 +35,8 @@ public interface ComponentCostDao {
      * @return
      */
     public int deleteComponentCostById(int id);
+
+    public int deleteProductComponentCostById(int componentId);
 
     /**
      * 根据主键id获取ComponentCost

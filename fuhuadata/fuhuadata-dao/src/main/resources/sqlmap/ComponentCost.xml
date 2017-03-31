@@ -4,7 +4,7 @@
 <sqlMap namespace="COMPONENTCOST">
     <typeAlias alias="ComponentCost" type="com.fuhuadata.domain.ComponentCost"/>
     <typeAlias alias="ComponentCostQuery" type="com.fuhuadata.domain.query.ComponentCostQuery"/>
-    <typeAlias alias="ProductComponent" type="com.fuhuadata.domain.ProductComponent"/>
+    <typeAlias alias="ProductComponent" type="com.fuhuadata.domain.KProductComponent"/>
 
     <resultMap id="COMPONENTCOST-MAP" class="ComponentCost">
         <result column="component_id" property="componentId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
@@ -53,7 +53,7 @@
 
     <update id="ADD-SUITABLE-PRODUCT" parameterClass="java.util.List">
         <![CDATA[
-            INSERT INTO customer_make_products
+            INSERT INTO k_product_component
             (id,component_id,consumption,product_category_id,category_full_name) values
             ]]>
         <iterate conjunction=",">
@@ -78,6 +78,12 @@
     <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
         <![CDATA[
             DELETE FROM k_component_cost WHERE component_id=#componentId#
+        ]]>
+    </delete>
+
+    <delete id="DELETE-PRODUCT-COMPONENT-BY-ID" parameterClass="java.lang.Integer">
+        <![CDATA[
+            DELETE FROM k_product_component WHERE component_id=#componentId#
         ]]>
     </delete>
 
