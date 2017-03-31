@@ -101,7 +101,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-xs-2 col-xs-offset-4">
-                                <a class="btn btn-block btn-primary packingAdd" id="finishAdd">完成</a>
+                                <a class="btn btn-block btn-primary" id="finishAdd">完成</a>
                             </div>
                             <div class="col-xs-2">
                                 <button class="btn btn-block btn-default" type="reset">重置</button>
@@ -113,10 +113,8 @@
         </div>
     </div>
 </div>
-<<<<<<< HEAD
+
 <input type="hidden" id="customerId" value="$!{customerId}">
-=======
->>>>>>> 524b3d825e251516029ceadf3efcb4c41a3ee05e
 <script type="text/javascript">
     $('#finishAdd').click(function () {
         var id = $("#customerId").val();

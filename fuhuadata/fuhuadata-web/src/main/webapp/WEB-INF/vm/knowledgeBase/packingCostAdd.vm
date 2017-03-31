@@ -113,43 +113,6 @@
                                     </div>
                                 </div>
                             </div>
-                                <div id="result"></div>
-                                #*<div class="col-xs-3 ">
-                                    <input id="file-1" name="file" type="file" multiple class="projectfile" data-overwrite-initial="false" data-min-file-count="1">
-                                </div>*#
-                                #*<div class="col-xs-5 col-xs-offset-1">
-                                    <input id="file-2" name="file" type="file" multiple class="projectfile" data-overwrite-initial="false" data-min-file-count="1">
-                                </div>*#
-                                #*<div class="col-xs-3 col-xs-offset-1">
-                                    <input id="file-2" name="file" type="file" multiple class="projectfile" data-overwrite-initial="false" data-min-file-count="1">
-                                </div>*#
-
-##                            <div class="form-group">
-##                                <div class="col-xs-3 col-xs-offset-1">
-##                                    <div class="input-group">
-##                                        <input class="form-control" type="text" value="" name="imagname" id="imagname1">
-##                                        <div class="input-group-btn">
-##                                            <botton class="btn btn-xs btn-primary">编辑图片名称</botton>
-##                                        </div>
-##                                    </div>
-##                                </div>
-                                #*<div class="col-xs-5 col-xs-offset-1">
-                                    <div class="input-group">
-                                        <input class="form-control" type="text" value="" name="imagname" id="imagname2">
-                                        <div class="input-group-btn">
-                                            <botton class="btn btn-xs btn-primary">编辑图片名称</botton>
-                                        </div>
-                                    </div>
-                                </div>*#
-                                #*<div class="col-xs-3 col-xs-offset-1">
-                                    <div class="input-group">
-                                        <input class="form-control" type="text" value="" name="imagname" id="imagname3">
-                                        <div class="input-group-btn">
-                                            <botton class="btn btn-xs btn-primary">编辑图片名称</botton>
-                                        </div>
-                                    </div>
-                                </div>*#
-##                            </div>
                         </div>
                     </div>
                     <div class="panel-body clearfix">

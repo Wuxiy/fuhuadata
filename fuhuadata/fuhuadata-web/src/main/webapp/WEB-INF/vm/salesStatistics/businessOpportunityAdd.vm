@@ -10,10 +10,6 @@
             <!--基本信息-->
             <div class="panel panel-default">
                     <div class="panel-heading">
-                        <div class="btn-group btn-group-xs panel-heading-btn pull-right">
-                            <button class="btn btn-primary">编辑</button>
-                            <a class="btn btn-primary" href="" target="_blank">报价</a>
-                        </div>
                         <h3 class="panel-title" lang="zh">
                             基本信息
                         </h3>
@@ -22,87 +18,148 @@
                         <div class="form-horizontal">
                             <div class="form-group ">
                                 <label class="col-xs-1 control-label" lang="zh">商机名称<sup class="not-null">*</sup></label>
-                                <div class="col-xs-2"><input class="form-control" type="text" value=""  /></div>
+                                <div class="col-xs-2">
+                                    <input class="form-control notnull" type="text" value="" id="businessName" disabled />
+                                </div>
                                 <label class="col-xs-1 control-label" lang="zh">商机编号</label>
-                                <div class="col-xs-2"><input class="form-control" type="text" value=""  /></div>
+                                <div class="col-xs-2">
+                                    <input class="form-control" type="text" value="" id="businessId" disabled />
+                                </div>
                                 <label class="col-xs-1 control-label" lang="zh">商机来源<sup class="not-null">*</sup></label>
                                 <div class="col-xs-2">
-                                    <select class="form-control" >
-                                        <option value="" selected lang="zh">展会</option>
-                                        <option value="" lang="zh">门户网站</option>
-                                        <option value="" lang="zh">农药店考察</option>
-                                        <option value="" lang="zh">客户介绍</option>
-                                        <option value="" lang="zh">主动联系</option>
-                                        <option value="" lang="zh">其他</option>
+                                    <select class="form-control notnull" id="businessFrom" disabled>
+                                        <option value="0" selected lang="zh">展会</option>
+                                        <option value="1" lang="zh">门户网站</option>
+                                        <option value="2" lang="zh">农药店考察</option>
+                                        <option value="3" lang="zh">客户介绍</option>
+                                        <option value="4" lang="zh">主动联系</option>
+                                        <option value="5" lang="zh">其他</option>
                                     </select>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">客户名称<sup class="not-null">*</sup></label>
-                                <div class="col-xs-2"><input class="form-control" type="text" value=""  /></div>
+                                <label class="col-xs-1 control-label" lang="zh">商机状态</label>
+                                <div class="col-xs-2">
+                                    <select class="form-control" id="businessState" disabled>
+                                        <option value="0" lang="zh" selected>待报价</option>
+                                        <option value="1" lang="zh">失败</option>
+                                        <option value="2" lang="zh">已转化</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group ">
-                                <label class="col-xs-1 control-label" lang="zh">客户类型</label>
+                                <label class="col-xs-1 control-label" lang="zh">客户名称<sup class="not-null">*</sup></label>
                                 <div class="col-xs-2">
-                                    <select class="form-control" >
-                                        <option value="" lang="zh">潜在客户</option>
-                                        <option value="" lang="zh">风险客户</option>
-                                        <option value="" lang="zh">一般客户</option>
-                                        <option value="" lang="zh">重要客户</option>
-                                        <option value="" lang="zh">大客户</option>
-                                        <option value="" selected lang="zh">战略客户</option>
-                                    </select>
+                                    <input class="form-control notnull" type="text" value="" id="customerName" disabled />
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">联系人</label>
-                                <div class="col-xs-2"><input class="form-control" type="text" value=""  /></div>
-                                <label class="col-xs-1 control-label" lang="zh">联系电话</label>
-                                <div class="col-xs-2"><input class="form-control" type="text" value=""  /></div>
-                                <label class="col-xs-1 control-label" lang="zh">邮箱</label>
-                                <div class="col-xs-2"><input class="form-control" type="text" value=""  /></div>
-                            </div>
-                            <div class="form-group">
                                 <label class="col-xs-1 control-label" lang="zh">企业性质</label>
                                 <div class="col-xs-2">
-                                    <select class="form-control" >
-                                        <option value="" selected lang="zh">工厂</option>
-                                        <option value="" lang="zh">分销商</option>
-                                        <option value="" lang="zh">经销商</option>
+                                    <select class="form-control" id="enterpriseNature" disabled>
+                                        <option value="1" selected lang="zh">工厂</option>
+                                        <option value="2" lang="zh">分销商</option>
+                                        <option value="3" lang="zh">经销商</option>
+                                        <option value="4" lang="zh">终端客户</option>
+                                        <option value="5" lang="zh">其他</option>
                                     </select>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">客户简称</label>
-                                <div class="col-xs-2"><input class="form-control" type="text" value=""  /></div>
+                                <label class="col-xs-1 control-label" lang="zh">客户类型</label>
+                                <div class="col-xs-2">
+                                    <select class="form-control" id="customerLevel" disabled>
+                                        <option value="" lang="zh">潜在客户</option>
+                                        <option value="5" lang="zh">风险客户</option>
+                                        <option value="4" lang="zh">一般客户</option>
+                                        <option value="3" lang="zh">重要客户</option>
+                                        <option value="2" lang="zh">大客户</option>
+                                        <option value="1" selected lang="zh">战略客户</option>
+                                    </select>
+                                </div>
+                                <label class="col-xs-1 control-label" lang="zh">信用评级</label>
+                                <div class="col-xs-2">
+                                    <select class="form-control" id="zhongxinbaoLevel" disabled>
+                                        <option value="" selected lang="zh">AAAA</option>
+                                        <option value="" lang="zh">AAA</option>
+                                        <option value="" lang="zh">AA</option>
+                                        <option value="" lang="zh">A</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-xs-1 control-label" lang="zh">客户国别</label>
-                                <div class="col-xs-2"><input class="form-control" type="text" value=""  /></div>
+                                <div class="col-xs-2">
+                                    <input class="form-control" type="text" value="" id="country" disabled />
+                                </div>
+                                <label class="col-xs-1 control-label" lang="zh">联系人</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" type="text" value="" id="name" disabled />
+                                </div>
+                                <label class="col-xs-1 control-label" lang="zh">联系电话</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" type="text" value="" id="linkPhone1" disabled />
+                                </div>
+                                <label class="col-xs-1 control-label" lang="zh">邮箱</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" type="email" value="lemail" id="" disabled />
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-xs-1 control-label" lang="zh">意向产品1</label>
-                                <div class="col-xs-2"><input class="form-control" type="text" value="草甘膦"  /></div>
+                                <div class="col-xs-2">
+                                    <input class="form-control" type="text" value="" id="intentionalProduct0" disabled />
+                                </div>
                                 <label class="col-xs-1 control-label" lang="zh">预计采购量1</label>
-                                <div class="col-xs-2"><input class="form-control" type="text" value="100万吨"  /></div>
+                                <div class="col-xs-2">
+                                    <input class="form-control" type="text" value="" id="estimatedPurchase0" disabled />
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-xs-1 control-label" lang="zh">意向产品2</label>
-                                <div class="col-xs-2"><input class="form-control" type="text" value="草甘膦"  /></div>
+                                <div class="col-xs-2">
+                                    <input class="form-control" type="text" value="" id="intentionalProduct1" disabled />
+                                </div>
                                 <label class="col-xs-1 control-label" lang="zh">预计采购量2</label>
-                                <div class="col-xs-2"><input class="form-control" type="text" value="100万吨"  /></div>
+                                <div class="col-xs-2">
+                                    <input class="form-control" type="text" value="" id="estimatedPurchase1" disabled />
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-xs-1 control-label" lang="zh">预计收益</label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input class="form-control" type="text" value="" />
+                                        <input class="form-control" type="text" value="" id="expectIncome" disabled/>
                                         <span class="input-group-addon">万元</span>
                                     </div>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">预计截止时间</label>
-                                <div class="col-xs-2"><input class="form-control" type="text" value=""  /></div>
+                                <label class="col-xs-1 control-label" lang="zh">预计截止日期</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" type="text" value="" id="deadline" disabled />
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-xs-1 control-label" lang="zh">商机描述</label>
                                 <div class="col-xs-8">
-                                    <textarea class="form-control " rows="3" lang="zh" >客户主要销售草甘膦系列产品，有原药采购需求</textarea>
+                                    <textarea class="form-control " rows="3" lang="zh" id="businessDescribe" disabled>客户主要销售草甘膦系列产品，有原药采购需求</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-xs-1 control-label" lang="zh">备注</label>
                                 <div class="col-xs-8">
-                                    <textarea class="form-control " rows="3" lang="zh" ></textarea>
+                                    <textarea class="form-control " rows="3" lang="zh" id="businessRemarks" disabled></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-xs-1 control-label" lang="zh">创建人</label>
+                                <div class="col-xs-2">
+                                    <input type="text" class="form-control" value="" id="createUserName" disabled/>
+                                </div>
+                                <label for="" class="col-xs-1 control-label" lang="zh">创建日期</label>
+                                <div class="col-xs-2">
+                                    <input type="data" class="form-control" value="" id="createTime" disabled/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-2 col-xs-offset-4">
+                                    <a class="btn btn-block btn-primary" id="finishAdd">完成</a>
+                                </div>
+                                <div class="col-xs-2">
+                                    <button class="btn btn-block btn-default" type="reset">重置</button>
                                 </div>
                             </div>
                         </div>
@@ -115,4 +172,77 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerAnotherNamer.js"></script>
+<script type="text/javascript" language="JavaScript">
+    $('#finishAdd').click(function () {
+        var url = basePath + '/businessInfo/doAddBusinessInfo';
+        var notnull = $('.notnull');
+        var submit_permit = true;
+        notnull.each(function () {
+            var val = $(this).val();
+            if(val == ''||val == null){
+                alert('请完善表单必填项');
+                submit_permit = false;
+                return false;
+            }
+        });
+        if(submit_permit){
+            var data = {
+                "bussinessId":$('#businessId').val(),
+                "bussinessName":$('#bussinessName').val(),
+                "businessId":$('#businessId').val(),
+                "businessFrom":$('#businessFrom').val(),
+                "businessState":$('#businessState').val(),
+                "customerName":$('#customerName').val(),
+                "enterpriseNature":$('#enterpriseNature').val(),
+                "customerLevel":$('#customerLevel').val(),
+                "zhongxinbaoLevel":$('#zhongxinbaoLevel').val(),
+                "country":$('#country').val(),
+                "name":$('#name').val(),
+                "linkPhone1":$('#linkPhone1').val(),
+                "lemail":$('#lemail').val(),
+                "expectIncome":$('#expectIncome').val(),
+                "deadline":$('#deadline').val(),
+                "businessDescribe":$('#businessDescribe').val(),
+                "businessRemarks":$('#businessRemarks').val(),
+                "createUserName":$('#createUserName').val(),
+                "createTime":$('#createTime').val(),
+                "intentionalProducts":getintentionalProducts(),
+                "createUserId":1,
+                "createUserName":"杨洋",
+                "lastmodifyUserId":1,
+                "lastmodifyUserName":"杨洋",
+                "createTime":"2017-03-20 17:42:29",
+                "modifyTime":"2017-03-20 17:42:29"
+            }
+            jQuery.ajax({
+                url:url,
+                type:'POST',
+                data:JSON.stringify(data),
+                dataType:"json",
+                contentType:"application/json",
+                success:function(result){
+                    if(result.code == 1){
+                        alert("新增成功!");
+                        location.reload();
+                    }else {
+                        alert("新增失败！");
+                    }
+                }
+            });
+        }
+    })
+
+    function getintentionalProducts() {
+        var data = [
+            {
+                "intentionalProduct":$('#intentionalProduct0').val(),
+                "estimatedPurchase":$('#estimatedPurchase0').val()
+            },
+            {
+                "intentionalProduct":$('#intentionalProduct1').val(),
+                "estimatedPurchase":$('#estimatedPurchase1').val()
+            }
+        ]
+        return JSON.stringify(data);
+    }
+</script>

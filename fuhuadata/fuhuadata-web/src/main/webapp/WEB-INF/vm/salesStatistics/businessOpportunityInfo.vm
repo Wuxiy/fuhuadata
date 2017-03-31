@@ -34,7 +34,7 @@
                                 <div class="form-group ">
                                     <label class="col-xs-1 control-label" lang="zh">商机名称<sup class="not-null">*</sup></label>
                                     <div class="col-xs-2">
-                                        <input class="form-control" type="text" value="" id="businessName" disabled />
+                                        <input class="form-control notnull" type="text" value="" id="businessName" disabled />
                                     </div>
                                     <label class="col-xs-1 control-label" lang="zh">商机编号</label>
                                     <div class="col-xs-2">
@@ -42,7 +42,7 @@
                                     </div>
                                     <label class="col-xs-1 control-label" lang="zh">商机来源<sup class="not-null">*</sup></label>
                                     <div class="col-xs-2">
-                                        <select class="form-control" id="businessFrom" disabled>
+                                        <select class="form-control notnull" id="businessFrom" disabled>
                                             <option value="0" selected lang="zh">展会</option>
                                             <option value="1" lang="zh">门户网站</option>
                                             <option value="2" lang="zh">农药店考察</option>
@@ -54,18 +54,16 @@
                                     <label class="col-xs-1 control-label" lang="zh">商机状态</label>
                                     <div class="col-xs-2">
                                         <select class="form-control" id="businessState" disabled>
-                                            <option value="" lang="zh">正常</option>
-                                            <option value="" lang="zh">失败</option>
-                                            <option value="" lang="zh">报价待转换</option>
-                                            <option value="" lang="zh">转化中</option>
-                                            <option value="" lang="zh">转化完成</option>
+                                            <option value="0" lang="zh">待报价</option>
+                                            <option value="1" lang="zh">失败</option>
+                                            <option value="2" lang="zh">已转化</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group ">
                                     <label class="col-xs-1 control-label" lang="zh">客户名称<sup class="not-null">*</sup></label>
                                     <div class="col-xs-2">
-                                        <input class="form-control" type="text" value="" id="customerName" disabled />
+                                        <input class="form-control notnull" type="text" value="" id="customerName" disabled />
                                     </div>
                                     <label class="col-xs-1 control-label" lang="zh">企业性质</label>
                                     <div class="col-xs-2">
@@ -119,21 +117,21 @@
                                 <div class="form-group">
                                     <label class="col-xs-1 control-label" lang="zh">意向产品1</label>
                                     <div class="col-xs-2">
-                                        <input class="form-control" type="text" value="" id="" disabled />
+                                        <input class="form-control" type="text" value="" id="intentionalProduct0" disabled />
                                     </div>
                                     <label class="col-xs-1 control-label" lang="zh">预计采购量1</label>
                                     <div class="col-xs-2">
-                                        <input class="form-control" type="text" value="" id="" disabled />
+                                        <input class="form-control" type="text" value="" id="estimatedPurchase0" disabled />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-xs-1 control-label" lang="zh">意向产品2</label>
                                     <div class="col-xs-2">
-                                        <input class="form-control" type="text" value="" id="" disabled />
+                                        <input class="form-control" type="text" value="" id="intentionalProduct1" disabled />
                                     </div>
                                     <label class="col-xs-1 control-label" lang="zh">预计采购量2</label>
                                     <div class="col-xs-2">
-                                        <input class="form-control" type="text" value="" id="" disabled />
+                                        <input class="form-control" type="text" value="" id="estimatedPurchase1" disabled />
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -194,20 +192,12 @@
                                     <th class="text-center" lang="zh">创建时间</th>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="businessfollow">
                                 <tr>
                                     <td>1</td>
                                     <td>获取客户联系人和联系方式</td>
                                     <td>与联系人进行沟通约定时间洽谈</td>
                                     <td>线索跟进</td>
-                                    <td>刘凯洋</td>
-                                    <td>2016-10-10 18:00</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>与客户联系人洽谈</td>
-                                    <td>确定客户对我们的产品感兴趣</td>
-                                    <td>需求挖掘</td>
                                     <td>刘凯洋</td>
                                     <td>2016-10-10 18:00</td>
                                 </tr>
@@ -236,7 +226,19 @@
         });
         //商机基本信息提交
         $(document).on('click.up','#save',function(){
-            upData(basePath+'/customerLinkman/updateBusinessInfoById','POST',updateBusinessInfo(),"application/json");
+            var notnull = $('.notnull');
+            var submit_permit = true;
+            notnull.each(function () {
+                var val = $(this).val();
+                if(val == ''||val == null){
+                    alert('请完善表单必填项');
+                    submit_permit = false;
+                    return false;
+                }
+            });
+            if(submit_permit){
+                upData(basePath+'/customerLinkman/updateBusinessInfoById','POST',updateBusinessInfo(),"application/json");
+            }
         });
         //客户基本信息取消提交
         $(document).on('click.cancel','#cancel',function(){
@@ -247,7 +249,14 @@
     //获取详情function
     function businessInfo(result) {
         var ResultData = result.data;
+        var businessfollow = result.businessfollow;
         console.log(ResultData);
+
+        var intentionalProducts = ResultData.intentionalProducts;
+        $('#intentionalProduct0').val(intentionalProducts[0].intentionalProduct);
+        $('#intentionalProduct1').val(intentionalProducts[1].intentionalProduct);
+        $('#estimatedPurchase0').val(intentionalProducts[0].estimatedPurchase);
+        $('#estimatedPurchase1').val(intentionalProducts[1].estimatedPurchase);
 
         $('#businessName').val(ResultData.businessName);
         $('#businessId').val(ResultData.businessId);
@@ -267,10 +276,24 @@
         $('#businessRemarks').val(ResultData.businessRemarks);
         $('#createUserName').val(ResultData.createUserName);
         $('#createTime').val(ResultData.createTime);
+
+        var _html = '';
+        for(var i=0;i<businessfollow.length;i++){
+            _html += '<tr>';
+            _html += '<td>'+businessfollow[i].name+'</td>';
+            _html += '<td>'+businessfollow[i].name+'</td>';
+            _html += '<td>'+businessfollow[i].name+'</td>';
+            _html += '<td>'+businessfollow[i].name+'</td>';
+            _html += '<td>'+businessfollow[i].name+'</td>';
+            _html += '<td>'+businessfollow[i].name+'</td>';
+            _html += '</tr>';
+        }
+        $('#businessfollow').append(_html);
     }
 
     function updateBusinessInfo(){
         var data = {
+            "bussinessId":$('#businessId').val(),
             "bussinessName":$('#bussinessName').val(),
             "businessId":$('#businessId').val(),
             "businessFrom":$('#businessFrom').val(),
@@ -288,9 +311,24 @@
             "businessDescribe":$('#businessDescribe').val(),
             "businessRemarks":$('#businessRemarks').val(),
             "createUserName":$('#createUserName').val(),
-            "createTime":$('#createTime').val()
+            "createTime":$('#createTime').val(),
+            "intentionalProducts":getintentionalProducts()
         }
 
+        return JSON.stringify(data);
+    }
+    
+    function getintentionalProducts() {
+        var data = [
+            {
+                "intentionalProduct":$('#intentionalProduct0').val(),
+                "estimatedPurchase":$('#estimatedPurchase0').val()
+            },
+            {
+                "intentionalProduct":$('#intentionalProduct1').val(),
+                "estimatedPurchase":$('#estimatedPurchase1').val()
+            }
+        ]
         return JSON.stringify(data);
     }
 </script>

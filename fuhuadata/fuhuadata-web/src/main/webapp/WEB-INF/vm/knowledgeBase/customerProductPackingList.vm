@@ -24,10 +24,10 @@
                             <span class="input-group-addon" lang="zh" >产品名称</span>
                             <input id="product_name" class="form-control" type="search" value="" placeholder="请输入产品名称"/>
                             <span class="input-group-btn">
-                                        <button data-toggle="modal" class="btn btn-xs btn-default" data-target="#tSearch" type="button">
-                                            <span class="glyphicon glyphicon-search"></span>
-                                        </button>
-                                    </span>
+                                <button data-toggle="modal" class="btn btn-xs btn-default" data-target="#tSearch" type="button">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
                             <span class="input-group-addon" lang="zh">品牌</span>
                             <input class="form-control" id="brand" type="search" value="" placeholder="请输入品牌"/>
                             <span class="input-group-addon" lang="zh" >加工厂</span>
