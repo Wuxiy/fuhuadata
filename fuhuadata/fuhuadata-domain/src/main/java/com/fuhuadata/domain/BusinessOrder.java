@@ -37,7 +37,7 @@ public class BusinessOrder implements Serializable{
     private BigDecimal creditRate;//信保赔付率
     private Integer transportFlag;//是否可转运,0是，1否
     private Integer partialShipmentFalg;//是否可分批出运
-    private Integer staus;//订单状态：-1：报价失败  0：报价中 1：已转化成订单 2：数据已上报到NC
+    private Integer status;//订单状态：-1：报价失败  0：报价中 1：已转化成订单 2：数据已上报到NC
     private String failureAnalysis;//失败原因分析
     private String dealTime;//nc系统合同签订时间
     private String deliverInfo;//交单地址等信息 json格式
@@ -293,14 +293,6 @@ public class BusinessOrder implements Serializable{
         this.partialShipmentFalg = partialShipmentFalg;
     }
 
-    public Integer getStaus() {
-        return staus;
-    }
-
-    public void setStaus(Integer staus) {
-        this.staus = staus;
-    }
-
     public String getDeliverInfo() {
         return deliverInfo;
     }
@@ -467,5 +459,13 @@ public class BusinessOrder implements Serializable{
 
     public void setFailureAnalysis(String failureAnalysis) {
         this.failureAnalysis = failureAnalysis;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }
