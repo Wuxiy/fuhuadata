@@ -13,9 +13,9 @@ $(function () {
 
     init();
     //获取数据
-    getData('${request.contextPath}/customerMarketInfo/init','POST',GetRequest(),pop);
+    getData(basePath+'/customerMarketInfo/init','POST',GetRequest(),pop);
     //创建树形菜单
-    $('#tree').creatTree('/productCategory/CategoryTree');
+    $('#tree').creatTree(basePath+'/productCategory/CategoryTree');
     /**
      * 功能按钮
      */
@@ -39,7 +39,7 @@ $(function () {
             year:year,
             customerId:cusId
         };
-        getData('${request.contextPath}/customerMarketInfo/getCPPListByCidAndYear','POST',data,cpps);
+        getData(basePath+'/customerMarketInfo/getCPPListByCidAndYear','POST',data,cpps);
     });
     //筛选客户销售产品
     $(document).on('change.year','#csps_year',function (e) {
@@ -49,7 +49,7 @@ $(function () {
             year:year,
             customerId:cusId
         };
-        getData('${request.contextPath}/customerMarketInfo/getSaleProductListByCidAndYear','POST',data,csps);
+        getData(basePath+'/customerMarketInfo/getSaleProductListByCidAndYear','POST',data,csps);
     });
     //构造客户采购模态
     $(document).on('click.addCpps','#add_cpps',function(){
@@ -101,7 +101,7 @@ $(function () {
             }
         });
         if(isUp){
-            upData('${request.contextPath}/customerMarketInfo/addCPPList','POST',cppsObj(),'application/json');
+            upData(basePath+'/customerMarketInfo/addCPPList','POST',cppsObj(),'application/json');
         };
     });
     //客户销售产品批量提交
@@ -117,17 +117,17 @@ $(function () {
             }
         });
         if(isUp){
-            upData('${request.contextPath}/customerMarketInfo/addCSPList','POST',cspsObj(),'application/json');
+            upData(basePath+'/customerMarketInfo/addCSPList','POST',cspsObj(),'application/json');
         };
     });
     //客户合作情况提交
     $(document).on('click.up','#cooperation_up',function() {
-        upData('${request.contextPath}/customerMarketInfo/updateCooperationInfo','POST',cooperationObj(),'application/x-www-form-urlencoded; charset=UTF-8');
+        upData(basePath+'/customerMarketInfo/updateCooperationInfo','POST',cooperationObj(),'application/x-www-form-urlencoded; charset=UTF-8');
     });
     //客户合作情况取消
     $(document).on('click','#cooperation_cl',function () {
         //刷新
-        getData('${request.contextPath}/customerMarketInfo/init','POST',GetRequest(),pop);
+        getData(basePath+'/customerMarketInfo/init','POST',GetRequest(),pop);
     })
     //双击文本添加到指定文本框
     var selectedPName;
