@@ -1,6 +1,7 @@
 package com.fuhuadata.manager;
 
 import com.fuhuadata.domain.ComponentCost;
+import com.fuhuadata.domain.ProductComponent;
 import com.fuhuadata.domain.query.ComponentCostQuery;
 import com.fuhuadata.domain.query.Result;
 
@@ -12,7 +13,7 @@ import java.util.List;
  */
 public interface ComponentCostManager {
 
-    public ComponentCost addComponentCost(ComponentCost componentCost);
+    public ComponentCost addComponentCost(ComponentCost componentCost, List<ProductComponent> productComponents);
 
     public boolean updateComponentCostById(int id, ComponentCost componentCost);
 

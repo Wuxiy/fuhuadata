@@ -2,9 +2,11 @@ package com.fuhuadata.manager.impl;
 
 import com.fuhuadata.dao.ComponentCostDao;
 import com.fuhuadata.domain.ComponentCost;
+import com.fuhuadata.domain.ProductComponent;
 import com.fuhuadata.domain.query.ComponentCostQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.ComponentCostManager;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +18,8 @@ import java.util.List;
 public class ComponentCostManagerImpl implements ComponentCostManager {
     private ComponentCostDao componentCostDao;
     @Override
-    public ComponentCost addComponentCost(ComponentCost componentCost) {
+    public ComponentCost addComponentCost(ComponentCost componentCost, List<ProductComponent> productComponents) {
+        componentCostDao.addSuitableProduct(productComponents);
         return componentCostDao.addComponentCost(componentCost);
     }
 

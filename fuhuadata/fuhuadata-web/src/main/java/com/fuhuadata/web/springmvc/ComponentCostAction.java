@@ -1,6 +1,7 @@
 package com.fuhuadata.web.springmvc;
 
 import com.fuhuadata.domain.ComponentCost;
+import com.fuhuadata.domain.ProductComponent;
 import com.fuhuadata.domain.query.ComponentCostQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -75,7 +77,7 @@ public class ComponentCostAction {
     @SystemLogAnnotation(module = "knowledgeBase-componentCostInfo",methods = "doAdd")
     public ResultPojo doAddComponentCost(@RequestBody ComponentCost componentCost){
         try{
-            Result<ComponentCost> result = componentCostService.addComponentCost(componentCost);
+            Result<ComponentCost> result = componentCostService.addComponentCost(componentCost,new ArrayList<ProductComponent>());
             return result.getResultPojo();//结果码,-1需要登录，0消息错误，1正确
         }catch(Exception e){
             log.error("添加成分价格错误");

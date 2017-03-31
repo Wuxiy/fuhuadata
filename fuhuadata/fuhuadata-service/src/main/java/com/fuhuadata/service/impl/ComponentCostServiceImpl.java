@@ -1,6 +1,7 @@
 package com.fuhuadata.service.impl;
 
 import com.fuhuadata.domain.ComponentCost;
+import com.fuhuadata.domain.ProductComponent;
 import com.fuhuadata.domain.query.ComponentCostQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.ComponentCostManager;
@@ -18,10 +19,10 @@ public class ComponentCostServiceImpl implements ComponentCostService {
     private ComponentCostManager componentCostManager;
 
     @Override
-    public Result<ComponentCost> addComponentCost(ComponentCost componentCost) {
+    public Result<ComponentCost> addComponentCost(ComponentCost componentCost, List<ProductComponent> productComponents) {
         Result<ComponentCost> result = new Result<ComponentCost>();
         try{
-            result.addDefaultModel(componentCostManager.addComponentCost(componentCost));
+            result.addDefaultModel(componentCostManager.addComponentCost(componentCost,productComponents));
         }catch (Exception e){
             result.setSuccess(false);
             //打印日志
