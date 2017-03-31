@@ -73,7 +73,7 @@
                 <b class="caret"></b>
             </a>
         </li>
-        <li class="active shadow-in" title="知识库">
+        <li class="shadow-in" title="知识库">
             <div id="collapseFive" class="list-group collapse">
                 <a class="list-group-item" href="${request.contextPath}/productProblem/productProblemList">产品常见问题</a>
                 <a class="list-group-item" href="${request.contextPath}/marketTraining/marketTrainingList">营销培训</a>

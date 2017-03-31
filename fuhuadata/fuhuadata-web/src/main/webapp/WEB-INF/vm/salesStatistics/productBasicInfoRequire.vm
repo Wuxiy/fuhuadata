@@ -1,0 +1,168 @@
+<!--产品要求——基本信息页——huxiangyang-->
+<div class="clearfix content shadow-out">
+    <!--面包屑导航-->
+    #breadcrumb()
+    <div class="dashboard-wrapper">
+        <div class="row">
+            <div class="col-xs-12">
+                <!--基本信息-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" lang="zh">
+                            基本信息
+                        </h3>
+                    </div>
+                    <div class="panel-body clearfix">
+                        <div class="form-horizontal">
+                            <div class="col-xs-12">
+                                <table class="table table-condensed table-bordered table-striped">
+                                    <tbody>
+                                    <tr>
+                                        <td><label class="col-xs-2 control-label" lang="zh">产品名称</label></td>
+                                        <td>
+                                            <div class="input-group">
+                                                <input class="form-control" value="" disabled>
+                                                <div class="input-group-btn"><button class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-search"></span></button></div>
+                                            </div>
+                                        </td>
+                                        <td><label class="col-xs-1 control-label" lang="zh">报关产品名称</label></td>
+                                        <td><input class="form-control" type="text" value="" /></td>
+                                        <td><label class="col-xs-1 control-label" lang="zh">客户商品名</label></td>
+                                        <td><input class="form-control" type="text" value="" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="col-xs-1 control-label" lang="zh">品牌</label></td>
+                                        <td><input class="form-control" type="text" value=""/></td>
+                                        <td><label class="col-xs-1 control-label" lang="zh">规格</label></td>
+                                        <td><input class="form-control" type="text" value=""/></td>
+                                        <td><label class="col-xs-1 control-label" lang="zh">型号</label></td>
+                                        <td><input class="form-control" type="text" value=""/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="col-xs-1 control-label" lang="zh">主单位</label></td>
+                                        <td><input class="form-control" type="text" value=""/></td>
+                                        <td><label class="col-xs-1 control-label" lang="zh">主数量</label></td>
+                                        <td><input class="form-control" type="text" value=""/></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="col-xs-1 control-label" lang="zh">单位</label></td>
+                                        <td><select><option value="0">KG</option><option value="1">瓶</option><option value="2">袋</option></select></td>
+                                        <td><label class="col-xs-1 control-label" lang="zh">数量</label></td>
+                                        <td><input class="form-control" type="text" value=""/></td>
+                                        <td><label class="col-xs-1 control-label" lang="zh">换算率（主数量/数量）</label></td>
+                                        <td><input class="form-control" type="text" value="" disabled/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="col-xs-1 control-label" lang="zh">价格计算类型</label></td>
+                                        <td><select><option value="0">自产类</option><option value="1">原药自产制剂加工类</option><option value="2">原药采购制剂加工类</option></select></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="col-xs-2 control-label" lang="zh">价委会指导价</label></td>
+                                        <td>
+                                            <div class="input-group">
+                                                <input class="form-control" value="" disabled>
+                                                <span class="input-group-addon">元</span>
+                                            </div>
+                                        </td>
+                                        <td><label class="col-xs-2 control-label" lang="zh">采购价格</label></td>
+                                        <td>
+                                            <div class="input-group">
+                                                <input class="form-control" value="" disabled>
+                                                <span class="input-group-addon">元</span>
+                                            </div>
+                                        </td>
+                                        <td><label class="col-xs-2 control-label" lang="zh">交货时间</label></td>
+                                        <td><input class="form-control" type="text" value=""/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="col-xs-1 control-label" lang="zh">加工厂</label></td>
+                                        <td><select><option value="0">杭州乐山</option><option value="1">安徽银山</option></select></td>
+                                        <td><label class="col-xs-2 control-label" lang="zh">毛利率</label></td>
+                                        <td>
+                                            <div class="input-group">
+                                                <input class="form-control" value="" disabled>
+                                                <span class="input-group-addon">%</span>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="col-xs-1 control-label" lang="zh">明佣计费方式</label></td>
+                                        <td><select><option value="0">从量</option><option value="1">从价</option><option value="2">无</option></select></td>
+                                        <td><label class="col-xs-2 control-label" lang="zh">明佣比例</label></td>
+                                        <td>
+                                            <div class="input-group">
+                                                <input class="form-control" value="" disabled>
+                                                <span class="input-group-addon">%</span>
+                                            </div>
+                                        </td>
+                                        <td><label class="col-xs-1 control-label" lang="zh">明佣标准</label></td>
+                                        <td><input class="form-control" type="text" value=""/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="col-xs-1 control-label" lang="zh">暗佣计费方式</label></td>
+                                        <td><select><option value="0">从量</option><option value="1">从价</option><option value="2">无</option></select></td>
+                                        <td><label class="col-xs-2 control-label" lang="zh">暗佣比例</label></td>
+                                        <td>
+                                            <div class="input-group">
+                                                <input class="form-control" value="" disabled>
+                                                <span class="input-group-addon">%</span>
+                                            </div>
+                                        </td>
+                                        <td><label class="col-xs-1 control-label" lang="zh">暗佣标准</label></td>
+                                        <td><input class="form-control" type="text" value=""/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="col-xs-1 control-label" lang="zh">出口退税方式</label></td>
+                                        <td><select><option value="0">按销售价退税</option><option value="1">按采购价退税</option><option value="2">不退税</option></select></td>
+                                        <td><label class="col-xs-2 control-label" lang="zh">出口退税率</label></td>
+                                        <td>
+                                            <div class="input-group">
+                                                <input class="form-control" value="" disabled>
+                                                <span class="input-group-addon">%</span>
+                                            </div>
+                                        </td>
+                                        <td><label class="col-xs-1 control-label" lang="zh">其他费用单价</label></td>
+                                        <td><input class="form-control" type="text" value=""/></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--加工成分-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" lang="zh">加工成分及费用</h3>
+                    </div>
+                    <div class="panel-body clearfix">
+                        <table class="table table-condensed table-bordered table-striped text-center">
+                            <thead>
+                            <tr>
+                                <th class="text-center" lang="zh">原料</th>
+                                <th class="text-center" lang="zh">单耗(kg/KL)</th>
+                                <th class="text-center" lang="zh">单价（元/kg）</th>
+                                <th class="text-center" lang="zh">费用（元/KL）</th>
+                                <th class="text-center" lang="zh">备注</th>
+                            </tr>
+                            </thead>
+                            <tbody id="">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-2 col-xs-offset-4"><a href="" class="btn btn-xs btn-block btn-default" type="button">取消</a></div>
+            <div class="col-xs-2"><a href="" class="btn btn-xs btn-block btn-primary" type="button">保存</a></div>
+        </div>
+    </div>
+</div>
