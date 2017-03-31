@@ -12,13 +12,13 @@ $(function () {
     $('#hTitle').text(iGetInnerText(title));
 
     init();
+
     //获取数据
-    getData('${request.contextPath}/customerMarketInfo/init','POST',GetRequest(),pop);
+    getData(basePath+'/customerMarketInfo/init','POST',GetRequest(),pop);
+
     //创建树形菜单
-    $('#tree').creatTree('/productCategory/CategoryTree');
-    /**
-     * 功能按钮
-     */
+    $('#tree').creatTree(basePath+'/productCategory/CategoryTree');
+
     //构造下拉选择框
     $('#cpps_year,#csps_year,#year').html(function (n,old) {
         old = '';
@@ -31,6 +31,7 @@ $(function () {
         }
         return options;
     }).val(new Date().getFullYear());//默认为今年
+
     //筛选客户采购产品
     $(document).on('change.year','#cpps_year',function (e) {
         var year = $(e.target).val();
@@ -39,8 +40,9 @@ $(function () {
             year:year,
             customerId:cusId
         };
-        getData('${request.contextPath}/customerMarketInfo/getCPPListByCidAndYear','POST',data,cpps);
+        getData(basePath+'/customerMarketInfo/getCPPListByCidAndYear','POST',data,cpps);
     });
+
     //筛选客户销售产品
     $(document).on('change.year','#csps_year',function (e) {
         var year = $(e.target).val();
@@ -49,8 +51,9 @@ $(function () {
             year:year,
             customerId:cusId
         };
-        getData('${request.contextPath}/customerMarketInfo/getSaleProductListByCidAndYear','POST',data,csps);
+        getData(basePath+'/customerMarketInfo/getSaleProductListByCidAndYear','POST',data,csps);
     });
+
     //构造客户采购模态
     $(document).on('click.addCpps','#add_cpps',function(){
         var comBtn = $('[data-form-btn="complete"]');
@@ -58,6 +61,7 @@ $(function () {
         $('#table').append(cppsTable());//重新填充表格
         comBtn.attr('id','cpps_up');//变更完成按钮
     });
+
     //构造客户销售模态
     $(document).on('click.addCsps','#add_csps',function(){
         var comBtn = $('[data-form-btn="complete"]');
@@ -65,6 +69,7 @@ $(function () {
         $('#table').append(cspsTable());//重新填充表格
         comBtn.attr('id','csps_up');//变更完成按钮
     });
+
     //继续添加采购产品或者销售产品
     $(document).on('click.add','#addMore',function(){
         var table = $('#table');
@@ -101,9 +106,10 @@ $(function () {
             }
         });
         if(isUp){
-            upData('${request.contextPath}/customerMarketInfo/addCPPList','POST',cppsObj(),'application/json');
-        };
+            upData(basePath+'/customerMarketInfo/addCPPList','POST',cppsObj(),'application/json');
+        }
     });
+
     //客户销售产品批量提交
     $(document).on('click.up','#csps_up',function(e) {
         var isUp=true;
@@ -117,33 +123,38 @@ $(function () {
             }
         });
         if(isUp){
-            upData('${request.contextPath}/customerMarketInfo/addCSPList','POST',cspsObj(),'application/json');
-        };
+            upData(basePath+'/customerMarketInfo/addCSPList','POST',cspsObj(),'application/json');
+        }
     });
+
     //客户合作情况提交
     $(document).on('click.up','#cooperation_up',function() {
-        upData('${request.contextPath}/customerMarketInfo/updateCooperationInfo','POST',cooperationObj(),'application/x-www-form-urlencoded; charset=UTF-8');
+        upData(basePath+'/customerMarketInfo/updateCooperationInfo','POST',cooperationObj(),'application/x-www-form-urlencoded; charset=UTF-8');
     });
+
     //客户合作情况取消
     $(document).on('click','#cooperation_cl',function () {
         //刷新
-        getData('${request.contextPath}/customerMarketInfo/init','POST',GetRequest(),pop);
-    })
+        getData(basePath+'/customerMarketInfo/init','POST',GetRequest(),pop);
+    });
+
     //双击文本添加到指定文本框
     var selectedPName;
     $(document).on('click','[data-target="#treeModal"]',function (e) {
         selectedPName = $(e.target).parents('.input-group').find('input');
 //            console.log(selectedPName);
-    })
+    });
+
     $(document).on('click','#tree a',function (e) {
         e.preventDefault();
-    })
+    });
+
     $(document).on('dblclick','#tree a.cNode',function (e) {
         var close = $(e.target).parents('.modal').find('.close');
         var txt = $(e.target).text();
         selectedPName.val(txt);
         close.click();
-    })
+    });
 
 
     //构造销售产品表格
@@ -181,6 +192,7 @@ $(function () {
         tbody += '<td colspan="2"><input name="marketShare3" class="form-control" type="text" value=""></td></tr></tbody>';
         return tbody;
     }
+
     //构造采购产品表格
     function cppsTable() {
         var tbody = '';
@@ -214,4 +226,4 @@ $(function () {
         tbody += '<td><input name="averagePrice3" class="form-control" type="text" value=""></td></tr></tbody>';
         return tbody;
     }
-})
+});

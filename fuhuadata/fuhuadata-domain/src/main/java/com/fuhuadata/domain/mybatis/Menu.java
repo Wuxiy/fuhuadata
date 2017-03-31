@@ -171,7 +171,7 @@ public class Menu extends BaseEntity<Integer> implements Treeable<Integer> {
     @JsonIgnore
     @Override
     public boolean isRoot() {
-        return getParentId() != null && getParentId() == 0;
+        return getParentId() != null && getId() == 0;
     }
 
     @JsonIgnore

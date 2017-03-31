@@ -89,7 +89,7 @@
         </div>
     </div>
 </div>
- <input id="parentId" type="hidden" value="" />
+ <input id="parentId" type="hidden" value="" class=""/>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script>
     $(function () {
@@ -98,10 +98,9 @@
         creatTrees();
 
         //给menuAside树添加更改顺序按钮
-        var upDownBtn = '<div class="btn-group btn-group-xs">'+
-                '<span name="upwardBtn" class="glyphicon glyphicon-arrow-up"></span>'+
-                '<span name="downWardBtn" class="glyphicon glyphicon-arrow-down"></span></div>';
-//        $('#menuAside').find('a').append(upDownBtn);
+        addSortBtn()
+
+        //上升
         $(document).on('click.moveUp','[name="upwardBtn"]',function () {
             var thisId = $(this).parents('li').attr('id');
             var prevId = $(this).parents('li').prev('li').attr('id');
@@ -109,8 +108,12 @@
                 tid:prevId,
                 sid:thisId
             };
+
+            //排序
             replaceIndex(obj);
         });
+
+        //下降
         $(document).on('click.moveUp','[name="downWardBtn"]',function () {
             var thisId = $(this).parents('li').attr('id');
             var nextId = $(this).parents('li').next('li').attr('id');
@@ -118,19 +121,12 @@
                 tid:thisId,
                 sid:nextId
             };
+
+            //排序
             replaceIndex(obj);
         });
 
-        function replaceIndex (data) {
-            jQuery.ajax({
-                url:'',
-                type:'POST',
-                data:data
-            }).done(function () {
-                location.reload();
-            });
-        }
-
+        //禁用表单控件
         forbiddenForm();
 
         //侧边菜单树
@@ -157,7 +153,7 @@
             var close = $('#treeModal').find('.close');
 
             //添加数据
-            if(thisId && thisId!=0){
+            if(thisId){
                 $('#parentName').val(thisTxt);
                 $('#parentId').val(thisId);
             }
@@ -196,6 +192,7 @@
                 console.log(result);
                 var thisId = result.data;
                 creatTrees();
+                addSortBtn()
                 getMenuDetails(thisId,renderMenu);
             });
 
@@ -206,6 +203,12 @@
             $(document).on('.tree.s');
         });
 
+        //取消
+        $(document).on('click.cencel','#cancel',function () {
+            location.reload();
+        });
+
+        //取得表单数据
         function setMenuObj() {
             var obj = {
                 parentId : ($('#parentId').val()=='' ? 0:$('#parentId').val()),
@@ -215,15 +218,21 @@
             };
             return obj;
         }
+
+        //禁用表单
         function forbiddenForm() {
             $('input,#searchingBtn','.panel-edit').not('.notDisabled').attr('disabled','disabled');
         }
+
+        //取得数据
         function getMenuDetails(id,callback){
             jQuery.ajax({
                 url:'/sys/menu/ajax/'+id,
                 type:'GET'
             }).done(callback);
         }
+
+        //渲染表单
         function renderMenu(result){
             $('#menuId,#parentId,#name,#Url,#parentName').val('');
             if(result.data!=null){
@@ -236,6 +245,8 @@
                 $('#parentName').val(data.parentName);
             }
         }
+
+        //构造菜单树
         function creatTrees() {
             var tree = $('<div class="tree"></div>');
             var modalTree = $('<div class="tree"></div>');
@@ -248,6 +259,37 @@
                 $(this).attr('id',function (i,old) {
                     return old + 'm';
                 })
+            });
+        }
+
+        //创建排序按钮
+        function addSortBtn() {
+            var upDownBtn = '<button name="upwardBtn" class="btn-link" style="height: 21px;border: 0">'+
+                    '<span class="glyphicon glyphicon-arrow-up"></span></button>'+
+                    '<button name="downWardBtn" class="btn-link" style="height: 21px;border: 0">'+
+                    '<span class="glyphicon glyphicon-arrow-down"></span></button>';
+            $('#menuAside .tree-branch').find('a').after(upDownBtn);
+            $('.tree-branch','#menuAside').find('li:first-child').
+            children('[name="upwardBtn"]').attr('disabled','disabled').
+            children('span').css('color','#eee');
+            $('.tree-branch','#menuAside').find('li:last-child').
+            children('[name="downWardBtn"]').attr('disabled','disabled').
+            children('span').css('color','#eee');
+        }
+
+        //排序
+        function replaceIndex (data) {
+            jQuery.ajax({
+                url:basePath+'/sys/menu/ajax/move',
+                type:'POST',
+                data:data
+            }).done(function () {
+
+                //创建树菜单
+                creatTrees();
+
+                //给menuAside树添加更改顺序按钮
+                addSortBtn()
             });
         }
     })

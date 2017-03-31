@@ -52,10 +52,8 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerContactsList.js"></script>
 <script type="text/javascript">
     function Add(){
-        var id = document.URL.split('?')[1].split('=')[1];
-        var url =basePath + $('#add').attr('data-url') + id;
-        console.log(url);
-        window.location.href = url;
+        var url =basePath + $('#add').attr('data-url') + $("#customerId").val();
+        window.open(url);
     }
 </script>
 
