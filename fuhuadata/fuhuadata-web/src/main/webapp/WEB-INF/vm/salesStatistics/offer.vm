@@ -48,11 +48,11 @@
                                     <!--搜索栏-->
                                     <div class="input-group">
                                         <span class="input-group-addon" lang="zh">客户名称</span>
-                                        <input class="form-control" id="customerName" />
+                                        <input class="form-control" type="text" value="" id="customerName" />
                                         <span class="input-group-addon" lang="zh">订单编号</span>
-                                        <input class="form-control" type="text" value="" />
-                                        <span class="input-group-addon" lang="zh">商机状态</span>
-                                        <select class="form-control" id="businessState">
+                                        <input class="form-control" type="text" value="" id="orderId"/>
+                                        <span class="input-group-addon" lang="zh">订单状态</span>
+                                        <select class="form-control" id="orderStatus">
                                             <option value="" selected lang="zh">全部</option>
                                             <option value="0" lang="zh">待下单</option>
                                             <option value="1" lang="zh">失败</option>
@@ -76,8 +76,6 @@
                                             <option value="4" lang="zh">终端客户</option>
                                             <option value="5" lang="zh">其他</option>
                                         </select>
-                                        <span class="input-group-addon" lang="zh">合同总金额</span>
-                                        <input class="form-control" type="text" value="" />
                                         <div class="input-group-btn">
                                             <button class="btn btn-xs btn-primary" id="submit" type="button">搜索</button>
                                         </div>
@@ -168,6 +166,11 @@
             url: basePath + '',
             dataType:'json',
             data:{
+                orderId:$('#orderId').val(),
+                customerName:$('#customerName').val(),
+                orderStatus:$('#businessState').val(),
+                customerLevel:$('#customerLevel').val(),
+                enterpriseNature:$('#enterpriseNature').val(),
                 areaClassId:click_node.oneLevelId,
                 areaId:click_node.twoLevelId,
                 startRow:pageNum*pageSize,
@@ -180,15 +183,15 @@
                 var _html = '';
                 for(var i=0;i<ResultData.length;i++){
                     _html += '<tr>';
-                    _html += '	<td>'+ResultData[i].name+'</td>';
-                    _html += '  <td><a href="">'+ResultData[i].name+'</a></td>';
-                    _html += '  <td>'+ResultData[i].name+'</td>';
+                    _html += '	<td>'+ResultData[i].orderId+'</td>';
+                    _html += '  <td><a href="">'+ResultData[i].businessId+'</a></td>';
+                    _html += '  <td>'+ResultData[i].customerName+'</td>';
                     _html += '  <td lang="zh">'+customerLevelList[ResultData[i].customerLevel-1]+'</td>';
-                    _html += '  <td lang="zh">'+businessOpportunity[ResultData[i].enterpriseNature-1]+'</td>';
-                    _html += '  <td>'+ResultData[i].name+'A</td>';
-                    _html += '  <td>'+ResultData[i].name+'</td>';
+                    _html += '  <td lang="zh">'+ResultData[i].enterpriseNature+'</td>';
+                    _html += '  <td>'+ResultData[i].amountPayable+'A</td>';
+                    _html += '  <td>'+ResultData[i].orderProduct+'</td>';
                     _html += '  <td lang="zh">'+ResultData[i].name+'</td>';
-                    _html += '  <td lang="zh">'+businessState[ResultData[i].name]+'</td>';
+                    _html += '  <td lang="zh">'+ResultData[i].remarks+'</td>';
                     _html +='   </tr>';
                 }
                 $("#offerList").html(_html);
@@ -222,6 +225,11 @@
             data:{
                 areaClassId:click_node.oneLevelId,
                 areaId:click_node.twoLevelId,
+                orderId:$('#orderId').val(),
+                customerName:$('#customerName').val(),
+                orderStatus:$('#businessState').val(),
+                customerLevel:$('#customerLevel').val(),
+                enterpriseNature:$('#enterpriseNature').val()
             },
             async:false,
             method:'POST',

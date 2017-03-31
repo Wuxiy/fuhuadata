@@ -4,14 +4,22 @@
 
 $(function () {
 
-    //获取地区和国家数据
+    //创建面包屑导航
+    $('#location').append(createCrumbsD());
+
+    //设置title标题
+    var title = $('#pTitle').text()+'——'+$('#sTitle').text();
+    $('#hTitle').text(iGetInnerText(title));
+
+    //创建地区下拉框
     var areaData = getAreaData();
+    creatAreaSelected(areaData,$('#areaId'));
     $(document).on('change.screen','#areaId',function () {
         var areaId = $('#areaId');
         var countryId = $('#countryId');
-        //取得地区下拉框的值
-        var areaIdVal = areaId.val();
+
         //根据地区下拉框赋值创建国家下拉框
+        var areaIdVal = areaId.val();
         creatCountrySelected(areaData,areaIdVal,countryId);
     });
 
@@ -20,7 +28,6 @@ $(function () {
         $('[name="customerType"]').val('2').attr('disabled','disabled');
         $('button').filter(editBtn).remove();
         $('.editHide').addClass('hidden');
-        // $('#deputyNav').children('li').slice(4).remove();
         $('.editView').removeClass('hidden');
         var finishBtn = '';
         finishBtn += '<div class="form-group">';
@@ -56,41 +63,6 @@ $(function () {
         });
         //客户基本信息提交
         $(document).on('click.up','#saveCustomerBasic',function(){
-            //提交数据
-            // var inputNotNull = true;
-            // $('input.notNull').each(function () {
-            //    var $this = $(this);
-            //    if($this.val()==''){
-            //        inputNotNull = false;
-            //        return false;
-            //    }else {
-            //        return true;
-            //    }
-            // });
-            // var selectNotNull = true;
-            // $('select.notNull').each(function () {
-            //    var $this = $(this);
-            //    if($this.val()==''||$this.val()=='-1'){
-            //        selectNotNull=false;
-            //        return false;
-            //    }else {
-            //        return true;
-            //    }
-            // });
-            // var checkboxNotNull = false;
-            // $('.notNull[name="enterpriseNature"]').each(function () {
-            //     var $this = $(this);
-            //     if($this.prop('checked')!=false){
-            //         checkboxNotNull = true;
-            //         return false;
-            //     }else {
-            //         return true;
-            //     }
-            // });
-            // if(inputNotNull && selectNotNull && checkboxNotNull){
-            // }else {
-            //     alert('请完善表单');
-            // }
             upData(basePath+'/customerBaseInfo/updateCustomerBaseInfo','POST',customerBasicFormObj(),"application/json");
             delDelBtn();
         });

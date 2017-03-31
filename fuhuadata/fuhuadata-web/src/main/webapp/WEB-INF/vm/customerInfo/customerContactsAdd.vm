@@ -1,7 +1,5 @@
 <div class="nav-deputy shadow-out clearfix">
-    <ul class="breadcrumb pull-right">
-        <li><span class="glyphicon glyphicon-map-marker"></span></li>
-    </ul>
+    #breadcrumb()
 </div>
 <div class="dashboard-wrapper">
     <div class="row">
@@ -115,7 +113,10 @@
         </div>
     </div>
 </div>
+<<<<<<< HEAD
 <input type="hidden" id="customerId" value="$!{customerId}">
+=======
+>>>>>>> 524b3d825e251516029ceadf3efcb4c41a3ee05e
 <script type="text/javascript">
     $('#finishAdd').click(function () {
         var id = $("#customerId").val();

@@ -2,11 +2,7 @@
     <!--副导航-->
     <div class="nav-deputy shadow-out clearfix">
         #deputyNav(3)
-        <ul class="breadcrumb pull-right">
-            <li><span class="glyphicon glyphicon-map-marker"></span></li>
-            <li><a href="">合作客户</a></li>
-            <li class="active">{变量}</li>
-        </ul>
+        #breadcrumb()
     </div>
     <!--表格容器-->
     <div class="dashboard-wrapper">
@@ -15,7 +11,7 @@
                 <div class="panel panel-default view-HD-lg">
                     <div class="panel-heading">
                         <button data-url="/customerLinkman/intoCustomerLinkmanAdd?customerId=" class="btn btn-xs btn-primary panel-heading-btn pull-right" lang="zh" id="add" onclick="Add()">新增</button>
-                        <h3 class="panel-title" lang="zh">
+                        <h3 id="sTitle" class="panel-title" lang="zh">
                             联系人
                         </h3>
                     </div>
@@ -48,9 +44,11 @@
     </div>
 </div>
 <input id="customerId" type="hidden" value='${customerId}'>
+<input id="customerType" type="hidden" value='$!{customerType}'>
+<input type="hidden" id="fullName" value="$!{fullName}" />
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
-##<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerContactsList.js"></script>
 <script type="text/javascript">
     function Add(){
