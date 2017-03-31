@@ -153,7 +153,7 @@
             var close = $('#treeModal').find('.close');
 
             //添加数据
-            if(thisId && thisId!=0){
+            if(thisId){
                 $('#parentName').val(thisTxt);
                 $('#parentId').val(thisId);
             }
