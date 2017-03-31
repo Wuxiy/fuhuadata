@@ -115,65 +115,63 @@
         </div>
     </div>
 </div>
-
+<input type="hidden" id="customerId" value="$!{customerId}">
 <script type="text/javascript">
     $('#finishAdd').click(function () {
-        var id = document.URL.split('?')[1].split('=')[1];
+        var id = $("#customerId").val();
         var url = basePath + '/customerLinkman/add';
         var notnull = $('.notnull');
-        var add = true;
+        var submit_permit = true;
         notnull.each(function () {
             var val = $(this).val();
             if(val == ''||val == null){
                 alert('请完善表单必填项');
-                add = false;
+                submit_permit = false;
                 return false;
-            }else {
-                var data = {
-                    "customerId":id,
-                    "name":$('#name').val(),
-                    "posts":$('#posts').val(),
-                    "responseArea":$('#responseArea').val(),
-                    "onJob":$('#onJob').val(),
-                    "sex":$('#sex').val(),
-                    "birthday":$('#birthday').val(),
-                    "nationality":$('#nationality').val(),
-                    "influence":$('#influence').val(),
-                    "exhibitionHabits":$('#exhibitionHabits').val(),
-                    "fancy":$('#fancy').val(),
-                    "linkPhone1":$('#linkPhone1').val(),
-                    "linkPhone2":$('#linkPhone2').val(),
-                    "lemail":$('#lemail').val(),
-                    "eatingHabits":$('#eatingHabits').val(),
-                    "faith":$('#faith').val(),
-                    "isDefault":$('#isDefault').val(),
-                    "remarks":$('#remarks').val(),
-                    "createUserId":1,
-                    "createUserName":"杨洋",
-                    "lastmodifyUserId":1,
-                    "lastmodifyUserName":"杨洋",
-                    "createTime":"2017-03-20 17:42:29",
-                    "modifyTime":"2017-03-20 17:42:29"
-                }
-                console.log(data);
-
-                jQuery.ajax({
-                    url:url,
-                    type:'POST',
-                    data:JSON.stringify(data),
-                    dataType:"json",
-                    contentType:"application/json",
-                    success:function(result){
-                        if(result.code == 1){
-                            alert("新增成功!");
-                            window.location.href = basePath + '/customerLinkman/intoCustomerLinkmanList?customerId=' + id;
-                        }else {
-                            alert("新增失败！");
-                        }
-                    }
-                })
             }
-        })
-
+        });
+        if(submit_permit){
+            var data = {
+                "customerId":id,
+                "name":$('#name').val(),
+                "posts":$('#posts').val(),
+                "responseArea":$('#responseArea').val(),
+                "onJob":$('#onJob').val(),
+                "sex":$('#sex').val(),
+                "birthday":$('#birthday').val(),
+                "nationality":$('#nationality').val(),
+                "influence":$('#influence').val(),
+                "exhibitionHabits":$('#exhibitionHabits').val(),
+                "fancy":$('#fancy').val(),
+                "linkPhone1":$('#linkPhone1').val(),
+                "linkPhone2":$('#linkPhone2').val(),
+                "lemail":$('#lemail').val(),
+                "eatingHabits":$('#eatingHabits').val(),
+                "faith":$('#faith').val(),
+                "isDefault":$('#isDefault').val(),
+                "remarks":$('#remarks').val(),
+                "createUserId":1,
+                "createUserName":"杨洋",
+                "lastmodifyUserId":1,
+                "lastmodifyUserName":"杨洋",
+                "createTime":"2017-03-20 17:42:29",
+                "modifyTime":"2017-03-20 17:42:29"
+            }
+            jQuery.ajax({
+                url:url,
+                type:'POST',
+                data:JSON.stringify(data),
+                dataType:"json",
+                contentType:"application/json",
+                success:function(result){
+                    if(result.code == 1){
+                        alert("新增成功!");
+                        window.location.href = basePath + '/customerLinkman/intoCustomerLinkmanList?customerId=' + id;
+                    }else {
+                        alert("新增失败！");
+                    }
+                }
+            });
+        }
     })
 </script>
