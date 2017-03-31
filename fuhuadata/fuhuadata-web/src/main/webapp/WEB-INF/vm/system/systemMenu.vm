@@ -192,6 +192,7 @@
                 console.log(result);
                 var thisId = result.data;
                 creatTrees();
+                addSortBtn()
                 getMenuDetails(thisId,renderMenu);
             });
 
