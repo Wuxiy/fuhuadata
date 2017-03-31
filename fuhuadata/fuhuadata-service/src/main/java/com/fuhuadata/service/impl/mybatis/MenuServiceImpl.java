@@ -16,15 +16,6 @@ public class MenuServiceImpl extends BaseTreeableServiceImpl<Menu, Integer>
         implements MenuService {
 
     @Override
-    public Menu getRoot() {
-        Menu menu = new Menu();
-        menu.setMenuId(0);
-        menu.setParentIds("");
-        menu.setName("全部");
-        return menu;
-    }
-
-    @Override
     public Menu get(Integer id) {
         return getMenuMapper().getMenu(id);
     }

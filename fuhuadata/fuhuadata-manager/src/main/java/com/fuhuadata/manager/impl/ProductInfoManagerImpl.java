@@ -1,12 +1,18 @@
 package com.fuhuadata.manager.impl;
 import java.util.List;
+
+import com.fuhuadata.domain.ProductComponent;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.ProductInfo;
 import com.fuhuadata.manager.ProductInfoManager;
 import com.fuhuadata.domain.query.QueryProductInfo;
 import com.fuhuadata.dao.ProductInfoDao;
 import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 
 /**
@@ -16,13 +22,17 @@ import java.util.ArrayList;
 public class ProductInfoManagerImpl implements ProductInfoManager {
 
     private ProductInfoDao productInfoDao;
-    
 
-    public ProductInfo addProductInfo(ProductInfo productInfo) {
+	@Transactional
+    public ProductInfo addProductInfo(ProductInfo productInfo,List<ProductComponent> productComponents) {
+    	productInfoDao.addProductProcessingComponent(productComponents);
     	return productInfoDao.addProductInfo(productInfo);
     }
-    
-    public boolean updateProductInfoById(int product_id, ProductInfo productInfo) {
+
+    @Transactional
+    public boolean updateProductInfoById(int product_id, ProductInfo productInfo,List<ProductComponent> productComponents) {
+    	productInfoDao.deleteProductProcessingComponent(product_id);
+    	productInfoDao.addProductProcessingComponent(productComponents);
     	return productInfoDao.updateProductInfoById(product_id, productInfo) == 1 ? true : false;
     }
     

@@ -1,0 +1,41 @@
+<!--产品要求——包装要求——huxiangyang-->
+<div class="clearfix content shadow-out">
+    <!--面包屑导航-->
+    #breadcrumb()
+    <div class="dashboard-wrapper">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" lang="zh">包装要求</h3>
+                    </div>
+                    <div class="panel-body clearfix">
+                        <div class="form-group">
+                            <label for="" class="control-label col-xs-1">主材选择</label>
+                            <div class="col-xs-2">
+                                <div class="input-group">
+                                    <input class="form-control" type="text">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-xs btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-condensed table-bordered table-striped text-center">
+                            <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

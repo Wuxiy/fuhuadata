@@ -2,6 +2,7 @@ package com.fuhuadata.dao.impl;
 
 import com.fuhuadata.dao.ComponentCostDao;
 import com.fuhuadata.domain.ComponentCost;
+import com.fuhuadata.domain.KProductComponent;
 import com.fuhuadata.domain.query.ComponentCostQuery;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
@@ -19,11 +20,18 @@ public class ComponentCostDaoImpl extends SqlMapClientTemplate implements Compon
     public static final String COUNT="COMPONENTCOST.COUNT";
     public static final String GET_BY_ID="COMPONENTCOST.GET-BY-ID";
     public static final String GET_BY_QUERY="COMPONENTCOST.GET-BY-QUERY";
+    public static final String ADD_SUITABLE_PRODUCT="COMPONENTCOST.ADD-SUITABLE-PRODUCT";
+    public static final String DELETE_PRODUCT_COMPONENT_ID_="COMPONENTCOST.DELETE-PRODUCT-COMPONENT-BY-ID";
 
     @Override
     public ComponentCost addComponentCost(ComponentCost componentCost) {
         componentCost.setComponentId((Integer)this.insert(ADD,componentCost));
         return componentCost;
+    }
+
+    @Override
+    public int addSuitableProduct(List<KProductComponent> KProductComponents) {
+        return this.update(ADD_SUITABLE_PRODUCT, KProductComponents);
     }
 
     @Override
@@ -35,6 +43,11 @@ public class ComponentCostDaoImpl extends SqlMapClientTemplate implements Compon
     @Override
     public int deleteComponentCostById(int id) {
         return this.delete(DELETE_BY_ID,id);
+    }
+
+    @Override
+    public int deleteProductComponentCostById(int componentId) {
+        return this.delete(DELETE_PRODUCT_COMPONENT_ID_,componentId);
     }
 
     @Override

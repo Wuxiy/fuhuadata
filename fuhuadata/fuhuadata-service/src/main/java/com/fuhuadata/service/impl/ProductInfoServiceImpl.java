@@ -3,6 +3,7 @@ import java.util.List;
 
 import com.fuhuadata.dao.ProductWareDao;
 import com.fuhuadata.domain.ComponentCost;
+import com.fuhuadata.domain.ProductComponent;
 import com.fuhuadata.domain.ProductWare;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.ProductInfo;
@@ -27,10 +28,10 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 	private  final static Log log = LogFactory.getLog(ProductProblemServiceImpl.class);
     private ProductInfoManager productInfoManager;
     private ProductWareManager productWareManager;
-    public Result<ProductInfo> addProductInfo(ProductInfo productInfo) {
+    public Result<ProductInfo> addProductInfo(ProductInfo productInfo,List<ProductComponent> productComponents) {
 		Result<ProductInfo> result = new Result<ProductInfo>();
 		try {
-			result.addDefaultModel(productInfoManager.addProductInfo(productInfo));			
+			result.addDefaultModel(productInfoManager.addProductInfo(productInfo,productComponents));
 		} catch(Exception e) {
 			result.setSuccess(false);
 			log.error("新增产品档案错误",e);
@@ -38,11 +39,11 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 		return result;
     }
     
-    public Result updateProductInfoById(int product_id, ProductInfo productInfo) {
+    public Result updateProductInfoById(int product_id, ProductInfo productInfo, List<ProductComponent> productComponents) {
 		Result result = new Result();
 		try {
 			String str=productInfo.getProcessingComponents();
-			result.setSuccess(productInfoManager.updateProductInfoById(product_id, productInfo));
+			result.setSuccess(productInfoManager.updateProductInfoById(product_id, productInfo,productComponents));
 		} catch(Exception e) {
 			result.setSuccess(false);
 			log.error("根据id更新产品档案信息错误",e);

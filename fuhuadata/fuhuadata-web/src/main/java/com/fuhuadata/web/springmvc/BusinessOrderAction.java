@@ -1,6 +1,5 @@
 package com.fuhuadata.web.springmvc;
 
-import com.fuhuadata.domain.BusinessInfo;
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
 import com.fuhuadata.domain.query.Result;
@@ -155,7 +154,7 @@ public class BusinessOrderAction {
     public ResultPojo updateOfferStatus(@RequestBody BusinessOrder businessOrder){
         Result<BusinessOrder> result = new Result<BusinessOrder>();
         try{
-            result = businessOrderService.updateBusinessOrderByOrderId(businessOrder);
+            result = businessOrderService.updateOfferStatus(businessOrder);
         }catch(Exception e){
             result.setSuccess(false);
         }

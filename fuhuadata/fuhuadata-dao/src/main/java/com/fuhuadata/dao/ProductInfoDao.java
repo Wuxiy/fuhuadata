@@ -2,6 +2,7 @@ package com.fuhuadata.dao;
 import java.util.List;
 
 import com.fuhuadata.domain.ProductCategory;
+import com.fuhuadata.domain.ProductComponent;
 import com.fuhuadata.domain.ProductInfo;
 import com.fuhuadata.domain.query.QueryProductInfo;
 import com.fuhuadata.vo.CustomerProductPackagingArchives;
@@ -32,6 +33,16 @@ public interface ProductInfoDao {
      * @return
      */
     public int deleteProductInfoById(int product_id);
+
+
+    public int addProductProcessingComponent(List<ProductComponent> productComponents);
+
+	/**
+	 * 根据标准产品ID删除产品加工成分
+	 * @param productId
+	 * @return
+	 */
+	public int deleteProductProcessingComponent(int productId);
 
 	/**
 	 * 根据产品分类查询

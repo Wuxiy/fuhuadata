@@ -26,14 +26,13 @@
         </dynamic>
     </sql>
 
-
     <sql id="ORDER-PAGE-COMMON">
         <dynamic prepend=" WHERE ">
             <isNotEmpty prepend=" AND " property="customerId">
                 base.short_name = #customerName#
             </isNotEmpty>
-            <isNotNull prepend=" AND " property="orderStatus">
-                a.staus = #orderStatus#
+            <isNotNull prepend=" AND " property="status">
+                a.status = #status#
             </isNotNull>
             <isNotEmpty prepend=" AND " property="saleOrganizationId">
                 sale_organization_id = #saleOrganizationId#
@@ -41,11 +40,27 @@
             <isNotNull prepend=" AND " property="customerLevel">
                 base.customer_level = #customerLevel#
             </isNotNull>
+            <isNotEqual property="areaClassId" compareValue="0" prepend=" AND ">
+                 base.customer_area_id = #areaClassId#
+                <isNotEqual property="areaId" compareValue="0" prepend=" AND ">
+                    base.country_id = #areaId#
+                </isNotEqual>
+            </isNotEqual>
+            <isNotEmpty prepend=" AND " property="enterpriseNature">
+                nature.customer_id=base.customer_id
+            </isNotEmpty>
+            <isNotNull prepend=" AND ">
+                a.`status` IN (-1,2,3)
+            </isNotNull>
+            <isNotEmpty prepend=" AND " property="orderBy">
+                order by $orderBy$
+            </isNotEmpty>
             <isNotEmpty prepend=" AND " property="startTime">
                 <![CDATA[
                      deal_time  >=  #startTime#
                 ]]>
             </isNotEmpty>
+
         </dynamic>
     </sql>
 
@@ -54,8 +69,8 @@
             <isNotNull prepend=" AND " property="customerName">
                 base.short_name = #customerName#
             </isNotNull>
-            <isNotNull prepend=" AND " property="orderStatus">
-                a.staus = #orderStatus#
+            <isNotNull prepend=" AND " property="status">
+                a.status = #status#
             </isNotNull>
             <isNotNull prepend=" AND " property="orderId">
                 a.order_id = #orderId#
@@ -63,6 +78,21 @@
             <isNotNull prepend=" AND " property="customerLevel">
                 base.customer_level = #customerLevel#
             </isNotNull>
+            <isNotEqual property="areaClassId" compareValue="0" prepend=" AND ">
+                base.customer_area_id = #areaClassId#
+                <isNotEqual property="areaId" compareValue="0" prepend=" AND ">
+                    base.country_id = #areaId#
+                </isNotEqual>
+            </isNotEqual>
+            <isNotEmpty prepend=" AND " property="enterpriseNature">
+                nature.customer_id=base.customer_id
+            </isNotEmpty>
+            <isNotNull prepend=" AND ">
+                a.`status` IN (-2,0,1)
+            </isNotNull>
+            <isNotEmpty prepend=" AND " property="orderBy">
+                order by $orderBy$
+            </isNotEmpty>
         </dynamic>
     </sql>
     <update id="UPDATE" parameterClass="BusinessOrder" >
@@ -149,8 +179,8 @@
             <isNotNull prepend=", " property="partialShipmentFalg" >
                 partial_shipment_falg = #partialShipmentFalg#
             </isNotNull>
-            <isNotNull prepend=", " property="staus" >
-                staus = #staus#
+            <isNotNull prepend=", " property="status" >
+                status = #status#
             </isNotNull>
             <isNotNull prepend=", " property="dealTime" >
                 deal_time = #dealTime#
@@ -225,7 +255,7 @@
         sale_organization_id, sale_organization_name, destination_port, shipment_port,
         collection_agreement, trade_type, trade_term, currency, trade_country, premium_rate,
         guarantee_rate, discount_rate, loss_rate, sale_rate, management_rate, gross_rate, credit_rate,
-        transport_flag, partial_shipment_falg, staus, deal_time, deliver_info, express_info, due_time,
+        transport_flag, partial_shipment_falg, status, deal_time, deliver_info, express_info, due_time,
         amount_payable, floor_price, maintenance_fee, net_profit, actual_payment_time,
         actual_amount_paid, unpaid_amount, is_complaint, is_pledge, is_modify_price, claim_amount,
         create_user_id, create_user_name, lastmodify_user_id, lastmodify_user_name, create_time,
@@ -238,7 +268,7 @@
         #tradeCountry#, #premiumRate#, #guaranteeRate#,
         #discountRate#, #lossRate#, #saleRate#, #managementRate#,
         #grossRate#, #creditRate#, #transportFlag#,
-        #partialShipmentFalg#, #staus#, #dealTime#, #deliverInfo#,
+        #partialShipmentFalg#, #status#, #dealTime#, #deliverInfo#,
         #expressInfo#, #dueTime#, #amountPayable#, #floorPrice#,
         #maintenanceFee#, #netProfit#, #actualPaymentTime#,
         #actualAmountPaid#, #unpaidAmount#, #isComplaint#, #isPledge#,
@@ -255,7 +285,7 @@
         sale_organization_name, destination_port, shipment_port, collection_agreement, trade_type,
         trade_term, currency, trade_country, premium_rate, guarantee_rate, discount_rate, loss_rate,
         sale_rate, management_rate, gross_rate, credit_rate, transport_flag, partial_shipment_falg,
-        staus, deal_time, deliver_info, express_info, due_time, amount_payable, floor_price,
+        status, deal_time, deliver_info, express_info, due_time, amount_payable, floor_price,
         maintenance_fee, net_profit, actual_payment_time, actual_amount_paid, unpaid_amount,
         is_complaint, is_pledge, is_modify_price, claim_amount, create_user_id, create_user_name,
         lastmodify_user_id, lastmodify_user_name, create_time, modify_time
@@ -268,10 +298,10 @@
         update business_order
         <dynamic prepend="set" >
             <isNotNull prepend=", " property="failureAnalysis" >
-                failur_analysis = #failureAnalysis#
+                failure_analysis = #failureAnalysis#
             </isNotNull>
-            <isNotNull prepend=", " property="staus" >
-                staus = #staus#
+            <isNotNull prepend=", " property="status" >
+                status = #status#
             </isNotNull>
             <isNotNull prepend="," property="lastmodifyUserId" >
                 lastmodify_user_id = #lastmodifyUserId#
@@ -296,26 +326,18 @@
             base.full_enterprise_nature enterpriseNature,
             a.amount_payable amountPayable,
             GROUP_CONCAT(b.`name`) AS orderProduct,
-            a.staus orderStatus
+            a.status status
         FROM
             business_order a
         LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
-        LEFT JOIN customer_enterprise_nature nature ON nature.customer_id = a.customer_id
         LEFT JOIN business_order_product b ON b.order_id = a.order_id
-        GROUP BY a.order_id
     ]]>
         <isNotEmpty prepend=", " property="enterpriseNature">
             (select * from customer_enterprise_nature where nature=#enterpriseNature#) nature
         </isNotEmpty>
-
         <isParameterPresent>
             <include refid="OFFER-PAGE-COMMON"/>
-            <isNotEmpty prepend=" AND " property="enterpriseNature">
-                nature.customer_id=base.customer_id
-            </isNotEmpty>
-            <isNotEmpty prepend=" AND " property="orderBy">
-                order by $orderBy$
-            </isNotEmpty>
+            GROUP BY a.order_id
             LIMIT #startRow#,#pageSize#
         </isParameterPresent>
     </select>
@@ -338,7 +360,7 @@
         a.floor_price floorPrice,
         a.is_complaint isComplaint,
         a.is_modify_price isModifyPrice,
-        a.staus orderStatus,
+        a.status status,
         a.deal_time dealTime
         FROM
         business_order a
@@ -348,12 +370,7 @@
         </isNotEmpty>
         <isParameterPresent>
             <include refid="ORDER-PAGE-COMMON"/>
-            <isNotEmpty prepend=" AND " property="enterpriseNature">
-                nature.customer_id=base.customer_id
-            </isNotEmpty>
-            <isNotEmpty prepend=" AND " property="orderBy">
-                order by $orderBy$
-            </isNotEmpty>
+            GROUP BY a.order_id
             limit #startRow#,#pageSize#
         </isParameterPresent>
     </select>
@@ -366,9 +383,7 @@
         </isNotEmpty>
         <isParameterPresent>
             <include refid="ORDER-PAGE-COMMON"/>
-            <isNotEmpty prepend=" AND " property="enterpriseNature">
-                nature.customer_id=base.customer_id
-            </isNotEmpty>
+            GROUP BY a.order_id
         </isParameterPresent>
     </select>
 
@@ -378,18 +393,13 @@
         FROM
         business_order a
         LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
-        LEFT JOIN customer_enterprise_nature nature ON nature.customer_id = a.customer_id
         LEFT JOIN business_order_product b ON b.order_id = a.order_id
-        GROUP BY a.order_id
         <isNotEmpty prepend=", " property="enterpriseNature">
             (select * from customer_enterprise_nature where nature=#enterpriseNature#) nature
         </isNotEmpty>
         <isParameterPresent>
-
             <include refid="OFFER-PAGE-COMMON"/>
-            <isNotEmpty prepend=" AND " property="enterpriseNature">
-                nature.customer_id=base.customer_id
-            </isNotEmpty>
+            GROUP BY a.order_id
         </isParameterPresent>
     </select>
 
