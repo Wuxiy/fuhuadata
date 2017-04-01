@@ -6,9 +6,8 @@ import com.fuhuadata.domain.KProductComponent;
 import com.fuhuadata.domain.query.ComponentCostQuery;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 /**
  * 成分价格DaoImpl
@@ -24,7 +23,7 @@ public class ComponentCostDaoImpl extends SqlMapClientTemplate implements Compon
     public static final String GET_BY_QUERY="COMPONENTCOST.GET-BY-QUERY";
     public static final String ADD_SUITABLE_PRODUCT="COMPONENTCOST.ADD-SUITABLE-PRODUCT";
     public static final String DELETE_PRODUCT_COMPONENT_ID_="COMPONENTCOST.DELETE-PRODUCT-COMPONENT-BY-ID";
-
+    private static final String GET_PRODUCT_COMPONENT_BY_COMPONENT_ID="COMPONENTCOST.GET-PRODUCTCOMPONENT-BY-COMPONENT-ID";
     @Override
     public ComponentCost addComponentCost(ComponentCost componentCost) {
         componentCost.setComponentId((Integer)this.insert(ADD,componentCost));
@@ -52,12 +51,16 @@ public class ComponentCostDaoImpl extends SqlMapClientTemplate implements Compon
         return this.delete(DELETE_PRODUCT_COMPONENT_ID_,componentId);
     }
 
+
     @Override
-    public ComponentCost getComponentCostById(int id,int productCategoryId) {
-        Map map=new HashMap();
-        map.put("id", id);
-        map.put("productCategoryId", productCategoryId);
-        return  (ComponentCost) this.queryForObject(GET_BY_ID,map);
+    public ComponentCost getComponentCostById(int id) {
+
+        return  (ComponentCost) this.queryForObject(GET_BY_ID,id);
+    }
+
+    @Override
+    public List<KProductComponent> getProductComponentByComponentId(int id) {
+        return this.queryForList(GET_PRODUCT_COMPONENT_BY_COMPONENT_ID,id);
     }
 
     @Override

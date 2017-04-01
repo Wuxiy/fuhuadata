@@ -17,6 +17,23 @@
         <result column="remarks" property="remarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>
 
+    <resultMap id="GET-COMPONENTCOST-MAP" class="ComponentCost">
+        <result column="component_id" property="componentId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="component_name" property="componentName" jdbcType="VARCHAR" javaType="java.lang.String" />
+        <result column="consumption" property="consumption" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="price_end" property="priceEnd" jdbcType="DATE" javaType="java.sql.Date"/>
+        <result column="unit_cost" property="unitCost" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    </resultMap>
+
+    <resultMap id="ProductComponent-Map" class="ProductComponent" >
+        <result column="id" property="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+        <result column="component_id" property="componentId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="consumption" property="consumption" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="product_category_id" property="productCategoryId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="category_full_name" property="categoryFullName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    </resultMap>
+
     <sql id="PAGE-COMMON">
         <dynamic prepend=" WHERE ">
             <isNotNull prepend=" AND " property="componentName">
@@ -106,23 +123,18 @@
         </isParameterPresent>
     </select>
 
-    <select id="GET-BY-ID" resultMap="COMPONENTCOST-MAP" parameterClass="java.util.Map">
+    <select id="GET-BY-ID" resultMap="GET-COMPONENTCOST-MAP" parameterClass="java.lang.Integer">
         <![CDATA[
-                   SELECT
-            a.component_id,
-            a.component_name,
-            a.unit_cost,
-            a.price_end,
-            b.consumption,
-            b.product_category_id,
-            b.category_full_name,
-            a.remarks
-        FROM
-            k_component_cost a
-        LEFT JOIN k_product_component b ON b.component_id = a.component_id
-        WHERE a.component_id=#id# AND b.product_category_id=#productCategoryId#
+                  select * from k_component_cost where component_id = #id#
         ]]>
     </select>
+
+    <select id="GET-PRODUCTCOMPONENT-BY-COMPONENT-ID" resultMap="ProductComponent-Map" parameterClass="java.lang.Integer">
+        <![CDATA[
+                  select * from k_product_component where component_id = #id#
+        ]]>
+    </select>
+
 
     <select id="GET-PAGE" resultMap="COMPONENTCOST-MAP" parameterClass="ComponentCostQuery">
         <![CDATA[

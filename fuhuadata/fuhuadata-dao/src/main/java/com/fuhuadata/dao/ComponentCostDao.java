@@ -43,7 +43,14 @@ public interface ComponentCostDao {
      * @param id
      * @return
      */
-    public ComponentCost getComponentCostById(int id,int productCategoryId);
+    public ComponentCost getComponentCostById(int id);
+
+    /**
+     * 根据成分id获取适用品类
+     * @param id
+     * @return
+     */
+    public List<KProductComponent> getProductComponentByComponentId(int id);
 
     /**
      * 查询不带分页

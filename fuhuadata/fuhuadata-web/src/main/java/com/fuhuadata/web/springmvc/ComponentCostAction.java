@@ -6,6 +6,7 @@ import com.fuhuadata.domain.query.ComponentCostQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.ComponentCostService;
+import com.fuhuadata.vo.ComponentCostDO;
 import com.fuhuadata.vo.ComponentCostVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
@@ -140,9 +141,9 @@ public class ComponentCostAction {
     @RequestMapping(value="/getComponentCostById",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-componentCostInfo",methods = "GET-BY-ID")
     @ResponseBody
-    public ResultPojo getComponentCostById(int id,int productCategoryId){
+    public ResultPojo getComponentCostById(int id){
         try{
-            Result<ComponentCost> result=componentCostService.getComponentCostById(id,productCategoryId);
+            Result<ComponentCostDO> result=componentCostService.getComponentCostById(id);
             return result.getResultPojo();
         }catch(Exception e){
             log.error("根据id获取成分价格错误",e);

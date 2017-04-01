@@ -6,6 +6,7 @@ import com.fuhuadata.domain.KProductComponent;
 import com.fuhuadata.domain.query.ComponentCostQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.ComponentCostManager;
+import com.fuhuadata.vo.ComponentCostDO;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -45,8 +46,12 @@ public class ComponentCostManagerImpl implements ComponentCostManager {
     }
 
     @Override
-    public ComponentCost getComponentCostById(int id,int productCategoryId) {
-        return componentCostDao.getComponentCostById(id,productCategoryId);
+    public ComponentCostDO getComponentCostById(int id) {
+        ComponentCostDO componentCostDO = new ComponentCostDO();
+        componentCostDO.setComponentCost(componentCostDao.getComponentCostById(id));
+        List<KProductComponent> productComponents = componentCostDao.getProductComponentByComponentId(id);
+        componentCostDO.setkProductComponents(productComponents);
+        return componentCostDO;
     }
 
     @Override

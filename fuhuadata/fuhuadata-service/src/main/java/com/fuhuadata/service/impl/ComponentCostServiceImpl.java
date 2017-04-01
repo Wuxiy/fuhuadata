@@ -6,6 +6,7 @@ import com.fuhuadata.domain.query.ComponentCostQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.ComponentCostManager;
 import com.fuhuadata.service.ComponentCostService;
+import com.fuhuadata.vo.ComponentCostDO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -58,14 +59,14 @@ public class ComponentCostServiceImpl implements ComponentCostService {
     }
 
     @Override
-    public Result<ComponentCost> getComponentCostById(int id,int productCategoryId) {
-        Result<ComponentCost> result = new Result<ComponentCost>();
+    public Result<ComponentCostDO> getComponentCostById(int id) {
+        Result<ComponentCostDO> result = new Result<ComponentCostDO>();
         try {
-            ComponentCost componentCost = componentCostManager.getComponentCostById(id,productCategoryId);
-            if( componentCost== null){
+            ComponentCostDO componentCostDO = componentCostManager.getComponentCostById(id);
+            if( componentCostDO== null){
                 result.setSimpleErrorMsg(0, "当前成分价格数据不存在，请重试");
             }else{
-                result.addDefaultModel("componentCosts", componentCost);
+                result.addDefaultModel("componentCosts",componentCostDO);
             }
         } catch (Exception e) {
             result.setSuccess(false);

@@ -4,6 +4,8 @@ import com.fuhuadata.domain.ComponentCost;
 import com.fuhuadata.domain.KProductComponent;
 import com.fuhuadata.domain.query.ComponentCostQuery;
 import com.fuhuadata.domain.query.Result;
+import com.fuhuadata.vo.ComponentCostDO;
+import com.fuhuadata.vo.ComponentCostVO;
 
 import java.util.List;
 
@@ -19,7 +21,7 @@ public interface ComponentCostManager {
 
     public boolean deleteComponentCostById(int id);
 
-    public ComponentCost getComponentCostById(int id,int productCategoryId);
+    public ComponentCostDO getComponentCostById(int id);
 
     public List<ComponentCost> getComponentCostByQuery(ComponentCostQuery componentCostQuery);
 
