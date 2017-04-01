@@ -19,7 +19,7 @@ public interface ComponentCostManager {
 
     public boolean deleteComponentCostById(int id);
 
-    public ComponentCost getComponentCostById(int id);
+    public ComponentCost getComponentCostById(int id,int productCategoryId);
 
     public List<ComponentCost> getComponentCostByQuery(ComponentCostQuery componentCostQuery);
 

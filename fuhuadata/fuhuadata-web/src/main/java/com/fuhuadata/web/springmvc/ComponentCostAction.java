@@ -76,11 +76,12 @@ public class ComponentCostAction {
 
     }
     @RequestMapping(value="/doAddComponentCost",method = RequestMethod.POST)
-    @ResponseBody
     @SystemLogAnnotation(module = "knowledgeBase-componentCostInfo",methods = "doAdd")
+    @ResponseBody
     public ResultPojo doAddComponentCost(@RequestBody ComponentCostVO componentCostVO){
         ComponentCost componentCost = componentCostVO.getComponentCost();
-        KProductComponent[] KProductComponents = componentCostVO.getKProductComponents();
+        System.out.println(componentCostVO.getkProductComponents()+"123"+componentCostVO.getComponentCost());
+        KProductComponent[] KProductComponents = componentCostVO.getkProductComponents();
         Result result = new Result();
         List<KProductComponent> list  = new ArrayList<KProductComponent>();
         try{
@@ -104,7 +105,7 @@ public class ComponentCostAction {
     @SystemLogAnnotation(module = "knowledgeBase-componentCostInfo",methods = "doUpdate")
     public ResultPojo delete(@RequestBody ComponentCostVO componentCostVO){
         ComponentCost componentCost = componentCostVO.getComponentCost();
-        KProductComponent[] KProductComponents = componentCostVO.getKProductComponents();
+        KProductComponent[] KProductComponents = componentCostVO.getkProductComponents();
         Result result = new Result();
         List<KProductComponent> list  = new ArrayList<KProductComponent>();
         try{
@@ -139,9 +140,9 @@ public class ComponentCostAction {
     @RequestMapping(value="/getComponentCostById",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-componentCostInfo",methods = "GET-BY-ID")
     @ResponseBody
-    public ResultPojo getComponentCostById(int id){
+    public ResultPojo getComponentCostById(int id,int productCategoryId){
         try{
-            Result<ComponentCost> result=componentCostService.getComponentCostById(id);
+            Result<ComponentCost> result=componentCostService.getComponentCostById(id,productCategoryId);
             return result.getResultPojo();
         }catch(Exception e){
             log.error("根据id获取成分价格错误",e);

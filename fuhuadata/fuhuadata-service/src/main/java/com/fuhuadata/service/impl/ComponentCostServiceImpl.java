@@ -58,10 +58,10 @@ public class ComponentCostServiceImpl implements ComponentCostService {
     }
 
     @Override
-    public Result<ComponentCost> getComponentCostById(int id) {
+    public Result<ComponentCost> getComponentCostById(int id,int productCategoryId) {
         Result<ComponentCost> result = new Result<ComponentCost>();
         try {
-            ComponentCost componentCost = componentCostManager.getComponentCostById(id);
+            ComponentCost componentCost = componentCostManager.getComponentCostById(id,productCategoryId);
             if( componentCost== null){
                 result.setSimpleErrorMsg(0, "当前成分价格数据不存在，请重试");
             }else{

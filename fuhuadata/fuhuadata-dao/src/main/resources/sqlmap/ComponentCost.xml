@@ -10,7 +10,8 @@
         <result column="component_id" property="componentId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result column="component_name" property="componentName" jdbcType="VARCHAR" javaType="java.lang.String" />
         <result column="consumption" property="consumption" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="suitable_product" property="suitableProduct" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="category_full_name" property="suitableProduct" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="product_category_id" property="productCategoryId"  jdbcType="INT" javaType="java.lang.Integer"/>
         <result column="price_end" property="priceEnd" jdbcType="DATE" javaType="java.sql.Date"/>
         <result column="unit_cost" property="unitCost" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="remarks" property="remarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
@@ -22,7 +23,7 @@
                 component_name = #componentName#
             </isNotNull>
             <isNotNull prepend=" AND " property="suitableProduct">
-                suitable_product =  #suitableProduct#
+                category_full_name =  #suitableProduct#
             </isNotNull>
         </dynamic>
     </sql>
@@ -33,32 +34,32 @@
                 component_name = #componentName#
             </isNotNull>
             <isNotNull prepend=" AND " property="suitableProduct">
-                suitable_product =  #suitableProduct#
+                b.category_full_name =  #suitableProduct#
             </isNotNull>
         </dynamic>
     </sql>
 
     <insert id="ADD" parameterClass="ComponentCost">
         INSERT INTO
-        k_component_cost (component_id, component_name, consumption,
-        suitable_product, price_end, unit_cost,
+        k_component_cost (component_id, component_name,
+        price_end, unit_cost,
         remarks)
-        VALUES (#componentId#, #componentName#, #consumption#,
-        #suitableProduct#, #priceEnd#, #unitCost#,
+        VALUES (#componentId#, #componentName#,
+        #priceEnd#, #unitCost#,
         #remarks#)
         <selectKey  resultClass="int" keyProperty="componentId">
-            SELECT @@IDENTITY AS component_id
+            SELECT @@IDENTITY AS componentId
         </selectKey>
     </insert>
 
     <update id="ADD-SUITABLE-PRODUCT" parameterClass="java.util.List">
         <![CDATA[
             INSERT INTO k_product_component
-            (id,component_id,consumption,product_category_id,category_full_name) values
+            (component_id,consumption,product_category_id,category_full_name) values
             ]]>
         <iterate conjunction=",">
             <![CDATA[
-                (#[].id#,#[].componentId#,#[].consumption#,
+                (#[].componentId#,#[].consumption#,
                 #[].productCategoryId#,#[].categoryFullName#)
                 ]]>
         </iterate>
@@ -67,8 +68,6 @@
     <update id="UPDATE" parameterClass="ComponentCost">
         UPDATE k_component_cost
         <dynamic prepend=" SET ">
-            <isNotNull prepend=", " property="consumption">consumption = #consumption#</isNotNull>
-            <isNotNull prepend=", " property="suitableProduct">suitable_product = #suitableProduct#</isNotNull>
             <isNotNull prepend=", " property="unitCost">unit_cost = #unitCost#</isNotNull>
             <isNotNull prepend=", " property="priceEnd">price_end = #priceEnd#</isNotNull>
         </dynamic>
@@ -89,16 +88,39 @@
 
     <select id="GET-BY-QUERY" resultMap="COMPONENTCOST-MAP" parameterClass="ComponentCostQuery">
         <![CDATA[
-            SELECT * FROM k_component_cost
+            SELECT
+            a.component_id,
+            a.component_name,
+            a.unit_cost,
+            a.price_end,
+            b.consumption,
+            b.product_category_id,
+            b.category_full_name,
+            a.remarks
+        FROM
+            k_component_cost a
+        LEFT JOIN k_product_component b ON b.component_id = a.component_id
         ]]>
         <isParameterPresent>
             <include refid="QUERY-COMMON"/>
         </isParameterPresent>
     </select>
 
-    <select id="GET-BY-ID" resultMap="COMPONENTCOST-MAP" parameterClass="java.lang.Integer">
+    <select id="GET-BY-ID" resultMap="COMPONENTCOST-MAP" parameterClass="java.util.Map">
         <![CDATA[
-            SELECT * FROM k_component_cost WHERE component_id=#id#
+                   SELECT
+            a.component_id,
+            a.component_name,
+            a.unit_cost,
+            a.price_end,
+            b.consumption,
+            b.product_category_id,
+            b.category_full_name,
+            a.remarks
+        FROM
+            k_component_cost a
+        LEFT JOIN k_product_component b ON b.component_id = a.component_id
+        WHERE a.component_id=#id# AND b.product_category_id=#productCategoryId#
         ]]>
     </select>
 
