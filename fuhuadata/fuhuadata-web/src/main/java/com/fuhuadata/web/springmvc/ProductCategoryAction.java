@@ -49,7 +49,7 @@ public class ProductCategoryAction {
     }
 
     /**
-     * json目录树
+     * json目录树,四级目录树
      * @return
      */
     @RequestMapping(value="/CategoryTree")
@@ -66,7 +66,7 @@ public class ProductCategoryAction {
     }
 
     /**
-     * json目录树
+     * json目录树，三级目录树
      * @return
      */
     @RequestMapping(value="/CategoryTreeThree")

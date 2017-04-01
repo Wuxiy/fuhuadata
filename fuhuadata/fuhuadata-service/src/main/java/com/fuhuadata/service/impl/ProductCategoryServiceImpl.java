@@ -136,7 +136,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
                                 }
                             }
                         }
-                        if(flag==false){
+                        if(flag==false&&product!=null){
                             small.addChildNode(product);
                         }
                     }
