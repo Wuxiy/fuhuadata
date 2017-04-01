@@ -415,8 +415,22 @@ $(document).on("click",".componnentId",function(){
         type: 'GET',
         url: url,
         success: function (result) {
-            var ResultData = eval(result.data);
-            var html = [];
+            var ComponentCost = result.data.componentCost;
+            var ProductComponents = eval(result.data.productComponents);
+
+            $('#componentName').val(ComponentCost.componentName);
+            $('#unitCost').val(ComponentCost.unitCost);
+            $('#priceEnd').val(ComponentCost.priceEnd);
+            $('#remarks').val(ComponentCost.remarks);
+
+            for(var i=0;i<ProductComponents.length;i++){
+                var Ps = ProductComponents[i];
+                var div = $('<div class="form-group" name="ProductSuitable"><label class="col-lg-2 control-label">适合产品</label><div class="col-xs-3"><div class="input-group"><input class="form-control suitableProduct" name="suitableProduct" type="text" data-id="'+Ps.productCategoryId+'" value="'+Ps.categoryFullName+'"><div class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal"><span class="glyphicon glyphicon-search"></span></button></div></div></div><label class="col-lg-2 control-label">单耗</label><div class="col-lg-3"><div class="input-group"><input class="form-control" type="text" name="consumption" value="'+Ps.consumption+'"><div class="input-group-btn"><botton class="btn btn-xs btn-primary">(元/kg)</botton></div></div><button type="button" class="close" data-form-btn="del" data-form-target="form-group" style="position: absolute;top:5px;">×</button></div>');
+                $('#costInfo').after(div);
+            }
+
+            $('#costmodal').modal('show');
+            /*var html = [];
             html += '<div class="modal-dialog">';
             html += '<div class="modal-content">';
             html += '<div class="modal-header">';
@@ -430,29 +444,28 @@ $(document).on("click",".componnentId",function(){
             html += '<input class="form-control" type="text" value="' + ResultData.componentName + '" id="componentName">';
             html += '</div></div>';
             html += '<div class="form-group">';
-            html += '<label class="col-lg-2 control-label">单耗</label>';
-            html += '<div class="col-lg-3">';
-            html += '<div class="input-group">';
-            html += '<input class="form-control" type="text" value="' + ResultData.consumption + '" id="consumption">';
-            html += '<div class="input-group-btn">';
-            html += '<botton class="btn btn-xs btn-primary">(元/kg)</botton></div></div></div>';
             html += '<label class="col-lg-2 control-label">单价</label>';
             html += '<div class="col-lg-3">';
             html += '<div class="input-group">';
             html += '<input class="form-control" type="text" value="' + ResultData.unitCost + '" id="unitCost">';
             html += '<div class="input-group-btn">';
             html += '<botton class="btn btn-xs btn-primary">(元/kg)</botton>';
-            html += '</div></div></div></div>';
-            html += '<div class="form-group">';
+            html += '</div></div></div>';
             html += '<label class="col-lg-2 control-label">价格有效期</label>';
             html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="text" value="' + ResultData.priceEnd + '" id="priceEnd">';
-            html += '</div>';
+            html += '<input class="form-control" type="date" value="' + ResultData.priceEnd + '" id="priceEnd">';
+            html += '</div></div>';
+            html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">适合产品</label>';
             html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="text" value="' + ResultData.suitableProduct + '" id="suitableProduct">';
+            html += '<input class="form-control" type="text" value="' + ResultData.suitableProduct + '" name="suitableProduct">';
             html += '</div>';
-            html += '</div>';
+            html += '<label class="col-lg-2 control-label">单耗</label>';
+            html += '<div class="col-lg-3">';
+            html += '<div class="input-group">';
+            html += '<input class="form-control" type="text" value="' + ResultData.consumption + '" id="consumption">';
+            html += '<div class="input-group-btn">';
+            html += '<botton class="btn btn-xs btn-primary">(元/kg)</botton></div></div></div></div>';
             html += '<div class="form-group">';
             html += '<label class="col-xs-2 control-label">备注</label>';
             html += '<div class="col-xs-8">';
@@ -463,15 +476,15 @@ $(document).on("click",".componnentId",function(){
             html += '</div>';
             html += '<div class="modal-footer">';
             html += '<div class="row">';
-            html += '<div class="col-xs-3 col-xs-offset-3">';
+            html += '<div class="col-xs-2 col-xs-offset-3">';
             html += '<button type="button" class="btn btn-primary btn-block updateCost" data_url="'+basePath+'/componentCost/doModify?id='+ResultData.componentId+'"> 完成 </button>';
             html += '</div>';
-            html += '<div class="col-xs-3">';
+            html += '<div class="col-xs-2">';
             html += '<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
             html += '</div></div></div></div></div>';
 
             $('#modal').html(html);
-            $('#modal').modal('show');
+            $('#modal').modal('show');*/
         }
     })
 })

@@ -224,6 +224,89 @@
 </div>
 
 <div class="modal fade" id="modal" tabindex="-1"  aria-hidden="true" data-backdrop="static"></div>
+<div class="modal fade" id="costmodal" tabindex="-1"  aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog" style="width:800px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h2 class="modal-title" >成分价格</h2>
+            </div>
+            <div class="modal-body ">
+                <form class="form-horizontal" action="">
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">成分名称<sup class="not-null">*</sup></label>
+                        <div class="col-lg-6">
+                            <input class="form-control notnull" type="text" id="componentName">
+                        </div>
+                    </div>
+                    <div class="form-group" id="costInfo">
+                        <label class="col-lg-2 control-label">单价<sup class="not-null">*</sup></label>
+                        <div class="col-lg-3">
+                            <div class="input-group">
+                                <input class="form-control notnull" type="text" id="unitCost">
+                                <div class="input-group-btn">
+                                    <botton class="btn btn-xs btn-primary">(元/kg)</botton>
+                                </div>
+                            </div>
+                        </div>
+                        <label class="col-lg-2 control-label">价格有效期</label>
+                        <div class="col-lg-3">
+                            <input class="form-control priceEndAdd" id="priceEnd" type="date">
+                        </div>
+                    </div>
+                    <div class="form-group" name="ProductSuitable">
+                        <label class="col-lg-2 control-label">适合产品<sup class="not-null">*</sup></label>
+                        <div class="col-xs-3">
+                            <div class="input-group">
+                                <input class="form-control suitableProductAdd" name="suitableProduct" type="text">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <label class="col-lg-2 control-label">单耗</label>
+                        <div class="col-lg-3">
+                            <div class="input-group">
+                                <input class="form-control" type="text" name="consumption">
+                                <div class="input-group-btn">
+                                    <botton class="btn btn-xs btn-primary">(元/kg)</botton>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">备注</label>
+                        <div class="col-xs-8">
+                            <textarea class="form-control"  rows="4" id="remarks"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-3 col-xs-offset-2">
+                        <button id="addMore" data-form-btn="add"  type="button" class="btn btn-block btn-primary" lang="zh">继续添加适应产品</button>
+                    </div>
+                    <div class="col-xs-2">
+                        <a type="button" class="btn btn-primary btn-block" id="costAdd">
+                            完成
+                        </a>
+                    </div>
+                    <div class="col-xs-2">
+                        <button type="button" class="btn btn-default btn-block" data-dismiss="modal">
+                            取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="costAddmodal" tabindex="-1" data-backdrop="static" aria-hidden="true" data-keyboard="true" >
     <div class="modal-dialog" style="width:800px">
         <div class="modal-content">
@@ -253,10 +336,10 @@
                         </div>
                         <label class="col-lg-2 control-label">价格有效期</label>
                         <div class="col-lg-3">
-                            <input class="form-control priceEndAdd" id="priceEndAdd" type="text">
+                            <input class="form-control priceEndAdd" id="priceEndAdd" type="date">
                         </div>
                     </div>
-                    <div class="form-group" id="costmore" name="ProductSuitable">
+                    <div class="form-group" id="costmore" name="ProductSuitableAdd">
                         <label class="col-lg-2 control-label">适合产品<sup class="not-null">*</sup></label>
                         <div class="col-xs-3">
                             <div class="input-group">
@@ -341,7 +424,7 @@
         var a = [];
         var b;
         var categoryFullNames = [];
-        $('[name="ProductSuitable"]').each(function(){
+        $('[name="ProductSuitableAdd"]').each(function(){
             var c = $(this).find('[name=suitableProductAdd]').val();
             categoryFullNames.push(c);
         })
@@ -375,7 +458,7 @@
 
     $('#addMore').click(function () {
         var btn = $(this);
-        var div = $('<div class="form-group" name="ProductSuitable"><label class="col-lg-2 control-label">适合产品</label><div class="col-xs-3"><div class="input-group"><input class="form-control suitableProductAdd" name="suitableProductAdd" type="text"><div class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal"><span class="glyphicon glyphicon-search"></span></button></div></div></div><label class="col-lg-2 control-label">单耗</label><div class="col-lg-3"><div class="input-group"><input class="form-control" type="text" name="consumptionAdd"><div class="input-group-btn"><botton class="btn btn-xs btn-primary">(元/kg)</botton></div></div><button type="button" class="close" data-form-btn="del" data-form-target="form-group" style="position: absolute;top:5px;">×</button></div>');
+        var div = $('<div class="form-group" name="ProductSuitableAdd"><label class="col-lg-2 control-label">适合产品</label><div class="col-xs-3"><div class="input-group"><input class="form-control suitableProductAdd" name="suitableProductAdd" type="text"><div class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal"><span class="glyphicon glyphicon-search"></span></button></div></div></div><label class="col-lg-2 control-label">单耗</label><div class="col-lg-3"><div class="input-group"><input class="form-control" type="text" name="consumptionAdd"><div class="input-group-btn"><botton class="btn btn-xs btn-primary">(元/kg)</botton></div></div><button type="button" class="close" data-form-btn="del" data-form-target="form-group" style="position: absolute;top:5px;">×</button></div>');
         $('#costmore').after(div);
 
     })
@@ -385,7 +468,7 @@
         var componentName = $('#componentNameAdd').val();
         var unitCost = $('#unitCostAdd').val();
         var CategoryFullNames = [];
-        $('[name="ProductSuitable"]').each(function(){
+        $('[name="ProductSuitableAdd"]').each(function(){
             var d = $(this).find('[name=suitableProductAdd]').val();
             CategoryFullNames.push(d);
         })
@@ -421,7 +504,7 @@
     function getProductComponents() {
         var arr = [];
         var obj = {};
-        var ProductSuitable = $('[name="ProductSuitable"]');
+        var ProductSuitable = $('[name="ProductSuitableAdd"]');
         ProductSuitable.each(function () {
             obj = {
                 "productCategoryId":$(this).find('[name=suitableProductAdd]').attr('data-id'),
