@@ -236,33 +236,28 @@
             <div class="modal-body ">
                 <form class="form-horizontal" action="">
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">成分名称</label>
+                        <label class="col-lg-2 control-label">成分名称<sup class="not-null">*</sup></label>
                         <div class="col-lg-6">
-                            <input class="form-control" type="text" id="componentNameAdd">
+                            <input class="form-control notnull" type="text" id="componentNameAdd">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">单耗</label>
+                        <label class="col-lg-2 control-label">单价<sup class="not-null">*</sup></label>
                         <div class="col-lg-3">
                             <div class="input-group">
-                                <input class="form-control" type="text" id="consumptionAdd">
+                                <input class="form-control notnull" type="text" id="unitCostAdd">
                                 <div class="input-group-btn">
                                     <botton class="btn btn-xs btn-primary">(元/kg)</botton>
                                 </div>
                             </div>
                         </div>
-                        <label class="col-lg-2 control-label">单价</label>
+                        <label class="col-lg-2 control-label">价格有效期</label>
                         <div class="col-lg-3">
-                            <div class="input-group">
-                                <input class="form-control" type="text" id="unitCostAdd">
-                                <div class="input-group-btn">
-                                    <botton class="btn btn-xs btn-primary">(元/kg)</botton>
-                                </div>
-                            </div>
+                            <input class="form-control priceEndAdd" id="priceEndAdd" type="text">
                         </div>
                     </div>
                     <div class="form-group" id="costmore" name="ProductSuitable">
-                        <label class="col-lg-2 control-label">适合产品</label>
+                        <label class="col-lg-2 control-label">适合产品<sup class="not-null">*</sup></label>
                         <div class="col-xs-3">
                             <div class="input-group">
                                 <input class="form-control suitableProductAdd" name="suitableProductAdd" type="text">
@@ -273,9 +268,14 @@
                                 </div>
                             </div>
                         </div>
-                        <label class="col-lg-2 control-label">价格有效期</label>
+                        <label class="col-lg-2 control-label">单耗</label>
                         <div class="col-lg-3">
-                            <input class="form-control priceEndAdd" name="priceEndAdd" type="text">
+                            <div class="input-group">
+                                <input class="form-control" type="text" name="consumptionAdd">
+                                <div class="input-group-btn">
+                                    <botton class="btn btn-xs btn-primary">(元/kg)</botton>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -338,40 +338,109 @@
     });
     $(document).on('click','a.cNode',function (e) {
         e.preventDefault();
+        var a = [];
+        var b;
+        var categoryFullNames = [];
+        $('[name="ProductSuitable"]').each(function(){
+            var c = $(this).find('[name=suitableProductAdd]').val();
+            categoryFullNames.push(c);
+        })
+
+        //获取树categoryFullName，id
         var tarEltext = $(e.target).text();
-        selectedPName.val(tarEltext);
-        $('#treeModal').modal('hide');
+        var id = $(e.target).parent('li').attr('id');
+        var sname = $(e.target).parent('li').parent('ul').parent('li').find('a:first').text();
+        var bname = $(e.target).parent('li').parent('ul').parent('li').parent('ul').parent('li').find('a:first').text();
+        if(bname!=''){
+            a.push(bname);
+        }
+        if(sname!=''){
+            a.push(sname);
+        }
+        if(tarEltext!=''){
+            a.push(tarEltext);
+        }
+        b = a.join('-');
+
+        var bool = contains(categoryFullNames,b);
+        if(bool){
+            selectedPName.val(b);
+            selectedPName.attr('data-id',id);
+            $('#treeModal').modal('hide');
+        }else {
+            alert('请选择不同的适应产品！');
+        }
+
     });
 
     $('#addMore').click(function () {
         var btn = $(this);
-        var div = $('<div class="form-group" name="ProductSuitable"><label class="col-lg-2 control-label">适合产品</label><div class="col-xs-3"><div class="input-group"><input class="form-control suitableProductAdd" name="suitableProductAdd" type="text"><div class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal"><span class="glyphicon glyphicon-search"></span></button></div></div></div><label class="col-lg-2 control-label">价格有效期</label><div class="col-lg-3"><input class="form-control priceEndAdd" name="priceEndAdd" type="text"></div><button type="button" class="close" data-form-btn="del" data-form-target="form-group" style="position: absolute;right:120px;">×</button></div>');
+        var div = $('<div class="form-group" name="ProductSuitable"><label class="col-lg-2 control-label">适合产品</label><div class="col-xs-3"><div class="input-group"><input class="form-control suitableProductAdd" name="suitableProductAdd" type="text"><div class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal"><span class="glyphicon glyphicon-search"></span></button></div></div></div><label class="col-lg-2 control-label">单耗</label><div class="col-lg-3"><div class="input-group"><input class="form-control" type="text" name="consumptionAdd"><div class="input-group-btn"><botton class="btn btn-xs btn-primary">(元/kg)</botton></div></div><button type="button" class="close" data-form-btn="del" data-form-target="form-group" style="position: absolute;top:5px;">×</button></div>');
         $('#costmore').after(div);
 
     })
 
 
     $('#costAdd').click(function(){
-        var data = {
-            "componentCost":{
-                "componentName":$('#componentName').val(),
-                "consumption":$('#consumption').val(),
-                "unitCost":$('#unitCost').val(),
-                "remarks":$('#remarks').val()
-            },
-            "productComponents":getProductComponents()
+        var componentName = $('#componentNameAdd').val();
+        var unitCost = $('#unitCostAdd').val();
+        var CategoryFullNames = [];
+        $('[name="ProductSuitable"]').each(function(){
+            var d = $(this).find('[name=suitableProductAdd]').val();
+            CategoryFullNames.push(d);
+        })
+        if(componentName == ''||unitCost == ''||CategoryFullNames == ''){
+            alert("请完善表单！");
+            return false;
+        }else {
+            var data = {
+                "componentCost":{
+                    "componentName":$('#componentNameAdd').val(),
+                    "priceEndAdd":$('#priceEndAdd').val(),
+                    "unitCostAdd":$('#unitCostAdd').val(),
+                    "remarks":$('#remarksAdd').val()
+                },
+                "productComponents":getProductComponents()
+            }
+            console.log(data);
+            jQuery.ajax({
+                type:'POST',
+                url:basePath + '/processCostList/doAddComponentCost',
+                dataType:"json",
+                contentType:"application/json",
+                data:JSON.stringify(data),
+                success:function(result){
+                    alert('添加成功');
+
+                }
+            })
         }
+
     })
     
     function getProductComponents() {
         var arr = [];
         var obj = {};
-        var ProductSuitable = $('input[name=ProductSuitable]');
-
+        var ProductSuitable = $('[name="ProductSuitable"]');
         ProductSuitable.each(function () {
             obj = {
-                
+                "productCategoryId":$(this).find('[name=suitableProductAdd]').attr('data-id'),
+                "categoryFullName":$(this).find('[name=suitableProductAdd]').val(),
+                "consumption":$(this).find('[name=consumptionAdd]').val()
             }
+            arr.push(obj);
         })
+        return JSON.stringify(arr);
+    }
+
+    //比较contains
+    function contains(arr,obj) {
+        var i = arr.length;
+        while (i--) {
+            if (arr[i] === obj) {
+                return false;
+            }
+        }
+        return true;
     }
 </script>

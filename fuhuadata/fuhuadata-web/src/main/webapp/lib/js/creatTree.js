@@ -15,7 +15,6 @@
         function creatBranch(getData,parent){
             if(getData instanceof Array && getData.length>0){
                 $.each(getData,function(n,item){
-                    console.log(item);
                     var li = $('<li id="'+item.cid+'"></li>');
                     if( item.nodes!=null && item.nodes.length > 0) {
                         $(li).append('<span class="branch-node" data-toggle="collapse" data-target="#t'+item.cid+'"></span><a href=""><span class="leaf"></span>'+item.cname+'</a>').append('<ul id="t'+item.cid+'" class="tree-branch collapse in"></ul>').appendTo(parent);
