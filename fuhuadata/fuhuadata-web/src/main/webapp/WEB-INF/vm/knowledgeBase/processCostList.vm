@@ -261,11 +261,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group" id="costmore">
+                    <div class="form-group" id="costmore" name="ProductSuitable">
                         <label class="col-lg-2 control-label">适合产品</label>
                         <div class="col-xs-3">
                             <div class="input-group">
-                                <input class="form-control suitableProductAdd" type="text">
+                                <input class="form-control suitableProductAdd" name="suitableProductAdd" type="text">
                                 <div class="input-group-btn">
                                     <button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal">
                                         <span class="glyphicon glyphicon-search"></span>
@@ -275,7 +275,7 @@
                         </div>
                         <label class="col-lg-2 control-label">价格有效期</label>
                         <div class="col-lg-3">
-                            <input class="form-control priceEndAdd" type="text">
+                            <input class="form-control priceEndAdd" name="priceEndAdd" type="text">
                         </div>
                     </div>
                     <div class="form-group">
@@ -309,7 +309,7 @@
 
 <!--树形菜单modal-->
 <div class="modal fade" id="treeModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" style="margin-top: 300px;">
+    <div class="modal-dialog" style="margin-top: 200px;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -329,11 +329,49 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/scaffolding.js"></script>
 <script type="text/javascript">
+    $('#tree').creatTree(basePath+'/productCategory/CategoryTreeThree');
+
+    //双击文本添加到指定文本框
+    var selectedPName;
+    $(document).on('click','[data-target="#treeModal"]',function (e) {
+        selectedPName = $(e.target).parents('.input-group').find('input');
+    });
+    $(document).on('click','a.cNode',function (e) {
+        e.preventDefault();
+        var tarEltext = $(e.target).text();
+        selectedPName.val(tarEltext);
+        $('#treeModal').modal('hide');
+    });
+
     $('#addMore').click(function () {
         var btn = $(this);
-        var div = $('<div class="form-group"><label class="col-lg-2 control-label">适合产品</label><div class="col-xs-3"><div class="input-group"><input class="form-control suitableProductAdd" type="text"><div class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal"><span class="glyphicon glyphicon-search"></span></button></div></div></div><label class="col-lg-2 control-label">价格有效期</label><div class="col-lg-3"><input class="form-control priceEndAdd" type="text"></div><button type="button" class="close" data-form-btn="del" data-form-target="form-group" style="position: absolute;right:120px;">×</button></div>');
+        var div = $('<div class="form-group" name="ProductSuitable"><label class="col-lg-2 control-label">适合产品</label><div class="col-xs-3"><div class="input-group"><input class="form-control suitableProductAdd" name="suitableProductAdd" type="text"><div class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal"><span class="glyphicon glyphicon-search"></span></button></div></div></div><label class="col-lg-2 control-label">价格有效期</label><div class="col-lg-3"><input class="form-control priceEndAdd" name="priceEndAdd" type="text"></div><button type="button" class="close" data-form-btn="del" data-form-target="form-group" style="position: absolute;right:120px;">×</button></div>');
         $('#costmore').after(div);
 
     })
-    $('#tree').creatTree(basePath+'/productCategory/CategoryTree');
+
+
+    $('#costAdd').click(function(){
+        var data = {
+            "componentCost":{
+                "componentName":$('#componentName').val(),
+                "consumption":$('#consumption').val(),
+                "unitCost":$('#unitCost').val(),
+                "remarks":$('#remarks').val()
+            },
+            "productComponents":getProductComponents()
+        }
+    })
+    
+    function getProductComponents() {
+        var arr = [];
+        var obj = {};
+        var ProductSuitable = $('input[name=ProductSuitable]');
+
+        ProductSuitable.each(function () {
+            obj = {
+                
+            }
+        })
+    }
 </script>

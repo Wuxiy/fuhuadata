@@ -142,6 +142,7 @@
         console.log(e.target);
         var tarEltext = $(e.target).text();
         $('#product_name').val(tarEltext);
+        $('#tSearch').modal('hide');
     });
     $(document).ready(function() {
         var table =$('#customer_customer_packaging_table').DataTable( {
