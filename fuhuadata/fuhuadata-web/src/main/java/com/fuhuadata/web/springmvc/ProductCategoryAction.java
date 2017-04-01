@@ -65,6 +65,23 @@ public class ProductCategoryAction {
         return result.getResultPojo();
     }
 
+    /**
+     * json目录树
+     * @return
+     */
+    @RequestMapping(value="/CategoryTreeThree")
+    @SystemLogAnnotation(module = "knowledgeBase-ProductCategory",methods = "CategoryTree")
+    @ResponseBody
+    public ResultPojo productCategoryCategory(){
+        Result<List<CategoryTree>> result = new Result<List<CategoryTree>>();
+        try{
+            result=productCategoryService.getProductCategoryByCategory();
+        }catch(Exception e){
+            log.error("获取产品树json数据错误",e);
+        }
+        return result.getResultPojo();
+    }
+
 //    /**
 //     * json目录树
 //     * @return

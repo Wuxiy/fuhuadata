@@ -17,7 +17,7 @@ $(function () {
     getData(basePath+'/customerMarketInfo/init','POST',GetRequest(),pop);
 
     //创建树形菜单
-    $('#tree').creatTree(basePath+'/productCategory/CategoryTree');
+    $('#tree').creatTree(basePath+'/productCategory/CategoryTree?fourNode=0');
 
     //构造下拉选择框
     $('#cpps_year,#csps_year,#year').html(function (n,old) {

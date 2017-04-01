@@ -57,7 +57,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     }
 
     /**
-     * 连接查询再构造
+     * 连接查询再构造,四级产品分类
      * @return
      */
     @Override
@@ -66,7 +66,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         try{
             List<ProductCategoryVO> list = productCategoryManager.getProductCategoryByLevel();
             System.out.println(list.size());
-            result.addDefaultModel("CategoryTree",getAllNodes(list));
+            result.addDefaultModel("CategoryTree",getAllNodes(list,1));
         }catch(Exception e){
             result.setSuccess(false);
             log.error("分层获取产品目录树错误");
@@ -76,11 +76,29 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 
 
     /**
+     * 连接查询再构造,三级产品分类
+     * @return
+     */
+    @Override
+    public Result<List<CategoryTree>> getProductCategoryByCategory() {
+        Result<List<CategoryTree>> result = new Result<List<CategoryTree>>();
+        try{
+            List<ProductCategoryVO> list = productCategoryManager.getProductCategoryByLevel();
+            System.out.println(list.size());
+            result.addDefaultModel("CategoryTree",getAllNodes(list,0));
+        }catch(Exception e){
+            result.setSuccess(false);
+            log.error("分层获取产品目录树错误");
+        }
+        return result;
+    }
+
+    /**
      * map构造tree
      * @param list
      * @return
      */
-    public List<CategoryTree> getAllNodes(List<ProductCategoryVO> list){
+    public List<CategoryTree> getAllNodes(List<ProductCategoryVO> list,int fourNode){
         Map<String,CategoryTree> map = new HashMap<String,CategoryTree>();
         List<CategoryTree> root_list = new ArrayList<CategoryTree>();
         try {
@@ -89,11 +107,14 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
                 CategoryTree small = null;
                 CategoryTree middle = null;
                 CategoryTree big = null;
-                if(vo.getProductId()!=null){
-                    product=new CategoryTree();
-                    product.setCid(vo.getProductId());
-                    product.setPid(vo.getSmallId());
-                    product.setCname(vo.getProductName());
+
+                if(fourNode ==1) {
+                    if (vo.getProductId() != null) {
+                        product = new CategoryTree();
+                        product.setCid(vo.getProductId());
+                        product.setPid(vo.getSmallId());
+                        product.setCname(vo.getProductName());
+                    }
                 }
                 if (vo.getSmallId() != null) {
                     small=map.get(vo.getSmallId());
@@ -108,9 +129,11 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
                     }else{
                         //判断当前头结点是否存在product子节点
                         boolean flag=false;
+                        if(product!=null) {
                         for(int i=0;i<small.getNodes().size();i++){
-                            if(small.getNodes().get(i).getCid()==product.getCid()){
-                                flag=true;
+                                if (small.getNodes().get(i).getCid() == product.getCid()) {
+                                    flag = true;
+                                }
                             }
                         }
                         if(flag==false){

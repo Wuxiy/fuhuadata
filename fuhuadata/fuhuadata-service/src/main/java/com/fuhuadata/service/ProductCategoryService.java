@@ -20,6 +20,8 @@ public interface ProductCategoryService {
 
     public Result<List<CategoryTree>> getProductCategoryByLevel();
 
+    public Result<List<CategoryTree>> getProductCategoryByCategory();
+
     public Result<List<ProductCategory>> getAll();
 
     public Result<List<CategoryTree>> getAllByTree();
