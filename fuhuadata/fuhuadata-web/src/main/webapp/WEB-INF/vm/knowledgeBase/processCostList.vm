@@ -253,7 +253,7 @@
                         </div>
                         <label class="col-lg-2 control-label">价格有效期</label>
                         <div class="col-lg-3">
-                            <input class="form-control priceEndAdd" id="priceEndAdd" type="text">
+                            <input class="form-control priceEndAdd" id="priceEndAdd" type="date">
                         </div>
                     </div>
                     <div class="form-group" id="costmore" name="ProductSuitable">
@@ -396,16 +396,16 @@
             var data = {
                 "componentCost":{
                     "componentName":$('#componentNameAdd').val(),
-                    "priceEndAdd":$('#priceEndAdd').val(),
-                    "unitCostAdd":$('#unitCostAdd').val(),
+                    "priceEnd":$('#priceEndAdd').val(),
+                    "unitCost":$('#unitCostAdd').val(),
                     "remarks":$('#remarksAdd').val()
                 },
-                "productComponents":getProductComponents()
+                "kProductComponents":getProductComponents()
             }
             console.log(data);
             jQuery.ajax({
                 type:'POST',
-                url:basePath + '/processCostList/doAddComponentCost',
+                url:basePath + '/componentCost/doAddComponentCost',
                 dataType:"json",
                 contentType:"application/json",
                 data:JSON.stringify(data),
@@ -430,7 +430,7 @@
             }
             arr.push(obj);
         })
-        return JSON.stringify(arr);
+        return arr;
     }
 
     //比较contains
