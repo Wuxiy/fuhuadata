@@ -20,8 +20,13 @@ public class ComponentCostManagerImpl implements ComponentCostManager {
     @Override
     @Transactional
     public ComponentCost addComponentCost(ComponentCost componentCost, List<KProductComponent> KProductComponents) {
+       ComponentCost addComponentCost = componentCostDao.addComponentCost(componentCost);
+       for(int i = 0;i<KProductComponents.size();i++) {
+           System.out.println(KProductComponents.get(i).getCategoryFullName());
+           KProductComponents.get(i).setComponentId(componentCost.getComponentId());
+       }
         componentCostDao.addSuitableProduct(KProductComponents);
-        return componentCostDao.addComponentCost(componentCost);
+        return addComponentCost;
     }
 
     @Override
@@ -40,8 +45,8 @@ public class ComponentCostManagerImpl implements ComponentCostManager {
     }
 
     @Override
-    public ComponentCost getComponentCostById(int id) {
-        return componentCostDao.getComponentCostById(id);
+    public ComponentCost getComponentCostById(int id,int productCategoryId) {
+        return componentCostDao.getComponentCostById(id,productCategoryId);
     }
 
     @Override

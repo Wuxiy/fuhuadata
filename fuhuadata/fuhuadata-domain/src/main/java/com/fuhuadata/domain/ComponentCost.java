@@ -1,11 +1,6 @@
 package com.fuhuadata.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fuhuadata.util.DateJsonDeserializer;
-import com.fuhuadata.util.DateJsonSerializer;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-
 import java.util.Date;
 
 /**
@@ -17,14 +12,16 @@ public class ComponentCost {
 
     private String componentName;//成分名称
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date priceEnd;//价格有效期
 
     private String unitCost;//单价
 
     private String consumption;//单耗
 
-    private String suitableProduct;//试用产品
+    private Integer productCategoryId;//产品第三层分类目录id
+
+    private String suitableProduct;//适用产品
 
     private String remarks;//备注
 
@@ -82,5 +79,13 @@ public class ComponentCost {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+
+    public Integer getProductCategoryId() {
+        return productCategoryId;
+    }
+
+    public void setProductCategoryId(Integer productCategoryId) {
+        this.productCategoryId = productCategoryId;
     }
 }

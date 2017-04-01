@@ -6,7 +6,9 @@ import com.fuhuadata.domain.KProductComponent;
 import com.fuhuadata.domain.query.ComponentCostQuery;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 成分价格DaoImpl
@@ -51,8 +53,11 @@ public class ComponentCostDaoImpl extends SqlMapClientTemplate implements Compon
     }
 
     @Override
-    public ComponentCost getComponentCostById(int id) {
-        return (ComponentCost) this.queryForObject(GET_BY_ID,id);
+    public ComponentCost getComponentCostById(int id,int productCategoryId) {
+        Map map=new HashMap();
+        map.put("id", id);
+        map.put("productCategoryId", productCategoryId);
+        return  (ComponentCost) this.queryForObject(GET_BY_ID,map);
     }
 
     @Override

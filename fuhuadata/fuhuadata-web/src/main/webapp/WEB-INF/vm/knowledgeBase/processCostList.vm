@@ -479,16 +479,16 @@
             var data = {
                 "componentCost":{
                     "componentName":$('#componentNameAdd').val(),
-                    "priceEndAdd":$('#priceEndAdd').val(),
-                    "unitCostAdd":$('#unitCostAdd').val(),
+                    "priceEnd":$('#priceEndAdd').val(),
+                    "unitCost":$('#unitCostAdd').val(),
                     "remarks":$('#remarksAdd').val()
                 },
-                "productComponents":getProductComponents()
+                "kProductComponents":getProductComponents()
             }
             console.log(data);
             jQuery.ajax({
                 type:'POST',
-                url:basePath + '/processCostList/doAddComponentCost',
+                url:basePath + '/componentCost/doAddComponentCost',
                 dataType:"json",
                 contentType:"application/json",
                 data:JSON.stringify(data),
@@ -513,7 +513,7 @@
             }
             arr.push(obj);
         })
-        return JSON.stringify(arr);
+        return arr;
     }
 
     //比较contains

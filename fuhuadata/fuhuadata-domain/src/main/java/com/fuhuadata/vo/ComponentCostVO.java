@@ -4,13 +4,17 @@ import com.fuhuadata.domain.ComponentCost;
 import com.fuhuadata.domain.KProductComponent;
 
 /**
+ * 成分价格新增更新view
  * Created by intanswer on 2017/3/31.
  */
 public class ComponentCostVO {
 
     private ComponentCost componentCost;//成分价格
 
-    private KProductComponent[] KProductComponents;//适用产品分类
+    private KProductComponent[] kProductComponents;//适用产品分类
+
+    public ComponentCostVO(){
+    }
 
     public ComponentCost getComponentCost() {
         return componentCost;
@@ -20,11 +24,12 @@ public class ComponentCostVO {
         this.componentCost = componentCost;
     }
 
-    public KProductComponent[] getKProductComponents() {
-        return KProductComponents;
+
+    public KProductComponent[] getkProductComponents() {
+        return kProductComponents;
     }
 
-    public void setKProductComponents(KProductComponent[] KProductComponents) {
-        this.KProductComponents = KProductComponents;
+    public void setkProductComponents(KProductComponent[] kProductComponents) {
+        this.kProductComponents = kProductComponents;
     }
 }
