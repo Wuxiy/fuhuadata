@@ -1,6 +1,7 @@
 package com.fuhuadata.manager.impl;
 import java.util.List;
 
+import com.fuhuadata.dao.ComponentCostDao;
 import com.fuhuadata.dao.ProductWareDao;
 import com.fuhuadata.domain.ProductComponent;
 import com.fuhuadata.domain.query.Result;
@@ -24,6 +25,9 @@ public class ProductInfoManagerImpl implements ProductInfoManager {
 
     @Autowired
 	private ProductWareDao productWareDao;
+
+    @Autowired
+	private ComponentCostDao componentCostDao;
 
 	@Transactional
     public ProductInfo addProductInfo(ProductInfo productInfo,List<ProductComponent> productComponents) {
@@ -78,7 +82,9 @@ public class ProductInfoManagerImpl implements ProductInfoManager {
 	 */
 	public ProductInfoVO getProductInfoById(int product_id) {
 		ProductInfoVO productInfoVO = new ProductInfoVO();
-		productInfoVO.setProductInfo(productInfoDao.getProductInfoById(product_id));
+		ProductInfo productInfo = productInfoDao.getProductInfoById(product_id);
+		productInfoVO.setProductInfo(productInfo);
+		productInfoVO.setAllProcessingComponents(componentCostDao.getComponentCostByCategoryId(productInfo.getSmallCategoryId()));
 		productInfoVO.setProcessingComponents(productInfoDao.getProductComponentByProductId(product_id));
 		productInfoVO.setWares(productWareDao.getProductWareByPId(product_id));
 		return productInfoVO;
