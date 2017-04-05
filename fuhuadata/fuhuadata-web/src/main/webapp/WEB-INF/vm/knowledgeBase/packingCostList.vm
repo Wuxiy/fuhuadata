@@ -87,8 +87,10 @@
 
         var bid,sid;
         if(ids ==1||ids ==2||ids ==3){
-            bid = 'bid=' + ids;
-            sid = 'sid=' + $("li[class='active'] li:first").attr('id');
+            alert('请选择包材子分类！');
+            return false;
+            /*bid = 'bid=' + ids;
+            sid = 'sid=' + $("li[class='active'] li:first").attr('id');*/
         }else{
             sid = 'sid=' + ids;
             bid = 'bid=' + $("li[class='active']").parent().parent().attr('id');

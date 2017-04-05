@@ -219,9 +219,9 @@
     </div>
 </div>
 
-<input type="hidden" id="bid" value='$!{}'>
-<input type="hidden" id="sid" value="$!{}" />
-<input type="hidden" id="id" value="$!{}" />
+<input type="hidden" id="bid" value='$!{bid}'>
+<input type="hidden" id="sid" value="$!{sid}" />
+<input type="hidden" id="id" value="$!{id}" />
 
 <script type="text/javascript" src="${request.contextPath}/lib/js/packingCostInfo.js"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>

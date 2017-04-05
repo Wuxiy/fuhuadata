@@ -2,7 +2,7 @@
  * Created by young on 2017/3/6.
  */
 
-    var thisURL = document.URL;
+    /*var thisURL = document.URL;
     var ni = thisURL.split('?')[1];
     var names = ni.split('&')[0];
     var bids = ni.split('&')[1];
@@ -12,7 +12,7 @@
     var sid = sids.split('=')[1];
     console.log(sid);
     var names = document.getElementById('packName');
-    names.value = name;
+    names.value = name;*/
 
     var img = $("input[name='file']");
 
@@ -161,8 +161,8 @@ function Ids() {
 $('.packingAdd').on('click',function(){
     var url = basePath+'/packingArchives/doAddPackingArchives';
     var data = {
-        "bigCategoryId":bid,
-        "smallCategoryId":sid,
+        "bigCategoryId":jQuery('#bid').val(),
+        "smallCategoryId":jQuery('#sid').val(),
         "packName": jQuery('#packName').val(),
         "spec": jQuery('#spec').val(),
         "size": jQuery('#size').val(),

@@ -3,12 +3,13 @@
  */
 
     //分割url，获取上个页面传过来的id
-    var thisURL = document.URL;
+    /*var thisURL = document.URL;
     var trans = thisURL.split('?')[1];
     var trans1 = trans.split('&')[0];
     var trans2 = trans.split('&')[1];
     var id = trans1.split('=')[1];
-    var bid = trans2.split('=')[1];
+    var bid = trans2.split('=')[1];*/
+    var bid = $('#bid').val();
     console.log(bid);
     var table = document.getElementById('packing_relate_table');
     var imgContent = document.getElementById('imgContent');
@@ -153,7 +154,7 @@ $(document).on('click.cancel','#cancel',function(){
     $('#finish').on('click',function(){
         var url = basePath+'/packingArchives/doModify';
         var data = {
-            "packingId":id,
+            "packingId":jQuery('#id').val(),
             "packName": jQuery('#packName').val(),
             "spec": jQuery('#spec').val(),
             "size": jQuery('#size').val(),
