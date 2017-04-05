@@ -120,7 +120,7 @@ $(document).on('click','.otherNameinfo',function(){
                         }
                 })
             })
-            $('#fullName').attr('data-id',ResultData.customerSubId),
+            $('#fullName').attr('data-id',ResultData.customerSubId);
             $('#fullName').val(ResultData.fullName);
             $('#shortName').val(ResultData.shortName);
             $('#zhongxinbaoNumber').val(ResultData.zhongxinbaoNumber);

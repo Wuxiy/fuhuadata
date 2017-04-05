@@ -149,7 +149,7 @@ $(document).ready(function () {
                 var ResultData = eval(result.data);
                 for(var i = 0;i<ResultData.length;i++) {
                     Portsurcharge.innerHTML += '<tr>' +
-                        '<td name="item">'+ResultData[i].item+'</td>' +
+                        '<td name="item" data_id="'+ResultData[i].portId+'">'+ResultData[i].item+'</td>' +
                         '<td><input class="form-control text-center" value="'+ResultData[i].generalChemicals+'" name="generalChemicals" disabled/></td>' +
                         '<td><input class="form-control text-center" value="'+ResultData[i].dangerousProduct+'" name="dangerousProduct" disabled/></td>' +
                     '</tr>';
@@ -791,6 +791,7 @@ $(document).on("click",".updateFreight",function(){
         success:function(result){
             alert('修改成功');
             $('#modal').modal('hide');
+            location.reload();
         }
     })
 })
@@ -892,6 +893,7 @@ function updateportSurcharge() {
         var obj = {};
         $(this).find('td').each(function(n,td){
             if(n==0){
+                obj.id = $(td).attr('data_id');
                 obj.item = $(td).text();
             }else if (n==1){
                 obj.generalChemicals = $(td).children('input').val();
