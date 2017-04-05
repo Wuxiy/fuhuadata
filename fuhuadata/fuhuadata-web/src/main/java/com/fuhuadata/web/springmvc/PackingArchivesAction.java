@@ -67,7 +67,11 @@ public class PackingArchivesAction {
      */
     @RequestMapping(value = "/addPackingArchives",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "add")
-    public ModelAndView addPackingArchives(PackingArchives packingArchives){
+    public ModelAndView addPackingArchives(String name,int bid,int sid){
+        PackingArchives packingArchives = new PackingArchives();
+        packingArchives.setBigCategoryId(bid);
+        packingArchives.setSmallCategoryId(sid);
+        packingArchives.setPackName(name);
         int packId = Integer.valueOf(bCodeService.getNextPackagingMaterialCode(packingArchives));
         return new ModelAndView("knowledgeBase/packingCostAdd").addObject("packId",packId);}
 
