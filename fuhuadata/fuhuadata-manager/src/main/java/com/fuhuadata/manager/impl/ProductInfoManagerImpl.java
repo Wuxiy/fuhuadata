@@ -1,16 +1,16 @@
 package com.fuhuadata.manager.impl;
 import java.util.List;
 
+import com.fuhuadata.dao.ComponentCostDao;
+import com.fuhuadata.dao.ProductWareDao;
 import com.fuhuadata.domain.ProductComponent;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.ProductInfo;
 import com.fuhuadata.manager.ProductInfoManager;
 import com.fuhuadata.domain.query.QueryProductInfo;
 import com.fuhuadata.dao.ProductInfoDao;
-import javax.annotation.Resource;
-
+import com.fuhuadata.vo.ProductInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -23,6 +23,12 @@ public class ProductInfoManagerImpl implements ProductInfoManager {
 
     private ProductInfoDao productInfoDao;
 
+    @Autowired
+	private ProductWareDao productWareDao;
+
+    @Autowired
+	private ComponentCostDao componentCostDao;
+
 	@Transactional
     public ProductInfo addProductInfo(ProductInfo productInfo,List<ProductComponent> productComponents) {
     	productInfoDao.addProductProcessingComponent(productComponents);
@@ -32,7 +38,9 @@ public class ProductInfoManagerImpl implements ProductInfoManager {
     @Transactional
     public boolean updateProductInfoById(int product_id, ProductInfo productInfo,List<ProductComponent> productComponents) {
     	productInfoDao.deleteProductProcessingComponent(product_id);
-    	productInfoDao.addProductProcessingComponent(productComponents);
+    	if(productComponents!=null) {
+			productInfoDao.addProductProcessingComponent(productComponents);
+		}
     	return productInfoDao.updateProductInfoById(product_id, productInfo) == 1 ? true : false;
     }
     
@@ -65,10 +73,21 @@ public class ProductInfoManagerImpl implements ProductInfoManager {
 		
 		return result;
     }
-    	
-    	
-    public ProductInfo getProductInfoById(int product_id) {
-    	return productInfoDao.getProductInfoById(product_id);
+
+
+	/**
+	 * 产品档案详情
+	 * @param product_id
+	 * @return
+	 */
+	public ProductInfoVO getProductInfoById(int product_id) {
+		ProductInfoVO productInfoVO = new ProductInfoVO();
+		ProductInfo productInfo = productInfoDao.getProductInfoById(product_id);
+		productInfoVO.setProductInfo(productInfo);
+		productInfoVO.setAllProcessingComponents(componentCostDao.getComponentCostByCategoryId(productInfo.getSmallCategoryId()));
+		productInfoVO.setProcessingComponents(productInfoDao.getProductComponentByProductId(product_id));
+		productInfoVO.setWares(productWareDao.getProductWareByPId(product_id));
+		return productInfoVO;
     }
 
 	@Override

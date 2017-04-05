@@ -6,6 +6,7 @@
    	<typeAlias alias="ProductInfo" type="com.fuhuadata.domain.ProductInfo"/>
    	<typeAlias alias="QueryProductInfo" type="com.fuhuadata.domain.query.QueryProductInfo"/>
 	<typeAlias alias="CustomerProductPackagingArchives" type="com.fuhuadata.vo.CustomerProductPackagingArchives"/>
+	<typeAlias alias="ProductComponent" type="com.fuhuadata.domain.ProductComponent"/>
 	
 	<resultMap id="PRODUCTINFO-MAP" class="ProductInfo">
 								<result property="productId" column="product_id" jdbcType="INT" javaType="java.lang.Integer" />
@@ -29,6 +30,16 @@
 								<result property="lastmodifyUserName" column="lastmodify_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="createTime" column="create_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
 								<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+	</resultMap>
+
+
+	<resultMap id="PRODUCTINFO-COMPONENT-MAP" class="ProductComponent" >
+		<result column="id" property="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+		<result column="product_id" property="productId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+		<result column="component_id" property="componentId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+		<result property="componentName" column="component_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+		<result column="consumption" property="consumption" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+		<result column="remark" property="remark" jdbcType="VARCHAR" javaType="java.lang.String"/>
 	</resultMap>
 	
 	<sql id="PAGE-COMMON">	
@@ -219,11 +230,11 @@
 	<update id="ADD-PRODUCT-PROCESSING-COMPONENTS" parameterClass="java.util.List">
 		<![CDATA[
             INSERT INTO product_component
-            (id,product_id,component_id,consumption,remark) values
+            (product_id,component_id,consumption,remark) values
             ]]>
 		<iterate conjunction=",">
 			<![CDATA[
-                (#[].id#,#[].productId#,#[].componentId#,
+                (#[].productId#,#[].componentId#,
                 #[].consumption#,#[].remark#
              )
                ]]>
@@ -248,6 +259,23 @@
 	<select id="GET-BY-ID" resultMap="PRODUCTINFO-MAP" parameterClass="java.lang.Integer">
 		<![CDATA[
 			SELECT * FROM product_info	WHERE product_id=#product_id#
+		]]>
+	</select>
+
+	<select id="GET-PRODUCT-COMPONENT-BY-ID" resultMap="PRODUCTINFO-COMPONENT-MAP" parameterClass="java.lang.Integer">
+		<![CDATA[
+						SELECT
+				a.id,
+				a.product_id,
+				a.component_id,
+				b.component_name,
+				a.consumption,
+				a.remark
+			FROM
+				product_component a
+			LEFT JOIN k_component_cost b ON b.component_id = a.component_id
+			WHERE
+				product_id = #product_id#
 		]]>
 	</select>
 

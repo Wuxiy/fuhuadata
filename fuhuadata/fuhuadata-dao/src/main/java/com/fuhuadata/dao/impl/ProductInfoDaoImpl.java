@@ -9,6 +9,7 @@ import com.fuhuadata.dao.ProductInfoDao;
 
 import com.fuhuadata.vo.CustomerProductPackagingArchives;
 import org.omg.PortableInterceptor.INACTIVE;
+import org.springframework.aop.support.AopUtils;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 /**
  * @author wangbo
@@ -28,6 +29,7 @@ public class ProductInfoDaoImpl extends SqlMapClientTemplate implements ProductI
     public static final String COUNT = "PRODUCTINFO.COUNT";
     public static final String ADD_PRODUCT_PROCESSING_COMPONENT="PRODUCTINFO.ADD-PRODUCT-PROCESSING-COMPONENTS";
     public static final String  DELETE_PROCESSING_COMPONENT_BY_ID="PRODUCTINFO.DELETE-PROCESSING-COMPONENTS-BY-ID";
+    public static final String GET_PRODUCT_COMPONENT_BY_PRODUCT_ID="PRODUCTINFO.GET-PRODUCT-COMPONENT-BY-ID";
 
     
     public ProductInfo addProductInfo(ProductInfo productInfo) {
@@ -46,7 +48,7 @@ public class ProductInfoDaoImpl extends SqlMapClientTemplate implements ProductI
 
     @Override
     public int addProductProcessingComponent(List<ProductComponent> productComponents) {
-        return this.update(ADD_PRODUCT_PROCESSING_COMPONENT);
+        return this.update(ADD_PRODUCT_PROCESSING_COMPONENT,productComponents);
     }
 
     @Override
@@ -71,6 +73,10 @@ public class ProductInfoDaoImpl extends SqlMapClientTemplate implements ProductI
     	return (ProductInfo) this.queryForObject(GET_BY_ID, product_id);
     }
 
+    @Override
+    public List<ProductComponent> getProductComponentByProductId(int product_id) {
+        return this.queryForList(GET_PRODUCT_COMPONENT_BY_PRODUCT_ID,product_id);
+    }
 
 
     public List<ProductInfo> getProductInfosByPage(QueryProductInfo queryProductInfo) {

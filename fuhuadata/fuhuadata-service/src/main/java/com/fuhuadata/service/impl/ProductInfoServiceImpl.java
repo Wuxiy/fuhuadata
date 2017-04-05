@@ -42,7 +42,6 @@ public class ProductInfoServiceImpl implements ProductInfoService {
     public Result updateProductInfoById(int product_id, ProductInfo productInfo, List<ProductComponent> productComponents) {
 		Result result = new Result();
 		try {
-			String str=productInfo.getProcessingComponents();
 			result.setSuccess(productInfoManager.updateProductInfoById(product_id, productInfo,productComponents));
 		} catch(Exception e) {
 			result.setSuccess(false);
@@ -82,9 +81,9 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 		Result<ProductInfoVO> result = new Result<ProductInfoVO>();
 		ProductInfoVO productInfoVO =new ProductInfoVO();
 		try {		
-		    ProductInfo  productInfo = productInfoManager.getProductInfoById(product_id);
-
-		    if(productInfo == null){
+		      productInfoVO = productInfoManager.getProductInfoById(product_id);
+		      ProductInfo productInfo = productInfoVO.getProductInfo();
+		    if(productInfoVO.getProductInfo() == null){
 				result.setSimpleErrorMsg(0, "当前数据不存在，请重试");
 			}else {
 		    	if(productInfo.getMidCategoryId()!=8) {
@@ -101,22 +100,21 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 							}
 						}
 					}
-					if (productInfo.getProcessingComponents() != null && productInfo.getProcessingComponents().length() > 0) {
-							JSONArray cJson = JSONArray.fromObject(productInfo.getProcessingComponents());
-							if (cJson.size() > 0) {
-								for (int i = 0; i < cJson.size(); i++) {
-									JSONObject cjob = cJson.getJSONObject(i);
-									ComponentCost componentCost = new ComponentCost();
-									componentCost.setComponentName((String) cjob.get("componentName"));
-									componentCost.setConsumption((String) cjob.get("consumption"));
-									componentCost.setRemarks((String) cjob.get("remarks"));
-									productInfoVO.addProcessingComponents(componentCost);
-								}
-							}
-						}
+					//加工成分json处理
+					//if (productInfo.getProcessingComponents() != null && productInfo.getProcessingComponents().length() > 0) {
+					//		JSONArray cJson = JSONArray.fromObject(productInfo.getProcessingComponents());
+					//		if (cJson.size() > 0) {
+					//			for (int i = 0; i < cJson.size(); i++) {
+					//				JSONObject cjob = cJson.getJSONObject(i);
+					//				ComponentCost componentCost = new ComponentCost();
+					//				componentCost.setComponentName((String) cjob.get("componentName"));
+					//				componentCost.setConsumption((String) cjob.get("consumption"));
+					//				componentCost.setRemarks((String) cjob.get("remarks"));
+					//				productInfoVO.addProcessingComponents(componentCost);
+					//			}
+					//		}
+					//	}
 				}
-					productInfoVO.setProductInfo(productInfo);
-					productInfoVO.setWares(productWareManager.getProductWareByPId(product_id));
 					result.addDefaultModel("ProductInfo", productInfoVO);
 			}
 		} catch(Exception e) {

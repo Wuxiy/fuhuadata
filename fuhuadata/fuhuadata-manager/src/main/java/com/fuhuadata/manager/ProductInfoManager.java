@@ -5,6 +5,8 @@ import com.fuhuadata.domain.ProductComponent;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.ProductInfo;
 import com.fuhuadata.domain.query.QueryProductInfo;
+import com.fuhuadata.vo.ProductInfoVO;
+
 import java.util.Map;
 import java.io.Serializable;
 
@@ -56,7 +58,7 @@ public interface ProductInfoManager {
      * @param product_id
      * @return
      */
-    public ProductInfo getProductInfoById(int product_id);
+    public ProductInfoVO getProductInfoById(int product_id);
 
 	/**
 	 * 根据产品分类查询
