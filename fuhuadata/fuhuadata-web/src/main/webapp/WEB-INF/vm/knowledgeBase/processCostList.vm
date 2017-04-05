@@ -121,6 +121,13 @@
                     <!--港杂费参考表开始-->
                     <div class="panel panel-default">
                         <div class="panel-heading">
+                            <button id="edit" data-form-btn="edit" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
+                            编辑
+                            </button>
+                            <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden">
+                                <button id="cancel" data-form-btn="cancel" class="btn" lang="zh">取消</button>
+                                <button id="save" data-form-btn="save" class="btn btn-primary" lang="zh">保存</button>
+                            </div>
                             <h3 class="panel-title">
                                 港杂费参考价
                             </h3>
@@ -256,7 +263,10 @@
                             <input class="form-control priceEndAdd" id="priceEnd" type="date">
                         </div>
                     </div>
-                    <div class="form-group" name="ProductSuitable">
+                    <div id="test">
+
+                    </div>
+                    #*<div class="form-group" name="ProductSuitable">
                         <label class="col-lg-2 control-label">适合产品<sup class="not-null">*</sup></label>
                         <div class="col-xs-3">
                             <div class="input-group">
@@ -277,7 +287,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>*#
                     <div class="form-group">
                         <label class="col-xs-2 control-label">备注</label>
                         <div class="col-xs-8">
@@ -289,10 +299,10 @@
             <div class="modal-footer">
                 <div class="row">
                     <div class="col-xs-3 col-xs-offset-2">
-                        <button id="addMore" data-form-btn="add"  type="button" class="btn btn-block btn-primary" lang="zh">继续添加适应产品</button>
+                        <button id="infoMore" data-form-btn="add"  type="button" class="btn btn-block btn-primary" lang="zh">继续添加适应产品</button>
                     </div>
                     <div class="col-xs-2">
-                        <a type="button" class="btn btn-primary btn-block" id="costAdd">
+                        <a type="button" class="btn btn-primary btn-block updateCost" id="updateCost">
                             完成
                         </a>
                     </div>
@@ -343,7 +353,7 @@
                         <label class="col-lg-2 control-label">适合产品<sup class="not-null">*</sup></label>
                         <div class="col-xs-3">
                             <div class="input-group">
-                                <input class="form-control suitableProductAdd" name="suitableProductAdd" type="text">
+                                <input class="form-control suitableProductAdd" name="suitableProduct" type="text">
                                 <div class="input-group-btn">
                                     <button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal">
                                         <span class="glyphicon glyphicon-search"></span>
@@ -407,8 +417,9 @@
     </div>
 </div>
 
-<script type="text/javascript" src="${request.contextPath}/lib/js/processCost.js"></script>
-<script type="text/javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/processCost.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/scaffolding.js"></script>
 <script type="text/javascript">
@@ -424,8 +435,8 @@
         var a = [];
         var b;
         var categoryFullNames = [];
-        $('[name="ProductSuitableAdd"]').each(function(){
-            var c = $(this).find('[name=suitableProductAdd]').val();
+        $('[name="ProductSuitable"]').each(function(){
+            var c = $(this).find('[name=suitableProduct]').val();
             categoryFullNames.push(c);
         })
 

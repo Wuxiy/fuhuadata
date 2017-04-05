@@ -17,10 +17,10 @@
                 $.each(getData,function(n,item){
                     var li = $('<li id="'+item.cid+'"></li>');
                     if( item.nodes!=null && item.nodes.length > 0) {
-                        $(li).append('<span class="branch-node" data-toggle="collapse" data-target="#t'+item.cid+'"></span><a href=""><span class="leaf"></span>'+item.cname+'</a>').append('<ul id="t'+item.cid+'" class="tree-branch collapse in"></ul>').appendTo(parent);
+                        $(li).append('<span class="branch-node" data-toggle="collapse" data-target="#t'+item.cid+'"></span><a><span class="leaf"></span>'+item.cname+'</a>').append('<ul id="t'+item.cid+'" class="tree-branch collapse in"></ul>').appendTo(parent);
                         creatBranch(item.nodes, $(li).children("ul.tree-branch"));
                     }else{
-                        $(li).append('<span class="branch"></span><a class="cNode" href=""><span class="leaf"></span>'+item.cname+'</a>').appendTo(parent);
+                        $(li).append('<span class="branch"></span><a class="cNode"><span class="leaf"></span>'+item.cname+'</a>').appendTo(parent);
                     }
                 })
             }
