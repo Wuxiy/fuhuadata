@@ -7,24 +7,31 @@ var CRM = {};
 CRM.common = window.CRM.common || {};
 CRM.common.isShow = false;
 CRM.el = {
-    EDIT_VIEW   : '[data-view="editView"]',
-    EDIT_HIDE   : '[data-view="editHide"]',
-    EDIT_BTN    : '[data-btn="editBtn"]',
-    SAVE_BTN    : '[data-btn="saveBtn"]',
-    CANCEL_BTN  : '[data-btn="cancelBtn"]',
-    ADD_BTN     : '[data-btn="addBtn"]',
-    DEL_BTN     : '[data-btn="delBtn"]',
-    ON_CONTROL  : '[data-control="on"]',
-    OFF_CONTROL : '[data-control="off"]'
+    PANEL_CONTAINER : '[data-container="panel"]',
+    EDIT_VIEW       : '[data-view="editView"]',
+    EDIT_HIDE       : '[data-view="editHide"]',
+    EDIT_BTN        : '[data-btn="editBtn"]',
+    SAVE_BTN        : '[data-btn="saveBtn"]',
+    CANCEL_BTN      : '[data-btn="cancelBtn"]',
+    ADD_BTN         : '[data-btn="addBtn"]',
+    DEL_BTN         : '[data-btn="delBtn"]',
+    ON_CONTROL      : '[data-control="on"]',
+    OFF_CONTROL     : '[data-control="off"]'
 };
-CRM.common.handleClick=function (element) {
-    this.showOrHide(element);
+
+
+//点击
+CRM.common.handleClick=function (event) {
+    var thisPanel = $(event.target).parents(CRM.el.PANEL_CONTAINER),
+         isShow    = false;
+    this.showOrHide(thisPanel,isShow);
 };
 
 //判断是否隐藏
-CRM.common.showOrHide = function (element) {
+CRM.common.showOrHide = function (element,isShow) {
 
-    if (element.hasClass('hidden')) {
+    //true的时候显示
+    if (isShow) {
 
         element.removeClass('hidden');
     }else{
@@ -32,7 +39,6 @@ CRM.common.showOrHide = function (element) {
     }
 };
 
-//
 
 
 
@@ -62,24 +68,24 @@ $(document).on('click.edit',editBtn,saveEdit);
 $(document).on('click.save',saveBtn,saveEdit);
 $(document).on('click.cancel',cancelBtn,saveEdit);
 $(document).on('click.del',delBtn,delEl);
-$(document).on('change.view',saltType,radioChecked);
+// $(document).on('change.view',saltType,radioChecked);
 
 // $('.else:checked').parents('.form-group').find('.elseInput').show();
 // $('.else:not(:checked)').parents('.form-group').find('.elseInput').hide();
 /**
  *checkbox其他选项
  */
-function radioChecked(e){
-    var radioGroup = $('[name="'+e.attr("name")+'"]');
-    var elseSelected = radioGroup.filter('.else');
-    var targetEl = e.parents('.form-group').find('.elseInput');
-    console.log(elseSelected.prop('checked'));
-    if(elseSelected.prop('checked')){
-        targetEl.removeClass('hidden');
-    }else{
-        targetEl.addClass('hidden');
-    }
-}
+// function radioChecked(e){
+//     var radioGroup = $('[name="'+e.attr("name")+'"]');
+//     var elseSelected = radioGroup.filter('.else');
+//     var targetEl = e.parents('.form-group').find('.elseInput');
+//     console.log(elseSelected.prop('checked'));
+//     if(elseSelected.prop('checked')){
+//         targetEl.removeClass('hidden');
+//     }else{
+//         targetEl.addClass('hidden');
+//     }
+// }
 
 /**
  *控制显示与隐藏

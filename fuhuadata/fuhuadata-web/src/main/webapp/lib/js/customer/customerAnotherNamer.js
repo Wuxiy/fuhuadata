@@ -99,13 +99,14 @@ function replace(arr1,arr2) {
 //详情
 $(document).on('click','.otherNameinfo',function(){
     var url = $(this).attr('data_url');
+
     jQuery.ajax({
         type:'POST',
         url:url,
         success:function(result){
             var ResultData = result.data;
-
             var arr = ResultData.property.split(',');
+            $("input[name='check']").val([]);
             $.each(arr,function(index,suitname){
                 $("input[name='check']").each(function(){
                         if($(this).attr('data-text') == suitname){
