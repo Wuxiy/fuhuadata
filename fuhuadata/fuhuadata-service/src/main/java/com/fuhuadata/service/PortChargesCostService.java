@@ -15,7 +15,7 @@ import java.util.List;
 public interface PortChargesCostService {
     public Result<PortChargesCost> addPortChargesCost(PortChargesCost portChargesCost);
 
-    public Result updatePortChargesCostById(PortChargesCost[] portChargesCosts);
+    public Result updatePortChargesCostById(int id,PortChargesCost portChargesCost);
 
     public Result deletePortChargesCostById(int id);
 
