@@ -11,7 +11,7 @@ public class ProductInfoDO {
 
     private ProductInfo productInfo;
 
-    private ProductComponent[] productComponents;//加工成分
+    private ProductComponent[] productComponents;//加工成分产品
 
 
     public ProductInfo getProductInfo() {

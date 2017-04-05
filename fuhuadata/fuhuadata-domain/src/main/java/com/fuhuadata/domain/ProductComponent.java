@@ -13,6 +13,8 @@ public class ProductComponent {
 
     private Integer componentId;
 
+    private String  componentName;//成分名称
+
     private BigDecimal consumption;
 
     private String remark;
@@ -55,5 +57,13 @@ public class ProductComponent {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getComponentName() {
+        return componentName;
+    }
+
+    public void setComponentName(String componentName) {
+        this.componentName = componentName;
     }
 }

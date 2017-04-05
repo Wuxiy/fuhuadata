@@ -4,7 +4,7 @@
 <sqlMap namespace="COMPONENTCOST">
     <typeAlias alias="ComponentCost" type="com.fuhuadata.domain.ComponentCost"/>
     <typeAlias alias="ComponentCostQuery" type="com.fuhuadata.domain.query.ComponentCostQuery"/>
-    <typeAlias alias="ProductComponent" type="com.fuhuadata.domain.KProductComponent"/>
+    <typeAlias alias="KProductComponent" type="com.fuhuadata.domain.KProductComponent"/>
 
     <resultMap id="COMPONENTCOST-MAP" class="ComponentCost">
         <result column="component_id" property="componentId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
@@ -26,7 +26,7 @@
         <result column="remarks" property="remarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>
 
-    <resultMap id="ProductComponent-Map" class="ProductComponent" >
+    <resultMap id="ProductComponent-Map" class="KProductComponent" >
         <result column="id" property="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
         <result column="component_id" property="componentId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result column="consumption" property="consumption" jdbcType="VARCHAR" javaType="java.lang.String"/>

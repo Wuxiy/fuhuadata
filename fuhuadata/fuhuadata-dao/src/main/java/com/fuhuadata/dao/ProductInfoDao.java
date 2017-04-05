@@ -71,6 +71,8 @@ public interface ProductInfoDao {
      */
     public ProductInfo getProductInfoById(int product_id);
 
+    public List<ProductComponent> getProductComponentByProductId(int product_id);
+
 
         
 	 /**
