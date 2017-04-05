@@ -901,6 +901,7 @@ function updateportSurcharge() {
         })
         arr.push(obj);
     })
-    return JSON.stringify(arr);
+    console.log(arr);
+    return arr;
 
 }

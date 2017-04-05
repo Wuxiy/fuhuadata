@@ -110,6 +110,12 @@ public class PortChargesCostAction {
         return new ModelAndView("knowledgeBase/modifyPortChargesCost");
     }
 
+    /**
+     * do modify
+     * @param id
+     * @param portChargesCost
+     * @return
+     */
     @RequestMapping(value="/doModifyPortChargesCost",method=RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-portChargesCost",methods = "doAdd")
     @ResponseBody
