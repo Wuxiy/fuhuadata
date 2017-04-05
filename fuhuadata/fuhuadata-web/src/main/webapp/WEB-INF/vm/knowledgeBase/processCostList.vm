@@ -266,28 +266,6 @@
                     <div id="test">
 
                     </div>
-                    #*<div class="form-group" name="ProductSuitable">
-                        <label class="col-lg-2 control-label">适合产品<sup class="not-null">*</sup></label>
-                        <div class="col-xs-3">
-                            <div class="input-group">
-                                <input class="form-control suitableProductAdd" name="suitableProduct" type="text">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal">
-                                        <span class="glyphicon glyphicon-search"></span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <label class="col-lg-2 control-label">单耗</label>
-                        <div class="col-lg-3">
-                            <div class="input-group">
-                                <input class="form-control" type="text" name="consumption">
-                                <div class="input-group-btn">
-                                    <botton class="btn btn-xs btn-primary">(元/kg)</botton>
-                                </div>
-                            </div>
-                        </div>
-                    </div>*#
                     <div class="form-group">
                         <label class="col-xs-2 control-label">备注</label>
                         <div class="col-xs-8">
@@ -435,7 +413,7 @@
         var a = [];
         var b;
         var categoryFullNames = [];
-        $('[name="ProductSuitable"]').each(function(){
+        $('[name="ProductSuitableAdd"]').each(function(){
             var c = $(this).find('[name=suitableProduct]').val();
             categoryFullNames.push(c);
         })
@@ -469,7 +447,7 @@
 
     $('#addMore').click(function () {
         var btn = $(this);
-        var div = $('<div class="form-group" name="ProductSuitableAdd"><label class="col-lg-2 control-label">适合产品</label><div class="col-xs-3"><div class="input-group"><input class="form-control suitableProductAdd" name="suitableProductAdd" type="text"><div class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal"><span class="glyphicon glyphicon-search"></span></button></div></div></div><label class="col-lg-2 control-label">单耗</label><div class="col-lg-3"><div class="input-group"><input class="form-control" type="text" name="consumptionAdd"><div class="input-group-btn"><botton class="btn btn-xs btn-primary">(元/kg)</botton></div></div><button type="button" class="close" data-form-btn="del" data-form-target="form-group" style="position: absolute;top:5px;">×</button></div>');
+        var div = $('<div class="form-group" name="ProductSuitableAdd"><label class="col-lg-2 control-label">适合产品</label><div class="col-xs-3"><div class="input-group"><input class="form-control suitableProductAdd" name="suitableProduct" type="text"><div class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal"><span class="glyphicon glyphicon-search"></span></button></div></div></div><label class="col-lg-2 control-label">单耗</label><div class="col-lg-3"><div class="input-group"><input class="form-control" type="text" name="consumptionAdd"><div class="input-group-btn"><botton class="btn btn-xs btn-primary">(元/kg)</botton></div></div><button type="button" class="close" data-form-btn="del" data-form-target="form-group" style="position: absolute;top:5px;">×</button></div>');
         $('#costmore').after(div);
 
     })
@@ -480,10 +458,11 @@
         var unitCost = $('#unitCostAdd').val();
         var CategoryFullNames = [];
         $('[name="ProductSuitableAdd"]').each(function(){
-            var d = $(this).find('[name=suitableProductAdd]').val();
+            var d = $(this).find('[name=suitableProduct]').val();
             CategoryFullNames.push(d);
         })
         if(componentName == ''||unitCost == ''||CategoryFullNames == ''){
+            console.log(CategoryFullNames);
             alert("请完善表单！");
             return false;
         }else {
@@ -515,11 +494,11 @@
     function getProductComponents() {
         var arr = [];
         var obj = {};
-        var ProductSuitable = $('[name="ProductSuitableAdd"]');
+        var ProductSuitable =$('#costAddmodal').find('[name="ProductSuitableAdd"]');
         ProductSuitable.each(function () {
             obj = {
-                "productCategoryId":$(this).find('[name=suitableProductAdd]').attr('data-id'),
-                "categoryFullName":$(this).find('[name=suitableProductAdd]').val(),
+                "productCategoryId":$(this).find('[name=suitableProduct]').attr('data-id'),
+                "categoryFullName":$(this).find('[name=suitableProduct]').val(),
                 "consumption":$(this).find('[name=consumptionAdd]').val()
             }
             arr.push(obj);

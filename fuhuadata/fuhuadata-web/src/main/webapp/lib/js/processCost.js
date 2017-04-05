@@ -411,8 +411,7 @@ $(document).on("click",".freight1",function(){
 $(document).on("click",".componnentId",function(){
     var url = $(this).attr("data_url");
     var test = $('#test');
-    test.innerHTML = '';
-    modal.innerHTML = '';
+    test.html('');
     jQuery.ajax({
         type: 'GET',
         url: url,
@@ -420,6 +419,7 @@ $(document).on("click",".componnentId",function(){
             var ComponentCost = result.data.componentCost;
             var ProductComponents = eval(result.data.kProductComponents);
 
+            $('#componentName').attr('data-id',ComponentCost.componentId);
             $('#componentName').val(ComponentCost.componentName);
             $('#unitCost').val(ComponentCost.unitCost);
             $('#priceEnd').val(ComponentCost.priceEnd);
@@ -427,10 +427,10 @@ $(document).on("click",".componnentId",function(){
 
             for(var i=0;i<ProductComponents.length;i++){
                 var Ps = ProductComponents[i];
-                var div = $('<div class="form-group" name="ProductSuitable"><label class="col-lg-2 control-label">适合产品</label><div class="col-xs-3"><div class="input-group"><input class="form-control suitableProduct" name="suitableProduct" type="text" data-id="'+Ps.productCategoryId+'" value="'+Ps.categoryFullName+'"><div class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal"><span class="glyphicon glyphicon-search"></span></button></div></div></div><label class="col-lg-2 control-label">单耗</label><div class="col-lg-3"><div class="input-group"><input class="form-control" type="text" name="consumption" value="'+Ps.consumption+'"><div class="input-group-btn"><botton class="btn btn-xs btn-primary">(元/kg)</botton></div></div><button type="button" class="close" data-form-btn="del" data-form-target="form-group" style="position: absolute;top:5px;">×</button></div>');
-                test.html(div);
-            }
 
+                var div = $('<div class="form-group" name="ProductSuitableAdd"><label class="col-lg-2 control-label">适合产品</label><div class="col-xs-3"><div class="input-group"><input class="form-control suitableProduct" name="suitableProduct" type="text" data-id="'+Ps.productCategoryId+'" value="'+Ps.categoryFullName+'"><div class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal"><span class="glyphicon glyphicon-search"></span></button></div></div></div><label class="col-lg-2 control-label">单耗</label><div class="col-lg-3"><div class="input-group"><input class="form-control" type="text" name="consumption" value="'+Ps.consumption+'"><div class="input-group-btn"><botton class="btn btn-xs btn-primary">(元/kg)</botton></div></div><button type="button" class="close" data-form-btn="del" data-form-target="form-group" style="position: absolute;top:5px;">×</button></div>');
+                div.appendTo(test);
+            }
             $('#costmodal').modal('show');
             /*var html = [];
             html += '<div class="modal-dialog">';
@@ -716,7 +716,7 @@ $(document).on("click",".updateCost",function(){
     var ComponentName = $('#componentName').val();
     var UnitCost = $('#unitCost').val();
     var CategoryFullNames = [];
-    $('[name="ProductSuitable"]').each(function(){
+    $('[name="ProductSuitableAdd"]').each(function(){
         var cs = $(this).find('[name=suitableProduct]').val();
         CategoryFullNames.push(cs);
     })
@@ -726,6 +726,7 @@ $(document).on("click",".updateCost",function(){
     }else {
         var data = {
             "componentCost":{
+                "componentId":$('#componentNameAdd').attr('data-id'),
                 "componentName":$('#componentNameAdd').val(),
                 "priceEnd":$('#priceEndAdd').val(),
                 "unitCost":$('#unitCostAdd').val(),
@@ -734,9 +735,9 @@ $(document).on("click",".updateCost",function(){
             "kProductComponents":ProductComponents()
         }
         console.log(data);
-        /*jQuery.ajax({
+        jQuery.ajax({
             type:'POST',
-            url:basePath + '',
+            url:basePath + 'componentCost/doModify',
             dataType:"json",
             contentType:"application/json",
             data:JSON.stringify(data),
@@ -744,13 +745,13 @@ $(document).on("click",".updateCost",function(){
                 alert('修改成功');
                 $('#modal').modal('hide');
             }
-        })*/
+        })
     }
 })
 
 $('#infoMore').click(function () {
     var btn = $(this);
-    var div = $('<div class="form-group" name="ProductSuitable"><label class="col-lg-2 control-label">适合产品</label><div class="col-xs-3"><div class="input-group"><input class="form-control suitableProduct" name="suitableProductAdd" type="text"><div class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal"><span class="glyphicon glyphicon-search"></span></button></div></div></div><label class="col-lg-2 control-label">单耗</label><div class="col-lg-3"><div class="input-group"><input class="form-control" type="text" name="consumption"><div class="input-group-btn"><botton class="btn btn-xs btn-primary">(元/kg)</botton></div></div><button type="button" class="close" data-form-btn="del" data-form-target="form-group" style="position: absolute;top:5px;">×</button></div>');
+    var div = $('<div class="form-group" name="ProductSuitableAdd"><label class="col-lg-2 control-label">适合产品</label><div class="col-xs-3"><div class="input-group"><input class="form-control suitableProduct" name="suitableProduct" type="text"><div class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal"><span class="glyphicon glyphicon-search"></span></button></div></div></div><label class="col-lg-2 control-label">单耗</label><div class="col-lg-3"><div class="input-group"><input class="form-control" type="text" name="consumption"><div class="input-group-btn"><botton class="btn btn-xs btn-primary">(元/kg)</botton></div></div><button type="button" class="close" data-form-btn="del" data-form-target="form-group" style="position: absolute;top:5px;">×</button></div>');
     $('#costInfo').after(div);
 
 })
@@ -758,7 +759,7 @@ $('#infoMore').click(function () {
 function ProductComponents() {
     var arr = [];
     var obj = {};
-    var ProductSuitable = $('[name="ProductSuitable"]');
+    var ProductSuitable = $('#costmodal').find('[name="ProductSuitableAdd"]');
     ProductSuitable.each(function () {
         obj = {
             "productCategoryId":$(this).find('[name=suitableProduct]').attr('data-id'),
@@ -770,7 +771,7 @@ function ProductComponents() {
     return arr;
 }
 
-$(document).on("cilck",".updateFreight",function(){
+$(document).on("click",".updateFreight",function(){
     var url = $(this).attr('data_url');
     var data = {
         "processFactory":$('#processFactory').val(),
@@ -875,11 +876,11 @@ $(document).on("click",".updaterate3",function(){
 //港杂费edit-save-cancel
 $(document).on('click.edit','#edit',function () {
 });
-//联系人基本信息提交
+//港杂费edit-save-cancel信息提交
 $(document).on('click.up','#save',function(){
     upData(basePath+'/portChargesCost/ModifyPortChargesCost','POST',updateportSurcharge(),"application/json");
 });
-//客户基本信息取消提交
+//港杂费edit-save-cancel信息取消提交
 $(document).on('click.cancel','#cancel',function(){
 });
 
