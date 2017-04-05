@@ -65,13 +65,22 @@ function checkboxArr() {
 
 //图片JSON
 function imgArr(){
+
     var arr=[];
     $('.filename').each(function(){
-        var objt ={
+        var names = $(this).val();
+        var newnames = names.sort();
+        for(var i=0;i<newnames.length;i++){
+            if(newnames[i]==newnames[i+1]){
+                alert('请输入不容的图片规格型号！');
+                return false;
+            }
+        }
+        var obj ={
             "name":$(this).val(),
             "path":$(this).attr('data-url'),
         };
-        arr.push(objt);
+        arr.push(obj);
     })
     return JSON.stringify(arr);
 }
@@ -203,8 +212,5 @@ $('#modal_checkAll').on('click',function(){
 })
 
 
-$('.update').hover(function(){
-
-})
 
 

@@ -228,6 +228,10 @@
     </div>
 </div>
 
+<input type="hidden" id="bid" value='$!{customerId}'>
+<input type="hidden" id="sid" value="$!{customerType}" />
+<input type="hidden" id="id" value="$!{fullName}" />
+
 <script type="text/javascript" src="${request.contextPath}/lib/js/packingAdd.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/scaffolding.js"></script>

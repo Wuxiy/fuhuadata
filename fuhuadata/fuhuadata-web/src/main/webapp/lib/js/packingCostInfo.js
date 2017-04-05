@@ -2,8 +2,6 @@
  * Created by young on 2017/3/7.
  */
 
-    $('.form-btn').hide();
-    $('#finish').hide();
     //分割url，获取上个页面传过来的id
     var thisURL = document.URL;
     var trans = thisURL.split('?')[1];
@@ -74,8 +72,8 @@ $(document).ready(function(){
                 for(var j=0;j<reData.length;j++){
                     imgContent.innerHTML += '<div class="col-xs-3">'+
                         '<img src="../'+reData[j].path+'" class="fileimg" width="300px" height="200px" style="margin-bottom:2%">'+
-                        '<input type="file" name="file" style="margin-bottom:2%"><div>'+
-                        '<input type="text" name="file" class="filename" data-url="'+reData[j].path+'" style="margin-bottom:2%" value="'+reData[j].name+'">'+
+                        '<input type="file" name="file" style="margin-bottom:2%" disabled><div>'+
+                        '<input type="text" name="file" class="filename" data-url="'+reData[j].path+'" style="margin-bottom:2%" value="'+reData[j].name+'" disabled>'+
                         '</div>'+
                         '</div>';
                 }
@@ -115,11 +113,19 @@ function fsubmit(){
 function imgArr(){
     var arr=[];
     $('.filename').each(function(){
-        var objt ={
+        var names = $(this).val();
+        var newnames = names.sort();
+        for(var i=0;i<newnames.length;i++){
+            if(newnames[i]==newnames[i+1]){
+                alert('请输入不容的图片规格型号！');
+                return false;
+            }
+        }
+        var obj ={
             "name":$(this).val(),
             "path":$(this).attr('data-url')
         };
-        arr.push(objt);
+        arr.push(obj);
     })
     return JSON.stringify(arr);
 }
@@ -136,19 +142,12 @@ function checkboxArr() {
     return JSON.stringify(checkboxarr);
 }
 
-//编辑
-    $('#edit').on('click',function(){
-        var celledit = $(".cell_edit");
-        console.log(celledit.length);
-
-        celledit.each(function(){
-            $(this).prop('disabled',false);
-        })
-        if($('#finish').hide()){
-            $('#finish').show();
-        }
-
-    })
+//baocai编辑
+$(document).on('click.edit','#edit',function () {
+});
+//baocai信息取消提交
+$(document).on('click.cancel','#cancel',function(){
+});
 
 //编辑完成保存
     $('#finish').on('click',function(){

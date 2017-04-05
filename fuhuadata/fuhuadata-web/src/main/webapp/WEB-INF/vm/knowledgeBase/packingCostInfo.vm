@@ -14,12 +14,13 @@
             <div id="Baseinfo" class="tab-pane fade in active">
                 <div class="panel panel-default">
                     <div class="panel-heading" id="btn">
-                        <a class="btn btn-xs btn-primary pull-right panel-heading-btn" id="edit">
+                        <button id="edit" data-form-btn="edit" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
                             编辑
-                        </a>
-                        <a class="btn btn-xs btn-primary pull-right panel-heading-btn" id="finish">
-                            完成
-                        </a>
+                        </button>
+                        <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden">
+                            <button id="cancel" data-form-btn="cancel" class="btn" lang="zh">取消</button>
+                            <button id="finish" data-form-btn="save" class="btn btn-primary" lang="zh">保存</button>
+                        </div>
                         <h3 class="panel-title">
                             基础信息
                         </h3>
@@ -107,9 +108,9 @@
                             </form>
                             <div class="form-group form-btn">
                                 <div class="col-xs-1 col-xs-offset-1">
-                                    <div class="btn-group btn-group-xs" disabled>
-                                        <button id="addImg" data-form-btn="add" class="btn btn-default" type="button" lang="zh">继续添加</button>
-                                        <input class="btn btn-primary" type="button" name="b1" value="上传" onclick="fsubmit()">
+                                    <div class="btn-group btn-group-xs" >
+                                        <button id="addImg" class="btn btn-default" type="button" lang="zh">继续添加</button>
+                                        <input class="btn btn-primary" type="button" name="b1" value="上传" onclick="fsubmit()" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -218,9 +219,16 @@
     </div>
 </div>
 
+<input type="hidden" id="bid" value='$!{}'>
+<input type="hidden" id="sid" value="$!{}" />
+<input type="hidden" id="id" value="$!{}" />
+
 <script type="text/javascript" src="${request.contextPath}/lib/js/packingCostInfo.js"></script>
+<script type="text/javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
+<script type="text/javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/scaffolding.js"></script>
+
 <script type="text/javascript">
     $('#tree').creatTree('${request.contextPath}/packingCategory/CategoryTree');
     $('#tree').filtrateData('${request.contextPath}/packingArchives/getPackingArchivesByPId',"modal_relate_table","packingInfoModal");
