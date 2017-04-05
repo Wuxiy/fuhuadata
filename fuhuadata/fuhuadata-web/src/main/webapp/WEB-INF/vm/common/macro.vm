@@ -166,11 +166,11 @@
             #if($num == 2)
                     class="active"
             #end
-        ><a href="">报价</a></li>
+        ><a href="${request.contextPath}/businessOrder/intoBusinessOffer/">报价</a></li>
         <li
             #if($num == 3)
                     class="active"
             #end
-        ><a href="">订单</a></li>
+        ><a href="${request.contextPath}/businessOrder/intoBusinessOrder/">订单</a></li>
     </ul>
 #end
