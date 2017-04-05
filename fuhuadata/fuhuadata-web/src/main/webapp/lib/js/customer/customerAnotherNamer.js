@@ -50,9 +50,6 @@ $(document).ready(function(){
     });
 })
 
-var id = document.URL.split('?')[1];
-var sid = id.split('=')[1];
-
 //渲染List
 function anotherNamerList(result) {
     var ResultData = result;
@@ -92,7 +89,6 @@ function replacelevel(arr) {
 }
 
 function replace(arr1,arr2) {
-    console.log(arr1);
     if(arr1.indexOf('其他')){
         arr1 = arr1.replace('其他',arr2);
     }
@@ -112,8 +108,8 @@ $(document).on('click','.otherNameinfo',function(){
             var arr = ResultData.property.split(',');
             $.each(arr,function(index,suitname){
                 $("input[name='check']").each(function(){
-                        if($(this).val() == suitname){
-                            $(this).attr('checked',true);
+                        if($(this).attr('data-text') == suitname){
+                            $(this).prop('checked',true);
                             if(suitname == 4){
                                 $('#propertyRemarks').val(ResultData.propertyRemarks);
                             }
@@ -137,7 +133,7 @@ $(document).on('click','.otherNameinfo',function(){
 function addAnotherName() {
     var data = {
         "customerSubcompanyInfo":{
-            "customerId":sid,
+            "customerId":$('#customerId').val(),
             "fullName":$('#fullNameAdd').val(),
             "shortName":$('#shortNameAdd').val(),
             "zhongxinbaoNumber":$('#zhongxinbaoNumberAdd').val(),
@@ -173,7 +169,7 @@ function checkboxarrAdd() {
     var obj;
     $("input[name='checkAdd']:checked").each(function(){
         obj = {
-            "customerId":sid,
+            "customerId":$('#customerId'),
             "type": "2",
             "nature": $(this).val()
         }
