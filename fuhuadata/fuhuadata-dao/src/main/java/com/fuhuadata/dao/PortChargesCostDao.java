@@ -20,11 +20,10 @@ public interface PortChargesCostDao {
 
     /**
      * 按照主键id更新，成功返回1
-     * @param id
      * @param portChargesCost
      * @return
      */
-    public int updatePortChargesCostById(int id, PortChargesCost portChargesCost);
+    public boolean updatePortChargesCostById(List<PortChargesCost> portChargesCost);
 
     /**
      * 按照主键id删除记录，成功返回1

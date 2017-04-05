@@ -32,10 +32,10 @@ public class PortChargesCostServiceImpl implements PortChargesCostService {
     }
 
     @Override
-    public Result updatePortChargesCostById(int id, PortChargesCost portChargesCost) {
+    public Result updatePortChargesCostById(List<PortChargesCost> portChargesCost) {
         Result result= new Result();
         try{
-            result.setSuccess(portChargesCostManager.updatePortChargesCostById(id,portChargesCost));
+            result.setSuccess(portChargesCostManager.updatePortChargesCostById(portChargesCost));
         }catch(Exception e){
             result.setSuccess(false);
             log.error("修改港杂费信息错误",e);

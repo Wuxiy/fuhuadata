@@ -61,7 +61,7 @@
                 dangerous_product = #dangerousProduct#
             </isNotNull>
         </dynamic>
-        WHERE id = #id#
+        WHERE port_id = #portId#
     </update>
 
 

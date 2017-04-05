@@ -21,7 +21,7 @@ public interface PortChargesCostManager {
 
     public PortChargesCost getPortChargesCostById(int id);
 
-    public boolean updatePortChargesCostById(int id,PortChargesCost portChargesCost);
+    public boolean updatePortChargesCostById(List<PortChargesCost> portChargesCost);
 
     public boolean deletePortChargesCostById(int id);
 

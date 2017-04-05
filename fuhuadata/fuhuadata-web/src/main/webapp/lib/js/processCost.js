@@ -879,7 +879,7 @@ $(document).on('click.edit','#edit',function () {
 });
 //港杂费edit-save-cancel信息提交
 $(document).on('click.up','#save',function(){
-    upData(basePath+'/portChargesCost/ModifyPortChargesCost','POST',updateportSurcharge(),"application/json");
+    upData(basePath+'/portChargesCost/doModifyPortChargesCost','POST',updateportSurcharge(),"application/json");
 });
 //港杂费edit-save-cancel信息取消提交
 $(document).on('click.cancel','#cancel',function(){
@@ -893,7 +893,7 @@ function updateportSurcharge() {
         var obj = {};
         $(this).find('td').each(function(n,td){
             if(n==0){
-                obj.id = $(td).attr('data_id');
+                obj.portId = $(td).attr('data_id');
                 obj.item = $(td).text();
             }else if (n==1){
                 obj.generalChemicals = $(td).children('input').val();
@@ -904,6 +904,6 @@ function updateportSurcharge() {
         arr.push(obj);
     })
     console.log(arr);
-    return arr;
+    return JSON.stringify(arr);
 
 }
