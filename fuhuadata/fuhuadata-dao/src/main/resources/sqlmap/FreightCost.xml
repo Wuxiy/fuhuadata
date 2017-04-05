@@ -79,7 +79,7 @@
                 process_factory = #processFactory#
             </isNotNull>
             <isNotNull prepend=", " property="unitCost">
-                unit_cost = #unit_cost#
+                unit_cost = #unitCost#
             </isNotNull>
             <isNotNull prepend=", " property="departureCity">
                 departure_city = #departureCity#

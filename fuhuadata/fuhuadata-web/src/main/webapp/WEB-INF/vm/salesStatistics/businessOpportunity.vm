@@ -178,8 +178,8 @@
             businessState:$('#businessState').val(),
             customerLevel:$('#customerLevel').val(),
             enterpriseNature:$('#enterpriseNature').val(),
-            /*areaClassId:click_node.oneLevelId,
-            areaId:click_node.twoLevelId,*/
+            areaClassId:click_node.oneLevelId,
+            areaId:click_node.twoLevelId,
             startRow:pageNum*pageSize,
             pageSize:pageSize
         };
@@ -233,8 +233,8 @@
     function getListCount(){
         var total = 0;
         var data = {
-            /*areaClassId:click_node.oneLevelId,
-            areaId:click_node.twoLevelId,*/
+            areaClassId:click_node.oneLevelId,
+            areaId:click_node.twoLevelId,
             customerName:$('#customerName').val(),
             businessFrom:$('#businessFrom').val(),
             businessState:$('#businessState').val(),

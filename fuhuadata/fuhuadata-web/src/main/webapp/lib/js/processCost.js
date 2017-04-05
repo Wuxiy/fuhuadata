@@ -105,9 +105,9 @@ $(document).ready(function () {
                 for (var i = 0; i < ResultData.length; i++) {
                     Freight.innerHTML += '<tr>' +
                         '<td><a class="freight1" data_url="'+basePath+'/freightCost/getFreightCostById?id='+ResultData[i].freightId+'">' + ResultData[i].processFactory + '</a></td>' +
-                        '<td>' + ResultData[i].unitCost + '</td>' +
                         '<td>' + ResultData[i].departureCity + '</td>' +
                         '<td>' + ResultData[i].destinationCity + '</td>' +
+                        '<td>' + ResultData[i].unitCost + '</td>' +
                         '<td>' + ResultData[i].remarks + '</td>' +
                         '</tr>';
                 }
@@ -376,7 +376,7 @@ $(document).on("click",".freight1",function(){
             html += '<botton class="btn btn-xs btn-primary">(元/T)</botton></div></div></div>';
             html += '</div>';
             html += '<div class="form-group">';
-            html += '<label class="col-lg-2 control-label">起运城市</label>';
+                html += '<label class="col-lg-2 control-label">起运城市</label>';
             html += '<div class="col-lg-3">';
             html += '<input class="form-control" type="text" value="' + ResuleData.departureCity + '" id="departureCity">';
             html += '</div>';
