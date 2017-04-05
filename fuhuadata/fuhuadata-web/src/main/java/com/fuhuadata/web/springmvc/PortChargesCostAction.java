@@ -112,16 +112,15 @@ public class PortChargesCostAction {
 
     /**
      * do modify
-     * @param id
      * @param portChargesCost
      * @return
      */
     @RequestMapping(value="/doModifyPortChargesCost",method=RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-portChargesCost",methods = "doAdd")
     @ResponseBody
-    public ResultPojo doModifyPortChargesCost(int id,@RequestBody PortChargesCost portChargesCost){
+    public ResultPojo doModifyPortChargesCost(@RequestBody PortChargesCost[] portChargesCosts){
         try{
-            Result<PortChargesCost> result = portChargesCostService.updatePortChargesCostById(id,portChargesCost);
+            Result<PortChargesCost> result = portChargesCostService.updatePortChargesCostById(portChargesCosts);
             return result.getResultPojo();
         }catch(Exception e){
             log.error("修改港杂费信息错误",e);
