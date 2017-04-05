@@ -20,7 +20,6 @@
     <resultMap id="GET-COMPONENTCOST-MAP" class="ComponentCost">
         <result column="component_id" property="componentId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result column="component_name" property="componentName" jdbcType="VARCHAR" javaType="java.lang.String" />
-        <result column="consumption" property="consumption" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="price_end" property="priceEnd" jdbcType="DATE" javaType="java.sql.Date"/>
         <result column="unit_cost" property="unitCost" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="remarks" property="remarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
