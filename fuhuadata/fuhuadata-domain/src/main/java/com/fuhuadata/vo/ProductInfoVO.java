@@ -22,6 +22,8 @@ public class ProductInfoVO {
 
     private List<ProductComponent> processingComponents;//加工成分
 
+    private List<ComponentCost>  allProcessingComponents;//产品品类-加工成分，供编辑时选择
+
 
     public ProductInfo getProductInfo() {
         return productInfo;
@@ -77,4 +79,11 @@ public class ProductInfoVO {
         this.processingComponents.add(productComponent);
     }
 
+    public List<ComponentCost> getAllProcessingComponents() {
+        return allProcessingComponents;
+    }
+
+    public void setAllProcessingComponents(List<ComponentCost> allProcessingComponents) {
+        this.allProcessingComponents = allProcessingComponents;
+    }
 }
