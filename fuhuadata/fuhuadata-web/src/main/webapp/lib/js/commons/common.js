@@ -2,6 +2,54 @@
  * Created by huxiangyang on 2017/3/13.
  */
 
+//唯一全局变量
+var CRM = {};
+CRM.common = window.CRM.common || {};
+CRM.common.isShow = false;
+CRM.el = {
+    EDIT_VIEW   : '[data-view="editView"]',
+    EDIT_HIDE   : '[data-view="editHide"]',
+    EDIT_BTN    : '[data-btn="editBtn"]',
+    SAVE_BTN    : '[data-btn="saveBtn"]',
+    CANCEL_BTN  : '[data-btn="cancelBtn"]',
+    ADD_BTN     : '[data-btn="addBtn"]',
+    DEL_BTN     : '[data-btn="delBtn"]',
+    ON_CONTROL  : '[data-control="on"]',
+    OFF_CONTROL : '[data-control="off"]'
+};
+CRM.common.handleClick=function (element) {
+    this.showOrHide(element);
+};
+
+//判断是否隐藏
+CRM.common.showOrHide = function (element) {
+
+    if (element.hasClass('hidden')) {
+
+        element.removeClass('hidden');
+    }else{
+        element.addClass('hidden');
+    }
+};
+
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //定义全局变量
 var editBtn = '[data-form-btn="edit"]';
 var saveBtn = '[data-form-btn="save"]';
