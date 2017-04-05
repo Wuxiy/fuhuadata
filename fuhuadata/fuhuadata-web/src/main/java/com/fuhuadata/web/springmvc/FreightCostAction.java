@@ -108,6 +108,7 @@ public class FreightCostAction {
     public ResultPojo  doModify(int id,@RequestBody FreightCost freightCost){
         try{
             Result<FreightCost> result = freightCostService.updateFreightCostById(id,freightCost);
+            return result.getResultPojo();
         }catch(Exception e){
             log.error("更新运费成本错误",e);
         }

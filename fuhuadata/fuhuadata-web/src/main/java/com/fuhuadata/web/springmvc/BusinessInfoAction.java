@@ -71,6 +71,9 @@ public class BusinessInfoAction {
     @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "countBusinessList")
     @ResponseBody
     public ResultPojo countBusinessList(@RequestBody BusinessInfoVO businessInfoVO){
+        if(businessInfoVO.getCustomerName()==null||"".equals(businessInfoVO.getCustomerName())){
+            businessInfoVO.setCustomerName(null);
+        }
         try{
             Result<Integer> result = businessInfoService.count(businessInfoVO);
             return result.getResultPojo();
