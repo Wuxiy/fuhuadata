@@ -219,7 +219,7 @@
     console.log(businessId);
     $(document).ready(function(){
         //获取信息
-        getData(basePath + '/businessInfo/getBusinessInfoById?businessId='+businessId,'POST',businessInfo);
+        getData(basePath + '/businessInfo/getBusinessInfoById?businessId='+businessId,'POST',null,businessInfo);
 
         //编辑商机基本信息
         $(document).on('click.edit','#edit',function () {
@@ -248,15 +248,15 @@
 
     //获取详情function
     function businessInfo(result) {
-        var ResultData = result.data;
+        var ResultData = result;
         var businessfollow = result.businessfollow;
         console.log(ResultData);
 
-        var intentionalProducts = ResultData.intentionalProducts;
+        /*var intentionalProducts = ResultData.intentionalProducts;
         $('#intentionalProduct0').val(intentionalProducts[0].intentionalProduct);
         $('#intentionalProduct1').val(intentionalProducts[1].intentionalProduct);
         $('#estimatedPurchase0').val(intentionalProducts[0].estimatedPurchase);
-        $('#estimatedPurchase1').val(intentionalProducts[1].estimatedPurchase);
+        $('#estimatedPurchase1').val(intentionalProducts[1].estimatedPurchase);*/
 
         $('#businessName').val(ResultData.businessName);
         $('#businessId').val(ResultData.businessId);
@@ -277,7 +277,7 @@
         $('#createUserName').val(ResultData.createUserName);
         $('#createTime').val(ResultData.createTime);
 
-        var _html = '';
+        /*var _html = '';
         for(var i=0;i<businessfollow.length;i++){
             _html += '<tr>';
             _html += '<td>'+businessfollow[i].name+'</td>';
@@ -287,7 +287,7 @@
             _html += '<td>'+businessfollow[i].name+'</td>';
             _html += '<td>'+businessfollow[i].name+'</td>';
             _html += '</tr>';
-        }
+        }*/
         $('#businessfollow').append(_html);
     }
 
