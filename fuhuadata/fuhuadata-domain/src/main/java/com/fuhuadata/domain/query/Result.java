@@ -67,6 +67,10 @@ public class Result<T> extends PageBase implements Serializable {
 	public Result() {
 	}
 
+	public static <T> Result<T> newResult(boolean success) {
+        return new Result<T>(success);
+    }
+
 	/**
 	 * 新增一个返回结果
 	 * @param obj

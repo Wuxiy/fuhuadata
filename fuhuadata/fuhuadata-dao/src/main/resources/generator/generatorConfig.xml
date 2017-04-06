@@ -48,9 +48,29 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="p_menu" domainObjectName="Menu">
-            <generatedKey column="menu_id" sqlStatement="MySql" identity="true" type="post"/>
+        <!--<table tableName="p_button" domainObjectName="Button">
+            <generatedKey column="button_id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>-->
+        <!--<table tableName="p_area_code" domainObjectName="AreaCode">
+        </table>-->
+        <table tableName="p_user_account" domainObjectName="UserAccount">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
         </table>
+        <!--<table tableName="p_user_area" domainObjectName="UserArea">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>-->
+        <!--<table tableName="p_user_role" domainObjectName="UserRole">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>
+        <table tableName="p_role_authority" domainObjectName="RoleAuthority">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>-->
+        <!--<table tableName="p_menu" domainObjectName="Menu">
+            <generatedKey column="menu_id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>-->
+        <!--<table tableName="p_role" domainObjectName="Role">
+            <generatedKey column="role_id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>-->
 
     </context>
 </generatorConfiguration>

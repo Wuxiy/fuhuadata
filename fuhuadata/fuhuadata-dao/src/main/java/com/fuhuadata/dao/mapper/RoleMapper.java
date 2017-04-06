@@ -1,23 +1,22 @@
 package com.fuhuadata.dao.mapper;
 
-import com.fuhuadata.dao.annotation.MybatisDao;
-import com.fuhuadata.domain.mybatis.Menu;
+import com.fuhuadata.domain.mybatis.Role;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-/**
- * <p>User: wangjie
- * <p>Date: 3/22/2017
- */
-@MybatisDao
-public interface MenuMapper extends BaseMapper<Menu, Integer> {
+public interface RoleMapper extends BaseMapper<Role, Integer> {
 
+    Role getRole(@Param("id") Integer id);
+
+    /**
+     * 删除自身和子节点
+     * @param parentId
+     * @param parents 该节点作为父节点的字符串
+     */
     void deleteSelfAndChildren(@Param("parentId") Integer parentId, @Param("parents") String parents);
 
     int countNextIndex(@Param("parentId") Integer parentId);
-
-    Menu getMenu(@Param("id") Integer id);
 
     int updateChildrenParentIds(@Param("newParentIds") String newParentIds,
                                 @Param("oldParentIds") String oldParentIds);
@@ -29,9 +28,5 @@ public interface MenuMapper extends BaseMapper<Menu, Integer> {
      * @param weight
      * @return
      */
-    List<Menu> listSelfAndNextSiblings(@Param("parentId") Integer parentId, @Param("weight") int weight);
-
-    List<Menu> listAuthorityMenus(@Param("roleId") Integer roleId);
-
-    List<Menu> listPermissionMenus(@Param("roleId") Integer roleId);
+    List<Role> listSelfAndNextSiblings(@Param("parentId") Integer parentId, @Param("weight") int weight);
 }

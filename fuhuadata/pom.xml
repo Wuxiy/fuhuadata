@@ -344,13 +344,38 @@
             </dependency>
             <!-- velocity end -->
 
-            <!-- APAPCHE LANG BEGIN -->
+            <!-- utils -->
             <dependency>
                 <groupId>commons-lang</groupId>
                 <artifactId>commons-lang</artifactId>
                 <version>2.5</version>
             </dependency>
-            <!-- APAPCHE LANG END -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>4.0</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>1.8.3</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>20.0</version>
+            </dependency>
 
             <!-- JSON BEGIN -->
             <dependency>
@@ -425,11 +450,6 @@
                 <groupId>mongo</groupId>
                 <artifactId>mongo</artifactId>
                 <version>2.9.1</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>20.0</version>
             </dependency>
             <dependency>
                 <groupId>sns.u.soa.common.rpc</groupId>

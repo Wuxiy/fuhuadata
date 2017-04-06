@@ -11,10 +11,10 @@ import java.util.List;
  */
 public class BaseTreeVo<ID extends Serializable> {
 
-    private ID cid;
-    private ID pid;
-    private String cname;
-    private List<BaseTreeVo> nodes;
+    private ID cid;// 当前节点id
+    private ID pid;// 父节点id
+    private String cname;// 当前节点名称
+    private List<BaseTreeVo> nodes;// 子节点集合
 
     public ID getCid() {
         return cid;
@@ -50,6 +50,7 @@ public class BaseTreeVo<ID extends Serializable> {
 
     /**
      * 添加子节点
+     *
      * @param child
      */
     public void addChildNode(BaseTreeVo child) {

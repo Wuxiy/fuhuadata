@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fuhuadata.domain.plugin.Treeable;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Table(name = "p_menu")
 public class Menu extends BaseEntity<Integer> implements Treeable<Integer> {
@@ -57,6 +58,17 @@ public class Menu extends BaseEntity<Integer> implements Treeable<Integer> {
     @Column(name = "order_index")
     private Integer orderIndex;
 
+    /**
+     * 角色权限
+     */
+    @Transient
+    private RoleAuthority roleAuthority;
+
+    /**
+     * 菜单关联的按钮
+     */
+    @Transient
+    private List<Button> buttons;
 
     @Override
     public void setId(Integer id) {
@@ -204,25 +216,27 @@ public class Menu extends BaseEntity<Integer> implements Treeable<Integer> {
         return null;
     }
 
-    @Override
-    public String toString() {
-        return "Menu{" +
-                "menuId=" + menuId +
-                ", parentId=" + parentId +
-                ", parentIds='" + parentIds + '\'' +
-                ", name='" + name + '\'' +
-                ", url='" + url + '\'' +
-                ", backup='" + backup + '\'' +
-                ", enablestate=" + enablestate +
-                ", orderIndex=" + orderIndex +
-                '}';
-    }
-
     public String getParentName() {
         return parentName;
     }
 
     public void setParentName(String parentName) {
         this.parentName = parentName;
+    }
+
+    public RoleAuthority getRoleAuthority() {
+        return roleAuthority;
+    }
+
+    public void setRoleAuthority(RoleAuthority roleAuthority) {
+        this.roleAuthority = roleAuthority;
+    }
+
+    public List<Button> getButtons() {
+        return buttons;
+    }
+
+    public void setButtons(List<Button> buttons) {
+        this.buttons = buttons;
     }
 }

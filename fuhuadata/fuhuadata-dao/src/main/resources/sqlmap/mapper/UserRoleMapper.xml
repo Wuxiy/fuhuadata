@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.UserRoleMapper">
+    <resultMap id="BaseResultMap" type="com.fuhuadata.domain.mybatis.UserRole">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="role_id" jdbcType="INTEGER" property="roleId"/>
+        <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime"/>
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+        <result column="auth_user_id" jdbcType="INTEGER" property="authUserId"/>
+        <result column="auth_user_name" jdbcType="VARCHAR" property="authUserName"/>
+        <result column="auth_time" jdbcType="TIMESTAMP" property="authTime"/>
+    </resultMap>
+
+    <resultMap id="UserExtendMap" type="com.fuhuadata.domain.mybatis.UserRole" extends="BaseResultMap">
+        <association property="user" column="user_id" columnPrefix="user_"
+                     resultMap="com.fuhuadata.dao.mapper.UserAccountMapper.UserAreasMap"/>
+    </resultMap>
+
+    <!-- p_user_role 缩写 ur -->
+    <sql id="BaseColumns">
+        ur.id,
+        ur.user_id,
+        ur.role_id,
+        ur.begin_time,
+        ur.end_time,
+        ur.auth_user_id,
+        ur.auth_user_name,
+        ur.auth_time
+    </sql>
+
+    <sql id="PrefixColumns">
+        ur.id ur_id,
+        ur.user_id ur_user_id,
+        ur.role_id ur_role_id,
+        ur.begin_time ur_begin_time,
+        ur.end_time ur_end_time,
+        ur.auth_user_id ur_auth_user_id,
+        ur.auth_user_name ur_auth_user_name,
+        ur.auth_time ur_auth_time
+    </sql>
+
+    <sql id="RoleUserJoin">
+        LEFT JOIN p_user_account ua ON ua.id=ur.user_id
+    </sql>
+
+    <select id="listUsersOfRole" resultMap="UserExtendMap">
+        SELECT
+        <include refid="BaseColumns"/>,
+        <include refid="com.fuhuadata.dao.mapper.UserAccountMapper.PrefixColumns"/>,
+        <include refid="com.fuhuadata.dao.mapper.AreaCodeMapper.UserAreasPrefixColumns"/>
+        FROM p_user_role ur
+        <include refid="RoleUserJoin"/>
+        <include refid="com.fuhuadata.dao.mapper.AreaCodeMapper.UserAreasJoin"/>
+        WHERE ur.role_id=#{roleId}
+    </select>
+
+</mapper>
