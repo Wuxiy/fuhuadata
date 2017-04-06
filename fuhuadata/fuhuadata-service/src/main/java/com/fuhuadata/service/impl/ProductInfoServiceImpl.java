@@ -1,10 +1,8 @@
 package com.fuhuadata.service.impl;
 import java.util.List;
 
-import com.fuhuadata.dao.ProductWareDao;
-import com.fuhuadata.domain.ComponentCost;
+
 import com.fuhuadata.domain.ProductComponent;
-import com.fuhuadata.domain.ProductWare;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.ProductInfo;
 import com.fuhuadata.manager.ProductInfoManager;
@@ -12,7 +10,6 @@ import com.fuhuadata.manager.ProductWareManager;
 import com.fuhuadata.service.ProductInfoService;
 import com.fuhuadata.domain.query.QueryProductInfo;
 
-import com.fuhuadata.util.JsonUtils;
 import com.fuhuadata.vo.PhysicalProperities;
 import com.fuhuadata.vo.ProductInfoVO;
 import net.sf.json.JSONArray;

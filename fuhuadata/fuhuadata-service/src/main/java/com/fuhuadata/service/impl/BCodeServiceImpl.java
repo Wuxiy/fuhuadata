@@ -5,9 +5,6 @@ import com.fuhuadata.domain.ProductInfo;
 import com.fuhuadata.manager.BCodeManager;
 import com.fuhuadata.service.BCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;

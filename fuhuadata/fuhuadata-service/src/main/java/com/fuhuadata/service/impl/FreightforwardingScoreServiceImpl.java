@@ -6,7 +6,6 @@ import com.fuhuadata.service.FreightforwardingScoreService;
 import java.util.List;
 import com.fuhuadata.domain.query.Result;
 import javax.annotation.Resource;
-import org.springframework.stereotype.Component;
 
 /**
  * @author wangbo

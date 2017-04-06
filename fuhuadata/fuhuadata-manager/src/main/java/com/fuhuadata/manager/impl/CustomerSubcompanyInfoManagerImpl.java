@@ -3,7 +3,6 @@ import java.util.List;
 
 import com.fuhuadata.dao.CustomerBaseInfoDao;
 import com.fuhuadata.dao.CustomerSubcompanyInfoDao;
-import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.domain.CustomerEnterpriceNature;
 import com.fuhuadata.domain.query.QueryCustomerSubcompanyInfo;
 import com.fuhuadata.domain.CustomerSubcompanyInfo;

@@ -7,8 +7,6 @@ import com.fuhuadata.domain.ProductInfo;
 import com.fuhuadata.domain.query.QueryProductInfo;
 import com.fuhuadata.vo.ProductInfoVO;
 
-import java.util.Map;
-import java.io.Serializable;
 
 /**
  * @author wangbo

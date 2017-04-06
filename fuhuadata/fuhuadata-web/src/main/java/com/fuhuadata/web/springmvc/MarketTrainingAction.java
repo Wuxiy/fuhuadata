@@ -1,7 +1,6 @@
 package com.fuhuadata.web.springmvc;
 
 import com.fuhuadata.domain.MarketTraining;
-import com.fuhuadata.domain.SystemLog;
 import com.fuhuadata.domain.query.MarketTrainingQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;

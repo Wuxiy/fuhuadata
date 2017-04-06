@@ -6,7 +6,6 @@ import com.fuhuadata.manager.WarehouseScoreManager;
 import com.fuhuadata.dao.WarehouseScoreDao;
 import com.fuhuadata.domain.query.QueryWarehouseScore;
 import javax.annotation.Resource;
-import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 
 /**

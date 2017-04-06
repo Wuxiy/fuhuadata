@@ -1,6 +1,5 @@
 package com.fuhuadata.web.springmvc;
 
-import com.fuhuadata.domain.CustomerProductArchives;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.CustomerProductArchivesService;
 import org.apache.log4j.Logger;

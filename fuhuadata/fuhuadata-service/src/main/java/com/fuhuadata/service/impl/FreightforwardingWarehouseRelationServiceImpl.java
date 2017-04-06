@@ -6,8 +6,6 @@ import com.fuhuadata.service.FreightforwardingWarehouseRelationService;
 import com.fuhuadata.manager.FreightforwardingWarehouseRelationManager;
 import com.fuhuadata.domain.FreightforwardingWarehouseRelation;
 import javax.annotation.Resource;
-import org.springframework.stereotype.Component;
-
 
 /**
  * @author wangbo

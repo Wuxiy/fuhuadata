@@ -5,7 +5,6 @@ import com.fuhuadata.domain.query.MarketTrainingQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.MarketTrainingManager;
 import com.fuhuadata.service.MarketTrainingService;
-import com.fuhuadata.service.SystemLogService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

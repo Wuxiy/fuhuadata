@@ -7,7 +7,6 @@ import com.fuhuadata.domain.CustomerMakeProduct;
 import com.fuhuadata.manager.CustomerBaseInfoManager;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;

@@ -6,7 +6,6 @@ import com.fuhuadata.manager.CustomerAreaManager;
 import com.fuhuadata.service.CustomerAreaService;
 import com.fuhuadata.vo.CategoryTree;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

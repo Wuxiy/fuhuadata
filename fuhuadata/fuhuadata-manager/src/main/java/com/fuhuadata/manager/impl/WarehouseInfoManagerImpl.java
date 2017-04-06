@@ -6,7 +6,6 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.QueryWarehouseInfo;
 import com.fuhuadata.manager.WarehouseInfoManager;
 import javax.annotation.Resource;
-import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 
 /**

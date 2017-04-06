@@ -6,7 +6,6 @@ import com.fuhuadata.dao.CustomerPurchaseProductDao;
 import com.fuhuadata.domain.CustomerPurchaseProduct;
 import com.fuhuadata.domain.query.QueryCustomerPurchaseProduct;
 import javax.annotation.Resource;
-import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 
 /**

@@ -2,7 +2,6 @@ package com.fuhuadata.manager.impl;
 import java.util.List;
 
 import com.fuhuadata.dao.RecordLinkmanDao;
-import com.fuhuadata.domain.RecordLinkman;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.dao.CustomerVisitRecordDao;
 import com.fuhuadata.manager.CustomerVisitRecordManager;
@@ -12,7 +11,6 @@ import javax.annotation.Resource;
 
 import com.fuhuadata.vo.CustomerVisitRecordVO;
 import com.fuhuadata.vo.VisitRecordVO;
-import com.ibatis.sqlmap.client.SqlMapClient;
 
 import java.util.ArrayList;
 
