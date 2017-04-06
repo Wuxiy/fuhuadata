@@ -9,7 +9,12 @@
          http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!-- 自动扫描,完成bean创建和依赖注入 -->
-    <context:component-scan base-package="com.fuhuadata"/>
+    <context:component-scan base-package="com.fuhuadata">
+        <context:include-filter type="annotation"
+                                expression="org.springframework.stereotype.Controller"/>
+        <context:include-filter type="annotation"
+                                expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+    </context:component-scan>
     <!--启用默认Servlet
      <mvc:default-servlet-handler/>-->
 
@@ -57,7 +62,7 @@
         <property name="exposeRequestAttributes" value="true"/><!--是否开放request属性-->
         <property name="requestContextAttribute" value="rc"/><!--request属性引用名称-->
 
-        <property name="layoutKey" value="layout"></property><!-- layoutKey设定模板文件键值，设定该值后就可以在vm文件中使用该键值设置模板路径-->
+        <property name="layoutKey" value="layout"/><!-- layoutKey设定模板文件键值，设定该值后就可以在vm文件中使用该键值设置模板路径-->
         <property name="screenContentKey" value="screen_content"/>
 
         <property name="dateToolAttribute" value="date"/><!--日期函数名称-->
