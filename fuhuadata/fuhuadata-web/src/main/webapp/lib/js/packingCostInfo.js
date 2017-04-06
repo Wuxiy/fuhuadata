@@ -9,6 +9,12 @@
     var trans2 = trans.split('&')[1];
     var id = trans1.split('=')[1];
     var bid = trans2.split('=')[1];*/
+    var id = $('#id').val();
+var bid = $('#bid').val();
+var sid = $('#sid').val();
+    console.log(bid);
+console.log(sid);
+console.log(id);
     var table = document.getElementById('packing_relate_table');
     var imgContent = document.getElementById('imgContent');
 
@@ -70,11 +76,12 @@ $(document).ready(function(){
                 var reData = ResultData.imagePath;
                 for(var j=0;j<reData.length;j++){
                     imgContent.innerHTML += '<div class="col-xs-3">'+
-                        '<img src="../'+reData[j].path+'" class="fileimg" width="300px" height="200px" style="margin-bottom:2%">'+
-                        '<input type="file" name="file" style="margin-bottom:2%" disabled><div>'+
-                        '<input type="text" name="file" class="filename" data-url="'+reData[j].path+'" style="margin-bottom:2%" value="'+reData[j].name+'" disabled>'+
-                        '</div>'+
-                        '</div>';
+                            '<button type="button" class="close" name="close" style="position: absolute;top:3px;left:0;" disabled>×</button>'+
+                            '<img src="../'+reData[j].path+'" class="fileimg" width="300px" height="200px" style="margin-bottom:2%">'+
+                            '<input type="file" name="file" style="margin-bottom:2%" disabled><div>'+
+                            '<input type="text" name="file" class="filename" data-url="'+reData[j].path+'" style="margin-bottom:2%" value="'+reData[j].name+'" disabled>'+
+                            '</div>'+
+                            '</div>';
                 }
             }
 

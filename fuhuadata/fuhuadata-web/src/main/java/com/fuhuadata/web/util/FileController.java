@@ -124,4 +124,24 @@ public class FileController {
         return result.getResultPojo();
     }
 
+    @RequestMapping(value = "/deleteFileSingle",method = RequestMethod.POST)
+    @ResponseBody
+    public ResultPojo deleteFileSingle(String imagePath){
+        Result result = new Result();
+        try {
+            if (imagePath != null ) {
+                File file = new File(imagePath);
+                // 路径为文件且不为空则进行删除
+                if (file.isFile() && file.exists()) {
+                    file.delete();
+                }
+            }
+        }catch(Exception e){
+            result.setSuccess(false);
+            log.error("文件删除出错",e);
+        }
+        return result.getResultPojo();
+    }
+
+
 }

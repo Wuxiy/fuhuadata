@@ -224,8 +224,8 @@ public class PackingArchivesAction {
      */
     @RequestMapping(value="/getDetails",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-packingArchives",methods = "details")
-    public ModelAndView getDetails(){
-        return  new ModelAndView("knowledgeBase/packingCostInfo");
+    public ModelAndView getDetails(int id,int bid,int sid){
+        return  new ModelAndView("knowledgeBase/packingCostInfo").addObject("id",id).addObject("sid",sid).addObject("bid",bid);
     }
 
     /**
@@ -264,5 +264,28 @@ public class PackingArchivesAction {
         }
         return null;
     }
+
+    /**
+     * 判断订单产品包装表有无此包材此型号图片)
+     * @param
+     * @return
+     */
+    @RequestMapping(value="/judgeImageModelToUse")
+    @SystemLogAnnotation(module = "knowledgeBase-packingArchives",methods = "judgeImageModelToUse")
+    @ResponseBody
+    public ResultPojo judgeImageModelToUse(int packId,String name){
+        try{
+            Result result = new Result();
+            result.addDefaultModel("useTotal",0);
+            //
+            result.setCode(1);
+            result.setMessage("允许删除，请确认");
+            return result.getResultPojo();
+        }catch(Exception e){
+            log.error("删除包材图片型号出错",e);
+        }
+        return null;
+    }
+
 
 }

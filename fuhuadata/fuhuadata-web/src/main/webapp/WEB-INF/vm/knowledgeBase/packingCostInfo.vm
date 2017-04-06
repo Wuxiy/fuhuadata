@@ -235,12 +235,41 @@
 
     $('#addImg').click(function () {
         var btn = $(this);
-        var div = $('<div class="col-xs-3" style="position: relative;"><button type="button" class="close" id="close" data-form-btn="del" data-form-target="col-xs-3" style="position: absolute;top:3px;left:0;">×</button><img src="" class="fileimg" width="300px" height="200px" style="margin-bottom:2%"><input type="file" name="file" style="margin-bottom:2%"><div class="caption"><input type="text" name="file" class="filename" style="margin-bottom:2%"></div></div>');
-        console.log(div);
+        var div = $('<div class="col-xs-3" style="position: relative;"><button type="button" class="close" name="close" style="position: absolute;top:3px;left:0;">×</button><img src="" class="fileimg" width="300px" height="200px" style="margin-bottom:2%"><input type="file" name="file" style="margin-bottom:2%"><div class="caption"><input type="text" name="file" class="filename" data-url="" style="margin-bottom:2%"></div></div>');
         div.appendTo('#imgContent');
     })
-    
-    $(document).on('click','#close',function () {
-        
+
+    $(document).on('click','[name="close"]',function () {
+        var imgpath = $(this).parent('div').find('[class="filename"]').attr('data-url');
+        var imgname = $(this).parent('div').find('[class="filename"]').attr('value');
+        var packId = $('#id').val();
+
+        console.log(imgpath);
+        var url1 = basePath + 'packingArchives/judgeImageModelToUse?packId=' + packId + '&&name=' + imgname;
+        var url2 = basePath + '/upload/deleteFileSingle';
+        if(imgpath != ''){
+            jQuery.ajax({
+                url:url1,
+                type:'POST',
+                success:function(result){
+                    var ResultData = result;
+                    if(ResultData == 0){
+                        jQuery.ajax({
+                            url:url2,
+                            type:'POST',
+                            data:imgpath,
+                            success:function (result) {
+                                alert('删除成功！');
+                                $(this).parent('div').remove();
+                            }
+                        })
+                    }else {
+                        alert('已有订单中使用此型号，不可删除');
+                    }
+                }
+            })
+        }else{
+            $(this).parent('div').remove();
+        }
     })
 </script>
