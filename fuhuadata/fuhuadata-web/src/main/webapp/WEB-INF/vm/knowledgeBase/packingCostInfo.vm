@@ -235,8 +235,12 @@
 
     $('#addImg').click(function () {
         var btn = $(this);
-        var div = $('<div class="col-xs-3" style="position: relative;"><button type="button" class="close" data-form-btn="del" data-form-target="col-xs-3" style="position: absolute;top:3px;left:0;">×</button><img src="" class="fileimg" width="300px" height="200px" style="margin-bottom:2%"><input type="file" name="file" style="margin-bottom:2%"><div class="caption"><input type="text" name="file" class="filename" style="margin-bottom:2%"></div></div>');
+        var div = $('<div class="col-xs-3" style="position: relative;"><button type="button" class="close" id="close" data-form-btn="del" data-form-target="col-xs-3" style="position: absolute;top:3px;left:0;">×</button><img src="" class="fileimg" width="300px" height="200px" style="margin-bottom:2%"><input type="file" name="file" style="margin-bottom:2%"><div class="caption"><input type="text" name="file" class="filename" style="margin-bottom:2%"></div></div>');
         console.log(div);
         div.appendTo('#imgContent');
+    })
+    
+    $(document).on('click','#close',function () {
+        
     })
 </script>

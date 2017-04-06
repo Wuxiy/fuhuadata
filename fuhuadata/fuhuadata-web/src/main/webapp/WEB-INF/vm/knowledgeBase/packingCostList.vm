@@ -81,7 +81,7 @@
         var ids = $("li[class='active']").attr('id');
         var pname = $("li[class='active']").parent('ul').parent('li').find('a:first').text();
         var cname = $("li[class='active']").children('a').text();
-        var name = pname + '-' + cname;
+        var name = 'name=' + pname + '-' + cname;
 
         var bid,sid;
         if(ids ==1||ids ==2||ids ==3){

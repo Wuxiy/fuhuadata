@@ -9,8 +9,6 @@
     var trans2 = trans.split('&')[1];
     var id = trans1.split('=')[1];
     var bid = trans2.split('=')[1];*/
-    var bid = $('#bid').val();
-    console.log(bid);
     var table = document.getElementById('packing_relate_table');
     var imgContent = document.getElementById('imgContent');
 
@@ -114,14 +112,6 @@ function fsubmit(){
 function imgArr(){
     var arr=[];
     $('.filename').each(function(){
-        var names = $(this).val();
-        var newnames = names.sort();
-        for(var i=0;i<newnames.length;i++){
-            if(newnames[i]==newnames[i+1]){
-                alert('请输入不容的图片规格型号！');
-                return false;
-            }
-        }
         var obj ={
             "name":$(this).val(),
             "path":$(this).attr('data-url')
@@ -152,6 +142,20 @@ $(document).on('click.cancel','#cancel',function(){
 
 //编辑完成保存
     $('#finish').on('click',function(){
+
+        var names = [];
+        $('.filename').each(function(){
+            names.push($(this).val());
+        })
+        var newnames = names.sort();
+        console.log(newnames);
+        for(var i=0;i<newnames.length;i++) {
+            if (newnames[i] == newnames[i + 1]) {
+                alert('请输入不容的图片规格型号！');
+                return false;
+            }
+        }
+
         var url = basePath+'/packingArchives/doModify';
         var data = {
             "packingId":jQuery('#id').val(),
@@ -289,6 +293,8 @@ $('#finish_relate').on('click',function(){
         alert('还未选择要添加的关联');
     }
 })
+
+
 
 
 
