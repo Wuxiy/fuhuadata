@@ -24,7 +24,7 @@ public interface BusinessInfoDao {
 
     public List<BusinessInfo> getBusinessInfoByQuery(QueryBusinessInfo queryBusinessInfo);
 
-    public List<BusinessInfoVO> getBusinessInfoByPage(BusinessInfoVO businessInfoVO);
+    public List<QueryBusinessInfo> getBusinessInfoByPage(QueryBusinessInfo queryBusinessInfo);
 
-     public int count(BusinessInfoVO businessInfoVO);
+     public int count(QueryBusinessInfo queryBusinessInfo);
 }

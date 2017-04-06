@@ -287,6 +287,7 @@
         $('#createUserName').val(ResultData.createUserName);
         $('#createTime').val(ResultData.createTime);
 
+<<<<<<< HEAD
         
     }
 
@@ -304,6 +305,20 @@
                     '<td>'+businessfollow[i].name+'</td>'+
                     '</tr>';
         }
+=======
+        /*var _html = '';
+        for(var i=0;i<businessfollow.length;i++){
+            _html += '<tr>';
+            _html += '<td>'+businessfollow[i].name+'</td>';
+            _html += '<td>'+businessfollow[i].name+'</td>';
+            _html += '<td>'+businessfollow[i].name+'</td>';
+            _html += '<td>'+businessfollow[i].name+'</td>';
+            _html += '<td>'+businessfollow[i].name+'</td>';
+            _html += '<td>'+businessfollow[i].name+'</td>';
+            _html += '</tr>';
+        }*/
+        $('#businessfollow').append(_html);
+>>>>>>> a6289832ea2c0ac0babadd4dc4d000a6892afb77
     }
 
     function updateBusinessInfo(){

@@ -1,6 +1,7 @@
 package com.fuhuadata.web.springmvc;
 
 import com.fuhuadata.domain.BusinessInfo;
+import com.fuhuadata.domain.query.QueryBusinessInfo;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.BCodeService;
@@ -43,18 +44,18 @@ public class BusinessInfoAction {
 
     /**
      * list
-     * @param businessInfoVO
+     * @param queryBusinessInfo
      * @return
      */
     @RequestMapping(value = "/queryBusinessInfoPageList",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "queryBusinessInfoPageList")
     @ResponseBody
-    public ResultPojo queryBusinessInfoPageList(@RequestBody BusinessInfoVO businessInfoVO){
-        if(businessInfoVO.getCustomerName()==null||"".equals(businessInfoVO.getCustomerName())){
-            businessInfoVO.setCustomerName(null);
+    public ResultPojo queryBusinessInfoPageList(@RequestBody QueryBusinessInfo queryBusinessInfo){
+        if(queryBusinessInfo.getCustomerName()==null||"".equals(queryBusinessInfo.getCustomerName())){
+            queryBusinessInfo.setCustomerName(null);
         }
         try{
-            Result<List<BusinessInfoVO>> result = businessInfoService.getBusinessInfoByPage(businessInfoVO);
+            Result<List<QueryBusinessInfo>> result = businessInfoService.getBusinessInfoByPage(queryBusinessInfo);
             return result.getResultPojo();
         }catch (Exception e){
             log.error("分页条件查询商机列表数据失败",e);
@@ -64,18 +65,18 @@ public class BusinessInfoAction {
 
     /**
      * count
-     * @param businessInfoVO
+     * @param queryBusinessInfo
      * @return
      */
     @RequestMapping(value = "/countBusinessList",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "countBusinessList")
     @ResponseBody
-    public ResultPojo countBusinessList(@RequestBody BusinessInfoVO businessInfoVO){
-        if(businessInfoVO.getCustomerName()==null||"".equals(businessInfoVO.getCustomerName())){
-            businessInfoVO.setCustomerName(null);
+    public ResultPojo countBusinessList(@RequestBody QueryBusinessInfo queryBusinessInfo){
+        if(queryBusinessInfo.getCustomerName()==null||"".equals(queryBusinessInfo.getCustomerName())){
+            queryBusinessInfo.setCustomerName(null);
         }
         try{
-            Result<Integer> result = businessInfoService.count(businessInfoVO);
+            Result<Integer> result = businessInfoService.count(queryBusinessInfo);
             return result.getResultPojo();
         }catch (Exception e){
             log.error("查询商机列表数量错误",e);
@@ -134,8 +135,7 @@ public class BusinessInfoAction {
     @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "getById")
     @ResponseBody
     public ResultPojo getBusinessInfoById(String  businessId){
-        System.out.println(businessId+"11111111111111");
-        Result<BusinessInfo> result = new Result<BusinessInfo>();
+        Result<BusinessInfoVO> result = new Result<BusinessInfoVO>();
         try{
             result = businessInfoService.getBusinessInfoByBusinessId(businessId);
         }catch(Exception e){

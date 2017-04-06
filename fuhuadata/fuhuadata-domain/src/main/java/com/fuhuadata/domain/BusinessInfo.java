@@ -10,6 +10,7 @@ import java.util.Date;
  * Created by intanswer on 2017/3/24.
  */
 public class BusinessInfo {
+
     private String businessId;//商机id
 
     private String customerId;//客户id
@@ -17,6 +18,22 @@ public class BusinessInfo {
     private String businessName;//商机名称
 
     private String customerName;//客户名称
+
+
+    private String  enterpriseNature;
+
+    private Integer  customerLevel;
+
+    private  Integer zhongxinbaoLevel;
+
+    private String country;
+
+    private  String linkmanName;
+
+    private String linkPhone1;
+
+    private String lemail;
+
 
     private Integer businessFrom;//商机来源，0展会，1门户网站，2农药店考察，3客户介绍，4主动联系，5其他
 
@@ -48,6 +65,62 @@ public class BusinessInfo {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date modifyTime;//修改时间
+
+    public String getEnterpriseNature() {
+        return enterpriseNature;
+    }
+
+    public void setEnterpriseNature(String enterpriseNature) {
+        this.enterpriseNature = enterpriseNature;
+    }
+
+    public Integer getCustomerLevel() {
+        return customerLevel;
+    }
+
+    public void setCustomerLevel(Integer customerLevel) {
+        this.customerLevel = customerLevel;
+    }
+
+    public Integer getZhongxinbaoLevel() {
+        return zhongxinbaoLevel;
+    }
+
+    public void setZhongxinbaoLevel(Integer zhongxinbaoLevel) {
+        this.zhongxinbaoLevel = zhongxinbaoLevel;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getLinkmanName() {
+        return linkmanName;
+    }
+
+    public void setLinkmanName(String linkmanName) {
+        this.linkmanName = linkmanName;
+    }
+
+    public String getLinkPhone1() {
+        return linkPhone1;
+    }
+
+    public void setLinkPhone1(String linkPhone1) {
+        this.linkPhone1 = linkPhone1;
+    }
+
+    public String getLemail() {
+        return lemail;
+    }
+
+    public void setLemail(String lemail) {
+        this.lemail = lemail;
+    }
 
     public String getBusinessId() {
         return businessId;

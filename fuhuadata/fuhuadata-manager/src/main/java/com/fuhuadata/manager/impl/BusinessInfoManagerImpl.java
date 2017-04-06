@@ -1,10 +1,13 @@
 package com.fuhuadata.manager.impl;
 
 import com.fuhuadata.dao.BusinessInfoDao;
+import com.fuhuadata.dao.BusinessRecordDao;
 import com.fuhuadata.domain.BusinessInfo;
+import com.fuhuadata.domain.BusinessRecord;
 import com.fuhuadata.domain.query.QueryBusinessInfo;
 import com.fuhuadata.manager.BusinessInfoManager;
 import com.fuhuadata.vo.BusinessInfoVO;
+import com.ibm.wsdl.util.xml.QNameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -16,6 +19,9 @@ public class BusinessInfoManagerImpl implements BusinessInfoManager {
 
     @Autowired
     private BusinessInfoDao businessInfoDao;
+
+    @Autowired
+    private BusinessRecordDao businessRecordDao;
     @Override
     public BusinessInfo addBusinessInfo(BusinessInfo businessInfo) {
         return businessInfoDao.addBusinessInfo(businessInfo);
@@ -32,8 +38,12 @@ public class BusinessInfoManagerImpl implements BusinessInfoManager {
     }
 
     @Override
-    public BusinessInfo getBusinessInfoByBusinessId(String businessId) {
-        return businessInfoDao.getBusinessInfoByBusinessId(businessId);
+    public BusinessInfoVO getBusinessInfoByBusinessId(String businessId) {
+        BusinessInfoVO businessInfoVO = new BusinessInfoVO();
+        businessInfoVO.setBusinessInfo( businessInfoDao.getBusinessInfoByBusinessId(businessId));
+        businessInfoVO.setBusinessRecords(businessRecordDao.getBusinessRecordByBusinessId(businessId));
+        return businessInfoVO;
+
     }
 
     @Override
@@ -47,12 +57,12 @@ public class BusinessInfoManagerImpl implements BusinessInfoManager {
     }
 
     @Override
-    public List<BusinessInfoVO> getBusinessInfoByPage(BusinessInfoVO businessInfoVO) {
-        return businessInfoDao.getBusinessInfoByPage(businessInfoVO);
+    public List<QueryBusinessInfo> getBusinessInfoByPage(QueryBusinessInfo queryBusinessInfo) {
+        return businessInfoDao.getBusinessInfoByPage(queryBusinessInfo);
     }
 
     @Override
-    public int count(BusinessInfoVO businessInfoVO) {
-        return businessInfoDao.count(businessInfoVO);
+    public int count(QueryBusinessInfo queryBusinessInfo) {
+        return businessInfoDao.count(queryBusinessInfo);
     }
 }

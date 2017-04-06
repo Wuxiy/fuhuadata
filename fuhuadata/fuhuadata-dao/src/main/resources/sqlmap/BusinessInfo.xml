@@ -27,6 +27,37 @@
         <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" javaType="java.sql.Timestamp"/>
     </resultMap>
 
+    <resultMap id="BUSINESSINFOALL-MAP" class="BusinessInfo">
+        <result column="business_id" jdbcType="VARCHAR" property="businessId" javaType="java.lang.String"/>
+        <result column="customer_id" jdbcType="VARCHAR" property="customerId" javaType="java.lang.String"/>
+        <result column="business_name" jdbcType="VARCHAR" property="businessName" javaType="java.lang.String"/>
+
+        <result column="customer_name" jdbcType="VARCHAR" property="customerName" javaType="java.lang.String"/>
+        <result property="enterpriseNature" column="full_enterprise_nature" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="customerLevel" column="customer_level" jdbcType="INT" javaType="java.lang.Integer"/>
+        <result property="zhongxinbaoLevel" column="zhongxinbao_level" jdbcType="INT" javaType="java.lang.Integer"/>
+        <result property="country" column="country" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="linkmanName" column="name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="linkPhone1" column="link_phone1" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="lemail" column="lemail" jdbcType="VARCHAR" javaType="java.lang.String"/>
+
+        <result column="business_from" jdbcType="INTEGER" property="businessFrom" javaType="java.lang.Integer"/>
+        <result column="business_state" jdbcType="INTEGER" property="businessState" javaType="java.lang.Integer"/>
+        <result column="expect_income" jdbcType="DECIMAL" property="expectIncome" javaType="java.math.BigDecimal"/>
+        <result column="deadline" jdbcType="DATE" property="deadline" javaType="java.sql.Date"/>
+        <result column="Intentional_products" jdbcType="VARCHAR" property="intentionalProducts" javaType="java.lang.String"/>
+        <result column="business_describe" jdbcType="VARCHAR" property="businessDescribe" javaType="java.lang.String"/>
+        <result column="business_remarks" jdbcType="VARCHAR" property="businessRemarks" javaType="java.lang.String"/>
+        <result column="fail_reason" jdbcType="VARCHAR" property="failReason" javaType="java.lang.String"/>
+        <result column="create_user_id" jdbcType="INTEGER" property="createUserId" javaType="java.lang.Integer"/>
+        <result column="create_user_name" jdbcType="VARCHAR" property="createUserName" javaType="java.lang.String"/>
+        <result column="lastmodify_user_id" jdbcType="INTEGER" property="lastmodifyUserId" javaType="java.lang.Integer"/>
+        <result column="lastmodify_user_name" jdbcType="VARCHAR" property="lastmodifyUserName" javaType="java.lang.String"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" javaType="java.sql.Timestamp"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" javaType="java.sql.Timestamp"/>
+    </resultMap>
+
+
     <sql id="PAGE-COMMON">
         <dynamic prepend=" WHERE">
            <isNotNull prepend=" AND " property="customerName">
@@ -197,9 +228,24 @@
     </delete>
 
 
-    <select id="GET-BY-ID" resultMap="BUSINESSINFO-MAP" parameterClass="java.lang.String">
+    <select id="GET-BY-ID" resultMap="BUSINESSINFOALL-MAP" parameterClass="java.lang.String">
         <![CDATA[
-            SELECT * FROM business_info WHERE business_id=#businessId#
+           SELECT
+            a.*,
+        base.full_enterprise_nature,
+        base.customer_level,
+        base.zhongxinbao_level,
+        base.country,
+        b.`name`,
+        b.link_phone1,
+        b.lemail
+        FROM
+            business_info a
+        LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
+        LEFT JOIN customer_linkman b ON b.customer_id = a.customer_id
+        WHERE
+            business_id = #businessId#
+        AND b.is_default = 1
     ]]>
     </select>
 
@@ -218,7 +264,7 @@
         </isParameterPresent>
     </select>
 
-    <select id="GET-PAGE" resultClass="BusinessInfoVO" parameterClass="BusinessInfoVO">
+    <select id="GET-PAGE" resultClass="QueryBusinessInfo" parameterClass="QueryBusinessInfo">
         <![CDATA[
                     SELECT
             a.business_id businessId,
@@ -246,7 +292,7 @@
         LIMIT #startRow#,#pageSize#
     </select>
 
-    <select id="COUNT" resultClass="java.lang.Integer" parameterClass="BusinessInfoVO">
+    <select id="COUNT" resultClass="java.lang.Integer" parameterClass="QueryBusinessInfo">
         <![CDATA[
             SELECT COUNT(a.business_id)
         FROM

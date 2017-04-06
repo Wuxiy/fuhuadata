@@ -2,6 +2,7 @@ package com.fuhuadata.service.impl;
 
 import com.fuhuadata.domain.BusinessInfo;
 import com.fuhuadata.domain.query.QueryBusinessInfo;
+import com.fuhuadata.domain.query.QueryBusinessOrder;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.BusinessInfoManager;
 import com.fuhuadata.service.BusinessInfoService;
@@ -10,6 +11,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.management.Query;
 import java.util.List;
 
 /**
@@ -58,14 +60,14 @@ public class BusinessInfoServiceImpl implements BusinessInfoService {
     }
 
     @Override
-    public Result<BusinessInfo> getBusinessInfoByBusinessId(String businessId) {
-        Result<BusinessInfo> result = new Result<BusinessInfo>();
+    public Result<BusinessInfoVO> getBusinessInfoByBusinessId(String businessId) {
+        Result<BusinessInfoVO> result = new Result<BusinessInfoVO>();
         try{
-            BusinessInfo businessInfo = businessInfoManager.getBusinessInfoByBusinessId(businessId);
+            BusinessInfoVO businessInfoVO = businessInfoManager.getBusinessInfoByBusinessId(businessId);
             if(businessId==null){
                 result.setSimpleErrorMsg(0,"当前数据不存在，请重试");
             }else {
-                result.addDefaultModel("BusinessInfo", businessInfo);
+                result.addDefaultModel("BusinessInfo", businessInfoVO);
             }
         }catch(Exception e){
             result.setSuccess(false);
@@ -99,10 +101,10 @@ public class BusinessInfoServiceImpl implements BusinessInfoService {
     }
 
     @Override
-    public Result<List<BusinessInfoVO>> getBusinessInfoByPage(BusinessInfoVO businessInfoVO) {
-        Result<List<BusinessInfoVO>> result = new Result<List<BusinessInfoVO>>();
+    public Result<List<QueryBusinessInfo>> getBusinessInfoByPage(QueryBusinessInfo queryBusinessInfo) {
+        Result<List<QueryBusinessInfo>> result = new Result<List<QueryBusinessInfo>>();
         try{
-            result.addDefaultModel("BusinessInfos",businessInfoManager.getBusinessInfoByPage(businessInfoVO));
+            result.addDefaultModel("BusinessInfos",businessInfoManager.getBusinessInfoByPage(queryBusinessInfo));
         }catch(Exception e){
             result.setSuccess(false);
             log.error("分页条件查询商机列表出错",e);
@@ -111,10 +113,10 @@ public class BusinessInfoServiceImpl implements BusinessInfoService {
     }
 
     @Override
-    public Result<Integer> count(BusinessInfoVO businessInfoVO) {
+    public Result<Integer> count(QueryBusinessInfo queryBusinessInfo) {
         Result<Integer> result = new Result<Integer>();
         try{
-            result.addDefaultModel(businessInfoManager.count(businessInfoVO));
+            result.addDefaultModel(businessInfoManager.count(queryBusinessInfo));
         }catch(Exception e){
             result.setSuccess(false);
             log.error("条件查询商机数量出错",e);

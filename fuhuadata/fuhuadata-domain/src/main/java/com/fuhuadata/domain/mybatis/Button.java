@@ -38,6 +38,12 @@ public class Button extends BaseEntity<Integer> {
     private String backup;
 
     /**
+     * 是否允许该权限
+     */
+    @Transient
+    private Boolean permitted;
+
+    /**
      * 获取按钮id
      *
      * @return button_id - 按钮id
@@ -143,5 +149,13 @@ public class Button extends BaseEntity<Integer> {
 
     public void setPermission(String permission) {
         this.permission = permission == null ? null : permission.trim();
+    }
+
+    public Boolean getPermitted() {
+        return permitted;
+    }
+
+    public void setPermitted(Boolean permitted) {
+        this.permitted = permitted;
     }
 }
