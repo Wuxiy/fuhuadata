@@ -1,7 +1,9 @@
 package com.fuhuadata.service.impl.mybatis;
 
 import com.fuhuadata.dao.mapper.MenuMapper;
+import com.fuhuadata.domain.mybatis.Button;
 import com.fuhuadata.domain.mybatis.Menu;
+import com.fuhuadata.domain.mybatis.RoleAuthority;
 import com.fuhuadata.domain.plugin.MenuTrees;
 import com.fuhuadata.service.mybatis.MenuService;
 import com.fuhuadata.vo.MenuTreeVo;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * <p>User: wangjie
@@ -58,7 +61,25 @@ public class MenuServiceImpl extends BaseTreeableServiceImpl<Menu, Integer>
     @Override
     public List<MenuTreeVo> listPermissionMenuTree(Integer roleId) {
         List<Menu> menus = getMenuMapper().listPermissionMenus(roleId);
+
+        setPermittedFlag(menus);
         return getMenuTreeVos(menus);
+    }
+
+    private void setPermittedFlag(List<Menu> menus) {
+        for (Menu menu : menus) {
+            RoleAuthority roleAuthority = menu.getRoleAuthority();
+            if (roleAuthority != null) {
+
+                Set<Integer> permissions = roleAuthority.getPermissionIdsSet();
+                if (menu.getButtons() != null && permissions != null) {
+
+                    for (Button button : menu.getButtons()) {
+                        button.setPermitted(permissions.contains(button.getId()));
+                    }
+                }
+            }
+        }
     }
 
     private MenuMapper getMenuMapper() {
