@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.RoleMapper">
+    <resultMap id="BaseResultMap" type="com.fuhuadata.domain.mybatis.Role">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="role_id" jdbcType="INTEGER" property="roleId"/>
+        <result column="org_id" jdbcType="INTEGER" property="orgId"/>
+        <result column="org_name" jdbcType="VARCHAR" property="orgName"/>
+        <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
+        <result column="parent_name" jdbcType="VARCHAR" property="parentName"/>
+        <result column="parent_ids" jdbcType="VARCHAR" property="parentIds"/>
+        <result column="role_name" jdbcType="VARCHAR" property="name"/>
+        <result column="is_enable" jdbcType="TINYINT" property="enable"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    
+    <resultMap id="RoleUserMap" type="com.fuhuadata.domain.mybatis.Role" extends="BaseResultMap">
+        <collection property="users" column="user_id" columnPrefix="user_"
+                    ofType="com.fuhuadata.domain.mybatis.UserAccount"
+                    resultMap="com.fuhuadata.dao.mapper.UserAccountMapper.BaseResultMap"/>
+    </resultMap>
+
+    <sql id="roleColumns">
+        r.role_id,
+        r.org_id,
+        o.name org_name,
+        r.parent_id,
+        p.role_name parent_name,
+        r.parent_ids,
+        r.role_name,
+        r.is_enable,
+        r.create_time
+    </sql>
+
+    <sql id="PrefixColumns">
+        r.role_id ro_role_id,
+        r.org_id ro_org_id,
+        o.name ro_org_name,
+        r.parent_id ro_parent_id,
+        p.role_name ro_parent_name,
+        r.parent_ids ro_parent_ids,
+        r.role_name ro_role_name,
+        r.is_enable ro_is_enable,
+        r.create_time ro_create_time
+    </sql>
+
+    <sql id="roleJoins">
+        LEFT JOIN p_role p ON p.role_id=r.parent_id
+        INNER JOIN p_organization o ON o.org_id = r.org_id
+    </sql>
+
+    <sql id="userJoin">
+        LEFT JOIN p_user_role ur ON ur.user_id=r.role_id
+        LEFT JOIN p_user_account ua ON ua.id=ur.user_id
+    </sql>
+
+    <select id="getRole" resultMap="BaseResultMap">
+        SELECT
+        <include refid="roleColumns"/>
+        FROM p_role r
+        <include refid="roleJoins"/>
+        WHERE r.role_id=#{id}
+    </select>
+
+    <delete id="deleteSelfAndChildren">
+        DELETE FROM p_role WHERE parent_id=#{parentId} OR parent_ids LIKE CONCAT(#{parents}, '%')
+    </delete>
+
+    <select id="countNextIndex" resultType="java.lang.Integer">
+        SELECT CASE WHEN MAX(weight) IS NULL THEN 1 ELSE (MAX(weight) + 1) END
+        FROM p_role WHERE parent_id = #{parentId}
+    </select>
+
+    <update id="updateChildrenParentIds">
+        UPDATE p_role SET parent_ids=(#{newParentIds} || SUBSTRING(parent_ids, LENGTH(#{oldParentIds})+1))
+        WHERE parent_ids LIKE CONCAT(#{oldParentIds}, '%')
+    </update>
+
+    <select id="listSelfAndNextSiblings" resultType="com.fuhuadata.domain.mybatis.Role">
+        SELECT
+        <include refid="roleColumns"/>
+        FROM p_role r
+        <include refid="roleJoins"/>
+        WHERE r.parent_id = #{parentId} AND r.weight &gt;= #{weight}
+        ORDER BY r.weight ASC
+    </select>
+</mapper>

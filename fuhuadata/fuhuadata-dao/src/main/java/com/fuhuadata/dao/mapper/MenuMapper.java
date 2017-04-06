@@ -30,4 +30,8 @@ public interface MenuMapper extends BaseMapper<Menu, Integer> {
      * @return
      */
     List<Menu> listSelfAndNextSiblings(@Param("parentId") Integer parentId, @Param("weight") int weight);
+
+    List<Menu> listAuthorityMenus(@Param("roleId") Integer roleId);
+
+    List<Menu> listPermissionMenus(@Param("roleId") Integer roleId);
 }

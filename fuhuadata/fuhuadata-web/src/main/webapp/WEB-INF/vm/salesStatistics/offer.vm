@@ -95,7 +95,6 @@
                                 <th class="text-center" lang="zh">企业性质</th>
                                 <th class="text-center" lang="zh">订单总价</th>
                                 <th class="text-center" lang="zh">订单产品</th>
-                                <th class="text-center" lang="zh">备注</th>
                                 <th class="text-center" lang="zh">状态</th>
                             </tr>
                             </thead>
@@ -125,6 +124,7 @@
 <script type="text/javascript" src="${request.contextPath}/lib/js/pagination/pagination.js"></script>
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/js/pagination/pagination.css" />
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
+
 <script type="text/javascript">
     var pageSize = 3;
     var click_node ={oneLevelId:0,twoLevelId:0};//接收目录树点击节点的id及其父id
@@ -162,20 +162,20 @@
     var businessState = ['待下单','失败','已下单'];
     //根据页码获取列表数据
     function getDataList(pageNum,jq){
+        var data = {
+            orderId:$('#orderId').val(),
+            customerName:$('#customerName').val(),
+            orderStatus:$('#businessState').val(),
+            customerLevel:$('#customerLevel').val(),
+            enterpriseNature:$('#enterpriseNature').val(),
+            areaClassId:click_node.oneLevelId,
+            areaId:click_node.twoLevelId,
+            startRow:pageNum*pageSize,
+            pageSize:pageSize
+        };
         jQuery.ajax({
             url: basePath + '/businessOrder/getOfferListPageByQuery',
             dataType:'json',
-            data:{
-                orderId:$('#orderId').val(),
-                customerName:$('#customerName').val(),
-                orderStatus:$('#businessState').val(),
-                customerLevel:$('#customerLevel').val(),
-                enterpriseNature:$('#enterpriseNature').val(),
-                areaClassId:click_node.oneLevelId,
-                areaId:click_node.twoLevelId,
-                startRow:pageNum*pageSize,
-                pageSize:pageSize
-            },
             async:true,
             method:'POST',
             contentType:"application/json",
@@ -192,8 +192,7 @@
                     _html += '  <td lang="zh">'+ResultData[i].enterpriseNature+'</td>';
                     _html += '  <td>'+ResultData[i].amountPayable+'A</td>';
                     _html += '  <td>'+ResultData[i].orderProduct+'</td>';
-                    _html += '  <td lang="zh">'+ResultData[i].name+'</td>';
-                    _html += '  <td lang="zh">'+ResultData[i].remarks+'</td>';
+                    _html += '  <td lang="zh">'+ResultData[i].status+'</td>';
                     _html +='   </tr>';
                 }
                 $("#offerList").html(_html);
@@ -221,23 +220,24 @@
      */
     function getListCount(){
         var total = 0;
+        var data = {
+            areaClassId:click_node.oneLevelId,
+            areaId:click_node.twoLevelId,
+            orderId:$('#orderId').val(),
+            customerName:$('#customerName').val(),
+            orderStatus:$('#businessState').val(),
+            customerLevel:$('#customerLevel').val(),
+            enterpriseNature:$('#enterpriseNature').val()
+        };
         jQuery.ajax({
             url:basePath + '/businessOrder/countOffer',
             dataType:'JSON',
-            data:{
-                areaClassId:click_node.oneLevelId,
-                areaId:click_node.twoLevelId,
-                orderId:$('#orderId').val(),
-                customerName:$('#customerName').val(),
-                orderStatus:$('#businessState').val(),
-                customerLevel:$('#customerLevel').val(),
-                enterpriseNature:$('#enterpriseNature').val()
-            },
             async:false,
             method:'POST',
             contentType:"application/json",
             data:JSON.stringify(data),
             success:function(data){
+                console.log(data);
                 total = data.data;
             }
         });

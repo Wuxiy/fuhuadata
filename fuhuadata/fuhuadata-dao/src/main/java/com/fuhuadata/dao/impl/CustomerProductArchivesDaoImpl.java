@@ -15,7 +15,7 @@ import org.springframework.orm.ibatis.SqlMapClientTemplate;
 public class CustomerProductArchivesDaoImpl extends SqlMapClientTemplate implements CustomerProductArchivesDao {
 
     public static final String ADD = "CUSTOMERPRODUCTARCHIVES.ADD";
-    public static final String UPDATE = "CUSTOMERPRODUCTARCHIVES.UPDATE";
+    public static final String UPDATE = "CUSTOMERPRODUCTARCHIVES.UPDATE-BY-ID";
     public static final String DELETE_BY_ID = "CUSTOMERPRODUCTARCHIVES.DELETE-BY-ID";
     public static final String GET_ALL = "CUSTOMERPRODUCTARCHIVES.GET-ALL";
     public static final String GET_BY_QUERY = "CUSTOMERPRODUCTARCHIVES.GET-BY-QUERY";

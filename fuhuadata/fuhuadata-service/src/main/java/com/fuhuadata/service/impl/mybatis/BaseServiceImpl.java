@@ -3,10 +3,13 @@ package com.fuhuadata.service.impl.mybatis;
 import com.fuhuadata.dao.mapper.BaseMapper;
 import com.fuhuadata.domain.mybatis.BaseEntity;
 import com.fuhuadata.service.mybatis.BaseService;
+import com.fuhuadata.service.util.MybatisUtils;
 import com.fuhuadata.util.ReflectUtils;
+import com.google.common.collect.Lists;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import tk.mybatis.mapper.entity.Example;
 
 import java.io.Serializable;
 import java.util.List;
@@ -42,9 +45,7 @@ public abstract class BaseServiceImpl<E extends BaseEntity<ID>, ID extends Seria
         this.entityClass = ReflectUtils.findParameterizedType(getClass(), 0);
     }
 
-    @Override
     public E get(ID id) {
-        System.out.println("baseMapper 类型：" + baseMapper.getClass());
         return baseMapper.selectByPrimaryKey(id);
     }
 
@@ -72,11 +73,26 @@ public abstract class BaseServiceImpl<E extends BaseEntity<ID>, ID extends Seria
         return baseMapper.insertSelective(entity);
     }
 
+    public int saveList(List<E> entices) {
+        return baseMapper.insertList(entices);
+    }
+
+    public List<ID> saveBatch(List<E> entices) {
+        List<ID> ids = Lists.newArrayList();
+
+        BaseMapper<E, ID> mapperBatch =
+                (BaseMapper<E, ID>) sqlSessionBatch.getMapper(MybatisUtils.getMapperInterface(baseMapper));
+        for (E entity : entices) {
+            mapperBatch.insert(entity);
+            ids.add(entity.getId());
+        }
+        return ids;
+    }
+
     public int update(E entity) {
         return baseMapper.updateByPrimaryKey(entity);
     }
 
-    @Override
     public int update(List<E> entices) {
         int count = 0;
 
@@ -90,13 +106,25 @@ public abstract class BaseServiceImpl<E extends BaseEntity<ID>, ID extends Seria
         return baseMapper.updateByPrimaryKeySelective(entity);
     }
 
-    @Override
     public int updateBatch(List<E> entices) {
         int count = 0;
 
-        BaseMapper<E, ID> mapperBatch = sqlSessionBatch.getMapper(baseMapper.getClass());
+        BaseMapper<E, ID> mapperBatch =
+                (BaseMapper<E, ID>) sqlSessionBatch.getMapper(MybatisUtils.getMapperInterface(baseMapper));
         for (E entity : entices) {
             count += mapperBatch.updateByPrimaryKey(entity);
+        }
+        return count;
+    }
+
+    @Override
+    public int updateBatchSelective(List<E> entices) {
+        int count = 0;
+
+        BaseMapper<E, ID> mapperBatch =
+                (BaseMapper<E, ID>) sqlSessionBatch.getMapper(MybatisUtils.getMapperInterface(baseMapper));
+        for (E entity : entices) {
+            count += mapperBatch.updateByPrimaryKeySelective(entity);
         }
         return count;
     }
@@ -107,6 +135,10 @@ public abstract class BaseServiceImpl<E extends BaseEntity<ID>, ID extends Seria
 
     public int delete(E entity) {
         return baseMapper.delete(entity);
+    }
+
+    public int delete(Example example) {
+        return baseMapper.deleteByExample(example);
     }
 
     protected E newEntity() {

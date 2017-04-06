@@ -91,7 +91,7 @@ public class BusinessInfoAction {
     @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "intoAdd")
     public ModelAndView intoAddBusinessInfo(){
         String businessId = bCodeService.getNextBusinessCode();
-        return new ModelAndView("/businessInfoAdd").addObject("businessId",businessId);
+        return new ModelAndView("/salesStatistics/businessOpportunityAdd").addObject("businessId",businessId);
     }
 
 
@@ -134,6 +134,7 @@ public class BusinessInfoAction {
     @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "getById")
     @ResponseBody
     public ResultPojo getBusinessInfoById(String  businessId){
+        System.out.println(businessId+"11111111111111");
         Result<BusinessInfo> result = new Result<BusinessInfo>();
         try{
             result = businessInfoService.getBusinessInfoByBusinessId(businessId);

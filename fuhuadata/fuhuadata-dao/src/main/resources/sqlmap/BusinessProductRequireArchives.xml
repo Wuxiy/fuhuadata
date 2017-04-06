@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="BusinessProductRequireArchives" >
+  <typeAlias alias="BusinessProductRequireArchives" type="com.fuhuadata.domain.BusinessProductRequireArchives"/>
+  <resultMap id="BusinessProductRequireArchivesResultMap" class="com.fuhuadata.domain.BusinessProductRequireArchives" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="business_product_id" property="businessProductId" jdbcType="INTEGER" />
+    <result column="main_packing_id" property="mainPackingId" jdbcType="INTEGER" />
+    <result column="main_packing_type" property="mainPackingType" jdbcType="VARCHAR" />
+    <result column="specification" property="specification" jdbcType="VARCHAR" />
+    <result column="material" property="material" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="bottle_weight" property="bottleWeight" jdbcType="DECIMAL" />
+    <result column="bottle_cap_color" property="bottleCapColor" jdbcType="VARCHAR" />
+    <result column="bottle_body_color" property="bottleBodyColor" jdbcType="VARCHAR" />
+    <result column="has_cap_logo" property="hasCapLogo" jdbcType="TINYINT" />
+    <result column="has_body_logo" property="hasBodyLogo" jdbcType="TINYINT" />
+    <result column="bottle_diameter" property="bottleDiameter" jdbcType="DECIMAL" />
+    <result column="has_danger_sign" property="hasDangerSign" jdbcType="TINYINT" />
+    <result column="business_check_num" property="businessCheckNum" jdbcType="VARCHAR" />
+    <result column="has_scale_line" property="hasScaleLine" jdbcType="TINYINT" />
+    <result column="has_spray_code" property="hasSprayCode" jdbcType="TINYINT" />
+    <result column="bottle_paste_require" property="bottlePasteRequire" jdbcType="VARCHAR" />
+    <result column="special_require" property="specialRequire" jdbcType="VARCHAR" />
+    <result column="addtional_price" property="addtionalPrice" jdbcType="DECIMAL" />
+    <result column="outer_packing_id" property="outerPackingId" jdbcType="INTEGER" />
+    <result column="sealing_style" property="sealingStyle" jdbcType="VARCHAR" />
+    <result column="outer_packing_other_require" property="outerPackingOtherRequire" jdbcType="VARCHAR" />
+    <result column="auxiliary_material_ids" property="auxiliaryMaterialIds" jdbcType="VARCHAR" />
+    <result column="other_require" property="otherRequire" jdbcType="VARCHAR" />
+    <result column="other_require_price" property="otherRequirePrice" jdbcType="DECIMAL" />
+    <result column="other_require_consumption" property="otherRequireConsumption" jdbcType="DECIMAL" />
+    <result column="img_info" property="imgInfo" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="where-common">
+    where 1=1
+    <isNotEmpty prepend="and" property="id">
+      id = #id#
+    </isNotEmpty>
+    <isNotEmpty prepend="and" property="businessProductId">
+      business_product_id = #businessProductId#
+    </isNotEmpty>
+  </sql>
+
+  <select id="getByQuery" resultMap="BusinessProductRequireArchivesResultMap" parameterClass="BusinessProductRequireArchives" >
+    select id, business_product_id, main_packing_id, main_packing_type, specification, material,
+      model, price, bottle_weight, bottle_cap_color, bottle_body_color, has_cap_logo, has_body_logo,
+      bottle_diameter, has_danger_sign, business_check_num, has_scale_line, has_spray_code,
+      bottle_paste_require, special_require, addtional_price, outer_packing_id, sealing_style,
+      outer_packing_other_require, auxiliary_material_ids, other_require, other_require_price,
+      other_require_consumption, img_info
+    from business_product_require_archives
+    <isParameterPresent >
+      <include refid="where-common"/>
+    </isParameterPresent>
+  </select>
+  
+  
+  <insert id="insert" parameterClass="BusinessProductRequireArchives" >
+    insert into business_product_require_archives (business_product_id, main_packing_id,
+      main_packing_type, specification, material, model, price, bottle_weight, bottle_cap_color,
+      bottle_body_color, has_cap_logo, has_body_logo, bottle_diameter, has_danger_sign,
+      business_check_num, has_scale_line, has_spray_code, bottle_paste_require, special_require,
+      addtional_price, outer_packing_id, sealing_style, outer_packing_other_require,
+      auxiliary_material_ids, other_require, other_require_price, other_require_consumption,
+      img_info)
+    values (#businessProductId#, #mainPackingId#,
+      #mainPackingType#, #specification#, #material#, #model#,
+      #price#, #bottleWeight#, #bottleCapColor#, #bottleBodyColor#,
+      #hasCapLogo#, #hasBodyLogo#, #bottleDiameter#,
+      #hasDangerSign#, #businessCheckNum#, #hasScaleLine#,
+      #hasSprayCode#, #bottlePasteRequire#, #specialRequire#,
+      #addtionalPrice#, #outerPackingId#, #sealingStyle#,
+      #outerPackingOtherRequire#, #auxiliaryMaterialIds#, #otherRequire#,
+      #otherRequirePrice#, #otherRequireConsumption#, #imgInfo#)
+
+    <selectKey resultClass="java.lang.Integer" keyProperty="id">
+      SELECT @@IDENTITY AS ID
+    </selectKey>
+  </insert>
+
+  <update id="update" parameterClass="BusinessProductRequireArchives" >
+    update business_product_require_archives
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="mainPackingId" >
+        main_packing_id = #mainPackingId#
+      </isNotNull>
+      <isNotNull prepend="," property="mainPackingType" >
+        main_packing_type = #mainPackingType#
+      </isNotNull>
+      <isNotNull prepend="," property="specification" >
+        specification = #specification#
+      </isNotNull>
+      <isNotNull prepend="," property="material" >
+        material = #material#
+      </isNotNull>
+      <isNotNull prepend="," property="model" >
+        model = #model#
+      </isNotNull>
+      <isNotNull prepend="," property="price" >
+        price = #price#
+      </isNotNull>
+      <isNotNull prepend="," property="bottleWeight" >
+        bottle_weight = #bottleWeight#
+      </isNotNull>
+      <isNotNull prepend="," property="bottleCapColor" >
+        bottle_cap_color = #bottleCapColor#
+      </isNotNull>
+      <isNotNull prepend="," property="bottleBodyColor" >
+        bottle_body_color = #bottleBodyColor#
+      </isNotNull>
+      <isNotNull prepend="," property="hasCapLogo" >
+        has_cap_logo = #hasCapLogo#
+      </isNotNull>
+      <isNotNull prepend="," property="hasBodyLogo" >
+        has_body_logo = #hasBodyLogo#
+      </isNotNull>
+      <isNotNull prepend="," property="bottleDiameter" >
+        bottle_diameter = #bottleDiameter#
+      </isNotNull>
+      <isNotNull prepend="," property="hasDangerSign" >
+        has_danger_sign = #hasDangerSign#
+      </isNotNull>
+      <isNotNull prepend="," property="businessCheckNum" >
+        business_check_num = #businessCheckNum#
+      </isNotNull>
+      <isNotNull prepend="," property="hasScaleLine" >
+        has_scale_line = #hasScaleLine#
+      </isNotNull>
+      <isNotNull prepend="," property="hasSprayCode" >
+        has_spray_code = #hasSprayCode#
+      </isNotNull>
+      <isNotNull prepend="," property="bottlePasteRequire" >
+        bottle_paste_require = #bottlePasteRequire#
+      </isNotNull>
+      <isNotNull prepend="," property="specialRequire" >
+        special_require = #specialRequire#
+      </isNotNull>
+      <isNotNull prepend="," property="addtionalPrice" >
+        addtional_price = #addtionalPrice#
+      </isNotNull>
+      <isNotNull prepend="," property="outerPackingId" >
+        outer_packing_id = #outerPackingId#
+      </isNotNull>
+      <isNotNull prepend="," property="sealingStyle" >
+        sealing_style = #sealingStyle#
+      </isNotNull>
+      <isNotNull prepend="," property="outerPackingOtherRequire" >
+        outer_packing_other_require = #outerPackingOtherRequire#
+      </isNotNull>
+      <isNotNull prepend="," property="auxiliaryMaterialIds" >
+        auxiliary_material_ids = #auxiliaryMaterialIds#
+      </isNotNull>
+      <isNotNull prepend="," property="otherRequire" >
+        other_require = #otherRequire#
+      </isNotNull>
+      <isNotNull prepend="," property="otherRequirePrice" >
+        other_require_price = #otherRequirePrice#
+      </isNotNull>
+      <isNotNull prepend="," property="otherRequireConsumption" >
+        other_require_consumption = #otherRequireConsumption#
+      </isNotNull>
+      <isNotNull prepend="," property="imgInfo" >
+        img_info = #imgInfo#
+      </isNotNull>
+    </dynamic>
+    <isParameterPresent >
+      <include refid="where-common"/>
+    </isParameterPresent>
+  </update>
+
+</sqlMap>

@@ -38,7 +38,7 @@
                                     </div>
                                     <label class="col-xs-1 control-label" lang="zh">商机编号</label>
                                     <div class="col-xs-2">
-                                        <input class="form-control" type="text" value="" id="businessId" disabled />
+                                        <input class="form-control" type="text" id="businessId" value="${businessId}" disabled />
                                     </div>
                                     <label class="col-xs-1 control-label" lang="zh">商机来源<sup class="not-null">*</sup></label>
                                     <div class="col-xs-2">
@@ -210,16 +210,16 @@
         </div>
     </div>
 
-<input type="hidden" id="businessId" value="${businessId}" />
+#*<input type="hidden" id="businessId" value="${businessId}" />*#
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript" lang="javascript">
     var businessId = $('#businessId').val();
-
+    console.log(businessId);
     $(document).ready(function(){
         //获取信息
-        getData(basePath + '/businessInfo/getBusinessInfoById','POST',businessId,businessInfo);
+        getData(basePath + '/businessInfo/getBusinessInfoById?businessId='+businessId,'POST',businessInfo);
 
         //编辑商机基本信息
         $(document).on('click.edit','#edit',function () {

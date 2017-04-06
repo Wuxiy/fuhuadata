@@ -41,7 +41,7 @@ public class FileController {
     @ResponseBody
     public ResultPojo uploadFile(@RequestParam(value="file") MultipartFile file, HttpServletRequest request) {
         Result result = new Result();
-        String path=null;
+        String path;
         File tempFile=null;
         try {
                 if (!file.isEmpty()) {
@@ -103,6 +103,26 @@ public class FileController {
           return result.getResultPojo();
     }
 
+
+    @RequestMapping(value = "/deleteFileSingle",method = RequestMethod.POST)
+    @ResponseBody
+    public ResultPojo deleteFileSingle(String imagePath){
+        Result result = new Result();
+        try {
+            if (imagePath != null ) {
+                    File file = new File(imagePath);
+                    // 路径为文件且不为空则进行删除
+                    if (file.isFile() && file.exists()) {
+                        file.delete();
+                    }
+                }
+        }catch(Exception e){
+            result.setSuccess(false);
+            log.error("文件删除出错",e);
+        }
+        return result.getResultPojo();
+    }
+
     @RequestMapping(value = "/deleteFile",method = RequestMethod.POST)
     @ResponseBody
     public ResultPojo deleteFile(@RequestBody String[] imagePaths){
@@ -124,6 +144,7 @@ public class FileController {
         return result.getResultPojo();
     }
 
+<<<<<<< HEAD
     @RequestMapping(value = "/deleteFileSingle",method = RequestMethod.POST)
     @ResponseBody
     public ResultPojo deleteFileSingle(String imagePath){
@@ -143,5 +164,7 @@ public class FileController {
         return result.getResultPojo();
     }
 
+=======
+>>>>>>> 15e338190762dff7198faf0f95decdece617559e
 
 }

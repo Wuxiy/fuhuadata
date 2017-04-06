@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.AreaCodeMapper">
+    <resultMap id="BaseResultMap" type="com.fuhuadata.domain.mybatis.AreaCode">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="areaid" jdbcType="VARCHAR" property="areaid"/>
+        <result column="area_name" jdbcType="VARCHAR" property="areaName"/>
+        <result column="e_area_name" jdbcType="VARCHAR" property="eAreaName"/>
+        <result column="parent_id" jdbcType="VARCHAR" property="parentId"/>
+        <result column="areaclass_id" jdbcType="INTEGER" property="areaclassId"/>
+        <result column="level" jdbcType="INTEGER" property="level"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+    </resultMap>
+
+    <sql id="BaseColumns">
+        ar.areaid,
+        ar.area_name,
+        ar.e_area_name,
+        ar.parent_id,
+        ar.areaclass_id,
+        ar.level,
+        ar.create_time,
+        ar.modify_time
+    </sql>
+
+    <sql id="UserAreasPrefixColumns">
+        ar.areaid user_area_areaid,
+        ar.area_name user_area_area_name,
+        ar.e_area_name user_area_e_area_name,
+        ar.parent_id user_area_parent_id,
+        ar.areaclass_id user_area_areaclass_id,
+        ar.level user_area_level,
+        ar.create_time user_area_create_time,
+        ar.modify_time user_area_modify_time
+    </sql>
+
+    <sql id="UserAreasJoin">
+        LEFT JOIN p_user_area us_ar ON us_ar.user_id=ua.id
+        LEFT JOIN p_area_code ar ON ar.areaid=us_ar.area_id
+    </sql>
+</mapper>

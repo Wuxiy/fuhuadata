@@ -90,13 +90,17 @@
                             <tr>
                                 <th class="text-center" lang="zh">订单编号</th>
                                 <th class="text-center" lang="zh">商机编号</th>
+                                <th class="text-center" lang="zh">销售组织</th>
+                                <th class="text-center" lang="zh">外销合同号</th>
                                 <th class="text-center" lang="zh">客户名称</th>
-                                <th class="text-center" lang="zh">客户类型</th>
-                                <th class="text-center" lang="zh">企业性质</th>
-                                <th class="text-center" lang="zh">订单总价</th>
-                                <th class="text-center" lang="zh">订单产品</th>
-                                <th class="text-center" lang="zh">备注</th>
+                                <th class="text-center" lang="zh">国家</th>
+                                <th class="text-center" lang="zh">合同成本价</th>
+                                <th class="text-center" lang="zh">合同总金额</th>
+                                <th class="text-center" lang="zh">是否投诉</th>
+                                <th class="text-center" lang="zh">是否调价</th>
+                                <th class="text-center" lang="zh">合同时间</th>
                                 <th class="text-center" lang="zh">状态</th>
+
                             </tr>
                             </thead>
                             <tbody id="oderList">
@@ -159,20 +163,22 @@
     var businessOpportunity = ['工厂','分销商' ,'经销商' ,'终端客户' ,'其他'];
     //根据页码获取列表数据
     function getDataList(pageNum,jq){
+        var data = {
+            saleOrganizationName:$('#saleOrganizationName').val(),
+            customerName:$('#customerName').val(),
+            orderStatus:$('#businessState').val(),
+            customerLevel:$('#customerLevel').val(),
+            enterpriseNature:$('#enterpriseNature').val(),
+            areaClassId:click_node.oneLevelId,
+            areaId:click_node.twoLevelId,
+            startRow:pageNum*pageSize,
+            pageSize:pageSize
+        }
         jQuery.ajax({
-            url: basePath + '',
+            url: basePath + '/businessOrder/getOrderListPageByQuery',
             dataType:'json',
-            data:{
-                saleOrganizationName:$('#saleOrganizationName').val(),
-                customerName:$('#customerName').val(),
-                orderStatus:$('#businessState').val(),
-                customerLevel:$('#customerLevel').val(),
-                enterpriseNature:$('#enterpriseNature').val(),
-                areaClassId:click_node.oneLevelId,
-                areaId:click_node.twoLevelId,
-                startRow:pageNum*pageSize,
-                pageSize:pageSize
-            },
+            data:JSON.stringify(data),
+            contentType:"application/json",
             async:true,
             method:'POST',
             success:function(data){
@@ -191,7 +197,7 @@
                     _html += '  <td lang="zh">'+(ResultData[i].isComplaint==0?"否":"是")+'</td>';
                     _html +='   <td>'+(ResultData[i].isModifyPrice==0?"否":"是")+'</td>';
                     _html +='   <td>'+ResultData[i].dealTime+'</td>';
-                    _html +='   <td>'+ResultData[i].orderStatus+'</td>';
+                    _html +='   <td>'+ResultData[i].status+'</td>';
                     _html +='   </tr>';
                 }
                 $("#oderList").html(_html);
@@ -219,18 +225,20 @@
      */
     function getListCount(){
         var total = 0;
+        var data = {
+            saleOrganizationName:$('#saleOrganizationName').val(),
+            customerName:$('#customerName').val(),
+            orderStatus:$('#businessState').val(),
+            customerLevel:$('#customerLevel').val(),
+            enterpriseNature:$('#enterpriseNature').val(),
+            areaClassId:click_node.oneLevelId,
+            areaId:click_node.twoLevelId
+        }
         jQuery.ajax({
-            url:basePath + '',
+            url:basePath + '/businessOrder/countOrder',
             dataType:'JSON',
-            data:{
-                saleOrganizationName:$('#saleOrganizationName').val(),
-                customerName:$('#customerName').val(),
-                orderStatus:$('#businessState').val(),
-                customerLevel:$('#customerLevel').val(),
-                enterpriseNature:$('#enterpriseNature').val(),
-                areaClassId:click_node.oneLevelId,
-                areaId:click_node.twoLevelId
-            },
+            data:JSON.stringify(data),
+            contentType:"application/json",
             async:false,
             method:'POST',
             success:function(data){

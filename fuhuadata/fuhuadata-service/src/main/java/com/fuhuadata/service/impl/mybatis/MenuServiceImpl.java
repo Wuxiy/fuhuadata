@@ -2,9 +2,13 @@ package com.fuhuadata.service.impl.mybatis;
 
 import com.fuhuadata.dao.mapper.MenuMapper;
 import com.fuhuadata.domain.mybatis.Menu;
+import com.fuhuadata.domain.plugin.MenuTrees;
 import com.fuhuadata.service.mybatis.MenuService;
+import com.fuhuadata.vo.MenuTreeVo;
+import com.google.common.collect.Sets;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -27,7 +31,7 @@ public class MenuServiceImpl extends BaseTreeableServiceImpl<Menu, Integer>
 
     @Override
     public void deleteSelfAndChildren(Menu self) {
-        ((MenuMapper) baseMapper).deleteSelfAndChildren(self.getId(), self.makeSelfAsNewParentIds());
+        getMenuMapper().deleteSelfAndChildren(self.getId(), self.makeSelfAsNewParentIds());
     }
 
     @Override
@@ -40,7 +44,31 @@ public class MenuServiceImpl extends BaseTreeableServiceImpl<Menu, Integer>
         return getMenuMapper().listSelfAndNextSiblings(parentId, weight);
     }
 
+    @Override
+    public List<Menu> listAuthorityMenus(Integer roleId) {
+        return getMenuMapper().listAuthorityMenus(roleId);
+    }
+
+    @Override
+    public List<MenuTreeVo> listAuthMenuTree(Integer roleId) {
+        List<Menu> menus = listAuthorityMenus(roleId);
+        return getMenuTreeVos(menus);
+    }
+
+    @Override
+    public List<MenuTreeVo> listPermissionMenuTree(Integer roleId) {
+        List<Menu> menus = getMenuMapper().listPermissionMenus(roleId);
+        return getMenuTreeVos(menus);
+    }
+
     private MenuMapper getMenuMapper() {
         return (MenuMapper) baseMapper;
+    }
+
+    private List<MenuTreeVo> getMenuTreeVos(List<Menu> menus) {
+        menus.add(getRoot());
+        HashSet<Integer> parentIds = Sets.newHashSet(getRoot().getId());
+
+        return new MenuTrees(menus, parentIds).convertToTreeList();
     }
 }

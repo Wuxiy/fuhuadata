@@ -39,8 +39,8 @@ public class PackingCategoryManagerImpl implements PackingCategoryManager {
     }
 
     @Override
-    public List<PackingCategoryVO> getAllByLevel() {
-        return packingCategoryDao.getAllByLevel();
+    public List<PackingCategoryVO> getAllByLevel(String parentIds) {
+        return packingCategoryDao.getAllByLevel(parentIds);
     }
 
     @Override

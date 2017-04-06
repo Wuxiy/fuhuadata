@@ -17,13 +17,13 @@
                     <div class="panel-body clearfix">
                         <div class="form-horizontal">
                             <div class="form-group ">
+                                <label class="col-xs-1 control-label" lang="zh">商机编号</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" type="text" value="${businessId}" id="businessId" disabled />
+                                </div>
                                 <label class="col-xs-1 control-label" lang="zh">商机名称<sup class="not-null">*</sup></label>
                                 <div class="col-xs-2">
                                     <input class="form-control notnull" type="text" value="" id="businessName" disabled />
-                                </div>
-                                <label class="col-xs-1 control-label" lang="zh">商机编号</label>
-                                <div class="col-xs-2">
-                                    <input class="form-control" type="text" value="" id="businessId" disabled />
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">商机来源<sup class="not-null">*</sup></label>
                                 <div class="col-xs-2">
