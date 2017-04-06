@@ -73,8 +73,13 @@ public class PackingArchivesAction {
         packingArchives.setSmallCategoryId(sid);
         packingArchives.setPackName(name);
         int packId = Integer.valueOf(bCodeService.getNextPackagingMaterialCode(packingArchives));
-        return new ModelAndView("knowledgeBase/packingCostAdd").addObject("packId",packId).addObject("bid",bid).addObject("sid",sid);}
+        return new ModelAndView("knowledgeBase/packingCostAdd").addObject("packId",packId).addObject("bid",bid).addObject("sid",sid).addObject("name",name);}
 
+    /**
+     * do add
+     * @param packingArchives
+     * @return
+     */
     @RequestMapping(value = "/doAddPackingArchives",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "doAdd")
     @ResponseBody
