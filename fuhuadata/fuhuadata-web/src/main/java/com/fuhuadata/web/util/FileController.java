@@ -41,7 +41,7 @@ public class FileController {
     @ResponseBody
     public ResultPojo uploadFile(@RequestParam(value="file") MultipartFile file, HttpServletRequest request) {
         Result result = new Result();
-        String path=null;
+        String path;
         File tempFile=null;
         try {
                 if (!file.isEmpty()) {
