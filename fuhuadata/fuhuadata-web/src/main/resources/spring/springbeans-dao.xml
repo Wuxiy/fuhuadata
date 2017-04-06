@@ -72,10 +72,10 @@
 
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
-            <tx:method name="save*" propagation="REQUIRES_NEW"/>
-            <tx:method name="update*" propagation="REQUIRES_NEW"/>
-            <tx:method name="delete*" propagation="REQUIRES_NEW"/>
-            <tx:method name="add*" propagation="REQUIRES_NEW"/>
+            <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="add*" propagation="REQUIRED"/>
 
             <tx:method name="get*" propagation="REQUIRED" read-only="true"/>
             <tx:method name="count*" propagation="REQUIRED" read-only="true"/>
