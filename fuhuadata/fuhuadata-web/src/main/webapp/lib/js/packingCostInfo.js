@@ -2,16 +2,13 @@
  * Created by young on 2017/3/7.
  */
 
-    $('.form-btn').hide();
-    $('#finish').hide();
     //分割url，获取上个页面传过来的id
-    var thisURL = document.URL;
+    /*var thisURL = document.URL;
     var trans = thisURL.split('?')[1];
     var trans1 = trans.split('&')[0];
     var trans2 = trans.split('&')[1];
     var id = trans1.split('=')[1];
-    var bid = trans2.split('=')[1];
-    console.log(bid);
+    var bid = trans2.split('=')[1];*/
     var table = document.getElementById('packing_relate_table');
     var imgContent = document.getElementById('imgContent');
 
@@ -74,8 +71,8 @@ $(document).ready(function(){
                 for(var j=0;j<reData.length;j++){
                     imgContent.innerHTML += '<div class="col-xs-3">'+
                         '<img src="../'+reData[j].path+'" class="fileimg" width="300px" height="200px" style="margin-bottom:2%">'+
-                        '<input type="file" name="file" style="margin-bottom:2%"><div>'+
-                        '<input type="text" name="file" class="filename" data-url="'+reData[j].path+'" style="margin-bottom:2%" value="'+reData[j].name+'">'+
+                        '<input type="file" name="file" style="margin-bottom:2%" disabled><div>'+
+                        '<input type="text" name="file" class="filename" data-url="'+reData[j].path+'" style="margin-bottom:2%" value="'+reData[j].name+'" disabled>'+
                         '</div>'+
                         '</div>';
                 }
@@ -115,11 +112,11 @@ function fsubmit(){
 function imgArr(){
     var arr=[];
     $('.filename').each(function(){
-        var objt ={
+        var obj ={
             "name":$(this).val(),
             "path":$(this).attr('data-url')
         };
-        arr.push(objt);
+        arr.push(obj);
     })
     return JSON.stringify(arr);
 }
@@ -136,25 +133,32 @@ function checkboxArr() {
     return JSON.stringify(checkboxarr);
 }
 
-//编辑
-    $('#edit').on('click',function(){
-        var celledit = $(".cell_edit");
-        console.log(celledit.length);
-
-        celledit.each(function(){
-            $(this).prop('disabled',false);
-        })
-        if($('#finish').hide()){
-            $('#finish').show();
-        }
-
-    })
+//baocai编辑
+$(document).on('click.edit','#edit',function () {
+});
+//baocai信息取消提交
+$(document).on('click.cancel','#cancel',function(){
+});
 
 //编辑完成保存
     $('#finish').on('click',function(){
+
+        var names = [];
+        $('.filename').each(function(){
+            names.push($(this).val());
+        })
+        var newnames = names.sort();
+        console.log(newnames);
+        for(var i=0;i<newnames.length;i++) {
+            if (newnames[i] == newnames[i + 1]) {
+                alert('请输入不容的图片规格型号！');
+                return false;
+            }
+        }
+
         var url = basePath+'/packingArchives/doModify';
         var data = {
-            "packingId":id,
+            "packingId":jQuery('#id').val(),
             "packName": jQuery('#packName').val(),
             "spec": jQuery('#spec').val(),
             "size": jQuery('#size').val(),
@@ -289,6 +293,8 @@ $('#finish_relate').on('click',function(){
         alert('还未选择要添加的关联');
     }
 })
+
+
 
 
 

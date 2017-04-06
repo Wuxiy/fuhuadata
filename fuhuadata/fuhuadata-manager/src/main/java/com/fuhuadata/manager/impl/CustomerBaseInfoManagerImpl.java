@@ -13,8 +13,6 @@ import com.fuhuadata.dao.CustomerBaseInfoDao;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
-import com.ibatis.sqlmap.client.SqlMapClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;

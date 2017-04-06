@@ -67,10 +67,19 @@ public class PackingArchivesAction {
      */
     @RequestMapping(value = "/addPackingArchives",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "add")
-    public ModelAndView addPackingArchives(PackingArchives packingArchives){
+    public ModelAndView addPackingArchives(String name,int bid,int sid){
+        PackingArchives packingArchives = new PackingArchives();
+        packingArchives.setBigCategoryId(bid);
+        packingArchives.setSmallCategoryId(sid);
+        packingArchives.setPackName(name);
         int packId = Integer.valueOf(bCodeService.getNextPackagingMaterialCode(packingArchives));
-        return new ModelAndView("knowledgeBase/packingCostAdd").addObject("packId",packId);}
+        return new ModelAndView("knowledgeBase/packingCostAdd").addObject("packId",packId).addObject("bid",bid).addObject("sid",sid).addObject("name",name);}
 
+    /**
+     * do add
+     * @param packingArchives
+     * @return
+     */
     @RequestMapping(value = "/doAddPackingArchives",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-packingCost",methods = "doAdd")
     @ResponseBody
@@ -252,6 +261,27 @@ public class PackingArchivesAction {
             return result.getResultPojo();
         }catch(Exception e){
             log.error("根据PId获取包材成本档案信息错误",e);
+        }
+        return null;
+    }
+
+    /**
+     * 判断订单产品包装表有无此包材此型号图片)
+     * @param
+     * @return
+     */
+    @RequestMapping(value="/judgeImageModelToUse")
+    @SystemLogAnnotation(module = "knowledgeBase-packingArchives",methods = "judgeImageModelToUse")
+    @ResponseBody
+    public ResultPojo judgeImageModelToUse(int packId,String name){
+        try{
+            Result result = new Result();
+            //
+            result.setCode(1);
+            result.setMessage("允许删除，请确认");
+            return result.getResultPojo();
+        }catch(Exception e){
+            log.error("删除包材图片型号出错",e);
         }
         return null;
     }

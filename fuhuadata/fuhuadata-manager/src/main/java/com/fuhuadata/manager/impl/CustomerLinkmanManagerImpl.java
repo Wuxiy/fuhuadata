@@ -1,5 +1,4 @@
 package com.fuhuadata.manager.impl;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 
@@ -8,16 +7,10 @@ import com.fuhuadata.domain.query.QueryCustomerLinkman;
 import com.fuhuadata.manager.CustomerLinkmanManager;
 import com.fuhuadata.dao.CustomerLinkmanDao;
 import com.fuhuadata.domain.CustomerLinkman;
-import com.fuhuadata.util.StringUtil;
-import com.ibatis.sqlmap.client.SqlMapClient;
-import com.ibatis.sqlmap.engine.mapping.sql.Sql;
-import com.sun.scenario.effect.impl.state.LinearConvolveKernel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 /**
  * @author wangbo

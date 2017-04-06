@@ -7,7 +7,6 @@ import com.fuhuadata.manager.ExhibitionInfoManager;
 import com.fuhuadata.domain.query.Result;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 

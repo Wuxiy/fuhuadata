@@ -10,13 +10,15 @@
                         <h3 class="panel-title" lang="zh">包装要求</h3>
                     </div>
                     <div class="panel-body clearfix">
-                        <div class="form-group">
-                            <label for="" class="control-label col-xs-1">主材选择</label>
-                            <div class="col-xs-2">
-                                <div class="input-group">
-                                    <input class="form-control" type="text">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-xs btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label for="" class="control-label col-xs-1">主材选择</label>
+                                <div class="col-xs-2">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-xs btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

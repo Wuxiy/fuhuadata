@@ -1,7 +1,6 @@
 package com.fuhuadata.web.springmvc;
 
 import com.fuhuadata.domain.FreightCost;
-import com.fuhuadata.domain.SystemLog;
 import com.fuhuadata.domain.query.FreightCostQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
@@ -108,6 +107,7 @@ public class FreightCostAction {
     public ResultPojo  doModify(int id,@RequestBody FreightCost freightCost){
         try{
             Result<FreightCost> result = freightCostService.updateFreightCostById(id,freightCost);
+            return result.getResultPojo();
         }catch(Exception e){
             log.error("更新运费成本错误",e);
         }

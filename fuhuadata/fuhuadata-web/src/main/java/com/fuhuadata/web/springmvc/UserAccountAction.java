@@ -5,11 +5,6 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import com.fuhuadata.web.util.SystemLogAnnotation;
-import com.fuhuadata.domain.SaleCustomer;
-import com.fuhuadata.domain.query.QuerySaleCustomer;
-import com.fuhuadata.service.SaleCustomerService;
-import com.fuhuadata.domain.SaleCustomer;
-import com.fuhuadata.domain.query.QuerySaleCustomer;
 import com.fuhuadata.service.SaleCustomerService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

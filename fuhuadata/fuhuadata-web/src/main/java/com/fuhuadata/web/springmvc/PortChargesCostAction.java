@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -110,13 +111,22 @@ public class PortChargesCostAction {
         return new ModelAndView("knowledgeBase/modifyPortChargesCost");
     }
 
+
+    /**
+     * do update
+     * @param portChargesCosts
+     * @return
+     */
     @RequestMapping(value="/doModifyPortChargesCost",method=RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-portChargesCost",methods = "doAdd")
     @ResponseBody
-    public ResultPojo doModifyPortChargesCost(int id,@RequestBody PortChargesCost portChargesCost){
+    public ResultPojo doModifyPortChargesCost(@RequestBody PortChargesCost[] portChargesCosts){
         try{
-            Result<PortChargesCost> result = portChargesCostService.updatePortChargesCostById(id,portChargesCost);
-            return result.getResultPojo();
+            if(portChargesCosts!=null&&portChargesCosts.length>0){
+                Result<PortChargesCost> result = portChargesCostService.updatePortChargesCostById(Arrays.asList(portChargesCosts));
+                return result.getResultPojo();
+            }
+
         }catch(Exception e){
             log.error("修改港杂费信息错误",e);
         }

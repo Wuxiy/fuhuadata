@@ -28,8 +28,8 @@ public class PortChargesCostManagerImpl implements PortChargesCostManager{
     }
 
     @Override
-    public boolean updatePortChargesCostById(int id, PortChargesCost portChargesCost) {
-        return portChargesCostDao.updatePortChargesCostById(id,portChargesCost)==1 ?true:false;
+    public boolean updatePortChargesCostById(List<PortChargesCost> portChargesCost) {
+        return portChargesCostDao.updatePortChargesCostById(portChargesCost);
     }
 
     @Override

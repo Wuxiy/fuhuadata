@@ -1,6 +1,5 @@
 package com.fuhuadata.web.springmvc;
 
-import com.fuhuadata.domain.CustomerVisitRecord;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.CustomerVisitRecordService;

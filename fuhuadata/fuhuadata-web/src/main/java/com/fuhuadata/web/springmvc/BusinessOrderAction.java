@@ -27,9 +27,16 @@ public class BusinessOrderAction {
     private BusinessOrderService businessOrderService;
 
 
+    @RequestMapping("/intoBusinessOffer")
+    @SystemLogAnnotation(module = "salesStatistics-businessOrder",methods = "intoOffer")
+    public ModelAndView intoBusinessOffer(){
+        return new ModelAndView("salesStatistics/offer");
+    }
+
     @RequestMapping("/intoBusinessOrder")
+    @SystemLogAnnotation(module = "salesStatistics-businessOrder",methods = "intoOffer")
     public ModelAndView intoBusinessOrder(){
-        return new ModelAndView("salesStatistics/placeOrder");
+        return new ModelAndView("salesStatistics/order");
     }
 
     /**

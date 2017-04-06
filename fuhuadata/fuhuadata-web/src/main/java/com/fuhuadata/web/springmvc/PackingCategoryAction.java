@@ -1,10 +1,8 @@
 package com.fuhuadata.web.springmvc;
 
 import com.fuhuadata.domain.PackingCategory;
-import com.fuhuadata.domain.ProductCategory;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
-import com.fuhuadata.service.PackingArchivesService;
 import com.fuhuadata.service.PackingCategoryService;
 import com.fuhuadata.vo.CategoryTree;
 import com.fuhuadata.web.util.SystemLogAnnotation;

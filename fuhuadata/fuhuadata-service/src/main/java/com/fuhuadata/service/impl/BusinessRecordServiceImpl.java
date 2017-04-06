@@ -3,7 +3,6 @@ package com.fuhuadata.service.impl;
 import com.fuhuadata.domain.BusinessRecord;
 import com.fuhuadata.domain.query.QueryBusinessRecord;
 import com.fuhuadata.domain.query.Result;
-import com.fuhuadata.manager.BusinessInfoManager;
 import com.fuhuadata.manager.BusinessRecordManager;
 import com.fuhuadata.service.BusinessRecordService;
 import org.apache.commons.logging.Log;

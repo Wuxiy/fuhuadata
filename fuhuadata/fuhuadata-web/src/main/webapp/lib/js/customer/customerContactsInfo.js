@@ -20,7 +20,7 @@ $(document).ready(function(){
             }
         })
     });
-    //客户基本信息取消提交
+    //联系人基本信息取消提交
     $(document).on('click.cancel','#cancel',function(){
         location.reload();
     });

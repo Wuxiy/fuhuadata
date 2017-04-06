@@ -41,6 +41,15 @@
             <isNotNull prepend=" AND " property="customerLevel">
                 base.customer_level = #customerLevel#
             </isNotNull>
+            <isNotEqual property="areaClassId" compareValue="0" prepend=" AND ">
+                 base.customer_area_id = #areaClassId#
+                <isNotEqual property="areaId" compareValue="0" prepend=" AND ">
+                    base.country_id = #areaId#
+                </isNotEqual>
+            </isNotEqual>
+            <isNotEmpty prepend=" AND " property="enterpriseNature">
+                nature.customer_id=base.customer_id
+            </isNotEmpty>
         </dynamic>
     </sql>
 
@@ -234,18 +243,6 @@
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>
         </isParameterPresent>
-
-        <isNotEmpty prepend=" AND " property="enterpriseNature">
-            nature.customer_id=base.customer_id
-        </isNotEmpty>
-
-        <isNotEqual property="areaClassId" compareValue="0">
-            and base.customer_area_id = #areaClassId#
-            <isNotEqual property="areaId" compareValue="0">
-                and	base.country_id = #areaId#
-            </isNotEqual>
-        </isNotEqual>
-
         LIMIT #startRow#,#pageSize#
     </select>
 
@@ -262,14 +259,5 @@
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>
         </isParameterPresent>
-        <isNotEqual property="areaClassId" compareValue="0">
-            and base.customer_area_id = #areaClassId#
-            <isNotEqual property="areaClassId" compareValue="0">
-                and	base.country_id = #areaId#
-            </isNotEqual>
-        </isNotEqual>
-        <isNotEmpty prepend=" AND " property="enterpriseNature">
-        nature.customer_id=base.customer_id
-        </isNotEmpty>
     </select>
 </sqlMap>

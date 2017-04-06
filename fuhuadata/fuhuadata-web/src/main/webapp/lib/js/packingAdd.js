@@ -2,18 +2,6 @@
  * Created by young on 2017/3/6.
  */
 
-    var thisURL = document.URL;
-    var ni = thisURL.split('?')[1];
-    var names = ni.split('&')[0];
-    var bids = ni.split('&')[1];
-    var sids = ni.split('&')[2];
-    var name = decodeURI(names.split('=')[1]);
-    var bid = bids.split('=')[1];
-    var sid = sids.split('=')[1];
-    console.log(sid);
-    var names = document.getElementById('packName');
-    names.value = name;
-
     var img = $("input[name='file']");
 
     var addTbody = document.getElementById('add_tbody');
@@ -67,11 +55,11 @@ function checkboxArr() {
 function imgArr(){
     var arr=[];
     $('.filename').each(function(){
-        var objt ={
+        var obj ={
             "name":$(this).val(),
             "path":$(this).attr('data-url'),
         };
-        arr.push(objt);
+        arr.push(obj);
     })
     return JSON.stringify(arr);
 }
@@ -150,10 +138,24 @@ function Ids() {
 
 //新增完成
 $('.packingAdd').on('click',function(){
+
+    var names = [];
+    $('.filename').each(function(){
+        names.push($(this).val());
+    })
+    var newnames = names.sort();
+    console.log(newnames);
+    for(var i=0;i<newnames.length;i++) {
+        if (newnames[i] == newnames[i + 1]) {
+            alert('请输入不容的图片规格型号！');
+            return false;
+        }
+    }
+
     var url = basePath+'/packingArchives/doAddPackingArchives';
     var data = {
-        "bigCategoryId":bid,
-        "smallCategoryId":sid,
+        "bigCategoryId":jQuery('#bid').val(),
+        "smallCategoryId":jQuery('#sid').val(),
         "packName": jQuery('#packName').val(),
         "spec": jQuery('#spec').val(),
         "size": jQuery('#size').val(),
@@ -203,8 +205,5 @@ $('#modal_checkAll').on('click',function(){
 })
 
 
-$('.update').hover(function(){
-
-})
 
 

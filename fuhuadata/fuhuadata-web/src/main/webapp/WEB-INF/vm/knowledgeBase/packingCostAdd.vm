@@ -23,7 +23,7 @@
                             <div class="form-group ">
                                 <label class="col-xs-1 control-label">包材类型名称</label>
                                 <div class="col-xs-3">
-                                    <input class="form-control" type="text" id="packName"/>
+                                    <input class="form-control" type="text" id="packName" value="$!{name}" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label">规格</label>
                                 <div class="col-xs-3">
@@ -227,6 +227,10 @@
         </div>
     </div>
 </div>
+
+<input type="hidden" id="bid" value='$!{bid}'>
+<input type="hidden" id="sid" value="$!{sid}" />
+<input type="hidden" id="id" value="$!{packId}" />
 
 <script type="text/javascript" src="${request.contextPath}/lib/js/packingAdd.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>

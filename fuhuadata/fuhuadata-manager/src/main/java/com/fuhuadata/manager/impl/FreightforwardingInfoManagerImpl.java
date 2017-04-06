@@ -6,7 +6,6 @@ import com.fuhuadata.domain.FreightforwardingInfo;
 import com.fuhuadata.dao.FreightforwardingInfoDao;
 import com.fuhuadata.manager.FreightforwardingInfoManager;
 import javax.annotation.Resource;
-import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 
 /**

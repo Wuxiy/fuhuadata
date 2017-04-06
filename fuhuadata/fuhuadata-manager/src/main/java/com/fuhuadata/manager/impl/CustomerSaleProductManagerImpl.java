@@ -6,7 +6,6 @@ import com.fuhuadata.manager.CustomerSaleProductManager;
 import com.fuhuadata.domain.CustomerSaleProduct;
 import com.fuhuadata.domain.query.Result;
 import javax.annotation.Resource;
-import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 
 /**

@@ -163,7 +163,7 @@
     //根据页码获取列表数据
     function getDataList(pageNum,jq){
         jQuery.ajax({
-            url: basePath + '',
+            url: basePath + '/businessOrder/getOfferListPageByQuery',
             dataType:'json',
             data:{
                 orderId:$('#orderId').val(),
@@ -178,6 +178,8 @@
             },
             async:true,
             method:'POST',
+            contentType:"application/json",
+            data:JSON.stringify(data),
             success:function(data){
                 var ResultData = data.data;
                 var _html = '';
@@ -220,7 +222,7 @@
     function getListCount(){
         var total = 0;
         jQuery.ajax({
-            url:basePath + '',
+            url:basePath + '/businessOrder/countOffer',
             dataType:'JSON',
             data:{
                 areaClassId:click_node.oneLevelId,
@@ -233,6 +235,8 @@
             },
             async:false,
             method:'POST',
+            contentType:"application/json",
+            data:JSON.stringify(data),
             success:function(data){
                 total = data.data;
             }

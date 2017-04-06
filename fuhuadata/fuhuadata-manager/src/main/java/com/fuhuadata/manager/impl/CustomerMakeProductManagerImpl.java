@@ -6,7 +6,6 @@ import com.fuhuadata.domain.query.CustomerMakeProductQuery;
 import com.fuhuadata.manager.CustomerMakeProductManager;
 
 import javax.annotation.Resource;
-import javax.mail.Flags;
 import java.util.List;
 
 /**

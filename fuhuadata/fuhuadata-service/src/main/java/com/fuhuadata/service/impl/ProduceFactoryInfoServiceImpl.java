@@ -6,9 +6,6 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.ProduceFactoryInfoManager;
 import com.fuhuadata.domain.ProduceFactoryInfo;
 import javax.annotation.Resource;
-import org.springframework.stereotype.Component;
-import java.util.Map;
-import java.io.Serializable;
 
 /**
  * @author wangbo

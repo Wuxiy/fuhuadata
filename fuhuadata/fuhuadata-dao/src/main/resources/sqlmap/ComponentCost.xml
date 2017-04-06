@@ -20,7 +20,14 @@
     <resultMap id="GET-COMPONENTCOST-MAP" class="ComponentCost">
         <result column="component_id" property="componentId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result column="component_name" property="componentName" jdbcType="VARCHAR" javaType="java.lang.String" />
-        <result column="consumption" property="consumption" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="price_end" property="priceEnd" jdbcType="DATE" javaType="java.sql.Date"/>
+        <result column="unit_cost" property="unitCost" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    </resultMap>
+
+    <resultMap id="GET-COMPONENTCOST-BY-CATEGORY-MAP" class="ComponentCost">
+        <result column="component_id" property="componentId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="component_name" property="componentName" jdbcType="VARCHAR" javaType="java.lang.String" />
         <result column="price_end" property="priceEnd" jdbcType="DATE" javaType="java.sql.Date"/>
         <result column="unit_cost" property="unitCost" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="remarks" property="remarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
@@ -129,12 +136,20 @@
         ]]>
     </select>
 
+    <!--根据成分id查找产品成分-->
     <select id="GET-PRODUCTCOMPONENT-BY-COMPONENT-ID" resultMap="ProductComponent-Map" parameterClass="java.lang.Integer">
         <![CDATA[
                   select * from k_product_component where component_id = #id#
         ]]>
     </select>
-
+    <!--根据品类id查找成分价格-->
+    <select id="GET-COMPONENT-BY-CATEGORY-ID" resultMap="GET-COMPONENTCOST-BY-CATEGORY-MAP" parameterClass="java.lang.Integer">
+        <![CDATA[
+                        SELECT a.* FROM k_component_cost a
+            LEFT JOIN k_product_component b ON b.component_id = a.component_id
+            WHERE b.product_category_id = #productCategoryId#
+       ]]>
+    </select>
 
     <select id="GET-PAGE" resultMap="COMPONENTCOST-MAP" parameterClass="ComponentCostQuery">
         <![CDATA[

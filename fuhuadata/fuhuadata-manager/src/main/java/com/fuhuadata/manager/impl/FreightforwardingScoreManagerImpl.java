@@ -6,7 +6,6 @@ import java.util.List;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.dao.FreightforwardingScoreDao;
 import javax.annotation.Resource;
-import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 
 /**
