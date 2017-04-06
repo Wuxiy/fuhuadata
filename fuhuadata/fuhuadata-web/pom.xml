@@ -110,13 +110,6 @@
         </dependency>
         <!-- velocity end -->
 
-        <!-- APAPCHE LANG BEGIN -->
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-        </dependency>
-        <!-- APAPCHE LANG END -->
-
         <!-- apache commons begin -->
         <dependency>
             <groupId>commons-codec</groupId>

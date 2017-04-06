@@ -36,6 +36,8 @@ public abstract class BaseTreeableController<E extends BaseEntity<ID> & Treeable
         this.baseService = baseService;
     }
 
+    protected abstract String getDefaultOrderBy();
+
     @RequestMapping(value = "ajax/load", method = RequestMethod.GET)
     @ResponseBody
     public ResultPojo load(HttpServletRequest request,
@@ -43,7 +45,7 @@ public abstract class BaseTreeableController<E extends BaseEntity<ID> & Treeable
                            @RequestParam(value = "searchName", required = false) String searchName,
                            @RequestParam(value = "parentId", required = false) ID parentId) {
 
-        String defaultOrderBy = "parent_ids asc, order_index asc";
+        String defaultOrderBy = getDefaultOrderBy();
         Example example = new Example(entityClass);
         example.setOrderByClause(defaultOrderBy);
 

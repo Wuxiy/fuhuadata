@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.UserAccountMapper">
+    <resultMap id="BaseResultMap" type="com.fuhuadata.domain.mybatis.UserAccount">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="login_name" jdbcType="VARCHAR" property="loginName"/>
+        <result column="login_password" jdbcType="VARCHAR" property="loginPassword"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="birthdate" jdbcType="DATE" property="birthdate"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="pk_group" jdbcType="VARCHAR" property="pkGroup"/>
+        <result column="pk_org" jdbcType="VARCHAR" property="pkOrg"/>
+        <result column="pk_psndoc" jdbcType="VARCHAR" property="pkPsndoc"/>
+        <result column="last_modify_time" jdbcType="TIMESTAMP" property="lastModifyTime"/>
+    </resultMap>
+
+    <!-- 用户地区映射 -->
+    <resultMap id="UserAreasMap" type="com.fuhuadata.domain.mybatis.UserAccount"
+               extends="BaseResultMap">
+        <collection property="areas" columnPrefix="area_"
+                    ofType="com.fuhuadata.domain.mybatis.AreaCode"
+                    resultMap="com.fuhuadata.dao.mapper.AreaCodeMapper.BaseResultMap"/>
+    </resultMap>
+
+    <!-- p_user_account 缩写 ua -->
+    <sql id="BaseColumns">
+        ua.id,
+        ua.login_name,
+        ua.login_password,
+        ua.name,
+        ua.mobile,
+        ua.birthdate,
+        ua.code,
+        ua.pk_group,
+        ua.pk_org,
+        ua.pk_psndoc,
+        ua.last_modify_time
+    </sql>
+
+    <sql id="PrefixColumns">
+        ua.id user_id,
+        ua.login_name user_login_name,
+        ua.login_password user_login_password,
+        ua.name user_name,
+        ua.mobile user_mobile,
+        ua.birthdate user_birthdate,
+        ua.code user_code,
+        ua.pk_group user_pk_group,
+        ua.pk_org user_pk_org,
+        ua.pk_psndoc user_pk_psndoc,
+        ua.last_modify_time user_last_modify_time
+    </sql>
+</mapper>

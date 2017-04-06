@@ -1,5 +1,9 @@
 package com.fuhuadata.util;
 
+import com.google.common.collect.Sets;
+import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.*;
 
 /**
@@ -126,7 +130,31 @@ public class StringUtil {
         return preStr+numStr;
     }
 
+    /**
+     * 将字符串分割为特定类型的set
+     *
+     * @param str
+     * @param separatorChars
+     * @param clazz
+     * @param <T>
+     * @return
+     */
+    public static <T> Set<T> splitToTypeSet(String str, String separatorChars, Class<T> clazz) {
+        Set<T> result = Sets.newHashSet();
 
+        if (StringUtils.isEmpty(str)) {
+            return result;
+        }
+
+        String[] values = StringUtils.split(str, separatorChars);
+        for (String value : values) {
+            if (StringUtils.isNotEmpty(value)) {
+                result.add((T) ConvertUtils.convert(value, clazz));
+            }
+        }
+
+        return result;
+    }
 
 
 }

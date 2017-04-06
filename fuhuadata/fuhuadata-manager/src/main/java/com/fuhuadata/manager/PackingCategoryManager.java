@@ -21,7 +21,7 @@ public interface PackingCategoryManager {
 
     public List<PackingCategory> getPackingCategoryByPId(int id);
 
-    public List<PackingCategoryVO> getAllByLevel();
+    public List<PackingCategoryVO> getAllByLevel(String parentIds);
 
     public PackingCategory getPackingCategoryById(int id);
 

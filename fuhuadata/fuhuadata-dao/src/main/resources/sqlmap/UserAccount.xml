@@ -55,7 +55,7 @@
 	
 	<insert id="ADD" parameterClass="UserAccount">
 		INSERT INTO 
-		fuhua_user_account(id,name,create_time,modify_time) 
+		p_user_account(id,name,create_time,modify_time)
 		VALUES(#id#,#name#,now(),now())
 		<selectKey resultClass="int" keyProperty="id">
 			SELECT @@IDENTITY AS ID
@@ -63,7 +63,7 @@
 	</insert>
 	
 	<update id="UPDATE" parameterClass="UserAccount">
-		UPDATE fuhua_user_account
+		UPDATE p_user_account
 		<dynamic prepend=" SET ">
 						<isNotNull prepend=", " property="name">name=#name#</isNotNull>
 						<isNotNull prepend=", " property="modifyTime">modify_time=now()</isNotNull>
@@ -73,24 +73,24 @@
 	
 	<!--  <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
 		<![CDATA[
-			UPDATE fuhua_user_account SET status=1 WHERE id=#id#
+			UPDATE p_user_account SET status=1 WHERE id=#id#
 		]]>
 	</delete>-->
 	<delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
 		<![CDATA[
-			DELETE FROM fuhua_user_account WHERE id=#id#
+			DELETE FROM p_user_account WHERE id=#id#
 		]]>
 	</delete>
 	
 	<select id="GET-ALL" resultMap="USERACCOUNT-MAP">
 		<![CDATA[
-			SELECT * FROM fuhua_user_account
+			SELECT * FROM p_user_account
 		]]>
 	</select>
 	
 	<select id="GET-BY-QUERY" resultMap="USERACCOUNT-MAP" parameterClass="UserAccountQuery">
 		<![CDATA[
-			SELECT * FROM fuhua_user_account
+			SELECT * FROM p_user_account
 		]]>
 		<isParameterPresent>   
             <include refid="QUERY-COMMON" />   
@@ -99,13 +99,13 @@
 	
 	<select id="GET-BY-ID" resultMap="USERACCOUNT-MAP" parameterClass="java.lang.Integer">
 		<![CDATA[
-			SELECT * FROM fuhua_user_account WHERE id=#id#
+			SELECT * FROM p_user_account WHERE id=#id#
 		]]>
 	</select>
 	
 	<select id="GET-PAGE" resultMap="USERACCOUNT-MAP" parameterClass="UserAccountQuery">
 		<![CDATA[
-			SELECT * FROM fuhua_user_account
+			SELECT * FROM p_user_account
 		]]>
 		<isParameterPresent>   
             <include refid="PAGE-COMMON" />   
@@ -115,7 +115,7 @@
 	
 	<select id="COUNT" resultClass="java.lang.Integer" parameterClass="UserAccountQuery">
 		<![CDATA[
-			SELECT COUNT(id) FROM fuhua_user_account
+			SELECT COUNT(id) FROM p_user_account
 		]]>
 		<isParameterPresent>   
             <include refid="PAGE-COMMON" />   

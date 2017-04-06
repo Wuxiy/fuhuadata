@@ -19,6 +19,6 @@ public interface PackingCategoryService {
 
     public Result<List<PackingCategory>> getAll();
 
-    public Result<List<CategoryTree>> getAllByTree();
+    public Result<List<CategoryTree>> getAllByTree(String parentIds);
 
 }

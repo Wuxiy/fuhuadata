@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="BusinessOrderProductComponent" >
+  <typeAlias alias="BusinessOrderProductComponent" type="com.fuhuadata.domain.BusinessOrderProductComponent"/>
+  <resultMap id="BusinessOrderProductComponentResultMap" class="com.fuhuadata.domain.BusinessOrderProductComponent" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="product_id" property="productId" jdbcType="INTEGER" />
+    <result column="component_id" property="componentId" jdbcType="INTEGER" />
+    <result column="component_name" property="componentName" jdbcType="VARCHAR" />
+    <result column="consumption" property="consumption" jdbcType="DECIMAL" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="cost" property="cost" jdbcType="DECIMAL" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="where-common">
+      where 1=1
+      <isNotEmpty property="id" prepend="and">
+        id=#id#
+      </isNotEmpty>
+      <isNotEmpty property="orderId" prepend="and">
+        order_id=#orderId#
+      </isNotEmpty>
+      <isNotEmpty property="productId" prepend="and">
+        product_id = #productId#
+      </isNotEmpty>
+      <isNotEmpty property="componentId" prepend="and">
+        component_id = #componentId#
+      </isNotEmpty>
+  </sql>
+
+  <select id="getByQuery" resultMap="BusinessOrderProductComponentResultMap" parameterClass="BusinessOrderProductComponent" >
+    select id, order_id, product_id, component_id, consumption, price, cost, remark
+    from business_order_product_component
+    <isParameterPresent >
+      <include refid="where-common"/>
+    </isParameterPresent>
+  </select>
+
+    <select id="getStandardProductComponent" resultMap="BusinessOrderProductComponentResultMap" parameterClass="java.lang.Integer">
+        SELECT
+          cc.`component_id`,
+          cc.`component_name`,
+          pc.`consumption`,
+          cc.`unit_cost` as price,
+          (pc.`consumption` * cc.`unit_cost`) as cost
+        FROM
+          product_component pc,
+          k_component_cost cc
+        WHERE pc.`component_id` = cc.`component_id`
+        AND pc.product_id = #productId#
+    </select>
+
+    <select id="getOrderProductComponent" resultMap="BusinessOrderProductComponentResultMap" parameterClass="java.util.HashMap">
+        SELECT
+        cc.`component_id`,
+        cc.`component_name`,
+        pc.`consumption`,
+        cc.`unit_cost` as price,
+        (pc.`consumption` * cc.`unit_cost`) as cost
+        FROM
+        product_component pc,
+        k_component_cost cc
+        WHERE pc.`component_id` = cc.`component_id`
+        AND pc.product_id = #productId#
+        AND pc.order_id = #orderId#
+    </select>
+
+  <delete id="deleteByQuery" parameterClass="BusinessOrderProductComponent" >
+    delete from business_order_product_component
+    <isParameterPresent >
+    <include refid="where-common"/>
+    </isParameterPresent>
+  </delete>
+  
+  <insert id="insert" parameterClass="BusinessOrderProductComponent" >
+    insert into business_order_product_component (order_id, product_id, component_id,
+      consumption, price, cost, remark)
+    values (#orderId#, #productId#, #componentId#,
+      #consumption#, #price#, #cost#, #remark#)
+      <selectKey resultClass="java.lang.Integer" keyProperty="id">
+          SELECT @@IDENTITY AS ID
+      </selectKey>
+  </insert>
+
+    <update id="update" parameterClass="BusinessOrderProductComponent">
+        update business_order_product_component
+        SET
+        <isNotEmpty prepend="," property="productId">
+            product_id = #productId#
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="componentId">
+            component_id = #componentId#
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="consumption">
+            consumption = #consumption#
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="price">
+            price = #price#
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="cost">
+            cost = #cost#
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="remark">
+            remark = #remark#
+        </isNotEmpty>
+        where  product_id = #productId#
+        AND order_id = #orderId#
+    </update>
+
+</sqlMap>

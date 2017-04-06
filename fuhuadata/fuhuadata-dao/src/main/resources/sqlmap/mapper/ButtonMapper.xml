@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.ButtonMapper">
+    <resultMap id="BaseResultMap" type="com.fuhuadata.domain.mybatis.Button">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="button_id" jdbcType="INTEGER" property="buttonId"/>
+        <result column="permission" jdbcType="VARCHAR" property="permission"/>
+        <result column="menu_id" jdbcType="INTEGER" property="menuId"/>
+        <result column="button_name" jdbcType="VARCHAR" property="buttonName"/>
+        <result column="posturl" jdbcType="VARCHAR" property="posturl"/>
+        <result column="backup" jdbcType="VARCHAR" property="backup"/>
+    </resultMap>
+
+    <!-- p_button 缩写 bu -->
+    <sql id="BaseColumns">
+        bu.button_id,
+        bu.permission,
+        bu.menu_id,
+        bu.button_name,
+        bu.posturl,
+        bu.backup
+    </sql>
+
+    <!-- p_button 前缀 button -->
+    <sql id="PrefixColumns">
+        bu.button_id button_button_id,
+        bu.permission button_permission,
+        bu.menu_id button_menu_id,
+        bu.button_name button_button_name,
+        bu.posturl button_posturl,
+        bu.backup button_backup
+    </sql>
+</mapper>

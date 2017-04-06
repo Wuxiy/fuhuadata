@@ -276,6 +276,7 @@ public class PackingArchivesAction {
     public ResultPojo judgeImageModelToUse(int packId,String name){
         try{
             Result result = new Result();
+            result.addDefaultModel("useTotal",0);
             //
             result.setCode(1);
             result.setMessage("允许删除，请确认");
