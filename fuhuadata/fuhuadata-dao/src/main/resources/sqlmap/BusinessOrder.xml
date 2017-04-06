@@ -31,15 +31,15 @@
             <isNotEmpty prepend=" AND " property="customerId">
                 base.short_name = #customerName#
             </isNotEmpty>
-            <isNotNull prepend=" AND " property="status">
+            <isNotEmpty prepend=" AND " property="status">
                 a.status = #status#
-            </isNotNull>
+            </isNotEmpty>
             <isNotEmpty prepend=" AND " property="saleOrganizationId">
                 sale_organization_id = #saleOrganizationId#
             </isNotEmpty>
-            <isNotNull prepend=" AND " property="customerLevel">
+            <isNotEmpty prepend=" AND " property="customerLevel">
                 base.customer_level = #customerLevel#
-            </isNotNull>
+            </isNotEmpty>
             <isNotEqual property="areaClassId" compareValue="0" prepend=" AND ">
                  base.customer_area_id = #areaClassId#
                 <isNotEqual property="areaId" compareValue="0" prepend=" AND ">
@@ -66,18 +66,18 @@
 
     <sql id="OFFER-PAGE-COMMON">
         <dynamic prepend=" WHERE">
-            <isNotNull prepend=" AND " property="customerName">
+            <isNotEmpty prepend=" AND " property="customerName">
                 base.short_name = #customerName#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="status">
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="status">
                 a.status = #status#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="orderId">
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="orderId">
                 a.order_id = #orderId#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="customerLevel">
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="customerLevel">
                 base.customer_level = #customerLevel#
-            </isNotNull>
+            </isNotEmpty>
             <isNotEqual property="areaClassId" compareValue="0" prepend=" AND ">
                 base.customer_area_id = #areaClassId#
                 <isNotEqual property="areaId" compareValue="0" prepend=" AND ">
@@ -326,7 +326,7 @@
             base.full_enterprise_nature enterpriseNature,
             a.amount_payable amountPayable,
             GROUP_CONCAT(b.`name`) AS orderProduct,
-            a.status status
+            a.`status` status
         FROM
             business_order a
         LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
@@ -360,7 +360,7 @@
         a.floor_price floorPrice,
         a.is_complaint isComplaint,
         a.is_modify_price isModifyPrice,
-        a.status status,
+        a.`status` status,
         a.deal_time dealTime
         FROM
         business_order a
@@ -376,20 +376,19 @@
     </select>
 
     <select id="COUNT-ORDER" parameterClass="QueryBusinessOrder" resultClass="java.lang.Integer">
-        select count(*) from business_order a
+        select count(a.order_id) from business_order a
         LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
         <isNotEmpty prepend=", " property="enterpriseNature">
             (select * from customer_enterprise_nature where nature=#enterpriseNature#) nature
         </isNotEmpty>
         <isParameterPresent>
             <include refid="ORDER-PAGE-COMMON"/>
-            GROUP BY a.order_id
         </isParameterPresent>
     </select>
 
 
     <select id="COUNT-OFFER" parameterClass="QueryBusinessOrder" resultClass="java.lang.Integer">
-        select count(*)
+        select count(a.order_id)
         FROM
         business_order a
         LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
@@ -399,7 +398,6 @@
         </isNotEmpty>
         <isParameterPresent>
             <include refid="OFFER-PAGE-COMMON"/>
-            GROUP BY a.order_id
         </isParameterPresent>
     </select>
 
