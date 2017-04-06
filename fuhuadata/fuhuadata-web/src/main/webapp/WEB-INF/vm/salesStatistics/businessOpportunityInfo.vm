@@ -2,7 +2,7 @@
 <div class="nav-deputy shadow-out clearfix">
     <ul id="myTab" class="nav nav-tabs pull-left">
         <li class="active"><a href="#Baseinfo" data-toggle="tab">基础信息</a></li>
-        <li><a href="#Packrelate" data-toggle="tab">跟进记录</a></li>
+        <li><a href="#followrecord" data-toggle="tab">跟进记录</a></li>
     </ul>
     <ul class="breadcrumb pull-right">
         <li><span class="glyphicon glyphicon-map-marker"></span></li>
@@ -111,7 +111,7 @@
                                     </div>
                                     <label class="col-xs-1 control-label" lang="zh">邮箱</label>
                                     <div class="col-xs-2">
-                                        <input class="form-control" type="email" value="lemail" id="" disabled />
+                                        <input class="form-control" type="email" value="" id="" disabled />
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -174,7 +174,7 @@
                     </div>
                 </div>
                 <!--商机跟进-->
-                <div id="Packrelate" class="tab-pane fade">
+                <div id="followrecord" class="tab-pane fade">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <a data-toggle="modal" data-target="#updateProgress" class="btn btn-xs btn-primary panel-heading-btn pull-right" href="#" lang="zh">新增</a>
@@ -216,10 +216,16 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript" lang="javascript">
     var businessId = $('#businessId').val();
-    console.log(businessId);
+    var businessFromList = ['展会','门户网站','农药店考察','客户介绍','主动联系','其他']
+    var customerLevelList = ['战略客户','大客户' ,'重要客户' ,'一般客户' ,'风险客户'];
+    var enterpriseNatureList = ['工厂','分销商' ,'经销商' ,'终端客户' ,'其他'];
+    var businessStateList = ['待报价','失败','已转化'];
+    var zhongxinbaoLevelList = ['未知','A','AA','AAA','AAAA'];
+    var businessfollow = document.getElementById('businessfollow');
+
     $(document).ready(function(){
         //获取信息
-        getData(basePath + '/businessInfo/getBusinessInfoById?businessId='+businessId,'POST',businessInfo);
+        getData(basePath + '/businessInfo/getBusinessInfoById?businessId='+businessId,'POST',null,businessInfo);
 
         //编辑商机基本信息
         $(document).on('click.edit','#edit',function () {
@@ -242,30 +248,34 @@
         });
         //客户基本信息取消提交
         $(document).on('click.cancel','#cancel',function(){
-            location.reload();
         });
+
+        $('a[href="#followrecord"]').click(function(){
+            $('a[href="#followrecord"]').tab('show');
+            getData(basePath + '/businessInfo/getBusinessInfoById?businessId='+businessId,'POST',null,businessFollow);
+        })
     })
 
     //获取详情function
     function businessInfo(result) {
-        var ResultData = result.data;
+        var ResultData = result;
         var businessfollow = result.businessfollow;
         console.log(ResultData);
 
-        var intentionalProducts = ResultData.intentionalProducts;
+        /*var intentionalProducts = ResultData.intentionalProducts;
         $('#intentionalProduct0').val(intentionalProducts[0].intentionalProduct);
         $('#intentionalProduct1').val(intentionalProducts[1].intentionalProduct);
         $('#estimatedPurchase0').val(intentionalProducts[0].estimatedPurchase);
-        $('#estimatedPurchase1').val(intentionalProducts[1].estimatedPurchase);
+        $('#estimatedPurchase1').val(intentionalProducts[1].estimatedPurchase);*/
 
         $('#businessName').val(ResultData.businessName);
         $('#businessId').val(ResultData.businessId);
-        $('#businessFrom').val(ResultData.businessFrom);
-        $('#businessState').val(ResultData.businessState);
+        $('#businessFrom').val(businessFrom[ResultData.businessFrom]);
+        $('#businessState').val(businessState[ResultData.businessState]);
         $('#customerName').val(ResultData.customerName);
-        $('#enterpriseNature').val(ResultData.enterpriseNature);
-        $('#customerLevel').val(ResultData.customerLevel);
-        $('#zhongxinbaoLevel').val(ResultData.zhongxinbaoLevel);
+        $('#enterpriseNature').val(enterpriseNatureList[ResultData.enterpriseNature]);
+        $('#customerLevel').val(customerLevelList[ResultData.customerLevel]);
+        $('#zhongxinbaoLevel').val(zhongxinbaoLevelList[ResultData.zhongxinbaoLevel]);
         $('#country').val(ResultData.country);
         $('#name').val(ResultData.name);
         $('#linkPhone1').val(ResultData.linkPhone1);
@@ -277,18 +287,23 @@
         $('#createUserName').val(ResultData.createUserName);
         $('#createTime').val(ResultData.createTime);
 
-        var _html = '';
+        
+    }
+
+    //跟进记录
+    function businessFollow(result) {
+        var ResultData = result;
         for(var i=0;i<businessfollow.length;i++){
-            _html += '<tr>';
-            _html += '<td>'+businessfollow[i].name+'</td>';
-            _html += '<td>'+businessfollow[i].name+'</td>';
-            _html += '<td>'+businessfollow[i].name+'</td>';
-            _html += '<td>'+businessfollow[i].name+'</td>';
-            _html += '<td>'+businessfollow[i].name+'</td>';
-            _html += '<td>'+businessfollow[i].name+'</td>';
-            _html += '</tr>';
+            businessfollow.innerHTML = '';
+            businessfollow.innerHTML += '<tr>'+
+                    '<td>'+businessfollow[i].name+'</td>'+
+                    '<td>'+businessfollow[i].name+'</td>'+
+                    '<td>'+businessfollow[i].name+'</td>'+
+                    '<td>'+businessfollow[i].name+'</td>'+
+                    '<td>'+businessfollow[i].name+'</td>'+
+                    '<td>'+businessfollow[i].name+'</td>'+
+                    '</tr>';
         }
-        $('#businessfollow').append(_html);
     }
 
     function updateBusinessInfo(){
