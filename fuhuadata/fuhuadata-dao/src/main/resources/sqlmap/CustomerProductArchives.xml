@@ -434,116 +434,195 @@
 	</sql>
 	
 	<insert id="ADD" parameterClass="CustomerProductArchives">
-		insert into customer_product_archives (id, order_id, product_id,
-		customer_id, name, customer_product_name,
-		brand, main_product_amount, main_product_unit,
-		sub_product_amount, sub_product_unit, convert_rate,
-		price_type, advise_price, purchase_price,
-		delivery_time, Internal_transport_mode,
-		Internal_transport_price, factory_id, factory_name,
-		straight_employing_way, straight_employing_scale,
-		straight_employing_standard, potential_employing_way,
-		potential_employing_scale, potential_employing_standard,
-		documentary_type, documentary_require, other_documentary_require,
-		shipping_agent_require, package_require, goods_type,
-		mianxiangqi, miantuiqi, cupboard_type,
-		cupboard_per_number, cupboard_number, ocean_freight,
-		port_surcharge, tax_free, gross_margin,
-		other_cost, min_sell_price, contract_price,
-		transform_state, composition_cost, pakage_other_requirement,
-		additional_price, consumption, img_info,
-		pakage_info, material_info, create_user_id,
-		create_user_name, lastmodify_user_id, lastmodify_user_name,
-		create_time, modify_time)
-		values (#id#, #orderId#, #productId#,
-		#customerId#, #name#, #customerProductName#,
-		#brand#, #mainProductAmount#, #mainProductUnit#,
-		#subProductAmount#, #subProductUnit#, #convertRate#,
-		#priceType#, #advisePrice#, #purchasePrice#,
-		#deliveryTime#, #internalTransportMode#,
-		#internalTransportPrice#, #factoryId#, #factoryName#,
-		#straightEmployingWay#, #straightEmployingScale#,
-		#straightEmployingStandard#, #potentialEmployingWay#,
-		#potentialEmployingScale#, #potentialEmployingStandard#,
-		#documentaryType#, #documentaryRequire#, #otherDocumentaryRequire#,
-		#shippingAgentRequire#, #packageRequire#, #goodsType#,
-		#mianxiangqi#, #miantuiqi#, #cupboardType#,
-		#cupboardPerNumber#, #cupboardNumber#, #oceanFreight#,
-		#portSurcharge#, #taxFree#, #grossMargin#,
-		#otherCost#, #minSellPrice#, #contractPrice#,
-		#transformState#, #compositionCost#, #pakageOtherRequirement#,
-		#additionalPrice#, #consumption#, #imgInfo#,
-		#pakageInfo#, #materialInfo#, #createUserId#,
-		#createUserName#, #lastmodifyUserId#, #lastmodifyUserName#,
-		#createTime#, #modifyTime#)
+		insert into customer_product_archives(
+		order_id,archive_product_id,product_id,customs_clearance_id,customs_clearance_name,customer_id,name,
+		customer_product_name,brand,main_product_amount,main_product_unit,sub_product_amount,sub_product_unit,
+		convert_rate,price_type,advise_price,purchase_price,delivery_time,factory_id,factory_name,straight_employing_way,
+		straight_employing_scale,straight_employing_standard,potential_employing_way,potential_employing_scale,potential_employing_standard,
+		tax_type,tax_free,other_cost
+		)
+		values(
+		#orderId#,#archiveProductId#,#productId#,#customsClearanceId#,#customsClearanceName#,#customerId#,#name#,
+		#customerProductName#,#brand#,#mainProductAmount#,#mainProductUnit#,#subProductAmount#,#subProductUnit#,
+		#convertRate#,#priceType#,#advisePrice#,#purchasePrice#,#deliveryTime#,#factoryId#,#factoryName#,#straightEmployingWay#,
+		#straightEmployingScale#,#straightEmployingStandard#,#potentialEmployingWay#,#potentialEmployingScale#,#potentialEmployingStandard#,
+		#taxType#,#taxFree#,#otherCost#
+		)
 		<selectKey resultClass="int" keyProperty="id">
 			SELECT @@IDENTITY AS ID
 		</selectKey>
 	</insert>
 	
-	<update id="UPDATE" parameterClass="CustomerProductArchives">
+	<update id="UPDATE-BY-ID" parameterClass="CustomerProductArchives">
 		UPDATE  customer_product_archives
 		<dynamic prepend=" SET ">
-						<isNotEmpty prepend=", " property="id">id=#id#</isNotEmpty>
-						<isNotEmpty prepend=", " property="productId">product_id=#productId#</isNotEmpty>
-						<isNotEmpty prepend=", " property="orderId">order_id = #orderId#</isNotEmpty>
-						<isNotEmpty prepend=", " property="customerId">customer_id=#customerId#</isNotEmpty>
-						<isNotEmpty prepend=", " property="customerProductName"> customer_product_name = #customerProductName#</isNotEmpty>
-						<isNotEmpty prepend=", " property="name">name=#name#</isNotEmpty>
-						<isNotEmpty prepend=", " property="brand">brand=#brand#</isNotEmpty>
-						<isNotEmpty prepend=", " property="mainProductAmount">main_product_amount=#mainProductAmount#</isNotEmpty>
-						<isNotEmpty prepend=", " property="mainProductUnit">main_product_unit=#mainProductUnit#</isNotEmpty>
-						<isNotEmpty prepend=", " property="subProductAmount">sub_product_amount=#subProductAmount#</isNotEmpty>
-						<isNotEmpty prepend=", " property="subProductUnit">sub_product_unit=#subProductUnit#</isNotEmpty>
-						<isNotEmpty prepend=", " property="convertRate">convert_rate=#convertRate#</isNotEmpty>
-						<isNotEmpty prepend=", " property="priceType">price_type=#priceType#</isNotEmpty>
-						<isNotEmpty prepend=", " property="advisePrice">advise_price=#advisePrice#</isNotEmpty>
-						<isNotEmpty prepend=", " property="purchasePrice">purchase_price=#purchasePrice#</isNotEmpty>
-						<isNotEmpty prepend=", " property="deliveryTime">delivery_time=#deliveryTime#</isNotEmpty>
-						<isNotEmpty prepend=", " property="InternalTransportMode">Internal_transport_mode=#InternalTransportMode#</isNotEmpty>
-						<isNotEmpty prepend=", " property="InternalTransportPrice">Internal_transport_price=#InternalTransportPrice#</isNotEmpty>
-						<isNotEmpty prepend=", " property="factoryId">factory_id=#factoryId#</isNotEmpty>
-						<isNotEmpty prepend=", " property="factoryName">factory_name=#factoryName#</isNotEmpty>
-						<isNotEmpty prepend=", " property="compositionCost">composition_cost = #compositionCost#</isNotEmpty>
-						<isNotEmpty prepend=", " property="pakageOtherRequirement">pakage_other_requirement = #pakageOtherRequirement#</isNotEmpty>
-						<isNotEmpty prepend=", " property="additionalPrice">additional_price = #additionalPrice#</isNotEmpty>
-						<isNotEmpty prepend=", " property="consumption">consumption = #consumption#</isNotEmpty>
-						<isNotEmpty prepend=", " property="imgInfo">img_info = #imgInfo#</isNotEmpty>
-						<isNotEmpty prepend=", " property="pakageInfo">pakage_info = #pakageInfo#</isNotEmpty>
-						<isNotEmpty prepend=", " property="materialInfo">material_info = #materialInfo#</isNotEmpty>
-						<isNotEmpty prepend=", " property="straightEmployingWay">straight_employing_way=#straightEmployingWay#</isNotEmpty>
-						<isNotEmpty prepend=", " property="straightEmployingScale">straight_employing_scale=#straightEmployingScale#</isNotEmpty>
-						<isNotEmpty prepend=", " property="straightEmployingStandard">straight_employing_standard=#straightEmployingStandard#</isNotEmpty>
-						<isNotEmpty prepend=", " property="potentialEmployingWay">potential_employing_way=#potentialEmployingWay#</isNotEmpty>
-						<isNotEmpty prepend=", " property="potentialEmployingScale">potential_employing_scale=#potentialEmployingScale#</isNotEmpty>
-						<isNotEmpty prepend=", " property="potentialEmployingStandard">potential_employing_standard=#potentialEmployingStandard#</isNotEmpty>
-						<isNotEmpty prepend=", " property="documentaryType">documentary_type=#documentaryType#</isNotEmpty>
-						<isNotEmpty prepend=", " property="documentaryRequire">documentary_require=#documentaryRequire#</isNotEmpty>
-						<isNotEmpty prepend=", " property="otherDocumentaryRequire">other_documentary_require=#otherDocumentaryRequire#</isNotEmpty>
-						<isNotEmpty prepend=", " property="shippingAgentRequire">shipping_agent_require=#shippingAgentRequire#</isNotEmpty>
-						<isNotEmpty prepend=", " property="packageRequire">package_require=#packageRequire#</isNotEmpty>
-						<isNotEmpty prepend=", " property="goodsType">goods_type=#goodsType#</isNotEmpty>
-						<isNotEmpty prepend=", " property="mianxiangqi">mianxiangqi=#mianxiangqi#</isNotEmpty>
-						<isNotEmpty prepend=", " property="miantuiqi">miantuiqi=#miantuiqi#</isNotEmpty>
-						<isNotEmpty prepend=", " property="cupboardType">cupboard_type=#cupboardType#</isNotEmpty>
-						<isNotEmpty prepend=", " property="cupboardPerNumber">cupboard_per_number=#cupboardPerNumber#</isNotEmpty>
-						<isNotEmpty prepend=", " property="cupboardNumber">cupboard_number=#cupboardNumber#</isNotEmpty>
-						<isNotEmpty prepend=", " property="oceanFreight">ocean_freight=#oceanFreight#</isNotEmpty>
-						<isNotEmpty prepend=", " property="portSurcharge">port_surcharge=#portSurcharge#</isNotEmpty>
-						<isNotEmpty prepend=", " property="taxFree">tax_free=#taxFree#</isNotEmpty>
-						<isNotEmpty prepend=", " property="grossMargin">gross_margin = #grossMargin#</isNotEmpty>
-						<isNotEmpty prepend=", " property="otherCost">other_cost=#otherCost#</isNotEmpty>
-						<isNotEmpty prepend=", " property="minSellPrice">min_sell_price=#minSellPrice#</isNotEmpty>
-						<isNotEmpty prepend=", " property="contractPrice">contract_price=#contractPrice#</isNotEmpty>
-						<isNotEmpty prepend=", " property="transformState">transform_state = #transformState#</isNotEmpty>
-						<isNotEmpty prepend=", " property="createUserId">create_user_id=#createUserId#</isNotEmpty>
-						<isNotEmpty prepend=", " property="createUserName">create_user_name=#createUserName#</isNotEmpty>
-						<isNotEmpty prepend=", " property="lastmodifyUserId">lastmodify_user_id=#lastmodifyUserId#</isNotEmpty>
-						<isNotEmpty prepend=", " property="lastmodifyUserName">lastmodify_user_name=#lastmodifyUserName#</isNotEmpty>
-						<isNotEmpty prepend=", " property="createTime">create_time=#createTime#</isNotEmpty>
-						<isNotEmpty prepend=", " property="modifyTime">modify_time=#modifyTime#</isNotEmpty>
+			<isNotNull prepend="," property="orderId">
+				order_id = #orderId#
+			</isNotNull>
+			<isNotNull prepend="," property="archiveProductId">
+				archive_product_id = #archiveProductId#
+			</isNotNull>
+			<isNotNull prepend="," property="productId">
+				product_id = #productId#
+			</isNotNull>
+			<isNotNull prepend="," property="customsClearanceId">
+				customs_clearance_id = #customsClearanceId#
+			</isNotNull>
+			<isNotNull prepend="," property="customsClearanceName">
+				customs_clearance_name = #customsClearanceName#
+			</isNotNull>
+			<isNotNull prepend="," property="customerId">
+				customer_id = #customerId#
+			</isNotNull>
+			<isNotNull prepend="," property="name">
+				name = #name#
+			</isNotNull>
+			<isNotNull prepend="," property="customerProductName">
+				customer_product_name = #customerProductName#
+			</isNotNull>
+			<isNotNull prepend="," property="brand">
+				brand = #brand#
+			</isNotNull>
+			<isNotNull prepend="," property="mainProductAmount">
+				main_product_amount = #mainProductAmount#
+			</isNotNull>
+			<isNotNull prepend="," property="mainProductUnit">
+				main_product_unit = #mainProductUnit#
+			</isNotNull>
+			<isNotNull prepend="," property="subProductAmount">
+				sub_product_amount = #subProductAmount#
+			</isNotNull>
+			<isNotNull prepend="," property="subProductUnit">
+				sub_product_unit = #subProductUnit#
+			</isNotNull>
+			<isNotNull prepend="," property="convertRate">
+				convert_rate = #convertRate#
+			</isNotNull>
+			<isNotNull prepend="," property="priceType">
+				price_type = #priceType#
+			</isNotNull>
+			<isNotNull prepend="," property="advisePrice">
+				advise_price = #advisePrice#
+			</isNotNull>
+			<isNotNull prepend="," property="purchasePrice">
+				purchase_price = #purchasePrice#
+			</isNotNull>
+			<isNotNull prepend="," property="deliveryTime">
+				delivery_time = #deliveryTime#
+			</isNotNull>
+			<isNotNull prepend="," property="internalTransportMode">
+				Internal_transport_mode = #internalTransportMode#
+			</isNotNull>
+			<isNotNull prepend="," property="internalTransportPrice">
+				Internal_transport_price = #internalTransportPrice#
+			</isNotNull>
+			<isNotNull prepend="," property="factoryId">
+				factory_id = #factoryId#
+			</isNotNull>
+			<isNotNull prepend="," property="factoryName">
+				factory_name = #factoryName#
+			</isNotNull>
+			<isNotNull prepend="," property="straightEmployingWay">
+				straight_employing_way = #straightEmployingWay#
+			</isNotNull>
+			<isNotNull prepend="," property="straightEmployingScale">
+				straight_employing_scale = #straightEmployingScale#
+			</isNotNull>
+			<isNotNull prepend="," property="straightEmployingStandard">
+				straight_employing_standard = #straightEmployingStandard#
+			</isNotNull>
+			<isNotNull prepend="," property="potentialEmployingWay">
+				potential_employing_way = #potentialEmployingWay#
+			</isNotNull>
+			<isNotNull prepend="," property="potentialEmployingScale">
+				potential_employing_scale = #potentialEmployingScale#
+			</isNotNull>
+			<isNotNull prepend="," property="potentialEmployingStandard">
+				potential_employing_standard = #potentialEmployingStandard#
+			</isNotNull>
+			<isNotNull prepend="," property="documentaryType">
+				documentary_type = #documentaryType#
+			</isNotNull>
+			<isNotNull prepend="," property="documentaryRequire">
+				documentary_require = #documentaryRequire#
+			</isNotNull>
+			<isNotNull prepend="," property="otherDocumentaryRequire">
+				other_documentary_require = #otherDocumentaryRequire#
+			</isNotNull>
+			<isNotNull prepend="," property="shippingAgentRequire">
+				shipping_agent_require = #shippingAgentRequire#
+			</isNotNull>
+			<isNotNull prepend="," property="packageRequire">
+				package_require = #packageRequire#
+			</isNotNull>
+			<isNotNull prepend="," property="goodsType">
+				goods_type = #goodsType#
+			</isNotNull>
+			<isNotNull prepend="," property="mianxiangqi">
+				mianxiangqi = #mianxiangqi#
+			</isNotNull>
+			<isNotNull prepend="," property="miantuiqi">
+				miantuiqi = #miantuiqi#
+			</isNotNull>
+			<isNotNull prepend="," property="cupboardType">
+				cupboard_type = #cupboardType#
+			</isNotNull>
+			<isNotNull prepend="," property="cupboardPerNumber">
+				cupboard_per_number = #cupboardPerNumber#
+			</isNotNull>
+			<isNotNull prepend="," property="cupboardNumber">
+				cupboard_number = #cupboardNumber#
+			</isNotNull>
+			<isNotNull prepend="," property="oceanFreight">
+				ocean_freight = #oceanFreight#
+			</isNotNull>
+			<isNotNull prepend="," property="portSurcharge">
+				port_surcharge = #portSurcharge#
+			</isNotNull>
+			<isNotNull prepend="," property="taxType">
+				tax_type = #taxType:TINYINT#
+			</isNotNull>
+			<isNotNull prepend="," property="taxFree">
+				tax_free = #taxFree#
+			</isNotNull>
+			<isNotNull prepend="," property="grossMargin">
+				gross_margin = #grossMargin#
+			</isNotNull>
+			<isNotNull prepend="," property="otherCost">
+				other_cost = #otherCost#
+			</isNotNull>
+			<isNotNull prepend="," property="minPrice">
+				min_price = #minPrice#
+			</isNotNull>
+			<isNotNull prepend="," property="contractPrice">
+				contract_price = #contractPrice#
+			</isNotNull>
+			<isNotNull prepend="," property="transformState">
+				transform_state = #transformState#
+			</isNotNull>
+			<isNotNull prepend="," property="compositionCost">
+				composition_cost = #compositionCost#
+			</isNotNull>
+			<isNotNull prepend="," property="createUserId">
+				create_user_id = #createUserId#
+			</isNotNull>
+			<isNotNull prepend="," property="createUserName">
+				create_user_name = #createUserName#
+			</isNotNull>
+			<isNotNull prepend="," property="lastmodifyUserId">
+				lastmodify_user_id = #lastmodifyUserId#
+			</isNotNull>
+			<isNotNull prepend="," property="lastmodifyUserName">
+				lastmodify_user_name = #lastmodifyUserName#
+			</isNotNull>
+			<isNotNull prepend="," property="createTime">
+				create_time = #createTime#
+			</isNotNull>
+			<isNotNull prepend="," property="modifyTime">
+				modify_time = #modifyTime#
+			</isNotNull>
 					</dynamic>
-		WHERE customer_product_id=#customer_product_id#
+		WHERE   id = #id#
 	</update>
 	
 	<delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">

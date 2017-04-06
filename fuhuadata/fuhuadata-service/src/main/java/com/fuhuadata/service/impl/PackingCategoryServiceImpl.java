@@ -66,11 +66,11 @@ public class PackingCategoryServiceImpl implements PackingCategoryService {
     }
 
     @Override
-    public Result<List<CategoryTree>> getAllByTree() {
+    public Result<List<CategoryTree>> getAllByTree(String parentIds) {
         List<CategoryTree> tree=new ArrayList<CategoryTree>();
         Result<List<CategoryTree>> result=new Result<List<CategoryTree>>();
         try {
-            List<PackingCategoryVO> list = packingCategoryManager.getAllByLevel();
+            List<PackingCategoryVO> list = packingCategoryManager.getAllByLevel(parentIds);
             result.addDefaultModel("CategoryTree", getAllNode(list));
         }catch(Exception e){
             result.setSuccess(false);

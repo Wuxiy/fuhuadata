@@ -154,27 +154,6 @@ public class BusinessOrderProduct {
     /**转化状态**/
     private Integer transformState;
 
-    /**加工成分及费用**/
-    private String compositionCost;
-
-    /**包装其他要求**/
-    private String pakageOtherRequirement;
-
-    /**附加单价**/
-    private BigDecimal additionalPrice;
-
-    /**单耗**/
-    private BigDecimal consumption;
-
-    /**包装图片信息**/
-    private String imgInfo;
-
-    /**包装要求**/
-    private String pakageInfo;
-
-    /**包材要求**/
-    private String materialInfo;
-
     /**创建者id**/
     private Integer createUserId;
 
@@ -595,62 +574,6 @@ public class BusinessOrderProduct {
 
     public void setTransformState(Integer transformState) {
         this.transformState = transformState;
-    }
-
-    public String getCompositionCost() {
-        return compositionCost;
-    }
-
-    public void setCompositionCost(String compositionCost) {
-        this.compositionCost = compositionCost;
-    }
-
-    public String getPakageOtherRequirement() {
-        return pakageOtherRequirement;
-    }
-
-    public void setPakageOtherRequirement(String pakageOtherRequirement) {
-        this.pakageOtherRequirement = pakageOtherRequirement;
-    }
-
-    public BigDecimal getAdditionalPrice() {
-        return additionalPrice;
-    }
-
-    public void setAdditionalPrice(BigDecimal additionalPrice) {
-        this.additionalPrice = additionalPrice;
-    }
-
-    public BigDecimal getConsumption() {
-        return consumption;
-    }
-
-    public void setConsumption(BigDecimal consumption) {
-        this.consumption = consumption;
-    }
-
-    public String getImgInfo() {
-        return imgInfo;
-    }
-
-    public void setImgInfo(String imgInfo) {
-        this.imgInfo = imgInfo;
-    }
-
-    public String getPakageInfo() {
-        return pakageInfo;
-    }
-
-    public void setPakageInfo(String pakageInfo) {
-        this.pakageInfo = pakageInfo;
-    }
-
-    public String getMaterialInfo() {
-        return materialInfo;
-    }
-
-    public void setMaterialInfo(String materialInfo) {
-        this.materialInfo = materialInfo;
     }
 
     public Integer getCreateUserId() {

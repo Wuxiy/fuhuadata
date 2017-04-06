@@ -41,8 +41,8 @@ public class PackingCategoryDaoImpl extends SqlMapClientTemplate implements Pack
     }
 
     @Override
-    public List<PackingCategoryVO> getAllByLevel() {
-        return this.queryForList(GET_BY_LEVEL);
+    public List<PackingCategoryVO> getAllByLevel(String parentIds) {
+        return this.queryForList(GET_BY_LEVEL,parentIds);
     }
 
     @Override

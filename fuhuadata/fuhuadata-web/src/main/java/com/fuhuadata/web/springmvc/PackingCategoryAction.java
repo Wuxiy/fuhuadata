@@ -54,10 +54,10 @@ public class PackingCategoryAction {
     @RequestMapping(value="/CategoryTree")
     @SystemLogAnnotation(module = "knowledgeBase-PackingCategory",methods = "tree")
     @ResponseBody
-    public ResultPojo packingCategoryTree(){
+    public ResultPojo packingCategoryTree(String parentIds){
         Result<List<CategoryTree>> result = new Result<List<CategoryTree>>();
         try{
-            result=packingCategoryService.getAllByTree();
+            result=packingCategoryService.getAllByTree(parentIds);
         }catch(Exception e){
             log.error("获取包材树json数据错误",e);
         }
