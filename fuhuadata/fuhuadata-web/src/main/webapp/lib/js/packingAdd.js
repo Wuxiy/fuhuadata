@@ -13,7 +13,8 @@
     console.log(sid);
     var names = document.getElementById('packName');
     names.value = name;*/
-
+    var bid = $('#bid').val();
+    console.log(bid);
     var img = $("input[name='file']");
 
     var addTbody = document.getElementById('add_tbody');
