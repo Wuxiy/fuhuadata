@@ -111,7 +111,7 @@
                                     </div>
                                     <label class="col-xs-1 control-label" lang="zh">邮箱</label>
                                     <div class="col-xs-2">
-                                        <input class="form-control" type="email" value="" id="" disabled />
+                                        <input class="form-control" type="email" value="" id="lemail" disabled />
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -243,7 +243,7 @@
                 }
             });
             if(submit_permit){
-                upData(basePath+'/customerLinkman/updateBusinessInfoById','POST',updateBusinessInfo(),"application/json");
+                upData(basePath+'/businessInfo/updateBusinessInfoById','POST',updateBusinessInfo(),"application/json");
             }
         });
         //客户基本信息取消提交
@@ -272,11 +272,11 @@
         $('#businessFrom').val(businessFrom[ResultData.businessFrom]);
         $('#businessState').val(businessState[ResultData.businessState]);
         $('#customerName').val(ResultData.customerName);
-        $('#enterpriseNature').val(enterpriseNatureList[ResultData.enterpriseNature]);
+        $('#enterpriseNature').val(ResultData.enterpriseNature);
         $('#customerLevel').val(customerLevelList[ResultData.customerLevel]);
         $('#zhongxinbaoLevel').val(zhongxinbaoLevelList[ResultData.zhongxinbaoLevel]);
         $('#country').val(ResultData.country);
-        $('#name').val(ResultData.name);
+        $('#name').val(ResultData.linkmanName);
         $('#linkPhone1').val(ResultData.linkPhone1);
         $('#lemail').val(ResultData.lemail);
         $('#expectIncome').val(ResultData.expectIncome);

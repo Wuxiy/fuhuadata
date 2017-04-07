@@ -40,12 +40,12 @@
                                     <span class="input-group-addon" lang="zh">活动类型</span>
                                     <select class="form-control" id="activityType">
                                         <option value="" selected lang="zh">全部</option>
-                                        <option value="5" lang="zh">远程沟通</option>
-                                        <option value="4" lang="zh">出差拜访</option>
-                                        <option value="3" lang="zh">展会邀请</option>
-                                        <option value="2" lang="zh">工厂参观</option>
-                                        <option value="1" lang="zh">商务宴请</option>
-                                        <option value="0" lang="zh">其他</option>
+                                        <option value="0" lang="zh">远程沟通</option>
+                                        <option value="1" lang="zh">出差拜访</option>
+                                        <option value="2" lang="zh">展会邀请</option>
+                                        <option value="3" lang="zh">工厂参观</option>
+                                        <option value="4" lang="zh">商务宴请</option>
+                                        <option value="5" lang="zh">其他</option>
                                     </select>
                                     <span class="input-group-addon" lang="zh">业务员</span>
                                     <input class="form-control" id="userName" />
