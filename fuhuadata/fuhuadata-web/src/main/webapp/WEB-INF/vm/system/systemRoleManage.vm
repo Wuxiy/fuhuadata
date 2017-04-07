@@ -1,0 +1,462 @@
+<!--副导航-->
+<div class="nav-deputy shadow-out clearfix">
+    <ul class="breadcrumb pull-right">
+        <li><span class="glyphicon glyphicon-map-marker"></span></li>
+        <li>
+            <a href="" lang="zh">系统管理</a>
+        </li>
+        <li class="active" lang="zh">菜单管理</li>
+    </ul>
+</div>
+<!--表格容器-->
+<div class="dashboard-wrapper">
+    <div class="col-xs-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title" lang="zh">菜单列表</h3>
+            </div>
+            <div id="menuAside" class="panel-body tree-container tree">
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-10  view-HD-lg">
+        <div id="roleManage" class="panel panel-default">
+            <div class="panel-heading">
+                <button data-btn="edit" data-view="editHide" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
+                    新增
+                </button>
+                <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right">
+                    <button data-btn="cancel" data-view="editView" class="btn hidden" lang="zh">取消</button>
+                    <button data-btn="save" data-view="editView" class="btn btn-primary hidden" lang="zh">保存</button>
+                </div>
+                <h3 class="panel-title" lang="zh">角色组管理</h3>
+            </div>
+            <div class="panel-body panel-edit">
+                <div class="row">
+                    <div class="col-xs-12 form-horizontal">
+                        <!--表单-->
+                        <div class="form-group">
+                            <label for="" class="control-label col-xs-1" lang="zh">所属组织</label>
+                            <div class="col-xs-2">
+                                <div class="input-group">
+                                    <input disabled type="text" class="form-control notEdit" />
+                                    <div class="input-group-btn">
+                                        <button data-control="off" disabled class="btn btn-xs btn-default dropdown-toggle" data-toggle="modal" data-target="#treeModal" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <label for="" class="control-label col-xs-1" lang="zh">上级角色</label>
+                            <div class="col-xs-2">
+                                <div class="input-group">
+                                    <input disabled type="text" class="form-control notEdit" />
+                                    <div class="input-group-btn">
+                                        <button data-control="off" disabled class="btn btn-xs btn-default dropdown-toggle" data-toggle="modal" data-target="#treeModal" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                                    </div>
+                                </div>
+                            </div>
+                            ##modal
+                            <div class="modal fade" id="treeModal" tabindex="-1"  aria-hidden="true" data-backdrop="static">
+                                <div class="modal-dialog" style="width: 400px">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="input-group" data-stopPropagation="true">
+                                                <input type="text" class="form-control notDisabled" placeholder="请输入关键词查找" lang="zh" />
+                                                <div class="input-group-btn"><button class="btn btn-xs btn-primary" type="submit"><span class="glyphicon glyphicon-search"></span></button></div>
+                                            </div>
+                                            <hr />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group text-right">
+                            <label for="" class="control-label col-xs-1" lang="zh">角色编码</label>
+                            <div class="col-xs-2"><input data-control="off" type="text" class="form-control" value="" /></div>
+                            <label for="" class="control-label col-xs-1" lang="zh">角色名称</label>
+                            <div class="col-xs-2"><input data-control="off" class="form-control" type="text" value="" /></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="control-label col-xs-1" lang="zh">启用状态</label>
+                            <div class="col-xs-2">
+                                <select id="" class="form-control">
+                                    <option value="1" lang="zh">已启用</option>
+                                    <option value="0" lang="zh">已禁用</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <ul id="myTab" class="nav nav-tabs">
+                                <li class="active"><a href="#tab_1" data-toggle="tab">已关联权限</a></li>
+                                <li><a href="#tab_2" data-toggle="tab">菜单权限</a></li>
+                                <li><a href="#tab_3" data-toggle="tab">按钮权限</a></li>
+                                <li><a href="#tab_4" data-toggle="tab">已分配组织</a></li>
+                            </ul>
+                            <div class="dashboard-wrapper">
+                                <div id="myTabContent" class="tab-content">
+                                    <div class="tab-pane fade in active" id="tab_1">
+                                        <table class="table table-condensed table-bordered text-center">
+                                            <caption>
+                                                <button data-target="#multiple" data-toggle="modal" class="btn-link pull-right" type="button">编辑</button>
+                                            </caption>
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">用户编号</th>
+                                                <th class="text-center">用户名称</th>
+                                                <th class="text-center">关联生效日期</th>
+                                                <th class="text-center">关联失效日期</th>
+                                                <th class="text-center">分配地区</th>
+                                                <th class="text-center">授权人</th>
+                                                <th class="text-center">授权时间</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>12345</td>
+                                                <td>刘凯洋</td>
+                                                <td>2016-10-10</td>
+                                                <td></td>
+                                                <td>
+                                                    <label class="control-label">墨西哥、新加坡</label>
+                                                    <button class="btn-link pull-right" data-toggle="modal" data-target="#multiple" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                                                </td>
+                                                <td>汪桂英</td>
+                                                <td>2016-10-10 18:00:00</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane fade" id="tab_2">
+                                        <table class="table table-condensed table-bordered text-center">
+                                            <caption>
+                                                <button data-target="#multiple" data-toggle="modal" class="btn-link pull-right" type="button">编辑</button>
+                                            </caption>
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">编号</th>
+                                                <th class="text-center">菜单</th>
+                                                <th class="text-center">授权人</th>
+                                                <th class="text-center">授权时间</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td lang="zh"></td>
+                                                <td data-toggle="collapse" data-target="#sellMenu_e" lang="zh">销售统计</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            </tbody>
+                                            <tbody id="sellMenu_e" class="collapse">
+                                            <tr>
+                                                <td lang="zh"></td>
+                                                <td lang="zh">商机</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td lang="zh"></td>
+                                                <td lang="zh">销售动态</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane fade" id="tab_3">
+                                        <table class="table table-condensed table-bordered text-center">
+                                            <caption>
+                                                <button data-target="#multiple" data-toggle="modal" class="btn-link pull-right" type="button">编辑</button>
+                                            </caption>
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">编号</th>
+                                                <th class="text-center">菜单</th>
+                                                <th class="text-center">功能权限</th>
+                                                <th class="text-center">授权人</th>
+                                                <th class="text-center">授权时间</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td lang="zh"></td>
+                                                <td data-toggle="collapse" data-target="#sellBtn_e" lang="zh">销售统计</td>
+                                                <td>
+                                                    <label class="checkbox-inline"><input type="checkbox" value="" />新增</label>
+                                                    <label class="checkbox-inline"><input type="checkbox" value="" />修改</label>
+                                                    <label class="checkbox-inline"><input type="checkbox" value="" />删除</label>
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            </tbody>
+                                            <tbody id="sellBtn_e" class="collapse">
+                                            <tr>
+                                                <td lang="zh"></td>
+                                                <td lang="zh">商机</td>
+                                                <td>
+                                                    <label class="checkbox-inline"><input type="checkbox" value="" />新增</label>
+                                                    <label class="checkbox-inline"><input type="checkbox" value="" />修改</label>
+                                                    <label class="checkbox-inline"><input type="checkbox" value="" />删除</label>
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td lang="zh"></td>
+                                                <td lang="zh">销售动态</td>
+                                                <td>
+                                                    <label class="checkbox-inline"><input type="checkbox" value="" />新增</label>
+                                                    <label class="checkbox-inline"><input type="checkbox" value="" />修改</label>
+                                                    <label class="checkbox-inline"><input type="checkbox" value="" />删除</label>
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane fade" id="tab_4">
+                                        <table class="table table-condensed table-bordered text-center">
+                                            <caption>
+                                                <button data-target="#multiple" data-toggle="modal" class="btn-link pull-right" type="button">编辑</button>
+                                            </caption>
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">编号</th>
+                                                <th class="text-center">组织名称</th>
+                                                <th class="text-center">组织类型</th>
+                                                <th class="text-center">授权人</th>
+                                                <th class="text-center">授权时间</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>12345</td>
+                                                <td>四川省乐山市福华通达农药科技有限公司</td>
+                                                <td></td>
+                                                <td>刘凯洋</td>
+                                                <td>2016-10-10</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+##modal
+<div class="modal fade" id="multiple" tabindex="-1"  aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-7" style="padding-left: 4px">待选地区</div>
+                    <div class="col-xs-5" style="padding-left: 4px">已选地区</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-5 well" style="padding: 4px">
+                        <div class="input-group" data-stopPropagation="true">
+                            <input type="text" class="form-control notDisabled" placeholder="请输入关键词查找" lang="zh" />
+                            <div class="input-group-btn">
+                                <button class="btn btn-xs btn-default" type="submit">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <hr />
+                        ##tree
+                        <div id="left" class="tree" style="height: 300px;overflow-y: scroll;overflow-x: auto">
+
+                        </div>
+                    </div>
+                    <div class="col-xs-2" style="padding-top: 105px">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <button class="btn btn-xs btn-block btn-primary" type="button" title="右移">
+                                        <span class="glyphicon glyphicon-chevron-right"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <button class="btn btn-xs btn-block btn-primary" type="button" title="左移">
+                                        <span class="glyphicon glyphicon-chevron-left"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <button class="btn btn-xs btn-block btn-primary" type="button" title="全部右移">
+                                        <span class="glyphicon glyphicon-chevron-right"></span>
+                                        <span class="glyphicon glyphicon-chevron-right"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <button class="btn btn-xs btn-block btn-primary" type="button" title="全部左移">
+                                        <span class="glyphicon glyphicon-chevron-left"></span>
+                                        <span class="glyphicon glyphicon-chevron-left"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-5 well" style="padding: 4px">
+                        <div class="input-group" data-stopPropagation="true">
+                            <input type="text" class="form-control notDisabled" placeholder="请输入关键词查找" lang="zh" />
+                            <div class="input-group-btn">
+                                <button class="btn btn-xs btn-default" type="submit">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <hr />
+                        ##tree
+                        <div id="right" class="tree" style="height: 300px;overflow-y: scroll;overflow-x: auto">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input id="parentId" type="hidden" value="" class=""/>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/system/systemRoleManage.js"></script>
+<script>
+
+//    $(function () {
+
+        //创建树菜单
+//        creatTrees();
+
+        //禁用表单控件
+//        forbiddenForm();
+//
+//        //侧边菜单树
+//        $(document).on('click.tree.s','#menuAside .tree a',function (e) {
+//            e.preventDefault();
+//
+//            //更改样式
+//            var thisEl = $(this);
+//            var par = thisEl.parents('.tree');
+//            par.find('li').removeClass('active');
+//            thisEl.parent('li').addClass('active');
+//
+//            //添加数据
+//            var thisId = thisEl.parent('li').attr('id');
+//            getMenuDetails(thisId,renderMenu);
+//        });
+//
+//        //modal菜单树
+//        $(document).on('click.tree.m','#menuModal .tree a',function (e) {
+//            e.preventDefault();
+//            var thisId = $(this).parent('li').attr('id').slice('0','-1');
+//            var thisTxt = $(this).text();
+//            var close = $('#treeModal').find('.close');
+//
+//            //添加数据
+//            if(thisId){
+//                $('#parentName').val(thisTxt);
+//                $('#parentId').val(thisId);
+//            }
+//
+//            //关闭modal
+//            close.click();
+//        });
+//
+//        //添加
+//        $(document).on('click.up','#addMenuItem',function () {
+//            var thisEl = $(this);
+//            thisEl.addClass('hidden');
+//            $('#btnGroup').removeClass('hidden');
+//            $('input,#searchingBtn','.panel-body').not('.notEdit').removeAttr('disabled');
+//            $(document).off('.tree.s');
+//            $('#menuAside').parents('.panel').fadeOut();
+//
+//            //以当前节点的id和name作为父节点的id和name
+//            if($('#menuId').val()!=''){
+//                $('#parentName').val($('#name').val());
+//                $('#parentId').val($('#menuId').val());
+//            }
+//            $('#name,#menuId,#Url').val('');
+//        });
+//
+//        //保存
+//        $(document).on('click.up','#save',function () {
+//            var menuData = setMenuObj();
+//            console.log(menuData);
+//
+//            jQuery.ajax({
+//                url:'/sys/menu/ajax/add',
+//                type:'POST',
+//                data:menuData
+//            }).done(function (result) {
+//                console.log(result);
+//                var thisId = result.data;
+//                creatTrees();
+//                addSortBtn()
+//                getMenuDetails(thisId,renderMenu);
+//            });
+//
+//            $('#addMenuItem').removeClass('hidden');
+//            $('#btnGroup').addClass('hidden');
+//            $('#menuAside').parents('.panel').fadeIn();
+//            forbiddenForm();
+//            $(document).on('.tree.s');
+//        });
+//
+//        //取消
+//        $(document).on('click.cencel','#cancel',function () {
+//            location.reload();
+//        });
+//
+//        //取得表单数据
+//        function setMenuObj() {
+//            var obj = {
+//                parentId : ($('#parentId').val()=='' ? 0:$('#parentId').val()),
+//                name : $('#name').val(),
+//                url : $('#Url').val(),
+//                enablestate : $('#enablestate').val()
+//            };
+//            return obj;
+//        }
+//
+//        //禁用表单
+//        function forbiddenForm() {
+//            $('input,#searchingBtn','.panel-edit').not('.notDisabled').attr('disabled','disabled');
+//        }
+//
+//        //取得数据
+//        function getMenuDetails(id,callback){
+//            jQuery.ajax({
+//                url:'/sys/menu/ajax/'+id,
+//                type:'GET'
+//            }).done(callback);
+//        }
+//
+//
+//    })
+
+</script>

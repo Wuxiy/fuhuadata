@@ -12,9 +12,16 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/roleManager/*")
 public class RoleManagerAction {
-
+/*
     @RequestMapping(value="/into",method = RequestMethod.GET)
     public ModelAndView RoleManager(){
         return new ModelAndView("system/systemCharacterEditor");
+    }*/
+
+    @RequestMapping(value="/into",method = RequestMethod.GET)
+    public ModelAndView RoleManager(){
+        return new ModelAndView("system/systemRoleManage");
     }
+
+
 }

@@ -23,20 +23,20 @@
         </div>
         <!--列表部分-->
         <div class="col-xs-10">
-            <div class="panel panel-default view-HD-lg">
+            <div id="productInfo" class="panel panel-default view-HD-lg">
                 <div class="panel-heading">
-                    <button id="disTree" data-form-btn="edit" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
+                    <button data-btn="edit" data-view="editHide" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
                         编辑
                     </button>
-                    <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden">
-                        <button data-form-btn="cancel" class="btn" lang="zh">取消</button>
-                        <button id="productInfo" data-form-btn="save" class="btn btn-primary" lang="zh">保存</button>
+                    <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right">
+                        <button data-btn="cancel" data-view="editView" class="btn hidden" lang="zh">取消</button>
+                        <button data-btn="save" data-view="editView" class="btn btn-primary hidden" lang="zh">保存</button>
                     </div>
                     <h3 class="panel-title" lang="zh">
                         标准产品档案
                     </h3>
                 </div>
-                <div id="container" class="panel-body panel-edit clearfix">
+                <div class="panel-body panel-edit clearfix">
                     <from class="form-horizontal">
                         <div class="form-group">
                             <label class="col-xs-1 control-label">品类</label>
@@ -143,205 +143,218 @@
 
 <input id="productId" type="hidden" value="">
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
-<script type="text/javascript">
-
-(function ($) {
-    $(function () {
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/knowledge/productArchivesList.js"></script>
 
 
-        $('#tree').creatTree(basePath+'/productCategory/CategoryTree');
-        $('#tree').filtrateData(basePath+'/productInfo/getProductInfoById','container','productArchivesList');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        $('#tree').filtrateData(basePath+'/productInfo/getProductInfoById','container','productArchivesList');
         //初始数据
-        productInfoForm({id:1011001});
+//        productInfoForm({id:1011001});
         //数据提交
-        $(document).on('click.upData','#productInfo',upProductInfo);
+//        $(document).on('click.upData','#productInfo',upProductInfo);
 
         //添加row
-        $(document).on('click.add','#addIndexItem',function () {
-            var tr = $('<tr><td><input class="form-control" type="text" value=""></td><td><input class="form-control" type="text" value=""></td><td style="position: relative"><input class="form-control" type="text" value=""/><button type="button" class="close" data-form-btn="del" data-form-target="tr" style="position: absolute;top:6px;right:-15px;">×</button></td></tr>');
-            tr.appendTo('[name="physicalProperities"]');
-        });
-        $(document).on('click.add','#addProItem',function () {
-            var tr = $('<tr><td><input class="form-control" type="text" value=""></td><td><input class="form-control" type="text" value=""></td><td style="position: relative"><input class="form-control" type="text" value=""/><button type="button" class="close" data-form-btn="del" data-form-target="tr" style="position: absolute;top:6px;right:-15px;">×</button></td></tr>');
-            tr.appendTo('[name="processingComponents"]');
-        });
+//        $(document).on('click.add','#addIndexItem',function () {
+//            var tr = $('<tr><td><input class="form-control" type="text" value=""></td><td><input class="form-control" type="text" value=""></td><td style="position: relative"><input class="form-control" type="text" value=""/><button type="button" class="close" data-form-btn="del" data-form-target="tr" style="position: absolute;top:6px;right:-15px;">×</button></td></tr>');
+//            tr.appendTo('[name="physicalProperities"]');
+//        });
+//        $(document).on('click.add','#addProItem',function () {
+//            var tr = $('<tr><td><input class="form-control" type="text" value=""></td><td><input class="form-control" type="text" value=""></td><td style="position: relative"><input class="form-control" type="text" value=""/><button type="button" class="close" data-form-btn="del" data-form-target="tr" style="position: absolute;top:6px;right:-15px;">×</button></td></tr>');
+//            tr.appendTo('[name="processingComponents"]');
+//        });
 
-    })
+//    });
 
     //获取标准产品数据
-    function productInfoForm(data) {
-        jQuery.ajax({
-            url:basePath+'/productInfo/getProductInfoById',
-            type:'POST',
-            data:data
-        }).done(function(data){
-            var getData                 = data.data,
-                productInfo             = getData.productInfo,
-                wares                   = getData.wares,
-                allProcessingComponents = getData.allProcessingComponents,
-                processingComponents    = getData.processingComponents,
-                index                   = getData.index,
-                tr                      = '',
-                pcisArr                 = [];
-
-            //表单处理
-            $('#productId').val(productInfo.productId);
-            $('#categoryName').val(productInfo.categoryName);
-            $('#name').val(productInfo.name);
-            $('#measurement').val(productInfo.measurement);
-            $('#concentration').val(productInfo.concentration);
-            $('[name="saltType"]').val([productInfo.saltType]);
-            $('#otherSaltName').val(productInfo.otherSaltName);
-            $('#executeStandard').val(productInfo.executeStandard);
-            $('#executeNumer').val(productInfo.executeNumer);
-            $('#executeRemarks').val(productInfo.executeRemarks);
-            $('#productFeature').val(productInfo.productFeature);
-            $('#lastmodifyUserName').val(productInfo.lastmodifyUserName);
-            $('#modifyTime').val(productInfo.modifyTime);
-
-            //规格型号
-            jQuery.each(wares,function (n,item) {
-                tr += '<tr><td>'+item.specification+'</td>';
-                tr += '<td>'+item.model+'</td></tr>';
-            });
-            $('#wares').append(tr);
-
-            //加工成分
-            if (allProcessingComponents instanceof Array && processingComponents instanceof Array) {
-                tr = '';
-                tr += '<tr><th class="text-center">是否需要</th>';
-                tr += '<th class="text-center">原料</th>';
-                tr += '<th class="text-center">单耗（kg/KL）</th>';
-                tr += '<th class="text-center">备注</th></tr>';
-                jQuery.each(allProcessingComponents,function (n,item) {
-                    tr += '<tr><td><input name="pcis" type="checkbox" disabled value="'+item.componentId+'"></td>';
-                    tr += '<td>'+item.componentName+'</td>';
-                    tr += '<td><input class="form-control" type="text" disabled value="'+item.unitCost+'"></td>';
-                    tr += '<td><input class="form-control" type="text" disabled value="'+item.remarks+'"></td></tr>';
-                });
-                $('#allProcessingComponents').html('').append(tr);
-                jQuery.each(processingComponents,function (n,item) {
-                    pcisArr.push(item.componentId);
-                });
-                $('[name="pcis"]').val(pcisArr);
-            }else{
-                tr = '';
-                tr = '<tr><td><textarea class="form-control">'+allProcessingComponents+'</textarea></td></tr>';
-                $('#allProcessingComponents').html('').append(tr);
-            }
-
-            //理化指标
-            if (index instanceof Array) {
-                tr = '';
-                tr += '<tr><th class="text-center">指标</th>';
-                tr += '<th class="text-center">值</th>';
-                tr += '<th class="text-center">备注</th></tr>';
-                jQuery.each(index,function (n,item) {
-                    console.log(item);
-                    tr += '<tr><td><input class="form-control" type="text" disabled value="'+item.index+'"></td>';
-                    tr += '<td><input class="form-control" type="text" disabled value="'+item.value+'"></td>';
-                    tr += '<td><input class="form-control" type="text" disabled value="'+item.remarks+'">';
-                    tr += '<button type="button" class="close hidden" data-form-btn="del" data-form-target="tr"' +
-                            ' style="position: absolute;top:6px;right:-15px;">×</button></td></tr>';
-                });
-                $('#index').append(tr);
-            }else{
-                tr = '';
-                tr = '<tr><td><textarea class="form-control">'+index+'</textarea></td></tr>';
-                $('#index').html('').append(tr);
-            }
-
-        });
-    }
+//    function productInfoForm(data) {
+//        jQuery.ajax({
+//            url:basePath+'/productInfo/getProductInfoById',
+//            type:'POST',
+//            data:data
+//        }).done(function(data){
+//            var getData                 = data.data,
+//                productInfo             = getData.productInfo,
+//                wares                   = getData.wares,
+//                allProcessingComponents = getData.allProcessingComponents,
+//                processingComponents    = getData.processingComponents,
+//                index                   = getData.index,
+//                tr                      = '',
+//                pcisArr                 = [];
+//
+//            //表单处理
+//            $('#productId').val(productInfo.productId);
+//            $('#categoryName').val(productInfo.categoryName);
+//            $('#name').val(productInfo.name);
+//            $('#measurement').val(productInfo.measurement);
+//            $('#concentration').val(productInfo.concentration);
+//            $('[name="saltType"]').val([productInfo.saltType]);
+//            $('#otherSaltName').val(productInfo.otherSaltName);
+//            $('#executeStandard').val(productInfo.executeStandard);
+//            $('#executeNumer').val(productInfo.executeNumer);
+//            $('#executeRemarks').val(productInfo.executeRemarks);
+//            $('#productFeature').val(productInfo.productFeature);
+//            $('#lastmodifyUserName').val(productInfo.lastmodifyUserName);
+//            $('#modifyTime').val(productInfo.modifyTime);
+//
+//            //规格型号
+//            jQuery.each(wares,function (n,item) {
+//                tr += '<tr><td>'+item.specification+'</td>';
+//                tr += '<td>'+item.model+'</td></tr>';
+//            });
+//            $('#wares').append(tr);
+//
+//            //加工成分
+//            if (allProcessingComponents instanceof Array && processingComponents instanceof Array) {
+//                tr = '';
+//                tr += '<tr><th class="text-center">是否需要</th>';
+//                tr += '<th class="text-center">原料</th>';
+//                tr += '<th class="text-center">单耗（kg/KL）</th>';
+//                tr += '<th class="text-center">备注</th></tr>';
+//                jQuery.each(allProcessingComponents,function (n,item) {
+//                    tr += '<tr><td><input name="pcis" type="checkbox" disabled value="'+item.componentId+'"></td>';
+//                    tr += '<td>'+item.componentName+'</td>';
+//                    tr += '<td><input class="form-control" type="text" disabled value="'+item.unitCost+'"></td>';
+//                    tr += '<td><input class="form-control" type="text" disabled value="'+item.remarks+'"></td></tr>';
+//                });
+//                $('#allProcessingComponents').html('').append(tr);
+//                jQuery.each(processingComponents,function (n,item) {
+//                    pcisArr.push(item.componentId);
+//                });
+//                $('[name="pcis"]').val(pcisArr);
+//            }else{
+//                tr = '';
+//                tr = '<tr><td><textarea class="form-control">'+allProcessingComponents+'</textarea></td></tr>';
+//                $('#allProcessingComponents').html('').append(tr);
+//            }
+//
+//            //理化指标
+//            if (index instanceof Array) {
+//                tr = '';
+//                tr += '<tr><th class="text-center">指标</th>';
+//                tr += '<th class="text-center">值</th>';
+//                tr += '<th class="text-center">备注</th></tr>';
+//                jQuery.each(index,function (n,item) {
+//                    console.log(item);
+//                    tr += '<tr><td><input class="form-control" type="text" disabled value="'+item.index+'"></td>';
+//                    tr += '<td><input class="form-control" type="text" disabled value="'+item.value+'"></td>';
+//                    tr += '<td><input class="form-control" type="text" disabled value="'+item.remarks+'">';
+//                    tr += '<button type="button" class="close hidden" data-form-btn="del" data-form-target="tr"' +
+//                            ' style="position: absolute;top:6px;right:-15px;">×</button></td></tr>';
+//                });
+//                $('#index').append(tr);
+//            }else{
+//                tr = '';
+//                tr = '<tr><td><textarea class="form-control">'+index+'</textarea></td></tr>';
+//                $('#index').html('').append(tr);
+//            }
+//
+//        });
+//    }
 
     //保存标注产品数据
-   function upProductInfo(e){
-        e.stopPropagation();
-        var upData = {
-            'productInfo':{
-                'productId': $('#productId').val(),
-                'categoryName': $('#categoryName').val(),
-                'name': $('#name').val(),
-                'measurement': $('#measurement').val(),
-                'concentration': $('#concentration').val(),
-                'executeStandard': $('#executeStandard').val(),
-                'executeNumer': $('#executeNumer').val(),
-                'executeRemarks': $('#executeRemarks').val(),
-                'productFeature': $('#productFeature').val(),
-                'modifyTime': getTime(),
-                'saltType': $('[name="saltType"]:checked').val(),
-                'otherSaltName': $('#otherSaltName').val(),
-                'physicalProperities' : getPPTable(),
-            },
-            'productComponents' : getPCTable()
-        };
-        console.log(upData);
-        function getPPTable() {
-            var p = content.find('[name="physicalProperities"]').find('tr');
-            console.log(p.find('textarea').length);
-            if(p.find('textarea').length!=1){
-                var arr = [];
-                p.each(function(){
-                    var obj = {};
-                    $(this).find('td').each(function(n,td){
-                        if(n==0){
-                            obj.index = $(td).children('input').val();
-                        }else if (n==1){
-                            obj.value = $(td).children('input').val();
-                        }else {
-                            obj.remarks = $(td).children('input').val();
-                        }
-                    });
-                    arr.push(obj);
-                })
-                return JSON.stringify(arr);
-            }else{
-                return p.find('textarea').val();
-            }
-        };
-        function getPCTable() {
-            var p = content.find('[name="processingComponents"]').find('tr');
-            if(p.find('textarea').length!=1){
-                var arr = [];
-                p.each(function(){
-                    var obj = {};
-                    $(this).find('td').each(function(n,td){
-                        if(n==0){
-                            obj.componentName = $(td).children('input').val();
-                        }else if (n==1){
-                            obj.consumption = $(td).children('input').val();
-                        }else {
-                            obj.remarks = $(td).children('input').val();
-                        }
-                    });
-                    arr.push(obj);
-                })
-                return arr;
-            }else{
-                return p.find('textarea').val();
-            }
-        };
-        function getTime(){
-            var time = new Date();
-            var year = time.getFullYear();
-            var month = parseInt(time.getMonth())+1;
-            var day = time.getDate();
-            var hours = parseInt(time.getHours());
-            var minutes = parseInt(time.getMinutes());
-            var seconds = parseInt(time.getSeconds());
-            var newTime;
-            return newTime = year+'-'+month+'-'+day+' '+hours+':'+minutes+':'+seconds;
-        };
-        jQuery.ajax({
-            'url':basePath+'/productInfo/doModify',
-            'type':'post',
-            'data':JSON.stringify(upData),
-            'contentType':"application/json"
-        }).done(function(){
-            alert('保存成功');
-        });
-    }
-
-    })(jQuery);
+//   function upProductInfo(e){
+//        e.stopPropagation();
+//        var upData = {
+//            'productInfo':{
+//                'productId': $('#productId').val(),
+//                'categoryName': $('#categoryName').val(),
+//                'name': $('#name').val(),
+//                'measurement': $('#measurement').val(),
+//                'concentration': $('#concentration').val(),
+//                'executeStandard': $('#executeStandard').val(),
+//                'executeNumer': $('#executeNumer').val(),
+//                'executeRemarks': $('#executeRemarks').val(),
+//                'productFeature': $('#productFeature').val(),
+//                'modifyTime': getTime(),
+//                'saltType': $('[name="saltType"]:checked').val(),
+//                'otherSaltName': $('#otherSaltName').val(),
+//                'physicalProperities' : getPPTable(),
+//            },
+//            'productComponents' : getPCTable()
+//        };
+//        console.log(upData);
+//        function getPPTable() {
+//            var p = content.find('[name="physicalProperities"]').find('tr');
+//            console.log(p.find('textarea').length);
+//            if(p.find('textarea').length!=1){
+//                var arr = [];
+//                p.each(function(){
+//                    var obj = {};
+//                    $(this).find('td').each(function(n,td){
+//                        if(n==0){
+//                            obj.index = $(td).children('input').val();
+//                        }else if (n==1){
+//                            obj.value = $(td).children('input').val();
+//                        }else {
+//                            obj.remarks = $(td).children('input').val();
+//                        }
+//                    });
+//                    arr.push(obj);
+//                })
+//                return JSON.stringify(arr);
+//            }else{
+//                return p.find('textarea').val();
+//            }
+//        };
+//        function getPCTable() {
+//            var p = content.find('[name="processingComponents"]').find('tr');
+//            if(p.find('textarea').length!=1){
+//                var arr = [];
+//                p.each(function(){
+//                    var obj = {};
+//                    $(this).find('td').each(function(n,td){
+//                        if(n==0){
+//                            obj.componentName = $(td).children('input').val();
+//                        }else if (n==1){
+//                            obj.consumption = $(td).children('input').val();
+//                        }else {
+//                            obj.remarks = $(td).children('input').val();
+//                        }
+//                    });
+//                    arr.push(obj);
+//                })
+//                return arr;
+//            }else{
+//                return p.find('textarea').val();
+//            }
+//        };
+//        function getTime(){
+//            var time = new Date();
+//            var year = time.getFullYear();
+//            var month = parseInt(time.getMonth())+1;
+//            var day = time.getDate();
+//            var hours = parseInt(time.getHours());
+//            var minutes = parseInt(time.getMinutes());
+//            var seconds = parseInt(time.getSeconds());
+//            var newTime;
+//            return newTime = year+'-'+month+'-'+day+' '+hours+':'+minutes+':'+seconds;
+//        };
+//        jQuery.ajax({
+//            'url':basePath+'/productInfo/doModify',
+//            'type':'post',
+//            'data':JSON.stringify(upData),
+//            'contentType':"application/json"
+//        }).done(function(){
+//            alert('保存成功');
+//        });
+//    }
+//
+//    })(jQuery);
 </script>
