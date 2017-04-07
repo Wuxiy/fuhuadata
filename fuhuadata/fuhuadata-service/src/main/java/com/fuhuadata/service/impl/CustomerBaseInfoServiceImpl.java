@@ -12,6 +12,7 @@ import java.util.List;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.service.CustomerBaseInfoService;
+import com.fuhuadata.vo.CustomerBaseInfoLinkman;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.LogFactory;
@@ -170,10 +171,23 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 		return result;
 	}
 
+	@Override
+	public Result<CustomerBaseInfoLinkman> getCustomerBaseInfoLinkmanByCustomerId(String customerId) {
+		Result<CustomerBaseInfoLinkman> result = new Result<CustomerBaseInfoLinkman>();
+		try{
+			result.addDefaultModel("CustomerBaseInfoLinkman",customerBaseInfoManager.getCustomerBaseInfoLinkmanByCustomerId(customerId));
+
+		}catch (Exception e){
+			result.setSuccess(false);
+			log.error("根据客户id获取客户及默认联系人信息出错",e);
+		}
+		return result;
+	}
+
 
 	public Result<List<CustomerBaseInfo>> getCustomerBaseInfoByPage(QueryCustomerBaseInfo queryCustomerBaseInfo) {
 		Result<List<CustomerBaseInfo>> result = new Result<List<CustomerBaseInfo>>();
-		try {
+			try {
 			result = customerBaseInfoManager.getCustomerBaseInfoByPage(queryCustomerBaseInfo);
 		} catch(Exception e) {
 			result.setSuccess(false);

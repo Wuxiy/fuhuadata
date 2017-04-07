@@ -258,9 +258,8 @@
 
     //获取详情function
     function businessInfo(result) {
-        var ResultData = result;
-        var businessfollow = result.businessfollow;
-        console.log(ResultData);
+        var ResultData = result.businessInfo;
+        console.log(result);
 
         /*var intentionalProducts = ResultData.intentionalProducts;
         $('#intentionalProduct0').val(intentionalProducts[0].intentionalProduct);
@@ -287,13 +286,12 @@
         $('#createUserName').val(ResultData.createUserName);
         $('#createTime').val(ResultData.createTime);
 
-<<<<<<< HEAD
         
     }
 
     //跟进记录
     function businessFollow(result) {
-        var ResultData = result;
+        var businessfollow = result.businessRecords;
         for(var i=0;i<businessfollow.length;i++){
             businessfollow.innerHTML = '';
             businessfollow.innerHTML += '<tr>'+
@@ -305,7 +303,6 @@
                     '<td>'+businessfollow[i].name+'</td>'+
                     '</tr>';
         }
-=======
         /*var _html = '';
         for(var i=0;i<businessfollow.length;i++){
             _html += '<tr>';
@@ -317,8 +314,7 @@
             _html += '<td>'+businessfollow[i].name+'</td>';
             _html += '</tr>';
         }*/
-        $('#businessfollow').append(_html);
->>>>>>> a6289832ea2c0ac0babadd4dc4d000a6892afb77
+//        $('#businessfollow').append(_html);
     }
 
     function updateBusinessInfo(){

@@ -9,6 +9,7 @@
 	<typeAlias alias="CustomerBaseInfoVO" type="com.fuhuadata.vo.CustomerBaseInfoVO"/>
 	<typeAlias alias="CustomerMakeProduct" type="com.fuhuadata.domain.CustomerMakeProduct"/>
 	<typeAlias alias="CustomerEnterpriceNature" type="com.fuhuadata.domain.CustomerEnterpriceNature"/>
+	<typeAlias alias="CustomerBaseInfoLinkman" type="com.fuhuadata.vo.CustomerBaseInfoLinkman"/>
 
 	<resultMap id="CUSTOMERBASEINFO-MAP" class="CustomerBaseInfo">
 					<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -371,6 +372,27 @@
 	<select id="GET-BY-ID" resultClass="CustomerBaseInfo" parameterClass="java.lang.String">
 		<![CDATA[
 			SELECT * FROM customer_base_info	WHERE customer_id=#customer_id#
+		]]>
+	</select>
+
+	<select id="GET-BASEINFO-LINKMANINFO-BY-CUSTOMERID" resultClass="CustomerBaseInfoLinkman" parameterClass="java.lang.String">
+		<![CDATA[
+						SELECT
+				base.full_name fullName,
+				base.short_name shortName,
+				base.customer_level customerLevel,
+				base.full_enterprise_nature enterpriseNature,
+				base.country country,
+				a.linkman_id linkmanId,
+				a.`name` linkmanName,
+				a.link_phone1 linkPhone1,
+				a.link_phone2 linkPhone2,
+				a.lemail lemail
+			FROM
+				customer_base_info base
+			LEFT JOIN customer_linkman a ON a.customer_id = base.customer_id
+			WHERE
+				a.is_default = 1 AND base.customer_id=#customerId#
 		]]>
 	</select>
 

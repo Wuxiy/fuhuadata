@@ -2,12 +2,14 @@ package com.fuhuadata.manager.impl;
 import java.util.List;
 
 import com.fuhuadata.dao.RecordLinkmanDao;
+import com.fuhuadata.domain.query.QueryBusinessOrder;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.dao.CustomerVisitRecordDao;
 import com.fuhuadata.manager.CustomerVisitRecordManager;
 import com.fuhuadata.domain.CustomerVisitRecord;
 import com.fuhuadata.domain.query.QueryCustomerVisitRecord;
 import javax.annotation.Resource;
+import javax.management.Query;
 
 import com.fuhuadata.vo.CustomerVisitRecordVO;
 import com.fuhuadata.vo.VisitRecordVO;
@@ -53,24 +55,10 @@ public class CustomerVisitRecordManagerImpl implements CustomerVisitRecordManage
     	return customerVisitRecordDao.getAllCustomerVisitRecords();
     }
     	
-    public Result<List<CustomerVisitRecord>> getCustomerVisitRecordsByPage(QueryCustomerVisitRecord queryCustomerVisitRecord) {
-		Result<List<CustomerVisitRecord>> result = new Result<List<CustomerVisitRecord>>();
-		int totalItem = customerVisitRecordDao.count(queryCustomerVisitRecord);
-		;
-		if (totalItem > 0) {
-			result.addDefaultModel("CustomerVisitRecords", customerVisitRecordDao.getCustomerVisitRecordsByPage(queryCustomerVisitRecord));		
-		} else {
-			result.addDefaultModel("CustomerVisitRecords", new ArrayList<CustomerVisitRecord>());
-		}
-		
-		result.setPageSize(queryCustomerVisitRecord.getPageSize());
-		result.setIndex(queryCustomerVisitRecord.getIndex());
-		result.setTotalItem(totalItem);
-		
-		return result;
+    public List<QueryCustomerVisitRecord> getCustomerVisitRecordsByPage(QueryCustomerVisitRecord queryCustomerVisitRecord) {
+		return customerVisitRecordDao.getCustomerVisitRecordsByPage(queryCustomerVisitRecord);
     }
-    	
-    	
+
     public CustomerVisitRecord getCustomerVisitRecordById(int visitrecord_id) {
     	return customerVisitRecordDao.getCustomerVisitRecordById(visitrecord_id);
     }

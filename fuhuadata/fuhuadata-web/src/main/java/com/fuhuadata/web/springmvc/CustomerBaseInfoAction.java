@@ -10,6 +10,7 @@ import com.fuhuadata.service.CustomerAreaService;
 import com.fuhuadata.service.CustomerBaseInfoService;
 import com.fuhuadata.service.CustomerMakeProductService;
 import com.fuhuadata.vo.CategoryTree;
+import com.fuhuadata.vo.CustomerBaseInfoLinkman;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
 import com.fuhuadata.vo.CustomerBaseInfoDO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
@@ -226,6 +227,26 @@ public class CustomerBaseInfoAction {
         }catch(Exception e){
             result.setSuccess(false);
             log.error("新增客户基本信息错误");
+        }
+        return result.getResultPojo();
+    }
+
+
+    /**
+     * 根据客户id获取客户以及默认联系人信息
+     * @param customerId
+     * @return
+     */
+    @RequestMapping(value = "/getCustomerBaseInfoLinkman",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "customerInfo-",methods = "getCustomerBaseInfoLinkman")
+    @ResponseBody
+    public ResultPojo getCustomerBaseInfoLinkman(String customerId){
+        Result<CustomerBaseInfoLinkman> result = new Result<CustomerBaseInfoLinkman>();
+        try{
+            result=customerBaseInfoService.getCustomerBaseInfoLinkmanByCustomerId(customerId);
+        }catch (Exception e){
+            result.setSuccess(false);
+            log.error("根据客户id获取客户以及默认联系人信息失败",e);
         }
         return result.getResultPojo();
     }

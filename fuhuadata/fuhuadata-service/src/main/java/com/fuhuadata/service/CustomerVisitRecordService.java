@@ -6,6 +6,8 @@ import com.fuhuadata.domain.query.QueryCustomerVisitRecord;
 import com.fuhuadata.vo.CustomerVisitRecordVO;
 import com.fuhuadata.vo.VisitRecordVO;
 
+import javax.management.Query;
+
 /**
  * @author wangbo
  * @date 2017-01-13 16:22:04
@@ -83,7 +85,7 @@ public interface CustomerVisitRecordService {
      * @param queryCustomerVisitRecord
      * @return
      */
-    public Result<List<CustomerVisitRecord>> getCustomerVisitRecordsByPage(QueryCustomerVisitRecord queryCustomerVisitRecord);
+    public Result<List<QueryCustomerVisitRecord>> getCustomerVisitRecordsByPage(QueryCustomerVisitRecord queryCustomerVisitRecord);
 
     /**
      * 查询总数
