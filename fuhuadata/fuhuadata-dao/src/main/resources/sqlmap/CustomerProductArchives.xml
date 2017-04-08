@@ -6,70 +6,70 @@
    	<typeAlias alias="CustomerProductArchives" type="com.fuhuadata.domain.CustomerProductArchives"/>
    	<typeAlias alias="QueryCustomerProductArchives" type="com.fuhuadata.domain.query.QueryCustomerProductArchives"/>
 	<typeAlias alias="CustomerProductPackagingArchives" type="com.fuhuadata.vo.CustomerProductPackagingArchives"/>
-	
 	<resultMap id="CUSTOMERPRODUCTARCHIVES-MAP" class="CustomerProductArchives">
-								<result property="id" column="id" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="productId" column="product_id" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="orderId" column="order_id" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="name" column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result column="customer_product_name" property="customerProductName" jdbcType="VARCHAR" javaType="java.lang.String"/>
-								<result property="brand" column="brand" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="mainProductAmount" column="main_product_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-								<result property="mainProductUnit" column="main_product_unit" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="subProductAmount" column="sub_product_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-								<result property="subProductUnit" column="sub_product_unit" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="convertRate" column="convert_rate" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-								<result property="priceType" column="price_type" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="advisePrice" column="advise_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-								<result property="purchasePrice" column="purchase_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-								<result property="deliveryTime" column="delivery_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
-								<result property="InternalTransportMode" column="Internal_transport_mode" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="InternalTransportPrice" column="Internal_transport_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-								<result property="factoryId" column="factory_id" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="factoryName" column="factory_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="id" column="id" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="productId" column="product_id" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="wareId" column="ware_id" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="orderId" column="order_id" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="name" column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result column="customer_product_name" property="customerProductName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+		<result property="brand" column="brand" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="mainProductAmount" column="main_product_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+		<result property="mainProductUnit" column="main_product_unit" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="subProductAmount" column="sub_product_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+		<result property="subProductUnit" column="sub_product_unit" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="convertRate" column="convert_rate" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+		<result property="priceType" column="price_type" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="advisePrice" column="advise_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+		<result property="purchasePrice" column="purchase_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+		<result property="deliveryTime" column="delivery_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+		<result property="InternalTransportMode" column="Internal_transport_mode" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="InternalTransportPrice" column="Internal_transport_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+		<result property="factoryId" column="factory_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="factoryName" column="factory_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result column="composition_cost" property="compositionCost" jdbcType="VARCHAR" />
+		<result column="pakage_other_requirement" property="pakageOtherRequirement" jdbcType="VARCHAR" />
+		<result column="additional_price" property="additionalPrice" jdbcType="DECIMAL" />
+		<result column="consumption" property="consumption" jdbcType="DECIMAL" />
+		<result column="img_info" property="imgInfo" jdbcType="VARCHAR" />
+		<result column="pakage_info" property="pakageInfo" jdbcType="VARCHAR" />
+		<result column="material_info" property="materialInfo" jdbcType="VARCHAR" />
+		<result property="straightEmployingWay" column="straight_employing_way" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="straightEmployingScale" column="straight_employing_scale" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+		<result property="straightEmployingStandard" column="straight_employing_standard" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="potentialEmployingWay" column="potential_employing_way" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="potentialEmployingScale" column="potential_employing_scale" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+		<result property="potentialEmployingStandard" column="potential_employing_standard" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="documentaryType" column="documentary_type" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="documentaryRequire" column="documentary_require" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="otherDocumentaryRequire" column="other_documentary_require" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="shippingAgentRequire" column="shipping_agent_require" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="packageRequire" column="package_require" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="goodsType" column="goods_type" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="mianxiangqi" column="mianxiangqi" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="miantuiqi" column="miantuiqi" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="cupboardType" column="cupboard_type" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="cupboardPerNumber" column="cupboard_per_number" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="cupboardNumber" column="cupboard_number" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="oceanFreight" column="ocean_freight" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+		<result property="portSurcharge" column="port_surcharge" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+		<result property="taxFree" column="tax_free" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+		<result column="gross_margin" property="grossMargin" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+		<result property="otherCost" column="other_cost" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+		<result property="minSellPrice" column="min_sell_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+		<result property="contractPrice" column="contract_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+		<result column="transform_state" property="transformState" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+		<result property="createUserId" column="create_user_id" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="createUserName" column="create_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="lastmodifyUserId" column="lastmodify_user_id" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="lastmodifyUserName" column="lastmodify_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="createTime" column="create_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+		<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+		<result property="customsClearanceId" column="customs_clearance_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="customsClearanceName" column="customs_clearance_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 
-								<result column="composition_cost" property="compositionCost" jdbcType="VARCHAR" />
-								<result column="pakage_other_requirement" property="pakageOtherRequirement" jdbcType="VARCHAR" />
-								<result column="additional_price" property="additionalPrice" jdbcType="DECIMAL" />
-								<result column="consumption" property="consumption" jdbcType="DECIMAL" />
-								<result column="img_info" property="imgInfo" jdbcType="VARCHAR" />
-								<result column="pakage_info" property="pakageInfo" jdbcType="VARCHAR" />
-								<result column="material_info" property="materialInfo" jdbcType="VARCHAR" />
-
-								<result property="straightEmployingWay" column="straight_employing_way" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="straightEmployingScale" column="straight_employing_scale" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-								<result property="straightEmployingStandard" column="straight_employing_standard" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="potentialEmployingWay" column="potential_employing_way" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="potentialEmployingScale" column="potential_employing_scale" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-								<result property="potentialEmployingStandard" column="potential_employing_standard" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="documentaryType" column="documentary_type" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="documentaryRequire" column="documentary_require" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="otherDocumentaryRequire" column="other_documentary_require" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="shippingAgentRequire" column="shipping_agent_require" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="packageRequire" column="package_require" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="goodsType" column="goods_type" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="mianxiangqi" column="mianxiangqi" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="miantuiqi" column="miantuiqi" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="cupboardType" column="cupboard_type" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="cupboardPerNumber" column="cupboard_per_number" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="cupboardNumber" column="cupboard_number" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="oceanFreight" column="ocean_freight" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-								<result property="portSurcharge" column="port_surcharge" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-								<result property="taxFree" column="tax_free" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-								<result column="gross_margin" property="grossMargin" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
-								<result property="otherCost" column="other_cost" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-								<result property="minSellPrice" column="min_sell_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-								<result property="contractPrice" column="contract_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-								<result column="transform_state" property="transformState" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-
-								<result property="createUserId" column="create_user_id" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="createUserName" column="create_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="lastmodifyUserId" column="lastmodify_user_id" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="lastmodifyUserName" column="lastmodify_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="createTime" column="create_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
-								<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
-														</resultMap>
+	</resultMap>
 	
 	<sql id="PAGE-COMMON">	
 		<dynamic prepend=" WHERE ">
@@ -263,6 +263,9 @@
 			<isNotNull prepend=" AND " property="productId">
 				product_id = #productId#
 			</isNotNull>
+			<isNotNull prepend=" AND " property="wareId">
+				ware_id = #wareId#
+			</isNotNull>
 			<isNotNull prepend=" AND " property="customerId">
 				customer_id = #customerId#
 			</isNotNull>
@@ -432,17 +435,117 @@
 			</isNotNull>
 		</dynamic>
 	</sql>
-	
+
+	<insert id="addArchives" parameterClass="java.lang.Integer">
+		insert into customer_product_archives (order_id, product_id,
+		ware_id, customs_clearance_id, customs_clearance_name, Internal_supply_id,
+		Internal_supply_name, customer_id, name, customer_product_name, brand, main_product_amount,
+		main_product_unit, sub_product_amount, sub_product_unit, convert_rate, price_type,
+		advise_price, purchase_price, delivery_time, Internal_transport_mode,
+		Internal_transport_price, factory_id, factory_name, straight_employing_way,
+		straight_employing_scale, straight_employing_standard, potential_employing_way,
+		potential_employing_scale, potential_employing_standard, documentary_type,
+		documentary_require, other_documentary_require, shipping_agent_require, package_require,
+		goods_type, mianxiangqi, miantuiqi, cupboard_type, cupboard_per_number, cupboard_number,
+		ocean_freight, port_surcharge, tax_type, tax_free, gross_margin, other_cost, min_price,
+		contract_price, transform_state, create_user_id, create_user_name, lastmodify_user_id,
+		lastmodify_user_name, create_time, modify_time)
+		(
+			select
+				order_id, product_id,
+				ware_id, customs_clearance_id, customs_clearance_name, Internal_supply_id,
+				Internal_supply_name, customer_id, name, customer_product_name, brand, main_product_amount,
+				main_product_unit, sub_product_amount, sub_product_unit, convert_rate, price_type,
+				advise_price, purchase_price, delivery_time, Internal_transport_mode,
+				Internal_transport_price, factory_id, factory_name, straight_employing_way,
+				straight_employing_scale, straight_employing_standard, potential_employing_way,
+				potential_employing_scale, potential_employing_standard, documentary_type,
+				documentary_require, other_documentary_require, shipping_agent_require, package_require,
+				goods_type, mianxiangqi, miantuiqi, cupboard_type, cupboard_per_number, cupboard_number,
+				ocean_freight, port_surcharge, tax_type, tax_free, gross_margin, other_cost, min_price,
+				contract_price, transform_state, create_user_id, create_user_name, lastmodify_user_id,
+				lastmodify_user_name, create_time, modify_time
+			from business_order_product
+				where id=#id#
+		)
+		)
+		<selectKey resultClass="int" keyProperty="id">
+			SELECT @@IDENTITY AS ID
+		</selectKey>
+	</insert>
+
+	<update id="updateArchives" parameterClass="java.lang.Integer">
+		update customer_product_archives a,business_order_product b
+		set
+		a.order_id = b.order_id
+		,a.product_id = b.product_id
+		,a.ware_id = b.ware_id
+		,a.customs_clearance_id = b.customs_clearance_id
+		,a.customs_clearance_name = b.customs_clearance_name
+		,a.Internal_supply_id = b.Internal_supply_id
+		,a.Internal_supply_name = b.Internal_supply_name
+		,a.customer_id = b.customer_id
+		,a.name = b.name
+		,a.customer_product_name = b.customer_product_name
+		,a.brand = b.brand
+		,a.main_product_amount = b.main_product_amount
+		,a.main_product_unit = b.main_product_unit
+		,a.sub_product_amount = b.sub_product_amount
+		,a.sub_product_unit = b.sub_product_unit
+		,a.convert_rate = b.convert_rate
+		,a.price_type = b.price_type
+		,a.advie_price = b.advie_price
+		,a.purchase_price = b.purchase_price
+		,a.delivery_time = b.delivery_time
+		,a.Internal_transport_mode = b.Internal_transport_mode
+		,a.Internal_transport_price = b.Internal_transport_price
+		,a.factory_id factory_name = b.factory_id factory_name
+		,a.straight_employing_way = b.straight_employing_way
+		,a.straight_employing_scale = b.straight_employing_scale
+		,a.straight_employing_standard = b.straight_employing_standard
+		,a.potential_employing_way = b.potential_employing_way
+		,a.potential_employing_scale = b.potential_employing_scale
+		,a.potential_employing_standard = b.potential_employing_standard
+		,a.documentary_type = b.documentary_type
+		,a.documentary_require = b.documentary_require
+		,a.other_documentary_require = b.other_documentary_require
+		,a.shipping_agent_require = b.shipping_agent_require
+		,a.package_require = b.package_require
+		,a.goods_type = b.goods_type
+		,a.mianxiangqi = b.mianxiangqi
+		,a.miantuiqi = b.miantuiqi
+		,a.cupboard_type = b.cupboard_type
+		,a.cupboard_per_number = b.cupboard_per_number
+		,a.cupboard_number = b.cupboard_number
+		,a.ocean_freight = b.ocean_freight
+		,a.port_surcharge = b.port_surcharge
+		,a.tax_type = b.tax_type
+		,a.tax_free = b.tax_free
+		,a.gross_margin = b.gross_margin
+		,a.other_cost = b.other_cost
+		,a.min_price = b.min_price
+		,a.contract_price = b.contract_price
+		,a.transform_state = b.transform_state
+		,a.create_user_id = b.create_user_id
+		,a.create_user_name = b.create_user_name
+		,a.lastmodify_user_id = b.lastmodify_user_id
+		,a.lastmodify_user_name = b.lastmodify_user_name
+		,a.create_time = b.create_time
+		,a.modify_time = b.modify_time
+		where b.archive_product_id = a.id
+		and a.id = #businessProductId#
+	</update>
+
 	<insert id="ADD" parameterClass="CustomerProductArchives">
 		insert into customer_product_archives(
-		order_id,archive_product_id,product_id,customs_clearance_id,customs_clearance_name,customer_id,name,
+		order_id,product_id,customs_clearance_id,customs_clearance_name,customer_id,name,
 		customer_product_name,brand,main_product_amount,main_product_unit,sub_product_amount,sub_product_unit,
 		convert_rate,price_type,advise_price,purchase_price,delivery_time,factory_id,factory_name,straight_employing_way,
 		straight_employing_scale,straight_employing_standard,potential_employing_way,potential_employing_scale,potential_employing_standard,
 		tax_type,tax_free,other_cost
 		)
 		values(
-		#orderId#,#archiveProductId#,#productId#,#customsClearanceId#,#customsClearanceName#,#customerId#,#name#,
+		#orderId#,#productId#,#customsClearanceId#,#customsClearanceName#,#customerId#,#name#,
 		#customerProductName#,#brand#,#mainProductAmount#,#mainProductUnit#,#subProductAmount#,#subProductUnit#,
 		#convertRate#,#priceType#,#advisePrice#,#purchasePrice#,#deliveryTime#,#factoryId#,#factoryName#,#straightEmployingWay#,
 		#straightEmployingScale#,#straightEmployingStandard#,#potentialEmployingWay#,#potentialEmployingScale#,#potentialEmployingStandard#,
@@ -459,11 +562,11 @@
 			<isNotNull prepend="," property="orderId">
 				order_id = #orderId#
 			</isNotNull>
-			<isNotNull prepend="," property="archiveProductId">
-				archive_product_id = #archiveProductId#
-			</isNotNull>
 			<isNotNull prepend="," property="productId">
 				product_id = #productId#
+			</isNotNull>
+			<isNotNull prepend="," property="wareId">
+				ware_id = #wareId#
 			</isNotNull>
 			<isNotNull prepend="," property="customsClearanceId">
 				customs_clearance_id = #customsClearanceId#
@@ -636,7 +739,7 @@
 			SELECT * FROM customer_product_archives
 		]]>
 	</select>
-	
+
 	<select id="GET-BY-QUERY" resultMap="CUSTOMERPRODUCTARCHIVES-MAP" parameterClass="QueryCustomerProductArchives">
 		<![CDATA[
 			SELECT * FROM customer_product_archives
@@ -744,4 +847,5 @@
 		where
 		customer_id=#customerId#
 	</select>
+
 </sqlMap>

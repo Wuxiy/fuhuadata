@@ -171,4 +171,9 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 	public ProductWareManager getProductWareManager(){
 		return this.productWareManager;
 	}
+
+	@Override
+	public ProductInfo getCustomsClearanceInfo(Integer productId) {
+		return productInfoManager.getCustomsClearanceInfo(productId);
+	}
 }

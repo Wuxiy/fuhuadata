@@ -4,22 +4,153 @@
 <sqlMap namespace="BUSINESSORDERPRODUCT" >
     <typeAlias alias="BusinessOrderProduct" type="com.fuhuadata.domain.BusinessOrderProduct"/>
     <typeAlias alias="QueryBusinessOrderProduct" type="com.fuhuadata.domain.query.QueryBusinessOrderProduct"/>
+    <resultMap class="com.fuhuadata.domain.BusinessOrderProduct" id="BusinessOrderProductResultMap">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+        <result column="archive_product_id" jdbcType="INTEGER" property="archiveProductId" />
+        <result column="product_id" jdbcType="INTEGER" property="productId" />
+        <result column="ware_id" jdbcType="INTEGER" property="wareId" />
+        <result column="customs_clearance_id" jdbcType="VARCHAR" property="customsClearanceId" />
+        <result column="customs_clearance_name" jdbcType="VARCHAR" property="customsClearanceName" />
+        <result column="Internal_supply_id" jdbcType="VARCHAR" property="internalSupplyId" />
+        <result column="Internal_supply_name" jdbcType="VARCHAR" property="internalSupplyName" />
+        <result column="customer_id" jdbcType="INTEGER" property="customerId" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="customer_product_name" jdbcType="VARCHAR" property="customerProductName" />
+        <result column="brand" jdbcType="VARCHAR" property="brand" />
+        <result column="main_product_amount" jdbcType="DECIMAL" property="mainProductAmount" />
+        <result column="main_product_unit" jdbcType="INTEGER" property="mainProductUnit" />
+        <result column="sub_product_amount" jdbcType="DECIMAL" property="subProductAmount" />
+        <result column="sub_product_unit" jdbcType="INTEGER" property="subProductUnit" />
+        <result column="convert_rate" jdbcType="DECIMAL" property="convertRate" />
+        <result column="price_type" jdbcType="INTEGER" property="priceType" />
+        <result column="advise_price" jdbcType="DECIMAL" property="advisePrice" />
+        <result column="purchase_price" jdbcType="DECIMAL" property="purchasePrice" />
+        <result column="delivery_time" jdbcType="TIMESTAMP" property="deliveryTime" />
+        <result column="Internal_transport_mode" jdbcType="INTEGER" property="internalTransportMode" />
+        <result column="Internal_transport_price" jdbcType="DECIMAL" property="internalTransportPrice" />
+        <result column="factory_id" jdbcType="VARCHAR" property="factoryId" />
+        <result column="factory_name" jdbcType="VARCHAR" property="factoryName" />
+        <result column="straight_employing_way" jdbcType="INTEGER" property="straightEmployingWay" />
+        <result column="straight_employing_scale" jdbcType="DECIMAL" property="straightEmployingScale" />
+        <result column="straight_employing_standard" jdbcType="VARCHAR" property="straightEmployingStandard" />
+        <result column="potential_employing_way" jdbcType="INTEGER" property="potentialEmployingWay" />
+        <result column="potential_employing_scale" jdbcType="DECIMAL" property="potentialEmployingScale" />
+        <result column="potential_employing_standard" jdbcType="VARCHAR" property="potentialEmployingStandard" />
+        <result column="documentary_type" jdbcType="INTEGER" property="documentaryType" />
+        <result column="documentary_require" jdbcType="VARCHAR" property="documentaryRequire" />
+        <result column="other_documentary_require" jdbcType="VARCHAR" property="otherDocumentaryRequire" />
+        <result column="shipping_agent_require" jdbcType="VARCHAR" property="shippingAgentRequire" />
+        <result column="package_require" jdbcType="VARCHAR" property="packageRequire" />
+        <result column="goods_type" jdbcType="INTEGER" property="goodsType" />
+        <result column="mianxiangqi" jdbcType="INTEGER" property="mianxiangqi" />
+        <result column="miantuiqi" jdbcType="INTEGER" property="miantuiqi" />
+        <result column="cupboard_type" jdbcType="INTEGER" property="cupboardType" />
+        <result column="cupboard_per_number" jdbcType="INTEGER" property="cupboardPerNumber" />
+        <result column="cupboard_number" jdbcType="INTEGER" property="cupboardNumber" />
+        <result column="ocean_freight" jdbcType="DECIMAL" property="oceanFreight" />
+        <result column="port_surcharge" jdbcType="DECIMAL" property="portSurcharge" />
+        <result column="tax_type" jdbcType="TINYINT" property="taxType" />
+        <result column="tax_free" jdbcType="DECIMAL" property="taxFree" />
+        <result column="gross_margin" jdbcType="DECIMAL" property="grossMargin" />
+        <result column="other_cost" jdbcType="DECIMAL" property="otherCost" />
+        <result column="min_price" jdbcType="DECIMAL" property="minPrice" />
+        <result column="contract_price" jdbcType="DECIMAL" property="contractPrice" />
+        <result column="transform_state" jdbcType="INTEGER" property="transformState" />
+        <result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
+        <result column="create_user_name" jdbcType="VARCHAR" property="createUserName" />
+        <result column="lastmodify_user_id" jdbcType="INTEGER" property="lastmodifyUserId" />
+        <result column="lastmodify_user_name" jdbcType="VARCHAR" property="lastmodifyUserName" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    </resultMap>
+    <select id="getBasicById" parameterClass="java.lang.Integer" resultMap="BusinessOrderProductResultMap">
+        select
+            order_id,archive_product_id,product_id,ware_id,customs_clearance_id,customs_clearance_name,customer_id,name,
+            customer_product_name,brand,main_product_amount,main_product_unit,sub_product_amount,sub_product_unit,
+            convert_rate,price_type,advise_price,purchase_price,delivery_time,factory_id,factory_name,straight_employing_way,
+            straight_employing_scale,straight_employing_standard,potential_employing_way,potential_employing_scale,potential_employing_standard,
+            tax_type,tax_free,other_cost
+        from business_order_product
+        where id=#id#
+    </select>
+    <select id="getDocumentaryById" parameterClass="java.lang.Integer" resultMap="BusinessOrderProductResultMap">
+        select
+            documentary_type,
+            documentary_require
+        from
+            business_order_product
+        where id=#id#
+    </select>
+
+    <select id="getPackageRequireById" parameterClass="java.lang.Integer" resultMap="BusinessOrderProductResultMap">
+        select
+            shipping_agent_require,
+            package_require,
+            goods_type,
+            mianxiangqi,
+            miantuiqi,
+            cupboard_type,
+            cupboard_per_number,
+            cupboard_number,
+            ocean_freight,
+            port_surcharge
+        from
+        business_order_product
+        where id=#id#
+    </select>
 
     <insert id="insertBasic" parameterClass="BusinessOrderProduct">
         insert into business_order_product(
-            order_id,archive_product_id,product_id,customs_clearance_id,customs_clearance_name,customer_id,name,
+            order_id,archive_product_id,product_id,ware_id,customs_clearance_id,customs_clearance_name,customer_id,name,
             customer_product_name,brand,main_product_amount,main_product_unit,sub_product_amount,sub_product_unit,
             convert_rate,price_type,advise_price,purchase_price,delivery_time,factory_id,factory_name,straight_employing_way,
             straight_employing_scale,straight_employing_standard,potential_employing_way,potential_employing_scale,potential_employing_standard,
             tax_type,tax_free,other_cost
         )
         values(
-        #orderId#,#archiveProductId#,#productId#,#customsClearanceId#,#customsClearanceName#,#customerId#,#name#,
+        #orderId#,#archiveProductId#,#productId#,#wareId#,#customsClearanceId#,#customsClearanceName#,#customerId#,#name#,
         #customerProductName#,#brand#,#mainProductAmount#,#mainProductUnit#,#subProductAmount#,#subProductUnit#,
         #convertRate#,#priceType#,#advisePrice#,#purchasePrice#,#deliveryTime#,#factoryId#,#factoryName#,#straightEmployingWay#,
         #straightEmployingScale#,#straightEmployingStandard#,#potentialEmployingWay#,#potentialEmployingScale#,#potentialEmployingStandard#,
         #taxType#,#taxFree#,#otherCost#
         )
+        <selectKey resultClass="java.lang.Integer" keyProperty="id">
+            SELECT @@IDENTITY AS ID
+        </selectKey>
+    </insert>
+
+    <insert id="insertFromArchives" parameterClass="BusinessOrderProduct">
+        insert into business_order_product (order_id, archive_product_id, product_id,
+        ware_id, customs_clearance_id, customs_clearance_name, Internal_supply_id,
+        Internal_supply_name, customer_id, name, customer_product_name, brand, main_product_amount,
+        main_product_unit, sub_product_amount, sub_product_unit, convert_rate, price_type,
+        advise_price, purchase_price, delivery_time, Internal_transport_mode,
+        Internal_transport_price, factory_id, factory_name, straight_employing_way,
+        straight_employing_scale, straight_employing_standard, potential_employing_way,
+        potential_employing_scale, potential_employing_standard, documentary_type,
+        documentary_require, other_documentary_require, shipping_agent_require, package_require,
+        goods_type, mianxiangqi, miantuiqi, cupboard_type, cupboard_per_number, cupboard_number,
+        ocean_freight, port_surcharge, tax_type, tax_free, gross_margin, other_cost, min_price,
+        contract_price, transform_state, create_user_id, create_user_name, lastmodify_user_id,
+        lastmodify_user_name, create_time, modify_time)
+
+        (select
+        #orderId# as order_id,#archiveProductId# as archive_product_id, product_id,
+        ware_id, customs_clearance_id, customs_clearance_name, Internal_supply_id,
+        Internal_supply_name, customer_id, name, customer_product_name, brand, main_product_amount,
+        main_product_unit, sub_product_amount, sub_product_unit, convert_rate, price_type,
+        advise_price, purchase_price, delivery_time, Internal_transport_mode,
+        Internal_transport_price, factory_id, factory_name, straight_employing_way,
+        straight_employing_scale, straight_employing_standard, potential_employing_way,
+        potential_employing_scale, potential_employing_standard, documentary_type,
+        documentary_require, other_documentary_require, shipping_agent_require, package_require,
+        goods_type, mianxiangqi, miantuiqi, cupboard_type, cupboard_per_number, cupboard_number,
+        ocean_freight, port_surcharge, tax_type, tax_free, gross_margin, other_cost, min_price,
+        contract_price, 0 as transform_state, #createUserId#, #createUserName#, #createUserId#,
+        #createUserName#, now(), now()
+        from customer_product_archives
+        where id = #archiveProductId#)
         <selectKey resultClass="java.lang.Integer" keyProperty="id">
             SELECT @@IDENTITY AS ID
         </selectKey>
@@ -36,6 +167,9 @@
             </isNotNull>
             <isNotNull prepend="," property="productId">
                 product_id = #productId#
+            </isNotNull>
+            <isNotNull prepend="," property="wareId">
+                ware_id = #wareId#
             </isNotNull>
             <isNotNull prepend="," property="customsClearanceId">
                 customs_clearance_id = #customsClearanceId#
@@ -197,5 +331,18 @@
         where id = #id#
     </update>
     
-
+    <delete id="deleteAllInfoByIds" parameterClass="java.lang.String">
+        DELETE
+                bop.*,
+                bpr.*,
+                bopc.*,
+        FROM
+                `business_order_product` bop,
+                `business_order_product_component` bopc,
+                `business_product_require` bpr
+        WHERE
+                bop.`id` =bopc.`business_product_id`
+                AND bop.`id` = bpr.`business_product_id`
+                AND bop.`id` in ($businessProductIds$)
+    </delete>
 </sqlMap>

@@ -107,4 +107,9 @@ public class ProductInfoManagerImpl implements ProductInfoManager {
 	public ProductInfoDao getProductInfoDao(){
     	return this.productInfoDao;
 	}
+
+	@Override
+	public ProductInfo getCustomsClearanceInfo(Integer productId) {
+		return productInfoDao.getCustomsClearanceInfo(productId);
+	}
 }

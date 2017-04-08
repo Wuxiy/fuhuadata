@@ -25,4 +25,6 @@ public interface ProductCategoryService {
     public Result<List<ProductCategory>> getAll();
 
     public Result<List<CategoryTree>> getAllByTree();
+
+    public Result<List<CategoryTree>> getTreeHasProductWare();
 }

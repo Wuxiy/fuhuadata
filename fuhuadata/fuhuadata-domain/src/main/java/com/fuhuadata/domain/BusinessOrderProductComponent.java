@@ -5,9 +5,11 @@ import java.math.BigDecimal;
 public class BusinessOrderProductComponent {
     private Integer id;
 
-    private Integer orderId;
+    private Integer businessProductId;
 
     private Integer productId;
+
+    private Integer wareId;
 
     private Integer componentId;
 
@@ -21,6 +23,14 @@ public class BusinessOrderProductComponent {
 
     private String remark;
 
+    public Integer getWareId() {
+        return wareId;
+    }
+
+    public void setWareId(Integer wareId) {
+        this.wareId = wareId;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -29,12 +39,12 @@ public class BusinessOrderProductComponent {
         this.id = id;
     }
 
-    public Integer getOrderId() {
-        return orderId;
+    public Integer getBusinessProductId() {
+        return businessProductId;
     }
 
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
+    public void setBusinessProductId(Integer businessProductId) {
+        this.businessProductId = businessProductId;
     }
 
     public Integer getProductId() {

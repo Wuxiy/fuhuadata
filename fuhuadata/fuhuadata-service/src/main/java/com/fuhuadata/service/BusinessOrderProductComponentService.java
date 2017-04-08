@@ -1,4 +1,4 @@
-package com.fuhuadata.dao;
+package com.fuhuadata.service;
 
 import com.fuhuadata.domain.BusinessOrderProductComponent;
 
@@ -6,23 +6,23 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by hexingfu on 2017/4/5.
+ * Created by hexingfu on 2017/4/7.
  */
-public interface BusinessOrderProductComponentDao {
+public interface BusinessOrderProductComponentService {
 
     /**
      * 插入产品成分及费用
      * @param businessOrderProductComponents
      * @return
      */
-     boolean insertProductComponent(List<BusinessOrderProductComponent> businessOrderProductComponents);
+    boolean insertProductComponent(List<BusinessOrderProductComponent> businessOrderProductComponents);
 
     /**
      * 通过复制档案插入产品成分及费用
      * @param map 必须参数：businessProductId 当前订单产品（表）id，businessProductArchivesId 客户产品档案id
      * @return
      */
-     int insertFromArchives(Map<String,Object> map);
+    int insertFromArchives(Map<String,Object> map);
 
     /**
      * 根据订单产品表id获取成分及其费用
@@ -43,19 +43,4 @@ public interface BusinessOrderProductComponentDao {
      * @return
      */
     boolean updateProductComponent(List<BusinessOrderProductComponent> businessOrderProductComponents);
-
-    /**
-     * 复制businessProductId的产品成分到businessProductArchivesId为档案数据
-     * @param map（businessProductArchivesId，businessProductId）
-     * @return
-     */
-    int addArchives(Map<String,Object> map);
-
-    /**
-     * 复制businessProductId的最新产品成分更新其对应档案数据
-     * @param businessProductId
-     * @return
-     */
-    int updateArchives(Integer businessProductId);
-
 }

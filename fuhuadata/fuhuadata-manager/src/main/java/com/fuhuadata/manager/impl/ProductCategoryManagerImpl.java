@@ -48,6 +48,10 @@ public class ProductCategoryManagerImpl implements ProductCategoryManager {
     public List<ProductCategoryVO> getProductCategoryByLevel() {
         return productCategoryDao.getProductCategoryByLevel();
     }
+    @Override
+    public List<ProductCategoryVO> getProductWare() {
+        return productCategoryDao.getProductWare();
+    }
 
     public void setProductCategoryDao(ProductCategoryDao productCategoryDao) {
         this.productCategoryDao = productCategoryDao;
@@ -55,4 +59,6 @@ public class ProductCategoryManagerImpl implements ProductCategoryManager {
     public ProductCategoryDao getProductCategoryDao(){
         return this.productCategoryDao;
     }
+
+
 }

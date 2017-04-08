@@ -218,6 +218,21 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     }
 
     @Override
+    public Result<List<CategoryTree>> getTreeHasProductWare() {
+        Result<List<CategoryTree>> result = new Result<List<CategoryTree>>();
+        try{
+
+            List<ProductCategoryVO> list = productCategoryManager.getProductWare();
+            System.out.println(list.size());
+            result.addDefaultModel("CategoryTree",getAllNodes(list,1));
+        }catch(Exception e){
+            result.setSuccess(false);
+            log.error("分层获取产品目录树错误");
+        }
+        return result;
+    }
+
+    @Override
     public Result<List<CategoryTree>> getAllByTree() {
         return null;
     }

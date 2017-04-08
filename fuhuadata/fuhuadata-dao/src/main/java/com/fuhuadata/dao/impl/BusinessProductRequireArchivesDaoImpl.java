@@ -7,31 +7,30 @@ import com.fuhuadata.domain.BusinessProductRequireArchives;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by hexingfu on 2017/4/5.
  */
+@Repository
 public class BusinessProductRequireArchivesDaoImpl implements BusinessProductRequireArchivesDao {
-    private static final String INSERT = "insert";
-    private static final String UPDATE = "update";
-    private static final String DELETE = "delete";
-    private static final String GET_BY_ORDER_PRODUCT_ID = "getByQuery";
+    private static final String INSERT = "BusinessProductRequireArchives.addArchives";
+    private static final String UPDATE = "BusinessProductRequireArchives.updateArchives";
+    private static final String GET_BY_ORDER_PRODUCT_ID = "BusinessProductRequireArchives.getByQuery";
     @Autowired
     private SqlMapClientTemplate sqlMapClientTemplate;
+
     @Override
-    public int addProductRequireArchives(BusinessProductRequireArchives businessProductRequireArchives) {
-        return (Integer)sqlMapClientTemplate.insert(INSERT,businessProductRequireArchives);
+    public int addArchives(Integer businessProductId) {
+        return (Integer)sqlMapClientTemplate.insert(INSERT,businessProductId);
     }
 
     @Override
-    public int updateProductRequireArchives(BusinessProductRequireArchives businessProductRequireArchives) {
-        return sqlMapClientTemplate.update(UPDATE,businessProductRequireArchives);
+    public int updateArchives(Integer businessProductId) {
+        return sqlMapClientTemplate.update(UPDATE,businessProductId);
     }
 
-    @Override
-    public int deleteProductRequireArchives(int id) {
-        return sqlMapClientTemplate.delete(DELETE,id);
-    }
 
     @Override
     public BusinessProductRequireArchives getByOrderProductId(int orderProductId) {

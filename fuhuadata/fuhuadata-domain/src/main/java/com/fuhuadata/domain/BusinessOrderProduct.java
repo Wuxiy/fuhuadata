@@ -21,6 +21,8 @@ public class BusinessOrderProduct {
 
     /**标准产品id**/
     private Integer productId;
+    /**规格id**/
+    private Integer wareId;
     /**报关产品编码**/
     private String customsClearanceId;
     /**报关产品名称**/
@@ -173,8 +175,39 @@ public class BusinessOrderProduct {
     /**修改时间**/
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date modifyTime;
+
     /**主包材id**/
     private Integer mainPackingId;
+
+    /**内部供货单位id**/
+    private String internalSupplyId;
+
+    /**内部供货单位**/
+    private String internalSupplyName;
+
+    public String getInternalSupplyId() {
+        return internalSupplyId;
+    }
+
+    public void setInternalSupplyId(String internalSupplyId) {
+        this.internalSupplyId = internalSupplyId;
+    }
+
+    public String getInternalSupplyName() {
+        return internalSupplyName;
+    }
+
+    public void setInternalSupplyName(String internalSupplyName) {
+        this.internalSupplyName = internalSupplyName;
+    }
+
+    public Integer getWareId() {
+        return wareId;
+    }
+
+    public void setWareId(Integer wareId) {
+        this.wareId = wareId;
+    }
 
     public Integer getMainPackingId() {
         return mainPackingId;

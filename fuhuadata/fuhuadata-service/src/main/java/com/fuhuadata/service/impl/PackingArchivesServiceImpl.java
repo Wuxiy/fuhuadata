@@ -135,7 +135,6 @@ public class PackingArchivesServiceImpl implements PackingArchivesService {
                 String ids = packingArchives.getAssociatedPackingId();
                 if(ids != null&& ids.length()>0) {
                     String[] idArray = ids.split(",");
-
                     for (int i = 0; i < idArray.length; i++) {
                         System.out.println(idArray[i]);
                         PackingArchives packingArchivesNode = packingArchivesManager.getPackingArchivesById(Integer.parseInt(idArray[i]));
