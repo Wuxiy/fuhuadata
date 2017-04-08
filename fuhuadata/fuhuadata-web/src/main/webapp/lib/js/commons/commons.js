@@ -106,6 +106,7 @@ CRM.module.Panel = function (el,res) {
 
     this.res = jQuery.extend({
         type        : 'POST',
+        async       : true,
         contentType : '',
         upUrl       : '',
         downUrl     : '',
@@ -140,7 +141,7 @@ CRM.module.Panel.prototype.handleEdit = function (e) {
 
     if (typeof res.downUrl === String && res.downUrl.length > 0) {
 
-        CRM.ajaxCall(res.type,res.downUrl,res.downData,res.contentType,res.down);
+        CRM.ajaxCall(res.type,res.downUrl,res.downData,res.contentType,res.down,res.async);
     }
 
 };
@@ -161,7 +162,7 @@ CRM.module.Panel.prototype.handleSave = function (e) {
 
     if (typeof res.upUrl === String && res.upUrl.length > 0) {
 
-        CRM.ajaxCall(res.type,res.upUrl,res.upData,res.contentType,res.up);
+        CRM.ajaxCall(res.type,res.upUrl,res.upData,res.contentType,res.up,res.async);
     }
 };
 
@@ -180,33 +181,36 @@ CRM.module.Panel.prototype.handleCancel = function (e) {
 
     if (typeof res.downUrl === String && res.downUrl.length > 0) {
 
-        CRM.ajaxCall(res.type,res.downUrl,res.downData,res.contentType,res.down);
+        CRM.ajaxCall(res.type,res.downUrl,res.downData,res.contentType,res.down,res.async);
     }
 
 };
 
-// //编辑
-// CRM.module.Panel.prototype.startEdit = function () {
-//     console.log('执行了startEdit');
-//     this.panel.on('click.panel.edit','button' + this.edit,function (e) {
-//         console.log('有毛病');
-//         // this.handleEdit(e);
-//     })
-// };
-//
-// //保存
-// CRM.module.Panel.prototype.startSave = function () {
-//     this.panel.on('click.panel.save','button'+ this.save,function (e) {
-//         this.handleSave(e);
-//     });
-// };
-//
-// //取消
-// CRM.module.Panel.prototype.startCancel = function () {
-//     this.panel.on('click.panel.cancel','button'+ this.cancel,function (e) {
-//         this.handleCancel(e);
-//     })
-// };
+//编辑
+CRM.module.Panel.prototype.startEdit = function () {
+    console.log('执行了startEdit');
+    var Panel = this;
+    this.panel.on('click.panel.edit','button' + this.edit,function (e) {
+        console.log('有毛病');
+        Panel.handleEdit(e);
+    })
+};
+
+//保存
+CRM.module.Panel.prototype.startSave = function () {
+    var Panel = this;
+    this.panel.on('click.panel.save','button'+ this.save,function (e) {
+        Panel.handleSave(e);
+    });
+};
+
+//取消
+CRM.module.Panel.prototype.startCancel = function () {
+    var Panel = this;
+    this.panel.on('click.panel.cancel','button'+ this.cancel,function (e) {
+        Panel.handleCancel(e);
+    })
+};
 
 //多选框
 CRM.module.Mulbox = function (el) {

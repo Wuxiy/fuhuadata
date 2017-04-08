@@ -132,20 +132,21 @@
 			</isNotEmpty>
 				</dynamic>
 	</sql>
-	
+
+
 	<sql id="QUERY-COMMON">
 		<dynamic prepend=" WHERE ">
 				<isNotEmpty prepend=" AND " property="customerId">
 			customer_id = #customerId#
 		</isNotEmpty>
 				<isNotEmpty prepend=" AND " property="fullName">
-			full_name = #fullName#
+			full_name like concat('%',#fullName#,'%')
 		</isNotEmpty>
-			<isNotEmpty prepend="and" property="">
+			<isNotEmpty prepend="and" property="customerLevel">
 				customer_level=#customerLevel#
 			</isNotEmpty>
 				<isNotEmpty prepend=" AND " property="shortName">
-			short_name = #shortName#
+			short_name like concat('%',#shortName#,'%')
 		</isNotEmpty>
 				<isNotEmpty prepend=" AND " property="customerType">
 			customer_type = #customerType#
@@ -180,9 +181,6 @@
 			<isNotEmpty prepend="and" property="customerStatus">
 				customer_status=#customerStatus#
 			</isNotEmpty>
-				<isNotEmpty prepend=" AND " property="remark">
-					remark = #remark#
-		</isNotEmpty>
 				<isNotEmpty prepend=" AND " property="enterprisePhone">
 			enterprise_phone = #enterprisePhone#
 		</isNotEmpty>
@@ -362,7 +360,12 @@
 
 	<select id="GET-BY-QUERY" resultClass="CustomerBaseInfo" parameterClass="QueryCustomerBaseInfo">
 		<![CDATA[
-			SELECT * FROM customer_base_info
+						SELECT
+				base.customer_id customerId,
+				base.full_name fullName,
+				base.short_name shortName
+			FROM
+				customer_base_info base
 		]]>
 		<isParameterPresent>
             <include refid="QUERY-COMMON" />
