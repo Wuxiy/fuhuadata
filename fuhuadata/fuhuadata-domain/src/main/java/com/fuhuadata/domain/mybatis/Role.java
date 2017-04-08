@@ -212,7 +212,6 @@ public class Role extends BaseEntity<Integer> implements Treeable<Integer> {
      *
      * @return role_name - 角色名称
      */
-    @JsonIgnore
     public String getName() {
         return name;
     }
