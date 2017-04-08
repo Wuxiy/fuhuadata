@@ -12,6 +12,7 @@ import com.fuhuadata.manager.CustomerVisitRecordManager;
 import com.fuhuadata.domain.CustomerVisitRecord;
 import com.fuhuadata.domain.query.QueryCustomerVisitRecord;
 import javax.annotation.Resource;
+import javax.management.Query;
 
 import com.fuhuadata.vo.CustomerVisitRecordVO;
 import com.fuhuadata.vo.VisitRecordVO;
@@ -160,12 +161,13 @@ public class CustomerVisitRecordServiceImpl implements CustomerVisitRecordServic
     }
     
 
-    public Result<List<CustomerVisitRecord>> getCustomerVisitRecordsByPage(QueryCustomerVisitRecord queryCustomerVisitRecord) {
-		Result<List<CustomerVisitRecord>> result = new Result<List<CustomerVisitRecord>>();
+    public Result<List<QueryCustomerVisitRecord>> getCustomerVisitRecordsByPage(QueryCustomerVisitRecord queryCustomerVisitRecord) {
+		Result<List<QueryCustomerVisitRecord>> result = new Result<List<QueryCustomerVisitRecord>>();
 		try {		
-			result = customerVisitRecordManager.getCustomerVisitRecordsByPage(queryCustomerVisitRecord);
+			result.addDefaultModel("CustomerVisitRecords",customerVisitRecordManager.getCustomerVisitRecordsByPage(queryCustomerVisitRecord)) ;
 		} catch(Exception e) {
 			result.setSuccess(false);
+			log.error("分页条件获取客户维护记录出错",e);
 		}
 		return result;	
     }

@@ -7,6 +7,8 @@ import com.fuhuadata.domain.query.QueryCustomerVisitRecord;
 import com.fuhuadata.vo.VisitRecordVO;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
+import javax.management.Query;
+
 /**
  * @author wangbo
  * @date 2017-01-13 16:22:04
@@ -61,7 +63,7 @@ public class CustomerVisitRecordDaoImpl extends SqlMapClientTemplate implements 
         return this.queryForList(GET_BY_LINKMAN_ID,linkmanId);
     }
 
-    public List<CustomerVisitRecord> getCustomerVisitRecordsByPage(QueryCustomerVisitRecord queryCustomerVisitRecord) {
+    public List<QueryCustomerVisitRecord> getCustomerVisitRecordsByPage(QueryCustomerVisitRecord queryCustomerVisitRecord) {
     	return this.queryForList(GET_PAGE, queryCustomerVisitRecord);
     }
     	

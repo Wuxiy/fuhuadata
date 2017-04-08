@@ -7,6 +7,7 @@ import com.fuhuadata.domain.CustomerEnterpriceNature;
 import com.fuhuadata.domain.CustomerMakeProduct;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.domain.query.Result;
+import com.fuhuadata.vo.CustomerBaseInfoLinkman;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
 
 /**
@@ -70,11 +71,18 @@ public interface CustomerBaseInfoService {
     public Result<CustomerBaseInfo> getCustomerBaseInfoById(String customer_id);
 
 	/**
-	 * 客户基本信息
+	 * 客户基本信息(百科信息以及产品产能)
 	 * @param id
 	 * @return
 	 */
 	public Result<CustomerBaseInfoVO> getCustomerInfoById(String id);
+
+	/**
+	 * 客户选择带出的客户及默认联系人基本信息
+	 * @param customerId
+	 * @return
+	 */
+	public Result<CustomerBaseInfoLinkman> getCustomerBaseInfoLinkmanByCustomerId(String customerId);
 
     /**
      * 查询列表，包含分页查询

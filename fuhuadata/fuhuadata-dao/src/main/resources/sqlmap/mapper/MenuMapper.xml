@@ -15,8 +15,21 @@
         <result column="enablestate" jdbcType="TINYINT" property="enablestate"/>
         <result column="order_index" jdbcType="INTEGER" property="orderIndex"/>
     </resultMap>
+    
+    <resultMap id="roleExtendMap" type="com.fuhuadata.domain.mybatis.Menu"
+               extends="BaseResultMap">
+        <association property="roleAuthority" columnPrefix="ro_au_"
+                     resultMap="com.fuhuadata.dao.mapper.RoleAuthorityMapper.BaseResultMap"/>
+    </resultMap>
 
-    <sql id="menuColumns">
+    <resultMap id="roleButtonExtendMap" type="com.fuhuadata.domain.mybatis.Menu"
+               extends="roleExtendMap">
+        <collection property="buttons" columnPrefix="button_"
+                    ofType="com.fuhuadata.domain.mybatis.Button"
+                    resultMap="com.fuhuadata.dao.mapper.ButtonMapper.BaseResultMap"/>
+    </resultMap>
+
+    <sql id="BaseColumns">
         m.menu_id,
         m.menu_name,
         m.parent_id,
@@ -28,9 +41,21 @@
         m.order_index
     </sql>
 
+    <sql id="FromTable">
+        FROM p_menu m
+    </sql>
+
+    <sql id="roleAuthorityJoin">
+        INNER JOIN p_role_authority roau ON roau.resource_id=m.menu_id
+    </sql>
+
+    <sql id="buttonsJoin">
+        LEFT JOIN p_button bu ON bu.menu_id=m.menu_id
+    </sql>
+
     <select id="getMenu" resultMap="BaseResultMap">
         SELECT
-        <include refid="menuColumns"/>
+        <include refid="BaseColumns"/>
         FROM p_menu m
         WHERE m.menu_id=#{id}
     </select>
@@ -51,9 +76,30 @@
 
     <select id="listSelfAndNextSiblings" resultMap="BaseResultMap">
         SELECT
-        <include refid="menuColumns"/>
+        <include refid="BaseColumns"/>
         FROM p_menu m
         WHERE m.parent_id = #{parentId} AND m.order_index &gt;= #{weight}
         ORDER BY m.order_index ASC
     </select>
+
+    <select id="listAuthorityMenus" resultMap="roleExtendMap">
+        SELECT
+        <include refid="BaseColumns"/>,
+        <include refid="com.fuhuadata.dao.mapper.RoleAuthorityMapper.PrefixColumns"/>
+        <include refid="FromTable"/>
+        <include refid="roleAuthorityJoin"/>
+        WHERE roau.role_id=#{roleId}
+    </select>
+
+    <select id="listPermissionMenus" resultMap="roleButtonExtendMap">
+        SELECT
+        <include refid="BaseColumns"/>,
+        <include refid="com.fuhuadata.dao.mapper.RoleAuthorityMapper.PrefixColumns"/>,
+        <include refid="com.fuhuadata.dao.mapper.ButtonMapper.PrefixColumns"/>
+        <include refid="FromTable"/>
+        <include refid="roleAuthorityJoin"/>
+        <include refid="buttonsJoin"/>
+        WHERE roau.role_id=#{roleId}
+    </select>
+
 </mapper>

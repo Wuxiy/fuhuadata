@@ -26,6 +26,11 @@ public class PackingArchivesManagerImpl implements PackingArchivesManager {
     }
 
     @Override
+    public List<PackingArchives> getPackingArchivesByIds(String ids) {
+        return packingArchivesDao.getPackingArchivesByIds(ids);
+    }
+
+    @Override
     public boolean updatePackingArchivesById(int id, PackingArchives packingArchives) {
         return packingArchivesDao.updatePackingArchivesById(id,packingArchives)==1?true:false;
     }

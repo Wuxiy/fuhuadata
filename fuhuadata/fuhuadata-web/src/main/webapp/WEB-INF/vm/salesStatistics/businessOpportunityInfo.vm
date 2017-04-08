@@ -1,29 +1,29 @@
-
 <div class="nav-deputy shadow-out clearfix">
     <ul id="myTab" class="nav nav-tabs pull-left">
         <li class="active"><a href="#Baseinfo" data-toggle="tab">基础信息</a></li>
-        <li><a href="#Packrelate" data-toggle="tab">跟进记录</a></li>
+        <li><a href="#followrecord" data-toggle="tab">跟进记录</a></li>
     </ul>
     <ul class="breadcrumb pull-right">
         <li><span class="glyphicon glyphicon-map-marker"></span></li>
     </ul>
 </div>
-    <div class="dashboard-wrapper">
-        <div class="row">
-            <div class="col-xs-12">
-                <!--基本信息-->
-                <div id="Baseinfo" class="tab-pane fade in active">
+
+<div class="dashboard-wrapper">
+    <div class="row">
+        <div class="tab-content col-xs-11">
+            <!--基本信息-->
+            <div id="Baseinfo" class="tab-pane fade in active">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <div class="btn-group btn-group-xs panel-heading-btn pull-right">
-                                <button id="edit" data-form-btn="edit" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
+                                <button id="edit" data-btn="edit" data-view="editHide"  class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
                                     编辑
                                 </button>
                                 <a class="btn btn-primary" href="" target="_blank">报价</a>
                             </div>
-                            <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden">
-                                <a id="cancel" data-form-btn="cancel" class="btn" lang="zh">取消</a>
-                                <a id="save" data-form-btn="save" class="btn btn-primary" lang="zh">保存</a>
+                            <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right">
+                                <a id="cancel" data-btn="cancel" data-view="editView" class="btn hidden" lang="zh">取消</a>
+                                <a id="save" data-btn="save" data-view="editView" class="btn btn-primary hidden" lang="zh">保存</a>
                             </div>
                             <h3 class="panel-title" lang="zh">
                                 基本信息
@@ -38,7 +38,7 @@
                                     </div>
                                     <label class="col-xs-1 control-label" lang="zh">商机编号</label>
                                     <div class="col-xs-2">
-                                        <input class="form-control" type="text" value="" id="businessId" disabled />
+                                        <input class="form-control" type="text" id="businessId" value="${businessId}" disabled />
                                     </div>
                                     <label class="col-xs-1 control-label" lang="zh">商机来源<sup class="not-null">*</sup></label>
                                     <div class="col-xs-2">
@@ -51,29 +51,12 @@
                                             <option value="5" lang="zh">其他</option>
                                         </select>
                                     </div>
-                                    <label class="col-xs-1 control-label" lang="zh">商机状态</label>
-                                    <div class="col-xs-2">
-                                        <select class="form-control" id="businessState" disabled>
-                                            <option value="0" lang="zh">待报价</option>
-                                            <option value="1" lang="zh">失败</option>
-                                            <option value="2" lang="zh">已转化</option>
-                                        </select>
-                                    </div>
+
                                 </div>
                                 <div class="form-group ">
                                     <label class="col-xs-1 control-label" lang="zh">客户名称<sup class="not-null">*</sup></label>
                                     <div class="col-xs-2">
                                         <input class="form-control notnull" type="text" value="" id="customerName" disabled />
-                                    </div>
-                                    <label class="col-xs-1 control-label" lang="zh">企业性质</label>
-                                    <div class="col-xs-2">
-                                        <select class="form-control" id="enterpriseNature" disabled>
-                                            <option value="1" selected lang="zh">工厂</option>
-                                            <option value="2" lang="zh">分销商</option>
-                                            <option value="3" lang="zh">经销商</option>
-                                            <option value="4" lang="zh">终端客户</option>
-                                            <option value="5" lang="zh">其他</option>
-                                        </select>
                                     </div>
                                     <label class="col-xs-1 control-label" lang="zh">客户类型</label>
                                     <div class="col-xs-2">
@@ -89,10 +72,11 @@
                                     <label class="col-xs-1 control-label" lang="zh">信用评级</label>
                                     <div class="col-xs-2">
                                         <select class="form-control" id="zhongxinbaoLevel" disabled>
-                                            <option value="" selected lang="zh">AAAA</option>
-                                            <option value="" lang="zh">AAA</option>
-                                            <option value="" lang="zh">AA</option>
-                                            <option value="" lang="zh">A</option>
+                                            <option value="4" selected lang="zh">AAAA</option>
+                                            <option value="3" lang="zh">AAA</option>
+                                            <option value="2" lang="zh">AA</option>
+                                            <option value="1" lang="zh">A</option>
+                                            <option value="0" selected lang="zh">未知</option>
                                         </select>
                                     </div>
                                 </div>
@@ -103,7 +87,7 @@
                                     </div>
                                     <label class="col-xs-1 control-label" lang="zh">联系人</label>
                                     <div class="col-xs-2">
-                                        <input class="form-control" type="text" value="" id="name" disabled />
+                                        <input class="form-control" type="text" value="" id="linkmanName" disabled />
                                     </div>
                                     <label class="col-xs-1 control-label" lang="zh">联系电话</label>
                                     <div class="col-xs-2">
@@ -111,52 +95,62 @@
                                     </div>
                                     <label class="col-xs-1 control-label" lang="zh">邮箱</label>
                                     <div class="col-xs-2">
-                                        <input class="form-control" type="email" value="lemail" id="" disabled />
+                                        <input class="form-control" type="email" value="" id="lemail" disabled />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-xs-1 control-label" lang="zh">意向产品1</label>
                                     <div class="col-xs-2">
-                                        <input class="form-control" type="text" value="" id="intentionalProduct0" disabled />
+                                        <input  data-control="off" class="form-control" type="text" value="" id="intentionalProduct0" disabled />
                                     </div>
                                     <label class="col-xs-1 control-label" lang="zh">预计采购量1</label>
                                     <div class="col-xs-2">
-                                        <input class="form-control" type="text" value="" id="estimatedPurchase0" disabled />
+                                        <input  data-control="off" class="form-control" type="text" value="" id="estimatedPurchase0" disabled />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-xs-1 control-label" lang="zh">意向产品2</label>
                                     <div class="col-xs-2">
-                                        <input class="form-control" type="text" value="" id="intentionalProduct1" disabled />
+                                        <input  data-control="off" class="form-control" type="text" value="" id="intentionalProduct1" disabled />
                                     </div>
                                     <label class="col-xs-1 control-label" lang="zh">预计采购量2</label>
                                     <div class="col-xs-2">
-                                        <input class="form-control" type="text" value="" id="estimatedPurchase1" disabled />
+                                        <input data-control="off" class="form-control" type="text" value="" id="estimatedPurchase1" disabled />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-xs-1 control-label" lang="zh">预计收益</label>
                                     <div class="col-xs-2">
                                         <div class="input-group">
-                                            <input class="form-control" type="text" value="" id="expectIncome" disabled/>
+                                            <input data-control="off" class="form-control" type="text" value="" id="expectIncome" disabled/>
                                             <span class="input-group-addon">万元</span>
                                         </div>
                                     </div>
                                     <label class="col-xs-1 control-label" lang="zh">预计截止日期</label>
                                     <div class="col-xs-2">
-                                        <input class="form-control" type="text" value="" id="deadline" disabled />
+                                        <input data-control="off" class="form-control" type="text" value="" id="deadline" disabled />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-1 control-label" lang="zh">商机状态</label>
+                                    <div class="col-xs-2">
+                                        <select data-control="off" class="form-control" id="businessState" disabled>
+                                            <option value="0" lang="zh">待报价</option>
+                                            <option value="1" lang="zh">失败</option>
+                                            <option value="2" lang="zh">已转化</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-xs-1 control-label" lang="zh">商机描述</label>
                                     <div class="col-xs-8">
-                                        <textarea class="form-control " rows="3" lang="zh" id="businessDescribe" disabled>客户主要销售草甘膦系列产品，有原药采购需求</textarea>
+                                        <textarea data-control="off" class="form-control " rows="3" lang="zh" id="businessDescribe" disabled>客户主要销售草甘膦系列产品，有原药采购需求</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-xs-1 control-label" lang="zh">备注</label>
                                     <div class="col-xs-8">
-                                        <textarea class="form-control " rows="3" lang="zh" id="businessRemarks" disabled></textarea>
+                                        <textarea data-control="off" class="form-control " rows="3" lang="zh" id="businessRemarks" disabled></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -173,11 +167,16 @@
                         </div>
                     </div>
                 </div>
-                <!--商机跟进-->
-                <div id="Packrelate" class="tab-pane fade">
+            <!--商机跟进-->
+            <div id="followrecord" class="tab-pane fade">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a data-toggle="modal" data-target="#updateProgress" class="btn btn-xs btn-primary panel-heading-btn pull-right" href="#" lang="zh">新增</a>
+                            <div class="btn-group btn-group-xs panel-heading-btn pull-right">
+                                <a class="btn btn-xs btn-primary panel-heading-btn" href="#addbusinessfollow" data-toggle="modal">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                    新增
+                                </a>
+                            </div>
                             <h3 class="panel-title" lang="zh">商机跟进</h3>
                         </div>
                         <div class="panel-body clearfix">
@@ -206,20 +205,96 @@
                         </div>
                     </div>
                 </div>
+        </div>
+    </div>
+</div>
+
+//新增跟进modal
+<div class="modal fade" id="addbusinessfollow" tabindex="-1" data-backdrop="static" aria-hidden="true" data-keyboard="true" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body ">
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body clearfix">
+                            <div class="form-horizontal">
+                                <div class="form-group ">
+                                    <label class="col-xs-2 control-label">商机阶段</label>
+                                    <div class="col-xs-5">
+                                        <select class="form-control" id="businessProcess" >
+                                            <option value="0" lang="zh">信息收集</option>
+                                            <option value="1" lang="zh">线索跟进</option>
+                                            <option value="2" lang="zh">需求挖掘</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-2 control-label">跟进内容</label>
+                                    <div class="col-xs-10">
+                                        <textarea class="form-control" rows="4" id="followContent"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-2 control-label">跟进效果</label>
+                                    <div class="col-xs-10">
+                                        <textarea class="form-control" rows="4" id="followEffect"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-3 col-xs-offset-3">
+                        <a type="button" class="btn btn-primary btn-block" id="followfinish">
+                            完成
+                        </a>
+                    </div>
+                    <div class="col-xs-3">
+                        <button class="btn btn-block btn-default" type="reset">重置</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+</div>
 
-<input type="hidden" id="businessId" value="${businessId}" />
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
+##<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript" lang="javascript">
     var businessId = $('#businessId').val();
+    var businessFromList = ['展会','门户网站','农药店考察','客户介绍','主动联系','其他']
+    var customerLevelList = ['战略客户','大客户' ,'重要客户' ,'一般客户' ,'风险客户'];
+    var enterpriseNatureList = ['工厂','分销商' ,'经销商' ,'终端客户' ,'其他'];
+    var businessStateList = ['待报价','失败','已转化'];
+    var zhongxinbaoLevelList = ['未知','A','AA','AAA','AAAA'];
+    var businessfollow = document.getElementById('businessfollow');
 
     $(document).ready(function(){
+
+        var baseInfo = new CRM.module.Panel('#Baseinfo',null);
+
+        baseInfo.panel.on('click.panel.edit',baseInfo.edit,function (e) {
+            baseInfo.handleEdit(e);
+        });
+        baseInfo.panel.on('click.panel.save',baseInfo.save,function (e) {
+            baseInfo.handleSave(e);
+        });
+        baseInfo.panel.on('click.panel.cancel',baseInfo.cancel,function (e) {
+            baseInfo.handleCancel(e);
+        });
+
         //获取信息
-        getData(basePath + '/businessInfo/getBusinessInfoById','POST',businessId,businessInfo);
+        getData(basePath + '/businessInfo/getBusinessInfoById?businessId='+businessId,'POST',null,businessInfo);
 
         //编辑商机基本信息
         $(document).on('click.edit','#edit',function () {
@@ -237,22 +312,53 @@
                 }
             });
             if(submit_permit){
-                upData(basePath+'/customerLinkman/updateBusinessInfoById','POST',updateBusinessInfo(),"application/json");
+                upData(basePath+'/businessInfo/updateBusinessInfoById','POST',updateBusinessInfo(),"application/json");
+                jQuery.ajax({
+                    url:basePath+'/businessInfo/updateBusinessInfoById',
+                    type:'POST',
+                    data:updateBusinessInfo(),
+                    contentType:"application/json",
+                    success:function () {
+                        alert('233');
+                        /*location.reload();*/
+                    }
+                })
+                /*upData(basePath+'/businessInfo/updateBusinessInfoById','POST',updateBusinessInfo(),"application/json");*/
             }
         });
         //客户基本信息取消提交
         $(document).on('click.cancel','#cancel',function(){
-            location.reload();
         });
+
+        //新增跟进记录
+        $(document).on('click','#followfinish',function () {
+            Followfinish();
+            jQuery.ajax({
+                url:basePath + '/businessRecord/doAddBusinessRecord',
+                type:'POST',
+                data:Followfinish(),
+                contentType:"application/json",
+                success:function () {
+                    alert('2333');
+                    /*location.reload();*/
+                }
+            })
+            /*upData(basePath+'/businessRecord/doAddBusinessRecord','POST',Followfinish(),"application/json");*/
+        })
+
+        /*$('a[href="#followrecord"]').click(function(){
+            $('a[href="#followrecord"]').tab('show');
+            getData(basePath + '/businessInfo/getBusinessInfoById?businessId='+businessId,'POST',null,businessFollow);
+        })*/
     })
 
     //获取详情function
     function businessInfo(result) {
-        var ResultData = result.data;
-        var businessfollow = result.businessfollow;
-        console.log(ResultData);
+        var ResultData = result.businessInfo;
+        var businessRecords = eval(result.businessRecords);
+        console.log(businessRecords[0].id);
 
-        var intentionalProducts = ResultData.intentionalProducts;
+        var intentionalProducts = eval(ResultData.intentionalProducts);
         $('#intentionalProduct0').val(intentionalProducts[0].intentionalProduct);
         $('#intentionalProduct1').val(intentionalProducts[1].intentionalProduct);
         $('#estimatedPurchase0').val(intentionalProducts[0].estimatedPurchase);
@@ -264,10 +370,14 @@
         $('#businessState').val(ResultData.businessState);
         $('#customerName').val(ResultData.customerName);
         $('#enterpriseNature').val(ResultData.enterpriseNature);
+        $('#customerLevel').val(customerLevelList[ResultData.customerLevel]);
+        $('#zhongxinbaoLevel').val(zhongxinbaoLevelList[ResultData.zhongxinbaoLevel]);
+        $('#country').val(ResultData.country);
+        $('#name').val(ResultData.linkmanName);
         $('#customerLevel').val(ResultData.customerLevel);
         $('#zhongxinbaoLevel').val(ResultData.zhongxinbaoLevel);
         $('#country').val(ResultData.country);
-        $('#name').val(ResultData.name);
+        $('#linkmanName').val(ResultData.linkmanName);
         $('#linkPhone1').val(ResultData.linkPhone1);
         $('#lemail').val(ResultData.lemail);
         $('#expectIncome').val(ResultData.expectIncome);
@@ -278,18 +388,34 @@
         $('#createTime').val(ResultData.createTime);
 
         var _html = '';
-        for(var i=0;i<businessfollow.length;i++){
-            _html += '<tr>';
-            _html += '<td>'+businessfollow[i].name+'</td>';
-            _html += '<td>'+businessfollow[i].name+'</td>';
-            _html += '<td>'+businessfollow[i].name+'</td>';
-            _html += '<td>'+businessfollow[i].name+'</td>';
-            _html += '<td>'+businessfollow[i].name+'</td>';
-            _html += '<td>'+businessfollow[i].name+'</td>';
-            _html += '</tr>';
+        for(var i=0;i<businessRecords.length;i++){
+            businessfollow.innerHTML += '<tr>'+
+                    '<td>'+businessRecords[i].id+'</td>'+
+                    '<td>'+businessRecords[i].followContent+'</td>'+
+                    '<td>'+businessRecords[i].followEffect+'</td>'+
+                    '<td>'+businessRecords[i].businessProcess+'</td>'+
+                    '<td>'+businessRecords[i].createUserName+'</td>'+
+                    '<td>'+businessRecords[i].createTime+'</td>'+
+                    '</tr>';
         }
-        $('#businessfollow').append(_html);
     }
+
+    /*
+    function businessFollow(result) {
+        var ResultData = result;
+        for(var i=0;i<businessfollow.length;i++){
+            businessfollow.innerHTML = '';
+            businessfollow.innerHTML += '<tr>'+
+                    '<td>'+businessfollow[i].name+'</td>'+
+                    '<td>'+businessfollow[i].name+'</td>'+
+                    '<td>'+businessfollow[i].name+'</td>'+
+                    '<td>'+businessfollow[i].name+'</td>'+
+                    '<td>'+businessfollow[i].name+'</td>'+
+                    '<td>'+businessfollow[i].name+'</td>'+
+                    '</tr>';
+        }*/
+
+
 
     function updateBusinessInfo(){
         var data = {
@@ -303,7 +429,7 @@
             "customerLevel":$('#customerLevel').val(),
             "zhongxinbaoLevel":$('#zhongxinbaoLevel').val(),
             "country":$('#country').val(),
-            "name":$('#name').val(),
+            "linkmanName":$('#linkmanName').val(),
             "linkPhone1":$('#linkPhone1').val(),
             "lemail":$('#lemail').val(),
             "expectIncome":$('#expectIncome').val(),
@@ -331,4 +457,22 @@
         ]
         return JSON.stringify(data);
     }
+
+    function Followfinish() {
+        var data = {
+            "businessId":$('#businessId').val(),
+            "followContent":$('#followContent').val(),
+            "followEffect":$('#followEffect').val(),
+            "businessProcess":$('#businessProcess').val(),
+            "createUserName":"杨洋",
+            "createUserId":1,
+            "createTime":getTime(),
+            "lastmodifyUserName":"杨洋",
+            "lastmodifyUserId":1,
+            "modifyTime":getTime()
+        }
+        console.log(data);
+        return JSON.stringify(data);
+    }
+
 </script>

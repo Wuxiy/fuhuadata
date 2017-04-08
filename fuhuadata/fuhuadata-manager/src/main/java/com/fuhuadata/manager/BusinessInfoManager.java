@@ -4,6 +4,7 @@ import com.fuhuadata.domain.BusinessInfo;
 import com.fuhuadata.domain.query.QueryBusinessInfo;
 import com.fuhuadata.vo.BusinessInfoVO;
 
+import javax.management.Query;
 import java.util.List;
 
 /**
@@ -18,14 +19,14 @@ public  interface BusinessInfoManager {
 
     public boolean deleteBusinessInfoByBusinessId(String businessId);
 
-    public BusinessInfo getBusinessInfoByBusinessId(String businessId);
+    public BusinessInfoVO getBusinessInfoByBusinessId(String businessId);
 
     public List<BusinessInfo> getBusinessInfoByCustomerId(String customerId);
 
     public List<BusinessInfo> getBusinessInfoByQuery(QueryBusinessInfo queryBusinessInfo);
 
-    public List<BusinessInfoVO> getBusinessInfoByPage(BusinessInfoVO businessInfoVO);
+    public List<QueryBusinessInfo> getBusinessInfoByPage(QueryBusinessInfo queryBusinessInfo);
 
-    public int count(BusinessInfoVO businessInfoVO);
+    public int count(QueryBusinessInfo queryBusinessInfo);
 
 }

@@ -172,7 +172,7 @@ $('.packingAdd').on('click',function(){
         "bRemarks": jQuery('#bremarks').val(),
     }
     console.log(data);
-    jQuery.ajax({
+    /*jQuery.ajax({
         type:"POST",
         url:url,
         dataType:"json",
@@ -182,7 +182,7 @@ $('.packingAdd').on('click',function(){
             alert("添加成功");
             location.reload();
         }
-    })
+    })*/
 })
 
 //全选框

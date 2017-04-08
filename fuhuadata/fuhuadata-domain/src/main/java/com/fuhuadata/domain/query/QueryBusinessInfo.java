@@ -1,5 +1,7 @@
 package com.fuhuadata.domain.query;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -16,41 +18,30 @@ public class QueryBusinessInfo {
     /**大区分类id**/
     private String areaClassId;
 
-    private String businessId;//商机id
+    private String  businessId;
+    private String businessName;
 
-    private String customerId;//客户id
+    private String customerId;
+    private String customerName;
 
-    private String businessName;//商机名称
+    /**1:战略客户,2:大客户 3:重要客户 4:一般客户 5:风险客户**/
+    private Integer customerLevel;
 
-    private String customerName;//客户名称
+    /**企业性质 1：工厂 2：分销商 3：经销商 4：终端客户 5：其他**/
+    private String enterpriseNature;
 
-    private Integer businessFrom;//商机来源
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date createTime;
 
-    private Integer businessState;//商机状态
+    private Integer remainDays;//剩余时间
 
-    private BigDecimal expectIncome;//预计收益
+    /**商机来源，0展会，1门户网站，2农药店考察，3客户介绍，4主动联系，5其他**/
+    private Integer businessFrom;
 
-    private Date deadline;//预计截止时间
+    private BigDecimal  expectIncome;//预计收益
 
-    private String intentionalProducts;//意向产品及购买
-
-    private String businessDescribe;//商机描述
-
-    private String businessRemarks;//商机备注
-
-    private String failReason;//失败原因
-
-    private Integer createUserId;//创建者id
-
-    private String createUserName;//创建者姓名
-
-    private Integer lastmodifyUserId;//上一次修改者id
-
-    private String lastmodifyUserName;//上一次修改者姓名
-
-    private Date createTime;//创建时间
-
-    private Date modifyTime;//修改时间
+    /**商机状态（0:待报价，1：失败，2：已转化）**/
+    private Integer businessState;
 
     public String getBusinessId() {
         return businessId;
@@ -58,14 +49,6 @@ public class QueryBusinessInfo {
 
     public void setBusinessId(String businessId) {
         this.businessId = businessId;
-    }
-
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
     }
 
     public String getBusinessName() {
@@ -84,100 +67,20 @@ public class QueryBusinessInfo {
         this.customerName = customerName;
     }
 
-    public Integer getBusinessFrom() {
-        return businessFrom;
+    public Integer getCustomerLevel() {
+        return customerLevel;
     }
 
-    public void setBusinessFrom(Integer businessFrom) {
-        this.businessFrom = businessFrom;
+    public void setCustomerLevel(Integer customerLevel) {
+        this.customerLevel = customerLevel;
     }
 
-    public Integer getBusinessState() {
-        return businessState;
+    public String getEnterpriseNature() {
+        return enterpriseNature;
     }
 
-    public void setBusinessState(Integer businessState) {
-        this.businessState = businessState;
-    }
-
-    public BigDecimal getExpectIncome() {
-        return expectIncome;
-    }
-
-    public void setExpectIncome(BigDecimal expectIncome) {
-        this.expectIncome = expectIncome;
-    }
-
-    public Date getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline(Date deadline) {
-        this.deadline = deadline;
-    }
-
-    public String getIntentionalProducts() {
-        return intentionalProducts;
-    }
-
-    public void setIntentionalProducts(String intentionalProducts) {
-        this.intentionalProducts = intentionalProducts;
-    }
-
-    public String getBusinessDescribe() {
-        return businessDescribe;
-    }
-
-    public void setBusinessDescribe(String businessDescribe) {
-        this.businessDescribe = businessDescribe;
-    }
-
-    public String getBusinessRemarks() {
-        return businessRemarks;
-    }
-
-    public void setBusinessRemarks(String businessRemarks) {
-        this.businessRemarks = businessRemarks;
-    }
-
-    public String getFailReason() {
-        return failReason;
-    }
-
-    public void setFailReason(String failReason) {
-        this.failReason = failReason;
-    }
-
-    public Integer getCreateUserId() {
-        return createUserId;
-    }
-
-    public void setCreateUserId(Integer createUserId) {
-        this.createUserId = createUserId;
-    }
-
-    public String getCreateUserName() {
-        return createUserName;
-    }
-
-    public void setCreateUserName(String createUserName) {
-        this.createUserName = createUserName;
-    }
-
-    public Integer getLastmodifyUserId() {
-        return lastmodifyUserId;
-    }
-
-    public void setLastmodifyUserId(Integer lastmodifyUserId) {
-        this.lastmodifyUserId = lastmodifyUserId;
-    }
-
-    public String getLastmodifyUserName() {
-        return lastmodifyUserName;
-    }
-
-    public void setLastmodifyUserName(String lastmodifyUserName) {
-        this.lastmodifyUserName = lastmodifyUserName;
+    public void setEnterpriseNature(String enterpriseNature) {
+        this.enterpriseNature = enterpriseNature;
     }
 
     public Date getCreateTime() {
@@ -188,12 +91,36 @@ public class QueryBusinessInfo {
         this.createTime = createTime;
     }
 
-    public Date getModifyTime() {
-        return modifyTime;
+    public Integer getRemainDays() {
+        return remainDays;
     }
 
-    public void setModifyTime(Date modifyTime) {
-        this.modifyTime = modifyTime;
+    public void setRemainDays(Integer remainDays) {
+        this.remainDays = remainDays;
+    }
+
+    public Integer getBusinessFrom() {
+        return businessFrom;
+    }
+
+    public void setBusinessFrom(Integer businessFrom) {
+        this.businessFrom = businessFrom;
+    }
+
+    public BigDecimal getExpectIncome() {
+        return expectIncome;
+    }
+
+    public void setExpectIncome(BigDecimal expectIncome) {
+        this.expectIncome = expectIncome;
+    }
+
+    public Integer getBusinessState() {
+        return businessState;
+    }
+
+    public void setBusinessState(Integer businessState) {
+        this.businessState = businessState;
     }
 
     public int getStartRow() {
@@ -212,12 +139,12 @@ public class QueryBusinessInfo {
         this.pageSize = pageSize;
     }
 
-    public String getAreaClassId() {
-        return areaClassId;
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public void setAreaClassId(String areaClassId) {
-        this.areaClassId = areaClassId;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
     public String getAreaId() {
@@ -226,5 +153,13 @@ public class QueryBusinessInfo {
 
     public void setAreaId(String areaId) {
         this.areaId = areaId;
+    }
+
+    public String getAreaClassId() {
+        return areaClassId;
+    }
+
+    public void setAreaClassId(String areaClassId) {
+        this.areaClassId = areaClassId;
     }
 }

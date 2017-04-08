@@ -26,60 +26,56 @@
 								<result property="createTime" column="create_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
 								<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
 														</resultMap>
-	
+	<resultMap id="QUERY-CUSTOMERVISITRECORD-MAP" class="QueryCustomerVisitRecord">
+		<result property="visitrecordId" column="visitrecord_id" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="customerName" column="full_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+		<result property="userId" column="user_id" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="userName" column="user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="startTime" column="start_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+		<result property="endTime" column="end_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+		<result property="activityType" column="activity_type" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="activityRemarks" column="activity_remarks" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="activityAddress" column="activity_address" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="activityExpense" column="activity_expense" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+		<result property="activitySummary" column="activity_summary" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="createUserId" column="create_user_id" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="createUserName" column="create_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="lastmodifyUserId" column="lastmodify_user_id" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="lastmodifyUserName" column="lastmodify_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="createTime" column="create_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+		<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+	</resultMap>
 	<sql id="PAGE-COMMON">	
 		<dynamic prepend=" WHERE ">
-				<isNotNull prepend=" AND " property="visitrecordId">
-			visitrecord_id = #visitrecordId#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="customerId">
-			customer_id = #customerId#
-		</isNotNull>
+			<isNotEmpty prepend=" AND " property="customerName">
+				base.full_name like concat('%',#customerName#,'%')
+			</isNotEmpty>
 				<isNotNull prepend=" AND " property="userId">
 			user_id = #userId#
 		</isNotNull>
-				<isNotNull prepend=" AND " property="userName">
-			user_name = #userName#
-		</isNotNull>
 				<isNotNull prepend=" AND " property="startTime">
-			start_time = #startTime#
+					<![CDATA[
+					start_time >= #startTime#
+			]]>
 		</isNotNull>
 				<isNotNull prepend=" AND " property="endTime">
-			end_time = #endTime#
+			<![CDATA[
+				end_time <= #endTime#
+			]]>
 		</isNotNull>
-				<isNotNull prepend=" AND " property="activityType">
+			<isNotNull prepend=" AND " property="activityType">
 			activity_type = #activityType#
 		</isNotNull>
-				<isNotNull prepend=" AND " property="activityRemarks">
-			activity_remarks = #activityRemarks#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="activityAddress">
-			activity_address = #activityAddress#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="activityExpense">
-			activity_expense = #activityExpense#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="activitySummary">
-			activity_summary = #activitySummary#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="createUserId">
-			create_user_id = #createUserId#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="createUserName">
-			create_user_name = #createUserName#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="lastmodifyUserId">
-			lastmodify_user_id = #lastmodifyUserId#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="lastmodifyUserName">
-			lastmodify_user_name = #lastmodifyUserName#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="createTime">
-			create_time = #createTime#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="modifyTime">
-			modify_time = #modifyTime#
-		</isNotNull>
+			<isNotEqual property="areaClassId" compareValue="0" prepend=" AND ">
+				base.customer_area_id = #areaClassId#
+				<isNotEqual property="areaId" compareValue="0" prepend=" AND ">
+					base.country_id = #areaId#
+				</isNotEqual>
+			</isNotEqual>
+			<isNotEmpty prepend=" AND " property="orderBy">
+				order by $orderBy$
+			</isNotEmpty>
 				</dynamic>
 	</sql>
 	
@@ -218,7 +214,7 @@
 		LEFT JOIN record_linkman b ON b.visit_record_id = a.visitrecord_id
 		LEFT JOIN customer_linkman c ON c.linkman_id = b.linkman_id
 		WHERE
-			a.customer_id = #fh123456#
+			a.customer_id = #customerId#
 		GROUP BY
 			a.visitrecord_id
 	]]>
@@ -243,9 +239,12 @@
 	]]>
 	</select>
 	
-	<select id="GET-PAGE" resultMap="CUSTOMERVISITRECORD-MAP" parameterClass="QueryCustomerVisitRecord">
+	<select id="GET-PAGE" resultMap="QUERY-CUSTOMERVISITRECORD-MAP" parameterClass="QueryCustomerVisitRecord">
 		<![CDATA[
-			SELECT * FROM customer_visit_record 
+			SELECT	base.full_name,a.*
+		FROM
+			customer_visit_record a
+		LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
 		]]>
 		<isParameterPresent>   
             <include refid="PAGE-COMMON" />   
@@ -256,6 +255,7 @@
 	<select id="COUNT" resultClass="java.lang.Integer" parameterClass="QueryCustomerVisitRecord">
 		<![CDATA[
 			SELECT COUNT(visitrecord_id) FROM customer_visit_record
+
 		]]>
 		<isParameterPresent>   
             <include refid="PAGE-COMMON" />   

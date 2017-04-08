@@ -18,13 +18,13 @@ public interface BusinessInfoService {
 
     public Result deleteBusinessInfoByBusinessId(String businessId);
 
-    public Result<BusinessInfo> getBusinessInfoByBusinessId(String businessId);
+    public Result<BusinessInfoVO> getBusinessInfoByBusinessId(String businessId);
 
     public Result<List<BusinessInfo>> getBusinessInfoByCustomerId(String customerId);
 
     public Result<List<BusinessInfo>> getBusinessInfoByQuery(QueryBusinessInfo queryBusinessInfo);
 
-    public Result<List<BusinessInfoVO>> getBusinessInfoByPage(BusinessInfoVO businessInfoVO);
+    public Result<List<QueryBusinessInfo>> getBusinessInfoByPage(QueryBusinessInfo queryBusinessInfo);
 
-    public Result<Integer> count(BusinessInfoVO businessInfoVO);
+    public Result<Integer> count(QueryBusinessInfo queryBusinessInfo);
 }

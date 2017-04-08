@@ -17,6 +17,8 @@ public interface PackingArchivesManager {
 
     public PackingArchives getPackingArchivesById(int id);
 
+    public List<PackingArchives> getPackingArchivesByIds(String ids);
+
     public boolean updatePackingArchivesById(int id,PackingArchives packingArchives);
 
     public boolean deletePackingArchivesById(int id);

@@ -1,5 +1,7 @@
 package com.fuhuadata.domain.query;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -26,6 +28,7 @@ public class QueryBusinessOrder {
     private String ncOrderId;//nc系统合同号
     private String country;//国家
     private Integer isComplaint;//是否投诉
+    @JsonFormat(pattern = "yyyy-MM-DD")
     private Date dealTime;//合同时间
     private Integer isModifyPrice;//是否调价
     private String startTime;//查询合同签定时间开始范围

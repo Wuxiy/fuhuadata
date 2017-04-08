@@ -9,6 +9,7 @@
 	<typeAlias alias="CustomerBaseInfoVO" type="com.fuhuadata.vo.CustomerBaseInfoVO"/>
 	<typeAlias alias="CustomerMakeProduct" type="com.fuhuadata.domain.CustomerMakeProduct"/>
 	<typeAlias alias="CustomerEnterpriceNature" type="com.fuhuadata.domain.CustomerEnterpriceNature"/>
+	<typeAlias alias="CustomerBaseInfoLinkman" type="com.fuhuadata.vo.CustomerBaseInfoLinkman"/>
 
 	<resultMap id="CUSTOMERBASEINFO-MAP" class="CustomerBaseInfo">
 					<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -131,20 +132,21 @@
 			</isNotEmpty>
 				</dynamic>
 	</sql>
-	
+
+
 	<sql id="QUERY-COMMON">
 		<dynamic prepend=" WHERE ">
 				<isNotEmpty prepend=" AND " property="customerId">
 			customer_id = #customerId#
 		</isNotEmpty>
 				<isNotEmpty prepend=" AND " property="fullName">
-			full_name = #fullName#
+			full_name like concat('%',#fullName#,'%')
 		</isNotEmpty>
-			<isNotEmpty prepend="and" property="">
+			<isNotEmpty prepend="and" property="customerLevel">
 				customer_level=#customerLevel#
 			</isNotEmpty>
 				<isNotEmpty prepend=" AND " property="shortName">
-			short_name = #shortName#
+			short_name like concat('%',#shortName#,'%')
 		</isNotEmpty>
 				<isNotEmpty prepend=" AND " property="customerType">
 			customer_type = #customerType#
@@ -179,9 +181,6 @@
 			<isNotEmpty prepend="and" property="customerStatus">
 				customer_status=#customerStatus#
 			</isNotEmpty>
-				<isNotEmpty prepend=" AND " property="remark">
-					remark = #remark#
-		</isNotEmpty>
 				<isNotEmpty prepend=" AND " property="enterprisePhone">
 			enterprise_phone = #enterprisePhone#
 		</isNotEmpty>
@@ -361,7 +360,12 @@
 
 	<select id="GET-BY-QUERY" resultClass="CustomerBaseInfo" parameterClass="QueryCustomerBaseInfo">
 		<![CDATA[
-			SELECT * FROM customer_base_info
+						SELECT
+				base.customer_id customerId,
+				base.full_name fullName,
+				base.short_name shortName
+			FROM
+				customer_base_info base
 		]]>
 		<isParameterPresent>
             <include refid="QUERY-COMMON" />
@@ -371,6 +375,27 @@
 	<select id="GET-BY-ID" resultClass="CustomerBaseInfo" parameterClass="java.lang.String">
 		<![CDATA[
 			SELECT * FROM customer_base_info	WHERE customer_id=#customer_id#
+		]]>
+	</select>
+
+	<select id="GET-BASEINFO-LINKMANINFO-BY-CUSTOMERID" resultClass="CustomerBaseInfoLinkman" parameterClass="java.lang.String">
+		<![CDATA[
+						SELECT
+				base.full_name fullName,
+				base.short_name shortName,
+				base.customer_level customerLevel,
+				base.full_enterprise_nature enterpriseNature,
+				base.country country,
+				a.linkman_id linkmanId,
+				a.`name` linkmanName,
+				a.link_phone1 linkPhone1,
+				a.link_phone2 linkPhone2,
+				a.lemail lemail
+			FROM
+				customer_base_info base
+			LEFT JOIN customer_linkman a ON a.customer_id = base.customer_id
+			WHERE
+				a.is_default = 1 AND base.customer_id=#customerId#
 		]]>
 	</select>
 

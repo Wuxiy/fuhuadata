@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.RoleAuthorityMapper">
+    <resultMap id="BaseResultMap" type="com.fuhuadata.domain.mybatis.RoleAuthority">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="role_id" jdbcType="INTEGER" property="roleId"/>
+        <result column="resource_type" jdbcType="TINYINT" property="resourceType"/>
+        <result column="resource_id" jdbcType="INTEGER" property="resourceId"/>
+        <result column="auth_user_id" jdbcType="INTEGER" property="authUserId"/>
+        <result column="auth_user_name" jdbcType="VARCHAR" property="authUserName"/>
+        <result column="auth_time" jdbcType="TIMESTAMP" property="authTime"/>
+        <result column="permission_ids" jdbcType="VARCHAR" property="permissionIds"/>
+    </resultMap>
+    
+    <resultMap id="ResourcesExtendMap" type="com.fuhuadata.domain.mybatis.RoleAuthority">
+        <collection property="buttons" columnPrefix="button_"
+                    ofType="com.fuhuadata.domain.mybatis.Button"
+                    resultMap="com.fuhuadata.dao.mapper.ButtonMapper.BaseResultMap"/>
+    </resultMap>
+
+    <!-- p_role_authority 缩写 roau -->
+    <sql id="BaseColumns">
+        roau.id,
+        roau.role_id,
+        roau.resource_type,
+        roau.resource_id,
+        roau.auth_user_id,
+        roau.auth_user_name,
+        roau.auth_time,
+        aoau.permission_ids
+    </sql>
+
+    <!-- 关联查询前缀 ro_au_ -->
+    <sql id="PrefixColumns">
+        roau.id ro_au_id,
+        roau.role_id ro_au_role_id,
+        roau.resource_type ro_au_resource_type,
+        roau.resource_id ro_au_resource_id,
+        roau.auth_user_id ro_au_auth_user_id,
+        roau.auth_user_name ro_au_auth_user_name,
+        roau.auth_time ro_au_auth_time,
+        roau.permission_ids ro_au_permission_ids
+    </sql>
+
+    <sql id="MenuButtonsJoin">
+        LEFT JOIN
+    </sql>
+    
+</mapper>

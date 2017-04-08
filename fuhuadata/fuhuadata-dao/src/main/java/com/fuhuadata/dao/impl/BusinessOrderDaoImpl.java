@@ -1,15 +1,10 @@
 package com.fuhuadata.dao.impl;
 
-import com.fuhuadata.dao.BaseDao;
 import com.fuhuadata.dao.BusinessOrderDao;
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
-import com.ibatis.sqlmap.client.SqlMapClient;
-import com.ibatis.sqlmap.engine.mapping.sql.Sql;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -77,7 +72,7 @@ public class BusinessOrderDaoImpl extends SqlMapClientTemplate implements Busine
 
     @Override
     public int countOffer(QueryBusinessOrder queryBusinessOrder) {
-        return (Integer)(this.queryForObject(COUNT_OFFER,queryBusinessOrder));
+        return ((Integer)(this.queryForObject(COUNT_OFFER,queryBusinessOrder))).intValue();
     }
 
     @Override
