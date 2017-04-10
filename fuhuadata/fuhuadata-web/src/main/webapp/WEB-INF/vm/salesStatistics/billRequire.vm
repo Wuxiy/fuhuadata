@@ -1,0 +1,224 @@
+<div class="clearfix content shadow-out">
+    <!--副导航-->
+    <div class="nav-deputy shadow-out clearfix">
+        #breadcrumb()
+    </div>
+    <!--表格容器-->
+    <div class="dashboard-wrapper">
+        <div class="row">
+            <div class="col-xs-10">
+                <!--单据要求-->
+                <div class="panel panel-default view-HD-lg">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" lang="zh">
+                            单据要求
+                        </h3>
+                    </div>
+                    <div class="panel-body panel-edit">
+                        <div class="form-group">
+                            <div class="input-group col-xs-3 ">
+                                <span class="input-group-addon" lang="zh">单据类型</span>
+                                <select id="name" class="form-control">
+                                    <option value="0">信用证条款单据</option>
+                                    <option value="1">非信用证条款单据</option>
+                                </select>
+                            </div>
+                        </div>
+                        <table class="table table-condensed table-bordered table-striped text-right">
+                            <tbody>
+                            <tr>
+                                <td class="col-xs-4" lang="zh"><label for="">出具海运提单</label></td>
+                                <td class="text-left">
+                                    <div class="checkbox col-xs-3">
+                                        <label><input id="oceanBillOfLading" type="checkbox" /></label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-xs-4" lang="zh">出具货运提单</td>
+                                <td class="text-left">
+                                    <div class="checkbox col-xs-3">
+                                        <label><input id="freightBillOfLading" type="checkbox" /></label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td lang="zh">是否需要发票</td>
+                                <td class="text-left">
+                                    <div class="checkbox col-xs-3">
+                                        <label><input id="invoice" type="checkbox" /></label>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td lang="zh">是否需要箱单</td>
+                                <td class="text-left">
+                                    <div class="checkbox col-xs-3">
+                                        <label><input id="packingLise" type="checkbox" /></label>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td lang="zh">是否需要质检单</td>
+                                <td class="text-left">
+                                    <div class="checkbox col-xs-2">
+                                        <label><input id="qualityPolicy" type="checkbox" /></label>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <input id="qualityPolicyTxt" type="text" class="form-control" placeholder="请输入公司抬头">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td lang="zh">是否需要保单</td>
+                                <td class="text-left">
+                                    <div class="checkbox col-xs-3">
+                                        <label><input id="warranty" type="checkbox" /></label>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td lang="zh">是否出COO</td>
+                                <td class="text-left">
+                                    <div class=" col-xs-2">
+                                        <label class="checkbox-inline"><input name="coo" type="checkbox" value="CIATB"/>商检局</label>
+                                    </div>
+                                    <div class="col-xs-10">
+                                        <label class="radio-inline"><input name="CIATB" type="radio" value="a"/>FORM A</label>
+                                        <label class="radio-inline"><input name="CIATB" type="radio" value="e"/>FORM E</label>
+                                        <label class="radio-inline"><input name="CIATB" type="radio" value="p"/>FORM P</label>
+                                        <label class="radio-inline"><input name="CIATB" type="radio" value="au"/>FORM AU</label>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <label class="checkbox-inline" style="padding-top: 3px"><input name="coo" type="checkbox" value="CCPIT"/>贸促会</label>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <label class="checkbox-inline" style="padding-top: 3px"><input name="coo" type="checkbox" value="general" />普通</label>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <input id="general" class="form-control" type="text" placeholder="请输入公司抬头"/>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td lang="zh">是否需要危包证</td>
+                                <td class="text-left">
+                                    <div class="checkbox col-xs-3">
+                                        <label><input id="dangerousPackage" type="checkbox" /></label>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td lang="zh">是否需要受益人证明</td>
+                                <td class="text-left">
+                                    <div class="checkbox col-xs-3">
+                                        <label><input id="favoree" type="checkbox" /></label>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td lang="zh">是否出熏蒸证书</td>
+                                <td class="text-left">
+                                    <div class="checkbox col-xs-3">
+                                        <label><input id="fumigation" type="checkbox" /></label>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td lang="zh">是否需要MSDS</td>
+                                <td class="text-left">
+                                    <div class="checkbox col-xs-3">
+                                        <label><input id="MSDS" type="checkbox" /></label>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td lang="zh">提单是否电放</td>
+                                <td class="form-group text-left">
+                                    <div class="checkbox col-xs-2">
+                                        <label><input name="telexRelease" type="checkbox" value="0" /><span lang="zh">直接电放</span></label>
+                                    </div>
+                                    <div class="checkbox col-xs-3">
+                                        <label><input name="telexRelease" type="checkbox" value="1" /><span lang="zh">正本出后电放</span></label>
+                                    </div>
+                                    <div class="col-xs-4"><input id="telexReleaseTxt" class="form-control" type="text" value="" placeholder="输入放单目的港" lang="zh" /></div>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td lang="zh">是否需要银行交单</td>
+                                <td class="text-left">
+                                    <div class="checkbox col-xs-3">
+                                        <label><input id="tenderDocument" type="checkbox" /></label>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td lang="zh">是否需要做第三方检测，并出具检测报告</td>
+                                <td class="text-left">
+                                    <div class="checkbox col-xs-3">
+                                        <label><input id="examiningReport" type="checkbox" /></label>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td lang="zh">是否需要Packing Declaration</td>
+                                <td class="text-left">
+                                    <div class="checkbox col-xs-3">
+                                        <label><input id="packingDeclaration" type="checkbox" /></label>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td lang="zh">是否需要Import Container Weight Declaration</td>
+                                <td class="text-left">
+                                    <div class="checkbox col-xs-3">
+                                        <label><input id="ICWD" type="checkbox" /></label>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>是否需要Manufacturer's Certificate</td>
+                                <td class="text-left">
+                                    <div class="checkbox col-xs-3">
+                                        <label><input id="MC" type="checkbox" /></label>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="control-label col-xs-2" lang="zh">其他单据要求</label>
+                                <div class="col-xs-10">
+                                    <textarea id="otherDocumentaryRequire" class="form-control" rows="3" placeholder="多个单据请以（、）隔开" lang="zh"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-1 col-xs-offset-5"><a href="" class="btn btn-block btn-default" type="button">上一步</a></div>
+                <div class="col-xs-1 col-xs-offset-1"><a href="" class="btn btn-block btn-primary" type="button">下一步</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<h3 id="sTitle" class="hidden">单据要求</h3>
+<input id="customerId" type="hidden" value='$!{customerId}'>
+<input id="customerType" type="hidden" value='$!{customerType}'>
+<input id="fullName" type="hidden" value='$!{fullName}'>
+
+
+
+
