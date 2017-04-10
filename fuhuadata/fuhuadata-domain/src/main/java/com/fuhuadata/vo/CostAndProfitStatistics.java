@@ -31,6 +31,8 @@ public class CostAndProfitStatistics {
 
     private Integer customerLevel;//客户类型
 
+    private String userArea;//业务员业务国家
+
     private String country;//国家
 
     private BigDecimal actualAmountPaid;//销售额
@@ -212,5 +214,13 @@ public class CostAndProfitStatistics {
 
     public void setDimension(Integer dimension) {
         this.dimension = dimension;
+    }
+
+    public String getUserArea() {
+        return userArea;
+    }
+
+    public void setUserArea(String userArea) {
+        this.userArea = userArea;
     }
 }

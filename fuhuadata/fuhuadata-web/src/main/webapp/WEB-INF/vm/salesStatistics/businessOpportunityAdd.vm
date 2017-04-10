@@ -191,7 +191,7 @@
             "fullName":"福华"
         }
         jQuery.ajax({
-            url:basePath + '/customerBaseInfo/getCustomerBaseInfoByQuery',
+                url:basePath + '/customerBaseInfo/getCustomerBaseInfoByQuery',
             contentType:"application/json",
             data:JSON.stringify(data),
             type:'POST',
