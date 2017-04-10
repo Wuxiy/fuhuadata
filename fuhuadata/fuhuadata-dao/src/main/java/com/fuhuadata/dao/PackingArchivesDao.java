@@ -40,6 +40,13 @@ public interface PackingArchivesDao {
     public PackingArchives getPackingArchivesById(int id);
 
     /**
+     * 通过ids字符串获取关联包材列表
+     * @param ids
+     * @return
+     */
+    public List<PackingArchives> getPackingArchivesByIds(String ids);
+
+    /**
      * 通过包材分类id查询包材成本档案列表
      * @param id
      * @return

@@ -12,6 +12,10 @@ public class QueryCustomerProductArchives extends PageBase {
 
 	/**标准产品id**/
 	private Integer productId;
+
+	/**产品规格id**/
+	private Integer wareId;
+
 	/**订单id**/
 	private Integer orderId;
 
@@ -182,7 +186,13 @@ public class QueryCustomerProductArchives extends PageBase {
 	/**修改时间**/
 	private Date modifyTime;
 
+	public Integer getWareId() {
+		return wareId;
+	}
 
+	public void setWareId(Integer wareId) {
+		this.wareId = wareId;
+	}
 
 	public Integer getId() {
 		return id;

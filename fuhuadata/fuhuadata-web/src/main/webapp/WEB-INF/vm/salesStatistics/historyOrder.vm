@@ -36,15 +36,15 @@
                                 <!--搜索栏-->
                                 <div class="input-group">
                                     <span class="input-group-addon" lang="zh">合同号</span>
-                                    <input class="form-control" id="customerName" />
+                                    <input class="form-control" id="ncOrderId" />
                                     <span class="input-group-addon" lang="zh">销售组织</span>
-                                    <input class="form-control" id="customerName" />
+                                    <input class="form-control" id="saleOrganizationId" />
                                     <span class="input-group-addon" lang="zh">客户名称</span>
                                     <input class="form-control" id="customerName" />
                                     <span class="input-group-addon" lang="zh">开始时间</span>
-                                    <input class="form-control" id="customerName" />
+                                    <input class="form-control" id="startTime" />
                                     <span class="input-group-addon" lang="zh">结束时间</span>
-                                    <input class="form-control" id="customerName" />
+                                    <input class="form-control" id="endTime" />
                                     <div class="input-group-btn">
                                         <button class="btn btn-xs btn-primary" id="submit" type="button">搜索</button>
                                     </div>
@@ -64,13 +64,13 @@
                             <th class="text-center" lang="zh">国家</th>
                             <th class="text-center" lang="zh">合同成本价</th>
                             <th class="text-center" lang="zh">合同总金额</th>
-                            <th class="text-center" lang="zh">利润</th>
-                            <th class="text-center" lang="zh">合同时间</th>
                             <th class="text-center" lang="zh">是否投诉</th>
                             <th class="text-center" lang="zh">是否调价</th>
+                            <th class="text-center" lang="zh">利润</th>
+                            <th class="text-center" lang="zh">合同时间</th>
                         </tr>
                         </thead>
-                        <tbody id="">
+                        <tbody id="oderList">
                         <tr>
                             <td>00001</td>
                             <td><a href="">草甘膦原药采购</a></td>
@@ -129,48 +129,49 @@
             callback:getDataList
         });
     }
-    var businessFrom = ['展会','门户网站','农药店考察','客户介绍','主动联系','其他']
-    var customerLevelList = ['战略客户','大客户' ,'重要客户' ,'一般客户' ,'风险客户'];
     var businessOpportunity = ['工厂','分销商' ,'经销商' ,'终端客户' ,'其他'];
-    var businessState = ['待报价','失败','已转化'];
     //根据页码获取列表数据
     function getDataList(pageNum,jq){
         var data = {
+            ncOrderId:$('#ncOrderId').val(),
+            saleOrganizationId:$('#saleOrganizationId').val(),
             customerName:$('#customerName').val(),
-            businessFrom:$('#businessFrom').val(),
-            businessState:$('#businessState').val(),
-            customerLevel:$('#customerLevel').val(),
-            enterpriseNature:$('#enterpriseNature').val(),
+            orderStatus:$('#businessState').val(),
+            startTime:$('#startTime').val(),
+            endTime:$('#endTime').val(),
             areaClassId:click_node.oneLevelId,
             areaId:click_node.twoLevelId,
             startRow:pageNum*pageSize,
             pageSize:pageSize
-        };
+        }
         jQuery.ajax({
-            url: basePath + '/businessInfo/queryBusinessInfoPageList',
+            url: basePath + '/businessOrder/getOrderListPageByQuery',
             dataType:'json',
+            data:JSON.stringify(data),
+            contentType:"application/json",
             async:true,
             method:'POST',
-            contentType:"application/json",
-            data:JSON.stringify(data),
             success:function(data){
                 var ResultData = data.data;
                 var _html = '';
-                for(var i=0;i<ResultData.length;i++){
-                    _html += '<tr>';
-                    _html += '	<td>'+ResultData[i].businessId+'</td>';
-                    _html += '  <td><a href="">'+ResultData[i].businessName+'</a></td>';
-                    _html += '  <td>'+ResultData[i].customerName+'</td>';
-                    _html += '  <td lang="zh">'+customerLevelList[ResultData[i].customerLevel-1]+'</td>';
-                    _html += '  <td lang="zh">'+businessOpportunity[ResultData[i].enterpriseNature-1]+'</td>';
-                    _html += '  <td>'+ResultData[i].createTime+'A</td>';
-                    _html += '  <td>'+ResultData[i].remainDays+'</td>';
-                    _html += '  <td lang="zh">'+businessFrom[ResultData[i].businessFrom]+'</td>';
-                    _html += '  <td lang="zh">'+ResultData[i].expectIncome+'</td>';
-                    _html +='   <td>'+businessState[ResultData[i].businessState]+'</td>';
-                    _html +='   </tr>';
+                if(ResultData && ResultData!='' && ResultData!='null') {
+                    for (var i = 0; i < ResultData.length; i++) {
+                        _html += '<tr>';
+                        _html += '	<td>' + ResultData[i].orderId + '</td>';
+                        _html += '  <td>' + ResultData[i].saleOrganizationName + '</td>';
+                        _html += '  <td lang="zh">' + ResultData[i].ncOrderId + '</td>';
+                        _html += '  <td lang="zh">' + ResultData[i].customerName + '</td>';
+                        _html += '  <td>' + ResultData[i].country + 'A</td>';
+                        _html += '  <td>' + ResultData[i].floorPrice + '</td>';
+                        _html += '  <td lang="zh">' + ResultData[i].amountPayable + '</td>';
+                        _html += '  <td lang="zh">' + (ResultData[i].isComplaint == 0 ? "否" : "是") + '</td>';
+                        _html += '   <td>' + (ResultData[i].isModifyPrice == 0 ? "否" : "是") + '</td>';
+                        _html += '   <td>' + ResultData[i].netProfit + '</td>';
+                        _html += '   <td>' + ResultData[i].dealTime + '</td>';
+                        _html += '   </tr>';
+                    }
                 }
-                $("#businessOpportunityList").html(_html);
+                $("#oderList").html(_html);
             }
         });
     }
@@ -196,22 +197,22 @@
     function getListCount(){
         var total = 0;
         var data = {
-            areaClassId:click_node.oneLevelId,
-            areaId:click_node.twoLevelId,
-            fullName:$("#fullName").val(),
+            ncOrderId:$('#ncOrderId').val(),
+            saleOrganizationId:$('#saleOrganizationId').val(),
             customerName:$('#customerName').val(),
-            businessFrom:$('#businessFrom').val(),
-            businessState:$('#businessState').val(),
-            customerLevel:$('#customerLevel').val(),
-            enterpriseNature:$('#enterpriseNature').val(),
+            orderStatus:$('#businessState').val(),
+            startTime:$('#startTime').val(),
+            endTime:$('#endTime').val(),
+            areaClassId:click_node.oneLevelId,
+            areaId:click_node.twoLevelId
         }
         jQuery.ajax({
-            url:basePath + '/businessInfo/countBusinessList',
+            url:basePath + '/businessOrder/countOrder',
             dataType:'JSON',
+            data:JSON.stringify(data),
+            contentType:"application/json",
             async:false,
             method:'POST',
-            contentType:"application/json",
-            data:JSON.stringify(data),
             success:function(data){
                 total = data.data;
             }

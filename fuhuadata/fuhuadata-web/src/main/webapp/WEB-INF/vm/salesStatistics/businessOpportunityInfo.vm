@@ -312,6 +312,7 @@
                 }
             });
             if(submit_permit){
+                upData(basePath+'/businessInfo/updateBusinessInfoById','POST',updateBusinessInfo(),"application/json");
                 jQuery.ajax({
                     url:basePath+'/businessInfo/updateBusinessInfoById',
                     type:'POST',
@@ -338,7 +339,7 @@
                 data:Followfinish(),
                 contentType:"application/json",
                 success:function () {
-                    alert('233');
+                    alert('2333');
                     /*location.reload();*/
                 }
             })
@@ -369,6 +370,10 @@
         $('#businessState').val(ResultData.businessState);
         $('#customerName').val(ResultData.customerName);
         $('#enterpriseNature').val(ResultData.enterpriseNature);
+        $('#customerLevel').val(customerLevelList[ResultData.customerLevel]);
+        $('#zhongxinbaoLevel').val(zhongxinbaoLevelList[ResultData.zhongxinbaoLevel]);
+        $('#country').val(ResultData.country);
+        $('#name').val(ResultData.linkmanName);
         $('#customerLevel').val(ResultData.customerLevel);
         $('#zhongxinbaoLevel').val(ResultData.zhongxinbaoLevel);
         $('#country').val(ResultData.country);

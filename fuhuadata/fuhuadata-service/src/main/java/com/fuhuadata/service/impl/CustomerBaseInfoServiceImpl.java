@@ -130,9 +130,10 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
     public Result<List<CustomerBaseInfo>> getCustomerBaseInfoByQuery(QueryCustomerBaseInfo queryCustomerBaseInfo) {
 		Result<List<CustomerBaseInfo>> result = new Result<List<CustomerBaseInfo>>();
 		try {
-			result.addDefaultModel("${!className}s", customerBaseInfoManager.getCustomerBaseInfoByQuery(queryCustomerBaseInfo));
+			result.addDefaultModel("CustomerBaseInfo", customerBaseInfoManager.getCustomerBaseInfoByQuery(queryCustomerBaseInfo));
 		} catch(Exception e) {
 			result.setSuccess(false);
+			log.error("条件获取客户列表失败",e);
 		}
 		return result;
     }

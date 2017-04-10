@@ -184,23 +184,25 @@
             success:function(data){
                 var ResultData = data.data;
                 var _html = '';
-                for(var i=0;i<ResultData.length;i++){
-                    _html += '<tr>';
-                    _html += '	<td>'+ResultData[i].orderId+'</td>';
-                    _html += '  <td><a href="">'+ResultData[i].businessId+'</a></td>';
-                    _html += '  <td>'+ResultData[i].saleOrganizationName+'</td>';
-                    _html += '  <td lang="zh">'+ResultData[i].ncOrderId+'</td>';
-                    _html += '  <td lang="zh">'+ResultData[i].customerName+'</td>';
-                    _html += '  <td>'+ResultData[i].country+'A</td>';
-                    _html += '  <td>'+ResultData[i].floorPrice+'</td>';
-                    _html += '  <td lang="zh">'+ResultData[i].amountPayable+'</td>';
-                    _html += '  <td lang="zh">'+(ResultData[i].isComplaint==0?"否":"是")+'</td>';
-                    _html +='   <td>'+(ResultData[i].isModifyPrice==0?"否":"是")+'</td>';
-                    _html +='   <td>'+ResultData[i].dealTime+'</td>';
-                    _html +='   <td>'+ResultData[i].status+'</td>';
-                    _html +='   </tr>';
+                if(ResultData && ResultData!='' && ResultData!='null') {
+                    for (var i = 0; i < ResultData.length; i++) {
+                        _html += '<tr>';
+                        _html += '	<td>' + ResultData[i].orderId + '</td>';
+                        _html += '  <td><a href="">' + ResultData[i].businessId + '</a></td>';
+                        _html += '  <td>' + ResultData[i].saleOrganizationName + '</td>';
+                        _html += '  <td lang="zh">' + ResultData[i].ncOrderId + '</td>';
+                        _html += '  <td lang="zh">' + ResultData[i].customerName + '</td>';
+                        _html += '  <td>' + ResultData[i].country + 'A</td>';
+                        _html += '  <td>' + ResultData[i].floorPrice + '</td>';
+                        _html += '  <td lang="zh">' + ResultData[i].amountPayable + '</td>';
+                        _html += '  <td lang="zh">' + (ResultData[i].isComplaint == 0 ? "否" : "是") + '</td>';
+                        _html += '   <td>' + (ResultData[i].isModifyPrice == 0 ? "否" : "是") + '</td>';
+                        _html += '   <td>' + ResultData[i].dealTime + '</td>';
+                        _html += '   <td>' + ResultData[i].status + '</td>';
+                        _html += '   </tr>';
+                    }
                 }
-                $("#oderList").html(_html);
+                    $("#oderList").html(_html);
             }
         });
     }

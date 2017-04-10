@@ -96,6 +96,28 @@
         ]]>
     </select>
 
+    <select id="GET-BY-WARE" resultClass="ProductCategoryVO">
+        SELECT
+        big.id AS parentId,
+        big.name AS parent,
+        midd.id AS middleId,
+        midd.name AS middle,
+        small.id AS smallId,
+        small.name AS child,
+        CONCAT(p.product_id,'_',pw.`ware_id`) AS productId,
+        CONCAT(p.`name`,'-', pw.`specification`) AS productName
+        FROM
+        product_category big
+        LEFT JOIN product_category midd
+        ON midd.`parent_id` = big.id
+        LEFT JOIN product_category small
+        ON small.parent_id = midd.`id`
+        LEFT JOIN product_info p
+        ON p.small_category_id=small.id
+        LEFT JOIN product_ware pw ON p.`product_id` = pw.`product_info_id`
+        WHERE big.`parent_id`=0
+    </select>
+
     <select id="GET-ALL" resultMap="PRODUCTCATEGORY-MAP">
       <![CDATA[
             SELECT * FROM product_category

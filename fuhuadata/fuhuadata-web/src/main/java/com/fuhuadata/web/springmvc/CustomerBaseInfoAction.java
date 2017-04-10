@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.management.Query;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -247,6 +248,26 @@ public class CustomerBaseInfoAction {
         }catch (Exception e){
             result.setSuccess(false);
             log.error("根据客户id获取客户以及默认联系人信息失败",e);
+        }
+        return result.getResultPojo();
+    }
+
+    /**
+     * 条件查询客户列表
+     * @param queryCustomerBaseInfo
+     * @return
+     */
+    @RequestMapping(value = "/getCustomerBaseInfoByQuery",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "customerInfo",methods = "getCustomerBaseInfoByQuery")
+    @ResponseBody
+    public ResultPojo getCustomerBaseInfoByQuery(@RequestBody QueryCustomerBaseInfo queryCustomerBaseInfo){
+        System.out.println(queryCustomerBaseInfo.getFullName()+"111111111111");
+        Result<List<CustomerBaseInfo>> result = new Result<List<CustomerBaseInfo>>();
+        try{
+            result=customerBaseInfoService.getCustomerBaseInfoByQuery(queryCustomerBaseInfo);
+        }catch (Exception e){
+            result.setSuccess(false);
+            log.error("条件获取客户列表失败",e);
         }
         return result.getResultPojo();
     }

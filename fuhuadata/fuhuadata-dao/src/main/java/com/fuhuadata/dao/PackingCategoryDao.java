@@ -29,6 +29,8 @@ public interface PackingCategoryDao {
      */
     public List<PackingCategoryVO> getAllByLevel(String parentIds);
 
+
+
     public List<PackingCategory> getPackingCategoryByParentId(int id);
 
     public PackingCategory getPackingCategoryById(int id);

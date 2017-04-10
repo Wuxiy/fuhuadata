@@ -4,8 +4,9 @@
   <typeAlias alias="BusinessOrderProductComponent" type="com.fuhuadata.domain.BusinessOrderProductComponent"/>
   <resultMap id="BusinessOrderProductComponentResultMap" class="com.fuhuadata.domain.BusinessOrderProductComponent" >
     <result column="id" property="id" jdbcType="INTEGER" />
-    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="business_product_id" property="businessProductId" jdbcType="INTEGER" />
     <result column="product_id" property="productId" jdbcType="INTEGER" />
+    <result column="ware_id" property="wareId" jdbcType="INTEGER" />
     <result column="component_id" property="componentId" jdbcType="INTEGER" />
     <result column="component_name" property="componentName" jdbcType="VARCHAR" />
     <result column="consumption" property="consumption" jdbcType="DECIMAL" />
@@ -19,11 +20,14 @@
       <isNotEmpty property="id" prepend="and">
         id=#id#
       </isNotEmpty>
-      <isNotEmpty property="orderId" prepend="and">
-        order_id=#orderId#
+      <isNotEmpty property="businessProductId" prepend="and">
+          business_product_id=#businessProductId#
       </isNotEmpty>
       <isNotEmpty property="productId" prepend="and">
         product_id = #productId#
+      </isNotEmpty>
+      <isNotEmpty property="wareId" prepend="and">
+          ware_id = #wareId#
       </isNotEmpty>
       <isNotEmpty property="componentId" prepend="and">
         component_id = #componentId#
@@ -31,14 +35,14 @@
   </sql>
 
   <select id="getByQuery" resultMap="BusinessOrderProductComponentResultMap" parameterClass="BusinessOrderProductComponent" >
-    select id, order_id, product_id, component_id, consumption, price, cost, remark
+    select id, order_id, product_id, ware_id,component_id, consumption, price, cost, remark
     from business_order_product_component
     <isParameterPresent >
       <include refid="where-common"/>
     </isParameterPresent>
   </select>
 
-    <select id="getStandardProductComponent" resultMap="BusinessOrderProductComponentResultMap" parameterClass="java.lang.Integer">
+  <select id="getStandardProductComponent" resultMap="BusinessOrderProductComponentResultMap" parameterClass="java.lang.Integer">
         SELECT
           cc.`component_id`,
           cc.`component_name`,
@@ -52,7 +56,21 @@
         AND pc.product_id = #productId#
     </select>
 
-    <select id="getOrderProductComponent" resultMap="BusinessOrderProductComponentResultMap" parameterClass="java.util.HashMap">
+  <select id="getListByBusinessProductId" resultMap="BusinessOrderProductComponentResultMap" parameterClass="java.lang.Integer">
+        SELECT
+        cc.`component_id`,
+        cc.`component_name`,
+        pc.`consumption`,
+        cc.`unit_cost` as price,
+        pc.cost
+        FROM
+        business_order_product_component pc,
+        k_component_cost cc
+        WHERE pc.`component_id` = cc.`component_id`
+        AND pc.business_product_id = #businessProductId#
+    </select>
+
+    <select id="getListByProductId" resultMap="BusinessOrderProductComponentResultMap" parameterClass="java.lang.Integer">
         SELECT
         cc.`component_id`,
         cc.`component_name`,
@@ -64,7 +82,6 @@
         k_component_cost cc
         WHERE pc.`component_id` = cc.`component_id`
         AND pc.product_id = #productId#
-        AND pc.order_id = #orderId#
     </select>
 
   <delete id="deleteByQuery" parameterClass="BusinessOrderProductComponent" >
@@ -75,20 +92,64 @@
   </delete>
   
   <insert id="insert" parameterClass="BusinessOrderProductComponent" >
-    insert into business_order_product_component (order_id, product_id, component_id,
+    insert into business_order_product_component (business_product_id, product_id, component_id,
       consumption, price, cost, remark)
-    values (#orderId#, #productId#, #componentId#,
+    values (#businessProductId#, #productId#, #componentId#,
       #consumption#, #price#, #cost#, #remark#)
       <selectKey resultClass="java.lang.Integer" keyProperty="id">
           SELECT @@IDENTITY AS ID
       </selectKey>
   </insert>
 
-    <update id="update" parameterClass="BusinessOrderProductComponent">
+  <insert id="insertFromArchives" parameterClass="java.util.HashMap" >
+        insert into business_order_product_component (business_product_id, product_id, component_id,
+        consumption, price, cost, remark)
+        (select #businessProductId#, product_id, component_id,
+                consumption, price, cost, remark
+          from business_order_product_component_archives
+        where business_product_id = #businessProductArchivesId#
+        )
+        <selectKey resultClass="java.lang.Integer" keyProperty="id">
+            SELECT @@IDENTITY AS ID
+        </selectKey>
+  </insert>
+
+    <insert id="addArchives" parameterClass="java.util.HashMap" >
+        insert into business_order_product_component_archives (business_product_id, product_id, component_id,
+        consumption, price, cost, remark)
+        (select #businessProductArchivesId#, product_id, component_id,
+        consumption, price, cost, remark
+        from business_order_product_component
+        where business_product_id = #businessProductId#
+        )
+        <selectKey resultClass="java.lang.Integer" keyProperty="id">
+            SELECT @@IDENTITY AS ID
+        </selectKey>
+    </insert>
+    <update id="updateArchives" parameterClass="java.lang.Integer">
+        update business_order_product_component_archives a,business_order_product_component b,
+        business_order_product c
+        set
+            a.consumption = b.consumption,
+            a.price = b.price,
+            a.cost = b.cost,
+            a.remark = b.remark
+        where
+            a.product_id = b.product_id
+            and a.ware_id = b.ware_id
+            and  a.component_id = b.component_id
+            and c.archive_product_id = a.business_product_id
+            and b.business_product_id = c.id
+            and c.id=#businessProductId#
+    </update>
+  <update id="update" parameterClass="BusinessOrderProductComponent">
         update business_order_product_component
         SET
         <isNotEmpty prepend="," property="productId">
             product_id = #productId#
+        </isNotEmpty>
+        <isNotEmpty prepend="," property="wareId">
+            ware_id = #wareId#
         </isNotEmpty>
         <isNotEmpty prepend="," property="componentId">
             component_id = #componentId#
@@ -105,8 +166,8 @@
         <isNotEmpty prepend="," property="remark">
             remark = #remark#
         </isNotEmpty>
-        where  product_id = #productId#
-        AND order_id = #orderId#
+        where  id=#id#
+
     </update>
 
 </sqlMap>

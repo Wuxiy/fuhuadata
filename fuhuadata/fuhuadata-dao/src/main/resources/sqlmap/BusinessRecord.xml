@@ -96,11 +96,11 @@
     </sql>
 
     <insert id="ADD" parameterClass="BusinessRecord">
-        insert into business_record (id, business_id, follow_content,
+        insert into business_record (business_id, follow_content,
         follow_effect, business_process, create_user_id,
         create_user_name, lastmodify_user_id, lastmodify_user_name,
         create_time, modify_time)
-        values (#id#, #businessId#, #followContent#,
+        values (#businessId#, #followContent#,
         #followEffect#, #businessProcess#, #createUserId#,
         #createUserName#, #lastmodifyUserId#, #lastmodifyUserName#,
         #createTime#, #modifyTime#)

@@ -87,8 +87,27 @@ public class ProductInfo{
     /**修改时间**/
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date modifyTime;
-	
-	
+	/**报关产品编码**/
+	private String customsClearanceId;
+	/**报关产品名称**/
+	private String customsClearanceName;
+
+	public String getCustomsClearanceId() {
+		return customsClearanceId;
+	}
+
+	public void setCustomsClearanceId(String customsClearanceId) {
+		this.customsClearanceId = customsClearanceId;
+	}
+
+	public String getCustomsClearanceName() {
+		return customsClearanceName;
+	}
+
+	public void setCustomsClearanceName(String customsClearanceName) {
+		this.customsClearanceName = customsClearanceName;
+	}
+
 	public ProductInfo() {
 	}
 	

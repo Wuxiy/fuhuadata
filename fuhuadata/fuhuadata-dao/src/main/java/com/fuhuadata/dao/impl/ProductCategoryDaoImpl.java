@@ -14,6 +14,7 @@ public class ProductCategoryDaoImpl extends SqlMapClientTemplate implements Prod
     public static final String ADD="PRODUCTCATEGORY.ADD";
     public static final String GET_ALL="PRODUCTCATEGORY.GET-ALL";
     public static final String GET_BY_LEVEL="PRODUCTCATEGORY.GET-BY-LEVEL";
+    public static final String GET_BY_WARE="PRODUCTCATEGORY.GET-BY-WARE";
     public static final String UPDATE="PRODUCTCATEGORY.UPDATE";
     public static final String DELETE="PRODUCTCATEGORY.DELETE";
     public static final String COUNT="PRODUCTCATEGORY.COUNT";
@@ -68,5 +69,10 @@ public class ProductCategoryDaoImpl extends SqlMapClientTemplate implements Prod
     @Override
     public int count() {
         return ((Integer)this.queryForObject(COUNT)).intValue();
+    }
+
+    @Override
+    public List<ProductCategoryVO> getProductWare() {
+        return this.queryForList(GET_BY_WARE);
     }
 }

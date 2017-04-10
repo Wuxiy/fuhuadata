@@ -24,4 +24,6 @@ public interface ProductCategoryManager {
     public List<ProductCategory> getProductCategoryByPId(int pid);
 
     public List<ProductCategoryVO> getProductCategoryByLevel();
+
+    public List<ProductCategoryVO> getProductWare();
 }

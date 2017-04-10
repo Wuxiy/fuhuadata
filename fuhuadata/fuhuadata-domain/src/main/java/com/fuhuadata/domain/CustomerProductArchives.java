@@ -15,6 +15,10 @@ public class CustomerProductArchives {
 	
     /**标准产品id**/
 	private Integer productId;
+
+	/**产品规格id**/
+	private Integer wareId;
+
 	/**订单id**/
 	private Integer orderId;
 
@@ -127,6 +131,9 @@ public class CustomerProductArchives {
     /**出口退税率**/
 	private BigDecimal taxFree;
 
+	/**出口退税方式1:按销售价退税 2：按采购价 3：不退税**/
+	private Integer taxType;
+
 	/**毛利率**/
 	private BigDecimal grossMargin;
 	
@@ -185,7 +192,65 @@ public class CustomerProductArchives {
     /**修改时间**/
 	private Date modifyTime;
 
+	/**报关产品编码**/
+	private String customsClearanceId;
 
+	/**报关产品名称**/
+	private String customsClearanceName;
+
+	/**内部供货单位id**/
+	private String internalSupplyId;
+
+	/**内部供货单位**/
+	private String internalSupplyName;
+
+	public String getInternalSupplyId() {
+		return internalSupplyId;
+	}
+
+	public void setInternalSupplyId(String internalSupplyId) {
+		this.internalSupplyId = internalSupplyId;
+	}
+
+	public String getInternalSupplyName() {
+		return internalSupplyName;
+	}
+
+	public void setInternalSupplyName(String internalSupplyName) {
+		this.internalSupplyName = internalSupplyName;
+	}
+
+	public String getCustomsClearanceId() {
+		return customsClearanceId;
+	}
+
+	public void setCustomsClearanceId(String customsClearanceId) {
+		this.customsClearanceId = customsClearanceId;
+	}
+
+	public String getCustomsClearanceName() {
+		return customsClearanceName;
+	}
+
+	public void setCustomsClearanceName(String customsClearanceName) {
+		this.customsClearanceName = customsClearanceName;
+	}
+
+	public Integer getTaxType() {
+		return taxType;
+	}
+
+	public void setTaxType(Integer taxType) {
+		this.taxType = taxType;
+	}
+
+	public Integer getWareId() {
+		return wareId;
+	}
+
+	public void setWareId(Integer wareId) {
+		this.wareId = wareId;
+	}
 
 	public Integer getId() {
 		return id;

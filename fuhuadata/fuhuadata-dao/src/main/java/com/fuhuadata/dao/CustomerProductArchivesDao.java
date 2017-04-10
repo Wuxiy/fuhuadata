@@ -97,6 +97,18 @@ public interface CustomerProductArchivesDao {
 	 */
 	public List<CustomerProductArchives> getCustomerTransportRequirement(String customerId);
 
+	/**
+	 * 查询订单产品插入到客户产品档案库
+	 * @param businessProductId
+	 * @return
+	 */
+	int addArchives(Integer businessProductId);
 
+	/**
+	 * 根据订单产品表主键更新客户产品表档案
+	 * @param businessProductId
+	 * @return
+	 */
+	int updateArchives(Integer businessProductId);
 
 }

@@ -26,6 +26,8 @@ public class CustomerProductArchivesDaoImpl extends SqlMapClientTemplate impleme
     public static final String GET_CUSTOMER_PRODUCT_REQUIRE_BY_ID="CUSTOMERPRODUCTARCHIVES.GET-CUSTOMER-PRODUCT-REQUIRE-BY-ID";
     public static final String GET_CUSTOMER_BILL_REQUIREMENT = "CUSTOMERPRODUCTARCHIVES.GET-CUSTOMER-BILL-REQUIREMENT";
     public static final String GET_CUSTOMER_TRANSPORT_REQUIREMENT = "CUSTOMERPRODUCTARCHIVES.GET-CUSTOMER-TRANSPORT-REQUIREMENT";
+    public static final String ADD_ARCHIVES = "CUSTOMERPRODUCTARCHIVES.addArchives";
+    public static final String UPDATE_ARCHIVES = "CUSTOMERPRODUCTARCHIVES.updateArchives";
     public CustomerProductArchives addCustomerProductInfo(CustomerProductArchives customerProductArchives) {
 		customerProductArchives.setId((Integer) this.insert(ADD, customerProductArchives));
     	return customerProductArchives;
@@ -77,5 +79,15 @@ public class CustomerProductArchivesDaoImpl extends SqlMapClientTemplate impleme
     @Override
     public List<CustomerProductArchives> getCustomerTransportRequirement(String customerId) {
         return this.queryForList(GET_CUSTOMER_TRANSPORT_REQUIREMENT,customerId);
+    }
+
+    @Override
+    public int addArchives(Integer businessProductId) {
+        return (Integer)this.insert(ADD_ARCHIVES,businessProductId);
+    }
+
+    @Override
+    public int updateArchives(Integer businessProductId) {
+        return this.update(UPDATE_ARCHIVES,businessProductId);
     }
 }
