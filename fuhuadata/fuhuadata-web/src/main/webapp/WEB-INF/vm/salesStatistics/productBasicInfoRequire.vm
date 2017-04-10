@@ -91,7 +91,15 @@
                                                 <sup class="not-null">*</sup>
                                             </label>
                                         </td>
-                                        <td><select id="priceType" class="form-control"><option value="0">自产类</option><option value="1">原药自产制剂加工类</option><option value="2">原药采购制剂加工类</option></select></td>
+                                        <td>
+                                            <select id="priceType" class="form-control">
+                                                <option value="0" selected>自产类</option>
+                                                <option value="1">原药自产制剂加工类</option>
+                                                <option value="2">原药采购制剂加工类</option>
+                                                <option value="3">贸易类</option>
+                                                <option value="4">其他类</option>
+                                            </select>
+                                        </td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -106,7 +114,7 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input id="advisePrice" class="form-control" value="" disabled>
+                                                <input id="advisePrice" class="form-control typechange" value="">
                                                 <span class="input-group-addon">元</span>
                                             </div>
                                         </td>
@@ -118,7 +126,7 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input id="purchasePrice" class="form-control" value="">
+                                                <input id="purchasePrice" class="form-control typechange" value="0">
                                                 <span class="input-group-addon">元</span>
                                             </div>
                                         </td>
@@ -132,7 +140,12 @@
                                                 <sup class="not-null">*</sup>
                                             </label>
                                         </td>
-                                        <td><select id="factoryId" class="form-control"><option value="0">杭州乐山</option><option value="1">安徽银山</option></select></td>
+                                        <td>
+                                            <select id="factoryId" class="form-control">
+                                                <option value="0">杭州乐山</option>
+                                                <option value="1">安徽银山</option>
+                                            </select>
+                                        </td>
                                         <td>
                                             <label class="control-label" lang="zh">
                                                 毛利率
@@ -141,14 +154,14 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input id="grossMargin" class="form-control" value="">
+                                                <input id="grossMargin" class="form-control typechange" value="">
                                                 <span class="input-group-addon">%</span>
                                             </div>
                                         </td>
                                         <td></td>
                                         <td></td>
                                     </tr>
-                                    <tr>
+                                    #*<tr>
                                         <td>
                                             <label class="control-label" lang="zh">
                                                 明佣计费方式
@@ -165,7 +178,7 @@
                                         </td>
                                         <td><label class="control-label" lang="zh">明佣标准</label></td>
                                         <td><input id="straightEmployingStandard" class="form-control" type="text" value=""/></td>
-                                    </tr>
+                                    </tr>*#
                                     <tr>
                                         <td>
                                             <label class="control-label" lang="zh">
@@ -173,7 +186,13 @@
                                                 <sup class="not-null">*</sup>
                                             </label>
                                         </td>
-                                        <td><select id="potentialEmployingWay" class="form-control"><option value="0">从量</option><option value="1">从价</option><option value="2">无</option></select></td>
+                                        <td>
+                                            <select id="potentialEmployingWay" class="form-control">
+                                                <option value="0">从量</option>
+                                                <option value="1">从价</option>
+                                                <option value="2">无</option>
+                                            </select>
+                                        </td>
                                         <td><label class="control-label" lang="zh">暗佣比例</label></td>
                                         <td>
                                             <div class="input-group">
@@ -186,7 +205,13 @@
                                     </tr>
                                     <tr>
                                         <td><label class="control-label" lang="zh">出口退税方式</label></td>
-                                        <td><select id="taxType" class="form-control"><option value="0">按销售价退税</option><option value="1">按采购价退税</option><option value="2">不退税</option></select></td>
+                                        <td>
+                                            <select id="taxType" class="form-control">
+                                                <option value="0">按销售价退税</option>
+                                                <option value="1">按采购价退税</option>
+                                                <option value="2">不退税</option>
+                                            </select>
+                                        </td>
                                         <td>
                                             <label class="control-label" lang="zh">
                                                 出口退税率
@@ -195,7 +220,7 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input id="taxFree" class="form-control" value="">
+                                                <input id="taxFree" class="form-control typechange" value="">
                                                 <span class="input-group-addon">%</span>
                                             </div>
                                         </td>
@@ -238,7 +263,7 @@
                 </div>
             </div>
             <div class="col-xs-1 col-xs-offset-4"><a href="" class="btn btn-block btn-default" type="button">取消</a></div>
-            <div class="col-xs-1 col-xs-offset-1"><a href="" class="btn btn-block btn-primary" type="button">下一步</a></div>
+            <div class="col-xs-1 col-xs-offset-1"><a href="" class="btn btn-block btn-primary" type="button" id="next">下一步</a></div>
         </div>
     </div>
 </div>
@@ -275,10 +300,13 @@
     var productId = '';
     var wareId = '';
 
+    $('.typechange').attr('disabled',false);
     $(document).ready(function () {
         $('#tree').creatTree(basePath+'/businessProduct/initProductCatetroy');
 
-
+        $('#next').click(function () {
+            upData(basePath + '','POST',Add(),"application/json");
+        })
     })
 
     $(document).on('click','a.cNode',function (e) {
@@ -304,10 +332,98 @@
             contentType:"application/json",
             data:JSON.stringify(data),
             success:function (result) {
-                var ResultData = result;
-                console.log(ResultData);
+                var businessProductId = result.businessProductId;
+                if(businessProductId != 0){
+                    jQuery.ajax({
+                        url:basePath + '/businessProduct/detailBaseInfo?businessProductId=' + businessProductId,
+                        type:'POST',
+                        success:function(result){
+                            console.log(result);
+                        }
+                    })
+                }
             }
         })
         $('#treeModal').modal('hide');
     });
+
+    $('#priceType').change(function () {
+
+        var val = $(this).val();
+        if(val == 0||val == 1){
+            $('#advisePrice').attr('disabled',false);
+            $('#advisePrice').val('');
+            if(val == 0){
+                $('#purchasePrice').attr('disabled',true);
+                $('#purchasePrice').val('0');
+                $('#grossMargin').attr('disabled',true);
+                $('#grossMargin').val('0');
+                $('#taxFree').attr('disabled',true);
+                $('#taxFree').val('0');
+            }else{
+                $('#purchasePrice').attr('disabled',true);
+                $('#purchasePrice').val('0');
+                $('#grossMargin').attr('disabled',false);
+                $('#grossMargin').val('');
+                $('#taxFree').attr('disabled',false);
+                $('#taxFree').val('');
+            }
+        }else if(val == 2||val == 3||val == 4){
+            $('#purchasePrice').attr('disabled',false);
+            $('#purchasePrice').val('');
+            if(val == 2){
+                $('#advisePrice').attr('disabled',true);
+                $('#advisePrice').val('0');
+            }
+        }
+    })
+
+    $('#potentialEmployingWay').change(function () {
+        var val = $(this).val();
+        if(val == 0){
+            $('#potentialEmployingScale').attr('disabled',false);
+            $('#potentialEmployingScale').val('');
+            $('#potentialEmployingStandard').attr('disabled',true);
+            $('#potentialEmployingStandard').val('0');
+        }else if(val == 1){
+            $('#potentialEmployingScale').attr('disabled',true);
+            $('#potentialEmployingScale').val('0');
+            $('#potentialEmployingStandard').attr('disabled',false);
+            $('#potentialEmployingStandard').val('');
+        }
+    })
+
+    function Add() {
+        var data = {
+            'name':$('#name').val(),
+            'customsClearanceName':$('#customsClearanceName').val(),
+            'customerProductName':$('#customerProductName').val(),
+            'brand':$('#brand').val(),
+            'mainProductUnit':$('#mainProductUnit').val(),
+            'mainProductAmount':$('#mainProductAmount').val(),
+            'subProductUnit':$('#subProductUnit').val(),
+            'subProductAmount':$('#subProductAmount').val(),
+            'convertRate':$('#convertRate').val(),
+            'advisePrice':$('#advisePrice').val(),
+            'purchasePrice':$('#purchasePrice').val(),
+            'factoryId':$('#factoryId').val(),
+            'grossMargin':$('#grossMargin').val(),
+            'potentialEmployingWay':$('#potentialEmployingWay').val(),
+            'potentialEmployingScale':$('#potentialEmployingScale').val(),
+            'potentialEmployingStandard':$('#potentialEmployingStandard').val(),
+            'taxType':$('#taxType').val(),
+            'taxFree':$('#taxFree').val(),
+            'otherCost':$('#otherCost').val(),
+            'straightEmployingWay':'',
+            'straightEmployingScale':'',
+            'straightEmployingStandard':'',
+            "createTime": getTime(),
+            "createUserId": 2,
+            "createUserName":"杨洋",
+            "modifyTime":"2017-03-02 11:44:49",
+            "lastmodifyUserId": 1,
+            "lastmodifyUserName": "胡向阳"
+        }
+        return JSON.stringify(data);
+    }
 </script>
