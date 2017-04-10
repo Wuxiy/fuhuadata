@@ -15,8 +15,8 @@
                 </div>
                 <div class="panel-body tree-container clearfix">
                     <!--树形菜单-->
-                    <div class="tree" id="tree">
-
+                    <div class="zTreeDemoBackground left">
+                        <ul id="asideTree" class="ztree"></ul>
                     </div>
                 </div>
             </div>

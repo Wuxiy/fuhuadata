@@ -269,7 +269,7 @@ public class BusinessOrderProductAction {
      */
     @RequestMapping("intoDocumentary")
     public ModelAndView intoDocumentary(Integer businessProductId){
-        return new ModelAndView("").addObject("businessProductId",businessProductId);
+        return new ModelAndView("salesStatistics/billRequire").addObject("businessProductId",businessProductId);
     }
 
     /**
@@ -315,7 +315,7 @@ public class BusinessOrderProductAction {
      */
     @RequestMapping("intoPackageRequire")
     public ModelAndView intoPackageRequire(Integer businessProductId){
-        return new ModelAndView().addObject("businessProductId",businessProductId);
+        return new ModelAndView("salesStatistics/transportRequire").addObject("businessProductId",businessProductId);
     }
 
     /**
