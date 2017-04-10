@@ -37,7 +37,16 @@
                                             </div>
                                         </td>
                                         <td class="col-xs-2"><label class="control-label" lang="zh">报关产品名称</label></td>
-                                        <td><input id="customsClearanceName" class="form-control" type="text" value="" /></td>
+                                        <td>
+                                            <div class="input-group">
+                                                <input id="customsClearanceName" class="form-control" value="" disabled>
+                                                <div class="input-group-btn">
+                                                    <button data-toggle="modal" data-target="#treeModal" class="btn btn-xs btn-default">
+                                                        <span class="glyphicon glyphicon-search"></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td class="col-xs-2"><label class="control-label" lang="zh">客户商品名</label></td>
                                         <td><input id="customerProductName" class="form-control" type="text" value="" /></td>
                                     </tr>
@@ -221,7 +230,13 @@
                             </tr>
                             </thead>
                             <tbody id="">
-
+                                <tr>
+                                    <td>草甘膦94%以上原粉（95%）</td>
+                                    <td><input class="form-control" type="text" value="385.00"></td>
+                                    <td><input class="form-control" type="text" value="80.00"></td>
+                                    <td>38,500</td>
+                                    <td><input class="form-control" type="text"></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -249,14 +264,14 @@
     </div>
 </div>
 
-<input id="id" type="hidden" value="$!{id}"><!--编号-->
-<input id="productId" type="hidden" value=""><!--标准产品id-->
-<input id="archiveProductId" type="hidden" value=""><!--客户产品id-->
-<input id="archiveProductId" type="hidden" value=""><!--客户产品id-->
-<input id="customsClearanceId" type="hidden" value=""><!--报关产品编码-->
-<input id="customerId" type="hidden" value=""><!--客户id-->
+<input id="id" type="hidden" value="$!{id}"> <!--编号-->
+<input id="productId" type="hidden" value=""> <!--标准产品id-->
+<input id="archiveProductId" type="hidden" value=""> <!--客户产品id-->
+<input id="archiveProductId" type="hidden" value=""> <!--客户产品id-->
+<input id="customsClearanceId" type="hidden" value=""> <!--报关产品编码-->
+<input id="customerId" type="hidden" value=""> <!--客户id-->
+
 <script type="text/javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
-<script type="text/javascript" src="${request.contextPath}/lib/js/saleprocess/basic.js"></script>
-<script type="text/javascript" src="${request.contextPath}/lib/js/saleprocess/productBasicInfoRequireM.js"></script>
-<script type="text/javascript" src="${request.contextPath}/lib/js/saleprocess/productBasicInfoRequireC.js"></script>
+<script type="text/javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
+<script type="text/javascript" src="${request.contextPath}/lib/js/saleprocess/productBasicInfoRequire.js"></script>
 

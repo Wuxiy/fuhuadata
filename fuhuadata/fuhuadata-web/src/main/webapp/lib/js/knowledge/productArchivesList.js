@@ -10,15 +10,16 @@ CRM.productArchivesList.editView     = $(CRM.el.EDIT_VIEW); // 编辑状态下�
 CRM.productArchivesList.editHide     = $(CRM.el.EDIT_HIDE); // 编辑状态下隐藏的标签
 CRM.productArchivesList.elOff        = $(CRM.el.OFF_CONTROL); // 编辑状态下开启的控件
 CRM.productArchivesList.mainPanel    = $('#productInfo'); // 主面板
-CRM.productArchivesList.asidePanel   = $('#roleTree'); // 侧面板
-CRM.productArchivesList.asideTree    = $('#asidePanel'); // 侧边树
+CRM.productArchivesList.asidePanel   = $('#asidePanel'); // 侧面板
+CRM.productArchivesList.asideTree    = $('#asideTree'); // 侧边树
 CRM.productArchivesList.formVessel   = $('#formVessel'); // 表单容器
 CRM.productArchivesList.form         = $('#form'); // 表单内容
 
 // 按钮
-CRM.productArchivesList.edit   = $('edit');
-CRM.productArchivesList.save   = $('save');
-CRM.productArchivesList.cancel = $('cancel');
+CRM.productArchivesList.edit        = $('edit');
+CRM.productArchivesList.save        = $('save');
+CRM.productArchivesList.cancel      = $('cancel');
+CRM.productArchivesList.proTreeData = null;
 
 // 表单控件
 CRM.productArchivesList.productId            = $('#productId'); // 产品id
@@ -104,8 +105,33 @@ CRM.productArchivesList.getProcessingComponentsDataDataHandler = function () {
 
 };
 
+// 产品树转换成普通数组
+CRM.productArchivesList.toArr = function (data) {
+    var arr = [];
+    function recursionData(data) {
+
+        if (data instanceof Array) {
+
+            $.each(data,function (n,item) {
+                var obj = {
+                    id   : item.cid,
+                    pId  : item.pid,
+                    name : item.cname
+                };
+                arr.push(obj);
+
+                recursionData(item.nodes);
+            })
+        }
+    }
+
+    recursionData(data);
+
+    return arr;
+};
+
 // 侧栏角色树的点击事件
-CRM.systemRoleManage.asideTreeOnClick = function(event, modLeftId, treeNode) {
+CRM.productArchivesList.asideTreeOnClick = function(event, modLeftId, treeNode) {
     var page = CRM.productArchivesList;
 
     // 渲染表单
@@ -136,8 +162,8 @@ CRM.productArchivesList.renderProTreeToAside = function () {
         id       = page.asideTree.attr('id'),
         treeObj  = null;
 
-    page.roleTreeData = CRM.toArr(data); // 将角色树的数据保存到page对象属性
-    $.fn.zTree.init(page.asideTree, setting, page.roleTreeData);
+    page.proTreeData = page.toArr(data); // 将角色树的数据保存到page对象属性
+    $.fn.zTree.init(page.asideTree, setting, page.proTreeData);
     treeObj = $.fn.zTree.getZTreeObj(id);
     treeObj.expandAll(true); // 默认展开
 };
