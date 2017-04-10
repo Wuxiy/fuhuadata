@@ -4,6 +4,7 @@ import com.fuhuadata.dao.BusinessOrderDao;
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
 import com.fuhuadata.manager.BusinessOrderManager;
+import com.fuhuadata.vo.CostAndProfitStatistics;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -52,5 +53,25 @@ public class BusinessOrderManagerImpl implements BusinessOrderManager {
     @Override
     public List<QueryBusinessOrder> getOrderListPageByQuery(QueryBusinessOrder queryBusinessOrder) {
         return businessOrderDao.getOrderListPageByQuery(queryBusinessOrder);
+    }
+
+    @Override
+    public List<CostAndProfitStatistics> getCostAndProfitStatisticsByPage(CostAndProfitStatistics costAndProfitStatistics) {
+        return businessOrderDao.getCostAndProfitStatisticsByPage(costAndProfitStatistics);
+    }
+
+    @Override
+    public List<CostAndProfitStatistics> getProfitStatisticsByPage(CostAndProfitStatistics costAndProfitStatistics) {
+        return businessOrderDao.getProfitStatisticsByPage(costAndProfitStatistics);
+    }
+
+    @Override
+    public int countCostAndProfit(CostAndProfitStatistics costAndProfitStatistics) {
+        return businessOrderDao.countCostAndProfit(costAndProfitStatistics);
+    }
+
+    @Override
+    public int countProfitStatistics(CostAndProfitStatistics costAndProfitStatistics) {
+        return businessOrderDao.countProfitStatistics(costAndProfitStatistics);
     }
 }

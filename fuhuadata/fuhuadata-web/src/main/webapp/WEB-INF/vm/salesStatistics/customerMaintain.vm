@@ -157,18 +157,20 @@
             success:function(data){
                 var ResultData = data.data;
                 var _html = '';
-                for(var i=0;i<ResultData.length;i++){
-                    _html += '<tr>';
-                    _html += '	<td>'+ResultData[i].visitrecordId+'</td>';
-                    _html += '  <td><a href="">'+ResultData[i].customerName+'</a></td>';
-                    _html += '  <td>'+ResultData[i].startTime+'</td>';
-                    _html += '  <td>'+ResultData[i].endTime+'</td>';
-                    _html += '  <td>'+activityTypeList[ResultData[i].activityType]+'</td>';
-                    _html += '  <td>'+ResultData[i].activityAddress+'</td>';
-                    _html += '  <td>'+ResultData[i].activityExpense+'</td>';
-                    _html += '  <td>'+ResultData[i].activitySummary+'</td>';
-                    _html += '  <td>'+ResultData[i].userName+'</td>';
-                    _html +='   </tr>';
+                if(ResultData && ResultData!='' && ResultData!='null') {
+                    for (var i = 0; i < ResultData.length; i++) {
+                        _html += '<tr>';
+                        _html += '	<td>' + ResultData[i].visitrecordId + '</td>';
+                        _html += '  <td><a href="">' + ResultData[i].customerName + '</a></td>';
+                        _html += '  <td>' + ResultData[i].startTime + '</td>';
+                        _html += '  <td>' + ResultData[i].endTime + '</td>';
+                        _html += '  <td>' + activityTypeList[ResultData[i].activityType] + '</td>';
+                        _html += '  <td>' + ResultData[i].activityAddress + '</td>';
+                        _html += '  <td>' + ResultData[i].activityExpense + '</td>';
+                        _html += '  <td>' + ResultData[i].activitySummary + '</td>';
+                        _html += '  <td>' + ResultData[i].userName + '</td>';
+                        _html += '   </tr>';
+                    }
                 }
                 $("#customerMaintainList").html(_html);
             }

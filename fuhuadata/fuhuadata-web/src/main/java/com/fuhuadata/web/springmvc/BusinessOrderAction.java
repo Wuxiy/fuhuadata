@@ -5,6 +5,7 @@ import com.fuhuadata.domain.query.QueryBusinessOrder;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.BusinessOrderService;
+import com.fuhuadata.vo.CostAndProfitStatistics;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -175,7 +176,7 @@ public class BusinessOrderAction {
      * @return
      */
     @RequestMapping(value = "/getBusinessOrderByOrderId",method = RequestMethod.POST)
-    @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "getBusinessOrderByOrderId")
+    @SystemLogAnnotation(module = "salesStatistics-businessOrder",methods = "getBusinessOrderByOrderId")
     @ResponseBody
     public ResultPojo getBusinessOrderByOrderId(String orderId){
         Result<BusinessOrder> result = new Result<BusinessOrder>();
@@ -187,6 +188,111 @@ public class BusinessOrderAction {
         return result.getResultPojo();
     }
 
+
+    /**
+     * 进入费用与利润
+     * @return
+     */
+    @RequestMapping("/intoCostAndProfitStatistics")
+    @SystemLogAnnotation(module = "salesStatistics",methods = "intoCostAndProfitStatistics")
+    public ModelAndView intoCostAndProfitStatistics(){
+        return new ModelAndView("salesStatistics/costProfit");
+    }
+
+    /**
+     * 进入利润与统计
+     * @return
+     */
+    @RequestMapping("/intoProfitStatistics")
+    @SystemLogAnnotation(module = "salesStatistics",methods = "intoProfitStatistics")
+    public ModelAndView intoProfitStatistics(){
+        return new ModelAndView("salesStatistics/profitStatistics");
+    }
+
+    /**
+     * 进入历史订单
+     * @return
+     */
+    @RequestMapping("/intoHistoryOrder")
+    @SystemLogAnnotation(module = "salesStatistics",methods = "intoHistoryOrder")
+    public ModelAndView intoHistoryOrder(){
+        return new ModelAndView("salesStatistics/historyOrder");
+    }
+
+
+    /**
+     * 费用与利润统计
+     * @param costAndProfitStatistics
+     * @return
+     */
+    @RequestMapping(value = "/getCostAndProfitStatisticsByPage",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "salesStatistics",methods = "getBusinessOrderByOrderId")
+    @ResponseBody
+    public ResultPojo getCostAndProfitStatisticsByPage(@RequestBody  CostAndProfitStatistics costAndProfitStatistics){
+        Result<List<CostAndProfitStatistics>> result = new Result<List<CostAndProfitStatistics>>();
+        try{
+            result = businessOrderService.getCostAndProfitStatisticsByPage(costAndProfitStatistics);
+        }catch(Exception e){
+            result.setSuccess(false);
+        }
+        return result.getResultPojo();
+    }
+
+    /**
+     * 费用与利润表 条目统计
+     * @param costAndProfitStatistics
+     * @return
+     */
+    @RequestMapping(value = "/countCostAndProfitStatistics",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "salesStatistics",methods = "countCostAndProfitStatistics")
+    @ResponseBody
+    public ResultPojo countCostAndProfitStatistics(@RequestBody  CostAndProfitStatistics costAndProfitStatistics){
+        Result<Integer> result = new Result<Integer>();
+            try{
+            result = businessOrderService.countCostAndProfit(costAndProfitStatistics);
+            }catch(Exception e){
+            result.setSuccess(false);
+        }
+        return result.getResultPojo();
+    }
+
+
+
+    /**
+     * 利润统计
+     * @param costAndProfitStatistics
+     * @return
+     */
+    @RequestMapping(value = "/getProfitStatisticsByPage",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "salesStatistics",methods = "getProfitStatisticsByPage")
+    @ResponseBody
+    public ResultPojo getProfitStatisticsByPage(@RequestBody CostAndProfitStatistics costAndProfitStatistics){
+        Result<List<CostAndProfitStatistics>>  result = new Result<List<CostAndProfitStatistics>>();
+        try{
+            result = businessOrderService.getProfitStatisticsByPage(costAndProfitStatistics);
+        }catch(Exception e){
+            result.setSuccess(false);
+        }
+        return result.getResultPojo();
+    }
+
+    /**
+     * 利润 条目统计
+     * @param costAndProfitStatistics
+     * @return
+     */
+    @RequestMapping(value = "/countProfitStatistics",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "salesStatistics",methods = "countProfitStatistics")
+    @ResponseBody
+    public ResultPojo countProfitStatistics(@RequestBody CostAndProfitStatistics costAndProfitStatistics){
+        Result<Integer>  result = new Result<Integer>();
+        try{
+            result = businessOrderService.countProfitStatistics(costAndProfitStatistics);
+        }catch(Exception e){
+            result.setSuccess(false);
+        }
+        return result.getResultPojo();
+    }
 
 
 }

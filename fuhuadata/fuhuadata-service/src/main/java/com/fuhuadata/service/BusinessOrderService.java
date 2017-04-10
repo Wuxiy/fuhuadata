@@ -3,6 +3,7 @@ package com.fuhuadata.service;
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
 import com.fuhuadata.domain.query.Result;
+import com.fuhuadata.vo.CostAndProfitStatistics;
 
 import java.util.List;
 
@@ -78,5 +79,23 @@ public interface BusinessOrderService {
      * @return
      */
     public Result<List<QueryBusinessOrder>> getOrderListPageByQuery(QueryBusinessOrder queryBusinessOrder);
+
+    /**
+     * 费用与利润统计
+     * @param costAndProfitStatistics
+     * @return
+     */
+    public Result<List<CostAndProfitStatistics>> getCostAndProfitStatisticsByPage(CostAndProfitStatistics costAndProfitStatistics);
+
+    /**
+     * 利润统计
+     * @param costAndProfitStatistics
+     * @return
+     */
+    public Result<List<CostAndProfitStatistics>> getProfitStatisticsByPage(CostAndProfitStatistics costAndProfitStatistics);
+
+    public Result<Integer> countCostAndProfit(CostAndProfitStatistics costAndProfitStatistics);
+
+    public Result<Integer> countProfitStatistics(CostAndProfitStatistics costAndProfitStatistics);
 
 }

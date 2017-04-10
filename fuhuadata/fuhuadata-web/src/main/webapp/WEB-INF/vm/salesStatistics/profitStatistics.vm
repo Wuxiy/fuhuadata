@@ -32,9 +32,9 @@
                                             <option value="1" lang="zh">战略客户</option>
                                         </select>
                                         <span class="input-group-addon" lang="zh">开始时间</span>
-                                        <input class="form-control" id="customerName" />
+                                        <input class="form-control" id="startTime" />
                                         <span class="input-group-addon" lang="zh">结束时间</span>
-                                        <input class="form-control" id="customerName" />
+                                        <input class="form-control" id="endTime" />
                                         <div class="input-group-btn">
                                             <button class="btn btn-xs btn-primary" id="submit" type="button">搜索</button>
                                         </div>
@@ -97,7 +97,7 @@
                                 <th class="text-center col-xs-2 text-middle">业务员</th>
                             </tr>
                             </thead>
-                            <tbody id=""></tbody>
+                            <tbody id="profitStatisticsList"></tbody>
                         </table>
                     </div>
                 </div>
@@ -113,9 +113,9 @@
                                     <!--搜索栏-->
                                     <div class="input-group">
                                         <span class="input-group-addon" lang="zh">开始时间</span>
-                                        <input class="form-control" id="customerName" />
+                                        <input class="form-control" id="startTime" />
                                         <span class="input-group-addon" lang="zh">结束时间</span>
-                                        <input class="form-control" id="customerName" />
+                                        <input class="form-control" id="endTime" />
                                         <div class="input-group-btn">
                                             <button class="btn btn-xs btn-primary" id="submit" type="button">搜索</button>
                                         </div>
@@ -242,3 +242,125 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src="${request.contextPath}/lib/js/pagination/pagination.js"></script>
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/js/pagination/pagination.css" />
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
+<script type="text/javascript">
+    var pageSize = 3;
+    var click_node ={oneLevelId:0,twoLevelId:0};//接收目录树点击节点的id及其父id
+    click_node.serach = function(){
+        serach();
+    }
+
+    $(document).ready(function(){
+        //生成地区目录树
+        $('#tree').creatTree('/customerBaseInfo/initAreaCategoryTree');
+        //目录树节点绑定点击事件
+        $('#tree').bindClickForCusArea(click_node);
+        //搜索按钮绑定事件
+        $("#submit").click(function(){
+            serach();
+        });
+        //默认查询数据
+        serach();
+    })
+
+    //查询按钮提交数据
+    function serach(){
+        var total = getListCount();
+        getDataList(0);
+        $("#pagination").pagination(total,{
+            items_per_page : pageSize,
+            num_edge_entries : 3,
+            num_display_entries : 10,
+            callback:getDataList
+        });
+    }
+    var customerLevelList = ['战略客户','大客户' ,'重要客户' ,'一般客户' ,'风险客户'];
+
+    //根据页码获取列表数据
+    function getDataList(pageNum,jq){
+        var data = {
+            customerName:$('#customerName').val(),
+            customerLevel:$('#customerLevel').val(),
+            country:$('#country').val(),
+            startTime:$('#startTime').val(),
+            endTime:$('#endTime').val(),
+            areaClassId:click_node.oneLevelId,
+            areaId:click_node.twoLevelId,
+            startRow:pageNum*pageSize,
+            pageSize:pageSize
+        };
+        jQuery.ajax({
+            url: basePath + '/businessOrder/getProfitStatisticsByPage',
+            dataType:'json',
+            async:true,
+            method:'POST',
+            contentType:"application/json",
+            data:JSON.stringify(data),
+            success:function(data){
+                var ResultData = data.data;
+                var _html = '';
+                if(ResultData && ResultData!='' && ResultData!='null') {
+                    for (var i = 0; i < ResultData.length; i++) {
+                        _html += '<tr>';
+                        _html += '	<td>' + ResultData[i].businessId + '</td>';
+                        _html += '  <td><a href="">' + ResultData[i].customerArea + '</a></td>';
+                        _html += '  <td>' + ResultData[i].actualAmountPaid + '</td>';
+                        _html += '  <td lang="zh">' + ResultData[i].floorPrice + '</td>';
+                        _html += '  <td lang="zh">' + ResultData[i].maintenanceFee + '</td>';
+                        _html += '  <td lang="zh">' + ResultData[i].netProfit + '</td>';
+                        _html += '  <td lang="zh">' + ResultData[i].salesManName + '</td>';
+                        _html += '  <td><a href="">' + ResultData[i].salesManName + '</td>';
+                        _html += '   </tr>';
+                    }
+                }
+                $("#costProfitList").html(_html);
+            }
+        });
+    }
+
+    /*分页插件参数
+    参数名	描述	参数值
+    maxentries	总条目数	必选参数，整数
+    items_per_page	每页显示的条目数	可选参数，默认是10
+    num_display_entries	连续分页主体部分显示的分页条目数	可选参数，默认是10
+    current_page	当前选中的页面	可选参数，默认是0，表示第1页
+    num_edge_entries	两侧显示的首尾分页的条目数	可选参数，默认是0
+    link_to	分页的链接	字符串，可选参数，默认是"#"
+    prev_text	“前一页”分页按钮上显示的文字	字符串参数，可选，默认是"Prev"
+    next_text	“下一页”分页按钮上显示的文字	字符串参数，可选，默认是"Next"
+    ellipse_text	省略的页数用什么文字表示	可选字符串参数，默认是"..."
+    prev_show_always	是否显示“前一页”分页按钮	布尔型，可选参数，默认为true，即显示“前一页”按钮
+    next_show_always	是否显示“下一页”分页按钮	布尔型，可选参数，默认为true，即显示“下一页”按钮
+    callback	回调函数	默认无执行效果*/
+
+    /**
+     * 获取列表数据总条目数
+     */
+    function getListCount(){
+        var total = 0;
+        var data = {
+            areaClassId:click_node.oneLevelId,
+            areaId:click_node.twoLevelId,
+            customerName:$('#customerName').val(),
+            customerLevel:$('#customerLevel').val(),
+            country:$('#country').val(),
+            startTime:$('#startTime').val(),
+            endTime:$('#endTime').val(),
+        }
+        jQuery.ajax({
+            url:basePath + '/businessOrder/countProfitStatistics',
+            dataType:'JSON',
+            async:false,
+            method:'POST',
+            contentType:"application/json",
+            data:JSON.stringify(data),
+            success:function(data){
+                total = data.data;
+            }
+        });
+        return total;
+    }
+</script>

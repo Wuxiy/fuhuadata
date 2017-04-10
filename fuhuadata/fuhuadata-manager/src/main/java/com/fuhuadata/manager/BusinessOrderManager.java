@@ -2,6 +2,7 @@ package com.fuhuadata.manager;
 
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
+import com.fuhuadata.vo.CostAndProfitStatistics;
 
 import java.util.List;
 
@@ -67,5 +68,35 @@ public interface BusinessOrderManager {
      * @return
      */
     public List<QueryBusinessOrder> getOrderListPageByQuery(QueryBusinessOrder queryBusinessOrder);
+
+
+    /**
+     * 费用与利润统计
+     * @param costAndProfitStatistics
+     * @return
+     */
+    public List<CostAndProfitStatistics> getCostAndProfitStatisticsByPage(CostAndProfitStatistics costAndProfitStatistics);
+
+    /**
+     * 利润统计
+     * @param costAndProfitStatistics
+     * @return
+     */
+    public List<CostAndProfitStatistics> getProfitStatisticsByPage(CostAndProfitStatistics costAndProfitStatistics);
+
+    /**
+     * count 费用和利润列表
+     * @param costAndProfitStatistics
+     * @return
+     */
+    public int countCostAndProfit(CostAndProfitStatistics costAndProfitStatistics);
+
+
+    /**
+     * count 利润统计
+     * @param costAndProfitStatistics
+     * @return
+     */
+    public int countProfitStatistics(CostAndProfitStatistics costAndProfitStatistics);
 
 }

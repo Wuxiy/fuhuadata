@@ -3,6 +3,7 @@ package com.fuhuadata.dao.impl;
 import com.fuhuadata.dao.BusinessOrderDao;
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
+import com.fuhuadata.vo.CostAndProfitStatistics;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
@@ -24,6 +25,14 @@ public class BusinessOrderDaoImpl extends SqlMapClientTemplate implements Busine
 
     private static final String COUNT = "BUSINESSORDER.count";
     private static final String QUERY_PAGE = "BUSINESSORDER.query_page";
+
+    private static final String COST_AND_PROFIT="BUSINESSORDER.COST-AND-PROFIT";
+
+    private static final String PROFIT_STATISTICS="BUSINESSORDER.PROFIT-STATISTICS";
+
+    public static final String COUNT_COST_AND_PROFIT = "BUSINESSORDER.COUNT-COST-AND-PROFIT";
+
+    public static final String COUNT_PROFIT_STATISTICS="BUSINESSORDER.COUNT-PROFIT-STATISTICS";
     @Override
     public int count(QueryBusinessOrder queryBusinessOrder) {
         try {
@@ -38,6 +47,26 @@ public class BusinessOrderDaoImpl extends SqlMapClientTemplate implements Busine
 
     public List<BusinessOrder> getOrderLisPageByQuery(QueryBusinessOrder queryBusinessOrder) {
         return this.queryForList(QUERY_PAGE,queryBusinessOrder);
+    }
+
+    @Override
+    public List<CostAndProfitStatistics> getCostAndProfitStatisticsByPage(CostAndProfitStatistics costAndProfitStatistics) {
+        return this.queryForList(COST_AND_PROFIT,costAndProfitStatistics);
+    }
+
+    @Override
+    public int countCostAndProfit(CostAndProfitStatistics costAndProfitStatistics) {
+        return (Integer) this.queryForObject(COUNT_COST_AND_PROFIT,costAndProfitStatistics);
+    }
+
+    @Override
+    public List<CostAndProfitStatistics> getProfitStatisticsByPage(CostAndProfitStatistics costAndProfitStatistics) {
+        return this.queryForList(PROFIT_STATISTICS,costAndProfitStatistics);
+    }
+
+    @Override
+    public int countProfitStatistics(CostAndProfitStatistics costAndProfitStatistics) {
+        return (Integer) this.queryForObject(COUNT_PROFIT_STATISTICS,costAndProfitStatistics);
     }
 
     @Override
