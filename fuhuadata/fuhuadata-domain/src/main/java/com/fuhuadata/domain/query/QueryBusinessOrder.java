@@ -31,6 +31,10 @@ public class QueryBusinessOrder {
     @JsonFormat(pattern = "yyyy-MM-DD")
     private Date dealTime;//合同时间
     private Integer isModifyPrice;//是否调价
+    private BigDecimal netProfit;//利润
+
+    private String salesManId;
+    private String salesManName;
     private String startTime;//查询合同签定时间开始范围
     private String endTime;//查询合同签定时间结束范围
     private Integer startRow;//分页起始行标
@@ -250,5 +254,29 @@ public class QueryBusinessOrder {
 
     public void setBusinessId(String businessId) {
         this.businessId = businessId;
+    }
+
+    public BigDecimal getNetProfit() {
+        return netProfit;
+    }
+
+    public void setNetProfit(BigDecimal netProfit) {
+        this.netProfit = netProfit;
+    }
+
+    public String getSalesManId() {
+        return salesManId;
+    }
+
+    public void setSalesManId(String salesManId) {
+        this.salesManId = salesManId;
+    }
+
+    public String getSalesManName() {
+        return salesManName;
+    }
+
+    public void setSalesManName(String salesManName) {
+        this.salesManName = salesManName;
     }
 }

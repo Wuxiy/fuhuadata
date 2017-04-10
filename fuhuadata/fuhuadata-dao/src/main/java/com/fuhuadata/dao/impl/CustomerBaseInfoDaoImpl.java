@@ -7,6 +7,7 @@ import com.fuhuadata.dao.CustomerBaseInfoDao;
 import com.fuhuadata.domain.CustomerEnterpriceNature;
 import com.fuhuadata.domain.CustomerMakeProduct;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
+import com.fuhuadata.vo.CustomerBaseInfoLinkman;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import org.springframework.dao.DataAccessException;
@@ -34,6 +35,7 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
     private static final String GET_RPODUCT_BY_ID="CUSTOMERBASEINFO.GET-PRODUCT-BY-ID";
     private static final String BATCH_ADD_NATURE="CUSTOMERBASEINFO.BATCH-ADD-NATURE";
     private static final String DELETE_NATURE_BY_CUSTOMERID="CUSTOMERBASEINFO.DELETE-NATURE-BY-CUSTOMERID";
+    private static final String GET_BASEINFO_LINKMANINFO_BY_CUSTOMERID="CUSTOMERBASEINFO.GET-BASEINFO-LINKMANINFO-BY-CUSTOMERID";
 
 
 
@@ -76,6 +78,11 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
     	
     public CustomerBaseInfo getCustomerBaseInfoById(String customer_id) {
     	return (CustomerBaseInfo) this.queryForObject(GET_BY_ID, customer_id);
+    }
+
+    @Override
+    public CustomerBaseInfoLinkman getCustomerBaseInfoLinkmanByCustomerId(String customerId) {
+        return (CustomerBaseInfoLinkman) this.queryForObject(GET_BASEINFO_LINKMANINFO_BY_CUSTOMERID,customerId);
     }
 
     @Override

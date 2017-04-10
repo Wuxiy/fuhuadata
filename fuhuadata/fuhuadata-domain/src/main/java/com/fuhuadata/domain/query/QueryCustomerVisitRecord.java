@@ -1,4 +1,6 @@
 package com.fuhuadata.domain.query;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 import java.math.BigDecimal;
 
@@ -6,13 +8,19 @@ import java.math.BigDecimal;
  * @author wangbo
  * @date 2017-01-13 16:22:04
  */
-public class QueryCustomerVisitRecord extends PageBase {
+public class QueryCustomerVisitRecord{
 
+	/**地区id**/
+	private String areaId;
+	/**大区分类id**/
+	private String areaClassId;
     /**拜访记录id**/
 	private Integer visitrecordId;
 	
     /**客户id**/
 	private String customerId;
+
+	private String customerName;
 	
     /**业务员id**/
 	private Integer userId;
@@ -21,9 +29,11 @@ public class QueryCustomerVisitRecord extends PageBase {
 	private String userName;
 	
     /**开始时间**/
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Date startTime;
 	
     /**结束时间**/
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Date endTime;
 	
     /**活动类型：0远程沟通，1出差拜访，2展会邀请，3工厂参观，4商务宴请，5其他（备注内容）**/
@@ -61,7 +71,40 @@ public class QueryCustomerVisitRecord extends PageBase {
 	
     /**修改时间**/
 	private Date modifyTime;
-	
+
+	private Integer startRow;//分页起始行标
+	private Integer pageSize;//分页步长
+	private String orderBy;//排序
+	private String sortFiled;//排序字段
+	private int sortType;//排序方向，0：正序 1：倒序
+
+
+
+
+
+	public String getOrderBy() {
+		return orderBy;
+	}
+
+	public void setOrderBy(String orderBy) {
+		this.orderBy = orderBy;
+	}
+
+	public String getSortFiled() {
+		return sortFiled;
+	}
+
+	public void setSortFiled(String sortFiled) {
+		this.sortFiled = sortFiled;
+	}
+
+	public int getSortType() {
+		return sortType;
+	}
+
+	public void setSortType(int sortType) {
+		this.sortType = sortType;
+	}
 
 	public Integer getVisitrecordId() {
 		return visitrecordId;
@@ -206,6 +249,45 @@ public class QueryCustomerVisitRecord extends PageBase {
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
 	}
-	
 
+
+	public String getAreaId() {
+		return areaId;
+	}
+
+	public void setAreaId(String areaId) {
+		this.areaId = areaId;
+	}
+
+	public String getAreaClassId() {
+		return areaClassId;
+	}
+
+	public void setAreaClassId(String areaClassId) {
+		this.areaClassId = areaClassId;
+	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	public Integer getStartRow() {
+		return startRow;
+	}
+
+	public void setStartRow(Integer startRow) {
+		this.startRow = startRow;
+	}
+
+	public Integer getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
+	}
 }

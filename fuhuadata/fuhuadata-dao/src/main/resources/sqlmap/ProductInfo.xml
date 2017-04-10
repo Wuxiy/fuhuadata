@@ -9,27 +9,29 @@
 	<typeAlias alias="ProductComponent" type="com.fuhuadata.domain.ProductComponent"/>
 	
 	<resultMap id="PRODUCTINFO-MAP" class="ProductInfo">
-								<result property="productId" column="product_id" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="bigCategoryId" column="big_category_id" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="midCategoryId" column="mid_category_id" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="smallCategoryId" column="small_category_id" jdbcType="INT" javaType="java.lang.Integer"/>
-								<result property="categoryName" column="category_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
-								<result property="name" column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="measurement" column="measurement" jdbcType="VARCHAR" javaType="java.lang.String"/>
-								<result property="concentration" column="concentration" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-								<result property="saltType" column="salt_type" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="otherSaltName" column="other_salt_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="executeStandard" column="execute_standard" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="executeNumer" column="execute_numer" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="productFeature" column="product_feature" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="processingComponents" column="processing_components" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="physicalProperities" column="physical_properities" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="createUserId" column="create_user_id" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="createUserName" column="create_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="lastmodifyUserId" column="lastmodify_user_id" jdbcType="INT" javaType="java.lang.Integer" />
-								<result property="lastmodifyUserName" column="lastmodify_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="createTime" column="create_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
-								<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+		<result property="productId" column="product_id" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="bigCategoryId" column="big_category_id" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="midCategoryId" column="mid_category_id" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="smallCategoryId" column="small_category_id" jdbcType="INT" javaType="java.lang.Integer"/>
+		<result property="categoryName" column="category_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+		<result property="name" column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="measurement" column="measurement" jdbcType="VARCHAR" javaType="java.lang.String"/>
+		<result property="concentration" column="concentration" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+		<result property="saltType" column="salt_type" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="otherSaltName" column="other_salt_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="executeStandard" column="execute_standard" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="executeNumer" column="execute_numer" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="productFeature" column="product_feature" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="processingComponents" column="processing_components" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="physicalProperities" column="physical_properities" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="createUserId" column="create_user_id" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="createUserName" column="create_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="lastmodifyUserId" column="lastmodify_user_id" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="lastmodifyUserName" column="lastmodify_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="createTime" column="create_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+		<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+		<result property="customsClearanceId" column="customs_clearance_id" jdbcType="VARCHAR" javaType="java.lang.String"/>
+		<result property="customsClearanceName" column="customs_clearance_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
 	</resultMap>
 
 
@@ -304,5 +306,11 @@
 		<isParameterPresent>   
             <include refid="PAGE-COMMON" />   
         </isParameterPresent>
+	</select>
+
+	<select id="getCustomsClearanceInfo" resultMap="PRODUCTINFO-MAP" parameterClass="java.lang.Integer">
+		select customs_clearance_name,customs_clearance_id
+		from product_info
+		where product_id=#productId#
 	</select>
 </sqlMap>

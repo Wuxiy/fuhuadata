@@ -10,6 +10,7 @@ import com.fuhuadata.dao.ProductInfoDao;
 import com.fuhuadata.vo.CustomerProductPackagingArchives;
 import org.omg.PortableInterceptor.INACTIVE;
 import org.springframework.aop.support.AopUtils;
+import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 /**
  * @author wangbo
@@ -30,7 +31,7 @@ public class ProductInfoDaoImpl extends SqlMapClientTemplate implements ProductI
     public static final String ADD_PRODUCT_PROCESSING_COMPONENT="PRODUCTINFO.ADD-PRODUCT-PROCESSING-COMPONENTS";
     public static final String  DELETE_PROCESSING_COMPONENT_BY_ID="PRODUCTINFO.DELETE-PROCESSING-COMPONENTS-BY-ID";
     public static final String GET_PRODUCT_COMPONENT_BY_PRODUCT_ID="PRODUCTINFO.GET-PRODUCT-COMPONENT-BY-ID";
-
+    public static final String GET_CUSTOMS_CLEARANCE_INFO = "PRODUCTINFO.getCustomsClearanceInfo";
     
     public ProductInfo addProductInfo(ProductInfo productInfo) {
 		productInfo.setProductId((Integer) this.insert(ADD, productInfo));
@@ -85,5 +86,15 @@ public class ProductInfoDaoImpl extends SqlMapClientTemplate implements ProductI
     	
     public int count(QueryProductInfo queryProductInfo) {
     	return ((Integer) this.queryForObject(COUNT, queryProductInfo)).intValue();
+    }
+
+    @Override
+    public ProductInfo getCustomsClearanceInfo(Integer productId) {
+        try {
+            return (ProductInfo)this.queryForObject(GET_CUSTOMS_CLEARANCE_INFO,productId);
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

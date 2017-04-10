@@ -143,8 +143,25 @@ CRM.moveEl = function (el,tar) {
     el.appendTo(tar);
 };
 
+<<<<<<< HEAD
 //面板组件，有编辑、保存、取消
 CRM.module.Panel = function (el) {
+=======
+//面板组件，有编辑、保存、取消功能
+CRM.module.Panel = function (el,res) {
+
+    this.res = jQuery.extend({
+        type        : 'POST',
+        async       : true,
+        contentType : '',
+        upUrl       : '',
+        downUrl     : '',
+        upData      : {},
+        downData    : {},
+        up          : function(){return false;},
+        down        : function(){return false;}
+    },res||{});
+>>>>>>> 6591119033eb3da09386a18be16b7ee3c9a7ac15
 
     // this.up          = up;
     // this.down        = down;
@@ -171,10 +188,17 @@ CRM.module.Panel.prototype.handleEdit = function (e) {
     CRM.onOrOff(elOff,isEditState);
     CRM.showOrHide(elShow,elHide,isEditState);
 
+<<<<<<< HEAD
     // if (typeof res.url === String && res.url.length > 0) {
     //
     //     CRM.ajaxCall(res);
     // }
+=======
+    if (typeof res.downUrl === String && res.downUrl.length > 0) {
+
+        CRM.ajaxCall(res.type,res.downUrl,res.downData,res.contentType,res.down,res.async);
+    }
+>>>>>>> 6591119033eb3da09386a18be16b7ee3c9a7ac15
 
 };
 
@@ -192,10 +216,17 @@ CRM.module.Panel.prototype.handleSave = function (e) {
     CRM.showOrHide(elShow,elHide,isEditState);
 
 
+<<<<<<< HEAD
     // if (typeof res.url === String && res.url.length > 0) {
     //
     //     CRM.ajaxCall(res);
     // }
+=======
+    if (typeof res.upUrl === String && res.upUrl.length > 0) {
+
+        CRM.ajaxCall(res.type,res.upUrl,res.upData,res.contentType,res.up,res.async);
+    }
+>>>>>>> 6591119033eb3da09386a18be16b7ee3c9a7ac15
 };
 
 //取消处理程序
@@ -211,21 +242,74 @@ CRM.module.Panel.prototype.handleCancel = function (e) {
     CRM.onOrOff(elOn,isEditState);
     CRM.showOrHide(elShow,elHide,isEditState);
 
+<<<<<<< HEAD
     // if (typeof res.url === String && res.url.length > 0) {
     //
     //     CRM.ajaxCall(res);
     // }
+=======
+    if (typeof res.downUrl === String && res.downUrl.length > 0) {
+
+        CRM.ajaxCall(res.type,res.downUrl,res.downData,res.contentType,res.down,res.async);
+    }
+>>>>>>> 6591119033eb3da09386a18be16b7ee3c9a7ac15
 
 };
 
 //编辑
 CRM.module.Panel.prototype.startEdit = function () {
+<<<<<<< HEAD
     // console.log('执行了startEdit');
     var panel = this;
     this.panel.on('click.panel.edit','button' + this.edit,function (e) {
         // console.log('有毛病');
         panel.handleEdit(e);
     })
+=======
+    console.log('执行了startEdit');
+    var Panel = this;
+    this.panel.on('click.panel.edit','button' + this.edit,function (e) {
+        console.log('有毛病');
+        Panel.handleEdit(e);
+    })
+};
+
+//保存
+CRM.module.Panel.prototype.startSave = function () {
+    var Panel = this;
+    this.panel.on('click.panel.save','button'+ this.save,function (e) {
+        Panel.handleSave(e);
+    });
+};
+
+//取消
+CRM.module.Panel.prototype.startCancel = function () {
+    var Panel = this;
+    this.panel.on('click.panel.cancel','button'+ this.cancel,function (e) {
+        Panel.handleCancel(e);
+    })
+};
+
+//多选框
+CRM.module.Mulbox = function (el) {
+    this.Mulbox = $(el);
+    this.right       = '[data-mulbox="left"]';
+    this.left        = '[data-mulbox="right"]';
+    this.leftBut     = '[data-btn="moveLeft"]';
+    this.rightBut    = '[data-but="moveRight"]';
+    this.leftAllBut  = '[data-but="moveAllLeft"]';
+    this.rightAllBut = '[data-but="moveAllRight"]';
+};
+
+CRM.module.Mulbox.prototype.move = function (el) {
+    var leftBox  = $(this.left,this.Mulbox),
+        rightBox = $(this.right,this.Mulbox);
+
+    if (el.data('but')==='moveLeft') {
+
+        leftBox.find('.active').appendTo(rightBox);
+    }
+>>>>>>> 6591119033eb3da09386a18be16b7ee3c9a7ac15
 };
 
 //保存

@@ -23,9 +23,18 @@ public class BusinessOrderProductDaoImpl implements BusinessOrderProductDao {
     private static final String GET_LIST_STMT = "BUSINESSORDERPRODUCT.";
     private static final String COUNT_STMT = "BUSINESSORDERPRODUCT.";
     private static final String GET_LIST_BY_PAGE_STMT = "BUSINESSORDERPRODUCT.";
-
+    private static final String INSERT_FROM_ARCHIVES = "BUSINESSORDERPRODUCT.insertFromArchives";
+    private static final String DELETE_ALL_INFO_BY_IDS = "BUSINESSORDERPRODUCT,deleteAllInfoByIds";
+    private static final String GET_BAISC_BY_ID = "BUSINESSORDERPRODUCT.getBasicById";
+    private static final String GET_DOCUMENTARY_BY_ID = "BUSINESSORDERPRODUCT.getDocumentaryById";
+    private static final String GET_PACKAGE_REQUIRE_BY_ID = "BUSINESSORDERPRODUCT.getPackageRequireById";
     public int insertBaseInfo(BusinessOrderProduct businessOrderProduct) throws Exception{
         return (Integer)sqlMapClient.insert(INSERT_STMT,businessOrderProduct);
+    }
+
+    @Override
+    public int insertFromArchives(BusinessOrderProduct businessOrderProduct) throws Exception {
+        return (Integer)sqlMapClient.insert(INSERT_FROM_ARCHIVES,businessOrderProduct);
     }
 
     public int updateBusinessOrderProduct(BusinessOrderProduct businessOrderProduct)throws Exception {
@@ -53,6 +62,40 @@ public class BusinessOrderProductDaoImpl implements BusinessOrderProductDao {
     public List<BusinessOrderProduct> getListByPage(QueryBusinessOrderProduct queryBusinessOrderProduct) {
         try {
             return sqlMapClient.queryForList(GET_LIST_BY_PAGE_STMT,queryBusinessOrderProduct);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public boolean deleteAllInfoByIds(String businessProductIds)throws Exception {
+        return (Integer)sqlMapClient.delete(DELETE_ALL_INFO_BY_IDS,businessProductIds) >0;
+    }
+    @Override
+    public BusinessOrderProduct getBaiscById(int id) {
+        try {
+            return (BusinessOrderProduct)sqlMapClient.queryForObject(GET_BAISC_BY_ID,id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public BusinessOrderProduct getDocumentaryById(int id) {
+        try {
+            return (BusinessOrderProduct)sqlMapClient.queryForObject(GET_DOCUMENTARY_BY_ID,id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public BusinessOrderProduct getPackageRequireById(int id) {
+        try {
+            return (BusinessOrderProduct)sqlMapClient.queryForObject(GET_PACKAGE_REQUIRE_BY_ID,id);
         } catch (SQLException e) {
             e.printStackTrace();
         }

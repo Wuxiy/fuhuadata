@@ -81,6 +81,32 @@
     </selectKey>
   </insert>
 
+  <insert id="insertFromArchives" parameterClass="java.util.HashMap" >
+    insert into business_product_require (business_product_id, main_packing_id,
+    main_packing_type, specification, material, model, price, bottle_weight, bottle_cap_color,
+    bottle_body_color, has_cap_logo, has_body_logo, bottle_diameter, has_danger_sign,
+    business_check_num, has_scale_line, has_spray_code, bottle_paste_require, special_require,
+    addtional_price, outer_packing_id, sealing_style, outer_packing_other_require,
+    auxiliary_material_ids, other_require, other_require_price, other_require_consumption,
+    img_info)
+
+    ( SELECT
+    #businessProductId#, main_packing_id,
+    main_packing_type, specification, material, model, price, bottle_weight, bottle_cap_color,
+    bottle_body_color, has_cap_logo, has_body_logo, bottle_diameter, has_danger_sign,
+    business_check_num, has_scale_line, has_spray_code, bottle_paste_require, special_require,
+    addtional_price, outer_packing_id, sealing_style, outer_packing_other_require,
+    auxiliary_material_ids, other_require, other_require_price, other_require_consumption,
+    img_info
+    from business_product_require_archives where business_product_id = #businessProductArchivesId#
+    )
+
+
+    <selectKey resultClass="java.lang.Integer" keyProperty="id">
+      SELECT @@IDENTITY AS ID
+    </selectKey>
+  </insert>
+
   <update id="update" parameterClass="BusinessProductRequire" >
     update business_product_require
     <dynamic prepend="set" >

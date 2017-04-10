@@ -6,6 +6,7 @@ import com.fuhuadata.domain.query.QueryBusinessOrder;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.BusinessOrderManager;
 import com.fuhuadata.service.BusinessOrderService;
+import com.fuhuadata.vo.CostAndProfitStatistics;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -131,4 +132,54 @@ public class BusinessOrderServiceImpl implements BusinessOrderService {
         }
         return result;
     }
+
+    @Override
+    public Result<List<CostAndProfitStatistics>> getCostAndProfitStatisticsByPage(CostAndProfitStatistics costAndProfitStatistics) {
+        Result<List<CostAndProfitStatistics>> result = new Result<List<CostAndProfitStatistics>>();
+        try{
+            result.addDefaultModel("CostAndProfitStatistics",businessOrderManager.getCostAndProfitStatisticsByPage(costAndProfitStatistics));
+        }catch(Exception e){
+            result.setSuccess(false);
+            log.error("分页获取费用与统计列表出错",e);
+        }
+        return result;
+    }
+
+    @Override
+    public Result<List<CostAndProfitStatistics>> getProfitStatisticsByPage(CostAndProfitStatistics costAndProfitStatistics) {
+        Result<List<CostAndProfitStatistics>> result = new Result<List<CostAndProfitStatistics>>();
+        try{
+            result.addDefaultModel("ProfitStatistics",businessOrderManager.getProfitStatisticsByPage(costAndProfitStatistics));
+        }catch(Exception e){
+            result.setSuccess(false);
+            log.error("分页获取利润统计列表出错",e);
+        }
+        return result;
+    }
+
+    @Override
+    public Result<Integer> countCostAndProfit(CostAndProfitStatistics costAndProfitStatistics) {
+        Result<Integer> result = new Result<Integer>();
+        try{
+            result.addDefaultModel(businessOrderManager.countCostAndProfit(costAndProfitStatistics));
+        }catch(Exception e){
+            result.setSuccess(false);
+            log.error("条件获取利润与统计列表数错误",e);
+        }
+        return result;
+    }
+
+
+    @Override
+    public Result<Integer> countProfitStatistics(CostAndProfitStatistics costAndProfitStatistics) {
+        Result<Integer> result = new Result<Integer>();
+        try{
+            result.addDefaultModel(businessOrderManager.countProfitStatistics(costAndProfitStatistics));
+        }catch(Exception e){
+            result.setSuccess(false);
+            log.error("条件获取利润统计列表数错误",e);
+        }
+        return result;
+    }
+
 }

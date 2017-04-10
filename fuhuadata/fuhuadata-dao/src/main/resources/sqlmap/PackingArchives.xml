@@ -248,6 +248,12 @@
 		]]>
     </select>
 
+    <select id="GET-BY-IDS" resultMap="PACKINGARCHIVES-MAP" parameterClass="java.lang.String">
+        <![CDATA[
+			SELECT * FROM k_packing_archives where packing_id in ($ids$)
+		]]>
+    </select>
+
     <select id="GET-BY-PID" resultMap="PACKINGARCHIVES-MAP" parameterClass="java.lang.Integer">
         <![CDATA[
             SELECT * FROM k_packing_archives WHERE big_category_id=#id# OR small_category_id=#id#

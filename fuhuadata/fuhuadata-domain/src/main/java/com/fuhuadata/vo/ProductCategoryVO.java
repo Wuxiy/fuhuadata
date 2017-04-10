@@ -14,7 +14,6 @@ public class ProductCategoryVO {
     private String productId;
     private String productName;
 
-
     public String getParent() {
         return parent;
     }

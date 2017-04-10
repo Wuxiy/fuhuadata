@@ -4,6 +4,43 @@
 <sqlMap namespace="BUSINESSORDER">
     <typeAlias alias="BusinessOrder" type="com.fuhuadata.domain.BusinessOrder"/>
     <typeAlias alias="QueryBusinessOrder" type="com.fuhuadata.domain.query.QueryBusinessOrder"/>
+    <typeAlias alias="CostAndProfitStatistics" type="com.fuhuadata.vo.CostAndProfitStatistics"/>
+
+
+    <sql id="COST-PROFIT-QUERY-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotEmpty prepend=" AND " property="customerName">
+                base.full_name like concat('%',#customerName#,'%')
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="customerLevel">
+                base.customer_level = #customerLevel#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="country">
+                base.country = #country#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="startTime">
+                <![CDATA[
+                     a.deal_time  >=  #startTime#
+                ]]>
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="endTime">
+                <![CDATA[
+                     a.deal_time  <=  #endTime#
+                ]]>
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="salesManId">
+                a.sales_man_id = #salesManId#
+            </isNotEmpty>
+            <isNotEqual property="areaClassId" compareValue="0" prepend=" AND ">
+                base.customer_area_id = #areaClassId#
+                <isNotEqual property="areaId" compareValue="0" prepend=" AND ">
+                    base.country_id = #areaId#
+                </isNotEqual>
+            </isNotEqual>
+        </dynamic>
+    </sql>
+
+
     <sql id="QUERY-COMMON">
         <dynamic prepend=" WHERE ">
             <isNotEmpty prepend=" AND " property="customerId">
@@ -29,7 +66,13 @@
     <sql id="ORDER-PAGE-COMMON">
         <dynamic prepend=" WHERE ">
             <isNotEmpty prepend=" AND " property="customerId">
-                base.short_name = #customerName#
+                base.short_name like concat('%',#customerName#,'%')
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="salesManId">
+                a.sales_man_id = #salesManId#
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="ncOrderId">
+                a.nc_order_id like concat('%',#ncOrderId#,'%')
             </isNotEmpty>
             <isNotEmpty prepend=" AND " property="status">
                 a.status = #status#
@@ -58,6 +101,11 @@
             <isNotEmpty prepend=" AND " property="startTime">
                 <![CDATA[
                      deal_time  >=  #startTime#
+                ]]>
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="endTime">
+                <![CDATA[
+                     deal_time  <=  #endTime#
                 ]]>
             </isNotEmpty>
 
@@ -360,6 +408,7 @@
         a.floor_price floorPrice,
         a.is_complaint isComplaint,
         a.is_modify_price isModifyPrice,
+        a.net_profit netProfit,
         a.`status` status,
         a.deal_time dealTime
         FROM
@@ -429,6 +478,121 @@
         <isParameterPresent>
             <include refid="QUERY-COMMON"/>
         </isParameterPresent>
+    </select>
+
+    <select id="COST-AND-PROFIT" parameterClass="CostAndProfitStatistics" resultClass="CostAndProfitStatistics">
+        <![CDATA[
+                        SELECT
+                base.customer_id customerId,
+                base.full_name customerName,
+                base.customer_level customerLevel,
+                base.country country,
+                SUM(a.actual_amount_paid) actualAmountPaid,
+                SUM(a.floor_price) floorPrice,
+                b.maintenance_fee maintenanceFee,
+                SUM(a.net_profit) netProfit,
+                a.sales_man_name salesManName
+            FROM
+                business_order a
+            LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
+            LEFT JOIN (SELECT
+                cvr.customer_id,
+                SUM(cvr.activity_expense) maintenance_fee
+            FROM
+                customer_visit_record cvr
+             ]]>
+        <dynamic prepend=" WHERE">
+            <isNotEmpty prepend=" AND " property="startTime">
+                <![CDATA[
+                     cvr.start_time >=  #startTime#
+                ]]>
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="endTime">
+                <![CDATA[
+                     cvr.end_time <=  #startTime#
+                ]]>
+            </isNotEmpty>
+        </dynamic>
+            GROUP BY
+                cvr.customer_id) b ON b.customer_id = a.customer_id
+        <isParameterPresent>
+            <include refid="COST-PROFIT-QUERY-COMMON"/>
+            <isNotEmpty prepend=" AND " property="orderBy">
+                order by $orderBy$
+            </isNotEmpty>
+            GROUP BY a.customer_id
+            limit #startRow#,#pageSize#
+        </isParameterPresent>
+    </select>
+
+    <select id="COUNT-COST-AND-PROFIT" parameterClass="CostAndProfitStatistics" resultClass="java.lang.Integer">
+        <![CDATA[
+            SELECT
+                count(*)
+            FROM
+                (
+                    SELECT
+                        count(*)
+                    FROM
+                        business_order a
+                    LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
+             ]]>
+        <isParameterPresent>
+            <include refid="COST-PROFIT-QUERY-COMMON"/>
+            GROUP BY a.customer_id  ) cu
+        </isParameterPresent>
+    </select>
+
+
+    <sql id="PROFIT-STATISTICS-QUERY-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotEmpty prepend=" AND " property="startTime">
+                <![CDATA[
+                     a.deal_time  >=  #startTime#
+                ]]>
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="endTime">
+                <![CDATA[
+                     a.deal_time  <=  #endTime#
+                ]]>
+            </isNotEmpty>
+        </dynamic>
+    </sql>
+
+    <select id="PROFIT-STATISTICS" parameterClass="CostAndProfitStatistics" resultClass="CostAndProfitStatistics">
+        <isEqual property="dimension" compareValue="0">
+            SELECT
+            base.country,
+            base.customer_area customerArea,
+            SUM(a.actual_amount_paid) actualAmountPaid,
+            SUM(a.floor_price) floorPrice,
+            SUM(a.maintenance_fee) maintenanceFee,
+            SUM(a.net_profit) netProfit
+            FROM
+            customer_base_info base
+            LEFT JOIN business_order a ON a.customer_id = base.customer_id
+            <isParameterPresent>
+                <include refid="PROFIT-STATISTICS-QUERY-COMMON"/>
+            </isParameterPresent>
+            GROUP BY base.customer_area_id
+            ORDER BY netProfit DESC
+        </isEqual>
+        <isNotEqual property="dimension" compareValue="1" prepend="">
+            group by countryId
+        </isNotEqual>
+        <isNotEqual property="dimension" compareValue="2" prepend="">
+            group by customerId
+        </isNotEqual>
+        <isNotEqual property="dimension" compareValue="3" prepend="">
+            group by salesManId
+        </isNotEqual>
+        <isNotEqual property="dimension" compareValue="4" prepend="">
+            group by
+        </isNotEqual>
+    </select>
+
+    <select id="COUNT-PROFIT-STATISTICS" parameterClass="CostAndProfitStatistics" resultClass="java.lang.Integer">
+
     </select>
 
 </sqlMap>

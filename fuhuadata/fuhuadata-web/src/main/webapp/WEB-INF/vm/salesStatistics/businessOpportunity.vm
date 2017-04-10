@@ -26,7 +26,7 @@
                 #saleNav(1)
                 <div class="panel-heading">
                     <div class="btn-group btn-group-xs panel-heading-btn pull-right">
-                        <a class="btn btn-xs btn-primary panel-heading-btn" href="" data-toggle="modal">
+                        <a class="btn btn-xs btn-primary panel-heading-btn" href="${request.contextPath}/businessInfo/AddBusinessInfo" data-toggle="modal">
                             <span class="glyphicon glyphicon-plus"></span>
                             新增商机
                         </a>

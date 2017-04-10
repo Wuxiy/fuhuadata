@@ -255,7 +255,7 @@
                     var ResultData = result;
                     if(ResultData == 0){
                         jQuery.ajax({
-                            url:url2,
+                            url:url1,
                             type:'POST',
                             data:imgpath,
                             success:function (result) {

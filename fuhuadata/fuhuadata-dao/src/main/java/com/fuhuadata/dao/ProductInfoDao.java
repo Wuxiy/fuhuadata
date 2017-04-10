@@ -91,5 +91,12 @@ public interface ProductInfoDao {
      * @return
      */
     public int count(QueryProductInfo queryProductInfo);
+
+	/**
+	 * 根据产品id获取对应报关产品编码和名称
+	 * @param productId
+	 * @return
+	 */
+	public ProductInfo getCustomsClearanceInfo(Integer productId);
     		
 }

@@ -6,6 +6,7 @@ import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.domain.CustomerEnterpriceNature;
 import com.fuhuadata.domain.CustomerMakeProduct;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
+import com.fuhuadata.vo.CustomerBaseInfoLinkman;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
 
 /**
@@ -58,6 +59,13 @@ public interface CustomerBaseInfoDao {
      * @return
      */
     public CustomerBaseInfo getCustomerBaseInfoById(String customer_id);
+
+	/**
+	 * 表格选择客户-带出的客户以及默认联系人信息
+	 * @param customerId
+	 * @return
+	 */
+	public CustomerBaseInfoLinkman getCustomerBaseInfoLinkmanByCustomerId(String customerId);
 
 	/**
 	 * 客户基本信息

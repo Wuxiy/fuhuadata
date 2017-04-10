@@ -183,17 +183,19 @@
             success:function(data){
                 var ResultData = data.data;
                 var _html = '';
-                for(var i=0;i<ResultData.length;i++){
-                    _html += '<tr>';
-                    _html += '	<td>'+ResultData[i].orderId+'</td>';
-                    _html += '  <td><a href="">'+ResultData[i].businessId+'</a></td>';
-                    _html += '  <td>'+ResultData[i].customerName+'</td>';
-                    _html += '  <td lang="zh">'+customerLevelList[ResultData[i].customerLevel-1]+'</td>';
-                    _html += '  <td lang="zh">'+ResultData[i].enterpriseNature+'</td>';
-                    _html += '  <td>'+ResultData[i].amountPayable+'A</td>';
-                    _html += '  <td>'+ResultData[i].orderProduct+'</td>';
-                    _html += '  <td lang="zh">'+ResultData[i].status+'</td>';
-                    _html +='   </tr>';
+                if(ResultData && ResultData!='' && ResultData!='null') {
+                    for (var i = 0; i < ResultData.length; i++) {
+                        _html += '<tr>';
+                        _html += '	<td>' + ResultData[i].orderId + '</td>';
+                        _html += '  <td><a href="">' + ResultData[i].businessId + '</a></td>';
+                        _html += '  <td>' + ResultData[i].customerName + '</td>';
+                        _html += '  <td lang="zh">' + customerLevelList[ResultData[i].customerLevel - 1] + '</td>';
+                        _html += '  <td lang="zh">' + ResultData[i].enterpriseNature + '</td>';
+                        _html += '  <td>' + ResultData[i].amountPayable + 'A</td>';
+                        _html += '  <td>' + ResultData[i].orderProduct + '</td>';
+                        _html += '  <td lang="zh">' + ResultData[i].status + '</td>';
+                        _html += '   </tr>';
+                    }
                 }
                 $("#offerList").html(_html);
             }

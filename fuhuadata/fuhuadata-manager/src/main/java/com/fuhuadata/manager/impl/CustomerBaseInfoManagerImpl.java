@@ -12,7 +12,9 @@ import java.util.List;
 import com.fuhuadata.dao.CustomerBaseInfoDao;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.domain.query.Result;
+import com.fuhuadata.vo.CustomerBaseInfoLinkman;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
+import org.apache.cxf.Bus;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
@@ -140,6 +142,11 @@ public class CustomerBaseInfoManagerImpl implements CustomerBaseInfoManager {
     public CustomerBaseInfo getCustomerBaseInfoById(String customer_id) {
     	return customerBaseInfoDao.getCustomerBaseInfoById(customer_id);
     }
+
+	@Override
+	public CustomerBaseInfoLinkman getCustomerBaseInfoLinkmanByCustomerId(String customerId) {
+		return customerBaseInfoDao.getCustomerBaseInfoLinkmanByCustomerId(customerId);
+	}
 
 	/**
 	 * 获取客户基本信息

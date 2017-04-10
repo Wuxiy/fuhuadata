@@ -1,5 +1,6 @@
 package com.fuhuadata.service.impl;
 
+import com.ctc.wstx.util.StringUtil;
 import com.fuhuadata.domain.PackingArchives;
 import com.fuhuadata.domain.query.PackingArchivesQuery;
 import com.fuhuadata.domain.query.Result;
@@ -9,6 +10,7 @@ import com.fuhuadata.vo.ImagePathVO;
 import com.fuhuadata.vo.PackingArchivesVO;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -134,13 +136,7 @@ public class PackingArchivesServiceImpl implements PackingArchivesService {
                 }
                 String ids = packingArchives.getAssociatedPackingId();
                 if(ids != null&& ids.length()>0) {
-                    String[] idArray = ids.split(",");
-
-                    for (int i = 0; i < idArray.length; i++) {
-                        System.out.println(idArray[i]);
-                        PackingArchives packingArchivesNode = packingArchivesManager.getPackingArchivesById(Integer.parseInt(idArray[i]));
-                        packingArchivesVO.addNodes(packingArchivesNode);
-                    }
+                    packingArchivesVO.setNodes(packingArchivesManager.getPackingArchivesByIds(ids));
                 }
                 result.addDefaultModel("PackingArchives", packingArchivesVO);
             }
@@ -156,15 +152,20 @@ public class PackingArchivesServiceImpl implements PackingArchivesService {
     public Result<List<PackingArchives>> getPakcingArchivesByIds(String[] ids) {
         Result<List<PackingArchives>> result = new Result<List<PackingArchives>>();
         try{
-            List<PackingArchives> list = new ArrayList<PackingArchives>();
-            if(ids!=null){
+           /* List<PackingArchives> list = new ArrayList<PackingArchives>();*/
+          /*  if(ids!=null){
                 for(int i=0;i<ids.length;i++){
                     PackingArchives packingArchives = new PackingArchives();
                     packingArchives=packingArchivesManager.getPackingArchivesById(Integer.parseInt(ids[i]));
                     list.add(packingArchives);
                 }
                 result.addDefaultModel(list);
-            }
+            }*/
+          if(ids!=null&&ids.length>0) {
+              String idsStr = StringUtils.join(ids, ",");
+              System.out.println(idsStr);
+              result.addDefaultModel("PackingArchivesList",packingArchivesManager.getPackingArchivesByIds(idsStr));
+          }
         }catch(Exception e){
             log.error("根据ids获取包材信息错误",e);
         }

@@ -42,7 +42,6 @@ public class CustomerPurchaseProductManagerImpl implements CustomerPurchaseProdu
     public Result<List<CustomerPurchaseProduct>> getCustomerPurchaseProductsByPage(QueryCustomerPurchaseProduct queryCustomerPurchaseProduct) {
 		Result<List<CustomerPurchaseProduct>> result = new Result<List<CustomerPurchaseProduct>>();
 		int totalItem = customerPurchaseProductDao.count(queryCustomerPurchaseProduct);
-		;
 		if (totalItem > 0) {
 			result.addDefaultModel("CustomerPurchaseProducts", customerPurchaseProductDao.getCustomerPurchaseProductsByPage(queryCustomerPurchaseProduct));		
 		} else {

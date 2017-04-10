@@ -2,6 +2,7 @@ package com.fuhuadata.dao;
 
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
+import com.fuhuadata.vo.CostAndProfitStatistics;
 
 import javax.management.Query;
 import java.util.List;
@@ -91,5 +92,33 @@ public interface BusinessOrderDao {
      * @return
      */
     public List<BusinessOrder> getOrderLisPageByQuery(QueryBusinessOrder queryBusinessOrder);
+
+    /**
+     * 费用与利润统计
+     * @param costAndProfitStatistics
+     * @return
+     */
+    public List<CostAndProfitStatistics> getCostAndProfitStatisticsByPage(CostAndProfitStatistics costAndProfitStatistics);
+
+    /**
+     * count 费用和利润列表
+     * @param costAndProfitStatistics
+     * @return
+     */
+    public int countCostAndProfit(CostAndProfitStatistics costAndProfitStatistics);
+
+    /**
+     * 利润统计
+     * @param costAndProfitStatistics
+     * @return
+     */
+    public List<CostAndProfitStatistics> getProfitStatisticsByPage(CostAndProfitStatistics costAndProfitStatistics);
+
+    /**
+     * count 利润统计
+     * @param costAndProfitStatistics
+     * @return
+     */
+    public int countProfitStatistics(CostAndProfitStatistics costAndProfitStatistics);
 
 }

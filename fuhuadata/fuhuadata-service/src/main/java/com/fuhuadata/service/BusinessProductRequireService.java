@@ -1,18 +1,15 @@
-package com.fuhuadata.dao;
-
+package com.fuhuadata.service;
 
 import com.fuhuadata.domain.BusinessProductRequire;
 
 import java.util.Map;
 
 /**
- * Created by hexingfu on 2017/4/5.
+ * Created by hexingfu on 2017/4/7.
  */
-public interface BusinessProductRequireDao{
+public interface BusinessProductRequireService {
 
     int addProductRequire(BusinessProductRequire businessProductRequire);
-
-    int insertFromArchives(Map<String,Object> map);
 
     int updateProductRequire(BusinessProductRequire businessProductRequire);
 

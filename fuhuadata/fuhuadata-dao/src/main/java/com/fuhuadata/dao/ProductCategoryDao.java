@@ -30,4 +30,6 @@ public interface ProductCategoryDao {
 
     public int count();
 
+    public List<ProductCategoryVO> getProductWare();
+
 }

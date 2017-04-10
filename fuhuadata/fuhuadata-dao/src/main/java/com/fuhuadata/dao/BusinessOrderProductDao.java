@@ -18,6 +18,14 @@ public interface BusinessOrderProductDao {
      */
     int insertBaseInfo(BusinessOrderProduct businessOrderProduct) throws Exception;
 
+    /**
+     * 通过复制档案新增产品要求基本信息、单据要求，订舱出运要求
+     * @param businessOrderProduct
+     * @return
+     * @throws Exception
+     */
+    int insertFromArchives(BusinessOrderProduct businessOrderProduct)throws Exception;
+
 
     /**
      * 修改产品要求（除基本信息外的其他信息新增时不做插入，在此做修改）
@@ -46,5 +54,34 @@ public interface BusinessOrderProductDao {
      * @return
      */
     List<BusinessOrderProduct> getListByPage(QueryBusinessOrderProduct queryBusinessOrderProduct);
+
+
+    /**
+     * 根据id集合删除订单产品相关所有信息，但是不删除档案
+     * @param businessProductIds
+     */
+    boolean deleteAllInfoByIds(String businessProductIds)throws Exception;
+
+    /**
+     * 获取订单产品基本信息
+     * @param id
+     * @return
+     */
+    BusinessOrderProduct getBaiscById(int id);
+
+    /**
+     * 根据id获取单据要求
+     * @param id
+     * @return
+     */
+    BusinessOrderProduct getDocumentaryById(int id);
+
+    /**
+     * 根据id获取装箱出运要求
+     * @param id
+     * @return
+     */
+    BusinessOrderProduct getPackageRequireById(int id);
+
 
 }
