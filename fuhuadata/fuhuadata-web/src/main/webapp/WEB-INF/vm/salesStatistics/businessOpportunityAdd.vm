@@ -206,7 +206,7 @@
     $(document).on('click','#search',function () {
         var customerList = document.getElementById('customerList');
         var data = {
-            "customerNameAdd":$('#customerNameAdd').val()
+            "fullName":$('#customerNameAdd').val()
         }
         jQuery.ajax({
                 url:basePath + '/customerBaseInfo/getCustomerBaseInfoByQuery',
@@ -234,45 +234,24 @@
     });
 
     $(document).on('click','#add',function () {
-<<<<<<< HEAD
         var id = $('#customerNameAdd').attr('data-id');
         if(id!=''){
             jQuery.ajax({
-                url:basePath + '',
+                url:basePath + '/customerBaseInfo/getCustomerBaseInfoLinkman?customerId=' + id,
                 type:'POST',
-                data:JSON.stringify($('#customerNameAdd').val()),
                 contentType:"application/json",
                 success:function (result) {
-                    var ResultData = result;
-                    $('#customerName').val(customerName);
-                    $('#country').val(country);
-                    $('#linkmanName').val(linkmanName);
-                    $('#linkPhone1').val(linkPhone1);
-                    $('#lemail').val(lemail);
+                    var ResultData = result.data;
+                    $('#customerName').val(ResultData.fullName);
+                    $('#country').val(ResultData.country);
+                    $('#linkmanName').val(ResultData.linkmanName);
+                    $('#linkPhone1').val(ResultData.linkPhone1);
+                    $('#lemail').val(ResultData.lemail);
                 }
             })
         }else {
             alert('请先选择客户名称再新增！');
         }
-
-=======
-
-        console.log(tarEltext);
-        jQuery.ajax({
-            url:basePath + '/customerBaseInfo/getCustomerBaseInfoLinkman',
-            type:'POST',
-            data:JSON.stringify(data),
-            contentType:"application/json",
-            success:function (result) {
-                var ResultData = result;
-                $('#customerName').val(customerName);
-                $('#country').val(country);
-                $('#linkmanName').val(linkmanName);
-                $('#linkPhone1').val(linkPhone1);
-                $('#lemail').val(lemail);
-            }
-        })
->>>>>>> 144d3e0582b28c6f83a939b2e58676e0f22f282f
     })
     
     $('#finishAdd').click(function () {
