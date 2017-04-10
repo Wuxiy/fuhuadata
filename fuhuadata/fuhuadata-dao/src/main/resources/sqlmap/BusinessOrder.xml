@@ -577,18 +577,80 @@
             GROUP BY base.customer_area_id
             ORDER BY netProfit DESC
         </isEqual>
-        <isNotEqual property="dimension" compareValue="1" prepend="">
-            group by countryId
-        </isNotEqual>
-        <isNotEqual property="dimension" compareValue="2" prepend="">
-            group by customerId
-        </isNotEqual>
-        <isNotEqual property="dimension" compareValue="3" prepend="">
-            group by salesManId
-        </isNotEqual>
-        <isNotEqual property="dimension" compareValue="4" prepend="">
-            group by
-        </isNotEqual>
+        <isEqual property="dimension" compareValue="1">
+            SELECT
+            base.country,
+            base.customer_area customerArea,
+            SUM(a.actual_amount_paid) actualAmountPaid,
+            SUM(a.floor_price) floorPrice,
+            SUM(a.maintenance_fee) maintenanceFee,
+            SUM(a.net_profit) netProfit
+            FROM
+            customer_base_info base
+            LEFT JOIN business_order a ON a.customer_id = base.customer_id
+            <isParameterPresent>
+                <include refid="PROFIT-STATISTICS-QUERY-COMMON"/>
+            </isParameterPresent>
+            GROUP BY
+            base.country_id
+            ORDER BY
+            netProfit DESC
+        </isEqual>
+        <isEqual property="dimension" compareValue="2">
+            SELECT
+            base.country,
+            base.customer_area customerArea,
+            base.full_name,
+            SUM(a.actual_amount_paid) actualAmountPaid,
+            SUM(a.floor_price) floorPrice,
+            SUM(a.maintenance_fee) maintenanceFee,
+            SUM(a.net_profit) netProfit,
+            a.sales_man_name
+            FROM
+            customer_base_info base
+            LEFT JOIN business_order a ON a.customer_id = base.customer_id
+            <isParameterPresent>
+                <include refid="PROFIT-STATISTICS-QUERY-COMMON"/>
+            </isParameterPresent>
+            GROUP BY
+            base.customer_id
+            ORDER BY
+            netProfit DESC
+        </isEqual>
+        <isEqual property="dimension" compareValue="3">
+            SELECT
+            base.country,
+            base.customer_area customerArea,
+            base.full_name customerName,
+            ua.userArea,
+            SUM(a.actual_amount_paid) actualAmountPaid,
+            SUM(a.floor_price) floorPrice,
+            SUM(a.maintenance_fee) maintenanceFee,
+            SUM(a.net_profit) netProfit,
+            a.sales_man_name salesManId
+            FROM
+            business_order a
+            LEFT JOIN customer_base_info base ON a.customer_id = base.customer_id
+            LEFT JOIN (
+            SELECT
+            pua.user_id,
+            GROUP_CONCAT(pac.area_name) AS userArea
+            FROM
+            p_user_area pua
+            LEFT JOIN p_area_code pac ON pac.areaid = pua.area_id
+            GROUP BY pua.user_id
+            ) ua ON ua.user_id =a.sales_man_id
+            <isParameterPresent>
+                <include refid="PROFIT-STATISTICS-QUERY-COMMON"/>
+            </isParameterPresent>
+            GROUP BY
+            a.sales_man_id
+            ORDER BY
+            netProfit DESC
+        </isEqual>
+        <isEqual property="dimension" compareValue="4">
+
+        </isEqual>
     </select>
 
     <select id="COUNT-PROFIT-STATISTICS" parameterClass="CostAndProfitStatistics" resultClass="java.lang.Integer">

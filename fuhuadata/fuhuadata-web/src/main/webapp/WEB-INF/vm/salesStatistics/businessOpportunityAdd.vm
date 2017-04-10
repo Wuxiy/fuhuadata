@@ -171,9 +171,23 @@
             </div>
 
             <div class="modal-body well" style="max-height: 300px; overflow-y: scroll; overflow-x: scroll;">
-                <ul id="customerList">
-                    
-                </ul>
+                <div class="form-group clearfix">
+                    <label class="col-lg-2 control-label">客户名称<sup class="not-null">*</sup></label>
+                    <div class="col-lg-4">
+                        <input class="form-control notnull" type="text" data-id="" id="customerNameAdd">
+                    </div>
+                    <div class="col-lg-2 col-xs-offset-1">
+                        <input class="form-control" type="button" value="搜索" id="search">
+                    </div>
+                    <div class="col-lg-2">
+                        <input class="form-control" type="button" value="新增" id="add">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <ul class="list-group" id="customerList">
+
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -186,22 +200,23 @@
     
     //获取客户modal列表
     $('#customerModal').click(function(){
+        $('#Modal').modal('show');
+    })
+
+    $(document).on('click','#search',function () {
         var customerList = document.getElementById('customerList');
         var data = {
-            "fullName":"福华"
+            "fullName":$('#customerNameAdd').val()
         }
         jQuery.ajax({
-            url:basePath + '/customerBaseInfo/getCustomerBaseInfoByQuery',
+                url:basePath + '/customerBaseInfo/getCustomerBaseInfoByQuery',
             contentType:"application/json",
             data:JSON.stringify(data),
             type:'POST',
-            success:function (result) {
-                var ResultData = result.data;
-                console.log(ResultData);
-                console.log(ResultData[0].fullName);
-                for(var i=0;i<ResultData.length;i++){
-                    console.log(ResultData[i].fullName);
-                    customerList.innerHTML += '<li><a class="node">'+ResultData[i].fullName+'</a></li>';
+            success: function (result) {
+                var ResultData = eval(result.data);
+                for (var i = 0; i < ResultData.length; i++) {
+                    customerList.innerHTML += '<li class="list-group-item"><a class="cNode" data-id="'+ResultData[i].customerId+'">' + ResultData[i].fullName + '</a></li>';
                 }
                 console.log(customerList);
                 $('#Modal').modal('show');
@@ -212,23 +227,32 @@
     $(document).on('click','a.cNode',function (e) {
         e.preventDefault();
         console.log(e.target);
+        var id = $(e.target).attr('data-id');
         var tarEltext = $(e.target).text();
-        console.log(tarEltext);
-        jQuery.ajax({
-            url:basePath + '',
-            type:'POST',
-            data:tarEltext,
-            contentType:"application/json",
-            success:function (result) {
-                var ResultData = result;
-                $('#customerName').val(customerName);
-                $('#country').val(country);
-                $('#linkmanName').val(linkmanName);
-                $('#linkPhone1').val(linkPhone1);
-                $('#lemail').val(lemail);
-            }
-        })
+        $('#customerNameAdd').val(tarEltext);
+        $('#customerNameAdd').attr('data-id',id);
     });
+
+    $(document).on('click','#add',function () {
+        var id = $('#customerNameAdd').attr('data-id');
+        if(id!=''){
+            jQuery.ajax({
+                url:basePath + '/customerBaseInfo/getCustomerBaseInfoLinkman?customerId=' + id,
+                type:'POST',
+                contentType:"application/json",
+                success:function (result) {
+                    var ResultData = result.data;
+                    $('#customerName').val(ResultData.fullName);
+                    $('#country').val(ResultData.country);
+                    $('#linkmanName').val(ResultData.linkmanName);
+                    $('#linkPhone1').val(ResultData.linkPhone1);
+                    $('#lemail').val(ResultData.lemail);
+                }
+            })
+        }else {
+            alert('请先选择客户名称再新增！');
+        }
+    })
     
     $('#finishAdd').click(function () {
         var url = basePath + '/businessInfo/doAddBusinessInfo';

@@ -261,7 +261,6 @@ public class CustomerBaseInfoAction {
     @SystemLogAnnotation(module = "customerInfo",methods = "getCustomerBaseInfoByQuery")
     @ResponseBody
     public ResultPojo getCustomerBaseInfoByQuery(@RequestBody QueryCustomerBaseInfo queryCustomerBaseInfo){
-        System.out.println(queryCustomerBaseInfo.getFullName()+"111111111111");
         Result<List<CustomerBaseInfo>> result = new Result<List<CustomerBaseInfo>>();
         try{
             result=customerBaseInfoService.getCustomerBaseInfoByQuery(queryCustomerBaseInfo);

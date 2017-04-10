@@ -172,13 +172,13 @@
                 {"data":"problemContent"},
                 {"data":"productType"},
                 {"data":"solution"},
-                {"data":"remarks"}
+                {"data":null}
             ],
             "columnDefs":[
                 {
                     "targets":1,
                     "render":function(data,type,row,meta){
-                        return '<a href="' + data + '" target="_blank">' + row.solution+ '</a>';
+                        return '<a href="' + data + '" target="_blank">' + row.problemContent+ '</a>';
                     }
                 }
             ],
