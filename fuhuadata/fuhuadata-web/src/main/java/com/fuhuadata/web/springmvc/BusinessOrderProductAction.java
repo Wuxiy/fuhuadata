@@ -49,9 +49,10 @@ public class BusinessOrderProductAction {
      * @return
      */
     @RequestMapping("/intoProductBasicInfoRequire")
-    public ModelAndView intoProductBasicInfoRequire(String orderId,Integer businessProductId){
+    public ModelAndView intoProductBasicInfoRequire(String orderId,Integer businessProductId,Integer customerId){
         return new ModelAndView("salesStatistics/productBasicInfoRequire")
                 .addObject("orderId",orderId)
+                .addObject("customerId",customerId)
                 .addObject("businessProductId",businessProductId);
     }
 
