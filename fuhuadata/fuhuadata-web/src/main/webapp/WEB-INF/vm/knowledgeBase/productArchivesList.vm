@@ -7,7 +7,7 @@
 <div class="dashboard-wrapper">
     <div class="row">
         <div class="col-xs-2">
-            <div class="panel panel-default">
+            <div id="aside" class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title" lang="zh">
                         产品分类
@@ -25,38 +25,53 @@
         <div class="col-xs-10">
             <div id="productInfo" class="panel panel-default view-HD-lg">
                 <div class="panel-heading">
-                    <button data-btn="edit" data-view="editHide" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
+                    <button id="edit" data-btn="edit" data-view="editHide" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
                         编辑
                     </button>
                     <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right">
-                        <button data-btn="cancel" data-view="editView" class="btn hidden" lang="zh">取消</button>
-                        <button data-btn="save" data-view="editView" class="btn btn-primary hidden" lang="zh">保存</button>
+                        <button id="save" data-btn="cancel" data-view="editView" class="btn hidden" lang="zh">取消</button>
+                        <button id="cancel" data-btn="save" data-view="editView" class="btn btn-primary hidden" lang="zh">保存</button>
                     </div>
                     <h3 class="panel-title" lang="zh">
                         标准产品档案
                     </h3>
                 </div>
-                <div class="panel-body panel-edit clearfix">
+                <div id="formVessel" class="panel-body panel-edit clearfix"></div>
+
+
+                <script id="form" type="text/template">
+
+                    <!-- 模板部分 -->
+
+                    <%if (data) {
+                        var proInfo = data.productInfo, // 产品基本信息
+                            wares   = data.wares, // 规格型号
+                            index   = data.index, // 理化指标
+                            pcs     = data.processingComponents, // 选中的加工成分
+                            allPcs  = data.allProcessingComponents // 所有的加工成分
+                    %>
+
                     <from class="form-horizontal">
                         <div class="form-group">
                             <label class="col-xs-1 control-label">品类</label>
                             <div class="col-xs-2">
-                                <input id="categoryName" class="form-control noEdit" disabled type="text"/>
+                                <input id="categoryName" class="form-control" disabled type="text" value="<%=proInfo.categoryName%>"/>
                             </div>
                             <label class="col-xs-1 control-label">品名</label>
                             <div class="col-xs-2">
-                                <input id="name" class="form-control noEdit" disabled type="text"/>
+                                <input id="name" class="form-control" disabled type="text" value="<%=proInfo.name%>"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-xs-1 control-label">主计量单位</label>
                             <div class="col-xs-2">
-                                <input id="measurement" class="form-control noEdit" disabled type="text"/>
+                                <input id="measurement" class="form-control" disabled type="text" value="<%=proInfo.measurement%>"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-xs-1 control-label" lang="zh">规格型号</label>
                             <div class="col-xs-4">
+                                <%if (wares.length > 0) %>
                                 <table class="table table-condensed table-bordered table-striped text-center">
                                     <thead>
                                     <tr>
@@ -64,27 +79,39 @@
                                         <th class="text-center col-xs-4" lang="zh">型号</th>
                                     </tr>
                                     </thead>
-                                    <tbody id="wares">
+                                    <!-- 判断语句if else-->
+                                    <%for(var i=0;i<wares.length;i++){%>
+                                    <tbody>
+                                    <tr>
+                                        <td><%=wares[i].specification%></td>
+                                        <td><%=wares[i].model%></td>
+                                    </tr>
                                     </tbody>
+                                    <%}%>
                                 </table>
+                                <%}else {%>
+                                <p>暂无数据</p>
+                                <%}%>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-xs-1 control-label">含量</label>
                             <div class="col-xs-2">
                                 <div class="input-group">
-                                    <input id="concentration" class="form-control" disabled type="text"/>
+                                    <input id="concentration" class="form-control" disabled type="text" value="<%=proInfo.concentration%>"/>
                                     <span class="input-group-addon">%</span>
                                 </div>
                             </div>
                             <label class="col-xs-1 control-label">盐类</label>
                             <div class="col-xs-7">
-                                <label class="radio-inline"><input name="saltType" type="radio" disabled value="0">无</label>
-                                <label class="radio-inline"><input name="saltType" type="radio" disabled value="1">异丙胺盐</label>
-                                <label class="radio-inline"><input name="saltType" type="radio" disabled value="2">铵盐</label>
-                                <label class="radio-inline"><input name="saltType" type="radio" disabled value="3">钾盐</label>
-                                <label class="radio-inline"><input name="saltType" type="radio" disabled value="4">二钾铵盐</label>
-                                <label class="radio-inline" style="position: relative"><input class="else" disabled name="saltType" type="radio" value="5">其他<input class="form-control elseInput" id="otherSaltName" disabled type="text" style="position: absolute;right: -210px;top:0;width: 200px;" placeholder="请输入其他盐类"></label>
+                                <label class="radio-inline"><input name="saltType" type="radio" disabled value="0" <%if(proInfo.saltType==0){%>checked<%}%>>无</label>
+                                <label class="radio-inline"><input name="saltType" type="radio" disabled value="1" <%if(proInfo.saltType==1){%>checked<%}%>>异丙胺盐</label>
+                                <label class="radio-inline"><input name="saltType" type="radio" disabled value="2" <%if(proInfo.saltType==2){%>checked<%}%>>铵盐</label>
+                                <label class="radio-inline"><input name="saltType" type="radio" disabled value="3" <%if(proInfo.saltType==3){%>checked<%}%>>钾盐</label>
+                                <label class="radio-inline"><input name="saltType" type="radio" disabled value="4" <%if(proInfo.saltType==4){%>checked<%}%>>二钾铵盐</label>
+                                <label class="radio-inline" style="position: relative"><input class="else" disabled name="saltType" type="radio" value="5" <%if(proInfo.saltType==5){%>checked<%}%>>其他
+                                    <input class="form-control elseInput" id="otherSaltName" <%if(proInfo.saltType==5){%>value="<%=proInfo.otherSaltName%>"<%}%> disabled type="text" style="position: absolute;right: -210px;top:0;width: 200px;" placeholder="请输入其他盐类">
+                                </label>
                             </div>
                         </div>
                         <div class="form-group">
@@ -135,226 +162,20 @@
                             </div>
                         </div>
                     </from>
-                </div>
+                    <%}else{%>
+                    <p class="text-center">
+                        暂无数据
+                    </p>
+                    <%}%>
+                    <!-- 模板结束 -->
+                </script>
+
+
             </div>
         </div>
     </div>
 </div>
 
 <input id="productId" type="hidden" value="">
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/knowledge/productArchivesList.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//        $('#tree').filtrateData(basePath+'/productInfo/getProductInfoById','container','productArchivesList');
-        //初始数据
-//        productInfoForm({id:1011001});
-        //数据提交
-//        $(document).on('click.upData','#productInfo',upProductInfo);
-
-        //添加row
-//        $(document).on('click.add','#addIndexItem',function () {
-//            var tr = $('<tr><td><input class="form-control" type="text" value=""></td><td><input class="form-control" type="text" value=""></td><td style="position: relative"><input class="form-control" type="text" value=""/><button type="button" class="close" data-form-btn="del" data-form-target="tr" style="position: absolute;top:6px;right:-15px;">×</button></td></tr>');
-//            tr.appendTo('[name="physicalProperities"]');
-//        });
-//        $(document).on('click.add','#addProItem',function () {
-//            var tr = $('<tr><td><input class="form-control" type="text" value=""></td><td><input class="form-control" type="text" value=""></td><td style="position: relative"><input class="form-control" type="text" value=""/><button type="button" class="close" data-form-btn="del" data-form-target="tr" style="position: absolute;top:6px;right:-15px;">×</button></td></tr>');
-//            tr.appendTo('[name="processingComponents"]');
-//        });
-
-//    });
-
-    //获取标准产品数据
-//    function productInfoForm(data) {
-//        jQuery.ajax({
-//            url:basePath+'/productInfo/getProductInfoById',
-//            type:'POST',
-//            data:data
-//        }).done(function(data){
-//            var getData                 = data.data,
-//                productInfo             = getData.productInfo,
-//                wares                   = getData.wares,
-//                allProcessingComponents = getData.allProcessingComponents,
-//                processingComponents    = getData.processingComponents,
-//                index                   = getData.index,
-//                tr                      = '',
-//                pcisArr                 = [];
-//
-//            //表单处理
-//            $('#productId').val(productInfo.productId);
-//            $('#categoryName').val(productInfo.categoryName);
-//            $('#name').val(productInfo.name);
-//            $('#measurement').val(productInfo.measurement);
-//            $('#concentration').val(productInfo.concentration);
-//            $('[name="saltType"]').val([productInfo.saltType]);
-//            $('#otherSaltName').val(productInfo.otherSaltName);
-//            $('#executeStandard').val(productInfo.executeStandard);
-//            $('#executeNumer').val(productInfo.executeNumer);
-//            $('#executeRemarks').val(productInfo.executeRemarks);
-//            $('#productFeature').val(productInfo.productFeature);
-//            $('#lastmodifyUserName').val(productInfo.lastmodifyUserName);
-//            $('#modifyTime').val(productInfo.modifyTime);
-//
-//            //规格型号
-//            jQuery.each(wares,function (n,item) {
-//                tr += '<tr><td>'+item.specification+'</td>';
-//                tr += '<td>'+item.model+'</td></tr>';
-//            });
-//            $('#wares').append(tr);
-//
-//            //加工成分
-//            if (allProcessingComponents instanceof Array && processingComponents instanceof Array) {
-//                tr = '';
-//                tr += '<tr><th class="text-center">是否需要</th>';
-//                tr += '<th class="text-center">原料</th>';
-//                tr += '<th class="text-center">单耗（kg/KL）</th>';
-//                tr += '<th class="text-center">备注</th></tr>';
-//                jQuery.each(allProcessingComponents,function (n,item) {
-//                    tr += '<tr><td><input name="pcis" type="checkbox" disabled value="'+item.componentId+'"></td>';
-//                    tr += '<td>'+item.componentName+'</td>';
-//                    tr += '<td><input class="form-control" type="text" disabled value="'+item.unitCost+'"></td>';
-//                    tr += '<td><input class="form-control" type="text" disabled value="'+item.remarks+'"></td></tr>';
-//                });
-//                $('#allProcessingComponents').html('').append(tr);
-//                jQuery.each(processingComponents,function (n,item) {
-//                    pcisArr.push(item.componentId);
-//                });
-//                $('[name="pcis"]').val(pcisArr);
-//            }else{
-//                tr = '';
-//                tr = '<tr><td><textarea class="form-control">'+allProcessingComponents+'</textarea></td></tr>';
-//                $('#allProcessingComponents').html('').append(tr);
-//            }
-//
-//            //理化指标
-//            if (index instanceof Array) {
-//                tr = '';
-//                tr += '<tr><th class="text-center">指标</th>';
-//                tr += '<th class="text-center">值</th>';
-//                tr += '<th class="text-center">备注</th></tr>';
-//                jQuery.each(index,function (n,item) {
-//                    console.log(item);
-//                    tr += '<tr><td><input class="form-control" type="text" disabled value="'+item.index+'"></td>';
-//                    tr += '<td><input class="form-control" type="text" disabled value="'+item.value+'"></td>';
-//                    tr += '<td><input class="form-control" type="text" disabled value="'+item.remarks+'">';
-//                    tr += '<button type="button" class="close hidden" data-form-btn="del" data-form-target="tr"' +
-//                            ' style="position: absolute;top:6px;right:-15px;">×</button></td></tr>';
-//                });
-//                $('#index').append(tr);
-//            }else{
-//                tr = '';
-//                tr = '<tr><td><textarea class="form-control">'+index+'</textarea></td></tr>';
-//                $('#index').html('').append(tr);
-//            }
-//
-//        });
-//    }
-
-    //保存标注产品数据
-//   function upProductInfo(e){
-//        e.stopPropagation();
-//        var upData = {
-//            'productInfo':{
-//                'productId': $('#productId').val(),
-//                'categoryName': $('#categoryName').val(),
-//                'name': $('#name').val(),
-//                'measurement': $('#measurement').val(),
-//                'concentration': $('#concentration').val(),
-//                'executeStandard': $('#executeStandard').val(),
-//                'executeNumer': $('#executeNumer').val(),
-//                'executeRemarks': $('#executeRemarks').val(),
-//                'productFeature': $('#productFeature').val(),
-//                'modifyTime': getTime(),
-//                'saltType': $('[name="saltType"]:checked').val(),
-//                'otherSaltName': $('#otherSaltName').val(),
-//                'physicalProperities' : getPPTable(),
-//            },
-//            'productComponents' : getPCTable()
-//        };
-//        console.log(upData);
-//        function getPPTable() {
-//            var p = content.find('[name="physicalProperities"]').find('tr');
-//            console.log(p.find('textarea').length);
-//            if(p.find('textarea').length!=1){
-//                var arr = [];
-//                p.each(function(){
-//                    var obj = {};
-//                    $(this).find('td').each(function(n,td){
-//                        if(n==0){
-//                            obj.index = $(td).children('input').val();
-//                        }else if (n==1){
-//                            obj.value = $(td).children('input').val();
-//                        }else {
-//                            obj.remarks = $(td).children('input').val();
-//                        }
-//                    });
-//                    arr.push(obj);
-//                })
-//                return JSON.stringify(arr);
-//            }else{
-//                return p.find('textarea').val();
-//            }
-//        };
-//        function getPCTable() {
-//            var p = content.find('[name="processingComponents"]').find('tr');
-//            if(p.find('textarea').length!=1){
-//                var arr = [];
-//                p.each(function(){
-//                    var obj = {};
-//                    $(this).find('td').each(function(n,td){
-//                        if(n==0){
-//                            obj.componentName = $(td).children('input').val();
-//                        }else if (n==1){
-//                            obj.consumption = $(td).children('input').val();
-//                        }else {
-//                            obj.remarks = $(td).children('input').val();
-//                        }
-//                    });
-//                    arr.push(obj);
-//                })
-//                return arr;
-//            }else{
-//                return p.find('textarea').val();
-//            }
-//        };
-//        function getTime(){
-//            var time = new Date();
-//            var year = time.getFullYear();
-//            var month = parseInt(time.getMonth())+1;
-//            var day = time.getDate();
-//            var hours = parseInt(time.getHours());
-//            var minutes = parseInt(time.getMinutes());
-//            var seconds = parseInt(time.getSeconds());
-//            var newTime;
-//            return newTime = year+'-'+month+'-'+day+' '+hours+':'+minutes+':'+seconds;
-//        };
-//        jQuery.ajax({
-//            'url':basePath+'/productInfo/doModify',
-//            'type':'post',
-//            'data':JSON.stringify(upData),
-//            'contentType':"application/json"
-//        }).done(function(){
-//            alert('保存成功');
-//        });
-//    }
-//
-//    })(jQuery);
-</script>

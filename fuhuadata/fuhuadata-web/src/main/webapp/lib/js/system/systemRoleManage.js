@@ -96,9 +96,9 @@ CRM.systemRoleManage.resetPage = function (id) {
 CRM.systemRoleManage.dealRenderUserTable = function () {
     var page = CRM.systemRoleManage;
     CRM.ajaxCall({
-        url:page.ROLE_RELEVANCE_USER_LOOK_GET,
-        type: 'GET',
-        callback: page.renderUserTable
+        url      :page.ROLE_RELEVANCE_USER_LOOK_GET,
+        type     : 'GET',
+        callback : page.renderUserTable
     })
 };
 
@@ -236,37 +236,6 @@ CRM.systemRoleManage.renderBtnTableHandle = function (res) {
     // 渲染到页面
     $('#table').html(html0);
 };
-
-// 返回处理过后的用户表格数据
-// CRM.systemRoleManage.returnBtnTableData = function (data) {
-//     var arr = [];
-//     $.each(data, function (i, item) {
-//         var obj = {
-//             id           : item.cid,
-//             name         : item.cname,
-//             nodes        : []
-//         };
-//         if (item.nodes instanceof Array && item.nodes.length > 0) {
-//             $.each(item.nodes, function (j, item) {
-//                 var inObj = {
-//                     id         :item.id,
-//                     name       :item.cname,
-//                     buttonId   : '',
-//                     buttonName : ''
-//                 };
-//                 $.each(item.buttons, function (k, item) {
-//
-//                     inObj.buttonId   += item.buttonId +',';
-//                     inObj.buttonName += item.buttonName +',';
-//                 })
-//             });
-//             obj.areasId   = obj.areasId.slice(0,-1);
-//             obj.areasName = obj.areasName.slice(0,-1);
-//         }
-//         arr.push(obj);
-//     });
-//     return arr;
-// };
 
 // 渲染组织表格
 CRM.systemRoleManage.renderOrgTable = function(id){
