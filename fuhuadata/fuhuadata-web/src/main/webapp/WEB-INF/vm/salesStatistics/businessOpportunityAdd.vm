@@ -209,7 +209,7 @@
             "fullName":$('#customerNameAdd').val()
         }
         jQuery.ajax({
-                url:basePath + '/customerBaseInfo/getCustomerBaseInfoByQuery',
+            url:basePath + '/customerBaseInfo/getCustomerBaseInfoByQuery',
             contentType:"application/json",
             data:JSON.stringify(data),
             type:'POST',
@@ -218,7 +218,6 @@
                 for (var i = 0; i < ResultData.length; i++) {
                     customerList.innerHTML += '<li class="list-group-item"><a class="cNode" data-id="'+ResultData[i].customerId+'">' + ResultData[i].fullName + '</a></li>';
                 }
-                console.log(customerList);
                 $('#Modal').modal('show');
             }
         })
@@ -247,6 +246,8 @@
                     $('#linkmanName').val(ResultData.linkmanName);
                     $('#linkPhone1').val(ResultData.linkPhone1);
                     $('#lemail').val(ResultData.lemail);
+
+                    $('#Modal').modal('hide');
                 }
             })
         }else {
