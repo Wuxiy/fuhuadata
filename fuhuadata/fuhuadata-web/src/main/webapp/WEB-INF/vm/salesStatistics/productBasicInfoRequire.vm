@@ -40,11 +40,6 @@
                                         <td>
                                             <div class="input-group">
                                                 <input id="customsClearanceName" class="form-control" value="" disabled>
-                                                <div class="input-group-btn">
-                                                    <button data-toggle="modal" data-target="#treeModal" class="btn btn-xs btn-default">
-                                                        <span class="glyphicon glyphicon-search"></span>
-                                                    </button>
-                                                </div>
                                             </div>
                                         </td>
                                         <td class="col-xs-2"><label class="control-label" lang="zh">客户商品名</label></td>
@@ -274,4 +269,45 @@
 <script type="text/javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/saleprocess/productBasicInfoRequire.js"></script>
+<script type="text/javascript">
+    var customerId = '';
+    var orderId = '';
+    var productId = '';
+    var wareId = '';
 
+    $(document).ready(function () {
+        $('#tree').creatTree(basePath+'/businessProduct/initProductCatetroy');
+
+
+    })
+
+    $(document).on('click','a.cNode',function (e) {
+        e.preventDefault();
+        var a = $(e.target);
+        var tarEltext = a.text();
+        var ids = a.parent('li').attr('id');
+
+        productId = ids.split('_')[0];
+        wareId = ids.split('_')[1];
+        $('#name').val(tarEltext);
+
+        var data = {
+            'customerId':customerId,
+            'orderId':orderId,
+            'productId':productId,
+            'wareId':wareId,
+            'businessProductId':''
+        }
+        jQuery.ajax({
+            url:basePath + '/businessProduct/addFromArchives',
+            type:'POST',
+            contentType:"application/json",
+            data:JSON.stringify(data),
+            success:function (result) {
+                var ResultData = result;
+                console.log(ResultData);
+            }
+        })
+        $('#treeModal').modal('hide');
+    });
+</script>

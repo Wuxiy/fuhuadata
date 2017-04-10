@@ -108,7 +108,7 @@ public class BusinessOrderProductAction {
             int new_businessProductId = businessOrderProductService.addFromArchives(customerId,orderId,businessProductId,productId,wareId);
             map.put("businessProductId",new_businessProductId);//如果成功复制档案，则new_businessProductId>0，返回页面后需要根据此id查询页面详情内容并显示，进入修改模式
             //如果第一次购买，则不需要重新加载页面，但是需要根据所选产品查询报关产品，加载产品成分
-            if(!flag){
+            if(new_businessProductId == 0){
                 //查询报关产品
                 ProductInfo productInfo = productInfoService.getCustomsClearanceInfo(productId);
                 if(productInfo!=null){
