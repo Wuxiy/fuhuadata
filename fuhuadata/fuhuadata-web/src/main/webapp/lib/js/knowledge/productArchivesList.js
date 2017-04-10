@@ -3,189 +3,175 @@
  */
 
 CRM.productArchivesList   = window.CRM.productArchivesList || {};
-CRM.url                   = window.CRM.url || {};
-CRM.url.PRODUCT_INFO_DOWN = basePath + '/productInfo/getProductInfoById';
-CRM.url.PRODUCT_INFO_UP   = basePath + '/productInfo/doModify';
+CRM.productArchivesList.PRODUCT_INFO_LOOK_GET= '/productInfo/getProductInfoById'; // 产品信息查看
+CRM.url.PRODUCT_INFO_POST   = '/productInfo/doModify'; // 产品信息编辑
 
-CRM.productArchivesList.url = CRM.url.PRODUCT_INFO_DOWN;
-CRM.productArchivesList.data = {id: 1011001};
-CRM.productArchivesList.init = function () {
-    var page = this,
-        elView = $(CRM.el.EDIT_VIEW),
-        elHide = $(CRM.el.EDIT_HIDE),
-        elOff = $(CRM.el.OFF_CONTROL),
-        res = {
-            type: 'POST',
-            contentType: 'application/json',
-            upUrl: CRM.url.PRODUCT_INFO_UP,
-            downUrl: CRM.url.PRODUCT_INFO_DOWN,
-            upData: page.upProductInfo,
-            downData: page.data,
-            down: page.productInfoForm
+CRM.productArchivesList.editView     = $(CRM.el.EDIT_VIEW); // 编辑状态下显示的标签
+CRM.productArchivesList.editHide     = $(CRM.el.EDIT_HIDE); // 编辑状态下隐藏的标签
+CRM.productArchivesList.elOff        = $(CRM.el.OFF_CONTROL); // 编辑状态下开启的控件
+CRM.productArchivesList.mainPanel    = $('#productInfo'); // 主面板
+CRM.productArchivesList.asidePanel   = $('#roleTree'); // 侧面板
+CRM.productArchivesList.asideTree    = $('#asidePanel'); // 侧边树
+CRM.productArchivesList.formVessel   = $('#formVessel'); // 表单容器
+CRM.productArchivesList.form         = $('#form'); // 表单内容
+
+// 按钮
+CRM.productArchivesList.edit   = $('edit');
+CRM.productArchivesList.save   = $('save');
+CRM.productArchivesList.cancel = $('cancel');
+
+// 表单控件
+CRM.productArchivesList.productId            = $('#productId'); // 产品id
+CRM.productArchivesList.categoryName         = $('#categoryName'); // 品类
+CRM.productArchivesList.name                 = $('#name'); // 品名
+CRM.productArchivesList.measurement          = $('#measurement'); // 主计量单位
+CRM.productArchivesList.concentration        = $('#concentration'); // 含量
+CRM.productArchivesList.saltType             = $('[name="saltType"]'); // 盐类(checkbox)
+CRM.productArchivesList.otherSaltName        = $('#otherSaltName'); // 其他盐类
+CRM.productArchivesList.executeStandard      = $('#executeStandard'); // 执行标准
+CRM.productArchivesList.executeNumer         = $('#executeNumer'); // 执行标准号
+CRM.productArchivesList.productFeature       = $('#productFeature'); // 产品特点
+CRM.productArchivesList.productFeature       = $('#wares'); // 产品规格(table)
+CRM.productArchivesList.processingComponents = $('#processingComponents'); // 加工成份(table)
+CRM.productArchivesList.physicalProperities  = $('#physicalProperities'); // 理化指标(table)
+CRM.productArchivesList.lastmodifyUserId     = $('#lastmodifyUserId'); // 最后编辑人id
+CRM.productArchivesList.lastmodifyUserName   = $('#lastmodifyUserName'); // 最后编辑人name
+CRM.productArchivesList.modifyTime           = $('#modifyTime'); // 最后修改时间
+
+// 收集数据
+CRM.productArchivesList.collectData = function () {
+    var page = CRM.systemRoleManage,
+        obj = {
+            productId            : page.productId.val(),
+            concentration        : page.concentration.val(),
+            saltType             : page.saltType.val(),
+            otherSaltName        : page.otherSaltName.val(),
+            executeStandard      : page.executeStandard.val(),
+            executeNumer         : page.executeNumer.val(),
+            productFeature       : page.productFeature.val(),
+            processingComponents : page.getTableData('#processingComponents'), // 加工成分table特殊处理
+            physicalProperities  : page.getTableData('#physicalProperities'),// 理化指标table特殊处理
+            lastmodifyUserId     : page.lastmodifyUserId.val(),
+            modifyTime           : page.modifyTime.val()
         };
+    return obj;
+};
 
-    CRM.showOrHide(elView, elHide, false);
-    CRM.onOrOff(elOff, false);
-    CRM.ajaxCall('POST', page.url, page.data, null, page.productInfoForm);
+// 获得表格数据
+CRM.productArchivesList.getTableData = function (id) {
+    var page = this;
+    if (id === '#processingComponents') {
 
-    var productInfo = new CRM.module.Panel('#productInfo', res);
+        page.getProcessingComponentsDataDataHandler();
+    }else if (id === '#physicalProperities') {
 
-    productInfo.panel.on('click.panel.edit',productInfo.edit,function (e) {
-        productInfo.handleEdit(e);
+        page.getPhysicalProperitiesDataHandler();
+    }
+};
+
+// 渲染页面
+CRM.productArchivesList.renderPage = function (id) {
+    var page =CRM.productArchivesList;
+    CRM.ajaxCall({
+        url      : page.PRODUCT_INFO_LOOK_GET,
+        data     : {id:id},
+        type     : 'POST',
+        callback : page.renderPageHandler
     })
 };
 
-//获取数据
-CRM.productArchivesList.productInfoForm = function (res) {
-    var data = res,
-        productInfo = data.productInfo,
-        wares = data.wares,
-        allProcessingComponents = data.allProcessingComponents,
-        processingComponents = data.processingComponents,
-        index = data.index,
-        tr = '',
-        pcisArr = [];
-
-    //表单处理
-    $('#productId').val(productInfo.productId);
-    $('#categoryName').val(productInfo.categoryName);
-    $('#name').val(productInfo.name);
-    $('#measurement').val(productInfo.measurement);
-    $('#concentration').val(productInfo.concentration);
-    $('[name="saltType"]').val([productInfo.saltType]);
-    $('#otherSaltName').val(productInfo.otherSaltName);
-    $('#executeStandard').val(productInfo.executeStandard);
-    $('#executeNumer').val(productInfo.executeNumer);
-    $('#executeRemarks').val(productInfo.executeRemarks);
-    $('#productFeature').val(productInfo.productFeature);
-    $('#lastmodifyUserName').val(productInfo.lastmodifyUserName);
-    $('#modifyTime').val(productInfo.modifyTime);
-
-    //规格型号
-    jQuery.each(wares, function (n, item) {
-        tr += '<tr><td>' + item.specification + '</td>';
-        tr += '<td>' + item.model + '</td></tr>';
-    });
-    $('#wares').append(tr);
-
-    //加工成分
-    if (allProcessingComponents instanceof Array && processingComponents instanceof Array) {
-        tr = '';
-        tr += '<tr><th class="text-center">是否需要</th>';
-        tr += '<th class="text-center">原料</th>';
-        tr += '<th class="text-center">单耗（kg/KL）</th>';
-        tr += '<th class="text-center">备注</th></tr>';
-        jQuery.each(allProcessingComponents, function (n, item) {
-            tr += '<tr><td><input name="pcis" type="checkbox" disabled value="' + item.componentId + '"></td>';
-            tr += '<td>' + item.componentName + '</td>';
-            tr += '<td><input class="form-control" type="text" disabled value="' + item.unitCost + '"></td>';
-            tr += '<td><input class="form-control" type="text" disabled value="' + item.remarks + '"></td></tr>';
-        });
-        $('#allProcessingComponents').html('').append(tr);
-        jQuery.each(processingComponents, function (n, item) {
-            pcisArr.push(item.componentId);
-        });
-        $('[name="pcis"]').val(pcisArr);
-    } else {
-        tr = '';
-        tr = '<tr><td><textarea class="form-control">' + allProcessingComponents + '</textarea></td></tr>';
-        $('#allProcessingComponents').html('').append(tr);
-    }
-
-    //理化指标
-    if (index instanceof Array) {
-        tr = '';
-        tr += '<tr><th class="text-center">指标</th>';
-        tr += '<th class="text-center">值</th>';
-        tr += '<th class="text-center">备注</th></tr>';
-        jQuery.each(index, function (n, item) {
-//                console.log(item);
-            tr += '<tr><td><input class="form-control" type="text" disabled value="' + item.index + '"></td>';
-            tr += '<td><input class="form-control" type="text" disabled value="' + item.value + '"></td>';
-            tr += '<td><input class="form-control" type="text" disabled value="' + item.remarks + '">';
-            tr += '<button type="button" class="close hidden" data-form-btn="del" data-form-target="tr"' +
-                ' style="position: absolute;top:6px;right:-15px;">×</button></td></tr>';
-        });
-        $('#index').append(tr);
-    } else {
-        tr = '';
-        tr = '<tr><td><textarea class="form-control">' + index + '</textarea></td></tr>';
-        $('#index').html('').append(tr);
-    }
-};
-
-//提交数据
-CRM.productArchivesList.upProductInfo = function () {
-//            e.stopPropagation();
-    var upData = {
-        'productInfo': {
-            'productId': $('#productId').val(),
-            'categoryName': $('#categoryName').val(),
-            'name': $('#name').val(),
-            'measurement': $('#measurement').val(),
-            'concentration': $('#concentration').val(),
-            'executeStandard': $('#executeStandard').val(),
-            'executeNumer': $('#executeNumer').val(),
-            'executeRemarks': $('#executeRemarks').val(),
-            'productFeature': $('#productFeature').val(),
-            'modifyTime': CRM.getTime(),
-            'saltType': $('[name="saltType"]:checked').val(),
-            'otherSaltName': $('#otherSaltName').val(),
-            'physicalProperities': getPPTable(),
+// 渲染页面处理程序
+CRM.productArchivesList.renderPageHandler = function (res) {
+    var page  = CRM.productArchivesList,
+        data  = {
+            data: res
         },
-        'productComponents': getPCTable()
-    };
+        html0 = bt('form',data); // 返回渲染过后的模板
 
-//            console.log(upData);
-    function getPPTable() {
-        var p = content.find('[name="physicalProperities"]').find('tr');
-        console.log(p.find('textarea').length);
-        if (p.find('textarea').length != 1) {
-            var arr = [];
-            p.each(function () {
-                var obj = {};
-                $(this).find('td').each(function (n, td) {
-                    if (n == 0) {
-                        obj.index = $(td).children('input').val();
-                    } else if (n == 1) {
-                        obj.value = $(td).children('input').val();
-                    } else {
-                        obj.remarks = $(td).children('input').val();
-                    }
-                });
-                arr.push(obj);
-            });
-            return JSON.stringify(arr);
-        } else {
-            return p.find('textarea').val();
-        }
-    }
+    // 将模板插入页面
+    page.formVessel.html(html0);
+};
 
-    function getPCTable() {
-        var p = content.find('[name="processingComponents"]').find('tr');
-        if (p.find('textarea').length != 1) {
-            var arr = [];
-            p.each(function () {
-                var obj = {};
-                $(this).find('td').each(function (n, td) {
-                    if (n == 0) {
-                        obj.componentName = $(td).children('input').val();
-                    } else if (n == 1) {
-                        obj.consumption = $(td).children('input').val();
-                    } else {
-                        obj.remarks = $(td).children('input').val();
-                    }
-                });
-                arr.push(obj);
-            });
-            return arr;
-        } else {
-            return p.find('textarea').val();
-        }
-    }
+// 获得理化指标处理程序
+CRM.productArchivesList.getPhysicalProperitiesDataHandler = function () {
+
 
 };
 
-CRM.productArchivesList.init();
+// 获得加工成分处理程序
+CRM.productArchivesList.getProcessingComponentsDataDataHandler = function () {
 
-$('#tree').creatTree(basePath + '/productCategory/CategoryTree');
+
+};
+
+// 侧栏角色树的点击事件
+CRM.systemRoleManage.asideTreeOnClick = function(event, modLeftId, treeNode) {
+    var page = CRM.productArchivesList;
+
+    // 渲染表单
+    page.renderPage(treeNode.id);
+
+    // 渲染第用户表格
+    page.table.html('');
+    CRM.addOnlyClass(t,'li',page.tab,'active');
+    page.renderUserTable(treeNode.id);
+};
+
+// 渲染产品树到侧边栏
+CRM.productArchivesList.renderProTreeToAside = function () {
+    var page    = CRM.productArchivesList,
+        setting = {
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            edit: {
+                enable: false
+            },
+            callback : {
+                onClick : page.asideTreeOnClick
+            }
+        },
+        id       = page.asideTree.attr('id'),
+        treeObj  = null;
+
+    page.roleTreeData = CRM.toArr(data); // 将角色树的数据保存到page对象属性
+    $.fn.zTree.init(page.asideTree, setting, page.roleTreeData);
+    treeObj = $.fn.zTree.getZTreeObj(id);
+    treeObj.expandAll(true); // 默认展开
+};
+
+
+// 初始化页面
+CRM.productArchivesList.init = function () {
+    var page = this;
+
+    // 禁用和隐藏的元素
+    CRM.showOrHide(page.editView, page.editHide, false);
+    CRM.onOrOff(page.elOff, false);
+
+    // 新建Panel对象实例，绑定编辑、保存、取消事件
+    var roleManage = new CRM.module.Panel('#productInfo');
+    roleManage.startEdit();
+    roleManage.startSave();
+    roleManage.startCancel();
+
+    // 渲染页面初始数据
+    page.renderPage(1011001);
+
+    // 渲染侧边栏的产品树
+    CRM.ajaxCall({
+        url      : CRM.url.PRODUCT_TREE_GET,
+        type     : 'GET',
+        callback : page.renderProTreeToAside
+    });
+
+};
+
+$(function () {
+    var page = CRM.productArchivesList;
+    page.init();
+
+
+});

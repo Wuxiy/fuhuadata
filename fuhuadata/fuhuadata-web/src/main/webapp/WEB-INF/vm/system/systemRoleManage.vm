@@ -246,7 +246,7 @@
                                 <tbody id="col<%=i%>btn" class="collapse">
                                 <td><%=data[0].nodes[i].nodes[j].cid%></td>
                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=data[0].nodes[i].nodes[j].cname%></td>
-                                <td><label><input type="checkbox"></label></td>
+                                <td>#*<label class="checkbox-inline"> <input type="checkbox">新增</label>*#</td>
                                 <td></td>
                                 <td></td>
                                 </tbody>

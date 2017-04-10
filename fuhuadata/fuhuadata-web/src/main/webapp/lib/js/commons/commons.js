@@ -11,10 +11,11 @@ CRM.url    = window.CRM.url || {};
 // 百度渲染引擎全局对象
 var bt = baidu.template;
 
-CRM.url.AREA_TREE_GET = '/customerBaseInfo/initAreaCategoryTree'; // 地区树
-CRM.url.ROLE_TREE_GET = '/sys/role/ajax/load?async=false'; // 角色树
-CRM.url.ORG_TREE_GET  = '/customerBaseInfoOrder/initSaleOrganizationTree'; // 组织树
-CRM.url.MENU_TREE_GET = '/sys/menu/ajax/load?async=false'; // 菜单树
+CRM.url.AREA_TREE_GET    = '/customerBaseInfo/initAreaCategoryTree'; // 地区树
+CRM.url.ROLE_TREE_GET    = '/sys/role/ajax/load?async=false'; // 角色树
+CRM.url.ORG_TREE_GET     = '/customerBaseInfoOrder/initSaleOrganizationTree'; // 组织树
+CRM.url.MENU_TREE_GET    = '/sys/menu/ajax/load?async=false'; // 菜单树
+CRM.url.PRODUCT_TREE_GET = '/productCategory/CategoryTree'; // 产品树
 
 //功能性控件
 CRM.el = {
@@ -143,10 +144,6 @@ CRM.moveEl = function (el,tar) {
     el.appendTo(tar);
 };
 
-<<<<<<< HEAD
-//面板组件，有编辑、保存、取消
-CRM.module.Panel = function (el) {
-=======
 //面板组件，有编辑、保存、取消功能
 CRM.module.Panel = function (el,res) {
 
@@ -161,7 +158,6 @@ CRM.module.Panel = function (el,res) {
         up          : function(){return false;},
         down        : function(){return false;}
     },res||{});
->>>>>>> 6591119033eb3da09386a18be16b7ee3c9a7ac15
 
     // this.up          = up;
     // this.down        = down;
@@ -188,18 +184,6 @@ CRM.module.Panel.prototype.handleEdit = function (e) {
     CRM.onOrOff(elOff,isEditState);
     CRM.showOrHide(elShow,elHide,isEditState);
 
-<<<<<<< HEAD
-    // if (typeof res.url === String && res.url.length > 0) {
-    //
-    //     CRM.ajaxCall(res);
-    // }
-=======
-    if (typeof res.downUrl === String && res.downUrl.length > 0) {
-
-        CRM.ajaxCall(res.type,res.downUrl,res.downData,res.contentType,res.down,res.async);
-    }
->>>>>>> 6591119033eb3da09386a18be16b7ee3c9a7ac15
-
 };
 
 //保存处理程序
@@ -215,18 +199,6 @@ CRM.module.Panel.prototype.handleSave = function (e) {
     CRM.onOrOff(elOn,isEditState);
     CRM.showOrHide(elShow,elHide,isEditState);
 
-
-<<<<<<< HEAD
-    // if (typeof res.url === String && res.url.length > 0) {
-    //
-    //     CRM.ajaxCall(res);
-    // }
-=======
-    if (typeof res.upUrl === String && res.upUrl.length > 0) {
-
-        CRM.ajaxCall(res.type,res.upUrl,res.upData,res.contentType,res.up,res.async);
-    }
->>>>>>> 6591119033eb3da09386a18be16b7ee3c9a7ac15
 };
 
 //取消处理程序
@@ -236,36 +208,16 @@ CRM.module.Panel.prototype.handleCancel = function (e) {
         elShow      = panel.find(this.editView),
         elHide      = panel.find(this.editHide),
         elOn        = panel.find(this.editOn);
-        // res         = this.down;
 
     isEditState = false;
     CRM.onOrOff(elOn,isEditState);
     CRM.showOrHide(elShow,elHide,isEditState);
 
-<<<<<<< HEAD
-    // if (typeof res.url === String && res.url.length > 0) {
-    //
-    //     CRM.ajaxCall(res);
-    // }
-=======
-    if (typeof res.downUrl === String && res.downUrl.length > 0) {
-
-        CRM.ajaxCall(res.type,res.downUrl,res.downData,res.contentType,res.down,res.async);
-    }
->>>>>>> 6591119033eb3da09386a18be16b7ee3c9a7ac15
-
 };
 
 //编辑
 CRM.module.Panel.prototype.startEdit = function () {
-<<<<<<< HEAD
-    // console.log('执行了startEdit');
-    var panel = this;
-    this.panel.on('click.panel.edit','button' + this.edit,function (e) {
-        // console.log('有毛病');
-        panel.handleEdit(e);
-    })
-=======
+
     console.log('执行了startEdit');
     var Panel = this;
     this.panel.on('click.panel.edit','button' + this.edit,function (e) {
@@ -290,216 +242,3 @@ CRM.module.Panel.prototype.startCancel = function () {
     })
 };
 
-//多选框
-CRM.module.Mulbox = function (el) {
-    this.Mulbox = $(el);
-    this.right       = '[data-mulbox="left"]';
-    this.left        = '[data-mulbox="right"]';
-    this.leftBut     = '[data-btn="moveLeft"]';
-    this.rightBut    = '[data-but="moveRight"]';
-    this.leftAllBut  = '[data-but="moveAllLeft"]';
-    this.rightAllBut = '[data-but="moveAllRight"]';
-};
-
-CRM.module.Mulbox.prototype.move = function (el) {
-    var leftBox  = $(this.left,this.Mulbox),
-        rightBox = $(this.right,this.Mulbox);
-
-    if (el.data('but')==='moveLeft') {
-
-        leftBox.find('.active').appendTo(rightBox);
-    }
->>>>>>> 6591119033eb3da09386a18be16b7ee3c9a7ac15
-};
-
-//保存
-CRM.module.Panel.prototype.startSave = function () {
-    var panel = this;
-    this.panel.on('click.panel.save','button'+ this.save,function (e) {
-        panel.handleSave(e);
-    });
-};
-
-//取消
-CRM.module.Panel.prototype.startCancel = function () {
-    var panel = this;
-    this.panel.on('click.panel.cancel','button'+ this.cancel,function (e) {
-        panel.handleCancel(e);
-    })
-};
-
-//多选框
-// CRM.module.Mulbox = function (el,data) {
-//     this.Mulbox      = $(el);
-//     this.data        = data;
-//     this.otherData   = [];
-//     this.right       = '[data-mulbox="left"]';
-//     this.left        = '[data-mulbox="right"]';
-//     this.leftBut     = '[data-btn="moveLeft"]';
-//     this.rightBut    = '[data-but="moveRight"]';
-//     this.leftAllBut  = '[data-but="moveAllLeft"]';
-//     this.rightAllBut = '[data-but="moveAllRight"]';
-// };
-//
-// CRM.module.Mulbox.prototype.moveArea = function (e) {
-//     var btn       = $(e.target),
-//         tranData  = null, // 在两个树之间传递数据
-//         leftBox   = $(this.left,this.Mulbox),
-//         rightBox  = $(this.right,this.Mulbox),
-//         leftData  = this.data,
-//         rightData = this.otherData,
-//         el        = null,
-//         cid       = 0;
-//
-//     if (btn.data('but')==='moveLeft') {
-//
-//         el = rightBox.find('.active');
-//         cid = el.data('id');
-//
-//         //根节点
-//         if (cid===0) {
-//
-//             $.each(leftData,function (n,item) {
-//
-//                 if (item.cid==cid) {
-//
-//                     tranData =  leftData.splice(n);
-//                 }
-//             });
-//
-//             rightData.push(tranData.split(0));
-//         }
-//
-//         //二级节点
-//         else if (cid.toString().length===3) {
-//
-//             $.each(leftData[0].nodes,function (n,item) {
-//
-//                 if (item.cid==cid) {
-//
-//                     tranData =  leftData[0].nodes.splice(n);
-//                 }
-//             });
-//
-//             rightData[0].nodes.push(tranData.split(0));
-//
-//         }
-//
-//         //三级节点
-//         else if (cid.toString().length===20) {
-//             var pid;
-//             $.each(leftData[0].nodes,function (n,itemArea) {
-//
-//                 $.each(itemArea,function (i,itemCountry) {
-//
-//                     if (itemCountry.cid==cid) {
-//
-//                         tranData = leftData[0].nodes[n].splice(i);
-//                         pid      = leftData[0].nodes[n].splice(i).pid;
-//                     }
-//                 })
-//             });
-//
-//             $.each(rightData[0].nodes,function (n,itemArea) {
-//
-//                 if (itemArea.cid = pid) {
-//
-//                     tranData[0].nodes[n].nodes.push(tranData.split(0));
-//                 }
-//             })
-//         }
-//
-//
-//         // leftBox.find('.active').appendTo(rightBox);
-//     }
-// };
-
-
-// CRM.module.Tree = function (el) {
-//     this.tree   = $(el);
-//     this.parent = $('<ul class="tree-root"></ul>');
-// };
-//
-// //创建树
-// CRM.module.Tree.prototype.createTree = function (data,parent) {
-//     var Tree = this;
-//     if (data instanceof Array && data.length > 0) {
-//         var html = '';
-//         $.each(data,function(n,item){
-//             var li = $('<li data-id="'+item.cid+'"></li>');//还未搞明白
-//             html = '';
-//
-//             if (item.nodes instanceof Array && item.nodes.length > 0) {
-//
-//                 html += '<span class="branch-node" data-toggle="collapse" data-target="#t'+item.cid+'"></span>';
-//                 html += '<a><span class="leaf"></span>'+item.cname+'</a>';
-//                 html += '<ul id="t'+item.cid+'" class="tree-branch collapse in"></ul>';
-//                 $(li).append(html).appendTo(parent);
-//
-//                 Tree.createTree(item.nodes,$(li).children("ul.tree-branch"));
-//             }else{
-//
-//                 html += '<span class="branch"></span><a class="cNode"><span class="leaf"></span>'+item.cname+'</a>';
-//                 $(li).append(html).appendTo(parent);
-//             }
-//         })
-//     }
-//     Tree.tree.append(Tree.parent);
-// };
-//
-// CRM.module.Tree.prototype.createCheckboxTree = function (data,parent) {
-//     var Tree = this;
-//     if (data instanceof Array && data.length > 0) {
-//         var html = '';
-//         $.each(data,function(n,item){
-//             var li = $('<li data-id=""></li>');//还未搞明白
-//             html = '';
-//
-//             if (item.nodes instanceof Array && item.nodes.length > 0) {
-//
-//                 html += '<span class="branch-node" data-toggle="collapse" data-target="#t'+item.cid+'"></span>';
-//                 html += '<a><span class="leaf"></span>'+item.cname+'</a>';
-//                 html += '<ul id="t'+item.cid+'" class="tree-branch collapse in"></ul>';
-//                 $(li).append(html).appendTo(parent);
-//
-//                 Tree.createTree(item.nodes,$(li).children("ul.tree-branch"));
-//             }else{
-//
-//                 html += '<span class="branch"></span><a class="cNode"><span class="leaf"></span><input name="'+item.pid+'" type="checkbox" value="'+item.cid+'">'+item.cname+'</a>';
-//                 $(li).append(html).appendTo(parent);
-//             }
-//         })
-//     }
-//     Tree.tree.html('').append(Tree.parent);
-// };
-//
-// CRM.module.Tree.prototype.handleEvent = function (e) {
-//     var el     = $(e.target).parent('li'),
-//         parent = this.tree;
-//
-//     CRM.addOnlyClass(el,'li',parent,'active');
-// };
-//
-// CRM.module.Tree.prototype.startClick = function () {
-//     var Tree = this;
-//     this.tree.on('click.tree.addClass','a',function (e) {
-//        Tree.handleEvent(e);
-//     })
-// };
-//
-// CRM.SaveBtn = function (id) {
-//   this.target = $('#'+id).data('target');
-// };
-//
-// CRM.SaveBtn.prototype.save = function (obj) { // obj.data;obj.callback
-//     var btn = this;
-//     this.on('click.save',obj,function (e) {
-//       btn.handle(e.data);
-//   })
-// };
-//
-// CRM.Form = function (id) {
-//     this.status = $('#'+id).data('status'); //edit or noEdit
-//     this.data = null;
-// };
-// CRM.
