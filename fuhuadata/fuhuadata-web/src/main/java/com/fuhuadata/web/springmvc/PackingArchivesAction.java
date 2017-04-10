@@ -298,8 +298,4 @@ public class PackingArchivesAction {
         }
         return null;
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 6591119033eb3da09386a18be16b7ee3c9a7ac15
 }

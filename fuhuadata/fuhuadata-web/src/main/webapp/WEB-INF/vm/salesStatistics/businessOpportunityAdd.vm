@@ -205,26 +205,17 @@
 
     $(document).on('click','#search',function () {
         var customerList = document.getElementById('customerList');
-        var data = {
-            "fullName":"福华"
-        }
         jQuery.ajax({
             url:basePath + '/customerBaseInfo/getCustomerBaseInfoByQuery',
             contentType:"application/json",
-            data:JSON.stringify(data),
+            data:JSON.stringify($('#customerNameAdd').val()),
             type:'POST',
-            data:$('#customerNameAdd').val(),
             success:function (result) {
-                var ResultData = result.data;
+                var ResultData = eval(result.data);
                 console.log(ResultData);
-                console.log(ResultData[0].fullName);
                 for(var i=0;i<ResultData.length;i++){
-<<<<<<< HEAD
-                    customerList.innerHTML += '<li><a class="node">'+ResultData[i].customerName+'</a></li>';
-=======
                     console.log(ResultData[i].fullName);
                     customerList.innerHTML += '<li><a class="node">'+ResultData[i].fullName+'</a></li>';
->>>>>>> b11f90464a017bd2084f4c02690339eb7fa2ec83
                 }
                 console.log(customerList);
                 $('#Modal').modal('show');
@@ -235,19 +226,16 @@
         e.preventDefault();
         console.log(e.target);
         var tarEltext = $(e.target).text();
-<<<<<<< HEAD
         $('#customerNameAdd').val(tarEltext);
 
     });
 
     $(document).on('click','#add',function () {
-=======
         console.log(tarEltext);
->>>>>>> b11f90464a017bd2084f4c02690339eb7fa2ec83
         jQuery.ajax({
             url:basePath + '',
             type:'POST',
-            data:$('#customerNameAdd').val(),
+            data:JSON.stringify($('#customerNameAdd').val()),
             contentType:"application/json",
             success:function (result) {
                 var ResultData = result;
