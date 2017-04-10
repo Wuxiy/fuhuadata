@@ -345,4 +345,8 @@
                 AND bop.`id` = bpr.`business_product_id`
                 AND bop.`id` in ($businessProductIds$)
     </delete>
+
+    <select id="getPriceType" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+        select price_type from business_order_product where id=#businessProductId#
+    </select>
 </sqlMap>

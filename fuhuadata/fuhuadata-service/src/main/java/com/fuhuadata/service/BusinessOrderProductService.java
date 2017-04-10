@@ -4,6 +4,7 @@ import com.fuhuadata.domain.BusinessOrderProduct;
 import com.fuhuadata.domain.BusinessOrderProductComponent;
 import com.fuhuadata.domain.query.QueryBusinessOrderProduct;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -27,7 +28,7 @@ public interface BusinessOrderProductService {
      * @param wareId
      * @return
      */
-    boolean addFromArchives(Integer customerId,String orderId,Integer businessProductId,Integer productId,Integer wareId);
+    int addFromArchives(Integer customerId,String orderId,Integer businessProductId,Integer productId,Integer wareId);
 
     /**
      * /**
@@ -84,4 +85,11 @@ public interface BusinessOrderProductService {
      * @return
      */
     BusinessOrderProduct getPackageRequireById(int id);
+
+    /**
+     * 根据订单产品id计算产品单价
+     * @param businessProductId
+     * @return
+     */
+    BigDecimal getPriceForBusinessProduct(Integer businessProductId);
 }

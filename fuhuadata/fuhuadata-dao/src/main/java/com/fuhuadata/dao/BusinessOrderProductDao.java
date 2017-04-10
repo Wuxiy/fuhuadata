@@ -83,5 +83,10 @@ public interface BusinessOrderProductDao {
      */
     BusinessOrderProduct getPackageRequireById(int id);
 
-
+    /**
+     * 获取订单产品的几个计算方式
+     * @param businessProduct
+     * @return
+     */
+    int getPriceType(Integer businessProduct);
 }

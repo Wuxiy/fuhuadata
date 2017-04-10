@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,7 +59,7 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
     }
 
     @Transactional
-    public boolean addFromArchives(Integer customerId,String orderId,Integer businessProductId, Integer productId, Integer wareId) {
+    public int addFromArchives(Integer customerId,String orderId,Integer businessProductId, Integer productId, Integer wareId) {
         try {
             //如果是修改状态，则删除当前数据，然后再复制档案数据
             if(businessProductId!=null && businessProductId>0){
@@ -71,7 +72,7 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
             queryCustomerProductArchives.setWareId(wareId);
             List<CustomerProductArchives> list = customerProductArchivesDao.getCustomerProductInfosByQuery(queryCustomerProductArchives);
             if(list == null || list.size()==0){
-                return false;
+                return 0;
             }
             int business_product_archives_id = list.get(0).getId();
             //如果买过，则从档案复制信息到订单产品
@@ -92,11 +93,11 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
             //3.复制包装要求
             BusinessProductRequire businessProductRequire = new BusinessProductRequire();
             businessProductRequireDao.insertFromArchives(param_map);
-            return true;
+            return new_businessProductId;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return false;
+        return 0;
     }
 
     public boolean deleteAllInfoByIds(String businessProductIds) {
@@ -145,5 +146,33 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
     @Override
     public List<BusinessOrderProduct> getListByPage(QueryBusinessOrderProduct queryBusinessOrderProduct) {
         return businessOrderProductDao.getListByPage(queryBusinessOrderProduct);
+    }
+
+    @Override
+    public BigDecimal getPriceForBusinessProduct(Integer businessProductId) {
+        //查询订单产品的价格计算方式
+        int priceType = businessOrderProductDao.getPriceType(businessProductId);
+        BigDecimal decimal = null;
+        switch (priceType){
+            case -1:
+                decimal = new BigDecimal(-1);
+                break;
+            case 0:
+                //do sth
+                break;
+            case 1:
+                //do sth
+                break;
+            case 2:
+                //do sth
+                break;
+            case 3:
+                //do sth
+                break;
+            case 4:
+                //do sth
+                break;
+        }
+        return null;
     }
 }

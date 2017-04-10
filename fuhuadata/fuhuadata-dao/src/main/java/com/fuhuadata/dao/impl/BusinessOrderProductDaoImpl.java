@@ -28,6 +28,7 @@ public class BusinessOrderProductDaoImpl implements BusinessOrderProductDao {
     private static final String GET_BAISC_BY_ID = "BUSINESSORDERPRODUCT.getBasicById";
     private static final String GET_DOCUMENTARY_BY_ID = "BUSINESSORDERPRODUCT.getDocumentaryById";
     private static final String GET_PACKAGE_REQUIRE_BY_ID = "BUSINESSORDERPRODUCT.getPackageRequireById";
+    private static final String GET_PRICE_TYPE = "BUSINESSORDERPRODUCT.getPriceType";
     public int insertBaseInfo(BusinessOrderProduct businessOrderProduct) throws Exception{
         return (Integer)sqlMapClient.insert(INSERT_STMT,businessOrderProduct);
     }
@@ -100,5 +101,15 @@ public class BusinessOrderProductDaoImpl implements BusinessOrderProductDao {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public int getPriceType(Integer businessProduct) {
+        try {
+            return (Integer)sqlMapClient.queryForObject(GET_PRICE_TYPE,businessProduct);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
 }
