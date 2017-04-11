@@ -56,10 +56,10 @@
         AND pc.product_id = #productId#
     </select>
 
-  <select id="getListByBusinessProductId" resultMap="BusinessOrderProductComponentResultMap" parameterClass="java.lang.Integer">
+  <select id="getListByBusinessProductId" resultClass="BusinessOrderProductComponent" parameterClass="java.lang.Integer">
         SELECT
-        cc.`component_id`,
-        cc.`component_name`,
+        cc.`component_id` as componentId,
+        cc.`component_name` as componentName,
         pc.`consumption`,
         cc.`unit_cost` as price,
         pc.cost
@@ -70,11 +70,11 @@
         AND pc.business_product_id = #businessProductId#
     </select>
 
-    <select id="getListByProductId" resultMap="BusinessOrderProductComponentResultMap" parameterClass="java.lang.Integer">
+    <select id="getListByProductId" resultClass="BusinessOrderProductComponent" parameterClass="java.lang.Integer">
         SELECT
-        cc.`component_id`,
-        cc.`component_name`,
-        pc.`consumption`,
+        cc.`component_id` as componentId,
+        cc.`component_name` as componentName,
+        pc.`consumption` ,
         cc.`unit_cost` as price,
         (pc.`consumption` * cc.`unit_cost`) as cost
         FROM

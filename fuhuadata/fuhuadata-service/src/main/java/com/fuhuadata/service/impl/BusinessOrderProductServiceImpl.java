@@ -59,7 +59,7 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
     }
 
     @Transactional
-    public int addFromArchives(Integer customerId,String orderId,Integer businessProductId, Integer productId, Integer wareId) {
+    public int addFromArchives(String customerId,String orderId,Integer businessProductId, Integer productId, Integer wareId) {
         try {
             //如果是修改状态，则删除当前数据，然后再复制档案数据
             if(businessProductId!=null && businessProductId>0){
@@ -67,7 +67,7 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
             }
             //检查该用户是否买过当前规格型号的产品
             QueryCustomerProductArchives queryCustomerProductArchives = new QueryCustomerProductArchives();
-            queryCustomerProductArchives.setCustomerId(customerId+"");
+            queryCustomerProductArchives.setCustomerId(customerId);
             queryCustomerProductArchives.setProductId(productId);
             queryCustomerProductArchives.setWareId(wareId);
             List<CustomerProductArchives> list = customerProductArchivesDao.getCustomerProductInfosByQuery(queryCustomerProductArchives);

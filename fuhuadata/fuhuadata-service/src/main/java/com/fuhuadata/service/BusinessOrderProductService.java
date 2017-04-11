@@ -28,7 +28,7 @@ public interface BusinessOrderProductService {
      * @param wareId
      * @return
      */
-    int addFromArchives(Integer customerId,String orderId,Integer businessProductId,Integer productId,Integer wareId);
+    int addFromArchives(String customerId,String orderId,Integer businessProductId,Integer productId,Integer wareId);
 
     /**
      * /**
