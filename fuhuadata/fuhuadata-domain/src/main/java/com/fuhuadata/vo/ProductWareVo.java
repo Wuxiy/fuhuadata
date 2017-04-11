@@ -1,10 +1,12 @@
 package com.fuhuadata.vo;
 
+import java.io.Serializable;
+
 /**
  * 添加订单产品时根据产品及其规格查询产品基本信息返回实体
  * Created by hexingfu on 2017/4/11.
  */
-public class ProductWareVo {
+public class ProductWareVo implements Serializable{
 
     private Integer productId;
     /**产品规格id**/
