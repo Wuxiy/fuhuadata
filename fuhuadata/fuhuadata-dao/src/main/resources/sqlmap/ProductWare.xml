@@ -3,7 +3,7 @@
         "http://www.ibatis.com/dtd/sql-map-2.dtd">
 <sqlMap namespace="PRODUCTWARE">
     <typeAlias alias="ProductWare" type="com.fuhuadata.domain.ProductWare"/>
-
+    <typeAlias alias="ProductWareVo" type="com.fuhuadata.vo.ProductWareVo"/>
     <resultMap id="PRODUCTWARE-MAP" class="ProductWare" >
         <result column="ware_id" property="wareId" jdbcType="INT" javaType="java.lang.Integer" />
         <result column="product_info_id" property="productInfoId" jdbcType="INT" javaType="java.lang.Integer" />
@@ -75,6 +75,22 @@
         <![CDATA[
 			SELECT COUNT(ware_id) FROM product_ware	WHERE product_info_id=#id#
 		]]>
+    </select>
+
+    <select id="getProductWareVo" resultClass="ProductWareVo" parameterClass="ProductWareVo">
+        SELECT
+            p.product_id productId,
+            w.`ware_id` wareId,
+            p.customs_clearance_id customsClearanceId,
+            p.customs_clearance_name customsClearanceName,
+            w.specification,
+            w.`model`
+        FROM
+            product_ware w,
+            product_info p
+        WHERE w.`product_info_id` = p.product_id
+        and p.product_id = #productId#
+        and w.ware_id = #wareId#
     </select>
 
 </sqlMap>

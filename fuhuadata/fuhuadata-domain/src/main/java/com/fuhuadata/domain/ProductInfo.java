@@ -92,6 +92,7 @@ public class ProductInfo{
 	/**报关产品名称**/
 	private String customsClearanceName;
 
+
 	public String getCustomsClearanceId() {
 		return customsClearanceId;
 	}

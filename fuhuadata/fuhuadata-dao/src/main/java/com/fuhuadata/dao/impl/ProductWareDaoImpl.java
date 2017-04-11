@@ -2,6 +2,7 @@ package com.fuhuadata.dao.impl;
 
 import com.fuhuadata.dao.ProductWareDao;
 import com.fuhuadata.domain.ProductWare;
+import com.fuhuadata.vo.ProductWareVo;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class ProductWareDaoImpl extends SqlMapClientTemplate implements ProductW
     private static  final String GET_BY_ID = "PRODUCTWARE.GET-BY-ID";
     private static  final String GET_BY_PID = "PRODUCTWARE.GET-BY-PID";
     private static final String COUNT="PRODUCTWARE.COUNT";
+    private static final String GET_PRODUCT_WARE_VO = "PRODUCTWARE.getProductWareVo";
 
 
     @Override
@@ -48,5 +50,10 @@ public class ProductWareDaoImpl extends SqlMapClientTemplate implements ProductW
     @Override
     public int countByPId(int id) {
         return ((Integer)this.queryForObject(COUNT,id)).intValue();
+    }
+
+    @Override
+    public ProductWareVo getProductWareVo(ProductWareVo productWareVo) {
+        return (ProductWareVo)this.queryForObject(GET_PRODUCT_WARE_VO,productWareVo);
     }
 }

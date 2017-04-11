@@ -1,6 +1,7 @@
 package com.fuhuadata.dao;
 
 import com.fuhuadata.domain.ProductWare;
+import com.fuhuadata.vo.ProductWareVo;
 
 import java.util.List;
 
@@ -31,5 +32,12 @@ public interface ProductWareDao {
      * @return
      */
     public int countByPId(int id);
+
+    /**
+     * 查询添加订单产品时需要的产品基本信息
+     * @param productWareVo
+     * @return
+     */
+    public ProductWareVo getProductWareVo(ProductWareVo productWareVo);
 
 }

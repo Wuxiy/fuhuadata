@@ -6,6 +6,7 @@ import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.*;
 import com.fuhuadata.vo.CategoryTree;
 import com.fuhuadata.vo.PackingArchivesVO;
+import com.fuhuadata.vo.ProductWareVo;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.log4j.Logger;
@@ -43,6 +44,8 @@ public class BusinessOrderProductAction {
     private BusinessProductRequireService businessProductRequireService;
     @Autowired
     private PackingArchivesService packingArchivesService;
+    @Autowired
+    private ProductWareService productWareService;
 
     /**
      * 进入添加订单产品基本信息页面
@@ -111,11 +114,13 @@ public class BusinessOrderProductAction {
             //如果第一次购买，则不需要重新加载页面，但是需要根据所选产品查询报关产品，加载产品成分
             if(new_businessProductId == 0){
                 //查询报关产品
-                ProductInfo productInfo = productInfoService.getCustomsClearanceInfo(productId);
+                /*ProductInfo productInfo = productInfoService.getCustomsClearanceInfo(productId);
                 if(productInfo!=null){
                     map.put("customsClearanceId",productInfo.getCustomsClearanceId());
                     map.put("customsClearanceName",productInfo.getCustomsClearanceName());
-                }
+                }*/
+                ProductWareVo productWareVo = productWareService.getProductWareVo(productId,wareId);
+                map.put("productWareVo",productWareVo);
                 //查询产品成分信息
                 map.put("components",businessOrderProductComponentService.getProductComponentsByProductId(productId));
             }
