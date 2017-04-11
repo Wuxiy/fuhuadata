@@ -60,24 +60,21 @@ CRM.onOrOff = function (el,isOn) {
 
 //ajax调用公共方法
 CRM.ajaxCall = function(res){
-    $.extend({
-        type        : 'POST',
-        contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
-        url         : '',
-        data        : {},
-        async       : true
-    },res||{});
-
-    $.ajax({
-        url         : basePath + res.url,
-        type        : res.type,
-        data        : res.data,
-        async       : res.async,
-        contentType : res.contentType
-    }).done(function (result){
+    // $.extend({
+    //     type        : 'POST',
+    //     contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+    //     url         : '',
+    //     data        : {},
+    //     async       : true
+    // },res||{});
+    if (res.callback) {
+        var callback = res.callback;
+        delete res.callback;
+    }
+    $.ajax(res).done(function (result){
         var data = result.data;
         console.log(data);
-        res.callback(data);
+        callback(data);
     }).fail(function(res){
         console.log('error:'+res.status);
     });

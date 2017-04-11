@@ -24,7 +24,7 @@
                                     <div class="input-group">
                                         <input class="form-control" type="text" value="" disabled/>
                                         <div class="input-group-btn">
-                                            <button class="btn btn-xs btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                                            <button data-toggle="modal" data-target="#packModal" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-search"></span></button>
                                         </div>
                                     </div>
                                 </td>
@@ -272,47 +272,52 @@
                             <tbody id="imgGroup" class="img-group">
                             <tr>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img src="/lib/img/u24030.png" alt="单击添加图片">
+                                    <img src="" alt="请点击添加图片">
                                     <div class="caption">
-                                        <h4 class="text-info ">
+                                        <p></p>
+                                        <h4>
                                             瓶型
-                                            <small><button class="btn-link" style="position: absolute" type="button">修改</button></small>
+                                            <small><button data-btn="modification" class="btn-link hidden" style="position: absolute" type="button">修改</button></small>
                                         </h4>
                                     </div>
                                 </td>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img src="/lib/img/u24030.png" alt="单击添加图片">
+                                    <img src="" alt="请点击添加图片">
                                     <div class="caption">
-                                        <h4 class="text-info ">
+                                        <p></p>
+                                        <h4>
                                             瓶身logo样例
-                                            <small><button class="btn-link" style="position: absolute" type="button">修改</button></small>
+                                            <small><button data-btn="modification" class="btn-link hidden" style="position: absolute" type="button">修改</button></small>
                                         </h4>
                                     </div>
                                 </td>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img src="/lib/img/logo.png" alt="单击添加图片">
+                                    <img src="" alt="请点击添加图片">
                                     <div class="caption">
-                                        <h4 class="text-info ">
+                                        <p></p>
+                                        <h4>
                                             瓶贴样例
-                                            <small><button class="btn-link" style="position: absolute" type="button">修改</button></small>
+                                            <small><button data-btn="modification" class="btn-link hidden" style="position: absolute" type="button">修改</button></small>
                                         </h4>
                                     </div>
                                 </td>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img src="/lib/img/logo.png" alt="单击添加图片">
+                                    <img src="" alt="请点击添加图片">
                                     <div class="caption">
-                                        <h4 class="text-info ">
+                                        <p></p>
+                                        <h4>
                                             封口方式
-                                            <small><button class="btn-link" style="position: absolute" type="button">修改</button></small>
+                                            <small><button data-btn="modification" class="btn-link hidden" style="position: absolute" type="button">修改</button></small>
                                         </h4>
                                     </div>
                                 </td>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img src="/lib/img/placeholder.png" alt="单击添加图片">
+                                    <img src="" alt="请点击添加图片">
                                     <div class="caption">
-                                        <h4 class="text-info ">
+                                        <p></p>
+                                        <h4>
                                             说明书样例
-                                            <small><button class="btn-link" style="position: absolute" type="button">修改</button></small>
+                                            <small><button data-btn="modification" class="btn-link hidden" style="position: absolute" type="button">修改</button></small>
                                         </h4>
                                     </div>
                                 </td>
@@ -323,30 +328,29 @@
                                         <h4>
                                             标签
                                             <small><button data-btn="modification" class="btn-link hidden" style="position: absolute" type="button">修改</button></small>
-##                                            <small><button data-btn="uploading" class="btn-link hidden" style="position: absolute" type="button">上传</button></small>
                                         </h4>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img src="/lib/img/placeholder.png" alt="">
+                                    <img src="" alt="请点击添加图片">
                                     <div class="caption">
-                                        <h4 class="text-info ">
+                                        <p></p>
+                                        <h4>
                                             纸箱
-                                            <small><button class="btn-link" style="position: absolute" type="button">修改</button></small>
+                                            <small><button data-btn="modification" class="btn-link hidden" style="position: absolute" type="button">修改</button></small>
                                         </h4>
                                     </div>
                                 </td>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img src="/lib/img/placeholder.png" alt="">
+                                    <img src="" alt="请点击添加图片">
                                     <div class="caption">
+                                        <p></p>
                                         <h4>
                                             其他
                                             <small><button data-btn="modification" class="btn-link hidden" style="position: absolute" type="button">修改</button></small>
-                                            <small><button data-btn="uploading" class="btn-link hidden" style="position: absolute" type="button">上传</button></small>
                                         </h4>
-                                        <p></p>
                                     </div>
                                 </td>
                             </tr>
@@ -375,6 +379,60 @@
             <div class="modal-body clearfix">
                 <div class="thumbnail">
                     <img src="" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="packModal" tabindex="-1"  aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div class="input-group" data-stopPropagation="true">
+                            <input type="text" class="form-control notDisabled" placeholder="请输入关键词查找" lang="zh" />
+                            <div class="input-group-btn"><button class="btn btn-xs btn-primary" type="submit"><span class="glyphicon glyphicon-search"></span></button></div>
+                        </div>
+                        <hr />
+                        <div class="zTreeDemoBackground left well" style="height: 300px;overflow-y: scroll;overflow-x: auto">
+                            <ul id="fModal" class="ztree"></ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-9">
+                        <table class="table table-condensed table-bordered table-striped text-right text-center">
+                            <thead>
+                            <tr>
+                                <th class="text-center"><div class="checkbox col-xs-12"><label><input type="checkbox"></label></div></th>
+                                <th class="text-center">包材类型编码</th>
+                                <th class="text-center">包材类型名称</th>
+                                <th class="text-center">规格</th>
+                                <th class="text-center">尺寸</th>
+                                <th class="text-center">材质</th>
+                                <th class="text-center">单价(元)</th>
+                                <th class="text-center">状态</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="">
+                                <td><div class="checkbox col-xs-12"><label><input type="checkbox"></label></div></td>
+                                <td>外包装-纸箱</td>
+                                <td>1L*10瓶/箱</td>
+                                <td></td>
+                                <td></td>
+                                <td>五层瓦楞</td>
+                                <td>3.00</td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -453,9 +511,11 @@
                 url         : '/upload/uploadFileAll',
                 type        : 'POST',
                 data        : data,
-//                contentType : 'multipart/form-data',
-                callback    :  function (data) {
-                    img.attr('src',data);
+                cache       : false,
+                contentType : false,
+                processData : false,
+                callback : function (data) {
+                    img.attr('src',"../"+basePath + data);
                     fileF.reset(); // 重置file的值
                     monBtn.removeClass('hidden'); // 显示修改按钮
                 }
