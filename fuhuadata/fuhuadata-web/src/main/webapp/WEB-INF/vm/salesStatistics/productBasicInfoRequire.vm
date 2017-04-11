@@ -52,9 +52,9 @@
                                                 <sup class="not-null">*</sup>
                                             </label>
                                         </td>
-                                        <td><input id="" class="form-control" type="text" value=""/></td>
+                                        <td><input id="specification" class="form-control" type="text" value=""/></td>
                                         <td><label class="control-label" lang="zh">型号</label></td>
-                                        <td><input id="" class="form-control" type="text" value=""/></td>
+                                        <td><input id="model" class="form-control" type="text" value=""/></td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -63,7 +63,7 @@
                                                 <sup class="not-null">*</sup>
                                             </label>
                                         </td>
-                                        <td><input id="mainProductUnit" class="form-control" type="text" value=""/></td>
+                                        <td><input id="measurement" class="form-control" type="text" value=""/></td>
                                         <td>
                                             <label class="control-label" lang="zh">
                                                 主数量
@@ -333,8 +333,15 @@
             data:data,
             success:function (result) {
                 var businessProductId = result.businessProductId;
+                var productWareVo = result.productWareVo;
                 var components = result.components;
-                $('#customsClearanceName').val(result.customsClearanceName);
+
+                console.log(productWareVo);
+                $('#customsClearanceName').val(productWareVo.customsClearanceName);
+                $('#measurement').val(productWareVo.measurement);
+                $('#specification').val(productWareVo.specification);
+                $('#model').val(productWareVo.model);
+
                 if(businessProductId == 0){
                     costtable.innerHTML = '';
                     for(var i=0;i<components.length;i++){
