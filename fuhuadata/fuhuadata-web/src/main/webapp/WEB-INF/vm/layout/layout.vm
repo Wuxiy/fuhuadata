@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title id="hTitle">CRM系统</title>
-    <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/css/fileinput.css" />
     <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/js/zTree/css/metroStyle/metroStyle.css"/>
     <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/dataTables/dataTables.bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/dataTables/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/css/fileinput.css" />
 
     <script src="${request.contextPath}/lib/js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
     <script src="${request.contextPath}/lib/js/jquery-migrate-1.4.1.min.js" type="text/javascript" charset="utf-8"></script>
