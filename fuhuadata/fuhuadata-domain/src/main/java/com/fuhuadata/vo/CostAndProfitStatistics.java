@@ -35,13 +35,19 @@ public class CostAndProfitStatistics {
 
     private String country;//国家
 
-    private BigDecimal actualAmountPaid;//销售额
+    private BigDecimal salesAmount;//销售额
 
     private BigDecimal floorPrice;//最低销售价
+
+    private BigDecimal grossProfit;//毛利润
 
     private BigDecimal maintenanceFee;//总维护费
 
     private BigDecimal netProfit;//净利润
+
+    private BigDecimal grossMargin;//毛利率
+
+    private BigDecimal salesVolume;//销售量
 
 
     private String salesManId;
@@ -152,14 +158,6 @@ public class CostAndProfitStatistics {
         this.country = country;
     }
 
-    public BigDecimal getActualAmountPaid() {
-        return actualAmountPaid;
-    }
-
-    public void setActualAmountPaid(BigDecimal actualAmountPaid) {
-        this.actualAmountPaid = actualAmountPaid;
-    }
-
     public BigDecimal getFloorPrice() {
         return floorPrice;
     }
@@ -222,5 +220,37 @@ public class CostAndProfitStatistics {
 
     public void setUserArea(String userArea) {
         this.userArea = userArea;
+    }
+
+    public BigDecimal getGrossProfit() {
+        return grossProfit;
+    }
+
+    public void setGrossProfit(BigDecimal grossProfit) {
+        this.grossProfit = grossProfit;
+    }
+
+    public BigDecimal getSalesVolume() {
+        return salesVolume;
+    }
+
+    public void setSalesVolume(BigDecimal salesVolume) {
+        this.salesVolume = salesVolume;
+    }
+
+    public BigDecimal getGrossMargin() {
+        return grossMargin;
+    }
+
+    public void setGrossMargin(BigDecimal grossMargin) {
+        this.grossMargin = grossMargin;
+    }
+
+    public BigDecimal getSalesAmount() {
+        return salesAmount;
+    }
+
+    public void setSalesAmount(BigDecimal salesAmount) {
+        this.salesAmount = salesAmount;
     }
 }
