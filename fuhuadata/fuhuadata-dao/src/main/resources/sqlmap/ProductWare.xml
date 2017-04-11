@@ -84,7 +84,8 @@
             p.customs_clearance_id customsClearanceId,
             p.customs_clearance_name customsClearanceName,
             w.specification,
-            w.`model`
+            w.`model`,
+            p.measurement
         FROM
             product_ware w,
             product_info p

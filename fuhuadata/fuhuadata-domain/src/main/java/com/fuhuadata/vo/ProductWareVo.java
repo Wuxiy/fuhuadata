@@ -17,6 +17,8 @@ public class ProductWareVo {
     private String specification;
     //型号
     private String model;
+    //主计量单位
+    private String measurement;
 
     public Integer getProductId() {
         return productId;
@@ -64,5 +66,13 @@ public class ProductWareVo {
 
     public void setModel(String model) {
         this.model = model;
+    }
+
+    public String getMeasurement() {
+        return measurement;
+    }
+
+    public void setMeasurement(String measurement) {
+        this.measurement = measurement;
     }
 }
