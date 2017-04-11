@@ -14,6 +14,9 @@ CRM.productArchivesList.asidePanel   = $('#asidePanel'); // 侧面板
 CRM.productArchivesList.asideTree    = $('#asideTree'); // 侧边树
 CRM.productArchivesList.formVessel   = $('#formVessel'); // 表单容器
 CRM.productArchivesList.form         = $('#form'); // 表单内容
+CRM.productArchivesList.wTbody       = 'waresContent'; // 规格型号表格内容
+CRM.productArchivesList.iTbody       = 'physicalProperitiesContent'; // 理化指标表格内容
+CRM.productArchivesList.pTbody       = 'processingComponentsContent'; // 加工成份表格内容
 
 // 按钮
 CRM.productArchivesList.edit        = $('edit');
@@ -32,7 +35,7 @@ CRM.productArchivesList.otherSaltName        = $('#otherSaltName'); // 其他盐
 CRM.productArchivesList.executeStandard      = $('#executeStandard'); // 执行标准
 CRM.productArchivesList.executeNumer         = $('#executeNumer'); // 执行标准号
 CRM.productArchivesList.productFeature       = $('#productFeature'); // 产品特点
-CRM.productArchivesList.productFeature       = $('#wares'); // 产品规格(table)
+CRM.productArchivesList.wares                = $('#wares'); // 产品规格(table)
 CRM.productArchivesList.processingComponents = $('#processingComponents'); // 加工成份(table)
 CRM.productArchivesList.physicalProperities  = $('#physicalProperities'); // 理化指标(table)
 CRM.productArchivesList.lastmodifyUserId     = $('#lastmodifyUserId'); // 最后编辑人id
@@ -63,7 +66,7 @@ CRM.productArchivesList.getTableData = function (id) {
     var page = this;
     if (id === '#processingComponents') {
 
-        page.getProcessingComponentsDataDataHandler();
+        page.getProcessingComponentsDataHandler();
     }else if (id === '#physicalProperities') {
 
         page.getPhysicalProperitiesDataHandler();
@@ -81,16 +84,41 @@ CRM.productArchivesList.renderPage = function (id) {
     })
 };
 
-// 渲染页面处理程序
-CRM.productArchivesList.renderPageHandler = function (res) {
-    var page  = CRM.productArchivesList,
-        data  = {
-            data: res
+// 百度渲染模板处理程序
+CRM.productArchivesList.tplHandler = function (id,data,tar) {
+    var res  = {
+            data:data
         },
-        html0 = bt('form',data); // 返回渲染过后的模板
+        html0 = bt(id,res);
 
-    // 将模板插入页面
-    page.formVessel.html(html0);
+    tar.html(html0);
+};
+
+// 渲染页面处理程序
+CRM.productArchivesList.renderPageHandler = function (data) {
+    var page  = CRM.productArchivesList,
+        p     = data.productInfo;
+    page.productId.val(p.productId);
+    page.categoryName.val(p.categoryName);
+    page.name.val(p.name);
+    page.measurement.val(p.measurement);
+    page.saltType.val([p.saltType]); // checkbox
+
+    if (p.saltType == 5) { // 如果显示其他则显示
+
+        page.otherSaltName.val(p.otherSaltName).removeClass('hidden');
+    }
+
+    page.executeStandard.val(p.executeStandard);
+    page.executeNumer.val(p.executeNumer);
+    page.productFeature.val(p.productFeature);
+    page.lastmodifyUserName.val(p.lastmodifyUserName);
+    page.modifyTime.val(p.modifyTime);
+
+    page.tplHandler(page.wTbody,data.wares,page.wares); // table规格型号
+    page.tplHandler(page.iTbody,data.index,page.physicalProperities); // table理化指标
+    page.tplHandler(page.pTbody,data.allProcessingComponents,page.processingComponents); // table加工成份
+
 };
 
 // 获得理化指标处理程序
@@ -100,7 +128,7 @@ CRM.productArchivesList.getPhysicalProperitiesDataHandler = function () {
 };
 
 // 获得加工成分处理程序
-CRM.productArchivesList.getProcessingComponentsDataDataHandler = function () {
+CRM.productArchivesList.getProcessingComponentsDataHandler = function () {
 
 
 };
@@ -136,15 +164,10 @@ CRM.productArchivesList.asideTreeOnClick = function(event, modLeftId, treeNode) 
 
     // 渲染表单
     page.renderPage(treeNode.id);
-
-    // 渲染第用户表格
-    page.table.html('');
-    CRM.addOnlyClass(t,'li',page.tab,'active');
-    page.renderUserTable(treeNode.id);
 };
 
 // 渲染产品树到侧边栏
-CRM.productArchivesList.renderProTreeToAside = function () {
+CRM.productArchivesList.renderProTreeToAside = function (data) {
     var page    = CRM.productArchivesList,
         setting = {
             data: {

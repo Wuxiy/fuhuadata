@@ -60,40 +60,20 @@ CRM.onOrOff = function (el,isOn) {
 
 //ajax调用公共方法
 CRM.ajaxCall = function(res){
-    $.extend({
-        type        : 'POST',
-        contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
-        url         : '',
-        data        : {},
-        async       : true
-    },res||{});
 
-    $.ajax({
-        url         : basePath + res.url,
-        type        : res.type,
-        data        : res.data,
-        async       : res.async,
-        contentType : res.contentType
-    }).done(function (result){
+    if (res.callback) {
+        var callback = res.callback;
+        delete res.callback;
+    }
+
+    $.ajax(res).done(function (result){
         var data = result.data;
         console.log(data);
-        res.callback(data);
+        callback(data);
     }).fail(function(res){
         console.log('error:'+res.status);
     });
 };
-
-// 返回数据
-// CRM.getData = function (type,url,data,contentType) {
-//   var getData;
-//   CRM.ajaxCall(type,url,data,contentType,callback,false);
-//
-//   function callback(res) {
-//       getData = res;
-//   }
-//
-//   return getData;
-// };
 
 // 返回普通数组对象
 CRM.toArr = function (data) {

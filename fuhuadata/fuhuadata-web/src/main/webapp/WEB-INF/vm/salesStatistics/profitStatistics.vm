@@ -248,16 +248,8 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript">
     var pageSize = 3;
-    var click_node ={oneLevelId:0,twoLevelId:0};//接收目录树点击节点的id及其父id
-    click_node.serach = function(){
-        serach();
-    }
 
     $(document).ready(function(){
-        //生成地区目录树
-        $('#tree').creatTree('/customerBaseInfo/initAreaCategoryTree');
-        //目录树节点绑定点击事件
-        $('#tree').bindClickForCusArea(click_node);
         //搜索按钮绑定事件
         $("#submit").click(function(){
             serach();
@@ -282,13 +274,8 @@
     //根据页码获取列表数据
     function getDataList(pageNum,jq){
         var data = {
-            customerName:$('#customerName').val(),
-            customerLevel:$('#customerLevel').val(),
-            country:$('#country').val(),
             startTime:$('#startTime').val(),
             endTime:$('#endTime').val(),
-            areaClassId:click_node.oneLevelId,
-            areaId:click_node.twoLevelId,
             startRow:pageNum*pageSize,
             pageSize:pageSize
         };

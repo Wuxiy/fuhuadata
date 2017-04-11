@@ -1,4 +1,4 @@
-package com.fuhuadata.vo;
+package com.fuhuadata.vo.Price;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

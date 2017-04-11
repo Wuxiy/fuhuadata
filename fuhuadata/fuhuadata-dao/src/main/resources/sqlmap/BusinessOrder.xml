@@ -564,8 +564,8 @@
             SELECT
             base.country,
             base.customer_area customerArea,
-            SUM(a.actual_amount_paid) actualAmountPaid,
-            SUM(a.floor_price) floorPrice,
+            SUM(a.actual_amount_paid) salesAmount,
+            SUM(a.gross_profit) grossProfit,
             SUM(a.maintenance_fee) maintenanceFee,
             SUM(a.net_profit) netProfit
             FROM
@@ -576,13 +576,14 @@
             </isParameterPresent>
             GROUP BY base.customer_area_id
             ORDER BY netProfit DESC
+            limit #startRow#,#pageSize#
         </isEqual>
         <isEqual property="dimension" compareValue="1">
             SELECT
             base.country,
             base.customer_area customerArea,
-            SUM(a.actual_amount_paid) actualAmountPaid,
-            SUM(a.floor_price) floorPrice,
+            SUM(a.actual_amount_paid) salesAmount,
+            SUM(a.gross_profit) grossProfit,
             SUM(a.maintenance_fee) maintenanceFee,
             SUM(a.net_profit) netProfit
             FROM
@@ -595,14 +596,15 @@
             base.country_id
             ORDER BY
             netProfit DESC
+            limit #startRow#,#pageSize#
         </isEqual>
         <isEqual property="dimension" compareValue="2">
             SELECT
             base.country,
             base.customer_area customerArea,
             base.full_name,
-            SUM(a.actual_amount_paid) actualAmountPaid,
-            SUM(a.floor_price) floorPrice,
+            SUM(a.actual_amount_paid) salesAmount,
+            SUM(a.gross_profit) grossProfit,
             SUM(a.maintenance_fee) maintenanceFee,
             SUM(a.net_profit) netProfit,
             a.sales_man_name
@@ -616,6 +618,7 @@
             base.customer_id
             ORDER BY
             netProfit DESC
+            limit #startRow#,#pageSize#
         </isEqual>
         <isEqual property="dimension" compareValue="3">
             SELECT
@@ -623,8 +626,8 @@
             base.customer_area customerArea,
             base.full_name customerName,
             ua.userArea,
-            SUM(a.actual_amount_paid) actualAmountPaid,
-            SUM(a.floor_price) floorPrice,
+            SUM(a.actual_amount_paid) salesAmount,
+            SUM(a.gross_profit) grossProfit,
             SUM(a.maintenance_fee) maintenanceFee,
             SUM(a.net_profit) netProfit,
             a.sales_man_name salesManId
@@ -647,14 +650,100 @@
             a.sales_man_id
             ORDER BY
             netProfit DESC
+            limit #startRow#,#pageSize#
         </isEqual>
-        <isEqual property="dimension" compareValue="4">
 
+        <isEqual property="dimension" compareValue="4">
+            SELECT
+            a.name,
+            b.category_name,
+            SUM(sales_volume) salesVolume,
+            SUM(a.gross_profit) grossProfit,
+            SUM(a.gross_margin) grossMargin,
+            SUM(a.contract_price) salesAmount
+            FROM
+            business_order_product a
+            LEFT JOIN product_info b ON b.product_id = a.product_id
+            <isParameterPresent>
+                <include refid="PROFIT-STATISTICS-QUERY-COMMON"/>
+            </isParameterPresent>
+            GROUP BY
+            a.`name`
+            ORDER BY
+            grossProfit DESC
+            limit #startRow#,#pageSize#
         </isEqual>
     </select>
 
-    <select id="COUNT-PROFIT-STATISTICS" parameterClass="CostAndProfitStatistics" resultClass="java.lang.Integer">
+    <select id="COUNT-PROFIT-STATISTICS" parameterClass="CostAndProfitStatistics" resultClass="CostAndProfitStatistics">
+        <isEqual property="dimension" compareValue="0">
+            select count(*) from (SELECT count(*)
+            FROM
+            customer_base_info base
+            LEFT JOIN business_order a ON a.customer_id = base.customer_id
+            <isParameterPresent>
+                <include refid="PROFIT-STATISTICS-QUERY-COMMON"/>
+            </isParameterPresent>
+            GROUP BY base.customer_area_id) temp
+        </isEqual>
+        <isEqual property="dimension" compareValue="1">
+           select count(*) from (SELECT
+            count(*)
+            FROM
+            customer_base_info base
+            LEFT JOIN business_order a ON a.customer_id = base.customer_id
+            <isParameterPresent>
+                <include refid="PROFIT-STATISTICS-QUERY-COMMON"/>
+            </isParameterPresent>
+            GROUP BY
+            base.country_id) temp
+        </isEqual>
+        <isEqual property="dimension" compareValue="2">
+            SELECT count(*) FROM (SELECT
+            count(*)
+            FROM
+            customer_base_info base
+            LEFT JOIN business_order a ON a.customer_id = base.customer_id
+            <isParameterPresent>
+                <include refid="PROFIT-STATISTICS-QUERY-COMMON"/>
+            </isParameterPresent>
+            GROUP BY
+            base.customer_id) temp
+        </isEqual>
+        <isEqual property="dimension" compareValue="3">
+            SELECT count(*) FROM (SELECT
+            count(*)
+            FROM
+            business_order a
+            LEFT JOIN customer_base_info base ON a.customer_id = base.customer_id
+            LEFT JOIN (
+            SELECT
+            pua.user_id,
+            GROUP_CONCAT(pac.area_name) AS userArea
+            FROM
+            p_user_area pua
+            LEFT JOIN p_area_code pac ON pac.areaid = pua.area_id
+            GROUP BY pua.user_id
+            ) ua ON ua.user_id =a.sales_man_id
+            <isParameterPresent>
+                <include refid="PROFIT-STATISTICS-QUERY-COMMON"/>
+            </isParameterPresent>
+            GROUP BY
+            a.sales_man_id) temp
+        </isEqual>
 
+        <isEqual property="dimension" compareValue="4">
+            SELECT count(*) FROM (SELECT
+            count(*)
+            FROM
+            business_order_product a
+            LEFT JOIN product_info b ON b.product_id = a.product_id
+            <isParameterPresent>
+                <include refid="PROFIT-STATISTICS-QUERY-COMMON"/>
+            </isParameterPresent>
+            GROUP BY
+            a.`name`) temp
+        </isEqual>
     </select>
 
 </sqlMap>
