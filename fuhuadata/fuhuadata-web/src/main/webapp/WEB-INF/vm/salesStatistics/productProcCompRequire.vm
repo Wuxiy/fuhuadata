@@ -272,7 +272,7 @@
                             <tbody id="imgGroup" class="img-group">
                             <tr>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img src="" alt="请点击添加图片">
+                                    <img src="/lib/img/placeholder.png" alt="请点击添加图片">
                                     <div class="caption">
                                         <p></p>
                                         <h4>
@@ -282,7 +282,7 @@
                                     </div>
                                 </td>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img src="" alt="请点击添加图片">
+                                    <img src="/lib/img/placeholder.png" alt="请点击添加图片">
                                     <div class="caption">
                                         <p></p>
                                         <h4>
@@ -292,7 +292,7 @@
                                     </div>
                                 </td>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img src="" alt="请点击添加图片">
+                                    <img src="/lib/img/placeholder.png" alt="请点击添加图片">
                                     <div class="caption">
                                         <p></p>
                                         <h4>
@@ -302,7 +302,7 @@
                                     </div>
                                 </td>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img src="" alt="请点击添加图片">
+                                    <img src="/lib/img/placeholder.png" alt="请点击添加图片">
                                     <div class="caption">
                                         <p></p>
                                         <h4>
@@ -312,7 +312,7 @@
                                     </div>
                                 </td>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img src="" alt="请点击添加图片">
+                                    <img src="/lib/img/placeholder.png" alt="请点击添加图片">
                                     <div class="caption">
                                         <p></p>
                                         <h4>
@@ -322,7 +322,7 @@
                                     </div>
                                 </td>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img src="" alt="请点击添加图片">
+                                    <img src="/lib/img/placeholder.png" alt="请点击添加图片">
                                     <div class="caption">
                                         <p></p>
                                         <h4>
@@ -334,7 +334,7 @@
                             </tr>
                             <tr>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img src="" alt="请点击添加图片">
+                                    <img src="/lib/img/placeholder.png" alt="请点击添加图片">
                                     <div class="caption">
                                         <p></p>
                                         <h4>
@@ -344,7 +344,7 @@
                                     </div>
                                 </td>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img src="" alt="请点击添加图片">
+                                    <img src="/lib/img/placeholder.png" alt="请点击添加图片">
                                     <div class="caption">
                                         <p></p>
                                         <h4>
@@ -365,6 +365,8 @@
                     </div>
                 </div>
             </div>
+            <div class="col-xs-1 col-xs-offset-5"><a href="" class="btn btn-block btn-default" type="button">上一步</a></div>
+            <div class="col-xs-1 col-xs-offset-1"><a href="" class="btn btn-block btn-primary" type="button">下一步</a></div>
         </div>
     </div>
 </div>
