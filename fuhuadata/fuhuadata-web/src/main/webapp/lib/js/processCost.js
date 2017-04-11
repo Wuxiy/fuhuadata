@@ -235,7 +235,7 @@ $(document).on("click",".adEexpense1",function(){
             html +='<div class="form-group">';
             html +='<label class="col-lg-2 control-label">主材规格</label>';
             html +='<div class="col-lg-6">';
-            html +='<input class="form-control" type="text" value="'+ResultData.costTerm+'" id="costTerm">';
+            html +='<input class="form-control" type="text" value="'+ResultData.costTerm+'" id="costTerm" disabled>';
             html +='</div></div>';
             html +='<div class="form-group">';
             html +='<label class="col-lg-2 control-label">单价</label>';
@@ -292,7 +292,7 @@ $(document).on("click",".adEexpense2",function(){
             html +='<div class="form-group">';
             html += '<label class="col-lg-2 control-label">加工厂</label>';
             html +='<div class="col-lg-6">';
-            html +='<input class="form-control" type="text" value="'+ResultData.processFactory+'" id="processFactory">';
+            html +='<input class="form-control" type="text" value="'+ResultData.processFactory+'" id="processFactory" disabled>';
             html +='</div></div>';
             html +='<div class="form-group">';
             html +='<label class="col-lg-2 control-label">水、电、气费</label>';
@@ -365,7 +365,7 @@ $(document).on("click",".freight1",function(){
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">国内运费维护</label>';
             html += '<div class="col-lg-6">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.processFactory + '" id="processFactory">';
+            html += '<input class="form-control" type="text" value="' + ResuleData.processFactory + '" id="processFactory" disabled>';
             html += '</div></div>';
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">单价</label>';
@@ -511,7 +511,7 @@ $(document).on("click",".rate1",function(){
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">币种</label>';
             html += '<div class="col-lg-6">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.currency + '" id="currency">';
+            html += '<input class="form-control" type="text" value="' + ResuleData.currency + '" id="currency" disabled>';
             html += '</div></div>';
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">汇率</label>';
@@ -566,7 +566,7 @@ $(document).on("click",".rate2",function(){
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">产品种类</label>';
             html += '<div class="col-lg-6">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.kind + '" id="kind">';
+            html += '<input class="form-control" type="text" value="' + ResuleData.kind + '" id="kind" disabled>';
             html += '</div></div>';
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">毛利率</label>';
@@ -621,7 +621,7 @@ $(document).on("click",".rate3",function(){
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">币种</label>';
             html += '<div class="col-lg-6">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.other + '" id="other">';
+            html += '<input class="form-control" type="text" value="' + ResuleData.other + '" id="other" disabled>';
             html += '</div></div>';
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">汇率</label>';

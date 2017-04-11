@@ -33,7 +33,6 @@ function fsubmit(){
                 $('.filename').eq(i).attr('data-url',item);
                 $('.fileimg').eq(i).attr('src',"../"+basePath+item);
             })
-
         }
     });
     return false;

@@ -352,10 +352,11 @@
                             </tr>
                             <tr class="hidden">
                                 <td>
-                                    <form id="fileForm" enctype="multipart/form-data">
-                                        <input id="openFile" name="file" type="file"></tr>
+                                    <form name="fileForm" id="fileForm" enctype="multipart/form-data">
+                                        <input id="openFile" name="file" type="file">
                                     </form>
                                 </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -453,6 +454,11 @@
                 url         : '/upload/uploadFileAll',
                 type        : 'POST',
                 data        : data,
+
+                dataType: 'JSON',
+                cache: false,
+                processData: false,
+                contentType: false,
 //                contentType : 'multipart/form-data',
                 callback    :  function (data) {
                     img.attr('src',data);
