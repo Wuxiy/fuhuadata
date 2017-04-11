@@ -23,10 +23,37 @@
 		<property name="numTestsPerEvictionRun" value="20" />
 	</bean>
 
-    <!-- iBatis ÅäÖÃ -->
+	<bean id="dataSourceOracle" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url">
+			<value>jdbc:oracle:thin:@192.168.30.21:1521/orcl</value>
+		</property>
+		<property name="username">
+			<value>OAfhdba20161014</value>
+		</property>
+		<property name="password">
+			<value>1</value>
+		</property>
+		<property name="maxActive">
+			<value>100</value>
+		</property>
+		<property name="maxIdle">
+			<value>8</value>
+		</property>
+		<property name="minIdle">
+			<value>1</value>
+		</property>
+	</bean>
+
+
+	<!-- iBatis ÅäÖÃ -->
 	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
 		<property name="configLocation" value="classpath:sqlmap-config.xml" />
 		<property name="useTransactionAwareDataSource" value="true" />
+	</bean>
+	<bean id="sqlMapClientOracle" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation" value="classpath:sqlmap-config.xml" />
+		<property name="dataSource" ref="dataSourceOracle" />
 	</bean>
 
 	<bean id="sqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate">

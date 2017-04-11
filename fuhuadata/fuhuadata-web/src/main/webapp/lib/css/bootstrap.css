@@ -2111,6 +2111,13 @@ th {
   width: 100%;
   max-width: 100%;
   margin-bottom: 18px;
+  display: table;
+}
+.table-row {
+  display: table-row;
+}
+.table-cell {
+  display: table-cell;
 }
 .table > thead > tr > th,
 .table > tbody > tr > th,
@@ -2181,13 +2188,17 @@ th {
 .table-hover > tbody > tr:hover {
   background-color: #f0f0f0;
 }
-table col[class*="col-"] {
+table col[class*="col-"],
+.table col[class*="col-"]{
   position: static;
   float: none;
   display: table-column;
 }
 table td[class*="col-"],
-table th[class*="col-"] {
+table th[class*="col-"],
+.table td[class*="col-"],
+.table th[class*="col-"]
+{
   position: static;
   float: none;
   display: table-cell;
@@ -2300,6 +2311,9 @@ table th[class*="col-"] {
 .table-responsive {
   overflow-x: auto;
   min-height: 0.01%;
+}
+.table-v-align-b > tbody > tr > td {
+  vertical-align: bottom;
 }
 @media screen and (max-width: 767px) {
   .table-responsive {
@@ -4922,10 +4936,13 @@ a.list-group-item.active > .badge,
   margin-left: auto;
   margin-right: auto;
 }
+/*a.thumbnail:focus,*/
 a.thumbnail:hover,
-a.thumbnail:focus,
 a.thumbnail.active {
   border-color: #2877aa;
+}
+a.thumbnail.active {
+  background: url('/lib/img/selected.png') no-repeat bottom -1px right -1px;
 }
 .thumbnail .caption {
   padding: 9px;

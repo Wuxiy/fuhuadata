@@ -8,7 +8,7 @@
 	<typeAlias alias="CustomerProductPackagingArchives" type="com.fuhuadata.vo.CustomerProductPackagingArchives"/>
 	<typeAlias alias="ProductComponent" type="com.fuhuadata.domain.ProductComponent"/>
 	
-	<resultMap id="PRODUCTINFO-MAP" class="ProductInfo">
+	<resultMap id="PRODUCTINFO-MAP" class="com.fuhuadata.domain.ProductInfo">
 		<result property="productId" column="product_id" jdbcType="INT" javaType="java.lang.Integer" />
 		<result property="bigCategoryId" column="big_category_id" jdbcType="INT" javaType="java.lang.Integer" />
 		<result property="midCategoryId" column="mid_category_id" jdbcType="INT" javaType="java.lang.Integer" />
@@ -308,8 +308,8 @@
         </isParameterPresent>
 	</select>
 
-	<select id="getCustomsClearanceInfo" resultMap="PRODUCTINFO-MAP" parameterClass="java.lang.Integer">
-		select customs_clearance_name,customs_clearance_id
+	<select id="getCustomsClearanceInfo" resultClass="ProductInfo" parameterClass="java.lang.Integer">
+		select customs_clearance_name as customsClearanceName,customs_clearance_id as  customsClearanceId
 		from product_info
 		where product_id=#productId#
 	</select>

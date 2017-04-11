@@ -1,36 +1,435 @@
 <!--产品要求——包装要求——huxiangyang-->
 <div class="clearfix content shadow-out">
-    <!--面包屑导航-->
-    #breadcrumb()
+    <div class="nav-deputy shadow-out clearfix">
+        <!--面包屑导航-->
+        #breadcrumb()
+    </div>
+
     <div class="dashboard-wrapper">
         <div class="row">
             <div class="col-xs-12">
-                <div class="panel panel-default">
+                <div class="panel panel-default view-HD-lg">
                     <div class="panel-heading">
                         <h3 class="panel-title" lang="zh">包装要求</h3>
                     </div>
                     <div class="panel-body clearfix">
-                        <div class="form-horizontal">
-                            <div class="form-group">
-                                <label for="" class="control-label col-xs-1">主材选择</label>
-                                <div class="col-xs-2">
-                                    <div class="input-group">
-                                        <input class="form-control" type="text">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-xs btn-default"><span class="glyphicon glyphicon-search"></span></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <table class="table table-condensed table-bordered table-striped text-center">
+                        <table class="table table-condensed table-bordered table-striped text-right">
+                            <caption class="text-info text-left">
+                                主材选择
+                            </caption>
                             <tbody>
                             <tr>
+                                <td class="col-xs-1">主材</td>
+                                <td class="col-xs-2">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" value="" disabled/>
+                                        <div class="input-group-btn">
+                                            <button data-toggle="modal" data-target="#packModal" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="col-xs-1">规格</td>
+                                <td class="col-xs-2"><input id="brand" class="form-control" type="text" value=""/></td>
+                                <td class="col-xs-1">材质</td>
+                                <td class="col-xs-2"><input id="" class="form-control" type="text" value=""/></td>
+                                <td class="col-xs-1">单价</td>
+                                <td class="col-xs-2">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" value=""/>
+                                        <span class="input-group-addon">元</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td >尺寸</td>
+                                <td id="size" class="text-center" colspan="7">
+                                    <div class="col-xs-2">
+                                        <a href="#" class="thumbnail">
+                                            <img src="/lib/img/u24030.png"
+                                                 alt="通用的占位符缩略图">
+                                            <div class="caption">
+                                                <h4 class="text-info ">
+                                                    AA
+                                                </h4>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a href="#" class="thumbnail">
+                                            <img src="/lib/img/u24030.png"
+                                                 alt="通用的占位符缩略图">
+                                            <div class="caption">
+                                                <h4 class="text-info ">
+                                                    AB
+                                                </h4>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a href="#" class="thumbnail">
+                                            <img src="/lib/img/u24030.png"
+                                                 alt="通用的占位符缩略图">
+                                            <div class="caption">
+                                                <h4 class="text-info ">
+                                                    AC
+                                                </h4>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>含盖瓶重</td>
+                                <td>
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" value=""/>
+                                        <span class="input-group-addon">g</span>
+                                    </div>
+                                </td>
+                                <td>瓶盖颜色(潘通号)</td>
+                                <td><input id="brand" class="form-control" type="text" value=""/></td>
+                                <td >瓶身颜色</td>
+                                <td><input id="" class="form-control" type="text" value=""/></td>
+                                <td>瓶盖有LOGO</td>
+                                <td>
+                                    <div class="checkbox col-xs-12 text-left">
+                                        <label ><input type="checkbox"></label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>瓶身有LOGO</td>
+                                <td>
+                                    <div class="checkbox col-xs-12 text-left">
+                                        <label ><input type="checkbox"></label>
+                                    </div>
+                                </td>
+                                <td>瓶口径</td>
+                                <td>
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" value=""/>
+                                        <span class="input-group-addon">mm</span>
+                                    </div>
+                                </td>
+                                <td>瓶需要危标</td>
+                                <td>
+                                    <div class="checkbox col-xs-12 text-left">
+                                        <label ><input type="checkbox"></label>
+                                    </div>
+                                </td>
+                                <td >商检号</td>
+                                <td><input id="" class="form-control" type="text" value=""/></td>
+                            </tr>
+                            <tr>
+                                <td>瓶身需要刻度线</td>
+                                <td>
+                                    <div class="checkbox col-xs-12 text-left">
+                                        <label ><input type="checkbox"></label>
+                                    </div>
+                                </td>
+                                <td>瓶喷码</td>
+                                <td>
+                                    <div class="checkbox col-xs-12 text-left">
+                                        <label ><input type="checkbox"></label>
+                                    </div>
+                                </td>
+                                <td >瓶贴要求</td>
+                                <td><input id="" class="form-control" type="text" value=""/></td>
+                                <td colspan="3"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="8">
+                                    <div class="form-horizontal">
+                                        <div class="form-group"></div>
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-1">特殊要求</label>
+                                            <div class="col-xs-6">
+                                                <textarea class="form-control" rows="3"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-1">附加单价</label>
+                                            <div class="col-xs-2">
+                                                <div class="input-group">
+                                                    <input class="form-control" type="text">
+                                                    <span class="input-group-addon">元</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-condensed table-bordered table-striped text-right text-center">
+                            <caption class="text-info text-left">
+                                外包装选择
+                            </caption>
+                            <thead>
+                            <tr>
+                                <th class="text-center">是否需要</th>
+                                <th class="text-center">包材类型</th>
+                                <th class="text-center">规格</th>
+                                <th class="text-center">尺寸</th>
+                                <th class="text-center">材质</th>
+                                <th class="text-center">单耗（每千升或每吨数量）</th>
+                                <th class="text-center">单价（元）</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="">
+                                    <td><div class="checkbox col-xs-12"><label><input type="checkbox"></label></div></td>
+                                    <td>外包装-纸箱</td>
+                                    <td>1L*10瓶/箱</td>
+                                    <td></td>
+                                    <td>五层瓦楞</td>
+                                    <td>1000</td>
+                                    <td>3.00</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7">
+                                        <div class="form-horizontal">
+                                            <div class="form-group"></div>
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-1">封箱口方式</label>
+                                                <div class="col-xs-2">
+                                                    <input class="form-control" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-1">其他要求</label>
+                                                <div class="col-xs-6">
+                                                    <textarea class="form-control" rows="3"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-condensed table-bordered table-striped text-right text-center">
+                            <caption class="text-info text-left">
+                                辅材
+                            </caption>
+                            <thead>
+                            <tr>
+                                <th class="text-center">是否需要</th>
+                                <th class="text-center">包材类型</th>
+                                <th class="text-center">规格</th>
+                                <th class="text-center">尺寸</th>
+                                <th class="text-center">材质</th>
+                                <th class="text-center">单耗（每千升或每吨数量）</th>
+                                <th class="text-center">单价（元）</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="">
+                                <td><div class="checkbox col-xs-12"><label><input type="checkbox"></label></div></td>
+                                <td>辅材-量杯</td>
+                                <td>20ML</td>
                                 <td></td>
                                 <td></td>
+                                <td>1000</td>
+                                <td>3.00</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-condensed table-bordered table-striped text-right text-center">
+                            <caption class="text-info text-left">
+                                其他要求
+                            </caption>
+                            <tbody>
+                            <tr >
+                                <td>
+                                    <div class="form-horizontal">
+                                        <div class="form-group"></div>
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-1">其他要求</label>
+                                            <div class="col-xs-6">
+                                                <textarea class="form-control" rows="3"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-1">附加单价</label>
+                                            <div class="col-xs-2">
+                                                <div class="input-group">
+                                                    <input class="form-control" type="text">
+                                                    <span class="input-group-addon">元</span>
+                                                </div>
+                                            </div>
+                                            <label class="control-label col-xs-1">单耗</label>
+                                            <div class="col-xs-2">
+                                                <input class="form-control" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-condensed table-bordered table-striped text-center text-center table-v-align-b">
+                            <caption class="text-info">图片上传</caption>
+                            <tbody id="imgGroup" class="img-group">
+                            <tr>
+                                <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
+                                    <img src="/lib/img/placeholder.png" alt="请点击添加图片">
+                                    <div class="caption">
+                                        <p></p>
+                                        <h4>
+                                            瓶型
+                                            <small><button data-btn="modification" class="btn-link hidden" style="position: absolute" type="button">修改</button></small>
+                                        </h4>
+                                    </div>
+                                </td>
+                                <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
+                                    <img src="/lib/img/placeholder.png" alt="请点击添加图片">
+                                    <div class="caption">
+                                        <p></p>
+                                        <h4>
+                                            瓶身logo样例
+                                            <small><button data-btn="modification" class="btn-link hidden" style="position: absolute" type="button">修改</button></small>
+                                        </h4>
+                                    </div>
+                                </td>
+                                <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
+                                    <img src="/lib/img/placeholder.png" alt="请点击添加图片">
+                                    <div class="caption">
+                                        <p></p>
+                                        <h4>
+                                            瓶贴样例
+                                            <small><button data-btn="modification" class="btn-link hidden" style="position: absolute" type="button">修改</button></small>
+                                        </h4>
+                                    </div>
+                                </td>
+                                <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
+                                    <img src="/lib/img/placeholder.png" alt="请点击添加图片">
+                                    <div class="caption">
+                                        <p></p>
+                                        <h4>
+                                            封口方式
+                                            <small><button data-btn="modification" class="btn-link hidden" style="position: absolute" type="button">修改</button></small>
+                                        </h4>
+                                    </div>
+                                </td>
+                                <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
+                                    <img src="/lib/img/placeholder.png" alt="请点击添加图片">
+                                    <div class="caption">
+                                        <p></p>
+                                        <h4>
+                                            说明书样例
+                                            <small><button data-btn="modification" class="btn-link hidden" style="position: absolute" type="button">修改</button></small>
+                                        </h4>
+                                    </div>
+                                </td>
+                                <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
+                                    <img src="/lib/img/placeholder.png" alt="请点击添加图片">
+                                    <div class="caption">
+                                        <p></p>
+                                        <h4>
+                                            标签
+                                            <small><button data-btn="modification" class="btn-link hidden" style="position: absolute" type="button">修改</button></small>
+                                        </h4>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
+                                    <img src="/lib/img/placeholder.png" alt="请点击添加图片">
+                                    <div class="caption">
+                                        <p></p>
+                                        <h4>
+                                            纸箱
+                                            <small><button data-btn="modification" class="btn-link hidden" style="position: absolute" type="button">修改</button></small>
+                                        </h4>
+                                    </div>
+                                </td>
+                                <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
+                                    <img src="/lib/img/placeholder.png" alt="请点击添加图片">
+                                    <div class="caption">
+                                        <p></p>
+                                        <h4>
+                                            其他
+                                            <small><button data-btn="modification" class="btn-link hidden" style="position: absolute" type="button">修改</button></small>
+                                        </h4>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="hidden">
+                                <td>
+                                    <form id="fileForm" enctype="multipart/form-data">
+                                        <input id="openFile" name="file" type="file"></tr>
+                                    </form>
+                                </td>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-1 col-xs-offset-5"><a href="" class="btn btn-block btn-default" type="button">上一步</a></div>
+            <div class="col-xs-1 col-xs-offset-1"><a href="" class="btn btn-block btn-primary" type="button">下一步</a></div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="imgModal" tabindex="-1"  aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body clearfix">
+                <div class="thumbnail">
+                    <img src="" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="packModal" tabindex="-1"  aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div class="input-group" data-stopPropagation="true">
+                            <input type="text" class="form-control notDisabled" placeholder="请输入关键词查找" lang="zh" />
+                            <div class="input-group-btn"><button class="btn btn-xs btn-primary" type="submit"><span class="glyphicon glyphicon-search"></span></button></div>
+                        </div>
+                        <hr />
+                        <div class="zTreeDemoBackground left well" style="height: 300px;overflow-y: scroll;overflow-x: auto">
+                            <ul id="fModal" class="ztree"></ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-9">
+                        <table class="table table-condensed table-bordered table-striped text-right text-center">
+                            <thead>
+                            <tr>
+                                <th class="text-center"><div class="checkbox col-xs-12"><label><input type="checkbox"></label></div></th>
+                                <th class="text-center">包材类型编码</th>
+                                <th class="text-center">包材类型名称</th>
+                                <th class="text-center">规格</th>
+                                <th class="text-center">尺寸</th>
+                                <th class="text-center">材质</th>
+                                <th class="text-center">单价(元)</th>
+                                <th class="text-center">状态</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="">
+                                <td><div class="checkbox col-xs-12"><label><input type="checkbox"></label></div></td>
+                                <td>外包装-纸箱</td>
+                                <td>1L*10瓶/箱</td>
                                 <td></td>
                                 <td></td>
-                                <td></td>
+                                <td>五层瓦楞</td>
+                                <td>3.00</td>
                                 <td></td>
                             </tr>
                             </tbody>
@@ -41,3 +440,90 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
+<script>
+
+
+
+    $(function () {
+
+        // 点击图片，选中型号
+        $('#size').on('click.select','a.thumbnail',function (e) {
+
+            // 阻止默认行为
+            e.preventDefault();
+
+            var el  = $(e.target).parents('a.thumbnail').length!==0 ? $(e.target).parents('a') : $(e.target);
+
+            // 点击添加激活，再次点击取消
+            if (el.is('.active')) {
+                el.removeClass('active');
+            }else{
+                el.addClass('active');
+            }
+        });
+
+
+        var thisThumbnail = null;
+
+        // 点击图片添加或者查看大图
+        $('#imgGroup').on('click.select','.thumbnail',function (e) {
+
+            // 阻止默认行为
+            e.preventDefault();
+
+            var el       = $(e.target).parents('.thumbnail').length!==0 ? $(e.target).parents('.thumbnail') : $(e.target),
+                file     = $('#openFile'),
+                imgModal = $('#imgModal'),
+                img      = el.find('img'),
+                src      = img.attr('src');
+
+            thisThumbnail = el; // 取得当前缩略图框
+
+            if (!(src == '' || src == '/lib/img/placeholder.png')) {
+
+                imgModal.find('img').attr('src',src); // 打开模态
+            }else {
+
+                e.stopPropagation(); // 阻止打开模态
+                file.trigger('click'); // 打开file
+            }
+        });
+
+        // monBtn绑定事件
+        $('#imgGroup').on('click.mon','[data-btn="modification"]',function (e) {
+            e.stopPropagation();
+            var el   = $(e.target).parents('.thumbnail').length!==0 ? $(e.target).parents('.thumbnail') : $(e.target),
+                file = $('#openFile');
+            thisThumbnail = el; //取得当前缩略图框
+            file.trigger('click'); // 打开file
+        });
+
+        // file绑定change事件
+        $('#openFile').on('change.file',function (e) {
+//            console.log(thisThumbnail);
+            var img    = thisThumbnail.find('img'),
+                fileF  = $('#fileForm')[0], // 转化为DOM对象
+                monBtn = thisThumbnail.find('[data-btn="modification"]'),
+                data   = new FormData(fileF);
+
+            console.log(data);
+            CRM.ajaxCall({
+                url         : '/upload/uploadFileAll',
+                type        : 'POST',
+                data        : data,
+                cache       : false,
+                contentType : false,
+                processData : false,
+                callback : function (data) {
+                    img.attr('src',"../"+basePath + data);
+                    fileF.reset(); // 重置file的值
+                    monBtn.removeClass('hidden'); // 显示修改按钮
+                }
+            });
+        });
+
+    });
+
+</script>

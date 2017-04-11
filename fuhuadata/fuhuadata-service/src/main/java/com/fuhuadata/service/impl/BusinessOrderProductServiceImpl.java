@@ -11,6 +11,7 @@ import com.fuhuadata.domain.CustomerProductArchives;
 import com.fuhuadata.domain.query.QueryBusinessOrderProduct;
 import com.fuhuadata.domain.query.QueryCustomerProductArchives;
 import com.fuhuadata.service.BusinessOrderProductService;
+import com.fuhuadata.vo.Price.Price;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -59,7 +60,7 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
     }
 
     @Transactional
-    public int addFromArchives(Integer customerId,String orderId,Integer businessProductId, Integer productId, Integer wareId) {
+    public int addFromArchives(String customerId,String orderId,Integer businessProductId, Integer productId, Integer wareId) {
         try {
             //如果是修改状态，则删除当前数据，然后再复制档案数据
             if(businessProductId!=null && businessProductId>0){
@@ -67,7 +68,7 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
             }
             //检查该用户是否买过当前规格型号的产品
             QueryCustomerProductArchives queryCustomerProductArchives = new QueryCustomerProductArchives();
-            queryCustomerProductArchives.setCustomerId(customerId+"");
+            queryCustomerProductArchives.setCustomerId(customerId);
             queryCustomerProductArchives.setProductId(productId);
             queryCustomerProductArchives.setWareId(wareId);
             List<CustomerProductArchives> list = customerProductArchivesDao.getCustomerProductInfosByQuery(queryCustomerProductArchives);
@@ -149,30 +150,61 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
     }
 
     @Override
-    public BigDecimal getPriceForBusinessProduct(Integer businessProductId) {
+    public Price getPriceForBusinessProduct(Integer businessProductId) {
         //查询订单产品的价格计算方式
         int priceType = businessOrderProductDao.getPriceType(businessProductId);
-        BigDecimal decimal = null;
+        Price price = null;
         switch (priceType){
-            case -1:
-                decimal = new BigDecimal(-1);
-                break;
             case 0:
-                //do sth
+                price = getSelfProductionPrice(businessProductId);
                 break;
             case 1:
-                //do sth
+                price = getOuterProcessingPrice(businessProductId);
                 break;
             case 2:
-                //do sth
+                price = getProcurementProcessingPrice(businessProductId);
                 break;
             case 3:
-                //do sth
-                break;
-            case 4:
-                //do sth
+                price = getTradePrice(businessProductId);
                 break;
         }
+        return price;
+    }
+
+    /**
+     * 自产类价格计算
+     * @param businessProductId
+     * @return
+     */
+    private Price getSelfProductionPrice(Integer businessProductId){
         return null;
     }
+
+    /**
+     * 外加工价格计算
+     * @param businessProductId
+     * @return
+     */
+    private Price getOuterProcessingPrice(Integer businessProductId){
+        return null;
+    }
+
+    /**
+     * 原药采购加工类价格计算
+     * @param businessProductId
+     * @return
+     */
+    private Price getProcurementProcessingPrice(Integer businessProductId){
+        return null;
+    }
+
+    /**
+     * 贸易类价格计算
+     * @param businessProductId
+     * @return
+     */
+    private Price getTradePrice(Integer businessProductId){
+        return null;
+    }
+
 }

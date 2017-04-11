@@ -288,15 +288,13 @@
 <input id="productId" type="hidden" value=""> <!--标准产品id-->
 <input id="archiveProductId" type="hidden" value=""> <!--客户产品id-->
 <input id="archiveProductId" type="hidden" value=""> <!--客户产品id-->
-<input id="customsClearanceId" type="hidden" value=""> <!--报关产品编码-->
-<input id="customerId" type="hidden" value=""> <!--客户id-->
+<input id="orderId" type="hidden" value="$!{orderId}"> <!--报关产品编码-->
+<input id="customerId" type="hidden" value="$!{customerId}"> <!--客户id-->
 
 <script type="text/javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/saleprocess/productBasicInfoRequire.js"></script>
 <script type="text/javascript">
-    var customerId = '';
-    var orderId = '';
     var productId = '';
     var wareId = '';
 
@@ -320,8 +318,8 @@
         $('#name').val(tarEltext);
 
         var data = {
-            'customerId':customerId,
-            'orderId':orderId,
+            'customerId':$('#customerId').val(),
+            'orderId':$('#orderId').val(),
             'productId':productId,
             'wareId':wareId,
             'businessProductId':''
@@ -329,8 +327,7 @@
         jQuery.ajax({
             url:basePath + '/businessProduct/addFromArchives',
             type:'POST',
-            contentType:"application/json",
-            data:JSON.stringify(data),
+            data:data,
             success:function (result) {
                 var businessProductId = result.businessProductId;
                 if(businessProductId != 0){
@@ -395,35 +392,43 @@
 
     function Add() {
         var data = {
-            'name':$('#name').val(),
-            'customsClearanceName':$('#customsClearanceName').val(),
-            'customerProductName':$('#customerProductName').val(),
-            'brand':$('#brand').val(),
-            'mainProductUnit':$('#mainProductUnit').val(),
-            'mainProductAmount':$('#mainProductAmount').val(),
-            'subProductUnit':$('#subProductUnit').val(),
-            'subProductAmount':$('#subProductAmount').val(),
-            'convertRate':$('#convertRate').val(),
-            'advisePrice':$('#advisePrice').val(),
-            'purchasePrice':$('#purchasePrice').val(),
-            'factoryId':$('#factoryId').val(),
-            'grossMargin':$('#grossMargin').val(),
-            'potentialEmployingWay':$('#potentialEmployingWay').val(),
-            'potentialEmployingScale':$('#potentialEmployingScale').val(),
-            'potentialEmployingStandard':$('#potentialEmployingStandard').val(),
-            'taxType':$('#taxType').val(),
-            'taxFree':$('#taxFree').val(),
-            'otherCost':$('#otherCost').val(),
-            'straightEmployingWay':'',
-            'straightEmployingScale':'',
-            'straightEmployingStandard':'',
-            "createTime": getTime(),
-            "createUserId": 2,
-            "createUserName":"杨洋",
-            "modifyTime":"2017-03-02 11:44:49",
-            "lastmodifyUserId": 1,
-            "lastmodifyUserName": "胡向阳"
+            "businessOrderProduct":{
+                'name':$('#name').val(),
+                'customsClearanceName':$('#customsClearanceName').val(),
+                'customerProductName':$('#customerProductName').val(),
+                'brand':$('#brand').val(),
+                'mainProductUnit':$('#mainProductUnit').val(),
+                'mainProductAmount':$('#mainProductAmount').val(),
+                'subProductUnit':$('#subProductUnit').val(),
+                'subProductAmount':$('#subProductAmount').val(),
+                'convertRate':$('#convertRate').val(),
+                'advisePrice':$('#advisePrice').val(),
+                'purchasePrice':$('#purchasePrice').val(),
+                'factoryId':$('#factoryId').val(),
+                'grossMargin':$('#grossMargin').val(),
+                'potentialEmployingWay':$('#potentialEmployingWay').val(),
+                'potentialEmployingScale':$('#potentialEmployingScale').val(),
+                'potentialEmployingStandard':$('#potentialEmployingStandard').val(),
+                'taxType':$('#taxType').val(),
+                'taxFree':$('#taxFree').val(),
+                'otherCost':$('#otherCost').val(),
+                'straightEmployingWay':'',
+                'straightEmployingScale':'',
+                'straightEmployingStandard':'',
+                "createTime": getTime(),
+                "createUserId": 2,
+                "createUserName":"杨洋",
+                "modifyTime":"2017-03-02 11:44:49",
+                "lastmodifyUserId": 1,
+                "lastmodifyUserName": "胡向阳"
+            },
+            "businessOrderProductComponents":getbusinessOrderProductComponents()
+            
         }
         return JSON.stringify(data);
+    }
+    
+    function getbusinessOrderProductComponents() {
+
     }
 </script>

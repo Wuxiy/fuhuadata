@@ -3,6 +3,7 @@ package com.fuhuadata.service;
 import com.fuhuadata.domain.BusinessOrderProduct;
 import com.fuhuadata.domain.BusinessOrderProductComponent;
 import com.fuhuadata.domain.query.QueryBusinessOrderProduct;
+import com.fuhuadata.vo.Price.Price;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -28,7 +29,7 @@ public interface BusinessOrderProductService {
      * @param wareId
      * @return
      */
-    int addFromArchives(Integer customerId,String orderId,Integer businessProductId,Integer productId,Integer wareId);
+    int addFromArchives(String customerId,String orderId,Integer businessProductId,Integer productId,Integer wareId);
 
     /**
      * /**
@@ -91,5 +92,5 @@ public interface BusinessOrderProductService {
      * @param businessProductId
      * @return
      */
-    BigDecimal getPriceForBusinessProduct(Integer businessProductId);
+    Price getPriceForBusinessProduct(Integer businessProductId);
 }

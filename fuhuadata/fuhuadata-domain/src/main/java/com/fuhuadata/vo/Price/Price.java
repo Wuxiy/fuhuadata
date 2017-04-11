@@ -2,39 +2,51 @@ package com.fuhuadata.vo.Price;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
- * Created by hexingfu on 2017/4/10.
+ * Created by hexingfu on 2017/4/11.
  */
-public class Price implements Serializable{
-    //总单价
-    private BigDecimal total;
-    //总单价明细
-    private Detail detail;
-    //价格计算类型,0自产类，1原药制剂自产类加工，2原药采购制剂加工，3贸易类，4其他
-    private int type;
+public class Price implements Serializable {
 
-    public BigDecimal getTotal() {
-        return total;
+    //价格
+    protected BigDecimal price;
+    //价格明细列表
+    protected List<PriceDetail> detailList;
+    //折合原币价格
+    protected BigDecimal convertedCurrency;
+    //信保赔付率
+    private BigDecimal trustPaymentRatio;
+
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setTotal(BigDecimal total) {
-        this.total = total;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
-    public Detail getDetail() {
-        return detail;
+    public List<PriceDetail> getDetailList() {
+        return detailList;
     }
 
-    public void setDetail(Detail detail) {
-        this.detail = detail;
+    public void setDetailList(List<PriceDetail> detailList) {
+        this.detailList = detailList;
     }
 
-    public int getType() {
-        return type;
+    public BigDecimal getConvertedCurrency() {
+        return convertedCurrency;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setConvertedCurrency(BigDecimal convertedCurrency) {
+        this.convertedCurrency = convertedCurrency;
+    }
+
+    public BigDecimal getTrustPaymentRatio() {
+        return trustPaymentRatio;
+    }
+
+    public void setTrustPaymentRatio(BigDecimal trustPaymentRatio) {
+        this.trustPaymentRatio = trustPaymentRatio;
     }
 }

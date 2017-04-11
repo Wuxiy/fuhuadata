@@ -25,7 +25,7 @@ public class BusinessOrder implements Serializable{
     private String collectionAgreement;//收款协议
     private Integer tradeType;//贸易方式 0一般贸易，1其他
     private String tradeTerm;//贸易术语
-    private Integer currency;//币种,0人民币，1美元，2欧元，3澳元
+    private String currency;//币种编码
     private String tradeCountry;//贸易国别
     private BigDecimal premiumRate;//保险费率
     private BigDecimal  guaranteeRate;//信保费率
@@ -197,11 +197,11 @@ public class BusinessOrder implements Serializable{
         this.tradeTerm = tradeTerm;
     }
 
-    public Integer getCurrency() {
+    public String getCurrency() {
         return currency;
     }
 
-    public void setCurrency(Integer currency) {
+    public void setCurrency(String currency) {
         this.currency = currency;
     }
 
