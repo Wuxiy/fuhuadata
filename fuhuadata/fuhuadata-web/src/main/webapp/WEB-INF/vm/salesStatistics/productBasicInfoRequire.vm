@@ -260,7 +260,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-1 col-xs-offset-4"><a href="" class="btn btn-block btn-default" type="button">取消</a></div>
+            <div class="col-xs-1 col-xs-offset-4"><a href="" class="btn btn-block btn-default" type="button">重置取消</a></div>
             <div class="col-xs-1 col-xs-offset-1"><a class="btn btn-block btn-primary" type="button" id="next">下一步</a></div>
         </div>
     </div>
@@ -285,8 +285,10 @@
 
 
 <input id="businessProductId" type="hidden" value="$!{businessProductId}"> <!--编号-->
-<input id="orderId" type="hidden" value="$!{orderId}"> <!--报关产品编码-->
-<input id="customerId" type="hidden" value="$!{customerId}"> <!--客户id-->
+<input id="orderId" type="hidden" value="$!{orderId}">
+<input id="customerId" type="hidden" value="$!{customerId}">
+<input id="productId" type="hidden" value="">
+<input id="wareId" type="hidden" value="">
 
 <script type="text/javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
@@ -332,7 +334,7 @@
             });
             if(isup&&!id){
                 jQuery.ajax({
-                    url:basePath + '/businessProduct/saveBaseInfoAndComponents?businessProductId=' + id,
+                    url:basePath + '/businessProduct/saveBaseInfoAndComponents',
                     type:'POST',
                     contentType:"application/json",
                     data:Add(),
@@ -364,7 +366,7 @@
         $('#convertRate').val(convertRate);
     })
     $('#subProductAmount').change(function () {
-        var val = $(mainProductAmount).val();
+        var val = $('#mainProductAmount').val();
         var Amountval = $(this).val();
         var convertRate = val/Amountval;
         $('#convertRate').val(convertRate);
@@ -379,6 +381,8 @@
 
         productId = ids.split('_')[0];
         wareId = ids.split('_')[1];
+        $('#productId').val(productId);
+        $('#wareId').val(wareId);
         $('#name').val(tarEltext);
 
         var data = {
@@ -507,6 +511,9 @@
         var data = {
             "businessOrderProduct":{
                 'name':$('#name').val(),
+                'orderId':$('#orderId').val(),
+                'productId':$('#productId').val(),
+                'wareId':$('#wareId').val(),
                 'customsClearanceName':$('#customsClearanceName').val(),
                 'customerProductName':$('#customerProductName').val(),
                 'brand':$('#brand').val(),
@@ -536,7 +543,8 @@
                 "modifyTime":"2017-03-02 11:44:49",
                 "lastmodifyUserId": 1,
                 "lastmodifyUserName": "胡向阳"
-            },
+            }
+            ,
             "businessOrderProductComponents":getbusinessOrderProductComponents()
             
         }
@@ -547,7 +555,11 @@
     function edit() {
         var data = {
             "businessOrderProduct":{
+                "id":$('#businessProductId').val(),
                 'name':$('#name').val(),
+                'orderId':$('#orderId').val(),
+                'productId':$('#productId').val(),
+                'wareId':$('#wareId').val(),
                 'customsClearanceName':$('#customsClearanceName').val(),
                 'customerProductName':$('#customerProductName').val(),
                 'brand':$('#brand').val(),
@@ -586,6 +598,8 @@
         tr.each(function () {
             var td = $(this).find('td'),
             obj = {
+                "productId":$('#productId').val(),
+                "wareId":$('#wareId').val(),
                 "componentId":td.eq(0).attr('data-id'),
                 "componentName":td.eq(0).text(),
                 "consumption":td.eq(1).find('input').val(),
