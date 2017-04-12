@@ -466,9 +466,9 @@
 				contract_price, transform_state, create_user_id, create_user_name, lastmodify_user_id,
 				lastmodify_user_name, create_time, modify_time
 			from business_order_product
-				where id=#id#
+				where id=#businessProductId#
 		)
-		<selectKey resultClass="int" keyProperty="id">
+		<selectKey resultClass="java.lang.Integer" keyProperty="value">
 			SELECT @@IDENTITY AS ID
 		</selectKey>
 	</insert>
@@ -550,7 +550,7 @@
 		#straightEmployingScale#,#straightEmployingStandard#,#potentialEmployingWay#,#potentialEmployingScale#,#potentialEmployingStandard#,
 		#taxType#,#taxFree#,#otherCost#
 		)
-		<selectKey resultClass="int" keyProperty="id">
+		<selectKey resultClass="java.lang.Integer" keyProperty="id">
 			SELECT @@IDENTITY AS ID
 		</selectKey>
 	</insert>

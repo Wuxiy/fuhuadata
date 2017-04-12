@@ -45,13 +45,21 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
             for(BusinessOrderProductComponent bopc:businessOrderProductComponents){
                 bopc.setBusinessProductId(businessProductId);
             }
-            businessOrderProductComponentDao.insertProductComponent(businessOrderProductComponents);
+            boolean flag = businessOrderProductComponentDao.insertProductComponent(businessOrderProductComponents);
+            if(!flag){
+               throw new Exception("插入产品成品失败");
+            }
             //维护档案数据
             int businessProductArchivesId = customerProductArchivesDao.addArchives(businessProductId);
+            if(businessProductArchivesId<1){
+                throw new Exception("插入档案失败");
+            }
             Map<String,Object> pmap = new HashMap<String,Object>();
             pmap.put("businessProductId",businessProductId);
             pmap.put("businessProductArchivesId",businessProductArchivesId);
-            businessOrderProductComponentDao.addArchives(pmap);
+            if(businessOrderProductComponentDao.addArchives(pmap)<1){
+                throw new Exception("插入档案失败");
+            }
             return businessProductId;
         } catch (Exception e) {
             e.printStackTrace();

@@ -92,9 +92,9 @@
   </delete>
   
   <insert id="insert" parameterClass="BusinessOrderProductComponent" >
-    insert into business_order_product_component (business_product_id, product_id, component_id,
+    insert into business_order_product_component (business_product_id, product_id,ware_id, component_id,
       consumption, price, cost, remark)
-    values (#businessProductId#, #productId#, #componentId#,
+    values (#businessProductId#, #productId#,#wareId#, #componentId#,
       #consumption#, #price#, #cost#, #remark#)
       <selectKey resultClass="java.lang.Integer" keyProperty="id">
           SELECT @@IDENTITY AS ID
@@ -115,14 +115,14 @@
   </insert>
 
     <insert id="addArchives" parameterClass="java.util.HashMap" >
-        insert into business_order_product_component_archives (business_product_id, product_id, component_id,
+        insert into business_order_product_component_archives (business_product_id, product_id,ware_id, component_id,
         consumption, price, cost, remark)
-        (select #businessProductArchivesId#, product_id, component_id,
+        (select #businessProductArchivesId#, product_id, ware_id,component_id,
         consumption, price, cost, remark
         from business_order_product_component
         where business_product_id = #businessProductId#
         )
-        <selectKey resultClass="java.lang.Integer" keyProperty="id">
+        <selectKey resultClass="java.lang.Integer" keyProperty="value">
             SELECT @@IDENTITY AS ID
         </selectKey>
     </insert>

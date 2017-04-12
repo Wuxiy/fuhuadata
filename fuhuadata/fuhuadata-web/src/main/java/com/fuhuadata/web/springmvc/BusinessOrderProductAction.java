@@ -137,6 +137,7 @@ public class BusinessOrderProductAction {
     @ResponseBody
     @RequestMapping(value="/saveBaseInfoAndComponents")
     public ResultPojo saveBaseInfoAndComponents(@RequestBody ProductRequireBase productRequireBase){
+        Map<String,Object> map = new HashMap<String,Object>();
         BusinessOrderProduct businessOrderProduct = productRequireBase.getBusinessOrderProduct();
         BusinessOrderProductComponent[] businessOrderProductComponents = productRequireBase.getBusinessOrderProductComponents();
         Integer businessProductId = businessOrderProduct.getId();
@@ -156,11 +157,14 @@ public class BusinessOrderProductAction {
                 //新增
                 businessProductId = businessOrderProductService.addBusinessOrderProduct(businessOrderProduct,list);
             }
+            map.put("success",true);
+            map.put("businessProductId",businessProductId);
+            map.put("orderId",businessOrderProduct.getOrderId());
         } catch (Exception e) {
             e.printStackTrace();
-            pojo.setData(false);
+            map.put("success",false);
         }
-        pojo.setData(true);
+        pojo.setData(map);
         return pojo;
     }
 

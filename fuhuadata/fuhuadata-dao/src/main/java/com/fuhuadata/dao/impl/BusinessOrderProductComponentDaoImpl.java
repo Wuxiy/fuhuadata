@@ -22,7 +22,7 @@ public class BusinessOrderProductComponentDaoImpl extends BaseDao<BusinessOrderP
     private static final String UPDATE = "BusinessOrderProductComponent.update";
     private static final String INSERT_FROM_ARCHIVES = "BusinessOrderProductComponent.insertFromArchives";
     private static final String GET_BY_PRODUCT_ID = "BusinessOrderProductComponent.getListByProductId";
-    private static final String ADD_ARCHIVES = "BusinessOrderProductComponent,addArchives";
+    private static final String ADD_ARCHIVES = "BusinessOrderProductComponent.addArchives";
     private static final String UPDATE_ARCHIVES = "BusinessOrderProductComponent.updateArchives";
     @Autowired
     private SqlMapClientTemplate sqlMapClientTemplate;
