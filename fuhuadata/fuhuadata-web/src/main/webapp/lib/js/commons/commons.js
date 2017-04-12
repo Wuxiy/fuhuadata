@@ -160,6 +160,18 @@ CRM.addOnlyClass = function (el,allEL,par,cl) {
     el.addClass(cl);
 };
 
+// 返回没选中的tr
+CRM.getNoSelectedTr = function (table) {
+
+    return table.find('tbody').find('tr').filter(function(){
+
+        if (!$(this).find('input').prop('checked')) {
+
+            return $(this);
+        }
+    });
+};
+
 //移动
 CRM.moveEl = function (el,tar) {
     el.appendTo(tar);
@@ -180,8 +192,6 @@ CRM.module.Panel = function (el,res) {
         down        : function(){return false;}
     },res||{});
 
-    // this.up          = up;
-    // this.down        = down;
     this.panel       = $(el);
     this.isEditState = false;
     this.edit        = CRM.el.EDIT_BTN;
@@ -330,6 +340,8 @@ CRM.editEl = function (el) {
         }
     });
 };
+
+
 // $("#zebraTable").find("td").dblclick( //点击编辑表格
 //     function() {
 //         if($(this).text()) {

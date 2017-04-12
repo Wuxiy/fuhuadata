@@ -120,15 +120,6 @@ CRM.productArchivesList.tplHandler = function (id,data,tar) {
 CRM.productArchivesList.viewPage = function () {
     var page = CRM.productArchivesList;
 
-    // 加工成分表格进入查看状态
-    page.processingComponents.find('tbody').find('tr').filter(function(){
-
-        if (!$(this).find('input').prop('checked')) {
-
-            return $(this);
-        }
-    }).attr('data-view','editView');
-
     // 等页面渲染完了再赋值
     page.editView = $(CRM.el.EDIT_VIEW);
     page.editHide = $(CRM.el.EDIT_HIDE);
@@ -157,10 +148,11 @@ CRM.productArchivesList.renderPageHandler = function (data) {
         page.measurement.val(p.measurement);
         page.saltType.val([p.saltType]); // checkbox
 
-        if (p.saltType == 5) { // 如果显示其他则显示
-
-            page.otherSaltName.val(p.otherSaltName).removeClass('hidden');
-        }
+        // if () {
+        //
+        //     page.otherSaltName.val(p.otherSaltName).removeClass('hidden');
+        // }
+        CRM.showOrHide(page.otherSaltName, null, page.saltType.filter('.else').prop('checked')); // 选中
 
         page.executeStandard.val(p.executeStandard);
         page.concentration.val(p.concentration);
@@ -199,6 +191,9 @@ CRM.productArchivesList.renderPageHandler = function (data) {
     // 创建可编辑表格实例
     page.editITable = new CRM.ETable({id:'#iTable',inverse:true});
     page.editPTable = new CRM.ETable({id:'#pTable',inverse:true});
+
+    // 未选中的tr隐藏
+    CRM.getNoSelectedTr($('#pTable')).addClass('hidden');
 
     // 页面进入查看状态
     page.viewPage();
@@ -317,6 +312,8 @@ $(function () {
 
         page.asidePanel.fadeOut();
 
+        $('#pTable').find('tr').removeClass('hidden');
+
         // 开启表格编辑功能
         page.editITable.status = true;
         page.editPTable.status = true;
@@ -348,6 +345,8 @@ $(function () {
     page.cancel.on('click.cancel',function () {
 
         page.asidePanel.fadeIn();
+
+        page.renderPage(page.productId.val());
 
         // 关闭表格编辑功能
         page.editITable.status = false;
