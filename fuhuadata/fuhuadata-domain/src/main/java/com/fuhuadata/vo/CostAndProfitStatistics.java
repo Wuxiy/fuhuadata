@@ -31,6 +31,8 @@ public class CostAndProfitStatistics {
 
     private String categoryName;//品类
 
+    private String customerAreaId;//地区分类id
+
     private String customerArea;//地区分类
 
     private Integer customerLevel;//客户类型
@@ -272,5 +274,13 @@ public class CostAndProfitStatistics {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public String getCustomerAreaId() {
+        return customerAreaId;
+    }
+
+    public void setCustomerAreaId(String customerAreaId) {
+        this.customerAreaId = customerAreaId;
     }
 }

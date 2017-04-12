@@ -546,6 +546,9 @@
 
     <sql id="PROFIT-STATISTICS-QUERY-COMMON">
         <dynamic prepend=" WHERE ">
+            <isNotEmpty prepend=" AND " property="customerAreaId">
+                base.customer_area_id  = #customerAreaId#
+            </isNotEmpty>
             <isNotEmpty prepend=" AND " property="startTime">
                 <![CDATA[
                      a.deal_time  >=  #startTime#
@@ -563,6 +566,7 @@
         <isEqual property="dimension" compareValue="0">
             SELECT
             base.country,
+            base.customer_area_id customerAreaId,
             base.customer_area customerArea,
             SUM(a.actual_amount_paid) salesAmount,
             SUM(a.gross_profit) grossProfit,
@@ -607,7 +611,8 @@
             SUM(a.gross_profit) grossProfit,
             SUM(a.maintenance_fee) maintenanceFee,
             SUM(a.net_profit) netProfit,
-            a.sales_man_name
+            a.sales_man_id salesManId,
+            a.sales_man_name salesManName
             FROM
             customer_base_info base
             LEFT JOIN business_order a ON a.customer_id = base.customer_id

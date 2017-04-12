@@ -114,11 +114,10 @@
                                     <th class="text-center text-middle">产品种类</th>
                                     <th class="text-center text-middle">销售量</th>
                                     <th class="text-center text-middle">销售额</th>
-                                    <th class="text-center text-middle">销售最低限价</th>
-                                    <th class="text-center text-middle">营销成本</th>
-                                    <th class="text-center text-middle">净利润</th>
-                                    <th class="text-center text-middle">排名</th>
+                                    <th class="text-center text-middle">毛利润</th>
                                     <th class="text-center text-middle">毛利率（%）</th>
+                                    <th class="text-center text-middle">排名</th>
+
                                 </tr>
                                 </thead>
                                 <tbody id="productDimension"></tbody>
@@ -215,13 +214,14 @@
                     if (ResultData && ResultData != '' && ResultData != 'null') {
                         for (var i = 0; i < ResultData.length; i++) {
                             _html += '<tr>';
-                            _html += '	<td>' + ResultData[i].businessId + '</td>';
+                            _html += '	<td>' + i + '</td>';
                             _html += '  <td><a href="">' + ResultData[i].productName + '</a></td>';
                             _html += '  <td>' + ResultData[i].categoryName + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].salesVolume + '</td>';
+                            _html += '  <td lang="zh">' + ResultData[i].salesAmount + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].grossProfit + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].grossMargin + '</td>';
-                            _html += '  <td lang="zh">' + ResultData[i].salesAmount + '</td>';
+                            _html += '	<td>' + i + '</td>';
                             _html += '   </tr>';
                         }
                     }
@@ -230,13 +230,14 @@
                     if (ResultData && ResultData != '' && ResultData != 'null') {
                         for (var i = 0; i < ResultData.length; i++) {
                             _html += '<tr>';
-                            _html += '	<td>' + ResultData[i].businessId + '</td>';
+                            _html += '	<td>' + i + '</td>';
                             _html += '  <td><a href="">' + ResultData[i].customerArea + '</a></td>';
                             _html += '  <td>' + ResultData[i].categoryName + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].salesAmount + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].grossProfit + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].maintenanceFee + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].netProfit + '</td>';
+                            _html += '	<td>' + i + '</td>';
                             _html += '   </tr>';
                         }
                     }
@@ -246,13 +247,14 @@
                     if (ResultData && ResultData != '' && ResultData != 'null') {
                         for (var i = 0; i < ResultData.length; i++) {
                             _html += '<tr>';
-                            _html += '	<td>' + ResultData[i].businessId + '</td>';
+                            _html += '	<td>' + i + '</td>';
                             _html += '	<td>' + ResultData[i].country + '</td>';
                             _html += '  <td><a href="">' + ResultData[i].customerArea + '</a></td>';
                             _html += '  <td lang="zh">' + ResultData[i].salesAmount + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].grossProfit + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].maintenanceFee + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].netProfit + '</td>';
+                            _html += '	<td>' + i + '</td>';
                             _html += '   </tr>';
                         }
                     }
@@ -262,7 +264,7 @@
                     if (ResultData && ResultData != '' && ResultData != 'null') {
                         for (var i = 0; i < ResultData.length; i++) {
                             _html += '<tr>';
-                            _html += '	<td>' + ResultData[i].businessId + '</td>';
+                            _html += '	<td>' + i + '</td>';
                             _html += '	<td>' + ResultData[i].customerName + '</td>';
                             _html += '	<td>' + ResultData[i].country + '</td>';
                             _html += '  <td><a href="">' + ResultData[i].customerArea + '</a></td>';
@@ -271,6 +273,7 @@
                             _html += '  <td lang="zh">' + ResultData[i].maintenanceFee + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].netProfit + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].salesManName + '</td>';
+                            _html += '	<td>' + i + '</td>';
                             _html += '   </tr>';
                         }
                     }
@@ -280,15 +283,18 @@
                     if (ResultData && ResultData != '' && ResultData != 'null') {
                         for (var i = 0; i < ResultData.length; i++) {
                             _html += '<tr>';
-                            _html += '	<td>' + ResultData[i].businessId + '</td>';
+                            _html += '	<td>' + i + '</td>';
                             _html += '	<td>' + ResultData[i].salesManName + '</td>';
                             _html += '  <td><a href="">' + ResultData[i].customerArea + '</a></td>';
                             _html += '  <td lang="zh">' + ResultData[i].salesAmount + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].grossProfit + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].maintenanceFee + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].netProfit + '</td>';
+                            _html += '	<td>' + i + '</td>';
+                            _html += '	<td><a href="">查看</a></td>';
                             _html += '   </tr>';
                         }
+
                     }
                     $("#salesManDimension").html(_html);
                 }
