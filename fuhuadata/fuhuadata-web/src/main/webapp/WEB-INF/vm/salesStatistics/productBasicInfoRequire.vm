@@ -124,12 +124,12 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input id="purchasePrice" class="form-control notnull" value="0" disabled>
+                                                <input id="purchasePrice" class="form-control notnull" value="">
                                                 <span class="input-group-addon">元</span>
                                             </div>
                                         </td>
                                         <td><label class="control-label" lang="zh">交货时间</label></td>
-                                        <td><input id="deliveryTime" class="form-control" type="text" value=""/></td>
+                                        <td><input id="deliveryTime" class="form-control" type="date" value=""/></td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -240,10 +240,10 @@
                         <table class="table table-condensed table-bordered table-striped text-center">
                             <thead>
                             <tr>
-                                <th class="text-center col-xs-3" lang="zh">原料</th>
-                                <th class="text-center col-xs-2" lang="zh">单耗(kg/KL)</th>
-                                <th class="text-center col-xs-2" lang="zh">单价（元/kg）</th>
-                                <th class="text-center col-xs-2" lang="zh">费用（元/KL）</th>
+                                <th class="text-center col-xs-3" lang="zh">原料<sup class="not-null">*</sup></th>
+                                <th class="text-center col-xs-2" lang="zh">单耗(kg/KL)<sup class="not-null">*</sup></th>
+                                <th class="text-center col-xs-2" lang="zh">单价（元/kg）<sup class="not-null">*</sup></th>
+                                <th class="text-center col-xs-2" lang="zh">费用（元/KL）<sup class="not-null">*</sup></th>
                                 <th class="text-center col-xs-3" lang="zh">备注</th>
                             </tr>
                             </thead>
@@ -285,8 +285,10 @@
 
 
 <input id="businessProductId" type="hidden" value="$!{businessProductId}"> <!--编号-->
-<input id="orderId" type="hidden" value="$!{orderId}"> <!--报关产品编码-->
-<input id="customerId" type="hidden" value="$!{customerId}"> <!--客户id-->
+<input id="orderId" type="hidden" value="$!{orderId}">
+<input id="customerId" type="hidden" value="$!{customerId}">
+<input id="productId" type="hidden" value="">
+<input id="wareId" type="hidden" value="">
 
 <script type="text/javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
@@ -298,14 +300,22 @@
     var wareId = '';
     var costtable = document.getElementById('costtable');
 
+    //根据id确定新增or编辑，添加默认disabled,val
     if(!id){
+        //暗佣计费方式
         $('#potentialEmployingWay').val('2');
         $('#potentialEmployingScale').val('0');
         $('#potentialEmployingScale').attr('disabled',true);
         $('#potentialEmployingStandard').val('0');
         $('#potentialEmployingStandard').attr('disabled',true);
+
+        //价格计算类型
+        $('#priceType').val('0');
+        $('#purchasePrice').attr('disabled',true);
+        $('#purchasePrice').val('0');
     }
 
+    //渲染树和提交
     $(document).ready(function () {
         //渲染树
         $('#tree').creatTree(basePath+'/businessProduct/initProductCatetroy');
@@ -319,20 +329,49 @@
                 data:Add(),
                 success:function (result) {
                     console.log(result);
+            var isup = true;
+            var notnull = $('.notnull');
+            notnull.each(function () {
+                var val = $(this).val();
+                if(val == ''||val == null){
+                    alert('请完善表单!');
+                    isup = false;
+                    return false;
                 }
-            })
+            });
+            if(isup&&!id){
+                jQuery.ajax({
+                    url:basePath + '/businessProduct/saveBaseInfoAndComponents',
+                    type:'POST',
+                    contentType:"application/json",
+                    data:Add(),
+                    success:function (result) {
+                        console.log(result);
+                    }
+                })
+            }
+            if(isup&&id){
+                jQuery.ajax({
+                    url:basePath + '/businessProduct/saveBaseInfoAndComponents?businessProductId=' + id,
+                    type:'POST',
+                    contentType:"application/json",
+                    data:edit(),
+                    success:function (result) {
+                        console.log(result);
+                    }
+                })
+            }
         })
     })
 
+    //换算率
     $('#mainProductAmount').change(function () {
         var val = $(this).val();
         $('#subProductAmount').val(val);
-
         var Amountval = $('#subProductAmount').val();
         var convertRate = val/Amountval;
         $('#convertRate').val(convertRate);
     })
-
     $('#subProductAmount').change(function () {
         var val = $(mainProductAmount).val();
         var Amountval = $(this).val();
@@ -349,6 +388,8 @@
 
         productId = ids.split('_')[0];
         wareId = ids.split('_')[1];
+        $('#productId').val(productId);
+        $('#wareId').val(wareId);
         $('#name').val(tarEltext);
 
         var data = {
@@ -378,8 +419,8 @@
                     for(var i=0;i<components.length;i++){
                         costtable.innerHTML += '<tr>'+
                                 '<td data-id="'+components[i].componentId+'">'+components[i].componentName+'</td>'+
-                                '<td><input class="form-control" type="text" value="'+components[i].consumption+'"></td>'+
-                                '<td><input class="form-control" type="text" value="'+components[i].price+'"></td>'+
+                                '<td><input class="form-control notnull" type="text" value="'+components[i].consumption+'"></td>'+
+                                '<td><input class="form-control notnull" type="text" value="'+components[i].price+'"></td>'+
                                 '<td>'+components[i].cost+'</td>'+
                                 '<td><input class="form-control" type="text" value=""></td>'+
                                 '</tr>';
@@ -406,8 +447,8 @@
                             for(var i=0;i<components.length;i++){
                                 costtable.innerHTML += '<tr>'+
                                         '<td data-id="'+components[i].componentId+'">'+components[i].componentName+'</td>'+
-                                        '<td><input class="form-control" type="text" value="'+components[i].consumption+'"></td>'+
-                                        '<td><input class="form-control" type="text" value="'+components[i].price+'"></td>'+
+                                        '<td><input class="form-control notnull" type="text" value="'+components[i].consumption+'"></td>'+
+                                        '<td><input class="form-control notnull" type="text" value="'+components[i].price+'"></td>'+
                                         '<td>'+components[i].cost+'</td>'+
                                         '<td><input class="form-control" type="text" value=""></td>'+
                                         '</tr>';
@@ -464,6 +505,11 @@
             $('#potentialEmployingScale').val('0');
             $('#potentialEmployingStandard').attr('disabled',false);
             $('#potentialEmployingStandard').val('');
+        }else if(val == 2){
+            $('#potentialEmployingScale').attr('disabled',true);
+            $('#potentialEmployingScale').val('0');
+            $('#potentialEmployingStandard').attr('disabled',true);
+            $('#potentialEmployingStandard').val('0');
         }
     })
 
@@ -510,6 +556,42 @@
         return JSON.stringify(data);
     }
 
+    function edit() {
+        var data = {
+            "businessOrderProduct":{
+                'name':$('#name').val(),
+                'customsClearanceName':$('#customsClearanceName').val(),
+                'customerProductName':$('#customerProductName').val(),
+                'brand':$('#brand').val(),
+                'specification':$('#specification').val(),
+                'model':$('#model').val(),
+                'measurement':$('#measurement').val(),
+                'mainProductAmount':$('#mainProductAmount').val(),
+                'subProductUnit':$('#subProductUnit').val(),
+                'subProductAmount':$('#subProductAmount').val(),
+                'convertRate':$('#convertRate').val(),
+                'advisePrice':$('#advisePrice').val(),
+                'purchasePrice':$('#purchasePrice').val(),
+                'factoryName':$('#factoryName').val(),
+                'grossMargin':$('#grossMargin').val(),
+                'potentialEmployingWay':$('#potentialEmployingWay').val(),
+                'potentialEmployingScale':$('#potentialEmployingScale').val(),
+                'potentialEmployingStandard':$('#potentialEmployingStandard').val(),
+                'taxType':$('#taxType').val(),
+                'taxFree':$('#taxFree').val(),
+                'otherCost':$('#otherCost').val(),
+                'straightEmployingWay':'',
+                'straightEmployingScale':'',
+                'straightEmployingStandard':''
+            },
+            "businessOrderProductComponents":getbusinessOrderProductComponents()
+
+        }
+        console.log(data);
+        return JSON.stringify(data);
+>>>>>>> 235b1eb10b23e767aca497e01debb85551f787c2
+    }
+
     //获取加工成分列表
     function getbusinessOrderProductComponents() {
         var arr = [];
@@ -517,6 +599,8 @@
         tr.each(function () {
             var td = $(this).find('td'),
             obj = {
+                "productId":$('#productId').val(),
+                "wareId":$('#wareId').val(),
                 "componentId":td.eq(0).attr('data-id'),
                 "componentName":td.eq(0).text(),
                 "consumption":td.eq(1).find('input').val(),
