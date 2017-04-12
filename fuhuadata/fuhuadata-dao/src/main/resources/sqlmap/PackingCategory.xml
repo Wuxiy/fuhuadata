@@ -48,8 +48,8 @@
         FROM p_packing_category parent
         LEFT JOIN p_packing_category child ON child.parent_id = parent.category_id
         WHERE parent.parent_id = 0
-       <isNotEmpty property="parentIds" prepend="and">
-           parent.category_id in ($parentIds$)
+       <isNotEmpty property="value" prepend="and">
+           parent.category_id in ($value$)
        </isNotEmpty>
     </select>
     <select id="GET-ALL" resultMap="PACKINGCATEGORY-MAP">
