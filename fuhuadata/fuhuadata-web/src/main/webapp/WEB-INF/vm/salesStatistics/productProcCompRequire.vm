@@ -514,22 +514,13 @@
                 url         : '/upload/uploadFileAll',
                 type        : 'POST',
                 data        : data,
-<<<<<<< HEAD
-
                 dataType: 'JSON',
                 cache: false,
                 processData: false,
                 contentType: false,
 //                contentType : 'multipart/form-data',
                 callback    :  function (data) {
-                    img.attr('src',data);
-=======
-                cache       : false,
-                contentType : false,
-                processData : false,
-                callback : function (data) {
-                    img.attr('src',"../"+basePath + data);
->>>>>>> 921aaa04173baa6670bd143c36be40cdc3929fbd
+                    img.attr('src',"../"+basePath+data);
                     fileF.reset(); // 重置file的值
                     monBtn.removeClass('hidden'); // 显示修改按钮
                 }

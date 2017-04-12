@@ -36,8 +36,8 @@
                         标准产品档案
                     </h3>
                 </div>
-                <div id="formVessel" class="panel-body panel-edit clearfix">
-                    <from class="form-horizontal">
+                <div class="panel-body panel-edit clearfix">
+                    <from  id="myForm" class="form-horizontal">
                         <div class="form-group">
                             <label class="col-xs-1 control-label">品类</label>
                             <div class="col-xs-2">
@@ -59,14 +59,14 @@
                             <div id="wares" class="col-xs-4"></div>
                         </div>
                         <div class="form-group">
-                            <label class="col-xs-1 control-label">含量</label>
+                            <label class="col-xs-1 control-label">含量<sup data-view="editView" class="not-null">*</sup></label>
                             <div class="col-xs-2">
                                 <div class="input-group">
                                     <input id="concentration" data-control="off" class="form-control" disabled type="text" value=""/>
                                     <span class="input-group-addon">%</span>
                                 </div>
                             </div>
-                            <label class="col-xs-1 control-label">盐类</label>
+                            <label class="col-xs-1 control-label">盐类<sup data-view="editView" class="not-null">*</sup></label>
                             <div class="col-xs-7">
                                 <label class="radio-inline"><input name="saltType" data-control="off" type="radio" disabled value="0">无</label>
                                 <label class="radio-inline"><input name="saltType" data-control="off" type="radio" disabled value="1">异丙胺盐</label>
@@ -79,7 +79,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-xs-1 control-label">执行标准</label>
+                            <label class="col-xs-1 control-label">执行标准<sup data-view="editView" class="not-null">*</sup></label>
                             <div class="col-xs-2">
                                 <select id="executeStandard" data-control="off" disabled class="form-control">
                                     <option value="-1">全部</option>
@@ -90,7 +90,7 @@
                                     <option value="4">其他</option>
                                 </select>
                             </div>
-                            <label class="col-xs-1 control-label">执行标准号</label>
+                            <label class="col-xs-1 control-label">执行标准号<sup data-view="editView" class="not-null">*</sup></label>
                             <div class="col-xs-2">
                                 <input id="executeNumer" data-control="off" disabled class="form-control" type="text"/>
                             </div>
@@ -102,11 +102,11 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-xs-1 control-label">加工成份</label>
+                            <label class="col-xs-1 control-label">加工成份<sup data-view="editView" class="not-null">*</sup></label>
                             <div id="processingComponents" class="col-xs-6"></div>
                         </div>
                         <div class="form-group">
-                            <label class="col-xs-1 control-label">理化指标</label>
+                            <label class="col-xs-1 control-label">理化指标<sup data-view="editView" class="not-null">*</sup></label>
                             <div id="physicalProperities" class="col-xs-6"></div>
                         </div>
                     </from>
@@ -118,7 +118,7 @@
 
 ## 规格型号
 <script id="waresContent" type="text/html">
-    <%if(data instanceof Array){%>
+
     <table class="table table-condensed table-bordered table-striped text-center">
         <thead>
         <tr>
@@ -127,17 +127,21 @@
         </tr>
         </thead>
         <tbody>
+        <%if(data instanceof Array){%>
         <%for(var i=0;i<data.length;i++){%>
         <tr>
             <td><%=data[i].specification%></td>
             <td><%=data[i].model%></td>
         </tr>
         <%}%>
+        <%}else{%>
+        <tr>
+            <td colspan="2">暂无数据</td>
+        </tr>
+        <%}%>
         </tbody>
     </table>
-    <%}else{%>
-    <p class="form-control" disabled>暂无数据</p>
-    <%}%>
+
 </script>
 
 ## 理化指标
@@ -164,7 +168,7 @@
     <%}else if(typeof data == 'string'){%>
     <textarea class="form-control" rows="3" data-control="off" disabled><%=data%></textarea>
     <%}else{%>
-    <p class="form-control" disabled>暂无数据</p>
+    <textarea class="form-control" rows="3" data-control="off" disabled>暂无数据</textarea>
     <%}%>
 </script>
 
@@ -198,7 +202,7 @@
     <%}else if(typeof data == 'string'){%>
     <textarea class="form-control" rows="3" data-control="off" disabled><%=data%></textarea>
     <%}else{%>
-    <p class="form-control" disabled>暂无数据</p>
+    <textarea class="form-control" rows="3" data-control="off" disabled>暂无数据</textarea>
     <%}%>
 </script>
 

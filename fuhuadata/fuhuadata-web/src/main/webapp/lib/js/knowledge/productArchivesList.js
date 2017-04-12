@@ -12,8 +12,8 @@ CRM.productArchivesList.elOff        = null; // 编辑状态下开启的控件
 CRM.productArchivesList.mainPanel    = $('#productInfo'); // 主面板
 CRM.productArchivesList.asidePanel   = $('#aside'); // 侧面板
 CRM.productArchivesList.asideTree    = $('#asideTree'); // 侧边树
-CRM.productArchivesList.formVessel   = $('#formVessel'); // 表单容器
-CRM.productArchivesList.form         = $('#form'); // 表单内容
+CRM.productArchivesList.form         = $('#myForm'); // 表单容器
+// CRM.productArchivesList.form         = $('#form'); // 表单内容
 CRM.productArchivesList.editITable   = null; // 可编辑表格(理化)
 CRM.productArchivesList.editPTable   = null; // 可编辑表格(加工)
 CRM.productArchivesList.wTbody       = 'waresContent'; // 规格型号表格内容
@@ -83,6 +83,27 @@ CRM.productArchivesList.collectData = function () {
     return JSON.stringify(obj);
 };
 
+// 重置页面
+CRM.productArchivesList.resetPage = function(){
+    var page = this;
+
+    page.productId.val('');
+    page.categoryName.val('');
+    page.name.val('');
+    page.measurement.val('');
+    page.saltType.val([]); // checkbox
+    page.otherSaltName.val('');
+    page.executeStandard.val('-1'); // select
+    page.concentration.val('');
+    page.executeNumer.val('');
+    page.productFeature.val('');
+    page.lastmodifyUserName.val('');
+    page.modifyTime.val('');
+    page.wares.html('');
+    page.processingComponents.html('');
+    page.physicalProperities.html('');
+};
+
 // 获得表格数据
 CRM.productArchivesList.getTableData = function (id) {
     var page = this;
@@ -138,8 +159,10 @@ CRM.productArchivesList.renderPageHandler = function (data) {
         apcs  = null,
         arr   = [];
 
+        page.resetPage();
+
     // 如果productInfo存在,则渲染
-    if (data.productInfo) {
+    if (data && data.productInfo) {
 
         p = data.productInfo;
         page.productId.val(p.productId);
@@ -147,11 +170,8 @@ CRM.productArchivesList.renderPageHandler = function (data) {
         page.name.val(p.name);
         page.measurement.val(p.measurement);
         page.saltType.val([p.saltType]); // checkbox
+        page.otherSaltName.val(p.otherSaltName);
 
-        // if () {
-        //
-        //     page.otherSaltName.val(p.otherSaltName).removeClass('hidden');
-        // }
         CRM.showOrHide(page.otherSaltName, null, page.saltType.filter('.else').prop('checked')); // 选中
 
         page.executeStandard.val(p.executeStandard);
@@ -162,14 +182,23 @@ CRM.productArchivesList.renderPageHandler = function (data) {
         page.modifyTime.val(p.modifyTime);
     }
 
-    page.tplHandler(page.wTbody,data.wares,page.wares); // table规格型号
+    if (data) {
 
-    // 判断是否是水剂
-    index = data.index == null ? p.physicalProperities : data.index;
-    apcs  = data.processingComponents == null ? p.processingComponents : data.allProcessingComponents;
+        page.tplHandler(page.wTbody,data.wares,page.wares); // table规格型号
+    }
 
-    page.tplHandler(page.iTbody, index, page.physicalProperities); // table理化指标
-    page.tplHandler(page.pTbody, apcs, page.processingComponents); // table加工成份
+    // 判断理化和加工的数据类型
+    if (data) {
+
+        index = data.index == null ? p.physicalProperities : data.index;
+        apcs  = data.processingComponents == null ? p.processingComponents : data.allProcessingComponents;
+        page.tplHandler(page.iTbody, index, page.physicalProperities); // table理化指标
+        page.tplHandler(page.pTbody, apcs, page.processingComponents); // table加工成份
+
+        // 创建可编辑表格实例
+        page.editITable = new CRM.ETable({id:'#iTable',inverse:true});
+        page.editPTable = new CRM.ETable({id:'#pTable',inverse:true});
+    }
 
     // 取得该产品具有的加工成份
     if (data.processingComponents instanceof Array) {
@@ -177,7 +206,7 @@ CRM.productArchivesList.renderPageHandler = function (data) {
         page.pcCheckboxs = $('[name="pc"]');
         $.each(data.processingComponents, function (i,item) {
             var val = item.componentId,
-                td = page.pcCheckboxs.filter('[value="'+val+'"]').parents('tr').find('td');
+                td = page.pcCheckboxs.filter('[value="'+ val +'"]').parents('tr').find('td');
             // td.eq(1).text(item.componentName);
             td.eq(2).text(item.consumption);
             td.eq(3).text(item.remark);
@@ -187,10 +216,6 @@ CRM.productArchivesList.renderPageHandler = function (data) {
     }
 
     page.pcCheckboxs.val(arr);
-
-    // 创建可编辑表格实例
-    page.editITable = new CRM.ETable({id:'#iTable',inverse:true});
-    page.editPTable = new CRM.ETable({id:'#pTable',inverse:true});
 
     // 未选中的tr隐藏
     CRM.getNoSelectedTr($('#pTable')).addClass('hidden');
@@ -274,10 +299,6 @@ CRM.productArchivesList.renderProTreeToAside = function (data) {
     treeObj = $.fn.zTree.getZTreeObj(id);
     treeObj.expandAll(true); // 默认展开
 };
-// 重置表单
-CRM.productArchivesList.reset=function(){
-
-};
 
 // 初始化页面
 CRM.productArchivesList.init = function () {
@@ -308,7 +329,7 @@ $(function () {
     page.init();
 
     // 编辑
-    page.edit.on('click.edit',function () {
+    page.edit.on('click.e',function () {
 
         page.asidePanel.fadeOut();
 
@@ -322,7 +343,7 @@ $(function () {
     });
 
     // 保存
-    page.save.on('click.save',function () {
+    page.save.on('click.s',function () {
 
         page.asidePanel.fadeIn();
 
@@ -331,7 +352,9 @@ $(function () {
             data : page.collectData(),
             type : 'POST',
             contentType:"application/json",
-            callback : page.renderPage(page.productId.val())
+            callback : function(data){
+                page.renderPage(page.productId.val());
+            }
     });
 
         // 关闭表格编辑功能
@@ -342,7 +365,7 @@ $(function () {
     });
 
     // 取消
-    page.cancel.on('click.cancel',function () {
+    page.cancel.on('click.c',function () {
 
         page.asidePanel.fadeIn();
 
@@ -359,6 +382,11 @@ $(function () {
     page.saltType.on('change.salt',function () {
         var thisEl = $(this).filter('.else');
         CRM.showOrHide(page.otherSaltName,null,thisEl.prop('checked'));
+
+        if (!thisEl.prop('checked')) {
+
+            page.otherSaltName.val(''); // 如果没选中清除该文本框
+        }
     });
 
 });
