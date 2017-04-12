@@ -25,5 +25,4 @@ public interface PackingCategoryManager {
 
     public PackingCategory getPackingCategoryById(int id);
 
-
 }

@@ -5,10 +5,7 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.*;
 import com.fuhuadata.util.JsonUtils;
-import com.fuhuadata.vo.CategoryTree;
-import com.fuhuadata.vo.DocumentaryVo;
-import com.fuhuadata.vo.PackingArchivesVO;
-import com.fuhuadata.vo.ProductWareVo;
+import com.fuhuadata.vo.*;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.log4j.Logger;
@@ -248,6 +245,8 @@ public class BusinessOrderProductAction {
                 }
             }
         }
+        map.put("outer",outer);
+        map.put("auxiliary",auxiliary);
         return map;
     }
 
@@ -337,7 +336,12 @@ public class BusinessOrderProductAction {
      */
     @ResponseBody
     @RequestMapping("/getPackageRequire")
-    public BusinessOrderProduct getPackageRequire(Integer businessProductId){
-       return businessOrderProductService.getPackageRequireById(businessProductId);
+    public Map<String,Object> getPackageRequire(Integer businessProductId){
+        Map<String,Object> map = new HashMap<String,Object>();
+        BusinessOrderProduct businessOrderProduct = businessOrderProductService.getPackageRequireById(businessProductId);
+        map.put("PackageRequireVo",JsonUtils.toObject(PackingRequireVo.class, businessOrderProduct.getPackageRequire()));
+        businessOrderProduct.setPackageRequire(null);
+        map.put("businessOrderProduct",businessOrderProduct);
+       return map;
     }
 }
