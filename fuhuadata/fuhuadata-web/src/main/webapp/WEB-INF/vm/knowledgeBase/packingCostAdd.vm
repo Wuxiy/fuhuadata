@@ -237,7 +237,7 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/scaffolding.js"></script>
 <script type="text/javascript">
-    $('#tree').creatTree('${request.contextPath}/packingCategory/CategoryTree');
+    $('#tree').creatTree('${request.contextPath}/packingCategory/CategoryTree?parentIds=2,3');
     $('#tree').filtrateData('${request.contextPath}/packingArchives/getPackingArchivesByPId',"modal_relate_table","packingInfoModal");
 
 

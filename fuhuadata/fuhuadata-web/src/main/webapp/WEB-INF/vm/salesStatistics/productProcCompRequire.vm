@@ -399,47 +399,49 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-xs-3">
-                        <div class="input-group" data-stopPropagation="true">
-                            <input type="text" class="form-control notDisabled" placeholder="请输入关键词查找" lang="zh" />
-                            <div class="input-group-btn"><button class="btn btn-xs btn-primary" type="submit"><span class="glyphicon glyphicon-search"></span></button></div>
-                        </div>
-                        <hr />
-                        #*<div class="zTreeDemoBackground left">
-                            <ul id="packingTree" class="ztree"></ul>
-                        </div>*#
-
-                        <div class="modal-body well" style="max-height: 300px; overflow-y: scroll; overflow-x: scroll;">
-                        ##                        这里插入树形菜单
-                            <div id="tree" class="tree"></div>
+                        <div class="panel panel-default">
+                            <div class="panel-body clearfix">
+                                <!--树形菜单-->
+                                <div id="tree" class="tree"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-xs-9">
-                        <table class="table table-condensed table-bordered table-striped text-right text-center">
-                            <thead>
-                            <tr>
-                                <th class="text-center"><div class="checkbox col-xs-12"><label><input type="checkbox"></label></div></th>
-                                <th class="text-center">包材类型编码</th>
-                                <th class="text-center">包材类型名称</th>
-                                <th class="text-center">规格</th>
-                                <th class="text-center">尺寸</th>
-                                <th class="text-center">材质</th>
-                                <th class="text-center">单价(元)</th>
-                                <th class="text-center">状态</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="">
-                                <td><div class="checkbox col-xs-12"><label><input type="checkbox"></label></div></td>
-                                <td>外包装-纸箱</td>
-                                <td>1L*10瓶/箱</td>
-                                <td></td>
-                                <td></td>
-                                <td>五层瓦楞</td>
-                                <td>3.00</td>
-                                <td></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div class="panel panel-default">
+                            <div class="panel-body clearfix">
+                                <table class="table table-condensed table-bordered table-striped text-right text-center">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center"></th>
+                                        <th class="text-center">包材类型编码</th>
+                                        <th class="text-center">包材类型名称</th>
+                                        <th class="text-center">规格</th>
+                                        <th class="text-center">尺寸</th>
+                                        <th class="text-center">材质</th>
+                                        <th class="text-center">单价(元)</th>
+                                        <th class="text-center">状态</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="container">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-3 col-xs-offset-3">
+                        <a type="button" class="btn btn-primary btn-block" id="finish">
+                            完成
+                        </a>
+                    </div>
+                    <div class="col-xs-3">
+                        <button type="button" class="btn btn-default btn-block" data-dismiss="modal">
+                            取消
+                        </button>
                     </div>
                 </div>
             </div>
@@ -459,27 +461,12 @@
 
     $(function () {
         $('#tree').creatTree(basePath+'/packingCategory/CategoryTree?parentIds=1');
-        /* function renderPackingTreeToModal(data) {
-                    var setting = {
-                        data: {
-                            simpleData: {
-                                enable: true
-                            }
-                        },
-                        edit: {
-                            enable: false
-                        },
-                        callback : {
-                            onClick : page.asideTreeOnClick
-                        }
-                    },
-                    treeObj  = null;
-
-            page.roleTreeData = CRM.toArr(data); // 将角色树的数据保存到page对象属性
-            $.fn.zTree.init(page.aside, setting, page.roleTreeData);
-            treeObj = $.fn.zTree.getZTreeObj(id);
-            treeObj.expandAll(true); // 默认展开
-        };*/
+        $('#tree').filtrateData(basePath+'/packingArchives/getPackingArchivesByPId',"container","packingorderlist");
+        jQuery.ajax({
+            url:basePath + '/packingArchives/getPackingArchivesByPId',
+            type:'POST',
+            data:{id:1}
+        }).done(packingorderlist);
 
         // 点击图片，选中型号
         $('#size').on('click.select','a.thumbnail',function (e) {
@@ -558,6 +545,31 @@
             });
         });
 
+
+
+        $('#finish').click(function(){
+
+            var cellcheckbox = $("input[name='cellcheckbox']:checked").parent('td').parent('tr').find('td');
+            var id = cellcheckbox.find('[name=cellcheckbox]').val();
+            var packName = cellcheckbox.eq(2).text();
+            var spec = cellcheckbox.eq(3).text();
+            console.log(id);
+        })
+
     });
+
+
+
+    //主材id=1列表
+    function packingorderlist(data) {
+        var ResultData = data.data;
+
+        jQuery.each(ResultData,function(n,item){
+            var parent  = $('#container');
+            var tr = '<tr><td><input type="checkbox" value="'+item.packingId+'" name="cellcheckbox"/></td><td>'+item.packingId+'</td><td>'+item.packName+'</td><td>'+item.spec+'</td><td>'+item.size+'</td><td>'+item.quality+'</td><td>'+item.unitPrice+'</td><td>'+item.status+'</td></tr>';
+            $(tr).appendTo(parent);
+        })
+    }
+
 
 </script>
