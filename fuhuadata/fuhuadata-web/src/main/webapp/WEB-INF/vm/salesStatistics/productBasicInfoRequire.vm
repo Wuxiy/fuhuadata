@@ -322,13 +322,6 @@
 
         //执行下一步操作，根据edit&add的值选择不同的获取表单数据方法
         $('#next').click(function () {
-            jQuery.ajax({
-                url:basePath + '/businessProduct/saveBaseInfoAndComponents',
-                type:'POST',
-                contentType:"application/json",
-                data:Add(),
-                success:function (result) {
-                    console.log(result);
             var isup = true;
             var notnull = $('.notnull');
             notnull.each(function () {
@@ -373,7 +366,7 @@
         $('#convertRate').val(convertRate);
     })
     $('#subProductAmount').change(function () {
-        var val = $(mainProductAmount).val();
+        var val = $('#mainProductAmount').val();
         var Amountval = $(this).val();
         var convertRate = val/Amountval;
         $('#convertRate').val(convertRate);
@@ -589,7 +582,6 @@
         }
         console.log(data);
         return JSON.stringify(data);
->>>>>>> 235b1eb10b23e767aca497e01debb85551f787c2
     }
 
     //获取加工成分列表
