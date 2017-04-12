@@ -38,7 +38,7 @@ public class ProductInfoManagerImpl implements ProductInfoManager {
     @Transactional
     public boolean updateProductInfoById(int product_id, ProductInfo productInfo,List<ProductComponent> productComponents) {
     	productInfoDao.deleteProductProcessingComponent(product_id);
-    	if(productComponents!=null) {
+    	if(productComponents!=null&&productComponents.size()>0) {
 			productInfoDao.addProductProcessingComponent(productComponents);
 		}
     	return productInfoDao.updateProductInfoById(product_id, productInfo) == 1 ? true : false;

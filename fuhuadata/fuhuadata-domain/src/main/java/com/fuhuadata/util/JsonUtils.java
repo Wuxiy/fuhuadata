@@ -59,7 +59,16 @@ public class JsonUtils {
 		}
 		return json;
 	}
-	
+	public static <T> T toObject(Class<T> valueType,String jsonStr){
+		ObjectMapper o = new ObjectMapper();
+		try {
+			return (T)o.readValue(jsonStr, valueType);
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	/**
 	 * 返回JSON数据构造成的Map
 	 * @param jsonText

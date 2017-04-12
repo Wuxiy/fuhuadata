@@ -110,7 +110,7 @@ CRM.ajaxCall = function(res){
             console.log(data);
             callback(data);
         }else{
-            console.log('没有数据');
+            callback();
         }
     }).fail(function(res){
         console.log('error:'+res.status);
@@ -210,7 +210,7 @@ CRM.module.Panel.prototype.handleEdit = function (e) {
         elShow      = panel.find(this.editView),
         elHide      = panel.find(this.editHide),
         elOff       = panel.find(this.viewOff),
-        // res         = this.down;
+        // res         = this.down;F
     isEditState = true;
     CRM.onOrOff(elOff,isEditState);
     CRM.showOrHide(elShow,elHide,isEditState);
