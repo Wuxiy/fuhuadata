@@ -1,8 +1,9 @@
 package com.fuhuadata.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class BusinessOrderProductComponent {
+public class BusinessOrderProductComponent implements Serializable{
     private Integer id;
 
     private Integer businessProductId;
@@ -22,6 +23,10 @@ public class BusinessOrderProductComponent {
     private BigDecimal cost;
 
     private String remark;
+
+    public BusinessOrderProductComponent(){
+
+    }
 
     public Integer getWareId() {
         return wareId;

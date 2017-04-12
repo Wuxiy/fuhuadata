@@ -468,7 +468,6 @@
 			from business_order_product
 				where id=#id#
 		)
-		)
 		<selectKey resultClass="int" keyProperty="id">
 			SELECT @@IDENTITY AS ID
 		</selectKey>

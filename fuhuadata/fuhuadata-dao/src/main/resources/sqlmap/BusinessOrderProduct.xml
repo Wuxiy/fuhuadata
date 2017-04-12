@@ -106,14 +106,14 @@
             customer_product_name,brand,main_product_amount,main_product_unit,sub_product_amount,sub_product_unit,
             convert_rate,price_type,advise_price,purchase_price,delivery_time,factory_id,factory_name,straight_employing_way,
             straight_employing_scale,straight_employing_standard,potential_employing_way,potential_employing_scale,potential_employing_standard,
-            tax_type,tax_free,other_cost
+            tax_type,tax_free,other_cost,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time
         )
         values(
         #orderId#,#archiveProductId#,#productId#,#wareId#,#customsClearanceId#,#customsClearanceName#,#customerId#,#name#,
         #customerProductName#,#brand#,#mainProductAmount#,#mainProductUnit#,#subProductAmount#,#subProductUnit#,
         #convertRate#,#priceType#,#advisePrice#,#purchasePrice#,#deliveryTime#,#factoryId#,#factoryName#,#straightEmployingWay#,
         #straightEmployingScale#,#straightEmployingStandard#,#potentialEmployingWay#,#potentialEmployingScale#,#potentialEmployingStandard#,
-        #taxType#,#taxFree#,#otherCost#
+        #taxType#,#taxFree#,#otherCost#,#createUserId#,#createUserName#,#createUserId#,#createUserName# ,now(),now()
         )
         <selectKey resultClass="java.lang.Integer" keyProperty="id">
             SELECT @@IDENTITY AS ID
