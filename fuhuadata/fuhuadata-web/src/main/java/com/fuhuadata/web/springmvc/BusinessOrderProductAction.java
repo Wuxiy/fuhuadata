@@ -4,7 +4,9 @@ import com.fuhuadata.domain.*;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.*;
+import com.fuhuadata.util.JsonUtils;
 import com.fuhuadata.vo.CategoryTree;
+import com.fuhuadata.vo.DocumentaryVo;
 import com.fuhuadata.vo.PackingArchivesVO;
 import com.fuhuadata.vo.ProductWareVo;
 import com.fuhuadata.web.util.SystemLogAnnotation;
@@ -294,7 +296,7 @@ public class BusinessOrderProductAction {
         BusinessOrderProduct businessOrderProduct = businessOrderProductService.
                 getDocumentaryById(businessProductId);
         map.put("documentaryType",businessOrderProduct.getDocumentaryType());
-        map.put("documentaryRequire",businessOrderProduct.getDocumentaryRequire());
+        map.put("documentaryRequire", JsonUtils.toObject(DocumentaryVo.class,businessOrderProduct.getDocumentaryRequire()));
         map.put("otherDocumentaryRequire",businessOrderProduct.getOtherDocumentaryRequire());
         return map;
     }
