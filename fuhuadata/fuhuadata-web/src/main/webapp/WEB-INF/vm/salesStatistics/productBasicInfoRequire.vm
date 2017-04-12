@@ -541,7 +541,7 @@
             
         }
         console.log(data);
-        return data;
+        return JSON.stringify(data);
     }
 
     function edit() {
