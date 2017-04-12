@@ -34,28 +34,65 @@ CRM.el = {
 //是否隐藏
 CRM.showOrHide = function (elView,elHide,isShow) {
 
-    //true的时候显示
-    if (isShow) {
+    if (isShow) { // 为true是编辑状态
 
-        elView.removeClass('hidden');
-        elHide.addClass('hidden');
-    }else{
-        elView.addClass('hidden');
-        elHide.removeClass('hidden');
+        if (elView!=null) {
+
+            elView.removeClass('hidden');
+        }
+        if (elHide!=null) {
+
+            elHide.addClass('hidden');
+        }
+    }else{ // false 是查看状态
+
+        if (elView!=null) {
+
+            elView.addClass('hidden');
+        }
+        if (elHide!=null) {
+
+            elHide.removeClass('hidden');
+        }
     }
 };
+
+// 删除处理程序
+CRM.delHandler = function(el){
+    var tar = el.data('target'),//取得data-target属性值,selector
+        tarEl = el.parents(tar)[0];//删除class等于该属性值的第一个祖先元素
+
+    $(tarEl).remove();
+};
+
+// // 选中显示处理程序(用于radio、checkbox、selected)
+// CRM.selectedView = function (bln,selctor) { // true 或者 false
+//
+//     if (bln) { // 为true时显示
+//
+//         $(selctor).removeClass('hidden');
+//     }else {
+//
+//         $(selctor).addClass('hidden');
+//     }
+// };
 
 //是否禁用
 CRM.onOrOff = function (el,isOn) {
 
-    if (isOn) {
+    if (el!=null) {
 
-        el.removeAttr('disabled')
-            .attr('data-control','on');
-    }else {
-        el.attr('disabled','disabled')
-            .attr('data-control','off');
+        if (isOn) {
+
+            el.attr('disabled',false)
+                .attr('data-control','on');
+        }else {
+
+            el.attr('disabled',true)
+                .attr('data-control','off');
+        }
     }
+
 };
 
 //ajax调用公共方法
@@ -68,8 +105,13 @@ CRM.ajaxCall = function(res){
 
     $.ajax(res).done(function (result){
         var data = result.data;
-        console.log(data);
-        callback(data);
+
+        if (data) {
+            console.log(data);
+            callback(data);
+        }else{
+            console.log('没有数据');
+        }
     }).fail(function(res){
         console.log('error:'+res.status);
     });
@@ -96,7 +138,6 @@ CRM.toArr = function (data) {
     }
 
     recursionData(data);
-
     return arr;
 };
 
@@ -221,4 +262,90 @@ CRM.module.Panel.prototype.startCancel = function () {
         Panel.handleCancel(e);
     })
 };
+
+// 可编辑的表格对象
+CRM.ETable = function (opts) {
+    opts = $.extend({
+        id       : '',
+        status   : false, // 为false关闭编辑功能，为true开启编辑功能
+        inverse  : false, // 当为false时，开启[data-editTd="yes"]的编辑功能；为true时，禁用[data-editTd="no"]的编辑功能
+        editTd   : '[data-editTd="yes"]',
+        noEditTd : '[data-editTd="no"]'
+    },opts||{});
+
+    this.table    = $(opts.id);
+    this.status   = opts.status;
+    this.inverse  = opts.inverse;
+    this.editTd   = opts.editTd;
+    this.noEditTd = opts.noEditTd;
+};
+CRM.ETable.prototype.toggle = function () {
+    var table = this;
+
+    if (table.status) {
+
+        table.openEdit(); // 开启编辑
+    }else {
+        table.closeEdit(); // 关闭编辑
+    }
+};
+CRM.ETable.prototype.openEdit = function () {
+    var table = this,
+        td    = table.inverse ? ':not(' + table.noEditTd + ')' : table.editTd;
+
+    table.table.on('click.table', 'td'+ td, function (e) {
+        table.editHandler(e);
+    });
+};
+CRM.ETable.prototype.closeEdit = function () {
+    var table = this.table;
+    table.off('.table');
+};
+CRM.ETable.prototype.editHandler = function (e) {
+    var el = $(e.target);
+
+    CRM.editEl(el);
+};
+
+// 编辑非表单元素
+CRM.editEl = function (el) {
+    if (el.find('span').length==1){
+
+        el.find('span').html('<input type="text" class="form-control" id="editInput" value="' + el.find('span').text() + '" />');
+    }else {
+
+        el.html('<input type="text" class="form-control" id="editInput" value="' + el.text() + '" />');
+    }
+
+    el.find('input').focus();
+    el.find('input').select();
+    el.find('input').blur(function(){
+
+        if (el.find('span').length==1){
+
+            $(this).parent('span').html($(this).val());
+        }else {
+
+            $(this).parent('td').html($(this).val());
+        }
+    });
+};
+// $("#zebraTable").find("td").dblclick( //点击编辑表格
+//     function() {
+//         if($(this).text()) {
+//             $(this).html("<input type='text' name='editInput' id='editInput' value='" + $(this).text() + "' />");
+//             $(this).find("input").focus();
+//             $(this).find("input").select();
+//             $(this).find("input").blur(
+//                 function() {
+//                     $(this).parent("td").html($(this).val());
+//                 }
+//             );
+//         }
+//     }
+// );
+// CRM.addEl=function(el,place,method){
+//     place.method(el);
+// };
+
 
