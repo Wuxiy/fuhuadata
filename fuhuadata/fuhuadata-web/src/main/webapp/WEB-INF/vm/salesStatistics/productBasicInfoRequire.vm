@@ -345,7 +345,7 @@
             }
             if(isup&&id){
                 jQuery.ajax({
-                    url:basePath + '/businessProduct/saveBaseInfoAndComponents?businessProductId=' + id,
+                    url:basePath + '/businessProduct/saveBaseInfoAndComponents',
                     type:'POST',
                     contentType:"application/json",
                     data:edit(),
@@ -511,6 +511,9 @@
         var data = {
             "businessOrderProduct":{
                 'name':$('#name').val(),
+                'orderId':$('#orderId').val(),
+                'productId':$('#productId').val(),
+                'wareId':$('#wareId').val(),
                 'customsClearanceName':$('#customsClearanceName').val(),
                 'customerProductName':$('#customerProductName').val(),
                 'brand':$('#brand').val(),
@@ -552,7 +555,11 @@
     function edit() {
         var data = {
             "businessOrderProduct":{
+                "id":$('#businessProductId').val(),
                 'name':$('#name').val(),
+                'orderId':$('#orderId').val(),
+                'productId':$('#productId').val(),
+                'wareId':$('#wareId').val(),
                 'customsClearanceName':$('#customsClearanceName').val(),
                 'customerProductName':$('#customerProductName').val(),
                 'brand':$('#brand').val(),
