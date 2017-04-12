@@ -342,22 +342,4 @@ CRM.editEl = function (el) {
 };
 
 
-// $("#zebraTable").find("td").dblclick( //点击编辑表格
-//     function() {
-//         if($(this).text()) {
-//             $(this).html("<input type='text' name='editInput' id='editInput' value='" + $(this).text() + "' />");
-//             $(this).find("input").focus();
-//             $(this).find("input").select();
-//             $(this).find("input").blur(
-//                 function() {
-//                     $(this).parent("td").html($(this).val());
-//                 }
-//             );
-//         }
-//     }
-// );
-// CRM.addEl=function(el,place,method){
-//     place.method(el);
-// };
-
 
