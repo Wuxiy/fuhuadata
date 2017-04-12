@@ -132,13 +132,13 @@ public class BusinessOrderProductAction {
 
     /**
      * 保存订单产品基本信息和产品成分
-     * @param businessOrderProduct
-     * @param businessOrderProductComponents
      * @return
      */
     @ResponseBody
     @RequestMapping(value="/saveBaseInfoAndComponents")
-    public ResultPojo saveBaseInfoAndComponents(BusinessOrderProduct businessOrderProduct,BusinessOrderProductComponent[] businessOrderProductComponents){
+    public ResultPojo saveBaseInfoAndComponents(@RequestBody ProductRequireBase productRequireBase){
+        BusinessOrderProduct businessOrderProduct = productRequireBase.getBusinessOrderProduct();
+        BusinessOrderProductComponent[] businessOrderProductComponents = productRequireBase.getBusinessOrderProductComponents();
         Integer businessProductId = businessOrderProduct.getId();
         ResultPojo pojo = new ResultPojo();
         List<BusinessOrderProductComponent> list = new ArrayList<BusinessOrderProductComponent>();

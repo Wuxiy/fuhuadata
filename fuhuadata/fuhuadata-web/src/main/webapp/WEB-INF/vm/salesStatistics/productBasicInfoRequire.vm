@@ -315,6 +315,7 @@
             jQuery.ajax({
                 url:basePath + '/businessProduct/saveBaseInfoAndComponents',
                 type:'POST',
+                contentType:"application/json",
                 data:Add(),
                 success:function (result) {
                     console.log(result);
@@ -500,12 +501,13 @@
                 "modifyTime":"2017-03-02 11:44:49",
                 "lastmodifyUserId": 1,
                 "lastmodifyUserName": "胡向阳"
-            },
+            }
+            ,
             "businessOrderProductComponents":getbusinessOrderProductComponents()
             
         }
         console.log(data);
-        return data;
+        return JSON.stringify(data);
     }
 
     //获取加工成分列表
