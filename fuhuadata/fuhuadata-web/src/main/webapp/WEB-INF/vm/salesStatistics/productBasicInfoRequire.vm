@@ -339,7 +339,9 @@
                     contentType:"application/json",
                     data:Add(),
                     success:function (result) {
+                        var ResultData = result.data;
                         console.log(result);
+                        window.location.href = basePath + '/businessProduct/intoProductRequire?orderId='+ResultData.orderId+'&&businessProductId='+ResultData.businessProductId+'';
                     }
                 })
             }

@@ -404,8 +404,13 @@
                             <div class="input-group-btn"><button class="btn btn-xs btn-primary" type="submit"><span class="glyphicon glyphicon-search"></span></button></div>
                         </div>
                         <hr />
-                        <div class="zTreeDemoBackground left well" style="height: 300px;overflow-y: scroll;overflow-x: auto">
-                            <ul id="fModal" class="ztree"></ul>
+                        #*<div class="zTreeDemoBackground left">
+                            <ul id="packingTree" class="ztree"></ul>
+                        </div>*#
+
+                        <div class="modal-body well" style="max-height: 300px; overflow-y: scroll; overflow-x: scroll;">
+                        ##                        这里插入树形菜单
+                            <div id="tree" class="tree"></div>
                         </div>
                     </div>
                     <div class="col-xs-9">
@@ -442,12 +447,39 @@
     </div>
 </div>
 
+<input id="businessProductId" type="hidden" value="$!{businessProductId}"> <!--编号-->
+<input id="orderId" type="hidden" value="$!{orderId}">
+<input id="customerId" type="hidden" value="$!{customerId}">
+<input id="productId" type="hidden" value="">
+<input id="wareId" type="hidden" value="">
+
+<script type="text/javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script>
 
-
-
     $(function () {
+        $('#tree').creatTree(basePath+'/packingCategory/CategoryTree?parentIds=1');
+        /* function renderPackingTreeToModal(data) {
+                    var setting = {
+                        data: {
+                            simpleData: {
+                                enable: true
+                            }
+                        },
+                        edit: {
+                            enable: false
+                        },
+                        callback : {
+                            onClick : page.asideTreeOnClick
+                        }
+                    },
+                    treeObj  = null;
+
+            page.roleTreeData = CRM.toArr(data); // 将角色树的数据保存到page对象属性
+            $.fn.zTree.init(page.aside, setting, page.roleTreeData);
+            treeObj = $.fn.zTree.getZTreeObj(id);
+            treeObj.expandAll(true); // 默认展开
+        };*/
 
         // 点击图片，选中型号
         $('#size').on('click.select','a.thumbnail',function (e) {
@@ -514,22 +546,12 @@
                 url         : '/upload/uploadFileAll',
                 type        : 'POST',
                 data        : data,
-<<<<<<< HEAD
-
                 dataType: 'JSON',
                 cache: false,
                 processData: false,
                 contentType: false,
-//                contentType : 'multipart/form-data',
                 callback    :  function (data) {
-                    img.attr('src',data);
-=======
-                cache       : false,
-                contentType : false,
-                processData : false,
-                callback : function (data) {
-                    img.attr('src',"../"+basePath + data);
->>>>>>> 921aaa04173baa6670bd143c36be40cdc3929fbd
+                    img.attr('src',"../"+basePath+data);
                     fileF.reset(); // 重置file的值
                     monBtn.removeClass('hidden'); // 显示修改按钮
                 }
