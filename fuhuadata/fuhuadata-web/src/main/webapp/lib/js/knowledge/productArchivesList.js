@@ -68,7 +68,7 @@ CRM.productArchivesList.collectData = function () {
     // 判断是否是水剂
     if (page.processingComponents.children('table').length===1) { // 加工成分
 
-        obj.processingComponents = page.getTableData('#processingComponents'); // 加工成分表格数据
+        obj.productComponents = page.getTableData('#processingComponents'); // 加工成分表格数据
     } else {
 
         obj.productInfo.processingComponents = page.processingComponents.find('textarea').val(); // 加工成分文本域数据

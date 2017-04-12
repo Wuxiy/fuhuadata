@@ -24,8 +24,8 @@
                                     <div class="input-group">
                                         <span class="input-group-addon" lang="zh">地区分类排名</span>
                                         <select class="form-control" id="dimension">
-                                            <option value="0" lang="zh">地区分类排名</option>
-                                            <option value="1" lang="zh">国家排名</option>
+                                            <option value="0" lang="zh"><a href="#areaRanking" data-toggle="tab">地区分类排名</a></option>
+                                            <option value="1" lang="zh"><a href="#countryRanking" data-toggle="tab">国家排名</a> </option>
                                         </select>
                                         <span class="input-group-addon" lang="zh">开始时间</span>
                                         <input class="form-control" id="startTime" />
@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div id="customerRanking" class="tab-pane fade">
-                <!--运费维护表开始-->
+                <!--客户排名开始-->
                 <div class="panel panel-default">
                     <div class="panel-body clearfix">
                         <div class="form-horizontal">
@@ -97,10 +97,10 @@
                         </table>
                     </div>
                 </div>
-                <!--运费维护表结束-->
+                <!--客户排名-->
             </div>
             <div id="salesManRanking" class="tab-pane fade">
-                <!--运费维护表开始-->
+                <!--业务员排名开始-->
                 <div class="panel panel-default">
                     <div class="panel-body clearfix">
                         <div class="form-horizontal">
@@ -138,10 +138,10 @@
                         </table>
                     </div>
                 </div>
-                <!--运费维护表结束-->
+                <!--业务员排名结束-->
             </div>
             <div id="productRanking" class="tab-pane fade">
-                <!--运费维护表开始-->
+                <!--产品排名开始-->
                 <div class="panel panel-default">
                     <div class="panel-body clearfix">
                         <div class="form-horizontal">
@@ -180,14 +180,13 @@
                         </table>
                     </div>
                 </div>
-                <!--运费维护表结束-->
+                <!--产品排名结束-->
             </div>
         </div>
     </div>
 </div>
 
-//模态框
-<div class="modal fade" id="addField" tabindex="-1" data-backdrop="static" aria-hidden="true" data-keyboard="true" >
+<div class="modal fade" id="countryDimension" tabindex="-1" data-backdrop="static" aria-hidden="true" data-keyboard="true" >
     <div class="modal-dialog" style="width:1200px;">
         <div class="modal-content">
             <div class="modal-header">
@@ -207,7 +206,7 @@
                                     <th class="col-xs-2 text-center text-middle" >国家</th>
                                     <th class="col-xs-1 text-center text-middle">地区分类</th>
                                     <th class="col-xs-1 text-center text-middle">销售额</th>
-                                    <th class="col-xs-2 text-center text-middle">销售最低限价</th>
+                                    <th class="col-xs-2 text-center text-middle">毛利润</th>
                                     <th class="col-xs-1 text-center text-middle">营销成本</th>
                                     <th class="col-xs-2 text-center text-middle">净利润</th>
                                     <th class="col-xs-1 text-center text-middle">排名</th>
@@ -282,6 +281,12 @@
         }
     });
 
+     //地区分类change事件
+    $('#dimension').on('change',function (e) {
+        var val = $('#dimension').find('option').filter(':selected').val();
+        serach(val);
+    });
+
     //根据页码获取列表数据
     function getDataList(pageNum,jq,dimension){
         var data = {
@@ -340,7 +345,6 @@
                             _html += '	<td>' + ResultData[i].businessId + '</td>';
                             _html += '	<td>' + ResultData[i].country + '</td>';
                             _html += '  <td><a href="">' + ResultData[i].customerArea + '</a></td>';
-                            _html += '  <td>' + ResultData[i].categoryName + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].salesAmount + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].grossProfit + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].maintenanceFee + '</td>';
@@ -358,7 +362,6 @@
                             _html += '	<td>' + ResultData[i].customerName + '</td>';
                             _html += '	<td>' + ResultData[i].country + '</td>';
                             _html += '  <td><a href="">' + ResultData[i].customerArea + '</a></td>';
-                            _html += '  <td>' + ResultData[i].categoryName + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].salesAmount + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].grossProfit + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].maintenanceFee + '</td>';
@@ -367,7 +370,7 @@
                             _html += '   </tr>';
                         }
                     }
-                    $("#countryDimension").html(_html);
+                    $("#customerDimension").html(_html);
                 }
                 else if(dimension==3){
                     if (ResultData && ResultData != '' && ResultData != 'null') {
