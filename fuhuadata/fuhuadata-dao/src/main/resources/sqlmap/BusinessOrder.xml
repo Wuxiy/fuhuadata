@@ -602,7 +602,7 @@
             SELECT
             base.country,
             base.customer_area customerArea,
-            base.full_name,
+            base.full_name customerName,
             SUM(a.actual_amount_paid) salesAmount,
             SUM(a.gross_profit) grossProfit,
             SUM(a.maintenance_fee) maintenanceFee,
@@ -655,8 +655,8 @@
 
         <isEqual property="dimension" compareValue="4">
             SELECT
-            a.name,
-            b.category_name,
+            a.name productName,
+            b.category_name categoryName,
             SUM(sales_volume) salesVolume,
             SUM(a.gross_profit) grossProfit,
             SUM(a.gross_margin) grossMargin,
@@ -675,7 +675,7 @@
         </isEqual>
     </select>
 
-    <select id="COUNT-PROFIT-STATISTICS" parameterClass="CostAndProfitStatistics" resultClass="CostAndProfitStatistics">
+    <select id="COUNT-PROFIT-STATISTICS" parameterClass="CostAndProfitStatistics" resultClass="java.lang.Integer">
         <isEqual property="dimension" compareValue="0">
             select count(*) from (SELECT count(*)
             FROM

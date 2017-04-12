@@ -27,6 +27,10 @@ public class CostAndProfitStatistics {
 
     private String customerName;//客户名称
 
+    private String productName;//产品名称
+
+    private String categoryName;//品类
+
     private String customerArea;//地区分类
 
     private Integer customerLevel;//客户类型
@@ -252,5 +256,21 @@ public class CostAndProfitStatistics {
 
     public void setSalesAmount(BigDecimal salesAmount) {
         this.salesAmount = salesAmount;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 }
