@@ -480,8 +480,24 @@
         </isParameterPresent>
     </select>
 
-    <select id="COST-AND-PROFIT" parameterClass="CostAndProfitStatistics" resultClass="CostAndProfitStatistics">
-        <![CDATA[
+    <sql id="COST-AND-PROFIT-INLINE">
+        <dynamic prepend=" WHERE">
+            <isNotEmpty prepend=" AND " property="startTime">
+                <![CDATA[
+                     cvr.start_time >=  #startTime#
+                ]]>
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="endTime">
+                <![CDATA[
+                     cvr.end_time <=  #startTime#
+                ]]>
+            </isNotEmpty>
+        </dynamic>
+    </sql>
+
+    <select id="COST-AND-PROFIT" remapResults="true" parameterClass="CostAndProfitStatistics" resultClass="CostAndProfitStatistics">
+        <isEqual property="dimension" compareValue="2">
+            <![CDATA[
                         SELECT
                 base.customer_id customerId,
                 base.full_name customerName,
@@ -501,28 +517,37 @@
             FROM
                 customer_visit_record cvr
              ]]>
-        <dynamic prepend=" WHERE">
-            <isNotEmpty prepend=" AND " property="startTime">
-                <![CDATA[
-                     cvr.start_time >=  #startTime#
-                ]]>
-            </isNotEmpty>
-            <isNotEmpty prepend=" AND " property="endTime">
-                <![CDATA[
-                     cvr.end_time <=  #startTime#
-                ]]>
-            </isNotEmpty>
-        </dynamic>
+         <isParameterPresent>
+             <include refid="COST-AND-PROFIT-INLINE"/>
+         </isParameterPresent>
             GROUP BY
-                cvr.customer_id) b ON b.customer_id = a.customer_id
-        <isParameterPresent>
-            <include refid="COST-PROFIT-QUERY-COMMON"/>
-            <isNotEmpty prepend=" AND " property="orderBy">
-                order by $orderBy$
-            </isNotEmpty>
-            GROUP BY a.customer_id
-            limit #startRow#,#pageSize#
-        </isParameterPresent>
+            cvr.customer_id) b ON b.customer_id = a.customer_id
+            <isParameterPresent>
+                <include refid="COST-PROFIT-QUERY-COMMON"/>
+                <isNotEmpty prepend=" AND " property="orderBy">
+                    order by $orderBy$
+                </isNotEmpty>
+                GROUP BY a.customer_id
+                limit #startRow#,#pageSize#
+            </isParameterPresent>
+        </isEqual>
+
+        <isEqual property="dimension" compareValue="4">
+          <![CDATA[
+            SELECT
+            bop.`name` productName,
+            pi.category_name categoryName,
+            SUM(bop.sales_volume) salesVolume,
+            SUM(bop.gross_profit) grossProfit,
+            SUM(bop.contract_price) salesAmount
+            FROM
+            business_order_product bop
+            LEFT JOIN product_info pi ON pi.product_id = bop.product_id
+            WHERE bop.customer_id = #customerId#
+            GROUP BY bop.`name`
+        ]]>
+        </isEqual>
+
     </select>
 
     <select id="COUNT-COST-AND-PROFIT" parameterClass="CostAndProfitStatistics" resultClass="java.lang.Integer">
@@ -662,7 +687,7 @@
             SELECT
             a.name productName,
             b.category_name categoryName,
-            SUM(sales_volume) salesVolume,
+            SUM(a.sales_volume) salesVolume,
             SUM(a.gross_profit) grossProfit,
             SUM(a.gross_margin) grossMargin,
             SUM(a.contract_price) salesAmount

@@ -349,4 +349,8 @@
     <select id="getPriceType" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
         select price_type from business_order_product where id=#businessProductId#
     </select>
+    
+    <select id="">
+
+    </select>
 </sqlMap>

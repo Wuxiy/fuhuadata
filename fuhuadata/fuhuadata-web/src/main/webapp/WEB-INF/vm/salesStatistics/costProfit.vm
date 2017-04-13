@@ -203,7 +203,8 @@
             areaClassId:click_node.oneLevelId,
             areaId:click_node.twoLevelId,
             startRow:pageNum*pageSize,
-            pageSize:pageSize
+            pageSize:pageSize,
+            dimension:2
         };
         jQuery.ajax({
             url: basePath + '/businessOrder/getCostAndProfitStatisticsByPage',
