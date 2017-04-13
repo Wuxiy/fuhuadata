@@ -15,11 +15,6 @@ public interface BusinessProductRequireService {
 
     int deleteProductRequire(int id);
 
-    /**
-     * 根据订单产品表主键获取产品要求
-     * @param orderProductId
-     * @return
-     */
-    BusinessProductRequire getByOrderProductId(int orderProductId);
+    BusinessProductRequire getOneByQuery(int productRequireId);
 
 }

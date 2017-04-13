@@ -19,10 +19,10 @@ public interface BusinessProductRequireDao{
     int deleteProductRequire(int id);
 
     /**
-     * 根据订单产品表主键获取产品要求
-     * @param orderProductId
+     * 根据id或者订单产品主键获取产品要求
+     * @param businessProductRequire
      * @return
      */
-    BusinessProductRequire getByOrderProductId(int orderProductId);
+    BusinessProductRequire getOneByQuery(BusinessProductRequire businessProductRequire )
 
 }

@@ -41,8 +41,9 @@ public class BusinessProductRequireServiceImpl implements BusinessProductRequire
         return businessProductRequireDao.deleteProductRequire(id);
     }
 
-    @Override
-    public BusinessProductRequire getByOrderProductId(int orderProductId) {
-        return businessProductRequireDao.getByOrderProductId(orderProductId);
+    public BusinessProductRequire getOneByQuery(int productRequireId) {
+        BusinessProductRequire businessProductRequire = new BusinessProductRequire();
+        businessProductRequire.setId(productRequireId);
+        return businessProductRequireDao.getOneByQuery(businessProductRequire);
     }
 }
