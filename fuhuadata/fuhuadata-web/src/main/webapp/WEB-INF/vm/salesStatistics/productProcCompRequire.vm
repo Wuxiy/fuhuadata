@@ -22,20 +22,20 @@
                                 <td class="col-xs-1">主材</td>
                                 <td class="col-xs-2">
                                     <div class="input-group">
-                                        <input class="form-control" type="text" value="" disabled/>
+                                        <input id="mainPackingType" class="form-control" type="text" value="" disabled/>
                                         <div class="input-group-btn">
                                             <button data-toggle="modal" data-target="#packModal" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-search"></span></button>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="col-xs-1">规格</td>
-                                <td class="col-xs-2"><input id="brand" class="form-control" type="text" value=""/></td>
+                                <td class="col-xs-2"><input id="specification" class="form-control" type="text" value=""/></td>
                                 <td class="col-xs-1">材质</td>
-                                <td class="col-xs-2"><input id="" class="form-control" type="text" value=""/></td>
+                                <td class="col-xs-2"><input id="material" class="form-control" type="text" value=""/></td>
                                 <td class="col-xs-1">单价</td>
                                 <td class="col-xs-2">
                                     <div class="input-group">
-                                        <input class="form-control" type="text" value=""/>
+                                        <input id="price" class="form-control" type="text" value=""/>
                                         <span class="input-group-addon">元</span>
                                     </div>
                                 </td>
@@ -82,18 +82,18 @@
                                 <td>含盖瓶重</td>
                                 <td>
                                     <div class="input-group">
-                                        <input class="form-control" type="text" value=""/>
+                                        <input id="bottleWeight" class="form-control" type="text" value=""/>
                                         <span class="input-group-addon">g</span>
                                     </div>
                                 </td>
                                 <td>瓶盖颜色(潘通号)</td>
-                                <td><input id="brand" class="form-control" type="text" value=""/></td>
+                                <td><input id="bottleCapColor" class="form-control" type="text" value=""/></td>
                                 <td >瓶身颜色</td>
-                                <td><input id="" class="form-control" type="text" value=""/></td>
+                                <td><input id="bottleBodyColor" class="form-control" type="text" value=""/></td>
                                 <td>瓶盖有LOGO</td>
                                 <td>
                                     <div class="checkbox col-xs-12 text-left">
-                                        <label ><input type="checkbox"></label>
+                                        <label ><input id="hasCapLogo" type="checkbox"></label>
                                     </div>
                                 </td>
                             </tr>
@@ -101,40 +101,40 @@
                                 <td>瓶身有LOGO</td>
                                 <td>
                                     <div class="checkbox col-xs-12 text-left">
-                                        <label ><input type="checkbox"></label>
+                                        <label ><input id="hasBodyLogo" type="checkbox"></label>
                                     </div>
                                 </td>
                                 <td>瓶口径</td>
                                 <td>
                                     <div class="input-group">
-                                        <input class="form-control" type="text" value=""/>
+                                        <input id="bottleDiameter" class="form-control" type="text" value=""/>
                                         <span class="input-group-addon">mm</span>
                                     </div>
                                 </td>
                                 <td>瓶需要危标</td>
                                 <td>
                                     <div class="checkbox col-xs-12 text-left">
-                                        <label ><input type="checkbox"></label>
+                                        <label ><input id="hasDangerSign" type="checkbox"></label>
                                     </div>
                                 </td>
                                 <td >商检号</td>
-                                <td><input id="" class="form-control" type="text" value=""/></td>
+                                <td><input id="businessCheckNum" class="form-control" type="text" value=""/></td>
                             </tr>
                             <tr>
                                 <td>瓶身需要刻度线</td>
                                 <td>
                                     <div class="checkbox col-xs-12 text-left">
-                                        <label ><input type="checkbox"></label>
+                                        <label ><input id="hasScaleLine" type="checkbox"></label>
                                     </div>
                                 </td>
                                 <td>瓶喷码</td>
                                 <td>
                                     <div class="checkbox col-xs-12 text-left">
-                                        <label ><input type="checkbox"></label>
+                                        <label ><input id="hasSprayCode" type="checkbox"></label>
                                     </div>
                                 </td>
                                 <td >瓶贴要求</td>
-                                <td><input id="" class="form-control" type="text" value=""/></td>
+                                <td><input id="bottlePasteRequire" class="form-control" type="text" value=""/></td>
                                 <td colspan="3"></td>
                             </tr>
                             <tr>
@@ -144,14 +144,14 @@
                                         <div class="form-group">
                                             <label class="control-label col-xs-1">特殊要求</label>
                                             <div class="col-xs-6">
-                                                <textarea class="form-control" rows="3"></textarea>
+                                                <textarea id="specialRequire" class="form-control" rows="3"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-xs-1">附加单价</label>
                                             <div class="col-xs-2">
                                                 <div class="input-group">
-                                                    <input class="form-control" type="text">
+                                                    <input id="addtionalPrice" class="form-control" type="text">
                                                     <span class="input-group-addon">元</span>
                                                 </div>
                                             </div>
@@ -193,13 +193,13 @@
                                             <div class="form-group">
                                                 <label class="control-label col-xs-1">封箱口方式</label>
                                                 <div class="col-xs-2">
-                                                    <input class="form-control" type="text">
+                                                    <input id="sealingStyle" class="form-control" type="text">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label col-xs-1">其他要求</label>
                                                 <div class="col-xs-6">
-                                                    <textarea class="form-control" rows="3"></textarea>
+                                                    <textarea id="outerOackingOtherRequire" class="form-control" rows="3"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -246,20 +246,20 @@
                                         <div class="form-group">
                                             <label class="control-label col-xs-1">其他要求</label>
                                             <div class="col-xs-6">
-                                                <textarea class="form-control" rows="3"></textarea>
+                                                <textarea id="otherRequire" class="form-control" rows="3"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-xs-1">附加单价</label>
                                             <div class="col-xs-2">
                                                 <div class="input-group">
-                                                    <input class="form-control" type="text">
+                                                    <input id="otherRequirePrice" class="form-control" type="text">
                                                     <span class="input-group-addon">元</span>
                                                 </div>
                                             </div>
                                             <label class="control-label col-xs-1">单耗</label>
                                             <div class="col-xs-2">
-                                                <input class="form-control" type="text">
+                                                <input id="otherRequireConsumption" class="form-control" type="text">
                                             </div>
                                         </div>
                                     </div>
@@ -553,7 +553,17 @@
             var id = cellcheckbox.find('[name=cellcheckbox]').val();
             var packName = cellcheckbox.eq(2).text();
             var spec = cellcheckbox.eq(3).text();
+            var mainPackingType = packName + '_' + spec;
+            $('#mainPackingType').val(mainPackingType);
             console.log(id);
+
+            jQuery.ajax({
+                url:basePath + '/businessProduct/getPackingArchivesInfo?packingArchivesId' + id,
+                type:'POST',
+                success:function(result){
+                    console.log(result);
+                }
+            })
         })
 
     });
@@ -566,10 +576,14 @@
 
         jQuery.each(ResultData,function(n,item){
             var parent  = $('#container');
-            var tr = '<tr><td><input type="checkbox" value="'+item.packingId+'" name="cellcheckbox"/></td><td>'+item.packingId+'</td><td>'+item.packName+'</td><td>'+item.spec+'</td><td>'+item.size+'</td><td>'+item.quality+'</td><td>'+item.unitPrice+'</td><td>'+item.status+'</td></tr>';
+            var tr = '<tr><td><input type="checkbox" value="'+item.packingId+'" class="check" name="cellcheckbox"/></td><td>'+item.packingId+'</td><td>'+item.packName+'</td><td>'+item.spec+'</td><td>'+item.size+'</td><td>'+item.quality+'</td><td>'+item.unitPrice+'</td><td>'+item.status+'</td></tr>';
             $(tr).appendTo(parent);
         })
     }
 
+    $(document).on('click','.check',function(){
+        $('.check').removeAttr('checked');
+        $(this).prop('checked','checked');
+    })
 
 </script>

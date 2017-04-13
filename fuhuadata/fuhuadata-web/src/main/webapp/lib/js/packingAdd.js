@@ -7,6 +7,8 @@
     var addTbody = document.getElementById('add_tbody');
 
     //根据包材类型获取关联包材的展示
+    var bid = $('#bid').val();
+    console.log(bid);
     if(bid != 1){
         $('.relate').hide();
     }
