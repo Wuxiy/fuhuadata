@@ -565,7 +565,6 @@
     <select id="PROFIT-STATISTICS" remapResults="true" parameterClass="CostAndProfitStatistics" resultClass="CostAndProfitStatistics">
         <isEqual property="dimension" compareValue="0">
             SELECT
-            base.country,
             base.customer_area_id customerAreaId,
             base.customer_area customerArea,
             SUM(a.actual_amount_paid) salesAmount,
