@@ -73,8 +73,10 @@
                 }else if(method=='packingInfoModal'){
                     $container.html('');
                     methods[method](data.data,$container);
+                }else if(method=='packingorderlist'){
+                    $container.html('');
+                    methods[method](data.data,$container);
                 }
-
             });
             return false;
         });
@@ -89,6 +91,13 @@
                     $(tr).append('<td>'+item.packingId+'</td><td><a href="'+basePath+'/packingArchives/getDetails?id='+item.packingId+'&bid='+item.bigCategoryId+'&sid='+item.smallCategoryId+'" class="packName">'+item.packName+'</a></td><td>'+item.spec+'</td><td>'+item.quality+'</td><td>'+item.qualityIndex+'</td><td>'+item.qualityTargetValue+'</td><td>'+item.unitPrice+'</td><td>'+item.priceEndDate+'</td><td>'+arr2+'</td><td>'+item.bRemarks+'</td><td>'+item.status+'</td>').appendTo(parent);
                 })
              },
+            //渲染包装要求包材列表
+            packingorderlist:function (getData,parent) {
+                $.each(getData,function(n,item){
+                    var tr = $('<tr></tr>');
+                    $(tr).append('<td><input type="checkbox" value="'+item.packingId+'" name="cellcheckbox"/></td><td>'+item.packingId+'</td><td>'+item.packName+'</td><td>'+item.spec+'</td><td>'+item.size+'</td><td>'+item.quality+'</td><td>'+item.unitPrice+'</td><td>'+item.status+'</td>').appendTo(parent);
+                })
+            },
             //渲染包材详情modal列表
             packingInfoModal : function(getData,parent){
                 $.each(getData,function(n,item){

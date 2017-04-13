@@ -195,8 +195,8 @@ public class BusinessOrderAction {
      */
     @RequestMapping("/intoCostAndProfitStatistics")
     @SystemLogAnnotation(module = "salesStatistics",methods = "intoCostAndProfitStatistics")
-    public ModelAndView intoCostAndProfitStatistics(){
-        return new ModelAndView("salesStatistics/costProfit");
+    public ModelAndView intoCostAndProfitStatistics(String salesManId){
+        return new ModelAndView("salesStatistics/costProfit").addObject("salesManId",salesManId);
     }
 
     /**
