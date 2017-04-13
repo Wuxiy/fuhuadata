@@ -174,26 +174,27 @@ public class BusinessOrderProductAction {
      * @return
      */
     @RequestMapping("/intoProductRequire")
-    public ModelAndView intoProductProcCompRequire(String orderId,Integer businessProductId ){
+    public ModelAndView intoProductProcCompRequire(String orderId,Integer businessProductId ,Integer productRequireId){
         return new ModelAndView("salesStatistics/productProcCompRequire")
                 .addObject("orderId",orderId)
+                .addObject("productRequireId",productRequireId)
                 .addObject("businessProductId",businessProductId);
     }
 
     /**
      *查询产品要求信息
-     * @param businessProductId
+     * @param productRequireId
      * @return
      */
     @ResponseBody
     @RequestMapping("/getProductRequireInfo")
-    public Map<String,Object> getProductRequireInfo(Integer businessProductId){
+    public Map<String,Object> getProductRequireInfo(Integer productRequireId){
         Map<String,Object> map = new HashMap<String,Object>();
         //存放外包装数据
         List<PackingArchives> outer = new ArrayList<PackingArchives>();
         //存放辅材数据
         List<PackingArchives> auxiliary = new ArrayList<PackingArchives>();
-        BusinessProductRequire businessProductRequire = this.businessProductRequireService.getByOrderProductId(businessProductId);
+        BusinessProductRequire businessProductRequire = this.businessProductRequireService.getOneByQuery(productRequireId);
         map.put("productRequire",businessProductRequire);
         if(businessProductRequire!=null){
             //如果查询到有信息，则需要查询该主材的型号列表和辅材列表便于前端渲染已选型号和辅材外包装
@@ -232,6 +233,7 @@ public class BusinessOrderProductAction {
         List<PackingArchives> auxiliary = new ArrayList<PackingArchives>();
         PackingArchivesVO pao = packingArchivesService.getPackingArchivesById(packingArchivesId).getModel();
         map.put("modelist",pao.getImagePath());
+        pao.setImagePath(null);
         map.put("main",pao.getPack());
         List<PackingArchives> allList = pao.getNodes();
         if(allList!=null){

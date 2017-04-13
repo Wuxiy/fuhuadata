@@ -14,11 +14,11 @@ import java.util.Map;
  */
 @Service
 public class BusinessProductRequireDaoImpl implements BusinessProductRequireDao {
-    private static final String INSERT = "insert";
-    private static final String UPDATE = "update";
-    private static final String DELETE = "delete";
-    private static final String GET_BY_ORDER_PRODUCT_ID = "getByQuery";
-    private static final String INSERT_FROM_ARCHIVES = "insertFromArchives";
+    private static final String INSERT = "BusinessProductRequire.insert";
+    private static final String UPDATE = "BusinessProductRequire.update";
+    private static final String DELETE = "BusinessProductRequire.delete";
+    private static final String GET_BY_QUERY = "BusinessProductRequire.getByQuery";
+    private static final String INSERT_FROM_ARCHIVES = "BusinessProductRequire.insertFromArchives";
 
     @Autowired
     private SqlMapClientTemplate sqlMapClientTemplate;
@@ -43,12 +43,9 @@ public class BusinessProductRequireDaoImpl implements BusinessProductRequireDao 
         return sqlMapClientTemplate.delete(DELETE,id);
     }
 
-    @Override
-    public BusinessProductRequire getByOrderProductId(int orderProductId) {
+    public BusinessProductRequire getOneByQuery(BusinessProductRequire businessProductRequire ) {
         try {
-            BusinessProductRequire businessProductRequire = new BusinessProductRequire();
-            businessProductRequire.setBusinessProductId(orderProductId);
-            return (BusinessProductRequire)sqlMapClientTemplate.queryForObject(GET_BY_ORDER_PRODUCT_ID,businessProductRequire);
+            return (BusinessProductRequire)sqlMapClientTemplate.queryForObject(GET_BY_QUERY,businessProductRequire);
         } catch (DataAccessException e) {
             e.printStackTrace();
         }

@@ -624,7 +624,9 @@
             base.country_id
             ORDER BY
             netProfit DESC
-            limit #startRow#,#pageSize#
+            <isNotEmpty property="startRow">
+                limit #startRow#,#pageSize#
+            </isNotEmpty>
         </isEqual>
         <isEqual property="dimension" compareValue="2">
             SELECT

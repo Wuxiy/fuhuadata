@@ -93,4 +93,18 @@ public interface BusinessOrderProductService {
      * @return
      */
     Price getPriceForBusinessProduct(Integer businessProductId);
+
+    /**
+     * 计算加工费
+     * @param businessProductId
+     * @return
+     */
+    BigDecimal calculateProcessCost(Integer businessProductId);
+
+    /**
+     * 计算最低销售单价
+     * @param businessProductId
+     * @return
+     */
+    BigDecimal calculateMinPrice(Integer businessProductId);
 }

@@ -42,21 +42,21 @@
                                     </select>
                                 </div>
                             </div>
-                            <table class="table table-bordered table-condensed table-striped text-center">
+                            <table id="areaDimension" class="table table-bordered table-condensed table-striped text-center">
                                 <caption class="text-right"><span lang="zh">金额单位：万元</span></caption>
                                 <thead>
-                                <tr>
-                                    <th class="text-center text-middle">编号</th>
-                                    <th class="text-center text-middle">地区分类</th>
-                                    <th class="text-center text-middle">销售额</th>
-                                    <th class="text-center text-middle">销售最低限价</th>
-                                    <th class="text-center text-middle">营销成本</th>
-                                    <th class="text-center text-middle">净利润</th>
-                                    <th class="text-center text-middle">排名</th>
-                                    <th class="text-center text-middle">地区内国家排名明细</th>
-                                </tr>
+##                                <tr>
+##                                    <th class="text-center text-middle">编号</th>
+##                                    <th class="text-center text-middle">地区分类</th>
+##                                    <th class="text-center text-middle">销售额</th>
+##                                    <th class="text-center text-middle">销售最低限价</th>
+##                                    <th class="text-center text-middle">营销成本</th>
+##                                    <th class="text-center text-middle">净利润</th>
+##                                    <th class="text-center text-middle">排名</th>
+##                                    <th class="text-center text-middle">地区内国家排名明细</th>
+##                                </tr>
                                 </thead>
-                                <tbody id="areaDimension"></tbody>
+                                <tbody></tbody>
 
                             </table>
                         </div>
@@ -132,8 +132,55 @@
 </div>
 <input id="dimensionP" type="hidden" value="0">
 
+## modal
+<div class="modal fade" id="myModal" tabindex="-1" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--表格-->
+                <table class="table table-condensed table-bordered text-center table-pagination">
+                    <caption class="text-right" lang="zh">单位：万元</caption>
+                    <thead></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script id="cThead" type="text/html">
+    <tr>
+        <th class="text-center">编号</th>
+        <th class="text-center">国家</th>
+        <th class="text-center">地区分类</th>
+        <th class="text-center">销售额</th>
+        <th class="text-center">销售最低限价</th>
+        <th class="text-center">营销成本</th>
+        <th class="text-center">净利润</th>
+        <th class="text-center">排名</th>
+    </tr>
+</script>
+
+<script id="aThead" type="text/html">
+    <tr>
+        <th class="text-center">编号</th>
+        <th class="text-center">地区分类</th>
+        <th class="text-center">销售额</th>
+        <th class="text-center">销售最低限价</th>
+        <th class="text-center">营销成本</th>
+        <th class="text-center">净利润</th>
+        <th class="text-center">排名</th>
+        <th class="text-center">地区内国家排名明细</th>
+    </tr>
+</script>
+
 <script type="text/javascript" src="${request.contextPath}/lib/js/pagination/pagination.js"></script>
-<link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/js/pagination/pagination.css" />
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript">
     var pageSize = 3;
@@ -179,6 +226,42 @@
         }
     });
 
+    // 地区分类a标签点击事件
+    $('#areaDimension').on('click', 'a[href="#myModal"]', function (e) {
+        var thisEl = $(e.target);
+        $.ajax({
+            url : basePath + '/businessOrder/getProfitStatisticsByPage',
+//            dataType : 'json',
+            type : 'POST',
+            contentType : "application/json",
+            data :JSON.stringify({
+                dimension      : 1,
+                endTime        : $('endTime').val(),
+                startTime      : $('startTime').val(),
+                customerAreaId : thisEl.data('areaid')
+            })
+        }).done(function (res) {
+            if (res) {
+                var data = res.data,
+                    _html ='';
+                $.each(data,function (i,item) {
+                    _html += '<tr>';
+                    _html += '<td>' + parseInt(i+1) + '</td>';
+                    _html += '<td>' + item.country + '</td>';
+                    _html += '<td><a href="">' + item.customerArea + '</a></td>';
+                    _html += '<td lang="zh">' + item.salesAmount + '</td>';
+                    _html += '<td lang="zh">' + item.grossProfit + '</td>';
+                    _html += '<td lang="zh">' + item.maintenanceFee + '</td>';
+                    _html += '<td lang="zh">' + item.netProfit + '</td>';
+                    _html += '<td>' + parseInt(i+1) + '</td>';
+                    _html += '</tr>';
+                });
+                $('#myModal').find('thead').html($('#cThead').html());
+                $('#myModal').find('tbody').html(_html);
+            }
+        })
+    });
+
      //地区分类change事件
     $('#dimension').on('change',function (e) {
         var val = $('#dimension').find('option').filter(':selected').val();
@@ -212,59 +295,62 @@
                 var _html = '';
                 if(dimension==4) {
                     if (ResultData && ResultData != '' && ResultData != 'null') {
-                        for (var i = 0; i < ResultData.length; i++) {
+                        for (var i = 0, j = 1; i < ResultData.length; i++, j++) {
                             _html += '<tr>';
-                            _html += '	<td>' + i + '</td>';
+                            _html += '	<td>' + j + '</td>';
                             _html += '  <td><a href="">' + ResultData[i].productName + '</a></td>';
                             _html += '  <td>' + ResultData[i].categoryName + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].salesVolume + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].salesAmount + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].grossProfit + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].grossMargin + '</td>';
-                            _html += '	<td>' + i + '</td>';
+                            _html += '	<td>' + j + '</td>';
                             _html += '   </tr>';
                         }
                     }
                     $("#productDimension").html(_html);
-                }else if(dimension==0){
+                }else if(dimension==0){ // 地区
                     if (ResultData && ResultData != '' && ResultData != 'null') {
-                        for (var i = 0; i < ResultData.length; i++) {
+                        for (var i = 0, j = 1; i < ResultData.length; i++, j++) {
                             _html += '<tr>';
-                            _html += '	<td>' + i + '</td>';
+                            _html += '	<td>' + j + '</td>';
                             _html += '  <td><a href="">' + ResultData[i].customerArea + '</a></td>';
-                            _html += '  <td>' + ResultData[i].categoryName + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].salesAmount + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].grossProfit + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].maintenanceFee + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].netProfit + '</td>';
-                            _html += '	<td>' + i + '</td>';
+                            _html += '  <td lang="zh">' + j + '</td>';
+                            _html += '	<td><a  data-toggle="modal" href="#myModal" data-areaid="' +
+                                    ResultData[i].customerAreaId + '">查看</a></td>';
                             _html += '   </tr>';
                         }
                     }
-                    $("#areaDimension").html(_html);
+                    $("#areaDimension").find('thead').html($('#aThead').html());
+                    $("#areaDimension").find('tbody').html(_html);
                 }
-                else if(dimension==1){
+                else if(dimension==1){ // 国家
                     if (ResultData && ResultData != '' && ResultData != 'null') {
-                        for (var i = 0; i < ResultData.length; i++) {
+                        for (var i = 0, j = 1; i < ResultData.length; i++, j++) {
                             _html += '<tr>';
-                            _html += '	<td>' + i + '</td>';
+                            _html += '	<td>' + j + '</td>';
                             _html += '	<td>' + ResultData[i].country + '</td>';
                             _html += '  <td><a href="">' + ResultData[i].customerArea + '</a></td>';
                             _html += '  <td lang="zh">' + ResultData[i].salesAmount + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].grossProfit + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].maintenanceFee + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].netProfit + '</td>';
-                            _html += '	<td>' + i + '</td>';
+                            _html += '	<td>' + j + '</td>';
                             _html += '   </tr>';
                         }
                     }
-                    $("#countryDimension").html(_html);
+                    $("#areaDimension").find('thead').html($('#cThead').html());
+                    $("#areaDimension").find('tbody').html(_html);
                 }
                 else if(dimension==2){
                     if (ResultData && ResultData != '' && ResultData != 'null') {
-                        for (var i = 0; i < ResultData.length; i++) {
+                        for (var i = 0, j = 1; i < ResultData.length; i++, j++) {
                             _html += '<tr>';
-                            _html += '	<td>' + i + '</td>';
+                            _html += '	<td>' + j + '</td>';
                             _html += '	<td>' + ResultData[i].customerName + '</td>';
                             _html += '	<td>' + ResultData[i].country + '</td>';
                             _html += '  <td><a href="">' + ResultData[i].customerArea + '</a></td>';
@@ -273,25 +359,26 @@
                             _html += '  <td lang="zh">' + ResultData[i].maintenanceFee + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].netProfit + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].salesManName + '</td>';
-                            _html += '	<td>' + i + '</td>';
+                            _html += '	<td>' + j + '</td>';
                             _html += '   </tr>';
                         }
                     }
                     $("#customerDimension").html(_html);
                 }
-                else if(dimension==3){
+                else if(dimension==3){ // 业务员
                     if (ResultData && ResultData != '' && ResultData != 'null') {
-                        for (var i = 0; i < ResultData.length; i++) {
+                        for (var i = 0, j = 1; i < ResultData.length; i++, j++) {
                             _html += '<tr>';
-                            _html += '	<td>' + i + '</td>';
+                            _html += '	<td>' + j + '</td>';
                             _html += '	<td>' + ResultData[i].salesManName + '</td>';
                             _html += '  <td><a href="">' + ResultData[i].customerArea + '</a></td>';
                             _html += '  <td lang="zh">' + ResultData[i].salesAmount + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].grossProfit + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].maintenanceFee + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].netProfit + '</td>';
-                            _html += '	<td>' + i + '</td>';
-                            _html += '	<td><a href="">查看</a></td>';
+                            _html += '	<td>' + j + '</td>';
+                            _html += '	<td><a href="'+basePath+'businessOrder/intoCostAndProfitStatistics?salesManId=+' +
+                                    ResultData[i].salesManId +'">查看</a></td>';
                             _html += '   </tr>';
                         }
 

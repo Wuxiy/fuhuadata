@@ -215,4 +215,13 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
         return null;
     }
 
+    @Override
+    public BigDecimal calculateProcessCost(Integer businessProductId) {
+        return null;
+    }
+
+    @Override
+    public BigDecimal calculateMinPrice(Integer businessProductId) {
+        return null;
+    }
 }

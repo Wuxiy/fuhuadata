@@ -6,6 +6,7 @@ import com.fuhuadata.util.DateJsonSerializer;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.math.BigDecimal;
 
@@ -13,7 +14,7 @@ import java.math.BigDecimal;
  * @author wangbo
  * @date 2017-01-13 16:26:04
  */
-public class RecordLinkman{
+public class RecordLinkman implements Serializable{
 
     /**主键id**/
 	private Integer id;

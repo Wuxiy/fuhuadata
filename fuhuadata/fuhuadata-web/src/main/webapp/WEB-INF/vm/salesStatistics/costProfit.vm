@@ -225,7 +225,8 @@
                     _html += '  <td>'+ResultData[i].country+'A</td>';
                     _html += '  <td><a href="">'+ResultData[i].actualAmountPaid+'</a></td>';
                     _html += '  <td lang="zh">'+ResultData[i].floorPrice+'</td>';
-                    _html += '  <td><a href=""> '+ResultData[i].maintenanceFee+'</a></td>';
+                    _html += '  <td><a href="customerVisitRecord/intoCustomerMaintenance?customerId='+
+                            ResultData[i].customerId +'">' + ResultData[i].maintenanceFee +'</a></td>';
                     _html += '  <td lang="zh">'+ResultData[i].netProfit+'</td>';
                     _html += '  <td lang="zh">'+ResultData[i].salesManName+'</td>';
                     _html +='   </tr>';
