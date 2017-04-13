@@ -634,7 +634,8 @@
             SUM(a.gross_profit) grossProfit,
             SUM(a.maintenance_fee) maintenanceFee,
             SUM(a.net_profit) netProfit,
-            a.sales_man_name salesManId
+            a.sales_man_id salesManId,
+            a.sales_man_name salesManName
             FROM
             business_order a
             LEFT JOIN customer_base_info base ON a.customer_id = base.customer_id
