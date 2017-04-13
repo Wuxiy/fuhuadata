@@ -174,15 +174,16 @@ public class BusinessOrderProductAction {
      * @return
      */
     @RequestMapping("/intoProductRequire")
-    public ModelAndView intoProductProcCompRequire(String orderId,Integer businessProductId ){
+    public ModelAndView intoProductProcCompRequire(String orderId,Integer businessProductId ,Integer productRequireId){
         return new ModelAndView("salesStatistics/productProcCompRequire")
                 .addObject("orderId",orderId)
+                .addObject("productRequireId",productRequireId)
                 .addObject("businessProductId",businessProductId);
     }
 
     /**
      *查询产品要求信息
-     * @param businessProductId
+     * @param productRequireId
      * @return
      */
     @ResponseBody
