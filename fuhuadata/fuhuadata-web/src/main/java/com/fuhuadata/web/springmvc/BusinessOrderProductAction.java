@@ -182,7 +182,7 @@ public class BusinessOrderProductAction {
 
     /**
      *查询产品要求信息
-     * @param businessProductId
+     * @param productRequireId
      * @return
      */
     @ResponseBody

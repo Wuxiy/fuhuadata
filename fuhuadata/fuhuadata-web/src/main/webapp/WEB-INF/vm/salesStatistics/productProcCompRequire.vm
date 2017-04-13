@@ -90,12 +90,14 @@
                                 <td><input id="bottleCapColor" class="form-control" type="text" value=""/></td>
                                 <td >瓶身颜色</td>
                                 <td><input id="bottleBodyColor" class="form-control" type="text" value=""/></td>
-                                <td>瓶盖有LOGO</td>
+                                <td>瓶口径</td>
                                 <td>
-                                    <div class="checkbox col-xs-12 text-left">
-                                        <label ><input id="hasCapLogo" type="checkbox"></label>
+                                    <div class="input-group">
+                                        <input id="bottleDiameter" class="form-control" type="text" value=""/>
+                                        <span class="input-group-addon">mm</span>
                                     </div>
                                 </td>
+
                             </tr>
                             <tr>
                                 <td>瓶身有LOGO</td>
@@ -104,11 +106,10 @@
                                         <label ><input id="hasBodyLogo" type="checkbox"></label>
                                     </div>
                                 </td>
-                                <td>瓶口径</td>
+                                <td>瓶盖有LOGO</td>
                                 <td>
-                                    <div class="input-group">
-                                        <input id="bottleDiameter" class="form-control" type="text" value=""/>
-                                        <span class="input-group-addon">mm</span>
+                                    <div class="checkbox col-xs-12 text-left">
+                                        <label ><input id="hasCapLogo" type="checkbox"></label>
                                     </div>
                                 </td>
                                 <td>瓶需要危标</td>
@@ -176,17 +177,8 @@
                                 <th class="text-center">单价（元）</th>
                             </tr>
                             </thead>
-                            <tbody>
-                                <tr class="">
-                                    <td><div class="checkbox col-xs-12"><label><input type="checkbox"></label></div></td>
-                                    <td>外包装-纸箱</td>
-                                    <td>1L*10瓶/箱</td>
-                                    <td></td>
-                                    <td>五层瓦楞</td>
-                                    <td>1000</td>
-                                    <td>3.00</td>
-                                </tr>
-                                <tr>
+                            <tbody id="outer">
+                                <tr id="befond">
                                     <td colspan="7">
                                         <div class="form-horizontal">
                                             <div class="form-group"></div>
@@ -222,7 +214,7 @@
                                 <th class="text-center">单价（元）</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="auxiliary">
                             <tr class="">
                                 <td><div class="checkbox col-xs-12"><label><input type="checkbox"></label></div></td>
                                 <td>辅材-量杯</td>
@@ -367,10 +359,12 @@
                 </div>
             </div>
             <div class="col-xs-1 col-xs-offset-5"><a href="" class="btn btn-block btn-default" type="button">上一步</a></div>
-            <div class="col-xs-1 col-xs-offset-1"><a href="" class="btn btn-block btn-primary" type="button">下一步</a></div>
+            <div class="col-xs-1 col-xs-offset-1"><a href="" class="btn btn-block btn-primary" type="button" id="next">下一步</a></div>
         </div>
     </div>
 </div>
+
+
 <div class="modal fade" id="imgModal" tabindex="-1"  aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -458,6 +452,8 @@
 <script type="text/javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script>
+    var auxiliary = document.getElementById('auxiliary');
+    var befond = document.getElementById('befond');
 
     $(function () {
         $('#tree').creatTree(basePath+'/packingCategory/CategoryTree?parentIds=1');
@@ -480,6 +476,7 @@
             if (el.is('.active')) {
                 el.removeClass('active');
             }else{
+                $('a.thumbnail').removeClass('active');
                 el.addClass('active');
             }
         });
@@ -545,25 +542,99 @@
             });
         });
 
-
-
         $('#finish').click(function(){
 
             var cellcheckbox = $("input[name='cellcheckbox']:checked").parent('td').parent('tr').find('td');
-            var id = cellcheckbox.find('[name=cellcheckbox]').val();
-            var packName = cellcheckbox.eq(2).text();
-            var spec = cellcheckbox.eq(3).text();
-            var mainPackingType = packName + '_' + spec;
-            $('#mainPackingType').val(mainPackingType);
-            console.log(id);
+            if(cellcheckbox.length<0){
+                alert('请选择主材！');
+                return false;
+            }else{
+                var id = cellcheckbox.find('[name=cellcheckbox]').val();
+                var packName = cellcheckbox.eq(2).text();
+                var spec = cellcheckbox.eq(3).text();
+                var mainPackingType = packName + '_' + spec;
 
-            jQuery.ajax({
-                url:basePath + '/businessProduct/getPackingArchivesInfo?packingArchivesId' + id,
-                type:'POST',
-                success:function(result){
-                    console.log(result);
+                $('#mainPackingType').val(mainPackingType);
+                $('#specification').val(spec);
+                $('#material').val(cellcheckbox.eq(5).text());
+                $('#price').val(cellcheckbox.eq(6).text());
+
+
+                jQuery.ajax({
+                    url:basePath + '/businessProduct/getPackingArchivesInfo?packingArchivesId=' + id,
+                    type:'POST',
+                    success:function(result){
+                        console.log(result);
+                        var outerData = result.outer;
+                        var auxiliaryData = result.auxiliary;
+                        var _html = '';
+
+                        for(var i=0;i<outerData.length;i++){
+                            _html += '<tr class="outerlist">';
+                            _html += '<td class="text-center"><input type="checkbox" value="'+outerData[i].packingId+'" name="outercheckbox"/></td>';
+                            _html += '<td class="text-center">'+outerData[i].packName+'</td>';
+                            _html += '<td class="text-center">'+outerData[i].spec+'</td>';
+                            _html += '<td class="text-center">'+outerData[i].size+'</td>';
+                            _html += '<td class="text-center">'+outerData[i].quality+'</td>';
+                            _html += '<td class="text-center">'+outerData[i].consumption+'</td>';
+                            _html += '<td class="text-center">'+outerData[i].unitPrice+'</td>';
+                            _html += '</tr>';
+                        }
+                        console.log(_html);
+                        $('#befond').before(_html);
+
+                        for(var j=0;j<auxiliary.length;j++){
+                            auxiliary.innerHTML += '<tr class="">'+
+                                    '<td><input type="checkbox" value="'+auxiliaryData[j].packingId+'" name="auxiliarycheckbox"/></td>'+
+                                    '<td>'+auxiliaryData[j].packName+'</td>' +
+                                    '<td>'+auxiliaryData[j].spec+'</td>'+
+                                    '<td>'+auxiliaryData[j].size+'</td>'+
+                                    '<td>'+auxiliaryData[j].quality+'</td>'+
+                                    '<td>'+auxiliaryData[j].consumption+'</td>'+
+                                    '<td>'+auxiliaryData[j].unitPrice+'</td>'+
+                                    '</tr>';
+                        }
+                    }
+                })
+                $('#packModal').modal('hide');
+            }
+        })
+
+        $('#next').click(function () {
+            var isup = true;
+            var notnull = $('.notnull');
+            notnull.each(function () {
+                var val = $(this).val();
+                if(val == ''||val == null){
+                    alert('请完善表单!');
+                    isup = false;
+                    return false;
                 }
-            })
+            });
+            if(isup&&!id){
+                jQuery.ajax({
+                    url:basePath + '/businessProduct/saveBaseInfoAndComponents',
+                    type:'POST',
+                    contentType:"application/json",
+                    data:Add(),
+                    success:function (result) {
+                        var ResultData = result.data;
+                        console.log(result);
+                        window.location.href = basePath + '/businessProduct/intoProductRequire?orderId='+ResultData.orderId+'&&businessProductId='+ResultData.businessProductId+'';
+                    }
+                })
+            }
+            if(isup&&id){
+                jQuery.ajax({
+                    url:basePath + '/businessProduct/saveBaseInfoAndComponents',
+                    type:'POST',
+                    contentType:"application/json",
+                    data:edit(),
+                    success:function (result) {
+                        console.log(result);
+                    }
+                })
+            }
         })
 
     });
@@ -581,9 +652,19 @@
         })
     }
 
+    //模态主材checkbox设置单选
     $(document).on('click','.check',function(){
         $('.check').removeAttr('checked');
         $(this).prop('checked','checked');
     })
+
+    //checked判定
+    function checked(id) {
+        if(id.attr('checked',true)){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
 
 </script>
