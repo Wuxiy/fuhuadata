@@ -30,7 +30,7 @@ public interface CustomerEncyclopediaManager {
      */
     public boolean deleteCustomerEncyclopediaById(String id);
 
-    public CustomerEncyVO getCustomerEncyclopediaById(String id);
+    public CustomerEncyclopedia getCustomerEncyclopediaById(String id);
 
     /**
      * 查询不带分页

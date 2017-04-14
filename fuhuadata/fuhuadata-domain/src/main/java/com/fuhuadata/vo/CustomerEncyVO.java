@@ -13,6 +13,7 @@ import java.util.Date;
  * Created by intanswer on 2017/3/13.
  */
 public class CustomerEncyVO {
+
     private String fullName;//企业全称
 
     private String shortName;//企业简称

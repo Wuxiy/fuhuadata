@@ -38,7 +38,7 @@ public interface CustomerEncyclopediaService {
      */
     public Result deleteCustomerEncyclopediaById(String id);
 
-    public Result<CustomerEncyVO> getCustomerEncyclopediaById(String id);
+    public Result<CustomerEncyclopedia> getCustomerEncyclopediaById(String id);
 
     public Result<List<CustomerEncyVO>> getCustomerEncyclopediaByQuery(CustomerEncyclopediaQuery customerEncyclopediaQuery);
 

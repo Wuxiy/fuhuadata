@@ -38,7 +38,7 @@ public interface CustomerEncyclopediaDao {
      * @param id
      * @return
      */
-    public CustomerEncyVO getCustomerEncyclopediaById(String id);
+    public CustomerEncyclopedia getCustomerEncyclopediaById(String id);
 
     /**
      * 查询不带分页

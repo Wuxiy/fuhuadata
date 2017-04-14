@@ -1,6 +1,8 @@
 package com.fuhuadata.service.impl;
 
+import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.domain.CustomerEncyclopedia;
+import com.fuhuadata.domain.CustomerEnterpriceNature;
 import com.fuhuadata.domain.query.CustomerEncyclopediaQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.CustomerEncyclopediaManager;
@@ -55,10 +57,10 @@ public class CustomerEncyclopediaServiceImpl implements CustomerEncyclopediaServ
     }
 
     @Override
-    public Result<CustomerEncyVO> getCustomerEncyclopediaById(String id) {
-        Result<CustomerEncyVO> result = new Result<CustomerEncyVO>();
+    public Result<CustomerEncyclopedia> getCustomerEncyclopediaById(String id) {
+        Result<CustomerEncyclopedia> result = new Result<CustomerEncyclopedia>();
         try {
-            CustomerEncyVO customerEncyclopedia = customerEncyclopediaManager.getCustomerEncyclopediaById(id);
+            CustomerEncyclopedia customerEncyclopedia = customerEncyclopediaManager.getCustomerEncyclopediaById(id);
             if(customerEncyclopedia == null){
                 result.setSimpleErrorMsg(0, "当前客户百科信息不存在，请重试");
             }else{

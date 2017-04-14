@@ -38,8 +38,8 @@ public class CustomerEncyclopediaDaoImpl extends SqlMapClientTemplate implements
     }
 
     @Override
-    public CustomerEncyVO getCustomerEncyclopediaById(String id) {
-        return (CustomerEncyVO) this.queryForObject(GET_BY_ID,id);
+    public CustomerEncyclopedia getCustomerEncyclopediaById(String id) {
+        return (CustomerEncyclopedia) this.queryForObject(GET_BY_ID,id);
     }
 
     @Override
