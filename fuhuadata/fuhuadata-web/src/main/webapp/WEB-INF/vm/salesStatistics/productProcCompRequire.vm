@@ -162,7 +162,7 @@
                             </tr>
                             </tbody>
                         </table>
-                        <table class="table table-condensed table-bordered table-striped text-right text-center">
+                        <table class="table table-condensed table-bordered table-striped text-right text-center" id="outer">
                             <caption class="text-info text-left">
                                 外包装选择
                             </caption>
@@ -177,7 +177,7 @@
                                 <th class="text-center">单价（元）</th>
                             </tr>
                             </thead>
-                            <tbody id="outer">
+                            <tbody>
                                 <tr id="befond">
                                     <td colspan="7">
                                         <div class="form-horizontal">
@@ -264,61 +264,55 @@
                             <tbody id="imgGroup" class="img-group">
                             <tr>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img src="/lib/img/placeholder.png" alt="请点击添加图片">
+                                    <img data-name="瓶型" src="/lib/img/placeholder.png" alt="请点击添加图片" class="imgpath">
                                     <div class="caption">
                                         <p></p>
-                                        <h4>
-                                            瓶型
+                                        <h4>瓶型
                                             <small><button data-btn="modification" class="btn-link hidden" style="position: absolute" type="button">修改</button></small>
                                         </h4>
                                     </div>
                                 </td>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img src="/lib/img/placeholder.png" alt="请点击添加图片">
+                                    <img data-name="瓶身logo样例" src="/lib/img/placeholder.png" alt="请点击添加图片" class="imgpath">
                                     <div class="caption">
                                         <p></p>
-                                        <h4>
-                                            瓶身logo样例
+                                        <h4>瓶身logo样例
                                             <small><button data-btn="modification" class="btn-link hidden" style="position: absolute" type="button">修改</button></small>
                                         </h4>
                                     </div>
                                 </td>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img src="/lib/img/placeholder.png" alt="请点击添加图片">
+                                    <img data-name="瓶贴样例" src="/lib/img/placeholder.png" alt="请点击添加图片" class="imgpath">
                                     <div class="caption">
                                         <p></p>
-                                        <h4>
-                                            瓶贴样例
+                                        <h4>瓶贴样例
                                             <small><button data-btn="modification" class="btn-link hidden" style="position: absolute" type="button">修改</button></small>
                                         </h4>
                                     </div>
                                 </td>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img src="/lib/img/placeholder.png" alt="请点击添加图片">
+                                    <img data-name="封口方式" src="/lib/img/placeholder.png" alt="请点击添加图片" class="imgpath">
                                     <div class="caption">
                                         <p></p>
-                                        <h4>
-                                            封口方式
+                                        <h4>封口方式
                                             <small><button data-btn="modification" class="btn-link hidden" style="position: absolute" type="button">修改</button></small>
                                         </h4>
                                     </div>
                                 </td>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img src="/lib/img/placeholder.png" alt="请点击添加图片">
+                                    <img data-name="说明书样例" src="/lib/img/placeholder.png" alt="请点击添加图片" class="imgpath">
                                     <div class="caption">
                                         <p></p>
-                                        <h4>
-                                            说明书样例
+                                        <h4>说明书样例
                                             <small><button data-btn="modification" class="btn-link hidden" style="position: absolute" type="button">修改</button></small>
                                         </h4>
                                     </div>
                                 </td>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img src="/lib/img/placeholder.png" alt="请点击添加图片">
+                                    <img data-name="标签" src="/lib/img/placeholder.png" alt="请点击添加图片" class="imgpath">
                                     <div class="caption">
                                         <p></p>
-                                        <h4>
-                                            标签
+                                        <h4>标签
                                             <small><button data-btn="modification" class="btn-link hidden" style="position: absolute" type="button">修改</button></small>
                                         </h4>
                                     </div>
@@ -326,21 +320,19 @@
                             </tr>
                             <tr>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img src="/lib/img/placeholder.png" alt="请点击添加图片">
+                                    <img data-name="纸箱" src="/lib/img/placeholder.png" alt="请点击添加图片" class="imgpath">
                                     <div class="caption">
                                         <p></p>
-                                        <h4>
-                                            纸箱
+                                        <h4>纸箱
                                             <small><button data-btn="modification" class="btn-link hidden" style="position: absolute" type="button">修改</button></small>
                                         </h4>
                                     </div>
                                 </td>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img src="/lib/img/placeholder.png" alt="请点击添加图片">
+                                    <img data-name="其他" src="/lib/img/placeholder.png" alt="请点击添加图片" class="imgpath">
                                     <div class="caption">
                                         <p></p>
-                                        <h4>
-                                            其他
+                                        <h4>其他
                                             <small><button data-btn="modification" class="btn-link hidden" style="position: absolute" type="button">修改</button></small>
                                         </h4>
                                     </div>
@@ -359,7 +351,7 @@
                 </div>
             </div>
             <div class="col-xs-1 col-xs-offset-5"><a href="" class="btn btn-block btn-default" type="button">上一步</a></div>
-            <div class="col-xs-1 col-xs-offset-1"><a href="" class="btn btn-block btn-primary" type="button" id="next">下一步</a></div>
+            <div class="col-xs-1 col-xs-offset-1"><a class="btn btn-block btn-primary" type="button" id="next">下一步</a></div>
         </div>
     </div>
 </div>
@@ -446,16 +438,104 @@
 <input id="businessProductId" type="hidden" value="$!{businessProductId}"> <!--编号-->
 <input id="orderId" type="hidden" value="$!{orderId}">
 <input id="customerId" type="hidden" value="$!{customerId}">
-<input id="productId" type="hidden" value="">
+<input id="productRequireId" type="hidden" value="$!{productRequireId}">
 <input id="wareId" type="hidden" value="">
 
 <script type="text/javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script>
+    var id = $('#productRequireId').val();
     var auxiliary = document.getElementById('auxiliary');
     var befond = document.getElementById('befond');
 
     $(function () {
+
+        if(!id){
+            jQuery.ajax({
+                url:basePath + '/businessProduct/getProductRequireInfo?productRequireId=' + id,
+                type:'POST',
+                success:function(result){
+                    var productRequire = result.productRequire;
+                    var imgInfo = productRequire.imgInfo;
+                    var imgpath = $('.imgpath');
+                    var imgpathlist;
+                    var outerData = result.outer;
+                    var auxiliaryData = result.auxiliary;
+                    var _html = '';
+
+                    $('#mainPackingType').val(productRequire.mainPackingType);
+                    $('#material').val(productRequire.material);
+                    $('#specification').val(productRequire.specification);
+                    $('#price').val(productRequire.price);
+                    $('#bottleWeight').val(productRequire.bottleWeight);
+                    $('#bottleCapColor').val(productRequire.bottleCapColor);
+                    $('#bottleBodyColor').val(productRequire.bottleBodyColor);
+                    $('#bottleDiameter').val(productRequire.bottleDiameter);
+                    $('#businessCheckNum').val(productRequire.businessCheckNum);
+                    $('#bottlePasteRequire').val(productRequire.bottlePasteRequire);
+                    $('#specialRequire').val(productRequire.specialRequire);
+                    $('#addtionalPrice').val(productRequire.addtionalPrice);
+                    $('#sealingStyle').val(productRequire.sealingStyle);
+                    $('#outerOackingOtherRequire').val(productRequire.outerOackingOtherRequire);
+                    $('#otherRequire').val(productRequire.otherRequire);
+                    $('#otherRequirePrice').val(productRequire.otherRequirePrice);
+                    $('#otherRequireConsumption').val(productRequire.outerOackingOtherRequire);
+
+                    if(productRequire.hasBodyLogo == 1){
+                        $('#hasBodyLogo').attr('checked',true);
+                    }
+                    if(productRequire.hasCapLogo == 1){
+                        $('#hasCapLogo').attr('checked',true);
+                    }
+                    if(productRequire.hasDangerSign == 1){
+                        $('#hasDangerSign').attr('checked',true);
+                    }
+                    if(productRequire.hasScaleLine == 1){
+                        $('#hasScaleLine').attr('checked',true);
+                    }
+                    if(productRequire.hasSprayCode == 1){
+                        $('#hasSprayCode').attr('checked',true);
+                    }
+
+                    /*imgInfo.each(function (n,item) {
+                        if(item == '')
+                    })*/
+                    imgInfo.each(function (n,item) {
+                        var it = item;
+                        imgpath.each(function () {
+                            $(this).attr('src',item);
+                        })
+                    })
+
+                    for(var i=0;i<outerData.length;i++){
+                        _html += '<tr class="outerlist">';
+                        _html += '<td class="text-center"><input type="checkbox" value="'+outerData[i].packingId+'" class="outercheckbox" name="outercheckbox"/></td>';
+                        _html += '<td class="text-center">'+outerData[i].packName+'</td>';
+                        _html += '<td class="text-center">'+outerData[i].spec+'</td>';
+                        _html += '<td class="text-center">'+outerData[i].size+'</td>';
+                        _html += '<td class="text-center">'+outerData[i].quality+'</td>';
+                        _html += '<td class="text-center">'+outerData[i].consumption+'</td>';
+                        _html += '<td class="text-center">'+outerData[i].unitPrice+'</td>';
+                        _html += '</tr>';
+                    }
+                    $('#befond').before(_html);
+
+                    for(var j=0;j<auxiliary.length;j++){
+                        auxiliary.innerHTML += '<tr class="">'+
+                                '<td><input type="checkbox" value="'+auxiliaryData[j].packingId+'" class="auxiliarycheckbox" name="auxiliarycheckbox"/></td>'+
+                                '<td>'+auxiliaryData[j].packName+'</td>' +
+                                '<td>'+auxiliaryData[j].spec+'</td>'+
+                                '<td>'+auxiliaryData[j].size+'</td>'+
+                                '<td>'+auxiliaryData[j].quality+'</td>'+
+                                '<td>'+auxiliaryData[j].consumption+'</td>'+
+                                '<td>'+auxiliaryData[j].unitPrice+'</td>'+
+                                '</tr>';
+                    }
+                }
+            })
+        }
+
+
         $('#tree').creatTree(basePath+'/packingCategory/CategoryTree?parentIds=1');
         $('#tree').filtrateData(basePath+'/packingArchives/getPackingArchivesByPId',"container","packingorderlist");
         jQuery.ajax({
@@ -554,6 +634,7 @@
                 var spec = cellcheckbox.eq(3).text();
                 var mainPackingType = packName + '_' + spec;
 
+                $('#mainPackingType').attr('data-id',id);
                 $('#mainPackingType').val(mainPackingType);
                 $('#specification').val(spec);
                 $('#material').val(cellcheckbox.eq(5).text());
@@ -571,7 +652,7 @@
 
                         for(var i=0;i<outerData.length;i++){
                             _html += '<tr class="outerlist">';
-                            _html += '<td class="text-center"><input type="checkbox" value="'+outerData[i].packingId+'" name="outercheckbox"/></td>';
+                            _html += '<td class="text-center"><input type="checkbox" value="'+outerData[i].packingId+'" class="outercheckbox" name="outercheckbox"/></td>';
                             _html += '<td class="text-center">'+outerData[i].packName+'</td>';
                             _html += '<td class="text-center">'+outerData[i].spec+'</td>';
                             _html += '<td class="text-center">'+outerData[i].size+'</td>';
@@ -580,12 +661,11 @@
                             _html += '<td class="text-center">'+outerData[i].unitPrice+'</td>';
                             _html += '</tr>';
                         }
-                        console.log(_html);
                         $('#befond').before(_html);
 
                         for(var j=0;j<auxiliary.length;j++){
                             auxiliary.innerHTML += '<tr class="">'+
-                                    '<td><input type="checkbox" value="'+auxiliaryData[j].packingId+'" name="auxiliarycheckbox"/></td>'+
+                                    '<td><input type="checkbox" value="'+auxiliaryData[j].packingId+'" class="auxiliarycheckbox" name="auxiliarycheckbox"/></td>'+
                                     '<td>'+auxiliaryData[j].packName+'</td>' +
                                     '<td>'+auxiliaryData[j].spec+'</td>'+
                                     '<td>'+auxiliaryData[j].size+'</td>'+
@@ -601,6 +681,7 @@
         })
 
         $('#next').click(function () {
+
             var isup = true;
             var notnull = $('.notnull');
             notnull.each(function () {
@@ -613,25 +694,23 @@
             });
             if(isup&&!id){
                 jQuery.ajax({
-                    url:basePath + '/businessProduct/saveBaseInfoAndComponents',
-                    type:'POST',
-                    contentType:"application/json",
-                    data:Add(),
-                    success:function (result) {
-                        var ResultData = result.data;
-                        console.log(result);
-                        window.location.href = basePath + '/businessProduct/intoProductRequire?orderId='+ResultData.orderId+'&&businessProductId='+ResultData.businessProductId+'';
-                    }
-                })
-            }
-            if(isup&&id){
-                jQuery.ajax({
-                    url:basePath + '/businessProduct/saveBaseInfoAndComponents',
+                    url:basePath + '/businessProduct/saveProductRequire',
                     type:'POST',
                     contentType:"application/json",
                     data:edit(),
                     success:function (result) {
-                        console.log(result);
+                        window.location.href = basePath + '/businessProduct/intoDocumentary';
+                    }
+                })
+            }
+            if(isup){
+                jQuery.ajax({
+                    url:basePath + '/businessProduct/saveProductRequire',
+                    type:'POST',
+                    contentType:"application/json",
+                    data:Add(),
+                    success:function (result) {
+                        window.location.href = basePath + '/businessProduct/intoDocumentary';
                     }
                 })
             }
@@ -639,7 +718,30 @@
 
     });
 
+    //外包材checkbox设置单选
+    $(document).on('click','.outercheckbox',function(){
+        $('.outercheckbox').removeAttr('checked');
+        $('.outercheckbox').removeClass('active');
+        $(this).prop('checked','checked');
+        $(this).addClass('active');
+    })
 
+    //模态主材checkbox设置单选
+    $(document).on('click','.check',function(){
+        $('.check').removeAttr('checked');
+        $('.check').removeClass('active');
+        $(this).prop('checked','checked');
+        $(this).addClass('active');
+    })
+
+    //checked判定
+    function checked(id) {
+        if(id.attr('checked',true)){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
 
     //主材id=1列表
     function packingorderlist(data) {
@@ -652,19 +754,109 @@
         })
     }
 
-    //模态主材checkbox设置单选
-    $(document).on('click','.check',function(){
-        $('.check').removeAttr('checked');
-        $(this).prop('checked','checked');
-    })
-
-    //checked判定
-    function checked(id) {
-        if(id.attr('checked',true)){
-            return 1;
-        }else{
-            return 0;
+    //新增function
+    function Add() {
+        var data = {
+            'businessProductId':$('#businessProductId').val(),
+            'mainPackingId':$('#mainPackingType').attr('data-id'),
+            'mainPackingType':$('#mainPackingType').val(),
+            'material':$('#material').val(),
+            'specification':$('#specification').val(),
+            'price':$('#price').val(),
+            'bottleWeight':$('#bottleWeight').val(),
+            'bottleCapColor':$('#bottleCapColor').val(),
+            'bottleBodyColor':$('#bottleBodyColor').val(),
+            'bottleDiameter':$('#bottleDiameter').val(),
+            'businessCheckNum':$('#businessCheckNum').val(),
+            'hasBodyLogo':checked($('#hasBodyLogo')),
+            'hasCapLogo':checked($('#hasCapLogo')),
+            'hasDangerSign':checked($('#hasDangerSign')),
+            'hasScaleLine':checked($('#hasScaleLine')),
+            'hasSprayCode':checked($('#hasSprayCode')),
+            'bottlePasteRequire':$('#bottlePasteRequire').val(),
+            'specialRequire':$('#specialRequire').val(),
+            'addtionalPrice':$('#addtionalPrice').val(),
+            'sealingStyle':$('#sealingStyle').val(),
+            'outerOackingOtherRequire':$('#outerOackingOtherRequire').val(),
+            'otherRequire':$('#otherRequire').val(),
+            'otherRequirePrice':$('#otherRequirePrice').val(),
+            'otherRequireConsumption':$('#otherRequireConsumption').val(),
+            'outerPackingId':getouterPackingId(),
+            'auxiliaryMaterialIds':getauxiliaryMaterialIds(),
+            'imgInfo':getimgInfo(),
+            'straightEmployingWay':'',
+            'straightEmployingScale':'',
+            'straightEmployingStandard':'',
+            "createTime": getTime(),
+            "createUserId": 2,
+            "createUserName":"杨洋",
+            "modifyTime":"2017-03-02 11:44:49",
+            "lastmodifyUserId": 1,
+            "lastmodifyUserName": "胡向阳"
         }
     }
 
+    function edit() {
+        var data = {
+            'productRequireId':$('#productRequireId').val(),
+            'businessProductId':$('#businessProductId').val(),
+            'mainPackingId':$('#mainPackingType').attr('data-id'),
+            'mainPackingType':$('#mainPackingType').val(),
+            'material':$('#material').val(),
+            'specification':$('#specification').val(),
+            'price':$('#price').val(),
+            'bottleWeight':$('#bottleWeight').val(),
+            'bottleCapColor':$('#bottleCapColor').val(),
+            'bottleBodyColor':$('#bottleBodyColor').val(),
+            'bottleDiameter':$('#bottleDiameter').val(),
+            'businessCheckNum':$('#businessCheckNum').val(),
+            'hasBodyLogo':checked($('#hasBodyLogo')),
+            'hasCapLogo':checked($('#hasCapLogo')),
+            'hasDangerSign':checked($('#hasDangerSign')),
+            'hasScaleLine':checked($('#hasScaleLine')),
+            'hasSprayCode':checked($('#hasSprayCode')),
+            'bottlePasteRequire':$('#bottlePasteRequire').val(),
+            'specialRequire':$('#specialRequire').val(),
+            'addtionalPrice':$('#addtionalPrice').val(),
+            'sealingStyle':$('#sealingStyle').val(),
+            'outerOackingOtherRequire':$('#outerOackingOtherRequire').val(),
+            'otherRequire':$('#otherRequire').val(),
+            'otherRequirePrice':$('#otherRequirePrice').val(),
+            'otherRequireConsumption':$('#otherRequireConsumption').val(),
+            'outerPackingId':getouterPackingId(),
+            'auxiliaryMaterialIds':getauxiliaryMaterialIds(),
+            'imgInfo':getimgInfo()
+        }
+
+    }
+
+    function getouterPackingId() {
+        var outerPackingId = $('#outer').find('[class="active"]').val();
+        return outerPackingId;
+    }
+    
+    function getauxiliaryMaterialIds() {
+        var a = [];
+        var b;
+        $("input[name='auxiliarycheckbox']:checked").each(function(){
+            a.push($(this).val());
+        })
+        b = a.join(',');
+        console.log(b);
+        return b;
+    }
+
+    function getimgInfo() {
+        var arr = [];
+        $('#imgGroup .thumbnail').each(function(){
+            var name = $(this).find('img').attr('data-name');
+            var obj = {
+                'name':$(this).find('img').attr('data-name'),
+                'imgpath':$(this).find('img').attr('url')
+            }
+            arr.push(obj);
+        })
+        console.log(arr);
+        return JSON.stringify(arr);
+    }
 </script>

@@ -75,9 +75,8 @@
 <script type="text/javascript">
     $(document).ready(function(){
         var table = $('#encyclopedia_table').DataTable({
-            "ajax":basePath + '/queryCustomerEncyclopediaList',
+            "ajax":basePath + 'queryCustomerEncyclopediaList',
             "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
-            "dom": 'tiprl',//自定义显示项
             "lengthChange": false,//是否允许用户自定义显示数量
             "bPaginate": true, //翻页功能
             "bFilter": false, //列筛序功能

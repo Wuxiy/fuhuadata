@@ -214,10 +214,44 @@
         </div>
     </div>
 </div>
+
 <h3 id="sTitle" class="hidden">单据要求</h3>
 <input id="customerId" type="hidden" value='$!{customerId}'>
 <input id="customerType" type="hidden" value='$!{customerType}'>
 <input id="fullName" type="hidden" value='$!{fullName}'>
+<input id="businessProductId" type="hidden" value='$!{businessProductId}'>
+
+<input id="" type="hidden" value=''>
+<input id="" type="hidden" value=''>
+
+<script type="text/javascript">
+    var id = $('#businessProductId').val();
+    
+    $(document).ready(function(){
+        if(!id){
+            jQuery.ajax({
+                url:basePath + /businessProduct/'getDocumentary?businessProductId=' + id,
+                type:'POST',
+                sucess:function(result){
+                    var documentaryType = result.documentaryType;
+                    var documentaryRequire = result.documentaryRequire;
+                    var otherDocumentaryRequire = result.otherDocumentaryRequire;
+
+
+                }
+            })
+        }
+
+    })
+
+    function checked(id) {
+        if(id.attr('checked',true)){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+</script>
 
 
 

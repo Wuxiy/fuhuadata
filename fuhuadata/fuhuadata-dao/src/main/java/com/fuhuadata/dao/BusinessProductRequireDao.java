@@ -23,6 +23,6 @@ public interface BusinessProductRequireDao{
      * @param businessProductRequire
      * @return
      */
-    BusinessProductRequire getOneByQuery(BusinessProductRequire businessProductRequire )
+    BusinessProductRequire getOneByQuery(BusinessProductRequire businessProductRequire );
 
 }
