@@ -8,6 +8,7 @@
     <result column="main_packing_id" property="mainPackingId" jdbcType="INTEGER" />
     <result column="main_packing_type" property="mainPackingType" jdbcType="VARCHAR" />
     <result column="specification" property="specification" jdbcType="VARCHAR" />
+    <result column="size" property="size" jdbcType="VARCHAR" />
     <result column="material" property="material" jdbcType="VARCHAR" />
     <result column="model" property="model" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DECIMAL" />
@@ -45,7 +46,7 @@
   </sql>
 
   <select id="getByQuery" resultMap="BusinessProductRequireArchivesResultMap" parameterClass="BusinessProductRequireArchives" >
-    select id, business_product_id, main_packing_id, main_packing_type, specification, material,
+    select id, business_product_id, main_packing_id, main_packing_type, specification, material,size,
       model, price, bottle_weight, bottle_cap_color, bottle_body_color, has_cap_logo, has_body_logo,
       bottle_diameter, has_danger_sign, business_check_num, has_scale_line, has_spray_code,
       bottle_paste_require, special_require, addtional_price, outer_packing_id, sealing_style,
@@ -59,7 +60,7 @@
   
   
   <insert id="addArchives" parameterClass="java.lang.Integer" >
-    insert into business_product_require_archives (business_product_id, main_packing_id,
+    insert into business_product_require_archives (business_product_id, main_packing_id,size,
       main_packing_type, specification, material, model, price, bottle_weight, bottle_cap_color,
       bottle_body_color, has_cap_logo, has_body_logo, bottle_diameter, has_danger_sign,
       business_check_num, has_scale_line, has_spray_code, bottle_paste_require, special_require,
@@ -67,7 +68,7 @@
       auxiliary_material_ids, other_require, other_require_price, other_require_consumption,
       img_info)
     (select
-        b.archive_product_id, a.main_packing_id,
+        b.archive_product_id, a.main_packing_id,size,
         a.main_packing_type, a.specification, a.material, a.model, a.price, a.bottle_weight, a.bottle_cap_color,
         a.bottle_body_color, a.has_cap_logo, a.has_body_logo, a.bottle_diameter, a.has_danger_sign,
         a.business_check_num, a.has_scale_line, a.has_spray_code, a.bottle_paste_require, a.special_require,
@@ -127,6 +128,9 @@
     <dynamic prepend="set" >
       <isNotNull prepend="," property="mainPackingId" >
         main_packing_id = #mainPackingId#
+      </isNotNull>
+      <isNotNull prepend="," property="size" >
+        size = #size#
       </isNotNull>
       <isNotNull prepend="," property="mainPackingType" >
         main_packing_type = #mainPackingType#

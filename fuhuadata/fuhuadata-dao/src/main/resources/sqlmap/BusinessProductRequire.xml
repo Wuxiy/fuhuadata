@@ -8,6 +8,7 @@
     <result column="main_packing_id" property="mainPackingId" jdbcType="INTEGER" />
     <result column="main_packing_type" property="mainPackingType" jdbcType="VARCHAR" />
     <result column="specification" property="specification" jdbcType="VARCHAR" />
+    <result column="size" property="size" jdbcType="VARCHAR" />
     <result column="material" property="material" jdbcType="VARCHAR" />
     <result column="model" property="model" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DECIMAL" />
@@ -45,7 +46,7 @@
   </sql>
 
   <select id="getByQuery" resultMap="BusinessProductRequireResultMap" parameterClass="BusinessProductRequire" >
-    select id, business_product_id, main_packing_id, main_packing_type, specification, material,
+    select id, business_product_id, main_packing_id, main_packing_type, specification,size, material,
       model, price, bottle_weight, bottle_cap_color, bottle_body_color, has_cap_logo, has_body_logo,
       bottle_diameter, has_danger_sign, business_check_num, has_scale_line, has_spray_code,
       bottle_paste_require, special_require, addtional_price, outer_packing_id, sealing_style,
@@ -60,14 +61,14 @@
   
   <insert id="insert" parameterClass="BusinessProductRequire" >
     insert into business_product_require (business_product_id, main_packing_id,
-      main_packing_type, specification, material, model, price, bottle_weight, bottle_cap_color,
+      main_packing_type, specification, material, model,size, price, bottle_weight, bottle_cap_color,
       bottle_body_color, has_cap_logo, has_body_logo, bottle_diameter, has_danger_sign,
       business_check_num, has_scale_line, has_spray_code, bottle_paste_require, special_require,
       addtional_price, outer_packing_id, sealing_style, outer_packing_other_require,
       auxiliary_material_ids, other_require, other_require_price, other_require_consumption,
       img_info)
     values (#businessProductId#, #mainPackingId#,
-      #mainPackingType#, #specification#, #material#, #model#,
+      #mainPackingType#, #specification#, #material#, #model#,#size#,
       #price#, #bottleWeight#, #bottleCapColor#, #bottleBodyColor#,
       #hasCapLogo#, #hasBodyLogo#, #bottleDiameter#,
       #hasDangerSign#, #businessCheckNum#, #hasScaleLine#,
@@ -82,7 +83,7 @@
   </insert>
 
   <insert id="insertFromArchives" parameterClass="java.util.HashMap" >
-    insert into business_product_require (business_product_id, main_packing_id,
+    insert into business_product_require (business_product_id, main_packing_id,size,
     main_packing_type, specification, material, model, price, bottle_weight, bottle_cap_color,
     bottle_body_color, has_cap_logo, has_body_logo, bottle_diameter, has_danger_sign,
     business_check_num, has_scale_line, has_spray_code, bottle_paste_require, special_require,
@@ -91,7 +92,7 @@
     img_info)
 
     ( SELECT
-    #businessProductId#, main_packing_id,
+    #businessProductId#, main_packing_id,size,
     main_packing_type, specification, material, model, price, bottle_weight, bottle_cap_color,
     bottle_body_color, has_cap_logo, has_body_logo, bottle_diameter, has_danger_sign,
     business_check_num, has_scale_line, has_spray_code, bottle_paste_require, special_require,
@@ -115,6 +116,9 @@
       </isNotNull>
       <isNotNull prepend="," property="mainPackingType" >
         main_packing_type = #mainPackingType#
+      </isNotNull>
+      <isNotNull prepend="," property="size" >
+        size = #size#
       </isNotNull>
       <isNotNull prepend="," property="specification" >
         specification = #specification#
