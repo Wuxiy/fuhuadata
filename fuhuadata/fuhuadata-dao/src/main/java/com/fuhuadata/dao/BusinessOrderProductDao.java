@@ -4,8 +4,10 @@ import com.fuhuadata.domain.BusinessOrderProduct;
 import com.fuhuadata.domain.BusinessOrderProductComponent;
 import com.fuhuadata.domain.query.QueryBusinessOrderProduct;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hexingfu on 2017/3/30.
@@ -89,4 +91,11 @@ public interface BusinessOrderProductDao {
      * @return
      */
     int getPriceType(Integer businessProduct);
+
+    /**
+     * 计算加工费
+     * @param businessProductId
+     * @return
+     */
+    BigDecimal calculateProcessCost(Integer businessProductId);
 }
