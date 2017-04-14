@@ -113,7 +113,8 @@
             b.company_type AS companyType,
             b.customer_area AS customerArea,
             b.country,
-            b.enterprise_nature AS enterpriseNature,
+			GROUP_CONCAT(nature.nature) enterpriseNature,
+			b.other_enterprise_nature otherEnterpriseNature,
             b.registered_funds AS registeredFund,
             b.registered_address AS registeredAddr,
             b.management_scope AS managementScope,
@@ -133,6 +134,7 @@
         FROM
             k_customer_encyclopedia a
         LEFT JOIN customer_base_info b ON a.customer_id = b.customer_id
+				LEFT JOIN customer_enterprise_nature nature ON nature.customer_id = a.customer_id
         WHERE a.ency_id=#id#
     ]]>
     </select>

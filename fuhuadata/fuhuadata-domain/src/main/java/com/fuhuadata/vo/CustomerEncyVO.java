@@ -25,6 +25,8 @@ public class CustomerEncyVO {
 
     private String enterpriseNature;//企业性质
 
+    private String otherEnterpriseNature;//企业其他性质
+
     private String registeredFund;//注册资金
 
     private String registeredAddr;//注册地址
@@ -233,5 +235,13 @@ public class CustomerEncyVO {
 
     public void setRegisteredFund(String registeredFund) {
         this.registeredFund = registeredFund;
+    }
+
+    public String getOtherEnterpriseNature() {
+        return otherEnterpriseNature;
+    }
+
+    public void setOtherEnterpriseNature(String otherEnterpriseNature) {
+        this.otherEnterpriseNature = otherEnterpriseNature;
     }
 }
