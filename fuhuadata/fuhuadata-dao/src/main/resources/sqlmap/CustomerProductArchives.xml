@@ -773,7 +773,8 @@
 				FROM customer_product_archives a
 				LEFT JOIN customer_base_info base on base.customer_id = a.customer_id
 				LEFT JOIN product_info b on a.product_id = b.product_id
-				LEFT JOIN product_ware c on c.product_info_id = b.product_id
+				LEFT JOIN product_ware c ON c.ware_id = a.ware_id
+				ORDER BY a.id
 		]]>
 	</select>
 

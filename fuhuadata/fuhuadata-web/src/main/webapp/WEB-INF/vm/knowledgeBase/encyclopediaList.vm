@@ -75,7 +75,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
         var table = $('#encyclopedia_table').DataTable({
-            "ajax":basePath + '/queryCustomerEncyclopediaList',
+            "ajax":basePath + '/customerEncyclopedia/queryCustomerEncyclopediaList',
             "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
             "dom": 'tiprl',//自定义显示项
             "lengthChange": false,//是否允许用户自定义显示数量
@@ -102,6 +102,12 @@
                     "targets":1,
                     "render":function (data,type,row) {
                         return '<a href="'+data+'" target="_blank">'+row.fullName+'</a>';
+                    }
+                },
+                {
+                    "targets":3,
+                    "render":function (data,row) {
+                        return ''
                     }
                 }
             ],
