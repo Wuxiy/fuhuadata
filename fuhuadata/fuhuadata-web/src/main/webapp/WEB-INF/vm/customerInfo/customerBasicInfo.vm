@@ -33,15 +33,15 @@
                                 </div>
                                 <label for="fullName" class="control-label col-xs-1" lang="zh">客户全称<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input id="fullName" data-control="off" name="fullName" class="form-control" type="text" value=""/>
+                                    <input id="fullName" data-control="off" disabled name="fullName" class="form-control" type="text" value=""/>
                                 </div>
                                 <label for="shortName" class="control-label col-xs-1" lang="zh">客户简称</label>
                                 <div class="col-xs-2">
-                                    <input id="shortName" data-control="off" name="shortName" class="form-control" type="text" value="" />
+                                    <input id="shortName" data-control="off" disabled name="shortName" class="form-control" type="text" value="" />
                                 </div>
                                 <label for="areaId" class=" control-label col-xs-1" lang="zh">地区分类<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <select id="areaId" data-control="off" name="areaId" class="form-control notNull">
+                                    <select id="areaId" data-control="off" disabled name="areaId" class="form-control notNull">
                                         <option lang="zh" value="" selected>——请选择地区——</option>
                                     </select>
                                 </div>
@@ -49,18 +49,18 @@
                             <div class="form-group">
                                 <label for="countryId" class="control-label col-xs-1" lang="zh">国家<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <select id="countryId" data-control="off" name="countryId" class="form-control notNull">
+                                    <select id="countryId" data-control="off" disabled name="countryId" class="form-control notNull">
                                         <option lang="zh" value="" selected>——请优先选择地区——</option>
                                     </select>
                                 </div>
                                 <label for="zhongxinbaoNumber" class="control-label col-xs-1" lang="zh">中信保编码</label>
                                 <div class="col-xs-2">
-                                    <input id="zhongxinbaoNumber" data-control="off" name="zhongxinbaoNumber" class="form-control" type="text" value="" />
+                                    <input id="zhongxinbaoNumber" data-control="off" disabled name="zhongxinbaoNumber" class="form-control" type="text" value="" />
                                 </div>
                                 <label for="zhongxinbaoLevel" class="control-label col-xs-1" lang="zh">信用评级</label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <select id="zhongxinbaoLevel" data-control="off" name="zhongxinbaoLevel" class="form-control">
+                                        <select id="zhongxinbaoLevel" data-control="off" disabled name="zhongxinbaoLevel" class="form-control">
                                             <option value="" lang="zh">请选择信用评级</option>
                                             <option value="1" selected>A</option>
                                             <option value="2">AA</option>
@@ -75,27 +75,27 @@
                                 <label class="control-label col-xs-1" lang="zh">企业性质<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-6">
                                     <label class="checkbox-inline">
-                                        <input id="showFactory" data-target="#factory" data-control="off" name="enterpriseNature" class="else notNull" type="checkbox" value="1" />
+                                        <input id="showFactory" data-target="#factory" data-control="off" disabled name="enterpriseNature" class="else notNull" type="checkbox" value="1" />
                                         <span lang="zh">工厂</span>
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input name="enterpriseNature" data-control="off" type="checkbox" value="2" />
+                                        <input name="enterpriseNature" data-control="off" disabled type="checkbox" value="2" />
                                         <span lang="zh">经销商</span>
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input id="showMajorCompetitorsGroup" data-control="off" data-target="#majorCompetitorsGroup" name="enterpriseNature" class="else notNull" type="checkbox" value="3" />
+                                        <input id="showMajorCompetitorsGroup" data-control="off" disabled data-target="#majorCompetitorsGroup" name="enterpriseNature" class="else notNull" type="checkbox" value="3" />
                                         <span lang="zh">分销商</span>
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input name="enterpriseNature" data-control="off" type="checkbox" value="4" />
+                                        <input name="enterpriseNature" data-control="off" disabled type="checkbox" value="4" />
                                         <span lang="zh">终端客户</span>
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input id="showOtherEnterpriceNature" data-control="off" data-target="#otherEnterpriceNature" name="enterpriseNature" class="else notNull" type="checkbox" value="5"/>
+                                        <input id="showOtherEnterpriceNature" data-control="off" disabled data-target="#otherEnterpriceNature" name="enterpriseNature" class="else notNull" type="checkbox" value="5"/>
                                         <span lang="zh">其他</span>
                                     </label>
                                     <span class="form-inline">
-                                        <input id="otherEnterpriceNature" data-control="off" name="otherEnterpriceNature" class="form-inline form-control" style="position:absolute;left:355px;" type="text" value="" placeholder="请输入企业性质" lang="zh"/>
+                                        <input id="otherEnterpriceNature" data-control="off" disabled name="otherEnterpriceNature" class="form-inline form-control" style="position:absolute;left:355px;" type="text" value="" placeholder="请输入企业性质" lang="zh"/>
                                     </span>
                                 </div>
                             </div>
@@ -103,35 +103,35 @@
                                 <label for="registeredFunds" class="control-label col-xs-1" lang="zh">注册资金</label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input id="registeredFunds" data-control="off" name="registeredFunds" class="form-control" type="text" value="" />
+                                        <input id="registeredFunds" data-control="off" disabled name="registeredFunds" class="form-control" type="text" value="" />
                                         <span class="input-group-addon">$</span>
                                     </div>
                                 </div>
                                 <label for="enterprisePhone" class="control-label col-xs-1" lang="zh">企业电话</label>
                                 <div class="col-xs-2">
-                                    <input id="enterprisePhone" data-control="off" name="enterprisePhone" class="form-control" type="tel" value="" />
+                                    <input id="enterprisePhone" data-control="off" disabled name="enterprisePhone" class="form-control" type="tel" value="" />
                                 </div>
                                 <label for="enterpriseEmail" class="control-label col-xs-1" lang="zh">企业邮箱</label>
                                 <div class="col-xs-2">
-                                    <input id="enterpriseEmail" data-control="off" name="enterpriseEmail" class="form-control" type="email" value="" />
+                                    <input id="enterpriseEmail" data-control="off" disabled name="enterpriseEmail" class="form-control" type="email" value="" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="registeredAddress" class="control-label col-xs-1" lang="zh">注册地址</label>
                                 <div class="col-xs-8">
-                                    <textarea id="registeredAddress" data-control="off" name="registeredAddress" class="form-control" rows="2" ></textarea>
+                                    <textarea id="registeredAddress" data-control="off" disabled name="registeredAddress" class="form-control" rows="2" ></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="managementScope" class="control-label col-xs-1" lang="zh">经营范围</label>
                                 <div class="col-xs-8">
-                                    <textarea id="managementScope" data-control="off" name="managementScope" class="form-control" rows="2" ></textarea>
+                                    <textarea id="managementScope" data-control="off" disabled name="managementScope" class="form-control" rows="2" ></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="hasChiCompany" class="control-label col-xs-1" lang="zh">是否有中国分公司</label>
                                 <div class="col-xs-2">
-                                    <select id="hasChiCompany" data-control="off" name="hasChiCompany" class="form-control" >
+                                    <select id="hasChiCompany" data-control="off" disabled name="hasChiCompany" class="form-control" >
                                         <option value="" lang="zh" selected>————请选择————</option>
                                         <option value="1" lang="zh" >有</option>
                                         <option value="0" lang="zh">无</option>
@@ -139,7 +139,7 @@
                                 </div>
                                 <label for="hasChiPurchase" class="control-label col-xs-1 text-left" lang="zh">是否有中方采购</label>
                                 <div class="col-xs-2">
-                                    <select id="hasChiPurchase" data-control="off" name="hasChiPurchase" class="form-control" >
+                                    <select id="hasChiPurchase" data-control="off" disabled name="hasChiPurchase" class="form-control" >
                                         <option value="" lang="zh" selected>————请选择————</option>
                                         <option value="1" lang="zh">有</option>
                                         <option value="0" lang="zh">无</option>
@@ -147,7 +147,7 @@
                                 </div>
                                 <label for="customerLevel" class="control-label col-xs-1" lang="zh">客户类型</label>
                                 <div class="col-xs-2">
-                                    <select id="customerLevel" data-control="off" name="customerLevel" class="form-control" >
+                                    <select id="customerLevel" data-control="off" disabled name="customerLevel" class="form-control" >
                                         <option value="" selected >——请选择客户类型——</option>
                                         <option value="1" lang="zh">战略客户</option>
                                         <option value="2" lang="zh">大客户</option>
@@ -165,14 +165,14 @@
                             <div class="form-group">
                                 <label for="imgFile" class="control-label col-xs-1" lang="zh">资质文件</label>
                                 <div class="col-xs-3">
-                                    <input id="imgFile" class="hidden" data-view="editView" data-control="off" name="imgFile" type="file"/>
+                                    <input id="imgFile" class="hidden" data-view="editView" data-control="off" disabled name="imgFile" type="file"/>
                                 </div>
                             </div>
                             <div class="form-group hidden" data-view="editView">
                                 <div class="col-xs-2 col-xs-offset-1">
                                     <div class="btn-group">
-                                        <button class="btn btn-xs btn-primary" data-control="off" lang="zh" type="button">上传</button>
-                                        <button class="btn btn-xs btn-default" data-control="off" type="button">添加资质文件</button>
+                                        <button class="btn btn-xs btn-primary" data-control="off" disabled lang="zh" type="button">上传</button>
+                                        <button class="btn btn-xs btn-default" data-control="off" disabled type="button">添加资质文件</button>
                                     </div>
                                 </div>
                             </div>
@@ -180,18 +180,18 @@
                                 <div class="form-group">
                                     <label for="factoryLocation" class="control-label col-xs-1" lang="zh">工厂位置</label>
                                     <div class="col-xs-5">
-                                        <textarea id="factoryLocation" data-control="off" name="factoryLocation" class="form-control" rows="2" ></textarea>
+                                        <textarea id="factoryLocation" data-control="off" disabled name="factoryLocation" class="form-control" rows="2" ></textarea>
                                     </div>
                                     <label for="productLine" class="control-label col-xs-1" lang="zh">生产线</label>
                                     <div class="col-xs-5">
-                                        <textarea id="productLine" data-control="off" name="productLine" class="form-control" rows="2" ></textarea>
+                                        <textarea id="productLine" data-control="off" disabled name="productLine" class="form-control" rows="2" ></textarea>
                                     </div>
                                 </div>
                                 ## 客户产品
                                 <div id="cmpC"></div>
                                 <div class="form-group">
                                     <div class="col-xs-2 col-xs-offset-1">
-                                        <button id="add" data-btn='add' data-view="editView" data-control="off" class="btn-link hidden" type="button">添加产品</button>
+                                        <button id="add" data-btn='add' data-view="editView" data-control="off" disabled class="btn-link hidden" type="button">添加产品</button>
                                     </div>
                                 </div>
                             </fieldset>
@@ -199,21 +199,21 @@
                                 <div class="form-group">
                                     <label for="majorCompetitors" class="control-label col-xs-1" lang="zh">分销主要竞争对手</label>
                                     <div class="col-xs-8">
-                                        <textarea id="majorCompetitors" data-control="off" name="majorCompetitors" class="form-control" rows="4" ></textarea>
+                                        <textarea id="majorCompetitors" data-control="off" disabled name="majorCompetitors" class="form-control" rows="4" ></textarea>
                                     </div>
                                 </div>
                             </fieldset>
                             <div class="form-group">
                                 <label for="remark" class="control-label col-xs-1" lang="zh">备注</label>
                                 <div class="col-xs-8">
-                                    <textarea id="remark" data-control="off" name="remark" class="form-control" rows="4" ></textarea>
+                                    <textarea id="remark" data-control="off" disabled name="remark" class="form-control" rows="4" ></textarea>
                                 </div>
                             </div>
                             <fieldset id="opportunity" class="">
                                 <div class="form-group">
                                     <label for="opportunitySource" class="control-label col-xs-1" lang="zh">机会来源<sup data-view="editView" class="not-null hidden">*</sup></label>
                                     <div class="col-xs-2">
-                                        <select id="opportunitySource" data-control="off" name="opportunitySource" class="form-control else notNull">
+                                        <select id="opportunitySource" data-control="off" disabled name="opportunitySource" class="form-control else notNull">
                                             <option value="" selected lang="zh">——请选择机会来源——</option>
                                             <option value="1">展会</option>
                                             <option value="2">门户网站</option>
@@ -224,13 +224,13 @@
                                         </select>
                                     </div>
                                     <div class="col-xs-2">
-                                        <input id="otherOpportunity" data-control="off" name="otherOpportunity" class="form-control" type="text" placeholder="输入机会来源" lang="zh"/>
+                                        <input id="otherOpportunity" data-control="off" disabled name="otherOpportunity" class="form-control" type="text" placeholder="输入机会来源" lang="zh"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="opportunityDescrible" class="control-label col-xs-1" lang="zh">机会描述<sup data-view="editView hidden"  class="not-null">*</sup></label>
                                     <div class="col-xs-8">
-                                        <textarea id="opportunityDescrible" data-control="off" name="opportunityDescrible" class="form-control notNull" rows="4" placeholder="描述客户发展机会" lang="zh"></textarea>
+                                        <textarea id="opportunityDescrible" data-control="off" disabled name="opportunityDescrible" class="form-control notNull" rows="4" placeholder="描述客户发展机会" lang="zh"></textarea>
                                     </div>
                                 </div>
                             </fieldset>

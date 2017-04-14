@@ -331,35 +331,32 @@ CRM.cbInfo.rInitHandler = function () {
     CRM.insertHtml('#cr',page.customerType); // 渲染cusotmerType表单控件
 };
 
+// 表单验证配置
+CRM.cbInfo.vDeploy= function () {
 
-$().ready(function() {
-    var page = CRM.cbInfo;
-
-    page.init();
-
-    $(document).tooltip({
-        selector:".glyphicon-warning-sign",
-        trigger:'click'
-        // template:"<div class='tooltip-arrow'></div>"
-    });
-
+    // 配置错误信息容器
     $.validator.setDefaults({
         errorElement: 'div'
     });
 
-    // 自定义弹出错误信息
+    // 配置错误信息
     var em = function (txt, t, l) {
         return '<div class="tooltip top in"' +
-                ' style="'+t+'; '+l+'; display: block; min-width: 50px;">' +
-                '<div class="tooltip-arrow" style="left: 50%; border-top-color: #ff524f"></div>' +
-                '<div class="tooltip-inner" style="background-color: #ff524f">'+txt+'</div>' +
-                '</div>';
+            ' style="'+t+'; '+l+'; display: block; min-width: 50px;">' +
+            '<div class="tooltip-arrow" style="left: 50%; border-top-color: #ff524f"></div>' +
+            '<div class="tooltip-inner" style="background-color: #ff524f">'+txt+'</div>' +
+            '</div>';
     };
+    return em;
+};
 
+// 返回对象
+CRM.cbInfo.pVerify = function (em) {
+
+    // 配置验证规格和显示消息
     var mainForm=$('#myForm').validate({
         onfocusout: function(element) {
             $(element).valid();
-
         },
         rules: {
             fullName: "required",
@@ -425,6 +422,13 @@ $().ready(function() {
         }
     });
 
+    return mainForm;
+};
+
+// 返回对象
+CRM.cbInfo.mVerify = function (em) {
+
+    // 流失原因表单
     var rea = $("#rForm").validate({
         rules: {
             reason:{
@@ -435,6 +439,19 @@ $().ready(function() {
             reason: em('其输入流失原因','top:-29px','right:0')
         }
     });
+
+    return rea;
+};
+
+$().ready(function() {
+    var page  = CRM.cbInfo,
+        pForm = null,
+        mForm = null;
+
+    page.init();
+    pForm = page.pVerify(page.vDeploy());
+    mForm = page.mVerify(page.vDeploy());
+
 
 
 

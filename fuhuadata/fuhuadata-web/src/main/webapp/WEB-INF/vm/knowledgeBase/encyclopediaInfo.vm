@@ -161,7 +161,6 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/knowledge/encyclopediaInfo.js"></script>
 
-<script type="text/javascript">
-    $('#submit')
-</script>

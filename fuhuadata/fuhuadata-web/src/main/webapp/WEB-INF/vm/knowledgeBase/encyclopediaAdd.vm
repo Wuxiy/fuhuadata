@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-xs-12">
     <!--表格开始-->
-    <div class="panel panel-default">
+    <div class="panel panel-default view-HD-lg">
         <div class="panel-heading">
             <h3 class="panel-title">
                 新增百科
@@ -16,15 +16,18 @@
         <div class="panel-body clearfix">
             <form class="form-horizontal">
                 <div class="form-group ">
-                    <label class="col-xs-1 control-label">企业全称</label>
+                    <label class="col-xs-1 control-label">企业全称<sup class="not-null">*</sup></label>
+                    <div class="col-xs-2">
+                        <input class="form-control" type="text"/>
+                        <div class="col-xs-12">
+                            <ul id="cName" class="pull-right dropdown-menu" style="width: 100%"></ul>
+                        </div>
+                    </div>
+                    <label class="col-xs-1 control-label">企业简称<sup class="not-null">*</sup></label>
                     <div class="col-xs-2">
                         <input class="form-control" type="text"/>
                     </div>
-                    <label class="col-xs-1 control-label">企业简称</label>
-                    <div class="col-xs-2">
-                        <input class="form-control" type="text"/>
-                    </div>
-                    <label class="col-xs-1 control-label">企业类别</label>
+                    <label class="col-xs-1 control-label">企业类别<sup class="not-null">*</sup></label>
                     <div class="col-xs-2">
                         <select class="form-control">
                             <option value="">客户</option>
@@ -33,21 +36,21 @@
                     </div>
                 </div>
                 <div class="form-group ">
-                    <label class="col-xs-1 control-label">地区分类</label>
+                    <label class="col-xs-1 control-label">地区分类<sup class="not-null">*</sup></label>
                     <div class="col-xs-2">
                         <select class="form-control">
                             <option value="">亚洲</option>
                             <option value="">欧洲</option>
                         </select>
                     </div>
-                    <label class="col-xs-1 control-label">国家</label>
+                    <label class="col-xs-1 control-label">国家<sup class="not-null">*</sup></label>
                     <div class="col-xs-2">
                         <select class="form-control">
                             <option value="">美国</option>
                             <option value="">中国</option>
                         </select>
                     </div>
-                    <label class="col-xs-1 control-label">企业性质</label>
+                    <label class="col-xs-1 control-label">企业性质<sup class="not-null">*</sup></label>
                     <div class="col-xs-2">
                         <select class="form-control">
                             <option value="">经销商</option>
@@ -56,25 +59,25 @@
                     </div>
                 </div>
                 <div class="form-group ">
-                    <label class="col-xs-1 control-label">注册资金(万美元)</label>
+                    <label class="col-xs-1 control-label">注册资金<sup class="not-null">*</sup></label>
                     <div class="col-xs-2">
                         <input type="text" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group ">
-                    <label class="col-xs-1 control-label">注册地址</label>
+                    <label class="col-xs-1 control-label">注册地址<sup class="not-null">*</sup></label>
                     <div class="col-xs-8">
                         <textarea class="form-control" rows="2"></textarea>
                     </div>
                 </div>
                 <div class="form-group ">
-                    <label class="col-xs-1 control-label">经营范围</label>
+                    <label class="col-xs-1 control-label">经营范围<sup class="not-null">*</sup></label>
                     <div class="col-xs-8">
                         <textarea class="form-control" rows="2"></textarea>
                     </div>
                 </div>
                 <div class="form-group ">
-                    <label class="col-xs-1 control-label">企业简介</label>
+                    <label class="col-xs-1 control-label">企业简介<sup class="not-null">*</sup></label>
                     <div class="col-xs-8">
                         <textarea class="form-control" rows="4"></textarea>
                     </div>
@@ -119,6 +122,15 @@
     </div>
 </div>
 
+## 查找客户名称
+<script id="cNameC" type="text/html">
+    <%if (data.length>0) {%>
+    <%for (var i=0; i<data.length; i++) {%>
+    <li><a href="" style="padding-left: 6px"></a></li>
+    <%}%>
+    <%}%>
+</script>
+
  <!-- 模态框（Modal） -->
 <div class="modal fade" id="addField" tabindex="-1" data-backdrop="static" aria-hidden="true" data-keyboard="true">
     <div class="modal-dialog">
@@ -162,6 +174,3 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    $('#submit')
-</script>
