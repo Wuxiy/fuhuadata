@@ -1,9 +1,6 @@
 package com.fuhuadata.service.impl;
 import com.fuhuadata.dao.CustomerBaseInfoDao;
-import com.fuhuadata.domain.CountCustomersOrderProduct;
-import com.fuhuadata.domain.CustomerBaseInfo;
-import com.fuhuadata.domain.CustomerEnterpriceNature;
-import com.fuhuadata.domain.CustomerMakeProduct;
+import com.fuhuadata.domain.*;
 import com.fuhuadata.manager.CustomerBaseInfoManager;
 
 import java.text.DecimalFormat;
@@ -176,8 +173,12 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 	public Result<CustomerBaseInfoLinkman> getCustomerBaseInfoLinkmanByCustomerId(String customerId) {
 		Result<CustomerBaseInfoLinkman> result = new Result<CustomerBaseInfoLinkman>();
 		try{
-			result.addDefaultModel("CustomerBaseInfoLinkman",customerBaseInfoManager.getCustomerBaseInfoLinkmanByCustomerId(customerId));
-
+			CustomerBaseInfoLinkman customerBaseInfoLinkman = customerBaseInfoManager.getCustomerBaseInfoLinkmanByCustomerId(customerId);
+			if(customerBaseInfoLinkman!=null) {
+				result.addDefaultModel("CustomerBaseInfoLinkman",customerBaseInfoLinkman );
+			}else {
+				result.setMessage("无当前客户数据请新增");
+			}
 		}catch (Exception e){
 			result.setSuccess(false);
 			log.error("根据客户id获取客户及默认联系人信息出错",e);

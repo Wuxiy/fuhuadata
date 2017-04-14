@@ -96,6 +96,17 @@ public class CustomerEncyclopediaAction {
     }
 
     /**
+     * 进入详情页编辑
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/modify",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "doUpdate")
+    public ModelAndView update(String customerId){
+       return new ModelAndView("").addObject("customerId",customerId);
+    }
+
+    /**
      * 更新百科信息
      * @param customerEncyclopedia
      * @return
@@ -117,9 +128,9 @@ public class CustomerEncyclopediaAction {
     @RequestMapping(value = "/getById",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "GET-BY-ID")
     @ResponseBody
-    public ResultPojo getById(String id){
+    public ResultPojo getById(String customerId){
         try{
-            Result result = customerEncyclopediaService.getCustomerEncyclopediaById(id);
+            Result result = customerEncyclopediaService.getCustomerEncyclopediaById(customerId);
             return result.getResultPojo();
         }catch(Exception e){
             log.error("根据ID获取客户百科信息错误",e);

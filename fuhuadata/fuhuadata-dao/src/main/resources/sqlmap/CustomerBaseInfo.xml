@@ -383,9 +383,12 @@
 						SELECT
 				base.full_name fullName,
 				base.short_name shortName,
+				base.company_type companyType,
+				base.customer_area_id customerAreaId,
+				base.customer_area customerArea,
+				base.country country,
 				base.customer_level customerLevel,
 				base.full_enterprise_nature enterpriseNature,
-				base.country country,
 				a.linkman_id linkmanId,
 				a.`name` linkmanName,
 				a.link_phone1 linkPhone1,
