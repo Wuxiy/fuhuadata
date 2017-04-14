@@ -143,6 +143,8 @@ public class BusinessOrderProduct {
 
     /**毛利率**/
     private BigDecimal grossMargin;
+    //加工费
+    private BigDecimal processCost;
 
     /**其他费用单价**/
     private BigDecimal otherCost;
@@ -184,6 +186,14 @@ public class BusinessOrderProduct {
 
     /**内部供货单位**/
     private String internalSupplyName;
+
+    public BigDecimal getProcessCost() {
+        return processCost;
+    }
+
+    public void setProcessCost(BigDecimal processCost) {
+        this.processCost = processCost;
+    }
 
     public String getInternalSupplyId() {
         return internalSupplyId;

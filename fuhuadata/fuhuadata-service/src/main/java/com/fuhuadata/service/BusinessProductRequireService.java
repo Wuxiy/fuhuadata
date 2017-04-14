@@ -15,6 +15,12 @@ public interface BusinessProductRequireService {
 
     int deleteProductRequire(int id);
 
-    BusinessProductRequire getOneByQuery(int productRequireId);
+    /**
+     * 根据productRequireId 或 businessProductId 查询，二者可以有一个为null
+     * @param productRequireId
+     * @param businessProductId
+     * @return
+     */
+    BusinessProductRequire getOneByQuery(Integer productRequireId,Integer businessProductId);
 
 }

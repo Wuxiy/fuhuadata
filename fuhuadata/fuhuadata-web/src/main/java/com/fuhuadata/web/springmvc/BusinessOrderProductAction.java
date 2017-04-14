@@ -156,6 +156,10 @@ public class BusinessOrderProductAction {
                 //新增
                 businessProductId = businessOrderProductService.addBusinessOrderProduct(businessOrderProduct,list);
             }
+            BusinessProductRequire businessProductRequire =  businessProductRequireService.getOneByQuery(null,businessProductId);
+            if(businessProductRequire!=null){
+                map.put("productRequireId",businessProductRequire.getId());
+            }
             map.put("success",true);
             map.put("businessProductId",businessProductId);
             map.put("orderId",businessOrderProduct.getOrderId());
@@ -194,7 +198,7 @@ public class BusinessOrderProductAction {
         List<PackingArchives> outer = new ArrayList<PackingArchives>();
         //存放辅材数据
         List<PackingArchives> auxiliary = new ArrayList<PackingArchives>();
-        BusinessProductRequire businessProductRequire = this.businessProductRequireService.getOneByQuery(productRequireId);
+        BusinessProductRequire businessProductRequire = this.businessProductRequireService.getOneByQuery(productRequireId,null);
         map.put("productRequire",businessProductRequire);
         if(businessProductRequire!=null){
             //如果查询到有信息，则需要查询该主材的型号列表和辅材列表便于前端渲染已选型号和辅材外包装

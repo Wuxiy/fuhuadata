@@ -1,13 +1,7 @@
 package com.fuhuadata.service.impl;
 
-import com.fuhuadata.dao.BusinessOrderProductComponentDao;
-import com.fuhuadata.dao.BusinessOrderProductDao;
-import com.fuhuadata.dao.BusinessProductRequireDao;
-import com.fuhuadata.dao.CustomerProductArchivesDao;
-import com.fuhuadata.domain.BusinessOrderProduct;
-import com.fuhuadata.domain.BusinessOrderProductComponent;
-import com.fuhuadata.domain.BusinessProductRequire;
-import com.fuhuadata.domain.CustomerProductArchives;
+import com.fuhuadata.dao.*;
+import com.fuhuadata.domain.*;
 import com.fuhuadata.domain.query.QueryBusinessOrderProduct;
 import com.fuhuadata.domain.query.QueryCustomerProductArchives;
 import com.fuhuadata.service.BusinessOrderProductService;
@@ -135,6 +129,11 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
 
     @Override
     public int updateBusinessOrderProduct(BusinessOrderProduct businessOrderProduct) throws Exception {
+        int priceType = businessOrderProductDao.getPriceType(businessOrderProduct.getId());
+        if(priceType==1 || priceType==2){
+            //更新加工费
+            businessOrderProduct.setProcessCost(businessOrderProductDao.calculateProcessCost(businessOrderProduct.getId()));
+        }
         //先修改订单产品数据
        int effect_num =  businessOrderProductDao.updateBusinessOrderProduct(businessOrderProduct);
         //更新档案数据
@@ -217,10 +216,25 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
 
     @Override
     public BigDecimal calculateProcessCost(Integer businessProductId) {
-        return null;
+        return businessOrderProductDao.calculateProcessCost(businessProductId);
     }
 
-    @Override
+    /**
+     * 最低销售价格={(【价委会指导单价】+【采购价格】）
+     *              ×【单位耗用比例】/【原币汇率】
+     *              +【加工费】/【原币汇率】
+     *              +【港杂费单价（原币）】
+     *              +【海运费单价（原币）】
+     *              +【佣金单价（原币）=明佣单价+暗佣单价】
+     *              +【其他费用】}
+     *              ÷(1+【出口退税率】/【采购退税计算率】
+     *              -【信保费率】
+     *              -【资金利率】*【计息比例】
+     *              -【佣金率=明佣佣金率+暗佣佣金率】
+     *              -【汇损率】)
+     * @param businessProductId
+     * @return
+     */
     public BigDecimal calculateMinPrice(Integer businessProductId) {
         return null;
     }
