@@ -16,10 +16,11 @@
     <script src="${request.contextPath}/lib/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
     <script src="${request.contextPath}/lib/js/zTree/js/jquery.ztree.all.js" type="text/javascript" charset="utf-8"></script>
     <script src="${request.contextPath}/lib/dataTables/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/dataTables/dataTables.bootstrap.js"></script>
-    <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/dataTables/dataTables.bootstrap.min.js"></script>
-    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
-    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+    <script src="${request.contextPath}/lib/dataTables/dataTables.bootstrap.js" type="text/javascript" charset="utf-8"></script>
+    <script src="${request.contextPath}/lib/dataTables/dataTables.bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="${request.contextPath}/lib/js/validate/jquery.validate.js" charset="utf-8"></script>
+    <script src="${request.contextPath}/lib/js/validate/additional-methods.js" charset="utf-8"></script>
+    <script src="${request.contextPath}/lib/js/validate/localization/messages_zh.js" charset="utf-8"></script>
 
 
 ##    <script src="${request.contextPath}/lib/js/jquery-lang.js" type="text/javascript" charset="utf-8"></script>

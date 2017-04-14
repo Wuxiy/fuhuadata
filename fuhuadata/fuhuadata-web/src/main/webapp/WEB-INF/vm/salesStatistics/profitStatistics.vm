@@ -231,7 +231,7 @@
         var thisEl = $(e.target);
         $.ajax({
             url : basePath + '/businessOrder/getProfitStatisticsByPage',
-//            dataType : 'json',
+            dataType : 'json',
             type : 'POST',
             contentType : "application/json",
             data :JSON.stringify({
@@ -244,6 +244,7 @@
             if (res) {
                 var data = res.data,
                     _html ='';
+                $('#myModal').find('tbody').html('');
                 $.each(data,function (i,item) {
                     _html += '<tr>';
                     _html += '<td>' + parseInt(i+1) + '</td>';
@@ -258,6 +259,8 @@
                 });
                 $('#myModal').find('thead').html($('#cThead').html());
                 $('#myModal').find('tbody').html(_html);
+            }else{
+                $('#myModal').find('tbody').html('<td>暂无数据</td>');
             }
         })
     });
@@ -377,7 +380,7 @@
                             _html += '  <td lang="zh">' + ResultData[i].maintenanceFee + '</td>';
                             _html += '  <td lang="zh">' + ResultData[i].netProfit + '</td>';
                             _html += '	<td>' + j + '</td>';
-                            _html += '	<td><a href="'+basePath+'businessOrder/intoCostAndProfitStatistics?salesManId=+' +
+                            _html += '	<td><a href="' + basePath + '/businessOrder/intoCostAndProfitStatistics?salesManId=' +
                                     ResultData[i].salesManId +'">查看</a></td>';
                             _html += '   </tr>';
                         }

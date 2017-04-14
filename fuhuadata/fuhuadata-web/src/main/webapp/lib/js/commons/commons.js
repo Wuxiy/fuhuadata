@@ -77,6 +77,21 @@ CRM.delHandler = function(el){
 //     }
 // };
 
+// 百度渲染模板处理程序
+CRM.tplHandler = function (id,data,tar) {
+    var res  = {
+            data:data
+        },
+        html0 = bt(id,res);
+
+    tar.html(html0);
+};
+
+CRM.insertHtml = function (id,tar) {
+    var htmlo = $(id).html();
+    tar.html(htmlo);
+};
+
 //是否禁用
 CRM.onOrOff = function (el,isOn) {
 
