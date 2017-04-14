@@ -70,7 +70,7 @@
                                             <td lang="zh">气囊</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input id="airSac" type="checkbox" /></label>
+                                                    <label><input id="gasbag" type="checkbox" /></label>
                                                 </div>
                                             </td>
 
@@ -79,7 +79,7 @@
                                             <td lang="zh">拉网</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input id="seine" type="checkbox" /></label>
+                                                    <label><input id="dragNet" type="checkbox" /></label>
                                                 </div>
                                             </td>
 
@@ -88,7 +88,7 @@
                                             <td lang="zh">紧固带</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input id="fasteningWith" type="checkbox" /></label>
+                                                    <label><input id="fastenBelt" type="checkbox" /></label>
                                                 </div>
                                             </td>
 
@@ -97,7 +97,7 @@
                                             <td lang="zh">抄条码</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input id="copyTheBarcode" type="checkbox" /></label>
+                                                    <label><input id="barcCode" type="checkbox" /></label>
                                                 </div>
                                             </td>
 
@@ -106,7 +106,7 @@
                                             <td lang="zh">美式门封</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input id="theOrdinaryAmerican" type="checkbox" /></label>
+                                                    <label><input id="americanDoorseal" type="checkbox" /></label>
                                                 </div>
                                             </td>
 
@@ -115,7 +115,7 @@
                                             <td lang="zh">护条</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input id="joint" type="checkbox" /></label>
+                                                    <label><input id="bead" type="checkbox" /></label>
                                                 </div>
                                             </td>
 
@@ -124,7 +124,7 @@
                                             <td lang="zh">护角</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input id="bead" type="checkbox" /></label>
+                                                    <label><input id="cornerProtection" type="checkbox" /></label>
                                                 </div>
                                             </td>
 
@@ -147,7 +147,7 @@
                                             <td lang="zh">吨桶是否铁丝固定</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input id="wireMeshFixedGuard" type="checkbox" /></label>
+                                                    <label><input id="wireFixed" type="checkbox" /></label>
                                                 </div>
                                             </td>
                                         </tr>
@@ -225,7 +225,85 @@
 </div>
 <input id="customerId" type="hidden" value='$!{customerId}'>
 <input type="hidden" id="customerType" value="$!{customerType}" />
-<input type="hidden" id="fullName" value="$!{fullName}" />
+<input id="businessProductId" type="hidden" value='$!{businessProductId}'>
+<script type="text/javascript">
+    var id = $('#businessProductId').val();
+
+    $(document).ready(function(){
+        jQuery.ajax({
+            url:basePath + '/businessProduct/businessProductId?businessProductId=' + id,
+            type:'POST',
+            success:function(result){
+                var PackageRequireVo = result.PackageRequireVo;
+                var businessOrderProduct = result.businessOrderProduct;
+
+
+                $('#mianxiangqi').val(PackageRequireVo.mianxiangqi);
+                $('#miantuiqi').val(PackageRequireVo.miantuiqi);
+                $('#mianxiangqi').val(PackageRequireVo.miantuiqi);
+                $('#mianxiangqi').val(PackageRequireVo.miantuiqi);
+                $('#mianxiangqi').val(PackageRequireVo.miantuiqi);
+                $('#mianxiangqi').val(PackageRequireVo.miantuiqi);
+                $('#mianxiangqi').val(PackageRequireVo.miantuiqi);
+
+                if(PackageRequireVo.postLabel == 1){
+                    $('#postLabel').attr('checked');
+                }
+                if(PackageRequireVo.basePlate == 1){
+                    $('#basePlate').attr('checked');
+                }
+                if(PackageRequireVo.paperboard == 1){
+                    $('#paperboard').attr('checked');
+                }
+                if(PackageRequireVo.gasbag == 1){
+                    $('#gasbag').attr('checked');
+                }
+                if(PackageRequireVo.dragNet == 1){
+                    $('#dragNet').attr('checked');
+                }
+                if(PackageRequireVo.fastenBelt == 1){
+                    $('#fastenBelt').attr('checked');
+                }
+                if(PackageRequireVo.barcCode == 1){
+                    $('#barcCode').attr('checked');
+                }
+                if(PackageRequireVo.americanDoorseal == 1){
+                    $('#americanDoorseal').attr('checked');
+                }
+                if(PackageRequireVo.cornerProtection == 1){
+                    $('#cornerProtection').attr('checked');
+                }
+                if(PackageRequireVo.bead == 1){
+                    $('#bead').attr('checked');
+                }
+                if(PackageRequireVo.wireFixed == 1){
+                    $('#wireFixed').attr('checked');
+                }
+
+            }
+        })
+    })
+
+    //监听互斥
+    $(document).on('click','input[name="fullyClose"]',function(){
+        $('input[name="fullyClose"]').removeAttr('checked');
+        $(this).prop('checked',true);
+    })
+    $(document).on('click','input[name="inspectionOfStorage"]',function(){
+        $('input[name="inspectionOfStorage"]').removeAttr('checked');
+        $(this).prop('checked',true);
+    })
+    //checked选择
+    function checked(id) {
+        var i = id.attr('checked',true)?1 : 0;
+        /*if(id.attr('checked',true)){
+            return 1;
+        }else{
+            return 0;
+        }*/
+        return i;
+    }
+</script>
 
 
 

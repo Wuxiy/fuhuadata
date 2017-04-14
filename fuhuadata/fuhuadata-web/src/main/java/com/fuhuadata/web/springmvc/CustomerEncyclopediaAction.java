@@ -131,6 +131,10 @@ public class CustomerEncyclopediaAction {
     public ResultPojo getById(String encyId){
         try{
             Result<CustomerEncyclopedia> result = customerEncyclopediaService.getCustomerEncyclopediaById(encyId);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6467016cb736b6b3245b292e2ef52df9b057a7c5
             return result.getResultPojo();
         }catch(Exception e){
             log.error("根据ID获取客户百科信息错误",e);
