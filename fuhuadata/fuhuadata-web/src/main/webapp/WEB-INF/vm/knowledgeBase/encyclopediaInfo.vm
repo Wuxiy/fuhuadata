@@ -9,6 +9,7 @@
     <!--表格开始-->
     <div class="panel panel-default view-HD-lg">
         <div class="panel-heading">
+            <a href="" class="btn btn-xs btn-primary panel-heading-btn">编辑</a>
             <h3 class="panel-title">
                 百科详情
             </h3>
@@ -137,10 +138,10 @@
 <script id="cumC" type="text/html">
     <%if (data.length>0) {%>
     <%for (var i=0; i<data.length; i++) {%>
-    <div class="form-group">
-        <label class="col-xs-1 control-label"><%=data[i].name%></label>
+    <div name="customField" class="form-group">
+        <label name="na" class="col-xs-1 control-label"><%=data[i].name%></label>
         <div class="col-xs-8">
-            <textarea class="form-control" disabled rows="4"><%=data[i].value%></textarea>
+            <textarea name="va" class="form-control" disabled rows="4"><%=data[i].value%></textarea>
         </div>
     </div>
     <%}%>
