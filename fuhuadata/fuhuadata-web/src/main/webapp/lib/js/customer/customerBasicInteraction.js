@@ -428,7 +428,7 @@ CRM.cbInfo.pVerify = function (em) {
 // 返回对象
 CRM.cbInfo.mVerify = function (em) {
 
-    // 流失原因表单
+    // 流失原因表单配置
     var rea = $("#rForm").validate({
         rules: {
             reason:{
