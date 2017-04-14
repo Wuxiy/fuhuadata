@@ -504,7 +504,7 @@
                 base.customer_level customerLevel,
                 base.country country,
                 SUM(a.actual_amount_paid) actualAmountPaid,
-                SUM(a.floor_price) floorPrice,
+                SUM(a.gross_profit) grossProfit,
                 b.maintenance_fee maintenanceFee,
                 SUM(a.net_profit) netProfit,
                 a.sales_man_name salesManName
