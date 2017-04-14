@@ -101,14 +101,9 @@ public class CustomerEncyclopediaAction {
      */
     @RequestMapping(value = "/modify",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "doUpdate")
-<<<<<<< HEAD
-    public ModelAndView update(String customerId){
-        return new ModelAndView("knowledgeBase/encyclopediaInfo").addObject("customerId",customerId);
-=======
     public ModelAndView update(String encyId){
         return new ModelAndView("knowledgeBase/encyclopediaInfo").addObject("customerId",encyId);
 
->>>>>>> 17395c1118ac9a7b619054f08c7496108dfce48b
     }
 
     /**
@@ -135,11 +130,8 @@ public class CustomerEncyclopediaAction {
     @ResponseBody
     public ResultPojo getById(String encyId){
         try{
-<<<<<<< HEAD
-            Result result = customerEncyclopediaService.getCustomerEncyclopediaById(encyId);
-=======
             Result<CustomerEncyclopedia> result = customerEncyclopediaService.getCustomerEncyclopediaById(encyId);
->>>>>>> ee47d2c979409852f58d6705156ee252bc77d5cc
+
             return result.getResultPojo();
         }catch(Exception e){
             log.error("根据ID获取客户百科信息错误",e);
