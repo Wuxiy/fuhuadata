@@ -136,6 +136,8 @@ public class CustomerProductArchives {
 
 	/**毛利率**/
 	private BigDecimal grossMargin;
+	//加工费
+	private BigDecimal processCost;
 	
     /**其他费用单价**/
 	private BigDecimal otherCost;
@@ -720,5 +722,13 @@ public class CustomerProductArchives {
 
 	public void setTransformState(Integer transformState) {
 		this.transformState = transformState;
+	}
+
+	public BigDecimal getProcessCost() {
+		return processCost;
+	}
+
+	public void setProcessCost(BigDecimal processCost) {
+		this.processCost = processCost;
 	}
 }

@@ -43,4 +43,5 @@ Config 2.0/" "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
 	<sqlMap resource="sqlmap/BusinessOrderProductComponent.xml"/>
 	<sqlMap resource="sqlmap/BusinessOrderProduct.xml"/>
 	<sqlMap resource="sqlmap/BusinessProductRequire.xml"/>
+	<sqlMap resource="sqlmap/Contract.xml"/>
 </sqlMapConfig>
