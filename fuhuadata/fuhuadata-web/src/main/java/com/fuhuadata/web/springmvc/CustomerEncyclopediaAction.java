@@ -96,6 +96,17 @@ public class CustomerEncyclopediaAction {
     }
 
     /**
+     * 进入详情页编辑
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/modify",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "doUpdate")
+    public ModelAndView update(String customerId){
+        return new ModelAndView("knowledgeBase/encyclopediaInfo").addObject("customerId",customerId);
+    }
+
+    /**
      * 更新百科信息
      * @param customerEncyclopedia
      * @return
