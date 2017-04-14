@@ -17,6 +17,8 @@ public class BusinessProductRequireArchives {
 
     private String model;
 
+    private String size;
+
     private BigDecimal price;
 
     private BigDecimal bottleWeight;
@@ -291,5 +293,13 @@ public class BusinessProductRequireArchives {
 
     public void setImgInfo(String imgInfo) {
         this.imgInfo = imgInfo;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
     }
 }

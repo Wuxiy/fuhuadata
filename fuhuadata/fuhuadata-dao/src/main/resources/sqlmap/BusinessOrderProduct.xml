@@ -53,6 +53,7 @@
         <result column="tax_type" jdbcType="TINYINT" property="taxType" />
         <result column="tax_free" jdbcType="DECIMAL" property="taxFree" />
         <result column="gross_margin" jdbcType="DECIMAL" property="grossMargin" />
+        <result column="process_cost" jdbcType="DECIMAL" property="processCost"/>
         <result column="other_cost" jdbcType="DECIMAL" property="otherCost" />
         <result column="min_price" jdbcType="DECIMAL" property="minPrice" />
         <result column="contract_price" jdbcType="DECIMAL" property="contractPrice" />
@@ -70,7 +71,7 @@
             customer_product_name,brand,main_product_amount,main_product_unit,sub_product_amount,sub_product_unit,
             convert_rate,price_type,advise_price,purchase_price,delivery_time,factory_id,factory_name,straight_employing_way,
             straight_employing_scale,straight_employing_standard,potential_employing_way,potential_employing_scale,potential_employing_standard,
-            tax_type,tax_free,other_cost
+            tax_type,tax_free,other_cost,process_cost
         from business_order_product
         where id=#id#
     </select>
@@ -131,7 +132,7 @@
         potential_employing_scale, potential_employing_standard, documentary_type,
         documentary_require, other_documentary_require, shipping_agent_require, package_require,
         goods_type, mianxiangqi, miantuiqi, cupboard_type, cupboard_per_number, cupboard_number,
-        ocean_freight, port_surcharge, tax_type, tax_free, gross_margin, other_cost, min_price,
+        ocean_freight, port_surcharge, tax_type, tax_free, gross_margin, process_cost,other_cost, min_price,
         contract_price, transform_state, create_user_id, create_user_name, lastmodify_user_id,
         lastmodify_user_name, create_time, modify_time)
 
@@ -146,7 +147,7 @@
         potential_employing_scale, potential_employing_standard, documentary_type,
         documentary_require, other_documentary_require, shipping_agent_require, package_require,
         goods_type, mianxiangqi, miantuiqi, cupboard_type, cupboard_per_number, cupboard_number,
-        ocean_freight, port_surcharge, tax_type, tax_free, gross_margin, other_cost, min_price,
+        ocean_freight, port_surcharge, tax_type, tax_free, gross_margin,process_cost, other_cost, min_price,
         contract_price, 0 as transform_state, #createUserId#, #createUserName#, #createUserId#,
         #createUserName#, now(), now()
         from customer_product_archives
@@ -294,6 +295,9 @@
             <isNotNull prepend="," property="grossMargin">
                 gross_margin = #grossMargin#
             </isNotNull>
+            <isNotNull prepend="," property="processCost">
+                process_cost = #processCost#
+            </isNotNull>
             <isNotNull prepend="," property="otherCost">
                 other_cost = #otherCost#
             </isNotNull>
@@ -348,5 +352,21 @@
 
     <select id="getPriceType" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
         select price_type from business_order_product where id=#businessProductId#
+    </select>
+
+    <select id="calculateProcesscost" parameterClass="java.lang.Integer" resultClass="java.math.BigDecimal">
+    select sum(ifnull(cost,0)) from (
+        SELECT SUM(cost) cost FROM `business_order_product_component` WHERE business_product_id = #value#
+        UNION
+        SELECT (ifnull(price,0)+ifnull(other_require_price,0)+ifnull(addtional_price,0)) cost FROM `business_product_require` WHERE business_product_id = #value#
+        UNION
+        SELECT SUM(unit_price*consumption) `k_packing_archives` WHERE packing_id IN(SELECT auxiliary_material_ids FROM business_product_require WHERE business_product_id = #value#)
+        UNION
+        SELECT ifnull(unit_cost,0) FROM k_freight_cost c,business_order_product p  WHERE c.process_factory = p.factory_name and p.id=#value#
+        UNION
+        SELECT  ifnull(unit_cost,0) FROM `k_preparation_process_cost` c,business_product_require r WHERE LOWER(c.cost_term)=LOWER(r.specification) AND r.business_product_id = #value# AND c.type=0
+        UNION
+        SELECT  ifnull(total_cost,0) FROM `k_preparation_process_cost` c,business_order_product p  WHERE c.process_factory=p.factory_name and p.id=#value#  AND c.type=1
+        ) a
     </select>
 </sqlMap>

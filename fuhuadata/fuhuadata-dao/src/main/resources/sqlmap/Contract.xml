@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="CONTRACT">
+    <typeAlias alias="Contract" type="com.fuhuadata.domain.Contract"/>
+    
+    
+    <select id="GET-CONTRACT-STATISTICAL" resultClass="Contract">
+        <![CDATA[
+            select   pk_contract ncOrderId,ccustomerid ncCustomerId , ntotalorigmny salesAmount,vdef37 grossProfit
+            from et_contract
+    ]]>
+    </select>
+
+    <select id="GET-CONTRACT-PRODUCT-STATISTICAL" resultClass="Contract">
+        <![CDATA[
+        select   pk_contract ncOrderId,pk_contract_b ncOrderProductId ,nnum salesVolume, norigmny salesAmount,vbdef36 grossProfit,vbdef30 grossMargin
+        from et_contract_b
+    ]]>
+    </select>
+
+    <update id="UPDATE-ORDER-STATISTICAL" parameterClass="Contract">
+        update business_order
+        <dynamic prepend=" SET ">
+            <isNotEmpty prepend=" ," property="salesAmount">
+                actual_amount_paid =  #salesAmount#
+            </isNotEmpty>
+            <isNotEmpty prepend=" ," property="grossProfit">
+                gross_profit = #grossProfit#
+            </isNotEmpty>
+            where nc_order_id = #ncOrderId#
+        </dynamic>
+    </update>
+
+
+    <update id="UPDATE-ORDER-PRODUCT-STATISTICAL" parameterClass="Contract">
+        update business_order_product
+        <dynamic prepend=" SET ">
+            <isNotEmpty prepend=" ," property="salesAmount">
+                contract_price =  #salesAmount#
+            </isNotEmpty>
+            <isNotEmpty prepend=" ," property="grossProfit">
+                gross_profit = #grossProfit#
+            </isNotEmpty>
+            <isNotEmpty prepend=" ," property="salesVolume">
+                sales_volume = #salesVolume#
+            </isNotEmpty>
+            <isNotEmpty prepend=", " property="grossMargin">
+                gross_margin = #grossMargin#
+            </isNotEmpty>
+            where nc_product_id = #ncOrderProductId#
+        </dynamic>
+    </update>
+
+
+
+</sqlMap>

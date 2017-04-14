@@ -56,6 +56,7 @@
 		<result property="portSurcharge" column="port_surcharge" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
 		<result property="taxFree" column="tax_free" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
 		<result column="gross_margin" property="grossMargin" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+		<result column="process_cost" jdbcType="DECIMAL" property="processCost"/>
 		<result property="otherCost" column="other_cost" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
 		<result property="minSellPrice" column="min_sell_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
 		<result property="contractPrice" column="contract_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
@@ -447,7 +448,7 @@
 		potential_employing_scale, potential_employing_standard, documentary_type,
 		documentary_require, other_documentary_require, shipping_agent_require, package_require,
 		goods_type, mianxiangqi, miantuiqi, cupboard_type, cupboard_per_number, cupboard_number,
-		ocean_freight, port_surcharge, tax_type, tax_free, gross_margin, other_cost, min_price,
+		ocean_freight, port_surcharge, tax_type, tax_free, gross_margin, other_cost,process_cost, min_price,
 		contract_price, transform_state, create_user_id, create_user_name, lastmodify_user_id,
 		lastmodify_user_name, create_time, modify_time)
 		(
@@ -462,7 +463,7 @@
 				potential_employing_scale, potential_employing_standard, documentary_type,
 				documentary_require, other_documentary_require, shipping_agent_require, package_require,
 				goods_type, mianxiangqi, miantuiqi, cupboard_type, cupboard_per_number, cupboard_number,
-				ocean_freight, port_surcharge, tax_type, tax_free, gross_margin, other_cost, min_price,
+				ocean_freight, port_surcharge, tax_type, tax_free, gross_margin, other_cost,process_cost, min_price,
 				contract_price, transform_state, create_user_id, create_user_name, lastmodify_user_id,
 				lastmodify_user_name, create_time, modify_time
 			from business_order_product
@@ -522,6 +523,7 @@
 		,a.tax_free = b.tax_free
 		,a.gross_margin = b.gross_margin
 		,a.other_cost = b.other_cost
+		,a.process_cost = b.process_cost
 		,a.min_price = b.min_price
 		,a.contract_price = b.contract_price
 		,a.transform_state = b.transform_state
@@ -541,14 +543,14 @@
 		customer_product_name,brand,main_product_amount,main_product_unit,sub_product_amount,sub_product_unit,
 		convert_rate,price_type,advise_price,purchase_price,delivery_time,factory_id,factory_name,straight_employing_way,
 		straight_employing_scale,straight_employing_standard,potential_employing_way,potential_employing_scale,potential_employing_standard,
-		tax_type,tax_free,other_cost
+		tax_type,tax_free,other_cost,process_cost
 		)
 		values(
 		#orderId#,#productId#,#customsClearanceId#,#customsClearanceName#,#customerId#,#name#,
 		#customerProductName#,#brand#,#mainProductAmount#,#mainProductUnit#,#subProductAmount#,#subProductUnit#,
 		#convertRate#,#priceType#,#advisePrice#,#purchasePrice#,#deliveryTime#,#factoryId#,#factoryName#,#straightEmployingWay#,
 		#straightEmployingScale#,#straightEmployingStandard#,#potentialEmployingWay#,#potentialEmployingScale#,#potentialEmployingStandard#,
-		#taxType#,#taxFree#,#otherCost#
+		#taxType#,#taxFree#,#otherCost#,#processCost#
 		)
 		<selectKey resultClass="java.lang.Integer" keyProperty="id">
 			SELECT @@IDENTITY AS ID
@@ -666,6 +668,9 @@
 			<isNotNull prepend="," property="miantuiqi">
 				miantuiqi = #miantuiqi#
 			</isNotNull>
+			<isNotNull prepend="," property="processCost">
+				process_cost = #processCost#
+			</isNotNull>
 			<isNotNull prepend="," property="cupboardType">
 				cupboard_type = #cupboardType#
 			</isNotNull>
@@ -773,7 +778,8 @@
 				FROM customer_product_archives a
 				LEFT JOIN customer_base_info base on base.customer_id = a.customer_id
 				LEFT JOIN product_info b on a.product_id = b.product_id
-				LEFT JOIN product_ware c on c.product_info_id = b.product_id
+				LEFT JOIN product_ware c ON c.ware_id = a.ware_id
+				ORDER BY a.id
 		]]>
 	</select>
 

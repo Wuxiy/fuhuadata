@@ -7,8 +7,10 @@ import com.ibatis.sqlmap.client.SqlMapClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hexingfu on 2017/3/30.
@@ -29,6 +31,7 @@ public class BusinessOrderProductDaoImpl implements BusinessOrderProductDao {
     private static final String GET_DOCUMENTARY_BY_ID = "BUSINESSORDERPRODUCT.getDocumentaryById";
     private static final String GET_PACKAGE_REQUIRE_BY_ID = "BUSINESSORDERPRODUCT.getPackageRequireById";
     private static final String GET_PRICE_TYPE = "BUSINESSORDERPRODUCT.getPriceType";
+    private static final String CALCULATE_PROCESS_COST = "BUSINESSORDERPRODUCT.calculateProcesscost";
     public int insertBaseInfo(BusinessOrderProduct businessOrderProduct) throws Exception{
         return (Integer)sqlMapClient.insert(INSERT_STMT,businessOrderProduct);
     }
@@ -111,5 +114,15 @@ public class BusinessOrderProductDaoImpl implements BusinessOrderProductDao {
             e.printStackTrace();
         }
         return -1;
+    }
+
+    @Override
+    public BigDecimal calculateProcessCost(Integer businessProdcutId) {
+        try {
+            return (BigDecimal)sqlMapClient.queryForObject(CALCULATE_PROCESS_COST,businessProdcutId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
