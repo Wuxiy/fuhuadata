@@ -130,11 +130,7 @@ public class CustomerEncyclopediaAction {
     @ResponseBody
     public ResultPojo getById(String encyId){
         try{
-<<<<<<< HEAD
-            Result result = customerEncyclopediaService.getCustomerEncyclopediaById(encyId);
-=======
             Result<CustomerEncyclopedia> result = customerEncyclopediaService.getCustomerEncyclopediaById(encyId);
->>>>>>> ee47d2c979409852f58d6705156ee252bc77d5cc
             return result.getResultPojo();
         }catch(Exception e){
             log.error("根据ID获取客户百科信息错误",e);
