@@ -30,8 +30,7 @@ public class CustomerEncyclopediaAction {
     private final static Log log = LogFactory.getLog(CustomerEncyclopediaAction.class);
     @Resource
     private CustomerEncyclopediaService customerEncyclopediaService;
-    private Integer pageSize=5;
-    private String page="1";
+
 
     @SuppressWarnings("unused")
     @RequestMapping(value = "/customerEncyclopediaList",method = RequestMethod.GET)
@@ -128,9 +127,9 @@ public class CustomerEncyclopediaAction {
     @RequestMapping(value = "/getById",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "GET-BY-ID")
     @ResponseBody
-    public ResultPojo getById(String customerId){
+    public ResultPojo getById(String encyId){
         try{
-            Result result = customerEncyclopediaService.getCustomerEncyclopediaById(customerId);
+            Result<CustomerEncyclopedia> result = customerEncyclopediaService.getCustomerEncyclopediaById(encyId);
             return result.getResultPojo();
         }catch(Exception e){
             log.error("根据ID获取客户百科信息错误",e);

@@ -28,10 +28,13 @@ public class CustomerEncyclopedia {
 
         private Integer customerLevel;
 
-        private String enterpriseNature;
+        private String enterpriseNature;//企业性质(1,2,3)
+
+        private String countryId;
 
         private String country;
 
+        private CustomerEnterpriceNature[] enterpriceNaturs;
 
         private String companyInfo;//企业简介
 
@@ -122,6 +125,14 @@ public class CustomerEncyclopedia {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public CustomerEnterpriceNature[] getEnterpriceNaturs() {
+        return enterpriceNaturs;
+    }
+
+    public void setEnterpriceNaturs(CustomerEnterpriceNature[] enterpriceNaturs) {
+        this.enterpriceNaturs = enterpriceNaturs;
     }
 
     public Integer getCreateUserId() {
@@ -237,5 +248,13 @@ public class CustomerEncyclopedia {
 
     public void setCustomField(String customField) {
         this.customField = customField;
+    }
+
+    public String getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(String countryId) {
+        this.countryId = countryId;
     }
 }
