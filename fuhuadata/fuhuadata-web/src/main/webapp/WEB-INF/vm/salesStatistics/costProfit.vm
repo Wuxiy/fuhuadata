@@ -69,7 +69,7 @@
                             <th class="text-center" lang="zh">客户类型</th>
                             <th class="text-center" lang="zh">国家</th>
                             <th class="text-center" lang="zh">销售额</th>
-                            <th class="text-center" lang="zh">销售最低限价</th>
+                            <th class="text-center" lang="zh">毛利润</th>
                             <th class="text-center" lang="zh">营销成本</th>
                             <th class="text-center" lang="zh">净利润</th>
                             <th class="text-center" lang="zh">业务员</th>
@@ -124,7 +124,6 @@
                         <th class="text-center">产品名称</th>
                         <th class="text-center">产品类型</th>
                         <th class="text-center">销售量</th>
-                        <th class="text-center">最低销售价</th>
                         <th class="text-center">销售额</th>
                         <th class="text-center">利润</th>
                     </tr>
@@ -180,13 +179,11 @@
                     $('#myModal').find('tbody').html('');
                     $.each(data, function (i,item) {
                         _html += '<tr>';
-                        _html += '<td>' + parseInt(i+1) + '</td>';
-                        _html += '<td>' + item.country + '</td>';
-                        _html += '<td><a href="">' + item.customerArea + '</a></td>';
-                        _html += '<td lang="zh">' + item.salesAmount + '</td>';
+                        _html += '<td>' + item.productName + '</td>';
+                        _html += '<td><a href="">' + item.categoryName + '</a></td>';
+                        _html += '<td lang="zh">' + item.salesVolume + '</td>';
                         _html += '<td lang="zh">' + item.grossProfit + '</td>';
-                        _html += '<td lang="zh">' + item.maintenanceFee + '</td>';
-                        _html += '<td lang="zh">' + item.netProfit + '</td>';
+                        _html += '<td lang="zh">' + item.salesAmount + '</td>';
                         _html += '<td>' + parseInt(i+1) + '</td>';
                         _html += '</tr>';
                     });
@@ -223,7 +220,8 @@
             areaId:click_node.twoLevelId,
             startRow:pageNum*pageSize,
             pageSize:pageSize,
-            salesManId:$('#salesManId').val()
+            salesManId:$('#salesManId').val(),
+            dimension:2
         };
         jQuery.ajax({
             url: basePath + '/businessOrder/getCostAndProfitStatisticsByPage',

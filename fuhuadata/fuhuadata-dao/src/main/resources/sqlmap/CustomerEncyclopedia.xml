@@ -151,11 +151,7 @@
             a.create_time AS createTime,
             a.lastmodify_user_id AS lastmodifyUserId,
             a.lastmodify_user_name AS lastmodifyUserName,
-            a.modify_time AS modifyTime,
-            <!--a.custom_field AS customField,-->
-            <!--a.company_info AS companyInfo,-->
-            <!--a.develop_his AS developHis,-->
-            <!--a.sell_network AS sallNetwork-->
+            a.modify_time AS modifyTime
         FROM k_customer_encyclopedia a
         LEFT JOIN customer_base_info b ON a.customer_id=b.customer_id
         ]]>

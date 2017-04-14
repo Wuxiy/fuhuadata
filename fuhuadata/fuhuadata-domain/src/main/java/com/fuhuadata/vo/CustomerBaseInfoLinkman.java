@@ -12,6 +12,12 @@ public class CustomerBaseInfoLinkman {
 
     private String shortName;
 
+    private Integer companyType;//企业类别 0：客户，1：竞对
+
+    private String customerAreaId;
+
+    private String customerArea;
+
     private Integer customerLevel;
 
     private String enterpriseNature;
@@ -114,5 +120,29 @@ public class CustomerBaseInfoLinkman {
 
     public void setLemail(String lemail) {
         this.lemail = lemail;
+    }
+
+    public Integer getCompanyType() {
+        return companyType;
+    }
+
+    public void setCompanyType(Integer companyType) {
+        this.companyType = companyType;
+    }
+
+    public String getCustomerAreaId() {
+        return customerAreaId;
+    }
+
+    public void setCustomerAreaId(String customerAreaId) {
+        this.customerAreaId = customerAreaId;
+    }
+
+    public String getCustomerArea() {
+        return customerArea;
+    }
+
+    public void setCustomerArea(String customerArea) {
+        this.customerArea = customerArea;
     }
 }

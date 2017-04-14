@@ -271,4 +271,6 @@ public class CustomerBaseInfoAction {
         return result.getResultPojo();
     }
 
+
+
 }

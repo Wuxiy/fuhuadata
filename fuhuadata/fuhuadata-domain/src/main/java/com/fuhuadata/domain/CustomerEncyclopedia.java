@@ -1,10 +1,6 @@
 package com.fuhuadata.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fuhuadata.util.DateJsonDeserializer;
-import com.fuhuadata.util.DateJsonSerializer;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import java.util.Date;
 
@@ -17,6 +13,25 @@ public class CustomerEncyclopedia {
         private String encyId;//百科编号
 
         private String customerId;//企业id
+
+        /**客户基本信息**/
+
+        private String fullName;
+
+        private String shortName;
+
+        private Integer companyType;//企业类别 0：客户，1：竞对
+
+        private String customerAreaId;
+
+        private String customerArea;
+
+        private Integer customerLevel;
+
+        private String enterpriseNature;
+
+        private String country;
+
 
         private String companyInfo;//企业简介
 
@@ -45,8 +60,71 @@ public class CustomerEncyclopedia {
         private String remarks;//备注
 
 
+    public String getFullName() {
+        return fullName;
+    }
 
-        public Integer getCreateUserId() {
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
+    }
+
+    public Integer getCompanyType() {
+        return companyType;
+    }
+
+    public void setCompanyType(Integer companyType) {
+        this.companyType = companyType;
+    }
+
+    public String getCustomerAreaId() {
+        return customerAreaId;
+    }
+
+    public void setCustomerAreaId(String customerAreaId) {
+        this.customerAreaId = customerAreaId;
+    }
+
+    public String getCustomerArea() {
+        return customerArea;
+    }
+
+    public void setCustomerArea(String customerArea) {
+        this.customerArea = customerArea;
+    }
+
+    public Integer getCustomerLevel() {
+        return customerLevel;
+    }
+
+    public void setCustomerLevel(Integer customerLevel) {
+        this.customerLevel = customerLevel;
+    }
+
+    public String getEnterpriseNature() {
+        return enterpriseNature;
+    }
+
+    public void setEnterpriseNature(String enterpriseNature) {
+        this.enterpriseNature = enterpriseNature;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public Integer getCreateUserId() {
             return createUserId;
         }
 
