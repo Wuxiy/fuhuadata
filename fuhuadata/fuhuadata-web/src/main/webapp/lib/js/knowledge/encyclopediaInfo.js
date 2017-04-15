@@ -9,10 +9,12 @@ CRM.enc.status = '';
 
 // url
 CRM.enc.INFO_LOOK_GET = '/customerEncyclopedia/getById?encyId=';
+CRM.enc.UP_DATA_POST = '/customerEncyclopedia/doModify';
+CRM.enc.ADD_DATA_POST = '/customerEncyclopedia/doAddCustomerEncyclopedia';
 
 // 隐藏域
 CRM.enc.nature     = $('#nature');
-CRM.enc.encyId     = $('#encyId');;
+CRM.enc.encyId     = $('#encyId');
 
 // script容器
 CRM.enc.cumC = 'cumC';
@@ -50,6 +52,25 @@ CRM.enc.infoInit = function () {
     })
 };
 
+// 编辑初始化
+CRM.enc.editInit = function () {
+    var page = CRM.enc;
+
+    CRM.ajaxCall({
+        url:page.INFO_LOOK_GET + page.encyId.val(),
+        type:'GET',
+        callback:function (data) {
+            page.renderInfo(data);
+            page.offEl();
+        }
+    })
+};
+
+// 新增初始化
+CRM.enc.addInit = function () {
+
+};
+
 // 渲染详情页面
 CRM.enc.renderInfo = function (data) {
     var page = CRM.enc;
@@ -81,6 +102,52 @@ CRM.enc.renderInfo = function (data) {
 
 };
 
+// 提交数据
+CRM.enc.upData = function () {
+    var page = CRM.enc;
+  CRM.ajaxCall({
+
+  })
+};
+
+// 收集编辑提交的数据
+CRM.enc.collectEData = function () {
+    var page = CRM.enc,
+        obj = {
+            encyId:page.encyId.val(),
+            companyInfo:page.companyInfo.val(),
+            developHis:page.developHis.val(),
+            sellNetwork:page.sellNetwork.val(),
+            lastmodifyUserName:CRM.getTime(),
+            modifyTime:page.modifyTime.val(),
+            customField:page.getCusFieList()
+        };
+    return JSON.stringify(obj);
+};
+
+// 获取自定义列表的数据
+CRM.enc.getCusFieList = function () {
+    var page = CRM.enc,
+        arr  = [];
+    $('#cum').find(page.customField).each(function () {
+        var thisEl = $(this),
+            obj = {
+                name : thisEl.find('[name="na"]').text(),
+                value: thisEl.find('[name="va"]').val()
+            };
+        arr.push(obj);
+    });
+    return JSON.stringify(arr);
+};
+
+// 禁用页面元素
+CRM.enc.offEl = function () {
+    var page = CRM.enc;
+    page.editEl  = $(CRM.el.ON_CONTROL);
+    CRM.onOrOff(page.editEl,false);
+};
+
+// 是否隐藏其他性质
 CRM.enc.isView = function () {
     var page = CRM.enc;
 
@@ -93,6 +160,7 @@ CRM.enc.isView = function () {
     }
 };
 
+// 返回当前页面的状态
 CRM.enc.getStatus = function () {
     var page = CRM.enc;
 
@@ -117,8 +185,14 @@ $(function () {
     if (page.status==='info') {
 
         page.infoInit();
-    }else {
 
+    }else if(page.status==='edit') {
+
+        page.editInit()
+
+        $('#cplBtn').on('click.edit',function () {
+            page.upData();
+        });
     }
 
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.DeptMapper">
+    <resultMap id="BaseResultMap" type="com.fuhuadata.domain.mybatis.Dept">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="PK_DEPT" jdbcType="VARCHAR" property="pkDept"/>
+        <result column="PK_FATHERORG" jdbcType="VARCHAR" property="pkFatherorg"/>
+        <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup"/>
+        <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg"/>
+        <result column="CODE" jdbcType="VARCHAR" property="code"/>
+        <result column="last_modify_time" jdbcType="TIMESTAMP" property="lastModifyTime"/>
+    </resultMap>
+
+    <!-- p_dept 缩写 de -->
+    <sql id="BaseColumns">
+        de.id,
+        de.name,
+        de.pk_dept,
+        de.pk_fatherorg,
+        de.pk_group,
+        de.pk_org,
+        de.code,
+        de.last_modify_time
+    </sql>
+
+</mapper>

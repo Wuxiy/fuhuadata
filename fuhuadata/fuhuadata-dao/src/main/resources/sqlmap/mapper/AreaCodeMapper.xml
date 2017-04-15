@@ -37,8 +37,23 @@
         ar.modify_time user_area_modify_time
     </sql>
 
+    <sql id="FromTable">
+        FROM p_area_code ar
+    </sql>
+    <sql id="InnerJoinUserArea">
+        INNER JOIN p_user_area us_ar ON us_ar.area_id=ar.areaid
+    </sql>
+
     <sql id="UserAreasJoin">
         LEFT JOIN p_user_area us_ar ON us_ar.user_id=ua.id
         LEFT JOIN p_area_code ar ON ar.areaid=us_ar.area_id
     </sql>
+
+    <select id="listCodesByUserId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumns"/>
+        <include refid="FromTable"/>
+        <include refid="InnerJoinUserArea"/>
+        WHERE us_ar.user_id=#{userId}
+    </select>
 </mapper>

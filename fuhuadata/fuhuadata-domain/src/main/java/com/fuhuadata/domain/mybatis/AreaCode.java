@@ -1,14 +1,18 @@
 package com.fuhuadata.domain.mybatis;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fuhuadata.domain.plugin.Treeable;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Table(name = "p_area_code")
-public class AreaCode extends BaseEntity<String> {
+public class AreaCode extends BaseEntity<String> implements Treeable<String> {
+
     @Id
     private String areaid;
 
@@ -76,6 +80,26 @@ public class AreaCode extends BaseEntity<String> {
         this.eAreaName = eAreaName == null ? null : eAreaName.trim();
     }
 
+    @Override
+    public void setName(String name) {
+        this.areaName = name;
+    }
+
+    @Override
+    public String getName() {
+        return this.areaName;
+    }
+
+    @Override
+    public String getIcon() {
+        return null;
+    }
+
+    @Override
+    public void setIcon(String icon) {
+        throw new UnsupportedOperationException();
+    }
+
     /**
      * @return parent_id
      */
@@ -88,6 +112,66 @@ public class AreaCode extends BaseEntity<String> {
      */
     public void setParentId(String parentId) {
         this.parentId = parentId == null ? null : parentId.trim();
+    }
+
+    @Override
+    public String getParentIds() {
+        return null;
+    }
+
+    @Override
+    public void setParentIds(String parentIds) {
+
+    }
+
+    @Override
+    public String getSeparator() {
+        return null;
+    }
+
+    @Override
+    public String makeSelfAsNewParentIds() {
+        return null;
+    }
+
+    @Override
+    public Integer getWeight() {
+        return null;
+    }
+
+    @Override
+    public void setWeight(Integer weight) {
+
+    }
+
+    @Override
+    public boolean isRoot() {
+        return false;
+    }
+
+    @Override
+    public boolean isLeaf() {
+        return false;
+    }
+
+    @Override
+    public boolean isHasChildren() {
+        return false;
+    }
+
+    @Override
+    public String getRootDefaultIcon() {
+        return null;
+    }
+
+    @Override
+    public String getBranchDefaultIcon() {
+        return null;
+    }
+
+    @Override
+    public String getLeafDefaultIcon() {
+        return null;
     }
 
     /**

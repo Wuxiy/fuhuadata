@@ -15,7 +15,7 @@ public interface UserAreaService extends BaseService<UserArea, Integer> {
      * @param userId
      * @param areaIds
      */
-    void saveUserArea(Integer userId, List<String> areaIds);
+    int saveUserArea(Integer userId, List<String> areaIds);
 
     int deleteAreaByUserId(Integer userId);
 }

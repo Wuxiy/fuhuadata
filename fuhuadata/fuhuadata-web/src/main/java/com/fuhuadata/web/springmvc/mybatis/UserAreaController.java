@@ -37,9 +37,10 @@ public class UserAreaController extends BaseController<UserArea, Integer> {
     public ResultPojo saveAreasForUser(@RequestParam("userId") Integer userId,
                                        @RequestParam("areaIds") String areaIdsStr) {
         List<String> areaIds = Arrays.asList(StringUtils.split(areaIdsStr, ","));
-        userAreaService.saveUserArea(userId, areaIds);
+        int count = userAreaService.saveUserArea(userId, areaIds);
 
-        Result<Boolean> result = Result.newResult(true);
+        Result<Integer> result = Result.newResult(true);
+        result.addDefaultModel(count);
         return result.getResultPojo();
     }
 }

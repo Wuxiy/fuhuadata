@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.JobMapper">
+    <resultMap id="BaseResultMap" type="com.fuhuadata.domain.mybatis.Job">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="pk_psnjob" jdbcType="VARCHAR" property="pkPsnjob"/>
+        <result column="psncode" jdbcType="VARCHAR" property="psncode"/>
+        <result column="pk_dept" jdbcType="VARCHAR" property="pkDept"/>
+    </resultMap>
+
+    <!-- p_job 缩写为 jo -->
+    <sql id="BaseColumns">
+        jo.id,
+        jo.pk_psnjob,
+        jo.psncode,
+        jo.pk_dept
+    </sql>
+
+</mapper>

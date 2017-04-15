@@ -105,7 +105,6 @@ CRM.onOrOff = function (el,isOn) {
             el.attr('disabled',true);
         }
     }
-
 };
 
 //ajax调用公共方法
@@ -130,6 +129,18 @@ CRM.ajaxCall = function(res){
     });
 };
 
+// 返回数据
+// CRM.getData = function (type,url,data,contentType) {
+//   var getData;
+//   CRM.ajaxCall(type,url,data,contentType,callback,false);
+//
+//   function callback(res) {
+//       getData = res;
+//   }
+//
+//   return getData;
+// };
+
 // 返回普通数组对象
 CRM.toArr = function (data) {
     var arr = [];
@@ -151,7 +162,71 @@ CRM.toArr = function (data) {
     }
 
     recursionData(data);
+
     return arr;
+};
+
+// 返回 id 数组和 simple 数组
+CRM.toArrWithIds = function (data) {
+    var idArr = [],
+        arr = [];
+
+    function recursionData(data) {
+
+        if (data instanceof Array) {
+
+            $.each(data,function (n,item) {
+                var obj = {
+                    id   : item.cid,
+                    pId  : item.pid,
+                    name : item.cname
+                };
+                arr.push(obj);
+                idArr.push(obj.id);
+
+                recursionData(item.nodes);
+            });
+        }
+    }
+
+    recursionData(data);
+
+    return {
+        ids: idArr,
+        data: arr
+    };
+};
+
+// 将数组转换为对象
+CRM.arrayToObjectWithIdKey = function (data, idKey) {
+    var result = {};
+
+    $.each(data, function (idx, item) {
+        if (item[idKey]) {
+            result[item[idKey]] = item;
+        }
+    });
+
+    return result;
+};
+
+// 通过 key 函数过滤重复数组
+CRM.uniqBy = function (array, key) {
+    var seen = {};
+
+    return $.grep(array, function (item, idx) {
+        var k = key(item);
+        return seen.hasOwnProperty(k) ? false : (seen[k] = true);
+    });
+};
+
+// ztree 对象转换为简单对象
+CRM.zTreeObjToSimpleObj = function (treeObj) {
+    return {
+        id: treeObj.id,
+        pId: treeObj.pId,
+        name: treeObj.name
+    };
 };
 
 // 返回当前时间，格式为yyyy-mm-dd
@@ -223,7 +298,7 @@ CRM.module.Panel.prototype.handleEdit = function (e) {
         elShow      = panel.find(this.editView),
         elHide      = panel.find(this.editHide),
         elOff       = panel.find(this.viewOff),
-        // res         = this.down;F
+        // res         = this.down;
     isEditState = true;
     CRM.onOrOff(elOff,isEditState);
     CRM.showOrHide(elShow,elHide,isEditState);

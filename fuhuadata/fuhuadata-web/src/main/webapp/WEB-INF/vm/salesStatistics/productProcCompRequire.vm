@@ -450,7 +450,7 @@
 
     $(function () {
 
-        if(!id){
+        if(id!=''){
             jQuery.ajax({
                 url:basePath + '/businessProduct/getProductRequireInfo?productRequireId=' + id,
                 type:'POST',
@@ -692,7 +692,7 @@
                     return false;
                 }
             });
-            if(isup&&!id){
+            if(isup&&id!=''){
                 jQuery.ajax({
                     url:basePath + '/businessProduct/saveProductRequire',
                     type:'POST',
@@ -703,7 +703,7 @@
                     }
                 })
             }
-            if(isup){
+            if(isup&&id==''){
                 jQuery.ajax({
                     url:basePath + '/businessProduct/saveProductRequire',
                     type:'POST',

@@ -315,19 +315,7 @@
     var costtable = document.getElementById('costtable');
 
     //根据id确定新增or编辑，添加默认disabled,val
-    if(!id){
-        //暗佣计费方式
-        $('#potentialEmployingWay').val('2');
-        $('#potentialEmployingScale').val('0');
-        $('#potentialEmployingScale').attr('disabled',true);
-        $('#potentialEmployingStandard').val('0');
-        $('#potentialEmployingStandard').attr('disabled',true);
-
-        //价格计算类型
-        $('#priceType').val('0');
-        $('#purchasePrice').attr('disabled',true);
-        $('#purchasePrice').val('0');
-
+    if(id!=''){
         jQuery.ajax({
             url:basePath + '/businessProduct/detailBaseInfo?businessProductId=' + id,
             type:'POST',
@@ -389,6 +377,18 @@
                 }
             }
         })
+    }else{
+        //暗佣计费方式
+        $('#potentialEmployingWay').val('2');
+        $('#potentialEmployingScale').val('0');
+        $('#potentialEmployingScale').attr('disabled',true);
+        $('#potentialEmployingStandard').val('0');
+        $('#potentialEmployingStandard').attr('disabled',true);
+
+        //价格计算类型
+        $('#priceType').val('0');
+        $('#purchasePrice').attr('disabled',true);
+        $('#purchasePrice').val('0');
     }
 
     //渲染树和提交
@@ -408,7 +408,7 @@
                     return false;
                 }
             });
-            if(isup&&!id){
+            if(isup&&id==''){
                 jQuery.ajax({
                     url:basePath + '/businessProduct/saveBaseInfoAndComponents',
                     type:'POST',
@@ -421,7 +421,7 @@
                     }
                 })
             }
-            if(isup&&id){
+            if(isup&&id!=''){
                 jQuery.ajax({
                     url:basePath + '/businessProduct/saveBaseInfoAndComponents',
                     type:'POST',
