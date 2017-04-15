@@ -65,7 +65,7 @@
                     is_full = #isFull#
                 </isNotNull>
                 <isNotNull prepend=", " property="createUserId">
-                    createUserId = #createUserId#
+                    create_user_id = #createUserId#
                 </isNotNull>
                 <isNotNull prepend=", " property="createUserName">
                     create_user_name = #createUserName#
