@@ -50,7 +50,7 @@
         #createTime#, #lastmodifyUserId#, #lastmodifyUserName#,
         #modifyTime#, #customField#, #companyInfo#,
         #developHis#, #sellNetwork#)
-        <selectKey resultClass="int" keyProperty="encyId">
+        <selectKey resultClass="java.lang.String" keyProperty="encyId">
             SELECT @@IDENTITY AS ency_id
         </selectKey>
     </insert>
@@ -111,11 +111,12 @@
             b.full_name AS fullName,
             b.short_name AS shortName,
             b.company_type AS companyType,
+            b.customer_area_id AS customerAreaId,
             b.customer_area AS customerArea,
-            b.country,
+            b.country countryId,
 			GROUP_CONCAT(nature.nature) enterpriseNature,
 			b.other_enterprise_nature otherEnterpriseNature,
-            b.registered_funds AS registeredFund,
+            b.registered_funds AS registeredFunds,
             b.registered_address AS registeredAddr,
             b.management_scope AS managementScope,
             a.ency_id AS encyId,

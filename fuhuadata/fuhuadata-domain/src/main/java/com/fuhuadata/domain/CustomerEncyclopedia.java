@@ -34,7 +34,13 @@ public class CustomerEncyclopedia {
 
         private String country;
 
-        private CustomerEnterpriceNature[] enterpriceNaturs;
+        private String registeredFunds;
+
+        private String registeredAddr;
+
+        private String managementScope;
+
+        private CustomerEnterpriceNature[] enterpriceNatures;
 
         private String companyInfo;//企业简介
 
@@ -127,13 +133,6 @@ public class CustomerEncyclopedia {
         this.country = country;
     }
 
-    public CustomerEnterpriceNature[] getEnterpriceNaturs() {
-        return enterpriceNaturs;
-    }
-
-    public void setEnterpriceNaturs(CustomerEnterpriceNature[] enterpriceNaturs) {
-        this.enterpriceNaturs = enterpriceNaturs;
-    }
 
     public Integer getCreateUserId() {
             return createUserId;
@@ -256,5 +255,38 @@ public class CustomerEncyclopedia {
 
     public void setCountryId(String countryId) {
         this.countryId = countryId;
+    }
+
+    public String getManagementScope() {
+        return managementScope;
+    }
+
+    public void setManagementScope(String managementScope) {
+        this.managementScope = managementScope;
+    }
+
+
+    public String getRegisteredFunds() {
+        return registeredFunds;
+    }
+
+    public void setRegisteredFunds(String registeredFunds) {
+        this.registeredFunds = registeredFunds;
+    }
+
+    public String getRegisteredAddr() {
+        return registeredAddr;
+    }
+
+    public void setRegisteredAddr(String registeredAddr) {
+        this.registeredAddr = registeredAddr;
+    }
+
+    public CustomerEnterpriceNature[] getEnterpriceNatures() {
+        return enterpriceNatures;
+    }
+
+    public void setEnterpriceNatures(CustomerEnterpriceNature[] enterpriceNatures) {
+        this.enterpriceNatures = enterpriceNatures;
     }
 }
