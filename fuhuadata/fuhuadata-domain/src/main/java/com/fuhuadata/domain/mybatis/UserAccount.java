@@ -80,6 +80,12 @@ public class UserAccount extends BaseEntity<Integer> {
     private List<AreaCode> areas;
 
     /**
+     * 用户树时组织ID
+     */
+    @Transient
+    private String pkDept;
+
+    /**
      * 获取用户id
      *
      * @return id - 用户id
@@ -283,5 +289,13 @@ public class UserAccount extends BaseEntity<Integer> {
 
     public void setAreas(List<AreaCode> areas) {
         this.areas = areas;
+    }
+
+    public String getPkDept() {
+        return pkDept;
+    }
+
+    public void setPkDept(String pkDept) {
+        this.pkDept = pkDept;
     }
 }

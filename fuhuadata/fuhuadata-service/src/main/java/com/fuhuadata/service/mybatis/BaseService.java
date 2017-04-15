@@ -18,6 +18,10 @@ public interface BaseService<E extends BaseEntity<ID>, ID extends Serializable> 
 
     List<E> list(E entity);
 
+    /**
+     * 获取所有记录
+     * @return
+     */
     List<E> list();
 
     List<E> listByExample(Object example);
