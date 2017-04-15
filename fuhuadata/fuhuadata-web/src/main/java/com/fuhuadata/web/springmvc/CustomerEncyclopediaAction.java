@@ -102,7 +102,7 @@ public class CustomerEncyclopediaAction {
     @RequestMapping(value = "/modify",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "doUpdate")
     public ModelAndView update(String encyId){
-        return new ModelAndView("knowledgeBase/encyclopediaInfo").addObject("customerId",encyId);
+        return new ModelAndView("knowledgeBase/encyclopediaInfo").addObject("encyId",encyId);
 
     }
 

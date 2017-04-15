@@ -105,7 +105,7 @@
     ]]>
     </delete>
 
-    <select id="GET-BY-ID" resultClass="CustomerEncyVO" parameterClass="java.lang.String">
+    <select id="GET-BY-ID" resultClass="CustomerEncyclopedia" parameterClass="java.lang.String">
         <![CDATA[
                 SELECT
             b.full_name AS fullName,
