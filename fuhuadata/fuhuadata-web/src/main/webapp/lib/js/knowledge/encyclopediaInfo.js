@@ -19,6 +19,8 @@ CRM.enc.encyId     = $('#encyId');
 // script容器
 CRM.enc.cumC = 'cumC';
 
+// tree 数据
+CRM.enc.areaTree = null;
 
 // 表单控件
 CRM.enc.fullName              = $('#fullName');
@@ -52,18 +54,12 @@ CRM.enc.infoInit = function () {
     })
 };
 
+
 // 编辑初始化
 CRM.enc.editInit = function () {
     var page = CRM.enc;
 
-    CRM.ajaxCall({
-        url:page.INFO_LOOK_GET + page.encyId.val(),
-        type:'GET',
-        callback:function (data) {
-            page.renderInfo(data);
-            page.offEl();
-        }
-    })
+    page.renderTree(page.encyId.val());
 };
 
 // 新增初始化
@@ -75,11 +71,11 @@ CRM.enc.addInit = function () {
 CRM.enc.renderInfo = function (data) {
     var page = CRM.enc;
 
+    page.customerArea.val(data.customerArea); // 地区
+    page.country.val(data.country); // 国家
     page.fullName.val(data.fullName);
     page.shortName.val(data.shortName);
     page.companyType.val(data.companyType);
-    page.customerArea.val(data.customerArea);
-    page.country.val(data.country);
     page.enterpriseNature.val(data.enterpriseNature.split(',')); // checkbox
     page.registeredFund.val(data.registeredFund);
     page.registeredAddr.val(data.registeredAddr);
@@ -106,7 +102,8 @@ CRM.enc.renderInfo = function (data) {
 CRM.enc.upData = function () {
     var page = CRM.enc;
   CRM.ajaxCall({
-
+      url  : page.UP_DATA_POST,
+      data : page.collectEData()
   })
 };
 
@@ -147,7 +144,7 @@ CRM.enc.offEl = function () {
     CRM.onOrOff(page.editEl,false);
 };
 
-// 是否隐藏其他性质
+// 是否隐藏其他文本框
 CRM.enc.isView = function () {
     var page = CRM.enc;
 
@@ -176,6 +173,71 @@ CRM.enc.getStatus = function () {
     }
 };
 
+// 渲染编辑页面处理程序
+CRM.enc.renderEditPageHandler = function (id) {
+    var page = CRM.enc;
+
+    CRM.ajaxCall({
+            url  : page.INFO_LOOK_GET + page.encyId.val(),
+            type : 'GET',
+        callback : function (data) {
+            var counTree = page.getCounData(page.areaTree,data.areaId); // 获取国家树的数据
+
+            page.renderTreeHandler(counTree, 'countryId', '——请优先选择地区——'); // 创建国家树
+            page.renderInfo(data);
+            page.isView(); // 根据表单的值显示或隐藏元素
+        }
+    });
+};
+
+// 是否有树的数据，有的话直接渲染，然后返回true，没有返回false
+CRM.enc.isRenderTree = function (id) {
+    var page = CRM.enc;
+
+    if (page.areaTree) {
+
+        return true;
+    }else {
+
+        return false;
+    }
+};
+
+// 先获取数据再，渲染下拉框
+CRM.enc.renderTree = function (id) {
+    var page = CRM.enc;
+
+    // 没有数据，先请求渲染下拉框，再请求渲染页面
+    CRM.ajaxCall({
+        url:CRM.url.AREA_TREE_GET,
+        type:'GET',
+        callback:function (res) {
+            page.areaTree = res[0].nodes; // 将取到的树数据赋值给对象属性，下次有的话就不用再发请求了
+            page.renderTreeHandler(page.areaTree, 'areaId', '——请选择地区——');
+            page.renderEditPageHandler(id);
+        }
+    });
+};
+
+// 渲染树下拉框处理程序
+CRM.cbInfo.renderTreeHandler = function (data, el, fitem) {
+    var page    = CRM.cbInfo,
+        fOptons = '<option value="">' + fitem + '</option>',
+        options = fOptons + page.getOption(data);
+
+    page[el].html(options);
+};
+
+// 返回下拉框内容
+CRM.cbInfo.getOption = function(data){
+    var options = '';
+    $.each(data,function (n,area) {
+        options += '<option value="'+area.cid+'">'+area.cname+'</option>';
+    });
+    return options;
+};
+
+
 
 $(function () {
     var page = CRM.enc;
@@ -188,7 +250,7 @@ $(function () {
 
     }else if(page.status==='edit') {
 
-        page.editInit()
+        page.editInit();
 
         $('#cplBtn').on('click.edit',function () {
             page.upData();

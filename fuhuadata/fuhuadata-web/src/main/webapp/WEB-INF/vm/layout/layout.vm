@@ -26,14 +26,14 @@
     <script src="${request.contextPath}/lib/js/jquery-lang.js" type="text/javascript" charset="utf-8"></script>
     <script src="${request.contextPath}/lib/js/jquery-lang.js" type="text/javascript" charset="utf-8"></script>
     <script src="${request.contextPath}/lib/js/langpack/nonDynamic.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript">
-
-
-        var lang = new Lang();
-        lang.init({
-            defaultLang: 'zh'
-        });
-    </script>
+##    <script type="text/javascript">
+##
+##
+##        var lang = new Lang();
+##        lang.init({
+##            defaultLang: 'zh'
+##        });
+##    </script>
 </head>
 <body class="bg-page">
 <div class="container-fluid">

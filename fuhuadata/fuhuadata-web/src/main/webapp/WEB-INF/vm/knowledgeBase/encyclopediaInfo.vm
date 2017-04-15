@@ -9,7 +9,7 @@
             <!--表格开始-->
             <div class="panel panel-default view-HD-lg">
                 <div class="panel-heading">
-                    <a href="/customerEncyclopedia/add/?" class="btn btn-xs btn-primary pull-right panel-heading-btn">编辑</a>
+                    <a href="${request.contextPath}/customerEncyclopedia/addCustomerEncyclopedia?encyId=$!{encyId}" class="btn btn-xs btn-primary pull-right panel-heading-btn">编辑</a>
                     <h3 class="panel-title">
                         百科详情
                     </h3>
@@ -76,9 +76,7 @@
                             <div class="col-xs-2">
                                 <div class="input-group">
                                     <input id="registeredFund" type="text" disabled class="form-control" />
-                                    <span class="input-group-addon">
-                                        万美元
-                                    </span>
+                                    <span class="input-group-addon">$</span>
                                 </div>
 
                             </div>
@@ -150,7 +148,7 @@
 </script>
 
 <input id="customerId" type="hidden" value="$!{customerId}">
-<input id="encyId" type="hidden" value="1">
+<input id="encyId" type="hidden" value="$!{encyId}">
 <input id="nature" type="hidden" value="info">
 
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
