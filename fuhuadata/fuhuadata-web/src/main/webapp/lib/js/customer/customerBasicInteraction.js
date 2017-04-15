@@ -16,6 +16,7 @@ CRM.cbInfo.factor       = $('#factory'); //工厂部分
 CRM.cbInfo.mcg          = $('#majorCompetitorsGroup'); // 竞争对手部分
 CRM.cbInfo.oppo         = $('#opportunity'); // 机会部分
 CRM.cbInfo.cmp          = 'cmp'; // 生产产品(循环加载)
+CRM.cbInfo.encyC        = 'encyC'; // 百科
 CRM.cbInfo.status       = null; // 页面状态
 CRM.cbInfo.isEdit       = false; // 页面是否可编辑 (默认不能编辑)
 
@@ -28,9 +29,9 @@ CRM.cbInfo.ctp = $('#ctp').val(); // 客户状态
 CRM.cbInfo.fname = $('#fname').val(); // 客户全称
 
 // 按钮
-CRM.cbInfo.edit        = $('#edit');
-CRM.cbInfo.save        = $('#save');
-CRM.cbInfo.cancel      = $('#cancel');
+CRM.cbInfo.edit        = null;
+CRM.cbInfo.save        = null;
+CRM.cbInfo.cancel      = null;
 CRM.cbInfo.upFile      = $('#up');
 CRM.cbInfo.addPro      = $('#add');
 
@@ -63,42 +64,107 @@ CRM.cbInfo.remark               = $('#remark'); // 备注
 CRM.cbInfo.shortName            = $('#shortName'); // 简称
 CRM.cbInfo.zhongxinbaoLevel     = $('#zhongxinbaoLevel'); // 中信保等级 必填
 CRM.cbInfo.zhongxinbaoNumber    = $('#zhongxinbaoNumber'); // 中信保编号
-CRM.cbInfo.customerMakeProduct  = $('[name="customerMakeProduct"]'); // 客户生产产品 list
+CRM.cbInfo.customerMakeProduct  = null; // 客户生产产品 list 动态内容，不能在这里赋值，不然为undefined
 CRM.cbInfo.customerLevel        = $('#customerLevel'); // 客户等级
+CRM.cbInfo.factoryLocation      = $('#factoryLocation'); // 工厂位置
+CRM.cbInfo.managementScope      = $('#managementScope'); // 经营范围
+CRM.cbInfo.opportunitySource    = $('#opportunitySource');
+CRM.cbInfo.otherEnterpriceNature= $('#otherEnterpriceNature');
 // CRM.cbInfo.customerStatus       = $('#customerStatus'); // 客户状态 0流失 1正常
 
 // 收集数据
 CRM.cbInfo.collectData = function () {
     var page = CRM.cbInfo,
         obj = {
-            areaId               : page.areaId.val(),
-            countryId            : page.countryId.val(),
-            companyType          : page.companyType.val(),
-            customerId           : page.customerId.val(),
-            customerLevel        : page.customerLevel.val(),
-            customerType         : page.customerType.val(),
-            enterpriseEmail      : page.enterpriseEmail.val(),
-            enterpriseNature     : page.enterpriseNature.val(),
-            enterprisePhone      : page.enterprisePhone.val(),
-            fullName             : page.fullName.val(),
-            hasChiCompany        : page.hasChiCompany.val(),
-            hasChiPurchase       : page.hasChiPurchase.val(),
-            lastmodifyUserId     : page.lastmodifyUserId.val(),
-            majorCompetitors     : page.majorCompetitors.val(),
-            modifyTime           : page.modifyTime.val(),
-            opportunityDescrible : page.opportunityDescrible.val(),
-            otherOpportunity     : page.otherOpportunity.val(),
-            productLine          : page.productLine.val(),
-            registeredAddress    : page.registeredAddress.val(),
-            registeredFunds      : page.registeredFunds.val(),
-            shortName            : page.shortName.val(),
-            zhongxinbaoLevel     : page.zhongxinbaoLevel.val(),
-            zhongxinbaoNumber    : page.zhongxinbaoNumber.val(),
-            customerMakeProduct  : page.customerMakeProduct.val(),
-            customerLevel        : page.customerLevel.val()
+            customerBaseInfo:{
+                areaId               : page.areaId.val(),
+                countryId            : page.countryId.val(),
+                companyType          : page.companyType.val(),
+                customerId           : page.cid,
+                customerLevel        : page.customerLevel.val(),
+                customerType         : page.customerType.val(),
+                enterpriseEmail      : page.enterpriseEmail.val(),
+                enterprisePhone      : page.enterprisePhone.val(),
+                fullName             : page.fullName.val(),
+                hasChiCompany        : page.hasChiCompany.val(),
+                hasChiPurchase       : page.hasChiPurchase.val(),
+                lastmodifyUserId     : page.lastmodifyUserId.val(),
+                majorCompetitors     : page.majorCompetitors.val(),
+                modifyTime           : CRM.getTime(),
+                opportunityDescrible : page.opportunityDescrible.val(),
+                otherOpportunity     : page.otherOpportunity.val(),
+                // productLine          : page.productLine.val(),
+                registeredAddress    : page.registeredAddress.val(),
+                registeredFunds      : page.registeredFunds.val(),
+                shortName            : page.shortName.val(),
+                zhongxinbaoLevel     : page.zhongxinbaoLevel.val(),
+                zhongxinbaoNumber    : page.zhongxinbaoNumber.val(),
+                // customerMakeProduct  : page.customerMakeProduct.val(),
+                otherEnterpriceNature: page.otherEnterpriceNature.val(),
+                managementScope      : page.managementScope.val(),
+                factoryLocation      : page.factoryLocation.val(),
+                productionLine       : page.productLine.val(),
+                remark               : page.remark.val(),
+                opportunitySource    : page.opportunitySource.val(),
+                fullEnterpriseNature : page.sCustomerEnterpriceNature(),
+                area                 : page.areaId.find(':selected').text(),
+                country              : page.areaId.find(':selected').text(),
+            },
+            customerEnterpriceNatures : page.customerEnterpriceNatureObj(),
+            customerMakeProducts : page.customerMakeProductObj()
+
         };
 
     return JSON.stringify(obj);
+};
+
+//企业性质
+CRM.cbInfo.customerEnterpriceNatureObj = function () {
+    var page  =  CRM.cbInfo,
+        arr = [];
+    page.enterpriseNature.filter(':checked').each(function () {
+        var obj = {
+            customerId : page.cid,
+            type : 1,
+            nature : $(this).val()
+        };
+        arr.push(obj);
+    });
+    return arr;
+};
+
+//企业性质字符传
+CRM.cbInfo.sCustomerEnterpriceNature = function () {
+    var page  =  CRM.cbInfo,
+        sName = '';
+
+    page.enterpriseNature.filter(':checked').each(function () {
+        var $this = $(this);
+        sName += $this.next('span').text() +',';
+    });
+
+    return sName.slice('0','-1');
+};
+
+//客户生产产品
+CRM.cbInfo.customerMakeProductObj = function () {
+    var page  =  CRM.cbInfo,
+        arr = [];
+
+    page.customerMakeProduct = $('[name="customerMakeProduct"]');
+    page.customerMakeProduct.each(function () {
+        var $this = $(this),
+            obj   = {};
+
+        if($this.data('id') && $this.data('id')!='' && $this.data('id')!=null){
+            obj.id = $this.data('id');
+        }
+        obj.customerId = page.cid;
+        obj.production = $this.find('[name="production"]').val();
+        obj.productName = $this.find('[name="productName"]').val();
+        arr.push(obj);
+    });
+    return arr;
 };
 
 // 渲染下拉框
@@ -186,7 +252,8 @@ CRM.cbInfo.renderPageHandler = function (id) {
 
 // 渲染表单处理程序
 CRM.cbInfo.renderForm = function(data){
-    var page = CRM.cbInfo;
+    var page = CRM.cbInfo,
+        encyData = {};
 
     page.areaId.val(data.areaId);
     page.countryId.val(data.countryId);
@@ -202,7 +269,7 @@ CRM.cbInfo.renderForm = function(data){
     page.hasChiPurchase.val(data.hasChiPurchase);
     page.lastmodifyUserId.val(data.lastmodifyUserId);
     page.majorCompetitors.val(data.majorCompetitors);
-    page.modifyTime.val(data.modifyTime.split(/\s/)[0]); // time
+    page.modifyTime.val(data.modifyTime); // time
     page.opportunityDescrible.val(data.opportunityDescrible);
     page.otherOpportunity.val(data.otherOpportunity);
     page.productLine.val(data.productLine);
@@ -211,9 +278,22 @@ CRM.cbInfo.renderForm = function(data){
     page.shortName.val(data.shortName);
     page.zhongxinbaoLevel.val(data.zhongxinbaoLevel);
     page.zhongxinbaoNumber.val(data.zhongxinbaoNumber);
-    page.customerMakeProduct.val(data.customerMakeProduct);
+    // page.customerMakeProduct.val(data.customerMakeProduct);
     page.customerLevel.val(data.customerLevel);
+    page.remark.val(data.remark);
+    page.factoryLocation.val(data.factoryLocation);
+    page.managementScope.val(data.managementScope);
 
+    // 百科
+    encyData.companyInfo = data.companyInfo;
+    encyData.developHis  = data.developHis;
+    encyData.sellNetwork = data.sellNetwork;
+    encyData.modifyTimeEn = data.modifyTimeEn;
+    encyData.lastmodifyUserNameEn = data.lastmodifyUserNameEn;
+    encyData.customField = JSON.parse(data.customField);
+    CRM.tplHandler('encyC',encyData,$('#ency'));
+
+    // 产品
     CRM.tplHandler('cmp',data.customerMakeProduct,$('#cmpC'));
 };
 
@@ -262,14 +342,6 @@ CRM.cbInfo.togglePage = function (isE) {
     // 禁用和隐藏的元素
     CRM.showOrHide(page.editView, page.editHide, isE);
     CRM.onOrOff(page.elOff, isE);
-
-    if (isE === true) {
-
-        isE = false;
-    }else {
-
-        isE = true;
-    };
 };
 
 // 初始化页面
@@ -436,7 +508,7 @@ CRM.cbInfo.mVerify = function (em) {
             }
         },
         messages: {
-            reason: em('其输入流失原因','top:-29px','right:0')
+            reason: em('请输入流失原因','top:-29px','right:0')
         }
     });
 
@@ -452,77 +524,88 @@ $().ready(function() {
     pForm = page.pVerify(page.vDeploy());
     mForm = page.mVerify(page.vDeploy());
 
-
-
-
-
-
-
-
-
-
-
     // 编辑
-   /* page.edit.on('click.e',function () {
+    page.edit = $('#edit');
+    page.edit.on('click.edit',function () {
 
-        page.asidePanel.fadeOut();
-
-        $('#pTable').find('tr').removeClass('hidden');
-
-        // 开启表格编辑功能
-        page.editITable.status = true;
-        page.editPTable.status = true;
-        page.editITable.toggle();
-        page.editPTable.toggle();
+        page.togglePage(true);
     });
 
     // 保存
-    page.save.on('click.s',function () {
+    page.save = $('#save');
+    page.save.on('click.save',function () {
 
-        page.asidePanel.fadeIn();
+        $('#upModal').modal('show');
 
-        CRM.ajaxCall({
-            url  : page.PRODUCT_INFO_POST,
-            data : page.collectData(),
-            type : 'POST',
-            contentType:"application/json",
-            callback : function(data){
-                page.renderPage(page.productId.val());
+        $('#up').on('click.up',function () {
+
+            if (pForm.form()) {
+
+                CRM.ajaxCall({
+                    url:page.EDIT_POST,
+                    data:page.collectData(),
+                    contentType:"application/json",
+                    method:'POST'
+                })
+            }else {
+
+                $('#errorM').modal('show');
+                $('#errorM').on('shown.bs.modal',function () {
+
+                    setTimeout($('#errorM').modal('hide'),500);
+                })
             }
         });
-
-        // 关闭表格编辑功能
-        page.editITable.status = false;
-        page.editPTable.status = false;
-        page.editITable.toggle();
-        page.editPTable.toggle();
+        // page.togglePage(false);
     });
 
     // 取消
-    page.cancel.on('click.c',function () {
-
-        page.asidePanel.fadeIn();
-
-        page.renderPage(page.productId.val());
-
-        // 关闭表格编辑功能
-        page.editITable.status = false;
-        page.editPTable.status = false;
-        page.editITable.toggle();
-        page.editPTable.toggle();
+    page.cancel = $('#cancel');
+    page.cancel.on('click.cancel',function () {
+        page.togglePage(false);
+        page.renderPage(page.cid);
+        pForm.form();
     });
 
-    // 盐类的change事件
-    page.saltType.on('change.salt',function () {
-        var thisEl = $(this).filter('.else');
-        CRM.showOrHide(page.otherSaltName,null,thisEl.prop('checked'));
+    $(document).on('click.cbx','#showFactory,#showMajorCompetitorsGroup,#showOtherEnterpriceNature',function () {
+        var $this = $(this);
+            id = $this.data('target');
+        if ($this.prop('checked')) {
 
-        if (!thisEl.prop('checked')) {
+            $(id).removeClass('hidden').val('');
+        }else {
 
-            page.otherSaltName.val(''); // 如果没选中清除该文本框
+            $(id).addClass('hidden').val('');
         }
-    });*/
+    });
 
+    $(document).on('change.sel','#customerType,#opportunitySource',function () {
+        var $this = $(this),
+            slt = $('#showOtherOpportunity'),
+            slo = $('#showRModal').prop('selected');
+
+        if ($this.attr('id')=='customerType' && slo) {
+
+            $('#rModal').modal('show');
+            $('#upReasons').on('click.up',function () {
+                // mForm.form();
+                if (mForm.form()) {
+                    // 提交表单
+                } else {
+                    return false
+                }
+            })
+        }else {
+
+            if (slt.prop('selected')) {
+
+                $(slt.data('target')).removeClass('hidden');
+            }else {
+
+                $(slt.data('target')).addClass('hidden');
+            }
+        }
+    })
 });
 
 

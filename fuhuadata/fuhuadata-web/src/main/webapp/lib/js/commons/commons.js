@@ -27,8 +27,8 @@ CRM.el = {
     CANCEL_BTN      : '[data-btn="cancel"]',
     ADD_BTN         : '[data-btn="add"]',
     DEL_BTN         : '[data-btn="del"]',
-    ON_CONTROL      : '[data-control="on"]',
-    OFF_CONTROL     : '[data-control="off"]'
+    ON_CONTROL      : '[data-control]',
+    OFF_CONTROL     : '[data-control]'
 };
 
 //是否隐藏
@@ -99,12 +99,10 @@ CRM.onOrOff = function (el,isOn) {
 
         if (isOn) {
 
-            el.attr('disabled',false)
-                .attr('data-control','on');
+            el.attr('disabled',false);
         }else {
 
-            el.attr('disabled',true)
-                .attr('data-control','off');
+            el.attr('disabled',true);
         }
     }
 
