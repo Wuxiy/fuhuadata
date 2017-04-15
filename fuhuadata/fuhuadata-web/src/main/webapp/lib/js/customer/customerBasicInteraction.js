@@ -382,6 +382,7 @@ CRM.cbInfo.init = function () {
 CRM.cbInfo.aInitHandler = function () {
     var page = CRM.cbInfo;
     CRM.insertHtml('#al',page.customerType); // 渲染cusotmerType表单控件
+    page.togglePage(true);
 };
 
 // 潜在客户初始化程序
