@@ -2,6 +2,7 @@ package com.fuhuadata.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * 商机报价基本信息
@@ -18,6 +19,8 @@ public class BusinessOrder implements Serializable{
     private String salesManId;//业务员id
     private String salesManName;//业务员姓名
     private String departmentId;//部门id
+    private String departmentName;//部门名称
+
     private String saleOrganizationId;//销售组织id
     private String saleOrganizationName;//销售组织名称
     private String destinationPort;//目的港
@@ -26,7 +29,14 @@ public class BusinessOrder implements Serializable{
     private Integer tradeType;//贸易方式 0一般贸易，1其他
     private String tradeTerm;//贸易术语
     private String currency;//币种编码
+
     private String tradeCountry;//贸易国别
+
+    private BigDecimal nusdexchgrate;//原币对美元汇率
+    private BigDecimal nexchangerate;//原币对本币汇率
+    private Date lastdelydate;//最迟交货期
+
+
     private BigDecimal premiumRate;//保险费率
     private BigDecimal  guaranteeRate;//信保费率
     private BigDecimal discountRate;//资金利率
@@ -35,10 +45,12 @@ public class BusinessOrder implements Serializable{
     private BigDecimal managementRate;//管理费用率
     private BigDecimal grossRate;//毛利率
     private BigDecimal creditRate;//信保赔付率
-    private Integer transportFlag;//是否可转运,0是，1否
+    private Integer transportFlag;//是否可转运,0否，1是
     private Integer partialShipmentFalg;//是否可分批出运
     private Integer status;//订单状态：-1：报价失败  0：报价中 1：已转化成订单 2：数据已上报到NC
+
     private String failureAnalysis;//失败原因分析
+
     private String dealTime;//nc系统合同签订时间
     private String deliverInfo;//交单地址等信息 json格式
     private String expressInfo;//寄件信息 json格式
@@ -48,6 +60,9 @@ public class BusinessOrder implements Serializable{
     private BigDecimal maintenanceFee;//维护费
     private BigDecimal netProfit;//净利润
     private String actualPaymentTime;//实际付款时间
+
+    private String grossProfit;//毛利润
+
     private BigDecimal actualAmountPaid;//实际付款金额
     private BigDecimal unpaidAmount;//未付金额
     private Integer isComplaint;//是否投诉 0:否 1：是
@@ -467,5 +482,45 @@ public class BusinessOrder implements Serializable{
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getGrossProfit() {
+        return grossProfit;
+    }
+
+    public void setGrossProfit(String grossProfit) {
+        this.grossProfit = grossProfit;
+    }
+
+    public BigDecimal getNusdexchgrate() {
+        return nusdexchgrate;
+    }
+
+    public void setNusdexchgrate(BigDecimal nusdexchgrate) {
+        this.nusdexchgrate = nusdexchgrate;
+    }
+
+    public BigDecimal getNexchangerate() {
+        return nexchangerate;
+    }
+
+    public void setNexchangerate(BigDecimal nexchangerate) {
+        this.nexchangerate = nexchangerate;
+    }
+
+    public Date getLastdelydate() {
+        return lastdelydate;
+    }
+
+    public void setLastdelydate(Date lastdelydate) {
+        this.lastdelydate = lastdelydate;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 }

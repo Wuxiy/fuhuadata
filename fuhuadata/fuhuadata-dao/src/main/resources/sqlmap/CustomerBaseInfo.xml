@@ -388,10 +388,12 @@
 				base.customer_area customerArea,
 				base.country country,
 				base.customer_level customerLevel,
-				base.full_enterprise_nature enterpriseNature,
+				GROUP_CONCAT(nature.nature) enterpriseNature,
 				ency.ency_id encyId
 			FROM customer_base_info base
 			LEFT JOIN k_customer_encyclopedia ency ON ency.customer_id =base.customer_id
+				LEFT JOIN customer_enterprise_nature nature
+			ON nature.customer_id=base.customer_id
 			WHERE base.customer_id=#customer_id#
 		]]>
 	</select>
