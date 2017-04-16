@@ -554,6 +554,7 @@ $(function () {
 
                 page.addData();
             }
+
         });
 
         $('#resetBtn').on('click.edit',function () {

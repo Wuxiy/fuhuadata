@@ -11,11 +11,22 @@ CRM.url    = window.CRM.url || {};
 // 百度渲染引擎全局对象
 var bt = baidu.template;
 
-CRM.url.AREA_TREE_GET    = '/customerBaseInfo/initAreaCategoryTree'; // 地区树
-CRM.url.ROLE_TREE_GET    = '/sys/role/ajax/load?async=false'; // 角色树
-CRM.url.ORG_TREE_GET     = '/customerBaseInfoOrder/initSaleOrganizationTree'; // 组织树
-CRM.url.MENU_TREE_GET    = '/sys/menu/ajax/load?async=false'; // 菜单树
-CRM.url.PRODUCT_TREE_GET = '/productCategory/CategoryTree'; // 产品树
+CRM.url.AREA_TREE_GET        = '/customerBaseInfo/initAreaCategoryTree'; // 地区树
+CRM.url.ROLE_TREE_GET        = '/sys/role/ajax/load?async=false'; // 角色树
+CRM.url.ORG_TREE_GET         = '/customerBaseInfoOrder/initSaleOrganizationTree'; // 组织树
+CRM.url.MENU_TREE_GET        = '/sys/menu/ajax/load?async=false'; // 菜单树
+CRM.url.PRODUCT_TREE_GET     = '/productCategory/CategoryTree'; // 产品树
+CRM.url.CUSTCLASS_TREE_GET   = '/customerBaseInfo/getCustclass'; // 客户基本分类树
+CRM.url.FORMATDOC_TREE_GET   = '/customerBaseInfo/getFormatdoc'; // 数据格式树
+CRM.url.COUNTRYZONE_TREE_GET = '/customerBaseInfo/getCountryzone'; // 贸易国别树
+CRM.url.TIMEZONE_TREE_GET    = '/customerBaseInfo/getTimezone'; // 时区树
+
+// getCustclass  客户基本分类
+//
+// getFormatdoc 数据格式档案
+// getCountryzone 贸易国别档案
+// getTimezone 时区档案
+
 
 //功能性控件
 CRM.el = {

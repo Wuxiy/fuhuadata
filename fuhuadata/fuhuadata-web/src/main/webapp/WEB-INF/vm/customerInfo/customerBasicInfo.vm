@@ -95,7 +95,7 @@
                                         <span lang="zh">其他</span>
                                     </label>
                                     <span class="form-inline">
-                                        <input id="otherEnterpriceNature" data-control="off" disabled name="otherEnterpriceNature" class="form-inline form-control" style="position:absolute;left:355px;" type="text" value="" placeholder="请输入企业性质" lang="zh"/>
+                                        <input id="otherEnterpriceNature" data-control="off" disabled name="otherEnterpriceNature" class="form-inline form-control hidden" style="position:absolute;left:355px;" type="text" value="" placeholder="请输入企业性质" lang="zh"/>
                                     </span>
                                 </div>
                             </div>
@@ -248,6 +248,7 @@
                                     <input id="modifyTime" class="form-control noEdit" disabled value="">
                                 </div>
                             </div>
+                            <div class="form-group" id="aBtn"></div>
                         </form>
                     </div>
                 </div>
@@ -315,7 +316,7 @@
         <div class="modal-content">
             <div class="modal-body clearfix">
                 <hr>
-                <h4 class="text-info text-center">请完善表单？</h4>
+                <h4 class="text-info text-center">请完善表单！</h4>
                 <hr>
             </div>
         </div>
@@ -351,16 +352,18 @@
         编辑
     </button>
     <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden" data-view="editView">
-        <button id="cancel" class="btn" lang="zh">取消</button>
-        <button id="save" class="btn btn-primary" lang="zh">保存</button>
+        <button id="cancel" class="btn" lang="zh" type="button">取消</button>
+        <button id="save" class="btn btn-primary" lang="zh" type="button">保存</button>
     </div>
 </script>
 
 ## 新增状态添加按钮
 <script id="funBtnA" type="text/html">
-    <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right">
-        <button id="cancel" data-view="eidtView" class="btn" lang="zh">取消</button>
-        <button id="save" data-view="eidtView" class="btn btn-primary" lang="zh">保存</button>
+    <div class="col-xs-2 col-xs-offset-4">
+        <button id="save" data-view="eidtView" type="button" class="btn btn-block btn-primary" lang="zh">完成</button>
+    </div>
+    <div class="col-xs-2">
+        <button id="resetB" data-view="eidtView" type="button" class="btn btn-block btn-default" lang="zh">重置</button>
     </div>
 </script>
 
@@ -413,6 +416,7 @@
 <input id="cid" type="hidden" value='$!{customerId}'>
 <input id="ctp" type="hidden" value="$!{customerType}" />
 <input id="fname" type="hidden" value="$!{fullName}" />
+<input id="customerType" type="hidden" value="" />
 
 ##<input id="encyId" type="hidden" value="">
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
