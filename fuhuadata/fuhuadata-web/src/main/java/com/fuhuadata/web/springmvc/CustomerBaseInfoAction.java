@@ -13,6 +13,10 @@ import com.fuhuadata.vo.CategoryTree;
 import com.fuhuadata.vo.CustomerBaseInfoLinkman;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
 import com.fuhuadata.vo.CustomerBaseInfoDO;
+import com.fuhuadata.vo.DataArchive.Countryzone;
+import com.fuhuadata.vo.DataArchive.Custclass;
+import com.fuhuadata.vo.DataArchive.Formatdoc;
+import com.fuhuadata.vo.DataArchive.Timezone;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -43,8 +47,6 @@ public class CustomerBaseInfoAction {
     private CustomerBaseInfoService customerBaseInfoService;
     @Autowired
     private CustomerAreaService  customerAreaService;
-    @Autowired
-    private CustomerMakeProductService customerMakeProductService;
 
     /**
      * 客户信息列表页入口
@@ -160,9 +162,9 @@ public class CustomerBaseInfoAction {
     @SystemLogAnnotation(module = "customerInfo-customerList",methods = "showCostomerBaseInfoDetails")
     @ResponseBody
     public ResultPojo showCustomerBaseInfoDetails(String customerId){
-        Result<CustomerBaseInfoVO> result = new Result<CustomerBaseInfoVO>();
+        Result<CustomerBaseInfo> result = new Result<CustomerBaseInfo>();
         try{
-            result=customerBaseInfoService.getCustomerInfoById(customerId);
+            result=customerBaseInfoService.getCustomerBaseInfoById(customerId);
         }catch (Exception e){
             result.setSuccess(false);
             log.error("获取客户基本信息错误",e);
@@ -252,6 +254,25 @@ public class CustomerBaseInfoAction {
         return result.getResultPojo();
     }
 
+
+    /**
+     * 根据客户id获取客户以及是否存在百科信息
+     * @param customerId
+     * @return
+     */
+    @RequestMapping(value = "/getCustomerInfoEncy",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "customerInfo-",methods = "getCustomerInfoEncy")
+    @ResponseBody
+    public ResultPojo getCustomerInfoEncy(String customerId){
+        Result<CustomerBaseInfo> result = new Result<CustomerBaseInfo>();
+        try{
+            result=customerBaseInfoService.getCustomerBaseInfoById(customerId);
+        }catch (Exception e){
+            result.setSuccess(false);
+            log.error("根据客户id获取客户及百科错误",e);
+        }
+        return result.getResultPojo();
+    }
     /**
      * 条件查询客户列表
      * @param queryCustomerBaseInfo
@@ -271,6 +292,85 @@ public class CustomerBaseInfoAction {
         return result.getResultPojo();
     }
 
+
+
+    /**
+     *  数据格式档案
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/getFormatdoc",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "customerInfo",methods = "getFormatdoc")
+    @ResponseBody
+    public ResultPojo getFormatdoc(){
+        Result<List<Formatdoc>> result = new Result<List<Formatdoc>>();
+        try{
+            result=customerBaseInfoService.getFormatdoc();
+        }catch (Exception e){
+            result.setSuccess(false);
+            log.error("获取数据格式错误",e);
+        }
+        return result.getResultPojo();
+    }
+
+    /**
+     *  贸易国别档案
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/getCountryzone",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "customerInfo",methods = "getCountryzone")
+    @ResponseBody
+    public ResultPojo getCountryzone(@RequestBody Countryzone countryzone){
+        Result<List<Countryzone>> result = new Result<List<Countryzone>>();
+        try{
+            result=customerBaseInfoService.getCountryzone(countryzone);
+        }catch (Exception e){
+            result.setSuccess(false);
+            log.error("条件获取贸易国别档案错误",e);
+        }
+        return result.getResultPojo();
+    }
+
+
+    /**
+     *  时区档案
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/getTimezone",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "customerInfo",methods = "getTimezone")
+    @ResponseBody
+    public ResultPojo getTimezone(@RequestBody Timezone timezone){
+        Result<List<Timezone>> result = new Result<List<Timezone>>();
+        try{
+            result=customerBaseInfoService.getTimezone(timezone);
+        }catch (Exception e){
+            result.setSuccess(false);
+            log.error("条件获取时区档案错误",e);
+        }
+        return result.getResultPojo();
+    }
+
+
+    /**
+     *  客户基本分类
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/getCustclass",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "customerInfo",methods = "getCustclass")
+    @ResponseBody
+    public ResultPojo getCustclass(){
+        Result<List<CategoryTree>> result = new Result<List<CategoryTree>>();
+        try{
+            result=customerBaseInfoService.getCustclass();
+        }catch (Exception e){
+            result.setSuccess(false);
+            log.error("获取客户基本分类档案错误",e);
+        }
+        return result.getResultPojo();
+    }
 
 
 }

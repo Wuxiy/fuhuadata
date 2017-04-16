@@ -134,6 +134,7 @@ public class CustomerEncyclopedia {
     }
 
 
+
     public Integer getCreateUserId() {
             return createUserId;
         }

@@ -4,7 +4,7 @@
 
 <sqlMap namespace="PACKINGCATEGORY">
     <typeAlias alias="PackingCategory" type="com.fuhuadata.domain.PackingCategory"/>
-    <typeAlias alias="PackingCategoryVO" type="com.fuhuadata.vo.PackingCategoryVO"/>
+    <typeAlias alias="PackingCategoryVO" type="com.fuhuadata.vo.CategoryVO"/>
 
     <resultMap id="PACKINGCATEGORY-MAP" class="PackingCategory">
             <result property="categoryId" column="category_id" jdbcType="INT" javaType="java.lang.Integer"/>

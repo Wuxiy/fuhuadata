@@ -5,7 +5,7 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.PackingCategoryManager;
 import com.fuhuadata.service.PackingCategoryService;
 import com.fuhuadata.vo.CategoryTree;
-import com.fuhuadata.vo.PackingCategoryVO;
+import com.fuhuadata.vo.CategoryVO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -70,7 +70,7 @@ public class PackingCategoryServiceImpl implements PackingCategoryService {
         List<CategoryTree> tree=new ArrayList<CategoryTree>();
         Result<List<CategoryTree>> result=new Result<List<CategoryTree>>();
         try {
-            List<PackingCategoryVO> list = packingCategoryManager.getAllByLevel(parentIds);
+            List<CategoryVO> list = packingCategoryManager.getAllByLevel(parentIds);
             result.addDefaultModel("CategoryTree", getAllNode(list));
         }catch(Exception e){
             result.setSuccess(false);
@@ -85,11 +85,11 @@ public class PackingCategoryServiceImpl implements PackingCategoryService {
      * @param list
      * @return
      */
-    public  List<CategoryTree> getAllNode(List<PackingCategoryVO> list){
+    public static List<CategoryTree> getAllNode(List<CategoryVO> list){
         Map<String, CategoryTree> map = new HashMap<String, CategoryTree>();
         List<CategoryTree> root_list = new ArrayList<CategoryTree>();
         try {
-            for (PackingCategoryVO vo : list) {
+            for (CategoryVO vo : list) {
                 CategoryTree child = null;
                 CategoryTree parent = null;
                 //从三级判断

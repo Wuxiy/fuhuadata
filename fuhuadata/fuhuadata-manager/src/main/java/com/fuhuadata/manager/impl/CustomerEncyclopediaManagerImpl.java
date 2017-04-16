@@ -59,7 +59,6 @@ public class CustomerEncyclopediaManagerImpl implements CustomerEncyclopediaMana
             customerBaseInfo.setModifyTime(sdf.format(customerEncyclopedia.getModifyTime()));
             CustomerBaseInfo customerBaseInfoAdd = customerBaseInfoDao.addCustomerBaseInfo(customerBaseInfo);
             customerEncyclopedia.setCustomerId(customerBaseInfoAdd.getCustomerId());
-            System.out.println(customerEncyclopedia.getEnterpriceNatures().length+"111111111111111");
             if(customerEncyclopedia.getEnterpriceNatures()!=null&&customerEncyclopedia.getEnterpriceNatures().length>0) {
                 for(int i = 0;i<customerEncyclopedia.getEnterpriceNatures().length;i++){
                     customerEncyclopedia.getEnterpriceNatures()[i].setCustomerId(customerBaseInfoAdd.getCustomerId());

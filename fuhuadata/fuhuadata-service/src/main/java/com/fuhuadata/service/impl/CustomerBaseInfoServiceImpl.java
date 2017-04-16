@@ -4,13 +4,20 @@ import com.fuhuadata.domain.*;
 import com.fuhuadata.manager.CustomerBaseInfoManager;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.service.CustomerBaseInfoService;
+import com.fuhuadata.vo.CategoryTree;
+import com.fuhuadata.vo.CategoryVO;
 import com.fuhuadata.vo.CustomerBaseInfoLinkman;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
+import com.fuhuadata.vo.DataArchive.Countryzone;
+import com.fuhuadata.vo.DataArchive.Custclass;
+import com.fuhuadata.vo.DataArchive.Formatdoc;
+import com.fuhuadata.vo.DataArchive.Timezone;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -215,5 +222,55 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 
 	public CustomerBaseInfo queryCooperationByCid(String customerId) {
 		return customerBaseInfoDao.queryCooperationByCid(customerId);
+	}
+
+	@Override
+	public Result<List<Formatdoc>> getFormatdoc( ) {
+
+		Result<List<Formatdoc>> result = new Result<List<Formatdoc>>();
+		try {
+			result.addDefaultModel(customerBaseInfoManager.getFormatdoc());
+		} catch(Exception e) {
+			result.setSuccess(false);
+			log.error("获取客户 数据格式档案错误");
+		}
+		return result;
+	}
+
+	@Override
+	public Result<List<Countryzone>> getCountryzone(Countryzone countryzone) {
+		Result<List<Countryzone>> result = new Result<List<Countryzone>>();
+		try {
+			result.addDefaultModel(customerBaseInfoManager.getCountryzone(countryzone));
+		} catch(Exception e) {
+			result.setSuccess(false);
+			log.error("获取客户 贸易国别档案错误");
+		}
+		return result;
+	}
+
+	@Override
+	public Result<List<Timezone>> getTimezone(Timezone timezone) {
+		Result<List<Timezone>> result = new Result<List<Timezone>>();
+		try {
+			result.addDefaultModel(customerBaseInfoManager.getTimezone(timezone));
+		} catch(Exception e) {
+			result.setSuccess(false);
+			log.error("获取客户 时区档案错误");
+		}
+		return result;
+	}
+
+	public Result<List<CategoryTree>> getCustclass() {
+		Result<List<CategoryTree>> result=new Result<List<CategoryTree>>();
+		try {
+			List<CategoryVO> list = customerBaseInfoManager.getCustclass();
+
+			result.addDefaultModel("CategoryTree", new PackingCategoryServiceImpl().getAllNode(list));
+		}catch(Exception e){
+			result.setSuccess(false);
+			log.error("获取包材目录树错误",e);
+		}
+		return result;
 	}
 }
