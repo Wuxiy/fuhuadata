@@ -113,7 +113,7 @@
             b.company_type AS companyType,
             b.customer_area_id AS customerAreaId,
             b.customer_area AS customerArea,
-            b.country countryId,
+            b.country_id countryId,
 			GROUP_CONCAT(nature.nature) enterpriseNature,
 			b.other_enterprise_nature otherEnterpriseNature,
             b.registered_funds AS registeredFunds,
@@ -131,7 +131,7 @@
             a.custom_field AS customField,
             a.company_info AS companyInfo,
             a.develop_his AS developHis,
-            a.sell_network AS sallNetwork
+            a.sell_network AS sellNetwork
         FROM
             k_customer_encyclopedia a
         LEFT JOIN customer_base_info b ON a.customer_id = b.customer_id
