@@ -162,9 +162,9 @@ public class CustomerBaseInfoAction {
     @SystemLogAnnotation(module = "customerInfo-customerList",methods = "showCostomerBaseInfoDetails")
     @ResponseBody
     public ResultPojo showCustomerBaseInfoDetails(String customerId){
-        Result<CustomerBaseInfo> result = new Result<CustomerBaseInfo>();
+        Result<CustomerBaseInfoVO> result = new Result<CustomerBaseInfoVO>();
         try{
-            result=customerBaseInfoService.getCustomerBaseInfoById(customerId);
+            result=customerBaseInfoService.getCustomerInfoById(customerId);
         }catch (Exception e){
             result.setSuccess(false);
             log.error("获取客户基本信息错误",e);

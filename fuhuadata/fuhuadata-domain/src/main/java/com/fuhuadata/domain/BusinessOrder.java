@@ -32,6 +32,9 @@ public class BusinessOrder implements Serializable{
 
     private String tradeCountry;//贸易国别
 
+    private Integer isCreditRisk;//是否使用信用险
+    private BigDecimal interestRate;//计息比例
+
     private BigDecimal nusdexchgrate;//原币对美元汇率
     private BigDecimal nexchangerate;//原币对本币汇率
     private Date lastdelydate;//最迟交货期
