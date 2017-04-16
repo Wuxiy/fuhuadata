@@ -10,11 +10,12 @@ CRM.enc.status = '';
 // url
 CRM.enc.INFO_LOOK_GET = '/customerEncyclopedia/getById?encyId=';
 CRM.enc.UP_DATA_POST = '/customerEncyclopedia/doModify';
-CRM.enc.ADD_DATA_POST = '/customerEncyclopedia/doAdd';
+CRM.enc.ADD_DATA_POST = '/customerEncyclopedia/doAddCustomerEncyclopedia';
 
 // 隐藏域
 CRM.enc.nature     = $('#nature');
 CRM.enc.encyId     = $('#encyId');
+CRM.enc.customerId = $('#customerId');
 
 // script容器
 CRM.enc.cumC = 'cumC';
@@ -67,7 +68,6 @@ CRM.enc.editInit = function () {
 // 新增初始化
 CRM.enc.addInit = function () {
     var page = CRM.enc;
-
     page.renderTree();
     page.onEl();
     $(CRM.el.EDIT_VIEW).removeClass('hidden');
@@ -77,6 +77,7 @@ CRM.enc.addInit = function () {
 CRM.enc.renderInfo = function (data) {
     var page = CRM.enc;
 
+    page.customerId.val(data.customerId);
     page.customerArea.val(data.customerArea); // 地区
     page.country.val(data.country); // 国家
     page.customerAreaId.val(data.customerAreaId); // 地区id
@@ -84,8 +85,12 @@ CRM.enc.renderInfo = function (data) {
     page.fullName.val(data.fullName);
     page.shortName.val(data.shortName);
     page.companyType.val(data.companyType);
-    page.enterpriseNature.val(data.enterpriseNature.split(',')); // checkbox
-    page.registeredFund.val(data.registeredFund);
+
+    if (data.enterpriseNature) {
+
+        page.enterpriseNature.val(data.enterpriseNature.split(',')); // checkbox
+    }
+    page.registeredFund.val(data.registeredFunds);
     page.registeredAddr.val(data.registeredAddr);
     page.managementScope.val(data.managementScope);
     page.companyInfo.val(data.companyInfo);
@@ -106,6 +111,11 @@ CRM.enc.renderInfo = function (data) {
 
 };
 
+// 表单重置
+CRM.enc.resetMyForm = function() {
+    $('textarea, input, select','#myForm').val('');
+    $('input[type="checkbox"]','#myForm').val([]);
+};
 // 提交数据
 CRM.enc.upEData = function () {
     var page = CRM.enc;
@@ -135,19 +145,19 @@ CRM.enc.upEData = function () {
 CRM.enc.addData = function () {
     var page = CRM.enc;
     CRM.ajaxCall({
-        url  : page.UP_DATA_POST,
-        data : page.collectEData(),
+        url  : page.ADD_DATA_POST,
+        data : page.collectAData(),
         type : 'POST',
         contentType:'application/json',
         callback: function (data) {
-            var isNot = page.isRenderTree();
-            if (isNot) {
-
-                page.renderEditPageHandler(page.encyId.val());
-            }else {
-
-                page.renderTree(page.encyId.val());
-            }
+            // var isNot = page.isRenderTree();
+            // if (isNot) {
+            //
+            //     page.renderEditPageHandler(page.encyId.val());
+            // }else {
+            //
+            //     page.renderTree(page.encyId.val());
+            // }
             $('#skipM').modal('show');
             $('#skip').attr('href', function (i,old) {
                 return old + page.encyId.val();
@@ -169,6 +179,44 @@ CRM.enc.collectEData = function () {
             customField:page.getCusFieList()
         };
     return JSON.stringify(obj);
+};
+
+// 收集新增提交的数据
+CRM.enc.collectAData = function () {
+    var page = CRM.enc,
+        obj = {
+            customerId:page.customerId.val(),
+            fullName:page.fullName.val(),
+            shortName:page.shortName.val(),
+            companyType:page.companyType.val(),
+            customerAreaId:page.customerAreaId.val(),
+            countryId:page.countryId.val(),
+            registeredFund:page.registeredFund.val(),
+            registeredAddr:page.registeredAddr.val(),
+            managementScope:page.managementScope.val(),
+            enterpriceNatures:page.getNature(),
+            companyInfo:page.companyInfo.val(),
+            developHis:page.developHis.val(),
+            sellNetwork:page.sellNetwork.val(),
+            lastmodifyUserId:page.lastmodifyUserName.val(),
+            createTime:CRM.getTime(),
+            customField:page.getCusFieList()
+        };
+    return JSON.stringify(obj);
+};
+
+// 获取企业性质的数据
+CRM.enc.getNature = function () {
+    var page = CRM.enc,
+        arr  = [];
+    page.enterpriseNature.filter(':checked').each(function () {
+        var obj = {
+            nature:1,
+            type:$(this).val()
+        };
+        arr.push(obj);
+    });
+    return arr;
 };
 
 // 获取自定义列表的数据
@@ -471,32 +519,52 @@ $(function () {
 
         // 点击下拉搜索框渲染数据
         $('#cName').on('click','a',function (e) {
-            var thisId = $(e.target).data('id');
+            var page = CRM.enc,
+                thisId = $(e.target).data('id');
+                page.customerId.val(thisId);
             CRM.ajaxCall({
                 url:'/customerBaseInfo/getCustomerInfoEncy?customerId='+thisId,
                 type:'POST',
                 contentType:'application/json',
                 callback:function (data) {
-                    var counTree = page.getCounData(page.areaTree,data.customerAreaId); // 获取国家树的数据
-                    page.renderTreeHandler(counTree, 'countryId', '——请优先选择地区——'); // 创建国家树
-                    page.renderInfo(data);
-                    page.isView(); // 根据表单的值显示或隐藏元素
+                    // 如果有encyId则跳转到详情页面，没有则渲染本页面数据
+                    if (data.encyId) {
+
+                        self.location = basePath+'/customerEncyclopedia/modify?encyId='+ data.encyId;
+                    }else {
+                        page.resetMyForm(); // 渲染前先重置
+                        var counTree = page.getCounData(page.areaTree,data.customerAreaId); // 获取国家树的数据
+                        page.renderTreeHandler(counTree, 'countryId', '——请优先选择地区——'); // 创建国家树
+                        page.renderInfo(data);
+                        page.isView(); // 根据表单的值显示或隐藏元素
+                    }
                 }
             });
             e.preventDefault();
             $('#cName').parent('div').removeClass('open');
         });
 
+        // 表单验证
+        var myForm = page.verify();
+
         // 点击完成，提交
-        $('#upBtn').on('click.edit',function () {
-            page.upEData();
+        $('#upBtn').on('click.add',function () {
+
+            if (myForm.form()) {
+
+                page.addData();
+            }
         });
 
-        // 表单验证
-        page.verify();
+        $('#resetBtn').on('click.edit',function () {
+
+            $('textarea, input, select','#myForm').val('');
+            $('input[type="checkbox"]','#myForm').val([]);
+        });
+
     }
 
-    // 添加自定义
+    // 添加自定义内容
     $('#submit').on('click.addItem',function () {
         var arr  = [],
             data = {
@@ -519,6 +587,10 @@ $(function () {
 
         $(this).closest(tar).remove();
     });
-
+    
+    // 返回
+    $('#backPage').on('click.back',function () {
+        window.history.back(-1);
+    })
 
 });
