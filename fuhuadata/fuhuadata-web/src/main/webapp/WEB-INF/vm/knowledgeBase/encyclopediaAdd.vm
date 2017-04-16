@@ -17,7 +17,7 @@
                     <form id="myForm" class="form-horizontal">
                         <div class="form-group ">
                             <label for="fullName" class="col-xs-1 control-label">企业全称<sup data-view="editView" class="not-null hidden">*</sup></label>
-                            <div class="col-xs-2">
+                            <div id="inputSearch" class="col-xs-2">
                                 <input id="fullName" name="fullName" data-control="on" class="form-control" disabled type="text" autocomplete="off"/>
                                 <div class="col-xs-12" >
                                     <ul id="cName" class="pull-right dropdown-menu" style="width: 100%;max-height: 200px;overflow-y: auto;"></ul>
@@ -81,7 +81,10 @@
                         <div class="form-group ">
                             <label for="registeredFund" class="col-xs-1 control-label">注册资金<sup data-view="editView" class="not-null hidden">*</sup></label>
                             <div class="col-xs-2">
-                                <input id="registeredFund" data-control="on" name="registeredFund" disabled type="text" class="form-control" />
+                                <div class="input-group">
+                                    <input id="registeredFund" data-control="on" name="registeredFund" disabled type="text" class="form-control" />
+                                    <span class="input-group-addon">$</span>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group ">
@@ -125,7 +128,10 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-xs-2 col-xs-offset-4">
+                            <div class="col-xs-2 col-xs-offset-3">
+                                <a href="#" class="btn btn-block btn-default" type="button">返回</a>
+                            </div>
+                            <div class="col-xs-2">
                                 <button id="upBtn" class="btn btn-block btn-primary" type="button">完成</button>
                             </div>
                             <div class="col-xs-2">

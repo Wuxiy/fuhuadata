@@ -10,7 +10,7 @@ CRM.enc.status = '';
 // url
 CRM.enc.INFO_LOOK_GET = '/customerEncyclopedia/getById?encyId=';
 CRM.enc.UP_DATA_POST = '/customerEncyclopedia/doModify';
-CRM.enc.ADD_DATA_POST = '/customerEncyclopedia/doAddCustomerEncyclopedia';
+CRM.enc.ADD_DATA_POST = '/customerEncyclopedia/doAdd';
 
 // 隐藏域
 CRM.enc.nature     = $('#nature');
@@ -129,6 +129,31 @@ CRM.enc.upEData = function () {
           })
       }
   })
+};
+
+// 新增数据
+CRM.enc.addData = function () {
+    var page = CRM.enc;
+    CRM.ajaxCall({
+        url  : page.UP_DATA_POST,
+        data : page.collectEData(),
+        type : 'POST',
+        contentType:'application/json',
+        callback: function (data) {
+            var isNot = page.isRenderTree();
+            if (isNot) {
+
+                page.renderEditPageHandler(page.encyId.val());
+            }else {
+
+                page.renderTree(page.encyId.val());
+            }
+            $('#skipM').modal('show');
+            $('#skip').attr('href', function (i,old) {
+                return old + page.encyId.val();
+            })
+        }
+    })
 };
 
 // 收集编辑提交的数据
@@ -370,23 +395,108 @@ $(function () {
 
         page.infoInit();
 
-    }else if (page.status==='edit') {
+    }else if (page.status==='edit') { // 编辑状态
 
         page.editInit();
 
+        // 完成
         $('#upBtn').on('click.edit',function () {
             page.upEData();
         });
 
+        // 重置
         $('#resetBtn').on('click.edit',function () {
 
             $('textarea','#editTextarea').val('');
         })
-    }else if (page.status==='add') {
+    }else if (page.status==='add') { // 新增状态
 
         page.addInit();
+
+        // 选中其他显示文本框
+        $(document).on('change','[name="enterpriseNature"]',function () {
+
+            if ($('#showOtherNature').prop('checked')) {
+                $('#otherEnterpriceNature').removeClass('hidden');
+            }else {
+                $('#otherEnterpriceNature').addClass('hidden');
+            }
+        });
+
+        // 选中地区，切换国家
+        $('#areaId').on('change.area',function () {
+            var val = $(this).val(),
+                isRender = page.isRenderTree();
+            if (isRender) {
+
+                var counTree = page.getCounData(page.areaTree,val); // 获取国家树的数据
+                page.renderTreeHandler(counTree, 'countryId', '——请优先选择地区——'); // 创建国家树
+            }else {
+
+                page.renderTree();
+                var counTree = page.getCounData(page.areaTree,val); // 获取国家树的数据
+                page.renderTreeHandler(counTree, 'countryId', '——请优先选择地区——'); // 创建国家树
+            }
+
+        });
+
+        // 企业全称下拉搜索框
+        $('#fullName').on('input.fname',function () {
+
+            if ($(this).val()!='') {
+                var obj = {
+                    fullName:$(this).val()
+                };
+                $('#cName').html('');
+                CRM.ajaxCall({
+                    url:'/customerBaseInfo/getCustomerBaseInfoByQuery',
+                    type:'POST',
+                    contentType:'application/json',
+                    data:JSON.stringify(obj),
+                    callback:function (data) {
+                        if (data) {
+                            CRM.tplHandler('cNameC',data,$('#cName'));
+                            $('#cName').parent('div').addClass('open');
+                        }else {
+                            $('#cName').html('');
+                            $('#cName').parent('div').removeClass('open');
+                        }
+                    }
+                });
+            }else {
+                $('#cName').html('');
+                $('#cName').parent('div').removeClass('open');
+            }
+        });
+
+        // 点击下拉搜索框渲染数据
+        $('#cName').on('click','a',function (e) {
+            var thisId = $(e.target).data('id');
+            CRM.ajaxCall({
+                url:'/customerBaseInfo/getCustomerInfoEncy?customerId='+thisId,
+                type:'POST',
+                contentType:'application/json',
+                callback:function (data) {
+                    var counTree = page.getCounData(page.areaTree,data.customerAreaId); // 获取国家树的数据
+                    page.renderTreeHandler(counTree, 'countryId', '——请优先选择地区——'); // 创建国家树
+                    page.renderInfo(data);
+                    page.isView(); // 根据表单的值显示或隐藏元素
+                }
+            });
+            e.preventDefault();
+            $('#cName').parent('div').removeClass('open');
+        });
+
+        // 点击完成，提交
+        $('#upBtn').on('click.edit',function () {
+            page.upEData();
+        });
+
+        // 表单验证
+        page.verify();
     }
 
+    // 添加自定义
     $('#submit').on('click.addItem',function () {
         var arr  = [],
             data = {
@@ -402,6 +512,7 @@ $(function () {
         $('textarea','#addField').val('');
     });
 
+    // 删除自定义
     $(document).on('click.del','[data-btn="del"]',function () {
         var $this = $(this),
             tar   = $this.data('target');
@@ -409,79 +520,5 @@ $(function () {
         $(this).closest(tar).remove();
     });
 
-    $(document).on('change','[name="enterpriseNature"]',function () {
 
-        if ($('#showOtherNature').prop('checked')) {
-            $('#otherEnterpriceNature').removeClass('hidden');
-        }else {
-            $('#otherEnterpriceNature').addClass('hidden');
-        }
-    });
-
-    $('#areaId').on('change.area',function () {
-        var val = $(this).val(),
-            isRender = page.isRenderTree();
-        if (isRender) {
-
-            var counTree = page.getCounData(page.areaTree,val); // 获取国家树的数据
-            page.renderTreeHandler(counTree, 'countryId', '——请优先选择地区——'); // 创建国家树
-        }else {
-
-            page.renderTree();
-            var counTree = page.getCounData(page.areaTree,val); // 获取国家树的数据
-            page.renderTreeHandler(counTree, 'countryId', '——请优先选择地区——'); // 创建国家树
-        }
-
-    });
-
-    $('#fullName').on('input.fname',function () {
-
-        if ($(this).val()!='') {
-            var obj = {
-                fullName:$(this).val()
-            };
-            $('#cName').html('');
-            CRM.ajaxCall({
-                url:'/customerBaseInfo/getCustomerBaseInfoByQuery',
-                type:'POST',
-                contentType:'application/json',
-                data:JSON.stringify(obj),
-                callback:function (data) {
-                    if (data) {
-                        CRM.tplHandler('cNameC',data,$('#cName'));
-                        $('#cName').parent('div').addClass('open');
-                    }else {
-                        $('#cName').html('');
-                        $('#cName').parent('div').removeClass('open');
-                    }
-                }
-            });
-        }else {
-            $('#cName').html('');
-            $('#cName').parent('div').removeClass('open');
-        }
-    });
-    // $('#fullName').on('focusout.fname',function () {
-    //     $('#cName').parent('div').removeClass('open');
-    // });
-
-    $('#cName').on('click','a',function (e) {
-        var thisId = $(e.target).data('id');
-        CRM.ajaxCall({
-            url:'/customerBaseInfo/getCustomerInfoEncy',
-            type:'POST',
-            data:JSON.stringify({
-                customerId:thisId
-            }),
-            contentType:'application/json',
-            callback:function (data) {
-                var counTree = page.getCounData(page.areaTree,data.customerAreaId); // 获取国家树的数据
-                page.renderTreeHandler(counTree, 'countryId', '——请优先选择地区——'); // 创建国家树
-                page.renderInfo(data);
-                page.isView(); // 根据表单的值显示或隐藏元素
-            }
-        });
-        // e.preventDefault();
-    });
-    page.verify();
 });
