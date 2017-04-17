@@ -81,4 +81,11 @@
         WHERE ur.role_id=#{roleId}
     </select>
 
+    <select id="listRoleIdsByUserId" resultType="java.lang.Integer">
+        SELECT
+        ur.role_id
+        <include refid="FromUserRole"/>
+        WHERE ur.user_id=#{userId}
+    </select>
+
 </mapper>

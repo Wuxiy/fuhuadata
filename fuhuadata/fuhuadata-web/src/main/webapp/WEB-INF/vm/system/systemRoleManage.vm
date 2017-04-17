@@ -33,6 +33,7 @@
                     新增
                 </button>
                 <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right">
+                    <button id="delete" data-btn="cancel" class="btn hidden" lang="zh">取消</button>
                     <button id="cancel" data-btn="cancel" data-view="editView" class="btn hidden" lang="zh">取消</button>
                     <button id="save" data-btn="save" data-view="editView" class="btn btn-primary hidden" lang="zh">保存</button>
                 </div>
@@ -142,8 +143,8 @@
                                                     <span class="glyphicon glyphicon-search"></span>
                                                 </button>
                                             </td>
-                                            <td><%=data[i].certigier%></td>
-                                            <td><%=data[i].accreditTime%></td>
+                                            <td><%=data[i].authUserName%></td>
+                                            <td><%=data[i].authTime%></td>
                                         </tr>
                                         <%}%>
 
@@ -189,7 +190,9 @@
                             <script id='btnTable' type="text/template">
                                 <!-- 模板部分 -->
                                 <caption>
-                                  <button id="editButton" class="btn-link pull-right" type="button">编辑</button>
+##                                    #if ($shiro.hasPermission("sys:role:update"))
+##                                      <button id="editButton" class="btn-link pull-right" type="button">编辑</button>
+##                                    #end
                                   <button id="saveButton" class="btn-link pull-right" type="button">保存</button>
                                 </caption>
                                 <thead>

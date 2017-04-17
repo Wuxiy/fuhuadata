@@ -11,6 +11,8 @@ import java.util.List;
  */
 public class MenuTreeVo extends BaseTreeVo<Integer> {
 
+    private String identity;
+
     private RoleAuthority roleAuthority;
     private List<Button> buttons;
 
@@ -30,4 +32,11 @@ public class MenuTreeVo extends BaseTreeVo<Integer> {
         this.buttons = buttons;
     }
 
+    public String getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(String identity) {
+        this.identity = identity;
+    }
 }

@@ -2,6 +2,7 @@ package com.fuhuadata.web.springmvc.mybatis;
 
 import com.fuhuadata.domain.mybatis.Menu;
 import com.fuhuadata.service.mybatis.MenuService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/sys/menu")
 public class MenuController extends BaseTreeableController<Menu, Integer> {
 
+    @RequiresPermissions("sys:menu:view")
     @RequestMapping(value = {"", "init"}, method = RequestMethod.GET)
     public String mian() {
         return "system/systemMenu";

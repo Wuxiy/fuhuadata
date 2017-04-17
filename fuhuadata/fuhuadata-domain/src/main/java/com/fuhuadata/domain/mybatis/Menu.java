@@ -17,6 +17,12 @@ public class Menu extends BaseEntity<Integer> implements Treeable<Integer> {
     private Integer menuId;
 
     /**
+     * 菜单标识
+     */
+    @Column(name = "identity")
+    private String identity;
+
+    /**
      * 上级菜单ID
      */
     @Column(name = "parent_id")
@@ -183,7 +189,7 @@ public class Menu extends BaseEntity<Integer> implements Treeable<Integer> {
     @JsonIgnore
     @Override
     public boolean isRoot() {
-        return getParentId() != null && getId() == 0;
+        return getParentId() != null && getParentId() == 0;
     }
 
     @JsonIgnore
@@ -238,5 +244,13 @@ public class Menu extends BaseEntity<Integer> implements Treeable<Integer> {
 
     public void setButtons(List<Button> buttons) {
         this.buttons = buttons;
+    }
+
+    public String getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(String identity) {
+        this.identity = identity;
     }
 }
