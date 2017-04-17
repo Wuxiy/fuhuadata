@@ -19,28 +19,62 @@ function screenData(obj,data,callBack){
     })
 }
 /**
- *获取单据要求
+ *渲染单据要求
  */
 function customerBillRequire(data) {
-    $('#otherDocumentaryRequire').val(data.otherDocumentaryRequire);
-    var require = jQuery.parseJSON(data.documentaryRequire);
 
-    $('#oceanBillOfLading').prop('checked',require.oceanBillOfLading);
-    $('#freightBillOfLading').prop('checked',require.freightBillOfLading);
-    $('#invoice').prop('checked',require.invoice);
-    $('#packingLise').prop('checked',require.packingLise);
-    $('#qualityPolicy').prop('checked',require.qualityPolicy);
-    $('#qualityPolicyTxt').val(require.qualityPolicyTxt);
-    $('#warranty').prop('checked',require.warranty);
-    $('#dangerousPackage').prop('checked',require.dangerousPackage);
-    $('#favoree').prop('checked',require.favoree);
-    $('#fumigation').prop('checked',require.fumigation);
-    $('#MSDS').prop('checked',require.MSDS);
-    $('#tenderDocument').prop('checked',require.tenderDocument);
-    $('#examiningReport').prop('checked',require.examiningReport);
-    $('#packingDeclaration').prop('checked',require.packingDeclaration);
-    $('#ICWD').prop('checked',require.ICWD);
-    $('#MC').prop('checked',require.MC);
+    if (data.oceanBillOfLading) {$('#oceanBillOfLading').val(data.oceanBillOfLading);}
+    if (data.freightForwardingBill) {$('#freightForwardingBill').val(data.freightForwardingBill);}
+    if (data.invoice) {$('#invoice').val(data.INVOICE);}
+    if (data.packingList) {$('#packingList').val(data.packingList);}
+    if (data.qualityTestingReport) {$('#qualityTestingReport').val(data.qualityTestingReport);}
+    if (data.reportCompanyTitle) {$('#reportCompanyTitle').val(data.reportCompanyTitle);}
+    if (data.guaranteeSlip) {$('#guaranteeSlip').val(data.guaranteeSlip);}
+    if (data.coo.length==1) {$('[name="coo"]').val([data.coo]);}
+    if (data.cooContent) {
+        if (data.coo==='1') {
+
+            $('[name="cooContent"][type="checkbox"]').val([data.cooContent]);
+        }else if (data.coo==='3') {
+
+            $('[name="cooContent"][type="text"]').val(data.cooContent);
+        }
+
+    }
+    if (data.dangerousCertificate) {$('#dangerousCertificate').val([data.dangerousCertificate]);}
+    if (data.beneficiaryCertification) {$('#beneficiaryCertification').val([data.beneficiaryCertification]);}
+    if (data.fumigationCertificate) {$('#fumigationCertificate').val([data.fumigationCertificate]);}
+    if (data.msds) {$('#msds').val([data.msds]);}
+    if (data.telexRelease) {$('[name="telexRelease"]').val([data.telexRelease]);}
+
+    if (data.releaseDestination && data.telexRelease!='0') {$('#releaseDestination').val(data.releaseDestination);} // 放单目的港 text
+
+    if (data.bankBill) {$('#bankBill').val([data.bankBill]);}
+    if (data.examiningReport) {$('#bankBill').val([data.examiningReport]);}
+    if (data.packingDeclaration) {$('#bankBill').val([data.packingDeclaration]);}
+    if (data.importContainerWeightDeclaration) {$('#bankBill').val([data.importContainerWeightDeclaration]);}
+    if (data.bankBill) {$('#manufacturerCertificate').val([data.manufacturerCertificate]);}
+
+    if (data.otherDocumentaryRequire) {$('#otherDocumentaryRequire').val(data.otherDocumentaryRequire);} // 其他单据要求 text
+
+    // var require = jQuery.parseJSON(data.documentaryRequire);
+    //
+    // $('#oceanBillOfLading').prop('checked',require.oceanBillOfLading);
+    // $('#freightBillOfLading').prop('checked',require.freightBillOfLading);
+    // $('#invoice').prop('checked',require.invoice);
+    // $('#packingLise').prop('checked',require.packingLise);
+    // $('#qualityPolicy').prop('checked',require.qualityPolicy);
+    // $('#qualityPolicyTxt').val(require.qualityPolicyTxt);
+    // $('#warranty').prop('checked',require.warranty);
+    // $('#dangerousPackage').prop('checked',require.dangerousPackage);
+    // $('#favoree').prop('checked',require.favoree);
+    // $('#fumigation').prop('checked',require.fumigation);
+    // $('#MSDS').prop('checked',require.MSDS);
+    // $('#tenderDocument').prop('checked',require.tenderDocument);
+    // $('#examiningReport').prop('checked',require.examiningReport);
+    // $('#packingDeclaration').prop('checked',require.packingDeclaration);
+    // $('#ICWD').prop('checked',require.ICWD);
+    // $('#MC').prop('checked',require.MC);
 
 //    if(require.qualityPolicy && require.qualityPolicy!='' && require.qualityPolicy!=null){
 //        var qua = jQuery.parseJSON(require.qualityPolicy);
@@ -66,7 +100,7 @@ function customerBillRequire(data) {
     }
 }
 /**
- *获取订舱出运要求
+ *渲染订舱出运要求
  */
 function  customerTransportRequire(data) {
     $('#shippingAgentRequire').val(data.shippingAgentRequire);
