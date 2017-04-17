@@ -313,4 +313,9 @@
 		from product_info
 		where product_id=#productId#
 	</select>
+
+	<select id="getRisetaxes" parameterClass="java.lang.Integer" resultClass="java.math.BigDecimal">
+		select b.risetaxes from product_info a,product_info b
+	where a.product_id = #value#
+	and ifnull(a.customs_clearance_id,a.product_id) = b.product_id
 </sqlMap>

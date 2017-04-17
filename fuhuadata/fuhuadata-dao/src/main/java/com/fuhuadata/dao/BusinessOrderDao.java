@@ -121,4 +121,6 @@ public interface BusinessOrderDao {
      */
     public int countProfitStatistics(CostAndProfitStatistics costAndProfitStatistics);
 
+    public BusinessOrder getById(String orderId);
+
 }

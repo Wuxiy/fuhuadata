@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Income" >
+  <resultMap id="IncomeResultMap" class="com.fuhuadata.domain.Income" >
+    <result column="pk_income" property="pkIncome" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="paymentday" property="paymentday" jdbcType="INTEGER" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="effectdate" property="effectdate" jdbcType="DATE" />
+    <result column="diseffectdate" property="diseffectdate" jdbcType="DATE" />
+    <result column="meno" property="meno" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="getByCode" parameterClass="java.lang.String">
+    select * from t_income where code = #value#
+  </select>
+
+</sqlMap>

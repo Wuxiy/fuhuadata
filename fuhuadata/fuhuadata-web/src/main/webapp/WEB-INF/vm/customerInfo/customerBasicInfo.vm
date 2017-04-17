@@ -100,6 +100,35 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="dataFormat" class="control-label col-xs-1" lang="zh">数据格式<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-2">
+                                    <select id="dataFormat" data-control="off" disabled name="dataFormat" class="form-control"></select>
+                                </div>
+                                <label for="customerBasicTypes" class="control-label col-xs-1" lang="zh">客户基本分类<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-2">
+                                    <div class="input-group">
+                                        <input id="customerBasicTypes" name="customerBasicTypes" data-toggle="dropdown" class="form-control dropdown-toggle" disabled type="text" placeholder="点击搜索按钮选择" autocomplete="off"/>
+                                        <div class="input-group-btn">
+                                            <button id="cbtSearch" class="btn btn-xs btn-default" data-control="on" type="button" data-toggle="modal" data-target="#cbtModal"><span class="glyphicon glyphicon-search"></span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label for="timeZone" class="control-label col-xs-1" lang="zh">时区<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div id="czSearch" class="col-xs-2">
+                                    <div class="col-xs-12" style="padding-left: 0;padding-right: 0">
+                                        <input id="timeZone" name="timeZone" data-toggle="dropdown" data-control="on" placeholder="请在下拉菜单中选择" class="form-control dropdown-toggle" disabled type="text" autocomplete="off"/>
+                                        <ul id="tz" class="pull-right dropdown-menu" style="width: 100%;max-height: 200px;overflow-y: auto;"></ul>
+                                    </div>
+                                </div>
+                                <label for="commerceCountry" class="control-label col-xs-1" lang="zh">贸易国别<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div id="ccSearch" class="col-xs-2">
+                                    <div class="col-xs-12" style="padding-left: 0;padding-right: 0">
+                                        <input id="commerceCountry" name="commerceCountry" data-toggle="dropdown" placeholder="请在下拉菜单中选择" data-control="on" class="form-control dropdown-toggle" disabled type="text" autocomplete="off"/>
+                                        <ul id="cc" class="pull-right dropdown-menu" style="width: 100%;max-height: 200px;overflow-y: auto;"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="registeredFunds" class="control-label col-xs-1" lang="zh">注册资金<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
@@ -255,7 +284,7 @@
                 <!--客户百科-->
                 <div class="panel panel-default panel-edit view-HD-lg" data-view="editHide">
                     <div class="panel-heading">
-                        <a id="encyEdit" href="#" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
+                        <a id="encyEdit" href="#" target="_blank" class="btn btn-xs btn-primary panel-heading-btn pull-right" lang="zh">
                             编辑百科
                         </a>
                         <h3 class="panel-title" lang="zh">
@@ -273,11 +302,15 @@
 <div class="modal fade" id="rModal" tabindex="-1" role="dialog" data-backdrop="false" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header"></div>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+            </div>
             <div class="modal-body">
                 <form id="rForm" class="form-horizontal">
                     <div class="form-group">
-                        <label for="reason" class="control-label col-xs-2">流失原因</label>
+                        <label for="reason" class="control-label col-xs-2">流失原因<sup class="not-null">*</sup></label>
                         <div class="col-xs-9">
                             <textarea class="form-control" id="reason" name="reason" rows="6"></textarea>
                         </div>
@@ -289,6 +322,25 @@
                     <div class="col-xs-2  col-xs-offset-9">
                         <button id="upReasons" data-form-btn="add" data-dismiss="modal" type="button" class="btn btn-block btn-primary" lang="zh">提交</button>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+## 客户基本分类
+<div class="modal fade in" id="cbtModal" tabindex="-1" role="dialog" data-backdrop="false" aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-dialog" style="width: 400px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body">
+                <hr>
+                <div class="zTreeDemoBackground left well" style="height: 300px;overflow-y: scroll;overflow-x: auto">
+                    <ul id="cbtTree" class="ztree"></ul>
                 </div>
             </div>
         </div>
@@ -323,7 +375,35 @@
     </div>
 </div>
 
-## 添加产品
+## 数据格式
+<script id="dataFormatC" type="text/html">
+    <%if (data.length>0) {%>
+    <option>——请选择——</option>
+    <%for (var i=0;i<data.length;i++){%>
+    <option id="<%=data[i].pkFormatdoc%>" value="<%=data[i].code%>"><%=data[i].name%></option>
+    <%}%>
+    <%}%>
+</script>
+
+## 查找时区和贸易国别
+<script id="tzC" type="text/html">
+    <%if (data.length>0) {%>
+    <%for (var i=0; i<data.length; i++) {%>
+    <li><a href="#" id="<%=data[i].pkTimezone%>" data-val="<%=data[i].code%>" style="padding-left: 6px"><%=data[i].name%></a></li>
+    <%}%>
+    <%}%>
+</script>
+
+## 查找贸易国别
+##<script id="ccC" type="text/html">
+##    <%if (data.length>0) {%>
+##    <%for (var i=0; i<data.length; i++) {%>
+##    <li><a href="#" data-id="<%=data[i].pkTimezone%>" data-val="<%=data[i].code style="padding-left: 6px"><%=data[i].name%></a></li>
+##    <%}%>
+##    <%}%>
+##</script>
+
+## 添加产品baidu模板用
 <script id="cmp" type="text/html">
     <%if (data.length>0) {%>
     <%for (var i=0;i<data.length;i++){%>
@@ -340,7 +420,7 @@
     <%}%>
 </script>
 
-## 添加产品
+## 添加产品字符串，添加按钮用
 <script id="pro" type="text/html">
     <div name="customerMakeProduct" data-id="" class="form-group" style="position: relative;">
         <label class="col-xs-1 control-label" style="position: relative">生产产品</label>

@@ -1,5 +1,8 @@
 package com.fuhuadata.domain;
 
+import com.fuhuadata.vo.DocumentaryVo;
+import com.fuhuadata.vo.PackingRequireVo;
+
 import java.util.Date;
 import java.math.BigDecimal;
 
@@ -94,6 +97,8 @@ public class CustomerProductArchives {
 	
     /**单据要求,json格式数据**/
 	private String documentaryRequire;
+	//单据要求对象
+	private DocumentaryVo documentaryVo;
 	
     /**其他单据要求**/
 	private String otherDocumentaryRequire;
@@ -103,6 +108,8 @@ public class CustomerProductArchives {
 	
     /**装箱要求**/
 	private String packageRequire;
+	/**装箱要求对象**/
+	private PackingRequireVo packingRequireVo;
 	
     /**出运货物货物类型，0普通，1危险品**/
 	private Integer goodsType;
@@ -210,6 +217,32 @@ public class CustomerProductArchives {
 	private BigDecimal unitUseRate;
 	//佣金单价
 	private BigDecimal commissionPrice;
+	//资金利息单价
+	private BigDecimal capitalInterestPrice;
+
+	public BigDecimal getCapitalInterestPrice() {
+		return capitalInterestPrice;
+	}
+
+	public void setCapitalInterestPrice(BigDecimal capitalInterestPrice) {
+		this.capitalInterestPrice = capitalInterestPrice;
+	}
+
+	public DocumentaryVo getDocumentaryVo() {
+		return documentaryVo;
+	}
+
+	public void setDocumentaryVo(DocumentaryVo documentaryVo) {
+		this.documentaryVo = documentaryVo;
+	}
+
+	public PackingRequireVo getPackingRequireVo() {
+		return packingRequireVo;
+	}
+
+	public void setPackingRequireVo(PackingRequireVo packingRequireVo) {
+		this.packingRequireVo = packingRequireVo;
+	}
 
 	public BigDecimal getCommissionPrice() {
 		return commissionPrice;

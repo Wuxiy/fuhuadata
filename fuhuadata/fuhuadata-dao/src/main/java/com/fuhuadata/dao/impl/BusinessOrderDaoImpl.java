@@ -114,4 +114,9 @@ public class BusinessOrderDaoImpl extends SqlMapClientTemplate implements Busine
     public List<QueryBusinessOrder> getOrderListPageByQuery(QueryBusinessOrder queryBusinessOrder) {
         return this.queryForList(ORDER_GET_PAGE,queryBusinessOrder);
     }
+
+    @Override
+    public BusinessOrder getById(String orderId) {
+        return (BusinessOrder)this.queryForObject(GET_BY_ID,orderId);
+    }
 }

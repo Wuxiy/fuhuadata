@@ -155,6 +155,14 @@ public class BusinessOrder implements Serializable{
         this.departmentId = departmentId;
     }
 
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
     public String getSaleOrganizationId() {
         return saleOrganizationId;
     }
@@ -225,6 +233,46 @@ public class BusinessOrder implements Serializable{
 
     public void setTradeCountry(String tradeCountry) {
         this.tradeCountry = tradeCountry;
+    }
+
+    public Integer getIsCreditRisk() {
+        return isCreditRisk;
+    }
+
+    public void setIsCreditRisk(Integer isCreditRisk) {
+        this.isCreditRisk = isCreditRisk;
+    }
+
+    public BigDecimal getInterestRate() {
+        return interestRate;
+    }
+
+    public void setInterestRate(BigDecimal interestRate) {
+        this.interestRate = interestRate;
+    }
+
+    public BigDecimal getNusdexchgrate() {
+        return nusdexchgrate;
+    }
+
+    public void setNusdexchgrate(BigDecimal nusdexchgrate) {
+        this.nusdexchgrate = nusdexchgrate;
+    }
+
+    public BigDecimal getNexchangerate() {
+        return nexchangerate;
+    }
+
+    public void setNexchangerate(BigDecimal nexchangerate) {
+        this.nexchangerate = nexchangerate;
+    }
+
+    public Date getLastdelydate() {
+        return lastdelydate;
+    }
+
+    public void setLastdelydate(Date lastdelydate) {
+        this.lastdelydate = lastdelydate;
     }
 
     public BigDecimal getPremiumRate() {
@@ -307,6 +355,30 @@ public class BusinessOrder implements Serializable{
         this.partialShipmentFalg = partialShipmentFalg;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getFailureAnalysis() {
+        return failureAnalysis;
+    }
+
+    public void setFailureAnalysis(String failureAnalysis) {
+        this.failureAnalysis = failureAnalysis;
+    }
+
+    public Date getDealTime() {
+        return dealTime;
+    }
+
+    public void setDealTime(Date dealTime) {
+        this.dealTime = dealTime;
+    }
+
     public String getDeliverInfo() {
         return deliverInfo;
     }
@@ -369,6 +441,14 @@ public class BusinessOrder implements Serializable{
 
     public void setActualPaymentTime(String actualPaymentTime) {
         this.actualPaymentTime = actualPaymentTime;
+    }
+
+    public BigDecimal getGrossProfit() {
+        return grossProfit;
+    }
+
+    public void setGrossProfit(BigDecimal grossProfit) {
+        this.grossProfit = grossProfit;
     }
 
     public BigDecimal getActualAmountPaid() {
@@ -465,86 +545,5 @@ public class BusinessOrder implements Serializable{
 
     public void setModifyTime(String modifyTime) {
         this.modifyTime = modifyTime;
-    }
-
-    public String getFailureAnalysis() {
-        return failureAnalysis;
-    }
-
-    public void setFailureAnalysis(String failureAnalysis) {
-        this.failureAnalysis = failureAnalysis;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-
-    public BigDecimal getNusdexchgrate() {
-        return nusdexchgrate;
-    }
-
-    public void setNusdexchgrate(BigDecimal nusdexchgrate) {
-        this.nusdexchgrate = nusdexchgrate;
-    }
-
-    public BigDecimal getNexchangerate() {
-        return nexchangerate;
-    }
-
-    public void setNexchangerate(BigDecimal nexchangerate) {
-        this.nexchangerate = nexchangerate;
-    }
-
-    public Date getLastdelydate() {
-        return lastdelydate;
-    }
-
-    public void setLastdelydate(Date lastdelydate) {
-        this.lastdelydate = lastdelydate;
-    }
-
-    public String getDepartmentName() {
-        return departmentName;
-    }
-
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName;
-    }
-
-    public Date getDealTime() {
-        return dealTime;
-    }
-
-    public void setDealTime(Date dealTime) {
-        this.dealTime = dealTime;
-    }
-
-    public BigDecimal getInterestRate() {
-        return interestRate;
-    }
-
-    public void setInterestRate(BigDecimal interestRate) {
-        this.interestRate = interestRate;
-    }
-
-    public Integer getIsCreditRisk() {
-        return isCreditRisk;
-    }
-
-    public void setIsCreditRisk(Integer isCreditRisk) {
-        this.isCreditRisk = isCreditRisk;
-    }
-
-    public BigDecimal getGrossProfit() {
-        return grossProfit;
-    }
-
-    public void setGrossProfit(BigDecimal grossProfit) {
-        this.grossProfit = grossProfit;
     }
 }

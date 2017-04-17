@@ -4,8 +4,8 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
-         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
          http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <context:property-placeholder location="classpath:resources.properties"/>
@@ -65,6 +65,7 @@
         <property name="exposeSpringMacroHelpers" value="true"/><!--是否使用spring对宏定义的支持-->
         <property name="exposeRequestAttributes" value="true"/><!--是否开放request属性-->
         <property name="requestContextAttribute" value="rc"/><!--request属性引用名称-->
+        <property name="exposeSessionAttributes" value="true"/><!-- 是否开放 session 属性 -->
 
         <property name="layoutKey" value="layout"/><!-- layoutKey设定模板文件键值，设定该值后就可以在vm文件中使用该键值设置模板路径-->
         <property name="screenContentKey" value="screen_content"/>

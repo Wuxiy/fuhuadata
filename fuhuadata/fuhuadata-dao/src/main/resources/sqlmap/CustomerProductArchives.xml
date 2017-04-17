@@ -65,6 +65,7 @@
 		<result property="customsClearanceId" column="customs_clearance_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="customsClearanceName" column="customs_clearance_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result column="unit_use_rate" jdbcType="DECIMAL" property="unitUseRate"/>
+		<result column="capital_interest_price" jdbcType="DECIMAL" property="capitalInterestPrice"/>
 	</resultMap>
 	
 	<sql id="PAGE-COMMON">	
@@ -78,6 +79,9 @@
 				<isNotNull prepend=" AND " property="productId">
 			product_id = #productId#
 		</isNotNull>
+			<isNotNull prepend=" AND " property="capitalInterestPrice">
+				capital_interest_price = #capitalInterestPrice#
+			</isNotNull>
 				<isNotNull prepend=" AND " property="customerId">
 			customer_id = #customerId#
 		</isNotNull>
@@ -254,6 +258,9 @@
 			<isNotNull prepend=" AND " property="name">
 				name = #name#
 			</isNotNull>
+			<isNotNull prepend=" and " property="capitalInterestPrice">
+				capital_interest_price = #capitalInterestPrice#
+			</isNotNull>
 			<isNotNull prepend=" AND " property="customerProductName">
 				customer_product_name = #customerProductName#
 			</isNotNull>
@@ -414,7 +421,7 @@
 		goods_type, mianxiangqi, miantuiqi, cupboard_type, cupboard_per_number, cupboard_number,
 		ocean_freight, port_surcharge, tax_type, tax_free, gross_margin, other_cost,process_cost, min_price,
 		contract_price, transform_state, create_user_id, create_user_name, lastmodify_user_id,
-		lastmodify_user_name, create_time, modify_time)
+		lastmodify_user_name, create_time, modify_time,capital_interest_price)
 		(
 			select
 				order_id, product_id,
@@ -427,7 +434,7 @@
 				goods_type, mianxiangqi, miantuiqi, cupboard_type, cupboard_per_number, cupboard_number,
 				ocean_freight, port_surcharge, tax_type, tax_free, gross_margin, other_cost,process_cost, min_price,
 				contract_price, transform_state, create_user_id, create_user_name, lastmodify_user_id,
-				lastmodify_user_name, create_time, modify_time
+				lastmodify_user_name, create_time, modify_time,capital_interest_price
 			from business_order_product
 				where id=#businessProductId#
 		)
@@ -490,6 +497,7 @@
 		,a.lastmodify_user_name = b.lastmodify_user_name
 		,a.create_time = b.create_time
 		,a.modify_time = b.modify_time
+		,a.capital_interest_price = b.capital_interest_price
 		where b.archive_product_id = a.id
 		and a.id = #businessProductId#
 	</update>
@@ -499,13 +507,13 @@
 		order_id,product_id,customs_clearance_id,customs_clearance_name,customer_id,name,
 		customer_product_name,brand,main_product_amount,main_product_unit,sub_product_amount,sub_product_unit,
 		convert_rate,price_type,advise_price,purchase_price,delivery_time,factory_id,factory_name,commission_price,
-		tax_type,tax_free,other_cost,process_cost
+		tax_type,tax_free,other_cost,process_cost,capital_interest_price
 		)
 		values(
 		#orderId#,#productId#,#customsClearanceId#,#customsClearanceName#,#customerId#,#name#,
 		#customerProductName#,#brand#,#mainProductAmount#,#mainProductUnit#,#subProductAmount#,#subProductUnit#,
 		#convertRate#,#priceType#,#advisePrice#,#purchasePrice#,#deliveryTime#,#factoryId#,#factoryName#,#commissionPrice#,
-		#taxType#,#taxFree#,#otherCost#,#processCost#
+		#taxType#,#taxFree#,#otherCost#,#processCost#,#capitalInterestPrice#
 		)
 		<selectKey resultClass="java.lang.Integer" keyProperty="id">
 			SELECT @@IDENTITY AS ID
@@ -520,6 +528,10 @@
 			</isNotNull>
 			<isNotNull prepend="," property="productId">
 				product_id = #productId#
+			</isNotNull>
+
+			<isNotNull prepend="," property="capitalInterestPrice">
+				capital_interest_price = #capitalInterestPrice#
 			</isNotNull>
 			<isNotNull prepend="," property="wareId">
 				ware_id = #wareId#

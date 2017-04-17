@@ -190,6 +190,17 @@ public class BusinessOrderProduct {
     private BigDecimal unitUseRate;
     //佣金单价
     private BigDecimal commissionPrice;
+    //资金利息单价
+    private BigDecimal capitalInterestPrice;
+
+
+    public BigDecimal getCapitalInterestPrice() {
+        return capitalInterestPrice;
+    }
+
+    public void setCapitalInterestPrice(BigDecimal capitalInterestPrice) {
+        this.capitalInterestPrice = capitalInterestPrice;
+    }
 
     public BigDecimal getCommissionPrice() {
         return commissionPrice;

@@ -381,6 +381,7 @@
 	<select id="GET-BY-ID" resultClass="CustomerBaseInfo" parameterClass="java.lang.String">
 		<![CDATA[
 			SELECT
+				base.customer_id customerId,
 				base.full_name fullName,
 				base.short_name shortName,
 				base.company_type companyType,
@@ -561,6 +562,7 @@
 			base.has_chi_company hasChiCompany,
 			base.has_chi_purchase hasChiPurchase,
 			base.customer_status customerStatus,
+			base.loss_reason lossReason,
 
 			base.formatdoc,
 			base.timezone,

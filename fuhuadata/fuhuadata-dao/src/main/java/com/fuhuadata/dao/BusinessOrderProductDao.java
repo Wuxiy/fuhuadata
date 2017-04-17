@@ -98,12 +98,12 @@ public interface BusinessOrderProductDao {
      */
     BigDecimal calculateProcessCost(Integer businessProductId);
 
+
     /**
      * 根据订单id获取订单产品列表
      * @param orderId
      * @return
      */
     public List<BusinessOrderProductList> getOrderProductList(String orderId);
-
 
 }
