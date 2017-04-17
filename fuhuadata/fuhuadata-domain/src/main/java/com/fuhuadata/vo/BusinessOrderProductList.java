@@ -9,7 +9,6 @@ import java.util.Date;
  */
 public class BusinessOrderProductList {
 
-    private Integer orderProductId;//订单产品id
     private String orderId;//订单id
     private String customerProductName;//客户商品名
     private String categorySerialNumber;//品类序列号
@@ -17,6 +16,9 @@ public class BusinessOrderProductList {
     private String categoryName;//品类
     private String productName;//产品名称
     private String brand;//品牌
+
+    private Integer businessProductId ;//订单产品id
+    private Integer productRequireId;//产品要求id
 
     private String specification;//规格
 
@@ -149,14 +151,6 @@ public class BusinessOrderProductList {
         this.minPrice = minPrice;
     }
 
-    public Integer getOrderProductId() {
-        return orderProductId;
-    }
-
-    public void setOrderProductId(Integer orderProductId) {
-        this.orderProductId = orderProductId;
-    }
-
     public String getProductCode() {
         return productCode;
     }
@@ -171,5 +165,21 @@ public class BusinessOrderProductList {
 
     public void setPackingSpecification(String packingSpecification) {
         this.packingSpecification = packingSpecification;
+    }
+
+    public Integer getProductRequireId() {
+        return productRequireId;
+    }
+
+    public void setProductRequireId(Integer productRequireId) {
+        this.productRequireId = productRequireId;
+    }
+
+    public Integer getBusinessProductId() {
+        return businessProductId;
+    }
+
+    public void setBusinessProductId(Integer businessProductId) {
+        this.businessProductId = businessProductId;
     }
 }
