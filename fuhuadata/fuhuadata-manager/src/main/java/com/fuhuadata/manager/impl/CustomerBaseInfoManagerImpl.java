@@ -58,16 +58,18 @@ public class CustomerBaseInfoManagerImpl implements CustomerBaseInfoManager {
 	@Transactional
     public CustomerBaseInfoVO addCustomerBaseInfo(List<CustomerEnterpriceNature> customerEnterpriceNatures, List<CustomerMakeProduct> customerMakeProducts , CustomerBaseInfo customerBaseInfo) {
 		CustomerBaseInfo cbi = customerBaseInfoDao.addCustomerBaseInfo(customerBaseInfo);
-		System.out.println(cbi.getCustomerId());
 		for(CustomerEnterpriceNature cen:customerEnterpriceNatures){
 			cen.setCustomerId(cbi.getCustomerId());
 		}
 		for(CustomerMakeProduct cmp : customerMakeProducts){
 			cmp.setCustomerId(cbi.getCustomerId());
 		}
+
 		customerBaseInfoDao.batchAddNature(customerEnterpriceNatures);
-		customerMakeProductDao.addCustomerMakeProducts(customerMakeProducts);
-		return customerBaseInfoDao.getCustomerInfoById(customerBaseInfo.getCustomerId());
+		if(customerMakeProducts!=null&&customerMakeProducts.size()>0) {
+			customerMakeProductDao.addCustomerMakeProducts(customerMakeProducts);
+		}
+		return customerBaseInfoDao.getCustomerInfoById(cbi.getCustomerId());
 
     }
 
