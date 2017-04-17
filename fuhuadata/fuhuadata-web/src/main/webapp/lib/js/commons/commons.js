@@ -11,11 +11,11 @@ CRM.url    = window.CRM.url || {};
 // 百度渲染引擎全局对象
 var bt = baidu.template;
 
-CRM.url.AREA_TREE_GET    = '/customerBaseInfo/initAreaCategoryTree'; // 地区树
-CRM.url.ROLE_TREE_GET    = '/sys/role/ajax/load?async=false'; // 角色树
-CRM.url.ORG_TREE_GET     = '/customerBaseInfoOrder/initSaleOrganizationTree'; // 组织树
-CRM.url.MENU_TREE_GET    = '/sys/menu/ajax/load?async=false'; // 菜单树
-CRM.url.PRODUCT_TREE_GET = '/productCategory/CategoryTree'; // 产品树
+CRM.url.AREA_TREE_GET    = basePath + '/customerBaseInfo/initAreaCategoryTree'; // 地区树
+CRM.url.ROLE_TREE_GET    = basePath + '/sys/role/ajax/load?async=false'; // 角色树
+CRM.url.ORG_TREE_GET     = basePath + '/customerBaseInfoOrder/initSaleOrganizationTree'; // 组织树
+CRM.url.MENU_TREE_GET    = basePath + '/sys/menu/ajax/load?async=false'; // 菜单树
+CRM.url.PRODUCT_TREE_GET =basePath +  '/productCategory/CategoryTree'; // 产品树
 
 //功能性控件
 CRM.el = {
