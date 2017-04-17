@@ -18,19 +18,52 @@ $(function () {
     var name = $('#name');                         //定义产品种类select控件
     var documentaryType = $('documentaryType');    //定义单据类型select控件
     //为获取的数据赋值
-    jQuery.ajax({
-        url:basePath+'/customerBaseInfoOrderRequire/getBillRequireList',
-        type:'POST',
-        data:GetRequest(),
-        async:false
-    }).done(function (result) {
-        orderData = result.data;
-    }).fail(function(result){
-        console.log('error:'+result.status);
-    });
+    // jQuery.ajax({
+    //     url:basePath+'/customerBaseInfoOrderRequire/getBillRequireList',
+    //     type:'POST',
+    //     data:GetRequest(),
+    //     async:false
+    // }).done(function (result) {
+    //     orderData = result.data;
+    // }).fail(function(result){
+    //     console.log('error:'+result.status);
+    // });
     //console.log(orderData);
 
-    //为新数据、产品种类、单据类型赋值
+
+    // //单据要求对象
+    // private DocumentaryVo documentaryVo;
+    //
+    // /**其他单据要求**/
+    // private String otherDocumentaryRequire;
+
+    // /**对船公司要求**/
+    // private String shippingAgentRequire;
+    //
+    // /**装箱要求**/
+    // private String packageRequire;
+    // /**装箱要求对象**/
+    // private PackingRequireVo packingRequireVo;
+    //
+    // /**出运货物货物类型，0普通，1危险品**/
+    // private Integer goodsType;
+    //
+    // /**免用箱期**/
+    // private Integer mianxiangqi;
+    //
+    // /**免推期**/
+    // private Integer miantuiqi;
+    //
+    // /**柜子规格**/
+    // private Integer cupboardType;
+    //
+    // /**整柜数量**/
+    // private Integer cupboardPerNumber;
+    //
+    // /**柜数**/
+    // private Integer cupboardNumber;
+
+    // 数据重构
     jQuery.each(orderData,function (n,item) {
         var obj = {};
         obj.name = item.name;
@@ -59,5 +92,5 @@ $(function () {
         screenData(obj,newData,customerBillRequire);
     });
 
-})
+});
 

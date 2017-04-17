@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -110,10 +109,6 @@ public class CustomerEncyclopediaAction {
     @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "doUpdate")
     public ModelAndView update(String encyId,String customerId){
         return new ModelAndView("knowledgeBase/encyclopediaInfo").addObject("encyId",encyId).addObject("customerId",customerId);
-<<<<<<< HEAD
-
-=======
->>>>>>> ffa9ac86c03043179c271370706e70f8874c91bf
     }
 
     /**

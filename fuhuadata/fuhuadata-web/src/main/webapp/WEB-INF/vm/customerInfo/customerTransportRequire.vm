@@ -39,10 +39,10 @@
                                             <td lang="zh">打托（缠膜）</td>
                                             <td class="text-left">
                                                 <div class="col-xs-12">
-                                                    <label class="checkbox-inline"><input name="fullyClose" type="checkbox" value="0"/>免熏蒸托盘</label>
-                                                    <label class="checkbox-inline"><input name="fullyClose" type="checkbox" value="1"/>熏蒸托盘</label>
-                                                    <label class="checkbox-inline"><input name="fullyClose" type="checkbox" value="2"/>塑料托盘</label>
-                                                    <label class="checkbox-inline"><input name="fullyClose" type="checkbox" value="3"/>订制托盘</label>
+                                                    <label class="checkbox-inline"><input name="tray" type="checkbox" value="1"/>免熏蒸托盘</label>
+                                                    <label class="checkbox-inline"><input name="tray" type="checkbox" value="2"/>熏蒸托盘</label>
+                                                    <label class="checkbox-inline"><input name="tray" type="checkbox" value="3"/>塑料托盘</label>
+                                                    <label class="checkbox-inline"><input name="tray" type="checkbox" value="4"/>订制托盘</label>
                                                 </div>
                                             </td>
                                         </tr>
@@ -50,7 +50,7 @@
                                             <td lang="zh">帖唛</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input id="postLabel" type="checkbox" /></label>
+                                                    <label><input id="postLabel" type="checkbox" value="1"/></label>
                                                 </div>
                                             </td>
 
@@ -59,7 +59,7 @@
                                             <td lang="zh">垫板</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input id="basePlate" type="checkbox" /></label>
+                                                    <label><input id="basePlate" type="checkbox" value="1"/></label>
                                                 </div>
                                             </td>
 
@@ -68,7 +68,7 @@
                                             <td lang="zh">纸板</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input id="paperboard" type="checkbox" /></label>
+                                                    <label><input id="paperBoard" type="checkbox" value="1"/></label>
                                                 </div>
                                             </td>
 
@@ -77,7 +77,7 @@
                                             <td lang="zh">气囊</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input id="airSac" type="checkbox" /></label>
+                                                    <label><input id="gasbag" type="checkbox" value="1"/></label>
                                                 </div>
                                             </td>
 
@@ -86,7 +86,7 @@
                                             <td lang="zh">拉网</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input id="seine" type="checkbox" /></label>
+                                                    <label><input id="dragNet" type="checkbox" value="1"/></label>
                                                 </div>
                                             </td>
 
@@ -95,7 +95,7 @@
                                             <td lang="zh">紧固带</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input id="fasteningWith" type="checkbox" /></label>
+                                                    <label><input id="fastenBelt" type="checkbox" value="1"/></label>
                                                 </div>
                                             </td>
 
@@ -104,7 +104,7 @@
                                             <td lang="zh">抄条码</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input id="copyTheBarcode" type="checkbox" /></label>
+                                                    <label><input id="barcCode" type="checkbox" value="1"/></label>
                                                 </div>
                                             </td>
 
@@ -113,7 +113,7 @@
                                             <td lang="zh">美式门封</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input id="theOrdinaryAmerican" type="checkbox" /></label>
+                                                    <label><input id="americanDoorseal" type="checkbox" value="1"/></label>
                                                 </div>
                                             </td>
 
@@ -122,7 +122,7 @@
                                             <td lang="zh">护条</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input id="joint" type="checkbox" /></label>
+                                                    <label><input id="bead" type="checkbox" value="1"/></label>
                                                 </div>
                                             </td>
 
@@ -131,7 +131,7 @@
                                             <td lang="zh">护角</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input id="bead" type="checkbox" /></label>
+                                                    <label><input id="cornerProtection" type="checkbox" value="1"/></label>
                                                 </div>
                                             </td>
 
@@ -140,13 +140,13 @@
                                             <td lang="zh">是否需要监装</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input name="inspectionOfStorage" type="checkbox" value="0"/>商检</label>
+                                                    <label><input name="inspectionOfLoading" type="checkbox" value="1"/>商检</label>
                                                 </div>
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input name="inspectionOfStorage" type="checkbox" value="1"/>法检</label>
+                                                    <label><input name="inspectionOfLoading" type="checkbox" value="2"/>法检</label>
                                                 </div>
                                                 <div class="col-xs-3">
-                                                    <input id="inspectionOfStorage" type="text" class="form-control" placeholder="输入机构名称"/>
+                                                    <input id="inspectionInstitution" type="text" class="form-control" placeholder="输入机构名称"/>
                                                 </div>
                                             </td>
                                         </tr>
@@ -154,7 +154,7 @@
                                             <td lang="zh">吨桶是否铁丝固定</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input id="wireMeshFixedGuard" type="checkbox" /></label>
+                                                    <label><input id="wireFixed" type="checkbox" value="1"/></label>
                                                 </div>
                                             </td>
                                         </tr>
