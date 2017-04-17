@@ -330,7 +330,7 @@
         DELETE
                 bop.*,
                 bpr.*,
-                bopc.*,
+                bopc.*
         FROM
                 `business_order_product` bop,
                 `business_order_product_component` bopc,

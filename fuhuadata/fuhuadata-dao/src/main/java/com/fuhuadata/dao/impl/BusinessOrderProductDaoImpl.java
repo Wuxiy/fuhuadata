@@ -27,7 +27,7 @@ public class BusinessOrderProductDaoImpl implements BusinessOrderProductDao {
     private static final String COUNT_STMT = "BUSINESSORDERPRODUCT.";
     private static final String GET_LIST_BY_PAGE_STMT = "BUSINESSORDERPRODUCT.";
     private static final String INSERT_FROM_ARCHIVES = "BUSINESSORDERPRODUCT.insertFromArchives";
-    private static final String DELETE_ALL_INFO_BY_IDS = "BUSINESSORDERPRODUCT,deleteAllInfoByIds";
+    private static final String DELETE_ALL_INFO_BY_IDS = "BUSINESSORDERPRODUCT.deleteAllInfoByIds";
     private static final String GET_BAISC_BY_ID = "BUSINESSORDERPRODUCT.getBasicById";
     private static final String GET_DOCUMENTARY_BY_ID = "BUSINESSORDERPRODUCT.getDocumentaryById";
     private static final String GET_PACKAGE_REQUIRE_BY_ID = "BUSINESSORDERPRODUCT.getPackageRequireById";
