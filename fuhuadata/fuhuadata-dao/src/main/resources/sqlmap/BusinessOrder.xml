@@ -508,7 +508,7 @@
     </select>
 
     <select id="COUNT-ORDER" parameterClass="QueryBusinessOrder" resultClass="java.lang.Integer">
-        select count(a.order_id) from business_order a
+        select count(DISTINCT a.order_id) from business_order a
         LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
         <isNotEmpty prepend=", " property="enterpriseNature">
             (select * from customer_enterprise_nature where nature=#enterpriseNature#) nature
@@ -520,7 +520,7 @@
 
 
     <select id="COUNT-OFFER" parameterClass="QueryBusinessOrder" resultClass="java.lang.Integer">
-        select count(a.order_id)
+        select count(DISTINCT a.order_id)
         FROM
         business_order a
         LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
