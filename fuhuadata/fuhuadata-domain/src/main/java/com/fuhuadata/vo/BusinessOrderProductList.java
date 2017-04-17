@@ -1,5 +1,7 @@
 package com.fuhuadata.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -26,14 +28,15 @@ public class BusinessOrderProductList {
 
     private String model;//型号
 
-    private BigDecimal mainProductAmount;//主产品数量
+    private BigDecimal mainProductAmount=null;//主产品数量
 
-    private Integer cupboardPerNumber;//整柜数量
+    private Integer cupboardPerNumber= null;//整柜数量
 
-    private Integer cupboardNumber;//柜数
+    private Integer cupboardNumber=null;//柜数
 
-    private Integer cupboardType;//柜子规格
+    private Integer cupboardType = null;//柜子规格
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date deliveryTime;//交货时间
 
     private BigDecimal minPrice;//最低销售价

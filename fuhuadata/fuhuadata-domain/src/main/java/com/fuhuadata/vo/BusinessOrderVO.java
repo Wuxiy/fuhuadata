@@ -1,7 +1,6 @@
 package com.fuhuadata.vo;
 
 import com.fuhuadata.domain.BusinessOrder;
-import com.fuhuadata.domain.BusinessOrderProduct;
 import com.fuhuadata.domain.CustomerBaseInfo;
 
 import java.util.List;
