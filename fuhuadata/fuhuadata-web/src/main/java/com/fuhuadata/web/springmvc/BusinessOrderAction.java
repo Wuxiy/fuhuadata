@@ -5,6 +5,7 @@ import com.fuhuadata.domain.query.QueryBusinessOrder;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.BusinessOrderService;
+import com.fuhuadata.vo.BusinessOrderVO;
 import com.fuhuadata.vo.CostAndProfitStatistics;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -179,7 +180,7 @@ public class BusinessOrderAction {
     @SystemLogAnnotation(module = "salesStatistics-businessOrder",methods = "getBusinessOrderByOrderId")
     @ResponseBody
     public ResultPojo getBusinessOrderByOrderId(String orderId){
-        Result<BusinessOrder> result = new Result<BusinessOrder>();
+        Result<BusinessOrderVO> result = new Result<BusinessOrderVO>();
         try{
             result = businessOrderService.getBusinessOrderByOrderId(orderId);
         }catch(Exception e){

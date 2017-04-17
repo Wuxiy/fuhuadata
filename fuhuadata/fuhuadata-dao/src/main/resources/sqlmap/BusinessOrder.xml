@@ -10,7 +10,7 @@
         <result column="order_id" jdbcType="VARCHAR" property="orderId" javaType="java.lang.String"/>
         <result column="nc_order_id" jdbcType="VARCHAR" property="ncOrderId" javaType="java.lang.String"/>
         <result column="business_id" jdbcType="VARCHAR" property="businessId" javaType="java.lang.String"/>
-        <result column="customer_id" jdbcType="INTEGER" property="customerId" javaType="java.lang.Integer"/>
+        <result column="customer_id" jdbcType="INTEGER" property="customerId" javaType="java.lang.String"/>
         <result column="customer_duty_paragraph" jdbcType="VARCHAR" property="customerDutyParagraph" javaType="java.lang.String"/>
         <result column="bill_to_customer" jdbcType="VARCHAR" property="billToCustomer" javaType="java.lang.String"/>
         <result column="sales_man_id" jdbcType="VARCHAR" property="salesManId" javaType="java.lang.String"/>
@@ -26,13 +26,13 @@
         <result column="trade_term" jdbcType="VARCHAR" property="tradeTerm" javaType="java.lang.String"/>
         <result column="currency" jdbcType="VARCHAR" property="currency" javaType="java.lang.String"/>
 
-        <result property="isCreditRisk" column="is_credit_risk " jdbcType="INT" javaType="java.lang.Integer"/>
-        <result property="interestRate" column="interest_rate" jdbcType="DECIMAL" javaType="java.lang.String"/>
+        <result property="isCreditRisk" column="is_credit_risk" jdbcType="INT" javaType="java.lang.Integer"/>
+        <result property="interestRate" column="interest_rate" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
 
 
         <result column="nusdexchgrate" jdbcType="DECIMAL" property="nusdexchgrate" javaType="java.math.BigDecimal"/>
         <result column="nexchangerate" jdbcType="DECIMAL" property="nexchangerate" javaType="java.math.BigDecimal"/>
-        <result column="lastdelydate" jdbcType="TIMESTAMP" property="lastdelydate" javaType="java.sql.Date"/>
+        <result column="lastdelydate" jdbcType="TIMESTAMP" property="lastdelydate" javaType="java.sql.Timestamp"/>
 
         <result column="trade_country" jdbcType="VARCHAR" property="tradeCountry" javaType="java.lang.String"/>
         <result column="premium_rate" jdbcType="DECIMAL" property="premiumRate" javaType="java.math.BigDecimal"/>
@@ -49,10 +49,9 @@
         <result column="deal_time" jdbcType="TIMESTAMP" property="dealTime" javaType="java.sql.Timestamp"/>
         <result column="deliver_info" jdbcType="VARCHAR" property="deliverInfo" javaType="java.lang.String"/>
         <result column="express_info" jdbcType="VARCHAR" property="expressInfo" javaType="java.lang.String"/>
-        <result column="due_time" jdbcType="DATE" property="dueTime" javaType="java.sql.Date"/>
+        <result column="due_time" jdbcType="DATE" property="dueTime" javaType="java.lang.String"/>
 
         <result column="amount_payable" jdbcType="DECIMAL" property="amountPayable" javaType="java.math.BigDecimal"/>
-
         <result column="floor_price" jdbcType="DECIMAL" property="floorPrice" javaType="java.math.BigDecimal"/>
 
         <result column="maintenance_fee" jdbcType="DECIMAL" property="maintenanceFee" javaType="java.math.BigDecimal"/>
@@ -69,8 +68,8 @@
         <result column="create_user_name" jdbcType="VARCHAR" property="createUserName" javaType="java.lang.String"/>
         <result column="lastmodify_user_id" jdbcType="INTEGER" property="lastmodifyUserId" javaType="java.lang.Integer"/>
         <result column="lastmodify_user_name" jdbcType="VARCHAR" property="lastmodifyUserName" javaType="java.lang.String"/>
-        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" javaType="java.sql.Timestamp"/>
-        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" javaType="java.sql.Timestamp"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" javaType="java.lang.String"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" javaType="java.lang.String"/>
         <result column="failure_analysis" jdbcType="VARCHAR" property="failureAnalysis" javaType="java.lang.String"/>
     </resultMap>
 

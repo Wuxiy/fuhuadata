@@ -95,6 +95,9 @@ public class CustomerBaseInfo implements Serializable{
 	/**贸易国别**/
 	private String countryzone;
 
+	/**客户税号**/
+	private String customerTax;
+
 
 	/*活跃周期*/
 	private Integer activePeriod;
@@ -697,5 +700,13 @@ public class CustomerBaseInfo implements Serializable{
 
 	public void setEncyId(String encyId) {
 		this.encyId = encyId;
+	}
+
+	public String getCustomerTax() {
+		return customerTax;
+	}
+
+	public void setCustomerTax(String customerTax) {
+		this.customerTax = customerTax;
 	}
 }

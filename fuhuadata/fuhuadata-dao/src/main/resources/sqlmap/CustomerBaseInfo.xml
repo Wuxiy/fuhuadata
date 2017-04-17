@@ -398,6 +398,58 @@
 		]]>
 	</select>
 
+	<resultMap id="ORDER-CUSTOMER-MAP" class="CustomerBaseInfo">
+		<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="ncId" column="nc_id" jdbcType="VARCHAR" javaType="java.lang.String"/>
+		<result property="fullName" column="full_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="shortName" column="short_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="customerType" column="customer_type" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="areaId" column="customer_area_id" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="area" column="customer_area" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="countryId" column="country_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="country" column="country" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="registeredFunds" column="registered_funds" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="registeredAddress" column="registered_address" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="managementScope" column="management_scope" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="zhongxinbaoNumber" column="zhongxinbao_number" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="zhongxinbaoLevel" column="zhongxinbao_level" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="enterprisePhone" column="enterprise_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="enterpriseEmail" column="enterprise_email" jdbcType="VARCHAR" javaType="java.lang.String" />
+
+
+		<result property="enterpriseNature" column="enterprise_nature" jdbcType="VARCHAR" javaType="java.lang.String"/>
+		<result property="otherEnterpriseNature" column="other_enterprise_nature" jdbcType="VARCHAR" javaType="java.lang.String" />
+	</resultMap>
+
+	<select id="GET-BY-CUSTOMERID" resultMap="ORDER-CUSTOMER-MAP" parameterClass="java.lang.String">
+		<![CDATA[
+							SELECT
+					base.customer_id,
+					base.nc_id,
+					base.full_name,
+					base.short_name,
+					base.customer_type,
+					base.customer_area_id,
+					base.customer_area,
+					base.country_id,
+					base.country,
+					base.registered_address,
+					base.registered_funds,
+					base.management_scope,
+					base.zhongxinbao_level,
+					base.zhongxinbao_number,
+					base.enterprise_phone,
+					base.enterprise_email,
+					GROUP_CONCAT(nature.nature) enterprise_nature,
+					base.other_enterprise_nature
+				FROM
+					customer_base_info base
+				LEFT JOIN customer_enterprise_nature nature
+							ON nature.customer_id=base.customer_id
+				WHERE base.customer_id = #customerId#
+	]]>
+	</select>
+
 	<select id="GET-BASEINFO-LINKMANINFO-BY-CUSTOMERID" resultClass="CustomerBaseInfoLinkman" parameterClass="java.lang.String">
 		<![CDATA[
 						SELECT

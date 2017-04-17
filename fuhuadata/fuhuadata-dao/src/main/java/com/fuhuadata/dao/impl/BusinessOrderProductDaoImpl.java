@@ -3,6 +3,7 @@ package com.fuhuadata.dao.impl;
 import com.fuhuadata.dao.BusinessOrderProductDao;
 import com.fuhuadata.domain.BusinessOrderProduct;
 import com.fuhuadata.domain.query.QueryBusinessOrderProduct;
+import com.fuhuadata.vo.BusinessOrderProductList;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -32,6 +33,8 @@ public class BusinessOrderProductDaoImpl implements BusinessOrderProductDao {
     private static final String GET_PACKAGE_REQUIRE_BY_ID = "BUSINESSORDERPRODUCT.getPackageRequireById";
     private static final String GET_PRICE_TYPE = "BUSINESSORDERPRODUCT.getPriceType";
     private static final String CALCULATE_PROCESS_COST = "BUSINESSORDERPRODUCT.calculateProcesscost";
+
+    private static final String GET_ORDER_PRODUCT_LIST="BUSINESSORDERPRODUCT.GET-ORDER-PRODUCT-LIST";
     public int insertBaseInfo(BusinessOrderProduct businessOrderProduct) throws Exception{
         return (Integer)sqlMapClient.insert(INSERT_STMT,businessOrderProduct);
     }
@@ -120,6 +123,16 @@ public class BusinessOrderProductDaoImpl implements BusinessOrderProductDao {
     public BigDecimal calculateProcessCost(Integer businessProdcutId) {
         try {
             return (BigDecimal)sqlMapClient.queryForObject(CALCULATE_PROCESS_COST,businessProdcutId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<BusinessOrderProductList> getOrderProductList(String orderId) {
+        try {
+            return sqlMapClient.queryForList(GET_ORDER_PRODUCT_LIST,orderId);
         } catch (SQLException e) {
             e.printStackTrace();
         }
