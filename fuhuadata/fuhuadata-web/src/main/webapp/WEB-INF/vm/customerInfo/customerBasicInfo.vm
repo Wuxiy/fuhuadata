@@ -255,7 +255,7 @@
                 <!--客户百科-->
                 <div class="panel panel-default panel-edit view-HD-lg" data-view="editHide">
                     <div class="panel-heading">
-                        <a href="/customerEncyclopedia/addCustomerEncyclopedia?encyId=$!{encyId}" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
+                        <a id="encyEdit" href="#" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
                             编辑百科
                         </a>
                         <h3 class="panel-title" lang="zh">

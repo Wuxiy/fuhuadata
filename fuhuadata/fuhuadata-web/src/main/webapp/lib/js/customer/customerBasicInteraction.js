@@ -7,6 +7,7 @@ CRM.cbInfo   = window.CRM.cbInfo || {};
 CRM.cbInfo.LOOK_POST    = '/customerBaseInfo/showCustomerBaseInfoDetails'; // 客户基本信息查看
 CRM.cbInfo.EDIT_POST    = '/customerBaseInfo/updateCustomerBaseInfo'; // 客户基本信息编辑
 CRM.cbInfo.ADD_POST     = '/customerBaseInfo/doAddCustomerBaseInfo'; // 客户信息新增
+CRM.cbInfo.encyUrl      = '/customerEncyclopedia/addCustomerEncyclopedia'; // 百科编辑
 
 CRM.cbInfo.editView     = null; // 编辑状态下显示的标签
 CRM.cbInfo.editHide     = null; // 编辑状态下隐藏的标签
@@ -308,6 +309,8 @@ CRM.cbInfo.renderForm = function(data){
     // 产品
     if (data.customerMakeProduct) { CRM.tplHandler('cmp',data.customerMakeProduct,$('#cmpC'));}
 
+    // 构造百科url
+    page.encyUrl += '?customerId=' + data.customerId + (data.encyId!=undefined? '&encyId=' + data.encyId : '');
 };
 
 // 返回页面状态，c合作客户页，l潜在客户页，r流失客户页，a潜在客户新增
@@ -648,8 +651,7 @@ $().ready(function() {
         $(this).closest(tar).remove();
     });
 
-    // 提交表单
-    // 点击提交
+    // 点击提交表单
     $('#up').on('click.up',function () {
 
         if (page.status!='a') {
@@ -680,6 +682,12 @@ $().ready(function() {
             });
         }
 
+    });
+
+    //
+    $('#encyEdit').on('click.ency',function () {
+
+        self.location = basePath + page.encyUrl;
     });
 });
 
