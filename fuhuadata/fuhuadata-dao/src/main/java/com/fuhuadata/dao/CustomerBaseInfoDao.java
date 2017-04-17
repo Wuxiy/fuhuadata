@@ -44,6 +44,14 @@ public interface CustomerBaseInfoDao {
      * @return
      */
     public int deleteCustomerBaseInfoById(String customer_id);
+
+
+	/**
+	 * 根据客户id获取订单客户信息
+	 * @param custoemrId
+	 * @return
+	 */
+	public CustomerBaseInfo getOrderCustomerInfoByCustomerId(String custoemrId);
     
 	 /**
      * 返回数据库所有记录，谨慎使用，最好不用

@@ -1,13 +1,12 @@
 package com.fuhuadata.dao;
 
 import com.fuhuadata.domain.BusinessOrderProduct;
-import com.fuhuadata.domain.BusinessOrderProductComponent;
 import com.fuhuadata.domain.query.QueryBusinessOrderProduct;
+import com.fuhuadata.vo.BusinessOrderProductList;
 
 import java.math.BigDecimal;
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
+
 
 /**
  * Created by hexingfu on 2017/3/30.
@@ -98,4 +97,13 @@ public interface BusinessOrderProductDao {
      * @return
      */
     BigDecimal calculateProcessCost(Integer businessProductId);
+
+    /**
+     * 根据订单id获取订单产品列表
+     * @param orderId
+     * @return
+     */
+    public List<BusinessOrderProductList> getOrderProductList(String orderId);
+
+
 }

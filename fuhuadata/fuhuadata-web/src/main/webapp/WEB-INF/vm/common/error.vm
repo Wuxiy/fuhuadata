@@ -1,0 +1,19 @@
+<div class="dashboard-wrapper">
+  <div class="row">
+    <!--列表部分-->
+    <div class="container">
+      <div class="jumbotron col-xs-5 col-xs-offset-3" style="max-height: 331px;">
+        <form id="myForm" class="form-horizontal">
+          <div class="form-group">
+            <div class="col-xs-12">
+              <h3>服务器出错了...</h3>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-xs-12 hidden">
+          ${error.stackTrace}
+      </div>
+    </div>
+  </div>
+</div>

@@ -4,6 +4,8 @@ import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.BusinessOrderProduct;
 import com.fuhuadata.domain.CustomerBaseInfo;
 
+import java.util.List;
+
 /**    订单报价详情
  * Created by intanswer on 2017/4/16.
  */
@@ -13,7 +15,7 @@ public class BusinessOrderVO {
 
     private CustomerBaseInfo customerBaseInfo;//客户基本信息
 
-    private BusinessOrderProduct businessOrderProduct;//订单产品
+    private List<BusinessOrderProductList> businessOrderProductLists;//订单产品
 
     public BusinessOrder getBusinessOrder() {
         return businessOrder;
@@ -23,13 +25,6 @@ public class BusinessOrderVO {
         this.businessOrder = businessOrder;
     }
 
-    public BusinessOrderProduct getBusinessOrderProduct() {
-        return businessOrderProduct;
-    }
-
-    public void setBusinessOrderProduct(BusinessOrderProduct businessOrderProduct) {
-        this.businessOrderProduct = businessOrderProduct;
-    }
 
     public CustomerBaseInfo getCustomerBaseInfo() {
         return customerBaseInfo;
@@ -37,6 +32,14 @@ public class BusinessOrderVO {
 
     public void setCustomerBaseInfo(CustomerBaseInfo customerBaseInfo) {
         this.customerBaseInfo = customerBaseInfo;
+    }
+
+    public List<BusinessOrderProductList> getBusinessOrderProductLists() {
+        return businessOrderProductLists;
+    }
+
+    public void setBusinessOrderProductLists(List<BusinessOrderProductList> businessOrderProductLists) {
+        this.businessOrderProductLists = businessOrderProductLists;
     }
 }
 
