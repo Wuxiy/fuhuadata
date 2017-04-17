@@ -6,6 +6,8 @@ import com.fuhuadata.dao.CustomerBaseInfoDao;
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
 import com.fuhuadata.manager.BusinessOrderManager;
+import com.fuhuadata.util.StringUtil;
+import com.fuhuadata.vo.BusinessOrderProductList;
 import com.fuhuadata.vo.BusinessOrderVO;
 import com.fuhuadata.vo.CostAndProfitStatistics;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,7 +90,11 @@ public class BusinessOrderManagerImpl implements BusinessOrderManager {
         BusinessOrder businessOrder= businessOrderDao.getBusinessOrderByOrderId(orderId);
         businessOrderVO.setBusinessOrder(businessOrder);
         businessOrderVO.setCustomerBaseInfo(customerBaseInfoDao.getOrderCustomerInfoByCustomerId(businessOrder.getCustomerId()));
-        businessOrderVO.setBusinessOrderProductLists(businessOrderProductDao.getOrderProductList(orderId));
+        List<BusinessOrderProductList> productList=businessOrderProductDao.getOrderProductList(orderId);
+        businessOrderVO.setBusinessOrderProductLists(productList);
+        for(BusinessOrderProductList c:productList){
+           c.setPackingSpecification(StringUtil.merge2string(c.getSpecification(),c.getModel(),"*"));
+        }
         return businessOrderVO;
     }
 }

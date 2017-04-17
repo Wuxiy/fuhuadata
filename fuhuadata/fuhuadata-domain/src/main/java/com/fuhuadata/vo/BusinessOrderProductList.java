@@ -13,11 +13,14 @@ public class BusinessOrderProductList {
     private String orderId;//订单id
     private String customerProductName;//客户商品名
     private String categorySerialNumber;//品类序列号
+    private String productCode;//产品序列号
     private String categoryName;//品类
     private String productName;//产品名称
     private String brand;//品牌
 
     private String specification;//规格
+
+    private String packingSpecification;//包装规格
 
     private String model;//型号
 
@@ -152,5 +155,21 @@ public class BusinessOrderProductList {
 
     public void setOrderProductId(Integer orderProductId) {
         this.orderProductId = orderProductId;
+    }
+
+    public String getProductCode() {
+        return productCode;
+    }
+
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
+    }
+
+    public String getPackingSpecification() {
+        return packingSpecification;
+    }
+
+    public void setPackingSpecification(String packingSpecification) {
+        this.packingSpecification = packingSpecification;
     }
 }

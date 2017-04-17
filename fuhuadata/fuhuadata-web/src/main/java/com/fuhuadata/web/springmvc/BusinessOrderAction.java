@@ -176,7 +176,7 @@ public class BusinessOrderAction {
      * @param orderId
      * @return
      */
-    @RequestMapping(value = "/getBusinessOrderByOrderId",method = RequestMethod.POST)
+    @RequestMapping(value = "/getBusinessOrderByOrderId",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "salesStatistics-businessOrder",methods = "getBusinessOrderByOrderId")
     @ResponseBody
     public ResultPojo getBusinessOrderByOrderId(String orderId){

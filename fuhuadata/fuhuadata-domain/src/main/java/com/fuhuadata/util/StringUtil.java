@@ -157,4 +157,22 @@ public class StringUtil {
     }
 
 
+    /**
+     * c产品规格型号合并
+     * @param str1
+     * @param str2
+     * @param separate
+     * @return
+     */
+    public static String merge2string(String str1,String str2,String separate){
+        if(str1!=null&&""!=str1){
+            if(str2!=null&&""!=str2){
+                return str1+separate+str2;
+            }else{
+                return str1;
+            }
+        }else{
+            return str2;
+        }
+    }
 }

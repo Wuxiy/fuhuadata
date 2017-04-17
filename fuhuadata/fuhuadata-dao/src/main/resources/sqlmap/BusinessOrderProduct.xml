@@ -360,6 +360,7 @@
         <result property="orderId" column="order_id" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="orderProductId" column="id" jdbcType="INT" javaType="java.lang.Integer"/>
         <result property="productName" column="name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="productCode" column="product_code" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="categoryName" column="category_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="brand" column="brand" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="specification" column="specification" jdbcType="VARCHAR" javaType="java.lang.String"/>
@@ -378,6 +379,7 @@
         bop.order_id,
         bop.id,
         bop.`name`,
+        bi.product_code,
         bi.category_name,
         bop.customer_product_name,
         bop.brand,
