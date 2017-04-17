@@ -63,7 +63,7 @@
     </select>
 
     <delete id="deleteSelfAndChildren">
-        DELETE FROM p_menu WHERE parent_id=#{parentId} OR parent_ids LIKE CONCAT(#{parents}, '%')
+        DELETE FROM p_menu WHERE menu_id=#{menuId} OR parent_ids LIKE CONCAT(#{parents}, '%')
     </delete>
 
     <select id="countNextIndex" resultType="java.lang.Integer">

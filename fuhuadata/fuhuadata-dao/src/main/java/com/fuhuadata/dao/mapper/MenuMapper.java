@@ -13,7 +13,7 @@ import java.util.List;
 @MybatisDao
 public interface MenuMapper extends BaseMapper<Menu, Integer> {
 
-    void deleteSelfAndChildren(@Param("parentId") Integer parentId, @Param("parents") String parents);
+    void deleteSelfAndChildren(@Param("menuId") Integer menuId, @Param("parents") String parents);
 
     int countNextIndex(@Param("parentId") Integer parentId);
 

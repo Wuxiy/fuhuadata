@@ -65,7 +65,7 @@
     </select>
 
     <delete id="deleteSelfAndChildren">
-        DELETE FROM p_role WHERE parent_id=#{parentId} OR parent_ids LIKE CONCAT(#{parents}, '%')
+        DELETE FROM p_role WHERE role_id=#{roleId} OR parent_ids LIKE CONCAT(#{parents}, '%')
     </delete>
 
     <select id="countNextIndex" resultType="java.lang.Integer">
