@@ -56,9 +56,11 @@ $('#imgGroup').on('click.mon','[data-btn="modification"]',function (e) {
 $('#openFile').on('change.file',function (e) {
 //            console.log(thisThumbnail);
     var img    = thisThumbnail.find('img'),
+        input  = thisThumbnail.find('input'),
         fileF  = $('#fileForm')[0], // 转化为DOM对象
         monBtn = thisThumbnail.find('[data-btn="modification"]'),
         data   = new FormData(fileF);
+        data.append("classifyPath","packingAchive");
 
     console.log(data);
     CRM.ajaxCall({
@@ -70,15 +72,18 @@ $('#openFile').on('change.file',function (e) {
         processData: false,
         contentType: false,
         callback    :  function (data) {
-            img.attr('src',"../"+basePath+data);
+            img.attr('src',(basePath==""?("/"+basePath):basePath)+data);
+            input.attr('data-url',(basePath==""?("/"+basePath):basePath)+data);
             fileF.reset(); // 重置file的值
             monBtn.removeClass('hidden'); // 显示修改按钮
         }
     });
 });
 
+/*
 function fsubmit(){
     var data = new FormData($('#form1')[0]);
+    data.append("classifyPath","packingAchive");
     console.log(data);
     jQuery.ajax({
         url: basePath+'/upload/uploadFileAll',
@@ -99,6 +104,7 @@ function fsubmit(){
     });
     return false;
 }
+*/
 
 //适用产品类型checkbox
 
@@ -233,7 +239,7 @@ $('.packingAdd').on('click',function(){
         "bRemarks": jQuery('#bremarks').val(),
     }
     console.log(data);
-    /*jQuery.ajax({
+    jQuery.ajax({
         type:"POST",
         url:url,
         dataType:"json",
@@ -243,7 +249,7 @@ $('.packingAdd').on('click',function(){
             alert("添加成功");
             location.reload();
         }
-    })*/
+    })
 })
 
 //全选框
@@ -264,6 +270,7 @@ $('#modal_checkAll').on('click',function(){
         }
     });
 })
+
 
 
 

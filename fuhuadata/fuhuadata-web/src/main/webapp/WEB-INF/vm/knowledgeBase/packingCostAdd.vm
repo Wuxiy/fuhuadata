@@ -91,7 +91,7 @@
                                     <textarea class="form-control" rows="4" id="bremarks"></textarea>
                                 </div>
                             </div>
-                            <form name="form1" id="form1" enctype="multipart/form-data">
+                            #*<form name="form1" id="form1" enctype="multipart/form-data">
                             <div class="form-group ">
                                 <label class="col-xs-1 control-label">图片</label>
                                 <div id="imgContent" class="col-xs-11">
@@ -105,17 +105,17 @@
                                     </div>
                                 </div>
                             </div>
-                            </form>
+                            </form>*#
                             <div class="form-group">
                                 <label class="col-xs-1 control-label">图片</label>
                                 <div id="imgGroup" class="col-xs-11">
                                     <div class="col-xs-3">
                                         <button type="button" class="close" name="close" style="position: absolute;top:3px;left:0;">×</button>
                                         <div class="col-xs-12 thumbnail">
-                                            <img  data-toggle="modal" data-target="#imgModal" data-name="瓶型" src="/lib/img/placeholder.png" alt="请点击添加图片" class="imgpath">
+                                            <img style="height: 240px" data-toggle="modal" data-target="#imgModal" data-name="" src="/lib/img/placeholder.png" alt="请点击添加图片" class="imgpath">
                                             <div class="input-group col-xs-10 col-xs-offset-1" style="padding-top: 5px">
-                                                <input class="form-control text-center" style="" value="瓶型"/>
-                                                <div class="input-group-btn"><button data-btn="modification" class="btn btn-xs btn-default hidden" type="button">修改</button></div>
+                                                <input class="form-control text-center filename" style="" value=""/>
+                                                <div class="input-group-btn"><button data-btn="modification" class="btn btn-xs btn-default hidden" type="button">图片修改</button></div>
                                             </div>
                                         </div>
                                     </div>
@@ -128,10 +128,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-1 col-xs-offset-1">
-                                    <div class="btn-group btn-group-xs">
-                                        <button id="addImg" data-form-btn="add" class="btn btn-default" type="button" lang="zh">继续添加</button>
-                                        <input class="btn btn-primary" type="button" name="b1" value="上传" onclick="fsubmit()">
-                                    </div>
+                                    <button id="addimg" data-form-btn="add" class="btn btn-default" type="button" lang="zh">继续添加</button>
                                 </div>
                             </div>
                         </div>
@@ -279,15 +276,14 @@
     $('#tree').creatTree('${request.contextPath}/packingCategory/CategoryTree?parentIds=2,3');
     $('#tree').filtrateData('${request.contextPath}/packingArchives/getPackingArchivesByPId',"modal_relate_table","packingInfoModal");
 
-
-    $('#addImg').click(function () {
+    $('#addimg').click(function(){
         var btn = $(this);
-        var div = $('<div class="col-xs-3" style="position: relative;"><button type="button" class="close" name="close" style="position: absolute;top:3px;left:0;">×</button><img src="" class="fileimg" width="300px" height="200px" style="margin-bottom:2%"><input type="file" name="file" style="margin-bottom:2%"><div class="caption"><input type="text" name="file" class="filename" data-url="" style="margin-bottom:2%"></div></div>');
-        div.appendTo('#imgContent');
+        var div = $('<div class="col-xs-3"><button type="button" class="close" name="close" style="position: absolute;top:3px;left:0;">×</button> <div class="col-xs-12 thumbnail"><img style="height: 240px;" data-toggle="modal" data-target="#imgModal" data-name="瓶型" src="/lib/img/placeholder.png" alt="请点击添加图片" class="imgpath"> <div class="input-group col-xs-10 col-xs-offset-1" style="padding-top: 5px"> <input class="form-control text-center filename" style="" value=""/> <div class="input-group-btn"><button data-btn="modification" class="btn btn-xs btn-default hidden" type="button">图片修改</button></div></div></div> </div>');
+        div.appendTo('#imgGroup');
     })
 
-    /*$(document).on('click','[name="close"]',function () {
-        var imgpath = $(this).parent('div').find('[class="filename"]').attr('data-url');
+    $(document).on('click','[name="close"]',function () {
+        /*var imgpath = $(this).parent('div').find('[class="filename"]').attr('data-url');
         console.log(imgpath);
         var url = basePath + '/upload/deleteFileSingle';
         if(imgpath != ''){
@@ -301,6 +297,7 @@
             })
         }else{
             $(this).parent('div').remove();
-        }
-    })*/
+        }*/
+        $(this).parent('div').remove();
+    })
 </script>
