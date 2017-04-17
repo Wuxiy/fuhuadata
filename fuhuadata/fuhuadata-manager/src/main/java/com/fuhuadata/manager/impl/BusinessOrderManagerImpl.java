@@ -92,8 +92,10 @@ public class BusinessOrderManagerImpl implements BusinessOrderManager {
         businessOrderVO.setCustomerBaseInfo(customerBaseInfoDao.getOrderCustomerInfoByCustomerId(businessOrder.getCustomerId()));
         List<BusinessOrderProductList> productList=businessOrderProductDao.getOrderProductList(orderId);
         businessOrderVO.setBusinessOrderProductLists(productList);
-        for(BusinessOrderProductList c:productList){
-           c.setPackingSpecification(StringUtil.merge2string(c.getSpecification(),c.getModel(),"*"));
+        if(productList!=null&&productList.size()>0) {
+            for (BusinessOrderProductList c : productList) {
+                c.setPackingSpecification(StringUtil.merge2string(c.getSpecification(), c.getModel(), "*"));
+            }
         }
         return businessOrderVO;
     }

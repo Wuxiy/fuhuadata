@@ -378,7 +378,7 @@
         <result property="deliveryTime" column="delivery_time" jdbcType="DATETIME" javaType="java.sql.Timestamp"/>
         <result property="minPrice" column="min_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
         <result property="customerProductName" column="customer_product_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result property="productRequireId" column="product_require_id" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="productRequireId" column="product_require_id" jdbcType="INT" javaType="java.lang.Integer"/>
     </resultMap>
 
     <select id="GET-ORDER-PRODUCT-LIST" parameterClass="java.lang.String" resultMap="CUSTOMER-ORDER-PRODUCT-LIST-MAP">
