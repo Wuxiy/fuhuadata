@@ -143,8 +143,8 @@
                                                     <span class="glyphicon glyphicon-search"></span>
                                                 </button>
                                             </td>
-                                            <td><%=data[i].certigier%></td>
-                                            <td><%=data[i].accreditTime%></td>
+                                            <td><%=data[i].authUserName%></td>
+                                            <td><%=data[i].authTime%></td>
                                         </tr>
                                         <%}%>
 
@@ -190,9 +190,9 @@
                             <script id='btnTable' type="text/template">
                                 <!-- 模板部分 -->
                                 <caption>
-                                    #if ($shiro.hasPermission("sys:role:update"))
-                                      <button id="editButton" class="btn-link pull-right" type="button">编辑</button>
-                                    #end
+##                                    #if ($shiro.hasPermission("sys:role:update"))
+##                                      <button id="editButton" class="btn-link pull-right" type="button">编辑</button>
+##                                    #end
                                   <button id="saveButton" class="btn-link pull-right" type="button">保存</button>
                                 </caption>
                                 <thead>

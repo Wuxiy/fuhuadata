@@ -281,8 +281,8 @@ CRM.systemRoleManage.returnUserTableData = function (data) {
             endTime: item.endTime ? item.endTime.split(/\s/)[0] : '',
             areasId: '',
             areasName: '',
-            certigier: '',
-            accreditTime: ''
+            authUserName: item.authUserName,
+            authTime: item.authTime
         };
         if (item.user.areas instanceof Array && item.user.areas.length > 0) {
             $.each(item.user.areas, function (j, item) {
@@ -327,8 +327,8 @@ CRM.systemRoleManage.renderMenuNode = function (node, level) {
     }
 
     html += "</td>";
-    html += "<td>" + (node.authUserName || "") + "</td>";
-    html += "<td>" + (node.authTime || "") + "</td>";
+    html += "<td>" + (node.roleAuthority.authUserName || "") + "</td>";
+    html += "<td>" + (node.roleAuthority.authTime || "") + "</td>";
     html += "</tr>";
     html += "</tbody>";
 
@@ -410,8 +410,8 @@ CRM.systemRoleManage.renderPermissionNode = function (node, level) {
     }
     html += "</td>";
 
-    html += "<td>" + (node.authUserName || "") + "</td>";
-    html += "<td>" + (node.authTime || "") + "</td>";
+    html += "<td>" + (node.roleAuthority.authUserName || "") + "</td>";
+    html += "<td>" + (node.roleAuthority.authTime || "") + "</td>";
     html += "</tr>";
     html += "</tbody>";
 
