@@ -35,12 +35,7 @@
 		<result column="img_info" property="imgInfo" jdbcType="VARCHAR" />
 		<result column="pakage_info" property="pakageInfo" jdbcType="VARCHAR" />
 		<result column="material_info" property="materialInfo" jdbcType="VARCHAR" />
-		<result property="straightEmployingWay" column="straight_employing_way" jdbcType="INT" javaType="java.lang.Integer" />
-		<result property="straightEmployingScale" column="straight_employing_scale" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-		<result property="straightEmployingStandard" column="straight_employing_standard" jdbcType="VARCHAR" javaType="java.lang.String" />
-		<result property="potentialEmployingWay" column="potential_employing_way" jdbcType="INT" javaType="java.lang.Integer" />
-		<result property="potentialEmployingScale" column="potential_employing_scale" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-		<result property="potentialEmployingStandard" column="potential_employing_standard" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result column="commission_price" jdbcType="DECIMAL" property="commissionPrice" />
 		<result property="documentaryType" column="documentary_type" jdbcType="INT" javaType="java.lang.Integer" />
 		<result property="documentaryRequire" column="documentary_require" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="otherDocumentaryRequire" column="other_documentary_require" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -69,7 +64,7 @@
 		<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
 		<result property="customsClearanceId" column="customs_clearance_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="customsClearanceName" column="customs_clearance_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-
+		<result column="unit_use_rate" jdbcType="DECIMAL" property="unitUseRate"/>
 	</resultMap>
 	
 	<sql id="PAGE-COMMON">	
@@ -157,24 +152,10 @@
 			<isNotNull prepend=" AND " property="materialInfo">
 				material_info = #materialInfo#
 			</isNotNull>
-				<isNotNull prepend=" AND " property="straightEmployingWay">
-			straight_employing_way = #straightEmployingWay#
+				<isNotNull prepend=" AND " property="commissionPrice">
+					commission_price = #commissionPrice#
 		</isNotNull>
-				<isNotNull prepend=" AND " property="straightEmployingScale">
-			straight_employing_scale = #straightEmployingScale#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="straightEmployingStandard">
-			straight_employing_standard = #straightEmployingStandard#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="potentialEmployingWay">
-			potential_employing_way = #potentialEmployingWay#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="potentialEmployingScale">
-			potential_employing_scale = #potentialEmployingScale#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="potentialEmployingStandard">
-			potential_employing_standard = #potentialEmployingStandard#
-		</isNotNull>
+
 				<isNotNull prepend=" AND " property="documentaryType">
 			documentary_type = #documentaryType#
 		</isNotNull>
@@ -341,23 +322,8 @@
 			<isNotNull prepend=" AND " property="materialInfo">
 				material_info = #materialInfo#
 			</isNotNull>
-			<isNotNull prepend=" AND " property="straightEmployingWay">
-				straight_employing_way = #straightEmployingWay#
-			</isNotNull>
-			<isNotNull prepend=" AND " property="straightEmployingScale">
-				straight_employing_scale = #straightEmployingScale#
-			</isNotNull>
-			<isNotNull prepend=" AND " property="straightEmployingStandard">
-				straight_employing_standard = #straightEmployingStandard#
-			</isNotNull>
-			<isNotNull prepend=" AND " property="potentialEmployingWay">
-				potential_employing_way = #potentialEmployingWay#
-			</isNotNull>
-			<isNotNull prepend=" AND " property="potentialEmployingScale">
-				potential_employing_scale = #potentialEmployingScale#
-			</isNotNull>
-			<isNotNull prepend=" AND " property="potentialEmployingStandard">
-				potential_employing_standard = #potentialEmployingStandard#
+			<isNotNull prepend=" AND " property="commissionPrice">
+				commission_price = #commissionPrice#
 			</isNotNull>
 			<isNotNull prepend=" AND " property="documentaryType">
 				documentary_type = #documentaryType#
@@ -443,9 +409,7 @@
 		Internal_supply_name, customer_id, name, customer_product_name, brand, main_product_amount,
 		main_product_unit, sub_product_amount, sub_product_unit, convert_rate, price_type,
 		advise_price, purchase_price, delivery_time, Internal_transport_mode,
-		Internal_transport_price, factory_id, factory_name, straight_employing_way,
-		straight_employing_scale, straight_employing_standard, potential_employing_way,
-		potential_employing_scale, potential_employing_standard, documentary_type,
+		Internal_transport_price, factory_id, factory_name, commission_price, documentary_type,
 		documentary_require, other_documentary_require, shipping_agent_require, package_require,
 		goods_type, mianxiangqi, miantuiqi, cupboard_type, cupboard_per_number, cupboard_number,
 		ocean_freight, port_surcharge, tax_type, tax_free, gross_margin, other_cost,process_cost, min_price,
@@ -458,9 +422,7 @@
 				Internal_supply_name, customer_id, name, customer_product_name, brand, main_product_amount,
 				main_product_unit, sub_product_amount, sub_product_unit, convert_rate, price_type,
 				advise_price, purchase_price, delivery_time, Internal_transport_mode,
-				Internal_transport_price, factory_id, factory_name, straight_employing_way,
-				straight_employing_scale, straight_employing_standard, potential_employing_way,
-				potential_employing_scale, potential_employing_standard, documentary_type,
+				Internal_transport_price, factory_id, factory_name, commission_price, documentary_type,
 				documentary_require, other_documentary_require, shipping_agent_require, package_require,
 				goods_type, mianxiangqi, miantuiqi, cupboard_type, cupboard_per_number, cupboard_number,
 				ocean_freight, port_surcharge, tax_type, tax_free, gross_margin, other_cost,process_cost, min_price,
@@ -500,12 +462,7 @@
 		,a.Internal_transport_mode = b.Internal_transport_mode
 		,a.Internal_transport_price = b.Internal_transport_price
 		,a.factory_id factory_name = b.factory_id factory_name
-		,a.straight_employing_way = b.straight_employing_way
-		,a.straight_employing_scale = b.straight_employing_scale
-		,a.straight_employing_standard = b.straight_employing_standard
-		,a.potential_employing_way = b.potential_employing_way
-		,a.potential_employing_scale = b.potential_employing_scale
-		,a.potential_employing_standard = b.potential_employing_standard
+		,a.commission_price = b.commission_price
 		,a.documentary_type = b.documentary_type
 		,a.documentary_require = b.documentary_require
 		,a.other_documentary_require = b.other_documentary_require
@@ -541,15 +498,13 @@
 		insert into customer_product_archives(
 		order_id,product_id,customs_clearance_id,customs_clearance_name,customer_id,name,
 		customer_product_name,brand,main_product_amount,main_product_unit,sub_product_amount,sub_product_unit,
-		convert_rate,price_type,advise_price,purchase_price,delivery_time,factory_id,factory_name,straight_employing_way,
-		straight_employing_scale,straight_employing_standard,potential_employing_way,potential_employing_scale,potential_employing_standard,
+		convert_rate,price_type,advise_price,purchase_price,delivery_time,factory_id,factory_name,commission_price,
 		tax_type,tax_free,other_cost,process_cost
 		)
 		values(
 		#orderId#,#productId#,#customsClearanceId#,#customsClearanceName#,#customerId#,#name#,
 		#customerProductName#,#brand#,#mainProductAmount#,#mainProductUnit#,#subProductAmount#,#subProductUnit#,
-		#convertRate#,#priceType#,#advisePrice#,#purchasePrice#,#deliveryTime#,#factoryId#,#factoryName#,#straightEmployingWay#,
-		#straightEmployingScale#,#straightEmployingStandard#,#potentialEmployingWay#,#potentialEmployingScale#,#potentialEmployingStandard#,
+		#convertRate#,#priceType#,#advisePrice#,#purchasePrice#,#deliveryTime#,#factoryId#,#factoryName#,#commissionPrice#,
 		#taxType#,#taxFree#,#otherCost#,#processCost#
 		)
 		<selectKey resultClass="java.lang.Integer" keyProperty="id">
@@ -626,23 +581,8 @@
 			<isNotNull prepend="," property="factoryName">
 				factory_name = #factoryName#
 			</isNotNull>
-			<isNotNull prepend="," property="straightEmployingWay">
-				straight_employing_way = #straightEmployingWay#
-			</isNotNull>
-			<isNotNull prepend="," property="straightEmployingScale">
-				straight_employing_scale = #straightEmployingScale#
-			</isNotNull>
-			<isNotNull prepend="," property="straightEmployingStandard">
-				straight_employing_standard = #straightEmployingStandard#
-			</isNotNull>
-			<isNotNull prepend="," property="potentialEmployingWay">
-				potential_employing_way = #potentialEmployingWay#
-			</isNotNull>
-			<isNotNull prepend="," property="potentialEmployingScale">
-				potential_employing_scale = #potentialEmployingScale#
-			</isNotNull>
-			<isNotNull prepend="," property="potentialEmployingStandard">
-				potential_employing_standard = #potentialEmployingStandard#
+			<isNotNull prepend="," property="commissionPrice">
+				commission_price = #commissionPrice#
 			</isNotNull>
 			<isNotNull prepend="," property="documentaryType">
 				documentary_type = #documentaryType#

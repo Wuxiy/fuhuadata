@@ -6,6 +6,8 @@ import com.fuhuadata.domain.query.QueryBusinessOrder;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.BusinessOrderManager;
 import com.fuhuadata.service.BusinessOrderService;
+import com.fuhuadata.vo.BusinessInfoVO;
+import com.fuhuadata.vo.BusinessOrderVO;
 import com.fuhuadata.vo.CostAndProfitStatistics;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -74,13 +76,13 @@ public class BusinessOrderServiceImpl implements BusinessOrderService {
     }
 
     @Override
-    public Result<BusinessOrder> getBusinessOrderByOrderId(String orderId) {
-        Result<BusinessOrder> result = new Result<BusinessOrder>();
+    public Result<BusinessOrderVO> getBusinessOrderByOrderId(String orderId) {
+        Result<BusinessOrderVO> result = new Result<BusinessOrderVO>();
         try{
-            result.addDefaultModel("BusinessOrder",businessOrderManager.getBusinessOrderByOrderId(orderId));
+            result.addDefaultModel("BusinessOrderInfo",businessOrderManager.getBusinessOrderAllInfo(orderId));
         }catch(Exception e){
             result.setSuccess(false);
-            log.error("根据id获取报价信息错误",e);
+            log.error("根据id获取报价订单信息错误",e);
         }
         return result;
     }

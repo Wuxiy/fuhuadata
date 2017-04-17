@@ -4,6 +4,8 @@
 <sqlMap namespace="BUSINESSORDERPRODUCT" >
     <typeAlias alias="BusinessOrderProduct" type="com.fuhuadata.domain.BusinessOrderProduct"/>
     <typeAlias alias="QueryBusinessOrderProduct" type="com.fuhuadata.domain.query.QueryBusinessOrderProduct"/>
+    <typeAlias alias="BusinessOrderProductList" type="com.fuhuadata.vo.BusinessOrderProductList"/>
+
     <resultMap class="com.fuhuadata.domain.BusinessOrderProduct" id="BusinessOrderProductResultMap">
         <result column="id" jdbcType="INTEGER" property="id" />
         <result column="order_id" jdbcType="VARCHAR" property="orderId" />
@@ -31,12 +33,7 @@
         <result column="Internal_transport_price" jdbcType="DECIMAL" property="internalTransportPrice" />
         <result column="factory_id" jdbcType="VARCHAR" property="factoryId" />
         <result column="factory_name" jdbcType="VARCHAR" property="factoryName" />
-        <result column="straight_employing_way" jdbcType="INTEGER" property="straightEmployingWay" />
-        <result column="straight_employing_scale" jdbcType="DECIMAL" property="straightEmployingScale" />
-        <result column="straight_employing_standard" jdbcType="VARCHAR" property="straightEmployingStandard" />
-        <result column="potential_employing_way" jdbcType="INTEGER" property="potentialEmployingWay" />
-        <result column="potential_employing_scale" jdbcType="DECIMAL" property="potentialEmployingScale" />
-        <result column="potential_employing_standard" jdbcType="VARCHAR" property="potentialEmployingStandard" />
+        <result column="commission_price" jdbcType="DECIMAL" property="commissionPrice" />
         <result column="documentary_type" jdbcType="INTEGER" property="documentaryType" />
         <result column="documentary_require" jdbcType="VARCHAR" property="documentaryRequire" />
         <result column="other_documentary_require" jdbcType="VARCHAR" property="otherDocumentaryRequire" />
@@ -64,14 +61,14 @@
         <result column="lastmodify_user_name" jdbcType="VARCHAR" property="lastmodifyUserName" />
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
         <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+        <result column="unit_use_rate" jdbcType="DECIMAL" property="unitUseRate"/>
     </resultMap>
     <select id="getBasicById" parameterClass="java.lang.Integer" resultMap="BusinessOrderProductResultMap">
         select
             order_id,archive_product_id,product_id,ware_id,customs_clearance_id,customs_clearance_name,customer_id,name,
             customer_product_name,brand,main_product_amount,main_product_unit,sub_product_amount,sub_product_unit,
-            convert_rate,price_type,advise_price,purchase_price,delivery_time,factory_id,factory_name,straight_employing_way,
-            straight_employing_scale,straight_employing_standard,potential_employing_way,potential_employing_scale,potential_employing_standard,
-            tax_type,tax_free,other_cost,process_cost
+            convert_rate,price_type,advise_price,purchase_price,delivery_time,factory_id,factory_name,commission_price,
+            tax_type,tax_free,other_cost,process_cost,unit_use_rate
         from business_order_product
         where id=#id#
     </select>
@@ -109,16 +106,15 @@
         insert into business_order_product(
             order_id,archive_product_id,product_id,ware_id,customs_clearance_id,customs_clearance_name,customer_id,name,
             customer_product_name,brand,main_product_amount,main_product_unit,sub_product_amount,sub_product_unit,
-            convert_rate,price_type,advise_price,purchase_price,delivery_time,factory_id,factory_name,straight_employing_way,
-            straight_employing_scale,straight_employing_standard,potential_employing_way,potential_employing_scale,potential_employing_standard,
-            tax_type,tax_free,other_cost,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time
+            convert_rate,price_type,advise_price,purchase_price,delivery_time,factory_id,factory_name,commission_price,
+            tax_type,tax_free,other_cost,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time,
+        unit_use_rate
         )
         values(
         #orderId#,#archiveProductId#,#productId#,#wareId#,#customsClearanceId#,#customsClearanceName#,#customerId#,#name#,
         #customerProductName#,#brand#,#mainProductAmount#,#mainProductUnit#,#subProductAmount#,#subProductUnit#,
-        #convertRate#,#priceType#,#advisePrice#,#purchasePrice#,#deliveryTime#,#factoryId#,#factoryName#,#straightEmployingWay#,
-        #straightEmployingScale#,#straightEmployingStandard#,#potentialEmployingWay#,#potentialEmployingScale#,#potentialEmployingStandard#,
-        #taxType#,#taxFree#,#otherCost#,#createUserId#,#createUserName#,#createUserId#,#createUserName# ,now(),now()
+        #convertRate#,#priceType#,#advisePrice#,#purchasePrice#,#deliveryTime#,#factoryId#,#factoryName#,#commissionPrice#,
+        #taxType#,#taxFree#,#otherCost#,#createUserId#,#createUserName#,#createUserId#,#createUserName# ,now(),now(),#unitUseRate#
         )
         <selectKey resultClass="java.lang.Integer" keyProperty="id">
             SELECT @@IDENTITY AS ID
@@ -131,14 +127,12 @@
         Internal_supply_name, customer_id, name, customer_product_name, brand, main_product_amount,
         main_product_unit, sub_product_amount, sub_product_unit, convert_rate, price_type,
         advise_price, purchase_price, delivery_time, Internal_transport_mode,
-        Internal_transport_price, factory_id, factory_name, straight_employing_way,
-        straight_employing_scale, straight_employing_standard, potential_employing_way,
-        potential_employing_scale, potential_employing_standard, documentary_type,
+        Internal_transport_price, factory_id, factory_name, commission_price, documentary_type,
         documentary_require, other_documentary_require, shipping_agent_require, package_require,
         goods_type, mianxiangqi, miantuiqi, cupboard_type, cupboard_per_number, cupboard_number,
         ocean_freight, port_surcharge, tax_type, tax_free, gross_margin, process_cost,other_cost, min_price,
         contract_price, transform_state, create_user_id, create_user_name, lastmodify_user_id,
-        lastmodify_user_name, create_time, modify_time)
+        lastmodify_user_name, create_time, modify_time,unit_use_rate)
 
         (select
         #orderId# as order_id,#archiveProductId# as archive_product_id, product_id,
@@ -146,14 +140,12 @@
         Internal_supply_name, customer_id, name, customer_product_name, brand, main_product_amount,
         main_product_unit, sub_product_amount, sub_product_unit, convert_rate, price_type,
         advise_price, purchase_price, delivery_time, Internal_transport_mode,
-        Internal_transport_price, factory_id, factory_name, straight_employing_way,
-        straight_employing_scale, straight_employing_standard, potential_employing_way,
-        potential_employing_scale, potential_employing_standard, documentary_type,
+        Internal_transport_price, factory_id, factory_name, commission_price, documentary_type,
         documentary_require, other_documentary_require, shipping_agent_require, package_require,
         goods_type, mianxiangqi, miantuiqi, cupboard_type, cupboard_per_number, cupboard_number,
         ocean_freight, port_surcharge, tax_type, tax_free, gross_margin,process_cost, other_cost, min_price,
         contract_price, 0 as transform_state, #createUserId#, #createUserName#, #createUserId#,
-        #createUserName#, now(), now()
+        #createUserName#, now(), now(),unit_use_rate
         from customer_product_archives
         where id = #archiveProductId#)
         <selectKey resultClass="java.lang.Integer" keyProperty="id">
@@ -166,6 +158,9 @@
         <dynamic prepend="set">
             <isNotNull prepend="," property="orderId">
                 order_id = #orderId#
+            </isNotNull>
+            <isNotNull prepend="," property="unitUseRate">
+                unit_use_rate = #unitUseRate#
             </isNotNull>
             <isNotNull prepend="," property="archiveProductId">
                 archive_product_id = #archiveProductId#
@@ -233,24 +228,10 @@
             <isNotNull prepend="," property="factoryName">
                 factory_name = #factoryName#
             </isNotNull>
-            <isNotNull prepend="," property="straightEmployingWay">
-                straight_employing_way = #straightEmployingWay#
+            <isNotNull prepend="," property="commissionPrice">
+                commission_price = #commissionPrice#
             </isNotNull>
-            <isNotNull prepend="," property="straightEmployingScale">
-                straight_employing_scale = #straightEmployingScale#
-            </isNotNull>
-            <isNotNull prepend="," property="straightEmployingStandard">
-                straight_employing_standard = #straightEmployingStandard#
-            </isNotNull>
-            <isNotNull prepend="," property="potentialEmployingWay">
-                potential_employing_way = #potentialEmployingWay#
-            </isNotNull>
-            <isNotNull prepend="," property="potentialEmployingScale">
-                potential_employing_scale = #potentialEmployingScale#
-            </isNotNull>
-            <isNotNull prepend="," property="potentialEmployingStandard">
-                potential_employing_standard = #potentialEmployingStandard#
-            </isNotNull>
+
             <isNotNull prepend="," property="documentaryType">
                 documentary_type = #documentaryType#
             </isNotNull>
@@ -372,6 +353,48 @@
         UNION
         SELECT  ifnull(total_cost,0) FROM `k_preparation_process_cost` c,business_order_product p  WHERE c.process_factory=p.factory_name and p.id=#value#  AND c.type=1
         ) a
+    </select>
+
+
+    <resultMap id="CUSTOMER-ORDER-PRODUCT-LIST-MAP" class="BusinessOrderProductList">
+        <result property="orderId" column="order_id" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="orderProductId" column="id" jdbcType="INT" javaType="java.lang.Integer"/>
+        <result property="productName" column="name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="productCode" column="product_code" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="categoryName" column="category_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="brand" column="brand" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="specification" column="specification" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="model" column="model" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="mainProductAmount" column="main_product_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+        <result property="cupboardPerNumber" column="cupboard_number" jdbcType="INT" javaType="java.lang.Integer"/>
+        <result property="cupboardNumber" column="cupboard_per_number" jdbcType="INT" javaType="java.lang.Integer"/>
+        <result property="cupboardType" column="cupboard_type" jdbcType="INT" javaType="java.lang.Integer"/>
+        <result property="deliveryTime" column="delivery_time" jdbcType="DATETIME" javaType="java.sql.Timestamp"/>
+        <result property="minPrice" column="min_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+        <result property="customerProductName" column="customer_product_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    </resultMap>
+
+    <select id="GET-ORDER-PRODUCT-LIST" parameterClass="java.lang.String" resultMap="CUSTOMER-ORDER-PRODUCT-LIST-MAP">
+        SELECT
+        bop.order_id,
+        bop.id,
+        bop.`name`,
+        bi.product_code,
+        bi.category_name,
+        bop.customer_product_name,
+        bop.brand,
+        pw.specification,
+        pw.model,
+        bop.main_product_amount,
+        bop.cupboard_number,
+        bop.cupboard_per_number,
+        bop.cupboard_type,
+        bop.delivery_time,
+        bop.min_price
+        FROM
+        business_order_product bop
+        LEFT JOIN product_ware pw ON pw.ware_id = bop.ware_id
+        left JOIN product_info bi ON bi.product_id = bop.product_id
     </select>
 
 </sqlMap>

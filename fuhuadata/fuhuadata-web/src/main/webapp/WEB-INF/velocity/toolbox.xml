@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <tools>
+    <!-- 属性，可在模板中使用 -->
     <data type="boolean" key="xhtml" value="true"/>
     <data type="boolean" key="isSimple" value="true"/>
     <data type="number" key="version" value="2.0"/>
@@ -18,5 +19,6 @@
     <toolbox scope="application">
         <!-- <tool key="map" class="java.util.HashMap"/> -->
         <!--<tool key="dateUtil" class="com.yonge.web.util.DateUtil"/>-->
+        <tool key="shiro" class="com.fuhuadata.shiro.web.support.velocity.Permission"/>
     </toolbox>
 </tools>

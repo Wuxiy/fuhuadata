@@ -186,6 +186,26 @@ public class BusinessOrderProduct {
 
     /**内部供货单位**/
     private String internalSupplyName;
+    //单位耗用比例
+    private BigDecimal unitUseRate;
+    //佣金单价
+    private BigDecimal commissionPrice;
+
+    public BigDecimal getCommissionPrice() {
+        return commissionPrice;
+    }
+
+    public void setCommissionPrice(BigDecimal commissionPrice) {
+        this.commissionPrice = commissionPrice;
+    }
+
+    public BigDecimal getUnitUseRate() {
+        return unitUseRate;
+    }
+
+    public void setUnitUseRate(BigDecimal unitUseRate) {
+        this.unitUseRate = unitUseRate;
+    }
 
     public BigDecimal getProcessCost() {
         return processCost;

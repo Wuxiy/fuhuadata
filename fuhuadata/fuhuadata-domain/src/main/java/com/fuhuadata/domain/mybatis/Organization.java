@@ -114,7 +114,7 @@ public class Organization extends BaseEntity<Integer> implements Treeable<Intege
     @JsonIgnore
     @Override
     public boolean isRoot() {
-        return false;
+        return getParentId() == null || getParentId() == 0;
     }
 
     @JsonIgnore

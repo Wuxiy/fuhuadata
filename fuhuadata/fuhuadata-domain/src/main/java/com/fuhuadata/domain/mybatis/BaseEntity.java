@@ -6,7 +6,7 @@ import java.io.Serializable;
  * <p>User: wangjie
  * <p>Date: 3/23/2017
  */
-public abstract class BaseEntity<ID extends Serializable> {
+public abstract class BaseEntity<ID extends Serializable> implements Serializable {
 
     public abstract void setId(ID id);
 

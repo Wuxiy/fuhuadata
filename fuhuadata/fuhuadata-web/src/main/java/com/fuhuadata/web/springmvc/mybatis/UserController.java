@@ -8,8 +8,8 @@ import com.fuhuadata.service.mybatis.UserService;
 import com.fuhuadata.vo.MixNodeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -37,7 +37,7 @@ public class UserController extends BaseController<UserAccount, Integer> {
         this.deptService = deptService;
     }
 
-    @GetMapping("/org/tree")
+    @RequestMapping(value = "/org/tree", method = RequestMethod.GET)
     @ResponseBody
     public ResultPojo orgAndDeptTree() {
         Result<List<MixNodeVO>> result = Result.newResult(false);
@@ -48,13 +48,13 @@ public class UserController extends BaseController<UserAccount, Integer> {
         return result.getResultPojo();
     }
 
-    @GetMapping("/dept/users")
+    @RequestMapping(value = "/dept/users", method = RequestMethod.GET)
     @ResponseBody
     public List<MixNodeVO> getUserTreeByDept(@RequestParam("pid") String deptId) {
         return userService.listUserNodesByDept(deptId);
     }
 
-    @GetMapping("/role/depts/tree")
+    @RequestMapping(value = "/role/depts/tree", method = RequestMethod.GET)
     @ResponseBody
     public ResultPojo getRoleTree(@RequestParam("roleId") Integer roleId) {
         Result<List<MixNodeVO>> result = Result.newResult(false);

@@ -3,6 +3,7 @@ package com.fuhuadata.service.impl.mybatis;
 import com.fuhuadata.dao.mapper.RoleAuthorityMapper;
 import com.fuhuadata.domain.mybatis.RoleAuthority;
 import com.fuhuadata.service.mybatis.RoleAuthorityService;
+import com.fuhuadata.service.util.LoginUtils;
 import com.google.common.collect.Lists;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -26,8 +27,9 @@ public class RoleAuthorityServiceImpl extends BaseServiceImpl<RoleAuthority, Int
 
         for (RoleAuthority authority : auths) {
             authority.setRoleId(roleId);
+            authority.setAuthUserId(LoginUtils.getLoginId());
+            authority.setAuthUserName(LoginUtils.getLoginName());
             authority.setAuthTime(new Date());
-            // TODO: 4/6/2017 添加授权人
         }
 
         deleteAuthOfRole(roleId);
@@ -58,7 +60,9 @@ public class RoleAuthorityServiceImpl extends BaseServiceImpl<RoleAuthority, Int
             }
             roleAuthority.setId(auth.getId());
             roleAuthority.setPermissionIds(auth.getPermissionIds());
-            // TODO: 4/6/2017 添加授权人
+            roleAuthority.setAuthUserId(LoginUtils.getLoginId());
+            roleAuthority.setAuthUserName(LoginUtils.getLoginName());
+            roleAuthority.setAuthTime(new Date());
 
             authsForUpdate.add(roleAuthority);
         }

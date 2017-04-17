@@ -14,7 +14,7 @@ public interface RoleMapper extends BaseMapper<Role, Integer> {
      * @param parentId
      * @param parents 该节点作为父节点的字符串
      */
-    void deleteSelfAndChildren(@Param("parentId") Integer parentId, @Param("parents") String parents);
+    void deleteSelfAndChildren(@Param("roleId") Integer parentId, @Param("parents") String parents);
 
     int countNextIndex(@Param("parentId") Integer parentId);
 

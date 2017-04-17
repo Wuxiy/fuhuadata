@@ -96,6 +96,19 @@ public class CustomerBaseInfo implements Serializable{
 	private String countryzone;
 
 
+	/**时区name**/
+	private String timezoneName;
+
+	/**客户基本分类name**/
+	private String custclassName;
+
+	/**数据格式name**/
+	private String formatdocName;
+
+	/**贸易国别name**/
+	private String countryzoneName;
+
+
 	/*活跃周期*/
 	private Integer activePeriod;
 
@@ -697,5 +710,37 @@ public class CustomerBaseInfo implements Serializable{
 
 	public void setEncyId(String encyId) {
 		this.encyId = encyId;
+	}
+
+	public String getTimezoneName() {
+		return timezoneName;
+	}
+
+	public void setTimezoneName(String timezoneName) {
+		this.timezoneName = timezoneName;
+	}
+
+	public String getCustclassName() {
+		return custclassName;
+	}
+
+	public void setCustclassName(String custclassName) {
+		this.custclassName = custclassName;
+	}
+
+	public String getFormatdocName() {
+		return formatdocName;
+	}
+
+	public void setFormatdocName(String formatdocName) {
+		this.formatdocName = formatdocName;
+	}
+
+	public String getCountryzoneName() {
+		return countryzoneName;
+	}
+
+	public void setCountryzoneName(String countryzoneName) {
+		this.countryzoneName = countryzoneName;
 	}
 }

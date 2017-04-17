@@ -4,9 +4,11 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
-         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
          http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <context:property-placeholder location="classpath:resources.properties"/>
 
     <!-- 自动扫描,完成bean创建和依赖注入 -->
     <context:component-scan base-package="com.fuhuadata">
@@ -51,6 +53,8 @@
 
     <!-- 配置Velocity视图解析器 ，将后缀为vm的文件交给下面的Resolver处理-->
     <bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+        <!-- velocity tool 2.0 使用 View -->
+        <property name="viewClass" value="com.fuhuadata.web.velocity.VelocityToolbox20View"/>
         <!--线上环境设置为true-->
         <property name="cache" value="false"/><!--是否缓存模板-->
         <property name="prefix" value="/"/>
@@ -61,6 +65,7 @@
         <property name="exposeSpringMacroHelpers" value="true"/><!--是否使用spring对宏定义的支持-->
         <property name="exposeRequestAttributes" value="true"/><!--是否开放request属性-->
         <property name="requestContextAttribute" value="rc"/><!--request属性引用名称-->
+        <property name="exposeSessionAttributes" value="true"/><!-- 是否开放 session 属性 -->
 
         <property name="layoutKey" value="layout"/><!-- layoutKey设定模板文件键值，设定该值后就可以在vm文件中使用该键值设置模板路径-->
         <property name="screenContentKey" value="screen_content"/>
@@ -82,4 +87,5 @@
         <property name="maxUploadSize" value="10485760000"/>
         <property name="maxInMemorySize" value="40960"/>
     </bean>
+
 </beans>

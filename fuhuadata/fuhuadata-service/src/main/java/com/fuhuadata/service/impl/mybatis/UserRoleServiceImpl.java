@@ -4,11 +4,13 @@ import com.fuhuadata.dao.mapper.UserRoleMapper;
 import com.fuhuadata.domain.mybatis.UserAccount;
 import com.fuhuadata.domain.mybatis.UserRole;
 import com.fuhuadata.service.mybatis.UserRoleService;
+import com.google.common.collect.Sets;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  * <p>User: wangjie
@@ -46,6 +48,12 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRole, Integer> impl
         }
 
         return getUserRoleMapper().listUserAccountsByRoleId(roleId);
+    }
+
+    @Override
+    public Set<Integer> getRoleIds(Integer userId) {
+        List<Integer> roleIdList = getUserRoleMapper().listRoleIdsByUserId(userId);
+        return Sets.newHashSet(roleIdList);
     }
 
     @Override

@@ -1,297 +1,332 @@
- <!--副导航-->
+<!--副导航-->
 <div class="nav-deputy shadow-out clearfix">
-    <ul class="breadcrumb pull-right">
-        <li><span class="glyphicon glyphicon-map-marker"></span></li>
-        <li>
-            <a href="" lang="zh">系统管理</a>
-        </li>
-        <li class="active" lang="zh">菜单管理</li>
-    </ul>
+  <ul class="breadcrumb pull-right">
+    <li><span class="glyphicon glyphicon-map-marker"></span></li>
+    <li>
+      <a href="" lang="zh">系统管理</a>
+    </li>
+    <li class="active" lang="zh">菜单管理</li>
+  </ul>
 </div>
 <!--表格容器-->
 <div class="dashboard-wrapper">
-    <div class="col-xs-2">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title" lang="zh">菜单列表</h3>
-            </div>
-            <div id="menuAside" class="panel-body tree-container"></div>
-        </div>
+  <div class="col-xs-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title" lang="zh">菜单列表</h3>
+      </div>
+      <div id="menuAside" class="panel-body tree-container"></div>
     </div>
-    <div class="col-xs-10  view-HD-lg">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <button id="addMenuItem" class="btn btn-xs btn-primary pull-right panel-heading-btn">新增</button>
-                <h3 class="panel-title" lang="zh">菜单管理</h3>
-            </div>
-            <div class="panel-body panel-edit">
-                <div class="row">
-                    <div class="col-xs-12 form-horizontal">
-                        <!--表单-->
-                        <div class="form-group">
-                            <label for="" class="control-label col-xs-1" lang="zh">菜单编码</label>
-                            <div class="col-xs-2">
-                                <input id="menuId" type="text" class="form-control notEdit" />
-                            </div>
-                            <label for="" class="control-label col-xs-1" lang="zh">上一级菜单</label>
-                            <div class="col-xs-2">
-                                <div class="input-group">
-                                    <input id="parentName" type="text" class="form-control notEdit" />
-                                    <div class="input-group-btn">
-                                        <button id="searchingBtn" disabled class="btn btn-xs btn-default dropdown-toggle" data-toggle="modal" data-target="#treeModal" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-                                    </div>
-                                </div>
-                            </div>
-##                            modal
-                            <div class="modal fade" id="treeModal" tabindex="-1"  aria-hidden="true" data-backdrop="static">
-                                <div class="modal-dialog" style="width: 400px">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                                &times;
-                                            </button>
-                                        </div>
-                                        <div id="menuModal" class="modal-body">
-                                            <div class="input-group" data-stopPropagation="true">
-                                                <input type="text" class="form-control notDisabled" placeholder="请输入关键词查找" lang="zh" />
-                                                <div class="input-group-btn"><button class="btn btn-xs btn-primary" type="submit"><span class="glyphicon glyphicon-search"></span></button></div>
-                                            </div>
-                                            <hr />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="form-group text-right">
-                            <label for="" class="control-label col-xs-1" lang="zh">菜单名称</label>
-                            <div class="col-xs-2"><input id="name" type="text" class="form-control" value="" /></div>
-                            <label for="" class="control-label col-xs-1" lang="zh">页面路径</label>
-                            <div class="col-xs-2"><input id="Url" class="form-control" type="text" value="" /></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="control-label col-xs-1" lang="zh">启用状态</label>
-                            <div class="col-xs-2">
-                                <select id="enablestate" class="form-control">
-                                    <option value="1" lang="zh">已启用</option>
-                                    <option value="0" lang="zh">已禁用</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group"></div>
-                        <div id="btnGroup" class="form-group hidden">
-                            <div class="col-xs-1 col-xs-offset-2"><button id="cancel" class="btn btn-block btn-xs btn-default">取消</button></div>
-                            <div class="col-xs-1"><button id="save" class="btn btn-block btn-xs btn-primary">保存</button></div>
-                        </div>
-                    </div>
+  </div>
+  <div class="col-xs-10  view-HD-lg">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right">
+          <button id="delete" data-btn="del" data-view="editHide" class="btn btn-xs btn-danger" lang="zh">删除</button>
+          <button id="addMenuItem" data-btn="edit" data-view="editHide" class="btn btn-xs btn-primary" type="button"
+                  lang="zh">
+            新增
+          </button>
+        </div>
+        <h3 class="panel-title" lang="zh">菜单管理</h3>
+      </div>
+      <div class="panel-body panel-edit">
+        <div class="row">
+          <div class="col-xs-12 form-horizontal">
+            <!--表单-->
+            <div class="form-group">
+              <label for="" class="control-label col-xs-1" lang="zh">菜单编码</label>
+              <div class="col-xs-2">
+                <input id="menuId" type="text" class="form-control notEdit"/>
+              </div>
+              <label for="" class="control-label col-xs-1" lang="zh">上一级菜单</label>
+              <div class="col-xs-2">
+                <div class="input-group">
+                  <input id="parentName" type="text" class="form-control notEdit"/>
+                  <div class="input-group-btn">
+                    <button id="searchingBtn" disabled class="btn btn-xs btn-default dropdown-toggle"
+                            data-toggle="modal" data-target="#treeModal" type="submit"><span
+                        class="glyphicon glyphicon-search"></span></button>
+                  </div>
                 </div>
+              </div>
+            ##                            modal
+              <div class="modal fade" id="treeModal" tabindex="-1" aria-hidden="true" data-backdrop="static">
+                <div class="modal-dialog" style="width: 400px">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                      </button>
+                    </div>
+                    <div id="menuModal" class="modal-body">
+                      <div class="input-group" data-stopPropagation="true">
+                        <input type="text" class="form-control notDisabled" placeholder="请输入关键词查找" lang="zh"/>
+                        <div class="input-group-btn">
+                          <button class="btn btn-xs btn-primary" type="submit"><span
+                              class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                      </div>
+                      <hr/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
+            <div class="form-group text-right">
+              <label for="" class="control-label col-xs-1" lang="zh">菜单名称</label>
+              <div class="col-xs-2"><input id="name" type="text" class="form-control" value=""/></div>
+              <label for="" class="control-label col-xs-1" lang="zh">页面路径</label>
+              <div class="col-xs-2"><input id="Url" class="form-control" type="text" value=""/></div>
+            </div>
+            <div class="form-group">
+              <label for="" class="control-label col-xs-1" lang="zh">启用状态</label>
+              <div class="col-xs-2">
+                <select id="enablestate" class="form-control">
+                  <option value="1" lang="zh">已启用</option>
+                  <option value="0" lang="zh">已禁用</option>
+                </select>
+              </div>
+              <label for="" class="control-label col-xs-1" lang="zh">菜单标识</label>
+              <div class="col-xs-2"><input id="identity" class="form-control" type="text" value=""/></div>
+            </div>
+            <div class="form-group"></div>
+            <div id="btnGroup" class="form-group hidden">
+              <div class="col-xs-1 col-xs-offset-2">
+                <button id="cancel" class="btn btn-block btn-xs btn-default">取消</button>
+              </div>
+              <div class="col-xs-1">
+                <button id="save" class="btn btn-block btn-xs btn-primary">保存</button>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
- <input id="parentId" type="hidden" value="" class=""/>
+<input id="parentId" type="hidden" value="" class=""/>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script>
-    $(function () {
+  $(function () {
+
+    //创建树菜单
+    creatTrees();
+
+    //给menuAside树添加更改顺序按钮
+    addSortBtn()
+
+    //上升
+    $(document).on('click.moveUp', '[name="upwardBtn"]', function () {
+      var thisId = $(this).parents('li').attr('id');
+      var prevId = $(this).parents('li').prev('li').attr('id');
+      var obj = {
+        tid: prevId,
+        sid: thisId
+      };
+
+      //排序
+      replaceIndex(obj);
+    });
+
+    //下降
+    $(document).on('click.moveUp', '[name="downWardBtn"]', function () {
+      var thisId = $(this).parents('li').attr('id');
+      var nextId = $(this).parents('li').next('li').attr('id');
+      var obj = {
+        tid: thisId,
+        sid: nextId
+      };
+
+      //排序
+      replaceIndex(obj);
+    });
+
+    //禁用表单控件
+    forbiddenForm();
+
+    //侧边菜单树
+    $(document).on('click.tree.s', '#menuAside .tree a', function (e) {
+      e.preventDefault();
+
+      //更改样式
+      var thisEl = $(this);
+      var par = thisEl.parents('.tree');
+      par.find('li').removeClass('active');
+      thisEl.parent('li').addClass('active');
+
+      //添加数据
+      var thisId = thisEl.parent('li').attr('id');
+      getMenuDetails(thisId, renderMenu);
+
+    });
+
+    //modal菜单树
+    $(document).on('click.tree.m', '#menuModal .tree a', function (e) {
+      e.preventDefault();
+      var thisId = $(this).parent('li').attr('id').slice('0', '-1');
+      var thisTxt = $(this).text();
+      var close = $('#treeModal').find('.close');
+
+      //添加数据
+      if (thisId) {
+        $('#parentName').val(thisTxt);
+        $('#parentId').val(thisId);
+      }
+
+      //关闭modal
+      close.click();
+    });
+
+    $(document).on('click.delete', '#delete', function (e) {
+
+      var menuId = $('#parentId').val();
+      if (menuId == null || menuId == "") {
+        alert("请选择需要删除的菜单！");
+        return false;
+      } else if (menuId == 0) {
+        alert("根节点不能删除！");
+        return false;
+      } else if (!confirm("确认删除该菜单？")) {
+        return false;
+      }
+
+      $.post('/sys/menu/ajax/' + menuId + '/remove', function (data) {
+        alert("删除成功！");
+        location.reload();
+      });
+    });
+
+    //添加
+    $(document).on('click.up', '#addMenuItem', function () {
+      var thisEl = $(this);
+      thisEl.addClass('hidden');
+      $('#delete').addClass('hidden');
+      $('#btnGroup').removeClass('hidden');
+      $('input,#searchingBtn', '.panel-body').not('.notEdit').removeAttr('disabled');
+//            $(document).off('.tree.s');
+      $('#menuAside').parents('.panel').fadeOut();
+
+      //以当前节点的id和name作为父节点的id和name
+      if ($('#menuId').val() != '') {
+        $('#parentName').val($('#name').val());
+        $('#parentId').val($('#menuId').val());
+      }
+      $('#name,#menuId,#Url,#identity').val('');
+    });
+
+    //保存
+    $(document).on('click.up', '#save', function () {
+      var menuData = setMenuObj();
+
+      jQuery.ajax({
+        url: '/sys/menu/ajax/add',
+        type: 'POST',
+        data: menuData
+      }).done(function (result) {
+        console.log(result);
+        var thisId = result.data;
+        creatTrees();
+        addSortBtn()
+        getMenuDetails(thisId, renderMenu);
+      });
+
+      $('#delete').removeClass('hidden');
+      $('#addMenuItem').removeClass('hidden');
+      $('#btnGroup').addClass('hidden');
+      $('#menuAside').parents('.panel').fadeIn();
+      forbiddenForm();
+//            $(document).on('.tree.s');
+    });
+
+    //取消
+    $(document).on('click.cencel', '#cancel', function () {
+      location.reload();
+    });
+
+    //取得表单数据
+    function setMenuObj() {
+      var obj = {
+        parentId: ($('#parentId').val() == '' ? 0 : $('#parentId').val()),
+        name: $('#name').val(),
+        url: $('#Url').val(),
+        enablestate: $('#enablestate').val(),
+        identity: $('#identity').val()
+      };
+      return obj;
+    }
+
+    //禁用表单
+    function forbiddenForm() {
+      $('input,#searchingBtn', '.panel-edit').not('.notDisabled').attr('disabled', 'disabled');
+    }
+
+    //取得数据
+    function getMenuDetails(id, callback) {
+      jQuery.ajax({
+        url: '/sys/menu/ajax/' + id,
+        type: 'GET'
+      }).done(callback);
+    }
+
+    //渲染表单
+    function renderMenu(result) {
+      $('#menuId,#parentId,#name,#Url,#parentName,#identity').val('');
+      if (result.data != null) {
+        var data = result.data;
+        $('#menuId').val(data.menuId);
+        $('#parentId').val(data.parentId);
+        $('#name').val(data.name);
+        $('#Url').val(data.url);
+        $('#enablestate').val(data.enablestate);
+        $('#parentName').val(data.parentName);
+        $('#identity').val(data.identity);
+      }
+    }
+
+    //构造菜单树
+    function creatTrees() {
+      var tree = $('<div class="tree"></div>');
+      var modalTree = $('<div class="tree"></div>');
+      modalTree.creatTree('${request.contextPath}/sys/menu/ajax/load?async=false');
+      tree.creatTree('${request.contextPath}/sys/menu/ajax/load?async=false');
+      $('#menuAside').html('').append(tree);
+      $('#menuModal').html('').append(modalTree).find('[id]').each(function () {
+
+        //因为id重复了，这里给menuModal中的所有的id加一个后缀
+        $(this).attr('id', function (i, old) {
+          return old + 'm';
+        })
+      });
+    }
+
+    //创建排序按钮
+    function addSortBtn() {
+      var upDownBtn = '<button name="upwardBtn" class="btn-link" style="height: 21px;border: 0">' +
+          '<span class="glyphicon glyphicon-arrow-up"></span></button>' +
+          '<button name="downWardBtn" class="btn-link" style="height: 21px;border: 0">' +
+          '<span class="glyphicon glyphicon-arrow-down"></span></button>';
+      $('#menuAside .tree-branch').find('a').after(upDownBtn);
+      $('.tree-branch', '#menuAside').find('li:first-child').children('[name="upwardBtn"]').attr('disabled', 'disabled').children('span').css('color', '#eee');
+      $('.tree-branch', '#menuAside').find('li:last-child').children('[name="downWardBtn"]').attr('disabled', 'disabled').children('span').css('color', '#eee');
+    }
+
+    //排序
+    function replaceIndex(data) {
+      jQuery.ajax({
+        url: basePath + '/sys/menu/ajax/move',
+        type: 'POST',
+        data: data
+      }).done(function () {
 
         //创建树菜单
         creatTrees();
 
         //给menuAside树添加更改顺序按钮
         addSortBtn()
-
-        //上升
-        $(document).on('click.moveUp','[name="upwardBtn"]',function () {
-            var thisId = $(this).parents('li').attr('id');
-            var prevId = $(this).parents('li').prev('li').attr('id');
-            var obj = {
-                tid:prevId,
-                sid:thisId
-            };
-
-            //排序
-            replaceIndex(obj);
-        });
-
-        //下降
-        $(document).on('click.moveUp','[name="downWardBtn"]',function () {
-            var thisId = $(this).parents('li').attr('id');
-            var nextId = $(this).parents('li').next('li').attr('id');
-            var obj = {
-                tid:thisId,
-                sid:nextId
-            };
-
-            //排序
-            replaceIndex(obj);
-        });
-
-        //禁用表单控件
-        forbiddenForm();
-
-        //侧边菜单树
-        $(document).on('click.tree.s','#menuAside .tree a',function (e) {
-            e.preventDefault();
-
-            //更改样式
-            var thisEl = $(this);
-            var par = thisEl.parents('.tree');
-            par.find('li').removeClass('active');
-            thisEl.parent('li').addClass('active');
-
-            //添加数据
-            var thisId = thisEl.parent('li').attr('id');
-            getMenuDetails(thisId,renderMenu);
-
-        });
-
-        //modal菜单树
-        $(document).on('click.tree.m','#menuModal .tree a',function (e) {
-            e.preventDefault();
-            var thisId = $(this).parent('li').attr('id').slice('0','-1');
-            var thisTxt = $(this).text();
-            var close = $('#treeModal').find('.close');
-
-            //添加数据
-            if(thisId){
-                $('#parentName').val(thisTxt);
-                $('#parentId').val(thisId);
-            }
-
-            //关闭modal
-            close.click();
-        });
-
-        //添加
-        $(document).on('click.up','#addMenuItem',function () {
-            var thisEl = $(this);
-            thisEl.addClass('hidden');
-            $('#btnGroup').removeClass('hidden');
-            $('input,#searchingBtn','.panel-body').not('.notEdit').removeAttr('disabled');
-            $(document).off('.tree.s');
-            $('#menuAside').parents('.panel').fadeOut();
-
-            //以当前节点的id和name作为父节点的id和name
-            if($('#menuId').val()!=''){
-                $('#parentName').val($('#name').val());
-                $('#parentId').val($('#menuId').val());
-            }
-            $('#name,#menuId,#Url').val('');
-        });
-
-        //保存
-        $(document).on('click.up','#save',function () {
-            var menuData = setMenuObj();
-            console.log(menuData);
-
-            jQuery.ajax({
-                url:'/sys/menu/ajax/add',
-                type:'POST',
-                data:menuData
-            }).done(function (result) {
-                console.log(result);
-                var thisId = result.data;
-                creatTrees();
-                addSortBtn()
-                getMenuDetails(thisId,renderMenu);
-            });
-
-            $('#addMenuItem').removeClass('hidden');
-            $('#btnGroup').addClass('hidden');
-            $('#menuAside').parents('.panel').fadeIn();
-            forbiddenForm();
-            $(document).on('.tree.s');
-        });
-
-        //取消
-        $(document).on('click.cencel','#cancel',function () {
-            location.reload();
-        });
-
-        //取得表单数据
-        function setMenuObj() {
-            var obj = {
-                parentId : ($('#parentId').val()=='' ? 0:$('#parentId').val()),
-                name : $('#name').val(),
-                url : $('#Url').val(),
-                enablestate : $('#enablestate').val()
-            };
-            return obj;
-        }
-
-        //禁用表单
-        function forbiddenForm() {
-            $('input,#searchingBtn','.panel-edit').not('.notDisabled').attr('disabled','disabled');
-        }
-
-        //取得数据
-        function getMenuDetails(id,callback){
-            jQuery.ajax({
-                url:'/sys/menu/ajax/'+id,
-                type:'GET'
-            }).done(callback);
-        }
-
-        //渲染表单
-        function renderMenu(result){
-            $('#menuId,#parentId,#name,#Url,#parentName').val('');
-            if(result.data!=null){
-                var data = result.data;
-                $('#menuId').val(data.menuId);
-                $('#parentId').val(data.parentId);
-                $('#name').val(data.name);
-                $('#Url').val(data.url);
-                $('#enablestate').val(data.enablestate);
-                $('#parentName').val(data.parentName);
-            }
-        }
-
-        //构造菜单树
-        function creatTrees() {
-            var tree = $('<div class="tree"></div>');
-            var modalTree = $('<div class="tree"></div>');
-            modalTree.creatTree('${request.contextPath}/sys/menu/ajax/load?async=false');
-            tree.creatTree('${request.contextPath}/sys/menu/ajax/load?async=false');
-            $('#menuAside').html('').append(tree);
-            $('#menuModal').html('').append(modalTree).find('[id]').each(function () {
-
-                //因为id重复了，这里给menuModal中的所有的id加一个后缀
-                $(this).attr('id',function (i,old) {
-                    return old + 'm';
-                })
-            });
-        }
-
-        //创建排序按钮
-        function addSortBtn() {
-            var upDownBtn = '<button name="upwardBtn" class="btn-link" style="height: 21px;border: 0">'+
-                    '<span class="glyphicon glyphicon-arrow-up"></span></button>'+
-                    '<button name="downWardBtn" class="btn-link" style="height: 21px;border: 0">'+
-                    '<span class="glyphicon glyphicon-arrow-down"></span></button>';
-            $('#menuAside .tree-branch').find('a').after(upDownBtn);
-            $('.tree-branch','#menuAside').find('li:first-child').
-            children('[name="upwardBtn"]').attr('disabled','disabled').
-            children('span').css('color','#eee');
-            $('.tree-branch','#menuAside').find('li:last-child').
-            children('[name="downWardBtn"]').attr('disabled','disabled').
-            children('span').css('color','#eee');
-        }
-
-        //排序
-        function replaceIndex (data) {
-            jQuery.ajax({
-                url:basePath+'/sys/menu/ajax/move',
-                type:'POST',
-                data:data
-            }).done(function () {
-
-                //创建树菜单
-                creatTrees();
-
-                //给menuAside树添加更改顺序按钮
-                addSortBtn()
-            });
-        }
-    })
+      });
+    }
+  })
 
 </script>

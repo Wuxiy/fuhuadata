@@ -7,8 +7,12 @@
     <!-- 监听器 -->  
     <listener>  
        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>  
-    </listener> 
-    
+    </listener>
+    <!-- 可以使用RequestContextHolder.currentRequestAttributes() 获取到请求的attr -->
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+
     <!-- spring config -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -31,20 +35,26 @@
 	    <url-pattern>/*</url-pattern>  
     </filter-mapping>
 
-	<filter>
-		<filter-name>access</filter-name>
-		<filter-class>
-			com.fuhuadata.web.util.doFilter
-		</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>access</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+    <!-- shiro 安全过滤器 -->
+    <!-- The filter-name matches name of a 'shiroFilter' bean inside applicationContext.xml -->
+    <filter>
+        <filter-name>shiroFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <param-name>targetFilterLifecycle</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
 
+    <!-- Make sure any request you want accessible to Shiro is filtered. /* catches all -->
+    <!-- requests.  Usually this filter mapping is defined first (before all others) to -->
+    <!-- ensure that Shiro works in subsequent filters in the filter chain:             -->
+    <filter-mapping>
+        <filter-name>shiroFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
-    
-    <!-- spring mvc配置 --> 
+    <!-- spring mvc配置 -->
 	<servlet>  
 	    <servlet-name>dispacherServlet</servlet-name>  
 	    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>  
@@ -67,14 +77,23 @@
 
 	<servlet-mapping>
 	    <servlet-name>dispacherServlet</servlet-name>
-	    <url-pattern>/</url-pattern>
+	    <url-pattern>/*</url-pattern>
 	</servlet-mapping>
-
-
-
-
 
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
+
+    <error-page>
+        <error-code>400</error-code>
+        <location>/error/400</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error/404</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error/500</location>
+    </error-page>
 </web-app>

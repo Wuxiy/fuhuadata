@@ -13,6 +13,20 @@
     <name>fuhuadata-web Maven Webapp</name>
     <url>http://maven.apache.org</url>
     <dependencies>
+        <!-- 测试相关包 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>com.fuhua</groupId>
             <artifactId>fuhuadata-service</artifactId>
@@ -41,11 +55,8 @@
             <groupId>javax.servlet</groupId>
             <artifactId>jsp-api</artifactId>
         </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-        </dependency>
         <!-- servlet jsp end -->
+
         <!-- struts begin -->
         <dependency>
             <groupId>org.apache.struts</groupId>
@@ -101,14 +112,15 @@
             <artifactId>spring-context-support</artifactId>
         </dependency>
         <dependency>
-            <groupId>velocity-tools</groupId>
-            <artifactId>velocity-tools</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-tools</artifactId>
+        </dependency>
         <!-- velocity end -->
+
 
         <!-- apache commons begin -->
         <dependency>
@@ -145,6 +157,7 @@
             <artifactId>spring-aop</artifactId>
         </dependency>
     </dependencies>
+
     <build>
         <finalName>${project.artifactId}</finalName>
         <resources>

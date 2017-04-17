@@ -32,10 +32,10 @@
                                             <td lang="zh">打托（缠膜）</td>
                                             <td class="text-left">
                                                 <div class="col-xs-12">
-                                                    <label class="checkbox-inline"><input name="fullyClose" type="checkbox" value="0"/>免熏蒸托盘</label>
-                                                    <label class="checkbox-inline"><input name="fullyClose" type="checkbox" value="1"/>熏蒸托盘</label>
-                                                    <label class="checkbox-inline"><input name="fullyClose" type="checkbox" value="2"/>塑料托盘</label>
-                                                    <label class="checkbox-inline"><input name="fullyClose" type="checkbox" value="3"/>订制托盘</label>
+                                                    <label class="checkbox-inline"><input name="fullyClose" type="checkbox" value="1"/>免熏蒸托盘</label>
+                                                    <label class="checkbox-inline"><input name="fullyClose" type="checkbox" value="2"/>熏蒸托盘</label>
+                                                    <label class="checkbox-inline"><input name="fullyClose" type="checkbox" value="3"/>塑料托盘</label>
+                                                    <label class="checkbox-inline"><input name="fullyClose" type="checkbox" value="4"/>订制托盘</label>
                                                 </div>
                                             </td>
                                         </tr>
@@ -139,7 +139,7 @@
                                                     <label><input name="inspectionOfStorage" type="checkbox" value="1"/>法检</label>
                                                 </div>
                                                 <div class="col-xs-3">
-                                                    <input id="inspectionOfStorage" type="text" class="form-control" placeholder="输入机构名称"/>
+                                                    <input id="inspectionInstitution" type="text" class="form-control" placeholder="输入机构名称"/>
                                                 </div>
                                             </td>
                                         </tr>
@@ -182,33 +182,33 @@
                                 <div class="form-group">
                                     <label class="control-label col-xs-2"><span lang="zh">柜型</span></label>
                                     <div class="col-xs-2">
-                                        <select class="form-control" name="" id="">
-                                            <option value="">20GP</option>
-                                            <option value="">40GP</option>
-                                            <option value="">20HQ</option>
+                                        <select class="form-control" name="" id="cupboardType">
+                                            <option value="0">20GP</option>
+                                            <option value="1">40GP</option>
+                                            <option value="2">20HQ</option>
                                         </select>
                                     </div>
                                     <label class="control-label col-xs-2"><span lang="zh">整柜数</span></label>
                                     <div class="col-xs-2">
-                                        <input id="" class="form-control" type="text" value="" />
+                                        <input id="cupboardPerNumber" class="form-control" type="text" value="" />
                                     </div>
                                     <label class="control-label col-xs-2"><span lang="zh">柜数</span></label>
                                     <div class="col-xs-2">
-                                        <input id="" class="form-control" type="text" value="" />
+                                        <input id="cupboardNumber" class="form-control" type="text" value="" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-xs-2"><span lang="zh">海运费单价</span></label>
                                     <div class="col-xs-2">
                                         <div class="input-group">
-                                            <input id="" class="form-control" type="text" value="" />
+                                            <input id="oceanFreight" class="form-control" type="text" value="" />
                                             <span class="input-group-addon">美元</span>
                                         </div>
                                     </div>
                                     <label class="control-label col-xs-2"><span lang="zh">港杂费单价</span></label>
                                     <div class="col-xs-2">
                                         <div class="input-group">
-                                            <input id="" class="form-control" type="text" value="" />
+                                            <input id="portSurcharge" class="form-control" type="text" value="" />
                                             <span class="input-group-addon">美元</span>
                                         </div>
                                     </div>
@@ -218,8 +218,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-1 col-xs-offset-5"><a href="" class="btn btn-block btn-default" type="button">上一步</a></div>
-            <div class="col-xs-1 col-xs-offset-1"><a href="" class="btn btn-block btn-primary" type="button">完成</a></div>
+            <div class="col-xs-1 col-xs-offset-5"><a href="" class="btn btn-block btn-default" type="button" id="back">上一步</a></div>
+            <div class="col-xs-1 col-xs-offset-1"><a href="" class="btn btn-block btn-primary" type="button" id="finish">完成</a></div>
         </div>
     </div>
 </div>
@@ -231,55 +231,119 @@
 
     $(document).ready(function(){
         jQuery.ajax({
-            url:basePath + '/businessProduct/businessProductId?businessProductId=' + id,
+            url:basePath + '/businessProduct/getPackageRequire?businessProductId=' + id,
             type:'POST',
             success:function(result){
-                var PackageRequireVo = result.PackageRequireVo;
-                var businessOrderProduct = result.businessOrderProduct;
+                console.log(result);
 
+                if(result.PackageRequireVo!=undefined){
+                    var PackageRequireVo = result.PackageRequireVo;
+                    if(PackageRequireVo.tray!=undefined){
+                        switch (PackageRequireVo.tray){
+                            case 1:
+                                $('input[name="fullyClose"]')[0].attr('checked',true);
+                                break;
+                            case 2:
+                                $('input[name="fullyClose"]')[1].attr('checked',true);
+                                break;
+                            case 3:
+                                $('input[name="fullyClose"]')[2].attr('checked',true);
+                                break;
+                            case 4:
+                                $('input[name="fullyClose"]')[3].attr('checked',true);
+                                break;
+                        }
+                    }
+                    if(PackageRequireVo.PackageRequireVo!=undefined){
+                        $('#inspectionInstitution').val(PackageRequireVo.PackageRequireVo);
+                    }
+                    if(PackageRequireVo.postLabel!=undefined&&PackageRequireVo.postLabel == 1){
+                        $('#postLabel').attr('checked');
+                    }
+                    if(PackageRequireVo.basePlate!=undefined&&PackageRequireVo.basePlate == 1){
+                        $('#basePlate').attr('checked');
+                    }
+                    if(PackageRequireVo.paperboard!=undefined&&PackageRequireVo.paperboard == 1){
+                        $('#paperboard').attr('checked');
+                    }
+                    if(PackageRequireVo.gasbag!=undefined&&PackageRequireVo.gasbag == 1){
+                        $('#gasbag').attr('checked');
+                    }
+                    if(PackageRequireVo.dragNet!=undefined&&PackageRequireVo.dragNet == 1){
+                        $('#dragNet').attr('checked');
+                    }
+                    if(PackageRequireVo.fastenBelt!=undefined&&PackageRequireVo.fastenBelt == 1){
+                        $('#fastenBelt').attr('checked');
+                    }
+                    if(PackageRequireVo.barcCode!=undefined&&PackageRequireVo.barcCode == 1){
+                        $('#barcCode').attr('checked');
+                    }
+                    if(PackageRequireVo.americanDoorseal!=undefined&&PackageRequireVo.americanDoorseal == 1){
+                        $('#americanDoorseal').attr('checked');
+                    }
+                    if(PackageRequireVo.cornerProtection!=undefined&&PackageRequireVo.cornerProtection == 1){
+                        $('#cornerProtection').attr('checked');
+                    }
+                    if(PackageRequireVo.bead!=undefined&&PackageRequireVo.bead == 1){
+                        $('#bead').attr('checked');
+                    }
+                    if(PackageRequireVo.wireFixed!=undefined&&PackageRequireVo.wireFixed == 1){
+                        $('#wireFixed').attr('checked');
+                    }
+                }
+                if(result.businessOrderProduct!=undefined){
+                    var businessOrderProduct = result.businessOrderProduct;
+                    if(businessOrderProduct.mianxiangqi!=undefined){
+                        $('#mianxiangqi').val(businessOrderProduct.mianxiangqi);
+                    }
+                    if(businessOrderProduct.miantuiqi!=undefined){
+                        $('#miantuiqi').val(businessOrderProduct.miantuiqi);
+                    }
+                    if(businessOrderProduct.cupboardType!=undefined){
+                        $('#cupboardType').val(businessOrderProduct.cupboardType);
+                    }
+                    if(businessOrderProduct.cupboardPerNumber!=undefined){
+                        $('#cupboardPerNumber').val(businessOrderProduct.cupboardPerNumber);
+                    }
+                    if(businessOrderProduct.cupboardNumber!=undefined){
+                        $('#cupboardNumber').val(businessOrderProduct.cupboardNumber);
+                    }
+                    if(businessOrderProduct.oceanFreight!=undefined){
+                        $('#oceanFreight').val(businessOrderProduct.oceanFreight);
+                    }
+                    if(businessOrderProduct.portSurcharge!=undefined){
+                        $('#portSurcharge').val(businessOrderProduct.portSurcharge);
+                    }
+                    if(businessOrderProduct.shippingAgentRequire!=undefined){
+                        $('#shippingAgentRequire').val(businessOrderProduct.shippingAgentRequire);
+                    }
+                    if(businessOrderProduct.goodsType!=undefined){
+                        switch (businessOrderProduct.goodsType){
+                            case 0:
+                                $('input[name="goodsType"]')[0].attr('checked',true);
+                                break;
+                            case 1:
+                                $('input[name="goodsType"]')[1].attr('checked',true);
+                                break;
+                        }
+                    }
+                }
+            }
+        })
+    })
 
-                $('#mianxiangqi').val(PackageRequireVo.mianxiangqi);
-                $('#miantuiqi').val(PackageRequireVo.miantuiqi);
-                $('#mianxiangqi').val(PackageRequireVo.miantuiqi);
-                $('#mianxiangqi').val(PackageRequireVo.miantuiqi);
-                $('#mianxiangqi').val(PackageRequireVo.miantuiqi);
-                $('#mianxiangqi').val(PackageRequireVo.miantuiqi);
-                $('#mianxiangqi').val(PackageRequireVo.miantuiqi);
+    $('#back').click(function(){
+        window.location.href = basePath + '/businessProduct/saveDocumentaryOrPacking?businessProductId=' + $('#businessProductId').val();
+    })
 
-                if(PackageRequireVo.postLabel == 1){
-                    $('#postLabel').attr('checked');
-                }
-                if(PackageRequireVo.basePlate == 1){
-                    $('#basePlate').attr('checked');
-                }
-                if(PackageRequireVo.paperboard == 1){
-                    $('#paperboard').attr('checked');
-                }
-                if(PackageRequireVo.gasbag == 1){
-                    $('#gasbag').attr('checked');
-                }
-                if(PackageRequireVo.dragNet == 1){
-                    $('#dragNet').attr('checked');
-                }
-                if(PackageRequireVo.fastenBelt == 1){
-                    $('#fastenBelt').attr('checked');
-                }
-                if(PackageRequireVo.barcCode == 1){
-                    $('#barcCode').attr('checked');
-                }
-                if(PackageRequireVo.americanDoorseal == 1){
-                    $('#americanDoorseal').attr('checked');
-                }
-                if(PackageRequireVo.cornerProtection == 1){
-                    $('#cornerProtection').attr('checked');
-                }
-                if(PackageRequireVo.bead == 1){
-                    $('#bead').attr('checked');
-                }
-                if(PackageRequireVo.wireFixed == 1){
-                    $('#wireFixed').attr('checked');
-                }
-
+    $(document).on('click','#finish',function(){
+        jQuery.ajax({
+            url:basePath + '/businessProduct/saveDocumentaryOrPacking?businessProductId=' + id,
+            type:'POST',
+            data:getdata(),
+            contentType:"application/json",
+            success:function(result){
+                console.log(result);
             }
         })
     })
@@ -302,6 +366,36 @@
             return 0;
         }*/
         return i;
+    }
+
+    function getdata() {
+        var data = {
+            'businessProductId':$('#businessProductId').val(),
+            'inspectionInstitution':$('#inspectionInstitution').val(),
+            'tray':$('input[name="fullyClose"]:checked').val(),
+            'inspectionOfLoading':$('input[name="inspectionOfStorage"]:checked').val(),
+            'postLabel':checked($('#postLabel')),
+            'basePlate':checked($('#basePlate')),
+            'paperBoard':checked($('#paperBoard')),
+            'gasbag':checked($('#gasbag')),
+            'dragNet':checked($('#dragNet')),
+            'fastenBelt':checked($('#fastenBelt')),
+            'barcCode':checked($('#barcCode')),
+            'americanDoorseal':checked($('#americanDoorseal')),
+            'bead':checked($('#bead')),
+            'cornerProtection':checked($('#cornerProtection')),
+            'inspectionInstitution':checked($('#inspectionInstitution')),
+            'wireFixed':checked($('#wireFixed')),
+            'shippingAgentRequire':$('#shippingAgentRequire').val(),
+            'mianxiangqi':$('#mianxiangqi').val(),
+            'miantuiqi':$('#miantuiqi').val(),
+            'cupboardType':$('#cupboardType').val(),
+            'cupboardPerNumber':$('#cupboardPerNumber').val(),
+            'cupboardNumber':$('#cupboardNumber').val(),
+            'oceanFreight':$('#oceanFreight').val(),
+            'portSurcharge':$('#portSurcharge').val()
+        }
+        return JSON.stringify(data);
     }
 </script>
 

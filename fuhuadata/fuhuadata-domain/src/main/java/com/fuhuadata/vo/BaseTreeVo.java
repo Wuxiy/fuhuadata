@@ -16,8 +16,9 @@ public class BaseTreeVo<ID extends Serializable> implements Serializable {
     private ID cid;// 当前节点id
     private ID pid;// 父节点id
     private String cname;// 当前节点名称
-    private Boolean isParent;// 是否是父节点
-    private Boolean open = false;// 节点是否展开
+    private boolean isParent;// 是否是父节点
+    private boolean root;// 是否是根节点
+    private boolean open = false;// 节点是否展开
     private List<BaseTreeVo<ID>> nodes;// 子节点集合
 
     public ID getCid() {
@@ -57,7 +58,7 @@ public class BaseTreeVo<ID extends Serializable> implements Serializable {
      *
      * @param child
      */
-    public void addChildNode(BaseTreeVo child) {
+    public void addChildNode(BaseTreeVo<ID> child) {
         if (this.nodes == null) {
             this.nodes = Lists.newArrayList();
         }
@@ -65,19 +66,27 @@ public class BaseTreeVo<ID extends Serializable> implements Serializable {
         nodes.add(child);
     }
 
-    public Boolean getIsParent() {
+    public boolean getIsParent() {
         return isParent;
     }
 
-    public void setIsParent(Boolean parent) {
+    public void setIsParent(boolean parent) {
         isParent = parent;
     }
 
-    public Boolean getOpen() {
+    public boolean getOpen() {
         return open;
     }
 
-    public void setOpen(Boolean open) {
+    public void setOpen(boolean open) {
         this.open = open;
+    }
+
+    public Boolean isRoot() {
+        return root;
+    }
+
+    public void setRoot(boolean root) {
+        this.root = root;
     }
 }

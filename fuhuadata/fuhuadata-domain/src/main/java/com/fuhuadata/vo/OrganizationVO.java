@@ -9,7 +9,7 @@ public class OrganizationVO extends BaseTreeVo<Integer> {
     private String ncId;
 
     @Override
-    public Boolean getIsParent() {
+    public boolean getIsParent() {
         return true;
     }
 

@@ -5,6 +5,7 @@ import com.fuhuadata.vo.MenuTreeVo;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>User: wangjie
@@ -16,6 +17,10 @@ public class MenuTrees extends Trees<MenuTreeVo, Menu, Integer> {
         super(flatItems, parentIds);
     }
 
+    public MenuTrees(List<Menu> flatItems, Map<Integer, MenuTreeVo> lookup) {
+        super(flatItems, lookup);
+    }
+
     @Override
     protected MenuTreeVo convertToTree(Menu node) {
 
@@ -23,6 +28,8 @@ public class MenuTrees extends Trees<MenuTreeVo, Menu, Integer> {
         treeNode.setCid(node.getId());
         treeNode.setCname(node.getName());
         treeNode.setPid(node.getParentId());
+        treeNode.setRoot(node.isRoot());
+        treeNode.setIdentity(node.getIdentity());
         treeNode.setRoleAuthority(node.getRoleAuthority());
         treeNode.setButtons(node.getButtons());
 

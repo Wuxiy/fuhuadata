@@ -128,7 +128,7 @@
                                     </div>
                                     <label class="col-xs-1 control-label" lang="zh">预计截止日期</label>
                                     <div class="col-xs-2">
-                                        <input data-control="off" class="form-control" type="text" value="" id="deadline" disabled />
+                                        <input data-control="off" class="form-control" type="date" value="" id="deadline" disabled />
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -354,50 +354,61 @@
 
     //获取详情function
     function businessInfo(result) {
-        var ResultData = result.businessInfo;
-        var businessRecords = eval(result.businessRecords);
-        console.log(businessRecords[0].id);
 
-        var intentionalProducts = eval(ResultData.intentionalProducts);
-        $('#intentionalProduct0').val(intentionalProducts[0].intentionalProduct);
-        $('#intentionalProduct1').val(intentionalProducts[1].intentionalProduct);
-        $('#estimatedPurchase0').val(intentionalProducts[0].estimatedPurchase);
-        $('#estimatedPurchase1').val(intentionalProducts[1].estimatedPurchase);
+        console.log(result);
+        if(result.businessRecords){
+            var businessRecords = eval(result.businessRecords);
+            for(var i=0;i<businessRecords.length;i++){
+                businessfollow.innerHTML += '<tr>'+
+                        '<td>'+businessRecords[i].id+'</td>'+
+                        '<td>'+businessRecords[i].followContent+'</td>'+
+                        '<td>'+businessRecords[i].followEffect+'</td>'+
+                        '<td>'+businessRecords[i].businessProcess+'</td>'+
+                        '<td>'+businessRecords[i].createUserName+'</td>'+
+                        '<td>'+businessRecords[i].createTime+'</td>'+
+                        '</tr>';
+            }
+        }
 
-        $('#businessName').val(ResultData.businessName);
-        $('#businessId').val(ResultData.businessId);
-        $('#businessFrom').val(ResultData.businessFrom);
-        $('#businessState').val(ResultData.businessState);
-        $('#customerName').val(ResultData.customerName);
-        $('#enterpriseNature').val(ResultData.enterpriseNature);
-        $('#customerLevel').val(customerLevelList[ResultData.customerLevel]);
-        $('#zhongxinbaoLevel').val(zhongxinbaoLevelList[ResultData.zhongxinbaoLevel]);
-        $('#country').val(ResultData.country);
-        $('#name').val(ResultData.linkmanName);
-        $('#customerLevel').val(ResultData.customerLevel);
-        $('#zhongxinbaoLevel').val(ResultData.zhongxinbaoLevel);
-        $('#country').val(ResultData.country);
-        $('#linkmanName').val(ResultData.linkmanName);
-        $('#linkPhone1').val(ResultData.linkPhone1);
-        $('#lemail').val(ResultData.lemail);
-        $('#expectIncome').val(ResultData.expectIncome);
-        $('#deadline').val(ResultData.deadline);
-        $('#businessDescribe').val(ResultData.businessDescribe);
-        $('#businessRemarks').val(ResultData.businessRemarks);
-        $('#createUserName').val(ResultData.createUserName);
-        $('#createTime').val(ResultData.createTime);
+        if(result.businessInfo!=undefined){
+            var ResultData = result.businessInfo;
+            if(ResultData.intentionalProducts != undefined){
+                var intentionalProducts = eval(ResultData.intentionalProducts);
+                $('#intentionalProduct0').val(intentionalProducts[0].intentionalProduct);
+                $('#intentionalProduct1').val(intentionalProducts[1].intentionalProduct);
+                $('#estimatedPurchase0').val(intentionalProducts[0].estimatedPurchase);
+                $('#estimatedPurchase1').val(intentionalProducts[1].estimatedPurchase);
+            }
+            $('#businessName').val(ResultData.businessName);
+            $('#businessId').val(ResultData.businessId);
+            $('#businessFrom').val(ResultData.businessFrom);
+            $('#businessState').val(ResultData.businessState);
+            $('#customerName').val(ResultData.customerName);
+            $('#enterpriseNature').val(ResultData.enterpriseNature);
+            $('#customerLevel').val(customerLevelList[ResultData.customerLevel]);
+            $('#zhongxinbaoLevel').val(zhongxinbaoLevelList[ResultData.zhongxinbaoLevel]);
+            $('#country').val(ResultData.country);
+            $('#name').val(ResultData.linkmanName);
+            $('#customerLevel').val(ResultData.customerLevel);
+            $('#zhongxinbaoLevel').val(ResultData.zhongxinbaoLevel);
+            $('#country').val(ResultData.country);
+            $('#linkmanName').val(ResultData.linkmanName);
+            $('#linkPhone1').val(ResultData.linkPhone1);
+            $('#lemail').val(ResultData.lemail);
+            $('#expectIncome').val(ResultData.expectIncome);
+            $('#deadline').val(ResultData.deadline);
+            $('#businessDescribe').val(ResultData.businessDescribe);
+            $('#businessRemarks').val(ResultData.businessRemarks);
+            $('#createUserName').val(ResultData.createUserName);
+            $('#createTime').val(ResultData.createTime);
+        }
+
+
+
+
 
         var _html = '';
-        for(var i=0;i<businessRecords.length;i++){
-            businessfollow.innerHTML += '<tr>'+
-                    '<td>'+businessRecords[i].id+'</td>'+
-                    '<td>'+businessRecords[i].followContent+'</td>'+
-                    '<td>'+businessRecords[i].followEffect+'</td>'+
-                    '<td>'+businessRecords[i].businessProcess+'</td>'+
-                    '<td>'+businessRecords[i].createUserName+'</td>'+
-                    '<td>'+businessRecords[i].createTime+'</td>'+
-                    '</tr>';
-        }
+
     }
 
     /*

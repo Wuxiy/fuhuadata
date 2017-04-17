@@ -2,6 +2,8 @@ package com.fuhuadata.manager;
 
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
+import com.fuhuadata.vo.BusinessOrderProductList;
+import com.fuhuadata.vo.BusinessOrderVO;
 import com.fuhuadata.vo.CostAndProfitStatistics;
 
 import java.util.List;
@@ -98,5 +100,13 @@ public interface BusinessOrderManager {
      * @return
      */
     public int countProfitStatistics(CostAndProfitStatistics costAndProfitStatistics);
+
+
+    /**
+     * 从报价订单列表近来的详情页
+     * @param orderId
+     * @return
+     */
+    public BusinessOrderVO getBusinessOrderAllInfo(String orderId);
 
 }

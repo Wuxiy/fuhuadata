@@ -77,7 +77,7 @@ public abstract class BaseTreeableServiceImpl<E extends BaseEntity<ID> & Treeabl
     @Override
     public void move(E source, E target, String moveType) {
         // 根节点不能移动
-        if (source == null || target == null || source.isRoot()) {
+        if (source == null || target == null) {
             return;
         }
 
