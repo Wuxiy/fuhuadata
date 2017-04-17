@@ -1,13 +1,18 @@
 package com.fuhuadata.dao;
 import java.util.List;
 
+
 import com.fuhuadata.domain.CountCustomersOrderProduct;
 import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.domain.CustomerEnterpriceNature;
 import com.fuhuadata.domain.CustomerMakeProduct;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
+import com.fuhuadata.vo.CategoryVO;
 import com.fuhuadata.vo.CustomerBaseInfoLinkman;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
+import com.fuhuadata.vo.DataArchive.Countryzone;
+import com.fuhuadata.vo.DataArchive.Formatdoc;
+import com.fuhuadata.vo.DataArchive.Timezone;
 
 /**
  * @author wangbo
@@ -119,4 +124,35 @@ public interface CustomerBaseInfoDao {
 	 * @return
 	 */
 	public CustomerBaseInfo queryCooperationByCid(String customerId);
+
+	//客户基本信息 字段档案
+
+	/**
+	 * 数据格式
+	 * @param
+	 * @return
+	 */
+	public List<Formatdoc> getFormatdoc( );
+
+
+	/**
+	 * 贸易国别
+	 * @param countryzone
+	 * @return
+	 */
+	public List<Countryzone> getCountryzone(Countryzone countryzone);
+
+	/**
+	 * 时区
+	 * @param timezone
+	 * @return
+	 */
+	public List<Timezone> getTimezone(Timezone timezone);
+
+
+	/**
+	 * 客户基本分类
+	 * @return
+	 */
+	public List<CategoryVO> getCustclass();
 }

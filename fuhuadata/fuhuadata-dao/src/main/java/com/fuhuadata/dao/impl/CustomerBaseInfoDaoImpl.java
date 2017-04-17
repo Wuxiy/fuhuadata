@@ -7,8 +7,13 @@ import com.fuhuadata.dao.CustomerBaseInfoDao;
 import com.fuhuadata.domain.CustomerEnterpriceNature;
 import com.fuhuadata.domain.CustomerMakeProduct;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
+import com.fuhuadata.vo.CategoryVO;
 import com.fuhuadata.vo.CustomerBaseInfoLinkman;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
+import com.fuhuadata.vo.DataArchive.Countryzone;
+import com.fuhuadata.vo.DataArchive.Custclass;
+import com.fuhuadata.vo.DataArchive.Formatdoc;
+import com.fuhuadata.vo.DataArchive.Timezone;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
@@ -36,6 +41,11 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
     private static final String BATCH_ADD_NATURE="CUSTOMERBASEINFO.BATCH-ADD-NATURE";
     private static final String DELETE_NATURE_BY_CUSTOMERID="CUSTOMERBASEINFO.DELETE-NATURE-BY-CUSTOMERID";
     private static final String GET_BASEINFO_LINKMANINFO_BY_CUSTOMERID="CUSTOMERBASEINFO.GET-BASEINFO-LINKMANINFO-BY-CUSTOMERID";
+
+    private static final String GET_CUSTCLASS = "CUSTOMERBASEINFO.GET-CUSTCLASS";
+    private static final String GET_COUNTRYZONE = "CUSTOMERBASEINFO.GET-COUNTRYZONE";
+    private static final String GET_FORMATDOC = "CUSTOMERBASEINFO.GET-FORMATDOC";
+    private static final String GET_TIMEZONE = "CUSTOMERBASEINFO.GET-TIMEZONE";
 
 
 
@@ -135,5 +145,25 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public List<Formatdoc> getFormatdoc() {
+        return this.queryForList(GET_FORMATDOC);
+    }
+
+    @Override
+    public List<Countryzone> getCountryzone(Countryzone countryzone) {
+        return this.queryForList(GET_COUNTRYZONE,countryzone);
+    }
+
+    @Override
+    public List<Timezone> getTimezone(Timezone timezone) {
+        return this.queryForList(GET_TIMEZONE,timezone);
+    }
+
+    @Override
+    public List<CategoryVO> getCustclass() {
+        return this.queryForList(GET_CUSTCLASS);
     }
 }

@@ -171,7 +171,7 @@ public class BusinessOrderAction {
 
 
     /**
-     *  获取订单详情
+     *  获取报价订单详情
      * @param orderId
      * @return
      */

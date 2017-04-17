@@ -84,6 +84,10 @@
         where id=#id#
     </select>
 
+    <select id="getPackageRequireByOrderId" parameterClass="java.lang.String" resultMap="BusinessOrderProductResultMap">
+
+    </select>
+
     <select id="getPackageRequireById" parameterClass="java.lang.Integer" resultMap="BusinessOrderProductResultMap">
         select
             shipping_agent_require,
@@ -369,4 +373,5 @@
         SELECT  ifnull(total_cost,0) FROM `k_preparation_process_cost` c,business_order_product p  WHERE c.process_factory=p.factory_name and p.id=#value#  AND c.type=1
         ) a
     </select>
+
 </sqlMap>

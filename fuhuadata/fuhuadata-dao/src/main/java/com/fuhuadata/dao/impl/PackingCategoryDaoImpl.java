@@ -2,7 +2,7 @@ package com.fuhuadata.dao.impl;
 
 import com.fuhuadata.dao.PackingCategoryDao;
 import com.fuhuadata.domain.PackingCategory;
-import com.fuhuadata.vo.PackingCategoryVO;
+import com.fuhuadata.vo.CategoryVO;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
 import java.util.List;
@@ -41,7 +41,7 @@ public class PackingCategoryDaoImpl extends SqlMapClientTemplate implements Pack
     }
 
     @Override
-    public List<PackingCategoryVO> getAllByLevel(String parentIds) {
+    public List<CategoryVO> getAllByLevel(String parentIds) {
         return this.queryForList(GET_BY_LEVEL,parentIds);
     }
 

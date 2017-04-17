@@ -63,8 +63,8 @@ public class CustomerEncyclopediaAction {
      */
     @RequestMapping(value = "/addCustomerEncyclopedia",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "add")
-    public ModelAndView addCustomerEncyclopedia(){
-        return new ModelAndView("knowledgeBase/customerEncyclopediaAdd");
+    public ModelAndView addCustomerEncyclopedia(String encyId){
+        return new ModelAndView("knowledgeBase/encyclopediaAdd").addObject("encyId",encyId);
     }
 
     @RequestMapping(value = "/doAddCustomerEncyclopedia",method = RequestMethod.POST)

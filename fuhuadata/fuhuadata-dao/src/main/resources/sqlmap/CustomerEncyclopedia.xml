@@ -50,7 +50,7 @@
         #createTime#, #lastmodifyUserId#, #lastmodifyUserName#,
         #modifyTime#, #customField#, #companyInfo#,
         #developHis#, #sellNetwork#)
-        <selectKey resultClass="int" keyProperty="encyId">
+        <selectKey resultClass="java.lang.String" keyProperty="encyId">
             SELECT @@IDENTITY AS ency_id
         </selectKey>
     </insert>
@@ -65,7 +65,7 @@
                     is_full = #isFull#
                 </isNotNull>
                 <isNotNull prepend=", " property="createUserId">
-                    createUserId = #createUserId#
+                    create_user_id = #createUserId#
                 </isNotNull>
                 <isNotNull prepend=", " property="createUserName">
                     create_user_name = #createUserName#
@@ -111,11 +111,12 @@
             b.full_name AS fullName,
             b.short_name AS shortName,
             b.company_type AS companyType,
+            b.customer_area_id AS customerAreaId,
             b.customer_area AS customerArea,
-            b.country,
+            b.country_id countryId,
 			GROUP_CONCAT(nature.nature) enterpriseNature,
 			b.other_enterprise_nature otherEnterpriseNature,
-            b.registered_funds AS registeredFund,
+            b.registered_funds AS registeredFunds,
             b.registered_address AS registeredAddr,
             b.management_scope AS managementScope,
             a.ency_id AS encyId,
@@ -130,7 +131,7 @@
             a.custom_field AS customField,
             a.company_info AS companyInfo,
             a.develop_his AS developHis,
-            a.sell_network AS sallNetwork
+            a.sell_network AS sellNetwork
         FROM
             k_customer_encyclopedia a
         LEFT JOIN customer_base_info b ON a.customer_id = b.customer_id

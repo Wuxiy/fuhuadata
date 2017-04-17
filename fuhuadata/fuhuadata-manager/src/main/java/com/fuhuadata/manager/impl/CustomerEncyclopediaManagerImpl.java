@@ -4,8 +4,7 @@ import com.fuhuadata.dao.CustomerBaseInfoDao;
 import com.fuhuadata.dao.CustomerEncyclopediaDao;
 import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.domain.CustomerEncyclopedia;
-import com.fuhuadata.domain.CustomerEnterpriceNature;
-import com.fuhuadata.domain.CustomerVisitRecord;
+
 import com.fuhuadata.domain.query.CustomerEncyclopediaQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.CustomerEncyclopediaManager;
@@ -13,6 +12,7 @@ import com.fuhuadata.vo.CustomerEncyVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -39,17 +39,34 @@ public class CustomerEncyclopediaManagerImpl implements CustomerEncyclopediaMana
             customerBaseInfo.setAreaId(Integer.valueOf(customerEncyclopedia.getCustomerAreaId()));
             customerBaseInfo.setArea(customerEncyclopedia.getCustomerArea());
             customerBaseInfo.setCountryId(customerEncyclopedia.getCountryId());
-            customerBaseInfo.setCountry(customerBaseInfo.getCountry());
+            customerBaseInfo.setCountry(customerEncyclopedia.getCountry());
             customerBaseInfo.setFullEnterpriseNature(customerEncyclopedia.getEnterpriseNature());
+            customerBaseInfo.setCreateUserId(customerEncyclopedia.getCreateUserId());
+            customerBaseInfo.setCreateUserName(customerEncyclopedia.getCreateUserName());
+            customerBaseInfo.setLastmodifyUserId(customerEncyclopedia.getLastmodifyUserId());
+            customerBaseInfo.setLastmodifyUserName(customerEncyclopedia.getLastmodifyUserName());
+            if(customerEncyclopedia.getRegisteredFunds()!=null) {
+                customerBaseInfo.setRegisteredFunds(customerEncyclopedia.getRegisteredFunds());
+            }
+            if(customerEncyclopedia.getRegisteredAddr()!=null) {
+                customerBaseInfo.setRegisteredAddress(customerEncyclopedia.getRegisteredAddr());
+            }
+            if(customerEncyclopedia.getManagementScope()!=null) {
+                customerBaseInfo.setManagementScope(customerEncyclopedia.getManagementScope());
+            }
+            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            customerBaseInfo.setCreateTime(sdf.format(customerEncyclopedia.getCreateTime()));
+            customerBaseInfo.setModifyTime(sdf.format(customerEncyclopedia.getModifyTime()));
             CustomerBaseInfo customerBaseInfoAdd = customerBaseInfoDao.addCustomerBaseInfo(customerBaseInfo);
-
-            if(customerEncyclopedia.getEnterpriceNaturs()!=null&&customerEncyclopedia.getEnterpriceNaturs().length>0) {
-                for(int i = 0;i<customerEncyclopedia.getEnterpriceNaturs().length;i++){
-                    customerEncyclopedia.getEnterpriceNaturs()[i].setCustomerId(customerBaseInfoAdd.getCustomerId());
+            customerEncyclopedia.setCustomerId(customerBaseInfoAdd.getCustomerId());
+            if(customerEncyclopedia.getEnterpriceNatures()!=null&&customerEncyclopedia.getEnterpriceNatures().length>0) {
+                for(int i = 0;i<customerEncyclopedia.getEnterpriceNatures().length;i++){
+                    customerEncyclopedia.getEnterpriceNatures()[i].setCustomerId(customerBaseInfoAdd.getCustomerId());
                 }
-                customerBaseInfoDao.batchAddNature(Arrays.asList(customerEncyclopedia.getEnterpriceNaturs()));
+                customerBaseInfoDao.batchAddNature(Arrays.asList(customerEncyclopedia.getEnterpriceNatures()));
             }
         }
+
         return customerEncyclopediaDao.addCustomerEncyclopedia(customerEncyclopedia);
     }
 
