@@ -150,70 +150,34 @@
                                         </td>
                                         <td>
                                             <label class="control-label" lang="zh">
-                                                毛利率
-                                                <sup class="not-null">*</sup>
-                                            </label>
-                                        </td>
-                                        <td>
-                                            <div class="input-group">
-                                                <input id="grossMargin" class="form-control typechange" value="">
-                                                <span class="input-group-addon">%</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <label class="control-label" lang="zh">
                                                 资金利息单价
                                                 <sup class="not-null">*</sup>
                                             </label>
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input id="" class="form-control typechange" value="">
+                                                <input id="capitalInterestPrice" class="form-control typechange" value="">
+                                                <span class="input-group-addon">%</span>
+                                            </div>
+                                        </td>
+                                        <td class="hidden">
+                                            <label class="control-label" lang="zh">
+                                                毛利率
+                                                <sup class="not-null">*</sup>
+                                            </label>
+                                        </td>
+                                        <td class="hidden">
+                                            <div class="input-group">
+                                                <input id="grossMargin" class="form-control typechange" value="">
                                                 <span class="input-group-addon">%</span>
                                             </div>
                                         </td>
                                     </tr>
-                                    #*<tr>
-                                        <td>
-                                            <label class="control-label" lang="zh">
-                                                明佣计费方式
-                                                <sup class="not-null">*</sup>
-                                            </label>
-                                        </td>
-                                        <td><select id="straightEmployingWay" class="form-control"><option value="0">从量</option><option value="1">从价</option><option value="2">无</option></select></td>
-                                        <td><label class="control-label" lang="zh">明佣比例</label></td>
-                                        <td>
-                                            <div class="input-group">
-                                                <input id="straightEmployingScale" class="form-control" value="">
-                                                <span class="input-group-addon">%</span>
-                                            </div>
-                                        </td>
-                                        <td><label class="control-label" lang="zh">明佣标准</label></td>
-                                        <td><input id="straightEmployingStandard" class="form-control" type="text" value=""/></td>
-                                    </tr>*#
                                     <tr>
-                                        <td>
-                                            <label class="control-label" lang="zh">
-                                                暗佣计费方式
-                                                <sup class="not-null">*</sup>
-                                            </label>
-                                        </td>
-                                        <td>
-                                            <select id="potentialEmployingWay" class="form-control notnull">
-                                                <option value="0">从量</option>
-                                                <option value="1">从价</option>
-                                                <option value="2">无</option>
-                                            </select>
-                                        </td>
-                                        <td><label class="control-label" lang="zh">暗佣比例</label></td>
-                                        <td>
-                                            <div class="input-group">
-                                                <input id="potentialEmployingScale" class="form-control" value="">
-                                                <span class="input-group-addon">%</span>
-                                            </div>
-                                        </td>
-                                        <td><label class="control-label" lang="zh">暗佣标准</label></td>
-                                        <td><input id="potentialEmployingStandard" class="form-control" type="text" value=""/></td>
+                                        <td><label class="control-label" lang="zh">佣金单价</label></td>
+                                        <td><input id="commissionPrice" class="form-control" type="text" value=""/></td>
+                                        <td><label class="control-label" lang="zh">单位耗用比例</label></td>
+                                        <td><input id="unitUseRate" class="form-control" type="text" value=""/></td>
                                     </tr>
                                     <tr>
                                         <td><label class="control-label" lang="zh">出口退税方式</label></td>
@@ -339,12 +303,13 @@
                 $('#purchasePrice').val(basicInfo.purchasePrice);
                 $('#deliveryTime').val(basicInfo.deliveryTime);
                 $('#factoryName').val(basicInfo.factoryName);
-                $('#potentialEmployingWay').val(basicInfo.potentialEmployingWay);
-                $('#potentialEmployingStandard').val(basicInfo.potentialEmployingStandard);
-                $('#potentialEmployingScale').val(basicInfo.potentialEmployingScale);
+                $('#grossMargin').val(basicInfo.grossMargin);
+                $('#commissionPrice').val(basicInfo.commissionPrice);
+                $('#unitUseRate').val(basicInfo.unitUseRate);
                 $('#taxType').val(basicInfo.taxType);
                 $('#taxFree').val(basicInfo.taxFree);
                 $('#otherCost').val(basicInfo.otherCost);
+                $('#capitalInterestPrice').val(basicInfo.capitalInterestPrice)
 
                 switch(basicInfo.priceType){
                     case 0:
@@ -378,12 +343,6 @@
             }
         })
     }else{
-        //暗佣计费方式
-        $('#potentialEmployingWay').val('2');
-        $('#potentialEmployingScale').val('0');
-        $('#potentialEmployingScale').attr('disabled',true);
-        $('#potentialEmployingStandard').val('0');
-        $('#potentialEmployingStandard').attr('disabled',true);
 
         //价格计算类型
         $('#priceType').val('0');
@@ -567,25 +526,6 @@
             $('#taxFree').val('');
         }
     })
-    $('#potentialEmployingWay').change(function () {
-        var val = $(this).val();
-        if(val == 0){
-            $('#potentialEmployingScale').attr('disabled',false);
-            $('#potentialEmployingScale').val('');
-            $('#potentialEmployingStandard').attr('disabled',true);
-            $('#potentialEmployingStandard').val('0');
-        }else if(val == 1){
-            $('#potentialEmployingScale').attr('disabled',true);
-            $('#potentialEmployingScale').val('0');
-            $('#potentialEmployingStandard').attr('disabled',false);
-            $('#potentialEmployingStandard').val('');
-        }else if(val == 2){
-            $('#potentialEmployingScale').attr('disabled',true);
-            $('#potentialEmployingScale').val('0');
-            $('#potentialEmployingStandard').attr('disabled',true);
-            $('#potentialEmployingStandard').val('0');
-        }
-    })
 
     //新增获取数据function
     function Add() {
@@ -609,9 +549,9 @@
                 'purchasePrice':$('#purchasePrice').val(),
                 'factoryName':$('#factoryName').val(),
                 'grossMargin':$('#grossMargin').val(),
-                'potentialEmployingWay':$('#potentialEmployingWay').val(),
-                'potentialEmployingScale':$('#potentialEmployingScale').val(),
-                'potentialEmployingStandard':$('#potentialEmployingStandard').val(),
+                'capitalInterestPrice':$('#capitalInterestPrice').val(),
+                'commissionPrice':$('#commissionPrice').val(),
+                'unitUseRate':$('#unitUseRate').val(),
                 'taxType':$('#taxType').val(),
                 'taxFree':$('#taxFree').val(),
                 'otherCost':$('#otherCost').val(),
@@ -656,9 +596,9 @@
                 'purchasePrice':$('#purchasePrice').val(),
                 'factoryName':$('#factoryName').val(),
                 'grossMargin':$('#grossMargin').val(),
-                'potentialEmployingWay':$('#potentialEmployingWay').val(),
-                'potentialEmployingScale':$('#potentialEmployingScale').val(),
-                'potentialEmployingStandard':$('#potentialEmployingStandard').val(),
+                'capitalInterestPrice':$('#capitalInterestPrice').val(),
+                'commissionPrice':$('#commissionPrice').val(),
+                'unitUseRate':$('#unitUseRate').val(),
                 'taxType':$('#taxType').val(),
                 'taxFree':$('#taxFree').val(),
                 'otherCost':$('#otherCost').val(),

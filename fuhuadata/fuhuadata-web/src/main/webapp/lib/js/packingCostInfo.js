@@ -74,7 +74,7 @@ $(document).ready(function(){
                         '<img style="height: 240px;" data-toggle="modal" data-target="#imgModal" data-name="" src="'+reData[j].path+'" alt="请点击添加图片" class="imgpath">'+
                         '<div class="input-group col-xs-10 col-xs-offset-1" style="padding-top: 5px">'+
                         '<input class="form-control text-center filename" data-url="'+reData[j].path+'" style="" value="'+reData[j].name+'" disabled/>'+
-                        '<div class="input-group-btn"><button data-btn="modification" class="btn btn-xs btn-default" type="button" disabled>图片修改</button></div>'+
+                        '<div class="input-group-btn"><button data-btn="modification" class="btn btn-xs btn-default modifyimg" type="button" disabled>图片修改</button></div>'+
                         '</div>'+
                         '</div>'+
                         '</div>';
@@ -201,6 +201,8 @@ function checkboxArr() {
 
 //baocai编辑
 $(document).on('click.edit','#edit',function () {
+    $('[name="close"]').attr('disabled',false);
+    $('.modifyimg').attr('disabled',false);
     $('.imagesbtn').show();
 });
 //baocai信息取消提交
