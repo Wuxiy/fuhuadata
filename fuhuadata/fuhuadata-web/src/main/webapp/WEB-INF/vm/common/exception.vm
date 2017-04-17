@@ -6,7 +6,7 @@
         <form id="myForm" class="form-horizontal">
           <div class="form-group">
             <div class="col-xs-12">
-              <h3>服务器错误...</h3>
+              ${error.message}
             </div>
           </div>
         </form>
