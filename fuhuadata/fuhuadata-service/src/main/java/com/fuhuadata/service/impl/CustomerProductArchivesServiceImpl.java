@@ -8,7 +8,10 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.service.CustomerProductArchivesService;
 import com.fuhuadata.manager.CustomerProductArchivesManager;
 
+import com.fuhuadata.util.JsonUtils;
 import com.fuhuadata.vo.CustomerProductPackagingArchives;
+import com.fuhuadata.vo.DocumentaryVo;
+import com.fuhuadata.vo.PackingRequireVo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -127,11 +130,23 @@ public class CustomerProductArchivesServiceImpl implements CustomerProductArchiv
 
 	@Override
 	public List<CustomerProductArchives> getCustomerBillRequirement(String customerId) {
-		return customerProductArchivesDao.getCustomerBillRequirement(customerId);
+		List<CustomerProductArchives> list = customerProductArchivesDao.getCustomerBillRequirement(customerId);
+		if(list!=null && list.size()>0){
+			for(CustomerProductArchives cp:list){
+				cp.setDocumentaryVo(JsonUtils.toObject(DocumentaryVo.class,cp.getDocumentaryRequire()));
+			}
+		}
+		return list;
 	}
 
 	@Override
 	public List<CustomerProductArchives> getCustomerTransportRequirement(String customerId) {
-		return customerProductArchivesDao.getCustomerTransportRequirement(customerId);
+		List<CustomerProductArchives> list = customerProductArchivesDao.getCustomerTransportRequirement(customerId);
+		if(list!=null && list.size()>0){
+			for(CustomerProductArchives cp:list){
+				cp.setPackingRequireVo(JsonUtils.toObject(PackingRequireVo.class,cp.getPackageRequire()));
+			}
+		}
+		return list;
 	}
 }

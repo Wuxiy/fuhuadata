@@ -79,6 +79,22 @@ public class BusinessOrder implements Serializable{
     private String createTime;//创建时间
     private String modifyTime;//创建时间
 
+    public Integer getIsCreditRisk() {
+        return isCreditRisk;
+    }
+
+    public void setIsCreditRisk(Integer isCreditRisk) {
+        this.isCreditRisk = isCreditRisk;
+    }
+
+    public BigDecimal getInterestRate() {
+        return interestRate;
+    }
+
+    public void setInterestRate(BigDecimal interestRate) {
+        this.interestRate = interestRate;
+    }
+
     public String getDealTime() {
         return dealTime;
     }

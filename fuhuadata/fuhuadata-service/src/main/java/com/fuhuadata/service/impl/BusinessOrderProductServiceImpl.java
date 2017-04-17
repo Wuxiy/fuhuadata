@@ -7,6 +7,7 @@ import com.fuhuadata.domain.query.QueryCustomerProductArchives;
 import com.fuhuadata.service.BusinessOrderProductService;
 import com.fuhuadata.vo.Price.Price;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,8 +31,10 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
     private CustomerProductArchivesDao customerProductArchivesDao;
     @Autowired
     private BusinessProductRequireDao businessProductRequireDao;
-
-
+    @Autowired
+    private BusinessOrderDao businessOrderDao;
+    @Autowired
+    private IncomeDao incomeDao;
     @Transactional
     public int addBusinessOrderProduct(BusinessOrderProduct businessOrderProduct,List<BusinessOrderProductComponent> businessOrderProductComponents) {
         try {
@@ -220,22 +223,217 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
     }
 
     /**
-     * 最低销售价格={(【价委会指导单价】+【采购价格】）
-     *              ×【单位耗用比例】/【原币汇率】
-     *              +【加工费】/【原币汇率】
-     *              +【港杂费单价（原币）】
-     *              +【海运费单价（原币）】
-     *              +【佣金单价（原币）=明佣单价+暗佣单价】
-     *              +【其他费用】}
-     *              ÷(1+【出口退税率】/【采购退税计算率】
-     *              -【信保费率】
-     *              -【资金利率】*【计息比例】
-     *              -【佣金率=明佣佣金率+暗佣佣金率】
-     *              -【汇损率】)
+     *
      * @param businessProductId
      * @return
      */
     public BigDecimal calculateMinPrice(Integer businessProductId) {
+        BusinessOrderProduct basic =  businessOrderProductDao.getBaiscById(businessProductId);
+        BusinessOrder order = businessOrderDao.getById(basic.getOrderId());
+        int tax_type = basic.getTaxType();
+        if(tax_type==1){
+            //按销售价退税
+            return calculatePriceForSale(basic,order);
+        }else if(tax_type==2){
+            //按采购价
+            return calculatePriceForPurchase(basic,order);
+        }else if(tax_type==3){
+            //不退税
+            return calculatePriceForNoneTax(basic,order);
+        }
         return null;
+    }
+    /**
+     * 按销售价退税计算最低价
+     * Y= {X+【港杂费单价】+【佣金单价】+【海运费单价】+【资金利息单价】+
+     * 【退税率】×【海运费单价】+【其他费用】}/（1-【汇损率】-【保险费率】-【信保费率】+【退税率】-【退税率】×【保险费率】）
+     */
+
+    private BigDecimal calculatePriceForSale(BusinessOrderProduct basic,BusinessOrder order){
+        //计算X值
+        BigDecimal x = getX(basic,order);
+        //港杂费单价
+        BigDecimal portSurcharge = basic.getPortSurcharge();
+        if(portSurcharge == null){
+            portSurcharge = new BigDecimal(0);
+        }
+        //佣金单价
+        BigDecimal commissionPrice = basic.getCommissionPrice();
+        if(commissionPrice == null){
+            commissionPrice = new BigDecimal(0);
+        }
+        //海运费单价
+        BigDecimal oceanFreight = basic.getOceanFreight();
+        if(oceanFreight == null){
+            oceanFreight = new BigDecimal(0);
+        }
+        //资金利息单价
+        BigDecimal capitalInterestPrice = basic.getCapitalInterestPrice();
+        if(capitalInterestPrice == null){
+            capitalInterestPrice = getCapitalInterestPrice(x,order);
+        }
+        //出口退税率
+        BigDecimal taxFree = basic.getTaxFree();
+        if(taxFree == null){
+            taxFree = new BigDecimal(1);
+        }
+        //其他费用
+        BigDecimal otherCost = basic.getOtherCost();
+        if(otherCost == null){
+            otherCost = new BigDecimal(1);
+        }
+        //汇损率
+        BigDecimal lossRate = order.getLossRate();
+        if (lossRate == null) {
+            lossRate = new BigDecimal(0);
+        }
+        //保险费率
+        BigDecimal premiumRate = order.getPremiumRate();
+        if(premiumRate == null){
+            premiumRate = new BigDecimal(0);
+        }
+        //信保费率
+        BigDecimal guaranteeRate = order.getGuaranteeRate();
+        if(guaranteeRate == null){
+            guaranteeRate = new BigDecimal(0);
+        }
+        /**
+         * Y= {X+【港杂费单价】+【佣金单价】+【海运费单价】+【资金利息单价】+
+         * 【退税率】×【海运费单价】+【其他费用】}/（1-【汇损率】-【保险费率】-【信保费率】+【退税率】-【退税率】×【保险费率】）
+         */
+        return x.add(portSurcharge).add(commissionPrice).add(oceanFreight).add(capitalInterestPrice)
+                .add(taxFree.multiply(oceanFreight)).add(otherCost).divide(
+                        new BigDecimal(1).subtract(lossRate).subtract(premiumRate).subtract(guaranteeRate).add(taxFree).subtract(
+                                taxFree.multiply(premiumRate)
+                        )
+                );
+    }
+
+    /**
+     * 按采购价退税计算最低价
+     * Y={ X+【港杂费单价】+【佣金单价】+【海运费单价】+【资金利息单价】-
+     * 【退税率】×X/【采购退税计算率】+【其他费用】}/(1-【汇损率】-【保险费率】-【信保费率】)
+     * @param basic
+     * @param order
+     * @return
+     */
+    private BigDecimal calculatePriceForPurchase(BusinessOrderProduct basic,BusinessOrder order){
+        //计算X值
+        BigDecimal x = getX(basic,order);
+        //港杂费单价
+        BigDecimal portSurcharge = basic.getPortSurcharge();
+        if(portSurcharge == null){
+            portSurcharge = new BigDecimal(0);
+        }
+        //佣金单价
+        BigDecimal commissionPrice = basic.getCommissionPrice();
+        if(commissionPrice == null){
+            commissionPrice = new BigDecimal(0);
+        }
+        //海运费单价
+        BigDecimal oceanFreight = basic.getOceanFreight();
+        if(oceanFreight == null){
+            oceanFreight = new BigDecimal(0);
+        }
+        //资金利息单价
+        BigDecimal capitalInterestPrice = basic.getCapitalInterestPrice();
+        if(capitalInterestPrice == null){
+            capitalInterestPrice = getCapitalInterestPrice(x,order);
+        }
+        //出口退税率
+        BigDecimal taxFree = basic.getTaxFree();
+        if(taxFree == null){
+            taxFree = new BigDecimal(1);
+        }
+        //其他费用
+        BigDecimal otherCost = basic.getOtherCost();
+        if(otherCost == null){
+            otherCost = new BigDecimal(1);
+        }
+        //汇损率
+        BigDecimal lossRate = order.getLossRate();
+        if (lossRate == null) {
+            lossRate = new BigDecimal(0);
+        }
+        //保险费率
+        BigDecimal premiumRate = order.getPremiumRate();
+        if(premiumRate == null){
+            premiumRate = new BigDecimal(0);
+        }
+        //信保费率
+        BigDecimal guaranteeRate = order.getGuaranteeRate();
+        if(guaranteeRate == null){
+            guaranteeRate = new BigDecimal(0);
+        }
+        //采购退税计算率 【采购退税计算率】=1+【增值税税率】（根据根据报关产品名称从NC系统读取）
+
+        return null;
+    }
+    //不退税计算最低价
+    private BigDecimal calculatePriceForNoneTax(BusinessOrderProduct basic,BusinessOrder order){
+        return null;
+    }
+
+    /**
+     * 计算x值
+     * X={(【价委会指导单价】+【采购价格】)*【单位耗用比例】+【加工费】}/【汇率】；
+     * @param basic
+     * @param order
+     * @return
+     */
+    private BigDecimal getX(BusinessOrderProduct basic,BusinessOrder order){
+        //价委会指导单价
+        BigDecimal advisePrice =  basic.getAdvisePrice();
+        if(advisePrice==null){
+            advisePrice = new BigDecimal(0);
+        }
+        //采购价格
+        BigDecimal purchasePrice =  basic.getPurchasePrice();
+        if(purchasePrice==null){
+            purchasePrice = new BigDecimal(0);
+        }
+        //单位耗用比例
+        BigDecimal unitUseRate =  basic.getUnitUseRate();
+        if(unitUseRate==null){
+            unitUseRate = new BigDecimal(1);
+        }
+        //加工费
+        BigDecimal processCost = new BigDecimal(0);
+        int priceType = basic.getPriceType();
+        //只有1原药制剂自产类加工，2原药采购制剂加工才有加工费
+        if(priceType==1 || priceType==2){
+            processCost = this.calculateProcessCost(basic.getId());
+        }
+        //原币对本币汇率
+        BigDecimal nexchangerate = order.getNexchangerate();
+        if(nexchangerate==null){
+            nexchangerate = new BigDecimal(1);
+        }
+        //X={(【价委会指导单价】+【采购价格】)*【单位耗用比例】+【加工费】}/【汇率】；
+        return advisePrice.add(purchasePrice).multiply(unitUseRate).add(processCost).divide(nexchangerate);
+    }
+    //计算资金利息单价
+    private BigDecimal getCapitalInterestPrice(BigDecimal x,BusinessOrder order){
+        /**
+         * 如果手工填写了利息单价，则等于手工填写的利息单价；
+         2）否则等于X×计息比率×资金利率×账期月数÷12，账期月数根据选择的“收款协议”
+         获取相应月数
+         */
+        //收款协议
+        Income income = incomeDao.getByCode(order.getCollectionAgreement());
+        //计息比率
+        BigDecimal interestRate = order.getInterestRate();
+        if(interestRate==null){
+            interestRate = new BigDecimal(1);
+        }
+        //资金利率
+        BigDecimal discountRate = order.getDiscountRate();
+        if(discountRate==null){
+            discountRate = new BigDecimal(1);
+        }
+        //账期月数
+        BigDecimal month = new BigDecimal(income.getPaymentday()).divide(new BigDecimal(30));
+        //X×计息比率×资金利率×账期月数÷12
+       return x.multiply(interestRate).multiply(discountRate).multiply(month).divide(new BigDecimal(12));
     }
 }

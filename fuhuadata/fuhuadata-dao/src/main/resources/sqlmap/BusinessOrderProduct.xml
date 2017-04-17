@@ -60,13 +60,14 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
         <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
         <result column="unit_use_rate" jdbcType="DECIMAL" property="unitUseRate"/>
+        <result column="capital_interest_price" jdbcType="DECIMAL" property="capitalInterestPrice"/>
     </resultMap>
     <select id="getBasicById" parameterClass="java.lang.Integer" resultMap="BusinessOrderProductResultMap">
         select
             order_id,archive_product_id,product_id,ware_id,customs_clearance_id,customs_clearance_name,customer_id,name,
             customer_product_name,brand,main_product_amount,main_product_unit,sub_product_amount,sub_product_unit,
             convert_rate,price_type,advise_price,purchase_price,delivery_time,factory_id,factory_name,commission_price,
-            tax_type,tax_free,other_cost,process_cost,unit_use_rate
+            tax_type,tax_free,other_cost,process_cost,unit_use_rate,capital_interest_price
         from business_order_product
         where id=#id#
     </select>
@@ -106,13 +107,14 @@
             customer_product_name,brand,main_product_amount,main_product_unit,sub_product_amount,sub_product_unit,
             convert_rate,price_type,advise_price,purchase_price,delivery_time,factory_id,factory_name,commission_price,
             tax_type,tax_free,other_cost,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time,
-        unit_use_rate
+        unit_use_rate,capital_interest_price
         )
         values(
         #orderId#,#archiveProductId#,#productId#,#wareId#,#customsClearanceId#,#customsClearanceName#,#customerId#,#name#,
         #customerProductName#,#brand#,#mainProductAmount#,#mainProductUnit#,#subProductAmount#,#subProductUnit#,
         #convertRate#,#priceType#,#advisePrice#,#purchasePrice#,#deliveryTime#,#factoryId#,#factoryName#,#commissionPrice#,
-        #taxType#,#taxFree#,#otherCost#,#createUserId#,#createUserName#,#createUserId#,#createUserName# ,now(),now(),#unitUseRate#
+        #taxType#,#taxFree#,#otherCost#,#createUserId#,#createUserName#,#createUserId#,#createUserName# ,now(),now(),
+        #unitUseRate#,#capitalInterestPrice#
         )
         <selectKey resultClass="java.lang.Integer" keyProperty="id">
             SELECT @@IDENTITY AS ID
@@ -130,7 +132,7 @@
         goods_type, mianxiangqi, miantuiqi, cupboard_type, cupboard_per_number, cupboard_number,
         ocean_freight, port_surcharge, tax_type, tax_free, gross_margin, process_cost,other_cost, min_price,
         contract_price, transform_state, create_user_id, create_user_name, lastmodify_user_id,
-        lastmodify_user_name, create_time, modify_time,unit_use_rate)
+        lastmodify_user_name, create_time, modify_time,unit_use_rate,capital_interest_price)
 
         (select
         #orderId# as order_id,#archiveProductId# as archive_product_id, product_id,
@@ -143,7 +145,7 @@
         goods_type, mianxiangqi, miantuiqi, cupboard_type, cupboard_per_number, cupboard_number,
         ocean_freight, port_surcharge, tax_type, tax_free, gross_margin,process_cost, other_cost, min_price,
         contract_price, 0 as transform_state, #createUserId#, #createUserName#, #createUserId#,
-        #createUserName#, now(), now(),unit_use_rate
+        #createUserName#, now(), now(),#unitUseRate#,#capitalInterestPrice#
         from customer_product_archives
         where id = #archiveProductId#)
         <selectKey resultClass="java.lang.Integer" keyProperty="id">
@@ -159,6 +161,9 @@
             </isNotNull>
             <isNotNull prepend="," property="unitUseRate">
                 unit_use_rate = #unitUseRate#
+            </isNotNull>
+            <isNotNull prepend="," property="capitalInterestPrice">
+                capital_interest_price = #capitalInterestPrice#
             </isNotNull>
             <isNotNull prepend="," property="archiveProductId">
                 archive_product_id = #archiveProductId#
@@ -314,6 +319,7 @@
             <isNotNull prepend="," property="modifyTime">
                 modify_time = #modifyTime#
             </isNotNull>
+
         </dynamic>
         where id = #id#
     </update>

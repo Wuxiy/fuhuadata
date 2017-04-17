@@ -98,4 +98,5 @@ public interface BusinessOrderProductDao {
      * @return
      */
     BigDecimal calculateProcessCost(Integer businessProductId);
+
 }
