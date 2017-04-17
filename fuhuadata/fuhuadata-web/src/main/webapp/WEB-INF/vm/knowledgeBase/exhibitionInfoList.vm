@@ -73,6 +73,7 @@
                 {"data":"createTime"}
             ],
             "columnDefs":[
+
                 {
                     "targets": 10,
                     "render": function(data,type,row,meta){

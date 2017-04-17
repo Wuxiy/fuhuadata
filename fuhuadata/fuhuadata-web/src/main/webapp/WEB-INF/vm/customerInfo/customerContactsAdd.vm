@@ -174,21 +174,17 @@
         }
     })
 
-    $('#isDefault').change(function(){
+    /*$('#isDefault').change(function(){
         var newName = $('#name').val();
-        var id = $(this).attr('data-id');
-        var url = basePath + '/customerLinkman/getCustomerLinkmanDefaultByCustomerId?customerId=' + id;
-
-        if($(this).val() == 1){
-            jQuery.ajax({
-                type:"POST",
-                url:url,
-                success:function(result){
-                    var name = result.data.name;
-                    var msg = '当前默认联系人是' + name + '，更改后的联系人为' + newName;
-                    alert(msg);
-                }
-            })
-        }
-    })
+        var url = basePath + '/customerLinkman/getCustomerLinkmanDefaultByCustomerId?customerId=' ;
+        jQuery.ajax({
+            type:"POST",
+            url:url,
+            success:function(result){
+                var name = result.data.name;
+                var msg = '当前默认联系人是' + name + '，更改后的联系人为' + newName;
+                alert(msg);
+            }
+        })
+    })*/
 </script>

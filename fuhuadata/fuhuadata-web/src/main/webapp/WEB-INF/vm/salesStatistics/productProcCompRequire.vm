@@ -44,7 +44,7 @@
                                 <td >尺寸</td>
                                 <td id="size" class="text-center" colspan="7">
                                     <div class="col-xs-2">
-                                        <a href="#" class="thumbnail">
+                                        <a href="#" class="thumbnail" data-val="AA">
                                             <img src="/lib/img/u24030.png"
                                                  alt="通用的占位符缩略图">
                                             <div class="caption">
@@ -55,7 +55,7 @@
                                         </a>
                                     </div>
                                     <div class="col-xs-2">
-                                        <a href="#" class="thumbnail">
+                                        <a href="#" class="thumbnail" data-val="AB">
                                             <img src="/lib/img/u24030.png"
                                                  alt="通用的占位符缩略图">
                                             <div class="caption">
@@ -66,7 +66,7 @@
                                         </a>
                                     </div>
                                     <div class="col-xs-2">
-                                        <a href="#" class="thumbnail">
+                                        <a href="#" class="thumbnail" data-val="AC">
                                             <img src="/lib/img/u24030.png"
                                                  alt="通用的占位符缩略图">
                                             <div class="caption">
@@ -350,7 +350,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-1 col-xs-offset-5"><a href="" class="btn btn-block btn-default" type="button">上一步</a></div>
+            <div class="col-xs-1 col-xs-offset-5"><a href="" class="btn btn-block btn-default" type="button" id="back">上一步</a></div>
             <div class="col-xs-1 col-xs-offset-1"><a class="btn btn-block btn-primary" type="button" id="next">下一步</a></div>
         </div>
     </div>
@@ -455,7 +455,84 @@
                 url:basePath + '/businessProduct/getProductRequireInfo?productRequireId=' + id,
                 type:'POST',
                 success:function(result){
-                    var productRequire = result.productRequire;
+                        var productRequire = result.productRequire;
+                        if(productRequire.mainPackingType!=undefined){
+                            $('#mainPackingType').val(productRequire.mainPackingType);
+                        }
+                        if(productRequire.material!=undefined){
+                            $('#material').val(productRequire.material);
+                        }
+                        if(productRequire.specification!=undefined){
+                            $('#specification').val(productRequire.specification);
+                        }
+                        if(productRequire.price!=undefined){
+                            $('#price').val(productRequire.price);
+                        }
+                        if(productRequire.bottleWeight!=undefined){
+                            $('#bottleWeight').val(productRequire.bottleWeight);
+                        }
+                        if(productRequire.bottleCapColor!=undefined){
+                            $('#bottleCapColor').val(productRequire.bottleCapColor);
+                        }
+                        if(productRequire.bottleBodyColor!=undefined){
+                            $('#bottleBodyColor').val(productRequire.bottleBodyColor);
+                        }
+                        if(productRequire.bottleDiameter!=undefined){
+                            $('#bottleDiameter').val(productRequire.bottleDiameter);
+                        }
+                        if(productRequire.businessCheckNum!=undefined){
+                            $('#businessCheckNum').val(productRequire.businessCheckNum);
+                        }
+                        if(productRequire.bottlePasteRequire!=undefined){
+                            $('#bottlePasteRequire').val(productRequire.bottlePasteRequire);
+                        }
+                        if(productRequire.specialRequire!=undefined){
+                            $('#specialRequire').val(productRequire.specialRequire);
+                        }
+                        if(productRequire.addtionalPrice!=undefined){
+                            $('#addtionalPrice').val(productRequire.addtionalPrice);
+                        }
+                        if(productRequire.sealingStyle!=undefined){
+                            $('#sealingStyle').val(productRequire.sealingStyle);
+                        }
+                        if(productRequire.outerOackingOtherRequire!=undefined){
+                            $('#outerOackingOtherRequire').val(productRequire.outerOackingOtherRequire);
+                        }
+                        if(productRequire.otherRequire!=undefined){
+                            $('#otherRequire').val(productRequire.otherRequire);
+                        }
+                        if(productRequire.otherRequirePrice!=undefined){
+                            $('#otherRequirePrice').val(productRequire.otherRequirePrice);
+                        }
+                        if(productRequire.otherRequireConsumption!=undefined){
+                            $('#otherRequireConsumption').val(productRequire.outerOackingOtherRequire);
+                        }
+                        if(productRequire.bottlePasteRequire!=undefined){
+                            $('#bottlePasteRequire').val(productRequire.bottlePasteRequire);
+                        }
+                        if(productRequire.specialRequire!=undefined){
+                            $('#specialRequire').val(productRequire.specialRequire);
+                        }
+                        if(productRequire.addtionalPrice!=undefined){
+                            $('#addtionalPrice').val(productRequire.addtionalPrice);
+                        }
+                        if(productRequire.sealingStyle!=undefined){
+                            $('#sealingStyle').val(productRequire.sealingStyle);
+                        }
+                        if(productRequire.size!=undefined){
+                            switch (productRequire.size){
+                                case 'AA':
+                                    $('#size').find('a[data-val="AA"]').addClass('active');
+                                    break;
+                                case 'AB':
+                                    $('#size').find('a[data-val="AB"]').addClass('active');
+                                    break;
+                                case 'AC':
+                                    $('#size').find('a[data-val="AC"]').addClass('active');
+                                    break;
+                            }
+                        }
+
                     var imgInfo = productRequire.imgInfo;
                     var imgpath = $('.imgpath');
                     var imgpathlist;
@@ -463,37 +540,19 @@
                     var auxiliaryData = result.auxiliary;
                     var _html = '';
 
-                    $('#mainPackingType').val(productRequire.mainPackingType);
-                    $('#material').val(productRequire.material);
-                    $('#specification').val(productRequire.specification);
-                    $('#price').val(productRequire.price);
-                    $('#bottleWeight').val(productRequire.bottleWeight);
-                    $('#bottleCapColor').val(productRequire.bottleCapColor);
-                    $('#bottleBodyColor').val(productRequire.bottleBodyColor);
-                    $('#bottleDiameter').val(productRequire.bottleDiameter);
-                    $('#businessCheckNum').val(productRequire.businessCheckNum);
-                    $('#bottlePasteRequire').val(productRequire.bottlePasteRequire);
-                    $('#specialRequire').val(productRequire.specialRequire);
-                    $('#addtionalPrice').val(productRequire.addtionalPrice);
-                    $('#sealingStyle').val(productRequire.sealingStyle);
-                    $('#outerOackingOtherRequire').val(productRequire.outerOackingOtherRequire);
-                    $('#otherRequire').val(productRequire.otherRequire);
-                    $('#otherRequirePrice').val(productRequire.otherRequirePrice);
-                    $('#otherRequireConsumption').val(productRequire.outerOackingOtherRequire);
-
-                    if(productRequire.hasBodyLogo == 1){
+                    if(productRequire.hasBodyLogo!=undefined&&productRequire.hasBodyLogo == 1){
                         $('#hasBodyLogo').attr('checked',true);
                     }
-                    if(productRequire.hasCapLogo == 1){
+                    if(productRequire.hasCapLogo!=undefined&&productRequire.hasCapLogo == 1){
                         $('#hasCapLogo').attr('checked',true);
                     }
-                    if(productRequire.hasDangerSign == 1){
+                    if(productRequire.hasDangerSign!=undefined&&productRequire.hasDangerSign == 1){
                         $('#hasDangerSign').attr('checked',true);
                     }
-                    if(productRequire.hasScaleLine == 1){
+                    if(productRequire.hasScaleLine!=undefined&&productRequire.hasScaleLine == 1){
                         $('#hasScaleLine').attr('checked',true);
                     }
-                    if(productRequire.hasSprayCode == 1){
+                    if(productRequire.hasSprayCode!=undefined&&productRequire.hasSprayCode == 1){
                         $('#hasSprayCode').attr('checked',true);
                     }
 
@@ -680,6 +739,10 @@
             }
         })
 
+        $('#back').click(function(){
+            window.location.href = basePath + '/businessProduct/intoProductBasicInfoRequire?businessProductId=' + $('#businessProductId').val();
+        })
+
         $('#next').click(function () {
 
             var isup = true;
@@ -784,6 +847,7 @@
             'outerPackingId':getouterPackingId(),
             'auxiliaryMaterialIds':getauxiliaryMaterialIds(),
             'imgInfo':getimgInfo(),
+            'size':getsize(),
             'straightEmployingWay':'',
             'straightEmployingScale':'',
             'straightEmployingStandard':'',
@@ -825,7 +889,8 @@
             'otherRequireConsumption':$('#otherRequireConsumption').val(),
             'outerPackingId':getouterPackingId(),
             'auxiliaryMaterialIds':getauxiliaryMaterialIds(),
-            'imgInfo':getimgInfo()
+            'imgInfo':getimgInfo(),
+            'size':getsize()
         }
 
     }
@@ -833,6 +898,14 @@
     function getouterPackingId() {
         var outerPackingId = $('#outer').find('[class="active"]').val();
         return outerPackingId;
+    }
+
+    function getsize(){
+        var size = $('#size').find('a[class="active"]').val();
+        if(size==''||size==undefined){
+            size = '';
+        }
+        return size;
     }
     
     function getauxiliaryMaterialIds() {

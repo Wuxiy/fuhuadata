@@ -107,6 +107,26 @@
                             </div>
                             </form>
                             <div class="form-group">
+                                <label class="col-xs-1 control-label">图片</label>
+                                <div id="imgGroup" class="col-xs-11">
+                                    <div class="col-xs-3">
+                                        <button type="button" class="close" name="close" style="position: absolute;top:3px;left:0;">×</button>
+                                        <div class="col-xs-12 thumbnail">
+                                            <img  data-toggle="modal" data-target="#imgModal" data-name="瓶型" src="/lib/img/placeholder.png" alt="请点击添加图片" class="imgpath">
+                                            <div class="input-group col-xs-10 col-xs-offset-1" style="padding-top: 5px">
+                                                <input class="form-control text-center" style="" value="瓶型"/>
+                                                <div class="input-group-btn"><button data-btn="modification" class="btn btn-xs btn-default hidden" type="button">修改</button></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hidden">
+                                <form name="fileForm" id="fileForm" enctype="multipart/form-data">
+                                    <input id="openFile" name="file" type="file">
+                                </form>
+                            </div>
+                            <div class="form-group">
                                 <div class="col-xs-1 col-xs-offset-1">
                                     <div class="btn-group btn-group-xs">
                                         <button id="addImg" data-form-btn="add" class="btn btn-default" type="button" lang="zh">继续添加</button>
@@ -233,7 +253,26 @@
 <input type="hidden" id="sid" value="$!{sid}" />
 <input type="hidden" id="id" value="$!{packId}" />
 
+//大图模态
+<div class="modal fade" id="imgModal" tabindex="-1"  aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body clearfix">
+                <div class="thumbnail">
+                    <img src="" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript" src="${request.contextPath}/lib/js/packingAdd.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/scaffolding.js"></script>
 <script type="text/javascript">
@@ -247,7 +286,7 @@
         div.appendTo('#imgContent');
     })
 
-    $(document).on('click','[name="close"]',function () {
+    /*$(document).on('click','[name="close"]',function () {
         var imgpath = $(this).parent('div').find('[class="filename"]').attr('data-url');
         console.log(imgpath);
         var url = basePath + '/upload/deleteFileSingle';
@@ -263,5 +302,5 @@
         }else{
             $(this).parent('div').remove();
         }
-    })
+    })*/
 </script>
