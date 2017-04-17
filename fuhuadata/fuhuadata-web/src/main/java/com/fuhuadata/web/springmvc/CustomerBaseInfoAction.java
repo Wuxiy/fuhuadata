@@ -334,7 +334,7 @@ public class CustomerBaseInfoAction {
 
 
     /**
-     *  时区档案
+     *
      * @param
      * @return
      */
@@ -358,7 +358,7 @@ public class CustomerBaseInfoAction {
      * @param
      * @return
      */
-    @RequestMapping(value = "/getCustclass",method = RequestMethod.POST)
+    @RequestMapping(value = "/getCustclass",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "customerInfo",methods = "getCustclass")
     @ResponseBody
     public ResultPojo getCustclass(){
