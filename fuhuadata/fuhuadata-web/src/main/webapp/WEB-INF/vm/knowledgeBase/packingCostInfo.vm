@@ -239,7 +239,7 @@
         div.appendTo('#imgGroup');
     })
 
-    $(document).on('click','[name="close"]',function () {
+    $(document).on('click','button[name="close"]',function () {
         /*var imgpath = $(this).parent('div').find('[class="filename"]').attr('data-url');
         var imgname = $(this).parent('div').find('[class="filename"]').attr('value');
         var packId = $('#id').val();

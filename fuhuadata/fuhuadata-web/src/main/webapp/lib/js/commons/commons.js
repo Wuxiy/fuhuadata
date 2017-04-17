@@ -251,7 +251,10 @@ CRM.getTime = function(){
     var minutes = parseInt(time.getMinutes());
     var seconds = parseInt(time.getSeconds());
     var newTime;
-    return newTime = year+'-'+month+'-'+day+' '+hours+':'+minutes+':'+seconds;
+    return newTime = year+'-'+(month.length==1?'0'+month:month)+'-'+(day.length==1?'0'+day:day)+
+        ' '+(hours.length==1?'0'+hours:hours)+
+        ':'+(minutes.length==1?'0'+minutes:minutes)+
+        ':'+(seconds.length==1?'0'+seconds:seconds);
 };
 
 // 添加激活样式

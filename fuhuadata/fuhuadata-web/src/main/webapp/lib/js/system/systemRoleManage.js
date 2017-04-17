@@ -7,6 +7,7 @@ CRM.systemRoleManage = window.CRM.systemRoleManage || {};
 
 CRM.systemRoleManage.ROLE_DETAILS_GET = '/sys/role/ajax/'; // 角色详情
 CRM.systemRoleManage.ROLE_ADD_POST = '/sys/role/ajax/add'; // 角色添加or更新
+CRM.systemRoleManage.ROLE_DELETE_POST = '/sys/role/ajax/'; // 角色删除
 CRM.systemRoleManage.ROLE_RELEVANCE_MENU_POST = '/sys/roleauth/save'; // 角色关联菜单
 CRM.systemRoleManage.ROLE_RELEVANCE_MENU_LOOK_GET = '/sys/roleauth/menu?roleId='; // 角色菜单查看
 CRM.systemRoleManage.MENU_RELEVANCE_LIMITS_POST = '/sys/roleauth/permission'; // 菜单关联权限
@@ -52,6 +53,7 @@ CRM.systemRoleManage.userTable = $('#userTable'); // 已关联用户表
 CRM.systemRoleManage.add = $('#add'); // 新增按钮
 CRM.systemRoleManage.cancel = $('#cancel'); // 取消按钮
 CRM.systemRoleManage.save = $('#save'); // 保存按钮
+CRM.systemRoleManage.delete = $('#delete');// 删除角色
 
 // 表单控件
 CRM.systemRoleManage.roleId = $('#roleId');
@@ -218,6 +220,7 @@ CRM.systemRoleManage.asideTreeOnClick = function (event, modLeftId, treeNode) {
 
     // 渲染第用户表格
     page.table.html('');
+    $(CRM.el.DEL_BTN).removeClass("hidden");
     CRM.addOnlyClass(t, 'li', page.tab, 'active');
     page.renderUserTable(treeNode.id);
 };
@@ -786,6 +789,29 @@ $(function () {
         // 隐藏侧栏和tab页
         page.asidePanel.fadeOut();
         page.tab.fadeOut();
+    });
+
+    // 删除角色
+    page.delete.on('click.delete', function (e) {
+
+        var roleId = page.roleId.val();
+        if (roleId == null || roleId == "") {
+            alert("请选择需要删除的角色！");
+            return false;
+        } else if (roleId == 0) {
+            alert("根节点不能删除！");
+            return false;
+        } else if (!confirm("确认删除该角色及其子节点？")) {
+            return false;
+        }
+        CRM.ajaxCall({
+            url: page.ROLE_DELETE_POST + roleId + '/remove',
+            type: 'POST',
+            callback: function (data) {
+                alert("删除成功");
+                window.location.reload();
+            }
+        });
     });
 
     //保存

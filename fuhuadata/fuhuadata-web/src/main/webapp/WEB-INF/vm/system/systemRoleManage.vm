@@ -29,11 +29,13 @@
     <div class="col-xs-10  view-HD-lg">
         <div id="roleManage" class="panel panel-default">
             <div class="panel-heading">
-                <button id="add" data-btn="edit" data-view="editHide" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
-                    新增
-                </button>
                 <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right">
-                    <button id="delete" data-btn="cancel" class="btn hidden" lang="zh">取消</button>
+                  <button id="delete" data-btn="del"data-view="editHide" class="btn btn-xs btn-danger" lang="zh">删除</button>
+                  <button id="add" data-btn="edit" data-view="editHide" class="btn btn-xs btn-primary" type="button" lang="zh">
+                    新增
+                  </button>
+                </div>
+                <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right">
                     <button id="cancel" data-btn="cancel" data-view="editView" class="btn hidden" lang="zh">取消</button>
                     <button id="save" data-btn="save" data-view="editView" class="btn btn-primary hidden" lang="zh">保存</button>
                 </div>

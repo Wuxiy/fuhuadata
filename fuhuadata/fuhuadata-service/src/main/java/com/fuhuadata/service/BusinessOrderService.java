@@ -3,6 +3,7 @@ package com.fuhuadata.service;
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
 import com.fuhuadata.domain.query.Result;
+import com.fuhuadata.vo.BusinessOrderVO;
 import com.fuhuadata.vo.CostAndProfitStatistics;
 
 import java.util.List;
@@ -51,7 +52,7 @@ public interface BusinessOrderService {
      * @param orderId
      * @return
      */
-    public Result<BusinessOrder> getBusinessOrderByOrderId(String orderId);
+    public Result<BusinessOrderVO> getBusinessOrderByOrderId(String orderId);
     /**
      * 分页获取报价列表
      * @param queryBusinessOrder

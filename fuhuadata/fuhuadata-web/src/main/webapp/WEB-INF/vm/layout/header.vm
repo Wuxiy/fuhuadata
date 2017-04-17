@@ -10,7 +10,7 @@
     </div>
     <div class="navbar-btn btn-group btn-group-xs pull-right">
         <button class="btn btn-primary"><span class="glyphicon glyphicon-envelope"></span></button>
-        <button class="btn btn-primary">业务员</button>
+        <button class="btn btn-primary">$!{user.name}</button>
         <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
         <ul class="dropdown-menu pull-right">
             <li><a href="$!{rc.contextPath}/password">修改密码</a></li>
@@ -106,7 +106,7 @@
         <li class="shadow-in">
             <div id="collapseSeven" class="list-group collapse">
                 <a class="list-group-item" href="#" lang="zh">数据字典维护</a>
-                <a class="list-group-item" href="/roleManager/into" lang="zh">角色管理</a>
+                <a class="list-group-item" href="/sys/role" lang="zh">角色管理</a>
                 <a class="list-group-item" href="/sys/menu" lang="zh">菜单管理</a>
 
             </div>

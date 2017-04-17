@@ -3,6 +3,7 @@ package com.fuhuadata.shiro.web.filter.authc;
 import com.fuhuadata.domain.mybatis.Principal;
 import com.fuhuadata.service.mybatis.UserService;
 import com.fuhuadata.service.util.UserLogUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.session.Session;
@@ -57,6 +58,7 @@ public class CustomFormAuthenticationFilter extends FormAuthenticationFilter {
     @Override
     protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request, ServletResponse response) throws Exception {
         logLoginAndUpdateUserAccessTime(request, response);
+        addUserToSession(subject);
         return super.onLoginSuccess(token, subject, request, response);
     }
 
@@ -68,12 +70,14 @@ public class CustomFormAuthenticationFilter extends FormAuthenticationFilter {
     /**
      * 添加当前登录用户信息到 Session 中
      *
-     * @param session
-     * @param token
+     * @param subject
      */
-    protected void addUserToSession(Session session, AuthenticationToken token) {
+    protected void addUserToSession(Subject subject) {
         // 登录成功后把当前用户写入 session
-
+        if (StringUtils.isNotBlank(getUserSessionParam())) {
+            Session session = subject.getSession();
+            session.setAttribute(getUserSessionParam(), subject.getPrincipal());
+        }
     }
 
     /**

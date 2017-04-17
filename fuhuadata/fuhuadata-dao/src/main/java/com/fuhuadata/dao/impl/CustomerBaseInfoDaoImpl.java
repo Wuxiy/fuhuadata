@@ -47,6 +47,8 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
     private static final String GET_FORMATDOC = "CUSTOMERBASEINFO.GET-FORMATDOC";
     private static final String GET_TIMEZONE = "CUSTOMERBASEINFO.GET-TIMEZONE";
 
+    private static final String GET_ORDER_BY_CUSTOMERID= "CUSTOMERBASEINFO.GET-BY-CUSTOMERID";
+
 
 
     public CustomerBaseInfo addCustomerBaseInfo(CustomerBaseInfo customerBaseInfo) {
@@ -77,7 +79,17 @@ public class CustomerBaseInfoDaoImpl extends SqlMapClientTemplate implements Cus
     public int deleteCustomerBaseInfoById(String customer_id) {
     	return this.update(DELETE_BY_ID, customer_id);
     }
-    
+
+    /**
+     * 订单客户信息
+     * @param custoemrId
+     * @return
+     */
+    @Override
+    public CustomerBaseInfo getOrderCustomerInfoByCustomerId(String custoemrId) {
+        return (CustomerBaseInfo) this.queryForObject(GET_ORDER_BY_CUSTOMERID,custoemrId);
+    }
+
     public List<CustomerBaseInfo> getAllCustomerBaseInfos() {
     	return this.queryForList(GET_ALL);
     }

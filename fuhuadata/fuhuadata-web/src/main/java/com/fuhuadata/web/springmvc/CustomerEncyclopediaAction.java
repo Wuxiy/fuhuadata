@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -63,8 +64,8 @@ public class CustomerEncyclopediaAction {
      */
     @RequestMapping(value = "/addCustomerEncyclopedia",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "add")
-    public ModelAndView addCustomerEncyclopedia(String encyId){
-        return new ModelAndView("knowledgeBase/encyclopediaAdd").addObject("encyId",encyId);
+    public ModelAndView addCustomerEncyclopedia(String encyId,String customerId){
+        return new ModelAndView("knowledgeBase/encyclopediaAdd").addObject("encyId",encyId).addObject("customerId",customerId);
     }
 
     @RequestMapping(value = "/doAddCustomerEncyclopedia",method = RequestMethod.POST)
@@ -73,6 +74,12 @@ public class CustomerEncyclopediaAction {
      public ResultPojo doAddCustomerEncyclopedia(@RequestBody CustomerEncyclopedia customerEncyclopedia){
         //
         try{
+            //后期获取系统用户和日期数据
+            customerEncyclopedia.setCreateUserId(1);
+            customerEncyclopedia.setCreateUserName("huxiangyang");
+            customerEncyclopedia.setLastmodifyUserId(1);
+            customerEncyclopedia.setLastmodifyUserName("胡向阳");
+
             Result<CustomerEncyclopedia> result = customerEncyclopediaService.addCustomerEncyclopedia(customerEncyclopedia);
             return result.getResultPojo();
         }catch(Exception e){
@@ -101,9 +108,12 @@ public class CustomerEncyclopediaAction {
      */
     @RequestMapping(value = "/modify",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "doUpdate")
-    public ModelAndView update(String encyId){
-        return new ModelAndView("knowledgeBase/encyclopediaInfo").addObject("encyId",encyId);
+    public ModelAndView update(String encyId,String customerId){
+        return new ModelAndView("knowledgeBase/encyclopediaInfo").addObject("encyId",encyId).addObject("customerId",customerId);
+<<<<<<< HEAD
 
+=======
+>>>>>>> ffa9ac86c03043179c271370706e70f8874c91bf
     }
 
     /**

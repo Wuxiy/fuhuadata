@@ -1,5 +1,7 @@
 package com.fuhuadata.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -54,7 +56,8 @@ public class BusinessOrder implements Serializable{
 
     private String failureAnalysis;//失败原因分析
 
-    private String dealTime;//nc系统合同签订时间
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date dealTime;//nc系统合同签订时间
     private String deliverInfo;//交单地址等信息 json格式
     private String expressInfo;//寄件信息 json格式
     private String dueTime;//应付款时间
@@ -64,7 +67,7 @@ public class BusinessOrder implements Serializable{
     private BigDecimal netProfit;//净利润
     private String actualPaymentTime;//实际付款时间
 
-    private String grossProfit;//毛利润
+    private BigDecimal grossProfit;//毛利润
 
     private BigDecimal actualAmountPaid;//实际付款金额
     private BigDecimal unpaidAmount;//未付金额
@@ -79,29 +82,6 @@ public class BusinessOrder implements Serializable{
     private String createTime;//创建时间
     private String modifyTime;//创建时间
 
-    public Integer getIsCreditRisk() {
-        return isCreditRisk;
-    }
-
-    public void setIsCreditRisk(Integer isCreditRisk) {
-        this.isCreditRisk = isCreditRisk;
-    }
-
-    public BigDecimal getInterestRate() {
-        return interestRate;
-    }
-
-    public void setInterestRate(BigDecimal interestRate) {
-        this.interestRate = interestRate;
-    }
-
-    public String getDealTime() {
-        return dealTime;
-    }
-
-    public void setDealTime(String dealTime) {
-        this.dealTime = dealTime;
-    }
 
     public String getOrderId() {
         return orderId;
@@ -175,6 +155,14 @@ public class BusinessOrder implements Serializable{
         this.departmentId = departmentId;
     }
 
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
     public String getSaleOrganizationId() {
         return saleOrganizationId;
     }
@@ -245,6 +233,46 @@ public class BusinessOrder implements Serializable{
 
     public void setTradeCountry(String tradeCountry) {
         this.tradeCountry = tradeCountry;
+    }
+
+    public Integer getIsCreditRisk() {
+        return isCreditRisk;
+    }
+
+    public void setIsCreditRisk(Integer isCreditRisk) {
+        this.isCreditRisk = isCreditRisk;
+    }
+
+    public BigDecimal getInterestRate() {
+        return interestRate;
+    }
+
+    public void setInterestRate(BigDecimal interestRate) {
+        this.interestRate = interestRate;
+    }
+
+    public BigDecimal getNusdexchgrate() {
+        return nusdexchgrate;
+    }
+
+    public void setNusdexchgrate(BigDecimal nusdexchgrate) {
+        this.nusdexchgrate = nusdexchgrate;
+    }
+
+    public BigDecimal getNexchangerate() {
+        return nexchangerate;
+    }
+
+    public void setNexchangerate(BigDecimal nexchangerate) {
+        this.nexchangerate = nexchangerate;
+    }
+
+    public Date getLastdelydate() {
+        return lastdelydate;
+    }
+
+    public void setLastdelydate(Date lastdelydate) {
+        this.lastdelydate = lastdelydate;
     }
 
     public BigDecimal getPremiumRate() {
@@ -327,6 +355,30 @@ public class BusinessOrder implements Serializable{
         this.partialShipmentFalg = partialShipmentFalg;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getFailureAnalysis() {
+        return failureAnalysis;
+    }
+
+    public void setFailureAnalysis(String failureAnalysis) {
+        this.failureAnalysis = failureAnalysis;
+    }
+
+    public Date getDealTime() {
+        return dealTime;
+    }
+
+    public void setDealTime(Date dealTime) {
+        this.dealTime = dealTime;
+    }
+
     public String getDeliverInfo() {
         return deliverInfo;
     }
@@ -389,6 +441,14 @@ public class BusinessOrder implements Serializable{
 
     public void setActualPaymentTime(String actualPaymentTime) {
         this.actualPaymentTime = actualPaymentTime;
+    }
+
+    public BigDecimal getGrossProfit() {
+        return grossProfit;
+    }
+
+    public void setGrossProfit(BigDecimal grossProfit) {
+        this.grossProfit = grossProfit;
     }
 
     public BigDecimal getActualAmountPaid() {
@@ -485,61 +545,5 @@ public class BusinessOrder implements Serializable{
 
     public void setModifyTime(String modifyTime) {
         this.modifyTime = modifyTime;
-    }
-
-    public String getFailureAnalysis() {
-        return failureAnalysis;
-    }
-
-    public void setFailureAnalysis(String failureAnalysis) {
-        this.failureAnalysis = failureAnalysis;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public String getGrossProfit() {
-        return grossProfit;
-    }
-
-    public void setGrossProfit(String grossProfit) {
-        this.grossProfit = grossProfit;
-    }
-
-    public BigDecimal getNusdexchgrate() {
-        return nusdexchgrate;
-    }
-
-    public void setNusdexchgrate(BigDecimal nusdexchgrate) {
-        this.nusdexchgrate = nusdexchgrate;
-    }
-
-    public BigDecimal getNexchangerate() {
-        return nexchangerate;
-    }
-
-    public void setNexchangerate(BigDecimal nexchangerate) {
-        this.nexchangerate = nexchangerate;
-    }
-
-    public Date getLastdelydate() {
-        return lastdelydate;
-    }
-
-    public void setLastdelydate(Date lastdelydate) {
-        this.lastdelydate = lastdelydate;
-    }
-
-    public String getDepartmentName() {
-        return departmentName;
-    }
-
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName;
     }
 }

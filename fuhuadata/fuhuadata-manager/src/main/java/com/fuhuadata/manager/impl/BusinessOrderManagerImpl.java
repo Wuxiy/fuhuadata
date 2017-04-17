@@ -1,9 +1,14 @@
 package com.fuhuadata.manager.impl;
 
 import com.fuhuadata.dao.BusinessOrderDao;
+import com.fuhuadata.dao.BusinessOrderProductDao;
+import com.fuhuadata.dao.CustomerBaseInfoDao;
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
 import com.fuhuadata.manager.BusinessOrderManager;
+import com.fuhuadata.util.StringUtil;
+import com.fuhuadata.vo.BusinessOrderProductList;
+import com.fuhuadata.vo.BusinessOrderVO;
 import com.fuhuadata.vo.CostAndProfitStatistics;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,6 +20,10 @@ import java.util.List;
 public class BusinessOrderManagerImpl implements BusinessOrderManager {
     @Autowired
     private BusinessOrderDao businessOrderDao;
+    @Autowired
+    private CustomerBaseInfoDao customerBaseInfoDao;
+    @Autowired
+    private BusinessOrderProductDao businessOrderProductDao;
     @Override
     public BusinessOrder addBusinessOrder(BusinessOrder businessOrder) {
         return businessOrderDao.addBusinessOrder(businessOrder);
@@ -73,5 +82,19 @@ public class BusinessOrderManagerImpl implements BusinessOrderManager {
     @Override
     public int countProfitStatistics(CostAndProfitStatistics costAndProfitStatistics) {
         return businessOrderDao.countProfitStatistics(costAndProfitStatistics);
+    }
+
+    @Override
+    public BusinessOrderVO getBusinessOrderAllInfo(String orderId) {
+        BusinessOrderVO businessOrderVO = new BusinessOrderVO();
+        BusinessOrder businessOrder= businessOrderDao.getBusinessOrderByOrderId(orderId);
+        businessOrderVO.setBusinessOrder(businessOrder);
+        businessOrderVO.setCustomerBaseInfo(customerBaseInfoDao.getOrderCustomerInfoByCustomerId(businessOrder.getCustomerId()));
+        List<BusinessOrderProductList> productList=businessOrderProductDao.getOrderProductList(orderId);
+        businessOrderVO.setBusinessOrderProductLists(productList);
+        for(BusinessOrderProductList c:productList){
+           c.setPackingSpecification(StringUtil.merge2string(c.getSpecification(),c.getModel(),"*"));
+        }
+        return businessOrderVO;
     }
 }

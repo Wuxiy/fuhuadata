@@ -6,14 +6,11 @@ import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.*;
 import com.fuhuadata.util.JsonUtils;
 import com.fuhuadata.vo.*;
-import com.fuhuadata.web.util.SystemLogAnnotation;
-import org.apache.commons.collections.map.HashedMap;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -350,4 +347,24 @@ public class BusinessOrderProductAction {
         map.put("businessOrderProduct",businessOrderProduct);
        return map;
     }
+
+    /**
+     * 删除订单产品要求，但是不删除档案信息
+     * @param businessProductIds
+     * @return
+     */
+    @RequestMapping("/deleteAllInfoByIds")
+    @ResponseBody
+    public ResultPojo deleteAllInfoByIds(String businessProductIds){
+        Result result = new Result();
+        try{
+            result.setSuccess(businessOrderProductService.deleteAllInfoByIds(businessProductIds));
+        }catch(Exception e){
+            result.setSuccess(false);
+            e.printStackTrace();
+        }
+        return result.getResultPojo();
+    }
+
+
 }
