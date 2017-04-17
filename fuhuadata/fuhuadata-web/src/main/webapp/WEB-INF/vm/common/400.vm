@@ -6,13 +6,13 @@
         <form id="myForm" class="form-horizontal">
           <div class="form-group">
             <div class="col-xs-12">
-              <h3>服务器错误...</h3>
+              <h3>请求出错...</h3>
             </div>
           </div>
         </form>
       </div>
       <div class="col-xs-12 hidden">
-          ${error.stackTrace}
+        ${error.stackTrace}
       </div>
     </div>
   </div>
