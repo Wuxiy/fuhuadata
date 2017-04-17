@@ -405,6 +405,7 @@
         LEFT JOIN product_ware pw ON pw.ware_id = bop.ware_id
         left JOIN product_info bi ON bi.product_id = bop.product_id
         LEFT JOIN business_product_require bpr on bpr.business_product_id = bop.id
+        WHERE bop.order_id = #orderId#
     </select>
 
 </sqlMap>
