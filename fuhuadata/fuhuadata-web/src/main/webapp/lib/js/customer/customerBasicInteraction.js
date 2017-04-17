@@ -374,7 +374,6 @@ CRM.cbInfo.init = function () {
 
     }else {
 
-        CRM.insertHtml('#funBtnA',$('#aBtn')); // 渲染功能按钮 新增
         CRM.cbInfo.aInitHandler(); // 新增
     }
 
@@ -385,6 +384,8 @@ CRM.cbInfo.init = function () {
 CRM.cbInfo.aInitHandler = function () {
     var page = CRM.cbInfo;
     CRM.insertHtml('#al',page.customerType); // 渲染cusotmerType表单控件
+    CRM.insertHtml('#funBtnA',$('#aBtn')); // 渲染功能按钮 新增
+    CRM.insertHtml('#backBtn',$('#funBtn')); // 返回
 
     // 渲染地区树
     CRM.ajaxCall({
@@ -528,6 +529,7 @@ $().ready(function() {
         pForm = null,
         mForm = null;
 
+    // 初始化
     page.init();
     pForm = page.pVerify(page.vDeploy());
     mForm = page.mVerify(page.vDeploy());
@@ -600,6 +602,13 @@ $().ready(function() {
         }
     });
 
+    // 添加更多产品
+    $('#add').on('click',function () {
+        var item = $('#pro').clone();
+
+        $('#cmpC').append(item.html());
+    });
+
     // 取消
     page.cancel = $('#cancel');
     page.cancel.on('click.cancel',function () {
@@ -668,6 +677,14 @@ $().ready(function() {
        $('input,textarea,select',$('#myForm')).val('');
        $('input[type="checkbox"]',$('#myForm')).val([]);
         // pForm.resetForm();
+    });
+
+    // 删除自己增加的产品
+    $(document).on('click.del','[data-btn="del"]',function () {
+        var $this = $(this),
+            tar   = $this.data('target');
+
+        $(this).closest(tar).remove();
     });
 });
 
