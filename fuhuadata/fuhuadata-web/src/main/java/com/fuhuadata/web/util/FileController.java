@@ -30,6 +30,7 @@ import java.util.Map;
 public class FileController {
     private static final Log log = LogFactory.getLog(FileController.class);
     private static final String  upoadURI = "images";
+    private static final String  DEFAULT_CLASSIFY = "default";
     private static final String LINUX_BASE = "/usr/local/tomcat8.0/apache-tomcat-8.0.39/webapps";
     @RequestMapping(value = "into",method = RequestMethod.GET)
     public ModelAndView upload(){
@@ -47,7 +48,7 @@ public class FileController {
         String base =getBase(request);
         String classifyPath = request.getParameter("classifyPath");
         if(StringUtils.isBlank(classifyPath)){
-            classifyPath = "default";
+            classifyPath = DEFAULT_CLASSIFY;
         }
         String path = base + File.separator + upoadURI + File.separator + classifyPath;
         File tempFile=null;
@@ -89,7 +90,7 @@ public class FileController {
         String base =getBase(request);
         String classifyPath = request.getParameter("classifyPath");
         if(StringUtils.isBlank(classifyPath)){
-            classifyPath = "default";
+            classifyPath = DEFAULT_CLASSIFY;
         }
         String path = base + File.separator + upoadURI + File.separator + classifyPath;
             if (files != null) {
