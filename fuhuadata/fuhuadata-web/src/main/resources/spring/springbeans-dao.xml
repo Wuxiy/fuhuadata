@@ -151,4 +151,5 @@
 	<bean id="businessRecordDao" class="com.fuhuadata.dao.impl.BusinessRecordDaoImpl"/>
 	<bean id="businessOrderDao" class="com.fuhuadata.dao.impl.BusinessOrderDaoImpl"/>
 	<bean id="contractDao" class="com.fuhuadata.dao.impl.ContractDaoImpl"/>
+	<bean id="dataArchivesDao" class="com.fuhuadata.dao.impl.DataArchivesDaoImpl"/>
 </beans>
