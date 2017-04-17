@@ -77,6 +77,8 @@
                                     <option value="0" lang="zh">已禁用</option>
                                 </select>
                             </div>
+                          <label for="" class="control-label col-xs-1" lang="zh">菜单标识</label>
+                          <div class="col-xs-2"><input id="identity" class="form-control" type="text" value="" /></div>
                         </div>
                         <div class="form-group"></div>
                         <div id="btnGroup" class="form-group hidden">
@@ -168,7 +170,7 @@
             thisEl.addClass('hidden');
             $('#btnGroup').removeClass('hidden');
             $('input,#searchingBtn','.panel-body').not('.notEdit').removeAttr('disabled');
-            $(document).off('.tree.s');
+//            $(document).off('.tree.s');
             $('#menuAside').parents('.panel').fadeOut();
 
             //以当前节点的id和name作为父节点的id和name
@@ -176,13 +178,12 @@
                 $('#parentName').val($('#name').val());
                 $('#parentId').val($('#menuId').val());
             }
-            $('#name,#menuId,#Url').val('');
+            $('#name,#menuId,#Url,#identity').val('');
         });
 
         //保存
         $(document).on('click.up','#save',function () {
             var menuData = setMenuObj();
-            console.log(menuData);
 
             jQuery.ajax({
                 url:'/sys/menu/ajax/add',
@@ -200,7 +201,7 @@
             $('#btnGroup').addClass('hidden');
             $('#menuAside').parents('.panel').fadeIn();
             forbiddenForm();
-            $(document).on('.tree.s');
+//            $(document).on('.tree.s');
         });
 
         //取消
@@ -214,7 +215,8 @@
                 parentId : ($('#parentId').val()=='' ? 0:$('#parentId').val()),
                 name : $('#name').val(),
                 url : $('#Url').val(),
-                enablestate : $('#enablestate').val()
+                enablestate : $('#enablestate').val(),
+                identity: $('#identity').val()
             };
             return obj;
         }
@@ -234,7 +236,7 @@
 
         //渲染表单
         function renderMenu(result){
-            $('#menuId,#parentId,#name,#Url,#parentName').val('');
+            $('#menuId,#parentId,#name,#Url,#parentName,#identity').val('');
             if(result.data!=null){
                 var data = result.data;
                 $('#menuId').val(data.menuId);
@@ -243,6 +245,7 @@
                 $('#Url').val(data.url);
                 $('#enablestate').val(data.enablestate);
                 $('#parentName').val(data.parentName);
+                $('#identity').val(data.identity);
             }
         }
 

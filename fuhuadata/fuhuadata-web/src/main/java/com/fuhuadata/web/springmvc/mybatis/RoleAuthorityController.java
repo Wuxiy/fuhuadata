@@ -11,7 +11,10 @@ import com.fuhuadata.vo.MenuTreeVo;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
 import java.util.List;
@@ -38,7 +41,7 @@ public class RoleAuthorityController extends BaseController<RoleAuthority, Integ
         this.menuService = menuService;
     }
 
-    @PostMapping("save")
+    @RequestMapping(value = "save", method = RequestMethod.POST)
     @ResponseBody
     public ResultPojo saveAuthsOfRole(@RequestParam("roleId") Integer roleId,
                                       @RequestParam("auths") String authsStr) {
@@ -72,7 +75,7 @@ public class RoleAuthorityController extends BaseController<RoleAuthority, Integ
         return result.getResultPojo();
     }
 
-    @PostMapping("/permission")
+    @RequestMapping(value = "/permission", method = RequestMethod.POST)
     @ResponseBody
     @SystemLogAnnotation(module = "sys-auth", methods = "updateRolePermission")
     public ResultPojo updateRolePermissions(@RequestParam("permissions") String permissionsStr) {
@@ -94,7 +97,7 @@ public class RoleAuthorityController extends BaseController<RoleAuthority, Integ
         return result.getResultPojo();
     }
 
-    @GetMapping(value = "/permission")
+    @RequestMapping(value = "/permission", method = RequestMethod.GET)
     @ResponseBody
     public ResultPojo listPermissionMenus(@RequestParam("roleId") Integer roleId) {
         Result<List<MenuTreeVo>> result = Result.newResult(true);

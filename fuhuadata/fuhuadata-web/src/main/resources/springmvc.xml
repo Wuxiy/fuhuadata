@@ -8,6 +8,8 @@
          http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
          http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
+    <context:property-placeholder location="classpath:resources.properties"/>
+
     <!-- 自动扫描,完成bean创建和依赖注入 -->
     <context:component-scan base-package="com.fuhuadata">
         <context:include-filter type="annotation"
@@ -51,6 +53,8 @@
 
     <!-- 配置Velocity视图解析器 ，将后缀为vm的文件交给下面的Resolver处理-->
     <bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+        <!-- velocity tool 2.0 使用 View -->
+        <property name="viewClass" value="com.fuhuadata.web.velocity.VelocityToolbox20View"/>
         <!--线上环境设置为true-->
         <property name="cache" value="false"/><!--是否缓存模板-->
         <property name="prefix" value="/"/>
@@ -82,4 +86,5 @@
         <property name="maxUploadSize" value="10485760000"/>
         <property name="maxInMemorySize" value="40960"/>
     </bean>
+
 </beans>

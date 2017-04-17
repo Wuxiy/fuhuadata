@@ -2,17 +2,26 @@ package com.fuhuadata.service.impl.mybatis;
 
 import com.fuhuadata.constant.NodeType;
 import com.fuhuadata.dao.mapper.UserAccountMapper;
+import com.fuhuadata.domain.mybatis.Principal;
 import com.fuhuadata.domain.mybatis.UserAccount;
+import com.fuhuadata.service.exception.ServiceException;
+import com.fuhuadata.service.exception.UserNotExistsException;
+import com.fuhuadata.service.exception.UserPasswordNotMatchException;
+import com.fuhuadata.service.mybatis.PasswordService;
 import com.fuhuadata.service.mybatis.UserRoleService;
 import com.fuhuadata.service.mybatis.UserService;
+import com.fuhuadata.service.util.IpUtils;
 import com.fuhuadata.service.util.UserTreeCache;
 import com.fuhuadata.vo.MixNodeVO;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 /**
@@ -25,9 +34,16 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
 
     private UserRoleService userRoleService;
 
+    private PasswordService passwordService;
+
     @Autowired
     public void setUserRoleService(UserRoleService userRoleService) {
         this.userRoleService = userRoleService;
+    }
+
+    @Autowired
+    public void setPasswordService(PasswordService passwordService) {
+        this.passwordService = passwordService;
     }
 
     private UserAccountMapper getUserMapper() {
@@ -157,4 +173,73 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
 
         return node;
     }
+
+    @Override
+    public UserAccount getUserByLoginName(String loginName) {
+        if (StringUtils.isEmpty(loginName)) {
+            return null;
+        }
+
+        Example example = new Example(UserAccount.class);
+        example.createCriteria().andEqualTo("code", loginName);
+
+        List<UserAccount> users = getUserMapper().selectByExample(example);
+        int size = users.size();
+        if (size == 1) {
+            return users.get(0);
+        } else if (size > 1) {
+            throw new ServiceException("用户登录名：" + loginName + "不唯一");
+        }
+        return null;
+    }
+
+    @Override
+    public UserAccount login(String loginName, String password) {
+
+        if (StringUtils.isBlank(loginName) || StringUtils.isBlank(password)) {
+            throw new UserNotExistsException("用户不存在");
+        }
+        // 检查密码长度是否正确
+        if (password.length() < UserAccount.PASSWORD_MIN_LENGTH
+                || password.length() > UserAccount.PASSWORD_MAX_LENGTH) {
+            throw new UserPasswordNotMatchException("密码长度错误");
+        }
+
+        // 获取当前代理对象，为了走切面
+        UserAccount user = ((UserService) AopContext.currentProxy()).getUserByLoginName(loginName);
+
+        passwordService.validate(user, password);
+
+        return user;
+    }
+
+    @Override
+    public void updateUserLoginInfo(Principal principal, HttpServletRequest request) {
+        Integer id = principal.getId();
+        UserAccount userAccount = get(id);
+
+        // 保存上次登录信息
+        userAccount.setLastLoginIp(userAccount.getLoginIp());
+        userAccount.setLastLoginTime(userAccount.getLoginTime());
+        // 保存这次登录信息
+        userAccount.setLoginIp(IpUtils.getIpAddr(request));
+        userAccount.setLoginTime(new Date());
+
+        update(userAccount);
+    }
+
+    @Override
+    public void changePassword(Integer userId, String password) {
+        if (userId == null || StringUtils.isBlank(password)) {
+            return;
+        }
+
+        UserAccount userAccount = get(userId);
+        if (userAccount != null) {
+            userAccount.setLastPassword(userAccount.getLoginPassword());
+            userAccount.setLoginPassword(password);
+            update(userAccount);
+        }
+    }
+
 }

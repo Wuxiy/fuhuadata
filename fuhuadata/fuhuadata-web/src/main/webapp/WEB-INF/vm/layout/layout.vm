@@ -36,32 +36,36 @@
 ##    </script>
 </head>
 <body class="bg-page">
-<div class="container-fluid">
-    
-    <!--头部-->
-    #parse("layout/header.vm")
-    
-    <!--主要内容-->
-    <div class="clearfix content shadow-out">
+    #if ($!nolayout)
+        $screen_content
+    #else
+    <div class="container-fluid">
+
+      <!--头部-->
+        #parse("layout/header.vm")
+
+      <!--主要内容-->
+      <div class="clearfix content shadow-out">
 
         <!--容器-->
-        $screen_content
+          $screen_content
+      </div>
     </div>
-</div>
 
     <!--脚部-->
-    #parse('layout/footer.vm')
+        #parse('layout/footer.vm')
 
-<script>
-    $(document).on('click.close.nav.open','body',function (e) {
+    <script>
+      $(document).on('click.close.nav.open', 'body', function (e) {
         var thisEl = e.target;
 
         //如果点击的元素不是导航的子元素，则关闭导航
-        if($(thisEl).parents('#nav-affix').length==0){
-            $('#nav-affix').find('[data-toggle="collapse"]').filter('[aria-expanded="true"]').click();
+        if ($(thisEl).parents('#nav-affix').length == 0) {
+          $('#nav-affix').find('[data-toggle="collapse"]').filter('[aria-expanded="true"]').click();
         }
-    })
-</script>
+      })
+    </script>
+    #end
 </body>
 </html>
 

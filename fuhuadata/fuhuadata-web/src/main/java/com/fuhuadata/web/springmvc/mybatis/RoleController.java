@@ -6,19 +6,25 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.mybatis.UserRoleService;
 import com.fuhuadata.service.mybatis.UserService;
+import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -36,6 +42,10 @@ public class RoleController extends BaseTreeableController<Role, Integer> {
 
     private UserService userService;
 
+    public RoleController() {
+        setResourceIdentity("sys:role");
+    }
+
     @Autowired
     public void setUserRoleService(UserRoleService userRoleService) {
         this.userRoleService = userRoleService;
@@ -46,6 +56,7 @@ public class RoleController extends BaseTreeableController<Role, Integer> {
         this.userService = userService;
     }
 
+    @RequiresPermissions("sys:role:view")
     @RequestMapping(value = {"", "init"}, method = RequestMethod.GET)
     public String mian() {
         return "system/systemRoleManage";
@@ -69,6 +80,11 @@ public class RoleController extends BaseTreeableController<Role, Integer> {
     @SystemLogAnnotation(module = "sys-role", methods = "saveUsersOfRole")
     public ResultPojo saveUsersOfRole(UserRole userRoleOri, @RequestParam("userIds") String userIds,
                                       @RequestParam(value = "deptIds", required = false) String deptIds) {
+
+        if (permissionList != null) {
+            permissionList.assertHasEditPermission();
+        }
+
         Result<Boolean> result = Result.newResult(false);
         List<UserRole> userRoles = Lists.newArrayList();
         Set<Integer> userIdsSet = Sets.newHashSet();
@@ -98,6 +114,9 @@ public class RoleController extends BaseTreeableController<Role, Integer> {
                 for (Integer userId : userIdsSet) {
                     UserRole userRole = (UserRole) BeanUtils.cloneBean(userRoleOri);
                     userRole.setUserId(userId);
+                    userRole.setAuthUserId(LoginUtils.getLoginId());
+                    userRole.setAuthUserName(LoginUtils.getLoginName());
+                    userRole.setAuthTime(new Date());
 
                     userRoles.add(userRole);
                 }
@@ -115,7 +134,7 @@ public class RoleController extends BaseTreeableController<Role, Integer> {
         return result.getResultPojo();
     }
 
-    @PostMapping("/users/delete")
+    @RequestMapping(value = "/users/delete", method = RequestMethod.POST)
     @ResponseBody
     public ResultPojo deleteUsersOfRole(@RequestParam("roleId") Integer roleId,
                                         @RequestParam("userIds") String userIdsStr) {

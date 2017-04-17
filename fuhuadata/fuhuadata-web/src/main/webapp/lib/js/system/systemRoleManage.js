@@ -182,11 +182,20 @@ CRM.systemRoleManage.collectData = function () {
 // 刷新页面数据
 CRM.systemRoleManage.resetPage = function (id) {
     var page = CRM.systemRoleManage;
-    CRM.ajaxCall({
-        url: page.ROLE_DETAILS_GET + id,
-        type: 'GET',
-        callback: page.renderData
-    })
+
+    if (id == 0) {
+        page.renderData({
+            roleId: id,
+            name: '全部',
+            enable: 1
+        });
+    } else {
+        CRM.ajaxCall({
+            url: page.ROLE_DETAILS_GET + id,
+            type: 'GET',
+            callback: page.renderData
+        })
+    }
 };
 
 // 处理用户表格渲染

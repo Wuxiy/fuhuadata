@@ -8,8 +8,8 @@ import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -31,7 +31,7 @@ public class UserAreaController extends BaseController<UserArea, Integer> {
         this.userAreaService = userAreaService;
     }
 
-    @PostMapping("save")
+    @RequestMapping(value = "save", method = RequestMethod.POST)
     @SystemLogAnnotation(module = "sys-user", methods = "saveAreaForUser")
     @ResponseBody
     public ResultPojo saveAreasForUser(@RequestParam("userId") Integer userId,

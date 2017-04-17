@@ -1,8 +1,10 @@
 package com.fuhuadata.service.mybatis;
 
+import com.fuhuadata.domain.mybatis.Principal;
 import com.fuhuadata.domain.mybatis.UserAccount;
 import com.fuhuadata.vo.MixNodeVO;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashSet;
 import java.util.List;
 
@@ -47,4 +49,12 @@ public interface UserService extends BaseService<UserAccount, Integer> {
      * @return
      */
     List<Integer> listUserIdsByDeptIds(List<String> deptIds);
+
+    UserAccount getUserByLoginName(String loginName);
+
+    UserAccount login(String loginName, String password);
+
+    void updateUserLoginInfo(Principal principal, HttpServletRequest request);
+
+    void changePassword(Integer userId, String password);
 }

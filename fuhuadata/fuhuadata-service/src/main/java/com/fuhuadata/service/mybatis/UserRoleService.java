@@ -4,6 +4,7 @@ import com.fuhuadata.domain.mybatis.UserAccount;
 import com.fuhuadata.domain.mybatis.UserRole;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * <p>User: wangjie
@@ -31,7 +32,19 @@ public interface UserRoleService extends BaseService<UserRole, Integer> {
      */
     List<UserRole> listUsersOfRole(Integer roleId);
 
+    /**
+     * 获取角色关联的用户
+     * @param roleId
+     * @return
+     */
     List<UserAccount> listUserAccountByRoleId(Integer roleId);
+
+    /**
+     * 获取用户关联角色id
+     * @param userId
+     * @return
+     */
+    Set<Integer> getRoleIds(Integer userId);
 
     /**
      * 删除角色关联用户
