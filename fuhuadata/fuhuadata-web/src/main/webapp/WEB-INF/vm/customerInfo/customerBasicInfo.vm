@@ -145,7 +145,7 @@
                                         <option value="0" lang="zh">无</option>
                                     </select>
                                 </div>
-                                <label for="customerLevel" class="control-label col-xs-1" lang="zh">客户类型</label>
+                                <label for="customerLevel" class="control-label col-xs-1" lang="zh">客户级别</label>
                                 <div class="col-xs-2">
                                     <select id="customerLevel" data-control="off" disabled name="customerLevel" class="form-control" >
                                         <option value="" selected >——请选择客户类型——</option>
@@ -255,7 +255,7 @@
                 <!--客户百科-->
                 <div class="panel panel-default panel-edit view-HD-lg" data-view="editHide">
                     <div class="panel-heading">
-                        <a href="/customerencyclopedia/modify" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
+                        <a href="/customerEncyclopedia/addCustomerEncyclopedia?encyId=$!{encyId}" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
                             编辑百科
                         </a>
                         <h3 class="panel-title" lang="zh">
@@ -332,7 +332,7 @@
         <div class="col-xs-2"><input name="productName" data-control="off" disabled class="form-control" type="text" value="<%=data[i].productName%>"></div>
         <label class="col-xs-1  control-label">产能</label>
         <div class="col-xs-2"><input name="production" data-control="off" disabled  class="form-control" type="text" value="<%=data[i].production%>"></div>
-        <button data-btn="del" type="button" class="close pull-left" data-target=".form-group" style="position: absolute;top: 2px;">
+        <button data-btn="del" data-view="editView" type="button" class="close pull-left" data-target=".form-group" style="position: absolute;top: 2px;">
             <span class="glyphicon glyphicon-remove-sign"></span>
         </button>
     </div>
