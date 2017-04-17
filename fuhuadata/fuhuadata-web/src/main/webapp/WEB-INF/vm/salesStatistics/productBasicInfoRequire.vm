@@ -417,7 +417,7 @@
                     success:function (result) {
                         var ResultData = result.data;
                         console.log(result);
-                        window.location.href = basePath + '/businessProduct/intoProductRequire?orderId='+ResultData.orderId+'&&businessProductId='+ResultData.businessProductId+'';
+                        window.location.href = basePath + '/businessProduct/intoProductRequire';
                     }
                 })
             }
@@ -429,6 +429,7 @@
                     data:edit(),
                     success:function (result) {
                         console.log(result);
+                        window.location.href = basePath + '/businessProduct/intoProductRequire';
                     }
                 })
             }

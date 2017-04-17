@@ -8,7 +8,7 @@ CRM.enc = window.CRM.enc || {};
 CRM.enc.status = '';
 
 // url
-CRM.enc.INFO_LOOK_GET = '/customerEncyclopedia/getById?encyId=';
+CRM.enc.INFO_LOOK_GET = '/customerEncyclopedia/getById';
 CRM.enc.UP_DATA_POST = '/customerEncyclopedia/doModify';
 CRM.enc.ADD_DATA_POST = '/customerEncyclopedia/doAddCustomerEncyclopedia';
 
@@ -262,7 +262,7 @@ CRM.enc.getStatus = function () {
     if (page.nature.val()==='info' && page.encyId.val()!=='') {
 
         page.status = 'info';
-    }else if (page.nature.val()==='edit' && page.encyId.val()!=='') {
+    }else if (page.nature.val()==='edit' && (page.encyId.val()!==''|| page.customerId.val()!=='')) {
 
         page.status = 'edit';
     }else if (page.nature.val()==='edit' && page.encyId.val()==='') {
@@ -276,7 +276,7 @@ CRM.enc.renderEditPageHandler = function (id) {
     var page = CRM.enc;
 
     CRM.ajaxCall({
-            url  : page.INFO_LOOK_GET + page.encyId.val(),
+            url  : page.encyId.val()!=''?page.INFO_LOOK_GET+'?encyId='+page.encyId.val():page.INFO_LOOK_GET+'?customerId='+page.customerId.val(),
             type : 'GET',
         callback : function (data) {
             // data.customerAreaId

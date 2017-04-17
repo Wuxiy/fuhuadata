@@ -2,27 +2,20 @@
  * Created by young on 2017/3/7.
  */
 
-    //分割url，获取上个页面传过来的id
-    /*var thisURL = document.URL;
-    var trans = thisURL.split('?')[1];
-    var trans1 = trans.split('&')[0];
-    var trans2 = trans.split('&')[1];
-    var id = trans1.split('=')[1];
-    var bid = trans2.split('=')[1];*/
     var id = $('#id').val();
-var bid = $('#bid').val();
-var sid = $('#sid').val();
-    console.log(bid);
-console.log(sid);
-console.log(id);
+    var bid = $('#bid').val();
+    var sid = $('#sid').val();
+
     var table = document.getElementById('packing_relate_table');
-    var imgContent = document.getElementById('imgContent');
+    var imgGroup = document.getElementById('imgGroup');
+
 
     if(bid != 1){
         $('.relate').hide();
     }
 
 $(document).ready(function(){
+    $('.imagesbtn').hide();
     var url = basePath+'/packingArchives/getPackingArchivesById?id='+id;
     jQuery.ajax({
         type:'GET',
@@ -72,16 +65,19 @@ $(document).ready(function(){
             }
 
             if(ResultData.imagePath){
-                $('.form-btn').show();
-                var reData = ResultData.imagePath;
+                var reData = eval(ResultData.imagePath);
+                console.log(reData);
                 for(var j=0;j<reData.length;j++){
-                    imgContent.innerHTML += '<div class="col-xs-3">'+
-                            '<button type="button" class="close" name="close" style="position: absolute;top:3px;left:0;" disabled>×</button>'+
-                            '<img src="../'+reData[j].path+'" class="fileimg" width="300px" height="200px" style="margin-bottom:2%">'+
-                            '<input type="file" name="file" style="margin-bottom:2%" disabled><div>'+
-                            '<input type="text" name="file" class="filename" data-url="'+reData[j].path+'" style="margin-bottom:2%" value="'+reData[j].name+'" disabled>'+
-                            '</div>'+
-                            '</div>';
+                    imgGroup.innerHTML += '<div class="col-xs-3">'+
+                        '<button type="button" class="close" name="close" style="position: absolute;top:3px;left:0;" disabled>×</button>'+
+                        '<div class="col-xs-12 thumbnail">'+
+                        '<img style="height: 240px;" data-toggle="modal" data-target="#imgModal" data-name="" src="'+reData[j].path+'" alt="请点击添加图片" class="imgpath">'+
+                        '<div class="input-group col-xs-10 col-xs-offset-1" style="padding-top: 5px">'+
+                        '<input class="form-control text-center filename" data-url="'+reData[j].path+'" style="" value="'+reData[j].name+'" disabled/>'+
+                        '<div class="input-group-btn"><button data-btn="modification" class="btn btn-xs btn-default" type="button" disabled>图片修改</button></div>'+
+                        '</div>'+
+                        '</div>'+
+                        '</div>';
                 }
             }
 
@@ -91,7 +87,70 @@ $(document).ready(function(){
 
 //图片上传
 
-function fsubmit(){
+var thisThumbnail = null;
+
+// 点击图片添加或者查看大图
+$('#imgGroup').on('click.select','img',function (e) {
+
+    // 阻止默认行为
+    e.preventDefault();
+
+    var el       = $(e.target).parents('.thumbnail').length!==0 ? $(e.target).parents('.thumbnail') : $(e.target),
+        file     = $('#openFile'),
+        imgModal = $('#imgModal'),
+        img      = $(e.target),
+        src      = img.attr('src');
+
+    thisThumbnail = el; // 取得当前缩略图框
+
+    if (!(src == '' || src == '/lib/img/placeholder.png')) {
+
+        imgModal.find('img').attr('src',src); // 打开模态
+    }else {
+
+        e.stopPropagation(); // 阻止打开模态
+        file.trigger('click'); // 打开file
+    }
+});
+
+// monBtn绑定事件
+$('#imgGroup').on('click.mon','[data-btn="modification"]',function (e) {
+    e.stopPropagation();
+    var el   = $(e.target).parents('.thumbnail').length!==0 ? $(e.target).parents('.thumbnail') : $(e.target),
+        file = $('#openFile');
+    thisThumbnail = el; //取得当前缩略图框
+    file.trigger('click'); // 打开file
+});
+
+// file绑定change事件
+$('#openFile').on('change.file',function (e) {
+//            console.log(thisThumbnail);
+    var img    = thisThumbnail.find('img'),
+        input  = thisThumbnail.find('input'),
+        fileF  = $('#fileForm')[0], // 转化为DOM对象
+        monBtn = thisThumbnail.find('[data-btn="modification"]'),
+        data   = new FormData(fileF);
+    data.append("classifyPath","packingAchive");
+
+    console.log(data);
+    CRM.ajaxCall({
+        url         : '/upload/uploadFileAll',
+        type        : 'POST',
+        data        : data,
+        dataType: 'JSON',
+        cache: false,
+        processData: false,
+        contentType: false,
+        callback    :  function (data) {
+            img.attr('src',(basePath==""?("/"+basePath):basePath)+data);
+            input.attr('data-url',(basePath==""?("/"+basePath):basePath)+data);
+            fileF.reset(); // 重置file的值
+            monBtn.removeClass('hidden'); // 显示修改按钮
+        }
+    });
+});
+
+/*function fsubmit(){
     var data = new FormData($('#form1')[0]);
     console.log(data);
     jQuery.ajax({
@@ -113,7 +172,7 @@ function fsubmit(){
         }
     });
     return false;
-}
+}*/
 
 //图片JSON
 function imgArr(){
@@ -142,6 +201,7 @@ function checkboxArr() {
 
 //baocai编辑
 $(document).on('click.edit','#edit',function () {
+    $('.imagesbtn').show();
 });
 //baocai信息取消提交
 $(document).on('click.cancel','#cancel',function(){

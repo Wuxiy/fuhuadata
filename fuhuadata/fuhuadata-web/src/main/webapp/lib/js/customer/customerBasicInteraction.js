@@ -7,6 +7,7 @@ CRM.cbInfo   = window.CRM.cbInfo || {};
 CRM.cbInfo.LOOK_POST    = '/customerBaseInfo/showCustomerBaseInfoDetails'; // 客户基本信息查看
 CRM.cbInfo.EDIT_POST    = '/customerBaseInfo/updateCustomerBaseInfo'; // 客户基本信息编辑
 CRM.cbInfo.ADD_POST     = '/customerBaseInfo/doAddCustomerBaseInfo'; // 客户信息新增
+CRM.cbInfo.encyUrl      = '/customerEncyclopedia/addCustomerEncyclopedia'; // 百科编辑
 
 CRM.cbInfo.editView     = null; // 编辑状态下显示的标签
 CRM.cbInfo.editHide     = null; // 编辑状态下隐藏的标签
@@ -271,6 +272,7 @@ CRM.cbInfo.renderForm = function(data){
     if (data.lastmodifyUserId) { page.lastmodifyUserId.val(data.lastmodifyUserId);}
     if (data.majorCompetitors) { page.majorCompetitors.val(data.majorCompetitors);}
     if (data.modifyTime) { page.modifyTime.val(data.modifyTime);} // time
+    if (data.opportunitySource) { page.opportunitySource.val(data.opportunitySource)} // 机会来源
     if (data.opportunityDescrible) { page.opportunityDescrible.val(data.opportunityDescrible);}
     if (data.otherOpportunity) { page.otherOpportunity.val(data.otherOpportunity);}
     if (data.productLine) { page.productLine.val(data.productLine);}
@@ -292,11 +294,23 @@ CRM.cbInfo.renderForm = function(data){
     if (data.lastmodifyUserNameEn) { encyData.lastmodifyUserNameEn = data.lastmodifyUserNameEn;}
     if (data.modifyTimeEn) { encyData.modifyTimeEn = data.modifyTimeEn;}
     if (data.customField) { encyData.customField = JSON.parse(data.customField);}
-    CRM.tplHandler('encyC',encyData,$('#ency'));
+    var isEncyData = false;
+    $.each(encyData,function (k,v) { // encyData是否有数据
+        if(encyData[k]!=undefined){
+            isEncyData = true;
+            return false;
+        }else {
+            return true;
+        }
+    });
+    if (isEncyData) { CRM.tplHandler('encyC',encyData,$('#ency'));} // 百科
+
 
     // 产品
     if (data.customerMakeProduct) { CRM.tplHandler('cmp',data.customerMakeProduct,$('#cmpC'));}
 
+    // 构造百科url
+    page.encyUrl += '?customerId=' + data.customerId + (data.encyId!=undefined? '&encyId=' + data.encyId : '');
 };
 
 // 返回页面状态，c合作客户页，l潜在客户页，r流失客户页，a潜在客户新增
@@ -325,11 +339,11 @@ CRM.cbInfo.returnStatus = function () {
 CRM.cbInfo.isView = function () {
     var page = CRM.cbInfo;
 
-    CRM.showOrHide(page.factor, null, $('#showFactory').prop('checked'));
-    CRM.showOrHide(page.mcg, null, $('#showMajorCompetitorsGroup').prop('checked'));
-    CRM.showOrHide(page.oppo, null, $('#showOpportunity').prop('selected'));
-    CRM.showOrHide(page.otherEnterpriceNature, null, $('#showOtherEnterpriceNature').prop('checked'));
-    CRM.showOrHide(page.otherOpportunity, null, $('#showOtherOpportunity').prop('selected'));
+    CRM.showOrHide(page.factor, null, $('#showFactory').prop('checked')); // 工厂
+    CRM.showOrHide(page.mcg, null, $('#showMajorCompetitorsGroup').prop('checked')); // 主要竞对
+    CRM.showOrHide(page.oppo, null, $('#showOpportunity').prop('selected')); // 机会来源
+    CRM.showOrHide(page.otherEnterpriceNature, null, $('#showOtherEnterpriceNature').prop('checked')); // 其他企业性质
+    CRM.showOrHide(page.otherOpportunity, null, $('#showOtherOpportunity').prop('selected')); // 其他机会
 };
 
 // 切换 隐藏/显示 和 禁用/启用
@@ -545,61 +559,11 @@ $().ready(function() {
     page.save = $('#save');
     page.save.on('click.save',function () {
 
-        $('#upModal').modal('show'); // 弹出是否提交表单
+        if (pForm.form()) { //验证通过弹出提交框
 
-        // 点击提交
-        if (page.status!='a'){ // 非新增状态
-
-            $('#up').on('click.up',function () {
-
-                if (pForm.form()) { // 验证通过则提交
-
-                    CRM.ajaxCall({
-                        url:page.EDIT_POST,
-                        data:page.collectData(),
-                        contentType:"application/json",
-                        method:'POST',
-                        callback:function () {
-
-                            page.renderPageHandler(page.cid);
-                        }
-                    })
-                }else {
-
-                    // $('#errorM').modal('show'); // 否则弹出错误弹框
-                    // $('#errorM').on('shown.bs.modal',function () {
-                    //
-                    //     setTimeout($('#errorM').modal('hide'),500);
-                    // })
-                }
-            });
-
-        }else{ // 新增状态
-
-            $('#up').on('click.up',function () {
-
-                if (pForm.form()) { // 验证通过则提交
-
-                    CRM.ajaxCall({
-                        url:page.ADD_POST,
-                        data:page.collectData(),
-                        contentType:"application/json",
-                        method:'POST',
-                        callback:function () {
-
-
-                        }
-                    })
-                }else {
-
-                    // $('#errorM').modal('show'); // 否则弹出错误弹框
-                    // $('#errorM').on('shown.bs.modal',function () {
-                    //
-                    //     setTimeout($('#errorM').modal('hide'),500);
-                    // })
-                }
-            });
+            $('#upModal').modal('show'); // 弹出是否提交表单
         }
+
     });
 
     // 添加更多产品
@@ -685,6 +649,45 @@ $().ready(function() {
             tar   = $this.data('target');
 
         $(this).closest(tar).remove();
+    });
+
+    // 点击提交表单
+    $('#up').on('click.up',function () {
+
+        if (page.status!='a') {
+
+            CRM.ajaxCall({
+                url:page.EDIT_POST,
+                data:page.collectData(),
+                contentType:"application/json",
+                method:'POST',
+                callback:function () {
+
+                    page.renderPageHandler(page.cid);
+                }
+            });
+
+        }else if (page.status=='a') {
+
+            CRM.ajaxCall({
+                url:page.ADD_POST,
+                data:page.collectData(),
+                contentType:"application/json",
+                method:'POST',
+                callback:function (data) {
+
+                    self.location = basePath+'/customerBaseInfo/intoCustomerBaseInfoDetails?' +
+                        'customerType=2&customerId='+ data.customerId;
+                }
+            });
+        }
+
+    });
+
+    //
+    $('#encyEdit').on('click.ency',function () {
+
+        self.location = basePath + page.encyUrl;
     });
 });
 

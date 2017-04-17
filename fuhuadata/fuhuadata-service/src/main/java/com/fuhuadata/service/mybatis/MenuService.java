@@ -4,6 +4,8 @@ import com.fuhuadata.domain.mybatis.Menu;
 import com.fuhuadata.vo.MenuTreeVo;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * <p>User: wangjie
@@ -17,6 +19,13 @@ public interface MenuService extends BaseTreeableService<Menu, Integer> {
      * @return
      */
     List<Menu> listAuthorityMenus(Integer roleId);
+
+    /**
+     * 获取角色关联菜单以及权限
+     * @param roleId
+     * @return
+     */
+    List<Menu> listMenuPermissions(Integer roleId);
 
     /**
      * 获取角色授权的菜单树
@@ -34,5 +43,22 @@ public interface MenuService extends BaseTreeableService<Menu, Integer> {
      * @return
      */
     List<MenuTreeVo> listPermissionMenuTree(Integer roleId);
+
+    /**
+     * 给现有树添加节点
+     * @param lookup 现有树的 Map
+     * @param addMenus
+     */
+    void addMenusToMenuTree(Map<Integer, MenuTreeVo> lookup, List<Menu> addMenus);
+
+    /**
+     * 获取资源的权限字符串，如 sys/role/view
+     * @param menuNode
+     * @param trees
+     * @return
+     */
+    String findActualResourceIdentity(MenuTreeVo menuNode, Map<Integer, MenuTreeVo> trees);
+
+    Set<String> getStringPermissions(Integer userId);
 
 }

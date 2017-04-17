@@ -6,6 +6,7 @@
           WARNING - @mbg.generated
         -->
         <id column="menu_id" jdbcType="INTEGER" property="menuId"/>
+        <result column="identity" jdbcType="VARCHAR" property="identity"/>
         <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
         <result column="parent_name" jdbcType="VARCHAR" property="parentName"/>
         <result column="parent_ids" jdbcType="VARCHAR" property="parentIds"/>
@@ -31,6 +32,7 @@
 
     <sql id="BaseColumns">
         m.menu_id,
+        m.identity,
         m.menu_name,
         m.parent_id,
         (SELECT p.menu_name FROM p_menu p WHERE p.menu_id=m.parent_id) parent_name,

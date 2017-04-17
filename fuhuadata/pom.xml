@@ -19,15 +19,19 @@
     <properties>
         <fuhuadata-common.version>1.0</fuhuadata-common.version>
         <fuhuadata.version>0.0.1-SNAPSHOT</fuhuadata.version>
-        <spring.version>4.3.2.RELEASE</spring.version>
+        <spring.version>4.2.9.RELEASE</spring.version>
         <jackson.version>1.5.5</jackson.version>
         <mysql.connector.version>5.1.5</mysql.connector.version>
         <mybatis.version>3.4.1</mybatis.version>
         <mybatis.spring.version>1.3.0</mybatis.spring.version>
         <mapper.version>3.3.9</mapper.version>
         <pagehelper.version>4.1.4</pagehelper.version>
+
+        <shiro.version>1.3.2</shiro.version>
+
+        <fastjson.version>1.2.31</fastjson.version>
         <slf4j.version>1.6.1</slf4j.version>
-        <junit.version>4.4</junit.version>
+        <junit.version>4.11</junit.version>
         <tomcat.maven.version>2.2</tomcat.maven.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -49,6 +53,20 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- 测试相关包 -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+                <scope>test</scope>
+            </dependency>
+
             <dependency>
                 <groupId>com.fuhua</groupId>
                 <artifactId>fuhuadata-domain</artifactId>
@@ -266,27 +284,6 @@
                 <artifactId>spring-aspects</artifactId>
                 <version>${spring.version}</version>
             </dependency>
-
-            <!-- <dependency>
-                 <groupId>org.springframework</groupId>
-                 <artifactId>spring</artifactId>
-                 <version>2.5.6</version>
-             </dependency>
-             <dependency>
-                 <groupId>org.springframework</groupId>
-                 <artifactId>spring-webmvc</artifactId>
-                 <version>2.5.6</version>
-             </dependency>
-             <dependency>
-                 <groupId>org.springframework</groupId>
-                 <artifactId>spring-aop</artifactId>
-                 <version>2.5.6</version>
-             </dependency>
-             <dependency>
-                 <groupId>org.springframework</groupId>
-                 <artifactId>spring-aspects</artifactId>
-                 <version>2.5.6</version>
-             </dependency> -->
             <!-- spring end -->
 
             <!-- aspectj begin -->
@@ -327,9 +324,9 @@
             </dependency>
             <!-- velocity begin -->
             <dependency>
-                <groupId>velocity-tools</groupId>
+                <groupId>org.apache.velocity</groupId>
                 <artifactId>velocity-tools</artifactId>
-                <version>1.2</version>
+                <version>2.0</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.velocity</groupId>
@@ -343,6 +340,33 @@
                 <version>2.1</version>
             </dependency>
             <!-- velocity end -->
+
+            <!-- apache shiro -->
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-core</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-web</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-spring</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-quartz</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-ehcache</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
 
             <!-- utils -->
             <dependency>
@@ -398,6 +422,11 @@
                 <artifactId>jackson-databind</artifactId>
                 <version>2.8.2</version>
             </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
             <!-- JSON END -->
 
             <!-- apache commons begin -->
@@ -419,12 +448,6 @@
                 <version>${mysql.connector.version}</version>
             </dependency>
             <!-- MySQL END -->
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
-                <scope>test</scope>
-            </dependency>
             <dependency>
                 <groupId>net.bull.javamelody</groupId>
                 <artifactId>javamelody</artifactId>
@@ -465,12 +488,6 @@
                 <groupId>com.thoughtworks.xstream</groupId>
                 <artifactId>xstream</artifactId>
                 <version>1.3.1</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-test</artifactId>
-                <version>${spring.version}</version>
-                <scope>test</scope>
             </dependency>
             <!-- CXF开始 -->
             <dependency>
@@ -532,6 +549,7 @@
                 <artifactId>httpcomponents-client</artifactId>
                 <version>4.3</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
     <build>

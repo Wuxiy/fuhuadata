@@ -17,8 +17,73 @@
 
 //图片上传
 
+var thisThumbnail = null;
+
+// 点击图片添加或者查看大图
+$('#imgGroup').on('click.select','img',function (e) {
+
+    // 阻止默认行为
+    e.preventDefault();
+
+    var el       = $(e.target).parents('.thumbnail').length!==0 ? $(e.target).parents('.thumbnail') : $(e.target),
+        file     = $('#openFile'),
+        imgModal = $('#imgModal'),
+        img      = $(e.target),
+        src      = img.attr('src');
+
+    thisThumbnail = el; // 取得当前缩略图框
+
+    if (!(src == '' || src == '/lib/img/placeholder.png')) {
+
+        imgModal.find('img').attr('src',src); // 打开模态
+    }else {
+
+        e.stopPropagation(); // 阻止打开模态
+        file.trigger('click'); // 打开file
+    }
+});
+
+// monBtn绑定事件
+$('#imgGroup').on('click.mon','[data-btn="modification"]',function (e) {
+    e.stopPropagation();
+    var el   = $(e.target).parents('.thumbnail').length!==0 ? $(e.target).parents('.thumbnail') : $(e.target),
+        file = $('#openFile');
+    thisThumbnail = el; //取得当前缩略图框
+    file.trigger('click'); // 打开file
+});
+
+// file绑定change事件
+$('#openFile').on('change.file',function (e) {
+//            console.log(thisThumbnail);
+    var img    = thisThumbnail.find('img'),
+        input  = thisThumbnail.find('input'),
+        fileF  = $('#fileForm')[0], // 转化为DOM对象
+        monBtn = thisThumbnail.find('[data-btn="modification"]'),
+        data   = new FormData(fileF);
+        data.append("classifyPath","packingAchive");
+
+    console.log(data);
+    CRM.ajaxCall({
+        url         : '/upload/uploadFileAll',
+        type        : 'POST',
+        data        : data,
+        dataType: 'JSON',
+        cache: false,
+        processData: false,
+        contentType: false,
+        callback    :  function (data) {
+            img.attr('src',(basePath==""?("/"+basePath):basePath)+data);
+            input.attr('data-url',(basePath==""?("/"+basePath):basePath)+data);
+            fileF.reset(); // 重置file的值
+            monBtn.removeClass('hidden'); // 显示修改按钮
+        }
+    });
+});
+
+/*
 function fsubmit(){
     var data = new FormData($('#form1')[0]);
+    data.append("classifyPath","packingAchive");
     console.log(data);
     jQuery.ajax({
         url: basePath+'/upload/uploadFileAll',
@@ -33,12 +98,13 @@ function fsubmit(){
             $.each(result.data,function(i,item){
                 console.log(item);
                 $('.filename').eq(i).attr('data-url',item);
-                $('.fileimg').eq(i).attr('src',"../"+basePath+item);
+                $('.fileimg').eq(i).attr('src',(basePath==""?("/"+basePath):basePath)+item);
             })
         }
     });
     return false;
 }
+*/
 
 //适用产品类型checkbox
 
@@ -173,7 +239,7 @@ $('.packingAdd').on('click',function(){
         "bRemarks": jQuery('#bremarks').val(),
     }
     console.log(data);
-    /*jQuery.ajax({
+    jQuery.ajax({
         type:"POST",
         url:url,
         dataType:"json",
@@ -183,7 +249,7 @@ $('.packingAdd').on('click',function(){
             alert("添加成功");
             location.reload();
         }
-    })*/
+    })
 })
 
 //全选框
@@ -204,6 +270,7 @@ $('#modal_checkAll').on('click',function(){
         }
     });
 })
+
 
 
 

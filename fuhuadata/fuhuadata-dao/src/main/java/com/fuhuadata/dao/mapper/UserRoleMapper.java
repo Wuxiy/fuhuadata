@@ -11,4 +11,6 @@ public interface UserRoleMapper extends BaseMapper<UserRole, Integer> {
     List<UserRole> listUsersOfRole(@Param("roleId") Integer roleId);
 
     List<UserAccount> listUserAccountsByRoleId(@Param("roleId") Integer roleId);
+
+    List<Integer> listRoleIdsByUserId(@Param("userId") Integer userId);
 }

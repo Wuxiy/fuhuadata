@@ -16,6 +16,11 @@
         <result column="pk_org" jdbcType="VARCHAR" property="pkOrg"/>
         <result column="pk_psndoc" jdbcType="VARCHAR" property="pkPsndoc"/>
         <result column="last_modify_time" jdbcType="TIMESTAMP" property="lastModifyTime"/>
+        <result column="login_ip" jdbcType="VARCHAR" property="loginIp"/>
+        <result column="login_time" jdbcType="TIMESTAMP" property="loginTime"/>
+        <result column="last_login_ip" jdbcType="VARCHAR" property="lastLoginIp"/>
+        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime"/>
+        <result column="login_count" jdbcType="INTEGER" property="loginCount"/>
         <result column="pk_dept" jdbcType="VARCHAR" property="pkDept"/>
     </resultMap>
 
@@ -31,7 +36,6 @@
     <sql id="BaseColumns">
         ua.id,
         ua.login_name,
-        ua.login_password,
         ua.name,
         ua.mobile,
         ua.birthdate,
