@@ -33,7 +33,7 @@ function fsubmit(){
             $.each(result.data,function(i,item){
                 console.log(item);
                 $('.filename').eq(i).attr('data-url',item);
-                $('.fileimg').eq(i).attr('src',"../"+basePath+item);
+                $('.fileimg').eq(i).attr('src',(basePath==""?("/"+basePath):basePath)+item);
             })
         }
     });

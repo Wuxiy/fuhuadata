@@ -2,9 +2,11 @@ package com.fuhuadata.web.util;
 
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -27,7 +29,8 @@ import java.util.Map;
 @RequestMapping(value = "/upload/*")
 public class FileController {
     private static final Log log = LogFactory.getLog(FileController.class);
-    private static final String  upoadURI = "images/";
+    private static final String  upoadURI = "images";
+    private static final String LINUX_BASE = "/usr/local/tomcat8.0/apache-tomcat-8.0.39/webapps";
     @RequestMapping(value = "into",method = RequestMethod.GET)
     public ModelAndView upload(){
         return new ModelAndView("knowledgeBase/uploadFile");
@@ -41,24 +44,24 @@ public class FileController {
     @ResponseBody
     public ResultPojo uploadFile(@RequestParam(value="file") MultipartFile file, HttpServletRequest request) {
         Result result = new Result();
-        String path;
+        String base =getBase(request);
+        String classifyPath = request.getParameter("classifyPath");
+        if(StringUtils.isBlank(classifyPath)){
+            classifyPath = "default";
+        }
+        String path = base + File.separator + upoadURI + File.separator + classifyPath;
         File tempFile=null;
         try {
                 if (!file.isEmpty()) {
                     try {
-                        path = request.getSession().getServletContext().getRealPath(upoadURI);//保存在服务器
                         System.out.println(path);
-
                         String fileName = file.getOriginalFilename();
                         tempFile = new File(path, fileName);
                         System.out.println(tempFile);
                         if (!tempFile.getParentFile().exists()) {
                             tempFile.getParentFile().mkdir();
                         }
-                        if (!tempFile.exists()) {
-                            tempFile.createNewFile();
-                        }
-                        file.transferTo(tempFile);
+                        FileCopyUtils.copy(file.getBytes(),tempFile);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -67,7 +70,7 @@ public class FileController {
             log.error("文件上传错误",e);
         }
         ResultPojo  resultPojo= result.getResultPojo();
-        resultPojo.setData(upoadURI+tempFile.getName());
+        resultPojo.setData(upoadURI + File.separator + classifyPath+File.separator+tempFile.getName());
         return resultPojo;
     }
 
@@ -83,27 +86,38 @@ public class FileController {
         Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
         org.springframework.util.MultiValueMap<String,MultipartFile> fileMap1=multipartRequest.getMultiFileMap();
             List<MultipartFile> files = fileMap1.get("file");
+        String base =getBase(request);
+        String classifyPath = request.getParameter("classifyPath");
+        if(StringUtils.isBlank(classifyPath)){
+            classifyPath = "default";
+        }
+        String path = base + File.separator + upoadURI + File.separator + classifyPath;
             if (files != null) {
                 for (MultipartFile file : files) {
-                    String path = request.getSession().getServletContext().getRealPath(upoadURI);//保存在服务器
-                    String fileName = file.getOriginalFilename();
+                    String fileName = System.currentTimeMillis()+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
                     File tempFile = new File(path, fileName);
-                    System.out.println(tempFile);
                     if (!tempFile.getParentFile().exists()) {
                         tempFile.getParentFile().mkdir();
                     }
-                    if (!tempFile.exists()) {
-                        tempFile.createNewFile();
-                        file.transferTo(tempFile);
-                    }
-                    fileURIs.add(upoadURI+tempFile.getName());
+                    System.out.println(tempFile);
+                    FileCopyUtils.copy(file.getBytes(),tempFile);
+                    fileURIs.add(upoadURI+File.separator+classifyPath+File.separator+tempFile.getName());
                 }
             }
             result.addDefaultModel(fileURIs);
           return result.getResultPojo();
     }
 
-
+    private String getBase(HttpServletRequest request){
+        String os = System.getProperty("os.name");
+        String path = null;
+        if(os.toLowerCase().startsWith("win")){
+            path = request.getSession().getServletContext().getRealPath("");
+        }else{
+            path = LINUX_BASE ;
+        }
+        return path;
+    }
     @RequestMapping(value = "/deleteFileSingle",method = RequestMethod.POST)
     @ResponseBody
     public ResultPojo deleteFileSingle(String imagePath){
