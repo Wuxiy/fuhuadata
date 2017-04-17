@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="DATAARCHIVES">
+    
+    <resultMap id="CURRTYPE-MAP" class="com.fuhuadata.vo.DataArchive.Currtype" >
+            <result column="pk_currtype" property="pkCurrtype" jdbcType="VARCHAR" />
+            <result column="name" property="name" jdbcType="VARCHAR" />
+            <result column="code" property="code" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <resultMap id="INCOME-MAP" class="com.fuhuadata.vo.DataArchive.Income" >
+        <result column="pk_income" property="pkIncome" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="name" property="name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="paymentday" property="paymentday" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="code" property="code" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="effectdate" property="effectdate" jdbcType="DATE" javaType="java.sql.Date"/>
+        <result column="diseffectdate" property="diseffectdate" jdbcType="DATE" javaType="java.sql.Date"/>
+        <result column="meno" property="meno" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    </resultMap>
+
+    <resultMap id="INCOTERM-MAP" class="com.fuhuadata.vo.DataArchive.Incoterm" >
+        <result column="pk_incoterm" property="pkIncoterm" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="code" property="code" jdbcType="VARCHAR" />
+        <result column="isinclufare" property="isinclufare" jdbcType="TINYINT" />
+        <result column="isincluprem" property="isincluprem" jdbcType="TINYINT" />
+    </resultMap>
+    
+    
+    <select id="GET-CURRTYPE" resultMap="CURRTYPE-MAP">
+    select * FROM  t_currtype
+    </select>
+
+    <select id="GET-INCOME" resultMap="INCOME-MAP">
+        select * FROM  t_income
+    </select>
+
+    <select id="GET-INCOTERM" resultMap="INCOTERM-MAP">
+        select * FROM  t_incoterm
+    </select>
+
+    
+    
+
+</sqlMap>

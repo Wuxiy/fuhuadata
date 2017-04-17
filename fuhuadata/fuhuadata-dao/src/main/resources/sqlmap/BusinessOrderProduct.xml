@@ -358,7 +358,7 @@
 
     <resultMap id="CUSTOMER-ORDER-PRODUCT-LIST-MAP" class="BusinessOrderProductList">
         <result property="orderId" column="order_id" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result property="orderProductId" column="id" jdbcType="INT" javaType="java.lang.Integer"/>
+        <result property="businessProductId" column="id" jdbcType="INT" javaType="java.lang.Integer"/>
         <result property="productName" column="name" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="productCode" column="product_code" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="categoryName" column="category_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
@@ -372,12 +372,14 @@
         <result property="deliveryTime" column="delivery_time" jdbcType="DATETIME" javaType="java.sql.Timestamp"/>
         <result property="minPrice" column="min_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
         <result property="customerProductName" column="customer_product_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="productRequireId" column="product_require_id" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>
 
     <select id="GET-ORDER-PRODUCT-LIST" parameterClass="java.lang.String" resultMap="CUSTOMER-ORDER-PRODUCT-LIST-MAP">
         SELECT
         bop.order_id,
         bop.id,
+        bpr.id product_require_id,
         bop.`name`,
         bi.product_code,
         bi.category_name,
@@ -391,10 +393,12 @@
         bop.cupboard_type,
         bop.delivery_time,
         bop.min_price
+
         FROM
         business_order_product bop
         LEFT JOIN product_ware pw ON pw.ware_id = bop.ware_id
         left JOIN product_info bi ON bi.product_id = bop.product_id
+        LEFT JOIN business_product_require bpr on bpr.business_product_id = bop.id
     </select>
 
 </sqlMap>
