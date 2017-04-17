@@ -88,14 +88,14 @@
                             <caption class="text-right"><span lang="zh">金额单位：万元</span></caption>
                             <thead>
                             <tr>
-                                <th class="text-center" lang="zh">订单编号</th>
-                                <th class="text-center" lang="zh">商机编号</th>
-                                <th class="text-center" lang="zh">客户名称</th>
-                                <th class="text-center" lang="zh">客户类型</th>
-                                <th class="text-center" lang="zh">企业性质</th>
-                                <th class="text-center" lang="zh">订单总价</th>
-                                <th class="text-center" lang="zh">订单产品</th>
-                                <th class="text-center" lang="zh">状态</th>
+                                <th class="text-center col-lg-1" lang="zh">订单编号</th>
+                                <th class="text-center col-lg-1" lang="zh">商机编号</th>
+                                <th class="text-center col-lg-1" lang="zh">客户名称</th>
+                                <th class="text-center col-lg-1" lang="zh">客户类型</th>
+                                <th class="text-center col-lg-1" lang="zh">企业性质</th>
+                                <th class="text-center col-lg-1" lang="zh">订单总价</th>
+                                <th class="text-center col-lg-4" lang="zh">订单产品</th>
+                                <th class="text-center col-lg-1" lang="zh">状态</th>
                             </tr>
                             </thead>
                             <tbody id="offerList">
@@ -159,7 +159,7 @@
 
     var customerLevelList = ['战略客户','大客户' ,'重要客户' ,'一般客户' ,'风险客户'];
     var businessOpportunity = ['工厂','分销商' ,'经销商' ,'终端客户' ,'其他'];
-    var businessState = ['待下单','失败','已下单'];
+    var businessStateList = ['报价失败','订单取消','报价中','已下单','已转化成订单','数据已上报到NC','已签约'];
     //根据页码获取列表数据
     function getDataList(pageNum,jq){
         var data = {
@@ -186,14 +186,14 @@
                 if(ResultData && ResultData!='' && ResultData!='null') {
                     for (var i = 0; i < ResultData.length; i++) {
                         _html += '<tr>';
-                        _html += '	<td><a href="">' + ResultData[i].orderId + '</td>';
+                        _html += '	<td><a href="'+basePath+'/businessOrder/intoOfferorOrder?orderId='+ResultData[i].orderId+'">' + ResultData[i].orderId + '</td>';
                         _html += '  <td><a href="">' + ResultData[i].businessId + '</a></td>';
                         _html += '  <td>' + ResultData[i].customerName + '</td>';
-                        _html += '  <td lang="zh">' + customerLevelList[ResultData[i].customerLevel - 1] + '</td>';
+                        _html += '  <td lang="zh">' + customerLevelList[ResultData[i].customerLevel + 2] + '</td>';
                         _html += '  <td lang="zh">' + ResultData[i].enterpriseNature + '</td>';
-                        _html += '  <td>' + ResultData[i].amountPayable + 'A</td>';
+                        _html += '  <td>' + ResultData[i].amountPayable + '</td>';
                         _html += '  <td>' + ResultData[i].orderProduct + '</td>';
-                        _html += '  <td lang="zh">' + ResultData[i].status + '</td>';
+                        _html += '  <td lang="zh">' + businessStateList[ResultData[i].status + 2]  + '</td>';
                         _html += '   </tr>';
                     }
                 }

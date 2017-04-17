@@ -555,9 +555,7 @@
                 'taxType':$('#taxType').val(),
                 'taxFree':$('#taxFree').val(),
                 'otherCost':$('#otherCost').val(),
-                'straightEmployingWay':'',
-                'straightEmployingScale':'',
-                'straightEmployingStandard':'',
+
                 "createTime": getTime(),
                 "createUserId": 2,
                 "createUserName":"杨洋",

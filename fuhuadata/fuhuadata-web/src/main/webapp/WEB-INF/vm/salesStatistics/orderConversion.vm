@@ -1,0 +1,113 @@
+
+<div class="clearfix content shadow-out">
+    <!--面包屑导航-->
+    <div class="nav-deputy shadow-out clearfix">
+        #breadcrumb()
+    </div>
+    <div class="dashboard-wrapper">
+        <div class="row">
+            <div class="col-xs-12">
+                <!--加工成分-->
+                <div class="panel panel-default view-HD-lg">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" lang="zh">订单转化</h3>
+                    </div>
+                    <div class="panel-body clearfix">
+                        <div class="form-horizontal">
+                            <div class="form-group ">
+                                <label class="col-xs-1 control-label" lang="zh">订单编号</label>
+                                <div class="col-xs-4">
+                                    <input class="form-control" type="text" id="orderId" value="" disabled />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body clearfix">
+                        <table class="table table-condensed table-bordered table-striped text-center">
+                            <thead>
+                            <tr>
+                                <th class="text-center col-xs-3" lang="zh">商机产品</th>
+                                <th class="text-center col-xs-2" lang="zh">最低销售价（元）</th>
+                                <th class="text-center col-xs-2" lang="zh">是否转化</th>
+                                <th class="text-center col-xs-2" lang="zh">合同单价（元）</th>
+                            </tr>
+                            </thead>
+                            <tbody id="conversiontable">
+
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td>产品总价</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body clearfix">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-xs-2 col-xs-offset-4">
+                            <a class="btn btn-block btn-primary" id="finish">转化</a>
+                        </div>
+                        <div class="col-xs-2">
+                            <button class="btn btn-block btn-default" type="reset">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input id="orderId" type="hidden" value="$!{orderId}">
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
+<script type="text/javascript" language="JavaScript">
+    var orderId = $('#orderId').val();
+    var conversiontable = $('#conversiontable').val();
+
+    $(document).ready(function(){
+
+        jQuery.ajax({
+            url:basePath + '' + orderId,
+            type:'POST',
+            data:'',
+            success:function(result){
+                conversiontable.innerHTML = '';
+                for(var i=0;i<result.length;i++){
+                    var ResultData = result[i];
+                    conversiontable.innerHTML += '<tr>' +
+                                    '<td>'+ResultData.name+'</td>
+                                    '<td>'+ResultData.name+'</td>'+
+                                    '<td><input type="checkbox" name="cellcheckbox" value="'+ResultData.businessProductId+'">'+ResultData.name+'</td>'+
+                                    '<td><input class="form-control" type="text" value="'+ResultData.name+'"></td>'+
+                                    '</tr>';
+                }
+            }
+        })
+
+    })
+
+    $('#finish').click(function(){
+        jQuery.ajax({
+            url:basePath + '',
+            type:'POST',
+            data:getIds(),
+            success:function(result){
+                console.log(result);
+            }
+        })
+    })
+
+    function getIds() {
+        var ids = new Array();
+        $("input[name='cellcheckbox']:checked").each(function(){
+            ids.push($(this).val());
+        })
+        return ids;
+    }
+</script>

@@ -170,6 +170,16 @@ public class BusinessOrderAction {
         return result.getResultPojo();
     }
 
+    /**
+     *  进入报价订单详情
+     * @param orderId
+     * @return
+     */
+    @RequestMapping("/intoOfferorOrder")
+    @SystemLogAnnotation(module = "salesStatistics",methods = "intoOfferorOrder")
+    public ModelAndView intoOfferorOrder(String orderId){
+        return new ModelAndView("salesStatistics/offerInfo").addObject("orderId",orderId);
+    }
 
     /**
      *  获取报价订单详情
