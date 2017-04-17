@@ -73,6 +73,10 @@ CRM.cbInfo.managementScope      = $('#managementScope'); // 经营范围
 CRM.cbInfo.opportunitySource    = $('#opportunitySource');
 CRM.cbInfo.otherEnterpriceNature= $('#otherEnterpriceNature');
 // CRM.cbInfo.customerStatus       = $('#customerStatus'); // 客户状态 0流失 1正常
+CRM.cbInfo.formatdoc            = $('#dataFormat');
+CRM.cbInfo.custclass            = $('#customerBasicTypes');
+CRM.cbInfo.timezone             = $('#timeZone');
+CRM.cbInfo.countryzone          = $('#commerceCountry');
 
 // 收集数据
 CRM.cbInfo.collectData = function () {
@@ -111,6 +115,11 @@ CRM.cbInfo.collectData = function () {
                 fullEnterpriseNature : page.sCustomerEnterpriceNature(),
                 area                 : page.areaId.find(':selected').text(),
                 country              : page.areaId.find(':selected').text(),
+                formatdoc            : page.formatdoc.val(),
+                custclass            : page.custclass.data('val'),
+                timezone             : page.timezone.data('val'),
+                countryzone          : page.countryzone.data('val'),
+                lossReason           : $('#reason').val()
             },
             customerEnterpriceNatures : page.customerEnterpriceNatureObj(),
             customerMakeProducts : page.customerMakeProductObj()
@@ -207,7 +216,7 @@ CRM.cbInfo.getCounData = function (data,id) {
     return res;
 };
 
-// 渲染地区树，渲染国家树，渲染表单
+// 渲染表单
 CRM.cbInfo.renderPage = function (id) {
     var page = CRM.cbInfo;
 
@@ -236,6 +245,9 @@ CRM.cbInfo.renderPage = function (id) {
 CRM.cbInfo.renderPageHandler = function (id) {
     var page = CRM.cbInfo;
 
+    // 重置表单
+    page.resetForm('#myForm');
+
     CRM.ajaxCall({
         url:page.LOOK_POST,
         type:'POST',
@@ -245,9 +257,22 @@ CRM.cbInfo.renderPageHandler = function (id) {
         callback:function (data) {
             var counTree = page.getCounData(page.areaTree,data.areaId); // 获取国家树的数据
             page.renderTree(counTree, 'countryId', '——请优先选择地区——'); // 创建国家树
-            page.renderForm(data); // 渲染页面表单
-            page.isView(); // 根据表单的值显示或隐藏元素
-            page.togglePage(page.isEdit); // 禁用和隐藏开关
+
+            // 渲染数据格式下拉框
+            CRM.ajaxCall({
+                url:'/customerBaseInfo/getFormatdoc',
+                type:'POST',
+                callback:function (dataF) {
+                    if (dataF) {
+
+                        CRM.tplHandler('dataFormatC',dataF,$('#dataFormat')); // 插入数据格式下拉框
+                        page.renderForm(data); // 渲染页面表单
+                        page.isView(); // 根据表单的值显示或隐藏元素
+                        page.togglePage(page.isEdit); // 禁用和隐藏开关
+                    }
+                }
+            });
+
         }
     });
 };
@@ -286,6 +311,16 @@ CRM.cbInfo.renderForm = function(data){
     if (data.factoryLocation) { page.factoryLocation.val(data.factoryLocation);}
     if (data.managementScope) { page.managementScope.val(data.managementScope);}
 
+    // 新加字段
+    if (data.formatdoc) { page.formatdoc.val(data.formatdoc);} // 数据格式
+    // if (data.formatdocName) { page.formatdoc.val(data.formatdocName);}
+    if (data.custclass) { page.custclass.data('val',data.custclass);} // 客户基本分类
+    if (data.custclassName) { page.custclass.val(data.custclassName);}
+    if (data.timezone) { page.timezone.data('val',data.timezone);} // 时区
+    if (data.timezoneName) { page.timezone.val(data.timezoneName);}
+    if (data.countryzone) { page.countryzone.data('val',data.countryzone);} // 贸易国别
+    if (data.countryzoneName) { page.countryzone.val(data.countryzoneName);}
+
     // 百科
     if (data.companyInfo) { encyData.companyInfo = data.companyInfo;}
     if (data.developHis) { encyData.developHis  = data.developHis;}
@@ -311,6 +346,13 @@ CRM.cbInfo.renderForm = function(data){
 
     // 构造百科url
     page.encyUrl += '?customerId=' + data.customerId + (data.encyId!=undefined? '&encyId=' + data.encyId : '');
+};
+
+// 重置表单
+CRM.cbInfo.resetForm = function (id) {
+    $('input,textarea,select',$(id)).val('');
+    $('input[type="checkbox"]',$(id)).val([]);
+    $('#customerBasicTypes,#timeZone,#commerceCountry').data('val','');
 };
 
 // 返回页面状态，c合作客户页，l潜在客户页，r流失客户页，a潜在客户新增
@@ -408,6 +450,17 @@ CRM.cbInfo.aInitHandler = function () {
         callback:function (res) {
             page.areaTree = res[0].nodes; // 将取到的树数据赋值给对象属性，下次有的话就不用再发请求了
             page.renderTree(page.areaTree, 'areaId', '——请选择地区——');
+        }
+    });
+    // 渲染数据格式下拉框
+    CRM.ajaxCall({
+        url:'/customerBaseInfo/getFormatdoc',
+        type:'POST',
+        callback:function (dataF) {
+            if (dataF) {
+
+                CRM.tplHandler('dataFormatC',dataF,$('#dataFormat')); // 插入数据格式下拉框
+            }
         }
     });
     page.togglePage(true);
@@ -536,6 +589,40 @@ CRM.cbInfo.mVerify = function (em) {
     });
 
     return rea;
+};
+
+// 给客户基本分类树添加点击事件
+CRM.cbInfo.cbtTreeClick = function (event, modLeftId, treeNode) {
+    var page = CRM.systemRoleManage;
+
+    $('#customerBasicTypes').val(treeNode.name);
+    $('#customerBasicTypes').data('val',treeNode.id);
+    $('#cbtModal').modal('hide');
+};
+
+// 渲染客户基本分类树
+CRM.cbInfo.renderCBTTree = function (data) {
+    var page = CRM.cbInfo,
+        setting = {
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            edit: {
+                enable: false
+            },
+            callback: {
+                onClick: page.cbtTreeClick
+            }
+        },
+        id = $('#cbtTree').attr('id'),
+        treeObj = null,
+        treeData = CRM.toArr(data);
+
+    $.fn.zTree.init($('#cbtTree'), setting, treeData);
+    treeObj = $.fn.zTree.getZTreeObj(id);
+    treeObj.expandAll(true); // 默认展开
 };
 
 $().ready(function() {
@@ -684,11 +771,118 @@ $().ready(function() {
 
     });
 
-    //
+    // 跳转百科编辑
     $('#encyEdit').on('click.ency',function () {
 
-        self.location = basePath + page.encyUrl;
+        window.open(basePath + page.encyUrl);
+        return false;
     });
+
+    // 时区下拉搜索框
+    // $('#timeZone').on('input.tz',function () {
+    //
+    //
+    // });
+
+    $('#timeZone').on('input.tz',function () {
+
+        if ($(this).val()!='') {
+            var obj = {
+                name: $(this).val()
+            };
+        }else {
+            var obj = {
+                name:'UTC'
+            };
+        }
+
+        $('#tz').html('');
+        CRM.ajaxCall({
+            url:'/customerBaseInfo/getTimezone',
+            type:'POST',
+            contentType:'application/json',
+            data:JSON.stringify(obj),
+            callback:function (data) {
+                if (data) {
+
+                    CRM.tplHandler('tzC',data,$('#tz'));
+                }
+            }
+        });
+    });
+
+    // 贸易国别下拉搜索框
+    $('#commerceCountry').on('input.cc',function () {
+
+        if ($(this).val()!='') {
+            var obj = {
+                name:$(this).val()
+            };
+            $('#cc').html('');
+            CRM.ajaxCall({
+                url:'/customerBaseInfo/getCountryzone',
+                type:'POST',
+                contentType:'application/json',
+                data:JSON.stringify(obj),
+                callback:function (data) {
+                    if (data) {
+                        CRM.tplHandler('tzC',data,$('#cc'));
+                    }
+                }
+            });
+        }
+    });
+
+    // 点击国别下拉菜单，将值添加到文本框
+    $('#cc').on('click.cc','a',function (e) {
+        var val = $(e.target).data('val'),
+            txt = $(e.target).text(),
+            tarInput = $('#commerceCountry');
+
+        tarInput.val(txt);
+        tarInput.data('val',val);
+        return false;
+    });
+
+    // 点击时区下拉菜单，将值添加到文本框
+    $('#tz').on('click.cc','a',function (e) {
+        var val = $(e.target).data('val'),
+            txt = $(e.target).text(),
+            tarInput = $('#timeZone');
+
+        tarInput.val(txt);
+        tarInput.data('val',val);
+        return false;
+    });
+
+    // 点击客户基本分类查找按钮，弹出树形菜单
+    $('#cbtSearch').on('click.tree',function () {
+        CRM.ajaxCall({
+            url:'/customerBaseInfo/getCustclass',
+            type:'GET',
+            callback:page.renderCBTTree
+        })
+    });
+
+    // 提交流失原因
+    $('#upReasons').on('click.upReason',function () {
+
+        if (page.status!='a') {
+
+            CRM.ajaxCall({
+                url:page.EDIT_POST,
+                data:page.collectData(),
+                contentType:"application/json",
+                method:'POST',
+                callback:function () {
+
+                    page.renderPageHandler(page.cid);
+                }
+            });
+
+        }
+    });
+
 });
 
 
