@@ -1,7 +1,7 @@
 package com.fuhuadata.dao;
 
 import com.fuhuadata.domain.PackingCategory;
-import com.fuhuadata.vo.PackingCategoryVO;
+import com.fuhuadata.vo.CategoryVO;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public interface PackingCategoryDao {
      * @param parentIds 1：主材 2：外包装 3：辅材,查询多种材料时逗号分隔，例如2,3表示只查询外包装和辅材
      * @return
      */
-    public List<PackingCategoryVO> getAllByLevel(String parentIds);
+    public List<CategoryVO> getAllByLevel(String parentIds);
 
 
 

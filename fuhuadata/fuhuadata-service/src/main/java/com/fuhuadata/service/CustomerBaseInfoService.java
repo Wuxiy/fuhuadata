@@ -7,8 +7,13 @@ import com.fuhuadata.domain.CustomerEnterpriceNature;
 import com.fuhuadata.domain.CustomerMakeProduct;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.domain.query.Result;
+import com.fuhuadata.vo.CategoryTree;
 import com.fuhuadata.vo.CustomerBaseInfoLinkman;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
+import com.fuhuadata.vo.DataArchive.Countryzone;
+import com.fuhuadata.vo.DataArchive.Custclass;
+import com.fuhuadata.vo.DataArchive.Formatdoc;
+import com.fuhuadata.vo.DataArchive.Timezone;
 
 /**
  * @author wangbo
@@ -117,5 +122,16 @@ public interface CustomerBaseInfoService {
 	 * @return
 	 */
 	public CustomerBaseInfo queryCooperationByCid(String customerId);
+
+
+	//客户基本信息 字段档案
+
+	public Result<List<Formatdoc>> getFormatdoc();
+
+	public Result<List<Countryzone>> getCountryzone(Countryzone countryzone);
+
+	public Result<List<Timezone>> getTimezone(Timezone timezone);
+
+	public Result<List<CategoryTree>> getCustclass();
 	
 }

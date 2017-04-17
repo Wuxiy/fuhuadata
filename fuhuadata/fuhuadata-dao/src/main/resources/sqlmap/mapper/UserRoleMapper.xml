@@ -44,8 +44,16 @@
         ur.auth_time ur_auth_time
     </sql>
 
+    <sql id="FromUserRole">
+        FROM p_user_role ur
+    </sql>
+
     <sql id="RoleUserJoin">
         LEFT JOIN p_user_account ua ON ua.id=ur.user_id
+    </sql>
+
+    <sql id="UserRoleJoinUser">
+        INNER JOIN p_user_account ua ON ua.id=ur.user_id
     </sql>
 
     <select id="listUsersOfRole" resultMap="UserExtendMap">
@@ -56,6 +64,20 @@
         FROM p_user_role ur
         <include refid="RoleUserJoin"/>
         <include refid="com.fuhuadata.dao.mapper.AreaCodeMapper.UserAreasJoin"/>
+        WHERE ur.role_id=#{roleId}
+    </select>
+
+    <select id="listUserAccountsByRoleId" resultMap="com.fuhuadata.dao.mapper.UserAccountMapper.BaseResultMap">
+        SELECT
+        ua.id,
+        ua.name,
+        ua.code,
+        ua.pk_org,
+        ua.pk_psndoc,
+        jo.pk_dept
+        <include refid="FromUserRole"/>
+        <include refid="UserRoleJoinUser"/>
+        <include refid="com.fuhuadata.dao.mapper.UserAccountMapper.JobJoin"/>
         WHERE ur.role_id=#{roleId}
     </select>
 

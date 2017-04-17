@@ -1,6 +1,5 @@
 package com.fuhuadata.domain.plugin;
 
-import com.fuhuadata.domain.mybatis.BaseEntity;
 import com.fuhuadata.util.ReflectUtils;
 import com.fuhuadata.vo.BaseTreeVo;
 import com.google.common.collect.Lists;
@@ -16,7 +15,7 @@ import java.util.Map;
  * <p>Date: 4/3/2017
  */
 public abstract class Trees<T extends BaseTreeVo<ID>,
-        E extends BaseEntity<ID> & Treeable<ID>,
+        E extends Treeable<ID>,
         ID extends Serializable> {
 
     private final Class<T> voClass;
@@ -27,6 +26,10 @@ public abstract class Trees<T extends BaseTreeVo<ID>,
 
     {
         voClass = ReflectUtils.findParameterizedType(getClass(), 0);
+    }
+
+    public Trees(List<E> flatItems) {
+        this.flatItems = flatItems;
     }
 
     public Trees(List<E> flatItems, HashSet<ID> parentIds) {
@@ -53,7 +56,7 @@ public abstract class Trees<T extends BaseTreeVo<ID>,
             }
             lookup.put(id, node);
 
-            if (isParent(id)) {
+            if (isParent(node)) {
                 // 父节点
                 roots.add(node);
             } else {
@@ -80,8 +83,8 @@ public abstract class Trees<T extends BaseTreeVo<ID>,
         parentNode.addChildNode(node);
     }
 
-    private boolean isParent(ID id) {
-        return this.parentIds.contains(id);
+    protected boolean isParent(T node) {
+        return this.parentIds.contains(node.getCid());
     }
 
     private T newVoInstance() {

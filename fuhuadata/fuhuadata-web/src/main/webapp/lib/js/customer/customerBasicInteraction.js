@@ -4,8 +4,10 @@
 
 
 CRM.cbInfo   = window.CRM.cbInfo || {};
-CRM.cbInfo.LOOK_POST     = '/customerBaseInfo/showCustomerBaseInfoDetails'; // 客户基本信息查看
-CRM.cbInfo.EDIT_POST    = '/productInfo/doModify'; // 客户基本信息编辑
+CRM.cbInfo.LOOK_POST    = '/customerBaseInfo/showCustomerBaseInfoDetails'; // 客户基本信息查看
+CRM.cbInfo.EDIT_POST    = '/customerBaseInfo/updateCustomerBaseInfo'; // 客户基本信息编辑
+CRM.cbInfo.ADD_POST     = '/customerBaseInfo/doAddCustomerBaseInfo'; // 客户信息新增
+CRM.cbInfo.encyUrl      = '/customerEncyclopedia/addCustomerEncyclopedia'; // 百科编辑
 
 CRM.cbInfo.editView     = null; // 编辑状态下显示的标签
 CRM.cbInfo.editHide     = null; // 编辑状态下隐藏的标签
@@ -16,6 +18,7 @@ CRM.cbInfo.factor       = $('#factory'); //工厂部分
 CRM.cbInfo.mcg          = $('#majorCompetitorsGroup'); // 竞争对手部分
 CRM.cbInfo.oppo         = $('#opportunity'); // 机会部分
 CRM.cbInfo.cmp          = 'cmp'; // 生产产品(循环加载)
+CRM.cbInfo.encyC        = 'encyC'; // 百科
 CRM.cbInfo.status       = null; // 页面状态
 CRM.cbInfo.isEdit       = false; // 页面是否可编辑 (默认不能编辑)
 
@@ -28,9 +31,9 @@ CRM.cbInfo.ctp = $('#ctp').val(); // 客户状态
 CRM.cbInfo.fname = $('#fname').val(); // 客户全称
 
 // 按钮
-CRM.cbInfo.edit        = $('#edit');
-CRM.cbInfo.save        = $('#save');
-CRM.cbInfo.cancel      = $('#cancel');
+CRM.cbInfo.edit        = null;
+CRM.cbInfo.save        = null;
+CRM.cbInfo.cancel      = null;
 CRM.cbInfo.upFile      = $('#up');
 CRM.cbInfo.addPro      = $('#add');
 
@@ -63,42 +66,107 @@ CRM.cbInfo.remark               = $('#remark'); // 备注
 CRM.cbInfo.shortName            = $('#shortName'); // 简称
 CRM.cbInfo.zhongxinbaoLevel     = $('#zhongxinbaoLevel'); // 中信保等级 必填
 CRM.cbInfo.zhongxinbaoNumber    = $('#zhongxinbaoNumber'); // 中信保编号
-CRM.cbInfo.customerMakeProduct  = $('[name="customerMakeProduct"]'); // 客户生产产品 list
+CRM.cbInfo.customerMakeProduct  = null; // 客户生产产品 list 动态内容，不能在这里赋值，不然为undefined
 CRM.cbInfo.customerLevel        = $('#customerLevel'); // 客户等级
+CRM.cbInfo.factoryLocation      = $('#factoryLocation'); // 工厂位置
+CRM.cbInfo.managementScope      = $('#managementScope'); // 经营范围
+CRM.cbInfo.opportunitySource    = $('#opportunitySource');
+CRM.cbInfo.otherEnterpriceNature= $('#otherEnterpriceNature');
 // CRM.cbInfo.customerStatus       = $('#customerStatus'); // 客户状态 0流失 1正常
 
 // 收集数据
 CRM.cbInfo.collectData = function () {
     var page = CRM.cbInfo,
         obj = {
-            areaId               : page.areaId.val(),
-            countryId            : page.countryId.val(),
-            companyType          : page.companyType.val(),
-            customerId           : page.customerId.val(),
-            customerLevel        : page.customerLevel.val(),
-            customerType         : page.customerType.val(),
-            enterpriseEmail      : page.enterpriseEmail.val(),
-            enterpriseNature     : page.enterpriseNature.val(),
-            enterprisePhone      : page.enterprisePhone.val(),
-            fullName             : page.fullName.val(),
-            hasChiCompany        : page.hasChiCompany.val(),
-            hasChiPurchase       : page.hasChiPurchase.val(),
-            lastmodifyUserId     : page.lastmodifyUserId.val(),
-            majorCompetitors     : page.majorCompetitors.val(),
-            modifyTime           : page.modifyTime.val(),
-            opportunityDescrible : page.opportunityDescrible.val(),
-            otherOpportunity     : page.otherOpportunity.val(),
-            productLine          : page.productLine.val(),
-            registeredAddress    : page.registeredAddress.val(),
-            registeredFunds      : page.registeredFunds.val(),
-            shortName            : page.shortName.val(),
-            zhongxinbaoLevel     : page.zhongxinbaoLevel.val(),
-            zhongxinbaoNumber    : page.zhongxinbaoNumber.val(),
-            customerMakeProduct  : page.customerMakeProduct.val(),
-            customerLevel        : page.customerLevel.val()
+            customerBaseInfo:{
+                areaId               : page.areaId.val(),
+                countryId            : page.countryId.val(),
+                companyType          : page.companyType.val(),
+                customerId           : page.cid,
+                customerLevel        : page.customerLevel.val(),
+                customerType         : page.customerType.val(),
+                enterpriseEmail      : page.enterpriseEmail.val(),
+                enterprisePhone      : page.enterprisePhone.val(),
+                fullName             : page.fullName.val(),
+                hasChiCompany        : page.hasChiCompany.val(),
+                hasChiPurchase       : page.hasChiPurchase.val(),
+                lastmodifyUserId     : page.lastmodifyUserId.val(),
+                majorCompetitors     : page.majorCompetitors.val(),
+                modifyTime           : CRM.getTime(),
+                opportunityDescrible : page.opportunityDescrible.val(),
+                otherOpportunity     : page.otherOpportunity.val(),
+                // productLine          : page.productLine.val(),
+                registeredAddress    : page.registeredAddress.val(),
+                registeredFunds      : page.registeredFunds.val(),
+                shortName            : page.shortName.val(),
+                zhongxinbaoLevel     : page.zhongxinbaoLevel.val(),
+                zhongxinbaoNumber    : page.zhongxinbaoNumber.val(),
+                // customerMakeProduct  : page.customerMakeProduct.val(),
+                otherEnterpriceNature: page.otherEnterpriceNature.val(),
+                managementScope      : page.managementScope.val(),
+                factoryLocation      : page.factoryLocation.val(),
+                productionLine       : page.productLine.val(),
+                remark               : page.remark.val(),
+                opportunitySource    : page.opportunitySource.val(),
+                fullEnterpriseNature : page.sCustomerEnterpriceNature(),
+                area                 : page.areaId.find(':selected').text(),
+                country              : page.areaId.find(':selected').text(),
+            },
+            customerEnterpriceNatures : page.customerEnterpriceNatureObj(),
+            customerMakeProducts : page.customerMakeProductObj()
+
         };
 
     return JSON.stringify(obj);
+};
+
+//企业性质
+CRM.cbInfo.customerEnterpriceNatureObj = function () {
+    var page  =  CRM.cbInfo,
+        arr = [];
+    page.enterpriseNature.filter(':checked').each(function () {
+        var obj = {
+            customerId : page.cid,
+            type : 1,
+            nature : $(this).val()
+        };
+        arr.push(obj);
+    });
+    return arr;
+};
+
+//企业性质字符传
+CRM.cbInfo.sCustomerEnterpriceNature = function () {
+    var page  =  CRM.cbInfo,
+        sName = '';
+
+    page.enterpriseNature.filter(':checked').each(function () {
+        var $this = $(this);
+        sName += $this.next('span').text() +',';
+    });
+
+    return sName.slice('0','-1');
+};
+
+//客户生产产品
+CRM.cbInfo.customerMakeProductObj = function () {
+    var page  =  CRM.cbInfo,
+        arr = [];
+
+    page.customerMakeProduct = $('[name="customerMakeProduct"]');
+    page.customerMakeProduct.each(function () {
+        var $this = $(this),
+            obj   = {};
+
+        if($this.data('id') && $this.data('id')!='' && $this.data('id')!=null){
+            obj.id = $this.data('id');
+        }
+        obj.customerId = page.cid;
+        obj.production = $this.find('[name="production"]').val();
+        obj.productName = $this.find('[name="productName"]').val();
+        arr.push(obj);
+    });
+    return arr;
 };
 
 // 渲染下拉框
@@ -139,7 +207,7 @@ CRM.cbInfo.getCounData = function (data,id) {
     return res;
 };
 
-// 页面渲染程序
+// 渲染地区树，渲染国家树，渲染表单
 CRM.cbInfo.renderPage = function (id) {
     var page = CRM.cbInfo;
 
@@ -164,7 +232,7 @@ CRM.cbInfo.renderPage = function (id) {
 
 };
 
-// 渲染页面逻辑处理程序
+// 渲染国家树，渲染表单
 CRM.cbInfo.renderPageHandler = function (id) {
     var page = CRM.cbInfo;
 
@@ -186,35 +254,63 @@ CRM.cbInfo.renderPageHandler = function (id) {
 
 // 渲染表单处理程序
 CRM.cbInfo.renderForm = function(data){
-    var page = CRM.cbInfo;
+    var page = CRM.cbInfo,
+        encyData = {};
 
-    page.areaId.val(data.areaId);
-    page.countryId.val(data.countryId);
-    page.companyType.val(data.companyType);
-    page.customerId.val(data.customerId);
-    page.customerLevel.val(data.customerLevel);
-    page.customerType.val(data.customerType);
-    page.enterpriseEmail.val(data.enterpriseEmail);
-    page.enterpriseNature.val(data.enterpriseNature.split(',')); // checkbox
-    page.enterprisePhone.val(data.enterprisePhone);
-    page.fullName.val(data.fullName);
-    page.hasChiCompany.val(data.hasChiCompany);
-    page.hasChiPurchase.val(data.hasChiPurchase);
-    page.lastmodifyUserId.val(data.lastmodifyUserId);
-    page.majorCompetitors.val(data.majorCompetitors);
-    page.modifyTime.val(data.modifyTime.split(/\s/)[0]); // time
-    page.opportunityDescrible.val(data.opportunityDescrible);
-    page.otherOpportunity.val(data.otherOpportunity);
-    page.productLine.val(data.productLine);
-    page.registeredAddress.val(data.registeredAddress);
-    page.registeredFunds.val(data.registeredFunds);
-    page.shortName.val(data.shortName);
-    page.zhongxinbaoLevel.val(data.zhongxinbaoLevel);
-    page.zhongxinbaoNumber.val(data.zhongxinbaoNumber);
-    page.customerMakeProduct.val(data.customerMakeProduct);
-    page.customerLevel.val(data.customerLevel);
+    if (data.areaId) { page.areaId.val(data.areaId);}
+    if (data.countryId) { page.countryId.val(data.countryId);}
+    if (data.companyType) { page.companyType.val(data.companyType);}
+    if (data.customerType) { page.customerType.val(data.customerType);}
+    if (data.customerId) { page.customerId.val(data.customerId);}
+    if (data.customerLevel) { page.customerLevel.val(data.customerLevel);}
+    if (data.enterpriseEmail) {  page.enterpriseEmail.val(data.enterpriseEmail);}
+    if (data.enterpriseNature) { page.enterpriseNature.val(data.enterpriseNature.split(','));} // checkbox
+    if (data.enterprisePhone) { page.enterprisePhone.val(data.enterprisePhone);}
+    if (data.fullName) { page.fullName.val(data.fullName);}
+    if (data.hasChiCompany) { page.hasChiCompany.val(data.hasChiCompany);}
+    if (data.hasChiPurchase) { page.hasChiPurchase.val(data.hasChiPurchase);}
+    if (data.lastmodifyUserId) { page.lastmodifyUserId.val(data.lastmodifyUserId);}
+    if (data.majorCompetitors) { page.majorCompetitors.val(data.majorCompetitors);}
+    if (data.modifyTime) { page.modifyTime.val(data.modifyTime);} // time
+    if (data.opportunitySource) { page.opportunitySource.val(data.opportunitySource)} // 机会来源
+    if (data.opportunityDescrible) { page.opportunityDescrible.val(data.opportunityDescrible);}
+    if (data.otherOpportunity) { page.otherOpportunity.val(data.otherOpportunity);}
+    if (data.productLine) { page.productLine.val(data.productLine);}
+    if (data.registeredAddress) { page.registeredAddress.val(data.registeredAddress);}
+    if (data.registeredFunds) { page.registeredFunds.val(data.registeredFunds);}
+    if (data.shortName) { page.shortName.val(data.shortName);}
+    if (data.zhongxinbaoLevel) { page.zhongxinbaoLevel.val(data.zhongxinbaoLevel);}
+    if (data.zhongxinbaoNumber) { page.zhongxinbaoNumber.val(data.zhongxinbaoNumber);}
+    // if (data.customerLevel) { page.customerLevel.val(data.customerLevel);}
+    if (data.remark) { page.remark.val(data.remark);}
+    if (data.factoryLocation) { page.factoryLocation.val(data.factoryLocation);}
+    if (data.managementScope) { page.managementScope.val(data.managementScope);}
 
-    CRM.tplHandler('cmp',data.customerMakeProduct,$('#cmpC'));
+    // 百科
+    if (data.companyInfo) { encyData.companyInfo = data.companyInfo;}
+    if (data.developHis) { encyData.developHis  = data.developHis;}
+    if (data.sellNetwork) { encyData.sellNetwork = data.sellNetwork;}
+    if (data.modifyTimeEn) { encyData.modifyTimeEn = data.modifyTimeEn;}
+    if (data.lastmodifyUserNameEn) { encyData.lastmodifyUserNameEn = data.lastmodifyUserNameEn;}
+    if (data.modifyTimeEn) { encyData.modifyTimeEn = data.modifyTimeEn;}
+    if (data.customField) { encyData.customField = JSON.parse(data.customField);}
+    var isEncyData = false;
+    $.each(encyData,function (k,v) { // encyData是否有数据
+        if(encyData[k]!=undefined){
+            isEncyData = true;
+            return false;
+        }else {
+            return true;
+        }
+    });
+    if (isEncyData) { CRM.tplHandler('encyC',encyData,$('#ency'));} // 百科
+
+
+    // 产品
+    if (data.customerMakeProduct) { CRM.tplHandler('cmp',data.customerMakeProduct,$('#cmpC'));}
+
+    // 构造百科url
+    page.encyUrl += '?customerId=' + data.customerId + (data.encyId!=undefined? '&encyId=' + data.encyId : '');
 };
 
 // 返回页面状态，c合作客户页，l潜在客户页，r流失客户页，a潜在客户新增
@@ -239,18 +335,18 @@ CRM.cbInfo.returnStatus = function () {
     }
 };
 
-// 判断是否隐藏
+// 工厂信息，竞争对手等，是否隐藏
 CRM.cbInfo.isView = function () {
     var page = CRM.cbInfo;
 
-    CRM.showOrHide(page.factor, null, $('#showFactory').prop('checked'));
-    CRM.showOrHide(page.mcg, null, $('#showMajorCompetitorsGroup').prop('checked'));
-    CRM.showOrHide(page.oppo, null, $('#showOpportunity').prop('checked'));
-    CRM.showOrHide(page.otherEnterpriceNature, null, $('#showOtherEnterpriceNature').prop('checked'));
-    CRM.showOrHide(page.otherOpportunity, null, $('#showOtherOpportunity').prop('checked'));
+    CRM.showOrHide(page.factor, null, $('#showFactory').prop('checked')); // 工厂
+    CRM.showOrHide(page.mcg, null, $('#showMajorCompetitorsGroup').prop('checked')); // 主要竞对
+    CRM.showOrHide(page.oppo, null, $('#showOpportunity').prop('selected')); // 机会来源
+    CRM.showOrHide(page.otherEnterpriceNature, null, $('#showOtherEnterpriceNature').prop('checked')); // 其他企业性质
+    CRM.showOrHide(page.otherOpportunity, null, $('#showOtherOpportunity').prop('selected')); // 其他机会
 };
 
-// 转换页面状态
+// 切换 隐藏/显示 和 禁用/启用
 CRM.cbInfo.togglePage = function (isE) {
     var page = CRM.cbInfo;
 
@@ -262,14 +358,6 @@ CRM.cbInfo.togglePage = function (isE) {
     // 禁用和隐藏的元素
     CRM.showOrHide(page.editView, page.editHide, isE);
     CRM.onOrOff(page.elOff, isE);
-
-    if (isE === true) {
-
-        isE = false;
-    }else {
-
-        isE = true;
-    };
 };
 
 // 初始化页面
@@ -285,13 +373,13 @@ CRM.cbInfo.init = function () {
 
         CRM.insertHtml('#crlBtn',$('#funBtn')); // 渲染功能按钮 非新增
 
-        if (page.status==='l') {
+        if (page.status==='l') { // 潜在
 
             CRM.cbInfo.lInitHandler();
-        }else if (page.status==='c') {
+        }else if (page.status==='c') { // 合作
 
             CRM.cbInfo.cInitHandler();
-        }else if (page.status==='r') {
+        }else if (page.status==='r') { // 流失
 
             CRM.cbInfo.rInitHandler();
         }
@@ -300,7 +388,7 @@ CRM.cbInfo.init = function () {
 
     }else {
 
-        CRM.cbInfo.aInitHandler();
+        CRM.cbInfo.aInitHandler(); // 新增
     }
 
 };
@@ -310,6 +398,20 @@ CRM.cbInfo.init = function () {
 CRM.cbInfo.aInitHandler = function () {
     var page = CRM.cbInfo;
     CRM.insertHtml('#al',page.customerType); // 渲染cusotmerType表单控件
+    CRM.insertHtml('#funBtnA',$('#aBtn')); // 渲染功能按钮 新增
+    CRM.insertHtml('#backBtn',$('#funBtn')); // 返回
+
+    // 渲染地区树
+    CRM.ajaxCall({
+        url:CRM.url.AREA_TREE_GET,
+        type:'GET',
+        callback:function (res) {
+            page.areaTree = res[0].nodes; // 将取到的树数据赋值给对象属性，下次有的话就不用再发请求了
+            page.renderTree(page.areaTree, 'areaId', '——请选择地区——');
+        }
+    });
+    page.togglePage(true);
+    page.isView();
 };
 
 // 潜在客户初始化程序
@@ -334,12 +436,12 @@ CRM.cbInfo.rInitHandler = function () {
 // 表单验证配置
 CRM.cbInfo.vDeploy= function () {
 
-    // 配置错误信息容器
+    // 错误信息容器
     $.validator.setDefaults({
         errorElement: 'div'
     });
 
-    // 配置错误信息
+    // 错误信息提示工具
     var em = function (txt, t, l) {
         return '<div class="tooltip top in"' +
             ' style="'+t+'; '+l+'; display: block; min-width: 50px;">' +
@@ -372,17 +474,11 @@ CRM.cbInfo.pVerify = function (em) {
                 required: "#aa:checked"
             },
             customerLevel:'required',
-            otherEnterpriceNature:{
-                required:'#showOtherEnterpriceNature:checked'
-            },
             opportunitySource:{
                 required:'#showOpportunity:checked'
             },
             opportunityDescrible:{
                 required:'#showOpportunity:checked'
-            },
-            otherOpportunity:{
-                required:'#showOtherOpportunity:checked'
             }
 
         },
@@ -416,7 +512,6 @@ CRM.cbInfo.pVerify = function (em) {
             },
             enterprisePhone:em('请输入有效的电话','top:-29px','right:0'),
             enterpriseEmail:em('请输入有效的邮箱','top:-29px','right:0'),
-            otherEnterpriceNature:em('请填写其他企业性质','top:-29px','left:400px'),
             opportunitySource:em('请选择一个值','top:-29px','right:0'),
             opportunityDescrible:em('请填写机会描述','top:-29px','right:0')
         }
@@ -436,7 +531,7 @@ CRM.cbInfo.mVerify = function (em) {
             }
         },
         messages: {
-            reason: em('其输入流失原因','top:-29px','right:0')
+            reason: em('请输入流失原因','top:-29px','right:0')
         }
     });
 
@@ -448,81 +543,152 @@ $().ready(function() {
         pForm = null,
         mForm = null;
 
+    // 初始化
     page.init();
     pForm = page.pVerify(page.vDeploy());
     mForm = page.mVerify(page.vDeploy());
 
-
-
-
-
-
-
-
-
-
-
     // 编辑
-   /* page.edit.on('click.e',function () {
+    page.edit = $('#edit');
+    page.edit.on('click.edit',function () {
 
-        page.asidePanel.fadeOut();
-
-        $('#pTable').find('tr').removeClass('hidden');
-
-        // 开启表格编辑功能
-        page.editITable.status = true;
-        page.editPTable.status = true;
-        page.editITable.toggle();
-        page.editPTable.toggle();
+        page.togglePage(true);
     });
 
     // 保存
-    page.save.on('click.s',function () {
+    page.save = $('#save');
+    page.save.on('click.save',function () {
 
-        page.asidePanel.fadeIn();
+        if (pForm.form()) { //验证通过弹出提交框
 
-        CRM.ajaxCall({
-            url  : page.PRODUCT_INFO_POST,
-            data : page.collectData(),
-            type : 'POST',
-            contentType:"application/json",
-            callback : function(data){
-                page.renderPage(page.productId.val());
-            }
-        });
+            $('#upModal').modal('show'); // 弹出是否提交表单
+        }
 
-        // 关闭表格编辑功能
-        page.editITable.status = false;
-        page.editPTable.status = false;
-        page.editITable.toggle();
-        page.editPTable.toggle();
+    });
+
+    // 添加更多产品
+    $('#add').on('click',function () {
+        var item = $('#pro').clone();
+
+        $('#cmpC').append(item.html());
     });
 
     // 取消
-    page.cancel.on('click.c',function () {
-
-        page.asidePanel.fadeIn();
-
-        page.renderPage(page.productId.val());
-
-        // 关闭表格编辑功能
-        page.editITable.status = false;
-        page.editPTable.status = false;
-        page.editITable.toggle();
-        page.editPTable.toggle();
+    page.cancel = $('#cancel');
+    page.cancel.on('click.cancel',function () {
+        page.togglePage(false);
+        page.renderPage(page.cid);
+        pForm.form();
     });
 
-    // 盐类的change事件
-    page.saltType.on('change.salt',function () {
-        var thisEl = $(this).filter('.else');
-        CRM.showOrHide(page.otherSaltName,null,thisEl.prop('checked'));
+    // 工厂选中，经销商选中，其他选中
+    $(document).on('click.cbx','#showFactory,#showMajorCompetitorsGroup,#showOtherEnterpriceNature',function () {
+        var $this = $(this);
+            id = $this.data('target');
+        if ($this.prop('checked')) {
 
-        if (!thisEl.prop('checked')) {
+            $(id).removeClass('hidden').val('');
+            $('textarea,input',$(id)).val('');
+        }else {
 
-            page.otherSaltName.val(''); // 如果没选中清除该文本框
+            $(id).addClass('hidden').val('');
+            $('textarea,input',$(id)).val('');
         }
-    });*/
+    });
 
+    // 其他机会描述选中，显示文本框。流失客户选中，弹出模态框
+    $(document).on('change.sel','#customerType,#opportunitySource',function () {
+        var $this = $(this),
+            slt = $('#showOtherOpportunity'),
+            slo = $('#showRModal').prop('selected');
+
+        if ($this.attr('id')=='customerType' && slo) { // 客户状态
+
+            $('#rModal').modal('show');
+            $('#upReasons').on('click.up',function () {
+                // mForm.form();
+                if (mForm.form()) {
+                    // 提交表单
+                } else {
+                    return false
+                }
+            })
+        }else {
+
+            if (slt.prop('selected')) { // 其他机会描述
+
+                $(slt.data('target')).removeClass('hidden');
+                $(slt.data('target')).val('');
+            }else {
+
+                $(slt.data('target')).addClass('hidden');
+                $(slt.data('target')).val('');
+            }
+        }
+    });
+
+    // 根据选择的地区渲染国家下拉框
+    $('#areaId').on('change.area',function () {
+        var val = $(this).val(),
+            counTree = page.getCounData(page.areaTree,val); // 获取国家树的数据
+
+        page.renderTree(counTree, 'countryId', '——请优先选择地区——'); // 创建国家树
+    });
+
+    // 重置
+    $('#resetB').on('click.reset',function () {
+
+       $('input,textarea,select',$('#myForm')).val('');
+       $('input[type="checkbox"]',$('#myForm')).val([]);
+        // pForm.resetForm();
+    });
+
+    // 删除自己增加的产品
+    $(document).on('click.del','[data-btn="del"]',function () {
+        var $this = $(this),
+            tar   = $this.data('target');
+
+        $(this).closest(tar).remove();
+    });
+
+    // 点击提交表单
+    $('#up').on('click.up',function () {
+
+        if (page.status!='a') {
+
+            CRM.ajaxCall({
+                url:page.EDIT_POST,
+                data:page.collectData(),
+                contentType:"application/json",
+                method:'POST',
+                callback:function () {
+
+                    page.renderPageHandler(page.cid);
+                }
+            });
+
+        }else if (page.status=='a') {
+
+            CRM.ajaxCall({
+                url:page.ADD_POST,
+                data:page.collectData(),
+                contentType:"application/json",
+                method:'POST',
+                callback:function (data) {
+
+                    self.location = basePath+'/customerBaseInfo/intoCustomerBaseInfoDetails?' +
+                        'customerType=2&customerId='+ data.customerId;
+                }
+            });
+        }
+
+    });
+
+    //
+    $('#encyEdit').on('click.ency',function () {
+
+        self.location = basePath + page.encyUrl;
+    });
 });
 
 

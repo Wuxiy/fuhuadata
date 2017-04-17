@@ -83,6 +83,19 @@ public class CustomerBaseInfo implements Serializable{
 	private Integer customerLevel;
 
 
+	/**时区**/
+	private String timezone;
+
+	/**客户基本分类**/
+	private String custclass;
+
+	/**数据格式**/
+	private String formatdoc;
+
+	/**贸易国别**/
+	private String countryzone;
+
+
 	/*活跃周期*/
 	private Integer activePeriod;
 
@@ -168,6 +181,8 @@ public class CustomerBaseInfo implements Serializable{
 	private String cooperationRemark;
 	//产品线
 	private String productionLine;
+
+	private String encyId;// 百科id 用来判断客户是否有百科
 	public CustomerBaseInfo() {
 	}
 
@@ -642,5 +657,45 @@ public class CustomerBaseInfo implements Serializable{
 
 	public void setNcId(String ncId) {
 		this.ncId = ncId;
+	}
+
+	public String getTimezone() {
+		return timezone;
+	}
+
+	public void setTimezone(String timezone) {
+		this.timezone = timezone;
+	}
+
+	public String getCustclass() {
+		return custclass;
+	}
+
+	public void setCustclass(String custclass) {
+		this.custclass = custclass;
+	}
+
+	public String getFormatdoc() {
+		return formatdoc;
+	}
+
+	public void setFormatdoc(String formatdoc) {
+		this.formatdoc = formatdoc;
+	}
+
+	public String getCountryzone() {
+		return countryzone;
+	}
+
+	public void setCountryzone(String countryzone) {
+		this.countryzone = countryzone;
+	}
+
+	public String getEncyId() {
+		return encyId;
+	}
+
+	public void setEncyId(String encyId) {
+		this.encyId = encyId;
 	}
 }

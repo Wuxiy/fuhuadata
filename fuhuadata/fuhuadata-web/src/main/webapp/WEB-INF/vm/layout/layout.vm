@@ -23,9 +23,12 @@
     <script src="${request.contextPath}/lib/js/validate/localization/messages_zh.js" charset="utf-8"></script>
 
 
-##    <script src="${request.contextPath}/lib/js/jquery-lang.js" type="text/javascript" charset="utf-8"></script>
-##    <script src="${request.contextPath}/lib/js/js.cookie.js" type="text/javascript" charset="utf-8"></script>
+    <script src="${request.contextPath}/lib/js/jquery-lang.js" type="text/javascript" charset="utf-8"></script>
+    <script src="${request.contextPath}/lib/js/jquery-lang.js" type="text/javascript" charset="utf-8"></script>
+    <script src="${request.contextPath}/lib/js/langpack/nonDynamic.js" type="text/javascript" charset="utf-8"></script>
 ##    <script type="text/javascript">
+##
+##
 ##        var lang = new Lang();
 ##        lang.init({
 ##            defaultLang: 'zh'

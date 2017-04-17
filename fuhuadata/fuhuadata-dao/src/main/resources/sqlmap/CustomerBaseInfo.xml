@@ -232,7 +232,7 @@
 		price_sensitivity, loyalty, start_cooperation_time,
 		cooperation_duration, purchasing_season,
 		active_period, is_fuhua_exclusive, cooperation_remark,
-		production_line)
+		production_line,timezone,custclass,formatdoc,countryzone)
 		values (#ncId#, #fullName#,
 		#shortName#, #companyType#, #areaId#,
 		#area#, #countryId#, #country#,
@@ -249,7 +249,7 @@
 		#priceSensitivity#, #loyalty#, #startCooperationTime#,
 		#cooperationDuration#, #purchasingSeason#,
 		#activePeriod#, #isFuhuaExclusive#, #cooperationRemark#,
-		#productionLine#)
+		#productionLine#,#timezone#,#custclass#,#formatdoc#,#countryzone#)
 		<selectKey resultClass="java.lang.String" keyProperty="customerId">
 			SELECT @@IDENTITY AS ID
 		</selectKey>
@@ -303,6 +303,12 @@
 						<isNotEmpty prepend=", " property="isFuhuaExclusive">is_fuhua_exclusive=#isFuhuaExclusive#</isNotEmpty>
 						<isNotEmpty prepend=", " property="cooperationRemark">cooperation_remark=#cooperationRemark#</isNotEmpty>
 						<isNotEmpty prepend=", " property="productionLine">production_line = #productionLine#</isNotEmpty>
+
+						<isNotEmpty prepend=", " property="timezone">timezone = #timezone#</isNotEmpty>
+						<isNotEmpty prepend=", " property="custclass">custclass = #custclass#</isNotEmpty>
+						<isNotEmpty prepend=", " property="formatdoc">formatdoc = #formatdoc#</isNotEmpty>
+						<isNotEmpty prepend=", " property="countryzone">countryzone = #countryzone#</isNotEmpty>
+
 					</dynamic>
 		WHERE customer_id=#customerId#
 	</update>
@@ -374,7 +380,21 @@
 
 	<select id="GET-BY-ID" resultClass="CustomerBaseInfo" parameterClass="java.lang.String">
 		<![CDATA[
-			SELECT * FROM customer_base_info	WHERE customer_id=#customer_id#
+			SELECT
+				base.full_name fullName,
+				base.short_name shortName,
+				base.company_type companyType,
+				base.customer_area_id customerAreaId,
+				base.customer_area customerArea,
+				base.country country,
+				base.customer_level customerLevel,
+				GROUP_CONCAT(nature.nature) enterpriseNature,
+				ency.ency_id encyId
+			FROM customer_base_info base
+			LEFT JOIN k_customer_encyclopedia ency ON ency.customer_id =base.customer_id
+				LEFT JOIN customer_enterprise_nature nature
+			ON nature.customer_id=base.customer_id
+			WHERE base.customer_id=#customer_id#
 		]]>
 	</select>
 
@@ -490,6 +510,11 @@
 			base.has_chi_purchase hasChiPurchase,
 			base.customer_status customerStatus,
 
+			base.formatdoc,
+			base.timezone,
+			base.formatdoc,
+			base.countryzone,
+
 			base.qualifications_file_url qualificationsFileUrl,
 			base.factory_location factoryLocation,
 			base.major_competitors majorCompetitors,
@@ -575,4 +600,68 @@
 			o.`customer_id` = #customerId#
 		group by op.archive_product_id
 	</select>
+
+
+	<!--客户基本信息 数据字典字段-->
+	<!--时区-->
+	<select id="GET-TIMEZONE" resultClass="com.fuhuadata.vo.DataArchive.Timezone" parameterClass="com.fuhuadata.vo.DataArchive.Timezone">
+		SELECT
+		pk_timezone pkTimezone,
+		name,
+		code,
+		description
+		from t_timezone tt
+		<dynamic prepend=" WHERE ">
+			<isNotEmpty prepend=" AND " property="pkTimezone">
+				pk_timezone like concat('%',#pkTimezone#,'%')
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="name">
+				name like concat('%',#name#,'%')
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<!--客户基本分类-->
+	<select id="GET-CUSTCLASS" resultClass="com.fuhuadata.vo.CategoryVO">
+		SELECT
+		parent.`code` parentId,
+		parent.`name` parentName,
+		mid.`name` midName,
+		mid.`code` midId,
+		child.`code` childId,
+		child.`name` childName
+		FROM t_custclass parent
+		LEFT JOIN t_custclass mid ON mid.parent_id = parent.pk_custclass
+		LEFT JOIN t_custclass child ON child.parent_id = mid.pk_custclass
+		WHERE parent.parent_id = '~'
+	</select>
+
+	<!--贸易国别-->
+	<select id="GET-COUNTRYZONE" resultClass="com.fuhuadata.vo.DataArchive.Countryzone" parameterClass="com.fuhuadata.vo.DataArchive.Countryzone">
+		SELECT
+		pk_country pkCountry,
+		name,
+		code,
+		phonecode,
+		pk_format pkFormat,
+		pk_lang pkLang,
+		pk_timezone pkTimezone,
+		wholename
+		from t_countryzone
+		<dynamic prepend=" WHERE ">
+			<isNotEmpty prepend=" AND " property="name">
+				name like concat('%',#name#,'%')
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<!--数据格式-->
+	<select id="GET-FORMATDOC" resultClass="com.fuhuadata.vo.DataArchive.Formatdoc">
+		SELECT
+		pk_formatdoc pkFormatdoc,
+		name,
+		code
+		from t_formatdoc
+	</select>
+
 </sqlMap>

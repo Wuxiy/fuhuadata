@@ -6,132 +6,145 @@
 <div class="dashboard-wrapper">
     <div class="row">
         <div class="col-xs-12">
-    <!--表格开始-->
-    <div class="panel panel-default view-HD-lg">
-        <div class="panel-heading">
-            <h3 class="panel-title">
-                新增百科
-            </h3>
-        </div>
-        <div class="panel-body clearfix">
-            <form class="form-horizontal">
-                <div class="form-group ">
-                    <label class="col-xs-1 control-label">企业全称<sup class="not-null">*</sup></label>
-                    <div class="col-xs-2">
-                        <input class="form-control" type="text"/>
-                        <div class="col-xs-12">
-                            <ul id="cName" class="pull-right dropdown-menu" style="width: 100%"></ul>
+            <!--表格开始-->
+            <div class="panel panel-default view-HD-lg">
+                <div class="panel-heading">
+                    <button id="backPage" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" type="button">返回</button>
+                    <h3 class="panel-title">
+                        新增/编辑百科
+                    </h3>
+                </div>
+                <div class="panel-body clearfix">
+                    <form id="myForm" class="form-horizontal">
+                        <div class="form-group ">
+                            <label for="fullName" class="col-xs-1 control-label">企业全称<sup data-view="editView" class="not-null hidden">*</sup></label>
+                            <div id="inputSearch" class="col-xs-2">
+                                <input id="fullName" name="fullName" data-control="on" class="form-control" disabled type="text" autocomplete="off"/>
+                                <div class="col-xs-12" >
+                                    <ul id="cName" class="pull-right dropdown-menu" style="width: 100%;max-height: 200px;overflow-y: auto;"></ul>
+                                </div>
+                            </div>
+                            <label for="shortName" class="col-xs-1 control-label">企业简称<sup data-view="editView" class="not-null hidden">*</sup></label>
+                            <div class="col-xs-2">
+                                <input id="shortName" name="shortName" data-control="on" class="form-control" disabled type="text"/>
+                            </div>
+                            <label for="companyType" class="col-xs-1 control-label">企业类别<sup data-view="editView" class="not-null hidden">*</sup></label>
+                            <div class="col-xs-2">
+                                <select id="companyType" name="companyType" data-control="on" disabled class="form-control">
+                                    <option value="">——请选择企业类别——</option>
+                                    <option value="0">客户</option>
+                                    <option value="1">竟对</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <label class="col-xs-1 control-label">企业简称<sup class="not-null">*</sup></label>
-                    <div class="col-xs-2">
-                        <input class="form-control" type="text"/>
-                    </div>
-                    <label class="col-xs-1 control-label">企业类别<sup class="not-null">*</sup></label>
-                    <div class="col-xs-2">
-                        <select class="form-control">
-                            <option value="">客户</option>
-                            <option value="">竟对</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group ">
-                    <label class="col-xs-1 control-label">地区分类<sup class="not-null">*</sup></label>
-                    <div class="col-xs-2">
-                        <select class="form-control">
-                            <option value="">亚洲</option>
-                            <option value="">欧洲</option>
-                        </select>
-                    </div>
-                    <label class="col-xs-1 control-label">国家<sup class="not-null">*</sup></label>
-                    <div class="col-xs-2">
-                        <select class="form-control">
-                            <option value="">美国</option>
-                            <option value="">中国</option>
-                        </select>
-                    </div>
-                    <label class="col-xs-1 control-label">企业性质<sup class="not-null">*</sup></label>
-                    <div class="col-xs-2">
-                        <select class="form-control">
-                            <option value="">经销商</option>
-                            <option value="">其他</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group ">
-                    <label class="col-xs-1 control-label">注册资金<sup class="not-null">*</sup></label>
-                    <div class="col-xs-2">
-                        <input type="text" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group ">
-                    <label class="col-xs-1 control-label">注册地址<sup class="not-null">*</sup></label>
-                    <div class="col-xs-8">
-                        <textarea class="form-control" rows="2"></textarea>
-                    </div>
-                </div>
-                <div class="form-group ">
-                    <label class="col-xs-1 control-label">经营范围<sup class="not-null">*</sup></label>
-                    <div class="col-xs-8">
-                        <textarea class="form-control" rows="2"></textarea>
-                    </div>
-                </div>
-                <div class="form-group ">
-                    <label class="col-xs-1 control-label">企业简介<sup class="not-null">*</sup></label>
-                    <div class="col-xs-8">
-                        <textarea class="form-control" rows="4"></textarea>
-                    </div>
-                </div>
-                <div class="form-group ">
-                    <label class="col-xs-1 control-label">发展历程</label>
-                    <div class="col-xs-8">
-                        <textarea class="form-control" rows="4"></textarea>
-                    </div>
-                </div>
-                <div class="form-group ">
-                    <label class="col-xs-1 control-label">销售网络</label>
-                    <div class="col-xs-8">
-                        <textarea class="form-control" rows="4"></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-xs-1 control-label">自定义字段1</label>
-                    <div class="col-xs-8">
-                        <textarea class="form-control" rows="4"></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-xs-1 col-xs-offset-1">
-                        <a href="" class="btn-link" data-toggle="modal" data-target="#addField">
-                            <span class="glyphicon glyphicon-plus"></span>
-                            添加字段</a>
-                    </div>
-                </div>
-                <div class="form-group">
-                <div class="col-xs-2 col-xs-offset-4">
-                    <button class="btn btn-block btn-primary" type="submit">完成</button>
-                </div>
-                <div class="col-xs-2">
-                    <button class="btn btn-block btn-default" type="reset">重置</button>
+                        <div class="form-group ">
+                            <label for="areaId" class="col-xs-1 control-label">地区分类<sup data-view="editView" class="not-null hidden">*</sup></label>
+                            <div class="col-xs-2">
+                                <select id="areaId" name="areaId" data-control="on" disabled class="form-control">
+
+                                </select>
+                            </div>
+                            <label for="countryId" class="col-xs-1 control-label">国家<sup data-view="editView" class="not-null hidden">*</sup></label>
+                            <div class="col-xs-2">
+                                <select id="countryId" data-control="on" name="countryId" disabled class="form-control">
+                                    <option value="">——请优先选择地区——</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-1 control-label">企业性质<sup data-view="editView" class="not-null hidden">*</sup></label>
+                            <div class="col-xs-6">
+                                <label class="checkbox-inline">
+                                    <input disabled data-control="on" name="enterpriseNature" type="checkbox" value="1">
+                                    <span lang="zh">工厂</span>
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input disabled data-control="on" name="enterpriseNature" disabled type="checkbox" value="2">
+                                    <span lang="zh">经销商</span>
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input disabled data-control="on" name="enterpriseNature" type="checkbox" value="3">
+                                    <span lang="zh">分销商</span>
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input disabled data-control="on" name="enterpriseNature" disabled type="checkbox" value="4">
+                                    <span lang="zh">终端客户</span>
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input id="showOtherNature" disabled data-control="on" data-target="#otherEnterpriceNature" name="enterpriseNature" class="else" type="checkbox" value="5">
+                                    <span lang="zh">其他</span>
+                                </label>
+                                <span class="form-inline">
+                                    <input disabled="disabled" data-control="on" id="otherEnterpriceNature" class="form-inline form-control hidden" style="position:absolute;left:355px;" type="text" value="" lang="zh">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label for="registeredFund" class="col-xs-1 control-label">注册资金<sup data-view="editView" class="not-null hidden">*</sup></label>
+                            <div class="col-xs-2">
+                                <div class="input-group">
+                                    <input id="registeredFund" data-control="on" name="registeredFund" disabled type="text" class="form-control" />
+                                    <span class="input-group-addon">$</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label for="registeredAddr" class="col-xs-1 control-label">注册地址<sup data-view="editView" class="not-null hidden">*</sup></label>
+                            <div class="col-xs-8">
+                                <textarea id="registeredAddr" data-control="on" name="registeredAddr" disabled class="form-control" rows="2"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label for="managementScope" class="col-xs-1 control-label">经营范围<sup data-view="editView" class="not-null hidden">*</sup></label>
+                            <div class="col-xs-8">
+                                <textarea id="managementScope" data-control="on" name="managementScope" disabled class="form-control" rows="2"></textarea>
+                            </div>
+                        </div>
+                        <div id="editTextarea">
+                            <div class="form-group ">
+                                <label for="companyInfo" class="col-xs-1 control-label">企业简介<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-8">
+                                    <textarea id="companyInfo" name="companyInfo" class="form-control" rows="4"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label for="developHis" class="col-xs-1 control-label">发展历程</label>
+                                <div class="col-xs-8">
+                                    <textarea id="developHis" name="developHis" class="form-control" rows="4"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label for="sellNetwork" class="col-xs-1 control-label">销售网络</label>
+                                <div class="col-xs-8">
+                                    <textarea id="sellNetwork" name="sellNetwork" class="form-control" rows="4"></textarea>
+                                </div>
+                            </div>
+                            <fieldset id="cum"></fieldset>
+                            <div class="form-group">
+                                <div class="col-xs-1 col-xs-offset-1">
+                                    <a href="" class="btn-link" data-toggle="modal" data-target="#addField">
+                                        <span class="glyphicon glyphicon-plus"></span>添加字段
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-2 col-xs-offset-4">
+                                <button id="upBtn" class="btn btn-block btn-primary" type="button">完成</button>
+                            </div>
+                            <div class="col-xs-2">
+                                <button id="resetBtn" class="btn btn-block btn-default" type="button">重置</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-            </form>
         </div>
     </div>
 </div>
-    </div>
-</div>
 
-## 查找客户名称
-<script id="cNameC" type="text/html">
-    <%if (data.length>0) {%>
-    <%for (var i=0; i<data.length; i++) {%>
-    <li><a href="" style="padding-left: 6px"></a></li>
-    <%}%>
-    <%}%>
-</script>
 
- <!-- 模态框（Modal） -->
+<!-- 模态框（Modal） -->
 <div class="modal fade" id="addField" tabindex="-1" data-backdrop="static" aria-hidden="true" data-keyboard="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -174,3 +187,64 @@
     </div>
 </div>
 
+## 确认提交modal
+<div class="modal fade" id="skipM" tabindex="-1" role="dialog" data-backdrop="false" aria-hidden="true">
+    <div class="modal-dialog" style="width: 370px;margin-top: 168px">
+        <div class="modal-content">
+            <div class="modal-body clearfix">
+                <h4 class="text-info text-center">提交成功，是否立即跳转？</h4>
+                <hr>
+                <div class="col-xs-5 col-xs-offset-1"><a id="skip" href="${request.contextPath}/customerEncyclopedia/modify?encyId=
+" class="btn btn-block btn-primary">跳转</a></div>
+                <div class="col-xs-5"><button data-dismiss="modal" class="btn btn-default btn-block" type="button">取消</button></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+## 查找客户名称
+<script id="cNameC" type="text/html">
+    <%if (data.length>0) {%>
+    <%for (var i=0; i<data.length; i++) {%>
+    <li><a href="#" data-id="<%=data[i].customerId%>" style="padding-left: 6px"><%=data[i].fullName%></a></li>
+    <%}%>
+    <%}%>
+</script>
+
+##  自定义信息
+<script id="cumC" type="text/html">
+    <%if (data.length>0) {%>
+    <%for (var i=0; i<data.length; i++) {%>
+    <div name="customField" class="form-group" style="position: relative">
+        <label name="na" class="col-xs-1 control-label"><%=data[i].name%></label>
+        <div class="col-xs-8">
+            <textarea name="va" class="form-control" rows="4"><%=data[i].value%></textarea>
+        </div>
+        <button data-btn="del" type="button" class="close pull-left" data-target=".form-group" style="position: absolute;top: 34%;">
+            <span class="glyphicon glyphicon-remove-sign"></span>
+        </button>
+    </div>
+    <%}%>
+    <%}%>
+</script>
+<script id="transit" type="text/html"></script>
+
+####  自定义信息
+##<script id="cumCo" type="text/html">
+##    <div name="customField" class="form-group">
+##        <label name="na" class="col-xs-1 control-label"></label>
+##        <div class="col-xs-8">
+##            <textarea name="va" class="form-control" rows="4"></textarea>
+##        </div>
+##        <button type="button" class="close" data-target="form-group">
+##            &times;
+##        </button>
+##    </div>
+##</script>
+
+<input id="nature" type="hidden" value="edit">
+<input id="encyId" type="hidden" value="$!{encyId}">
+<input id="customerId" type="hidden" value="$!{customerId}">
+
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/knowledge/encyclopediaInfo.js"></script>

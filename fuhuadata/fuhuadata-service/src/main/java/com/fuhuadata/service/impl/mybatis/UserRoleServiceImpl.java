@@ -1,11 +1,13 @@
 package com.fuhuadata.service.impl.mybatis;
 
 import com.fuhuadata.dao.mapper.UserRoleMapper;
+import com.fuhuadata.domain.mybatis.UserAccount;
 import com.fuhuadata.domain.mybatis.UserRole;
 import com.fuhuadata.service.mybatis.UserRoleService;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -29,7 +31,6 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRole, Integer> impl
         if (roleId == null) {
             throw new IllegalArgumentException("roleId 不能为空");
         }
-        deleteUserRoles(roleId);
         saveList(users);
     }
 
@@ -39,10 +40,40 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRole, Integer> impl
     }
 
     @Override
+    public List<UserAccount> listUserAccountByRoleId(Integer roleId) {
+        if (roleId == null) {
+            return Collections.emptyList();
+        }
+
+        return getUserRoleMapper().listUserAccountsByRoleId(roleId);
+    }
+
+    @Override
     public void deleteUserRoles(Integer roleId) {
         Example example = new Example(UserRole.class);
         example.createCriteria().andEqualTo("roleId", roleId);
 
         int deleted = delete(example);
+    }
+
+    @Override
+    public void deleteUserRoles(List<Integer> userRoleIds) {
+        Example example = new Example(UserRole.class);
+        example.createCriteria().andIn("id", userRoleIds);
+
+        delete(example);
+    }
+
+    @Override
+    public int deleteUserRoles(Integer roleId, List<Integer> userIds) {
+        if (roleId == null || userIds == null || userIds.size() == 0) {
+            return 0;
+        }
+
+        Example example = new Example(UserRole.class);
+        example.createCriteria().andEqualTo("roleId", roleId)
+                .andIn("userId", userIds);
+
+        return delete(example);
     }
 }

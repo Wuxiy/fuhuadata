@@ -16,6 +16,7 @@
         <result column="pk_org" jdbcType="VARCHAR" property="pkOrg"/>
         <result column="pk_psndoc" jdbcType="VARCHAR" property="pkPsndoc"/>
         <result column="last_modify_time" jdbcType="TIMESTAMP" property="lastModifyTime"/>
+        <result column="pk_dept" jdbcType="VARCHAR" property="pkDept"/>
     </resultMap>
 
     <!-- 用户地区映射 -->
@@ -41,6 +42,7 @@
         ua.last_modify_time
     </sql>
 
+    <!-- 关联查询前缀 user -->
     <sql id="PrefixColumns">
         ua.id user_id,
         ua.login_name user_login_name,
@@ -54,4 +56,55 @@
         ua.pk_psndoc user_pk_psndoc,
         ua.last_modify_time user_last_modify_time
     </sql>
+
+    <!-- 关联关系 -->
+    <sql id="FromTable">
+        FROM p_user_account ua
+    </sql>
+    <sql id="JobJoin">
+        INNER JOIN p_job jo ON jo.psncode=ua.code
+    </sql>
+
+    <select id="listUserByDeptId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumns"/>
+        <include refid="FromTable"/>
+        <include refid="JobJoin"/>
+        WHERE jo.pk_dept=#{deptId}
+    </select>
+
+    <select id="listUsersByUserIds" resultMap="BaseResultMap">
+        SELECT
+        ua.id,
+        ua.name,
+        ua.code,
+        ua.pk_org,
+        ua.pk_psndoc,
+        jo.pk_dept
+        <include refid="FromTable"/>
+        <include refid="JobJoin"/>
+        WHERE ua.id IN
+        <foreach collection="userIds" item="userId" open="(" close=")" separator=",">
+            #{userId}
+        </foreach>
+    </select>
+
+    <select id="listDeptIdsOfUserByRoleId" resultType="java.lang.String">
+        SELECT jo.pk_dept
+        FROM p_user_role ur
+        INNER JOIN p_user_account ua ON ua.id=ur.user_id
+        INNER JOIN p_job jo ON ua.code=jo.psncode
+        WHERE ur.role_id=#{roleId}
+    </select>
+
+    <select id="listUserIdsByDeptIds" resultType="java.lang.Integer">
+        SELECT
+        ua.id
+        <include refid="FromTable"/>
+        <include refid="JobJoin"/>
+        WHERE jo.pk_dept IN
+        <foreach collection="deptIds" item="dept" open="(" close=")" separator=",">
+            #{dept}
+        </foreach>
+    </select>
 </mapper>

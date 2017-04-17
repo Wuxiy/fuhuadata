@@ -34,6 +34,8 @@ public class CustomerBaseInfoLinkman {
 
     private String lemail;
 
+    private String encyId;//百科id ,用于判断客户有无百科信息
+
     public String getCustomerId() {
         return customerId;
     }
@@ -144,5 +146,13 @@ public class CustomerBaseInfoLinkman {
 
     public void setCustomerArea(String customerArea) {
         this.customerArea = customerArea;
+    }
+
+    public String getEncyId() {
+        return encyId;
+    }
+
+    public void setEncyId(String encyId) {
+        this.encyId = encyId;
     }
 }

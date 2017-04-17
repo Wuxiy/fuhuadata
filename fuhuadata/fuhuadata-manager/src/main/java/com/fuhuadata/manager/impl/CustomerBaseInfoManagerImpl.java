@@ -12,8 +12,13 @@ import java.util.List;
 import com.fuhuadata.dao.CustomerBaseInfoDao;
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.domain.query.Result;
+import com.fuhuadata.vo.CategoryVO;
 import com.fuhuadata.vo.CustomerBaseInfoLinkman;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
+import com.fuhuadata.vo.DataArchive.Countryzone;
+import com.fuhuadata.vo.DataArchive.Custclass;
+import com.fuhuadata.vo.DataArchive.Formatdoc;
+import com.fuhuadata.vo.DataArchive.Timezone;
 import org.apache.cxf.Bus;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,16 +58,18 @@ public class CustomerBaseInfoManagerImpl implements CustomerBaseInfoManager {
 	@Transactional
     public CustomerBaseInfoVO addCustomerBaseInfo(List<CustomerEnterpriceNature> customerEnterpriceNatures, List<CustomerMakeProduct> customerMakeProducts , CustomerBaseInfo customerBaseInfo) {
 		CustomerBaseInfo cbi = customerBaseInfoDao.addCustomerBaseInfo(customerBaseInfo);
-		System.out.println(cbi.getCustomerId());
 		for(CustomerEnterpriceNature cen:customerEnterpriceNatures){
 			cen.setCustomerId(cbi.getCustomerId());
 		}
 		for(CustomerMakeProduct cmp : customerMakeProducts){
 			cmp.setCustomerId(cbi.getCustomerId());
 		}
+
 		customerBaseInfoDao.batchAddNature(customerEnterpriceNatures);
-		customerMakeProductDao.addCustomerMakeProducts(customerMakeProducts);
-		return customerBaseInfoDao.getCustomerInfoById(customerBaseInfo.getCustomerId());
+		if(customerMakeProducts!=null&&customerMakeProducts.size()>0) {
+			customerMakeProductDao.addCustomerMakeProducts(customerMakeProducts);
+		}
+		return customerBaseInfoDao.getCustomerInfoById(cbi.getCustomerId());
 
     }
 
@@ -177,5 +184,30 @@ public class CustomerBaseInfoManagerImpl implements CustomerBaseInfoManager {
 	@Override
 	public List<CountCustomersOrderProduct> countOrderProduct(String customerId) {
 		return customerBaseInfoDao.countOrderProduct(customerId);
+	}
+
+	@Override
+	public CustomerBaseInfo queryCooperationByCid(String customerId) {
+		return null;
+	}
+
+	@Override
+	public List<Formatdoc> getFormatdoc() {
+		return customerBaseInfoDao.getFormatdoc();
+	}
+
+	@Override
+	public List<Countryzone> getCountryzone(Countryzone countryzone) {
+		return customerBaseInfoDao.getCountryzone(countryzone);
+	}
+
+	@Override
+	public List<Timezone> getTimezone(Timezone timezone) {
+		return customerBaseInfoDao.getTimezone(timezone);
+	}
+
+	@Override
+	public List<CategoryVO> getCustclass() {
+		return customerBaseInfoDao.getCustclass();
 	}
 }

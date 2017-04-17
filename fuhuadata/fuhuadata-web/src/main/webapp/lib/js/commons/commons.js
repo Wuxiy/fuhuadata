@@ -11,11 +11,23 @@ CRM.url    = window.CRM.url || {};
 // 百度渲染引擎全局对象
 var bt = baidu.template;
 
-CRM.url.AREA_TREE_GET    = '/customerBaseInfo/initAreaCategoryTree'; // 地区树
-CRM.url.ROLE_TREE_GET    = '/sys/role/ajax/load?async=false'; // 角色树
-CRM.url.ORG_TREE_GET     = '/customerBaseInfoOrder/initSaleOrganizationTree'; // 组织树
-CRM.url.MENU_TREE_GET    = '/sys/menu/ajax/load?async=false'; // 菜单树
-CRM.url.PRODUCT_TREE_GET = '/productCategory/CategoryTree'; // 产品树
+
+CRM.url.AREA_TREE_GET        = basePath+ '/customerBaseInfo/initAreaCategoryTree'; // 地区树
+CRM.url.ROLE_TREE_GET        = basePath+ '/sys/role/ajax/load?async=false'; // 角色树
+CRM.url.ORG_TREE_GET         = basePath+ '/customerBaseInfoOrder/initSaleOrganizationTree'; // 组织树
+CRM.url.MENU_TREE_GET        = basePath+ '/sys/menu/ajax/load?async=false'; // 菜单树
+CRM.url.PRODUCT_TREE_GET     = basePath+ '/productCategory/CategoryTree'; // 产品树
+CRM.url.CUSTCLASS_TREE_GET   = basePath+ '/customerBaseInfo/getCustclass'; // 客户基本分类树
+CRM.url.FORMATDOC_TREE_GET   = basePath+ '/customerBaseInfo/getFormatdoc'; // 数据格式树
+CRM.url.COUNTRYZONE_TREE_GET =basePath+  '/customerBaseInfo/getCountryzone'; // 贸易国别树
+CRM.url.TIMEZONE_TREE_GET    = basePath+ '/customerBaseInfo/getTimezone'; // 时区树
+
+// getCustclass  客户基本分类
+//
+// getFormatdoc 数据格式档案
+// getCountryzone 贸易国别档案
+// getTimezone 时区档案
+
 
 //功能性控件
 CRM.el = {
@@ -27,8 +39,8 @@ CRM.el = {
     CANCEL_BTN      : '[data-btn="cancel"]',
     ADD_BTN         : '[data-btn="add"]',
     DEL_BTN         : '[data-btn="del"]',
-    ON_CONTROL      : '[data-control="on"]',
-    OFF_CONTROL     : '[data-control="off"]'
+    ON_CONTROL      : '[data-control]',
+    OFF_CONTROL     : '[data-control]'
 };
 
 //是否隐藏
@@ -99,15 +111,12 @@ CRM.onOrOff = function (el,isOn) {
 
         if (isOn) {
 
-            el.attr('disabled',false)
-                .attr('data-control','on');
+            el.attr('disabled',false);
         }else {
 
-            el.attr('disabled',true)
-                .attr('data-control','off');
+            el.attr('disabled',true);
         }
     }
-
 };
 
 //ajax调用公共方法
@@ -132,6 +141,18 @@ CRM.ajaxCall = function(res){
     });
 };
 
+// 返回数据
+// CRM.getData = function (type,url,data,contentType) {
+//   var getData;
+//   CRM.ajaxCall(type,url,data,contentType,callback,false);
+//
+//   function callback(res) {
+//       getData = res;
+//   }
+//
+//   return getData;
+// };
+
 // 返回普通数组对象
 CRM.toArr = function (data) {
     var arr = [];
@@ -153,7 +174,71 @@ CRM.toArr = function (data) {
     }
 
     recursionData(data);
+
     return arr;
+};
+
+// 返回 id 数组和 simple 数组
+CRM.toArrWithIds = function (data) {
+    var idArr = [],
+        arr = [];
+
+    function recursionData(data) {
+
+        if (data instanceof Array) {
+
+            $.each(data,function (n,item) {
+                var obj = {
+                    id   : item.cid,
+                    pId  : item.pid,
+                    name : item.cname
+                };
+                arr.push(obj);
+                idArr.push(obj.id);
+
+                recursionData(item.nodes);
+            });
+        }
+    }
+
+    recursionData(data);
+
+    return {
+        ids: idArr,
+        data: arr
+    };
+};
+
+// 将数组转换为对象
+CRM.arrayToObjectWithIdKey = function (data, idKey) {
+    var result = {};
+
+    $.each(data, function (idx, item) {
+        if (item[idKey]) {
+            result[item[idKey]] = item;
+        }
+    });
+
+    return result;
+};
+
+// 通过 key 函数过滤重复数组
+CRM.uniqBy = function (array, key) {
+    var seen = {};
+
+    return $.grep(array, function (item, idx) {
+        var k = key(item);
+        return seen.hasOwnProperty(k) ? false : (seen[k] = true);
+    });
+};
+
+// ztree 对象转换为简单对象
+CRM.zTreeObjToSimpleObj = function (treeObj) {
+    return {
+        id: treeObj.id,
+        pId: treeObj.pId,
+        name: treeObj.name
+    };
 };
 
 // 返回当前时间，格式为yyyy-mm-dd
@@ -225,7 +310,7 @@ CRM.module.Panel.prototype.handleEdit = function (e) {
         elShow      = panel.find(this.editView),
         elHide      = panel.find(this.editHide),
         elOff       = panel.find(this.viewOff),
-        // res         = this.down;F
+        // res         = this.down;
     isEditState = true;
     CRM.onOrOff(elOff,isEditState);
     CRM.showOrHide(elShow,elHide,isEditState);

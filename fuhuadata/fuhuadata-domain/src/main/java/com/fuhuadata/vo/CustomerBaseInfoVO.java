@@ -67,6 +67,18 @@ public class CustomerBaseInfoVO {
     /**备注**/
     private String remark;
 
+    /**时区**/
+    private String timezone;
+
+    /**客户基本分类**/
+    private String custclass;
+
+    /**数据格式**/
+    private String formatdoc;
+
+    /**贸易国别**/
+    private String countryzone;
+
     /*潜在客户机会来源 1:展会，2：门户网站 3：农药店考察 4：客户介绍 5：主动联系 6：其他*/
     private Integer opportunitySource;
     /*其他机会来源*/
@@ -538,5 +550,37 @@ public class CustomerBaseInfoVO {
 
     public void setNcId(String ncId) {
         this.ncId = ncId;
+    }
+
+    public String getTimezone() {
+        return timezone;
+    }
+
+    public void setTimezone(String timezone) {
+        this.timezone = timezone;
+    }
+
+    public String getCustclass() {
+        return custclass;
+    }
+
+    public void setCustclass(String custclass) {
+        this.custclass = custclass;
+    }
+
+    public String getFormatdoc() {
+        return formatdoc;
+    }
+
+    public void setFormatdoc(String formatdoc) {
+        this.formatdoc = formatdoc;
+    }
+
+    public String getCountryzone() {
+        return countryzone;
+    }
+
+    public void setCountryzone(String countryzone) {
+        this.countryzone = countryzone;
     }
 }

@@ -6,6 +6,74 @@
     <typeAlias alias="QueryBusinessOrder" type="com.fuhuadata.domain.query.QueryBusinessOrder"/>
     <typeAlias alias="CostAndProfitStatistics" type="com.fuhuadata.vo.CostAndProfitStatistics"/>
 
+    <resultMap id="BUSINESSORDER-MAP" class="BusinessOrder">
+        <result column="order_id" jdbcType="VARCHAR" property="orderId" javaType="java.lang.String"/>
+        <result column="nc_order_id" jdbcType="VARCHAR" property="ncOrderId" javaType="java.lang.String"/>
+        <result column="business_id" jdbcType="VARCHAR" property="businessId" javaType="java.lang.String"/>
+        <result column="customer_id" jdbcType="INTEGER" property="customerId" javaType="java.lang.Integer"/>
+        <result column="customer_duty_paragraph" jdbcType="VARCHAR" property="customerDutyParagraph" javaType="java.lang.String"/>
+        <result column="bill_to_customer" jdbcType="VARCHAR" property="billToCustomer" javaType="java.lang.String"/>
+        <result column="sales_man_id" jdbcType="VARCHAR" property="salesManId" javaType="java.lang.String"/>
+        <result column="sales_man_name" jdbcType="VARCHAR" property="salesManName" javaType="java.lang.String"/>
+        <result column="department_id" jdbcType="VARCHAR" property="departmentId" javaType="java.lang.String"/>
+        <result property="departmentName" column="department_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="sale_organization_id" jdbcType="VARCHAR" property="saleOrganizationId" javaType="java.lang.String"/>
+        <result column="sale_organization_name" jdbcType="VARCHAR" property="saleOrganizationName" javaType="java.lang.String"/>
+        <result column="destination_port" jdbcType="VARCHAR" property="destinationPort" javaType="java.lang.String"/>
+        <result column="shipment_port" jdbcType="VARCHAR" property="shipmentPort" javaType="java.lang.String"/>
+        <result column="collection_agreement" jdbcType="VARCHAR" property="collectionAgreement" javaType="java.lang.String"/>
+        <result column="trade_type" jdbcType="TINYINT" property="tradeType" javaType="java.lang.Integer"/>
+        <result column="trade_term" jdbcType="VARCHAR" property="tradeTerm" javaType="java.lang.String"/>
+        <result column="currency" jdbcType="VARCHAR" property="currency" javaType="java.lang.String"/>
+
+        <result property="isCreditRisk" column="is_credit_risk " jdbcType="INT" javaType="java.lang.Integer"/>
+        <result property="interestRate" column="interest_rate" jdbcType="DECIMAL" javaType="java.lang.String"/>
+
+
+        <result column="nusdexchgrate" jdbcType="DECIMAL" property="nusdexchgrate" javaType="java.math.BigDecimal"/>
+        <result column="nexchangerate" jdbcType="DECIMAL" property="nexchangerate" javaType="java.math.BigDecimal"/>
+        <result column="lastdelydate" jdbcType="TIMESTAMP" property="lastdelydate" javaType="java.sql.Date"/>
+
+        <result column="trade_country" jdbcType="VARCHAR" property="tradeCountry" javaType="java.lang.String"/>
+        <result column="premium_rate" jdbcType="DECIMAL" property="premiumRate" javaType="java.math.BigDecimal"/>
+        <result column="guarantee_rate" jdbcType="DECIMAL" property="guaranteeRate" javaType="java.math.BigDecimal"/>
+        <result column="discount_rate" jdbcType="DECIMAL" property="discountRate" javaType="java.math.BigDecimal"/>
+        <result column="loss_rate" jdbcType="DECIMAL" property="lossRate" javaType="java.math.BigDecimal"/>
+        <result column="sale_rate" jdbcType="DECIMAL" property="saleRate" javaType="java.math.BigDecimal"/>
+        <result column="management_rate" jdbcType="DECIMAL" property="managementRate" javaType="java.math.BigDecimal"/>
+        <result column="gross_rate" jdbcType="DECIMAL" property="grossRate" javaType="java.math.BigDecimal"/>
+        <result column="credit_rate" jdbcType="DECIMAL" property="creditRate" javaType="java.math.BigDecimal"/>
+        <result column="transport_flag" jdbcType="TINYINT" property="transportFlag" javaType="java.lang.Integer"/>
+        <result column="partial_shipment_falg" jdbcType="TINYINT" property="partialShipmentFalg" javaType="java.lang.Integer"/>
+        <result column="status" jdbcType="TINYINT" property="status" javaType="java.lang.Integer"/>
+        <result column="deal_time" jdbcType="TIMESTAMP" property="dealTime" javaType="java.sql.Timestamp"/>
+        <result column="deliver_info" jdbcType="VARCHAR" property="deliverInfo" javaType="java.lang.String"/>
+        <result column="express_info" jdbcType="VARCHAR" property="expressInfo" javaType="java.lang.String"/>
+        <result column="due_time" jdbcType="DATE" property="dueTime" javaType="java.sql.Date"/>
+
+        <result column="amount_payable" jdbcType="DECIMAL" property="amountPayable" javaType="java.math.BigDecimal"/>
+
+        <result column="floor_price" jdbcType="DECIMAL" property="floorPrice" javaType="java.math.BigDecimal"/>
+
+        <result column="maintenance_fee" jdbcType="DECIMAL" property="maintenanceFee" javaType="java.math.BigDecimal"/>
+        <result column="net_profit" jdbcType="DECIMAL" property="netProfit" javaType="java.math.BigDecimal"/>
+        <result column="actual_payment_time" jdbcType="DATE" property="actualPaymentTime" javaType="java.sql.Date"/>
+        <result column="gross_profit" jdbcType="DECIMAL" property="grossProfit" javaType="java.math.BigDecimal"/>
+        <result column="actual_amount_paid" jdbcType="DECIMAL" property="actualAmountPaid" javaType="java.math.BigDecimal" />
+        <result column="unpaid_amount" jdbcType="DECIMAL" property="unpaidAmount" javaType="java.math.BigDecimal"/>
+        <result column="is_complaint" jdbcType="TINYINT" property="isComplaint" javaType="java.lang.Integer"/>
+        <result column="is_pledge" jdbcType="TINYINT" property="isPledge" javaType="java.lang.Integer"/>
+        <result column="is_modify_price" jdbcType="TINYINT" property="isModifyPrice" javaType="java.lang.Integer"/>
+        <result column="claim_amount" jdbcType="DECIMAL" property="claimAmount" javaType="java.math.BigDecimal"/>
+        <result column="create_user_id" jdbcType="INTEGER" property="createUserId" javaType="java.lang.Integer"/>
+        <result column="create_user_name" jdbcType="VARCHAR" property="createUserName" javaType="java.lang.String"/>
+        <result column="lastmodify_user_id" jdbcType="INTEGER" property="lastmodifyUserId" javaType="java.lang.Integer"/>
+        <result column="lastmodify_user_name" jdbcType="VARCHAR" property="lastmodifyUserName" javaType="java.lang.String"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" javaType="java.sql.Timestamp"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" javaType="java.sql.Timestamp"/>
+        <result column="failure_analysis" jdbcType="VARCHAR" property="failureAnalysis" javaType="java.lang.String"/>
+    </resultMap>
+
 
     <sql id="COST-PROFIT-QUERY-COMMON">
         <dynamic prepend=" WHERE ">
@@ -143,9 +211,33 @@
             </isNotEmpty>
         </dynamic>
     </sql>
+
     <update id="UPDATE" parameterClass="BusinessOrder" >
         update business_order
         <dynamic prepend="set" >
+            <isNotNull prepend=", " property="isCreditRisk">
+                is_credit_risk = #isCreditRisk#
+            </isNotNull>
+            <isNotNull prepend=", " property="interestRate">
+                interest_rate = #interestRate#
+            </isNotNull>
+            <isNotNull prepend=", " property="departmentName">
+                department_name = #departmentName#
+            </isNotNull>
+            <isNotNull prepend=", " property="nusdexchgrate">
+                nusdexchgrate = #nusdexchgrate#
+            </isNotNull>
+            <isNotNull prepend=", " property="nexchangerate">
+                nexchangerate = #nexchangerate#
+            </isNotNull>
+            <isNotNull prepend=", " property="lastdelydate">
+                lastdelydate = #lastdelydate#
+            </isNotNull>
+            <isNotNull prepend=", " property="grossProfit">
+                gross_profit= #grossProfit#
+            </isNotNull>
+
+
             <isNotNull prepend=", " property="ncOrderId" >
                 nc_order_id = #ncOrderId#
             </isNotNull>
@@ -307,7 +399,7 @@
         amount_payable, floor_price, maintenance_fee, net_profit, actual_payment_time,
         actual_amount_paid, unpaid_amount, is_complaint, is_pledge, is_modify_price, claim_amount,
         create_user_id, create_user_name, lastmodify_user_id, lastmodify_user_name, create_time,
-        modify_time)
+        modify_time,gross_profit,is_credit_risk,interest_rate,department_name,nusdexchgrate,nexchangerate,lastdelydate,gross_profit)
         values (#orderId#, #ncOrderId#, #businessId#, #customerId#,
         #customerDutyParagraph#, #billToCustomer#, #salesManId#,
         #salesManName#, #departmentId#, #saleOrganizationId#,
@@ -322,22 +414,13 @@
         #actualAmountPaid#, #unpaidAmount#, #isComplaint#, #isPledge#,
         #isModifyPrice#, #claimAmount#, #createUserId#,
         #createUserName#, #lastmodifyUserId#, #lastmodifyUserName#,
-        #createTime#, #modifyTime#)
+        #createTime#, #modifyTime#, #isCreditRisk#,#interestRate#,#departmentName#,#nusdexchgrate#,#nexchangerate#,#lastdelydate#，#grossProfit#)
 
     </insert>
 
-    <select id="GET-BY-ID" resultClass="BusinessOrder" parameterClass="java.lang.String" >
+    <select id="GET-BY-ID" resultMap="BUSINESSORDER-MAP" parameterClass="java.lang.String" >
         <![CDATA[
-        select order_id, nc_order_id, business_id, customer_id, customer_duty_paragraph,
-        bill_to_customer, sales_man_id, sales_man_name, department_id, sale_organization_id,
-        sale_organization_name, destination_port, shipment_port, collection_agreement, trade_type,
-        trade_term, currency, trade_country, premium_rate, guarantee_rate, discount_rate, loss_rate,
-        sale_rate, management_rate, gross_rate, credit_rate, transport_flag, partial_shipment_falg,
-        status, deal_time, deliver_info, express_info, due_time, amount_payable, floor_price,
-        maintenance_fee, net_profit, actual_payment_time, actual_amount_paid, unpaid_amount,
-        is_complaint, is_pledge, is_modify_price, claim_amount, create_user_id, create_user_name,
-        lastmodify_user_id, lastmodify_user_name, create_time, modify_time
-        from business_order
+        select *  from business_order
         where order_id = #orderId#
     ]]>
     </select>

@@ -1,7 +1,7 @@
 <!--副导航-->
 <style type="text/css">
-    .ztree li span.button.switch.level0 {visibility:hidden; width:1px;}
-    .ztree li ul.level0 {padding:0; background:none;}
+    /*.ztree li span.button.switch.level0 {visibility:hidden; width:1px;}*/
+    /*.ztree li ul.level0 {padding:0; background:none;}*/
 </style>
 <div class="nav-deputy shadow-out clearfix">
     <ul class="breadcrumb pull-right">
@@ -131,14 +131,14 @@
                                     <%if(data.length>0) { %>
 
                                         <%for(var i=0;i<data.length;i++){%>
-                                        <tr>
+                                        <tr data-user-id="<%=data[i].id%>">
                                             <td><%=data[i].id%></td>
                                             <td><%=data[i].name%></td>
                                             <td><%=data[i].beginTime%></td>
                                             <td><%=data[i].endTime%></td>
                                             <td data-id="<%=data[i].areasId%>">
-                                                <label class="control-label"><%=data[i].areasName%></label>
-                                                <button name="areaTree" class="btn-link pull-right" data-toggle="modal" data-target="#multiple" type="button">
+                                                <label class="control-label j-area-label"><%=data[i].areasName%></label>
+                                                <button name="areaTree" class="btn-link pull-right j-area-tree" data-toggle="modal" data-target="#multiple" type="button">
                                                     <span class="glyphicon glyphicon-search"></span>
                                                 </button>
                                             </td>
@@ -148,7 +148,7 @@
                                         <%}%>
 
                                     <%}else{%>
-                                        <tr><td rowspan="7">没有数据，请添加</td></tr>
+                                        <tr><td colspan="7">没有数据，请添加</td></tr>
                                     <%}%>
                                     </tbody>
                                 <!-- 模板结束 -->
@@ -157,7 +157,7 @@
                             <script id='menuTable' type="text/template">
                                 <!-- 模板部分 -->
                                 <caption>
-                                    <button id="" data-target="#multiple" data-toggle="modal" class="btn-link pull-right" type="button">编辑</button>
+                                    <button id="menuTree" data-target="#multiple" data-toggle="modal" class="btn-link pull-right" type="button">编辑</button>
                                 </caption>
                                 <thead>
                                 <tr>
@@ -168,39 +168,18 @@
                                 </tr>
                                 </thead>
 
+                                <%
+                                var root = data[0];
+                                var nodes = root.nodes;
+                                %>
                                 <!-- 判断语句if else-->
-                                <%if (data[0].nodes.length>0) { %>
-
-                                    <%for(var i=0;i<data[0].nodes.length;i++){%>
-                                    <tbody>
-                                    <tr>
-                                        <td><%=data[0].nodes[i].cid%></td>
-                                        <td>
-                                            <a data-toggle="collapse" href="#col<%=i%>menu">
-                                                <%if (data[0].nodes[i].nodes.length>0) {%><b class="caret"></b><%}%>
-                                                <%=data[0].nodes[i].cname%>
-                                            </a>
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    </tbody>
-                                        <%if (data[0].nodes[i].nodes.length>0) { %>
-
-                                            <%for(var j=0;j<data[0].nodes[i].nodes.length;j++){%>
-
-                                            <tbody id="col<%=i%>menu" class="collapse">
-                                                <td><%=data[0].nodes[i].nodes[j].cid%></td>
-                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=data[0].nodes[i].nodes[j].cname%></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tbody>
-                                            <%}%>
-                                        <%}%>
+                                <%if (nodes && nodes.length>0) {%>
+                                    <%for (var i=0; i<nodes.length; i++) {%>
+                                        <%-CRM.systemRoleManage.renderMenuNode(nodes[i], 1)%>
                                     <%}%>
                                 <%}else{%>
                                     <tbody>
-                                    <tr><td rowspan="7">没有数据，请添加</td></tr>
+                                    <tr><td colspan="4">没有数据，请添加</td></tr>
                                     </tbody>
                                 <%}%>
 
@@ -210,7 +189,8 @@
                             <script id='btnTable' type="text/template">
                                 <!-- 模板部分 -->
                                 <caption>
-                                    <button id="" data-target="#multiple" data-toggle="modal" class="btn-link pull-right" type="button">编辑</button>
+                                  <button id="editButton" class="btn-link pull-right" type="button">编辑</button>
+                                  <button id="saveButton" class="btn-link pull-right" type="button">保存</button>
                                 </caption>
                                 <thead>
                                 <tr>
@@ -221,41 +201,18 @@
                                     <th class="text-center">授权时间</th>
                                 </tr>
                                 </thead>
+                                <%
+                                var root = data[0];
+                                var nodes = root.nodes;
+                                %>
                                 <!-- 判断语句if else-->
-                                <%if (data[0].nodes.length>0) { %>
-
-                                <%for(var i=0;i<data[0].nodes.length;i++){%>
-                                <tbody>
-                                <tr>
-                                    <td><%=data[0].nodes[i].cid%></td>
-                                    <td>
-                                        <a data-toggle="collapse" href="#col<%=i%>btn">
-                                            <%=data[0].nodes[i].cname%>
-                                            <%if (data[0].nodes[i].nodes.length>0) {%><b class="caret"></b><%}%>
-                                        </a>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                </tbody>
-                                <%if (data[0].nodes[i].nodes.length>0) { %>
-
-                                <%for(var j=0;j<data[0].nodes[i].nodes.length;j++){%>
-
-                                <tbody id="col<%=i%>btn" class="collapse">
-                                <td><%=data[0].nodes[i].nodes[j].cid%></td>
-                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=data[0].nodes[i].nodes[j].cname%></td>
-                                <td>#*<label class="checkbox-inline"> <input type="checkbox">新增</label>*#</td>
-                                <td></td>
-                                <td></td>
-                                </tbody>
-                                <%}%>
-                                <%}%>
+                                <%if (nodes && nodes.length>0) {%>
+                                <%for (var i=0; i<nodes.length; i++) {%>
+                                <%-CRM.systemRoleManage.renderPermissionNode(nodes[i], 1)%>
                                 <%}%>
                                 <%}else{%>
                                 <tbody>
-                                <tr><td rowspan="7">没有数据，请添加</td></tr>
+                                <tr><td colspan="5">没有数据，请添加</td></tr>
                                 </tbody>
                                 <%}%>
                                 <!-- 模板结束 -->
@@ -277,7 +234,7 @@
                     &times;
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body j-modal-body">
                 <div class="row">
                     <div class="col-xs-7" style="padding-left: 4px">待选地区</div>
                     <div class="col-xs-5" style="padding-left: 4px">已选地区</div>
@@ -302,14 +259,14 @@
                         <div class="form-horizontal">
                             <div class="form-group">
                                 <div class="col-xs-12">
-                                    <button class="btn btn-xs btn-block btn-primary" type="button" title="右移">
+                                    <button class="btn btn-xs btn-block btn-primary j-add-node" type="button" title="右移">
                                         <span class="glyphicon glyphicon-chevron-right"></span>
                                     </button>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-12">
-                                    <button class="btn btn-xs btn-block btn-primary" type="button" title="左移">
+                                    <button class="btn btn-xs btn-block btn-primary j-delete-node" type="button" title="左移">
                                         <span class="glyphicon glyphicon-chevron-left"></span>
                                     </button>
                                 </div>
@@ -343,13 +300,12 @@
                         </div>
                         <hr />
                         ##tree
-                        <div id="right" class="tree" style="height: 300px;overflow-y: scroll;overflow-x: auto">
-
-                        </div>
+                      <div class="zTreeDemoBackground right" style="height: 300px;overflow-y: scroll;overflow-x: auto">
+                        <ul id="right" class="ztree"></ul>
+                      </div>
                     </div>
                     <div class="col-xs-2 col-xs-offset-4">
                         ##分配地区的用户编码
-                        <input id="userId" type="hidden" value="">
                         <button class="btn btn-block btn-primary" type="button" data-btn="finish" data-dismiss="modal">完成</button>
                     </div>
                     <div class="col-xs-2">
@@ -362,6 +318,7 @@
 </div>
 <input id="orgId" type="hidden">
 <input id="parentId" type="hidden">
+<input id="userId" type="hidden">
 
 
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>

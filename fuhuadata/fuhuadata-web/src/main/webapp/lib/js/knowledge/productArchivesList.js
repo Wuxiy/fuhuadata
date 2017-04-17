@@ -3,8 +3,8 @@
  */
 
 CRM.productArchivesList   = window.CRM.productArchivesList || {};
-CRM.productArchivesList.PRODUCT_INFO_LOOK_GET = '/productInfo/getProductInfoById'; // 产品信息查看
-CRM.productArchivesList.PRODUCT_INFO_POST     = '/productInfo/doModify'; // 产品信息编辑
+CRM.productArchivesList.PRODUCT_INFO_LOOK_GET = basePath + '/productInfo/getProductInfoById'; // 产品信息查看
+CRM.productArchivesList.PRODUCT_INFO_POST     = basePath + '/productInfo/doModify'; // 产品信息编辑
 
 CRM.productArchivesList.editView     = null; // 编辑状态下显示的标签
 CRM.productArchivesList.editHide     = null; // 编辑状态下隐藏的标签

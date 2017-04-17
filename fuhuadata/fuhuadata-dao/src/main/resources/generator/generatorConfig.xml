@@ -48,14 +48,25 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
+        <!--<table tableName="p_organization" domainObjectName="Organization">
+            <generatedKey column="org_id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>
+        <table tableName="p_dept" domainObjectName="Dept">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>
+        <table tableName="p_job" domainObjectName="Job">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>-->
         <!--<table tableName="p_button" domainObjectName="Button">
             <generatedKey column="button_id" sqlStatement="MySql" identity="true" type="post"/>
         </table>-->
         <!--<table tableName="p_area_code" domainObjectName="AreaCode">
         </table>-->
-        <table tableName="p_user_account" domainObjectName="UserAccount">
-            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        <table tableName="p_areaclass" domainObjectName="AreaClass">
         </table>
+        <!--<table tableName="p_user_account" domainObjectName="UserAccount">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>-->
         <!--<table tableName="p_user_area" domainObjectName="UserArea">
             <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
         </table>-->
