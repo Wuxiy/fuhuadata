@@ -531,7 +531,7 @@
 
 	<select id="GET-CUSTOMER-BASEINFO" resultClass="CustomerBaseInfoVO" parameterClass="java.lang.String">
 		<![CDATA[
-		SELECT
+				SELECT
 			base.customer_id as customerId,
 			base.full_name fullName,
 			GROUP_CONCAT(nature.nature) enterpriseNature,
@@ -581,16 +581,25 @@
 			en.custom_field customField,
 			en.lastmodify_user_id lastmodifyUserIdEn,
 			en.lastmodify_user_name lastmodifyUserNameEn,
-			en.modify_time modifyTimeEn
+			en.modify_time modifyTimeEn,
+			tc1.`name` countryzoneName,
+			tc2.`name` custclassName,
+			tf.`name` formatdocName,
+			tf.`name` timezoneName
 			FROM
 				customer_base_info base
 			LEFT JOIN k_customer_encyclopedia en
 			ON base.customer_id = en.customer_id
 			LEFT JOIN customer_enterprise_nature nature
 			ON nature.customer_id=base.customer_id
+    		LEFT JOIN t_countryzone tc1  ON  tc1.`code` = base.countryzone
+			LEFT JOIN t_custclass tc2 ON tc2.`code` = base.custclass
+			LEFT JOIN t_formatdoc tf ON tf.code = base.formatdoc
+			LEFT JOIN t_timezone tt ON tt.`code` = base.timezone
 			WHERE
 				base.customer_id = #customerId#
 			GROUP BY base.customer_id
+
 	]]>
 	</select>
 

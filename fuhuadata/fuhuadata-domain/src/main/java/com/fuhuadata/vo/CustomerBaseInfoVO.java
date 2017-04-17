@@ -75,6 +75,19 @@ public class CustomerBaseInfoVO {
     /**贸易国别**/
     private String countryzone;
 
+
+    /**时区name**/
+    private String timezoneName;
+
+    /**客户基本分类name**/
+    private String custclassName;
+
+    /**数据格式name**/
+    private String formatdocName;
+
+    /**贸易国别name**/
+    private String countryzoneName;
+
     /*潜在客户机会来源 1:展会，2：门户网站 3：农药店考察 4：客户介绍 5：主动联系 6：其他*/
     private Integer opportunitySource;
     /*其他机会来源*/
@@ -578,5 +591,37 @@ public class CustomerBaseInfoVO {
 
     public void setCountryzone(String countryzone) {
         this.countryzone = countryzone;
+    }
+
+    public String getTimezoneName() {
+        return timezoneName;
+    }
+
+    public void setTimezoneName(String timezoneName) {
+        this.timezoneName = timezoneName;
+    }
+
+    public String getCustclassName() {
+        return custclassName;
+    }
+
+    public void setCustclassName(String custclassName) {
+        this.custclassName = custclassName;
+    }
+
+    public String getFormatdocName() {
+        return formatdocName;
+    }
+
+    public void setFormatdocName(String formatdocName) {
+        this.formatdocName = formatdocName;
+    }
+
+    public String getCountryzoneName() {
+        return countryzoneName;
+    }
+
+    public void setCountryzoneName(String countryzoneName) {
+        this.countryzoneName = countryzoneName;
     }
 }
