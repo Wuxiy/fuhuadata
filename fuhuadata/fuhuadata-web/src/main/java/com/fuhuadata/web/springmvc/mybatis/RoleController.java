@@ -13,7 +13,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +55,7 @@ public class RoleController extends BaseTreeableController<Role, Integer> {
         this.userService = userService;
     }
 
-    @RequiresPermissions("sys:role:view")
+//    @RequiresPermissions("sys:role:view")
     @RequestMapping(value = {"", "init"}, method = RequestMethod.GET)
     public String mian() {
         return "system/systemRoleManage";
@@ -81,9 +80,9 @@ public class RoleController extends BaseTreeableController<Role, Integer> {
     public ResultPojo saveUsersOfRole(UserRole userRoleOri, @RequestParam("userIds") String userIds,
                                       @RequestParam(value = "deptIds", required = false) String deptIds) {
 
-        if (permissionList != null) {
+        /*if (permissionList != null) {
             permissionList.assertHasEditPermission();
-        }
+        }*/
 
         Result<Boolean> result = Result.newResult(false);
         List<UserRole> userRoles = Lists.newArrayList();
