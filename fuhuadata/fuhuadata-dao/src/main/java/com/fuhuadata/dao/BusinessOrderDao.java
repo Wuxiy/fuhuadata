@@ -3,8 +3,6 @@ package com.fuhuadata.dao;
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
 import com.fuhuadata.vo.CostAndProfitStatistics;
-
-import javax.management.Query;
 import java.util.List;
 
 /**

@@ -1,9 +1,12 @@
 package com.fuhuadata.vo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * 客户产品包装档案
  * Created by intanswer on 2017/3/7.
  */
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class CustomerProductPackagingArchives {
     private String customerProductId;//客户商品id
     private String customerId;
