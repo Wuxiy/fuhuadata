@@ -113,7 +113,7 @@ public class BusinessOrderProductDaoImpl implements BusinessOrderProductDao {
     public int getPriceType(Integer businessProduct) {
         try {
             return (Integer)sqlMapClient.queryForObject(GET_PRICE_TYPE,businessProduct);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return -1;

@@ -284,6 +284,7 @@
     var orderId = $('#orderId').val();
     var businessProductId = $('#businessProductId').val();
     var productRequireId = $('#productRequireId').val();
+    console.log(orderId);
     var productId = '';
     var wareId = '';
     var costtable = document.getElementById('costtable');
@@ -357,7 +358,7 @@
                             '<td><input class="form-control notnull" type="text" value="'+components[i].consumption+'"></td>'+
                             '<td><input class="form-control notnull" type="text" value="'+components[i].price+'"></td>'+
                             '<td>'+components[i].cost+'</td>'+
-                            '<td><input class="form-control" type="text" value="'+components[i].remarks+'"></td>'+
+                            '<td><input class="form-control" type="text" value="'+ifEmpty(components[i].remarks)+'"></td>'+
                             '</tr>';
                 }
             }
@@ -653,7 +654,12 @@
             data:editdata(),
             success:function (result) {
                 console.log(result);
+                alert("修改成功!");
             }
         })
+    })
+
+    $('#back').click(function(){
+        window.location.href = basePath + '/businessOrder/intoOfferorOrder?orderId=' + orderId;
     })
 </script>
