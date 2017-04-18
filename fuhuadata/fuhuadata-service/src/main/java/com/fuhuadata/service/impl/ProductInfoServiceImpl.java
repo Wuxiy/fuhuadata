@@ -83,8 +83,8 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 		    if(productInfoVO.getProductInfo() == null){
 				result.setSimpleErrorMsg(0, "当前数据不存在，请重试");
 			}else {
-		    	if(productInfo.getMidCategoryId()!=8) {
-					if (productInfo.getPhysicalProperities() != null && productInfo.getPhysicalProperities().length() > 0) {
+					if (productInfo.getPhysicalProperities() != null && productInfo.getPhysicalProperities().length() > 0
+							&& productInfo.getPhysicalProperities().startsWith("[{")) {
 						JSONArray json = JSONArray.fromObject(productInfo.getPhysicalProperities()); // 首先把字符串转成JSONArray对象
 						if (json.size() > 0) {
 							for (int i = 0; i < json.size(); i++) {
@@ -111,7 +111,6 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 					//			}
 					//		}
 					//	}
-				}
 					result.addDefaultModel("ProductInfo", productInfoVO);
 			}
 		} catch(Exception e) {
