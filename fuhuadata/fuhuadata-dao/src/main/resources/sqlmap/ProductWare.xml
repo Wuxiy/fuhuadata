@@ -9,10 +9,28 @@
         <result column="product_info_id" property="productInfoId" jdbcType="INT" javaType="java.lang.Integer" />
         <result column="specification" property="specification" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="model" property="model" jdbcType="VARCHAR" javaType="java.lang.String"/>
+
+        <result column="nc_id" property="ncId" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="code" property="code" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="customs_clearance_id" property="customsClearanceId" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="customs_clearance_name" property="customsClearanceName" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>
 
     <sql id="QUERY_COMMON">
         <dynamic prepend=" WHERE">
+            <isNotNull prepend=" AND " property="ncId">
+                nc_id = #ncId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="code">
+                code = #code#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="customsClearanceId">
+                customs_clearance_id = #customsClearanceId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="customsClearanceName">
+                customs_clearance_name = #customsClearanceName#
+            </isNotNull>
+
             <isNotNull prepend=" AND " property="wareId">
                 ware_id = #wareId#
             </isNotNull>
@@ -56,6 +74,18 @@
                 <isNotEmpty prepend=", " property="model">
                     model = #model#
                 </isNotEmpty>
+                <isNotNull prepend=" AND " property="ncId">
+                    nc_id = #ncId#
+                </isNotNull>
+                <isNotNull prepend=" AND " property="code">
+                    code = #code#
+                </isNotNull>
+                <isNotNull prepend=" AND " property="customsClearanceId">
+                    customs_clearance_id = #customsClearanceId#
+                </isNotNull>
+                <isNotNull prepend=" AND " property="customsClearanceName">
+                    customs_clearance_name = #customsClearanceName#
+                </isNotNull>
         </dynamic>
     </update>
 
@@ -81,8 +111,8 @@
         SELECT
             p.product_id productId,
             w.`ware_id` wareId,
-            p.customs_clearance_id customsClearanceId,
-            p.customs_clearance_name customsClearanceName,
+            w.customs_clearance_id customsClearanceId,
+            w.customs_clearance_name customsClearanceName,
             w.specification,
             w.`model`,
             p.measurement
