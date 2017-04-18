@@ -330,7 +330,7 @@
                             '<td><a href="'+basePath+'/businessProduct/intoProductBasicInfoRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'">'+ifEmpty(businessOrderProductLists[i].productName)+'</a></td>'+
                             '<td>'+ifEmpty(businessOrderProductLists[i].categoryName)+'</td>'+
                             '<td>'+ifEmpty(businessOrderProductLists[i].brand)+'</td>'+
-                            '<td><a href="'+basePath+'/businessProduct/intoProductRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&productRequireId='+businessOrderProductLists[i].orderId+'">'+ifEmpty(businessOrderProductLists[i].specification)+'</a></td>'+
+                            '<td><a href="'+basePath+'/businessProduct/intoProductRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&productRequireId='+businessOrderProductLists[i].productRequireId+'">'+ifEmpty(businessOrderProductLists[i].specification)+'</a></td>'+
                             '<td>'+ifEmpty(businessOrderProductLists[i].mainProductAmount)+'</td>'+
                             '<td>'+ifEmpty(businessOrderProductLists[i].cupboardPerNumber)+'</td>'+
                             '<td>'+ifEmpty(businessOrderProductLists[i].cupboardType)+'</td>'+
@@ -348,8 +348,9 @@
 
     $('#save').click(function(){
         jQuery.ajax({
-            url:'',
+            url:basePath + '/businessOrder/updateBusinessOrderByOrderId',
             type:'POST',
+            contentType:"application/json",
             data:getOrder(),
             success:function (result) {
                 console.log(result);
@@ -358,7 +359,7 @@
     })
 
     function getOrder() {
-        var data = {
+        var businessOrder = {
             "orderId":$('#orderId').val(),
             "businessId":$('#businessId').val(),
             "customerName":$('#customerName').val(),
@@ -394,7 +395,8 @@
             "nusdexchgrate":$('#nusdexchgrate').val(),
             "nexchangerate":$('#nexchangerate').val(),
         }
-        return JSON.stringify(data);
+        console.log(businessOrder)
+        return JSON.stringify(businessOrder);
     }
 
     //新增产品信息

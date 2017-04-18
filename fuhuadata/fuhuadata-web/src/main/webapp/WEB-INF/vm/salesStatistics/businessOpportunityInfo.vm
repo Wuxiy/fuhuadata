@@ -19,7 +19,7 @@
                                 <button id="edit" data-btn="edit" data-view="editHide"  class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
                                     编辑
                                 </button>
-                                <a class="btn btn-primary" href="" target="_blank">报价</a>
+                                <a class="btn btn-primary" href="" target="_blank" id="offer">报价</a>
                             </div>
                             <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right">
                                 <a id="cancel" data-btn="cancel" data-view="editView" class="btn hidden" lang="zh">取消</a>
@@ -497,5 +497,9 @@
 
     $('#back').click(function(){
         window.location.href = basePath + '/businessOrder/intoBusinessInfo';
+    })
+
+    $('#offer').click(function(){
+        window.location.href = basePath + '/businessOrder/intoBusinessConverse?businessId=' + businessId;
     })
 </script>

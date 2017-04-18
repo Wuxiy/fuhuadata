@@ -129,7 +129,7 @@ public class BusinessOrderAction {
     @SystemLogAnnotation(module = "salesStatistics",methods = "intoBusinessConverse")
     public ModelAndView intoBusinessConverse(String businessId){
         String orderId = bCodeService.getNextOrderCode();
-        return new ModelAndView("salesStatistics/offerInfo").addObject("orderId",orderId).addObject("businessId",businessId);
+        return new ModelAndView("salesStatistics/offerAdd").addObject("orderId",orderId).addObject("businessId",businessId);
     }
 
     /**
