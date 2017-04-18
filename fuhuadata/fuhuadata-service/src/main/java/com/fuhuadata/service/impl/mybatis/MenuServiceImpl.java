@@ -127,11 +127,6 @@ public class MenuServiceImpl extends BaseTreeableServiceImpl<Menu, Integer>
             s.deleteCharAt(length - 1);
         }
 
-        // 如果有儿子，最后拼一个 *
-        /*if (menuNode.getNodes() != null && menuNode.getNodes().size() > 0) {
-            s.append(":*");
-        }*/
-
         return s.toString();
     }
 

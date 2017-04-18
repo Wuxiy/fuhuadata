@@ -41,7 +41,7 @@ public class ErrorAction {
         Throwable exception = (Throwable) request.getAttribute("javax.servlet.error.exception");
 
         ModelAndView mv = new ModelAndView("common/error");
-        mv.addObject("error", exception);
+        mv.addObject("error", ExceptionResponse.from(exception));
 
         return mv;
     }

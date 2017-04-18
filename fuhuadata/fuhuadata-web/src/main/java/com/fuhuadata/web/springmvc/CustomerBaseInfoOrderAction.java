@@ -5,7 +5,10 @@ import com.fuhuadata.domain.query.QueryOrganization;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.BusinessOrderService;
 import com.fuhuadata.service.OrganizationService;
+import com.fuhuadata.service.util.LoginUtils;
+import com.fuhuadata.web.util.CustomerUtils;
 import org.apache.log4j.Logger;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +31,10 @@ public class CustomerBaseInfoOrderAction {
 
     @RequestMapping("/entrance")
     public ModelAndView entrance(String customerId,String customerType,String fullName){
+
+        Subject subject = LoginUtils.getSubject();
+        subject.checkPermission(CustomerUtils.getCustomerPermissonPrefix(customerType) + ":order:view");
+
         return new ModelAndView("customerInfo/customerOrderInfo")
                 .addObject("customerType",customerType)
                 .addObject("fullName",fullName)

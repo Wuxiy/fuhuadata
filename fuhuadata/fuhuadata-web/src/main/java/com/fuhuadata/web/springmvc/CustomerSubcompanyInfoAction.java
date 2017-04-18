@@ -5,10 +5,13 @@ import com.fuhuadata.domain.CustomerSubcompanyInfo;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.CustomerSubcompanyInfoService;
+import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.CustomerSubcompanyInfoVO;
+import com.fuhuadata.web.util.CustomerUtils;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,6 +41,10 @@ public class CustomerSubcompanyInfoAction {
     @RequestMapping(value = "/intoCustomerSubcompanyInfo",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "customerInfo-CustomerSubcompanyInfo",methods = "into")
     public ModelAndView intoCustomerSubcompanyInfo(String customerId,String customerType,String fullName){
+
+        Subject subject = LoginUtils.getSubject();
+        subject.checkPermission(CustomerUtils.getCustomerPermissonPrefix(customerType) + ":alias:view");
+
         return new ModelAndView("customerInfo/customerAnotherNamer")
                 .addObject("customerType",customerType)
                 .addObject("fullName",fullName)
