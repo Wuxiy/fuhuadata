@@ -199,7 +199,7 @@
 						<isNotEmpty prepend=", " property="categoryName">category_name=#categoryName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="concentration">concentration=#concentration#</isNotEmpty>
 						<isNotEmpty prepend=", " property="name">name=#name#</isNotEmpty>
-						<isNotEmpty prepend=", " property="measurement">measurement=#measurement#</isNotEmpty>
+						<!--<isNotEmpty prepend=", " property="measurement">measurement=#measurement#</isNotEmpty>-->
 						<isNotEmpty prepend=", " property="saltType">salt_type=#saltType#</isNotEmpty>
 						<isNotEmpty prepend=", " property="otherSaltName">other_salt_name=#otherSaltName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="executeStandard">execute_standard=#executeStandard#</isNotEmpty>

@@ -134,10 +134,14 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
 
     @Override
     public int updateBusinessOrderProduct(BusinessOrderProduct businessOrderProduct) throws Exception {
-        int priceType = businessOrderProductDao.getPriceType(businessOrderProduct.getId());
-        if(priceType==1 || priceType==2){
+        Integer priceType = businessOrderProductDao.getPriceType(businessOrderProduct.getId());
+        if(priceType!=null &&(priceType==1 || priceType==2)){
             //更新加工费
             businessOrderProduct.setProcessCost(businessOrderProductDao.calculateProcessCost(businessOrderProduct.getId()));
+        }
+        if(businessOrderProductDao.getBaiscById(businessOrderProduct.getId()).getMainPackingId()!=null){
+            //更新最低价
+            businessOrderProduct.setMinPrice(calculateMinPrice(businessOrderProduct.getId()));
         }
         //先修改订单产品数据
        int effect_num =  businessOrderProductDao.updateBusinessOrderProduct(businessOrderProduct);
