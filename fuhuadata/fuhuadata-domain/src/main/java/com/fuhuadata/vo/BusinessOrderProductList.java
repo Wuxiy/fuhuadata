@@ -14,7 +14,7 @@ public class BusinessOrderProductList {
     private String orderId;//订单id
     private String customerProductName;//客户商品名
     private String categorySerialNumber;//品类序列号
-    private String productCode;//产品序列号
+    private Integer productCode;//产品序列号
     private String categoryName;//品类
     private String productName;//产品名称
     private String brand;//品牌
@@ -154,13 +154,6 @@ public class BusinessOrderProductList {
         this.minPrice = minPrice;
     }
 
-    public String getProductCode() {
-        return productCode;
-    }
-
-    public void setProductCode(String productCode) {
-        this.productCode = productCode;
-    }
 
     public String getPackingSpecification() {
         return packingSpecification;
@@ -184,5 +177,13 @@ public class BusinessOrderProductList {
 
     public void setBusinessProductId(Integer businessProductId) {
         this.businessProductId = businessProductId;
+    }
+
+    public Integer getProductCode() {
+        return productCode;
+    }
+
+    public void setProductCode(Integer productCode) {
+        this.productCode = productCode;
     }
 }

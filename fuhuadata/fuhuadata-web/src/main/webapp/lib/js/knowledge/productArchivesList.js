@@ -162,63 +162,75 @@ CRM.productArchivesList.renderPageHandler = function (data) {
         page.resetPage();
 
     // 如果productInfo存在,则渲染
-    if (data && data.productInfo) {
+    if (data) {
 
         p = data.productInfo;
-        page.productId.val(p.productId);
-        page.categoryName.val(p.categoryName);
-        page.name.val(p.name);
-        page.measurement.val(p.measurement);
-        page.saltType.val([p.saltType]); // checkbox
-        page.otherSaltName.val(p.otherSaltName);
+        if (p.productId) {page.productId.val(p.productId);}
+        if (p.categoryName) {page.categoryName.val(p.categoryName);}
+        if (p.name) {page.name.val(p.name);}
+        if (p.measurement) {page.measurement.val(p.measurement);}
+        if (p.saltType) {page.saltType.val([p.saltType]);}
+        if (p.otherSaltName) {
+            page.otherSaltName.val(p.otherSaltName);
+            CRM.showOrHide(page.otherSaltName, null, page.saltType.filter('.else').prop('checked')); // 选中
+        }
+        if (p.executeStandard) {page.executeStandard.val(p.executeStandard);}
+        if (p.concentration) {page.concentration.val(p.concentration);}
+        if (p.executeNumer) {page.executeNumer.val(p.executeNumer);}
+        if (p.productFeature) {page.productFeature.val(p.productFeature);}
+        if (p.lastmodifyUserName) {page.lastmodifyUserName.val(p.lastmodifyUserName);}
+        if (p.modifyTime) {page.modifyTime.val(p.modifyTime);}
 
-        CRM.showOrHide(page.otherSaltName, null, page.saltType.filter('.else').prop('checked')); // 选中
+        // page.categoryName.val(p.categoryName);
+        // page.name.val(p.name);
+        // page.measurement.val(p.measurement);
+        // page.saltType.val([p.saltType]); // checkbox
+        // page.otherSaltName.val(p.otherSaltName);
+        // page.executeStandard.val(p.executeStandard);
+        // page.concentration.val(p.concentration);
+        // page.executeNumer.val(p.executeNumer);
+        // page.productFeature.val(p.productFeature);
+        // page.lastmodifyUserName.val(p.lastmodifyUserName);
+        // page.modifyTime.val(p.modifyTime);
 
-        page.executeStandard.val(p.executeStandard);
-        page.concentration.val(p.concentration);
-        page.executeNumer.val(p.executeNumer);
-        page.productFeature.val(p.productFeature);
-        page.lastmodifyUserName.val(p.lastmodifyUserName);
-        page.modifyTime.val(p.modifyTime);
-    }
+        if (data.wares) {
 
-    if (data) {
+            page.tplHandler(page.wTbody,data.wares,page.wares); // table规格型号
+        }
 
-        page.tplHandler(page.wTbody,data.wares,page.wares); // table规格型号
-    }
-
-    // 判断理化和加工的数据类型
-    if (data) {
-
-        index = data.index == null ? p.physicalProperities : data.index;
-        apcs  = data.processingComponents == null ? p.processingComponents : data.allProcessingComponents;
+        // 判断理化和加工的数据类型 数组/字符串
+        index = (data.index == null ? p.physicalProperities : data.index);
+        apcs  = (data.allProcessingComponents == null ? p.processingComponents : data.allProcessingComponents);
         page.tplHandler(page.iTbody, index, page.physicalProperities); // table理化指标
         page.tplHandler(page.pTbody, apcs, page.processingComponents); // table加工成份
 
         // 创建可编辑表格实例
         page.editITable = new CRM.ETable({id:'#iTable',inverse:true});
         page.editPTable = new CRM.ETable({id:'#pTable',inverse:true});
+
+        // 取得加工成份checkbox
+        if (data.allProcessingComponents!=null) {
+
+            // 不能提前赋值$('[name="pc"]'),因为百度模板还未插入页面，查找时会得到空数组
+            page.pcCheckboxs = $('[name="pc"]');
+        }
+        if (data.processingComponents instanceof Array && data.processingComponents && data.allProcessingComponents) {
+            $.each(data.processingComponents, function (i,item) {
+                var val = item.componentId,
+                    td = page.pcCheckboxs.filter('[value="'+ val +'"]').parents('tr').find('td');
+                // td.eq(1).text(item.componentName);
+                td.eq(2).text(item.consumption);
+                td.eq(3).text(item.remark);
+                arr.push(val);
+            });
+        }
+        if (data.allProcessingComponents!=null) {
+            page.pcCheckboxs.val(arr);
+        }
+
+        // 未选中的tr隐藏
+        CRM.getNoSelectedTr($('#pTable')).addClass('hidden');
     }
-
-    // 取得该产品具有的加工成份
-    if (data.processingComponents instanceof Array) {
-        // 不能提前赋值$('[name="pc"]'),因为百度模板还未插入页面，查找时会得到空数组
-        page.pcCheckboxs = $('[name="pc"]');
-        $.each(data.processingComponents, function (i,item) {
-            var val = item.componentId,
-                td = page.pcCheckboxs.filter('[value="'+ val +'"]').parents('tr').find('td');
-            // td.eq(1).text(item.componentName);
-            td.eq(2).text(item.consumption);
-            td.eq(3).text(item.remark);
-            arr.push(val);
-        });
-
-    }
-
-    page.pcCheckboxs.val(arr);
-
-    // 未选中的tr隐藏
-    CRM.getNoSelectedTr($('#pTable')).addClass('hidden');
 
     // 页面进入查看状态
     page.viewPage();
@@ -299,16 +311,13 @@ CRM.productArchivesList.renderProTreeToAside = function (data) {
     console.log(CRM.toArr(data));
     page.proTreeData = CRM.toArr(data); // 将角色树的数据保存到page对象属性
     $.fn.zTree.init(page.asideTree, setting, page.proTreeData);
-    treeObj = $.fn.zTree.getZTreeObj(id);
-    treeObj.expandAll(true); // 默认展开
+    // treeObj = $.fn.zTree.getZTreeObj(id);
+    // treeObj.expandAll(true); // 默认展开
 };
 
 // 初始化页面
 CRM.productArchivesList.init = function () {
     var page = this;
-
-    // 渲染页面初始数据
-    // page.renderPage();
 
     // 渲染侧边栏的产品树
     CRM.ajaxCall({
@@ -316,8 +325,8 @@ CRM.productArchivesList.init = function () {
         type     : 'GET',
         callback : function(data){
 
+            page.renderPage(60);
             page.renderProTreeToAside(data);
-            // page.renderPage();
         }
     });
 
@@ -336,64 +345,64 @@ $(function () {
     page.init();
 
     // 编辑
-    // page.edit.on('click.e',function () {
-    //
-    //     page.asidePanel.fadeOut();
-    //
-    //     $('#pTable').find('tr').removeClass('hidden');
-    //
-    //     // 开启表格编辑功能
-    //     page.editITable.status = true;
-    //     page.editPTable.status = true;
-    //     page.editITable.toggle();
-    //     page.editPTable.toggle();
-    // });
-    //
-    // // 保存
-    // page.save.on('click.s',function () {
-    //
-    //     page.asidePanel.fadeIn();
-    //
-    //     CRM.ajaxCall({
-    //         url  : page.PRODUCT_INFO_POST,
-    //         data : page.collectData(),
-    //         type : 'POST',
-    //         contentType:"application/json",
-    //         callback : function(data){
-    //             page.renderPage(page.productId.val());
-    //         }
-    //     });
-    //
-    //     // 关闭表格编辑功能
-    //     page.editITable.status = false;
-    //     page.editPTable.status = false;
-    //     page.editITable.toggle();
-    //     page.editPTable.toggle();
-    // });
-    //
-    // // 取消
-    // page.cancel.on('click.c',function () {
-    //
-    //     page.asidePanel.fadeIn();
-    //
-    //     page.renderPage(page.productId.val());
-    //
-    //     // 关闭表格编辑功能
-    //     page.editITable.status = false;
-    //     page.editPTable.status = false;
-    //     page.editITable.toggle();
-    //     page.editPTable.toggle();
-    // });
-    //
-    // // 盐类的change事件
-    // page.saltType.on('change.salt',function () {
-    //     var thisEl = $(this).filter('.else');
-    //     CRM.showOrHide(page.otherSaltName,null,thisEl.prop('checked'));
-    //
-    //     if (!thisEl.prop('checked')) {
-    //
-    //         page.otherSaltName.val(''); // 如果没选中清除该文本框
-    //     }
-    // });
+    page.edit.on('click.e',function () {
+
+        page.asidePanel.fadeOut();
+
+        $('#pTable').find('tr').removeClass('hidden');
+
+        // 开启表格编辑功能
+        page.editITable.status = true;
+        page.editPTable.status = true;
+        page.editITable.toggle();
+        page.editPTable.toggle();
+    });
+
+    // 保存
+    page.save.on('click.s',function () {
+
+        page.asidePanel.fadeIn();
+
+        CRM.ajaxCall({
+            url  : page.PRODUCT_INFO_POST,
+            data : page.collectData(),
+            type : 'POST',
+            contentType:"application/json",
+            callback : function(data){
+                page.renderPage(page.productId.val());
+            }
+        });
+
+        // 关闭表格编辑功能
+        page.editITable.status = false;
+        page.editPTable.status = false;
+        page.editITable.toggle();
+        page.editPTable.toggle();
+    });
+
+    // 取消
+    page.cancel.on('click.c',function () {
+
+        page.asidePanel.fadeIn();
+
+        page.renderPage(page.productId.val());
+
+        // 关闭表格编辑功能
+        page.editITable.status = false;
+        page.editPTable.status = false;
+        page.editITable.toggle();
+        page.editPTable.toggle();
+    });
+
+    // 盐类的change事件
+    page.saltType.on('change.salt',function () {
+        var thisEl = $(this).filter('.else');
+        CRM.showOrHide(page.otherSaltName,null,thisEl.prop('checked'));
+
+        if (!thisEl.prop('checked')) {
+
+            page.otherSaltName.val(''); // 如果没选中清除该文本框
+        }
+    });
 
 });

@@ -232,7 +232,7 @@ public class PackingArchivesAction {
      *
      * @return
      */
-    @RequiresPermissions({"wiki:mate:base"})
+    @RequiresPermissions({"wiki:mate:base:view"})
     @RequestMapping(value = "/getDetails", method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-packingArchives", methods = "details")
     public ModelAndView getDetails(int id, int bid, int sid) {

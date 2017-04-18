@@ -1,11 +1,14 @@
 package com.fuhuadata.web.springmvc;
 
+import com.fuhuadata.domain.BusinessInfo;
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.BCodeService;
+import com.fuhuadata.service.BusinessInfoService;
 import com.fuhuadata.service.BusinessOrderService;
+import com.fuhuadata.vo.BusinessInfoVO;
 import com.fuhuadata.vo.BusinessOrderVO;
 import com.fuhuadata.vo.CostAndProfitStatistics;
 import com.fuhuadata.web.util.SystemLogAnnotation;
@@ -24,7 +27,7 @@ import java.util.List;
  * Created by Think on 2017/3/29.
  */
 @Controller
-@RequestMapping("/businessOrder/*")
+    @RequestMapping("/businessOrder/*")
 public class BusinessOrderAction {
 
     @Autowired
@@ -32,6 +35,9 @@ public class BusinessOrderAction {
 
     @Autowired
     private BCodeService bCodeService;
+
+    @Autowired
+    private BusinessInfoService businessInfoService;
 
 
     @RequiresPermissions({"sale:flow:offer:view"})
@@ -129,7 +135,8 @@ public class BusinessOrderAction {
     @SystemLogAnnotation(module = "salesStatistics",methods = "intoBusinessConverse")
     public ModelAndView intoBusinessConverse(String businessId){
         String orderId = bCodeService.getNextOrderCode();
-        return new ModelAndView("salesStatistics/offerAdd").addObject("orderId",orderId).addObject("businessId",businessId);
+        Result<BusinessInfoVO> result = businessInfoService.getBusinessInfoByBusinessId(businessId);
+        return new ModelAndView("salesStatistics/offerAdd").addObject("orderId",orderId).addObject("businessId",businessId).addObject("businessInfo",result.getModel());
     }
 
     /**

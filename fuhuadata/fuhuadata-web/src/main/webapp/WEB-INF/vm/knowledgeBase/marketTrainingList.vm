@@ -10,10 +10,13 @@
     <!--表格开始-->
     <div class="panel panel-default">
         <div class="panel-heading">
-            <button class="btn btn-xs btn-primary pull-right panel-heading-btn" href="" data-toggle="modal" data-target="#addTrain" data-keyboard="true">
-                <span class="glyphicon glyphicon-plus"></span>
-                新增
-            </button>
+            #if ($shiro.hasPermission("wiki:train:add"))
+                <button class="btn btn-xs btn-primary pull-right panel-heading-btn" href="" data-toggle="modal"
+                        data-target="#addTrain" data-keyboard="true">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    新增
+                </button>
+            #end
             <h3 class="panel-title">
                 营销培训
             </h3>
