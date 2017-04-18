@@ -104,17 +104,7 @@
                             </tr>
                             </thead>
                             <tbody id="oderList">
-                            <tr>
-                                <td>00001</td>
-                                <td><a href="" target="_blank">草甘膦原药采购</a></td>
-                                <td>NUFARM</td>
-                                <td>战略客户</td>
-                                <td>经销商</td>
-                                <td>客户主要销售草甘膦系列产品，有原药采购需求</td>
-                                <td>门店考察</td>
-                                <td>100</td>
-                                <td>正常</td>
-                            </tr>
+
                             </tbody>
                         </table>
                         <!--分页导航-->
@@ -161,6 +151,7 @@
         });
     }
     var businessOpportunity = ['工厂','分销商' ,'经销商' ,'终端客户' ,'其他'];
+    var businessStateList = ['报价失败','订单取消','报价中','已下单','已转化成订单','数据已上报到NC','已签约'];
     //根据页码获取列表数据
     function getDataList(pageNum,jq){
         var data = {
@@ -187,7 +178,7 @@
                 if(ResultData && ResultData!='' && ResultData!='null') {
                     for (var i = 0; i < ResultData.length; i++) {
                         _html += '<tr>';
-                        _html += '	<td>' + ResultData[i].orderId + '</td>';
+                        _html += '	<td><a href="'+basePath+'/businessOrder/intoOfferorOrder?orderId='+ResultData[i].orderId+'">' + ResultData[i].orderId + '</a></td>';
                         _html += '  <td><a href="">' + ResultData[i].businessId + '</a></td>';
                         _html += '  <td>' + ResultData[i].saleOrganizationName + '</td>';
                         _html += '  <td lang="zh">' + ResultData[i].ncOrderId + '</td>';
@@ -198,7 +189,7 @@
                         _html += '  <td lang="zh">' + (ResultData[i].isComplaint == 0 ? "否" : "是") + '</td>';
                         _html += '   <td>' + (ResultData[i].isModifyPrice == 0 ? "否" : "是") + '</td>';
                         _html += '   <td>' + ResultData[i].dealTime + '</td>';
-                        _html += '   <td>' + ResultData[i].status + '</td>';
+                        _html += '   <td>' + businessStateList[ResultData[i].status + 2] + '</td>';
                         _html += '   </tr>';
                     }
                 }

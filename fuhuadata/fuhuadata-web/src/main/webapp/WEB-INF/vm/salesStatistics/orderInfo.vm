@@ -241,25 +241,20 @@
                         </tr>
                         </thead>
                         <tbody id="businessproduct">
-                        <tr>
-                            <td>000002</td>
-                            <td>Anna</td>
-                            <td>销售</td>
-                            <td>是</td>
-                            <td>华盛顿</td>
-                            <td>女</td>
-                            <td>美国</td>
-                            <td>000002</td>
-                            <td>Anna</td>
-                            <td>销售</td>
-                            <td>是</td>
-                            <td>华盛顿</td>
-                            <td>女</td>
-                        </tr>
+
                         </tbody>
                     </table>
                 </div>
             </div>
+        </div>
+        <div class="panel-body clearfix">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-xs-2 col-xs-offset-4">
+                        <a class="btn btn-block btn-primary" id="back">返回</a>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -337,6 +332,10 @@
                 }
             }
         })
+    })
+
+    $('#back').click(function(){
+        window.location.href = basePath + '/businessOrder/intoBusinessOrder';
     })
 
 </script>

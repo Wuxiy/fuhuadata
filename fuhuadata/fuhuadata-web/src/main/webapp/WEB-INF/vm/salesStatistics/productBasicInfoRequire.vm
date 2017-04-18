@@ -28,9 +28,9 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input id="name" class="form-control notnull" value="" disabled>
+                                                <input id="name" class="form-control notnull isdisabled" value="">
                                                 <div class="input-group-btn">
-                                                    <button data-toggle="modal" data-target="#treeModal" class="btn btn-xs btn-default">
+                                                    <button data-toggle="modal" data-target="#treeModal" class="btn btn-xs btn-default isdisabled">
                                                         <span class="glyphicon glyphicon-search"></span>
                                                     </button>
                                                 </div>
@@ -38,10 +38,10 @@
                                         </td>
                                         <td class="col-xs-2"><label class="control-label" lang="zh">报关产品名称</label></td>
                                         <td>
-                                            <input id="customsClearanceName" class="form-control" value="" disabled>
+                                            <input id="customsClearanceName" class="form-control isdisabled" value="">
                                         </td>
                                         <td class="col-xs-2"><label class="control-label" lang="zh">客户商品名</label></td>
-                                        <td><input id="customerProductName" class="form-control" type="text" value="" /></td>
+                                        <td><input id="customerProductName" class="form-control isdisabled" type="text" value="" /></td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -50,11 +50,11 @@
                                                 <sup class="not-null">*</sup>
                                             </label>
                                         </td>
-                                        <td><input id="specification" class="form-control notnull" type="text" value="" disabled/></td>
+                                        <td><input id="specification" class="form-control notnull isdisabled" type="text" value="" disabled/></td>
                                         <td><label class="control-label" lang="zh">型号</label></td>
-                                        <td><input id="model" class="form-control" type="text" value="" disabled/></td>
+                                        <td><input id="model" class="form-control isdisabled" type="text" value="" disabled/></td>
                                         <td><label class="control-label" lang="zh">品牌</label></td>
-                                        <td><input id="brand" class="form-control" type="text" value=""/></td>
+                                        <td><input id="brand" class="form-control isdisabled" type="text" value=""/></td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -63,7 +63,7 @@
                                                 <sup class="not-null">*</sup>
                                             </label>
                                         </td>
-                                        <td><input id="measurement" class="form-control notnull" type="text" value="" disabled/></td>
+                                        <td><input id="measurement" class="form-control notnull isdisabled" type="text" value="" disabled/></td>
                                         <td>
                                             <label class="control-label" lang="zh">
                                                 主数量
@@ -274,12 +274,16 @@
 <script type="text/javascript" src="${request.contextPath}/lib/js/saleprocess/productBasicInfoRequire.js"></script>
 <script type="text/javascript">
     var id = $('#businessProductId').val();
+    var productRequireId = $('#productRequireId').val();
+    console.log(productRequireId);
     var productId = '';
     var wareId = '';
     var costtable = document.getElementById('costtable');
 
     //根据id确定新增or编辑，添加默认disabled,val
     if(id!=''){
+        $('.isdisabled').attr('disabled',true);
+
         jQuery.ajax({
             url:basePath + '/businessProduct/detailBaseInfo?businessProductId=' + id,
             type:'POST',
@@ -454,7 +458,7 @@
                                     '<td><input class="form-control notnull" type="text" value="'+components[i].consumption+'"></td>'+
                                     '<td><input class="form-control notnull" type="text" value="'+components[i].price+'"></td>'+
                                     '<td>'+components[i].cost+'</td>'+
-                                    '<td><input class="form-control" type="text" value="'+components[i].remarks+'"></td>'+
+                                    '<td><input class="form-control" type="text" value="'+ifEmpty(components[i].remarks)+'"></td>'+
                                     '</tr>';
                         }
                     } else{
@@ -482,7 +486,7 @@
                                         '<td><input class="form-control notnull" type="text" value="'+components[i].consumption+'"></td>'+
                                         '<td><input class="form-control notnull" type="text" value="'+components[i].price+'"></td>'+
                                         '<td>'+components[i].cost+'</td>'+
-                                        '<td><input class="form-control" type="text" value="'+components[i].remarks+'"></td>'+
+                                        '<td><input class="form-control" type="text" value="'+ifEmpty(components[i].remarks)+'"></td>'+
                                         '</tr>';
                             }
                         }
@@ -629,5 +633,9 @@
             arr.push(obj);
         })
         return arr;
+    }
+
+    function ifEmpty(data) {
+        return data==undefined?'':data;
     }
 </script>

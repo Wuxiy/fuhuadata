@@ -171,14 +171,25 @@ public class BusinessOrderAction {
     }
 
     /**
-     *  进入报价订单详情
+     *  进入报价详情
      * @param orderId
      * @return
      */
-    @RequestMapping("/intoOfferorOrder")
-    @SystemLogAnnotation(module = "salesStatistics",methods = "intoOfferorOrder")
-    public ModelAndView intoOfferorOrder(String orderId){
+    @RequestMapping("/intoOffer")
+    @SystemLogAnnotation(module = "salesStatistics",methods = "intoOffer")
+    public ModelAndView intoOffer(String orderId){
         return new ModelAndView("salesStatistics/offerInfo").addObject("orderId",orderId);
+    }
+
+    /**
+     *  进入订单详情
+     * @param orderId
+     * @return
+     */
+    @RequestMapping("/intoOrder")
+    @SystemLogAnnotation(module = "salesStatistics",methods = "intoOrder")
+    public ModelAndView intoOrder(String orderId){
+        return new ModelAndView("salesStatistics/orderInfo").addObject("orderId",orderId);
     }
 
     /**
