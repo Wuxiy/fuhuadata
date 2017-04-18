@@ -65,7 +65,6 @@ public class CustomerProductPackingAction {
      *客户信息页面客户产品要求
      * @return
      */
-    @SuppressWarnings("unused")
     @RequestMapping(value="/intoCustomerProductInfo",method= RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerProductPackaging  ",methods = "into")
     public ModelAndView intoCustomerProductInfo(String customerId,String customerType,String fullName){
