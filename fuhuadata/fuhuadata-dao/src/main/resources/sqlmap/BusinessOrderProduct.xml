@@ -297,9 +297,6 @@
             <isNotNull prepend="," property="transformState">
                 transform_state = #transformState#
             </isNotNull>
-            <isNotNull prepend="," property="compositionCost">
-                composition_cost = #compositionCost#
-            </isNotNull>
             <isNotNull prepend="," property="createUserId">
                 create_user_id = #createUserId#
             </isNotNull>
@@ -324,18 +321,13 @@
     </update>
     
     <delete id="deleteAllInfoByIds" parameterClass="java.lang.String">
-        DELETE
-                bop.*,
-                bpr.*,
-                bopc.*
+        DELETE bop.*, bpr.*, bopc.*
         FROM
-                `business_order_product` bop,
-                `business_order_product_component` bopc,
-                `business_product_require` bpr
-        WHERE
-                bop.`id` =bopc.`business_product_id`
-                AND bop.`id` = bpr.`business_product_id`
-                AND bop.`id` in ($businessProductIds$)
+        `business_order_product` bop
+
+        LEFT JOIN	`business_order_product_component` bopc ON bopc.business_product_id = bop.id
+        LEFT JOIN	`business_product_require` bpr ON bpr.business_product_id = bop.id
+        WHERE bop.id IN ($businessProductIds$)
     </delete>
 
     <select id="getPriceType" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">

@@ -78,7 +78,7 @@
                 <a class="list-group-item" href="${request.contextPath}/productProblem/productProblemList">产品常见问题</a>
                 <a class="list-group-item" href="${request.contextPath}/marketTraining/marketTrainingList">营销培训</a>
                 <a class="list-group-item" href="${request.contextPath}/customerProductPacking/customerProductPackingList">客户产品包装要求</a>
-                <a class="list-group-item" href="${request.contextPath}/knowledgeBase/productArchivesList">标准产品档案</a>
+                <a class="list-group-item" href="${request.contextPath}/productInfo/show">标准产品档案</a>
                 <a class="list-group-item" href="${request.contextPath}/packingArchives/packingArchivesList">包材成本参考</a>
                 <a class="list-group-item" href="${request.contextPath}/knowledgeBase/processCostList">加工成本参考</a>
                 <a class="list-group-item" href="${request.contextPath}/customerEncyclopedia/customerEncyclopediaList">百科</a>

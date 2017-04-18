@@ -9,7 +9,7 @@ import com.fuhuadata.vo.VisitRecordVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import javax.management.Query;
 import java.util.List;
 
 /**
@@ -26,7 +25,7 @@ import java.util.List;
  * Created by intanswer on 2017/3/20.
  */
 @Controller
-    @RequestMapping("/customerVisitRecord/*")
+@RequestMapping("/customerVisitRecord/*")
 public class CustomerVisitRecordAction {
     private final static Log log = LogFactory.getLog(CustomerVisitRecordAction.class);
     @Resource
@@ -87,6 +86,7 @@ public class CustomerVisitRecordAction {
      * into customer maintenance
      * @return
      */
+    @RequiresPermissions({"sale:client:view"})
     @RequestMapping(value="/intoCustomerMaintenance",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "salesStatistics-CustomerMaintenance",methods = "intoCustomerMaintenance")
     public ModelAndView intoCustomerMaintenance(String customerId,String customerType,String fullName){

@@ -8,6 +8,7 @@ import com.fuhuadata.service.RateService;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +36,7 @@ public class RateAction {
      * init
      * @return
      */
-    @SuppressWarnings("unused")
+    @RequiresPermissions({"wiki:rate:view"})
     @RequestMapping(value="/RateList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledge-Rate",methods = "into")
     public ModelAndView rate(){

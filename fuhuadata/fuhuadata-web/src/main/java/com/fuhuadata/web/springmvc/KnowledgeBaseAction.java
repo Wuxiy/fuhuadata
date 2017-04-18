@@ -2,22 +2,12 @@ package com.fuhuadata.web.springmvc;
 
 
 
-import javax.annotation.Resource;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fuhuadata.domain.UserAccount;
-import com.fuhuadata.domain.query.Result;
-import com.fuhuadata.domain.query.ResultPojo;
-import com.fuhuadata.domain.query.UserAccountQuery;
-import com.fuhuadata.service.UserAccountService;
 
 @Controller
 
@@ -66,6 +56,7 @@ public class KnowledgeBaseAction {
      * 标准产品档案列表
      * @return
      */
+    @RequiresPermissions({"wiki:stand:view"})
     @RequestMapping(value="/productArchivesList",method=RequestMethod.GET)
     public ModelAndView productArchivesList(){return new ModelAndView("knowledgeBase/productArchivesList");}
 
@@ -94,6 +85,7 @@ public class KnowledgeBaseAction {
      * 加工成本列表
      * @return
      */
+    @RequiresPermissions({"wiki:proc:view"})
     @RequestMapping(value="/processCostList",method=RequestMethod.GET)
     public ModelAndView processCostList(){return new ModelAndView("knowledgeBase/processCostList");}
 

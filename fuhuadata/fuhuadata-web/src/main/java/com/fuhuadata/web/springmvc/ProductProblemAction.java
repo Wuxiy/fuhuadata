@@ -13,6 +13,7 @@ import com.fuhuadata.service.ProductProblemService;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +37,7 @@ public class ProductProblemAction {
      * init
      * @return
      */
+    @RequiresPermissions({"wiki:ques:view"})
     @RequestMapping(value = "/productProblemList")
     @SystemLogAnnotation(module = "knowledgeBase-productProblem",methods = "into")
     public ModelAndView productProblem(){

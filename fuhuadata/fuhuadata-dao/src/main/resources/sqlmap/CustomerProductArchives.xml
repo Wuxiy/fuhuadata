@@ -463,12 +463,13 @@
 		,a.sub_product_unit = b.sub_product_unit
 		,a.convert_rate = b.convert_rate
 		,a.price_type = b.price_type
-		,a.advie_price = b.advie_price
+		,a.advise_price = b.advise_price
 		,a.purchase_price = b.purchase_price
 		,a.delivery_time = b.delivery_time
 		,a.Internal_transport_mode = b.Internal_transport_mode
 		,a.Internal_transport_price = b.Internal_transport_price
-		,a.factory_id factory_name = b.factory_id factory_name
+		,a.factory_id  = b.factory_id
+		,a.factory_name = b.factory_name
 		,a.commission_price = b.commission_price
 		,a.documentary_type = b.documentary_type
 		,a.documentary_require = b.documentary_require

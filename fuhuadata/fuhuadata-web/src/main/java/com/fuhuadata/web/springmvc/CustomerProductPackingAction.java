@@ -6,6 +6,7 @@ import com.fuhuadata.vo.CustomerProductPackagingArchives;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,8 +32,8 @@ public class CustomerProductPackingAction {
      * 客户产品包装要求列表
      * @return
      */
+    @RequiresPermissions({"wiki:pack:view"})
     @SuppressWarnings("unused")
-
     @RequestMapping(value="/customerProductPackingList",method= RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerProductPackaging  ",methods = "into")
     public ModelAndView customerProductPackingList(){
