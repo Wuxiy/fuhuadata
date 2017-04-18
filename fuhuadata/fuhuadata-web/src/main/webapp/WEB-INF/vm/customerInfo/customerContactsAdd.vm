@@ -1,4 +1,5 @@
 <div class="nav-deputy shadow-out clearfix">
+    #deputyNav(3)
     #breadcrumb()
 </div>
 <div class="dashboard-wrapper">
@@ -165,7 +166,7 @@
                 success:function(result){
                     if(result.code == 1){
                         alert("新增成功!");
-                        window.location.href = basePath + '/customerLinkman/intoCustomerLinkmanList?customerId=' + id;
+                        window.location.href = basePath + '/customerLinkman/intoCustomerLinkmanList?customerType=$!{customerType}&customerId=$!{customerId}';
                     }else {
                         alert("新增失败！");
                     }
