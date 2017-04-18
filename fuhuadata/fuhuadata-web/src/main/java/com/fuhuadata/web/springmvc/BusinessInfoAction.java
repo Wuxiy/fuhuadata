@@ -122,7 +122,7 @@ public class BusinessInfoAction {
      * @param
      * @return
      */
-    @RequiresPermissions({"sale:flow:oppo:view"})
+    @RequiresPermissions({"sale:flow:oppo:ba"})
     @RequestMapping(value = "/intoBusinessOpportunityInfo",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "intoinfo")
     @ResponseBody
