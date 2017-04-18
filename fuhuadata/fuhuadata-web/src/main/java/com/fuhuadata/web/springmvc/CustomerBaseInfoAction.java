@@ -8,18 +8,17 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.CustomerAreaService;
 import com.fuhuadata.service.CustomerBaseInfoService;
-import com.fuhuadata.service.CustomerMakeProductService;
 import com.fuhuadata.vo.CategoryTree;
+import com.fuhuadata.vo.CustomerBaseInfoDO;
 import com.fuhuadata.vo.CustomerBaseInfoLinkman;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
-import com.fuhuadata.vo.CustomerBaseInfoDO;
 import com.fuhuadata.vo.DataArchive.Countryzone;
-import com.fuhuadata.vo.DataArchive.Custclass;
 import com.fuhuadata.vo.DataArchive.Formatdoc;
 import com.fuhuadata.vo.DataArchive.Timezone;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,7 +28,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import javax.management.Query;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -141,6 +139,7 @@ public class CustomerBaseInfoAction {
      * @param
      * @return
      */
+    @RequiresPermissions({"client:coop:basic:view"})
     @RequestMapping(value = "/intoCustomerBaseInfoDetails",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "customerInfo-customerList",methods = "intoCostomerBaseInfoDetails")
     public ModelAndView intoCustomerBaseInfoDetails(String customerId,String customerType,String fullName){
