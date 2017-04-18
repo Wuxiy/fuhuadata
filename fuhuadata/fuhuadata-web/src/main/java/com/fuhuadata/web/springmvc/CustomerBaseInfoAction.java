@@ -8,6 +8,7 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.CustomerAreaService;
 import com.fuhuadata.service.CustomerBaseInfoService;
+import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.CategoryTree;
 import com.fuhuadata.vo.CustomerBaseInfoDO;
 import com.fuhuadata.vo.CustomerBaseInfoLinkman;
@@ -15,10 +16,11 @@ import com.fuhuadata.vo.CustomerBaseInfoVO;
 import com.fuhuadata.vo.DataArchive.Countryzone;
 import com.fuhuadata.vo.DataArchive.Formatdoc;
 import com.fuhuadata.vo.DataArchive.Timezone;
+import com.fuhuadata.web.util.CustomerUtils;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -139,18 +141,22 @@ public class CustomerBaseInfoAction {
      * @param
      * @return
      */
-    @RequiresPermissions({"client:coop:basic:view"})
     @RequestMapping(value = "/intoCustomerBaseInfoDetails",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "customerInfo-customerList",methods = "intoCostomerBaseInfoDetails")
     public ModelAndView intoCustomerBaseInfoDetails(String customerId,String customerType,String fullName){
         if(customerId==null || customerId.trim().equals("")){
             customerId = "";
         }
+
+        Subject subject = LoginUtils.getSubject();
+        subject.checkPermission(CustomerUtils.getCustomerPermissonPrefix(customerType) + ":basic:view");
+
         ModelAndView model = new ModelAndView("customerInfo/customerBasicInfo").addObject("customerId",customerId)
                 .addObject("customerType",customerType)
                 .addObject("fullName",fullName);
         return model;
     }
+
 
     /**
      * 客户基本信息详情

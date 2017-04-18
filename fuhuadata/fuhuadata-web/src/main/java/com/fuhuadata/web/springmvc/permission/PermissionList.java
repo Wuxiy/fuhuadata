@@ -18,8 +18,8 @@ public class PermissionList implements Serializable {
 
     private static final long serialVersionUID = 1304804152872912956L;
 
-    public static final String CREATE_PERMISSION = "create";
-    public static final String UPDATE_PERMISSION = "update";
+    public static final String CREATE_PERMISSION = "add";
+    public static final String UPDATE_PERMISSION = "edit";
     public static final String DELETE_PERMISSION = "delete";
     public static final String VIEW_PERMISSION = "view";
 
