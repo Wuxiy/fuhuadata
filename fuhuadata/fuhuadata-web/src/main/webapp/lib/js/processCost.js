@@ -359,11 +359,11 @@ $(document).on("click",".freight1",function(){
             html += '<div class="modal-content">';
             html += '<div class="modal-header">';
             html += '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';
-            html += '<h2 class="modal-title" >成分价格</h2></div>';
+            html += '<h2 class="modal-title" >运费维护</h2></div>';
             html += '<div class="modal-body">';
             html += '<form class="form-horizontal" action="">';
             html += '<div class="form-group">';
-            html += '<label class="col-lg-2 control-label">国内运费维护</label>';
+            html += '<label class="col-lg-2 control-label">加工厂</label>';
             html += '<div class="col-lg-6">';
             html += '<input class="form-control" type="text" value="' + ResuleData.processFactory + '" id="processFactory" disabled>';
             html += '</div></div>';
@@ -726,24 +726,24 @@ $(document).on("click",".updateCost",function(){
     }else {
         var data = {
             "componentCost":{
-                "componentId":$('#componentNameAdd').attr('data-id'),
-                "componentName":$('#componentNameAdd').val(),
-                "priceEnd":$('#priceEndAdd').val(),
-                "unitCost":$('#unitCostAdd').val(),
-                "remarks":$('#remarksAdd').val()
+                "componentId":$('#componentName').attr('data-id'),
+                "componentName":$('#componentName').val(),
+                "priceEnd":$('#priceEnd').val(),
+                "unitCost":$('#unitCost').val(),
+                "remarks":$('#remarks').val()
             },
             "kProductComponents":ProductComponents()
         }
         console.log(data);
         jQuery.ajax({
             type:'POST',
-            url:basePath + 'componentCost/doModify',
+            url:basePath + '/componentCost/doModify',
             dataType:"json",
             contentType:"application/json",
             data:JSON.stringify(data),
             success:function(result){
                 alert('修改成功');
-                $('#modal').modal('hide');
+                $('#costmodal').modal('hide');
             }
         })
     }
