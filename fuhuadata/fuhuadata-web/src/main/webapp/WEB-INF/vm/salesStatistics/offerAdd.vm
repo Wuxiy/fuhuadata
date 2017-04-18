@@ -272,6 +272,9 @@
     </div>
 </div>
 
+<input id="businessProductId" type="hidden" value="$!{businessProductId}">
+<input id="orderId" type="hidden" value="$!{orderId}">
+
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
