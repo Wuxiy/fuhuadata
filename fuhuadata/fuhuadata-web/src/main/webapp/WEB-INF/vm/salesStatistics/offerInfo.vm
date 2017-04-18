@@ -34,7 +34,7 @@
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">客户名称</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" type="text" id="customerName" value="" disabled />
+                                    <input class="form-control" type="text" id="fullName" value="" disabled />
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">客户税号</label>
                                 <div class="col-xs-2">
@@ -52,25 +52,14 @@
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">企业电话</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" type="text" id="linkPhone1" value="" disabled />
+                                    <input class="form-control" type="text" id="enterprisePhone" value="" disabled />
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">企业邮箱</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" type="text" id="lemail" value="" disabled />
+                                    <input class="form-control" type="text" id="enterpriseEmail" value="" disabled />
                                 </div>
                             </div>
                             <div class="form-group ">
-                                <label class="col-xs-1 control-label" lang="zh">企业性质</label>
-                                <div class="col-xs-2">
-                                    <select class="form-control" id="enterpriseNature">
-                                        <option value="" selected lang="zh">全部</option>
-                                        <option value="1" lang="zh">工厂</option>
-                                        <option value="2" lang="zh">分销商</option>
-                                        <option value="3" lang="zh">经销商</option>
-                                        <option value="4" lang="zh">终端客户</option>
-                                        <option value="5" lang="zh">其他</option>
-                                    </select>
-                                </div>
                                 <label class="col-xs-1 control-label" lang="zh">收票客户</label>
                                 <div class="col-xs-2">
                                     <input class="form-control" type="text" id="billToCustomer" value="" disabled />
@@ -115,7 +104,7 @@
                             <div class="form-group">
                                 <label class="col-xs-1 control-label" lang="zh">贸易方式<sup class="not-null">*</sup></label>
                                 <div class="col-xs-2">
-                                    <select class="form-control" id="tradeType">
+                                    <select class="form-control" id="tradeType" disabled>
                                         <option value="0">一般贸易</option>
                                         <option value="1">其他</option>
                                     </select>
@@ -214,6 +203,30 @@
                                     <input class="form-control" type="email" id="" value="" disabled />
                                 </div>
                             </div>
+                            <div class="form-group ">
+                                <label class="col-xs-1 control-label">企业性质<sup class="not-null">*</sup></label>
+                                <div class="col-xs-5">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="0" data-text="工厂"> 工厂
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="1" data-text="经销商"> 经销商
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="2" data-text="分销商"> 分销商
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="3" data-text="终端客户"> 终端客户
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="check" class="suitableType cell_edit" id="other" value="4" data-text="其他"> 其他
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input class="form-control" type="text" id="otherRemarks" value="输入企业性质" disabled/>
+                                    </label>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -288,12 +301,23 @@
                 var businessOrder = result.data.businessOrder;
                 var customerBaseInfo = result.data.customerBaseInfo;
                 var businessOrderProductLists = result.data.businessOrderProductLists;
+                /*var enterpriseNature = customerBaseInfo.enterpriseNature.split(',');
+
+                $.each(arr,function(index,value){
+                    $("input[name='check']").each(function(){
+                        if($(this).val == value){
+                            $(this).prop('checked',true);
+                            if(value == 4){
+                                $('#otherRemarks').val(customerBaseInfo.otherRemarks);
+                            }
+                        }
+                    })
+                })*/
 
                 $('#businessId').val(businessOrder.businessId);
-                $('#customerName').val(customerBaseInfo.customerName);
+                $('#fullName').val(customerBaseInfo.fullName);
                 $('#customerDutyParagraph').val(businessOrder.customerDutyParagraph);
-                $('#linkPhone1').val(customerBaseInfo.linkPhone1);
-                $('#enterpriseNature').val(customerBaseInfo.enterpriseNature);
+                $('#enterprisePhone').val(customerBaseInfo.enterprisePhone);
                 $('#zhongxinbaoNumber').val(customerBaseInfo.zhongxinbaoNumber);
                 $('#registeredFunds').val(customerBaseInfo.registeredFunds);
                 $('#billToCustomer').val(businessOrder.billToCustomer);
@@ -318,7 +342,7 @@
                 $('#managementRate').val(businessOrder.managementRate);
                 $('#transportFlag').val(businessOrder.transportFlag);
                 $('#partialShipmentFalg').val(businessOrder.partialShipmentFalg);
-                $('#lemail').val(businessOrder.status);
+                $('#enterpriseEmail').val(customerBaseInfo.enterpriseEmail);
                 $('#internalSupplyName').val(businessOrder.internalSupplyName);
                 $('#nusdexchgrate').val(businessOrder.status);
                 $('#nexchangerate').val(businessOrder.internalSupplyName);
@@ -353,7 +377,8 @@
             contentType:"application/json",
             data:getOrder(),
             success:function (result) {
-                console.log(result);
+                alert("修改成功!");
+                location.reload();
             }
         })
     })
@@ -366,7 +391,7 @@
             "customerDutyParagraph":$('#customerDutyParagraph').val(),
             "linkPhone1":$('#linkPhone1').val(),
             "lemail":$('#lemail').val(),
-            "enterpriseNature":$('#enterpriseNature').val(),
+            "enterpriseNature":getenterpriseNature(),
             "registeredFunds":$('#registeredFunds').val(),
             "zhongxinbaoNumber":$('#zhongxinbaoNumber').val(),
             "billToCustomer":$('#billToCustomer').val(),
@@ -441,4 +466,13 @@
     $('#back').click(function(){
         window.location.href = basePath + '/businessOrder/intoBusinessOffer';
     })
+
+    function getenterpriseNature() {
+        var arr = [];
+        $('input[name="check"]:checked').each(function(){
+            var val = $(this).val();
+            arr.push(val);
+        })
+        return arr;
+    }
 </script>

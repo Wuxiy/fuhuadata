@@ -45,25 +45,14 @@
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">企业电话</label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" id="linkPhone1" value="" disabled />
+                                <input class="form-control" type="text" id="enterprisePhone" value="" disabled />
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">企业邮箱</label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" id="lemail" value="" disabled />
+                                <input class="form-control" type="text" id="enterpriseEmail" value="" disabled />
                             </div>
                         </div>
                         <div class="form-group ">
-                            <label class="col-xs-1 control-label" lang="zh">企业性质</label>
-                            <div class="col-xs-2">
-                                <select class="form-control" id="enterpriseNature">
-                                    <option value="" selected lang="zh">全部</option>
-                                    <option value="1" lang="zh">工厂</option>
-                                    <option value="2" lang="zh">分销商</option>
-                                    <option value="3" lang="zh">经销商</option>
-                                    <option value="4" lang="zh">终端客户</option>
-                                    <option value="5" lang="zh">其他</option>
-                                </select>
-                            </div>
                             <label class="col-xs-1 control-label" lang="zh">收票客户</label>
                             <div class="col-xs-2">
                                 <input class="form-control" type="text" id="billToCustomer" value="" disabled />
@@ -203,6 +192,29 @@
                                 <input class="form-control" type="email" id="internalSupplyName" value="" disabled />
                             </div>
                         </div>
+                        <div class="form-group ">
+                            <label class="col-xs-1 control-label">企业性质<sup class="not-null">*</sup></label>
+                            <div class="col-xs-5">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="check" class="suitableType cell_edit" value="0" data-text="工厂"> 工厂
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="check" class="suitableType cell_edit" value="1" data-text="经销商"> 经销商
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="check" class="suitableType cell_edit" value="2" data-text="分销商"> 分销商
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="check" class="suitableType cell_edit" value="3" data-text="终端客户"> 终端客户
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="check" class="suitableType cell_edit" id="other" value="4" data-text="其他"> 其他
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input class="form-control" type="text" id="otherRemarks" value="输入企业性质" disabled/>
+                                </label>
+
+                            </div>
                     </div>
                 </div>
             </div>
@@ -220,23 +232,6 @@
                     <table class="table table-condensed table-bordered table-striped text-center">
                         <thead>
                         <tr>
-                            <th class="text-center" lang="zh">产品序列号</th>
-                            <th class="text-center" lang="zh">品名</th>
-                            <th class="text-center" lang="zh">品类</th>
-                            <th class="text-center" lang="zh">品牌</th>
-                            <th class="text-center" lang="zh">包装规格</th>
-                            <th class="text-center" lang="zh">产品数量</th>
-                            <th class="text-center" lang="zh">整柜数量</th>
-                            <th class="text-center" lang="zh">柜型</th>
-                            <th class="text-center" lang="zh">柜数</th>
-                            <th class="text-center" lang="zh">交货时间</th>
-                            <th class="text-center" lang="zh">最低销售价（元/KG（L)）</th>
-                            <th class="text-center" lang="zh">单据要求</th>
-                            <th class="text-center" lang="zh">订舱出运要求</th>
-                        </tr>
-                        </thead>
-                        <tbody id="">
-                        <tr>
                             <td class="text-center">产品序列号</td>
                             <td class="text-center">品名</td>
                             <td class="text-center">品类</td>
@@ -252,6 +247,9 @@
                             <td class="text-center">订舱出运要求</td>
                             <td class="text-center">勾选删除项</td>
                         </tr>
+                        </thead>
+                        <tbody id="">
+
                         </tbody>
                     </table>
                 </div>
@@ -299,9 +297,9 @@
             "businessId":$('#businessId').val(),
             "customerName":$('#customerName').val(),
             "customerDutyParagraph":$('#customerDutyParagraph').val(),
-            "linkPhone1":$('#linkPhone1').val(),
-            "lemail":$('#lemail').val(),
-            "enterpriseNature":$('#enterpriseNature').val(),
+            "enterprisePhone":$('#enterprisePhone').val(),
+            "enterpriseEmail":$('#enterpriseEmail').val(),
+            "enterpriseNature":getenterpriseNature(),
             "registeredFunds":$('#registeredFunds').val(),
             "zhongxinbaoNumber":$('#zhongxinbaoNumber').val(),
             "billToCustomer":$('#billToCustomer').val(),
@@ -343,4 +341,13 @@
     $('#Add').click(function(){
         window.location.href = basePath + '/businessProduct/intoProductBasicInfoRequire?orderId=' + orderId;
     })
+
+    function getenterpriseNature() {
+        var arr = [];
+        $('input[name="check"]:checked').each(function(){
+            var val = $(this).val();
+            arr.push(val);
+        })
+        return arr;
+    }
 </script>
