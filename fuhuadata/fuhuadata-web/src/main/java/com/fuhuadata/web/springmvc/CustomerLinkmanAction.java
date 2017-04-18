@@ -64,8 +64,8 @@ public class CustomerLinkmanAction {
      */
     @RequestMapping(value = "intoCustomerLinkmanAdd",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "customerInfo-customerContacts",methods = "intoCustomerLinkmanAdd")
-    public ModelAndView intoCustomerLinkmanAdd(String customerId){
-        ModelAndView model = new ModelAndView("customerInfo/customerContactsAdd").addObject("customerId",customerId);
+    public ModelAndView intoCustomerLinkmanAdd(String customerId,int customerType){
+        ModelAndView model = new ModelAndView("customerInfo/customerContactsAdd").addObject("customerId",customerId).addObject("customerType",customerType);
         return model;
     }
 
