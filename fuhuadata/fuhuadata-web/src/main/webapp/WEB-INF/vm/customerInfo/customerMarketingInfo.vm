@@ -162,13 +162,33 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="errorM" tabindex="-1" role="dialog" data-backdrop="false" aria-hidden="true">
+    <div class="modal-dialog" style="width: 370px;margin-top: 168px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body clearfix">
+                <hr>
+                <h4 class="text-danger text-center">请完善表单！</h4>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>
+
 <h1 id="sTitle" class="hidden">市场信息</h1>
 <input id="customerId" type="hidden" value='${customerId}'>
 <input id="customerType" type="hidden" value='$!{customerType}'>
 <input type="hidden" id="fullName" value="$!{fullName}" />
+
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
+##<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerMarketingAjax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerMarketingInteraction.js"></script>

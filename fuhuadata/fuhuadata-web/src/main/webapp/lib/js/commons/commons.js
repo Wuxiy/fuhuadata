@@ -352,10 +352,8 @@ CRM.module.Panel.prototype.handleCancel = function (e) {
 //编辑
 CRM.module.Panel.prototype.startEdit = function () {
 
-    console.log('执行了startEdit');
     var Panel = this;
     this.panel.on('click.panel.edit','button' + this.edit,function (e) {
-        console.log('有毛病');
         Panel.handleEdit(e);
     })
 };
