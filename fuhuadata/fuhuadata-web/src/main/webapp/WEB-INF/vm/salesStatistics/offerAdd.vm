@@ -272,7 +272,7 @@
     </div>
 </div>
 
-<input id="businessProductId" type="hidden" value="$!{businessProductId}">
+<input id="businessId" type="hidden" value="$!{businessId}">
 <input id="orderId" type="hidden" value="$!{orderId}">
 
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
@@ -280,6 +280,7 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript">
     var orderId = $('#orderId').val();
+    var businessId = $('#businessId').val();
 
     $('#finish').click(function(){
         jQuery.ajax({

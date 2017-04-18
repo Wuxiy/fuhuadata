@@ -72,20 +72,20 @@
                             <caption class="text-right" lang="zh">金额单位：万元</caption>
                             <thead>
                             <tr>
-                                <th class="sorting" lang="zh">客户编号</th>
-                                <th class="sorting" lang="zh">客户全称</th>
-                                <th class="sorting" lang="zh">客户简称</th>
+                                <th lang="zh">客户编号</th>
+                                <th lang="zh">客户全称</th>
+                                <th lang="zh">客户简称</th>
                                 <th lang="zh">国家</th>
                                 <th lang="zh">客户级别</th>
-                                <th class="sorting" lang="zh">信用评级</th>
-                                <th class="sorting" lang="zh">开始合作时间</th>
-                                <th class="sorting" lang="zh">合作时间</th>
-                                <th class="sorting" lang="zh">活跃周期</th>
-                                <th class="sorting" lang="zh">合同总金额</th>
-                                <th class="sorting" lang="zh">已回款金额</th>
-                                <th class="sorting" lang="zh">总最低销售限价</th>
-                                <th class="sorting" lang="zh">总维护费用</th>
-                                <th class="sorting" lang="zh">净利润</th>
+                                <th lang="zh">信用评级</th>
+                                <th lang="zh">开始合作时间</th>
+                                <th lang="zh">合作时间</th>
+                                <th lang="zh">活跃周期</th>
+                                <th lang="zh">合同总金额</th>
+                                <th lang="zh">已回款金额</th>
+                                <th lang="zh">总最低销售限价</th>
+                                <th lang="zh">总维护费用</th>
+                                <th lang="zh">净利润</th>
                                 <th lang="zh">客户状态</th>
                                 <th lang="zh">业务员</th>
                                 <th lang="zh">流失原因分析</th>

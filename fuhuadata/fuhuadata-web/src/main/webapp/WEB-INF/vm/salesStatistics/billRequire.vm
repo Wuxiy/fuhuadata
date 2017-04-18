@@ -227,7 +227,8 @@
 <script type="text/javascript">
     var id = $('#businessProductId').val();
     console.log(id);
-    $(document).ready(function(){
+
+    if(id!=''){
         jQuery.ajax({
             url:basePath + '/businessProduct/getDocumentary?businessProductId=' + id,
             type:'POST',
@@ -331,10 +332,10 @@
 
             }
         })
-            $('.contentRadio').attr('disabled',true);
-            $('.contentText').attr('disabled',true);
-
-    })
+    }else {
+        $('.contentRadio').attr('disabled',true);
+        $('.contentText').attr('disabled',true);
+    }
 
     $('#back').click(function(){
         window.location.href = basePath + '/businessProduct/saveDocumentaryOrPacking?productRequireId=' + id;

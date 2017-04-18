@@ -441,9 +441,11 @@
 
 ## 非新增状态添加按钮
 <script id="crlBtn" type="text/html">
+##    #if ($shiro.hasPermission(""))
     <button id="edit" data-view="editHide" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
         编辑
     </button>
+##    #end
     <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden" data-view="editView">
         <button id="cancel" class="btn" lang="zh" type="button">取消</button>
         <button id="save" class="btn btn-primary" lang="zh" type="button">保存</button>

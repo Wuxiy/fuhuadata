@@ -4,10 +4,13 @@ import com.fuhuadata.domain.CustomerLinkman;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.CustomerLinkmanService;
+import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.CustomerLinkmanVO;
+import com.fuhuadata.web.util.CustomerUtils;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,6 +35,10 @@ public class CustomerLinkmanAction {
     @RequestMapping(value="/intoCustomerLinkmanList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "customerInfo-customerContacts",methods = "into")
     public ModelAndView intoCustomerLinkmanList(String customerId,String customerType,String fullName){
+
+        Subject subject = LoginUtils.getSubject();
+        subject.checkPermission(CustomerUtils.getCustomerPermissonPrefix(customerType) + ":link:view");
+
         return new ModelAndView("customerInfo/customerContacts").addObject("customerId",customerId)
                 .addObject("fullName",fullName)
                 .addObject("customerType",customerType);

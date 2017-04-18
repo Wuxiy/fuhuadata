@@ -2,7 +2,10 @@ package com.fuhuadata.web.springmvc;
 
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.CustomerProductArchivesService;
+import com.fuhuadata.service.util.LoginUtils;
+import com.fuhuadata.web.util.CustomerUtils;
 import org.apache.log4j.Logger;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +32,10 @@ public class CustomerBaseInfoOrderRequireAction {
      */
     @RequestMapping("/billRequireEntrance")
     public ModelAndView billRequireEntrance(String customerId,String customerType,String fullName){
+
+        Subject subject = LoginUtils.getSubject();
+        subject.checkPermission(CustomerUtils.getCustomerPermissonPrefix(customerType) + ":orre:view");
+
         return new ModelAndView("customerInfo/customerBillRequire")
                 .addObject("customerType",customerType)
                 .addObject("fullName",fullName)

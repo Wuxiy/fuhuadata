@@ -4,6 +4,7 @@ import com.fuhuadata.constant.Consts;
 import com.fuhuadata.domain.UserAccount;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
+import com.fuhuadata.service.mybatis.MenuService;
 import com.fuhuadata.service.mybatis.UserService;
 import com.fuhuadata.service.util.LoginUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Set;
 
 /**
  * Created by zhangxiang on 2017/2/8.
@@ -42,6 +44,9 @@ public class LoginAction {
     @Autowired
     UserService userService;
 
+    @Autowired
+    MenuService menuService;
+
     @RequestMapping({"", "index"})
     public String index() {
         return "/salesStatistics/businessOpportunity";
@@ -52,6 +57,12 @@ public class LoginAction {
     public Boolean testPermission(@RequestParam String perm) {
         Subject subject = LoginUtils.getSubject();
         return subject.isPermitted(perm);
+    }
+
+    @RequestMapping("/permissions")
+    @ResponseBody
+    public Set<String> getPermissions(@RequestParam Integer userId) {
+        return menuService.getStringPermissions(userId);
     }
 
     @RequestMapping(value = "/login")

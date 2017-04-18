@@ -229,7 +229,7 @@
 <script type="text/javascript">
     var id = $('#businessProductId').val();
 
-    $(document).ready(function(){
+    if(id!=''){
         jQuery.ajax({
             url:basePath + '/businessProduct/getPackageRequire?businessProductId=' + id,
             type:'POST',
@@ -330,10 +330,10 @@
                 }
             }
         })
-    })
+    }
 
     $('#back').click(function(){
-        window.location.href = basePath + '/businessProduct/saveDocumentaryOrPacking?businessProductId=' + $('#businessProductId').val();
+        window.location.href = basePath + '/businessProduct/saveDocumentaryOrPacking?businessProductId=' + id;
     })
 
     $(document).on('click','#finish',function(){

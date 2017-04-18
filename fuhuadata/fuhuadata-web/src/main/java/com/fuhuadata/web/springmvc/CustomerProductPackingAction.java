@@ -1,17 +1,21 @@
 package com.fuhuadata.web.springmvc;
+
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.CustomerProductArchivesService;
+import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.CustomerProductPackagingArchives;
+import com.fuhuadata.web.util.CustomerUtils;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.annotation.Resource;
 import java.util.List;
 /**
@@ -32,8 +36,8 @@ public class CustomerProductPackingAction {
      * 客户产品包装要求列表
      * @return
      */
-    @RequiresPermissions({"wiki:pack:view"})
     @SuppressWarnings("unused")
+
     @RequestMapping(value="/customerProductPackingList",method= RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerProductPackaging  ",methods = "into")
     public ModelAndView customerProductPackingList(){
@@ -68,6 +72,10 @@ public class CustomerProductPackingAction {
     @RequestMapping(value="/intoCustomerProductInfo",method= RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerProductPackaging  ",methods = "into")
     public ModelAndView intoCustomerProductInfo(String customerId,String customerType,String fullName){
+
+        Subject subject = LoginUtils.getSubject();
+        subject.checkPermission(CustomerUtils.getCustomerPermissonPrefix(customerType) + ":prod:view");
+
         return new ModelAndView("customerInfo/customerProductRequest")
                 .addObject("customerType",customerType)
                 .addObject("fullName",fullName)

@@ -70,34 +70,34 @@
         from business_order_product
         where id=#id#
     </select>
-    <select id="getDocumentaryById" parameterClass="java.lang.Integer" resultMap="BusinessOrderProductResultMap">
+    <select id="getDocumentaryById" parameterClass="java.lang.Integer" resultClass="BusinessOrderProduct">
         select
-            documentary_type,
-            documentary_require
+            documentary_type documentaryType,
+            documentary_require documentaryRequire
         from
             business_order_product
-        where id=#id#
+        where id=#value#
     </select>
 
     <select id="getPackageRequireByOrderId" parameterClass="java.lang.String" resultMap="BusinessOrderProductResultMap">
 
     </select>
 
-    <select id="getPackageRequireById" parameterClass="java.lang.Integer" resultMap="BusinessOrderProductResultMap">
+    <select id="getPackageRequireById" parameterClass="java.lang.Integer" resultClass="BusinessOrderProduct">
         select
-            shipping_agent_require,
-            package_require,
-            goods_type,
+            shipping_agent_require shippingAgentRequire,
+            package_require packageRequire,
+            goods_type goodsType,
             mianxiangqi,
             miantuiqi,
-            cupboard_type,
-            cupboard_per_number,
-            cupboard_number,
-            ocean_freight,
-            port_surcharge
+            cupboard_type cupboardType,
+            cupboard_per_number cupboardPerNumber,
+            cupboard_number cupboardNumber,
+            ocean_freight oceanFreight,
+            port_surcharge portSurcharge
         from
         business_order_product
-        where id=#id#
+        where id=#value#
     </select>
 
     <insert id="insertBasic" parameterClass="BusinessOrderProduct">
