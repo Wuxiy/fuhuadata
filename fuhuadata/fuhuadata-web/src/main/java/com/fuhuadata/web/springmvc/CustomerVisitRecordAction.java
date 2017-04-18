@@ -4,12 +4,15 @@ import com.fuhuadata.domain.query.QueryCustomerVisitRecord;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.CustomerVisitRecordService;
+import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.CustomerVisitRecordVO;
 import com.fuhuadata.vo.VisitRecordVO;
+import com.fuhuadata.web.util.CustomerUtils;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +41,10 @@ public class CustomerVisitRecordAction {
     @RequestMapping(value="/intocustomerVisitRecordList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "customerInfo-customerVisitRecord",methods = "into")
     public ModelAndView intocustomerVisitRecordList(String customerId,String customerType,String fullName){
+
+        Subject subject = LoginUtils.getSubject();
+        subject.checkPermission(CustomerUtils.getCustomerPermissonPrefix(customerType) + ":comm:view");
+
         return new ModelAndView("customerInfo/customerVisitRecordList")
                 .addObject("customerType",customerType)
                 .addObject("fullName",fullName)
