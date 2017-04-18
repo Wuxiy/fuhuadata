@@ -104,4 +104,12 @@
         WHERE roau.role_id=#{roleId}
     </select>
 
+    <select id="listAuthorityMenuIds" resultType="java.lang.Integer">
+        SELECT
+        m.menu_id
+        <include refid="FromTable"/>
+        <include refid="roleAuthorityJoin"/>
+        WHERE roau.role_id=#{roleId}
+    </select>
+
 </mapper>

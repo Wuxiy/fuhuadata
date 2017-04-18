@@ -21,6 +21,13 @@ public interface MenuService extends BaseTreeableService<Menu, Integer> {
     List<Menu> listAuthorityMenus(Integer roleId);
 
     /**
+     * 获取角色授权的菜单集合 id
+     * @param roleId
+     * @return
+     */
+    List<Integer> listAuthorityMenuIds(Integer roleId);
+
+    /**
      * 获取角色关联菜单以及权限
      * @param roleId
      * @return
