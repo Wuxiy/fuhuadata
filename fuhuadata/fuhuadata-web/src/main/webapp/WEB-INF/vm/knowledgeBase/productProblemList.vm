@@ -9,10 +9,13 @@
     <!--表格开始-->
             <div class="panel panel-default">
         <div class="panel-heading">
-            <button class="btn btn-xs btn-primary panel-heading-btn pull-right" data-toggle="modal" data-target="#modal" data-backdrop="static" data-keyboard="true">
-                <span class="glyphicon glyphicon-plus"></span>
-                新增
-            </button>
+            #if ($shiro.hasPermission("wiki:ques:add"))
+                <button class="btn btn-xs btn-primary panel-heading-btn pull-right" data-toggle="modal"
+                        data-target="#modal" data-backdrop="static" data-keyboard="true">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    新增
+                </button>
+            #end
             <h3 class="panel-title">
                 常见问题
             </h3>

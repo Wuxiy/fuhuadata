@@ -2,10 +2,18 @@
 <div class="nav-deputy shadow-out clearfix">
     <ul id="myTab" class="nav nav-tabs pull-left">
         <li class="active"><a href="#adEexpense" data-toggle="tab">制剂加工费</a></li>
-        <li><a href="#freight" data-toggle="tab">国内运费</a></li>
-        <li><a href="#cost" data-toggle="tab">成分价格</a></li>
-        <li><a href="#portSurcharge" data-toggle="tab">港杂费</a></li>
-        <li><a href="#rate" data-toggle="tab">费率</a></li>
+        #if ($shiro.hasPermission("wiki:proc:frei:view"))
+            <li><a href="#freight" data-toggle="tab">国内运费</a></li>
+        #end
+        #if ($shiro.hasPermission("wiki:proc:ele:view"))
+            <li><a href="#cost" data-toggle="tab">成分价格</a></li>
+        #end
+        #if ($shiro.hasPermission("wiki:proc:hok:view"))
+            <li><a href="#portSurcharge" data-toggle="tab">港杂费</a></li>
+        #end
+        #if ($shiro.hasPermission("wiki:proc:rate:view"))
+            <li><a href="#rate" data-toggle="tab">费率</a></li>
+        #end
     </ul>
     <ul class="breadcrumb pull-right">
         <li><span class="glyphicon glyphicon-map-marker"></span></li>
@@ -89,12 +97,14 @@
                     <!--成分价格表开始-->
                     <div class="panel panel-default">
                         <div class="panel-heading">
+                            #if ($shiro.hasPermission("wiki:proc:ele:add"))
                             <div class="btn-group btn-group-xs panel-heading-btn pull-right">
                                 <a class="btn btn-xs btn-primary panel-heading-btn" href="#costAddmodal" data-toggle="modal">
                                     <span class="glyphicon glyphicon-plus"></span>
                                     新增
                                 </a>
                             </div>
+                            #end
                             <h3 class="panel-title">
                                 成分价格
                             </h3>

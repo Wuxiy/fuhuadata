@@ -11,10 +11,12 @@
     <!--表格开始-->
     <div class="panel panel-default">
         <div class="panel-heading">
+            #if ($shiro.hasPermission("wiki:state:add"))
             <a class="btn btn-xs btn-primary pull-right panel-heading-btn" href="${request.contextPath}/exhibitionInfo/addExhibitionInfo" data-toggle="modal">
                 <span class="glyphicon glyphicon-plus"></span>
                 新增
             </a>
+            #end
             <h3 class="panel-title">
                 展会动态
             </h3>
