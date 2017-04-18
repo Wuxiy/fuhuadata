@@ -11,6 +11,7 @@ import com.fuhuadata.service.CustomerBaseInfoService;
 import com.fuhuadata.service.CustomerPurchaseProductService;
 import com.fuhuadata.service.CustomerSaleProductService;
 import org.apache.log4j.Logger;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,6 +42,7 @@ public class MarketInfoAction {
      * @param customerId
      * @return
      */
+    @RequiresPermissions("client:coop:indu:view")
     @RequestMapping("/entrance")
     public ModelAndView entrance(String customerId,String customerType,String fullName){
         return  new ModelAndView("/customerInfo/customerMarketingInfo").addObject("customerId",customerId)
