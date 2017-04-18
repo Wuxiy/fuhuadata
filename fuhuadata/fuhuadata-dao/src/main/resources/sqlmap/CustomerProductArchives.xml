@@ -711,6 +711,7 @@
 		]]>
 	</select>
 
+
 	<select id="GET-CUSTOMER-PRODUCT-PACKAGING" resultClass="CustomerProductPackagingArchives">
 		<![CDATA[
 				SELECT

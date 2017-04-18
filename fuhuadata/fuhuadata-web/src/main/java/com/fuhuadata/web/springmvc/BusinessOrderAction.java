@@ -4,6 +4,7 @@ import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
+import com.fuhuadata.service.BCodeService;
 import com.fuhuadata.service.BusinessOrderService;
 import com.fuhuadata.vo.BusinessOrderVO;
 import com.fuhuadata.vo.CostAndProfitStatistics;
@@ -27,6 +28,9 @@ public class BusinessOrderAction {
 
     @Autowired
     private BusinessOrderService businessOrderService;
+
+    @Autowired
+    private BCodeService bCodeService;
 
 
     @RequestMapping("/intoBusinessOffer")
@@ -115,16 +119,36 @@ public class BusinessOrderAction {
 
 
     /**
-     *  add
+     *  进入商机转化
+     * @param businessId
+     */
+    @RequestMapping("/intoBusinessConverse")
+    @SystemLogAnnotation(module = "salesStatistics",methods = "intoBusinessConverse")
+    public ModelAndView intoBusinessConverse(String businessId){
+        String orderId = bCodeService.getNextOrderCode();
+        return new ModelAndView("salesStatistics/offerInfo").addObject("orderId",orderId).addObject("businessId",businessId);
+    }
+
+    /**
+     *  doAdd
      * @param businessOrder
      * @return
      */
-    @RequestMapping(value = "/addBusinessOrder",method = RequestMethod.POST)
+    @RequestMapping(value = "/doAddBusinessOrder",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "addBusinessOrder")
     @ResponseBody
     public ResultPojo addBusinessOrder(@RequestBody BusinessOrder businessOrder){
         Result<BusinessOrder> result = new Result<BusinessOrder>();
         try{
+            businessOrder.setStatus(0);//新增报价,从商机转化而来，为报价中的状态
+
+            /**设置创建人和修改人**/
+            businessOrder.setCreateUserId(1);
+            businessOrder.setCreateUserName("杨洋");
+            businessOrder.setLastmodifyUserId(1);
+            businessOrder.setLastmodifyUserName("杨洋");
+
+
             result = businessOrderService.addBusinessOrder(businessOrder);
         }catch(Exception e){
             result.setSuccess(false);
@@ -175,6 +199,12 @@ public class BusinessOrderAction {
      * @param orderId
      * @return
      */
+    @RequestMapping("/intoOfferorOrder")
+    @SystemLogAnnotation(module = "salesStatistics",methods = "intoOfferorOrder")
+    public ModelAndView intoOfferorOrder(String orderId,String businessId) {
+        return new ModelAndView("salesStatistics/offerInfo").addObject("orderId", orderId).addObject("businessId", businessId);
+    }
+
     @RequestMapping("/intoOffer")
     @SystemLogAnnotation(module = "salesStatistics",methods = "intoOffer")
     public ModelAndView intoOffer(String orderId){
@@ -209,6 +239,7 @@ public class BusinessOrderAction {
         }
         return result.getResultPojo();
     }
+
 
 
     /**
