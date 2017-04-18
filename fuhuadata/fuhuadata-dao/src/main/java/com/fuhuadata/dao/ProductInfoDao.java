@@ -102,9 +102,9 @@ public interface ProductInfoDao {
 
 	/**
 	 * 获取产品增值税税率
-	 * @param productId
+	 * @param wareId
 	 * @return
 	 */
-	public BigDecimal getRisetaxes(Integer productId);
+	public BigDecimal getRisetaxes(Integer wareId);
     		
 }

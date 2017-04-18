@@ -101,7 +101,7 @@ public class ProductInfoDaoImpl extends SqlMapClientTemplate implements ProductI
     }
 
     @Override
-    public BigDecimal getRisetaxes(Integer productId) {
-        return (BigDecimal)this.queryForObject(GET_RISETAXES,productId);
+    public BigDecimal getRisetaxes(Integer wareId) {
+        return (BigDecimal)this.queryForObject(GET_RISETAXES,wareId);
     }
 }

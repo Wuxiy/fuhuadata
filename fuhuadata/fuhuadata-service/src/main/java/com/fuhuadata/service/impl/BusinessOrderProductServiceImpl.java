@@ -373,7 +373,7 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
         }
         //采购退税计算率 【采购退税计算率】=1+【增值税税率】（根据根据报关产品名称从NC系统读取）
         //增值税税率
-        BigDecimal zzssl = productInfoDao.getRisetaxes(basic.getProductId());
+        BigDecimal zzssl = productInfoDao.getRisetaxes(basic.getWareId());
         if(zzssl==null){
             zzssl = new BigDecimal(0);
         }

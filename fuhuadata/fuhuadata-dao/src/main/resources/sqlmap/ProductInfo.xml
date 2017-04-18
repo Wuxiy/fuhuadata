@@ -30,8 +30,6 @@
 		<result property="lastmodifyUserName" column="lastmodify_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="createTime" column="create_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
 		<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
-		<result property="customsClearanceId" column="customs_clearance_id" jdbcType="VARCHAR" javaType="java.lang.String"/>
-		<result property="customsClearanceName" column="customs_clearance_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
 	</resultMap>
 
 
@@ -199,7 +197,7 @@
 						<isNotEmpty prepend=", " property="categoryName">category_name=#categoryName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="concentration">concentration=#concentration#</isNotEmpty>
 						<isNotEmpty prepend=", " property="name">name=#name#</isNotEmpty>
-						<!--<isNotEmpty prepend=", " property="measurement">measurement=#measurement#</isNotEmpty>-->
+						<isNotEmpty prepend=", " property="measurement">measurement=#measurement#</isNotEmpty>
 						<isNotEmpty prepend=", " property="saltType">salt_type=#saltType#</isNotEmpty>
 						<isNotEmpty prepend=", " property="otherSaltName">other_salt_name=#otherSaltName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="executeStandard">execute_standard=#executeStandard#</isNotEmpty>
@@ -260,7 +258,30 @@
 	
 	<select id="GET-BY-ID" resultMap="PRODUCTINFO-MAP" parameterClass="java.lang.Integer">
 		<![CDATA[
-			SELECT * FROM product_info	WHERE product_id=#product_id#
+			SELECT
+			 p.product_id,
+			 p.big_category_id,
+			 p.mid_category_id,
+			 p.small_category_id,
+			 p.category_name,
+			 p.name,
+			 p.measurement,
+			 p.concentration,
+			 p.salt_type,
+			 p.other_salt_name,
+			 p.execute_standard,
+			 p.execute_numer,
+			 p.product_feature,
+			 p.processing_components,
+			 p.physical_properities,
+			 p.create_user_id,
+			 p.create_user_name,
+			 p.lastmodify_user_id,
+			 p.lastmodify_user_name,
+			 p.create_time,
+			 p.modify_time
+			 FROM product_info p,product_ware w	WHERE w.product_info_id = p.product_id and product_id=#product_id#
+			limit 1
 		]]>
 	</select>
 
@@ -315,8 +336,8 @@
 	</select>
 
 	<select id="getRisetaxes" parameterClass="java.lang.Integer" resultClass="java.math.BigDecimal">
-		select b.risetaxes from product_info a,product_info b
-		where a.product_id = #value#
-		and ifnull(a.customs_clearance_id,a.product_id) = b.product_id
+		select b.risetaxes from product_ware a,product_ware b
+		where a.ware_id = #value#
+		and ifnull(a.customs_clearance_id,a.code) = b.code
 	</select>
 </sqlMap>
