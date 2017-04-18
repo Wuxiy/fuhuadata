@@ -208,7 +208,7 @@ CRM.productArchivesList.renderPageHandler = function (data) {
         page.editITable = new CRM.ETable({id:'#iTable',inverse:true});
         page.editPTable = new CRM.ETable({id:'#pTable',inverse:true});
 
-        // 取得该产品具有的加工成份
+        // 取得加工成份checkbox
         if (data.allProcessingComponents!=null) {
 
             // 不能提前赋值$('[name="pc"]'),因为百度模板还未插入页面，查找时会得到空数组
@@ -224,7 +224,6 @@ CRM.productArchivesList.renderPageHandler = function (data) {
                 arr.push(val);
             });
         }
-
         if (data.allProcessingComponents!=null) {
             page.pcCheckboxs.val(arr);
         }
@@ -312,8 +311,8 @@ CRM.productArchivesList.renderProTreeToAside = function (data) {
     console.log(CRM.toArr(data));
     page.proTreeData = CRM.toArr(data); // 将角色树的数据保存到page对象属性
     $.fn.zTree.init(page.asideTree, setting, page.proTreeData);
-    treeObj = $.fn.zTree.getZTreeObj(id);
-    treeObj.expandAll(true); // 默认展开
+    // treeObj = $.fn.zTree.getZTreeObj(id);
+    // treeObj.expandAll(true); // 默认展开
 };
 
 // 初始化页面
