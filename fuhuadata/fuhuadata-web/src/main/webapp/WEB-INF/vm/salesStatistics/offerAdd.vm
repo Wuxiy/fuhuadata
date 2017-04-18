@@ -19,7 +19,7 @@
                         <div class="form-group ">
                             <label class="col-xs-1 control-label" lang="zh">订单编号</label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" id="orderId" value="" disabled />
+                                <input class="form-control" type="text" id="orderId" value="$!{orderId}" disabled />
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">商机编号</label>
                             <div class="col-xs-2">
@@ -272,7 +272,6 @@
     </div>
 </div>
 
-<input id="orderId" type="hidden" value="$!{orderId}">
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>

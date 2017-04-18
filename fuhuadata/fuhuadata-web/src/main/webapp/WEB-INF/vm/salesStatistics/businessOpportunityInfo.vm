@@ -205,6 +205,15 @@
                         </div>
                     </div>
                 </div>
+            <div class="panel-body clearfix">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-xs-2 col-xs-offset-4">
+                            <a class="btn btn-block btn-primary" id="back">返回</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -486,4 +495,7 @@
         return JSON.stringify(data);
     }
 
+    $('#back').click(function(){
+        window.location.href = basePath + '/businessOrder/intoBusinessInfo';
+    })
 </script>

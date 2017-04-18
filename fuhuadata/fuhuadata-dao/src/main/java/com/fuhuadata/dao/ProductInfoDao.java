@@ -1,4 +1,5 @@
 package com.fuhuadata.dao;
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.fuhuadata.domain.ProductCategory;
@@ -98,5 +99,12 @@ public interface ProductInfoDao {
 	 * @return
 	 */
 	public ProductInfo getCustomsClearanceInfo(Integer productId);
+
+	/**
+	 * 获取产品增值税税率
+	 * @param productId
+	 * @return
+	 */
+	public BigDecimal getRisetaxes(Integer productId);
     		
 }

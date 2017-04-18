@@ -251,26 +251,20 @@
                         </tr>
                         </thead>
                         <tbody id="businessproduct">
-                        <tr>
-                            <td class="text-center">产品序列号</td>
-                            <td class="text-center">品名</td>
-                            <td class="text-center">品类</td>
-                            <td class="text-center">品牌</td>
-                            <td class="text-center">包装规格</td>
-                            <td class="text-center">产品数量</td>
-                            <td class="text-center">整柜数量</td>
-                            <td class="text-center">柜型</td>
-                            <td class="text-center">柜数</td>
-                            <td class="text-center">交货时间</td>
-                            <td class="text-center">最低销售价（元/KG（L)）</td>
-                            <td class="text-center">单据要求</td>
-                            <td class="text-center">订舱出运要求</td>
-                            <td class="text-center">勾选删除项</td>
-                        </tr>
+
                         </tbody>
                     </table>
                 </div>
             </div>
+        </div>
+        <div class="panel-body clearfix">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-xs-2 col-xs-offset-4">
+                        <a class="btn btn-block btn-primary" id="back">返回</a>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -333,10 +327,10 @@
                 for(var i=0;i<businessOrderProductLists.length;i++){
                     businessproduct.innerHTML += '<tr>'+
                             '<td>'+ifEmpty(businessOrderProductLists[i].productCode)+'</td>'+
-                            '<td><a href="'+basePath+'/businessProduct/intoProductBasicInfoRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'"></a>'+ifEmpty(businessOrderProductLists[i].productName)+'</td>'+
+                            '<td><a href="'+basePath+'/businessProduct/intoProductBasicInfoRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'">'+ifEmpty(businessOrderProductLists[i].productName)+'</a></td>'+
                             '<td>'+ifEmpty(businessOrderProductLists[i].categoryName)+'</td>'+
                             '<td>'+ifEmpty(businessOrderProductLists[i].brand)+'</td>'+
-                            '<td><a href="'+basePath+'/businessProduct/intoProductRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&productRequireId='+businessOrderProductLists[i].orderId+'"></a>'+ifEmpty(businessOrderProductLists[i].specification)+'</td>'+
+                            '<td><a href="'+basePath+'/businessProduct/intoProductRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&productRequireId='+businessOrderProductLists[i].orderId+'">'+ifEmpty(businessOrderProductLists[i].specification)+'</a></td>'+
                             '<td>'+ifEmpty(businessOrderProductLists[i].mainProductAmount)+'</td>'+
                             '<td>'+ifEmpty(businessOrderProductLists[i].cupboardPerNumber)+'</td>'+
                             '<td>'+ifEmpty(businessOrderProductLists[i].cupboardType)+'</td>'+
@@ -441,4 +435,8 @@
     function ifEmpty(data) {
         return data==undefined?'':data;
     }
+
+    $('#back').click(function(){
+        window.location.href = basePath + '/businessOrder/intoBusinessOffer';
+    })
 </script>

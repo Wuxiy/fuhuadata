@@ -35,6 +35,8 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
     private BusinessOrderDao businessOrderDao;
     @Autowired
     private IncomeDao incomeDao;
+    @Autowired
+    private ProductInfoDao productInfoDao;
     @Transactional
     public int addBusinessOrderProduct(BusinessOrderProduct businessOrderProduct,List<BusinessOrderProductComponent> businessOrderProductComponents) {
         try {
@@ -366,12 +368,78 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
             guaranteeRate = new BigDecimal(0);
         }
         //采购退税计算率 【采购退税计算率】=1+【增值税税率】（根据根据报关产品名称从NC系统读取）
-
-        return null;
+        //增值税税率
+        BigDecimal zzssl = productInfoDao.getRisetaxes(basic.getProductId());
+        if(zzssl==null){
+            zzssl = new BigDecimal(0);
+        }
+        BigDecimal purchaseZZL = new BigDecimal(1).add(zzssl);
+        /**
+         *  Y={ X+【港杂费单价】+【佣金单价】+【海运费单价】+【资金利息单价】-
+         * 【退税率】×X/【采购退税计算率】+【其他费用】}/(1-【汇损率】-【保险费率】-【信保费率】)
+         */
+        return x.add(portSurcharge).add(commissionPrice).add(oceanFreight).add(capitalInterestPrice)
+                .subtract(taxFree.multiply(x).divide(purchaseZZL)).add(otherCost)
+                .divide(new BigDecimal(1).subtract(lossRate).subtract(premiumRate).subtract(guaranteeRate));
     }
-    //不退税计算最低价
+
+    /**
+     * 不退税计算最低价
+     * Y={ X+【港杂费单价】+【佣金单价】+【海运费单价】+【资金利息单价】+
+     * 【其他费用】}/(1-【汇损率】-【保险费率】-【信保费率】)
+     * @param basic
+     * @param order
+     * @return
+     */
     private BigDecimal calculatePriceForNoneTax(BusinessOrderProduct basic,BusinessOrder order){
-        return null;
+        //计算X值
+        BigDecimal x = getX(basic,order);
+        //港杂费单价
+        BigDecimal portSurcharge = basic.getPortSurcharge();
+        if(portSurcharge == null){
+            portSurcharge = new BigDecimal(0);
+        }
+        //佣金单价
+        BigDecimal commissionPrice = basic.getCommissionPrice();
+        if(commissionPrice == null){
+            commissionPrice = new BigDecimal(0);
+        }
+        //海运费单价
+        BigDecimal oceanFreight = basic.getOceanFreight();
+        if(oceanFreight == null){
+            oceanFreight = new BigDecimal(0);
+        }
+        //资金利息单价
+        BigDecimal capitalInterestPrice = basic.getCapitalInterestPrice();
+        if(capitalInterestPrice == null){
+            capitalInterestPrice = getCapitalInterestPrice(x,order);
+        }
+        //其他费用
+        BigDecimal otherCost = basic.getOtherCost();
+        if(otherCost == null){
+            otherCost = new BigDecimal(1);
+        }
+        //汇损率
+        BigDecimal lossRate = order.getLossRate();
+        if (lossRate == null) {
+            lossRate = new BigDecimal(0);
+        }
+        //保险费率
+        BigDecimal premiumRate = order.getPremiumRate();
+        if(premiumRate == null){
+            premiumRate = new BigDecimal(0);
+        }
+        //信保费率
+        BigDecimal guaranteeRate = order.getGuaranteeRate();
+        if(guaranteeRate == null){
+            guaranteeRate = new BigDecimal(0);
+        }
+        /**
+         * * Y={ X+【港杂费单价】+【佣金单价】+【海运费单价】+【资金利息单价】+
+         * 【其他费用】}/(1-【汇损率】-【保险费率】-【信保费率】)
+         */
+        return x.add(portSurcharge).add(commissionPrice).add(oceanFreight).add(capitalInterestPrice)
+                .add(otherCost).divide(new BigDecimal(1).subtract(lossRate).subtract(premiumRate).subtract(guaranteeRate));
     }
 
     /**

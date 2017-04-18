@@ -1,4 +1,5 @@
 package com.fuhuadata.dao.impl;
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.fuhuadata.domain.ProductComponent;
@@ -32,6 +33,7 @@ public class ProductInfoDaoImpl extends SqlMapClientTemplate implements ProductI
     public static final String  DELETE_PROCESSING_COMPONENT_BY_ID="PRODUCTINFO.DELETE-PROCESSING-COMPONENTS-BY-ID";
     public static final String GET_PRODUCT_COMPONENT_BY_PRODUCT_ID="PRODUCTINFO.GET-PRODUCT-COMPONENT-BY-ID";
     public static final String GET_CUSTOMS_CLEARANCE_INFO = "PRODUCTINFO.getCustomsClearanceInfo";
+    public static final String GET_RISETAXES = "PRODUCTINFO.getRisetaxes";
     
     public ProductInfo addProductInfo(ProductInfo productInfo) {
 		productInfo.setProductId((Integer) this.insert(ADD, productInfo));
@@ -96,5 +98,10 @@ public class ProductInfoDaoImpl extends SqlMapClientTemplate implements ProductI
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public BigDecimal getRisetaxes(Integer productId) {
+        return (BigDecimal)this.queryForObject(GET_RISETAXES,productId);
     }
 }
