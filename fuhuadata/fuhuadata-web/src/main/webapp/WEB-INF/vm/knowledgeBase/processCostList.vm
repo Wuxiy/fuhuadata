@@ -421,7 +421,9 @@
 
         //获取树categoryFullName，id
         var tarEltext = $(e.target).text();
-        var id = $(e.target).parent('li').attr('id');
+        var cid = $(e.target).parent('li').attr('id');
+        var id = cid.split('_')[1];
+        console.log(id);
         var sname = $(e.target).parent('li').parent('ul').parent('li').find('a:first').text();
         var bname = $(e.target).parent('li').parent('ul').parent('li').parent('ul').parent('li').find('a:first').text();
         if(bname!=''){
