@@ -1,14 +1,18 @@
 /**
- * 获取数据
+ * huxiangyang
  */
 //市场信息页面所有数据
 function pop(result){
+
     // console.log(result);
     var data = result;
+
     //获取采购产品
     cpps(data);
+
     //获取销售产品
     csps(data);
+
     //获取合作情况
     var coop = data.cooperation;
 
@@ -24,12 +28,18 @@ function pop(result){
 
 //客户采购产品
 function cpps(result){
-    var data;
+    var data=[];
+
     //对data的层级进行判断
-    if(result instanceof Array){
-        data = result;//取第一层
-    }else{
-        data = result.cpps;//取第二层
+    if (result) {
+
+        if(result instanceof Array && result.length>0){
+
+            data = result;//取第一层
+        }else if (result.cpps instanceof Array && result.cpps.length>0) {
+
+            data = result.cpps;//取第二层
+        }
     }
     var cpps = $('#cpps');
     cpps.html('');
@@ -37,29 +47,29 @@ function cpps(result){
         var tbody = '';
         tbody += '<tbody>';
         tbody += '<tr><th class="text-center">采购产品</th>';
-        tbody += '<td class="text-center">'+item.productName+'</td>';
+        tbody += '<td class="text-center">'+(item.productName!=undefined?item.productName:'')+'</td>';
         tbody += '<th class="text-center">年需求量</th>';
-        tbody += '<td class="text-center">'+item.annualDemands+'</td>';
+        tbody += '<td class="text-center">'+(item.annualDemands!=undefined?item.annualDemands:'')+'</td>';
         tbody += '<th class="text-center">平均单价(美元)</th>';
-        tbody += '<td class="text-center">'+item.averagePrice+'</td></tr>';
-        tbody += '<tr><td>供应商1</td>'
-        tbody += '<td>'+item.supplier1+'</td>';
-        tbody += '<td>年采购量</td>'
-        tbody += '<td>'+item.purchaseAmount1+'</td>';
+        tbody += '<td class="text-center">'+(item.averagePrice!=undefined?item.averagePrice:'')+'</td></tr>';
+        tbody += '<tr><td>供应商1</td>';
+        tbody += '<td>'+(item.supplier1!=undefined?item.supplier1:'')+'</td>';
+        tbody += '<td>年采购量</td>';
+        tbody += '<td>'+(item.purchaseAmount1!=undefined?item.purchaseAmount1:'')+'</td>';
         tbody += '<td>平均单价</td>';
-        tbody += '<td>'+item.averagePrice1+'</td></tr>';
-        tbody += '<tr><td>供应商2</td>'
-        tbody += '<td>'+item.supplier2+'</td>';
-        tbody += '<td>年采购量</td>'
-        tbody += '<td>'+item.purchaseAmount2+'</td>';
+        tbody += '<td>'+(item.averagePrice1!=undefined?item.averagePrice1:'')+'</td></tr>';
+        tbody += '<tr><td>供应商2</td>';
+        tbody += '<td>'+(item.supplier2!=undefined?item.supplier2:'')+'</td>';
+        tbody += '<td>年采购量</td>';
+        tbody += '<td>'+(item.purchaseAmount2!=undefined?item.purchaseAmount2:'')+'</td>';
         tbody += '<td>平均单价</td>';
-        tbody += '<td>'+item.averagePrice2+'</td></tr>';
-        tbody += '<tr><td>供应商3</td>'
-        tbody += '<td>'+item.supplier3+'</td>';
-        tbody += '<td>年采购量</td>'
-        tbody += '<td>'+item.purchaseAmount3+'</td>';
+        tbody += '<td>'+(item.averagePrice2!=undefined?item.averagePrice2:'')+'</td></tr>';
+        tbody += '<tr><td>供应商3</td>';
+        tbody += '<td>'+(item.supplier3!=undefined?item.supplier3:'')+'</td>';
+        tbody += '<td>年采购量</td>';
+        tbody += '<td>'+(item.purchaseAmount3!=undefined?item.purchaseAmount3:'')+'</td>';
         tbody += '<td>平均单价</td>';
-        tbody += '<td>'+item.averagePrice3+'</td></tr></tbody>';
+        tbody += '<td>'+(item.averagePrice3!=undefined?item.averagePrice3:'')+'</td></tr></tbody>';
         $('#cpps_year').val(item.year);
         cpps.append(tbody);
     });
@@ -67,12 +77,18 @@ function cpps(result){
 
 //客户销售产品
 function csps(result) {
-    var data;
-    //对data的层级进行判断
-    if(result instanceof Array){
-        data = result;//取第一层
-    }else{
-        data = result.csps;//取第二层
+    var data = [];
+
+    if (result) {
+
+        //对data的层级进行判断
+        if (result instanceof Array && result.length>0) {
+
+            data = result;//取第一层
+        }else if (result.csps instanceof Array && result.csps.length>0) {
+
+            data = result.csps;//取第二层
+        }
     }
     var csps = $('#csps');
     csps.html('');
@@ -80,31 +96,31 @@ function csps(result) {
         var tbody = '';
         tbody += '<tbody>';
         tbody += '<tr><th class="text-center">销售产品</th>';
-        tbody += '<td class="text-center">'+item.productName+'</td>';
+        tbody += '<td class="text-center">'+(item.productName!=undefined?item.productName:'')+'</td>';
         tbody += '<th class="text-center">年销售量</th>';
-        tbody += '<td class="text-center">'+item.yearSalesTotal+'</td>';
+        tbody += '<td class="text-center">'+(item.yearSalesTotal!=undefined?item.yearSalesTotal:'')+'</td>';
         tbody += '<th class="text-center">品牌</th>';
-        tbody += '<td class="text-center">'+item.brand+'</td>';
+        tbody += '<td class="text-center">'+(item.brand!=undefined?item.brand:'')+'</td>';
         tbody += '<th class="text-center">营销手段</th>';
-        tbody += '<td class="text-center">'+item.marketingMethod+'</td></tr>';
+        tbody += '<td class="text-center">'+(item.marketingMethod!=undefined?item.marketingMethod:'')+'</td></tr>';
         tbody += '<tr><td>销售目的国1</td>';
-        tbody += '<td>'+item.destinationCountry1+'</td>';
+        tbody += '<td>'+(item.destinationCountry1!=undefined?item.destinationCountry1:'')+'</td>';
         tbody += '<td>年销售量</td>';
-        tbody += '<td>'+item.yearSales1+'</td>';
+        tbody += '<td>'+(item.yearSales1!=undefined?item.yearSales1:'')+'</td>';
         tbody += '<td colspan="2">所占市场份额</td>';
-        tbody += '<td colspan="2">'+item.marketShare1+'</td></tr>';
+        tbody += '<td colspan="2">'+(item.marketShare1!=undefined?item.marketShare1:'')+'</td></tr>';
         tbody += '<tr><td>销售目的国2</td>';
-        tbody += '<td>'+item.destinationCountry2+'</td>';
+        tbody += '<td>'+(item.destinationCountry2!=undefined?item.destinationCountry2:'')+'</td>';
         tbody += '<td>年销售量</td>';
-        tbody += '<td>'+item.yearSales2+'</td>';
+        tbody += '<td>'+(item.yearSales2!=undefined?item.yearSales2:'')+'</td>';
         tbody += '<td colspan="2">所占市场份额</td>';
-        tbody += '<td colspan="2">'+item.marketShare2+'</td></tr>';
+        tbody += '<td colspan="2">'+(item.marketShare2!=undefined?item.marketShare2:'')+'</td></tr>';
         tbody += '<tr><td>销售目的国3</td>';
-        tbody += '<td>'+item.destinationCountry3+'</td>';
+        tbody += '<td>'+(item.destinationCountry3!=undefined?item.destinationCountry3:'')+'</td>';
         tbody += '<td>年销售量</td>';
-        tbody += '<td>'+item.yearSales3+'</td>';
+        tbody += '<td>'+(item.yearSales3!=undefined?item.yearSales3:'')+'</td>';
         tbody += '<td colspan="2">所占市场份额</td>';
-        tbody += '<td colspan="2">'+item.marketShare3+'</td></tr></tbody>';
+        tbody += '<td colspan="2">'+(item.marketShare3!=undefined?item.marketShare3:'')+'</td></tr></tbody>';
         $('#csps_year').val(item.year);
         csps.append(tbody);
     });
@@ -123,6 +139,7 @@ function cppsObj() {
         var obj = {};
         obj.year = $('#year').val();
         obj.customerId = $('#customerId').val();
+        obj.customerType = $('#customerType').val();
         obj.productName = $this.find('[name="productName"]').val();
         obj.annualDemands = $this.find('[name="annualDemands"]').val();
         obj.averagePrice = $this.find('[name="averagePrice"]').val();
@@ -150,6 +167,7 @@ function cspsObj() {
         var obj = {};
         obj.year = $('#year').val();
         obj.customerId = $('#customerId').val();
+        obj.customerType = $('#customerType').val();
         obj.productName = $this.find('[name="productName"]').val();
         obj.yearSalesTotal = $this.find('[name="yearSalesTotal"]').val();
         obj.brand = $this.find('[name="brand"]').val();
@@ -157,12 +175,12 @@ function cspsObj() {
         obj.destinationCountry1 = $this.find('[name="destinationCountry1"]').val();
         obj.yearSales1 = $this.find('[name="yearSales1"]').val();
         obj.marketShare1 = $this.find('[name="marketShare1"]').val();
-        obj.destinationCountry2 = $this.find('[name="destinationCountry1"]').val();
-        obj.yearSales2 = $this.find('[name="yearSales1"]').val();
-        obj.marketShare2 = $this.find('[name="marketShare1"]').val();
-        obj.destinationCountry3 = $this.find('[name="destinationCountry1"]').val();
-        obj.yearSales3 = $this.find('[name="yearSales1"]').val();
-        obj.marketShare3 = $this.find('[name="marketShare1"]').val();
+        obj.destinationCountry2 = $this.find('[name="destinationCountry2"]').val();
+        obj.yearSales2 = $this.find('[name="yearSales2"]').val();
+        obj.marketShare2 = $this.find('[name="marketShare2"]').val();
+        obj.destinationCountry3 = $this.find('[name="destinationCountry3"]').val();
+        obj.yearSales3 = $this.find('[name="yearSales3"]').val();
+        obj.marketShare3 = $this.find('[name="marketShare3"]').val();
         csps.push(obj);
         console.log(csps);
     });
@@ -183,4 +201,74 @@ function cooperationObj(){
     obj.cooperationRemark=$('#cooperationRemark').val();
     console.log(obj);
     return obj;
+}
+
+//构造销售产品表格
+function cspsTable(){
+    var tbody = '';
+    tbody += '<tbody name="cspsTbody">';
+    tbody += '<tr><th>销售产品<sup class="not-null">*</sup></th>';
+    tbody += '<th><div class="input-group"><input name="productName" class="form-control" type="text" value="" disabled required>';
+    tbody += '<span class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal">';
+    tbody += '<span class="glyphicon glyphicon-search"></span>';
+    tbody += '</button></span></div></th>';
+    tbody += '<th>年销售量<sup class="not-null">*</sup></th>';
+    tbody += '<th><input name="yearSalesTotal" class="form-control" type="text" value="" required></th>';
+    tbody += '<th>品牌</th>';
+    tbody += '<th><input name="brand" class="form-control" type="text" value=""></th>';
+    tbody += '<th>营销手段</th>';
+    tbody += '<th><input name="marketingMethod" class="form-control" type="text" value=""></th></tr>';
+    tbody += '<tr><td>销售目的国1</td>'
+    tbody += '<td><input name="destinationCountry1" class="form-control" type="text" value=""></td>';
+    tbody += '<td>年销售量</td>'
+    tbody += '<td><input name="yearSales1" class="form-control" type="text" value=""></td>';
+    tbody += '<td colspan="2">所占市场份额</td>';
+    tbody += '<td colspan="2"><input name="marketShare1" class="form-control" type="text" value=""></td></tr>';
+    tbody += '<tr><td>销售目的国2</td>'
+    tbody += '<td><input name="destinationCountry2" class="form-control" type="text" value=""></td>';
+    tbody += '<td>年销售量</td>'
+    tbody += '<td><input name="yearSales2" class="form-control" type="text" value=""></td>';
+    tbody += '<td colspan="2">所占市场份额</td>';
+    tbody += '<td colspan="2"><input name="marketShare2" class="form-control" type="text" value=""></td></tr>';
+    tbody += '<tr><td>销售目的国3</td>'
+    tbody += '<td><input name="destinationCountry3" class="form-control" type="text" value=""></td>';
+    tbody += '<td>年销售量</td>'
+    tbody += '<td><input name="yearSales3" class="form-control" type="text" value=""></td>';
+    tbody += '<td colspan="2">所占市场份额</td>';
+    tbody += '<td colspan="2"><input name="marketShare3" class="form-control" type="text" value=""></td></tr></tbody>';
+    return tbody;
+}
+
+//构造采购产品表格
+function cppsTable() {
+    var tbody = '';
+    tbody += '<tbody name="cppsTbody">';
+    tbody += '<tr><th>采购产品<sup class="not-null">*</sup></th>';
+    tbody += '<th><div class="input-group"><input name="productName" class="form-control" type="text" value="" disabled required>';
+    tbody += '<span class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal">';
+    tbody += '<span class="glyphicon glyphicon-search"></span>';
+    tbody += '</button></span></div></th>';
+    tbody += '<th>年需求量<sup class="not-null">*</sup></th>';
+    tbody += '<th><input name="annualDemands" class="form-control" type="text" value="" required></th>';
+    tbody += '<th>平均单价(美元)<sup class="not-null">*</sup></th>';
+    tbody += '<th><input name="averagePrice" class="form-control" type="text" value="" required></th></tr>';
+    tbody += '<tr><td>供应商1<sup class="not-null">*</sup></td>'
+    tbody += '<td><input name="supplier1" class="form-control" type="text" value="" required></td>';
+    tbody += '<td>年采购量<sup class="not-null">*</sup></td>'
+    tbody += '<td><input name="purchaseAmount1" class="form-control" type="text" value="" required></td>';
+    tbody += '<td>平均单价<sup class="not-null">*</sup></td>';
+    tbody += '<td><input name="averagePrice1" class="form-control" type="text" value="" required></td></tr>';
+    tbody += '<tr><td>供应商2</td>'
+    tbody += '<td><input name="supplier2" class="form-control" type="text" value=""></td>';
+    tbody += '<td>年采购量</td>'
+    tbody += '<td><input name="purchaseAmount2" class="form-control" type="text" value=""></td>';
+    tbody += '<td>平均单价</td>';
+    tbody += '<td><input name="averagePrice2" class="form-control" type="text" value=""></td></tr>';
+    tbody += '<tr><td>供应商3</td>'
+    tbody += '<td><input name="supplier3" class="form-control" type="text" value=""></td>';
+    tbody += '<td>年采购量</td>'
+    tbody += '<td><input name="purchaseAmount3" class="form-control" type="text" value=""></td>';
+    tbody += '<td>平均单价</td>';
+    tbody += '<td><input name="averagePrice3" class="form-control" type="text" value=""></td></tr></tbody>';
+    return tbody;
 }

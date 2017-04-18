@@ -4,6 +4,11 @@
 
 $(function () {
 
+    var orderData = null, // 获取的单据数据
+        name = $('#name'); // 产品种类select控件
+
+    // var documentaryType = $('documentaryType');    //单据类型select控件
+
     //创建面包屑导航
     $('#location').append(createCrumbsD());
 
@@ -11,24 +16,30 @@ $(function () {
     var title = $('#pTitle').text()+'——'+$('#sTitle').text();
     $('#hTitle').text(iGetInnerText(title));
 
-    init();
-    var orderData;                                 //定义获取的数据
-    var optionNames = '';                          //定义产品种类集合
-    var newData = [];                              //定义新数据
-    var name = $('#name');                         //定义产品种类select控件
-    var documentaryType = $('documentaryType');    //定义单据类型select控件
-    //为获取的数据赋值
-    // jQuery.ajax({
-    //     url:basePath+'/customerBaseInfoOrderRequire/getBillRequireList',
-    //     type:'POST',
-    //     data:GetRequest(),
-    //     async:false
-    // }).done(function (result) {
-    //     orderData = result.data;
-    // }).fail(function(result){
-    //     console.log('error:'+result.status);
-    // });
-    //console.log(orderData);
+    init(); // 初始化
+
+    // 获取数据并渲染表单
+    CRM.ajaxCall({
+        url:'/customerBaseInfoOrderRequire/getBillRequireList',
+        data:ajaxParam(),
+        type:'POST',
+        callback:function (data) {
+
+            orderData = reconstructionData(data); // 将data赋给外部变量，闭包
+            renderSelect(orderData,'nameC',name); // 渲染下拉菜单
+            screenData({productId:name.val()},orderData,customerBillRequire); // 根据下拉框的值渲染数据
+        }
+    });
+
+    // 下拉框的值改变时渲染数据
+    $(document).on('change.screen','#name',function () {
+        var obj = {
+            productId:name.val()
+        };
+        screenData(obj,orderData,customerBillRequire);
+    });
+
+
 
 
     // //单据要求对象
@@ -62,35 +73,6 @@ $(function () {
     //
     // /**柜数**/
     // private Integer cupboardNumber;
-
-    // 数据重构
-    jQuery.each(orderData,function (n,item) {
-        var obj = {};
-        obj.name = item.name;
-        obj.productId = item.productId;
-        obj.documentaryRequire = item.documentaryRequire;
-        obj.otherDocumentaryRequire = item.otherDocumentaryRequire;
-        obj.shippingAgentRequire = item.shippingAgentRequire;
-        obj.packageRequire = item.packageRequire;
-        obj.goodsType = obj.goodsType;
-        obj.mianxiangqi = obj.mianxiangqi;
-        obj.miantuiqi = obj.miantuiqi;
-        optionNames += '<option value="'+item.productId+'">'+item.name+'</option>';
-        newData.push(obj);
-    });
-
-    //渲染产品种类select
-    name.append(optionNames);
-
-    //渲染单据类型select
-    var obj = {};
-    obj.productId = name.val();
-    screenData(obj,newData,customerBillRequire);
-    $(document).on('change.screen','#name',function () {
-        var obj = {};
-        obj.productId = name.val();
-        screenData(obj,newData,customerBillRequire);
-    });
 
 });
 

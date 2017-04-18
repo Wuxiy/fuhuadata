@@ -214,9 +214,20 @@
 <input id="customerId" type="hidden" value='$!{customerId}'>
 <input id="customerType" type="hidden" value='$!{customerType}'>
 <input id="fullName" type="hidden" value='$!{fullName}'>
+
+## 产品种类
+<script id="nameC" type="text/html">
+    <%if (data.length>0) {%>
+    <%for (var i=0;i<data.length;i++){%>
+    <option value="<%=data[i].productId%>"><%=data[i].name%></option>
+    <%}%>
+    <%}%>
+</script>
+
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerOrderRequireAjax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerOrderRequireInteraction.js"></script>
 

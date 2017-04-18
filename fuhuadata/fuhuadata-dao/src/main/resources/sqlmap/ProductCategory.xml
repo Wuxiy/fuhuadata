@@ -76,11 +76,11 @@
     <select id="GET-BY-LEVEL" resultClass="ProductCategoryVO">
         <![CDATA[
                 select
-          big.id AS parentId,
+          concat('c_',big.id) AS parentId,
           big.name AS parent,
-          mid.id AS middleId,
+          concat('c_',mid.id) AS middleId,
           mid.name AS middle,
-          small.id AS smallId,
+          concat('c_',small.id) AS smallId,
           small.name AS child,
         pi.product_id AS productId,
         pi.`name` AS productName
