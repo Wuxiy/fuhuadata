@@ -9,6 +9,7 @@ import com.fuhuadata.service.BusinessOrderService;
 import com.fuhuadata.vo.BusinessOrderVO;
 import com.fuhuadata.vo.CostAndProfitStatistics;
 import com.fuhuadata.web.util.SystemLogAnnotation;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,12 +34,14 @@ public class BusinessOrderAction {
     private BCodeService bCodeService;
 
 
+    @RequiresPermissions({"sale:flow:offer:view"})
     @RequestMapping("/intoBusinessOffer")
     @SystemLogAnnotation(module = "salesStatistics-businessOrder",methods = "intoOffer")
     public ModelAndView intoBusinessOffer(){
         return new ModelAndView("salesStatistics/offer");
     }
 
+    @RequiresPermissions({"sale:flow:order:view"})
     @RequestMapping("/intoBusinessOrder")
     @SystemLogAnnotation(module = "salesStatistics-businessOrder",methods = "intoOffer")
     public ModelAndView intoBusinessOrder(){
@@ -246,6 +249,7 @@ public class BusinessOrderAction {
      * 进入费用与利润
      * @return
      */
+    @RequiresPermissions({"sale:fee:view"})
     @RequestMapping("/intoCostAndProfitStatistics")
     @SystemLogAnnotation(module = "salesStatistics",methods = "intoCostAndProfitStatistics")
     public ModelAndView intoCostAndProfitStatistics(String salesManId){
@@ -256,6 +260,7 @@ public class BusinessOrderAction {
      * 进入利润与统计
      * @return
      */
+    @RequiresPermissions({"sale:profit:view"})
     @RequestMapping("/intoProfitStatistics")
     @SystemLogAnnotation(module = "salesStatistics",methods = "intoProfitStatistics")
     public ModelAndView intoProfitStatistics(){
@@ -266,6 +271,7 @@ public class BusinessOrderAction {
      * 进入历史订单
      * @return
      */
+    @RequiresPermissions({"sale:profit:view"})
     @RequestMapping("/intoHistoryOrder")
     @SystemLogAnnotation(module = "salesStatistics",methods = "intoHistoryOrder")
     public ModelAndView intoHistoryOrder(){

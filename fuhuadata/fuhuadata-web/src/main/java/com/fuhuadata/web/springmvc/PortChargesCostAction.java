@@ -8,6 +8,7 @@ import com.fuhuadata.service.PortChargesCostService;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,7 @@ public class PortChargesCostAction {
     private Integer pageSize = 10;
     private String page="1";
 
+    @RequiresPermissions({"wiki:hok:view"})
     @RequestMapping(value = "/portChargesCostList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-portChargesCost",methods = "into")
     public ModelAndView portChargesCost(){

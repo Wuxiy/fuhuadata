@@ -12,6 +12,7 @@ import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -41,10 +42,10 @@ public class PackingArchivesAction {
      *
      * @return
      */
+    @RequiresPermissions({"wiki:mate:view"})
     @RequestMapping(value = "/packingArchivesList", method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-packingCost", methods = "into")
     public ModelAndView packingArchives() {
-
         return new ModelAndView("knowledgeBase/packingCostList");
     }
 
@@ -231,6 +232,7 @@ public class PackingArchivesAction {
      *
      * @return
      */
+    @RequiresPermissions({"wiki:mate:base"})
     @RequestMapping(value = "/getDetails", method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-packingArchives", methods = "details")
     public ModelAndView getDetails(int id, int bid, int sid) {

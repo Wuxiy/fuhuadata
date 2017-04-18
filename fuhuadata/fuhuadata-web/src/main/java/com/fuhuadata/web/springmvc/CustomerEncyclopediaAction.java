@@ -9,6 +9,7 @@ import com.fuhuadata.vo.CustomerEncyVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +33,7 @@ public class CustomerEncyclopediaAction {
     private CustomerEncyclopediaService customerEncyclopediaService;
 
 
-    @SuppressWarnings("unused")
+    @RequiresPermissions({"wiki:wiki:view"})
     @RequestMapping(value = "/customerEncyclopediaList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "into")
     public ModelAndView customerEncyclopedia(){

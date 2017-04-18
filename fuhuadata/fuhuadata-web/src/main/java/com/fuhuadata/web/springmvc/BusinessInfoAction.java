@@ -9,6 +9,7 @@ import com.fuhuadata.service.BusinessInfoService;
 import com.fuhuadata.vo.BusinessInfoVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.LogFactory;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,6 +37,7 @@ public class BusinessInfoAction {
      * into
      * @return
      */
+    @RequiresPermissions({"sale:flow:view"})
     @RequestMapping(value="/intoBusinessInfo",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "into")
     public ModelAndView intoBusinessInfo(){
@@ -120,6 +122,7 @@ public class BusinessInfoAction {
      * @param
      * @return
      */
+    @RequiresPermissions({"sale:flow:oppo:view"})
     @RequestMapping(value = "/intoBusinessOpportunityInfo",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "intoinfo")
     @ResponseBody

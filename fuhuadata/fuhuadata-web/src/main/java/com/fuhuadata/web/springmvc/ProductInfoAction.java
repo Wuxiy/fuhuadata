@@ -12,6 +12,7 @@ import com.fuhuadata.vo.ProductInfoVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,10 +40,11 @@ public class ProductInfoAction {
     @Autowired
     private BCodeService bCodeService;
 
+    @RequiresPermissions({"wiki:stand:view"})
     @RequestMapping(value="/show")
     @SystemLogAnnotation(module = "knowledgeBase-productInfo",methods = "into")
     public ModelAndView ProductInfo(){
-        return new ModelAndView("knowledgeBase/productInfo");
+        return new ModelAndView("knowledgeBase/productArchivesList");
     }
 
     @RequestMapping(value="/list")

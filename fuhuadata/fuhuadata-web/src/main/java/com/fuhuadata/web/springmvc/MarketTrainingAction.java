@@ -9,6 +9,7 @@ import com.fuhuadata.service.MarketTrainingService;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,6 +35,7 @@ public class MarketTrainingAction {
      * 营销培训列表
      * @return
      */
+    @RequiresPermissions({"wiki:train:view"})
     @RequestMapping(value="/marketTrainingList")
     @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "into")
     public ModelAndView marketTrainingList(){
