@@ -281,7 +281,10 @@ CRM.productArchivesList.renderProTreeToAside = function (data) {
         setting = {
             data: {
                 simpleData: {
-                    enable: true
+                    enable: true,
+                    idKey: "id",
+                    pIdKey: "pId",
+                    rootPId: 0
                 }
             },
             edit: {
@@ -293,7 +296,7 @@ CRM.productArchivesList.renderProTreeToAside = function (data) {
         },
         id       = page.asideTree.attr('id'),
         treeObj  = null;
-
+    console.log(CRM.toArr(data));
     page.proTreeData = CRM.toArr(data); // 将角色树的数据保存到page对象属性
     $.fn.zTree.init(page.asideTree, setting, page.proTreeData);
     treeObj = $.fn.zTree.getZTreeObj(id);
@@ -305,13 +308,17 @@ CRM.productArchivesList.init = function () {
     var page = this;
 
     // 渲染页面初始数据
-    page.renderPage(1011001);
+    // page.renderPage();
 
     // 渲染侧边栏的产品树
     CRM.ajaxCall({
         url      : CRM.url.PRODUCT_TREE_GET,
         type     : 'GET',
-        callback : page.renderProTreeToAside
+        callback : function(data){
+
+            page.renderProTreeToAside(data);
+            // page.renderPage();
+        }
     });
 
     // 新建Panel对象实例，绑定编辑、保存、取消事件
@@ -329,64 +336,64 @@ $(function () {
     page.init();
 
     // 编辑
-    page.edit.on('click.e',function () {
-
-        page.asidePanel.fadeOut();
-
-        $('#pTable').find('tr').removeClass('hidden');
-
-        // 开启表格编辑功能
-        page.editITable.status = true;
-        page.editPTable.status = true;
-        page.editITable.toggle();
-        page.editPTable.toggle();
-    });
-
-    // 保存
-    page.save.on('click.s',function () {
-
-        page.asidePanel.fadeIn();
-
-        CRM.ajaxCall({
-            url  : page.PRODUCT_INFO_POST,
-            data : page.collectData(),
-            type : 'POST',
-            contentType:"application/json",
-            callback : function(data){
-                page.renderPage(page.productId.val());
-            }
-    });
-
-        // 关闭表格编辑功能
-        page.editITable.status = false;
-        page.editPTable.status = false;
-        page.editITable.toggle();
-        page.editPTable.toggle();
-    });
-
-    // 取消
-    page.cancel.on('click.c',function () {
-
-        page.asidePanel.fadeIn();
-
-        page.renderPage(page.productId.val());
-
-        // 关闭表格编辑功能
-        page.editITable.status = false;
-        page.editPTable.status = false;
-        page.editITable.toggle();
-        page.editPTable.toggle();
-    });
-
-    // 盐类的change事件
-    page.saltType.on('change.salt',function () {
-        var thisEl = $(this).filter('.else');
-        CRM.showOrHide(page.otherSaltName,null,thisEl.prop('checked'));
-
-        if (!thisEl.prop('checked')) {
-
-            page.otherSaltName.val(''); // 如果没选中清除该文本框
-        }
-    });
+    // page.edit.on('click.e',function () {
+    //
+    //     page.asidePanel.fadeOut();
+    //
+    //     $('#pTable').find('tr').removeClass('hidden');
+    //
+    //     // 开启表格编辑功能
+    //     page.editITable.status = true;
+    //     page.editPTable.status = true;
+    //     page.editITable.toggle();
+    //     page.editPTable.toggle();
+    // });
+    //
+    // // 保存
+    // page.save.on('click.s',function () {
+    //
+    //     page.asidePanel.fadeIn();
+    //
+    //     CRM.ajaxCall({
+    //         url  : page.PRODUCT_INFO_POST,
+    //         data : page.collectData(),
+    //         type : 'POST',
+    //         contentType:"application/json",
+    //         callback : function(data){
+    //             page.renderPage(page.productId.val());
+    //         }
+    //     });
+    //
+    //     // 关闭表格编辑功能
+    //     page.editITable.status = false;
+    //     page.editPTable.status = false;
+    //     page.editITable.toggle();
+    //     page.editPTable.toggle();
+    // });
+    //
+    // // 取消
+    // page.cancel.on('click.c',function () {
+    //
+    //     page.asidePanel.fadeIn();
+    //
+    //     page.renderPage(page.productId.val());
+    //
+    //     // 关闭表格编辑功能
+    //     page.editITable.status = false;
+    //     page.editPTable.status = false;
+    //     page.editITable.toggle();
+    //     page.editPTable.toggle();
+    // });
+    //
+    // // 盐类的change事件
+    // page.saltType.on('change.salt',function () {
+    //     var thisEl = $(this).filter('.else');
+    //     CRM.showOrHide(page.otherSaltName,null,thisEl.prop('checked'));
+    //
+    //     if (!thisEl.prop('checked')) {
+    //
+    //         page.otherSaltName.val(''); // 如果没选中清除该文本框
+    //     }
+    // });
 
 });

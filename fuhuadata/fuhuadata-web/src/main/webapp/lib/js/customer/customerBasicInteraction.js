@@ -7,6 +7,7 @@ CRM.cbInfo   = window.CRM.cbInfo || {};
 CRM.cbInfo.LOOK_POST    = '/customerBaseInfo/showCustomerBaseInfoDetails'; // 客户基本信息查看
 CRM.cbInfo.EDIT_POST    = '/customerBaseInfo/updateCustomerBaseInfo'; // 客户基本信息编辑
 CRM.cbInfo.ADD_POST     = '/customerBaseInfo/doAddCustomerBaseInfo'; // 客户信息新增
+CRM.cbInfo.ENCY_SKIP    = '' // 百科编辑
 CRM.cbInfo.encyUrl      = '/customerEncyclopedia/addCustomerEncyclopedia'; // 百科编辑
 
 CRM.cbInfo.editView     = null; // 编辑状态下显示的标签
@@ -73,10 +74,10 @@ CRM.cbInfo.managementScope      = $('#managementScope'); // 经营范围
 CRM.cbInfo.opportunitySource    = $('#opportunitySource');
 CRM.cbInfo.otherEnterpriceNature= $('#otherEnterpriceNature');
 // CRM.cbInfo.customerStatus       = $('#customerStatus'); // 客户状态 0流失 1正常
-CRM.cbInfo.formatdoc            = $('#dataFormat');
-CRM.cbInfo.custclass            = $('#customerBasicTypes');
-CRM.cbInfo.timezone             = $('#timeZone');
-CRM.cbInfo.countryzone          = $('#commerceCountry');
+CRM.cbInfo.formatdoc            = $('#dataFormat'); // 数据格式
+CRM.cbInfo.custclass            = $('#customerBasicTypes'); // 客户基本分类
+CRM.cbInfo.timezone             = $('#timeZone'); // 时区
+CRM.cbInfo.countryzone          = $('#commerceCountry'); // 贸易国别
 
 // 收集数据
 CRM.cbInfo.collectData = function () {
@@ -345,12 +346,12 @@ CRM.cbInfo.renderForm = function(data){
     if (data.customerMakeProduct) { CRM.tplHandler('cmp',data.customerMakeProduct,$('#cmpC'));}
 
     // 构造百科url
-    page.encyUrl += '?customerId=' + data.customerId + (data.encyId!=undefined? '&encyId=' + data.encyId : '');
+    page.ENCY_SKIP = page.encyUrl + '?customerId=' + data.customerId + (data.encyId!=undefined? '&encyId=' + data.encyId : '');
 };
 
 // 重置表单
 CRM.cbInfo.resetForm = function (id) {
-    $('input,textarea,select',$(id)).val('');
+    $('input:not([type="checkbox"]),textarea,select',$(id)).val('');
     $('input[type="checkbox"]',$(id)).val([]);
     $('#customerBasicTypes,#timeZone,#commerceCountry').data('val','');
 };
@@ -774,7 +775,7 @@ $().ready(function() {
     // 跳转百科编辑
     $('#encyEdit').on('click.ency',function () {
 
-        window.open(basePath + page.encyUrl);
+        window.open(basePath + page.ENCY_SKIP);
         return false;
     });
 
@@ -835,23 +836,23 @@ $().ready(function() {
 
     // 点击国别下拉菜单，将值添加到文本框
     $('#cc').on('click.cc','a',function (e) {
-        var val = $(e.target).data('val'),
+        var elVal = $(e.target).data('val'),
             txt = $(e.target).text(),
             tarInput = $('#commerceCountry');
 
         tarInput.val(txt);
-        tarInput.data('val',val);
+        tarInput.data('val',elVal);
         return false;
     });
 
     // 点击时区下拉菜单，将值添加到文本框
     $('#tz').on('click.cc','a',function (e) {
-        var val = $(e.target).data('val'),
+        var elVal = $(e.target).data('val'),
             txt = $(e.target).text(),
             tarInput = $('#timeZone');
 
         tarInput.val(txt);
-        tarInput.data('val',val);
+        tarInput.data('val',elVal);
         return false;
     });
 

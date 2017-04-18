@@ -297,9 +297,6 @@
             <isNotNull prepend="," property="transformState">
                 transform_state = #transformState#
             </isNotNull>
-            <isNotNull prepend="," property="compositionCost">
-                composition_cost = #compositionCost#
-            </isNotNull>
             <isNotNull prepend="," property="createUserId">
                 create_user_id = #createUserId#
             </isNotNull>
