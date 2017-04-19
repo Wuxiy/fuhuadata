@@ -10,6 +10,6 @@ public class DataSourceRouter extends AbstractRoutingDataSource {
 
     @Override
     protected Object determineCurrentLookupKey() {
-        return null;
+        return HandleDataSource.getDataSource();
     }
 }
