@@ -5,22 +5,22 @@
 
 CRM.systemRoleManage = window.CRM.systemRoleManage || {};
 
-CRM.systemRoleManage.ROLE_DETAILS_GET = '/sys/role/ajax/'; // 角色详情
-CRM.systemRoleManage.ROLE_ADD_POST = '/sys/role/ajax/add'; // 角色添加or更新
-CRM.systemRoleManage.ROLE_DELETE_POST = '/sys/role/ajax/'; // 角色删除
-CRM.systemRoleManage.ROLE_RELEVANCE_MENU_POST = '/sys/roleauth/save'; // 角色关联菜单
-CRM.systemRoleManage.ROLE_RELEVANCE_MENU_LOOK_GET = '/sys/roleauth/menu?roleId='; // 角色菜单查看
-CRM.systemRoleManage.MENU_RELEVANCE_LIMITS_POST = '/sys/roleauth/permission'; // 菜单关联权限
-CRM.systemRoleManage.MENU_RELEVANCE_LIMITS_LOOK_GET = '/sys/roleauth/permission?roleId='; // 菜单权限查看
-CRM.systemRoleManage.USER_RELEVANCE_AREA_POST = '/sys/user/area/save'; // 用户关联地区
-CRM.systemRoleManage.ROLE_RELEVANCE_USER_POST = '/sys/role/users'; // 角色关联用户
-CRM.systemRoleManage.ROLE_DELETE_USER_POST = '/sys/role/users/delete'; // 角色删除用户
-CRM.systemRoleManage.ROLE_RELEVANCE_USER_LOOK_GET = '/sys/role/users?roleId='; // 角色关联用户查看
-CRM.systemRoleManage.ROLE_RELEVANCE_USER_TREE_GET = '/sys/user/role/depts/tree?roleId='; // 角色关联用户树查看
-CRM.systemRoleManage.USER_ORG_TREE_GET = '/sys/user/org/tree'; // 组织树
-CRM.systemRoleManage.USER_BY_DEPT_GET = '/sys/user/dept/users'; // 部门下的用户
-CRM.systemRoleManage.AREA_TREE_GET = '/customerBaseInfo/initAreaCategoryTree';// 地区树
-CRM.systemRoleManage.AREA_TREE_OF_USER_GET = '/sys/area/code/user?userId=';// 用户所关联的地区树
+CRM.systemRoleManage.ROLE_DETAILS_GET = basePath + '/sys/role/ajax/'; // 角色详情
+CRM.systemRoleManage.ROLE_ADD_POST = basePath + '/sys/role/ajax/add'; // 角色添加or更新
+CRM.systemRoleManage.ROLE_DELETE_POST = basePath + '/sys/role/ajax/'; // 角色删除
+CRM.systemRoleManage.ROLE_RELEVANCE_MENU_POST = basePath + '/sys/roleauth/save'; // 角色关联菜单
+CRM.systemRoleManage.ROLE_RELEVANCE_MENU_LOOK_GET = basePath + '/sys/roleauth/menu?roleId='; // 角色菜单查看
+CRM.systemRoleManage.MENU_RELEVANCE_LIMITS_POST = basePath + '/sys/roleauth/permission'; // 菜单关联权限
+CRM.systemRoleManage.MENU_RELEVANCE_LIMITS_LOOK_GET = basePath + '/sys/roleauth/permission?roleId='; // 菜单权限查看
+CRM.systemRoleManage.USER_RELEVANCE_AREA_POST = basePath + '/sys/user/area/save'; // 用户关联地区
+CRM.systemRoleManage.ROLE_RELEVANCE_USER_POST = basePath + '/sys/role/users'; // 角色关联用户
+CRM.systemRoleManage.ROLE_DELETE_USER_POST = basePath + '/sys/role/users/delete'; // 角色删除用户
+CRM.systemRoleManage.ROLE_RELEVANCE_USER_LOOK_GET = basePath + '/sys/role/users?roleId='; // 角色关联用户查看
+CRM.systemRoleManage.ROLE_RELEVANCE_USER_TREE_GET = basePath + '/sys/user/role/depts/tree?roleId='; // 角色关联用户树查看
+CRM.systemRoleManage.USER_ORG_TREE_GET = basePath + '/sys/user/org/tree'; // 组织树
+CRM.systemRoleManage.USER_BY_DEPT_GET = basePath + '/sys/user/dept/users'; // 部门下的用户
+CRM.systemRoleManage.AREA_TREE_GET = basePath + '/customerBaseInfo/initAreaCategoryTree';// 地区树
+CRM.systemRoleManage.AREA_TREE_OF_USER_GET = basePath + '/sys/area/code/user?userId=';// 用户所关联的地区树
 
 // 保存树的数据
 CRM.systemRoleManage.areaTreeData = null;
