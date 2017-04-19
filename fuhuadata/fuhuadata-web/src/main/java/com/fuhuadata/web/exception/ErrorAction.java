@@ -1,6 +1,8 @@
 package com.fuhuadata.web.exception;
 
 import com.fuhuadata.web.exception.entity.ExceptionResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/error")
 @Controller
 public class ErrorAction {
+
+    Logger logger = LoggerFactory.getLogger(getClass());
 
     @RequestMapping("404")
     public ModelAndView error404(
@@ -30,6 +34,8 @@ public class ErrorAction {
     public ModelAndView error400(HttpServletRequest request) {
         Throwable exception = (Throwable) request.getAttribute("javax.servlet.error.exception");
 
+        logger.error(exception.getMessage(), exception);
+
         ModelAndView mv = new ModelAndView("common/400");
         mv.addObject("error", ExceptionResponse.from(exception));
 
@@ -39,6 +45,8 @@ public class ErrorAction {
     @RequestMapping("500")
     public ModelAndView error500(HttpServletRequest request) {
         Throwable exception = (Throwable) request.getAttribute("javax.servlet.error.exception");
+
+        logger.error(exception.getMessage(), exception);
 
         ModelAndView mv = new ModelAndView("common/error");
         mv.addObject("error", ExceptionResponse.from(exception));

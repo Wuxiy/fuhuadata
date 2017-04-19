@@ -73,6 +73,11 @@ public class MenuServiceImpl extends BaseTreeableServiceImpl<Menu, Integer>
     }
 
     @Override
+    public List<Integer> listAuthorityMenuIds(Integer roleId) {
+        return getMenuMapper().listAuthorityMenuIds(roleId);
+    }
+
+    @Override
     public List<Menu> listMenuPermissions(Integer roleId) {
         return getMenuMapper().listPermissionMenus(roleId);
     }

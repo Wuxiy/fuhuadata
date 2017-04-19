@@ -113,6 +113,9 @@ public class ComponentCostAction {
         try{
             if(KProductComponents !=null&& KProductComponents.length>0) {
                 list= Arrays.asList(KProductComponents);
+                for(KProductComponent kProductComponent : KProductComponents){
+                    kProductComponent.setComponentId(componentCost.getComponentId());
+                }
             }
             result = componentCostService.updateComponentCostById(componentCost, list);
 
