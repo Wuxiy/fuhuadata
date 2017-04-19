@@ -11,7 +11,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">
-                展会新增
+                展会详情
             </h3>
         </div>
         <div class="panel-body clearfix">
@@ -19,7 +19,7 @@
                 <div class="form-group ">
                     <label class="col-xs-1 control-label">展会名称</label>
                     <div class="col-xs-6">
-                        <textarea class="form-control" rows="2" id="exhibitionName"></textarea>
+                        <textarea class="form-control" rows="2" id="exhibitionName">$!{exhibition.exhibitionName}</textarea>
                     </div>
                 </div>
                 <div class="form-group ">
@@ -54,39 +54,39 @@
                 <div class="form-group">
                     <label class="col-xs-1 control-label">详细地址</label>
                     <div class="col-xs-6">
-                        <textarea class="form-control" rows="3" id="exhibitionAddr"></textarea>
+                        <textarea class="form-control" rows="3" id="exhibitionAddr">$!{exhibition.exhibitionAddr}</textarea>
                     </div>
                 </div>
                 <div class="form-group ">
                     <label class="col-xs-1 control-label">开始时间</label>
                     <div class="col-xs-2">
-                        <input type="date" class="form-control" id="startDate"/>
+                        <input type="date" class="form-control" id="startDate" value='$!{exhibition.startDate}'/>
                     </div>
                     <label class="col-xs-1 control-label">结束时间</label>
                     <div class="col-xs-2">
-                        <input type="date" class="form-control" id="finishDate"/>
+                        <input type="date" class="form-control" id="finishDate" value='$!{exhibition.finishDate}'/>
                     </div>
                 </div>
                 <div class="form-group ">
                     <label class="col-xs-1 control-label">主办方</label>
                     <div class="col-xs-2">
-                        <input type="text" class="form-control" id="sponsor"/>
+                        <input type="text" class="form-control" id="sponsor" value='$!{exhibition.sponsor}'/>
                     </div>
                     <label class="col-xs-1 control-label">承办方</label>
                     <div class="col-xs-2">
-                        <input type="text" class="form-control" id="organizer"/>
+                        <input type="text" class="form-control" id="organizer"  value='$!{exhibition.organizer}'/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-1 control-label">展会介绍</label>
                     <div class="col-xs-6">
-                        <textarea class="form-control" rows="4" id="exhibitionInfo"></textarea>
+                        <textarea class="form-control" rows="4" id="exhibitionInfo">$!{exhibition.exhibitionInfo}</textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-1 control-label">展会链接</label>
                     <div class="col-xs-6">
-                        <textarea class="form-control" rows="2" placeholder="http://" id="exhibitionLink"></textarea>
+                        <textarea class="form-control" rows="2" placeholder="http://" id="exhibitionLink">$!{exhibition.exhibitionLink}</textarea>
                     </div>
                 </div>
                 <div class="form-group">
@@ -124,6 +124,7 @@
                 "country":jQuery('#country').val(),
                 "startDate":jQuery('#startDate').val(),
                 "finishDate":jQuery('#finishDate').val(),
+                "creator":"test2",
                 "createTime":createTime,
                 "exhibitionLink":jQuery('#exhibitionLink').val(),
                 "exhibitionAddr": jQuery('#exhibitionAddr').val(),
@@ -133,7 +134,7 @@
 
             jQuery.ajax({
                 type:"POST",
-                url:"${request.contextPath}/exhibitionInfo/doAddExhibitionInfo",
+                url:"${request.contextPath}/exhibitionInfo/doModifyExhibitionInfo",
                 dataType:"json",
                 contentType:"application/json",
                 data:JSON.stringify(data),

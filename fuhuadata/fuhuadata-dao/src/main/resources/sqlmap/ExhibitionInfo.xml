@@ -17,6 +17,7 @@
         <result column="exhibition_addr" property="exhibitionAddr" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="exhibition_link" property="exhibitionLink" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="exhibitionInfo" column="exhibition_info" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="creatorId" column="creator_id" jdbcType="INT" javaType="java.lang.Integer"/>
         <result column="creator" property="creator" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="create_time" property="createTime" jdbcType="DATETIME" javaType="java.sql.Timestamp"/>
     </resultMap>
@@ -70,12 +71,12 @@
         insert into k_exhibition_info (exhibition_id, exhibition_name, sponsor,
         organizer, region, country,
         city, start_date, finish_date,
-        exhibition_addr, exhibition_link, creator,
+        exhibition_addr, exhibition_link,creator_id ,creator,
         create_time, exhibition_info)
         values (#exhibitionId#, #exhibitionName#, #sponsor#,
         #organizer#, #region#, #country#,
         #city#, #startDate#, #finishDate#,
-        #exhibitionAddr#, #exhibitionLink#, #creator#,
+        #exhibitionAddr#, #exhibitionLink#,#creatorId# #creator#,
         #createTime#, #exhibitionInfo#)
         <selectKey resultClass="int" keyProperty="exhibitionId">
             SELECT @@IDENTITY AS exhibition_id

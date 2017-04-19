@@ -4,6 +4,7 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.vo.DataArchive.Currtype;
 import com.fuhuadata.vo.DataArchive.Income;
 import com.fuhuadata.vo.DataArchive.Incoterm;
+import com.fuhuadata.vo.DataArchive.Portdoc;
 
 import java.util.List;
 
@@ -29,6 +30,8 @@ public interface DataArchivesService {
      * @return
      */
     public Result<List<Incoterm>> getIncoterm();
+
+    public Result<List<Portdoc>> getPortdoc(Portdoc portdoc);
 
 
 }

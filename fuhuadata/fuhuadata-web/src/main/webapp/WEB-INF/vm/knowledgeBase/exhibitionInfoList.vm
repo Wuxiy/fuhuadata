@@ -79,9 +79,16 @@
                 {
                     "targets": 10,
                     "render": function(data,type,row,meta){
-                        return '<a href="' + data + '" target="_blank">' + row.exhibitionLink + '</a>';
+                        return '<a href="' + data + '" target="_blank">' + data + '</a>';
+                    }
+                },
+                {
+                    "targets": 1,
+                    "render": function(data,type,row,meta){
+                        return '<a href="${request.contextPath}/exhibitionInfo/modifyExhibitionInfo?id='+row.exhibitionId+'" target="_blank">' + data + '</a>';
                     }
                 }
+
             ],
             "language": {
                 "url": '${request.contextPath}/lib/dataTables/lang/dataTables.lang.zh',

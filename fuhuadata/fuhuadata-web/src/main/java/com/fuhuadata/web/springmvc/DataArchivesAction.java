@@ -6,8 +6,10 @@ import com.fuhuadata.service.DataArchivesService;
 import com.fuhuadata.vo.DataArchive.Currtype;
 import com.fuhuadata.vo.DataArchive.Income;
 import com.fuhuadata.vo.DataArchive.Incoterm;
+import com.fuhuadata.vo.DataArchive.Portdoc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -65,6 +67,22 @@ public class DataArchivesAction {
         Result<List<Currtype>> result = new Result<List<Currtype>>();
         try {
             result = dataArchivesService.getCurrtype();
+        }catch (Exception e){
+            result.setSuccess(false);
+        }
+        return result.getResultPojo();
+    }
+
+    /**
+     *  港口档案
+     * @return
+     */
+    @RequestMapping("/getPortdoc")
+    @ResponseBody
+    public ResultPojo getPortdoc(@RequestBody Portdoc portdoc){
+        Result<List<Portdoc>> result = new Result<List<Portdoc>>();
+        try {
+            result = dataArchivesService.getPortdoc(portdoc);
         }catch (Exception e){
             result.setSuccess(false);
         }
