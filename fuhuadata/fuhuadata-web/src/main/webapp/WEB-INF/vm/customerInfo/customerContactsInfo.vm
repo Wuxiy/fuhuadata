@@ -6,97 +6,103 @@
 <div class="dashboard-wrapper">
     <div class="row">
         <div class="tab-content col-xs-10">
-            <div class="panel panel-default">
+            <div id="basicInfo" class="panel panel-default">
                 <div class="panel-heading">
-                    <button id="edit" data-form-btn="edit" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
-                        编辑
-                    </button>
-                    <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden">
-                        <a id="cancel" data-form-btn="cancel" class="btn" lang="zh">取消</a>
-                        <a id="save" data-form-btn="save" class="btn btn-primary" lang="zh">保存</a>
+                    <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right">
+                        <button id="back" data-view="editHide" class="btn btn-xs btn-default" type="button" lang="zh">
+                            返回
+                        </button>
+                        <button id="edit" data-btn="edit" data-view="editHide" class="btn btn-xs btn-primary" type="button" lang="zh">
+                            编辑
+                        </button>
+                    </div>
+                    <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right">
+                        <button id="cancel" data-btn="cancel" data-view="editView" class="btn btn-default hidden" type="button" lang="zh">取消</button>
+                        <button id="resetBtn" data-view="editView" class="btn btn-info hidden" type="reset" lang="zh">重置</button>
+                        <button id="save" data-btn="save" data-view="editView" class="btn btn-primary hidden" type="button" lang="zh">保存</button>
                     </div>
                     <h3 class="panel-title">
                         基础信息
                     </h3>
                 </div>
                 <div class="panel-body clearfix">
-                    <div class="form-horizontal">
+                    <form id="myForm" class="form-horizontal">
                         <div class="form-group ">
-                            <label class="col-xs-1 control-label">姓名<sup class="not-null">*</sup></label>
+                            <label class="col-xs-1 control-label">姓名<sup data-view="editView" class="not-null hidden">*</sup></label>
                             <div class="col-xs-2">
-                                <input class="form-control notnull" type="text" id="name" disabled/>
+                                <input data-control="on" class="form-control notnull" type="text" id="name" disabled/>
                             </div>
                             <label class="col-xs-1 control-label">岗位</label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" id="posts" disabled/>
+                                <input data-control="on" class="form-control" type="text" id="posts" disabled/>
                             </div>
                             <label class="col-xs-1 control-label">负责区域</label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" id="responseArea" disabled/>
+                                <input data-control="on" class="form-control" type="text" id="responseArea" disabled/>
                             </div>
-                            <label class="col-xs-1 control-label">是否在职<sup class="not-null">*</sup></label>
+                            <label class="col-xs-1 control-label">是否在职<sup data-view="editView" class="not-null hidden">*</sup></label>
                             <div class="col-xs-2">
-                                <select class="form-control notnull" name="items" id="onJob" disabled>
+                                <select data-control="on" class="form-control notnull" name="items" id="onJob" disabled>
                                     <option  value="1">是</option>
                                     <option  value="0">否</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group ">
-                            <label class="col-xs-1 control-label">性别<sup class="not-null">*</sup></label>
+                            <label class="col-xs-1 control-label">性别<sup data-view="editView" class="not-null hidden">*</sup></label>
                             <div class="col-xs-2">
-                                <select class="form-control notnull" name="items" id="sex">
+                                <select data-control="on" class="form-control notnull" disabled name="items" id="sex">
                                     <option  value="0">男</option>
                                     <option  value="1">女</option>
                                 </select>
                             </div>
                             <label class="col-xs-1 control-label">生日</label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="date" id="birthday" disabled/>
+                                <input data-control="on" class="form-control" type="date" id="birthday" disabled/>
                             </div>
                             <label class="col-xs-1 control-label">国籍</label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" id="nationality" disabled/>
+                                <input data-control="on" class="form-control" type="text" id="nationality" disabled/>
                             </div>
                             <label class="col-xs-1 control-label">影响力情况</label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" id="influence" disabled/>
+                                <input data-control="on" class="form-control" type="text" id="influence" disabled/>
                             </div>
                         </div>
                         <div class="form-group ">
                             <label class="col-xs-1 control-label">展会习惯</label>
                             <div class="col-xs-2">
-                                <input type="text" class="form-control" id="exhibitionHabits" disabled/>
+                                <input data-control="on" data-control="on" type="text" class="form-control" id="exhibitionHabits" disabled/>
                             </div>
                             <label class="col-xs-1 control-label">喜好</label>
                             <div class="col-xs-2">
-                                <input type="text" class="form-control" id="fancy" disabled/>
+                                <input data-control="on" data-control="on" type="text" class="form-control" id="fancy" disabled/>
                             </div>
                             <label class="col-xs-1 control-label">联系电话1</label>
                             <div class="col-xs-2">
-                                <input type="text" class="form-control" id="linkPhone1" disabled/>
+                                <input data-control="on" data-control="on" type="text" class="form-control" id="linkPhone1" disabled/>
                             </div>
                             <label class="col-xs-1 control-label">联系电话2</label>
                             <div class="col-xs-2">
-                                <input type="text" class="form-control" id="linkPhone2" disabled/>
+                                <input data-control="on" data-control="on" type="text" class="form-control" id="linkPhone2" disabled/>
                             </div>
                         </div>
                         <div class="form-group ">
                             <label class="col-xs-1 control-label">邮箱</label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" id="lemail" disabled/>
+                                <input data-control="on" class="form-control" type="text" id="lemail" disabled/>
                             </div>
                             <label class="col-xs-1 control-label">饮食</label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" id="eatingHabits" disabled/>
+                                <input data-control="on" class="form-control" type="text" id="eatingHabits" disabled/>
                             </div>
                             <label class="col-xs-1 control-label">宗教信仰</label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" id="faith" disabled/>
+                                <input data-control="on" class="form-control" type="text" id="faith" disabled/>
                             </div>
-                            <label class="col-xs-1 control-label">是否默认<sup class="not-null">*</sup></label>
+                            <label class="col-xs-1 control-label">是否默认<sup data-view="editView" class="not-null hidden">*</sup></label>
                             <div class="col-xs-2">
-                                <select class="form-control notnull" name="items" id="isDefault" disabled>
+                                <select data-control="on" class="form-control notnull" name="items" id="isDefault" disabled>
                                     <option  value="1">是</option>
                                     <option  value="0">否</option>
                                 </select>
@@ -105,10 +111,10 @@
                         <div class="form-group ">
                             <label class="col-xs-1 control-label">备注</label>
                             <div class="col-xs-11">
-                                <textarea class="form-control" rows="4" id="remarks" disabled></textarea>
+                                <textarea data-control="on" class="form-control" rows="4" id="remarks" disabled></textarea>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -148,24 +154,25 @@
                 </div>
             </div>
         </div>
-        <div class="tab-content col-xs-10">
-            <div class="panel-body clearfix">
-                <form class="form-horizontal">
-                    <div class="form-group">
-                        <div class="col-xs-2 col-xs-offset-4">
-                            <a class="btn btn-block btn-primary packingAdd">完成</a>
-                        </div>
-                        <div class="col-xs-2">
-                            <button class="btn btn-block btn-default" type="reset">重置</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+##        <div class="tab-content col-xs-10">
+##            <div class="panel-body clearfix">
+##                <form class="form-horizontal">
+##                    <div class="form-group">
+##                        <div class="col-xs-2 col-xs-offset-4">
+##                            <a class="btn btn-block btn-primary packingAdd">完成</a>
+##                        </div>
+##                        <div class="col-xs-2">
+##                            <button class="btn btn-block btn-default" type="reset">重置</button>
+##                        </div>
+##                    </div>
+##                </form>
+##            </div>
+##        </div>
     </div>
 </div>
 
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerContactsInfo.js"></script>
@@ -186,5 +193,21 @@
                 }
             })
         }
+    })
+
+    // 新建Panel对象实例，绑定编辑、保存、取消事件
+    var bInfo = new CRM.module.Panel('#basicInfo');
+    bInfo.startEdit();
+    bInfo.startSave();
+    bInfo.startCancel();
+    
+    // 返回
+    $('#back').on('click.back',function () {
+        window.history.back(-1);
+    })
+    
+    // 重置
+    $('#resetBtn').on('click.reset',function () {
+        $('input,textarea',$('#myForm')).val('');
     })
 </script>

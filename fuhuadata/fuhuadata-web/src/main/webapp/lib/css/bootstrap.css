@@ -5752,6 +5752,7 @@ button.close {
   display: inline-block;
   padding-right: 5px;
   color: #333333;
+  cursor: pointer;
 }
 .tree .active>a,
 .tree a:focus {

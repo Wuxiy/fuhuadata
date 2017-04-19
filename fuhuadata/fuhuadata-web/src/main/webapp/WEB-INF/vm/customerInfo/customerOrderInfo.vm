@@ -41,7 +41,7 @@
                                         <span class="input-group-addon" lang="zh">销售组织</span>
                                         <input id="oSaleOrganizationId" type="text" style="display:none" value="">
                                         <input id="oSaleOrganizationName" type="text" class="form-control" value="" disabled>
-                                        <span class="input-group-btn"><button data-toggle="modal" data-target="#treeModal" class="btn btn-xs btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button></span>
+                                        <span class="input-group-btn"><button id="popupMd" class="btn btn-xs btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button></span>
                                         <span class="input-group-addon" lang="zh">外销合同号</span>
                                         <input id="oNcOrderId" class="form-control" type="text" value="" />
                                         <span class="input-group-addon" lang="zh">开始日期</span>
@@ -361,9 +361,11 @@
                     &times;
                 </button>
             </div>
-            <div class="modal-body well" style="max-height: 300px; overflow-y: scroll; overflow-x: scroll;">
+            <div class="modal-body">
                 ##这里插入树形菜单
-                <div id="tree" class="tree"></div>
+                <div class="zTreeDemoBackground left well" style="height: 300px;overflow-y: scroll;overflow-x: auto">
+                    <ul id="tree" class="ztree"></ul>
+                </div>
             </div>
         </div>
     </div>
@@ -378,6 +380,7 @@
 <script type="text/javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
+<script type="text/javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/customer/customerOrderAjax.js"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/customer/customerOrderInteraction.js"></script>

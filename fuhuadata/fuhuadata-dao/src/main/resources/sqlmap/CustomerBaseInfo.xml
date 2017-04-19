@@ -587,7 +587,7 @@
 			tc1.`name` countryzoneName,
 			tc2.`name` custclassName,
 			tf.`name` formatdocName,
-			tf.`name` timezoneName
+			tt.`name` timezoneName
 			FROM
 				customer_base_info base
 			LEFT JOIN k_customer_encyclopedia en
