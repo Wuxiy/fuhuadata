@@ -235,6 +235,8 @@
     console.log(id);
 
     if(id!=''){
+        $('.isdisabled').attr('disabled',true);
+
         jQuery.ajax({
             url:basePath + '/businessProduct/getDocumentary?businessProductId=' + id,
             type:'POST',
@@ -339,6 +341,9 @@
             }
         })
     }else {
+        $('#resert').removeClass('hidden');
+        $('#rnext').removeClass('hidden');
+        
         $('.contentRadio').attr('disabled',true);
         $('.contentText').attr('disabled',true);
     }
