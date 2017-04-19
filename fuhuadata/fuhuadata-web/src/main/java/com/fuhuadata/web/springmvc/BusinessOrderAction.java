@@ -215,12 +215,6 @@ public class BusinessOrderAction {
         return new ModelAndView("salesStatistics/offerInfo").addObject("orderId", orderId).addObject("businessId", businessId);
     }
 
-    @RequestMapping("/intoOffer")
-    @SystemLogAnnotation(module = "salesStatistics",methods = "intoOffer")
-    public ModelAndView intoOffer(String orderId){
-        return new ModelAndView("salesStatistics/offerInfo").addObject("orderId",orderId);
-    }
-
     /**
      *  进入订单详情
      * @param orderId

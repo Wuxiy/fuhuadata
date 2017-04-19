@@ -343,7 +343,7 @@
     }else {
         $('#resert').removeClass('hidden');
         $('#rnext').removeClass('hidden');
-        
+
         $('.contentRadio').attr('disabled',true);
         $('.contentText').attr('disabled',true);
     }
@@ -477,6 +477,10 @@
                 console.log(result);
             }
         })
+    })
+
+    $('#back').click(function(){
+        window.location.href = basePath + '/businessOrder/intoOfferorOrder?orderId=' + orderId;
     })
 </script>
 

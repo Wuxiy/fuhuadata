@@ -453,6 +453,7 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script>
     var id = $('#productRequireId').val();
+    var orderId = $('#orderId').val();
     var auxiliary = document.getElementById('auxiliary');
     var befond = document.getElementById('befond');
 
@@ -940,4 +941,8 @@
         console.log(arr);
         return JSON.stringify(arr);
     }
+
+    $('#back').click(function(){
+        window.location.href = basePath + '/businessOrder/intoOfferorOrder?orderId=' + orderId;
+    })
 </script>

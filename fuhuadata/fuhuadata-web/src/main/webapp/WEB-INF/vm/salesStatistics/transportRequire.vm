@@ -413,6 +413,10 @@
         }
         return JSON.stringify(data);
     }
+
+    $('#back').click(function(){
+        window.location.href = basePath + '/businessOrder/intoOfferorOrder?orderId=' + orderId;
+    })
 </script>
 
 
