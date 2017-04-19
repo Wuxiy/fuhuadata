@@ -2,14 +2,17 @@
  * Created by huxiangyang on 2017/3/13.
  */
 
+//指定文本框
+var selectedPName = null;
+var treeData = null;
 $(function () {
 
     //创建面包屑导航
-    $('#location').append(createCrumbsD());
+    // $('#location').append(createCrumbsD());
 
     //设置title标题
-    var title = $('#pTitle').text()+'——'+$('#sTitle').text();
-    $('#hTitle').text(iGetInnerText(title));
+    // var title = $('#pTitle').text()+'——'+$('#sTitle').text();
+    // $('#hTitle').text(iGetInnerText(title));
 
     init();
 
@@ -27,7 +30,7 @@ $(function () {
     // getData(basePath+'/customerMarketInfo/init','POST',GetRequest(),pop);
 
     //创建树形菜单
-    $('#tree').creatTree(basePath+'/productCategory/CategoryTree?fourNode=0');
+    // $('#tree').creatTree(basePath+'/productCategory/CategoryTree?fourNode=0');
 
     //构造下拉选择框
     $('#cpps_year,#csps_year,#year').html(function (n,old) {
@@ -228,23 +231,33 @@ $(function () {
         // getData(basePath+'/customerMarketInfo/init','POST',GetRequest(),pop);
     });
 
-    //双击文本添加到指定文本框
-    var selectedPName;
-    $(document).on('click','[data-target="#treeModal"]',function (e) {
+
+    $(document).on('click','button[name="popupMd"]', function (e) {
+
+        $('#treeModal').modal('show');
         selectedPName = $(e.target).parents('.input-group').find('input');
+
+        if (treeData==null) {
+
+            CRM.ajaxCall({
+                url:'/productCategory/CategoryTree?fourNode=0',
+                type:'GET',
+                callback:renderTree
+            })
+        }
     });
 
     // 单击树节点阻止冒泡
-    $(document).on('click','#tree a',function (e) {
-        e.preventDefault();
-    });
+    // $(document).on('click','#tree a',function (e) {
+    //     e.preventDefault();
+    // });
 
     // 双击树节点，将文本添加到选择框
-    $(document).on('dblclick','#tree a.cNode',function (e) {
-        var close = $(e.target).parents('.modal').find('.close');
-        var txt = $(e.target).text();
-        selectedPName.val(txt);
-        close.click();
-    });
+    // $(document).on('dblclick','#tree a.cNode',function (e) {
+    //     var close = $(e.target).parents('.modal').find('.close');
+    //     var txt = $(e.target).text();
+    //     selectedPName.val(txt);
+    //     close.click();
+    // });
 
 });

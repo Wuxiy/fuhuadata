@@ -167,9 +167,9 @@ CRM.enc.addData = function () {
             //     page.renderTree(page.encyId.val());
             // }
             $('#skipM').modal('show');
-            $('#skip').attr('href', function (i,old) {
-                return old + data.encyId;
-            })
+            // $('#skip').attr('href', function (i,old) {
+            //     return old + data.encyId;
+            // })
         }
     })
 };
@@ -631,6 +631,11 @@ $(function () {
     $('#backPage').on('click.back',function () {
 
         window.history.back(-1);
-    })
+    });
 
+    // 跳转
+    $('#skip').on('click.back',function () {
+        window.history.back(-1);
+        return false;
+    })
 });

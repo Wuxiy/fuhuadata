@@ -614,7 +614,7 @@ CRM.cbInfo.renderCBTTree = function (data) {
                 enable: false
             },
             callback: {
-                onClick: page.cbtTreeClick
+                onDblClick: page.cbtTreeClick
             }
         },
         id = $('#cbtTree').attr('id'),
@@ -775,7 +775,7 @@ $().ready(function() {
     // 跳转百科编辑
     $('#encyEdit').on('click.ency',function () {
 
-        window.open(basePath + page.ENCY_SKIP);
+        self.location = basePath + page.ENCY_SKIP;
         return false;
     });
 

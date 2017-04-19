@@ -5,8 +5,8 @@ $(document).ready(function(){
     getData(basePath + '/customerLinkman/getCustomerLinkmanDetailsById','POST',GetRequest(),customerContactsInfo);
 
     //编辑联系人基本信息
-    $(document).on('click.edit','#edit',function () {
-    });
+    // $(document).on('click.edit','#edit',function () {
+    // });
     //联系人基本信息提交
     $(document).on('click.up','#save',function(){
         var notnull = $('.notnull');
@@ -24,7 +24,7 @@ $(document).ready(function(){
     $(document).on('click.cancel','#cancel',function(){
         location.reload();
     });
-})
+});
 
 //详情列表
 function customerContactsInfo(result) {

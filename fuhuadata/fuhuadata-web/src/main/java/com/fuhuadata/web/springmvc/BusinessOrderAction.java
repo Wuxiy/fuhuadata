@@ -1,6 +1,5 @@
 package com.fuhuadata.web.springmvc;
 
-import com.fuhuadata.domain.BusinessInfo;
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
 import com.fuhuadata.domain.query.Result;

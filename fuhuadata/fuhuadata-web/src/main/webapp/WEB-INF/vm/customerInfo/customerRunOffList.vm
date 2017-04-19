@@ -225,21 +225,21 @@
                         _html += '<tr>';
                         _html += '	<td>' + customer.customerId + '</td>';
                         _html += '  <td><a href="${request.contextPath}/customerBaseInfo/intoCustomerBaseInfoDetails?customerType=3&customerId='+customer.customerId+'" target="_blank">' + customer.fullName + '</a></td>';
-                        _html += '  <td>' + customer.shortName + '</td>';
-                        _html += '  <td lang="zh">' + customer.country + '</td>';
-                        _html += '  <td lang="zh">' + customerLevelList[customer.customerLevel - 1] + '</td>';
-                        _html += '  <td>' + customer.zhongxinbaoLevel + 'A</td>';
-                        _html += '  <td>' + customer.startCooperationTime + '</td>';
-                        _html += '  <td lang="zh">' + customer.cooperationDuration + '</td>';
-                        _html += '  <td lang="zh">' + customer.activePeriod + '</td>';
-                        _html += '  <td><a href="" data-toggle="modal" data-target="#details">' + customer.totalMoney + '</a></td>';
-                        _html += '   <td>' + customer.payMoney + '</td>';
-                        _html += '   <td>' + customer.minPrice + '</td>';
-                        _html += '   <td>' + customer.maintenanceFee + '</td>';
-                        _html += '   <td>' + customer.netProfit + '</td>';
+                        _html += '  <td>' + (customer.shortName!=undefined?customer.shortName:'') + '</td>';
+                        _html += '  <td lang="zh">' + (customer.country!=undefined?customer.country:'') + '</td>';
+                        _html += '  <td lang="zh">' + (customer.customerLevel!=undefined?customerLevelList[customer.customerLevel - 1]:'') + '</td>';
+                        _html += '  <td>' + (customer.zhongxinbaoLevel!=undefined?customer.zhongxinbaoLevel:'') + 'A</td>';
+                        _html += '  <td>' + (customer.startCooperationTime!=undefined?customer.startCooperationTime:'') + '</td>';
+                        _html += '  <td lang="zh">' + (customer.cooperationDuration!=undefined?customer.cooperationDuration:'') + '</td>';
+                        _html += '  <td lang="zh">' + (customer.activePeriod!=undefined?customer.activePeriod:'') + '</td>';
+                        _html += '  <td><a href="" data-toggle="modal" data-target="#details">' + (customer.totalMoney!=undefined?customer.totalMoney:'') + '</a></td>';
+                        _html += '   <td>' + (customer.payMoney!=undefined?customer.payMoney:'') + '</td>';
+                        _html += '   <td>' + (customer.minPrice!=undefined?customer.minPrice:'') + '</td>';
+                        _html += '   <td>' + (customer.maintenanceFee!=undefined?customer.maintenanceFee:'') + '</td>';
+                        _html += '   <td>' + (customer.netProfit!=undefined?customer.netProfit:'') + '</td>';
                         _html += '   <td lang="zh">' + (customer.customerStatus == 0 ? "易流失" : "正常") + '</td>';
-                        _html += '   <td>' + customer.lastmodifyUserName + '</td>';
-                        _html += '   <td>' + customer.lossReason + '</td>';
+                        _html += '   <td>' + (customer.lastmodifyUserName!=undefined?customer.lastmodifyUserName:'') + '</td>';
+                        _html += '   <td>' + (customer.lossReason!=undefined?customer.lossReason:'') + '</td>';
                         _html += '   </tr>';
                     }
                 }

@@ -209,7 +209,7 @@ function cspsTable(){
     tbody += '<tbody name="cspsTbody">';
     tbody += '<tr><th>销售产品<sup class="not-null">*</sup></th>';
     tbody += '<th><div class="input-group"><input name="productName" class="form-control" type="text" value="" disabled required>';
-    tbody += '<span class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal">';
+    tbody += '<span class="input-group-btn"><button name="popupMd" class="btn btn-xs btn-default" type="button">';
     tbody += '<span class="glyphicon glyphicon-search"></span>';
     tbody += '</button></span></div></th>';
     tbody += '<th>年销售量<sup class="not-null">*</sup></th>';
@@ -218,21 +218,21 @@ function cspsTable(){
     tbody += '<th><input name="brand" class="form-control" type="text" value=""></th>';
     tbody += '<th>营销手段</th>';
     tbody += '<th><input name="marketingMethod" class="form-control" type="text" value=""></th></tr>';
-    tbody += '<tr><td>销售目的国1</td>'
+    tbody += '<tr><td>销售目的国1</td>';
     tbody += '<td><input name="destinationCountry1" class="form-control" type="text" value=""></td>';
-    tbody += '<td>年销售量</td>'
+    tbody += '<td>年销售量</td>';
     tbody += '<td><input name="yearSales1" class="form-control" type="text" value=""></td>';
     tbody += '<td colspan="2">所占市场份额</td>';
     tbody += '<td colspan="2"><input name="marketShare1" class="form-control" type="text" value=""></td></tr>';
-    tbody += '<tr><td>销售目的国2</td>'
+    tbody += '<tr><td>销售目的国2</td>';
     tbody += '<td><input name="destinationCountry2" class="form-control" type="text" value=""></td>';
-    tbody += '<td>年销售量</td>'
+    tbody += '<td>年销售量</td>';
     tbody += '<td><input name="yearSales2" class="form-control" type="text" value=""></td>';
     tbody += '<td colspan="2">所占市场份额</td>';
     tbody += '<td colspan="2"><input name="marketShare2" class="form-control" type="text" value=""></td></tr>';
-    tbody += '<tr><td>销售目的国3</td>'
+    tbody += '<tr><td>销售目的国3</td>';
     tbody += '<td><input name="destinationCountry3" class="form-control" type="text" value=""></td>';
-    tbody += '<td>年销售量</td>'
+    tbody += '<td>年销售量</td>';
     tbody += '<td><input name="yearSales3" class="form-control" type="text" value=""></td>';
     tbody += '<td colspan="2">所占市场份额</td>';
     tbody += '<td colspan="2"><input name="marketShare3" class="form-control" type="text" value=""></td></tr></tbody>';
@@ -245,30 +245,67 @@ function cppsTable() {
     tbody += '<tbody name="cppsTbody">';
     tbody += '<tr><th>采购产品<sup class="not-null">*</sup></th>';
     tbody += '<th><div class="input-group"><input name="productName" class="form-control" type="text" value="" disabled required>';
-    tbody += '<span class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal">';
+    tbody += '<span class="input-group-btn"><button name="popupMd" class="btn btn-xs btn-default" type="button">';
     tbody += '<span class="glyphicon glyphicon-search"></span>';
     tbody += '</button></span></div></th>';
     tbody += '<th>年需求量<sup class="not-null">*</sup></th>';
     tbody += '<th><input name="annualDemands" class="form-control" type="text" value="" required></th>';
     tbody += '<th>平均单价(美元)<sup class="not-null">*</sup></th>';
     tbody += '<th><input name="averagePrice" class="form-control" type="text" value="" required></th></tr>';
-    tbody += '<tr><td>供应商1<sup class="not-null">*</sup></td>'
+    tbody += '<tr><td>供应商1<sup class="not-null">*</sup></td>';
     tbody += '<td><input name="supplier1" class="form-control" type="text" value="" required></td>';
-    tbody += '<td>年采购量<sup class="not-null">*</sup></td>'
+    tbody += '<td>年采购量<sup class="not-null">*</sup></td>';
     tbody += '<td><input name="purchaseAmount1" class="form-control" type="text" value="" required></td>';
     tbody += '<td>平均单价<sup class="not-null">*</sup></td>';
     tbody += '<td><input name="averagePrice1" class="form-control" type="text" value="" required></td></tr>';
-    tbody += '<tr><td>供应商2</td>'
+    tbody += '<tr><td>供应商2</td>';
     tbody += '<td><input name="supplier2" class="form-control" type="text" value=""></td>';
-    tbody += '<td>年采购量</td>'
+    tbody += '<td>年采购量</td>';
     tbody += '<td><input name="purchaseAmount2" class="form-control" type="text" value=""></td>';
     tbody += '<td>平均单价</td>';
     tbody += '<td><input name="averagePrice2" class="form-control" type="text" value=""></td></tr>';
-    tbody += '<tr><td>供应商3</td>'
+    tbody += '<tr><td>供应商3</td>';
     tbody += '<td><input name="supplier3" class="form-control" type="text" value=""></td>';
-    tbody += '<td>年采购量</td>'
+    tbody += '<td>年采购量</td>';
     tbody += '<td><input name="purchaseAmount3" class="form-control" type="text" value=""></td>';
     tbody += '<td>平均单价</td>';
     tbody += '<td><input name="averagePrice3" class="form-control" type="text" value=""></td></tr></tbody>';
     return tbody;
+}
+
+/**
+ * 渲染树菜单
+ * @param data
+ */
+function renderTree(data) {
+    var setting = {
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            edit: {
+                enable: false
+            },
+            callback: {
+                onDblClick: ablclickTree
+            }
+        },
+        id = $('#tree').attr('id');
+    treeData = CRM.toArr(data);
+
+    $.fn.zTree.init($('#tree'), setting, treeData);
+}
+
+/**
+ * 树点击事件
+ * @param event
+ * @param modLeftId
+ * @param treeNode
+ */
+
+function ablclickTree(event, modLeftId, treeNode) {
+
+    selectedPName.val(treeNode.name);
+    $('#treeModal').modal('hide');
 }
