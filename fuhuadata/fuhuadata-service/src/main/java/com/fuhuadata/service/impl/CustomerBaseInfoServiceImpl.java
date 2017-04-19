@@ -289,14 +289,11 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 				CategoryTree big = null;
 
 				if (vo.getChildId() != null) {
-					small=map.get(vo.getMidId());
-					if(small==null) {
 						small = new CategoryTree();
 						small.setCname(vo.getChildName());
 						small.setPid(vo.getMidId());
 						small.setCid(vo.getChildId());
-					}
-					map.put(small.getCid(),small);
+						map.put(small.getCid(),small);
 				}
 				if (vo.getMidId() != null) {
 					middle = map.get(vo.getMidId());
@@ -304,11 +301,12 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 						middle = new CategoryTree();
 						middle.setCid(vo.getMidId());
 						middle.setCname(vo.getMidName());
+						middle.setPid(vo.getParentId());
 						if (small != null) {
 							middle.addChildNode(small);
 						}
 					}else{
-						//判断当前头结点是否存在small子节点
+						//判断当前middle结点是否存在small子节点
 						boolean flag=false;
 						for(int i=0;i<middle.getNodes().size();i++){
 							if(middle.getNodes().get(i).getCid()==small.getCid()){
@@ -327,7 +325,7 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 					big = new CategoryTree();
 					big.setCid(vo.getParentId());
 					big.setPid("0");
-					big.setCname(vo.getParentId());
+					big.setCname(vo.getParentName());
 					if (middle != null) {
 						big.addChildNode(middle);
 					}
@@ -349,7 +347,7 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 
 			Set<Map.Entry<String, CategoryTree>> entrys = map.entrySet();
 			for (Map.Entry<String, CategoryTree> entry : entrys) {
-				if (entry.getValue().getPid() .equals("0")) {
+				if ("0".equals(entry.getValue().getPid())){
 					root_list.add(entry.getValue());
 				}
 			}

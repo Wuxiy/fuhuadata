@@ -19,8 +19,20 @@ public class BusinessInfo {
 
     private String customerName;//客户名称
 
+    private String enterprisePhone;//企业电话
+
+    private String enterpriseEmail;//企业邮箱
+
+    private String otherEnterpriseNature;//其他企业性质
+
+    private String  zhongxinbaoNumber;//中信保编号
+
+    private String registeredFunds;//注册资金
 
     private String  enterpriseNature;
+
+
+    private String  fullEnterpriseNature;
 
     private Integer  customerLevel;
 
@@ -65,6 +77,54 @@ public class BusinessInfo {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date modifyTime;//修改时间
+
+    public String getEnterprisePhone() {
+        return enterprisePhone;
+    }
+
+    public void setEnterprisePhone(String enterprisePhone) {
+        this.enterprisePhone = enterprisePhone;
+    }
+
+    public String getEnterpriseEmail() {
+        return enterpriseEmail;
+    }
+
+    public void setEnterpriseEmail(String enterpriseEmail) {
+        this.enterpriseEmail = enterpriseEmail;
+    }
+
+    public String getOtherEnterpriseNature() {
+        return otherEnterpriseNature;
+    }
+
+    public void setOtherEnterpriseNature(String otherEnterpriseNature) {
+        this.otherEnterpriseNature = otherEnterpriseNature;
+    }
+
+    public String getZhongxinbaoNumber() {
+        return zhongxinbaoNumber;
+    }
+
+    public void setZhongxinbaoNumber(String zhongxinbaoNumber) {
+        this.zhongxinbaoNumber = zhongxinbaoNumber;
+    }
+
+    public String getRegisteredFunds() {
+        return registeredFunds;
+    }
+
+    public void setRegisteredFunds(String registeredFunds) {
+        this.registeredFunds = registeredFunds;
+    }
+
+    public String getFullEnterpriseNature() {
+        return fullEnterpriseNature;
+    }
+
+    public void setFullEnterpriseNature(String fullEnterpriseNature) {
+        this.fullEnterpriseNature = fullEnterpriseNature;
+    }
 
     public String getEnterpriseNature() {
         return enterpriseNature;

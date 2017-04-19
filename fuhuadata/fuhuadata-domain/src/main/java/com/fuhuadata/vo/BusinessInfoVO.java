@@ -1,11 +1,8 @@
 package com.fuhuadata.vo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fuhuadata.domain.BusinessInfo;
 import com.fuhuadata.domain.BusinessRecord;
 
-import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 /**

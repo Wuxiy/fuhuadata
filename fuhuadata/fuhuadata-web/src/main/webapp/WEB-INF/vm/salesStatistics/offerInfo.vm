@@ -70,11 +70,8 @@
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">部门</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" id="departmentName" data-code="1" value="123" />
+                                    <input class="form-control" id="departmentName" data-code="" value="" />
                                     <select id="departmentNameS" class="form-control hidden">
-                                        <option value="1">123</option>
-                                        <option value="2">223</option>
-                                        <option value="3">323</option>
                                     </select>
                                 </div>
                             </div>
@@ -410,11 +407,11 @@
             "saleOrganizationName":$('#saleOrganizationName').val(),
             "destinationPort":$('#destinationPort').val(),
             "shipmentPort":$('#shipmentPort').val(),
-            "collectionAgreement":$('#collectionAgreement').val(),
+            "collectionAgreement":$('#inc').val(),
             "tradeType":$('#tradeType').val(),
-            "tradeTerm":$('#tradeTerm').val(),
-            "tradeCountry":$('#tradeCountry').val(),
-            "currency":$('#currency').val(),
+            "tradeTerm":$('#incoterm').val(),
+            "tradeCountry":$('#countryzone').val(),
+            "currency":$('#currtype').val(),
             "premiumRate":$('#premiumRate').val(),
             "guaranteeRate":$('#guaranteeRate').val(),
             "discountRate":$('#discountRate').val(),

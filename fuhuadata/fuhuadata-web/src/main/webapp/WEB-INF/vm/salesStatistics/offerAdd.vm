@@ -27,7 +27,7 @@
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">客户名称</label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" id="customerName" value="" disabled />
+                                <input class="form-control" type="text" id="customerName" value="$!{businessInfo.businessInfo.customerName}" disabled />
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">客户税号</label>
                             <div class="col-xs-2">
@@ -37,25 +37,25 @@
                         <div class="form-group">
                             <label class="col-xs-1 control-label" lang="zh">中信保编码</label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" id="zhongxinbaoNumber" value="" disabled />
+                                <input class="form-control" type="text" id="zhongxinbaoNumber" value="$!{businessInfo.businessInfo.zhongxinbaoNumber}" disabled />
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">注册资金</label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" id="registeredFunds" value="" disabled />
+                                <input class="form-control" type="text" id="registeredFunds" value="$!{businessInfo.businessInfo.registeredFunds}" disabled />
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">企业电话</label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" id="enterprisePhone" value="" disabled />
+                                <input class="form-control" type="text" id="enterprisePhone" value="$!{businessInfo.businessInfo.enterprisePhone}" disabled />
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">企业邮箱</label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" id="enterpriseEmail" value="" disabled />
+                                <input class="form-control" type="text" id="enterpriseEmail" value="$!{businessInfo.businessInfo.enterpriseEmail}" disabled />
                             </div>
                         </div>
                         <div class="form-group ">
                             <label class="col-xs-1 control-label" lang="zh">收票客户</label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" id="billToCustomer" value="" />
+                                <input class="form-control" type="text" id="billToCustomer" value="$!{businessInfo.businessInfo.customerName}" />
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">业务员</label>
                             <div class="col-xs-2">
@@ -63,33 +63,35 @@
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">部门</label>
                             <div class="col-xs-2">
-                                <select class="form-control" id="departmentName">
-
+                                <input class="form-control" id="departmentName" data-code="" value="" />
+                                <select id="departmentNameS" class="form-control hidden">
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-xs-1 control-label" lang="zh">销售组织</label>
                             <div class="col-xs-2">
-                                <select class="form-control" id="saleOrganizationName">
+                                <select class="form-control" id="saleOrganizationName" disabled>
 
                                 </select>
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">目的港<sup class="not-null">*</sup></label>
                             <div class="col-xs-2">
-                                <select class="form-control" id="destinationPort">
-
+                                <input class="form-control" id="destinationPort" data-code="" value="" />
+                                <select id="destinationPortS" class="form-control hidden">
+                                </select>
                                 </select>
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">起运港<sup class="not-null">*</sup></label>
                             <div class="col-xs-2">
-                                <select class="form-control" id="shipmentPort">
-
+                                <input  class="form-control" id="shipmentPort" data-code="" value="">
+                                <select class="form-control hidden" id="shipmentPortS">
                                 </select>
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">收款协议<sup class="not-null">*</sup></label>
                             <div class="col-xs-2">
-                                <select class="form-control" id="collectionAgreement">
+                                <input id="income" class="form-control" data-code="" value="">
+                                <select class="form-control hidden" id="incomeS">
 
                                 </select>
                             </div>
@@ -97,26 +99,28 @@
                         <div class="form-group">
                             <label class="col-xs-1 control-label" lang="zh">贸易方式<sup class="not-null">*</sup></label>
                             <div class="col-xs-2">
-                                <select class="form-control" id="tradeType">
+                                <select class="form-control" id="tradeType" disabled>
                                     <option value="0">一般贸易</option>
                                     <option value="1">其他</option>
                                 </select>
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">贸易术语<sup class="not-null">*</sup></label>
                             <div class="col-xs-2">
-                                <select class="form-control" id="tradeTerm">
+                                <input class="form-control" id="incoterm" data-code="" value="">
+                                <select class="form-control hidden" id="incotermS">
 
                                 </select>
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">币易国别<sup class="not-null">*</sup></label>
                             <div class="col-xs-2">
-                                <select class="form-control" id="tradeCountry">
+                                <input class="form-control" id="countryzone" data-code="" value="">
+                                <select class="form-control hidden"  id="countryzone ">
 
                                 </select>
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">是否使用信用险</label>
                             <div class="col-xs-2">
-                                <select class="form-control" id="isCreditRisk" >
+                                <select class="form-control" id="isCreditRisk" disabled>
                                     <option value="0">否</option>
                                     <option value="1">是</option>
                                 </select>
@@ -125,11 +129,8 @@
                         <div class="form-group">
                             <label class="col-xs-1 control-label" lang="zh">币种<sup class="not-null">*</sup></label>
                             <div class="col-xs-2">
-                                <select class="form-control" id="currency" >
-                                    <option value="0">RMB</option>
-                                    <option value="1">美元</option>
-                                    <option value="2">欧元</option>
-                                </select>
+                                <input class="form-control" id="currtype" data-code="" value="">
+                                <select class="form-control hidden" id="currtypeS"></select>
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">原币对美元汇率<sup class="not-null">*</sup></label>
                             <div class="col-xs-2">
@@ -313,11 +314,11 @@
             "saleOrganizationName":$('#saleOrganizationName').val(),
             "destinationPort":$('#destinationPort').val(),
             "shipmentPort":$('#shipmentPort').val(),
-            "collectionAgreement":$('#collectionAgreement').val(),
+            "collectionAgreement":$('#income').val(),
             "tradeType":$('#tradeType').val(),
-            "tradeTerm":$('#tradeTerm').val(),
-            "tradeCountry":$('#tradeCountry').val(),
-            "currency":$('#currency').val(),
+            "tradeTerm":$('#incoterm').val(),
+            "tradeCountry":$('#countryzone').val(),
+            "currency":$('#currtype').val(),
             "premiumRate":$('#premiumRate').val(),
             "guaranteeRate":$('#guaranteeRate').val(),
             "discountRate":$('#discountRate').val(),
@@ -354,5 +355,120 @@
             arr.push(val);
         })
         return arr;
+    }
+
+
+
+    // 部门
+    var departmentData = null;
+    $('#departmentName').on('click.edit',function () {
+        $(this).addClass('hidden');
+        if (departmentData!=null){
+            $.ajax({
+                url:'',
+                type:'GET'
+            }).done(function (result) {
+                departmentData = result.data;
+                renderSelect(departmentData,$('#departmentNameS'));
+                $('#departmentNameS').removeClass('hidden').val($(this).data('code'));
+            });
+        }else {
+            $('#departmentNameS').removeClass('hidden').val($(this).data('code'));
+        }
+    });
+
+    $('#departmentNameS').on('change.edit',function (e) {
+        var tarItem = $(this),
+                val = tarItem.val(),
+                text = tarItem.find('option').filter(':selected').text();
+        $('#departmentName').val(text);
+        $('#departmentName').data('code',val);
+    });
+
+    $('#departmentNameS').on('focusout',function () {
+        $('#departmentNameS').addClass('hidden');
+        $('#departmentName').removeClass('hidden');
+    })
+
+    //目的港
+    var destinationPortData = null;
+    $('#destinationPort').on('click.edit',function () {
+        $(this).addClass('hidden');
+        if (destinationPortData!=null){
+            $.ajax({
+                url:basePath +'/freightCost/queryFreightCostList',
+                type:'GET'
+            }).done(function (result) {
+
+                $('#destinationPortS').removeClass('hidden').val($(this).data('code'));
+            });
+        }else {
+            $('#destinationPortS').removeClass('hidden').val($(this).data('code'));
+        }
+    });
+
+    $('#destinationPortS').on('change.edit',function (e) {
+        var tarItem = $(this),
+                val = tarItem.val(),
+                text = tarItem.find('option').filter(':selected').text();
+        $('#destinationPortS').val(text);
+        $('#destinationPortS').data('code',val);
+    });
+
+    $('#destinationPortS').on('focusout',function () {
+        $('#destinationPortS').addClass('hidden');
+        $('#destinationPortS').removeClass('hidden');
+    })
+
+    var IncomeData = null;
+    selectArchive($('#income'),$('#incomeS'),'/dataArchives/getIncome',IncomeData);//收款协议
+    var currtypeData = null;
+    selectArchive($('#currtype'),$('#currtypeS'),'/dataArchives/getCurrtype',currtypeData);//币种
+    var incotermData = null;
+    selectArchive($('#incoterm'),$('#incotermS'),'/dataArchives/getIncoterm',incotermData);//贸易术语
+
+    //币种
+    function selectArchive(ipt,slt,url,res) {
+        ipt.on('click.edit',function () {
+            $(this).addClass('hidden');
+            if (res==null){
+                $.ajax({
+                    url:basePath + url,
+                    type:'GET'
+                }).done(function (result) {
+                    res = result.data;
+                    renderSelect(res,slt);
+                    if ($(this).data('code')!=''){
+                        slt.val($(this).data('code'));
+                    }
+                    slt.removeClass('hidden');
+//                $('#currencyS').click();
+                });
+            }else {
+                slt.removeClass('hidden').val($(this).data('code'));
+            }
+        });
+
+        slt.on('change.edit',function (e) {
+            var tarItem = $(this),
+                    val = tarItem.val(),
+                    text = tarItem.find('option').filter(':selected').text();
+            ipt.val(text);
+            ipt.data('code',val);
+        });
+
+        slt.on('focusout',function () {
+            slt.addClass('hidden'); // 隐藏
+            ipt.removeClass('hidden'); // 显示
+        })
+    }
+
+    //下拉列表
+    function renderSelect(data,el) {
+        var _html = '';
+        $.each(data,function(i,item){
+            _html += '<option value="' + item.code + '">'+ item.name + '</option>';
+        })
+        el.append(_html);
     }
 </script>
