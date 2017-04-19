@@ -10,6 +10,13 @@
             <div class="col-xs-12">
                 <div class="panel panel-default view-HD-lg">
                     <div class="panel-heading">
+                        <button id="edit" data-form-btn="edit" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
+                            编辑
+                        </button>
+                        <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden">
+                            <a id="cancel" data-form-btn="cancel" class="btn" lang="zh">取消</a>
+                            <a id="save" data-form-btn="save" class="btn btn-primary" lang="zh">保存</a>
+                        </div>
                         <h3 class="panel-title" lang="zh">包装要求</h3>
                     </div>
                     <div class="panel-body clearfix">
@@ -350,8 +357,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-1 col-xs-offset-5"><a href="" class="btn btn-block btn-default" type="button" id="back">上一步</a></div>
-            <div class="col-xs-1 col-xs-offset-1"><a class="btn btn-block btn-primary" type="button" id="next">下一步</a></div>
+            <div class="col-xs-1 col-xs-offset-2"><a class="btn btn-block btn-default hidden" type="button" id="back">返回</a></div>
+            <div class="col-xs-1 col-xs-offset-1"><a class="btn btn-block btn-default hidden" type="button" id="resert">重置取消</a></div>
+            <div class="col-xs-1 col-xs-offset-1"><a class="btn btn-block btn-primary hidden" type="button" id="next">下一步</a></div>
         </div>
     </div>
 </div>
@@ -442,7 +450,7 @@
 <input id="wareId" type="hidden" value="">
 
 <script type="text/javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script>
     var id = $('#productRequireId').val();
     var auxiliary = document.getElementById('auxiliary');

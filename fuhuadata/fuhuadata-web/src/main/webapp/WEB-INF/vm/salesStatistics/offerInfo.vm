@@ -8,7 +8,7 @@
     <div class="row">
         <div class="tab-content col-xs-12">
             <!--基本信息-->
-                <div class="panel panel-default">
+                <div id="offerInfo" class="panel panel-default">
                     <div class="panel-heading">
                         <button id="edit" data-form-btn="edit" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
                             编辑
@@ -207,19 +207,19 @@
                                 <label class="col-xs-1 control-label">企业性质<sup class="not-null">*</sup></label>
                                 <div class="col-xs-5">
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="0" data-text="工厂"> 工厂
+                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="1" data-text="工厂"> 工厂
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="1" data-text="经销商"> 经销商
+                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="2" data-text="经销商"> 经销商
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="2" data-text="分销商"> 分销商
+                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="3" data-text="分销商"> 分销商
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="3" data-text="终端客户"> 终端客户
+                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="4" data-text="终端客户"> 终端客户
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="check" class="suitableType cell_edit" id="other" value="4" data-text="其他"> 其他
+                                        <input type="checkbox" name="check" class="suitableType cell_edit" id="other" value="5" data-text="其他"> 其他
                                     </label>
                                     <label class="checkbox-inline">
                                         <input class="form-control" type="text" id="otherRemarks" value="输入企业性质" disabled/>
@@ -284,13 +284,18 @@
 
  <!--编号-->
 <input id="customerId" type="hidden" value="$!{customerId}">
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript">
     var orderId = $('#orderId').val();
     var businessProductId = $('#businessProductId').val();
     var businessproduct = document.getElementById('businessproduct');
+
+    var bInfo = new CRM.module.Panel('#offerInfo');
+    bInfo.startEdit();
+    bInfo.startSave();
+    bInfo.startCancel();
 
     $(document).ready(function(){
         //请求数据
@@ -301,18 +306,20 @@
                 var businessOrder = result.data.businessOrder;
                 var customerBaseInfo = result.data.customerBaseInfo;
                 var businessOrderProductLists = result.data.businessOrderProductLists;
-                /*var enterpriseNature = customerBaseInfo.enterpriseNature.split(',');
+                var enterpriseNature = customerBaseInfo.enterpriseNature.split(',');
+                console.log(enterpriseNature);
 
-                $.each(arr,function(index,value){
+                $.each(enterpriseNature,function(index,value){
                     $("input[name='check']").each(function(){
-                        if($(this).val == value){
+                        console.log($(this).val);
+                        if($(this).val() == value){
                             $(this).prop('checked',true);
-                            if(value == 4){
+                            /*if(value == 4){
                                 $('#otherRemarks').val(customerBaseInfo.otherRemarks);
-                            }
+                            }*/
                         }
                     })
-                })*/
+                })
 
                 $('#businessId').val(businessOrder.businessId);
                 $('#fullName').val(customerBaseInfo.fullName);

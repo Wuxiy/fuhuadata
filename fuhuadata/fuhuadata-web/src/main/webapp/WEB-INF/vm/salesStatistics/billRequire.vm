@@ -10,6 +10,13 @@
                 <!--单据要求-->
                 <div class="panel panel-default view-HD-lg">
                     <div class="panel-heading">
+                        <button id="edit" data-form-btn="edit" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
+                            编辑
+                        </button>
+                        <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden">
+                            <a id="cancel" data-form-btn="cancel" class="btn" lang="zh">取消</a>
+                            <a id="save" data-form-btn="save" class="btn btn-primary" lang="zh">保存</a>
+                        </div>
                         <h3 class="panel-title" lang="zh">
                             单据要求
                         </h3>
@@ -18,7 +25,7 @@
                         <div class="form-group">
                             <div class="input-group col-xs-3 ">
                                 <span class="input-group-addon" lang="zh">单据类型</span>
-                                <select id="documentaryType" class="form-control">
+                                <select id="documentaryType" class="form-control isdisbaled">
                                     <option value="0">信用证条款单据</option>
                                     <option value="1">非信用证条款单据</option>
                                 </select>
@@ -30,7 +37,7 @@
                                 <td class="col-xs-4" lang="zh"><label for="">出具海运提单</label></td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input id="oceanBillOfLading" type="checkbox" /></label>
+                                        <label><input id="oceanBillOfLading" type="checkbox" class="isdisabled"/></label>
                                     </div>
                                 </td>
                             </tr>
@@ -38,7 +45,7 @@
                                 <td class="col-xs-4" lang="zh">出具货运提单</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input id="freightForwardingBill" type="checkbox" /></label>
+                                        <label><input id="freightForwardingBill" type="checkbox" class="isdisabled"/></label>
                                     </div>
                                 </td>
                             </tr>
@@ -46,7 +53,7 @@
                                 <td lang="zh">是否需要发票</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input id="invoice" type="checkbox" /></label>
+                                        <label><input id="invoice" type="checkbox" class="isdisabled"/></label>
                                     </div>
                                 </td>
 
@@ -55,7 +62,7 @@
                                 <td lang="zh">是否需要箱单</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input id="packingList" type="checkbox" /></label>
+                                        <label><input id="packingList" type="checkbox" class="isdisabled"/></label>
                                     </div>
                                 </td>
 
@@ -64,10 +71,10 @@
                                 <td lang="zh">是否需要质检单</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-2">
-                                        <label><input id="qualityTestingReport" type="checkbox" /></label>
+                                        <label><input id="qualityTestingReport" type="checkbox" class="isdisabled"/></label>
                                     </div>
                                     <div class="col-xs-4">
-                                        <input id="reportCompanyTitle" type="text" class="form-control" placeholder="请输入公司抬头">
+                                        <input id="reportCompanyTitle" type="text" class="form-control isdisabled" placeholder="请输入公司抬头" >
                                     </div>
                                 </td>
                             </tr>
@@ -75,7 +82,7 @@
                                 <td lang="zh">是否需要保单</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input id="guaranteeSlip" type="checkbox" /></label>
+                                        <label><input id="guaranteeSlip" type="checkbox" class="isdisabled"/></label>
                                     </div>
                                 </td>
 
@@ -84,22 +91,22 @@
                                 <td lang="zh">是否出COO</td>
                                 <td class="text-left">
                                     <div class=" col-xs-2">
-                                        <label class="checkbox-inline"><input name="coo" type="checkbox" value="1"/>商检局</label>
+                                        <label class="checkbox-inline"><input name="coo" type="checkbox" value="1" class="isdisabled"/>商检局</label>
                                     </div>
                                     <div class="col-xs-10">
-                                        <label class="radio-inline"><input class="contentRadio" name="cooContent" type="radio" value="a"/>FORM A</label>
-                                        <label class="radio-inline"><input class="contentRadio" name="cooContent" type="radio" value="e"/>FORM E</label>
-                                        <label class="radio-inline"><input class="contentRadio" name="cooContent" type="radio" value="p"/>FORM P</label>
-                                        <label class="radio-inline"><input class="contentRadio" name="cooContent" type="radio" value="au"/>FORM AU</label>
+                                        <label class="radio-inline"><input class="contentRadio isdisabled" name="cooContent" type="radio" value="a"/>FORM A</label>
+                                        <label class="radio-inline"><input class="contentRadio isdisabled" name="cooContent" type="radio" value="e"/>FORM E</label>
+                                        <label class="radio-inline"><input class="contentRadio isdisabled" name="cooContent" type="radio" value="p"/>FORM P</label>
+                                        <label class="radio-inline"><input class="contentRadio isdisabled" name="cooContent" type="radio" value="au"/>FORM AU</label>
                                     </div>
                                     <div class="col-xs-12">
-                                        <label class="checkbox-inline" style="padding-top: 3px"><input name="coo" type="checkbox" value="2"/>贸促会</label>
+                                        <label class="checkbox-inline" style="padding-top: 3px"><input name="coo" type="checkbox" value="2" class="isdisabled"/>贸促会</label>
                                     </div>
                                     <div class="col-xs-2">
-                                        <label class="checkbox-inline" style="padding-top: 3px"><input name="coo" type="checkbox" value="3" />普通</label>
+                                        <label class="checkbox-inline" style="padding-top: 3px"><input name="coo" type="checkbox" value="3"  class="isdisabled"/>普通</label>
                                     </div>
                                     <div class="col-xs-4">
-                                        <input id="cooContentText" name="cooContent" class="form-control contentText" type="text" placeholder="请输入公司抬头"/>
+                                        <input id="cooContentText" name="cooContent" class="form-control contentText isdisabled" type="text" placeholder="请输入公司抬头"/>
                                     </div>
                                 </td>
                             </tr>
@@ -107,7 +114,7 @@
                                 <td lang="zh">是否需要危包证</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input id="dangerousCertificate" type="checkbox" /></label>
+                                        <label><input id="dangerousCertificate" type="checkbox" class="isdisabled"/></label>
                                     </div>
                                 </td>
 
@@ -116,7 +123,7 @@
                                 <td lang="zh">是否需要受益人证明</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input id="beneficiaryCertification" type="checkbox" /></label>
+                                        <label><input id="beneficiaryCertification" type="checkbox" class="isdisabled"/></label>
                                     </div>
                                 </td>
 
@@ -125,7 +132,7 @@
                                 <td lang="zh">是否出熏蒸证书</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input id="fumigationCertificate" type="checkbox" /></label>
+                                        <label><input id="fumigationCertificate" type="checkbox" class="isdisabled"/></label>
                                     </div>
                                 </td>
 
@@ -134,7 +141,7 @@
                                 <td lang="zh">是否需要MSDS</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input id="msds" type="checkbox" /></label>
+                                        <label><input id="msds" type="checkbox" class="isdisabled"/></label>
                                     </div>
                                 </td>
 
@@ -143,12 +150,12 @@
                                 <td lang="zh">提单是否电放</td>
                                 <td class="form-group text-left">
                                     <div class="checkbox col-xs-2">
-                                        <label><input name="telexRelease" type="checkbox" value="1" /><span lang="zh">直接电放</span></label>
+                                        <label><input name="telexRelease" type="checkbox" value="1" class="isdisabled"/><span lang="zh">直接电放</span></label>
                                     </div>
                                     <div class="checkbox col-xs-3">
-                                        <label><input name="telexRelease" type="checkbox" value="2" /><span lang="zh">正本出后电放</span></label>
+                                        <label><input name="telexRelease" type="checkbox" value="2" class="isdisabled"/><span lang="zh">正本出后电放</span></label>
                                     </div>
-                                    <div class="col-xs-4"><input id="releaseDestination" class="form-control" type="text" value="" placeholder="输入放单目的港" lang="zh" /></div>
+                                    <div class="col-xs-4"><input id="releaseDestination" class="form-control isdisabled" type="text" value="" placeholder="输入放单目的港" lang="zh" /></div>
                                 </td>
 
                             </tr>
@@ -156,7 +163,7 @@
                                 <td lang="zh">是否需要银行交单</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input id="bankBill" type="checkbox" /></label>
+                                        <label><input id="bankBill" type="checkbox" class="isdisabled"/></label>
                                     </div>
                                 </td>
 
@@ -165,7 +172,7 @@
                                 <td lang="zh">是否需要做第三方检测，并出具检测报告</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input id="examiningReport" type="checkbox" /></label>
+                                        <label><input id="examiningReport" type="checkbox" class="isdisabled"/></label>
                                     </div>
                                 </td>
 
@@ -174,7 +181,7 @@
                                 <td lang="zh">是否需要Packing Declaration</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input id="packingDeclaration" type="checkbox" /></label>
+                                        <label><input id="packingDeclaration" type="checkbox" class="isdisabled"/></label>
                                     </div>
                                 </td>
 
@@ -183,7 +190,7 @@
                                 <td lang="zh">是否需要Import Container Weight Declaration</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input id="importContainerWeightDeclaration" type="checkbox" /></label>
+                                        <label><input id="importContainerWeightDeclaration" type="checkbox" class="isdisabled"/></label>
                                     </div>
                                 </td>
 
@@ -192,7 +199,7 @@
                                 <td>是否需要Manufacturer's Certificate</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input id="manufacturerCertificate" type="checkbox" /></label>
+                                        <label><input id="manufacturerCertificate" type="checkbox" class="isdisabled"/></label>
                                     </div>
                                 </td>
                             </tr>
@@ -202,14 +209,15 @@
                             <div class="form-group">
                                 <label class="control-label col-xs-2" lang="zh">其他单据要求</label>
                                 <div class="col-xs-10">
-                                    <textarea id="otherDocumentaryRequire" class="form-control" rows="3" placeholder="多个单据请以（、）隔开" lang="zh"></textarea>
+                                    <textarea id="otherDocumentaryRequire" class="form-control isdisabled" rows="3" placeholder="多个单据请以（、）隔开" lang="zh"></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-1 col-xs-offset-5"><a class="btn btn-block btn-default" type="button" id="back">上一步</a></div>
-                <div class="col-xs-1 col-xs-offset-1"><a class="btn btn-block btn-primary" type="button" id="next">下一步</a></div>
+                <div class="col-xs-1 col-xs-offset-2"><a class="btn btn-block btn-default hidden" type="button" id="back">返回</a></div>
+                <div class="col-xs-1 col-xs-offset-1"><a class="btn btn-block btn-default hidden" type="button" id="resert">重置取消</a></div>
+                <div class="col-xs-1 col-xs-offset-1"><a class="btn btn-block btn-primary hidden" type="button" id="next">下一步</a></div>
             </div>
         </div>
     </div>
@@ -221,9 +229,7 @@
 <input id="fullName" type="hidden" value='$!{fullName}'>
 <input id="businessProductId" type="hidden" value='$!{businessProductId}'>
 
-<input id="" type="hidden" value=''>
-<input id="" type="hidden" value=''>
-
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript">
     var id = $('#businessProductId').val();
     console.log(id);
@@ -355,29 +361,31 @@
 
     function getdata() {
         var data = {
-            'businessProductId':$('#businessProductId').val(),
-            'oceanBillOfLading':checked($('#oceanBillOfLading')),
-            'freightForwardingBill':checked($('#freightForwardingBill')),
-            'invoice':checked($('#invoice')),
-            'packingList':checked($('#packingList')),
-            'qualityTestingReport':checked($('#qualityTestingReport')),
-            'reportCompanyTitle':$('#oceanBillOfLading').val(),
-            'guaranteeSlip':checked($('#guaranteeSlip')),
-            'coo':$('input[name="coo"]:checked').val(),
-            'cooContent':getcooContent(),
-            'dangerousCertificate':checked($('#dangerousCertificate')),
-            'beneficiaryCertification':checked($('#beneficiaryCertification')),
-            'fumigationCertificate':checked($('#fumigationCertificate')),
-            'msds':checked($('#msds')),
-            'bankBill':checked($('#bankBill')),
-            'examiningReport':checked($('#examiningReport')),
-            'packingDeclaration':checked($('#packingDeclaration')),
-            'importContainerWeightDeclaration':checked($('#importContainerWeightDeclaration')),
-            'manufacturerCertificate':checked($('#manufacturerCertificate')),
-            'releaseDestination':$('#releaseDestination').val(),
-            'telexRelease':$('input[name="telexRelease"]:checked').val(),
-            'documentaryType':$('#name').val(),
-            'otherDocumentaryRequire':$('#otherDocumentaryRequire').val()
+            "documentaryRequire":{
+                'businessProductId':$('#businessProductId').val(),
+                'oceanBillOfLading':checked($('#oceanBillOfLading')),
+                'freightForwardingBill':checked($('#freightForwardingBill')),
+                'invoice':checked($('#invoice')),
+                'packingList':checked($('#packingList')),
+                'qualityTestingReport':checked($('#qualityTestingReport')),
+                'reportCompanyTitle':$('#oceanBillOfLading').val(),
+                'guaranteeSlip':checked($('#guaranteeSlip')),
+                'coo':getcoo(),
+                'cooContent':getcooContent(),
+                'dangerousCertificate':checked($('#dangerousCertificate')),
+                'beneficiaryCertification':checked($('#beneficiaryCertification')),
+                'fumigationCertificate':checked($('#fumigationCertificate')),
+                'msds':checked($('#msds')),
+                'bankBill':checked($('#bankBill')),
+                'examiningReport':checked($('#examiningReport')),
+                'packingDeclaration':checked($('#packingDeclaration')),
+                'importContainerWeightDeclaration':checked($('#importContainerWeightDeclaration')),
+                'manufacturerCertificate':checked($('#manufacturerCertificate')),
+                'releaseDestination':$('#releaseDestination').val(),
+                'telexRelease':gettelexRelease(),
+            },
+            "documentaryType":$('#documentaryType').val(),
+            "otherDocumentaryRequire":$('#otherDocumentaryRequire').val()
         }
         console.log(data);
         return JSON.stringify(data);
@@ -394,13 +402,32 @@
         return i;
     }
 
+    function gettelexRelease(){
+        var telexRelease;
+        if($('input[name="telexRelease"]:checked').length==0){
+            telexRelease = '';
+        }else{
+            telexRelease = $('input[name="telexRelease"]:checked').val();
+        }
+        return telexRelease;
+    }
+
+    function getcoo() {
+        var coo;
+        if($('input[name="coo"]:checked').length==0){
+            coo = '';
+        }else{
+            coo = $('input[name="coo"]:checked').val();
+        }
+        return coo;
+    }
+
     function getcooContent() {
         var conContent;
-        var contentRadio =  $('input[class="contentRadio"]:checked');
-        if(contentRadio.length<0){
+        if($('input[name="coo"]:checked').val() == '1'){
+            conContent = $('input[class="contentRadio"]:checked').val();
+        }else if($('input[name="coo"]:checked').val() == '3'){
             conContent = $('#cooContentText').val();
-        }else if(contentRadio[0].val()){
-            conContent = contentRadio[0].val();
         }else{
             conContent = '';
         }
@@ -433,6 +460,18 @@
     $(document).on('click','input[name="telexRelease"]',function(){
         $('input[name="telexRelease"]').removeAttr('checked');
         $(this).prop('checked','checked');
+    })
+
+    $('#save').click(function(){
+        jQuery.ajax({
+            url:basePath + '/businessProduct/saveDocumentaryOrPacking?productRequireId=' + id,
+            type:'POST',
+            data:getdata(),
+            contentType:"application/json",
+            success:function(result){
+                console.log(result);
+            }
+        })
     })
 </script>
 
