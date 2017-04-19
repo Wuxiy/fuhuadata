@@ -15,11 +15,11 @@
 			value="jdbc:mysql://192.168.30.120:3306/fuhuadata?useUnicode=true&amp;characterEncoding=UTF8&amp;zeroDateTimeBehavior=convertToNull" />
 		<property name="username" value="root" />
 		<property name="password" value="root" />
-
 		<property name="maxActive" value="30" />
 		<property name="initialSize" value="1" />
 		<property name="timeBetweenEvictionRunsMillis" value="290000" />
-		<property name="minEvictableIdleTimeMillis" value="290000" />
+		<property name="minEvictableIdleTimeMillis" value="290000" /
+		>
 		<property name="numTestsPerEvictionRun" value="20" />
 	</bean>
 
