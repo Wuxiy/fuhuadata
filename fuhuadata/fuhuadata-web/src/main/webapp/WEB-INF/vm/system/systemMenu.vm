@@ -192,7 +192,7 @@
         return false;
       }
 
-      $.post('/sys/menu/ajax/' + menuId + '/remove', function (data) {
+      $.post('$!{rc.contextPath}/sys/menu/ajax/' + menuId + '/remove', function (data) {
         alert("删除成功！");
         location.reload();
       });
@@ -221,7 +221,7 @@
       var menuData = setMenuObj();
 
       jQuery.ajax({
-        url: '/sys/menu/ajax/add',
+        url: '$!{rc.contextPath}/sys/menu/ajax/add',
         type: 'POST',
         data: menuData
       }).done(function (result) {
@@ -265,7 +265,7 @@
     //取得数据
     function getMenuDetails(id, callback) {
       jQuery.ajax({
-        url: '/sys/menu/ajax/' + id,
+        url: '$!{rc.contextPath}/sys/menu/ajax/' + id,
         type: 'GET'
       }).done(callback);
     }
