@@ -186,7 +186,7 @@
                 if(ResultData && ResultData!='' && ResultData!='null') {
                     for (var i = 0; i < ResultData.length; i++) {
                         _html += '<tr>';
-                        _html += '	<td><a href="'+basePath+'/businessOrder/intoOffer?orderId='+ResultData[i].orderId+'">' + ResultData[i].orderId + '</a></td>';
+                        _html += '	<td><a href="'+basePath+'/businessOrder/intoOfferorOrder?orderId='+ResultData[i].orderId+'">' + ResultData[i].orderId + '</a></td>';
                         _html += '  <td><a href="">' + ResultData[i].businessId + '</a></td>';
                         _html += '  <td>' + ResultData[i].customerName + '</td>';
                         _html += '  <td lang="zh">' + customerLevelList[ResultData[i].customerLevel - 1] + '</td>';
