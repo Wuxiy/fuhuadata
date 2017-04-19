@@ -39,6 +39,9 @@ public class BusinessOrderProductComponentServiceImpl implements BusinessOrderPr
 
     @Override
     public boolean updateProductComponent(List<BusinessOrderProductComponent> businessOrderProductComponents) {
+        if(businessOrderProductComponents.size()==0){
+            return false;
+        }
         boolean flag = businessOrderProductComponentDao.updateProductComponent(businessOrderProductComponents);
         //修改档案，必须在修改订单产品成分之后执行
         businessOrderProductComponentDao.updateArchives(businessOrderProductComponents.get(0).getBusinessProductId());

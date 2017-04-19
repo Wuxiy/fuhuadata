@@ -340,7 +340,7 @@
         UNION
         SELECT (ifnull(price,0)+ifnull(other_require_price,0)+ifnull(addtional_price,0)) cost FROM `business_product_require` WHERE business_product_id = #value#
         UNION
-        SELECT SUM(unit_price*consumption) `k_packing_archives` WHERE packing_id IN(SELECT auxiliary_material_ids FROM business_product_require WHERE business_product_id = #value#)
+        SELECT SUM(unit_price*consumption) from  `k_packing_archives` WHERE packing_id IN(SELECT ifnull(auxiliary_material_ids,0) FROM business_product_require WHERE business_product_id = #value#)
         UNION
         SELECT ifnull(unit_cost,0) FROM k_freight_cost c,business_order_product p  WHERE c.process_factory = p.factory_name and p.id=#value#
         UNION
