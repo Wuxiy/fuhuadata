@@ -1,6 +1,7 @@
 package com.fuhuadata.vo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * 添加订单产品时根据产品及其规格查询产品基本信息返回实体
@@ -21,6 +22,16 @@ public class ProductWareVo implements Serializable{
     private String model;
     //主计量单位
     private String measurement;
+    //单位耗用比例
+    private BigDecimal unitUseRate;
+
+    public BigDecimal getUnitUseRate() {
+        return unitUseRate;
+    }
+
+    public void setUnitUseRate(BigDecimal unitUseRate) {
+        this.unitUseRate = unitUseRate;
+    }
 
     public Integer getProductId() {
         return productId;

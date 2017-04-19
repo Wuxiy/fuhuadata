@@ -103,6 +103,27 @@ public class QueryCustomerBaseInfo  {
 	//机会描述
 	private String opportunityDescrible;
 
+	//所属销售组织编码
+	private String saleOrganizationId;
+	//所属销售组织名称
+	private String saleOrganizationName;
+
+	public String getSaleOrganizationId() {
+		return saleOrganizationId;
+	}
+
+	public void setSaleOrganizationId(String saleOrganizationId) {
+		this.saleOrganizationId = saleOrganizationId;
+	}
+
+	public String getSaleOrganizationName() {
+		return saleOrganizationName;
+	}
+
+	public void setSaleOrganizationName(String saleOrganizationName) {
+		this.saleOrganizationName = saleOrganizationName;
+	}
+
 	public String getOpportunityDescrible() {
 		return opportunityDescrible;
 	}

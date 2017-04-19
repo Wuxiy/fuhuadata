@@ -70,8 +70,13 @@
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">部门</label>
                                 <div class="col-xs-2">
+<<<<<<< HEAD
                                     <select class="form-control" id="departmentName" data-control="on" disabled>
 
+=======
+                                    <input class="form-control" id="departmentName" data-code="" value="" />
+                                    <select id="departmentNameS" class="form-control hidden">
+>>>>>>> 618c24612518b27ded67edb9ac57f904664f2c58
                                     </select>
                                 </div>
                             </div>
@@ -84,19 +89,35 @@
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">目的港<sup class="not-null">*</sup></label>
                                 <div class="col-xs-2">
+<<<<<<< HEAD
                                     <select class="form-control" id="destinationPort" data-control="on" disabled>
 
+=======
+                                        <input class="form-control" id="destinationPort" data-code="" value="" />
+                                        <select id="destinationPortS" class="form-control hidden">
+                                        </select>
+>>>>>>> 618c24612518b27ded67edb9ac57f904664f2c58
                                     </select>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">起运港<sup class="not-null">*</sup></label>
                                 <div class="col-xs-2">
+<<<<<<< HEAD
                                     <select class="form-control" id="shipmentPort" data-control="on" disabled>
 
+=======
+                                    <input  class="form-control" id="shipmentPort" data-code="" value="">
+                                    <select class="form-control hidden" id="shipmentPortS">
+>>>>>>> 618c24612518b27ded67edb9ac57f904664f2c58
                                     </select>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">收款协议<sup class="not-null">*</sup></label>
                                 <div class="col-xs-2">
+<<<<<<< HEAD
                                     <select class="form-control" id="collectionAgreement" data-control="on" disabled>
+=======
+                                    <input id="income" class="form-control" data-code="" value="">
+                                    <select class="form-control hidden" id="incomeS">
+>>>>>>> 618c24612518b27ded67edb9ac57f904664f2c58
 
                                     </select>
                                 </div>
@@ -111,13 +132,23 @@
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">贸易术语<sup class="not-null">*</sup></label>
                                 <div class="col-xs-2">
+<<<<<<< HEAD
                                     <select class="form-control" id="tradeTerm" data-control="on" disabled>
+=======
+                                    <input class="form-control" id="incoterm" data-code="" value="">
+                                    <select class="form-control hidden" id="incotermS">
+>>>>>>> 618c24612518b27ded67edb9ac57f904664f2c58
 
                                     </select>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">币易国别<sup class="not-null">*</sup></label>
                                 <div class="col-xs-2">
+<<<<<<< HEAD
                                     <select class="form-control" id="tradeCountry" data-control="on" disabled>
+=======
+                                    <input class="form-control" id="countryzone" data-code="" value="">
+                                    <select class="form-control hidden"  id="countryzone ">
+>>>>>>> 618c24612518b27ded67edb9ac57f904664f2c58
 
                                     </select>
                                 </div>
@@ -132,11 +163,16 @@
                             <div class="form-group">
                                 <label class="col-xs-1 control-label" lang="zh">币种<sup class="not-null">*</sup></label>
                                 <div class="col-xs-2">
+<<<<<<< HEAD
                                     <select class="form-control" id="currency" data-control="on" disabled>
                                         <option value="0">RMB</option>
                                         <option value="1">美元</option>
                                         <option value="2">欧元</option>
                                     </select>
+=======
+                                    <input class="form-control" id="currtype" data-code="" value="">
+                                    <select class="form-control hidden" id="currtypeS"></select>
+>>>>>>> 618c24612518b27ded67edb9ac57f904664f2c58
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">原币对美元汇率<sup class="not-null">*</sup></label>
                                 <div class="col-xs-2">
@@ -302,77 +338,77 @@
         jQuery.ajax({
             url:basePath + '/businessOrder/getBusinessOrderByOrderId?orderId=' + orderId,
             type:'GET',
-            success:function(result){
-                var businessOrder = result.data.businessOrder;
-                var customerBaseInfo = result.data.customerBaseInfo;
-                var businessOrderProductLists = result.data.businessOrderProductLists;
-                var enterpriseNature = customerBaseInfo.enterpriseNature.split(',');
-                console.log(enterpriseNature);
-
-                $.each(enterpriseNature,function(index,value){
-                    $("input[name='check']").each(function(){
-                        if($(this).val() == value){
-                            $(this).prop('checked',true);
-                            /*if(value == 4){
-                                $('#otherRemarks').val(customerBaseInfo.otherRemarks);
-                            }*/
-                        }
-                    })
-                })
-
-                $('#businessId').val(businessOrder.businessId);
-                $('#fullName').val(customerBaseInfo.fullName);
-                $('#customerDutyParagraph').val(businessOrder.customerDutyParagraph);
-                $('#enterprisePhone').val(customerBaseInfo.enterprisePhone);
-                $('#zhongxinbaoNumber').val(customerBaseInfo.zhongxinbaoNumber);
-                $('#registeredFunds').val(customerBaseInfo.registeredFunds);
-                $('#billToCustomer').val(businessOrder.billToCustomer);
-                $('#salesManName').val(businessOrder.salesManName);
-                $('#departmentName').val(businessOrder.departmentName);
-                $('#saleOrganizationName').val(businessOrder.saleOrganizationName);
-                $('#destinationPort').val(businessOrder.destinationPort);
-                $('#shipmentPort').val(businessOrder.shipmentPort);
-                $('#collectionAgreement').val(businessOrder.collectionAgreement);
-                $('#tradeType').val(businessOrder.tradeType);
-                $('#tradeTerm').val(businessOrder.tradeTerm);
-                $('#tradeCountry').val(businessOrder.tradeCountry);
-                $('#currency').val(businessOrder.currency);
-                $('#premiumRate').val(businessOrder.premiumRate);
-                $('#guaranteeRate').val(businessOrder.guaranteeRate);
-                $('#discountRate').val(businessOrder.discountRate);
-                $('#isCreditRisk').val(businessOrder.isCreditRisk);
-                $('#lossRate').val(businessOrder.lossRate);
-                $('#interestRate').val(businessOrder.interestRate);
-                $('#creditRate').val(businessOrder.creditRate);
-                $('#saleRate').val(businessOrder.saleRate);
-                $('#managementRate').val(businessOrder.managementRate);
-                $('#transportFlag').val(businessOrder.transportFlag);
-                $('#partialShipmentFalg').val(businessOrder.partialShipmentFalg);
-                $('#enterpriseEmail').val(customerBaseInfo.enterpriseEmail);
-                $('#internalSupplyName').val(businessOrder.internalSupplyName);
-                $('#nusdexchgrate').val(businessOrder.status);
-                $('#nexchangerate').val(businessOrder.internalSupplyName);
-
-                businessproduct.innerHTML = '';
-                for(var i=0;i<businessOrderProductLists.length;i++){
-                    businessproduct.innerHTML += '<tr>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].productCode)+'</td>'+
-                            '<td><a href="'+basePath+'/businessProduct/intoProductBasicInfoRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'">'+ifEmpty(businessOrderProductLists[i].productName)+'</a></td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].categoryName)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].brand)+'</td>'+
-                            '<td><a href="'+basePath+'/businessProduct/intoProductRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&productRequireId='+businessOrderProductLists[i].productRequireId+'">'+ifEmpty(businessOrderProductLists[i].specification)+'</a></td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].mainProductAmount)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].cupboardPerNumber)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].cupboardType)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].cupboardNumber)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].deliveryTime)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].documentaryRequire)+'</td>'+
-                            '<td><a href="'+basePath+'/businessProduct/intoDocumentary?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'">查看</a></td>'+
-                            '<td><a href="'+basePath+'/businessProduct/intoPackageRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'">查看</a></td>'+
-                            '<td><input type="checkbox" class="form-control" name="cellcheckbox" value="'+businessOrderProductLists[i].orderId+'" /></td>'+
-                            '</tr>';
-                }
-            }
+//            success:function(result){
+//                var businessOrder = result.data.businessOrder;
+//                var customerBaseInfo = result.data.customerBaseInfo;
+//                var businessOrderProductLists = result.data.businessOrderProductLists;
+//                var enterpriseNature = customerBaseInfo.enterpriseNature.split(',');
+//                console.log(enterpriseNature);
+//
+//                $.each(enterpriseNature,function(index,value){
+//                    $("input[name='check']").each(function(){
+//                        if($(this).val() == value){
+//                            $(this).prop('checked',true);
+//                            /*if(value == 4){
+//                                $('#otherRemarks').val(customerBaseInfo.otherRemarks);
+//                            }*/
+//                        }
+//                    })
+//                })
+//
+//                $('#businessId').val(businessOrder.businessId);
+//                $('#fullName').val(customerBaseInfo.fullName);
+//                $('#customerDutyParagraph').val(businessOrder.customerDutyParagraph);
+//                $('#enterprisePhone').val(customerBaseInfo.enterprisePhone);
+//                $('#zhongxinbaoNumber').val(customerBaseInfo.zhongxinbaoNumber);
+//                $('#registeredFunds').val(customerBaseInfo.registeredFunds);
+//                $('#billToCustomer').val(businessOrder.billToCustomer);
+//                $('#salesManName').val(businessOrder.salesManName);
+//                $('#departmentName').val(businessOrder.departmentName);
+//                $('#saleOrganizationName').val(businessOrder.saleOrganizationName);
+//                $('#destinationPort').val(businessOrder.destinationPort);
+//                $('#shipmentPort').val(businessOrder.shipmentPort);
+//                $('#collectionAgreement').val(businessOrder.collectionAgreement);
+//                $('#tradeType').val(businessOrder.tradeType);
+//                $('#tradeTerm').val(businessOrder.tradeTerm);
+//                $('#tradeCountry').val(businessOrder.tradeCountry);
+//                $('#currency').val(businessOrder.currency);
+//                $('#premiumRate').val(businessOrder.premiumRate);
+//                $('#guaranteeRate').val(businessOrder.guaranteeRate);
+//                $('#discountRate').val(businessOrder.discountRate);
+//                $('#isCreditRisk').val(businessOrder.isCreditRisk);
+//                $('#lossRate').val(businessOrder.lossRate);
+//                $('#interestRate').val(businessOrder.interestRate);
+//                $('#creditRate').val(businessOrder.creditRate);
+//                $('#saleRate').val(businessOrder.saleRate);
+//                $('#managementRate').val(businessOrder.managementRate);
+//                $('#transportFlag').val(businessOrder.transportFlag);
+//                $('#partialShipmentFalg').val(businessOrder.partialShipmentFalg);
+//                $('#enterpriseEmail').val(customerBaseInfo.enterpriseEmail);
+//                $('#internalSupplyName').val(businessOrder.internalSupplyName);
+//                $('#nusdexchgrate').val(businessOrder.status);
+//                $('#nexchangerate').val(businessOrder.internalSupplyName);
+//
+//                businessproduct.innerHTML = '';
+//                for(var i=0;i<businessOrderProductLists.length;i++){
+//                    businessproduct.innerHTML += '<tr>'+
+//                            '<td>'+ifEmpty(businessOrderProductLists[i].productCode)+'</td>'+
+//                            '<td><a href="'+basePath+'/businessProduct/intoProductBasicInfoRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'">'+ifEmpty(businessOrderProductLists[i].productName)+'</a></td>'+
+//                            '<td>'+ifEmpty(businessOrderProductLists[i].categoryName)+'</td>'+
+//                            '<td>'+ifEmpty(businessOrderProductLists[i].brand)+'</td>'+
+//                            '<td><a href="'+basePath+'/businessProduct/intoProductRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&productRequireId='+businessOrderProductLists[i].productRequireId+'">'+ifEmpty(businessOrderProductLists[i].specification)+'</a></td>'+
+//                            '<td>'+ifEmpty(businessOrderProductLists[i].mainProductAmount)+'</td>'+
+//                            '<td>'+ifEmpty(businessOrderProductLists[i].cupboardPerNumber)+'</td>'+
+//                            '<td>'+ifEmpty(businessOrderProductLists[i].cupboardType)+'</td>'+
+//                            '<td>'+ifEmpty(businessOrderProductLists[i].cupboardNumber)+'</td>'+
+//                            '<td>'+ifEmpty(businessOrderProductLists[i].deliveryTime)+'</td>'+
+//                            '<td>'+ifEmpty(businessOrderProductLists[i].documentaryRequire)+'</td>'+
+//                            '<td><a href="'+basePath+'/businessProduct/intoDocumentary?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'">查看</a></td>'+
+//                            '<td><a href="'+basePath+'/businessProduct/intoPackageRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'">查看</a></td>'+
+//                            '<td><input type="checkbox" class="form-control" name="cellcheckbox" value="'+businessOrderProductLists[i].orderId+'" /></td>'+
+//                            '</tr>';
+//                }
+//            }
         })
     })
 
@@ -406,11 +442,11 @@
             "saleOrganizationName":$('#saleOrganizationName').val(),
             "destinationPort":$('#destinationPort').val(),
             "shipmentPort":$('#shipmentPort').val(),
-            "collectionAgreement":$('#collectionAgreement').val(),
+            "collectionAgreement":$('#inc').val(),
             "tradeType":$('#tradeType').val(),
-            "tradeTerm":$('#tradeTerm').val(),
-            "tradeCountry":$('#tradeCountry').val(),
-            "currency":$('#currency').val(),
+            "tradeTerm":$('#incoterm').val(),
+            "tradeCountry":$('#countryzone').val(),
+            "currency":$('#currtype').val(),
             "premiumRate":$('#premiumRate').val(),
             "guaranteeRate":$('#guaranteeRate').val(),
             "discountRate":$('#discountRate').val(),
@@ -434,6 +470,120 @@
     $('#Add').click(function(){
         window.location.href = basePath + '/businessProduct/intoProductBasicInfoRequire?orderId=' + orderId;
     })
+
+    // 部门
+    var departmentData = null;
+    $('#departmentName').on('click.edit',function () {
+        $(this).addClass('hidden');
+        if (departmentData!=null){
+            $.ajax({
+                url:'',
+                type:'GET'
+            }).done(function (result) {
+                departmentData = result.data;
+                renderSelect(departmentData,$('#departmentNameS'));
+                $('#departmentNameS').removeClass('hidden').val($(this).data('code'));
+            });
+        }else {
+            $('#departmentNameS').removeClass('hidden').val($(this).data('code'));
+        }
+    });
+
+     $('#departmentNameS').on('change.edit',function (e) {
+         var tarItem = $(this),
+                 val = tarItem.val(),
+                 text = tarItem.find('option').filter(':selected').text();
+         $('#departmentName').val(text);
+         $('#departmentName').data('code',val);
+     });
+
+    $('#departmentNameS').on('focusout',function () {
+        $('#departmentNameS').addClass('hidden');
+        $('#departmentName').removeClass('hidden');
+    })
+
+    //目的港
+    var destinationPortData = null;
+    $('#destinationPort').on('click.edit',function () {
+        $(this).addClass('hidden');
+        if (destinationPortData!=null){
+            $.ajax({
+                url:basePath +'/freightCost/queryFreightCostList',
+                type:'GET'
+            }).done(function (result) {
+
+                $('#destinationPortS').removeClass('hidden').val($(this).data('code'));
+            });
+        }else {
+            $('#destinationPortS').removeClass('hidden').val($(this).data('code'));
+        }
+    });
+
+    $('#destinationPortS').on('change.edit',function (e) {
+        var tarItem = $(this),
+                val = tarItem.val(),
+                text = tarItem.find('option').filter(':selected').text();
+        $('#destinationPortS').val(text);
+        $('#destinationPortS').data('code',val);
+    });
+
+    $('#destinationPortS').on('focusout',function () {
+        $('#destinationPortS').addClass('hidden');
+        $('#destinationPortS').removeClass('hidden');
+    })
+
+    //收款协议
+    var IncomeData = null;
+    selectArchive($('#income'),$('#incomeS'),'/dataArchives/getIncome',IncomeData);//收款协议
+    var currtypeData = null;
+    selectArchive($('#currtype'),$('#currtypeS'),'/dataArchives/getCurrtype',currtypeData);//币种
+    var incotermData = null;
+    selectArchive($('#incoterm'),$('#incotermS'),'/dataArchives/getIncoterm',incotermData);//贸易术语
+
+    //币种
+    function selectArchive(ipt,slt,url,res) {
+        ipt.on('click.edit',function () {
+            $(this).addClass('hidden');
+            if (res==null){
+                $.ajax({
+                    url:basePath + url,
+                    type:'GET'
+                }).done(function (result) {
+                    res = result.data;
+                    renderSelect(res,slt);
+                    if ($(this).data('code')!=''){
+                        slt.val($(this).data('code'));
+                    }
+                    slt.removeClass('hidden');
+//                $('#currencyS').click();
+                });
+            }else {
+                slt.removeClass('hidden').val($(this).data('code'));
+            }
+        });
+
+        slt.on('change.edit',function (e) {
+            var tarItem = $(this),
+                    val = tarItem.val(),
+                    text = tarItem.find('option').filter(':selected').text();
+            ipt.val(text);
+            ipt.data('code',val);
+        });
+
+        slt.on('focusout',function () {
+            slt.addClass('hidden'); // 隐藏
+            ipt.removeClass('hidden'); // 显示
+        })
+    }
+
+    //下拉列表
+    function renderSelect(data,el) {
+        var _html = '';
+        $.each(data,function(i,item){
+            _html += '<option value="' + item.code + '">'+ item.name + '</option>';
+        })
+        el.append(_html);
+    }
 
     //批量删除
     $('#delete').on('click',function(){

@@ -4,8 +4,7 @@ import com.fuhuadata.domain.*;
 import com.fuhuadata.manager.CustomerBaseInfoManager;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import com.fuhuadata.domain.query.QueryCustomerBaseInfo;
 import com.fuhuadata.domain.query.Result;
@@ -266,11 +265,96 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 		try {
 			List<CategoryVO> list = customerBaseInfoManager.getCustclass();
 
-			result.addDefaultModel("CategoryTree", new PackingCategoryServiceImpl().getAllNode(list));
+			result.addDefaultModel("CategoryTree", getAllNodes(list));
 		}catch(Exception e){
 			result.setSuccess(false);
 			log.error("获取包材目录树错误",e);
 		}
 		return result;
 	}
+
+
+	/**
+	 * map构造tree
+	 * @param list,fourNode 为 0 获取三级目录 , 1 为获取三层目录
+	 * @return
+	 */
+	public List<CategoryTree> getAllNodes(List<CategoryVO> list){
+		Map<String,CategoryTree> map = new HashMap<String,CategoryTree>();
+		List<CategoryTree> root_list = new ArrayList<CategoryTree>();
+		try {
+			for (CategoryVO vo : list) {
+				CategoryTree small = null;
+				CategoryTree middle = null;
+				CategoryTree big = null;
+
+				if (vo.getChildId() != null) {
+						small = new CategoryTree();
+						small.setCname(vo.getChildName());
+						small.setPid(vo.getMidId());
+						small.setCid(vo.getChildId());
+						map.put(small.getCid(),small);
+				}
+				if (vo.getMidId() != null) {
+					middle = map.get(vo.getMidId());
+					if (middle == null) {
+						middle = new CategoryTree();
+						middle.setCid(vo.getMidId());
+						middle.setCname(vo.getMidName());
+						middle.setPid(vo.getParentId());
+						if (small != null) {
+							middle.addChildNode(small);
+						}
+					}else{
+						//判断当前middle结点是否存在small子节点
+						boolean flag=false;
+						for(int i=0;i<middle.getNodes().size();i++){
+							if(middle.getNodes().get(i).getCid()==small.getCid()){
+								flag=true;
+							}
+						}
+						if(flag==false){
+							middle.addChildNode(small);
+						}
+					}
+					map.put(middle.getCid(), middle);
+				}
+
+				big = map.get(vo.getParentId());
+				if (big == null) {
+					big = new CategoryTree();
+					big.setCid(vo.getParentId());
+					big.setPid("0");
+					big.setCname(vo.getParentName());
+					if (middle != null) {
+						big.addChildNode(middle);
+					}
+				}else{
+					//判断当前头结点是否存在middle子节点
+					boolean flag=false;
+					for(int i=0;i<big.getNodes().size();i++){
+						if(big.getNodes().get(i).getCid()==middle.getCid()){
+							flag=true;
+						}
+					}
+					if(flag==false){
+						big.addChildNode(middle);
+					}
+
+				}
+				map.put(big.getCid(), big);
+			}
+
+			Set<Map.Entry<String, CategoryTree>> entrys = map.entrySet();
+			for (Map.Entry<String, CategoryTree> entry : entrys) {
+				if ("0".equals(entry.getValue().getPid())){
+					root_list.add(entry.getValue());
+				}
+			}
+		}catch(Exception e){
+			log.error("获取客户基本分类",e);
+		}
+		return root_list;
+	}
+
 }

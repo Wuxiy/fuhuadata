@@ -5,11 +5,11 @@
 $(document).ready(function(){
 
     //创建面包屑导航
-    $('#location').append(createCrumbsAnother());
+    // $('#location').append(createCrumbsAnother());
 
     //设置title标题
-    var title = $('#pTitle').text()+'——'+$('#sTitle').text();
-    $('#hTitle').text(iGetInnerText(title));
+    // var title = $('#pTitle').text()+'——'+$('#sTitle').text();
+    // $('#hTitle').text(iGetInnerText(title));
 
     getData(basePath + '/customerSubcompanyInfo/getCustomerSubcompanyInfosByCustomerId','POST',GetRequest(),anotherNamerList);
 

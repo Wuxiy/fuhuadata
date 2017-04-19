@@ -30,9 +30,9 @@ function reconstructionData(data) {
 
             if (item.otherDocumentaryRequire) {obj.otherDocumentaryRequire=item.otherDocumentaryRequire}
 
-            if (item.documentaryVo) {
+            if (item.documentaryRequire) {
 
-                var d = JSON.parse(item.documentaryVo);
+                var d = JSON.parse(item.documentaryRequire);
 
                 if (d.oceanBillOfLading) {obj.oceanBillOfLading=d.oceanBillOfLading}
                 if (d.freightForwardingBill) {obj.freightForwardingBill=d.freightForwardingBill}
@@ -86,9 +86,9 @@ function reconstructionTraData(data) {
             if (item.mianxiangqi) {obj.mianxiangqi=item.mianxiangqi}
             if (item.miantuiqi) {obj.miantuiqi=item.miantuiqi}
 
-            if (item.packingRequireVo) {
+            if (item.packingRequire) {
 
-                var d = JSON.parse(item.packingRequireVo);
+                var d = JSON.parse(item.packingRequire);
 
                 if (d.tray) {obj.tray=d.tray}
                 if (d.postLabel) {obj.postLabel=d.postLabel}
@@ -119,7 +119,7 @@ function reconstructionTraData(data) {
 // 筛选
 function screenData(obj,data,callBack){
     jQuery.each(data,function (n,item) {
-        if(obj.val == item.productId){
+        if(obj.productId == item.productId){
             //渲染数据
             callBack(item);
             //退出循环
@@ -134,20 +134,20 @@ function screenData(obj,data,callBack){
 // 渲染单据要求
 function customerBillRequire(data) {
 
-    if (data.oceanBillOfLading) {$('#oceanBillOfLading').val(data.oceanBillOfLading);}
-    if (data.freightForwardingBill) {$('#freightForwardingBill').val(data.freightForwardingBill);}
-    if (data.invoice) {$('#invoice').val(data.invoice);}
-    if (data.packingList) {$('#packingList').val(data.packingList);}
-    if (data.qualityTestingReport) {$('#qualityTestingReport').val(data.qualityTestingReport);}
+    if (data.oceanBillOfLading) {$('#oceanBillOfLading').val([data.oceanBillOfLading]);}
+    if (data.freightForwardingBill) {$('#freightForwardingBill').val([data.freightForwardingBill]);}
+    if (data.invoice) {$('#invoice').val([data.invoice]);}
+    if (data.packingList) {$('#packingList').val([data.packingList]);}
+    if (data.qualityTestingReport) {$('#qualityTestingReport').val([data.qualityTestingReport]);}
 
-    if (data.reportCompanyTitle) {$('#reportCompanyTitle').val(data.reportCompanyTitle);}
-    if (data.guaranteeSlip) {$('#guaranteeSlip').val(data.guaranteeSlip);}
-    if (data.coo.length==1) {$('[name="coo"]').val([data.coo]);}
-    if (data.cooContent) {
-        if (data.coo==='1') {
+    if (data.reportCompanyTitle && data.qualityTestingReport!='0') {$('#reportCompanyTitle').val(data.reportCompanyTitle);}
+    if (data.guaranteeSlip) {$('#guaranteeSlip').val([data.guaranteeSlip]);}
+    if (data.coo) {$('[name="coo"]').val([data.coo]);}
+    if (data.cooContent && data.coo!='0') {
+        if (data.coo=='1') {
 
             $('[name="cooContent"][type="checkbox"]').val([data.cooContent]);
-        }else if (data.coo==='3') {
+        }else if (data.coo=='3') {
 
             $('[name="cooContent"][type="text"]').val(data.cooContent);
         }
@@ -179,10 +179,10 @@ function renderSelect(data,id,el) {
 
        var obj = {
            name : item.name,
-           val : item.productId,
+           productId : item.productId,
        };
 
-       arr.push[obj];
+       arr.push(obj);
     });
 
     CRM.tplHandler(id,arr,el);
@@ -191,7 +191,7 @@ function renderSelect(data,id,el) {
 // 渲染订舱出运要求
 function customerTransportRequire(data) {
 
-    if (data.shippingAgentRequire) {$('#shippingAgentRequire').val([data.shippingAgentRequire]);}
+    if (data.shippingAgentRequire) {$('#shippingAgentRequire').val(data.shippingAgentRequire);} // 船运公司要求 text
     if (data.tray) {$('[name="tray"]').val([data.tray]);}
     if (data.postLabel) {$('#postLabel').val([data.postLabel]);}
     if (data.basePlate) {$('#basePlate').val([data.basePlate]);}
@@ -206,10 +206,16 @@ function customerTransportRequire(data) {
     if (data.bead) {$('#bead').val([data.bead]);}
     if (data.cornerProtection) {$('#cornerProtection').val([data.cornerProtection]);}
     if (data.inspectionOfLoading) {$('[name="inspectionOfLoading"]').val([data.inspectionOfLoading]);}
-    if (data.inspectionInstitution && data.inspectionOfLoading) {$('#inspectionInstitution').val([data.inspectionInstitution]);}
+    if (data.inspectionInstitution && data.inspectionOfLoading!='0') {$('#inspectionInstitution').val(data.inspectionInstitution);}
     if (data.wireFixed) {$('#wireFixed').val([data.wireFixed]);}
 
     if (data.goodsType) {$('[name="goodsType"]').val([data.goodsType]);}
     if (data.mianxiangqi) {$('#mianxiangqi').val(data.mianxiangqi);}
     if (data.miantuiqi) {$('#miantuiqi').val(data.miantuiqi);}
+}
+
+// 重置
+function resetbillPanel() {
+    $('input[type="checkbox"]',$('#billPanel')).val([]);
+    $('input[type="text"],textarea',$('#billPanel')).val('');
 }

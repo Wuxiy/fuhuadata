@@ -7,12 +7,15 @@
         <div class="tab-content col-xs-10">
             <div class="panel panel-default">
                 <div class="panel-heading">
+                    <button id="back" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
+                        返回
+                    </button>
                     <h3 class="panel-title">
                         基础信息
                     </h3>
                 </div>
                 <div class="panel-body clearfix">
-                    <div class="form-horizontal">
+                    <div id="myForm" class="form-horizontal">
                         <div class="form-group ">
                             <label class="col-xs-1 control-label">姓名<sup class="not-null">*</sup></label>
                             <div class="col-xs-2">
@@ -105,7 +108,7 @@
                                 <a class="btn btn-block btn-primary" id="finishAdd">完成</a>
                             </div>
                             <div class="col-xs-2">
-                                <button class="btn btn-block btn-default" type="reset">重置</button>
+                                <button id="resetBtn" class="btn btn-block btn-default" type="reset">重置</button>
                             </div>
                         </div>
                     </div>
@@ -174,7 +177,15 @@
             });
         }
     })
+    // 返回
+    $('#back').on('click.back',function () {
+        window.history.back(-1);
+    })
 
+    // 重置
+    $('#resetBtn').on('click.reset',function () {
+        $('input,textarea',$('#myForm')).val('');
+    })
     /*$('#isDefault').change(function(){
         var newName = $('#name').val();
         var url = basePath + '/customerLinkman/getCustomerLinkmanDefaultByCustomerId?customerId=' ;

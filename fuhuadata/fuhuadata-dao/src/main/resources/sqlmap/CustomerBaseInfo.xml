@@ -16,6 +16,8 @@
 					<result property="ncId" column="nc_id" jdbcType="VARCHAR" javaType="java.lang.String"/>
 					<result property="fullName" column="full_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="shortName" column="short_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="saleOrganizationName" column="sale_organization_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="saleOrganizationId" column="sale_organization_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="customerType" column="customer_type" jdbcType="INT" javaType="java.lang.Integer" />
 					<result property="areaId" column="customer_area_id" jdbcType="INT" javaType="java.lang.Integer" />
 					<result property="area" column="customer_area" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -97,6 +99,12 @@
 			zhongxinbao_level = #zhongxinbaoLevel#
 		</isNotEmpty>
 
+			<isNotEmpty prepend=" AND " property="saleOrganizationName">
+				sale_organization_name = #saleOrganizationName#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="saleOrganizationId">
+				sale_organization_id = #saleOrganizationId#
+			</isNotEmpty>
 				<isNotEmpty prepend=" AND " property="enterprisePhone">
 			enterprise_phone = #enterprisePhone#
 		</isNotEmpty>
@@ -139,6 +147,12 @@
 				<isNotEmpty prepend=" AND " property="customerId">
 			customer_id = #customerId#
 		</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="saleOrganizationName">
+				sale_organization_name = #saleOrganizationName#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="saleOrganizationId">
+				sale_organization_id = #saleOrganizationId#
+			</isNotEmpty>
 				<isNotEmpty prepend=" AND " property="fullName">
 			full_name like concat('%',#fullName#,'%')
 		</isNotEmpty>
@@ -232,7 +246,7 @@
 		price_sensitivity, loyalty, start_cooperation_time,
 		cooperation_duration, purchasing_season,
 		active_period, is_fuhua_exclusive, cooperation_remark,
-		production_line,timezone,custclass,formatdoc,countryzone)
+		production_line,timezone,custclass,formatdoc,countryzone,sale_organization_id,sale_organization_name)
 		values (#ncId#, #fullName#,
 		#shortName#, #companyType#, #areaId#,
 		#area#, #countryId#, #country#,
@@ -249,7 +263,7 @@
 		#priceSensitivity#, #loyalty#, #startCooperationTime#,
 		#cooperationDuration#, #purchasingSeason#,
 		#activePeriod#, #isFuhuaExclusive#, #cooperationRemark#,
-		#productionLine#,#timezone#,#custclass#,#formatdoc#,#countryzone#)
+		#productionLine#,#timezone#,#custclass#,#formatdoc#,#countryzone#,#saleOrganizationId#,#saleOrganizationName#)
 		<selectKey resultClass="java.lang.String" keyProperty="customerId">
 			SELECT @@IDENTITY AS ID
 		</selectKey>
@@ -308,6 +322,8 @@
 						<isNotEmpty prepend=", " property="custclass">custclass = #custclass#</isNotEmpty>
 						<isNotEmpty prepend=", " property="formatdoc">formatdoc = #formatdoc#</isNotEmpty>
 						<isNotEmpty prepend=", " property="countryzone">countryzone = #countryzone#</isNotEmpty>
+						<isNotEmpty prepend=", " property="saleOrganizationId">sale_organization_id = #saleOrganizationId#</isNotEmpty>
+						<isNotEmpty prepend=", " property="saleOrganizationName">sale_organization_name = #saleOrganizationName#</isNotEmpty>
 
 					</dynamic>
 		WHERE customer_id=#customerId#

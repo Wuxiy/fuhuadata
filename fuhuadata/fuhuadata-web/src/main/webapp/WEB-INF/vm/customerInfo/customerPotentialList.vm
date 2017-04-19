@@ -115,6 +115,7 @@
     click_node.serach = function(){
         serach();
     }
+    var cusType = ['潜在' ,'合作' ,'流失'];
     $(function(){
         //生成地区目录树
         $('#tree').creatTree('${request.contextPath}/customerBaseInfo/initAreaCategoryTree');
@@ -165,17 +166,17 @@
                         var customer = list[i];
                         _html += '<tr>';
                         _html += '	<td>' + customer.customerId + '</td>';
-                        _html += '  <td><a href="${request.contextPath}/customerBaseInfo/intoCustomerBaseInfoDetails?customerType=2&customerId='+customer.customerId+'&fullName='+customer.fullName+'" target="_blank">' + customer.fullName + '</a></td>';
-                        _html += '  <td>' + customer.shortName + '</td>';
-                        _html += '  <td lang="zh">' + customer.country + '</td>';
-                        _html += '  <td>' + customer.zhongxinbaoLevel + 'A</td>';
-                        _html += '  <td>' + customer.fullEnterpriseNature + '</td>';
-                        _html += '  <td lang="zh">' + customer.linkManName + '</td>';
-                        _html += '  <td lang="zh">' + customer.linkManEmail + '</td>';
-                        _html += '  <td lang="zh">' + customer.opportunityDescrible + '</td>';
-                        _html += '   <td lang="zh">' + (customer.customerStatus == 0 ? "流失" : "正常") + '</td>';
-                        _html += '   <td>' + customer.createUserName + '</td>';
-                        _html += '   <td>' + customer.createTime + '</td>';
+                        _html += '  <td><a href="${request.contextPath}/customerBaseInfo/intoCustomerBaseInfoDetails?customerType=2&customerId='+customer.customerId+'" target="_blank">' + customer.fullName + '</a></td>';
+                        _html += '  <td>' + (customer.shortName!=undefined?customer.shortName:'') + '</td>';
+                        _html += '  <td lang="zh">' + (customer.country!=undefined?customer.country:'') + '</td>';
+                        _html += '  <td>' + (customer.zhongxinbaoLevel!=undefined?customer.zhongxinbaoLevel:'') + 'A</td>';
+                        _html += '  <td>' + (customer.fullEnterpriseNature!=undefined?customer.fullEnterpriseNature:'') + '</td>';
+                        _html += '  <td lang="zh">' + (customer.linkManName!=undefined?customer.linkManName:'') + '</td>';
+                        _html += '  <td lang="zh">' + (customer.linkManEmail!=undefined?customer.linkManEmail:'') + '</td>';
+                        _html += '  <td lang="zh">' + (customer.opportunityDescrible!=undefined?customer.opportunityDescrible:'') + '</td>';
+                        _html += '   <td lang="zh">' + (customer.customerType!=undefined?cusType[customer.customerType-1]:'') + '</td>';
+                        _html += '   <td>' + (customer.createUserName!=undefined?customer.createUserName:'') + '</td>';
+                        _html += '   <td>' + (customer.createTime!=undefined?customer.createTime:'') + '</td>';
                         _html += '   </tr>';
                     }
                 }
