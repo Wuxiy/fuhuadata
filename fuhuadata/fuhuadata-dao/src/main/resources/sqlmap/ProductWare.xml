@@ -115,7 +115,8 @@
             w.customs_clearance_name customsClearanceName,
             w.specification,
             w.`model`,
-            p.measurement
+            p.measurement,
+            w.unit_use_rate  unitUseRate
         FROM
             product_ware w,
             product_info p

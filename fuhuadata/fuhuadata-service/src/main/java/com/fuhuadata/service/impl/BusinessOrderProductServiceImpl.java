@@ -283,6 +283,7 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
         if(taxFree == null){
             taxFree = new BigDecimal(1);
         }
+        taxFree = taxFree.divide(new BigDecimal(100));
         //其他费用
         BigDecimal otherCost = basic.getOtherCost();
         if(otherCost == null){
@@ -293,16 +294,19 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
         if (lossRate == null) {
             lossRate = new BigDecimal(0);
         }
+        lossRate = lossRate.divide(new BigDecimal(100));
         //保险费率
         BigDecimal premiumRate = order.getPremiumRate();
         if(premiumRate == null){
             premiumRate = new BigDecimal(0);
         }
+        premiumRate = premiumRate.divide(new BigDecimal(100));
         //信保费率
         BigDecimal guaranteeRate = order.getGuaranteeRate();
         if(guaranteeRate == null){
             guaranteeRate = new BigDecimal(0);
         }
+        guaranteeRate = guaranteeRate.divide(new BigDecimal(100));
         /**
          * Y= {X+【港杂费单价】+【佣金单价】+【海运费单价】+【资金利息单价】+
          * 【退税率】×【海运费单价】+【其他费用】}/（1-【汇损率】-【保险费率】-【信保费率】+【退税率】-【退税率】×【保险费率】）
@@ -351,6 +355,7 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
         if(taxFree == null){
             taxFree = new BigDecimal(1);
         }
+        taxFree = taxFree.divide(new BigDecimal(100));
         //其他费用
         BigDecimal otherCost = basic.getOtherCost();
         if(otherCost == null){
@@ -361,16 +366,19 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
         if (lossRate == null) {
             lossRate = new BigDecimal(0);
         }
+        lossRate = lossRate.divide(new BigDecimal(100));
         //保险费率
         BigDecimal premiumRate = order.getPremiumRate();
         if(premiumRate == null){
             premiumRate = new BigDecimal(0);
         }
+        premiumRate = premiumRate.divide(new BigDecimal(100));
         //信保费率
         BigDecimal guaranteeRate = order.getGuaranteeRate();
         if(guaranteeRate == null){
             guaranteeRate = new BigDecimal(0);
         }
+        guaranteeRate = guaranteeRate.divide(new BigDecimal(100));
         //采购退税计算率 【采购退税计算率】=1+【增值税税率】（根据根据报关产品名称从NC系统读取）
         //增值税税率
         BigDecimal zzssl = productInfoDao.getRisetaxes(basic.getWareId());
@@ -379,6 +387,7 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
             zzssl = new BigDecimal(0);
         }
         BigDecimal purchaseZZL = new BigDecimal(1).add(zzssl);
+        purchaseZZL = purchaseZZL.divide(new BigDecimal(100));
         /**
          *  Y={ X+【港杂费单价】+【佣金单价】+【海运费单价】+【资金利息单价】-
          * 【退税率】×X/【采购退税计算率】+【其他费用】}/(1-【汇损率】-【保险费率】-【信保费率】)
@@ -429,16 +438,19 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
         if (lossRate == null) {
             lossRate = new BigDecimal(0);
         }
+        lossRate = lossRate.divide(new BigDecimal(100));
         //保险费率
         BigDecimal premiumRate = order.getPremiumRate();
         if(premiumRate == null){
             premiumRate = new BigDecimal(0);
         }
+        premiumRate = premiumRate.divide(new BigDecimal(100));
         //信保费率
         BigDecimal guaranteeRate = order.getGuaranteeRate();
         if(guaranteeRate == null){
             guaranteeRate = new BigDecimal(0);
         }
+        guaranteeRate = guaranteeRate.divide(new BigDecimal(100));
         /**
          * * Y={ X+【港杂费单价】+【佣金单价】+【海运费单价】+【资金利息单价】+
          * 【其他费用】}/(1-【汇损率】-【保险费率】-【信保费率】)
@@ -499,11 +511,13 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
         if(interestRate==null){
             interestRate = new BigDecimal(1);
         }
+        interestRate = interestRate.divide(new BigDecimal(100));
         //资金利率
         BigDecimal discountRate = order.getDiscountRate();
         if(discountRate==null){
             discountRate = new BigDecimal(1);
         }
+        discountRate = discountRate.divide(new BigDecimal(100));
         //账期月数
         BigDecimal month = new BigDecimal(income.getPaymentday()).divide(new BigDecimal(30));
         //X×计息比率×资金利率×账期月数÷12
