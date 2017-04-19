@@ -31,7 +31,25 @@ public interface MenuMapper extends BaseMapper<Menu, Integer> {
      */
     List<Menu> listSelfAndNextSiblings(@Param("parentId") Integer parentId, @Param("weight") int weight);
 
+    /**
+     * 获取角色授权的菜单
+     * @param roleId
+     * @return
+     */
     List<Menu> listAuthorityMenus(@Param("roleId") Integer roleId);
 
+    /**
+     * 获取角色授权菜单ids
+     * @param roleId
+     * @return
+     */
+    List<Integer> listAuthorityMenuIds(@Param("roleId") Integer roleId);
+
+    /**
+     * 获取角色授权的菜单和按钮权限
+     * @param roleId
+     * @return
+     */
     List<Menu> listPermissionMenus(@Param("roleId") Integer roleId);
+
 }

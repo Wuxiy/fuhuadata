@@ -21,7 +21,7 @@
   <div class="jumbotron" style="background-color: rgba(255,255,255,0.5); margin-top: 50px;">
     <div class="container">
       <h3 lang="zh">登录</h3>
-      <form action="/login" method="post">
+      <form action="${rc.contextPath}/login" method="post">
           #if (${error})
               <div>$!{error}</div>
           #end

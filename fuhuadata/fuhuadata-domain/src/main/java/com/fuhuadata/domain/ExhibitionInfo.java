@@ -39,6 +39,8 @@ public class ExhibitionInfo{
 
     private String exhibitionLink;
 
+    private Integer creatorId;
+
     private String creator;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -156,5 +158,13 @@ public class ExhibitionInfo{
 
     public void setExhibitionInfo(String exhibitionInfo) {
         this.exhibitionInfo = exhibitionInfo;
+    }
+
+    public Integer getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(Integer creatorId) {
+        this.creatorId = creatorId;
     }
 }

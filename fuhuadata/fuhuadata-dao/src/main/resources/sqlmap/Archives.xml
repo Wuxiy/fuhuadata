@@ -26,6 +26,13 @@
         <result column="isinclufare" property="isinclufare" jdbcType="TINYINT" />
         <result column="isincluprem" property="isincluprem" jdbcType="TINYINT" />
     </resultMap>
+
+    <resultMap id="PORTDOC-MAP" class="com.fuhuadata.vo.DataArchive.Portdoc" >
+        <result column="pk_portdoc" property="pkPortdoc" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="vname" property="vname" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="venname" property="venname" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="vcode" property="vcode" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    </resultMap>
     
     
     <select id="GET-CURRTYPE" resultMap="CURRTYPE-MAP">
@@ -40,7 +47,17 @@
         select * FROM  t_incoterm
     </select>
 
-    
-    
+    <select id="GET-PORTDOC" resultMap="PORTDOC-MAP" parameterClass="com.fuhuadata.vo.DataArchive.Portdoc">
+        select * FROM  t_portdoc
+        <dynamic prepend=" WHERE ">
+            <isNotEmpty prepend=" AND " property="vname">
+                vname like concat('%',#vname#,'%')
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="venname">
+                venname like concat('%',#venname#,'%')
+            </isNotEmpty>
+        </dynamic>
+    </select>
+
 
 </sqlMap>

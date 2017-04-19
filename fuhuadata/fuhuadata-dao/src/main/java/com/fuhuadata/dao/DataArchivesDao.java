@@ -3,7 +3,9 @@ package com.fuhuadata.dao;
 import com.fuhuadata.vo.DataArchive.Currtype;
 import com.fuhuadata.vo.DataArchive.Income;
 import com.fuhuadata.vo.DataArchive.Incoterm;
+import com.fuhuadata.vo.DataArchive.Portdoc;
 
+import javax.sound.sampled.Port;
 import java.util.List;
 
 /**
@@ -28,4 +30,10 @@ public interface DataArchivesDao {
      * @return
      */
     public List<Incoterm> getIncoterm();
+
+    /**
+     *  港口档案
+     * @return
+     */
+    public List<Portdoc> getPortdoc(Portdoc portdoc);
 }

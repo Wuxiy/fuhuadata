@@ -1,6 +1,5 @@
 package com.fuhuadata.web.springmvc;
 
-import com.fuhuadata.domain.BusinessInfo;
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
 import com.fuhuadata.domain.query.Result;
@@ -213,12 +212,6 @@ public class BusinessOrderAction {
     @SystemLogAnnotation(module = "salesStatistics",methods = "intoOfferorOrder")
     public ModelAndView intoOfferorOrder(String orderId,String businessId) {
         return new ModelAndView("salesStatistics/offerInfo").addObject("orderId", orderId).addObject("businessId", businessId);
-    }
-
-    @RequestMapping("/intoOffer")
-    @SystemLogAnnotation(module = "salesStatistics",methods = "intoOffer")
-    public ModelAndView intoOffer(String orderId){
-        return new ModelAndView("salesStatistics/offerInfo").addObject("orderId",orderId);
     }
 
     /**

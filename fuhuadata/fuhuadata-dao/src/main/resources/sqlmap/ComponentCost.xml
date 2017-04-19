@@ -94,6 +94,8 @@
         <dynamic prepend=" SET ">
             <isNotNull prepend=", " property="unitCost">unit_cost = #unitCost#</isNotNull>
             <isNotNull prepend=", " property="priceEnd">price_end = #priceEnd#</isNotNull>
+            <isNotEmpty prepend=", " property="remarks">remarks = #remarks#</isNotEmpty>
+            <isNotEmpty prepend=", " property="unitCost">unit_cost = #unitCost#</isNotEmpty>
         </dynamic>
         WHERE component_id = #componentId#
     </update>

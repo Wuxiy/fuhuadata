@@ -2,13 +2,17 @@ package com.fuhuadata.service.impl.mybatis;
 
 import com.fuhuadata.dao.mapper.RoleAuthorityMapper;
 import com.fuhuadata.domain.mybatis.RoleAuthority;
+import com.fuhuadata.service.mybatis.MenuService;
 import com.fuhuadata.service.mybatis.RoleAuthorityService;
 import com.fuhuadata.service.util.LoginUtils;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -19,21 +23,42 @@ import java.util.List;
 public class RoleAuthorityServiceImpl extends BaseServiceImpl<RoleAuthority, Integer>
         implements RoleAuthorityService {
 
+    private MenuService menuService;
+
+    @Autowired
+    public void setMenuService(MenuService menuService) {
+        this.menuService = menuService;
+    }
+
+    private RoleAuthorityMapper getRoleAuthMapper() {
+        return (RoleAuthorityMapper) baseMapper;
+    }
+
     @Override
     public void saveAuthOfRole(Integer roleId, List<RoleAuthority> auths) {
         if (roleId == null) {
             throw new IllegalArgumentException("roleId 不能为空");
         }
 
+        HashSet<Integer> menuIds = Sets.newHashSet(menuService.listAuthorityMenuIds(roleId));
+        List<Integer> retainMenuIds = Lists.newArrayList();
+        List<RoleAuthority> authorities = Lists.newArrayList();
+
         for (RoleAuthority authority : auths) {
+            if (menuIds.contains(authority.getResourceId())) {// 如果已存在，则不修改
+                retainMenuIds.add(authority.getResourceId());
+                continue;
+            }
+
             authority.setRoleId(roleId);
             authority.setAuthUserId(LoginUtils.getLoginId());
             authority.setAuthUserName(LoginUtils.getLoginName());
             authority.setAuthTime(new Date());
+            authorities.add(authority);
         }
 
-        deleteAuthOfRole(roleId);
-        saveList(auths);
+        getRoleAuthMapper().deleteMenusByRoleId(roleId, retainMenuIds);
+        saveList(authorities);
     }
 
     @Override
@@ -68,10 +93,6 @@ public class RoleAuthorityServiceImpl extends BaseServiceImpl<RoleAuthority, Int
         }
 
         updateBatchSelective(authsForUpdate);
-    }
-
-    private RoleAuthorityMapper getRoleAuthMapper() {
-        return (RoleAuthorityMapper) baseMapper;
     }
 
 }

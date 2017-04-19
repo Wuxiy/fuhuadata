@@ -74,7 +74,10 @@ public abstract class BaseServiceImpl<E extends BaseEntity<ID>, ID extends Seria
     }
 
     public int saveList(List<E> entices) {
-        return baseMapper.insertList(entices);
+        if (entices.size() > 0) {
+            return baseMapper.insertList(entices);
+        }
+        return 0;
     }
 
     public List<ID> saveBatch(List<E> entices) {

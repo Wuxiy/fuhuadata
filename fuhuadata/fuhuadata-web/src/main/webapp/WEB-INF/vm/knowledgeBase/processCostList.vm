@@ -131,9 +131,11 @@
                     <!--港杂费参考表开始-->
                     <div class="panel panel-default">
                         <div class="panel-heading">
+                            #if ($shiro.hasPermission("wiki:proc:hok:edit"))
                             <button id="edit" data-form-btn="edit" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
                             编辑
                             </button>
+                            #end
                             <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden">
                                 <button id="cancel" data-form-btn="cancel" class="btn" lang="zh">取消</button>
                                 <button id="save" data-form-btn="save" class="btn btn-primary" lang="zh">保存</button>
@@ -155,7 +157,7 @@
                             </table>
                         </div>
                     </div>
-                    <!--港杂费参考表结束-->
+                    <!--参考表结束-->
             </div>
             <div id="rate" class="tab-pane fade">
                     <!--费率表开始-->
@@ -497,7 +499,7 @@
                 data:JSON.stringify(data),
                 success:function(result){
                     alert('添加成功');
-
+                    $('#costAddmodal').modal('hide');
                 }
             })
         }

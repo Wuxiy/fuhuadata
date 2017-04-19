@@ -94,7 +94,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 
     /**
      * map构造tree
-     * @param list
+     * @param list,fourNode 为 0 获取三级目录 , 1 为获取三层目录
      * @return
      */
     public List<CategoryTree> getAllNodes(List<ProductCategoryVO> list,int fourNode){

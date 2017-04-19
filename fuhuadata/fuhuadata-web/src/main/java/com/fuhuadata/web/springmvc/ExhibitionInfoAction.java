@@ -69,9 +69,6 @@ public class    ExhibitionInfoAction {
         Result<List<ExhibitionInfo>> result = new Result<List<ExhibitionInfo>>();
         try{
             exhibitionInfoQuery.setPageSize(pageSize);
-            //out
-            System.out.println(index);
-            System.out.println(exhibitionName);
             if(index==null){
                 exhibitionInfoQuery.setIndex(Integer.valueOf(page.trim()));
             }else{
@@ -98,6 +95,8 @@ public class    ExhibitionInfoAction {
     @ResponseBody
     public ResultPojo doAddExhibitionInfo(@RequestBody ExhibitionInfo exhibitionInfo){
         try{
+            exhibitionInfo.setCreatorId(0);
+            exhibitionInfo.setCreator("杨洋");
             Result<ExhibitionInfo> result = exhibitionInfoService.addExhibitionInfo(exhibitionInfo);
             return result.getResultPojo();
         }catch (Exception e){
@@ -118,19 +117,20 @@ public class    ExhibitionInfoAction {
         }
         return null;
     }
-
     @RequestMapping(value = "/modifyExhibitionInfo",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods="update")
     public ModelAndView modifyExhibitonInfo(int id){
+        Result<ExhibitionInfo> result = new Result<ExhibitionInfo>();
         try{
-            Result<ExhibitionInfo> result = new Result<ExhibitionInfo>();
+            result = exhibitionInfoService.getExhibitionInfoById(id);
         }catch (Exception e){
-            log.error("获取展会信息失败",e);
+            result.setSuccess(false);
+            log.error("根据id获取展会详情错误");
         }
-        return new ModelAndView("knowledgeBase/exhibitionInfoUpdate");
+        return new ModelAndView("knowledgeBase/exhibitionInfo").addObject("exhibition",result.getModel());
     }
 
-    @RequestMapping(value = "/doModifyExhibitionInfo.do",method =RequestMethod.GET)
+    @RequestMapping(value = "/doModifyExhibitionInfo",method =RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "doUpdate")
     @ResponseBody
     public ResultPojo doModifyExhibitionInfo(@RequestBody ExhibitionInfo exhibitionInfo){
