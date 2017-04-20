@@ -24,7 +24,7 @@ public abstract class Trees<T extends BaseTreeVo<ID>,
 
     private Map<ID, T> lookup = Maps.newHashMap();
 
-    private TreeRoot<T, ID> parentable;
+    private TreeRoot<T, ID> rootable;
 
     {
         voClass = ReflectUtils.findParameterizedType(getClass(), 0);
@@ -37,21 +37,21 @@ public abstract class Trees<T extends BaseTreeVo<ID>,
     public Trees(List<E> flatItems, HashSet<ID> parentIds) {
         this.flatItems = flatItems;
         this.lookup = Maps.newHashMap();
-        this.parentable = new ContainsRoot<T, ID>(parentIds);
+        this.rootable = new ContainsRoot<T, ID>(parentIds);
     }
 
     public Trees(List<E> flatItems, Map<ID, T> lookup) {
         this.flatItems = flatItems;
         this.lookup = lookup;
-        this.parentable = new NodeRoot<T, ID>();
+        this.rootable = new NodeRoot<T, ID>();
     }
 
     public Map<ID, T> getLookup() {
         return lookup;
     }
 
-    public void setParentable(TreeRoot<T, ID> parentable) {
-        this.parentable = parentable;
+    public void setRootable(TreeRoot<T, ID> rootable) {
+        this.rootable = rootable;
     }
 
     /**
@@ -101,7 +101,7 @@ public abstract class Trees<T extends BaseTreeVo<ID>,
     }
 
     protected boolean isParent(T node) {
-        return parentable.isRoot(node);
+        return rootable.isRoot(node);
     }
 
     private T newVoInstance() {

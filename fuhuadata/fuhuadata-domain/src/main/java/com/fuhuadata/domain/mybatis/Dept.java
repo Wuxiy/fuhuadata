@@ -100,7 +100,6 @@ public class Dept extends BaseEntity<Integer> implements Treeable<String> {
         if (StringUtils.isNotBlank(getPkFatherorg()) && getPkFatherorg().length() > 10) {
             return getPkFatherorg();
         }
-        System.out.println("部门[" + getPkDept() + "]使用组织[" + getPkOrg() + "]作为上级节点");
         return getPkOrg();
     }
 

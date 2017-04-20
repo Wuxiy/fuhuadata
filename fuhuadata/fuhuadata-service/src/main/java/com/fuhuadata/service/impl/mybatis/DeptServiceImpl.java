@@ -2,17 +2,23 @@ package com.fuhuadata.service.impl.mybatis;
 
 import com.fuhuadata.constant.NodeType;
 import com.fuhuadata.domain.mybatis.Dept;
+import com.fuhuadata.domain.mybatis.Organization;
+import com.fuhuadata.domain.plugin.TreeRoot;
 import com.fuhuadata.service.mybatis.DeptService;
 import com.fuhuadata.service.mybatis.OrganizationService;
 import com.fuhuadata.service.util.UserTreeCache;
 import com.fuhuadata.vo.MixNodeVO;
+import com.google.common.base.Function;
+import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.PostConstruct;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -37,10 +43,15 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept, Integer> implements D
         List<MixNodeVO> orgs = orgService.listOrgNodes();
         orgs.addAll(listDeptNodes());
 
-        return convertToTree(orgs);
+        return convertToTree(orgs, new TreeRoot<MixNodeVO, String>() {
+            @Override
+            public boolean isRoot(MixNodeVO node) {
+                return isOrgRoot(node);
+            }
+        });
     }
 
-    private List<MixNodeVO> convertToTree(List<MixNodeVO> flatNodes) {
+    private List<MixNodeVO> convertToTree(List<MixNodeVO> flatNodes, TreeRoot<MixNodeVO, String> rootable) {
         List<MixNodeVO> roots = Lists.newArrayList();
         Map<String, MixNodeVO> lookup = Maps.newHashMap();
 
@@ -62,7 +73,7 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept, Integer> implements D
             }
 
             String pid = node.getPid();
-            if (isRoot(node)) {
+            if (rootable.isRoot(node)) {
                 roots.add(node);
             } else {
                 MixNodeVO parent = lookup.get(pid);
@@ -79,7 +90,7 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept, Integer> implements D
     }
 
     // 上级节点为0则为根节点
-    private boolean isRoot(MixNodeVO nodeVO) {
+    private boolean isOrgRoot(MixNodeVO nodeVO) {
         return StringUtils.isNotBlank(nodeVO.getPid()) && nodeVO.getPid().equals("0");
     }
 
@@ -97,6 +108,49 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept, Integer> implements D
         }
 
         return nodes;
+    }
+
+    @Override
+    public List<MixNodeVO> getDeptTree(Integer orgId) {
+
+        final Organization org = orgService.get(orgId);
+        List<Dept> depts = listDepts(org.getNcId());
+
+        List<MixNodeVO> nodes = Lists.transform(depts, new Function<Dept, MixNodeVO>() {
+            @Override
+            public MixNodeVO apply(Dept input) {
+                return convertToNode(input);
+            }
+        });
+
+        return convertToTree(nodes, new TreeRoot<MixNodeVO, String>() {
+            @Override
+            public boolean isRoot(MixNodeVO node) {
+                return Objects.equal(node.getPid(), org.getNcId());
+            }
+        });
+    }
+
+    @Override
+    public List<Dept> listDepts(String pkOrg) {
+        if (StringUtils.isBlank(pkOrg)) {
+            return Collections.emptyList();
+        }
+
+        Example example = new Example(Dept.class);
+        example.createCriteria().andEqualTo("pkOrg", pkOrg);
+        return listByExample(example);
+    }
+
+    @Override
+    public List<Dept> listDepts(Integer orgId) {
+        Organization org = orgService.get(orgId);
+
+        if (org == null) {
+            return Collections.emptyList();
+        }
+
+        return listDepts(org.getNcId());
     }
 
     private MixNodeVO convertToNode(Dept dept) {

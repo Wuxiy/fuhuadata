@@ -23,4 +23,12 @@ public interface OrganizationService extends BaseTreeableService<Organization, I
      * @return
      */
     List<MixNodeVO> listOrgNodes();
+
+    /**
+     * 获取所有组织
+     * @return
+     */
+    List<Organization> listOrgs();
+
+    Organization getByCode(String ncId);
 }

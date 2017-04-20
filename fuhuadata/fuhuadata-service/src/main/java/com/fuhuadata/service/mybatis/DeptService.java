@@ -22,4 +22,25 @@ public interface DeptService extends BaseService<Dept, Integer> {
      * @return
      */
     List<MixNodeVO> listDeptNodes();
+
+    /**
+     * 获取组织下的部门树
+     * @param orgId
+     * @return
+     */
+    List<MixNodeVO> getDeptTree(Integer orgId);
+
+    /**
+     * 根据组织 ncid 获取部门集合
+     * @param pkOrg
+     * @return
+     */
+    List<Dept> listDepts(String pkOrg);
+
+    /**
+     * 根据组织 id 获取部门集合
+     * @param orgId
+     * @return
+     */
+    List<Dept> listDepts(Integer orgId);
 }
