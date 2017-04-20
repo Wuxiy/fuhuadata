@@ -37,7 +37,7 @@
                                             <div class="input-group">
                                                 <input id="name" class="form-control notnull" value="" disabled>
                                                 <div class="input-group-btn">
-                                                    <button data-toggle="modal" data-target="#treeModal" class="btn btn-xs btn-default" disabled>
+                                                    <button name="search" data-toggle="modal" data-target="#treeModal" class="btn btn-xs btn-default" disabled>
                                                         <span class="glyphicon glyphicon-search"></span>
                                                     </button>
                                                 </div>
@@ -387,7 +387,7 @@
     } else{
         $('#resert').removeClass('hidden');
         $('#next').removeClass('hidden');
-
+        $('button[name="search"]').attr('disabled',false);
         $('[data-target="on"]').removeClass('disabled');
     }
 
