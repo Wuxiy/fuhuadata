@@ -48,7 +48,7 @@
                                             <td class="text-danger">产品总价</td>
                                             <td></td>
                                             <td></td>
-                                            <td id="totalPrice"></td>
+                                            <td class="text-danger" id="totalPrice"></td>
                                         </tr>
                                         </tfoot>
                                     </table>
