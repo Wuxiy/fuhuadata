@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="BUSINESSORDERTONC">
+    <typeAlias alias="BusinessOrder" type="com.fuhuadata.domain.BusinessOrder"/>
+
+    <update id="UPDATE-STATUS-BY-NCORDERID" parameterClass="java.util.HashMap">
+        update business_order
+        <dynamic prepend="set">
+            <isNotNull prepend="," property="status">
+                status=#status#
+            </isNotNull>
+            where nc_order_id=#ncOrderId#
+        </dynamic>
+    </update>
+
+</sqlMap>

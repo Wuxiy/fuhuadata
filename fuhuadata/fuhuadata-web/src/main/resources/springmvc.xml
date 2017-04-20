@@ -21,7 +21,7 @@
      <mvc:default-servlet-handler/>-->
 
     <!-- 使AspectJ注解起作用：自动为匹配的类生成代理对象 -->
-    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <aop:aspectj-autoproxy expose-proxy="true" proxy-target-class="true"/>
     <bean id="systemLogAspect" class="com.fuhuadata.web.util.SystemLogAspect"/>
 
     <!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->

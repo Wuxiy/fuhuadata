@@ -164,4 +164,5 @@
 	<bean id="businessOrderDao" class="com.fuhuadata.dao.impl.BusinessOrderDaoImpl"/>
 	<bean id="contractDao" class="com.fuhuadata.dao.impl.ContractDaoImpl"/>
 	<bean id="dataArchivesDao" class="com.fuhuadata.dao.impl.DataArchivesDaoImpl"/>
+	<bean id="orderToNc" class="com.fuhuadata.dao.impl.NCExchange.OrderToNcImpl"/>
 </beans>
