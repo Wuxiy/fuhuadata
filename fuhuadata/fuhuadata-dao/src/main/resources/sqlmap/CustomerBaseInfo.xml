@@ -59,6 +59,8 @@
 					<result property="linkManName" column="link_man_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="linkManEmail" column="link_man_email" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="otherEnterpriseNature" column="other_enterprise_nature" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="customerDutyParagraph" column="customer_duty_paragraph" jdbcType="VARCHAR" javaType="java.lang.String" />
+
 	</resultMap>
 	
 	<resultMap id="CUSTOMERENTERPRICENATURE-MAP" class="CustomerEnterpriceNature">
@@ -138,6 +140,10 @@
 			<isNotEmpty prepend=" AND " property="opportunityDescrible">
 				opportunity_describle like  '%opportunityDescrible%'
 			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="customerDutyParagraph">
+				customer_duty_paragraph = #customerDutyParagraph#
+			</isNotEmpty>
+
 				</dynamic>
 	</sql>
 
@@ -152,6 +158,9 @@
 			</isNotEmpty>
 			<isNotEmpty prepend=" AND " property="saleOrganizationId">
 				sale_organization_id = #saleOrganizationId#
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="customerDutyParagraph">
+				customer_duty_paragraph = #customerDutyParagraph#
 			</isNotEmpty>
 				<isNotEmpty prepend=" AND " property="fullName">
 			full_name like concat('%',#fullName#,'%')
@@ -246,7 +255,7 @@
 		price_sensitivity, loyalty, start_cooperation_time,
 		cooperation_duration, purchasing_season,
 		active_period, is_fuhua_exclusive, cooperation_remark,
-		production_line,timezone,custclass,formatdoc,countryzone,sale_organization_id,sale_organization_name)
+		production_line,timezone,custclass,formatdoc,countryzone,sale_organization_id,sale_organization_name,customer_duty_paragraph)
 		values (#ncId#, #fullName#,
 		#shortName#, #companyType#, #areaId#,
 		#area#, #countryId#, #country#,
@@ -263,7 +272,8 @@
 		#priceSensitivity#, #loyalty#, #startCooperationTime#,
 		#cooperationDuration#, #purchasingSeason#,
 		#activePeriod#, #isFuhuaExclusive#, #cooperationRemark#,
-		#productionLine#,#timezone#,#custclass#,#formatdoc#,#countryzone#,#saleOrganizationId#,#saleOrganizationName#)
+		#productionLine#,#timezone#,#custclass#,#formatdoc#,#countryzone#,#saleOrganizationId#,#saleOrganizationName#,
+		#customerDutyParagraph#)
 		<selectKey resultClass="java.lang.String" keyProperty="customerId">
 			SELECT @@IDENTITY AS ID
 		</selectKey>
@@ -273,6 +283,7 @@
 		UPDATE customer_base_info
 		<dynamic prepend=" SET ">
 						<isNotEmpty prepend=", " property="fullName">full_name=#fullName#</isNotEmpty>
+						<isNotEmpty prepend=", " property="customerDutyParagraph">customer_duty_paragraph=#customerDutyParagraph#</isNotEmpty>
 						<isNotEmpty prepend=", " property="shortName">short_name=#shortName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="areaId">customer_area_id=#areaId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="area">customer_area=#area#</isNotEmpty>

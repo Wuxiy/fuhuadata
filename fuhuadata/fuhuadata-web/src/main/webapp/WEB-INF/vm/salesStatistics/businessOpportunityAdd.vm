@@ -19,11 +19,11 @@
                             <div class="form-group ">
                                 <label class="col-xs-1 control-label" lang="zh">商机编号</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" type="text" value="${businessId}" id="businessId" />
+                                    <input class="form-control" type="text" value="${businessId}" id="businessId" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">商机名称<sup class="not-null">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input class="form-control notnull" type="text" value="" id="businessName" />
+                                    <input class="form-control notnull" type="text" value="" id="businessId"/>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">商机来源<sup class="not-null">*</sup></label>
                                 <div class="col-xs-2">
@@ -42,7 +42,7 @@
                                 <label class="col-xs-1 control-label" lang="zh">客户名称<sup class="not-null">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input class="form-control notnull" type="text" value="" id="customerName" />
+                                        <input class="form-control notnull" type="text" value="" id="customerName" disabled/>
                                         <div class="input-group-btn">
                                             <button class="btn btn-xs btn-default" type="button" id="customerModal">
                                                 <span class="glyphicon glyphicon-search"></span>
@@ -52,7 +52,7 @@
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">客户类型</label>
                                 <div class="col-xs-2">
-                                    <select class="form-control" id="customerLevel">
+                                    <select class="form-control" id="customerLevel" disabled>
                                         <option value="" lang="zh">潜在客户</option>
                                         <option value="5" lang="zh">风险客户</option>
                                         <option value="4" lang="zh">一般客户</option>
@@ -63,30 +63,31 @@
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">信用评级</label>
                                 <div class="col-xs-2">
-                                    <select class="form-control" id="zhongxinbaoLevel">
-                                        <option value="" selected lang="zh">AAAA</option>
-                                        <option value="" lang="zh">AAA</option>
-                                        <option value="" lang="zh">AA</option>
-                                        <option value="" lang="zh">A</option>
+                                    <select class="form-control" id="zhongxinbaoLevel" disabled>
+                                        <option value="4" lang="zh">AAAA</option>
+                                        <option value="3" lang="zh">AAA</option>
+                                        <option value="2" lang="zh">AA</option>
+                                        <option value="1" lang="zh">A</option>
+                                        <option lang="zh" selected>未知</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-xs-1 control-label" lang="zh">客户国别</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" type="text" value="" id="country" />
+                                    <input class="form-control" type="text" value="" id="country" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">联系人</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" type="text" value="" id="linkmanName" />
+                                    <input class="form-control" type="text" value="" id="linkmanName" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">联系电话</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" type="text" value="" id="linkPhone1" />
+                                    <input class="form-control" type="text" value="" id="linkPhone1" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">邮箱</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" type="email" value="" id="lemail" />
+                                    <input class="form-control" type="email" value="" id="lemail" disabled/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -125,7 +126,7 @@
                             <div class="form-group">
                                 <label class="col-xs-1 control-label" lang="zh">商机状态</label>
                                 <div class="col-xs-2">
-                                    <select class="form-control" id="businessState">
+                                    <select class="form-control" id="businessState" disabled>
                                         <option value="0" lang="zh" selected>待报价</option>
                                         <option value="1" lang="zh">失败</option>
                                         <option value="2" lang="zh">已转化</option>
@@ -246,6 +247,7 @@
                     $('#linkmanName').val(ResultData.linkmanName);
                     $('#linkPhone1').val(ResultData.linkPhone1);
                     $('#lemail').val(ResultData.lemail);
+                    $('#zhongxinbaoLevel').val(ResultData.zhongxinbaoLevel);
 
                     $('#Modal').modal('hide');
                 }
@@ -269,8 +271,7 @@
         });
         if(submit_permit){
             var data = {
-                "bussinessId":$('#businessId').val(),
-                "bussinessName":$('#bussinessName').val(),
+                "businessName":$('#businessName').val(),
                 "businessId":$('#businessId').val(),
                 "businessFrom":$('#businessFrom').val(),
                 "businessState":$('#businessState').val(),

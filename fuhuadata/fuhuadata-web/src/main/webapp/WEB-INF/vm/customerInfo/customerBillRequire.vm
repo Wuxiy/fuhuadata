@@ -25,7 +25,7 @@
                         <table class="table table-condensed table-bordered table-striped text-right">
                             <tbody>
                             <tr>
-                                <td class="col-xs-4" lang="zh"><label for="">出具海运提单</label></td>
+                                <td class="col-xs-4" lang="zh">出具海运提单</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
                                         <label><input id="oceanBillOfLading" disabled type="checkbox" value="1"/></label>

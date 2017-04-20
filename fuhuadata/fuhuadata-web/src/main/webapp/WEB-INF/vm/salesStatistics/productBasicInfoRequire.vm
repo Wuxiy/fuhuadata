@@ -10,9 +10,14 @@
                 <!--基本信息-->
                 <div id="basicInfo" class="panel panel-default view-HD-lg">
                     <div class="panel-heading">
-                        <button id="edit" data-btn="edit" data-view="editHide" class="btn btn-xs btn-primary panel-heading-btn pull-right hidden" type="button" lang="zh">
+                        <div class="btn-group panel-heading-btn pull-right">
+                            <a class="btn btn-xs btn-default" data-view="editHide" id="back">返回</a>
+                            <button id="edit" data-btn="edit" data-view="editHide" class="btn btn-xs btn-primary panel-heading-btn pull-right hidden" type="button" lang="zh">
                             编辑
-                        </button>
+                            </button>
+
+                        </div>
+
                         <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right">
                             <button id="cancel" data-btn="cancel" data-view="editView" class="btn btn-default hidden" type="button" lang="zh">取消</button>
                             <button id="save" data-btn="save" data-view="editView" class="btn btn-primary hidden" type="button" lang="zh">保存</button>
@@ -77,15 +82,15 @@
                                                 <sup class="not-null">*</sup>
                                             </label>
                                         </td>
-                                        <td><input data-control="on" id="mainProductAmount" class="form-control notnull" type="text" value="" disabled/></td>
+                                        <td><input data-control="on" id="mainProductAmount" class="form-control notnull isdisabled" type="text" value="" disabled/></td>
                                         <td></td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td><label class="control-label" lang="zh">单位</label></td>
-                                        <td><select data-control="on" id="subProductUnit" class="form-control" disabled><option value="0">KG</option><option value="1">瓶</option><option value="2">袋</option></select></td>
+                                        <td><select data-control="on" id="subProductUnit" class="form-control isdisabled" disabled><option value="0">KG</option><option value="1">瓶</option><option value="2">袋</option></select></td>
                                         <td><label class="control-label" lang="zh">数量</label></td>
-                                        <td><input data-control="on" id="subProductAmount" class="form-control" type="text" value="" disabled/></td>
+                                        <td><input data-control="on" id="subProductAmount" class="form-control isdisabled" type="text" value="" disabled/></td>
                                         <td><label class="control-label" lang="zh">换算率（主数量/数量）</label></td>
                                         <td><input id="convertRate" class="form-control" type="text" value="" disabled/></td>
                                     </tr>
@@ -97,7 +102,7 @@
                                             </label>
                                         </td>
                                         <td>
-                                            <select data-control="on" id="priceType" class="form-control notnull" disabled>
+                                            <select data-control="on" id="priceType" class="form-control notnull isdisabled" disabled>
                                                 <option value="0" selected>自产类</option>
                                                 <option value="1">原药自产制剂加工类</option>
                                                 <option value="2">原药采购制剂加工类</option>
@@ -119,7 +124,7 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input data-control="on" id="advisePrice" class="form-control notnull" value="" disabled>
+                                                <input data-control="on" id="advisePrice" class="form-control notnull isdisabled" value="" disabled>
                                                 <span class="input-group-addon">元</span>
                                             </div>
                                         </td>
@@ -131,12 +136,12 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input data-control="on" id="purchasePrice" class="form-control notnull" value="" disabled>
+                                                <input data-control="on" id="purchasePrice" class="form-control notnull" value="0" disabled>
                                                 <span class="input-group-addon">元</span>
                                             </div>
                                         </td>
                                         <td><label class="control-label" lang="zh">交货时间</label></td>
-                                        <td><input data-control="on" id="deliveryTime" class="form-control" type="date" value="" disabled/></td>
+                                        <td><input data-control="on" id="deliveryTime" class="form-control isdisabled" type="datetime-local" value="" disabled/></td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -147,9 +152,9 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input data-control="on" id="factoryName" class="form-control notnull" value="" disabled>
+                                                <input data-control="on" id="factoryName" class="form-control notnull " value="" disabled>
                                                 <div class="input-group-btn">
-                                                    <button data-control="on" class="btn btn-xs btn-default" id="factory" disabled>
+                                                    <button data-control="on" class="btn btn-xs btn-default isdisabled" id="factory" disabled>
                                                         <span class="glyphicon glyphicon-search"></span>
                                                     </button>
                                                 </div>
@@ -163,7 +168,7 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input data-control="on" id="capitalInterestPrice" class="form-control typechange" value="" disabled>
+                                                <input data-control="on" id="capitalInterestPrice" class="form-control typechange isdisabled" value="" disabled>
                                                 <span class="input-group-addon">%</span>
                                             </div>
                                         </td>
@@ -175,21 +180,21 @@
                                         </td>
                                         <td class="hidden">
                                             <div class="input-group">
-                                                <input data-control="on" id="grossMargin" class="form-control typechange" value="" disabled>
+                                                <input data-control="on" id="grossMargin" class="form-control typechange isdisabled" value="" disabled>
                                                 <span class="input-group-addon">%</span>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td><label class="control-label" lang="zh">佣金单价</label></td>
-                                        <td><input data-control="on" id="commissionPrice" class="form-control" type="text" value="" disabled/></td>
+                                        <td><input data-control="on" id="commissionPrice" class="form-control isdisabled" type="text" value="" disabled/></td>
                                         <td><label class="control-label" lang="zh">单位耗用比例</label></td>
-                                        <td><input data-control="on" id="unitUseRate" class="form-control" type="text" value="" disabled/></td>
+                                        <td><input data-control="on" id="unitUseRate" class="form-control isdisabled" type="text" value="" disabled/></td>
                                     </tr>
                                     <tr>
                                         <td><label class="control-label" lang="zh">出口退税方式</label></td>
                                         <td>
-                                            <select data-control="on" id="taxType" class="form-control" disabled>
+                                            <select data-control="on" id="taxType" class="form-control isdisabled" disabled>
                                                 <option value="0">按销售价退税</option>
                                                 <option value="1">按采购价退税</option>
                                                 <option value="2">不退税</option>
@@ -203,12 +208,12 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input data-control="on" id="taxFree" class="form-control notnull" value="" disabled>
+                                                <input data-control="on" id="taxFree" class="form-control notnull isdisabled" value="" disabled>
                                                 <span class="input-group-addon">%</span>
                                             </div>
                                         </td>
                                         <td><label class="control-label" lang="zh">其他费用单价</label></td>
-                                        <td><input data-control="on" id="otherCost" class="form-control" type="text" value="" disabled/></td>
+                                        <td><input data-control="on" id="otherCost" class="form-control isdisabled" type="text" value="" disabled/></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -216,6 +221,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!--加工成分-->
                 <div id="cost" class="panel panel-default view-HD-lg">
                     <div class="panel-heading">
@@ -233,21 +239,20 @@
                             </tr>
                             </thead>
                             <tbody id="costtable">
-                                <tr>
+                                #*<tr>
                                     <td>草甘膦94%以上原粉（95%）</td>
                                     <td><input class="form-control" type="text" value="385.00"></td>
                                     <td><input class="form-control" type="text" value="80.00"></td>
                                     <td>38,500</td>
                                     <td><input class="form-control" type="text"></td>
-                                </tr>
+                                </tr>*#
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-            <div class="col-xs-1 col-xs-offset-2"><a class="btn btn-block btn-default hidden" type="button" id="back">返回</a></div>
-            <div class="col-xs-1 col-xs-offset-1"><a class="btn btn-block btn-default hidden" type="button" id="resert">重置取消</a></div>
-            <div class="col-xs-1 col-xs-offset-1"><a class="btn btn-block btn-primary hidden" type="button" id="next">下一步</a></div>
+            <div class="col-xs-2 col-xs-offset-2"><a class="btn btn-block btn-default hidden" type="button" id="resert">重置取消</a></div>
+            <div class="col-xs-2 col-xs-offset-1"><a class="btn btn-block btn-primary hidden" type="button" id="next">下一步</a></div>
         </div>
     </div>
 </div>
@@ -292,7 +297,6 @@
 <input id="orderId" type="hidden" value="$!{orderId}">
 <input id="customerId" type="hidden" value="$!{customerId}">
 <input id="productRequireId" type="hidden" value="$!{productRequireId}">
-<input id="wareId" type="hidden" value="">
 
 <script type="text/javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
@@ -302,7 +306,8 @@
     var orderId = $('#orderId').val();
     var businessProductId = $('#businessProductId').val();
     var productRequireId = $('#productRequireId').val();
-    console.log(orderId);
+    var customerId = $('$customerId').val();
+
     var productId = '';
     var wareId = '';
     var costtable = document.getElementById('costtable');
@@ -315,7 +320,6 @@
 
     //若为查看产品要求详情businessProductId
     if(businessProductId!=''){
-        $('#back').removeClass('hidden');
         $('#edit').removeClass('hidden');
 
         jQuery.ajax({
@@ -389,6 +393,7 @@
         $('#next').removeClass('hidden');
         $('button[name="search"]').attr('disabled',false);
         $('[data-target="on"]').removeClass('disabled');
+        $('.isdisabled').attr('disabled',false);
     }
 
     //渲染树和提交
@@ -408,16 +413,16 @@
                     return false;
                 }
             });
-            if(isup&&id==''){
+            if(isup){
                 jQuery.ajax({
                     url:basePath + '/businessProduct/saveBaseInfoAndComponents',
                     type:'POST',
                     contentType:"application/json",
                     data:Add(),
                     success:function (result) {
-                        var ResultData = result.data;
-                        console.log(result);
-                        window.location.href = basePath + '/businessProduct/intoProductRequire';
+                        if(result == true){
+                            window.location.href = basePath + '/businessProduct/intoProductRequire';
+                        }
                     }
                 })
             }
@@ -623,8 +628,7 @@
                 "modifyTime":"2017-03-02 11:44:49",
                 "lastmodifyUserId": 1,
                 "lastmodifyUserName": "胡向阳"
-            }
-            ,
+            },
             "businessOrderProductComponents":getbusinessOrderProductComponents()
             
         }
