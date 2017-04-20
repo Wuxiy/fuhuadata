@@ -470,6 +470,7 @@
 					base.zhongxinbao_number,
 					base.enterprise_phone,
 					base.enterprise_email,
+					base.customer_duty_paragraph,
 					GROUP_CONCAT(nature.nature) enterprise_nature,
 					base.other_enterprise_nature
 				FROM
@@ -499,8 +500,8 @@
 				a.link_phone1 linkPhone1,
 				a.link_phone2 linkPhone2,
 				a.lemail lemail,
-				GROUP_CONCAT(nature.nature) enterprise_nature,
-				base.other_enterprise_nature
+				GROUP_CONCAT(nature.nature) enterpriseNature,
+				base.otherEnterpriseNature
 			FROM
 				customer_base_info base
 			LEFT JOIN customer_linkman a ON a.customer_id = base.customer_id
