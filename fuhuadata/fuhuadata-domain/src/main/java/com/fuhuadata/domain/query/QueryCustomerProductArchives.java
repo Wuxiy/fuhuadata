@@ -186,6 +186,37 @@ public class QueryCustomerProductArchives extends PageBase {
 	/**修改时间**/
 	private Date modifyTime;
 
+	//单位耗用比例
+	private BigDecimal unitUseRate;
+	//佣金单价
+	private BigDecimal commissionPrice;
+	//资金利息单价
+	private BigDecimal capitalInterestPrice;
+
+	public BigDecimal getUnitUseRate() {
+		return unitUseRate;
+	}
+
+	public void setUnitUseRate(BigDecimal unitUseRate) {
+		this.unitUseRate = unitUseRate;
+	}
+
+	public BigDecimal getCommissionPrice() {
+		return commissionPrice;
+	}
+
+	public void setCommissionPrice(BigDecimal commissionPrice) {
+		this.commissionPrice = commissionPrice;
+	}
+
+	public BigDecimal getCapitalInterestPrice() {
+		return capitalInterestPrice;
+	}
+
+	public void setCapitalInterestPrice(BigDecimal capitalInterestPrice) {
+		this.capitalInterestPrice = capitalInterestPrice;
+	}
+
 	public Integer getWareId() {
 		return wareId;
 	}

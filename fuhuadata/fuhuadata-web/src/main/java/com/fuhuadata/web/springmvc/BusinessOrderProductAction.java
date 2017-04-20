@@ -132,7 +132,7 @@ public class BusinessOrderProductAction {
      */
     @ResponseBody
     @RequestMapping(value="/saveBaseInfoAndComponents")
-    public ResultPojo saveBaseInfoAndComponents(@RequestBody ProductRequireBase productRequireBase){
+        public ResultPojo saveBaseInfoAndComponents(@RequestBody ProductRequireBase productRequireBase){
         Map<String,Object> map = new HashMap<String,Object>();
         BusinessOrderProduct businessOrderProduct = productRequireBase.getBusinessOrderProduct();
         BusinessOrderProductComponent[] businessOrderProductComponents = productRequireBase.getBusinessOrderProductComponents();
@@ -175,10 +175,11 @@ public class BusinessOrderProductAction {
      * @return
      */
     @RequestMapping("/intoProductRequire")
-    public ModelAndView intoProductProcCompRequire(String orderId,Integer businessProductId ,Integer productRequireId){
+    public ModelAndView intoProductProcCompRequire(String orderId,Integer businessProductId ,Integer productRequireId,String customerId){
         return new ModelAndView("salesStatistics/productProcCompRequire")
                 .addObject("orderId",orderId)
                 .addObject("productRequireId",productRequireId)
+                .addObject("customerId",customerId)
                 .addObject("businessProductId",businessProductId);
     }
 
@@ -282,8 +283,13 @@ public class BusinessOrderProductAction {
      * @return
      */
     @RequestMapping("intoDocumentary")
-    public ModelAndView intoDocumentary(Integer businessProductId){
-        return new ModelAndView("salesStatistics/billRequire").addObject("businessProductId",businessProductId);
+    public ModelAndView intoDocumentary(String orderId,Integer businessProductId ,Integer productRequireId,Integer customerId){
+        return new ModelAndView("salesStatistics/billRequire")
+                .addObject("orderId",orderId)
+                .addObject("businessProductId",businessProductId)
+                .addObject("productRequireId",productRequireId)
+                .addObject("customerId",customerId)
+                .addObject("businessProductId",businessProductId);
     }
 
     /**
@@ -328,8 +334,12 @@ public class BusinessOrderProductAction {
      * @return
      */
     @RequestMapping("intoPackageRequire")
-    public ModelAndView intoPackageRequire(Integer businessProductId){
-        return new ModelAndView("salesStatistics/transportRequire").addObject("businessProductId",businessProductId);
+    public ModelAndView intoPackageRequire(String orderId,Integer businessProductId ,Integer productRequireId,Integer customerId){
+        return new ModelAndView("salesStatistics/transportRequire")
+                .addObject("orderId",orderId)
+                .addObject("customerId",customerId)
+                .addObject("productRequireId",productRequireId)
+                .addObject("businessProductId",businessProductId);
     }
 
     /**
