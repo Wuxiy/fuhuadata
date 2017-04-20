@@ -68,7 +68,7 @@ public class ProductInfoAction {
     @RequestMapping(value="/add",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-productInfo",methods = "add")
     public ModelAndView addProductInfo(ProductInfo productInfo){
-        int  productId = (Integer.valueOf(bCodeService.getNextStandardProductCode(productInfo))).intValue();
+        int  productId = (Integer.valueOf(bCodeService.genNextStandardProductCode(productInfo))).intValue();
         return new ModelAndView("knowledgeBase/productInfoAdd").addObject("productId",productId);}
 
     @RequestMapping(value="/doAdd",method=RequestMethod.POST)

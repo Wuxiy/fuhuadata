@@ -150,8 +150,8 @@
         var businessStateList = ['报价失败','订单取消','待下单','已下单','已转化成订单','数据已上报到NC','已签约'];
     %>
     <tr>
-        <td><a href="/businessOrder/intoOfferorOrder?orderId=<%=data[i].businessId%>"><%=data[i].orderId%></a></td>
-        <td><a href=""><%=data[i].businessId%></a></td>
+        <td><a href="/businessOrder/intoOfferorOrder?orderId=<%=data[i].orderId%>"><%=data[i].orderId%></a></td>
+        <td><a href="/businessOrder/intoBusinessOpportunityInfo?orderId=<%=data[i].businessId%>"><%=data[i].businessId%></a></td>
         <td>福华</td><td lang="zh"><%=customerLevelList[data[i].customerLevel - 1]%></td>
         <td lang="zh"><%=data[i].enterpriseNature%></td>
         <td><%=data[i].amountPayable%></td>

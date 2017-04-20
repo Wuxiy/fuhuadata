@@ -68,13 +68,32 @@
     </div>
 </div>
 
-<input id="orderId" type="hidden" value="$!{orderId}">
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="JavaScript">
 
 
     $(document).ready(function(){
+<<<<<<< HEAD
+        console.log(orderId)
+        jQuery.ajax({
+            url:basePath + '' + orderId,
+            type:'POST',
+            data:'',
+            success:function(result){
+                conversiontable.innerHTML = '';
+                for(var i=0;i<result.length;i++){
+                    var ResultData = result[i];
+                    conversiontable.innerHTML += '<tr>' +
+                                    '<td>'+ResultData.name+'</td>'+
+                                    '<td>'+ResultData.name+'</td>'+
+                                    '<td><input type="checkbox" name="cellcheckbox" value="'+ResultData.businessProductId+'">'+ResultData.name+'</td>'+
+                                    '<td><input class="form-control" type="text" value="'+ResultData.name+'"></td>'+
+                                    '</tr>';
+                }
+            }
+        })
+=======
 
         $(document).on('input.cc','input[name="onePrice"]',function () {
             var total = 0;
@@ -91,6 +110,7 @@
 
         $(document).on('click.cc','input[name="checkItem"]',function () {
             var total = 0;
+>>>>>>> 3f7afdc56810a4d781e92ed0bab943b975a54346
 
             $('input[name="checkItem"]').filter(':checked').closest('tr')
                     .find('input[name="onePrice"]').each(function () {

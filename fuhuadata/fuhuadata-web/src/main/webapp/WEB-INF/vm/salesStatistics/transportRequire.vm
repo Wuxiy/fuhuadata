@@ -10,9 +10,13 @@
                 <!--订舱出运要求-->
                 <div id="transport" class="panel panel-default view-HD-lg">
                     <div class="panel-heading">
-                        <button id="edit" data-btn="edit" data-view="editHide" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
-                            编辑
-                        </button>
+                        <div class="btn-group panel-heading-btn pull-right">
+                            <a class="btn btn-xs btn-default hidden" data-view="editHide" id="back">返回</a>
+                            <button id="edit" data-btn="edit" data-view="editHide" class="btn btn-xs btn-primary panel-heading-btn pull-right hidden" type="button" lang="zh">
+                                编辑
+                            </button>
+
+                        </div>
                         <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right">
                             <button id="cancel" data-btn="cancel" data-view="editView" type="button" class="btn btn-xs btn-default hidden" type="button" lang="zh">取消</button>
                             <button id="save" data-btn="save" data-view="editView" type="button" class="btn btn-primary hidden" lang="zh">保存</button>
@@ -225,19 +229,22 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-1 col-xs-offset-2"><a class="btn btn-block btn-default hidden" type="button" id="back">返回</a></div>
-            <div class="col-xs-1 col-xs-offset-1"><a class="btn btn-block btn-default hidden" type="button" id="before">上一步</a></div>
-            <div class="col-xs-1 col-xs-offset-1"><a class="btn btn-block btn-primary hidden" type="button" id="next">下一步</a></div>
+            <div class="col-xs-2 col-xs-offset-2"><a class="btn btn-block btn-default hidden" type="button" id="before">上一步</a></div>
+            <div class="col-xs-2 col-xs-offset-1"><a class="btn btn-block btn-primary hidden" type="button" id="next">下一步</a></div>
         </div>
     </div>
 </div>
-<input id="customerId" type="hidden" value='$!{customerId}'>
-<input type="hidden" id="customerType" value="$!{customerType}" />
-<input id="businessProductId" type="hidden" value='$!{businessProductId}'>
+<input id="businessProductId" type="hidden" value="$!{businessProductId}"> <!--编号-->
+<input id="orderId" type="hidden" value="$!{orderId}">
+<input id="customerId" type="hidden" value="$!{customerId}">
+<input id="productRequireId" type="hidden" value="$!{productRequireId}">
 
 <script type="text/javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script type="text/javascript">
     var id = $('#businessProductId').val();
+    var orderId = $('#orderId').val();
+    var customerId = $('#customerId').val();
+    var productRequireId = $('#productRequireId').val();
 
     var bInfo = new CRM.module.Panel('#transport');
     bInfo.startEdit();
@@ -428,7 +435,7 @@
     })
 
     $('#before').click(function(){
-        window.location.href = basePath + '/businessProduct/intoDocumentary?businessProductId=' + id;
+        window.location.href = basePath + '/businessProduct/intoDocumentary?businessProductId=' + id + '&&productRequireId=' + productRequireId + '&&orderId=' + orderId + '&&customerId=' + customerId;
     })
 </script>
 

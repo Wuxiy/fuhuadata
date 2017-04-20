@@ -147,6 +147,7 @@ public class CustomerBaseInfo implements Serializable{
     /**创建时间**/
 	private String createTime;
 
+
     /**修改时间**/
 	private String modifyTime;
 	/*合同总金额*/
@@ -198,20 +199,12 @@ public class CustomerBaseInfo implements Serializable{
 	private String saleOrganizationId;
 	//所属销售组织名称
 	private String saleOrganizationName;
-	//客户税号
-	private String customerDutyParagraph;
-
 	private String encyId;// 百科id 用来判断客户是否有百科
+
+	private String customerDutyParagraph;//客户税号
 	public CustomerBaseInfo() {
 	}
 
-	public String getCustomerDutyParagraph() {
-		return customerDutyParagraph;
-	}
-
-	public void setCustomerDutyParagraph(String customerDutyParagraph) {
-		this.customerDutyParagraph = customerDutyParagraph;
-	}
 
 	public String getSaleOrganizationId() {
 		return saleOrganizationId;
@@ -772,5 +765,13 @@ public class CustomerBaseInfo implements Serializable{
 
 	public void setCountryzoneName(String countryzoneName) {
 		this.countryzoneName = countryzoneName;
+	}
+
+	public String getCustomerDutyParagraph() {
+		return customerDutyParagraph;
+	}
+
+	public void setCustomerDutyParagraph(String customerDutyParagraph) {
+		this.customerDutyParagraph = customerDutyParagraph;
 	}
 }

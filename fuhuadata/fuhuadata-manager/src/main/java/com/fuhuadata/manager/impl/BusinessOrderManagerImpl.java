@@ -4,6 +4,7 @@ import com.fuhuadata.dao.BusinessOrderDao;
 import com.fuhuadata.dao.BusinessOrderProductDao;
 import com.fuhuadata.dao.CustomerBaseInfoDao;
 import com.fuhuadata.domain.BusinessOrder;
+import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
 import com.fuhuadata.manager.BusinessOrderManager;
 import com.fuhuadata.util.StringUtil;
@@ -89,7 +90,10 @@ public class BusinessOrderManagerImpl implements BusinessOrderManager {
         BusinessOrderVO businessOrderVO = new BusinessOrderVO();
         BusinessOrder businessOrder= businessOrderDao.getBusinessOrderByOrderId(orderId);
         businessOrderVO.setBusinessOrder(businessOrder);
-        businessOrderVO.setCustomerBaseInfo(customerBaseInfoDao.getOrderCustomerInfoByCustomerId(businessOrder.getCustomerId()));
+        CustomerBaseInfo customerBaseInfo = customerBaseInfoDao.getOrderCustomerInfoByCustomerId(businessOrder.getCustomerId());
+        if(customerBaseInfo!=null) {
+            businessOrderVO.setCustomerBaseInfo(customerBaseInfo);
+        }
         List<BusinessOrderProductList> productList=businessOrderProductDao.getOrderProductList(orderId);
         businessOrderVO.setBusinessOrderProductLists(productList);
         if(productList!=null&&productList.size()>0) {
