@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 /**
+ * 用户
  * <p>User: wangjie
  * <p>Date: 4/12/2017
  */
@@ -52,6 +53,16 @@ public class UserController extends BaseController<UserAccount, Integer> {
     @ResponseBody
     public List<MixNodeVO> getUserTreeByDept(@RequestParam("pid") String deptId) {
         return userService.listUserNodesByDept(deptId);
+    }
+
+    @RequestMapping(value = "/dept/users/pojo", method = RequestMethod.GET)
+    @ResponseBody
+    public ResultPojo getUserTreeByDeptId(@RequestParam("pid") String deptId) {
+        Result<List<MixNodeVO>> result = Result.newResult(false);
+
+        result.addDefaultModel(userService.listUserNodesByDept(deptId));
+        result.setSuccess(true);
+        return result.getResultPojo();
     }
 
     @RequestMapping(value = "/role/depts/tree", method = RequestMethod.GET)

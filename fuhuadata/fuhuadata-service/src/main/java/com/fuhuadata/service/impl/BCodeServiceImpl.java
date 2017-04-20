@@ -5,6 +5,7 @@ import com.fuhuadata.domain.ProductInfo;
 import com.fuhuadata.manager.BCodeManager;
 import com.fuhuadata.service.BCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -42,13 +43,13 @@ public class BCodeServiceImpl implements BCodeService {
         return PREFIX_BUSINESS + getToday() + code;
     }
 
-    /*public  static void main(String[] args){
-        FileSystemXmlApplicationContext context = new FileSystemXmlApplicationContext("fuhuadata/fuhuadata-web/src/main/resources/spring-config.xml");
+    public  static void main(String[] args){
+        FileSystemXmlApplicationContext context = new FileSystemXmlApplicationContext("D:/workspace/fuhuadata/fuhuadata/fuhuadata-web/src/main/resources/spring-config.xml");
         BCodeService s = (BCodeService)context.getBean(BCodeService.class);
         for(int i=1;i<=100;i++){
             System.out.println(s.getNextOrderCode());
         }
-    }*/
+    }
     @Override
     public String getNextOrderCode() {
         int indx = bCodeManager.getNextOrderCode();

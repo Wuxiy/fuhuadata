@@ -35,24 +35,24 @@ public class Result<T> extends PageBase implements Serializable {
 	 * 当前的key
 	 */
 	private String modelKey = DEFAULT_MODEL_KEY;
-	
+
 	/**
 	 * 结果码,-1需要登录，0消息错误，1正确
 	 */
 	private int code = 1;
-	
+
 	/**
 	 * 错误信息
 	 */
 	private String message;
-	
+
 	/**
 	 * 返回码和返回参数
 	 */
 	public String resultCode;
-	
+
 	public String resultCodeParams[];
-	
+
 	/**
 	 * 带是否成功的构造方法
 	 * @param success
@@ -60,7 +60,7 @@ public class Result<T> extends PageBase implements Serializable {
 	public Result(boolean success) {
 		this.success = success;
 	}
-	
+
 	/**
 	 * 默认构造方法
 	 */
@@ -68,7 +68,9 @@ public class Result<T> extends PageBase implements Serializable {
 	}
 
 	public static <T> Result<T> newResult(boolean success) {
-        return new Result<T>(success);
+        Result<T> result = new Result<T>();
+        result.setSuccess(success);
+        return result;
     }
 
 	/**
@@ -80,11 +82,11 @@ public class Result<T> extends PageBase implements Serializable {
 		modelKey = key;
 		return result.put(modelKey, obj);
 	}
-	
+
 	public Object addDefaultModel(T obj) {
 		return result.put(modelKey, obj);
 	}
-	
+
 	/**
 	 * 得到默认的模型
 	 * @return
@@ -93,12 +95,12 @@ public class Result<T> extends PageBase implements Serializable {
 	public T getModel(){
 		return (T) result.get(modelKey);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public T getModel(String key){
 		return (T) result.get(key);
 	}
-	
+
 	/**
 	 * 取出默认的值
 	 * @return
@@ -127,7 +129,7 @@ public class Result<T> extends PageBase implements Serializable {
 	}
 
 	/**
-	 * 取出所有的key 
+	 * 取出所有的key
 	 * @return
 	 */
 	public Set<String> keySet() {
@@ -183,7 +185,7 @@ public class Result<T> extends PageBase implements Serializable {
 		this.message = message;
 		result.put("message", message);
 	}
-	
+
 	/**
 	 * 返回标准pojo格式数据
 	 * @return
@@ -217,7 +219,7 @@ public class Result<T> extends PageBase implements Serializable {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
+
 	public String getResultCode() {
 		return resultCode;
 	}
