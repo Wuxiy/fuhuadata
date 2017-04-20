@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.IncotermMapper">
+  <resultMap id="BaseResultMap" type="com.fuhuadata.domain.mybatis.Incoterm">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="pk_incoterm" jdbcType="VARCHAR" property="pkIncoterm" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="isinclufare" jdbcType="TINYINT" property="isinclufare" />
+    <result column="isincluprem" jdbcType="TINYINT" property="isincluprem" />
+  </resultMap>
+</mapper>

@@ -22,6 +22,7 @@
         <spring.version>4.2.9.RELEASE</spring.version>
         <jackson.version>1.5.5</jackson.version>
         <mysql.connector.version>5.1.5</mysql.connector.version>
+        <oracle.connector.version>11.2.0.1.0</oracle.connector.version>
         <mybatis.version>3.4.1</mybatis.version>
         <mybatis.spring.version>1.3.0</mybatis.spring.version>
         <mapper.version>3.3.9</mapper.version>
@@ -448,6 +449,12 @@
                 <version>${mysql.connector.version}</version>
             </dependency>
             <!-- MySQL END -->
+            <!-- oracle -->
+            <dependency>
+                <groupId>com.oracle</groupId>
+                <artifactId>ojdbc6</artifactId>
+                <version>${oracle.connector.version}</version>
+            </dependency>
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
@@ -544,13 +551,6 @@
                 <version>2.2.4</version>
             </dependency>
             <!-- CXF结束-->
-
-            <dependency>
-                <groupId>org.owasp.antisamy</groupId>
-                <artifactId>antisamy</artifactId>
-                <version>1.4.4</version>
-            </dependency>
-
             <dependency>
                 <groupId>org.apache.poi</groupId>
                 <artifactId>poi</artifactId>

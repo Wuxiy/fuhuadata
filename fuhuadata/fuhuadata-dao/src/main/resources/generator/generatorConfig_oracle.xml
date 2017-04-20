@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- 配置文件路径 -->
+    <properties resource="config.properties"/>
+
+    <!-- oracle 驱动地址 -->
+    <!--<classPathEntry location="${oracle.drive.class.path}"/>-->
+
+    <context id="dev" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!-- mapper 插件配置 -->
+        <plugin type="${mapper.plugin}">
+            <property name="mappers" value="${mapper.Mapper}"/>
+        </plugin>
+
+        <!-- 数据库连接信息 -->
+        <jdbcConnection driverClass="${oracle.driverClass}"
+                        connectionURL="${oracle.url}"
+                        userId="${oracle.user}"
+                        password="${oracle.password}">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- 生成的 model 实体文件的包路径 -->
+        <javaModelGenerator targetPackage="${oracle.model.package}" targetProject="${target.project}">
+            <!-- 生成的包名中是否包含数据库 schema 名 -->
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- 生成的 sqlmap xml 文件的路径 -->
+        <sqlMapGenerator targetPackage="${oracle.xml.mapper.package}" targetProject="${xml.target.project}/sqlmap">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!-- 生成 dao 或 mapper 接口文件的包路径 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="${oracle.mapper.package}" targetProject="${target.project}">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--<table tableName="bd_countryzone" domainObjectName="CountryZone"/>-->
+        <table tableName="bd_incoterm" domainObjectName="Incoterm"/>
+        <table tableName="ftpub_portdoc" domainObjectName="FtpubPortdoc"/>
+        <table tableName="bd_currtype" domainObjectName="Currtype"/>
+        <table tableName="bd_custclass" domainObjectName="CustClass"/>
+        <table tableName="bd_formatdoc" domainObjectName="Formatdoc"/>
+        <table tableName="bd_income" domainObjectName="Income"/>
+        <table tableName="bd_timezone" domainObjectName="TimeZone"/>
+
+    </context>
+</generatorConfiguration>

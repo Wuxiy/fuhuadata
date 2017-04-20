@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.CountryzoneMapper">
+  <resultMap id="BaseResultMap" type="com.fuhuadata.domain.mybatis.Countryzone">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="pk_country" jdbcType="VARCHAR" property="pkCountry" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="phonecode" jdbcType="VARCHAR" property="phonecode" />
+    <result column="pk_format" jdbcType="VARCHAR" property="pkFormat" />
+    <result column="pk_lang" jdbcType="VARCHAR" property="pkLang" />
+    <result column="pk_timezone" jdbcType="VARCHAR" property="pkTimezone" />
+    <result column="wholename" jdbcType="VARCHAR" property="wholename" />
+  </resultMap>
+</mapper>

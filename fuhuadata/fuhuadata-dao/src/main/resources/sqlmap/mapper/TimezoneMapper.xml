@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.TimezoneMapper">
+  <resultMap id="BaseResultMap" type="com.fuhuadata.domain.mybatis.Timezone">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="pk_timezone" jdbcType="VARCHAR" property="pkTimezone" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+</mapper>
