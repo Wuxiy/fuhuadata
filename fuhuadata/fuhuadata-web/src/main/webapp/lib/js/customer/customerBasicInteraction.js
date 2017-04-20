@@ -78,7 +78,8 @@ CRM.cbInfo.formatdoc            = $('#dataFormat'); // 数据格式
 CRM.cbInfo.custclass            = $('#customerBasicTypes'); // 客户基本分类
 CRM.cbInfo.timezone             = $('#timeZone'); // 时区
 CRM.cbInfo.countryzone          = $('#commerceCountry'); // 贸易国别
-
+CRM.cbInfo.customerDutyParagraph= $('#customerDutyParagraph'); // 客户税号
+CRM.cbInfo.saleOrganizationName = $('#saleOrganizationName'); // 所属组织
 // 收集数据
 CRM.cbInfo.collectData = function () {
     var page = CRM.cbInfo,
@@ -120,7 +121,9 @@ CRM.cbInfo.collectData = function () {
                 custclass            : page.custclass.data('val'),
                 timezone             : page.timezone.data('val'),
                 countryzone          : page.countryzone.data('val'),
-                lossReason           : $('#reason').val()
+                lossReason           : $('#reason').val(),
+                saleOrganizationId   : page.saleOrganizationName.data('val'),
+                customerDutyParagraph: page.customerDutyParagraph.val()
             },
             customerEnterpriceNatures : page.customerEnterpriceNatureObj(),
             customerMakeProducts : page.customerMakeProductObj()
@@ -321,6 +324,10 @@ CRM.cbInfo.renderForm = function(data){
     if (data.timezoneName) { page.timezone.val(data.timezoneName);}
     if (data.countryzone) { page.countryzone.data('val',data.countryzone);} // 贸易国别
     if (data.countryzoneName) { page.countryzone.val(data.countryzoneName);}
+    if (data.saleOrganizationName) { page.saleOrganizationName.val(data.saleOrganizationName);}  // 所属组织
+    if (data.saleOrganizationId) { page.saleOrganizationName.data('val',data.saleOrganizationId);}
+    if (data.customerDutyParagraph) {page.customerDutyParagraph.val(data.customerDutyParagraph)} // 客户税号
+
 
     // 百科
     if (data.companyInfo) { encyData.companyInfo = data.companyInfo;}
@@ -881,13 +888,62 @@ $().ready(function() {
     });
 
     // 点击选择所属组织
-    $('#oNSearch').on('click',function () {
-        CRM.ajaxCall({
-            url:'/customerBaseInfo/getCustclass',
-            type:'GET',
-            callback:page.renderCBTTree
-        })
-    })
+    var orgTreeData = null;
+    $('#oNSearch').on('click.renderTree',function () {
+        if (orgTreeData==null) {
+            $.ajax({
+                url:basePath+'/customerBaseInfoOrder/initSaleOrganizationTree',
+                type:'GET'
+            }).done(function (result) {
+                orgTreeData = result.data;
+                renderTree(orgTreeData);
+            })
+        }else {
+            renderTree(orgTreeData);
+        }
+    });
+
+    /**
+     * 渲染树菜单
+     * @param data
+     */
+    function renderTree(data) {
+        var setting = {
+                data: {
+                    simpleData: {
+                        enable: true
+                    }
+                },
+                edit: {
+                    enable: false
+                },
+                callback: {
+                    onDblClick: ablclickTree
+                }
+            },
+            id = $('#cbtTree').attr('id'),
+            treeObj = null,
+
+            treeData = CRM.toArr(data);
+
+        $.fn.zTree.init($('#cbtTree'), setting, treeData);
+        treeObj = $.fn.zTree.getZTreeObj(id);
+        treeObj.expandAll(true); // 默认展开
+    }
+
+    /**
+     * 树点击事件
+     * @param event
+     * @param modLeftId
+     * @param treeNode
+     */
+
+    function ablclickTree(event, modLeftId, treeNode) {
+
+        $('#saleOrganizationName').data('val',treeNode.id);
+        $('#saleOrganizationName').val(treeNode.name);
+        $('#cbtModal').modal('hide');
+    }
 
 });
 

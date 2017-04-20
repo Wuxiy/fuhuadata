@@ -89,7 +89,6 @@
         bop.product_id productId,
         bop.customer_product_name customerProductName,
         bop.`name` name,
-        bop.
         bop.min_price minPrice,
         bop.transform_state transformState,
         bop.contract_price contractPrice
@@ -331,7 +330,6 @@
             <isNotNull prepend="," property="modifyTime">
                 modify_time = #modifyTime#
             </isNotNull>
-
         </dynamic>
         where id = #id#
     </update>

@@ -151,4 +151,8 @@ public abstract class BaseServiceImpl<E extends BaseEntity<ID>, ID extends Seria
             throw new IllegalStateException("can not instantiated entity : " + this.entityClass, e);
         }
     }
+
+    protected BaseMapper<E, ID> getBatchMapper() {
+        return (BaseMapper<E, ID>) sqlSessionBatch.getMapper(MybatisUtils.getMapperInterface(baseMapper));
+    }
 }

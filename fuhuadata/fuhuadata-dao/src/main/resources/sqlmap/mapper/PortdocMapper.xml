@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.PortdocMapper">
+  <resultMap id="BaseResultMap" type="com.fuhuadata.domain.mybatis.Portdoc">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="pk_portdoc" jdbcType="VARCHAR" property="pkPortdoc" />
+    <result column="vname" jdbcType="VARCHAR" property="vname" />
+    <result column="venname" jdbcType="VARCHAR" property="venname" />
+    <result column="vcode" jdbcType="VARCHAR" property="vcode" />
+  </resultMap>
+</mapper>

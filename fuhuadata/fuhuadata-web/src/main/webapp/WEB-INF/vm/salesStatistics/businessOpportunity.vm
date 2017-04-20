@@ -131,6 +131,35 @@
     </div>
 </div>
 
+## 失败原因modal
+<div class="modal fade" id="rModal" tabindex="-1" role="dialog" data-backdrop="false" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="rForm" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="reason" class="control-label col-xs-2">失败原因<sup class="not-null">*</sup></label>
+                        <div class="col-xs-9">
+                            <textarea class="form-control" id="reason" name="reason" rows="6"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-2  col-xs-offset-9">
+                        <button id="upReasons" data-form-btn="add" type="button" class="btn btn-block btn-primary" lang="zh">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script type="text/javascript" src="${request.contextPath}/lib/js/pagination/pagination.js"></script>
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/js/pagination/pagination.css" />
@@ -153,7 +182,41 @@
         });
         //默认查询数据
         serach();
+
+        // 弹出失败原因模态
+        var thisOrder = '';
+        $(document).on('click','a[href="#rModal"]',function (e) {
+            // 取得当前订单号
+            thisOrder = $(this).data('val');
+            // 打开modal
+            $('#rModal').modal('show');
+        })
+
+        // 提交失败原因
+        $('#upReasons').on('click',function () {
+            CRM.ajaxCall({
+                url : '/businessInfo/updateBusinessInfoById',
+                data : JSON.stringify(cltReaData(thisOrder,$('#reason').val())),
+                type :'POST',
+                contentType : "application/json",
+                callback:function () {
+                    $('#rModal').modal('hide');
+                    alert('提交成功');
+                    serach();
+                }
+            })
+        });
     })
+
+    // 流失原因需要上传的数据
+    function cltReaData(num,con) {
+        var obj = {
+            orderId : num,
+            failureAnalysis : con,
+            status : -2
+        }
+        return obj;
+    }
 
     //查询按钮提交数据
     function serach(){
@@ -193,19 +256,28 @@
             success:function(data){
                 var ResultData = data.data;
                 var _html = '';
-                for(var i=0;i<ResultData.length;i++){
-                    _html += '<tr>';
-                    _html += '	<td>'+ResultData[i].businessId+'</td>';
-                    _html += '  <td><a href="'+basePath+'/businessInfo/intoBusinessOpportunityInfo?businessId='+ResultData[i].businessId+'">'+ResultData[i].businessName+'</a></td>';
-                    _html += '  <td>'+ResultData[i].customerName+'</td>';
-                    _html += '  <td lang="zh">'+customerLevelList[ResultData[i].customerLevel-1]+'</td>';
-                    _html += '  <td lang="zh">'+ResultData[i].enterpriseNature+'</td>';
-                    _html += '  <td>'+ResultData[i].createTime+'A</td>';
-                    _html += '  <td>'+ResultData[i].remainDays+'</td>';
-                    _html += '  <td lang="zh">'+businessFrom[ResultData[i].businessFrom]+'</td>';
-                    _html += '  <td lang="zh">'+ResultData[i].expectIncome+'</td>';
-                    _html +='   <td>'+businessState[ResultData[i].businessState]+'</td>';
-                    _html +='   </tr>';
+
+                if (ResultData instanceof Array && ResultData.length>0) {
+
+                    for(var i=0;i<ResultData.length;i++){
+                        _html += '<tr>';
+                        _html += '<td>'+ResultData[i].businessId+'</td>';
+                        _html += '<td><a href="'+basePath+'/businessInfo/intoBusinessOpportunityInfo?businessId='+ResultData[i].businessId+'">'+ResultData[i].businessName+'</a></td>';
+                        _html += '<td>'+ResultData[i].customerName+'</td>';
+                        _html += '<td lang="zh">'+customerLevelList[ResultData[i].customerLevel-1]+'</td>';
+                        _html += '<td lang="zh">'+ResultData[i].enterpriseNature+'</td>';
+                        _html += '<td>'+ResultData[i].createTime+'A</td>';
+                        _html += '<td>'+ResultData[i].remainDays+'</td>';
+                        _html += '<td lang="zh">'+businessFrom[ResultData[i].businessFrom]+'</td>';
+                        _html += '<td lang="zh">'+ResultData[i].expectIncome+'</td>';
+                        _html += (ResultData[i].businessState!=0)?'<td>'+businessState[ResultData[i].businessState]+'</td>':
+                                '<td><a data-toggle="dropdown" class="dropdown"  href="#">'+businessState[ResultData[i].businessState]+'</a>' +
+                                '<ul class="dropdown-menu pull-right"> ' +
+                                '<li><a href="'+ResultData[i].businessId+'">报价</a></li>' +
+                                '<li><a data-val="'+ResultData[i].businessId+'" data-toggle="modal" href="#rModal">失败</a></li> ' +
+                                '</ul></td>';
+                        _html += '</tr>';
+                    }
                 }
                 $("#businessOpportunityList").html(_html);
             }

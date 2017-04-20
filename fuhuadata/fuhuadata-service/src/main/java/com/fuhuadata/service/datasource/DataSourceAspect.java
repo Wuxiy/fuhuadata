@@ -1,5 +1,8 @@
-package com.fuhuadata.dao.datasource;
+package com.fuhuadata.service.datasource;
 
+import com.fuhuadata.dao.datasource.DataSource;
+import com.fuhuadata.dao.datasource.HandleDataSource;
+import org.apache.commons.lang3.ClassUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -8,6 +11,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -29,7 +33,7 @@ public class DataSourceAspect {
     /**
      * 切入点 service包及子孙包下的所有类
      */
-    @Pointcut("execution(* com.fuhuadata.service..*(..))")
+    @Pointcut("execution(* com.fuhuadata.service.oracle..*(..)) || execution(* com.fuhuadata.service.mybatis..*(..))")
     public void aspect() {
     }
 
@@ -46,7 +50,7 @@ public class DataSourceAspect {
         dataSource = this.getDataSource(target, method);
         //从接口初始化
         if (dataSource == null) {
-            for (Class<?> clazz : target.getInterfaces()) {
+            for (Class<?> clazz : ClassUtils.getAllInterfaces(target)) {
                 dataSource = getDataSource(clazz, method);
                 if (dataSource != null) {
                     break;//从某个接口中一旦发现注解，不再循环
@@ -79,14 +83,12 @@ public class DataSourceAspect {
         try {
             //1.优先方法注解
             Method m = target.getMethod(method.getName(), method.getParameterTypes());
-            if (m != null && m.isAnnotationPresent(DataSource.class)) {
-                return m.getAnnotation(DataSource.class);
+            DataSource annotation = AnnotationUtils.findAnnotation(m, DataSource.class);
+            if (annotation != null) {
+                return annotation;
             }
             //2.其次类注解
-            if (target.isAnnotationPresent(DataSource.class)) {
-                return target.getAnnotation(DataSource.class);
-            }
-
+            return AnnotationUtils.findAnnotation(target, DataSource.class);
         } catch (Exception e) {
             e.printStackTrace();
             logger.error(MessageFormat.format("通过注解切换数据源时发生异常[class={0},method={1}]："

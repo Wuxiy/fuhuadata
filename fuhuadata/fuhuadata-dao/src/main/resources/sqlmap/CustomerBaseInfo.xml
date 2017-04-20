@@ -470,6 +470,7 @@
 					base.zhongxinbao_number,
 					base.enterprise_phone,
 					base.enterprise_email,
+					base.customer_duty_paragraph,
 					GROUP_CONCAT(nature.nature) enterprise_nature,
 					base.other_enterprise_nature
 				FROM
@@ -493,15 +494,19 @@
 				base.customer_area customerArea,
 				base.country country,
 				base.customer_level customerLevel,
-				base.full_enterprise_nature enterpriseNature,
+				base.full_enterprise_nature fullEnterpriseNature,
 				a.linkman_id linkmanId,
 				a.`name` linkmanName,
 				a.link_phone1 linkPhone1,
 				a.link_phone2 linkPhone2,
-				a.lemail lemail
+				a.lemail lemail,
+				GROUP_CONCAT(nature.nature) enterpriseNature,
+				base.otherEnterpriseNature
 			FROM
 				customer_base_info base
 			LEFT JOIN customer_linkman a ON a.customer_id = base.customer_id
+			LEFT JOIN customer_enterprise_nature nature
+							ON nature.customer_id=base.customer_id
 			WHERE
 				a.is_default = 1 AND base.customer_id=#customerId#
 		]]>
@@ -600,7 +605,7 @@
 			base.timezone,
 			base.formatdoc,
 			base.countryzone,
-
+			base.customer_duty_paragraph customerDutyParagraph,
 			base.qualifications_file_url qualificationsFileUrl,
 			base.factory_location factoryLocation,
 			base.major_competitors majorCompetitors,
@@ -662,7 +667,6 @@
 		<isNotEqual property="areaId" compareValue="0">
 			and	country_id = #areaId#
 		</isNotEqual>
-
 	</select>
 
 	<select id="countOrderByCustomer" resultClass="CustomerBaseInfo" parameterClass="java.lang.String">

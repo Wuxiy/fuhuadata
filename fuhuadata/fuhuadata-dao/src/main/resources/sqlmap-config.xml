@@ -48,4 +48,5 @@ Config 2.0/" "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
 	<sqlMap resource="sqlmap/Income.xml"/>
 	<sqlMap resource="sqlmap/BusinessProductRequireArchives.xml"/>
 
+	<sqlMap resource="sqlmap/NCExchange/OrderToNC.xml"/>
 </sqlMapConfig>

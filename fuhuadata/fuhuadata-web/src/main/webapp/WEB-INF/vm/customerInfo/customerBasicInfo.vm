@@ -62,10 +62,10 @@
                                         <span class="input-group-addon"><a href="http://www.sinosure.com.cn/sinosure/index.html" target="_blank">快速查询</a></span>
                                     </div>
                                 </div>
-                                <label for="oSaleOrganizationName" class="control-label col-xs-1" lang="zh">所属组织<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <label for="saleOrganizationName" class="control-label col-xs-1" lang="zh">所属组织<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input id="oSaleOrganizationName" name="oSaleOrganizationName" data-toggle="dropdown" class="form-control dropdown-toggle" disabled type="text" placeholder="点击搜索按钮选择" autocomplete="off"/>
+                                        <input id="saleOrganizationName" name="saleOrganizationName" data-toggle="dropdown" class="form-control dropdown-toggle" disabled type="text" placeholder="点击搜索按钮选择" autocomplete="off"/>
                                         <div class="input-group-btn">
                                             <button id="oNSearch" class="btn btn-xs btn-default" data-control="on" type="button" data-toggle="modal" data-target="#cbtModal"><span class="glyphicon glyphicon-search"></span></button>
                                         </div>
@@ -74,7 +74,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-1" lang="zh">企业性质<sup data-view="editView" class="not-null hidden">*</sup></label>
-                                <div class="col-xs-6">
+                                <div class="col-xs-5">
                                     <label class="checkbox-inline">
                                         <input id="showFactory" data-target="#factory" data-control="off" disabled name="enterpriseNature" value="1" class="else notNull" type="checkbox"/>
                                         <span lang="zh">工厂</span>
@@ -99,6 +99,8 @@
                                         <input id="otherEnterpriceNature" data-control="off" disabled name="otherEnterpriceNature" class="form-inline form-control hidden" style="position:absolute;left:355px;" type="text" value="" placeholder="请输入企业性质" lang="zh"/>
                                     </span>
                                 </div>
+                                <label class="col-xs-1 control-label" for="customerDutyParagraph">客户税号</label>
+                                <div class="col-xs-2"><input id="customerDutyParagraph" data-control="on" disabled name="customerDutyParagraph" class="form-control" type="text"></div>
                             </div>
                             <div class="form-group">
                                 <label for="dataFormat" class="control-label col-xs-1" lang="zh">数据格式<sup data-view="editView" class="not-null hidden">*</sup></label>
@@ -540,13 +542,8 @@
 <input id="cid" type="hidden" value='$!{customerId}'>
 <input id="ctp" type="hidden" value="$!{customerType}" />
 <input id="fname" type="hidden" value="$!{fullName}" />
-##<input id="customerType" type="hidden" value="" />
 
-##<input id="encyId" type="hidden" value="">
 <script type="text/javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
-##<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
-##<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
-##<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerBasicAjax.js"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/customer/customerBasicInteraction.js"></script>
 
 

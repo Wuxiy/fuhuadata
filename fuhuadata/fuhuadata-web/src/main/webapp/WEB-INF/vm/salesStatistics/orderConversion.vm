@@ -48,7 +48,7 @@
                                             <td class="text-danger">产品总价</td>
                                             <td></td>
                                             <td></td>
-                                            <td id="totalPrice"></td>
+                                            <td class="text-danger" id="totalPrice"></td>
                                         </tr>
                                         </tfoot>
                                     </table>
@@ -72,29 +72,29 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="JavaScript">
 
+##
 
-    $(document).ready(function(){
-<<<<<<< HEAD
-        console.log(orderId)
-        jQuery.ajax({
-            url:basePath + '' + orderId,
-            type:'POST',
-            data:'',
-            success:function(result){
-                conversiontable.innerHTML = '';
-                for(var i=0;i<result.length;i++){
-                    var ResultData = result[i];
-                    conversiontable.innerHTML += '<tr>' +
-                                    '<td>'+ResultData.name+'</td>'+
-                                    '<td>'+ResultData.name+'</td>'+
-                                    '<td><input type="checkbox" name="cellcheckbox" value="'+ResultData.businessProductId+'">'+ResultData.name+'</td>'+
-                                    '<td><input class="form-control" type="text" value="'+ResultData.name+'"></td>'+
-                                    '</tr>';
-                }
-            }
-        })
-=======
-
+//<<<<<<< HEAD
+//        console.log(orderId)
+//        jQuery.ajax({
+//            url:basePath + '' + orderId,
+//            type:'POST',
+//            data:'',
+//            success:function(result){
+//                conversiontable.innerHTML = '';
+//                for(var i=0;i<result.length;i++){
+//                    var ResultData = result[i];
+//                    conversiontable.innerHTML += '<tr>' +
+//                                    '<td>'+ResultData.name+'</td>'+
+//                                    '<td>'+ResultData.name+'</td>'+
+//                                    '<td><input type="checkbox" name="cellcheckbox" value="'+ResultData.businessProductId+'">'+ResultData.name+'</td>'+
+//                                    '<td><input class="form-control" type="text" value="'+ResultData.name+'"></td>'+
+//                                    '</tr>';
+//                }
+//            }
+//        })
+//=======
+$(document).ready(function(){
         $(document).on('input.cc','input[name="onePrice"]',function () {
             var total = 0;
 
@@ -110,7 +110,6 @@
 
         $(document).on('click.cc','input[name="checkItem"]',function () {
             var total = 0;
->>>>>>> 3f7afdc56810a4d781e92ed0bab943b975a54346
 
             $('input[name="checkItem"]').filter(':checked').closest('tr')
                     .find('input[name="onePrice"]').each(function () {
@@ -124,16 +123,29 @@
 
         var orderId = $('#orderId').val();
         var conversiontable = $('#conversiontable').val();
+
+
     })
 
     //
 
 
+    var testdata = {
+        "businessOrder":{
+            "orderId":"20170322122021023",
+            "floorPrice":1000,
+            "status":1
+        },
+        "businessOrderProducts":[{"id":1,"transformState":1,"contractPrice":100},{"id":2,"transformState":1,"contractPrice":100}]
+    };
     $('#finish').click(function(){
         jQuery.ajax({
-            url:basePath + '',
+            url:basePath + '/businessOrder/updateOrderProducts',
             type:'POST',
-            data:getIds(),
+            dataType:'JSON',
+            contentType:"application/json",
+            data:JSON.stringify(testdata),
+            contentType:"application/json",
             success:function(result){
                 console.log(result);
             }

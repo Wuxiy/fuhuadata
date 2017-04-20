@@ -25,24 +25,12 @@
 
 	<bean id="dataSourceOracle" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url">
-			<value>jdbc:oracle:thin:@192.168.30.21:1521/orcl</value>
-		</property>
-		<property name="username">
-			<value>OAfhdba20161014</value>
-		</property>
-		<property name="password">
-			<value>1</value>
-		</property>
-		<property name="maxActive">
-			<value>100</value>
-		</property>
-		<property name="maxIdle">
-			<value>8</value>
-		</property>
-		<property name="minIdle">
-			<value>1</value>
-		</property>
+		<property name="url" value="jdbc:oracle:thin:@192.168.30.30:1521/orcl"/>
+		<property name="username" value="fh20170307"/>
+		<property name="password" value="1"/>
+		<property name="maxActive" value="100"/>
+		<property name="maxIdle" value="8"/>
+		<property name="minIdle" value="1"/>
 	</bean>
 
 
@@ -126,8 +114,8 @@
 
     <aop:config expose-proxy="true" proxy-target-class="true">
         <!-- 只对业务逻辑层实施事务 -->
-        <aop:pointcut id="txPointcut" expression="execution(* com.fuhuadata.service..*+.*(..)))"/>
-        <aop:advisor id="txAdvisor" advice-ref="txAdvice" pointcut-ref="txPointcut"/>
+        <aop:pointcut id="txPointcut" expression="execution(* com.fuhuadata.service.mybatis..*+.*(..)))"/>
+        <aop:advisor id="txAdvisor" advice-ref="txAdvice" pointcut-ref="txPointcut" order="2"/>
     </aop:config>
 
 	<bean id="userAccountDao" class="com.fuhuadata.dao.impl.UserAccountDaoImpl" />
@@ -164,4 +152,5 @@
 	<bean id="businessOrderDao" class="com.fuhuadata.dao.impl.BusinessOrderDaoImpl"/>
 	<bean id="contractDao" class="com.fuhuadata.dao.impl.ContractDaoImpl"/>
 	<bean id="dataArchivesDao" class="com.fuhuadata.dao.impl.DataArchivesDaoImpl"/>
+	<bean id="orderToNc" class="com.fuhuadata.dao.impl.NCExchange.OrderToNcImpl"/>
 </beans>
