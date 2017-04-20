@@ -17,7 +17,7 @@
                             <div class="form-group ">
                                 <label class="col-xs-1 control-label" lang="zh">订单编号</label>
                                 <div class="col-xs-4">
-                                    <input class="form-control" type="text" id="orderId" value="" disabled />
+                                    <input data-val="$!{businessOrderProduct.businessOrderProducts}" class="form-control" type="text" id="orderId" value="" disabled />
                                 </div>
                             </div>
                         </div>
