@@ -55,7 +55,11 @@
                         <div class="form-group ">
                             <label class="col-xs-1 control-label" lang="zh">收票客户</label>
                             <div class="col-xs-2">
+<<<<<<< HEAD
+                                <input class="form-control" type="text" id="billToCustomer" value="" />
+=======
                                 <input class="form-control" type="text" id="billToCustomer" value="$!{businessInfo.businessInfo.customerName}" />
+>>>>>>> 618c24612518b27ded67edb9ac57f904664f2c58
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">业务员</label>
                             <div class="col-xs-2">
@@ -63,14 +67,33 @@
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">部门</label>
                             <div class="col-xs-2">
+<<<<<<< HEAD
+                                <input class="form-control" type="text" id="departmentName" value="" />
+=======
                                 <input class="form-control" id="departmentName" data-code="" value="" />
                                 <select id="departmentNameS" class="form-control hidden">
                                 </select>
+>>>>>>> 618c24612518b27ded67edb9ac57f904664f2c58
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-xs-1 control-label" lang="zh">销售组织</label>
                             <div class="col-xs-2">
+<<<<<<< HEAD
+                                <input class="form-control" type="text" id="saleOrganizationName" value="" />
+                            </div>
+                            <label class="col-xs-1 control-label" lang="zh">目的港<sup class="not-null">*</sup></label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="destinationPort" value="" />
+                            </div>
+                            <label class="col-xs-1 control-label" lang="zh">起运港<sup class="not-null">*</sup></label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="shipmentPort" value="" />
+                            </div>
+                            <label class="col-xs-1 control-label" lang="zh">收款协议<sup class="not-null">*</sup></label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="collectionAgreement" value="" />
+=======
                                 <select class="form-control" id="saleOrganizationName" disabled>
 
                                 </select>
@@ -114,6 +137,7 @@
                                 <select class="form-control hidden" id="incomeS">
 
                                 </select>
+>>>>>>> 618c24612518b27ded67edb9ac57f904664f2c58
                             </div>
                         </div>
                         <div class="form-group">
@@ -126,13 +150,20 @@
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">贸易术语<sup class="not-null">*</sup></label>
                             <div class="col-xs-2">
+<<<<<<< HEAD
+                                <input class="form-control" type="text" id="tradeTerm" value="" />
+=======
                                 <input class="form-control" id="incoterm" data-code="" value="">
                                 <select class="form-control hidden" id="incotermS">
 
                                 </select>
+>>>>>>> 618c24612518b27ded67edb9ac57f904664f2c58
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">贸易国别<sup class="not-null">*</sup></label>
                             <div class="col-xs-2">
+<<<<<<< HEAD
+                                <input class="form-control" type="text" id="tradeCountry" value="" />
+=======
                                 <div class="input-group">
                                     <input id="countryzone" name="countryzone" placeholder="请在下拉菜单中选择" class="form-control" disabled type="text" autocomplete="off"/>
                                     <div class="input-group-btn">
@@ -143,10 +174,11 @@
                                         </div>
                                     </div>
                                 </div>
+>>>>>>> 618c24612518b27ded67edb9ac57f904664f2c58
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">是否使用信用险</label>
                             <div class="col-xs-2">
-                                <select class="form-control" id="isCreditRisk" disabled>
+                                <select class="form-control" id="isCreditRisk">
                                     <option value="0">否</option>
                                     <option value="1">是</option>
                                 </select>
@@ -155,6 +187,25 @@
                         <div class="form-group">
                             <label class="col-xs-1 control-label" lang="zh">币种<sup class="not-null">*</sup></label>
                             <div class="col-xs-2">
+<<<<<<< HEAD
+                                <select class="form-control" id="currency">
+                                    <option value="0">RMB</option>
+                                    <option value="1">美元</option>
+                                    <option value="2">欧元</option>
+                                </select>
+                            </div>
+                            <label class="col-xs-1 control-label" lang="zh">原币对美元汇率<sup class="not-null">*</sup></label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="nusdexchgrate" value="" />
+                            </div>
+                            <label class="col-xs-1 control-label" lang="zh">原币对本元汇率<sup class="not-null">*</sup></label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="nexchangerate" value="" />
+                            </div>
+                            <label class="col-xs-1 control-label" lang="zh">保险费率（%）<sup class="not-null">*</sup></label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="premiumRate" value="" />
+=======
                                 <input class="form-control" id="currtype" data-code="" value="">
                                 <select class="form-control hidden" id="currtypeS"></select>
                             </div>
@@ -169,12 +220,28 @@
                             <label class="col-xs-1 control-label" lang="zh">保险费率（%）<sup class="not-null">*</sup></label>
                             <div class="col-xs-2">
                                 <input class="form-control" type="text" id="premiumRate" value=""  />
+>>>>>>> 618c24612518b27ded67edb9ac57f904664f2c58
                             </div>
 
                         </div>
                         <div class="form-group">
                             <label class="col-xs-1 control-label" lang="zh">资金利率（%）<sup class="not-null">*</sup></label>
                             <div class="col-xs-2">
+<<<<<<< HEAD
+                                <input class="form-control" type="text" id="discountRate" value="" />
+                            </div>
+                            <label class="col-xs-1 control-label" lang="zh">汇损费率（%）<sup class="not-null">*</sup></label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="lossRate" value="" />
+                            </div>
+                            <label class="col-xs-1 control-label" lang="zh">计息比例（%）<sup class="not-null">*</sup></label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="interestRate" value="" />
+                            </div>
+                            <label class="col-xs-1 control-label" lang="zh">信保赔付率（%）<sup class="not-null">*</sup></label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="creditRate" value="" />
+=======
                                 <input class="form-control" type="text" id="discountRate" value=""  />
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">汇损费率（%）<sup class="not-null">*</sup></label>
@@ -188,11 +255,23 @@
                             <label class="col-xs-1 control-label" lang="zh">信保赔付率（%）<sup class="not-null">*</sup></label>
                             <div class="col-xs-2">
                                 <input class="form-control" type="text" id="creditRate" value=""  />
+>>>>>>> 618c24612518b27ded67edb9ac57f904664f2c58
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-xs-1 control-label" lang="zh">销售费率（%）<sup class="not-null">*</sup></label>
                             <div class="col-xs-2">
+<<<<<<< HEAD
+                                <input class="form-control" type="text" id="saleRate" value="" />
+                            </div>
+                            <label class="col-xs-1 control-label" lang="zh">管理汇率（%）<sup class="not-null">*</sup></label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="managementRate" value="" />
+                            </div>
+                            <label class="col-xs-1 control-label" lang="zh">信保费率（%）<sup class="not-null">*</sup></label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="text" id="guaranteeRate" value="" />
+=======
                                 <input class="form-control" type="text" id="saleRate" value=""  />
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">管理汇率（%）<sup class="not-null">*</sup></label>
@@ -202,26 +281,50 @@
                             <label class="col-xs-1 control-label" lang="zh">信保费率（%）<sup class="not-null">*</sup></label>
                             <div class="col-xs-2">
                                 <input class="form-control" type="text" id="guaranteeRate" value=""  />
+>>>>>>> 618c24612518b27ded67edb9ac57f904664f2c58
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-xs-1 control-label" lang="zh">是否可转运</label>
                             <div class="col-xs-2">
+<<<<<<< HEAD
+                                <select class="form-control" id="transportFlag">
+=======
                                 <select class="form-control" id="transportFlag" >
+>>>>>>> 618c24612518b27ded67edb9ac57f904664f2c58
                                     <option value="0">否</option>
                                     <option value="1">是</option>
                                 </select>
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">是否可分批出运</label>
                             <div class="col-xs-2">
+<<<<<<< HEAD
+                                <select class="form-control" id="partialShipmentFalg">
+=======
                                 <select class="form-control" id="partialShipmentFalg" >
+>>>>>>> 618c24612518b27ded67edb9ac57f904664f2c58
                                     <option value="0">否</option>
                                     <option value="1">是</option>
                                 </select>
                             </div>
+<<<<<<< HEAD
+                            <label class="col-xs-1 control-label" lang="zh">状态</label>
+                            <div class="col-xs-2">
+                                <select class="form-control" id="status">
+                                    <option value="-1">报价失败</option>
+                                    <option value="0">报价中</option>
+                                    <option value="1">已转化成订单</option>
+                                    <option value="2">数据已上报到NC</option>
+                                </select>
+                            </div>
+                            <label class="col-xs-1 control-label" lang="zh">内部供货单位<sup class="not-null">*</sup></label>
+                            <div class="col-xs-2">
+                                <input class="form-control" type="email" id="internalSupplyName" value="" />
+=======
                             <label class="col-xs-1 control-label" lang="zh">内部供货单位<sup class="not-null">*</sup></label>
                             <div class="col-xs-2">
                                 <input class="form-control" type="email" id="internalSupplyName" value=""  />
+>>>>>>> 618c24612518b27ded67edb9ac57f904664f2c58
                             </div>
                         </div>
                         <div class="form-group ">
