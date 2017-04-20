@@ -155,7 +155,7 @@ public class BusinessOrderProduct {
     /**合同单价**/
     private BigDecimal contractPrice;
 
-    /**转化状态**/
+    /** 转化状态,0未转化，1已转化**/
     private Integer transformState;
 
     /**创建者id**/
