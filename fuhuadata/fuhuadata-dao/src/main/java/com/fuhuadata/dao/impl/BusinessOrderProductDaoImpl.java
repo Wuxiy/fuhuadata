@@ -1,11 +1,13 @@
 package com.fuhuadata.dao.impl;
 
+import com.fuhuadata.dao.BaseDao;
 import com.fuhuadata.dao.BusinessOrderProductDao;
 import com.fuhuadata.domain.BusinessOrderProduct;
 import com.fuhuadata.domain.query.QueryBusinessOrderProduct;
 import com.fuhuadata.vo.BusinessOrderProductList;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
@@ -17,14 +19,17 @@ import java.util.Map;
  * Created by hexingfu on 2017/3/30.
  */
 @Repository
-public class BusinessOrderProductDaoImpl implements BusinessOrderProductDao {
+public class BusinessOrderProductDaoImpl extends BaseDao<BusinessOrderProduct> implements BusinessOrderProductDao {
 
     @Autowired
     private SqlMapClient sqlMapClient;
+    @Autowired
+    private SqlMapClientTemplate sqlMapClientTemplate;
     private static final String INSERT_STMT = "BUSINESSORDERPRODUCT.insertBasic";
     private static final String IUPDATE_STMT = "BUSINESSORDERPRODUCT.update";
     private static final String GET_LIST_STMT = "BUSINESSORDERPRODUCT.";
     private static final String COUNT_STMT = "BUSINESSORDERPRODUCT.";
+    private static final String GET_ORDER_PRODUCTS_BY_ORDER_ID="BUSINESSORDERPRODUCT.getOrderProductsByOrderId";
     private static final String GET_LIST_BY_PAGE_STMT = "BUSINESSORDERPRODUCT.";
     private static final String INSERT_FROM_ARCHIVES = "BUSINESSORDERPRODUCT.insertFromArchives";
     private static final String DELETE_ALL_INFO_BY_IDS = "BUSINESSORDERPRODUCT.deleteAllInfoByIds";
@@ -138,4 +143,21 @@ public class BusinessOrderProductDaoImpl implements BusinessOrderProductDao {
         }
         return null;
     }
+
+    public List<BusinessOrderProduct> getBusinessOrderProducts(String orderId){
+        try{
+            List<BusinessOrderProduct> list = sqlMapClient.queryForList(GET_ORDER_PRODUCTS_BY_ORDER_ID, orderId);
+            return list;
+        }catch(Exception e){
+            e.printStackTrace();
+
+        }
+        return null;
+    }
+
+    @Override
+    public boolean updateBusinessOrderProducts(List<BusinessOrderProduct> businessOrderProducts) {
+        return this.batch(sqlMapClientTemplate,IUPDATE_STMT,businessOrderProducts);
+    }
+
 }

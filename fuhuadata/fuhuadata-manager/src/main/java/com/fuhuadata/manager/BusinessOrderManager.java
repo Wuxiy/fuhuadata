@@ -103,7 +103,7 @@ public interface BusinessOrderManager {
 
 
     /**
-     * 从报价订单列表近来的详情页
+     * 从报价订单列表进来的详情页
      * @param orderId
      * @return
      */

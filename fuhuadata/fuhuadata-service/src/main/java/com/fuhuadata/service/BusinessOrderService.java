@@ -3,6 +3,8 @@ package com.fuhuadata.service;
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
 import com.fuhuadata.domain.query.Result;
+import com.fuhuadata.vo.BusinessOrderDO;
+import com.fuhuadata.vo.BusinessOrderProductVO;
 import com.fuhuadata.vo.BusinessOrderVO;
 import com.fuhuadata.vo.CostAndProfitStatistics;
 
@@ -98,5 +100,12 @@ public interface BusinessOrderService {
     public Result<Integer> countCostAndProfit(CostAndProfitStatistics costAndProfitStatistics);
 
     public Result<Integer> countProfitStatistics(CostAndProfitStatistics costAndProfitStatistics);
+
+    /**
+     * 报价转化提交
+     * @param businessOrderDO
+     * @return
+     */
+    public Result updateBusinessOrderAndProduct(BusinessOrderDO businessOrderDO);
 
 }

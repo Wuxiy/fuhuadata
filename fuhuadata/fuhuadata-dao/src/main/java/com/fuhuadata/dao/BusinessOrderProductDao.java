@@ -106,4 +106,14 @@ public interface BusinessOrderProductDao {
      */
     public List<BusinessOrderProductList> getOrderProductList(String orderId);
 
+    /**
+     * 根据订单id获取订单产品
+     * @param orderId
+     * @return
+     */
+    public List<BusinessOrderProduct> getBusinessOrderProducts(String orderId);
+
+    public boolean updateBusinessOrderProducts(List<BusinessOrderProduct> businessOrderProducts);
+
+
 }

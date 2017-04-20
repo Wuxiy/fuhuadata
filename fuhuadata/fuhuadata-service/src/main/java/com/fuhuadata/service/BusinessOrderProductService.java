@@ -3,6 +3,8 @@ package com.fuhuadata.service;
 import com.fuhuadata.domain.BusinessOrderProduct;
 import com.fuhuadata.domain.BusinessOrderProductComponent;
 import com.fuhuadata.domain.query.QueryBusinessOrderProduct;
+import com.fuhuadata.domain.query.Result;
+import com.fuhuadata.vo.BusinessOrderProductVO;
 import com.fuhuadata.vo.Price.Price;
 
 import java.math.BigDecimal;
@@ -107,4 +109,11 @@ public interface BusinessOrderProductService {
      * @return
      */
     BigDecimal calculateMinPrice(Integer businessProductId);
+
+    /**
+     * 根据orderId获取订单产品
+     * @param orderId
+     * @return
+     */
+    public Result<BusinessOrderProductVO> getBusinessOrderProducts(String orderId);
 }

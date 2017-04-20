@@ -1,6 +1,8 @@
 package com.fuhuadata.service;
 
+import com.fuhuadata.domain.BusinessOrderProduct;
 import com.fuhuadata.domain.BusinessOrderProductComponent;
+import com.fuhuadata.domain.query.Result;
 
 import java.util.List;
 import java.util.Map;
@@ -43,4 +45,5 @@ public interface BusinessOrderProductComponentService {
      * @return
      */
     boolean updateProductComponent(List<BusinessOrderProductComponent> businessOrderProductComponents);
+
 }

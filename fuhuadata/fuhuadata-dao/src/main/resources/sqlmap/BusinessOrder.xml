@@ -576,6 +576,7 @@
         </dynamic>
     </sql>
 
+
     <select id="COST-AND-PROFIT" remapResults="true" parameterClass="CostAndProfitStatistics" resultClass="CostAndProfitStatistics">
         <isEqual property="dimension" compareValue="2">
             <![CDATA[
@@ -584,14 +585,15 @@
                 base.full_name customerName,
                 base.customer_level customerLevel,
                 base.country country,
-                SUM(a.actual_amount_paid) actualAmountPaid,
-                SUM(a.gross_profit) grossProfit,
+                SUM(sc.amount) actualAmountPaid,
+                SUM(sc.gross_profit) grossProfit,
                 b.maintenance_fee maintenanceFee,
-                SUM(a.net_profit) netProfit,
+                a.sales_man_id salesManId,
                 a.sales_man_name salesManName
             FROM
                 business_order a
             LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
+            LEFT JOIN sync_contract sc ON sc.pk_longpro = a.nc_order_id
             LEFT JOIN (SELECT
                 cvr.customer_id,
                 SUM(cvr.activity_expense) maintenance_fee
@@ -613,19 +615,23 @@
             </isParameterPresent>
         </isEqual>
 
+        <!--每个客户购买产品统计-->
         <isEqual property="dimension" compareValue="4">
           <![CDATA[
-            SELECT
-            bop.`name` productName,
-            pi.category_name categoryName,
-            SUM(bop.sales_volume) salesVolume,
-            SUM(bop.gross_profit) grossProfit,
-            SUM(bop.contract_price) salesAmount
-            FROM
-            business_order_product bop
-            LEFT JOIN product_info pi ON pi.product_id = bop.product_id
-            WHERE bop.customer_id = #customerId#
-            GROUP BY bop.`name`
+                   SELECT
+                    bop.`name` productName,
+                    pi.category_name categoryName,
+                    SUM(ssc.num) salesVolume,
+                    SUM(ssc.gross_profit) grossProfit,
+                    SUM(ssc.amount) salesAmount,
+                                SUM(ssc.gross_rate) grossRate
+                    FROM
+                    business_order_product bop
+                     LEFT JOIN business_order bo ON bo.order_id  = bop.order_id
+                     LEFT JOIN product_info pi ON pi.product_id = bop.product_id
+                     LEFT JOIN sync_sub_contract ssc ON ssc.pk_longpro  = bo.nc_order_id
+                    WHERE bop.customer_id = #customerId#
+                    GROUP BY bop.`name`
         ]]>
         </isEqual>
 
@@ -673,13 +679,14 @@
             SELECT
             base.customer_area_id customerAreaId,
             base.customer_area customerArea,
-            SUM(a.actual_amount_paid) salesAmount,
-            SUM(a.gross_profit) grossProfit,
+            SUM(sc.amount) salesAmount,
+            SUM(sc.gross_profit) grossProfit,
             SUM(a.maintenance_fee) maintenanceFee,
             SUM(a.net_profit) netProfit
             FROM
             customer_base_info base
             LEFT JOIN business_order a ON a.customer_id = base.customer_id
+            LEFT JOIN sync_contract sc ON sc.pk_longpro = a.nc_order_id
             <isParameterPresent>
                 <include refid="PROFIT-STATISTICS-QUERY-COMMON"/>
             </isParameterPresent>
@@ -691,13 +698,14 @@
             SELECT
             base.country,
             base.customer_area customerArea,
-            SUM(a.actual_amount_paid) salesAmount,
-            SUM(a.gross_profit) grossProfit,
+            SUM(sc.amount) salesAmount,
+            SUM(sc.gross_profit) grossProfit,
             SUM(a.maintenance_fee) maintenanceFee,
             SUM(a.net_profit) netProfit
             FROM
             customer_base_info base
             LEFT JOIN business_order a ON a.customer_id = base.customer_id
+            LEFT JOIN sync_contract sc ON sc.pk_longpro = a.nc_order_id
             <isParameterPresent>
                 <include refid="PROFIT-STATISTICS-QUERY-COMMON"/>
             </isParameterPresent>
@@ -714,8 +722,8 @@
             base.country,
             base.customer_area customerArea,
             base.full_name customerName,
-            SUM(a.actual_amount_paid) salesAmount,
-            SUM(a.gross_profit) grossProfit,
+            SUM(sc.amount) salesAmount,
+            SUM(sc.gross_profit) grossProfit,
             SUM(a.maintenance_fee) maintenanceFee,
             SUM(a.net_profit) netProfit,
             a.sales_man_id salesManId,
@@ -723,6 +731,7 @@
             FROM
             customer_base_info base
             LEFT JOIN business_order a ON a.customer_id = base.customer_id
+            LEFT JOIN sync_contract sc ON sc.pk_longpro = a.nc_order_id
             <isParameterPresent>
                 <include refid="PROFIT-STATISTICS-QUERY-COMMON"/>
             </isParameterPresent>
@@ -738,8 +747,8 @@
             base.customer_area customerArea,
             base.full_name customerName,
             ua.userArea,
-            SUM(a.actual_amount_paid) salesAmount,
-            SUM(a.gross_profit) grossProfit,
+            SUM(sc.amount) salesAmount,
+            SUM(sc.gross_profit) grossProfit,
             SUM(a.maintenance_fee) maintenanceFee,
             SUM(a.net_profit) netProfit,
             a.sales_man_id salesManId,
@@ -747,6 +756,7 @@
             FROM
             business_order a
             LEFT JOIN customer_base_info base ON a.customer_id = base.customer_id
+            LEFT JOIN sync_contract sc ON sc.pk_longpro = a.nc_order_id
             LEFT JOIN (
             SELECT
             pua.user_id,
@@ -770,20 +780,22 @@
             SELECT
             a.name productName,
             b.category_name categoryName,
-            SUM(a.sales_volume) salesVolume,
-            SUM(a.gross_profit) grossProfit,
-            SUM(a.gross_margin) grossMargin,
-            SUM(a.contract_price) salesAmount
+            SUM(ssc.num) salesVolume,
+            SUM(ssc.gross_profit) grossProfit,
+            SUM(ssc.amount) salesAmount,
+            SUM(ssc.gross_rate) grossRate
             FROM
             business_order_product a
             LEFT JOIN product_info b ON b.product_id = a.product_id
+            LEFT JOIN business_order bo ON bo.order_id = a.order_id
+            LEFT JOIN sync_sub_contract ssc ON ssc.pk_longpro = bo.nc_order_id
             <isParameterPresent>
                 <include refid="PROFIT-STATISTICS-QUERY-COMMON"/>
             </isParameterPresent>
             GROUP BY
             a.`name`
             ORDER BY
-            grossProfit DESC
+            grossRate DESC
             limit #startRow#,#pageSize#
         </isEqual>
     </select>
@@ -858,5 +870,7 @@
             a.`name`) temp
         </isEqual>
     </select>
+
+
 
 </sqlMap>

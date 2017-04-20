@@ -1,7 +1,9 @@
 package com.fuhuadata.service.impl;
 
 import com.fuhuadata.dao.BusinessOrderProductComponentDao;
+import com.fuhuadata.domain.BusinessOrderProduct;
 import com.fuhuadata.domain.BusinessOrderProductComponent;
+import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.service.BusinessOrderProductComponentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,4 +46,5 @@ public class BusinessOrderProductComponentServiceImpl implements BusinessOrderPr
         businessOrderProductComponentDao.updateArchives(businessOrderProductComponents.get(0).getBusinessProductId());
         return flag;
     }
+
 }

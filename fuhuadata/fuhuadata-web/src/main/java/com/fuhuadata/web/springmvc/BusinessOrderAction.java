@@ -1,15 +1,16 @@
 package com.fuhuadata.web.springmvc;
 
+import com.fuhuadata.dao.BusinessOrderDao;
 import com.fuhuadata.domain.BusinessOrder;
+import com.fuhuadata.domain.BusinessOrderProduct;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.BCodeService;
 import com.fuhuadata.service.BusinessInfoService;
+import com.fuhuadata.service.BusinessOrderProductService;
 import com.fuhuadata.service.BusinessOrderService;
-import com.fuhuadata.vo.BusinessInfoVO;
-import com.fuhuadata.vo.BusinessOrderVO;
-import com.fuhuadata.vo.CostAndProfitStatistics;
+import com.fuhuadata.vo.*;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import sun.rmi.runtime.Log;
 
 import java.util.List;
 
@@ -37,6 +39,9 @@ public class BusinessOrderAction {
 
     @Autowired
     private BusinessInfoService businessInfoService;
+
+    @Autowired
+    private BusinessOrderProductService businessOrderProductService;
 
 
     @RequiresPermissions({"sale:flow:offer:view"})
@@ -137,6 +142,35 @@ public class BusinessOrderAction {
         Result<BusinessInfoVO> result = businessInfoService.getBusinessInfoByBusinessId(businessId);
         return new ModelAndView("salesStatistics/offerAdd").addObject("orderId",orderId).addObject("businessId",businessId).addObject("businessInfo",result.getModel());
     }
+
+    /**
+     *  进入报价转化
+     * @param orderId
+     */
+    @RequestMapping("/intoBusinessOfferConverse")
+    @SystemLogAnnotation(module = "salesStatistics",methods = "intoBusinessOfferConverse")
+    public ModelAndView intoBusinessOfferConverse(String orderId){
+        Result<BusinessOrderProductVO> result = businessOrderProductService.getBusinessOrderProducts(orderId);
+        return new ModelAndView("salesStatistics/orderConversion").addObject("orderId",orderId).addObject("businessOrderProduct",result.getModel());
+    }
+
+    /**
+     *  报价转化订单
+     * @param
+     */
+    @RequestMapping("/updateOrderProducts")
+    @SystemLogAnnotation(module = "salesStatistics",methods = "updateOrderProducts")
+    public ResultPojo updateOrderProducts(@RequestBody BusinessOrderDO businessOrderDO){
+        Result result = new Result();
+        try{
+            result = businessOrderService.updateBusinessOrderAndProduct(businessOrderDO);
+        }catch (Exception e){
+            result.setSuccess(false);
+        }
+        result.setMessage("报价转化订单成功！");
+        return result.getResultPojo();
+    }
+
 
     /**
      *  doAdd

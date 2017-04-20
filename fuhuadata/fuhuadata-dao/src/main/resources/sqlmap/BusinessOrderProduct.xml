@@ -80,7 +80,22 @@
     </select>
 
     <select id="getPackageRequireByOrderId" parameterClass="java.lang.String" resultMap="BusinessOrderProductResultMap">
+    </select>
 
+    <select id="getOrderProductsByOrderId" parameterClass="java.lang.String" resultMap="BusinessOrderProductResultMap">
+        SELECT
+        bop.id,
+        bop.order_id,
+        bop.product_id,
+        bop.customer_product_name,
+        bop.`name`,
+        bop.min_price,
+        bop.transform_state,
+        bop.contract_price
+        FROM
+        business_order_product bop
+        WHERE
+        order_id = #orderId#
     </select>
 
     <select id="getPackageRequireById" parameterClass="java.lang.Integer" resultClass="BusinessOrderProduct">

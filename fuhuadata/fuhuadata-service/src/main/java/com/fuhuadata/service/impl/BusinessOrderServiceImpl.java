@@ -1,19 +1,21 @@
 package com.fuhuadata.service.impl;
 
 import com.fuhuadata.dao.BusinessOrderDao;
+import com.fuhuadata.dao.BusinessOrderProductDao;
 import com.fuhuadata.domain.BusinessOrder;
+import com.fuhuadata.domain.BusinessOrderProduct;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.BusinessOrderManager;
 import com.fuhuadata.service.BusinessOrderService;
-import com.fuhuadata.vo.BusinessInfoVO;
-import com.fuhuadata.vo.BusinessOrderVO;
-import com.fuhuadata.vo.CostAndProfitStatistics;
+import com.fuhuadata.vo.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -28,6 +30,9 @@ public class BusinessOrderServiceImpl implements BusinessOrderService {
 
     @Autowired
     private BusinessOrderDao businessOrderDao;
+
+    @Autowired
+    private BusinessOrderProductDao businessOrderProductDao;
 
     @Override
     public int count(QueryBusinessOrder queryBusinessOrder) {
@@ -180,6 +185,26 @@ public class BusinessOrderServiceImpl implements BusinessOrderService {
         }catch(Exception e){
             result.setSuccess(false);
             log.error("条件获取利润统计列表数错误",e);
+        }
+        return result;
+    }
+
+    @Override
+    @Transactional
+    public Result updateBusinessOrderAndProduct(BusinessOrderDO businessOrderDO) {
+        Result result = new Result();
+        try{
+            if(businessOrderDO.getBusinessOrder()!=null) {
+                result.setSuccess(businessOrderManager.updateBusinessOrderByOrderId(businessOrderDO.getBusinessOrder()));
+            }
+            if(businessOrderDO.getBusinessOrderProducts()!=null&&businessOrderDO.getBusinessOrderProducts().length>0){
+                List<BusinessOrderProduct> list = Arrays.asList(businessOrderDO.getBusinessOrderProducts());
+                result.setSuccess(businessOrderProductDao.updateBusinessOrderProducts(list));
+            }
+
+        }catch(Exception e){
+            result.setSuccess(false);
+            log.error("更新订单和订单产品",e);
         }
         return result;
     }

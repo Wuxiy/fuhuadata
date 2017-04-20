@@ -4,7 +4,10 @@ import com.fuhuadata.dao.*;
 import com.fuhuadata.domain.*;
 import com.fuhuadata.domain.query.QueryBusinessOrderProduct;
 import com.fuhuadata.domain.query.QueryCustomerProductArchives;
+import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.service.BusinessOrderProductService;
+import com.fuhuadata.vo.BusinessOrderProductVO;
+import com.fuhuadata.vo.BusinessOrderVO;
 import com.fuhuadata.vo.Price.Price;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
@@ -522,5 +525,25 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
         BigDecimal month = new BigDecimal(income.getPaymentday()).divide(new BigDecimal(30));
         //X×计息比率×资金利率×账期月数÷12
        return x.multiply(interestRate).multiply(discountRate).multiply(month).divide(new BigDecimal(12));
+    }
+    /**
+     *  根据orderId  获取订单产品及订单总价
+     * @param orderId
+     * @return
+     */
+    @Override
+    public Result<BusinessOrderProductVO> getBusinessOrderProducts(String orderId) {
+        Result<BusinessOrderProductVO> result = new Result<BusinessOrderProductVO>();
+        try {
+            List<BusinessOrderProduct> list= businessOrderProductDao.getBusinessOrderProducts(orderId);
+            BusinessOrder  businessOrder = businessOrderDao.getBusinessOrderByOrderId(orderId);
+            BusinessOrderProductVO businessOrderProductVO = new BusinessOrderProductVO();
+            businessOrderProductVO.setBusinessOrder(businessOrder);
+            businessOrderProductVO.setBusinessOrderProducts(list);
+            result.addDefaultModel(businessOrderProductVO);
+        } catch (Exception e) {
+            result.setSuccess(false);
+        }
+        return result;
     }
 }
