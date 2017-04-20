@@ -421,7 +421,7 @@
 		goods_type, mianxiangqi, miantuiqi, cupboard_type, cupboard_per_number, cupboard_number,
 		ocean_freight, port_surcharge, tax_type, tax_free, gross_margin, other_cost,process_cost, min_price,
 		contract_price, transform_state, create_user_id, create_user_name, lastmodify_user_id,
-		lastmodify_user_name, create_time, modify_time,capital_interest_price)
+		lastmodify_user_name, create_time, modify_time,capital_interest_price,unit_use_rate)
 		(
 			select
 				order_id, product_id,
@@ -434,7 +434,7 @@
 				goods_type, mianxiangqi, miantuiqi, cupboard_type, cupboard_per_number, cupboard_number,
 				ocean_freight, port_surcharge, tax_type, tax_free, gross_margin, other_cost,process_cost, min_price,
 				contract_price, transform_state, create_user_id, create_user_name, lastmodify_user_id,
-				lastmodify_user_name, create_time, modify_time,capital_interest_price
+				lastmodify_user_name, create_time, modify_time,capital_interest_price,unit_use_rate
 			from business_order_product
 				where id=#businessProductId#
 		)
@@ -499,6 +499,7 @@
 		,a.create_time = b.create_time
 		,a.modify_time = b.modify_time
 		,a.capital_interest_price = b.capital_interest_price
+		,a.unit_use_rate = b.unit_use_rate
 		where b.archive_product_id = a.id
 		and a.id = #businessProductId#
 	</update>
@@ -508,13 +509,13 @@
 		order_id,product_id,customs_clearance_id,customs_clearance_name,customer_id,name,
 		customer_product_name,brand,main_product_amount,main_product_unit,sub_product_amount,sub_product_unit,
 		convert_rate,price_type,advise_price,purchase_price,delivery_time,factory_id,factory_name,commission_price,
-		tax_type,tax_free,other_cost,process_cost,capital_interest_price
+		tax_type,tax_free,other_cost,process_cost,capital_interest_price,unit_use_rate
 		)
 		values(
 		#orderId#,#productId#,#customsClearanceId#,#customsClearanceName#,#customerId#,#name#,
 		#customerProductName#,#brand#,#mainProductAmount#,#mainProductUnit#,#subProductAmount#,#subProductUnit#,
 		#convertRate#,#priceType#,#advisePrice#,#purchasePrice#,#deliveryTime#,#factoryId#,#factoryName#,#commissionPrice#,
-		#taxType#,#taxFree#,#otherCost#,#processCost#,#capitalInterestPrice#
+		#taxType#,#taxFree#,#otherCost#,#processCost#,#capitalInterestPrice#,#unitUseRate#
 		)
 		<selectKey resultClass="java.lang.Integer" keyProperty="id">
 			SELECT @@IDENTITY AS ID
@@ -531,6 +532,9 @@
 				product_id = #productId#
 			</isNotNull>
 
+			<isNotNull prepend="," property="unitUseRate">
+				unit_use_rate = #unitUseRate#
+			</isNotNull>
 			<isNotNull prepend="," property="capitalInterestPrice">
 				capital_interest_price = #capitalInterestPrice#
 			</isNotNull>

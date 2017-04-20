@@ -594,7 +594,6 @@ CRM.cbInfo.mVerify = function (em) {
 
 // 给客户基本分类树添加点击事件
 CRM.cbInfo.cbtTreeClick = function (event, modLeftId, treeNode) {
-    var page = CRM.systemRoleManage;
 
     $('#customerBasicTypes').val(treeNode.name);
     $('#customerBasicTypes').data('val',treeNode.id);
@@ -779,13 +778,9 @@ $().ready(function() {
         return false;
     });
 
-    // 时区下拉搜索框
-    // $('#timeZone').on('input.tz',function () {
-    //
-    //
-    // });
 
-    $('#timeZone').on('input.tz',function () {
+    // 时区下拉搜索框
+    $('#timeZoneS').on('input.tz',function () {
 
         if ($(this).val()!='') {
             var obj = {
@@ -812,8 +807,9 @@ $().ready(function() {
         });
     });
 
+
     // 贸易国别下拉搜索框
-    $('#commerceCountry').on('input.cc',function () {
+    $('#commerceCountryS').on('input.cc',function () {
 
         if ($(this).val()!='') {
             var obj = {
@@ -883,6 +879,15 @@ $().ready(function() {
 
         }
     });
+
+    // 点击选择所属组织
+    $('#oNSearch').on('click',function () {
+        CRM.ajaxCall({
+            url:'/customerBaseInfo/getCustclass',
+            type:'GET',
+            callback:page.renderCBTTree
+        })
+    })
 
 });
 

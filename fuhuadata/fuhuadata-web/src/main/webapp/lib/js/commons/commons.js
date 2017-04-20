@@ -77,18 +77,6 @@ CRM.delHandler = function(el){
     $(tarEl).remove();
 };
 
-// // 选中显示处理程序(用于radio、checkbox、selected)
-// CRM.selectedView = function (bln,selctor) { // true 或者 false
-//
-//     if (bln) { // 为true时显示
-//
-//         $(selctor).removeClass('hidden');
-//     }else {
-//
-//         $(selctor).addClass('hidden');
-//     }
-// };
-
 // 百度渲染模板处理程序
 CRM.tplHandler = function (id,data,tar) {
     var res  = {
@@ -140,18 +128,6 @@ CRM.ajaxCall = function(res){
         console.log('error:'+res.status);
     });
 };
-
-// 返回数据
-// CRM.getData = function (type,url,data,contentType) {
-//   var getData;
-//   CRM.ajaxCall(type,url,data,contentType,callback,false);
-//
-//   function callback(res) {
-//       getData = res;
-//   }
-//
-//   return getData;
-// };
 
 // 返回普通数组对象
 CRM.toArr = function (data) {

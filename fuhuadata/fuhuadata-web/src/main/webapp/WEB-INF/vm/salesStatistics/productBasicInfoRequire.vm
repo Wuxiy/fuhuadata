@@ -35,9 +35,9 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input id="name" class="form-control notnull isdisabled" value="" disabled>
+                                                <input id="name" class="form-control notnull" value="" disabled>
                                                 <div class="input-group-btn">
-                                                    <button data-toggle="modal" data-target="#treeModal" class="btn btn-xs btn-default isdisabled">
+                                                    <button name="search" data-toggle="modal" data-target="#treeModal" class="btn btn-xs btn-default" disabled>
                                                         <span class="glyphicon glyphicon-search"></span>
                                                     </button>
                                                 </div>
@@ -45,10 +45,10 @@
                                         </td>
                                         <td class="col-xs-2"><label class="control-label" lang="zh">报关产品名称</label></td>
                                         <td>
-                                            <input id="customsClearanceName" class="form-control isdisabled" value="" disabled>
+                                            <input id="customsClearanceName" class="form-control" value="" disabled>
                                         </td>
                                         <td class="col-xs-2"><label class="control-label" lang="zh">客户商品名</label></td>
-                                        <td><input id="customerProductName" class="form-control isdisabled" type="text" value="" disabled/></td>
+                                        <td><input id="customerProductName" class="form-control" type="text" value="" disabled/></td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -57,11 +57,11 @@
                                                 <sup class="not-null">*</sup>
                                             </label>
                                         </td>
-                                        <td><input id="specification" class="form-control notnull isdisabled" type="text" value="" disabled/></td>
+                                        <td><input id="specification" class="form-control notnull" type="text" value="" disabled/></td>
                                         <td><label class="control-label" lang="zh">型号</label></td>
-                                        <td><input id="model" class="form-control isdisabled" type="text" value="" disabled/></td>
+                                        <td><input id="model" class="form-control" type="text" value="" disabled/></td>
                                         <td><label class="control-label" lang="zh">品牌</label></td>
-                                        <td><input id="brand" class="form-control isdisabled" type="text" value="" disabled/></td>
+                                        <td><input id="brand" class="form-control" type="text" value="" disabled/></td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -70,24 +70,24 @@
                                                 <sup class="not-null">*</sup>
                                             </label>
                                         </td>
-                                        <td><input id="measurement" class="form-control notnull isdisabled" type="text" value="" disabled/></td>
+                                        <td><input id="measurement" class="form-control notnull" type="text" value="" disabled/></td>
                                         <td>
                                             <label class="control-label" lang="zh">
                                                 主数量
                                                 <sup class="not-null">*</sup>
                                             </label>
                                         </td>
-                                        <td><input data-control="on" id="mainProductAmount" class="form-control notnull" type="text" value=""/></td>
+                                        <td><input data-control="on" id="mainProductAmount" class="form-control notnull" type="text" value="" disabled/></td>
                                         <td></td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td><label class="control-label" lang="zh">单位</label></td>
-                                        <td><select data-control="on" id="subProductUnit" class="form-control"><option value="0">KG</option><option value="1">瓶</option><option value="2">袋</option></select></td>
+                                        <td><select data-control="on" id="subProductUnit" class="form-control" disabled><option value="0">KG</option><option value="1">瓶</option><option value="2">袋</option></select></td>
                                         <td><label class="control-label" lang="zh">数量</label></td>
-                                        <td><input data-control="on" id="subProductAmount" class="form-control" type="text" value=""/></td>
+                                        <td><input data-control="on" id="subProductAmount" class="form-control" type="text" value="" disabled/></td>
                                         <td><label class="control-label" lang="zh">换算率（主数量/数量）</label></td>
-                                        <td><input id="convertRate" class="form-control isdisabled" type="text" value="" disabled/></td>
+                                        <td><input id="convertRate" class="form-control" type="text" value="" disabled/></td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -97,7 +97,7 @@
                                             </label>
                                         </td>
                                         <td>
-                                            <select data-control="on" id="priceType" class="form-control notnull">
+                                            <select data-control="on" id="priceType" class="form-control notnull" disabled>
                                                 <option value="0" selected>自产类</option>
                                                 <option value="1">原药自产制剂加工类</option>
                                                 <option value="2">原药采购制剂加工类</option>
@@ -119,7 +119,7 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input data-control="on" id="advisePrice" class="form-control notnull" value="">
+                                                <input data-control="on" id="advisePrice" class="form-control notnull" value="" disabled>
                                                 <span class="input-group-addon">元</span>
                                             </div>
                                         </td>
@@ -131,12 +131,12 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input data-control="on" id="purchasePrice" class="form-control notnull" value="">
+                                                <input data-control="on" id="purchasePrice" class="form-control notnull" value="" disabled>
                                                 <span class="input-group-addon">元</span>
                                             </div>
                                         </td>
                                         <td><label class="control-label" lang="zh">交货时间</label></td>
-                                        <td><input data-control="on" id="deliveryTime" class="form-control" type="date" value=""/></td>
+                                        <td><input data-control="on" id="deliveryTime" class="form-control" type="date" value="" disabled/></td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -149,7 +149,7 @@
                                             <div class="input-group">
                                                 <input data-control="on" id="factoryName" class="form-control notnull" value="" disabled>
                                                 <div class="input-group-btn">
-                                                    <button data-control="on" data-toggle="modal" data-target="#factoryModal" class="btn btn-xs btn-default">
+                                                    <button data-control="on" class="btn btn-xs btn-default" id="factory" disabled>
                                                         <span class="glyphicon glyphicon-search"></span>
                                                     </button>
                                                 </div>
@@ -163,7 +163,7 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input data-control="on" id="capitalInterestPrice" class="form-control typechange" value="">
+                                                <input data-control="on" id="capitalInterestPrice" class="form-control typechange" value="" disabled>
                                                 <span class="input-group-addon">%</span>
                                             </div>
                                         </td>
@@ -175,21 +175,21 @@
                                         </td>
                                         <td class="hidden">
                                             <div class="input-group">
-                                                <input data-control="on" id="grossMargin" class="form-control typechange" value="">
+                                                <input data-control="on" id="grossMargin" class="form-control typechange" value="" disabled>
                                                 <span class="input-group-addon">%</span>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td><label class="control-label" lang="zh">佣金单价</label></td>
-                                        <td><input data-control="on" id="commissionPrice" class="form-control" type="text" value=""/></td>
+                                        <td><input data-control="on" id="commissionPrice" class="form-control" type="text" value="" disabled/></td>
                                         <td><label class="control-label" lang="zh">单位耗用比例</label></td>
-                                        <td><input data-control="on" id="unitUseRate" class="form-control" type="text" value=""/></td>
+                                        <td><input data-control="on" id="unitUseRate" class="form-control" type="text" value="" disabled/></td>
                                     </tr>
                                     <tr>
                                         <td><label class="control-label" lang="zh">出口退税方式</label></td>
                                         <td>
-                                            <select data-control="on" id="taxType" class="form-control">
+                                            <select data-control="on" id="taxType" class="form-control" disabled>
                                                 <option value="0">按销售价退税</option>
                                                 <option value="1">按采购价退税</option>
                                                 <option value="2">不退税</option>
@@ -203,12 +203,12 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input data-control="on" id="taxFree" class="form-control notnull" value="">
+                                                <input data-control="on" id="taxFree" class="form-control notnull" value="" disabled>
                                                 <span class="input-group-addon">%</span>
                                             </div>
                                         </td>
                                         <td><label class="control-label" lang="zh">其他费用单价</label></td>
-                                        <td><input data-control="on" id="otherCost" class="form-control" type="text" value=""/></td>
+                                        <td><input data-control="on" id="otherCost" class="form-control" type="text" value="" disabled/></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -217,7 +217,7 @@
                     </div>
                 </div>
                 <!--加工成分-->
-                <div class="panel panel-default view-HD-lg">
+                <div id="cost" class="panel panel-default view-HD-lg">
                     <div class="panel-heading">
                         <h3 class="panel-title" lang="zh">加工成分及费用</h3>
                     </div>
@@ -268,7 +268,25 @@
     </div>
 </div>
 <!--加工厂modal-->
+<div class="modal fade" id="factoryModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 200px; width: 300px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
 
+            <div class="modal-body well" style="max-height: 300px;overflow-y: scroll; overflow-x: scroll;">
+                <div class="form-group">
+                    <ul class="list-group" id="factoryList">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <input id="businessProductId" type="hidden" value="$!{businessProductId}"> <!--编号-->
 <input id="orderId" type="hidden" value="$!{orderId}">
@@ -297,7 +315,6 @@
 
     //若为查看产品要求详情businessProductId
     if(businessProductId!=''){
-        $('.isdisabled').attr('disabled',true);
         $('#back').removeClass('hidden');
         $('#edit').removeClass('hidden');
 
@@ -351,26 +368,27 @@
                         break;
                 }
 
-                costtable.innerHTML = '';
-                for(var i=0;i<components.length;i++){
-                    costtable.innerHTML += '<tr>'+
-                            '<td data-id="'+components[i].componentId+'">'+components[i].componentName+'</td>'+
-                            '<td><input class="form-control notnull" type="text" value="'+components[i].consumption+'"></td>'+
-                            '<td><input class="form-control notnull" type="text" value="'+components[i].price+'"></td>'+
-                            '<td>'+components[i].cost+'</td>'+
-                            '<td><input class="form-control" type="text" value="'+ifEmpty(components[i].remarks)+'"></td>'+
-                            '</tr>';
+                if(components.length == 0){
+                    $('#cost').addClass('hidden');
+                }else{
+                    costtable.innerHTML = '';
+                    for(var i=0;i<components.length;i++){
+                        costtable.innerHTML += '<tr>'+
+                                '<td data-id="'+components[i].componentId+'">'+components[i].componentName+'</td>'+
+                                '<td><input class="form-control notnull" type="text" value="'+components[i].consumption+'" data-target="on" disabled></td>'+
+                                '<td><input class="form-control notnull" type="text" value="'+components[i].price+'" data-target="on" disabled></td>'+
+                                '<td>'+components[i].cost+'</td>'+
+                                '<td><input class="form-control" type="text" value="'+ifEmpty(components[i].remarks)+'" data-target="on" disabled></td>'+
+                                '</tr>';
+                    }
                 }
             }
         })
     } else{
         $('#resert').removeClass('hidden');
         $('#next').removeClass('hidden');
-
-        //价格计算类型
-        $('#priceType').val('0');
-        $('#purchasePrice').attr('disabled',true);
-        $('#purchasePrice').val('0');
+        $('button[name="search"]').attr('disabled',false);
+        $('[data-target="on"]').removeClass('disabled');
     }
 
     //渲染树和提交
@@ -405,6 +423,30 @@
             }
         })
     })
+
+    $('#factory').click(function(){
+        var factoryList = document.getElementById('factoryList');
+        factoryList.innerHTML = '';
+        jQuery.ajax({
+            url:basePath + '/freightCost/queryFreightCostList',
+            type:'GET',
+            success: function (result) {
+                var ResultData = eval(result.data);
+                for (var i = 0; i < ResultData.length; i++) {
+                    factoryList.innerHTML += '<li class="list-group-item"><a class="fNode">'+ResultData[i].processFactory+'</a></li>';
+                }
+                $('#factoryModal').modal('show');
+            }
+        })
+    })
+
+    $(document).on('click','a.fNode',function (e) {
+        e.preventDefault();
+        console.log(e.target);
+        var tarEltext = $(e.target).text();
+        $('#factoryName').val(tarEltext);
+        $('#factoryModal').modal('hide');
+    });
 
     //换算率
     $('#mainProductAmount').change(function () {
@@ -447,35 +489,39 @@
                 data:data,
                 success:function (result) {
                     var businessProductId = result.businessProductId;
-                    var productWareVo = result.productWareVo;
-                    var components = result.components;
-
-                    console.log(productWareVo);
-                    $('#customsClearanceName').val(productWareVo.customsClearanceName);
-                    $('#measurement').val(productWareVo.measurement);
-                    $('#specification').val(productWareVo.specification);
-                    $('#model').val(productWareVo.model);
 
                     //若businessProductId=0,则没有档案，执行新增；businessProductId！=0，则获取档案填充
                     if(businessProductId == 0){
-                        costtable.innerHTML = '';
-                        for(var i=0;i<components.length;i++){
-                            costtable.innerHTML += '<tr>'+
-                                    '<td data-id="'+components[i].componentId+'">'+components[i].componentName+'</td>'+
-                                    '<td><input class="form-control notnull" type="text" value="'+components[i].consumption+'"></td>'+
-                                    '<td><input class="form-control notnull" type="text" value="'+components[i].price+'"></td>'+
-                                    '<td>'+components[i].cost+'</td>'+
-                                    '<td><input class="form-control" type="text" value="'+ifEmpty(components[i].remarks)+'"></td>'+
-                                    '</tr>';
+                        var productWareVo = result.productWareVo;
+                        var components = result.components;
+
+                        console.log(productWareVo);
+                        $('#customsClearanceName').val(productWareVo.customsClearanceName);
+                        $('#measurement').val(productWareVo.measurement);
+                        $('#specification').val(productWareVo.specification);
+                        $('#model').val(productWareVo.model);
+                        $('#unitUseRate').val(productWareVo.unitUseRate);
+
+                        if(components.length == 0){
+                            $('#cost').addClass('hidden');
+                        }else{
+                            costtable.innerHTML = '';
+                            for(var i=0;i<components.length;i++){
+                                costtable.innerHTML += '<tr>'+
+                                        '<td data-id="'+components[i].componentId+'">'+components[i].componentName+'</td>'+
+                                        '<td><input class="form-control notnull" type="text" value="'+components[i].consumption+'"></td>'+
+                                        '<td><input class="form-control notnull" type="text" value="'+components[i].price+'"></td>'+
+                                        '<td>'+components[i].cost+'</td>'+
+                                        '<td><input class="form-control" type="text" value="'+ifEmpty(components[i].remarks)+'"></td>'+
+                                        '</tr>';
+                            }
                         }
+
                     } else{
                     jQuery.ajax({
                         url:basePath + '/businessProduct/detailBaseInfo?businessProductId=' + businessProductId,
                         type:'POST',
                         success:function(result){
-                            $('#brand').attr('disabled',true);
-                            $('#customerProductName').attr('disabled',true);
-
                             var basicInfo = result.basicInfo;
                             var components = result.components;
 
@@ -486,15 +532,19 @@
                             $('#model').val(basicInfo.model);
                             $('#brand').val(basicInfo.brand);
 
-                            costtable.innerHTML = '';
-                            for(var i=0;i<components.length;i++){
-                                costtable.innerHTML += '<tr>'+
-                                        '<td data-id="'+components[i].componentId+'">'+components[i].componentName+'</td>'+
-                                        '<td><input class="form-control notnull" type="text" value="'+components[i].consumption+'"></td>'+
-                                        '<td><input class="form-control notnull" type="text" value="'+components[i].price+'"></td>'+
-                                        '<td>'+components[i].cost+'</td>'+
-                                        '<td><input class="form-control" type="text" value="'+ifEmpty(components[i].remarks)+'"></td>'+
-                                        '</tr>';
+                            if(components.length==0){
+                                $('#cost').addClass('hidden');
+                            }else{
+                                costtable.innerHTML = '';
+                                for(var i=0;i<components.length;i++){
+                                    costtable.innerHTML += '<tr>'+
+                                            '<td data-id="'+components[i].componentId+'">'+components[i].componentName+'</td>'+
+                                            '<td><input class="form-control notnull" type="text" value="'+components[i].consumption+'"></td>'+
+                                            '<td><input class="form-control notnull" type="text" value="'+components[i].price+'"></td>'+
+                                            '<td>'+components[i].cost+'</td>'+
+                                            '<td><input class="form-control" type="text" value="'+ifEmpty(components[i].remarks)+'"></td>'+
+                                            '</tr>';
+                                }
                             }
                         }
                     })
@@ -590,7 +640,6 @@
                 'name':$('#name').val(),
                 'orderId':$('#orderId').val(),
                 'productId':$('#productId').val(),
-                'wareId':$('#wareId').val(),
                 'customsClearanceName':$('#customsClearanceName').val(),
                 'customerProductName':$('#customerProductName').val(),
                 'brand':$('#brand').val(),
@@ -611,9 +660,6 @@
                 'taxType':$('#taxType').val(),
                 'taxFree':$('#taxFree').val(),
                 'otherCost':$('#otherCost').val(),
-                'straightEmployingWay':'',
-                'straightEmployingScale':'',
-                'straightEmployingStandard':''
             },
             "businessOrderProductComponents":getbusinessOrderProductComponents()
 

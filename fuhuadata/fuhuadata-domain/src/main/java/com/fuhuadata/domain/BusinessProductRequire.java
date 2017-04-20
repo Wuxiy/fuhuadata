@@ -1,8 +1,9 @@
 package com.fuhuadata.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class BusinessProductRequire {
+public class BusinessProductRequire implements Serializable{
     private Integer id;
 
     private Integer businessProductId;
