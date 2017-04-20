@@ -85,7 +85,7 @@
                 departure_city = #departureCity#
             </isNotNull>
             <isNotNull prepend=", " property="destinationCity">
-                destination_city = #departureCity#
+                destination_city = #destinationCity#
             </isNotNull>
             <isNotNull prepend=", " property="remarks">
                 remarks = #remarks#

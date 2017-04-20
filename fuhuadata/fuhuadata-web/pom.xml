@@ -240,14 +240,10 @@
         <profile>
 
             <id>development</id>
-
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
-
             <properties>
-
-
                 <fuhua.log.level>DEBUG</fuhua.log.level>
                 <system.log.path>w:/fuhualog</system.log.path>
                 <fuhua.log.additivity>true</fuhua.log.additivity>
@@ -260,7 +256,6 @@
                 </jdsmy.jdbc.url>
                 <jdsmy.jdbc.username>root</jdsmy.jdbc.username>
                 <jdsmy.jdbc.password>root</jdsmy.jdbc.password>
-
 
                 <!--.......................passport相关开始....................... -->
                 <!-- 前台登录cookie名 -->

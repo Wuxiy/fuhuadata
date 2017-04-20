@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.oracle.PortDocMapper">
+  <resultMap id="BaseResultMap" type="com.fuhuadata.domain.oracle.PortDoc">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="PK_PORTDOC" jdbcType="CHAR" property="pkPortdoc" />
+    <result column="CDISTRICTID" jdbcType="VARCHAR" property="cdistrictid" />
+    <result column="CREATIONTIME" jdbcType="CHAR" property="creationtime" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+    <result column="ENABLESTATE" jdbcType="DECIMAL" property="enablestate" />
+    <result column="MODIFIEDTIME" jdbcType="CHAR" property="modifiedtime" />
+    <result column="MODIFIER" jdbcType="VARCHAR" property="modifier" />
+    <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="TS" jdbcType="CHAR" property="ts" />
+    <result column="VCODE" jdbcType="VARCHAR" property="vcode" />
+    <result column="VDEF1" jdbcType="VARCHAR" property="vdef1" />
+    <result column="VDEF10" jdbcType="VARCHAR" property="vdef10" />
+    <result column="VDEF11" jdbcType="VARCHAR" property="vdef11" />
+    <result column="VDEF12" jdbcType="VARCHAR" property="vdef12" />
+    <result column="VDEF13" jdbcType="VARCHAR" property="vdef13" />
+    <result column="VDEF14" jdbcType="VARCHAR" property="vdef14" />
+    <result column="VDEF15" jdbcType="VARCHAR" property="vdef15" />
+    <result column="VDEF16" jdbcType="VARCHAR" property="vdef16" />
+    <result column="VDEF17" jdbcType="VARCHAR" property="vdef17" />
+    <result column="VDEF18" jdbcType="VARCHAR" property="vdef18" />
+    <result column="VDEF19" jdbcType="VARCHAR" property="vdef19" />
+    <result column="VDEF2" jdbcType="VARCHAR" property="vdef2" />
+    <result column="VDEF20" jdbcType="VARCHAR" property="vdef20" />
+    <result column="VDEF3" jdbcType="VARCHAR" property="vdef3" />
+    <result column="VDEF4" jdbcType="VARCHAR" property="vdef4" />
+    <result column="VDEF5" jdbcType="VARCHAR" property="vdef5" />
+    <result column="VDEF6" jdbcType="VARCHAR" property="vdef6" />
+    <result column="VDEF7" jdbcType="VARCHAR" property="vdef7" />
+    <result column="VDEF8" jdbcType="VARCHAR" property="vdef8" />
+    <result column="VDEF9" jdbcType="VARCHAR" property="vdef9" />
+    <result column="VENNAME" jdbcType="VARCHAR" property="venname" />
+    <result column="VNAME" jdbcType="VARCHAR" property="vname" />
+    <result column="VNAME2" jdbcType="VARCHAR" property="vname2" />
+    <result column="VNAME3" jdbcType="VARCHAR" property="vname3" />
+    <result column="VNAME4" jdbcType="VARCHAR" property="vname4" />
+    <result column="VNAME5" jdbcType="VARCHAR" property="vname5" />
+    <result column="VNAME6" jdbcType="VARCHAR" property="vname6" />
+    <result column="VNOTE" jdbcType="VARCHAR" property="vnote" />
+  </resultMap>
+</mapper>

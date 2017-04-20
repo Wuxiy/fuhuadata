@@ -1,5 +1,6 @@
 package com.fuhuadata.service.mybatis;
 
+import com.fuhuadata.dao.datasource.DataSource;
 import com.fuhuadata.domain.mybatis.BaseEntity;
 import tk.mybatis.mapper.entity.Example;
 
@@ -10,6 +11,7 @@ import java.util.List;
  * <p>User: wangjie
  * <p>Date: 3/23/2017
  */
+@DataSource("mysql")
 public interface BaseService<E extends BaseEntity<ID>, ID extends Serializable> {
 
     E get(ID id);

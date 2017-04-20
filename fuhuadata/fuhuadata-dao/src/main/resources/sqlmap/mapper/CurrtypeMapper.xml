@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.CurrtypeMapper">
+  <resultMap id="BaseResultMap" type="com.fuhuadata.domain.mybatis.Currtype">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="pk_currtype" jdbcType="VARCHAR" property="pkCurrtype" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+  </resultMap>
+</mapper>
