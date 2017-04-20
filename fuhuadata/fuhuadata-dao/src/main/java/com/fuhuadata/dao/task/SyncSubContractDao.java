@@ -8,12 +8,12 @@ import java.util.List;
 /**
  * Created by hexingfu on 2017/4/19.
  */
-public interface SyncContractDao {
+public interface SyncSubContractDao {
     /**
      * 从oracle数据库获取转口合同和出口合同数据
      * @return
      */
-    List<SyncContract> getOracleData() throws Exception;
+    List<SyncSubContract> getOracleData() throws Exception;
 
     /**
      * 清空mysql里面的同步表数据
@@ -25,6 +25,6 @@ public interface SyncContractDao {
      * 将oracle数据插入到mysql
      * @return
      */
-    void insertMysqlData(List<SyncContract> list)throws Exception;
+    void insertMysqlData(List<SyncSubContract> list)throws Exception;
 
 }
