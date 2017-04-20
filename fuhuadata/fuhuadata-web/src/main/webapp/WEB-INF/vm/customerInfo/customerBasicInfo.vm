@@ -62,6 +62,8 @@
                                         <span class="input-group-addon"><a href="http://www.sinosure.com.cn/sinosure/index.html" target="_blank">快速查询</a></span>
                                     </div>
                                 </div>
+                                <label for="zhongxinbaoLevel" class="control-label col-xs-1" lang="zh">信用评级<sup data-view="editView" class="not-null hidden">*</sup></label>
+
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-1" lang="zh">企业性质<sup data-view="editView" class="not-null hidden">*</sup></label>

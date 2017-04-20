@@ -10,7 +10,7 @@
             <div class="panel panel-default view-HD-lg">
                 <div class="panel-heading">
                     #if ($shiro.hasPermission("wiki:wiki:edit"))
-                    <a href="${request.contextPath}/customerEncyclopedia/addCustomerEncyclopedia?encyId=$!{encyId}" target="_self" class="btn btn-xs btn-primary pull-right panel-heading-btn">编辑</a>
+                    <a href="${request.contextPath}/customerEncyclopedia/addCustomerEncyclopedia?encyId=$!{encyId}"  class="btn btn-xs btn-primary pull-right panel-heading-btn">编辑</a>
                     #end
                     <h3 class="panel-title">
                         百科详情

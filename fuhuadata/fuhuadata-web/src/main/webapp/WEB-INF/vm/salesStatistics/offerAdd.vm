@@ -31,7 +31,7 @@
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">客户税号</label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" id="customerDutyParagraph" value="" />
+                                <input class="form-control" type="text" disabled id="customerDutyParagraph" value="" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -134,12 +134,12 @@
                             <label class="col-xs-1 control-label" lang="zh">贸易国别<sup class="not-null">*</sup></label>
                             <div class="col-xs-2">
                                 <div class="input-group">
-                                    <input id="commerceCountry" name="commerceCountry" placeholder="请在下拉菜单中选择" class="form-control" disabled type="text" autocomplete="off"/>
+                                    <input id="countryzone" name="countryzone" placeholder="请在下拉菜单中选择" class="form-control" disabled type="text" autocomplete="off"/>
                                     <div class="input-group-btn">
                                         <button data-control="on" class="btn btn-xs btn-default dropdown" data-toggle="dropdown" type="button"><span class="glyphicon glyphicon-search"></span></button>
                                         <div class="dropdown-menu pull-right" style="width: 196px;padding: 3px 0;">
-                                            <input id="commerceCountryS" name="commerceCountryS" class="form-control" data-control="on" type="text" placeholder="请输入关键词查找" style="box-shadow: none;border-radius: 0; border-color: transparent">
-                                            <ul id="cc" style="list-style: none;margin-bottom: 0;padding: 0;width: 100%;max-height: 200px;overflow-y: auto;"></ul>
+                                            <input id="countryzoneS" name="countryzoneS" class="form-control" data-control="on" type="text" placeholder="请输入关键词查找" style="box-shadow: none;border-radius: 0; border-color: transparent">
+                                            <ul id="cz" style="list-style: none;margin-bottom: 0;padding: 0;width: 100%;max-height: 200px;overflow-y: auto;"></ul>
                                         </div>
                                     </div>
                                 </div>
@@ -301,11 +301,20 @@
     </div>
 </div>
 
-## 查找时区和贸易国别
+## 贸易国别
 <script id="tzC" type="text/html">
     <%if (data.length>0) {%>
     <%for (var i=0; i<data.length; i++) {%>
     <li><a href="#" id="<%=data[i].pkTimezone%>" data-val="<%=data[i].code%>" style="padding-left: 6px"><%=data[i].name%></a></li>
+    <%}%>
+    <%}%>
+</script>
+
+## 起运港和目的港
+<script id="dpC" type="text/html">
+    <%if (data.length>0) {%>
+    <%for (var i=0; i<data.length; i++) {%>
+    <li><a href="#" data-val="<%=data[i].vcode%>" style="padding-left: 6px"><%=data[i].vname%></a></li>
     <%}%>
     <%}%>
 </script>
@@ -323,8 +332,9 @@
 
     $('#finish').click(function(){
         jQuery.ajax({
-            url:'',
+            url: basePath +'businessOrder/doAddBusinessOrder',
             type:'POST',
+            contentType:"application/json",
             data:getOrder(),
             success:function (result) {
                 console.log(result);
@@ -392,69 +402,6 @@
         return arr;
     }
 
-
-
-//    // 部门
-//    var departmentData = null;
-//    $('#departmentName').on('click.edit',function () {
-//        $(this).addClass('hidden');
-//        if (departmentData!=null){
-//            $.ajax({
-//                url:'',
-//                type:'GET'
-//            }).done(function (result) {
-//                departmentData = result.data;
-//                renderSelect(departmentData,$('#departmentNameS'));
-//                $('#departmentNameS').removeClass('hidden').val($(this).data('code'));
-//            });
-//        }else {
-//            $('#departmentNameS').removeClass('hidden').val($(this).data('code'));
-//        }
-//    });
-//
-//    $('#departmentNameS').on('change.edit',function (e) {
-//        var tarItem = $(this),
-//                val = tarItem.val(),
-//                text = tarItem.find('option').filter(':selected').text();
-//        $('#departmentName').val(text);
-//        $('#departmentName').data('code',val);
-//    });
-//
-//    $('#departmentNameS').on('focusout',function () {
-//        $('#departmentNameS').addClass('hidden');
-//        $('#departmentName').removeClass('hidden');
-//    })
-//
-//    //目的港
-//    var destinationPortData = null;
-//    $('#destinationPort').on('click.edit',function () {
-//        $(this).addClass('hidden');
-//        if (destinationPortData!=null){
-//            $.ajax({
-//                url:basePath +'/freightCost/queryFreightCostList',
-//                type:'GET'
-//            }).done(function (result) {
-//
-//                $('#destinationPortS').removeClass('hidden').val($(this).data('code'));
-//            });
-//        }else {
-//            $('#destinationPortS').removeClass('hidden').val($(this).data('code'));
-//        }
-//    });
-//
-//    $('#destinationPortS').on('change.edit',function (e) {
-//        var tarItem = $(this),
-//                val = tarItem.val(),
-//                text = tarItem.find('option').filter(':selected').text();
-//        $('#destinationPortS').val(text);
-//        $('#destinationPortS').data('code',val);
-//    });
-//
-//    $('#destinationPortS').on('focusout',function () {
-//        $('#destinationPortS').addClass('hidden');
-//        $('#destinationPortS').removeClass('hidden');
-//    })
-
     var IncomeData = null;
     selectArchive($('#income'),$('#incomeS'),'/dataArchives/getIncome',IncomeData);//收款协议
     var currtypeData = null;
@@ -464,22 +411,22 @@
 
 
     // 贸易国别
-    seacrhSelect($('#commerceCountryS'),'/customerBaseInfo/getCountryzone',$('#cc'),$('#commerceCountry'));
+    seacrhSelect($('#countryzoneS'),'/customerBaseInfo/getCountryzone',$('#cz'),$('#countryzone'),'tzC','name');
 
     // 目的港
-    seacrhSelect($('#destinationPortS'),'/customerBaseInfo/getCountryzone',$('#dp'),$('#destinationPort'));
+    seacrhSelect($('#destinationPortS'),'/dataArchives/getPortdoc',$('#dp'),$('#destinationPort'),'dpC','vname');
 
     // 启运港
-    seacrhSelect($('#shipmentPortS'),'/customerBaseInfo/getCountryzone',$('#sp'),$('#shipmentPort'));
+    seacrhSelect($('#shipmentPortS'),'/dataArchives/getPortdoc',$('#sp'),$('#shipmentPort'),'dpC','vname');
 
-    function seacrhSelect(sh,url,ul,tarEl,) {
+    function seacrhSelect(sh,url,ul,tarEl,strId,arg) {
 
+        // 搜索框
         sh.on('input.cc',function () {
 
             if ($(this).val()!='') {
-                var obj = {
-                    name:$(this).val()
-                };
+                var obj = {};
+                obj[arg]=$(this).val();
                 ul.html('');
                 CRM.ajaxCall({
                     url:url,
@@ -488,13 +435,17 @@
                     data:JSON.stringify(obj),
                     callback:function (data) {
                         if (data) {
-                            CRM.tplHandler('tzC',data,ul);
+                            CRM.tplHandler(strId,data,ul);
                         }
                     }
                 });
             }
         });
-
+        // 搜索框失去焦点
+        sh.on('blur.cc',function (){
+            sh.val('');
+//            ul.html('');
+        });
         // 点击下拉菜单，将值添加到文本框
         ul.on('click.cc','a',function (e) {
             var elVal = $(e.target).data('val'),

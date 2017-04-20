@@ -6,20 +6,19 @@
 </div>
 <div class="dashboard-wrapper">
     <div class="row">
-        <div class="tab-content col-xs-12">
+        <div class="tab-content col-xs-12 view-HD-lg">
             <!--基本信息-->
                 <div id="offerInfo" class="panel panel-default">
                     <div class="panel-heading">
-                        <button id="edit" data-form-btn="edit" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
-                            编辑
-                        </button>
-                        <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden">
-                            <a id="cancel" data-form-btn="cancel" class="btn" lang="zh">取消</a>
-                            <a id="save" data-form-btn="save" class="btn btn-primary" lang="zh">保存</a>
+                        <div class="btn-group panel-heading-btn pull-right">
+                            <a class="btn btn-xs btn-default" data-view="editHide" id="back">返回</a>
+                            <button id="edit" data-btn="edit" data-view="editHide" class="btn btn-xs btn-primary" type="button" lang="zh">编辑</button>
                         </div>
-                        <h3 class="panel-title" lang="zh">
-                            基本信息
-                        </h3>
+                        <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right">
+                            <button id="cancel" data-btn="cancel" data-view="editView" class="btn btn-default hidden" type="button" lang="zh">取消</button>
+                            <button id="save" data-btn="save" data-view="editView" class="btn btn-primary hidden" type="button" lang="zh">保存</button>
+                        </div>
+                        <h3 class="panel-title" lang="zh">基本信息</h3>
                     </div>
                     <div class="panel-body clearfix">
                         <div class="form-horizontal">
@@ -70,7 +69,7 @@
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">部门</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" id="departmentName" data-code="" value="" />
+                                    <input class="form-control" data-control="on" disabled id="departmentName" data-code="" value="" />
                                     <select id="departmentNameS" class="form-control hidden">
                                     </select>
                                 </div>
@@ -82,48 +81,63 @@
 
                                     </select>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">目的港<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">目的港<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                        <input class="form-control" id="destinationPort" data-code="" value="" />
-                                        <select id="destinationPortS" class="form-control hidden">
-                                        </select>
-                                    </select>
+                                    <div class="input-group">
+                                        <input id="destinationPort" name="destinationPort" placeholder="请在下拉菜单中选择" class="form-control" disabled type="text" autocomplete="off"/>
+                                        <div class="input-group-btn">
+                                            <button data-control="on" disabled class="btn btn-xs btn-default dropdown" data-toggle="dropdown" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                                            <div class="dropdown-menu pull-right" style="width: 196px;padding: 3px 0;">
+                                                <input  id="destinationPortS" name="destinationPortS" class="form-control" data-control="on" type="text" placeholder="请输入关键词查找" style="box-shadow: none; border-radius: 0; border-color: transparent">
+                                                <ul id="dp" style="list-style: none;margin-bottom: 0;padding: 0;width: 100%;max-height: 200px;overflow-y: auto;"></ul>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">起运港<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">起运港<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input  class="form-control" id="shipmentPort" data-code="" value="">
-                                    <select class="form-control hidden" id="shipmentPortS">
-                                    </select>
+                                    <div class="input-group">
+                                        <input id="shipmentPort" name="shipmentPort" placeholder="请在下拉菜单中选择" class="form-control" disabled type="text" autocomplete="off"/>
+                                        <div class="input-group-btn">
+                                            <button data-control="on" disabled class="btn btn-xs btn-default dropdown" data-toggle="dropdown" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                                            <div class="dropdown-menu pull-right" style="width: 196px;padding: 3px 0;">
+                                                <input id="shipmentPortS" name="shipmentPortS" class="form-control" data-control="on" type="text" placeholder="请输入关键词查找" style="box-shadow: none;border-radius: 0; border-color: transparent">
+                                                <ul id="sp" style="list-style: none;margin-bottom: 0;padding: 0;width: 100%;max-height: 200px;overflow-y: auto;"></ul>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">收款协议<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">收款协议<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input id="income" class="form-control" data-code="" value="">
-                                    <select class="form-control hidden" id="incomeS">
-
-                                    </select>
+                                    <input id="income" data-control="on" disabled class="form-control" data-code="" value="">
+                                    <select class="form-control hidden" disabled data-control="on" id="incomeS"></select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-xs-1 control-label" lang="zh">贸易方式<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">贸易方式<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <select class="form-control" id="tradeType" disabled>
                                         <option value="0">一般贸易</option>
                                         <option value="1">其他</option>
                                     </select>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">贸易术语<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">贸易术语<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" id="incoterm" data-code="" value="">
-                                    <select class="form-control hidden" id="incotermS">
-
-                                    </select>
+                                    <input class="form-control" data-control="on" disabled id="incoterm" data-code="" value="">
+                                    <select class="form-control hidden" data-control="on" disabled id="incotermS"></select>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">币易国别<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">贸易国别<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" id="countryzone" data-code="" value="">
-                                    <select class="form-control hidden"  id="countryzone ">
-
-                                    </select>
+                                    <div class="input-group">
+                                        <input id="countryzone" name="countryzone" placeholder="请在下拉菜单中选择" class="form-control" disabled type="text" autocomplete="off"/>
+                                        <div class="input-group-btn">
+                                            <button data-control="on" disabled class="btn btn-xs btn-default dropdown" data-toggle="dropdown" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                                            <div class="dropdown-menu pull-right" style="width: 196px;padding: 3px 0;">
+                                                <input id="countryzoneS" name="countryzoneS" class="form-control" data-control="on" type="text" placeholder="请输入关键词查找" style="box-shadow: none;border-radius: 0; border-color: transparent">
+                                                <ul id="cz" style="list-style: none;margin-bottom: 0;padding: 0;width: 100%;max-height: 200px;overflow-y: auto;"></ul>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">是否使用信用险</label>
                                 <div class="col-xs-2">
@@ -134,54 +148,78 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-xs-1 control-label" lang="zh">币种<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">币种<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" id="currtype" data-code="" value="">
-                                    <select class="form-control hidden" id="currtypeS"></select>
+                                    <input class="form-control" data-control="on" disabled id="currtype" data-code="" value="">
+                                    <select class="form-control hidden" data-control="on" disabled id="currtypeS"></select>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">原币对美元汇率<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">原币对美元汇率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <input class="form-control" type="text" id="nusdexchgrate" value="" disabled />
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">原币对本元汇率<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">原币对本元汇率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <input class="form-control" type="text" id="nexchangerate" value="" disabled />
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">保险费率（%）<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">保险费率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" type="text" id="premiumRate" value="" disabled />
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" id="premiumRate" value="" disabled />
+                                        <span class="input-group-addon">%</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-xs-1 control-label" lang="zh">资金利率（%）<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">资金利率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" type="text" id="discountRate" value="" disabled />
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" id="discountRate" value="" disabled />
+                                        <span class="input-group-addon">%</span>
+                                    </div>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">汇损费率（%）<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">汇损费率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" type="text" id="lossRate" value="" disabled />
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" id="lossRate" value="" disabled />
+                                        <span class="input-group-addon">%</span>
+                                    </div>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">计息比例（%）<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">计息比例<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" type="text" id="interestRate" value="" disabled />
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" id="interestRate" value="" disabled />
+                                        <span class="input-group-addon">%</span>
+                                    </div>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">信保赔付率（%）<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">信保赔付率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" type="text" id="creditRate" value="" disabled />
+                                    <div class="input-group">
+                                      <input class="form-control" type="text" id="creditRate" value="" disabled />
+                                        <span class="input-group-addon">%</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-xs-1 control-label" lang="zh">销售费率（%）<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">销售费率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" type="text" id="saleRate" value="" disabled />
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" id="saleRate" value="" disabled />
+                                        <span class="input-group-addon">%</span>
+                                    </div>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">管理汇率（%）<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">管理汇率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" type="text" id="managementRate" value="" disabled />
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" id="managementRate" value="" disabled />
+                                        <span class="input-group-addon">%</span>
+                                    </div>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">信保费率（%）<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">信保费率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" type="text" id="guaranteeRate" value="" disabled />
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" id="guaranteeRate" value="" disabled />
+                                        <span class="input-group-addon">%</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -232,12 +270,12 @@
                     </div>
                 </div>
         </div>
-        <div class="tab-content col-xs-12">
+        <div class="tab-content col-xs-12 view-HD-lg">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="btn-group btn-group-xs panel-heading-btn pull-right">
-                        <button class="btn btn-xs btn-primary panel-heading-btn pull-right" lang="zh" id="Add">新增</button>
                         <button class="btn btn-primary" id="delete">删除</button>
+                        <button class="btn btn-xs btn-primary" lang="zh" id="Add">新增</button>
                     </div>
                     <h3 class="panel-title">
                         产品信息
@@ -275,13 +313,30 @@
             <form class="form-horizontal">
                 <div class="form-group">
                     <div class="col-xs-2 col-xs-offset-4">
-                        <a class="btn btn-block btn-primary" id="back">返回</a>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+## 贸易国别
+<script id="tzC" type="text/html">
+    <%if (data.length>0) {%>
+    <%for (var i=0; i<data.length; i++) {%>
+    <li><a href="#" id="<%=data[i].pkTimezone%>" data-val="<%=data[i].code%>" style="padding-left: 6px"><%=data[i].name%></a></li>
+    <%}%>
+    <%}%>
+</script>
+
+## 起运港和目的港
+<script id="dpC" type="text/html">
+    <%if (data.length>0) {%>
+    <%for (var i=0; i<data.length; i++) {%>
+    <li><a href="#" data-val="<%=data[i].vcode%>" style="padding-left: 6px"><%=data[i].vname%></a></li>
+    <%}%>
+    <%}%>
+</script>
 
  <!--编号-->
 <input id="customerId" type="hidden" value="$!{customerId}">
@@ -303,77 +358,77 @@
         jQuery.ajax({
             url:basePath + '/businessOrder/getBusinessOrderByOrderId?orderId=' + orderId,
             type:'GET',
-//            success:function(result){
-//                var businessOrder = result.data.businessOrder;
-//                var customerBaseInfo = result.data.customerBaseInfo;
-//                var businessOrderProductLists = result.data.businessOrderProductLists;
-//                var enterpriseNature = customerBaseInfo.enterpriseNature.split(',');
-//                console.log(enterpriseNature);
-//
-//                $.each(enterpriseNature,function(index,value){
-//                    $("input[name='check']").each(function(){
-//                        if($(this).val() == value){
-//                            $(this).prop('checked',true);
-//                            /*if(value == 4){
-//                                $('#otherRemarks').val(customerBaseInfo.otherRemarks);
-//                            }*/
-//                        }
-//                    })
-//                })
-//
-//                $('#businessId').val(businessOrder.businessId);
-//                $('#fullName').val(customerBaseInfo.fullName);
-//                $('#customerDutyParagraph').val(businessOrder.customerDutyParagraph);
-//                $('#enterprisePhone').val(customerBaseInfo.enterprisePhone);
-//                $('#zhongxinbaoNumber').val(customerBaseInfo.zhongxinbaoNumber);
-//                $('#registeredFunds').val(customerBaseInfo.registeredFunds);
-//                $('#billToCustomer').val(businessOrder.billToCustomer);
-//                $('#salesManName').val(businessOrder.salesManName);
-//                $('#departmentName').val(businessOrder.departmentName);
-//                $('#saleOrganizationName').val(businessOrder.saleOrganizationName);
-//                $('#destinationPort').val(businessOrder.destinationPort);
-//                $('#shipmentPort').val(businessOrder.shipmentPort);
-//                $('#collectionAgreement').val(businessOrder.collectionAgreement);
-//                $('#tradeType').val(businessOrder.tradeType);
-//                $('#tradeTerm').val(businessOrder.tradeTerm);
-//                $('#tradeCountry').val(businessOrder.tradeCountry);
-//                $('#currency').val(businessOrder.currency);
-//                $('#premiumRate').val(businessOrder.premiumRate);
-//                $('#guaranteeRate').val(businessOrder.guaranteeRate);
-//                $('#discountRate').val(businessOrder.discountRate);
-//                $('#isCreditRisk').val(businessOrder.isCreditRisk);
-//                $('#lossRate').val(businessOrder.lossRate);
-//                $('#interestRate').val(businessOrder.interestRate);
-//                $('#creditRate').val(businessOrder.creditRate);
-//                $('#saleRate').val(businessOrder.saleRate);
-//                $('#managementRate').val(businessOrder.managementRate);
-//                $('#transportFlag').val(businessOrder.transportFlag);
-//                $('#partialShipmentFalg').val(businessOrder.partialShipmentFalg);
-//                $('#enterpriseEmail').val(customerBaseInfo.enterpriseEmail);
-//                $('#internalSupplyName').val(businessOrder.internalSupplyName);
-//                $('#nusdexchgrate').val(businessOrder.status);
-//                $('#nexchangerate').val(businessOrder.internalSupplyName);
-//
-//                businessproduct.innerHTML = '';
-//                for(var i=0;i<businessOrderProductLists.length;i++){
-//                    businessproduct.innerHTML += '<tr>'+
-//                            '<td>'+ifEmpty(businessOrderProductLists[i].productCode)+'</td>'+
-//                            '<td><a href="'+basePath+'/businessProduct/intoProductBasicInfoRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'">'+ifEmpty(businessOrderProductLists[i].productName)+'</a></td>'+
-//                            '<td>'+ifEmpty(businessOrderProductLists[i].categoryName)+'</td>'+
-//                            '<td>'+ifEmpty(businessOrderProductLists[i].brand)+'</td>'+
-//                            '<td><a href="'+basePath+'/businessProduct/intoProductRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&productRequireId='+businessOrderProductLists[i].productRequireId+'">'+ifEmpty(businessOrderProductLists[i].specification)+'</a></td>'+
-//                            '<td>'+ifEmpty(businessOrderProductLists[i].mainProductAmount)+'</td>'+
-//                            '<td>'+ifEmpty(businessOrderProductLists[i].cupboardPerNumber)+'</td>'+
-//                            '<td>'+ifEmpty(businessOrderProductLists[i].cupboardType)+'</td>'+
-//                            '<td>'+ifEmpty(businessOrderProductLists[i].cupboardNumber)+'</td>'+
-//                            '<td>'+ifEmpty(businessOrderProductLists[i].deliveryTime)+'</td>'+
-//                            '<td>'+ifEmpty(businessOrderProductLists[i].documentaryRequire)+'</td>'+
-//                            '<td><a href="'+basePath+'/businessProduct/intoDocumentary?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'">查看</a></td>'+
-//                            '<td><a href="'+basePath+'/businessProduct/intoPackageRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'">查看</a></td>'+
-//                            '<td><input type="checkbox" class="form-control" name="cellcheckbox" value="'+businessOrderProductLists[i].orderId+'" /></td>'+
-//                            '</tr>';
-//                }
-//            }
+            success:function(result){
+                var businessOrder = result.data.businessOrder;
+                var customerBaseInfo = result.data.customerBaseInfo;
+                var businessOrderProductLists = result.data.businessOrderProductLists;
+                var enterpriseNature = customerBaseInfo.enterpriseNature.split(',');
+                console.log(enterpriseNature);
+
+                $.each(enterpriseNature,function(index,value){
+                    $("input[name='check']").each(function(){
+                        if($(this).val() == value){
+                            $(this).prop('checked',true);
+                            /*if(value == 4){
+                                $('#otherRemarks').val(customerBaseInfo.otherRemarks);
+                            }*/
+                        }
+                    })
+                })
+
+                $('#businessId').val(businessOrder.businessId);
+                $('#fullName').val(customerBaseInfo.fullName);
+                $('#customerDutyParagraph').val(businessOrder.customerDutyParagraph);
+                $('#enterprisePhone').val(customerBaseInfo.enterprisePhone);
+                $('#zhongxinbaoNumber').val(customerBaseInfo.zhongxinbaoNumber);
+                $('#registeredFunds').val(customerBaseInfo.registeredFunds);
+                $('#billToCustomer').val(businessOrder.billToCustomer);
+                $('#salesManName').val(businessOrder.salesManName);
+                $('#departmentName').val(businessOrder.departmentName);
+                $('#saleOrganizationName').val(businessOrder.saleOrganizationName);
+                $('#destinationPort').val(businessOrder.destinationPort);
+                $('#shipmentPort').val(businessOrder.shipmentPort);
+                $('#collectionAgreement').val(businessOrder.collectionAgreement);
+                $('#tradeType').val(businessOrder.tradeType);
+                $('#tradeTerm').val(businessOrder.tradeTerm);
+                $('#tradeCountry').val(businessOrder.tradeCountry);
+                $('#currency').val(businessOrder.currency);
+                $('#premiumRate').val(businessOrder.premiumRate);
+                $('#guaranteeRate').val(businessOrder.guaranteeRate);
+                $('#discountRate').val(businessOrder.discountRate);
+                $('#isCreditRisk').val(businessOrder.isCreditRisk);
+                $('#lossRate').val(businessOrder.lossRate);
+                $('#interestRate').val(businessOrder.interestRate);
+                $('#creditRate').val(businessOrder.creditRate);
+                $('#saleRate').val(businessOrder.saleRate);
+                $('#managementRate').val(businessOrder.managementRate);
+                $('#transportFlag').val(businessOrder.transportFlag);
+                $('#partialShipmentFalg').val(businessOrder.partialShipmentFalg);
+                $('#enterpriseEmail').val(customerBaseInfo.enterpriseEmail);
+                $('#internalSupplyName').val(businessOrder.internalSupplyName);
+                $('#nusdexchgrate').val(businessOrder.status);
+                $('#nexchangerate').val(businessOrder.internalSupplyName);
+
+                businessproduct.innerHTML = '';
+                for(var i=0;i<businessOrderProductLists.length;i++){
+                    businessproduct.innerHTML += '<tr>'+
+                            '<td>'+ifEmpty(businessOrderProductLists[i].productCode)+'</td>'+
+                            '<td><a href="'+basePath+'/businessProduct/intoProductBasicInfoRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'">'+ifEmpty(businessOrderProductLists[i].productName)+'</a></td>'+
+                            '<td>'+ifEmpty(businessOrderProductLists[i].categoryName)+'</td>'+
+                            '<td>'+ifEmpty(businessOrderProductLists[i].brand)+'</td>'+
+                            '<td><a href="'+basePath+'/businessProduct/intoProductRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&productRequireId='+businessOrderProductLists[i].productRequireId+'">'+ifEmpty(businessOrderProductLists[i].specification)+'</a></td>'+
+                            '<td>'+ifEmpty(businessOrderProductLists[i].mainProductAmount)+'</td>'+
+                            '<td>'+ifEmpty(businessOrderProductLists[i].cupboardPerNumber)+'</td>'+
+                            '<td>'+ifEmpty(businessOrderProductLists[i].cupboardType)+'</td>'+
+                            '<td>'+ifEmpty(businessOrderProductLists[i].cupboardNumber)+'</td>'+
+                            '<td>'+ifEmpty(businessOrderProductLists[i].deliveryTime)+'</td>'+
+                            '<td>'+ifEmpty(businessOrderProductLists[i].documentaryRequire)+'</td>'+
+                            '<td><a href="'+basePath+'/businessProduct/intoDocumentary?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'">查看</a></td>'+
+                            '<td><a href="'+basePath+'/businessProduct/intoPackageRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'">查看</a></td>'+
+                            '<td><input type="checkbox" class="form-control" name="cellcheckbox" value="'+businessOrderProductLists[i].orderId+'" /></td>'+
+                            '</tr>';
+                }
+            }
         })
     })
 
@@ -497,7 +552,6 @@
         $('#destinationPortS').removeClass('hidden');
     })
 
-    //收款协议
     var IncomeData = null;
     selectArchive($('#income'),$('#incomeS'),'/dataArchives/getIncome',IncomeData);//收款协议
     var currtypeData = null;
@@ -505,7 +559,55 @@
     var incotermData = null;
     selectArchive($('#incoterm'),$('#incotermS'),'/dataArchives/getIncoterm',incotermData);//贸易术语
 
-    //币种
+    // 贸易国别
+    seacrhSelect($('#countryzoneS'),'/customerBaseInfo/getCountryzone',$('#cz'),$('#countryzone'),'tzC','name');
+
+    // 目的港
+    seacrhSelect($('#destinationPortS'),'/dataArchives/getPortdoc',$('#dp'),$('#destinationPort'),'dpC','vname');
+
+    // 启运港
+    seacrhSelect($('#shipmentPortS'),'/dataArchives/getPortdoc',$('#sp'),$('#shipmentPort'),'dpC','vname');
+
+    function seacrhSelect(sh,url,ul,tarEl,strId,arg) {
+
+        // 搜索框
+        sh.on('input.cc',function () {
+
+            if ($(this).val()!='') {
+                var obj = {};
+                obj[arg]=$(this).val();
+                ul.html('');
+                CRM.ajaxCall({
+                    url:url,
+                    type:'POST',
+                    contentType:'application/json',
+                    data:JSON.stringify(obj),
+                    callback:function (data) {
+                        if (data) {
+                            CRM.tplHandler(strId,data,ul);
+                        }
+                    }
+                });
+            }
+        });
+        // 搜索框失去焦点
+        sh.on('blur.cc',function (){
+            sh.val('');
+//            ul.html('');
+        });
+        // 点击下拉菜单，将值添加到文本框
+        ul.on('click.cc','a',function (e) {
+            var elVal = $(e.target).data('val'),
+                    txt = $(e.target).text(),
+                    tarInput = tarEl;
+
+            tarInput.val(txt);
+            tarInput.data('val',elVal);
+            return false;
+        });
+    }
+
+    // 渲染下拉框
     function selectArchive(ipt,slt,url,res) {
         ipt.on('click.edit',function () {
             $(this).addClass('hidden');
@@ -541,7 +643,7 @@
         })
     }
 
-    //下拉列表
+    // 填充下拉框内容
     function renderSelect(data,el) {
         var _html = '';
         $.each(data,function(i,item){
@@ -585,7 +687,8 @@
     }
 
     $('#back').click(function(){
-        window.location.href = basePath + '/businessOrder/intoBusinessOffer';
+//        window.location.href = basePath + '/businessOrder/intoBusinessOffer';
+        window.history.back(-1)
     })
 
     function getenterpriseNature() {

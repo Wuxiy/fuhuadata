@@ -16,6 +16,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <div class="btn-group btn-group-xs panel-heading-btn pull-right">
+                                <a class="btn btn-default" data-view="editHide" id="back">返回</a>
                                 <button id="edit" data-btn="edit" data-view="editHide"  class="btn btn-primary" type="button" lang="zh">
                                     编辑
                                 </button>
@@ -209,7 +210,7 @@
                 <form class="form-horizontal">
                     <div class="form-group">
                         <div class="col-xs-2 col-xs-offset-4">
-                            <a class="btn btn-block btn-primary" id="back">返回</a>
+
                         </div>
                     </div>
                 </form>
@@ -218,7 +219,7 @@
     </div>
 </div>
 
-//新增跟进modal
+##新增跟进modal
 <div class="modal fade" id="addbusinessfollow" tabindex="-1" data-backdrop="static" aria-hidden="true" data-keyboard="true" >
     <div class="modal-dialog">
         <div class="modal-content">
@@ -280,6 +281,7 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript" lang="javascript">
+
     var businessId = $('#businessId').val();
     var businessFromList = ['展会','门户网站','农药店考察','客户介绍','主动联系','其他']
     var customerLevelList = ['战略客户','大客户' ,'重要客户' ,'一般客户' ,'风险客户'];
@@ -302,12 +304,16 @@
             baseInfo.handleCancel(e);
         });
 
+        //重置表单
+        resetForm();
+
         //获取信息
         getData(basePath + '/businessInfo/getBusinessInfoById?businessId='+businessId,'POST',null,businessInfo);
 
         //编辑商机基本信息
         $(document).on('click.edit','#edit',function () {
         });
+
         //商机基本信息提交
         $(document).on('click.up','#save',function(){
             var notnull = $('.notnull');
@@ -328,7 +334,9 @@
                     data:updateBusinessInfo(),
                     contentType:"application/json",
                     success:function () {
-                        alert('233');
+                        alert('保存成功');
+                        resetForm();
+                        getData(basePath + '/businessInfo/getBusinessInfoById?businessId='+businessId,'POST',null,businessInfo);
                         /*location.reload();*/
                     }
                 })
@@ -348,7 +356,10 @@
                 data:Followfinish(),
                 contentType:"application/json",
                 success:function () {
-                    alert('2333');
+                    alert('保存成功');
+                    resetForm();
+                    getData(basePath + '/businessInfo/getBusinessInfoById?businessId='+businessId,'POST',null,businessInfo);
+                    $('#addbusinessfollow').modal('hide');
                     /*location.reload();*/
                 }
             })
@@ -478,6 +489,11 @@
         return JSON.stringify(data);
     }
 
+    function resetForm() {
+        $('input,textarea,select',$('#Baseinfo')).val('');
+        $('#businessfollow').html('');
+    }
+
     function Followfinish() {
         var data = {
             "businessId":$('#businessId').val(),
@@ -496,7 +512,8 @@
     }
 
     $('#back').click(function(){
-        window.location.href = basePath + '/businessOrder/intoBusinessInfo';
+//        window.location.href = basePath + '/businessOrder/intoBusinessInfo';
+        window.history.back(-1);
     })
 
     $('#offer').click(function(){

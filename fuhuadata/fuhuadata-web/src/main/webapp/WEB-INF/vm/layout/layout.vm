@@ -26,14 +26,17 @@
     <script src="${request.contextPath}/lib/js/jquery-lang.js" type="text/javascript" charset="utf-8"></script>
     <script src="${request.contextPath}/lib/js/jquery-lang.js" type="text/javascript" charset="utf-8"></script>
     <script src="${request.contextPath}/lib/js/langpack/nonDynamic.js" type="text/javascript" charset="utf-8"></script>
-##    <script type="text/javascript">
-##
-##
-##        var lang = new Lang();
-##        lang.init({
-##            defaultLang: 'zh'
-##        });
-##    </script>
+##    <script src="${request.contextPath}/lib/js/commons/commons.js" type="text/javascript" charset="utf-8"></script>
+
+    <script type="text/javascript">
+        var language = navigator.browserLanguage?navigator.browserLanguage:navigator.language,
+                lang = new Lang();
+
+        lang.init({
+            defaultLang: (language.indexOf('zh')>-1?'zh':'en')
+        });
+
+    </script>
 </head>
 <body class="bg-page">
     #if ($!nolayout)
