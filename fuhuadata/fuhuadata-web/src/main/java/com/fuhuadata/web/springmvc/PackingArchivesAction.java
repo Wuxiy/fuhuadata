@@ -75,7 +75,7 @@ public class PackingArchivesAction {
         packingArchives.setBigCategoryId(bid);
         packingArchives.setSmallCategoryId(sid);
         packingArchives.setPackName(name);
-        int packId = Integer.valueOf(bCodeService.getNextPackagingMaterialCode(packingArchives));
+        int packId = Integer.valueOf(bCodeService.genNextPackagingMaterialCode(packingArchives));
         return new ModelAndView("knowledgeBase/packingCostAdd").addObject("packId", packId).addObject("bid", bid).addObject("sid", sid).addObject("name", name);
     }
 

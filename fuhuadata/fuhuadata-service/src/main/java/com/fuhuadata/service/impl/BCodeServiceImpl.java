@@ -28,7 +28,7 @@ public class BCodeServiceImpl implements BCodeService {
     private static  final int ORDER_BIT_NUM = 4;
 
     @Override
-    public String getNextBusinessCode() {
+    public String genNextBusinessCode() {
         int indx = bCodeManager.getNextBusinessCode();
         String code = "";
         for(int i=1;i<BUSINESS_BIT_NUM;i++){
@@ -43,15 +43,15 @@ public class BCodeServiceImpl implements BCodeService {
         return PREFIX_BUSINESS + getToday() + code;
     }
 
-    public  static void main(String[] args){
+  /*  public  static void main(String[] args){
         FileSystemXmlApplicationContext context = new FileSystemXmlApplicationContext("D:/workspace/fuhuadata/fuhuadata/fuhuadata-web/src/main/resources/spring-config.xml");
         BCodeService s = (BCodeService)context.getBean(BCodeService.class);
         for(int i=1;i<=100;i++){
             System.out.println(s.getNextOrderCode());
         }
-    }
+    }*/
     @Override
-    public String getNextOrderCode() {
+    public String genNextOrderCode() {
         int indx = bCodeManager.getNextOrderCode();
         String code = "";
         for(int i=1;i<ORDER_BIT_NUM;i++){
@@ -67,7 +67,7 @@ public class BCodeServiceImpl implements BCodeService {
     }
 
     @Override
-    public String getNextStandardProductCode(ProductInfo productInfo) {
+    public String genNextStandardProductCode(ProductInfo productInfo) {
         String[] split_categroy = productInfo.getCategoryName().split("-");
         String one_level = null;
         String two_level = null;
@@ -89,7 +89,7 @@ public class BCodeServiceImpl implements BCodeService {
     }
 
     @Override
-    public String getNextPackagingMaterialCode(PackingArchives packingArchives) {
+    public String genNextPackagingMaterialCode(PackingArchives packingArchives) {
         return packingArchives.getBigCategoryId()+ "" + bCodeManager.getNextPackagingMaterialCode();
 
     }

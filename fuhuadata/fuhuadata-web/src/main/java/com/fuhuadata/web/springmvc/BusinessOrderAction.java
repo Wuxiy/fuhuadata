@@ -138,7 +138,7 @@ public class BusinessOrderAction {
     @RequestMapping("/intoBusinessConverse")
     @SystemLogAnnotation(module = "salesStatistics",methods = "intoBusinessConverse")
     public ModelAndView intoBusinessConverse(String businessId){
-        String orderId = bCodeService.getNextOrderCode();
+        String orderId = bCodeService.genNextOrderCode();
         Result<BusinessInfoVO> result = businessInfoService.getBusinessInfoByBusinessId(businessId);
         return new ModelAndView("salesStatistics/offerAdd").addObject("orderId",orderId).addObject("businessId",businessId).addObject("businessInfo",result.getModel());
     }

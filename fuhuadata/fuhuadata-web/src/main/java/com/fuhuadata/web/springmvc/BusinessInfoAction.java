@@ -93,7 +93,7 @@ public class BusinessInfoAction {
     @RequestMapping(value="/AddBusinessInfo",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "intoAdd")
     public ModelAndView intoAddBusinessInfo(){
-        String businessId = bCodeService.getNextBusinessCode();
+        String businessId = bCodeService.genNextBusinessCode();
         return new ModelAndView("/salesStatistics/businessOpportunityAdd").addObject("businessId",businessId);
     }
 
