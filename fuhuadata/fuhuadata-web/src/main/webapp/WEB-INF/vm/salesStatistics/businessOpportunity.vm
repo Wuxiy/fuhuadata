@@ -44,9 +44,9 @@
                         <!--搜索&筛选控件-->
                         <div class="form-horizontal">
                             <div class="form-group">
-                                <div class="col-xs-12">
+                                <div class="col-xs-10 pull-right">
                                     <!--搜索栏-->
-                                    <div class="input-group">
+                                    <form class="input-group">
                                         <span class="input-group-addon" lang="zh">客户名称</span>
                                         <input class="form-control" id="customerName" />
                                         <span class="input-group-addon" lang="zh">商机来源</span>
@@ -85,9 +85,12 @@
                                             <option value="5" lang="zh">其他</option>
                                         </select>
                                         <div class="input-group-btn">
+                                            <button class="btn btn-xs btn-default" type="reset">重置</button>
+                                        </div>
+                                        <div class="input-group-btn">
                                             <button class="btn btn-xs btn-primary" id="submit" type="button">搜索</button>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -124,9 +127,9 @@
                             </tbody>
                         </table>
                         <!--分页导航-->
-                        <div id="pagination" class="pagination"></div>
-                    </div>
+                    <div id="pagination" class="pagination"></div>
                 </div>
+            </div>
         </div>
     </div>
 </div>
@@ -194,14 +197,15 @@
 
         // 提交失败原因
         $('#upReasons').on('click',function () {
-            CRM.ajaxCall({
+            $.ajax({
                 url : '/businessInfo/updateBusinessInfoById',
                 data : JSON.stringify(cltReaData(thisOrder,$('#reason').val())),
                 type :'POST',
                 contentType : "application/json",
-                callback:function () {
+                success:function () {
                     $('#rModal').modal('hide');
                     alert('提交成功');
+                    $('#reason').val('');
                     serach();
                 }
             })
@@ -211,9 +215,9 @@
     // 流失原因需要上传的数据
     function cltReaData(num,con) {
         var obj = {
-            orderId : num,
-            failureAnalysis : con,
-            status : -2
+            businessId : num,
+            failReason : con,
+            businessState : 1
         }
         return obj;
     }
@@ -273,7 +277,8 @@
                         _html += (ResultData[i].businessState!=0)?'<td>'+businessState[ResultData[i].businessState]+'</td>':
                                 '<td><a data-toggle="dropdown" class="dropdown"  href="#">'+businessState[ResultData[i].businessState]+'</a>' +
                                 '<ul class="dropdown-menu pull-right"> ' +
-                                '<li><a href="'+ResultData[i].businessId+'">报价</a></li>' +
+                                '<li><a href="/businessOrder/intoBusinessConverse?businessId='+
+                                    ResultData[i].businessId+'">报价</a></li>' +
                                 '<li><a data-val="'+ResultData[i].businessId+'" data-toggle="modal" href="#rModal">失败</a></li> ' +
                                 '</ul></td>';
                         _html += '</tr>';

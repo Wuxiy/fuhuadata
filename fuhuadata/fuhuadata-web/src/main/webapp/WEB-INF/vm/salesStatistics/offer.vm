@@ -220,6 +220,7 @@
                 callback:function () {
                     $('#rModal').modal('hide');
                     alert('提交成功');
+                    $('#reason').val('');
                     serach();
                 }
             })
