@@ -14,7 +14,16 @@ public class CustomerBaseInfoLinkman {
 
     private Integer companyType;//企业类别 0：客户，1：竞对
 
+    /**中信保信用评级,0未知,1:1A,2:2A,3:3A,4:4A**/
+    private Integer zhongxinbaoLevel;
+
     private String customerAreaId;
+
+    /**企业电话**/
+    private String enterprisePhone;
+
+    /**企业邮箱**/
+    private String enterpriseEmail;
 
     private String customerArea;
 
@@ -154,5 +163,29 @@ public class CustomerBaseInfoLinkman {
 
     public void setEncyId(String encyId) {
         this.encyId = encyId;
+    }
+
+    public Integer getZhongxinbaoLevel() {
+        return zhongxinbaoLevel;
+    }
+
+    public void setZhongxinbaoLevel(Integer zhongxinbaoLevel) {
+        this.zhongxinbaoLevel = zhongxinbaoLevel;
+    }
+
+    public String getEnterprisePhone() {
+        return enterprisePhone;
+    }
+
+    public void setEnterprisePhone(String enterprisePhone) {
+        this.enterprisePhone = enterprisePhone;
+    }
+
+    public String getEnterpriseEmail() {
+        return enterpriseEmail;
+    }
+
+    public void setEnterpriseEmail(String enterpriseEmail) {
+        this.enterpriseEmail = enterpriseEmail;
     }
 }

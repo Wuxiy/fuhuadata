@@ -17,6 +17,9 @@ public class CustomerBaseInfo implements Serializable{
     /**企业全称**/
 	private String fullName;
 
+	/**客户税号**/
+	private String customerDutyParagraph;
+
 
 	/**企业简称**/
 	private String shortName;
@@ -762,5 +765,13 @@ public class CustomerBaseInfo implements Serializable{
 
 	public void setCountryzoneName(String countryzoneName) {
 		this.countryzoneName = countryzoneName;
+	}
+
+	public String getCustomerDutyParagraph() {
+		return customerDutyParagraph;
+	}
+
+	public void setCustomerDutyParagraph(String customerDutyParagraph) {
+		this.customerDutyParagraph = customerDutyParagraph;
 	}
 }

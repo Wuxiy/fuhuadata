@@ -20,6 +20,9 @@ public class CustomerBaseInfoVO {
     /**企业全称**/
     private String fullName;
 
+    /**客户税号**/
+    private String customerDutyParagraph;
+
     /**企业性质 1：工厂 2：分销商 3：经销商 4：终端客户 5：其他**/
     //多选1,2,3
     private String enterpriseNature;
@@ -623,5 +626,13 @@ public class CustomerBaseInfoVO {
 
     public void setCountryzoneName(String countryzoneName) {
         this.countryzoneName = countryzoneName;
+    }
+
+    public String getCustomerDutyParagraph() {
+        return customerDutyParagraph;
+    }
+
+    public void setCustomerDutyParagraph(String customerDutyParagraph) {
+        this.customerDutyParagraph = customerDutyParagraph;
     }
 }

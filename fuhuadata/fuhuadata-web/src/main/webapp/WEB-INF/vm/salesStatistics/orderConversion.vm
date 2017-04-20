@@ -63,7 +63,6 @@
     </div>
 </div>
 
-<input id="orderId" type="hidden" value="$!{orderId}">
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="JavaScript">
@@ -71,7 +70,7 @@
     var conversiontable = $('#conversiontable').val();
 
     $(document).ready(function(){
-
+        console.log(orderId)
         jQuery.ajax({
             url:basePath + '' + orderId,
             type:'POST',
@@ -81,7 +80,7 @@
                 for(var i=0;i<result.length;i++){
                     var ResultData = result[i];
                     conversiontable.innerHTML += '<tr>' +
-                                    '<td>'+ResultData.name+'</td>
+                                    '<td>'+ResultData.name+'</td>'+
                                     '<td>'+ResultData.name+'</td>'+
                                     '<td><input type="checkbox" name="cellcheckbox" value="'+ResultData.businessProductId+'">'+ResultData.name+'</td>'+
                                     '<td><input class="form-control" type="text" value="'+ResultData.name+'"></td>'+

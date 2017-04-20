@@ -147,6 +147,10 @@ public class BusinessOrderProductDaoImpl extends BaseDao<BusinessOrderProduct> i
     public List<BusinessOrderProduct> getBusinessOrderProducts(String orderId){
         try{
             List<BusinessOrderProduct> list = sqlMapClient.queryForList(GET_ORDER_PRODUCTS_BY_ORDER_ID, orderId);
+
+            for(int i=0; i < list.size()-1;i++){
+                System.out.println(list.get(i).getMinPrice()+"1111111111111111111");
+            }
             return list;
         }catch(Exception e){
             e.printStackTrace();
