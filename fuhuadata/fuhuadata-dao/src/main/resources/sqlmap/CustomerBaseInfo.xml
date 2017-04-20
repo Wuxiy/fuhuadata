@@ -498,10 +498,14 @@
 				a.`name` linkmanName,
 				a.link_phone1 linkPhone1,
 				a.link_phone2 linkPhone2,
-				a.lemail lemail
+				a.lemail lemail,
+				GROUP_CONCAT(nature.nature) enterprise_nature,
+				base.other_enterprise_nature
 			FROM
 				customer_base_info base
 			LEFT JOIN customer_linkman a ON a.customer_id = base.customer_id
+			LEFT JOIN customer_enterprise_nature nature
+							ON nature.customer_id=base.customer_id
 			WHERE
 				a.is_default = 1 AND base.customer_id=#customerId#
 		]]>
@@ -662,7 +666,6 @@
 		<isNotEqual property="areaId" compareValue="0">
 			and	country_id = #areaId#
 		</isNotEqual>
-
 	</select>
 
 	<select id="countOrderByCustomer" resultClass="CustomerBaseInfo" parameterClass="java.lang.String">

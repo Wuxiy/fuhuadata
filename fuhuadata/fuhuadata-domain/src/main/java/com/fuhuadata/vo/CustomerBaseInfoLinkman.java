@@ -29,7 +29,11 @@ public class CustomerBaseInfoLinkman {
 
     private Integer customerLevel;
 
+    private String fullEnterpriseNature;
+
     private String enterpriseNature;
+
+    private String otherEnterpriseNature;
 
     private String country;
 
@@ -187,5 +191,21 @@ public class CustomerBaseInfoLinkman {
 
     public void setEnterpriseEmail(String enterpriseEmail) {
         this.enterpriseEmail = enterpriseEmail;
+    }
+
+    public String getFullEnterpriseNature() {
+        return fullEnterpriseNature;
+    }
+
+    public void setFullEnterpriseNature(String fullEnterpriseNature) {
+        this.fullEnterpriseNature = fullEnterpriseNature;
+    }
+
+    public String getOtherEnterpriseNature() {
+        return otherEnterpriseNature;
+    }
+
+    public void setOtherEnterpriseNature(String otherEnterpriseNature) {
+        this.otherEnterpriseNature = otherEnterpriseNature;
     }
 }
