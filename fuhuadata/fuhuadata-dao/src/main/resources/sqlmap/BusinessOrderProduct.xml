@@ -82,7 +82,7 @@
     <select id="getPackageRequireByOrderId" parameterClass="java.lang.String" resultMap="BusinessOrderProductResultMap">
     </select>
 
-    <select id="getOrderProductsByOrderId" parameterClass="java.lang.String" resultMap="BusinessOrderProductResultMap">
+    <select id="getOrderProductsByOrderId" parameterClass="java.lang.String" resultClass="BusinessOrderProduct">
         SELECT
         bop.id,
         bop.order_id,
