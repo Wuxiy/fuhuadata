@@ -44,9 +44,9 @@
                         <!--搜索&筛选控件-->
                         <div class="form-horizontal">
                             <div class="form-group">
-                                <div class="col-xs-12">
+                                <div class="col-xs-10 pull-right">
                                     <!--搜索栏-->
-                                    <div class="input-group">
+                                    <form class="input-group">
                                         <span class="input-group-addon" lang="zh">客户名称</span>
                                         <input class="form-control" type="text" value="" id="customerName" />
                                         <span class="input-group-addon" lang="zh">订单编号</span>
@@ -77,9 +77,12 @@
                                             <option value="5" lang="zh">其他</option>
                                         </select>
                                         <div class="input-group-btn">
+                                            <button class="btn btn-xs btn-default" type="reset">重置</button>
+                                        </div>
+                                        <div class="input-group-btn">
                                             <button class="btn btn-xs btn-primary" id="submit" type="button">搜索</button>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -88,34 +91,52 @@
                             <caption class="text-right"><span lang="zh">金额单位：万元</span></caption>
                             <thead>
                             <tr>
-                                <th class="text-center col-lg-1" lang="zh">订单编号</th>
-                                <th class="text-center col-lg-1" lang="zh">商机编号</th>
-                                <th class="text-center col-lg-1" lang="zh">客户名称</th>
-                                <th class="text-center col-lg-1" lang="zh">客户类型</th>
-                                <th class="text-center col-lg-1" lang="zh">企业性质</th>
-                                <th class="text-center col-lg-1" lang="zh">订单总价</th>
-                                <th class="text-center col-lg-4" lang="zh">订单产品</th>
-                                <th class="text-center col-lg-1" lang="zh">状态</th>
+                                <th class="text-center col-xs-1" lang="zh">订单编号</th>
+                                <th class="text-center col-xs-1" lang="zh">商机编号</th>
+                                <th class="text-center col-xs-1" lang="zh">客户名称</th>
+                                <th class="text-center col-xs-1" lang="zh">客户类型</th>
+                                <th class="text-center col-xs-1" lang="zh">企业性质</th>
+                                <th class="text-center col-xs-1" lang="zh">订单总价</th>
+                                <th class="text-center col-xs-4" lang="zh">订单产品</th>
+                                <th class="text-center col-xs-1" lang="zh">状态</th>
                             </tr>
                             </thead>
-                            <tbody id="offerList">
-                            <tr>
-                                <td>00001</td>
-                                <td><a href="" target="_blank">草甘膦原药采购</a></td>
-                                <td>NUFARM</td>
-                                <td>战略客户</td>
-                                <td>经销商</td>
-                                <td>客户主要销售草甘膦系列产品，有原药采购需求</td>
-                                <td>门店考察</td>
-                                <td>100</td>
-                                <td>正常</td>
-                            </tr>
-                            </tbody>
+                            <tbody id="offerList"></tbody>
                         </table>
                         <!--分页导航-->
                         <div id="pagination" class="pagination"></div>
                     </div>
                 </div>
+        </div>
+    </div>
+</div>
+
+## 失败原因modal
+<div class="modal fade" id="rModal" tabindex="-1" role="dialog" data-backdrop="false" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="rForm" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="reason" class="control-label col-xs-2">失败原因<sup class="not-null">*</sup></label>
+                        <div class="col-xs-9">
+                            <textarea class="form-control" id="reason" name="reason" rows="6"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-2  col-xs-offset-9">
+                        <button id="upReasons" data-form-btn="add" type="button" class="btn btn-block btn-primary" lang="zh">提交</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -135,24 +156,24 @@
         <td lang="zh"><%=data[i].enterpriseNature%></td>
         <td><%=data[i].amountPayable%></td>
         <td><%=data[i].orderProduct%></td>
-        <%if ((data[i].status + 2)==0) {%>
-        <td lang="zh"><%=businessStateList[ResultData[i].status + 2]%></td>
+        <%if ((data[i].status+2)!=2) {%>
+        <td lang="zh"><%=businessStateList[data[i].status + 2]%></td>
         <%} else{%>
         <td lang="zh">
             <a data-toggle="dropdown" class="dropdown" href="#"><%=businessStateList[data[i].status + 2]%></a>
             <ul class="dropdown-menu pull-right">
-                <li><a href="#<%=%>">转化</a></li>
-                <li><a data-toggle="modal" href="#reasonM">失败</a></li>
+                <li><a href="/businessOrder/intoBusinessOfferConverse?orderId=<%=data[i].orderId%>">转化</a></li>
+                <li><a data-val="<%=data[i].orderId%>" data-toggle="modal" href="#rModal">失败</a></li>
             </ul>
         </td>
         <%}%>
     </tr>
-##    <li><a href="#" data-val="<%=data[i].vcode%>" style="padding-left: 6px"><%=data[i].vname%></a></li>
     <%}%>
     <%}%>
 </script>
 
 <script type="text/javascript" src="${request.contextPath}/lib/js/pagination/pagination.js"></script>
+<script type="text/javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/js/pagination/pagination.css" />
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 
@@ -164,17 +185,55 @@
     }
 
     $(document).ready(function(){
+
         //生成地区目录树
         $('#tree').creatTree('/customerBaseInfo/initAreaCategoryTree');
+
         //目录树节点绑定点击事件
         $('#tree').bindClickForCusArea(click_node);
+
         //搜索按钮绑定事件
         $("#submit").click(function(){
             serach();
         });
+
         //默认查询数据
         serach();
+
+        // 弹出失败原因模态
+        var thisOrder = '';
+        $(document).on('click','a[href="#rModal"]',function (e) {
+            // 取得当前订单号
+            thisOrder = $(this).data('val');
+            // 打开modal
+            $('#rModal').modal('show');
+        })
+
+        // 提交失败原因
+        $('#upReasons').on('click',function () {
+            CRM.ajaxCall({
+                url : '/businessOrder/updateOfferStatus',
+                data : JSON.stringify(cltReaData(thisOrder,$('#reason').val())),
+                type :'POST',
+                contentType : "application/json",
+                callback:function () {
+                    $('#rModal').modal('hide');
+                    alert('提交成功');
+                    serach();
+                }
+            })
+        });
     })
+
+    // 流失原因需要上传的数据
+    function cltReaData(num,con) {
+        var obj = {
+            orderId : num,
+            failureAnalysis : con,
+            status : -2
+        }
+        return obj;
+    }
 
     //查询按钮提交数据
     function serach(){
@@ -188,10 +247,6 @@
         });
     }
 
-    var customerLevelList = ['战略客户','大客户' ,'重要客户' ,'一般客户' ,'风险客户'];
-    var businessOpportunity = ['工厂','分销商' ,'经销商' ,'终端客户' ,'其他'];
-    var businessStateList = ['报价失败','订单取消','待下单','已下单','已转化成订单','数据已上报到NC','已签约'];
-    //根据页码获取列表数据
     function getDataList(pageNum,jq){
         var data = {
             orderId:$('#orderId').val(),
@@ -213,48 +268,10 @@
             data:JSON.stringify(data),
             success:function(data){
                 var ResultData = data.data;
-//                var _html = '';
-
-//                if(ResultData && ResultData!='' && ResultData!='null') {
-//                    for (var i = 0; i < ResultData.length; i++) {
-//                        _html += '<tr>';
-//                        _html += '<td><a href="'+basePath+'/businessOrder/intoOfferorOrder?orderId='+ResultData[i].orderId+'">' + ResultData[i].orderId + '</a></td>';
-//                        _html += '<td><a href="">' + ResultData[i].businessId + '</a></td>';
-//                        _html += '<td>' + ResultData[i].customerName + '</td>';
-//                        _html += '<td lang="zh">' + customerLevelList[ResultData[i].customerLevel - 1] + '</td>';
-//                        _html += '<td lang="zh">' + ResultData[i].enterpriseNature + '</td>';
-//                        _html += '<td>' + ResultData[i].amountPayable + '</td>';
-//                        _html += '<td>' + ResultData[i].orderProduct + '</td>';
-//                        _html += (ResultData[i].status + 2!=0)?('<td lang="zh">' + businessStateList[ResultData[i].status + 2] + '</td>'):
-//                                ('<td lang="zh">' +
-//                                '<a data-toggle="dropdown" class="dropdown-toggle" href="#"' + businessStateList[ResultData[i].status + 2] +'</a>' +
-//                                '<ul class="dropdown-menu pull-right"> ' +
-//                                '<li><a href="/">转化</a></li> ' +
-//                                '<li><data-toggle="modal" href="#reasonM">失败</></li> ' +
-//                                '</ul></td>');
-//                        _html += '</tr>';
-//                    }
-//                }
-                CRM.tplHandler('olC',ResultData,$('#offerList'))
-                $("#offerList").html(_html);
+                CRM.tplHandler('olC',ResultData,$('#offerList'));
             }
         });
     }
-
-    /*分页插件参数
-    参数名	描述	参数值
-    maxentries	总条目数	必选参数，整数
-    items_per_page	每页显示的条目数	可选参数，默认是10
-    num_display_entries	连续分页主体部分显示的分页条目数	可选参数，默认是10
-    current_page	当前选中的页面	可选参数，默认是0，表示第1页
-    num_edge_entries	两侧显示的首尾分页的条目数	可选参数，默认是0
-    link_to	分页的链接	字符串，可选参数，默认是"#"
-    prev_text	“前一页”分页按钮上显示的文字	字符串参数，可选，默认是"Prev"
-    next_text	“下一页”分页按钮上显示的文字	字符串参数，可选，默认是"Next"
-    ellipse_text	省略的页数用什么文字表示	可选字符串参数，默认是"..."
-    prev_show_always	是否显示“前一页”分页按钮	布尔型，可选参数，默认为true，即显示“前一页”按钮
-    next_show_always	是否显示“下一页”分页按钮	布尔型，可选参数，默认为true，即显示“下一页”按钮
-    callback	回调函数	默认无执行效果*/
 
     /**
      * 获取列表数据总条目数
