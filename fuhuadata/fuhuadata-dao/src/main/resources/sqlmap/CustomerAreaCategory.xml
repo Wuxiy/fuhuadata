@@ -4,24 +4,15 @@
 
 <sqlMap namespace="CustomerArea">
     <typeAlias alias="CustomerArea" type="com.fuhuadata.domain.CustomerArea"/>
-    <resultMap id="CUSTOMERAREA-MAP" class="CustomerArea">
-        <result property="areaId" column="area_id" jdbcType="INT" javaType="java.lang.String"/>
-        <result property="areaName" column="area_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result property="areaClassId" column="areaclass_id" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result property="areaClassName" column="areaclass_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
-    </resultMap>
 
-
-    <select id="getAllList" resultMap="CUSTOMERAREA-MAP" >
+    <select id="getAllList" resultClass="CustomerArea" >
         SELECT
-            pa.`areaclass_id`,
-            pa.`name` areaclass_name,
-            pac.`areaid` area_id,
-            pac.`area_name`
+            pk_areacl pkAreacl,
+            code ,
+            name,
+            pk_fatherarea pkFatherarea
         FROM
-            p_area_code pac,
-            p_areaclass pa
-        WHERE pac.`areaclass_id` = pa.`areaclass_id`
+            t_areacl
     </select>
 
 </sqlMap>
