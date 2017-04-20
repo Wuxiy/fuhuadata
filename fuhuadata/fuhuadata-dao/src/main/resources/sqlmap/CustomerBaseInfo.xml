@@ -493,7 +493,7 @@
 				base.customer_area customerArea,
 				base.country country,
 				base.customer_level customerLevel,
-				base.full_enterprise_nature enterpriseNature,
+				base.full_enterprise_nature fullEnterpriseNature,
 				a.linkman_id linkmanId,
 				a.`name` linkmanName,
 				a.link_phone1 linkPhone1,

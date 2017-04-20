@@ -147,6 +147,7 @@ public class CustomerBaseInfo implements Serializable{
     /**创建时间**/
 	private String createTime;
 
+
     /**修改时间**/
 	private String modifyTime;
 	/*合同总金额*/
@@ -199,6 +200,8 @@ public class CustomerBaseInfo implements Serializable{
 	//所属销售组织名称
 	private String saleOrganizationName;
 	private String encyId;// 百科id 用来判断客户是否有百科
+
+	private String customerDutyParagraph;//客户税号
 	public CustomerBaseInfo() {
 	}
 
