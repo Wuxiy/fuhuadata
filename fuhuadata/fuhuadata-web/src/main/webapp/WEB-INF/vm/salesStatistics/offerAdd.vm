@@ -333,7 +333,7 @@
 
     $('#finish').click(function(){
         jQuery.ajax({
-            url: basePath +'businessOrder/doAddBusinessOrder',
+            url: basePath +'/businessOrder/doAddBusinessOrder',
             type:'POST',
             contentType:"application/json",
             data:getOrder(),

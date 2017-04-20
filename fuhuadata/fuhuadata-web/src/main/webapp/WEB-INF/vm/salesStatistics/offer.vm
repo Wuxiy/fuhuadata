@@ -120,6 +120,37 @@
     </div>
 </div>
 
+## 报价列表
+<script id="olC" type="text/html">
+    <%if (data.length>0) {%>
+    <%for (var i=0; i<data.length; i++) {
+        var customerLevelList = ['战略客户','大客户' ,'重要客户' ,'一般客户' ,'风险客户'];
+        var businessOpportunity = ['工厂','分销商' ,'经销商' ,'终端客户' ,'其他'];
+        var businessStateList = ['报价失败','订单取消','待下单','已下单','已转化成订单','数据已上报到NC','已签约'];
+    %>
+    <tr>
+        <td><a href="/businessOrder/intoOfferorOrder?orderId=<%=data[i].businessId%>"><%=data[i].orderId%></a></td>
+        <td><a href=""><%=data[i].businessId%></a></td>
+        <td>福华</td><td lang="zh"><%=customerLevelList[data[i].customerLevel - 1]%></td>
+        <td lang="zh"><%=data[i].enterpriseNature%></td>
+        <td><%=data[i].amountPayable%></td>
+        <td><%=data[i].orderProduct%></td>
+        <%if ((data[i].status + 2)==0) {%>
+        <td lang="zh"><%=businessStateList[ResultData[i].status + 2]%></td>
+        <%} else{%>
+        <td lang="zh">
+            <a data-toggle="dropdown" class="dropdown" href="#"><%=businessStateList[data[i].status + 2]%></a>
+            <ul class="dropdown-menu pull-right">
+                <li><a href="#<%=%>">转化</a></li>
+                <li><a data-toggle="modal" href="#reasonM">失败</a></li>
+            </ul>
+        </td>
+        <%}%>
+    </tr>
+##    <li><a href="#" data-val="<%=data[i].vcode%>" style="padding-left: 6px"><%=data[i].vname%></a></li>
+    <%}%>
+    <%}%>
+</script>
 
 <script type="text/javascript" src="${request.contextPath}/lib/js/pagination/pagination.js"></script>
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/js/pagination/pagination.css" />
@@ -182,21 +213,29 @@
             data:JSON.stringify(data),
             success:function(data){
                 var ResultData = data.data;
-                var _html = '';
-                if(ResultData && ResultData!='' && ResultData!='null') {
-                    for (var i = 0; i < ResultData.length; i++) {
-                        _html += '<tr>';
-                        _html += '	<td><a href="'+basePath+'/businessOrder/intoOfferorOrder?orderId='+ResultData[i].orderId+'">' + ResultData[i].orderId + '</a></td>';
-                        _html += '  <td><a href="">' + ResultData[i].businessId + '</a></td>';
-                        _html += '  <td>' + ResultData[i].customerName + '</td>';
-                        _html += '  <td lang="zh">' + customerLevelList[ResultData[i].customerLevel - 1] + '</td>';
-                        _html += '  <td lang="zh">' + ResultData[i].enterpriseNature + '</td>';
-                        _html += '  <td>' + ResultData[i].amountPayable + '</td>';
-                        _html += '  <td>' + ResultData[i].orderProduct + '</td>';
-                        _html += '  <td lang="zh">' + businessStateList[ResultData[i].status + 1]  + '</td>';
-                        _html += '   </tr>';
-                    }
-                }
+//                var _html = '';
+
+//                if(ResultData && ResultData!='' && ResultData!='null') {
+//                    for (var i = 0; i < ResultData.length; i++) {
+//                        _html += '<tr>';
+//                        _html += '<td><a href="'+basePath+'/businessOrder/intoOfferorOrder?orderId='+ResultData[i].orderId+'">' + ResultData[i].orderId + '</a></td>';
+//                        _html += '<td><a href="">' + ResultData[i].businessId + '</a></td>';
+//                        _html += '<td>' + ResultData[i].customerName + '</td>';
+//                        _html += '<td lang="zh">' + customerLevelList[ResultData[i].customerLevel - 1] + '</td>';
+//                        _html += '<td lang="zh">' + ResultData[i].enterpriseNature + '</td>';
+//                        _html += '<td>' + ResultData[i].amountPayable + '</td>';
+//                        _html += '<td>' + ResultData[i].orderProduct + '</td>';
+//                        _html += (ResultData[i].status + 2!=0)?('<td lang="zh">' + businessStateList[ResultData[i].status + 2] + '</td>'):
+//                                ('<td lang="zh">' +
+//                                '<a data-toggle="dropdown" class="dropdown-toggle" href="#"' + businessStateList[ResultData[i].status + 2] +'</a>' +
+//                                '<ul class="dropdown-menu pull-right"> ' +
+//                                '<li><a href="/">转化</a></li> ' +
+//                                '<li><data-toggle="modal" href="#reasonM">失败</></li> ' +
+//                                '</ul></td>');
+//                        _html += '</tr>';
+//                    }
+//                }
+                CRM.tplHandler('olC',ResultData,$('#offerList'))
                 $("#offerList").html(_html);
             }
         });
