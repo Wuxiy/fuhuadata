@@ -17,7 +17,7 @@
                             <div class="form-group ">
                                 <label class="col-xs-1 control-label" lang="zh">订单编号</label>
                                 <div class="col-xs-3">
-                                    <input data-val="$!{businessOrderProduct.product}" class="form-control" type="text" id="orderId" value="" disabled />
+                                    <input data-val="$!{businessOrderProduct.businessOrderProducts}" class="form-control" type="text" id="orderId" value="$!{orderId}" disabled />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -25,7 +25,7 @@
                                     <table class="table table-condensed table-bordered table-striped text-center">
                                         <thead>
                                         <tr>
-                                            <th class="text-center col-xs-3" lang="zh">商机产品</th>
+                                            <th class="text-center col-xs-6" lang="zh">商机产品</th>
                                             <th class="text-center col-xs-2" lang="zh">最低销售价（元）</th>
                                             <th class="text-center col-xs-2" lang="zh">是否转化</th>
                                             <th class="text-center col-xs-2" lang="zh">合同单价（元）</th>
@@ -34,23 +34,21 @@
                                         <tbody id="conversiontable">
                                         #if($!{businessOrderProduct})
                                             #foreach($info in $!{businessOrderProduct.businessOrderProducts})
-                                            <tr>
+                                            <tr name="item">
                                                 <td>$!info.name</td>
-                                                <td></td>
-                                                <td>
-
-                                                </td>
-                                                <td><input class="form-control" type="number" /></td>
+                                                <td>$!info.minPrice</td>
+                                                <td><input name="checkItem" type="checkbox" #if($!info.transformState==0) checked #end value="1"/></td>
+                                                <td><input name="onePrice" class="form-control" type="number" /></td>
                                             </tr>
                                             #end
                                         #end
                                         </tbody>
                                         <tfoot>
                                         <tr>
-                                            <td>产品总价</td>
+                                            <td class="text-danger">产品总价</td>
                                             <td></td>
                                             <td></td>
-                                            <td></td>
+                                            <td id="totalPrice"></td>
                                         </tr>
                                         </tfoot>
                                     </table>
@@ -74,30 +72,42 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="JavaScript">
-    var orderId = $('#orderId').val();
-    var conversiontable = $('#conversiontable').val();
+
 
     $(document).ready(function(){
 
-        jQuery.ajax({
-            url:basePath + '' + orderId,
-            type:'POST',
-            data:'',
-            success:function(result){
-                conversiontable.innerHTML = '';
-                for(var i=0;i<result.length;i++){
-                    var ResultData = result[i];
-                    conversiontable.innerHTML += '<tr>' +
-                                    '<td>'+ResultData.name+'</td>
-                                    '<td>'+ResultData.name+'</td>'+
-                                    '<td><input type="checkbox" name="cellcheckbox" value="'+ResultData.businessProductId+'">'+ResultData.name+'</td>'+
-                                    '<td><input class="form-control" type="text" value="'+ResultData.name+'"></td>'+
-                                    '</tr>';
-                }
-            }
-        })
+        $(document).on('input.cc','input[name="onePrice"]',function () {
+            var total = 0;
 
+            $('input[name="checkItem"]').filter(':checked').closest('tr')
+                    .find('input[name="onePrice"]').each(function () {
+                var oneItem = $(this).val()!=''?$(this).val():0;
+
+                total += parseInt(oneItem);
+            });
+
+            $('#totalPrice').text(total);
+        });
+
+        $(document).on('click.cc','input[name="checkItem"]',function () {
+            var total = 0;
+
+            $('input[name="checkItem"]').filter(':checked').closest('tr')
+                    .find('input[name="onePrice"]').each(function () {
+                var oneItem = $(this).val()!=''?$(this).val():0;
+
+                total += parseInt(oneItem);
+            });
+
+            $('#totalPrice').text(total);
+        });
+
+        var orderId = $('#orderId').val();
+        var conversiontable = $('#conversiontable').val();
     })
+
+    //
+
 
     $('#finish').click(function(){
         jQuery.ajax({
@@ -108,7 +118,7 @@
                 console.log(result);
             }
         })
-    })
+    });
 
     function getIds() {
         var ids = new Array();
