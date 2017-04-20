@@ -85,13 +85,14 @@
     <select id="getOrderProductsByOrderId" parameterClass="java.lang.String" resultClass="BusinessOrderProduct">
         SELECT
         bop.id,
-        bop.order_id,
-        bop.product_id,
-        bop.customer_product_name,
-        bop.`name`,
-        bop.min_price,
-        bop.transform_state,
-        bop.contract_price
+        bop.order_id orderId,
+        bop.product_id productId,
+        bop.customer_product_name customerProductName,
+        bop.`name` name,
+        bop.
+        bop.min_price minPrice,
+        bop.transform_state transformState,
+        bop.contract_price contractPrice
         FROM
         business_order_product bop
         WHERE

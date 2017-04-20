@@ -19,6 +19,8 @@ public class BusinessInfo {
 
     private String customerName;//客户名称
 
+    private String customerDutyParagraph;//客户税号
+
     private String enterprisePhone;//企业电话
 
     private String enterpriseEmail;//企业邮箱
@@ -324,5 +326,13 @@ public class BusinessInfo {
 
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
+    }
+
+    public String getCustomerDutyParagraph() {
+        return customerDutyParagraph;
+    }
+
+    public void setCustomerDutyParagraph(String customerDutyParagraph) {
+        this.customerDutyParagraph = customerDutyParagraph;
     }
 }

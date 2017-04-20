@@ -336,6 +336,8 @@
 						<isNotEmpty prepend=", " property="saleOrganizationId">sale_organization_id = #saleOrganizationId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="saleOrganizationName">sale_organization_name = #saleOrganizationName#</isNotEmpty>
 
+						<isNotEmpty prepend=", " property="customerDutyParagraph">customer_duty_paragraph = #customerDutyParagraph#</isNotEmpty>
+
 					</dynamic>
 		WHERE customer_id=#customerId#
 	</update>
@@ -444,7 +446,7 @@
 		<result property="enterprisePhone" column="enterprise_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="enterpriseEmail" column="enterprise_email" jdbcType="VARCHAR" javaType="java.lang.String" />
 
-
+		<result property="customerDutyParagraph" column="customer_duty_paragraph" jdbcType="VARCHAR" javaType="java.lang.String"/>
 		<result property="enterpriseNature" column="enterprise_nature" jdbcType="VARCHAR" javaType="java.lang.String"/>
 		<result property="otherEnterpriseNature" column="other_enterprise_nature" jdbcType="VARCHAR" javaType="java.lang.String" />
 	</resultMap>
@@ -485,6 +487,9 @@
 				base.short_name shortName,
 				base.company_type companyType,
 				base.customer_area_id customerAreaId,
+				base.zhongxinbao_level zhongxinbaoLevel,
+				base.enterprise_email enterpriseEmail,
+				base.enterprise_phone enterprisePhone,
 				base.customer_area customerArea,
 				base.country country,
 				base.customer_level customerLevel,

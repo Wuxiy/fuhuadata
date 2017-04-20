@@ -20,7 +20,7 @@
                                 <button id="edit" data-btn="edit" data-view="editHide"  class="btn btn-primary" type="button" lang="zh">
                                     编辑
                                 </button>
-                                <a class="btn btn-primary" target="_blank" id="offer">报价</a>
+                                <a class="btn btn-primary hidden" target="_blank" id="offer">报价</a>
                             </div>
                             <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right">
                                 <a id="cancel" data-btn="cancel" data-view="editView" class="btn btn-default hidden" lang="zh">取消</a>
@@ -135,7 +135,7 @@
                                 <div class="form-group">
                                     <label class="col-xs-1 control-label" lang="zh">商机状态</label>
                                     <div class="col-xs-2">
-                                        <select data-control="off" class="form-control" id="businessState" disabled>
+                                        <select class="form-control" id="businessState" disabled>
                                             <option value="0" lang="zh">待报价</option>
                                             <option value="1" lang="zh">失败</option>
                                             <option value="2" lang="zh">已转化</option>
@@ -276,6 +276,7 @@
     </div>
 </div>
 
+
 ##<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
@@ -399,6 +400,9 @@
                 $('#estimatedPurchase0').val(intentionalProducts[0].estimatedPurchase);
                 $('#estimatedPurchase1').val(intentionalProducts[1].estimatedPurchase);
             }
+            if(ResultData.businessState!=undefined&&ResultData.businessState == 0){
+                $('#offer').removeClass('hidden');
+            }
             $('#businessName').val(ResultData.businessName);
             $('#businessId').val(ResultData.businessId);
             $('#businessFrom').val(ResultData.businessFrom);
@@ -422,10 +426,6 @@
             $('#createUserName').val(ResultData.createUserName);
             $('#createTime').val(ResultData.createTime);
         }
-
-
-
-
 
         var _html = '';
 

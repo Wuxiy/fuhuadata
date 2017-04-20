@@ -10,6 +10,11 @@
             <!--基本信息-->
             <div class="panel panel-default">
                 <div class="panel-heading">
+                    <div class="btn-group panel-heading-btn pull-right">
+                        <button class="btn btn-xs btn-default" id="back">返回</button>
+                        <button class="btn btn-xs btn-primary" type="button" id="finish">完成</button>
+                    </div>
+
                     <h3 class="panel-title" lang="zh">
                         基本信息
                     </h3>
@@ -286,7 +291,7 @@
                 </table>
             </div>
         </div>
-            <div class="clearfix">
+            #*<div class="clearfix">
                 <form class="form-horizontal">
                     <div class="form-group">
                         <div class="col-xs-2 col-xs-offset-4">
@@ -297,7 +302,7 @@
                         </div>
                     </div>
                 </form>
-            </div>
+            </div>*#
         </div>
     </div>
 </div>
@@ -321,6 +326,7 @@
 </script>
 
 <input id="orderId" type="hidden" value="$!{orderId}">
+<input id="code" type="hidden" value="">
 
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
