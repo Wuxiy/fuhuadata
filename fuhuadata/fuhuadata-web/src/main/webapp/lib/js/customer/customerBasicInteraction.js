@@ -880,6 +880,15 @@ $().ready(function() {
         }
     });
 
+    // 点击选择所属组织
+    $('#oNSearch').on('click',function () {
+        CRM.ajaxCall({
+            url:'/customerBaseInfo/getCustclass',
+            type:'GET',
+            callback:page.renderCBTTree
+        })
+    })
+
 });
 
 
