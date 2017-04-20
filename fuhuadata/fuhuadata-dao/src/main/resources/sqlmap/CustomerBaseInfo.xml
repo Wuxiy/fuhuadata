@@ -470,7 +470,7 @@
 					base.zhongxinbao_number,
 					base.enterprise_phone,
 					base.enterprise_email,
-					base.customer_duty_paragraph
+					base.customer_duty_paragraph,
 					GROUP_CONCAT(nature.nature) enterprise_nature,
 					base.other_enterprise_nature
 				FROM
