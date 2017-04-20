@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import sun.rmi.runtime.Log;
 
 import java.util.List;
 
@@ -158,8 +157,9 @@ public class BusinessOrderAction {
      *  报价转化订单
      * @param
      */
-    @RequestMapping("/updateOrderProducts")
+    @RequestMapping(value = "/updateOrderProducts",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "salesStatistics",methods = "updateOrderProducts")
+    @ResponseBody
     public ResultPojo updateOrderProducts(@RequestBody BusinessOrderDO businessOrderDO){
         Result result = new Result();
         try{
