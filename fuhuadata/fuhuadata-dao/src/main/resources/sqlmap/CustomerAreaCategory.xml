@@ -13,7 +13,7 @@
             pk_fatherarea pkFatherarea
         FROM
             t_areacl
-        where code &lt; '91' and code &gt; '1'
+        where code &lt; '91' and code &gt; '9'
         <isNotEmpty prepend="and" property="value">
             pk_fatherarea = #value#
         </isNotEmpty>
