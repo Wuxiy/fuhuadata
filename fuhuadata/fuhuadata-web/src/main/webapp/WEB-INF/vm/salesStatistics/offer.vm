@@ -14,9 +14,11 @@
                         地区分类
                     </h3>
                 </div>
-                <div class="panel-body clearfix">
+                <div class="panel-body tree-container clearfix">
                     <!--树形菜单-->
-                    <div id="tree" class="tree"></div>
+                    <div class="zTreeDemoBackground left">
+                        <ul id="areaTree" class="ztree"></ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -35,11 +37,11 @@
                 </div>
             </div>
             <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title" lang="zh">
-                            报价列表
-                        </h3>
-                    </div>
+                <div class="panel-heading">
+                    <h3 class="panel-title" lang="zh">
+                        报价列表
+                    </h3>
+                </div>
                     <div class="panel-body clearfix">
                         <!--搜索&筛选控件-->
                         <div class="form-horizontal">
@@ -106,7 +108,7 @@
                         <!--分页导航-->
                         <div id="pagination" class="pagination"></div>
                     </div>
-                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -175,33 +177,171 @@
     <%}%>
 </script>
 
-<script type="text/javascript" src="${request.contextPath}/lib/js/pagination/pagination.js"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
-<link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/js/pagination/pagination.css" />
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 
 <script type="text/javascript">
-    var pageSize = 3;
-    var click_node ={oneLevelId:0,twoLevelId:0};//接收目录树点击节点的id及其父id
-    click_node.serach = function(){
-        serach();
-    }
+//    var pageSize = 3;
+//    var click_node ={oneLevelId:0,twoLevelId:0};//接收目录树点击节点的id及其父id
+//    click_node.serach = function(){
+//        serach();
+//    }
 
-    $(document).ready(function(){
+//    $(document).ready(function(){
+//
+//        //生成地区目录树
+//        $('#tree').creatTree('/customerBaseInfo/initAreaCategoryTree');
+//
+//        //目录树节点绑定点击事件
+//        $('#tree').bindClickForCusArea(click_node);
+//
+//        //搜索按钮绑定事件
+//        $("#submit").click(function(){
+//            serach();
+//        });
+//
+//        //默认查询数据
+//        serach();
+//
+//        // 弹出失败原因模态
+//        var thisOrder = '';
+//        $(document).on('click','a[href="#rModal"]',function (e) {
+//            // 取得当前订单号
+//            thisOrder = $(this).data('val');
+//            // 打开modal
+//            $('#rModal').modal('show');
+//        })
+//
+//        // 提交失败原因
+//        $('#upReasons').on('click',function () {
+//            CRM.ajaxCall({
+//                url : '/businessOrder/updateOfferStatus',
+//                data : JSON.stringify(cltReaData(thisOrder,$('#reason').val())),
+//                type :'POST',
+//                contentType : "application/json",
+//                callback:function () {
+//                    $('#rModal').modal('hide');
+//                    alert('提交成功');
+//                    $('#reason').val('');
+//                    serach();
+//                }
+//            })
+//        });
+//    })
 
-        //生成地区目录树
-        $('#tree').creatTree('/customerBaseInfo/initAreaCategoryTree');
 
-        //目录树节点绑定点击事件
-        $('#tree').bindClickForCusArea(click_node);
 
-        //搜索按钮绑定事件
+    //查询按钮提交数据
+//    function serach(){
+//        var total = getListCount();
+//        getDataList(0);
+//        $("#pagination").pagination(total,{
+//            items_per_page : pageSize,
+//            num_edge_entries : 3,
+//            num_display_entries : 10,
+//            callback:getDataList
+//        });
+//    }
+
+//    function getDataList(pageNum,jq){
+//        var data = {
+//            orderId:$('#orderId').val(),
+//            customerName:$('#customerName').val(),
+//            orderStatus:$('#businessState').val(),
+//            customerLevel:$('#customerLevel').val(),
+//            enterpriseNature:$('#enterpriseNature').val(),
+//            areaClassId:click_node.oneLevelId,
+//            areaId:click_node.twoLevelId,
+//            startRow:pageNum*pageSize,
+//            pageSize:pageSize
+//        };
+//        jQuery.ajax({
+//            url: basePath + '/businessOrder/getOfferListPageByQuery',
+//            dataType:'json',
+//            async:true,
+//            method:'POST',
+//            contentType:"application/json",
+//            data:JSON.stringify(data),
+//            success:function(data){
+//                var ResultData = data.data;
+//                // 前段模板渲染列表
+//                CRM.tplHandler('olC',ResultData,$('#offerList'));
+//            }
+//        });
+//    }
+
+    /**
+     * 获取列表数据总条目数
+     */
+//    function getListCount(){
+//        var total = 0;
+//        var data = {
+//            areaClassId:click_node.oneLevelId,
+//            areaId:click_node.twoLevelId,
+//            orderId:$('#orderId').val(),
+//            customerName:$('#customerName').val(),
+//            orderStatus:$('#businessState').val(),
+//            customerLevel:$('#customerLevel').val(),
+//            enterpriseNature:$('#enterpriseNature').val()
+//        };
+//        jQuery.ajax({
+//            url:basePath + '/businessOrder/countOffer',
+//            dataType:'JSON',
+//            async:false,
+//            method:'POST',
+//            contentType:"application/json",
+//            data:JSON.stringify(data),
+//            success:function(data){
+//                console.log(data);
+//                total = data.data;
+//            }
+//        });
+//        return total;
+//    }
+
+
+
+
+    var pagesize = 4; // 分页步长
+    var areaTreeData = []; // 保存树的数据
+//    var businessFrom = ['展会','门户网站','农药店考察','客户介绍','主动联系','其他']
+//    var customerLevelList = ['战略客户','大客户' ,'重要客户' ,'一般客户' ,'风险客户'];
+//    var businessOpportunity = ['工厂','分销商' ,'经销商' ,'终端客户' ,'其他'];
+//    var businessState = ['待报价','失败','已转化'];
+    var areaId = ''; // 地区id
+
+    $(function(){
+
+        // 请求树的数据
+        jQuery.ajax({
+            url:basePath+'/customerBaseInfo/initAreaCategoryTree',
+            type:'GET'
+        }).done(function (res) {
+
+            // 将数据赋值给外部变量，方便搜索时处理数据
+            areaTreeData=[{
+                pkAreacl : '1001D2100000000067E6',
+                pkFatherarea : '~',
+                name : '全部'
+            }];
+            areaTreeData.push.apply(areaTreeData,res.data);
+
+            renderAreaTree(areaTreeData,areaTreeDblHandler,$('#areaTree')); // 渲染树
+        });
+
+        // 搜索按钮绑定事件
         $("#submit").click(function(){
+
             serach();
         });
 
-        //默认查询数据
+        // 初始化分页插件并渲染第一页数据
         serach();
+
+        // 点击重置按钮重置areaId
+        $('#resetBtn').on('click',function () {
+
+            areaId = '';
+        });
 
         // 弹出失败原因模态
         var thisOrder = '';
@@ -227,7 +367,181 @@
                 }
             })
         });
-    })
+    });
+
+
+
+
+    /**
+     *以下是逻辑处理和数据处理函数
+     */
+    // 渲染客户基本分类树
+    function renderAreaTree (data,callback,el) {
+        var setting = {
+                    data: {
+                        simpleData: {
+                            enable: true,
+                            idKey: "pkAreacl",
+                            pIdKey: "pkFatherarea",
+                            rootPId: '~'
+                        }
+                    },
+                    edit: {
+                        enable: false
+                    },
+                    callback: {
+                        onClick: callback
+                    }
+                },
+                id = el.attr('id'),
+                treeObj = null;
+
+        $.fn.zTree.init(el, setting, data);
+        treeObj = $.fn.zTree.getZTreeObj('areaTree');
+        treeObj.expandNode(treeObj.getNodes()[0],true);
+    };
+
+    // 地区树添加单击事件
+    function areaTreeDblHandler (event, modLeftId, treeNode) {
+
+        // 遍历子节点函数
+        function smarty(node) {
+
+            $.each(node,function (i,item) {
+                if (!item.isParent) { // 不是父节点，将他的id添加到数组
+
+                    arr.push(item.pkAreacl);
+                    return true;
+                }else { // 是父节点则继续遍历他的子节点
+
+                    smarty(item.children);
+                }
+            });
+        }
+
+
+        if (treeNode.pkAreacl!='1001D2100000000067E6'){
+
+            var treeObj = $.fn.zTree.getZTreeObj('areaTree'),
+                    sNodes = treeObj.getSelectedNodes(); // 选中的节点集合
+
+            if (sNodes.length > 0) {
+
+                if (sNodes[0].isParent) { // 当前节点是父节点则取出他的所有子节点
+
+                    var arr = [],
+                            nodes = sNodes[0].children;
+
+                    smarty(nodes);
+
+                    areaId = arr.join(',');
+                } else {
+
+                    areaId = treeNode.pkAreacl;
+                }
+            }
+        }else {
+
+            areaId = '';
+        }
+//        console.log(treeObj.getNodes()[0]);
+        serach();
+    }
+
+    // 搜索列表并渲染
+    function serach(){
+
+        // 获取参数
+        var data = collectArgs();
+
+        getDataList(0,pagesize,rederLiset); // 初始化第一页数据
+
+        // 获取总的条数
+        getListCount(data,function (total) {
+
+            // 渲染分页
+            rederPaging(total,pagesize,function (pageNum,jq) {
+
+                // 获取列表数据
+                getDataList(pageNum,pagesize);
+            })
+        })
+
+    }
+
+    // 收集提交参数
+    function collectArgs() {
+        var obj={
+            areaId:areaId,
+            orderId:$('#orderId').val(),
+            customerName:$('#customerName').val(),
+            orderStatus:$('#businessState').val(),
+            customerLevel:$('#customerLevel').val(),
+            enterpriseNature:$('#enterpriseNature').val()
+        }
+        return obj;
+    }
+
+    // 获取列表数据条目总数
+    function getListCount(data,callback){
+        var total = 0;
+        jQuery.ajax({
+            url:basePath + '/businessOrder/countOffer',
+            dataType:'JSON',
+            contentType:'application/json',
+            data:JSON.stringify(data),
+            async:true,
+            type:'POST'
+        }).done(function (res) {
+            total = res.data;
+            callback(total);
+        });
+    }
+
+    // 渲染分页插件
+    function rederPaging(total,pageSize,callback) {
+
+        $("#pagination").pagination(total,{
+            items_per_page : pageSize,
+            num_edge_entries : 3,
+            num_display_entries : 10,
+            callback:callback
+        });
+    }
+
+    // 根据页码获取列表数据
+    function getDataList(pageNum,pageSize,callback) {
+        jQuery.ajax({
+            url:basePath + '/businessOrder/getOfferListPageByQuery',
+            dataType:'json',
+            contentType:'application/json',
+            data:JSON.stringify({
+                areaId:areaId,
+                orderId:$('#orderId').val(),
+                customerName:$('#customerName').val(),
+                orderStatus:$('#businessState').val(),
+                customerLevel:$('#customerLevel').val(),
+                enterpriseNature:$('#enterpriseNature').val(),
+                startRow:pageNum*pageSize,
+                pageSize:pageSize
+            }),
+            async:true,
+            type:'POST'
+        }).done(function (res) {
+
+            // 渲染列表
+            rederLiset(res,pageNum);
+        });
+    }
+
+    // 渲染列表
+    function rederLiset(data,pageNum){
+
+        var ResultData = data.data;
+
+        // 前段模板渲染列表
+        CRM.tplHandler('olC',ResultData,$('#offerList'));
+    }
 
     // 流失原因需要上传的数据
     function cltReaData(num,con) {
@@ -237,73 +551,5 @@
             status : -2
         }
         return obj;
-    }
-
-    //查询按钮提交数据
-    function serach(){
-        var total = getListCount();
-        getDataList(0);
-        $("#pagination").pagination(total,{
-            items_per_page : pageSize,
-            num_edge_entries : 3,
-            num_display_entries : 10,
-            callback:getDataList
-        });
-    }
-
-    function getDataList(pageNum,jq){
-        var data = {
-            orderId:$('#orderId').val(),
-            customerName:$('#customerName').val(),
-            orderStatus:$('#businessState').val(),
-            customerLevel:$('#customerLevel').val(),
-            enterpriseNature:$('#enterpriseNature').val(),
-            areaClassId:click_node.oneLevelId,
-            areaId:click_node.twoLevelId,
-            startRow:pageNum*pageSize,
-            pageSize:pageSize
-        };
-        jQuery.ajax({
-            url: basePath + '/businessOrder/getOfferListPageByQuery',
-            dataType:'json',
-            async:true,
-            method:'POST',
-            contentType:"application/json",
-            data:JSON.stringify(data),
-            success:function(data){
-                var ResultData = data.data;
-                // 前段模板渲染列表
-                CRM.tplHandler('olC',ResultData,$('#offerList'));
-            }
-        });
-    }
-
-    /**
-     * 获取列表数据总条目数
-     */
-    function getListCount(){
-        var total = 0;
-        var data = {
-            areaClassId:click_node.oneLevelId,
-            areaId:click_node.twoLevelId,
-            orderId:$('#orderId').val(),
-            customerName:$('#customerName').val(),
-            orderStatus:$('#businessState').val(),
-            customerLevel:$('#customerLevel').val(),
-            enterpriseNature:$('#enterpriseNature').val()
-        };
-        jQuery.ajax({
-            url:basePath + '/businessOrder/countOffer',
-            dataType:'JSON',
-            async:false,
-            method:'POST',
-            contentType:"application/json",
-            data:JSON.stringify(data),
-            success:function(data){
-                console.log(data);
-                total = data.data;
-            }
-        });
-        return total;
     }
 </script>
