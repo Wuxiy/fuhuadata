@@ -102,6 +102,7 @@
                             <thead>
                             <tr>
                                 <th class="text-center" lang="zh">编号</th>
+                                <th class="text-center" lang="zh">商机编号</th>
                                 <th class="text-center" lang="zh">商机名称</th>
                                 <th class="text-center" lang="zh">客户名称</th>
                                 <th class="text-center" lang="zh">客户类型</th>
