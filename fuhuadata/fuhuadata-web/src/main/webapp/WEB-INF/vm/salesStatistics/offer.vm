@@ -153,7 +153,7 @@
     %>
     <tr>
         <td><a href="${request.contextPath}/businessOrder/intoOfferorOrder?orderId=<%=data[i].orderId%>"><%=data[i].orderId%></a></td>
-        <td><a href="${request.contextPath}/businessOrder/intoBusinessOpportunityInfo?orderId=<%=data[i].businessId%>"><%=data[i].businessId%></a></td>
+        <td><a href="${request.contextPath}/businessOrder/intoBusinessOpportunityInfo?businessId=<%=data[i].businessId%>"><%=data[i].businessId%></a></td>
         <td><%=data[i].customerName%></td>
         <td lang="zh"><%=customerLevelList[data[i].customerLevel - 1]%></td>
         <td lang="zh"><%=data[i].enterpriseNature%></td>

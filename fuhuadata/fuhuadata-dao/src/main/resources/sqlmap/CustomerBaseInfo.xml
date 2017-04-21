@@ -173,7 +173,7 @@
 			customer_type = #customerType#
 		</isNotEmpty>
 				<isNotEmpty prepend=" AND " property="areaId">
-					customer_area_id  in(#areaId#)
+					customer_area_id  in (#areaId#)
 		</isNotEmpty>
 				<isNotEmpty prepend=" AND " property="area">
 			customer_area = #area#
@@ -547,7 +547,7 @@
 			nature.customer_id=base.customer_id
 		</isNotEmpty>
 		<isNotEmpty prepend="and" property="areaId">
-			customer_area_id in(#areaId#)
+			base.customer_area_id in (#areaId#)
 		</isNotEmpty>
 
 		LIMIT #startRow#,#pageSize#
@@ -646,7 +646,7 @@
 			nature.customer_id=base.customer_id
 		</isNotEmpty>
 		<isNotEmpty prepend="and" property="areaId">
-			customer_area_id in(#areaId#)
+			customer_area_id in (#areaId#)
 		</isNotEmpty>
 	</select>
 
