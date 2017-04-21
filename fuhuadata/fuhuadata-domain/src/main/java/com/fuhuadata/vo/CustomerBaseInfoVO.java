@@ -42,11 +42,11 @@ public class CustomerBaseInfoVO {
     /**地区分类,例如北美洲**/
     private String area;
 
-    /**国家分类id**/
-    private String countryId;
-
-    /**国家,例如美国**/
-    private String country;
+//    *国家分类id*
+//    private String countryId;
+//
+//    *国家,例如美国*
+//    private String country;
 
     /**注册资金**/
     private String registeredFunds;
@@ -255,14 +255,6 @@ public class CustomerBaseInfoVO {
 
     public void setArea(String area) {
         this.area = area;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
     }
 
     public String getRegisteredFunds() {
@@ -541,13 +533,6 @@ public class CustomerBaseInfoVO {
         this.lossReason = lossReason;
     }
 
-    public String getCountryId() {
-        return countryId;
-    }
-
-    public void setCountryId(String countryId) {
-        this.countryId = countryId;
-    }
 
     public String getNcId() {
         return ncId;

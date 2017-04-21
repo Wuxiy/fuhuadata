@@ -119,10 +119,6 @@
                                 </div>
                                 <label for="timeZone" class="control-label col-xs-1" lang="zh">时区<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div id="czSearch" class="col-xs-2">
-##                                    <div class="col-xs-12" style="padding-left: 0;padding-right: 0">
-##                                        <input id="timeZone" name="timeZone" data-toggle="dropdown" data-control="on" placeholder="请在下拉菜单中选择" class="form-control dropdown-toggle" disabled type="text" autocomplete="off"/>
-##                                        <ul id="tz" class="pull-right dropdown-menu" style="width: 100%;max-height: 200px;overflow-y: auto;"></ul>
-##                                    </div>
                                     <div class="input-group">
                                         <input id="timeZone" name="timeZone" placeholder="请在下拉菜单中选择" class="form-control" disabled type="text" autocomplete="off"/>
                                         <div class="input-group-btn">
@@ -136,10 +132,6 @@
                                 </div>
                                 <label for="commerceCountry" class="control-label col-xs-1" lang="zh">贸易国别<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div id="ccSearch" class="col-xs-2">
-##                                    <div class="col-xs-12" style="padding-left: 0;padding-right: 0">
-##                                        <input id="commerceCountry" name="commerceCountry" data-toggle="dropdown" placeholder="请在下拉菜单中选择" data-control="on" class="form-control dropdown-toggle" disabled type="text" autocomplete="off"/>
-##                                        <ul id="cc" class="pull-right dropdown-menu" style="width: 100%;max-height: 200px;overflow-y: auto;"></ul>
-##                                    </div>
                                     <div class="input-group">
                                         <input id="commerceCountry" name="commerceCountry" placeholder="请在下拉菜单中选择" class="form-control" disabled type="text" autocomplete="off"/>
                                         <div class="input-group-btn">

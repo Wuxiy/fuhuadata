@@ -217,7 +217,7 @@
 
                     smarty(nodes);
 
-                    areaId = arr.join(',');
+                    areaId = arr.join('\',\'');
                 } else {
 
                     areaId = treeNode.pkAreacl;
