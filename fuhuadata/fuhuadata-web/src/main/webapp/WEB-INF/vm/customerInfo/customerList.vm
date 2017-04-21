@@ -129,12 +129,9 @@
                         <th class="text-center" lang="zh">总利润</th>
                     </tr>
                     </thead>
-                    <tbody>
-
-                    </tbody>
+                    <tbody></tbody>
                 </table>
             </div>
-
         </div>
     </div>
 </div>
@@ -148,6 +145,7 @@
     var areaTreeData = []; // 保存树的数据
     var customerLevelList = ['战略客户','大客户' ,'重要客户' ,'一般客户' ,'风险客户'];
     var areaId = ''; // 地区id
+
     $(function(){
 
         // 请求树的数据
@@ -240,10 +238,14 @@
             var isParent = sNodes[0].isParent;
         }
 
-        console.log(sNodes);
+        function filter(node) {
+            return (node.level == 2 && node.name.indexOf("test")>-1);
+        }
 
+        var node = treeObj.getNodesByFilter(true, true); // 仅查找一个节点
+        var nodes = treeObj.getNodesByFilter(filter); // 查找节点集合
 
-
+        console.log(nodes);
 //        if (treeNode.id == '~') { // 如果当前节点为全部，则令areaId为空
 //
 //            areaId = '';
@@ -333,8 +335,7 @@
             dataType:'json',
             data:{
                 customerType:$("#customerType").val(),
-                areaClassId:0,
-                areaId:0,
+                areaId:areaId,
                 fullName:$("#fullName").val(),
                 enterpriseNature:$("#enterpriseNature").val(),
                 zhongxinbaoLevel:$("#zhongxinbaoLevel").val(),
