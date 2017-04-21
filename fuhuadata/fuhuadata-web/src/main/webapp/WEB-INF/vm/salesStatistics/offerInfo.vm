@@ -402,7 +402,7 @@
                                 '<td><a href="'+basePath+'/businessProduct/intoProductBasicInfoRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'">'+ifEmpty(businessOrderProductLists[i].productName)+'</a></td>'+
                                 '<td>'+ifEmpty(businessOrderProductLists[i].categoryName)+'</td>'+
                                 '<td>'+ifEmpty(businessOrderProductLists[i].brand)+'</td>'+
-                                '<td><a href="'+basePath+'/businessProduct/intoProductRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&productRequireId='+ifEmpty(businessOrderProductLists[i].productRequireId)+'">'+ifEmpty(businessOrderProductLists[i].specification)+'</a></td>'+
+                                '<td><a href="'+basePath+'/businessProduct/intoProductRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&productRequireId='+ifEmpty(businessOrderProductLists[i].productRequireId)+'&&edit=1'+'">'+ifEmpty(businessOrderProductLists[i].specification)+'</a></td>'+
                                 '<td>'+ifEmpty(businessOrderProductLists[i].mainProductAmount)+'</td>'+
                                 '<td>'+ifEmpty(businessOrderProductLists[i].cupboardPerNumber)+'</td>'+
                                 '<td>'+ifEmpty(businessOrderProductLists[i].cupboardType)+'</td>'+

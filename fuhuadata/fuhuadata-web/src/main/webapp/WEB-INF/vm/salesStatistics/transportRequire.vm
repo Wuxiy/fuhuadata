@@ -185,7 +185,7 @@
                                     <label class="control-label col-xs-2"><span lang="zh">免堆期</span></label>
                                     <div class="col-xs-2">
                                         <div class="input-group">
-                                            <input id="miantuiqi" class="form-control isdisabled" type="text" value="" disabled/>
+                                            <input id="miantuiqi" class="form-control isdisabled" type="text" value="" data-control="on" disabled/>
                                             <span class="input-group-addon">天</span>
                                         </div>
                                     </div>
@@ -336,6 +336,9 @@
                 }
                 if(businessOrderProduct.goodsType!=undefined){
                     var goodsType = businessOrderProduct.goodsType;
+                    if(goodsType == 0){
+                        $('input[name="goodsType"]').attr('disabled',false);
+                    }
                     $('input[name="goodsType"]').each(function(){
                         var val = $(this).val();
                         if(val == goodsType){
@@ -359,6 +362,7 @@
             data:getdata(),
             /*contentType:"application/json",*/
             success:function(result){
+                alert('添加成功!');
                 console.log(result);
             }
         })
@@ -423,9 +427,11 @@
             success:function(result){
                 console.log(result);
                 if(result == true){
-                    location.reload();
+                    alert('修改成功！');
+                    /*location.reload();*/
+                }else{
+                    alert('修改失败！');
                 }
-
             }
         })
     })

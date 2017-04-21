@@ -73,7 +73,8 @@
     <select id="getDocumentaryById" parameterClass="java.lang.Integer" resultClass="BusinessOrderProduct">
         select
             documentary_type documentaryType,
-            documentary_require documentaryRequire
+            documentary_require documentaryRequire,
+            other_documentary_require otherDocumentaryRequire
         from
             business_order_product
         where id=#value#

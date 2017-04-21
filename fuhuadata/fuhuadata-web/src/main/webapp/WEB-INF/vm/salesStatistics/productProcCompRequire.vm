@@ -11,6 +11,13 @@
                 <div id="productRequire" class="panel panel-default view-HD-lg">
                     <div class="panel-heading">
                         <div class="btn-group panel-heading-btn pull-right">
+                            <a class="btn btn-xs btn-default hidden" data-view="editHide" id="editback">返回</a>
+                            <button id="addedit" data-btn="edit" data-view="editHide" class="btn btn-xs btn-primary panel-heading-btn pull-right hidden" type="button" lang="zh">
+                                完成
+                            </button>
+
+                        </div>
+                        <div class="btn-group panel-heading-btn pull-right">
                             <a class="btn btn-xs btn-default hidden" data-view="editHide" id="back">返回</a>
                             <button id="edit" data-btn="edit" data-view="editHide" class="btn btn-xs btn-primary panel-heading-btn pull-right hidden" type="button" lang="zh">
                                 编辑
@@ -416,6 +423,7 @@
 <input id="orderId" type="hidden" value="$!{orderId}">
 <input id="customerId" type="hidden" value="$!{customerId}">
 <input id="productRequireId" type="hidden" value="$!{productRequireId}">
+<input id="editRequire" type="hidden" value="$!{edit}">
 
 <script type="text/javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
@@ -425,6 +433,7 @@
     var businessProductId = $('#businessProductId').val();
     var customerId = $('#customerId').val();
     var orderId = $('#orderId').val();
+    var editRequire = $('#editRequire').val();
 
     var auxiliary = document.getElementById('auxiliary');
     var befond = document.getElementById('befond');
@@ -597,7 +606,13 @@
                     }
                 }
             })
-        }else{
+        }else if(editRequire == 1&&id != ''){
+            $('#addback').removeClass('hidden');
+            $('#addedit').removeClass('hidden');
+
+            $('[data-target="#packModal"]').attr('disabled',false);
+            $('.isdisabled').attr('disabled',false);
+        }else {
             $('#before').removeClass('hidden');
             $('#next').removeClass('hidden');
 

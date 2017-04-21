@@ -78,7 +78,7 @@
                                         <label><input id="qualityTestingReport" type="checkbox" data-control="on" disabled/></label>
                                     </div>
                                     <div class="col-xs-4">
-                                        <input id="reportCompanyTitle" type="text" class="form-control isdisabled" placeholder="请输入公司抬头" >
+                                        <input id="reportCompanyTitle" type="text" class="form-control isdisabled" placeholder="请输入公司抬头" disabled>
                                     </div>
                                 </td>
                             </tr>
@@ -159,7 +159,7 @@
                                     <div class="checkbox col-xs-3">
                                         <label><input name="telexRelease" type="checkbox" value="2" data-control="on" disabled/><span lang="zh">正本出后电放</span></label>
                                     </div>
-                                    <div class="col-xs-4"><input id="releaseDestination" class="form-control" type="text" value="" placeholder="输入放单目的港" lang="zh" /></div>
+                                    <div class="col-xs-4"><input id="releaseDestination" class="form-control" type="text" value="" placeholder="输入放单目的港" lang="zh" disabled/></div>
                                 </td>
 
                             </tr>
@@ -246,12 +246,13 @@
 
     if(id!=''){
         $('#back').removeClass('hidden');
+        $('#edit').removeClass('hidden');
 
         jQuery.ajax({
             url:basePath + '/businessProduct/getDocumentary?businessProductId=' + id,
             type:'POST',
             success:function(result){
-                var documentaryRequire = result.documentaryRequire;
+                var documentaryRequire = eval(result.documentaryRequire);
                 $('#documentaryType').val(result.documentaryType);
                 $('#otherDocumentaryRequire').val(result.otherDocumentaryRequire);
 
@@ -308,6 +309,9 @@
                 }
                 if(documentaryRequire.coo!=undefined){
                     var coo = documentaryRequire.coo;
+                    if(coo == 0){
+                        $('input[name="coo"]').attr('checked',false);
+                    }
                     $('input[name="coo"]').each(function(){
                         var val = $(this).val();
                         if(val == coo){
@@ -317,9 +321,12 @@
                 }
                 if(documentaryRequire.telexRelease!=undefined){
                     var telexRelease = documentaryRequire.telexRelease;
+                    if(telexRelease == 0){
+                        $('input[name="telexRelease"]').attr('checked',false);
+                    }
                     $('input[name="telexRelease"]').each(function(){
                         var val = $(this).val();
-                        if(val == coo){
+                        if(val == telexRelease){
                             $(this).attr('checked',true);
                         }
                     })
@@ -351,7 +358,7 @@
             url:basePath + '/businessProduct/saveDocumentaryOrPacking?productRequireId=' + id,
             type:'POST',
             data:getdata(),
-            contentType:"application/json",
+            /*contentType:"application/json",*/
             success:function(result){
                 window.location.href = basePath + '/businessProduct/intoPackageRequire';
             }
@@ -400,7 +407,7 @@
     function gettelexRelease(){
         var telexRelease;
         if($('input[name="telexRelease"]:checked').length==0){
-            telexRelease = '';
+            telexRelease = 0;
         }else{
             telexRelease = $('input[name="telexRelease"]:checked').val();
         }
@@ -410,7 +417,7 @@
     function getcoo() {
         var coo;
         if($('input[name="coo"]:checked').length==0){
-            coo = '';
+            coo = 0;
         }else{
             coo = $('input[name="coo"]:checked').val();
         }
@@ -483,7 +490,7 @@
             /*contentType:"application/json",*/
             success:function(result){
                 console.log(result);
-                location.reload();
+                /*location.reload();*/
             }
         })
     })
