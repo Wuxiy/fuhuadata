@@ -35,10 +35,10 @@
                                         #if($!{businessOrderProduct})
                                             #foreach($info in $!{businessOrderProduct.businessOrderProducts})
                                             <tr name="item">
-                                                <td>$!info.name</td>
-                                                <td>$!info.minPrice</td>
+                                                <td name="proName" data-val="$!info.id">$!info.name</td>
+                                                <td name="proFloorPrice" data-val="$!info.minPrice">$!info.minPrice</td>
                                                 <td><input name="checkItem" type="checkbox" #if($!info.transformState==0) checked #end value="1"/></td>
-                                                <td><input name="onePrice" class="form-control" type="number" /></td>
+                                                <td><input name="onePrice" step="0.01" class="form-control" type="number" /></td>
                                             </tr>
                                             #end
                                         #end
@@ -46,9 +46,9 @@
                                         <tfoot>
                                         <tr>
                                             <td class="text-danger">产品总价</td>
+                                            <td id="floorPrice" data-val=""></td>
                                             <td></td>
-                                            <td></td>
-                                            <td class="text-danger" id="totalPrice"></td>
+                                            <td class="text-danger" data-val="" id="totalPrice"></td>
                                         </tr>
                                         </tfoot>
                                     </table>
@@ -72,91 +72,85 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="JavaScript">
 
-##
-
-//<<<<<<< HEAD
-//        console.log(orderId)
-//        jQuery.ajax({
-//            url:basePath + '' + orderId,
-//            type:'POST',
-//            data:'',
-//            success:function(result){
-//                conversiontable.innerHTML = '';
-//                for(var i=0;i<result.length;i++){
-//                    var ResultData = result[i];
-//                    conversiontable.innerHTML += '<tr>' +
-//                                    '<td>'+ResultData.name+'</td>'+
-//                                    '<td>'+ResultData.name+'</td>'+
-//                                    '<td><input type="checkbox" name="cellcheckbox" value="'+ResultData.businessProductId+'">'+ResultData.name+'</td>'+
-//                                    '<td><input class="form-control" type="text" value="'+ResultData.name+'"></td>'+
-//                                    '</tr>';
-//                }
-//            }
-//        })
-//=======
 $(document).ready(function(){
-        $(document).on('input.cc','input[name="onePrice"]',function () {
-            var total = 0;
 
-            $('input[name="checkItem"]').filter(':checked').closest('tr')
-                    .find('input[name="onePrice"]').each(function () {
-                var oneItem = $(this).val()!=''?$(this).val():0;
+    calculatePrice()
 
-                total += parseInt(oneItem);
-            });
+    $(document).on('input.cc','input[name="onePrice"]',function () {
 
-            $('#totalPrice').text(total);
-        });
+        calculatePrice()
+    });
 
-        $(document).on('click.cc','input[name="checkItem"]',function () {
-            var total = 0;
+    $(document).on('click.cc','input[name="checkItem"]',function () {
 
-            $('input[name="checkItem"]').filter(':checked').closest('tr')
-                    .find('input[name="onePrice"]').each(function () {
-                var oneItem = $(this).val()!=''?$(this).val():0;
+        calculatePrice()
+    });
 
-                total += parseInt(oneItem);
-            });
+    var orderId = $('#orderId').val();
+    var conversiontable = $('#conversiontable').val();
 
-            $('#totalPrice').text(total);
-        });
-
-        var orderId = $('#orderId').val();
-        var conversiontable = $('#conversiontable').val();
-
-
-    })
-
-    //
-
-
-    var testdata = {
-        "businessOrder":{
-            "orderId":"20170322122021023",
-            "floorPrice":1000,
-            "status":1
-        },
-        "businessOrderProducts":[{"id":1,"transformState":1,"contractPrice":100},{"id":2,"transformState":1,"contractPrice":100}]
-    };
     $('#finish').click(function(){
         jQuery.ajax({
             url:basePath + '/businessOrder/updateOrderProducts',
             type:'POST',
             dataType:'JSON',
             contentType:"application/json",
-            data:JSON.stringify(testdata),
+            data:JSON.stringify(upData()),
             contentType:"application/json",
             success:function(result){
+                alert('转化成功');
                 console.log(result);
+                window.history.back(-1);
             }
         })
     });
+})
 
-    function getIds() {
-        var ids = new Array();
-        $("input[name='cellcheckbox']:checked").each(function(){
-            ids.push($(this).val());
-        })
-        return ids;
+
+
+    // 需要上传的数据
+    function upData() {
+        var obj = {
+            businessOrder : {
+                orderId : $('#orderId').val(),
+                floorPrice : $('#floorPrice').data('val')==''?0:$('#totalPrice').data('val'),
+                amountPayable:$('#totalPrice').data('val')==''?0:$('#totalPrice').data('val'),
+                status : 1
+            },
+            businessOrderProducts : getProData()
+        }
+        return obj;
+    }
+
+    // 每一项产品的数据
+    function getProData() {
+        var arr = [];
+        $('input[name="checkItem"]').filter(':checked').closest('tr')
+            .each(function () {
+                var obj = {
+                    id : $(this).find('[name="proName"]').data('val'),
+                    transformState : 1,
+                    contractPrice : $(this).find('[name="onePrice"]').val()==''?0:$(this).find('[name="onePrice"]').val()
+                };
+                arr.push(obj);
+            });
+        return arr;
+    }
+
+    // 计算总合同价和最低销售价
+    function calculatePrice() {
+        var total = 0,
+            floorPrice = 0;
+        $('input[name="checkItem"]').filter(':checked').closest('tr')
+            .each(function () {
+                var onePrice = $(this).find('input[name="onePrice"]').val()!=''?$(this).find('input[name="onePrice"]').val():0,
+                        oneFprice = $(this).find('[name="proFloorPrice"]').data('val')!=''?$(this).find('[name="proFloorPrice"]').data('val'):0;
+                floorPrice += parseFloat(oneFprice);
+                total += parseFloat(onePrice);
+            });
+        $('#totalPrice').text(total.toFixed(2));
+        $('#totalPrice').data('val',total.toFixed(2));
+        $('#floorPrice').text(floorPrice.toFixed(2));
+        $('#floorPrice').data('val',floorPrice.toFixed(2));
     }
 </script>

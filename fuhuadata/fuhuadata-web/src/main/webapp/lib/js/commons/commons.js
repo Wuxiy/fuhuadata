@@ -418,5 +418,62 @@ CRM.editEl = function (el) {
     });
 };
 
+// 在树种搜索当前节点，并返回当前节点的后代对象，如果没有，则返回当前节点的id
+CRM.getNodes = function (id,data) {
+
+    function smarty(data) {
+
+        $.each(data,function (i,item) {
+            if (id == item.cid && item.nodes instanceof Array) {
+
+                nodes = item.nodes;
+                return false;
+            }else if (item.nodes instanceof Array) {
+
+                smarty(item.nodes);
+            }else {
+
+                return true;
+            }
+        });
+    }
+
+    var nodes = null;
+    smarty(data);
+
+    if (nodes!=null) {
+
+        return nodes;
+    }else {
+        return id.toString();
+    }
+};
+
+// 取得当前节点所有后代节点的id拼成的字符串
+CRM.searchTreeId = function (data) {
+
+    function smarty(node) {
+
+        $.each(node,function (i,item) {
+
+            arr.push(item.cid);
+
+            if (item.nodes instanceof Array) {
+
+                smarty(item.nodes);
+            }else {
+
+                return true;
+            }
+        })
+    }
+
+    var arr = [],
+        str;
+    smarty(data);
+    str = arr.join(',');
+    return str;
+};
+
 
 

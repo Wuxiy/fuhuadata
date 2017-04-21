@@ -143,7 +143,7 @@
 
 ## 报价列表
 <script id="olC" type="text/html">
-    <%if (data.length>0) {%>
+    <%if (data && data.length>0) {%>
     <%for (var i=0; i<data.length; i++) {
         var customerLevelList = ['战略客户','大客户' ,'重要客户' ,'一般客户' ,'风险客户'];
         var businessOpportunity = ['工厂','分销商' ,'经销商' ,'终端客户' ,'其他'];
@@ -176,6 +176,8 @@
         <%}%>
     </tr>
     <%}%>
+    <%} else{%>
+    <tr></tr>
     <%}%>
 </script>
 
@@ -226,6 +228,7 @@
                 callback:function () {
                     $('#rModal').modal('hide');
                     alert('提交成功');
+                    $('#reason').val('');
                     serach();
                 }
             })

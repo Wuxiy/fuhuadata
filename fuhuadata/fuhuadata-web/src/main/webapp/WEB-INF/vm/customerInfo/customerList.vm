@@ -13,7 +13,9 @@
 				</div>
 				<div class="panel-body tree-container clearfix">
 					<!--树形菜单-->
-					<div class="tree" id="tree"></div>
+                    <div class="zTreeDemoBackground left">
+                        <ul id="areaTree" class="ztree"></ul>
+                    </div>
 				</div>
 			</div>
 		</div>
@@ -25,48 +27,50 @@
 					</div>
 					<div class="panel-body clearfix">
 						<!--搜索&筛选控件-->
-						<form class="form-group">
-							<div class="input-group">
-								<span class="input-group-addon" lang="zh">客户全称</span>
-								<input class="form-control" type="text" id="fullName" value="" />
-								<span class="input-group-addon" lang="zh">企业性质</span>
-								<select class="form-control" id="enterpriseNature">
-									<option value="" selected lang="zh">全部</option>
-									<option value="1" lang="zh">加工厂</option>
-									<option value="2" lang="zh">分销商</option>
-									<option value="3" lang="zh">经销商</option>
-									<option value="4" lang="zh">终端客户</option>
-									<option value="5" lang="zh">其他</option>
-								</select>
-								<span class="input-group-addon" lang="zh" >信用评级</span>
-								<select class="form-control" id="zhongxinbaoLevel">
-									<option value="" selected lang="zh">全部</option>
-									<option value="1" lang="zh">A</option>
-									<option value="2" lang="zh">AA</option>
-									<option value="3" lang="zh">AAA</option>
-									<option value="4" lang="zh">AAAA</option>
-								</select>
-								<span class="input-group-addon" lang="zh">客户级别</span>
-								<select class="form-control" id="customerLevel">
-									<option value="" selected lang="zh">全部</option>
-									<option value="1" lang="zh">战略客户</option>
-                                    <option value="2" lang="zh">大客户</option>
-                                    <option value="3" lang="zh">重要客户</option>
-                                    <option value="4" lang="zh">一般客户</option>
-                                    <option value="5" lang="zh">风险客户</option>
-								</select>
-								<span class="input-group-addon" lang="zh" >客户状态</span>
-								<select class="form-control" id="customerStatus">
-									<option value="" selected lang="zh">全部</option>
-									<option value="1" lang="zh">正常</option>
-									<option value="0" lang="zh">易流失</option>
-								</select>
-								<div class="input-group-btn">
-									<button class="btn btn-xs btn-primary" type="reset">重置</button>
-									<button class="btn btn-xs btn-primary" id="submit" type="button">搜索</button>
-								</div>
-							</div>
-						</form>
+                        <div class="form-horizontal">
+                            <form class="form-group col-xs-10 pull-right">
+                                <div class="input-group">
+                                    <span class="input-group-addon" lang="zh">客户全称</span>
+                                    <input class="form-control" type="text" id="fullName" value="" />
+                                    <span class="input-group-addon" lang="zh">企业性质</span>
+                                    <select class="form-control" id="enterpriseNature">
+                                        <option value="" selected lang="zh">全部</option>
+                                        <option value="1" lang="zh">加工厂</option>
+                                        <option value="2" lang="zh">分销商</option>
+                                        <option value="3" lang="zh">经销商</option>
+                                        <option value="4" lang="zh">终端客户</option>
+                                        <option value="5" lang="zh">其他</option>
+                                    </select>
+                                    <span class="input-group-addon" lang="zh" >信用评级</span>
+                                    <select class="form-control" id="zhongxinbaoLevel">
+                                        <option value="" selected lang="zh">全部</option>
+                                        <option value="1" lang="zh">A</option>
+                                        <option value="2" lang="zh">AA</option>
+                                        <option value="3" lang="zh">AAA</option>
+                                        <option value="4" lang="zh">AAAA</option>
+                                    </select>
+                                    <span class="input-group-addon" lang="zh">客户级别</span>
+                                    <select class="form-control" id="customerLevel">
+                                        <option value="" selected lang="zh">全部</option>
+                                        <option value="1" lang="zh">战略客户</option>
+                                        <option value="2" lang="zh">大客户</option>
+                                        <option value="3" lang="zh">重要客户</option>
+                                        <option value="4" lang="zh">一般客户</option>
+                                        <option value="5" lang="zh">风险客户</option>
+                                    </select>
+                                    <span class="input-group-addon" lang="zh" >客户状态</span>
+                                    <select class="form-control" id="customerStatus">
+                                        <option value="" selected lang="zh">全部</option>
+                                        <option value="1" lang="zh">正常</option>
+                                        <option value="0" lang="zh">易流失</option>
+                                    </select>
+                                    <div class="input-group-btn">
+                                        <button id="resetBtn" class="btn btn-xs btn-default" type="reset">重置</button>
+                                        <button class="btn btn-xs btn-primary" id="submit" type="button">搜索</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
 						<!--表格-->
 						<table class="table table-condensed table-bordered table-striped">
 							<caption class="text-right" lang="zh">金额单位：万元</caption>
@@ -135,50 +139,188 @@
 </div>
 
 <input type="hidden" id="customerType" value="${customerType}" />
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerListCommon.js"></script>
-<script type="text/javascript" src="${request.contextPath}/lib/js/pagination/pagination.js"></script>
-<link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/js/pagination/pagination.css" />
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
+
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script type="text/javascript">
-	var pageSize = 2;//分页步长
-    var click_node ={oneLevelId:0,twoLevelId:0};//接收目录树点击节点的id及其父id
-    click_node.serach = function(){
-        serach();
-	}
+
+    var pagesize = 4; // 分页步长
+    var areaTreeData = null; // 保存树的数据
+    var customerLevelList = ['战略客户','大客户' ,'重要客户' ,'一般客户' ,'风险客户'];
+    var areaId = ''; // 地区id
     $(function(){
-		//生成地区目录树
-        $('#tree').creatTree('${request.contextPath}/customerBaseInfo/initAreaCategoryTree');
-        //目录树节点绑定点击事件
-        $('#tree').bindClickForCusArea(click_node);
-		//搜索按钮绑定事件
+
+        // 请求树的数据
+        jQuery.ajax({
+            url:basePath+'/customerBaseInfo/initAreaCategoryTree',
+            type:'GET'
+        }).done(function (res) {
+            // 将数据赋值给外部变量，方便搜索时处理数据
+            areaTreeData=[{
+                cid : '~',
+                pid : 'z',
+                cname : '全部',
+                nodes : res.data
+            }];
+            renderAreaTree(areaTreeData,areaTreeDblHandler,$('#areaTree')); // 渲染树
+        });
+
+        // 搜索按钮绑定事件
 		$("#submit").click(function(){
+
             serach();
 		});
-		//默认查询数据
+
+		// 初始化分页插件并渲染第一页数据
         serach();
+
+        // 点击合同金额弹出合同总金额模态
+        $(document).on('click.pop','a[name="totalMoney"]',function (e) {
+            var customerId = $(e.target).data('val');
+
+            jQuery.ajax({
+                url:basePath + '/customerBaseInfo/showCustomerOrderProductDetail',
+                dataType:'json',
+                data:{
+                    customerId: customerId
+                },
+                async:true,
+                type:'POST'
+            }).done(function (res) {
+                renderModal(res.data,$('#details').find('tbody')); // 将数据渲染到modal的表中
+                $('#details').modal('show'); // 打开modal
+            });
+        });
+
+        // 点击重置按钮重置areaId
+        $('#resetBtn').on('click',function () {
+
+            areaId = '';
+        });
     });
-	//查询按钮提交数据
+
+
+
+
+
+    /**
+     *以下是逻辑处理和数据处理函数
+     */
+    // 渲染客户基本分类树
+    function renderAreaTree (data,callback,el) {
+        var setting = {
+                    data: {
+                        simpleData: {
+                            enable: true
+                        }
+                    },
+                    edit: {
+                        enable: false
+                    },
+                    callback: {
+                        onClick: callback
+                    }
+                },
+                id = el.attr('id'),
+                treeData = CRM.toArr(data);
+
+        $.fn.zTree.init(el, setting, treeData);
+    };
+
+    // 地区树添加单击事件
+    function areaTreeDblHandler (event, modLeftId, treeNode) {
+
+
+        if (treeNode.id == '~') { // 如果当前节点为全部，则令areaId为空
+
+            areaId = '';
+        }else { // 不是全部时判断有无子节点
+
+            var isArr = CRM.getNodes(treeNode.id,areaTreeData);
+
+            if (isArr instanceof Array) { // 有子节点返回后代节点id字符串
+
+                areaId = CRM.searchTreeId(isArr);
+            }else { // 没有后代，返回自身的id
+
+                areaId = isArr;
+            }
+        }
+
+        console.log(areaId);
+        // 搜索表格
+        serach();
+    }
+
+	// 搜索列表并渲染
 	function serach(){
-		var total = getListCount();
-        getDataList(0);
+
+	    // 获取参数
+	    var data = collectArgs();
+
+        getDataList(0,pagesize,rederLiset); // 初始化第一页数据
+
+        // 获取总的条数
+        getListCount(data,function (total) {
+            
+            // 渲染分页
+            rederPaging(total,pagesize,function (pageNum,jq) {
+                
+                // 获取列表数据,在回调函数里渲染列表
+                getDataList(pageNum,pagesize,rederLiset);
+            })
+        })
+
+	}
+
+    // 收集提交参数
+    function collectArgs() {
+        var obj={
+            customerType:$("#customerType").val(),
+            areaId:areaId,
+            fullName:$("#fullName").val(),
+            enterpriseNature:$("#enterpriseNature").val(),
+            zhongxinbaoLevel:$("#zhongxinbaoLevel").val(),
+            customerLevel:$("#customerLevel").val(),
+            customerStatus:$("#customerStatus").val(),
+        }
+        return obj;
+    }
+
+    // 获取列表数据条目总数
+	function getListCount(data,callback){
+		var total = 0;
+        jQuery.ajax({
+			url:basePath + '/customerBaseInfo/countCustomerList',
+			dataType:'JSON',
+			data:data,
+			async:true,
+			type:'POST'
+		}).done(function (res) {
+            total = res.data;
+            callback(total);
+        });
+	}
+
+	// 渲染分页插件
+    function rederPaging(total,pageSize,callback) {
+	    
         $("#pagination").pagination(total,{
             items_per_page : pageSize,
             num_edge_entries : 3,
             num_display_entries : 10,
-            callback:getDataList
+            callback:callback
         });
-	}
-	var customerLevelList = ['战略客户','大客户' ,'重要客户' ,'一般客户' ,'风险客户'];
-	//根据页码获取列表数据
-	function getDataList(pageNum,jq){
+    }
+
+    // 根据页码获取列表数据
+    function getDataList(pageNum,pageSize,callback) {
         jQuery.ajax({
-            url:'${request.contextPath}/customerBaseInfo/queryCustomerPageList',
+            url:basePath + '/customerBaseInfo/queryCustomerPageList',
             dataType:'json',
             data:{
-				customerType:$("#customerType").val(),
-                areaClassId:click_node.oneLevelId,
-                areaId:click_node.twoLevelId,
+                customerType:$("#customerType").val(),
+                areaClassId:0,
+                areaId:0,
                 fullName:$("#fullName").val(),
                 enterpriseNature:$("#enterpriseNature").val(),
                 zhongxinbaoLevel:$("#zhongxinbaoLevel").val(),
@@ -188,114 +330,64 @@
                 pageSize:pageSize
             },
             async:true,
-            method:'POST',
-            success:function(data){
-				var list = data.data;
-//				console.log(list);
-				var _html = '';
-				if(list && list!='' && list!='null'){
-                    for(var i=0;i<list.length;i++){
-                        var customer = list[i];
-                        _html += '<tr>';
-                        _html += '	<td>'+customer.customerId+'</td>';
-                        _html += '  <td><a href="${request.contextPath}/customerBaseInfo/intoCustomerBaseInfoDetails?customerType=1&customerId='+customer.customerId+'" >'+customer.fullName+'</a></td>';
-                        _html += '  <td>'+(customer.shortName!=undefined?customer.shortName:'')+'</td>';
-                        _html += '  <td lang="zh">'+(customer.country!=undefined?customer.country:'')+'</td>';
-                        _html += '  <td lang="zh">'+(customer.customerLevel!=undefined?customerLevelList[customer.customerLevel-1]:'')+'</td>';
-                        _html += '  <td>'+(customer.zhongxinbaoLevel!=undefined?customer.zhongxinbaoLevel:'')+'A</td>';
-                        _html += '  <td>'+(customer.startCooperationTime!=undefined?customer.startCooperationTime:'')+'</td>';
-                        _html += '  <td lang="zh">'+(customer.cooperationDuration!=undefined?customer.cooperationDuration:'')+'</td>';
-                        _html += '  <td lang="zh">'+(customer.activePeriod!=undefined?customer.activePeriod:'')+'</td>';
-                        _html += '  <td><a href="" data-toggle="modal" data-target="#details">'+(customer.totalMoney!=undefined?customer.totalMoney:'')+'</a></td>';
-                        _html +='   <td>'+(customer.payMoney!=undefined?customer.payMoney:'')+'</td>';
-                        _html +='   <td>'+(customer.minPrice!=undefined?customer.minPrice:'')+'</td>';
-                        _html +='   <td>'+(customer.maintenanceFee!=undefined?customer.maintenanceFee:'')+'</td>';
-                        _html +='   <td>'+(customer.netProfit!=undefined?customer.netProfit:'')+'</td>';
-                        _html +='   <td lang="zh">'+(customer.customerStatus==0?"易流失":"正常")+'</td>';
-                        _html +='   <td>'+customer.lastmodifyUserName+'</td>';
-                        _html +='   <td>'+(customer.remark!=undefined?customer.remark:'')+'</td>';
-                        _html +='   </tr>';
-                    }
-                }
-				$("#append_container").html(_html);
+            type:'POST'
+        }).done(callback);
+    }
 
-				//点击a为modal添加数据
-                var modalDetails = '[data-target="#details"]';
-//                console.log($(modalDetails));
-                $(modalDetails).on('click.modalData',function(e){
-                    var el = $(e.target);
-                    var modalId = el.data('target');
-                    var customerId = el.parents('tr').children('td').first().text();
-//                    console.log(customerId);
-                    jQuery.ajax({
-                        url:'${request.contextPath}/customerBaseInfo/showCustomerOrderProductDetail',
-                        dataType:'json',
-                        data:{
-                            customerId: customerId
-                        },
-                        async:true,
-                        type:'POST',
-                        success:function(result){
-                            var data = result.data;
-                            var container = $(modalId).find('tbody');
-                            container.html('');
-                            if(data!=null){
-                               jQuery.each(data,function (n,item) {
-								   var tr = $('<tr></tr>');
-                                   tr.append('<td>'+item.productName+'</td><td>'+item.categoryName+'</td><td>'+item.totalSaleNum+'</td><td>'+item.totalSaleMoney+'</td><td>'+item.totalMinPrice+'</td><td>'+item.totalProfit+'</td>').appendTo(container);
-                               })
-                            }else{
-                                var tr = $('<tr></tr>');
-                                tr.append('<td colspan="6">没有数据</td>').appendTo(container);
-                            }
-                        }
-                    })
-                });
+    // 渲染列表
+    function rederLiset(data){
+        var list = data.data;
+//        console.log(list);
+        var _html = '';
+        if(list && list!='' && list!='null'){
+            for(var i=0;i<list.length;i++){
+                var customer = list[i];
+                _html += '<tr>';
+                _html += '	<td>'+customer.customerId+'</td>';
+                _html += '  <td><a href='+basePath+'"/customerBaseInfo/intoCustomerBaseInfoDetails?customerType=1&customerId='+customer.customerId+'" >'+customer.fullName+'</a></td>';
+                _html += '  <td>'+(customer.shortName!=undefined?customer.shortName:'')+'</td>';
+                _html += '  <td lang="zh">'+(customer.country!=undefined?customer.country:'')+'</td>';
+                _html += '  <td lang="zh">'+(customer.customerLevel!=undefined?customerLevelList[customer.customerLevel-1]:'')+'</td>';
+                _html += '  <td>'+(customer.zhongxinbaoLevel!=undefined?customer.zhongxinbaoLevel:'')+'A</td>';
+                _html += '  <td>'+(customer.startCooperationTime!=undefined?customer.startCooperationTime:'')+'</td>';
+                _html += '  <td lang="zh">'+(customer.cooperationDuration!=undefined?customer.cooperationDuration:'')+'</td>';
+                _html += '  <td lang="zh">'+(customer.activePeriod!=undefined?customer.activePeriod:'')+'</td>';
+                _html += '  <td><a href="#" name="totalMoney" data-val="'+customer.customerId+'">'+(customer.totalMoney!=undefined?customer.totalMoney:'')+'</a></td>';
+                _html +='   <td>'+(customer.payMoney!=undefined?customer.payMoney:'')+'</td>';
+                _html +='   <td>'+(customer.minPrice!=undefined?customer.minPrice:'')+'</td>';
+                _html +='   <td>'+(customer.maintenanceFee!=undefined?customer.maintenanceFee:'')+'</td>';
+                _html +='   <td>'+(customer.netProfit!=undefined?customer.netProfit:'')+'</td>';
+                _html +='   <td lang="zh">'+(customer.customerStatus==0?"易流失":"正常")+'</td>';
+                _html +='   <td>'+customer.lastmodifyUserName+'</td>';
+                _html +='   <td>'+(customer.remark!=undefined?customer.remark:'')+'</td>';
+                _html +='   </tr>';
             }
-        });
-	}
+        }
+        $("#append_container").html(_html);
+    }
 
-    /*分页插件参数
-    参数名	描述	参数值
-    maxentries	总条目数	必选参数，整数
-    items_per_page	每页显示的条目数	可选参数，默认是10
-    num_display_entries	连续分页主体部分显示的分页条目数	可选参数，默认是10
-    current_page	当前选中的页面	可选参数，默认是0，表示第1页
-    num_edge_entries	两侧显示的首尾分页的条目数	可选参数，默认是0
-    link_to	分页的链接	字符串，可选参数，默认是"#"
-    prev_text	“前一页”分页按钮上显示的文字	字符串参数，可选，默认是"Prev"
-    next_text	“下一页”分页按钮上显示的文字	字符串参数，可选，默认是"Next"
-    ellipse_text	省略的页数用什么文字表示	可选字符串参数，默认是"..."
-    prev_show_always	是否显示“前一页”分页按钮	布尔型，可选参数，默认为true，即显示“前一页”按钮
-    next_show_always	是否显示“下一页”分页按钮	布尔型，可选参数，默认为true，即显示“下一页”按钮
-    callback	回调函数	默认无执行效果*/
+    // 渲染模态
+    function renderModal(data,el) {
 
-    /**
-	 * 获取列表数据总条目数
-     */
-	function getListCount(){
-		var total = 0;
-        jQuery.ajax({
-			url:'${request.contextPath}/customerBaseInfo/countCustomerList',
-			dataType:'JSON',
-			data:{
-                customerType:$("#customerType").val(),
-                areaClassId:click_node.oneLevelId,
-                areaId:click_node.twoLevelId,
-                fullName:$("#fullName").val(),
-                enterpriseNature:$("#enterpriseNature").val(),
-                zhongxinbaoLevel:$("#zhongxinbaoLevel").val(),
-                customerLevel:$("#customerLevel").val(),
-                customerStatus:$("#customerStatus").val(),
-			},
-			async:false,//同步加载
-			method:'POST',
-			success:function(data){
-                total = data.data;
-			}
-		});
-		return total;
-	}
+        if (data instanceof Array) {
 
+            var _html=''
+            jQuery.each(data,function (n,item) {
+
+                _html += '<tr><td>'+item.productName+'</td>';
+                _html += '<td>'+item.categoryName+'</td>'
+                _html += '<td>'+item.totalSaleNum+'</td>';
+                _html += '<td>'+item.totalSaleMoney+'</td>';
+                _html += '<td>'+item.totalMinPrice+'</td>';
+                _html += '<td>'+item.totalProfit+'</td></tr>';
+
+                el.html(_html);
+            })
+        }else{
+
+            _html = '<tr><td colspan="6">暂无数据</td></tr>';
+            el.html(_html);
+        }
+    }
 
 </script>
