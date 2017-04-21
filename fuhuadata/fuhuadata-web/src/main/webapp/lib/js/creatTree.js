@@ -89,7 +89,7 @@
                         var arr = item.suitableType;
                         var arr2 = arr.split(',');
                         /*console.log(item);*/
-                        $(tr).append('<td>'+item.packingId+'</td><td><a href="'+basePath+'/packingArchives/getDetails?id='+item.packingId+'&bid='+item.bigCategoryId+'&sid='+item.smallCategoryId+'" class="packName">'+ifEmpty(item.packName)+'</a></td><td>'+ifEmpty(item.spec)+'</td><td>'+ifEmpty(item.quality)+'</td><td>'+ifEmpty(item.qualityIndex)+'</td><td>'+ifEmpty(item.qualityTargetValue)+'</td><td>'+ifEmpty(item.unitPrice)+'</td><td>'+ifEmpty(item.priceEndDate)+'</td><td>'+replace(ifEmpty(item.suitableType))+'</td><td>'+ifEmpty(item.bRemarks)+'</td><td>'+ifEmpty(item.status)+'</td>').appendTo(parent);
+                        $(tr).append('<td>'+item.packingId+'</td><td><a href="'+basePath+'/packingArchives/getDetails?id='+item.packingId+'&bid='+item.bigCategoryId+'&sid='+item.smallCategoryId+'" class="packName">'+ifEmpty(item.packName)+'</a></td><td>'+ifEmpty(item.spec)+'</td><td>'+ifEmpty(item.quality)+'</td><td>'+ifEmpty(item.qualityIndex)+'</td><td>'+ifEmpty(item.qualityTargetValue)+'</td><td>'+ifEmpty(item.unitPrice)+'</td><td>'+ifEmpty(item.priceEndDate)+'</td><td>'+replace(ifEmpty(item.suitableType))+'</td><td>'+ifEmpty(item.bRemarks)+'</td><td>'+(ifEmpty(item.status)==1?'启用':'禁用')+'</td>').appendTo(parent);
                     })
                 }
              },

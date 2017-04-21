@@ -110,7 +110,7 @@
         if(ResultData!=undefined){
             jQuery.each(ResultData,function(n,item){
                 var parent  = $('#container');
-                var tr = '<tr><td>'+ifEmpty(item.packingId)+'</td><td><a href="'+basePath+'/packingArchives/getDetails?id='+item.packingId+'&bid='+item.bigCategoryId+'&sid='+item.smallCategoryId+'" class="packName">'+ifEmpty(item.packName)+'</a></td><td>'+ifEmpty(item.spec)+'</td><td>'+ifEmpty(item.quality)+'</td><td>'+ifEmpty(item.qualityIndex)+'</td><td>'+ifEmpty(item.qualityTargetValue)+'</td><td>'+ifEmpty(item.unitPrice)+'</td><td>'+ifEmpty(item.priceEndDate)+'</td><td>'+replace(ifEmpty(item.suitableType))+'</td><td>'+ifEmpty(item.bRemarks)+'</td><td>'+ifEmpty(item.status)+'</td></tr>';
+                var tr = '<tr><td>'+ifEmpty(item.packingId)+'</td><td><a href="'+basePath+'/packingArchives/getDetails?id='+item.packingId+'&bid='+item.bigCategoryId+'&sid='+item.smallCategoryId+'" class="packName">'+ifEmpty(item.packName)+'</a></td><td>'+ifEmpty(item.spec)+'</td><td>'+ifEmpty(item.quality)+'</td><td>'+ifEmpty(item.qualityIndex)+'</td><td>'+ifEmpty(item.qualityTargetValue)+'</td><td>'+ifEmpty(item.unitPrice)+'</td><td>'+ifEmpty(item.priceEndDate)+'</td><td>'+replace(ifEmpty(item.suitableType))+'</td><td>'+ifEmpty(item.bRemarks)+'</td><td>'+(ifEmpty(item.status)==1?'启用':'禁用')+'</td></tr>';
                 $(tr).appendTo(parent);
             })
         }
