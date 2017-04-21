@@ -19,7 +19,7 @@
 					<result property="saleOrganizationName" column="sale_organization_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="saleOrganizationId" column="sale_organization_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="customerType" column="customer_type" jdbcType="INT" javaType="java.lang.Integer" />
-					<result property="areaId" column="customer_area_id" jdbcType="INT" javaType="java.lang.Integer" />
+					<result property="areaId" column="customer_area_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="area" column="customer_area" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="registeredFunds" column="registered_funds" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="registeredAddress" column="registered_address" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -425,7 +425,7 @@
 		<result property="fullName" column="full_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="shortName" column="short_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="customerType" column="customer_type" jdbcType="INT" javaType="java.lang.Integer" />
-		<result property="areaId" column="customer_area_id" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="areaId" column="customer_area_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="area" column="customer_area" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="registeredFunds" column="registered_funds" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="registeredAddress" column="registered_address" jdbcType="VARCHAR" javaType="java.lang.String" />

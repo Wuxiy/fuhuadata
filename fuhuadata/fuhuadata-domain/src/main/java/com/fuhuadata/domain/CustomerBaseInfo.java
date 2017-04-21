@@ -23,7 +23,7 @@ public class CustomerBaseInfo implements Serializable{
 	private Integer companyType;//企业类型：0：客户，1：竞对
 
 	/**地区id**/
-	private Integer areaId;
+	private String areaId;
 
 	/**地区分类,例如北美洲**/
 	private String area;
@@ -254,13 +254,6 @@ public class CustomerBaseInfo implements Serializable{
 		this.fullEnterpriseNature = fullEnterpriseNature;
 	}
 
-	public Integer getAreaId() {
-		return areaId;
-	}
-
-	public void setAreaId(Integer areaId) {
-		this.areaId = areaId;
-	}
 
 	public String getArea() {
 		return area;
@@ -750,5 +743,13 @@ public class CustomerBaseInfo implements Serializable{
 
 	public void setCustomerDutyParagraph(String customerDutyParagraph) {
 		this.customerDutyParagraph = customerDutyParagraph;
+	}
+
+	public String getAreaId() {
+		return areaId;
+	}
+
+	public void setAreaId(String areaId) {
+		this.areaId = areaId;
 	}
 }
