@@ -59,7 +59,7 @@
   </select>
   
   
-  <insert id="addArchives" parameterClass="java.lang.Integer" >
+  <insert id="addArchives"  >
     insert into business_product_require_archives (business_product_id, main_packing_id,size,
       main_packing_type, specification, material, model, price, bottle_weight, bottle_cap_color,
       bottle_body_color, has_cap_logo, has_body_logo, bottle_diameter, has_danger_sign,
@@ -79,8 +79,8 @@
             business_order_product b
       where a.business_product_id = b.id and b.id=#businessProductId#
     )
-    <selectKey resultClass="java.lang.Integer" keyProperty="id">
-      SELECT @@IDENTITY AS ID
+    <selectKey resultClass="java.lang.Integer" keyProperty="value">
+      SELECT @@IDENTITY AS value
     </selectKey>
   </insert>
 
@@ -121,7 +121,7 @@
         where a.business_product_id = d.id
         and b.business_product_id = c.id
         and c.archive_product_id = d.id
-        and b.business_product_id =#businessProductId#
+        and b.business_product_id =#value#
   </update>
   <update id="update" parameterClass="BusinessProductRequireArchives" >
     update business_product_require_archives

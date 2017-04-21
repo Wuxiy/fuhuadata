@@ -67,18 +67,18 @@
                                 <td>含盖瓶重</td>
                                 <td>
                                     <div class="input-group">
-                                        <input data-control="on" id="bottleWeight" class="form-control" type="text" value="" disabled/>
+                                        <input data-control="on" id="bottleWeight" class="form-control isdisabled" type="text" value="" disabled/>
                                         <span class="input-group-addon">g</span>
                                     </div>
                                 </td>
                                 <td>瓶盖颜色(潘通号)</td>
-                                <td><input data-control="on" id="bottleCapColor" class="form-control" type="text" value="" disabled/></td>
+                                <td><input data-control="on" id="bottleCapColor" class="form-control isdisabled" type="text" value="" disabled/></td>
                                 <td >瓶身颜色</td>
-                                <td><input data-control="on" id="bottleBodyColor" class="form-control" type="text" value="" disabled/></td>
+                                <td><input data-control="on" id="bottleBodyColor" class="form-control isdisabled" type="text" value="" disabled/></td>
                                 <td>瓶口径</td>
                                 <td>
                                     <div class="input-group">
-                                        <input data-control="on" id="bottleDiameter" class="form-control" type="text" value="" disabled/>
+                                        <input data-control="on" id="bottleDiameter" class="form-control isdisabled" type="text" value="" disabled/>
                                         <span class="input-group-addon">mm</span>
                                     </div>
                                 </td>
@@ -88,39 +88,39 @@
                                 <td>瓶身有LOGO</td>
                                 <td>
                                     <div class="checkbox col-xs-12 text-left">
-                                        <label ><input data-control="on" id="hasBodyLogo" type="checkbox" disabled></label>
+                                        <label ><input class="isdisabled" data-control="on" id="hasBodyLogo" type="checkbox" disabled></label>
                                     </div>
                                 </td>
                                 <td>瓶盖有LOGO</td>
                                 <td>
                                     <div class="checkbox col-xs-12 text-left">
-                                        <label ><input data-control="on" id="hasCapLogo" type="checkbox" disabled></label>
+                                        <label ><input class="isdisabled" data-control="on" id="hasCapLogo" type="checkbox" disabled></label>
                                     </div>
                                 </td>
                                 <td>瓶需要危标</td>
                                 <td>
                                     <div class="checkbox col-xs-12 text-left">
-                                        <label ><input data-control="on" id="hasDangerSign" type="checkbox" disabled></label>
+                                        <label ><input class="isdisabled" data-control="on" id="hasDangerSign" type="checkbox" disabled></label>
                                     </div>
                                 </td>
                                 <td >商检号</td>
-                                <td><input data-control="on" id="businessCheckNum" class="form-control" type="text" value="" disabled/></td>
+                                <td><input data-control="on" id="businessCheckNum" class="form-control isdisabled" type="text" value="" disabled/></td>
                             </tr>
                             <tr>
                                 <td>瓶身需要刻度线</td>
                                 <td>
                                     <div class="checkbox col-xs-12 text-left">
-                                        <label ><input data-control="on" id="hasScaleLine" type="checkbox" disabled></label>
+                                        <label ><input class="isdisabled" data-control="on" id="hasScaleLine" type="checkbox" disabled></label>
                                     </div>
                                 </td>
                                 <td>瓶喷码</td>
                                 <td>
                                     <div class="checkbox col-xs-12 text-left">
-                                        <label ><input data-control="on" id="hasSprayCode" type="checkbox" disabled></label>
+                                        <label ><input class="isdisabled" data-control="on" id="hasSprayCode" type="checkbox" disabled></label>
                                     </div>
                                 </td>
                                 <td >瓶贴要求</td>
-                                <td><input data-control="on" id="bottlePasteRequire" class="form-control" type="text" value="" disabled/></td>
+                                <td><input data-control="on" id="bottlePasteRequire" class="form-control isdisabled" type="text" value="" disabled/></td>
                                 <td colspan="3"></td>
                             </tr>
                             <tr>
@@ -130,14 +130,14 @@
                                         <div class="form-group">
                                             <label class="control-label col-xs-1">特殊要求</label>
                                             <div class="col-xs-6">
-                                                <textarea data-control="on" id="specialRequire" class="form-control" rows="3" disabled></textarea>
+                                                <textarea data-control="on" id="specialRequire" class="form-control isdisabled" rows="3" disabled></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-xs-1">附加单价</label>
                                             <div class="col-xs-2">
                                                 <div class="input-group">
-                                                    <input data-control="on" id="addtionalPrice" class="form-control" type="text" disabled>
+                                                    <input data-control="on" id="addtionalPrice" class="form-control isdisabled" type="text" disabled>
                                                     <span class="input-group-addon">元</span>
                                                 </div>
                                             </div>
@@ -170,13 +170,13 @@
                                             <div class="form-group">
                                                 <label class="control-label col-xs-1">封箱口方式</label>
                                                 <div class="col-xs-2">
-                                                    <input data-control="on" id="sealingStyle" class="form-control" type="text" disabled>
+                                                    <input data-control="on" id="sealingStyle" class="form-control isdisabled" type="text" disabled>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label col-xs-1">其他要求</label>
                                                 <div class="col-xs-6">
-                                                    <textarea data-control="on" id="outerPackingOtherRequire" class="form-control" rows="3" disabled></textarea>
+                                                    <textarea data-control="on" id="outerPackingOtherRequire" class="form-control isdisabled" rows="3" disabled></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -215,20 +215,20 @@
                                         <div class="form-group">
                                             <label class="control-label col-xs-1">其他要求</label>
                                             <div class="col-xs-6">
-                                                <textarea data-control="on" id="otherRequire" class="form-control" rows="3" disabled></textarea>
+                                                <textarea data-control="on" id="otherRequire" class="form-control isdisabled" rows="3" disabled></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-xs-1">附加单价</label>
                                             <div class="col-xs-2">
                                                 <div class="input-group">
-                                                    <input data-control="on" id="otherRequirePrice" class="form-control" type="text" disabled>
+                                                    <input data-control="on" id="otherRequirePrice" class="form-control isdisabled" type="text" disabled>
                                                     <span class="input-group-addon">元</span>
                                                 </div>
                                             </div>
                                             <label class="control-label col-xs-1">单耗</label>
                                             <div class="col-xs-2">
-                                                <input data-control="on" id="otherRequireConsumption" class="form-control" type="text" disabled>
+                                                <input data-control="on" id="otherRequireConsumption" class="form-control isdisabled" type="text" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -418,6 +418,7 @@
 <input id="productRequireId" type="hidden" value="$!{productRequireId}">
 
 <script type="text/javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
+<script type="text/javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script>
     var id = $('#productRequireId').val();
@@ -508,27 +509,18 @@
                             $('#sealingStyle').val(productRequire.sealingStyle);
                         }
                         if(productRequire.size!=undefined){
-                            switch (productRequire.size){
-                                case 'AA':
-                                    $('#size').find('a[data-val="AA"]').addClass('active');
-                                    break;
-                                case 'AB':
-                                    $('#size').find('a[data-val="AB"]').addClass('active');
-                                    break;
-                                case 'AC':
-                                    $('#size').find('a[data-val="AC"]').addClass('active');
-                                    break;
-                            }
+                            $('#size').val(productRequire.size);
                         }
+
                         if(productRequire.imgInfo!=undefined){
-                            var imgInfo = productRequire.imgInfo;
+                            var imgInfo = eval(productRequire.imgInfo);
                             $('img[data-name]').each(function (i,item) {
                                 var thisImg = $(this),
                                     nameImg = thisImg.data('name');
                                     btn     = thisImg.parent('td').find('button');
                                 $.each(imgInfo,function (n,one) {
                                     if (nameImg==one.name){
-                                        thisImg.attr('src',one.path);
+                                        thisImg.attr('src',one.imgpath);
                                         btn.removeClass('hidden');
                                         return false;
                                     }else {
@@ -543,10 +535,10 @@
 
                     for(var k=0;k<modelist.length;k++){
                         img_html +='<div class="col-xs-2">';
-                        img_html +='<a href="#" class="thumbnail">';
+                        img_html +='<a class="thumbnail" >';
                         img_html +='<img src="'+modelist[k].path+'" alt="通用的占位符缩略图"  style="height: 200px;">';
                         img_html +='<div class="caption">';
-                        img_html +='<h4 class="text-info ">'+modelist[k].name+'<input style="margin-left: 15px;" type="checkbox" name="modelist" class="btn-link" data-name="'+modelist[k].name+'" data-path="'+modelist[k].path+'" disabled></h4>';
+                        img_html +='<h4 class="text-info ">'+modelist[k].name+'<input style="margin-left: 15px;" type="checkbox" name="modelist" class="btn-link" data-name="'+modelist[k].name+'" data-path="'+modelist[k].path+'" disabled checked></h4>';
                         img_html +='</div>';
                         img_html += '</a>';
                         img_html +='</div>';
@@ -608,6 +600,9 @@
         }else{
             $('#before').removeClass('hidden');
             $('#next').removeClass('hidden');
+
+            $('[data-target="#packModal"]').attr('disabled',false);
+            $('.isdisabled').attr('disabled',false);
         }
 
 
@@ -770,10 +765,11 @@
             jQuery.ajax({
                 url:basePath + '/businessProduct/saveProductRequire',
                 type:'POST',
-                contentType:"application/json",
+                /*contentType:"application/json",*/
                 data:Add(),
                 success:function (result) {
-                    window.location.href = basePath + '/businessProduct/intoDocumentary';
+                    console.log(result);
+                   /* window.location.href = basePath + '/businessProduct/intoDocumentary';*/
                 }
             })
         })
@@ -844,7 +840,7 @@
             'auxiliaryMaterialIds':getauxiliaryMaterialIds(),
             'imgInfo':getimgInfo(),
             'size':$('#size').val(),
-            'model':getmodel(),
+            'model':$('input[name="modelist"]:checked').attr('data-name'),
             'straightEmployingWay':'',
             'straightEmployingScale':'',
             'straightEmployingStandard':'',
@@ -855,6 +851,8 @@
             "lastmodifyUserId": 1,
             "lastmodifyUserName": "胡向阳"
         }
+        console.log(data);
+        return data;
     }
 
     function edit() {
@@ -889,8 +887,9 @@
             'auxiliaryMaterialIds':getauxiliaryMaterialIds(),
             'imgInfo':getimgInfo(),
             'size':$('#otherRequireConsumption').val(),
-            'model':getmodel()
+            'model':$('input[name="modelist"]:checked').attr('data-name')
         }
+        console.log(data);
         return data;
 
     }

@@ -296,7 +296,7 @@
 <input id="businessProductId" type="hidden" value="$!{businessProductId}"> <!--编号-->
 <input id="orderId" type="hidden" value="$!{orderId}">
 <input id="customerId" type="hidden" value="$!{customerId}">
-<input id="productRequireId" type="hidden" value="$!{productRequireId}">
+<input id="productRequireId" type="hidden" value="">
 
 <script type="text/javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
@@ -306,7 +306,7 @@
     var orderId = $('#orderId').val();
     var businessProductId = $('#businessProductId').val();
     var productRequireId = $('#productRequireId').val();
-    var customerId = $('$customerId').val();
+    var customerId = $('#customerId').val();
 
     var productId = '';
     var wareId = '';
@@ -330,6 +330,8 @@
                 var components = result.components;
 
                 $('#name').val(basicInfo.name);
+                $('#name').attr('data-productId',basicInfo.productId);
+                $('#name').attr('data-wareId',basicInfo.wareId);
                 $('#customsClearanceName').val(basicInfo.customsClearanceName);
                 $('#customerProductName').val(basicInfo.customerProductName);
                 $('#specification').val(basicInfo.specification);
@@ -420,8 +422,10 @@
                     contentType:"application/json",
                     data:Add(),
                     success:function (result) {
-                        if(result == true){
-                            window.location.href = basePath + '/businessProduct/intoProductRequire';
+                        var success = result.data.success;
+                        if(success == true){
+                            var businessProductId = result.data.businessProductId;
+                            window.location.href = basePath + '/businessProduct/intoProductRequire?businessProductId=' + businessProductId + '&&orderId=' + orderId + '&&customerId=' + customerId + '&&productRequireId=' + productRequireId;
                         }
                     }
                 })
@@ -429,6 +433,7 @@
         })
     })
 
+    //加工厂列表
     $('#factory').click(function(){
         var factoryList = document.getElementById('factoryList');
         factoryList.innerHTML = '';
@@ -477,8 +482,8 @@
 
         productId = ids.split('_')[0];
         wareId = ids.split('_')[1];
-        $('#productId').val(productId);
-        $('#wareId').val(wareId);
+        $('#name').attr('data-productId',productId);
+        $('#name').attr('data-wareId',wareId);
         $('#name').val(tarEltext);
 
         var data = {
@@ -486,7 +491,7 @@
             'orderId':$('#orderId').val(),
             'productId':productId,
             'wareId':wareId,
-            'businessProductId':''
+            'businessProductId':$('#businessProductId').val()
         }
         jQuery.ajax({
                 url:basePath + '/businessProduct/addFromArchives',
@@ -599,8 +604,8 @@
             "businessOrderProduct":{
                 'name':$('#name').val(),
                 'orderId':$('#orderId').val(),
-                'productId':$('#productId').val(),
-                'wareId':$('#wareId').val(),
+                'productId':$('#name').attr('data-productId'),
+                'wareId':$('#name').attr('data-wareId'),
                 'customsClearanceName':$('#customsClearanceName').val(),
                 'customerProductName':$('#customerProductName').val(),
                 'brand':$('#brand').val(),
@@ -621,6 +626,7 @@
                 'taxType':$('#taxType').val(),
                 'taxFree':$('#taxFree').val(),
                 'otherCost':$('#otherCost').val(),
+                'productRequireId':'',
 
                 "createTime": getTime(),
                 "createUserId": 2,
@@ -642,8 +648,9 @@
                 "id":$('#businessProductId').val(),
                 'productRequireId':$('#productRequireId').val(),
                 'name':$('#name').val(),
-                'orderId':$('#orderId').val(),
-                'productId':$('#productId').val(),
+                'orderId':$('#orderId').val(),/*
+                'productId':$('#name').attr('data-productId'),
+                'wareId':$('#name').attr('data-wareId'),*/
                 'customsClearanceName':$('#customsClearanceName').val(),
                 'customerProductName':$('#customerProductName').val(),
                 'brand':$('#brand').val(),
