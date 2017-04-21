@@ -85,6 +85,7 @@ CRM.cbInfo.collectData = function () {
         obj = {
             customerBaseInfo:{
                 areaId               : page.areaId.data('val'),
+                area                 : page.areaId.val(),
                 companyType          : page.companyType.val(),
                 customerId           : page.cid,
                 customerLevel        : page.customerLevel.val(),
@@ -113,14 +114,15 @@ CRM.cbInfo.collectData = function () {
                 remark               : page.remark.val(),
                 opportunitySource    : page.opportunitySource.val(),
                 fullEnterpriseNature : page.sCustomerEnterpriceNature(),
-                area                 : page.areaId.find(':selected').text(),
-                country              : page.areaId.find(':selected').text(),
+                // area                 : page.areaId.find(':selected').text(),
+                // country              : page.areaId.find(':selected').text(),
                 formatdoc            : page.formatdoc.val(),
                 custclass            : page.custclass.data('val'),
                 timezone             : page.timezone.data('val'),
                 countryzone          : page.countryzone.data('val'),
                 lossReason           : $('#reason').val(),
                 saleOrganizationId   : page.saleOrganizationName.data('val'),
+                saleOrganizationName : page.saleOrganizationName.val(),
                 customerDutyParagraph: page.customerDutyParagraph.val()
             },
             customerEnterpriceNatures : page.customerEnterpriceNatureObj(),
