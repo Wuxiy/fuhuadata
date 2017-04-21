@@ -313,7 +313,7 @@ $('#delete').on('click',function(){
     if(ids.length > 0){
         var msg = "确定要删除这些关联吗？";
         if(confirm(msg)){
-            var url = basePath + 'deleteRelation?id=' + id;
+            var url = basePath + '/packingArchives/deleteRelation?id=' + id;
             var data = ids;
 
             jQuery.ajax({
@@ -343,7 +343,7 @@ $('#finish_relate').on('click',function(){
     if(ids.length > 0){
         var msg = "确认要为主材添加这些关联吗？";
         if(msg){
-            var url = basePath + 'addRelation?id=' + id;
+            var url = basePath + '/packingArchives/addRelation?id=' + id;
             var data = ids;
             console.log(ids);
             jQuery.ajax({
