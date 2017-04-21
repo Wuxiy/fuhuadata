@@ -72,28 +72,28 @@
                             </form>
                         </div>
 						<!--表格-->
-						<table class="table table-condensed table-bordered table-striped">
+						<table class="table text-center table-condensed table-bordered table-striped">
 							<caption class="text-right" lang="zh">金额单位：万元</caption>
 							<thead>
 							<tr>
-                                <th lang="zh">编号</th>
-								<th lang="zh">客户编号</th>
-								<th lang="zh">客户全称</th>
-								<th lang="zh">客户简称</th>
-								<th lang="zh">国家</th>
-								<th lang="zh">客户级别</th>
-								<th lang="zh">信用评级</th>
-								<th lang="zh">开始合作时间</th>
-								<th lang="zh">合作时间</th>
-								<th lang="zh">活跃周期</th>
-								<th lang="zh">合同总金额</th>
-								<th lang="zh">已回款金额</th>
-								<th lang="zh">总最低销售限价</th>
-								<th lang="zh">总维护费用</th>
-								<th lang="zh">净利润</th>
-								<th lang="zh">客户状态</th>
-								<th lang="zh">业务员</th>
-								<th lang="zh">备注</th>
+                                <th class="text-center" lang="zh">编号</th>
+								<th class="text-center" lang="zh">客户编号</th>
+								<th class="text-center" lang="zh">客户全称</th>
+								<th class="text-center" lang="zh">客户简称</th>
+								<th class="text-center" lang="zh">国家</th>
+								<th class="text-center" lang="zh">客户级别</th>
+								<th class="text-center" lang="zh">信用评级</th>
+								<th class="text-center" lang="zh">开始合作时间</th>
+								<th class="text-center" lang="zh">合作时间</th>
+								<th class="text-center" lang="zh">活跃周期</th>
+								<th class="text-center" lang="zh">合同总金额</th>
+								<th class="text-center" lang="zh">已回款金额</th>
+								<th class="text-center" lang="zh">总最低销售限价</th>
+								<th class="text-center" lang="zh">总维护费用</th>
+								<th class="text-center" lang="zh">净利润</th>
+								<th class="text-center" lang="zh">客户状态</th>
+								<th class="text-center" lang="zh">业务员</th>
+								<th class="text-center" lang="zh">备注</th>
 							</tr>
 							</thead>
 							<tbody id="append_container">
@@ -224,47 +224,60 @@
                         onClick: callback
                     }
                 },
-                id = el.attr('id');
+                id = el.attr('id'),
+                treeObj = null;
 
         $.fn.zTree.init(el, setting, data);
+        treeObj = $.fn.zTree.getZTreeObj('areaTree');
+        treeObj.expandNode(treeObj.getNodes()[0],true);
     };
 
     // 地区树添加单击事件
     function areaTreeDblHandler (event, modLeftId, treeNode) {
 
-        var treeObj = $.fn.zTree.getZTreeObj('areaTree');
-        var sNodes = treeObj.getSelectedNodes();
-        if (sNodes.length > 0) {
-            var isParent = sNodes[0].isParent;
+        // 遍历子节点函数
+        function smarty(node) {
+
+            $.each(node,function (i,item) {
+                if (!item.isParent) { // 不是父节点，将他的id添加到数组
+
+                    arr.push(item.pkAreacl);
+                    return true;
+                }else { // 是父节点则继续遍历他的子节点
+
+                    smarty(item.children);
+                }
+            });
         }
 
-        function filter(node) {
-            return (node.level == 2 && node.name.indexOf("test")>-1);
+        if (treeNode.pkAreacl!='1001D2100000000067E6'){
+
+            var treeObj = $.fn.zTree.getZTreeObj('areaTree'),
+                    sNodes = treeObj.getSelectedNodes(); // 选中的节点集合
+
+            if (sNodes.length > 0) {
+
+                if (sNodes[0].isParent) { // 当前节点是父节点则取出他的所有子节点
+
+                    var arr = [],
+                            nodes = sNodes[0].children;
+
+                    smarty(nodes);
+
+                    areaId = arr.join(',');
+                } else {
+
+                    areaId = treeNode.pkAreacl;
+                }
+            }
+        }else {
+
+            areaId = '';
         }
 
-        var node = treeObj.getNodesByFilter(true, true); // 仅查找一个节点
-        var nodes = treeObj.getNodesByFilter(filter); // 查找节点集合
 
-        console.log(nodes);
-//        if (treeNode.id == '~') { // 如果当前节点为全部，则令areaId为空
-//
-//            areaId = '';
-//        }else { // 不是全部时判断有无子节点
-//
-//            var isArr = CRM.getNodes(treeNode.id,areaTreeData);
-//
-//            if (isArr instanceof Array) { // 有子节点返回后代节点id字符串
-//
-//                areaId = CRM.searchTreeId(isArr);
-//            }else { // 没有后代，返回自身的id
-//
-//                areaId = isArr;
-//            }
-//        }
-//
-//        console.log(areaId);
-//        // 搜索表格
-//        serach();
+        console.log(areaId);
+        serach();
     }
 
 	// 搜索列表并渲染

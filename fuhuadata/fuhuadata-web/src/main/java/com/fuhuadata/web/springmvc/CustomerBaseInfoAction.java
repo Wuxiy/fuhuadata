@@ -153,8 +153,13 @@ public class CustomerBaseInfoAction {
         Subject subject = LoginUtils.getSubject();
         subject.checkPermission(CustomerUtils.getCustomerPermissonPrefix(customerType) + ":basic:view");
 
+        //查询数据格式档案
+        Result<List<Formatdoc>> result = new Result<List<Formatdoc>>();
+        result=customerBaseInfoService.getFormatdoc();
+
         ModelAndView model = new ModelAndView("customerInfo/customerBasicInfo").addObject("customerId",customerId)
                 .addObject("customerType",customerType)
+                .addObject("formatdoc",result.get())
                 .addObject("fullName",fullName);
         return model;
     }

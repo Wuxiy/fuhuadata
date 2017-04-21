@@ -23,6 +23,7 @@ public class BusinessOrderProduct {
     private Integer productId;
     /**规格id**/
     private Integer wareId;
+
     /**报关产品编码**/
     private String customsClearanceId;
     /**报关产品名称**/
@@ -193,6 +194,30 @@ public class BusinessOrderProduct {
     //资金利息单价
     private BigDecimal capitalInterestPrice;
 
+
+    //==============非本表字段，用于前端显示=======================
+    //规格
+    private String specification;
+    //型号
+    private String model;
+
+    public String getSpecification() {
+        return specification;
+    }
+
+    public void setSpecification(String specification) {
+        this.specification = specification;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    //=====================================
 
     public BigDecimal getCapitalInterestPrice() {
         return capitalInterestPrice;
