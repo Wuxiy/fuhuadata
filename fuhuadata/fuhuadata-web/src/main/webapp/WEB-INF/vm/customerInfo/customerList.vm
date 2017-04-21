@@ -232,39 +232,42 @@
     // 地区树添加单击事件
     function areaTreeDblHandler (event, modLeftId, treeNode) {
 
-        var treeObj = $.fn.zTree.getZTreeObj('areaTree');
-        var sNodes = treeObj.getSelectedNodes();
+        // 遍历子节点函数
+        function smarty(node) {
+
+            $.each(node,function (i,item) {
+                if (!item.isParent) { // 不是父节点，将他的id添加到数组
+
+                    arr.push(item.pkAreacl);
+                    return true;
+                }else { // 是父节点则继续遍历他的子节点
+
+                    smarty(item.children);
+                }
+            });
+        }
+
+        var treeObj = $.fn.zTree.getZTreeObj('areaTree'),
+            sNodes = treeObj.getSelectedNodes(); // 选中的节点集合
+
         if (sNodes.length > 0) {
-            var isParent = sNodes[0].isParent;
+
+            if (sNodes[0].isParent) { // 当前节点是父节点则取出他的所有子节点
+
+                var arr = [],
+                    nodes = sNodes[0].children;
+
+                smarty(nodes);
+
+                areaId = arr.join(',');
+            } else {
+
+                areaId = treeNode.pkAreacl;
+            }
         }
 
-        function filter(node) {
-            return (node.level == 2 && node.name.indexOf("test")>-1);
-        }
-
-        var node = treeObj.getNodesByFilter(true, true); // 仅查找一个节点
-        var nodes = treeObj.getNodesByFilter(filter); // 查找节点集合
-
-        console.log(nodes);
-//        if (treeNode.id == '~') { // 如果当前节点为全部，则令areaId为空
-//
-//            areaId = '';
-//        }else { // 不是全部时判断有无子节点
-//
-//            var isArr = CRM.getNodes(treeNode.id,areaTreeData);
-//
-//            if (isArr instanceof Array) { // 有子节点返回后代节点id字符串
-//
-//                areaId = CRM.searchTreeId(isArr);
-//            }else { // 没有后代，返回自身的id
-//
-//                areaId = isArr;
-//            }
-//        }
-//
 //        console.log(areaId);
-//        // 搜索表格
-//        serach();
+        serach();
     }
 
 	// 搜索列表并渲染
