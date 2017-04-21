@@ -21,12 +21,11 @@
     <script src="${request.contextPath}/lib/js/validate/jquery.validate.js" charset="utf-8"></script>
     <script src="${request.contextPath}/lib/js/validate/additional-methods.js" charset="utf-8"></script>
     <script src="${request.contextPath}/lib/js/validate/localization/messages_zh.js" charset="utf-8"></script>
-
+    <script src="${request.contextPath}/lib/js/pagination/pagination.js" type="text/javascript" charset="utf-8"></script>
 
     <script src="${request.contextPath}/lib/js/jquery-lang.js" type="text/javascript" charset="utf-8"></script>
     <script src="${request.contextPath}/lib/js/jquery-lang.js" type="text/javascript" charset="utf-8"></script>
     <script src="${request.contextPath}/lib/js/langpack/nonDynamic.js" type="text/javascript" charset="utf-8"></script>
-##    <script src="${request.contextPath}/lib/js/commons/commons.js" type="text/javascript" charset="utf-8"></script>
 
     <script type="text/javascript">
         var language = navigator.browserLanguage?navigator.browserLanguage:navigator.language,

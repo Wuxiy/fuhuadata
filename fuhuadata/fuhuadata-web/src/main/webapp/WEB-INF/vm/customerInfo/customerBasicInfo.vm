@@ -33,18 +33,15 @@
                                 </div>
                                 <label for="areaId" class=" control-label col-xs-1" lang="zh">地区分类<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <select id="areaId" data-control="off" disabled name="areaId" class="form-control notNull">
-                                        <option lang="zh" value="" selected>——请选择地区——</option>
-                                    </select>
+                                    <div class="input-group">
+                                        <input id="areaId" data-control="off" disabled name="areaId" class="form-control">
+                                        <div class="input-group-btn">
+                                            <button id="aISearch" class="btn btn-xs btn-default" data-control="on" type="button" data-toggle="modal" data-target="#cbtModal"><span class="glyphicon glyphicon-search"></span></button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="countryId" class="control-label col-xs-1" lang="zh">国家<sup data-view="editView" class="not-null hidden">*</sup></label>
-                                <div class="col-xs-2">
-                                    <select id="countryId" data-control="off" disabled name="countryId" class="form-control notNull">
-                                        <option lang="zh" value="" selected>——请优先选择地区——</option>
-                                    </select>
-                                </div>
                                 <label for="zhongxinbaoNumber" class="control-label col-xs-1" lang="zh">中信保编码</label>
                                 <div class="col-xs-2">
                                     <input id="zhongxinbaoNumber" data-control="off" disabled name="zhongxinbaoNumber" class="form-control" type="text" value="" />
@@ -105,7 +102,9 @@
                             <div class="form-group">
                                 <label for="dataFormat" class="control-label col-xs-1" lang="zh">数据格式<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <select id="dataFormat" data-control="off" disabled name="dataFormat" class="form-control"></select>
+                                    <select id="dataFormat" data-control="off" disabled name="dataFormat" class="form-control">
+                                        <option value=""></option>
+                                    </select>
                                 </div>
                                 <label for="customerBasicTypes" class="control-label col-xs-1" lang="zh">客户基本分类<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
@@ -401,7 +400,6 @@
 ## 数据格式
 <script id="dataFormatC" type="text/html">
     <%if (data.length>0) {%>
-    <option>——请选择——</option>
     <%for (var i=0;i<data.length;i++){%>
     <option id="<%=data[i].pkFormatdoc%>" value="<%=data[i].code%>"><%=data[i].name%></option>
     <%}%>
