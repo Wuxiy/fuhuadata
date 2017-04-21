@@ -7,7 +7,9 @@ import com.fuhuadata.domain.BusinessOrderProduct;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.BusinessOrderManager;
+import com.fuhuadata.manager.NCExchange.BusinessOrderToNC;
 import com.fuhuadata.service.BusinessOrderService;
+import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -32,7 +34,10 @@ public class BusinessOrderServiceImpl implements BusinessOrderService {
     private BusinessOrderDao businessOrderDao;
 
     @Autowired
+    private BusinessOrderToNC businessOrderToNC;
+
     private BusinessOrderProductDao businessOrderProductDao;
+
 
     @Override
     public int count(QueryBusinessOrder queryBusinessOrder) {
@@ -65,6 +70,7 @@ public class BusinessOrderServiceImpl implements BusinessOrderService {
             result.setSuccess(false);
             log.error("根据id更新报价信息错误",e);
         }
+        result.setMessage("根据id更新报价表头信息成功");
         return result;
     }
 
@@ -77,6 +83,7 @@ public class BusinessOrderServiceImpl implements BusinessOrderService {
             result.setSuccess(false);
             log.error("根据id更新报价状态错误",e);
         }
+        result.setMessage("根据id更新报价状态成功");
         return result;
     }
 
@@ -201,10 +208,13 @@ public class BusinessOrderServiceImpl implements BusinessOrderService {
                 List<BusinessOrderProduct> list = Arrays.asList(businessOrderDO.getBusinessOrderProducts());
                 result.setSuccess(businessOrderProductDao.updateBusinessOrderProducts(list));
             }
-
+            String code = businessOrderToNC.sendBusinessOrder(businessOrderDO.getBusinessOrder().getOrderId());
+            if(code =="1"){
+                result.setMessage("订单转化同步NC成功");
+            }
         }catch(Exception e){
             result.setSuccess(false);
-            log.error("更新订单和订单产品",e);
+            log.error("更新订单和订单产品错误,NC同步错误",e);
         }
         return result;
     }

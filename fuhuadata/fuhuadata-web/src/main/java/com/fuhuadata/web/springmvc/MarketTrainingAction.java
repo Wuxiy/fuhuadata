@@ -6,6 +6,8 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.MarketTrainingService;
 
+import com.fuhuadata.service.util.LoginUtils;
+import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -70,6 +72,9 @@ public class MarketTrainingAction {
     @ResponseBody
     public ResultPojo doAddMarketTraining(@RequestBody MarketTraining marketTraining){
         try{
+            marketTraining.setUserId(LoginUtils.getLoginId());
+            marketTraining.setUserName(LoginUtils.getLoginName());
+            marketTraining.setUploadDate(DateUtil.getDateTimeFormat());
             Result<MarketTraining> result = marketTrainingService.addMarketTraining(marketTraining);
             return result.getResultPojo();
         }catch (Exception e){

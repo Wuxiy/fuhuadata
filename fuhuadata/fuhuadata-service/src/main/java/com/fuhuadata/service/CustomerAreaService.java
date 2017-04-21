@@ -10,5 +10,10 @@ import java.util.List;
  * Created by hexingfu on 2017/3/9.
  */
 public interface CustomerAreaService {
-    public Result<List<CategoryTree>> getAllCustomerAreaList();
+    /**
+     * 根据主键加载子节点
+     * @param id
+     * @return
+     */
+    public Result<List<CustomerArea>> getAllCustomerAreaList(String id);
 }

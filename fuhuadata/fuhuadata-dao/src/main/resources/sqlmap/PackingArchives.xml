@@ -256,7 +256,7 @@
 
     <select id="GET-BY-PID" resultMap="PACKINGARCHIVES-MAP" parameterClass="java.lang.Integer">
         <![CDATA[
-            SELECT * FROM k_packing_archives WHERE big_category_id=#id# OR small_category_id=#id#
+            SELECT * FROM k_packing_archives WHERE big_category_id=#id# OR small_category_id=#id# ORDER BY packing_id DESC
         ]]>
     </select>
 

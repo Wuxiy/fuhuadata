@@ -9,5 +9,5 @@ import java.util.List;
  */
 public interface CustomerAreaManager {
 
-    public List<CustomerArea> getAllCustomerAreaList();
+    public List<CustomerArea> getAllCustomerAreaList(String id);
 }

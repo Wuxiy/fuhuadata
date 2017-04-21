@@ -79,6 +79,9 @@
             <isNotEmpty prepend=" AND " property="customerName">
                 base.full_name like concat('%',#customerName#,'%')
             </isNotEmpty>
+            <isNotEmpty prepend=" OR " property="customerName">
+                base.short_name like concat('%',#customerName#,'%')
+            </isNotEmpty>
             <isNotEmpty prepend=" AND " property="customerLevel">
                 base.customer_level = #customerLevel#
             </isNotEmpty>
@@ -132,8 +135,11 @@
 
     <sql id="ORDER-PAGE-COMMON">
         <dynamic prepend=" WHERE ">
-            <isNotEmpty prepend=" AND " property="customerId">
+            <isNotEmpty prepend=" AND " property="customerName">
                 base.short_name like concat('%',#customerName#,'%')
+            </isNotEmpty>
+            <isNotEmpty prepend=" OR " property="customerName">
+                base.full_name like concat('%',#customerName#,'%')
             </isNotEmpty>
             <isNotEmpty prepend=" AND " property="salesManId">
                 a.sales_man_id = #salesManId#
@@ -184,11 +190,14 @@
             <isNotEmpty prepend=" AND " property="customerName">
                 base.short_name = #customerName#
             </isNotEmpty>
+            <isNotEmpty prepend=" OR " property="customerName">
+                base.full_name like concat('%',#customerName#,'%')
+            </isNotEmpty>
             <isNotEmpty prepend=" AND " property="status">
                 a.status = #status#
             </isNotEmpty>
             <isNotEmpty prepend=" AND " property="orderId">
-                a.order_id = #orderId#
+                a.order_id like concat('',#orderId#,'')
             </isNotEmpty>
             <isNotEmpty prepend=" AND " property="customerLevel">
                 base.customer_level = #customerLevel#

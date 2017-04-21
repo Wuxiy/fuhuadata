@@ -7,8 +7,10 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.BCodeService;
 import com.fuhuadata.service.ProductInfoService;
+import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.ProductInfoDO;
 import com.fuhuadata.vo.ProductInfoVO;
+import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -78,6 +80,14 @@ public class ProductInfoAction {
         ProductInfo productInfo = productInfoDO.getProductInfo();
         ProductComponent[] productComponents  = productInfoDO.getProductComponents();
         Result<ProductInfo> result = new Result<ProductInfo>();
+        //基础信息
+        productInfo.setCreateUserId(LoginUtils.getLoginId());
+        productInfo.setCreateUserName(LoginUtils.getLoginName());
+        productInfo.setCreateTime(DateUtil.getDateTimeFormat());
+        productInfo.setLastmodifyUserId(LoginUtils.getLoginId());
+        productInfo.setLastmodifyUserName(LoginUtils.getLoginName());
+        productInfo.setModifyTime(DateUtil.getDateTimeFormat());
+
         List<ProductComponent> list = new ArrayList<ProductComponent>();
         try{
             if(productComponents!=null&&productComponents.length>0) {
@@ -132,6 +142,10 @@ public class ProductInfoAction {
     public ResultPojo doModifyProductInfo(@RequestBody ProductInfoDO productInfoDO) {
         ProductInfo productInfo = productInfoDO.getProductInfo();
         ProductComponent[] productComponents  = productInfoDO.getProductComponents();
+        //基础信息
+        productInfo.setLastmodifyUserId(LoginUtils.getLoginId());
+        productInfo.setLastmodifyUserName(LoginUtils.getLoginName());
+        productInfo.setModifyTime(DateUtil.getDateTimeFormat());
         Result<ProductInfo> result = new Result<ProductInfo>();
         List<ProductComponent> list = new ArrayList<ProductComponent>();
         try{

@@ -5,7 +5,9 @@ import com.fuhuadata.domain.query.CustomerEncyclopediaQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.CustomerEncyclopediaService;
+import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.CustomerEncyVO;
+import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -72,13 +74,13 @@ public class CustomerEncyclopediaAction {
     @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "doAdd")
     @ResponseBody
      public ResultPojo doAddCustomerEncyclopedia(@RequestBody CustomerEncyclopedia customerEncyclopedia){
-        //
         try{
-            //后期获取系统用户和日期数据
-            customerEncyclopedia.setCreateUserId(1);
-            customerEncyclopedia.setCreateUserName("huxiangyang");
-            customerEncyclopedia.setLastmodifyUserId(1);
-            customerEncyclopedia.setLastmodifyUserName("胡向阳");
+            customerEncyclopedia.setCreateUserId(LoginUtils.getLoginId());
+            customerEncyclopedia.setCreateUserName(LoginUtils.getLoginName());
+            customerEncyclopedia.setLastmodifyUserId(LoginUtils.getLoginId());
+            customerEncyclopedia.setLastmodifyUserName(LoginUtils.getLoginName());
+            customerEncyclopedia.setCreateTime(DateUtil.getDateTimeFormat());
+            customerEncyclopedia.setModifyTime(DateUtil.getDateTimeFormat());
 
             Result<CustomerEncyclopedia> result = customerEncyclopediaService.addCustomerEncyclopedia(customerEncyclopedia);
             return result.getResultPojo();
@@ -122,8 +124,13 @@ public class CustomerEncyclopediaAction {
     @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "doUpdate")
     @ResponseBody
     public ResultPojo update(@RequestBody CustomerEncyclopedia customerEncyclopedia){
+        customerEncyclopedia.setLastmodifyUserId(LoginUtils.getLoginId());
+        customerEncyclopedia.setLastmodifyUserName(LoginUtils.getLoginName());
+        customerEncyclopedia.setModifyTime(DateUtil.getDateTimeFormat());
+
         try{
             String id =customerEncyclopedia.getEncyId();
+
             Result result = customerEncyclopediaService.updateCustomerEncyclopediaById(id,customerEncyclopedia);
             return result.getResultPojo();
         }catch(Exception e){

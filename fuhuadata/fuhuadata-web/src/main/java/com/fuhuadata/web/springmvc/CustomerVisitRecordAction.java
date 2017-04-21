@@ -8,6 +8,7 @@ import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.CustomerVisitRecordVO;
 import com.fuhuadata.vo.VisitRecordVO;
 import com.fuhuadata.web.util.CustomerUtils;
+import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -80,6 +81,11 @@ public class CustomerVisitRecordAction {
     @ResponseBody
     public ResultPojo addCustomerVisitRecord(@RequestBody CustomerVisitRecordVO customerVisitRecordVO){
         Result result = new Result();
+        customerVisitRecordVO.getCustomerVisitRecord().setCreateUserId(LoginUtils.getLoginId());
+        customerVisitRecordVO.getCustomerVisitRecord().setCreateUserName(LoginUtils.getLoginName());
+        customerVisitRecordVO.getCustomerVisitRecord().setLastmodifyUserId(LoginUtils.getLoginId());
+        customerVisitRecordVO.getCustomerVisitRecord().setLastmodifyUserName(LoginUtils.getLoginName());
+        customerVisitRecordVO.getCustomerVisitRecord().setModifyTime(DateUtil.getDateTimeFormat());
         try{
              result=customerVisitRecordService.addVisitRecord(customerVisitRecordVO);
         }catch(Exception e){

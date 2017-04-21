@@ -46,11 +46,11 @@ function cpps(result){
     $.each(data,function(n,item){
         var tbody = '';
         tbody += '<tbody>';
-        tbody += '<tr><th class="text-center">采购产品</th>';
-        tbody += '<td class="text-center">'+(item.productName!=undefined?item.productName:'')+'</td>';
-        tbody += '<th class="text-center">年需求量</th>';
-        tbody += '<td class="text-center">'+(item.annualDemands!=undefined?item.annualDemands:'')+'</td>';
-        tbody += '<th class="text-center">平均单价(美元)</th>';
+        tbody += '<tr><th width="10%" class="text-center">采购产品</th>';
+        tbody += '<td width="30%" class="text-center">'+(item.productName!=undefined?item.productName:'')+'</td>';
+        tbody += '<th width="10%" class="text-center">年需求量</th>';
+        tbody += '<td width="20%" class="text-center">'+(item.annualDemands!=undefined?item.annualDemands:'')+'</td>';
+        tbody += '<th width="20%" class="text-center">平均单价(美元)</th>';
         tbody += '<td class="text-center">'+(item.averagePrice!=undefined?item.averagePrice:'')+'</td></tr>';
         tbody += '<tr><td>供应商1</td>';
         tbody += '<td>'+(item.supplier1!=undefined?item.supplier1:'')+'</td>';
@@ -207,17 +207,17 @@ function cooperationObj(){
 function cspsTable(){
     var tbody = '';
     tbody += '<tbody name="cspsTbody">';
-    tbody += '<tr><th>销售产品<sup class="not-null">*</sup></th>';
-    tbody += '<th><div class="input-group"><input name="productName" class="form-control" type="text" value="" disabled required>';
+    tbody += '<tr><th width="10%" class="text-center">销售产品<sup class="not-null">*</sup></th>';
+    tbody += '<th width="20%" class="text-center"><div class="input-group"><input name="productName" class="form-control" type="text" value="" disabled required>';
     tbody += '<span class="input-group-btn"><button name="popupMd" class="btn btn-xs btn-default" type="button">';
     tbody += '<span class="glyphicon glyphicon-search"></span>';
     tbody += '</button></span></div></th>';
-    tbody += '<th>年销售量<sup class="not-null">*</sup></th>';
-    tbody += '<th><input name="yearSalesTotal" class="form-control" type="text" value="" required></th>';
-    tbody += '<th>品牌</th>';
-    tbody += '<th><input name="brand" class="form-control" type="text" value=""></th>';
-    tbody += '<th>营销手段</th>';
-    tbody += '<th><input name="marketingMethod" class="form-control" type="text" value=""></th></tr>';
+    tbody += '<th width="10%" class="text-center">年销售量<sup class="not-null">*</sup></th>';
+    tbody += '<th width="20%" class="text-center"><input name="yearSalesTotal" class="form-control" type="text" value="" required></th>';
+    tbody += '<th width="10%" class="text-center">品牌</th>';
+    tbody += '<th width="10%" class="text-center"><input name="brand" class="form-control" type="text" value=""></th>';
+    tbody += '<th width="10%" class="text-center">营销手段</th>';
+    tbody += '<th width="10%" class="text-center"><input name="marketingMethod" class="form-control" type="text" value=""></th></tr>';
     tbody += '<tr><td>销售目的国1</td>';
     tbody += '<td><input name="destinationCountry1" class="form-control" type="text" value=""></td>';
     tbody += '<td>年销售量</td>';
@@ -243,15 +243,15 @@ function cspsTable(){
 function cppsTable() {
     var tbody = '';
     tbody += '<tbody name="cppsTbody">';
-    tbody += '<tr><th>采购产品<sup class="not-null">*</sup></th>';
-    tbody += '<th><div class="input-group"><input name="productName" class="form-control" type="text" value="" disabled required>';
+    tbody += '<tr><th width="10%" class="text-center">采购产品<sup class="not-null">*</sup></th>';
+    tbody += '<th width="30%" class="text-center"><div class="input-group"><input name="productName" class="form-control" type="text" value="" disabled required>';
     tbody += '<span class="input-group-btn"><button name="popupMd" class="btn btn-xs btn-default" type="button">';
     tbody += '<span class="glyphicon glyphicon-search"></span>';
     tbody += '</button></span></div></th>';
-    tbody += '<th>年需求量<sup class="not-null">*</sup></th>';
-    tbody += '<th><input name="annualDemands" class="form-control" type="text" value="" required></th>';
-    tbody += '<th>平均单价(美元)<sup class="not-null">*</sup></th>';
-    tbody += '<th><input name="averagePrice" class="form-control" type="text" value="" required></th></tr>';
+    tbody += '<th width="10%" class="text-center">年需求量<sup class="not-null">*</sup></th>';
+    tbody += '<th width="20%" class="text-center"><input name="annualDemands" class="form-control" type="text" value="" required></th>';
+    tbody += '<th width="10%" class="text-center">平均单价(美元)<sup class="not-null">*</sup></th>';
+    tbody += '<th width="20%" class="text-center"><input name="averagePrice" class="form-control" type="text" value="" required></th></tr>';
     tbody += '<tr><td>供应商1<sup class="not-null">*</sup></td>';
     tbody += '<td><input name="supplier1" class="form-control" type="text" value="" required></td>';
     tbody += '<td>年采购量<sup class="not-null">*</sup></td>';

@@ -44,8 +44,6 @@ CRM.cbInfo.areaTree = null;
 // 表单控件
 CRM.cbInfo.area                 = $('#area'); // 地区
 CRM.cbInfo.areaId               = $('#areaId'); // 地区id
-CRM.cbInfo.country              = $('#country'); // 国家
-CRM.cbInfo.countryId            = $('#countryId'); // 国家id
 CRM.cbInfo.companyType          = $('#companyType'); // 公司类型
 CRM.cbInfo.customerId           = $('#customerId'); // 客户id 自动生成
 CRM.cbInfo.customerType         = $('#customerType'); // 客户状态 [1,2,3] 1合作客户 2潜在客户 3流失客户
@@ -80,13 +78,13 @@ CRM.cbInfo.timezone             = $('#timeZone'); // 时区
 CRM.cbInfo.countryzone          = $('#commerceCountry'); // 贸易国别
 CRM.cbInfo.customerDutyParagraph= $('#customerDutyParagraph'); // 客户税号
 CRM.cbInfo.saleOrganizationName = $('#saleOrganizationName'); // 所属组织
+
 // 收集数据
 CRM.cbInfo.collectData = function () {
     var page = CRM.cbInfo,
         obj = {
             customerBaseInfo:{
-                areaId               : page.areaId.val(),
-                countryId            : page.countryId.val(),
+                areaId               : page.areaId.data('val'),
                 companyType          : page.companyType.val(),
                 customerId           : page.cid,
                 customerLevel        : page.customerLevel.val(),
@@ -221,65 +219,59 @@ CRM.cbInfo.getCounData = function (data,id) {
 };
 
 // 渲染表单
-CRM.cbInfo.renderPage = function (id) {
+CRM.cbInfo.renderPage = function () {
     var page = CRM.cbInfo;
 
-    // 有数据，先渲染下拉框，再请求渲染页面
-    if (page.areaTree) {
-
-        page.renderTree(page.areaTree, 'areaId', '——请选择地区——');
-        page.renderPageHandler(id);
-    }else {
-
-        // 没有数据，先请求渲染下拉框，再请求渲染页面
-        CRM.ajaxCall({
-            url:CRM.url.AREA_TREE_GET,
-            type:'GET',
-            callback:function (res) {
-                page.areaTree = res[0].nodes; // 将取到的树数据赋值给对象属性，下次有的话就不用再发请求了
-                page.renderTree(page.areaTree, 'areaId', '——请选择地区——');
-                page.renderPageHandler(id);
-            }
-        })
-    }
+    $.ajax({
+        url:page.LOOK_POST,
+        type:'POST',
+        data:{
+            customerId:page.cid
+        }
+    }).done(function (res) {
+        var data = res.data;
+        page.renderForm(data); // 渲染页面表单
+        page.isView(); // 根据表单的值显示或隐藏元素
+        page.togglePage(page.isEdit); // 禁用和隐藏开关
+    });
 
 };
 
 // 渲染国家树，渲染表单
-CRM.cbInfo.renderPageHandler = function (id) {
-    var page = CRM.cbInfo;
-
-    // 重置表单
-    page.resetForm('#myForm');
-
-    CRM.ajaxCall({
-        url:page.LOOK_POST,
-        type:'POST',
-        data:{
-            customerId:id
-        },
-        callback:function (data) {
-            var counTree = page.getCounData(page.areaTree,data.areaId); // 获取国家树的数据
-            page.renderTree(counTree, 'countryId', '——请优先选择地区——'); // 创建国家树
-
-            // 渲染数据格式下拉框
-            CRM.ajaxCall({
-                url:'/customerBaseInfo/getFormatdoc',
-                type:'POST',
-                callback:function (dataF) {
-                    if (dataF) {
-
-                        CRM.tplHandler('dataFormatC',dataF,$('#dataFormat')); // 插入数据格式下拉框
-                        page.renderForm(data); // 渲染页面表单
-                        page.isView(); // 根据表单的值显示或隐藏元素
-                        page.togglePage(page.isEdit); // 禁用和隐藏开关
-                    }
-                }
-            });
-
-        }
-    });
-};
+// CRM.cbInfo.renderPageHandler = function (id) {
+//     var page = CRM.cbInfo;
+//
+//     // 重置表单
+//     page.resetForm('#myForm');
+//
+//     CRM.ajaxCall({
+//         url:page.LOOK_POST,
+//         type:'POST',
+//         data:{
+//             customerId:id
+//         },
+//         callback:function (data) {
+//             var counTree = page.getCounData(page.areaTree,data.areaId); // 获取国家树的数据
+//             page.renderTree(counTree, 'countryId', '——请优先选择地区——'); // 创建国家树
+//
+//             // 渲染数据格式下拉框
+//             CRM.ajaxCall({
+//                 url:'/customerBaseInfo/getFormatdoc',
+//                 type:'POST',
+//                 callback:function (dataF) {
+//                     if (dataF) {
+//
+//                         CRM.tplHandler('dataFormatC',dataF,$('#dataFormat')); // 插入数据格式下拉框
+//                         page.renderForm(data); // 渲染页面表单
+//                         page.isView(); // 根据表单的值显示或隐藏元素
+//                         page.togglePage(page.isEdit); // 禁用和隐藏开关
+//                     }
+//                 }
+//             });
+//
+//         }
+//     });
+// };
 
 // 渲染表单处理程序
 CRM.cbInfo.renderForm = function(data){
@@ -287,7 +279,6 @@ CRM.cbInfo.renderForm = function(data){
         encyData = {};
 
     if (data.areaId) { page.areaId.val(data.areaId);}
-    if (data.countryId) { page.countryId.val(data.countryId);}
     if (data.companyType) { page.companyType.val(data.companyType);}
     if (data.customerType) { page.customerType.val(data.customerType);}
     if (data.customerId) { page.customerId.val(data.customerId);}
@@ -316,8 +307,12 @@ CRM.cbInfo.renderForm = function(data){
     if (data.managementScope) { page.managementScope.val(data.managementScope);}
 
     // 新加字段
-    if (data.formatdoc) { page.formatdoc.val(data.formatdoc);} // 数据格式
-    // if (data.formatdocName) { page.formatdoc.val(data.formatdocName);}
+    if (page.formatdoc.val()==''){
+        if (data.formatdoc) { page.formatdoc.find('option').eq(0).val(data.formatdoc);} // 数据格式
+        if (data.formatdocName) { page.formatdoc.find('option').eq(0).text(data.formatdocName);}
+    }else {
+        if (data.formatdoc) { page.formatdoc.val(data.formatdoc);} // 数据格式
+    }
     if (data.custclass) { page.custclass.data('val',data.custclass);} // 客户基本分类
     if (data.custclassName) { page.custclass.val(data.custclassName);}
     if (data.timezone) { page.timezone.data('val',data.timezone);} // 时区
@@ -421,7 +416,7 @@ CRM.cbInfo.init = function () {
     if (page.status!=='a') {
 
 
-        CRM.insertHtml('#crlBtn',$('#funBtn')); // 渲染功能按钮 非新增
+        CRM.insertHtml('#crlBtn',$('#funBtn')); // 渲染功能按钮 非新增状态
 
         if (page.status==='l') { // 潜在
 
@@ -434,7 +429,7 @@ CRM.cbInfo.init = function () {
             CRM.cbInfo.rInitHandler();
         }
 
-        page.renderPage(page.cid); // 渲染页面
+        page.renderPage(); // 渲染页面
 
     }else {
 
@@ -524,7 +519,6 @@ CRM.cbInfo.pVerify = function (em) {
         rules: {
             fullName: "required",
             areaId: 'required',
-            countryId: 'required',
             "enterpriseNature": {
                 required : true
             },
@@ -548,9 +542,6 @@ CRM.cbInfo.pVerify = function (em) {
                 required:em('必填','top:-29px','right:0')
             },
             areaId: {
-                required:em('请选择一个值','top:-29px','right:0')
-            },
-            countryId: {
                 required:em('请选择一个值','top:-29px','right:0')
             },
             showFactory: {
@@ -632,6 +623,9 @@ CRM.cbInfo.renderCBTTree = function (data) {
     treeObj.expandAll(true); // 默认展开
 };
 
+/**
+ * 以下是实现
+ */
 $().ready(function() {
     var page  = CRM.cbInfo,
         pForm = null,
@@ -671,7 +665,7 @@ $().ready(function() {
     page.cancel = $('#cancel');
     page.cancel.on('click.cancel',function () {
         page.togglePage(false);
-        page.renderPage(page.cid);
+        // page.renderPage(page.cid);
         pForm.form();
     });
 
@@ -721,13 +715,6 @@ $().ready(function() {
         }
     });
 
-    // 根据选择的地区渲染国家下拉框
-    $('#areaId').on('change.area',function () {
-        var val = $(this).val(),
-            counTree = page.getCounData(page.areaTree,val); // 获取国家树的数据
-
-        page.renderTree(counTree, 'countryId', '——请优先选择地区——'); // 创建国家树
-    });
 
     // 重置
     $('#resetB').on('click.reset',function () {
@@ -885,6 +872,12 @@ $().ready(function() {
             });
 
         }
+    });
+
+    $('#dataFormat').on('click',function () {
+        $.ajax({
+
+        })
     });
 
     // 点击选择所属组织

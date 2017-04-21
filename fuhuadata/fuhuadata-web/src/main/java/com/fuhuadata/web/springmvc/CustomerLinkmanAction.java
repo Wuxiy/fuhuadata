@@ -7,6 +7,7 @@ import com.fuhuadata.service.CustomerLinkmanService;
 import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.CustomerLinkmanVO;
 import com.fuhuadata.web.util.CustomerUtils;
+import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -87,11 +88,12 @@ public class CustomerLinkmanAction {
     public ResultPojo addCustomerLinkmanById(@RequestBody CustomerLinkman customerLinkman){
         Result result = new Result();
         try{
-            //
-            customerLinkman.setCreateUserId(0);
-            customerLinkman.setCreateUserName("admin");
-            customerLinkman.setLastmodifyUserId(0);
-            customerLinkman.setLastmodifyUserName("admin");
+            customerLinkman.setCreateUserId(LoginUtils.getLoginId());
+            customerLinkman.setCreateUserName(LoginUtils.getLoginName());
+            customerLinkman.setLastmodifyUserId(LoginUtils.getLoginId());
+            customerLinkman.setLastmodifyUserName(LoginUtils.getLoginName());
+            customerLinkman.setCreateTime(DateUtil.getDateTimeFormat());
+            customerLinkman.setModifyTime(DateUtil.getDateTimeFormat());
             result=customerLinkmanService.addCustomerLinkman(customerLinkman);
         }catch(Exception e){
             log.error("新增联系人错误",e);
@@ -128,6 +130,9 @@ public class CustomerLinkmanAction {
     @ResponseBody
     public ResultPojo updateCustomerLinkmanById(@RequestBody CustomerLinkman customerLinkman){
         Result result = new Result();
+        customerLinkman.setLastmodifyUserId(LoginUtils.getLoginId());
+        customerLinkman.setLastmodifyUserName(LoginUtils.getLoginName());
+        customerLinkman.setModifyTime(DateUtil.getDateTimeFormat());
         try{
             String id = customerLinkman.getLinkmanId();
             result=customerLinkmanService.updateCustomerLinkmanById(id,customerLinkman);

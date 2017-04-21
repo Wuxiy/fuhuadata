@@ -19,9 +19,9 @@ public class CustomerAreaDaoImpl  implements CustomerAreaDao {
     @Autowired
     private SqlMapClient sqlMapClient;
     @Override
-    public List<CustomerArea> getAllCustomerAreaList() {
+    public List<CustomerArea> getAllCustomerAreaList(String id) {
         try {
-            return sqlMapClient.queryForList(GET_ALL_LIST);
+            return sqlMapClient.queryForList(GET_ALL_LIST,id);
         } catch (SQLException e) {
             e.printStackTrace();
         }

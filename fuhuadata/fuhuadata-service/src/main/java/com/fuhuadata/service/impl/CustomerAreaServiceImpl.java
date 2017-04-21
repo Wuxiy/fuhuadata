@@ -6,7 +6,9 @@ import com.fuhuadata.domain.query.QueryOrganization;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.CustomerAreaManager;
 import com.fuhuadata.service.CustomerAreaService;
+import com.fuhuadata.util.StringUtil;
 import com.fuhuadata.vo.CategoryTree;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,9 +24,12 @@ public class CustomerAreaServiceImpl implements CustomerAreaService{
     private CustomerAreaManager customerAreaManager;
 
 
-    public Result<List<CategoryTree>> getAllCustomerAreaList() {
-        List<CustomerArea> area_list =  customerAreaManager.getAllCustomerAreaList();
-        //将组织列表转换为组织树map对象
+    public Result<List<CustomerArea>> getAllCustomerAreaList(String id) {
+        List<CustomerArea> area_list =  customerAreaManager.getAllCustomerAreaList(id);
+        Result<List<CustomerArea>> result = new Result<List<CustomerArea>>();
+        result.addDefaultModel(area_list);
+        return result;
+       /* //将组织列表转换为组织树map对象
         Map<String,CategoryTree> map = listToTreeMap(area_list);
         //给每个树对象添加子节点
         for(CustomerArea o:area_list){
@@ -51,10 +56,10 @@ public class CustomerAreaServiceImpl implements CustomerAreaService{
         }
         for(String s:del_list){
             map.remove(s);
-        }
-        Result<List<CategoryTree>> result = new Result<List<CategoryTree>>();
+        }*/
+       /* Result<List<CategoryTree>> result = new Result<List<CategoryTree>>();
         result.addDefaultModel(new ArrayList<CategoryTree>(map.values()));
-        return result;
+        return result;*/
     }
     private Map<String,CategoryTree> listToTreeMap(List<CustomerArea> list){
         Map<String,CategoryTree> map = new HashMap<String,CategoryTree>();

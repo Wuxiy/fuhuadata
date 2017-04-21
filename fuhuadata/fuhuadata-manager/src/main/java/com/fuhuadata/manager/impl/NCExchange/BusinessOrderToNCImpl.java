@@ -8,7 +8,6 @@ import com.fuhuadata.domain.query.QueryBusinessOrderProduct;
 import com.fuhuadata.manager.NCExchange.BusinessOrderToNC;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.dom4j.*;
 import org.dom4j.DocumentHelper;
 import org.dom4j.io.DocumentSource;
 import org.jdom.input.SAXBuilder;
