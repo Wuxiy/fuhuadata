@@ -456,14 +456,13 @@ CRM.searchTreeId = function (data) {
 
         $.each(node,function (i,item) {
 
-            arr.push(item.cid);
+            if (!item.nodes) {
 
-            if (item.nodes instanceof Array) {
-
-                smarty(item.nodes);
+                arr.push(item.cid);
+                return true;
             }else {
 
-                return true;
+                smarty(item.nodes);
             }
         })
     }
