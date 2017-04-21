@@ -222,7 +222,7 @@
                     }
                 },
                 id = el.attr('id'),
-                treeData = CRM.toArr(data);
+                treeData = data;
 
         $.fn.zTree.init(el, setting, treeData);
     };

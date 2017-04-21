@@ -8,6 +8,7 @@ import com.fuhuadata.service.CustomerSubcompanyInfoService;
 import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.CustomerSubcompanyInfoVO;
 import com.fuhuadata.web.util.CustomerUtils;
+import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -101,6 +102,12 @@ public class CustomerSubcompanyInfoAction {
     @ResponseBody
     public ResultPojo addCustomerSubcompanyInfo(@RequestBody CustomerSubcompanyInfo customerSubcompanyInfo){
         Result<CustomerSubcompanyInfo> result = new Result<CustomerSubcompanyInfo>();
+        customerSubcompanyInfo.setCreateTime(DateUtil.getDateTimeFormat());
+        customerSubcompanyInfo.setCreateUserId(LoginUtils.getLoginId());
+        customerSubcompanyInfo.setCreateUserName(LoginUtils.getLoginName());
+        customerSubcompanyInfo.setLastmodifyUserId(LoginUtils.getLoginId());
+        customerSubcompanyInfo.setLastmodifyUserName(LoginUtils.getLoginName());
+        customerSubcompanyInfo.setModifyTime(DateUtil.getDateTimeFormat());
         try{
             result=customerSubcompanyInfoService.addCustomerSubcompanyInfo(customerSubcompanyInfo);
         }catch(Exception e){
@@ -121,6 +128,9 @@ public class CustomerSubcompanyInfoAction {
     public ResultPojo updateCustomerSubcompanyInfo(@RequestBody CustomerSubcompanyInfoVO customerSubcompanyInfoVO){
         Result<CustomerSubcompanyInfo> result = new Result<CustomerSubcompanyInfo>();
         List<CustomerEnterpriceNature> list = new ArrayList<CustomerEnterpriceNature>();
+        customerSubcompanyInfoVO.getCustomerSubcompanyInfo().setModifyTime(DateUtil.getDateTimeFormat());
+        customerSubcompanyInfoVO.getCustomerSubcompanyInfo().setLastmodifyUserId(LoginUtils.getLoginId());
+        customerSubcompanyInfoVO.getCustomerSubcompanyInfo().setLastmodifyUserName(LoginUtils.getLoginName());
         try{
             CustomerEnterpriceNature[] customerEnterpriceNatures = customerSubcompanyInfoVO.getCustomerEnterpriceNatures();
             if(customerEnterpriceNatures!=null && customerEnterpriceNatures.length>0) {

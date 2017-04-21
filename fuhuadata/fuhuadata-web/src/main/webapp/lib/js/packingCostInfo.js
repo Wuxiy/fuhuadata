@@ -34,17 +34,17 @@ $(document).ready(function(){
                         }
                     })
                 })
-                $('#packName').val(pack.packName);
-                $('#spec').val(pack.spec);
-                $('#size').val(pack.size);
-                $('#quality').val(pack.quality);
-                $('#qualityIndex').val(pack.qualityIndex);
-                $('#qualityTargetValue').val(pack.qualityTargetValue);
-                $('#unitPrice').val(pack.unitPrice);
-                $('#consumption').val(pack.consumption);
-                $('#priceEndDate').val(pack.priceEndDate);
-                $('#status').val(pack.status);
-                $('#bRemarks').val(pack.bRemarks);
+                $('#packName').val(ifEmpty(pack.packName));
+                $('#spec').val(ifEmpty(pack.spec));
+                $('#size').val(ifEmpty(pack.size));
+                $('#quality').val(ifEmpty(pack.quality));
+                $('#qualityIndex').val(ifEmpty(pack.qualityIndex));
+                $('#qualityTargetValue').val(ifEmpty(pack.qualityTargetValue));
+                $('#unitPrice').val(ifEmpty(pack.unitPrice));
+                $('#consumption').val(ifEmpty(pack.consumption));
+                $('#priceEndDate').val(ifEmpty(pack.priceEndDate));
+                $('#status').val(ifEmpty(pack.status));
+                $('#bRemarks').val(ifEmpty(pack.bRemarks));
             }
 
             if(ResultData.nodes){
@@ -52,14 +52,14 @@ $(document).ready(function(){
                 for(var i=0;i<node.length;i++){
                     table.innerHTML += '<tr>'+
                         '<td class="text-center"><input type="checkbox" name="cellcheckbox" value="'+node[i].packingId+'" /></td>'+
-                        '<td class="col-xs-2 text-center text-middle">'+node[i].packingId+'</td>'+
-                        '<td class="col-xs-2 text-center text-middle">'+node[i].packName+'</td>'+
-                        '<td class="col-xs-1 text-center text-middle">'+node[i].spec+'</td>'+
-                        '<td class="col-xs-1 text-center text-middle">'+node[i].size+'</td>'+
-                        '<td class="col-xs-2 text-center text-middle">'+node[i].quality+'</td>'+
-                        '<td class="col-xs-1 text-center text-middle">'+node[i].unitPrice+'</td>'+
-                        '<td class="col-xs-1 text-center text-middle">'+node[i].consumption+'</td>'+
-                        '<td class="col-xs-1 text-center text-middle">'+node[i].status+'</td>'
+                        '<td class="col-xs-2 text-center text-middle">'+ifEmpty(node[i].packingId)+'</td>'+
+                        '<td class="col-xs-2 text-center text-middle">'+ifEmpty(node[i].packName)+'</td>'+
+                        '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].spec)+'</td>'+
+                        '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].size)+'</td>'+
+                        '<td class="col-xs-2 text-center text-middle">'+ifEmpty(node[i].quality)+'</td>'+
+                        '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].unitPrice)+'</td>'+
+                        '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].consumption)+'</td>'+
+                        '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].status)+'</td>'
                     '</tr>';
                 }
             }
@@ -71,7 +71,7 @@ $(document).ready(function(){
                     imgGroup.innerHTML += '<div class="col-xs-3">'+
                         '<button type="button" class="close" name="close" style="position: absolute;top:3px;left:0;" disabled>×</button>'+
                         '<div class="col-xs-12 thumbnail">'+
-                        '<img style="height: 240px;" data-toggle="modal" data-target="#imgModal" data-name="" src="'+reData[j].path+'" alt="请点击添加图片" class="imgpath">'+
+                        '<img style="height: 240px;" data-toggle="modal" data-target="#imgModal" data-name="" src="'+basePath + reData[j].path+'" alt="请点击添加图片" class="imgpath">'+
                         '<div class="input-group col-xs-10 col-xs-offset-1" style="padding-top: 5px">'+
                         '<input class="form-control text-center filename" data-url="'+reData[j].path+'" style="" value="'+reData[j].name+'" disabled/>'+
                         '<div class="input-group-btn"><button data-btn="modification" class="btn btn-xs btn-default modifyimg" type="button" disabled>图片修改</button></div>'+
@@ -313,7 +313,7 @@ $('#delete').on('click',function(){
     if(ids.length > 0){
         var msg = "确定要删除这些关联吗？";
         if(confirm(msg)){
-            var url = basePath + 'deleteRelation?id=' + id;
+            var url = basePath + '/packingArchives/deleteRelation?id=' + id;
             var data = ids;
 
             jQuery.ajax({
@@ -343,7 +343,7 @@ $('#finish_relate').on('click',function(){
     if(ids.length > 0){
         var msg = "确认要为主材添加这些关联吗？";
         if(msg){
-            var url = basePath + 'addRelation?id=' + id;
+            var url = basePath + '/packingArchives/addRelation?id=' + id;
             var data = ids;
             console.log(ids);
             jQuery.ajax({
@@ -362,6 +362,11 @@ $('#finish_relate').on('click',function(){
         alert('还未选择要添加的关联');
     }
 })
+
+function ifEmpty(data) {
+    return data==undefined?'':data;
+}
+
 
 
 

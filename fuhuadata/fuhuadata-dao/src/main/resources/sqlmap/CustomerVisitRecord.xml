@@ -51,6 +51,9 @@
 			<isNotEmpty prepend=" AND " property="customerName">
 				base.full_name like concat('%',#customerName#,'%')
 			</isNotEmpty>
+			<isNotEmpty prepend=" OR " property="customerName">
+				base.short_name like concat('%',#customerName#,'%')
+			</isNotEmpty>
 				<isNotNull prepend=" AND " property="userId">
 			user_id = #userId#
 		</isNotNull>
@@ -241,7 +244,7 @@
 	
 	<select id="GET-PAGE" resultMap="QUERY-CUSTOMERVISITRECORD-MAP" parameterClass="QueryCustomerVisitRecord">
 		<![CDATA[
-			SELECT	base.full_name,a.*
+			SELECT	base.full_name,base.short_name,a.*
 		FROM
 			customer_visit_record a
 		LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id

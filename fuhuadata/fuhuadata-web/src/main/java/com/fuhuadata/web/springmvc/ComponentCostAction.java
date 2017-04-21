@@ -82,7 +82,6 @@ public class ComponentCostAction {
     @ResponseBody
     public ResultPojo doAddComponentCost(@RequestBody ComponentCostVO componentCostVO){
         ComponentCost componentCost = componentCostVO.getComponentCost();
-        System.out.println(componentCostVO.getkProductComponents()+"123"+componentCostVO.getComponentCost());
         KProductComponent[] KProductComponents = componentCostVO.getkProductComponents();
         Result result = new Result();
         List<KProductComponent> list  = new ArrayList<KProductComponent>();

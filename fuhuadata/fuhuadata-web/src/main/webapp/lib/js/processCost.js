@@ -18,47 +18,7 @@ $(document).ready(function () {
         type: "GET",
         url: basePath+"/preparationProcessCost/queryPreparationProcessCostList",
         success: function (result) {
-            var ResultData = eval(result.data);
-            var ResultData1 = new Array();
-            var ResultData2 = new Array();
-
-            for (var i = 0; i < ResultData.length; i++) {
-                if (ResultData[i].type == 0) {
-                    ResultData1.push(ResultData[i]);
-                } else {
-                    ResultData2.push(ResultData[i]);
-                }
-            }
-
-            for (var j = 0; j < ResultData1.length; j++) {
-                Adeexpense1.innerHTML += '<tr>' +
-                    '<td><a class="adEexpense1" data_url="'+basePath+'/preparationProcessCost/getPreparationProcessCostById?id='+ResultData1[j].mcostId+'">' + ResultData1[j].costTerm + '</a></td>' +
-                    '<td>' + ResultData1[j].unitCost + '</td>' +
-                    '<td>' + ResultData1[j].priceEnd + '</td>' +
-                    '<td>' + ResultData1[j].remarks + '</td>' +
-                    '</tr>';
-            }
-            for (var k = 0; k < ResultData2.length; k++) {
-                Adeexpense2.innerHTML += '<tr>' +
-                    '<td><a class="adEexpense2" data_url="'+basePath+'/preparationProcessCost/getPreparationProcessCostById?id='+ResultData2[k].mcostId+'">' + ResultData2[k].processFactory + '</a></td>' +
-                    '<td>' + ResultData2[k].charges + '</td>' +
-                    '<td>' + ResultData2[k].profit + '</td>' +
-                    '<td>' + ResultData2[k].managementFee + '</td>' +
-                    '<td>' + ResultData2[k].tax + '</td>' +
-                    '<td>' + ResultData2[k].totalCost + '</td>' +
-                    '</tr>';
-            }
-        }
-    })
-
-    $('a[href="#adEexpense"]').click(function () {
-        $('a[href="#adEexpense"]').tab('show');
-        jQuery.ajax({
-            type: "GET",
-            url: basePath+"/preparationProcessCost/queryPreparationProcessCostList",
-            success: function (result) {
-                Adeexpense1.innerHTML = '';
-                Adeexpense2.innerHTML = '';
+            if(result.data!=undefined){
                 var ResultData = eval(result.data);
                 var ResultData1 = new Array();
                 var ResultData2 = new Array();
@@ -74,20 +34,65 @@ $(document).ready(function () {
                 for (var j = 0; j < ResultData1.length; j++) {
                     Adeexpense1.innerHTML += '<tr>' +
                         '<td><a class="adEexpense1" data_url="'+basePath+'/preparationProcessCost/getPreparationProcessCostById?id='+ResultData1[j].mcostId+'">' + ResultData1[j].costTerm + '</a></td>' +
-                        '<td>' + ResultData1[j].unitCost + '</td>' +
-                        '<td>' + ResultData1[j].priceEnd + '</td>' +
-                        '<td>' + ResultData1[j].remarks + '</td>' +
+                        '<td>' + ifEmpty(ResultData1[j].unitCost) + '</td>' +
+                        '<td>' + ifEmpty(ResultData1[j].priceEnd) + '</td>' +
+                        '<td>' + ifEmpty(ResultData1[j].remarks) + '</td>' +
                         '</tr>';
                 }
                 for (var k = 0; k < ResultData2.length; k++) {
                     Adeexpense2.innerHTML += '<tr>' +
                         '<td><a class="adEexpense2" data_url="'+basePath+'/preparationProcessCost/getPreparationProcessCostById?id='+ResultData2[k].mcostId+'">' + ResultData2[k].processFactory + '</a></td>' +
-                        '<td>' + ResultData2[k].charges + '</td>' +
-                        '<td>' + ResultData2[k].profit + '</td>' +
-                        '<td>' + ResultData2[k].managementFee + '</td>' +
-                        '<td>' + ResultData2[k].tax + '</td>' +
-                        '<td>' + ResultData2[k].totalCost + '</td>' +
+                        '<td>' + ifEmpty(ResultData2[k].charges) + '</td>' +
+                        '<td>' + ifEmpty(ResultData2[k].profit) + '</td>' +
+                        '<td>' + ifEmpty(ResultData2[k].managementFee) + '</td>' +
+                        '<td>' + ifEmpty(ResultData2[k].tax) + '</td>' +
+                        '<td>' + ifEmpty(ResultData2[k].totalCost) + '</td>' +
                         '</tr>';
+                }
+            }
+
+        }
+    })
+
+    $('a[href="#adEexpense"]').click(function () {
+        $('a[href="#adEexpense"]').tab('show');
+        jQuery.ajax({
+            type: "GET",
+            url: basePath+"/preparationProcessCost/queryPreparationProcessCostList",
+            success: function (result) {
+                Adeexpense1.innerHTML = '';
+                Adeexpense2.innerHTML = '';
+                if(result.data!=undefined){
+                    var ResultData = eval(result.data);
+                    var ResultData1 = new Array();
+                    var ResultData2 = new Array();
+
+                    for (var i = 0; i < ResultData.length; i++) {
+                        if (ResultData[i].type == 0) {
+                            ResultData1.push(ResultData[i]);
+                        } else {
+                            ResultData2.push(ResultData[i]);
+                        }
+                    }
+
+                    for (var j = 0; j < ResultData1.length; j++) {
+                        Adeexpense1.innerHTML += '<tr>' +
+                            '<td><a class="adEexpense1" data_url="'+basePath+'/preparationProcessCost/getPreparationProcessCostById?id='+ResultData1[j].mcostId+'">' + ifEmpty(ResultData1[j].costTerm) + '</a></td>' +
+                            '<td>' + ifEmpty(ResultData1[j].unitCost) + '</td>' +
+                            '<td>' + ifEmpty(ResultData1[j].priceEnd) + '</td>' +
+                            '<td>' + ifEmpty(ResultData1[j].remarks) + '</td>' +
+                            '</tr>';
+                    }
+                    for (var k = 0; k < ResultData2.length; k++) {
+                        Adeexpense2.innerHTML += '<tr>' +
+                            '<td><a class="adEexpense2" data_url="'+basePath+'/preparationProcessCost/getPreparationProcessCostById?id='+ResultData2[k].mcostId+'">' + ResultData2[k].processFactory + '</a></td>' +
+                            '<td>' + ifEmpty(ResultData2[k].charges) + '</td>' +
+                            '<td>' + ifEmpty(ResultData2[k].profit) + '</td>' +
+                            '<td>' + ifEmpty(ResultData2[k].managementFee) + '</td>' +
+                            '<td>' + ifEmpty(ResultData2[k].tax) + '</td>' +
+                            '<td>' + ifEmpty(ResultData2[k].totalCost) + '</td>' +
+                            '</tr>';
+                    }
                 }
             }
         })
@@ -101,15 +106,17 @@ $(document).ready(function () {
             data: 'json',
             success: function (result) {
                 Freight.innerHTML = '';
-                var ResultData = eval(result.data);
-                for (var i = 0; i < ResultData.length; i++) {
-                    Freight.innerHTML += '<tr>' +
-                        '<td><a class="freight1" data_url="'+basePath+'/freightCost/getFreightCostById?id='+ResultData[i].freightId+'">' + ResultData[i].processFactory + '</a></td>' +
-                        '<td>' + ResultData[i].departureCity + '</td>' +
-                        '<td>' + ResultData[i].destinationCity + '</td>' +
-                        '<td>' + ResultData[i].unitCost + '</td>' +
-                        '<td>' + ResultData[i].remarks + '</td>' +
-                        '</tr>';
+                if(result.data!=undefined){
+                    var ResultData = eval(result.data);
+                    for (var i = 0; i < ResultData.length; i++) {
+                        Freight.innerHTML += '<tr>' +
+                            '<td><a class="freight1" data_url="'+basePath+'/freightCost/getFreightCostById?id='+ResultData[i].freightId+'">' + ifEmpty(ResultData[i].processFactory) + '</a></td>' +
+                            '<td>' + ifEmpty(ResultData[i].departureCity) + '</td>' +
+                            '<td>' + ifEmpty(ResultData[i].destinationCity) + '</td>' +
+                            '<td>' + ifEmpty(ResultData[i].unitCost) + '</td>' +
+                            '<td>' + ifEmpty(ResultData[i].remarks) + '</td>' +
+                            '</tr>';
+                    }
                 }
             }
         })
@@ -122,16 +129,18 @@ $(document).ready(function () {
             type: 'GET',
             success: function (result) {
                 Cost.innerHTML = '';
-                var ResultData = eval(result.data);
-                for (var i = 0; i < ResultData.length; i++) {
-                    Cost.innerHTML += '<tr>' +
-                        '<td><a class="componnentId" data_url="'+basePath+'/componentCost/getComponentCostById?id=' + ResultData[i].componentId + '&&productCategoryId='+ResultData[i].productCategoryId+'">' + ResultData[i].componentName + '</a></td>' +
-                        '<td>' + ResultData[i].consumption + '</td>' +
-                        '<td>' + ResultData[i].unitCost + '</td>' +
-                        '<td>' + ResultData[i].priceEnd + '</td>' +
-                        '<td>' + ResultData[i].suitableProduct + '</td>' +
-                        '<td>' + ResultData[i].remarks + '</td>' +
-                        '</tr>';
+                if(result.data!=undefined){
+                    var ResultData = eval(result.data);
+                    for (var i = 0; i < ResultData.length; i++) {
+                        Cost.innerHTML += '<tr>' +
+                            '<td><a class="componnentId" data_url="'+basePath+'/componentCost/getComponentCostById?id=' + ResultData[i].componentId + '&&productCategoryId='+ResultData[i].productCategoryId+'">' + ifEmpty(ResultData[i].componentName) + '</a></td>' +
+                            '<td>' + ifEmpty(ResultData[i].consumption) + '</td>' +
+                            '<td>' + ifEmpty(ResultData[i].unitCost) + '</td>' +
+                            '<td>' + ifEmpty(ResultData[i].priceEnd) + '</td>' +
+                            '<td>' + ifEmpty(ResultData[i].suitableProduct) + '</td>' +
+                            '<td>' + ifEmpty(ResultData[i].remarks) + '</td>' +
+                            '</tr>';
+                    }
                 }
             }
         })
@@ -146,13 +155,15 @@ $(document).ready(function () {
             success: function (result) {
 
                 Portsurcharge.innerHTML = '';
-                var ResultData = eval(result.data);
-                for(var i = 0;i<ResultData.length;i++) {
-                    Portsurcharge.innerHTML += '<tr>' +
-                        '<td name="item" data_id="'+ResultData[i].portId+'">'+ResultData[i].item+'</td>' +
-                        '<td><input class="form-control text-center" value="'+ResultData[i].generalChemicals+'" name="generalChemicals" disabled/></td>' +
-                        '<td><input class="form-control text-center" value="'+ResultData[i].dangerousProduct+'" name="dangerousProduct" disabled/></td>' +
-                    '</tr>';
+                if(result.data!=undefined){
+                    var ResultData = eval(result.data);
+                    for(var i = 0;i<ResultData.length;i++) {
+                        Portsurcharge.innerHTML += '<tr>' +
+                            '<td name="item" data_id="'+ResultData[i].portId+'">'+ResultData[i].item+'</td>' +
+                            '<td><input class="form-control text-center" value="'+ResultData[i].generalChemicals+'" name="generalChemicals" disabled/></td>' +
+                            '<td><input class="form-control text-center" value="'+ResultData[i].dangerousProduct+'" name="dangerousProduct" disabled/></td>' +
+                            '</tr>';
+                    }
                 }
             }
         })
@@ -167,47 +178,50 @@ $(document).ready(function () {
                 Rate1.innerHTML = '';
                 Rate2.innerHTML = '';
                 Rate3.innerHTML = '';
-                var ResultData = eval(result.data);
-                var ResultData1 = new Array();
-                var ResultData2 = new Array();
-                var ResultData3 = new Array();
+                if(result.data!=undefined){
+                    var ResultData = eval(result.data);
+                    var ResultData1 = new Array();
+                    var ResultData2 = new Array();
+                    var ResultData3 = new Array();
 
-                for (var i = 0; i < ResultData.length; i++) {
-                    if (ResultData[i].type == 0) {
-                        ResultData1.push(ResultData[i]);
-                    } else if (ResultData[i].type == 1) {
-                        ResultData2.push(ResultData[i]);
-                    } else {
-                        ResultData3.push(ResultData[i]);
+                    for (var i = 0; i < ResultData.length; i++) {
+                        if (ResultData[i].type == 0) {
+                            ResultData1.push(ResultData[i]);
+                        } else if (ResultData[i].type == 1) {
+                            ResultData2.push(ResultData[i]);
+                        } else {
+                            ResultData3.push(ResultData[i]);
+                        }
+                    }
+
+                    for (var j = 0; j < ResultData1.length; j++) {
+                        Rate1.innerHTML += '<tr>' +
+                            '<td><a class="rate1" data_url="'+basePath+'/Rate/getRateById?id='+ResultData1[j].rateId+'">' + ifEmpty(ResultData1[j].currency) + '</a></td>' +
+                            '<td>' + ifEmpty(ResultData1[j].rate) + '</td>' +
+                            '<td>' + ifEmpty(ResultData1[j].termofValidity) + '</td>' +
+                            '<td>' + ifEmpty(ResultData1[j].remarks) + '</td>' +
+                            '</tr>';
+                    }
+
+                    for (var k = 0; k < ResultData2.length; k++) {
+                        Rate2.innerHTML += '<tr>' +
+                            '<td><a class="rate2" data_url="'+basePath+'/Rate/getRateById?id='+ResultData2[k].rateId+'">' + ifEmpty(ResultData2[k].kind) + '</a></td>' +
+                            '<td>' + ifEmpty(ResultData2[k].grossMargin) + '</td>' +
+                            '<td>' + ifEmpty(ResultData2[k].termofValidity) + '</td>' +
+                            '<td>' + ifEmpty(ResultData2[k].remarks) + '</td>' +
+                            '</tr>';
+                    }
+
+                    for (var l = 0; l < ResultData2.length; l++) {
+                        Rate3.innerHTML += '<tr>' +
+                            '<td><a class="rate3" data_url="'+basePath+'/Rate/getRateById?id='+ResultData3[l].rateId+'">' + ifEmpty(ResultData3[l].other) + '</a></td>' +
+                            '<td>' + ifEmpty(ResultData3[l].rateValue) + '</td>' +
+                            '<td>' + ifEmpty(ResultData3[l].termofValidity) + '</td>' +
+                            '<td>' + ifEmpty(ResultData3[l].remarks) + '</td>' +
+                            '</tr>';
                     }
                 }
 
-                for (var j = 0; j < ResultData1.length; j++) {
-                    Rate1.innerHTML += '<tr>' +
-                        '<td><a class="rate1" data_url="'+basePath+'/Rate/getRateById?id='+ResultData1[j].rateId+'">' + ResultData1[j].currency + '</a></td>' +
-                        '<td>' + ResultData1[j].rate + '</td>' +
-                        '<td>' + ResultData1[j].termofValidity + '</td>' +
-                        '<td>' + ResultData1[j].remarks + '</td>' +
-                        '</tr>';
-                }
-
-                for (var k = 0; k < ResultData2.length; k++) {
-                    Rate2.innerHTML += '<tr>' +
-                        '<td><a class="rate2" data_url="'+basePath+'/Rate/getRateById?id='+ResultData2[k].rateId+'">' + ResultData2[k].kind + '</a></td>' +
-                        '<td>' + ResultData2[k].grossMargin + '</td>' +
-                        '<td>' + ResultData2[k].termofValidity + '</td>' +
-                        '<td>' + ResultData2[k].remarks + '</td>' +
-                        '</tr>';
-                }
-
-                for (var l = 0; l < ResultData2.length; l++) {
-                    Rate3.innerHTML += '<tr>' +
-                        '<td><a class="rate3" data_url="'+basePath+'/Rate/getRateById?id='+ResultData3[l].rateId+'">' + ResultData3[l].other + '</a></td>' +
-                        '<td>' + ResultData3[l].rateValue + '</td>' +
-                        '<td>' + ResultData3[l].termofValidity + '</td>' +
-                        '<td>' + ResultData3[l].remarks + '</td>' +
-                        '</tr>';
-                }
             }
         })
     });
@@ -235,23 +249,23 @@ $(document).on("click",".adEexpense1",function(){
             html +='<div class="form-group">';
             html +='<label class="col-lg-2 control-label">主材规格</label>';
             html +='<div class="col-lg-6">';
-            html +='<input class="form-control" type="text" value="'+ResultData.costTerm+'" id="costTerm" disabled>';
+            html +='<input class="form-control" type="text" value="'+ifEmpty(ResultData.costTerm)+'" id="costTerm" disabled>';
             html +='</div></div>';
             html +='<div class="form-group">';
             html +='<label class="col-lg-2 control-label">单价</label>';
             html +='<div class="col-lg-3">';
             html +='<div class="input-group">';
-            html +='<input class="form-control" type="text" value="'+ResultData.unitCost+'" id="unitCost">';
+            html +='<input class="form-control" type="text" value="'+ifEmpty(ResultData.unitCost)+'" id="unitCost">';
             html +='<div class="input-group-btn">';
             html +='<botton class="btn btn-xs btn-primary">(元/kg)</botton></div></div></div>';
             html +='<label class="col-lg-2 control-label">价格有效期</label>';
             html +='<div class="col-lg-4">';
-            html +='<input class="form-control" type="date" value="'+ResultData.priceEnd+'" id="priceEnd">';
+            html +='<input class="form-control" type="date" value="'+ifEmpty(ResultData.priceEnd)+'" id="priceEnd">';
             html +='</div></div>';
             html +='<div class="form-group">';
             html +='<label class="col-xs-2 control-label">备注</label>';
             html +='<div class="col-xs-9">';
-            html +='<textarea class="form-control"  rows="4" id="remarks">'+ResultData.remarks+'</textarea>';
+            html +='<textarea class="form-control"  rows="4" id="remarks">'+ifEmpty(ResultData.remarks)+'</textarea>';
             html +='</div>';
             html +='</div>';
             html +='</form>';
@@ -292,19 +306,19 @@ $(document).on("click",".adEexpense2",function(){
             html +='<div class="form-group">';
             html += '<label class="col-lg-2 control-label">加工厂</label>';
             html +='<div class="col-lg-6">';
-            html +='<input class="form-control" type="text" value="'+ResultData.processFactory+'" id="processFactory" disabled>';
+            html +='<input class="form-control" type="text" value="'+ifEmpty(ResultData.processFactory)+'" id="processFactory" disabled>';
             html +='</div></div>';
             html +='<div class="form-group">';
             html +='<label class="col-lg-2 control-label">水、电、气费</label>';
             html +='<div class="col-lg-3">';
             html +='<div class="input-group">';
-            html +='<input class="form-control" type="text" value="'+ResultData.charges+'" id="charges">';
+            html +='<input class="form-control" type="text" value="'+ifEmpty(ResultData.charges)+'" id="charges">';
             html +='<div class="input-group-btn">';
             html +='<botton class="btn btn-xs btn-primary">(元/吨)</botton></div></div></div>';
             html +='<label class="col-lg-2 control-label">利润</label>';
             html +='<div class="col-lg-3">';
             html +='<div class="input-group">';
-            html +='<input class="form-control" type="text" value="'+ResultData.profit+'" id="profit">';
+            html +='<input class="form-control" type="text" value="'+ifEmpty(ResultData.profit)+'" id="profit">';
             html +='<div class="input-group-btn">';
             html +='<botton class="btn btn-xs btn-primary">(元/吨)</botton>';
             html +='</div></div></div></div>';
@@ -312,20 +326,20 @@ $(document).on("click",".adEexpense2",function(){
             html +='<label class="col-lg-2 control-label">管理费</label>';
             html +='<div class="col-lg-3">';
             html +='<div class="input-group">';
-            html +='<input class="form-control" type="text" value="'+ResultData.managementFee+'" id="managementFee">';
+            html +='<input class="form-control" type="text" value="'+ifEmpty(ResultData.managementFee)+'" id="managementFee">';
             html +='<div class="input-group-btn">';
             html +='<botton class="btn btn-xs btn-primary">(元/吨)</botton></div></div></div>';
             html +='<label class="col-lg-2 control-label">税金</label>';
             html +='<div class="col-lg-3">';
             html +='<div class="input-group">';
-            html +='<input class="form-control" type="text" value="'+ResultData.tax+'" id="tax">';
+            html +='<input class="form-control" type="text" value="'+ifEmpty(ResultData.tax)+'" id="tax">';
             html +='<div class="input-group-btn">';
             html +='<botton class="btn btn-xs btn-primary">(元/吨)</botton>';
             html +='</div></div></div></div>';
             html +='<div class="form-group">';
             html +='<label class="col-xs-2 control-label">费用合计</label>';
             html +='<div class="col-xs-8">';
-            html +='<textarea class="form-control"  rows="4" id="totalCost">'+ResultData.totalCost+'</textarea>';
+            html +='<textarea class="form-control"  rows="4" id="totalCost">'+ifEmpty(ResultData.totalCost)+'</textarea>';
             html +='</div>';
             html +='</div>';
             html +='</form>';
@@ -365,30 +379,30 @@ $(document).on("click",".freight1",function(){
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">加工厂</label>';
             html += '<div class="col-lg-6">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.processFactory + '" id="processFactory" disabled>';
+            html += '<input class="form-control" type="text" value="' + ifEmpty(ResuleData.processFactory) + '" id="processFactory" disabled>';
             html += '</div></div>';
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">单价</label>';
             html += '<div class="col-lg-3">';
             html += '<div class="input-group">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.unitCost + '" id="unitCost">';
+            html += '<input class="form-control" type="text" value="' + ifEmpty(ResuleData.unitCost) + '" id="unitCost">';
             html += '<div class="input-group-btn">';
             html += '<botton class="btn btn-xs btn-primary">(元/T)</botton></div></div></div>';
             html += '</div>';
             html += '<div class="form-group">';
                 html += '<label class="col-lg-2 control-label">起运城市</label>';
             html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.departureCity + '" id="departureCity">';
+            html += '<input class="form-control" type="text" value="' + ifEmpty(ResuleData.departureCity) + '" id="departureCity">';
             html += '</div>';
             html += '<label class="col-lg-2 control-label">目的城市</label>';
             html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.destinationCity + '" id="destinationCity">';
+            html += '<input class="form-control" type="text" value="' + ifEmpty(ResuleData.destinationCity) + '" id="destinationCity">';
             html += '</div>';
             html += '</div>';
             html += '<div class="form-group">';
             html += '<label class="col-xs-2 control-label">备注</label>';
             html += '<div class="col-xs-8">';
-            html += '<textarea class="form-control"  rows="4" id="remarks">' + ResuleData.remarks + '</textarea>';
+            html += '<textarea class="form-control"  rows="4" id="remarks">' + ifEmpty(ResuleData.remarks) + '</textarea>';
             html += '</div>';
             html += '</div>';
             html += '</form>';
@@ -420,10 +434,10 @@ $(document).on("click",".componnentId",function(){
             var ProductComponents = eval(result.data.kProductComponents);
 
             $('#componentName').attr('data-id',ComponentCost.componentId);
-            $('#componentName').val(ComponentCost.componentName);
-            $('#unitCost').val(ComponentCost.unitCost);
-            $('#priceEnd').val(ComponentCost.priceEnd);
-            $('#remarks').val(ComponentCost.remarks);
+            $('#componentName').val(ifEmpty(ComponentCost.componentName));
+            $('#unitCost').val(ifEmpty(ComponentCost.unitCost));
+            $('#priceEnd').val(ifEmpty(ComponentCost.priceEnd));
+            $('#remarks').val(ifEmpty(ComponentCost.remarks));
 
             for(var i=0;i<ProductComponents.length;i++){
                 var Ps = ProductComponents[i];
@@ -511,22 +525,22 @@ $(document).on("click",".rate1",function(){
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">币种</label>';
             html += '<div class="col-lg-6">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.currency + '" id="currency" disabled>';
+            html += '<input class="form-control" type="text" value="' + ifEmpty(ResuleData.currency) + '" id="currency" disabled>';
             html += '</div></div>';
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">汇率</label>';
             html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.rate + '" id="rate">';
+            html += '<input class="form-control" type="text" value="' + ifEmpty(ResuleData.rate) + '" id="rate">';
             html += '</div>';
             html += '<label class="col-lg-2 control-label">有效期</label>';
             html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="date" value="' + ResuleData. termofValidity+ '" id="termofValidity">';
+            html += '<input class="form-control" type="date" value="' + ifEmpty(ResuleData.termofValidity)+ '" id="termofValidity">';
             html += '</div>';
             html += '</div>';
             html += '<div class="form-group">';
             html += '<label class="col-xs-2 control-label">备注</label>';
             html += '<div class="col-xs-8">';
-            html += '<textarea class="form-control"  rows="4" id="remarks">' + ResuleData.remarks + '</textarea>';
+            html += '<textarea class="form-control"  rows="4" id="remarks">' + ifEmpty(ResuleData.remarks) + '</textarea>';
             html += '</div>';
             html += '</div>';
             html += '</form>';
@@ -566,22 +580,22 @@ $(document).on("click",".rate2",function(){
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">产品种类</label>';
             html += '<div class="col-lg-6">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.kind + '" id="kind" disabled>';
+            html += '<input class="form-control" type="text" value="' + ifEmpty(ResuleData.kind) + '" id="kind" disabled>';
             html += '</div></div>';
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">毛利率</label>';
             html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.grossMargin + '" id="grossMargin">';
+            html += '<input class="form-control" type="text" value="' + ifEmpty(ResuleData.grossMargin) + '" id="grossMargin">';
             html += '</div>';
             html += '<label class="col-lg-2 control-label">有效期</label>';
             html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="text" value="' + ResuleData. termofValidity+ '" id="termofValidity">';
+            html += '<input class="form-control" type="text" value="' + ifEmpty(ResuleData. termofValidity)+ '" id="termofValidity">';
             html += '</div>';
             html += '</div>';
             html += '<div class="form-group">';
             html += '<label class="col-xs-2 control-label">备注</label>';
             html += '<div class="col-xs-8">';
-            html += '<textarea class="form-control"  rows="4" id="remarks">' + ResuleData.remarks + '</textarea>';
+            html += '<textarea class="form-control"  rows="4" id="remarks">' + ifEmpty(ResuleData.remarks) + '</textarea>';
             html += '</div>';
             html += '</div>';
             html += '</form>';
@@ -621,22 +635,22 @@ $(document).on("click",".rate3",function(){
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">币种</label>';
             html += '<div class="col-lg-6">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.other + '" id="other" disabled>';
+            html += '<input class="form-control" type="text" value="' + ifEmpty(ResuleData.other) + '" id="other" disabled>';
             html += '</div></div>';
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">汇率</label>';
             html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="text" value="' + ResuleData.rateValue + '" id="rateValue">';
+            html += '<input class="form-control" type="text" value="' + ifEmpty(ResuleData.rateValue) + '" id="rateValue">';
             html += '</div>';
             html += '<label class="col-lg-2 control-label">有效期</label>';
             html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="text" value="' + ResuleData. termofValidity+ '" id="termofValidity">';
+            html += '<input class="form-control" type="text" value="' + ifEmpty(ResuleData. termofValidity)+ '" id="termofValidity">';
             html += '</div>';
             html += '</div>';
             html += '<div class="form-group">';
             html += '<label class="col-xs-2 control-label">备注</label>';
             html += '<div class="col-xs-8">';
-            html += '<textarea class="form-control"  rows="4" id="remarks">' + ResuleData.remarks + '</textarea>';
+            html += '<textarea class="form-control"  rows="4" id="remarks">' + ifEmpty(ResuleData.remarks) + '</textarea>';
             html += '</div>';
             html += '</div>';
             html += '</form>';
@@ -677,11 +691,10 @@ $(document).on("click",".updateadEexpense1",function(){
         dataType:"json",
         contentType:"application/json",
         data:JSON.stringify(data),
-        success:function(data){
+        success:function(result){
             alert('修改成功');
-            location.reload();
             $('#modal').modal('hide');
-            location.reload();
+            $('a[href="#adEexpense"]').click();
         }
     })
 })
@@ -708,6 +721,7 @@ $(document).on("click",".updateadEexpense2",function(){
         success:function(result){
             alert('修改成功');
             $('#modal').modal('hide');
+            $('a[href="#adEexpense"]').click();
         }
     })
 })
@@ -744,6 +758,7 @@ $(document).on("click",".updateCost",function(){
             success:function(result){
                 alert('修改成功');
                 $('#costmodal').modal('hide');
+                $('a[href="#cost"]').click();
             }
         })
     }
@@ -791,6 +806,7 @@ $(document).on("click",".updateFreight",function(){
         success:function(result){
             alert('修改成功');
             $('#modal').modal('hide');
+            $('a[href="#freight"]').click();
             /*location.reload();*/
         }
     })
@@ -818,6 +834,7 @@ $(document).on("click",".updaterate1",function(){
         success:function(result){
             alert('修改成功');
             $('#modal').modal('hide');
+            $('a[href="#rate"]').click();
         }
     })
 })
@@ -844,6 +861,7 @@ $(document).on("click",".updaterate2",function(){
         success:function(result){
             alert('修改成功');
             $('#modal').modal('hide');
+            $('a[href="#rate"]').click();
         }
     })
 })
@@ -870,6 +888,7 @@ $(document).on("click",".updaterate3",function(){
         success:function(result){
             alert('修改成功');
             $('#modal').modal('hide');
+            $('a[href="#rate"]').click();
         }
     })
 })
@@ -906,4 +925,8 @@ function updateportSurcharge() {
     console.log(arr);
     return JSON.stringify(arr);
 
+}
+
+function ifEmpty(data) {
+    return data==undefined?'':data;
 }

@@ -148,7 +148,17 @@
                             </tr>
                             </thead>
                             <tbody id="packing_relate_table">
-
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

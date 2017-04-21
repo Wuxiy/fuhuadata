@@ -78,12 +78,13 @@ CRM.cbInfo.timezone             = $('#timeZone'); // 时区
 CRM.cbInfo.countryzone          = $('#commerceCountry'); // 贸易国别
 CRM.cbInfo.customerDutyParagraph= $('#customerDutyParagraph'); // 客户税号
 CRM.cbInfo.saleOrganizationName = $('#saleOrganizationName'); // 所属组织
+
 // 收集数据
 CRM.cbInfo.collectData = function () {
     var page = CRM.cbInfo,
         obj = {
             customerBaseInfo:{
-                areaId               : page.areaId.val(),
+                areaId               : page.areaId.data('val'),
                 companyType          : page.companyType.val(),
                 customerId           : page.cid,
                 customerLevel        : page.customerLevel.val(),

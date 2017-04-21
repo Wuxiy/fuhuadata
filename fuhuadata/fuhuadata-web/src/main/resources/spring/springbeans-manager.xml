@@ -35,6 +35,6 @@
 	<bean id="businessRecordManager" class="com.fuhuadata.manager.impl.BusinessRecordManagerImpl"/>
 	<bean id="businessOrderManager" class="com.fuhuadata.manager.impl.BusinessOrderManagerImpl"/>
 	<bean id="contractManager" class="com.fuhuadata.manager.impl.ContractManagerImpl"/>
-	<!--<bean id="busindessOrderToNC" class="com.fuhuadata.manager.impl.NCExchange.BusinessOrderToNCImpl"/>-->
-	<!--<bean id="customerInfoToNC" class="com.fuhuadata.manager.impl.NCExchange.CustomerInfoToNCImpl"/>-->
+	<bean id="busindessOrderToNC" class="com.fuhuadata.manager.impl.NCExchange.BusinessOrderToNCImpl"/>
+	<bean id="customerInfoToNC" class="com.fuhuadata.manager.impl.NCExchange.CustomerInfoToNCImpl"/>
 </beans>

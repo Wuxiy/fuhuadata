@@ -57,6 +57,25 @@ public class DateUtil {
         }
     }
 
+
+    /**
+     * 获取系统当前日期，以yyyy-MM-dd HH:mm:ss返回日期Date
+     * @return
+     */
+    public static Date getDateTimeFormat(){
+        String str = sdf_datetime_format.format(cale.getTime());
+        SimpleDateFormat format = new SimpleDateFormat(DATETIME_FORMAT);
+        if(!str.equals("")&&str!=null){
+            try {
+                return format.parse(str);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+
     /**
      * 获得服务器当前日期，以格式为：yyyy-MM-dd的日期字符串形式返回
      * @return

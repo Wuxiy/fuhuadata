@@ -106,8 +106,8 @@
         <li class="shadow-in">
             <div id="collapseSeven" class="list-group collapse">
                 <a class="list-group-item" href="#" lang="zh">数据字典维护</a>
-                <a class="list-group-item" href="/sys/role" lang="zh">角色管理</a>
-                <a class="list-group-item" href="/sys/menu" lang="zh">菜单管理</a>
+                <a class="list-group-item" href="${rc.contextPath}/sys/role" lang="zh">角色管理</a>
+                <a class="list-group-item" href="${rc.contextPath}/sys/menu" lang="zh">菜单管理</a>
 
             </div>
             <a data-toggle="collapse" href="#collapseSeven" data-parent="#accordion">

@@ -126,6 +126,7 @@
         FROM
             k_component_cost a
         LEFT JOIN k_product_component b ON b.component_id = a.component_id
+        order by component_id DESC
         ]]>
         <isParameterPresent>
             <include refid="QUERY-COMMON"/>

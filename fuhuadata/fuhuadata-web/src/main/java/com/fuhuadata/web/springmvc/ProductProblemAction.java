@@ -10,6 +10,8 @@ import com.fuhuadata.domain.query.ProductProblemQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.ProductProblemService;
+import com.fuhuadata.service.util.LoginUtils;
+import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -71,6 +74,9 @@ public class ProductProblemAction {
     @ResponseBody
     public ResultPojo doAddProductProblem(@RequestBody ProductProblem productProblem){
         try{
+            productProblem.setCreateUserId(LoginUtils.getLoginId());
+            productProblem.setCreateUserName(LoginUtils.getLoginName());
+            productProblem.setCreateTime(DateUtil.getDateTimeFormat());
             Result<ProductProblem> result = productProblemService.addProductProblem(productProblem);
             return result.getResultPojo();
         }catch(Exception e){

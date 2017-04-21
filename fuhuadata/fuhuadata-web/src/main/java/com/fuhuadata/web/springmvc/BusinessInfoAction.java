@@ -6,7 +6,9 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.BCodeService;
 import com.fuhuadata.service.BusinessInfoService;
+import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.BusinessInfoVO;
+import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import java.util.List;
 
 /**
@@ -107,6 +110,12 @@ public class BusinessInfoAction {
     @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "doAdd")
     @ResponseBody
     public ResultPojo doAddBusinessInfo(@RequestBody BusinessInfo businessInfo){
+        businessInfo.setCreateUserId(LoginUtils.getLoginId());
+        businessInfo.setCreateUserName(LoginUtils.getLoginName());
+        businessInfo.setCreateTime(DateUtil.getDateTimeFormat());
+        businessInfo.setLastmodifyUserId(LoginUtils.getLoginId());
+        businessInfo.setLastmodifyUserName(LoginUtils.getLoginName());
+        businessInfo.setModifyTime(DateUtil.getDateTimeFormat());
         Result<BusinessInfo> result = new Result<BusinessInfo>();
         try{
             result = businessInfoService.addBusinessInfo(businessInfo);
@@ -156,6 +165,9 @@ public class BusinessInfoAction {
     @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "update")
     @ResponseBody
     public ResultPojo updateBusinessInfoById(@RequestBody BusinessInfo  businessInfo){
+        businessInfo.setLastmodifyUserId(LoginUtils.getLoginId());
+        businessInfo.setLastmodifyUserName(LoginUtils.getLoginName());
+        businessInfo.setModifyTime(DateUtil.getDateTimeFormat());
         Result<BusinessInfo> result = new Result<BusinessInfo>();
         try{
             result = businessInfoService.updateBusinessInfoByBusinessId(businessInfo);
