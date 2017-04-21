@@ -278,8 +278,8 @@ CRM.cbInfo.renderForm = function(data){
     var page = CRM.cbInfo,
         encyData = {};
 
-    if (data.areaIdName) { page.areaId.val(data.areaId);}
-    if (data.areaId) { page.areaId.data('val',data.areaIdName);}
+    if (data.area) { page.areaId.val(data.area);}
+    if (data.areaId) { page.areaId.data('val',data.areaId);}
     if (data.companyType) { page.companyType.val(data.companyType);}
     if (data.customerType) { page.customerType.val(data.customerType);}
     if (data.customerId) { page.customerId.val(data.customerId);}
@@ -619,6 +619,45 @@ CRM.cbInfo.renderCBTTree = function (data) {
     treeObj.expandAll(true); // 默认展开
 };
 
+
+// 给地区树添加点击事件
+CRM.cbInfo.areTreeClick = function (event, modLeftId, treeNode) {
+    var treeObj = $.fn.zTree.getZTreeObj('cbtTree'),
+        node = treeObj.getSelectedNodes()[0];
+
+    if (!node.isParent) {
+
+        $('#areaId').val(treeNode.name);
+        $('#areaId').data('val',treeNode.pkAreacl);
+        $('#cbtModal').modal('hide');
+
+    }else {
+        alert('请选择子节点');
+    }
+};
+
+// 渲染地区分类树
+CRM.cbInfo.renderAreaTree = function (data) {
+    var page = CRM.cbInfo;
+    setting = {
+        data: {
+            simpleData: {
+                enable: true,
+                idKey: "pkAreacl",
+                pIdKey: "pkFatherarea"
+            }
+        },
+        edit: {
+            enable: false
+        },
+        callback: {
+            onDblClick: page.areTreeClick
+        }
+    };
+
+    $.fn.zTree.init($('#cbtTree'), setting, data);
+};
+
 /**
  * 以下是实现
  */
@@ -740,7 +779,7 @@ $().ready(function() {
                 contentType:"application/json",
                 method:'POST',
                 callback:function () {
-
+                    page.resetForm();
                     page.renderPage();
                     // page.renderPageHandler(page.cid);
                 }
@@ -768,35 +807,6 @@ $().ready(function() {
 
         self.location = basePath + page.ENCY_SKIP;
         return false;
-    });
-
-
-    // 时区下拉搜索框
-    $('#timeZoneS').on('input.tz',function () {
-
-        if ($(this).val()!='') {
-            var obj = {
-                name: $(this).val()
-            };
-        }else {
-            var obj = {
-                name:'UTC'
-            };
-        }
-
-        $('#tz').html('');
-        CRM.ajaxCall({
-            url:'/customerBaseInfo/getTimezone',
-            type:'POST',
-            contentType:'application/json',
-            data:JSON.stringify(obj),
-            callback:function (data) {
-                if (data) {
-
-                    CRM.tplHandler('tzC',data,$('#tz'));
-                }
-            }
-        });
     });
 
     // 贸易国别，获取焦点时渲染下拉框
@@ -855,6 +865,48 @@ $().ready(function() {
         return false;
     });
 
+    // 时区下拉搜索框,获取焦点查询所有数据
+    $('#timeZoneS').on('focus.tz',function () {
+
+        $('#tz').html('');
+        CRM.ajaxCall({
+            url:'/customerBaseInfo/getTimezone',
+            type:'POST',
+            contentType:'application/json',
+            data:JSON.stringify({
+                name:''
+            }),
+            callback:function (data) {
+                if (data) {
+
+                    CRM.tplHandler('tzC',data,$('#tz'));
+                }
+            }
+        });
+    });
+
+    // 时区下拉搜索框，根据值动态渲染数据
+    $('#timeZoneS').on('input.tz',function () {
+
+        var obj = {
+            name: $(this).val()
+        };
+
+        $('#tz').html('');
+        CRM.ajaxCall({
+            url:'/customerBaseInfo/getTimezone',
+            type:'POST',
+            contentType:'application/json',
+            data:JSON.stringify(obj),
+            callback:function (data) {
+                if (data) {
+
+                    CRM.tplHandler('tzC',data,$('#tz'));
+                }
+            }
+        });
+    });
+
     // 点击时区下拉菜单，将值添加到文本框
     $('#tz').on('click.cc','a',function (e) {
         var elVal = $(e.target).data('val'),
@@ -866,12 +918,27 @@ $().ready(function() {
         return false;
     });
 
+    // 时区下拉菜单，失去焦点时隐藏
+    $('#timeZoneS').on('blur.cc',function () {
+
+        $(this).val('');
+    });
+
     // 点击客户基本分类查找按钮，弹出树形菜单
     $('#cbtSearch').on('click.tree',function () {
         CRM.ajaxCall({
             url:'/customerBaseInfo/getCustclass',
             type:'GET',
             callback:page.renderCBTTree
+        })
+    });
+
+    // 点击地区分类查找按钮，弹出树形菜单
+    $('#aISearch').on('click.tree',function () {
+        CRM.ajaxCall({
+            url:'/customerBaseInfo/initAreaCategoryTree',
+            type:'GET',
+            callback:page.renderAreaTree
         })
     });
 
@@ -886,18 +953,12 @@ $().ready(function() {
                 contentType:"application/json",
                 method:'POST',
                 callback:function () {
-
-                    page.renderPageHandler(page.cid);
+                    page.resetForm();
+                    page.renderPage();
                 }
             });
 
         }
-    });
-
-    $('#dataFormat').on('click',function () {
-        $.ajax({
-
-        })
     });
 
     // 点击选择所属组织

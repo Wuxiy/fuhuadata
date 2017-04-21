@@ -140,62 +140,61 @@
     </div>
 </div>
 <input id="salesManId" type="hidden" value="$!{salesManId}">
-<script type="text/javascript" src="$!{request.contextPath}/lib/js/pagination/pagination.js"></script>
-<link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/js/pagination/pagination.css" />
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
-<script type="text/javascript">
-    var pageSize = 3;
-    var click_node ={oneLevelId:0,twoLevelId:0};//接收目录树点击节点的id及其父id
-    click_node.serach = function(){
-        serach();
-    }
 
-    $(document).ready(function(){
-        //生成地区目录树
-        $('#tree').creatTree('/customerBaseInfo/initAreaCategoryTree');
-        //目录树节点绑定点击事件
-        $('#tree').bindClickForCusArea(click_node);
-        //搜索按钮绑定事件
-        $("#submit").click(function(){
-            serach();
-        });
-        //默认查询数据
-        serach();
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
+<script type="text/javascript">
+//    var pageSize = 3;
+//    var click_node ={oneLevelId:0,twoLevelId:0};//接收目录树点击节点的id及其父id
+//    click_node.serach = function(){
+//        serach();
+//    }
+
+//    $(document).ready(function(){
+//        //生成地区目录树
+//        $('#tree').creatTree('/customerBaseInfo/initAreaCategoryTree');
+//        //目录树节点绑定点击事件
+//        $('#tree').bindClickForCusArea(click_node);
+//        //搜索按钮绑定事件
+//        $("#submit").click(function(){
+//            serach();
+//        });
+//        //默认查询数据
+//        serach();
 
         // 销售额a标签点击事件
-        $('#costProfitList').on('click', 'a[href="#myModal"]', function (e) {
-            var thisEl = $(e.target);
-            $.ajax({
-                url : basePath + '/businessOrder/getCostAndProfitStatisticsByPage',
-                dataType : 'json',
-                type : 'POST',
-                contentType : "application/json",
-                data :JSON.stringify({
-                    dimension  : 4,
-                    customerId : thisEl.data('customerid')
-                })
-            }).done(function (res) {
-                if (res) {
-                    var data = res.data,
-                            _html ='';
-                    $('#myModal').find('tbody').html('');
-                    $.each(data, function (i,item) {
-                        _html += '<tr>';
-                        _html += '<td>' + item.productName + '</td>';
-                        _html += '<td><a href="">' + item.categoryName + '</a></td>';
-                        _html += '<td lang="zh">' + item.salesVolume + '</td>';
-                        _html += '<td lang="zh">' + item.grossProfit + '</td>';
-                        _html += '<td lang="zh">' + item.salesAmount + '</td>';
-                        _html += '<td>' + parseInt(i+1) + '</td>';
-                        _html += '</tr>';
-                    });
-                    $('#myModal').find('tbody').html(_html);
-                }else{
-                    $('#myModal').find('tbody').html('<td>暂无数据</td>');
-                }
-            })
-        });
-    })
+//        $('#costProfitList').on('click', 'a[href="#myModal"]', function (e) {
+//            var thisEl = $(e.target);
+//            $.ajax({
+//                url : basePath + '/businessOrder/getCostAndProfitStatisticsByPage',
+//                dataType : 'json',
+//                type : 'POST',
+//                contentType : "application/json",
+//                data :JSON.stringify({
+//                    dimension  : 4,
+//                    customerId : thisEl.data('customerid')
+//                })
+//            }).done(function (res) {
+//                if (res) {
+//                    var data = res.data,
+//                            _html ='';
+//                    $('#myModal').find('tbody').html('');
+//                    $.each(data, function (i,item) {
+//                        _html += '<tr>';
+//                        _html += '<td>' + item.productName + '</td>';
+//                        _html += '<td><a href="">' + item.categoryName + '</a></td>';
+//                        _html += '<td lang="zh">' + item.salesVolume + '</td>';
+//                        _html += '<td lang="zh">' + item.grossProfit + '</td>';
+//                        _html += '<td lang="zh">' + item.salesAmount + '</td>';
+//                        _html += '<td>' + parseInt(i+1) + '</td>';
+//                        _html += '</tr>';
+//                    });
+//                    $('#myModal').find('tbody').html(_html);
+//                }else{
+//                    $('#myModal').find('tbody').html('<td>暂无数据</td>');
+//                }
+//            })
+//        });
+//    })
 
     //查询按钮提交数据
 //    function serach(){
@@ -346,6 +345,40 @@
             areaId = '';
         });
 
+        // 销售额a标签点击事件
+        $('#costProfitList').on('click', 'a[href="#myModal"]', function (e) {
+            var thisEl = $(e.target);
+            $.ajax({
+                url : basePath + '/businessOrder/getCostAndProfitStatisticsByPage',
+                dataType : 'json',
+                type : 'POST',
+                contentType : "application/json",
+                data :JSON.stringify({
+                    dimension  : 4,
+                    customerId : thisEl.data('customerid')
+                })
+            }).done(function (res) {
+                if (res) {
+                    var data = res.data,
+                            _html ='';
+                    $('#myModal').find('tbody').html('');
+                    $.each(data, function (i,item) {
+                        _html += '<tr>';
+                        _html += '<td>' + item.productName + '</td>';
+                        _html += '<td><a href="">' + item.categoryName + '</a></td>';
+                        _html += '<td lang="zh">' + item.salesVolume + '</td>';
+                        _html += '<td lang="zh">' + item.grossProfit + '</td>';
+                        _html += '<td lang="zh">' + item.salesAmount + '</td>';
+                        _html += '<td>' + parseInt(i+1) + '</td>';
+                        _html += '</tr>';
+                    });
+                    $('#myModal').find('tbody').html(_html);
+                }else{
+                    $('#myModal').find('tbody').html('<td>暂无数据</td>');
+                }
+            })
+        });
+
         // 弹出失败原因模态
 //        var thisOrder = '';
 //        $(document).on('click','a[href="#rModal"]',function (e) {
@@ -437,7 +470,7 @@
 
                     smarty(nodes);
 
-                    areaId = arr.join(',');
+                    areaId = arr.join('\',\'');
                 } else {
 
                     areaId = treeNode.pkAreacl;

@@ -58,6 +58,7 @@
 					<result property="linkManEmail" column="link_man_email" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="otherEnterpriseNature" column="other_enterprise_nature" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="customerDutyParagraph" column="customer_duty_paragraph" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="countryzone" column="countryzone" jdbcType="VARCHAR" javaType="java.lang.String"/>
 
 	</resultMap>
 	
@@ -233,7 +234,7 @@
 	<insert id="ADD" parameterClass="CustomerBaseInfo">
 		insert into customer_base_info (nc_id, full_name,
 		short_name, company_type, customer_area_id,
-		customer_area, country_id, country,
+		customer_area,
 		full_enterprise_nature, other_enterprise_nature,
 		registered_funds, registered_address, management_scope,
 		zhongxinbao_number, zhongxinbao_level, enterprise_phone,
@@ -279,7 +280,7 @@
 						<isNotEmpty prepend=", " property="shortName">short_name=#shortName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="areaId">customer_area_id=#areaId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="area">customer_area=#area#</isNotEmpty>
-						<isNotEmpty prepend=", " property="country">country=#country#</isNotEmpty>
+						<!--<isNotEmpty prepend=", " property="country">country=#country#</isNotEmpty>-->
 						<isNotEmpty prepend=", " property="companyType">company_type=#companyType#</isNotEmpty>
 						<isNotEmpty prepend=", " property="otherEnterpriseNature">other_enterprise_nature=#otherEnterprieNature#</isNotEmpty>
 						<isNotEmpty prepend=", " property="registeredFunds">registered_funds=#registeredFunds#</isNotEmpty>
@@ -407,7 +408,7 @@
 				base.company_type companyType,
 				base.customer_area_id customerAreaId,
 				base.customer_area customerArea,
-				base.country country,
+				base.countryzone countryzone,
 				base.customer_level customerLevel,
 				GROUP_CONCAT(nature.nature) enterpriseNature,
 				ency.ency_id encyId
@@ -438,6 +439,7 @@
 		<result property="customerDutyParagraph" column="customer_duty_paragraph" jdbcType="VARCHAR" javaType="java.lang.String"/>
 		<result property="enterpriseNature" column="enterprise_nature" jdbcType="VARCHAR" javaType="java.lang.String"/>
 		<result property="otherEnterpriseNature" column="other_enterprise_nature" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="countryzone" column="countryzone" jdbcType="VARCHAR" javaType="java.lang.String"/>
 	</resultMap>
 
 	<select id="GET-BY-CUSTOMERID" resultMap="ORDER-CUSTOMER-MAP" parameterClass="java.lang.String">
@@ -450,8 +452,7 @@
 					base.customer_type,
 					base.customer_area_id,
 					base.customer_area,
-					base.country_id,
-					base.country,
+					base.countryzone,
 					base.registered_address,
 					base.registered_funds,
 					base.management_scope,
@@ -481,7 +482,7 @@
 				base.enterprise_email enterpriseEmail,
 				base.enterprise_phone enterprisePhone,
 				base.customer_area customerArea,
-				base.country country,
+				base.countryzone country,
 				base.customer_level customerLevel,
 				base.full_enterprise_nature fullEnterpriseNature,
 				a.linkman_id linkmanId,
@@ -507,7 +508,7 @@
 		base.customer_id   customerId,
 		base.full_name fullName,
 		base.short_name shortName,
-		base.country ,
+		base.countryzone,
 		base.customer_level customerLevel,
 		base.zhongxinbao_level zhongxinbaoLevel,
 		base.start_cooperation_time startCooperationTime,
@@ -584,6 +585,7 @@
 			base.has_chi_purchase hasChiPurchase,
 			base.customer_status customerStatus,
 			base.loss_reason lossReason,
+			base.sale_organization_name saleOrganizationName,
 
 			base.formatdoc,
 			base.timezone,
