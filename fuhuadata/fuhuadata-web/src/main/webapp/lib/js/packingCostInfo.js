@@ -354,7 +354,7 @@ $('#finish_relate').on('click',function(){
                 data:JSON.stringify(data),
                 success:function(){
                     alert("添加关联成功！");
-                    location.reload();
+
                 }
             })
         }

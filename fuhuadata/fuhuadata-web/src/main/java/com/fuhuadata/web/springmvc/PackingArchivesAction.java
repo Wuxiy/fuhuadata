@@ -147,12 +147,22 @@ public class PackingArchivesAction {
         Result result = new Result();
         try {
             PackingArchives packingArchives = new PackingArchives();
-            String[] ids1 = packingArchivesService.getPackingArchivesById(id).getModel().getPack().getAssociatedPackingId().split(",");
-            String[] idsArray = StringUtil.union(ids1, ids);//取并集
-            String str = StringUtils.join(idsArray, ",");
-            packingArchives.setAssociatedPackingId(str);
-            result = packingArchivesService.updatePackingArchivesById(id, packingArchives);
-            return result.getResultPojo();
+            String idsstr = packingArchivesService.getPackingArchivesById(id).getModel().getPack().getAssociatedPackingId();
+            String[] ids1 = null;
+            if(idsstr!=null){
+                ids1 = idsstr.split(",");
+                String[] idsArray = StringUtil.union(ids1, ids);//取并集
+                String str = StringUtils.join(idsArray, ",");
+                packingArchives.setAssociatedPackingId(str);
+                result = packingArchivesService.updatePackingArchivesById(id, packingArchives);
+                return result.getResultPojo();
+            }else{
+                String str = StringUtils.join(ids,",");
+                packingArchives.setAssociatedPackingId(str);
+                result= packingArchivesService.updatePackingArchivesById(id,packingArchives);
+                return result.getResultPojo();
+            }
+
         } catch (Exception e) {
             log.error("更新主材关联失败", e);
         }
