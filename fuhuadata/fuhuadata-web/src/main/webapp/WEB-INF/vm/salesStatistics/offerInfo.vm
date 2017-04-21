@@ -243,7 +243,7 @@
                                         <input type="checkbox" name="check" class="suitableType cell_edit" id="other" value="5" data-text="其他" disabled> 其他
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input class="form-control" type="text" id="otherRemarks" value="输入企业性质" disabled/>
+                                        <input class="form-control" type="text" id="otherEnterpriseNature" value="输入企业性质" disabled/>
                                     </label>
 
                                 </div>
@@ -321,15 +321,16 @@
 </script>
 
  <!--编号-->
-<input id="customerId" type="hidden" value="$!{customerId}">
+<input id="customerId" type="hidden" value="">
 <script type="text/javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript">
     var orderId = $('#orderId').val();
-    var businessProductId = $('#businessProductId').val();
+    var businessProductId = '';
     var businessproduct = document.getElementById('businessproduct');
 
+    console.log(customerId);
     var bInfo = new CRM.module.Panel('#offerInfo');
     bInfo.startEdit();
     bInfo.startSave();
@@ -343,7 +344,7 @@
             success:function(result){
                 var businessOrder = result.data.businessOrder;
                 var customerBaseInfo = result.data.customerBaseInfo;
-                var businessOrderProductLists = result.data.businessOrderProductLists;
+
                 var enterpriseNature = customerBaseInfo.enterpriseNature.split(',');
                 console.log(enterpriseNature);
 
@@ -351,15 +352,16 @@
                     $("input[name='check']").each(function(){
                         if($(this).val() == value){
                             $(this).prop('checked',true);
-                            /*if(value == 4){
-                                $('#otherRemarks').val(customerBaseInfo.otherRemarks);
-                            }*/
+                            if(value == 4){
+                                $('#otherEnterpriseNature').val(customerBaseInfo.otherEnterpriseNature);
+                            }
                         }
                     })
                 })
 
                 $('#businessId').val(businessOrder.businessId);
                 $('#fullName').val(customerBaseInfo.fullName);
+                $('#customerId').val(customerBaseInfo.customerId);
                 $('#customerDutyParagraph').val(businessOrder.customerDutyParagraph);
                 $('#enterprisePhone').val(customerBaseInfo.enterprisePhone);
                 $('#zhongxinbaoNumber').val(customerBaseInfo.zhongxinbaoNumber);
@@ -392,24 +394,28 @@
                 $('#nexchangerate').val(businessOrder.internalSupplyName);
 
                 businessproduct.innerHTML = '';
-                for(var i=0;i<businessOrderProductLists.length;i++){
-                    businessproduct.innerHTML += '<tr>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].productCode)+'</td>'+
-                            '<td><a href="'+basePath+'/businessProduct/intoProductBasicInfoRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'">'+ifEmpty(businessOrderProductLists[i].productName)+'</a></td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].categoryName)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].brand)+'</td>'+
-                            '<td><a href="'+basePath+'/businessProduct/intoProductRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&productRequireId='+businessOrderProductLists[i].productRequireId+'">'+ifEmpty(businessOrderProductLists[i].specification)+'</a></td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].mainProductAmount)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].cupboardPerNumber)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].cupboardType)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].cupboardNumber)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].deliveryTime)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].documentaryRequire)+'</td>'+
-                            '<td><a href="'+basePath+'/businessProduct/intoDocumentary?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'">查看</a></td>'+
-                            '<td><a href="'+basePath+'/businessProduct/intoPackageRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'">查看</a></td>'+
-                            '<td><input type="checkbox" class="form-control" name="cellcheckbox" value="'+businessOrderProductLists[i].orderId+'" /></td>'+
-                            '</tr>';
+                if(result.data.businessOrderProductLists!=undefined){
+                    var businessOrderProductLists = result.data.businessOrderProductLists;
+                    for(var i=0;i<businessOrderProductLists.length;i++){
+                        businessproduct.innerHTML += '<tr>'+
+                                '<td>'+ifEmpty(businessOrderProductLists[i].productCode)+'</td>'+
+                                '<td><a href="'+basePath+'/businessProduct/intoProductBasicInfoRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'">'+ifEmpty(businessOrderProductLists[i].productName)+'</a></td>'+
+                                '<td>'+ifEmpty(businessOrderProductLists[i].categoryName)+'</td>'+
+                                '<td>'+ifEmpty(businessOrderProductLists[i].brand)+'</td>'+
+                                '<td><a href="'+basePath+'/businessProduct/intoProductRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&productRequireId='+ifEmpty(businessOrderProductLists[i].productRequireId)+'">'+ifEmpty(businessOrderProductLists[i].specification)+'</a></td>'+
+                                '<td>'+ifEmpty(businessOrderProductLists[i].mainProductAmount)+'</td>'+
+                                '<td>'+ifEmpty(businessOrderProductLists[i].cupboardPerNumber)+'</td>'+
+                                '<td>'+ifEmpty(businessOrderProductLists[i].cupboardType)+'</td>'+
+                                '<td>'+ifEmpty(businessOrderProductLists[i].cupboardNumber)+'</td>'+
+                                '<td>'+ifEmpty(businessOrderProductLists[i].deliveryTime)+'</td>'+
+                                '<td>'+ifEmpty(businessOrderProductLists[i].documentaryRequire)+'</td>'+
+                                '<td><a href="'+basePath+'/businessProduct/intoDocumentary?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'">查看</a></td>'+
+                                '<td><a href="'+basePath+'/businessProduct/intoPackageRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'">查看</a></td>'+
+                                '<td><input type="checkbox" class="form-control" name="cellcheckbox" value="'+businessOrderProductLists[i].orderId+'" /></td>'+
+                                '</tr>';
+                    }
                 }
+
             }
         })
     })
@@ -470,7 +476,8 @@
 
     //新增产品信息
     $('#Add').click(function(){
-        window.location.href = basePath + '/businessProduct/intoProductBasicInfoRequire?orderId=' + orderId;
+        var customerId = $('#customerId').val();
+        window.location.href = basePath + '/businessProduct/intoProductBasicInfoRequire?orderId=' + orderId + '&&customerId=' + customerId + '&&businessProductId=' + businessProductId;
     })
 
     // 部门

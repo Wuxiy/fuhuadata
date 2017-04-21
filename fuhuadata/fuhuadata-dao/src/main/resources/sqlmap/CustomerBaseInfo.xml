@@ -490,7 +490,7 @@
 				a.link_phone2 linkPhone2,
 				a.lemail lemail,
 				GROUP_CONCAT(nature.nature) enterpriseNature,
-				base.otherEnterpriseNature
+				base.other_enterprise_nature  otherEnterpriseNature
 			FROM
 				customer_base_info base
 			LEFT JOIN customer_linkman a ON a.customer_id = base.customer_id

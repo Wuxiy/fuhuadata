@@ -258,7 +258,7 @@
             LEFT JOIN customer_linkman b ON b.customer_id = a.customer_id
             LEFT JOIN customer_enterprise_nature nature ON nature.customer_id = a.customer_id
             WHERE
-                business_id = 'sj201703230001'
+                business_id = #businessId#
             AND b.is_default = 1
     ]]>
     </select>

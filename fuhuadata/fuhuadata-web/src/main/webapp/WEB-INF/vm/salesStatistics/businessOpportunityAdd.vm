@@ -23,7 +23,7 @@
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">商机名称<sup class="not-null">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input class="form-control notnull" type="text" value="" id="businessId"/>
+                                    <input class="form-control notnull" type="text" value="" id="businessName"/>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">商机来源<sup class="not-null">*</sup></label>
                                 <div class="col-xs-2">
@@ -117,9 +117,8 @@
                                         <input type="checkbox" name="check" class="suitableType cell_edit" id="other" value="5" data-text="其他" disabled> 其他
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input class="form-control" type="text" id="otherRemarks" value="输入企业性质" disabled/>
+                                        <input class="form-control" type="text" id="otherEnterpriseNature" value="输入企业性质" disabled/>
                                     </label>
-
                                 </div>
                             </div>
                             <div class="form-group">
@@ -155,7 +154,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group ">
+                            #*<div class="form-group ">
                                 <label class="col-xs-1 control-label">企业性质<sup class="not-null">*</sup></label>
                                 <div class="col-xs-5">
                                     <label class="checkbox-inline">
@@ -178,7 +177,7 @@
                                     </label>
 
                                 </div>
-                            </div>
+                            </div>*#
                             <div class="form-group">
                                 <label class="col-xs-1 control-label" lang="zh">商机描述</label>
                                 <div class="col-xs-8">
@@ -275,43 +274,45 @@
         console.log(e.target);
         var id = $(e.target).attr('data-id');
         var tarEltext = $(e.target).text();
-        $('#customerNameAdd').val(tarEltext);
-        $('#customerNameAdd').attr('data-id',id);
+        $('#customerName').val(tarEltext);
+        $('#customerName').attr('data-id',id);
+
+        $('#Modal').modal('hide');
+        jQuery.ajax({
+            url: basePath + '/customerBaseInfo/getCustomerBaseInfoLinkman?customerId=' + id,
+            type: 'POST',
+            contentType: "application/json",
+            success: function (result) {
+                var ResultData = result.data;
+                var enterpriseNature = ResultData.enterpriseNature.split(',');
+                $('#customerName').val(ResultData.fullName);
+                $('#country').val(ResultData.country);
+                $('#linkmanName').val(ResultData.linkmanName);
+                $('#linkPhone1').val(ResultData.linkPhone1);
+                $('#lemail').val(ResultData.lemail);
+                $('#zhongxinbaoLevel').val(ResultData.zhongxinbaoLevel);
+                $.each(enterpriseNature, function (index, value) {
+                    $("input[name='check']").each(function () {
+                        if ($(this).val() == value) {
+                            $(this).prop('checked', true);
+                            if (value == 4) {
+                                $('#otherEnterpriseNature').val(ResultData.otherEnterpriseNature);
+                            }
+                        }
+                    })
+                })
+            }
+        })
     });
 
     $(document).on('click','#add',function () {
-        var id = $('#customerNameAdd').attr('data-id');
+        /*var id = $('#customerNameAdd').attr('data-id');
         if(id!=''){
-            jQuery.ajax({
-                url:basePath + '/customerBaseInfo/getCustomerBaseInfoLinkman?customerId=' + id,
-                type:'POST',
-                contentType:"application/json",
-                success:function (result) {
-                    var ResultData = result.data;
-                    var enterpriseNature = ResultData.enterpriseNature.split(',');
-                    $('#customerName').val(ResultData.fullName);
-                    $('#country').val(ResultData.country);
-                    $('#linkmanName').val(ResultData.linkmanName);
-                    $('#linkPhone1').val(ResultData.linkPhone1);
-                    $('#lemail').val(ResultData.lemail);
-                    $('#zhongxinbaoLevel').val(ResultData.zhongxinbaoLevel);
-                    $.each(enterpriseNature,function(index,value){
-                        $("input[name='check']").each(function(){
-                            if($(this).val() == value){
-                                $(this).prop('checked',true);
-                                /*if(value == 4){
-                                    $('#otherRemarks').val(customerBaseInfo.otherRemarks);
-                                }*/
-                            }
-                        })
-                    })
 
-                    $('#Modal').modal('hide');
-                }
             })
         }else {
             alert('请先选择客户名称再新增！');
-        }
+        }*/
     })
     
     $('#finishAdd').click(function () {
@@ -328,24 +329,19 @@
         });
         if(submit_permit){
             var data = {
+
                 "businessName":$('#businessName').val(),
                 "businessId":$('#businessId').val(),
                 "businessFrom":$('#businessFrom').val(),
                 "businessState":$('#businessState').val(),
+
+                "customerId":$('#customerName').attr('data-id'),
                 "customerName":$('#customerName').val(),
-                "enterpriseNature":$('#enterpriseNature').val(),
-                "customerLevel":$('#customerLevel').val(),
-                "zhongxinbaoLevel":$('#zhongxinbaoLevel').val(),
-                "country":$('#country').val(),
-                "linkmanName":$('#name').val(),
-                "linkPhone1":$('#linkPhone1').val(),
-                "lemail":$('#lemail').val(),
+
                 "expectIncome":$('#expectIncome').val(),
                 "deadline":$('#deadline').val(),
                 "businessDescribe":$('#businessDescribe').val(),
                 "businessRemarks":$('#businessRemarks').val(),
-                "createUserName":$('#createUserName').val(),
-                "createTime":$('#createTime').val(),
                 "intentionalProducts":getintentionalProducts(),
                 "createUserId":1,
                 "createUserName":"杨洋",
@@ -353,7 +349,8 @@
                 "lastmodifyUserName":"杨洋",
                 "createTime":"2017-03-20 17:42:29",
                 "modifyTime":"2017-03-20 17:42:29"
-            }
+            };
+            console.log(data);
             jQuery.ajax({
                 url:url,
                 type:'POST',
@@ -384,5 +381,14 @@
             }
         ]
         return JSON.stringify(data);
+    }
+
+    function getenterpriseNature() {
+        var arr = [];
+        $('input[name="check"]:checked').each(function(){
+            var val = $(this).val();
+            arr.push(val);
+        })
+        return arr;
     }
 </script>
