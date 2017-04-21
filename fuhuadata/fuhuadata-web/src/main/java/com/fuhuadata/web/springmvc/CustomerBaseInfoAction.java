@@ -18,6 +18,7 @@ import com.fuhuadata.vo.DataArchive.Countryzone;
 import com.fuhuadata.vo.DataArchive.Formatdoc;
 import com.fuhuadata.vo.DataArchive.Timezone;
 import com.fuhuadata.web.util.CustomerUtils;
+import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -188,9 +189,12 @@ public class CustomerBaseInfoAction {
     @SystemLogAnnotation(module = "customerInfo-customerList",methods = "updateCustomerBaseInfo")
     @ResponseBody
     public ResultPojo updateCustomerBaseInfo(@RequestBody CustomerBaseInfoDO customerBaseInfoDO){
+
         Result result = new Result();
         CustomerBaseInfo customerBaseInfo = customerBaseInfoDO.getCustomerBaseInfo();
-
+        customerBaseInfo.setLastmodifyUserId(LoginUtils.getLoginId());
+        customerBaseInfo.setLastmodifyUserName(LoginUtils.getLoginName());
+        customerBaseInfo.setModifyTime(DateUtil.getDateTime());
         CustomerMakeProduct[] customerMakeProducts = customerBaseInfoDO.getCustomerMakeProducts();
         CustomerEnterpriceNature[] customerEnterpriceNatures = customerBaseInfoDO.getCustomerEnterpriceNatures();
         try{
@@ -221,6 +225,12 @@ public class CustomerBaseInfoAction {
     public ResultPojo doAddCustomerBaseInfo(@RequestBody CustomerBaseInfoDO customerBaseInfoDO){
         Result result = new Result();
         CustomerBaseInfo customerBaseInfo = customerBaseInfoDO.getCustomerBaseInfo();
+        customerBaseInfo.setCreateUserId(LoginUtils.getLoginId());
+        customerBaseInfo.setCreateUserName(LoginUtils.getLoginName());
+        customerBaseInfo.setLastmodifyUserId(LoginUtils.getLoginId());
+        customerBaseInfo.setLastmodifyUserName(LoginUtils.getLoginName());
+        customerBaseInfo.setCreateTime(DateUtil.getDateTime());
+        customerBaseInfo.setModifyTime(DateUtil.getDateTime());
         CustomerMakeProduct[] customerMakeProducts = customerBaseInfoDO.getCustomerMakeProducts();
         CustomerEnterpriceNature[] customerEnterpriceNatures = customerBaseInfoDO.getCustomerEnterpriceNatures();
         try{

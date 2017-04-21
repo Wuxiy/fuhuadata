@@ -10,7 +10,9 @@ import com.fuhuadata.service.BCodeService;
 import com.fuhuadata.service.BusinessInfoService;
 import com.fuhuadata.service.BusinessOrderProductService;
 import com.fuhuadata.service.BusinessOrderService;
+import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.*;
+import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -162,9 +164,18 @@ public class BusinessOrderAction {
     @ResponseBody
     public ResultPojo updateOrderProducts(@RequestBody BusinessOrderDO businessOrderDO){
         Result result = new Result();
+       businessOrderDO.getBusinessOrder().setLastmodifyUserId(LoginUtils.getLoginId());
+       businessOrderDO.getBusinessOrder().setLastmodifyUserName(LoginUtils.getLoginName());
+       businessOrderDO.getBusinessOrder().setModifyTime(DateUtil.getDateTime());
+       if(businessOrderDO.getBusinessOrderProducts()!=null&&businessOrderDO.getBusinessOrderProducts().length>0){
+           for(int i = 0;i<businessOrderDO.getBusinessOrderProducts().length;i++){
+               businessOrderDO.getBusinessOrderProducts()[i].setModifyTime(DateUtil.getDateTimeFormat());
+               businessOrderDO.getBusinessOrderProducts()[i].setLastmodifyUserId(LoginUtils.getLoginId());
+               businessOrderDO.getBusinessOrderProducts()[i].setLastmodifyUserName(LoginUtils.getLoginName());
+           }
+       }
         try{
             result = businessOrderService.updateBusinessOrderAndProduct(businessOrderDO);
-            System.out.println();
         }catch (Exception e){
             result.setSuccess(false);
         }
@@ -187,11 +198,12 @@ public class BusinessOrderAction {
             businessOrder.setStatus(0);//新增报价,从商机转化而来，为报价中的状态
 
             /**设置创建人和修改人**/
-            businessOrder.setCreateUserId(1);
-            businessOrder.setCreateUserName("杨洋");
-            businessOrder.setLastmodifyUserId(1);
-            businessOrder.setLastmodifyUserName("杨洋");
-
+            businessOrder.setCreateUserId(LoginUtils.getLoginId());
+            businessOrder.setCreateUserName(LoginUtils.getLoginName());
+            businessOrder.setLastmodifyUserId(LoginUtils.getLoginId());
+            businessOrder.setLastmodifyUserName(LoginUtils.getLoginName());
+            businessOrder.setCreateTime(DateUtil.getDateTime());
+            businessOrder.setModifyTime(DateUtil.getDateTime());
 
             result = businessOrderService.addBusinessOrder(businessOrder);
         }catch(Exception e){
@@ -202,7 +214,8 @@ public class BusinessOrderAction {
 
 
     /**
-     *  update
+     *
+     *  update 报价单 表头和订单产品信息
      * @param businessOrder
      * @return
      */
@@ -210,6 +223,9 @@ public class BusinessOrderAction {
     @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "updateBusinessOrderByOrderId")
     @ResponseBody
     public ResultPojo updateBusinessOrderByOrderId(@RequestBody BusinessOrder businessOrder){
+        businessOrder.setLastmodifyUserId(LoginUtils.getLoginId());
+        businessOrder.setLastmodifyUserName(LoginUtils.getLoginName());
+        businessOrder.setModifyTime(DateUtil.getDateTime());
         Result<BusinessOrder> result = new Result<BusinessOrder>();
         try{
             result = businessOrderService.updateBusinessOrderByOrderId(businessOrder);
@@ -230,7 +246,11 @@ public class BusinessOrderAction {
     @ResponseBody
     public ResultPojo updateOfferStatus(@RequestBody BusinessOrder businessOrder){
         Result<BusinessOrder> result = new Result<BusinessOrder>();
+        businessOrder.setLastmodifyUserId(LoginUtils.getLoginId());
+        businessOrder.setLastmodifyUserName(LoginUtils.getLoginName());
+        businessOrder.setModifyTime(DateUtil.getDateTime());
         try{
+            businessOrder.setStatus(-2);
             result = businessOrderService.updateOfferStatus(businessOrder);
         }catch(Exception e){
             result.setSuccess(false);

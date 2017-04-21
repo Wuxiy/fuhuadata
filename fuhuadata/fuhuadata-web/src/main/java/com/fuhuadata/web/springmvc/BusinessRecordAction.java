@@ -4,6 +4,8 @@ import com.fuhuadata.domain.BusinessRecord;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.BusinessRecordService;
+import com.fuhuadata.service.util.LoginUtils;
+import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +31,12 @@ public class BusinessRecordAction {
     @ResponseBody
     public ResultPojo doAddBusinessRecord(@RequestBody BusinessRecord businessRecord){
         Result<BusinessRecord> result = new Result<BusinessRecord>();
+        businessRecord.setCreateUserId(LoginUtils.getLoginId());
+        businessRecord.setCreateUserName(LoginUtils.getLoginName());
+        businessRecord.setCreateTime(DateUtil.getDateTimeFormat());
+        businessRecord.setLastmodifyUserId(LoginUtils.getLoginId());
+        businessRecord.setLastmodifyUserName(LoginUtils.getLoginName());
+        businessRecord.setModifyTime(DateUtil.getDateTimeFormat());
         try{
             result = businessRecordService.addBusinessRecord(businessRecord);
         }catch(Exception e){

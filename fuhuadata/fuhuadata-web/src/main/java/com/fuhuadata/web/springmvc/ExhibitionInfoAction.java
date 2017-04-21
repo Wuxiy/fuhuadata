@@ -6,6 +6,8 @@ import com.fuhuadata.domain.query.ExhibitionInfoQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.ExhibitionInfoService;
+import com.fuhuadata.service.util.LoginUtils;
+import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -95,8 +97,9 @@ public class    ExhibitionInfoAction {
     @ResponseBody
     public ResultPojo doAddExhibitionInfo(@RequestBody ExhibitionInfo exhibitionInfo){
         try{
-            exhibitionInfo.setCreatorId(0);
-            exhibitionInfo.setCreator("杨洋");
+            exhibitionInfo.setCreatorId(LoginUtils.getLoginId());
+            exhibitionInfo.setCreator(LoginUtils.getLoginName());
+            exhibitionInfo.setCreateTime(DateUtil.getDateTimeFormat());
             Result<ExhibitionInfo> result = exhibitionInfoService.addExhibitionInfo(exhibitionInfo);
             return result.getResultPojo();
         }catch (Exception e){

@@ -69,8 +69,11 @@
     <sql id="PAGE-COMMON">
         <dynamic prepend=" WHERE">
            <isNotNull prepend=" AND " property="customerName">
-               a.customer_name = #customerName#
+               a.short_name like concat('%',#customerName#,'%')
            </isNotNull>
+            <isNotNull prepend=" OR " property="customerName">
+                a.full_name like concat('%',#customerName#,'%')
+            </isNotNull>
             <isNotNull prepend=" AND " property="businessFrom">
                 a.business_from = #businessFrom#
             </isNotNull>
