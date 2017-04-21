@@ -278,7 +278,8 @@ CRM.cbInfo.renderForm = function(data){
     var page = CRM.cbInfo,
         encyData = {};
 
-    if (data.areaId) { page.areaId.val(data.areaId);}
+    if (data.areaIdName) { page.areaId.val(data.areaId);}
+    if (data.areaId) { page.areaId.data('val',data.areaIdName);}
     if (data.companyType) { page.companyType.val(data.companyType);}
     if (data.customerType) { page.customerType.val(data.customerType);}
     if (data.customerId) { page.customerId.val(data.customerId);}
@@ -307,12 +308,7 @@ CRM.cbInfo.renderForm = function(data){
     if (data.managementScope) { page.managementScope.val(data.managementScope);}
 
     // 新加字段
-    if (page.formatdoc.val()==''){
-        if (data.formatdoc) { page.formatdoc.find('option').eq(0).val(data.formatdoc);} // 数据格式
-        if (data.formatdocName) { page.formatdoc.find('option').eq(0).text(data.formatdocName);}
-    }else {
-        if (data.formatdoc) { page.formatdoc.val(data.formatdoc);} // 数据格式
-    }
+    if (data.formatdoc) { page.formatdoc.val(data.formatdoc);} // 数据格式
     if (data.custclass) { page.custclass.data('val',data.custclass);} // 客户基本分类
     if (data.custclassName) { page.custclass.val(data.custclassName);}
     if (data.timezone) { page.timezone.data('val',data.timezone);} // 时区
@@ -665,8 +661,9 @@ $().ready(function() {
     page.cancel = $('#cancel');
     page.cancel.on('click.cancel',function () {
         page.togglePage(false);
+        page.renderPage();
         // page.renderPage(page.cid);
-        pForm.form();
+        // pForm.form();
     });
 
     // 工厂选中，经销商选中，其他选中
@@ -744,7 +741,8 @@ $().ready(function() {
                 method:'POST',
                 callback:function () {
 
-                    page.renderPageHandler(page.cid);
+                    page.renderPage();
+                    // page.renderPageHandler(page.cid);
                 }
             });
 
@@ -801,27 +799,49 @@ $().ready(function() {
         });
     });
 
+    // 贸易国别，获取焦点时渲染下拉框
+    $('#commerceCountryS').on('focus.cc',function () {
 
-    // 贸易国别下拉搜索框
+
+        CRM.ajaxCall({
+            url:'/customerBaseInfo/getCountryzone',
+            type:'POST',
+            contentType:'application/json',
+            data:JSON.stringify({
+                name:''
+            }),
+            callback:function (data) {
+                if (data) {
+                    CRM.tplHandler('tzC',data,$('#cc'));
+                }
+            }
+        });
+    });
+
+    // 贸易国别，改变值时，渲染下拉框
     $('#commerceCountryS').on('input.cc',function () {
 
-        if ($(this).val()!='') {
-            var obj = {
-                name:$(this).val()
-            };
-            $('#cc').html('');
-            CRM.ajaxCall({
-                url:'/customerBaseInfo/getCountryzone',
-                type:'POST',
-                contentType:'application/json',
-                data:JSON.stringify(obj),
-                callback:function (data) {
-                    if (data) {
-                        CRM.tplHandler('tzC',data,$('#cc'));
-                    }
+        var obj = {
+            name:$(this).val()
+        };
+        $('#cc').html('');
+        CRM.ajaxCall({
+            url:'/customerBaseInfo/getCountryzone',
+            type:'POST',
+            contentType:'application/json',
+            data:JSON.stringify(obj),
+            callback:function (data) {
+                if (data) {
+                    CRM.tplHandler('tzC',data,$('#cc'));
                 }
-            });
-        }
+            }
+        });
+    });
+
+    // 贸易国别，失去焦点清空搜索框
+    $('#commerceCountryS').on('blur.cc',function () {
+
+        $(this).val('');
     });
 
     // 点击国别下拉菜单，将值添加到文本框
