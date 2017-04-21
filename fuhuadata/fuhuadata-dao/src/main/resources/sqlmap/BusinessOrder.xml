@@ -101,12 +101,15 @@
             <isNotEmpty prepend=" AND " property="salesManId">
                 a.sales_man_id = #salesManId#
             </isNotEmpty>
-            <isNotEqual property="areaClassId" compareValue="0" prepend=" AND ">
-                base.customer_area_id = #areaClassId#
-                <isNotEqual property="areaId" compareValue="0" prepend=" AND ">
-                    base.country_id = #areaId#
-                </isNotEqual>
-            </isNotEqual>
+            <!--<isNotEqual property="areaClassId" compareValue="0" prepend=" AND ">-->
+                <!--base.customer_area_id = #areaClassId#-->
+                <!--<isNotEqual property="areaId" compareValue="0" prepend=" AND ">-->
+                    <!--base.country_id = #areaId#-->
+                <!--</isNotEqual>-->
+            <!--</isNotEqual>-->
+            <isNotNull prepend=" AND " property="areaId">
+                base.customer_area_id in (#areaId#)
+            </isNotNull>
         </dynamic>
     </sql>
 
@@ -156,12 +159,15 @@
             <isNotEmpty prepend=" AND " property="customerLevel">
                 base.customer_level = #customerLevel#
             </isNotEmpty>
-            <isNotEqual property="areaClassId" compareValue="0" prepend=" AND ">
-                 base.customer_area_id = #areaClassId#
-                <isNotEqual property="areaId" compareValue="0" prepend=" AND ">
-                    base.country_id = #areaId#
-                </isNotEqual>
-            </isNotEqual>
+            <!--<isNotEqual property="areaClassId" compareValue="0" prepend=" AND ">-->
+                 <!--base.customer_area_id = #areaClassId#-->
+                <!--<isNotEqual property="areaId" compareValue="0" prepend=" AND ">-->
+                    <!--base.country_id = #areaId#-->
+                <!--</isNotEqual>-->
+            <!--</isNotEqual>-->
+            <isNotNull prepend=" AND" property="areaId">
+                base.customer_area_id in (#areaId#)
+            </isNotNull>
             <isNotEmpty prepend=" AND " property="enterpriseNature">
                 nature.customer_id=base.customer_id
             </isNotEmpty>
@@ -202,12 +208,15 @@
             <isNotEmpty prepend=" AND " property="customerLevel">
                 base.customer_level = #customerLevel#
             </isNotEmpty>
-            <isNotEqual property="areaClassId" compareValue="0" prepend=" AND ">
-                base.customer_area_id = #areaClassId#
-                <isNotEqual property="areaId" compareValue="0" prepend=" AND ">
-                    base.country_id = #areaId#
-                </isNotEqual>
-            </isNotEqual>
+            <!--<isNotEqual property="areaClassId" compareValue="0" prepend=" AND ">-->
+                <!--base.customer_area_id = #areaClassId#-->
+                <!--<isNotEqual property="areaId" compareValue="0" prepend=" AND ">-->
+                    <!--base.country_id = #areaId#-->
+                <!--</isNotEqual>-->
+            <!--</isNotEqual>-->
+            <isNotNull prepend=" AND " property="areaId">
+                base.customer_area_id  in (#areaId#)
+            </isNotNull>
             <isNotEmpty prepend=" AND " property="enterpriseNature">
                 nature.customer_id=base.customer_id
             </isNotEmpty>
