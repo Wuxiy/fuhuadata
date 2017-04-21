@@ -89,9 +89,9 @@
                     <!--base.country_id = #areaId#-->
                 <!--</isNotEqual>-->
             <!--</isNotEqual>-->
-            <isNotNull prepend=" AND " property="areaId">
+            <isNotEmpty prepend=" AND " property="areaId">
                 base.customer_area_id in (#areaId#)
-            </isNotNull>
+            </isNotEmpty>
             <isNotEmpty prepend=" AND " property="enterpriseNature">
                 nature.customer_id=base.customer_id
             </isNotEmpty>
