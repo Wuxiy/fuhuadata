@@ -83,28 +83,35 @@
         var methods={
             //渲染包材成本列表
             packingArchivesList : function(getData,parent){
-                $.each(getData,function(n,item){
-                    var tr = $('<tr></tr>');
-                    var arr = item.suitableType;
-                    var arr2 = arr.split(',');
-                    /*console.log(item);*/
-                    $(tr).append('<td>'+item.packingId+'</td><td><a href="'+basePath+'/packingArchives/getDetails?id='+item.packingId+'&bid='+item.bigCategoryId+'&sid='+item.smallCategoryId+'" class="packName">'+item.packName+'</a></td><td>'+item.spec+'</td><td>'+item.quality+'</td><td>'+item.qualityIndex+'</td><td>'+item.qualityTargetValue+'</td><td>'+item.unitPrice+'</td><td>'+item.priceEndDate+'</td><td>'+arr2+'</td><td>'+item.bRemarks+'</td><td>'+item.status+'</td>').appendTo(parent);
-                })
+                if(getData!=undefined){
+                    $.each(getData,function(n,item){
+                        var tr = $('<tr></tr>');
+                        var arr = item.suitableType;
+                        var arr2 = arr.split(',');
+                        /*console.log(item);*/
+                        $(tr).append('<td>'+item.packingId+'</td><td><a href="'+basePath+'/packingArchives/getDetails?id='+item.packingId+'&bid='+item.bigCategoryId+'&sid='+item.smallCategoryId+'" class="packName">'+item.packName+'</a></td><td>'+item.spec+'</td><td>'+item.quality+'</td><td>'+item.qualityIndex+'</td><td>'+item.qualityTargetValue+'</td><td>'+item.unitPrice+'</td><td>'+item.priceEndDate+'</td><td>'+arr2+'</td><td>'+item.bRemarks+'</td><td>'+item.status+'</td>').appendTo(parent);
+                    })
+                }
              },
             //渲染包装要求包材列表
             packingorderlist:function (getData,parent) {
-                $.each(getData,function(n,item){
-                    var tr = $('<tr></tr>');
-                    $(tr).append('<td><input type="checkbox" value="'+item.packingId+'" name="cellcheckbox"/></td><td>'+item.packingId+'</td><td>'+item.packName+'</td><td>'+item.spec+'</td><td>'+item.size+'</td><td>'+item.quality+'</td><td>'+item.unitPrice+'</td><td>'+item.status+'</td>').appendTo(parent);
-                })
+                if(getData!=undefined){
+                    $.each(getData,function(n,item){
+                        var tr = $('<tr></tr>');
+                        $(tr).append('<td><input type="checkbox" value="'+item.packingId+'" name="cellcheckbox"/></td><td>'+item.packingId+'</td><td>'+item.packName+'</td><td>'+item.spec+'</td><td>'+item.size+'</td><td>'+item.quality+'</td><td>'+item.unitPrice+'</td><td>'+item.status+'</td>').appendTo(parent);
+                    })
+                }
+
             },
             //渲染包材详情modal列表
             packingInfoModal : function(getData,parent){
-                $.each(getData,function(n,item){
-                    var tr = $('<tr></tr>');
-                    /*console.log(item);*/
-                    $(tr).append('<td><input type="checkbox" value="'+item.packingId+'" name="modal_cellcheckbox"/></td><td>'+item.packingId+'</td><td>'+item.packName+'</td><td>'+item.spec+'</td><td>'+item.size+'</td><td>'+item.quality+'</td><td>'+item.unitPrice+'</td><td>'+item.consumption+'</td><td>'+item.status+'</td>').appendTo(parent);
-                })
+                if(getData!=undefined){
+                    $.each(getData,function(n,item){
+                        var tr = $('<tr></tr>');
+                        /*console.log(item);*/
+                        $(tr).append('<td><input type="checkbox" value="'+item.packingId+'" name="modal_cellcheckbox"/></td><td>'+item.packingId+'</td><td>'+item.packName+'</td><td>'+item.spec+'</td><td>'+item.size+'</td><td>'+item.quality+'</td><td>'+item.unitPrice+'</td><td>'+item.consumption+'</td><td>'+item.status+'</td>').appendTo(parent);
+                    })
+                }
             },
             //渲染标准产品档案
             productArchivesList : function(getData){

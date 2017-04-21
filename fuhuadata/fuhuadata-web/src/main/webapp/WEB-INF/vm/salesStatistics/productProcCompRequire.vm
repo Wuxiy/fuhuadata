@@ -895,11 +895,12 @@
     }
 
     function getouterPackingId() {
-        var outerPackingId = $('#outer').find('[class="active"]').val();
+        var outerPackingId = $('input[class="outercheckbox"]:checked').length;
+        console.log(outerPackingId);
         return outerPackingId;
     }
 
-    function getmodel(){
+    /*function getmodel(){
         var name = $('input[name="modelist"]:checked').attr('data-name');
         var path = $('input[name="modelist"]:checked').attr('data-path');
         var model = {
@@ -907,7 +908,7 @@
             'path':path
         }
         return model;
-    }
+    }*/
     
     function getauxiliaryMaterialIds() {
         var a = [];
