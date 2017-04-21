@@ -173,7 +173,7 @@
 			customer_type = #customerType#
 		</isNotEmpty>
 				<isNotEmpty prepend=" AND " property="areaId">
-					customer_area_id = #areaId#
+					customer_area_id  in($areaId$)
 		</isNotEmpty>
 				<isNotEmpty prepend=" AND " property="area">
 			customer_area = #area#
@@ -546,9 +546,9 @@
 		<isNotEmpty prepend="and" property="enterpriseNature">
 			nature.customer_id=base.customer_id
 		</isNotEmpty>
-		<isNotEqual prepend="and" property="areaId" compareValue="0">
-			customer_area_id=#areaId#
-		</isNotEqual>
+		<isNotEmpty prepend="and" property="areaId">
+			customer_area_id in($areaId$)
+		</isNotEmpty>
 
 		LIMIT #startRow#,#pageSize#
 	</select>
@@ -645,9 +645,9 @@
 		<isNotEmpty prepend="and" property="enterpriseNature">
 			nature.customer_id=base.customer_id
 		</isNotEmpty>
-		<isNotEqual prepend="and" property="areaId" compareValue="0">
-			customer_area_id=#areaId#
-		</isNotEqual>
+		<isNotEmpty prepend="and" property="areaId">
+			customer_area_id in($areaId$)
+		</isNotEmpty>
 	</select>
 
 	<select id="countOrderByCustomer" resultClass="CustomerBaseInfo" parameterClass="java.lang.String">
@@ -659,7 +659,7 @@
 		ifnull(sum(ifnull(actual_amount_paid,0)),0) payMoney
 		from  business_order
 		where customer_id = #customerId#
-		and staus = 3
+		and status = 3
 	</select>
 
 	<select id="countOrderProduct" resultClass="CountCustomersOrderProduct" parameterClass="java.lang.String">
@@ -676,7 +676,7 @@
 			o.`order_id` = op.`order_id`
 			and op.`product_id` = p.`product_id`
 			and transform_state=1
-			and o.staus = 3
+			and o.status = 3
 			o.`customer_id` = #customerId#
 		group by op.archive_product_id
 	</select>

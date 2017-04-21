@@ -145,7 +145,7 @@
 <script type="text/javascript">
 
     var pagesize = 4; // 分页步长
-    var areaTreeData = null; // 保存树的数据
+    var areaTreeData = []; // 保存树的数据
     var customerLevelList = ['战略客户','大客户' ,'重要客户' ,'一般客户' ,'风险客户'];
     var areaId = ''; // 地区id
     $(function(){
@@ -155,13 +155,15 @@
             url:basePath+'/customerBaseInfo/initAreaCategoryTree',
             type:'GET'
         }).done(function (res) {
+
             // 将数据赋值给外部变量，方便搜索时处理数据
             areaTreeData=[{
-                cid : '~',
-                pid : 'z',
-                cname : '全部',
-                nodes : res.data
+                pkAreacl : '1001D2100000000067E6',
+                pkFatherarea : '~',
+                name : '全部'
             }];
+            areaTreeData.push.apply(areaTreeData,res.data);
+
             renderAreaTree(areaTreeData,areaTreeDblHandler,$('#areaTree')); // 渲染树
         });
 
@@ -211,7 +213,10 @@
         var setting = {
                     data: {
                         simpleData: {
-                            enable: true
+                            enable: true,
+                            idKey: "pkAreacl",
+                            pIdKey: "pkFatherarea",
+                            rootPId: '~'
                         }
                     },
                     edit: {
@@ -221,35 +226,43 @@
                         onClick: callback
                     }
                 },
-                id = el.attr('id'),
-                treeData = data;
+                id = el.attr('id');
 
-        $.fn.zTree.init(el, setting, treeData);
+        $.fn.zTree.init(el, setting, data);
     };
 
     // 地区树添加单击事件
     function areaTreeDblHandler (event, modLeftId, treeNode) {
 
-
-        if (treeNode.id == '~') { // 如果当前节点为全部，则令areaId为空
-
-            areaId = '';
-        }else { // 不是全部时判断有无子节点
-
-            var isArr = CRM.getNodes(treeNode.id,areaTreeData);
-
-            if (isArr instanceof Array) { // 有子节点返回后代节点id字符串
-
-                areaId = CRM.searchTreeId(isArr);
-            }else { // 没有后代，返回自身的id
-
-                areaId = isArr;
-            }
+        var treeObj = $.fn.zTree.getZTreeObj('areaTree');
+        var sNodes = treeObj.getSelectedNodes();
+        if (sNodes.length > 0) {
+            var isParent = sNodes[0].isParent;
         }
 
-        console.log(areaId);
-        // 搜索表格
-        serach();
+        console.log(sNodes);
+
+
+
+//        if (treeNode.id == '~') { // 如果当前节点为全部，则令areaId为空
+//
+//            areaId = '';
+//        }else { // 不是全部时判断有无子节点
+//
+//            var isArr = CRM.getNodes(treeNode.id,areaTreeData);
+//
+//            if (isArr instanceof Array) { // 有子节点返回后代节点id字符串
+//
+//                areaId = CRM.searchTreeId(isArr);
+//            }else { // 没有后代，返回自身的id
+//
+//                areaId = isArr;
+//            }
+//        }
+//
+//        console.log(areaId);
+//        // 搜索表格
+//        serach();
     }
 
 	// 搜索列表并渲染
