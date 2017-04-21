@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.IncomeMapper">
+  <resultMap id="BaseResultMap" type="com.fuhuadata.domain.mybatis.Income">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="pk_income" jdbcType="VARCHAR" property="pkIncome" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="paymentday" jdbcType="INTEGER" property="paymentday" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="effectdate" jdbcType="DATE" property="effectdate" />
+    <result column="diseffectdate" jdbcType="DATE" property="diseffectdate" />
+    <result column="meno" jdbcType="VARCHAR" property="meno" />
+  </resultMap>
+</mapper>

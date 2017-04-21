@@ -150,9 +150,16 @@
         var businessStateList = ['报价失败','订单取消','报价中','已转化成订单','数据已上报到NC','已签约'];
     %>
     <tr>
+<<<<<<< HEAD
         <td><a href="/businessOrder/intoOfferorOrder?orderId=<%=data[i].orderId%>"><%=data[i].orderId%></a></td>
         <td><a href="/businessOrder/intoBusinessOpportunityInfo?orderId=<%=data[i].businessId%>"><%=data[i].businessId%></a></td>
         <td><%=data[i].customerName%></td><td lang="zh"><%=customerLevelList[data[i].customerLevel - 1]%></td>
+=======
+        <td><a href="${request.contextPath}/businessOrder/intoOfferorOrder?orderId=<%=data[i].orderId%>"><%=data[i].orderId%></a></td>
+        <td><a href="${request.contextPath}/businessOrder/intoBusinessOpportunityInfo?orderId=<%=data[i].businessId%>"><%=data[i].businessId%></a></td>
+        <td><%=data[i].customerName%></td>
+        <td lang="zh"><%=customerLevelList[data[i].customerLevel - 1]%></td>
+>>>>>>> 0847fff2a404b58ce208804d1efb04b372a6c003
         <td lang="zh"><%=data[i].enterpriseNature%></td>
         <td><%=data[i].amountPayable%></td>
         <td><%=data[i].orderProduct%></td>
@@ -162,7 +169,7 @@
         <td lang="zh">
             <a data-toggle="dropdown" class="dropdown" href="#"><%=businessStateList[data[i].status + 2]%></a>
             <ul class="dropdown-menu pull-right">
-                <li><a href="/businessOrder/intoBusinessOfferConverse?orderId=<%=data[i].orderId%>">转化</a></li>
+                <li><a href="${request.contextPath}/businessOrder/intoBusinessOfferConverse?orderId=<%=data[i].orderId%>">转化</a></li>
                 <li><a data-val="<%=data[i].orderId%>" data-toggle="modal" href="#rModal">失败</a></li>
             </ul>
         </td>
@@ -268,6 +275,7 @@
             data:JSON.stringify(data),
             success:function(data){
                 var ResultData = data.data;
+                // 前段模板渲染列表
                 CRM.tplHandler('olC',ResultData,$('#offerList'));
             }
         });

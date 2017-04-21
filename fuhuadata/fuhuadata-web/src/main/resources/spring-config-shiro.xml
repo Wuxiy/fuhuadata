@@ -118,6 +118,7 @@
         <property name="filterChainDefinitions">
             <value>
                 /lib/** = anon
+                /order/status = anon
                 /favicon.ico = anon
                 /logout = logout
                 /login = authc

@@ -17,7 +17,6 @@ public class CustomerBaseInfo implements Serializable{
     /**企业全称**/
 	private String fullName;
 
-
 	/**企业简称**/
 	private String shortName;
 
@@ -200,8 +199,8 @@ public class CustomerBaseInfo implements Serializable{
 	//所属销售组织名称
 	private String saleOrganizationName;
 	private String encyId;// 百科id 用来判断客户是否有百科
-
 	private String customerDutyParagraph;//客户税号
+
 	public CustomerBaseInfo() {
 	}
 

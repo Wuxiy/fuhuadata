@@ -14,6 +14,7 @@
     <task:scheduled-tasks scheduler="scheduler">
         <task:scheduled ref="syncDocFromNc" method="autoTest" cron="10 * * * * ?"/>
         <task:scheduled ref="syncContract" method="sync" cron="0 0 0 * * ?"/>
+        <task:scheduled ref="syncSubContract" method="sync" cron="0 10 0 * * ?"/>
     </task:scheduled-tasks>
 
 

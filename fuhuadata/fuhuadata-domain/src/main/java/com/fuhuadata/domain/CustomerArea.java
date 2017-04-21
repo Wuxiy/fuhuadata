@@ -9,43 +9,33 @@ import java.io.Serializable;
 public class CustomerArea implements Serializable{
 
     /**区域id**/
-    private String areaId;
+    private String pkAreacl;
     /**区域名称**/
-    private String areaName;
-    /**大区id**/
-    private String areaClassId;
-    /**大域名称**/
-    private String areaClassName;
+    private String name;
+    /**父级id**/
+    private String pkFatherarea;
 
-    public String getAreaId() {
-        return areaId;
+    public String getPkAreacl() {
+        return pkAreacl;
     }
 
-    public void setAreaId(String areaId) {
-        this.areaId = areaId;
+    public void setPkAreacl(String pkAreacl) {
+        this.pkAreacl = pkAreacl;
     }
 
-    public String getAreaName() {
-        return areaName;
+    public String getName() {
+        return name;
     }
 
-    public void setAreaName(String areaName) {
-        this.areaName = areaName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getAreaClassId() {
-        return areaClassId;
+    public String getPkFatherarea() {
+        return pkFatherarea;
     }
 
-    public void setAreaClassId(String areaClassId) {
-        this.areaClassId = areaClassId;
-    }
-
-    public String getAreaClassName() {
-        return areaClassName;
-    }
-
-    public void setAreaClassName(String areaClassName) {
-        this.areaClassName = areaClassName;
+    public void setPkFatherarea(String pkFatherarea) {
+        this.pkFatherarea = pkFatherarea;
     }
 }

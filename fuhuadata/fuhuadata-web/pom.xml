@@ -156,6 +156,26 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
         </dependency>
+
+        <!--<dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>jsr311-api</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>1.19</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-servlet</artifactId>
+            <version>1.19</version>
+        </dependency>-->
+
+
     </dependencies>
 
     <build>
@@ -220,14 +240,10 @@
         <profile>
 
             <id>development</id>
-
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
-
             <properties>
-
-
                 <fuhua.log.level>DEBUG</fuhua.log.level>
                 <system.log.path>w:/fuhualog</system.log.path>
                 <fuhua.log.additivity>true</fuhua.log.additivity>
@@ -240,7 +256,6 @@
                 </jdsmy.jdbc.url>
                 <jdsmy.jdbc.username>root</jdsmy.jdbc.username>
                 <jdsmy.jdbc.password>root</jdsmy.jdbc.password>
-
 
                 <!--.......................passport相关开始....................... -->
                 <!-- 前台登录cookie名 -->
@@ -261,4 +276,5 @@
             </properties>
         </profile>
     </profiles>
+
 </project>

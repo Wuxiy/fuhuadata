@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SyncContract" >
+  <typeAlias alias="syncContract" type="com.fuhuadata.domain.task.SyncContract"/>
+
+  <select id="getOracleData" resultClass="syncContract">
+          SELECT
+              cfirstid as pkLongpro,
+              c.pk_contract as pkContract,
+              p.ntotalorigmny as amount,
+              p.vdef37 as grossProfit,
+              1 as type
+      FROM
+              et_contract_b c,
+              et_contract p
+      WHERE
+              c.pk_contract = p.pk_contract
+              AND cfirstid != '~'
+              AND c.dr = 0
+              AND p.dr = 0
+              AND p. fpfstatusflag =1
+              AND p.frevisestatusflag =-1
+              AND p.fstatusflag =8
+              AND p.ctrantypeid ='5715'
+      GROUP BY
+              c.pk_contract,
+              cfirstid,
+              ntotalorigmny,
+              p.vdef37
+
+      UNION ALL
+
+      SELECT
+              cfirstid as pkLongpro,
+              c.pk_contract as pkContract,
+              p.ntotalorigmny as amount,
+              p.vdef37 as grossProfit,
+              2 as type
+      FROM
+              ent_contract_b c,
+              ent_contract p
+      WHERE
+              c.pk_contract = p.pk_contract
+              AND cfirstid != '~'
+              AND c.dr = 0
+              AND p.dr = 0
+              AND p. fpfstatusflag =1
+              AND p.frevisestatusflag =-1
+              AND p.fstatusflag =8
+              AND p.ctrantypeid ='5715'
+      GROUP BY
+              c.pk_contract,
+              cfirstid,
+              ntotalorigmny,
+              p.vdef37
+  </select>
+
+  <delete id="deleteMysqlData">
+     delete from sync_contract
+  </delete>
+
+  <insert id="insertMysqlData" parameterClass="java.util.List">
+    <![CDATA[
+            INSERT INTO sync_contract
+            (type,pk_longpro,pk_contract,amount,gross_profit) values
+            ]]>
+    <iterate conjunction=",">
+      <![CDATA[
+                (#[].type#,#[].pkLongpro#,#[].pkContract#,#[].amount#,#[].grossProfit#)
+                ]]>
+    </iterate>
+  </insert>
+
+
+</sqlMap>
