@@ -38,8 +38,6 @@ public class CustomerEncyclopediaManagerImpl implements CustomerEncyclopediaMana
             customerBaseInfo.setShortName(customerEncyclopedia.getShortName());
             customerBaseInfo.setAreaId(Integer.valueOf(customerEncyclopedia.getCustomerAreaId()));
             customerBaseInfo.setArea(customerEncyclopedia.getCustomerArea());
-            customerBaseInfo.setCountryId(customerEncyclopedia.getCountryId());
-            customerBaseInfo.setCountry(customerEncyclopedia.getCountry());
             customerBaseInfo.setFullEnterpriseNature(customerEncyclopedia.getEnterpriseNature());
             customerBaseInfo.setCreateUserId(customerEncyclopedia.getCreateUserId());
             customerBaseInfo.setCreateUserName(customerEncyclopedia.getCreateUserName());

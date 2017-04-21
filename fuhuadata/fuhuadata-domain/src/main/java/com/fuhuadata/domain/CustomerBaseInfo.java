@@ -27,13 +27,6 @@ public class CustomerBaseInfo implements Serializable{
 
 	/**地区分类,例如北美洲**/
 	private String area;
-
-	/**国家分类id**/
-	private String countryId;
-
-	/**国家,例如美国**/
-	private String country;
-
     /**注册资金**/
 	private String registeredFunds;
 
@@ -277,13 +270,6 @@ public class CustomerBaseInfo implements Serializable{
 		this.area = area;
 	}
 
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
 
 	public String getRegisteredFunds() {
 		return registeredFunds;
@@ -676,14 +662,6 @@ public class CustomerBaseInfo implements Serializable{
 
 	public void setCompanyType(Integer companyType) {
 		this.companyType = companyType;
-	}
-
-	public String getCountryId() {
-		return countryId;
-	}
-
-	public void setCountryId(String countryId) {
-		this.countryId = countryId;
 	}
 
 	public String getNcId() {

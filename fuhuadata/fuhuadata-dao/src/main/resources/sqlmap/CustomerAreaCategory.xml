@@ -13,6 +13,8 @@
             pk_fatherarea pkFatherarea
         FROM
             t_areacl
+        where code &lt; '91'
+        order by code
     </select>
 
 </sqlMap>
