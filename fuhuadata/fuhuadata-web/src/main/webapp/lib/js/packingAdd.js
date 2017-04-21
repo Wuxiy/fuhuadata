@@ -175,15 +175,15 @@ $('#add_relate').on('click',function(){
                     alert("添加关联成功！");
                     for(var i=0;i<result.data.length;i++){
                         addTbody.innerHTML += '<tr>'+
-                            '<td class="text-center"><input type="checkbox" name="cellcheckbox" value="'+result.data[i].packingId+'" /></td>'+
-                            '<td class="col-xs-2 text-center text-middle">'+result.data[i].packingId+'</td>'+
-                            '<td class="col-xs-2 text-center text-middle">'+result.data[i].packName+'</td>'+
-                            '<td class="col-xs-1 text-center text-middle">'+result.data[i].spec+'</td>'+
-                            '<td class="col-xs-1 text-center text-middle">'+result.data[i].size+'</td>'+
-                            '<td class="col-xs-2 text-center text-middle">'+result.data[i].quality+'</td>'+
-                            '<td class="col-xs-1 text-center text-middle">'+result.data[i].unitPrice+'</td>'+
-                            '<td class="col-xs-1 text-center text-middle">'+result.data[i].consumption+'</td>'+
-                            '<td class="col-xs-1 text-center text-middle">'+result.data[i].status+'</td>'
+                            '<td class="text-center"><input type="checkbox" name="cellcheckbox" value="'+ifEmpty(result.data[i].packingId)+'" /></td>'+
+                            '<td class="col-xs-2 text-center text-middle">'+ifEmpty(result.data[i].packingId)+'</td>'+
+                            '<td class="col-xs-2 text-center text-middle">'+ifEmpty(result.data[i].packName)+'</td>'+
+                            '<td class="col-xs-1 text-center text-middle">'+ifEmpty(result.data[i].spec)+'</td>'+
+                            '<td class="col-xs-1 text-center text-middle">'+ifEmpty(result.data[i].size)+'</td>'+
+                            '<td class="col-xs-2 text-center text-middle">'+ifEmpty(result.data[i].quality)+'</td>'+
+                            '<td class="col-xs-1 text-center text-middle">'+ifEmpty(result.data[i].unitPrice)+'</td>'+
+                            '<td class="col-xs-1 text-center text-middle">'+ifEmpty(result.data[i].consumption)+'</td>'+
+                            '<td class="col-xs-1 text-center text-middle">'+ifEmpty(result.data[i].status)+'</td>'
                         '</tr>';
                     }
 
@@ -270,6 +270,11 @@ $('#modal_checkAll').on('click',function(){
         }
     });
 })
+
+function ifEmpty(data) {
+    return data==undefined?'':data;
+}
+
 
 
 

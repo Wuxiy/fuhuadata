@@ -146,19 +146,20 @@
                                 <th class="col-xs-1 text-center text-middle">单耗（每千升或每吨）</th>
                                 <th class="col-xs-1 text-center text-middle">状态</th>
                             </tr>
+                            <tr>
+                                <td></td>
+                                <td id="packpackingId" class="text-center text-middle"></td>
+                                <td id="packpackName" class="text-center text-middle"></td>
+                                <td id="packspec" class="text-center text-middle"></td>
+                                <td id="packsize" class="text-center text-middle"></td>
+                                <td id="packquality" class="text-center text-middle"></td>
+                                <td id="packunitPrice" class="text-center text-middle"></td>
+                                <td id="packconsumption" class="text-center text-middle"></td>
+                                <td id="packstatus" class="text-center text-middle"></td>
+                            </tr>
                             </thead>
                             <tbody id="packing_relate_table">
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+
                             </tbody>
                         </table>
                     </div>

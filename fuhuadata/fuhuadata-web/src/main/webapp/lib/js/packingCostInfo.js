@@ -45,6 +45,15 @@ $(document).ready(function(){
                 $('#priceEndDate').val(ifEmpty(pack.priceEndDate));
                 $('#status').val(ifEmpty(pack.status));
                 $('#bRemarks').val(ifEmpty(pack.bRemarks));
+
+                $('#packpackingId').text(ifEmpty(pack.packingId));
+                $('#packpackName').text(ifEmpty(pack.packName));
+                $('#packspec').text(ifEmpty(pack.spec));
+                $('#packsize').text(ifEmpty(pack.size));
+                $('#packquality').text(ifEmpty(pack.quality));
+                $('#packunitPrice').text(ifEmpty(pack.unitPrice));
+                $('#packconsumption').text(ifEmpty(pack.consumption));
+                $('#packstatus').text(ifEmpty(pack.status));
             }
 
             if(ResultData.nodes){
