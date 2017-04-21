@@ -25,9 +25,6 @@ public class CustomerAreaServiceImpl implements CustomerAreaService{
 
 
     public Result<List<CustomerArea>> getAllCustomerAreaList(String id) {
-        if(StringUtils.isBlank(id)){
-            id = "~";
-        }
         List<CustomerArea> area_list =  customerAreaManager.getAllCustomerAreaList(id);
         Result<List<CustomerArea>> result = new Result<List<CustomerArea>>();
         result.addDefaultModel(area_list);
