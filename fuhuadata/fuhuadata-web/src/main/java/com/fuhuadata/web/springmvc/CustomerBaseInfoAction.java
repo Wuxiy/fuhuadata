@@ -1,5 +1,6 @@
 package com.fuhuadata.web.springmvc;
 
+import com.fuhuadata.domain.CustomerArea;
 import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.domain.CustomerEnterpriceNature;
 import com.fuhuadata.domain.CustomerMakeProduct;
@@ -68,9 +69,9 @@ public class CustomerBaseInfoAction {
     @ResponseBody
     @RequestMapping(value = "/initAreaCategoryTree",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "customerInfo-customerList",methods = "initAreaCategoryTree")
-    public ResultPojo initAreaCategoryTree(){
+    public ResultPojo initAreaCategoryTree(String pid){
         try{
-            Result<List<CategoryTree>> result = customerAreaService.getAllCustomerAreaList();
+            Result<List<CustomerArea>> result = customerAreaService.getAllCustomerAreaList(pid);
             return result.getResultPojo();
         }catch (Exception e){
 

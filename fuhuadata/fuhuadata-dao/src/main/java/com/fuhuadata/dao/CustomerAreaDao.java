@@ -15,5 +15,5 @@ public interface CustomerAreaDao {
      * 查询数据库中所有最下级地区及其大区信息
      * @return
      */
-    public List<CustomerArea> getAllCustomerAreaList();
+    public List<CustomerArea> getAllCustomerAreaList(String id);
 }

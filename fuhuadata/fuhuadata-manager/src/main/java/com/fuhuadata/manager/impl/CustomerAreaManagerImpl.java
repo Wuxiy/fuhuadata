@@ -16,8 +16,8 @@ public class CustomerAreaManagerImpl implements CustomerAreaManager {
     @Autowired
     private CustomerAreaDao customerAreaDao;
     @Override
-    public List<CustomerArea> getAllCustomerAreaList() {
-        return customerAreaDao.getAllCustomerAreaList();
+    public List<CustomerArea> getAllCustomerAreaList(String id) {
+        return customerAreaDao.getAllCustomerAreaList(id);
     }
 }
 
