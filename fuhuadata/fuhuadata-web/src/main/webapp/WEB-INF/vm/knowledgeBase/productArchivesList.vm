@@ -196,7 +196,7 @@
                 </div>
             </td>
             <td  data-editTd="no"><%=data[i].componentName%></td>
-            <td><%=data[i].unitCost%></td>
+            <td><%=data[i].consumption%></td>
             <td></td>
         </tr>
         <%}%>
