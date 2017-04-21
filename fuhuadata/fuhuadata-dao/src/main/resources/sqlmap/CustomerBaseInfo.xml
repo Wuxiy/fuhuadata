@@ -21,8 +21,6 @@
 					<result property="customerType" column="customer_type" jdbcType="INT" javaType="java.lang.Integer" />
 					<result property="areaId" column="customer_area_id" jdbcType="INT" javaType="java.lang.Integer" />
 					<result property="area" column="customer_area" jdbcType="VARCHAR" javaType="java.lang.String" />
-					<result property="countryId" column="country_id" jdbcType="VARCHAR" javaType="java.lang.String" />
-					<result property="country" column="country" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="registeredFunds" column="registered_funds" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="registeredAddress" column="registered_address" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="managementScope" column="management_scope" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -180,12 +178,6 @@
 				<isNotEmpty prepend=" AND " property="area">
 			customer_area = #area#
 		</isNotEmpty>
-				<isNotEmpty prepend=" AND " property="countryId">
-			country_id = #countryId#
-		</isNotEmpty>
-				<isNotEmpty prepend=" AND " property="country">
-			country = #country#
-		</isNotEmpty>
 				<isNotEmpty prepend=" AND " property="registeredFunds">
 			registered_funds = #registeredFunds#
 		</isNotEmpty>
@@ -258,7 +250,7 @@
 		production_line,timezone,custclass,formatdoc,countryzone,sale_organization_id,sale_organization_name,customer_duty_paragraph)
 		values (#ncId#, #fullName#,
 		#shortName#, #companyType#, #areaId#,
-		#area#, #countryId#, #country#,
+		#area#,
 		#fullEnterpriseNature#, #otherEnterpriseNature#,
 		#registeredFunds#, #registeredAddress#, #managementScope#,
 		#zhongxinbaoNumber#, #zhongxinbaoLevel#, #enterprisePhone#,
@@ -287,7 +279,6 @@
 						<isNotEmpty prepend=", " property="shortName">short_name=#shortName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="areaId">customer_area_id=#areaId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="area">customer_area=#area#</isNotEmpty>
-						<isNotEmpty prepend=", " property="countryId">country_id=#countryId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="country">country=#country#</isNotEmpty>
 						<isNotEmpty prepend=", " property="companyType">company_type=#companyType#</isNotEmpty>
 						<isNotEmpty prepend=", " property="otherEnterpriseNature">other_enterprise_nature=#otherEnterprieNature#</isNotEmpty>
@@ -436,8 +427,6 @@
 		<result property="customerType" column="customer_type" jdbcType="INT" javaType="java.lang.Integer" />
 		<result property="areaId" column="customer_area_id" jdbcType="INT" javaType="java.lang.Integer" />
 		<result property="area" column="customer_area" jdbcType="VARCHAR" javaType="java.lang.String" />
-		<result property="countryId" column="country_id" jdbcType="VARCHAR" javaType="java.lang.String" />
-		<result property="country" column="country" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="registeredFunds" column="registered_funds" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="registeredAddress" column="registered_address" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="managementScope" column="management_scope" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -501,7 +490,7 @@
 				a.link_phone2 linkPhone2,
 				a.lemail lemail,
 				GROUP_CONCAT(nature.nature) enterpriseNature,
-				base.otherEnterpriseNature
+				base.other_enterprise_nature  otherEnterpriseNature
 			FROM
 				customer_base_info base
 			LEFT JOIN customer_linkman a ON a.customer_id = base.customer_id
@@ -557,11 +546,8 @@
 		<isNotEmpty prepend="and" property="enterpriseNature">
 			nature.customer_id=base.customer_id
 		</isNotEmpty>
-		<isNotEqual prepend="and" property="areaClassId" compareValue="0">
-			customer_area_id=#areaClassId#
-		</isNotEqual>
-		<isNotEqual property="areaId" compareValue="0">
-			and	country_id = #areaId#
+		<isNotEqual prepend="and" property="areaId" compareValue="0">
+			customer_area_id=#areaId#
 		</isNotEqual>
 
 		LIMIT #startRow#,#pageSize#
@@ -578,8 +564,6 @@
 			base.company_type companyType,
 			base.customer_area_id areaId,
 			base.customer_area area,
-			base.country_id countryId,
-			base.country country,
 			base.registered_funds registeredFunds,
 			base.registered_address registeredAddress,
 			base.management_scope managementScope,
@@ -661,11 +645,8 @@
 		<isNotEmpty prepend="and" property="enterpriseNature">
 			nature.customer_id=base.customer_id
 		</isNotEmpty>
-		<isNotEqual prepend="and" property="areaClassId" compareValue="0">
-			customer_area_id=#areaClassId#
-		</isNotEqual>
-		<isNotEqual property="areaId" compareValue="0">
-			and	country_id = #areaId#
+		<isNotEqual prepend="and" property="areaId" compareValue="0">
+			customer_area_id=#areaId#
 		</isNotEqual>
 	</select>
 

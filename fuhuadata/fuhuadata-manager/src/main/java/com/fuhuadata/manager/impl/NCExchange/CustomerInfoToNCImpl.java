@@ -208,7 +208,7 @@ public class CustomerInfoToNCImpl implements CustomerInfoToNC{
         c.setFullName("crmTEST042001");
         c.setShortName("crm01");
         c.setCustomerId("042001");
-        c.setCountry("CN");
+        c.setCountryzone("CN");
         CustomerInfoToNC customerInfoToNC=new CustomerInfoToNCImpl();
         customerInfoToNC.sendCustomerInfo(c);
     }

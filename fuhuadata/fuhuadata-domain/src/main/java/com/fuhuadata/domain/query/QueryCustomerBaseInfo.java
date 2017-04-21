@@ -34,16 +34,7 @@ public class QueryCustomerBaseInfo  {
 	
     /**地区分类,例如北美洲**/
 	private String area;
-	
-    /**大区分类id**/
-	private String areaClassId;
-	
-    /**大区分类,如：亚太区**/
-	private String areaClassName;
-	/*国家id*/
-	private String countryId;
-	/*国家*/
-	private String country;
+
     /**注册资金**/
 	private String registeredFunds;
 	
@@ -361,21 +352,6 @@ public class QueryCustomerBaseInfo  {
 		this.area = area;
 	}
 
-	public String getAreaClassId() {
-		return areaClassId;
-	}
-
-	public void setAreaClassId(String areaClassId) {
-		this.areaClassId = areaClassId;
-	}
-
-	public String getAreaClassName() {
-		return areaClassName;
-	}
-
-	public void setAreaClassName(String areaClassName) {
-		this.areaClassName = areaClassName;
-	}
 
 	public int getStartRow() {
 		return startRow;
@@ -393,21 +369,6 @@ public class QueryCustomerBaseInfo  {
 		this.pageSize = pageSize;
 	}
 
-	public String getCountryId() {
-		return countryId;
-	}
-
-	public void setCountryId(String countryId) {
-		this.countryId = countryId;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
 
 	public String getEnterpriseEmail() {
 		return enterpriseEmail;

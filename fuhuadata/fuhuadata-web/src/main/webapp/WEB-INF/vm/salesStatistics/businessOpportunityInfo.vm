@@ -108,6 +108,27 @@
                                     <div class="col-xs-2">
                                         <input  data-control="off" class="form-control" type="text" value="" id="estimatedPurchase0" disabled />
                                     </div>
+                                    <label class="col-xs-1 control-label">企业性质<sup class="not-null">*</sup></label>
+                                    <div class="col-xs-5">
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" name="check" class="suitableType cell_edit" value="1" data-text="工厂" disabled> 工厂
+                                        </label>
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" name="check" class="suitableType cell_edit" value="2" data-text="经销商" disabled> 经销商
+                                        </label>
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" name="check" class="suitableType cell_edit" value="3" data-text="分销商" disabled> 分销商
+                                        </label>
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" name="check" class="suitableType cell_edit" value="4" data-text="终端客户" disabled> 终端客户
+                                        </label>
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" name="check" class="suitableType cell_edit" id="other" value="5" data-text="其他" disabled> 其他
+                                        </label>
+                                        <label class="checkbox-inline">
+                                            <input class="form-control" type="text" id="otherEnterpriseNature" value="输入企业性质" disabled/>
+                                        </label>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-xs-1 control-label" lang="zh">意向产品2</label>
@@ -142,7 +163,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group ">
+                               #* <div class="form-group ">
                                     <label class="col-xs-1 control-label">企业性质<sup class="not-null">*</sup></label>
                                     <div class="col-xs-5">
                                         <label class="checkbox-inline">
@@ -165,7 +186,7 @@
                                         </label>
 
                                     </div>
-                                </div>
+                                </div>*#
                                 <div class="form-group">
                                     <label class="col-xs-1 control-label" lang="zh">商机描述</label>
                                     <div class="col-xs-8">
@@ -217,14 +238,7 @@
                                 </tr>
                                 </thead>
                                 <tbody id="businessfollow">
-                                <tr>
-                                    <td>1</td>
-                                    <td>获取客户联系人和联系方式</td>
-                                    <td>与联系人进行沟通约定时间洽谈</td>
-                                    <td>线索跟进</td>
-                                    <td>刘凯洋</td>
-                                    <td>2016-10-10 18:00</td>
-                                </tr>
+
                                 </tbody>
                             </table>
                         </div>
@@ -417,6 +431,18 @@
 
         if(result.businessInfo!=undefined){
             var ResultData = result.businessInfo;
+            var enterpriseNature = ResultData.enterpriseNature.split(',');
+
+            $.each(enterpriseNature,function(index,value){
+                $('input[name="check"]').each(function(){
+                    if($(this).val() == value){
+                        $(this).prop('checked',true);
+                        if(value == 4){
+                            $('#otherEnterpriseNature').val(ResultData.otherEnterpriseNature);
+                        }
+                    }
+                })
+            })
             if(ResultData.intentionalProducts != undefined){
                 var intentionalProducts = eval(ResultData.intentionalProducts);
                 $('#intentionalProduct0').val(intentionalProducts[0].intentionalProduct);
@@ -514,7 +540,8 @@
     }
 
     function resetForm() {
-        $('input,textarea,select',$('#Baseinfo')).val('');
+        $('input:not([type="checkbox"]),textarea,select',$('#Baseinfo')).val('');
+        $('input[type="checkbox"]',$('#Baseinfo')).val([]);
         $('#businessfollow').html('');
     }
 

@@ -77,7 +77,7 @@ public class CustomerBaseInfoServiceImpl implements CustomerBaseInfoService {
 		if(StringUtils.isNotBlank(customerBaseInfo.getArea())){
 			complete_num++;
 		}
-		if(StringUtils.isNotBlank(customerBaseInfo.getCountry())){
+		if(StringUtils.isNotBlank(customerBaseInfo.getCountryzone())){
 			complete_num++;
 		}
 		if(StringUtils.isNotBlank(customerBaseInfo.getFullEnterpriseNature())){

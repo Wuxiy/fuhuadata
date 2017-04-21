@@ -791,7 +791,7 @@ $(document).on("click",".updateFreight",function(){
         success:function(result){
             alert('修改成功');
             $('#modal').modal('hide');
-            location.reload();
+            /*location.reload();*/
         }
     })
 })

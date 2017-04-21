@@ -218,11 +218,13 @@
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">状态</label>
                             <div class="col-xs-2">
-                                <select class="form-control" id="status">
-                                    <option value="-1">报价失败</option>
-                                    <option value="0">报价中</option>
+                                <select class="form-control" id="status" disabled>
+                                    <option value="-2">报价失败</option>
+                                    <option value="-1">订单取消</option>
+                                    <option value="0" selected>报价中</option>
                                     <option value="1">已转化成订单</option>
                                     <option value="2">数据已上报到NC</option>
+                                    <option value="3">已签约</option>
                                 </select>
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">内部供货单位<sup class="not-null">*</sup></label>
@@ -233,8 +235,9 @@
                         <div class="form-group ">
                             <label class="col-xs-1 control-label">企业性质<sup class="not-null">*</sup></label>
                             <div class="col-xs-5">
+                                <input class="hidden" id="enterpriseNature" value="$!{businessInfo.businessInfo.enterpriseNature}">
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="check" class="suitableType cell_edit" value="0" data-text="工厂" disabled> 工厂
+                                    <input type="checkbox" name="check" id="1" class="suitableType cell_edit" value="0" data-text="工厂" disabled> 工厂
                                 </label>
                                 <label class="checkbox-inline">
                                     <input type="checkbox" name="check" class="suitableType cell_edit" value="1" data-text="经销商" disabled> 经销商
@@ -248,8 +251,9 @@
                                 <label class="checkbox-inline">
                                     <input type="checkbox" name="check" class="suitableType cell_edit" id="other" value="4" data-text="其他" disabled> 其他
                                 </label>
+                                <input class="hidden" id="otherEnterpriseNatureText" value="$!{businessInfo.businessInfo.otherEnterpriseNatureText}">
                                 <label class="checkbox-inline">
-                                    <input class="form-control" type="text" id="otherRemarks" value="输入企业性质" disabled/>
+                                    <input class="form-control" type="text" id="otherEnterpriseNature" value="输入企业性质" disabled/>
                                 </label>
 
                             </div>
@@ -285,9 +289,7 @@
                         <td class="text-center">勾选删除项</td>
                     </tr>
                     </thead>
-                    <tbody id="">
-
-                    </tbody>
+                    <tbody id=""></tbody>
                 </table>
             </div>
         </div>
@@ -326,6 +328,7 @@
 </script>
 
 <input id="orderId" type="hidden" value="$!{orderId}">
+<input id="customerId" type="hidden" value="$!{businessInfo.businessInfo.customerId}">
 <input id="code" type="hidden" value="">
 
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
@@ -333,9 +336,23 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript">
+    var customerId = $('#customerId').val();
     var orderId = $('#orderId').val();
     var businessId = $('#businessId').val();
-    console.log(businessId);
+    var enterpriseNature = $('#enterpriseNature').val();
+    console.log(customerId);
+    var otherEnterpriseNatureText = $('#otherEnterpriseNatureText').val();
+
+    /*$.each(enterpriseNature,function(index,value){
+        $("input[name='check']").each(function(){
+            if($(this).val() == value){
+                $(this).prop('checked',true);
+                if(value == 4){
+                    $('#otherEnterpriseNature').val(otherEnterpriseNatureText);
+                }
+            }
+        })
+    })*/
 
     $('#finish').click(function(){
         jQuery.ajax({
@@ -344,13 +361,15 @@
             contentType:"application/json",
             data:getOrder(),
             success:function (result) {
-                console.log(result);
+                var code = result.code;
+                $('#code').val(code);
             }
         })
     })
 
     function getOrder() {
         var data = {
+            "customerId":$('#customerId').val(),
             "orderId":$('#orderId').val(),
             "businessId":$('#businessId').val(),
             "customerName":$('#customerName').val(),
@@ -397,7 +416,11 @@
 
     //新增产品信息
     $('#Add').click(function(){
-        window.location.href = basePath + '/businessProduct/intoProductBasicInfoRequire?orderId=' + orderId;
+        if($('#code').val() != 1){
+            window.location.href = basePath + '/businessProduct/intoProductBasicInfoRequire?orderId=' + orderId;
+        }else{
+            alert('请先保存报价信息！');
+        }
     })
 
     function getenterpriseNature() {
