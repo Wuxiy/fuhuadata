@@ -40,6 +40,8 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
     private IncomeDao incomeDao;
     @Autowired
     private ProductInfoDao productInfoDao;
+    @Autowired
+    private ProductWareDao productWareDao;
     @Transactional
     public int addBusinessOrderProduct(BusinessOrderProduct businessOrderProduct,List<BusinessOrderProductComponent> businessOrderProductComponents) {
         try {
@@ -122,7 +124,13 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
 
     @Override
     public BusinessOrderProduct getBaiscById(int id) {
-        return businessOrderProductDao.getBaiscById(id);
+        BusinessOrderProduct businessOrderProduct = businessOrderProductDao.getBaiscById(id);
+        if(businessOrderProduct!=null){
+            ProductWare productWare = productWareDao.getProductWareById(businessOrderProduct.getWareId());
+            businessOrderProduct.setSpecification(productWare.getSpecification());
+            businessOrderProduct.setModel(productWare.getModel());
+        }
+        return businessOrderProduct;
     }
 
     @Override

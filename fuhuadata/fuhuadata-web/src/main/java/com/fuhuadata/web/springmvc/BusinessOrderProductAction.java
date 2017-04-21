@@ -175,11 +175,14 @@ public class BusinessOrderProductAction {
      * @return
      */
     @RequestMapping("/intoProductRequire")
-    public ModelAndView intoProductProcCompRequire(String orderId,Integer businessProductId ,Integer productRequireId,String customerId){
+    public ModelAndView intoProductProcCompRequire(String orderId,Integer businessProductId ,
+                                                   Integer productRequireId,String customerId,
+                                                   Integer edit){
         return new ModelAndView("salesStatistics/productProcCompRequire")
                 .addObject("orderId",orderId)
                 .addObject("productRequireId",productRequireId)
                 .addObject("customerId",customerId)
+                .addObject("edit",edit==null?0:edit)
                 .addObject("businessProductId",businessProductId);
     }
 
