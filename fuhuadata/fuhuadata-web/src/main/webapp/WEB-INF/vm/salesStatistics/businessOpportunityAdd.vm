@@ -1,4 +1,3 @@
-
 <div class="nav-deputy shadow-out clearfix">
     <ul class="breadcrumb pull-right">
         <li><span class="glyphicon glyphicon-map-marker"></span></li>
@@ -8,7 +7,8 @@
     <div class="row">
         <div class="col-xs-12">
             <!--基本信息-->
-            <div class="panel panel-default">
+            <form id="myForm" class="form-horizontal">
+                <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title" lang="zh">
                             基本信息
@@ -19,15 +19,20 @@
                             <div class="form-group ">
                                 <label class="col-xs-1 control-label" lang="zh">商机编号</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" type="text" value="${businessId}" id="businessId" disabled/>
+                                    <input class="form-control" type="text" value="${businessId}" id="businessId"
+                                           disabled/>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">商机名称<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">
+                                    商机名称<sup class="not-null">*</sup>
+                                </label>
                                 <div class="col-xs-2">
-                                    <input class="form-control notnull" type="text" value="" id="businessName"/>
+                                    <input class="form-control notnull" type="text" name="businessName" value=""
+                                           id="businessName" required/>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">商机来源<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">商机来源<sup
+                                    class="not-null">*</sup></label>
                                 <div class="col-xs-2">
-                                    <select class="form-control notnull" id="businessFrom">
+                                    <select class="form-control notnull" name="businessFrom" id="businessFrom">
                                         <option value="0" selected lang="zh">展会</option>
                                         <option value="1" lang="zh">门户网站</option>
                                         <option value="2" lang="zh">农药店考察</option>
@@ -39,10 +44,12 @@
 
                             </div>
                             <div class="form-group ">
-                                <label class="col-xs-1 control-label" lang="zh">客户名称<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">客户名称<sup
+                                    class="not-null">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input class="form-control notnull" type="text" value="" id="customerName" disabled/>
+                                        <input class="form-control notnull" type="text" name="customerName" value="" id="customerName"
+                                               readonly/>
                                         <div class="input-group-btn">
                                             <button class="btn btn-xs btn-default" type="button" id="customerModal">
                                                 <span class="glyphicon glyphicon-search"></span>
@@ -93,42 +100,48 @@
                             <div class="form-group">
                                 <label class="col-xs-1 control-label" lang="zh">意向产品1</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" type="text" value="" id="intentionalProduct0" />
+                                    <input class="form-control" type="text" value="" id="intentionalProduct0"/>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">预计采购量1</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" type="text" value="" id="estimatedPurchase0" />
+                                    <input class="form-control" type="text" value="" id="estimatedPurchase0"/>
                                 </div>
                                 <label class="col-xs-1 control-label">企业性质<sup class="not-null">*</sup></label>
                                 <div class="col-xs-5">
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="1" data-text="工厂" disabled> 工厂
+                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="1"
+                                               data-text="工厂" disabled> 工厂
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="2" data-text="经销商" disabled> 经销商
+                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="2"
+                                               data-text="经销商" disabled> 经销商
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="3" data-text="分销商" disabled> 分销商
+                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="3"
+                                               data-text="分销商" disabled> 分销商
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="4" data-text="终端客户" disabled> 终端客户
+                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="4"
+                                               data-text="终端客户" disabled> 终端客户
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="check" class="suitableType cell_edit" id="other" value="5" data-text="其他" disabled> 其他
+                                        <input type="checkbox" name="check" class="suitableType cell_edit" id="other"
+                                               value="5" data-text="其他" disabled> 其他
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input class="form-control" type="text" id="otherEnterpriseNature" value="输入企业性质" disabled/>
+                                        <input class="form-control" type="text" id="otherEnterpriseNature"
+                                               value="输入企业性质" disabled/>
                                     </label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-xs-1 control-label" lang="zh">意向产品2</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" type="text" value="" id="intentionalProduct1" />
+                                    <input class="form-control" type="text" value="" id="intentionalProduct1"/>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">预计采购量2</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" type="text" value="" id="estimatedPurchase1" />
+                                    <input class="form-control" type="text" value="" id="estimatedPurchase1"/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -141,7 +154,7 @@
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">预计截止日期</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" type="date" value="" id="deadline" />
+                                    <input class="form-control" type="date" value="" id="deadline"/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -154,30 +167,30 @@
                                     </select>
                                 </div>
                             </div>
-                            #*<div class="form-group ">
-                                <label class="col-xs-1 control-label">企业性质<sup class="not-null">*</sup></label>
-                                <div class="col-xs-5">
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="1" data-text="工厂" disabled> 工厂
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="2" data-text="经销商" disabled> 经销商
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="3" data-text="分销商" disabled> 分销商
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="check" class="suitableType cell_edit" value="4" data-text="终端客户" disabled> 终端客户
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="check" class="suitableType cell_edit" id="other" value="5" data-text="其他" disabled> 其他
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input class="form-control" type="text" id="otherRemarks" value="输入企业性质" disabled/>
-                                    </label>
+                        #*<div class="form-group ">
+                            <label class="col-xs-1 control-label">企业性质<sup class="not-null">*</sup></label>
+                            <div class="col-xs-5">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="check" class="suitableType cell_edit" value="1" data-text="工厂" disabled> 工厂
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="check" class="suitableType cell_edit" value="2" data-text="经销商" disabled> 经销商
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="check" class="suitableType cell_edit" value="3" data-text="分销商" disabled> 分销商
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="check" class="suitableType cell_edit" value="4" data-text="终端客户" disabled> 终端客户
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="check" class="suitableType cell_edit" id="other" value="5" data-text="其他" disabled> 其他
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input class="form-control" type="text" id="otherRemarks" value="输入企业性质" disabled/>
+                                </label>
 
-                                </div>
-                            </div>*#
+                            </div>
+                        </div>*#
                             <div class="form-group">
                                 <label class="col-xs-1 control-label" lang="zh">商机描述</label>
                                 <div class="col-xs-8">
@@ -201,6 +214,7 @@
                         </div>
                     </div>
                 </div>
+            </form>
         </div>
     </div>
 </div>
@@ -243,152 +257,181 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript" language="JavaScript">
-    
-    //获取客户modal列表
-    $('#customerModal').click(function(){
-        $('#Modal').modal('show');
-    })
 
-    $(document).on('click','#search',function () {
-        var customerList = document.getElementById('customerList');
-        var data = {
-            "fullName":$('#customerNameAdd').val()
-        }
-        jQuery.ajax({
-            url:basePath + '/customerBaseInfo/getCustomerBaseInfoByQuery',
-            contentType:"application/json",
-            data:JSON.stringify(data),
-            type:'POST',
-            success: function (result) {
-                var ResultData = eval(result.data);
-                for (var i = 0; i < ResultData.length; i++) {
-                    customerList.innerHTML += '<li class="list-group-item"><a class="cNode" data-id="'+ResultData[i].customerId+'">' + ResultData[i].fullName + '</a></li>';
+    $(document).ready(function () {
+        // 错误信息容器
+        $.validator.setDefaults({
+            errorElement: 'div'
+        });
+
+        // 错误信息提示工具
+        var em = function (txt, t, l) {
+            return '<div class="tooltip top in"' +
+                ' style="'+t+'; '+l+'; display: block; min-width: 50px;">' +
+                '<div class="tooltip-arrow" style="left: 50%; border-top-color: #ff524f"></div>' +
+                '<div class="tooltip-inner" style="background-color: #ff524f">'+txt+'</div>' +
+                '</div>';
+        };
+
+        var validator = $('#myForm').validate({
+            onfocusout: function (element) {
+                $(element).valid();
+            },
+            rules: {
+                businessName: 'required',
+                businessFrom: 'required',
+                customerName: 'required'
+            },
+            messages: {
+                businessName: {
+                    required: em('必填','top:-29px','right:0')
+                },
+                businessFrom: {
+                    required: em('必填','top:-29px','right:0')
+                },
+                customerName: {
+                    required: em('必填','top:-29px','right:0')
                 }
-                $('#Modal').modal('show');
-            }
-        })
-    })
-
-    $(document).on('click','a.cNode',function (e) {
-        e.preventDefault();
-        console.log(e.target);
-        var id = $(e.target).attr('data-id');
-        var tarEltext = $(e.target).text();
-        $('#customerName').val(tarEltext);
-        $('#customerName').attr('data-id',id);
-
-        $('#Modal').modal('hide');
-        jQuery.ajax({
-            url: basePath + '/customerBaseInfo/getCustomerBaseInfoLinkman?customerId=' + id,
-            type: 'POST',
-            contentType: "application/json",
-            success: function (result) {
-                var ResultData = result.data;
-                var enterpriseNature = ResultData.enterpriseNature.split(',');
-                $('#customerName').val(ResultData.fullName);
-                $('#country').val(ResultData.country);
-                $('#linkmanName').val(ResultData.linkmanName);
-                $('#linkPhone1').val(ResultData.linkPhone1);
-                $('#lemail').val(ResultData.lemail);
-                $('#zhongxinbaoLevel').val(ResultData.zhongxinbaoLevel);
-                $.each(enterpriseNature, function (index, value) {
-                    $("input[name='check']").each(function () {
-                        if ($(this).val() == value) {
-                            $(this).prop('checked', true);
-                            if (value == 4) {
-                                $('#otherEnterpriseNature').val(ResultData.otherEnterpriseNature);
-                            }
-                        }
-                    })
-                })
-            }
-        })
-    });
-
-    $(document).on('click','#add',function () {
-        /*var id = $('#customerNameAdd').attr('data-id');
-        if(id!=''){
-
-            })
-        }else {
-            alert('请先选择客户名称再新增！');
-        }*/
-    })
-    
-    $('#finishAdd').click(function () {
-        var url = basePath + '/businessInfo/doAddBusinessInfo';
-        var notnull = $('.notnull');
-        var submit_permit = true;
-        notnull.each(function () {
-            var val = $(this).val();
-            if(val == ''||val == null){
-                alert('请完善表单必填项');
-                submit_permit = false;
-                return false;
             }
         });
-        if(submit_permit){
-            var data = {
 
-                "businessName":$('#businessName').val(),
-                "businessId":$('#businessId').val(),
-                "businessFrom":$('#businessFrom').val(),
-                "businessState":$('#businessState').val(),
-
-                "customerId":$('#customerName').attr('data-id'),
-                "customerName":$('#customerName').val(),
-
-                "expectIncome":$('#expectIncome').val(),
-                "deadline":$('#deadline').val(),
-                "businessDescribe":$('#businessDescribe').val(),
-                "businessRemarks":$('#businessRemarks').val(),
-                "intentionalProducts":getintentionalProducts(),
-                "createUserId":1,
-                "createUserName":"杨洋",
-                "lastmodifyUserId":1,
-                "lastmodifyUserName":"杨洋",
-                "createTime":"2017-03-20 17:42:29",
-                "modifyTime":"2017-03-20 17:42:29"
-            };
-            console.log(data);
-            jQuery.ajax({
-                url:url,
-                type:'POST',
-                data:JSON.stringify(data),
-                dataType:"json",
-                contentType:"application/json",
-                success:function(result){
-                    if(result.code == 1){
-                        alert("新增成功!");
-                        location.reload();
-                    }else {
-                        alert("新增失败！");
-                    }
-                }
-            });
-        }
-    })
-
-    function getintentionalProducts() {
-        var data = [
-            {
-                "intentionalProduct":$('#intentionalProduct0').val(),
-                "estimatedPurchase":$('#estimatedPurchase0').val()
-            },
-            {
-                "intentionalProduct":$('#intentionalProduct1').val(),
-                "estimatedPurchase":$('#estimatedPurchase1').val()
-            }
-        ]
-        return JSON.stringify(data);
-    }
-
-    function getenterpriseNature() {
-        var arr = [];
-        $('input[name="check"]:checked').each(function(){
-            var val = $(this).val();
-            arr.push(val);
+        //获取客户modal列表
+        $('#customerModal').click(function () {
+            $('#Modal').modal('show');
         })
-        return arr;
-    }
+
+        $(document).on('click', '#search', function () {
+            var customerList = document.getElementById('customerList');
+            var data = {
+                "fullName": $('#customerNameAdd').val()
+            }
+            jQuery.ajax({
+                url: basePath + '/customerBaseInfo/getCustomerBaseInfoByQuery',
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                type: 'POST',
+                success: function (result) {
+                    var ResultData = eval(result.data);
+                    for (var i = 0; i < ResultData.length; i++) {
+                        customerList.innerHTML += '<li class="list-group-item"><a class="cNode" data-id="' + ResultData[i].customerId + '">' + ResultData[i].fullName + '</a></li>';
+                    }
+                    $('#Modal').modal('show');
+                }
+            })
+        })
+
+        $(document).on('click', 'a.cNode', function (e) {
+            e.preventDefault();
+            console.log(e.target);
+            var id = $(e.target).attr('data-id');
+            var tarEltext = $(e.target).text();
+            $('#customerName').val(tarEltext);
+            $('#customerName').attr('data-id', id);
+
+            $('#Modal').modal('hide');
+            jQuery.ajax({
+                url: basePath + '/customerBaseInfo/getCustomerBaseInfoLinkman?customerId=' + id,
+                type: 'POST',
+                contentType: "application/json",
+                success: function (result) {
+                    var ResultData = result.data;
+                    var enterpriseNature = ResultData.enterpriseNature.split(',');
+                    $('#customerName').val(ResultData.fullName);
+                    $('#country').val(ResultData.country);
+                    $('#linkmanName').val(ResultData.linkmanName);
+                    $('#linkPhone1').val(ResultData.linkPhone1);
+                    $('#lemail').val(ResultData.lemail);
+                    $('#zhongxinbaoLevel').val(ResultData.zhongxinbaoLevel);
+                    $.each(enterpriseNature, function (index, value) {
+                        $("input[name='check']").each(function () {
+                            if ($(this).val() == value) {
+                                $(this).prop('checked', true);
+                                if (value == 4) {
+                                    $('#otherEnterpriseNature').val(ResultData.otherEnterpriseNature);
+                                }
+                            }
+                        })
+                    })
+                }
+            })
+        });
+
+        $(document).on('click', '#add', function () {
+            /*var id = $('#customerNameAdd').attr('data-id');
+            if(id!=''){
+
+                })
+            }else {
+                alert('请先选择客户名称再新增！');
+            }*/
+        })
+
+        $('#finishAdd').click(function () {
+            var url = basePath + '/businessInfo/doAddBusinessInfo';
+            if (validator.form()) {
+                var data = {
+
+                    "businessName": $('#businessName').val(),
+                    "businessId": $('#businessId').val(),
+                    "businessFrom": $('#businessFrom').val(),
+                    "businessState": $('#businessState').val(),
+
+                    "customerId": $('#customerName').attr('data-id'),
+                    "customerName": $('#customerName').val(),
+
+                    "expectIncome": $('#expectIncome').val(),
+                    "deadline": $('#deadline').val(),
+                    "businessDescribe": $('#businessDescribe').val(),
+                    "businessRemarks": $('#businessRemarks').val(),
+                    "intentionalProducts": getintentionalProducts(),
+                    "createUserId": 1,
+                    "createUserName": "杨洋",
+                    "lastmodifyUserId": 1,
+                    "lastmodifyUserName": "杨洋",
+                    "createTime": "2017-03-20 17:42:29",
+                    "modifyTime": "2017-03-20 17:42:29"
+                };
+                console.log(data);
+                jQuery.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: JSON.stringify(data),
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (result) {
+                        if (result.code == 1) {
+                            alert("新增成功!");
+                            location.reload();
+                        } else {
+                            alert("新增失败！");
+                        }
+                    }
+                });
+            }
+        })
+
+        function getintentionalProducts() {
+            var data = [
+                {
+                    "intentionalProduct": $('#intentionalProduct0').val(),
+                    "estimatedPurchase": $('#estimatedPurchase0').val()
+                },
+                {
+                    "intentionalProduct": $('#intentionalProduct1').val(),
+                    "estimatedPurchase": $('#estimatedPurchase1').val()
+                }
+            ]
+            return JSON.stringify(data);
+        }
+
+        function getenterpriseNature() {
+            var arr = [];
+            $('input[name="check"]:checked').each(function () {
+                var val = $(this).val();
+                arr.push(val);
+            })
+            return arr;
+        }
+    });
+
 </script>
