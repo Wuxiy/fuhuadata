@@ -49,10 +49,11 @@ public class BusinessOrderProductAction {
      * @return
      */
     @RequestMapping("/intoProductBasicInfoRequire")
-    public ModelAndView intoProductBasicInfoRequire(String orderId,Integer businessProductId,Integer customerId){
+    public ModelAndView intoProductBasicInfoRequire(String orderId,Integer businessProductId,Integer customerId,Integer edit){
         return new ModelAndView("salesStatistics/productBasicInfoRequire")
                 .addObject("orderId",orderId)
                 .addObject("customerId",customerId)
+                .addObject("edit",edit==null?0:edit)
                 .addObject("businessProductId",businessProductId);
     }
 
@@ -290,11 +291,12 @@ public class BusinessOrderProductAction {
      * @return
      */
     @RequestMapping("intoDocumentary")
-    public ModelAndView intoDocumentary(String orderId,Integer businessProductId ,Integer productRequireId,Integer customerId){
+    public ModelAndView intoDocumentary(String orderId,Integer businessProductId ,Integer productRequireId,Integer customerId,Integer edit){
         return new ModelAndView("salesStatistics/billRequire")
                 .addObject("orderId",orderId)
                 .addObject("businessProductId",businessProductId)
                 .addObject("productRequireId",productRequireId)
+                .addObject("edit",edit==null?0:edit)
                 .addObject("customerId",customerId);
     }
 
@@ -340,11 +342,12 @@ public class BusinessOrderProductAction {
      * @return
      */
     @RequestMapping("intoPackageRequire")
-    public ModelAndView intoPackageRequire(String orderId,Integer businessProductId ,Integer productRequireId,Integer customerId){
+    public ModelAndView intoPackageRequire(String orderId,Integer businessProductId ,Integer productRequireId,Integer customerId,Integer edit){
         return new ModelAndView("salesStatistics/transportRequire")
                 .addObject("orderId",orderId)
                 .addObject("customerId",customerId)
                 .addObject("productRequireId",productRequireId)
+                .addObject("edit",edit==null?0:edit)
                 .addObject("businessProductId",businessProductId);
     }
 
