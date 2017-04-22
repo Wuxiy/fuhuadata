@@ -123,6 +123,7 @@
             convert_rate,price_type,advise_price,purchase_price,delivery_time,factory_id,factory_name,commission_price,
             tax_type,tax_free,other_cost,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time,
         unit_use_rate,capital_interest_price
+
         )
         values(
         #orderId#,#archiveProductId#,#productId#,#wareId#,#customsClearanceId#,#customsClearanceName#,#customerId#,#name#,
