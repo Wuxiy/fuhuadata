@@ -244,11 +244,11 @@
 
     <select id="GET-BY-ID" resultMap="BUSINESSINFOALL-MAP" parameterClass="java.lang.String">
         <![CDATA[
-                       SELECT
-                a.*, base.full_enterprise_nature,
-                base.customer_level,
+                      SELECT
+	                a.*, base.full_enterprise_nature,
+	                base.customer_level,
                 base.zhongxinbao_level,
-                base.country,
+                 tc.`name` country,
                 base.other_enterprise_nature,
                 base.enterprise_email,
                 base.enterprise_phone,
@@ -263,8 +263,9 @@
             LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
             LEFT JOIN customer_linkman b ON b.customer_id = a.customer_id
             LEFT JOIN customer_enterprise_nature nature ON nature.customer_id = a.customer_id
+            LEFT JOIN	t_countryzone tc ON tc.`code` = base.countryzone
             WHERE
-                business_id = #businessId#
+                business_id = 'sj201703230001'
             AND b.is_default = 1
     ]]>
     </select>
