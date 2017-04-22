@@ -7,70 +7,73 @@
 <div class="dashboard-wrapper">
     <div class="row">
         <div class="col-xs-12">
-    <!--表格开始-->
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            #if ($shiro.hasPermission("wiki:train:add"))
-                <button class="btn btn-xs btn-primary pull-right panel-heading-btn" href="" data-toggle="modal"
-                        data-target="#addTrain" data-keyboard="true">
-                    <span class="glyphicon glyphicon-plus"></span>
-                    新增
-                </button>
-            #end
-            <h3 class="panel-title">
-                营销培训
-            </h3>
-        </div>
-        <div class="panel-body clearfix">
-            <!--搜索框开始-->
-            <div class="form-horizontal">
-                <div class="form-group">
-                    <div class="col-xs-1 pull-right">
-                        <button type="button" class="btn btn-block btn-primary btn-xs">
-                            搜索
+            <!--表格开始-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    #if ($shiro.hasPermission("wiki:train:add"))
+                        <button class="btn btn-xs btn-primary pull-right panel-heading-btn" href="" data-toggle="modal"
+                                data-target="#addTrain" data-keyboard="true">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            新增
                         </button>
-                    </div>
-                    <div class="col-xs-2 pull-right">
-                        <input class="form-control" type="search" value="" placeholder="请输入标题"/>
-                    </div>
-                    <label class="col-xs-1 control-label pull-right">标题</label>
-                    <div class="col-xs-2 pull-right">
-                        <div class="input-group">
-                            <input class="form-control" type="search" value="" placeholder="请输入品类"/>
-                            <span class="input-group-btn">
-                                        <button data-toggle="modal" data-target="#search" class="btn btn-xs btn-default" type="button">
+                    #end
+                    <h3 class="panel-title">
+                        营销培训
+                    </h3>
+                </div>
+                <div class="panel-body clearfix">
+                    <!--搜索框开始-->
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-xs-1 pull-right">
+                                <button type="button" class="btn btn-block btn-primary btn-xs">
+                                    搜索
+                                </button>
+                            </div>
+                            <div class="col-xs-2 pull-right">
+                                <input class="form-control" type="search" value="" placeholder="请输入标题"/>
+                            </div>
+                            <label class="col-xs-1 control-label pull-right">标题</label>
+                            <div class="col-xs-2 pull-right">
+                                <div class="input-group">
+                                    <input class="form-control" type="search" value="" placeholder="请输入品类"/>
+                                    <span class="input-group-btn">
+                                        <button data-toggle="modal" data-target="#search" class="btn btn-xs btn-default"
+                                                type="button">
                                             <span class="glyphicon glyphicon-search"></span>
                                         </button>
                                     </span>
+                                </div>
+                            </div>
+                            <label class="col-xs-1 control-label pull-right">品类</label>
                         </div>
                     </div>
-                    <label class="col-xs-1 control-label pull-right">品类</label>
+                    <!--搜索框结束-->
+                    <!--表格开始-->
+                    <table id="markettrain_table" class="table table-condensed table-bordered table-striped text-center"
+                           cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th class="col-xs-1 text-center text-middle">编号</th>
+                            <th class="col-xs-4 text-center text-middle">标题</th>
+                            <th class="col-xs-2 text-center text-middle">产品种类</th>
+                            <th class="col-xs-2 text-center text-middle">上传人</th>
+                            <th class="col-xs-2 text-center text-middle">上传时间</th>
+                            <th class="col-xs-1 text-center text-middle">可否下载</th>
+                        </tr>
+                        </thead>
+
+                    </table>
+                    <!--表格结束-->
                 </div>
             </div>
-            <!--搜索框结束-->
-            <!--表格开始-->
-            <table id="markettrain_table" class="table table-condensed table-bordered table-striped text-center" cellspacing="0" width="100%">
-                <thead>
-                <tr>
-                    <th class="col-xs-1 text-center text-middle">编号</th>
-                    <th class="col-xs-4 text-center text-middle">标题</th>
-                    <th class="col-xs-2 text-center text-middle">产品种类</th>
-                    <th class="col-xs-2 text-center text-middle">上传人</th>
-                    <th class="col-xs-2 text-center text-middle">上传时间</th>
-                    <th class="col-xs-1 text-center text-middle">可否下载</th>
-                </tr>
-                </thead>
-
-            </table>
-            <!--表格结束-->
         </div>
-    </div>
-</div>
     </div>
 </div>
 
 <!--添加模态框开始 -->
-<div class="modal fade" id="addTrain" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="true">
+<div class="modal fade" id="addTrain" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+     data-keyboard="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -135,32 +138,33 @@
     </div>
 </div>
 
- <script type="text/javascript">
-     $(document).ready(function(){
+<script type="text/javascript">
+    $(document).ready(function () {
         $("#markettrain_table").dataTable({
-            "ajax":'${request.contextPath}/marketTraining/queryMarketTrainingList',
-            "pagingType":"full_numbers",
+            "ajax": '${request.contextPath}/marketTraining/queryMarketTrainingList',
+            "pagingType": "full_numbers",
             "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
-            "columns":[
-                 {"data":"tranId"},
-                 {"data":"title"},
-                 {"data":"productType"},
-                 {"data":"userName"},
-                 {"data":"uploadDate"},
-                 {"data":"download"}
-             ],
-            "columnDefs":[
-                 {
-                     "targets":5,
-                     "render":function (data,type,row,meta) {
-                         return '<a href="'+data+'" target="_blank">'+row.download+'</a>';
-                     }
-                 }
-             ],
+            "columns": [
+                {"data": "tranId"},
+                {"data": "title"},
+                {"data": "productType"},
+                {"data": "userName"},
+                {"data": "uploadDate"},
+                {"data": "download"}
+            ],
+            "columnDefs": [{
+                targets: "_all",
+                defaultContent: ''
+            }, {
+                "targets": 5,
+                "render": function (data, type, row, meta) {
+                    return '<a href="' + data + '" target="_blank">' + row.download + '</a>';
+                }
+            }],
             "language": {
-                 "url": '${request.contextPath}/lib/dataTables/lang/dataTables.lang.zh',
-                         "searchPlaceholder": '关键字'
-             }
-         })
-     })
- </script>
+                "url": '${request.contextPath}/lib/dataTables/lang/dataTables.lang.zh',
+                "searchPlaceholder": '关键字'
+            }
+        })
+    })
+</script>
