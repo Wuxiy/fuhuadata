@@ -48,6 +48,15 @@ public class CustomerBaseInfoVO {
 //    *国家,例如美国*
 //    private String country;
 
+    /**
+     * 销售组织id
+     */
+    private String  saleOrganizationId;
+    /**
+     * 销售组织
+     */
+    private String  saleOrganizationName;
+
     /**注册资金**/
     private String registeredFunds;
 
@@ -620,5 +629,21 @@ public class CustomerBaseInfoVO {
 
     public void setAreaId(String areaId) {
         this.areaId = areaId;
+    }
+
+    public String getSaleOrganizationId() {
+        return saleOrganizationId;
+    }
+
+    public void setSaleOrganizationId(String saleOrganizationId) {
+        this.saleOrganizationId = saleOrganizationId;
+    }
+
+    public String getSaleOrganizationName() {
+        return saleOrganizationName;
+    }
+
+    public void setSaleOrganizationName(String saleOrganizationName) {
+        this.saleOrganizationName = saleOrganizationName;
     }
 }

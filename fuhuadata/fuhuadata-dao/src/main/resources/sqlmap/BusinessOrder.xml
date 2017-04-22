@@ -434,6 +434,7 @@
 
     </insert>
 
+    <!--报价及订单详情页表头-->
     <select id="GET-BY-ID" resultMap="BUSINESSORDER-MAP" parameterClass="java.lang.String" >
         <![CDATA[
         select *  from business_order
@@ -441,6 +442,7 @@
     ]]>
     </select>
 
+    <!--更新报价单状态-->
     <update id="UPDATE-OFFER-STATUS" parameterClass="BusinessOrder">
         update business_order
         <dynamic prepend="set" >
@@ -478,6 +480,7 @@
             business_order a
         LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
         LEFT JOIN business_order_product b ON b.order_id = a.order_id
+        LEFT JOIN t_countryzone tc ON tc.`code` = base.countryzone
     ]]>
         <isNotEmpty prepend=", " property="enterpriseNature">
             (select * from customer_enterprise_nature where nature=#enterpriseNature#) nature
@@ -502,7 +505,7 @@
         a.sale_organization_name saleOrganizationName,
         a.nc_order_id ncOrderId,
         base.short_name customerName,
-        base.country country,
+        tc.`name` country,
         a.amount_payable amountPayable,
         a.floor_price floorPrice,
         a.is_complaint isComplaint,
@@ -513,6 +516,7 @@
         FROM
         business_order a
         LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
+        LEFT JOIN t_countryzone tc ON tc.`code` = base.countryzone
         <isNotEmpty prepend=", " property="enterpriseNature">
             (select * from customer_enterprise_nature where nature=#enterpriseNature#) nature
         </isNotEmpty>
@@ -595,6 +599,7 @@
     </sql>
 
 
+    <!--费用和利润统计列表-->
     <select id="COST-AND-PROFIT" remapResults="true" parameterClass="CostAndProfitStatistics" resultClass="CostAndProfitStatistics">
         <isEqual property="dimension" compareValue="2">
             <![CDATA[
@@ -602,7 +607,7 @@
                 base.customer_id customerId,
                 base.full_name customerName,
                 base.customer_level customerLevel,
-                base.country country,
+                tc.`name` country,
                 SUM(sc.amount) actualAmountPaid,
                 SUM(sc.gross_profit) grossProfit,
                 b.maintenance_fee maintenanceFee,
@@ -612,6 +617,7 @@
                 business_order a
             LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
             LEFT JOIN sync_contract sc ON sc.pk_longpro = a.nc_order_id
+            LEFT JOIN t_countryzone tc ON tc.`code` = base.countryzone
             LEFT JOIN (SELECT
                 cvr.customer_id,
                 SUM(cvr.activity_expense) maintenance_fee
@@ -669,7 +675,7 @@
              ]]>
         <isParameterPresent>
             <include refid="COST-PROFIT-QUERY-COMMON"/>
-            GROUP BY a.customer_id  ) cu
+            GROUP BY a.customer_id) cu
         </isParameterPresent>
     </select>
 
@@ -692,6 +698,7 @@
         </dynamic>
     </sql>
 
+    <!--费用统计列表-->
     <select id="PROFIT-STATISTICS" remapResults="true" parameterClass="CostAndProfitStatistics" resultClass="CostAndProfitStatistics">
         <isEqual property="dimension" compareValue="0">
             SELECT

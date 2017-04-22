@@ -82,7 +82,7 @@ public class CustomerBaseInfoAction {
     }
 
 
-    @RequestMapping(value = "/countCustomerList",method = RequestMethod.POST)
+    @RequestMapping("/countCustomerList")
     @SystemLogAnnotation(module = "customerInfo-customerList",methods = "countCustomerList")
     @ResponseBody
     public ResultPojo countCustomerList( QueryCustomerBaseInfo queryCustomerBaseInfo){

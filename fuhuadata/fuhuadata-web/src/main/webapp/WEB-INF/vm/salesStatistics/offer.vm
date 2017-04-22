@@ -158,6 +158,18 @@
         count++;
     %>
     <tr>
+<<<<<<< HEAD
+        <td></td>
+        <td><a href="${request.contextPath}/businessOrder/intoOfferorOrder?orderId=<%=data[i].orderId%>"><%=data[i].orderId%></a></td>
+        <td><a href="${request.contextPath}/businessOrder/intoBusinessOpportunityInfo?businessId=<%=data[i].businessId%>"><%=data[i].businessId%></a></td>
+        <td><%=data[i].customerName%></td>
+        <td lang="zh"><%=customerLevelList[data[i].customerLevel - 1]%></td>
+        <td lang="zh"><%=data[i].enterpriseNature%></td>
+        <td><%=data[i].amountPayable%></td>
+        <td><%=data[i].orderProduct%></td>
+        <%if ((data[i].status+2)!=2) {%>
+        <td lang="zh"><%=businessStateList[data[i].status + 2]%></td>
+=======
         <td><%=count%></td>
         <td><a href="${request.contextPath}/businessOrder/intoOfferorOrder?orderId=<%=data.info[i].orderId%>"><%=data.info[i].orderId%></a></td>
         <td><a href="${request.contextPath}/businessOrder/intoBusinessOpportunityInfo?orderId=<%=data.info[i].businessId%>"><%=data.info[i].businessId%></a></td>
@@ -168,6 +180,7 @@
         <td><%=data.info[i].orderProduct%></td>
         <%if ((data.info[i].status+2)!=2) {%>
         <td lang="zh"><%=businessStateList[data.info[i].status + 2]%></td>
+>>>>>>> 5062db68eb3df390c6365a53546f037aff92e2f1
         <%} else{%>
         <td lang="zh">
             <a data-toggle="dropdown" class="dropdown" href="#"><%=businessStateList[data.info[i].status + 2]%></a>

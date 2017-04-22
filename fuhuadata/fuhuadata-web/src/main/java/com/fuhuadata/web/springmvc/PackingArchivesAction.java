@@ -158,6 +158,7 @@ public class PackingArchivesAction {
                 return result.getResultPojo();
             }else{
                 String str = StringUtils.join(ids,",");
+                System.out.println(str+"111111111111111111");
                 packingArchives.setAssociatedPackingId(str);
                 result= packingArchivesService.updatePackingArchivesById(id,packingArchives);
                 return result.getResultPojo();
