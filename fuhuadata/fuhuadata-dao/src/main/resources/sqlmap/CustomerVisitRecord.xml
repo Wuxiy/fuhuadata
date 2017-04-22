@@ -70,12 +70,15 @@
 			<isNotNull prepend=" AND " property="activityType">
 			activity_type = #activityType#
 		</isNotNull>
-			<isNotEqual property="areaClassId" compareValue="0" prepend=" AND ">
-				base.customer_area_id = #areaClassId#
-				<isNotEqual property="areaId" compareValue="0" prepend=" AND ">
-					base.country_id = #areaId#
-				</isNotEqual>
-			</isNotEqual>
+			<!--<isNotEqual property="areaClassId" compareValue="0" prepend=" AND ">-->
+				<!--base.customer_area_id = #areaClassId#-->
+				<!--<isNotEqual property="areaId" compareValue="0" prepend=" AND ">-->
+					<!--base.country_id = #areaId#-->
+				<!--</isNotEqual>-->
+			<!--</isNotEqual>-->
+			<isNotNull property="areaId" prepend=" AND ">
+				base.customer_area_id in (#areaId#)
+			</isNotNull>
 			<isNotEmpty prepend=" AND " property="orderBy">
 				order by $orderBy$
 			</isNotEmpty>
