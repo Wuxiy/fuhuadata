@@ -328,8 +328,6 @@
 						<isNotEmpty prepend=", " property="saleOrganizationId">sale_organization_id = #saleOrganizationId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="saleOrganizationName">sale_organization_name = #saleOrganizationName#</isNotEmpty>
 
-						<isNotEmpty prepend=", " property="customerDutyParagraph">customer_duty_paragraph = #customerDutyParagraph#</isNotEmpty>
-
 					</dynamic>
 		WHERE customer_id=#customerId#
 	</update>
@@ -345,6 +343,7 @@
 		where customer_id = #customerId#
 	</delete>
 
+	<!--批量新增企业性质关联-->
 	<update id="BATCH-ADD-NATURE" parameterClass="java.util.List">
 		<![CDATA[
             INSERT INTO customer_enterprise_nature
@@ -385,6 +384,7 @@
 				customer_id=#customerId#
 	</select>
 
+	<!--商机新增客户选择列表-->
 	<select id="GET-BY-QUERY" resultClass="CustomerBaseInfo" parameterClass="QueryCustomerBaseInfo">
 		<![CDATA[
 						SELECT
@@ -399,6 +399,7 @@
         </isParameterPresent>
 	</select>
 
+	<!--百科新增-带过去的客户基本信息-->
 	<select id="GET-BY-ID" resultClass="CustomerBaseInfo" parameterClass="java.lang.String">
 		<![CDATA[
 			SELECT
@@ -420,6 +421,7 @@
 		]]>
 	</select>
 
+	<!--报价订单详情页客户信息map-->
 	<resultMap id="ORDER-CUSTOMER-MAP" class="CustomerBaseInfo">
 		<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="ncId" column="nc_id" jdbcType="VARCHAR" javaType="java.lang.String"/>
@@ -442,6 +444,7 @@
 		<result property="countryzone" column="countryzone" jdbcType="VARCHAR" javaType="java.lang.String"/>
 	</resultMap>
 
+	<!--报价订单根据客户id获取的报价订单客户信息-->
 	<select id="GET-BY-CUSTOMERID" resultMap="ORDER-CUSTOMER-MAP" parameterClass="java.lang.String">
 		<![CDATA[
 							SELECT
@@ -471,6 +474,7 @@
 	]]>
 	</select>
 
+	<!--商机新增-->
 	<select id="GET-BASEINFO-LINKMANINFO-BY-CUSTOMERID" resultClass="CustomerBaseInfoLinkman" parameterClass="java.lang.String">
 		<![CDATA[
 						SELECT
@@ -554,6 +558,7 @@
 		LIMIT #startRow#,#pageSize#
 	</select>
 
+	<!--客户信息详情页-->
 	<select id="GET-CUSTOMER-BASEINFO" resultClass="CustomerBaseInfoVO" parameterClass="java.lang.String">
 		<![CDATA[
 				SELECT
@@ -585,8 +590,8 @@
 			base.has_chi_purchase hasChiPurchase,
 			base.customer_status customerStatus,
 			base.loss_reason lossReason,
+			base.sale_organization_id saleOrganizationId,
 			base.sale_organization_name saleOrganizationName,
-
 			base.formatdoc,
 			base.timezone,
 			base.formatdoc,
