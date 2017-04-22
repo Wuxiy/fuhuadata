@@ -7,77 +7,79 @@
 <div class="dashboard-wrapper">
     <div class="row">
         <div class="col-xs-12">
-<!--表格开始-->
-<div class="panel panel-default">
-    <div class="panel-heading">
-        #if ($shiro.hasPermission("wiki:wiki:add"))
-        <a class="btn btn-xs btn-primary pull-right panel-heading-btn" href="${request.contextPath}/knowledgeBase/encyclopediaAdd" data-toggle="modal">
-            <span class="glyphicon glyphicon-plus"></span>
-            新增
-        </a>
-        #end
-        <h3 class="panel-title">
-            百科
-        </h3>
-    </div>
-    <div class="panel-body clearfix">
-        <!--搜索框开始-->
-        <div class="form-horizontal">
-            <div class="form-group ">
-                <div class="col-xs-2 pull-right">
-                    <input id="search" class="form-control" type="search" value="" placeholder="请输入关键词搜素"/>
+            <!--表格开始-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    #if ($shiro.hasPermission("wiki:wiki:add"))
+                        <a class="btn btn-xs btn-primary pull-right panel-heading-btn"
+                           href="${request.contextPath}/knowledgeBase/encyclopediaAdd" data-toggle="modal">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            新增
+                        </a>
+                    #end
+                    <h3 class="panel-title">
+                        百科
+                    </h3>
                 </div>
-                <label class="col-xs-1 control-label pull-left">企业类型</label>
-                <div class="col-xs-1 pull-left">
-                    <select class="form-control" id="type" onchange="selectType(this)">
-                        <option value="0">客户</option>
-                        <option value="1">竟对</option>
-                    </select>
+                <div class="panel-body clearfix">
+                    <!--搜索框开始-->
+                    <div class="form-horizontal">
+                        <div class="form-group ">
+                            <div class="col-xs-2 pull-right">
+                                <input id="search" class="form-control" type="search" value="" placeholder="请输入关键词搜素"/>
+                            </div>
+                            <label class="col-xs-1 control-label pull-left">企业类型</label>
+                            <div class="col-xs-1 pull-left">
+                                <select class="form-control" id="type" onchange="selectType(this)">
+                                    <option value="0">客户</option>
+                                    <option value="1">竟对</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!--搜索框结束-->
+                    <!--表格开始-->
+                    <table id="encyclopedia_table"
+                           class="table table-condensed table-bordered table-striped text-center" cellpadding="0">
+                        <thead>
+                        <tr>
+                            <th class="col-xs-1 text-center">编号</th>
+                            <th class="col-xs-3 text-center">企业全称</th>
+                            <th class="col-xs-1 text-center">企业简称</th>
+                            <th class="col-xs-1 text-center">企业类型</th>
+                            <th class="col-xs-1 text-center">完整度</th>
+                            <th class="col-xs-1 text-center">创建人</th>
+                            <th class="col-xs-1 text-center">创建时间</th>
+                            <th class="col-xs-1 text-center">最后编辑人</th>
+                            <th class="col-xs-2 text-center">最后编辑时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td><a href="encyclopedia_add.html">润丰</a></td>
+                            <td>竟对</td>
+                            <td>78%</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10</td>
+                            <td>刘凯洋</td>
+                            <td>2016-10-10</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!--表格结束-->
+
                 </div>
             </div>
         </div>
-        <!--搜索框结束-->
-        <!--表格开始-->
-        <table id="encyclopedia_table" class="table table-condensed table-bordered table-striped text-center" cellpadding="0">
-            <thead>
-            <tr>
-                <th class="col-xs-1 text-center">编号</th>
-                <th class="col-xs-3 text-center">企业全称</th>
-                <th class="col-xs-1 text-center">企业简称</th>
-                <th class="col-xs-1 text-center">企业类型</th>
-                <th class="col-xs-1 text-center">完整度</th>
-                <th class="col-xs-1 text-center">创建人</th>
-                <th class="col-xs-1 text-center">创建时间</th>
-                <th class="col-xs-1 text-center">最后编辑人</th>
-                <th class="col-xs-2 text-center">最后编辑时间</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>1</td>
-                <td><a href="encyclopedia_add.html">润丰</a></td>
-                <td><a href="encyclopedia_add.html">润丰</a></td>
-                <td>竟对</td>
-                <td>78%</td>
-                <td>刘凯洋</td>
-                <td>2016-10-10</td>
-                <td>刘凯洋</td>
-                <td>2016-10-10</td>
-            </tr>
-            </tbody>
-        </table>
-        <!--表格结束-->
-
-    </div>
-</div>
-</div>
     </div>
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function () {
         var table = $('#encyclopedia_table').DataTable({
-            "ajax":basePath + '/customerEncyclopedia/queryCustomerEncyclopediaList',
+            "ajax": basePath + '/customerEncyclopedia/queryCustomerEncyclopediaList',
             "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
             "lengthChange": false,//是否允许用户自定义显示数量
             "bPaginate": true, //翻页功能
@@ -86,32 +88,32 @@
             "ordering": true, //排序功能
             "Info": true,//页脚信息
             "autoWidth": true,//自动宽度
-            "pagingType":"full_numbers",
-            "columns":[
-                {"data":"encyId"},
-                {"data":"fullName"},
-                {"data":"shortName"},
-                {"data":"companyType"},
-                {"data":"isFull"},
-                {"data":"createUserName"},
-                {"data":"createTime"},
-                {"data":"lastmodifyUserName"},
-                {"data":"modifyTime"}
+            "pagingType": "full_numbers",
+            "columns": [
+                {"data": "encyId"},
+                {"data": "fullName"},
+                {"data": "shortName"},
+                {"data": "companyType"},
+                {"data": "isFull"},
+                {"data": "createUserName"},
+                {"data": "createTime"},
+                {"data": "lastmodifyUserName"},
+                {"data": "modifyTime"}
             ],
-            "columnDefs":[
-                {
-                    "targets":1,
-                    "render":function (data,type,row) {
-                        return '<a href=/customerEncyclopedia/modify?encyId='+row.encyId+'"target="_blank">'+row.fullName+'</a>';
-                    }
-                },
-                {
-                    "targets":3,
-                    "render":function (data,row) {
-                        return ''
-                    }
+            "columnDefs": [{
+                targets: "_all",
+                defaultContent: ''
+            }, {
+                "targets": 1,
+                "render": function (data, type, row) {
+                    return '<a href=/customerEncyclopedia/modify?encyId=' + row.encyId + '"target="_blank">' + row.fullName + '</a>';
                 }
-            ],
+            }, {
+                "targets": 3,
+                "render": function (data, row) {
+                    return ''
+                }
+            }],
             "language": {
                 "url": '${request.contextPath}/lib/dataTables/lang/dataTables.lang.zh',
                 "searchPlaceholder": '关键字'

@@ -161,9 +161,9 @@
         <%if(data instanceof Array){%>
         <%for(var i=0;i<data.length;i++){%>
         <tr>
-            <td><%=data[i].index%></td>
+            <td style="height: 35px"><%=data[i].index%></td>
             <td><%=data[i].value%></td>
-            <td><%=data[i].remarks%><button type="button" data-btn="del" data-target="tr" class="close">×</button></td>
+            <td><span><%=data[i].remarks%></span><button type="button" data-view="editView" data-btn="del" data-target="tr" class="close hidden">×</button></td>
         </tr>
         <%}%>
         <%}%>
@@ -219,7 +219,7 @@
 
 <script id="iItem" type="text/html">
     <tr>
-        <td></td>
+        <td style="height: 35px"></td>
         <td></td>
         <td><span></span><button type="button" data-view="editView" data-btn="del" data-target="tr" class="close">×</button></td>
     </tr>

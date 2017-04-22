@@ -8,94 +8,94 @@
 <div class="dashboard-wrapper">
     <div class="row">
         <div class="col-xs-12">
-    <!--表格开始-->
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            #if ($shiro.hasPermission("wiki:state:add"))
-            <a class="btn btn-xs btn-primary pull-right panel-heading-btn" href="${request.contextPath}/exhibitionInfo/addExhibitionInfo" data-toggle="modal">
-                <span class="glyphicon glyphicon-plus"></span>
-                新增
-            </a>
-            #end
-            <h3 class="panel-title">
-                展会动态
-            </h3>
-        </div>
-        <div class="panel-body clearfix">
-
             <!--表格开始-->
-            <table id="exhibition_table"  class="display table table-condensed table-bordered table-striped" cellspacing="0" width="100%">
-                <thead>
-                <tr>
-                    <th class="text-center text-middle">编号</th>
-                    <th class="col-xs-2 text-center text-middle" >展会名称</th>
-                    <th class="col-xs-1 text-center text-middle">主办方</th>
-                    <th class="col-xs-2 text-center text-middle">承办单位</th>
-                    <th class="text-center text-middle">国家</th>
-                    <th class="text-center text-middle">城市</th>
-                    <th class="col-xs-1 text-center text-middle">开始时间</th>
-                    <th class="col-xs-1 text-center text-middle">结束日期</th>
-                    <th class="col-xs-1 text-center text-middle">展会地址</th>
-                    <th class="col-xs-2 text-center text-middle">展会介绍</th>
-                    <th class="col-xs-1 text-center text-middle">展会介绍连接</th>
-                    <th class="text-center">创建人</th>
-                    <th class="col-xs-1 text-center text-middle">创建时间</th>
-                </tr>
-                </thead>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    #if ($shiro.hasPermission("wiki:state:add"))
+                        <a class="btn btn-xs btn-primary pull-right panel-heading-btn"
+                           href="${request.contextPath}/exhibitionInfo/addExhibitionInfo" data-toggle="modal">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            新增
+                        </a>
+                    #end
+                    <h3 class="panel-title">
+                        展会动态
+                    </h3>
+                </div>
+                <div class="panel-body clearfix">
 
-            </table>
-            <!--表格结束-->
-            <!--分页导航开始-->
+                    <!--表格开始-->
+                    <table id="exhibition_table" class="display table table-condensed table-bordered table-striped"
+                           cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th class="text-center text-middle">编号</th>
+                            <th class="col-xs-2 text-center text-middle">展会名称</th>
+                            <th class="col-xs-1 text-center text-middle">主办方</th>
+                            <th class="col-xs-2 text-center text-middle">承办单位</th>
+                            <th class="text-center text-middle">国家</th>
+                            <th class="text-center text-middle">城市</th>
+                            <th class="col-xs-1 text-center text-middle">开始时间</th>
+                            <th class="col-xs-1 text-center text-middle">结束日期</th>
+                            <th class="col-xs-1 text-center text-middle">展会地址</th>
+                            <th class="col-xs-2 text-center text-middle">展会介绍</th>
+                            <th class="col-xs-1 text-center text-middle">展会介绍连接</th>
+                            <th class="text-center">创建人</th>
+                            <th class="col-xs-1 text-center text-middle">创建时间</th>
+                        </tr>
+                        </thead>
+
+                    </table>
+                    <!--表格结束-->
+                    <!--分页导航开始-->
+                </div>
+            </div>
         </div>
-    </div>
-</div>
     </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
 
-        $('#exhibition_table').dataTable( {
+        $('#exhibition_table').dataTable({
 
-            "ajax":'${request.contextPath}/exhibitionInfo/queryExhibitionInfoList',
-            "pagingType":"full_numbers",
+            "ajax": '${request.contextPath}/exhibitionInfo/queryExhibitionInfoList',
+            "pagingType": "full_numbers",
             "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
-            "columns":[
-                {"data":"exhibitionId"},
-                {"data":"exhibitionName"},
-                {"data":"sponsor"},
-                {"data":"organizer"},
-                {"data":"country"},
-                {"data":"city"},
-                {"data":"startDate"},
-                {"data":"finishDate"},
-                {"data":"exhibitionAddr"},
-                {"data":"exhibitionInfo"},
-                {"data":"exhibitionLink"},
-                {"data":"creator"},
-                {"data":"createTime"}
+            "columns": [
+                {"data": "exhibitionId"},
+                {"data": "exhibitionName"},
+                {"data": "sponsor"},
+                {"data": "organizer"},
+                {"data": "country"},
+                {"data": "city"},
+                {"data": "startDate"},
+                {"data": "finishDate"},
+                {"data": "exhibitionAddr"},
+                {"data": "exhibitionInfo"},
+                {"data": "exhibitionLink"},
+                {"data": "creator"},
+                {"data": "createTime"}
             ],
-            "columnDefs":[
-
-                {
-                    "targets": 10,
-                    "render": function(data,type,row,meta){
-                        return '<a href="' + data + '" target="_blank">' + data + '</a>';
-                    }
-                },
-                {
-                    "targets": 1,
-                    "render": function(data,type,row,meta){
-                        return '<a href="${request.contextPath}/exhibitionInfo/modifyExhibitionInfo?id='+row.exhibitionId+'" target="_blank">' + data + '</a>';
-                    }
+            "columnDefs": [{
+                targets: '_all',
+                defaultContent: ''
+            }, {
+                "targets": 10,
+                "render": function (data, type, row, meta) {
+                    return '<a href="' + data + '" target="_blank">' + data + '</a>';
                 }
-
-            ],
+            }, {
+                "targets": 1,
+                "render": function (data, type, row, meta) {
+                    return '<a href="${request.contextPath}/exhibitionInfo/modifyExhibitionInfo?id=' + row.exhibitionId + '" target="_blank">' + data + '</a>';
+                }
+            }],
             "language": {
                 "url": '${request.contextPath}/lib/dataTables/lang/dataTables.lang.zh',
                 "searchPlaceholder": '关键字'
             }
-        } );
-    } );
+        });
+    });
 
 
 </script>

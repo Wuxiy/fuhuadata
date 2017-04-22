@@ -272,7 +272,7 @@ CRM.productArchivesList.getPhysicalProperitiesDataHandler = function () {
             obj = {
                 index   : item.find('td').eq(0).text(),
                 value   : item.find('td').eq(1).text(),
-                remarks : item.find('td').eq(2).text()
+                remarks : item.find('td').eq(2).find('span').text()
             };
         arr.push(obj);
     });
@@ -406,7 +406,17 @@ $(function () {
         }
     });
 
-    //
+    // 点击添加理化指标项
+    page.addItem = '#addiBodyItem';
+    $(document).on('click.add','#addiBodyItem',function () {
 
+        var item = $('#iItem').html();
+        $('#iBody').append(item);
+    });
 
+    // 点击删除理化指标
+    $(document).on('click.del','button[data-btn="del"]',function () {
+        var tarEl = $(this).data('target');
+        $(this).closest(tarEl).remove();
+    })
 });
