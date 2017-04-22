@@ -242,13 +242,14 @@
     </delete>
 
 
+    <!--商机转化表头客户信息-->
     <select id="GET-BY-ID" resultMap="BUSINESSINFOALL-MAP" parameterClass="java.lang.String">
         <![CDATA[
-                      SELECT
-	                a.*, base.full_enterprise_nature,
-	                base.customer_level,
+                SELECT
+	            a.*, base.full_enterprise_nature,
+	            base.customer_level,
                 base.zhongxinbao_level,
-                 tc.`name` country,
+                tc.`name` country,
                 base.other_enterprise_nature,
                 base.enterprise_email,
                 base.enterprise_phone,
@@ -265,7 +266,7 @@
             LEFT JOIN customer_enterprise_nature nature ON nature.customer_id = a.customer_id
             LEFT JOIN	t_countryzone tc ON tc.`code` = base.countryzone
             WHERE
-                business_id = 'sj201703230001'
+                business_id = #businessId#
             AND b.is_default = 1
     ]]>
     </select>
