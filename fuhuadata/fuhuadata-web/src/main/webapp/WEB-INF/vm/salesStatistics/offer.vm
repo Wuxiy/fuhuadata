@@ -93,6 +93,7 @@
                             <caption class="text-right"><span lang="zh">金额单位：万元</span></caption>
                             <thead>
                             <tr>
+                                <th class="text-center col-xs-1" lang="zh">编号</th>
                                 <th class="text-center col-xs-1" lang="zh">订单编号</th>
                                 <th class="text-center col-xs-1" lang="zh">商机编号</th>
                                 <th class="text-center col-xs-1" lang="zh">客户名称</th>
@@ -145,30 +146,34 @@
 
 ## 报价列表
 <script id="olC" type="text/html">
-    <%if (data.info.length instanceof Array) {%>
-    <%for (var i=0; i<data.length; i++) {
+    <%if (data.info instanceof Array) {
+        var count = data.pgs*data.pgn;
+        console.log(count);
+    %>
+    <%for (var i=0; i<data.info.length; i++) {
         var customerLevelList = ['战略客户','大客户' ,'重要客户' ,'一般客户' ,'风险客户'];
         var businessOpportunity = ['工厂','分销商' ,'经销商' ,'终端客户' ,'其他'];
         var businessStateList = ['报价失败','订单取消','报价中','已转化成订单','数据已上报到NC','已签约'];
-        var count = data.pgs*pg
+##        console.log(count);
+        count++;
     %>
     <tr>
-        <td></td>
-        <td><a href="${request.contextPath}/businessOrder/intoOfferorOrder?orderId=<%=data[i].orderId%>"><%=data[i].orderId%></a></td>
-        <td><a href="${request.contextPath}/businessOrder/intoBusinessOpportunityInfo?orderId=<%=data[i].businessId%>"><%=data[i].businessId%></a></td>
-        <td><%=data[i].customerName%></td>
-        <td lang="zh"><%=customerLevelList[data[i].customerLevel - 1]%></td>
-        <td lang="zh"><%=data[i].enterpriseNature%></td>
-        <td><%=data[i].amountPayable%></td>
-        <td><%=data[i].orderProduct%></td>
-        <%if ((data[i].status+2)!=2) {%>
-        <td lang="zh"><%=businessStateList[data[i].status + 2]%></td>
+        <td><%=count%></td>
+        <td><a href="${request.contextPath}/businessOrder/intoOfferorOrder?orderId=<%=data.info[i].orderId%>"><%=data.info[i].orderId%></a></td>
+        <td><a href="${request.contextPath}/businessOrder/intoBusinessOpportunityInfo?orderId=<%=data.info[i].businessId%>"><%=data.info[i].businessId%></a></td>
+        <td><%=data.info[i].customerName%></td>
+        <td lang="zh"><%=customerLevelList[data.info[i].customerLevel - 1]%></td>
+        <td lang="zh"><%=data.info[i].enterpriseNature%></td>
+        <td><%=data.info[i].amountPayable%></td>
+        <td><%=data.info[i].orderProduct%></td>
+        <%if ((data.info[i].status+2)!=2) {%>
+        <td lang="zh"><%=businessStateList[data.info[i].status + 2]%></td>
         <%} else{%>
         <td lang="zh">
-            <a data-toggle="dropdown" class="dropdown" href="#"><%=businessStateList[data[i].status + 2]%></a>
+            <a data-toggle="dropdown" class="dropdown" href="#"><%=businessStateList[data.info[i].status + 2]%></a>
             <ul class="dropdown-menu pull-right">
-                <li><a href="${request.contextPath}/businessOrder/intoBusinessOfferConverse?orderId=<%=data[i].orderId%>">转化</a></li>
-                <li><a data-val="<%=data[i].orderId%>" data-toggle="modal" href="#rModal">失败</a></li>
+                <li><a href="${request.contextPath}/businessOrder/intoBusinessOfferConverse?orderId=<%=data.info[i].orderId%>">转化</a></li>
+                <li><a data-val="<%=data.info[i].orderId%>" data-toggle="modal" href="#rModal">失败</a></li>
             </ul>
         </td>
         <%}%>
@@ -540,7 +545,7 @@
     function rederLiset(data,pageNum,pageSize){
 
         var ResultData = {
-                info:data,
+                info:data.data,
                 pgn:pageNum,
                 pgs:pageSize
             };

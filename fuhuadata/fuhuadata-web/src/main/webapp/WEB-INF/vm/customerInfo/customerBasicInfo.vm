@@ -34,7 +34,7 @@
                                 <label for="areaId" class=" control-label col-xs-1" lang="zh">地区分类<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input id="areaId" data-val="" data-control="off" disabled name="areaId" class="form-control">
+                                        <input id="areaId" data-val="" disabled name="areaId" class="form-control">
                                         <div class="input-group-btn">
                                             <button id="aISearch" class="btn btn-xs btn-default" data-control="on" type="button" data-toggle="modal" data-target="#cbtModal"><span class="glyphicon glyphicon-search"></span></button>
                                         </div>
@@ -68,6 +68,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                <label class="col-xs-1 control-label" for="customerDutyParagraph">客户税号</label>
+                                <div class="col-xs-2"><input id="customerDutyParagraph" data-control="on" disabled name="customerDutyParagraph" class="form-control" type="text"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-1" lang="zh">企业性质<sup data-view="editView" class="not-null hidden">*</sup></label>
@@ -96,8 +98,6 @@
                                         <input id="otherEnterpriceNature" data-control="off" disabled name="otherEnterpriceNature" class="form-inline form-control hidden" style="position:absolute;left:355px;" type="text" value="" placeholder="请输入企业性质" lang="zh"/>
                                     </span>
                                 </div>
-                                <label class="col-xs-1 control-label" for="customerDutyParagraph">客户税号</label>
-                                <div class="col-xs-2"><input id="customerDutyParagraph" data-control="on" disabled name="customerDutyParagraph" class="form-control" type="text"></div>
                             </div>
                             <div class="form-group">
                                 <label for="dataFormat" class="control-label col-xs-1" lang="zh">数据格式<sup data-view="editView" class="not-null hidden">*</sup></label>

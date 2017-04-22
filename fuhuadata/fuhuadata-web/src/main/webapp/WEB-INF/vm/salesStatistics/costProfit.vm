@@ -14,7 +14,7 @@
                         地区分类
                     </h3>
                 </div>
-                <div class="panel-body clearfix">
+                <div class="panel-body tree-container clearfix">
                     <!--树形菜单-->
                     <div class="zTreeDemoBackground left">
                         <ul id="areaTree" class="ztree"></ul>
@@ -33,32 +33,33 @@
                 <div class="panel-body clearfix">
                     <!--搜索&筛选控件-->
                     <div class="form-horizontal">
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <!--搜索栏-->
-                                <div class="input-group">
-                                    <span class="input-group-addon" lang="zh">客户名称</span>
-                                    <input class="form-control" id="customerName" />
-                                    <span class="input-group-addon" lang="zh">客户类型</span>
-                                    <select class="form-control" id="customerLevel">
-                                        <option value="" selected lang="zh">全部</option>
-                                        <option value="5" lang="zh">风险客户</option>
-                                        <option value="4" lang="zh">一般客户</option>
-                                        <option value="3" lang="zh">重要客户</option>
-                                        <option value="2" lang="zh">大客户</option>
-                                        <option value="1" lang="zh">战略客户</option>
-                                    </select>
-                                    <span class="input-group-addon" lang="zh">国家</span>
-                                    <input class="form-control" id="country" />
-                                    <span class="input-group-addon" lang="zh">开始时间</span>
-                                    <input class="form-control" id="startTime" />
-                                    <span class="input-group-addon" lang="zh">结束时间</span>
-                                    <input class="form-control" id="endTime" />
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-xs btn-primary" id="submit" type="button">搜索</button>
-                                    </div>
+                        <div class="form-group col-xs-10 pull-right">
+                            <!--搜索栏-->
+                            <form class="input-group">
+                                <span class="input-group-addon" lang="zh">客户名称</span>
+                                <input class="form-control" id="customerName" />
+                                <span class="input-group-addon" lang="zh">客户类型</span>
+                                <select class="form-control" id="customerLevel">
+                                    <option value="" selected lang="zh">全部</option>
+                                    <option value="5" lang="zh">风险客户</option>
+                                    <option value="4" lang="zh">一般客户</option>
+                                    <option value="3" lang="zh">重要客户</option>
+                                    <option value="2" lang="zh">大客户</option>
+                                    <option value="1" lang="zh">战略客户</option>
+                                </select>
+                                <span class="input-group-addon" lang="zh">国家</span>
+                                <input class="form-control" id="country" />
+                                <span class="input-group-addon" lang="zh">开始时间</span>
+                                <input class="form-control" type="date" id="startTime" />
+                                <span class="input-group-addon" lang="zh">结束时间</span>
+                                <input class="form-control" type="date" id="endTime" />
+                                <div class="input-group-btn">
+                                    <button class="btn btn-xs btn-default" id="resetBtn" type="reset">重置</button>
                                 </div>
-                            </div>
+                                <div class="input-group-btn">
+                                    <button class="btn btn-xs btn-primary" id="submit" type="button">搜索</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <!--表格-->
@@ -78,17 +79,17 @@
                         </tr>
                         </thead>
                         <tbody id="costProfitList">
-                        <tr>
-                            <td>00001</td>
-                            <td><a href="">草甘膦原药采购</a></td>
-                            <td>NUFARM</td>
-                            <td>战略客户</td>
-                            <td>经销商</td>
-                            <td>客户主要销售草甘膦系列产品，有原药采购需求</td>
-                            <td>门店考察</td>
-                            <td>80</td>
-                            <td>100</td>
-                        </tr>
+##                        <tr>
+##                            <td>00001</td>
+##                            <td><a href="">草甘膦原药采购</a></td>
+##                            <td>NUFARM</td>
+##                            <td>战略客户</td>
+##                            <td>经销商</td>
+##                            <td>客户主要销售草甘膦系列产品，有原药采购需求</td>
+##                            <td>门店考察</td>
+##                            <td>80</td>
+##                            <td>100</td>
+##                        </tr>
                         </tbody>
                         <tfoot>
                         <tr>
@@ -301,14 +302,19 @@
 //    }
 //
 
-
+//customerName:$('#customerName').val(),
+//customerLevel:$('#customerLevel').val(),
+//country:$('#country').val(),
+//startTime:$('#startTime').val(),
+//endTime:$('#endTime').val(),
+//salesManId:$('#salesManId').val()
 
 
 
 
     var pagesize = 4; // 分页步长
     var areaTreeData = []; // 保存树的数据
-    var customerLevelList = ['战略客户','大客户' ,'重要客户' ,'一般客户' ,'风险客户'];
+//    var customerLevelList = ['战略客户','大客户' ,'重要客户' ,'一般客户' ,'风险客户'];
     var areaId = ''; // 地区id
 
     $(function(){
@@ -358,7 +364,7 @@
                     customerId : thisEl.data('customerid')
                 })
             }).done(function (res) {
-                if (res) {
+                if (res.data) {
                     var data = res.data,
                             _html ='';
                     $('#myModal').find('tbody').html('');

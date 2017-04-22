@@ -596,9 +596,9 @@
                 _html += '<td>'+ResultData[i].businessId+'</td>';
                 _html += '<td><a href="'+basePath+'/businessInfo/intoBusinessOpportunityInfo?businessId='+ResultData[i].businessId+'">'+ResultData[i].businessName+'</a></td>';
                 _html += '<td>'+ResultData[i].customerName+'</td>';
-                _html += '<td lang="zh">'+customerLevelList[ResultData[i].customerLevel-1]+'</td>';
-                _html += '<td lang="zh">'+ResultData[i].enterpriseNature+'</td>';
-                _html += '<td>'+ResultData[i].createTime+'A</td>';
+                _html += '<td lang="zh">'+(ResultData[i].customerLevel!=undefined?customerLevelList[ResultData[i].customerLevel-1]:'')+'</td>';
+                _html += '<td lang="zh">'+(ResultData[i].enterpriseNature!=undefined?ResultData[i].enterpriseNature:'')+'</td>';
+                _html += '<td>'+ResultData[i].createTime+'</td>';
                 _html += '<td>'+ResultData[i].remainDays+'</td>';
                 _html += '<td lang="zh">'+businessFrom[ResultData[i].businessFrom]+'</td>';
                 _html += '<td lang="zh">'+ResultData[i].expectIncome+'</td>';
