@@ -85,6 +85,7 @@ CRM.cbInfo.collectData = function () {
         obj = {
             customerBaseInfo:{
                 areaId               : page.areaId.data('val'),
+                area                 : page.areaId.val(),
                 companyType          : page.companyType.val(),
                 customerId           : page.cid,
                 customerLevel        : page.customerLevel.val(),
@@ -113,14 +114,15 @@ CRM.cbInfo.collectData = function () {
                 remark               : page.remark.val(),
                 opportunitySource    : page.opportunitySource.val(),
                 fullEnterpriseNature : page.sCustomerEnterpriceNature(),
-                area                 : page.areaId.find(':selected').text(),
-                country              : page.areaId.find(':selected').text(),
+                // area                 : page.areaId.find(':selected').text(),
+                // country              : page.areaId.find(':selected').text(),
                 formatdoc            : page.formatdoc.val(),
                 custclass            : page.custclass.data('val'),
                 timezone             : page.timezone.data('val'),
                 countryzone          : page.countryzone.data('val'),
                 lossReason           : $('#reason').val(),
                 saleOrganizationId   : page.saleOrganizationName.data('val'),
+                saleOrganizationName : page.saleOrganizationName.val(),
                 customerDutyParagraph: page.customerDutyParagraph.val()
             },
             customerEnterpriceNatures : page.customerEnterpriceNatureObj(),
@@ -278,7 +280,8 @@ CRM.cbInfo.renderForm = function(data){
     var page = CRM.cbInfo,
         encyData = {};
 
-    if (data.areaId) { page.areaId.val(data.areaId);}
+    if (data.area) { page.areaId.val(data.area);}
+    if (data.areaId) { page.areaId.data('val',data.areaId);}
     if (data.companyType) { page.companyType.val(data.companyType);}
     if (data.customerType) { page.customerType.val(data.customerType);}
     if (data.customerId) { page.customerId.val(data.customerId);}
@@ -307,12 +310,7 @@ CRM.cbInfo.renderForm = function(data){
     if (data.managementScope) { page.managementScope.val(data.managementScope);}
 
     // 新加字段
-    if (page.formatdoc.val()==''){
-        if (data.formatdoc) { page.formatdoc.find('option').eq(0).val(data.formatdoc);} // 数据格式
-        if (data.formatdocName) { page.formatdoc.find('option').eq(0).text(data.formatdocName);}
-    }else {
-        if (data.formatdoc) { page.formatdoc.val(data.formatdoc);} // 数据格式
-    }
+    if (data.formatdoc) { page.formatdoc.val(data.formatdoc);} // 数据格式
     if (data.custclass) { page.custclass.data('val',data.custclass);} // 客户基本分类
     if (data.custclassName) { page.custclass.val(data.custclassName);}
     if (data.timezone) { page.timezone.data('val',data.timezone);} // 时区
@@ -623,6 +621,45 @@ CRM.cbInfo.renderCBTTree = function (data) {
     treeObj.expandAll(true); // 默认展开
 };
 
+
+// 给地区树添加点击事件
+CRM.cbInfo.areTreeClick = function (event, modLeftId, treeNode) {
+    var treeObj = $.fn.zTree.getZTreeObj('cbtTree'),
+        node = treeObj.getSelectedNodes()[0];
+
+    if (!node.isParent) {
+
+        $('#areaId').val(treeNode.name);
+        $('#areaId').data('val',treeNode.pkAreacl);
+        $('#cbtModal').modal('hide');
+
+    }else {
+        alert('请选择子节点');
+    }
+};
+
+// 渲染地区分类树
+CRM.cbInfo.renderAreaTree = function (data) {
+    var page = CRM.cbInfo;
+    setting = {
+        data: {
+            simpleData: {
+                enable: true,
+                idKey: "pkAreacl",
+                pIdKey: "pkFatherarea"
+            }
+        },
+        edit: {
+            enable: false
+        },
+        callback: {
+            onDblClick: page.areTreeClick
+        }
+    };
+
+    $.fn.zTree.init($('#cbtTree'), setting, data);
+};
+
 /**
  * 以下是实现
  */
@@ -665,8 +702,9 @@ $().ready(function() {
     page.cancel = $('#cancel');
     page.cancel.on('click.cancel',function () {
         page.togglePage(false);
+        page.renderPage();
         // page.renderPage(page.cid);
-        pForm.form();
+        // pForm.form();
     });
 
     // 工厂选中，经销商选中，其他选中
@@ -743,8 +781,9 @@ $().ready(function() {
                 contentType:"application/json",
                 method:'POST',
                 callback:function () {
-
-                    page.renderPageHandler(page.cid);
+                    page.resetForm();
+                    page.renderPage();
+                    // page.renderPageHandler(page.cid);
                 }
             });
 
@@ -772,19 +811,88 @@ $().ready(function() {
         return false;
     });
 
+    // 贸易国别，获取焦点时渲染下拉框
+    $('#commerceCountryS').on('focus.cc',function () {
 
-    // 时区下拉搜索框
+
+        CRM.ajaxCall({
+            url:'/customerBaseInfo/getCountryzone',
+            type:'POST',
+            contentType:'application/json',
+            data:JSON.stringify({
+                name:''
+            }),
+            callback:function (data) {
+                if (data) {
+                    CRM.tplHandler('tzC',data,$('#cc'));
+                }
+            }
+        });
+    });
+
+    // 贸易国别，改变值时，渲染下拉框
+    $('#commerceCountryS').on('input.cc',function () {
+
+        var obj = {
+            name:$(this).val()
+        };
+        $('#cc').html('');
+        CRM.ajaxCall({
+            url:'/customerBaseInfo/getCountryzone',
+            type:'POST',
+            contentType:'application/json',
+            data:JSON.stringify(obj),
+            callback:function (data) {
+                if (data) {
+                    CRM.tplHandler('tzC',data,$('#cc'));
+                }
+            }
+        });
+    });
+
+    // 贸易国别，失去焦点清空搜索框
+    $('#commerceCountryS').on('blur.cc',function () {
+
+        $(this).val('');
+    });
+
+    // 点击国别下拉菜单，将值添加到文本框
+    $('#cc').on('click.cc','a',function (e) {
+        var elVal = $(e.target).data('val'),
+            txt = $(e.target).text(),
+            tarInput = $('#commerceCountry');
+
+        tarInput.val(txt);
+        tarInput.data('val',elVal);
+        return false;
+    });
+
+    // 时区下拉搜索框,获取焦点查询所有数据
+    $('#timeZoneS').on('focus.tz',function () {
+
+        $('#tz').html('');
+        CRM.ajaxCall({
+            url:'/customerBaseInfo/getTimezone',
+            type:'POST',
+            contentType:'application/json',
+            data:JSON.stringify({
+                name:''
+            }),
+            callback:function (data) {
+                if (data) {
+
+                    CRM.tplHandler('tzC',data,$('#tz'));
+                }
+            }
+        });
+    });
+
+    // 时区下拉搜索框，根据值动态渲染数据
     $('#timeZoneS').on('input.tz',function () {
 
-        if ($(this).val()!='') {
-            var obj = {
-                name: $(this).val()
-            };
-        }else {
-            var obj = {
-                name:'UTC'
-            };
-        }
+        var obj = {
+            name: $(this).val()
+        };
 
         $('#tz').html('');
         CRM.ajaxCall({
@@ -801,40 +909,6 @@ $().ready(function() {
         });
     });
 
-
-    // 贸易国别下拉搜索框
-    $('#commerceCountryS').on('input.cc',function () {
-
-        if ($(this).val()!='') {
-            var obj = {
-                name:$(this).val()
-            };
-            $('#cc').html('');
-            CRM.ajaxCall({
-                url:'/customerBaseInfo/getCountryzone',
-                type:'POST',
-                contentType:'application/json',
-                data:JSON.stringify(obj),
-                callback:function (data) {
-                    if (data) {
-                        CRM.tplHandler('tzC',data,$('#cc'));
-                    }
-                }
-            });
-        }
-    });
-
-    // 点击国别下拉菜单，将值添加到文本框
-    $('#cc').on('click.cc','a',function (e) {
-        var elVal = $(e.target).data('val'),
-            txt = $(e.target).text(),
-            tarInput = $('#commerceCountry');
-
-        tarInput.val(txt);
-        tarInput.data('val',elVal);
-        return false;
-    });
-
     // 点击时区下拉菜单，将值添加到文本框
     $('#tz').on('click.cc','a',function (e) {
         var elVal = $(e.target).data('val'),
@@ -846,12 +920,27 @@ $().ready(function() {
         return false;
     });
 
+    // 时区下拉菜单，失去焦点时隐藏
+    $('#timeZoneS').on('blur.cc',function () {
+
+        $(this).val('');
+    });
+
     // 点击客户基本分类查找按钮，弹出树形菜单
     $('#cbtSearch').on('click.tree',function () {
         CRM.ajaxCall({
             url:'/customerBaseInfo/getCustclass',
             type:'GET',
             callback:page.renderCBTTree
+        })
+    });
+
+    // 点击地区分类查找按钮，弹出树形菜单
+    $('#aISearch').on('click.tree',function () {
+        CRM.ajaxCall({
+            url:'/customerBaseInfo/initAreaCategoryTree',
+            type:'GET',
+            callback:page.renderAreaTree
         })
     });
 
@@ -866,18 +955,12 @@ $().ready(function() {
                 contentType:"application/json",
                 method:'POST',
                 callback:function () {
-
-                    page.renderPageHandler(page.cid);
+                    page.resetForm();
+                    page.renderPage();
                 }
             });
 
         }
-    });
-
-    $('#dataFormat').on('click',function () {
-        $.ajax({
-
-        })
     });
 
     // 点击选择所属组织

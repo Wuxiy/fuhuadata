@@ -37,16 +37,25 @@ public class CustomerBaseInfoVO {
     private Integer companyType;
 
     /**地区id**/
-    private Integer areaId;
+    private String areaId;
 
     /**地区分类,例如北美洲**/
     private String area;
 
-    /**国家分类id**/
-    private String countryId;
+//    *国家分类id*
+//    private String countryId;
+//
+//    *国家,例如美国*
+//    private String country;
 
-    /**国家,例如美国**/
-    private String country;
+    /**
+     * 销售组织id
+     */
+    private String  saleOrganizationId;
+    /**
+     * 销售组织
+     */
+    private String  saleOrganizationName;
 
     /**注册资金**/
     private String registeredFunds;
@@ -248,13 +257,6 @@ public class CustomerBaseInfoVO {
         this.customerType = customerType;
     }
 
-    public Integer getAreaId() {
-        return areaId;
-    }
-
-    public void setAreaId(Integer areaId) {
-        this.areaId = areaId;
-    }
 
     public String getArea() {
         return area;
@@ -262,14 +264,6 @@ public class CustomerBaseInfoVO {
 
     public void setArea(String area) {
         this.area = area;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
     }
 
     public String getRegisteredFunds() {
@@ -548,13 +542,6 @@ public class CustomerBaseInfoVO {
         this.lossReason = lossReason;
     }
 
-    public String getCountryId() {
-        return countryId;
-    }
-
-    public void setCountryId(String countryId) {
-        this.countryId = countryId;
-    }
 
     public String getNcId() {
         return ncId;
@@ -634,5 +621,29 @@ public class CustomerBaseInfoVO {
 
     public void setCustomerDutyParagraph(String customerDutyParagraph) {
         this.customerDutyParagraph = customerDutyParagraph;
+    }
+
+    public String getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(String areaId) {
+        this.areaId = areaId;
+    }
+
+    public String getSaleOrganizationId() {
+        return saleOrganizationId;
+    }
+
+    public void setSaleOrganizationId(String saleOrganizationId) {
+        this.saleOrganizationId = saleOrganizationId;
+    }
+
+    public String getSaleOrganizationName() {
+        return saleOrganizationName;
+    }
+
+    public void setSaleOrganizationName(String saleOrganizationName) {
+        this.saleOrganizationName = saleOrganizationName;
     }
 }

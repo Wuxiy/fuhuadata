@@ -1,15 +1,14 @@
 package com.fuhuadata.web.action;
 
-import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.fuhuadata.domain.UserAccount;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.UserAccountQuery;
 import com.fuhuadata.service.UserAccountService;
 import com.fuhuadata.web.util.BaseAction;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import java.util.List;
 
 public class UserAccountAction extends BaseAction{
 	private final static Log log = LogFactory.getLog(UserAccountAction.class);
@@ -42,6 +41,7 @@ public class UserAccountAction extends BaseAction{
 	
 	/**
 	 * 添加用户信息
+     *
 	 * @return
 	 */
 	public String addUserAccount(){

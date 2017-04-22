@@ -19,7 +19,7 @@
 					<result property="saleOrganizationName" column="sale_organization_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="saleOrganizationId" column="sale_organization_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="customerType" column="customer_type" jdbcType="INT" javaType="java.lang.Integer" />
-					<result property="areaId" column="customer_area_id" jdbcType="INT" javaType="java.lang.Integer" />
+					<result property="areaId" column="customer_area_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="area" column="customer_area" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="registeredFunds" column="registered_funds" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="registeredAddress" column="registered_address" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -58,6 +58,7 @@
 					<result property="linkManEmail" column="link_man_email" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="otherEnterpriseNature" column="other_enterprise_nature" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="customerDutyParagraph" column="customer_duty_paragraph" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="countryzone" column="countryzone" jdbcType="VARCHAR" javaType="java.lang.String"/>
 
 	</resultMap>
 	
@@ -173,7 +174,7 @@
 			customer_type = #customerType#
 		</isNotEmpty>
 				<isNotEmpty prepend=" AND " property="areaId">
-					customer_area_id  in(#areaId#)
+					customer_area_id  in (#areaId#)
 		</isNotEmpty>
 				<isNotEmpty prepend=" AND " property="area">
 			customer_area = #area#
@@ -233,7 +234,7 @@
 	<insert id="ADD" parameterClass="CustomerBaseInfo">
 		insert into customer_base_info (nc_id, full_name,
 		short_name, company_type, customer_area_id,
-		customer_area, country_id, country,
+		customer_area,
 		full_enterprise_nature, other_enterprise_nature,
 		registered_funds, registered_address, management_scope,
 		zhongxinbao_number, zhongxinbao_level, enterprise_phone,
@@ -279,7 +280,7 @@
 						<isNotEmpty prepend=", " property="shortName">short_name=#shortName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="areaId">customer_area_id=#areaId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="area">customer_area=#area#</isNotEmpty>
-						<isNotEmpty prepend=", " property="country">country=#country#</isNotEmpty>
+						<!--<isNotEmpty prepend=", " property="country">country=#country#</isNotEmpty>-->
 						<isNotEmpty prepend=", " property="companyType">company_type=#companyType#</isNotEmpty>
 						<isNotEmpty prepend=", " property="otherEnterpriseNature">other_enterprise_nature=#otherEnterprieNature#</isNotEmpty>
 						<isNotEmpty prepend=", " property="registeredFunds">registered_funds=#registeredFunds#</isNotEmpty>
@@ -327,8 +328,6 @@
 						<isNotEmpty prepend=", " property="saleOrganizationId">sale_organization_id = #saleOrganizationId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="saleOrganizationName">sale_organization_name = #saleOrganizationName#</isNotEmpty>
 
-						<isNotEmpty prepend=", " property="customerDutyParagraph">customer_duty_paragraph = #customerDutyParagraph#</isNotEmpty>
-
 					</dynamic>
 		WHERE customer_id=#customerId#
 	</update>
@@ -344,6 +343,7 @@
 		where customer_id = #customerId#
 	</delete>
 
+	<!--批量新增企业性质关联-->
 	<update id="BATCH-ADD-NATURE" parameterClass="java.util.List">
 		<![CDATA[
             INSERT INTO customer_enterprise_nature
@@ -384,6 +384,7 @@
 				customer_id=#customerId#
 	</select>
 
+	<!--商机新增客户选择列表-->
 	<select id="GET-BY-QUERY" resultClass="CustomerBaseInfo" parameterClass="QueryCustomerBaseInfo">
 		<![CDATA[
 						SELECT
@@ -398,6 +399,7 @@
         </isParameterPresent>
 	</select>
 
+	<!--百科新增-带过去的客户基本信息-->
 	<select id="GET-BY-ID" resultClass="CustomerBaseInfo" parameterClass="java.lang.String">
 		<![CDATA[
 			SELECT
@@ -407,7 +409,7 @@
 				base.company_type companyType,
 				base.customer_area_id customerAreaId,
 				base.customer_area customerArea,
-				base.country country,
+				base.countryzone countryzone,
 				base.customer_level customerLevel,
 				GROUP_CONCAT(nature.nature) enterpriseNature,
 				ency.ency_id encyId
@@ -419,13 +421,14 @@
 		]]>
 	</select>
 
+	<!--报价订单详情页客户信息map-->
 	<resultMap id="ORDER-CUSTOMER-MAP" class="CustomerBaseInfo">
 		<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="ncId" column="nc_id" jdbcType="VARCHAR" javaType="java.lang.String"/>
 		<result property="fullName" column="full_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="shortName" column="short_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="customerType" column="customer_type" jdbcType="INT" javaType="java.lang.Integer" />
-		<result property="areaId" column="customer_area_id" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="areaId" column="customer_area_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="area" column="customer_area" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="registeredFunds" column="registered_funds" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="registeredAddress" column="registered_address" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -438,8 +441,10 @@
 		<result property="customerDutyParagraph" column="customer_duty_paragraph" jdbcType="VARCHAR" javaType="java.lang.String"/>
 		<result property="enterpriseNature" column="enterprise_nature" jdbcType="VARCHAR" javaType="java.lang.String"/>
 		<result property="otherEnterpriseNature" column="other_enterprise_nature" jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="countryzone" column="countryzone" jdbcType="VARCHAR" javaType="java.lang.String"/>
 	</resultMap>
 
+	<!--报价订单根据客户id获取的报价订单客户信息-->
 	<select id="GET-BY-CUSTOMERID" resultMap="ORDER-CUSTOMER-MAP" parameterClass="java.lang.String">
 		<![CDATA[
 							SELECT
@@ -450,8 +455,7 @@
 					base.customer_type,
 					base.customer_area_id,
 					base.customer_area,
-					base.country_id,
-					base.country,
+					base.countryzone,
 					base.registered_address,
 					base.registered_funds,
 					base.management_scope,
@@ -470,6 +474,7 @@
 	]]>
 	</select>
 
+	<!--商机新增-->
 	<select id="GET-BASEINFO-LINKMANINFO-BY-CUSTOMERID" resultClass="CustomerBaseInfoLinkman" parameterClass="java.lang.String">
 		<![CDATA[
 						SELECT
@@ -481,7 +486,7 @@
 				base.enterprise_email enterpriseEmail,
 				base.enterprise_phone enterprisePhone,
 				base.customer_area customerArea,
-				base.country country,
+				base.countryzone country,
 				base.customer_level customerLevel,
 				base.full_enterprise_nature fullEnterpriseNature,
 				a.linkman_id linkmanId,
@@ -507,7 +512,7 @@
 		base.customer_id   customerId,
 		base.full_name fullName,
 		base.short_name shortName,
-		base.country ,
+		base.countryzone,
 		base.customer_level customerLevel,
 		base.zhongxinbao_level zhongxinbaoLevel,
 		base.start_cooperation_time startCooperationTime,
@@ -547,12 +552,13 @@
 			nature.customer_id=base.customer_id
 		</isNotEmpty>
 		<isNotEmpty prepend="and" property="areaId">
-			customer_area_id in(#areaId#)
+			base.customer_area_id in (#areaId#)
 		</isNotEmpty>
 
 		LIMIT #startRow#,#pageSize#
 	</select>
 
+	<!--客户信息详情页-->
 	<select id="GET-CUSTOMER-BASEINFO" resultClass="CustomerBaseInfoVO" parameterClass="java.lang.String">
 		<![CDATA[
 				SELECT
@@ -584,7 +590,8 @@
 			base.has_chi_purchase hasChiPurchase,
 			base.customer_status customerStatus,
 			base.loss_reason lossReason,
-
+			base.sale_organization_id saleOrganizationId,
+			base.sale_organization_name saleOrganizationName,
 			base.formatdoc,
 			base.timezone,
 			base.formatdoc,
@@ -646,7 +653,7 @@
 			nature.customer_id=base.customer_id
 		</isNotEmpty>
 		<isNotEmpty prepend="and" property="areaId">
-			customer_area_id in(#areaId#)
+			customer_area_id in (#areaId#)
 		</isNotEmpty>
 	</select>
 

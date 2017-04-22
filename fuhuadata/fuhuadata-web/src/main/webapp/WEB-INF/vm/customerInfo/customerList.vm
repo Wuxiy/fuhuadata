@@ -264,7 +264,7 @@
 
                     smarty(nodes);
 
-                    areaId = arr.join(',');
+                    areaId = arr.join('\',\'');
                 } else {
 
                     areaId = treeNode.pkAreacl;
@@ -276,7 +276,7 @@
         }
 
 
-        console.log(areaId);
+//        console.log(areaId);
         serach();
     }
 
