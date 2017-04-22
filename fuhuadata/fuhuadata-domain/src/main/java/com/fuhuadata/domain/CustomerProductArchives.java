@@ -39,7 +39,7 @@ public class CustomerProductArchives {
 	private BigDecimal mainProductAmount;
 	
     /**主产品单位,0L,1KG**/
-	private Integer mainProductUnit;
+	private String mainProductUnit;
 	
     /**从产品数量**/
 	private BigDecimal subProductAmount;
@@ -425,11 +425,11 @@ public class CustomerProductArchives {
 		this.mainProductAmount = mainProductAmount;
 	}
 	
-	public Integer getMainProductUnit() {
+	public String getMainProductUnit() {
 		return mainProductUnit;
 	}
 	
-	public void setMainProductUnit(Integer mainProductUnit) {
+	public void setMainProductUnit(String mainProductUnit) {
 		this.mainProductUnit = mainProductUnit;
 	}
 	
