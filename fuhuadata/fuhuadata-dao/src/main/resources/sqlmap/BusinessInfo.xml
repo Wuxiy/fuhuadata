@@ -266,7 +266,7 @@
             LEFT JOIN customer_enterprise_nature nature ON nature.customer_id = a.customer_id
             LEFT JOIN	t_countryzone tc ON tc.`code` = base.countryzone
             WHERE
-                business_id = #businessId#
+                business_id = #value#
             AND b.is_default = 1
     ]]>
     </select>
