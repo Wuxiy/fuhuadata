@@ -231,6 +231,7 @@
 <input id="orderId" type="hidden" value="$!{orderId}">
 <input id="customerId" type="hidden" value="$!{customerId}">
 <input id="productRequireId" type="hidden" value="$!{productRequireId}">
+<input id="editId" type="hidden" value="$!{edit}">
 
 <script type="text/javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script type="text/javascript">
@@ -238,13 +239,14 @@
     var productRequireId = $('#productRequireId').val();
     var orderId = $('#orderId').val();
     var customerId = $('#customerId').val();
+    var editId = $('#editId').val();
 
     var bInfo = new CRM.module.Panel('#billRequiire');
     bInfo.startEdit();
     bInfo.startSave();
     bInfo.startCancel();
 
-    if(id!=''){
+    if(editId == 1&&id!=''){
         $('#back').removeClass('hidden');
         $('#edit').removeClass('hidden');
 

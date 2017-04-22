@@ -423,7 +423,7 @@
 <input id="orderId" type="hidden" value="$!{orderId}">
 <input id="customerId" type="hidden" value="$!{customerId}">
 <input id="productRequireId" type="hidden" value="$!{productRequireId}">
-<input id="editRequire" type="hidden" value="$!{edit}">
+<input id="editId" type="hidden" value="$!{edit}">
 
 <script type="text/javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
@@ -433,8 +433,8 @@
     var businessProductId = $('#businessProductId').val();
     var customerId = $('#customerId').val();
     var orderId = $('#orderId').val();
-    var editRequire = $('#editRequire').val();
-    console.log(editRequire);
+    var editId = $('#editId').val();
+    console.log(editId);
 
     var auxiliary = document.getElementById('auxiliary');
     var befond = document.getElementById('befond');
@@ -446,7 +446,7 @@
 
     $(function () {
 
-        if(id!=''){
+        if(editId == 1&&id!=''){
             $('#edit').removeClass('hidden');
             $('#back').removeClass('hidden');
 
@@ -611,13 +611,13 @@
 
                 }
             })
-        }else if(editRequire == 1&&id == ''){
+        }else if(editId == 1&&id == ''){
             $('#addback').removeClass('hidden');
             $('#addedit').removeClass('hidden');
 
             $('[data-target="#packModal"]').attr('disabled',false);
             $('.isdisabled').attr('disabled',false);
-        }else {
+        }else if(editId != 2&&editId != 2&&id == ''){
             $('#before').removeClass('hidden');
             $('#next').removeClass('hidden');
 

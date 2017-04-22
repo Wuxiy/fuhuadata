@@ -11,7 +11,7 @@
                 <div id="basicInfo" class="panel panel-default view-HD-lg">
                     <div class="panel-heading">
                         <div class="btn-group panel-heading-btn pull-right">
-                            <a class="btn btn-xs btn-default" data-view="editHide" id="back">返回</a>
+                            <a class="btn btn-xs btn-default hidden" data-view="editHide" id="back">返回</a>
                             <button id="edit" data-btn="edit" data-view="editHide" class="btn btn-xs btn-primary panel-heading-btn pull-right hidden" type="button" lang="zh">
                             编辑
                             </button>
@@ -297,6 +297,7 @@
 <input id="orderId" type="hidden" value="$!{orderId}">
 <input id="customerId" type="hidden" value="$!{customerId}">
 <input id="productRequireId" type="hidden" value="">
+<input id="editId" type="hidden" value="$!{edit}">
 
 <script type="text/javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
@@ -307,6 +308,7 @@
     var businessProductId = $('#businessProductId').val();
     var productRequireId = $('#productRequireId').val();
     var customerId = $('#customerId').val();
+    var editId = $('#editId').val();
 
     var productId = '';
     var wareId = '';
@@ -318,9 +320,10 @@
     bInfo.startCancel();
 
 
-    //若为查看产品要求详情businessProductId
-    if(businessProductId!=''){
+    //若为查看产品要求详情editId标识符为1；businessProductId不为空
+    if(editId == 1&&businessProductId != ''){
         $('#edit').removeClass('hidden');
+        $('#back').removeClass('hidden');
 
         jQuery.ajax({
             url:basePath + '/businessProduct/detailBaseInfo?businessProductId=' + businessProductId,
@@ -393,6 +396,7 @@
     } else{
         $('#resert').removeClass('hidden');
         $('#next').removeClass('hidden');
+
         $('button[name="search"]').attr('disabled',false);
         $('[data-target="on"]').removeClass('disabled');
         $('.isdisabled').attr('disabled',false);
