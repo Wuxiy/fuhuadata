@@ -24,6 +24,7 @@ CRM.productArchivesList.pTbody       = 'processingComponentsContent'; // 加工�
 CRM.productArchivesList.edit        = $('#edit');
 CRM.productArchivesList.save        = $('#save');
 CRM.productArchivesList.cancel      = $('#cancel');
+CRM.productArchivesList.addItem     = null;
 
 // 树数据
 CRM.productArchivesList.proTreeData = null;
@@ -404,5 +405,8 @@ $(function () {
             page.otherSaltName.val(''); // 如果没选中清除该文本框
         }
     });
+
+    //
+
 
 });
