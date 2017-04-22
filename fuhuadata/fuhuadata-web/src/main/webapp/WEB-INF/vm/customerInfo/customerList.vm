@@ -141,7 +141,7 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script type="text/javascript">
 
-    var pagesize = 4; // 分页步长
+    var pagesize = 10; // 分页步长
     var areaTreeData = []; // 保存树的数据
     var customerLevelList = ['战略客户','大客户' ,'重要客户' ,'一般客户' ,'风险客户'];
     var areaId = ''; // 地区id
