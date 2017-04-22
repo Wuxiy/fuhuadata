@@ -351,7 +351,7 @@ $('#finish_relate').on('click',function(){
 
     if(ids.length > 0){
         var msg = "确认要为主材添加这些关联吗？";
-        if(msg){
+        if(confirm(msg)){
             var url = basePath + '/packingArchives/addRelation?id=' + id;
             var data = ids;
             console.log(ids);
@@ -363,7 +363,9 @@ $('#finish_relate').on('click',function(){
                 data:JSON.stringify(data),
                 success:function(){
                     alert("添加关联成功！");
-
+                    $('#addField').modal('hide');
+                    location.reload();
+                    $('a[href="#Packrelate"]').tab('show');
                 }
             })
         }
