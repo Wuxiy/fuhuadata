@@ -149,7 +149,6 @@
 
 ## 理化指标
 <script id="physicalProperitiesContent" type="text/html">
-    <%if(data instanceof Array){%>
     <table id="iTable" class="table table-condensed table-bordered table-striped text-center">
         <thead>
         <tr>
@@ -158,26 +157,31 @@
             <th class="text-center col-xs-4" lang="zh">备注</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="pBody">
+        <%if(data instanceof Array){%>
         <%for(var i=0;i<data.length;i++){%>
         <tr>
-            <td data-editTd="no"><%=data[i].index%></td>
+            <td><%=data[i].index%></td>
             <td><%=data[i].value%></td>
-            <td><%=data[i].remarks%></td>
+            <td><%=data[i].remarks%><button type="button" data-btn="del" data-target="tr" class="close">×</button></td>
         </tr>
         <%}%>
+        <%}%>
+##        <tr><td colspan="3" data-editTd="no">暂无数据</td></tr>
         </tbody>
+        <tfoot  data-view="editView">
+            <tr><td colspan="3" data-editTd="no"><button data-btn="add" class="btn btn-xs btn-block btn-default" type="button">添加</button></td></tr>
+        </tfoot>
     </table>
-    <%}else if(typeof data == 'string'){%>
-    <textarea class="form-control" rows="3" data-control="off" disabled><%=data%></textarea>
-    <%}else{%>
-    <textarea class="form-control" rows="3" data-control="off" disabled>暂无数据</textarea>
-    <%}%>
+##    if(typeof data == 'string'){%>
+##    <textarea class="form-control" rows="3" data-control="off" disabled><%=data%></textarea>
+##    <%}else
+##    <textarea class="form-control" rows="3" data-control="off" disabled>暂无数据</textarea>
+
 </script>
 
 ## 加工成分
 <script id="processingComponentsContent" type="text/html">
-    <%if(data instanceof Array){%>
     <table id="pTable" class="table table-condensed table-bordered table-striped text-center">
         <thead>
         <tr>
@@ -187,7 +191,8 @@
             <th class="text-center col-xs-3" lang="zh">备注</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="pBody">
+        <%if(data instanceof Array){%>
         <%for(var i=0;i<data.length;i++){%>
         <tr>
             <td data-editTd="no" data-view="editView">
@@ -195,18 +200,34 @@
                     <label><input name="pc" type="checkbox" value="<%=data[i].componentId%>"></label>
                 </div>
             </td>
-            <td  data-editTd="no"><%=data[i].componentName%></td>
+            <td><%=data[i].componentName%></td>
             <td><%=data[i].consumption%></td>
-            <td></td>
+            <td><span></span><button type="button" data-view="editView" data-btn="del" data-target="tr" class="close">×</button></td>
         </tr>
         <%}%>
+        <%}%>
+##        <tr><td colspan="3" data-view="editHide" data-editTd="no">暂无数据</td></tr>
         </tbody>
+        <tfoot>
+        <tr><td colspan="4" data-view="editView" data-editTd="no"><button data-btn="add" class="btn btn-xs btn-block btn-default" type="button">添加</button></td></tr>
+        </tfoot>
     </table>
-    <%}else if(typeof data == 'string'){%>
-    <textarea class="form-control" rows="3" data-control="off" disabled><%=data%></textarea>
-    <%}else{%>
-    <textarea class="form-control" rows="3" data-control="off" disabled>暂无数据</textarea>
-    <%}%>
+
+##    if(typeof data == 'string'){%>
+##    <textarea class="form-control" rows="3" data-control="off" disabled><%=data%></textarea>
+##    <%}else
+
+##    <textarea class="form-control" rows="3" data-control="off" disabled>暂无数据</textarea>
+
+</script>
+
+
+<script id="pItem" type="text/html">
+    <tr>
+        <td></td>
+        <td></td>
+        <td><span></span><button type="button" data-view="editView" data-btn="del" data-target="tr" class="close">×</button></td>
+    </tr>
 </script>
 
 <input id="productId" type="hidden" value="">

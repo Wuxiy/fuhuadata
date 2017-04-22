@@ -404,9 +404,11 @@ CRM.editEl = function (el) {
         el.html('<input type="text" class="form-control" id="editInput" value="' + el.text() + '" />');
     }
 
-    el.find('input').focus();
-    el.find('input').select();
-    el.find('input').blur(function(){
+    // el.find('input').focus();
+    // el.find('input').select();
+    $('#editInput').focus();
+    $('#editInput').select();
+    $('#editInput').blur(function(){
 
         if (el.find('span').length==1){
 
