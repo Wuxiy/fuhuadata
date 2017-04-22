@@ -61,8 +61,8 @@
                                     </div>
                                     <label class="col-xs-1 control-label" lang="zh">客户类型</label>
                                     <div class="col-xs-2">
-                                        <select class="form-control" id="customerLevel" disabled>
-                                            <option value="" lang="zh">潜在客户</option>
+                                        <input class="form-control notnull" type="text" value="" id="customerLevelText" disabled />
+                                        <select class="form-control hidden" id="customerLevel" disabled>
                                             <option value="5" lang="zh">风险客户</option>
                                             <option value="4" lang="zh">一般客户</option>
                                             <option value="3" lang="zh">重要客户</option>
@@ -73,7 +73,8 @@
                                     <label class="col-xs-1 control-label" lang="zh">信用评级</label>
                                     <div class="col-xs-2">
                                         <select class="form-control" id="zhongxinbaoLevel" disabled>
-                                            <option value="4" selected lang="zh">AAAA</option>
+                                            <input class="form-control notnull" type="text" value="" id="zhongxinbaoLevelText" disabled />
+                                            <option value="4" lang="zh">AAAA</option>
                                             <option value="3" lang="zh">AAA</option>
                                             <option value="2" lang="zh">AA</option>
                                             <option value="1" lang="zh">A</option>
@@ -459,8 +460,12 @@
             $('#businessState').val(ResultData.businessState);
             $('#customerName').val(ResultData.customerName);
             $('#enterpriseNature').val(ResultData.enterpriseNature);
-            $('#customerLevel').val(customerLevelList[ResultData.customerLevel]);
-            $('#zhongxinbaoLevel').val(zhongxinbaoLevelList[ResultData.zhongxinbaoLevel]);
+            $('#customerLevel').val(ResultData.customerLevel);
+            $('#zhongxinbaoLevel').val(ResultData.zhongxinbaoLevel);
+
+            $('#customerLevelText').val($('#customerLevel').text());
+            $('#zhongxinbaoLevelText').val($('#zhongxinbaoLevel').text());
+
             $('#country').val(ResultData.country);
             $('#name').val(ResultData.linkmanName);
             $('#customerLevel').val(ResultData.customerLevel);

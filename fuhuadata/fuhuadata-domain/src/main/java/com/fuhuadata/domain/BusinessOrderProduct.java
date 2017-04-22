@@ -44,7 +44,7 @@ public class BusinessOrderProduct {
     private BigDecimal mainProductAmount;
 
     /**主产品单位**/
-    private Integer mainProductUnit;
+    private String mainProductUnit;
 
     /**辅产品数量**/
     private BigDecimal subProductAmount;
@@ -377,14 +377,6 @@ public class BusinessOrderProduct {
 
     public void setMainProductAmount(BigDecimal mainProductAmount) {
         this.mainProductAmount = mainProductAmount;
-    }
-
-    public Integer getMainProductUnit() {
-        return mainProductUnit;
-    }
-
-    public void setMainProductUnit(Integer mainProductUnit) {
-        this.mainProductUnit = mainProductUnit;
     }
 
     public BigDecimal getSubProductAmount() {
@@ -721,5 +713,13 @@ public class BusinessOrderProduct {
 
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
+    }
+
+    public String getMainProductUnit() {
+        return mainProductUnit;
+    }
+
+    public void setMainProductUnit(String mainProductUnit) {
+        this.mainProductUnit = mainProductUnit;
     }
 }

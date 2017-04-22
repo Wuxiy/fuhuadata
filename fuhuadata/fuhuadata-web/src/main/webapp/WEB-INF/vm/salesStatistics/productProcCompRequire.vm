@@ -11,14 +11,21 @@
                 <div id="productRequire" class="panel panel-default view-HD-lg">
                     <div class="panel-heading">
                         <div class="btn-group panel-heading-btn pull-right">
-                            <a class="btn btn-xs btn-default hidden" data-view="editHide" id="editback">返回</a>
+                            <a class="btn btn-xs btn-default hidden" data-view="editHide" onclick="back()" id="editback">返回</a>
                             <button id="addedit" data-btn="edit" data-view="editHide" class="btn btn-xs btn-primary panel-heading-btn pull-right hidden" type="button" lang="zh">
                                 完成
                             </button>
 
                         </div>
                         <div class="btn-group panel-heading-btn pull-right">
-                            <a class="btn btn-xs btn-default hidden" data-view="editHide" id="back">返回</a>
+                            <a class="btn btn-xs btn-default hidden" data-view="editHide" onclick="back()" id="infoback">返回</a>
+                            <button id="infoedit" data-btn="edit" data-view="editHide" class="btn btn-xs btn-primary panel-heading-btn pull-right hidden" type="button" lang="zh">
+                                完成
+                            </button>
+
+                        </div>
+                        <div class="btn-group panel-heading-btn pull-right">
+                            <a class="btn btn-xs btn-default hidden" data-view="editHide" onclick="back()" id="back">返回</a>
                             <button id="edit" data-btn="edit" data-view="editHide" class="btn btn-xs btn-primary panel-heading-btn pull-right hidden" type="button" lang="zh">
                                 编辑
                             </button>
@@ -43,7 +50,7 @@
                                     <div class="input-group">
                                         <input id="mainPackingType" class="form-control" type="text" value="" disabled/>
                                         <div class="input-group-btn">
-                                            <button data-toggle="modal" data-target="#packModal" class="btn btn-xs btn-default" disabled>
+                                            <button data-control="on" data-toggle="modal" data-target="#packModal" class="btn btn-xs btn-default" disabled>
                                                 <span class="glyphicon glyphicon-search"></span></button>
                                         </div>
                                     </div>
@@ -434,6 +441,7 @@
     var customerId = $('#customerId').val();
     var orderId = $('#orderId').val();
     var editRequire = $('#editRequire').val();
+    console.log(editRequire);
 
     var auxiliary = document.getElementById('auxiliary');
     var befond = document.getElementById('befond');
@@ -606,7 +614,7 @@
                     }
                 }
             })
-        }else if(editRequire == 1&&id != ''){
+        }else if(editRequire == 1&&id == ''){
             $('#addback').removeClass('hidden');
             $('#addedit').removeClass('hidden');
 
@@ -964,7 +972,39 @@
         })
     })
 
-    $('#back').click(function(){
-        window.location.href = basePath + '/businessProduct/intoProductBasicInfoRequire?businessProductId=' + businessProductId + '&&customerId=' + customerId + '&&orderId=' + orderId + '&&productRequireId' + id;
+    $('#addedit').click(function(){
+        var isup = true;
+        var notnull = $('.notnull');
+        notnull.each(function () {
+            var val = $(this).val();
+            if(val == ''||val == null){
+                alert('请完善表单!');
+                isup = false;
+                return false;
+            }
+        });
+
+        jQuery.ajax({
+            url:basePath + '/businessProduct/saveProductRequire',
+            type:'POST',
+            /*contentType:"application/json",*/
+            data:Add(),
+            success:function (result) {
+                console.log(result);
+                if(result == true){
+                    alert('新增成功!');
+                }
+
+            }
+        })
     })
+
+    /*$('#infoedit').click(function(){
+
+    })*/
+
+    function back() {
+        window.location.href = basePath + '/businessOrder/intoOfferorOrder?orderId=' + orderId;
+    }
+
 </script>
