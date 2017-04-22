@@ -275,9 +275,11 @@ public class BusinessOrderProductAction {
                 businessProductRequireService.updateProductRequire(businessProductRequire);
             }
             result.put("businessProductRequireId",businessProductRequireId);
+            result.put("success",true);
             return result;
         } catch (Exception e) {
             log.error("保存产品要求错误：" + e.getMessage());
+            result.put("success",false);
         }
         return result;
     }
