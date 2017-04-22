@@ -59,8 +59,8 @@
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">客户类型</label>
                                 <div class="col-xs-2">
-                                    <select class="form-control" id="customerLevel" disabled>
-                                        <option value="" lang="zh">潜在客户</option>
+                                    <input class="form-control notnull" type="text" value="" id="customerLevelText" disabled />
+                                    <select class="form-control hidden" id="customerLevel" disabled>
                                         <option value="5" lang="zh">风险客户</option>
                                         <option value="4" lang="zh">一般客户</option>
                                         <option value="3" lang="zh">重要客户</option>
@@ -70,7 +70,8 @@
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">信用评级</label>
                                 <div class="col-xs-2">
-                                    <select class="form-control" id="zhongxinbaoLevel" disabled>
+                                    <input class="form-control notnull" type="text" value="" id="zhongxinbaoLevelText" disabled />
+                                    <select class="form-control hidden" id="zhongxinbaoLevel" disabled>
                                         <option value="4" lang="zh">AAAA</option>
                                         <option value="3" lang="zh">AAA</option>
                                         <option value="2" lang="zh">AA</option>
@@ -335,23 +336,31 @@
                 contentType: "application/json",
                 success: function (result) {
                     var ResultData = result.data;
-                    var enterpriseNature = ResultData.enterpriseNature.split(',');
+
                     $('#customerName').val(ResultData.fullName);
                     $('#country').val(ResultData.country);
                     $('#linkmanName').val(ResultData.linkmanName);
                     $('#linkPhone1').val(ResultData.linkPhone1);
                     $('#lemail').val(ResultData.lemail);
                     $('#zhongxinbaoLevel').val(ResultData.zhongxinbaoLevel);
-                    $.each(enterpriseNature, function (index, value) {
-                        $("input[name='check']").each(function () {
-                            if ($(this).val() == value) {
-                                $(this).prop('checked', true);
-                                if (value == 4) {
-                                    $('#otherEnterpriseNature').val(ResultData.otherEnterpriseNature);
+
+                    $('#customerLevelText').val($('#customerLevel').text());
+                    $('#zhongxinbaoLevelText').val($('#zhongxinbaoLevel').text());
+
+                    if(ResultData.enterpriseNature!=undefined){
+                        var enterpriseNature = ResultData.enterpriseNature.split(',');
+                        $.each(enterpriseNature, function (index, value) {
+                            $("input[name='check']").each(function () {
+                                if ($(this).val() == value) {
+                                    $(this).prop('checked', true);
+                                    if (value == 4) {
+                                        $('#otherEnterpriseNature').val(ResultData.otherEnterpriseNature);
+                                    }
                                 }
-                            }
+                            })
                         })
-                    })
+                    }
+
                 }
             })
         });

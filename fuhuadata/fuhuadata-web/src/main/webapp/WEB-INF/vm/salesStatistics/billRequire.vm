@@ -252,98 +252,102 @@
             url:basePath + '/businessProduct/getDocumentary?businessProductId=' + id,
             type:'POST',
             success:function(result){
-                var documentaryRequire = eval(result.documentaryRequire);
-                $('#documentaryType').val(result.documentaryType);
-                $('#otherDocumentaryRequire').val(result.otherDocumentaryRequire);
-
-                if(documentaryRequire.reportCompanyTitle!=undefined){
-                    $('#reportCompanyTitle').val(documentaryRequire.reportCompanyTitle);
-                }
-                if(documentaryRequire.releaseDestination!=undefined){
-                    $('#releaseDestination').val(documentaryRequire.releaseDestination);
-                }
-                if(documentaryRequire.oceanBillOfLading!=undefined&&documentaryRequire.oceanBillOfLading == 1){
-                    $('#oceanBillOfLading').attr('checked',true);
-                }
-                if(documentaryRequire.freightForwardingBill!=undefined&&documentaryRequire.freightForwardingBill == 1){
-                    $('#freightForwardingBill').attr('checked',true);
-                }
-                if(documentaryRequire.invoice!=undefined&&documentaryRequire.invoice == 1){
-                    $('#invoice').attr('checked',true);
-                }
-                if(documentaryRequire.packingList!=undefined&&documentaryRequire.packingList == 1){
-                    $('#packingList').attr('checked',true);
-                }
-                if(documentaryRequire.qualityTestingReport!=undefined&&documentaryRequire.qualityTestingReport == 1){
-                    $('#qualityTestingReport').attr('checked',true);
-                }
-                if(documentaryRequire.guaranteeSlip!=undefined&&documentaryRequire.guaranteeSlip == 1){
-                    $('#guaranteeSlip').attr('checked',true);
-                }
-                if(documentaryRequire.dangerousCertificate!=undefined&&documentaryRequire.dangerousCertificate == 1){
-                    $('#dangerousCertificate').attr('checked',true);
-                }
-                if(documentaryRequire.beneficiaryCertification!=undefined&&documentaryRequire.beneficiaryCertification == 1){
-                    $('#beneficiaryCertification').attr('checked',true);
-                }
-                if(documentaryRequire.fumigationCertificate!=undefined&&documentaryRequire.fumigationCertificate == 1){
-                    $('#fumigationCertificate').attr('checked',true);
-                }
-                if(documentaryRequire.msds!=undefined&&documentaryRequire.msds == 1){
-                    $('#msds').attr('checked',true);
-                }
-                if(documentaryRequire.bankBill!=undefined&&documentaryRequire.bankBill == 1){
-                    $('#bankBill').attr('checked',true);
-                }
-                if(documentaryRequire.examiningReport!=undefined&&documentaryRequire.examiningReport == 1){
-                    $('#examiningReport').attr('checked',true);
-                }
-                if(documentaryRequire.packingDeclaration!=undefined&&documentaryRequire.packingDeclaration == 1){
-                    $('#packingDeclaration').attr('checked',true);
-                }
-                if(documentaryRequire.importContainerWeightDeclaration!=undefined&&documentaryRequire.importContainerWeightDeclaration == 1){
-                    $('#importContainerWeightDeclaration').attr('checked',true);
-                }
-                if(documentaryRequire.manufacturerCertificate!=undefined&&documentaryRequire.manufacturerCertificate == 1){
-                    $('#manufacturerCertificate').attr('checked',true);
-                }
-                if(documentaryRequire.coo!=undefined){
-                    var coo = documentaryRequire.coo;
-                    if(coo == 0){
-                        $('input[name="coo"]').attr('checked',false);
+                if(result.documentaryRequire!=undefined){
+                    var documentaryRequire = result.documentaryRequire;
+                    if(documentaryRequire.reportCompanyTitle!=undefined){
+                        $('#reportCompanyTitle').val(documentaryRequire.reportCompanyTitle);
                     }
-                    $('input[name="coo"]').each(function(){
-                        var val = $(this).val();
-                        if(val == coo){
-                            $(this).attr('checked',true);
-                        }
-                    })
-                }
-                if(documentaryRequire.telexRelease!=undefined){
-                    var telexRelease = documentaryRequire.telexRelease;
-                    if(telexRelease == 0){
-                        $('input[name="telexRelease"]').attr('checked',false);
+                    if(documentaryRequire.releaseDestination!=undefined){
+                        $('#releaseDestination').val(documentaryRequire.releaseDestination);
                     }
-                    $('input[name="telexRelease"]').each(function(){
-                        var val = $(this).val();
-                        if(val == telexRelease){
-                            $(this).attr('checked',true);
+                    if(documentaryRequire.oceanBillOfLading!=undefined&&documentaryRequire.oceanBillOfLading == 1){
+                        $('#oceanBillOfLading').attr('checked',true);
+                    }
+                    if(documentaryRequire.freightForwardingBill!=undefined&&documentaryRequire.freightForwardingBill == 1){
+                        $('#freightForwardingBill').attr('checked',true);
+                    }
+                    if(documentaryRequire.invoice!=undefined&&documentaryRequire.invoice == 1){
+                        $('#invoice').attr('checked',true);
+                    }
+                    if(documentaryRequire.packingList!=undefined&&documentaryRequire.packingList == 1){
+                        $('#packingList').attr('checked',true);
+                    }
+                    if(documentaryRequire.qualityTestingReport!=undefined&&documentaryRequire.qualityTestingReport == 1){
+                        $('#qualityTestingReport').attr('checked',true);
+                    }
+                    if(documentaryRequire.guaranteeSlip!=undefined&&documentaryRequire.guaranteeSlip == 1){
+                        $('#guaranteeSlip').attr('checked',true);
+                    }
+                    if(documentaryRequire.dangerousCertificate!=undefined&&documentaryRequire.dangerousCertificate == 1){
+                        $('#dangerousCertificate').attr('checked',true);
+                    }
+                    if(documentaryRequire.beneficiaryCertification!=undefined&&documentaryRequire.beneficiaryCertification == 1){
+                        $('#beneficiaryCertification').attr('checked',true);
+                    }
+                    if(documentaryRequire.fumigationCertificate!=undefined&&documentaryRequire.fumigationCertificate == 1){
+                        $('#fumigationCertificate').attr('checked',true);
+                    }
+                    if(documentaryRequire.msds!=undefined&&documentaryRequire.msds == 1){
+                        $('#msds').attr('checked',true);
+                    }
+                    if(documentaryRequire.bankBill!=undefined&&documentaryRequire.bankBill == 1){
+                        $('#bankBill').attr('checked',true);
+                    }
+                    if(documentaryRequire.examiningReport!=undefined&&documentaryRequire.examiningReport == 1){
+                        $('#examiningReport').attr('checked',true);
+                    }
+                    if(documentaryRequire.packingDeclaration!=undefined&&documentaryRequire.packingDeclaration == 1){
+                        $('#packingDeclaration').attr('checked',true);
+                    }
+                    if(documentaryRequire.importContainerWeightDeclaration!=undefined&&documentaryRequire.importContainerWeightDeclaration == 1){
+                        $('#importContainerWeightDeclaration').attr('checked',true);
+                    }
+                    if(documentaryRequire.manufacturerCertificate!=undefined&&documentaryRequire.manufacturerCertificate == 1){
+                        $('#manufacturerCertificate').attr('checked',true);
+                    }
+                    if(documentaryRequire.coo!=undefined){
+                        var coo = documentaryRequire.coo;
+                        if(coo == 0){
+                            $('input[name="coo"]').attr('checked',false);
                         }
-                    })
-                }
-                if(documentaryRequire.cooContent!=undefined){
-                    var cooContent = documentaryRequire.cooContent;
-                    $.each(cooContent,function(index,value){
-                        $('.contentRadio').each(function(){
-                            if($(this).val() == value){
-                                $(this).prop('checked',true);
-                            }else{
-                                $('#cooContentText').val(cooContent);
+                        $('input[name="coo"]').each(function(){
+                            var val = $(this).val();
+                            if(val == coo){
+                                $(this).attr('checked',true);
                             }
                         })
-                    })
+                    }
+                    if(documentaryRequire.telexRelease!=undefined){
+                        var telexRelease = documentaryRequire.telexRelease;
+                        if(telexRelease == 0){
+                            $('input[name="telexRelease"]').attr('checked',false);
+                        }
+                        $('input[name="telexRelease"]').each(function(){
+                            var val = $(this).val();
+                            if(val == telexRelease){
+                                $(this).attr('checked',true);
+                            }
+                        })
+                    }
+                    if(documentaryRequire.cooContent!=undefined){
+                        var cooContent = documentaryRequire.cooContent;
+                        $.each(cooContent,function(index,value){
+                            $('.contentRadio').each(function(){
+                                if($(this).val() == value){
+                                    $(this).prop('checked',true);
+                                }else{
+                                    $('#cooContentText').val(cooContent);
+                                }
+                            })
+                        })
+                    }
                 }
-
+                if(result.documentaryType!=undefined){
+                    $('#documentaryType').val(result.documentaryType);
+                }
+                if(result.otherDocumentaryRequire!=undefined){
+                    $('#otherDocumentaryRequire').val(result.otherDocumentaryRequire);
+                }
             }
         })
     }else {
@@ -445,16 +449,16 @@
 
     $('#qualityTestingReport').change(function(){
         if($(this).attr('checked')){
-            $('#reportCompanyTitle').removeClass('disabled');
+            $('#reportCompanyTitle').attr('disabled',false);
         }else{
             $('#reportCompanyTitle').attr('disabled',true);
             $('#reportCompanyTitle').attr('value','');
         }
     })
 
-    $('#input[name="telexRelease"]').change(function(){
+    $('input[name="telexRelease"]').change(function(){
         if($(this).attr('checked')){
-            $('#releaseDestination').removeClass('disabled');
+            $('#releaseDestination').attr('disabled',false);
         }else{
             $('#releaseDestination').attr('disabled',true);
             $('#releaseDestination').attr('value','');
@@ -489,8 +493,12 @@
             data:getdata(),
             /*contentType:"application/json",*/
             success:function(result){
-                console.log(result);
-                /*location.reload();*/
+                if(result == true){
+                    alert('修改成功！');
+                    location.reload();
+                }else{
+                    alert('修改失败！');
+                }
             }
         })
     })

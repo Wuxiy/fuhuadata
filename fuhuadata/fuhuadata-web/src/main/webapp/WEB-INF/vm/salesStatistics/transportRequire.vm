@@ -72,7 +72,7 @@
                                             <td lang="zh">纸板</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input id="paperboard" type="checkbox" data-control="on" disabled/></label>
+                                                    <label><input id="paperBoard" type="checkbox" data-control="on" disabled/></label>
                                                 </div>
                                             </td>
 
@@ -144,10 +144,10 @@
                                             <td lang="zh">是否需要监装</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input name="inspectionOfStorage" type="checkbox" value="0" data-control="on" disabled/>商检</label>
+                                                    <label><input name="inspectionOfLoading" type="checkbox" value="0" data-control="on" disabled/>商检</label>
                                                 </div>
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input name="inspectionOfStorage" type="checkbox" value="1" data-control="on" disabled/>法检</label>
+                                                    <label><input name="inspectionOfLoading" type="checkbox" value="1" data-control="on" disabled/>法检</label>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <input id="inspectionInstitution" type="text" class="form-control isdisabled" placeholder="输入机构名称" disabled/>
@@ -265,9 +265,24 @@
                 var PackageRequireVo = result.PackageRequireVo;
                 if(PackageRequireVo.tray!=undefined){
                     var tray = PackageRequireVo.tray;
+                    if(tray == 0){
+                        $('input[name="fullyClose"]').attr('checked',false);
+                    }
                     $('input[name="fullyClose"]').each(function(){
                         var val = $(this).val();
                         if(val == tray){
+                            $(this).attr('checked',true);
+                        }
+                    })
+                }
+                if(PackageRequireVo.inspectionOfLoading!=undefined){
+                    var inspectionOfLoading = PackageRequireVo.inspectionOfLoading;
+                    if(inspectionOfLoading == 0){
+                        $('input[name="inspectionOfLoading"]').attr('checked',false);
+                    }
+                    $('input[name="inspectionOfLoading"]').each(function(){
+                        var val = $(this).val();
+                        if(val == inspectionOfLoading){
                             $(this).attr('checked',true);
                         }
                     })
@@ -281,8 +296,8 @@
                 if(PackageRequireVo.basePlate!=undefined&&PackageRequireVo.basePlate == 1){
                     $('#basePlate').attr('checked',true);
                 }
-                if(PackageRequireVo.paperboard!=undefined&&PackageRequireVo.paperboard == 1){
-                    $('#paperboard').attr('checked',true);
+                if(PackageRequireVo.paperBoard!=undefined&&PackageRequireVo.paperBoard == 1){
+                    $('#paperBoard').attr('checked',true);
                 }
                 if(PackageRequireVo.gasbag!=undefined&&PackageRequireVo.gasbag == 1){
                     $('#gasbag').attr('checked',true);
@@ -374,7 +389,7 @@
         $(this).prop('checked',true);
     })
     $(document).on('click','input[name="inspectionOfStorage"]',function(){
-        $('input[name="inspectionOfStorage"]').removeAttr('checked');
+        $('input[name="inspectionOfLoading"]').removeAttr('checked');
         $(this).prop('checked',true);
     })
 
@@ -388,7 +403,7 @@
         var PackageRequireVo = {
             'inspectionInstitution':$('#inspectionInstitution').val(),
             'tray':$('input[name="fullyClose"]:checked').val(),
-            'inspectionOfLoading':$('input[name="inspectionOfStorage"]:checked').val(),
+            'inspectionOfLoading':getinspectionOfLoading(),
             'postLabel':checked($('#postLabel')),
             'basePlate':checked($('#basePlate')),
             'paperBoard':checked($('#paperBoard')),
@@ -399,11 +414,12 @@
             'americanDoorseal':checked($('#americanDoorseal')),
             'bead':checked($('#bead')),
             'cornerProtection':checked($('#cornerProtection')),
+            'wireFixed':checked($('#wireFixed')),
         }
         var businessOrderProduct = {
             'id':id,
             'packageRequire':JSON.stringify(PackageRequireVo),
-            'wireFixed':checked($('#wireFixed')),
+            'goodsType':$('input[name="goodsType"]:checked').val(),
             'shippingAgentRequire':$('#shippingAgentRequire').val(),
             'mianxiangqi':$('#mianxiangqi').val(),
             'miantuiqi':$('#miantuiqi').val(),
@@ -417,6 +433,16 @@
         return businessOrderProduct;
     }
 
+    function getinspectionOfLoading() {
+        var inspectionOfLoading;
+        if($('input[name="inspectionOfLoading"]:checked').length==0){
+            inspectionOfLoading = 0;
+        }else{
+            inspectionOfLoading = $('input[name="inspectionOfLoading"]:checked').val();
+        }
+        console.log(inspectionOfLoading);
+        return inspectionOfLoading;
+    }
 
     $('#save').click(function(){
         jQuery.ajax({
@@ -428,7 +454,7 @@
                 console.log(result);
                 if(result == true){
                     alert('修改成功！');
-                    /*location.reload();*/
+                    location.reload();
                 }else{
                     alert('修改失败！');
                 }

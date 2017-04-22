@@ -21,7 +21,7 @@
         <result column="customer_product_name" jdbcType="VARCHAR" property="customerProductName" />
         <result column="brand" jdbcType="VARCHAR" property="brand" />
         <result column="main_product_amount" jdbcType="DECIMAL" property="mainProductAmount" />
-        <result column="main_product_unit" jdbcType="INTEGER" property="mainProductUnit" />
+        <result column="main_product_unit" jdbcType="VARCHAR" property="mainProductUnit" />
         <result column="sub_product_amount" jdbcType="DECIMAL" property="subProductAmount" />
         <result column="sub_product_unit" jdbcType="INTEGER" property="subProductUnit" />
         <result column="convert_rate" jdbcType="DECIMAL" property="convertRate" />

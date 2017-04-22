@@ -721,7 +721,7 @@
         </isEqual>
         <isEqual property="dimension" compareValue="1">
             SELECT
-            base.country,
+            tc.`name` country,
             base.customer_area customerArea,
             SUM(sc.amount) salesAmount,
             SUM(sc.gross_profit) grossProfit,
@@ -731,11 +731,12 @@
             customer_base_info base
             LEFT JOIN business_order a ON a.customer_id = base.customer_id
             LEFT JOIN sync_contract sc ON sc.pk_longpro = a.nc_order_id
+            LEFT JOIN	t_countryzone tc ON tc.`code` = base.countryzone
             <isParameterPresent>
                 <include refid="PROFIT-STATISTICS-QUERY-COMMON"/>
             </isParameterPresent>
             GROUP BY
-            base.country_id
+            base.countryzone
             ORDER BY
             netProfit DESC
             <isNotEmpty property="startRow">
@@ -744,7 +745,7 @@
         </isEqual>
         <isEqual property="dimension" compareValue="2">
             SELECT
-            base.country,
+            tc.`name` country,
             base.customer_area customerArea,
             base.full_name customerName,
             SUM(sc.amount) salesAmount,
@@ -757,6 +758,7 @@
             customer_base_info base
             LEFT JOIN business_order a ON a.customer_id = base.customer_id
             LEFT JOIN sync_contract sc ON sc.pk_longpro = a.nc_order_id
+            LEFT JOIN	t_countryzone tc ON tc.`code` = base.countryzone
             <isParameterPresent>
                 <include refid="PROFIT-STATISTICS-QUERY-COMMON"/>
             </isParameterPresent>
@@ -768,7 +770,7 @@
         </isEqual>
         <isEqual property="dimension" compareValue="3">
             SELECT
-            base.country,
+            tc.`name` country,
             base.customer_area customerArea,
             base.full_name customerName,
             ua.userArea,
@@ -782,6 +784,7 @@
             business_order a
             LEFT JOIN customer_base_info base ON a.customer_id = base.customer_id
             LEFT JOIN sync_contract sc ON sc.pk_longpro = a.nc_order_id
+            LEFT JOIN	t_countryzone tc ON tc.`code` = base.countryzone
             LEFT JOIN (
             SELECT
             pua.user_id,
@@ -846,7 +849,7 @@
                 <include refid="PROFIT-STATISTICS-QUERY-COMMON"/>
             </isParameterPresent>
             GROUP BY
-            base.country_id) temp
+            base.countryzone) temp
         </isEqual>
         <isEqual property="dimension" compareValue="2">
             SELECT count(*) FROM (SELECT

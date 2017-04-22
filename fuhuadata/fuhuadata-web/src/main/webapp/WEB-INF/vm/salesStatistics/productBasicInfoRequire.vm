@@ -42,7 +42,7 @@
                                             <div class="input-group">
                                                 <input id="name" class="form-control notnull" value="" disabled>
                                                 <div class="input-group-btn">
-                                                    <button name="search" data-toggle="modal" data-target="#treeModal" class="btn btn-xs btn-default" disabled>
+                                                    <button data-control="on" name="search" data-toggle="modal" data-target="#treeModal" class="btn btn-xs btn-default" disabled>
                                                         <span class="glyphicon glyphicon-search"></span>
                                                     </button>
                                                 </div>
@@ -75,7 +75,7 @@
                                                 <sup class="not-null">*</sup>
                                             </label>
                                         </td>
-                                        <td><input id="measurement" class="form-control notnull" type="text" value="" disabled/></td>
+                                        <td><input id="mainProductUnit" class="form-control notnull" type="text" value="" disabled/></td>
                                         <td>
                                             <label class="control-label" lang="zh">
                                                 主数量
@@ -337,7 +337,7 @@
                 $('#specification').val(basicInfo.specification);
                 $('#model').val(basicInfo.model);
                 $('#brand').val(basicInfo.brand);
-                $('#measurement').val(basicInfo.measurement);
+                $('#mainProductUnit').val(basicInfo.mainProductUnit);
                 $('#mainProductAmount').val(basicInfo.mainProductAmount);
                 $('#subProductUnit').val(basicInfo.subProductUnit);
                 $('#subProductAmount').val(basicInfo.subProductAmount);
@@ -425,7 +425,7 @@
                         var success = result.data.success;
                         if(success == true){
                             var businessProductId = result.data.businessProductId;
-                            window.location.href = basePath + '/businessProduct/intoProductRequire?businessProductId=' + businessProductId + '&&orderId=' + orderId + '&&customerId=' + customerId + '&&productRequireId=' + productRequireId;
+                            /*window.location.href = basePath + '/businessProduct/intoProductRequire?businessProductId=' + businessProductId + '&&orderId=' + orderId + '&&customerId=' + customerId + '&&productRequireId=' + productRequireId;*/
                         }
                     }
                 })
@@ -504,10 +504,11 @@
                     if(businessProductId == 0){
                         var productWareVo = result.productWareVo;
                         var components = result.components;
+                        $('#businessProductId').val('');
 
                         console.log(productWareVo);
                         $('#customsClearanceName').val(productWareVo.customsClearanceName);
-                        $('#measurement').val(productWareVo.measurement);
+                        $('#mainProductUnit').val(productWareVo.measurement);
                         $('#specification').val(productWareVo.specification);
                         $('#model').val(productWareVo.model);
                         $('#unitUseRate').val(productWareVo.unitUseRate);
@@ -537,7 +538,7 @@
 
                             $('#customerProductName').val(basicInfo.customerProductName);
                             $('#customsClearanceName').val(basicInfo.customsClearanceName);
-                            $('#measurement').val(basicInfo.measurement);
+                            $('#mainProductUnit').val(basicInfo.measurement);
                             $('#specification').val(basicInfo.specification);
                             $('#model').val(basicInfo.model);
                             $('#brand').val(basicInfo.brand);
@@ -602,6 +603,7 @@
     function Add() {
         var data = {
             "businessOrderProduct":{
+                'id':$('#businessProductId').val(),
                 'name':$('#name').val(),
                 'orderId':$('#orderId').val(),
                 'productId':$('#name').attr('data-productId'),
@@ -609,9 +611,10 @@
                 'customsClearanceName':$('#customsClearanceName').val(),
                 'customerProductName':$('#customerProductName').val(),
                 'brand':$('#brand').val(),
+                'priceType':$('#priceType').val(),
                 'specification':$('#specification').val(),
                 'model':$('#model').val(),
-                'measurement':$('#measurement').val(),
+                'mainProductUnit':$('#mainProductUnit').val(),
                 'mainProductAmount':$('#mainProductAmount').val(),
                 'subProductUnit':$('#subProductUnit').val(),
                 'subProductAmount':$('#subProductAmount').val(),
@@ -626,7 +629,6 @@
                 'taxType':$('#taxType').val(),
                 'taxFree':$('#taxFree').val(),
                 'otherCost':$('#otherCost').val(),
-                'productRequireId':'',
 
                 "createTime": getTime(),
                 "createUserId": 2,
@@ -656,7 +658,7 @@
                 'brand':$('#brand').val(),
                 'specification':$('#specification').val(),
                 'model':$('#model').val(),
-                'measurement':$('#measurement').val(),
+                'mainProductUnit':$('#mainProductUnit').val(),
                 'mainProductAmount':$('#mainProductAmount').val(),
                 'subProductUnit':$('#subProductUnit').val(),
                 'subProductAmount':$('#subProductAmount').val(),
@@ -708,7 +710,7 @@
             url:basePath + '/businessProduct/saveBaseInfoAndComponents',
             type:'POST',
             contentType:"application/json",
-            data:editdata(),
+            data:Add(),
             success:function (result) {
                 console.log(result);
                 alert("修改成功!");
