@@ -274,7 +274,7 @@ public class BusinessOrderProductAction {
             }else{
                 businessProductRequireService.updateProductRequire(businessProductRequire);
             }
-            result.put("productRequireId\n",businessProductRequireId);
+            result.put("productRequireId",businessProductRequireId);
             result.put("success",true);
             return result;
         } catch (Exception e) {
