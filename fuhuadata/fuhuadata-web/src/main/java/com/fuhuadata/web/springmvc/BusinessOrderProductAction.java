@@ -264,7 +264,8 @@ public class BusinessOrderProductAction {
      */
     @ResponseBody
     @RequestMapping("/saveProductRequire")
-    public boolean saveProductRequire(BusinessProductRequire businessProductRequire){
+    public Map<String,Object> saveProductRequire(BusinessProductRequire businessProductRequire){
+        Map<String,Object> result = new HashMap<String,Object>();
         Integer businessProductRequireId = businessProductRequire.getId();
         try {
             if(businessProductRequireId == null || businessProductRequireId == 0){
@@ -273,11 +274,12 @@ public class BusinessOrderProductAction {
             }else{
                 businessProductRequireService.updateProductRequire(businessProductRequire);
             }
-            return true;
+            result.put("businessProductRequireId",businessProductRequireId);
+            return result;
         } catch (Exception e) {
             log.error("保存产品要求错误：" + e.getMessage());
         }
-        return false;
+        return result;
     }
 
     /**
