@@ -157,7 +157,7 @@
             <th class="text-center col-xs-4" lang="zh">备注</th>
         </tr>
         </thead>
-        <tbody id="pBody">
+        <tbody id="iBody">
         <%if(data instanceof Array){%>
         <%for(var i=0;i<data.length;i++){%>
         <tr>
@@ -167,10 +167,9 @@
         </tr>
         <%}%>
         <%}%>
-##        <tr><td colspan="3" data-editTd="no">暂无数据</td></tr>
         </tbody>
         <tfoot  data-view="editView">
-            <tr><td colspan="3" data-editTd="no"><button data-btn="add" class="btn btn-xs btn-block btn-default" type="button">添加</button></td></tr>
+            <tr><td colspan="3" data-editTd="no"><button id="addiBodyItem" data-btn="add" class="btn btn-xs btn-block btn-default" type="button">添加</button></td></tr>
         </tfoot>
     </table>
 ##    if(typeof data == 'string'){%>
@@ -191,7 +190,7 @@
             <th class="text-center col-xs-3" lang="zh">备注</th>
         </tr>
         </thead>
-        <tbody id="pBody">
+        <tbody>
         <%if(data instanceof Array){%>
         <%for(var i=0;i<data.length;i++){%>
         <tr>
@@ -200,17 +199,13 @@
                     <label><input name="pc" type="checkbox" value="<%=data[i].componentId%>"></label>
                 </div>
             </td>
-            <td><%=data[i].componentName%></td>
+            <td data-editTd="no"><%=data[i].componentName%></td>
             <td><%=data[i].consumption%></td>
-            <td><span></span><button type="button" data-view="editView" data-btn="del" data-target="tr" class="close">×</button></td>
+            <td></td>
         </tr>
         <%}%>
         <%}%>
-##        <tr><td colspan="3" data-view="editHide" data-editTd="no">暂无数据</td></tr>
         </tbody>
-        <tfoot>
-        <tr><td colspan="4" data-view="editView" data-editTd="no"><button data-btn="add" class="btn btn-xs btn-block btn-default" type="button">添加</button></td></tr>
-        </tfoot>
     </table>
 
 ##    if(typeof data == 'string'){%>
@@ -222,7 +217,7 @@
 </script>
 
 
-<script id="pItem" type="text/html">
+<script id="iItem" type="text/html">
     <tr>
         <td></td>
         <td></td>
