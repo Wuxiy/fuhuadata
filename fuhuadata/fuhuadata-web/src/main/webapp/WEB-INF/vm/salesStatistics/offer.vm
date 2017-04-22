@@ -180,7 +180,9 @@
     </tr>
     <%}%>
     <%} else{%>
-    <tr></tr>
+    <tr>
+        <td colspan="9">暂无数据</td>
+    </tr>
     <%}%>
 </script>
 
