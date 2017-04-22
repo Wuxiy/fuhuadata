@@ -149,7 +149,7 @@ public class PackingArchivesAction {
             PackingArchives packingArchives = new PackingArchives();
             String idsstr = packingArchivesService.getPackingArchivesById(id).getModel().getPack().getAssociatedPackingId();
             String[] ids1 = null;
-            if(idsstr!=null){
+            if(idsstr!=null&&idsstr.length()>0){
                 ids1 = idsstr.split(",");
                 String[] idsArray = StringUtil.union(ids1, ids);//取并集
                 String str = StringUtils.join(idsArray, ",");

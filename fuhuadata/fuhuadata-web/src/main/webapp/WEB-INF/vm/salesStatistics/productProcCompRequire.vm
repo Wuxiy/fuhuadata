@@ -594,7 +594,7 @@
                     }
                     $('#befond').before(_html);
 
-                    for(var j=0;j<auxiliary.length;j++){
+                    for(var j=0;j<auxiliaryData.length;j++){
                         auxiliary.innerHTML += '<tr class="">'+
                                 '<td><input type="checkbox" value="'+auxiliaryData[j].packingId+'" class="auxiliarycheckbox" name="auxiliarycheckbox"/></td>'+
                                 '<td>'+auxiliaryData[j].packName+'</td>' +
@@ -720,6 +720,7 @@
                         var img_html = '';
                         var _html = '';
 
+
                         for(var k=0;k<modelist.length;k++){
                             img_html +='<div class="col-xs-2">';
                             img_html +='<a href="#" class="thumbnail">';
@@ -732,29 +733,35 @@
                         }
                         $('#model').html(img_html);
 
-                        for(var i=0;i<outerData.length;i++){
-                            _html += '<tr class="outerlist">';
-                            _html += '<td class="text-center"><input type="checkbox" value="'+outerData[i].packingId+'" class="outercheckbox" name="outercheckbox"/></td>';
-                            _html += '<td class="text-center">'+outerData[i].packName+'</td>';
-                            _html += '<td class="text-center">'+outerData[i].spec+'</td>';
-                            _html += '<td class="text-center">'+outerData[i].size+'</td>';
-                            _html += '<td class="text-center">'+outerData[i].quality+'</td>';
-                            _html += '<td class="text-center">'+outerData[i].consumption+'</td>';
-                            _html += '<td class="text-center">'+outerData[i].unitPrice+'</td>';
-                            _html += '</tr>';
+                        if(outerData.length != 0){
+                            for(var i=0;i<outerData.length;i++){
+                                _html += '<tr class="outerlist">';
+                                _html += '<td class="text-center"><input type="checkbox" value="'+ifEmpty(outerData[i].packingId)+'" class="outercheckbox" name="outercheckbox"/></td>';
+                                _html += '<td class="text-center">'+ifEmpty(outerData[i].packName)+'</td>';
+                                _html += '<td class="text-center">'+ifEmpty(outerData[i].spec)+'</td>';
+                                _html += '<td class="text-center">'+ifEmpty(outerData[i].size)+'</td>';
+                                _html += '<td class="text-center">'+ifEmpty(outerData[i].quality)+'</td>';
+                                _html += '<td class="text-center">'+ifEmpty(outerData[i].consumption)+'</td>';
+                                _html += '<td class="text-center">'+ifEmpty(outerData[i].unitPrice)+'</td>';
+                                _html += '</tr>';
+                            }
+                            $('#befond').before(_html);
                         }
-                        $('#befond').before(_html);
 
-                        for(var j=0;j<auxiliary.length;j++){
-                            auxiliary.innerHTML += '<tr class="">'+
-                                    '<td><input type="checkbox" value="'+auxiliaryData[j].packingId+'" class="auxiliarycheckbox" name="auxiliarycheckbox"/></td>'+
-                                    '<td>'+auxiliaryData[j].packName+'</td>' +
-                                    '<td>'+auxiliaryData[j].spec+'</td>'+
-                                    '<td>'+auxiliaryData[j].size+'</td>'+
-                                    '<td>'+auxiliaryData[j].quality+'</td>'+
-                                    '<td>'+auxiliaryData[j].consumption+'</td>'+
-                                    '<td>'+auxiliaryData[j].unitPrice+'</td>'+
-                                    '</tr>';
+                        if(auxiliaryData.length!=0){
+                            for(var j=0;j<auxiliaryData.length;j++){
+                                auxiliary.innerHTML += '<tr class="">'+
+                                        '<td><input type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox" name="auxiliarycheckbox"/></td>'+
+                                        '<td>'+ifEmpty(auxiliaryData[j].packName)+'</td>' +
+                                        '<td>'+ifEmpty(auxiliaryData[j].spec)+'</td>'+
+                                        '<td>'+ifEmpty(auxiliaryData[j].size)+'</td>'+
+                                        '<td>'+ifEmpty(auxiliaryData[j].quality)+'</td>'+
+                                        '<td>'+ifEmpty(auxiliaryData[j].consumption)+'</td>'+
+                                        '<td>'+ifEmpty(auxiliaryData[j].unitPrice)+'</td>'+
+                                        '</tr>';
+                            }
+                        }else{
+                            $('#auxiliary').addClass('hidden');
                         }
                     }
                 })
@@ -786,7 +793,7 @@
                 /*contentType:"application/json",*/
                 data:Add(),
                 success:function (result) {
-                    var success = result.data.success;
+                    var success = result;
                     if(success == true){
                         var productRequireId = result.data.productRequireId;
                         $('#productRequireId').val(productRequireId);
@@ -826,7 +833,7 @@
 
         jQuery.each(ResultData,function(n,item){
             var parent  = $('#container');
-            var tr = '<tr><td><input type="checkbox" value="'+item.packingId+'" class="check" name="cellcheckbox"/></td><td>'+item.packingId+'</td><td>'+item.packName+'</td><td>'+item.spec+'</td><td>'+item.size+'</td><td>'+item.quality+'</td><td>'+item.unitPrice+'</td><td>'+item.status+'</td></tr>';
+            var tr = '<tr><td><input type="checkbox" value="'+item.packingId+'" class="check" name="cellcheckbox"/></td><td>'+ifEmpty(item.packingId)+'</td><td>'+ifEmpty(item.packName)+'</td><td>'+ifEmpty(item.spec)+'</td><td>'+ifEmpty(item.size)+'</td><td>'+ifEmpty(item.quality)+'</td><td>'+ifEmpty(item.unitPrice)+'</td><td>'+(ifEmpty(item.status)==1?'启用':'禁用')+'</td></tr>';
             $(tr).appendTo(parent);
         })
     }

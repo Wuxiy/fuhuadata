@@ -258,6 +258,8 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript" language="JavaScript">
+    var customerLevelList = ['战略客户','大客户' ,'重要客户' ,'一般客户' ,'风险客户'];
+    var zhongxinbaoLevelList = ['未知','A','AA','AAA','AAAA'];
 
     $(document).ready(function () {
         // 错误信息容器
@@ -313,7 +315,8 @@
                 type: 'POST',
                 success: function (result) {
                     var ResultData = eval(result.data);
-                    if(ResultData.length == 0){
+                    console.log(ResultData.length);
+                    if(ResultData.length != 0){
                         for (var i = 0; i < ResultData.length; i++) {
                             customerList.innerHTML += '<li class="list-group-item"><a class="cNode" data-id="' + ResultData[i].customerId + '">' + ResultData[i].fullName + '</a></li>';
                         }
@@ -342,16 +345,29 @@
                 success: function (result) {
                     var ResultData = result.data;
 
-                    $('#customerName').val(ResultData.fullName);
-                    $('#country').val(ResultData.country);
-                    $('#linkmanName').val(ResultData.linkmanName);
-                    $('#linkPhone1').val(ResultData.linkPhone1);
-                    $('#lemail').val(ResultData.lemail);
-                    $('#zhongxinbaoLevel').val(ResultData.zhongxinbaoLevel);
-
-                    $('#customerLevelText').val($('#customerLevel').select().text());
-                    $('#zhongxinbaoLevelText').val($('#zhongxinbaoLevel').select().text());
-
+                    if(ResultData.fullName!=undefined){
+                        $('#customerName').val(ResultData.fullName);
+                    }
+                    if(ResultData.country!=undefined){
+                        $('#country').val(ResultData.country);
+                    }
+                    if(ResultData.linkmanName!=undefined){
+                        $('#linkmanName').val(ResultData.linkmanName);
+                    }
+                    if(ResultData.linkPhone1!=undefined){
+                        $('#linkPhone1').val(ResultData.linkPhone1);
+                    }
+                    if(ResultData.lemail!=undefined){
+                        $('#lemail').val(ResultData.lemail);
+                    }
+                    if(ResultData.customerLevel!=undefined){
+                        $('#customerLevel').val(ResultData.customerLevel);
+                        $('#customerLevelText').val(customerLevelList[ResultData.customerLevel - 1]);
+                    }
+                    if(ResultData.zhongxinbaoLevel!=undefined){
+                        $('#zhongxinbaoLevel').val(ResultData.zhongxinbaoLevel);
+                        $('#zhongxinbaoLevelText').val(zhongxinbaoLevelList[ResultData.zhongxinbaoLevel]);
+                    }
                     if(ResultData.enterpriseNature!=undefined){
                         var enterpriseNature = ResultData.enterpriseNature.split(',');
                         $.each(enterpriseNature, function (index, value) {

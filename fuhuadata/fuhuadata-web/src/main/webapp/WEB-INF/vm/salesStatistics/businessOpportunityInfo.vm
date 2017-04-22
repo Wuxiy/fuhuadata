@@ -432,18 +432,21 @@
 
         if(result.businessInfo!=undefined){
             var ResultData = result.businessInfo;
-            var enterpriseNature = ResultData.enterpriseNature.split(',');
+            if(ResultData.enterpriseNature!=undefined){
+                var enterpriseNature = ResultData.enterpriseNature.split(',');
 
-            $.each(enterpriseNature,function(index,value){
-                $('input[name="check"]').each(function(){
-                    if($(this).val() == value){
-                        $(this).prop('checked',true);
-                        if(value == 4){
-                            $('#otherEnterpriseNature').val(ResultData.otherEnterpriseNature);
+                $.each(enterpriseNature,function(index,value){
+                    $('input[name="check"]').each(function(){
+                        if($(this).val() == value){
+                            $(this).prop('checked',true);
+                            if(value == 4){
+                                $('#otherEnterpriseNature').val(ResultData.otherEnterpriseNature);
+                            }
                         }
-                    }
+                    })
                 })
-            })
+            }
+
             if(ResultData.intentionalProducts != undefined){
                 var intentionalProducts = eval(ResultData.intentionalProducts);
                 $('#intentionalProduct0').val(intentionalProducts[0].intentionalProduct);
@@ -454,36 +457,63 @@
             if(ResultData.businessState!=undefined&&ResultData.businessState == 0){
                 $('#offer').removeClass('hidden');
             }
-            $('#businessName').val(ResultData.businessName);
-            $('#businessId').val(ResultData.businessId);
-            $('#businessFrom').val(ResultData.businessFrom);
-            $('#businessState').val(ResultData.businessState);
-            $('#customerName').val(ResultData.customerName);
-            $('#enterpriseNature').val(ResultData.enterpriseNature);
-            $('#customerLevel').val(ResultData.customerLevel);
-            $('#zhongxinbaoLevel').val(ResultData.zhongxinbaoLevel);
-
-            console.log(ResultData.customerLevel);
-            $('#customerLevelText').val($('#customerLevel').select().text());
-            $('#zhongxinbaoLevelText').val($('#zhongxinbaoLevel').select().text());
-
-            $('#country').val(ResultData.country);
-            $('#name').val(ResultData.linkmanName);
-            $('#customerLevel').val(ResultData.customerLevel);
-            $('#zhongxinbaoLevel').val(ResultData.zhongxinbaoLevel);
-            $('#country').val(ResultData.country);
-            $('#linkmanName').val(ResultData.linkmanName);
-            $('#linkPhone1').val(ResultData.linkPhone1);
-            $('#lemail').val(ResultData.lemail);
-            $('#expectIncome').val(ResultData.expectIncome);
-            $('#deadline').val(ResultData.deadline);
-            $('#businessDescribe').val(ResultData.businessDescribe);
-            $('#businessRemarks').val(ResultData.businessRemarks);
-            $('#createUserName').val(ResultData.createUserName);
-            $('#createTime').val(ResultData.createTime);
+            if(ResultData.businessName != undefined){
+                $('#businessName').val(ResultData.businessName);
+            }
+            if(ResultData.businessId != undefined){
+                $('#businessId').val(ResultData.businessId);
+            }
+            if(ResultData.businessFrom != undefined){
+                $('#businessFrom').val(ResultData.businessFrom);
+            }
+            if(ResultData.businessState != undefined){
+                $('#businessState').val(ResultData.businessState);
+            }
+            if(ResultData.customerName != undefined){
+                $('#customerName').val(ResultData.customerName);
+            }
+            if(ResultData.enterpriseNature != undefined){
+                $('#enterpriseNature').val(ResultData.enterpriseNature);
+            }
+            if(ResultData.customerLevel != undefined){
+                $('#customerLevel').val(ResultData.customerLevel);
+                $('#customerLevelText').val(customerLevelList[ResultData.customerLevel - 1]);
+            }
+            if(ResultData.zhongxinbaoLevel != undefined){
+                $('#zhongxinbaoLevel').val(ResultData.zhongxinbaoLevel);
+                $('#zhongxinbaoLevelText').val(zhongxinbaoLevelList[ResultData.zhongxinbaoLevel]);
+            }
+            if(ResultData.country != undefined){
+                $('#country').val(ResultData.country);
+            }
+            if(ResultData.linkmanName != undefined){
+                $('#linkmanName').val(ResultData.linkmanName);
+            }
+            if(ResultData.linkPhone1 != undefined){
+                $('#linkPhone1').val(ResultData.linkPhone1);
+            }
+            if(ResultData.lemail != undefined){
+                $('#lemail').val(ResultData.lemail);
+            }
+            if(ResultData.expectIncome != undefined){
+                $('#expectIncome').val(ResultData.expectIncome);
+            }
+            if(ResultData.deadline != undefined){
+                $('#deadline').val(ResultData.deadline);
+            }
+            if(ResultData.businessDescribe != undefined){
+                $('#businessDescribe').val(ResultData.businessDescribe);
+            }
+            if(ResultData.businessRemarks != undefined){
+                $('#businessRemarks').val(ResultData.businessRemarks);
+            }
+            if(ResultData.createUserName != undefined){
+                $('#createUserName').val(ResultData.createUserName);
+            }
+            if(ResultData.createTime != undefined){
+                $('#createTime').val(ResultData.createTime);
+            }
         }
-
-        var _html = '';
 
     }
 

@@ -363,6 +363,7 @@
             success:function (result) {
                 var code = result.code;
                 $('#code').val(code);
+                alert('保存成功!');
             }
         })
     })
@@ -416,6 +417,7 @@
 
     //新增产品信息
     $('#Add').click(function(){
+        var code = $('#code').val();
         if($('#code').val() != 1){
             window.location.href = basePath + '/businessProduct/intoProductBasicInfoRequire?orderId=' + orderId;
         }else{
