@@ -361,7 +361,9 @@
                 }
 
 
-                $('#businessId').val(businessOrder.businessId);
+                if(businessOrder.businessId){
+                    $('#businessId').val(businessOrder.businessId);
+                }
                 $('#fullName').val(customerBaseInfo.fullName);
                 $('#customerId').val(customerBaseInfo.customerId);
                 $('#customerDutyParagraph').val(businessOrder.customerDutyParagraph);

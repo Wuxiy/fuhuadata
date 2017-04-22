@@ -580,31 +580,35 @@
                         if(item == '')
                     })*/
 
-
-                    for(var i=0;i<outerData.length;i++){
-                        _html += '<tr class="outerlist">';
-                        _html += '<td class="text-center"><input type="checkbox" value="'+outerData[i].packingId+'" class="outercheckbox" name="outercheckbox"/></td>';
-                        _html += '<td class="text-center">'+outerData[i].packName+'</td>';
-                        _html += '<td class="text-center">'+outerData[i].spec+'</td>';
-                        _html += '<td class="text-center">'+outerData[i].size+'</td>';
-                        _html += '<td class="text-center">'+outerData[i].quality+'</td>';
-                        _html += '<td class="text-center">'+outerData[i].consumption+'</td>';
-                        _html += '<td class="text-center">'+outerData[i].unitPrice+'</td>';
-                        _html += '</tr>';
+                    if(outerData.length!=0){
+                        for(var i=0;i<outerData.length;i++){
+                            _html += '<tr class="outerlist">';
+                            _html += '<td class="text-center"><input type="checkbox" value="'+outerData[i].packingId+'" class="outercheckbox" name="outercheckbox"/></td>';
+                            _html += '<td class="text-center">'+outerData[i].packName+'</td>';
+                            _html += '<td class="text-center">'+outerData[i].spec+'</td>';
+                            _html += '<td class="text-center">'+outerData[i].size+'</td>';
+                            _html += '<td class="text-center">'+outerData[i].quality+'</td>';
+                            _html += '<td class="text-center">'+outerData[i].consumption+'</td>';
+                            _html += '<td class="text-center">'+outerData[i].unitPrice+'</td>';
+                            _html += '</tr>';
+                        }
+                        $('#befond').before(_html);
                     }
-                    $('#befond').before(_html);
 
-                    for(var j=0;j<auxiliaryData.length;j++){
-                        auxiliary.innerHTML += '<tr class="">'+
-                                '<td><input type="checkbox" value="'+auxiliaryData[j].packingId+'" class="auxiliarycheckbox" name="auxiliarycheckbox"/></td>'+
-                                '<td>'+auxiliaryData[j].packName+'</td>' +
-                                '<td>'+auxiliaryData[j].spec+'</td>'+
-                                '<td>'+auxiliaryData[j].size+'</td>'+
-                                '<td>'+auxiliaryData[j].quality+'</td>'+
-                                '<td>'+auxiliaryData[j].consumption+'</td>'+
-                                '<td>'+auxiliaryData[j].unitPrice+'</td>'+
-                                '</tr>';
+                    if(auxiliaryData.length!=0){
+                        for(var j=0;j<auxiliaryData.length;j++){
+                            auxiliary.innerHTML += '<tr class="">'+
+                                    '<td><input type="checkbox" value="'+auxiliaryData[j].packingId+'" class="auxiliarycheckbox" name="auxiliarycheckbox"/></td>'+
+                                    '<td>'+auxiliaryData[j].packName+'</td>' +
+                                    '<td>'+auxiliaryData[j].spec+'</td>'+
+                                    '<td>'+auxiliaryData[j].size+'</td>'+
+                                    '<td>'+auxiliaryData[j].quality+'</td>'+
+                                    '<td>'+auxiliaryData[j].consumption+'</td>'+
+                                    '<td>'+auxiliaryData[j].unitPrice+'</td>'+
+                                    '</tr>';
+                        }
                     }
+
                 }
             })
         }else if(editRequire == 1&&id == ''){
@@ -720,18 +724,20 @@
                         var img_html = '';
                         var _html = '';
 
-
-                        for(var k=0;k<modelist.length;k++){
-                            img_html +='<div class="col-xs-2">';
-                            img_html +='<a href="#" class="thumbnail">';
-                            img_html +='<img src="'+modelist[k].path+'" alt="通用的占位符缩略图"  style="height: 200px;">';
-                            img_html +='<div class="caption">';
-                            img_html +='<h4 class="text-info ">'+modelist[k].name+'<input style="margin-left: 15px;" type="checkbox" name="modelist" class="btn-link" data-name="'+modelist[k].name+'" data-path="'+modelist[k].path+'"></h4>';
-                            img_html +='</div>';
-                            img_html += '</a>';
-                            img_html +='</div>';
+                        if(modelist != null || modelist != undefined){
+                            for(var k=0;k<modelist.length;k++){
+                                img_html +='<div class="col-xs-2">';
+                                img_html +='<a href="#" class="thumbnail">';
+                                img_html +='<img src="'+modelist[k].path+'" alt="通用的占位符缩略图"  style="height: 200px;">';
+                                img_html +='<div class="caption">';
+                                img_html +='<h4 class="text-info ">'+modelist[k].name+'<input style="margin-left: 15px;" type="checkbox" name="modelist" class="btn-link" data-name="'+modelist[k].name+'" data-path="'+modelist[k].path+'"></h4>';
+                                img_html +='</div>';
+                                img_html += '</a>';
+                                img_html +='</div>';
+                            }
+                            $('#model').html(img_html);
                         }
-                        $('#model').html(img_html);
+
 
                         if(outerData.length != 0){
                             for(var i=0;i<outerData.length;i++){
@@ -793,9 +799,9 @@
                 /*contentType:"application/json",*/
                 data:Add(),
                 success:function (result) {
-                    var success = result;
+                    var success = result.success;
                     if(success == true){
-                        var productRequireId = result.data.productRequireId;
+                        var productRequireId = result.productRequireId;
                         $('#productRequireId').val(productRequireId);
                         window.location.href = basePath + '/businessProduct/intoDocumentary?businessProductId=' + businessProductId + '&&orderId=' + orderId + '&&customerId=' + customerId + '&&productRequireId=' + productRequireId;
                     }
@@ -809,7 +815,7 @@
     $(document).on('click','.outercheckbox',function(){
         $('.outercheckbox').removeAttr('checked');
         $('.outercheckbox').removeClass('active');
-        $(this).prop('checked','checked');
+        $(this).attr('checked',true);
         $(this).addClass('active');
     })
 
@@ -924,7 +930,7 @@
     }
 
     function getouterPackingId() {
-        var outerPackingId = $('input[class="outercheckbox"]:checked').length;
+        var outerPackingId = $('input[class="active"]:checked').val();
         console.log(outerPackingId);
         return outerPackingId;
     }
