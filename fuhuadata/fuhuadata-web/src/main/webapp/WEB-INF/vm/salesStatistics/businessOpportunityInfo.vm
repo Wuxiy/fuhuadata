@@ -72,8 +72,8 @@
                                     </div>
                                     <label class="col-xs-1 control-label" lang="zh">信用评级</label>
                                     <div class="col-xs-2">
-                                        <select class="form-control" id="zhongxinbaoLevel" disabled>
-                                            <input class="form-control notnull" type="text" value="" id="zhongxinbaoLevelText" disabled />
+                                        <input class="form-control notnull " type="text" value="" id="zhongxinbaoLevelText" disabled />
+                                        <select class="form-control hidden" id="zhongxinbaoLevel" disabled>
                                             <option value="4" lang="zh">AAAA</option>
                                             <option value="3" lang="zh">AAA</option>
                                             <option value="2" lang="zh">AA</option>
