@@ -357,6 +357,10 @@
 
     }
 
+    $('#before').click(function(){
+        window.location.href = basePath + '/businessProduct/intoProductRequire?businessProductId=' + id + '&&orderId=' + orderId + '&&customerId=' + customerId + '&&productRequireId=' + productRequireId;
+    })
+
     $('#next').click(function(){
         jQuery.ajax({
             url:basePath + '/businessProduct/saveDocumentaryOrPacking?productRequireId=' + id,
@@ -364,7 +368,7 @@
             data:getdata(),
             /*contentType:"application/json",*/
             success:function(result){
-                window.location.href = basePath + '/businessProduct/intoPackageRequire';
+                window.location.href = basePath + '/businessProduct/intoPackageRequire?businessProductId=' + id + '&&orderId=' + orderId + '&&customerId=' + customerId + '&&productRequireId=' + productRequireId;
             }
         })
     })

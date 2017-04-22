@@ -137,12 +137,6 @@
             <version>2.1</version>
         </dependency>
 
-        <!-- YUI Compressor -->
-        <dependency>
-            <groupId>yuicompressor</groupId>
-            <artifactId>yuicompressor</artifactId>
-            <version>2.4.7</version>
-        </dependency>
         <dependency>
             <groupId>net.bull.javamelody</groupId>
             <artifactId>javamelody-core</artifactId>

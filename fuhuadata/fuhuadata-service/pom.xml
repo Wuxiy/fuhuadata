@@ -47,11 +47,6 @@
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>IKAnalyzer</groupId>
-            <artifactId>IKAnalyzer</artifactId>
-            <version>2012FF_u1</version>
-        </dependency>
         <!-- servlet jsp begin -->
         <dependency>
             <groupId>javax.servlet</groupId>

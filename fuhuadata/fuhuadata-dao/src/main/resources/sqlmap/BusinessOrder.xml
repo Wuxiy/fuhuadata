@@ -85,9 +85,11 @@
             <isNotEmpty prepend=" AND " property="customerLevel">
                 base.customer_level = #customerLevel#
             </isNotEmpty>
+
             <isNotEmpty prepend=" AND " property="country">
-                base.country = #country#
+                tc.name = #country#
             </isNotEmpty>
+
             <isNotEmpty prepend=" AND " property="startTime">
                 <![CDATA[
                      a.deal_time  >=  #startTime#
@@ -672,6 +674,7 @@
                     FROM
                         business_order a
                     LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
+                    LEFT JOIN t_countryzone tc ON tc.`code` = base.countryzone
              ]]>
         <isParameterPresent>
             <include refid="COST-PROFIT-QUERY-COMMON"/>

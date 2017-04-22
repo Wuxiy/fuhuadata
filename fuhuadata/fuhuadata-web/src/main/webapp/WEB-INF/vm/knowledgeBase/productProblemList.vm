@@ -179,6 +179,9 @@
             ],
             "columnDefs":[
                 {
+                    targets: "_all",
+                    defaultContent: ''
+                }, {
                     "targets":1,
                     "render":function(data,type,row,meta){
                         return '<a href="' + data + '" target="_blank">' + row.problemContent+ '</a>';
