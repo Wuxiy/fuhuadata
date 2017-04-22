@@ -313,10 +313,15 @@
                 type: 'POST',
                 success: function (result) {
                     var ResultData = eval(result.data);
-                    for (var i = 0; i < ResultData.length; i++) {
-                        customerList.innerHTML += '<li class="list-group-item"><a class="cNode" data-id="' + ResultData[i].customerId + '">' + ResultData[i].fullName + '</a></li>';
+                    if(ResultData.length == 0){
+                        for (var i = 0; i < ResultData.length; i++) {
+                            customerList.innerHTML += '<li class="list-group-item"><a class="cNode" data-id="' + ResultData[i].customerId + '">' + ResultData[i].fullName + '</a></li>';
+                        }
+                        $('#Modal').modal('show');
+                    }else{
+                        alert('未搜索到相关客户，请重新搜索@！');
                     }
-                    $('#Modal').modal('show');
+
                 }
             })
         })
@@ -344,8 +349,8 @@
                     $('#lemail').val(ResultData.lemail);
                     $('#zhongxinbaoLevel').val(ResultData.zhongxinbaoLevel);
 
-                    $('#customerLevelText').val($('#customerLevel').text());
-                    $('#zhongxinbaoLevelText').val($('#zhongxinbaoLevel').text());
+                    $('#customerLevelText').val($('#customerLevel').select().text());
+                    $('#zhongxinbaoLevelText').val($('#zhongxinbaoLevel').select().text());
 
                     if(ResultData.enterpriseNature!=undefined){
                         var enterpriseNature = ResultData.enterpriseNature.split(',');
@@ -410,7 +415,7 @@
                     success: function (result) {
                         if (result.code == 1) {
                             alert("新增成功!");
-                            location.reload();
+                            window.location.href = basePath + '/businessOrder/intoBusinessOffer/';
                         } else {
                             alert("新增失败！");
                         }

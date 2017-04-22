@@ -416,7 +416,7 @@
     function businessInfo(result) {
 
         console.log(result);
-        if(result.businessRecords){
+        if(result.businessRecords!=undefined){
             var businessRecords = eval(result.businessRecords);
             for(var i=0;i<businessRecords.length;i++){
                 businessfollow.innerHTML += '<tr>'+
@@ -463,8 +463,9 @@
             $('#customerLevel').val(ResultData.customerLevel);
             $('#zhongxinbaoLevel').val(ResultData.zhongxinbaoLevel);
 
-            $('#customerLevelText').val($('#customerLevel').text());
-            $('#zhongxinbaoLevelText').val($('#zhongxinbaoLevel').text());
+            console.log(ResultData.customerLevel);
+            $('#customerLevelText').val($('#customerLevel').select().text());
+            $('#zhongxinbaoLevelText').val($('#zhongxinbaoLevel').select().text());
 
             $('#country').val(ResultData.country);
             $('#name').val(ResultData.linkmanName);
@@ -485,23 +486,6 @@
         var _html = '';
 
     }
-
-    /*
-    function businessFollow(result) {
-        var ResultData = result;
-        for(var i=0;i<businessfollow.length;i++){
-            businessfollow.innerHTML = '';
-            businessfollow.innerHTML += '<tr>'+
-                    '<td>'+businessfollow[i].name+'</td>'+
-                    '<td>'+businessfollow[i].name+'</td>'+
-                    '<td>'+businessfollow[i].name+'</td>'+
-                    '<td>'+businessfollow[i].name+'</td>'+
-                    '<td>'+businessfollow[i].name+'</td>'+
-                    '<td>'+businessfollow[i].name+'</td>'+
-                    '</tr>';
-        }*/
-
-
 
     function updateBusinessInfo(){
         var data = {

@@ -18,13 +18,6 @@
 
                         </div>
                         <div class="btn-group panel-heading-btn pull-right">
-                            <a class="btn btn-xs btn-default hidden" data-view="editHide" onclick="back()" id="infoback">返回</a>
-                            <button id="infoedit" data-btn="edit" data-view="editHide" class="btn btn-xs btn-primary panel-heading-btn pull-right hidden" type="button" lang="zh">
-                                完成
-                            </button>
-
-                        </div>
-                        <div class="btn-group panel-heading-btn pull-right">
                             <a class="btn btn-xs btn-default hidden" data-view="editHide" onclick="back()" id="back">返回</a>
                             <button id="edit" data-btn="edit" data-view="editHide" class="btn btn-xs btn-primary panel-heading-btn pull-right hidden" type="button" lang="zh">
                                 编辑
@@ -769,6 +762,10 @@
             }
         })
 
+        $('#before').click(function(){
+            var productRequireId = $('#productRequireId');
+            window.location.href = basePath + '/businessProduct/intoProductBasicInfoRequire?businessProductId=' + businessProductId + '&&orderId=' + orderId + '&&customerId' + customerId + '&&productRequireId' + productRequireId;
+        })
 
         $('#next').click(function () {
 
@@ -783,16 +780,18 @@
                 }
             });
 
-
-
             jQuery.ajax({
                 url:basePath + '/businessProduct/saveProductRequire',
                 type:'POST',
                 /*contentType:"application/json",*/
                 data:Add(),
                 success:function (result) {
-                    console.log(result);
-                   /* window.location.href = basePath + '/businessProduct/intoDocumentary';*/
+                    var success = result.data.success;
+                    if(success == true){
+                        var productRequireId = result.data.productRequireId;
+                        $('#productRequireId').val(productRequireId);
+                        window.location.href = basePath + '/businessProduct/intoDocumentary?businessProductId=' + businessProductId + '&&orderId=' + orderId + '&&customerId=' + customerId + '&&productRequireId=' + productRequireId;
+                    }
                 }
             })
         })
@@ -999,12 +998,12 @@
         })
     })
 
-    /*$('#infoedit').click(function(){
-
-    })*/
-
     function back() {
         window.location.href = basePath + '/businessOrder/intoOfferorOrder?orderId=' + orderId;
+    }
+
+    function ifEmpty(data) {
+        return data==undefined?'':data;
     }
 
 </script>

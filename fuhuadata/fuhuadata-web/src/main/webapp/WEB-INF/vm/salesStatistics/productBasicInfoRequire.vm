@@ -425,7 +425,7 @@
                         var success = result.data.success;
                         if(success == true){
                             var businessProductId = result.data.businessProductId;
-                            /*window.location.href = basePath + '/businessProduct/intoProductRequire?businessProductId=' + businessProductId + '&&orderId=' + orderId + '&&customerId=' + customerId + '&&productRequireId=' + productRequireId;*/
+                            window.location.href = basePath + '/businessProduct/intoProductRequire?businessProductId=' + businessProductId + '&&orderId=' + orderId + '&&customerId=' + customerId + '&&productRequireId=' + productRequireId;
                         }
                     }
                 })

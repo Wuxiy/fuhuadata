@@ -291,8 +291,7 @@ public class BusinessOrderProductAction {
                 .addObject("orderId",orderId)
                 .addObject("businessProductId",businessProductId)
                 .addObject("productRequireId",productRequireId)
-                .addObject("customerId",customerId)
-                .addObject("businessProductId",businessProductId);
+                .addObject("customerId",customerId);
     }
 
     /**
