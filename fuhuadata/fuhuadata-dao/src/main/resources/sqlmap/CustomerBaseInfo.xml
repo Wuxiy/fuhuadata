@@ -509,10 +509,12 @@
 	<select id="GET-PAGE" resultClass="CustomerBaseInfo" parameterClass="QueryCustomerBaseInfo">
 
 		SELECT
+        base.nc_id ncId,
 		base.customer_id   customerId,
 		base.full_name fullName,
 		base.short_name shortName,
 		base.countryzone,
+        base.customer_area area,
 		base.customer_level customerLevel,
 		base.zhongxinbao_level zhongxinbaoLevel,
 		base.start_cooperation_time startCooperationTime,
