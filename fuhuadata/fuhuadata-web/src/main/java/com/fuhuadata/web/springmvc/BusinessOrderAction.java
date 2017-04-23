@@ -3,15 +3,16 @@ package com.fuhuadata.web.springmvc;
 import com.fuhuadata.dao.BusinessOrderDao;
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.BusinessOrderProduct;
+import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
-import com.fuhuadata.service.BCodeService;
-import com.fuhuadata.service.BusinessInfoService;
-import com.fuhuadata.service.BusinessOrderProductService;
-import com.fuhuadata.service.BusinessOrderService;
+import com.fuhuadata.service.*;
 import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.*;
+import com.fuhuadata.vo.DataArchive.Currtype;
+import com.fuhuadata.vo.DataArchive.Income;
+import com.fuhuadata.vo.DataArchive.Incoterm;
 import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -43,6 +44,9 @@ public class BusinessOrderAction {
 
     @Autowired
     private BusinessOrderProductService businessOrderProductService;
+
+    @Autowired
+    private DataArchivesService dataArchivesService;
 
 
     @RequiresPermissions({"sale:flow:offer:view"})
@@ -141,7 +145,14 @@ public class BusinessOrderAction {
     public ModelAndView intoBusinessConverse(String businessId){
         String orderId = bCodeService.genNextOrderCode();
         Result<BusinessInfoVO> result = businessInfoService.getBusinessInfoByBusinessId(businessId);
-        return new ModelAndView("salesStatistics/offerAdd").addObject("orderId",orderId).addObject("businessId",businessId).addObject("businessInfo",result.getModel());
+        //收款协议
+        Result<List<Income>> rincome = dataArchivesService.getIncome();
+        //贸易术语
+        Result<List<Incoterm>> rincoterm = dataArchivesService.getIncoterm();
+        //币种
+        Result<List<Currtype>> rcurrtype = dataArchivesService.getCurrtype();
+        return new ModelAndView("salesStatistics/offerAdd").addObject("orderId",orderId).addObject("businessId",businessId).addObject("businessInfo",result.getModel())
+                .addObject("income",rincome.getModel()).addObject("incoterm",rincoterm.getModel()).addObject("currtype",rcurrtype.getModel());
     }
 
     /**
@@ -152,7 +163,14 @@ public class BusinessOrderAction {
     @SystemLogAnnotation(module = "salesStatistics",methods = "intoBusinessOfferConverse")
     public ModelAndView intoBusinessOfferConverse(String orderId){
         Result<BusinessOrderProductVO> result = businessOrderProductService.getBusinessOrderProducts(orderId);
-        return new ModelAndView("salesStatistics/orderConversion").addObject("orderId",orderId).addObject("businessOrderProduct",result.getModel());
+        //收款协议
+        Result<List<Income>> rincome = dataArchivesService.getIncome();
+        //贸易术语
+        Result<List<Incoterm>> rincoterm = dataArchivesService.getIncoterm();
+        //币种
+        Result<List<Currtype>> rcurrtype = dataArchivesService.getCurrtype();
+        return new ModelAndView("salesStatistics/orderConversion").addObject("orderId",orderId).addObject("businessOrderProduct",result.getModel())
+                .addObject("income",rincome.getModel()).addObject("incoterm",rincoterm.getModel()).addObject("currtype",rcurrtype.getModel());
     }
 
     /**
@@ -185,25 +203,25 @@ public class BusinessOrderAction {
 
 
     /**
-     *  doAdd
-     * @param businessOrder
-     * @return
-     */
-    @RequestMapping(value = "/doAddBusinessOrder",method = RequestMethod.POST)
-    @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "addBusinessOrder")
-    @ResponseBody
-    public ResultPojo addBusinessOrder(@RequestBody BusinessOrder businessOrder){
-        Result<BusinessOrder> result = new Result<BusinessOrder>();
-        try{
-            businessOrder.setStatus(0);//新增报价,从商机转化而来，为报价中的状态
+             *  doAdd
+             * @param businessOrder
+             * @return
+             */
+            @RequestMapping(value = "/doAddBusinessOrder",method = RequestMethod.POST)
+            @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "addBusinessOrder")
+            @ResponseBody
+            public ResultPojo addBusinessOrder(@RequestBody BusinessOrder businessOrder){
+                Result<BusinessOrder> result = new Result<BusinessOrder>();
+                try{
+                    businessOrder.setStatus(0);//新增报价,从商机转化而来，为报价中的状态
 
-            /**设置创建人和修改人**/
-            businessOrder.setCreateUserId(LoginUtils.getLoginId());
-            businessOrder.setCreateUserName(LoginUtils.getLoginName());
-            businessOrder.setLastmodifyUserId(LoginUtils.getLoginId());
-            businessOrder.setLastmodifyUserName(LoginUtils.getLoginName());
-            businessOrder.setCreateTime(DateUtil.getDateTime());
-            businessOrder.setModifyTime(DateUtil.getDateTime());
+                    /**设置创建人和修改人**/
+                    businessOrder.setCreateUserId(LoginUtils.getLoginId());
+                    businessOrder.setCreateUserName(LoginUtils.getLoginName());
+                    businessOrder.setLastmodifyUserId(LoginUtils.getLoginId());
+                    businessOrder.setLastmodifyUserName(LoginUtils.getLoginName());
+                    businessOrder.setCreateTime(DateUtil.getDateTime());
+                    businessOrder.setModifyTime(DateUtil.getDateTime());
 
             result = businessOrderService.addBusinessOrder(businessOrder);
         }catch(Exception e){
@@ -266,7 +284,14 @@ public class BusinessOrderAction {
     @RequestMapping("/intoOfferorOrder")
     @SystemLogAnnotation(module = "salesStatistics",methods = "intoOfferorOrder")
     public ModelAndView intoOfferorOrder(String orderId,String businessId) {
-        return new ModelAndView("salesStatistics/offerInfo").addObject("orderId", orderId).addObject("businessId", businessId);
+        //收款协议
+        Result<List<Income>> rincome = dataArchivesService.getIncome();
+        //贸易术语
+        Result<List<Incoterm>> rincoterm = dataArchivesService.getIncoterm();
+        //币种
+        Result<List<Currtype>> rcurrtype = dataArchivesService.getCurrtype();
+        return new ModelAndView("salesStatistics/offerInfo").addObject("orderId", orderId).addObject("businessId", businessId)
+                .addObject("income",rincome.getModel()).addObject("incoterm",rincoterm.getModel()).addObject("currtype",rcurrtype.getModel());
     }
 
     /**
@@ -277,6 +302,7 @@ public class BusinessOrderAction {
     @RequestMapping("/intoOrder")
     @SystemLogAnnotation(module = "salesStatistics",methods = "intoOrder")
     public ModelAndView intoOrder(String orderId){
+
         return new ModelAndView("salesStatistics/orderInfo").addObject("orderId",orderId);
     }
 

@@ -24,6 +24,7 @@
         <result column="collection_agreement" jdbcType="VARCHAR" property="collectionAgreement" javaType="java.lang.String"/>
         <result column="trade_type" jdbcType="TINYINT" property="tradeType" javaType="java.lang.Integer"/>
         <result column="trade_term" jdbcType="VARCHAR" property="tradeTerm" javaType="java.lang.String"/>
+
         <result column="currency" jdbcType="VARCHAR" property="currency" javaType="java.lang.String"/>
 
         <result property="isCreditRisk" column="is_credit_risk" jdbcType="INT" javaType="java.lang.Integer"/>
@@ -439,8 +440,72 @@
     <!--报价及订单详情页表头-->
     <select id="GET-BY-ID" resultMap="BUSINESSORDER-MAP" parameterClass="java.lang.String" >
         <![CDATA[
-        select *  from business_order
-        where order_id = #orderId#
+                  SELECT
+                order_id,
+                nc_order_id,
+                business_id,
+                customer_id,
+                customer_duty_paragraph,
+                bill_to_customer,
+                sales_man_id,
+                sales_man_name,
+                department_id,
+                department_name,
+                sale_organization_id,
+                sale_organization_name,
+                destination_port,
+                shipment_port,
+                t_income.`name` collection_agreement,
+                trade_type,
+                t_incoterm.`name` trade_term,
+                t_currtype.`name` currency,
+                nusdexchgrate,
+                nexchangerate,
+                lastdelydate,
+                trade_country,
+                premium_rate,
+                guarantee_rate,
+                discount_rate,
+                loss_rate,
+                sale_rate,
+                management_rate,
+                gross_rate,
+                credit_rate,
+                transport_flag,
+                partial_shipment_falg,
+                STATUS,
+                deal_time,
+                deliver_info,
+                express_info,
+                due_time,
+                amount_payable,
+                floor_price,
+                maintenance_fee,
+                net_profit,
+                actual_payment_time,
+                gross_profit,
+                actual_amount_paid,
+                unpaid_amount,
+                is_complaint,
+                is_pledge,
+                is_modify_price,
+                claim_amount,
+                create_user_id,
+                create_user_name,
+                lastmodify_user_id,
+                lastmodify_user_name,
+                create_time,
+                modify_time,
+                failure_analysis,
+                is_credit_risk,
+                interest_rate
+            FROM
+                business_order
+            LEFT JOIN t_currtype ON t_currtype.`code` = business_order.currency
+            LEFT JOIN t_incoterm ON t_incoterm.`code` = business_order.trade_term
+            LEFT JOIN t_income ON t_income.`code` = business_order.collection_agreement
+            WHERE
+                order_id = #orderId#
     ]]>
     </select>
 

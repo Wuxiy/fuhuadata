@@ -20,6 +20,9 @@
         <result property="creatorId" column="creator_id" jdbcType="INT" javaType="java.lang.Integer"/>
         <result column="creator" property="creator" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="create_time" property="createTime" jdbcType="DATETIME" javaType="java.sql.Timestamp"/>
+        <result column="lastmodify_user_id" jdbcType="INTEGER" property="lastmodifyUserId" javaType="java.lang.Integer"/>
+        <result column="lastmodify_user_name" jdbcType="VARCHAR" property="lastmodifyUserName" javaType="java.lang.String"/>
+        <result column="modify_time" jdbcType="DATETIME" property="modifyTime" javaType="java.sql.Timestamp"/>
     </resultMap>
     <sql id="PAGE-COMMON">
         <dynamic prepend=" WHERE ">
@@ -72,12 +75,12 @@
         organizer, region, country,
         city, start_date, finish_date,
         exhibition_addr, exhibition_link,creator_id ,creator,
-        create_time, exhibition_info)
+        create_time, exhibition_info,lastmodify_user_id,lastmodify_user_name,modify_time)
         values (#exhibitionId#, #exhibitionName#, #sponsor#,
         #organizer#, #region#, #country#,
         #city#, #startDate#, #finishDate#,
         #exhibitionAddr#, #exhibitionLink#,#creatorId# #creator#,
-        #createTime#, #exhibitionInfo#)
+        #createTime#, #exhibitionInfo#,#lastmodifyUserId#, #lastmodifyUserName#,#modifyTime#)
         <selectKey resultClass="int" keyProperty="exhibitionId">
             SELECT @@IDENTITY AS exhibition_id
         </selectKey>
@@ -125,6 +128,15 @@
             <isNotNull prepend=", " property="exhibitionInfo">
                 exhibition_info = #exhibitionInfo#
             </isNotNull>
+            <isNotNull prepend="," property="lastmodifyUserId" >
+                lastmodify_user_id = #lastmodifyUserId#
+            </isNotNull>
+            <isNotNull prepend="," property="lastmodifyUserName" >
+                lastmodify_user_name = #lastmodifyUserName#
+            </isNotNull>
+            <isNotNull prepend="," property="modifyTime" >
+                modify_time = #modifyTime#
+            </isNotNull>
         </dynamic>
     </update>
 
@@ -151,7 +163,32 @@
 
     <select id="GET-BY-ID" resultMap="EXHIBITIONINFO-MAP" parameterClass="java.lang.Integer">
         <![CDATA[
-            SELECT * FROM k_exhibition_info WHERE exhibition_id = #exhibitionId#
+                        SELECT
+                kei.exhibition_id,
+                kei.exhibition_name,
+                kei.exhibition_info,
+                kei.exhibition_addr,
+                kei.exhibition_link,
+                kei.sponsor,
+                kei.organizer,
+                ta.`name` region,
+                tc.`name` country,
+                kei.city,
+                kei.start_date,
+                kei.finish_date,
+                kei.creator_id,
+                kei.creator,
+                kei.create_time,
+                kei.modify_time,
+                kei.lastmodify_user_id,
+                kei.lastmodify_user_name
+
+            FROM
+                k_exhibition_info kei
+            LEFT JOIN t_countryzone tc ON tc.`code` = kei.country
+            LEFT JOIN t_areacl ta ON ta.`code` = kei.region
+            WHERE
+                exhibition_id = #exhibitionId#
         ]]>
     </select>
 
