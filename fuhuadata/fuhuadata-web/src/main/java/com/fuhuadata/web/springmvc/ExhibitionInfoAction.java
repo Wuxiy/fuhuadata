@@ -103,6 +103,9 @@ public class    ExhibitionInfoAction {
             exhibitionInfo.setCreatorId(LoginUtils.getLoginId());
             exhibitionInfo.setCreator(LoginUtils.getLoginName());
             exhibitionInfo.setCreateTime(DateUtil.getDateTimeFormat());
+            exhibitionInfo.setLastmodifyUserId(LoginUtils.getLoginId());
+            exhibitionInfo.setLastmodifyUserName(LoginUtils.getLoginName());
+            exhibitionInfo.setModifyTime(DateUtil.getDateTimeFormat());
             Result<ExhibitionInfo> result = exhibitionInfoService.addExhibitionInfo(exhibitionInfo);
             return result.getResultPojo();
         }catch (Exception e){
@@ -142,6 +145,9 @@ public class    ExhibitionInfoAction {
     @ResponseBody
     public ResultPojo doModifyExhibitionInfo(@RequestBody ExhibitionInfo exhibitionInfo){
         try{
+            exhibitionInfo.setLastmodifyUserId(LoginUtils.getLoginId());
+            exhibitionInfo.setLastmodifyUserName(LoginUtils.getLoginName());
+            exhibitionInfo.setModifyTime(DateUtil.getDateTimeFormat());
             int id = exhibitionInfo.getExhibitionId();
             Result<ExhibitionInfo> result = exhibitionInfoService.updateExhibitionInfoById(id,exhibitionInfo);
             return result.getResultPojo();

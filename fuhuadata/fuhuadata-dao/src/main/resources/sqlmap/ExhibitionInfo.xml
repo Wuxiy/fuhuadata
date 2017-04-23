@@ -75,12 +75,12 @@
         organizer, region, country,
         city, start_date, finish_date,
         exhibition_addr, exhibition_link,creator_id ,creator,
-        create_time, exhibition_info,lastmodify_user_id,lastmodify_user_name,modify_time)
+        create_time,exhibition_info,lastmodify_user_id,lastmodify_user_name,modify_time)
         values (#exhibitionId#, #exhibitionName#, #sponsor#,
         #organizer#, #region#, #country#,
         #city#, #startDate#, #finishDate#,
-        #exhibitionAddr#, #exhibitionLink#,#creatorId# #creator#,
-        #createTime#, #exhibitionInfo#,#lastmodifyUserId#, #lastmodifyUserName#,#modifyTime#)
+        #exhibitionAddr#, #exhibitionLink#,#creatorId#,#creator#,
+        #createTime#, #exhibitionInfo#,#lastmodifyUserId#,#lastmodifyUserName#,#modifyTime#)
         <selectKey resultClass="int" keyProperty="exhibitionId">
             SELECT @@IDENTITY AS exhibition_id
         </selectKey>
@@ -131,13 +131,14 @@
             <isNotNull prepend="," property="lastmodifyUserId" >
                 lastmodify_user_id = #lastmodifyUserId#
             </isNotNull>
-            <isNotNull prepend="," property="lastmodifyUserName" >
+            <isNotNull prepend=", " property="lastmodifyUserName" >
                 lastmodify_user_name = #lastmodifyUserName#
             </isNotNull>
-            <isNotNull prepend="," property="modifyTime" >
+            <isNotNull prepend=", " property="modifyTime" >
                 modify_time = #modifyTime#
             </isNotNull>
         </dynamic>
+        where exhibition_id = #exhibitionId#
     </update>
 
     <delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
@@ -154,7 +155,30 @@
 
     <select id="GET-BY-QUERY" resultMap="EXHIBITIONINFO-MAP" parameterClass="ExhibitionInfoQuery">
         <![CDATA[
-            SELECT * FROM k_exhibition_info
+             SELECT
+                kei.exhibition_id,
+                kei.exhibition_name,
+                kei.exhibition_info,
+                kei.exhibition_addr,
+                kei.exhibition_link,
+                kei.sponsor,
+                kei.organizer,
+                ta.`name` region,
+                tc.`name` country,
+                kei.city,
+                kei.start_date,
+                kei.finish_date,
+                kei.creator_id,
+                kei.creator,
+                kei.create_time,
+                kei.modify_time,
+                kei.lastmodify_user_id,
+                kei.lastmodify_user_name
+
+            FROM
+                k_exhibition_info kei
+            LEFT JOIN t_countryzone tc ON tc.`code` = kei.country
+            LEFT JOIN t_areacl ta ON ta.`code` = kei.region
         ]]>
         <isParameterPresent>
             <include refid="QUERY-COMMON"/>
