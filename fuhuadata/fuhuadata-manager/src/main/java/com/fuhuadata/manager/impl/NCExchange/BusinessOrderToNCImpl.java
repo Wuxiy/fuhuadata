@@ -2,19 +2,28 @@ package com.fuhuadata.manager.impl.NCExchange;
 
 import com.fuhuadata.dao.BusinessOrderDao;
 import com.fuhuadata.dao.BusinessOrderProductDao;
+import com.fuhuadata.dao.CustomerBaseInfoDao;
+import com.fuhuadata.dao.NCExchange.OrderToNc;
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.BusinessOrderProduct;
+import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.domain.query.QueryBusinessOrderProduct;
 import com.fuhuadata.manager.NCExchange.BusinessOrderToNC;
+import com.fuhuadata.manager.NCExchange.CustomerInfoToNC;
+import com.fuhuadata.vo.CustomerBaseInfoVO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.aspectj.weaver.loadtime.Agent;
+import org.dom4j.*;
 import org.dom4j.DocumentHelper;
 import org.dom4j.io.DocumentSource;
 import org.jdom.input.SAXBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import javax.servlet.ServletContext;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
@@ -26,10 +35,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by zhangxiang on 2017/4/10.
@@ -41,6 +47,16 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
     private BusinessOrderDao businessOrderDao;
     @Autowired
     private BusinessOrderProductDao businessOrderProductDao;
+    @Autowired
+    private CustomerBaseInfoDao customerBaseInfoDao;
+    @Autowired
+    private CustomerInfoToNC customerInfoToNC;
+    @Autowired
+    private OrderToNc orderToNc;
+    @Value("${ncurl}")
+    private String ncUrl;
+    @Autowired
+    ServletContext servletContext;
 
     /**
      * 返回值为"1"则NC转换成功
@@ -48,32 +64,47 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
      * @return
      */
     @Override
-    public String sendBusinessOrder(String orderId) {
+    public String sendBusinessOrder(String orderId,List<Integer> orderProductsId) {
 
         /*
         将订单实体转换成xml。
          */
             BusinessOrder orderBaseInfo = businessOrderDao.getBusinessOrderByOrderId(orderId);
-            QueryBusinessOrderProduct qbop = new QueryBusinessOrderProduct();
-            qbop.setOrderId(orderId);
-            List<BusinessOrderProduct> orderProducts = businessOrderProductDao.getList(qbop);
-            String xmlName= businessOrderToXML(orderBaseInfo, orderProducts);
+            String customerId=orderBaseInfo.getCustomerId();
+            CustomerBaseInfo customerBaseInfo=customerBaseInfoDao.getCustomerBaseInfoById(customerId);
+            int customerType=customerBaseInfo.getCustomerType();
+            String ncid=customerBaseInfo.getNcId();
+            //判断该客户是否是合作客户，如果不是则转换成合作客户，并导入nc客户基本档案
+            if (2==customerType){
+                ncid=customerInfoToNC.sendCustomerInfo(customerBaseInfo);
+            }
+
+            List<BusinessOrderProduct> orderProducts = orderToNc.getOrderProductsById(orderProductsId);
+            String xmlName= businessOrderToXML(orderBaseInfo, orderProducts,ncid);
         /*
         将xml文件传送到nc端
          */
+
+        //获取配置参数
+
+
         String pk_order=null;
         String resultCode=null;
         try {
             // 获取Servlet连接并设置请求的方法
-            String url = "http://192.168.30.30:8300/service/XChangeServlet?account=01&groupcode=0001";
-            URL realURL = new URL(url);
+            //Properties properties = new Properties();
+            //InputStream inputS = new FileInputStream("fuhuadata-manager/src/main/resource/ncInfo.properties");
+            //properties.load(inputS);
+            //String ncurl = properties.getProperty("ncurl");
+
+            URL realURL = new URL(ncUrl);
             HttpURLConnection connection = (HttpURLConnection) realURL.openConnection();
             connection.setDoOutput(true);
             connection.setRequestProperty("Content-type", "text/xml");
             connection.setRequestMethod("POST");
 
 
-            File file = new File("fuhuadata-manager/src/main/resource/indocs"+xmlName);
+            File file = new File(xmlName);
             BufferedOutputStream out = new BufferedOutputStream(connection.getOutputStream());
             BufferedInputStream input = new BufferedInputStream(new FileInputStream(file));
             int length;
@@ -112,8 +143,9 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
 
 
             //设置日期格式
+            String a = servletContext.getRealPath("/");
             SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddHHmmss");
-            String resFile = "fuhuadata-manager/src/main/resource/indocs/orderBackFile" + fmt.format(new Date()) + ".xml";
+            String resFile =a + fmt.format(new Date()) + ".xml";
             StreamResult result = new StreamResult(new File(resFile));
             transformer.transform(source, result);
             System.out.println("======生成回执文件成功=======");
@@ -143,15 +175,15 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                     log.info("导入nc失败");
                 } else if (resSuc.equals("Y")) {
                     log.info("导入nc成功");
-                    //接下来的代码，修改状态
+                    //修改状态
                     orderBaseInfo.setStatus(2);
                     orderBaseInfo.setNcOrderId(pk_order);
                     businessOrderDao.updateBusinessOrderByOrderId(orderBaseInfo);
                 } else {
-                    System.out.println("出现未知错误");
+                    log.error("出現未知错误");
                 }
             } else {
-                System.out.println("未找到successful属性");
+                log.error("未找到回执文件的succeful属性");
             }
         }catch (Exception e){
             log.error("发送nc出错",e);
@@ -159,8 +191,7 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
 
         return resultCode;
     }
-
-    private String businessOrderToXML(BusinessOrder orderBaseInfo, List<BusinessOrderProduct> orderProducts){
+    private String businessOrderToXML(BusinessOrder orderBaseInfo, List<BusinessOrderProduct> orderProducts,String ncid){
         String xmlName=null;
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -187,25 +218,61 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
             pk_group.appendChild(document.createTextNode("0001"));
             billhead.appendChild(pk_group);
             Map<String,String> nodeValue=new HashMap<String, String>();
-            nodeValue.put("pk_org",orderBaseInfo.getSaleOrganizationId());
-            nodeValue.put("ccustomerid",orderBaseInfo.getCustomerId());
-            nodeValue.put("ctradecountryid",orderBaseInfo.getTradeCountry());
-            nodeValue.put("cemployeeid",orderBaseInfo.getSalesManId());
-            nodeValue.put("cdeptvid",orderBaseInfo.getDepartmentId());
-            nodeValue.put("corigcurrencyid",orderBaseInfo.getCurrency());
-            nodeValue.put("nexchangerate",""+orderBaseInfo.getNexchangerate());
-            nodeValue.put("nusdexchgrate",""+orderBaseInfo.getNusdexchgrate());
-            nodeValue.put("cpaytermid",orderBaseInfo.getCollectionAgreement());
-            nodeValue.put("ctradewordid",orderBaseInfo.getTradeTerm());
+            if(orderBaseInfo.getSaleOrganizationId()!=null) {
+                nodeValue.put("pk_org", "" + orderBaseInfo.getSaleOrganizationId());
+            }
+            nodeValue.put("ccustomerid",""+ncid);
+            if (orderBaseInfo.getTradeCountry()!=null) {
+                nodeValue.put("ctradecountryid", "" + orderBaseInfo.getTradeCountry());
+            }if (orderBaseInfo.getSalesManId()!=null) {
+                nodeValue.put("cemployeeid", "" + orderBaseInfo.getSalesManId());
+            }
+            if (orderBaseInfo.getDepartmentId()!=null) {
+                nodeValue.put("cdeptvid", "" + orderBaseInfo.getDepartmentId());
+            }
+            //if (orderBaseInfo.getCurrency()!=null) {
+            //    nodeValue.put("corigcurrencyid", "" + orderBaseInfo.getCurrency());
+            //}
+            if (orderBaseInfo.getNexchangerate()!=null) {
+                nodeValue.put("nexchangerate", "" + orderBaseInfo.getNexchangerate());
+            }
+            if (orderBaseInfo.getNusdexchgrate()!=null) {
+                nodeValue.put("nusdexchgrate", "" + orderBaseInfo.getNusdexchgrate());
+            }
+            if (orderBaseInfo.getCollectionAgreement()!=null) {
+                nodeValue.put("cpaytermid", "" + orderBaseInfo.getCollectionAgreement());
+            }
+            if (orderBaseInfo.getTradeTerm()!=null) {
+                nodeValue.put("ctradewordid", "" + orderBaseInfo.getTradeTerm());
+            }
             //nodeValue.put("ctransporttypeid","");
-            nodeValue.put("cloadportid",orderBaseInfo.getShipmentPort());
-            nodeValue.put("cdestportid",orderBaseInfo.getDestinationPort());
-            nodeValue.put("vdef6",""+orderBaseInfo.getGuaranteeRate());
-            nodeValue.put("vdef16",""+orderBaseInfo.getCreditRate());
-            nodeValue.put("vdef17",""+orderBaseInfo.getDiscountRate());
-            nodeValue.put("vdef18",""+orderBaseInfo.getSaleRate());
-            nodeValue.put("vdef19",""+orderBaseInfo.getManagementRate());
-            nodeValue.put("vdef12",""+orderBaseInfo.getLossRate());
+            if (orderBaseInfo.getShipmentPort()!=null) {
+                nodeValue.put("cloadportid", "" + orderBaseInfo.getShipmentPort());
+            }
+            if (orderBaseInfo.getDestinationPort()!=null) {
+                nodeValue.put("cdestportid", "" + orderBaseInfo.getDestinationPort());
+            }
+            if (orderBaseInfo.getGuaranteeRate()!=null) {
+                nodeValue.put("vdef6", "" + orderBaseInfo.getGuaranteeRate());
+            }
+            if (orderBaseInfo.getCreditRate()!=null) {
+                nodeValue.put("vdef16", "" + orderBaseInfo.getCreditRate());
+            }
+            if (orderBaseInfo.getDiscountRate()!=null) {
+                nodeValue.put("vdef17", "" + orderBaseInfo.getDiscountRate());
+            }
+            if (orderBaseInfo.getSaleRate()!=null) {
+                nodeValue.put("vdef18", "" + orderBaseInfo.getSaleRate());
+            }
+            if (orderBaseInfo.getManagementRate()!=null) {
+                nodeValue.put("vdef19", "" + orderBaseInfo.getManagementRate());
+            }
+            if (orderBaseInfo.getLossRate()!=null) {
+                nodeValue.put("vdef12", "" + orderBaseInfo.getLossRate());
+            }
+            if (orderBaseInfo.getCollectionAgreement()!=null){
+                nodeValue.put("cpaytermid",""+orderBaseInfo.getCollectionAgreement());
+            }
             //设定长期协议的协议状态为生效。
             nodeValue.put("fstatusflag","7");
             nodeValue.put("fpfstatusflag","1");
@@ -228,36 +295,73 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                 pk_longpro_b.appendChild(item);
                 Map<String,String> productMap=new HashMap<String, String>();
                 productMap.put("crowno",""+i);i++;
-                productMap.put("cmaterialvid",""+orderProduct.getProductId());
-                productMap.put("",orderProduct.getInternalSupplyId());
-                productMap.put("nnum",""+orderProduct.getMainProductAmount());
-                productMap.put("norigprice",""+orderProduct.getContractPrice());
-                productMap.put("vbdef20",""+orderProduct.getCommissionPrice());
+                //根据crm的物料id查询product_ware表里的nc物料code
+                int wareId=orderProduct.getWareId();
+                String materialCode=orderToNc.getCodeByWareId(wareId);
+                if(materialCode!=null){
+                    productMap.put("cmaterialvid",""+materialCode);
+                }
+                //内部供货单位
+                //productMap.put("",orderProduct.getInternalSupplyId());
+                if (orderProduct.getMainProductAmount()!=null) {
+                    productMap.put("nnum", "" + orderProduct.getMainProductAmount());
+                }
+                if (orderProduct.getContractPrice()!=null) {
+                    productMap.put("norigprice", "" + orderProduct.getContractPrice());
+                }
+                if (orderProduct.getCommissionPrice()!=null) {
+                    productMap.put("vbdef20", "" + orderProduct.getCommissionPrice());
+                }
                 //单耗
-                productMap.put("vbdef7",""+orderProduct.getConvertRate());
+                if (orderProduct.getConvertRate()!=null) {
+                    productMap.put("vbdef7", "" + orderProduct.getConvertRate());
+                }
                 //采购单价
-                productMap.put("vbdef8",""+orderProduct.getPurchasePrice());
+                if (orderProduct.getPurchasePrice()!=null) {
+                    productMap.put("vbdef8", "" + orderProduct.getPurchasePrice());
+                }
                 //海运单价
-                productMap.put("vbdef9",""+orderProduct.getOceanFreight());
+                if (orderProduct.getOceanFreight()!=null) {
+                    productMap.put("vbdef9", "" + orderProduct.getOceanFreight());
+                }
                 //港杂单价
-                productMap.put("vbdef10",""+orderProduct.getPortSurcharge());
+                if (orderProduct.getPortSurcharge()!=null) {
+                    productMap.put("vbdef10", "" + orderProduct.getPortSurcharge());
+                }
                 //原药基准价
-                productMap.put("vbdef11",""+orderProduct.getAdvisePrice());
+                if (orderProduct.getAdvisePrice()!=null) {
+                    productMap.put("vbdef11", "" + orderProduct.getAdvisePrice());
+                }
                 //毛利率
-                productMap.put("vbdef12",""+orderProduct.getGrossMargin());
+                if (orderProduct.getGrossMargin()!=null) {
+                    productMap.put("vbdef12", "" + orderProduct.getGrossMargin());
+                }
                 //加工费单价
-                productMap.put("vbdef13",""+orderProduct.getProcessCost());
+                if (orderProduct.getProcessCost()!=null) {
+                    productMap.put("vbdef13", "" + orderProduct.getProcessCost());
+                }
                 //其他费用单价
-                productMap.put("vbdef14",""+orderProduct.getOtherCost());
+                if (orderProduct.getOtherCost()!=null) {
+                    productMap.put("vbdef14", "" + orderProduct.getOtherCost());
+                }
                 //退税计算方式
-                productMap.put("vbdef15",""+orderProduct.getTaxType());
+                if (orderProduct.getTaxType()!=null) {
+                    productMap.put("vbdef15", "" + orderProduct.getTaxType());
+                }
                 //退税率
-                productMap.put("vbdef3",""+orderProduct.getTaxFree());
+                if (orderProduct.getTaxFree()!=null) {
+                    productMap.put("vbdef3", "" + orderProduct.getTaxFree());
+                }
                 //货柜数
-                productMap.put("vbdef17",""+orderProduct.getCupboardNumber());
+                if (orderProduct.getCupboardNumber()!=null) {
+                    productMap.put("vbdef17", "" + orderProduct.getCupboardNumber());
+                }
                 //货柜类型
-                productMap.put("cpackingid",""+orderProduct.getCupboardType());
+                if (orderProduct.getCupboardType()!=null) {
+                    productMap.put("cpackingid", "" + orderProduct.getCupboardType());
+                }
                 for(Map.Entry<String ,String> entry:productMap.entrySet()){
+                    String a=entry.getKey();
                     Element ele=document.createElement(entry.getKey());
                     ele.appendChild(document.createTextNode(entry.getValue()));
                     item.appendChild(ele);
@@ -273,8 +377,10 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             // 向文本输出流打印对象的格式化表示形式
             // 要保证你的文本输出后格式不乱码，打印对象需指定打印格式，以标记此文本支持的格式
-            xmlName="order"+orderBaseInfo.getOrderId()+System.currentTimeMillis()+".xml";
-            PrintWriter pw = new PrintWriter("fuhuadata-manager/src/main/resource/indocs"+xmlName, "utf-8");
+
+            String a = servletContext.getRealPath("/");
+            xmlName=a+"order"+orderBaseInfo.getOrderId()+System.currentTimeMillis()+".xml";
+            PrintWriter pw = new PrintWriter(xmlName, "utf-8");
             // 充当转换结果的持有者，可以为 XML、纯文本、HTML 或某些其他格式的标记
             StreamResult result = new StreamResult(pw);
             transformer.transform(source, result);
@@ -285,9 +391,11 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
         return xmlName;
     }
 
-    public static void main(String[] args) {
-        BusinessOrderToNC b=new BusinessOrderToNCImpl();
-        b.sendBusinessOrder("20170322122021023");
+    public void setNcUrl(String ncUrl) {
+        this.ncUrl = ncUrl;
+    }
+    public String getNcUrl(){
+        return this.ncUrl;
     }
 
 }

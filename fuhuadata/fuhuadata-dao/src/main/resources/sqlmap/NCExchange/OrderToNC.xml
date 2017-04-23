@@ -3,6 +3,73 @@
         "http://www.ibatis.com/dtd/sql-map-2.dtd">
 <sqlMap namespace="BUSINESSORDERTONC">
     <typeAlias alias="BusinessOrder" type="com.fuhuadata.domain.BusinessOrder"/>
+    <typeAlias alias="BusinessOrderProduct" type="com.fuhuadata.domain.BusinessOrderProduct"/>
+
+    <resultMap class="com.fuhuadata.domain.BusinessOrderProduct" id="BusinessOrderProductResultMap">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+        <result column="archive_product_id" jdbcType="INTEGER" property="archiveProductId" />
+        <result column="product_id" jdbcType="INTEGER" property="productId" />
+        <result column="ware_id" jdbcType="INTEGER" property="wareId" />
+        <result column="customs_clearance_id" jdbcType="VARCHAR" property="customsClearanceId" />
+        <result column="customs_clearance_name" jdbcType="VARCHAR" property="customsClearanceName" />
+        <result column="Internal_supply_id" jdbcType="VARCHAR" property="internalSupplyId" />
+        <result column="Internal_supply_name" jdbcType="VARCHAR" property="internalSupplyName" />
+        <result column="customer_id" jdbcType="INTEGER" property="customerId" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="customer_product_name" jdbcType="VARCHAR" property="customerProductName" />
+        <result column="brand" jdbcType="VARCHAR" property="brand" />
+        <result column="main_product_amount" jdbcType="DECIMAL" property="mainProductAmount" />
+        <result column="main_product_unit" jdbcType="VARCHAR" property="mainProductUnit" />
+        <result column="sub_product_amount" jdbcType="DECIMAL" property="subProductAmount" />
+        <result column="sub_product_unit" jdbcType="INTEGER" property="subProductUnit" />
+        <result column="convert_rate" jdbcType="DECIMAL" property="convertRate" />
+        <result column="price_type" jdbcType="INTEGER" property="priceType" />
+        <result column="advise_price" jdbcType="DECIMAL" property="advisePrice" />
+        <result column="purchase_price" jdbcType="DECIMAL" property="purchasePrice" />
+        <result column="delivery_time" jdbcType="TIMESTAMP" property="deliveryTime" />
+        <result column="Internal_transport_mode" jdbcType="INTEGER" property="internalTransportMode" />
+        <result column="Internal_transport_price" jdbcType="DECIMAL" property="internalTransportPrice" />
+        <result column="factory_id" jdbcType="VARCHAR" property="factoryId" />
+        <result column="factory_name" jdbcType="VARCHAR" property="factoryName" />
+        <result column="commission_price" jdbcType="DECIMAL" property="commissionPrice" />
+        <result column="documentary_type" jdbcType="INTEGER" property="documentaryType" />
+        <result column="documentary_require" jdbcType="VARCHAR" property="documentaryRequire" />
+        <result column="other_documentary_require" jdbcType="VARCHAR" property="otherDocumentaryRequire" />
+        <result column="shipping_agent_require" jdbcType="VARCHAR" property="shippingAgentRequire" />
+        <result column="package_require" jdbcType="VARCHAR" property="packageRequire" />
+        <result column="goods_type" jdbcType="INTEGER" property="goodsType" />
+        <result column="mianxiangqi" jdbcType="INTEGER" property="mianxiangqi" />
+        <result column="miantuiqi" jdbcType="INTEGER" property="miantuiqi" />
+        <result column="cupboard_type" jdbcType="INTEGER" property="cupboardType" />
+        <result column="cupboard_per_number" jdbcType="INTEGER" property="cupboardPerNumber" />
+        <result column="cupboard_number" jdbcType="INTEGER" property="cupboardNumber" />
+        <result column="ocean_freight" jdbcType="DECIMAL" property="oceanFreight" />
+        <result column="port_surcharge" jdbcType="DECIMAL" property="portSurcharge" />
+        <result column="tax_type" jdbcType="TINYINT" property="taxType" />
+        <result column="tax_free" jdbcType="DECIMAL" property="taxFree" />
+        <result column="gross_margin" jdbcType="DECIMAL" property="grossMargin" />
+        <result column="process_cost" jdbcType="DECIMAL" property="processCost"/>
+        <result column="other_cost" jdbcType="DECIMAL" property="otherCost" />
+        <result column="min_price" jdbcType="DECIMAL" property="minPrice" />
+        <result column="contract_price" jdbcType="DECIMAL" property="contractPrice" />
+        <result column="transform_state" jdbcType="INTEGER" property="transformState" />
+        <result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
+        <result column="create_user_name" jdbcType="VARCHAR" property="createUserName" />
+        <result column="lastmodify_user_id" jdbcType="INTEGER" property="lastmodifyUserId" />
+        <result column="lastmodify_user_name" jdbcType="VARCHAR" property="lastmodifyUserName" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+        <result column="unit_use_rate" jdbcType="DECIMAL" property="unitUseRate"/>
+        <result column="capital_interest_price" jdbcType="DECIMAL" property="capitalInterestPrice"/>
+    </resultMap>
+
+    <select id="getOrderProductsById" parameterClass="java.util.List" resultMap="BusinessOrderProductResultMap">
+        select
+        *
+        from business_order_product
+        where id IN <iterate open="(" close=")" conjunction=",">#orderProductsId[]#</iterate>
+    </select>
 
     <update id="UPDATE-STATUS-BY-NCORDERID" parameterClass="java.util.HashMap">
         update business_order
@@ -13,5 +80,7 @@
             where nc_order_id=#ncOrderId#
         </dynamic>
     </update>
-
+    <select id="getCodeByWareId" parameterClass="java.lang.Integer" resultClass="java.lang.String">
+        select code from product_ware where ware_id=#wareId#
+    </select>
 </sqlMap>

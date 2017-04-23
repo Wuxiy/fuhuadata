@@ -284,6 +284,7 @@
 						<isNotEmpty prepend=", " property="companyType">company_type=#companyType#</isNotEmpty>
 						<isNotEmpty prepend=", " property="otherEnterpriseNature">other_enterprise_nature=#otherEnterprieNature#</isNotEmpty>
 						<isNotEmpty prepend=", " property="registeredFunds">registered_funds=#registeredFunds#</isNotEmpty>
+						<isNotEmpty prepend=", " property="ncId">nc_id=#ncId#</isNotEmpty>
 
 						<isNotEmpty prepend=", " property="registeredAddress">registered_address=#registeredAddress#</isNotEmpty>
 						<isNotEmpty prepend=", " property="managementScope">management_scope=#managementScope#</isNotEmpty>
@@ -403,9 +404,16 @@
 	<select id="GET-BY-ID" resultClass="CustomerBaseInfo" parameterClass="java.lang.String">
 		<![CDATA[
 			SELECT
+				base.sale_organization_id saleOrganizationId,
 				base.customer_id customerId,
+				base.nc_id ncId,
+				base.customer_type customerType,
 				base.full_name fullName,
 				base.short_name shortName,
+				base.custclass custclass,
+				base.timezone timezone,
+				base.formatdoc formatdoc,
+				base.customer_area area,
 				base.company_type companyType,
 				base.customer_area_id customerAreaId,
 				base.customer_area customerArea,

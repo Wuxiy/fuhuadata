@@ -9,9 +9,16 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.io.DocumentSource;
 import org.jdom.input.SAXBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletRequest;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
@@ -23,10 +30,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by zhangxiang on 2017/4/11.
@@ -36,21 +40,32 @@ public class CustomerInfoToNCImpl implements CustomerInfoToNC{
     private static final Log log = LogFactory.getLog(CustomerInfoToNCImpl.class);
     @Autowired
     private CustomerBaseInfoDao customerBaseInfoDao;
+
+    @Value("${ncurl}")
+    private String ncUrl;
+
+    @Autowired
+    ServletContext servletContext;
+
     @Override
-    public Map<Integer, String> sendCustomerInfo(CustomerBaseInfo customerBaseInfo) {
+    public String sendCustomerInfo(CustomerBaseInfo customerBaseInfo) {
          String xmlName= customerInfoToXML(customerBaseInfo);
-        String pk_customer=null;
+        String ncid=null;
         try {
+            //InputStream inputS = new FileInputStream("fuhuadata-manager/src/main/resource/ncInfo.properties");
+            //Properties properties = new Properties();
+            //properties.load(inputS);
+            //String ncurl = properties.getProperty("ncurl");
+
             // 获取Servlet连接并设置请求的方法
-            String url = "http://192.168.30.30:8300/service/XChangeServlet?account=01&groupcode=0001";
-            URL realURL = new URL(url);
+            URL realURL = new URL(ncUrl);
             HttpURLConnection connection = (HttpURLConnection) realURL.openConnection();
             connection.setDoOutput(true);
             connection.setRequestProperty("Content-type", "text/xml");
             connection.setRequestMethod("POST");
 
-
-            File file = new File("fuhuadata-manager/src/main/resource/indocs/"+xmlName);
+            String a = servletContext.getRealPath("/");
+            File file = new File(a+xmlName);
             BufferedOutputStream out = new BufferedOutputStream(connection.getOutputStream());
             BufferedInputStream input = new BufferedInputStream(new FileInputStream(file));
             int length;
@@ -90,7 +105,7 @@ public class CustomerInfoToNCImpl implements CustomerInfoToNC{
 
             //设置日期格式
             SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddHHmmss");
-            String resFile = "fuhuadata-manager/src/main/resource/backfile/customerBackFile" + fmt.format(new Date()) + ".xml";
+            String resFile = a+fmt.format(new Date()) + ".xml";
             StreamResult result = new StreamResult(new File(resFile));
             transformer.transform(source, result);
             log.info("生成回执文件成功");
@@ -109,7 +124,7 @@ public class CustomerInfoToNCImpl implements CustomerInfoToNC{
                 System.out.println("resultdescription---> " + e.getChildText("resultdescription"));
                 System.out.println("content--> " + e.getChildText("content"));
                 System.out.println("--------------------------------------");
-                pk_customer=e.getChildText("content");
+                ncid=e.getChildText("content");
             }
 
             //后面对回执结果做判断,然后改变导入状态就行了
@@ -119,7 +134,8 @@ public class CustomerInfoToNCImpl implements CustomerInfoToNC{
                 } else if (resSuc.equals("Y")) {
                     log.info("导入nc成功");
                     //修改状态
-                    customerBaseInfo.setNcId(pk_customer);
+                    customerBaseInfo.setNcId(ncid);
+                    customerBaseInfo.setCustomerType(1);
                     customerBaseInfoDao.updateCustomerBaseInfoById(customerBaseInfo.getCustomerId(),customerBaseInfo);
                 } else {
                     log.info("出现未知错误");
@@ -132,7 +148,7 @@ public class CustomerInfoToNCImpl implements CustomerInfoToNC{
         }catch (Exception e){
             log.error("发送nc出错",e);
         }
-        return null;
+        return ncid;
     }
     private String customerInfoToXML(CustomerBaseInfo customerBaseInfo){
         String xmlName=null;
@@ -159,7 +175,7 @@ public class CustomerInfoToNCImpl implements CustomerInfoToNC{
             pk_group.appendChild(document.createTextNode("0001"));
             billhead.appendChild(pk_group);
             Map<String,String> nodeValue=new HashMap<String, String>();
-            nodeValue.put("pk_org","TD");
+            nodeValue.put("pk_org",customerBaseInfo.getSaleOrganizationId());
             nodeValue.put("name",customerBaseInfo.getFullName());
             nodeValue.put("shortname",customerBaseInfo.getShortName());
             //客户基本分类
@@ -173,7 +189,7 @@ public class CustomerInfoToNCImpl implements CustomerInfoToNC{
             //客户类别（内部客户，外部客户）
             nodeValue.put("custprop","0");
             //地区分类
-            nodeValue.put("pk_areacl",customerBaseInfo.getArea());
+            nodeValue.put("pk_areacl",customerBaseInfo.getCustomerAreaId());
             //nodeValue.put("","");
 
             for(Map.Entry<String ,String> entry:nodeValue.entrySet()){
@@ -190,8 +206,14 @@ public class CustomerInfoToNCImpl implements CustomerInfoToNC{
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             // 向文本输出流打印对象的格式化表示形式
             // 要保证你的文本输出后格式不乱码，打印对象需指定打印格式，以标记此文本支持的格式
+
+            String a = servletContext.getRealPath("/");
             xmlName="customer"+customerBaseInfo.getCustomerId()+System.currentTimeMillis()+".xml";
-            PrintWriter pw = new PrintWriter("fuhuadata-manager/src/main/resource/indocs/"+xmlName,"utf-8");
+            File fileUrl=new File(a+xmlName);
+            if (!fileUrl.exists()){
+                fileUrl.createNewFile();
+            }
+            PrintWriter pw = new PrintWriter(fileUrl,"utf-8");
             // 充当转换结果的持有者，可以为 XML、纯文本、HTML 或某些其他格式的标记
             StreamResult result = new StreamResult(pw);
             transformer.transform(source, result);
@@ -203,13 +225,12 @@ public class CustomerInfoToNCImpl implements CustomerInfoToNC{
         return xmlName;
     }
 
-    public static void main(String[] args) {
-        CustomerBaseInfo c=new CustomerBaseInfo();
-        c.setFullName("crmTEST042001");
-        c.setShortName("crm01");
-        c.setCustomerId("042001");
-        c.setCountryzone("CN");
-        CustomerInfoToNC customerInfoToNC=new CustomerInfoToNCImpl();
-        customerInfoToNC.sendCustomerInfo(c);
+
+    public void setNcUrl(String ncUrl) {
+        this.ncUrl = ncUrl;
     }
+    public String getNcUrl(){
+        return this.ncUrl;
+    }
+
 }
