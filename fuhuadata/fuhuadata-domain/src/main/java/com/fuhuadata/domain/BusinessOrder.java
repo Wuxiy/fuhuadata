@@ -25,15 +25,17 @@ public class BusinessOrder implements Serializable{
 
     private String saleOrganizationId;//销售组织id
     private String saleOrganizationName;//销售组织名称
-    private String destinationPort;//目的港
-    private String shipmentPort;//起运港
+    private String destinationPort;//目的港code
+    private String shipmentPort;//起运港code
+    private String destinationPortName;//目的港
+    private String shipmentPortName;//起运港
     private String collectionAgreement;//收款协议
     private Integer tradeType;//贸易方式 0一般贸易，1其他
     private String tradeTerm;//贸易术语
     private String currency;//币种编码
 
-    private String tradeCountry;//贸易国别
-
+    private String tradeCountry;//贸易国别code
+    private String tradeCountryName;//贸易国别
     private Integer isCreditRisk;//是否使用信用险
     private BigDecimal interestRate;//计息比例
 
@@ -177,6 +179,22 @@ public class BusinessOrder implements Serializable{
 
     public void setSaleOrganizationName(String saleOrganizationName) {
         this.saleOrganizationName = saleOrganizationName;
+    }
+
+    public String getDestinationPortName() {
+        return destinationPortName;
+    }
+
+    public void setDestinationPortName(String destinationPortName) {
+        this.destinationPortName = destinationPortName;
+    }
+
+    public String getShipmentPortName() {
+        return shipmentPortName;
+    }
+
+    public void setShipmentPortName(String shipmentPortName) {
+        this.shipmentPortName = shipmentPortName;
     }
 
     public String getDestinationPort() {

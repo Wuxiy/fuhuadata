@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -209,11 +210,15 @@ public class BusinessOrderServiceImpl implements BusinessOrderService {
                 List<BusinessOrderProduct> list = Arrays.asList(businessOrderDO.getBusinessOrderProducts());
                 result.setSuccess(businessOrderProductDao.updateBusinessOrderProducts(list));
             }
-            //update和nc同步对order表都有更新操作,造成事务嵌套，死锁，加上注解，支持当前事务，如果当前没有事务，就以非事务方式执行
-            //String code = businessOrderToNC.sendBusinessOrder(businessOrderDO.getBusinessOrder().getOrderId());
-            //if(code =="1"){
-            //    result.setMessage("订单转化同步NC成功");
-            //}
+            List<Integer> orderProductsId=new ArrayList<Integer>();
+            for(BusinessOrderProduct businessOrderProduct:businessOrderDO.getBusinessOrderProducts()){
+                orderProductsId.add(businessOrderProduct.getId());
+            }
+            String orderId=businessOrderDO.getBusinessOrder().getOrderId();
+            String code = businessOrderToNC.sendBusinessOrder(orderId,orderProductsId);
+            if("1"==code){
+                result.setMessage("订单转化同步NC成功");
+            }
         }catch(Exception e){
             result.setSuccess(false);
             log.error("更新订单和订单产品错误,NC同步错误",e);

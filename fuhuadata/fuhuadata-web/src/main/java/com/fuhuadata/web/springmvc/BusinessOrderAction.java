@@ -302,7 +302,6 @@ public class BusinessOrderAction {
     @RequestMapping("/intoOrder")
     @SystemLogAnnotation(module = "salesStatistics",methods = "intoOrder")
     public ModelAndView intoOrder(String orderId){
-
         return new ModelAndView("salesStatistics/orderInfo").addObject("orderId",orderId);
     }
 

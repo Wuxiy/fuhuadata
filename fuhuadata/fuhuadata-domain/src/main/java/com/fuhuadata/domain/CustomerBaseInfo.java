@@ -193,6 +193,29 @@ public class CustomerBaseInfo implements Serializable{
 	private String saleOrganizationName;
 	private String encyId;// 百科id 用来判断客户是否有百科
 	private String customerDutyParagraph;//客户税号
+	private String customerAreaId;
+	private String customerArea;
+
+	public String getCustomerArea() {
+		return customerArea;
+	}
+
+	public void setCustomerArea(String customerArea) {
+		this.customerArea = customerArea;
+	}
+
+
+
+
+	public String getCustomerAreaId() {
+		return customerAreaId;
+	}
+
+	public void setCustomerAreaId(String customerAreaId) {
+		this.customerAreaId = customerAreaId;
+	}
+
+
 
 	public CustomerBaseInfo() {
 	}
