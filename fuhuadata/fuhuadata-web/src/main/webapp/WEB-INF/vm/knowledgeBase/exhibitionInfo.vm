@@ -86,7 +86,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-xs-2 col-xs-offset-4">
-                                <button id="comBtn" class="btn btn-block btn-primary">完成</button>
+                                <button id="comBtn" class="btn btn-block btn-primary" type="button">完成</button>
                             </div>
                             <div class="col-xs-2">
                                 <button class="btn btn-block btn-default" type="reset">重置</button>
@@ -137,21 +137,15 @@
         // 点击完成提交数据
         jQuery('#comBtn').on('click.upData',function () {
 
-
-            jQuery(function(){
-
-
-                jQuery.ajax({
-                    type:"POST",
-                    url:basePath + "/exhibitionInfo/doModifyExhibitionInfo",
-                    dataType:"json",
-                    contentType:"application/json",
-                    data:JSON.stringify(getData()),
-                    success:function(){
-                        alert("添加成功");
-//                        window.history.back(-1);
-                    }
-                })
+            jQuery.ajax({
+                type:"POST",
+                url:basePath + "/exhibitionInfo/doModifyExhibitionInfo",
+                dataType:"json",
+                contentType:"application/json",
+                data:JSON.stringify(getData()),
+                success:function(){
+                    alert("添加成功");
+                }
             })
         });
 
@@ -213,15 +207,23 @@
 
         // 点击地区搜索按钮，弹出树形菜单
         $('#regSearch').on('click.tree',function () {
-            CRM.ajaxCall({
-                url:'/customerBaseInfo/initAreaCategoryTree',
-                type:'GET',
-                callback: renderAreaTree
-            })
+            if (treeData == null) {
+
+                CRM.ajaxCall({
+                    url:'/customerBaseInfo/initAreaCategoryTree',
+                    type:'GET',
+                    callback: renderAreaTree
+                })
+            }
         });
 
     });
 
+
+    /**
+     * 逻辑处理程序
+     */
+    var treeData = null; // 保存树的数据
 
     // 取得要提交的字段
     function getData() {
@@ -278,7 +280,7 @@
                 onDblClick: areTreeClick
             }
         };
-
-        $.fn.zTree.init($('#cbtTree'), setting, data);
+        treeData = data;
+        $.fn.zTree.init($('#cbtTree'), setting, treeData);
     };
 </script>
