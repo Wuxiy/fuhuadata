@@ -144,7 +144,8 @@
                 contentType:"application/json",
                 data:JSON.stringify(getData()),
                 success:function(){
-//                    alert("添加成功");
+                    alert("添加成功");
+                    window.history.back(-1);
                 }
             })
         });
