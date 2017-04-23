@@ -17,7 +17,7 @@
         <isNotEmpty prepend="and" property="value">
             pk_fatherarea = #value#
         </isNotEmpty>
-        order by code
+        order by c.code
     </select>
 
 </sqlMap>
