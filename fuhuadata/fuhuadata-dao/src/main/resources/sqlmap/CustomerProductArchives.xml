@@ -811,4 +811,17 @@
 		customer_id=#customerId#
 	</select>
 
+	<!--进入客户产品要求详情页所需ids 参数为客户产品档案id-->
+	<select id="GET-CUSTOMER-PRODUCT-IDS" parameterClass="java.lang.Integer" resultClass="CustomerProductPackagingArchives">
+		SELECT
+		bop.id  businessProductId,
+		bop.order_id orderId,
+		bpr.id businessRequireId
+		FROM
+		customer_product_archives cpa
+		LEFT JOIN business_order_product bop ON bop.archive_product_id = cpa.id
+		LEFT JOIN business_product_require bpr ON bpr.business_product_id = bop.id
+		where cpa.id = #id#
+	</select>
+
 </sqlMap>

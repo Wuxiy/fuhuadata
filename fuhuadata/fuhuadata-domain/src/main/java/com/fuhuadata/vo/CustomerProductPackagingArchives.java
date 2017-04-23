@@ -8,6 +8,11 @@ package com.fuhuadata.vo;
 
 public class CustomerProductPackagingArchives {
     private String customerProductId;//客户商品id
+
+    private Integer businessProductId;//订单产品id
+    private Integer businessRequireId;//产品要求id
+    private String orderId;//订单id
+
     private String customerId;
     private String customerName;//客户名称
     private String customerProductName;//客户商品名
@@ -124,5 +129,29 @@ public class CustomerProductPackagingArchives {
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
+    }
+
+    public Integer getBusinessProductId() {
+        return businessProductId;
+    }
+
+    public void setBusinessProductId(Integer businessProductId) {
+        this.businessProductId = businessProductId;
+    }
+
+    public Integer getBusinessRequireId() {
+        return businessRequireId;
+    }
+
+    public void setBusinessRequireId(Integer businessRequireId) {
+        this.businessRequireId = businessRequireId;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 }

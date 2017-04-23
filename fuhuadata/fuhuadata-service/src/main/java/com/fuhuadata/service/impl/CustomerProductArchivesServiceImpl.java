@@ -128,6 +128,23 @@ public class CustomerProductArchivesServiceImpl implements CustomerProductArchiv
 		return result;	
     }
 
+
+	/**
+	 * 根据客户产品要求id 获取进入产品要求页面所需的ids
+	 * @param id
+	 * @return
+	 */
+	public Result<CustomerProductPackagingArchives> getCustomerProductIds(int id){
+		Result<CustomerProductPackagingArchives> result = new Result<CustomerProductPackagingArchives>();
+		try {
+			result.addDefaultModel("CustomerProductIds",customerProductArchivesDao.getCustomerProductIds(id));
+		} catch(Exception e) {
+			log.error("根据客户产品要求id获取ids");
+			result.setSuccess(false);
+		}
+		return result;
+	}
+
 	@Override
 	public List<CustomerProductArchives> getCustomerBillRequirement(String customerId) {
 		List<CustomerProductArchives> list = customerProductArchivesDao.getCustomerBillRequirement(customerId);

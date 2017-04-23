@@ -133,10 +133,11 @@ public class    ExhibitionInfoAction {
             result.setSuccess(false);
             log.error("根据id获取展会详情错误");
         }
-        return new ModelAndView("knowledgeBase/exhibitionInfo").addObject("exhibition",result.getModel());
+
+        return new ModelAndView("knowledgeBase/exhibitionInfo").addObject("exhibition",result.getModel()).addObject("id",id);
     }
 
-    @RequestMapping(value = "/doModifyExhibitionInfo",method =RequestMethod.GET)
+    @RequestMapping(value = "/doModifyExhibitionInfo",method =RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "doUpdate")
     @ResponseBody
     public ResultPojo doModifyExhibitionInfo(@RequestBody ExhibitionInfo exhibitionInfo){

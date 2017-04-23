@@ -1,5 +1,7 @@
 package com.fuhuadata.dao;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.fuhuadata.domain.CustomerProductArchives;
 import com.fuhuadata.domain.query.QueryCustomerProductArchives;
@@ -64,6 +66,13 @@ public interface CustomerProductArchivesDao {
 	 * @return
 	 */
 	public List<CustomerProductPackagingArchives> getCustomerProductPackingArchivesById(String customerId);
+
+	/**
+	 * 根据客户产品档案id获取 客户产品要求页面所需ids
+	 * @param id
+	 * @return
+	 */
+	public CustomerProductPackagingArchives getCustomerProductIds(int id);
         
 	 /**
      * 查询列表，包含分页查询，查询结果为空返回空的List对象
@@ -110,5 +119,8 @@ public interface CustomerProductArchivesDao {
 	 * @return
 	 */
 	int updateArchives(Integer businessProductId);
+
+
+
 
 }
