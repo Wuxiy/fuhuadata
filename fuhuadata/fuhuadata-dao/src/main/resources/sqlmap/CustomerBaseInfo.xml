@@ -175,7 +175,7 @@
 		</isNotEmpty>
 				<isNotEmpty prepend=" AND " property="areaId">
 					customer_area_id in (
-					select code from t_areacl where pk_areacl in(#areaId#)
+					select code from t_areacl where pk_areacl in($areaId$)
 					)
 		</isNotEmpty>
 				<isNotEmpty prepend=" AND " property="area">
@@ -557,7 +557,7 @@
 		</isNotEmpty>
 		<isNotEmpty prepend="and" property="areaId">
 			base.customer_area_id in (
-			select code from t_areacl where pk_areacl in(#areaId#)
+			select code from t_areacl where pk_areacl in($areaId$)
 			)
 		</isNotEmpty>
 
@@ -660,7 +660,7 @@
 		</isNotEmpty>
 		<isNotEmpty prepend="and" property="areaId">
 			base.customer_area_id in (
-			select code from t_areacl where pk_areacl in(#areaId#)
+			select code from t_areacl where pk_areacl in($areaId$)
 			)
 		</isNotEmpty>
 	</select>
