@@ -84,11 +84,11 @@ CRM.enc.addInit = function () {
 CRM.enc.renderInfo = function (data) {
     var page = CRM.enc;
 
-    page.customerId.val(data.customerId);
+    // page.customerId.val(data.customerId);
     page.customerArea.val(data.customerArea); // 地区
     page.country.val(data.country); // 国家
-    page.customerAreaId.val(data.customerAreaId); // 地区id
-    page.countryId.val(data.countryId); // 国家id
+    // page.customerAreaId.val(data.customerAreaId); // 地区id
+    // page.countryId.val(data.countryId); // 国家id
     page.fullName.val(data.fullName);
     page.shortName.val(data.shortName);
     page.companyType.val(data.companyType);
@@ -638,4 +638,115 @@ $(function () {
         window.history.back(-1);
         return false;
     })
+
+    // 国家搜索框，获取焦点时渲染下拉菜单
+    $('#countryS').on('focus.cc',function () {
+
+
+        CRM.ajaxCall({
+            url:'/customerBaseInfo/getCountryzone',
+            type:'POST',
+            contentType:'application/json',
+            data:JSON.stringify({
+                name:''
+            }),
+            callback:function (data) {
+                if (data) {
+                    CRM.tplHandler('tzC',data,$('#cc'));
+                }
+            }
+        });
+    });
+
+    // 国家搜索框，改变值时，渲染下拉框
+    $('#countryS').on('input.cc',function () {
+
+        var obj = {
+            name:$(this).val()
+        };
+        $('#cc').html('');
+        CRM.ajaxCall({
+            url:'/customerBaseInfo/getCountryzone',
+            type:'POST',
+            contentType:'application/json',
+            data:JSON.stringify(obj),
+            callback:function (data) {
+                if (data) {
+                    CRM.tplHandler('tzC',data,$('#cc'));
+                }
+            }
+        });
+    });
+
+    // 国家搜索框，失去焦点清空搜索框
+    $('#countryS').on('blur.cc',function () {
+
+        $(this).val('');
+    });
+
+    // 点击国家下拉菜单，将值添加到文本框
+    $('#cc').on('click.cc','a',function (e) {
+        var elVal = $(e.target).data('val'),
+            txt = $(e.target).text(),
+            tarInput = $('#country');
+
+        tarInput.val(txt);
+        tarInput.data('val',elVal);
+        return false;
+    });
+
+    // 点击地区搜索按钮，弹出树形菜单
+    $('#regSearch').on('click.tree',function () {
+        if (treeData == null) {
+
+            CRM.ajaxCall({
+                url:'/customerBaseInfo/initAreaCategoryTree',
+                type:'GET',
+                callback: renderAreaTree
+            })
+        }
+    });
 });
+
+
+/**
+ *逻辑处理程序
+ */
+var treeData = null; // 保存树的数据
+
+// 给地区树添加点击事件
+function areTreeClick (event, modLeftId, treeNode) {
+    var treeObj = $.fn.zTree.getZTreeObj('cbtTree'),
+        node = treeObj.getSelectedNodes()[0];
+
+    if (!node.isParent) {
+
+        $('#region').val(treeNode.name);
+        $('#region').data('val',treeNode.pkAreacl);
+        $('#cbtModal').modal('hide');
+
+    }else {
+        alert('请选择子节点');
+    }
+};
+
+// 渲染地区分类树
+function renderAreaTree (data) {
+    var setting = {
+        data: {
+            simpleData: {
+                enable: true,
+                idKey: "pkAreacl",
+                pIdKey: "pkFatherarea"
+            }
+        },
+        edit: {
+            enable: false
+        },
+        callback: {
+            onDblClick: areTreeClick
+        }
+    };
+    treeData = data;
+    $.fn.zTree.init($('#cbtTree'), setting, treeData);
+};

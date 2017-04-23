@@ -63,25 +63,36 @@
                                 <div class="col-xs-2">
                                     <input class="form-control" type="text" id="billToCustomer" value="" data-control="on" disabled />
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">业务员</label>
+                                <label for="saleOrganizationName" class="control-label col-xs-1" lang="zh">销售组织<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" type="text" id="salesManName" value="" disabled />
+                                    <div class="input-group">
+                                        <input id="saleOrganizationName" name="saleOrganizationName" data-toggle="dropdown" class="form-control dropdown-toggle" disabled type="text" placeholder="点击搜索按钮选择" autocomplete="off"/>
+                                        <div class="input-group-btn">
+                                            <button id="oNSearch" class="btn btn-xs btn-default" data-control="on" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">部门</label>
+##                                <div class="col-xs-2">
+##                                    <input class="form-control" data-control="on" disabled id="departmentName" data-code="" value="" disabled/>
+##                                    <select id="departmentName" class="form-control">
+##                                    </select>
+##                                </div>
                                 <div class="col-xs-2">
-                                    <input class="form-control" data-control="on" disabled id="departmentName" data-code="" value="" disabled/>
-                                    <select id="departmentNameS" class="form-control hidden">
-                                    </select>
+                                    <div class="input-group">
+                                        <input id="departmentName" name="departmentName" data-toggle="dropdown" class="form-control dropdown-toggle" disabled type="text" placeholder="点击搜索按钮选择" autocomplete="off"/>
+                                        <div class="input-group-btn">
+                                            <button id="depSearch" class="btn btn-xs btn-default" data-control="on" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label class="col-xs-1 control-label" lang="zh">业务员</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" type="text" id="salesManName" value=""  />
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-xs-1 control-label" lang="zh">销售组织</label>
-                                <div class="col-xs-2">
-                                    <select class="form-control" id="saleOrganizationName" data-control="on" disabled>
-
-                                    </select>
-                                </div>
-                                <label class="col-xs-1 control-label" lang="zh">目的港<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">目的港<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
                                         <input id="destinationPort" name="destinationPort" placeholder="请在下拉菜单中选择" class="form-control" disabled type="text" autocomplete="off"/>
@@ -107,10 +118,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">收款协议<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">收款协议<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input data-control="on" id="income" class="form-control" data-code="" value="" disabled>
-                                    <select class="form-control hidden" id="incomeS"></select>
+##                                    <input data-control="on" id="income" class="form-control" data-code="" value="" disabled>
+                                    <select class="form-control" id="income">
+                                        #foreach($!info in $!{income})
+                                            <option value="$!info.code">$!info.name</option>
+                                        #end
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -121,13 +136,17 @@
                                         <option value="1">其他</option>
                                     </select>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">贸易术语<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">贸易术语<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                 ##                                <input class="form-control" type="text" id="tradeTerm" value="" />
-                                    <input data-control="on" class="form-control" id="incoterm" data-code="" value="" disabled>
-                                    <select data-control="on" class="form-control hidden" id="incotermS" disabled></select>
+##                                    <input data-control="on" class="form-control" id="incoterm" data-code="" value="" disabled>
+                                    <select data-control="on" class="form-control" id="incoterm" >
+                                        #foreach($!info in $!{incoterm})
+                                            <option value="$!info.code">$!info.name</option>
+                                        #end
+                                    </select>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">贸易国别<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">贸易国别<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                 ##                                <input class="form-control" type="text" id="tradeCountry" value="" />
                                     <div class="input-group">
@@ -150,56 +169,60 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-xs-1 control-label" lang="zh">币种<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">币种<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input data-control="on" id="currtype" class="form-control" type="text" disabled>
-                                    <select class="form-control hidden" id="currtypeS"></select>
+##                                    <input data-control="on" id="currtype" class="form-control" type="text" disabled>
+                                    <select class="form-control" id="currtype">
+                                        #foreach($!info in $!{currtype})
+                                            <option value="$!info.code">$!info.name</option>
+                                        #end
+                                    </select>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">原币对美元汇率<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">原币对美元汇率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <input data-control="on" class="form-control" type="text" id="nusdexchgrate" value="" disabled/>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">原币对本元汇率<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">原币对本元汇率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <input data-control="on" class="form-control" type="text" id="nexchangerate" value="" disabled/>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">保险费率（%）<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">保险费率（%）<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <input data-control="on" class="form-control" id="premiumRate" data-code="" value="" disabled>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-xs-1 control-label" lang="zh">资金利率（%）<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">资金利率（%）<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <input data-control="on" class="form-control" type="text" id="discountRate" value="" disabled/>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">汇损费率（%）<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">汇损费率（%）<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <input data-control="on" class="form-control" type="text" id="lossRate" value="" disabled/>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">计息比例（%）<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">计息比例（%）<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <input data-control="on" class="form-control" type="text" id="interestRate" value="" disabled/>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">信保赔付率（%）<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">信保赔付率（%）<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <input data-control="on" class="form-control" type="text" id="creditRate" value="" disabled/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-xs-1 control-label" lang="zh">销售费率（%）<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">销售费率（%）<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <input data-control="on" class="form-control" type="text" id="saleRate" value="" disabled/>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">管理汇率（%）<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">管理汇率（%）<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <input data-control="on" class="form-control" type="text" id="managementRate" value="" disabled/>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">信保费率（%）<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">信保费率（%）<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <input data-control="on" class="form-control" type="text" id="guaranteeRate" value="" disabled/>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">管理汇率（%）<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">管理汇率（%）<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <input data-control="on" class="form-control" type="text" id="managementRate" value=""  disabled/>
                                 </div>
@@ -219,13 +242,13 @@
                                         <option value="1">是</option>
                                     </select>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">内部供货单位<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">内部供货单位<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <input class="form-control" type="email" id="" value="" data-control="on" disabled />
                                 </div>
                             </div>
                             <div class="form-group ">
-                                <label class="col-xs-1 control-label">企业性质<sup class="not-null">*</sup></label>
+                                <label class="col-xs-1 control-label">企业性质</label>
                                 <div class="col-xs-5">
                                     <label class="checkbox-inline">
                                         <input type="checkbox" name="check" class="suitableType cell_edit" value="1" data-text="工厂" disabled> 工厂
@@ -243,7 +266,7 @@
                                         <input type="checkbox" name="check" class="suitableType cell_edit" id="other" value="5" data-text="其他" disabled> 其他
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input class="form-control" type="text" id="otherEnterpriseNature" value="输入企业性质" disabled/>
+                                        <input class="form-control" type="text" id="otherEnterpriseNature" value="" disabled/>
                                     </label>
 
                                 </div>
@@ -301,6 +324,26 @@
         </div>
     </div>
 </div>
+
+## 客户基本分类
+<div class="modal fade in" id="cbtModal" tabindex="-1" role="dialog" data-backdrop="false" aria-hidden="true">
+    <div class="modal-dialog" style="width: 400px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body">
+                <hr>
+                <div class="zTreeDemoBackground left well" style="height: 300px;overflow-y: scroll;overflow-x: auto">
+                    <ul id="cbtTree" class="ztree"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 ## 贸易国别
 <script id="tzC" type="text/html">
@@ -484,73 +527,192 @@
         window.location.href = basePath + '/businessProduct/intoProductBasicInfoRequire?orderId=' + orderId + '&&customerId=' + customerId + '&&businessProductId=' + businessProductId;
     })
 
-    // 部门
-    var departmentData = null;
-    $('#departmentName').on('click.edit',function () {
-        $(this).addClass('hidden');
-        if (departmentData!=null){
+//    // 部门
+//    var departmentData = null;
+//    $('#departmentName').on('click.edit',function () {
+//        $(this).addClass('hidden');
+//        if (departmentData!=null){
+//            $.ajax({
+//                url:'',
+//                type:'GET'
+//            }).done(function (result) {
+//                departmentData = result.data;
+//                renderSelect(departmentData,$('#departmentNameS'));
+//                $('#departmentNameS').removeClass('hidden').val($(this).data('code'));
+//            });
+//        }else {
+//            $('#departmentNameS').removeClass('hidden').val($(this).data('code'));
+//        }
+//    });
+//
+//     $('#departmentNameS').on('change.edit',function (e) {
+//         var tarItem = $(this),
+//                 val = tarItem.val(),
+//                 text = tarItem.find('option').filter(':selected').text();
+//         $('#departmentName').val(text);
+//         $('#departmentName').data('code',val);
+//     });
+//
+//    $('#departmentNameS').on('focusout',function () {
+//        $('#departmentNameS').addClass('hidden');
+//        $('#departmentName').removeClass('hidden');
+//    })
+//
+//    //目的港
+//    var destinationPortData = null;
+//    $('#destinationPort').on('click.edit',function () {
+//        $(this).addClass('hidden');
+//        if (destinationPortData!=null){
+//            $.ajax({
+//                url:basePath +'/freightCost/queryFreightCostList',
+//                type:'GET'
+//            }).done(function (result) {
+//
+//                $('#destinationPortS').removeClass('hidden').val($(this).data('code'));
+//            });
+//        }else {
+//            $('#destinationPortS').removeClass('hidden').val($(this).data('code'));
+//        }
+//    });
+
+//    $('#destinationPortS').on('change.edit',function (e) {
+//        var tarItem = $(this),
+//                val = tarItem.val(),
+//                text = tarItem.find('option').filter(':selected').text();
+//        $('#destinationPortS').val(text);
+//        $('#destinationPortS').data('code',val);
+//    });
+//
+//    $('#destinationPortS').on('focusout',function () {
+//        $('#destinationPortS').addClass('hidden');
+//        $('#destinationPortS').removeClass('hidden');
+//    })
+
+    // 点击选择所属组织
+    var orgTreeData = null;
+    $('#oNSearch').on('click.renderTree',function () {
+        $('#cbtTree').html('');
+        if (orgTreeData==null) {
             $.ajax({
-                url:'',
+                url:basePath+'/customerBaseInfoOrder/initSaleOrganizationTree',
                 type:'GET'
             }).done(function (result) {
-                departmentData = result.data;
-                renderSelect(departmentData,$('#departmentNameS'));
-                $('#departmentNameS').removeClass('hidden').val($(this).data('code'));
-            });
+                orgTreeData = result.data;
+                renderTree(orgTreeData);
+            })
         }else {
-            $('#departmentNameS').removeClass('hidden').val($(this).data('code'));
+            renderTree(orgTreeData);
         }
+        $('#cbtModal').modal('show');
     });
 
-     $('#departmentNameS').on('change.edit',function (e) {
-         var tarItem = $(this),
-                 val = tarItem.val(),
-                 text = tarItem.find('option').filter(':selected').text();
-         $('#departmentName').val(text);
-         $('#departmentName').data('code',val);
-     });
-
-    $('#departmentNameS').on('focusout',function () {
-        $('#departmentNameS').addClass('hidden');
-        $('#departmentName').removeClass('hidden');
-    })
-
-    //目的港
-    var destinationPortData = null;
-    $('#destinationPort').on('click.edit',function () {
-        $(this).addClass('hidden');
-        if (destinationPortData!=null){
+    $('#depSearch').on('click.renderTree',function () {
+        var orgId = $('#saleOrganizationName').data('val');
+        $('#cbtTree').html('');
+        if (orgId!='' && orgId!=undefined) {
             $.ajax({
-                url:basePath +'/freightCost/queryFreightCostList',
+                url:basePath+'/sys/dept/tree/org?orgId='+orgId,
                 type:'GET'
             }).done(function (result) {
-
-                $('#destinationPortS').removeClass('hidden').val($(this).data('code'));
+                renderDepTree(result.data);
             });
+            $('#cbtModal').modal('show');
         }else {
-            $('#destinationPortS').removeClass('hidden').val($(this).data('code'));
+            alert('请先选择一个组织');
         }
+
     });
 
-    $('#destinationPortS').on('change.edit',function (e) {
-        var tarItem = $(this),
-                val = tarItem.val(),
-                text = tarItem.find('option').filter(':selected').text();
-        $('#destinationPortS').val(text);
-        $('#destinationPortS').data('code',val);
-    });
+    /**
+     * 渲染组织树菜单
+     * @param data
+     */
+    function renderTree(data) {
+        var setting = {
+                    data: {
+                        simpleData: {
+                            enable: true
+                        }
+                    },
+                    edit: {
+                        enable: false
+                    },
+                    callback: {
+                        onDblClick: ablclickTree
+                    }
+                },
+                id = $('#cbtTree').attr('id'),
+                treeObj = null,
 
-    $('#destinationPortS').on('focusout',function () {
-        $('#destinationPortS').addClass('hidden');
-        $('#destinationPortS').removeClass('hidden');
-    })
+                treeData = CRM.toArr(data);
 
-    var IncomeData = null;
-    selectArchive($('#income'),$('#incomeS'),'/dataArchives/getIncome',IncomeData);//收款协议
-    var currtypeData = null;
-    selectArchive($('#currtype'),$('#currtypeS'),'/dataArchives/getCurrtype',currtypeData);//币种
-    var incotermData = null;
-    selectArchive($('#incoterm'),$('#incotermS'),'/dataArchives/getIncoterm',incotermData);//贸易术语
+        $.fn.zTree.init($('#cbtTree'), setting, treeData);
+        treeObj = $.fn.zTree.getZTreeObj(id);
+        treeObj.expandAll(true); // 默认展开
+    }
+
+    /**
+     * 组织树点击事件
+     * @param event
+     * @param modLeftId
+     * @param treeNode
+     */
+
+    function ablclickTree(event, modLeftId, treeNode) {
+
+        $('#saleOrganizationName').data('val',treeNode.id);
+        $('#saleOrganizationName').val(treeNode.name);
+        $('#cbtModal').modal('hide');
+    }
+
+
+    /**
+     * 渲染部门树菜单
+     * @param data
+     */
+    function renderDepTree(data) {
+        var setting = {
+                    data: {
+                        simpleData: {
+                            enable: true
+                        }
+                    },
+                    edit: {
+                        enable: false
+                    },
+                    callback: {
+                        onDblClick: depClickTree
+                    }
+                },
+                id = $('#cbtTree').attr('id'),
+                treeObj = null,
+
+                treeData = CRM.toArr(data);
+
+        $.fn.zTree.init($('#cbtTree'), setting, treeData);
+        treeObj = $.fn.zTree.getZTreeObj(id);
+        treeObj.expandAll(true); // 默认展开
+    }
+
+    /**
+     * 部门树点击事件
+     * @param event
+     * @param modLeftId
+     * @param treeNode
+     */
+
+    function depClickTree(event, modLeftId, treeNode) {
+
+        $('#departmentName').data('val',treeNode.id);
+        $('#departmentName').val(treeNode.name);
+        $('#cbtModal').modal('hide');
+    }
+//    var IncomeData = null;
+//    selectArchive($('#income'),$('#incomeS'),'/dataArchives/getIncome',IncomeData);//收款协议
+//    var currtypeData = null;
+//    selectArchive($('#currtype'),$('#currtypeS'),'/dataArchives/getCurrtype',currtypeData);//币种
+//    var incotermData = null;
+//    selectArchive($('#incoterm'),$('#incotermS'),'/dataArchives/getIncoterm',incotermData);//贸易术语
 
     // 贸易国别
     seacrhSelect($('#countryzoneS'),'/customerBaseInfo/getCountryzone',$('#cz'),$('#countryzone'),'tzC','name');
@@ -563,25 +725,43 @@
 
     function seacrhSelect(sh,url,ul,tarEl,strId,arg) {
 
-        // 搜索框
+        // 搜索框,获取焦点查询所有数据
+        sh.on('focus.cc',function () {
+
+            ul.html('');
+            CRM.ajaxCall({
+                url:url,
+                type:'POST',
+                contentType:'application/json',
+                data:JSON.stringify({
+                    name:''
+                }),
+                callback:function (data) {
+                    if (data) {
+
+                        CRM.tplHandler(strId,data,ul);
+                    }
+                }
+            });
+        });
+
+        // 搜索框，值改变时渲染数据
         sh.on('input.cc',function () {
 
-            if ($(this).val()!='') {
-                var obj = {};
-                obj[arg]=$(this).val();
-                ul.html('');
-                CRM.ajaxCall({
-                    url:url,
-                    type:'POST',
-                    contentType:'application/json',
-                    data:JSON.stringify(obj),
-                    callback:function (data) {
-                        if (data) {
-                            CRM.tplHandler(strId,data,ul);
-                        }
+            var obj = {};
+            obj[arg]=$(this).val();
+            ul.html('');
+            CRM.ajaxCall({
+                url:url,
+                type:'POST',
+                contentType:'application/json',
+                data:JSON.stringify(obj),
+                callback:function (data) {
+                    if (data) {
+                        CRM.tplHandler(strId,data,ul);
                     }
-                });
-            }
+                }
+            });
         });
         // 搜索框失去焦点
         sh.on('blur.cc',function (){
