@@ -111,7 +111,7 @@
                 <!--</isNotEqual>-->
             <!--</isNotEqual>-->
             <isNotEmpty prepend=" AND " property="areaId">
-                base.customer_area_id in (#areaId#)
+                base.customer_area_id in ($areaId$)
             </isNotEmpty>
         </dynamic>
     </sql>
@@ -169,7 +169,7 @@
                 <!--</isNotEqual>-->
             <!--</isNotEqual>-->
             <isNotEmpty prepend=" AND" property="areaId">
-                base.customer_area_id in (#areaId#)
+                base.customer_area_id in  ($areaId$)
             </isNotEmpty>
             <isNotEmpty prepend=" AND " property="enterpriseNature">
                 nature.customer_id=base.customer_id
@@ -218,7 +218,7 @@
                 <!--</isNotEqual>-->
             <!--</isNotEqual>-->
             <isNotEmpty prepend=" AND " property="areaId">
-                base.customer_area_id  in (#areaId#)
+                base.customer_area_id  in  ($areaId$)
             </isNotEmpty>
             <isNotEmpty prepend=" AND " property="enterpriseNature">
                 nature.customer_id=base.customer_id
