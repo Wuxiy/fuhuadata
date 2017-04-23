@@ -15,6 +15,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
@@ -35,7 +36,7 @@ public class BusinessOrderServiceImpl implements BusinessOrderService {
 
     @Autowired
     private BusinessOrderToNC businessOrderToNC;
-
+    @Autowired
     private BusinessOrderProductDao businessOrderProductDao;
 
 
@@ -197,7 +198,7 @@ public class BusinessOrderServiceImpl implements BusinessOrderService {
     }
 
     @Override
-    @Transactional
+    @Transactional(propagation= Propagation.SUPPORTS)
     public Result updateBusinessOrderAndProduct(BusinessOrderDO businessOrderDO) {
         Result result = new Result();
         try{
@@ -208,10 +209,11 @@ public class BusinessOrderServiceImpl implements BusinessOrderService {
                 List<BusinessOrderProduct> list = Arrays.asList(businessOrderDO.getBusinessOrderProducts());
                 result.setSuccess(businessOrderProductDao.updateBusinessOrderProducts(list));
             }
-            String code = businessOrderToNC.sendBusinessOrder(businessOrderDO.getBusinessOrder().getOrderId());
-            if(code =="1"){
-                result.setMessage("订单转化同步NC成功");
-            }
+            //update和nc同步对order表都有更新操作,造成事务嵌套，死锁，加上注解，支持当前事务，如果当前没有事务，就以非事务方式执行
+            //String code = businessOrderToNC.sendBusinessOrder(businessOrderDO.getBusinessOrder().getOrderId());
+            //if(code =="1"){
+            //    result.setMessage("订单转化同步NC成功");
+            //}
         }catch(Exception e){
             result.setSuccess(false);
             log.error("更新订单和订单产品错误,NC同步错误",e);

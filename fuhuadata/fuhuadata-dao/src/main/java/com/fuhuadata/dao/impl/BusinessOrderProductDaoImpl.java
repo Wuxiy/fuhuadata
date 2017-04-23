@@ -161,7 +161,10 @@ public class BusinessOrderProductDaoImpl extends BaseDao<BusinessOrderProduct> i
 
     @Override
     public boolean updateBusinessOrderProducts(List<BusinessOrderProduct> businessOrderProducts) {
-        return this.batch(sqlMapClientTemplate,IUPDATE_STMT,businessOrderProducts);
+        if(businessOrderProducts!=null&&businessOrderProducts.size()>0) {
+            return this.batch(sqlMapClientTemplate, IUPDATE_STMT, businessOrderProducts);
+        }
+        return false;
     }
 
 }

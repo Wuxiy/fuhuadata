@@ -98,5 +98,13 @@ public interface CustomerProductArchivesService {
 	 * @return
 	 */
 	public List<CustomerProductArchives> getCustomerTransportRequirement(String customerId);
+
+	/**
+	 * 根据客户产品档案id 查询详情页所需id
+	 * @param id
+	 * @return
+	 */
+	public Result<CustomerProductPackagingArchives> getCustomerProductIds(int id);
+
 	
 }

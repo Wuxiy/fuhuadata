@@ -1,4 +1,5 @@
 package com.fuhuadata.dao.impl;
+import java.util.HashMap;
 import java.util.List;
 import com.fuhuadata.dao.CustomerProductArchivesDao;
 import com.fuhuadata.domain.CustomerProductArchives;
@@ -28,6 +29,7 @@ public class CustomerProductArchivesDaoImpl extends SqlMapClientTemplate impleme
     public static final String GET_CUSTOMER_TRANSPORT_REQUIREMENT = "CUSTOMERPRODUCTARCHIVES.GET-CUSTOMER-TRANSPORT-REQUIREMENT";
     public static final String ADD_ARCHIVES = "CUSTOMERPRODUCTARCHIVES.addArchives";
     public static final String UPDATE_ARCHIVES = "CUSTOMERPRODUCTARCHIVES.updateArchives";
+    public static final String GET_CUSTOMER_PRODUCT_IDS="CUSTOMERPRODUCTARCHIVES.GET-CUSTOMER-PRODUCT-IDS";
     public CustomerProductArchives addCustomerProductInfo(CustomerProductArchives customerProductArchives) {
 		customerProductArchives.setId((Integer) this.insert(ADD, customerProductArchives));
     	return customerProductArchives;
@@ -61,6 +63,11 @@ public class CustomerProductArchivesDaoImpl extends SqlMapClientTemplate impleme
 
     public List<CustomerProductPackagingArchives> getCustomerProductPackingArchivesById(String customerId){
         return this.queryForList(GET_CUSTOMER_PRODUCT_REQUIRE_BY_ID,customerId);
+    }
+
+    @Override
+    public CustomerProductPackagingArchives getCustomerProductIds(int id) {
+        return (CustomerProductPackagingArchives)this.queryForObject(GET_CUSTOMER_PRODUCT_IDS,id);
     }
 
     public List<CustomerProductArchives> getCustomerProductInfosByPage(QueryCustomerProductArchives queryCustomerProductArchives) {

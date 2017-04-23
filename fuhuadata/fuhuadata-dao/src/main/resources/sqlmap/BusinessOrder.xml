@@ -472,7 +472,7 @@
             SELECT
             a.order_id orderId,
             a.business_id businessId,
-            base.short_name customerName,
+            base.full_name customerName,
             base.customer_level customerLevel,
             base.full_enterprise_nature enterpriseNature,
             a.amount_payable amountPayable,
@@ -506,7 +506,7 @@
         a.business_id businessId,
         a.sale_organization_name saleOrganizationName,
         a.nc_order_id ncOrderId,
-        base.short_name customerName,
+        base.full_name customerName,
         tc.`name` country,
         a.amount_payable amountPayable,
         a.floor_price floorPrice,

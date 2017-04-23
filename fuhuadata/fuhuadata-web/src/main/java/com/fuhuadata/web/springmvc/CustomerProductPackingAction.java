@@ -36,8 +36,6 @@ public class CustomerProductPackingAction {
      * 客户产品包装要求列表
      * @return
      */
-    @SuppressWarnings("unused")
-
     @RequestMapping(value="/customerProductPackingList",method= RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerProductPackaging  ",methods = "into")
     public ModelAndView customerProductPackingList(){
@@ -51,6 +49,10 @@ public class CustomerProductPackingAction {
     @RequestMapping(value="/infocustomerProductPacking",method=RequestMethod.GET)
     public ModelAndView infocustomerProductPacking(){return new ModelAndView("knowledgeBase/customerProductPackingInfo");}
 
+    /**
+     * 知识库，客户产品包装要求
+     * @return
+     */
     @RequestMapping(value = "/queryCustomerProductPackingList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerProductPackaging",methods = "list")
     @ResponseBody
@@ -59,7 +61,7 @@ public class CustomerProductPackingAction {
             Result<List<CustomerProductPackagingArchives>> result = customerProductInfoService.getCustomerProductPackagingArchives();
             return result.getResultPojo();
         } catch (Exception e) {
-            log.error("获取客户产品包装要求错误",e);
+            log.error("获取客户产品包装要求列表错误",e);
         }
         return null;
     }
@@ -82,7 +84,11 @@ public class CustomerProductPackingAction {
                 .addObject("customerId",customerId);
     }
 
-
+    /**
+     *  客户信息产品要求列表
+     * @param customerId
+     * @return
+     */
     @RequestMapping(value = "/getCustomerProductInfoById",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerProductPackaging",methods = "getCustomerProductInfoById")
     @ResponseBody
@@ -94,6 +100,19 @@ public class CustomerProductPackingAction {
             log.error("获取客户产品包装要求错误",e);
         }
         return null;
+    }
+
+    /**
+     * 百科和客户产品要求 客户商品名详情页
+     * @return
+     */
+    @RequestMapping(value="/intoCustomerProductInfoDetails",method= RequestMethod.GET)
+    @SystemLogAnnotation(module = "customerProductPackaging  ",methods = "into")
+    public ModelAndView intoCustomerProductInfoDetails(int id){
+        Result<CustomerProductPackagingArchives> result = customerProductInfoService.getCustomerProductIds(id);
+        CustomerProductPackagingArchives cppa = result.getModel();
+        return new ModelAndView("salesStatistics/productProcCompRequire").addObject("orderId",cppa.getOrderId()).addObject("businessProductId",cppa.getBusinessProductId()).
+                addObject("productRequireId",cppa.getBusinessRequireId()).addObject("edit",2);
     }
 
 
