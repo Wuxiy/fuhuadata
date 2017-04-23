@@ -21,6 +21,9 @@
         <result column="sale_organization_name" jdbcType="VARCHAR" property="saleOrganizationName" javaType="java.lang.String"/>
         <result column="destination_port" jdbcType="VARCHAR" property="destinationPort" javaType="java.lang.String"/>
         <result column="shipment_port" jdbcType="VARCHAR" property="shipmentPort" javaType="java.lang.String"/>
+        <result column="destination_port_name" jdbcType="VARCHAR" property="destinationPortName" javaType="java.lang.String"/>
+        <result column="shipment_port_name" jdbcType="VARCHAR" property="shipmentPortName" javaType="java.lang.String"/>
+
         <result column="collection_agreement" jdbcType="VARCHAR" property="collectionAgreement" javaType="java.lang.String"/>
         <result column="trade_type" jdbcType="TINYINT" property="tradeType" javaType="java.lang.Integer"/>
         <result column="trade_term" jdbcType="VARCHAR" property="tradeTerm" javaType="java.lang.String"/>
@@ -34,7 +37,7 @@
         <result column="nusdexchgrate" jdbcType="DECIMAL" property="nusdexchgrate" javaType="java.math.BigDecimal"/>
         <result column="nexchangerate" jdbcType="DECIMAL" property="nexchangerate" javaType="java.math.BigDecimal"/>
         <result column="lastdelydate" jdbcType="TIMESTAMP" property="lastdelydate" javaType="java.sql.Timestamp"/>
-
+        <result column="trade_country_name" jdbcType="VARCHAR" property="tradeCountryName" javaType="java.lang.String"/>
         <result column="trade_country" jdbcType="VARCHAR" property="tradeCountry" javaType="java.lang.String"/>
         <result column="premium_rate" jdbcType="DECIMAL" property="premiumRate" javaType="java.math.BigDecimal"/>
         <result column="guarantee_rate" jdbcType="DECIMAL" property="guaranteeRate" javaType="java.math.BigDecimal"/>
@@ -294,6 +297,16 @@
             <isNotNull prepend=", " property="shipmentPort" >
                 shipment_port = #shipmentPort#
             </isNotNull>
+
+            <isNotNull prepend=", " property="destinationPortName" >
+                destination_port_name = #destinationPortName#
+            </isNotNull>
+            <isNotNull prepend=", " property="shipmentPortName" >
+                shipment_port_name = #shipmentPortName#
+            </isNotNull>
+
+
+
             <isNotNull prepend=", " property="collectionAgreement" >
                 collection_agreement = #collectionAgreement#
             </isNotNull>
@@ -308,6 +321,9 @@
             </isNotNull>
             <isNotNull prepend=", " property="tradeCountry" >
                 trade_country = #tradeCountry#
+            </isNotNull>
+            <isNotNull prepend=", " property="tradeCountryName" >
+                trade_country_name = #tradeCountryName#
             </isNotNull>
             <isNotNull prepend=", " property="premiumRate" >
                 premium_rate = #premiumRate#
@@ -413,8 +429,8 @@
 
         insert into business_order (order_id, nc_order_id, business_id, customer_id,customer_duty_paragraph,
         bill_to_customer, sales_man_id, sales_man_name, department_id,sale_organization_id,
-        sale_organization_name, destination_port, shipment_port,collection_agreement, trade_type,
-        trade_term, currency, trade_country, premium_rate,guarantee_rate, discount_rate,
+        sale_organization_name, destination_port, shipment_port,destination_port_name, shipment_port_name,collection_agreement, trade_type,
+        trade_term, currency, trade_country,trade_country_name, premium_rate,guarantee_rate, discount_rate,
         loss_rate, sale_rate, management_rate, gross_rate, credit_rate,
         transport_flag, partial_shipment_falg, status, deal_time, deliver_info, express_info, due_time,amount_payable, floor_price, maintenance_fee,
         net_profit, actual_payment_time,actual_amount_paid, unpaid_amount, is_complaint, is_pledge, is_modify_price, claim_amount,create_user_id, create_user_name,
@@ -422,7 +438,7 @@
         values (#orderId#, #ncOrderId#, #businessId#, #customerId#,
         #customerDutyParagraph#, #billToCustomer#, #salesManId#,
         #salesManName#, #departmentId#, #saleOrganizationId#,
-        #saleOrganizationName#, #destinationPort#, #shipmentPort#,
+        #saleOrganizationName#, #destinationPort#, #shipmentPort#,#destinationPortName#, #shipmentPortName#,
         #collectionAgreement#, #tradeType#, #tradeTerm#, #currency#,
         #tradeCountry#, #premiumRate#, #guaranteeRate#,
         #discountRate#, #lossRate#, #saleRate#, #managementRate#,
@@ -455,14 +471,17 @@
                 sale_organization_name,
                 destination_port,
                 shipment_port,
-                t_income.`name` collection_agreement,
+                 destination_port_name,
+                shipment_port_name,
+                collection_agreement,
                 trade_type,
-                t_incoterm.`name` trade_term,
-                t_currtype.`name` currency,
+                trade_term,
+                currency,
                 nusdexchgrate,
                 nexchangerate,
                 lastdelydate,
                 trade_country,
+                trade_country_name,
                 premium_rate,
                 guarantee_rate,
                 discount_rate,
@@ -501,9 +520,6 @@
                 interest_rate
             FROM
                 business_order
-            LEFT JOIN t_currtype ON t_currtype.`code` = business_order.currency
-            LEFT JOIN t_incoterm ON t_incoterm.`code` = business_order.trade_term
-            LEFT JOIN t_income ON t_income.`code` = business_order.collection_agreement
             WHERE
                 order_id = #orderId#
     ]]>
