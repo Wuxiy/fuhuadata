@@ -49,7 +49,7 @@ public class UserController extends BaseController<UserAccount, Integer> {
         return result.getResultPojo();
     }
 
-    @RequestMapping(value = "/dept/users", method = RequestMethod.GET)
+    @RequestMapping("/dept/users")
     @ResponseBody
     public List<MixNodeVO> getUserTreeByDept(@RequestParam("pid") String deptId) {
         return userService.listUserNodesByDept(deptId);
