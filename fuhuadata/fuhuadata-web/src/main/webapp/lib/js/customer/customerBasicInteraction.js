@@ -284,7 +284,7 @@ CRM.cbInfo.renderForm = function(data){
     if (data.areaId) { page.areaId.data('val',data.areaId);}
     if (data.companyType) { page.companyType.val(data.companyType);}
     if (data.customerType) { page.customerType.val(data.customerType);}
-    if (data.customerId) { page.customerId.val(data.customerId);}
+    if (data.customerId) { page.customerId.val(data.ncId);}
     if (data.customerLevel) { page.customerLevel.val(data.customerLevel);}
     if (data.enterpriseEmail) {  page.enterpriseEmail.val(data.enterpriseEmail);}
     if (data.enterpriseNature) { page.enterpriseNature.val(data.enterpriseNature.split(','));} // checkbox
