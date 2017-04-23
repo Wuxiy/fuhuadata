@@ -479,6 +479,8 @@
                     var arr = [],
                             nodes = sNodes[0].children;
 
+                    arr.push(treeNode.pkAreacl);
+
                     smarty(nodes);
 
                     areaId = arr.join('\',\'');
