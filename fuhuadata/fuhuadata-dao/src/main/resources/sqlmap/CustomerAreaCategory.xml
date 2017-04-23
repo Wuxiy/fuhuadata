@@ -7,13 +7,13 @@
 
     <select id="getAllList" resultClass="CustomerArea" parameterClass="java.lang.String">
         SELECT
-            pk_areacl pkAreacl,
-            code ,
-            name,
-            pk_fatherarea pkFatherarea
+            c.code pkAreacl,
+            c.name,
+            p.code pkFatherarea
         FROM
-            t_areacl
-        where code &lt; '91' and code &gt; '9'
+            t_areacl c,t_areacl p
+        where c.code &lt; '91' and c.code &gt; '9'
+        and c.pk_fatherarea = p.pk_areacl
         <isNotEmpty prepend="and" property="value">
             pk_fatherarea = #value#
         </isNotEmpty>
