@@ -317,6 +317,7 @@
                     var ResultData = eval(result.data);
                     console.log(ResultData.length);
                     if(ResultData.length != 0){
+                        customerList.innerHTML = "";
                         for (var i = 0; i < ResultData.length; i++) {
                             customerList.innerHTML += '<li class="list-group-item"><a class="cNode" data-id="' + ResultData[i].customerId + '">' + ResultData[i].fullName + '</a></li>';
                         }
