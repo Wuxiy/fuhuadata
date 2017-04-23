@@ -43,6 +43,14 @@ public class ExhibitionInfo{
 
     private String exhibitionInfo;//展会介绍
 
+    private Integer lastmodifyUserId;//上一次修改者id
+
+    private String lastmodifyUserName;//上一次修改者姓名
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date modifyTime;//修改时间
+
+
     public Integer getExhibitionId() {
         return exhibitionId;
     }
@@ -161,5 +169,29 @@ public class ExhibitionInfo{
 
     public void setCreatorId(Integer creatorId) {
         this.creatorId = creatorId;
+    }
+
+    public Integer getLastmodifyUserId() {
+        return lastmodifyUserId;
+    }
+
+    public void setLastmodifyUserId(Integer lastmodifyUserId) {
+        this.lastmodifyUserId = lastmodifyUserId;
+    }
+
+    public String getLastmodifyUserName() {
+        return lastmodifyUserName;
+    }
+
+    public void setLastmodifyUserName(String lastmodifyUserName) {
+        this.lastmodifyUserName = lastmodifyUserName;
+    }
+
+    public Date getModifyTime() {
+        return modifyTime;
+    }
+
+    public void setModifyTime(Date modifyTime) {
+        this.modifyTime = modifyTime;
     }
 }
