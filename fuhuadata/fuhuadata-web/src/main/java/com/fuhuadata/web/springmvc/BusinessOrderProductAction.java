@@ -49,10 +49,11 @@ public class BusinessOrderProductAction {
      * @return
      */
     @RequestMapping("/intoProductBasicInfoRequire")
-    public ModelAndView intoProductBasicInfoRequire(String orderId,Integer businessProductId,Integer customerId){
+    public ModelAndView intoProductBasicInfoRequire(String orderId,Integer businessProductId,Integer customerId,Integer edit){
         return new ModelAndView("salesStatistics/productBasicInfoRequire")
                 .addObject("orderId",orderId)
                 .addObject("customerId",customerId)
+                .addObject("edit",edit==null?0:edit)
                 .addObject("businessProductId",businessProductId);
     }
 
@@ -264,7 +265,8 @@ public class BusinessOrderProductAction {
      */
     @ResponseBody
     @RequestMapping("/saveProductRequire")
-    public boolean saveProductRequire(BusinessProductRequire businessProductRequire){
+    public Map<String,Object> saveProductRequire(BusinessProductRequire businessProductRequire){
+        Map<String,Object> result = new HashMap<String,Object>();
         Integer businessProductRequireId = businessProductRequire.getId();
         try {
             if(businessProductRequireId == null || businessProductRequireId == 0){
@@ -273,11 +275,14 @@ public class BusinessOrderProductAction {
             }else{
                 businessProductRequireService.updateProductRequire(businessProductRequire);
             }
-            return true;
+            result.put("productRequireId",businessProductRequireId);
+            result.put("success",true);
+            return result;
         } catch (Exception e) {
             log.error("保存产品要求错误：" + e.getMessage());
+            result.put("success",false);
         }
-        return false;
+        return result;
     }
 
     /**
@@ -286,11 +291,12 @@ public class BusinessOrderProductAction {
      * @return
      */
     @RequestMapping("intoDocumentary")
-    public ModelAndView intoDocumentary(String orderId,Integer businessProductId ,Integer productRequireId,Integer customerId){
+    public ModelAndView intoDocumentary(String orderId,Integer businessProductId ,Integer productRequireId,Integer customerId,Integer edit){
         return new ModelAndView("salesStatistics/billRequire")
                 .addObject("orderId",orderId)
                 .addObject("businessProductId",businessProductId)
                 .addObject("productRequireId",productRequireId)
+                .addObject("edit",edit==null?0:edit)
                 .addObject("customerId",customerId);
     }
 
@@ -336,11 +342,12 @@ public class BusinessOrderProductAction {
      * @return
      */
     @RequestMapping("intoPackageRequire")
-    public ModelAndView intoPackageRequire(String orderId,Integer businessProductId ,Integer productRequireId,Integer customerId){
+    public ModelAndView intoPackageRequire(String orderId,Integer businessProductId ,Integer productRequireId,Integer customerId,Integer edit){
         return new ModelAndView("salesStatistics/transportRequire")
                 .addObject("orderId",orderId)
                 .addObject("customerId",customerId)
                 .addObject("productRequireId",productRequireId)
+                .addObject("edit",edit==null?0:edit)
                 .addObject("businessProductId",businessProductId);
     }
 

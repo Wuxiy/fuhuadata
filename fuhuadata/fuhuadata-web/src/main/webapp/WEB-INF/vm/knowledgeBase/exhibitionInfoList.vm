@@ -42,6 +42,7 @@
                             <th class="col-xs-1 text-center text-middle">展会介绍连接</th>
                             <th class="text-center">创建人</th>
                             <th class="col-xs-1 text-center text-middle">创建时间</th>
+                            <th >操作</th>
                         </tr>
                         </thead>
 
@@ -56,7 +57,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-        $('#exhibition_table').dataTable({
+        var datatale = $('#exhibition_table').DataTable({
 
             "ajax": '${request.contextPath}/exhibitionInfo/queryExhibitionInfoList',
             "pagingType": "full_numbers",
@@ -74,7 +75,14 @@
                 {"data": "exhibitionInfo"},
                 {"data": "exhibitionLink"},
                 {"data": "creator"},
-                {"data": "createTime"}
+                {"data": "createTime"},
+                {
+                    data: 'exhibitionId',
+                    render: function (data, type, row, meta) {
+                        var delBtn = '<a href="#" class="j-delete" data-id="' + data + '">删除</a>';
+                        return delBtn;
+                    }
+                }
             ],
             "columnDefs": [{
                 targets: '_all',
@@ -95,6 +103,31 @@
                 "searchPlaceholder": '关键字'
             }
         });
+
+        // 删除
+        $(document).on('click', '.j-delete', function (e) {
+            var jbtn = $(e.target),
+                jtr = jbtn.closest('tr'),
+                id = jbtn.data("id");
+
+            if (confirm("确认删除该展会动态？")) {
+                var url = '${rc.contextPath}/exhibitionInfo/deleteExhibitionInfo';
+                $.post(url, {
+                    id: id
+                }, function (result) {
+                    if (result.code == 1) {
+                        alert("删除成功！");
+                        datatale.row(jtr).remove();
+                        datatale.ajax.reload(null, false);
+                    } else {
+                        alert("删除失败！");
+                    }
+                });
+            }
+
+            return false;
+        });
+
     });
 
 

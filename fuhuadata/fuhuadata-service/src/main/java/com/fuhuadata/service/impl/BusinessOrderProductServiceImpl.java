@@ -6,6 +6,7 @@ import com.fuhuadata.domain.query.QueryBusinessOrderProduct;
 import com.fuhuadata.domain.query.QueryCustomerProductArchives;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.service.BusinessOrderProductService;
+import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.BusinessOrderProductVO;
 import com.fuhuadata.vo.BusinessOrderVO;
 import com.fuhuadata.vo.Price.Price;
@@ -45,6 +46,10 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
     @Transactional
     public int addBusinessOrderProduct(BusinessOrderProduct businessOrderProduct,List<BusinessOrderProductComponent> businessOrderProductComponents) {
         try {
+            businessOrderProduct.setCreateUserId(LoginUtils.getLoginId());
+            businessOrderProduct.setCreateUserName(LoginUtils.getLoginName());
+            businessOrderProduct.setLastmodifyUserName(LoginUtils.getLoginName());
+            businessOrderProduct.setLastmodifyUserId(LoginUtils.getLoginId());
             int businessProductId = businessOrderProductDao.insertBaseInfo(businessOrderProduct);
             for(BusinessOrderProductComponent bopc:businessOrderProductComponents){
                 bopc.setBusinessProductId(businessProductId);
@@ -93,10 +98,10 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
             BusinessOrderProduct businessOrderProduct = new BusinessOrderProduct();
             businessOrderProduct.setOrderId(orderId);
             businessOrderProduct.setArchiveProductId(business_product_archives_id);
-            businessOrderProduct.setCreateUserName("admin");
-            businessOrderProduct.setCreateUserId(0);
-            businessOrderProduct.setLastmodifyUserId(0);
-            businessOrderProduct.setLastmodifyUserName("admin");
+            businessOrderProduct.setCreateUserName(LoginUtils.getLoginName());
+            businessOrderProduct.setCreateUserId(LoginUtils.getLoginId());
+            businessOrderProduct.setLastmodifyUserId(LoginUtils.getLoginId());
+            businessOrderProduct.setLastmodifyUserName(LoginUtils.getLoginName());
             int new_businessProductId =  businessOrderProductDao.insertFromArchives(businessOrderProduct);
             //2.复制产品成分及其费用
             Map<String,Object> param_map = new HashMap<String,Object>();
@@ -155,6 +160,8 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
             businessOrderProduct.setMinPrice(calculateMinPrice(businessOrderProduct.getId()));
         }
         //先修改订单产品数据
+        businessOrderProduct.setLastmodifyUserId(LoginUtils.getLoginId());
+        businessOrderProduct.setLastmodifyUserName(LoginUtils.getLoginName());
        int effect_num =  businessOrderProductDao.updateBusinessOrderProduct(businessOrderProduct);
         //更新档案数据
         customerProductArchivesDao.updateArchives(businessOrderProduct.getId());
