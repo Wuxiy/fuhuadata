@@ -175,21 +175,37 @@ public class CustomerInfoToNCImpl implements CustomerInfoToNC{
             pk_group.appendChild(document.createTextNode("0001"));
             billhead.appendChild(pk_group);
             Map<String,String> nodeValue=new HashMap<String, String>();
-            nodeValue.put("pk_org",customerBaseInfo.getSaleOrganizationId());
-            nodeValue.put("name",customerBaseInfo.getFullName());
-            nodeValue.put("shortname",customerBaseInfo.getShortName());
+            if (customerBaseInfo.getSaleOrganizationId()!=null) {
+                nodeValue.put("pk_org", customerBaseInfo.getSaleOrganizationId());
+            }
+            if (customerBaseInfo.getFullName()!=null) {
+                nodeValue.put("name", customerBaseInfo.getFullName());
+            }
+            if (customerBaseInfo.getShortName()!=null) {
+                nodeValue.put("shortname", customerBaseInfo.getShortName());
+            }
             //客户基本分类
-            nodeValue.put("pk_custclass",customerBaseInfo.getCustclass());
+            if (customerBaseInfo.getCustclass()!=null) {
+                nodeValue.put("pk_custclass", customerBaseInfo.getCustclass());
+            }
             //国家
-            nodeValue.put("pk_country",customerBaseInfo.getCountryzone());
+            if (customerBaseInfo.getCountryzone()!=null) {
+                nodeValue.put("pk_country", customerBaseInfo.getCountryzone());
+            }
             //时区
-            nodeValue.put("pk_timezone",customerBaseInfo.getTimezone());
+            if (customerBaseInfo.getTimezone()!=null) {
+                nodeValue.put("pk_timezone", customerBaseInfo.getTimezone());
+            }
             //数据格式
-            nodeValue.put("pk_format",customerBaseInfo.getFormatdoc());
+            if (customerBaseInfo.getFormatdoc()!=null) {
+                nodeValue.put("pk_format", customerBaseInfo.getFormatdoc());
+            }
             //客户类别（内部客户，外部客户）
             nodeValue.put("custprop","0");
             //地区分类
-            nodeValue.put("pk_areacl",customerBaseInfo.getCustomerAreaId());
+            if (customerBaseInfo.getCustomerAreaId()!=null) {
+                nodeValue.put("pk_areacl", customerBaseInfo.getCustomerAreaId());
+            }
             //nodeValue.put("","");
 
             for(Map.Entry<String ,String> entry:nodeValue.entrySet()){

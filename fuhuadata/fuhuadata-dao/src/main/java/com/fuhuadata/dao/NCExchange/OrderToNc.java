@@ -13,4 +13,5 @@ public interface OrderToNc {
     void updateOrderStatusByNcOrderId(Map<String,Object> mapv);
     List<BusinessOrderProduct> getOrderProductsById(List<Integer> orderProductsId);
     String getCodeByWareId(int wareId);
+    BusinessOrder getBusinessOrderByOrderId(String orderId);
 }

@@ -1,6 +1,7 @@
 package com.fuhuadata.dao.impl.NCExchange;
 
 import com.fuhuadata.dao.NCExchange.OrderToNc;
+import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.BusinessOrderProduct;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
@@ -15,6 +16,7 @@ public class OrderToNcImpl extends SqlMapClientTemplate implements OrderToNc {
     private static final String UPDATE_STATUS_BY_NCORDERID="BUSINESSORDERTONC.UPDATE-STATUS-BY-NCORDERID";
     private static final String GET_ORDER_PRODUCTS_BY_ID="BUSINESSORDERTONC.getOrderProductsById";
     private static final String GET_CODE_BY_WARE_ID="BUSINESSORDERTONC.getCodeByWareId";
+    private static final String GET_BUSINESSORDER_BY_ORDER_ID="BUSINESSORDERTONC.getBusinessOrderByOrderId";
     @Override
     public void updateOrderStatusByNcOrderId(Map<String,Object> mapv) {
         this.update(UPDATE_STATUS_BY_NCORDERID,mapv);
@@ -28,6 +30,12 @@ public class OrderToNcImpl extends SqlMapClientTemplate implements OrderToNc {
     @Override
     public String getCodeByWareId(int wareId) {
         return (String) this.queryForObject(GET_CODE_BY_WARE_ID,wareId);
+    }
+
+    @Override
+    public BusinessOrder getBusinessOrderByOrderId(String orderId) {
+
+        return (BusinessOrder) this.queryForObject(GET_BUSINESSORDER_BY_ORDER_ID,orderId);
     }
 
 

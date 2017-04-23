@@ -55,6 +55,10 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
     private OrderToNc orderToNc;
     @Value("${ncurl}")
     private String ncUrl;
+    @Value("${ctrantypeid}")
+    private String ctrantypeid;
+    @Value("${vtrantypecode}")
+    private String vtrantypecode;
     @Autowired
     ServletContext servletContext;
 
@@ -69,7 +73,7 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
         /*
         将订单实体转换成xml。
          */
-            BusinessOrder orderBaseInfo = businessOrderDao.getBusinessOrderByOrderId(orderId);
+            BusinessOrder orderBaseInfo = orderToNc.getBusinessOrderByOrderId(orderId);
             String customerId=orderBaseInfo.getCustomerId();
             CustomerBaseInfo customerBaseInfo=customerBaseInfoDao.getCustomerBaseInfoById(customerId);
             int customerType=customerBaseInfo.getCustomerType();
@@ -220,7 +224,9 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
             Map<String,String> nodeValue=new HashMap<String, String>();
             if(orderBaseInfo.getSaleOrganizationId()!=null) {
                 nodeValue.put("pk_org", "" + orderBaseInfo.getSaleOrganizationId());
+                nodeValue.put("pk_org_v","" + orderBaseInfo.getSaleOrganizationId());
             }
+
             nodeValue.put("ccustomerid",""+ncid);
             if (orderBaseInfo.getTradeCountry()!=null) {
                 nodeValue.put("ctradecountryid", "" + orderBaseInfo.getTradeCountry());
@@ -230,9 +236,16 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
             if (orderBaseInfo.getDepartmentId()!=null) {
                 nodeValue.put("cdeptvid", "" + orderBaseInfo.getDepartmentId());
             }
-            //if (orderBaseInfo.getCurrency()!=null) {
-            //    nodeValue.put("corigcurrencyid", "" + orderBaseInfo.getCurrency());
-            //}
+            if (orderBaseInfo.getCurrency()!=null) {
+                nodeValue.put("corigcurrencyid", "" + orderBaseInfo.getCurrency());
+                //本位币
+                nodeValue.put("ccurrencyid","" + orderBaseInfo.getCurrency());
+            }
+
+            //nc长期协议的 协议类型
+            nodeValue.put("ctrantypeid",ctrantypeid);
+            nodeValue.put("vtrantypecode",vtrantypecode);
+
             if (orderBaseInfo.getNexchangerate()!=null) {
                 nodeValue.put("nexchangerate", "" + orderBaseInfo.getNexchangerate());
             }
@@ -273,6 +286,7 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
             if (orderBaseInfo.getCollectionAgreement()!=null){
                 nodeValue.put("cpaytermid",""+orderBaseInfo.getCollectionAgreement());
             }
+
             //设定长期协议的协议状态为生效。
             nodeValue.put("fstatusflag","7");
             nodeValue.put("fpfstatusflag","1");
