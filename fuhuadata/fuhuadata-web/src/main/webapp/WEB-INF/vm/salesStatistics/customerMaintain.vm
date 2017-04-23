@@ -228,7 +228,7 @@
 
             // 将数据赋值给外部变量，方便搜索时处理数据
             areaTreeData=[{
-                pkAreacl : '1001D2100000000067E6',
+                pkAreacl : '9',
                 pkFatherarea : '~',
                 name : '全部'
             }];
@@ -364,7 +364,7 @@
         }
 
 
-        if (treeNode.pkAreacl!='1001D2100000000067E6'){
+        if (treeNode.pkAreacl!='9'){
 
             var treeObj = $.fn.zTree.getZTreeObj('areaTree'),
                     sNodes = treeObj.getSelectedNodes(); // 选中的节点集合
