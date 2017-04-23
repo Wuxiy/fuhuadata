@@ -10,6 +10,7 @@
             <!--表格开始-->
             <div class="panel panel-default">
                 <div class="panel-heading">
+                    <button id="backPage" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" type="button">返回</button>
                     <h3 class="panel-title">
                         展会编辑
                     </h3>
@@ -216,6 +217,12 @@
                     callback: renderAreaTree
                 })
             }
+        });
+
+        // 返回
+        $('#backPage').on('click.back',function () {
+
+            window.history.back(-1);
         });
 
     });

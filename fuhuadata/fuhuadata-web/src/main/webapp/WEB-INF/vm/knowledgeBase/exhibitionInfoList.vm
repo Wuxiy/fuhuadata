@@ -95,7 +95,7 @@
             }, {
                 "targets": 1,
                 "render": function (data, type, row, meta) {
-                    return '<a href="${request.contextPath}/exhibitionInfo/modifyExhibitionInfo?id=' + row.exhibitionId + '" target="_blank">' + data + '</a>';
+                    return '<a href="${request.contextPath}/exhibitionInfo/modifyExhibitionInfo?id=' + row.exhibitionId + '" target="_self">' + data + '</a>';
                 }
             }],
             "language": {
