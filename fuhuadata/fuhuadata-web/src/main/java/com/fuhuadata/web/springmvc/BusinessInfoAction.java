@@ -139,6 +139,7 @@ public class BusinessInfoAction {
         return new ModelAndView("/salesStatistics/businessOpportunityInfo").addObject("businessId",businessId);
     }
     /**
+     *  商机客户信息
      * get by id
      * @param businessId
      * @return

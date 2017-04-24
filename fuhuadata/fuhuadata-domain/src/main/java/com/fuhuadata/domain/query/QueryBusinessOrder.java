@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * Created by hexingfu on 2017/3/18.
  */
-public class QueryBusinessOrder {
+public class  QueryBusinessOrder {
 
     /**地区id**/
     private String areaId;

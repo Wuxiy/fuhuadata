@@ -31,16 +31,16 @@
         <result column="currency" jdbcType="VARCHAR" property="currency" javaType="java.lang.String"/>
 
         <result property="isCreditRisk" column="is_credit_risk" jdbcType="INT" javaType="java.lang.Integer"/>
-        <result property="interestRate" column="interest_rate" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+        <result property="interestRate" column="interest_rate" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 
 
-        <result column="nusdexchgrate" jdbcType="DECIMAL" property="nusdexchgrate" javaType="java.math.BigDecimal"/>
-        <result column="nexchangerate" jdbcType="DECIMAL" property="nexchangerate" javaType="java.math.BigDecimal"/>
+        <result column="nusdexchgrate" jdbcType="DECIMAL" property="nusdexchgrate" javaType="java.math.BigDecimal" nullValue="0"/>
+        <result column="nexchangerate" jdbcType="DECIMAL" property="nexchangerate" javaType="java.math.BigDecimal" nullValue="0"/>
         <result column="lastdelydate" jdbcType="TIMESTAMP" property="lastdelydate" javaType="java.sql.Timestamp"/>
         <result column="trade_country_name" jdbcType="VARCHAR" property="tradeCountryName" javaType="java.lang.String"/>
         <result column="trade_country" jdbcType="VARCHAR" property="tradeCountry" javaType="java.lang.String"/>
-        <result column="premium_rate" jdbcType="DECIMAL" property="premiumRate" javaType="java.math.BigDecimal"/>
-        <result column="guarantee_rate" jdbcType="DECIMAL" property="guaranteeRate" javaType="java.math.BigDecimal"/>
+        <result column="premium_rate" jdbcType="DECIMAL" property="premiumRate" javaType="java.math.BigDecimal" nullValue="0"/>
+        <result column="guarantee_rate" jdbcType="DECIMAL" property="guaranteeRate" javaType="java.math.BigDecimal" nullValue="0"/>
         <result column="discount_rate" jdbcType="DECIMAL" property="discountRate" javaType="java.math.BigDecimal"/>
         <result column="loss_rate" jdbcType="DECIMAL" property="lossRate" javaType="java.math.BigDecimal"/>
         <result column="sale_rate" jdbcType="DECIMAL" property="saleRate" javaType="java.math.BigDecimal"/>
@@ -209,7 +209,7 @@
                 a.status = #status#
             </isNotEmpty>
             <isNotEmpty prepend=" AND " property="orderId">
-                a.order_id like concat('',#orderId#,'')
+                a.order_id like concat('%',#orderId#,'%')
             </isNotEmpty>
             <isNotEmpty prepend=" AND " property="customerLevel">
                 base.customer_level = #customerLevel#

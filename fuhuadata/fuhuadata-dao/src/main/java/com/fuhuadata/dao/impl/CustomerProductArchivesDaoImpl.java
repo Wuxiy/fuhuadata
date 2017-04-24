@@ -67,7 +67,7 @@ public class CustomerProductArchivesDaoImpl extends SqlMapClientTemplate impleme
 
     @Override
     public CustomerProductPackagingArchives getCustomerProductIds(int id) {
-        return (CustomerProductPackagingArchives)this.queryForObject(GET_CUSTOMER_PRODUCT_IDS,id);
+            return (CustomerProductPackagingArchives)this.queryForObject(GET_CUSTOMER_PRODUCT_IDS,id);
     }
 
     public List<CustomerProductArchives> getCustomerProductInfosByPage(QueryCustomerProductArchives queryCustomerProductArchives) {
