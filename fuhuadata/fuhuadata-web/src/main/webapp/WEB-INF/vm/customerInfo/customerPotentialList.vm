@@ -29,7 +29,7 @@
                     <div class="panel-body clearfix">
                         <!--搜索&筛选控件-->
                         <div class="form-horizontal">
-                            <form class="form-group col-xs-10 pull-right">
+                            <form class="form-group col-xs-12">
                                 <div class="input-group">
                                     <span class="input-group-addon" lang="zh">客户全称</span>
                                     <input class="form-control" type="text" id="fullName" value="" />

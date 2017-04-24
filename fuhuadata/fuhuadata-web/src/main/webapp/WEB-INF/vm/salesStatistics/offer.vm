@@ -56,9 +56,9 @@
                                         <span class="input-group-addon" lang="zh">订单状态</span>
                                         <select class="form-control" id="orderStatus">
                                             <option value="" selected lang="zh">全部</option>
-                                            <option value="0" lang="zh">待下单</option>
-                                            <option value="1" lang="zh">失败</option>
-                                            <option value="2" lang="zh">已下单</option>
+                                            <option value="-2" lang="zh">报价失败</option>
+                                            <option value="0" lang="zh">报价中 </option>
+                                            <option value="1" lang="zh">已转化成订单</option>
                                         </select>
                                         <span class="input-group-addon" lang="zh">客户类型</span>
                                         <select class="form-control" id="customerLevel">
