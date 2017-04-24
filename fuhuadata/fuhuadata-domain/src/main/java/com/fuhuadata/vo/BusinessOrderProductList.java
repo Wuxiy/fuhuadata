@@ -19,6 +19,10 @@ public class BusinessOrderProductList {
     private String productName;//产品名称
     private String brand;//品牌
 
+    private Integer transformState;//转化状态
+
+    private BigDecimal contractPrice;//合同单价
+
     private Integer businessProductId ;//订单产品id
     private Integer productRequireId;//产品要求id
 
@@ -185,5 +189,21 @@ public class BusinessOrderProductList {
 
     public void setProductCode(Integer productCode) {
         this.productCode = productCode;
+    }
+
+    public Integer getTransformState() {
+        return transformState;
+    }
+
+    public void setTransformState(Integer transformState) {
+        this.transformState = transformState;
+    }
+
+    public BigDecimal getContractPrice() {
+        return contractPrice;
+    }
+
+    public void setContractPrice(BigDecimal contractPrice) {
+        this.contractPrice = contractPrice;
     }
 }

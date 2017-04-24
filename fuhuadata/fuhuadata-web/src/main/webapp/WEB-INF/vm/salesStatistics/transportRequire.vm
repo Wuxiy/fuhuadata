@@ -366,7 +366,7 @@
             }
         })
     }else {
-        $('[data-target="on"]').removeClass('disabled');
+        $('[data-control="on"]').attr('disabled',false);
 
         $('#before').removeClass('hidden');
         $('#next').removeClass('hidden');

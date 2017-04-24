@@ -32,7 +32,7 @@
                             <span class="glyphicon glyphicon-plus"></span>
                             新增商机
                         </a>
-                        <a class="btn btn-primary" href="">直接报价</a>
+                        <a class="btn btn-primary" href="" disabled="">直接报价</a>
                     </div>
                 </div>
             </div>

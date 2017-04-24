@@ -355,14 +355,11 @@
     }else {
         $('#before').removeClass('hidden');
         $('#next').removeClass('hidden');
-        $('[data-target="on"]').removeClass('disabled');
+        $('[data-control="on"]').attr('disabled',false);
 
     }
 
-    $('#before').click(function(){
-        window.location.href = basePath + '/businessProduct/intoProductRequire?businessProductId=' + id + '&&orderId=' + orderId + '&&customerId=' + customerId + '&&productRequireId=' + productRequireId;
-    })
-
+    //下一步function
     $('#next').click(function(){
         jQuery.ajax({
             url:basePath + '/businessProduct/saveDocumentaryOrPacking?productRequireId=' + id,
@@ -374,6 +371,7 @@
             }
         })
     })
+
 
     function getdata() {
         var documentaryRequire = {

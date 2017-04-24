@@ -223,7 +223,7 @@
                 </div>
 
                 <!--加工成分-->
-                <div id="cost" class="panel panel-default view-HD-lg">
+                <div id="cost" class="panel panel-default view-HD-lg hidden">
                     <div class="panel-heading">
                         <h3 class="panel-title" lang="zh">加工成分及费用</h3>
                     </div>
@@ -320,7 +320,7 @@
     bInfo.startCancel();
 
 
-    //若为查看产品要求详情editId标识符为1；businessProductId不为空
+    //editId=1,businessProductId!='',列表进入查看详情；
     if(editId == 1&&businessProductId != ''){
         $('#edit').removeClass('hidden');
         $('#back').removeClass('hidden');
@@ -377,9 +377,8 @@
                         break;
                 }
 
-                if(components.length == 0){
-                    $('#cost').addClass('hidden');
-                }else{
+                if(components.length != 0){
+                    $('#cost').removeClass('hidden');
                     costtable.innerHTML = '';
                     for(var i=0;i<components.length;i++){
                         costtable.innerHTML += '<tr>'+
@@ -517,9 +516,8 @@
                         $('#model').val(productWareVo.model);
                         $('#unitUseRate').val(productWareVo.unitUseRate);
 
-                        if(components.length == 0){
-                            $('#cost').addClass('hidden');
-                        }else{
+                        if(components.length != 0){
+                            $('#cost').removeClass('hidden');
                             costtable.innerHTML = '';
                             for(var i=0;i<components.length;i++){
                                 costtable.innerHTML += '<tr>'+
@@ -531,7 +529,6 @@
                                         '</tr>';
                             }
                         }
-
                     } else{
                     jQuery.ajax({
                         url:basePath + '/businessProduct/detailBaseInfo?businessProductId=' + businessProductId,
@@ -547,9 +544,8 @@
                             $('#model').val(basicInfo.model);
                             $('#brand').val(basicInfo.brand);
 
-                            if(components.length==0){
-                                $('#cost').addClass('hidden');
-                            }else{
+                            if(components.length!=0){
+                                $('#cost').removeClass('hidden');
                                 costtable.innerHTML = '';
                                 for(var i=0;i<components.length;i++){
                                     costtable.innerHTML += '<tr>'+
@@ -709,6 +705,7 @@
         return data==undefined?'':data;
     }
 
+    //editId=1编辑保存
     $('#save').click(function(){
         jQuery.ajax({
             url:basePath + '/businessProduct/saveBaseInfoAndComponents',
@@ -722,6 +719,7 @@
         })
     })
 
+    //返回function
     $('#back').click(function(){
         window.location.href = basePath + '/businessOrder/intoOfferorOrder?orderId=' + orderId;
     })

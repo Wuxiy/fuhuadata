@@ -296,7 +296,7 @@
                     </div>
                 </div>
         </div>
-        <div data-view="editHide" class="tab-content col-xs-12 view-HD-lg">
+        <div id="producttable" data-view="editHide" class="tab-content col-xs-12 view-HD-lg">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="btn-group btn-group-xs panel-heading-btn pull-right">
@@ -415,65 +415,77 @@
             url:basePath + '/businessOrder/getBusinessOrderByOrderId?orderId=' + orderId,
             type:'GET',
             success:function(result){
-                var businessOrder = result.data.businessOrder;
-                var customerBaseInfo = result.data.customerBaseInfo;
+                    var businessOrder = result.data.businessOrder;
+                    if(!businessOrder.businessId){
+                        $('#businessId').val(businessOrder.businessId); // 商机编号
+                    }
+                    $('#customerDutyParagraph').val(businessOrder.customerDutyParagraph); // 客户税号
+                    $('#billToCustomer').val(businessOrder.billToCustomer); // 收票客户
+                    $('#saleOrganizationName').val(businessOrder.saleOrganizationName); // 销售组织
+                    $('#departmentName').val(businessOrder.departmentName); // 部门
+                    $('#salesManName').val(businessOrder.salesManName); // 业务员
+                    $('#destinationPort').val(businessOrder.destinationPortName); // 目的港
+                    $('#shipmentPort').val(businessOrder.shipmentPortName); // 起运港
+                    $('#income').val(businessOrder.collectionAgreement); // 收款协议
+                    $('#tradeType').val(businessOrder.tradeType); // 贸易方式
+                    $('#incoterm').val(businessOrder.tradeTerm); // 贸易术语
+                    $('#countryzone').val(businessOrder.tradeCountry); // 贸易国别
+                    $('#isCreditRisk').val(businessOrder.isCreditRisk); // 是否使用信用险
+                    $('#currency').val(businessOrder.currency); // 币种
+                    $('#nusdexchgrate').val(businessOrder.nusdexchgrate); // 原币对美元汇率
+                    $('#nexchangerate').val(businessOrder.nexchangerate); // 原币对本元汇率
+                    $('#premiumRate').val(businessOrder.premiumRate); // 保险费率
+                    $('#discountRate').val(businessOrder.discountRate); // 资金利率
+                    $('#lossRate').val(businessOrder.lossRate); // 汇损费率
+                    $('#interestRate').val(businessOrder.interestRate); // 计息比例
+                    $('#saleRate').val(businessOrder.saleRate); // 销售费率
+                    $('#managementRate').val(businessOrder.managementRate); // 管理汇率
+                    $('#guaranteeRate').val(businessOrder.guaranteeRate); // 信保费率
+                    $('#creditRate').val(businessOrder.creditRate); // 信保赔付率
+                    $('#transportFlag').val(businessOrder.transportFlag); // 是否可转运
+                    $('#partialShipmentFalg').val(businessOrder.partialShipmentFalg); // 是否可分批出运
 
-//                if(customerBaseInfo.enterpriseNature!=undefined){
-//                    var enterpriseNature = customerBaseInfo.enterpriseNature.split(',');
-//
-//                    $.each(enterpriseNature,function(index,value){
-//                        $("input[name='check']").each(function(){
-//                            if($(this).val() == value){
-//                                $(this).prop('checked',true);
-//                                if(value == 4){
-//
-//                                }
-//                            }
-//                        })
-//                    });
-//                }
 
-                $('#customerId').val(customerBaseInfo.customerId); // 客户id
-                if(businessOrder.businessId){
-                    $('#businessId').val(businessOrder.businessId); // 商机编号
+                    var customerBaseInfo = result.data.customerBaseInfo;
+                    console.log(customerBaseInfo);
+                    $('#customerId').val(customerBaseInfo.customerId); // 客户id
+
+                    $('#fullName').val(customerBaseInfo.fullName); // 客户名称
+
+                    $('#zhongxinbaoNumber').val(customerBaseInfo.zhongxinbaoNumber); // 中信保编码
+                    $('#registeredFunds').val(customerBaseInfo.registeredFunds); // 注册资金
+                    $('#enterprisePhone').val(customerBaseInfo.enterprisePhone); // 企业电话
+                    $('#enterpriseEmail').val(customerBaseInfo.enterpriseEmail); // 企业邮箱
+
+
+                    $('[name="check"]').val([customerBaseInfo.enterpriseNature]); // 企业性质
+                    $('#otherEnterpriseNature').val(customerBaseInfo.otherEnterpriseNature); // 其他企业性质
+
+
+
+
+                if(customerBaseInfo.enterpriseNature!=undefined){
+                    var enterpriseNature = customerBaseInfo.enterpriseNature.split(',');
+
+                    $.each(enterpriseNature,function(index,value){
+                        $("input[name='check']").each(function(){
+                            if($(this).val() == value){
+                                $(this).prop('checked',true);
+                                if(value == 4){
+
+                                }
+                            }
+                        })
+                    });
                 }
-                $('#fullName').val(customerBaseInfo.fullName); // 客户名称
-                $('#customerDutyParagraph').val(businessOrder.customerDutyParagraph); // 客户税号
-                $('#zhongxinbaoNumber').val(customerBaseInfo.zhongxinbaoNumber); // 中信保编码
-                $('#registeredFunds').val(customerBaseInfo.registeredFunds); // 注册资金
-                $('#enterprisePhone').val(customerBaseInfo.enterprisePhone); // 企业电话
-                $('#enterpriseEmail').val(customerBaseInfo.enterpriseEmail); // 企业邮箱
-                $('#billToCustomer').val(businessOrder.billToCustomer); // 收票客户
-                $('#saleOrganizationName').val(businessOrder.saleOrganizationName); // 销售组织
-                $('#departmentName').val(businessOrder.departmentName); // 部门
-                $('#salesManName').val(businessOrder.salesManName); // 业务员
-                $('#destinationPort').val(businessOrder.destinationPortName); // 目的港
-                $('#shipmentPort').val(businessOrder.shipmentPortName); // 起运港
-                $('#income').val(businessOrder.collectionAgreement); // 收款协议
-                $('#tradeType').val(businessOrder.tradeType); // 贸易方式
-                $('#incoterm').val(businessOrder.tradeTerm); // 贸易术语
-                $('#countryzone').val(businessOrder.tradeCountry); // 贸易国别
-                $('#isCreditRisk').val(businessOrder.isCreditRisk); // 是否使用信用险
-                $('#currency').val(businessOrder.currency); // 币种
-                $('#nusdexchgrate').val(businessOrder.nusdexchgrate); // 原币对美元汇率
-                $('#nexchangerate').val(businessOrder.nexchangerate); // 原币对本元汇率
-                $('#premiumRate').val(businessOrder.premiumRate); // 保险费率
-                $('#discountRate').val(businessOrder.discountRate); // 资金利率
-                $('#lossRate').val(businessOrder.lossRate); // 汇损费率
-                $('#interestRate').val(businessOrder.interestRate); // 计息比例
-                $('#saleRate').val(businessOrder.saleRate); // 销售费率
-                $('#managementRate').val(businessOrder.managementRate); // 管理汇率
-                $('#guaranteeRate').val(businessOrder.guaranteeRate); // 信保费率
-                $('#creditRate').val(businessOrder.creditRate); // 信保赔付率
-                $('#transportFlag').val(businessOrder.transportFlag); // 是否可转运
-                $('#partialShipmentFalg').val(businessOrder.partialShipmentFalg); // 是否可分批出运
-                $('[name="check"]').val([customerBaseInfo.enterpriseNature]); // 企业性质
-                $('#otherEnterpriseNature').val(customerBaseInfo.otherEnterpriseNature); // 其他企业性质
 
-//                $('#collectionAgreement').val(businessOrder.collectionAgreement);
-//                $('#tradeTerm').val(businessOrder.tradeTerm);
-//                $('#tradeCountry').val(businessOrder.tradeCountry);
-//                $('#internalSupplyName').val(businessOrder.internalSupplyName);
+
+
+                /*$('#collectionAgreement').val(businessOrder.collectionAgreement);
+                $('#tradeTerm').val(businessOrder.tradeTerm);
+                $('#tradeCountry').val(businessOrder.tradeCountry);
+                $('#internalSupplyName').val(businessOrder.internalSupplyName);*/
+
 
                 businessproduct.innerHTML = '';
                 if(result.data.businessOrderProductLists!=undefined){
