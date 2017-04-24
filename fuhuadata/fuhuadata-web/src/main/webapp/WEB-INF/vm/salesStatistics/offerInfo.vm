@@ -11,8 +11,8 @@
                 <div  class="panel panel-default">
                     <div class="panel-heading">
                         <div class="btn-group panel-heading-btn pull-right">
-                            <a class="btn btn-xs btn-default hidden" data-view="editHide" id="addback">返回</a>
-                            <button id="finish" data-btn="edit" data-view="editHide" class="btn btn-xs btn-primary panel-heading-btn pull-right hidden" type="button" lang="zh">
+                            <a class="btn btn-xs btn-default hidden" id="addback">返回</a>
+                            <button id="finish" data-btn="edit" class="btn btn-xs btn-primary panel-heading-btn pull-right hidden" type="button" lang="zh">
                                 完成
                             </button>
 
@@ -36,7 +36,7 @@
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">商机编号</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" type="text" id="businessId" value="" disabled />
+                                    <input class="form-control" type="text" id="businessId" value="$!{businessId}" disabled />
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">客户名称</label>
                                 <div class="col-xs-2">
@@ -563,6 +563,28 @@
                 type:'POST',
                 success:function(result){
                     console.log(result);
+                    var businessInfo = result.data.businessInfo;
+                    console.log(businessInfo.customerName);
+                    $('#customerId').val(businessInfo.customerId); // 客户id
+                    $('#fullName').val(businessInfo.customerName); // 客户名称
+                    $('#zhongxinbaoNumber').val(businessInfo.zhongxinbaoNumber); // 中信保编码
+                    $('#registeredFunds').val(businessInfo.registeredFunds); // 注册资金
+                    $('#enterprisePhone').val(businessInfo.enterprisePhone); // 企业电话
+                    $('#enterpriseEmail').val(businessInfo.enterpriseEmail); // 企业邮箱
+                    $('#billToCustomer').val(businessInfo.customerName); // 收票客户
+                    $('#otherEnterpriseNature').val(businessInfo.otherEnterpriseNature); // 其他企业性质
+
+                    if(businessInfo.enterpriseNature!=undefined){
+                        var enterpriseNature = businessInfo.enterpriseNature.split(',');
+
+                        $.each(enterpriseNature,function(index,value){
+                            $("input[name='check']").each(function(){
+                                if($(this).val() == value){
+                                    $(this).prop('checked',true);
+                                }
+                            })
+                        });
+                    }
                 }
             })
         }
@@ -651,41 +673,7 @@
             "creditRate":$('#creditRate').val(), // 信保赔付率
             "transportFlag":$('#transportFlag').val(), // 是否可转运
             "partialShipmentFalg":$('#partialShipmentFalg').val(), // 是否可分批出运
-//            "customerId":$('#customerId').val(),
-//            "orderId":$('#orderId').val(),
-//            "businessId":$('#businessId').val(),
-//            "customerName":$('#customerName').val(),
-//            "customerDutyParagraph":$('#customerDutyParagraph').val(),
-//            "enterprisePhone":$('#enterprisePhone').val(),
-//            "enterpriseEmail":$('#enterpriseEmail').val(),
-//            "enterpriseNature":getenterpriseNature(),
-//            "registeredFunds":$('#registeredFunds').val(),
-//            "zhongxinbaoNumber":$('#zhongxinbaoNumber').val(),
-//            "billToCustomer":$('#billToCustomer').val(),
-//            "salesManName":$('#salesManName').val(),
-//            "departmentName":$('#departmentName').val(),
-//            "saleOrganizationName":$('#saleOrganizationName').val(),
-//            "destinationPort":$('#destinationPort').val(),
-//            "shipmentPort":$('#shipmentPort').val(),
-//            "collectionAgreement":$('#income').val(),
-//            "tradeType":$('#tradeType').val(),
-//            "tradeTerm":$('#incoterm').val(),
-//            "tradeCountry":$('#countryzone').val(),
-//            "currency":$('#currtype').val(),
-//            "premiumRate":$('#premiumRate').val(),
-//            "guaranteeRate":$('#guaranteeRate').val(),
-//            "discountRate":$('#discountRate').val(),
-//            "isCreditRisk":$('#isCreditRisk').val(),
-//            "lossRate":$('#lossRate').val(),
-//            "interestRate":$('#interestRate').val(),
-//            "creditRate":$('#creditRate').val(),
-//            "saleRate":$('#saleRate').val(),
-//            "managementRate":$('#managementRate').val(),
-//            "transportFlag":$('#transportFlag').val(),
-//            "partialShipmentFalg":$('#partialShipmentFalg').val(),
-//            "internalSupplyName":$('#internalSupplyName').val(),
-//            "nusdexchgrate":$('#nusdexchgrate').val(),
-//            "nexchangerate":$('#nexchangerate').val(),
+
             "createTime": CRM.getTime(),
             "createUserId": 2,
             "createUserName":"杨洋",
@@ -761,66 +749,6 @@
         window.location.href = basePath + '/businessProduct/intoProductBasicInfoRequire?orderId=' + orderId + '&&customerId=' + customerId + '&&businessProductId=' + businessProductId;
     })
 
-//    // 部门
-//    var departmentData = null;
-//    $('#departmentName').on('click.edit',function () {
-//        $(this).addClass('hidden');
-//        if (departmentData!=null){
-//            $.ajax({
-//                url:'',
-//                type:'GET'
-//            }).done(function (result) {
-//                departmentData = result.data;
-//                renderSelect(departmentData,$('#departmentNameS'));
-//                $('#departmentNameS').removeClass('hidden').val($(this).data('code'));
-//            });
-//        }else {
-//            $('#departmentNameS').removeClass('hidden').val($(this).data('code'));
-//        }
-//    });
-//
-//     $('#departmentNameS').on('change.edit',function (e) {
-//         var tarItem = $(this),
-//                 val = tarItem.val(),
-//                 text = tarItem.find('option').filter(':selected').text();
-//         $('#departmentName').val(text);
-//         $('#departmentName').data('code',val);
-//     });
-//
-//    $('#departmentNameS').on('focusout',function () {
-//        $('#departmentNameS').addClass('hidden');
-//        $('#departmentName').removeClass('hidden');
-//    })
-//
-//    //目的港
-//    var destinationPortData = null;
-//    $('#destinationPort').on('click.edit',function () {
-//        $(this).addClass('hidden');
-//        if (destinationPortData!=null){
-//            $.ajax({
-//                url:basePath +'/freightCost/queryFreightCostList',
-//                type:'GET'
-//            }).done(function (result) {
-//
-//                $('#destinationPortS').removeClass('hidden').val($(this).data('code'));
-//            });
-//        }else {
-//            $('#destinationPortS').removeClass('hidden').val($(this).data('code'));
-//        }
-//    });
-
-//    $('#destinationPortS').on('change.edit',function (e) {
-//        var tarItem = $(this),
-//                val = tarItem.val(),
-//                text = tarItem.find('option').filter(':selected').text();
-//        $('#destinationPortS').val(text);
-//        $('#destinationPortS').data('code',val);
-//    });
-//
-//    $('#destinationPortS').on('focusout',function () {
-//        $('#destinationPortS').addClass('hidden');
-//        $('#destinationPortS').removeClass('hidden');
-//    })
 
     // 点击选择销售组织
     var orgTreeData = null;
