@@ -553,6 +553,8 @@
             "creditRate":$('#creditRate').val(), // 信保赔付率
             "transportFlag":$('#transportFlag').val(), // 是否可转运
             "partialShipmentFalg":$('#partialShipmentFalg').val(), // 是否可分批出运
+            "internalSupplyId":$('#internalSupplyName').data('val'),
+            "internalSupplyName":$('#internalSupplyName').val(),
 //            "customerId":$('#customerId').val(),
 //            "orderId":$('#orderId').val(),
 //            "businessId":$('#businessId').val(),
@@ -636,6 +638,23 @@
             }).done(function (result) {
                 orgTreeData = result.data;
                 renderTree(orgTreeData);
+            })
+        }else {
+            renderTree(orgTreeData);
+        }
+        $('#cbtModal').modal('show');
+    });
+
+    //点击选择内部供货单位
+    $('#interSearch').on('click.renderTree',function () {
+        $('#cbtTree').html('');
+        if (orgTreeData==null) {
+            $.ajax({
+                url:basePath+'/customerBaseInfoOrder/initSaleOrganizationTree',
+                type:'GET'
+            }).done(function (result) {
+                orgTreeData = result.data;
+                renderinterTree(orgTreeData);
             })
         }else {
             renderTree(orgTreeData);
@@ -742,6 +761,55 @@
         $('#departmentName').data('val','');
         $('#salesManName').val('');
         $('#salesManName').data('val','');
+    }
+
+    /**
+     * 渲染内部供货单位树菜单
+     * @param data
+     */
+    function renderinterTree(data) {
+
+        var setting = {
+                    data: {
+                        simpleData: {
+                            enable: true
+                        }
+                    },
+                    edit: {
+                        enable: false
+                    },
+                    callback: {
+                        onDblClick: interclickTree
+                    }
+                },
+                id = $('#cbtTree').attr('id'),
+                treeObj = null,
+
+                treeData = CRM.toArr(data);
+
+        $.fn.zTree.init($('#cbtTree'), setting, treeData);
+        treeObj = $.fn.zTree.getZTreeObj(id);
+        treeObj.expandAll(true); // 默认展开
+    }
+
+    /**
+     * 内部供货单位树点击事件
+     * @param event
+     * @param modLeftId
+     * @param treeNode
+     */
+
+    function interclickTree(event, modLeftId, treeNode) {
+
+        $('#internalSupplyName').data('val',treeNode.id);
+        $('#internalSupplyName').val(treeNode.name);
+        $('#cbtModal').modal('hide');
+
+        /*// 清空部门和业务员
+        $('#departmentName').val('');
+        $('#departmentName').data('val','');
+        $('#salesManName').val('');
+        $('#salesManName').data('val','');*/
     }
 
     /**
