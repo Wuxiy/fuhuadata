@@ -81,7 +81,12 @@
                                 <label class="control-label col-xs-3" lang="zh">开始合作时间</label>
                                 <div class="col-xs-2"><input id="startCooperationTime" class="form-control" type="date" value="" /></div>
                                 <label class="control-label col-xs-2" lang="zh">合作时间</label>
-                                <div class="col-xs-2"><input id="cooperationDuration" class="form-control" type="text" value="" /></div>
+                                <div class="col-xs-2">
+                                    <div class="input-group">
+                                        <input id="cooperationDuration" class="form-control" type="number" value="" />
+                                        <span class="input-group-addon" lang="zh">月</span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-3" lang="zh">采购季节</label>
