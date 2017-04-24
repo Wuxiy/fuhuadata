@@ -166,6 +166,19 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept, Integer> implements D
         return listDepts(org.getNcId());
     }
 
+    @Override
+    public Dept getDeptByCode(String code) {
+        Example example = new Example(Dept.class);
+        example.createCriteria().andEqualTo("code", code);
+
+        List<Dept> depts = listByExample(example);
+        if (depts.size() == 1) {
+            return depts.get(0);
+        }
+
+        return null;
+    }
+
     private MixNodeVO convertToNode(Dept dept) {
 
         MixNodeVO nodeVO = new MixNodeVO(NodeType.DEPT.key);

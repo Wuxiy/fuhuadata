@@ -58,4 +58,6 @@ public interface DeptService extends BaseService<Dept, Integer> {
      * @return
      */
     List<Dept> listDepts(Integer orgId);
+
+    Dept getDeptByCode(String code);
 }
