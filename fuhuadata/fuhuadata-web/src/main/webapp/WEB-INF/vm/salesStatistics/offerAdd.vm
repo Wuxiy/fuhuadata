@@ -372,20 +372,20 @@
                 <table class="table table-condensed table-bordered table-striped text-center">
                     <thead>
                     <tr>
-                        <td class="text-center">产品序列号</td>
-                        <td class="text-center">品名</td>
-                        <td class="text-center">品类</td>
-                        <td class="text-center">品牌</td>
-                        <td class="text-center">包装规格</td>
-                        <td class="text-center">产品数量</td>
-                        <td class="text-center">整柜数量</td>
-                        <td class="text-center">柜型</td>
-                        <td class="text-center">柜数</td>
-                        <td class="text-center">交货时间</td>
-                        <td class="text-center">最低销售价（元/KG（L)）</td>
-                        <td class="text-center">单据要求</td>
-                        <td class="text-center">订舱出运要求</td>
-                        <td class="text-center">勾选删除项</td>
+                        <th class="text-center">产品序列号</th>
+                        <th class="text-center">品名</th>
+                        <th class="text-center">品类</th>
+                        <th class="text-center">品牌</th>
+                        <th class="text-center">包装规格</th>
+                        <th class="text-center">产品数量</th>
+                        <th class="text-center">整柜数量</th>
+                        <th class="text-center">柜型</th>
+                        <th class="text-center">柜数</th>
+                        <th class="text-center">交货时间</th>
+                        <th class="text-center">最低销售价（元/KG（L)）</th>
+                        <th class="text-center">单据要求</th>
+                        <th class="text-center">订舱出运要求</th>
+                        <th class="text-center">勾选删除项</th>
                     </tr>
                     </thead>
                     <tbody id=""></tbody>
@@ -504,7 +504,7 @@
                 var code = result.code;
                 $('#code').val(code);
                 alert('保存成功!');
-                location.reload();
+//                location.reload();
             }
         })
     });

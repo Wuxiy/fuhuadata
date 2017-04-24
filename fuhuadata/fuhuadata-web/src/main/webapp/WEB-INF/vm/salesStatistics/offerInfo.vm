@@ -731,6 +731,30 @@
      * @param data
      */
     function renderTree(data) {
+
+        function toArr(data) {
+            var arr = [];
+            function recursionData(data) {
+
+                if (data instanceof Array) {
+
+                    $.each(data,function (n,item) {
+                        var obj = {
+                            id   : item.cCode,
+                            pId  : item.pCode,
+                            name : item.cname
+                        };
+                        arr.push(obj);
+
+                        recursionData(item.nodes);
+                    })
+                }
+            }
+
+            recursionData(data);
+
+            return arr;
+        };
         var setting = {
                     data: {
                         simpleData: {
@@ -747,7 +771,7 @@
                 id = $('#cbtTree').attr('id'),
                 treeObj = null,
 
-                treeData = CRM.toArr(data);
+                treeData = toArr(data);
 
         $.fn.zTree.init($('#cbtTree'), setting, treeData);
         treeObj = $.fn.zTree.getZTreeObj(id);
