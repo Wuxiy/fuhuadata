@@ -63,7 +63,8 @@
                                 <div class="form-group ">
                                     <label class="col-xs-1 control-label">开始时间<sup class="not-null">*</sup></label>
                                     <div class="col-xs-4">
-                                        <input class="form-control" type="datetime-local" id="startTime"/>
+                                        <input type="text" class="sang_Calender" style="z-index: 99999999"/>
+                                        <input class="form-control" type="datetime-local" id="startTime" />
                                     </div>
                                     <label class="col-xs-1 control-label col-xs-offset-1">结束时间</label>
                                     <div class="col-xs-4">

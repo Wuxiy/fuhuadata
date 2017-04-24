@@ -19,7 +19,7 @@
     <script src="${request.contextPath}/lib/dataTables/dataTables.bootstrap.js" type="text/javascript" charset="utf-8"></script>
     <script src="${request.contextPath}/lib/dataTables/dataTables.bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="${request.contextPath}/lib/js/validate/jquery.validate.js" charset="utf-8"></script>
-##    <script src="${request.contextPath}/lib/js/validate/jquery-validation-bootstrap-tooltip.js" charset="utf-8"></script>
+
     <script src="${request.contextPath}/lib/js/validate/additional-methods.js" charset="utf-8"></script>
     <script src="${request.contextPath}/lib/js/validate/localization/messages_zh.js" charset="utf-8"></script>
     <script src="${request.contextPath}/lib/js/pagination/pagination.js" type="text/javascript" charset="utf-8"></script>
@@ -27,6 +27,8 @@
     <script src="${request.contextPath}/lib/js/jquery-lang.js" type="text/javascript" charset="utf-8"></script>
     <script src="${request.contextPath}/lib/js/jquery-lang.js" type="text/javascript" charset="utf-8"></script>
     <script src="${request.contextPath}/lib/js/langpack/nonDynamic.js" type="text/javascript" charset="utf-8"></script>
+    <script src="${request.contextPath}/lib/js/jedate.js" type="text/javascript" charset="utf-8"></script>
+    <script src="${request.contextPath}/lib/js/datetime.js" type="text/javascript" charset="utf-8"></script>
 
     <script type="text/javascript">
         var language = navigator.browserLanguage?navigator.browserLanguage:navigator.language,
