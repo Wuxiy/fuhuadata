@@ -755,7 +755,7 @@
             recursionData(data);
 
             return arr;
-        };
+        }
         var setting = {
                     data: {
                         simpleData: {
