@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
-import javax.annotation.PostConstruct;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +31,6 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept, Integer> implements D
     @Autowired
     private OrganizationService orgService;
 
-    @PostConstruct
     public void refreshOrgAndDeptCache() {
         orgService.listOrgNodes();
         listDeptNodes();

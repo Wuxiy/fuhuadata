@@ -48,14 +48,15 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="t_countryzone" domainObjectName="Countryzone"/>
+        <table tableName="t_areacl" domainObjectName="AreaCl"/>
+        <!--<table tableName="t_countryzone" domainObjectName="Countryzone"/>
         <table tableName="t_incoterm" domainObjectName="Incoterm"/>
         <table tableName="t_portdoc" domainObjectName="Portdoc"/>
         <table tableName="t_currtype" domainObjectName="Currtype"/>
         <table tableName="t_custclass" domainObjectName="Custclass"/>
         <table tableName="t_formatdoc" domainObjectName="Formatdoc"/>
         <table tableName="t_income" domainObjectName="Income"/>
-        <table tableName="t_timezone" domainObjectName="Timezone"/>
+        <table tableName="t_timezone" domainObjectName="Timezone"/>-->
         <!--<table tableName="p_organization" domainObjectName="Organization">
             <generatedKey column="org_id" sqlStatement="MySql" identity="true" type="post"/>
         </table>

@@ -493,7 +493,9 @@ CRM.systemRoleManage.renderAreaTreeToLeft = function (data) {
             },
             data: {
                 simpleData: {
-                    enable: true
+                    enable: true,
+                    idKey: 'pkAreacl',
+                    pIdKey: 'pkFatherarea'
                 }
             },
             edit: {
@@ -501,9 +503,9 @@ CRM.systemRoleManage.renderAreaTreeToLeft = function (data) {
             }
         },
         id = page.sModL.attr('id'),
-        treeObj = null;
+        treeObj;
 
-    page.areaTreeData = CRM.toArr(data);
+    page.areaTreeData = data;
     $.fn.zTree.init(page.sModL, setting, page.areaTreeData);
     treeObj = $.fn.zTree.getZTreeObj(id);
     treeObj.expandAll(true);
@@ -917,19 +919,6 @@ $(function () {
         });
     });
 
-    // 编辑分配地区
-    page.userTable.on('click.area', '[name="areaTree"]', function (e) {
-        var id = $(e.target).parents('tr').find('td').first();
-        $('#userId').val(id);
-        $('#multiple').find('[data-btn="finish"]').attr('id', 'saveArea');
-        page.sModL.html('');
-        CRM.ajaxCall({
-            url: CRM.url.AREA_TREE_GET,
-            type: 'GET',
-            callback: page.renderAreaTreeToLeft
-        });
-    });
-
     // 编辑所属组织
     page.editBelOrg.on('click.area', function (e) {
 
@@ -1148,7 +1137,16 @@ $(function () {
                 url: CRM.url.AREA_TREE_GET,
                 type: 'GET',
                 callback: function (data) {
-                    page.renderAreaTreeToSModalL(CRM.toArr(data));
+                    if (data !== null && $.isArray(data)) {
+                        var areaData = $.map(data, function (item, idx) {
+                            return {
+                                id: item.pkAreacl,
+                                name: item.name,
+                                pId: item.pkFatherarea
+                            }
+                        });
+                        page.renderAreaTreeToSModalL(areaData);
+                    }
                 }
             });
         }
