@@ -112,6 +112,21 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept, Integer> implements D
     public List<MixNodeVO> getDeptTree(Integer orgId) {
 
         final Organization org = orgService.get(orgId);
+
+        return getDeptTree(org);
+    }
+
+    @Override
+    public List<MixNodeVO> getDeptTree(String orgCode) {
+
+        final Organization org = orgService.getByCode(orgCode);
+
+        return getDeptTree(org);
+    }
+
+    @Override
+    public List<MixNodeVO> getDeptTree(final Organization org) {
+
         List<Dept> depts = listDepts(org.getNcId());
 
         List<MixNodeVO> nodes = Lists.transform(depts, new Function<Dept, MixNodeVO>() {

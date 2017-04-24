@@ -50,13 +50,26 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization, Integ
     }
 
     @Override
-    public Organization getByCode(String ncId) {
+    public Organization getByNcId(String ncId) {
         Example example = new Example(Organization.class);
         example.createCriteria().andEqualTo("ncId", ncId);
 
         List<Organization> orgs = listByExample(example);
-        if (orgs.size() == 0) {
+        if (orgs.size() == 1) {
             return orgs.get(0);
+        }
+
+        return null;
+    }
+
+    @Override
+    public Organization getByCode(String code) {
+        Example example = new Example(Organization.class);
+        example.createCriteria().andEqualTo("code", code);
+
+        List<Organization> organizations = listByExample(example);
+        if (organizations.size() == 1) {
+            return organizations.get(0);
         }
 
         return null;

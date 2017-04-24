@@ -6,6 +6,7 @@ import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.mybatis.DeptService;
 import com.fuhuadata.vo.MixNodeVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +31,7 @@ public class DeptController extends BaseController<Dept, Integer> {
         this.deptService = deptService;
     }
 
-    @RequestMapping("/tree/org")
+    @RequestMapping(value = "/tree/org", params = "orgId")
     @ResponseBody
     @SystemLogAnnotation(module = "sys_dept", methods = "getDeptTreeByOrgId")
     public ResultPojo getDeptTreeByOrgId(@RequestParam("orgId") Integer orgId) {
@@ -41,6 +42,21 @@ public class DeptController extends BaseController<Dept, Integer> {
         }
 
         result.addDefaultModel(deptService.getDeptTree(orgId));
+        result.setSuccess(true);
+        return result.getResultPojo();
+    }
+
+    @RequestMapping(value = "/tree/org", params = "code")
+    @ResponseBody
+    @SystemLogAnnotation(module = "sys_dept", methods = "getDeptTreeByOrgId")
+    public ResultPojo getDeptTreeByOrgCode(@RequestParam("code") String code) {
+        Result<List<MixNodeVO>> result = Result.newResult(false);
+
+        if (StringUtils.isBlank(code)) {
+            result.setMessage("请求参数 code 不能为空");
+        }
+
+        result.addDefaultModel(deptService.getDeptTree(code));
         result.setSuccess(true);
         return result.getResultPojo();
     }

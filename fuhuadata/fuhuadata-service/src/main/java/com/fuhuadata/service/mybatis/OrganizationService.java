@@ -30,5 +30,17 @@ public interface OrganizationService extends BaseService<Organization, Integer> 
      */
     List<Organization> listOrgs();
 
-    Organization getByCode(String ncId);
+    /**
+     * 根据 ncId 获取组织
+     * @param ncId
+     * @return
+     */
+    Organization getByNcId(String ncId);
+
+    /**
+     * 根据 code 获取组织
+     * @param code
+     * @return
+     */
+    Organization getByCode(String code);
 }
