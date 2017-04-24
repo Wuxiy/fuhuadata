@@ -492,8 +492,7 @@
                 for (var i = 0; i < ResultData.length; i++) {
                     _html += '<tr>';
                     _html += '<td>'+(++count)+'</td>';
-                    _html += '	<td>' + ResultData[i].visitrecordId + '</td>';
-                    _html += '  <td><a href="">' + ResultData[i].customerName + '</a></td>';
+                    _html += '  <td><a href='+basePath+'"/customerBaseInfo/intoCustomerBaseInfoDetails?customerType=1&customerId='+ResultData[i].customerId+'">' + ResultData[i].customerName + '</a></td>';
                     _html += '  <td>' + ResultData[i].startTime + '</td>';
                     _html += '  <td>' + ResultData[i].endTime + '</td>';
                     _html += '  <td>' + activityTypeList[ResultData[i].activityType] + '</td>';

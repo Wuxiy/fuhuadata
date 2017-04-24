@@ -15,8 +15,8 @@ public class RateDaoImpl extends SqlMapClientTemplate implements RateDao{
 
     public static final String ADD = "RATE.ADD";
     public static final String UPDATE = "RATE.UPDATE";
-    public static final String DELETE_BY_ID = "RATE.DELETE_BY_ID";
-    public static final String GET_PAGE = "RATE.GET_PAGE";
+    public static final String DELETE_BY_ID = "RATE.DELETE-BY-ID";
+    public static final String GET_PAGE = "RATE.GET-PAGE";
     public static final String COUNT = "RATE.COUNT";
     public static final String GET_BY_ID="RATE.GET-BY-ID";
     public static final String GET_BY_QUERY="RATE.GET-BY-QUERY";
