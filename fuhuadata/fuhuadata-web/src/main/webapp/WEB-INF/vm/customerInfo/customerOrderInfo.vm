@@ -375,8 +375,7 @@
 <input id="customerType" type="hidden" value='$!{customerType}'>
 <input type="hidden" id="fullName" value="$!{fullName}" />
 
-<script type="text/javascript" src="${request.contextPath}/lib/js/pagination/pagination.js"></script>
-<link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/js/pagination/pagination.css" />
+
 <script type="text/javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
