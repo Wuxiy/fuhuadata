@@ -37,7 +37,7 @@
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">客户税号</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" type="text" id="customerDutyParagraph" value="" disabled />
+                                    <input class="form-control" data-control="on" type="text" id="customerDutyParagraph" value="" disabled />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -436,7 +436,8 @@
                     $('#income').val(businessOrder.collectionAgreement); // 收款协议
                     $('#tradeType').val(businessOrder.tradeType); // 贸易方式
                     $('#incoterm').val(businessOrder.tradeTerm); // 贸易术语
-                    $('#countryzone').val(businessOrder.countryzoneName); // 贸易国别
+                    $('#countryzone').val(businessOrder.tradeCountryName); // 贸易国别name
+                    $('#countryzone').data('val',businessOrder.tradeCountry); // 贸易国别id
                     $('#isCreditRisk').val(businessOrder.isCreditRisk); // 是否使用信用险
                     $('#currency').val(businessOrder.currency); // 币种
                     $('#nusdexchgrate').val(businessOrder.nusdexchgrate); // 原币对美元汇率
@@ -530,7 +531,9 @@
             data:getOrder(),
             success:function (result) {
                 alert("修改成功!");
+
                /* location.reload();*/
+
             }
         })
     });
@@ -705,7 +708,7 @@
         $('#cbtTree').html('');
         if (orgId!='' && orgId!=undefined) {
             $.ajax({
-                url:basePath+'/sys/dept/tree/org?orgId='+orgId,
+                url:basePath+'/sys/dept/tree/org?code='+orgId,
                 type:'GET'
             }).done(function (result) {
                 renderDepTree(result.data);
@@ -760,29 +763,6 @@
      */
     function renderTree(data) {
 
-//        function toArr(data) {
-//            var arr = [];
-//            function recursionData(data) {
-//
-//                if (data instanceof Array) {
-//
-//                    $.each(data,function (n,item) {
-//                        var obj = {
-//                            id   : item.cCode,
-//                            pId  : item.pCode,
-//                            name : item.cname
-//                        };
-//                        arr.push(obj);
-//
-//                        recursionData(item.nodes);
-//                    })
-//                }
-//            }
-//
-//            recursionData(data);
-//
-//            return arr;
-//        }
         var setting = {
                     data: {
                         simpleData: {

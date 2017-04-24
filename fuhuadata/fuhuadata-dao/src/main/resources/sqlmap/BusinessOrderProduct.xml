@@ -384,7 +384,7 @@
         <result property="minPrice" column="min_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
         <result property="customerProductName" column="customer_product_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="productRequireId" column="product_require_id" jdbcType="INT" javaType="java.lang.Integer"/>
-        <result property="transformState" column="transform_state" jdbcType="INT" javaType="java.lang.String"/>
+        <result property="transformState" column="transform_state" jdbcType="INT" javaType="java.lang.Integer"/>
         <result property="contractPrice" column="contract_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
     </resultMap>
 

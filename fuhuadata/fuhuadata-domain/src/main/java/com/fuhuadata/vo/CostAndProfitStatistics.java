@@ -15,6 +15,7 @@ public class CostAndProfitStatistics {
 
     private String startTime;//查询合同签定时间开始范围
     private String endTime;//查询合同签定时间结束范围
+
     /**分类维度 0:按地区 1:按国家 2:按客户 3:按业务员 4:按产品**/
     private Integer dimension;
     private Integer startRow;//分页起始行标

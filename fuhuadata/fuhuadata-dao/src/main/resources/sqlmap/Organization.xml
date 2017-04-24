@@ -41,11 +41,10 @@
                 c.is_sale_role isSaleRole,
                 c.create_time createTime
         from
-                p_organization c,p_organization p
+                p_organization c left join p_organization p on  c.parent_id = p.nc_id
         <isParameterPresent>
             <include refid="QUERY-COMMON"/>
         </isParameterPresent>
-        and c.parent_id = p.nc_id
     </select>
 
 

@@ -32,6 +32,7 @@ public abstract class Trees<T extends BaseTreeVo<ID>,
 
     public Trees(List<E> flatItems) {
         this.flatItems = flatItems;
+        this.rootable = new NodeRoot<T, ID>();
     }
 
     public Trees(List<E> flatItems, HashSet<ID> parentIds) {
@@ -41,9 +42,8 @@ public abstract class Trees<T extends BaseTreeVo<ID>,
     }
 
     public Trees(List<E> flatItems, Map<ID, T> lookup) {
-        this.flatItems = flatItems;
+        this(flatItems);
         this.lookup = lookup;
-        this.rootable = new NodeRoot<T, ID>();
     }
 
     public Map<ID, T> getLookup() {
@@ -73,7 +73,7 @@ public abstract class Trees<T extends BaseTreeVo<ID>,
             }
             lookup.put(id, node);
 
-            if (isParent(node)) {
+            if (isRoot(node)) {
                 // 父节点
                 roots.add(node);
             } else {
@@ -100,7 +100,7 @@ public abstract class Trees<T extends BaseTreeVo<ID>,
         parentNode.addChildNode(node);
     }
 
-    protected boolean isParent(T node) {
+    protected boolean isRoot(T node) {
         return rootable.isRoot(node);
     }
 

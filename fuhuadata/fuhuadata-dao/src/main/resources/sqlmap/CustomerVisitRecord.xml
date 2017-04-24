@@ -76,9 +76,9 @@
 					<!--base.country_id = #areaId#-->
 				<!--</isNotEqual>-->
 			<!--</isNotEqual>-->
-			<isNotNull property="areaId" prepend=" AND ">
-				base.customer_area_id in (#areaId#)
-			</isNotNull>
+			<isNotEmpty property="areaId" prepend=" AND ">
+				base.customer_area_id in ($areaId$)
+			</isNotEmpty>
 			<isNotEmpty prepend=" AND " property="orderBy">
 				order by $orderBy$
 			</isNotEmpty>

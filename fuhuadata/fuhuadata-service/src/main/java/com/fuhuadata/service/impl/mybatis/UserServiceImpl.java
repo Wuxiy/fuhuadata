@@ -2,11 +2,13 @@ package com.fuhuadata.service.impl.mybatis;
 
 import com.fuhuadata.constant.NodeType;
 import com.fuhuadata.dao.mapper.UserAccountMapper;
+import com.fuhuadata.domain.mybatis.Dept;
 import com.fuhuadata.domain.mybatis.Principal;
 import com.fuhuadata.domain.mybatis.UserAccount;
 import com.fuhuadata.service.exception.ServiceException;
 import com.fuhuadata.service.exception.UserNotExistsException;
 import com.fuhuadata.service.exception.UserPasswordNotMatchException;
+import com.fuhuadata.service.mybatis.DeptService;
 import com.fuhuadata.service.mybatis.PasswordService;
 import com.fuhuadata.service.mybatis.UserRoleService;
 import com.fuhuadata.service.mybatis.UserService;
@@ -36,6 +38,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
 
     private PasswordService passwordService;
 
+    private DeptService deptService;
+
     @Autowired
     public void setUserRoleService(UserRoleService userRoleService) {
         this.userRoleService = userRoleService;
@@ -44,6 +48,11 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
     @Autowired
     public void setPasswordService(PasswordService passwordService) {
         this.passwordService = passwordService;
+    }
+
+    @Autowired
+    public void setDeptService(DeptService deptService) {
+        this.deptService = deptService;
     }
 
     private UserAccountMapper getUserMapper() {
@@ -69,6 +78,22 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
             nodes.add(convertToNode(user));
         }
         return nodes;
+    }
+
+    @Override
+    public List<MixNodeVO> getUserNodesByDeptCode(String deptCode) {
+        Dept dept = deptService.getDeptByCode(deptCode);
+        return getUserNodesByDept(dept);
+    }
+
+    @Override
+    public List<MixNodeVO> getUserNodesByDept(Dept dept) {
+        if (dept == null) {
+            return Collections.emptyList();
+        }
+
+        String pkDept = dept.getPkDept();
+        return listUserNodesByDept(pkDept);
     }
 
     @Override
@@ -166,6 +191,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
         MixNodeVO node = new MixNodeVO(NodeType.USER.key);
 
         node.setCid(String.valueOf(user.getId()));
+        node.setCode(user.getCode());
         node.setCname(user.getName());
         node.setIsParent(false);
         node.setNcId(user.getCode());

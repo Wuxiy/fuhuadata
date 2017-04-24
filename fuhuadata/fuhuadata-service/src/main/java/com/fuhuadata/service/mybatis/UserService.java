@@ -1,5 +1,6 @@
 package com.fuhuadata.service.mybatis;
 
+import com.fuhuadata.domain.mybatis.Dept;
 import com.fuhuadata.domain.mybatis.Principal;
 import com.fuhuadata.domain.mybatis.UserAccount;
 import com.fuhuadata.vo.MixNodeVO;
@@ -27,6 +28,10 @@ public interface UserService extends BaseService<UserAccount, Integer> {
      * @return
      */
     List<MixNodeVO> listUserNodesByDept(String deptId);
+
+    List<MixNodeVO> getUserNodesByDeptCode(String deptCode);
+
+    List<MixNodeVO> getUserNodesByDept(Dept dept);
 
     /**
      * 获取用户（包含部门ID）

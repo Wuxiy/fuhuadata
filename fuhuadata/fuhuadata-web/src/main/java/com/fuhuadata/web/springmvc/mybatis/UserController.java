@@ -55,12 +55,22 @@ public class UserController extends BaseController<UserAccount, Integer> {
         return userService.listUserNodesByDept(deptId);
     }
 
-    @RequestMapping(value = "/dept/users/pojo", method = RequestMethod.GET)
+    @RequestMapping(value = "/dept/users/pojo", method = RequestMethod.GET, params = "pid")
     @ResponseBody
     public ResultPojo getUserTreeByDeptId(@RequestParam("pid") String deptId) {
         Result<List<MixNodeVO>> result = Result.newResult(false);
 
         result.addDefaultModel(userService.listUserNodesByDept(deptId));
+        result.setSuccess(true);
+        return result.getResultPojo();
+    }
+
+    @RequestMapping(value = "/dept/users/pojo", method = RequestMethod.GET, params = "code")
+    @ResponseBody
+    public ResultPojo getUserTreeByDeptCode(@RequestParam("code") String code) {
+        Result<List<MixNodeVO>> result = Result.newResult(false);
+
+        result.addDefaultModel(userService.getUserNodesByDeptCode(code));
         result.setSuccess(true);
         return result.getResultPojo();
     }

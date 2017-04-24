@@ -119,7 +119,7 @@ CRM.ajaxCall = function(res){
         var data = result.data;
 
         if (data) {
-            console.log(data);
+            // console.log(data);
             callback(data);
         }else{
             callback();

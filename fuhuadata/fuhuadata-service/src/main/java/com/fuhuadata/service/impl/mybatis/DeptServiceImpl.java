@@ -112,12 +112,29 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept, Integer> implements D
     public List<MixNodeVO> getDeptTree(Integer orgId) {
 
         final Organization org = orgService.get(orgId);
+
+        return getDeptTree(org);
+    }
+
+    @Override
+    public List<MixNodeVO> getDeptTree(String orgCode) {
+
+        final Organization org = orgService.getByCode(orgCode);
+
+        return getDeptTree(org);
+    }
+
+    @Override
+    public List<MixNodeVO> getDeptTree(final Organization org) {
+
         List<Dept> depts = listDepts(org.getNcId());
 
         List<MixNodeVO> nodes = Lists.transform(depts, new Function<Dept, MixNodeVO>() {
             @Override
             public MixNodeVO apply(Dept input) {
-                return convertToNode(input);
+                MixNodeVO node = convertToNode(input);
+                node.setIsParent(false);
+                return node;
             }
         });
 
@@ -151,11 +168,25 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept, Integer> implements D
         return listDepts(org.getNcId());
     }
 
+    @Override
+    public Dept getDeptByCode(String code) {
+        Example example = new Example(Dept.class);
+        example.createCriteria().andEqualTo("code", code);
+
+        List<Dept> depts = listByExample(example);
+        if (depts.size() == 1) {
+            return depts.get(0);
+        }
+
+        return null;
+    }
+
     private MixNodeVO convertToNode(Dept dept) {
 
         MixNodeVO nodeVO = new MixNodeVO(NodeType.DEPT.key);
 
         nodeVO.setCid(dept.getPkDept());
+        nodeVO.setCode(dept.getCode());
         nodeVO.setCname(dept.getName());
         nodeVO.setPid(dept.getParentId());
         nodeVO.setNcId(dept.getPkDept());

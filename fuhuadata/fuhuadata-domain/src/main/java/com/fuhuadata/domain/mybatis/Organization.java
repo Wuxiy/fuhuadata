@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Table(name = "p_organization")
-public class Organization extends BaseEntity<Integer> implements Treeable<Integer> {
+public class Organization extends BaseEntity<Integer> implements Treeable<String> {
     /**
      * 组织id
      */
@@ -20,12 +20,18 @@ public class Organization extends BaseEntity<Integer> implements Treeable<Intege
      * 父级id
      */
     @Column(name = "parent_id")
-    private Integer parentId;
+    private String parentId;
 
     /**
      * 组织名称
      */
     private String name;
+
+    /**
+     * 组织编码
+     */
+    @Column(name = "code")
+    private String code;
 
     @Column(name = "nc_id")
     private String ncId;
@@ -65,7 +71,7 @@ public class Organization extends BaseEntity<Integer> implements Treeable<Intege
      *
      * @return parent_id - 父级id
      */
-    public Integer getParentId() {
+    public String getParentId() {
         return parentId;
     }
 
@@ -74,7 +80,7 @@ public class Organization extends BaseEntity<Integer> implements Treeable<Intege
      *
      * @param parentId 父级id
      */
-    public void setParentId(Integer parentId) {
+    public void setParentId(String parentId) {
         this.parentId = parentId;
     }
 
@@ -114,7 +120,7 @@ public class Organization extends BaseEntity<Integer> implements Treeable<Intege
     @JsonIgnore
     @Override
     public boolean isRoot() {
-        return getParentId() == null || getParentId() == 0;
+        return getParentId() == null || getParentId().equals("~");
     }
 
     @JsonIgnore
@@ -231,5 +237,13 @@ public class Organization extends BaseEntity<Integer> implements Treeable<Intege
     @Override
     public Integer getId() {
         return this.orgId;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }
