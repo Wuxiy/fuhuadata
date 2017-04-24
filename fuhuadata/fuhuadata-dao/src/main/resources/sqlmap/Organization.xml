@@ -45,7 +45,7 @@
         <isParameterPresent>
             <include refid="QUERY-COMMON"/>
         </isParameterPresent>
-        1=1 and c.parent_id = p.nc_id
+        and c.parent_id = p.nc_id
     </select>
 
 

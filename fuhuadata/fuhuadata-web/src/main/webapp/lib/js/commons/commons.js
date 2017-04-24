@@ -19,7 +19,7 @@ CRM.url.MENU_TREE_GET        = basePath+ '/sys/menu/ajax/load?async=false'; // �
 CRM.url.PRODUCT_TREE_GET     = basePath+ '/productCategory/CategoryTree'; // 产品树
 CRM.url.CUSTCLASS_TREE_GET   = basePath+ '/customerBaseInfo/getCustclass'; // 客户基本分类树
 CRM.url.FORMATDOC_TREE_GET   = basePath+ '/customerBaseInfo/getFormatdoc'; // 数据格式树
-CRM.url.COUNTRYZONE_TREE_GET =basePath+  '/customerBaseInfo/getCountryzone'; // 贸易国别树
+CRM.url.COUNTRYZONE_TREE_GET = basePath+  '/customerBaseInfo/getCountryzone'; // 贸易国别树
 CRM.url.TIMEZONE_TREE_GET    = basePath+ '/customerBaseInfo/getTimezone'; // 时区树
 
 // getCustclass  客户基本分类
