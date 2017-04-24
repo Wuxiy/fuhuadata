@@ -498,10 +498,6 @@
         })
     });
 
-    // 取消
-    $('#cancel').click(function () {
-        location.reload();
-    });
     function getOrder() {
         var data = {
             "orderId":$('#orderId').val(), // 订单编号
