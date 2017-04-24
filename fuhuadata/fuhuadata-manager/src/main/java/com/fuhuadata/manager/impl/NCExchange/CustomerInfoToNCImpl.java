@@ -1,6 +1,7 @@
 package com.fuhuadata.manager.impl.NCExchange;
 
 import com.fuhuadata.dao.CustomerBaseInfoDao;
+import com.fuhuadata.dao.NCExchange.OrderToNc;
 import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.manager.NCExchange.CustomerInfoToNC;
 import org.apache.commons.logging.Log;
@@ -46,6 +47,8 @@ public class CustomerInfoToNCImpl implements CustomerInfoToNC{
 
     @Autowired
     ServletContext servletContext;
+    @Autowired
+    OrderToNc orderToNc;
 
     @Override
     public String sendCustomerInfo(CustomerBaseInfo customerBaseInfo) {
@@ -175,7 +178,9 @@ public class CustomerInfoToNCImpl implements CustomerInfoToNC{
             pk_group.appendChild(document.createTextNode("0001"));
             billhead.appendChild(pk_group);
             Map<String,String> nodeValue=new HashMap<String, String>();
+
             if (customerBaseInfo.getSaleOrganizationId()!=null) {
+                //String ncId=orderToNc.getOrgNcIdByOrgId();
                 nodeValue.put("pk_org", customerBaseInfo.getSaleOrganizationId());
             }
             if (customerBaseInfo.getFullName()!=null) {
