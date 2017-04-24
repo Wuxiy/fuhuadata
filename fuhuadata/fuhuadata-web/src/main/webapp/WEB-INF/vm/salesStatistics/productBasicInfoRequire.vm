@@ -17,7 +17,6 @@
                             </button>
 
                         </div>
-
                         <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right">
                             <button id="cancel" data-btn="cancel" data-view="editView" class="btn btn-default hidden" type="button" lang="zh">取消</button>
                             <button id="save" data-btn="save" data-view="editView" class="btn btn-primary hidden" type="button" lang="zh">保存</button>
@@ -29,7 +28,7 @@
                     <div class="panel-body clearfix">
                         <div class="form-horizontal">
                             <div class="col-xs-12">
-                                <table class="table table-condensed table-bordered table-striped text-right">
+                                <table class="table table-condensed table-bordered text-right">
                                     <tbody>
                                     <tr>
                                         <td class="col-xs-2">
@@ -169,7 +168,7 @@
                                         <td>
                                             <div class="input-group">
                                                 <input data-control="on" id="capitalInterestPrice" class="form-control typechange isdisabled" value="" disabled>
-                                                <span class="input-group-addon">%</span>
+                                                <span class="input-group-addon">原币</span>
                                             </div>
                                         </td>
                                         #*<td>
@@ -198,7 +197,12 @@
                                     </tr>
                                     <tr>
                                         <td><label class="control-label" lang="zh">佣金单价</label></td>
-                                        <td><input data-control="on" id="commissionPrice" class="form-control isdisabled" type="text" value="" disabled/></td>
+                                        <td>
+                                            <div class="input-group">
+                                                <input data-control="on" id="commissionPrice" class="form-control isdisabled" type="text" value="" disabled/>
+                                                <span class="input-group-addon">原币</span>
+                                            </div>
+                                        </td>
                                         <td><label class="control-label" lang="zh">单位耗用比例</label></td>
                                         <td><input data-control="on" id="unitUseRate" class="form-control isdisabled" type="text" value="" disabled/></td>
                                     </tr>
@@ -224,7 +228,12 @@
                                             </div>
                                         </td>
                                         <td><label class="control-label" lang="zh">其他费用单价</label></td>
-                                        <td><input data-control="on" id="otherCost" class="form-control isdisabled" type="text" value="" disabled/></td>
+                                        <td>
+                                            <div class="input-group">
+                                                <input data-control="on" id="otherCost" class="form-control isdisabled" type="text" value="" disabled/>
+                                                <span class="input-group-addon">原币</span>
+                                            </div>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>

@@ -250,8 +250,10 @@ function cppsTable() {
     tbody += '</button></span></div></th>';
     tbody += '<th width="10%" class="text-center">年需求量<sup class="not-null">*</sup></th>';
     tbody += '<th width="20%" class="text-center"><input name="annualDemands" class="form-control" type="text" value="" required></th>';
-    tbody += '<th width="10%" class="text-center">平均单价(美元)<sup class="not-null">*</sup></th>';
-    tbody += '<th width="20%" class="text-center"><input name="averagePrice" class="form-control" type="text" value="" required></th></tr>';
+    tbody += '<th width="10%" class="text-center">平均单价<sup class="not-null">*</sup></th>';
+    tbody += '<th width="20%" class="text-center"><div class="input-group">' +
+        '<input name="averagePrice" class="form-control" step="0.1" type="number" value="" required>' +
+        '<span class="input-group-addon">$</span></div></th></tr>';
     tbody += '<tr><td>供应商1<sup class="not-null">*</sup></td>';
     tbody += '<td><input name="supplier1" class="form-control" type="text" value="" required></td>';
     tbody += '<td>年采购量<sup class="not-null">*</sup></td>';
@@ -306,6 +308,18 @@ function renderTree(data) {
 
 function ablclickTree(event, modLeftId, treeNode) {
 
-    selectedPName.val(treeNode.name);
-    $('#treeModal').modal('hide');
+    var treeObj = $.fn.zTree.getZTreeObj('tree'),
+        node = treeObj.getSelectedNodes()[0];
+
+    if (!node.isParent) {
+
+        selectedPName.val(treeNode.name);
+        $('#treeModal').modal('hide');
+
+    }else {
+        alert('请选择子节点');
+    }
+
+    // selectedPName.val(treeNode.name);
+    // $('#treeModal').modal('hide');
 }

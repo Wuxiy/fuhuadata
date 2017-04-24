@@ -445,14 +445,14 @@ CRM.cbInfo.aInitHandler = function () {
     CRM.insertHtml('#backBtn',$('#funBtn')); // 返回
 
     // 渲染地区树
-    CRM.ajaxCall({
-        url:CRM.url.AREA_TREE_GET,
-        type:'GET',
-        callback:function (res) {
-            page.areaTree = res[0].nodes; // 将取到的树数据赋值给对象属性，下次有的话就不用再发请求了
-            page.renderTree(page.areaTree, 'areaId', '——请选择地区——');
-        }
-    });
+    // CRM.ajaxCall({
+    //     url:CRM.url.AREA_TREE_GET,
+    //     type:'GET',
+    //     callback:function (res) {
+    //         page.areaTree = res[0].nodes; // 将取到的树数据赋值给对象属性，下次有的话就不用再发请求了
+    //         page.renderTree(page.areaTree, 'areaId', '——请选择地区——');
+    //     }
+    // });
     // 渲染数据格式下拉框
     CRM.ajaxCall({
         url:'/customerBaseInfo/getFormatdoc',
