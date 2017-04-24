@@ -352,7 +352,7 @@
                 }
             }
         })
-    }else {
+    }else if(editId == 1&&id==''){
         $('#before').removeClass('hidden');
         $('#next').removeClass('hidden');
         $('[data-control="on"]').attr('disabled',false);
@@ -367,7 +367,7 @@
             data:getdata(),
             /*contentType:"application/json",*/
             success:function(result){
-                window.location.href = basePath + '/businessProduct/intoPackageRequire?businessProductId=' + id + '&&orderId=' + orderId + '&&customerId=' + customerId + '&&productRequireId=' + productRequireId;
+                window.location.href = basePath + '/businessProduct/intoPackageRequire?businessProductId=' + id + '&&orderId=' + orderId + '&&customerId=' + customerId + '&&productRequireId=' + productRequireId + '&&edit=' + editId;
             }
         })
     })
@@ -512,7 +512,7 @@
     })
 
     $('#before').click(function(){
-        window.location.href = basePath + '/businessProduct/intoProductRequire?orderId=' + orderId + '&&productRequireId=' + productRequireId + '&&businessProductId=' + id + '&&customerId=' + customerId;
+        window.location.href = basePath + '/businessProduct/intoProductRequire?orderId=' + orderId + '&&productRequireId=' + productRequireId + '&&businessProductId=' + id + '&&customerId=' + customerId + '&&edit=' + editId;
     })
 </script>
 

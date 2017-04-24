@@ -365,14 +365,14 @@
                 }
             }
         })
-    }else {
+    }else if(editId == 1&&id==''){
         $('[data-control="on"]').attr('disabled',false);
 
         $('#before').removeClass('hidden');
         $('#next').removeClass('hidden');
     }
 
-    $(document).on('click','#finish',function(){
+    $(document).on('click','#next',function(){
         jQuery.ajax({
             url:basePath + '/businessProduct/saveDocumentaryOrPacking',
             type:'POST',
@@ -470,7 +470,7 @@
     })
 
     $('#before').click(function(){
-        window.location.href = basePath + '/businessProduct/intoDocumentary?businessProductId=' + id + '&&productRequireId=' + productRequireId + '&&orderId=' + orderId + '&&customerId=' + customerId;
+        window.location.href = basePath + '/businessProduct/intoDocumentary?businessProductId=' + id + '&&productRequireId=' + productRequireId + '&&orderId=' + orderId + '&&customerId=' + customerId + '&&edit=' + editId;
     })
 </script>
 

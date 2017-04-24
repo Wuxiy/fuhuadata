@@ -172,6 +172,17 @@
                                                 <span class="input-group-addon">%</span>
                                             </div>
                                         </td>
+                                        #*<td>
+                                            <label class="col-xs-1 control-label" lang="zh">
+                                                内部供货单位
+                                                <sup class="not-null">*</sup>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="col-xs-2">
+                                                <input class="form-control" type="email" id="internalSupplyName" value="" />
+                                            </div>
+                                        </td>*#
                                         <td class="hidden">
                                             <label class="control-label" lang="zh">
                                                 毛利率
@@ -418,6 +429,54 @@
         $('#cbtModal').modal('show');
     });
 
+    /**
+     * 渲染内部供货单位树菜单
+     * @param data
+     */
+    function renderinterTree(data) {
+
+        var setting = {
+                    data: {
+                        simpleData: {
+                            enable: true
+                        }
+                    },
+                    edit: {
+                        enable: false
+                    },
+                    callback: {
+                        onDblClick: interclickTree
+                    }
+                },
+                id = $('#cbtTree').attr('id'),
+                treeObj = null,
+
+                treeData = CRM.toArr(data);
+
+        $.fn.zTree.init($('#cbtTree'), setting, treeData);
+        treeObj = $.fn.zTree.getZTreeObj(id);
+        treeObj.expandAll(true); // 默认展开
+    }
+
+    /**
+     * 内部供货单位树点击事件
+     * @param event
+     * @param modLeftId
+     * @param treeNode
+     */
+
+    function interclickTree(event, modLeftId, treeNode) {
+
+        $('#internalSupplyName').data('val',treeNode.id);
+        $('#internalSupplyName').val(treeNode.name);
+        $('#cbtModal').modal('hide');
+
+        /*// 清空部门和业务员
+        $('#departmentName').val('');
+        $('#departmentName').data('val','');
+        $('#salesManName').val('');
+        $('#salesManName').data('val','');*/
+    }
 
     //渲染树和提交
     $(document).ready(function () {
@@ -445,8 +504,9 @@
                     success:function (result) {
                         var success = result.data.success;
                         if(success == true){
+                            var editId = 1;
                             var businessProductId = result.data.businessProductId;
-                            window.location.href = basePath + '/businessProduct/intoProductRequire?businessProductId=' + businessProductId + '&&orderId=' + orderId + '&&customerId=' + customerId + '&&productRequireId=' + productRequireId;
+                            window.location.href = basePath + '/businessProduct/intoProductRequire?businessProductId=' + businessProductId + '&&orderId=' + orderId + '&&customerId=' + customerId + '&&productRequireId=' + productRequireId + '&&edit=' + editId;
                         }
                     }
                 })
@@ -648,6 +708,9 @@
                 'taxFree':$('#taxFree').val(),
                 'otherCost':$('#otherCost').val(),
 
+                /*"internalSupplyId":$('#internalSupplyName').data('val'),
+                "internalSupplyName":$('#internalSupplyName').val(),*/
+
                 "createTime": getTime(),
                 "createUserId": 2,
                 "createUserName":"杨洋",
@@ -691,6 +754,10 @@
                 'taxType':$('#taxType').val(),
                 'taxFree':$('#taxFree').val(),
                 'otherCost':$('#otherCost').val(),
+
+
+                /*"internalSupplyId":$('#internalSupplyName').data('val'),
+                "internalSupplyName":$('#internalSupplyName').val(),*/
             },
             "businessOrderProductComponents":getbusinessOrderProductComponents()
 

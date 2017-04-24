@@ -542,8 +542,6 @@
             "creditRate":$('#creditRate').val(), // 信保赔付率
             "transportFlag":$('#transportFlag').val(), // 是否可转运
             "partialShipmentFalg":$('#partialShipmentFalg').val(), // 是否可分批出运
-            /*"internalSupplyId":$('#internalSupplyName').data('val'),
-            "internalSupplyName":$('#internalSupplyName').val(),*/
 //            "customerId":$('#customerId').val(),
 //            "orderId":$('#orderId').val(),
 //            "businessId":$('#businessId').val(),
