@@ -469,6 +469,12 @@
                 department_name,
                 sale_organization_id,
                 sale_organization_name,
+<<<<<<< HEAD
+=======
+                tp2.vname destination_port,
+                tp1.vname shipment_port,
+				collection_agreement,
+>>>>>>> f2c1df5a0802d43554c95858e098231fab493aba
                 destination_port,
                 shipment_port,
                  destination_port_name,
@@ -480,6 +486,10 @@
                 nusdexchgrate,
                 nexchangerate,
                 lastdelydate,
+<<<<<<< HEAD
+=======
+                t_countryzone.`name` trade_country,
+>>>>>>> f2c1df5a0802d43554c95858e098231fab493aba
                 trade_country,
                 trade_country_name,
                 premium_rate,
@@ -520,6 +530,12 @@
                 interest_rate
             FROM
                 business_order
+<<<<<<< HEAD
+=======
+						LEFT JOIN t_portdoc tp1 ON tp1.vcode = business_order.shipment_port
+						LEFT JOIN t_portdoc tp2 ON tp2.vcode = business_order.destination_port
+						LEFT JOIN t_countryzone ON t_countryzone.`code` = business_order.trade_country
+>>>>>>> f2c1df5a0802d43554c95858e098231fab493aba
             WHERE
                 order_id = #orderId#
     ]]>
@@ -982,7 +998,5 @@
             a.`name`) temp
         </isEqual>
     </select>
-
-
 
 </sqlMap>

@@ -37,7 +37,7 @@
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">客户税号</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" type="text" id="customerDutyParagraph" value="" data-control="on" disabled />
+                                    <input class="form-control" type="text" id="customerDutyParagraph" value="" disabled />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -502,9 +502,10 @@
                             '<td>'+ifEmpty(businessOrderProductLists[i].cupboardNumber)+'</td>'+
                             '<td>'+ifEmpty(businessOrderProductLists[i].deliveryTime)+'</td>'+
                             '<td>'+ifEmpty(businessOrderProductLists[i].documentaryRequire)+'</td>'+
+
                             '<td><a href="'+basePath+'/businessProduct/intoDocumentary?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&edit=1'+'">查看</a></td>'+
                             '<td><a href="'+basePath+'/businessProduct/intoPackageRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&edit=1'+'">查看</a></td>'+
-                            '<td><input type="checkbox" class="form-control" name="cellcheckbox" value="'+businessOrderProductLists[i].orderId+'" /></td>'+
+                            '<td><input type="checkbox" class="form-control" name="cellcheckbox" value="'+businessOrderProductLists[i].businessProductId+'" /></td>'+
                             '</tr>';
                     }
                 }
@@ -946,15 +947,15 @@
         if(ids.length > 0){
             var msg = "确定要删除这些关联吗？";
             if(confirm(msg)){
-                var url = basePath + 'deleteRelation?businessProductId=' + businessProductId;
-                var data = ids;
-
+                var data = ids.join(',');
+                var url = basePath + '/businessProduct/deleteAllInfoByIds?businessProductIds=' + data;
+                console.log(data);
                 jQuery.ajax({
                     url:url,
                     type:'POST',
-                    dataType:"json",
-                    contentType:"application/json",
-                    data:JSON.stringify(data),
+//                    dataType:"json",
+//                    contentType:"application/json",
+//                    data:,
                     success:function(){
                         alert("批量删除成功");
                         location.reload();
