@@ -4,15 +4,19 @@
         <li><span class="glyphicon glyphicon-map-marker"></span></li>
     </ul>
 </div>
-<div class="dashboard-wrapper view-HD-lg">
+<div id="offerInfo" class="dashboard-wrapper view-HD-lg">
     <div class="row">
         <div class="tab-content col-xs-12">
             <!--基本信息-->
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="btn-group panel-heading-btn pull-right">
-                        <button class="btn btn-xs btn-default" id="back">返回</button>
-                        <button class="btn btn-xs btn-primary" type="button" id="finish">完成</button>
+                        <button id="back" class="btn btn-xs btn-default" data-view="editHide" type="button">返回</button>
+                        <button id="edit" class="btn btn-xs btn-primary" data-btn="edit" data-view="editHide" type="button" >编辑</button>
+                    </div>
+                    <div class="btn-group panel-heading-btn pull-right">
+                        <button id="cancel" class="btn btn-xs btn-default hidden" data-btn="cancel" data-view="editView">取消</button>
+                        <button class="btn btn-xs btn-primary hidden" data-btn="save" data-view="editView" type="button" id="finish">完成</button>
                     </div>
                     <h3 class="panel-title" lang="zh">
                         基本信息
@@ -59,32 +63,32 @@
                         <div class="form-group ">
                             <label class="col-xs-1 control-label" lang="zh">收票客户</label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" id="billToCustomer" value="$!{businessInfo.businessInfo.customerName}" />
+                                <input class="form-control" data-control="no" disabled type="text" id="billToCustomer" value="$!{businessInfo.businessInfo.customerName}" />
                             </div>
-                            <label for="saleOrganizationName" class="control-label col-xs-1" lang="zh">销售组织<sup data-view="editView" class="not-null">*</sup></label>
+                            <label for="saleOrganizationName" class="control-label col-xs-1" lang="zh">销售组织<sup data-view="editView" class="not-null hidden">*</sup></label>
                             <div class="col-xs-2">
                                 <div class="input-group">
                                     <input id="saleOrganizationName" name="saleOrganizationName" data-toggle="dropdown" class="form-control dropdown-toggle" disabled type="text" placeholder="点击搜索按钮选择" autocomplete="off"/>
                                     <div class="input-group-btn">
-                                        <button id="oNSearch" class="btn btn-xs btn-default" data-control="on" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                                        <button id="oNSearch" disabled class="btn btn-xs btn-default" data-control="on" type="button"><span class="glyphicon glyphicon-search"></span></button>
                                     </div>
                                 </div>
                             </div>
-                            <label class="col-xs-1 control-label" lang="zh">部门<sup data-view="editView" class="not-null">*</sup></label>
+                            <label class="col-xs-1 control-label" lang="zh">部门<sup data-view="editView" class="not-null hidden">*</sup></label>
                             <div class="col-xs-2">
                                 <div class="input-group">
                                     <input id="departmentName" name="departmentName" data-toggle="dropdown" class="form-control dropdown-toggle" disabled type="text" placeholder="点击搜索按钮选择" autocomplete="off"/>
                                     <div class="input-group-btn">
-                                        <button id="depSearch" class="btn btn-xs btn-default" data-control="on" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                                        <button id="depSearch" disabled class="btn btn-xs btn-default" data-control="on" type="button"><span class="glyphicon glyphicon-search"></span></button>
                                     </div>
                                 </div>
                             </div>
-                            <label for="salesManName" class="col-xs-1 control-label" lang="zh">业务员<sup data-view="editView" class="not-null">*</sup></label>
+                            <label for="salesManName" class="col-xs-1 control-label" lang="zh">业务员<sup data-view="editView" class="not-null hidden">*</sup></label>
                             <div class="col-xs-2">
                                 <div class="input-group">
                                     <input id="salesManName" name="salesManName" placeholder="请在下拉菜单中选择" class="form-control" disabled type="text" autocomplete="off"/>
                                     <div class="input-group-btn">
-                                        <button id="salSearch" data-control="on" class="btn btn-xs btn-default dropdown" data-toggle="dropdown" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                                        <button id="salSearch" disabled data-control="on" class="btn btn-xs btn-default dropdown" data-toggle="dropdown" type="button"><span class="glyphicon glyphicon-search"></span></button>
                                         <div class="dropdown-menu pull-right" style="width: 196px;padding: 3px 0;">
                                             <ul id="sm" style="list-style: none;margin-bottom: 0;padding: 0;width: 100%;max-height: 200px;overflow-y: auto;"></ul>
                                         </div>
@@ -126,12 +130,12 @@
 ##                            </div>
 ##                        </div>
                         <div class="form-group">
-                            <label class="col-xs-1 control-label" lang="zh">目的港<sup data-view="editView" class="not-null">*</sup></label>
+                            <label class="col-xs-1 control-label" lang="zh">目的港<sup data-view="editView" class="not-null hidden">*</sup></label>
                             <div class="col-xs-2">
                                 <div class="input-group">
-                                    <input id="destinationPort" name="destinationPort" placeholder="请在下拉菜单中选择" class="form-control" disabled type="text" autocomplete="off"/>
+                                    <input id="destinationPort"  name="destinationPort" placeholder="请在下拉菜单中选择" class="form-control" disabled type="text" autocomplete="off"/>
                                     <div class="input-group-btn">
-                                        <button data-control="on" data-control="on" class="btn btn-xs btn-default dropdown" data-toggle="dropdown" type="button" ><span class="glyphicon glyphicon-search"></span></button>
+                                        <button disabled data-control="on" class="btn btn-xs btn-default dropdown" data-toggle="dropdown" type="button" ><span class="glyphicon glyphicon-search"></span></button>
                                         <div class="dropdown-menu pull-right" style="width: 196px;padding: 3px 0;">
                                             <input  id="destinationPortS" name="destinationPortS" class="form-control" data-control="on" type="text" placeholder="请输入关键词查找" style="box-shadow: none; border-radius: 0; border-color: transparent">
                                             <ul id="dp" style="list-style: none;margin-bottom: 0;padding: 0;width: 100%;max-height: 200px;overflow-y: auto;"></ul>
@@ -139,12 +143,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <label class="col-xs-1 control-label" lang="zh">起运港<sup data-view="editView" class="not-null">*</sup></label>
+                            <label class="col-xs-1 control-label" lang="zh">起运港<sup data-view="editView" class="not-null hidden">*</sup></label>
                             <div class="col-xs-2">
                                 <div class="input-group">
                                     <input id="shipmentPort" name="shipmentPort" placeholder="请在下拉菜单中选择" class="form-control" disabled type="text" autocomplete="off"/>
                                     <div class="input-group-btn">
-                                        <button data-control="on" class="btn btn-xs btn-default dropdown" data-toggle="dropdown" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                                        <button data-control="on" disabled class="btn btn-xs btn-default dropdown" data-toggle="dropdown" type="button"><span class="glyphicon glyphicon-search"></span></button>
                                         <div class="dropdown-menu pull-right" style="width: 196px;padding: 3px 0;">
                                             <input id="shipmentPortS" name="shipmentPortS" class="form-control" data-control="on" type="text" placeholder="请输入关键词查找" style="box-shadow: none;border-radius: 0; border-color: transparent">
                                             <ul id="sp" style="list-style: none;margin-bottom: 0;padding: 0;width: 100%;max-height: 200px;overflow-y: auto;"></ul>
@@ -152,9 +156,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <label class="col-xs-1 control-label" lang="zh">收款协议<sup data-view="editView" class="not-null">*</sup></label>
+                            <label class="col-xs-1 control-label" lang="zh">收款协议<sup data-view="editView" class="not-null hidden">*</sup></label>
                             <div class="col-xs-2">
-                                <select class="form-control" data-control="on" id="income">
+                                <select class="form-control" data-control="on" disabled id="income">
                                     <option value="">——请选择——</option>
                                     #foreach($!info in $!{income})
                                         <option value="$!info.code">$!info.name</option>
@@ -199,28 +203,28 @@
 ##                            </div>
 ##                        </div>
                         <div class="form-group">
-                            <label class="col-xs-1 control-label" lang="zh">贸易方式<sup data-view="editView" class="not-null">*</sup></label>
+                            <label class="col-xs-1 control-label" lang="zh">贸易方式<sup data-view="editView" class="not-null hidden">*</sup></label>
                             <div class="col-xs-2">
-                                <select class="form-control" id="tradeType" data-control="on">
+                                <select class="form-control" id="tradeType" disabled data-control="on">
                                     <option value="0">一般贸易</option>
                                     <option value="1">其他</option>
                                 </select>
                             </div>
-                            <label class="col-xs-1 control-label" lang="zh">贸易术语<sup data-view="editView" class="not-null">*</sup></label>
+                            <label class="col-xs-1 control-label" lang="zh">贸易术语<sup data-view="editView" class="not-null hidden">*</sup></label>
                             <div class="col-xs-2">
-                                <select data-control="on" class="form-control" id="incoterm" >
+                                <select data-control="on" class="form-control" disabled id="incoterm" >
                                     <option value="">——请选择——</option>
                                     #foreach($!info in $!{incoterm})
                                         <option value="$!info.code">$!info.name</option>
                                     #end
                                 </select>
                             </div>
-                            <label class="col-xs-1 control-label" lang="zh">贸易国别<sup data-view="editView" class="not-null">*</sup></label>
+                            <label class="col-xs-1 control-label" lang="zh">贸易国别<sup data-view="editView" class="not-null hidden">*</sup></label>
                             <div class="col-xs-2">
                                 <div class="input-group">
                                     <input id="countryzone" name="countryzone" disabled placeholder="请在下拉菜单中选择" class="form-control" type="text" autocomplete="off"/>
                                     <div class="input-group-btn">
-                                        <button data-control="on" class="btn btn-xs btn-default dropdown" data-toggle="dropdown" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                                        <button data-control="on" disabled class="btn btn-xs btn-default dropdown" data-toggle="dropdown" type="button"><span class="glyphicon glyphicon-search"></span></button>
                                         <div class="dropdown-menu pull-right" style="width: 196px;padding: 3px 0;">
                                             <input id="countryzoneS" name="countryzoneS" class="form-control" data-control="on" type="text" placeholder="请输入关键词查找" style="box-shadow: none;border-radius: 0; border-color: transparent">
                                             <ul id="cz" style="list-style: none;margin-bottom: 0;padding: 0;width: 100%;max-height: 200px;overflow-y: auto;"></ul>
@@ -230,7 +234,7 @@
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">是否使用信用险</label>
                             <div class="col-xs-2">
-                                <select class="form-control" id="isCreditRisk" data-control="on">
+                                <select class="form-control" disabled id="isCreditRisk" data-control="on">
                                     <option value="0">否</option>
                                     <option value="1">是</option>
                                 </select>
@@ -242,71 +246,71 @@
 ##                                <input id="currtype" class="form-control" type="text">
 ##                                <select class="form-control hidden" id="currtypeS"></select>
 ##                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">币种<sup data-view="editView" class="not-null">*</sup></label>
+                            <label class="col-xs-1 control-label" lang="zh">币种<sup data-view="editView" class="not-null hidden">*</sup></label>
                             <div class="col-xs-2">
-                                <select class="form-control" data-control="on" id="currency">
+                                <select class="form-control" disabled data-control="on" id="currency">
                                     <option value="">——请选择——</option>
                                     #foreach($!info in $!{currtype})
                                         <option value="$!info.code">$!info.name</option>
                                     #end
                                 </select>
                             </div>
-                            <label class="col-xs-1 control-label" lang="zh">原币对美元汇率<sup class="not-null">*</sup></label>
+                            <label class="col-xs-1 control-label" lang="zh">原币对美元汇率<sup data-view="editView" class="not-null hidden">*</sup></label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" id="nusdexchgrate" value="" />
+                                <input class="form-control"  data-control="on" disabled type="text" id="nusdexchgrate" value="" />
                             </div>
-                            <label class="col-xs-1 control-label" lang="zh">原币对本元汇率<sup class="not-null">*</sup></label>
+                            <label class="col-xs-1 control-label" lang="zh">原币对本元汇率<sup data-view="editView" class="not-null hidden">*</sup></label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" id="nexchangerate" value="" />
+                                <input class="form-control"  data-control="on" disabled type="text" id="nexchangerate" value="" />
                             </div>
-                            <label class="col-xs-1 control-label" lang="zh">保险费率（%）<sup class="not-null">*</sup></label>
+                            <label class="col-xs-1 control-label" lang="zh">保险费率（%）<sup data-view="editView" class="not-null hidden">*</sup></label>
                             <div class="col-xs-2">
-                                <input class="form-control" id="premiumRate" data-code="" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-xs-1 control-label" lang="zh">资金利率（%）<sup class="not-null">*</sup></label>
-                            <div class="col-xs-2">
-                                <input class="form-control" type="text" id="discountRate" value="" />
-                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">汇损费率（%）<sup class="not-null">*</sup></label>
-                            <div class="col-xs-2">
-                                <input class="form-control" type="text" id="lossRate" value="" />
-                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">计息比例（%）<sup class="not-null">*</sup></label>
-                            <div class="col-xs-2">
-                                <input class="form-control" type="text" id="interestRate" value="" />
+                                <input class="form-control"  data-control="on" disabled id="premiumRate" data-code="" value="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-xs-1 control-label" lang="zh">销售费率（%）<sup class="not-null">*</sup></label>
+                            <label class="col-xs-1 control-label" lang="zh">资金利率（%）<sup data-view="editView" class="not-null hidden">*</sup></label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" id="saleRate" value="" />
+                                <input class="form-control"  data-control="on" disabled type="text" id="discountRate" value="" />
                             </div>
-                            <label class="col-xs-1 control-label" lang="zh">管理汇率（%）<sup class="not-null">*</sup></label>
+                            <label class="col-xs-1 control-label" lang="zh">汇损费率（%）<sup data-view="editView" class="not-null hidden">*</sup></label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" id="managementRate" value="" />
+                                <input class="form-control"  data-control="on" disabled type="text" id="lossRate" value="" />
                             </div>
-                            <label class="col-xs-1 control-label" lang="zh">信保费率（%）<sup class="not-null">*</sup></label>
+                            <label class="col-xs-1 control-label" lang="zh">计息比例（%）<sup data-view="editView" class="not-null hidden">*</sup></label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" id="guaranteeRate" value="" />
+                                <input class="form-control"  data-control="on" disabled type="text" id="interestRate" value="" />
                             </div>
-                            <label class="col-xs-1 control-label" lang="zh">信保赔付率（%）<sup class="not-null">*</sup></label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-1 control-label" lang="zh">销售费率（%）<sup data-view="editView" class="not-null hidden">*</sup></label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" id="creditRate" value="" />
+                                <input class="form-control"  data-control="on" disabled type="text" id="saleRate" value="" />
+                            </div>
+                            <label class="col-xs-1 control-label" lang="zh">管理汇率（%）<sup data-view="editView" class="not-null hidden">*</sup></label>
+                            <div class="col-xs-2">
+                                <input class="form-control"  data-control="on" disabled type="text" id="managementRate" value="" />
+                            </div>
+                            <label class="col-xs-1 control-label" lang="zh">信保费率（%）<sup data-view="editView" class="not-null hidden">*</sup></label>
+                            <div class="col-xs-2">
+                                <input class="form-control"  data-control="on" disabled type="text" id="guaranteeRate" value="" />
+                            </div>
+                            <label class="col-xs-1 control-label" lang="zh">信保赔付率（%）<sup data-view="editView" class="not-null hidden">*</sup></label>
+                            <div class="col-xs-2">
+                                <input class="form-control"  data-control="on" disabled type="text" id="creditRate" value="" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-xs-1 control-label" lang="zh">是否可转运</label>
                             <div class="col-xs-2">
-                                <select class="form-control" id="transportFlag" >
+                                <select class="form-control" data-control="on" disabled id="transportFlag" >
                                     <option value="0">否</option>
                                     <option value="1">是</option>
                                 </select>
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">是否可分批出运</label>
                             <div class="col-xs-2">
-                                <select class="form-control" id="partialShipmentFalg" >
+                                <select class="form-control" data-control="on" disabled id="partialShipmentFalg" >
                                     <option value="0">否</option>
                                     <option value="1">是</option>
                                 </select>
@@ -356,7 +360,7 @@
                 </div>
             </div>
         </div>
-        <div class="panel panel-default">
+        <div data-view="editHide" class="panel panel-default">
             <div class="panel-heading">
                 <button class="btn btn-xs btn-primary panel-heading-btn pull-right" lang="zh" id="Add">新增</button>
                 <h3 class="panel-title">
@@ -466,6 +470,11 @@
     console.log(customerId);
     var otherEnterpriseNatureText = $('#otherEnterpriseNatureText').val();
 
+
+    var bInfo = new CRM.module.Panel('#offerInfo');
+    bInfo.startEdit();
+    bInfo.startSave();
+    bInfo.startCancel();
     /*$.each(enterpriseNature,function(index,value){
         $("input[name='check']").each(function(){
             if($(this).val() == value){
@@ -477,6 +486,14 @@
         })
     })*/
 
+    // 返回
+    $('#back').click(function () {
+
+        window.history.back(-1);
+    });
+
+
+    // 完成
     $('#finish').click(function(){
         jQuery.ajax({
             url: basePath +'/businessOrder/doAddBusinessOrder',
@@ -487,10 +504,15 @@
                 var code = result.code;
                 $('#code').val(code);
                 alert('保存成功!');
+                location.reload();
             }
         })
-    })
+    });
 
+    // 取消
+    $('#cancel').click(function () {
+        location.reload();
+    });
     function getOrder() {
         var data = {
             "orderId":$('#orderId').val(), // 订单编号

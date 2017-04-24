@@ -4,11 +4,11 @@
         <li><span class="glyphicon glyphicon-map-marker"></span></li>
     </ul>
 </div>
-<div class="dashboard-wrapper">
+<div  id="offerInfo" class="dashboard-wrapper">
     <div class="row">
         <div class="tab-content col-xs-12 view-HD-lg">
             <!--基本信息-->
-                <div id="offerInfo" class="panel panel-default">
+                <div  class="panel panel-default">
                     <div class="panel-heading">
                         <div class="btn-group panel-heading-btn pull-right">
                             <a class="btn btn-xs btn-default" data-view="editHide" id="back">返回</a>
@@ -296,7 +296,7 @@
                     </div>
                 </div>
         </div>
-        <div class="tab-content col-xs-12 view-HD-lg">
+        <div data-view="editHide" class="tab-content col-xs-12 view-HD-lg">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="btn-group btn-group-xs panel-heading-btn pull-right">
@@ -513,7 +513,11 @@
                 location.reload();
             }
         })
-    })
+    });
+
+    $('#cancel').click(function () {
+        location.reload();
+    });
 
     function getOrder() {
         var businessOrder = {
