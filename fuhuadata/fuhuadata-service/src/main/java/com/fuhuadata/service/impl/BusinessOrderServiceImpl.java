@@ -9,7 +9,6 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.BusinessOrderManager;
 import com.fuhuadata.manager.NCExchange.BusinessOrderToNC;
 import com.fuhuadata.service.BusinessOrderService;
-import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

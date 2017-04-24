@@ -156,4 +156,8 @@
     <select id="getBusinessOrderByOrderId" parameterClass="java.lang.String" resultMap="BUSINESSORDER-MAP">
         select * from business_order where order_id=#orderId#
     </select>
+
+    <select id="getOrgNcIdByOrgId" parameterClass="java.lang.Integer" resultClass="java.lang.String" >
+        select nc_id from p_organization where org_id=#orgId#
+    </select>
 </sqlMap>

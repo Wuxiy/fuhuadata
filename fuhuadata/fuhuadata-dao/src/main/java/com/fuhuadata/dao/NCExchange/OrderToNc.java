@@ -14,4 +14,5 @@ public interface OrderToNc {
     List<BusinessOrderProduct> getOrderProductsById(List<Integer> orderProductsId);
     String getCodeByWareId(int wareId);
     BusinessOrder getBusinessOrderByOrderId(String orderId);
+    String getOrgNcIdByOrgId(int orgId);
 }

@@ -71,4 +71,12 @@ public class Organization implements Serializable {
     public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
+
+    public String getPcode() {
+        return pcode;
+    }
+
+    public void setPcode(String pcode) {
+        this.pcode = pcode;
+    }
 }
