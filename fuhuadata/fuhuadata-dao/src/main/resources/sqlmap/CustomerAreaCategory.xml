@@ -9,11 +9,10 @@
         SELECT
             c.code pkAreacl,
             c.name,
-            p.code pkFatherarea
+            IFNULL(p.code,9) pkFatherarea
         FROM
-            t_areacl c,t_areacl p
+            t_areacl c left join t_areacl p on  c.pk_fatherarea = p.pk_areacl
         where ((c.code &lt; '91' and c.code &gt; '9') or c.name='其他')
-        and c.pk_fatherarea = p.pk_areacl
         <isNotEmpty prepend="and" property="value">
             pk_fatherarea = #value#
         </isNotEmpty>

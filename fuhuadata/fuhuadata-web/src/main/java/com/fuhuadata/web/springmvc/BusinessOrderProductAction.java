@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,7 +44,7 @@ public class BusinessOrderProductAction {
     private PackingArchivesService packingArchivesService;
     @Autowired
     private ProductWareService productWareService;
-    @Autowired
+    @Resource
     private FreightCostService freightCostService;
     /**
      * 进入添加订单产品基本信息页面
