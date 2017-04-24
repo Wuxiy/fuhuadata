@@ -39,7 +39,7 @@
                             </div>
                             <label class="col-xs-1 control-label" lang="zh">客户税号</label>
                             <div class="col-xs-2">
-                                <input class="form-control" type="text" disabled id="customerDutyParagraph" value="" />
+                                <input class="form-control" type="text" data-control="on" disabled id="customerDutyParagraph" value="" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -438,7 +438,7 @@
 <script id="salC" type="text/html">
     <%if (data.length>0) {%>
     <%for (var i=0; i<data.length; i++) {%>
-    <li><a href="#" data-val="<%=data[i].ncId%>" style="padding-left: 6px"><%=data[i].cname%></a></li>
+    <li><a href="#" data-val="<%=data[i].code%>" style="padding-left: 6px"><%=data[i].cname%></a></li>
     <%}%>
     <%}%>
 </script>
@@ -657,7 +657,7 @@
         $('#cbtTree').html('');
         if (orgId!='' && orgId!=undefined) {
             $.ajax({
-                url:basePath+'/sys/dept/tree/org?orgId='+orgId,
+                url:basePath+'/sys/dept/tree/org?code='+orgId,
                 type:'GET'
             }).done(function (result) {
                 renderDepTree(result.data);
@@ -677,13 +677,13 @@
         if (pid!='' && pid!=undefined) {
 
             $.ajax({
-                url:'/sys/user/dept/users?pid='+pid,
-                type:'POST',
+                url:basePath + '/sys/user/dept/users/pojo?code='+pid,
+                type:'GET',
                 contentType:'application/json'
             }).done(function (data) {
-                if (data) {
+                if (data.data instanceof Array) {
 
-                    CRM.tplHandler('salC',data,$('#sm'));
+                    CRM.tplHandler('salC',data.data,$('#sm'));
                 }
             });
         }else {
@@ -809,7 +809,11 @@
         var setting = {
                     data: {
                         simpleData: {
-                            enable: true
+                            enable: false
+                        },
+                        key:{
+                            children:"nodes",
+                            name:"cname"
                         }
                     },
                     edit: {
@@ -820,11 +824,9 @@
                     }
                 },
                 id = $('#cbtTree').attr('id'),
-                treeObj = null,
+                treeObj = null;
 
-                treeData = CRM.toArr(data);
-
-        $.fn.zTree.init($('#cbtTree'), setting, treeData);
+        $.fn.zTree.init($('#cbtTree'), setting, data);
         treeObj = $.fn.zTree.getZTreeObj(id);
         treeObj.expandAll(true); // 默认展开
     }
@@ -838,8 +840,8 @@
 
     function depClickTree(event, modLeftId, treeNode) {
 
-        $('#departmentName').data('val', treeNode.id);
-        $('#departmentName').val(treeNode.name);
+        $('#departmentName').data('val',treeNode.code);
+        $('#departmentName').val(treeNode.cname);
         $('#cbtModal').modal('hide');
 
         // 清空业务员
