@@ -12,7 +12,7 @@
                     <div class="panel-heading">
                         <div class="btn-group panel-heading-btn pull-right">
                             <a class="btn btn-xs btn-default hidden" id="addback">返回</a>
-                            <button id="finish" data-btn="edit" class="btn btn-xs btn-primary panel-heading-btn pull-right hidden" type="button" lang="zh">
+                            <button id="finish" class="btn btn-xs btn-primary panel-heading-btn pull-right hidden" type="button" lang="zh">
                                 完成
                             </button>
 
@@ -338,8 +338,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="btn-group btn-group-xs panel-heading-btn pull-right">
-                        <button class="btn btn-primary" id="delete">删除</button>
-                        <button class="btn btn-xs btn-primary" lang="zh" id="Add">新增</button>
+                        <button class="btn btn-primary" id="delete" disabled>删除</button>
+                        <button class="btn btn-xs btn-primary" lang="zh" id="Add" disabled>新增</button>
                     </div>
                     <h3 class="panel-title">
                         产品信息
@@ -458,6 +458,9 @@
         if(orderId!=''&&businessId==''){
             $('#back').removeClass('hidden');
             $('#edit').removeClass('hidden');
+
+            $('#delete').attr('disabled',false);
+            $('#Add').attr('disabled',false);
 
             //请求数据
             jQuery.ajax({
@@ -599,10 +602,24 @@
             contentType:"application/json",
             data:getAddOrder(),
             success:function (result) {
-                var code = result.code;
-                $('#code').val(code);
-                alert('保存成功!');
-//                location.reload();
+                var ResultData = result.code;
+                if(ResultData == 1){
+                    alert('保存成功!');
+                    $('#delete').attr('disabled',false);
+                    $('#Add').attr('disabled',false);
+
+                    $('#addback').addClass('hidden');
+                    $('#finish').addClass('hidden');
+                    $('#back').removeClass('hidden');
+                    $('#edit').removeClass('hidden');
+                }else{
+
+                    alert('保存失败！');
+                    $('#addback').removeClass('hidden');
+                    $('#finish').removeClass('hidden');
+                    $('#back').addClass('hidden');
+                    $('#edit').addClass('hidden');
+                }
             }
         })
     });
