@@ -421,15 +421,18 @@
                     }
                     $('#customerDutyParagraph').val(businessOrder.customerDutyParagraph); // 客户税号
                     $('#billToCustomer').val(businessOrder.billToCustomer); // 收票客户
-                    $('#saleOrganizationName').val(businessOrder.saleOrganizationName); // 销售组织
-                    $('#departmentName').val(businessOrder.departmentName); // 部门
-                    $('#salesManName').val(businessOrder.salesManName); // 业务员
+                    $('#saleOrganizationName').val(businessOrder.saleOrganizationName); // 销售组织name
+                    $('#saleOrganizationName').data('val',businessOrder.saleOrganizationId); // 销售组织id
+                    $('#departmentName').val(businessOrder.departmentName); // 部门name
+                    $('#departmentName').data('val',businessOrder.departmentId); // 部门id
+                    $('#salesManName').val(businessOrder.salesManName); // 业务员name
+                    $('#salesManName').data('val',businessOrder.salesManId); // 业务员id
                     $('#destinationPort').val(businessOrder.destinationPortName); // 目的港
                     $('#shipmentPort').val(businessOrder.shipmentPortName); // 起运港
                     $('#income').val(businessOrder.collectionAgreement); // 收款协议
                     $('#tradeType').val(businessOrder.tradeType); // 贸易方式
                     $('#incoterm').val(businessOrder.tradeTerm); // 贸易术语
-                    $('#countryzone').val(businessOrder.tradeCountry); // 贸易国别
+                    $('#countryzone').val(businessOrder.countryzoneName); // 贸易国别
                     $('#isCreditRisk').val(businessOrder.isCreditRisk); // 是否使用信用险
                     $('#currency').val(businessOrder.currency); // 币种
                     $('#nusdexchgrate').val(businessOrder.nusdexchgrate); // 原币对美元汇率
@@ -733,29 +736,29 @@
      */
     function renderTree(data) {
 
-        function toArr(data) {
-            var arr = [];
-            function recursionData(data) {
-
-                if (data instanceof Array) {
-
-                    $.each(data,function (n,item) {
-                        var obj = {
-                            id   : item.cCode,
-                            pId  : item.pCode,
-                            name : item.cname
-                        };
-                        arr.push(obj);
-
-                        recursionData(item.nodes);
-                    })
-                }
-            }
-
-            recursionData(data);
-
-            return arr;
-        }
+//        function toArr(data) {
+//            var arr = [];
+//            function recursionData(data) {
+//
+//                if (data instanceof Array) {
+//
+//                    $.each(data,function (n,item) {
+//                        var obj = {
+//                            id   : item.cCode,
+//                            pId  : item.pCode,
+//                            name : item.cname
+//                        };
+//                        arr.push(obj);
+//
+//                        recursionData(item.nodes);
+//                    })
+//                }
+//            }
+//
+//            recursionData(data);
+//
+//            return arr;
+//        }
         var setting = {
                     data: {
                         simpleData: {
@@ -772,7 +775,7 @@
                 id = $('#cbtTree').attr('id'),
                 treeObj = null,
 
-                treeData = toArr(data);
+                treeData = CRM.toArr(data);
 
         $.fn.zTree.init($('#cbtTree'), setting, treeData);
         treeObj = $.fn.zTree.getZTreeObj(id);

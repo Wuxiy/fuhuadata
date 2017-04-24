@@ -30,11 +30,11 @@ public class OrganizationServiceImpl implements OrganizationService {
         Map<String,CategoryTree> map = listToTreeMap(organizationList);
         //给每个树对象添加子节点
         for(Organization o:organizationList){
-            CategoryTree p_ct = map.get(o.getParentId()+"");
+            CategoryTree p_ct = map.get(o.getPcode()+"");
             if(p_ct==null){
                 continue;
             }
-            CategoryTree ct = map.get(o.getNcId());
+            CategoryTree ct = map.get(o.getCode());
             p_ct.addChildNode(ct);
         }
 
@@ -61,9 +61,9 @@ public class OrganizationServiceImpl implements OrganizationService {
         for(Organization o:list){
             CategoryTree ct = new CategoryTree();
             ct.setCname(o.getName());
-            ct.setPid(o.getParentId()+"");
-            ct.setCid(o.getNcId()+"");
-            map.put(o.getNcId()+"",ct);
+            ct.setPid(o.getPcode());
+            ct.setCid(o.getCode());
+            map.put(o.getCode(),ct);
         }
         return map;
     }
