@@ -223,7 +223,7 @@
                 </div>
 
                 <!--加工成分-->
-                <div id="cost" class="panel panel-default view-HD-lg">
+                <div id="cost" class="panel panel-default view-HD-lg hidden">
                     <div class="panel-heading">
                         <h3 class="panel-title" lang="zh">加工成分及费用</h3>
                     </div>
@@ -377,9 +377,8 @@
                         break;
                 }
 
-                if(components.length == 0){
-                    $('#cost').addClass('hidden');
-                }else{
+                if(components.length != 0){
+                    $('#cost').removeClass('hidden');
                     costtable.innerHTML = '';
                     for(var i=0;i<components.length;i++){
                         costtable.innerHTML += '<tr>'+
@@ -517,9 +516,8 @@
                         $('#model').val(productWareVo.model);
                         $('#unitUseRate').val(productWareVo.unitUseRate);
 
-                        if(components.length == 0){
-                            $('#cost').addClass('hidden');
-                        }else{
+                        if(components.length != 0){
+                            $('#cost').removeClass('hidden');
                             costtable.innerHTML = '';
                             for(var i=0;i<components.length;i++){
                                 costtable.innerHTML += '<tr>'+
@@ -531,7 +529,6 @@
                                         '</tr>';
                             }
                         }
-
                     } else{
                     jQuery.ajax({
                         url:basePath + '/businessProduct/detailBaseInfo?businessProductId=' + businessProductId,
@@ -547,9 +544,8 @@
                             $('#model').val(basicInfo.model);
                             $('#brand').val(basicInfo.brand);
 
-                            if(components.length==0){
-                                $('#cost').addClass('hidden');
-                            }else{
+                            if(components.length!=0){
+                                $('#cost').removeClass('hidden');
                                 costtable.innerHTML = '';
                                 for(var i=0;i<components.length;i++){
                                     costtable.innerHTML += '<tr>'+
