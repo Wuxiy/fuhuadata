@@ -446,6 +446,8 @@
 
     $(function () {
 
+        //根据editId和productRequireId判定页面状态，
+        //editid=1,id!='',列表进入查询详情；editId=1,id=='',列表进入，没有详情；editId=2,id!='',客户页面进入查看；editId!=2,!=1,id='',包材要求新增
         if(editId == 1&&id!=''){
             $('#edit').removeClass('hidden');
             $('#back').removeClass('hidden');
@@ -623,9 +625,172 @@
 
             $('[data-target="#packModal"]').attr('disabled',false);
             $('.isdisabled').attr('disabled',false);
+        }else if(editId == 2&&id!=''){
+            jQuery.ajax({
+                url:basePath + '/businessProduct/getProductRequireInfo?productRequireId=' + id,
+                type:'POST',
+                success:function(result){
+                    var productRequire = result.productRequire;
+                    if(productRequire.mainPackingType!=undefined){
+                        $('#mainPackingType').val(productRequire.mainPackingType);
+                    }
+                    if(productRequire.material!=undefined){
+                        $('#material').val(productRequire.material);
+                    }
+                    if(productRequire.specification!=undefined){
+                        $('#specification').val(productRequire.specification);
+                    }
+                    if(productRequire.price!=undefined){
+                        $('#price').val(productRequire.price);
+                    }
+                    if(productRequire.bottleWeight!=undefined){
+                        $('#bottleWeight').val(productRequire.bottleWeight);
+                    }
+                    if(productRequire.bottleCapColor!=undefined){
+                        $('#bottleCapColor').val(productRequire.bottleCapColor);
+                    }
+                    if(productRequire.bottleBodyColor!=undefined){
+                        $('#bottleBodyColor').val(productRequire.bottleBodyColor);
+                    }
+                    if(productRequire.bottleDiameter!=undefined){
+                        $('#bottleDiameter').val(productRequire.bottleDiameter);
+                    }
+                    if(productRequire.businessCheckNum!=undefined){
+                        $('#businessCheckNum').val(productRequire.businessCheckNum);
+                    }
+                    if(productRequire.bottlePasteRequire!=undefined){
+                        $('#bottlePasteRequire').val(productRequire.bottlePasteRequire);
+                    }
+                    if(productRequire.specialRequire!=undefined){
+                        $('#specialRequire').val(productRequire.specialRequire);
+                    }
+                    if(productRequire.addtionalPrice!=undefined){
+                        $('#addtionalPrice').val(productRequire.addtionalPrice);
+                    }
+                    if(productRequire.sealingStyle!=undefined){
+                        $('#sealingStyle').val(productRequire.sealingStyle);
+                    }
+                    if(productRequire.outerOackingOtherRequire!=undefined){
+                        $('#outerOackingOtherRequire').val(productRequire.outerOackingOtherRequire);
+                    }
+                    if(productRequire.otherRequire!=undefined){
+                        $('#otherRequire').val(productRequire.otherRequire);
+                    }
+                    if(productRequire.otherRequirePrice!=undefined){
+                        $('#otherRequirePrice').val(productRequire.otherRequirePrice);
+                    }
+                    if(productRequire.otherRequireConsumption!=undefined){
+                        $('#otherRequireConsumption').val(productRequire.outerOackingOtherRequire);
+                    }
+                    if(productRequire.bottlePasteRequire!=undefined){
+                        $('#bottlePasteRequire').val(productRequire.bottlePasteRequire);
+                    }
+                    if(productRequire.specialRequire!=undefined){
+                        $('#specialRequire').val(productRequire.specialRequire);
+                    }
+                    if(productRequire.addtionalPrice!=undefined){
+                        $('#addtionalPrice').val(productRequire.addtionalPrice);
+                    }
+                    if(productRequire.sealingStyle!=undefined){
+                        $('#sealingStyle').val(productRequire.sealingStyle);
+                    }
+                    if(productRequire.size!=undefined){
+                        $('#size').val(productRequire.size);
+                    }
+
+                    if(productRequire.imgInfo!=undefined){
+                        var imgInfo = eval(productRequire.imgInfo);
+                        $('img[data-name]').each(function (i,item) {
+                            var thisImg = $(this),
+                                    nameImg = thisImg.data('name');
+                            btn     = thisImg.parent('td').find('button');
+                            $.each(imgInfo,function (n,one) {
+                                if (nameImg==one.name){
+                                    thisImg.attr('src',one.imgpath);
+                                    btn.removeClass('hidden');
+                                    return false;
+                                }else {
+                                    return true;
+                                }
+                            })
+                        });
+                    }
+
+                    var modelist = eval(result.modelist);
+                    var img_html = '';
+
+                    for(var k=0;k<modelist.length;k++){
+                        img_html +='<div class="col-xs-2">';
+                        img_html +='<a class="thumbnail" >';
+                        img_html +='<img src="'+modelist[k].path+'" alt="通用的占位符缩略图"  style="height: 200px;">';
+                        img_html +='<div class="caption">';
+                        img_html +='<h4 class="text-info ">'+modelist[k].name+'<input style="margin-left: 15px;" type="checkbox" name="modelist" class="btn-link" data-name="'+modelist[k].name+'" data-path="'+modelist[k].path+'" disabled checked></h4>';
+                        img_html +='</div>';
+                        img_html += '</a>';
+                        img_html +='</div>';
+                    }
+                    $('#model').html(img_html);
+
+                    var outerData = result.outer;
+                    var auxiliaryData = result.auxiliary;
+
+                    var _html = '';
+
+                    if(productRequire.hasBodyLogo!=undefined&&productRequire.hasBodyLogo == 1){
+                        $('#hasBodyLogo').attr('checked',true);
+                    }
+                    if(productRequire.hasCapLogo!=undefined&&productRequire.hasCapLogo == 1){
+                        $('#hasCapLogo').attr('checked',true);
+                    }
+                    if(productRequire.hasDangerSign!=undefined&&productRequire.hasDangerSign == 1){
+                        $('#hasDangerSign').attr('checked',true);
+                    }
+                    if(productRequire.hasScaleLine!=undefined&&productRequire.hasScaleLine == 1){
+                        $('#hasScaleLine').attr('checked',true);
+                    }
+                    if(productRequire.hasSprayCode!=undefined&&productRequire.hasSprayCode == 1){
+                        $('#hasSprayCode').attr('checked',true);
+                    }
+
+                    /*imgInfo.each(function (n,item) {
+                        if(item == '')
+                    })*/
+
+                    if(outerData.length!=0){
+                        for(var i=0;i<outerData.length;i++){
+                            _html += '<tr class="outerlist">';
+                            _html += '<td class="text-center"><input type="checkbox" value="'+outerData[i].packingId+'" class="outercheckbox" name="outercheckbox"/></td>';
+                            _html += '<td class="text-center">'+outerData[i].packName+'</td>';
+                            _html += '<td class="text-center">'+outerData[i].spec+'</td>';
+                            _html += '<td class="text-center">'+outerData[i].size+'</td>';
+                            _html += '<td class="text-center">'+outerData[i].quality+'</td>';
+                            _html += '<td class="text-center">'+outerData[i].consumption+'</td>';
+                            _html += '<td class="text-center">'+outerData[i].unitPrice+'</td>';
+                            _html += '</tr>';
+                        }
+                        $('#befond').before(_html);
+                    }
+
+                    if(auxiliaryData.length!=0){
+                        for(var j=0;j<auxiliaryData.length;j++){
+                            auxiliary.innerHTML += '<tr class="">'+
+                                    '<td><input type="checkbox" value="'+auxiliaryData[j].packingId+'" class="auxiliarycheckbox" name="auxiliarycheckbox"/></td>'+
+                                    '<td>'+auxiliaryData[j].packName+'</td>' +
+                                    '<td>'+auxiliaryData[j].spec+'</td>'+
+                                    '<td>'+auxiliaryData[j].size+'</td>'+
+                                    '<td>'+auxiliaryData[j].quality+'</td>'+
+                                    '<td>'+auxiliaryData[j].consumption+'</td>'+
+                                    '<td>'+auxiliaryData[j].unitPrice+'</td>'+
+                                    '</tr>';
+                        }
+                    }
+
+                }
+            })
+
         }
 
-
+        //渲染主材树
         $('#tree').creatTree(basePath+'/packingCategory/CategoryTree?parentIds=1');
         $('#tree').filtrateData(basePath+'/packingArchives/getPackingArchivesByPId',"container","packingorderlist");
         jQuery.ajax({
@@ -694,6 +859,8 @@
             });
         });
 
+
+        //主材按钮完成
         $('#finish').click(function(){
 
             var cellcheckbox = $("input[name='cellcheckbox']:checked").parent('td').parent('tr').find('td');
@@ -775,11 +942,13 @@
             }
         })
 
+        //上一步，四个id参数
         $('#before').click(function(){
             var productRequireId = $('#productRequireId');
             window.location.href = basePath + '/businessProduct/intoProductBasicInfoRequire?businessProductId=' + businessProductId + '&&orderId=' + orderId + '&&customerId' + customerId + '&&productRequireId' + productRequireId;
         })
 
+        //新增下一步，生成productRequireId，
         $('#next').click(function () {
 
             var isup = true;
@@ -833,7 +1002,7 @@
         return i;
     }
 
-    //主材id=1列表
+    //渲染树，主材id=1列表
     function packingorderlist(data) {
         var ResultData = data.data;
 
@@ -844,7 +1013,7 @@
         })
     }
 
-    //新增function
+    //新增获取数据function Add
     function Add() {
         var data = {
             'businessProductId':$('#businessProductId').val(),
@@ -890,6 +1059,7 @@
         return data;
     }
 
+    //编辑获取数据function edit()
     function edit() {
         var data = {
             'id':$('#productRequireId').val(),
@@ -929,6 +1099,7 @@
 
     }
 
+    //获取外包材ID
     function getouterPackingId() {
         var outerPackingId = $('input[class="active"]:checked').val();
         console.log(outerPackingId);
@@ -944,7 +1115,8 @@
         }
         return model;
     }*/
-    
+
+    //获取辅材Id数组
     function getauxiliaryMaterialIds() {
         var a = [];
         var b;
@@ -956,6 +1128,7 @@
         return b;
     }
 
+    //获取图片imgInfo
     function getimgInfo() {
         var arr = [];
         $('#imgGroup .thumbnail').each(function(){
@@ -970,6 +1143,7 @@
         return JSON.stringify(arr);
     }
 
+    //editId=1，id!=''时编辑保存
     $('#save').click(function(){
         jQuery.ajax({
             url:basePath + '/businessProduct/saveProductRequire',
@@ -984,6 +1158,7 @@
         })
     })
 
+    //editId=1,id=''时编辑保存
     $('#addedit').click(function(){
         var isup = true;
         var notnull = $('.notnull');
@@ -1011,10 +1186,11 @@
         })
     })
 
+    //返回function
     function back() {
         window.location.href = basePath + '/businessOrder/intoOfferorOrder?orderId=' + orderId;
     }
-
+    //判空，判定undefined function
     function ifEmpty(data) {
         return data==undefined?'':data;
     }

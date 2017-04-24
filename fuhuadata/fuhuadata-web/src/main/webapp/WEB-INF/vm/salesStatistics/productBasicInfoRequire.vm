@@ -320,7 +320,7 @@
     bInfo.startCancel();
 
 
-    //若为查看产品要求详情editId标识符为1；businessProductId不为空
+    //editId=1,businessProductId!='',列表进入查看详情；
     if(editId == 1&&businessProductId != ''){
         $('#edit').removeClass('hidden');
         $('#back').removeClass('hidden');
@@ -709,6 +709,7 @@
         return data==undefined?'':data;
     }
 
+    //editId=1编辑保存
     $('#save').click(function(){
         jQuery.ajax({
             url:basePath + '/businessProduct/saveBaseInfoAndComponents',
@@ -722,6 +723,7 @@
         })
     })
 
+    //返回function
     $('#back').click(function(){
         window.location.href = basePath + '/businessOrder/intoOfferorOrder?orderId=' + orderId;
     })
