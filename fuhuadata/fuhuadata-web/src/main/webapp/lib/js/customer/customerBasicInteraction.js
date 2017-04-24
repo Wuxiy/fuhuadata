@@ -753,6 +753,11 @@ $().ready(function() {
         }
     });
 
+    // 返回
+    // $('#backPage').on('click.back',function () {
+    //
+    //     window.history.back(-1);
+    // });
 
     // 重置
     $('#resetB').on('click.reset',function () {

@@ -418,78 +418,83 @@
                 var businessOrder = result.data.businessOrder;
                 var customerBaseInfo = result.data.customerBaseInfo;
 
-                if(customerBaseInfo.enterpriseNature!=undefined){
-                    var enterpriseNature = customerBaseInfo.enterpriseNature.split(',');
+//                if(customerBaseInfo.enterpriseNature!=undefined){
+//                    var enterpriseNature = customerBaseInfo.enterpriseNature.split(',');
+//
+//                    $.each(enterpriseNature,function(index,value){
+//                        $("input[name='check']").each(function(){
+//                            if($(this).val() == value){
+//                                $(this).prop('checked',true);
+//                                if(value == 4){
+//
+//                                }
+//                            }
+//                        })
+//                    });
+//                }
 
-                    $.each(enterpriseNature,function(index,value){
-                        $("input[name='check']").each(function(){
-                            if($(this).val() == value){
-                                $(this).prop('checked',true);
-                                if(value == 4){
-                                    $('#otherEnterpriseNature').val(customerBaseInfo.otherEnterpriseNature);
-                                }
-                            }
-                        })
-                    })
-                }
-
-
+                $('#customerId').val(customerBaseInfo.customerId); // 客户id
                 if(businessOrder.businessId){
-                    $('#businessId').val(businessOrder.businessId);
+                    $('#businessId').val(businessOrder.businessId); // 商机编号
                 }
-                $('#fullName').val(customerBaseInfo.fullName);
-                $('#customerId').val(customerBaseInfo.customerId);
-                $('#customerDutyParagraph').val(businessOrder.customerDutyParagraph);
-                $('#enterprisePhone').val(customerBaseInfo.enterprisePhone);
-                $('#zhongxinbaoNumber').val(customerBaseInfo.zhongxinbaoNumber);
-                $('#registeredFunds').val(customerBaseInfo.registeredFunds);
-                $('#billToCustomer').val(businessOrder.billToCustomer);
-                $('#salesManName').val(businessOrder.salesManName);
-                $('#departmentName').val(businessOrder.departmentName);
-                $('#saleOrganizationName').val(businessOrder.saleOrganizationName);
-                $('#destinationPort').val(businessOrder.destinationPort);
-                $('#shipmentPort').val(businessOrder.shipmentPort);
-                $('#collectionAgreement').val(businessOrder.collectionAgreement);
-                $('#tradeType').val(businessOrder.tradeType);
-                $('#tradeTerm').val(businessOrder.tradeTerm);
-                $('#tradeCountry').val(businessOrder.tradeCountry);
-                $('#currency').val(businessOrder.currency);
-                $('#premiumRate').val(businessOrder.premiumRate);
-                $('#guaranteeRate').val(businessOrder.guaranteeRate);
-                $('#discountRate').val(businessOrder.discountRate);
-                $('#isCreditRisk').val(businessOrder.isCreditRisk);
-                $('#lossRate').val(businessOrder.lossRate);
-                $('#interestRate').val(businessOrder.interestRate);
-                $('#creditRate').val(businessOrder.creditRate);
-                $('#saleRate').val(businessOrder.saleRate);
-                $('#managementRate').val(businessOrder.managementRate);
-                $('#transportFlag').val(businessOrder.transportFlag);
-                $('#partialShipmentFalg').val(businessOrder.partialShipmentFalg);
-                $('#enterpriseEmail').val(customerBaseInfo.enterpriseEmail);
-                $('#internalSupplyName').val(businessOrder.internalSupplyName);
-                $('#nusdexchgrate').val(businessOrder.status);
-                $('#nexchangerate').val(businessOrder.internalSupplyName);
+                $('#fullName').val(customerBaseInfo.fullName); // 客户名称
+                $('#customerDutyParagraph').val(businessOrder.customerDutyParagraph); // 客户税号
+                $('#zhongxinbaoNumber').val(customerBaseInfo.zhongxinbaoNumber); // 中信保编码
+                $('#registeredFunds').val(customerBaseInfo.registeredFunds); // 注册资金
+                $('#enterprisePhone').val(customerBaseInfo.enterprisePhone); // 企业电话
+                $('#enterpriseEmail').val(customerBaseInfo.enterpriseEmail); // 企业邮箱
+                $('#billToCustomer').val(businessOrder.billToCustomer); // 收票客户
+                $('#saleOrganizationName').val(businessOrder.saleOrganizationName); // 销售组织
+                $('#departmentName').val(businessOrder.departmentName); // 部门
+                $('#salesManName').val(businessOrder.salesManName); // 业务员
+                $('#destinationPort').val(businessOrder.destinationPortName); // 目的港
+                $('#shipmentPort').val(businessOrder.shipmentPortName); // 起运港
+                $('#income').val(businessOrder.collectionAgreement); // 收款协议
+                $('#tradeType').val(businessOrder.tradeType); // 贸易方式
+                $('#incoterm').val(businessOrder.tradeTerm); // 贸易术语
+                $('#countryzone').val(businessOrder.tradeCountry); // 贸易国别
+                $('#isCreditRisk').val(businessOrder.isCreditRisk); // 是否使用信用险
+                $('#currency').val(businessOrder.currency); // 币种
+                $('#nusdexchgrate').val(businessOrder.nusdexchgrate); // 原币对美元汇率
+                $('#nexchangerate').val(businessOrder.nexchangerate); // 原币对本元汇率
+                $('#premiumRate').val(businessOrder.premiumRate); // 保险费率
+                $('#discountRate').val(businessOrder.discountRate); // 资金利率
+                $('#lossRate').val(businessOrder.lossRate); // 汇损费率
+                $('#interestRate').val(businessOrder.interestRate); // 计息比例
+                $('#saleRate').val(businessOrder.saleRate); // 销售费率
+                $('#managementRate').val(businessOrder.managementRate); // 管理汇率
+                $('#guaranteeRate').val(businessOrder.guaranteeRate); // 信保费率
+                $('#creditRate').val(businessOrder.creditRate); // 信保赔付率
+                $('#transportFlag').val(businessOrder.transportFlag); // 是否可转运
+                $('#partialShipmentFalg').val(businessOrder.partialShipmentFalg); // 是否可分批出运
+                $('[name="check"]').val([customerBaseInfo.enterpriseNature]); // 企业性质
+                $('#otherEnterpriseNature').val(customerBaseInfo.otherEnterpriseNature); // 其他企业性质
+
+//                $('#collectionAgreement').val(businessOrder.collectionAgreement);
+//                $('#tradeTerm').val(businessOrder.tradeTerm);
+//                $('#tradeCountry').val(businessOrder.tradeCountry);
+//                $('#internalSupplyName').val(businessOrder.internalSupplyName);
 
                 businessproduct.innerHTML = '';
                 if(result.data.businessOrderProductLists!=undefined){
                     var businessOrderProductLists = result.data.businessOrderProductLists;
                     for(var i=0;i<businessOrderProductLists.length;i++){
                         businessproduct.innerHTML += '<tr>'+
-                                '<td>'+ifEmpty(businessOrderProductLists[i].productCode)+'</td>'+
-                                '<td><a href="'+basePath+'/businessProduct/intoProductBasicInfoRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&edit=1'+'">'+ifEmpty(businessOrderProductLists[i].productName)+'</a></td>'+
-                                '<td>'+ifEmpty(businessOrderProductLists[i].categoryName)+'</td>'+
-                                '<td>'+ifEmpty(businessOrderProductLists[i].brand)+'</td>'+
-                                '<td><a href="'+basePath+'/businessProduct/intoProductRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&productRequireId='+ifEmpty(businessOrderProductLists[i].productRequireId)+'&&edit=1'+'">'+ifEmpty(businessOrderProductLists[i].specification)+'</a></td>'+
-                                '<td>'+ifEmpty(businessOrderProductLists[i].mainProductAmount)+'</td>'+
-                                '<td>'+ifEmpty(businessOrderProductLists[i].cupboardPerNumber)+'</td>'+
-                                '<td>'+ifEmpty(businessOrderProductLists[i].cupboardType)+'</td>'+
-                                '<td>'+ifEmpty(businessOrderProductLists[i].cupboardNumber)+'</td>'+
-                                '<td>'+ifEmpty(businessOrderProductLists[i].deliveryTime)+'</td>'+
-                                '<td>'+ifEmpty(businessOrderProductLists[i].documentaryRequire)+'</td>'+
-                                '<td><a href="'+basePath+'/businessProduct/intoDocumentary?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&edit=1'+'">查看</a></td>'+
-                                '<td><a href="'+basePath+'/businessProduct/intoPackageRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&edit=1'+'">查看</a></td>'+
-                                '<td><input type="checkbox" class="form-control" name="cellcheckbox" value="'+businessOrderProductLists[i].orderId+'" /></td>'+
-                                '</tr>';
+                            '<td>'+ifEmpty(businessOrderProductLists[i].productCode)+'</td>'+
+                            '<td><a href="'+basePath+'/businessProduct/intoProductBasicInfoRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&edit=1'+'">'+ifEmpty(businessOrderProductLists[i].productName)+'</a></td>'+
+                            '<td>'+ifEmpty(businessOrderProductLists[i].categoryName)+'</td>'+
+                            '<td>'+ifEmpty(businessOrderProductLists[i].brand)+'</td>'+
+                            '<td><a href="'+basePath+'/businessProduct/intoProductRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&productRequireId='+ifEmpty(businessOrderProductLists[i].productRequireId)+'&&edit=1'+'">'+ifEmpty(businessOrderProductLists[i].specification)+'</a></td>'+
+                            '<td>'+ifEmpty(businessOrderProductLists[i].mainProductAmount)+'</td>'+
+                            '<td>'+ifEmpty(businessOrderProductLists[i].cupboardPerNumber)+'</td>'+
+                            '<td>'+ifEmpty(businessOrderProductLists[i].cupboardType)+'</td>'+
+                            '<td>'+ifEmpty(businessOrderProductLists[i].cupboardNumber)+'</td>'+
+                            '<td>'+ifEmpty(businessOrderProductLists[i].deliveryTime)+'</td>'+
+                            '<td>'+ifEmpty(businessOrderProductLists[i].documentaryRequire)+'</td>'+
+                            '<td><a href="'+basePath+'/businessProduct/intoDocumentary?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&edit=1'+'">查看</a></td>'+
+                            '<td><a href="'+basePath+'/businessProduct/intoPackageRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&edit=1'+'">查看</a></td>'+
+                            '<td><input type="checkbox" class="form-control" name="cellcheckbox" value="'+businessOrderProductLists[i].orderId+'" /></td>'+
+                            '</tr>';
                     }
                 }
 
@@ -505,52 +510,63 @@
             data:getOrder(),
             success:function (result) {
                 alert("修改成功!");
-//                location.reload();
+                location.reload();
             }
         })
     })
 
     function getOrder() {
         var businessOrder = {
-            "orderId":$('#orderId').val(),
-            "businessId":$('#businessId').val(),
-//            "customerName":$('#customerName').val(),
-            "customerDutyParagraph":$('#customerDutyParagraph').val(),
-            "billToCustomer":$('#billToCustomer').val(),
-            "saleOrganizationName":$('#saleOrganizationName').data('val'),
-            "departmentName":$('#departmentName').data('val'),
-            "salesManName":$('#salesManName').data('val'),
-            "destinationPort":$('#destinationPort').data('val'),
-            "shipmentPort":$('#shipmentPort').data('val'),
-            "income":$('#income').val(),
-            "tradeType":$('#tradeType').val(),
-//            "incoterm":$('#incoterm').val(),
-            "tradeCountry":$('#countryzone').data('val'),
-            "isCreditRisk":$('#isCreditRisk').val(),
-            "currency":$('#currency').data('val'),
+            "orderId":$('#orderId').val(), // 订单编号
+            "businessId":$('#businessId').val(), // 商机编号
+            "customerId":$('#customerId').val(), // 客户编号
+            "customerDutyParagraph":$('#customerDutyParagraph').val(), // 客户税号
+            "billToCustomer":$('#billToCustomer').val(), // 收票客户
+            "salesManId":$('#salesManName').data('val'), // 业务员id
+            "salesManName":$('#salesManName').val(), // 业务员name
+            "departmentId":$('#departmentName').data('val'), // 部门id
+            "departmentName":$('#departmentName').val(), // 部门name
+
+            "saleOrganizationId":$('#saleOrganizationName').data('val'), // 销售组织id
+            "saleOrganizationName":$('#saleOrganizationName').val(), // 销售组织name
+            "destinationPort":$('#destinationPort').data('val'), // 目的港id
+            "destinationPortName":$('#destinationPort').val(), // 目的港name
+            "shipmentPort":$('#shipmentPort').data('val'), // 起运港id
+            "shipmentPortName":$('#shipmentPort').val(), // 起运港name
+            "collectionAgreement":$('#income').val(), // 收款协议
+            "tradeType":$('#tradeType').val(), // 贸易方式
+            "tradeTerm":$('#incoterm').val(), // 贸易术语
+            "currency":$('#currency').val(), // 币种编码
+
+            "tradeCountry":$('#countryzone').data('val'), // 贸易国别id
+            "tradeCountryName":$('#countryzone').val(), // 贸易国别name
+            "isCreditRisk":$('#isCreditRisk').val(), // 是否使用信用险
+            "interestRate":$('#interestRate').val(), // 计息比例
+
+            "nusdexchgrate":$('#nusdexchgrate').val(), // 原币对美元汇率
+            "nexchangerate":$('#nexchangerate').val(), // 原币对本币汇率
+
+            "premiumRate":$('#premiumRate').val(), // 保险费率
+            "guaranteeRate":$('#guaranteeRate').val(), // 信保费率
+            "discountRate":$('#discountRate').val(), // 资金利率
+            "lossRate":$('#lossRate').val(), // 汇损费率
+            "saleRate":$('#saleRate').val(), // 销售费率
+            "managementRate":$('#managementRate').val(), // 管理汇率
+            "creditRate":$('#creditRate').val(), // 信保赔付率
+            "transportFlag":$('#transportFlag').val(), // 是否可转运
+            "partialShipmentFalg":$('#partialShipmentFalg').val() // 是否可分批出运
+
+        }
+        //            "internalSupplyName":$('#internalSupplyName').val()
 //            "currtype":$('#currtype').val(),
-            "nusdexchgrate":$('#nusdexchgrate').val(),
-            "nexchangerate":$('#nexchangerate').val(),
-            "premiumRate":$('#premiumRate').val(),
-//            "linkPhone1":$('#linkPhone1').val(),
-//            "lemail":$('#lemail').val(),
-            "discountRate":$('#discountRate').val(),
-            "lossRate":$('#lossRate').val(),
-            "interestRate":$('#interestRate').val(),
-            "saleRate":$('#saleRate').val(),
-            "managementRate":$('#managementRate').val(),
-            "guaranteeRate":$('#guaranteeRate').val(),
-            "creditRate":$('#creditRate').val(),
-            "transportFlag":$('#transportFlag').val(),
-            "partialShipmentFalg":$('#partialShipmentFalg').val(),
 //            "enterpriseNature":getenterpriseNature(),
 //            "registeredFunds":$('#registeredFunds').val(),
 //            "zhongxinbaoNumber":$('#zhongxinbaoNumber').val(),
-            "collectionAgreement":$('#inc').val(),
-            "tradeTerm":$('#incoterm').data('val'),
-            "internalSupplyName":$('#internalSupplyName').val()
-        }
-        console.log(businessOrder)
+//            "linkPhone1":$('#linkPhone1').val(),
+//            "lemail":$('#lemail').val(),
+//            "incoterm":$('#incoterm').val(),
+//            "customerName":$('#customerName').val(),
+//        console.log(businessOrder)
         return JSON.stringify(businessOrder);
     }
 
@@ -734,6 +750,12 @@
         $('#saleOrganizationName').data('val',treeNode.id);
         $('#saleOrganizationName').val(treeNode.name);
         $('#cbtModal').modal('hide');
+
+        // 清空部门和业务员
+        $('#departmentName').val('');
+        $('#departmentName').data('val','');
+        $('#salesManName').val('');
+        $('#salesManName').data('val','');
     }
 
     /**
@@ -776,6 +798,10 @@
         $('#departmentName').data('val',treeNode.id);
         $('#departmentName').val(treeNode.name);
         $('#cbtModal').modal('hide');
+
+        // 清空业务员
+        $('#salesManName').val('');
+        $('#salesManName').data('val','');
     }
 //    var IncomeData = null;
 //    selectArchive($('#income'),$('#incomeS'),'/dataArchives/getIncome',IncomeData);//收款协议

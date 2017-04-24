@@ -10,7 +10,7 @@
 
 <div class="dashboard-wrapper">
     <div class="row">
-        <div class="tab-content col-xs-11">
+        <div class="tab-content col-xs-12 view-HD-lg">
             <!--基本信息-->
             <div id="Baseinfo" class="tab-pane fade in active">
                     <div class="panel panel-default">
@@ -33,17 +33,17 @@
                         <div class="panel-body clearfix">
                             <div class="form-horizontal">
                                 <div class="form-group ">
-                                    <label class="col-xs-1 control-label" lang="zh">商机名称<sup data-view="viewEdit" class="not-null">*</sup></label>
+                                    <label class="col-xs-1 control-label" lang="zh">商机名称</label>
                                     <div class="col-xs-2">
-                                        <input class="form-control notnull" type="text" value="" id="businessName" disabled />
+                                        <input class="form-control" type="text" value="" id="businessName" disabled />
                                     </div>
                                     <label class="col-xs-1 control-label" lang="zh">商机编号</label>
                                     <div class="col-xs-2">
                                         <input class="form-control" type="text" id="businessId" value="${businessId}" disabled />
                                     </div>
-                                    <label class="col-xs-1 control-label" lang="zh">商机来源<sup data-view="viewEdit" class="not-null">*</sup></label>
+                                    <label class="col-xs-1 control-label" lang="zh">商机来源</label>
                                     <div class="col-xs-2">
-                                        <select class="form-control notnull" id="businessFrom" disabled>
+                                        <select class="form-control" id="businessFrom" disabled>
                                             <option value="0" selected lang="zh">展会</option>
                                             <option value="1" lang="zh">门户网站</option>
                                             <option value="2" lang="zh">农药店考察</option>
@@ -55,13 +55,13 @@
 
                                 </div>
                                 <div class="form-group ">
-                                    <label class="col-xs-1 control-label" lang="zh">客户名称<sup data-view="viewEdit" class="not-null">*</sup></label>
+                                    <label class="col-xs-1 control-label" lang="zh">客户名称</label>
                                     <div class="col-xs-2">
-                                        <input class="form-control notnull" type="text" value="" id="customerName" disabled />
+                                        <input class="form-control" type="text" value="" id="customerName" disabled />
                                     </div>
                                     <label class="col-xs-1 control-label" lang="zh">客户类型</label>
                                     <div class="col-xs-2">
-                                        <input class="form-control notnull" type="text" value="" id="customerLevelText" disabled />
+                                        <input class="form-control" type="text" value="" id="customerLevelText" disabled />
                                         <select class="form-control hidden" id="customerLevel" disabled>
                                             <option value="5" lang="zh">风险客户</option>
                                             <option value="4" lang="zh">一般客户</option>
@@ -72,7 +72,7 @@
                                     </div>
                                     <label class="col-xs-1 control-label" lang="zh">信用评级</label>
                                     <div class="col-xs-2">
-                                        <input class="form-control notnull " type="text" value="" id="zhongxinbaoLevelText" disabled />
+                                        <input class="form-control " type="text" value="" id="zhongxinbaoLevelText" disabled />
                                         <select class="form-control hidden" id="zhongxinbaoLevel" disabled>
                                             <option value="4" lang="zh">AAAA</option>
                                             <option value="3" lang="zh">AAA</option>
@@ -109,7 +109,7 @@
                                     <div class="col-xs-2">
                                         <input  data-control="off" class="form-control" type="text" value="" id="estimatedPurchase0" disabled />
                                     </div>
-                                    <label class="col-xs-1 control-label">企业性质<sup class="not-null">*</sup></label>
+                                    <label class="col-xs-1 control-label">企业性质</label>
                                     <div class="col-xs-5">
                                         <label class="checkbox-inline">
                                             <input type="checkbox" name="check" class="suitableType cell_edit" value="1" data-text="工厂" disabled> 工厂
@@ -358,14 +358,14 @@
         $(document).on('click.up','#save',function(){
             var notnull = $('.notnull');
             var submit_permit = true;
-            notnull.each(function () {
-                var val = $(this).val();
-                if(val == ''||val == null){
-                    alert('请完善表单必填项');
-                    submit_permit = false;
-                    return false;
-                }
-            });
+//            notnull.each(function () {
+//                var val = $(this).val();
+//                if(val == ''||val == null){
+//                    alert('请完善表单必填项');
+//                    submit_permit = false;
+//                    return false;
+//                }
+//            });
             if(submit_permit){
                 upData(basePath+'/businessInfo/updateBusinessInfoById','POST',updateBusinessInfo(),"application/json");
                 jQuery.ajax({
