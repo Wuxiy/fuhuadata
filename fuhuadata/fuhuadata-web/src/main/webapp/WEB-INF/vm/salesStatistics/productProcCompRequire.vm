@@ -619,7 +619,7 @@
 
             $('[data-target="#packModal"]').attr('disabled',false);
             $('.isdisabled').attr('disabled',false);
-        }else if(editId != 2&&editId != 2&&id == ''){
+        }else if(editId != 1&&editId != 2&&id == ''){
             $('#before').removeClass('hidden');
             $('#next').removeClass('hidden');
 
@@ -946,7 +946,7 @@
         //上一步，四个id参数
         $('#before').click(function(){
             var productRequireId = $('#productRequireId');
-            window.location.href = basePath + '/businessProduct/intoProductBasicInfoRequire?businessProductId=' + businessProductId + '&&orderId=' + orderId + '&&customerId' + customerId + '&&productRequireId' + productRequireId;
+            window.location.href = basePath + '/businessProduct/intoProductBasicInfoRequire?businessProductId=' + businessProductId + '&&orderId=' + orderId + '&&customerId' + customerId + '&&productRequireId' + productRequireId + '&&edit=' + editId;
         })
 
         //新增下一步，生成productRequireId，
@@ -973,7 +973,7 @@
                     if(success == true){
                         var productRequireId = result.productRequireId;
                         $('#productRequireId').val(productRequireId);
-                        window.location.href = basePath + '/businessProduct/intoDocumentary?businessProductId=' + businessProductId + '&&orderId=' + orderId + '&&customerId=' + customerId + '&&productRequireId=' + productRequireId;
+                        window.location.href = basePath + '/businessProduct/intoDocumentary?businessProductId=' + businessProductId + '&&orderId=' + orderId + '&&customerId=' + customerId + '&&productRequireId=' + productRequireId + '&&edit=' + editId;
                     }
                 }
             })

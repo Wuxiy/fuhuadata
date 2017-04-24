@@ -7,8 +7,8 @@ package com.fuhuadata.vo;
  */
 
 public class CustomerProductPackagingArchives {
-    private String customerProductId;//客户商品id
 
+    private String customerProductId;//客户商品id
     private Integer businessProductId;//订单产品id
     private Integer businessRequireId;//产品要求id
     private String orderId;//订单id

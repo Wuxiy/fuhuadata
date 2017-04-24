@@ -289,7 +289,7 @@
                                         <option value="1">是</option>
                                     </select>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">内部供货单位<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                #*<label class="col-xs-1 control-label" lang="zh">内部供货单位<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
                                         <input id="internalSupplyName" name="internalSupplyName" data-toggle="dropdown" class="form-control dropdown-toggle" disabled type="text" placeholder="点击搜索按钮选择" autocomplete="off"/>
@@ -297,7 +297,7 @@
                                             <button id="interSearch" class="btn btn-xs btn-default" data-control="on" disabled type="button"><span class="glyphicon glyphicon-search"></span></button>
                                         </div>
                                     </div>
-                                </div>
+                                </div>*#
                             </div>
                             <div class="form-group ">
                                 <label class="col-xs-1 control-label">企业性质</label>
@@ -609,8 +609,8 @@
             "creditRate":$('#creditRate').val(), // 信保赔付率
             "transportFlag":$('#transportFlag').val(), // 是否可转运
             "partialShipmentFalg":$('#partialShipmentFalg').val(), // 是否可分批出运
-            "internalSupplyId":$('#internalSupplyName').data('val'),
-            "internalSupplyName":$('#internalSupplyName').val()
+            /*"internalSupplyId":$('#internalSupplyName').data('val'),
+            "internalSupplyName":$('#internalSupplyName').val()*/
 
         }
         //            "internalSupplyName":$('#internalSupplyName').val()

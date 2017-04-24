@@ -1,9 +1,6 @@
 package com.fuhuadata.web.springmvc;
 
-import com.fuhuadata.dao.BusinessOrderDao;
 import com.fuhuadata.domain.BusinessOrder;
-import com.fuhuadata.domain.BusinessOrderProduct;
-import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
@@ -152,7 +149,7 @@ public class BusinessOrderAction {
         Result<List<Incoterm>> rincoterm = dataArchivesService.getIncoterm();
         //币种
         Result<List<Currtype>> rcurrtype = dataArchivesService.getCurrtype();
-        return new ModelAndView("salesStatistics/offerAdd").addObject("orderId",orderId).addObject("businessId",businessId).addObject("businessInfo",result.getModel())
+        return new ModelAndView("salesStatistics/offerInfo").addObject("orderId",orderId).addObject("businessId",businessId).addObject("businessInfo",result.getModel())
                 .addObject("income",rincome.getModel()).addObject("incoterm",rincoterm.getModel()).addObject("currtype",rcurrtype.getModel());
     }
 
@@ -228,6 +225,7 @@ public class BusinessOrderAction {
         }catch(Exception e){
             result.setSuccess(false);
         }
+        result.getModel().setOrderId(businessOrder.getOrderId());
         return result.getResultPojo();
     }
 
@@ -355,8 +353,8 @@ public class BusinessOrderAction {
     @RequiresPermissions({"sale:profit:view"})
     @RequestMapping("/intoHistoryOrder")
     @SystemLogAnnotation(module = "salesStatistics",methods = "intoHistoryOrder")
-    public ModelAndView intoHistoryOrder(){
-        return new ModelAndView("salesStatistics/historyOrder");
+    public ModelAndView intoHistoryOrder(String salesManId){
+        return new ModelAndView("salesStatistics/historyOrder").addObject("salesManId",salesManId);
     }
 
 

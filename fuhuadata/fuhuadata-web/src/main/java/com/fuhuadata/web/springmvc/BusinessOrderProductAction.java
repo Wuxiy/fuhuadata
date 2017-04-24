@@ -1,6 +1,7 @@
 package com.fuhuadata.web.springmvc;
 
 import com.fuhuadata.domain.*;
+import com.fuhuadata.domain.query.FreightCostQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.*;
@@ -42,7 +43,8 @@ public class BusinessOrderProductAction {
     private PackingArchivesService packingArchivesService;
     @Autowired
     private ProductWareService productWareService;
-
+    @Autowired
+    private FreightCostService freightCostService;
     /**
      * 进入添加订单产品基本信息页面
      * @param orderId
@@ -50,10 +52,13 @@ public class BusinessOrderProductAction {
      */
     @RequestMapping("/intoProductBasicInfoRequire")
     public ModelAndView intoProductBasicInfoRequire(String orderId,Integer businessProductId,Integer customerId,Integer edit){
+
+        FreightCostQuery freightCostQuery = new FreightCostQuery();
         return new ModelAndView("salesStatistics/productBasicInfoRequire")
                 .addObject("orderId",orderId)
                 .addObject("customerId",customerId)
                 .addObject("edit",edit==null?0:edit)
+                .addObject("freightCosts",freightCostService.getFreightCostsByPage(freightCostQuery).getModel())
                 .addObject("businessProductId",businessProductId);
     }
 
