@@ -156,6 +156,7 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept, Integer> implements D
         MixNodeVO nodeVO = new MixNodeVO(NodeType.DEPT.key);
 
         nodeVO.setCid(dept.getPkDept());
+        nodeVO.setCode(dept.getCode());
         nodeVO.setCname(dept.getName());
         nodeVO.setPid(dept.getParentId());
         nodeVO.setNcId(dept.getPkDept());

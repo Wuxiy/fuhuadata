@@ -15,6 +15,7 @@ public class BaseTreeVo<ID extends Serializable> implements Serializable {
 
     private ID cid;// 当前节点id
     private ID pid;// 父节点id
+    private String code;// nc code
     private String cname;// 当前节点名称
     private boolean isParent;// 是否是父节点
     private boolean root;// 是否是根节点
@@ -88,5 +89,13 @@ public class BaseTreeVo<ID extends Serializable> implements Serializable {
 
     public void setRoot(boolean root) {
         this.root = root;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

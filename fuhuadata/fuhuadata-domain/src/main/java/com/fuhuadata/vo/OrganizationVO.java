@@ -4,7 +4,7 @@ package com.fuhuadata.vo;
  * <p>User: wangjie
  * <p>Date: 4/11/2017
  */
-public class OrganizationVO extends BaseTreeVo<Integer> {
+public class OrganizationVO extends BaseTreeVo<String> {
 
     private String ncId;
 

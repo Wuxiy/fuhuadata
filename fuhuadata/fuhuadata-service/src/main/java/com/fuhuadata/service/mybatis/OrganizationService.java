@@ -10,7 +10,7 @@ import java.util.List;
  * <p>User: wangjie
  * <p>Date: 4/11/2017
  */
-public interface OrganizationService extends BaseTreeableService<Organization, Integer> {
+public interface OrganizationService extends BaseService<Organization, Integer> {
 
     /**
      * 获取组织树

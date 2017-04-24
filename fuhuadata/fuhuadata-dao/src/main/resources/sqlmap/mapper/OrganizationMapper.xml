@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fuhuadata.dao.mapper.OrganizationMapper">
-  <resultMap id="BaseResultMap" type="com.fuhuadata.domain.mybatis.Organization">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="org_id" jdbcType="INTEGER" property="orgId" />
-    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="nc_id" jdbcType="VARCHAR" property="ncId" />
-    <result column="is_sale_role" jdbcType="TINYINT" property="isSaleRole" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-  </resultMap>
+    <resultMap id="BaseResultMap" type="com.fuhuadata.domain.mybatis.Organization">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="org_id" jdbcType="INTEGER" property="orgId"/>
+        <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="nc_id" jdbcType="VARCHAR" property="ncId"/>
+        <result column="is_sale_role" jdbcType="TINYINT" property="isSaleRole"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
 </mapper>
