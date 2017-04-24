@@ -191,6 +191,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
         MixNodeVO node = new MixNodeVO(NodeType.USER.key);
 
         node.setCid(String.valueOf(user.getId()));
+        node.setCode(user.getCode());
         node.setCname(user.getName());
         node.setIsParent(false);
         node.setNcId(user.getCode());

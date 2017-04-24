@@ -132,7 +132,9 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept, Integer> implements D
         List<MixNodeVO> nodes = Lists.transform(depts, new Function<Dept, MixNodeVO>() {
             @Override
             public MixNodeVO apply(Dept input) {
-                return convertToNode(input);
+                MixNodeVO node = convertToNode(input);
+                node.setIsParent(false);
+                return node;
             }
         });
 
