@@ -12,7 +12,7 @@
             p.code pkFatherarea
         FROM
             t_areacl c,t_areacl p
-        where c.code &lt; '91' and c.code &gt; '9'
+        where ((c.code &lt; '91' and c.code &gt; '9') or c.name='其他')
         and c.pk_fatherarea = p.pk_areacl
         <isNotEmpty prepend="and" property="value">
             pk_fatherarea = #value#

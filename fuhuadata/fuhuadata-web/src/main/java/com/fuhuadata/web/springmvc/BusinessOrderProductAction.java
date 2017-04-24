@@ -52,13 +52,13 @@ public class BusinessOrderProductAction {
      */
     @RequestMapping("/intoProductBasicInfoRequire")
     public ModelAndView intoProductBasicInfoRequire(String orderId,Integer businessProductId,Integer customerId,Integer edit){
-
         FreightCostQuery freightCostQuery = new FreightCostQuery();
+        List<FreightCost> list = freightCostService.getFreightCostsByPage(freightCostQuery).getModel();
         return new ModelAndView("salesStatistics/productBasicInfoRequire")
                 .addObject("orderId",orderId)
                 .addObject("customerId",customerId)
                 .addObject("edit",edit==null?0:edit)
-                .addObject("freightCosts",freightCostService.getFreightCostsByPage(freightCostQuery).getModel())
+                .addObject("freightCosts",list)
                 .addObject("businessProductId",businessProductId);
     }
 
