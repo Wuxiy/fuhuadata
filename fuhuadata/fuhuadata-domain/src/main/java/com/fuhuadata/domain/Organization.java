@@ -13,15 +13,27 @@ public class Organization implements Serializable {
         
         private Integer orgId;
     
-        private Integer parentId;
+        private String parentId;//父级ncid
     
         private String name;
     
         private String ncId;
+
+        private String code;
+
+        private String pcode;//父级code
     
         private Integer isSaleRole;
     
         private String createTime;
+
+        public String getCode() {
+            return code;
+        }
+
+        public void setCode(String code) {
+            this.code = code;
+        }
 
     public Integer getOrgId() {
         return orgId;
@@ -29,10 +41,10 @@ public class Organization implements Serializable {
     public void setOrgId(Integer orgId) {
         this.orgId = orgId;
     }
-    public Integer getParentId() {
+    public String getParentId() {
         return parentId;
     }
-    public void setParentId(Integer parentId) {
+    public void setParentId(String parentId) {
         this.parentId = parentId;
     }
     public String getName() {

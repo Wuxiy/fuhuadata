@@ -841,6 +841,7 @@
                 fileF  = $('#fileForm')[0], // 转化为DOM对象
                 monBtn = thisThumbnail.find('[data-btn="modification"]'),
                 data   = new FormData(fileF);
+                data.append("classifyPath","oederRequire");
 
             console.log(data);
             CRM.ajaxCall({
@@ -852,7 +853,7 @@
                 processData: false,
                 contentType: false,
                 callback    :  function (data) {
-                    img.attr('src',"../"+basePath+data);
+                    img.attr('src',(basePath==""?("/"+basePath):basePath)+data);
                     fileF.reset(); // 重置file的值
                     monBtn.removeClass('hidden'); // 显示修改按钮
                 }

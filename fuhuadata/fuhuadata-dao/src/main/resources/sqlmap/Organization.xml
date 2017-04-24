@@ -9,39 +9,43 @@
     <sql id="QUERY-COMMON">
         <dynamic prepend=" WHERE ">
             <isNotEmpty prepend=" AND " property="orgId">
-                org_id = #orgId#
+                c.org_id = #orgId#
             </isNotEmpty>
             <isNotEmpty prepend=" AND " property="parentId">
-                parent_id =  #parentId#
+                c.parent_id =  #parentId#
             </isNotEmpty>
             <isNotEmpty prepend=" AND " property="name">
-                name =  #name#
+                c.name =  #name#
             </isNotEmpty>
             <isNotEmpty prepend=" AND " property="ncId">
-                nc_id =  #ncId#
+                c.nc_id =  #ncId#
             </isNotEmpty>
             <isNotEmpty prepend=" AND " property="isSaleRole">
-                is_sale_role =  #isSaleRole#
+                c.is_sale_role =  #isSaleRole#
             </isNotEmpty>
             <isNotEmpty prepend=" AND " property="likeName">
-                name like   '%$likeName$%'
+                c.name like   '%$likeName$%'
             </isNotEmpty>
+
         </dynamic>
     </sql>
 
     <select id="getOrganizationListByQuery" parameterClass="QueryOrganization" resultClass="Organization">
         select
-                org_id orgId,
-                parent_id parentId,
-                name,
-                nc_id ncId,
-                is_sale_role isSaleRole,
-                create_time createTime
+                c.org_id orgId,
+                c.parent_id parentId,
+                c.name,
+                c.nc_id ncId,
+                c.code,
+                p.code pcode,
+                c.is_sale_role isSaleRole,
+                c.create_time createTime
         from
-                p_organization
+                p_organization c,p_organization p
         <isParameterPresent>
             <include refid="QUERY-COMMON"/>
         </isParameterPresent>
+        1=1 and c.parent_id = p.nc_id
     </select>
 
 

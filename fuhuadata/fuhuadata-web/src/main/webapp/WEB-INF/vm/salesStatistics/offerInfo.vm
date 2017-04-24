@@ -296,7 +296,7 @@
                     </div>
                 </div>
         </div>
-        <div data-view="editHide" class="tab-content col-xs-12 view-HD-lg">
+        <div id="producttable" data-view="editHide" class="tab-content col-xs-12 view-HD-lg">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="btn-group btn-group-xs panel-heading-btn pull-right">
@@ -485,6 +485,7 @@
                 $('#tradeTerm').val(businessOrder.tradeTerm);
                 $('#tradeCountry').val(businessOrder.tradeCountry);
                 $('#internalSupplyName').val(businessOrder.internalSupplyName);*/
+
 
                 businessproduct.innerHTML = '';
                 if(result.data.businessOrderProductLists!=undefined){
