@@ -531,6 +531,7 @@
 		base.customer_status customerStatus,
 		base.lastmodify_user_name lastmodifyUserName,
 		base.remark,
+		base.enterprise_email,
 		base.loss_reason lossReason,
 		base.opportunity_describle opportunityDescrible,
 		base.create_user_name createUserName,

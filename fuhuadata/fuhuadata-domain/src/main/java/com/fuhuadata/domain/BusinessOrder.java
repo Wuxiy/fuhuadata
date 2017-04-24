@@ -564,4 +564,12 @@ public class BusinessOrder implements Serializable{
     public void setModifyTime(String modifyTime) {
         this.modifyTime = modifyTime;
     }
+
+    public String getTradeCountryName() {
+        return tradeCountryName;
+    }
+
+    public void setTradeCountryName(String tradeCountryName) {
+        this.tradeCountryName = tradeCountryName;
+    }
 }
