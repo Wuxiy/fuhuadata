@@ -46,7 +46,7 @@
                         <!--搜索&筛选控件-->
                         <div class="form-horizontal">
                             <div class="form-group">
-                                <div class="col-xs-10 pull-right">
+                                <div class="col-xs-12">
                                     <!--搜索栏-->
                                     <form class="input-group">
                                         <span class="input-group-addon" lang="zh">客户名称</span>
@@ -487,7 +487,7 @@
             areaId:areaId,
             orderId:$('#orderId').val(),
             customerName:$('#customerName').val(),
-            orderStatus:$('#businessState').val(),
+            status:$('#orderStatus').val(),
             customerLevel:$('#customerLevel').val(),
             enterpriseNature:$('#enterpriseNature').val()
         }
