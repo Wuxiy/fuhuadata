@@ -355,7 +355,7 @@
     }else {
         $('#before').removeClass('hidden');
         $('#next').removeClass('hidden');
-        $('[data-target="on"]').removeClass('disabled');
+        $('[data-control="on"]').attr('disabled',false);
 
     }
 
