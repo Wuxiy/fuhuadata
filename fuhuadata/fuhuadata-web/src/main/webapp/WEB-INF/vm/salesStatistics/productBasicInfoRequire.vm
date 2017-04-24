@@ -401,6 +401,24 @@
         $('.isdisabled').attr('disabled',false);
     }
 
+    //点击选择内部供货单位
+    $('#interSearch').on('click.renderTree',function () {
+        $('#cbtTree').html('');
+        if (orgTreeData==null) {
+            $.ajax({
+                url:basePath+'/customerBaseInfoOrder/initSaleOrganizationTree',
+                type:'GET'
+            }).done(function (result) {
+                orgTreeData = result.data;
+                renderinterTree(orgTreeData);
+            })
+        }else {
+            renderTree(orgTreeData);
+        }
+        $('#cbtModal').modal('show');
+    });
+
+
     //渲染树和提交
     $(document).ready(function () {
         //渲染树

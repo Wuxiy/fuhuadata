@@ -315,17 +315,6 @@
                                     <option value="1">是</option>
                                 </select>
                             </div>
-                            <label class="col-xs-1 control-label" lang="zh">状态</label>
-                            <div class="col-xs-2">
-                                <select class="form-control" id="status" disabled>
-                                    <option value="-2">报价失败</option>
-                                    <option value="-1">订单取消</option>
-                                    <option value="0" selected>报价中</option>
-                                    <option value="1">已转化成订单</option>
-                                    <option value="2">数据已上报到NC</option>
-                                    <option value="3">已签约</option>
-                                </select>
-                            </div>
 ##                            <label class="col-xs-1 control-label" lang="zh">内部供货单位<sup class="not-null">*</sup></label>
 ##                            <div class="col-xs-2">
 ##                                <input class="form-control" type="email" id="internalSupplyName" value="" />
@@ -553,8 +542,8 @@
             "creditRate":$('#creditRate').val(), // 信保赔付率
             "transportFlag":$('#transportFlag').val(), // 是否可转运
             "partialShipmentFalg":$('#partialShipmentFalg').val(), // 是否可分批出运
-            "internalSupplyId":$('#internalSupplyName').data('val'),
-            "internalSupplyName":$('#internalSupplyName').val(),
+            /*"internalSupplyId":$('#internalSupplyName').data('val'),
+            "internalSupplyName":$('#internalSupplyName').val(),*/
 //            "customerId":$('#customerId').val(),
 //            "orderId":$('#orderId').val(),
 //            "businessId":$('#businessId').val(),
