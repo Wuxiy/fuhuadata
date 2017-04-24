@@ -34,7 +34,7 @@ public class OrganizationServiceImpl implements OrganizationService {
             if(p_ct==null){
                 continue;
             }
-            CategoryTree ct = map.get(o.getOrgId()+"");
+            CategoryTree ct = map.get(o.getNcId());
             p_ct.addChildNode(ct);
         }
 
@@ -62,8 +62,8 @@ public class OrganizationServiceImpl implements OrganizationService {
             CategoryTree ct = new CategoryTree();
             ct.setCname(o.getName());
             ct.setPid(o.getParentId()+"");
-            ct.setCid(o.getOrgId()+"");
-            map.put(o.getOrgId()+"",ct);
+            ct.setCid(o.getNcId()+"");
+            map.put(o.getNcId()+"",ct);
         }
         return map;
     }
