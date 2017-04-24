@@ -290,8 +290,8 @@ CRM.cbInfo.renderForm = function(data){
     if (data.enterpriseNature) { page.enterpriseNature.val(data.enterpriseNature.split(','));} // checkbox
     if (data.enterprisePhone) { page.enterprisePhone.val(data.enterprisePhone);}
     if (data.fullName) { page.fullName.val(data.fullName);}
-    if (data.hasChiCompany) { page.hasChiCompany.val(data.hasChiCompany);}
-    if (data.hasChiPurchase) { page.hasChiPurchase.val(data.hasChiPurchase);}
+    if (data.hasChiCompany!=null && data.hasChiCompany!=undefined) { page.hasChiCompany.val(data.hasChiCompany);}
+    if (data.hasChiPurchase!=null && data.hasChiPurchase!=undefined) { page.hasChiPurchase.val(data.hasChiPurchase);}
     if (data.lastmodifyUserId) { page.lastmodifyUserId.val(data.lastmodifyUserId);}
     if (data.majorCompetitors) { page.majorCompetitors.val(data.majorCompetitors);}
     if (data.modifyTime) { page.modifyTime.val(data.modifyTime);} // time
