@@ -215,9 +215,9 @@
                                         <td><label class="control-label" lang="zh">出口退税方式</label></td>
                                         <td>
                                             <select data-control="on" id="taxType" class="form-control isdisabled" disabled>
-                                                <option value="0">按销售价退税</option>
-                                                <option value="1">按采购价退税</option>
-                                                <option value="2">不退税</option>
+                                                <option value="1">按销售价退税</option>
+                                                <option value="2">按采购价退税</option>
+                                                <option value="3">不退税</option>
                                             </select>
                                         </td>
                                         <td>
@@ -428,10 +428,10 @@
                         for(var i=0;i<components.length;i++){
                             costtable.innerHTML += '<tr>'+
                                     '<td data-id="'+components[i].componentId+'">'+ifEmpty(components[i].componentName)+'</td>'+
-                                    '<td><input class="form-control notnull" type="text" value="'+ifEmpty(components[i].consumption)+'" data-target="on" disabled></td>'+
-                                    '<td><input class="form-control notnull" type="text" value="'+ifEmpty(components[i].price)+'" data-target="on" disabled></td>'+
-                                    '<td>'+ifEmpty(components[i].cost)+'</td>'+
-                                    '<td><input class="form-control" type="text" value="'+ifEmpty(components[i].remarks)+'" data-target="on" disabled></td>'+
+                                    '<td><input data-control="on" name="consumption" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].consumption)+'" disabled></td>'+
+                                    '<td><input data-control="on" name="price" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].price)+'" disabled></td>'+
+                                    '<td><input name="cost" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].cost)+'" disabled></td>'+
+                                    '<td><input name="remarks" data-control="on" class="form-control text-center" type="text" value="'+ifEmpty(components[i].remarks)+'" disabled></td>'+
                                     '</tr>';
                         }
                     }
@@ -456,233 +456,6 @@
         if(editId == 2){
             $('#back').removeClass('hidden');
         }
-
-        /*if(editId == 1&&businessProductId != ''){
-            $('#edit').removeClass('hidden');
-            $('#back').removeClass('hidden');
-
-            jQuery.ajax({
-                url:basePath + '/businessProduct/detailBaseInfo?businessProductId=' + businessProductId,
-                type:'POST',
-                success:function(result){
-                    var basicInfo = result.basicInfo;
-                    var components = result.components;
-
-                    $('#name').val(basicInfo.name);
-                    $('#name').attr('data-productId',basicInfo.productId);
-                    $('#name').attr('data-wareId',basicInfo.wareId);
-                    $('#customsClearanceName').val(basicInfo.customsClearanceName);
-                    $('#customerProductName').val(basicInfo.customerProductName);
-                    $('#specification').val(basicInfo.specification);
-                    $('#model').val(basicInfo.model);
-                    $('#brand').val(basicInfo.brand);
-                    $('#mainProductUnit').val(basicInfo.mainProductUnit);
-                    $('#mainProductAmount').val(basicInfo.mainProductAmount);
-                    $('#subProductUnit').val(basicInfo.subProductUnit);
-                    $('#subProductAmount').val(basicInfo.subProductAmount);
-                    $('#convertRate').val(basicInfo.convertRate);
-                    $('#priceType').val(basicInfo.priceType);
-                    $('#advisePrice').val(basicInfo.advisePrice);
-                    $('#purchasePrice').val(basicInfo.purchasePrice);
-                    $('#deliveryTime').val(basicInfo.deliveryTime);
-                    $('#factoryName').val(basicInfo.factoryName);
-                    $('#grossMargin').val(basicInfo.grossMargin);
-                    $('#commissionPrice').val(basicInfo.commissionPrice);
-                    $('#unitUseRate').val(basicInfo.unitUseRate);
-                    $('#taxType').val(basicInfo.taxType);
-                    $('#taxFree').val(basicInfo.taxFree);
-                    $('#otherCost').val(basicInfo.otherCost);
-                    $('#capitalInterestPrice').val(basicInfo.capitalInterestPrice)
-
-                    switch(basicInfo.priceType){
-                        case 0:
-                            $('#purchasePrice').attr('disabled',true);
-                            break;
-                        case 1:
-                            $('#purchasePrice').attr('disabled',true);
-                            break;
-                        case 2:
-                            $('#advisePrice').attr('disabled',true);
-                            break;
-                        case 3:
-                            $('#advisePrice').attr('disabled',true);
-                            break;
-                        case 4:
-                            $('#purchasePrice').attr('disabled',true);
-                            $('#advisePrice').attr('disabled',true);
-                            break;
-                    }
-
-                    if(components.length != 0){
-                        $('#cost').removeClass('hidden');
-                        costtable.innerHTML = '';
-                        for(var i=0;i<components.length;i++){
-                            costtable.innerHTML += '<tr>'+
-                                    '<td data-id="'+components[i].componentId+'">'+components[i].componentName+'</td>'+
-                                    '<td><input class="form-control notnull" type="text" value="'+components[i].consumption+'" data-target="on" disabled></td>'+
-                                    '<td><input class="form-control notnull" type="text" value="'+components[i].price+'" data-target="on" disabled></td>'+
-                                    '<td>'+components[i].cost+'</td>'+
-                                    '<td><input class="form-control" type="text" value="'+ifEmpty(components[i].remarks)+'" data-target="on" disabled></td>'+
-                                    '</tr>';
-                        }
-                    }
-                }
-            })
-        }
-        else if(editId == 0){
-            if(businessProductId != ''){
-                $('#resert').removeClass('hidden');
-                $('#next').removeClass('hidden');
-
-                $('#edit').removeClass('hidden');
-                $('#back').removeClass('hidden');
-
-                jQuery.ajax({
-                    url:basePath + '/businessProduct/detailBaseInfo?businessProductId=' + businessProductId,
-                    type:'POST',
-                    success:function(result){
-                        var basicInfo = result.basicInfo;
-                        var components = result.components;
-
-                        $('#name').val(basicInfo.name);
-                        $('#name').attr('data-productId',basicInfo.productId);
-                        $('#name').attr('data-wareId',basicInfo.wareId);
-                        $('#customsClearanceName').val(basicInfo.customsClearanceName);
-                        $('#customerProductName').val(basicInfo.customerProductName);
-                        $('#specification').val(basicInfo.specification);
-                        $('#model').val(basicInfo.model);
-                        $('#brand').val(basicInfo.brand);
-                        $('#mainProductUnit').val(basicInfo.mainProductUnit);
-                        $('#mainProductAmount').val(basicInfo.mainProductAmount);
-                        $('#subProductUnit').val(basicInfo.subProductUnit);
-                        $('#subProductAmount').val(basicInfo.subProductAmount);
-                        $('#convertRate').val(basicInfo.convertRate);
-                        $('#priceType').val(basicInfo.priceType);
-                        $('#advisePrice').val(basicInfo.advisePrice);
-                        $('#purchasePrice').val(basicInfo.purchasePrice);
-                        $('#deliveryTime').val(basicInfo.deliveryTime);
-                        $('#factoryName').val(basicInfo.factoryName);
-                        $('#grossMargin').val(basicInfo.grossMargin);
-                        $('#commissionPrice').val(basicInfo.commissionPrice);
-                        $('#unitUseRate').val(basicInfo.unitUseRate);
-                        $('#taxType').val(basicInfo.taxType);
-                        $('#taxFree').val(basicInfo.taxFree);
-                        $('#otherCost').val(basicInfo.otherCost);
-                        $('#capitalInterestPrice').val(basicInfo.capitalInterestPrice)
-
-                        switch(basicInfo.priceType){
-                            case 0:
-                                $('#purchasePrice').attr('disabled',true);
-                                break;
-                            case 1:
-                                $('#purchasePrice').attr('disabled',true);
-                                break;
-                            case 2:
-                                $('#advisePrice').attr('disabled',true);
-                                break;
-                            case 3:
-                                $('#advisePrice').attr('disabled',true);
-                                break;
-                            case 4:
-                                $('#purchasePrice').attr('disabled',true);
-                                $('#advisePrice').attr('disabled',true);
-                                break;
-                        }
-
-                        if(components.length != 0){
-                            $('#cost').removeClass('hidden');
-                            costtable.innerHTML = '';
-                            for(var i=0;i<components.length;i++){
-                                costtable.innerHTML += '<tr>'+
-                                        '<td data-id="'+components[i].componentId+'">'+components[i].componentName+'</td>'+
-                                        '<td><input class="form-control notnull" type="text" value="'+components[i].consumption+'" data-target="on" disabled></td>'+
-                                        '<td><input class="form-control notnull" type="text" value="'+components[i].price+'" data-target="on" disabled></td>'+
-                                        '<td>'+components[i].cost+'</td>'+
-                                        '<td><input class="form-control" type="text" value="'+ifEmpty(components[i].remarks)+'" data-target="on" disabled></td>'+
-                                        '</tr>';
-                            }
-                        }
-                    }
-                })
-            }
-            if(businessProductId == ''){
-                $('#resert').removeClass('hidden');
-                $('#next').removeClass('hidden');
-
-                $('button[name="search"]').attr('disabled',false);
-                $('[data-target="on"]').removeClass('disabled');
-                $('.isdisabled').attr('disabled',false);
-            }
-
-        }else if(editId == 2&&businessProductId != ''){
-            jQuery.ajax({
-                url:basePath + '/businessProduct/detailBaseInfo?businessProductId=' + businessProductId,
-                type:'POST',
-                success:function(result){
-                    var basicInfo = result.basicInfo;
-                    var components = result.components;
-
-                    $('#name').val(basicInfo.name);
-                    $('#name').attr('data-productId',basicInfo.productId);
-                    $('#name').attr('data-wareId',basicInfo.wareId);
-                    $('#customsClearanceName').val(basicInfo.customsClearanceName);
-                    $('#customerProductName').val(basicInfo.customerProductName);
-                    $('#specification').val(basicInfo.specification);
-                    $('#model').val(basicInfo.model);
-                    $('#brand').val(basicInfo.brand);
-                    $('#mainProductUnit').val(basicInfo.mainProductUnit);
-                    $('#mainProductAmount').val(basicInfo.mainProductAmount);
-                    $('#subProductUnit').val(basicInfo.subProductUnit);
-                    $('#subProductAmount').val(basicInfo.subProductAmount);
-                    $('#convertRate').val(basicInfo.convertRate);
-                    $('#priceType').val(basicInfo.priceType);
-                    $('#advisePrice').val(basicInfo.advisePrice);
-                    $('#purchasePrice').val(basicInfo.purchasePrice);
-                    $('#deliveryTime').val(basicInfo.deliveryTime);
-                    $('#factoryName').val(basicInfo.factoryName);
-                    $('#grossMargin').val(basicInfo.grossMargin);
-                    $('#commissionPrice').val(basicInfo.commissionPrice);
-                    $('#unitUseRate').val(basicInfo.unitUseRate);
-                    $('#taxType').val(basicInfo.taxType);
-                    $('#taxFree').val(basicInfo.taxFree);
-                    $('#otherCost').val(basicInfo.otherCost);
-                    $('#capitalInterestPrice').val(basicInfo.capitalInterestPrice)
-
-                    switch(basicInfo.priceType){
-                        case 0:
-                            $('#purchasePrice').attr('disabled',true);
-                            break;
-                        case 1:
-                            $('#purchasePrice').attr('disabled',true);
-                            break;
-                        case 2:
-                            $('#advisePrice').attr('disabled',true);
-                            break;
-                        case 3:
-                            $('#advisePrice').attr('disabled',true);
-                            break;
-                        case 4:
-                            $('#purchasePrice').attr('disabled',true);
-                            $('#advisePrice').attr('disabled',true);
-                            break;
-                    }
-
-                    if(components.length != 0){
-                        $('#cost').removeClass('hidden');
-                        costtable.innerHTML = '';
-                        for(var i=0;i<components.length;i++){
-                            costtable.innerHTML += '<tr>'+
-                                    '<td data-id="'+components[i].componentId+'">'+components[i].componentName+'</td>'+
-                                    '<td><input class="form-control notnull" type="text" value="'+components[i].consumption+'" data-target="on" disabled></td>'+
-                                    '<td><input class="form-control notnull" type="text" value="'+components[i].price+'" data-target="on" disabled></td>'+
-                                    '<td>'+components[i].cost+'</td>'+
-                                    '<td><input class="form-control" type="text" value="'+ifEmpty(components[i].remarks)+'" data-target="on" disabled></td>'+
-                                    '</tr>';
-                        }
-                    }
-                }
-            })
-        }*/
 
         //渲染树
         $('#tree').creatTree(basePath+'/businessProduct/initProductCatetroy');
@@ -810,6 +583,18 @@
         })
     })
 
+    $(document).on('click','#edit',function(){
+        $('input[name="consumption"]').attr('disabled',false);
+        $('input[name="price"]').attr('disabled',false);
+        $('input[name="remarks"]').attr('disabled',false);
+    })
+
+    $(document).on('click','#cancel',function(){
+        $('input[name="consumption"]').attr('disabled',true);
+        $('input[name="price"]').attr('disabled',true);
+        $('input[name="remarks"]').attr('disabled',true);
+    })
+
     $(document).on('click','a.fNode',function (e) {
         e.preventDefault();
         console.log(e.target);
@@ -881,10 +666,10 @@
                             for(var i=0;i<components.length;i++){
                                 costtable.innerHTML += '<tr>'+
                                         '<td data-id="'+components[i].componentId+'">'+ifEmpty(components[i].componentName)+'</td>'+
-                                        '<td><input class="form-control notnull" type="text" value="'+ifEmpty(components[i].consumption)+'"></td>'+
-                                        '<td><input class="form-control notnull" type="text" value="'+ifEmpty(components[i].price)+'"></td>'+
-                                        '<td>'+ifEmpty(components[i].cost)+'</td>'+
-                                        '<td><input class="form-control" type="text" value="'+ifEmpty(components[i].remarks)+'"></td>'+
+                                        '<td><input data-control="on" name="consumption" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].consumption)+'" disabled></td>'+
+                                        '<td><input data-control="on" name="price" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].price)+'" disabled></td>'+
+                                        '<td><input name="cost" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].cost)+'"  disabled></td>'+
+                                        '<td><input name="remarks" data-control="on" class="form-control text-center" type="text" value="'+ifEmpty(components[i].remarks)+'" disabled></td>'+
                                         '</tr>';
                             }
                         }
@@ -910,10 +695,10 @@
                                 for(var i=0;i<components.length;i++){
                                     costtable.innerHTML += '<tr>'+
                                             '<td data-id="'+components[i].componentId+'">'+ifEmpty(components[i].componentName)+'</td>'+
-                                            '<td><input class="form-control notnull" type="text" value="'+ifEmpty(components[i].consumption)+'"></td>'+
-                                            '<td><input class="form-control notnull" type="text" value="'+ifEmpty(components[i].price)+'"></td>'+
-                                            '<td>'+ifEmpty(components[i].cost)+'</td>'+
-                                            '<td><input class="form-control" type="text" value="'+ifEmpty(components[i].remarks)+'"></td>'+
+                                            '<td><input data-control="on" name="consumption" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].consumption)+'" disabled></td>'+
+                                            '<td><input data-control="on" name="price" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].price)+'" disabled></td>'+
+                                            '<td><input name="cost" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].cost)+'" disabled></td>'+
+                                            '<td><input name="remarks" data-control="on" class="form-control text-center" type="text" value="'+ifEmpty(components[i].remarks)+'" disabled></td>'+
                                             '</tr>';
                                 }
                             }
@@ -1086,6 +871,22 @@
                 alert("修改成功!");
             }
         })
+    })
+
+    //费用计算
+    $(document).on('change','input[name="consumption"]',function(){
+        var consumption = $(this).val();
+        var price = $(this).parents('tr').find('td').find('[name=price]').val();
+        var cost = consumption*price;
+
+        $(this).parents('tr').find('td').find('[name=cost]').val(cost);
+    })
+    $(document).on('change','input[name="price"]',function(){
+        var price = $(this).val();
+        var consumption = $(this).parents('tr').find('td').find('[name=consumption]').val();
+        var cost = consumption*price;
+
+        $(this).parents('tr').find('td').find('[name=cost]').val(cost);
     })
 
     //返回function

@@ -11,14 +11,14 @@
                 <div id="productRequire" class="panel panel-default view-HD-lg">
                     <div class="panel-heading">
                         <div class="btn-group panel-heading-btn pull-right">
-                            <a class="btn btn-xs btn-default hidden" data-view="editHide" onclick="back()" id="addback">返回</a>
+                            <a class="btn btn-xs btn-default hidden" id="addback">返回</a>
                             <button id="addedit" data-btn="edit" class="btn btn-xs btn-primary panel-heading-btn pull-right hidden" type="button" lang="zh">
                                 完成
                             </button>
 
                         </div>
                         <div class="btn-group panel-heading-btn pull-right">
-                            <a class="btn btn-xs btn-default hidden" data-view="editHide" onclick="back()" id="back">返回</a>
+                            <a class="btn btn-xs btn-default hidden" data-view="editHide" id="back">返回</a>
                             <button id="edit" data-btn="edit" data-view="editHide" class="btn btn-xs btn-primary panel-heading-btn pull-right hidden" type="button" lang="zh">
                                 编辑
                             </button>
@@ -453,7 +453,17 @@
                 type:'POST',
                 success:function(result){
                     var productRequire = result.productRequire;
+
+                    var auxiliaryMaterialIds = "";
+                    var outerPackingId = "";
+                    if(productRequire.outerPackingId!=undefined){
+                         outerPackingId = productRequire.outerPackingId;
+                    }
+                    if(productRequire.auxiliaryMaterialIds){
+                         auxiliaryMaterialIds = productRequire.auxiliaryMaterialIds;
+                    }
                     if(productRequire.mainPackingType!=undefined){
+                        $('#mainPackingType').attr('data-id',productRequire.mainPackingId);
                         $('#mainPackingType').val(productRequire.mainPackingType);
                     }
                     if(productRequire.material!=undefined){
@@ -582,30 +592,39 @@
                     if(outerData.length!=0){
                         for(var i=0;i<outerData.length;i++){
                             _html += '<tr class="outerlist">';
-                            _html += '<td class="text-center"><input type="checkbox" value="'+outerData[i].packingId+'" class="outercheckbox" name="outercheckbox"/></td>';
-                            _html += '<td class="text-center">'+outerData[i].packName+'</td>';
-                            _html += '<td class="text-center">'+outerData[i].spec+'</td>';
-                            _html += '<td class="text-center">'+outerData[i].size+'</td>';
-                            _html += '<td class="text-center">'+outerData[i].quality+'</td>';
-                            _html += '<td class="text-center">'+outerData[i].consumption+'</td>';
-                            _html += '<td class="text-center">'+outerData[i].unitPrice+'</td>';
+                            if(outerData[i].packingId == outerPackingId){
+                                _html += '<td class="text-center"><input type="checkbox" value="'+ifEmpty(outerData[i].packingId)+'" class="outercheckbox" name="outercheckbox" checked/></td>';
+                            }else{
+                                _html += '<td class="text-center"><input type="checkbox" value="'+ifEmpty(outerData[i].packingId)+'" class="outercheckbox" name="outercheckbox"/></td>';
+                            }
+                            _html += '<td class="text-center">'+ifEmpty(outerData[i].packName)+'</td>';
+                            _html += '<td class="text-center">'+ifEmpty(outerData[i].spec)+'</td>';
+                            _html += '<td class="text-center">'+ifEmpty(outerData[i].size)+'</td>';
+                            _html += '<td class="text-center">'+ifEmpty(outerData[i].quality)+'</td>';
+                            _html += '<td class="text-center">'+ifEmpty(outerData[i].consumption)+'</td>';
+                            _html += '<td class="text-center">'+ifEmpty(outerData[i].unitPrice)+'</td>';
                             _html += '</tr>';
                         }
                         $('#befond').before(_html);
                     }
 
+                    var auxiliary_html;
                     if(auxiliaryData.length!=0){
                         for(var j=0;j<auxiliaryData.length;j++){
-                            auxiliary.innerHTML += '<tr class="">'+
-                                    '<td><input type="checkbox" value="'+auxiliaryData[j].packingId+'" class="auxiliarycheckbox" name="auxiliarycheckbox"/></td>'+
-                                    '<td>'+auxiliaryData[j].packName+'</td>' +
-                                    '<td>'+auxiliaryData[j].spec+'</td>'+
-                                    '<td>'+auxiliaryData[j].size+'</td>'+
-                                    '<td>'+auxiliaryData[j].quality+'</td>'+
-                                    '<td>'+auxiliaryData[j].consumption+'</td>'+
-                                    '<td>'+auxiliaryData[j].unitPrice+'</td>'+
-                                    '</tr>';
+                            if((','+auxiliaryMaterialIds+",").indexOf(auxiliaryData[j].packingId)>-1){
+                                auxiliary_html += '<tr class=""><td><input type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox" name="auxiliarycheckbox" checked/></td>';
+                            }else {
+                                auxiliary_html += '<tr class=""><td><input type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox" name="auxiliarycheckbox"/></td>';
+                            }
+                            auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].packName)+'</td>';
+                            auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].spec)+'</td>';
+                            auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].size)+'</td>';
+                            auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].quality)+'</td>';
+                            auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].consumption)+'</td>';
+                            auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].unitPrice)+'</td></tr>';
+
                         }
+                        $('#auxiliary').append(auxiliary_html);
                     }
 
                 }
@@ -1473,7 +1492,7 @@
 
     //获取外包材ID
     function getouterPackingId() {
-        var outerPackingId = $('input[class="active"]:checked').val();
+        var outerPackingId = $('.active').val();
         console.log(outerPackingId);
         return outerPackingId;
     }

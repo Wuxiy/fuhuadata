@@ -717,7 +717,7 @@
                         console.log(result);
                         if(result == true){
                             alert('添加成功！');
-                            window.location.href = basePath + '/businessProduct/intoPackageRequire?businessProductId=' + id + '&orderId=' + orderId + '&customerId=' + customerId + '&productRequireId=' + productRequireId + '&edit=' + editId;
+                           /* window.location.href = basePath + '/businessProduct/intoPackageRequire?businessProductId=' + id + '&orderId=' + orderId + '&customerId=' + customerId + '&productRequireId=' + productRequireId + '&edit=' + editId;*/
                         }else{
                             alert('添加失败！');
                         }

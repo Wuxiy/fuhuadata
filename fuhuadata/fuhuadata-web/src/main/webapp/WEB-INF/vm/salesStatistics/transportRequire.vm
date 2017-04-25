@@ -689,6 +689,20 @@
         return businessOrderProduct;
     }
 
+    //互斥
+    $(document).on('click','input[name="inspectionOfLoading"]',function(){
+        $('input[name="inspectionOfLoading"]').removeAttr('checked');
+        $(this).prop('checked',true);
+    })
+    $('input[name="inspectionOfLoading"]').change(function(){
+        if($(this).attr('checked')){
+            $('#inspectionInstitution').attr('disabled',false);
+        }else{
+            $('#inspectionInstitution').attr('disabled',true);
+            $('#inspectionInstitution').attr('value','');
+        }
+    })
+
     function getinspectionOfLoading() {
         var inspectionOfLoading;
         if($('input[name="inspectionOfLoading"]:checked').length==0){
