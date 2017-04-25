@@ -31,7 +31,7 @@ public class FileController {
     private static final Log log = LogFactory.getLog(FileController.class);
     private static final String  upoadURI = "images";
     private static final String  DEFAULT_CLASSIFY = "default";
-    private static final String LINUX_BASE = "/usr/local/tomcat8.0/apache-tomcat-8.0.39/webapps";
+    private static final String LINUX_BASE = "/usr/local/tomcat8.0/apache-tomcat-8.0.39/webapps/fuhuadata-web";
     @RequestMapping(value = "into",method = RequestMethod.GET)
     public ModelAndView upload(){
         return new ModelAndView("knowledgeBase/uploadFile");
