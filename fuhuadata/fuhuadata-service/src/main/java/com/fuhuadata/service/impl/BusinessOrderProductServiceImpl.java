@@ -52,23 +52,29 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
             int businessProductId = businessOrderProductDao.insertBaseInfo(businessOrderProduct);
             for(BusinessOrderProductComponent bopc:businessOrderProductComponents){
                 bopc.setBusinessProductId(businessProductId);
+                bopc.setWareId(businessOrderProduct.getWareId());
+                bopc.setProductId(businessOrderProduct.getProductId());
             }
-            boolean flag = businessOrderProductComponentDao.insertProductComponent(businessOrderProductComponents);
-            if(!flag){
-               throw new Exception("插入产品成品失败");
+            if(businessOrderProductComponents.size()>0){
+                boolean flag = businessOrderProductComponentDao.insertProductComponent(businessOrderProductComponents);
+                if(!flag){
+                    throw new Exception("插入产品成品失败");
+                }
             }
             //维护档案数据
             int businessProductArchivesId = customerProductArchivesDao.addArchives(businessProductId);
             if(businessProductArchivesId<1){
                 throw new Exception("插入档案失败");
             }
-            Map<String,Object> pmap = new HashMap<String,Object>();
-            pmap.put("businessProductId",businessProductId);
-            pmap.put("businessProductArchivesId",businessProductArchivesId);
-            if(businessOrderProductComponentDao.addArchives(pmap)<1){
-                throw new Exception("插入档案失败");
+            if(businessOrderProductComponents.size()>0){
+                Map<String,Object> pmap = new HashMap<String,Object>();
+                pmap.put("businessProductId",businessProductId);
+                pmap.put("businessProductArchivesId",businessProductArchivesId);
+                if(businessOrderProductComponentDao.addArchives(pmap)<1){
+                    throw new Exception("插入档案失败");
+                }
             }
-            System.out.print("+++++++++++++++++++++++service返回新增businessProductId："+businessProductId+"+++++++++++++++++++++++++++++++");
+            System.out.println("+++++++++++++++++++++++service返回新增businessProductId："+businessProductId+"+++++++++++++++++++++++++++++++");
             return businessProductId;
         } catch (Exception e) {
             e.printStackTrace();

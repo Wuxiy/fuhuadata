@@ -160,7 +160,7 @@ public class BusinessOrderProductAction {
             }else{
                 //新增
                 businessProductId = businessOrderProductService.addBusinessOrderProduct(businessOrderProduct,list);
-                System.out.print("+++++++++++++++++++++++action接收新增businessProductId："+businessProductId+"+++++++++++++++++++++++++++++++");
+                System.out.println("+++++++++++++++++++++++action接收新增businessProductId："+businessProductId+"+++++++++++++++++++++++++++++++");
             }
             BusinessProductRequire businessProductRequire =  businessProductRequireService.getOneByQuery(null,businessProductId);
             if(businessProductRequire!=null){
@@ -295,7 +295,7 @@ public class BusinessOrderProductAction {
 
     /**
      * 进入单据要求页面
-     * @param businessProductId
+     * @param
      * @return
      */
     @RequestMapping("intoDocumentary")
