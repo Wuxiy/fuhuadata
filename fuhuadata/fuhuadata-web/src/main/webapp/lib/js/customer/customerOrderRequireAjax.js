@@ -86,26 +86,26 @@ function reconstructionTraData(data) {
             if (item.mianxiangqi) {obj.mianxiangqi=item.mianxiangqi}
             if (item.miantuiqi) {obj.miantuiqi=item.miantuiqi}
 
-            if (item.packingRequire) {
+            if (item.packageRequire) {
 
-                var d = JSON.parse(item.packingRequire);
+                var d = JSON.parse(item.packageRequire);
 
-                if (d.tray) {obj.tray=d.tray}
-                if (d.postLabel) {obj.postLabel=d.postLabel}
+                if (d.tray) {obj.tray=d.tray} //
+                if (d.postLabel) {obj.postLabel=d.postLabel} //
                 if (d.basePlate) {obj.basePlate=d.basePlate}
-                if (d.paperBoard) {obj.paperBoard=d.paperBoard}
-                if (d.gasbag) {obj.gasbag=d.gasbag}
+                if (d.paperBoard) {obj.paperBoard=d.paperBoard} //
+                if (d.gasbag) {obj.gasbag=d.gasbag} //
 
-                if (d.dragNet) {obj.dragNet=d.dragNet}
-                if (d.fastenBelt) {obj.fastenBelt=d.fastenBelt}
-                if (d.barcCode) {obj.barcCode=d.barcCode}
-                if (d.americanDoorseal) {obj.americanDoorseal=d.americanDoorseal}
-                if (d.bead) {obj.bead=d.bead}
+                if (d.dragNet) {obj.dragNet=d.dragNet} //
+                if (d.fastenBelt) {obj.fastenBelt=d.fastenBelt} //
+                if (d.barcCode) {obj.barcCode=d.barcCode} //
+                if (d.americanDoorseal) {obj.americanDoorseal=d.americanDoorseal} //
+                if (d.bead) {obj.bead=d.bead} //
 
-                if (d.cornerProtection) {obj.cornerProtection=d.cornerProtection}
-                if (d.inspectionOfLoading) {obj.inspectionOfLoading=d.inspectionOfLoading}
-                if (d.inspectionInstitution) {obj.inspectionInstitution=d.inspectionInstitution}
-                if (d.wireFixed) {obj.wireFixed=d.wireFixed}
+                if (d.cornerProtection) {obj.cornerProtection=d.cornerProtection} //
+                if (d.inspectionOfLoading) {obj.inspectionOfLoading=d.inspectionOfLoading} //
+                if (d.inspectionInstitution) {obj.inspectionInstitution=d.inspectionInstitution} //
+                if (d.wireFixed) {obj.wireFixed=d.wireFixed} //
             }
 
             arr.push(obj);
