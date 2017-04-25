@@ -161,7 +161,9 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
             //更新加工费
             businessOrderProduct.setProcessCost(businessOrderProductDao.calculateProcessCost(businessOrderProduct.getId()));
         }
-        if(businessOrderProductDao.getBaiscById(businessOrderProduct.getId()).getMainPackingId()!=null){
+        BusinessProductRequire businessProductRequire = new BusinessProductRequire();
+        businessProductRequire.setBusinessProductId(businessOrderProduct.getId());
+        if(businessProductRequireDao.getOneByQuery(businessProductRequire)!=null){
             //更新最低价
             businessOrderProduct.setMinPrice(calculateMinPrice(businessOrderProduct.getId()));
         }
