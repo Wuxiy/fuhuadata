@@ -1387,6 +1387,7 @@
     //新增获取数据function Add
     function Add() {
         var data = {
+            'businessProductId':$('#businessProductId').val(),
             'mainPackingId':$('#mainPackingType').attr('data-id'),
             'mainPackingType':$('#mainPackingType').val(),
             'material':$('#material').val(),
