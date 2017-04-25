@@ -159,8 +159,13 @@
     %>
     <tr>
         <td><%=count%></td>
+        <%if(data.info[i].status==0){%>
         <td><a href="${request.contextPath}/businessOrder/intoOfferorOrder?orderId=<%=data.info[i].orderId%>"><%=data.info[i].orderId%></a></td>
-        <td><a href="${request.contextPath}/businessOrder/intoBusinessOpportunityInfo?orderId=<%=data.info[i].businessId%>"><%=data.info[i].businessId%></a></td>
+        <%}else{%>
+        <td><a href="${request.contextPath}/businessOrder/intoOrder?orderId=<%=data.info[i].orderId%>"><%=data.info[i].orderId%></a></td>
+        <%}%>
+        <td><a href="${request.contextPath}/businessInfo/intoBusinessOpportunityInfo?businessId=<%=data.info[i].businessId%>"><%=data.info[i].businessId%></a></td>
+##        <td><a href="${request.contextPath}/businessOrder/intoOfferorOrder?orderId=<%=data.info[i].businessId%>"><%=data.info[i].businessId%></a></td>
         <td><%=(data.info[i].customerName!=undefined?data.info[i].customerName:'')%></td>
         <td lang="zh"><%=(data.info[i].customerLevel!=undefined?customerLevelList[data.info[i].customerLevel - 1]:'')%></td>
         <td lang="zh"><%=(data.info[i].enterpriseNature!=undefined?data.info[i].enterpriseNature:'')%></td>

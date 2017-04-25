@@ -6,7 +6,7 @@
 </div>
 <div class="dashboard-wrapper">
     <div class="row">
-        <div class="tab-content col-xs-12">
+        <div class="col-xs-12 view-HD-lg">
             <!--基本信息-->
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -15,242 +15,270 @@
                     </h3>
                 </div>
                 <div class="panel-body clearfix">
-                    <div class="form-horizontal">
-                        <div class="form-group ">
-                            <label class="col-xs-1 control-label" lang="zh">订单编号</label>
-                            <div class="col-xs-2">
-                                <input class="form-control" type="text" id="orderId" value="$!{orderId}" disabled />
-                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">商机编号</label>
-                            <div class="col-xs-2">
-                                <input class="form-control" type="text" id="businessId" value="" disabled />
-                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">客户名称</label>
-                            <div class="col-xs-2">
-                                <input class="form-control" type="text" id="customerName" value="" disabled />
-                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">客户税号</label>
-                            <div class="col-xs-2">
-                                <input class="form-control" type="text" id="customerDutyParagraph" value="" disabled />
-                            </div>
+                <div class="form-horizontal">
+                    <div class="form-group ">
+                        <label class="col-xs-1 control-label" lang="zh">订单编号</label>
+                        <div class="col-xs-2">
+                            <input class="form-control" type="text" id="orderId" value="$!{orderId}" disabled />
                         </div>
-                        <div class="form-group">
-                            <label class="col-xs-1 control-label" lang="zh">中信保编码</label>
-                            <div class="col-xs-2">
-                                <input class="form-control" type="text" id="zhongxinbaoNumber" value="" disabled />
-                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">注册资金</label>
-                            <div class="col-xs-2">
-                                <input class="form-control" type="text" id="registeredFunds" value="" disabled />
-                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">企业电话</label>
-                            <div class="col-xs-2">
-                                <input class="form-control" type="text" id="linkPhone1" value="" disabled />
-                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">企业邮箱</label>
-                            <div class="col-xs-2">
-                                <input class="form-control" type="text" id="lemail" value="" disabled />
-                            </div>
+                        <label class="col-xs-1 control-label" lang="zh">商机编号</label>
+                        <div class="col-xs-2">
+                            <input class="form-control" type="text" id="businessId" value="$!{businessId}" disabled />
                         </div>
-                        <div class="form-group ">
-                            <label class="col-xs-1 control-label" lang="zh">企业性质</label>
-                            <div class="col-xs-2">
-                                <select class="form-control" id="enterpriseNature">
-                                    <option value="" selected lang="zh">全部</option>
-                                    <option value="1" lang="zh">工厂</option>
-                                    <option value="2" lang="zh">分销商</option>
-                                    <option value="3" lang="zh">经销商</option>
-                                    <option value="4" lang="zh">终端客户</option>
-                                    <option value="5" lang="zh">其他</option>
-                                </select>
-                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">收票客户</label>
-                            <div class="col-xs-2">
-                                <input class="form-control" type="text" id="billToCustomer" value="" disabled />
-                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">业务员</label>
-                            <div class="col-xs-2">
-                                <input class="form-control" type="text" id="salesManName" value="" disabled />
-                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">部门</label>
-                            <div class="col-xs-2">
-                                <select class="form-control" id="departmentName" disabled>
-
-                                </select>
-                            </div>
+                        <label class="col-xs-1 control-label" lang="zh">客户名称</label>
+                        <div class="col-xs-2">
+                            <input class="form-control" type="text" id="fullName" value="" disabled />
                         </div>
-                        <div class="form-group">
-                            <label class="col-xs-1 control-label" lang="zh">销售组织</label>
-                            <div class="col-xs-2">
-                                <select class="form-control" id="saleOrganizationName" disabled>
-
-                                </select>
-                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">目的港<sup class="not-null">*</sup></label>
-                            <div class="col-xs-2">
-                                <select class="form-control" id="destinationPort" disabled>
-
-                                </select>
-                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">起运港<sup class="not-null">*</sup></label>
-                            <div class="col-xs-2">
-                                <select class="form-control" id="shipmentPort" disabled>
-
-                                </select>
-                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">收款协议<sup class="not-null">*</sup></label>
-                            <div class="col-xs-2">
-                                <select class="form-control" id="collectionAgreement" disabled>
-
-                                </select>
-                            </div>
+                        <label class="col-xs-1 control-label" lang="zh">客户税号</label>
+                        <div class="col-xs-2">
+                            <input class="form-control" data-control="on" type="text" id="customerDutyParagraph" value="" disabled />
                         </div>
-                        <div class="form-group">
-                            <label class="col-xs-1 control-label" lang="zh">贸易方式<sup class="not-null">*</sup></label>
-                            <div class="col-xs-2">
-                                <select class="form-control" id="tradeType">
-                                    <option value="0">一般贸易</option>
-                                    <option value="1">其他</option>
-                                </select>
-                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">贸易术语<sup class="not-null">*</sup></label>
-                            <div class="col-xs-2">
-                                <select class="form-control" id="tradeTerm" disabled>
-
-                                </select>
-                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">币易国别<sup class="not-null">*</sup></label>
-                            <div class="col-xs-2">
-                                <select class="form-control" id="tradeCountry" disabled>
-
-                                </select>
-                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">是否使用信用险</label>
-                            <div class="col-xs-2">
-                                <select class="form-control" id="isCreditRisk" disabled>
-                                    <option value="0">否</option>
-                                    <option value="1">是</option>
-                                </select>
-                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-1 control-label" lang="zh">中信保编码</label>
+                        <div class="col-xs-2">
+                            <input class="form-control" type="text" id="zhongxinbaoNumber" value="" disabled />
                         </div>
-                        <div class="form-group">
-                            <label class="col-xs-1 control-label" lang="zh">币种<sup class="not-null">*</sup></label>
-                            <div class="col-xs-2">
-                                <select class="form-control" id="currency" disabled>
-                                    <option value="0">RMB</option>
-                                    <option value="1">美元</option>
-                                    <option value="2">欧元</option>
-                                </select>
-                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">原币对美元汇率<sup class="not-null">*</sup></label>
-                            <div class="col-xs-2">
-                                <input class="form-control" type="text" id="nusdexchgrate" value="" disabled />
-                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">原币对本元汇率<sup class="not-null">*</sup></label>
-                            <div class="col-xs-2">
-                                <input class="form-control" type="text" id="nexchangerate" value="" disabled />
-                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">保险费率（%）<sup class="not-null">*</sup></label>
-                            <div class="col-xs-2">
-                                <input class="form-control" type="text" id="premiumRate" value="" disabled />
-                            </div>
+                        <label class="col-xs-1 control-label" lang="zh">注册资金</label>
+                        <div class="col-xs-2">
+                            <input class="form-control" type="text" id="registeredFunds" value="" disabled />
                         </div>
-                        <div class="form-group">
-                            <label class="col-xs-1 control-label" lang="zh">资金利率（%）<sup class="not-null">*</sup></label>
-                            <div class="col-xs-2">
-                                <input class="form-control" type="text" id="discountRate" value="" disabled />
-                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">汇损费率（%）<sup class="not-null">*</sup></label>
-                            <div class="col-xs-2">
-                                <input class="form-control" type="text" id="lossRate" value="" disabled />
-                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">计息比例（%）<sup class="not-null">*</sup></label>
-                            <div class="col-xs-2">
-                                <input class="form-control" type="text" id="interestRate" value="" disabled />
-                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">信保赔付率（%）<sup class="not-null">*</sup></label>
-                            <div class="col-xs-2">
-                                <input class="form-control" type="text" id="creditRate" value="" disabled />
-                            </div>
+                        <label class="col-xs-1 control-label" lang="zh">企业电话</label>
+                        <div class="col-xs-2">
+                            <input class="form-control" type="text" id="enterprisePhone" value="" disabled />
                         </div>
-                        <div class="form-group">
-                            <label class="col-xs-1 control-label" lang="zh">销售费率（%）<sup class="not-null">*</sup></label>
-                            <div class="col-xs-2">
-                                <input class="form-control" type="text" id="saleRate" value="" disabled />
-                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">管理汇率（%）<sup class="not-null">*</sup></label>
-                            <div class="col-xs-2">
-                                <input class="form-control" type="text" id="managementRate" value="" disabled />
-                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">信保费率（%）<sup class="not-null">*</sup></label>
-                            <div class="col-xs-2">
-                                <input class="form-control" type="text" id="guaranteeRate" value="" disabled />
-                            </div>
+                        <label class="col-xs-1 control-label" lang="zh">企业邮箱</label>
+                        <div class="col-xs-2">
+                            <input class="form-control" type="text" id="enterpriseEmail" value="" disabled />
                         </div>
-                        <div class="form-group">
-                            <label class="col-xs-1 control-label" lang="zh">是否可转运</label>
-                            <div class="col-xs-2">
-                                <select class="form-control" id="transportFlag" disabled>
-                                    <option value="0">否</option>
-                                    <option value="1">是</option>
-                                </select>
-                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">是否可分批出运</label>
-                            <div class="col-xs-2">
-                                <select class="form-control" id="partialShipmentFalg" disabled>
-                                    <option value="0">否</option>
-                                    <option value="1">是</option>
-                                </select>
-                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">内部供货单位<sup class="not-null">*</sup></label>
-                            <div class="col-xs-2">
-                                <input class="form-control" type="email" id="" value="" disabled />
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-xs-1 control-label" lang="zh">收票客户</label>
+                        <div class="col-xs-2">
+                            <input class="form-control" type="text" id="billToCustomer" value="" data-control="on" disabled />
+                        </div>
+                        <label for="saleOrganizationName" class="control-label col-xs-1" lang="zh">销售组织<sup data-view="editView" class="not-null hidden">*</sup></label>
+                        <div class="col-xs-2">
+                            <input id="saleOrganizationName" name="saleOrganizationName" data-toggle="dropdown" class="form-control dropdown-toggle" disabled type="text"/>
+                        </div>
+                        <label class="col-xs-1 control-label" lang="zh">部门<sup data-view="editView" class="not-null hidden">*</sup></label>
+                        <div class="col-xs-2">
+                            <input id="departmentName" name="departmentName" data-toggle="dropdown" class="form-control dropdown-toggle" disabled type="text"/>
+                        </div>
+                        <label for="salesManName" class="col-xs-1 control-label" lang="zh">业务员<sup data-view="editView" class="not-null hidden">*</sup></label>
+                        <div class="col-xs-2">
+                            <input id="salesManName" name="salesManName" class="form-control" disabled type="text" autocomplete="off"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-1 control-label" lang="zh">目的港<sup data-view="editView" class="not-null hidden">*</sup></label>
+                        <div class="col-xs-2">
+                            <input id="destinationPort" name="destinationPort" class="form-control" disabled type="text" autocomplete="off"/>
+                        </div>
+                        <label class="col-xs-1 control-label" lang="zh">起运港<sup data-view="editView" class="not-null hidden">*</sup></label>
+                        <div class="col-xs-2">
+                            <input id="shipmentPort" name="shipmentPort" class="form-control" disabled type="text" autocomplete="off"/>
+                        </div>
+                        <label class="col-xs-1 control-label" lang="zh">收款协议<sup data-view="editView" class="not-null hidden">*</sup></label>
+                        <div class="col-xs-2">
+                            <select class="form-control" data-control="on" disabled id="income">
+                                <option value="">——请选择——</option>
+                                #foreach($!info in $!{income})
+                                    <option value="$!info.code">$!info.name</option>
+                                #end
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-1 control-label" lang="zh">贸易方式<sup data-view="editView" class="not-null hidden">*</sup></label>
+                        <div class="col-xs-2">
+                            <select class="form-control" id="tradeType" data-control="on" disabled>
+                                <option value="0">一般贸易</option>
+                                <option value="1">其他</option>
+                            </select>
+                        </div>
+                        <label class="col-xs-1 control-label" lang="zh">贸易术语<sup data-view="editView" class="not-null hidden">*</sup></label>
+                        <div class="col-xs-2">
+                            <select data-control="on" class="form-control" disabled id="incoterm" >
+                                <option value="">——请选择——</option>
+                                #foreach($!info in $!{incoterm})
+                                    <option value="$!info.code">$!info.name</option>
+                                #end
+                            </select>
+                        </div>
+                        <label class="col-xs-1 control-label" lang="zh">贸易国别<sup data-view="editView" class="not-null hidden">*</sup></label>
+                        <div class="col-xs-2">
+                            <input id="countryzone" name="countryzone" class="form-control" disabled type="text" autocomplete="off"/>
+                        </div>
+                        <label class="col-xs-1 control-label" lang="zh">是否使用信用险</label>
+                        <div class="col-xs-2">
+                            <select class="form-control" id="isCreditRisk" data-control="on" disabled>
+                                <option value="0">否</option>
+                                <option value="1">是</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-1 control-label" lang="zh">币种<sup data-view="editView" class="not-null hidden">*</sup></label>
+                        <div class="col-xs-2">
+                            <select class="form-control" data-control="on" disabled id="currency">
+                                <option value="">——请选择——</option>
+                                #foreach($!info in $!{currtype})
+                                    <option value="$!info.code">$!info.name</option>
+                                #end
+                            </select>
+                        </div>
+                        <label class="col-xs-1 control-label" lang="zh">原币对美元汇率<sup data-view="editView" class="not-null hidden">*</sup></label>
+                        <div class="col-xs-2">
+                            <input data-control="on" class="form-control" type="number" step="0.01" id="nusdexchgrate" value="" disabled/>
+                        </div>
+                        <label class="col-xs-1 control-label" lang="zh">原币对本元汇率<sup data-view="editView" class="not-null hidden">*</sup></label>
+                        <div class="col-xs-2">
+                            <input data-control="on" class="form-control" type="number" step="0.01" id="nexchangerate" value="" disabled/>
+                        </div>
+                        <label class="col-xs-1 control-label" lang="zh">保险费率<sup data-view="editView" class="not-null hidden">*</sup></label>
+                        <div class="col-xs-2">
+                            <div class="input-group">
+                                <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="premiumRate" value="" disabled/>
+                                <span class="input-group-addon">%</span>
                             </div>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="col-xs-1 control-label" lang="zh">资金利率<sup data-view="editView" class="not-null hidden">*</sup></label>
+                        <div class="col-xs-2">
+                            <div class="input-group">
+                                <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="discountRate" value="" disabled/>
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                        <label class="col-xs-1 control-label" lang="zh">汇损费率<sup data-view="editView" class="not-null hidden">*</sup></label>
+                        <div class="col-xs-2">
+                            <div class="input-group">
+                                <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="lossRate" value="" disabled/>
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                        <label class="col-xs-1 control-label" lang="zh">计息比例<sup data-view="editView" class="not-null hidden">*</sup></label>
+                        <div class="col-xs-2">
+                            <div class="input-group">
+                                <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="interestRate" value="" disabled/>
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-1 control-label" lang="zh">销售费率<sup data-view="editView" class="not-null hidden">*</sup></label>
+                        <div class="col-xs-2">
+                            <div class="input-group">
+                                <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="saleRate" value="" disabled/>
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                        <label class="col-xs-1 control-label" lang="zh">管理汇率<sup data-view="editView" class="not-null hidden">*</sup></label>
+                        <div class="col-xs-2">
+                            <div class="input-group">
+                                <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="managementRate" value="" disabled/>
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                        <label class="col-xs-1 control-label" lang="zh">信保费率<sup data-view="editView" class="not-null hidden">*</sup></label>
+                        <div class="col-xs-2">
+                            <div class="input-group">
+                                <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="guaranteeRate" value="" disabled/>
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                        <label class="col-xs-1 control-label" lang="zh">信保赔付率<sup data-view="editView" class="not-null hidden">*</sup></label>
+                        <div class="col-xs-2">
+                            <div class="input-group">
+                                <input data-control="on" class="form-control" min="0" step="0.01" type="number" id="creditRate" value="" disabled/>
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-1 control-label" lang="zh">是否可转运</label>
+                        <div class="col-xs-2">
+                            <select  class="form-control" id="transportFlag" data-control="on" disabled>
+                                <option value="0">否</option>
+                                <option value="1">是</option>
+                            </select>
+                        </div>
+                        <label class="col-xs-1 control-label" lang="zh">是否可分批出运</label>
+                        <div class="col-xs-2">
+                            <select class="form-control" id="partialShipmentFalg" data-control="on" disabled>
+                                <option value="0">否</option>
+                                <option value="1">是</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group hidden">
+                        <label class="col-xs-1 control-label">企业性质</label>
+                        <div class="col-xs-6">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="check" class="suitableType cell_edit" value="1" data-text="工厂" disabled> 工厂
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="check" class="suitableType cell_edit" value="2" data-text="经销商" disabled> 经销商
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="check" class="suitableType cell_edit" value="3" data-text="分销商" disabled> 分销商
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="check" class="suitableType cell_edit" value="4" data-text="终端客户" disabled> 终端客户
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="check" class="suitableType cell_edit" id="other" value="5" data-text="其他" disabled> 其他
+                            </label>
+                            <label class="checkbox-inline">
+                                <input class="form-control" type="text" id="otherEnterpriseNature" value="" disabled/>
+                            </label>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="tab-content col-xs-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        产品信息
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    <!--表格-->
-                    <table class="table table-condensed table-bordered table-striped text-center">
-                        <thead>
-                        <tr>
-                            <th class="text-center" lang="zh">产品序列号</th>
-                            <th class="text-center" lang="zh">品名</th>
-                            <th class="text-center" lang="zh">品类</th>
-                            <th class="text-center" lang="zh">品牌</th>
-                            <th class="text-center" lang="zh">包装规格</th>
-                            <th class="text-center" lang="zh">产品数量</th>
-                            <th class="text-center" lang="zh">整柜数量</th>
-                            <th class="text-center" lang="zh">柜型</th>
-                            <th class="text-center" lang="zh">柜数</th>
-                            <th class="text-center" lang="zh">交货时间</th>
-                            <th class="text-center" lang="zh">最低销售价（元/KG（L)）</th>
-                            <th class="text-center" lang="zh">单据要求</th>
-                            <th class="text-center" lang="zh">订舱出运要求</th>
-                            <th class="text-center" lang="zh">是否转化</th>
-                            <th class="text-center" lang="zh">合同单价（元）</th>
-                        </tr>
-                        </thead>
-                        <tbody id="businessproduct">
 
-                        </tbody>
-                    </table>
-                </div>
             </div>
         </div>
-        <div class="panel-body clearfix">
+    </div>
+        <div class="col-xs-12 view-HD-lg">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    产品信息
+                </h3>
+            </div>
+            <div class="panel-body">
+                <!--表格-->
+                <table class="table table-condensed table-bordered table-striped text-center">
+                    <thead>
+                    <tr>
+                        <th class="text-center" lang="zh">产品序列号</th>
+                        <th class="text-center" lang="zh">品名</th>
+                        <th class="text-center" lang="zh">品类</th>
+                        <th class="text-center" lang="zh">品牌</th>
+                        <th class="text-center" lang="zh">包装规格</th>
+                        <th class="text-center" lang="zh">产品数量</th>
+                        <th class="text-center" lang="zh">整柜数量</th>
+                        <th class="text-center" lang="zh">柜型</th>
+                        <th class="text-center" lang="zh">柜数</th>
+                        <th class="text-center" lang="zh">交货时间</th>
+                        <th class="text-center" lang="zh">最低销售价（元/KG（L)）</th>
+                        <th class="text-center" lang="zh">单据要求</th>
+                        <th class="text-center" lang="zh">订舱出运要求</th>
+                        <th class="text-center" lang="zh">是否转化</th>
+                        <th class="text-center" lang="zh">合同单价（元）</th>
+                    </tr>
+                    </thead>
+                    <tbody id="businessproduct"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+        <div class="col-xs-12 view-HD-lg">
             <form class="form-horizontal">
                 <div class="form-group">
-                    <div class="col-xs-2 col-xs-offset-4">
+                    <div class="col-xs-2 pull-right">
                         <a class="btn btn-block btn-primary" id="back">返回</a>
                     </div>
                 </div>
@@ -261,11 +289,15 @@
 
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
+##<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript" language="JavaScript">
     var orderId = $('#orderId').val();
     var businessProductId = $('#businessProductId').val();
     var businessproduct = document.getElementById('businessproduct');
+
+    function ifEmpty(data) {
+        return data==undefined?'':data;
+    }
 
     $(document).ready(function(){
         //请求数据
@@ -273,127 +305,212 @@
             url:basePath + '/businessOrder/getBusinessOrderByOrderId?orderId=' + orderId,
             type:'GET',
             success:function(result){
-                var businessOrder = result.data.businessOrder;
-                var customerBaseInfo = result.data.customerBaseInfo;
-                var businessOrderProductLists = result.data.businessOrderProductLists;
+//                var businessOrder = result.data.businessOrder;
+//                var customerBaseInfo = result.data.customerBaseInfo;
+//                var businessOrderProductLists = result.data.businessOrderProductLists;
 
-                if(!businessOrder.businessId){
-                    $('#businessId').val(businessOrder.businessId);
-                }
-                if(customerBaseInfo.customerName){
-                    $('#customerName').val(customerBaseInfo.customerName);
-                }
-                if(businessOrder.customerDutyParagraph){
-                    $('#customerDutyParagraph').val(businessOrder.customerDutyParagraph);
-                }
-                if(customerBaseInfo.linkPhone1){
-                    $('#linkPhone1').val(customerBaseInfo.linkPhone1);
-                }
-                if(customerBaseInfo.enterpriseNature){
-                    $('#enterpriseNature').val(customerBaseInfo.enterpriseNature);
-                }
-                if(customerBaseInfo.zhongxinbaoNumber){
-                    $('#zhongxinbaoNumber').val(customerBaseInfo.zhongxinbaoNumber);
-                }
-                if(customerBaseInfo.registeredFunds){
-                    $('#registeredFunds').val(customerBaseInfo.registeredFunds);
-                }
-                if(businessOrder.billToCustomer){
-                    $('#billToCustomer').val(businessOrder.billToCustomer);
-                }
-                if(businessOrder.salesManName){
-                    $('#salesManName').val(businessOrder.salesManName);
-                }
-                if(businessOrder.departmentName){
-                    $('#departmentName').val(businessOrder.departmentName);
-                }if(businessOrder.saleOrganizationName){
-                    $('#saleOrganizationName').val(businessOrder.saleOrganizationName);
-                }
-                if(businessOrder.destinationPort){
-                    $('#destinationPort').val(businessOrder.destinationPort);
-                }
-                if(businessOrder.shipmentPort){
-                    $('#shipmentPort').val(businessOrder.shipmentPort);
-                }
-                if(businessOrder.collectionAgreement){
-                    $('#collectionAgreement').val(businessOrder.collectionAgreement);
-                }
-                if(businessOrder.tradeType){
-                    $('#tradeType').val(businessOrder.tradeType);
-                }
-                if(businessOrder.tradeTerm){
-                    $('#tradeTerm').val(businessOrder.tradeTerm);
-                }
-                if(businessOrder.tradeCountry){
-                    $('#tradeCountry').val(businessOrder.tradeCountry);
-                }
-                if(businessOrder.currency){
-                    $('#currency').val(businessOrder.currency);
-                }
-                if(businessOrder.premiumRate){
-                    $('#premiumRate').val(businessOrder.premiumRate);
-                }
-                if(businessOrder.guaranteeRate){
-                    $('#guaranteeRate').val(businessOrder.guaranteeRate);
-                }
-                if(businessOrder.discountRate){
-                    $('#discountRate').val(businessOrder.discountRate);
-                }
-                if(businessOrder.isCreditRisk){
-                    $('#isCreditRisk').val(businessOrder.isCreditRisk);
-                }
-                if(businessOrder.lossRate){
-                    $('#lossRate').val(businessOrder.lossRate);
-                }
-                if(businessOrder.interestRate){
-                    $('#interestRate').val(businessOrder.interestRate);
-                }
-                if(businessOrder.creditRate){
-                    $('#creditRate').val(businessOrder.creditRate);
-                }
-                if(businessOrder.saleRate){
-                    $('#saleRate').val(businessOrder.saleRate);
-                }
-                if(businessOrder.managementRate){
-                    $('#managementRate').val(businessOrder.managementRate);
-                }
-                if(businessOrder.transportFlag){
-                    $('#transportFlag').val(businessOrder.transportFlag);
-                }
-                if(businessOrder.partialShipmentFalg){
-                    $('#partialShipmentFalg').val(businessOrder.partialShipmentFalg);
-                }
-                if(businessOrder.lemail){
-                    $('#lemail').val(businessOrder.lemail);
-                }
-                if(businessOrder.internalSupplyName){
-                    $('#internalSupplyName').val(businessOrder.internalSupplyName);
-                }
-                if(businessOrder.status)){
-                    $('#nusdexchgrate').val(businessOrder.status);
-                }
-                if(businessOrder.internalSupplyName){
-                    $('#internalSupplyName').val(businessOrder.internalSupplyName);
-                }
+//                if(!businessOrder.businessId){
+//                    $('#businessId').val(businessOrder.businessId);
+//                }
+//                if(customerBaseInfo.customerName){
+//                    $('#customerName').val(customerBaseInfo.customerName);
+//                }
+//                if(businessOrder.customerDutyParagraph){
+//                    $('#customerDutyParagraph').val(businessOrder.customerDutyParagraph);
+//                }
+//                if(customerBaseInfo.linkPhone1){
+//                    $('#linkPhone1').val(customerBaseInfo.linkPhone1);
+//                }
+//                if(customerBaseInfo.enterpriseNature){
+//                    $('#enterpriseNature').val(customerBaseInfo.enterpriseNature);
+//                }
+//                if(customerBaseInfo.zhongxinbaoNumber){
+//                    $('#zhongxinbaoNumber').val(customerBaseInfo.zhongxinbaoNumber);
+//                }
+//                if(customerBaseInfo.registeredFunds){
+//                    $('#registeredFunds').val(customerBaseInfo.registeredFunds);
+//                }
+//                if(businessOrder.billToCustomer){
+//                    $('#billToCustomer').val(businessOrder.billToCustomer);
+//                }
+//                if(businessOrder.salesManName){
+//                    $('#salesManName').val(businessOrder.salesManName);
+//                }
+//                if(businessOrder.departmentName){
+//                    $('#departmentName').val(businessOrder.departmentName);
+//                }if(businessOrder.saleOrganizationName){
+//                    $('#saleOrganizationName').val(businessOrder.saleOrganizationName);
+//                }
+//                if(businessOrder.destinationPort){
+//                    $('#destinationPort').val(businessOrder.destinationPort);
+//                }
+//                if(businessOrder.shipmentPort){
+//                    $('#shipmentPort').val(businessOrder.shipmentPort);
+//                }
+//                if(businessOrder.collectionAgreement){
+//                    $('#collectionAgreement').val(businessOrder.collectionAgreement);
+//                }
+//                if(businessOrder.tradeType){
+//                    $('#tradeType').val(businessOrder.tradeType);
+//                }
+//                if(businessOrder.tradeTerm){
+//                    $('#tradeTerm').val(businessOrder.tradeTerm);
+//                }
+//                if(businessOrder.tradeCountry){
+//                    $('#tradeCountry').val(businessOrder.tradeCountry);
+//                }
+//                if(businessOrder.currency){
+//                    $('#currency').val(businessOrder.currency);
+//                }
+//                if(businessOrder.premiumRate){
+//                    $('#premiumRate').val(businessOrder.premiumRate);
+//                }
+//                if(businessOrder.guaranteeRate){
+//                    $('#guaranteeRate').val(businessOrder.guaranteeRate);
+//                }
+//                if(businessOrder.discountRate){
+//                    $('#discountRate').val(businessOrder.discountRate);
+//                }
+//                if(businessOrder.isCreditRisk){
+//                    $('#isCreditRisk').val(businessOrder.isCreditRisk);
+//                }
+//                if(businessOrder.lossRate){
+//                    $('#lossRate').val(businessOrder.lossRate);
+//                }
+//                if(businessOrder.interestRate){
+//                    $('#interestRate').val(businessOrder.interestRate);
+//                }
+//                if(businessOrder.creditRate){
+//                    $('#creditRate').val(businessOrder.creditRate);
+//                }
+//                if(businessOrder.saleRate){
+//                    $('#saleRate').val(businessOrder.saleRate);
+//                }
+//                if(businessOrder.managementRate){
+//                    $('#managementRate').val(businessOrder.managementRate);
+//                }
+//                if(businessOrder.transportFlag){
+//                    $('#transportFlag').val(businessOrder.transportFlag);
+//                }
+//                if(businessOrder.partialShipmentFalg){
+//                    $('#partialShipmentFalg').val(businessOrder.partialShipmentFalg);
+//                }
+//                if(businessOrder.lemail){
+//                    $('#lemail').val(businessOrder.lemail);
+//                }
+//                if(businessOrder.internalSupplyName){
+//                    $('#internalSupplyName').val(businessOrder.internalSupplyName);
+//                }
+//                if(businessOrder.status)){
+//                    $('#nusdexchgrate').val(businessOrder.status);
+//                }
+//                if(businessOrder.internalSupplyName){
+//                    $('#internalSupplyName').val(businessOrder.internalSupplyName);
+//                }
 
-                businessproduct.innerHTML = '';
-                for(var i=0;i<businessOrderProductLists.length;i++){
-                    businessproduct.innerHTML += '<tr>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].productCode)+'</td>'+
-                            '<td><a href="'+basePath+'/businessProduct/intoProductBasicInfoRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'"></a>'+ifEmpty(businessOrderProductLists[i].productName)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].categoryName)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].brand)+'</td>'+
-                            '<td><a href="'+basePath+'/businessProduct/intoProductRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&productRequireId='+businessOrderProductLists[i].orderId+'"></a>'+ifEmpty(businessOrderProductLists[i].specification)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].mainProductAmount)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].cupboardPerNumber)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].cupboardType)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].cupboardNumber)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].deliveryTime)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].documentaryRequire)+'</td>'+
-                            '<td><a href="'+basePath+'/businessProduct/intoDocumentary?businessProductId='+businessOrderProductLists[i].businessProductId+'">查看</a></td>'+
-                            '<td><a href="'+basePath+'/businessProduct/intoPackageRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'">查看</a></td>'+
-                            '<td><input type="checkbox" class="form-control" name="cellcheckbox" value="'+businessOrderProductLists[i].documentaryRequire+'" /></td>'+
-                            '</tr>';
+//                businessproduct.innerHTML = '';
+//                for(var i=0;i<businessOrderProductLists.length;i++){
+//                    businessproduct.innerHTML += '<tr>'+
+//                            '<td>'+ifEmpty(businessOrderProductLists[i].productCode)+'</td>'+
+//                            '<td><a href="'+basePath+'/businessProduct/intoProductBasicInfoRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'"></a>'+ifEmpty(businessOrderProductLists[i].productName)+'</td>'+
+//                            '<td>'+ifEmpty(businessOrderProductLists[i].categoryName)+'</td>'+
+//                            '<td>'+ifEmpty(businessOrderProductLists[i].brand)+'</td>'+
+//                            '<td><a href="'+basePath+'/businessProduct/intoProductRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&productRequireId='+businessOrderProductLists[i].orderId+'"></a>'+ifEmpty(businessOrderProductLists[i].specification)+'</td>'+
+//                            '<td>'+ifEmpty(businessOrderProductLists[i].mainProductAmount)+'</td>'+
+//                            '<td>'+ifEmpty(businessOrderProductLists[i].cupboardPerNumber)+'</td>'+
+//                            '<td>'+ifEmpty(businessOrderProductLists[i].cupboardType)+'</td>'+
+//                            '<td>'+ifEmpty(businessOrderProductLists[i].cupboardNumber)+'</td>'+
+//                            '<td>'+ifEmpty(businessOrderProductLists[i].deliveryTime)+'</td>'+
+//                            '<td>'+ifEmpty(businessOrderProductLists[i].documentaryRequire)+'</td>'+
+//                            '<td><a href="'+basePath+'/businessProduct/intoDocumentary?businessProductId='+businessOrderProductLists[i].businessProductId+'">查看</a></td>'+
+//                            '<td><a href="'+basePath+'/businessProduct/intoPackageRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'">查看</a></td>'+
+//                            '<td><input type="checkbox" class="form-control" name="cellcheckbox" value="'+businessOrderProductLists[i].documentaryRequire+'" /></td>'+
+//                            '</tr>';
+//                }
+
+                if(result.data != null&&result.data != undefined){
+                    var businessOrder = result.data.businessOrder;
+                    if(businessOrder.businessId!=undefined){$('#businessId').val(businessOrder.businessId); }// 商机编号
+                    if(businessOrder.customerDutyParagraph!=undefined){$('#customerDutyParagraph').val(businessOrder.customerDutyParagraph);} // 客户税号
+                    if(businessOrder.billToCustomer!=undefined){$('#billToCustomer').val(businessOrder.billToCustomer);} // 收票客户
+                    if(businessOrder.saleOrganizationName!=undefined){$('#saleOrganizationName').val(businessOrder.saleOrganizationName);} // 销售组织name
+                    if(businessOrder.saleOrganizationId!=undefined){$('#saleOrganizationName').data('val',businessOrder.saleOrganizationId);} // 销售组织id
+                    if(businessOrder.departmentName!=undefined){$('#departmentName').val(businessOrder.departmentName); }// 部门name
+                    if(businessOrder.departmentId!=undefined){$('#departmentName').data('val',businessOrder.departmentId);} // 部门id
+                    if(businessOrder.salesManName!=undefined){$('#salesManName').val(businessOrder.salesManName);} // 业务员name
+                    if(businessOrder.salesManId!=undefined){$('#salesManName').data('val',businessOrder.salesManId);} // 业务员id
+                    if(businessOrder.destinationPortName!=undefined){$('#destinationPort').val(businessOrder.destinationPortName);} // 目的港
+                    if(businessOrder.shipmentPortName!=undefined){$('#shipmentPort').val(businessOrder.shipmentPortName); }// 起运港
+                    if(businessOrder.collectionAgreement!=undefined){$('#income').val(businessOrder.collectionAgreement);} // 收款协议
+                    if(businessOrder.tradeType!=undefined){$('#tradeType').val(businessOrder.tradeType);} // 贸易方式
+                    if(businessOrder.tradeTerm!=undefined){$('#incoterm').val(businessOrder.tradeTerm);} // 贸易术语
+                    if(businessOrder.tradeCountryName!=undefined){$('#countryzone').val(businessOrder.tradeCountryName);} // 贸易国别name
+                    if(businessOrder.tradeCountry!=undefined){$('#countryzone').data('val',businessOrder.tradeCountry);} // 贸易国别id
+                    if(businessOrder.isCreditRisk!=undefined){$('#isCreditRisk').val(businessOrder.isCreditRisk); }// 是否使用信用险
+                    if(businessOrder.currency!=undefined){$('#currency').val(businessOrder.currency); }// 币种
+                    if(businessOrder.nusdexchgrate!=undefined){$('#nusdexchgrate').val(businessOrder.nusdexchgrate);} // 原币对美元汇率
+                    if(businessOrder.nexchangerate!=undefined){$('#nexchangerate').val(businessOrder.nexchangerate);} // 原币对本元汇率
+                    if(businessOrder.premiumRate!=undefined){$('#premiumRate').val(businessOrder.premiumRate);} // 保险费率
+                    if(businessOrder.discountRate!=undefined){$('#discountRate').val(businessOrder.discountRate);} // 资金利率
+                    if(businessOrder.lossRate!=undefined){$('#lossRate').val(businessOrder.lossRate);} // 汇损费率
+                    if(businessOrder.interestRate!=undefined){$('#interestRate').val(businessOrder.interestRate);} // 计息比例
+                    if(businessOrder.saleRate!=undefined){$('#saleRate').val(businessOrder.saleRate);} // 销售费率
+                    if(businessOrder.managementRate!=undefined){$('#managementRate').val(businessOrder.managementRate);} // 管理汇率
+                    if(businessOrder.guaranteeRate!=undefined){$('#guaranteeRate').val(businessOrder.guaranteeRate);} // 信保费率
+                    if(businessOrder.creditRate!=undefined){$('#creditRate').val(businessOrder.creditRate);} // 信保赔付率
+                    if(businessOrder.transportFlag!=undefined){$('#transportFlag').val(businessOrder.transportFlag);} // 是否可转运
+                    if(businessOrder.partialShipmentFalg!=undefined){$('#partialShipmentFalg').val(businessOrder.partialShipmentFalg);} // 是否可分批出运
+
+
+                    var customerBaseInfo = result.data.customerBaseInfo;
+                    if(customerBaseInfo.customerId!=undefined){$('#customerId').val(customerBaseInfo.customerId);} // 客户id
+                    if(customerBaseInfo.fullName!=undefined){$('#fullName').val(customerBaseInfo.fullName);} // 客户名称
+                    if(customerBaseInfo.zhongxinbaoNumber!=undefined){$('#zhongxinbaoNumber').val(customerBaseInfo.zhongxinbaoNumber); }// 中信保编码
+                    if(customerBaseInfo.registeredFunds!=undefined){$('#registeredFunds').val(customerBaseInfo.registeredFunds); }// 注册资金
+                    if(customerBaseInfo.enterprisePhone!=undefined){$('#enterprisePhone').val(customerBaseInfo.enterprisePhone);} // 企业电话
+                    if(customerBaseInfo.enterpriseEmail!=undefined){$('#enterpriseEmail').val(customerBaseInfo.enterpriseEmail);}// 企业邮箱
+                    if(customerBaseInfo.enterpriseNature!=undefined){$('[name="check"]').val([customerBaseInfo.enterpriseNature]); }// 企业性质
+                    if(customerBaseInfo.otherEnterpriseNature!=undefined){$('#otherEnterpriseNature').val(customerBaseInfo.otherEnterpriseNature);} // 其他企业性质
+
+                    if(customerBaseInfo.enterpriseNature!=undefined){
+                        var enterpriseNature = customerBaseInfo.enterpriseNature.split(',');
+
+                        $.each(enterpriseNature,function(index,value){
+                            $("input[name='check']").each(function(){
+                                if($(this).val() == value){
+                                    $(this).prop('checked',true);
+                                    if(value == 4){
+
+                                    }
+                                }
+                            })
+                        });
+                    }
+
+                    businessproduct.innerHTML = '';
+                    if(result.data.businessOrderProductLists!=undefined){
+                        var businessOrderProductLists = result.data.businessOrderProductLists;
+                        for(var i=0;i<businessOrderProductLists.length;i++){
+                            businessproduct.innerHTML += '<tr>'+
+                                    '<td>'+ifEmpty(businessOrderProductLists[i].productCode)+'</td>'+
+                                    '<td><a href="'+basePath+'/businessProduct/intoProductBasicInfoRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&edit=1'+'">'+ifEmpty(businessOrderProductLists[i].productName)+'</a></td>'+
+                                    '<td>'+ifEmpty(businessOrderProductLists[i].categoryName)+'</td>'+
+                                    '<td>'+ifEmpty(businessOrderProductLists[i].brand)+'</td>'+
+                                    '<td><a href="'+basePath+'/businessProduct/intoProductRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&productRequireId='+ifEmpty(businessOrderProductLists[i].productRequireId)+'&&edit=1'+'">'+ifEmpty(businessOrderProductLists[i].specification)+'</a></td>'+
+                                    '<td>'+ifEmpty(businessOrderProductLists[i].mainProductAmount)+'</td>'+
+                                    '<td>'+ifEmpty(businessOrderProductLists[i].cupboardPerNumber)+'</td>'+
+                                    '<td>'+ifEmpty(businessOrderProductLists[i].cupboardType)+'</td>'+
+                                    '<td>'+ifEmpty(businessOrderProductLists[i].cupboardNumber)+'</td>'+
+                                    '<td>'+ifEmpty(businessOrderProductLists[i].deliveryTime)+'</td>'+
+                                    '<td>'+ifEmpty(businessOrderProductLists[i].minPrice)+'</td>'+
+
+                                    '<td><a href="'+basePath+'/businessProduct/intoDocumentary?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&edit=1'+'">查看</a></td>'+
+                                    '<td><a href="'+basePath+'/businessProduct/intoPackageRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&edit=1'+'">查看</a></td>'+
+                                    '<td>'+(businessOrderProductLists[i].transformState==0?'否':'是')+'</td>'+
+                                    '<td>'+ifEmpty(businessOrderProductLists[i].contractPrice)+'</td>'+
+                                    '</tr>';
+                        }
+                    }
                 }
             }
         })

@@ -497,8 +497,8 @@ $(function(){
             for (var i = 0; i < ResultData.length; i++) {
                 _html += '<tr>';
                 _html += '<td>'+(++count)+'</td>';
-                _html += '<td><a href="'+basePath+'/businessOrder/intoOfferorOrder?orderId='+ResultData[i].orderId+'">' + (ResultData[i].orderId!=undefined?ResultData[i].orderId:'') + '</a></td>';
-                _html += '<td><a href="">' + (ResultData[i].businessId!=undefined?ResultData[i].businessId:'') + '</a></td>';
+                _html += '<td><a href="'+basePath+'/businessOrder/intoOrder?orderId='+ResultData[i].orderId+'">' + (ResultData[i].orderId!=undefined?ResultData[i].orderId:'') + '</a></td>';
+                _html += '<td><a href="'+basePath+'/businessInfo/intoBusinessOpportunityInfo?businessId='+ResultData[i].businessId+'">' + (ResultData[i].businessId!=undefined?ResultData[i].businessId:'') + '</a></td>';
                 _html += '<td>' + (ResultData[i].saleOrganizationName!=undefined?ResultData[i].saleOrganizationName:'') + '</td>';
                 _html += '<td lang="zh">' + (ResultData[i].ncOrderId!=undefined?ResultData[i].ncOrderId:'') + '</td>';
                 _html += '<td lang="zh">' + (ResultData[i].customerName!=undefined?ResultData[i].customerName:'') + '</td>';
