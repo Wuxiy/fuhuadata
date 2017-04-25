@@ -26,6 +26,7 @@ function getListCount(callback){
         url:basePath+'/customerBaseInfoOrder/count',
         dataType:'JSON',
         data:{
+            customerId:$('#customerId').val(),
             saleOrganizationId:$('#oSaleOrganizationId').val(),
             ncOrderId:$('#oNcOrderId').val(),
             startTime:$('#oStartTime').val(),
@@ -139,6 +140,7 @@ function getDataList(pageNum,jq){
         url:basePath+'/customerBaseInfoOrder/getListByPage',
         dataType:'json',
         data:{
+            customerId:$('#customerId').val(),
             saleOrganizationId:$('#oSaleOrganizationId').val(),
             ncOrderId:$('#oNcOrderId').val(),
             startTime:$('#oStartTime').val(),
