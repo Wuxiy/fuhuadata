@@ -382,7 +382,7 @@
             $('#edit').removeClass('hidden');
         }
 
-        if(editId == 0&& id!=''){
+        if(editId == 2){
             $('#previous').removeClass('hidden');
             $('#down').removeClass('hidden');
         }
@@ -616,21 +616,25 @@
 
         //全部添加成功后保存
         $(document).on('click','#next',function(){
-            jQuery.ajax({
-                url:basePath + '/businessProduct/saveDocumentaryOrPacking',
-                type:'POST',
-                data:getdata(),
-                /*contentType:"application/json",*/
-                success:function(result){
-                    if(result == true){
-                        alert('添加保存成功!');
-                        console.log(result);
-                        window.location.href = basePath + '/businessOrder/intoOfferorOrder?orderId=' + orderId;
-                    }else{
-                        alert('添加保存失败！');
+            if(id!=''){
+                window.location.href = basePath + '/businessOrder/intoOfferorOrder?orderId=' + orderId;
+            }else{
+                jQuery.ajax({
+                    url:basePath + '/businessProduct/saveDocumentaryOrPacking',
+                    type:'POST',
+                    data:getdata(),
+                    /*contentType:"application/json",*/
+                    success:function(result){
+                        if(result == true){
+                            alert('添加保存成功!');
+                            console.log(result);
+                            window.location.href = basePath + '/businessOrder/intoOfferorOrder?orderId=' + orderId;
+                        }else{
+                            alert('添加保存失败！');
+                        }
                     }
-                }
-            })
+                })
+            }
         })
     })
 
@@ -719,7 +723,7 @@
     })
 
     $('#before').click(function(){
-        window.location.href = basePath + '/businessProduct/intoDocumentary?businessProductId=' + id + '&&productRequireId=' + productRequireId + '&&orderId=' + orderId + '&&customerId=' + customerId + '&&edit=' + editId;
+        window.location.href = basePath + '/businessProduct/intoDocumentary?businessProductId=' + id + '&productRequireId=' + productRequireId + '&orderId=' + orderId + '&customerId=' + customerId + '&edit=' + editId;
     })
 </script>
 

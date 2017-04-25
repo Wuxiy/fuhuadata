@@ -1313,36 +1313,40 @@
 
         //新增下一步，生成productRequireId，
         $('#next').click(function () {
-
-            var isup = true;
-            var notnull = $('.notnull');
-            notnull.each(function () {
-                var val = $(this).val();
-                if(val == ''||val == null){
-                    alert('请完善表单!');
-                    isup = false;
-                    return false;
-                }
-            });
-
-            jQuery.ajax({
-                url:basePath + '/businessProduct/saveProductRequire',
-                type:'POST',
-                /*contentType:"application/json",*/
-                data:Add(),
-                success:function (result) {
-                    var success = result.success;
-                    console.log(success);
-                    if(success == true){
-                        alert('添加成功！');
-                        var productRequireId = result.productRequireId;
-                        $('#productRequireId').val(productRequireId);
-                        window.location.href = basePath + '/businessProduct/intoDocumentary?businessProductId=' + businessProductId + '&orderId=' + orderId + '&customerId=' + customerId + '&productRequireId=' + productRequireId + '&edit=' + editId;
-                    }else{
-                        alert('添加失败！');
+            if(id!=0){
+                window.location.href = basePath + '/businessProduct/intoDocumentary?businessProductId=' + businessProductId + '&orderId=' + orderId + '&customerId=' + customerId + '&productRequireId=' + productRequireId + '&edit=' + editId;
+            }else{
+                var isup = true;
+                var notnull = $('.notnull');
+                notnull.each(function () {
+                    var val = $(this).val();
+                    if(val == ''||val == null){
+                        alert('请完善表单!');
+                        isup = false;
+                        return false;
                     }
-                }
-            })
+                });
+
+                jQuery.ajax({
+                    url:basePath + '/businessProduct/saveProductRequire',
+                    type:'POST',
+                    /*contentType:"application/json",*/
+                    data:Add(),
+                    success:function (result) {
+                        var success = result.success;
+                        console.log(success);
+                        if(success == true){
+                            alert('添加成功！');
+                            var productRequireId = result.productRequireId;
+
+                            window.location.href = basePath + '/businessProduct/intoDocumentary?businessProductId=' + businessProductId + '&orderId=' + orderId + '&customerId=' + customerId + '&productRequireId=' + productRequireId + '&edit=' + editId;
+                        }else{
+                            alert('添加失败！');
+                        }
+                    }
+                })
+            }
+
         })
 
     });
@@ -1383,7 +1387,6 @@
     //新增获取数据function Add
     function Add() {
         var data = {
-            'businessProductId':$('#businessProductId').val(),
             'mainPackingId':$('#mainPackingType').attr('data-id'),
             'mainPackingType':$('#mainPackingType').val(),
             'material':$('#material').val(),

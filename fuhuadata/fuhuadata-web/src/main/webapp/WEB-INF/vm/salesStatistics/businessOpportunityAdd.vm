@@ -433,7 +433,7 @@
                     success: function (result) {
                         if (result.code == 1) {
                             alert("新增成功!");
-                            window.location.href = basePath + '/businessOrder/intoBusinessOffer/';
+                            window.location.href = basePath + '/businessOrder/intoBusinessInfo/';
                         } else {
                             alert("新增失败！");
                         }

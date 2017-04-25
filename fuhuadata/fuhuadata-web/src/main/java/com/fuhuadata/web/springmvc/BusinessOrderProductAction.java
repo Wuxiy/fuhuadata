@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,7 +53,7 @@ public class BusinessOrderProductAction {
      * @return
      */
     @RequestMapping("/intoProductBasicInfoRequire")
-    public ModelAndView intoProductBasicInfoRequire(String orderId,Integer businessProductId,Integer customerId,Integer edit){
+    public ModelAndView intoProductBasicInfoRequire(String orderId,String businessProductId,String customerId,String edit){
         FreightCostQuery freightCostQuery = new FreightCostQuery();
         List<FreightCost> list = freightCostService.getFreightCostsByPage(freightCostQuery).getModel();
         return new ModelAndView("salesStatistics/productBasicInfoRequire")
@@ -297,7 +298,17 @@ public class BusinessOrderProductAction {
      * @return
      */
     @RequestMapping("intoDocumentary")
-    public ModelAndView intoDocumentary(String orderId,Integer businessProductId ,Integer productRequireId,Integer customerId,Integer edit){
+    public ModelAndView intoDocumentary(
+            HttpServletRequest request
+
+    ){
+         /* String orderId,Integer businessProductId ,Integer productRequireId,Integer customerId,Integer edit*/
+         String orderId = request.getParameter("orderId");
+        String businessProductId = request.getParameter("businessProductId");
+        String productRequireId = request.getParameter("productRequireId");
+        String customerId = request.getParameter("customerId");
+        String edit = request.getParameter("edit");
+        System.out.print("sbusinessProductId:"+businessProductId+",productRequireId:"+productRequireId);
         return new ModelAndView("salesStatistics/billRequire")
                 .addObject("orderId",orderId)
                 .addObject("businessProductId",businessProductId)
