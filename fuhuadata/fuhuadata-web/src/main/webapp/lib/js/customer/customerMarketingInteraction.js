@@ -18,7 +18,7 @@ $(function () {
 
     //获取数据
     CRM.ajaxCall({
-        url:'/customerMarketInfo/init',
+        url:basePath + '/customerMarketInfo/init',
         type:'POST',
         data:{
             customerId:$('#customerId').val(),
@@ -54,7 +54,7 @@ $(function () {
                 customerType:$('#customerType').val()
             };
         CRM.ajaxCall({
-            url:'/customerMarketInfo/getCPPListByCidAndYear',
+            url:basePath + '/customerMarketInfo/getCPPListByCidAndYear',
             type:'POST',
             data:data,
             callback:cpps
@@ -70,7 +70,7 @@ $(function () {
                 customerType:$('#customerType').val()
         };
         CRM.ajaxCall({
-            url:'/customerMarketInfo/getSaleProductListByCidAndYear',
+            url:basePath + '/customerMarketInfo/getSaleProductListByCidAndYear',
             type:'POST',
             data:data,
             callback:csps
@@ -131,14 +131,14 @@ $(function () {
         });
         if(isUp){
             CRM.ajaxCall({
-                url:'/customerMarketInfo/addCPPList',
+                url:basePath + '/customerMarketInfo/addCPPList',
                 type:'POST',
                 data:cppsObj(),
                 contentType:'application/json',
                 callback: function () {
                     // 刷新客户采购产品
                     CRM.ajaxCall({
-                        url:'/customerMarketInfo/getCPPListByCidAndYear',
+                        url:basePath + '/customerMarketInfo/getCPPListByCidAndYear',
                         type:'POST',
                         data:{
                             customerId:$('#customerId').val(),
@@ -168,14 +168,14 @@ $(function () {
         });
         if(isUp){
             CRM.ajaxCall({
-                url:'/customerMarketInfo/addCSPList',
+                url:basePath + '/customerMarketInfo/addCSPList',
                 type:'POST',
                 data:cspsObj(),
                 contentType:'application/json',
                 callback: function () {
                     // 刷新客户销售产品
                     CRM.ajaxCall({
-                        url:'/customerMarketInfo/getSaleProductListByCidAndYear',
+                        url:basePath + '/customerMarketInfo/getSaleProductListByCidAndYear',
                         type:'POST',
                         data:{
                             customerId:$('#customerId').val(),
@@ -195,13 +195,13 @@ $(function () {
     //客户合作情况提交
     $(document).on('click.up','#cooperation_up',function() {
         CRM.ajaxCall({
-            url:'/customerMarketInfo/updateCooperationInfo',
+            url:basePath + '/customerMarketInfo/updateCooperationInfo',
             type:'POST',
             data:cooperationObj(),
             contentType:'application/x-www-form-urlencoded; charset=UTF-8',
             callback:function () {
                 CRM.ajaxCall({
-                    url:'/customerMarketInfo/init',
+                    url:basePath + '/customerMarketInfo/init',
                     type:'POST',
                     data:{
                         customerId:$('#customerId').val(),
@@ -219,7 +219,7 @@ $(function () {
     $(document).on('click','#cooperation_cl',function () {
         //刷新
         CRM.ajaxCall({
-            url:'/customerMarketInfo/init',
+            url:basePath + '/customerMarketInfo/init',
             type:'POST',
             data:{
                 customerId:$('#customerId').val(),
@@ -240,7 +240,7 @@ $(function () {
         if (treeData==null) {
 
             CRM.ajaxCall({
-                url:'/productCategory/CategoryTree?fourNode=0',
+                url:basePath + '/productCategory/CategoryTree?fourNode=0',
                 type:'GET',
                 callback:renderTree
             })

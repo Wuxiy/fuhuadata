@@ -89,7 +89,7 @@ function updateContactsInfo() {
         "faith":$('#faith').val(),
         "isDefault":$('#isDefault').val(),
         "remarks":$('#remarks').val()
-    }
+    };
     console.log(data);
     return JSON.stringify(data);
 }

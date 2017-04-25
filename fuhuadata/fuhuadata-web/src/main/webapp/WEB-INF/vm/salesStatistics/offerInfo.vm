@@ -306,7 +306,7 @@
                                     </div>
                                 </div>*#
                             </div>
-                            <div class="form-group ">
+                            <div class="form-group hidden">
                                 <label class="col-xs-1 control-label">企业性质</label>
                                 <div class="col-xs-6">
                                     <label class="checkbox-inline">
@@ -443,7 +443,6 @@
     var businessId = $('#businessId').val();
     console.log(businessId);
 
-    var customerId = $('#customerId').val();
     var businessProductId = '';
     var businessproduct = document.getElementById('businessproduct');
     var editId = $('#editId').val();
@@ -469,9 +468,7 @@
                 success:function(result){
                     if(result.data != null&&result.data != undefined){
                         var businessOrder = result.data.businessOrder;
-                        if(!businessOrder.businessId){
-                            $('#businessId').val(businessOrder.businessId); // 商机编号
-                        }
+                        $('#businessId').val(businessOrder.businessId); // 商机编号
                         $('#customerDutyParagraph').val(businessOrder.customerDutyParagraph); // 客户税号
                         $('#billToCustomer').val(businessOrder.billToCustomer); // 收票客户
                         $('#saleOrganizationName').val(businessOrder.saleOrganizationName); // 销售组织name
@@ -1027,7 +1024,7 @@
 
             ul.html('');
             CRM.ajaxCall({
-                url:url,
+                url:basePath + url,
                 type:'POST',
                 contentType:'application/json',
                 data:JSON.stringify({
@@ -1049,7 +1046,7 @@
             obj[arg]=$(this).val();
             ul.html('');
             CRM.ajaxCall({
-                url:url,
+                url:basePath + url,
                 type:'POST',
                 contentType:'application/json',
                 data:JSON.stringify(obj),
@@ -1136,7 +1133,7 @@
                 var url = basePath + '/businessProduct/deleteAllInfoByIds?businessProductIds=' + data;
                 console.log(data);
                 jQuery.ajax({
-                    url:url,
+                    url: url,
                     type:'POST',
 //                    dataType:"json",
 //                    contentType:"application/json",

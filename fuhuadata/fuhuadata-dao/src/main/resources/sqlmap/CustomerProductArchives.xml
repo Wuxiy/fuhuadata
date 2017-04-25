@@ -10,7 +10,7 @@
 		<result property="id" column="id" jdbcType="INT" javaType="java.lang.Integer" />
 		<result property="productId" column="product_id" jdbcType="INT" javaType="java.lang.Integer" />
 		<result property="wareId" column="ware_id" jdbcType="INT" javaType="java.lang.Integer" />
-		<result property="orderId" column="order_id" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="orderId" column="order_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="name" column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result column="customer_product_name" property="customerProductName" jdbcType="VARCHAR" javaType="java.lang.String"/>
@@ -28,8 +28,6 @@
 		<result property="InternalTransportPrice" column="Internal_transport_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result property="factoryId" column="factory_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="factoryName" column="factory_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-		<result column="composition_cost" property="compositionCost" jdbcType="VARCHAR" />
-		<result column="pakage_other_requirement" property="pakageOtherRequirement" jdbcType="VARCHAR" />
 		<result column="additional_price" property="additionalPrice" jdbcType="DECIMAL" />
 		<result column="consumption" property="consumption" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result column="img_info" property="imgInfo" jdbcType="VARCHAR" />
@@ -136,9 +134,6 @@
 		</isNotNull>
 			<isNotNull prepend=" AND " property="compositionCost">
 				composition_cost = #compositionCost#
-			</isNotNull>
-			<isNotNull prepend=" AND " property="pakageOtherRequirement">
-				pakage_other_requirement = #pakageOtherRequirement#
 			</isNotNull>
 			<isNotNull prepend=" AND " property="additionalPrice">
 				additional_price = #additionalPrice#
@@ -309,9 +304,6 @@
 			</isNotNull>
 			<isNotNull prepend=" AND " property="compositionCost">
 				composition_cost = #compositionCost#
-			</isNotNull>
-			<isNotNull prepend=" AND " property="pakageOtherRequirement">
-				pakage_other_requirement = #pakageOtherRequirement#
 			</isNotNull>
 			<isNotNull prepend=" AND " property="additionalPrice">
 				additional_price = #additionalPrice#

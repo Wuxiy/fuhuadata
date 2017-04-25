@@ -23,7 +23,7 @@ public class CustomerProductArchives {
 	private Integer wareId;
 
 	/**订单id**/
-	private Integer orderId;
+	private String orderId;
 
     /**客户编号id**/
 	private String customerId;
@@ -159,8 +159,6 @@ public class CustomerProductArchives {
 	private Integer transformState;
 
 
-	/**加工成分及费用json**/
-	private String compositionCost;
 
 	/**包装其他要求**/
 	private String pakageOtherRequirement;
@@ -324,13 +322,6 @@ public class CustomerProductArchives {
 		this.customerProductName = customerProductName;
 	}
 
-	public String getCompositionCost() {
-		return compositionCost;
-	}
-
-	public void setCompositionCost(String compositionCost) {
-		this.compositionCost = compositionCost;
-	}
 
 	public String getPakageOtherRequirement() {
 		return pakageOtherRequirement;
@@ -754,11 +745,11 @@ public class CustomerProductArchives {
 	}
 
 
-	public Integer getOrderId() {
+	public String getOrderId() {
 		return orderId;
 	}
 
-	public void setOrderId(Integer orderId) {
+	public void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
 

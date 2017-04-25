@@ -538,26 +538,6 @@
                         });
                     }
 
-                    var modelist = eval(result.modelist);
-                    var img_html = '';
-
-                    for(var k=0;k<modelist.length;k++){
-                        img_html +='<div class="col-xs-2">';
-                        img_html +='<a class="thumbnail" >';
-                        img_html +='<img src="'+modelist[k].path+'" alt="通用的占位符缩略图"  style="height: 200px;">';
-                        img_html +='<div class="caption">';
-                        img_html +='<h4 class="text-info ">'+modelist[k].name+'<input style="margin-left: 15px;" type="checkbox" name="modelist" class="btn-link" data-name="'+modelist[k].name+'" data-path="'+modelist[k].path+'" disabled checked></h4>';
-                        img_html +='</div>';
-                        img_html += '</a>';
-                        img_html +='</div>';
-                    }
-                    $('#model').html(img_html);
-
-                    var outerData = result.outer;
-                    var auxiliaryData = result.auxiliary;
-
-                    var _html = '';
-
                     if(productRequire.hasBodyLogo!=undefined&&productRequire.hasBodyLogo == 1){
                         $('#hasBodyLogo').attr('checked',true);
                     }
@@ -574,9 +554,30 @@
                         $('#hasSprayCode').attr('checked',true);
                     }
 
-                    /*imgInfo.each(function (n,item) {
-                        if(item == '')
-                    })*/
+
+                    var modelist = eval(result.modelist);
+                    var img_html = '';
+
+                    console.log(modelist);
+                    if(modelist!=undefined){
+                        for(var k=0;k<modelist.length;k++){
+                            img_html +='<div class="col-xs-2">';
+                            img_html +='<a class="thumbnail" >';
+                            img_html +='<img src="'+modelist[k].path+'" alt="通用的占位符缩略图"  style="height: 200px;">';
+                            img_html +='<div class="caption">';
+                            img_html +='<h4 class="text-info ">'+modelist[k].name+'<input style="margin-left: 15px;" type="checkbox" name="modelist" class="btn-link" data-name="'+modelist[k].name+'" data-path="'+modelist[k].path+'" disabled checked></h4>';
+                            img_html +='</div>';
+                            img_html += '</a>';
+                            img_html +='</div>';
+                        }
+                        $('#model').html(img_html);
+                    }
+
+
+                    var outerData = result.outer;
+                    var auxiliaryData = result.auxiliary;
+
+                    var _html = '';
 
                     if(outerData.length!=0){
                         for(var i=0;i<outerData.length;i++){
@@ -1207,7 +1208,7 @@
 
             console.log(data);
             CRM.ajaxCall({
-                url         : '/upload/uploadFileAll',
+                url         : basePath + '/upload/uploadFileAll',
                 type        : 'POST',
                 data        : data,
                 dataType: 'JSON',
@@ -1338,7 +1339,7 @@
                         if(success == true){
                             alert('添加成功！');
                             var productRequireId = result.productRequireId;
-
+                            console.log(productRequireId);
                             window.location.href = basePath + '/businessProduct/intoDocumentary?businessProductId=' + businessProductId + '&orderId=' + orderId + '&customerId=' + customerId + '&productRequireId=' + productRequireId + '&edit=' + editId;
                         }else{
                             alert('添加失败！');

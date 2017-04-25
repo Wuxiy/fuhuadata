@@ -40,6 +40,11 @@ public interface UserService extends BaseService<UserAccount, Integer> {
      */
     List<UserAccount> listUsersWithDeptIdByUserIds(List<Integer> userIds);
 
+    /**
+     * 获取角色关联用户的去重的组织 ids
+     * @param roleId
+     * @return
+     */
     HashSet<String> listDeptIdsOfUserByRoleId(Integer roleId);
 
     List<MixNodeVO> getUserTreeWhenAddNodes(List<Integer> userIds);

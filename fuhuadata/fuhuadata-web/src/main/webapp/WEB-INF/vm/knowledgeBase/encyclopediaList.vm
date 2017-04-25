@@ -115,7 +115,7 @@
                 }
             }],
             "language": {
-                "url": '${request.contextPath}/lib/dataTables/lang/dataTables.lang.zh',
+                "url": basePath + '/lib/dataTables/lang/dataTables.lang.zh',
                 "searchPlaceholder": '关键字'
             }
         })

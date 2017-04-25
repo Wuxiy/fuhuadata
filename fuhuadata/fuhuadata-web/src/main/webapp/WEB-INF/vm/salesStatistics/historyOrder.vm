@@ -97,8 +97,8 @@
 </div>
 
 
-<script type="text/javascript" src="${request.contextPath}/lib/js/pagination/pagination.js"></script>
-<link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/js/pagination/pagination.css" />
+##<script type="text/javascript" src="${request.contextPath}/lib/js/pagination/pagination.js"></script>
+##<link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/js/pagination/pagination.css" />
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript">
 //    var pageSize = 3;

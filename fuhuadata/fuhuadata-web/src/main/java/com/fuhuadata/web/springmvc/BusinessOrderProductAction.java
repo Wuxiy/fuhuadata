@@ -160,7 +160,7 @@ public class BusinessOrderProductAction {
             }else{
                 //新增
                 businessProductId = businessOrderProductService.addBusinessOrderProduct(businessOrderProduct,list);
-                System.out.print("+++++++++++++++++++++++action接收新增businessProductId："+businessProductId+"+++++++++++++++++++++++++++++++");
+                System.out.println("+++++++++++++++++++++++action接收新增businessProductId："+businessProductId+"+++++++++++++++++++++++++++++++");
             }
             BusinessProductRequire businessProductRequire =  businessProductRequireService.getOneByQuery(null,businessProductId);
             if(businessProductRequire!=null){
@@ -282,6 +282,15 @@ public class BusinessOrderProductAction {
                 businessProductRequireId =  businessProductRequireService.addProductRequire(businessProductRequire);
             }else{
                 businessProductRequireService.updateProductRequire(businessProductRequire);
+                BusinessOrderProduct businessOrderProduct = new BusinessOrderProduct();
+                businessOrderProduct.setId(businessProductRequire.getBusinessProductId());
+                BusinessOrderProduct basic =  businessOrderProductService.getBaiscById(businessProductRequire.getBusinessProductId());
+                Integer priceType = basic.getPriceType();
+                //只有1原药制剂自产类加工，2原药采购制剂加工才有加工费
+                if(priceType==1 || priceType==2){
+                    businessOrderProduct.setProcessCost(businessOrderProductService.calculateProcessCost(businessProductRequire.getBusinessProductId()));
+                }
+                businessOrderProduct.setMinPrice(businessOrderProductService.calculateMinPrice(businessProductRequire.getBusinessProductId()));
             }
             result.put("productRequireId",businessProductRequireId);
             result.put("success",true);
@@ -295,7 +304,7 @@ public class BusinessOrderProductAction {
 
     /**
      * 进入单据要求页面
-     * @param businessProductId
+     * @param
      * @return
      */
     @RequestMapping("intoDocumentary")

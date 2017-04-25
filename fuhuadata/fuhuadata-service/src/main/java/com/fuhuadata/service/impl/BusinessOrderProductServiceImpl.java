@@ -52,23 +52,34 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
             int businessProductId = businessOrderProductDao.insertBaseInfo(businessOrderProduct);
             for(BusinessOrderProductComponent bopc:businessOrderProductComponents){
                 bopc.setBusinessProductId(businessProductId);
+                bopc.setWareId(businessOrderProduct.getWareId());
+                bopc.setProductId(businessOrderProduct.getProductId());
             }
-            boolean flag = businessOrderProductComponentDao.insertProductComponent(businessOrderProductComponents);
-            if(!flag){
-               throw new Exception("插入产品成品失败");
+            if(businessOrderProductComponents.size()>0){
+                boolean flag = businessOrderProductComponentDao.insertProductComponent(businessOrderProductComponents);
+                if(!flag){
+                    throw new Exception("插入产品成品失败");
+                }
             }
             //维护档案数据
             int businessProductArchivesId = customerProductArchivesDao.addArchives(businessProductId);
             if(businessProductArchivesId<1){
                 throw new Exception("插入档案失败");
             }
-            Map<String,Object> pmap = new HashMap<String,Object>();
-            pmap.put("businessProductId",businessProductId);
-            pmap.put("businessProductArchivesId",businessProductArchivesId);
-            if(businessOrderProductComponentDao.addArchives(pmap)<1){
-                throw new Exception("插入档案失败");
+            //将档案id回写到订单产品表
+            BusinessOrderProduct bop = new BusinessOrderProduct();
+            bop.setId(businessProductId);
+            bop.setArchiveProductId(businessProductArchivesId);
+            businessOrderProductDao.updateBusinessOrderProduct(bop);
+            //添加产品成分档案
+            if(businessOrderProductComponents.size()>0){
+                Map<String,Object> pmap = new HashMap<String,Object>();
+                pmap.put("businessProductId",businessProductId);
+                pmap.put("businessProductArchivesId",businessProductArchivesId);
+                if(businessOrderProductComponentDao.addArchives(pmap)<1){
+                    throw new Exception("插入档案失败");
+                }
             }
-            System.out.print("+++++++++++++++++++++++service返回新增businessProductId："+businessProductId+"+++++++++++++++++++++++++++++++");
             return businessProductId;
         } catch (Exception e) {
             e.printStackTrace();
@@ -150,24 +161,30 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
 
     @Override
     public int updateBusinessOrderProduct(BusinessOrderProduct businessOrderProduct) throws Exception {
+        int effect_num =  businessOrderProductDao.updateBusinessOrderProduct(businessOrderProduct);
+        updatePrice(businessOrderProduct);
+        //更新档案数据
+        customerProductArchivesDao.updateArchives(businessOrderProduct.getId());
+        return effect_num;
+    }
+    //更新最低价，加工费
+    private void updatePrice(BusinessOrderProduct businessOrderProduct) throws Exception {
         Integer priceType = businessOrderProductDao.getPriceType(businessOrderProduct.getId());
         if(priceType!=null &&(priceType==1 || priceType==2)){
             //更新加工费
             businessOrderProduct.setProcessCost(businessOrderProductDao.calculateProcessCost(businessOrderProduct.getId()));
         }
-        if(businessOrderProductDao.getBaiscById(businessOrderProduct.getId()).getMainPackingId()!=null){
+        BusinessProductRequire businessProductRequire = new BusinessProductRequire();
+        businessProductRequire.setBusinessProductId(businessOrderProduct.getId());
+        if(businessProductRequireDao.getOneByQuery(businessProductRequire)!=null){
             //更新最低价
             businessOrderProduct.setMinPrice(calculateMinPrice(businessOrderProduct.getId()));
         }
         //先修改订单产品数据
         businessOrderProduct.setLastmodifyUserId(LoginUtils.getLoginId());
         businessOrderProduct.setLastmodifyUserName(LoginUtils.getLoginName());
-       int effect_num =  businessOrderProductDao.updateBusinessOrderProduct(businessOrderProduct);
-        //更新档案数据
-        customerProductArchivesDao.updateArchives(businessOrderProduct.getId());
-        return effect_num;
+        businessOrderProductDao.updateBusinessOrderProduct(businessOrderProduct);
     }
-
     @Override
     public List<BusinessOrderProduct> getList(QueryBusinessOrderProduct queryBusinessOrderProduct) {
         return businessOrderProductDao.getList(queryBusinessOrderProduct);
@@ -301,7 +318,7 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
         if(taxFree == null){
             taxFree = new BigDecimal(1);
         }
-        taxFree = taxFree.divide(new BigDecimal(100));
+        taxFree = taxFree.divide(new BigDecimal(100),4,BigDecimal.ROUND_HALF_UP);
         //其他费用
         BigDecimal otherCost = basic.getOtherCost();
         if(otherCost == null){
@@ -312,19 +329,19 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
         if (lossRate == null) {
             lossRate = new BigDecimal(0);
         }
-        lossRate = lossRate.divide(new BigDecimal(100));
+        lossRate = lossRate.divide(new BigDecimal(100),4,BigDecimal.ROUND_HALF_UP);
         //保险费率
         BigDecimal premiumRate = order.getPremiumRate();
         if(premiumRate == null){
             premiumRate = new BigDecimal(0);
         }
-        premiumRate = premiumRate.divide(new BigDecimal(100));
+        premiumRate = premiumRate.divide(new BigDecimal(100),4,BigDecimal.ROUND_HALF_UP);
         //信保费率
         BigDecimal guaranteeRate = order.getGuaranteeRate();
         if(guaranteeRate == null){
             guaranteeRate = new BigDecimal(0);
         }
-        guaranteeRate = guaranteeRate.divide(new BigDecimal(100));
+        guaranteeRate = guaranteeRate.divide(new BigDecimal(100),4,BigDecimal.ROUND_HALF_UP);
         /**
          * Y= {X+【港杂费单价】+【佣金单价】+【海运费单价】+【资金利息单价】+
          * 【退税率】×【海运费单价】+【其他费用】}/（1-【汇损率】-【保险费率】-【信保费率】+【退税率】-【退税率】×【保险费率】）
@@ -333,7 +350,7 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
                 .add(taxFree.multiply(oceanFreight)).add(otherCost).divide(
                         new BigDecimal(1).subtract(lossRate).subtract(premiumRate).subtract(guaranteeRate).add(taxFree).subtract(
                                 taxFree.multiply(premiumRate)
-                        )
+                        ),4,BigDecimal.ROUND_HALF_UP
                 );
     }
 
@@ -373,7 +390,7 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
         if(taxFree == null){
             taxFree = new BigDecimal(1);
         }
-        taxFree = taxFree.divide(new BigDecimal(100));
+        taxFree = taxFree.divide(new BigDecimal(100),4,BigDecimal.ROUND_HALF_UP);
         //其他费用
         BigDecimal otherCost = basic.getOtherCost();
         if(otherCost == null){
@@ -384,19 +401,19 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
         if (lossRate == null) {
             lossRate = new BigDecimal(0);
         }
-        lossRate = lossRate.divide(new BigDecimal(100));
+        lossRate = lossRate.divide(new BigDecimal(100),4,BigDecimal.ROUND_HALF_UP);
         //保险费率
         BigDecimal premiumRate = order.getPremiumRate();
         if(premiumRate == null){
             premiumRate = new BigDecimal(0);
         }
-        premiumRate = premiumRate.divide(new BigDecimal(100));
+        premiumRate = premiumRate.divide(new BigDecimal(100),4,BigDecimal.ROUND_HALF_UP);
         //信保费率
         BigDecimal guaranteeRate = order.getGuaranteeRate();
         if(guaranteeRate == null){
             guaranteeRate = new BigDecimal(0);
         }
-        guaranteeRate = guaranteeRate.divide(new BigDecimal(100));
+        guaranteeRate = guaranteeRate.divide(new BigDecimal(100),4,BigDecimal.ROUND_HALF_UP);
         //采购退税计算率 【采购退税计算率】=1+【增值税税率】（根据根据报关产品名称从NC系统读取）
         //增值税税率
         BigDecimal zzssl = productInfoDao.getRisetaxes(basic.getWareId());
@@ -411,8 +428,8 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
          * 【退税率】×X/【采购退税计算率】+【其他费用】}/(1-【汇损率】-【保险费率】-【信保费率】)
          */
         return x.add(portSurcharge).add(commissionPrice).add(oceanFreight).add(capitalInterestPrice)
-                .subtract(taxFree.multiply(x).divide(purchaseZZL)).add(otherCost)
-                .divide(new BigDecimal(1).subtract(lossRate).subtract(premiumRate).subtract(guaranteeRate));
+                .subtract(taxFree.multiply(x).divide(purchaseZZL,4,BigDecimal.ROUND_HALF_UP)).add(otherCost)
+                .divide(new BigDecimal(1).subtract(lossRate).subtract(premiumRate).subtract(guaranteeRate),4,BigDecimal.ROUND_HALF_UP);
     }
 
     /**
@@ -456,25 +473,25 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
         if (lossRate == null) {
             lossRate = new BigDecimal(0);
         }
-        lossRate = lossRate.divide(new BigDecimal(100));
+        lossRate = lossRate.divide(new BigDecimal(100),4,BigDecimal.ROUND_HALF_UP);
         //保险费率
         BigDecimal premiumRate = order.getPremiumRate();
         if(premiumRate == null){
             premiumRate = new BigDecimal(0);
         }
-        premiumRate = premiumRate.divide(new BigDecimal(100));
+        premiumRate = premiumRate.divide(new BigDecimal(100),4,BigDecimal.ROUND_HALF_UP);
         //信保费率
         BigDecimal guaranteeRate = order.getGuaranteeRate();
         if(guaranteeRate == null){
             guaranteeRate = new BigDecimal(0);
         }
-        guaranteeRate = guaranteeRate.divide(new BigDecimal(100));
+        guaranteeRate = guaranteeRate.divide(new BigDecimal(100),4,BigDecimal.ROUND_HALF_UP);
         /**
          * * Y={ X+【港杂费单价】+【佣金单价】+【海运费单价】+【资金利息单价】+
          * 【其他费用】}/(1-【汇损率】-【保险费率】-【信保费率】)
          */
         return x.add(portSurcharge).add(commissionPrice).add(oceanFreight).add(capitalInterestPrice)
-                .add(otherCost).divide(new BigDecimal(1).subtract(lossRate).subtract(premiumRate).subtract(guaranteeRate));
+                .add(otherCost).divide(new BigDecimal(1).subtract(lossRate).subtract(premiumRate).subtract(guaranteeRate),4,BigDecimal.ROUND_HALF_UP);
     }
 
     /**
@@ -513,7 +530,7 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
             nexchangerate = new BigDecimal(1);
         }
         //X={(【价委会指导单价】+【采购价格】)*【单位耗用比例】+【加工费】}/【汇率】；
-        return advisePrice.add(purchasePrice).multiply(unitUseRate).add(processCost).divide(nexchangerate);
+        return advisePrice.add(purchasePrice).multiply(unitUseRate).add(processCost).divide(nexchangerate,4,BigDecimal.ROUND_HALF_UP);
     }
     //计算资金利息单价
     private BigDecimal getCapitalInterestPrice(BigDecimal x,BusinessOrder order){
@@ -529,17 +546,17 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
         if(interestRate==null){
             interestRate = new BigDecimal(1);
         }
-        interestRate = interestRate.divide(new BigDecimal(100));
+        interestRate = interestRate.divide(new BigDecimal(100),4,BigDecimal.ROUND_HALF_UP);
         //资金利率
         BigDecimal discountRate = order.getDiscountRate();
         if(discountRate==null){
             discountRate = new BigDecimal(1);
         }
-        discountRate = discountRate.divide(new BigDecimal(100));
+        discountRate = discountRate.divide(new BigDecimal(100),4,BigDecimal.ROUND_HALF_UP);
         //账期月数
-        BigDecimal month = new BigDecimal(income.getPaymentday()).divide(new BigDecimal(30));
+        BigDecimal month = new BigDecimal(income.getPaymentday()).divide(new BigDecimal(30),4,BigDecimal.ROUND_HALF_UP);
         //X×计息比率×资金利率×账期月数÷12
-       return x.multiply(interestRate).multiply(discountRate).multiply(month).divide(new BigDecimal(12));
+       return x.multiply(interestRate).multiply(discountRate).multiply(month).divide(new BigDecimal(12),4,BigDecimal.ROUND_HALF_UP);
     }
     /**
      *  根据orderId  获取订单产品及订单总价

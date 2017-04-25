@@ -179,8 +179,6 @@ public class BusinessOrderProduct {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date modifyTime;
 
-    /**主包材id**/
-    private Integer mainPackingId;
 
     /**内部供货单位id**/
     private String internalSupplyId;
@@ -273,14 +271,6 @@ public class BusinessOrderProduct {
 
     public void setWareId(Integer wareId) {
         this.wareId = wareId;
-    }
-
-    public Integer getMainPackingId() {
-        return mainPackingId;
-    }
-
-    public void setMainPackingId(Integer mainPackingId) {
-        this.mainPackingId = mainPackingId;
     }
 
     public Integer getTaxType() {

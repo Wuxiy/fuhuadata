@@ -41,6 +41,7 @@ public class MixNodeVO extends BaseTreeVo<String> {
         dest.setPid(orgi.getPid());
         dest.setIsParent(orgi.getIsParent());
         dest.setOpen(orgi.getOpen());
+        dest.setRoot(orgi.isRoot());
         dest.setNcId(orgi.getNcId());
 
         return dest;
