@@ -448,7 +448,7 @@
 
     <!--报价及订单详情页表头-->
     <select id="GET-BY-ID" resultMap="BUSINESSORDER-MAP" parameterClass="java.lang.String" >
-        <![CDATA[
+    <![CDATA[
                   SELECT
                 order_id,
                 nc_order_id,
@@ -516,7 +516,7 @@
             WHERE
                 order_id = #orderId#
     ]]>
-    </select>
+</select>
 
     <!--更新报价单状态-->
     <update id="UPDATE-OFFER-STATUS" parameterClass="BusinessOrder">
@@ -574,6 +574,8 @@
         delete from business_order where order_id = #orderId#
     ]]>
     </delete>
+
+
 
     <select id="ORDER-GET-PAGE" parameterClass="QueryBusinessOrder" resultClass="QueryBusinessOrder">
         SELECT
@@ -985,6 +987,18 @@
             GROUP BY
             a.`name`) temp
         </isEqual>
+    </select>
+
+
+    <select id="getByBusinessId" resultClass="java.lang.String" parameterClass="java.lang.String" >
+        <![CDATA[
+                  SELECT
+                order_id
+            FROM
+                business_order
+            WHERE
+                business_id = #value#
+    ]]>
     </select>
 
 </sqlMap>

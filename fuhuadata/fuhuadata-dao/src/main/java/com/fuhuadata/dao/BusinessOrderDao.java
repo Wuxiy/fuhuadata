@@ -2,6 +2,7 @@ package com.fuhuadata.dao;
 
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
+import com.fuhuadata.vo.BusinessOrderVO;
 import com.fuhuadata.vo.CostAndProfitStatistics;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
 public interface BusinessOrderDao {
 
 
+    String getOrderIdByBusinessId(String businessId);
     /**
      * add
      * @param businessOrder

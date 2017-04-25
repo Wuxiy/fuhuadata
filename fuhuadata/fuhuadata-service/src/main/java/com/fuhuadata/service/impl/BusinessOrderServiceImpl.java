@@ -39,6 +39,10 @@ public class BusinessOrderServiceImpl implements BusinessOrderService {
     @Autowired
     private BusinessOrderProductDao businessOrderProductDao;
 
+    @Override
+    public String getOrderIdByBusinessId(String businessId) {
+        return businessOrderDao.getOrderIdByBusinessId(businessId);
+    }
 
     @Override
     public int count(QueryBusinessOrder queryBusinessOrder) {
