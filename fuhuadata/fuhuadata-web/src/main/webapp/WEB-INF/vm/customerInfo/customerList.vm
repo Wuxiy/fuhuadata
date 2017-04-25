@@ -65,8 +65,8 @@
                                         <option value="0" lang="zh">易流失</option>
                                     </select>
                                     <div class="input-group-btn">
-                                        <button id="resetBtn" class="btn btn-xs btn-default" type="reset">重置</button>
-                                        <button class="btn btn-xs btn-primary" id="submit" type="button">搜索</button>
+                                        <button id="resetBtn" class="btn btn-xs btn-default" type="reset" lang="zh">重置</button>
+                                        <button class="btn btn-xs btn-primary" id="submit" type="button" lang="zh">搜索</button>
                                     </div>
                                 </div>
                             </form>

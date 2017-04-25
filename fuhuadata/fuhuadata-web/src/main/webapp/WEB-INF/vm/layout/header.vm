@@ -4,7 +4,7 @@
 <!--头部开始-->
 <nav class="navbar navbar-cards navbar-fixed-top">
     <div class="navbar-header">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="#" lang="zh" style="color: #fff;">
             福华客户关系管理系统
         </a>
     </div>
@@ -13,8 +13,8 @@
         <button class="btn btn-primary">$!{user.name}</button>
         <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
         <ul class="dropdown-menu pull-right">
-            <li><a href="$!{rc.contextPath}/password">修改密码</a></li>
-            <li><a href="$!{rc.contextPath}/logout">退出</a></li>
+            <li><a href="$!{rc.contextPath}/password" lang="zh">修改密码</a></li>
+            <li><a href="$!{rc.contextPath}/logout" lang="zh">退出</a></li>
         </ul>
     </div>
     <div class="pull-right breadcrumb-btn btn-group btn-group-xs navbar-btn">
@@ -28,11 +28,11 @@
     <ul id="nav-affix" class="nav nav-cards">
         <li class="shadow-in" title="客户信息">
             <div id="collapseOne" class="list-group collapse">
-                <a class="list-group-item" href="${request.contextPath}/customerBaseInfo/customerListPageInit?customerType=1">合作客户</a>
-                <a class="list-group-item" href="${request.contextPath}/customerBaseInfo/customerListPageInit?customerType=2">潜在客户</a>
-                <a class="list-group-item" href="${request.contextPath}/customerBaseInfo/customerListPageInit?customerType=3">流失客户</a>
+                <a class="list-group-item" href="${request.contextPath}/customerBaseInfo/customerListPageInit?customerType=1" lang="zh">合作客户</a>
+                <a class="list-group-item" href="${request.contextPath}/customerBaseInfo/customerListPageInit?customerType=2" lang="zh">潜在客户</a>
+                <a class="list-group-item" href="${request.contextPath}/customerBaseInfo/customerListPageInit?customerType=3" lang="zh">流失客户</a>
             </div>
-            <a data-toggle="collapse" href="#collapseOne" data-parent="#nav-affix">
+            <a data-toggle="collapse" href="#collapseOne" data-parent="#nav-affix"  lang="zh">
                 <span class="glyphicon glyphicon-user"></span>
                 客户信息
                 <b class="caret"></b>
@@ -40,10 +40,10 @@
         </li>
         <li class="shadow-in" title="供应商信息">
             <div id="collapseTwo" class="list-group collapse">
-                <a class="list-group-item" href="#">加工厂</a>
-                <a class="list-group-item" href="#">货代</a>
+                <a class="list-group-item" lang="zh" href="#">加工厂</a>
+                <a class="list-group-item" lang="zh" href="#">货代</a>
             </div>
-            <a data-toggle="collapse" href="#collapseTwo" data-parent="#nav-affix">
+            <a data-toggle="collapse" href="#collapseTwo" data-parent="#nav-affix" lang="zh">
                 <span class="glyphicon glyphicon-briefcase"></span>
                 供应商信息
                 <b class="caret"></b>
@@ -51,13 +51,13 @@
         </li>
         <li class="shadow-in" title="销售统计">
             <div id="collapseThree" class="list-group collapse">
-                <a class="list-group-item" href="${request.contextPath}/businessInfo/intoBusinessInfo">销售流程</a>
-                <a class="list-group-item" href="${request.contextPath}/businessOrder/intoCostAndProfitStatistics">费用与利润</a>
-                <a class="list-group-item" href="${request.contextPath}/customerVisitRecord/intoCustomerMaintenance">客户维护</a>
-                <a class="list-group-item" href="${request.contextPath}/businessOrder/intoProfitStatistics">利润统计</a>
-                <a class="list-group-item" href="${request.contextPath}/businessOrder/intoHistoryOrder">我的历史订单</a>
+                <a class="list-group-item" lang="zh" href="${request.contextPath}/businessInfo/intoBusinessInfo">销售流程</a>
+                <a class="list-group-item" lang="zh" href="${request.contextPath}/businessOrder/intoCostAndProfitStatistics">费用与利润</a>
+                <a class="list-group-item" lang="zh" href="${request.contextPath}/customerVisitRecord/intoCustomerMaintenance">客户维护</a>
+                <a class="list-group-item" lang="zh" href="${request.contextPath}/businessOrder/intoProfitStatistics">利润统计</a>
+                <a class="list-group-item" lang="zh" href="${request.contextPath}/businessOrder/intoHistoryOrder">我的历史订单</a>
             </div>
-            <a data-toggle="collapse" href="#collapseThree" data-parent="#nav-affix">
+            <a data-toggle="collapse" href="#collapseThree" data-parent="#nav-affix" lang="zh">
                 <span class="glyphicon glyphicon-stats"></span>
                 销售统计
                 <b class="caret"></b>
@@ -65,9 +65,9 @@
         </li>
         <li class="shadow-in" title="行业数据">
             <div id="collapseFour" class="list-group collapse">
-                <a class="list-group-item" href="#">市场数据</a>
+                <a class="list-group-item" href="#"  lang="zh">市场数据</a>
             </div>
-            <a data-toggle="collapse" href="#collapseFour" data-parent="#nav-affix">
+            <a data-toggle="collapse" href="#collapseFour" data-parent="#nav-affix" lang="zh">
                 <span class="glyphicon glyphicon-list-alt"></span>
                 行业数据
                 <b class="caret"></b>
@@ -75,17 +75,17 @@
         </li>
         <li class="shadow-in" title="知识库">
             <div id="collapseFive" class="list-group collapse">
-                <a class="list-group-item" href="${request.contextPath}/productProblem/productProblemList">产品常见问题</a>
-                <a class="list-group-item" href="${request.contextPath}/marketTraining/marketTrainingList">营销培训</a>
-                <a class="list-group-item" href="${request.contextPath}/customerProductPacking/customerProductPackingList">客户产品包装要求</a>
-                <a class="list-group-item" href="${request.contextPath}/productInfo/show">标准产品档案</a>
-                <a class="list-group-item" href="${request.contextPath}/packingArchives/packingArchivesList">包材成本参考</a>
-                <a class="list-group-item" href="${request.contextPath}/knowledgeBase/processCostList">加工成本参考</a>
-                <a class="list-group-item" href="${request.contextPath}/customerEncyclopedia/customerEncyclopediaList">百科</a>
-                <a class="list-group-item" href="${request.contextPath}/exhibitionInfo/exhibitionInfoList">展会动态</a>
-                <a class="list-group-item" href="">其他</a>
+                <a class="list-group-item" lang="zh" href="${request.contextPath}/productProblem/productProblemList">产品常见问题</a>
+                <a class="list-group-item" lang="zh" href="${request.contextPath}/marketTraining/marketTrainingList">营销培训</a>
+                <a class="list-group-item" lang="zh" href="${request.contextPath}/customerProductPacking/customerProductPackingList">客户产品包装要求</a>
+                <a class="list-group-item" lang="zh" href="${request.contextPath}/productInfo/show">标准产品档案</a>
+                <a class="list-group-item" lang="zh" href="${request.contextPath}/packingArchives/packingArchivesList">包材成本参考</a>
+                <a class="list-group-item" lang="zh" href="${request.contextPath}/knowledgeBase/processCostList">加工成本参考</a>
+                <a class="list-group-item" lang="zh" href="${request.contextPath}/customerEncyclopedia/customerEncyclopediaList">百科</a>
+                <a class="list-group-item" lang="zh" href="${request.contextPath}/exhibitionInfo/exhibitionInfoList">展会动态</a>
+                <a class="list-group-item" lang="zh" href="">其他</a>
             </div>
-            <a data-toggle="collapse" href="#collapseFive" data-parent="#nav-affix">
+            <a data-toggle="collapse" href="#collapseFive" data-parent="#nav-affix" lang="zh">
                 <span class="glyphicon glyphicon-book"></span>
                 知识库
                 <b class="caret"></b>
@@ -93,11 +93,11 @@
         </li>
         <li class="shadow-in" title="决策支持" >
             <div id="collapseSix" class="list-group collapse">
-                <a class="list-group-item" href="#">销售数据</a>
-                <a class="list-group-item" href="#">成本费用</a>
-                <a class="list-group-item" href="#">数据库</a>
+                <a class="list-group-item" lang="zh" href="#">销售数据</a>
+                <a class="list-group-item" lang="zh" href="#">成本费用</a>
+                <a class="list-group-item" lang="zh" href="#">数据库</a>
             </div>
-            <a data-toggle="collapse" href="#collapseSix" data-parent="#nav-affix">
+            <a data-toggle="collapse" href="#collapseSix" data-parent="#nav-affix" lang="zh">
                 <span class="glyphicon glyphicon-pencil"></span>
                 决策支持
                 <b class="caret"></b>
@@ -110,9 +110,9 @@
                 <a class="list-group-item" href="${rc.contextPath}/sys/menu" lang="zh">菜单管理</a>
 
             </div>
-            <a data-toggle="collapse" href="#collapseSeven" data-parent="#accordion">
+            <a data-toggle="collapse" href="#collapseSeven" data-parent="#accordion" lang="zh">
                 <span class="glyphicon glyphicon-cog"></span>
-                <span lang="zh">系统管理</span>
+                系统管理
                 <b class="caret"></b>
             </a>
         </li>
