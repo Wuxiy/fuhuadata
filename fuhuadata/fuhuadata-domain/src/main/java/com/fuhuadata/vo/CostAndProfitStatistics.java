@@ -50,6 +50,8 @@ public class CostAndProfitStatistics {
 
     private BigDecimal maintenanceFee;//总维护费
 
+    private String specification;//规格
+
     private BigDecimal netProfit;//净利润
 
     private BigDecimal grossMargin;//毛利率
@@ -283,5 +285,13 @@ public class CostAndProfitStatistics {
 
     public void setCustomerAreaId(String customerAreaId) {
         this.customerAreaId = customerAreaId;
+    }
+
+    public String getSpecification() {
+        return specification;
+    }
+
+    public void setSpecification(String specification) {
+        this.specification = specification;
     }
 }

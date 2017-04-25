@@ -8,15 +8,12 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.service.BusinessOrderProductService;
 import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.BusinessOrderProductVO;
-import com.fuhuadata.vo.BusinessOrderVO;
 import com.fuhuadata.vo.Price.Price;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +47,7 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
             businessOrderProduct.setLastmodifyUserName(LoginUtils.getLoginName());
             businessOrderProduct.setLastmodifyUserId(LoginUtils.getLoginId());
             int businessProductId = businessOrderProductDao.insertBaseInfo(businessOrderProduct);
+            System.out.println("1111111111111新增商机产品返回ID"+businessProductId);
             for(BusinessOrderProductComponent bopc:businessOrderProductComponents){
                 bopc.setBusinessProductId(businessProductId);
                 bopc.setWareId(businessOrderProduct.getWareId());
@@ -63,6 +61,7 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
             }
             //维护档案数据
             int businessProductArchivesId = customerProductArchivesDao.addArchives(businessProductId);
+            System.out.println("档案数据id"+businessProductArchivesId);
             if(businessProductArchivesId<1){
                 throw new Exception("插入档案失败");
             }

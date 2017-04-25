@@ -690,7 +690,7 @@
                 base.full_name customerName,
                 base.customer_level customerLevel,
                 tc.`name` country,
-                SUM(sc.amount) actualAmountPaid,
+                SUM(sc.amount) salesAmount,
                 SUM(sc.gross_profit) grossProfit,
                 b.maintenance_fee maintenanceFee,
                 a.sales_man_id salesManId,
@@ -724,20 +724,25 @@
         <!--每个客户购买产品统计-->
         <isEqual property="dimension" compareValue="4">
           <![CDATA[
-                   SELECT
-                    bop.`name` productName,
-                    pi.category_name categoryName,
-                    SUM(ssc.num) salesVolume,
-                    SUM(ssc.gross_profit) grossProfit,
-                    SUM(ssc.amount) salesAmount,
-                                SUM(ssc.gross_rate) grossRate
-                    FROM
-                    business_order_product bop
-                     LEFT JOIN business_order bo ON bo.order_id  = bop.order_id
-                     LEFT JOIN product_info pi ON pi.product_id = bop.product_id
-                     LEFT JOIN sync_sub_contract ssc ON ssc.pk_longpro  = bo.nc_order_id
-                    WHERE bop.customer_id = #customerId#
-                    GROUP BY bop.`name`
+                 SELECT
+					pi.`name` productName,
+					pi.category_name categoryName,
+					pw.specification,
+					SUM(ssc.num) salesVolume,
+					SUM(ssc.gross_profit) grossProfit,
+					SUM(ssc.amount) salesAmount,
+					SUM(ssc.gross_rate) grossRate
+				FROM
+					sync_sub_contract ssc
+				LEFT JOIN sync_contract sc ON sc.pk_contract = ssc.pk_contract
+				LEFT JOIN product_ware pw ON pw.`code` = ssc.product_code
+				LEFT JOIN product_info pi ON pi.product_id = pw.product_info_id
+				LEFT JOIN business_order bo ON bo.nc_order_id = sc.pk_longpro
+
+				WHERE
+					bo.customer_id = #customerId#
+				GROUP BY
+					pi.`name`
         ]]>
         </isEqual>
 
@@ -829,6 +834,7 @@
         <isEqual property="dimension" compareValue="2">
             SELECT
             tc.`name` country,
+            base.customer_id customerId,
             base.customer_area customerArea,
             base.full_name customerName,
             SUM(sc.amount) salesAmount,
@@ -889,22 +895,23 @@
 
         <isEqual property="dimension" compareValue="4">
             SELECT
-            a.name productName,
-            b.category_name categoryName,
+            bi.`name` productName,
+            bi.category_name categoryName,
             SUM(ssc.num) salesVolume,
             SUM(ssc.gross_profit) grossProfit,
             SUM(ssc.amount) salesAmount,
             SUM(ssc.gross_rate) grossRate
             FROM
-            business_order_product a
-            LEFT JOIN product_info b ON b.product_id = a.product_id
-            LEFT JOIN business_order bo ON bo.order_id = a.order_id
-            LEFT JOIN sync_sub_contract ssc ON ssc.pk_longpro = bo.nc_order_id
+            sync_sub_contract ssc
+            LEFT JOIN sync_contract sc ON sc.pk_contract = ssc.pk_contract_b
+            LEFT JOIN business_order a ON a.nc_order_id = sc.pk_longpro
+            LEFT JOIN product_ware pw ON ssc.product_code = pw.`code`
+            LEFT JOIN product_info bi ON bi.product_id = pw.product_info_id
             <isParameterPresent>
                 <include refid="PROFIT-STATISTICS-QUERY-COMMON"/>
             </isParameterPresent>
             GROUP BY
-            a.`name`
+            bi.`name`
             ORDER BY
             grossRate DESC
             limit #startRow#,#pageSize#

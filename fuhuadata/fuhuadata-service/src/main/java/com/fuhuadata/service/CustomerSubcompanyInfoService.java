@@ -19,7 +19,7 @@ public interface CustomerSubcompanyInfoService {
 	 * @param customerSubcompanyInfo
 	 * @return
 	 */
-    public Result<CustomerSubcompanyInfo> addCustomerSubcompanyInfo(CustomerSubcompanyInfo customerSubcompanyInfo) ;
+    public Result<CustomerSubcompanyInfo> addCustomerSubcompanyInfo(CustomerSubcompanyInfo customerSubcompanyInfo,List<CustomerEnterpriceNature> customerEnterpriceNatures) ;
  
     /**
      * 按照主键id更新customerSubcompanyInfo，请重新new CustomerSubcompanyInfo 的更新对象，设置要更新的字段

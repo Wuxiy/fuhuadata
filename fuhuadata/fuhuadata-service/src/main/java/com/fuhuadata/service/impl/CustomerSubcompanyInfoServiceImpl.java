@@ -28,10 +28,10 @@ public class CustomerSubcompanyInfoServiceImpl implements CustomerSubcompanyInfo
     private CustomerSubcompanyInfoManager customerSubcompanyInfoManager;
 	@Resource
 	private CustomerBaseInfoManager customerBaseInfoManager;
-    public Result<CustomerSubcompanyInfo> addCustomerSubcompanyInfo(CustomerSubcompanyInfo customerSubcompanyInfo) {
+    public Result<CustomerSubcompanyInfo> addCustomerSubcompanyInfo(CustomerSubcompanyInfo customerSubcompanyInfo,List<CustomerEnterpriceNature> list) {
 		Result<CustomerSubcompanyInfo> result = new Result<CustomerSubcompanyInfo>();
 		try {
-			result.addDefaultModel(customerSubcompanyInfoManager.addCustomerSubcompanyInfo(customerSubcompanyInfo));			
+			result.addDefaultModel(customerSubcompanyInfoManager.addCustomerSubcompanyInfo(customerSubcompanyInfo,list));
 		} catch(Exception e) {;
 			result.setSuccess(false);
 			log.error("新增客户子公司错误",e);
