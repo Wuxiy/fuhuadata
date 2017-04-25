@@ -8,15 +8,12 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.service.BusinessOrderProductService;
 import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.BusinessOrderProductVO;
-import com.fuhuadata.vo.BusinessOrderVO;
 import com.fuhuadata.vo.Price.Price;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +47,7 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
             businessOrderProduct.setLastmodifyUserName(LoginUtils.getLoginName());
             businessOrderProduct.setLastmodifyUserId(LoginUtils.getLoginId());
             int businessProductId = businessOrderProductDao.insertBaseInfo(businessOrderProduct);
+            System.out.println("1111111111111新增商机产品返回ID"+businessProductId);
             for(BusinessOrderProductComponent bopc:businessOrderProductComponents){
                 bopc.setBusinessProductId(businessProductId);
                 bopc.setWareId(businessOrderProduct.getWareId());
@@ -63,6 +61,7 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
             }
             //维护档案数据
             int businessProductArchivesId = customerProductArchivesDao.addArchives(businessProductId);
+            System.out.println("档案数据id"+businessProductArchivesId);
             if(businessProductArchivesId<1){
                 throw new Exception("插入档案失败");
             }
@@ -346,12 +345,13 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
          * Y= {X+【港杂费单价】+【佣金单价】+【海运费单价】+【资金利息单价】+
          * 【退税率】×【海运费单价】+【其他费用】}/（1-【汇损率】-【保险费率】-【信保费率】+【退税率】-【退税率】×【保险费率】）
          */
+        BigDecimal z = new BigDecimal(1).subtract(lossRate).subtract(premiumRate).subtract(guaranteeRate).add(taxFree).subtract(
+                taxFree.multiply(premiumRate));
+        if(z.equals(BigDecimal.ZERO)){
+            return new BigDecimal(0);
+        }
         return x.add(portSurcharge).add(commissionPrice).add(oceanFreight).add(capitalInterestPrice)
-                .add(taxFree.multiply(oceanFreight)).add(otherCost).divide(
-                        new BigDecimal(1).subtract(lossRate).subtract(premiumRate).subtract(guaranteeRate).add(taxFree).subtract(
-                                taxFree.multiply(premiumRate)
-                        ),4,BigDecimal.ROUND_HALF_UP
-                );
+                .add(taxFree.multiply(oceanFreight)).add(otherCost).divide(z,4,BigDecimal.ROUND_HALF_UP);
     }
 
     /**
@@ -427,9 +427,13 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
          *  Y={ X+【港杂费单价】+【佣金单价】+【海运费单价】+【资金利息单价】-
          * 【退税率】×X/【采购退税计算率】+【其他费用】}/(1-【汇损率】-【保险费率】-【信保费率】)
          */
+        BigDecimal z = new BigDecimal(1).subtract(lossRate).subtract(premiumRate).subtract(guaranteeRate);
+        if(z.equals(BigDecimal.ZERO)){
+            return new BigDecimal(0);
+        }
         return x.add(portSurcharge).add(commissionPrice).add(oceanFreight).add(capitalInterestPrice)
                 .subtract(taxFree.multiply(x).divide(purchaseZZL,4,BigDecimal.ROUND_HALF_UP)).add(otherCost)
-                .divide(new BigDecimal(1).subtract(lossRate).subtract(premiumRate).subtract(guaranteeRate),4,BigDecimal.ROUND_HALF_UP);
+                .divide(z,4,BigDecimal.ROUND_HALF_UP);
     }
 
     /**
@@ -490,8 +494,12 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
          * * Y={ X+【港杂费单价】+【佣金单价】+【海运费单价】+【资金利息单价】+
          * 【其他费用】}/(1-【汇损率】-【保险费率】-【信保费率】)
          */
+        BigDecimal z = new BigDecimal(1).subtract(lossRate).subtract(premiumRate).subtract(guaranteeRate);
+        if(z.equals(BigDecimal.ZERO)){
+            return new BigDecimal(0);
+        }
         return x.add(portSurcharge).add(commissionPrice).add(oceanFreight).add(capitalInterestPrice)
-                .add(otherCost).divide(new BigDecimal(1).subtract(lossRate).subtract(premiumRate).subtract(guaranteeRate),4,BigDecimal.ROUND_HALF_UP);
+                .add(otherCost).divide(z,4,BigDecimal.ROUND_HALF_UP);
     }
 
     /**
@@ -526,7 +534,7 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
         }
         //原币对本币汇率
         BigDecimal nexchangerate = order.getNexchangerate();
-        if(nexchangerate==null){
+        if(nexchangerate==null || nexchangerate.equals(BigDecimal.ZERO)){
             nexchangerate = new BigDecimal(1);
         }
         //X={(【价委会指导单价】+【采购价格】)*【单位耗用比例】+【加工费】}/【汇率】；

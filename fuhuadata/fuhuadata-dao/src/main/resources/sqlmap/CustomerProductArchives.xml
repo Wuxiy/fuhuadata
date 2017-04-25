@@ -28,8 +28,6 @@
 		<result property="InternalTransportPrice" column="Internal_transport_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result property="factoryId" column="factory_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="factoryName" column="factory_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-		<result column="additional_price" property="additionalPrice" jdbcType="DECIMAL" />
-		<result column="consumption" property="consumption" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result column="img_info" property="imgInfo" jdbcType="VARCHAR" />
 		<result column="pakage_info" property="pakageInfo" jdbcType="VARCHAR" />
 		<result column="material_info" property="materialInfo" jdbcType="VARCHAR" />
@@ -135,13 +133,7 @@
 			<isNotNull prepend=" AND " property="compositionCost">
 				composition_cost = #compositionCost#
 			</isNotNull>
-			<isNotNull prepend=" AND " property="additionalPrice">
-				additional_price = #additionalPrice#
-			</isNotNull>
 
-			<isNotNull prepend=" AND " property="consumption">
-				consumption = #consumption#
-			</isNotNull>
 			<isNotNull prepend=" AND " property="imgInfo">
 				img_info = #imgInfo#
 			</isNotNull>
@@ -305,13 +297,7 @@
 			<isNotNull prepend=" AND " property="compositionCost">
 				composition_cost = #compositionCost#
 			</isNotNull>
-			<isNotNull prepend=" AND " property="additionalPrice">
-				additional_price = #additionalPrice#
-			</isNotNull>
 
-			<isNotNull prepend=" AND " property="consumption">
-				consumption = #consumption#
-			</isNotNull>
 			<isNotNull prepend=" AND " property="imgInfo">
 				img_info = #imgInfo#
 			</isNotNull>
@@ -753,10 +739,13 @@
 				LEFT JOIN customer_base_info base on base.customer_id = a.customer_id
 				LEFT JOIN product_info b on a.product_id = b.product_id
 				LEFT JOIN product_ware c on c.product_info_id = b.product_id
-				WHERE a.customer_id = #customerId#
+				WHERE
+					a.ware_id = c.ware_id
+				AND
+				a.customer_id = #customerId#
 		]]>
 	</select>
-	
+
 	<select id="GET-PAGE" resultMap="CUSTOMERPRODUCTARCHIVES-MAP" parameterClass="QueryCustomerProductArchives">
 		<![CDATA[
 			SELECT * FROM customer_product_archives

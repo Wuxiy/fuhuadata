@@ -80,7 +80,15 @@ public class BusinessOrderManagerImpl implements BusinessOrderManager {
 
     @Override
     public List<CostAndProfitStatistics> getCostAndProfitStatisticsByPage(CostAndProfitStatistics costAndProfitStatistics) {
-        return businessOrderDao.getCostAndProfitStatisticsByPage(costAndProfitStatistics);
+
+           List<CostAndProfitStatistics> list  =    businessOrderDao.getCostAndProfitStatisticsByPage(costAndProfitStatistics);
+            //计算净利润，前期没有从businessOrder表里取
+           for(CostAndProfitStatistics cps:list){
+               if(cps.getGrossProfit()!=null&&cps.getMaintenanceFee()!=null){
+                   cps.setNetProfit(cps.getGrossProfit().subtract(cps.getMaintenanceFee()));
+               }
+           }
+           return list;
     }
 
     @Override
@@ -90,6 +98,7 @@ public class BusinessOrderManagerImpl implements BusinessOrderManager {
 
     @Override
     public int countCostAndProfit(CostAndProfitStatistics costAndProfitStatistics) {
+
         return businessOrderDao.countCostAndProfit(costAndProfitStatistics);
     }
 
