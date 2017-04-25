@@ -57,6 +57,10 @@ function anotherNamerList(result) {
     console.log(ResultData);
     AnotherNameList.innerHTML = '';
 
+    if (ResultData === undefined || ResultData === "") {
+        return;
+    }
+
     for(var i=0;i<ResultData.length;i++){
         AnotherNameList.innerHTML += '<tr>'+
                                         '<td>'+ResultData[i].customerSubId+'</td>'+
