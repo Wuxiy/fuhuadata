@@ -418,6 +418,8 @@
     bInfo.startSave();
     bInfo.startCancel();
 
+    var cupboardTypeList = ['20GP','40GP','20HQ'];
+
     $(document).ready(function(){
         if(orderId!=''&&businessId==''){
             $('#back').removeClass('hidden');
@@ -496,19 +498,19 @@
                             for(var i=0;i<businessOrderProductLists.length;i++){
                                 businessproduct.innerHTML += '<tr>'+
                                         '<td>'+ifEmpty(businessOrderProductLists[i].productCode)+'</td>'+
-                                        '<td><a href="'+basePath+'/businessProduct/intoProductBasicInfoRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&edit=1'+'">'+ifEmpty(businessOrderProductLists[i].productName)+'</a></td>'+
+                                        '<td><a href="'+basePath+'/businessProduct/intoProductBasicInfoRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&orderId='+businessOrderProductLists[i].orderId+'&edit=1'+'">'+ifEmpty(businessOrderProductLists[i].productName)+'</a></td>'+
                                         '<td>'+ifEmpty(businessOrderProductLists[i].categoryName)+'</td>'+
                                         '<td>'+ifEmpty(businessOrderProductLists[i].brand)+'</td>'+
-                                        '<td><a href="'+basePath+'/businessProduct/intoProductRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&productRequireId='+ifEmpty(businessOrderProductLists[i].productRequireId)+'&&edit=1'+'">'+ifEmpty(businessOrderProductLists[i].specification)+'</a></td>'+
+                                        '<td><a href="'+basePath+'/businessProduct/intoProductRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&orderId='+businessOrderProductLists[i].orderId+'&productRequireId='+ifEmpty(businessOrderProductLists[i].productRequireId)+'&edit=1'+'">'+ifEmpty(businessOrderProductLists[i].specification)+'</a></td>'+
                                         '<td>'+ifEmpty(businessOrderProductLists[i].mainProductAmount)+'</td>'+
                                         '<td>'+ifEmpty(businessOrderProductLists[i].cupboardPerNumber)+'</td>'+
-                                        '<td>'+ifEmpty(businessOrderProductLists[i].cupboardType)+'</td>'+
+                                        '<td>'+cupboardTypeList[ifEmpty(businessOrderProductLists[i].cupboardType)]+'</td>'+
                                         '<td>'+ifEmpty(businessOrderProductLists[i].cupboardNumber)+'</td>'+
                                         '<td>'+ifEmpty(businessOrderProductLists[i].deliveryTime)+'</td>'+
                                         '<td>'+ifEmpty(businessOrderProductLists[i].minPrice)+'</td>'+
 
-                                        '<td><a href="'+basePath+'/businessProduct/intoDocumentary?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&edit=1'+'">查看</a></td>'+
-                                        '<td><a href="'+basePath+'/businessProduct/intoPackageRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&edit=1'+'">查看</a></td>'+
+                                        '<td><a href="'+basePath+'/businessProduct/intoDocumentary?businessProductId='+businessOrderProductLists[i].businessProductId+'&orderId='+businessOrderProductLists[i].orderId+'&edit=1'+'">查看</a></td>'+
+                                        '<td><a href="'+basePath+'/businessProduct/intoPackageRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&orderId='+businessOrderProductLists[i].orderId+'&edit=1'+'">查看</a></td>'+
                                         '<td><input type="checkbox" class="form-control" name="cellcheckbox" value="'+businessOrderProductLists[i].businessProductId+'" /></td>'+
                                         '</tr>';
                             }

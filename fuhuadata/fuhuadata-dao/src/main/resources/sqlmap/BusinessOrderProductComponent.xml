@@ -58,11 +58,13 @@
 
   <select id="getListByBusinessProductId" resultClass="BusinessOrderProductComponent" parameterClass="java.lang.Integer">
         SELECT
+        pc.id,
         cc.`component_id` as componentId,
         cc.`component_name` as componentName,
         pc.`consumption`,
         cc.`unit_cost` as price,
-        pc.cost
+        pc.cost,
+        pc.remark
         FROM
         business_order_product_component pc,
         k_component_cost cc
@@ -145,7 +147,7 @@
   <update id="update" parameterClass="BusinessOrderProductComponent">
         update business_order_product_component
         SET
-        1=1
+        id=id
         <isNotEmpty prepend="," property="productId">
             product_id = #productId#
         </isNotEmpty>

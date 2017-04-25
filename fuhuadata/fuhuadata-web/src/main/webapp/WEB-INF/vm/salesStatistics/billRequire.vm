@@ -278,6 +278,7 @@
                     }
                     if(documentaryRequire.qualityTestingReport!=undefined&&documentaryRequire.qualityTestingReport == 1){
                         $('#qualityTestingReport').attr('checked',true);
+                        $('#reportCompanyTitle').attr('data-control','on');
                     }
                     if(documentaryRequire.guaranteeSlip!=undefined&&documentaryRequire.guaranteeSlip == 1){
                         $('#guaranteeSlip').attr('checked',true);
@@ -330,6 +331,7 @@
                             var val = $(this).val();
                             if(val == telexRelease){
                                 $(this).attr('checked',true);
+                                $('#releaseDestination').attr('data-control','on');
                             }
                         })
                     }
