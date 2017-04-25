@@ -151,8 +151,8 @@ $('#openFile').on('change.file',function (e) {
         processData: false,
         contentType: false,
         callback    :  function (data) {
-            img.attr('src',(basePath==""?("/"+basePath):basePath)+data);
-            input.attr('data-url',(basePath==""?("/"+basePath):basePath)+data);
+            img.attr('src',(basePath==""?("/"+basePath):basePath)+"/"+data);
+            input.attr('data-url',(basePath==""?("/"+basePath):basePath)+"/"+data);
             fileF.reset(); // 重置file的值
             monBtn.removeClass('hidden'); // 显示修改按钮
         }
