@@ -1133,7 +1133,7 @@
                 var url = basePath + '/businessProduct/deleteAllInfoByIds?businessProductIds=' + data;
                 console.log(data);
                 jQuery.ajax({
-                    url:bas url,
+                    url: url,
                     type:'POST',
 //                    dataType:"json",
 //                    contentType:"application/json",
