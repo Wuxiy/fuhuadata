@@ -30,7 +30,7 @@ $(document).ready(function(){
             return false;
         }else{
             upData(basePath+'/customerVisitRecord/addCustomerVisitRecord','POST',addVisit(),"application/json");
-            location.reload();
+            // location.reload();
         }
 
     });
@@ -97,7 +97,7 @@ function modalContact(result) {
     for(var i=0;i<ResultData.length;i++){
         modalContactList.innerHTML += '<tr>'+
                                         '<td><input type="checkbox" name="cellcheckbox"></td>'+
-                                        '<td name="Lname" data-name="'+ResultData[i].name+'">'+ResultData[i].name+'</td>'+
+                                        '<td name="Lname" data-name="'+ ResultData[i].linkmanId +'">'+ ResultData[i].name+'</td>'+
                                         '<td><input type="text" name="gift" disabled></td>'+
                                         '</tr>';
     }
@@ -130,9 +130,9 @@ function recordLinkman() {
         var obj = {
             "linkmanId":$(this).parents('tr').find('[name="Lname"]').attr('data-name'),
             "activityGift":$(this).parents('tr').find('[name="gift"]').val()
-        }
+        };
         arr.push(obj);
-    })
+    });
     return arr;
 }
 
@@ -162,7 +162,7 @@ $(document).on('change','input[name="cellcheckbox"]',function(){
     }else {
         $(this).parents('tr').find('[name="gift"]').attr('disabled',true);
     }
-})
+});
 
 $(document).on('click','#activityType',function(){
     if($(this).val() == 5){
@@ -170,4 +170,4 @@ $(document).on('click','#activityType',function(){
     }else{
         $('#activityRemarks').attr('disabled',true);
     }
-})
+});
