@@ -619,7 +619,7 @@
 
             $('[data-target="#packModal"]').attr('disabled',false);
             $('.isdisabled').attr('disabled',false);
-        }else if(editId != 1&&editId != 2&&id == ''){
+        }else if(editId == 0&&editId == ''){
             $('#before').removeClass('hidden');
             $('#next').removeClass('hidden');
 

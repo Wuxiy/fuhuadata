@@ -253,138 +253,250 @@
     bInfo.startSave();
     bInfo.startCancel();
 
-    if(editId == 1&&id!=''){
-        $('.isdisabled').attr('disabled',true);
-        $('#back').removeClass('hidden');
-        $('#edit').removeClass('hidden');
+    //editId=0,id=='',新增;eidtId=1,id!='',列表进入查看详情;editId=2,id!='',客户信息表进入查看详情
+    $(document).ready(function(){
+        if(editId == 1&&id!=''){
+            $('.isdisabled').attr('disabled',true);
+            $('#back').removeClass('hidden');
+            $('#edit').removeClass('hidden');
 
-        jQuery.ajax({
-            url:basePath + '/businessProduct/getPackageRequire?businessProductId=' + id,
-            type:'POST',
-            success:function(result){
-                console.log(result);
+            jQuery.ajax({
+                url:basePath + '/businessProduct/getPackageRequire?businessProductId=' + id,
+                type:'POST',
+                success:function(result){
+                    console.log(result);
 
-                var PackageRequireVo = result.PackageRequireVo;
-                if(PackageRequireVo.tray!=undefined){
-                    var tray = PackageRequireVo.tray;
-                    if(tray == 0){
-                        $('input[name="fullyClose"]').attr('checked',false);
-                    }
-                    $('input[name="fullyClose"]').each(function(){
-                        var val = $(this).val();
-                        if(val == tray){
-                            $(this).attr('checked',true);
+                    var PackageRequireVo = result.PackageRequireVo;
+                    if(PackageRequireVo.tray!=undefined){
+                        var tray = PackageRequireVo.tray;
+                        if(tray == 0){
+                            $('input[name="fullyClose"]').attr('checked',false);
                         }
-                    })
-                }
-                if(PackageRequireVo.inspectionOfLoading!=undefined){
-                    var inspectionOfLoading = PackageRequireVo.inspectionOfLoading;
-                    if(inspectionOfLoading == 0){
-                        $('input[name="inspectionOfLoading"]').attr('checked',false);
+                        $('input[name="fullyClose"]').each(function(){
+                            var val = $(this).val();
+                            if(val == tray){
+                                $(this).attr('checked',true);
+                            }
+                        })
                     }
-                    $('input[name="inspectionOfLoading"]').each(function(){
-                        var val = $(this).val();
-                        if(val == inspectionOfLoading){
-                            $(this).attr('checked',true);
+                    if(PackageRequireVo.inspectionOfLoading!=undefined){
+                        var inspectionOfLoading = PackageRequireVo.inspectionOfLoading;
+                        if(inspectionOfLoading == 0){
+                            $('input[name="inspectionOfLoading"]').attr('checked',false);
                         }
-                    })
-                }
-                if(PackageRequireVo.inspectionInstitution!=undefined){
-                    $('#inspectionInstitution').val(PackageRequireVo.inspectionInstitution);
-                }
-                if(PackageRequireVo.postLabel!=undefined&&PackageRequireVo.postLabel == 1){
-                    $('#postLabel').attr('checked',true);
-                }
-                if(PackageRequireVo.basePlate!=undefined&&PackageRequireVo.basePlate == 1){
-                    $('#basePlate').attr('checked',true);
-                }
-                if(PackageRequireVo.paperBoard!=undefined&&PackageRequireVo.paperBoard == 1){
-                    $('#paperBoard').attr('checked',true);
-                }
-                if(PackageRequireVo.gasbag!=undefined&&PackageRequireVo.gasbag == 1){
-                    $('#gasbag').attr('checked',true);
-                }
-                if(PackageRequireVo.dragNet!=undefined&&PackageRequireVo.dragNet == 1){
-                    $('#dragNet').attr('checked',true);
-                }
-                if(PackageRequireVo.fastenBelt!=undefined&&PackageRequireVo.fastenBelt == 1){
-                    $('#fastenBelt').attr('checked',true);
-                }
-                if(PackageRequireVo.barcCode!=undefined&&PackageRequireVo.barcCode == 1){
-                    $('#barcCode').attr('checked',true);
-                }
-                if(PackageRequireVo.americanDoorseal!=undefined&&PackageRequireVo.americanDoorseal == 1){
-                    $('#americanDoorseal').attr('checked',true);
-                }
-                if(PackageRequireVo.cornerProtection!=undefined&&PackageRequireVo.cornerProtection == 1){
-                    $('#cornerProtection').attr('checked',true);
-                }
-                if(PackageRequireVo.bead!=undefined&&PackageRequireVo.bead == 1){
-                    $('#bead').attr('checked',true);
-                }
-                if(PackageRequireVo.wireFixed!=undefined&&PackageRequireVo.wireFixed == 1){
-                    $('#wireFixed').attr('checked',true);
-                }
-
-                var businessOrderProduct = result.businessOrderProduct;
-                if(businessOrderProduct.mianxiangqi!=undefined){
-                    $('#mianxiangqi').val(businessOrderProduct.mianxiangqi);
-                }
-                if(businessOrderProduct.miantuiqi!=undefined){
-                    $('#miantuiqi').val(businessOrderProduct.miantuiqi);
-                }
-                if(businessOrderProduct.cupboardType!=undefined){
-                    $('#cupboardType').val(businessOrderProduct.cupboardType);
-                }
-                if(businessOrderProduct.cupboardPerNumber!=undefined){
-                    $('#cupboardPerNumber').val(businessOrderProduct.cupboardPerNumber);
-                }
-                if(businessOrderProduct.cupboardNumber!=undefined){
-                    $('#cupboardNumber').val(businessOrderProduct.cupboardNumber);
-                }
-                if(businessOrderProduct.oceanFreight!=undefined){
-                    $('#oceanFreight').val(businessOrderProduct.oceanFreight);
-                }
-                if(businessOrderProduct.portSurcharge!=undefined){
-                    $('#portSurcharge').val(businessOrderProduct.portSurcharge);
-                }
-                if(businessOrderProduct.shippingAgentRequire!=undefined){
-                    $('#shippingAgentRequire').val(businessOrderProduct.shippingAgentRequire);
-                }
-                if(businessOrderProduct.goodsType!=undefined){
-                    var goodsType = businessOrderProduct.goodsType;
-                    if(goodsType == 0){
-                        $('input[name="goodsType"]').attr('disabled',false);
+                        $('input[name="inspectionOfLoading"]').each(function(){
+                            var val = $(this).val();
+                            if(val == inspectionOfLoading){
+                                $(this).attr('checked',true);
+                            }
+                        })
                     }
-                    $('input[name="goodsType"]').each(function(){
-                        var val = $(this).val();
-                        if(val == goodsType){
-                            $(this).attr('checked',true);
+                    if(PackageRequireVo.inspectionInstitution!=undefined){
+                        $('#inspectionInstitution').val(PackageRequireVo.inspectionInstitution);
+                    }
+                    if(PackageRequireVo.postLabel!=undefined&&PackageRequireVo.postLabel == 1){
+                        $('#postLabel').attr('checked',true);
+                    }
+                    if(PackageRequireVo.basePlate!=undefined&&PackageRequireVo.basePlate == 1){
+                        $('#basePlate').attr('checked',true);
+                    }
+                    if(PackageRequireVo.paperBoard!=undefined&&PackageRequireVo.paperBoard == 1){
+                        $('#paperBoard').attr('checked',true);
+                    }
+                    if(PackageRequireVo.gasbag!=undefined&&PackageRequireVo.gasbag == 1){
+                        $('#gasbag').attr('checked',true);
+                    }
+                    if(PackageRequireVo.dragNet!=undefined&&PackageRequireVo.dragNet == 1){
+                        $('#dragNet').attr('checked',true);
+                    }
+                    if(PackageRequireVo.fastenBelt!=undefined&&PackageRequireVo.fastenBelt == 1){
+                        $('#fastenBelt').attr('checked',true);
+                    }
+                    if(PackageRequireVo.barcCode!=undefined&&PackageRequireVo.barcCode == 1){
+                        $('#barcCode').attr('checked',true);
+                    }
+                    if(PackageRequireVo.americanDoorseal!=undefined&&PackageRequireVo.americanDoorseal == 1){
+                        $('#americanDoorseal').attr('checked',true);
+                    }
+                    if(PackageRequireVo.cornerProtection!=undefined&&PackageRequireVo.cornerProtection == 1){
+                        $('#cornerProtection').attr('checked',true);
+                    }
+                    if(PackageRequireVo.bead!=undefined&&PackageRequireVo.bead == 1){
+                        $('#bead').attr('checked',true);
+                    }
+                    if(PackageRequireVo.wireFixed!=undefined&&PackageRequireVo.wireFixed == 1){
+                        $('#wireFixed').attr('checked',true);
+                    }
+
+                    var businessOrderProduct = result.businessOrderProduct;
+                    if(businessOrderProduct.mianxiangqi!=undefined){
+                        $('#mianxiangqi').val(businessOrderProduct.mianxiangqi);
+                    }
+                    if(businessOrderProduct.miantuiqi!=undefined){
+                        $('#miantuiqi').val(businessOrderProduct.miantuiqi);
+                    }
+                    if(businessOrderProduct.cupboardType!=undefined){
+                        $('#cupboardType').val(businessOrderProduct.cupboardType);
+                    }
+                    if(businessOrderProduct.cupboardPerNumber!=undefined){
+                        $('#cupboardPerNumber').val(businessOrderProduct.cupboardPerNumber);
+                    }
+                    if(businessOrderProduct.cupboardNumber!=undefined){
+                        $('#cupboardNumber').val(businessOrderProduct.cupboardNumber);
+                    }
+                    if(businessOrderProduct.oceanFreight!=undefined){
+                        $('#oceanFreight').val(businessOrderProduct.oceanFreight);
+                    }
+                    if(businessOrderProduct.portSurcharge!=undefined){
+                        $('#portSurcharge').val(businessOrderProduct.portSurcharge);
+                    }
+                    if(businessOrderProduct.shippingAgentRequire!=undefined){
+                        $('#shippingAgentRequire').val(businessOrderProduct.shippingAgentRequire);
+                    }
+                    if(businessOrderProduct.goodsType!=undefined){
+                        var goodsType = businessOrderProduct.goodsType;
+                        if(goodsType == 0){
+                            $('input[name="goodsType"]').attr('disabled',false);
                         }
-                    })
+                        $('input[name="goodsType"]').each(function(){
+                            var val = $(this).val();
+                            if(val == goodsType){
+                                $(this).attr('checked',true);
+                            }
+                        })
+                    }
                 }
-            }
-        })
-    }else if(editId == 1&&id==''){
-        $('[data-control="on"]').attr('disabled',false);
+            })
+        }else if(editId == 1&&id==''){
+            $('[data-control="on"]').attr('disabled',false);
 
-        $('#before').removeClass('hidden');
-        $('#next').removeClass('hidden');
-    }
+            $('#before').removeClass('hidden');
+            $('#next').removeClass('hidden');
+        }else if(editId == 2&&id !=''){
+            jQuery.ajax({
+                url:basePath + '/businessProduct/getPackageRequire?businessProductId=' + id,
+                type:'POST',
+                success:function(result){
+                    console.log(result);
 
-    $(document).on('click','#next',function(){
-        jQuery.ajax({
-            url:basePath + '/businessProduct/saveDocumentaryOrPacking',
-            type:'POST',
-            data:getdata(),
-            /*contentType:"application/json",*/
-            success:function(result){
-                alert('添加成功!');
-                console.log(result);
-                window.location.href = basePath + '/businessOrder/intoOfferorOrder?orderId=' + orderId;
-            }
+                    var PackageRequireVo = result.PackageRequireVo;
+                    if(PackageRequireVo.tray!=undefined){
+                        var tray = PackageRequireVo.tray;
+                        if(tray == 0){
+                            $('input[name="fullyClose"]').attr('checked',false);
+                        }
+                        $('input[name="fullyClose"]').each(function(){
+                            var val = $(this).val();
+                            if(val == tray){
+                                $(this).attr('checked',true);
+                            }
+                        })
+                    }
+                    if(PackageRequireVo.inspectionOfLoading!=undefined){
+                        var inspectionOfLoading = PackageRequireVo.inspectionOfLoading;
+                        if(inspectionOfLoading == 0){
+                            $('input[name="inspectionOfLoading"]').attr('checked',false);
+                        }
+                        $('input[name="inspectionOfLoading"]').each(function(){
+                            var val = $(this).val();
+                            if(val == inspectionOfLoading){
+                                $(this).attr('checked',true);
+                            }
+                        })
+                    }
+                    if(PackageRequireVo.inspectionInstitution!=undefined){
+                        $('#inspectionInstitution').val(PackageRequireVo.inspectionInstitution);
+                    }
+                    if(PackageRequireVo.postLabel!=undefined&&PackageRequireVo.postLabel == 1){
+                        $('#postLabel').attr('checked',true);
+                    }
+                    if(PackageRequireVo.basePlate!=undefined&&PackageRequireVo.basePlate == 1){
+                        $('#basePlate').attr('checked',true);
+                    }
+                    if(PackageRequireVo.paperBoard!=undefined&&PackageRequireVo.paperBoard == 1){
+                        $('#paperBoard').attr('checked',true);
+                    }
+                    if(PackageRequireVo.gasbag!=undefined&&PackageRequireVo.gasbag == 1){
+                        $('#gasbag').attr('checked',true);
+                    }
+                    if(PackageRequireVo.dragNet!=undefined&&PackageRequireVo.dragNet == 1){
+                        $('#dragNet').attr('checked',true);
+                    }
+                    if(PackageRequireVo.fastenBelt!=undefined&&PackageRequireVo.fastenBelt == 1){
+                        $('#fastenBelt').attr('checked',true);
+                    }
+                    if(PackageRequireVo.barcCode!=undefined&&PackageRequireVo.barcCode == 1){
+                        $('#barcCode').attr('checked',true);
+                    }
+                    if(PackageRequireVo.americanDoorseal!=undefined&&PackageRequireVo.americanDoorseal == 1){
+                        $('#americanDoorseal').attr('checked',true);
+                    }
+                    if(PackageRequireVo.cornerProtection!=undefined&&PackageRequireVo.cornerProtection == 1){
+                        $('#cornerProtection').attr('checked',true);
+                    }
+                    if(PackageRequireVo.bead!=undefined&&PackageRequireVo.bead == 1){
+                        $('#bead').attr('checked',true);
+                    }
+                    if(PackageRequireVo.wireFixed!=undefined&&PackageRequireVo.wireFixed == 1){
+                        $('#wireFixed').attr('checked',true);
+                    }
+
+                    var businessOrderProduct = result.businessOrderProduct;
+                    if(businessOrderProduct.mianxiangqi!=undefined){
+                        $('#mianxiangqi').val(businessOrderProduct.mianxiangqi);
+                    }
+                    if(businessOrderProduct.miantuiqi!=undefined){
+                        $('#miantuiqi').val(businessOrderProduct.miantuiqi);
+                    }
+                    if(businessOrderProduct.cupboardType!=undefined){
+                        $('#cupboardType').val(businessOrderProduct.cupboardType);
+                    }
+                    if(businessOrderProduct.cupboardPerNumber!=undefined){
+                        $('#cupboardPerNumber').val(businessOrderProduct.cupboardPerNumber);
+                    }
+                    if(businessOrderProduct.cupboardNumber!=undefined){
+                        $('#cupboardNumber').val(businessOrderProduct.cupboardNumber);
+                    }
+                    if(businessOrderProduct.oceanFreight!=undefined){
+                        $('#oceanFreight').val(businessOrderProduct.oceanFreight);
+                    }
+                    if(businessOrderProduct.portSurcharge!=undefined){
+                        $('#portSurcharge').val(businessOrderProduct.portSurcharge);
+                    }
+                    if(businessOrderProduct.shippingAgentRequire!=undefined){
+                        $('#shippingAgentRequire').val(businessOrderProduct.shippingAgentRequire);
+                    }
+                    if(businessOrderProduct.goodsType!=undefined){
+                        var goodsType = businessOrderProduct.goodsType;
+                        if(goodsType == 0){
+                            $('input[name="goodsType"]').attr('disabled',false);
+                        }
+                        $('input[name="goodsType"]').each(function(){
+                            var val = $(this).val();
+                            if(val == goodsType){
+                                $(this).attr('checked',true);
+                            }
+                        })
+                    }
+                }
+            })
+        }
+
+        $(document).on('click','#next',function(){
+            jQuery.ajax({
+                url:basePath + '/businessProduct/saveDocumentaryOrPacking',
+                type:'POST',
+                data:getdata(),
+                /*contentType:"application/json",*/
+                success:function(result){
+                    alert('添加成功!');
+                    console.log(result);
+                    window.location.href = basePath + '/businessOrder/intoOfferorOrder?orderId=' + orderId;
+                }
+            })
         })
     })
+
 
     //监听互斥
     $(document).on('click','input[name="fullyClose"]',function(){
