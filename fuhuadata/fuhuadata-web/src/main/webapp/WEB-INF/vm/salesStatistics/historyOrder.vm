@@ -27,32 +27,35 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title" lang="zh">
-                        费用和利润
+                       历史订单
                     </h3>
                 </div>
                 <div class="panel-body clearfix">
                     <!--搜索&筛选控件-->
                     <div class="form-horizontal">
-                        <div class="form-group col-xs-10 pull-right">
-                            <form class="input-group">
-                                <span class="input-group-addon" lang="zh">合同号</span>
-                                <input class="form-control" id="ncOrderId" />
-                                <span class="input-group-addon" lang="zh">销售组织</span>
-                                <input class="form-control" id="saleOrganizationId" />
-                                <span class="input-group-addon" lang="zh">客户名称</span>
-                                <input class="form-control" id="customerName" />
-                                <span class="input-group-addon" lang="zh">开始时间</span>
-                                <input class="form-control" id="startTime" />
-                                <span class="input-group-addon" lang="zh">结束时间</span>
-                                <input class="form-control" id="endTime" />
-                                <div class="input-group-btn">
-                                    <button class="btn btn-xs btn-default" id="resetBtn" type="reset">重置</button>
-                                </div>
-                                <div class="input-group-btn">
-                                    <button class="btn btn-xs btn-primary" id="submit" type="button">搜索</button>
-                                </div>
-                            </form>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <form class="input-group">
+                                    <span class="input-group-addon" lang="zh">合同号</span>
+                                    <input class="form-control" id="ncOrderId" />
+                                    <span class="input-group-addon" lang="zh">销售组织</span>
+                                    <input class="form-control" id="saleOrganizationId" />
+                                    <span class="input-group-addon" lang="zh">客户名称</span>
+                                    <input class="form-control" id="customerName" />
+                                    <span class="input-group-addon" lang="zh">开始时间</span>
+                                    <input class="form-control" id="startTime" />
+                                    <span class="input-group-addon" lang="zh">结束时间</span>
+                                    <input class="form-control" id="endTime" />
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-xs btn-default" id="resetBtn" type="reset">重置</button>
+                                    </div>
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-xs btn-primary" id="submit" type="button">搜索</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
+
                     </div>
                     <!--表格-->
                     <table class="table table-condensed table-bordered table-striped text-center">
@@ -475,17 +478,17 @@
         if(ResultData && ResultData!='' && ResultData!='null') {
             for (var i = 0; i < ResultData.length; i++) {
                 _html += '<tr>';
-                _html += '	<td>' + ResultData[i].orderId + '</td>';
-                _html += '  <td>' + ResultData[i].saleOrganizationName + '</td>';
-                _html += '  <td lang="zh">' + ResultData[i].ncOrderId + '</td>';
-                _html += '  <td lang="zh">' + ResultData[i].customerName + '</td>';
-                _html += '  <td>' + ResultData[i].country + 'A</td>';
-                _html += '  <td>' + ResultData[i].floorPrice + '</td>';
-                _html += '  <td lang="zh">' + ResultData[i].amountPayable + '</td>';
+                _html += '	<td>' + (ResultData[i].orderId!=undefined?ResultData[i].orderId:'') + '</td>';
+                _html += '  <td>' + (ResultData[i].saleOrganizationName!=undefined?ResultData[i].saleOrganizationName:'') + '</td>';
+                _html += '  <td lang="zh">' + (ResultData[i].ncOrderId!=undefined?ResultData[i].ncOrderId:'') + '</td>';
+                _html += '  <td lang="zh">' + (ResultData[i].customerName!=undefined?ResultData[i].customerName:'') + '</td>';
+                _html += '  <td>' + (ResultData[i].country!=undefined?ResultData[i].country:'') + 'A</td>';
+                _html += '  <td>' + (ResultData[i].floorPrice!=undefined?ResultData[i].floorPrice:'') + '</td>';
+                _html += '  <td lang="zh">' + (ResultData[i].amountPayable!=undefined?ResultData[i].amountPayable:'') + '</td>';
                 _html += '  <td lang="zh">' + (ResultData[i].isComplaint == 0 ? "否" : "是") + '</td>';
                 _html += '   <td>' + (ResultData[i].isModifyPrice == 0 ? "否" : "是") + '</td>';
-                _html += '   <td>' + ResultData[i].netProfit + '</td>';
-                _html += '   <td>' + ResultData[i].dealTime + '</td>';
+                _html += '   <td>' + (ResultData[i].netProfit!=undefined?ResultData[i].netProfit:'') + '</td>';
+                _html += '   <td>' + (ResultData[i].dealTime!=undefined?ResultData[i].dealTime:'') + '</td>';
                 _html += '   </tr>';
             }
         }

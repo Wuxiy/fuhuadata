@@ -51,7 +51,7 @@
                                             <input id="customsClearanceName" class="form-control" value="" disabled>
                                         </td>
                                         <td class="col-xs-2"><label class="control-label" lang="zh">客户商品名</label></td>
-                                        <td><input id="customerProductName" class="form-control" type="text" value="" disabled/></td>
+                                        <td><input data-control="on" id="customerProductName" class="form-control isdisabled" type="text" value="" disabled/></td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -64,7 +64,7 @@
                                         <td><label class="control-label" lang="zh">型号</label></td>
                                         <td><input id="model" class="form-control" type="text" value="" disabled/></td>
                                         <td><label class="control-label" lang="zh">品牌</label></td>
-                                        <td><input id="brand" class="form-control" type="text" value="" disabled/></td>
+                                        <td><input data-control="on" id="brand" class="form-control isdisabled" type="text" value="" disabled/></td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -341,7 +341,7 @@
 <input id="businessProductId" type="hidden" value="$!{businessProductId}"> <!--编号-->
 <input id="orderId" type="hidden" value="$!{orderId}">
 <input id="customerId" type="hidden" value="$!{customerId}">
-<input id="productRequireId" type="hidden" value="">
+<input id="productRequireId" type="hidden" value="$!{productRequireId}">
 <input id="editId" type="hidden" value="$!{edit}">
 
 
@@ -401,7 +401,9 @@
                     $('#taxType').val(basicInfo.taxType);
                     $('#taxFree').val(basicInfo.taxFree);
                     $('#otherCost').val(basicInfo.otherCost);
-                    $('#capitalInterestPrice').val(basicInfo.capitalInterestPrice)
+                    $('#capitalInterestPrice').val(basicInfo.capitalInterestPrice);
+                    $('#internalSupplyName').val(basicInfo.internalSupplyName);
+                    $('#internalSupplyName').data('val',basicInfo.internalSupplyId);
 
                     switch(basicInfo.priceType){
                         case 0:
@@ -666,10 +668,10 @@
                             for(var i=0;i<components.length;i++){
                                 costtable.innerHTML += '<tr>'+
                                         '<td data-id="'+components[i].componentId+'">'+ifEmpty(components[i].componentName)+'</td>'+
-                                        '<td><input data-control="on" name="consumption" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].consumption)+'" disabled></td>'+
-                                        '<td><input data-control="on" name="price" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].price)+'" disabled></td>'+
+                                        '<td><input data-control="on" name="consumption" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].consumption)+'" ></td>'+
+                                        '<td><input data-control="on" name="price" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].price)+'" ></td>'+
                                         '<td><input name="cost" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].cost)+'"  disabled></td>'+
-                                        '<td><input name="remarks" data-control="on" class="form-control text-center" type="text" value="'+ifEmpty(components[i].remarks)+'" disabled></td>'+
+                                        '<td><input name="remarks" data-control="on" class="form-control text-center" type="text" value="'+ifEmpty(components[i].remarks)+'" ></td>'+
                                         '</tr>';
                             }
                         }
@@ -679,15 +681,46 @@
                         url:basePath + '/businessProduct/detailBaseInfo?businessProductId=' + businessProductId,
                         type:'POST',
                         success:function(result){
+                            console.log(result);
                             var basicInfo = result.basicInfo;
                             var components = result.components;
 
-                            $('#customerProductName').val(basicInfo.customerProductName);
+                            /*$('#customerProductName').val(basicInfo.customerProductName);
                             $('#customsClearanceName').val(basicInfo.customsClearanceName);
-                            $('#mainProductUnit').val(basicInfo.measurement);
+                            $('#mainProductUnit').val(basicInfo.mainProductUnit);
                             $('#specification').val(basicInfo.specification);
                             $('#model').val(basicInfo.model);
                             $('#brand').val(basicInfo.brand);
+                            $('#mainProductAmount').val(basicInfo.mainProductAmount);
+                            $('#subProductAmount').val(basicInfo.subProductAmount);
+                            $('#convertRate').val(basicInfo.convertRate);*/
+                            $('#name').val(basicInfo.name);
+                            $('#name').attr('data-productId',basicInfo.productId);
+                            $('#name').attr('data-wareId',basicInfo.wareId);
+                            $('#customsClearanceName').val(basicInfo.customsClearanceName);
+                            $('#customerProductName').val(basicInfo.customerProductName);
+                            $('#specification').val(basicInfo.specification);
+                            $('#model').val(basicInfo.model);
+                            $('#brand').val(basicInfo.brand);
+                            $('#mainProductUnit').val(basicInfo.mainProductUnit);
+                            $('#mainProductAmount').val(basicInfo.mainProductAmount);
+                            $('#subProductUnit').val(basicInfo.subProductUnit);
+                            $('#subProductAmount').val(basicInfo.subProductAmount);
+                            $('#convertRate').val(basicInfo.convertRate);
+                            $('#priceType').val(basicInfo.priceType);
+                            $('#advisePrice').val(basicInfo.advisePrice);
+                            $('#purchasePrice').val(basicInfo.purchasePrice);
+                            $('#deliveryTime').val(basicInfo.deliveryTime);
+                            $('#factoryName').val(basicInfo.factoryName);
+                            $('#grossMargin').val(basicInfo.grossMargin);
+                            $('#commissionPrice').val(basicInfo.commissionPrice);
+                            $('#unitUseRate').val(basicInfo.unitUseRate);
+                            $('#taxType').val(basicInfo.taxType);
+                            $('#taxFree').val(basicInfo.taxFree);
+                            $('#otherCost').val(basicInfo.otherCost);
+                            $('#capitalInterestPrice').val(basicInfo.capitalInterestPrice);
+                            $('#internalSupplyName').val(basicInfo.internalSupplyName);
+                            $('#internalSupplyName').data('val',basicInfo.internalSupplyId);
 
                             if(components.length!=0){
                                 $('#cost').removeClass('hidden');

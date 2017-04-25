@@ -11,14 +11,14 @@
                 <div id="productRequire" class="panel panel-default view-HD-lg">
                     <div class="panel-heading">
                         <div class="btn-group panel-heading-btn pull-right">
-                            <a class="btn btn-xs btn-default hidden" id="addback">返回</a>
+                            <a class="btn btn-xs btn-default hidden" onclick="back()" id="addback">返回</a>
                             <button id="addedit" data-btn="edit" class="btn btn-xs btn-primary panel-heading-btn pull-right hidden" type="button" lang="zh">
                                 完成
                             </button>
 
                         </div>
                         <div class="btn-group panel-heading-btn pull-right">
-                            <a class="btn btn-xs btn-default hidden" data-view="editHide" id="back">返回</a>
+                            <a class="btn btn-xs btn-default hidden" data-view="editHide" onclick="back()" id="back">返回</a>
                             <button id="edit" data-btn="edit" data-view="editHide" class="btn btn-xs btn-primary panel-heading-btn pull-right hidden" type="button" lang="zh">
                                 编辑
                             </button>
@@ -1327,14 +1327,15 @@
 
         //上一步，四个id参数
         $('#before').click(function(){
-            var productRequireId = $('#productRequireId');
-            window.location.href = basePath + '/businessProduct/intoProductBasicInfoRequire?businessProductId=' + businessProductId + '&&orderId=' + orderId + '&&customerId' + customerId + '&&productRequireId' + productRequireId + '&&edit=' + editId;
+            var productRequireId = $('#productRequireId').val();
+            console.log(productRequireId);
+            window.location.href = basePath + '/businessProduct/intoProductBasicInfoRequire?businessProductId=' + businessProductId + '&orderId=' + orderId + '&customerId=' + customerId + '&productRequireId=' + productRequireId + '&&edit=' + editId;
         })
 
         //新增下一步，生成productRequireId，
         $('#next').click(function () {
             if(id!=0){
-                window.location.href = basePath + '/businessProduct/intoDocumentary?businessProductId=' + businessProductId + '&orderId=' + orderId + '&customerId=' + customerId + '&productRequireId=' + productRequireId + '&edit=' + editId;
+                window.location.href = basePath + '/businessProduct/intoDocumentary?businessProductId=' + businessProductId + '&orderId=' + orderId + '&customerId=' + customerId + '&productRequireId=' + id + '&edit=' + editId;
             }else{
                 var isup = true;
                 var notnull = $('.notnull');
