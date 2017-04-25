@@ -163,8 +163,6 @@ public class CustomerProductArchives {
 	/**包装其他要求**/
 	private String pakageOtherRequirement;
 
-	/**附加单价**/
-	private BigDecimal additionalPrice;
 
 	/**单耗**/
 	private BigDecimal consumption;
@@ -331,13 +329,6 @@ public class CustomerProductArchives {
 		this.pakageOtherRequirement = pakageOtherRequirement;
 	}
 
-	public BigDecimal getAdditionalPrice() {
-		return additionalPrice;
-	}
-
-	public void setAdditionalPrice(BigDecimal additionalPrice) {
-		this.additionalPrice = additionalPrice;
-	}
 
 	public BigDecimal getConsumption() {
 		return consumption;
