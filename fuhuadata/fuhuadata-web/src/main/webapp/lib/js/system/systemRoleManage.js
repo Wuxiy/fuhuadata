@@ -19,8 +19,8 @@ CRM.systemRoleManage.ROLE_RELEVANCE_USER_LOOK_GET = basePath + '/sys/role/users?
 CRM.systemRoleManage.ROLE_RELEVANCE_USER_TREE_GET = basePath + '/sys/user/role/depts/tree?roleId='; // 角色关联用户树查看
 CRM.systemRoleManage.USER_ORG_TREE_GET = basePath + '/sys/user/org/tree'; // 组织树
 CRM.systemRoleManage.USER_BY_DEPT_GET = basePath + '/sys/user/dept/users'; // 部门下的用户
-CRM.systemRoleManage.AREA_TREE_GET = basePath + '/customerBaseInfo/initAreaCategoryTree';// 地区树
-CRM.systemRoleManage.AREA_TREE_OF_USER_GET = basePath + '/sys/area/code/user?userId=';// 用户所关联的地区树
+CRM.systemRoleManage.AREA_TREE_GET = basePath + '/sys/area/foreign';// 地区树
+CRM.systemRoleManage.AREA_TREE_OF_USER_GET = basePath + '/sys/area/user?userId=';// 用户所关联的地区树
 
 // 保存树的数据
 CRM.systemRoleManage.areaTreeData = null;
@@ -185,7 +185,7 @@ CRM.systemRoleManage.collectData = function () {
 CRM.systemRoleManage.resetPage = function (id) {
     var page = CRM.systemRoleManage;
 
-    if (id == 0) {
+    if (id === 0) {
         page.renderData({
             roleId: id,
             name: '全部',
@@ -279,6 +279,7 @@ CRM.systemRoleManage.returnUserTableData = function (data) {
     $.each(data, function (i, item) {
         var obj = {
             id: item.id,
+            userId: item.userId,
             name: item.userName,
             beginTime: item.beginTime ? item.beginTime.split(/\s/)[0] : '',
             endTime: item.endTime ? item.endTime.split(/\s/)[0] : '',
@@ -289,8 +290,8 @@ CRM.systemRoleManage.returnUserTableData = function (data) {
         };
         if (item.user.areas instanceof Array && item.user.areas.length > 0) {
             $.each(item.user.areas, function (j, item) {
-                obj.areasId += item.areaid + ',';
-                obj.areasName += item.areaName + '、';
+                obj.areasId += item.id + ',';
+                obj.areasName += item.name + '、';
             });
             obj.areasId = obj.areasId.slice(0, -1);
             obj.areasName = obj.areasName.slice(0, -1);
@@ -1013,6 +1014,7 @@ $(function () {
             deptIds = [];
 
         $.each(checkedNodes, function (idx, item) {
+            console.log(item);
             if (item.type === 3) {
                 userIds.push(item.cid);
             } else if (item.type === 2 && !item.zAsync) {
@@ -1134,18 +1136,11 @@ $(function () {
             page.renderAreaTreeToSModalL(page.AreaTreeData);
         } else {
             CRM.ajaxCall({
-                url: CRM.url.AREA_TREE_GET,
+                url: page.AREA_TREE_GET,
                 type: 'GET',
                 callback: function (data) {
                     if (data !== null && $.isArray(data)) {
-                        var areaData = $.map(data, function (item, idx) {
-                            return {
-                                id: item.pkAreacl,
-                                name: item.name,
-                                pId: item.pkFatherarea
-                            }
-                        });
-                        page.renderAreaTreeToSModalL(areaData);
+                        page.renderAreaTreeToSModalL(page.nodesToZTreeNodes(data));
                     }
                 }
             });

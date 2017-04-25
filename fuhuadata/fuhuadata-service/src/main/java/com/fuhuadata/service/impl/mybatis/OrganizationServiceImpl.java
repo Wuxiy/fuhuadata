@@ -82,8 +82,9 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization, Integ
         nodeVO.setCid(org.getNcId());
         nodeVO.setCode(org.getCode());
         nodeVO.setCname(org.getName());
-        nodeVO.setPid(String.valueOf(org.getParentId()));
+        nodeVO.setPid(org.getParentId());
         nodeVO.setNcId(org.getNcId());
+        nodeVO.setRoot(org.isRoot());
         nodeVO.setIsParent(true);
 
         return nodeVO;

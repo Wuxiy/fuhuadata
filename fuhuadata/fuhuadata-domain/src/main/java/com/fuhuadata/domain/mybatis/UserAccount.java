@@ -121,7 +121,7 @@ public class UserAccount extends BaseEntity<Integer> {
      * 地区
      */
     @Transient
-    private List<AreaCode> areas;
+    private List<AreaCl> areas;
 
     /**
      * 用户树时组织ID
@@ -359,11 +359,11 @@ public class UserAccount extends BaseEntity<Integer> {
         this.lastLoginTime = lastLoginTime;
     }
 
-    public List<AreaCode> getAreas() {
+    public List<AreaCl> getAreas() {
         return areas;
     }
 
-    public void setAreas(List<AreaCode> areas) {
+    public void setAreas(List<AreaCl> areas) {
         this.areas = areas;
     }
 
