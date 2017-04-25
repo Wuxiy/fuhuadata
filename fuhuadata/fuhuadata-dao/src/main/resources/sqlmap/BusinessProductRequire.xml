@@ -103,8 +103,8 @@
     )
 
 
-    <selectKey resultClass="java.lang.Integer" keyProperty="id">
-      SELECT @@IDENTITY AS ID
+    <selectKey resultClass="java.lang.Integer" keyProperty="value">
+      SELECT @@IDENTITY AS value
     </selectKey>
   </insert>
 

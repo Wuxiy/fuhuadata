@@ -87,7 +87,10 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
     }
 
     @Transactional
-    public int addFromArchives(String customerId,String orderId,Integer businessProductId, Integer productId, Integer wareId) {
+    public Map<String,Object> addFromArchives(String customerId,String orderId,Integer businessProductId, Integer productId, Integer wareId) {
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("businessProductId",0);
+        map.put("productRequireId",0);
         try {
             //如果是修改状态，则删除当前数据，然后再复制档案数据
             if(businessProductId!=null && businessProductId>0){
@@ -100,7 +103,7 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
             queryCustomerProductArchives.setWareId(wareId);
             List<CustomerProductArchives> list = customerProductArchivesDao.getCustomerProductInfosByQuery(queryCustomerProductArchives);
             if(list == null || list.size()==0){
-                return 0;
+                return map;
             }
             int business_product_archives_id = list.get(0).getId();
             //如果买过，则从档案复制信息到订单产品
@@ -113,6 +116,7 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
             businessOrderProduct.setLastmodifyUserId(LoginUtils.getLoginId());
             businessOrderProduct.setLastmodifyUserName(LoginUtils.getLoginName());
             int new_businessProductId =  businessOrderProductDao.insertFromArchives(businessOrderProduct);
+            map.put("businessProductId",new_businessProductId);
             //2.复制产品成分及其费用
             Map<String,Object> param_map = new HashMap<String,Object>();
             param_map.put("businessProductId",new_businessProductId);
@@ -120,12 +124,12 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
             businessOrderProductComponentDao.insertFromArchives(param_map);
             //3.复制包装要求
             BusinessProductRequire businessProductRequire = new BusinessProductRequire();
-            businessProductRequireDao.insertFromArchives(param_map);
-            return new_businessProductId;
+            map.put("productRequireId", businessProductRequireDao.insertFromArchives(param_map));
+            return map;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return 0;
+        return map;
     }
 
     public boolean deleteAllInfoByIds(String businessProductIds) {

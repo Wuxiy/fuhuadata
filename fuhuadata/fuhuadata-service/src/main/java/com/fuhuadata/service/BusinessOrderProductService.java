@@ -9,6 +9,7 @@ import com.fuhuadata.vo.Price.Price;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hexingfu on 2017/4/5.
@@ -31,7 +32,7 @@ public interface BusinessOrderProductService {
      * @param wareId
      * @return
      */
-    int addFromArchives(String customerId,String orderId,Integer businessProductId,Integer productId,Integer wareId);
+    Map<String,Object> addFromArchives(String customerId, String orderId, Integer businessProductId, Integer productId, Integer wareId);
 
     /**
      * /**
