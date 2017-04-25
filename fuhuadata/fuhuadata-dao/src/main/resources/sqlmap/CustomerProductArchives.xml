@@ -746,8 +746,10 @@
 				other_documentary_require otherDocumentaryRequire
 		from
 				customer_product_archives
+
 		where
 				customer_id=#customerId#
+				group by product_id,ware_id
 	</select>
 
 	<select id="GET-CUSTOMER-TRANSPORT-REQUIREMENT" resultClass="CustomerProductArchives" parameterClass="java.lang.String">
