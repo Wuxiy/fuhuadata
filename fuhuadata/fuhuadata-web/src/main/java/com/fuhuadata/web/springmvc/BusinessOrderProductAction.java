@@ -146,7 +146,6 @@ public class BusinessOrderProductAction {
         BusinessOrderProduct businessOrderProduct = productRequireBase.getBusinessOrderProduct();
         BusinessOrderProductComponent[] businessOrderProductComponents = productRequireBase.getBusinessOrderProductComponents();
         Integer businessProductId = businessOrderProduct.getId();
-        System.out.println("action11111111111111111111"+businessProductId);
         ResultPojo pojo = new ResultPojo();
         List<BusinessOrderProductComponent> list = new ArrayList<BusinessOrderProductComponent>();
         for(BusinessOrderProductComponent bopc:businessOrderProductComponents){
