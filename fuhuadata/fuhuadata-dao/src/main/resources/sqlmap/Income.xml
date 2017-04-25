@@ -11,7 +11,7 @@
     <result column="meno" property="meno" jdbcType="VARCHAR" />
   </resultMap>
 
-  <select id="getByCode" parameterClass="java.lang.String">
+  <select id="getByCode" parameterClass="java.lang.String" resultMap="IncomeResultMap">
     select * from t_income where code = #value#
   </select>
 

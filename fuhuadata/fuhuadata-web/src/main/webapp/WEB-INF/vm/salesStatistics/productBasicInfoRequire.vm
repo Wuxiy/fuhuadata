@@ -429,11 +429,11 @@
                         costtable.innerHTML = '';
                         for(var i=0;i<components.length;i++){
                             costtable.innerHTML += '<tr>'+
-                                    '<td data-id="'+components[i].componentId+'">'+ifEmpty(components[i].componentName)+'</td>'+
+                                    '<td data-id="'+components[i].componentId+'" data-fid="'+components[i].id+'">'+ifEmpty(components[i].componentName)+'</td>'+
                                     '<td><input data-control="on" name="consumption" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].consumption)+'" disabled></td>'+
                                     '<td><input data-control="on" name="price" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].price)+'" disabled></td>'+
                                     '<td><input name="cost" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].cost)+'" disabled></td>'+
-                                    '<td><input name="remarks" data-control="on" class="form-control text-center" type="text" value="'+ifEmpty(components[i].remarks)+'" disabled></td>'+
+                                    '<td><input name="remark" data-control="on" class="form-control text-center" type="text" value="'+ifEmpty(components[i].remark)+'" disabled></td>'+
                                     '</tr>';
                         }
                     }
@@ -588,13 +588,13 @@
     $(document).on('click','#edit',function(){
         $('input[name="consumption"]').attr('disabled',false);
         $('input[name="price"]').attr('disabled',false);
-        $('input[name="remarks"]').attr('disabled',false);
+        $('input[name="remark"]').attr('disabled',false);
     })
 
     $(document).on('click','#cancel',function(){
         $('input[name="consumption"]').attr('disabled',true);
         $('input[name="price"]').attr('disabled',true);
-        $('input[name="remarks"]').attr('disabled',true);
+        $('input[name="remark"]').attr('disabled',true);
     })
 
     $(document).on('click','a.fNode',function (e) {
@@ -670,8 +670,8 @@
                                         '<td data-id="'+components[i].componentId+'">'+ifEmpty(components[i].componentName)+'</td>'+
                                         '<td><input data-control="on" name="consumption" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].consumption)+'" ></td>'+
                                         '<td><input data-control="on" name="price" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].price)+'" ></td>'+
-                                        '<td><input name="cost" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].cost)+'"  disabled></td>'+
-                                        '<td><input name="remarks" data-control="on" class="form-control text-center" type="text" value="'+ifEmpty(components[i].remarks)+'" ></td>'+
+                                        '<td><input name="cost" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].cost)+'" disabled ></td>'+
+                                        '<td><input name="remark" data-control="on" class="form-control text-center" type="text" value="'+ifEmpty(components[i].remark)+'" ></td>'+
                                         '</tr>';
                             }
                         }
@@ -728,10 +728,10 @@
                                 for(var i=0;i<components.length;i++){
                                     costtable.innerHTML += '<tr>'+
                                             '<td data-id="'+components[i].componentId+'">'+ifEmpty(components[i].componentName)+'</td>'+
-                                            '<td><input data-control="on" name="consumption" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].consumption)+'" disabled></td>'+
-                                            '<td><input data-control="on" name="price" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].price)+'" disabled></td>'+
+                                            '<td><input data-control="on" name="consumption" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].consumption)+'" ></td>'+
+                                            '<td><input data-control="on" name="price" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].price)+'" ></td>'+
                                             '<td><input name="cost" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].cost)+'" disabled></td>'+
-                                            '<td><input name="remarks" data-control="on" class="form-control text-center" type="text" value="'+ifEmpty(components[i].remarks)+'" disabled></td>'+
+                                            '<td><input name="remark" data-control="on" class="form-control text-center" type="text" value="'+ifEmpty(components[i].remark)+'" ></td>'+
                                             '</tr>';
                                 }
                             }
@@ -875,14 +875,15 @@
         tr.each(function () {
             var td = $(this).find('td'),
             obj = {
+                "id":td.eq(0).attr('data-fid'),
                 "productId":$('#name').attr('data-productId'),
                 "wareId":$('#name').attr('data-wareId'),
                 "componentId":td.eq(0).attr('data-id'),
                 "componentName":td.eq(0).text(),
                 "consumption":td.eq(1).find('input').val(),
                 "price":td.eq(2).find('input').val(),
-                "cost":td.eq(3).text(),
-                "remarks":td.eq(4).find('input').val()
+                "cost":td.eq(3).find('input').val(),
+                "remark":td.eq(4).find('input').val()
             };
             arr.push(obj);
         })

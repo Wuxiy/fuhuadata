@@ -161,7 +161,7 @@
         goods_type, mianxiangqi, miantuiqi, cupboard_type, cupboard_per_number, cupboard_number,
         ocean_freight, port_surcharge, tax_type, tax_free, gross_margin,process_cost, other_cost, min_price,
         contract_price, 0 as transform_state, #createUserId#, #createUserName#, #createUserId#,
-        #createUserName#, now(), now(),unitUseRate,capitalInterestPrice
+        #createUserName#, now(), now(),unit_use_rate,capital_interest_price
         from customer_product_archives
         where id = #archiveProductId#)
         <selectKey resultClass="java.lang.Integer" keyProperty="id">
