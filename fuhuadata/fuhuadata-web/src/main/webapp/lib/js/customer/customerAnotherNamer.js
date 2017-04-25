@@ -27,7 +27,7 @@ $(document).ready(function(){
             return false;
         }else{
             upData(basePath+'/customerSubcompanyInfo/addCustomerSubcompanyInfo','POST',addAnotherName(),"application/json");
-            location.reload();
+            // location.reload();
         }
     });
     //更新提交
@@ -56,21 +56,18 @@ function anotherNamerList(result) {
     var AnotherNameList = document.getElementById('anotherNameList');
     console.log(ResultData);
     AnotherNameList.innerHTML = '';
-
-    if (ResultData === undefined || ResultData === "") {
-        return;
-    }
-
-    for(var i=0;i<ResultData.length;i++){
-        AnotherNameList.innerHTML += '<tr>'+
-                                        '<td>'+ResultData[i].customerSubId+'</td>'+
-                                        '<td><a class="otherNameinfo" data_url="'+basePath+'/customerSubcompanyInfo/getCustomerSubcompanyInfoById?customerSubId='+ResultData[i].customerSubId+'">'+ResultData[i].fullName+'</a></td>'+
-                                        '<td>'+ResultData[i].shortName+'</td>'+
-                                        '<td>'+replace(ResultData[i].property,ResultData[i].propertyRemarks)+'</td>'+
-                                        '<td>'+ResultData[i].zhongxinbaoNumber+'</td>'+
-                                        '<td>'+replacelevel(ResultData[i].zhongxinbaoLevel)+'</td>'+
-                                        '<td>'+ResultData[i].customerSubRemarks+'</td>'+
-                                        '</tr>';
+    if(ResultData) {
+        for (var i = 0; i < ResultData.length; i++) {
+            AnotherNameList.innerHTML += '<tr>' +
+                '<td>' + ResultData[i].customerSubId + '</td>' +
+                '<td><a class="otherNameinfo" data_url="' + basePath + '/customerSubcompanyInfo/getCustomerSubcompanyInfoById?customerSubId=' + ResultData[i].customerSubId + '">' + ResultData[i].fullName + '</a></td>' +
+                '<td>' + ResultData[i].shortName + '</td>' +
+                '<td>' + replace(ResultData[i].property, ResultData[i].propertyRemarks) + '</td>' +
+                '<td>' + ResultData[i].zhongxinbaoNumber + '</td>' +
+                '<td>' + replacelevel(ResultData[i].zhongxinbaoLevel) + '</td>' +
+                '<td>' + ResultData[i].customerSubRemarks + '</td>' +
+                '</tr>';
+        }
     }
 }
 
@@ -150,7 +147,7 @@ function addAnotherName() {
 
         },
         "customerEnterpriceNatures":checkboxarrAdd()
-    }
+    };
     console.log(data);
     return JSON.stringify(data);
 }
@@ -170,12 +167,12 @@ function checkboxarrAdd() {
     var obj;
     $("input[name='checkAdd']:checked").each(function(){
         obj = {
-            "customerId":$('#customerId'),
+            "customerId":$('#customerId').val(),
             "type": "2",
             "nature": $(this).val()
-        }
+        };
         checkboxarrAdd.push(obj);
-    })
+    });
     return checkboxarrAdd;
 }
 
@@ -184,7 +181,7 @@ function checkboxAddtext() {
     var b;
     $("input[name='checkAdd']:checked").each(function(){
         a.push($(this).attr('data-textAdd'));
-    })
+    });
     b = a.join(',');
     console.log(b);
     return b;
@@ -196,7 +193,7 @@ $(document).on('click','#otherAdd',function(){
     }else{
         $('#propertyRemarksAdd').attr('disabled',true);
     }
-})
+});
 
 
 //edit function
@@ -213,7 +210,7 @@ function updateInfo() {
             "propertyRemarks":$('#propertyRemarks').val()
         },
         "customerEnterpriceNatures":checkboxArr()
-    }
+    };
     console.log(data);
     return JSON.stringify(data);
 }
@@ -223,7 +220,7 @@ function checkboxtext(){
     var b;
     $("input[name='check']:checked").each(function(){
        a.push($(this).attr('data-text'));
-    })
+    });
     b = a.join(',');
     console.log(b);
     return b;
@@ -237,9 +234,9 @@ function checkboxArr() {
             "customerId":$('#fullName').attr('data-id'),
             "type": "2",
             "nature": $(this).val()
-        }
+        };
         checkboxarr.push(obj);
-    })
+    });
     return checkboxarr;
 }
 
@@ -249,4 +246,4 @@ $(document).on('change','#other',function(){
     }else{
         $('#propertyRemarks').attr('disabled',true);
     }
-})
+});

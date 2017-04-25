@@ -90,18 +90,29 @@ $(document).ready(function(){
     var conversiontable = $('#conversiontable').val();
 
     $('#finish').click(function(){
+        var btn = $(this).add('#reset');
+        btn.attr('disabled',true);
         jQuery.ajax({
             url:basePath + '/businessOrder/updateOrderProducts',
             type:'POST',
             dataType:'JSON',
             contentType:"application/json",
             data:JSON.stringify(upData()),
-            contentType:"application/json",
-            success:function(result){
-                alert('转化成功');
-                console.log(result);
-                window.history.back(-1);
-            }
+//            contentType:"application/json",
+//            success:function(result){
+//                alert('转化成功');
+//                console.log(result);
+//                window.history.back(-1);
+//            }
+        }).done(function (result) {
+
+            alert('转化成功');
+            console.log(result);
+            window.history.back(-1);
+        }).fail(function () {
+
+            alert('转化失败，请重试！！');
+            btn.attr('disabled',false);
         })
     });
 })

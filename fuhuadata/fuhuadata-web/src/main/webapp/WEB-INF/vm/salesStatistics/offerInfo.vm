@@ -80,11 +80,6 @@
                                     </div>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">部门<sup data-view="editView" class="not-null hidden">*</sup></label>
-##                                <div class="col-xs-2">
-##                                    <input class="form-control" data-control="on" disabled id="departmentName" data-code="" value="" disabled/>
-##                                    <select id="departmentName" class="form-control">
-##                                    </select>
-##                                </div>
                                 <div class="col-xs-2">
                                     <div class="input-group">
                                         <input id="departmentName" name="departmentName" data-toggle="dropdown" class="form-control dropdown-toggle" disabled type="text" placeholder="点击搜索按钮选择" autocomplete="off"/>
@@ -94,22 +89,12 @@
                                     </div>
                                 </div>
                                 <label for="salesManName" class="col-xs-1 control-label" lang="zh">业务员<sup data-view="editView" class="not-null hidden">*</sup></label>
-##                                <div class="col-xs-2">
-##                                    <input class="form-control" type="text" id="salesManName" value=""  />
-##                                </div>
                                 <div class="col-xs-2">
-##                                    <div class="input-group">
-##                                        <input id="salesManName" name="salesManName" data-toggle="dropdown" class="form-control dropdown-toggle" disabled type="text" placeholder="点击搜索按钮选择" autocomplete="off"/>
-##                                        <div class="input-group-btn">
-##                                            <button id="salSearch" class="btn btn-xs btn-default" data-control="on" type="button"><span class="glyphicon glyphicon-search"></span></button>
-##                                        </div>
-##                                    </div>
                                     <div class="input-group">
                                         <input id="salesManName" name="salesManName" placeholder="请在下拉菜单中选择" class="form-control" disabled type="text" autocomplete="off"/>
                                         <div class="input-group-btn">
                                             <button id="salSearch" data-control="on" disabled class="btn btn-xs btn-default dropdown" data-toggle="dropdown" type="button"><span class="glyphicon glyphicon-search"></span></button>
                                             <div class="dropdown-menu pull-right" style="width: 196px;padding: 3px 0;">
-##                                                <input id="shipmentPortS" name="shipmentPortS" class="form-control" data-control="on" type="text" placeholder="请输入关键词查找" style="box-shadow: none;border-radius: 0; border-color: transparent">
                                                 <ul id="sm" style="list-style: none;margin-bottom: 0;padding: 0;width: 100%;max-height: 200px;overflow-y: auto;"></ul>
                                             </div>
                                         </div>
@@ -145,7 +130,6 @@
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">收款协议<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-##                                    <input data-control="on" id="income" class="form-control" data-code="" value="" disabled>
                                     <select class="form-control" data-control="on" disabled id="income">
                                         <option value="">——请选择——</option>
                                         #foreach($!info in $!{income})
@@ -164,8 +148,6 @@
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">贸易术语<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                ##                                <input class="form-control" type="text" id="tradeTerm" value="" />
-##                                    <input data-control="on" class="form-control" id="incoterm" data-code="" value="" disabled>
                                     <select data-control="on" class="form-control" disabled id="incoterm" >
                                         <option value="">——请选择——</option>
                                         #foreach($!info in $!{incoterm})
@@ -175,7 +157,6 @@
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">贸易国别<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                ##                                <input class="form-control" type="text" id="tradeCountry" value="" />
                                     <div class="input-group">
                                         <input id="countryzone" name="countryzone" placeholder="请在下拉菜单中选择" class="form-control" disabled type="text" autocomplete="off"/>
                                         <div class="input-group-btn">
@@ -219,7 +200,6 @@
                                         <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="premiumRate" value="0.03" disabled/>
                                         <span class="input-group-addon">%</span>
                                     </div>
-##                                    <input data-control="on" class="form-control" id="premiumRate" data-code="" value="" disabled>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -236,7 +216,6 @@
                                         <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="lossRate" value="0" disabled/>
                                         <span class="input-group-addon">%</span>
                                     </div>
-##                                    <input data-control="on" class="form-control" type="text" id="lossRate" value="" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">计息比例<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
@@ -244,7 +223,6 @@
                                         <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="interestRate" value="" disabled/>
                                         <span class="input-group-addon">%</span>
                                     </div>
-##                                    <input data-control="on" class="form-control" type="text" id="interestRate" value="" disabled/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -254,7 +232,6 @@
                                         <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="saleRate" value="0.50" disabled/>
                                         <span class="input-group-addon">%</span>
                                     </div>
-##                                    <input data-control="on" class="form-control" type="text" id="saleRate" value="" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">管理费用比率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
@@ -262,7 +239,6 @@
                                         <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="managementRate" value="0.20" disabled/>
                                         <span class="input-group-addon">%</span>
                                     </div>
-##                                    <input data-control="on" class="form-control" type="text" id="managementRate" value="" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">信保费率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
@@ -270,15 +246,13 @@
                                         <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="guaranteeRate" value="0.24" disabled/>
                                         <span class="input-group-addon">%</span>
                                     </div>
-##                                    <input data-control="on" class="form-control" type="text" id="guaranteeRate" value="" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">信保赔付率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="creditRate" value="" disabled/>
+                                        <input data-control="on" class="form-control" min="0" step="0.01" type="number" id="creditRate" value="" disabled/>
                                         <span class="input-group-addon">%</span>
                                     </div>
-##                                    <input data-control="on" class="form-control" type="text" id="creditRate" value="" disabled/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -296,15 +270,6 @@
                                         <option value="1">是</option>
                                     </select>
                                 </div>
-                                #*<label class="col-xs-1 control-label" lang="zh">内部供货单位<sup data-view="editView" class="not-null hidden">*</sup></label>
-                                <div class="col-xs-2">
-                                    <div class="input-group">
-                                        <input id="internalSupplyName" name="internalSupplyName" data-toggle="dropdown" class="form-control dropdown-toggle" disabled type="text" placeholder="点击搜索按钮选择" autocomplete="off"/>
-                                        <div class="input-group-btn">
-                                            <button id="interSearch" class="btn btn-xs btn-default" data-control="on" disabled type="button"><span class="glyphicon glyphicon-search"></span></button>
-                                        </div>
-                                    </div>
-                                </div>*#
                             </div>
                             <div class="form-group hidden">
                                 <label class="col-xs-1 control-label">企业性质</label>
@@ -468,47 +433,47 @@
                 success:function(result){
                     if(result.data != null&&result.data != undefined){
                         var businessOrder = result.data.businessOrder;
-                        $('#businessId').val(businessOrder.businessId); // 商机编号
-                        $('#customerDutyParagraph').val(businessOrder.customerDutyParagraph); // 客户税号
-                        $('#billToCustomer').val(businessOrder.billToCustomer); // 收票客户
-                        $('#saleOrganizationName').val(businessOrder.saleOrganizationName); // 销售组织name
-                        $('#saleOrganizationName').data('val',businessOrder.saleOrganizationId); // 销售组织id
-                        $('#departmentName').val(businessOrder.departmentName); // 部门name
-                        $('#departmentName').data('val',businessOrder.departmentId); // 部门id
-                        $('#salesManName').val(businessOrder.salesManName); // 业务员name
-                        $('#salesManName').data('val',businessOrder.salesManId); // 业务员id
-                        $('#destinationPort').val(businessOrder.destinationPortName); // 目的港
-                        $('#shipmentPort').val(businessOrder.shipmentPortName); // 起运港
-                        $('#income').val(businessOrder.collectionAgreement); // 收款协议
-                        $('#tradeType').val(businessOrder.tradeType); // 贸易方式
-                        $('#incoterm').val(businessOrder.tradeTerm); // 贸易术语
-                        $('#countryzone').val(businessOrder.tradeCountryName); // 贸易国别name
-                        $('#countryzone').data('val',businessOrder.tradeCountry); // 贸易国别id
-                        $('#isCreditRisk').val(businessOrder.isCreditRisk); // 是否使用信用险
-                        $('#currency').val(businessOrder.currency); // 币种
-                        $('#nusdexchgrate').val(businessOrder.nusdexchgrate); // 原币对美元汇率
-                        $('#nexchangerate').val(businessOrder.nexchangerate); // 原币对本元汇率
-                        $('#premiumRate').val(businessOrder.premiumRate); // 保险费率
-                        $('#discountRate').val(businessOrder.discountRate); // 资金利率
-                        $('#lossRate').val(businessOrder.lossRate); // 汇损费率
-                        $('#interestRate').val(businessOrder.interestRate); // 计息比例
-                        $('#saleRate').val(businessOrder.saleRate); // 销售费率
-                        $('#managementRate').val(businessOrder.managementRate); // 管理汇率
-                        $('#guaranteeRate').val(businessOrder.guaranteeRate); // 信保费率
-                        $('#creditRate').val(businessOrder.creditRate); // 信保赔付率
-                        $('#transportFlag').val(businessOrder.transportFlag); // 是否可转运
-                        $('#partialShipmentFalg').val(businessOrder.partialShipmentFalg); // 是否可分批出运
+                        if(businessOrder.businessId!=undefined){$('#businessId').val(businessOrder.businessId); }// 商机编号
+                        if(businessOrder.customerDutyParagraph!=undefined){$('#customerDutyParagraph').val(businessOrder.customerDutyParagraph);} // 客户税号
+                        if(businessOrder.billToCustomer!=undefined){$('#billToCustomer').val(businessOrder.billToCustomer);} // 收票客户
+                        if(businessOrder.saleOrganizationName!=undefined){$('#saleOrganizationName').val(businessOrder.saleOrganizationName);} // 销售组织name
+                        if(businessOrder.saleOrganizationId!=undefined){$('#saleOrganizationName').data('val',businessOrder.saleOrganizationId);} // 销售组织id
+                        if(businessOrder.departmentName!=undefined){$('#departmentName').val(businessOrder.departmentName); }// 部门name
+                        if(businessOrder.departmentId!=undefined){$('#departmentName').data('val',businessOrder.departmentId);} // 部门id
+                        if(businessOrder.salesManName!=undefined){$('#salesManName').val(businessOrder.salesManName);} // 业务员name
+                        if(businessOrder.salesManId!=undefined){$('#salesManName').data('val',businessOrder.salesManId);} // 业务员id
+                        if(businessOrder.destinationPortName!=undefined){$('#destinationPort').val(businessOrder.destinationPortName);} // 目的港
+                        if(businessOrder.shipmentPortName!=undefined){$('#shipmentPort').val(businessOrder.shipmentPortName); }// 起运港
+                        if(businessOrder.collectionAgreement!=undefined){$('#income').val(businessOrder.collectionAgreement);} // 收款协议
+                        if(businessOrder.tradeType!=undefined){$('#tradeType').val(businessOrder.tradeType);} // 贸易方式
+                        if(businessOrder.tradeTerm!=undefined){$('#incoterm').val(businessOrder.tradeTerm);} // 贸易术语
+                        if(businessOrder.tradeCountryName!=undefined){$('#countryzone').val(businessOrder.tradeCountryName);} // 贸易国别name
+                        if(businessOrder.tradeCountry!=undefined){$('#countryzone').data('val',businessOrder.tradeCountry);} // 贸易国别id
+                        if(businessOrder.isCreditRisk!=undefined){$('#isCreditRisk').val(businessOrder.isCreditRisk); }// 是否使用信用险
+                        if(businessOrder.currency!=undefined){$('#currency').val(businessOrder.currency); }// 币种
+                        if(businessOrder.nusdexchgrate!=undefined){$('#nusdexchgrate').val(businessOrder.nusdexchgrate);} // 原币对美元汇率
+                        if(businessOrder.nexchangerate!=undefined){$('#nexchangerate').val(businessOrder.nexchangerate);} // 原币对本元汇率
+                        if(businessOrder.premiumRate!=undefined){$('#premiumRate').val(businessOrder.premiumRate);} // 保险费率
+                        if(businessOrder.discountRate!=undefined){$('#discountRate').val(businessOrder.discountRate);} // 资金利率
+                        if(businessOrder.lossRate!=undefined){$('#lossRate').val(businessOrder.lossRate);} // 汇损费率
+                        if(businessOrder.interestRate!=undefined){$('#interestRate').val(businessOrder.interestRate);} // 计息比例
+                        if(businessOrder.saleRate!=undefined){$('#saleRate').val(businessOrder.saleRate);} // 销售费率
+                        if(businessOrder.managementRate!=undefined){$('#managementRate').val(businessOrder.managementRate);} // 管理汇率
+                        if(businessOrder.guaranteeRate!=undefined){$('#guaranteeRate').val(businessOrder.guaranteeRate);} // 信保费率
+                        if(businessOrder.creditRate!=undefined){$('#creditRate').val(businessOrder.creditRate);} // 信保赔付率
+                        if(businessOrder.transportFlag!=undefined){$('#transportFlag').val(businessOrder.transportFlag);} // 是否可转运
+                        if(businessOrder.partialShipmentFalg!=undefined){$('#partialShipmentFalg').val(businessOrder.partialShipmentFalg);} // 是否可分批出运
 
 
                         var customerBaseInfo = result.data.customerBaseInfo;
-                        $('#customerId').val(customerBaseInfo.customerId); // 客户id
-                        $('#fullName').val(customerBaseInfo.fullName); // 客户名称
-                        $('#zhongxinbaoNumber').val(customerBaseInfo.zhongxinbaoNumber); // 中信保编码
-                        $('#registeredFunds').val(customerBaseInfo.registeredFunds); // 注册资金
-                        $('#enterprisePhone').val(customerBaseInfo.enterprisePhone); // 企业电话
-                        $('#enterpriseEmail').val(customerBaseInfo.enterpriseEmail); // 企业邮箱
-                        $('[name="check"]').val([customerBaseInfo.enterpriseNature]); // 企业性质
-                        $('#otherEnterpriseNature').val(customerBaseInfo.otherEnterpriseNature); // 其他企业性质
+                        if(customerBaseInfo.customerId!=undefined){$('#customerId').val(customerBaseInfo.customerId);} // 客户id
+                        if(customerBaseInfo.fullName!=undefined){$('#fullName').val(customerBaseInfo.fullName);} // 客户名称
+                        if(customerBaseInfo.zhongxinbaoNumber!=undefined){$('#zhongxinbaoNumber').val(customerBaseInfo.zhongxinbaoNumber); }// 中信保编码
+                        if(customerBaseInfo.registeredFunds!=undefined){$('#registeredFunds').val(customerBaseInfo.registeredFunds); }// 注册资金
+                        if(customerBaseInfo.enterprisePhone!=undefined){$('#enterprisePhone').val(customerBaseInfo.enterprisePhone);} // 企业电话
+                        if(customerBaseInfo.enterpriseEmail!=undefined){$('#enterpriseEmail').val(customerBaseInfo.enterpriseEmail);}// 企业邮箱
+                        if(customerBaseInfo.enterpriseNature!=undefined){$('[name="check"]').val([customerBaseInfo.enterpriseNature]); }// 企业性质
+                        if(customerBaseInfo.otherEnterpriseNature!=undefined){$('#otherEnterpriseNature').val(customerBaseInfo.otherEnterpriseNature);} // 其他企业性质
 
                         if(customerBaseInfo.enterpriseNature!=undefined){
                             var enterpriseNature = customerBaseInfo.enterpriseNature.split(',');
@@ -1143,7 +1108,11 @@
                 var url = basePath + '/businessProduct/deleteAllInfoByIds?businessProductIds=' + data;
                 console.log(data);
                 jQuery.ajax({
+<<<<<<< HEAD
+                    url:basePath + url,
+=======
                     url: url,
+>>>>>>> 1f22868ed827862af27be4238a45225b6d57d398
                     type:'POST',
 //                    dataType:"json",
 //                    contentType:"application/json",

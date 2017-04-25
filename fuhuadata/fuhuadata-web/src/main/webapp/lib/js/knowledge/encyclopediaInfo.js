@@ -152,6 +152,7 @@ CRM.enc.upEData = function () {
         callback: function (data) {
 
             self.location = basePath+'/customerEncyclopedia/modify?encyId='+ page.encyId.val();
+            // window.history.back(-1);
             // $('#skipM').modal('show');
             // $('#skip').attr('href', function (i,old) {
             //     return old + page.encyId.val();
@@ -171,6 +172,7 @@ CRM.enc.addData = function () {
         callback: function (data) {
 
             self.location = basePath+'/customerEncyclopedia/modify?encyId='+ data.encyId;
+            // window.history.back(-1);
             // $('#skipM').modal('show');
             // $('#skip').attr('href', function (i,old) {
             //     return old + data.encyId;
@@ -658,7 +660,13 @@ $(function () {
     // 返回
     $('#backPage').on('click.back',function () {
 
-        window.history.back(-1);
+        if ( window.history==1) {
+
+            window.close();
+        }else {
+
+            window.history.back(-1);
+        };
         return false;
     });
 

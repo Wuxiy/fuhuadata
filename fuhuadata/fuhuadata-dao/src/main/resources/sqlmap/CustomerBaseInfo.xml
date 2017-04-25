@@ -506,11 +506,11 @@
 				base.other_enterprise_nature  otherEnterpriseNature
 			FROM
 				customer_base_info base
-			LEFT JOIN customer_linkman a ON a.customer_id = base.customer_id
+			LEFT JOIN customer_linkman a ON a.customer_id = base.customer_id AND a.is_default = 1
 			LEFT JOIN customer_enterprise_nature nature
 							ON nature.customer_id=base.customer_id
 			WHERE
-				a.is_default = 1 AND base.customer_id=#customerId#
+				 base.customer_id=#customerId#
 		]]>
 	</select>
 

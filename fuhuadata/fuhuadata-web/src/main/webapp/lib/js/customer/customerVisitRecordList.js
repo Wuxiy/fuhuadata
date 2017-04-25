@@ -2,6 +2,8 @@
  * Created by Loyun on 2017/3/22.
  */
 
+var customerId = $('#customerId').val();
+console.log(customerId);
 $(document).ready(function(){
 
     //创建面包屑导航
@@ -32,7 +34,7 @@ $(document).ready(function(){
         }
 
     });
-})
+});
 var id = document.URL.split('?')[1];
 var sid = id.split('=')[1];
 
@@ -40,25 +42,26 @@ $(document).on('click','#add',function () {
     console.log(id);
     var url = basePath + '/customerLinkman/getCustomerLinkmanByCustomerId';
     getData(url,'POST',id,modalContact);
-})
+});
 
 //list
 function visitList(result) {
     var visitList = document.getElementById('visitList');
     var ResultData = result;
     console.log(ResultData);
-
-    for(var i=0;i<ResultData.length;i++){
-        visitList.innerHTML += '<tr>'+
-                                '<td>'+ResultData[i].startTime+'</td>'+
-                                '<td>'+ResultData[i].endTime+'</td>'+
-                                '<td>'+replace(ResultData[i].activityType,ResultData[i].activityRemarks)+'</td>'+
-                                '<td>'+ResultData[i].activityAddress+'</td>'+
-                                '<td>'+ResultData[i].activityExpens+'</td>'+
-                                '<td>'+ResultData[i].name+'</td>'+
-                                '<td>'+ResultData[i].activityGift+'</td>'+
-                                '<td>'+ResultData[i].activitySummary+'</td>'+
-                                '</tr>';
+    if(ResultData) {
+        for (var i = 0; i < ResultData.length; i++) {
+            visitList.innerHTML += '<tr>' +
+                '<td>' + ResultData[i].startTime + '</td>' +
+                '<td>' + ResultData[i].endTime + '</td>' +
+                '<td>' + replace(ResultData[i].activityType, ResultData[i].activityRemarks) + '</td>' +
+                '<td>' + ResultData[i].activityAddress + '</td>' +
+                '<td>' + ResultData[i].activityExpens + '</td>' +
+                '<td>' + ResultData[i].name + '</td>' +
+                '<td>' + ResultData[i].activityGift + '</td>' +
+                '<td>' + ResultData[i].activitySummary + '</td>' +
+                '</tr>';
+        }
     }
 }
 
@@ -105,9 +108,9 @@ function modalContact(result) {
 function addVisit() {
     var data = {
         "customerVisitRecord":{
-            "customerId":sid,
-            "startTime":getDateTime($('#startTime').val()),
-            "endTime":getDateTime($('#endTime').val()),
+            "customerId":$('#customerId').val(),
+            "startTime":$('#startTime').val(),
+            "endTime":$('#endTime').val(),
             "activityAddress":$('#activityAddress').val(),
             "activityExpense":$('#activityExpense').val(),
             "activityType":$('#activityType').val(),
@@ -115,7 +118,7 @@ function addVisit() {
             "activitySummary":$('#activitySummary').val()
         },
         "recordLinkmen":recordLinkman()
-    }
+    };
     console.log(data);
     return JSON.stringify(data);
 }
@@ -130,8 +133,7 @@ function recordLinkman() {
         }
         arr.push(obj);
     })
-    console.log(arr);
-    return JSON.stringify(arr);
+    return arr;
 }
 
 $('#checkAll').on('click',function(){
@@ -169,14 +171,3 @@ $(document).on('click','#activityType',function(){
         $('#activityRemarks').attr('disabled',true);
     }
 })
-
-//获取datetime
-function getDateTime(datetime){
-    var date = datetime.split('T')[0];
-    var time = datetime.split('T')[1] + ':59';
-    console.log(date);
-    console.log(time);
-    var DateTime = date + ' ' + time;
-    console.log(DateTime);
-    return DateTime;
-}

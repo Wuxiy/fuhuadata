@@ -41,8 +41,9 @@
                             <label class="col-xs-1 control-label">性别<sup class="not-null">*</sup></label>
                             <div class="col-xs-2">
                                 <select class="form-control notnull" name="items" id="sex">
-                                    <option  value="1">男</option>
-                                    <option  value="2">女</option>
+                                    <option  value="0" lang="zh">未知</option>
+                                    <option  value="1" lang="zh">男</option>
+                                    <option  value="2" lang="zh">女</option>
                                 </select>
                             </div>
                             <label class="col-xs-1 control-label">生日</label>
@@ -186,17 +187,22 @@
     $('#resetBtn').on('click.reset',function () {
         $('input,textarea',$('#myForm')).val('');
     })
-    /*$('#isDefault').change(function(){
+    $('#isDefault').change(function(){
         var newName = $('#name').val();
-        var url = basePath + '/customerLinkman/getCustomerLinkmanDefaultByCustomerId?customerId=' ;
+        var url = basePath + '/customerLinkman/getCustomerLinkmanDefaultByCustomerId?customerId=' + $('#customerId').val();
         jQuery.ajax({
             type:"POST",
             url:url,
             success:function(result){
-                var name = result.data.name;
-                var msg = '当前默认联系人是' + name + '，更改后的联系人为' + newName;
-                alert(msg);
+
+                if ($('#isDefault').val()==1) {
+
+                    var name = result.data.name;
+                    var msg = '当前默认联系人是' + name + '，更改后的联系人为' + newName;
+                    alert(msg);
+                }
+
             }
-        })
-    })*/
+        });
+    })
 </script>

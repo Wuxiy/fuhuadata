@@ -305,7 +305,7 @@
         LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
     ]]>
         <isNotEmpty prepend=", " property="enterpriseNature">
-            (select * from customer_enterprise_nature where nature=#enterpriseNature#) nature
+            (select DISTINCT(customer_id) from customer_enterprise_nature where nature=#enterpriseNature#) nature
         </isNotEmpty>
 
         <isParameterPresent>
