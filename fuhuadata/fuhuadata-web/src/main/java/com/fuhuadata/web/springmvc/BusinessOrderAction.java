@@ -309,7 +309,14 @@ public class BusinessOrderAction {
     @RequestMapping("/intoOrder")
     @SystemLogAnnotation(module = "salesStatistics",methods = "intoOrder")
     public ModelAndView intoOrder(String orderId){
-        return new ModelAndView("salesStatistics/orderInfo").addObject("orderId",orderId);
+        //收款协议
+        Result<List<Income>> rincome = dataArchivesService.getIncome();
+        //贸易术语
+        Result<List<Incoterm>> rincoterm = dataArchivesService.getIncoterm();
+        //币种
+        Result<List<Currtype>> rcurrtype = dataArchivesService.getCurrtype();
+        return new ModelAndView("salesStatistics/orderInfo").addObject("orderId",orderId)
+                .addObject("income",rincome.getModel()).addObject("incoterm",rincoterm.getModel()).addObject("currtype",rcurrtype.getModel());
     }
 
     /**
