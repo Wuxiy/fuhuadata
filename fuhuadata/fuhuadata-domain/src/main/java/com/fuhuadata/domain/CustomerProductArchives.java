@@ -23,7 +23,7 @@ public class CustomerProductArchives {
 	private Integer wareId;
 
 	/**订单id**/
-	private Integer orderId;
+	private String orderId;
 
     /**客户编号id**/
 	private String customerId;
@@ -754,11 +754,11 @@ public class CustomerProductArchives {
 	}
 
 
-	public Integer getOrderId() {
+	public String getOrderId() {
 		return orderId;
 	}
 
-	public void setOrderId(Integer orderId) {
+	public void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
 

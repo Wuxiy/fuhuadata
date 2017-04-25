@@ -3,6 +3,7 @@ package com.fuhuadata.service.impl.mybatis;
 import com.fuhuadata.constant.NodeType;
 import com.fuhuadata.domain.mybatis.Dept;
 import com.fuhuadata.domain.mybatis.Organization;
+import com.fuhuadata.domain.plugin.NodeRoot;
 import com.fuhuadata.domain.plugin.TreeRoot;
 import com.fuhuadata.service.mybatis.DeptService;
 import com.fuhuadata.service.mybatis.OrganizationService;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import javax.annotation.PostConstruct;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +33,7 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept, Integer> implements D
     @Autowired
     private OrganizationService orgService;
 
+    @PostConstruct
     public void refreshOrgAndDeptCache() {
         orgService.listOrgNodes();
         listDeptNodes();
@@ -41,34 +44,20 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept, Integer> implements D
         List<MixNodeVO> orgs = orgService.listOrgNodes();
         orgs.addAll(listDeptNodes());
 
-        return convertToTree(orgs, new TreeRoot<MixNodeVO, String>() {
-            @Override
-            public boolean isRoot(MixNodeVO node) {
-                return isOrgRoot(node);
-            }
-        });
+        return convertToTree(orgs, new NodeRoot<MixNodeVO, String>());
     }
 
     private List<MixNodeVO> convertToTree(List<MixNodeVO> flatNodes, TreeRoot<MixNodeVO, String> rootable) {
         List<MixNodeVO> roots = Lists.newArrayList();
         Map<String, MixNodeVO> lookup = Maps.newHashMap();
 
-        for (MixNodeVO node : flatNodes) {
+        for (MixNodeVO node : flatNodes) {// 遍历所有的组织和部门节点
             String id = node.getCid();
-            String ncId = node.getNcId();
 
             if (lookup.get(id) != null) {// 作为父节点添加过
                 node.setNodes(lookup.get(id).getNodes());
             }
             lookup.put(id, node);
-
-            if (node.getType() == NodeType.ORG.key) {
-                // 判断组织是否作为部门上级被添加过
-                if (lookup.get(ncId) != null) {
-                    node.setNodes(lookup.get(ncId).getNodes());
-                }
-                lookup.put(ncId, node);
-            }
 
             String pid = node.getPid();
             if (rootable.isRoot(node)) {
@@ -85,11 +74,6 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept, Integer> implements D
         }
 
         return roots;
-    }
-
-    // 上级节点为0则为根节点
-    private boolean isOrgRoot(MixNodeVO nodeVO) {
-        return StringUtils.isNotBlank(nodeVO.getPid()) && nodeVO.getPid().equals("0");
     }
 
     @Override

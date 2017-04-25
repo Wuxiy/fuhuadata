@@ -176,17 +176,17 @@
                                                 <span class="input-group-addon">原币</span>
                                             </div>
                                         </td>
-                                        #*<td>
-                                            <label class="col-xs-1 control-label" lang="zh">
-                                                内部供货单位
-                                                <sup class="not-null">*</sup>
-                                            </label>
-                                        </td>
+                                        <td><label class="control-label" lang="zh">内部供货单位<sup data-view="editView" class="not-null hidden">*</sup></label></td>
                                         <td>
-                                            <div class="col-xs-2">
-                                                <input class="form-control" type="email" id="internalSupplyName" value="" />
+                                        <div class="">
+                                            <div class="input-group">
+                                                <input id="internalSupplyName" name="internalSupplyName" data-toggle="dropdown" class="form-control dropdown-toggle" disabled type="text" placeholder="点击搜索按钮选择" autocomplete="off"/>
+                                                <div class="input-group-btn">
+                                                    <button data-control="on" id="interSearch" class="btn btn-xs btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                                                </div>
                                             </div>
-                                        </td>*#
+                                        </div>
+                                        </td>
                                         <td class="hidden">
                                             <label class="control-label" lang="zh">
                                                 毛利率
@@ -319,12 +319,32 @@
 ##        </div>
 ##    </div>
 ##</div>
+<div class="modal fade in" id="cbtModal" tabindex="-1" role="dialog" data-backdrop="false" aria-hidden="true">
+    <div class="modal-dialog" style="width: 400px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body">
+                <hr>
+                <div class="zTreeDemoBackground left well" style="height: 300px;overflow-y: scroll;overflow-x: auto">
+                    <ul id="cbtTree" class="ztree"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <input id="businessProductId" type="hidden" value="$!{businessProductId}"> <!--编号-->
 <input id="orderId" type="hidden" value="$!{orderId}">
 <input id="customerId" type="hidden" value="$!{customerId}">
 <input id="productRequireId" type="hidden" value="">
 <input id="editId" type="hidden" value="$!{edit}">
+
+
 
 <script type="text/javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
@@ -407,10 +427,10 @@
                         costtable.innerHTML = '';
                         for(var i=0;i<components.length;i++){
                             costtable.innerHTML += '<tr>'+
-                                    '<td data-id="'+components[i].componentId+'">'+components[i].componentName+'</td>'+
-                                    '<td><input class="form-control notnull" type="text" value="'+components[i].consumption+'" data-target="on" disabled></td>'+
-                                    '<td><input class="form-control notnull" type="text" value="'+components[i].price+'" data-target="on" disabled></td>'+
-                                    '<td>'+components[i].cost+'</td>'+
+                                    '<td data-id="'+components[i].componentId+'">'+ifEmpty(components[i].componentName)+'</td>'+
+                                    '<td><input class="form-control notnull" type="text" value="'+ifEmpty(components[i].consumption)+'" data-target="on" disabled></td>'+
+                                    '<td><input class="form-control notnull" type="text" value="'+ifEmpty(components[i].price)+'" data-target="on" disabled></td>'+
+                                    '<td>'+ifEmpty(components[i].cost)+'</td>'+
                                     '<td><input class="form-control" type="text" value="'+ifEmpty(components[i].remarks)+'" data-target="on" disabled></td>'+
                                     '</tr>';
                         }
@@ -690,6 +710,7 @@
                         data:Add(),
                         success:function (result) {
                             var success = result.data.success;
+                            console.log(result);
                             if(success == true){
                                 alert('添加成功！');
                                 var editId = 0;
@@ -706,6 +727,7 @@
 
 
     //点击选择内部供货单位
+    var orgTreeData = null;
     $('#interSearch').on('click.renderTree',function () {
         $('#cbtTree').html('');
         if (orgTreeData==null) {
@@ -820,6 +842,7 @@
 
         productId = ids.split('_')[0];
         wareId = ids.split('_')[1];
+
         $('#name').attr('data-productId',productId);
         $('#name').attr('data-wareId',wareId);
         $('#name').val(tarEltext);
@@ -837,6 +860,7 @@
                 data:data,
                 success:function (result) {
                     var businessProductId = result.businessProductId;
+                    console.log(businessProductId);
 
                     //若businessProductId=0,则没有档案，执行新增；businessProductId！=0，则获取档案填充
                     if(businessProductId == 0){
@@ -856,15 +880,16 @@
                             costtable.innerHTML = '';
                             for(var i=0;i<components.length;i++){
                                 costtable.innerHTML += '<tr>'+
-                                        '<td data-id="'+components[i].componentId+'">'+components[i].componentName+'</td>'+
-                                        '<td><input class="form-control notnull" type="text" value="'+components[i].consumption+'"></td>'+
-                                        '<td><input class="form-control notnull" type="text" value="'+components[i].price+'"></td>'+
-                                        '<td>'+components[i].cost+'</td>'+
+                                        '<td data-id="'+components[i].componentId+'">'+ifEmpty(components[i].componentName)+'</td>'+
+                                        '<td><input class="form-control notnull" type="text" value="'+ifEmpty(components[i].consumption)+'"></td>'+
+                                        '<td><input class="form-control notnull" type="text" value="'+ifEmpty(components[i].price)+'"></td>'+
+                                        '<td>'+ifEmpty(components[i].cost)+'</td>'+
                                         '<td><input class="form-control" type="text" value="'+ifEmpty(components[i].remarks)+'"></td>'+
                                         '</tr>';
                             }
                         }
                     } else{
+                        $('#businessProductId').val(businessProductId);
                     jQuery.ajax({
                         url:basePath + '/businessProduct/detailBaseInfo?businessProductId=' + businessProductId,
                         type:'POST',
@@ -884,10 +909,10 @@
                                 costtable.innerHTML = '';
                                 for(var i=0;i<components.length;i++){
                                     costtable.innerHTML += '<tr>'+
-                                            '<td data-id="'+components[i].componentId+'">'+components[i].componentName+'</td>'+
-                                            '<td><input class="form-control notnull" type="text" value="'+components[i].consumption+'"></td>'+
-                                            '<td><input class="form-control notnull" type="text" value="'+components[i].price+'"></td>'+
-                                            '<td>'+components[i].cost+'</td>'+
+                                            '<td data-id="'+components[i].componentId+'">'+ifEmpty(components[i].componentName)+'</td>'+
+                                            '<td><input class="form-control notnull" type="text" value="'+ifEmpty(components[i].consumption)+'"></td>'+
+                                            '<td><input class="form-control notnull" type="text" value="'+ifEmpty(components[i].price)+'"></td>'+
+                                            '<td>'+ifEmpty(components[i].cost)+'</td>'+
                                             '<td><input class="form-control" type="text" value="'+ifEmpty(components[i].remarks)+'"></td>'+
                                             '</tr>';
                                 }
@@ -939,6 +964,7 @@
         var data = {
             "businessOrderProduct":{
                 'id':$('#businessProductId').val(),
+                'customerId':$('#customerId').val(),
                 'name':$('#name').val(),
                 'orderId':$('#orderId').val(),
                 'productId':$('#name').attr('data-productId'),
@@ -965,8 +991,8 @@
                 'taxFree':$('#taxFree').val(),
                 'otherCost':$('#otherCost').val(),
 
-                /*"internalSupplyId":$('#internalSupplyName').data('val'),
-                "internalSupplyName":$('#internalSupplyName').val(),*/
+                "internalSupplyId":$('#internalSupplyName').data('val'),
+                "internalSupplyName":$('#internalSupplyName').val(),
 
                 "createTime": getTime(),
                 "createUserId": 2,
@@ -1013,8 +1039,8 @@
                 'otherCost':$('#otherCost').val(),
 
 
-                /*"internalSupplyId":$('#internalSupplyName').data('val'),
-                "internalSupplyName":$('#internalSupplyName').val(),*/
+                "internalSupplyId":$('#internalSupplyName').data('val'),
+                "internalSupplyName":$('#internalSupplyName').val()
             },
             "businessOrderProductComponents":getbusinessOrderProductComponents()
 
@@ -1030,13 +1056,14 @@
         tr.each(function () {
             var td = $(this).find('td'),
             obj = {
-                "productId":$('#productId').val(),
-                "wareId":$('#wareId').val(),
+                "productId":$('#name').attr('data-productId'),
+                "wareId":$('#name').attr('data-wareId'),
                 "componentId":td.eq(0).attr('data-id'),
                 "componentName":td.eq(0).text(),
                 "consumption":td.eq(1).find('input').val(),
                 "price":td.eq(2).find('input').val(),
-                "cost":td.eq(3).text()
+                "cost":td.eq(3).text(),
+                "remarks":td.eq(4).find('input').val()
             };
             arr.push(obj);
         })

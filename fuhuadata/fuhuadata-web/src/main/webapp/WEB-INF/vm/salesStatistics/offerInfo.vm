@@ -443,7 +443,6 @@
     var businessId = $('#businessId').val();
     console.log(businessId);
 
-    var customerId = $('#customerId').val();
     var businessProductId = '';
     var businessproduct = document.getElementById('businessproduct');
     var editId = $('#editId').val();
@@ -469,9 +468,7 @@
                 success:function(result){
                     if(result.data != null&&result.data != undefined){
                         var businessOrder = result.data.businessOrder;
-                        if(!businessOrder.businessId){
-                            $('#businessId').val(businessOrder.businessId); // 商机编号
-                        }
+                        $('#businessId').val(businessOrder.businessId); // 商机编号
                         $('#customerDutyParagraph').val(businessOrder.customerDutyParagraph); // 客户税号
                         $('#billToCustomer').val(businessOrder.billToCustomer); // 收票客户
                         $('#saleOrganizationName').val(businessOrder.saleOrganizationName); // 销售组织name

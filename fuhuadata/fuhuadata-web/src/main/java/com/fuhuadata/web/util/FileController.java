@@ -98,7 +98,7 @@ public class FileController {
                     String fileName = System.currentTimeMillis()+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
                     File tempFile = new File(path, fileName);
                     if (!tempFile.getParentFile().exists()) {
-                        tempFile.getParentFile().mkdir();
+                        tempFile.getParentFile().mkdirs();
                     }
                     System.out.println(tempFile);
                     FileCopyUtils.copy(file.getBytes(),tempFile);

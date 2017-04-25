@@ -60,10 +60,10 @@
         SELECT
         <include refid="BaseColumns"/>,
         <include refid="com.fuhuadata.dao.mapper.UserAccountMapper.PrefixColumns"/>,
-        <include refid="com.fuhuadata.dao.mapper.AreaCodeMapper.UserAreasPrefixColumns"/>
+        <include refid="com.fuhuadata.dao.mapper.AreaClMapper.UserAreaPrefixColumns"/>
         FROM p_user_role ur
         <include refid="RoleUserJoin"/>
-        <include refid="com.fuhuadata.dao.mapper.AreaCodeMapper.UserAreasJoin"/>
+        <include refid="com.fuhuadata.dao.mapper.UserAccountMapper.LeftJoinAreas"/>
         WHERE ur.role_id=#{roleId}
     </select>
 

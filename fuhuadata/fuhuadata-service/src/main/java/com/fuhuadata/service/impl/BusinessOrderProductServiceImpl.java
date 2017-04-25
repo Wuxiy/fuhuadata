@@ -43,7 +43,6 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
     private ProductInfoDao productInfoDao;
     @Autowired
     private ProductWareDao productWareDao;
-    @Transactional
     public int addBusinessOrderProduct(BusinessOrderProduct businessOrderProduct,List<BusinessOrderProductComponent> businessOrderProductComponents) {
         try {
             businessOrderProduct.setCreateUserId(LoginUtils.getLoginId());
@@ -53,22 +52,29 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
             int businessProductId = businessOrderProductDao.insertBaseInfo(businessOrderProduct);
             for(BusinessOrderProductComponent bopc:businessOrderProductComponents){
                 bopc.setBusinessProductId(businessProductId);
+                bopc.setWareId(businessOrderProduct.getWareId());
+                bopc.setProductId(businessOrderProduct.getProductId());
             }
-            boolean flag = businessOrderProductComponentDao.insertProductComponent(businessOrderProductComponents);
-            if(!flag){
-               throw new Exception("插入产品成品失败");
+            if(businessOrderProductComponents.size()>0){
+                boolean flag = businessOrderProductComponentDao.insertProductComponent(businessOrderProductComponents);
+                if(!flag){
+                    throw new Exception("插入产品成品失败");
+                }
             }
             //维护档案数据
             int businessProductArchivesId = customerProductArchivesDao.addArchives(businessProductId);
             if(businessProductArchivesId<1){
                 throw new Exception("插入档案失败");
             }
-            Map<String,Object> pmap = new HashMap<String,Object>();
-            pmap.put("businessProductId",businessProductId);
-            pmap.put("businessProductArchivesId",businessProductArchivesId);
-            if(businessOrderProductComponentDao.addArchives(pmap)<1){
-                throw new Exception("插入档案失败");
+            if(businessOrderProductComponents.size()>0){
+                Map<String,Object> pmap = new HashMap<String,Object>();
+                pmap.put("businessProductId",businessProductId);
+                pmap.put("businessProductArchivesId",businessProductArchivesId);
+                if(businessOrderProductComponentDao.addArchives(pmap)<1){
+                    throw new Exception("插入档案失败");
+                }
             }
+            System.out.println("+++++++++++++++++++++++service返回新增businessProductId："+businessProductId+"+++++++++++++++++++++++++++++++");
             return businessProductId;
         } catch (Exception e) {
             e.printStackTrace();
@@ -155,7 +161,9 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
             //更新加工费
             businessOrderProduct.setProcessCost(businessOrderProductDao.calculateProcessCost(businessOrderProduct.getId()));
         }
-        if(businessOrderProductDao.getBaiscById(businessOrderProduct.getId()).getMainPackingId()!=null){
+        BusinessProductRequire businessProductRequire = new BusinessProductRequire();
+        businessProductRequire.setBusinessProductId(businessOrderProduct.getId());
+        if(businessProductRequireDao.getOneByQuery(businessProductRequire)!=null){
             //更新最低价
             businessOrderProduct.setMinPrice(calculateMinPrice(businessOrderProduct.getId()));
         }

@@ -55,6 +55,13 @@ public interface BusinessOrderService {
      * @return
      */
     public Result<BusinessOrderVO> getBusinessOrderByOrderId(String orderId);
+
+    /**
+     * 根据商机id获取订单id
+     * @param businessId
+     * @return
+     */
+    public String getOrderIdByBusinessId(String businessId);
     /**
      * 分页获取报价列表
      * @param queryBusinessOrder
