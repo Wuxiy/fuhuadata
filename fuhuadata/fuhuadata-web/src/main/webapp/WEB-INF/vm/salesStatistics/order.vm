@@ -497,18 +497,18 @@ $(function(){
             for (var i = 0; i < ResultData.length; i++) {
                 _html += '<tr>';
                 _html += '<td>'+(++count)+'</td>';
-                _html += '<td><a href="'+basePath+'/businessOrder/intoOfferorOrder?orderId='+ResultData[i].orderId+'">' + ResultData[i].orderId + '</a></td>';
-                _html += '<td><a href="">' + ResultData[i].businessId + '</a></td>';
-                _html += '<td>' + ResultData[i].saleOrganizationName + '</td>';
-                _html += '<td lang="zh">' + ResultData[i].ncOrderId + '</td>';
-                _html += '<td lang="zh">' + ResultData[i].customerName + '</td>';
-                _html += '<td>' + ResultData[i].country + 'A</td>';
-                _html += '<td>' + ResultData[i].floorPrice + '</td>';
-                _html += '<td lang="zh">' + ResultData[i].amountPayable + '</td>';
+                _html += '<td><a href="'+basePath+'/businessOrder/intoOfferorOrder?orderId='+ResultData[i].orderId+'">' + (ResultData[i].orderId!=undefined?ResultData[i].orderId:'') + '</a></td>';
+                _html += '<td><a href="">' + (ResultData[i].businessId!=undefined?ResultData[i].businessId:'') + '</a></td>';
+                _html += '<td>' + (ResultData[i].saleOrganizationName!=undefined?ResultData[i].saleOrganizationName:'') + '</td>';
+                _html += '<td lang="zh">' + (ResultData[i].ncOrderId!=undefined?ResultData[i].ncOrderId:'') + '</td>';
+                _html += '<td lang="zh">' + (ResultData[i].customerName!=undefined?ResultData[i].customerName:'') + '</td>';
+                _html += '<td>' + (ResultData[i].country!=undefined?ResultData[i].country:'') + '</td>';
+                _html += '<td>' + (ResultData[i].floorPrice!=undefined?ResultData[i].floorPrice:'') + '</td>';
+                _html += '<td lang="zh">' + (ResultData[i].amountPayable!=undefined?ResultData[i].amountPayable:'') + '</td>';
                 _html += '<td lang="zh">' + (ResultData[i].isComplaint == 0 ? "否" : "是") + '</td>';
                 _html += '<td>' + (ResultData[i].isModifyPrice == 0 ? "否" : "是") + '</td>';
-                _html += '<td>' + ResultData[i].dealTime + '</td>';
-                _html += '<td>' + businessStateList[ResultData[i].status + 2] + '</td>';
+                _html += '<td>' + (ResultData[i].dealTime!=undefined?ResultData[i].dealTime:'') + '</td>';
+                _html += '<td>' + (ResultData[i].status!=undefined?businessStateList[ResultData[i].status + 2]:'') + '</td>';
                 _html += '</tr>';
             }
         }

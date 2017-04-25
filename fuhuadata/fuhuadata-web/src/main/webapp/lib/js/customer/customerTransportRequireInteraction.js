@@ -9,7 +9,7 @@ $(function () {
 
     // 获取数据并渲染表单
     CRM.ajaxCall({
-        url:'/customerBaseInfoOrderRequire/getTransportRequireList',
+        url:basePath + '/customerBaseInfoOrderRequire/getTransportRequireList',
         data:ajaxParam(),
         type:'POST',
         callback:function (data) {

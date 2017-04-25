@@ -145,12 +145,9 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="registeredFunds" class="control-label col-xs-1" lang="zh">注册资金<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <label for="registeredFunds" class="control-label col-xs-1" lang="zh">注册资金</label>
                                 <div class="col-xs-2">
-                                    <div class="input-group">
-                                        <input id="registeredFunds" data-control="off" disabled name="registeredFunds" class="form-control" type="text" value="" />
-                                        <span class="input-group-addon">$</span>
-                                    </div>
+                                    <input id="registeredFunds" data-control="off" disabled name="registeredFunds" class="form-control" type="text" value="" />
                                 </div>
                                 <label for="enterprisePhone" class="control-label col-xs-1" lang="zh">企业电话</label>
                                 <div class="col-xs-2">
@@ -162,19 +159,19 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="registeredAddress" class="control-label col-xs-1" lang="zh">注册地址<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <label for="registeredAddress" class="control-label col-xs-1" lang="zh">注册地址</label>
                                 <div class="col-xs-8">
                                     <textarea id="registeredAddress" data-control="off" disabled name="registeredAddress" class="form-control" rows="2" ></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="managementScope" class="control-label col-xs-1" lang="zh">经营范围<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <label for="managementScope" class="control-label col-xs-1" lang="zh">经营范围</label>
                                 <div class="col-xs-8">
                                     <textarea id="managementScope" data-control="off" disabled name="managementScope" class="form-control" rows="2" ></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="hasChiCompany" class="control-label col-xs-1" lang="zh">是否有中国分公司<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <label for="hasChiCompany" class="control-label col-xs-1" lang="zh">是否有中国分公司</label>
                                 <div class="col-xs-2">
                                     <select id="hasChiCompany" data-control="off" disabled name="hasChiCompany" class="form-control" >
                                         <option value="" lang="zh" selected>——请选择——</option>
@@ -182,7 +179,7 @@
                                         <option value="0" lang="zh">无</option>
                                     </select>
                                 </div>
-                                <label for="hasChiPurchase" class="control-label col-xs-1 text-left" lang="zh">是否有中方采购<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <label for="hasChiPurchase" class="control-label col-xs-1 text-left" lang="zh">是否有中方采购</label>
                                 <div class="col-xs-2">
                                     <select id="hasChiPurchase" data-control="off" disabled name="hasChiPurchase" class="form-control" >
                                         <option value="" lang="zh" selected>——请选择——</option>

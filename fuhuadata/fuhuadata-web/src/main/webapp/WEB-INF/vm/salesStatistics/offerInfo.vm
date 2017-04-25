@@ -306,7 +306,7 @@
                                     </div>
                                 </div>*#
                             </div>
-                            <div class="form-group ">
+                            <div class="form-group hidden">
                                 <label class="col-xs-1 control-label">企业性质</label>
                                 <div class="col-xs-6">
                                     <label class="checkbox-inline">
@@ -1024,7 +1024,7 @@
 
             ul.html('');
             CRM.ajaxCall({
-                url:url,
+                url:basePath + url,
                 type:'POST',
                 contentType:'application/json',
                 data:JSON.stringify({
@@ -1046,7 +1046,7 @@
             obj[arg]=$(this).val();
             ul.html('');
             CRM.ajaxCall({
-                url:url,
+                url:basePath + url,
                 type:'POST',
                 contentType:'application/json',
                 data:JSON.stringify(obj),
@@ -1133,7 +1133,7 @@
                 var url = basePath + '/businessProduct/deleteAllInfoByIds?businessProductIds=' + data;
                 console.log(data);
                 jQuery.ajax({
-                    url:url,
+                    url: url,
                     type:'POST',
 //                    dataType:"json",
 //                    contentType:"application/json",

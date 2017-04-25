@@ -167,7 +167,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $("#productproblem_table").dataTable( {
-            "ajax":'${request.contextPath}/productProblem/queryProductProblemList',
+            "ajax": basePath + '/productProblem/queryProductProblemList',
             "pagingType":"full_numbers",
             "lengthMenu":[[5, 10, 15, -1], [5, 10, 15, "All"]],
             "columns":[
@@ -189,7 +189,7 @@
                 }
             ],
             "language": {
-                "url": '${request.contextPath}/lib/dataTables/lang/dataTables.lang.zh',
+                "url": basePath + '/lib/dataTables/lang/dataTables.lang.zh',
                         "searchPlaceholder": '关键字'
             }
         });

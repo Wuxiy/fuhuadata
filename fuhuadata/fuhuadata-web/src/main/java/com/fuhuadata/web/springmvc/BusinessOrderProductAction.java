@@ -282,6 +282,15 @@ public class BusinessOrderProductAction {
                 businessProductRequireId =  businessProductRequireService.addProductRequire(businessProductRequire);
             }else{
                 businessProductRequireService.updateProductRequire(businessProductRequire);
+                BusinessOrderProduct businessOrderProduct = new BusinessOrderProduct();
+                businessOrderProduct.setId(businessProductRequire.getBusinessProductId());
+                BusinessOrderProduct basic =  businessOrderProductService.getBaiscById(businessProductRequire.getBusinessProductId());
+                Integer priceType = basic.getPriceType();
+                //只有1原药制剂自产类加工，2原药采购制剂加工才有加工费
+                if(priceType==1 || priceType==2){
+                    businessOrderProduct.setProcessCost(businessOrderProductService.calculateProcessCost(businessProductRequire.getBusinessProductId()));
+                }
+                businessOrderProduct.setMinPrice(businessOrderProductService.calculateMinPrice(businessProductRequire.getBusinessProductId()));
             }
             result.put("productRequireId",businessProductRequireId);
             result.put("success",true);
