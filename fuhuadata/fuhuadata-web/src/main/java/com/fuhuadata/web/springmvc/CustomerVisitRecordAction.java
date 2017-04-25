@@ -86,6 +86,7 @@ public class CustomerVisitRecordAction {
         customerVisitRecordVO.getCustomerVisitRecord().setLastmodifyUserId(LoginUtils.getLoginId());
         customerVisitRecordVO.getCustomerVisitRecord().setLastmodifyUserName(LoginUtils.getLoginName());
         customerVisitRecordVO.getCustomerVisitRecord().setModifyTime(DateUtil.getDateTimeFormat());
+        customerVisitRecordVO.getCustomerVisitRecord().setCreateTime(DateUtil.getDateTimeFormat());
         try{
              result=customerVisitRecordService.addVisitRecord(customerVisitRecordVO);
         }catch(Exception e){

@@ -597,14 +597,13 @@
                 _html += '  <td><a href="'+basePath+'/customerBaseInfo/intoCustomerBaseInfoDetails?customerType=1&customerId=' +
                         ResultData[i].customerId + '">'+ ResultData[i].customerName+'</a></td>';
                 _html += '  <td lang="zh">'+customerLevelList[ResultData[i].customerLevel-1]+'</td>';
-                _html += '  <td>'+ResultData[i].country+'A</td>';
+                _html += '  <td>'+ResultData[i].country+'</td>';
                 _html += '  <td><a data-toggle="modal" href="#myModal" data-customerid="'+ ResultData[i].customerId +'">'+
-                        (ResultData[i].actualAmountPaid==null?0:ResultData[i].actualAmountPaid)+'</a></td>';
-                _html += '  <td lang="zh">'+ResultData[i].floorPrice+'</td>';
+                        (ResultData[i].salesAmount==null?0:ResultData[i].salesAmount)+'</a></td>';
+                _html += '  <td lang="zh">'+(ResultData[i].grossProfit!=undefined?ResultData[i].grossProfit:0)+'</td>';
                 _html += '  <td><a href="'+basePath+'/customerVisitRecord/intoCustomerMaintenance?customerId='+
-                        ResultData[i].customerId +'">' + ResultData[i].maintenanceFee +'</a></td>';
-                _html += '  <td lang="zh">'+ResultData[i].netProfit+'</td>';
-                _html += '  <td lang="zh">'+ResultData[i].salesManName+'</td>';
+                        ResultData[i].customerId +'">' + (ResultData[i].maintenanceFee!=undefined?ResultData[i].maintenanceFee:0) +'</a></td>';
+                _html += '  <td lang="zh">' +  (ResultData[i].netProfit!=undefined?ResultData[i].netProfit:0) + '</td>';
                 _html +='   </tr>';
             }
 

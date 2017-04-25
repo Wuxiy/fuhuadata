@@ -616,25 +616,22 @@
 
         //全部添加成功后保存
         $(document).on('click','#next',function(){
-            if(id!=''){
-                window.location.href = basePath + '/businessOrder/intoOfferorOrder?orderId=' + orderId;
-            }else{
-                jQuery.ajax({
-                    url:basePath + '/businessProduct/saveDocumentaryOrPacking',
-                    type:'POST',
-                    data:getdata(),
-                    /*contentType:"application/json",*/
-                    success:function(result){
-                        if(result == true){
-                            alert('添加保存成功!');
-                            console.log(result);
-                            window.location.href = basePath + '/businessOrder/intoOfferorOrder?orderId=' + orderId;
-                        }else{
-                            alert('添加保存失败！');
-                        }
+            jQuery.ajax({
+                url:basePath + '/businessProduct/saveDocumentaryOrPacking',
+                type:'POST',
+                data:getdata(),
+                /*contentType:"application/json",*/
+                success:function(result){
+                    if(result == true){
+                        alert('添加保存成功!');
+                        console.log(result);
+                        window.location.href = basePath + '/businessOrder/intoOfferorOrder?orderId=' + orderId;
+                    }else{
+                        alert('添加保存失败！');
                     }
-                })
-            }
+                }
+            })
+
         })
     })
 
@@ -688,6 +685,20 @@
         console.log(businessOrderProduct);
         return businessOrderProduct;
     }
+
+    //互斥
+    $(document).on('click','input[name="inspectionOfLoading"]',function(){
+        $('input[name="inspectionOfLoading"]').removeAttr('checked');
+        $(this).prop('checked',true);
+    })
+    $('input[name="inspectionOfLoading"]').change(function(){
+        if($(this).attr('checked')){
+            $('#inspectionInstitution').attr('disabled',false);
+        }else{
+            $('#inspectionInstitution').attr('disabled',true);
+            $('#inspectionInstitution').attr('value','');
+        }
+    })
 
     function getinspectionOfLoading() {
         var inspectionOfLoading;

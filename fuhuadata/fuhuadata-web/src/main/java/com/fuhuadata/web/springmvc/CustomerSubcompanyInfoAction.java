@@ -94,22 +94,29 @@ public class CustomerSubcompanyInfoAction {
 
     /**
      * do add
-     * @param customerSubcompanyInfo
+     * @param customerSubcompanyInfoVO
      * @return
      */
     @RequestMapping(value="/addCustomerSubcompanyInfo",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "customerInfo-CustomerSubcompanyInfo",methods = "doAdd")
     @ResponseBody
-    public ResultPojo addCustomerSubcompanyInfo(@RequestBody CustomerSubcompanyInfo customerSubcompanyInfo){
+    public ResultPojo addCustomerSubcompanyInfo(@RequestBody CustomerSubcompanyInfoVO customerSubcompanyInfoVO){
+
         Result<CustomerSubcompanyInfo> result = new Result<CustomerSubcompanyInfo>();
+        CustomerSubcompanyInfo customerSubcompanyInfo = customerSubcompanyInfoVO.getCustomerSubcompanyInfo();
+        CustomerEnterpriceNature[] customerEnterpriceNatures = customerSubcompanyInfoVO.getCustomerEnterpriceNatures();
         customerSubcompanyInfo.setCreateTime(DateUtil.getDateTimeFormat());
         customerSubcompanyInfo.setCreateUserId(LoginUtils.getLoginId());
         customerSubcompanyInfo.setCreateUserName(LoginUtils.getLoginName());
         customerSubcompanyInfo.setLastmodifyUserId(LoginUtils.getLoginId());
         customerSubcompanyInfo.setLastmodifyUserName(LoginUtils.getLoginName());
         customerSubcompanyInfo.setModifyTime(DateUtil.getDateTimeFormat());
+        List<CustomerEnterpriceNature> list = new ArrayList<CustomerEnterpriceNature>();
+        if(customerEnterpriceNatures!=null && customerEnterpriceNatures.length>0) {
+            list = Arrays.asList(customerSubcompanyInfoVO.getCustomerEnterpriceNatures());
+        }
         try{
-            result=customerSubcompanyInfoService.addCustomerSubcompanyInfo(customerSubcompanyInfo);
+            result=customerSubcompanyInfoService.addCustomerSubcompanyInfo(customerSubcompanyInfo,list);
         }catch(Exception e){
             result.setSuccess(false);
             log.error("新增客户子公司错误",e);

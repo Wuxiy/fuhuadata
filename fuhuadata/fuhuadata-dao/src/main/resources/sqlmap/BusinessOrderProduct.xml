@@ -28,7 +28,7 @@
         <result column="price_type" jdbcType="INTEGER" property="priceType" />
         <result column="advise_price" jdbcType="DECIMAL" property="advisePrice" />
         <result column="purchase_price" jdbcType="DECIMAL" property="purchasePrice" />
-        <result column="delivery_time" jdbcType="TIMESTAMP" property="deliveryTime" />
+        <result column="delivery_time" jdbcType="DATE" property="deliveryTime" />
         <result column="Internal_transport_mode" jdbcType="INTEGER" property="internalTransportMode" />
         <result column="Internal_transport_price" jdbcType="DECIMAL" property="internalTransportPrice" />
         <result column="factory_id" jdbcType="VARCHAR" property="factoryId" />
@@ -122,7 +122,7 @@
             customer_product_name,brand,main_product_amount,main_product_unit,sub_product_amount,sub_product_unit,
             convert_rate,price_type,advise_price,purchase_price,delivery_time,factory_id,factory_name,commission_price,
             tax_type,tax_free,other_cost,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time,
-        unit_use_rate,capital_interest_price
+        unit_use_rate,capital_interest_price,internal_Supply_Id,internal_Supply_name
 
         )
         values(
@@ -130,7 +130,7 @@
         #customerProductName#,#brand#,#mainProductAmount#,#mainProductUnit#,#subProductAmount#,#subProductUnit#,
         #convertRate#,#priceType#,#advisePrice#,#purchasePrice#,#deliveryTime#,#factoryId#,#factoryName#,#commissionPrice#,
         #taxType#,#taxFree#,#otherCost#,#createUserId#,#createUserName#,#createUserId#,#createUserName# ,now(),now(),
-        #unitUseRate#,#capitalInterestPrice#
+        #unitUseRate#,#capitalInterestPrice#,#internalSupplyId#,#internalSupplyName#
         )
         <selectKey resultClass="java.lang.Integer" keyProperty="id">
             SELECT @@IDENTITY AS ID
@@ -172,166 +172,173 @@
     <update id="update" parameterClass="BusinessOrderProduct">
         update business_order_product
         <dynamic prepend="set">
-            <isNotNull prepend="," property="orderId">
+            <isNotEmpty prepend="," property="orderId">
                 order_id = #orderId#
-            </isNotNull>
-            <isNotNull prepend="," property="unitUseRate">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="unitUseRate">
                 unit_use_rate = #unitUseRate#
-            </isNotNull>
-            <isNotNull prepend="," property="capitalInterestPrice">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="capitalInterestPrice">
                 capital_interest_price = #capitalInterestPrice#
-            </isNotNull>
-            <isNotNull prepend="," property="archiveProductId">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="archiveProductId">
                 archive_product_id = #archiveProductId#
-            </isNotNull>
-            <isNotNull prepend="," property="productId">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="productId">
                 product_id = #productId#
-            </isNotNull>
-            <isNotNull prepend="," property="wareId">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="wareId">
                 ware_id = #wareId#
-            </isNotNull>
-            <isNotNull prepend="," property="customsClearanceId">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="customsClearanceId">
                 customs_clearance_id = #customsClearanceId#
-            </isNotNull>
-            <isNotNull prepend="," property="customsClearanceName">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="customsClearanceName">
                 customs_clearance_name = #customsClearanceName#
-            </isNotNull>
-            <isNotNull prepend="," property="customerId">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="customerId">
                 customer_id = #customerId#
-            </isNotNull>
-            <isNotNull prepend="," property="name">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="name">
                 name = #name#
-            </isNotNull>
-            <isNotNull prepend="," property="customerProductName">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="customerProductName">
                 customer_product_name = #customerProductName#
-            </isNotNull>
-            <isNotNull prepend="," property="brand">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="brand">
                 brand = #brand#
-            </isNotNull>
-            <isNotNull prepend="," property="mainProductAmount">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="mainProductAmount">
                 main_product_amount = #mainProductAmount#
-            </isNotNull>
-            <isNotNull prepend="," property="mainProductUnit">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="mainProductUnit">
                 main_product_unit = #mainProductUnit#
-            </isNotNull>
-            <isNotNull prepend="," property="subProductAmount">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="subProductAmount">
                 sub_product_amount = #subProductAmount#
-            </isNotNull>
-            <isNotNull prepend="," property="subProductUnit">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="subProductUnit">
                 sub_product_unit = #subProductUnit#
-            </isNotNull>
-            <isNotNull prepend="," property="convertRate">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="convertRate">
                 convert_rate = #convertRate#
-            </isNotNull>
-            <isNotNull prepend="," property="priceType">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="priceType">
                 price_type = #priceType#
-            </isNotNull>
-            <isNotNull prepend="," property="advisePrice">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="advisePrice">
                 advise_price = #advisePrice#
-            </isNotNull>
-            <isNotNull prepend="," property="purchasePrice">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="purchasePrice">
                 purchase_price = #purchasePrice#
-            </isNotNull>
-            <isNotNull prepend="," property="deliveryTime">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="deliveryTime">
                 delivery_time = #deliveryTime#
-            </isNotNull>
-            <isNotNull prepend="," property="internalTransportMode">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="internalTransportMode">
                 Internal_transport_mode = #internalTransportMode#
-            </isNotNull>
-            <isNotNull prepend="," property="internalTransportPrice">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="internalTransportPrice">
                 Internal_transport_price = #internalTransportPrice#
-            </isNotNull>
-            <isNotNull prepend="," property="factoryId">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="factoryId">
                 factory_id = #factoryId#
-            </isNotNull>
-            <isNotNull prepend="," property="factoryName">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="factoryName">
                 factory_name = #factoryName#
-            </isNotNull>
-            <isNotNull prepend="," property="commissionPrice">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="commissionPrice">
                 commission_price = #commissionPrice#
-            </isNotNull>
+            </isNotEmpty>
 
-            <isNotNull prepend="," property="documentaryType">
+            <isNotEmpty prepend="," property="documentaryType">
                 documentary_type = #documentaryType#
-            </isNotNull>
-            <isNotNull prepend="," property="documentaryRequire">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="documentaryRequire">
                 documentary_require = #documentaryRequire#
-            </isNotNull>
-            <isNotNull prepend="," property="otherDocumentaryRequire">
+            </isNotEmpty>
+
+            <isNotEmpty prepend="," property="internalSupplyId">
+                internal_Supply_Id = #internalSupplyId#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="internalSupplyName">
+                internal_Supply_name = #internalSupplyName#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="otherDocumentaryRequire">
                 other_documentary_require = #otherDocumentaryRequire#
-            </isNotNull>
-            <isNotNull prepend="," property="shippingAgentRequire">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="shippingAgentRequire">
                 shipping_agent_require = #shippingAgentRequire#
-            </isNotNull>
-            <isNotNull prepend="," property="packageRequire">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="packageRequire">
                 package_require = #packageRequire#
-            </isNotNull>
-            <isNotNull prepend="," property="goodsType">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="goodsType">
                 goods_type = #goodsType#
-            </isNotNull>
-            <isNotNull prepend="," property="mianxiangqi">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="mianxiangqi">
                 mianxiangqi = #mianxiangqi#
-            </isNotNull>
-            <isNotNull prepend="," property="miantuiqi">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="miantuiqi">
                 miantuiqi = #miantuiqi#
-            </isNotNull>
-            <isNotNull prepend="," property="cupboardType">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="cupboardType">
                 cupboard_type = #cupboardType#
-            </isNotNull>
-            <isNotNull prepend="," property="cupboardPerNumber">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="cupboardPerNumber">
                 cupboard_per_number = #cupboardPerNumber#
-            </isNotNull>
-            <isNotNull prepend="," property="cupboardNumber">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="cupboardNumber">
                 cupboard_number = #cupboardNumber#
-            </isNotNull>
-            <isNotNull prepend="," property="oceanFreight">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="oceanFreight">
                 ocean_freight = #oceanFreight#
-            </isNotNull>
-            <isNotNull prepend="," property="portSurcharge">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="portSurcharge">
                 port_surcharge = #portSurcharge#
-            </isNotNull>
-            <isNotNull prepend="," property="taxType">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="taxType">
                 tax_type = #taxType#
-            </isNotNull>
-            <isNotNull prepend="," property="taxFree">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="taxFree">
                 tax_free = #taxFree#
-            </isNotNull>
-            <isNotNull prepend="," property="grossMargin">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="grossMargin">
                 gross_margin = #grossMargin#
-            </isNotNull>
-            <isNotNull prepend="," property="processCost">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="processCost">
                 process_cost = #processCost#
-            </isNotNull>
-            <isNotNull prepend="," property="otherCost">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="otherCost">
                 other_cost = #otherCost#
-            </isNotNull>
-            <isNotNull prepend="," property="minPrice">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="minPrice">
                 min_price = #minPrice#
-            </isNotNull>
-            <isNotNull prepend="," property="contractPrice">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="contractPrice">
                 contract_price = #contractPrice#
-            </isNotNull>
-            <isNotNull prepend="," property="transformState">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="transformState">
                 transform_state = #transformState#
-            </isNotNull>
-            <isNotNull prepend="," property="createUserId">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="createUserId">
                 create_user_id = #createUserId#
-            </isNotNull>
-            <isNotNull prepend="," property="createUserName">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="createUserName">
                 create_user_name = #createUserName#
-            </isNotNull>
-            <isNotNull prepend="," property="lastmodifyUserId">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="lastmodifyUserId">
                 lastmodify_user_id = #lastmodifyUserId#
-            </isNotNull>
-            <isNotNull prepend="," property="lastmodifyUserName">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="lastmodifyUserName">
                 lastmodify_user_name = #lastmodifyUserName#
-            </isNotNull>
-            <isNotNull prepend="," property="createTime">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="createTime">
                 create_time = #createTime#
-            </isNotNull>
-            <isNotNull prepend="," property="modifyTime">
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="modifyTime">
                 modify_time = #modifyTime#
-            </isNotNull>
+            </isNotEmpty>
         </dynamic>
         where id = #id#
     </update>

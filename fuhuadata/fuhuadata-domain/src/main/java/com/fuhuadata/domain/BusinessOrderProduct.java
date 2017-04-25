@@ -65,7 +65,7 @@ public class BusinessOrderProduct {
     private BigDecimal purchasePrice;
 
     /**交货时间**/
-    private Date deliveryTime;
+    private String deliveryTime;
 
     /**内运方式**/
     private Integer internalTransportMode;
@@ -417,11 +417,11 @@ public class BusinessOrderProduct {
         this.purchasePrice = purchasePrice;
     }
 
-    public Date getDeliveryTime() {
+    public String getDeliveryTime() {
         return deliveryTime;
     }
 
-    public void setDeliveryTime(Date deliveryTime) {
+    public void setDeliveryTime(String deliveryTime) {
         this.deliveryTime = deliveryTime;
     }
 

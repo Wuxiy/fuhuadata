@@ -60,7 +60,7 @@ public class CustomerProductArchives {
 	private BigDecimal purchasePrice;
 	
     /**交货时间**/
-	private Date deliveryTime;
+	private String deliveryTime;
 	
     /**内运方式,0空，1汽运+江运，2汽运，3江运**/
 	private Integer InternalTransportMode;
@@ -159,26 +159,16 @@ public class CustomerProductArchives {
 	private Integer transformState;
 
 
-	/**加工成分及费用json**/
-	private String compositionCost;
 
 	/**包装其他要求**/
 	private String pakageOtherRequirement;
 
-	/**附加单价**/
-	private BigDecimal additionalPrice;
 
 	/**单耗**/
 	private BigDecimal consumption;
 
-	/**包装图片要求**/
-	private String imgInfo;
 
-	/**包装要求**/
-	private String pakageInfo;
 
-	/**包材要求**/
-	private String materialInfo;
 
 
 
@@ -324,13 +314,6 @@ public class CustomerProductArchives {
 		this.customerProductName = customerProductName;
 	}
 
-	public String getCompositionCost() {
-		return compositionCost;
-	}
-
-	public void setCompositionCost(String compositionCost) {
-		this.compositionCost = compositionCost;
-	}
 
 	public String getPakageOtherRequirement() {
 		return pakageOtherRequirement;
@@ -340,13 +323,6 @@ public class CustomerProductArchives {
 		this.pakageOtherRequirement = pakageOtherRequirement;
 	}
 
-	public BigDecimal getAdditionalPrice() {
-		return additionalPrice;
-	}
-
-	public void setAdditionalPrice(BigDecimal additionalPrice) {
-		this.additionalPrice = additionalPrice;
-	}
 
 	public BigDecimal getConsumption() {
 		return consumption;
@@ -356,29 +332,8 @@ public class CustomerProductArchives {
 		this.consumption = consumption;
 	}
 
-	public String getImgInfo() {
-		return imgInfo;
-	}
 
-	public void setImgInfo(String imgInfo) {
-		this.imgInfo = imgInfo;
-	}
 
-	public String getPakageInfo() {
-		return pakageInfo;
-	}
-
-	public void setPakageInfo(String pakageInfo) {
-		this.pakageInfo = pakageInfo;
-	}
-
-	public String getMaterialInfo() {
-		return materialInfo;
-	}
-
-	public void setMaterialInfo(String materialInfo) {
-		this.materialInfo = materialInfo;
-	}
 
 	public CustomerProductArchives() {
 	}
@@ -480,15 +435,15 @@ public class CustomerProductArchives {
 	public void setPurchasePrice(BigDecimal purchasePrice) {
 		this.purchasePrice = purchasePrice;
 	}
-	
-	public Date getDeliveryTime() {
+
+	public String getDeliveryTime() {
 		return deliveryTime;
 	}
-	
-	public void setDeliveryTime(Date deliveryTime) {
+
+	public void setDeliveryTime(String deliveryTime) {
 		this.deliveryTime = deliveryTime;
 	}
-	
+
 	public Integer getInternalTransportMode() {
 		return InternalTransportMode;
 	}

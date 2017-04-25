@@ -23,18 +23,11 @@
 		<result property="priceType" column="price_type" jdbcType="INT" javaType="java.lang.Integer" />
 		<result property="advisePrice" column="advise_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result property="purchasePrice" column="purchase_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
-		<result property="deliveryTime" column="delivery_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+		<result property="deliveryTime" column="delivery_time" jdbcType="DATE" javaType="java.lang.String" />
 		<result property="InternalTransportMode" column="Internal_transport_mode" jdbcType="INT" javaType="java.lang.Integer" />
 		<result property="InternalTransportPrice" column="Internal_transport_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result property="factoryId" column="factory_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="factoryName" column="factory_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-		<result column="composition_cost" property="compositionCost" jdbcType="VARCHAR" />
-		<result column="pakage_other_requirement" property="pakageOtherRequirement" jdbcType="VARCHAR" />
-		<result column="additional_price" property="additionalPrice" jdbcType="DECIMAL" />
-		<result column="consumption" property="consumption" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
-		<result column="img_info" property="imgInfo" jdbcType="VARCHAR" />
-		<result column="pakage_info" property="pakageInfo" jdbcType="VARCHAR" />
-		<result column="material_info" property="materialInfo" jdbcType="VARCHAR" />
 		<result column="commission_price" jdbcType="DECIMAL" property="commissionPrice" />
 		<result property="documentaryType" column="documentary_type" jdbcType="INT" javaType="java.lang.Integer" />
 		<result property="documentaryRequire" column="documentary_require" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -53,7 +46,6 @@
 		<result column="gross_margin" property="grossMargin" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result column="process_cost" jdbcType="DECIMAL" property="processCost"/>
 		<result property="otherCost" column="other_cost" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
-		<result property="minSellPrice" column="min_sell_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result property="contractPrice" column="contract_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result column="transform_state" property="transformState" jdbcType="INTEGER" javaType="java.lang.Integer"/>
 		<result property="createUserId" column="create_user_id" jdbcType="INT" javaType="java.lang.Integer" />
@@ -137,25 +129,7 @@
 			<isNotNull prepend=" AND " property="compositionCost">
 				composition_cost = #compositionCost#
 			</isNotNull>
-			<isNotNull prepend=" AND " property="pakageOtherRequirement">
-				pakage_other_requirement = #pakageOtherRequirement#
-			</isNotNull>
-			<isNotNull prepend=" AND " property="additionalPrice">
-				additional_price = #additionalPrice#
-			</isNotNull>
 
-			<isNotNull prepend=" AND " property="consumption">
-				consumption = #consumption#
-			</isNotNull>
-			<isNotNull prepend=" AND " property="imgInfo">
-				img_info = #imgInfo#
-			</isNotNull>
-			<isNotNull prepend=" AND " property="pakageInfo">
-				pakage_info = #pakageInfo#
-			</isNotNull>
-			<isNotNull prepend=" AND " property="materialInfo">
-				material_info = #materialInfo#
-			</isNotNull>
 				<isNotNull prepend=" AND " property="commissionPrice">
 					commission_price = #commissionPrice#
 		</isNotNull>
@@ -207,9 +181,6 @@
 			</isNotNull>
 				<isNotNull prepend=" AND " property="otherCost">
 			other_cost = #otherCost#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="minSellPrice">
-			min_sell_price = #minSellPrice#
 		</isNotNull>
 				<isNotNull prepend=" AND " property="contractPrice">
 			contract_price = #contractPrice#
@@ -310,25 +281,7 @@
 			<isNotNull prepend=" AND " property="compositionCost">
 				composition_cost = #compositionCost#
 			</isNotNull>
-			<isNotNull prepend=" AND " property="pakageOtherRequirement">
-				pakage_other_requirement = #pakageOtherRequirement#
-			</isNotNull>
-			<isNotNull prepend=" AND " property="additionalPrice">
-				additional_price = #additionalPrice#
-			</isNotNull>
 
-			<isNotNull prepend=" AND " property="consumption">
-				consumption = #consumption#
-			</isNotNull>
-			<isNotNull prepend=" AND " property="imgInfo">
-				img_info = #imgInfo#
-			</isNotNull>
-			<isNotNull prepend=" AND " property="pakageInfo">
-				pakage_info = #pakageInfo#
-			</isNotNull>
-			<isNotNull prepend=" AND " property="materialInfo">
-				material_info = #materialInfo#
-			</isNotNull>
 			<isNotNull prepend=" AND " property="commissionPrice">
 				commission_price = #commissionPrice#
 			</isNotNull>
@@ -379,9 +332,6 @@
 			</isNotNull>
 			<isNotNull prepend=" AND " property="otherCost">
 				other_cost = #otherCost#
-			</isNotNull>
-			<isNotNull prepend=" AND " property="minSellPrice">
-				min_sell_price = #minSellPrice#
 			</isNotNull>
 			<isNotNull prepend=" AND " property="contractPrice">
 				contract_price = #contractPrice#
@@ -761,10 +711,13 @@
 				LEFT JOIN customer_base_info base on base.customer_id = a.customer_id
 				LEFT JOIN product_info b on a.product_id = b.product_id
 				LEFT JOIN product_ware c on c.product_info_id = b.product_id
-				WHERE a.customer_id = #customerId#
+				WHERE
+					a.ware_id = c.ware_id
+				AND
+				a.customer_id = #customerId#
 		]]>
 	</select>
-	
+
 	<select id="GET-PAGE" resultMap="CUSTOMERPRODUCTARCHIVES-MAP" parameterClass="QueryCustomerProductArchives">
 		<![CDATA[
 			SELECT * FROM customer_product_archives

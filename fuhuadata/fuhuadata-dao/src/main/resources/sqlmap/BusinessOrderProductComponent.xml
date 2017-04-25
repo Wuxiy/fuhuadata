@@ -102,9 +102,9 @@
   </insert>
 
   <insert id="insertFromArchives" parameterClass="java.util.HashMap" >
-        insert into business_order_product_component (business_product_id, product_id, component_id,
+        insert into business_order_product_component (business_product_id, product_id,ware_id, component_id,
         consumption, price, cost, remark)
-        (select #businessProductId#, product_id, component_id,
+        (select #businessProductId#, product_id,ware_id, component_id,
                 consumption, price, cost, remark
           from business_order_product_component_archives
         where business_product_id = #businessProductArchivesId#
