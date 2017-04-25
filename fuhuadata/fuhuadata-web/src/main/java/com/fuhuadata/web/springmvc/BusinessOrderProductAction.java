@@ -53,12 +53,13 @@ public class BusinessOrderProductAction {
      * @return
      */
     @RequestMapping("/intoProductBasicInfoRequire")
-    public ModelAndView intoProductBasicInfoRequire(String orderId,String businessProductId,String customerId,String edit){
+    public ModelAndView intoProductBasicInfoRequire(String orderId,String businessProductId,String productRequireId, String customerId,String edit){
         FreightCostQuery freightCostQuery = new FreightCostQuery();
         List<FreightCost> list = freightCostService.getFreightCostsByPage(freightCostQuery).getModel();
         return new ModelAndView("salesStatistics/productBasicInfoRequire")
                 .addObject("orderId",orderId)
                 .addObject("customerId",customerId)
+                .addObject("productRequireId",productRequireId)
                 .addObject("edit",edit==null?0:edit)
                 .addObject("freightCosts",list)
                 .addObject("businessProductId",businessProductId);
