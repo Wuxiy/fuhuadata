@@ -139,7 +139,7 @@
                                             </div>
                                         </td>
                                         <td><label class="control-label" lang="zh">交货时间</label></td>
-                                        <td><input data-control="on" id="deliveryTime" class="form-control isdisabled" type="datetime-local" value="" disabled/></td>
+                                        <td><input data-control="on" id="deliveryTime" class="form-control isdisabled" type="date" value="" disabled/></td>
                                     </tr>
                                     <tr>
                                         <td>
