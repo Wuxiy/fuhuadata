@@ -225,7 +225,7 @@ public class BusinessOrderAction {
         }catch(Exception e){
             result.setSuccess(false);
         }
-        result.getModel().setOrderId(businessOrder.getOrderId());
+       /* result.getModel().setOrderId(businessOrder.getOrderId());*/
         return result.getResultPojo();
     }
 
