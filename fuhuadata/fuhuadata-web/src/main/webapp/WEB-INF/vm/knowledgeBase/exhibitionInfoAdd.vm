@@ -197,7 +197,7 @@
 
 
             CRM.ajaxCall({
-                url:'/customerBaseInfo/getCountryzone',
+                url:basePath + '/customerBaseInfo/getCountryzone',
                 type:'POST',
                 contentType:'application/json',
                 data:JSON.stringify({
@@ -219,7 +219,7 @@
             };
             $('#cc').html('');
             CRM.ajaxCall({
-                url:'/customerBaseInfo/getCountryzone',
+                url:basePath + '/customerBaseInfo/getCountryzone',
                 type:'POST',
                 contentType:'application/json',
                 data:JSON.stringify(obj),
@@ -253,7 +253,7 @@
             if (treeData == null) {
 
                 CRM.ajaxCall({
-                    url:'/customerBaseInfo/initAreaCategoryTree',
+                    url:basePath + '/customerBaseInfo/initAreaCategoryTree',
                     type:'GET',
                     callback: renderAreaTree
                 })

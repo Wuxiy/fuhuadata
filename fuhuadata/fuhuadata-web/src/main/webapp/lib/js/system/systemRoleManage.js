@@ -902,12 +902,6 @@ $(function () {
 
     });
 
-    // 编辑关联用户
-    page.editUserTree.on('click.user', function (e) {
-
-        $('#multiple').find('[data-btn="finish"]').attr('id', 'saveUser');
-    });
-
     // 编辑分配组织
     page.editOrgTree.on('click.org', function (e) {
 
@@ -947,6 +941,8 @@ $(function () {
 
         $('#multiple').find('[data-btn="finish"]').attr('id', 'saveUser');
         $('#multiple').find('.j-modal-body').attr('id', 'userModal');
+        $('#multiple').find('.j-candi').html("待选用户");
+        $('#multiple').find('.j-selected').html("已选用户");
 
         CRM.systemRoleManage.destroyModalTree();
         CRM.ajaxCall({
@@ -1051,6 +1047,9 @@ $(function () {
 
         $('#multiple').find('[data-btn="finish"]').attr('id', 'saveMenu');
         $('#multiple').find('.j-modal-body').attr('id', 'menuModal');
+        $('#multiple').find('.j-candi').html("待选菜单");
+        $('#multiple').find('.j-selected').html("已选菜单");
+
         CRM.ajaxCall({
             url: CRM.url.MENU_TREE_GET,
             type: 'GET',
@@ -1155,6 +1154,8 @@ $(function () {
 
         $('#multiple').find('[data-btn="finish"]').attr('id', 'saveArea');
         $('#multiple').find('.j-modal-body').attr('id', 'areaModal');
+        $('#multiple').find('.j-candi').html("待选地区");
+        $('#multiple').find('.j-selected').html("已选地区");
         page.userId.val(userId);
 
         page.destroyModalTree();

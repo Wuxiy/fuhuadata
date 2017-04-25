@@ -402,7 +402,7 @@
         // 提交失败原因
         $('#upReasons').on('click',function () {
             $.ajax({
-                url : '/businessInfo/updateBusinessInfoById',
+                url : basePath + '/businessInfo/updateBusinessInfoById',
                 data : JSON.stringify(cltReaData(thisOrder,$('#reason').val())),
                 type :'POST',
                 contentType : "application/json",
@@ -601,16 +601,16 @@
                 _html += '<td>'+ResultData[i].customerName+'</td>';
                 _html += '<td lang="zh">'+(ResultData[i].customerLevel!=undefined?customerLevelList[ResultData[i].customerLevel-1]:'')+'</td>';
                 _html += '<td lang="zh">'+(ResultData[i].enterpriseNature!=undefined?ResultData[i].enterpriseNature:'')+'</td>';
-                _html += '<td>'+ResultData[i].createTime+'</td>';
-                _html += '<td>'+ResultData[i].remainDays+'</td>';
-                _html += '<td lang="zh">'+businessFrom[ResultData[i].businessFrom]+'</td>';
-                _html += '<td lang="zh">'+ResultData[i].expectIncome+'</td>';
+                _html += '<td>'+(ResultData[i].createTime!=undefined?ResultData[i].createTime:'')+'</td>';
+                _html += '<td>'+(ResultData[i].remainDays!=undefined?ResultData[i].remainDays:'')+'</td>';
+                _html += '<td lang="zh">'+(ResultData[i].businessFrom!=undefined?businessFrom[ResultData[i].businessFrom]:'')+'</td>';
+                _html += '<td lang="zh">'+(ResultData[i].expectIncome!=undefined?ResultData[i].expectIncome:'')+'</td>';
                 _html += (ResultData[i].businessState!=0)?'<td>'+businessState[ResultData[i].businessState]+'</td>':
-                        '<td><a data-toggle="dropdown" class="dropdown"  href="#">'+businessState[ResultData[i].businessState]+'</a>' +
+                        '<td><a data-toggle="dropdown" class="dropdown"  href="#">'+(ResultData[i].businessState!=undefined?businessState[ResultData[i].businessState]:'')+'</a>' +
                         '<ul class="dropdown-menu pull-right"> ' +
                         '<li><a href="/businessOrder/intoBusinessConverse?businessId='+
-                        ResultData[i].businessId+'">报价</a></li>' +
-                        '<li><a data-val="'+ResultData[i].businessId+'" data-toggle="modal" href="#rModal">失败</a></li> ' +
+                        (ResultData[i].businessId!=undefined?ResultData[i].businessId:'')+'">报价</a></li>' +
+                        '<li><a data-val="'+(ResultData[i].businessId!=undefined?ResultData[i].businessId:'')+'" data-toggle="modal" href="#rModal">失败</a></li> ' +
                         '</ul></td>';
                 _html += '</tr>';
             }

@@ -8,9 +8,9 @@ CRM.enc = window.CRM.enc || {};
 CRM.enc.status = '';
 
 // url
-CRM.enc.INFO_LOOK_GET = '/customerEncyclopedia/getById';
-CRM.enc.UP_DATA_POST = '/customerEncyclopedia/doModify';
-CRM.enc.ADD_DATA_POST = '/customerEncyclopedia/doAddCustomerEncyclopedia';
+CRM.enc.INFO_LOOK_GET = basePath + '/customerEncyclopedia/getById';
+CRM.enc.UP_DATA_POST = basePath + '/customerEncyclopedia/doModify';
+CRM.enc.ADD_DATA_POST = basePath + '/customerEncyclopedia/doAddCustomerEncyclopedia';
 
 // 隐藏域
 CRM.enc.nature     = $('#nature');
@@ -64,7 +64,7 @@ CRM.enc.editInitByCus = function () {
     var page = CRM.enc;
 
     CRM.ajaxCall({
-        url:'/customerBaseInfo/getCustomerInfoEncy?customerId='+ page.customerId.val(),
+        url:basePath + '/customerBaseInfo/getCustomerInfoEncy?customerId='+ page.customerId.val(),
         type:'POST',
         contentType:'application/json',
         callback : function (data) {
@@ -543,7 +543,7 @@ $(function () {
 
             $('#cName').html('');
             CRM.ajaxCall({
-                url:'/customerBaseInfo/getCustomerBaseInfoByQuery',
+                url:basePath + '/customerBaseInfo/getCustomerBaseInfoByQuery',
                 type:'POST',
                 contentType:'application/json',
                 data:JSON.stringify({
@@ -567,7 +567,7 @@ $(function () {
                 };
                 $('#cName').html('');
                 CRM.ajaxCall({
-                    url:'/customerBaseInfo/getCustomerBaseInfoByQuery',
+                    url:basePath + '/customerBaseInfo/getCustomerBaseInfoByQuery',
                     type:'POST',
                     contentType:'application/json',
                     data:JSON.stringify(obj),

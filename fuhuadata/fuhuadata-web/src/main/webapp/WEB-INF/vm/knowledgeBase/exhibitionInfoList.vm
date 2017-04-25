@@ -59,7 +59,7 @@
 
         var datatale = $('#exhibition_table').DataTable({
 
-            "ajax": '${request.contextPath}/exhibitionInfo/queryExhibitionInfoList',
+            "ajax": basePath + '/exhibitionInfo/queryExhibitionInfoList',
             "pagingType": "full_numbers",
             "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
             "columns": [
@@ -99,7 +99,7 @@
                 }
             }],
             "language": {
-                "url": '${request.contextPath}/lib/dataTables/lang/dataTables.lang.zh',
+                "url": basePath + '/lib/dataTables/lang/dataTables.lang.zh',
                 "searchPlaceholder": '关键字'
             }
         });
@@ -111,7 +111,7 @@
                 id = jbtn.data("id");
 
             if (confirm("确认删除该展会动态？")) {
-                var url = '${rc.contextPath}/exhibitionInfo/deleteExhibitionInfo';
+                var url = basePath + '/exhibitionInfo/deleteExhibitionInfo';
                 $.post(url, {
                     id: id
                 }, function (result) {

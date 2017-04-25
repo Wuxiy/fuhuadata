@@ -859,7 +859,7 @@
 
                 ul.html('');
                 CRM.ajaxCall({
-                    url:url,
+                    url:basePath + url,
                     type:'POST',
                     contentType:'application/json',
                     data:JSON.stringify({
@@ -881,7 +881,7 @@
                 obj[arg]=$(this).val();
                 ul.html('');
                 CRM.ajaxCall({
-                    url:url,
+                    url:basePath + url,
                     type:'POST',
                     contentType:'application/json',
                     data:JSON.stringify(obj),
