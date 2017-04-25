@@ -278,6 +278,8 @@
             </div>
             <div class="col-xs-2 col-xs-offset-2"><a class="btn btn-block btn-default hidden" type="button" id="resert">重置取消</a></div>
             <div class="col-xs-2 col-xs-offset-1"><a class="btn btn-block btn-primary hidden" type="button" id="next">下一步</a></div>
+            <div class="col-xs-2 col-xs-offset-2"><a class="btn btn-block btn-default hidden" type="button" id="previous">上一步</a></div>
+            <div class="col-xs-2 col-xs-offset-1"><a class="btn btn-block btn-primary hidden" type="button" id="down">下一步</a></div>
         </div>
     </div>
 </div>
@@ -347,7 +349,95 @@
 
     //editId=1,businessProductId!='',列表进入查看详情；editId=0,新增;eidtId=2，客户信息进入查看
     $(document).ready(function(){
-        if(editId == 1&&businessProductId != ''){
+        if(businessProductId != ''){
+            jQuery.ajax({
+                url:basePath + '/businessProduct/detailBaseInfo?businessProductId=' + businessProductId,
+                type:'POST',
+                success:function(result){
+                    var basicInfo = result.basicInfo;
+                    var components = result.components;
+
+                    $('#name').val(basicInfo.name);
+                    $('#name').attr('data-productId',basicInfo.productId);
+                    $('#name').attr('data-wareId',basicInfo.wareId);
+                    $('#customsClearanceName').val(basicInfo.customsClearanceName);
+                    $('#customerProductName').val(basicInfo.customerProductName);
+                    $('#specification').val(basicInfo.specification);
+                    $('#model').val(basicInfo.model);
+                    $('#brand').val(basicInfo.brand);
+                    $('#mainProductUnit').val(basicInfo.mainProductUnit);
+                    $('#mainProductAmount').val(basicInfo.mainProductAmount);
+                    $('#subProductUnit').val(basicInfo.subProductUnit);
+                    $('#subProductAmount').val(basicInfo.subProductAmount);
+                    $('#convertRate').val(basicInfo.convertRate);
+                    $('#priceType').val(basicInfo.priceType);
+                    $('#advisePrice').val(basicInfo.advisePrice);
+                    $('#purchasePrice').val(basicInfo.purchasePrice);
+                    $('#deliveryTime').val(basicInfo.deliveryTime);
+                    $('#factoryName').val(basicInfo.factoryName);
+                    $('#grossMargin').val(basicInfo.grossMargin);
+                    $('#commissionPrice').val(basicInfo.commissionPrice);
+                    $('#unitUseRate').val(basicInfo.unitUseRate);
+                    $('#taxType').val(basicInfo.taxType);
+                    $('#taxFree').val(basicInfo.taxFree);
+                    $('#otherCost').val(basicInfo.otherCost);
+                    $('#capitalInterestPrice').val(basicInfo.capitalInterestPrice)
+
+                    switch(basicInfo.priceType){
+                        case 0:
+                            $('#purchasePrice').attr('disabled',true);
+                            break;
+                        case 1:
+                            $('#purchasePrice').attr('disabled',true);
+                            break;
+                        case 2:
+                            $('#advisePrice').attr('disabled',true);
+                            break;
+                        case 3:
+                            $('#advisePrice').attr('disabled',true);
+                            break;
+                        case 4:
+                            $('#purchasePrice').attr('disabled',true);
+                            $('#advisePrice').attr('disabled',true);
+                            break;
+                    }
+
+                    if(components.length != 0){
+                        $('#cost').removeClass('hidden');
+                        costtable.innerHTML = '';
+                        for(var i=0;i<components.length;i++){
+                            costtable.innerHTML += '<tr>'+
+                                    '<td data-id="'+components[i].componentId+'">'+components[i].componentName+'</td>'+
+                                    '<td><input class="form-control notnull" type="text" value="'+components[i].consumption+'" data-target="on" disabled></td>'+
+                                    '<td><input class="form-control notnull" type="text" value="'+components[i].price+'" data-target="on" disabled></td>'+
+                                    '<td>'+components[i].cost+'</td>'+
+                                    '<td><input class="form-control" type="text" value="'+ifEmpty(components[i].remarks)+'" data-target="on" disabled></td>'+
+                                    '</tr>';
+                        }
+                    }
+                }
+            })
+        }
+
+        if(editId == 0){
+            $('#resert').removeClass('hidden');
+            $('#next').removeClass('hidden');
+
+            $('button[name="search"]').attr('disabled',false);
+            $('[data-target="on"]').removeClass('disabled');
+            $('.isdisabled').attr('disabled',false);
+        }
+
+        if(editId == 1){
+            $('#edit').removeClass('hidden');
+            $('#back').removeClass('hidden');
+        }
+
+        if(editId == 2){
+            $('#back').removeClass('hidden');
+        }
+
+        /*if(editId == 1&&businessProductId != ''){
             $('#edit').removeClass('hidden');
             $('#back').removeClass('hidden');
 
@@ -419,13 +509,91 @@
                 }
             })
         }
-        else if(editId == 0&&businessProductId == ''){
-            $('#resert').removeClass('hidden');
-            $('#next').removeClass('hidden');
+        else if(editId == 0){
+            if(businessProductId != ''){
+                $('#resert').removeClass('hidden');
+                $('#next').removeClass('hidden');
 
-            $('button[name="search"]').attr('disabled',false);
-            $('[data-target="on"]').removeClass('disabled');
-            $('.isdisabled').attr('disabled',false);
+                $('#edit').removeClass('hidden');
+                $('#back').removeClass('hidden');
+
+                jQuery.ajax({
+                    url:basePath + '/businessProduct/detailBaseInfo?businessProductId=' + businessProductId,
+                    type:'POST',
+                    success:function(result){
+                        var basicInfo = result.basicInfo;
+                        var components = result.components;
+
+                        $('#name').val(basicInfo.name);
+                        $('#name').attr('data-productId',basicInfo.productId);
+                        $('#name').attr('data-wareId',basicInfo.wareId);
+                        $('#customsClearanceName').val(basicInfo.customsClearanceName);
+                        $('#customerProductName').val(basicInfo.customerProductName);
+                        $('#specification').val(basicInfo.specification);
+                        $('#model').val(basicInfo.model);
+                        $('#brand').val(basicInfo.brand);
+                        $('#mainProductUnit').val(basicInfo.mainProductUnit);
+                        $('#mainProductAmount').val(basicInfo.mainProductAmount);
+                        $('#subProductUnit').val(basicInfo.subProductUnit);
+                        $('#subProductAmount').val(basicInfo.subProductAmount);
+                        $('#convertRate').val(basicInfo.convertRate);
+                        $('#priceType').val(basicInfo.priceType);
+                        $('#advisePrice').val(basicInfo.advisePrice);
+                        $('#purchasePrice').val(basicInfo.purchasePrice);
+                        $('#deliveryTime').val(basicInfo.deliveryTime);
+                        $('#factoryName').val(basicInfo.factoryName);
+                        $('#grossMargin').val(basicInfo.grossMargin);
+                        $('#commissionPrice').val(basicInfo.commissionPrice);
+                        $('#unitUseRate').val(basicInfo.unitUseRate);
+                        $('#taxType').val(basicInfo.taxType);
+                        $('#taxFree').val(basicInfo.taxFree);
+                        $('#otherCost').val(basicInfo.otherCost);
+                        $('#capitalInterestPrice').val(basicInfo.capitalInterestPrice)
+
+                        switch(basicInfo.priceType){
+                            case 0:
+                                $('#purchasePrice').attr('disabled',true);
+                                break;
+                            case 1:
+                                $('#purchasePrice').attr('disabled',true);
+                                break;
+                            case 2:
+                                $('#advisePrice').attr('disabled',true);
+                                break;
+                            case 3:
+                                $('#advisePrice').attr('disabled',true);
+                                break;
+                            case 4:
+                                $('#purchasePrice').attr('disabled',true);
+                                $('#advisePrice').attr('disabled',true);
+                                break;
+                        }
+
+                        if(components.length != 0){
+                            $('#cost').removeClass('hidden');
+                            costtable.innerHTML = '';
+                            for(var i=0;i<components.length;i++){
+                                costtable.innerHTML += '<tr>'+
+                                        '<td data-id="'+components[i].componentId+'">'+components[i].componentName+'</td>'+
+                                        '<td><input class="form-control notnull" type="text" value="'+components[i].consumption+'" data-target="on" disabled></td>'+
+                                        '<td><input class="form-control notnull" type="text" value="'+components[i].price+'" data-target="on" disabled></td>'+
+                                        '<td>'+components[i].cost+'</td>'+
+                                        '<td><input class="form-control" type="text" value="'+ifEmpty(components[i].remarks)+'" data-target="on" disabled></td>'+
+                                        '</tr>';
+                            }
+                        }
+                    }
+                })
+            }
+            if(businessProductId == ''){
+                $('#resert').removeClass('hidden');
+                $('#next').removeClass('hidden');
+
+                $('button[name="search"]').attr('disabled',false);
+                $('[data-target="on"]').removeClass('disabled');
+                $('.isdisabled').attr('disabled',false);
+            }
+
         }else if(editId == 2&&businessProductId != ''){
             jQuery.ajax({
                 url:basePath + '/businessProduct/detailBaseInfo?businessProductId=' + businessProductId,
@@ -494,7 +662,7 @@
                     }
                 }
             })
-        }
+        }*/
 
         //渲染树
         $('#tree').creatTree(basePath+'/businessProduct/initProductCatetroy');
@@ -520,9 +688,10 @@
                     success:function (result) {
                         var success = result.data.success;
                         if(success == true){
+                            alert('添加成功！');
                             var editId = 0;
                             var businessProductId = result.data.businessProductId;
-                            window.location.href = basePath + '/businessProduct/intoProductRequire?businessProductId=' + businessProductId + '&&orderId=' + orderId + '&&customerId=' + customerId + '&&productRequireId=' + productRequireId + '&&edit=' + editId;
+                            window.location.href = basePath + '/businessProduct/intoProductRequire?businessProductId=' + businessProductId + '&orderId=' + orderId + '&customerId=' + customerId + '&productRequireId=' + productRequireId + '&edit=' + editId;
                         }
                     }
                 })

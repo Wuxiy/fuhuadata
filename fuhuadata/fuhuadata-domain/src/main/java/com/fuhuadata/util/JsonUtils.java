@@ -60,6 +60,9 @@ public class JsonUtils {
 		return json;
 	}
 	public static <T> T toObject(Class<T> valueType,String jsonStr){
+		if(jsonStr == null){
+			return null;
+		}
 		ObjectMapper o = new ObjectMapper();
 		try {
 			return (T)o.readValue(jsonStr, valueType);

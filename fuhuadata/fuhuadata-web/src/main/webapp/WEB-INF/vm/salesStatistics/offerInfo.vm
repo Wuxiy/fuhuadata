@@ -763,7 +763,7 @@
     //新增产品信息
     $('#Add').click(function(){
         var customerId = $('#customerId').val();
-        window.location.href = basePath + '/businessProduct/intoProductBasicInfoRequire?orderId=' + orderId + '&&customerId=' + customerId + '&&businessProductId=' + businessProductId;
+        window.location.href = basePath + '/businessProduct/intoProductBasicInfoRequire?orderId=' + orderId + '&customerId=' + customerId + '&businessProductId=' + businessProductId + '&edit=0';
     })
 
 
