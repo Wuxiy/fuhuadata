@@ -512,7 +512,7 @@
                 renderinterTree(orgTreeData);
             })
         }else {
-            renderTree(orgTreeData);
+            renderinterTree(orgTreeData);
         }
         $('#cbtModal').modal('show');
     });
@@ -775,6 +775,7 @@
                 'taxType':$('#taxType').val(),
                 'taxFree':$('#taxFree').val(),
                 'otherCost':$('#otherCost').val(),
+                'deliveryTime':$('#deliveryTime').val(),
 
                 "internalSupplyId":$('#internalSupplyName').data('val'),
                 "internalSupplyName":$('#internalSupplyName').val(),

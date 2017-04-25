@@ -1542,7 +1542,7 @@
            /* contentType:"application/json",*/
             data:edit(),
             success:function (result) {
-                if(result == true){
+                if(result.success == true){
                     alert('修改成功！');
                 }
             }

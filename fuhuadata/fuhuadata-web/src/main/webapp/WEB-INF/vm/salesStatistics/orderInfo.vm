@@ -389,7 +389,7 @@
                             '<td>'+ifEmpty(businessOrderProductLists[i].cupboardType)+'</td>'+
                             '<td>'+ifEmpty(businessOrderProductLists[i].cupboardNumber)+'</td>'+
                             '<td>'+ifEmpty(businessOrderProductLists[i].deliveryTime)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].documentaryRequire)+'</td>'+
+                            '<td>'+ifEmpty(businessOrderProductLists[i].minPrice)+'</td>'+
                             '<td><a href="'+basePath+'/businessProduct/intoDocumentary?businessProductId='+businessOrderProductLists[i].businessProductId+'">查看</a></td>'+
                             '<td><a href="'+basePath+'/businessProduct/intoPackageRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'">查看</a></td>'+
                             '<td><input type="checkbox" class="form-control" name="cellcheckbox" value="'+businessOrderProductLists[i].documentaryRequire+'" /></td>'+

@@ -216,24 +216,24 @@
                                 <label class="col-xs-1 control-label" lang="zh">保险费率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="premiumRate" value="" disabled/>
+                                        <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="premiumRate" value="0.03%" disabled/>
                                         <span class="input-group-addon">%</span>
                                     </div>
 ##                                    <input data-control="on" class="form-control" id="premiumRate" data-code="" value="" disabled>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-xs-1 control-label" lang="zh">资金利率<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">资金利息利率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="discountRate" value="" disabled/>
+                                        <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="discountRate" value="6%" disabled/>
                                         <span class="input-group-addon">%</span>
                                     </div>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">汇损费率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="lossRate" value="" disabled/>
+                                        <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="lossRate" value="0%" disabled/>
                                         <span class="input-group-addon">%</span>
                                     </div>
 ##                                    <input data-control="on" class="form-control" type="text" id="lossRate" value="" disabled/>
@@ -248,18 +248,18 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-xs-1 control-label" lang="zh">销售费率<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">销售费用比率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="saleRate" value="" disabled/>
+                                        <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="saleRate" value="0.50%" disabled/>
                                         <span class="input-group-addon">%</span>
                                     </div>
 ##                                    <input data-control="on" class="form-control" type="text" id="saleRate" value="" disabled/>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">管理汇率<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">管理费用比率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="managementRate" value="" disabled/>
+                                        <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="managementRate" value="0.20%" disabled/>
                                         <span class="input-group-addon">%</span>
                                     </div>
 ##                                    <input data-control="on" class="form-control" type="text" id="managementRate" value="" disabled/>
@@ -267,7 +267,7 @@
                                 <label class="col-xs-1 control-label" lang="zh">信保费率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="guaranteeRate" value="" disabled/>
+                                        <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="guaranteeRate" value="0.24%" disabled/>
                                         <span class="input-group-addon">%</span>
                                     </div>
 ##                                    <input data-control="on" class="form-control" type="text" id="guaranteeRate" value="" disabled/>
@@ -540,7 +540,7 @@
                                         '<td>'+ifEmpty(businessOrderProductLists[i].cupboardType)+'</td>'+
                                         '<td>'+ifEmpty(businessOrderProductLists[i].cupboardNumber)+'</td>'+
                                         '<td>'+ifEmpty(businessOrderProductLists[i].deliveryTime)+'</td>'+
-                                        '<td>'+ifEmpty(businessOrderProductLists[i].documentaryRequire)+'</td>'+
+                                        '<td>'+ifEmpty(businessOrderProductLists[i].minPrice)+'</td>'+
 
                                         '<td><a href="'+basePath+'/businessProduct/intoDocumentary?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&edit=1'+'">查看</a></td>'+
                                         '<td><a href="'+basePath+'/businessProduct/intoPackageRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&edit=1'+'">查看</a></td>'+
@@ -622,6 +622,16 @@
     });
 
     $('#save').click(function(){
+        /*var isup = true;
+        var typenumber = $('input[type=number]');
+        typenumber.each(function () {
+            var val = $(this).val();
+            if(val == 0){
+                alert('费率类信息不可为0！');
+                isup = false;
+                return false;
+            }
+        });*/
         jQuery.ajax({
             url:basePath + '/businessOrder/updateBusinessOrderByOrderId',
             type:'POST',
@@ -630,7 +640,7 @@
             success:function (result) {
                 alert("修改成功!");
 
-               /* location.reload();*/
+                /* location.reload();*/
 
             }
         })
