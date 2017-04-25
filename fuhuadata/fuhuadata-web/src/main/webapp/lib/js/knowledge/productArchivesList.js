@@ -250,10 +250,10 @@ CRM.productArchivesList.getProcessingComponentsDataHandler = function () {
     tr.each(function () {
         var item = $(this),
             obj = {
-                productId   : page.productId.val(),
-                componentId : item.find('td').eq(0).find('input').val(),
-                consumption : item.find('td').eq(2).text(),
-                remark      : item.find('td').eq(3).text()
+                productId   : page.productId.val().replace(/\s+/g,''),
+                componentId : item.find('td').eq(0).find('input').val().replace(/\s+/g,''),
+                consumption : item.find('td').eq(2).text().replace(/\s+/g,''),
+                remark      : item.find('td').eq(3).text().replace(/\s+/g,'')
         };
         arr.push(obj);
     });
@@ -270,9 +270,9 @@ CRM.productArchivesList.getPhysicalProperitiesDataHandler = function () {
     tr.each(function () {
         var item = $(this),
             obj = {
-                index   : item.find('td').eq(0).text(),
-                value   : item.find('td').eq(1).text(),
-                remarks : item.find('td').eq(2).find('span').text()
+                index   : item.find('td').eq(0).text().replace(/\s+/g,''),
+                value   : item.find('td').eq(1).text().replace(/\s+/g,''),
+                remarks : item.find('td').eq(2).find('span').text().replace(/\s+/g,'')
             };
         arr.push(obj);
     });
@@ -286,12 +286,12 @@ CRM.productArchivesList.asideTreeOnClick = function(event, modLeftId, treeNode) 
     page.resetPage();
 
     if (!/^c_/.test(treeNode.id)) {
-
-        // 渲染表单
-        page.renderPage(treeNode.id);
+        sessionStorage.setItem('productId',treeNode.id);
+        page.renderPage(sessionStorage.getItem('productId'));
     }
 
-    // console.log(/^c_/.test(treeNode.id));
+    console.log(/^c_/.test(treeNode.id));
+
 };
 
 // 渲染产品树到侧边栏
@@ -332,7 +332,13 @@ CRM.productArchivesList.init = function () {
         type     : 'GET',
         callback : function(data){
 
-            page.renderPage(60);
+            if (sessionStorage.getItem('productId')) {
+
+                page.renderPage(sessionStorage.getItem('productId'));
+            }else {
+                sessionStorage.setItem('productId',60);
+                page.renderPage(sessionStorage.getItem('productId'))
+            }
             page.renderProTreeToAside(data);
         }
     });

@@ -35,8 +35,24 @@
                 lang = new Lang();
 
         lang.init({
-            defaultLang: (language.indexOf('zh')>-1?'zh':'en')
+            defaultLang: 'zh'
         });
+
+//        var langType = (language.indexOf('zh')>-1?'zh':'en');
+//        if (sessionStorage.getItem('lang')) { // 本地存有lang属性，直接判断语言类型
+//
+//            window.lang.change(sessionStorage.getItem('lang'));
+//        }else { // 没有lang属性，自动判断语言类型
+//
+//            if (language.indexOf('zh')>-1) {
+//
+//                sessionStorage.setItem('lang','zh');
+//                window.lang.change(sessionStorage.getItem('lang'));
+//            }else {
+//                sessionStorage.setItem('lang','en');
+//                window.lang.change(sessionStorage.getItem('lang'));
+//            }
+//        }
 
     </script>
 </head>
@@ -61,14 +77,46 @@
         #parse('layout/footer.vm')
 
     <script>
-      $(document).on('click.close.nav.open', 'body', function (e) {
-        var thisEl = e.target;
+        $(document).on('click.close.nav.open', 'body', function (e) {
+            var thisEl = e.target;
 
-        //如果点击的元素不是导航的子元素，则关闭导航
-        if ($(thisEl).parents('#nav-affix').length == 0) {
-          $('#nav-affix').find('[data-toggle="collapse"]').filter('[aria-expanded="true"]').click();
-        }
-      })
+            //如果点击的元素不是导航的子元素，则关闭导航
+            if ($(thisEl).parents('#nav-affix').length == 0) {
+                $('#nav-affix').find('[data-toggle="collapse"]').filter('[aria-expanded="true"]').click();
+            }
+        });
+        $(function () {
+
+            if (localStorage.getItem('lang')) { // 本地存有lang属性，直接判断语言类型
+
+                window.lang.change(localStorage.getItem('lang'));
+            }else { // 没有lang属性，自动判断语言类型
+
+                if (language.indexOf('zh')>-1) {
+
+                    localStorage.setItem('lang','zh');
+                    window.lang.change(localStorage.getItem('lang'));
+                }else {
+                    localStorage.setItem('lang','en');
+                    window.lang.change(localStorage.getItem('lang'));
+                }
+            }
+
+            // 点击切换中文
+            $('#changZh').click(function () {
+
+                localStorage.setItem('lang','zh');
+                window.lang.change(localStorage.getItem('lang'));
+            });
+
+            // 点击切换英文
+            $('#changEn').click(function () {
+
+                localStorage.setItem('lang','en');
+                window.lang.change(localStorage.getItem('lang'));
+            })
+        })
+
     </script>
     #end
 </body>

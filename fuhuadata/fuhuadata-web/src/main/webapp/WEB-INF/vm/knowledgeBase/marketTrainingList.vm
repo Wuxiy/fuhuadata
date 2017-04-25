@@ -141,7 +141,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#markettrain_table").dataTable({
-            "ajax": '${request.contextPath}/marketTraining/queryMarketTrainingList',
+            "ajax": basePath + '/marketTraining/queryMarketTrainingList',
             "pagingType": "full_numbers",
             "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
             "columns": [
@@ -162,7 +162,7 @@
                 }
             }],
             "language": {
-                "url": '${request.contextPath}/lib/dataTables/lang/dataTables.lang.zh',
+                "url": basePath + '/lib/dataTables/lang/dataTables.lang.zh',
                 "searchPlaceholder": '关键字'
             }
         })

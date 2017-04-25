@@ -18,12 +18,14 @@
         </ul>
     </div>
     <div class="pull-right breadcrumb-btn btn-group btn-group-xs navbar-btn">
-        <a href="#lang-en" class="btn btn-danger" onclick="window.lang.change('zh'); return false;">
-            中文
-        </a>
-        <a href="#lang-en" class="btn btn-primary" onclick="window.lang.change('en'); return false;">
-            English
-        </a>
+##        <a id="changEn" href="#lang-en" class="btn btn-danger" onclick="window.lang.change('zh'); return false;">
+##            中文
+##        </a>
+##        <a id="changZh" href="#lang-en" class="btn btn-primary" onclick="window.lang.change('en'); return false;">
+##            English
+##        </a>
+    <button id="changZh" type="button" class="btn btn-danger">中文</button>
+    <button id="changEn" type="button" class="btn btn-primary">English</button>
     </div>
     <ul id="nav-affix" class="nav nav-cards">
         <li class="shadow-in" title="客户信息">

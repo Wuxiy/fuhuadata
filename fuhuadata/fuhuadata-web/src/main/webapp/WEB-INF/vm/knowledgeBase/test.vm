@@ -3,7 +3,7 @@
     <!--表格开始-->
     <div class="panel panel-default">
         <div class="panel-heading">
-            <a class="btn btn-xs btn-primary pull-right panel-heading-btn" href="/exhibitionInfo/addExhibitionInfo" data-toggle="modal">
+            <a class="btn btn-xs btn-primary pull-right panel-heading-btn" href="${request.contextPath}/exhibitionInfo/addExhibitionInfo" data-toggle="modal">
                 <span class="glyphicon glyphicon-plus"></span>
                 新增
             </a>
@@ -92,7 +92,7 @@
                 }
             ],
             "language": {
-                "url": '/lib/dataTables/lang/dataTables.lang.zh',
+                "url": basePath + '/lib/dataTables/lang/dataTables.lang.zh',
                 "searchPlaceholder": '关键字'
             }
         } );

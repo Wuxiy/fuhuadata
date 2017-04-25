@@ -4,11 +4,11 @@
 
 
 CRM.cbInfo   = window.CRM.cbInfo || {};
-CRM.cbInfo.LOOK_POST    = '/customerBaseInfo/showCustomerBaseInfoDetails'; // 客户基本信息查看
-CRM.cbInfo.EDIT_POST    = '/customerBaseInfo/updateCustomerBaseInfo'; // 客户基本信息编辑
-CRM.cbInfo.ADD_POST     = '/customerBaseInfo/doAddCustomerBaseInfo'; // 客户信息新增
-CRM.cbInfo.ENCY_SKIP    = '' // 百科编辑
-CRM.cbInfo.encyUrl      = '/customerEncyclopedia/addCustomerEncyclopedia'; // 百科编辑
+CRM.cbInfo.LOOK_POST    = basePath + '/customerBaseInfo/showCustomerBaseInfoDetails'; // 客户基本信息查看
+CRM.cbInfo.EDIT_POST    = basePath + '/customerBaseInfo/updateCustomerBaseInfo'; // 客户基本信息编辑
+CRM.cbInfo.ADD_POST     = basePath + '/customerBaseInfo/doAddCustomerBaseInfo'; // 客户信息新增
+// CRM.cbInfo.ENCY_SKIP    = '' // 百科编辑
+CRM.cbInfo.encyUrl      = basePath + '/customerEncyclopedia/addCustomerEncyclopedia'; // 百科编辑
 
 CRM.cbInfo.editView     = null; // 编辑状态下显示的标签
 CRM.cbInfo.editHide     = null; // 编辑状态下隐藏的标签
@@ -455,7 +455,7 @@ CRM.cbInfo.aInitHandler = function () {
     // });
     // 渲染数据格式下拉框
     CRM.ajaxCall({
-        url:'/customerBaseInfo/getFormatdoc',
+        url: basePath + '/customerBaseInfo/getFormatdoc',
         type:'POST',
         callback:function (dataF) {
             if (dataF) {
@@ -517,16 +517,17 @@ CRM.cbInfo.pVerify = function (em) {
         rules: {
             fullName: "required",
             areaId: 'required',
-            "enterpriseNature": {
+            enterpriseNature: {
                 required : true
             },
-            enterprisePhone:'digits',
-            enterpriseEmail:'email',
-            showFactory: 'required',
-            showMajorCompetitorsGroup: {
-                required: "#aa:checked"
-            },
-            customerLevel:'required',
+            // enterpriseNature:"required",
+            // enterprisePhone:'digits',
+            // enterpriseEmail:'email',
+            // showFactory: 'required',
+            // showMajorCompetitorsGroup: {
+            //     required: "#aa:checked"
+            // },
+            // customerLevel:'required',
             opportunitySource:{
                 required:'#showOpportunity:checked'
             },
@@ -542,26 +543,26 @@ CRM.cbInfo.pVerify = function (em) {
             areaId: {
                 required:em('请选择一个值','top:-29px','right:0')
             },
-            showFactory: {
-                required:em('必填','top:-29px','right:0')
-            },
-            showMajorCompetitorsGroup: {
-                required:em('必填','top:-29px','right:0')
-            },
+            // showFactory: {
+            //     required:em('必填','top:-29px','right:0')
+            // },
+            // showMajorCompetitorsGroup: {
+            //     required:em('必填','top:-29px','right:0')
+            // },
             enterpriseNature:{
                 required:em('请选择一个值','top:-29px','left:-60px')
             },
-            hasChiCompany:{
-                required:em('请选择一个值','top:-29px','right:0')
-            },
-            hasChiPurchase:{
-                required:em('请选择一个值','top:-29px','right:0')
-            },
-            customerLevel:{
-                required:em('请选择一个值','top:-29px','right:0')
-            },
-            enterprisePhone:em('请输入有效的电话','top:-29px','right:0'),
-            enterpriseEmail:em('请输入有效的邮箱','top:-29px','right:0'),
+            // hasChiCompany:{
+            //     required:em('请选择一个值','top:-29px','right:0')
+            // },
+            // hasChiPurchase:{
+            //     required:em('请选择一个值','top:-29px','right:0')
+            // },
+            // customerLevel:{
+            //     required:em('请选择一个值','top:-29px','right:0')
+            // },
+            // enterprisePhone:em('请输入有效的电话','top:-29px','right:0'),
+            // enterpriseEmail:em('请输入有效的邮箱','top:-29px','right:0'),
             opportunitySource:em('请选择一个值','top:-29px','right:0'),
             opportunityDescrible:em('请填写机会描述','top:-29px','right:0')
         }
@@ -821,7 +822,7 @@ $().ready(function() {
 
 
         CRM.ajaxCall({
-            url:'/customerBaseInfo/getCountryzone',
+            url:basePath + '/customerBaseInfo/getCountryzone',
             type:'POST',
             contentType:'application/json',
             data:JSON.stringify({
@@ -843,7 +844,7 @@ $().ready(function() {
         };
         $('#cc').html('');
         CRM.ajaxCall({
-            url:'/customerBaseInfo/getCountryzone',
+            url:basePath + '/customerBaseInfo/getCountryzone',
             type:'POST',
             contentType:'application/json',
             data:JSON.stringify(obj),
@@ -877,7 +878,7 @@ $().ready(function() {
 
         $('#tz').html('');
         CRM.ajaxCall({
-            url:'/customerBaseInfo/getTimezone',
+            url:basePath + '/customerBaseInfo/getTimezone',
             type:'POST',
             contentType:'application/json',
             data:JSON.stringify({
@@ -901,7 +902,7 @@ $().ready(function() {
 
         $('#tz').html('');
         CRM.ajaxCall({
-            url:'/customerBaseInfo/getTimezone',
+            url:basePath + '/customerBaseInfo/getTimezone',
             type:'POST',
             contentType:'application/json',
             data:JSON.stringify(obj),
@@ -934,7 +935,7 @@ $().ready(function() {
     // 点击客户基本分类查找按钮，弹出树形菜单
     $('#cbtSearch').on('click.tree',function () {
         CRM.ajaxCall({
-            url:'/customerBaseInfo/getCustclass',
+            url:basePath +'/customerBaseInfo/getCustclass',
             type:'GET',
             callback:page.renderCBTTree
         })
@@ -943,7 +944,7 @@ $().ready(function() {
     // 点击地区分类查找按钮，弹出树形菜单
     $('#aISearch').on('click.tree',function () {
         CRM.ajaxCall({
-            url:'/customerBaseInfo/initAreaCategoryTree',
+            url:basePath +'/customerBaseInfo/initAreaCategoryTree',
             type:'GET',
             callback:page.renderAreaTree
         })

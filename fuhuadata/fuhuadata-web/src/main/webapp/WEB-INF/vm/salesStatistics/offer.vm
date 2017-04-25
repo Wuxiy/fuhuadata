@@ -161,11 +161,11 @@
         <td><%=count%></td>
         <td><a href="${request.contextPath}/businessOrder/intoOfferorOrder?orderId=<%=data.info[i].orderId%>"><%=data.info[i].orderId%></a></td>
         <td><a href="${request.contextPath}/businessOrder/intoBusinessOpportunityInfo?orderId=<%=data.info[i].businessId%>"><%=data.info[i].businessId%></a></td>
-        <td><%=data.info[i].customerName%></td>
-        <td lang="zh"><%=customerLevelList[data.info[i].customerLevel - 1]%></td>
-        <td lang="zh"><%=data.info[i].enterpriseNature%></td>
-        <td><%=data.info[i].amountPayable%></td>
-        <td><%=data.info[i].orderProduct%></td>
+        <td><%=(data.info[i].customerName!=undefined?data.info[i].customerName:'')%></td>
+        <td lang="zh"><%=(data.info[i].customerLevel!=undefined?customerLevelList[data.info[i].customerLevel - 1]:'')%></td>
+        <td lang="zh"><%=(data.info[i].enterpriseNature!=undefined?data.info[i].enterpriseNature:'')%></td>
+        <td><%=(data.info[i].amountPayable!=undefined?data.info[i].amountPayable:'')%></td>
+        <td><%=(data.info[i].orderProduct!=undefined?data.info[i].orderProduct:'')%></td>
         <%if ((data.info[i].status+2)!=2) {%>
         <td lang="zh"><%=businessStateList[data.info[i].status + 2]%></td>
         <%} else{%>
@@ -364,7 +364,7 @@
         // 提交失败原因
         $('#upReasons').on('click',function () {
             CRM.ajaxCall({
-                url : '/businessOrder/updateOfferStatus',
+                url : basePath + '/businessOrder/updateOfferStatus',
                 data : JSON.stringify(cltReaData(thisOrder,$('#reason').val())),
                 type :'POST',
                 contentType : "application/json",

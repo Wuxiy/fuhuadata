@@ -28,48 +28,51 @@
                     <div class="panel-body clearfix">
                         <!--搜索&筛选控件-->
                         <div class="form-horizontal">
-                            <form class="form-group col-xs-12">
-                                <div class="input-group">
-                                    <span class="input-group-addon" lang="zh">客户全称</span>
-                                    <input class="form-control" type="text" id="fullName" value="" />
-                                    <span class="input-group-addon" lang="zh">企业性质</span>
-                                    <select class="form-control" id="enterpriseNature">
-                                        <option value="" selected lang="zh">全部</option>
-                                        <option value="1" lang="zh">加工厂</option>
-                                        <option value="2" lang="zh">分销商</option>
-                                        <option value="3" lang="zh">经销商</option>
-                                        <option value="4" lang="zh">终端客户</option>
-                                        <option value="5" lang="zh">其他</option>
-                                    </select>
-                                    <span class="input-group-addon" lang="zh" >信用评级</span>
-                                    <select class="form-control" id="zhongxinbaoLevel">
-                                        <option value="" selected lang="zh">全部</option>
-                                        <option value="1" lang="zh">A</option>
-                                        <option value="2" lang="zh">AA</option>
-                                        <option value="3" lang="zh">AAA</option>
-                                        <option value="4" lang="zh">AAAA</option>
-                                    </select>
-                                    <span class="input-group-addon" lang="zh">客户级别</span>
-                                    <select class="form-control" id="customerLevel">
-                                        <option value="" selected lang="zh">全部</option>
-                                        <option value="1" lang="zh">战略客户</option>
-                                        <option value="2" lang="zh">大客户</option>
-                                        <option value="3" lang="zh">重要客户</option>
-                                        <option value="4" lang="zh">一般客户</option>
-                                        <option value="5" lang="zh">风险客户</option>
-                                    </select>
-                                    <span class="input-group-addon" lang="zh" >客户状态</span>
-                                    <select class="form-control" id="customerStatus">
-                                        <option value="" selected lang="zh">全部</option>
-                                        <option value="1" lang="zh">正常</option>
-                                        <option value="0" lang="zh">易流失</option>
-                                    </select>
-                                    <div class="input-group-btn">
-                                        <button id="resetBtn" class="btn btn-xs btn-default" type="reset">重置</button>
-                                        <button class="btn btn-xs btn-primary" id="submit" type="button">搜索</button>
+                            <div class="col-xs-12">
+                                <form class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon" lang="zh">客户全称</span>
+                                        <input class="form-control" type="text" id="fullName" value="" />
+                                        <span class="input-group-addon" lang="zh">企业性质</span>
+                                        <select class="form-control" id="enterpriseNature">
+                                            <option value="" selected lang="zh">全部</option>
+                                            <option value="1" lang="zh">加工厂</option>
+                                            <option value="2" lang="zh">分销商</option>
+                                            <option value="3" lang="zh">经销商</option>
+                                            <option value="4" lang="zh">终端客户</option>
+                                            <option value="5" lang="zh">其他</option>
+                                        </select>
+                                        <span class="input-group-addon" lang="zh" >信用评级</span>
+                                        <select class="form-control" id="zhongxinbaoLevel">
+                                            <option value="" selected lang="zh">全部</option>
+                                            <option value="1" lang="zh">A</option>
+                                            <option value="2" lang="zh">AA</option>
+                                            <option value="3" lang="zh">AAA</option>
+                                            <option value="4" lang="zh">AAAA</option>
+                                        </select>
+                                        <span class="input-group-addon" lang="zh">客户级别</span>
+                                        <select class="form-control" id="customerLevel">
+                                            <option value="" selected lang="zh">全部</option>
+                                            <option value="1" lang="zh">战略客户</option>
+                                            <option value="2" lang="zh">大客户</option>
+                                            <option value="3" lang="zh">重要客户</option>
+                                            <option value="4" lang="zh">一般客户</option>
+                                            <option value="5" lang="zh">风险客户</option>
+                                        </select>
+                                        <span class="input-group-addon" lang="zh" >客户状态</span>
+                                        <select class="form-control" id="customerStatus">
+                                            <option value="" selected lang="zh">全部</option>
+                                            <option value="1" lang="zh">正常</option>
+                                            <option value="0" lang="zh">易流失</option>
+                                        </select>
+                                        <div class="input-group-btn">
+                                            <button id="resetBtn" class="btn btn-xs btn-default" type="reset" lang="zh">重置</button>
+                                            <button class="btn btn-xs btn-primary" id="submit" type="button" lang="zh">搜索</button>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
+
                         </div>
                         <!--表格-->
                         <table class="table text-center table-condensed table-bordered table-striped">

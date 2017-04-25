@@ -125,6 +125,7 @@ CRM.ajaxCall = function(res){
             callback();
         }
     }).fail(function(res){
+        alert('提交失败，请重新提交');
         console.log('error:'+res.status);
     });
 };
