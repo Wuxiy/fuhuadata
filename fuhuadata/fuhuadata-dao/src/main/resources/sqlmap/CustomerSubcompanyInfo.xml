@@ -127,7 +127,7 @@
 	<insert id="ADD" parameterClass="CustomerSubcompanyInfo">
 		INSERT INTO 
 		customer_subcompany_info(customer_sub_id,customer_id,full_name,short_name,property,property_remarks,zhongxinbao_number,zhongxinbao_level,customer_sub_remarks,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time) 
-		VALUES(#customerSubId#,#customerId#,#fullName#,#shortName#,#property#,#propertyRemarks#,#zhongxinbaoNumber#,#zhongxinbaoLevel#,#customerSubRemarks#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
+		VALUES(#customerSubId#,#customerId#,#fullName#,#shortName#,#property#,#propertyRemarks#,#zhongxinbaoNumber#,#zhongxinbaoLevel#,#customerSubRemarks#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,now(),now())
 		<selectKey resultClass="int" keyProperty="customerSubId">
 			SELECT @@IDENTITY AS customer_sub_id
 		</selectKey>
@@ -150,7 +150,7 @@
 						<isNotNull prepend=", " property="lastmodifyUserId">lastmodify_user_id=#lastmodifyUserId#</isNotNull>
 						<isNotNull prepend=", " property="lastmodifyUserName">lastmodify_user_name=#lastmodifyUserName#</isNotNull>
 						<isNotNull prepend=", " property="createTime">create_time=#createTime#</isNotNull>
-						<isNotNull prepend=", " property="modifyTime">modify_time=#modifyTime#</isNotNull>
+						<isNotNull prepend=", " property="modifyTime">modify_time=now()</isNotNull>
 					</dynamic>
 		WHERE customer_sub_id=#customerSubId#
 	</update>

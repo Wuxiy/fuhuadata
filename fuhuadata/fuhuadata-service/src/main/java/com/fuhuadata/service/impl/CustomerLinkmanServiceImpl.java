@@ -42,6 +42,7 @@ public class CustomerLinkmanServiceImpl implements CustomerLinkmanService {
 			}
 			else if(customerLinkmanDefault==null&&customerLinkman.getIsDefault()==0) {
 				result.setMessage("必须为该客户设置默认联系人");
+				result.setCode(0);
 				return result;
 			}
 			result.addDefaultModel(customerLinkmanManager.addCustomerLinkman(customerLinkman));

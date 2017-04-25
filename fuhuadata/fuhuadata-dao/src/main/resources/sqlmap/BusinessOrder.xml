@@ -442,7 +442,7 @@
         #lossRate#, #saleRate#, #managementRate#,#grossRate#, #creditRate#,
         #transportFlag#,#partialShipmentFalg#, #status#, #dealTime#, #deliverInfo#,#expressInfo#, #dueTime#, #amountPayable#, #floorPrice#,#maintenanceFee#,
         #netProfit#, #actualPaymentTime#,#actualAmountPaid#, #unpaidAmount#, #isComplaint#, #isPledge#,#isModifyPrice#, #claimAmount#, #createUserId#,#createUserName#, #lastmodifyUserId#, #lastmodifyUserName#,
-        #createTime#, #modifyTime#, #isCreditRisk#,#interestRate#,#departmentName#,#nusdexchgrate#,#nexchangerate#,#lastdelydate#,#grossProfit#)
+        now(), now(), #isCreditRisk#,#interestRate#,#departmentName#,#nusdexchgrate#,#nexchangerate#,#lastdelydate#,#grossProfit#)
 
     </insert>
 
@@ -535,7 +535,7 @@
                 lastmodify_user_name = #lastmodifyUserName#
             </isNotNull>
             <isNotNull prepend="," property="modifyTime" >
-                modify_time = #modifyTime#
+                modify_time = now()
             </isNotNull>
         </dynamic>
         where order_id = #orderId#

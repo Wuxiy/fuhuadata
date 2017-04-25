@@ -89,7 +89,7 @@ public class BusinessOrderAction {
     @ResponseBody
     public ResultPojo getOrderListPageByQuery(@RequestBody QueryBusinessOrder queryBusinessOrder){
         Result<List<QueryBusinessOrder>> result = new Result<List<QueryBusinessOrder>>();
-        //queryBusinessOrder.setSalesManId(LoginUtils.getLoginId()+"");
+        queryBusinessOrder.setSalesManId(LoginUtils.getLoginId()+"");
         try{
             result = businessOrderService.getOrderListPageByQuery(queryBusinessOrder);
         }catch(Exception e){

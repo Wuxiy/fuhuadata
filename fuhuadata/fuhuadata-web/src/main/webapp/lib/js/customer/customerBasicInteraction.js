@@ -517,10 +517,10 @@ CRM.cbInfo.pVerify = function (em) {
         rules: {
             fullName: "required",
             areaId: 'required',
-            enterpriseNature: {
+            "enterpriseNature": {
                 required : true
             },
-            // enterpriseNature:"required",
+            enterpriseNature:"required",
             // enterprisePhone:'digits',
             // enterpriseEmail:'email',
             // showFactory: 'required',
@@ -813,6 +813,7 @@ $().ready(function() {
     // 跳转百科编辑
     $('#encyEdit').on('click.ency',function () {
 
+        sessionStorage.setItem('customerUrl',window.location.href);
         self.location = basePath + page.ENCY_SKIP;
         return false;
     });

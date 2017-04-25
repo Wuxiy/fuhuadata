@@ -231,7 +231,7 @@
 						<isNotNull prepend=", " property="lastmodifyUserId">lastmodify_user_id=#lastmodifyUserId#</isNotNull>
 						<isNotNull prepend=", " property="lastmodifyUserName">lastmodify_user_name=#lastmodifyUserName#</isNotNull>
 						<isNotNull prepend=", " property="createTime">create_time=#createTime#</isNotNull>
-						<isNotNull prepend=", " property="modifyTime">modify_time=#modifyTime#</isNotNull>
+						<isNotNull prepend=", " property="modifyTime">modify_time=now()</isNotNull>
 					</dynamic>
 		WHERE linkman_id=#linkmanId#
 	</update>

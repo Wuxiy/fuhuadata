@@ -150,7 +150,7 @@
 	<insert id="ADD" parameterClass="CustomerVisitRecord">
 		INSERT INTO 
 		customer_visit_record(visitrecord_id,customer_id,user_id,user_name,start_time,end_time,activity_type,activity_address,activity_expense,activity_summary,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time)
-		VALUES(#visitrecordId#,#customerId#,#userId#,#userName#,#startTime#,#endTime#,#activityType#,#activityAddress#,#activityExpense#,#activitySummary#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
+		VALUES(#visitrecordId#,#customerId#,#userId#,#userName#,#startTime#,#endTime#,#activityType#,#activityAddress#,#activityExpense#,#activitySummary#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,now(),now())
 		<selectKey resultClass="int" keyProperty="visitrecordId">
 			SELECT @@IDENTITY AS visitrecord_id
 		</selectKey>
@@ -175,7 +175,7 @@
 						<isNotEmpty prepend=", " property="lastmodifyUserId">lastmodify_user_id=#lastmodifyUserId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="lastmodifyUserName">lastmodify_user_name=#lastmodifyUserName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="createTime">create_time=#createTime#</isNotEmpty>
-						<isNotEmpty prepend=", " property="modifyTime">modify_time=#modifyTime#</isNotEmpty>
+						<isNotEmpty prepend=", " property="modifyTime">modify_time=now()</isNotEmpty>
 					</dynamic>
 		WHERE visitrecord_id=#visitrecord_id#
 	</update>

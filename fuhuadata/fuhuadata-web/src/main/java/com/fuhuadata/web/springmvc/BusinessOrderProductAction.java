@@ -293,6 +293,7 @@ public class BusinessOrderProductAction {
                     businessOrderProduct.setProcessCost(businessOrderProductService.calculateProcessCost(businessProductRequire.getBusinessProductId()));
                 }
                 businessOrderProduct.setMinPrice(businessOrderProductService.calculateMinPrice(businessProductRequire.getBusinessProductId()));
+                businessOrderProductService.updateBusinessOrderProduct(businessOrderProduct);
             }
             result.put("productRequireId",businessProductRequireId);
             result.put("success",true);
