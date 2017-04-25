@@ -28,9 +28,6 @@
 		<result property="InternalTransportPrice" column="Internal_transport_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result property="factoryId" column="factory_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="factoryName" column="factory_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-		<result column="img_info" property="imgInfo" jdbcType="VARCHAR" />
-		<result column="pakage_info" property="pakageInfo" jdbcType="VARCHAR" />
-		<result column="material_info" property="materialInfo" jdbcType="VARCHAR" />
 		<result column="commission_price" jdbcType="DECIMAL" property="commissionPrice" />
 		<result property="documentaryType" column="documentary_type" jdbcType="INT" javaType="java.lang.Integer" />
 		<result property="documentaryRequire" column="documentary_require" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -49,7 +46,6 @@
 		<result column="gross_margin" property="grossMargin" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result column="process_cost" jdbcType="DECIMAL" property="processCost"/>
 		<result property="otherCost" column="other_cost" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
-		<result property="minSellPrice" column="min_sell_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result property="contractPrice" column="contract_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result column="transform_state" property="transformState" jdbcType="INTEGER" javaType="java.lang.Integer"/>
 		<result property="createUserId" column="create_user_id" jdbcType="INT" javaType="java.lang.Integer" />
@@ -134,15 +130,6 @@
 				composition_cost = #compositionCost#
 			</isNotNull>
 
-			<isNotNull prepend=" AND " property="imgInfo">
-				img_info = #imgInfo#
-			</isNotNull>
-			<isNotNull prepend=" AND " property="pakageInfo">
-				pakage_info = #pakageInfo#
-			</isNotNull>
-			<isNotNull prepend=" AND " property="materialInfo">
-				material_info = #materialInfo#
-			</isNotNull>
 				<isNotNull prepend=" AND " property="commissionPrice">
 					commission_price = #commissionPrice#
 		</isNotNull>
@@ -194,9 +181,6 @@
 			</isNotNull>
 				<isNotNull prepend=" AND " property="otherCost">
 			other_cost = #otherCost#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="minSellPrice">
-			min_sell_price = #minSellPrice#
 		</isNotNull>
 				<isNotNull prepend=" AND " property="contractPrice">
 			contract_price = #contractPrice#
@@ -298,15 +282,6 @@
 				composition_cost = #compositionCost#
 			</isNotNull>
 
-			<isNotNull prepend=" AND " property="imgInfo">
-				img_info = #imgInfo#
-			</isNotNull>
-			<isNotNull prepend=" AND " property="pakageInfo">
-				pakage_info = #pakageInfo#
-			</isNotNull>
-			<isNotNull prepend=" AND " property="materialInfo">
-				material_info = #materialInfo#
-			</isNotNull>
 			<isNotNull prepend=" AND " property="commissionPrice">
 				commission_price = #commissionPrice#
 			</isNotNull>
@@ -357,9 +332,6 @@
 			</isNotNull>
 			<isNotNull prepend=" AND " property="otherCost">
 				other_cost = #otherCost#
-			</isNotNull>
-			<isNotNull prepend=" AND " property="minSellPrice">
-				min_sell_price = #minSellPrice#
 			</isNotNull>
 			<isNotNull prepend=" AND " property="contractPrice">
 				contract_price = #contractPrice#

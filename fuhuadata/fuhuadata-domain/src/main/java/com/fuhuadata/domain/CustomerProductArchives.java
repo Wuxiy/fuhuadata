@@ -167,14 +167,8 @@ public class CustomerProductArchives {
 	/**单耗**/
 	private BigDecimal consumption;
 
-	/**包装图片要求**/
-	private String imgInfo;
 
-	/**包装要求**/
-	private String pakageInfo;
 
-	/**包材要求**/
-	private String materialInfo;
 
 
 
@@ -338,29 +332,8 @@ public class CustomerProductArchives {
 		this.consumption = consumption;
 	}
 
-	public String getImgInfo() {
-		return imgInfo;
-	}
 
-	public void setImgInfo(String imgInfo) {
-		this.imgInfo = imgInfo;
-	}
 
-	public String getPakageInfo() {
-		return pakageInfo;
-	}
-
-	public void setPakageInfo(String pakageInfo) {
-		this.pakageInfo = pakageInfo;
-	}
-
-	public String getMaterialInfo() {
-		return materialInfo;
-	}
-
-	public void setMaterialInfo(String materialInfo) {
-		this.materialInfo = materialInfo;
-	}
 
 	public CustomerProductArchives() {
 	}
