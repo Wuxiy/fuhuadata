@@ -741,6 +741,7 @@
 		select
 				name,
 				product_id productId,
+				ware_id wareId,
 				documentary_require documentaryRequire ,
 				other_documentary_require otherDocumentaryRequire
 		from
