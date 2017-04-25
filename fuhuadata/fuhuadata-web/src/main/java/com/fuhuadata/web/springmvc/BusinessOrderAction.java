@@ -12,6 +12,7 @@ import com.fuhuadata.vo.DataArchive.Income;
 import com.fuhuadata.vo.DataArchive.Incoterm;
 import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -140,8 +141,15 @@ public class BusinessOrderAction {
      */
     @RequestMapping("/intoBusinessConverse")
     @SystemLogAnnotation(module = "salesStatistics",methods = "intoBusinessConverse")
-    public ModelAndView intoBusinessConverse(String businessId){
-        String orderId = bCodeService.genNextOrderCode();
+    public Object intoBusinessConverse(String businessId){
+        String orderId = null;
+        if(StringUtils.isNotBlank(businessId)){
+            orderId = businessOrderService.getOrderIdByBusinessId(businessId);
+            if(StringUtils.isNotBlank(orderId)){
+                return "redirect:/businessOrder/intoOfferorOrder?orderId="+orderId;
+            }
+        }
+        orderId =  bCodeService.genNextOrderCode();
         Result<BusinessInfoVO> result = businessInfoService.getBusinessInfoByBusinessId(businessId);
         //收款协议
         Result<List<Income>> rincome = dataArchivesService.getIncome();

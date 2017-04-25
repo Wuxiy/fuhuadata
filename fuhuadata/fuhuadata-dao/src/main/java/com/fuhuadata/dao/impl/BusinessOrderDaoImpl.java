@@ -3,6 +3,7 @@ package com.fuhuadata.dao.impl;
 import com.fuhuadata.dao.BusinessOrderDao;
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
+import com.fuhuadata.vo.BusinessOrderVO;
 import com.fuhuadata.vo.CostAndProfitStatistics;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
@@ -33,6 +34,19 @@ public class BusinessOrderDaoImpl extends SqlMapClientTemplate implements Busine
     public static final String COUNT_COST_AND_PROFIT = "BUSINESSORDER.COUNT-COST-AND-PROFIT";
 
     public static final String COUNT_PROFIT_STATISTICS="BUSINESSORDER.COUNT-PROFIT-STATISTICS";
+
+    public static final String GET_BY_BUSINESS_ID="BUSINESSORDER.getByBusinessId";
+
+    @Override
+    public String getOrderIdByBusinessId(String businessId) {
+        try {
+            return (String)this.queryForObject(GET_BY_BUSINESS_ID,businessId);
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     @Override
     public int count(QueryBusinessOrder queryBusinessOrder) {
         try {

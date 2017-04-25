@@ -43,7 +43,6 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
     private ProductInfoDao productInfoDao;
     @Autowired
     private ProductWareDao productWareDao;
-    @Transactional
     public int addBusinessOrderProduct(BusinessOrderProduct businessOrderProduct,List<BusinessOrderProductComponent> businessOrderProductComponents) {
         try {
             businessOrderProduct.setCreateUserId(LoginUtils.getLoginId());
@@ -69,6 +68,7 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
             if(businessOrderProductComponentDao.addArchives(pmap)<1){
                 throw new Exception("插入档案失败");
             }
+            System.out.print("+++++++++++++++++++++++service返回新增businessProductId："+businessProductId+"+++++++++++++++++++++++++++++++");
             return businessProductId;
         } catch (Exception e) {
             e.printStackTrace();

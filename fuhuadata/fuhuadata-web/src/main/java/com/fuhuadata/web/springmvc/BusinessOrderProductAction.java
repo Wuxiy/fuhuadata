@@ -160,6 +160,7 @@ public class BusinessOrderProductAction {
             }else{
                 //新增
                 businessProductId = businessOrderProductService.addBusinessOrderProduct(businessOrderProduct,list);
+                System.out.print("+++++++++++++++++++++++action接收新增businessProductId："+businessProductId+"+++++++++++++++++++++++++++++++");
             }
             BusinessProductRequire businessProductRequire =  businessProductRequireService.getOneByQuery(null,businessProductId);
             if(businessProductRequire!=null){
