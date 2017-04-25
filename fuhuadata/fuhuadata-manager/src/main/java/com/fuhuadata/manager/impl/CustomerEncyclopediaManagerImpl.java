@@ -31,7 +31,7 @@ public class CustomerEncyclopediaManagerImpl implements CustomerEncyclopediaMana
     public CustomerEncyclopedia addCustomerEncyclopedia(CustomerEncyclopedia customerEncyclopedia) {
 
         //百科新增时判断是否是在原客户基础信息上新增百科，否则新增基本客户信息
-        if(customerEncyclopedia.getCustomerId()==null){
+        if(customerEncyclopedia.getCustomerId()==null||"".equals(customerEncyclopedia.getCustomerId())){
             CustomerBaseInfo customerBaseInfo  = new CustomerBaseInfo();
             customerBaseInfo.setCompanyType(customerEncyclopedia.getCompanyType());
             customerBaseInfo.setFullName(customerEncyclopedia.getFullName());
@@ -64,7 +64,6 @@ public class CustomerEncyclopediaManagerImpl implements CustomerEncyclopediaMana
                 customerBaseInfoDao.batchAddNature(Arrays.asList(customerEncyclopedia.getEnterpriceNatures()));
             }
         }
-
         return customerEncyclopediaDao.addCustomerEncyclopedia(customerEncyclopedia);
     }
 

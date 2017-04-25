@@ -33,7 +33,7 @@ public class FreightCostAction {
     private Integer pageSize = 10;
     private String page="1";
 
-    /**
+    /** 
      * init
      * @return
      */

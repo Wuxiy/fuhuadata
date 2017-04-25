@@ -47,12 +47,12 @@
 					<result property="lastmodifyUserName" column="lastmodify_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="createTime" column="create_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
 					<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
-					<result property="totalMoney" column="totalMoney" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-					<result property="minPrice" column="minPrice" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-					<result property="maintenanceFee" column="maintenanceFee" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-					<result property="payMoney" column="payMoney" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-					<result property="netProfit" column="net_profit" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-					<result property="lossReason" column="loss_reason" jdbcType="VARCHAR" javaType="java.lang.String" />
+					<result property="totalMoney" column="totalMoney" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
+					<result property="minPrice" column="minPrice" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
+					<result property="maintenanceFee" column="maintenanceFee" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
+					<result property="payMoney" column="payMoney" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
+					<result property="netProfit" column="net_profit" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
+					<result property="lossReason" column="loss_reason" jdbcType="VARCHAR" javaType="java.lang.String" nullValue="0"/>
 					<result property="opportunityDescrible" column="opportunity_describle" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="linkManName" column="link_man_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 					<result property="linkManEmail" column="link_man_email" jdbcType="VARCHAR" javaType="java.lang.String" />

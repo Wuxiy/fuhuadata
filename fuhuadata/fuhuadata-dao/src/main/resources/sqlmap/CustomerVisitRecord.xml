@@ -17,7 +17,7 @@
 								<result property="activityType" column="activity_type" jdbcType="INT" javaType="java.lang.Integer" />
 								<result property="activityRemarks" column="activity_remarks" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="activityAddress" column="activity_address" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="activityExpense" column="activity_expense" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+								<result property="activityExpense" column="activity_expense" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0" />
 								<result property="activitySummary" column="activity_summary" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="createUserId" column="create_user_id" jdbcType="INT" javaType="java.lang.Integer" />
 								<result property="createUserName" column="create_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -37,7 +37,7 @@
 		<result property="activityType" column="activity_type" jdbcType="INT" javaType="java.lang.Integer" />
 		<result property="activityRemarks" column="activity_remarks" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="activityAddress" column="activity_address" jdbcType="VARCHAR" javaType="java.lang.String" />
-		<result property="activityExpense" column="activity_expense" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+		<result property="activityExpense" column="activity_expense" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result property="activitySummary" column="activity_summary" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="createUserId" column="create_user_id" jdbcType="INT" javaType="java.lang.Integer" />
 		<result property="createUserName" column="create_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -54,9 +54,12 @@
 			<isNotEmpty prepend=" OR " property="customerName">
 				base.short_name like concat('%',#customerName#,'%')
 			</isNotEmpty>
-				<isNotNull prepend=" AND " property="userId">
+			<isNotEmpty prepend=" AND " property="customerId">
+				base.customer_id = #customerId#
+			</isNotEmpty>
+			<isNotNull prepend=" AND " property="userId">
 			user_id = #userId#
-		</isNotNull>
+			</isNotNull>
 				<isNotNull prepend=" AND " property="startTime">
 					<![CDATA[
 					start_time >= #startTime#
@@ -260,8 +263,8 @@
 	
 	<select id="COUNT" resultClass="java.lang.Integer" parameterClass="QueryCustomerVisitRecord">
 		<![CDATA[
-			SELECT COUNT(visitrecord_id) FROM customer_visit_record
-
+			SELECT COUNT(visitrecord_id) FROM customer_visit_record a
+			LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
 		]]>
 		<isParameterPresent>   
             <include refid="PAGE-COMMON" />   

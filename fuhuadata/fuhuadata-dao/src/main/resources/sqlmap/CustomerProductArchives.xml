@@ -15,23 +15,23 @@
 		<result property="name" column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result column="customer_product_name" property="customerProductName" jdbcType="VARCHAR" javaType="java.lang.String"/>
 		<result property="brand" column="brand" jdbcType="VARCHAR" javaType="java.lang.String" />
-		<result property="mainProductAmount" column="main_product_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+		<result property="mainProductAmount" column="main_product_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result property="mainProductUnit" column="main_product_unit" jdbcType="java.lang.String" javaType="java.lang.String" />
-		<result property="subProductAmount" column="sub_product_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+		<result property="subProductAmount" column="sub_product_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result property="subProductUnit" column="sub_product_unit" jdbcType="INT" javaType="java.lang.Integer" />
-		<result property="convertRate" column="convert_rate" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+		<result property="convertRate" column="convert_rate" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result property="priceType" column="price_type" jdbcType="INT" javaType="java.lang.Integer" />
-		<result property="advisePrice" column="advise_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-		<result property="purchasePrice" column="purchase_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+		<result property="advisePrice" column="advise_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
+		<result property="purchasePrice" column="purchase_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result property="deliveryTime" column="delivery_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
 		<result property="InternalTransportMode" column="Internal_transport_mode" jdbcType="INT" javaType="java.lang.Integer" />
-		<result property="InternalTransportPrice" column="Internal_transport_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+		<result property="InternalTransportPrice" column="Internal_transport_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result property="factoryId" column="factory_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="factoryName" column="factory_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result column="composition_cost" property="compositionCost" jdbcType="VARCHAR" />
 		<result column="pakage_other_requirement" property="pakageOtherRequirement" jdbcType="VARCHAR" />
 		<result column="additional_price" property="additionalPrice" jdbcType="DECIMAL" />
-		<result column="consumption" property="consumption" jdbcType="DECIMAL" />
+		<result column="consumption" property="consumption" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result column="img_info" property="imgInfo" jdbcType="VARCHAR" />
 		<result column="pakage_info" property="pakageInfo" jdbcType="VARCHAR" />
 		<result column="material_info" property="materialInfo" jdbcType="VARCHAR" />
@@ -47,14 +47,14 @@
 		<result property="cupboardType" column="cupboard_type" jdbcType="INT" javaType="java.lang.Integer" />
 		<result property="cupboardPerNumber" column="cupboard_per_number" jdbcType="INT" javaType="java.lang.Integer" />
 		<result property="cupboardNumber" column="cupboard_number" jdbcType="INT" javaType="java.lang.Integer" />
-		<result property="oceanFreight" column="ocean_freight" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-		<result property="portSurcharge" column="port_surcharge" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-		<result property="taxFree" column="tax_free" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-		<result column="gross_margin" property="grossMargin" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+		<result property="oceanFreight" column="ocean_freight" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
+		<result property="portSurcharge" column="port_surcharge" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
+		<result property="taxFree" column="tax_free" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
+		<result column="gross_margin" property="grossMargin" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result column="process_cost" jdbcType="DECIMAL" property="processCost"/>
-		<result property="otherCost" column="other_cost" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-		<result property="minSellPrice" column="min_sell_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-		<result property="contractPrice" column="contract_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+		<result property="otherCost" column="other_cost" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
+		<result property="minSellPrice" column="min_sell_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
+		<result property="contractPrice" column="contract_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result column="transform_state" property="transformState" jdbcType="INTEGER" javaType="java.lang.Integer"/>
 		<result property="createUserId" column="create_user_id" jdbcType="INT" javaType="java.lang.Integer" />
 		<result property="createUserName" column="create_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -64,8 +64,8 @@
 		<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
 		<result property="customsClearanceId" column="customs_clearance_id" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="customsClearanceName" column="customs_clearance_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-		<result column="unit_use_rate" jdbcType="DECIMAL" property="unitUseRate"/>
-		<result column="capital_interest_price" jdbcType="DECIMAL" property="capitalInterestPrice"/>
+		<result column="unit_use_rate" jdbcType="DECIMAL" property="unitUseRate" javaType="java.math.BigDecimal" nullValue="0"/>
+		<result column="capital_interest_price" jdbcType="DECIMAL" property="capitalInterestPrice" javaType="java.math.BigDecimal" nullValue="0"/>
 	</resultMap>
 	
 	<sql id="PAGE-COMMON">	
