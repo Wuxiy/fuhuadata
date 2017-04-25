@@ -420,6 +420,7 @@
     function collectArgs() {
         var obj={
             areaId:areaId,
+            activityType:$('#activityType').val(),
             customerName:$('#customerName').val(),
             userName:$('#userName').val(),
             customerLevel:$('#customerLevel').val(),
@@ -465,6 +466,7 @@
             contentType:'application/json',
             data:JSON.stringify({
                 areaId:areaId,
+                activityType:$('#activityType').val(),
                 customerName:$('#customerName').val(),
                 customerId:$('#customerId').val(),
                 userName:$('#userName').val(),
@@ -500,7 +502,7 @@
                     _html += '  <td>' + activityTypeList[ResultData[i].activityType] + '</td>';
                     _html += '  <td>' + ResultData[i].activityAddress + '</td>';
                     _html += '  <td>' + ResultData[i].activityExpense + '</td>';
-                    _html += '  <td>' + ResultData[i].activitySummary + '</td>';
+                    _html += '  <td>' + (ResultData[i].activitySummary!=undefined?ResultData[i].activitySummary:'') + '</td>';
                     _html += '  <td>' + ResultData[i].userName + '</td>';
                     _html += '   </tr>';
                 }
