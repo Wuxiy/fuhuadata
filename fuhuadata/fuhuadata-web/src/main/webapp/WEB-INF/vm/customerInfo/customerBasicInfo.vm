@@ -79,12 +79,12 @@
                                         <span lang="zh">工厂</span>
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input name="enterpriseNature" data-control="off" disabled type="checkbox" value="2" />
-                                        <span lang="zh">经销商</span>
+                                        <input id="showMajorCompetitorsGroup" data-control="off" disabled data-target="#majorCompetitorsGroup" name="enterpriseNature" class="else notNull" type="checkbox" value="2" />
+                                        <span lang="zh">分销商</span>
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input id="showMajorCompetitorsGroup" data-control="off" disabled data-target="#majorCompetitorsGroup" name="enterpriseNature" class="else notNull" type="checkbox" value="3" />
-                                        <span lang="zh">分销商</span>
+                                        <input name="enterpriseNature" data-control="off" disabled type="checkbox" value="3" />
+                                        <span lang="zh">经销商</span>
                                     </label>
                                     <label class="checkbox-inline">
                                         <input name="enterpriseNature" data-control="off" disabled type="checkbox" value="4" />
