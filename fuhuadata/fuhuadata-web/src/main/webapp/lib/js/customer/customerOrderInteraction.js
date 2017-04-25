@@ -2,7 +2,7 @@
  * Created by Huxiangyang on 2017/3/30.
  */
 
-var pageSize = 3;//分页步长
+var pageSize = 10;//分页步长
 var treeData = null;
 $(function(){
 

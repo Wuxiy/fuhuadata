@@ -36,7 +36,7 @@
                     <div class="panel-body">
                         <div class="form-horizontal">
                             <form class="form-group">
-                                <div class="col-xs-8 pull-right">
+                                <div class="col-xs-12">
                                     <div class="input-group">
                                         <span class="input-group-addon" lang="zh">销售组织</span>
                                         <input id="oSaleOrganizationId" type="text" style="display:none" value="">
@@ -49,7 +49,7 @@
                                         <span class="input-group-addon" lang="zh">结束日期</span>
                                         <input id="oEndTime" class="form-control" type="date" value="" />
                                         <div class="input-group-btn">
-                                            <button class="btn btn-xs btn-primary" type="reset">重置</button>
+                                            <button class="btn btn-xs btn-default" type="reset">重置</button>
                                         </div>
                                         <div class="input-group-btn">
                                             <button id="oSubmit" class="btn btn-xs btn-primary" type="button">搜索</button>

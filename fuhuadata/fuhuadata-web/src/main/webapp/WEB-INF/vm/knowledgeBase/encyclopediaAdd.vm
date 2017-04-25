@@ -52,28 +52,37 @@
 ##                            </div>
 ##                        </div>
                         <div class="form-group ">
-                            <label for="customerArea" class=" control-label col-xs-1" lang="zh">地区分类<sup data-view="editView" class="not-null hidden">*</sup></label>
+                            <label for="areaId" class=" control-label col-xs-1" lang="zh">地区分类<sup data-view="editView" class="not-null hidden">*</sup></label>
                             <div class="col-xs-2">
                                 <div class="input-group">
-                                    <input id="customerArea" data-val="" disabled name="customerArea" class="form-control" value="">
+                                    <input id="areaId" data-val="" disabled name="areaId" class="form-control">
                                     <div class="input-group-btn">
-                                        <button id="aISearch" class="btn btn-xs btn-default" data-control="on" type="button" data-toggle="modal" data-target="#cbtModal"><span class="glyphicon glyphicon-search"></span></button>
+                                        <button id="aISearch" disabled class="btn btn-xs btn-default" data-control="on" type="button" data-toggle="modal" data-target="#cbtModal"><span class="glyphicon glyphicon-search"></span></button>
                                     </div>
                                 </div>
                             </div>
-                            <label for="country" class="control-label col-xs-1" lang="zh">国家<sup data-view="editView" class="not-null hidden">*</sup></label>
-                            <div id="ccSearch" class="col-xs-2">
-                                <div class="input-group">
-                                    <input id="country" name="country" data-val="" placeholder="请在下拉菜单中选择" class="form-control" disabled type="text" autocomplete="off" value=""/>
-                                    <div class="input-group-btn">
-                                        <button data-control="on" class="btn btn-xs btn-default dropdown" data-toggle="dropdown" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                                        <div class="dropdown-menu pull-right" style="width: 196px;padding: 3px 0;">
-                                            <input id="countryS" name="countryS" class="form-control" data-control="on" type="text" placeholder="请输入关键词查找" style="box-shadow: none;border-radius: 0; border-color: transparent">
-                                            <ul id="cc" style="list-style: none;margin-bottom: 0;padding: 0;width: 100%;max-height: 200px;overflow-y: auto;"></ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+##                            <label for="customerArea" class=" control-label col-xs-1" lang="zh">地区分类<sup data-view="editView" class="not-null hidden">*</sup></label>
+##                            <div class="col-xs-2">
+##                                <div class="input-group">
+##                                    <input id="customerArea" data-val="" disabled name="customerArea" class="form-control" value="">
+##                                    <div class="input-group-btn">
+##                                        <button id="aISearch" class="btn btn-xs btn-default" data-control="on" type="button" data-toggle="modal" data-target="#cbtModal"><span class="glyphicon glyphicon-search"></span></button>
+##                                    </div>
+##                                </div>
+##                            </div>
+##                            <label for="country" class="control-label col-xs-1" lang="zh">国家<sup data-view="editView" class="not-null hidden">*</sup></label>
+##                            <div id="ccSearch" class="col-xs-2">
+##                                <div class="input-group">
+##                                    <input id="country" name="country" data-val="" placeholder="请在下拉菜单中选择" class="form-control" disabled type="text" autocomplete="off" value=""/>
+##                                    <div class="input-group-btn">
+##                                        <button data-control="on" class="btn btn-xs btn-default dropdown" data-toggle="dropdown" type="button"><span class="glyphicon glyphicon-search"></span></button>
+##                                        <div class="dropdown-menu pull-right" style="width: 196px;padding: 3px 0;">
+##                                            <input id="countryS" name="countryS" class="form-control" data-control="on" type="text" placeholder="请输入关键词查找" style="box-shadow: none;border-radius: 0; border-color: transparent">
+##                                            <ul id="cc" style="list-style: none;margin-bottom: 0;padding: 0;width: 100%;max-height: 200px;overflow-y: auto;"></ul>
+##                                        </div>
+##                                    </div>
+##                                </div>
+##                            </div>
                         </div>
                         <div class="form-group">
                             <label class="col-xs-1 control-label">企业性质<sup data-view="editView" class="not-null hidden">*</sup></label>

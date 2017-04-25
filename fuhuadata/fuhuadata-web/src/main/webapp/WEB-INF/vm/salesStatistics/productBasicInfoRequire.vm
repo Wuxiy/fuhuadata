@@ -80,7 +80,7 @@
                                                 <sup class="not-null">*</sup>
                                             </label>
                                         </td>
-                                        <td><input data-control="on" id="mainProductAmount" class="form-control notnull isdisabled" type="text" value="" disabled/></td>
+                                        <td><input data-control="on" id="mainProductAmount" class="form-control notnull isdisabled" type="number" value="" disabled/></td>
                                         <td></td>
                                         <td></td>
                                     </tr>
@@ -88,7 +88,7 @@
                                         <td><label class="control-label" lang="zh">单位</label></td>
                                         <td><select data-control="on" id="subProductUnit" class="form-control isdisabled" disabled><option value="0">KG</option><option value="1">瓶</option><option value="2">袋</option></select></td>
                                         <td><label class="control-label" lang="zh">数量</label></td>
-                                        <td><input data-control="on" id="subProductAmount" class="form-control isdisabled" type="text" value="" disabled/></td>
+                                        <td><input data-control="on" id="subProductAmount" class="form-control isdisabled" type="number" value="" disabled/></td>
                                         <td><label class="control-label" lang="zh">换算率（主数量/数量）</label></td>
                                         <td><input id="convertRate" class="form-control" type="text" value="" disabled/></td>
                                     </tr>
@@ -149,14 +149,20 @@
                                             </label>
                                         </td>
                                         <td>
-                                            <div class="input-group">
-                                                <input data-control="on" id="factoryName" class="form-control notnull " value="" disabled>
-                                                <div class="input-group-btn">
-                                                    <button data-control="on" class="btn btn-xs btn-default isdisabled" id="factory" disabled>
-                                                        <span class="glyphicon glyphicon-search"></span>
-                                                    </button>
-                                                </div>
-                                            </div>
+                                            <select name="factoryName" id="factoryName" class="form-control">
+                                                <option value="">——请选择——</option>
+                                                #foreach($!info in $!{freightCosts})
+                                                    <option value="$!info.freightId">$!info.processFactory</option>
+                                                #end
+                                            </select>
+##                                            <div class="input-group">
+##                                                <input data-control="on" id="factoryName" class="form-control notnull " value="" disabled>
+##                                                <div class="input-group-btn">
+##                                                    <button data-control="on" class="btn btn-xs btn-default isdisabled" id="factory" disabled>
+##                                                        <span class="glyphicon glyphicon-search"></span>
+##                                                    </button>
+##                                                </div>
+##                                            </div>
                                         </td>
                                         <td>
                                             <label class="control-label" lang="zh">
@@ -292,25 +298,25 @@
     </div>
 </div>
 <!--加工厂modal-->
-<div class="modal fade" id="factoryModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" style="margin-top: 200px; width: 300px;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
-            </div>
-
-            <div class="modal-body well" style="max-height: 300px;overflow-y: scroll; overflow-x: scroll;">
-                <div class="form-group">
-                    <ul class="list-group" id="factoryList">
-
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+##<div class="modal fade" id="factoryModal" tabindex="-1" role="dialog" aria-hidden="true">
+##    <div class="modal-dialog" style="margin-top: 200px; width: 300px;">
+##        <div class="modal-content">
+##            <div class="modal-header">
+##                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+##                    &times;
+##                </button>
+##            </div>
+##
+##            <div class="modal-body well" style="max-height: 300px;overflow-y: scroll; overflow-x: scroll;">
+##                <div class="form-group">
+##                    <ul class="list-group" id="factoryList">
+##
+##                    </ul>
+##                </div>
+##            </div>
+##        </div>
+##    </div>
+##</div>
 
 <input id="businessProductId" type="hidden" value="$!{businessProductId}"> <!--编号-->
 <input id="orderId" type="hidden" value="$!{orderId}">
