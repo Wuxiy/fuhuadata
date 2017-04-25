@@ -14,6 +14,7 @@ $(document).ready(function () {
     getData(basePath + '/customerProductPacking/getCustomerProductInfoById','GET',GetRequest(),ProductRequestList);
 });
 
+
 function ProductRequestList(result) {
     var ResultData = result;
     console.log(ResultData);
