@@ -1,8 +1,10 @@
 package com.fuhuadata.manager.impl;
 
+import com.fuhuadata.dao.BusinessInfoDao;
 import com.fuhuadata.dao.BusinessOrderDao;
 import com.fuhuadata.dao.BusinessOrderProductDao;
 import com.fuhuadata.dao.CustomerBaseInfoDao;
+import com.fuhuadata.domain.BusinessInfo;
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.CustomerBaseInfo;
 import com.fuhuadata.domain.query.QueryBusinessOrder;
@@ -12,6 +14,7 @@ import com.fuhuadata.vo.BusinessOrderProductList;
 import com.fuhuadata.vo.BusinessOrderVO;
 import com.fuhuadata.vo.CostAndProfitStatistics;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,8 +28,18 @@ public class BusinessOrderManagerImpl implements BusinessOrderManager {
     private CustomerBaseInfoDao customerBaseInfoDao;
     @Autowired
     private BusinessOrderProductDao businessOrderProductDao;
+    @Autowired
+    private BusinessInfoDao businessInfoDao;
+
     @Override
+    @Transactional
     public BusinessOrder addBusinessOrder(BusinessOrder businessOrder) {
+        //将商机状态置为2  已转化
+        BusinessInfo businessInfo = new BusinessInfo();
+        businessInfo.setBusinessState(2);
+        businessInfo.setBusinessId(businessOrder.getBusinessId());
+        businessInfoDao.updateBusinessInfoByBusinessId(businessInfo);
+
         return businessOrderDao.addBusinessOrder(businessOrder);
     }
 

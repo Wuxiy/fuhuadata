@@ -88,7 +88,7 @@
     </div>
 </div>
 
-
+<input id="customerId" type="hidden" value="$!{customerId}">
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script type="text/javascript">
 //    var pageSize = 3;
@@ -424,7 +424,8 @@
             userName:$('#userName').val(),
             customerLevel:$('#customerLevel').val(),
             startTime:$('#startTime').val(),
-            endTime:$('#endTime').val()
+            endTime:$('#endTime').val(),
+            customerId:$('#customerId').val()
         }
         return obj;
     }
@@ -465,6 +466,7 @@
             data:JSON.stringify({
                 areaId:areaId,
                 customerName:$('#customerName').val(),
+                customerId:$('#customerId').val(),
                 userName:$('#userName').val(),
                 customerLevel:$('#customerLevel').val(),
                 startTime:$('#startTime').val(),

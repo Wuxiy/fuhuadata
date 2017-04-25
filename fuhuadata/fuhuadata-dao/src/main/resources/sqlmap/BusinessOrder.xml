@@ -41,12 +41,12 @@
         <result column="trade_country" jdbcType="VARCHAR" property="tradeCountry" javaType="java.lang.String"/>
         <result column="premium_rate" jdbcType="DECIMAL" property="premiumRate" javaType="java.math.BigDecimal" nullValue="0"/>
         <result column="guarantee_rate" jdbcType="DECIMAL" property="guaranteeRate" javaType="java.math.BigDecimal" nullValue="0"/>
-        <result column="discount_rate" jdbcType="DECIMAL" property="discountRate" javaType="java.math.BigDecimal"/>
-        <result column="loss_rate" jdbcType="DECIMAL" property="lossRate" javaType="java.math.BigDecimal"/>
-        <result column="sale_rate" jdbcType="DECIMAL" property="saleRate" javaType="java.math.BigDecimal"/>
-        <result column="management_rate" jdbcType="DECIMAL" property="managementRate" javaType="java.math.BigDecimal"/>
-        <result column="gross_rate" jdbcType="DECIMAL" property="grossRate" javaType="java.math.BigDecimal"/>
-        <result column="credit_rate" jdbcType="DECIMAL" property="creditRate" javaType="java.math.BigDecimal"/>
+        <result column="discount_rate" jdbcType="DECIMAL" property="discountRate" javaType="java.math.BigDecimal" nullValue="0"/>
+        <result column="loss_rate" jdbcType="DECIMAL" property="lossRate" javaType="java.math.BigDecimal" nullValue="0"/>
+        <result column="sale_rate" jdbcType="DECIMAL" property="saleRate" javaType="java.math.BigDecimal" nullValue="0"/>
+        <result column="management_rate" jdbcType="DECIMAL" property="managementRate" javaType="java.math.BigDecimal" nullValue="0"/>
+        <result column="gross_rate" jdbcType="DECIMAL" property="grossRate" javaType="java.math.BigDecimal" nullValue="0"/>
+        <result column="credit_rate" jdbcType="DECIMAL" property="creditRate" javaType="java.math.BigDecimal" nullValue="0"/>
         <result column="transport_flag" jdbcType="TINYINT" property="transportFlag" javaType="java.lang.Integer"/>
         <result column="partial_shipment_falg" jdbcType="TINYINT" property="partialShipmentFalg" javaType="java.lang.Integer"/>
         <result column="status" jdbcType="TINYINT" property="status" javaType="java.lang.Integer"/>
@@ -55,19 +55,19 @@
         <result column="express_info" jdbcType="VARCHAR" property="expressInfo" javaType="java.lang.String"/>
         <result column="due_time" jdbcType="DATE" property="dueTime" javaType="java.lang.String"/>
 
-        <result column="amount_payable" jdbcType="DECIMAL" property="amountPayable" javaType="java.math.BigDecimal"/>
-        <result column="floor_price" jdbcType="DECIMAL" property="floorPrice" javaType="java.math.BigDecimal"/>
+        <result column="amount_payable" jdbcType="DECIMAL" property="amountPayable" javaType="java.math.BigDecimal" nullValue="0"/>
+        <result column="floor_price" jdbcType="DECIMAL" property="floorPrice" javaType="java.math.BigDecimal" nullValue="0"/>
 
-        <result column="maintenance_fee" jdbcType="DECIMAL" property="maintenanceFee" javaType="java.math.BigDecimal"/>
-        <result column="net_profit" jdbcType="DECIMAL" property="netProfit" javaType="java.math.BigDecimal"/>
+        <result column="maintenance_fee" jdbcType="DECIMAL" property="maintenanceFee" javaType="java.math.BigDecimal" nullValue="0"/>
+        <result column="net_profit" jdbcType="DECIMAL" property="netProfit" javaType="java.math.BigDecimal" nullValue="0"/>
         <result column="actual_payment_time" jdbcType="DATE" property="actualPaymentTime" javaType="java.sql.Date"/>
-        <result column="gross_profit" jdbcType="DECIMAL" property="grossProfit" javaType="java.math.BigDecimal"/>
-        <result column="actual_amount_paid" jdbcType="DECIMAL" property="actualAmountPaid" javaType="java.math.BigDecimal" />
-        <result column="unpaid_amount" jdbcType="DECIMAL" property="unpaidAmount" javaType="java.math.BigDecimal"/>
+        <result column="gross_profit" jdbcType="DECIMAL" property="grossProfit" javaType="java.math.BigDecimal" nullValue="0"/>
+        <result column="actual_amount_paid" jdbcType="DECIMAL" property="actualAmountPaid" javaType="java.math.BigDecimal" nullValue="0"/>
+        <result column="unpaid_amount" jdbcType="DECIMAL" property="unpaidAmount" javaType="java.math.BigDecimal" nullValue="0"/>
         <result column="is_complaint" jdbcType="TINYINT" property="isComplaint" javaType="java.lang.Integer"/>
         <result column="is_pledge" jdbcType="TINYINT" property="isPledge" javaType="java.lang.Integer"/>
         <result column="is_modify_price" jdbcType="TINYINT" property="isModifyPrice" javaType="java.lang.Integer"/>
-        <result column="claim_amount" jdbcType="DECIMAL" property="claimAmount" javaType="java.math.BigDecimal"/>
+        <result column="claim_amount" jdbcType="DECIMAL" property="claimAmount" javaType="java.math.BigDecimal" nullValue="0"/>
         <result column="create_user_id" jdbcType="INTEGER" property="createUserId" javaType="java.lang.Integer"/>
         <result column="create_user_name" jdbcType="VARCHAR" property="createUserName" javaType="java.lang.String"/>
         <result column="lastmodify_user_id" jdbcType="INTEGER" property="lastmodifyUserId" javaType="java.lang.Integer"/>
@@ -91,7 +91,7 @@
             </isNotEmpty>
 
             <isNotEmpty prepend=" AND " property="country">
-                tc.name = #country#
+                tc.name like concat('%',#country#,'%')
             </isNotEmpty>
 
             <isNotEmpty prepend=" AND " property="startTime">
@@ -113,7 +113,7 @@
                     <!--base.country_id = #areaId#-->
                 <!--</isNotEqual>-->
             <!--</isNotEqual>-->
-            <isNotEmpty prepend=" AND " property="areaId">
+            <isNotEmpty prepend="and" property="areaId">
                 base.customer_area_id in ($areaId$)
             </isNotEmpty>
         </dynamic>
@@ -564,6 +564,7 @@
         <isParameterPresent>
             <include refid="OFFER-PAGE-COMMON"/>
             GROUP BY a.order_id
+            ORDER BY a.modify_time DESC
             LIMIT #startRow#,#pageSize#
         </isParameterPresent>
     </select>
@@ -599,6 +600,7 @@
         <isParameterPresent>
             <include refid="ORDER-PAGE-COMMON"/>
             GROUP BY a.order_id
+            ORDER BY a.modify_time DESC
             limit #startRow#,#pageSize#
         </isParameterPresent>
     </select>

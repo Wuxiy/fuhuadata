@@ -21,7 +21,7 @@
         <result column="component_id" property="componentId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result column="component_name" property="componentName" jdbcType="VARCHAR" javaType="java.lang.String" />
         <result column="price_end" property="priceEnd" jdbcType="DATE" javaType="java.sql.Date"/>
-        <result column="unit_cost" property="unitCost" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="unit_cost" property="unitCost" jdbcType="VARCHAR" javaType="java.lang.String" nullValue="0"/>
         <result column="remarks" property="remarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>
 
@@ -29,8 +29,8 @@
         <result column="component_id" property="componentId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result column="component_name" property="componentName" jdbcType="VARCHAR" javaType="java.lang.String" />
         <result column="price_end" property="priceEnd" jdbcType="DATE" javaType="java.sql.Date"/>
-        <result column="consumption" property="consumption" jdbcType="DATE" javaType="java.lang.String"/>
-        <result column="unit_cost" property="unitCost" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="consumption" property="consumption" jdbcType="DATE" javaType="java.lang.String" nullValue="0"/>
+        <result column="unit_cost" property="unitCost" jdbcType="VARCHAR" javaType="java.lang.String" nullValue="0"/>
         <result column="remarks" property="remarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>
 

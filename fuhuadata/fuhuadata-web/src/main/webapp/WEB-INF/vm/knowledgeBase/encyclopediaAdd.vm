@@ -108,7 +108,7 @@
                                     <span lang="zh">其他</span>
                                 </label>
                                 <span class="form-inline">
-                                    <input disabled="disabled" data-control="on" id="otherEnterpriceNature" class="form-inline form-control hidden" style="position:absolute;left:355px;" type="text" value="" lang="zh">
+                                    <input disabled="disabled" data-control="on" id="otherEnterpriceNature" class="form-inline form-control" style="position:absolute;left:355px;" type="text" value="" lang="zh">
                                 </span>
                             </div>
                         </div>
@@ -116,7 +116,7 @@
                             <label for="registeredFund" class="col-xs-1 control-label">注册资金<sup data-view="editView" class="not-null hidden">*</sup></label>
                             <div class="col-xs-2">
                                 <div class="input-group">
-                                    <input id="registeredFund" data-control="on" name="registeredFund" disabled type="text" class="form-control" />
+                                    <input id="registeredFund" data-control="on" name="registeredFund" disabled type="number" class="form-control" />
                                     <span class="input-group-addon">$</span>
                                 </div>
                             </div>

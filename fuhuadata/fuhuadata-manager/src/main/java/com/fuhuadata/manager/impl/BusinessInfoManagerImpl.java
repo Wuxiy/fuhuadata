@@ -3,11 +3,9 @@ package com.fuhuadata.manager.impl;
 import com.fuhuadata.dao.BusinessInfoDao;
 import com.fuhuadata.dao.BusinessRecordDao;
 import com.fuhuadata.domain.BusinessInfo;
-import com.fuhuadata.domain.BusinessRecord;
 import com.fuhuadata.domain.query.QueryBusinessInfo;
 import com.fuhuadata.manager.BusinessInfoManager;
 import com.fuhuadata.vo.BusinessInfoVO;
-import com.ibm.wsdl.util.xml.QNameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

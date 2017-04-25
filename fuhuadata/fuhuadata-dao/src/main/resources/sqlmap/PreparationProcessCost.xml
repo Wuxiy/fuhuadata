@@ -12,11 +12,11 @@
         <result column="unit_cost" property="unitCost" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="price_end" property="priceEnd" jdbcType="DATE" javaType="java.sql.Date"/>
         <result column="process_factory" property="processFactory" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="charges" property="charges" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
-        <result column="profit" property="profit" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
-        <result column="management_fee" property="managementFee" jdbcType="DECIMAL" />
-        <result column="tax" property="tax" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
-        <result column="total_cost" property="totalCost" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+        <result column="charges" property="charges" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
+        <result column="profit" property="profit" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
+        <result column="management_fee" property="managementFee" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
+        <result column="tax" property="tax" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
+        <result column="total_cost" property="totalCost" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
         <result column="remarks" property="remarks" jdbcType="VARCHAR" javaType="java.lang.String" />
     </resultMap>
 

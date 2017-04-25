@@ -10,9 +10,9 @@
         <result property="currency" column="currency" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="kind" property="kind" jdbcType="VARCHAR" javaType="java.lang.String" />
         <result column="other" property="other" jdbcType="VARCHAR" javaType="java.lang.String" />
-        <result column="gross_margin" property="grossMargin" jdbcType="VARCHAR" javaType="java.math.BigDecimal" />
-        <result column="rate_value" property="rateValue" jdbcType="VARCHAR" javaType="java.math.BigDecimal" />
-        <result column="rate" property="rate" jdbcType="VARCHAR" javaType="java.math.BigDecimal"/>
+        <result column="gross_margin" property="grossMargin" jdbcType="VARCHAR" javaType="java.math.BigDecimal" nullValue="0"/>
+        <result column="rate_value" property="rateValue" jdbcType="VARCHAR" javaType="java.math.BigDecimal" nullValue="0"/>
+        <result column="rate" property="rate" jdbcType="VARCHAR" javaType="java.math.BigDecimal" nullValue="0"/>
         <result column="term_of_validity" property="termofValidity" jdbcType="DATE" javaType="java.sql.Date"/>
         <result column="remarks" property="remarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>
