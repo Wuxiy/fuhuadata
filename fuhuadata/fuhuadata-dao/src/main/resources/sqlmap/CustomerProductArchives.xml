@@ -23,7 +23,7 @@
 		<result property="priceType" column="price_type" jdbcType="INT" javaType="java.lang.Integer" />
 		<result property="advisePrice" column="advise_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result property="purchasePrice" column="purchase_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
-		<result property="deliveryTime" column="delivery_time" jdbcType="DATE" javaType="java.util.Date" />
+		<result property="deliveryTime" column="delivery_time" jdbcType="DATE" javaType="java.lang.String" />
 		<result property="InternalTransportMode" column="Internal_transport_mode" jdbcType="INT" javaType="java.lang.Integer" />
 		<result property="InternalTransportPrice" column="Internal_transport_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result property="factoryId" column="factory_id" jdbcType="VARCHAR" javaType="java.lang.String" />

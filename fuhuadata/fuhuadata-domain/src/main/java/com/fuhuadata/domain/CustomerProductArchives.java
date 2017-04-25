@@ -60,7 +60,7 @@ public class CustomerProductArchives {
 	private BigDecimal purchasePrice;
 	
     /**交货时间**/
-	private Date deliveryTime;
+	private String deliveryTime;
 	
     /**内运方式,0空，1汽运+江运，2汽运，3江运**/
 	private Integer InternalTransportMode;
@@ -462,15 +462,15 @@ public class CustomerProductArchives {
 	public void setPurchasePrice(BigDecimal purchasePrice) {
 		this.purchasePrice = purchasePrice;
 	}
-	
-	public Date getDeliveryTime() {
+
+	public String getDeliveryTime() {
 		return deliveryTime;
 	}
-	
-	public void setDeliveryTime(Date deliveryTime) {
+
+	public void setDeliveryTime(String deliveryTime) {
 		this.deliveryTime = deliveryTime;
 	}
-	
+
 	public Integer getInternalTransportMode() {
 		return InternalTransportMode;
 	}
