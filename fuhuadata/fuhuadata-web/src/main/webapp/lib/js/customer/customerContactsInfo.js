@@ -56,12 +56,11 @@ function customerContactsInfo(result) {
     if(customerVisitRecords){
         for(var i=0;i<customerVisitRecords.length;i++){
             visitRecordsTable.innerHTML += '<tr><td>'+customerVisitRecords[i].startTime+'</td>'+
-                '<td>'+customerVisitRecords[i].endTime+'</td>'+
-                '<td>'+customerVisitRecords[i].activityType+'</td>'+
-                '<td>'+customerVisitRecords[i].activityAddress+'</td>'+
-                '<td>'+customerVisitRecords[i].activityExpense+'</td>'+
-                '<td>'+customerVisitRecords[i].activityGift+'</td>'+
-                '<td>'+customerVisitRecords[i].activitySummary+'</td>'+
+                '<td>'+(customerVisitRecords[i].endTime!=undefined?customerVisitRecords[i].endTime:'')+'</td>'+
+                '<td>'+(customerVisitRecords[i].activityType!=undefined?customerVisitRecords[i].activityType:'')+'</td>'+
+                '<td>'+(customerVisitRecords[i].activityAddress!=undefined?customerVisitRecords[i].activityAddress:'')+'</td>'+
+                '<td>'+(customerVisitRecords[i].activityGift!=undefined?customerVisitRecords[i].activityGift:'')+'</td>'+
+                '<td>'+(customerVisitRecords[i].activitySummary!=undefined?customerVisitRecords[i].activitySummary:'')+'</td>'+
                 '</tr>';
         }
     }

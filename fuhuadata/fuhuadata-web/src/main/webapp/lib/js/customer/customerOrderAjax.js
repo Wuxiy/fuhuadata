@@ -100,7 +100,7 @@ function customerOrderHis(result,pn,pz) {
             tr += '<tr>';
             tr += '<td>'+ (++countItem) +'</td>';
             tr += '<td>'+(item.saleOrganizationName?item.saleOrganizationName:'')+'</td>';
-            tr += '<td><a href="/businessOrder/intoOfferorOrder?orderId='+item.orderId+'">'+(item.orderId?item.orderId:'')+'</a></td>';
+            tr += '<td><a href="'+basePath+'/businessOrder/intoOrder?orderId='+item.orderId+'">'+(item.orderId?item.orderId:'')+'</a></td>';
             tr += '<td><a href="">'+(item.ncOrderId?item.ncOrderId:'')+'</a></td>';
             tr += '<td>'+(item.amountPayable?item.amountPayable:'')+'</td>';
             tr += '<td>'+(item.floorPrice?item.floorPrice:'')+'</td>';

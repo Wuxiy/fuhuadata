@@ -168,11 +168,11 @@
                 dataType:"json",
                 contentType:"application/json",
                 success:function(result){
-                    if(result.code == 1){
-                        alert("新增成功!");
-                        window.location.href = basePath + '/customerLinkman/intoCustomerLinkmanList?customerType=$!{customerType}&customerId=$!{customerId}';
-                    }else {
-                        alert("新增失败！");
+                    if(result.code == 1) {
+                            alert("新增成功")
+                            window.location.href = basePath + '/customerLinkman/intoCustomerLinkmanList?customerType=$!{customerType}&customerId=$!{customerId}';
+                        } else {
+                        alert("新增失败,请添加默认联系人");
                     }
                 }
             });

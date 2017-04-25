@@ -170,7 +170,7 @@
         #expectIncome#, #deadline#, #intentionalProducts#,
         #businessDescribe#, #businessRemarks#, #failReason#,
         #createUserId#, #createUserName#, #lastmodifyUserId#,
-        #lastmodifyUserName#, #createTime#, #modifyTime#
+        #lastmodifyUserName#,now(), now()
         )
     </insert>
 
@@ -226,10 +226,10 @@
                 lastmodify_user_name = #lastmodifyUserName#
             </isNotNull>
             <isNotNull prepend=", " property="createTime">
-                create_time = #createTime#
+                create_time = now()
             </isNotNull>
             <isNotNull prepend=", " property="modifyTime">
-                modify_time = #modifyTime#
+                modify_time = now()
             </isNotNull>
         </dynamic>
         WHERE business_id = #businessId#

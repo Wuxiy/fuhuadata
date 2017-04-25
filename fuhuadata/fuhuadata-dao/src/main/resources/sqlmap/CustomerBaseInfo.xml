@@ -311,7 +311,7 @@
 						<isNotEmpty prepend=", " property="lastmodifyUserId">lastmodify_user_id=#lastmodifyUserId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="lastmodifyUserName">lastmodify_user_name=#lastmodifyUserName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="createTime">create_time=#createTime#</isNotEmpty>
-						<isNotEmpty prepend=", " property="modifyTime">modify_time=#modifyTime#</isNotEmpty>
+						<isNotEmpty prepend=", " property="modifyTime">modify_time=now()</isNotEmpty>
 						<isNotEmpty prepend=", " property="priceSensitivity">price_sensitivity=#priceSensitivity#</isNotEmpty>
 						<isNotEmpty prepend=", " property="loyalty">loyalty=#loyalty#</isNotEmpty>
 						<isNotEmpty prepend=", " property="startCooperationTime">start_cooperation_time=#startCooperationTime#</isNotEmpty>
@@ -574,6 +574,7 @@
 		<![CDATA[
 				SELECT
 			base.customer_id as customerId,
+			base.nc_id as ncId,
 			base.full_name fullName,
 			GROUP_CONCAT(nature.nature) enterpriseNature,
 			base.other_enterprise_nature otherEnterpriseNature,

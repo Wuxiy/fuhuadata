@@ -18,7 +18,7 @@
                             <div class="btn-group btn-group-xs panel-heading-btn pull-right">
                                 <a class="btn btn-default" data-view="editHide" id="back">返回</a>
                                 <button id="edit" data-btn="edit" data-view="editHide"  class="btn btn-primary" type="button" lang="zh">
-                                    编辑
+                                编辑
                                 </button>
                                 <a class="btn btn-primary hidden" target="_blank" id="offer">报价</a>
                             </div>
