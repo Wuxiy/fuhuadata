@@ -82,9 +82,14 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
             if (2==customerType){
                 ncid=customerInfoToNC.sendCustomerInfo(customerBaseInfo);
             }
-
-            List<BusinessOrderProduct> orderProducts = orderToNc.getOrderProductsById(orderProductsId);
-            String xmlName= businessOrderToXML(orderBaseInfo, orderProducts,ncid);
+            String xmlName=null;
+            if (orderProductsId.size()!=0) {
+                List<BusinessOrderProduct> orderProducts = orderToNc.getOrderProductsById(orderProductsId);
+                xmlName = businessOrderToXML(orderBaseInfo, orderProducts, ncid);
+            }else {
+                log.error("-----没有订单产品无法提交NC-----");
+                return "";
+            }
         /*
         将xml文件传送到nc端
          */
@@ -225,8 +230,16 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
             if(orderBaseInfo.getSaleOrganizationId()!=null) {
                 nodeValue.put("pk_org", "" + orderBaseInfo.getSaleOrganizationId());
                 nodeValue.put("pk_org_v","" + orderBaseInfo.getSaleOrganizationId());
+                nodeValue.put("csettleorgvid",""+orderBaseInfo.getSaleOrganizationId());
+                nodeValue.put("csettleorgid",""+orderBaseInfo.getSaleOrganizationId());
+                nodeValue.put("carorgvid",""+orderBaseInfo.getSaleOrganizationId());
+                nodeValue.put("carorgid",""+orderBaseInfo.getSaleOrganizationId());
+                nodeValue.put("csettleorgvid",""+orderBaseInfo.getSaleOrganizationId());
+                nodeValue.put("csettleorgid",""+orderBaseInfo.getSaleOrganizationId());
+                nodeValue.put("carorgvid",""+orderBaseInfo.getSaleOrganizationId());
+                nodeValue.put("carorgid",""+orderBaseInfo.getSaleOrganizationId());
             }
-
+            nodeValue.put("ctrademodeid","10");
             nodeValue.put("ccustomerid",""+ncid);
             if (orderBaseInfo.getTradeCountry()!=null) {
                 nodeValue.put("ctradecountryid", "" + orderBaseInfo.getTradeCountry());
@@ -235,11 +248,13 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
             }
             if (orderBaseInfo.getDepartmentId()!=null) {
                 nodeValue.put("cdeptvid", "" + orderBaseInfo.getDepartmentId());
+                nodeValue.put("cdeptid","" + orderBaseInfo.getDepartmentId());
             }
             if (orderBaseInfo.getCurrency()!=null) {
                 nodeValue.put("corigcurrencyid", "" + orderBaseInfo.getCurrency());
                 //本位币
                 nodeValue.put("ccurrencyid","" + orderBaseInfo.getCurrency());
+                nodeValue.put("cusdcurrencyid","" + orderBaseInfo.getCurrency());
             }
 
             //nc长期协议的 协议类型
@@ -314,6 +329,7 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                 String materialCode=orderToNc.getCodeByWareId(wareId);
                 if(materialCode!=null){
                     productMap.put("cmaterialvid",""+materialCode);
+                    productMap.put("vbdef1",""+materialCode);
                 }
                 //内部供货单位
                 //productMap.put("",orderProduct.getInternalSupplyId());
@@ -321,7 +337,12 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                     productMap.put("nnum", "" + orderProduct.getMainProductAmount());
                 }
                 if (orderProduct.getContractPrice()!=null) {
+                    //销售单价
                     productMap.put("norigprice", "" + orderProduct.getContractPrice());
+                    //主本币单价
+                    productMap.put("nprice","" + orderProduct.getContractPrice());
+                    //主美元单价
+                    productMap.put("norigprice",""+orderProduct.getContractPrice().multiply(orderBaseInfo.getNusdexchgrate()));
                 }
                 if (orderProduct.getCommissionPrice()!=null) {
                     productMap.put("vbdef20", "" + orderProduct.getCommissionPrice());
