@@ -283,9 +283,15 @@ CRM.productArchivesList.getPhysicalProperitiesDataHandler = function () {
 // 侧栏角色树的点击事件
 CRM.productArchivesList.asideTreeOnClick = function(event, modLeftId, treeNode) {
     var page = CRM.productArchivesList;
+    page.resetPage();
 
-    // 渲染表单
-    page.renderPage(treeNode.id);
+    if (!/^c_/.test(treeNode.id)) {
+
+        // 渲染表单
+        page.renderPage(treeNode.id);
+    }
+
+    // console.log(/^c_/.test(treeNode.id));
 };
 
 // 渲染产品树到侧边栏
@@ -309,7 +315,7 @@ CRM.productArchivesList.renderProTreeToAside = function (data) {
         },
         id       = page.asideTree.attr('id'),
         treeObj  = null;
-    console.log(CRM.toArr(data));
+    // console.log(CRM.toArr(data));
     page.proTreeData = CRM.toArr(data); // 将角色树的数据保存到page对象属性
     $.fn.zTree.init(page.asideTree, setting, page.proTreeData);
     // treeObj = $.fn.zTree.getZTreeObj(id);

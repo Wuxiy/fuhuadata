@@ -55,7 +55,7 @@
                             <label for="areaId" class=" control-label col-xs-1" lang="zh">地区分类<sup data-view="editView" class="not-null hidden">*</sup></label>
                             <div class="col-xs-2">
                                 <div class="input-group">
-                                    <input id="areaId" data-val="" disabled name="areaId" class="form-control">
+                                    <input id="areaId" data-val="" readonly name="areaId" class="form-control">
                                     <div class="input-group-btn">
                                         <button id="aISearch" disabled class="btn btn-xs btn-default" data-control="on" type="button" data-toggle="modal" data-target="#cbtModal"><span class="glyphicon glyphicon-search"></span></button>
                                     </div>
