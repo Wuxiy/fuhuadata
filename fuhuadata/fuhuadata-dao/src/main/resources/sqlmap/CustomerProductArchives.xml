@@ -451,7 +451,7 @@
 		,a.capital_interest_price = b.capital_interest_price
 		,a.unit_use_rate = b.unit_use_rate
 		where b.archive_product_id = a.id
-		and a.id = #businessProductId#
+		and b.id = #businessProductId#
 	</update>
 
 	<insert id="ADD" parameterClass="CustomerProductArchives">

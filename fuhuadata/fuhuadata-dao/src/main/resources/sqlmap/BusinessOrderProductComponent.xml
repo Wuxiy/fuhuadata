@@ -145,6 +145,7 @@
   <update id="update" parameterClass="BusinessOrderProductComponent">
         update business_order_product_component
         SET
+        1=1
         <isNotEmpty prepend="," property="productId">
             product_id = #productId#
         </isNotEmpty>
