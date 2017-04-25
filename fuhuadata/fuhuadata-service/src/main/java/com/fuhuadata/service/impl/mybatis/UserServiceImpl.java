@@ -135,33 +135,44 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
         return roots;
     }
 
+    // 根据部门 ids 获取组织和部门的树
     private List<MixNodeVO> getTreeFromDeptIds(HashSet<String> deptIds, Map<String, MixNodeVO> lookup) {
         List<MixNodeVO> roots = Lists.newArrayList();
+        HashSet<String> rootIds = Sets.newHashSet();
 
         for (String deptId : deptIds) {
             MixNodeVO nodeVO = MixNodeVO.cloneNode(UserTreeCache.get(deptId));
 
-            lookup.put(deptId, nodeVO);
-            String pid = nodeVO.getPid();
-            while (!pid.equals("0")) {
-                MixNodeVO pNode = lookup.get(pid);
+            while (nodeVO != null) {
 
+                String cid = nodeVO.getCid();
+                if (lookup.get(cid) != null) {
+                    // 作为父节点添加过，所以设置其子节点
+                    nodeVO.setNodes(lookup.get(cid).getNodes());
+                }
+                lookup.put(cid, nodeVO);
+
+                if (nodeVO.isRoot()) {
+                    if (!rootIds.contains(cid)) {
+                        roots.add(nodeVO);
+                        rootIds.add(cid);
+                    }
+                    break;
+                }
+
+                String pid = nodeVO.getPid();
+                MixNodeVO pNode = lookup.get(pid);
                 if (pNode != null) {
                     pNode.addChildNode(nodeVO);
                 } else {
                     pNode = MixNodeVO.cloneNode(UserTreeCache.get(pid));
-                    pNode.addChildNode(nodeVO);
-                    lookup.put(pNode.getCid(), pNode);
-                    if (pNode.getType() == NodeType.ORG.key) {
-                        lookup.put(pNode.getNcId(), pNode);
+                    if (pNode != null) {
+                        pNode.addChildNode(nodeVO);
+                        lookup.put(pNode.getCid(), pNode);
                     }
                 }
 
-                pid = pNode.getPid();
                 nodeVO = pNode;
-                if (pid.equals("0") && roots.size() == 0) {
-                    roots.add(pNode);
-                }
             }
         }
         return roots;

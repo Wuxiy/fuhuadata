@@ -120,13 +120,13 @@
                                     </caption>
                                     <thead>
                                     <tr>
-                                        <th class="text-center">用户编号</th>
-                                        <th class="text-center">用户名称</th>
-                                        <th class="text-center">关联生效日期</th>
-                                        <th class="text-center">关联失效日期</th>
-                                        <th class="text-center">分配地区</th>
-                                        <th class="text-center">授权人</th>
-                                        <th class="text-center">授权时间</th>
+                                        <th width="10%" class="text-center">用户编号</th>
+                                        <th width="10%" class="text-center">用户名称</th>
+                                        <th width="10%" class="text-center">关联生效日期</th>
+                                        <th width="10%" class="text-center">关联失效日期</th>
+                                        <th width="40%" class="text-center">分配地区</th>
+                                        <th width="10%" class="text-center">授权人</th>
+                                        <th width="10%" class="text-center">授权时间</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -134,13 +134,13 @@
                                     <%if(data.length>0) { %>
 
                                         <%for(var i=0;i<data.length;i++){%>
-                                        <tr data-user-id="<%=data[i].id%>">
+                                        <tr data-user-id="<%=data[i].userId%>">
                                             <td><%=data[i].id%></td>
                                             <td><%=data[i].name%></td>
                                             <td><%=data[i].beginTime%></td>
                                             <td><%=data[i].endTime%></td>
                                             <td data-id="<%=data[i].areasId%>">
-                                                <label class="control-label j-area-label"><%=data[i].areasName%></label>
+                                                <label class="j-area-label text-center"><%=data[i].areasName%></label>
                                                 <button name="areaTree" class="btn-link pull-right j-area-tree" data-toggle="modal" data-target="#multiple" type="button">
                                                     <span class="glyphicon glyphicon-search"></span>
                                                 </button>
@@ -241,7 +241,7 @@
             </div>
             <div class="modal-body j-modal-body">
                 <div class="row">
-                    <div class="col-xs-7" style="padding-left: 4px">待选地区</div>
+                    <div class="col-xs-7 j-" style="padding-left: 4px">待选地区</div>
                     <div class="col-xs-5" style="padding-left: 4px">已选地区</div>
                 </div>
                 <div class="row">

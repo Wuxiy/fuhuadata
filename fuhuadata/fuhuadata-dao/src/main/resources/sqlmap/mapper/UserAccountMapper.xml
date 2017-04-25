@@ -28,8 +28,8 @@
     <resultMap id="UserAreasMap" type="com.fuhuadata.domain.mybatis.UserAccount"
                extends="BaseResultMap">
         <collection property="areas" columnPrefix="area_"
-                    ofType="com.fuhuadata.domain.mybatis.AreaCode"
-                    resultMap="com.fuhuadata.dao.mapper.AreaCodeMapper.BaseResultMap"/>
+                    ofType="com.fuhuadata.domain.mybatis.AreaCl"
+                    resultMap="com.fuhuadata.dao.mapper.AreaClMapper.BaseResultMap"/>
     </resultMap>
 
     <!-- p_user_account 缩写 ua -->
@@ -67,6 +67,10 @@
     </sql>
     <sql id="JobJoin">
         INNER JOIN p_job jo ON jo.psncode=ua.code
+    </sql>
+    <sql id="LeftJoinAreas">
+        LEFT JOIN p_user_area us_ar ON us_ar.user_id=ua.id
+        LEFT JOIN t_areacl ac ON ac.pk_areacl=us_ar.area_id
     </sql>
 
     <select id="listUserByDeptId" resultMap="BaseResultMap">

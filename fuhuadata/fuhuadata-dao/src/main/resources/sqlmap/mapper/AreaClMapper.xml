@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.AreaClMapper">
+    <resultMap id="BaseResultMap" type="com.fuhuadata.domain.mybatis.AreaCl">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="pk_areacl" jdbcType="VARCHAR" property="pkAreacl"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="pk_fatherarea" jdbcType="VARCHAR" property="pkFatherarea"/>
+    </resultMap>
+
+    <sql id="BaseColumns">
+        ac.pk_areacl,
+        ac.code,
+        ac.name,
+        ac.pk_fatherarea
+    </sql>
+
+    <sql id="UserAreaPrefixColumns">
+        ac.pk_areacl user_area_pk_areacl,
+        ac.code user_area_code,
+        ac.name user_area_name,
+        ac.pk_fatherarea user_area_pk_fatherarea
+    </sql>
+
+    <sql id="FromTable">
+        FROM t_areacl ac
+    </sql>
+
+    <sql id="InnerJoinUserArea">
+        INNER JOIN p_user_area us_ar ON us_ar.area_id=ac.pk_areacl
+    </sql>
+
+    <select id="listAreasByUserId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumns"/>
+        <include refid="FromTable"/>
+        <include refid="InnerJoinUserArea"/>
+        WHERE us_ar.user_id=#{userId}
+    </select>
+
+    <select id="listForeignAreas" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumns"/>
+        <include refid="FromTable"/>
+        WHERE ((ac.code &lt; '91' and ac.code &gt; '9') or ac.name='其他')
+    </select>
+</mapper>
