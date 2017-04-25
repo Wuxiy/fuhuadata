@@ -16,7 +16,7 @@ public interface CustomerSubcompanyInfoManager {
 	 * @param customerSubcompanyInfo
 	 * @return
 	 */
-    public CustomerSubcompanyInfo addCustomerSubcompanyInfo(CustomerSubcompanyInfo customerSubcompanyInfo) ;
+    public CustomerSubcompanyInfo addCustomerSubcompanyInfo(CustomerSubcompanyInfo customerSubcompanyInfo,List<CustomerEnterpriceNature> list) ;
     
 	 /**
      * 按照主键id更新customerSubcompanyInfo，请重新new CustomerSubcompanyInfo 的更新对象，设置要更新的字段

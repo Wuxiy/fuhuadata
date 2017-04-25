@@ -753,10 +753,13 @@
 				LEFT JOIN customer_base_info base on base.customer_id = a.customer_id
 				LEFT JOIN product_info b on a.product_id = b.product_id
 				LEFT JOIN product_ware c on c.product_info_id = b.product_id
-				WHERE a.customer_id = #customerId#
+				WHERE
+					a.ware_id = c.ware_id
+				AND
+				a.customer_id = #customerId#
 		]]>
 	</select>
-	
+
 	<select id="GET-PAGE" resultMap="CUSTOMERPRODUCTARCHIVES-MAP" parameterClass="QueryCustomerProductArchives">
 		<![CDATA[
 			SELECT * FROM customer_product_archives

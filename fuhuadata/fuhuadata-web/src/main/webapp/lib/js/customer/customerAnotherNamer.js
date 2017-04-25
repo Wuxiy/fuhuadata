@@ -147,11 +147,7 @@ function addAnotherName() {
             "propertyRemarks":$('#propertyRemarks').val(),
             "property":checkboxAddtext(),
             "createTime": getTime(),
-            "createUserId": 2,
-            "createUserName":"杨洋",
-            "modifyTime":"2017-03-02 11:44:49",
-            "lastmodifyUserId": 1,
-            "lastmodifyUserName": "胡向阳"
+
         },
         "customerEnterpriceNatures":checkboxarrAdd()
     }

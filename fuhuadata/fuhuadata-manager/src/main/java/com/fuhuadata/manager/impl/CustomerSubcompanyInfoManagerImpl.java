@@ -27,8 +27,13 @@ public class CustomerSubcompanyInfoManagerImpl implements CustomerSubcompanyInfo
 	private CustomerBaseInfoDao customerBaseInfoDao;
 
 
-    public CustomerSubcompanyInfo addCustomerSubcompanyInfo(CustomerSubcompanyInfo customerSubcompanyInfo) {
+	@Transactional
+    public CustomerSubcompanyInfo addCustomerSubcompanyInfo(CustomerSubcompanyInfo customerSubcompanyInfo,List<CustomerEnterpriceNature> list) {
+		if(list!=null&&list.size()>0) {
+			customerBaseInfoDao.batchAddNature(list);
+		}
     	return customerSubcompanyInfoDao.addCustomerSubcompanyInfo(customerSubcompanyInfo);
+
     }
 
     @Transactional
