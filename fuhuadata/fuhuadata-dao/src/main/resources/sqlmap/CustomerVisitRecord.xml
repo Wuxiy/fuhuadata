@@ -58,8 +58,11 @@
 				base.customer_id = #customerId#
 			</isNotEmpty>
 			<isNotNull prepend=" AND " property="userId">
-			user_id = #userId#
+				user_id = #userId#
 			</isNotNull>
+			<isNotEmpty prepend=" AND " property="userName">
+				user_name like concat('%',#userName#,'%')
+			</isNotEmpty>
 				<isNotNull prepend=" AND " property="startTime">
 					<![CDATA[
 					start_time >= #startTime#
@@ -100,7 +103,7 @@
 			user_id = #userId#
 		</isNotNull>
 				<isNotNull prepend=" AND " property="userName">
-			user_name = #userName#
+			user_name like concat('%',#userName#,'%')
 		</isNotNull>
 				<isNotNull prepend=" AND " property="startTime">
 			start_time = #startTime#
