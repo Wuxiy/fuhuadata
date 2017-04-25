@@ -93,6 +93,7 @@
                         <label class="col-xs-1 control-label" lang="zh">贸易方式<sup data-view="editView" class="not-null hidden">*</sup></label>
                         <div class="col-xs-2">
                             <select class="form-control" id="tradeType" data-control="on" disabled>
+                                <option value="">——请选择——</option>
                                 <option value="0">一般贸易</option>
                                 <option value="1">其他</option>
                             </select>
@@ -504,7 +505,6 @@
                                     '<td>'+ifEmpty(businessOrderProductLists[i].deliveryTime)+'</td>'+
                                     '<td>'+ifEmpty(businessOrderProductLists[i].minPrice)+'</td>'+
 
-<<<<<<< HEAD
                                     '<td><a href="'+basePath+'/businessProduct/intoDocumentary?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&edit=1'+'">查看</a></td>'+
                                     '<td><a href="'+basePath+'/businessProduct/intoPackageRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&edit=1'+'">查看</a></td>'+
                                     '<td>'+(businessOrderProductLists[i].transformState==0?'否':'是')+'</td>'+
@@ -512,26 +512,6 @@
                                     '</tr>';
                         }
                     }
-=======
-                businessproduct.innerHTML = '';
-                for(var i=0;i<businessOrderProductLists.length;i++){
-                    businessproduct.innerHTML += '<tr>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].productCode)+'</td>'+
-                            '<td><a href="'+basePath+'/businessProduct/intoProductBasicInfoRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'"></a>'+ifEmpty(businessOrderProductLists[i].productName)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].categoryName)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].brand)+'</td>'+
-                            '<td><a href="'+basePath+'/businessProduct/intoProductRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&productRequireId='+businessOrderProductLists[i].orderId+'"></a>'+ifEmpty(businessOrderProductLists[i].specification)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].mainProductAmount)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].cupboardPerNumber)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].cupboardType)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].cupboardNumber)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].deliveryTime)+'</td>'+
-                            '<td>'+ifEmpty(businessOrderProductLists[i].minPrice)+'</td>'+
-                            '<td><a href="'+basePath+'/businessProduct/intoDocumentary?businessProductId='+businessOrderProductLists[i].businessProductId+'">查看</a></td>'+
-                            '<td><a href="'+basePath+'/businessProduct/intoPackageRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'">查看</a></td>'+
-                            '<td><input type="checkbox" class="form-control" name="cellcheckbox" value="'+businessOrderProductLists[i].documentaryRequire+'" /></td>'+
-                            '</tr>';
->>>>>>> 1f22868ed827862af27be4238a45225b6d57d398
                 }
             }
         })

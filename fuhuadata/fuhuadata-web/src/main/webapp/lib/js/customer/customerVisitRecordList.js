@@ -52,14 +52,14 @@ function visitList(result) {
     if(ResultData) {
         for (var i = 0; i < ResultData.length; i++) {
             visitList.innerHTML += '<tr>' +
-                '<td>' + ResultData[i].startTime + '</td>' +
-                '<td>' + ResultData[i].endTime + '</td>' +
+                '<td>' + (ResultData[i].startTime!=undefined?ResultData[i].startTime:'') + '</td>' +
+                '<td>' + (ResultData[i].endTime!=undefined?ResultData[i].endTime:'') + '</td>' +
                 '<td>' + replace(ResultData[i].activityType, ResultData[i].activityRemarks) + '</td>' +
-                '<td>' + ResultData[i].activityAddress + '</td>' +
-                '<td>' + ResultData[i].activityExpens + '</td>' +
-                '<td>' + ResultData[i].name + '</td>' +
-                '<td>' + ResultData[i].activityGift + '</td>' +
-                '<td>' + ResultData[i].activitySummary + '</td>' +
+                '<td>' + (ResultData[i].activityAddress!=undefined?ResultData[i].activityAddress:'') + '</td>' +
+                '<td>' + (ResultData[i].activityExpens!=undefined?ResultData[i].activityExpens:'') + '</td>' +
+                '<td>' + (ResultData[i].name!=undefined?ResultData[i].name:'') + '</td>' +
+                '<td>' + (ResultData[i].activityGift!=undefined?ResultData[i].activityGift:'') + '</td>' +
+                '<td>' + (ResultData[i].activitySummary!=undefined?ResultData[i].activitySummary:'') + '</td>' +
                 '</tr>';
         }
     }

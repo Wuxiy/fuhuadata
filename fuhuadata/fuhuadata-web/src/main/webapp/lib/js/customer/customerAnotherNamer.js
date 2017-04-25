@@ -22,10 +22,12 @@ $(document).ready(function(){
         if(fullNameAdd == ''||xingzhiAdd.length<0){
             alert('请完善表单必填项');
             return false;
-        }else if($("#other:checked")&&propertyRemarksAdd == ''){
-            alert('请输入企业性质备注');
-            return false;
-        }else{
+        }
+        // else if($("#other:checked")&&propertyRemarksAdd == ''){
+        //     alert('请输入企业性质备注');
+        //     return false;
+        // }
+        else{
             upData(basePath+'/customerSubcompanyInfo/addCustomerSubcompanyInfo','POST',addAnotherName(),"application/json");
             // location.reload();
         }
@@ -39,16 +41,18 @@ $(document).ready(function(){
         if(fullName == ''||xingzhi.length<0){
             alert('请完善表单必填项');
             return false;
-        }else if($("#otherAdd:checked")&&propertyRemarks == ''){
-            alert('请输入企业性质必填项');
-            return false;
-        }else{
+        }
+        // else if($("#otherAdd:checked")&&propertyRemarks == ''){
+        //     alert('请输入企业性质必填项');
+        //     return false;
+        // }
+        else{
             upData(basePath+'/customerSubcompanyInfo/updateCustomerSubcompanyInfoById','POST',updateInfo(),"application/json");
             /*location.reload();*/
         }
 
     });
-})
+});
 
 //渲染List
 function anotherNamerList(result) {
