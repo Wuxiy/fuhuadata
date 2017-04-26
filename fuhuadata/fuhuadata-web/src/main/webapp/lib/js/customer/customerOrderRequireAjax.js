@@ -8,7 +8,7 @@ function ajaxParam() {
 
     var obj = {
         customerId:$('#customerId').val(),
-        customerType:$('#customerType').val()
+        customerType:$('#customerType').val(),
     };
 
     return obj;
@@ -25,7 +25,7 @@ function reconstructionData(data) {
 
             var obj = {
                 name : item.name,
-                productId : item.productId
+                wareId : item.wareId
             };
 
             if (item.otherDocumentaryRequire) {obj.otherDocumentaryRequire=item.otherDocumentaryRequire}
@@ -42,17 +42,17 @@ function reconstructionData(data) {
 
                 if (d.reportCompanyTitle) {obj.reportCompanyTitle=d.reportCompanyTitle}
                 if (d.guaranteeSlip) {obj.guaranteeSlip=d.guaranteeSlip}
-                if (d.coo) {obj.coo=d.coo}
+                if (d.coo) {obj.coo=d.coo} //
                 if (d.cooContent) {obj.cooContent=d.cooContent}
                 if (d.dangerousCertificate) {obj.dangerousCertificate=d.dangerousCertificate}
 
-                if (d.beneficiaryCertification) {obj.beneficiaryCertification=d.beneficiaryCertification}
+                if (d.beneficiaryCertification) {obj.beneficiaryCertification=d.beneficiaryCertification} //
                 if (d.fumigationCertificate) {obj.fumigationCertificate=d.fumigationCertificate}
                 if (d.msds) {obj.msds=d.msds}
                 if (d.telexRelease) {obj.telexRelease=d.telexRelease}
                 if (d.releaseDestination) {obj.releaseDestination=d.releaseDestination}
 
-                if (d.bankBill) {obj.bankBill=d.bankBill}
+                if (d.bankBill) {obj.bankBill=d.bankBill} //
                 if (d.examiningReport) {obj.examiningReport=d.examiningReport}
                 if (d.packingDeclaration) {obj.packingDeclaration=d.packingDeclaration}
                 if (d.importContainerWeightDeclaration) {obj.importContainerWeightDeclaration=d.importContainerWeightDeclaration}
@@ -78,7 +78,7 @@ function reconstructionTraData(data) {
 
             var obj = {
                 name : item.name,
-                productId : item.productId
+                wareId : item.wareId
             };
 
             if (item.shippingAgentRequire) {obj.shippingAgentRequire=item.shippingAgentRequire}
@@ -119,7 +119,7 @@ function reconstructionTraData(data) {
 // 筛选
 function screenData(obj,data,callBack){
     jQuery.each(data,function (n,item) {
-        if(obj.productId == item.productId){
+        if(obj.wareId == item.wareId){
             //渲染数据
             callBack(item);
             //退出循环
@@ -179,7 +179,7 @@ function renderSelect(data,id,el) {
 
        var obj = {
            name : item.name,
-           productId : item.productId,
+           wareId : item.wareId,
        };
 
        arr.push(obj);

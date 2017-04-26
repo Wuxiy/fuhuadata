@@ -22,7 +22,6 @@
                             <button id="edit" data-btn="edit" data-view="editHide" class="btn btn-xs btn-primary panel-heading-btn pull-right hidden" type="button" lang="zh">
                                 编辑
                             </button>
-
                         </div>
 
                         <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right">
