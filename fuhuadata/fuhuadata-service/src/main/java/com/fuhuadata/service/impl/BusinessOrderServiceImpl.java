@@ -207,6 +207,8 @@ public class BusinessOrderServiceImpl implements BusinessOrderService {
         Result result = new Result();
         try{
             if(businessOrderDO.getBusinessOrder()!=null) {
+                //转化之前先把  订单的状态置为-2 报价失败
+                businessOrderDO.getBusinessOrder().setStatus(-2);
                 result.setSuccess(businessOrderManager.updateBusinessOrderByOrderId(businessOrderDO.getBusinessOrder()));
             }
             if(businessOrderDO.getBusinessOrderProducts()!=null&&businessOrderDO.getBusinessOrderProducts().length>0){
