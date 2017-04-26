@@ -329,7 +329,7 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                 String materialCode=orderToNc.getCodeByWareId(wareId);
                 if(materialCode!=null){
                     productMap.put("cmaterialvid",""+materialCode);
-                    productMap.put("vbdef17",""+materialCode);
+                    productMap.put("vbdef2",""+materialCode);
                 }
                 //内部供货单位
                 //productMap.put("",orderProduct.getInternalSupplyId());
@@ -389,7 +389,7 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                 }
                 //货柜数
                 if (orderProduct.getCupboardNumber()!=null) {
-                    productMap.put("vbdef4", "" + orderProduct.getCupboardNumber());
+                    productMap.put("vbdef17", "" + orderProduct.getCupboardNumber());
                 }
                 //货柜类型
                 if (orderProduct.getCupboardType()!=null) {
