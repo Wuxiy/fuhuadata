@@ -357,6 +357,7 @@
     var customerId = $('#customerId').val();
     var editId = $('#editId').val();
 
+    console.log(productRequireId);
     var productId = '';
     var wareId = '';
     var costtable = document.getElementById('costtable');
@@ -466,7 +467,7 @@
         $('#next').click(function () {
             var businessProductId = $('#businessProductId').val();
             if(businessProductId != ''){
-                var productRequireId = $('#productRequireId').val();
+                productRequireId = $('#productRequireId').val();
                 window.location.href = basePath + '/businessProduct/intoProductRequire?businessProductId=' + businessProductId + '&orderId=' + orderId + '&customerId=' + customerId + '&productRequireId=' + productRequireId + '&edit=' + editId;
             }else{
                 var isup = true;
@@ -670,7 +671,7 @@
                             costtable.innerHTML = '';
                             for(var i=0;i<components.length;i++){
                                 costtable.innerHTML += '<tr>'+
-                                        '<td data-id="'+components[i].componentId+'" >'+ifEmpty(components[i].componentName)+'</td>'+
+                                        '<td data-id="'+components[i].componentId+'" data-fid="'+components[i].id+'">'+ifEmpty(components[i].componentName)+'</td>'+
                                         '<td><input data-control="on" name="consumption" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].consumption)+'" ></td>'+
                                         '<td><input data-control="on" name="price" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].price)+'" ></td>'+
                                         '<td><input name="cost" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].cost)+'" disabled ></td>'+
@@ -722,7 +723,7 @@
                                 costtable.innerHTML = '';
                                 for(var i=0;i<components.length;i++){
                                     costtable.innerHTML += '<tr>'+
-                                            '<td data-id="'+components[i].componentId+'" >'+ifEmpty(components[i].componentName)+'</td>'+
+                                            '<td data-id="'+components[i].componentId+'" data-fid="'+components[i].id+'">'+ifEmpty(components[i].componentName)+'</td>'+
                                             '<td><input data-control="on" name="consumption" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].consumption)+'" ></td>'+
                                             '<td><input data-control="on" name="price" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].price)+'" ></td>'+
                                             '<td><input name="cost" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].cost)+'" disabled></td>'+
@@ -870,16 +871,19 @@
         tr.each(function () {
             var td = $(this).find('td'),
             obj = {
-                "id":td.eq(0).attr('data-fid'),
+                /*"id":(td.eq(0).attr('data-fid') == undefined?'':td.eq(0).attr('data-fid')),*/
                 "productId":$('#name').attr('data-productId'),
                 "wareId":$('#name').attr('data-wareId'),
                 "componentId":td.eq(0).attr('data-id'),
                 "componentName":td.eq(0).text(),
-                "consumption":td.eq(1).find('input').val(),
-                "price":td.eq(2).find('input').val(),
+                "consumption":td.eq(1).find('input[name="consumption"]').val(),
+                "price":td.eq(2).find('input[name="price"]').val(),
                 "cost":td.eq(3).find('input').val(),
                 "remark":td.eq(4).find('input').val()
             };
+            /*if((td.eq(0).attr('data-fid')== undefined){
+
+            }*/
             arr.push(obj);
         })
         return arr;
