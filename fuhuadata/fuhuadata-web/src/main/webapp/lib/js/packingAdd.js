@@ -64,7 +64,7 @@ $('#openFile').on('change.file',function (e) {
 
     console.log(data);
     CRM.ajaxCall({
-        url         : '/upload/uploadFileAll',
+        url         : basePath + '/upload/uploadFileAll',
         type        : 'POST',
         data        : data,
         dataType: 'JSON',
