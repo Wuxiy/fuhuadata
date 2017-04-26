@@ -608,7 +608,7 @@
                 _html += (ResultData[i].businessState!=0)?'<td>'+businessState[ResultData[i].businessState]+'</td>':
                         '<td><a data-toggle="dropdown" class="dropdown"  href="#">'+(ResultData[i].businessState!=undefined?businessState[ResultData[i].businessState]:'')+'</a>' +
                         '<ul class="dropdown-menu pull-right"> ' +
-                        '<li><a href="/businessOrder/intoBusinessConverse?businessId='+
+                        '<li><a href="'+basePath+'/businessOrder/intoBusinessConverse?businessId='+
                         (ResultData[i].businessId!=undefined?ResultData[i].businessId:'')+'">报价</a></li>' +
                         '<li><a data-val="'+(ResultData[i].businessId!=undefined?ResultData[i].businessId:'')+'" data-toggle="modal" href="#rModal">失败</a></li> ' +
                         '</ul></td>';
