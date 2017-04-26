@@ -21,7 +21,7 @@
                             订舱出运要求
                         </h3>
                     </div>
-                    <div class="panel-body panel-edit">
+                    <div id="billPanel" class="panel-body panel-edit">
                         <div class="form-horizontal">
                             <div class="form-group">
                                 <label class="control-label col-xs-2" lang="zh">对船运公司要求</label>
