@@ -756,6 +756,7 @@
 		select
 				name,
 				product_id productId,
+				ware_id wareId,
 				shipping_agent_require shippingAgentRequire ,
 				package_require packageRequire,
 				goods_type goodsType,
