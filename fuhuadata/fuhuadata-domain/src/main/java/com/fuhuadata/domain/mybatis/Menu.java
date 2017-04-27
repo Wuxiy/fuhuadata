@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fuhuadata.domain.plugin.Treeable;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Table(name = "p_menu")
@@ -11,6 +12,7 @@ public class Menu extends BaseEntity<Integer> implements Treeable<Integer> {
     /**
      * 菜单ID
      */
+    @NotNull
     @Id
     @Column(name = "menu_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,12 +21,14 @@ public class Menu extends BaseEntity<Integer> implements Treeable<Integer> {
     /**
      * 菜单标识
      */
+    @NotNull
     @Column(name = "identity")
     private String identity;
 
     /**
      * 上级菜单ID
      */
+    @NotNull
     @Column(name = "parent_id")
     private Integer parentId;
 

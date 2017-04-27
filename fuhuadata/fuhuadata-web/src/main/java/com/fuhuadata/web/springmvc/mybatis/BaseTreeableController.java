@@ -1,5 +1,6 @@
 package com.fuhuadata.web.springmvc.mybatis;
 
+import com.alibaba.fastjson.JSON;
 import com.fuhuadata.domain.mybatis.BaseEntity;
 import com.fuhuadata.domain.plugin.Treeable;
 import com.fuhuadata.domain.query.Result;
@@ -13,10 +14,14 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
@@ -143,8 +148,15 @@ public abstract class BaseTreeableController<E extends BaseEntity<ID> & Treeable
 
     @RequestMapping(value = {"/ajax/add", "/ajax/update"}, method = RequestMethod.POST)
     @ResponseBody
-    public ResultPojo ajaxAddChild(E node) {
+    public ResultPojo ajaxAddChild(@Valid E node, BindingResult bindingResult) {
         Result<ID> result = new Result<ID>(true);
+
+        if (bindingResult.hasErrors()) {
+            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+            result.setSuccess(false);
+            result.setMessage(JSON.toJSONString(fieldErrors));
+            return result.getResultPojo();
+        }
 
         if (node == null) {
             result.setSuccess(false);

@@ -25,7 +25,7 @@
     <bean id="systemLogAspect" class="com.fuhuadata.web.util.SystemLogAspect"/>
 
     <!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
-    <mvc:annotation-driven>
+    <mvc:annotation-driven validator="validator">
         <mvc:message-converters register-defaults="true">
             <!-- 将StringHttpMessageConverter的默认编码设为UTF-8 -->
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
