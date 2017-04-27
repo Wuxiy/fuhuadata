@@ -217,17 +217,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
             return null;
         }
 
-        Example example = new Example(UserAccount.class);
-        example.createCriteria().andEqualTo("code", loginName);
-
-        List<UserAccount> users = getUserMapper().selectByExample(example);
-        int size = users.size();
-        if (size == 1) {
-            return users.get(0);
-        } else if (size > 1) {
-            throw new ServiceException("用户登录名：" + loginName + "不唯一");
-        }
-        return null;
+        // loginName 就是 code
+        return getUserMapper().getByCode(loginName);
     }
 
     @Override
@@ -244,6 +235,10 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
 
         // 获取当前代理对象，为了走切面
         UserAccount user = ((UserService) AopContext.currentProxy()).getUserByLoginName(loginName);
+
+        if (user == null) {
+            throw new UserNotExistsException("用户不存在");
+        }
 
         passwordService.validate(user, password);
 
