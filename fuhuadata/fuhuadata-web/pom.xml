@@ -6,6 +6,7 @@
         <groupId>com.fuhua</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+    <groupId>com.fuhua</groupId>
     <artifactId>fuhuadata-web</artifactId>
     <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
@@ -55,6 +56,25 @@
             <artifactId>jsp-api</artifactId>
         </dependency>
         <!-- servlet jsp end -->
+
+        <!-- struts begin -->
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-spring-plugin</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javassist</groupId>
+            <artifactId>javassist</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-json-plugin</artifactId>
+        </dependency>
+        <!-- struts end -->
 
         <!-- aspectj begin -->
         <dependency>
