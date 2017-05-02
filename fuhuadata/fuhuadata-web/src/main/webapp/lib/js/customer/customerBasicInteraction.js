@@ -814,7 +814,7 @@ $().ready(function() {
     $('#encyEdit').on('click.ency',function () {
 
         sessionStorage.setItem('customerUrl',window.location.href);
-        self.location = basePath + page.ENCY_SKIP;
+        self.location = page.ENCY_SKIP;
         return false;
     });
 

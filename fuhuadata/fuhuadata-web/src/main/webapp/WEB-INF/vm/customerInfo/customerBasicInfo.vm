@@ -61,12 +61,12 @@
                                 </div>
                                 <label for="saleOrganizationName" class="control-label col-xs-1" lang="zh">所属组织<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <div class="input-group">
-                                        <input id="saleOrganizationName" name="saleOrganizationName" data-toggle="dropdown" class="form-control dropdown-toggle" disabled type="text" placeholder="点击搜索按钮选择" autocomplete="off"/>
-                                        <div class="input-group-btn">
-                                            <button id="oNSearch" class="btn btn-xs btn-default" data-control="on" type="button" data-toggle="modal" data-target="#cbtModal"><span class="glyphicon glyphicon-search"></span></button>
+                                        <div class="input-group">
+                                            <input id="saleOrganizationName" name="saleOrganizationName" data-toggle="dropdown" class="form-control dropdown-toggle" disabled type="text" placeholder="点击搜索按钮选择" autocomplete="off"/>
+                                            <div class="input-group-btn">
+                                                <button id="oNSearch" class="btn btn-xs btn-default" data-control="on" type="button" data-toggle="modal" data-target="#cbtModal"><span class="glyphicon glyphicon-search"></span></button>
+                                            </div>
                                         </div>
-                                    </div>
                                 </div>
                                 <label class="col-xs-1 control-label" for="customerDutyParagraph">客户税号</label>
                                 <div class="col-xs-2"><input id="customerDutyParagraph" data-control="on" disabled name="customerDutyParagraph" class="form-control" type="text"></div>
