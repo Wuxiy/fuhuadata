@@ -93,7 +93,7 @@
                             <label class="col-xs-1 control-label">是否默认<sup class="not-null">*</sup></label>
                             <div class="col-xs-2">
                                 <select class="form-control notnull" name="items" id="isDefault">
-                                    #if($!{linkmanId.length}==1)
+                                    #if($!{isDefault}==1)
                                         <option  value="1">是</option>
                                         <option  value="0" selected>否</option>
                                     #else
