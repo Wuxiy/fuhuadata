@@ -170,7 +170,7 @@
         #expectIncome#, #deadline#, #intentionalProducts#,
         #businessDescribe#, #businessRemarks#, #failReason#,
         #createUserId#, #createUserName#, #lastmodifyUserId#,
-        #lastmodifyUserName#,now(), now()
+        #lastmodifyUserName#,now(),now()
         )
     </insert>
 
@@ -213,20 +213,11 @@
             <isNotNull prepend=", " property="failReason">
                 fail_reason = #failReason#
             </isNotNull>
-            <isNotNull prepend=", " property="createUserId">
-                create_user_id = #createUserId#
-            </isNotNull>
-            <isNotNull prepend=", " property="createUserName">
-                create_user_name = #createUserName#
-            </isNotNull>
             <isNotNull prepend=", " property="lastmodifyUserId">
                 lastmodify_user_id = #lastmodifyUserId#
             </isNotNull>
             <isNotNull prepend=" , " property="lastmodifyUserName">
                 lastmodify_user_name = #lastmodifyUserName#
-            </isNotNull>
-            <isNotNull prepend=", " property="createTime">
-                create_time = now()
             </isNotNull>
             <isNotNull prepend=", " property="modifyTime">
                 modify_time = now()

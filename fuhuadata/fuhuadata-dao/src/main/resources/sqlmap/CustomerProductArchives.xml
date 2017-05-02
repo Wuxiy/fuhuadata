@@ -715,6 +715,7 @@
 					a.ware_id = c.ware_id
 				AND
 				a.customer_id = #customerId#
+				GROUP BY a.product_id,a.ware_id
 		]]>
 	</select>
 

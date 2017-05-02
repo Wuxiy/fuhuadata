@@ -247,7 +247,7 @@
                             <tbody id="imgGroup" class="img-group">
                             <tr>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img data-name="瓶型" src="/lib/img/placeholder.png" alt="请点击添加图片" class="imgpath">
+                                    <img data-name="瓶型" src="${request.contextPath}/lib/img/placeholder.png" alt="请点击添加图片" class="imgpath">
                                     <div class="caption">
                                         <p></p>
                                         <h4>瓶型
@@ -256,7 +256,7 @@
                                     </div>
                                 </td>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img data-name="瓶身logo样例" src="/lib/img/placeholder.png" alt="请点击添加图片" class="imgpath">
+                                    <img data-name="瓶身logo样例" src="${request.contextPath}/lib/img/placeholder.png" alt="请点击添加图片" class="imgpath">
                                     <div class="caption">
                                         <p></p>
                                         <h4>瓶身logo样例
@@ -265,7 +265,7 @@
                                     </div>
                                 </td>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img data-name="瓶贴样例" src="/lib/img/placeholder.png" alt="请点击添加图片" class="imgpath">
+                                    <img data-name="瓶贴样例" src="${request.contextPath}/lib/img/placeholder.png" alt="请点击添加图片" class="imgpath">
                                     <div class="caption">
                                         <p></p>
                                         <h4>瓶贴样例
@@ -274,7 +274,7 @@
                                     </div>
                                 </td>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img data-name="封口方式" src="/lib/img/placeholder.png" alt="请点击添加图片" class="imgpath">
+                                    <img data-name="封口方式" src="${request.contextPath}/lib/img/placeholder.png" alt="请点击添加图片" class="imgpath">
                                     <div class="caption">
                                         <p></p>
                                         <h4>封口方式
@@ -283,7 +283,7 @@
                                     </div>
                                 </td>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img data-name="说明书样例" src="/lib/img/placeholder.png" alt="请点击添加图片" class="imgpath">
+                                    <img data-name="说明书样例" src="${request.contextPath}/lib/img/placeholder.png" alt="请点击添加图片" class="imgpath">
                                     <div class="caption">
                                         <p></p>
                                         <h4>说明书样例
@@ -292,7 +292,7 @@
                                     </div>
                                 </td>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img data-name="标签" src="/lib/img/placeholder.png" alt="请点击添加图片" class="imgpath">
+                                    <img data-name="标签" src="${request.contextPath}/lib/img/placeholder.png" alt="请点击添加图片" class="imgpath">
                                     <div class="caption">
                                         <p></p>
                                         <h4>标签
@@ -303,7 +303,7 @@
                             </tr>
                             <tr>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img data-name="纸箱" src="/lib/img/placeholder.png" alt="请点击添加图片" class="imgpath">
+                                    <img data-name="纸箱" src="${request.contextPath}/lib/img/placeholder.png" alt="请点击添加图片" class="imgpath">
                                     <div class="caption">
                                         <p></p>
                                         <h4>纸箱
@@ -312,7 +312,7 @@
                                     </div>
                                 </td>
                                 <td data-toggle="modal" data-target="#imgModal" class="col-xs-2 thumbnail">
-                                    <img data-name="其他" src="/lib/img/placeholder.png" alt="请点击添加图片" class="imgpath">
+                                    <img data-name="其他" src="${request.contextPath}/lib/img/placeholder.png" alt="请点击添加图片" class="imgpath">
                                     <div class="caption">
                                         <p></p>
                                         <h4>其他
@@ -572,7 +572,7 @@
                         for(var k=0;k<modelist.length;k++){
                             img_html +='<div class="col-xs-2">';
                             img_html +='<a class="thumbnail" >';
-                            img_html +='<img src="'+modelist[k].path+'" alt="通用的占位符缩略图"  style="height: 200px;">';
+                            img_html +='<img src="'+basePath+"/"+modelist[k].path+'" alt="通用的占位符缩略图"  style="height: 200px;">';
                             img_html +='<div class="caption">';
                             img_html +='<h4 class="text-info ">'+modelist[k].name+'<input style="margin-left: 15px;" type="checkbox" name="modelist" class="btn-link" data-name="'+modelist[k].name+'" data-path="'+modelist[k].path+'" disabled checked></h4>';
                             img_html +='</div>';
@@ -1196,7 +1196,7 @@
 
             thisThumbnail = el; // 取得当前缩略图框
 
-            if (!(src == '' || src == '/lib/img/placeholder.png')) {
+            if (!(src == '' || src == basePath+'/lib/img/placeholder.png')) {
 
                 imgModal.find('img').attr('src',src); // 打开模态
             }else {
@@ -1277,7 +1277,7 @@
                             for(var k=0;k<modelist.length;k++){
                                 img_html +='<div class="col-xs-2">';
                                 img_html +='<a href="#" class="thumbnail">';
-                                img_html +='<img src="'+modelist[k].path+'" alt="通用的占位符缩略图"  style="height: 200px;">';
+                                img_html +='<img src="'+basePath+"/"+modelist[k].path+'" alt="通用的占位符缩略图"  style="height: 200px;">';
                                 img_html +='<div class="caption">';
                                 img_html +='<h4 class="text-info ">'+modelist[k].name+'<input style="margin-left: 15px;" type="checkbox" name="modelist" class="btn-link" data-name="'+modelist[k].name+'" data-path="'+modelist[k].path+'"></h4>';
                                 img_html +='</div>';

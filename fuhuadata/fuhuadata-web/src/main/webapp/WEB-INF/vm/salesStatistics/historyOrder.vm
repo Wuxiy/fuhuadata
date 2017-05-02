@@ -260,7 +260,6 @@
 
         // 搜索按钮绑定事件
         $("#submit").click(function(){
-
             serach();
         });
 
@@ -412,7 +411,8 @@
             customerName:$('#customerName').val(),
             orderStatus:$('#businessState').val(),
             startTime:$('#startTime').val(),
-            endTime:$('#endTime').val()
+            endTime:$('#endTime').val(),
+            salesManId:0
         }
         return obj;
     }
@@ -487,7 +487,7 @@
                 _html += '  <td lang="zh">' + (ResultData[i].amountPayable!=undefined?ResultData[i].amountPayable:'') + '</td>';
                 _html += '  <td lang="zh">' + (ResultData[i].isComplaint == 0 ? "否" : "是") + '</td>';
                 _html += '   <td>' + (ResultData[i].isModifyPrice == 0 ? "否" : "是") + '</td>';
-                _html += '   <td>' + (ResultData[i].netProfit!=undefined?ResultData[i].netProfit:'') + '</td>';
+                _html += '   <td>' + (ResultData[i].netProfit!=undefined?ResultData[i].netProfit:0) + '</td>';
                 _html += '   <td>' + (ResultData[i].dealTime!=undefined?ResultData[i].dealTime:'') + '</td>';
                 _html += '   </tr>';
             }

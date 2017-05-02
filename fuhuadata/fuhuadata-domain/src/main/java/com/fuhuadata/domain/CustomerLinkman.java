@@ -1,11 +1,6 @@
 package com.fuhuadata.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fuhuadata.util.DateJsonDeserializer;
-import com.fuhuadata.util.DateJsonSerializer;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-
 import java.util.Date;
 
 /**

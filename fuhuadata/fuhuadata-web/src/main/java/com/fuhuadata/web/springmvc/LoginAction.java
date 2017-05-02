@@ -14,6 +14,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +64,12 @@ public class LoginAction {
     @ResponseBody
     public Set<String> getPermissions(@RequestParam Integer userId) {
         return menuService.getStringPermissions(userId);
+    }
+
+    @RequestMapping("/exception")
+    @RequiresUser
+    public void testExceptionHanlding() {
+        throw new IllegalArgumentException("非法参数错误");
     }
 
     @RequestMapping(value = "/login")

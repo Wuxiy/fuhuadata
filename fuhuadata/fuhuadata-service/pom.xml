@@ -33,12 +33,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>net.sf.json-lib</groupId>
-            <artifactId>json-lib</artifactId>
-            <version>2.1</version>
-            <classifier>jdk15</classifier>
-        </dependency>
-        <dependency>
             <groupId>com.thoughtworks.xstream</groupId>
             <artifactId>xstream</artifactId>
         </dependency>
@@ -61,6 +55,12 @@
             <artifactId>jstl</artifactId>
         </dependency>
         <!-- servlet jsp end -->
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>2.1</version>
+            <classifier>jdk15</classifier>
+        </dependency>
         <!-- apache shiro -->
         <dependency>
             <groupId>org.apache.shiro</groupId>

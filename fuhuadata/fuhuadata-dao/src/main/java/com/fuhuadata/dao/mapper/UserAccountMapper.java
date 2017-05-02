@@ -14,4 +14,6 @@ public interface UserAccountMapper extends BaseMapper<UserAccount, Integer> {
     List<String> listDeptIdsOfUserByRoleId(@Param("roleId") Integer roleId);
 
     List<Integer> listUserIdsByDeptIds(@Param("deptIds") List<String> deptIds);
+
+    UserAccount getByCode(@Param("code") String code);
 }

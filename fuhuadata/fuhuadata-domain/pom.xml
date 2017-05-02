@@ -46,6 +46,12 @@
             <artifactId>persistence-api</artifactId>
         </dependency>
 
+        <!-- hibernate validator -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+
         <!-- utils -->
         <dependency>
             <groupId>com.google.guava</groupId>
