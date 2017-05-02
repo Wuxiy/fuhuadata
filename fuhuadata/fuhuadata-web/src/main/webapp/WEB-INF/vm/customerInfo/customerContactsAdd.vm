@@ -41,7 +41,7 @@
                             <label class="col-xs-1 control-label">性别<sup class="not-null">*</sup></label>
                             <div class="col-xs-2">
                                 <select class="form-control notnull" name="items" id="sex">
-                                    <option  value="0" lang="zh">未知</option>
+                                    <option  value="0" lang="zh">保密</option>
                                     <option  value="1" lang="zh">男</option>
                                     <option  value="2" lang="zh">女</option>
                                 </select>
@@ -93,8 +93,12 @@
                             <label class="col-xs-1 control-label">是否默认<sup class="not-null">*</sup></label>
                             <div class="col-xs-2">
                                 <select class="form-control notnull" name="items" id="isDefault">
-                                    <option  value="1">是</option>
-                                    <option  value="0" selected>否</option>
+                                    #if($!{linkmanId.length}==1)
+                                        <option  value="1">是</option>
+                                        <option  value="0" selected>否</option>
+                                    #else
+                                        <option  value="1" selected>是</option>
+                                    #end
                                 </select>
                             </div>
                         </div>

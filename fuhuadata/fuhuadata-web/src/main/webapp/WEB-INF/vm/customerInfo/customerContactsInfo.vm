@@ -52,7 +52,7 @@
                             <label class="col-xs-1 control-label">性别<sup data-view="editView" class="not-null hidden">*</sup></label>
                             <div class="col-xs-2">
                                 <select data-control="on" class="form-control notnull" disabled name="items" id="sex">
-                                    <option  value="0" lang="zh">未知</option>
+                                    <option  value="0" lang="zh">保密</option>
                                     <option  value="1" lang="zh">男</option>
                                     <option  value="1" lang="zh">女</option>
                                 </select>

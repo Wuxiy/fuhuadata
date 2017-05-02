@@ -84,14 +84,14 @@
                                         <td></td>
                                         <td></td>
                                     </tr>
-                                    <tr>
-                                        <td><label class="control-label" lang="zh">单位</label></td>
-                                        <td><select data-control="on" id="subProductUnit" class="form-control isdisabled" disabled><option value="0">KG</option><option value="1">瓶</option><option value="2">袋</option></select></td>
-                                        <td><label class="control-label" lang="zh">数量</label></td>
-                                        <td><input data-control="on" id="subProductAmount" class="form-control isdisabled" type="number" value="" disabled/></td>
-                                        <td><label class="control-label" lang="zh">换算率（主数量/数量）</label></td>
-                                        <td><input id="convertRate" class="form-control" type="text" value="" disabled/></td>
-                                    </tr>
+##                                    <tr>
+##                                        <td><label class="control-label" lang="zh">单位</label></td>
+##                                        <td><select data-control="on" id="subProductUnit" class="form-control isdisabled" disabled><option value="0">KG</option><option value="1">瓶</option><option value="2">袋</option></select></td>
+##                                        <td><label class="control-label" lang="zh">数量</label></td>
+##                                        <td><input data-control="on" id="subProductAmount" class="form-control isdisabled" type="number" value="" disabled/></td>
+##                                        <td><label class="control-label" lang="zh">换算率（主数量/数量）</label></td>
+##                                        <td><input id="convertRate" class="form-control" type="text" value="" disabled/></td>
+##                                    </tr>
                                     <tr>
                                         <td>
                                             <label class="control-label" lang="zh">

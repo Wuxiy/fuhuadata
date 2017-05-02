@@ -18,7 +18,7 @@
                         </a>
                     #end
                     <h3 class="panel-title">
-                        百科
+                        企业百科
                     </h3>
                 </div>
                 <div class="panel-body clearfix">
@@ -39,8 +39,7 @@
                     </div>
                     <!--搜索框结束-->
                     <!--表格开始-->
-                    <table id="encyclopedia_table"
-                           class="table table-condensed table-bordered table-striped text-center" cellpadding="0">
+                    <table id="encyclopedia_table" class="table table-condensed table-bordered table-striped text-center" cellpadding="0">
                         <thead>
                         <tr>
                             <th class="col-xs-1 text-center">编号</th>
@@ -54,22 +53,9 @@
                             <th class="col-xs-2 text-center">最后编辑时间</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td><a href="encyclopedia_add.html">润丰</a></td>
-                            <td><a href="encyclopedia_add.html">润丰</a></td>
-                            <td>竟对</td>
-                            <td>78%</td>
-                            <td>刘凯洋</td>
-                            <td>2016-10-10</td>
-                            <td>刘凯洋</td>
-                            <td>2016-10-10</td>
-                        </tr>
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                     <!--表格结束-->
-
                 </div>
             </div>
         </div>

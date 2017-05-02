@@ -302,7 +302,7 @@
                         for (var i = 0, j = 1; i < ResultData.length; i++, j++) {
                             _html += '<tr>';
                             _html += '	<td>' + j + '</td>';
-                            _html += '  <td><a href="">' + (ResultData[i].productName!=undefined?ResultData[i].productName:'') + '</a></td>';
+                            _html += '  <td>' + (ResultData[i].productName!=undefined?ResultData[i].productName:'') + '</td>';
                             _html += '  <td>' + (ResultData[i].categoryName!=undefined?ResultData[i].categoryName:'') + '</td>';
                             _html += '  <td lang="zh">' + (ResultData[i].salesVolume!=undefined?ResultData[i].salesVolume:0)+ '</td>';
                             _html += '  <td lang="zh">' + (ResultData[i].salesAmount!=undefined?ResultData[i].salesAmount:0)+ '</td>';
