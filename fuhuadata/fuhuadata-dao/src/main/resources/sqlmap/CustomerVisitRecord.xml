@@ -170,11 +170,9 @@
 						<isNotEmpty prepend=", " property="activityAddress">activity_address=#activityAddress#</isNotEmpty>
 						<isNotEmpty prepend=", " property="activityExpense">activity_expense=#activityExpense#</isNotEmpty>
 						<isNotEmpty prepend=", " property="activitySummary">activity_summary=#activitySummary#</isNotEmpty>
-						<isNotEmpty prepend=", " property="createUserId">create_user_id=#createUserId#</isNotEmpty>
-						<isNotEmpty prepend=", " property="createUserName">create_user_name=#createUserName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="lastmodifyUserId">lastmodify_user_id=#lastmodifyUserId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="lastmodifyUserName">lastmodify_user_name=#lastmodifyUserName#</isNotEmpty>
-						<isNotEmpty prepend=", " property="createTime">create_time=#createTime#</isNotEmpty>
+
 						<isNotEmpty prepend=", " property="modifyTime">modify_time=now()</isNotEmpty>
 					</dynamic>
 		WHERE visitrecord_id=#visitrecord_id#

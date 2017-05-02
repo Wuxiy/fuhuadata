@@ -382,7 +382,7 @@ $(function(){
                 _html += '<tr>';
                 _html += '<td>'+(++count)+'</td>'
                 _html += '<td>' + customer.customerId + '</td>';
-                _html += '<td><a href='+basePath+'"/customerBaseInfo/intoCustomerBaseInfoDetails?customerType=3&customerId='+customer.customerId+'" target="_blank">' + customer.fullName + '</a></td>';
+                _html += '<td><a href="'+basePath+'/customerBaseInfo/intoCustomerBaseInfoDetails?customerType=3&customerId='+customer.customerId+'" target="_blank">' + customer.fullName + '</a></td>';
                 _html += '<td>' + (customer.shortName!=undefined?customer.shortName:'') + '</td>';
                 _html += '<td lang="zh">' + (customer.country!=undefined?customer.country:'') + '</td>';
                 _html += '<td lang="zh">' + (customer.customerLevel!=undefined?customerLevelList[customer.customerLevel - 1]:'') + '</td>';

@@ -310,7 +310,6 @@
 						<isNotEmpty prepend=", " property="createUserName">create_user_name=#createUserName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="lastmodifyUserId">lastmodify_user_id=#lastmodifyUserId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="lastmodifyUserName">lastmodify_user_name=#lastmodifyUserName#</isNotEmpty>
-						<isNotEmpty prepend=", " property="createTime">create_time=#createTime#</isNotEmpty>
 						<isNotEmpty prepend=", " property="modifyTime">modify_time=now()</isNotEmpty>
 						<isNotEmpty prepend=", " property="priceSensitivity">price_sensitivity=#priceSensitivity#</isNotEmpty>
 						<isNotEmpty prepend=", " property="loyalty">loyalty=#loyalty#</isNotEmpty>

@@ -83,7 +83,7 @@
                 <a class="list-group-item" lang="zh" href="${request.contextPath}/productInfo/show">标准产品档案</a>
                 <a class="list-group-item" lang="zh" href="${request.contextPath}/packingArchives/packingArchivesList">包材成本参考</a>
                 <a class="list-group-item" lang="zh" href="${request.contextPath}/knowledgeBase/processCostList">加工成本参考</a>
-                <a class="list-group-item" lang="zh" href="${request.contextPath}/customerEncyclopedia/customerEncyclopediaList">百科</a>
+                <a class="list-group-item" lang="zh" href="${request.contextPath}/customerEncyclopedia/customerEncyclopediaList">企业百科</a>
                 <a class="list-group-item" lang="zh" href="${request.contextPath}/exhibitionInfo/exhibitionInfoList">展会动态</a>
                 <a class="list-group-item" lang="zh" href="">其他</a>
             </div>

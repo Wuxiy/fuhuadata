@@ -73,7 +73,14 @@ public class CustomerLinkmanAction {
     @RequestMapping(value = "intoCustomerLinkmanAdd",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "customerInfo-customerContacts",methods = "intoCustomerLinkmanAdd")
     public ModelAndView intoCustomerLinkmanAdd(String customerId,int customerType){
-        ModelAndView model = new ModelAndView("customerInfo/customerContactsAdd").addObject("customerId",customerId).addObject("customerType",customerType);
+        //获取客户默认联系人，判断当前客户有无默认联系人
+        Result<CustomerLinkman> result = customerLinkmanService.getCustomerLinkmanDefaultByCustomerId(customerId);
+        String linkmanId = null;
+        if(result.getModel()!=null){
+            linkmanId = result.getModel().getLinkmanId();
+        }
+        ModelAndView model = new ModelAndView("customerInfo/customerContactsAdd").addObject("customerId",customerId).addObject("customerType",customerType)
+                .addObject("linkmanId",linkmanId);
         return model;
     }
 

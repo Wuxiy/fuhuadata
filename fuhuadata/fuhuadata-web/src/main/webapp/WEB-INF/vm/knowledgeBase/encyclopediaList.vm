@@ -18,7 +18,7 @@
                         </a>
                     #end
                     <h3 class="panel-title">
-                        百科
+                        企业百科
                     </h3>
                 </div>
                 <div class="panel-body clearfix">
@@ -39,8 +39,7 @@
                     </div>
                     <!--搜索框结束-->
                     <!--表格开始-->
-                    <table id="encyclopedia_table"
-                           class="table table-condensed table-bordered table-striped text-center" cellpadding="0">
+                    <table id="encyclopedia_table" class="table table-condensed table-bordered table-striped text-center" cellpadding="0">
                         <thead>
                         <tr>
                             <th class="col-xs-1 text-center">编号</th>
@@ -54,11 +53,14 @@
                             <th class="col-xs-2 text-center">最后编辑时间</th>
                         </tr>
                         </thead>
+<<<<<<< HEAD
                         <tbody>
                         </tbody>
+=======
+                        <tbody></tbody>
+>>>>>>> 5221a710215a547260f8afe12155e1b18fe62e09
                     </table>
                     <!--表格结束-->
-
                 </div>
             </div>
         </div>

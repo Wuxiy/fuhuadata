@@ -40,6 +40,9 @@ public class QueryRecordLinkman extends PageBase {
 	
     /**修改时间**/
 	private Date modifyTime;
+
+	/**备注**/
+	private String remarks;
 	
 
 	public Integer getId() {
@@ -129,6 +132,13 @@ public class QueryRecordLinkman extends PageBase {
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
 	}
-	
 
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
 }
