@@ -1,11 +1,6 @@
 package com.fuhuadata.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fuhuadata.util.DateJsonDeserializer;
-import com.fuhuadata.util.DateJsonSerializer;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.math.BigDecimal;
@@ -50,6 +45,9 @@ public class RecordLinkman implements Serializable{
     /**修改时间**/
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date modifyTime;
+
+	/**备注**/
+	private String remarks;
 	
 	
 	public RecordLinkman() {
@@ -143,5 +141,13 @@ public class RecordLinkman implements Serializable{
 
 	public void setVisitRecordId(Integer visitRecordId) {
 		this.visitRecordId = visitRecordId;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
 	}
 }

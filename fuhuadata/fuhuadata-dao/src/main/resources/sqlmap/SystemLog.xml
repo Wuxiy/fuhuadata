@@ -91,7 +91,7 @@
     <insert id="ADD" parameterClass="SystemLog">
         INSERT INTO
         fuhua_system_log
-        VALUES(#logId#,#userId#,#userName#,#ip#,#module#,#method#,#date#,#responseDate#,#commit#,#parementers#,#remarks#)
+        VALUES(#logId#,#userId#,#userName#,#ip#,#module#,#method#,now(),#responseDate#,#commit#,#parementers#,#remarks#)
         <selectKey resultClass="int" keyProperty="logId">
             SELECT @@IDENTITY AS log_id
         </selectKey>

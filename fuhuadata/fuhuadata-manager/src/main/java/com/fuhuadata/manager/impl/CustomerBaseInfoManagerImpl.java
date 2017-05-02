@@ -16,10 +16,8 @@ import com.fuhuadata.vo.CategoryVO;
 import com.fuhuadata.vo.CustomerBaseInfoLinkman;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
 import com.fuhuadata.vo.DataArchive.Countryzone;
-import com.fuhuadata.vo.DataArchive.Custclass;
 import com.fuhuadata.vo.DataArchive.Formatdoc;
 import com.fuhuadata.vo.DataArchive.Timezone;
-import org.apache.cxf.Bus;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;

@@ -169,7 +169,6 @@ public class BusinessInfoAction {
         businessInfo.setLastmodifyUserId(LoginUtils.getLoginId());
         businessInfo.setLastmodifyUserName(LoginUtils.getLoginName());
         businessInfo.setModifyTime(DateUtil.getDateTimeFormat());
-        System.out.println(DateUtil.getDateTimeFormat()+"1111111111111111111");
         Result<BusinessInfo> result = new Result<BusinessInfo>();
         try{
             result = businessInfoService.updateBusinessInfoByBusinessId(businessInfo);

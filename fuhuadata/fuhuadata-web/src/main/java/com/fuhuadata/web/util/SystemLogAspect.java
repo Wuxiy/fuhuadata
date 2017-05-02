@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.fuhuadata.domain.SystemLog;
 import com.fuhuadata.service.SystemLogService;
+import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.web.util.SystemLogAnnotation;
+import com.mysql.jdbc.log.LogUtils;
 import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -29,8 +31,8 @@ public class SystemLogAspect {
     @Resource
     private SystemLogService systemLogService;
 
-    //配置接入点
-    @Pointcut("execution(* com.fuhuadata.web.springmvc.ExhibitionInfoAction.*(..))")
+    //配置接入点,监控springMVC下的all action
+    @Pointcut("execution(* com.fuhuadata.web.springmvc.BusinessOrderAction.*(..))")
     private void controllerAspect(){
         System.out.print("进入切面环绕通知");
     }//定义一个切入点
@@ -42,15 +44,13 @@ public class SystemLogAspect {
          SystemLog log = new SystemLog();
         //获取登录用户账户
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        //String userName = (String) request.getSession().getAttribute("USER_ID");
-        log.setUserId(0);
-        String userName = "test";
-        log.setUserName(userName);
-        //获取系统时间
-        String time = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss").format(new Date());
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = sdf.parse(time);
-        log.setDate(date);//执行时间
+        log.setUserId(LoginUtils.getLoginId());
+        log.setUserName(LoginUtils.getLoginName());
+        ////获取系统时间
+        //String time = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss").format(new Date());
+        //SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //Date date = sdf.parse(time);
+        //log.setDate(DateUtil.getDateTimeFormat());//执行时间
 
         //获取客户端ip
         String ip = request.getHeader("x-forwarded-for");

@@ -175,18 +175,18 @@
                 {"data":"problemContent"},
                 {"data":"productType"},
                 {"data":"solution"},
-                {"data":null}
+                {"data":"remarks"}
             ],
             "columnDefs":[
                 {
                     targets: "_all",
                     defaultContent: ''
-                }, {
+                }/*, {
                     "targets":1,
                     "render":function(data,type,row,meta){
                         return '<a href="' + data + '" target="_blank">' + row.problemContent+ '</a>';
                     }
-                }
+                }*/
             ],
             "language": {
                 "url": basePath + '/lib/dataTables/lang/dataTables.lang.zh',
