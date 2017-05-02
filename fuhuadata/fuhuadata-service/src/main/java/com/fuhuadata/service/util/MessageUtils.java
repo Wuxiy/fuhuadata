@@ -28,16 +28,33 @@ public class MessageUtils {
      * @return
      */
     public static String message(String code, Object... args) {
-        ensureMessageSource();
-
         Locale locale = LocaleContextHolder.getLocale();
-        return messageSource.getMessage(code, args, "", locale);
+        return message(code, args, locale);
     }
 
+    /**
+     * 获取消息，用于字段验证错误消息的获取
+     * @param resolvable
+     * @return
+     */
     public static String message(MessageSourceResolvable resolvable) {
         ensureMessageSource();
 
         return messageSource.getMessage(resolvable, LocaleContextHolder.getLocale());
+    }
+
+    public static String message(String code, Object[] args, String defaultMessage, Locale locale) {
+        ensureMessageSource();
+
+        return messageSource.getMessage(code, args, defaultMessage, locale);
+    }
+
+    public static String message(String code, Object[] args, Locale locale) {
+        return message(code, args, "", locale);
+    }
+
+    public static String message(String code, Locale locale) {
+        return message(code, null, locale);
     }
 
     private static void ensureMessageSource() {

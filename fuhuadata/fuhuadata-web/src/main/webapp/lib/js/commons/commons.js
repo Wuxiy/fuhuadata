@@ -11,7 +11,7 @@ CRM.url    = window.CRM.url || {};
 // 百度渲染引擎全局对象
 var bt = baidu.template;
 
-
+CRM.url.LOGIN                = basePath + '/login';// 登录
 CRM.url.AREA_TREE_GET        = basePath+ '/customerBaseInfo/initAreaCategoryTree'; // 地区树
 CRM.url.ROLE_TREE_GET        = basePath+ '/sys/role/ajax/load?async=false'; // 角色树
 CRM.url.ORG_TREE_GET         = basePath+ '/customerBaseInfoOrder/initSaleOrganizationTree'; // 组织树
