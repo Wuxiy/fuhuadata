@@ -55,17 +55,6 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td><a href="encyclopedia_add.html">润丰</a></td>
-                            <td><a href="encyclopedia_add.html">润丰</a></td>
-                            <td>竟对</td>
-                            <td>78%</td>
-                            <td>刘凯洋</td>
-                            <td>2016-10-10</td>
-                            <td>刘凯洋</td>
-                            <td>2016-10-10</td>
-                        </tr>
                         </tbody>
                     </table>
                     <!--表格结束-->
@@ -106,7 +95,7 @@
             }, {
                 "targets": 1,
                 "render": function (data, type, row) {
-                    return '<a href=/customerEncyclopedia/modify?encyId=' + row.encyId + '"target="_blank">' + row.fullName + '</a>';
+                    return '<a href='basePath+'/customerEncyclopedia/modify?encyId=' + row.encyId + '"target="_blank">' + (row.fullName?row.fullName:"") + '</a>';
                 }
             }, {
                 "targets": 3,

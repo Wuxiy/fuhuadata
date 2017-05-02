@@ -20,6 +20,7 @@
                         <table class="table table-condensed table-bordered table-striped text-center">
                             <thead>
                             <tr>
+
                                 <th class="text-center" lang="zh">编号</th>
                                 <th class="text-center" lang="zh">姓名</th>
                                 <th class="text-center" lang="zh">岗位</th>

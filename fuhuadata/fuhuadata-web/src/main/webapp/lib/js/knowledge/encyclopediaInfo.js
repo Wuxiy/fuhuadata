@@ -151,13 +151,14 @@ CRM.enc.upEData = function () {
         contentType:'application/json',
         callback: function (data) {
 
-            if (sessionStorage.getItem('customerUrl')) {
-
-                self.location = sessionStorage.getItem('customerUrl');
-            }else {
-
-                self.location = basePath+'/customerEncyclopedia/modify?encyId='+ page.encyId.val();
-            }
+            // if (sessionStorage.getItem('customerUrl')) {
+            //
+            //     self.location = sessionStorage.getItem('customerUrl');
+            // }else {
+            //
+            //     self.location = basePath+'/customerEncyclopedia/modify?encyId='+ page.encyId.val();
+            // }
+            self.location = basePath+'/customerEncyclopedia/modify?encyId='+ page.encyId.val();
             // window.history.back(-1);
             // $('#skipM').modal('show');
             // $('#skip').attr('href', function (i,old) {
@@ -177,13 +178,14 @@ CRM.enc.addData = function () {
         contentType:'application/json',
         callback: function (data) {
 
-            if (sessionStorage.getItem('customerUrl')) {
-
-                self.location = sessionStorage.getItem('customerUrl');
-            }else {
-
-                self.location = basePath+'/customerEncyclopedia/modify?encyId='+ data.encyId;
-            }
+            // if (sessionStorage.getItem('customerUrl')) {
+            //
+            //     self.location = sessionStorage.getItem('customerUrl');
+            // }else {
+            //
+            //     self.location = basePath+'/customerEncyclopedia/modify?encyId='+ data.encyId;
+            // }
+            self.location = basePath+'/customerEncyclopedia/modify?encyId='+ data.encyId;
             // window.history.back(-1);
             // $('#skipM').modal('show');
             // $('#skip').attr('href', function (i,old) {
