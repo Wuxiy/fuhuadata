@@ -14,22 +14,38 @@
 
     <aop:config proxy-target-class="true"/>
 
-	<!-- 自动扫描,完成bean创建和依赖注入 -->
+    <!-- 自动扫描,完成bean创建和依赖注入 -->
     <context:component-scan base-package="com.fuhuadata">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-        <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+        <context:exclude-filter type="annotation"
+                                expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
     </context:component-scan>
+
+    <!-- 国际化的消息资源文件（本系统中主要用于显示/错误消息定制） -->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <!-- 在web环境中一定要定位到classpath 否则默认到当前web应用下找  -->
+                <value>classpath:messages/messages</value>
+                <value>classpath:messages/ValidationMessages</value>
+            </list>
+        </property>
+        <property name="useCodeAsDefaultMessage" value="false"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="cacheSeconds" value="60"/>
+    </bean>
 
     <!-- 配置 JSR303 Bean Validator 定义 -->
     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
         <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+        <property name="validationMessageSource" ref="messageSource"/>
     </bean>
 
-	<!-- 启动spring注解,当自动扫描启动后,该配置可以去掉   
+    <!-- 启动spring注解,当自动扫描启动后,该配置可以去掉
     <context:annotation-config /> -->
-	<import resource="spring/springbeans-dao.xml" />
-	<import resource="spring/springbeans-manager.xml" />
-	<import resource="spring/springbeans-service.xml" />
+    <import resource="spring/springbeans-dao.xml"/>
+    <import resource="spring/springbeans-manager.xml"/>
+    <import resource="spring/springbeans-service.xml"/>
     <import resource="spring-config-shiro.xml"/>
     <import resource="spring-config-task.xml"/>
 </beans>

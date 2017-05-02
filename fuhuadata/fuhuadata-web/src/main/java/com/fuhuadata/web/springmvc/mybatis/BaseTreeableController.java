@@ -7,6 +7,7 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.mybatis.BaseTreeableService;
 import com.fuhuadata.vo.BaseTreeVo;
+import com.fuhuadata.web.exception.InvalidRequestException;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
@@ -152,10 +153,7 @@ public abstract class BaseTreeableController<E extends BaseEntity<ID> & Treeable
         Result<ID> result = new Result<ID>(true);
 
         if (bindingResult.hasErrors()) {
-            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
-            result.setSuccess(false);
-            result.setMessage(JSON.toJSONString(fieldErrors));
-            return result.getResultPojo();
+            throw new InvalidRequestException("请求参数错误", bindingResult);
         }
 
         if (node == null) {
