@@ -89,10 +89,10 @@
             
             // 判断会话是否过期，会话过期则跳转登录页面
             $(document).ajaxSuccess(function (e, jqXhr, ajaxOpts, data) {
-                console.log(jqXhr.responseText);
                 if (jqXhr.responseText) {
                     var result = JSON.parse(jqXhr.responseText);
                     if (result.code && result.code === -1) {
+                        console.log(jqXhr.responseText);
                         alert(result.message);
                         window.location = basePath + "/login";
                     }

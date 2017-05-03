@@ -2,12 +2,16 @@ package com.fuhuadata.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 成分价格
  * Created by intanswer on 2017/1/17.
  */
 public class ComponentCost {
+
+    private Integer costId;
+
     private Integer componentId;
 
     private String componentName;//成分名称
@@ -87,5 +91,26 @@ public class ComponentCost {
 
     public void setProductCategoryId(Integer productCategoryId) {
         this.productCategoryId = productCategoryId;
+    }
+
+    public Integer getCostId() {
+        return costId;
+    }
+
+    public void setCostId(Integer costId) {
+        this.costId = costId;
+    }
+
+    public static class ComponentCostWrapper {
+
+        private List<ComponentCost> componentCosts;
+
+        public List<ComponentCost> getComponentCosts() {
+            return componentCosts;
+        }
+
+        public void setComponentCosts(List<ComponentCost> componentCosts) {
+            this.componentCosts = componentCosts;
+        }
     }
 }

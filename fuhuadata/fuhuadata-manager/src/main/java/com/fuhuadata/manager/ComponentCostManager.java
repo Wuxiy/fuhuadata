@@ -21,6 +21,8 @@ public interface ComponentCostManager {
 
     public boolean deleteComponentCostById(int id);
 
+    boolean deleteComponentCostByIds(List<Integer> ids);
+
     public ComponentCostDO getComponentCostById(int id);
 
     public List<ComponentCost> getComponentCostByQuery(ComponentCostQuery componentCostQuery);

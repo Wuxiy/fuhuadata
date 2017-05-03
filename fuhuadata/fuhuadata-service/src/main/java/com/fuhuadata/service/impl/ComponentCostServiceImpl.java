@@ -7,10 +7,14 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.ComponentCostManager;
 import com.fuhuadata.service.ComponentCostService;
 import com.fuhuadata.vo.ComponentCostDO;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by intanswer on 2017/1/18.
@@ -56,6 +60,44 @@ public class ComponentCostServiceImpl implements ComponentCostService {
             log.error("删除成分价格信息错误",e);
         }
         return result;
+    }
+
+    @Transactional
+    @Override
+    public boolean deleteComponentCostByIds(List<Integer> costIds) {
+        return componentCostManager.deleteComponentCostByIds(costIds);
+    }
+
+    @Override
+    public boolean deleteCostByProductIds(List<Integer> componentIds) {
+        for (Integer componentId : componentIds) {
+            // 如果成分关联的产品为空，则删除该成分
+            ComponentCostDO componentCostDO = componentCostManager.getComponentCostById(componentId);
+            List<KProductComponent> kProductComponents = componentCostDO.getkProductComponents();
+            if (null == kProductComponents || kProductComponents.size() == 0) {
+                deleteComponentCostById(componentId);
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean deleteCompoentCost(List<ComponentCost> costs) {
+        if (null == costs) {
+            return false;
+        }
+
+        List<Integer> componentIds = Lists.newArrayList();
+        Set<Integer> costIds = Sets.newHashSet();
+
+        for (ComponentCost componentCost : costs) {
+            costIds.add(componentCost.getComponentId());// 成分关联产品主键id
+            componentIds.add(componentCost.getCostId());// 成分id
+        }
+
+        deleteComponentCostByIds(componentIds);
+        deleteCostByProductIds(Lists.newArrayList(costIds));
+        return true;
     }
 
     @Override

@@ -19,6 +19,12 @@ public interface ComponentCostService {
 
     public Result deleteComponentCostById(int id);
 
+    boolean deleteComponentCostByIds(List<Integer> costIds);
+
+    boolean deleteCostByProductIds(List<Integer> componentIds);
+
+    boolean deleteCompoentCost(List<ComponentCost> costs);
+
     public Result<ComponentCostDO> getComponentCostById(int id);
 
     public Result<List<ComponentCost>> getComponentCostByQuery(ComponentCostQuery componentCostQuery);
