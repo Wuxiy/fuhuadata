@@ -103,42 +103,35 @@
                         <div class="panel-body clearfix">
                             <div class="form-horizontal">
                                 <div class="form-group ">
-                                    <label class="col-xs-2 control-label">开始时间<sup class="not-null">*</sup></label>
+                                    <label class="col-xs-2 control-label">开始时间</label>
                                     <div class="col-xs-4">
-                                        <input class="form-control" type="date" id="startTime" />
+                                        <input readonly class="form-control" type="text" id="mstartTime" />
                                     </div>
                                     <label class="col-xs-2 control-label">结束时间</label>
                                     <div class="col-xs-4">
-                                        <input class="form-control" type="date" id="endTime"/>
+                                        <input readonly id="mendTime" type="text" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group ">
                                     <label class="col-xs-2 control-label">活动地点</label>
                                     <div class="col-xs-4">
-                                        <input class="form-control" type="text" id="activityAddress"/>
+                                        <input readonly id="mactivityAddress" type="text" class="form-control">
                                     </div>
-                                    <label class="col-xs-2 control-label">费用<sup class="not-null">*</sup></label>
+                                    <label class="col-xs-2 control-label">费用</label>
                                     <div class="col-xs-4">
                                         <div class="input-group">
-                                            <input class="form-control" type="number" min="0" id="activityExpense"/>
+                                            <input readonly class="form-control" type="number" min="0" id="mactivityExpense"/>
                                             <span class="input-group-addon">元</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group ">
-                                    <label class="col-xs-2 control-label">活动类型<sup class="not-null">*</sup></label>
+                                    <label class="col-xs-2 control-label">活动类型</label>
                                     <div class="col-xs-4">
-                                        <select class="form-control" name="items" id="activityType">
-                                            <option  value="0">远程沟通</option>
-                                            <option  value="1">出差拜访</option>
-                                            <option  value="2">展会邀请</option>
-                                            <option  value="3">工厂参观</option>
-                                            <option  value="4">商务宴请</option>
-                                            <option  value="5">其他(备注内容)</option>
-                                        </select>
+                                        <input readonly id="mactivityType" type="text" class="form-control">
                                     </div>
                                     <div class="col-xs-4">
-                                        <input class="form-control hidden" type="text" id="activityRemarks" placeholder="请输入活动类型" disabled/>
+                                        <input readonly class="form-control hidden" type="text" id="activityRemarks" placeholder="请输入活动类型" disabled/>
                                     </div>
                                 </div>
                                 <div class="form-group ">
@@ -147,7 +140,6 @@
                                         <table class="table table-condensed table-bordered table-striped text-center">
                                             <thead>
                                             <tr>
-                                                <th class="text-center col-xs-2" lang="zh"><input type="checkbox" id="checkAll">是否拜访</th>
                                                 <th class="text-center col-xs-2" lang="zh">联系人</th>
                                                 <th class="text-center col-xs-4" lang="zh">赠送礼物</th>
                                                 <th class="text-center col-xs-4" lang="zh">备注</th>
@@ -160,7 +152,7 @@
                                 <div class="form-group">
                                     <label class="col-xs-2 control-label">活动摘要</label>
                                     <div class="col-xs-10">
-                                        <textarea class="form-control" rows="4" id="activitySummary"></textarea>
+                                        <textarea readonly class="form-control" rows="4" id="mactivitySummary"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -169,18 +161,6 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <div class="row">
-                    <div class="col-xs-3 col-xs-offset-3">
-                        <a type="button" class="btn btn-primary btn-block" id="addVisit">
-                            完成
-                        </a>
-                    </div>
-                    <div class="col-xs-3">
-                        <button type="button" class="btn btn-default btn-block" data-dismiss="modal">
-                            取消
-                        </button>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -210,7 +190,7 @@
             }];
             areaTreeData.push.apply(areaTreeData,res.data);
 
-            renderAreaTree(areaTreeData,areaTreeDblHandler,$('#areaTree')); // 渲染树
+//            renderAreaTree(areaTreeData,areaTreeDblHandler,$('#areaTree')); // 渲染树
         });
 
         // 搜索按钮绑定事件
@@ -233,26 +213,42 @@
         $('#customerMaintainList').on('click', 'a[href="#myModal"]', function (e) {
             var thisEl = $(e.target);
             $.ajax({
-                url : basePath + '/customerVisitRecord/getCustomerVisitRecordById?visirecordId='+thisEl.data('visitrecordId'),
+                url : basePath + '/customerVisitRecord/getCustomerVisitRecordById?visirecordId='+thisEl.data('visitrecordid'),
                 type : 'GET'
             }).done(function (res) {
                     var data = res.data,
                             _html ='';
-                    var customerVisitRecord=data.customerVisitRecord;
+                    var c=data.customerVisitRecord;
                     var recordLinkmanList = data.recordLinkmanList;
                     $('#myModal').find('tbody').html('');
 
-                    $.each(data, function (i,item) {
-                        _html += '<tr>';
-                        _html += '<td>' + item.productName + '</td>';
-                        _html += '<td><a href="">' + item.categoryName + '</a></td>';
-                        _html += '<td lang="zh">' + item.salesVolume + '</td>';
-                        _html += '<td lang="zh">' + item.grossProfit + '</td>';
-                        _html += '<td lang="zh">' + item.salesAmount + '</td>';
-                        _html += '<td>' + parseInt(i+1) + '</td>';
-                        _html += '</tr>';
-                    });
-                    $('#myModal').find('tbody').html(_html);
+                    $('#mstartTime').val(c.startTime);
+                    $('#mendTime').val(c.endTime);
+                    $('#mactivityAddress').val(c.activityAddress);
+                    $('#mactivityExpense').val(c.activityExpense);
+                    $('#mactivityType').val(activityTypeList[c.activityType]);
+                    $('#mactivitySummary').val(c.activitySummary);
+
+//                    $.each(data, function (i,item) {
+//                        _html += '<tr>';
+//                        _html += '<td>' + item.productName + '</td>';
+//                        _html += '<td><a href="">' + item.categoryName + '</a></td>';
+//                        _html += '<td lang="zh">' + item.salesVolume + '</td>';
+//                        _html += '<td lang="zh">' + item.grossProfit + '</td>';
+//                        _html += '<td lang="zh">' + item.salesAmount + '</td>';
+//                        _html += '<td>' + parseInt(i+1) + '</td>';
+//                        _html += '</tr>';
+//                    });
+//                    $('#myModal').find('tbody').html(_html);
+
+                for(var i=0;i<recordLinkmanList.length;i++){
+                    modalContactList.innerHTML += '<tr>'+
+                            '<td name="Lname">'+ recordLinkmanList[i].name+'</td>'+
+                            '<td name="Lname">'+ recordLinkmanList[i].activityGift+'</td>'+
+                            '<td name="Lname">'+ recordLinkmanList[i].remarks+'</td>'+
+                            '</tr>';
+                }
+                $('#addField').modal('show');
             })
         });
 
@@ -288,8 +284,8 @@
     /**
      *以下是逻辑处理和数据处理函数
      */
-    // 渲染客户基本分类树
-  /*  function renderAreaTree (data,callback,el) {
+    // 地区树
+    function renderAreaTree (data,callback,el) {
         var setting = {
                     data: {
                         simpleData: {
@@ -312,7 +308,7 @@
         $.fn.zTree.init(el, setting, data);
         treeObj = $.fn.zTree.getZTreeObj('areaTree');
         treeObj.expandNode(treeObj.getNodes()[0],true);
-    };*/
+    };
 
     // 地区树添加单击事件
     function areaTreeDblHandler (event, modLeftId, treeNode) {
@@ -474,6 +470,7 @@
 //                    _html += '  <td>' + (ResultData[i].activitySummary!=undefined?ResultData[i].activitySummary:'') + '</td>';
                     _html += '  <td>' + ResultData[i].userName + '</td>';
                     _html += '   </tr>';
+                    console.log(ResultData[i].visitrecordId);
                 }
             }
             $("#customerMaintainList").html(_html);
