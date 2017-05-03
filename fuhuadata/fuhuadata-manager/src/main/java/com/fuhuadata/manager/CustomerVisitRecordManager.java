@@ -1,12 +1,11 @@
 package com.fuhuadata.manager;
 import java.util.List;
-import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.CustomerVisitRecord;
 import com.fuhuadata.domain.query.QueryCustomerVisitRecord;
+import com.fuhuadata.vo.CustomerVisitRecordLinkman;
 import com.fuhuadata.vo.CustomerVisitRecordVO;
 import com.fuhuadata.vo.VisitRecordVO;
 
-import javax.management.Query;
 
 /**
  * @author wangbo
@@ -58,7 +57,7 @@ public interface CustomerVisitRecordManager {
      * @param visitrecord_id
      * @return
      */
-    public CustomerVisitRecord getCustomerVisitRecordById(int visitrecord_id);
+    public CustomerVisitRecordLinkman getCustomerVisitRecordById(int visitrecord_id);
 
 	/**
 	 * 根据客户id返回关于客户的沟通记录

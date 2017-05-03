@@ -604,13 +604,8 @@
                 _html += '  <td><a href="'+basePath+'/customerVisitRecord/intoCustomerMaintenance?customerId='+
                         ResultData[i].customerId +'">' + (ResultData[i].maintenanceFee!=undefined?ResultData[i].maintenanceFee:0) +'</a></td>';
                 _html += '  <td lang="zh">' +  (ResultData[i].netProfit!=undefined?ResultData[i].netProfit:0) + '</td>';
-<<<<<<< HEAD
-                _html += '  <td>' +  (ResultData[i].salesManName!=undefined?ResultData[i].salesManName:0) + '</td>';
-                _html += '  </tr>';
-=======
                 _html += '  <td lang="zh">' +  (ResultData[i].salesManName!=undefined?ResultData[i].salesManName:'') + '</td>';
                 _html +='   </tr>';
->>>>>>> 57caff0c420ad9537a64eb8935e50a3e0a846000
             }
         }
         $("#costProfitList").html(_html);

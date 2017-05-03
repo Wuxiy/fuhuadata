@@ -5,13 +5,16 @@ import com.fuhuadata.domain.query.CustomerEncyclopediaQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.CustomerEncyclopediaService;
+import com.fuhuadata.service.DataArchivesService;
 import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.CustomerEncyVO;
+import com.fuhuadata.vo.DataArchive.Currtype;
 import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.xml.crypto.Data;
 import java.util.List;
 
 /**
@@ -33,6 +37,8 @@ public class CustomerEncyclopediaAction {
     private final static Log log = LogFactory.getLog(CustomerEncyclopediaAction.class);
     @Resource
     private CustomerEncyclopediaService customerEncyclopediaService;
+    @Autowired
+    private DataArchivesService dataArchivesService;
 
 
     @RequiresPermissions({"wiki:wiki:view"})
@@ -67,7 +73,9 @@ public class CustomerEncyclopediaAction {
     @RequestMapping(value = "/addCustomerEncyclopedia",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "add")
     public ModelAndView addCustomerEncyclopedia(String encyId,String customerId){
-        return new ModelAndView("knowledgeBase/encyclopediaAdd").addObject("encyId",encyId).addObject("customerId",customerId);
+        Result<List<Currtype>> currtype = dataArchivesService.getCurrtype();
+        return new ModelAndView("knowledgeBase/encyclopediaAdd").addObject("encyId",encyId).addObject("customerId",customerId)
+                .addObject("currtype",currtype.getModel());
     }
 
     @RequestMapping(value = "/doAddCustomerEncyclopedia",method = RequestMethod.POST)
@@ -111,7 +119,9 @@ public class CustomerEncyclopediaAction {
     @RequestMapping(value = "/modify",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "doUpdate")
     public ModelAndView update(String encyId,String customerId){
-        return new ModelAndView("knowledgeBase/encyclopediaInfo").addObject("encyId",encyId).addObject("customerId",customerId);
+        Result<List<Currtype>> currtype = dataArchivesService.getCurrtype();
+        return new ModelAndView("knowledgeBase/encyclopediaInfo").addObject("encyId",encyId).addObject("customerId",customerId)
+                .addObject("currtype",currtype.getModel());
 
     }
 

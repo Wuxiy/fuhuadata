@@ -55,7 +55,7 @@ public class BusinessOrderProduct {
     /**换算率**/
     private BigDecimal convertRate;
 
-    /**价格计算类型**/
+    /**价格计算类型,01自产类，02原药制剂自产类加工，03贸易类，04原药采购制剂加工，09其他**/
     private Integer priceType;
 
     /**价委会指导价**/

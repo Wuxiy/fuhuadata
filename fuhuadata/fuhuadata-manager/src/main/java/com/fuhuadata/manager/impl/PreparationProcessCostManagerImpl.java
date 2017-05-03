@@ -17,7 +17,7 @@ public class PreparationProcessCostManagerImpl implements PreparationProcessCost
     private PreparationProcessCostDao preparationProcessCostDao;
     @Override
     public PreparationProcessCost addPreparationProcessCost(PreparationProcessCost preparationProcessCost) {
-        return preparationProcessCostDao.addComponentCost(preparationProcessCost);
+        return preparationProcessCostDao.addPreparationProcessCost(preparationProcessCost);
     }
 
     @Override
