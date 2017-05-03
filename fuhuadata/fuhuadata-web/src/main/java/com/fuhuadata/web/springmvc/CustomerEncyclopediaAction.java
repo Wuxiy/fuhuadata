@@ -73,9 +73,10 @@ public class CustomerEncyclopediaAction {
     @RequestMapping(value = "/addCustomerEncyclopedia",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "add")
     public ModelAndView addCustomerEncyclopedia(String encyId,String customerId){
-        Result<List<Currtype>> currtype = dataArchivesService.getCurrtype();
+        Result<List<Currtype>> rcurrtype = dataArchivesService.getCurrtype();
+        System.out.println(rcurrtype.getModel().get(1).getPkCurrtype());
         return new ModelAndView("knowledgeBase/encyclopediaAdd").addObject("encyId",encyId).addObject("customerId",customerId)
-                .addObject("currtype",currtype.getModel());
+                .addObject("currtype",rcurrtype.getModel());
     }
 
     @RequestMapping(value = "/doAddCustomerEncyclopedia",method = RequestMethod.POST)

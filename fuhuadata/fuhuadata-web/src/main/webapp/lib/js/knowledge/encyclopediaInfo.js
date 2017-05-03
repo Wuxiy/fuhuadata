@@ -33,7 +33,7 @@ CRM.enc.customerArea          = $('#areaId');
 // CRM.enc.countryId             = $('#countryId');
 CRM.enc.enterpriseNature      = $('[name="enterpriseNature"]'); // checkbox
 CRM.enc.otherEnterpriceNature = $('#otherEnterpriceNature');
-CRM.enc.registeredFund        = $('#registeredFund');
+CRM.enc.registeredFund        = $('#registeredFunds');
 CRM.enc.registeredAddr        = $('#registeredAddr');
 CRM.enc.managementScope       = $('#managementScope');
 CRM.enc.companyInfo           = $('#companyInfo');
@@ -113,7 +113,15 @@ CRM.enc.renderInfo = function (data) {
 
         page.enterpriseNature.val(data.enterpriseNature.split(',')); // checkbox
     }
-    page.registeredFund.val(data.registeredFunds); // 注册资金
+    if (data.registeredFunds) {
+        if(data.registeredFunds.split(':').length==2){
+            $('#fundType').text(data.registeredFunds.split(':')[0]).data('val',data.registeredFunds.split(':')[0]);
+            page.registeredFund.val(data.registeredFunds.split(':')[1]);
+        }else {
+            page.registeredFund.val(data.registeredFunds.split(':')[0]);
+        }
+    } // 注册资金
+    // page.registeredFund.val(data.registeredFunds); // 注册资金
     page.registeredAddr.val(data.registeredAddr); // 注册地址
     page.managementScope.val(data.managementScope); // 经营范围
     page.companyInfo.val(data.companyInfo); // 企业简介
@@ -220,7 +228,7 @@ CRM.enc.collectAData = function () {
             companyType:page.companyType.val(), // 企业类别
             customerAreaId:page.customerArea.data('val'), // 地区id
             customerArea:page.customerArea.val(), // 地区name
-            registeredFund:page.registeredFund.val(), // 注册资金
+            registeredFund:($('#fundType').data('val')+':'+page.registeredFunds.val()), // 注册资金
             registeredAddr:page.registeredAddr.val(), // 注册地址
             managementScope:page.managementScope.val(), // 经营范围
             enterpriceNatures:page.getNature(), // 企业性质

@@ -84,8 +84,8 @@ CRM.cbInfo.collectData = function () {
     var page = CRM.cbInfo,
         obj = {
             customerBaseInfo:{
-                areaId               : page.areaId.data('val'),
-                area                 : page.areaId.val(),
+                areaId               : page.areaId.data('val'), // 地区分类id
+                area                 : page.areaId.val(), // 地区分类name
                 companyType          : page.companyType.val(),
                 customerId           : page.cid,
                 customerLevel        : page.customerLevel.val(),
@@ -102,7 +102,7 @@ CRM.cbInfo.collectData = function () {
                 otherOpportunity     : page.otherOpportunity.val(),
                 // productLine          : page.productLine.val(),
                 registeredAddress    : page.registeredAddress.val(),
-                registeredFunds      : page.registeredFunds.val(),
+                registeredFunds      : ($('#fundType').data('val')+':'+page.registeredFunds.val()), // 注册资金
                 shortName            : page.shortName.val(),
                 zhongxinbaoLevel     : page.zhongxinbaoLevel.val(),
                 zhongxinbaoNumber    : page.zhongxinbaoNumber.val(),
@@ -239,42 +239,6 @@ CRM.cbInfo.renderPage = function () {
 
 };
 
-// 渲染国家树，渲染表单
-// CRM.cbInfo.renderPageHandler = function (id) {
-//     var page = CRM.cbInfo;
-//
-//     // 重置表单
-//     page.resetForm('#myForm');
-//
-//     CRM.ajaxCall({
-//         url:page.LOOK_POST,
-//         type:'POST',
-//         data:{
-//             customerId:id
-//         },
-//         callback:function (data) {
-//             var counTree = page.getCounData(page.areaTree,data.areaId); // 获取国家树的数据
-//             page.renderTree(counTree, 'countryId', '——请优先选择地区——'); // 创建国家树
-//
-//             // 渲染数据格式下拉框
-//             CRM.ajaxCall({
-//                 url:'/customerBaseInfo/getFormatdoc',
-//                 type:'POST',
-//                 callback:function (dataF) {
-//                     if (dataF) {
-//
-//                         CRM.tplHandler('dataFormatC',dataF,$('#dataFormat')); // 插入数据格式下拉框
-//                         page.renderForm(data); // 渲染页面表单
-//                         page.isView(); // 根据表单的值显示或隐藏元素
-//                         page.togglePage(page.isEdit); // 禁用和隐藏开关
-//                     }
-//                 }
-//             });
-//
-//         }
-//     });
-// };
-
 // 渲染表单处理程序
 CRM.cbInfo.renderForm = function(data){
     var page = CRM.cbInfo,
@@ -300,7 +264,14 @@ CRM.cbInfo.renderForm = function(data){
     if (data.otherOpportunity) { page.otherOpportunity.val(data.otherOpportunity);}
     if (data.productLine) { page.productLine.val(data.productLine);}
     if (data.registeredAddress) { page.registeredAddress.val(data.registeredAddress);}
-    if (data.registeredFunds) { page.registeredFunds.val(data.registeredFunds);}
+    if (data.registeredFunds) {
+        if(data.registeredFunds.split(':').length==2){
+            $('#fundType').text(data.registeredFunds.split(':')[0]).data('val',data.registeredFunds.split(':')[0]);
+            page.registeredFunds.val(data.registeredFunds.split(':')[1]);
+        }else {
+            page.registeredFunds.val(data.registeredFunds.split(':')[0]);
+        }
+    } // 注册资金
     if (data.shortName) { page.shortName.val(data.shortName);}
     if (data.zhongxinbaoLevel) { page.zhongxinbaoLevel.val(data.zhongxinbaoLevel);}
     if (data.zhongxinbaoNumber) { page.zhongxinbaoNumber.val(data.zhongxinbaoNumber);}
@@ -340,7 +311,6 @@ CRM.cbInfo.renderForm = function(data){
         }
     });
     if (isEncyData) { CRM.tplHandler('encyC',encyData,$('#ency'));} // 百科
-
 
     // 产品
     if (data.customerMakeProduct) { CRM.tplHandler('cmp',data.customerMakeProduct,$('#cmpC'));}
@@ -444,15 +414,6 @@ CRM.cbInfo.aInitHandler = function () {
     CRM.insertHtml('#funBtnA',$('#aBtn')); // 渲染功能按钮 新增
     CRM.insertHtml('#backBtn',$('#funBtn')); // 返回
 
-    // 渲染地区树
-    // CRM.ajaxCall({
-    //     url:CRM.url.AREA_TREE_GET,
-    //     type:'GET',
-    //     callback:function (res) {
-    //         page.areaTree = res[0].nodes; // 将取到的树数据赋值给对象属性，下次有的话就不用再发请求了
-    //         page.renderTree(page.areaTree, 'areaId', '——请选择地区——');
-    //     }
-    // });
     // 渲染数据格式下拉框
     CRM.ajaxCall({
         url: basePath + '/customerBaseInfo/getFormatdoc',
@@ -520,7 +481,7 @@ CRM.cbInfo.pVerify = function (em) {
             "enterpriseNature": {
                 required : true
             },
-            enterpriseNature:"required",
+            // enterpriseNature:"required",
             // enterprisePhone:'digits',
             // enterpriseEmail:'email',
             // showFactory: 'required',
@@ -986,6 +947,14 @@ $().ready(function() {
         }
     });
 
+    // 点击选择币种
+    $('#sFundType').on('click','a',function (e) {
+        e.preventDefault();
+        var $this = $(this);
+        $('#fundType').data('val',$this.data('val'));
+        $('#fundType').text($this.data('val'));
+    });
+
     /**
      * 渲染树菜单
      * @param data
@@ -1029,219 +998,3 @@ $().ready(function() {
     }
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// $(function () {
-//
-//     //创建面包屑导航
-//     $('#location').append(createCrumbsD());
-//
-//     //设置title标题
-//     var title = $('#pTitle').text()+'——'+$('#sTitle').text();
-//     $('#hTitle').text(iGetInnerText(title));
-//
-//     //创建地区下拉框
-//     var areaData = getAreaData();
-//     creatAreaSelected(areaData,$('#areaId'));
-//     $(document).on('change.screen','#areaId',function () {
-//         var areaId = $('#areaId');
-//         var countryId = $('#countryId');
-//
-//         //根据地区下拉框赋值创建国家下拉框
-//         var areaIdVal = areaId.val();
-//         creatCountrySelected(areaData,areaIdVal,countryId);
-//     });
-//
-//     //新增页面——customerId为空字符串说明是新增页面
-//     if($('#customerId').val()==''){
-//         $('[name="customerType"]').val('2').attr('disabled','disabled');
-//         $('button').filter(editBtn).remove();
-//         $('.editHide').addClass('hidden');
-//         $('.editView').removeClass('hidden');
-//         var finishBtn = '';
-//         finishBtn += '<div class="form-group">';
-//         finishBtn += '<div class="col-xs-2 col-xs-offset-4">';
-//         finishBtn += '<button id="resetForm" class="btn btn-block btn-default">重置</button></div>'
-//         finishBtn += '<div class="col-xs-2">';
-//         finishBtn += '<button id="upData" class="btn btn-block btn-primary" type="button">完成</button></div>';
-//         finishBtn += '</div>';
-//         $('.form-horizontal').append(finishBtn);
-//         $(document).on('click.up','#upData',function () {
-//             $.ajax({
-//                 url:basePath+'/customerBaseInfo/doAddCustomerBaseInfo',
-//                 type:'POST',
-//                 contentType:"application/json",
-//                 data: customerBasicFormObj()
-//             }).done(function (result) {
-//                 console.log(result.data);
-//                 var customerId = result.data.customerId;
-//                 $('#linkPot').attr('href','/customerBaseInfo/intoCustomerBaseInfoDetails?customerType=2&customerId='+ result.data.customerId);
-//                 document.getElementById('linkPot').click();
-//             })
-//         });
-//         $(document).on('click.reset','#resetForm',function () {
-//            location.reload();
-//         });
-//     }else if($('#customerId').val()!=''){
-//         init();
-//         //获取初始数据
-//         getData(basePath+'/customerBaseInfo/showCustomerBaseInfoDetails','POST',GetRequest(),customerBasicInfo);
-//         //编辑客户基本信息
-//         $(document).on('click.edit','editCustomerBasic',function () {
-//             addDelBtn('customerMakeProduct','form-group');
-//         });
-//         //客户基本信息提交
-//         $(document).on('click.up','#saveCustomerBasic',function(){
-//             upData(basePath+'/customerBaseInfo/updateCustomerBaseInfo','POST',customerBasicFormObj(),"application/json");
-//             delDelBtn();
-//         });
-//         //客户基本信息取消提交
-//         $(document).on('click.cancel','#cancelCustomerBasic',function(){
-//             //重新获取数据
-//             location.reload();
-//         });
-//         $(document).on('click.edit','#editEncyclopedia',function () {
-//             //添加删除按钮
-//             addDelBtn('customField','form-group');
-//         });
-//         $(document).on('click.create','#addFiled',function () {
-//             var container = $('#filedContainer');
-//             container.html('');
-//             var form = '';
-//             form += '<div class="form-horizontal">';
-//             form += '<div class="form-group">';
-//             form += '<label for="" class="control-label col-xs-2">名称</label>';
-//             form += '<div class="col-xs-4">';
-//             form += '<input type="text" class="form-control" value=""></div></div>';
-//             form += '<div class="form-group">';
-//             form += '<label for="" class="control-label col-xs-2">内容</label>';
-//             form += '<div class="col-xs-9">';
-//             form += '<textarea class="form-control" name="" rows="8" value=""></textarea></div></div>';
-//             form += '</div>';
-//             container.append(form);
-//         });
-//         $(document).on('click.append','#up_cf',function () {
-//             var place = $('#addFiled').parents('.form-group');
-//             var container = $('#filedContainer');
-//             var name = $('input',container).val();
-//             var content = $('textarea',container).val();
-//             var row = '';
-//             row += '<div name="customField" class="form-group">';
-//             row += '<label name="name" class="control-label col-xs-1" lang="zh">'+ name +'</label>';
-//             row += '<div class="col-xs-8"><textarea name="value" class="form-control" rows="4">'+ content +'</textarea>';
-//             row += '</div>';
-//             place.before(row);
-//             delDelBtn();
-//             addDelBtn('customField','form-group');
-//         });
-//         $(document).on('click.up','#addEncyclopedia',function(){
-//             //提交数据
-//             upData(basePath+'/customerEncyclopedia/doModify','POST',customerEncyclopediaObj(),"application/json");
-//             delDelBtn();
-//         });
-//         $(document).on('change','#customerType',function () {
-//             var $this = $(this);
-//             if($this.val()==3){
-//                 $('#showReasons').click();
-//                 var container = $('#reasons').find('.modal-body .form-group');
-//                 var content = '';
-//                 content += '<label class="control-label col-xs-2">流失原因分析</label>';
-//                 content += '<div class="col-xs-9"><textarea class="form-control" rows="8"></textarea></div>';
-//                 container.html('').append(content);
-//             }
-//         })
-//     }
-//
-//     //button——添加产品
-//     $(document).on('click.add','#addPro',function () {
-//         var row = '';
-//         row += '<div name="customerMakeProduct" class="form-group" style="position:relative;">';
-//         row += '<label class="col-xs-1 control-label" style="position: relative">生产产品</label>';
-//         row += '<div class="col-xs-2"><input name="productName" class="form-control" type="text" value=""></div>';
-//         row += '<label class="col-xs-1  control-label">产能</label>';
-//         row += '<div class="col-xs-2"><input name="production" class="form-control" type="text" value=""></div>';
-//         row += '</div>';
-//         $('#addPro').parents('.form-group').before(row);
-//         delDelBtn();
-//         addDelBtn('customerMakeProduct','form-group');
-//         $('[name="customerMakeProduct"]').eq(0).find('button').remove();
-//         $('[name="customerMakeProduct"]').each(function (n) {
-//             var $this = $(this);
-//             $this.find('label').eq(0).text(function () {
-//                 return '生产产品'+parseInt(n+1);
-//             })
-//         })
-//     });
-//
-//     //select||checkbox控制显示与隐藏
-//     controlSOrH('#showOpportunity');
-//     controlSOrH('#showOtherOpportunity');
-//     controlSOrH('#showFactory');
-//     controlSOrH('#showMajorCompetitorsGroup');
-//     controlSOrH('#showOtherEnterpriceNature');
-//
-//     $(document).on('change.view','[name="customerType"]',function () {
-//         controlSOrH('#showOpportunity');
-//     });
-//     $(document).on('change.view','#opportunitySource',function () {
-//         controlSOrH('#showOtherOpportunity');
-//     });
-//     $(document).on('change.view','[name="enterpriseNature"]',function () {
-//         controlSOrH('#showFactory');
-//         controlSOrH('#showMajorCompetitorsGroup');
-//         controlSOrH('#showOtherEnterpriceNature');
-//     });
-//
-// });
-//
-// /**
-//  * 删除按钮的添加和删除
-//  */
-// // function reorderPro(){
-// //     $('[name="customerMakeProduct"]').find('label:first-child').html(function (n,old) {
-// //         if(n!=0){
-// //             return '<button type="button" class="close" data-form-btn="del" data-form-target="form-group" style="position: absolute;top: 3px;left: 24px;">×</button>生产产品' + parseInt(n+1);
-// //         }
-// //     });
-// // }
-// function addDelBtn(name,tar) {
-//     var delBtn = '<button type="button" class="close" data-form-btn="del" data-form-target="'+tar+'" style="position:absolute;top:3px;left:25px;z-index:100;">×</button>';
-//     $('[name="'+name+'"]').css('position','relative').prepend(delBtn);
-// }
-// function delDelBtn() {
-//     $('button').filter('[data-form-btn="del"]').remove();
-// }
