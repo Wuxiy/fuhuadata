@@ -55,10 +55,16 @@ public interface CustomerProductArchivesDao {
     public CustomerProductArchives getCustomerProductInfoById(int customer_product_id);
 
 	/**
-	 * 结合客户标准产品档案表和规格型号表查询客户包装要求信息
+	 * 知识库-结合客户标准产品档案表和规格型号表查询客户包装要求信息
 	 * @return
 	 */
-	public List<CustomerProductPackagingArchives> getCustomerProductPackagingArchives();
+	public List<CustomerProductPackagingArchives> getCustomerProductPackagingArchives(CustomerProductPackagingArchives cppa);
+	/**
+	 *
+	 * @param cppa
+	 * @return
+	 */
+	public int countCustomerProductPackagingArchives(CustomerProductPackagingArchives cppa);
 
 	/**
 	 * 根据id获取客户产品要求

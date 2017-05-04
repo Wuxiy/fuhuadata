@@ -18,11 +18,11 @@
                     <form class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon" lang="zh">客户名称</span>
-                            <input class="form-control" id="customer_name" type="search" placeholder="请输入客户名称"/>
+                            <input class="form-control" id="customerName" type="search" placeholder="请输入客户名称"/>
                             <span class="input-group-addon" lang="zh">客户商品名</span>
-                            <input class="form-control" id="customer_product_name" type="search" value="" placeholder="请输入客户商品名称"/>
+                            <input class="form-control" id="customerProductName" type="search" value="" placeholder="请输入客户商品名称"/>
                             <span class="input-group-addon" lang="zh" >产品名称</span>
-                            <input id="product_name" class="form-control" type="search" value="" placeholder="请输入产品名称"/>
+                            <input id="productName" class="form-control" type="search" value="" placeholder="请输入产品名称"/>
                             <span class="input-group-btn">
                                 <button data-toggle="modal" class="btn btn-xs btn-default" data-target="#tSearch" type="button">
                                     <span class="glyphicon glyphicon-search"></span>
@@ -31,14 +31,15 @@
                             <span class="input-group-addon" lang="zh">品牌</span>
                             <input class="form-control" id="brand" type="search" value="" placeholder="请输入品牌"/>
                             <span class="input-group-addon" lang="zh" >加工厂</span>
-                            <select class="form-control" id="factory_name">
-                                <option value="">全部</option>
-                                <option value="1">杭州海辰</option>
-                                <option value="2">杭州乐川</option>
+                            <select name="factoryName" id="factoryName" class="form-control">
+                                <option value="">——请选择——</option>
+                                #foreach($!info in $!{freightCosts})
+                                    <option value="$!info.freightId">$!info.processFactory</option>
+                                #end
                             </select>
                             <div class="input-group-btn">
                                 <button class="btn btn-xs btn-default" type="reset">重置</button>
-                                <button class="btn btn-xs btn-primary" id="button" type="button">搜索</button>
+                                <button class="btn btn-xs btn-primary" id="submit" type="button">搜索</button>
                             </div>
                         </div>
                     </form>
@@ -99,12 +100,13 @@
                             <th class="text-center">型号</th>
                             <th class="text-center">主单位</th>
                             <th class="text-center">加工厂</th>
-                            <th class="text-center">加工厂编号</th>
                         </tr>
                         </th>
                         </thead>
-
+                        <tbody id="list"></tbody>
                     </table>
+                    <!--分页导航-->
+                    <div id="pagination" class="pagination"></div>
                     <!--表格结束-->
                 </div>
                 <div class="panel-body clearfix"></div>
@@ -136,16 +138,146 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript">
 
+    var pagesize = 10; // 分页步长
     $('#tree').creatTree(basePath+'/productCategory/CategoryTree');
     $(document).on('click','a.cNode',function (e) {
         e.preventDefault();
         console.log(e.target);
         var tarEltext = $(e.target).text();
-        $('#product_name').val(tarEltext);
+        $('#productName').val(tarEltext);
         $('#tSearch').modal('hide');
     });
-    $(document).ready(function() {
+    $("#submit").click(function () {
+        search();
+    });
+    //加工厂列表
+    $('#factory').click(function(){
+        var factoryList = document.getElementById('factoryList');
+        factoryList.innerHTML = '';
+        jQuery.ajax({
+            url:basePath + '/freightCost/queryFreightCostList',
+            type:'GET',
+            success: function (result) {
+                var ResultData = eval(result.data);
+                for (var i = 0; i < ResultData.length; i++) {
+                    factoryList.innerHTML += '<li class="list-group-item"><a class="fNode">'+ResultData[i].processFactory+'</a></li>';
+                }
+                $('#factoryModal').modal('show');
+            }
+        })
+    });
 
+    search();
+
+    // 搜索列表并渲染
+    function search(){
+        // 获取参数
+        var data = collectArgs();
+
+        getDataList(0,pagesize,rederLiset); // 初始化第一页数据
+
+        // 获取总的条数
+        getListCount(data,function (total) {
+
+            // 渲染分页
+            rederPaging(total,pagesize,function (pageNum,jq) {
+
+                // 获取列表数据
+                getDataList(pageNum,pagesize);
+            })
+        })
+
+    }
+
+    // 收集提交参数
+    function collectArgs() {
+        var obj={
+            productName:$('#productName').val(),
+            customerName:$('#customerName').val(),
+            brand:$('#brand').val(),
+            factoryId:$('#factoryName').val(),
+            customerProductName:$('#customerProductName').val()
+        }
+        return obj;
+    }
+
+    // 获取列表数据条目总数
+    function getListCount(data,callback){
+        var total = 0;
+        jQuery.ajax({
+            url:basePath + '/customerProductPacking/countCustomerProductPackingByPage',
+            dataType:'JSON',
+            contentType:'application/json',
+            data:JSON.stringify(data),
+            async:true,
+            type:'POST'
+        }).done(function (res) {
+            total = res.data;
+            callback(total);
+        });
+    }
+
+    // 渲染分页插件
+    function rederPaging(total,pageSize,callback) {
+
+        $("#pagination").pagination(total,{
+            items_per_page : pageSize,
+            num_edge_entries : 3,
+            num_display_entries : 10,
+            callback:callback
+        });
+    }
+
+    // 根据页码获取列表数据
+    function getDataList(pageNum,pageSize,callback) {
+        jQuery.ajax({
+            url:basePath + '/customerProductPacking/getCustomerProductPackingByPage',
+            dataType:'json',
+            contentType:'application/json',
+            data:JSON.stringify({
+                productName:$('#productName').val(),
+                customerName:$('#customerName').val(),
+                brand:$('#brand').val(),
+                factoryId:$('#factoryName').val(),
+                customerProductName:$('#customerProductName').val(),
+                startRow:pageNum*pageSize,
+                pageSize:pageSize
+            }),
+            async:true,
+            type:'POST'
+        }).done(function (res) {
+
+            // 渲染列表
+            rederLiset(res,pageNum);
+        });
+    }
+    // 渲染列表
+    function rederLiset(data,pageNum){
+
+        var ResultData = data.data,
+                _html = '',
+                count = pageNum*pagesize;
+
+        if(ResultData && ResultData!='' && ResultData!='null') {
+            for (var i = 0; i < ResultData.length; i++) {
+                _html += '<tr>';
+                _html += '<td>'+(++count)+'</td>';
+                _html += '<td>' + (ResultData[i].customerName!=undefined?ResultData[i].customerName:'') + '</td>';
+                _html += '<td><a href='+basePath+'"/customerProductPacking/intoCustomerProductInfoDetails?id='+ResultData[i].customerProductId+'">' + (ResultData[i].customerProductName!=undefined?ResultData[i].customerProductName:'') + '</a></td>';
+                _html += '<td>' + (ResultData[i].categorySerialNumber!=undefined?ResultData[i].categorySerialNumber:'') + '</td>';
+                _html += '<td lang="zh">' + (ResultData[i].categoryName!=undefined?ResultData[i].categoryName:'') + '</td>';
+                _html += '<td lang="zh">' + (ResultData[i].productName!=undefined?ResultData[i].productName:'') + '</td>';
+                _html += '<td>' + (ResultData[i].brand!=undefined?ResultData[i].brand:'') + '</td>';
+                _html += '<td>' + (ResultData[i].specification!=undefined?ResultData[i].specification:'') + '</td>';
+                _html += '<td lang="zh">' + (ResultData[i].model!=undefined?ResultData[i].model:'') + '</td>';
+                _html += '<td lang="zh">' + (ResultData[i].mainUnit != undefined ? ResultData[i].mainUnit:'') + '</td>';
+                _html += '<td>' + (ResultData[i].factoryName!=undefined?ResultData[i].factoryName:'') + '</td>';
+                _html += '</tr>';
+            }
+        }
+        $("#list").html(_html);
+    }
+   /* $(document).ready(function() {
         var table =$('#customer_customer_packaging_table').DataTable( {
             "ajax":basePath+'/customerProductPacking/queryCustomerProductPackingList',
             "pagingType":"full_numbers",
@@ -205,7 +337,7 @@
                     .draw(false);
 
         });
-    } );
+    } );*/
 
 
 </script>

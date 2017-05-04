@@ -1,9 +1,7 @@
 package com.fuhuadata.service.impl;
-import java.security.interfaces.RSAKey;
 import java.util.Arrays;
 import java.util.List;
 
-import com.fuhuadata.dao.RecordLinkmanDao;
 import com.fuhuadata.domain.RecordLinkman;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.RecordLinkmanManager;
@@ -12,12 +10,10 @@ import com.fuhuadata.manager.CustomerVisitRecordManager;
 import com.fuhuadata.domain.CustomerVisitRecord;
 import com.fuhuadata.domain.query.QueryCustomerVisitRecord;
 import javax.annotation.Resource;
-import javax.management.Query;
 
 import com.fuhuadata.vo.CustomerVisitRecordLinkman;
 import com.fuhuadata.vo.CustomerVisitRecordVO;
 import com.fuhuadata.vo.VisitRecordVO;
-import jdk.jfr.events.ExceptionThrownEvent;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

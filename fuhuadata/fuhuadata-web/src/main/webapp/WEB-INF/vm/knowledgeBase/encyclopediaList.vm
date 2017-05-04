@@ -63,59 +63,201 @@
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        var table = $('#encyclopedia_table').DataTable({
-            "ajax": basePath + '/customerEncyclopedia/queryCustomerEncyclopediaList',
-            "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
-            "lengthChange": false,//是否允许用户自定义显示数量
-            "bPaginate": true, //翻页功能
-            "bFilter": false, //列筛序功能
-            "searching": true,//本地搜索
-            "ordering": true, //排序功能
-            "Info": true,//页脚信息
-            "autoWidth": true,//自动宽度
-            "pagingType": "full_numbers",
-            "columns": [
-                {"data": "encyId"},
-                {"data": "fullName"},
-                {"data": "shortName"},
-                {"data": "companyType"},
-                {"data": "isFull"},
-                {"data": "createUserName"},
-                {"data": "createTime"},
-                {"data": "lastmodifyUserName"},
-                {"data": "modifyTime"}
-            ],
-            "columnDefs": [{
-                targets: "_all",
-                defaultContent: ''
-            }, {
-                "targets": 1,
-                "render": function (data, type, row) {
-                    return '<a href='basePath+'/customerEncyclopedia/modify?encyId=' + row.encyId + '"target="_blank">' + (row.fullName?row.fullName:"") + '</a>';
+
+    var pagesize = 10; // 分页步长
+    $('#tree').creatTree(basePath+'/productCategory/CategoryTree');
+    $(document).on('click','a.cNode',function (e) {
+        e.preventDefault();
+        console.log(e.target);
+        var tarEltext = $(e.target).text();
+        $('#productName').val(tarEltext);
+        $('#tSearch').modal('hide');
+    });
+    $("#submit").click(function () {
+        search();
+    });
+    //加工厂列表
+    $('#factory').click(function(){
+        var factoryList = document.getElementById('factoryList');
+        factoryList.innerHTML = '';
+        jQuery.ajax({
+            url:basePath + '/freightCost/queryFreightCostList',
+            type:'GET',
+            success: function (result) {
+                var ResultData = eval(result.data);
+                for (var i = 0; i < ResultData.length; i++) {
+                    factoryList.innerHTML += '<li class="list-group-item"><a class="fNode">'+ResultData[i].processFactory+'</a></li>';
                 }
-            }, {
-                "targets": 3,
-                "render": function (data, row) {
-                    return ''
-                }
-            }],
-            "language": {
-                "url": basePath + '/lib/dataTables/lang/dataTables.lang.zh',
-                "searchPlaceholder": '关键字'
+                $('#factoryModal').modal('show');
             }
         })
+    });
 
+    search();
 
-        //自定义搜索
-        $('#type').on('keyup click', function () {
-            var type = $("#type").val()
-            table.search(type, false, false).draw();
+    // 搜索列表并渲染
+    function search(){
+        // 获取参数
+        var data = collectArgs();
+
+        getDataList(0,pagesize,rederLiset); // 初始化第一页数据
+
+        // 获取总的条数
+        getListCount(data,function (total) {
+
+            // 渲染分页
+            rederPaging(total,pagesize,function (pageNum,jq) {
+
+                // 获取列表数据
+                getDataList(pageNum,pagesize);
+            })
+        })
+
+    }
+
+    // 收集提交参数
+    function collectArgs() {
+        var obj={
+            productName:$('#productName').val(),
+            customerName:$('#customerName').val(),
+            brand:$('#brand').val(),
+            factoryId:$('#factoryName').val(),
+            customerProductName:$('#customerProductName').val()
+        }
+        return obj;
+    }
+
+    // 获取列表数据条目总数
+    function getListCount(data,callback){
+        var total = 0;
+        jQuery.ajax({
+            url:basePath + '/customerProductPacking/countCustomerProductPackingByPage',
+            dataType:'JSON',
+            contentType:'application/json',
+            data:JSON.stringify(data),
+            async:true,
+            type:'POST'
+        }).done(function (res) {
+            total = res.data;
+            callback(total);
         });
+    }
 
-        $('#search').on('keyup click', function () {
-            var search = $("#search").val()
-            table.search(search, false, false).draw();
+    // 渲染分页插件
+    function rederPaging(total,pageSize,callback) {
+
+        $("#pagination").pagination(total,{
+            items_per_page : pageSize,
+            num_edge_entries : 3,
+            num_display_entries : 10,
+            callback:callback
         });
-    })
+    }
+
+    // 根据页码获取列表数据
+    function getDataList(pageNum,pageSize,callback) {
+        jQuery.ajax({
+            url:basePath + '/customerProductPacking/getCustomerProductPackingByPage',
+            dataType:'json',
+            contentType:'application/json',
+            data:JSON.stringify({
+                productName:$('#productName').val(),
+                customerName:$('#customerName').val(),
+                brand:$('#brand').val(),
+                factoryId:$('#factoryName').val(),
+                customerProductName:$('#customerProductName').val(),
+                startRow:pageNum*pageSize,
+                pageSize:pageSize
+            }),
+            async:true,
+            type:'POST'
+        }).done(function (res) {
+
+            // 渲染列表
+            rederLiset(res,pageNum);
+        });
+    }
+    // 渲染列表
+    function rederLiset(data,pageNum){
+
+        var ResultData = data.data,
+                _html = '',
+                count = pageNum*pagesize;
+
+        if(ResultData && ResultData!='' && ResultData!='null') {
+            for (var i = 0; i < ResultData.length; i++) {
+                _html += '<tr>';
+                _html += '<td>'+(++count)+'</td>';
+                _html += '<td>' + (ResultData[i].customerName!=undefined?ResultData[i].customerName:'') + '</td>';
+                _html += '<td><a href='+basePath+'"/customerProductPacking/intoCustomerProductInfoDetails?id='+ResultData[i].customerProductId+'">' + (ResultData[i].customerProductName!=undefined?ResultData[i].customerProductName:'') + '</a></td>';
+                _html += '<td>' + (ResultData[i].categorySerialNumber!=undefined?ResultData[i].categorySerialNumber:'') + '</td>';
+                _html += '<td lang="zh">' + (ResultData[i].categoryName!=undefined?ResultData[i].categoryName:'') + '</td>';
+                _html += '<td lang="zh">' + (ResultData[i].productName!=undefined?ResultData[i].productName:'') + '</td>';
+                _html += '<td>' + (ResultData[i].brand!=undefined?ResultData[i].brand:'') + '</td>';
+                _html += '<td>' + (ResultData[i].specification!=undefined?ResultData[i].specification:'') + '</td>';
+                _html += '<td lang="zh">' + (ResultData[i].model!=undefined?ResultData[i].model:'') + '</td>';
+                _html += '<td lang="zh">' + (ResultData[i].mainUnit != undefined ? ResultData[i].mainUnit:'') + '</td>';
+                _html += '<td>' + (ResultData[i].factoryName!=undefined?ResultData[i].factoryName:'') + '</td>';
+                _html += '</tr>';
+            }
+        }
+        $("#list").html(_html);
+    }
+
+
+//    $(document).ready(function () {
+//        var table = $('#encyclopedia_table').DataTable({
+//            "ajax": basePath + '/customerEncyclopedia/queryCustomerEncyclopediaList',
+//            "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
+//            "lengthChange": false,//是否允许用户自定义显示数量
+//            "bPaginate": true, //翻页功能
+//            "bFilter": false, //列筛序功能
+//            "searching": true,//本地搜索
+//            "ordering": true, //排序功能
+//            "Info": true,//页脚信息
+//            "autoWidth": true,//自动宽度
+//            "pagingType": "full_numbers",
+//            "columns": [
+//                {"data": "encyId"},
+//                {"data": "fullName"},
+//                {"data": "shortName"},
+//                {"data": "companyType"},
+//                {"data": "isFull"},
+//                {"data": "createUserName"},
+//                {"data": "createTime"},
+//                {"data": "lastmodifyUserName"},
+//                {"data": "modifyTime"}
+//            ],
+//            "columnDefs": [{
+//                targets: "_all",
+//                defaultContent: ''
+//            }, {
+//                "targets": 1,
+//                "render": function (data, type, row) {
+//                    return '<a href='+basePath+'/customerEncyclopedia/modify?encyId=' + row.encyId + '"target="_blank">' + (row.fullName?row.fullName:"") + '</a>';
+//                }
+//            }, {
+//                "targets": 3,
+//                "render": function (data, row) {
+//                    return ''
+//                }
+//            }],
+//            "language": {
+//                "url": basePath + '/lib/dataTables/lang/dataTables.lang.zh',
+//                "searchPlaceholder": '关键字'
+//            }
+//        })
+//
+//
+//        //自定义搜索
+//        $('#type').on('keyup click', function () {
+//            var type = $("#type").val()
+//            table.search(type, false, false).draw();
+//        });
+//
+//        $('#search').on('keyup click', function () {
+//            var search = $("#search").val()
+//            table.search(search, false, false).draw();
+//        });
+//    })
 </script>

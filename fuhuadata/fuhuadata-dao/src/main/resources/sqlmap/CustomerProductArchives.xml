@@ -667,7 +667,27 @@
 	</select>
 
 
-	<select id="GET-CUSTOMER-PRODUCT-PACKAGING" resultClass="CustomerProductPackagingArchives">
+	<!--知识库-客户产品包装要求-->
+	<sql id="CUSTOMER-PRODUCT-PACKING-QUERY">
+		<dynamic prepend=" WHERE ">
+			<isNotEmpty prepend=" AND " property="customerName">
+				base.full_name like concat('%',#customerName#,'%')
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="customerProductName">
+				a.customer_product_name like concat('%',#customerProductName#,'%')
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="productName">
+				a.name like concat('%',productName,'%')
+			</isNotEmpty>
+			<isNotEmpty prepend=" AND " property="brand">
+				a.brand like concat('%',#brand#,'%')
+			</isNotEmpty>
+			<isNotEmpty prepend="AND " property="factoryId">
+				a.factory_id = #factoryId#
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+	<select id="GET-CUSTOMER-PRODUCT-PACKAGING" resultClass="CustomerProductPackagingArchives" parameterClass="CustomerProductPackagingArchives">
 		<![CDATA[
 				SELECT
 				a.id as customerProductId,
@@ -687,10 +707,30 @@
 				LEFT JOIN customer_base_info base on base.customer_id = a.customer_id
 				LEFT JOIN product_info b on a.product_id = b.product_id
 				LEFT JOIN product_ware c ON c.ware_id = a.ware_id
-				ORDER BY a.id
 		]]>
+		<isParameterPresent>
+			<include refid="CUSTOMER-PRODUCT-PACKING-QUERY"/>
+			ORDER BY a.modify_time DESC
+			<isNotEmpty property="pageSize">
+				LIMIT #startRow#,#pageSize#
+			</isNotEmpty>
+		</isParameterPresent>
+	</select>
+	<select id="COUNT-CUSTOMER-PRODUCT-PACKAGING" resultClass="java.lang.Integer" parameterClass="CustomerProductPackagingArchives">
+		<![CDATA[
+				SELECT
+				count(a.id)
+				FROM customer_product_archives a
+				LEFT JOIN customer_base_info base on base.customer_id = a.customer_id
+				LEFT JOIN product_info b on a.product_id = b.product_id
+				LEFT JOIN product_ware c ON c.ware_id = a.ware_id
+		]]>
+		<isParameterPresent>
+			<include refid="CUSTOMER-PRODUCT-PACKING-QUERY"/>
+		</isParameterPresent>
 	</select>
 
+	<!--客户基本信息-产品要求-->
 	<select id="GET-CUSTOMER-PRODUCT-REQUIRE-BY-ID" resultClass="CustomerProductPackagingArchives" parameterClass="java.lang.String">
 		<![CDATA[
 			SELECT
