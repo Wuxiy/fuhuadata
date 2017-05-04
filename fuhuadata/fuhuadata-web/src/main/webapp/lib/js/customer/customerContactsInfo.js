@@ -17,6 +17,7 @@ $(document).ready(function(){
                 return false;
             }else{
                 upData(basePath+'/customerLinkman/updateById','POST',updateContactsInfo(),"application/json");
+                return false;
             }
         })
     });

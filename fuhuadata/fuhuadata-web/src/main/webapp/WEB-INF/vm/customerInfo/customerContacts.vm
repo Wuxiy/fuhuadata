@@ -20,7 +20,6 @@
                         <table class="table table-condensed table-bordered table-striped text-center">
                             <thead>
                             <tr>
-
                                 <th class="text-center" lang="zh">编号</th>
                                 <th class="text-center" lang="zh">姓名</th>
                                 <th class="text-center" lang="zh">岗位</th>
@@ -34,9 +33,7 @@
                                 <th class="text-center" lang="zh">备注</th>
                             </tr>
                             </thead>
-                            <tbody id="contactsList">
-
-                            </tbody>
+                            <tbody id="contactsList"></tbody>
                         </table>
                     </div>
                 </div>
@@ -44,17 +41,12 @@
         </div>
     </div>
 </div>
-<input id="customerId" type="hidden" value='${customerId}'>
-<input id="customerType" type="hidden" value='$!{customerType}'>
-<input type="hidden" id="fullName" value="$!{fullName}" />
+<input id="customerId" type="hidden" value="$!{customerId}">
+<input id="customerType" type="hidden" value="$!{customerType}">
+##<input type="hidden" id="fullName" value="$!{fullName}" />
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerContactsList.js"></script>
-##<script type="text/javascript">
-##    function Add(){
-##        var url =basePath + $('#add').attr('data-url') + $("#customerId").val();
-##        window.open(url);
-##    }
-##</script>
+
 
