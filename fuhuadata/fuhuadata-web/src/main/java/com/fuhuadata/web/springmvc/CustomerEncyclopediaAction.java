@@ -67,33 +67,16 @@ public class CustomerEncyclopediaAction {
     }
 
     /**
-     * 客户百科 - 后端分页
-     * @return
-     */
-    @RequestMapping(value = "/getCustomerEncyclopediaListByQuery",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "list")
-    @ResponseBody
-    public ResultPojo getCustomerEncyclopediaListByQuery(@RequestBody CustomerEncyclopediaQuery query){
-        Result<List<CustomerEncyVO>> result = new Result<List<CustomerEncyVO>>();
-        try{
-            result=customerEncyclopediaService.getCustomerEncyclopediaByQuery(query);
-        }catch(Exception e){
-            log.error("获取企业百科列表失败",e);
-        }
-        return result.getResultPojo();
-    }
-
-    /**
      * add
      * @return
      */
     @RequestMapping(value = "/addCustomerEncyclopedia",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "add")
     public ModelAndView addCustomerEncyclopedia(String encyId,String customerId){
-        Result<List<Currtype>> currtype = dataArchivesService.getCurrtype();
-        System.out.println("1111111111111111"+currtype);
+        Result<List<Currtype>> rcurrtype = dataArchivesService.getCurrtype();
+        System.out.println(rcurrtype.getModel().get(1).getPkCurrtype());
         return new ModelAndView("knowledgeBase/encyclopediaAdd").addObject("encyId",encyId).addObject("customerId",customerId)
-                .addObject("currtype",currtype.getModel());
+                .addObject("currtype",rcurrtype.getModel());
     }
 
     @RequestMapping(value = "/doAddCustomerEncyclopedia",method = RequestMethod.POST)

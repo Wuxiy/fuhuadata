@@ -36,6 +36,13 @@ public interface ComponentCostDao {
      */
     public int deleteComponentCostById(int id);
 
+    /**
+     * 批量删除成分参考
+     * @param costIds
+     * @return
+     */
+    int deleteComponentByIds(List<Integer> costIds);
+
     public int deleteProductComponentCostById(int componentId);
 
     /**

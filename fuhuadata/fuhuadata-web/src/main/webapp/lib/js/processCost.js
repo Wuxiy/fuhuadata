@@ -11,6 +11,43 @@ var Rate2 = document.getElementById("rate2");
 var Rate3 = document.getElementById("rate3");
 var modal = document.getElementById("modal");
 
+var ComponentCost = ComponentCost || {};
+
+(function (obj) {
+
+    obj.refreshTable = function () {
+        jQuery.ajax({
+            url: basePath+'/componentCost/queryComponentCostList',
+            type: 'GET',
+            data: 'json',
+            success: function (result) {
+                $('#cost1').html('');
+                if(result.data!=undefined){
+                    var ResultData = result.data,
+                        costHtml = '';
+                    for (var i = 0; i < ResultData.length; i++) {
+                        costHtml += '<tr data-component-id="' + ResultData[i].componentId + '">' +
+                            '<td><a class="componnentId" data_url="'+basePath+'/componentCost/getComponentCostById?id=' + ResultData[i].componentId + '&&productCategoryId='+ResultData[i].productCategoryId+'">' + ifEmpty(ResultData[i].componentName) + '</a></td>' +
+                            '<td>' + ifEmpty(ResultData[i].consumption) + '</td>' +
+                            '<td>' + ifEmpty(ResultData[i].unitCost) + '</td>' +
+                            '<td>' + ifEmpty(ResultData[i].priceEnd) + '</td>' +
+                            '<td>' + ifEmpty(ResultData[i].suitableProduct) + '</td>' +
+                            '<td>' + ifEmpty(ResultData[i].remarks) + '</td>' +
+                            '<td>' +
+                            '<div class="checkbox">' +
+                            '<label><input type="checkbox" value="' + ResultData[i].costId + '" class="j-delete"></label>' +
+                            '</div>' +
+                            '</td>' +
+                            '</tr>';
+
+                        $('#cost1').html(costHtml);
+                    }
+                }
+            }
+        })
+    }
+})(ComponentCost);
+
 $(document).ready(function () {
 
     $('a[href="#adEexpense"]').tab('show');
@@ -124,26 +161,7 @@ $(document).ready(function () {
 
     $('a[href="#cost"]').click(function () {
         $('a[href="#cost"]').tab('show');
-        jQuery.ajax({
-            url: basePath+'/componentCost/queryComponentCostList',
-            type: 'GET',
-            success: function (result) {
-                Cost.innerHTML = '';
-                if(result.data!=undefined){
-                    var ResultData = eval(result.data);
-                    for (var i = 0; i < ResultData.length; i++) {
-                        Cost.innerHTML += '<tr>' +
-                            '<td><a class="componnentId" data_url="'+basePath+'/componentCost/getComponentCostById?id=' + ResultData[i].componentId + '&&productCategoryId='+ResultData[i].productCategoryId+'">' + ifEmpty(ResultData[i].componentName) + '</a></td>' +
-                            '<td>' + ifEmpty(ResultData[i].consumption) + '</td>' +
-                            '<td>' + ifEmpty(ResultData[i].unitCost) + '</td>' +
-                            '<td>' + ifEmpty(ResultData[i].priceEnd) + '</td>' +
-                            '<td>' + ifEmpty(ResultData[i].suitableProduct) + '</td>' +
-                            '<td>' + ifEmpty(ResultData[i].remarks) + '</td>' +
-                            '</tr>';
-                    }
-                }
-            }
-        })
+        ComponentCost.refreshTable();
     });
 
     $('a[href="#portSurcharge"]').click(function () {

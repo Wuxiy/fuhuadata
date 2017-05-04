@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser.Feature;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.util.JSONPObject;
@@ -140,6 +141,31 @@ public class JsonMapper extends ObjectMapper {
     }
 
     /**
+     * 反序列化复杂对象
+     *
+     * <pre>
+     *     new TypeReference<List<MyClass>>(){}
+     * </pre>
+     *
+     * @param jsonString
+     * @param valueReference
+     * @param <T>
+     * @return
+     */
+    public <T> T fromJson(String jsonString, TypeReference valueReference) {
+        if (StringUtils.isEmpty(jsonString)) {
+            return null;
+        }
+
+        try {
+            return this.readValue(jsonString, valueReference);
+        } catch (IOException e) {
+            logger.warn("parse json string error:" + jsonString, e);
+            return null;
+        }
+    }
+
+    /**
      * 構造泛型的Collection Type如:
      * ArrayList<MyBean>, 则调用constructCollectionType(ArrayList.class,MyBean.class)
      * HashMap<String,MyBean>, 则调用(HashMap.class,String.class, MyBean.class)
@@ -217,6 +243,17 @@ public class JsonMapper extends ObjectMapper {
      */
     public static Object fromJsonString(String jsonString, Class<?> clazz) {
         return JsonMapper.getInstance().fromJson(jsonString, clazz);
+    }
+
+    /**
+     * JSON 字符串转换为 JAVA 对象
+     * @param jsonString
+     * @param valueReference
+     * @param <T>
+     * @return
+     */
+    public static <T> T fromJsonString(String jsonString, TypeReference valueReference) {
+        return JsonMapper.getInstance().fromJson(jsonString, valueReference);
     }
 
     /**
