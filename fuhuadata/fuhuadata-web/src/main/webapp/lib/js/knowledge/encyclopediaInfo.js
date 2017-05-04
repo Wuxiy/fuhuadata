@@ -688,7 +688,7 @@ $(function () {
         }else {
 
             window.history.back(-1);
-        };
+        }
         return false;
     });
 
@@ -713,6 +713,13 @@ $(function () {
         }
     });
 
+    // 点击选择币种
+    $('#sFundType').on('click','a',function (e) {
+        e.preventDefault();
+        var $this = $(this);
+        $('#fundType').data('val',$this.data('val'));
+        $('#fundType').text($this.data('val'));
+    });
 });
 
 

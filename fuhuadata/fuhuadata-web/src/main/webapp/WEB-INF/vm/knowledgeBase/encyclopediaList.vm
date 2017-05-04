@@ -12,7 +12,7 @@
                 <div class="panel-heading">
                     #if ($shiro.hasPermission("wiki:wiki:add"))
                         <a class="btn btn-xs btn-primary pull-right panel-heading-btn"
-                           href="${request.contextPath}/knowledgeBase/encyclopediaAdd" data-toggle="modal">
+                           href="${request.contextPath}/customerEncyclopedia/addCustomerEncyclopedia" data-toggle="modal">
                             <span class="glyphicon glyphicon-plus"></span>
                             新增
                         </a>
@@ -92,7 +92,7 @@
             }, {
                 "targets": 1,
                 "render": function (data, type, row) {
-                    return '<a href='basePath+'/customerEncyclopedia/modify?encyId=' + row.encyId + '"target="_blank">' + (row.fullName?row.fullName:"") + '</a>';
+                    return '<a href="'+ basePath +'/customerEncyclopedia/modify?encyId=' + row.encyId + '" target="_blank">' + (row.fullName?row.fullName:"") + '</a>';
                 }
             }, {
                 "targets": 3,

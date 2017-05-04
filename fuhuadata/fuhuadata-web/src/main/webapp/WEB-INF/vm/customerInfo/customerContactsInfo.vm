@@ -104,8 +104,12 @@
                             <label class="col-xs-1 control-label">是否默认<sup data-view="editView" class="not-null hidden">*</sup></label>
                             <div class="col-xs-2">
                                 <select data-control="on" class="form-control notnull" name="items" id="isDefault" disabled>
-                                    <option  value="1">是</option>
-                                    <option  value="0">否</option>
+                                    #if($!{isDefault}==0)
+                                        <option  value="1">是</option>
+                                        <option  value="0" selected>否</option>
+                                    #else
+                                        <option  value="1" selected>是</option>
+                                    #end
                                 </select>
                             </div>
                         </div>
@@ -122,6 +126,7 @@
         <div class="tab-content col-xs-10">
             <div class="panel panel-default">
                 <div class="panel-heading">
+                    <a href="${request.contextPath}/customerVisitRecord/intocustomerVisitRecordList?customerType=$!{customerType}&customerId=$!{customerId}" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">新增沟通记录</a>
                     <h3 class="panel-title">
                         沟通记录
                     </h3>
@@ -135,32 +140,15 @@
                             <th class="text-center" lang="zh">结束时间</th>
                             <th class="text-center" lang="zh">活动类型</th>
                             <th class="text-center" lang="zh">活动地点</th>
-##                            <th class="text-center" lang="zh">费用</th>
                             <th class="text-center" lang="zh">礼物赠送</th>
                             <th class="text-center" lang="zh">活动摘要</th>
                         </tr>
                         </thead>
-                        <tbody id="visitRecordsTable">
-
-                        </tbody>
+                        <tbody id="visitRecordsTable"></tbody>
                     </table>
                 </div>
             </div>
         </div>
-##        <div class="tab-content col-xs-10">
-##            <div class="panel-body clearfix">
-##                <form class="form-horizontal">
-##                    <div class="form-group">
-##                        <div class="col-xs-2 col-xs-offset-4">
-##                            <a class="btn btn-block btn-primary packingAdd">完成</a>
-##                        </div>
-##                        <div class="col-xs-2">
-##                            <button class="btn btn-block btn-default" type="reset">重置</button>
-##                        </div>
-##                    </div>
-##                </form>
-##            </div>
-##        </div>
     </div>
 </div>
 
