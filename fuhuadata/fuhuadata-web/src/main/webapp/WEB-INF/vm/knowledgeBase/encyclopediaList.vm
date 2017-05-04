@@ -198,6 +198,7 @@
                 _html += '<td lang="zh">' + (ResultData[i].model!=undefined?ResultData[i].model:'') + '</td>';
                 _html += '<td lang="zh">' + (ResultData[i].mainUnit != undefined ? ResultData[i].mainUnit:'') + '</td>';
                 _html += '<td>' + (ResultData[i].factoryName!=undefined?ResultData[i].factoryName:'') + '</td>';
+                _html += '<td>' + (ResultData[i].factoryName!=undefined?ResultData[i].factoryName:'') + '</td>';
                 _html += '</tr>';
             }
         }
