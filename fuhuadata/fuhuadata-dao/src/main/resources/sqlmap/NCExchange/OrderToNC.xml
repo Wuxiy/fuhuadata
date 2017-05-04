@@ -160,4 +160,14 @@
     <select id="getOrgNcIdByOrgId" parameterClass="java.lang.Integer" resultClass="java.lang.String" >
         select nc_id from p_organization where org_id=#orgId#
     </select>
+
+    <update id="updateCustCooperationTime" parameterClass="java.lang.String">
+        update customer_base_info
+        <dynamic prepend="set">
+            <isNotNull prepend="," property="startCooperationTime">
+                start_cooperation_time=#startCooperationTime#
+            </isNotNull>
+            where nc_id=#ncId#
+        </dynamic>
+    </update>
 </sqlMap>

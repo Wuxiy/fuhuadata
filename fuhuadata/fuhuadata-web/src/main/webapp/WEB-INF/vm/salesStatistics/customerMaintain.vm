@@ -228,27 +228,15 @@
                     $('#mactivityExpense').val(c.activityExpense);
                     $('#mactivityType').val(activityTypeList[c.activityType]);
                     $('#mactivitySummary').val(c.activitySummary);
-
-//                    $.each(data, function (i,item) {
-//                        _html += '<tr>';
-//                        _html += '<td>' + item.productName + '</td>';
-//                        _html += '<td><a href="">' + item.categoryName + '</a></td>';
-//                        _html += '<td lang="zh">' + item.salesVolume + '</td>';
-//                        _html += '<td lang="zh">' + item.grossProfit + '</td>';
-//                        _html += '<td lang="zh">' + item.salesAmount + '</td>';
-//                        _html += '<td>' + parseInt(i+1) + '</td>';
-//                        _html += '</tr>';
-//                    });
-//                    $('#myModal').find('tbody').html(_html);
-
-                for(var i=0;i<recordLinkmanList.length;i++){
-                    modalContactList.innerHTML += '<tr>'+
-                            '<td name="Lname">'+ recordLinkmanList[i].name+'</td>'+
-                            '<td name="Lname">'+ recordLinkmanList[i].activityGift+'</td>'+
-                            '<td name="Lname">'+ recordLinkmanList[i].remarks+'</td>'+
-                            '</tr>';
+                if(recordLinkmanList!=null&&recordLinkmanList.length>0) {
+                    for (var i = 0; i < recordLinkmanList.length; i++) {
+                        modalContactList.innerHTML += '<tr>' +
+                                '<td name="Lname">' + (recordLinkmanList[i].linkmanName != undefined ? recordLinkmanList[i].linkmanName : '无') + '</td>' +
+                                '<td name="Lname">' + (recordLinkmanList[i].activityGift != undefined ? recordLinkmanList[i].activityGift : '无') + '</td>' +
+                                '<td name="Lname">' + (recordLinkmanList[i].remarks != undefined ? recordLinkmanList[i].remarks : '无') + '</td>' +
+                                '</tr>';
+                    }
                 }
-                $('#addField').modal('show');
             })
         });
 
@@ -470,11 +458,8 @@
 //                    _html += '  <td>' + (ResultData[i].activitySummary!=undefined?ResultData[i].activitySummary:'') + '</td>';
                     _html += '  <td>' + ResultData[i].userName + '</td>';
                     _html += '   </tr>';
-                    console.log(ResultData[i].visitrecordId);
                 }
             }
             $("#customerMaintainList").html(_html);
         }
-
-
 </script>

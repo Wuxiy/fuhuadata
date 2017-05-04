@@ -13,7 +13,8 @@ public class ComponentCostVO {
 
     private KProductComponent[] kProductComponents;//适用产品分类
 
-    public ComponentCostVO(){
+    public ComponentCostVO(ComponentCost componentCost){
+        this.componentCost = componentCost;
     }
 
     public ComponentCost getComponentCost() {
@@ -32,4 +33,5 @@ public class ComponentCostVO {
     public void setkProductComponents(KProductComponent[] kProductComponents) {
         this.kProductComponents = kProductComponents;
     }
+
 }

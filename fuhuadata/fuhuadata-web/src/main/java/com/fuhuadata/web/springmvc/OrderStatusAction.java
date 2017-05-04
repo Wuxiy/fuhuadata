@@ -1,6 +1,7 @@
 package com.fuhuadata.web.springmvc;
 
 import com.fuhuadata.dao.NCExchange.OrderToNc;
+import com.fuhuadata.dao.impl.NCExchange.OrderToNcImpl;
 import com.fuhuadata.domain.mybatis.UserAccount;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,12 +46,18 @@ public class OrderStatusAction {
         }
         String ncOrderId= request.getParameter("vbillcode");
         String status= request.getParameter("status");
+        String ncId=request.getParameter("nc_id");
 
         try {
             Map<String,Object> mapv=new HashMap<String,Object>();
             mapv.put("ncOrderId",ncOrderId);
-            mapv.put("status",Integer.valueOf(status));
+            mapv.put("status",3);
             orderToNc.updateOrderStatusByNcOrderId(mapv);
+            Date dt=new Date();
+            Map<String,Object> mapc=new HashMap<String,Object>();
+            mapc.put("startCooperationTime",dt);
+            mapc.put("ncId",ncId);
+            orderToNc.updateCustCooperationTime(mapc);
         }catch (Exception e){
             e.printStackTrace();
         }

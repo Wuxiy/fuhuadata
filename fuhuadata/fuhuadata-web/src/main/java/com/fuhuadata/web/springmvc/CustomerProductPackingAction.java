@@ -1,8 +1,11 @@
 package com.fuhuadata.web.springmvc;
 
+import com.fuhuadata.domain.FreightCost;
+import com.fuhuadata.domain.query.FreightCostQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.CustomerProductArchivesService;
+import com.fuhuadata.service.FreightCostService;
 import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.CustomerProductPackagingArchives;
 import com.fuhuadata.web.util.CustomerUtils;
@@ -10,7 +13,9 @@ import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,6 +37,9 @@ public class CustomerProductPackingAction {
     @Resource
     private CustomerProductArchivesService customerProductInfoService;
 
+    @Autowired
+    private FreightCostService freightCostService;
+
     /**
      * 客户产品包装要求列表
      * @return
@@ -39,7 +47,9 @@ public class CustomerProductPackingAction {
     @RequestMapping(value="/customerProductPackingList",method= RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-customerProductPackaging  ",methods = "into")
     public ModelAndView customerProductPackingList(){
-        return new ModelAndView("knowledgeBase/customerProductPackingList");
+        FreightCostQuery freightCostQuery = new FreightCostQuery();
+        List<FreightCost> list = freightCostService.getFreightCostsByPage(freightCostQuery).getModel();
+        return new ModelAndView("knowledgeBase/customerProductPackingList").addObject("freightCosts",list);
     }
 
     /**
@@ -50,7 +60,7 @@ public class CustomerProductPackingAction {
     public ModelAndView infocustomerProductPacking(){return new ModelAndView("knowledgeBase/customerProductPackingInfo");}
 
     /**
-     * 知识库，客户产品包装要求
+     * 知识库，客户产品包装要求前端分页
      * @return
      */
     @RequestMapping(value = "/queryCustomerProductPackingList",method = RequestMethod.GET)
@@ -58,7 +68,9 @@ public class CustomerProductPackingAction {
     @ResponseBody
     public ResultPojo getCustomerProductPackagingArchives() {
         try {
-            Result<List<CustomerProductPackagingArchives>> result = customerProductInfoService.getCustomerProductPackagingArchives();
+            CustomerProductPackagingArchives customerProductPackagingArchives = new CustomerProductPackagingArchives();
+
+            Result<List<CustomerProductPackagingArchives>> result = customerProductInfoService.getCustomerProductPackagingArchives(customerProductPackagingArchives);
             return result.getResultPojo();
         } catch (Exception e) {
             log.error("获取客户产品包装要求列表错误",e);
@@ -66,6 +78,40 @@ public class CustomerProductPackingAction {
         return null;
     }
 
+
+    /**
+     * 知识库，客户产品包装要求后端分页
+     * @return
+     */
+    @RequestMapping(value = "/getCustomerProductPackingByPage",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "knowledgeBase-customerProductPackaging",methods = "list")
+    @ResponseBody
+    public ResultPojo getCustomerProductInfoByQuery(@RequestBody  CustomerProductPackagingArchives customerProductPackagingArchives) {
+        try {
+            Result<List<CustomerProductPackagingArchives>> result = customerProductInfoService.getCustomerProductPackagingArchives(customerProductPackagingArchives);
+            return result.getResultPojo();
+        } catch (Exception e) {
+            log.error("获取客户产品包装要求列表错误",e);
+        }
+        return null;
+    }
+
+    /**
+     * 知识库，客户产品包装要求count
+     * @return
+     */
+    @RequestMapping(value = "/countCustomerProductPackingByPage",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "knowledgeBase-customerProductPackaging",methods = "list")
+    @ResponseBody
+    public ResultPojo countCustomerProductInfoByQuery(@RequestBody CustomerProductPackagingArchives customerProductPackagingArchives) {
+        try {
+            Result<Integer> result = customerProductInfoService.countCustomerProductPackagingArchives(customerProductPackagingArchives);
+            return result.getResultPojo();
+        } catch (Exception e) {
+            log.error("获取客户产品包装要求数量错误",e);
+        }
+        return null;
+    }
 
     /**
      *客户信息页面客户产品要求
@@ -103,7 +149,7 @@ public class CustomerProductPackingAction {
     }
 
     /**
-     * 百科和客户产品要求 客户商品名详情页
+     * 百科和客户产品要求-客户商品名详情页
      * @return
      */
     @RequestMapping(value="/intoCustomerProductInfoDetails",method= RequestMethod.GET)
@@ -114,6 +160,10 @@ public class CustomerProductPackingAction {
         return new ModelAndView("salesStatistics/productProcCompRequire").addObject("orderId",cppa.getOrderId()).addObject("businessProductId",cppa.getBusinessProductId()).
                 addObject("productRequireId",cppa.getBusinessRequireId()).addObject("edit",2);
     }
+
+
+
+
 
 
 }

@@ -37,8 +37,11 @@ public class CustomerProductArchivesManagerImpl implements CustomerProductArchiv
     }
 
 	@Override
-	public List<CustomerProductPackagingArchives> getCustomerProductPackagingArchives() {
-		return customerProductInfoDao.getCustomerProductPackagingArchives();
+	public List<CustomerProductPackagingArchives> getCustomerProductPackagingArchives(CustomerProductPackagingArchives cppa) {
+		return customerProductInfoDao.getCustomerProductPackagingArchives(cppa);
+	}
+	public int countCustomerProductPackagingArchives(CustomerProductPackagingArchives cppa){
+    	return customerProductInfoDao.countCustomerProductPackagingArchives(cppa);
 	}
 
 	public List<CustomerProductPackagingArchives> getCustomerProductPackingArchivesById(String customerId){

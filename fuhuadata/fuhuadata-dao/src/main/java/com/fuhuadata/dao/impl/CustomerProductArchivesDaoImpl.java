@@ -24,6 +24,7 @@ public class CustomerProductArchivesDaoImpl extends SqlMapClientTemplate impleme
     public static final String GET_PAGE = "CUSTOMERPRODUCTARCHIVES.GET-PAGE";
     public static final String COUNT = "CUSTOMERPRODUCTARCHIVES.COUNT";
     public static final String GET_CUSTOMER_PRODUCT_PACKAGING="CUSTOMERPRODUCTARCHIVES.GET-CUSTOMER-PRODUCT-PACKAGING";
+    public static final String COUNT_CUSTOMER_PRODUCT_PACKAGING="CUSTOMERPRODUCTARCHIVES.COUNT-CUSTOMER-PRODUCT-PACKAGING";
     public static final String GET_CUSTOMER_PRODUCT_REQUIRE_BY_ID="CUSTOMERPRODUCTARCHIVES.GET-CUSTOMER-PRODUCT-REQUIRE-BY-ID";
     public static final String GET_CUSTOMER_BILL_REQUIREMENT = "CUSTOMERPRODUCTARCHIVES.GET-CUSTOMER-BILL-REQUIREMENT";
     public static final String GET_CUSTOMER_TRANSPORT_REQUIREMENT = "CUSTOMERPRODUCTARCHIVES.GET-CUSTOMER-TRANSPORT-REQUIREMENT";
@@ -56,9 +57,23 @@ public class CustomerProductArchivesDaoImpl extends SqlMapClientTemplate impleme
         return (CustomerProductArchives) this.queryForObject(GET_BY_ID, customer_product_id);
     }
 
+    /**
+     * 知识库-客户产品包装要求
+     * @param cppa
+     * @return
+     */
     @Override
-    public List<CustomerProductPackagingArchives> getCustomerProductPackagingArchives() {
-            return this.queryForList(GET_CUSTOMER_PRODUCT_PACKAGING);
+    public List<CustomerProductPackagingArchives> getCustomerProductPackagingArchives(CustomerProductPackagingArchives cppa) {
+            return this.queryForList(GET_CUSTOMER_PRODUCT_PACKAGING,cppa);
+    }
+
+    /**
+     * 知识库-客户包装要求count
+     * @param cppa
+     * @return
+     */
+    public int countCustomerProductPackagingArchives(CustomerProductPackagingArchives cppa){
+        return (Integer) this.queryForObject(COUNT_CUSTOMER_PRODUCT_PACKAGING,cppa);
     }
 
     public List<CustomerProductPackagingArchives> getCustomerProductPackingArchivesById(String customerId){

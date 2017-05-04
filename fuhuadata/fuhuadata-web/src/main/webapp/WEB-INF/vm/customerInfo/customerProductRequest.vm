@@ -19,6 +19,7 @@
                         <table class="table table-condensed table-bordered table-striped text-center">
                             <thead>
                             <tr>
+                                <th class="text-center" lang="zh">客户名称</th>
                                 <th class="text-center" lang="zh">客户商品名</th>
                                 <th class="text-center" lang="zh">品类序列号</th>
                                 <th class="text-center" lang="zh">品类</th>

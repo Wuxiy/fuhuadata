@@ -30,14 +30,6 @@
         </dynamic>
     </sql>
 
-    <sql id="QUERY-COMMON">
-        <dynamic prepend=" WHERE ">
-            <isNotNull prepend=" AND " property="customerId">
-                customer_id=#customerId#
-            </isNotNull>
-        </dynamic>
-    </sql>
-
     <insert id="ADD" parameterClass="CustomerEncyclopedia">
         INSERT INTO
         k_customer_encyclopedia (ency_id, customer_id,
@@ -132,6 +124,13 @@
     ]]>
     </select>
 
+    <sql id="QUERY-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotNull prepend=" AND " property="customerName">
+                a.full_name like concat('%',#customerName#,'%')
+            </isNotNull>
+        </dynamic>
+    </sql>
     <select id="GET-BY-QUERY" resultClass="CustomerEncyVO" parameterClass="CustomerEncyclopediaQuery">
         <![CDATA[
         SELECT
