@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import javax.xml.crypto.Data;
 import java.util.List;
 
 /**
@@ -61,10 +60,52 @@ public class CustomerEncyclopediaAction {
             CustomerEncyclopediaQuery query = new CustomerEncyclopediaQuery();
             result=customerEncyclopediaService.getCustomerEncyclopediaByQuery(query);
         }catch(Exception e){
+            result.setSuccess(false);
             log.error("获取企业百科列表失败",e);
         }
         return result.getResultPojo();
     }
+
+    /**
+     *  分页获取企业百科
+     * list
+     * @return
+     */
+    @RequestMapping(value = "/getCustomerEncyclopediaListByQuery",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "list")
+    @ResponseBody
+    public ResultPojo getCustomerEncyclopediaListByQuery(@RequestBody CustomerEncyclopediaQuery query){
+        Result<List<CustomerEncyVO>> result = new Result<List<CustomerEncyVO>>();
+        try{
+            result=customerEncyclopediaService.getCustomerEncyclopediaByQuery(query);
+        }catch(Exception e){
+            result.setSuccess(false);
+            log.error("分页获取企业百科列表失败",e);
+        }
+        return result.getResultPojo();
+    }
+
+    /**
+     *  分页获取企业百科数量
+     * list
+     * @return
+     */
+    @RequestMapping(value = "/count",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "count_list")
+    @ResponseBody
+    public ResultPojo count(@RequestBody CustomerEncyclopediaQuery query){
+        Result<Integer> result = new Result<Integer>();
+        try{
+            result=customerEncyclopediaService.count(query);
+        }catch(Exception e){
+            result.setSuccess(false);
+            log.error("分页获取企业百科列表失败",e);
+        }
+        return result.getResultPojo();
+    }
+
+
+
 
     /**
      * add
@@ -83,6 +124,7 @@ public class CustomerEncyclopediaAction {
     @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "doAdd")
     @ResponseBody
      public ResultPojo doAddCustomerEncyclopedia(@RequestBody CustomerEncyclopedia customerEncyclopedia){
+        Result<CustomerEncyclopedia> result = new Result<CustomerEncyclopedia>();
         try{
             customerEncyclopedia.setCreateUserId(LoginUtils.getLoginId());
             customerEncyclopedia.setCreateUserName(LoginUtils.getLoginName());
@@ -90,10 +132,10 @@ public class CustomerEncyclopediaAction {
             customerEncyclopedia.setLastmodifyUserName(LoginUtils.getLoginName());
             customerEncyclopedia.setCreateTime(DateUtil.getDateTimeFormat());
             customerEncyclopedia.setModifyTime(DateUtil.getDateTimeFormat());
-
-            Result<CustomerEncyclopedia> result = customerEncyclopediaService.addCustomerEncyclopedia(customerEncyclopedia);
+            result = customerEncyclopediaService.addCustomerEncyclopedia(customerEncyclopedia);
             return result.getResultPojo();
         }catch(Exception e){
+            result.setSuccess(false);
             log.error("添加客户百科信息失败",e);
         }
         return null;
@@ -103,10 +145,12 @@ public class CustomerEncyclopediaAction {
     @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "delete")
     @ResponseBody
     public ResultPojo delete(String id){
+         Result result = new Result();
          try{
-             Result result = customerEncyclopediaService.deleteCustomerEncyclopediaById(id);
+             result = customerEncyclopediaService.deleteCustomerEncyclopediaById(id);
              return result.getResultPojo();
         }catch(Exception e){
+             result.setSuccess(false);
              log.error("根据ID删除客户百科信息错误",e);
          }
          return null;
@@ -138,13 +182,13 @@ public class CustomerEncyclopediaAction {
         customerEncyclopedia.setLastmodifyUserId(LoginUtils.getLoginId());
         customerEncyclopedia.setLastmodifyUserName(LoginUtils.getLoginName());
         customerEncyclopedia.setModifyTime(DateUtil.getDateTimeFormat());
-
+        Result result = new Result();
         try{
             String id =customerEncyclopedia.getEncyId();
-
-            Result result = customerEncyclopediaService.updateCustomerEncyclopediaById(id,customerEncyclopedia);
+            result = customerEncyclopediaService.updateCustomerEncyclopediaById(id,customerEncyclopedia);
             return result.getResultPojo();
         }catch(Exception e){
+            result.setSuccess(false);
             log.error("根据id更新客户信息错误",e);
         }
         return null;
@@ -154,10 +198,12 @@ public class CustomerEncyclopediaAction {
     @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "GET-BY-ID")
     @ResponseBody
     public ResultPojo getById(String encyId){
+        Result<CustomerEncyclopedia> result = new Result<CustomerEncyclopedia>();
         try{
-            Result<CustomerEncyclopedia> result = customerEncyclopediaService.getCustomerEncyclopediaById(encyId);
+            result = customerEncyclopediaService.getCustomerEncyclopediaById(encyId);
             return result.getResultPojo();
         }catch(Exception e){
+            result.setSuccess(false);
             log.error("根据ID获取客户百科信息错误",e);
         }
         return null;

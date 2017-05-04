@@ -20,6 +20,8 @@ public class CustomerEncyclopediaQuery extends PageBase {
 
     private String customerName;
 
+    private String companyType;//企业类型,0客户,1竞对
+
     private String companyInfo;//企业简介
 
     private String isFull;//完整度
@@ -43,6 +45,8 @@ public class CustomerEncyclopediaQuery extends PageBase {
     private Date modifyTime;//最后编辑时间
 
     private String remarks;//备注
+
+    private String searchKey;//搜索内容
 
 
 
@@ -169,5 +173,21 @@ public class CustomerEncyclopediaQuery extends PageBase {
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
+    }
+
+    public String getSearchKey() {
+        return searchKey;
+    }
+
+    public void setSearchKey(String searchKey) {
+        this.searchKey = searchKey;
+    }
+
+    public String getCompanyType() {
+        return companyType;
+    }
+
+    public void setCompanyType(String companyType) {
+        this.companyType = companyType;
     }
 }
