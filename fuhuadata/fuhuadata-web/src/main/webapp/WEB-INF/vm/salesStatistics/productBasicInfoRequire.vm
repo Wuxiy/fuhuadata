@@ -101,11 +101,11 @@
                                         </td>
                                         <td>
                                             <select data-control="on" id="priceType" class="form-control notnull isdisabled" disabled>
-                                                <option value="0" selected>自产类</option>
-                                                <option value="1">原药自产制剂加工类</option>
-                                                <option value="2">原药采购制剂加工类</option>
-                                                <option value="3">贸易类</option>
-                                                <option value="4">其他类</option>
+                                                <option value="01" selected>自产类</option>
+                                                <option value="02">原药自产制剂加工类</option>
+                                                <option value="04">原药采购制剂加工类</option>
+                                                <option value="03">贸易类</option>
+                                                <option value="09">其他类</option>
                                             </select>
                                         </td>
                                         <td></td>

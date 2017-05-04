@@ -15,7 +15,7 @@ public interface PreparationProcessCostDao {
      * @param preparationProcessCost
      * @return
      */
-    public PreparationProcessCost addComponentCost(PreparationProcessCost preparationProcessCost);
+    public PreparationProcessCost addPreparationProcessCost(PreparationProcessCost preparationProcessCost);
 
     /**
      * 按照主键id更新，成功返回1

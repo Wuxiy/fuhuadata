@@ -3,23 +3,16 @@ package com.fuhuadata.vo;
 import com.fuhuadata.domain.CustomerVisitRecord;
 import com.fuhuadata.domain.RecordLinkman;
 
+import java.util.List;
 
 /**
- * 客户沟通记录新增
- * Created by intanswer on 2017/3/22.
+ * 客户沟通记录详情
+ * Created by intanswer on 2017/5/3.
  */
-public class CustomerVisitRecordVO {
+public class CustomerVisitRecordLinkman {
     private CustomerVisitRecord customerVisitRecord;
+    private  List<RecordLinkman> recordLinkmanList;
 
-    private RecordLinkman[] recordLinkmen;
-
-    public RecordLinkman[] getRecordLinkmen() {
-        return recordLinkmen;
-    }
-
-    public void setRecordLinkmen(RecordLinkman[] recordLinkmen) {
-        this.recordLinkmen = recordLinkmen;
-    }
 
     public CustomerVisitRecord getCustomerVisitRecord() {
         return customerVisitRecord;
@@ -27,5 +20,13 @@ public class CustomerVisitRecordVO {
 
     public void setCustomerVisitRecord(CustomerVisitRecord customerVisitRecord) {
         this.customerVisitRecord = customerVisitRecord;
+    }
+
+    public List<RecordLinkman> getRecordLinkmanList() {
+        return recordLinkmanList;
+    }
+
+    public void setRecordLinkmanList(List<RecordLinkman> recordLinkmanList) {
+        this.recordLinkmanList = recordLinkmanList;
     }
 }

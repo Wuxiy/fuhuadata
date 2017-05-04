@@ -1,6 +1,5 @@
 package com.fuhuadata.domain.query;
 
-import com.fuhuadata.domain.query.PageBase;
 
 import java.math.BigDecimal;
 import java.sql.Date;

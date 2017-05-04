@@ -74,7 +74,7 @@
                             <th class="text-center" lang="zh">活动类型</th>
                             <th class="text-center" lang="zh">活动地点</th>
                             <th class="text-center" lang="zh">费用</th>
-                            <th class="text-center" lang="zh">活动摘要</th>
+##                            <th class="text-center" lang="zh">活动摘要</th>
                             <th class="text-center" lang="zh">业务员</th>
                         </tr>
                         </thead>
@@ -88,130 +88,87 @@
     </div>
 </div>
 
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" data-backdrop="static" aria-hidden="true" data-keyboard="true" >
+    <div class="modal-dialog" style="width:800px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body ">
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body clearfix">
+                            <div class="form-horizontal">
+                                <div class="form-group ">
+                                    <label class="col-xs-2 control-label">开始时间</label>
+                                    <div class="col-xs-4">
+                                        <input readonly class="form-control" type="text" id="mstartTime" />
+                                    </div>
+                                    <label class="col-xs-2 control-label">结束时间</label>
+                                    <div class="col-xs-4">
+                                        <input readonly id="mendTime" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="col-xs-2 control-label">活动地点</label>
+                                    <div class="col-xs-4">
+                                        <input readonly id="mactivityAddress" type="text" class="form-control">
+                                    </div>
+                                    <label class="col-xs-2 control-label">费用</label>
+                                    <div class="col-xs-4">
+                                        <div class="input-group">
+                                            <input readonly class="form-control" type="number" min="0" id="mactivityExpense"/>
+                                            <span class="input-group-addon">元</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="col-xs-2 control-label">活动类型</label>
+                                    <div class="col-xs-4">
+                                        <input readonly id="mactivityType" type="text" class="form-control">
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <input readonly class="form-control hidden" type="text" id="activityRemarks" placeholder="请输入活动类型" disabled/>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="col-xs-2 control-label">姓名</label>
+                                    <div class="col-xs-10">
+                                        <table class="table table-condensed table-bordered table-striped text-center">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center col-xs-2" lang="zh">联系人</th>
+                                                <th class="text-center col-xs-4" lang="zh">赠送礼物</th>
+                                                <th class="text-center col-xs-4" lang="zh">备注</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="modalContactList"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-2 control-label">活动摘要</label>
+                                    <div class="col-xs-10">
+                                        <textarea readonly class="form-control" rows="4" id="mactivitySummary"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
 <input id="customerId" type="hidden" value="$!{customerId}">
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script type="text/javascript">
-//    var pageSize = 3;
-//    var click_node ={oneLevelId:0,twoLevelId:0};//接收目录树点击节点的id及其父id
-//    click_node.serach = function(){
-//        serach();
-//    }
-//
-//    $(document).ready(function(){
-//        //生成地区目录树
-//        $('#tree').creatTree('/customerBaseInfo/initAreaCategoryTree');
-//        //目录树节点绑定点击事件
-//        $('#tree').bindClickForCusArea(click_node);
-//        //搜索按钮绑定事件
-//        $("#submit").click(function(){
-//            serach();
-//        });
-//        //默认查询数据
-//        serach();
-//    })
-//
-//    //查询按钮提交数据
-//    function serach(){
-//        var total = getListCount();
-//        getDataList(0);
-//        $("#pagination").pagination(total,{
-//            items_per_page : pageSize,
-//            num_edge_entries : 3,
-//            num_display_entries : 10,
-//            callback:getDataList
-//        });
-//    }
-//    var activityTypeList = ['远程沟通','出差拜访','展会邀请','工厂参观','商务宴请','其他'];
-//    //根据页码获取列表数据
-//    function getDataList(pageNum,jq){
-//        var data = {
-//            customerName:$('#customerName').val(),
-//            userName:$('#userName').val(),
-//            activityType:$('#activityType').val(),
-//            startTime:$('#startTime').val(),
-//            endTime:$('#endTime').val(),
-//            areaClassId:click_node.oneLevelId,
-//            areaId:click_node.twoLevelId,
-//            startRow:pageNum*pageSize,
-//            pageSize:pageSize
-//        };
-//        jQuery.ajax({
-//            url: basePath + '/customerVisitRecord/getCustomerVisitRecordByPage',
-//            dataType:'json',
-//            async:true,
-//            method:'POST',
-//            contentType:"application/json",
-//            data:JSON.stringify(data),
-//            success:function(data){
-//                var ResultData = data.data;
-//                var _html = '';
-//                if(ResultData && ResultData!='' && ResultData!='null') {
-//                    for (var i = 0; i < ResultData.length; i++) {
-//                        _html += '<tr>';
-//                        _html += '	<td>' + ResultData[i].visitrecordId + '</td>';
-//                        _html += '  <td><a href="">' + ResultData[i].customerName + '</a></td>';
-//                        _html += '  <td>' + ResultData[i].startTime + '</td>';
-//                        _html += '  <td>' + ResultData[i].endTime + '</td>';
-//                        _html += '  <td>' + activityTypeList[ResultData[i].activityType] + '</td>';
-//                        _html += '  <td>' + ResultData[i].activityAddress + '</td>';
-//                        _html += '  <td>' + ResultData[i].activityExpense + '</td>';
-//                        _html += '  <td>' + ResultData[i].activitySummary + '</td>';
-//                        _html += '  <td>' + ResultData[i].userName + '</td>';
-//                        _html += '   </tr>';
-//                    }
-//                }
-//                $("#customerMaintainList").html(_html);
-//            }
-//        });
-//    }
-
-    /*分页插件参数
-    参数名	描述	参数值
-    maxentries	总条目数	必选参数，整数
-    items_per_page	每页显示的条目数	可选参数，默认是10
-    num_display_entries	连续分页主体部分显示的分页条目数	可选参数，默认是10
-    current_page	当前选中的页面	可选参数，默认是0，表示第1页
-    num_edge_entries	两侧显示的首尾分页的条目数	可选参数，默认是0
-    link_to	分页的链接	字符串，可选参数，默认是"#"
-    prev_text	“前一页”分页按钮上显示的文字	字符串参数，可选，默认是"Prev"
-    next_text	“下一页”分页按钮上显示的文字	字符串参数，可选，默认是"Next"
-    ellipse_text	省略的页数用什么文字表示	可选字符串参数，默认是"..."
-    prev_show_always	是否显示“前一页”分页按钮	布尔型，可选参数，默认为true，即显示“前一页”按钮
-    next_show_always	是否显示“下一页”分页按钮	布尔型，可选参数，默认为true，即显示“下一页”按钮
-    callback	回调函数	默认无执行效果*/
-
-    /**
-     * 获取列表数据总条目数
-     */
-//    function getListCount(){
-//        var total = 0;
-//        var data = {
-//            areaClassId:click_node.oneLevelId,
-//            areaId:click_node.twoLevelId,
-//            customerName:$('#customerName').val(),
-//            userName:$('#userName').val(),
-//            customerLevel:$('#customerLevel').val(),
-//            startTime:$('#startTime').val(),
-//            endTime:$('#endTime').val(),
-//        }
-//        jQuery.ajax({
-//            url:basePath + '/customerVisitRecord/count',
-//            dataType:'JSON',
-//            async:false,
-//            method:'POST',
-//            contentType:"application/json",
-//            data:JSON.stringify(data),
-//            success:function(data){
-//                total = data.data;
-//            }
-//        });
-//        return total;
-//    }
-
-
-
-
-
 
     var pagesize = 4; // 分页步长
     var areaTreeData = []; // 保存树的数据
@@ -219,7 +176,6 @@
     var areaId = ''; // 地区id
 
     $(function(){
-
         // 请求树的数据
         jQuery.ajax({
             url:basePath+'/customerBaseInfo/initAreaCategoryTree',
@@ -234,7 +190,7 @@
             }];
             areaTreeData.push.apply(areaTreeData,res.data);
 
-            renderAreaTree(areaTreeData,areaTreeDblHandler,$('#areaTree')); // 渲染树
+//            renderAreaTree(areaTreeData,areaTreeDblHandler,$('#areaTree')); // 渲染树
         });
 
         // 搜索按钮绑定事件
@@ -248,42 +204,51 @@
 
         // 点击重置按钮重置areaId
         $('#resetBtn').on('click',function () {
-
             areaId = '';
         });
 
-        // 销售额a标签点击事件
-        $('#costProfitList').on('click', 'a[href="#myModal"]', function (e) {
+
+
+        // 点击费用模态-沟通记录详情
+        $('#customerMaintainList').on('click', 'a[href="#myModal"]', function (e) {
             var thisEl = $(e.target);
             $.ajax({
-                url : basePath + '/businessOrder/getCostAndProfitStatisticsByPage',
-                dataType : 'json',
-                type : 'POST',
-                contentType : "application/json",
-                data :JSON.stringify({
-                    dimension  : 4,
-                    customerId : thisEl.data('customerid')
-                })
+                url : basePath + '/customerVisitRecord/getCustomerVisitRecordById?visirecordId='+thisEl.data('visitrecordid'),
+                type : 'GET'
             }).done(function (res) {
-                if (res.data) {
                     var data = res.data,
                             _html ='';
+                    var c=data.customerVisitRecord;
+                    var recordLinkmanList = data.recordLinkmanList;
                     $('#myModal').find('tbody').html('');
-                    $.each(data, function (i,item) {
-                        _html += '<tr>';
-                        _html += '<td>' + item.productName + '</td>';
-                        _html += '<td><a href="">' + item.categoryName + '</a></td>';
-                        _html += '<td lang="zh">' + item.salesVolume + '</td>';
-                        _html += '<td lang="zh">' + item.grossProfit + '</td>';
-                        _html += '<td lang="zh">' + item.salesAmount + '</td>';
-                        _html += '<td>' + parseInt(i+1) + '</td>';
-                        _html += '</tr>';
-                    });
-                    $('#myModal').find('tbody').html(_html);
-                }else{
-                    $('#myModal').find('tbody').html('<td>暂无数据</td>');
-                }
 
+                    $('#mstartTime').val(c.startTime);
+                    $('#mendTime').val(c.endTime);
+                    $('#mactivityAddress').val(c.activityAddress);
+                    $('#mactivityExpense').val(c.activityExpense);
+                    $('#mactivityType').val(activityTypeList[c.activityType]);
+                    $('#mactivitySummary').val(c.activitySummary);
+
+//                    $.each(data, function (i,item) {
+//                        _html += '<tr>';
+//                        _html += '<td>' + item.productName + '</td>';
+//                        _html += '<td><a href="">' + item.categoryName + '</a></td>';
+//                        _html += '<td lang="zh">' + item.salesVolume + '</td>';
+//                        _html += '<td lang="zh">' + item.grossProfit + '</td>';
+//                        _html += '<td lang="zh">' + item.salesAmount + '</td>';
+//                        _html += '<td>' + parseInt(i+1) + '</td>';
+//                        _html += '</tr>';
+//                    });
+//                    $('#myModal').find('tbody').html(_html);
+
+                for(var i=0;i<recordLinkmanList.length;i++){
+                    modalContactList.innerHTML += '<tr>'+
+                            '<td name="Lname">'+ recordLinkmanList[i].name+'</td>'+
+                            '<td name="Lname">'+ recordLinkmanList[i].activityGift+'</td>'+
+                            '<td name="Lname">'+ recordLinkmanList[i].remarks+'</td>'+
+                            '</tr>';
+                }
+                $('#addField').modal('show');
             })
         });
 
@@ -319,7 +284,7 @@
     /**
      *以下是逻辑处理和数据处理函数
      */
-    // 渲染客户基本分类树
+    // 地区树
     function renderAreaTree (data,callback,el) {
         var setting = {
                     data: {
@@ -501,13 +466,15 @@
                     _html += '  <td>' + ResultData[i].endTime + '</td>';
                     _html += '  <td>' + activityTypeList[ResultData[i].activityType] + '</td>';
                     _html += '  <td>' + ResultData[i].activityAddress + '</td>';
-                    _html += '  <td>' + ResultData[i].activityExpense + '</td>';
-                    _html += '  <td>' + (ResultData[i].activitySummary!=undefined?ResultData[i].activitySummary:'') + '</td>';
+                    _html += '  <td><a data-toggle="modal" href="#myModal" data-visitrecordId="'+ResultData[i].visitrecordId+'"> ' + ResultData[i].activityExpense + '</a></td>';
+//                    _html += '  <td>' + (ResultData[i].activitySummary!=undefined?ResultData[i].activitySummary:'') + '</td>';
                     _html += '  <td>' + ResultData[i].userName + '</td>';
                     _html += '   </tr>';
+                    console.log(ResultData[i].visitrecordId);
                 }
             }
             $("#customerMaintainList").html(_html);
         }
+
 
 </script>

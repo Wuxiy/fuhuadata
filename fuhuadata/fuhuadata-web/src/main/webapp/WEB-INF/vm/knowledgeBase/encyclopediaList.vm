@@ -53,12 +53,7 @@
                             <th class="col-xs-2 text-center">最后编辑时间</th>
                         </tr>
                         </thead>
-<<<<<<< HEAD
-                        <tbody>
-                        </tbody>
-=======
                         <tbody></tbody>
->>>>>>> 5221a710215a547260f8afe12155e1b18fe62e09
                     </table>
                     <!--表格结束-->
                 </div>
