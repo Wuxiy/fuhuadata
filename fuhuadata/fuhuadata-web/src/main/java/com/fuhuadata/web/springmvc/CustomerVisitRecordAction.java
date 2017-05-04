@@ -5,6 +5,7 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.CustomerVisitRecordService;
 import com.fuhuadata.service.util.LoginUtils;
+import com.fuhuadata.vo.CustomerVisitRecordLinkman;
 import com.fuhuadata.vo.CustomerVisitRecordVO;
 import com.fuhuadata.vo.VisitRecordVO;
 import com.fuhuadata.web.util.CustomerUtils;
@@ -151,8 +152,23 @@ public class CustomerVisitRecordAction {
         return result.getResultPojo();
     }
 
-
-
+    /**
+     * 获取沟通记录详情
+     * @return
+     */
+    @RequestMapping(value="/getCustomerVisitRecordById",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "salesStatistics-CustomerMaintenance",methods = "getCustomerVisitRecordById")
+    @ResponseBody
+    public ResultPojo getCustomerVisitRecordById(int visirecordId){
+        Result<CustomerVisitRecordLinkman> result = new Result<CustomerVisitRecordLinkman>();
+        try{
+            result = customerVisitRecordService.getCustomerVisitRecordById(visirecordId);
+            return result.getResultPojo();
+        }catch (Exception e){
+            result.setSuccess(false);
+        }
+        return null;
+    }
 
 }
 

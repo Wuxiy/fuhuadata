@@ -73,14 +73,14 @@ public class CustomerLinkmanAction {
     @RequestMapping(value = "intoCustomerLinkmanAdd",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "customerInfo-customerContacts",methods = "intoCustomerLinkmanAdd")
     public ModelAndView intoCustomerLinkmanAdd(String customerId,int customerType){
-        //获取客户默认联系人，判断当前客户有无默认联系人
+        //获取客户默认联系人
         Result<CustomerLinkman> result = customerLinkmanService.getCustomerLinkmanDefaultByCustomerId(customerId);
-        String linkmanId = null;
+        int isDefault=0;
         if(result.getModel()!=null){
-            linkmanId = result.getModel().getLinkmanId();
+            isDefault=1;
         }
         ModelAndView model = new ModelAndView("customerInfo/customerContactsAdd").addObject("customerId",customerId).addObject("customerType",customerType)
-                .addObject("linkmanId",linkmanId);
+                .addObject("isDefault",isDefault);
         return model;
     }
 

@@ -9,12 +9,14 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.CustomerAreaService;
 import com.fuhuadata.service.CustomerBaseInfoService;
+import com.fuhuadata.service.DataArchivesService;
 import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.CategoryTree;
 import com.fuhuadata.vo.CustomerBaseInfoDO;
 import com.fuhuadata.vo.CustomerBaseInfoLinkman;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
 import com.fuhuadata.vo.DataArchive.Countryzone;
+import com.fuhuadata.vo.DataArchive.Currtype;
 import com.fuhuadata.vo.DataArchive.Formatdoc;
 import com.fuhuadata.vo.DataArchive.Timezone;
 import com.fuhuadata.web.util.CustomerUtils;
@@ -49,6 +51,8 @@ public class CustomerBaseInfoAction {
     private CustomerBaseInfoService customerBaseInfoService;
     @Autowired
     private CustomerAreaService  customerAreaService;
+    @Autowired
+    private DataArchivesService dataArchivesService;
 
     /**
      * 客户信息列表页入口
@@ -85,7 +89,7 @@ public class CustomerBaseInfoAction {
     @RequestMapping("/countCustomerList")
     @SystemLogAnnotation(module = "customerInfo-customerList",methods = "countCustomerList")
     @ResponseBody
-    public ResultPojo countCustomerList( QueryCustomerBaseInfo queryCustomerBaseInfo){
+    public ResultPojo countCustomerList(QueryCustomerBaseInfo queryCustomerBaseInfo){
         try{
             Result<Integer> result = customerBaseInfoService.count(queryCustomerBaseInfo);
             return result.getResultPojo();
@@ -156,11 +160,14 @@ public class CustomerBaseInfoAction {
         //查询数据格式档案
         Result<List<Formatdoc>> result = new Result<List<Formatdoc>>();
         result=customerBaseInfoService.getFormatdoc();
+        //币种
+        Result<List<Currtype>> rcurrtype = dataArchivesService.getCurrtype();
 
         ModelAndView model = new ModelAndView("customerInfo/customerBasicInfo").addObject("customerId",customerId)
                 .addObject("customerType",customerType)
                 .addObject("formatdoc",result.get())
-                .addObject("fullName",fullName);
+                .addObject("fullName",fullName)
+                .addObject("currtype",rcurrtype.getModel());
         return model;
     }
 

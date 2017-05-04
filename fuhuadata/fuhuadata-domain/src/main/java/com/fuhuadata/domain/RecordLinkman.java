@@ -19,6 +19,9 @@ public class RecordLinkman implements Serializable{
 	
     /**客户联系人ID**/
 	private String linkmanId;
+
+	/**客户联系人姓名**/
+	private String linkmanName;
 	
     /**单人费用，单位元**/
 	private BigDecimal activityExpens;
@@ -149,5 +152,13 @@ public class RecordLinkman implements Serializable{
 
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
+	}
+
+	public String getLinkmanName() {
+		return linkmanName;
+	}
+
+	public void setLinkmanName(String linkmanName) {
+		this.linkmanName = linkmanName;
 	}
 }
