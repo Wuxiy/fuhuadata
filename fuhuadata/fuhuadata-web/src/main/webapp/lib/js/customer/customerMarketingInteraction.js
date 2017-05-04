@@ -2,21 +2,14 @@
  * Created by huxiangyang on 2017/3/13.
  */
 
-//指定文本框
+// 指定文本框
 var selectedPName = null;
 var treeData = null;
 $(function () {
 
-    //创建面包屑导航
-    // $('#location').append(createCrumbsD());
-
-    //设置title标题
-    // var title = $('#pTitle').text()+'——'+$('#sTitle').text();
-    // $('#hTitle').text(iGetInnerText(title));
-
     init();
 
-    //获取数据
+    // 获取数据
     CRM.ajaxCall({
         url:basePath + '/customerMarketInfo/init',
         type:'POST',
@@ -27,12 +20,8 @@ $(function () {
         },
         callback:pop
     });
-    // getData(basePath+'/customerMarketInfo/init','POST',GetRequest(),pop);
 
-    //创建树形菜单
-    // $('#tree').creatTree(basePath+'/productCategory/CategoryTree?fourNode=0');
-
-    //构造下拉选择框
+    // 构造下拉选择框
     $('#cpps_year,#csps_year,#year').html(function (n,old) {
         old = '';
         var nowDate = new Date();
@@ -43,9 +32,9 @@ $(function () {
             options += '<option value="'+i+'">'+i+'</option>';
         }
         return options;
-    }).val(new Date().getFullYear());//默认为今年
+    }).val(new Date().getFullYear());// 默认为今年
 
-    //筛选客户采购产品
+    // 筛选客户采购产品
     $(document).on('change.year','#cpps_year',function (e) {
         var year = $(e.target).val(),
             data = {
@@ -61,7 +50,7 @@ $(function () {
         });
     });
 
-    //筛选客户销售产品
+    // 筛选客户销售产品
     $(document).on('change.year','#csps_year',function (e) {
         var year = $(e.target).val(),
             data = {
@@ -101,14 +90,14 @@ $(function () {
         var colspanN = table.find('tr').first().find('th').length;
         var comBtn = $('[data-form-btn="complete"]');
         var tbody;
-        var delBtn = "";//删除按钮
+        var delBtn = "";// 删除按钮
         delBtn += '<tr>';
         delBtn += '<td colspan="'+colspanN+'">';
         delBtn += '<button class="btn btn-default btn-xs btn-block" data-form-btn="del" data-form-target="tbody">删除';
         delBtn += '</button></td></tr>';
-        //判断完成按钮的id
+        // 判断完成按钮的id
         if(comBtn.attr('id')=='cpps_up'){
-            tbody = cppsTable();//构造tbody
+            tbody = cppsTable();// 构造tbody
             console.log(delBtn);
             $(tbody).append(delBtn).appendTo(table);//插入到表格
         }else{
@@ -117,7 +106,7 @@ $(function () {
         }
     });
 
-    //客户采购产品批量提交
+    // 客户采购产品批量提交
     $(document).on('click.up','#cpps_up',function(e) {
         var isUp=true;
         var notNull = $(e.target).parents('.modal').find('input[required ]');
@@ -154,7 +143,7 @@ $(function () {
         }
     });
 
-    //客户销售产品批量提交
+    // 客户销售产品批量提交
     $(document).on('click.up','#csps_up',function(e) {
         var isUp=true;
         var notNull = $(e.target).parents('.modal').find('input[required ]');
@@ -192,7 +181,7 @@ $(function () {
         }
     });
 
-    //客户合作情况提交
+    // 客户合作情况提交
     $(document).on('click.up','#cooperation_up',function() {
         CRM.ajaxCall({
             url:basePath + '/customerMarketInfo/updateCooperationInfo',
