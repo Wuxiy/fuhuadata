@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.CustomerSaleCountryMapper">
+  <resultMap id="BaseResultMap" type="com.fuhuadata.domain.mybatis.CustomerSaleCountry">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="destination_country" jdbcType="VARCHAR" property="destinationCountry" />
+    <result column="year_sales" jdbcType="VARCHAR" property="yearSales" />
+    <result column="market_share" jdbcType="VARCHAR" property="marketShare" />
+  </resultMap>
+</mapper>

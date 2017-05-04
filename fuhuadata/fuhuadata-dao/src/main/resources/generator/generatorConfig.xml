@@ -48,7 +48,20 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="t_areacl" domainObjectName="AreaCl"/>
+        <!-- 需要生成实体 Bean 的数据库表 -->
+        <table tableName="customer_purchase_product" domainObjectName="CustomerPurchaseProduct">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>
+        <table tableName="customer_purchase_supplier" domainObjectName="CustomerPurchaseSupplier">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>
+        <table tableName="customer_sale_product" domainObjectName="CustomerSaleProduct">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>
+        <table tableName="customer_sale_country" domainObjectName="CustomerSaleCountry">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>
+        <!--<table tableName="t_areacl" domainObjectName="AreaCl"/>-->
         <!--<table tableName="t_countryzone" domainObjectName="Countryzone"/>
         <table tableName="t_incoterm" domainObjectName="Incoterm"/>
         <table tableName="t_portdoc" domainObjectName="Portdoc"/>

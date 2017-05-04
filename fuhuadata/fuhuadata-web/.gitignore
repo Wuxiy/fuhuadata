@@ -1,0 +1,13 @@
+
+.DS_Store
+*/.DS_Store
+fuhuadata/.classpath
+fuhuadata/.*
+fuhuadata/.idea/
+fuhuadata/fuhuadata.iml
+*.iml
+fuhuadata/target/
+target/
+.idea/
+
+logs/
