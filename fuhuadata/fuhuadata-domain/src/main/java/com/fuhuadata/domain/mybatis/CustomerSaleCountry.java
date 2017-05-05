@@ -12,6 +12,18 @@ public class CustomerSaleCountry extends BaseEntity<Integer> {
     private Integer id;
 
     /**
+     * 销售产品id
+     */
+    @Column(name = "sale_id")
+    private Integer saleId;
+
+    /**
+     * 标准产品id
+     */
+    @Column(name = "product_id")
+    private Integer productId;
+
+    /**
      * 销售目的国
      */
     @Column(name = "destination_country")
@@ -28,6 +40,11 @@ public class CustomerSaleCountry extends BaseEntity<Integer> {
      */
     @Column(name = "market_share")
     private String marketShare;
+
+    /**
+     * 主计量单位
+     */
+    private String measurement;
 
     /**
      * 获取主键id
@@ -99,5 +116,29 @@ public class CustomerSaleCountry extends BaseEntity<Integer> {
      */
     public void setMarketShare(String marketShare) {
         this.marketShare = marketShare == null ? null : marketShare.trim();
+    }
+
+    public Integer getSaleId() {
+        return saleId;
+    }
+
+    public void setSaleId(Integer saleId) {
+        this.saleId = saleId;
+    }
+
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
+
+    public String getMeasurement() {
+        return measurement;
+    }
+
+    public void setMeasurement(String measurement) {
+        this.measurement = measurement;
     }
 }

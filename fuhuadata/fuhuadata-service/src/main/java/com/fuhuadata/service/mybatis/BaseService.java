@@ -46,6 +46,13 @@ public interface BaseService<E extends BaseEntity<ID>, ID extends Serializable> 
      */
     List<ID> saveBatch(List<E> entices);
 
+    /**
+     * 保存或更新
+     * @param entity
+     * @return
+     */
+    int saveOrUpdateSelective(E entity);
+
     int update(E entity);
 
     int update(List<E> entices);

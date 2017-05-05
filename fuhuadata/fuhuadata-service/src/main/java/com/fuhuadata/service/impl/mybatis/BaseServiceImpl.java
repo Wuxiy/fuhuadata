@@ -92,6 +92,21 @@ public abstract class BaseServiceImpl<E extends BaseEntity<ID>, ID extends Seria
         return ids;
     }
 
+    @Override
+    public int saveOrUpdateSelective(E entity) {
+
+        if (entity == null) {
+            return 0;
+        }
+
+        if (entity.getId() != null) {
+            return updateSelective(entity);
+        } else {
+            return saveSelective(entity);
+        }
+
+    }
+
     public int update(E entity) {
         return baseMapper.updateByPrimaryKey(entity);
     }
@@ -154,5 +169,9 @@ public abstract class BaseServiceImpl<E extends BaseEntity<ID>, ID extends Seria
 
     protected BaseMapper<E, ID> getBatchMapper() {
         return (BaseMapper<E, ID>) sqlSessionBatch.getMapper(MybatisUtils.getMapperInterface(baseMapper));
+    }
+
+    protected Example newExample() {
+        return new Example(this.entityClass);
     }
 }

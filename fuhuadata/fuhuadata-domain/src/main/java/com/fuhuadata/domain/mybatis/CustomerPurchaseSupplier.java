@@ -1,7 +1,7 @@
 package com.fuhuadata.domain.mybatis;
 
-import java.math.BigDecimal;
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Table(name = "customer_purchase_supplier")
 public class CustomerPurchaseSupplier extends BaseEntity<Integer> {
@@ -11,6 +11,18 @@ public class CustomerPurchaseSupplier extends BaseEntity<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    /**
+     * 采购产品id
+     */
+    @Column(name = "purchase_id")
+    private Integer purchaseId;
+
+    /**
+     * 标准产品id
+     */
+    @Column(name = "product_id")
+    private Integer productId;
 
     /**
      * 供应商名称
@@ -27,6 +39,11 @@ public class CustomerPurchaseSupplier extends BaseEntity<Integer> {
      */
     @Column(name = "price_average")
     private BigDecimal priceAverage;
+
+    /**
+     * 主计量单位
+     */
+    private String measurement;
 
     /**
      * 获取主键id
@@ -98,5 +115,29 @@ public class CustomerPurchaseSupplier extends BaseEntity<Integer> {
      */
     public void setPriceAverage(BigDecimal priceAverage) {
         this.priceAverage = priceAverage;
+    }
+
+    public Integer getPurchaseId() {
+        return purchaseId;
+    }
+
+    public void setPurchaseId(Integer purchaseId) {
+        this.purchaseId = purchaseId;
+    }
+
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
+
+    public String getMeasurement() {
+        return measurement;
+    }
+
+    public void setMeasurement(String measurement) {
+        this.measurement = measurement;
     }
 }
