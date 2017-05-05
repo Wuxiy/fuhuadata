@@ -181,7 +181,7 @@
 	<insert id="ADD" parameterClass="ProductInfo">
 		INSERT INTO 
 		product_info(product_id,big_category_id,mid_category_id,small_category_id,category_name,measurement,concentration,name,salt_type,other_salt_name,execute_standard,execute_numer,product_feature,processing_components,physical_properities,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time)
-		VALUES(#productId#,#bigCategoryId#,#midCategoryId#,#smallCategoryId#,#categoryName#,#measurement#,#concentration#,#name#,#saltType#,#otherSaltName#,#executeStandard#,#executeNumer#,#productFeature#,#processingComponents#,#physicalProperities#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
+		VALUES(#productId#,#bigCategoryId#,#midCategoryId#,#smallCategoryId#,#categoryName#,#measurement#,#concentration#,#name#,#saltType#,#otherSaltName#,#executeStandard#,#executeNumer#,#productFeature#,#processingComponents#,#physicalProperities#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,now(),now())
 		<selectKey resultClass="int" keyProperty="id">
 			SELECT @@IDENTITY AS ID
 		</selectKey>
@@ -210,7 +210,7 @@
 						<isNotEmpty prepend=", " property="lastmodifyUserId">lastmodify_user_id=#lastmodifyUserId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="lastmodifyUserName">lastmodify_user_name=#lastmodifyUserName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="createTime">create_time=#createTime#</isNotEmpty>
-						<isNotEmpty prepend=", " property="modifyTime">modify_time=#modifyTime#</isNotEmpty>
+						<isNotEmpty prepend=", " property="modifyTime">modify_time=now()</isNotEmpty>
 					</dynamic>
 		WHERE product_id=#productId#
 	</update>

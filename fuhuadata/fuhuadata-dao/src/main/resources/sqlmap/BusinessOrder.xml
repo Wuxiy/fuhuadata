@@ -150,9 +150,9 @@
             <isNotEmpty prepend=" OR " property="customerName">
                 base.full_name like concat('%',#customerName#,'%')
             </isNotEmpty>
-            <!--<isNotEmpty prepend=" AND " property="salesManId">-->
-                <!--a.sales_man_id = #salesManId#-->
-            <!--</isNotEmpty>-->
+            <isNotEmpty prepend=" AND " property="salesManId">
+                a.sales_man_id = #salesManId#
+            </isNotEmpty>
             <isNotEmpty prepend=" AND " property="ncOrderId">
                 a.nc_order_id like concat('%',#ncOrderId#,'%')
             </isNotEmpty>
@@ -403,23 +403,14 @@
             <isNotNull prepend="," property="claimAmount" >
                 claim_amount = #claimAmount#
             </isNotNull>
-            <isNotNull prepend="," property="createUserId" >
-                create_user_id = #createUserId#
-            </isNotNull>
-            <isNotNull prepend="," property="createUserName" >
-                create_user_name = #createUserName#
-            </isNotNull>
             <isNotNull prepend="," property="lastmodifyUserId" >
                 lastmodify_user_id = #lastmodifyUserId#
             </isNotNull>
             <isNotNull prepend="," property="lastmodifyUserName" >
                 lastmodify_user_name = #lastmodifyUserName#
             </isNotNull>
-            <isNotNull prepend="," property="createTime" >
-                create_time = #createTime#
-            </isNotNull>
             <isNotNull prepend="," property="modifyTime" >
-                modify_time = #modifyTime#
+                modify_time = now()
             </isNotNull>
         </dynamic>
         where order_id = #orderId#

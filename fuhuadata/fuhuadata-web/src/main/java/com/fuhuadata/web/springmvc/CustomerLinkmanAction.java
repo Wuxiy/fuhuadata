@@ -73,7 +73,14 @@ public class CustomerLinkmanAction {
     @RequestMapping(value = "intoCustomerLinkmanAdd",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "customerInfo-customerContacts",methods = "intoCustomerLinkmanAdd")
     public ModelAndView intoCustomerLinkmanAdd(String customerId,int customerType){
-        ModelAndView model = new ModelAndView("customerInfo/customerContactsAdd").addObject("customerId",customerId).addObject("customerType",customerType);
+        //获取客户默认联系人
+        Result<CustomerLinkman> result = customerLinkmanService.getCustomerLinkmanDefaultByCustomerId(customerId);
+        int isDefault=0;
+        if(result.getModel()!=null){
+            isDefault=1;
+        }
+        ModelAndView model = new ModelAndView("customerInfo/customerContactsAdd").addObject("customerId",customerId).addObject("customerType",customerType)
+                .addObject("isDefault",isDefault);
         return model;
     }
 
@@ -149,8 +156,21 @@ public class CustomerLinkmanAction {
      */
     @RequestMapping(value = "intoCustomerLinkmanInfo",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "customerInfo-customerContacts",methods = "intoCustomerLinkmanInfo")
-    public ModelAndView intoCustomerLinkmanInfo(String customerId){
-        ModelAndView model = new ModelAndView("customerInfo/customerContactsInfo").addObject("customerId",customerId);
+    public ModelAndView intoCustomerLinkmanInfo(String linkmanId,String customerId,int customerType){
+        //获取客户默认联系人
+        Result<CustomerLinkman> result = customerLinkmanService.getCustomerLinkmanDefaultByCustomerId(customerId);
+       /* String defaultLinkmanId = null;
+        int isDefault = 0;
+        if(result.getModel()!=null){
+            defaultLinkmanId= result.getModel().getLinkmanId();
+        }
+        if(linkmanId == defaultLinkmanId){
+            isDefault = 1;
+        }*/
+        int isDefault = customerLinkmanService.getCustomerLinkmanById(linkmanId).getModel().getIsDefault();
+        ModelAndView model = new ModelAndView("customerInfo/customerContactsInfo").addObject("customerId",customerId)
+                .addObject("isDefault",isDefault)
+                .addObject("customerType",customerType);
         return model;
     }
 

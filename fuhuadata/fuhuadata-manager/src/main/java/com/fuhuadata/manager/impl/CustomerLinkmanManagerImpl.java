@@ -82,7 +82,6 @@ public class CustomerLinkmanManagerImpl implements CustomerLinkmanManager {
     public Result<List<CustomerLinkman>> getCustomerLinkmansByPage(QueryCustomerLinkman queryCustomerLinkman) {
 		Result<List<CustomerLinkman>> result = new Result<List<CustomerLinkman>>();
 		int totalItem = customerLinkmanDao.count(queryCustomerLinkman);
-		;
 		if (totalItem > 0) {
 			result.addDefaultModel("CustomerLinkmans", customerLinkmanDao.getCustomerLinkmansByPage(queryCustomerLinkman));		
 		} else {

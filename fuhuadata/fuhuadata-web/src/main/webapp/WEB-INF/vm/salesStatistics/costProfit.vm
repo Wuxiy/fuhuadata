@@ -380,7 +380,7 @@
                     });
                     $('#myModal').find('tbody').html(_html);
                 }else{
-                    $('#myModal').find('tbody').html('<td>暂无数据</td>');
+                    $('#myModal').find('tbody').html('<td colspan="5">暂无数据</td>');
                 }
             })
         });
@@ -604,11 +604,11 @@
                 _html += '  <td><a href="'+basePath+'/customerVisitRecord/intoCustomerMaintenance?customerId='+
                         ResultData[i].customerId +'">' + (ResultData[i].maintenanceFee!=undefined?ResultData[i].maintenanceFee:0) +'</a></td>';
                 _html += '  <td lang="zh">' +  (ResultData[i].netProfit!=undefined?ResultData[i].netProfit:0) + '</td>';
+                _html += '  <td lang="zh">' +  (ResultData[i].salesManName!=undefined?ResultData[i].salesManName:'') + '</td>';
                 _html +='   </tr>';
             }
-
-            $("#costProfitList").html(_html);
         }
+        $("#costProfitList").html(_html);
     }
 
     // 流失原因需要上传的数据

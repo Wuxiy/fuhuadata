@@ -112,7 +112,7 @@ $('#imgGroup').on('click.select','img',function (e) {
 
     thisThumbnail = el; // 取得当前缩略图框
 
-    if (!(src == '' || src == '/lib/img/placeholder.png')) {
+    if (!(src == '' || src == basePath+'/lib/img/placeholder.png')) {
 
         imgModal.find('img').attr('src',src); // 打开模态
     }else {

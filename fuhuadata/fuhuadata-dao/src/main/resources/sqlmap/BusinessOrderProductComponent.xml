@@ -68,6 +68,7 @@
         FROM
         business_order_product_component pc,
         k_component_cost cc
+
         WHERE pc.`component_id` = cc.`component_id`
         AND pc.business_product_id = #businessProductId#
     </select>

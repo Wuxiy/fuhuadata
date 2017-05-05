@@ -23,8 +23,11 @@ public class CustomerProductPackagingArchives {
     private String specification;//规格
     private String model;//型号
     private String mainUnit;//主单位
-    private Integer factoryId;//加工产id
+    private Integer factoryId;//加工厂id
     private String factoryName;//加工厂名称
+
+    private Integer startRow;//分页起始行标
+    private Integer pageSize;//分页步长
 
     public String getModel() {
         return model;
@@ -153,5 +156,21 @@ public class CustomerProductPackagingArchives {
 
     public void setOrderId(String orderId) {
         this.orderId = orderId;
+    }
+
+    public Integer getStartRow() {
+        return startRow;
+    }
+
+    public void setStartRow(Integer startRow) {
+        this.startRow = startRow;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
     }
 }

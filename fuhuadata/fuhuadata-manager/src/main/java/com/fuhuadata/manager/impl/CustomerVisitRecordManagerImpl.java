@@ -2,19 +2,17 @@ package com.fuhuadata.manager.impl;
 import java.util.List;
 
 import com.fuhuadata.dao.RecordLinkmanDao;
-import com.fuhuadata.domain.query.QueryBusinessOrder;
-import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.dao.CustomerVisitRecordDao;
+import com.fuhuadata.domain.RecordLinkman;
+import com.fuhuadata.domain.query.QueryRecordLinkman;
 import com.fuhuadata.manager.CustomerVisitRecordManager;
 import com.fuhuadata.domain.CustomerVisitRecord;
 import com.fuhuadata.domain.query.QueryCustomerVisitRecord;
 import javax.annotation.Resource;
-import javax.management.Query;
 
+import com.fuhuadata.vo.CustomerVisitRecordLinkman;
 import com.fuhuadata.vo.CustomerVisitRecordVO;
 import com.fuhuadata.vo.VisitRecordVO;
-
-import java.util.ArrayList;
 
 /**
  * @author wangbo
@@ -59,8 +57,14 @@ public class CustomerVisitRecordManagerImpl implements CustomerVisitRecordManage
 		return customerVisitRecordDao.getCustomerVisitRecordsByPage(queryCustomerVisitRecord);
     }
 
-    public CustomerVisitRecord getCustomerVisitRecordById(int visitrecord_id) {
-    	return customerVisitRecordDao.getCustomerVisitRecordById(visitrecord_id);
+    public CustomerVisitRecordLinkman getCustomerVisitRecordById(int visitrecord_id) {
+		CustomerVisitRecordLinkman customerVisitRecordLinkman = new CustomerVisitRecordLinkman();
+		QueryRecordLinkman queryRecordLinkman = new QueryRecordLinkman();
+		queryRecordLinkman.setVisitRecordId(visitrecord_id+"");
+		List<RecordLinkman> recordLinkmanList = recordLinkmanDao.getRecordLinkmansByQuery(queryRecordLinkman);
+    	customerVisitRecordLinkman.setCustomerVisitRecord(customerVisitRecordDao.getCustomerVisitRecordById(visitrecord_id));
+    	customerVisitRecordLinkman.setRecordLinkmanList(recordLinkmanList);
+    	return customerVisitRecordLinkman;
     }
 
 	@Override

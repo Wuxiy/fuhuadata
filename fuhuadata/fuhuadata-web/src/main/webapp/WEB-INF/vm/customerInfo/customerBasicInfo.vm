@@ -61,12 +61,12 @@
                                 </div>
                                 <label for="saleOrganizationName" class="control-label col-xs-1" lang="zh">所属组织<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <div class="input-group">
-                                        <input id="saleOrganizationName" name="saleOrganizationName" data-toggle="dropdown" class="form-control dropdown-toggle" disabled type="text" placeholder="点击搜索按钮选择" autocomplete="off"/>
-                                        <div class="input-group-btn">
-                                            <button id="oNSearch" class="btn btn-xs btn-default" data-control="on" type="button" data-toggle="modal" data-target="#cbtModal"><span class="glyphicon glyphicon-search"></span></button>
+                                        <div class="input-group">
+                                            <input id="saleOrganizationName" name="saleOrganizationName" data-toggle="dropdown" class="form-control dropdown-toggle" disabled type="text" placeholder="点击搜索按钮选择" autocomplete="off"/>
+                                            <div class="input-group-btn">
+                                                <button id="oNSearch" class="btn btn-xs btn-default" data-control="on" type="button" data-toggle="modal" data-target="#cbtModal"><span class="glyphicon glyphicon-search"></span></button>
+                                            </div>
                                         </div>
-                                    </div>
                                 </div>
                                 <label class="col-xs-1 control-label" for="customerDutyParagraph">客户税号</label>
                                 <div class="col-xs-2"><input id="customerDutyParagraph" data-control="on" disabled name="customerDutyParagraph" class="form-control" type="text"></div>
@@ -147,7 +147,20 @@
                             <div class="form-group">
                                 <label for="registeredFunds" class="control-label col-xs-1" lang="zh">注册资金</label>
                                 <div class="col-xs-2">
-                                    <input id="registeredFunds" data-control="off" disabled name="registeredFunds" class="form-control" type="text" value="" />
+                                    <div class="input-group">
+                                        <span id="fundType" class="input-group-addon" data-val="美元" lang="zh">美元</span>
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-xs btn-default dropdown-toggle" data-control="off" disabled data-toggle="dropdown" type="button">
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul id="sFundType" class="dropdown-menu">
+                                                #foreach($!info in $!{currtype})
+                                                    <li><a href="#" lang="zh" data-val="$!info.name">$!info.name</a></li>
+                                                #end
+                                            </ul>
+                                        </div>
+                                        <input id="registeredFunds" data-control="off" disabled name="registeredFunds" class="form-control" min="0" type="number" value="" />
+                                    </div>
                                 </div>
                                 <label for="enterprisePhone" class="control-label col-xs-1" lang="zh">企业电话</label>
                                 <div class="col-xs-2">
@@ -301,7 +314,7 @@
                             编辑百科
                         </a>
                         <h3 class="panel-title" lang="zh">
-                            客户百科
+                            企业百科
                         </h3>
                     </div>
                     <div id="ency" class="panel-body"></div>

@@ -18,6 +18,7 @@
 		<result property="lastmodifyUserName" column="lastmodify_user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="createTime" column="create_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
 		<result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+		<result property="remarks" column="remarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
 	</resultMap>
 	
 	<sql id="PAGE-COMMON">	
@@ -61,45 +62,28 @@
 	<sql id="QUERY-COMMON">	
 		<dynamic prepend=" WHERE ">
 				<isNotNull prepend=" AND " property="id">
-			id = #id#
+			rl.id = #id#
 		</isNotNull>
 				<isNotNull prepend=" AND " property="visitRecordId">
-			visit_record_id = #visitRecordId#
+			rl.visit_record_id = #visitRecordId#
 		</isNotNull>
 				<isNotNull prepend=" AND " property="linkmanId">
-			linkman_id = #linkmanId#
+			rl.linkman_id = #linkmanId#
 		</isNotNull>
 				<isNotNull prepend=" AND " property="activityExpens">
-			activity_expens = #activityExpens#
+			rl.activity_expens = #activityExpens#
 		</isNotNull>
 				<isNotNull prepend=" AND " property="activityGift">
-			activity_gift = #activityGift#
+			rl.activity_gift = #activityGift#
 		</isNotNull>
-				<isNotNull prepend=" AND " property="createUserId">
-			create_user_id = #createUserId#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="createUserName">
-			create_user_name = #createUserName#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="lastmodifyUserId">
-			lastmodify_user_id = #lastmodifyUserId#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="lastmodifyUserName">
-			lastmodify_user_name = #lastmodifyUserName#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="createTime">
-			create_time = #createTime#
-		</isNotNull>
-				<isNotNull prepend=" AND " property="modifyTime">
-			modify_time = #modifyTime#
-		</isNotNull>
+
 				</dynamic>
 	</sql>
 	
 	<insert id="ADD" parameterClass="RecordLinkman">
 		INSERT INTO 
-		record_linkman(id,visit_record_id,linkman_id,activity_expens,activity_gift,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time) 
-		VALUES(#id#,#visitRecordId#,#linkmanId#,#activityExpens#,#activityGift#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,#createTime#,#modifyTime#)
+		record_linkman(id,visit_record_id,linkman_id,activity_expens,activity_gift,create_user_id,create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time,remarks)
+		VALUES(#id#,#visitRecordId#,#linkmanId#,#activityExpens#,#activityGift#,#createUserId#,#createUserName#,#lastmodifyUserId#,#lastmodifyUserName#,now(),now(),#remarks#)
 		<selectKey resultClass="int" keyProperty="id">
 			SELECT @@IDENTITY AS ID
 		</selectKey>
@@ -109,13 +93,13 @@
 		<![CDATA[
             INSERT INTO record_linkman
             (visit_record_id,linkman_id,activity_expens,activity_gift,create_user_id,
-            create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time) values
+            create_user_name,lastmodify_user_id,lastmodify_user_name,create_time,modify_time,remarks) values
             ]]>
 		<iterate conjunction=",">
 			<![CDATA[
                 (#[].visitRecordId#,#[].linkmanId#,
                 #[].activityExpens#,#[].activityGift#,#[].createUserId#,#[].createUserName#,
-                #[].lastmodifyUserId#,#[].lastmodifyUserName#,#[].createTime#,#[].modifyTime#)
+                #[].lastmodifyUserId#,#[].lastmodifyUserName#,now(),now(), #[].remarks#)
                 ]]>
 		</iterate>
 
@@ -129,12 +113,10 @@
 						<isNotEmpty prepend=", " property="linkmanId">linkman_id=#linkmanId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="activityExpens">activity_expens=#activityExpens#</isNotEmpty>
 						<isNotEmpty prepend=", " property="activityGift">activity_gift=#activityGift#</isNotEmpty>
-						<isNotEmpty prepend=", " property="createUserId">create_user_id=#createUserId#</isNotEmpty>
-						<isNotEmpty prepend=", " property="createUserName">create_user_name=#createUserName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="lastmodifyUserId">lastmodify_user_id=#lastmodifyUserId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="lastmodifyUserName">lastmodify_user_name=#lastmodifyUserName#</isNotEmpty>
-						<isNotEmpty prepend=", " property="createTime">create_time=#createTime#</isNotEmpty>
-						<isNotEmpty prepend=", " property="modifyTime">modify_time=#modifyTime#</isNotEmpty>
+						<isNotEmpty prepend=", " property="modifyTime">modify_time=now()</isNotEmpty>
+						<isNotEmpty prepend=", " property="remarks">remarks = #remarks#</isNotEmpty>
 					</dynamic>
 		WHERE id=#id#
 	</update>
@@ -151,9 +133,24 @@
 		]]>
 	</select>
 	
-	<select id="GET-BY-QUERY" resultMap="RECORDLINKMAN-MAP" parameterClass="QueryRecordLinkman">
+	<select id="GET-BY-QUERY" resultClass="RecordLinkman" parameterClass="QueryRecordLinkman">
 		<![CDATA[
-			SELECT * FROM record_linkman
+						SELECT
+			rl.`id` ,
+			rl.`visit_record_id` visitRecordId,
+			rl.`linkman_id` linkmanId,
+			cl.`name` AS linkmanName,
+			rl.`activity_expens` activityExpens,
+			rl.`activity_gift` activityGift,
+			rl.`create_time` createTime,
+			rl.`create_user_id` createUserId,
+			rl.`create_user_name` createUserName,
+			rl.`lastmodify_user_id` lastmodifyUserId,
+			rl.`lastmodify_user_name` lastmodifyUserName,
+			rl.`modify_time` modifyTime,
+			rl.`remarks`
+			FROM record_linkman rl
+			LEFT JOIN customer_linkman cl ON cl.`linkman_id` = rl.`linkman_id`
 		]]>
 		<isParameterPresent>   
             <include refid="QUERY-COMMON" />   

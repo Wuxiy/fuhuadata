@@ -39,10 +39,17 @@ public interface CustomerProductArchivesService {
     public Result deleteCustomerProductInfoById(int customer_product_id);
 
 	/**
-	 * 客户产品包装要求
+	 * 知识库-客户产品包装要求
 	 * @return
 	 */
-	public Result<List<CustomerProductPackagingArchives>> getCustomerProductPackagingArchives();
+	public Result<List<CustomerProductPackagingArchives>> getCustomerProductPackagingArchives(CustomerProductPackagingArchives customerProductPackagingArchives);
+
+	/**
+	 *  知识库-客户产品包装要求 count
+	 * @param cppa
+	 * @return
+	 */
+	public Result<Integer> countCustomerProductPackagingArchives(CustomerProductPackagingArchives cppa);
 
 	public Result<List<CustomerProductPackagingArchives>> getCustomerProductPackagingArchivesById(String customerId);
 

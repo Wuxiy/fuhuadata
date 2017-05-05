@@ -40,9 +40,16 @@ public class ComponentCostManagerImpl implements ComponentCostManager {
         return flag;
     }
 
+    @Transactional
     @Override
     public boolean deleteComponentCostById(int id) {
         return componentCostDao.deleteComponentCostById(id) ==1 ? true:false;
+    }
+
+    @Transactional
+    @Override
+    public boolean deleteComponentCostByIds(List<Integer> ids) {
+        return componentCostDao.deleteComponentByIds(ids) == ids.size();
     }
 
     @Override

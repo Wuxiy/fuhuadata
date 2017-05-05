@@ -80,7 +80,7 @@
         #organizer#, #region#, #country#,
         #city#, #startDate#, #finishDate#,
         #exhibitionAddr#, #exhibitionLink#,#creatorId#,#creator#,
-        #createTime#, #exhibitionInfo#,#lastmodifyUserId#,#lastmodifyUserName#,#modifyTime#)
+        now(), #exhibitionInfo#,#lastmodifyUserId#,#lastmodifyUserName#,now())
         <selectKey resultClass="int" keyProperty="exhibitionId">
             SELECT @@IDENTITY AS exhibition_id
         </selectKey>
@@ -119,12 +119,6 @@
             <isNotNull prepend=", " property="exhibitionLink">
                 exhibition_link  = #exhibitionLink#
             </isNotNull>
-            <isNotNull prepend=", " property="creator">
-                creator = #creator#
-            </isNotNull>
-            <isNotNull prepend=", " property="createTime">
-                create_time = #createTime#
-            </isNotNull>
             <isNotNull prepend=", " property="exhibitionInfo">
                 exhibition_info = #exhibitionInfo#
             </isNotNull>
@@ -135,7 +129,7 @@
                 lastmodify_user_name = #lastmodifyUserName#
             </isNotNull>
             <isNotNull prepend=", " property="modifyTime" >
-                modify_time = #modifyTime#
+                modify_time = now()
             </isNotNull>
         </dynamic>
         where exhibition_id = #exhibitionId#

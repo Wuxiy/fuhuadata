@@ -389,7 +389,7 @@
     /**
      *以下是逻辑处理和数据处理函数
      */
-    // 渲染客户基本分类树
+    // 地区树
     function renderAreaTree (data,callback,el) {
         var setting = {
                     data: {

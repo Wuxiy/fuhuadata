@@ -1,10 +1,15 @@
 package com.fuhuadata.manager.impl;
 
 import com.fuhuadata.dao.PackingArchivesDao;
+import com.fuhuadata.dao.PreparationProcessCostDao;
 import com.fuhuadata.domain.PackingArchives;
+import com.fuhuadata.domain.PreparationProcessCost;
 import com.fuhuadata.domain.query.PackingArchivesQuery;
+import com.fuhuadata.domain.query.PreparationProcessCostQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.PackingArchivesManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +20,24 @@ import java.util.List;
  */
 public class PackingArchivesManagerImpl implements PackingArchivesManager {
     private PackingArchivesDao packingArchivesDao;
+    @Autowired
+    private PreparationProcessCostDao preparationProcessCostDao;
     @Override
+    @Transactional
     public PackingArchives addPackingArchives(PackingArchives packingArchives) {
+        //若添加主材，则要将新增的规格添加进人工费规格表
+        if(packingArchives.getBigCategoryId()==1) {
+            PreparationProcessCostQuery preparationProcessCostQuery = new PreparationProcessCostQuery();
+            preparationProcessCostQuery.setType(0);
+            preparationProcessCostQuery.setCostTerm(packingArchives.getSpec());
+            List<PreparationProcessCost> list=preparationProcessCostDao.getPreparationProcessCostByQuery(preparationProcessCostQuery);
+            if(list!=null||list.size()==1) {
+                PreparationProcessCost preparationProcessCost = new PreparationProcessCost();
+                preparationProcessCost.setType(0);
+                preparationProcessCost.setCostTerm(packingArchives.getSpec());
+                preparationProcessCostDao.addPreparationProcessCost(preparationProcessCost);
+            }
+        }
         return packingArchivesDao.addPackingArchives(packingArchives);
     }
 

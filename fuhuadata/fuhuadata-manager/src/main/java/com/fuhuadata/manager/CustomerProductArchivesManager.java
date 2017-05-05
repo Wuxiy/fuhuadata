@@ -36,11 +36,23 @@ public interface CustomerProductArchivesManager {
     public boolean deleteCustomerProductInfoById(int customer_product_id);
 
 	/**
-	 * 客户产品包装要求信息
+	 * 知识库-客户产品包装要求信息
 	 * @return
 	 */
-	public List<CustomerProductPackagingArchives> getCustomerProductPackagingArchives();
+	public List<CustomerProductPackagingArchives> getCustomerProductPackagingArchives(CustomerProductPackagingArchives cppa);
 
+	/**
+	 * 知识库-客户产品包装要求count
+	 * @param cppa
+	 * @return
+	 */
+	public int countCustomerProductPackagingArchives(CustomerProductPackagingArchives cppa);
+
+	/**
+	 * 客户基本信息，产品信息
+	 * @param customerId
+	 * @return
+	 */
 	public List<CustomerProductPackagingArchives> getCustomerProductPackingArchivesById(String customerId);
 
     /**

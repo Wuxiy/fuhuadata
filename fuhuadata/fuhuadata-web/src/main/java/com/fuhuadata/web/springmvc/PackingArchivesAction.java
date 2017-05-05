@@ -65,7 +65,6 @@ public class PackingArchivesAction {
 
     /**
      * add
-     *
      * @return
      */
     @RequestMapping(value = "/addPackingArchives", method = RequestMethod.GET)
@@ -90,6 +89,8 @@ public class PackingArchivesAction {
     @ResponseBody
     public ResultPojo doAddPackingArchives(@RequestBody PackingArchives packingArchives) {
         try {
+            // 转化规格为大写
+            packingArchives.setSpec(packingArchives.getSpec().toUpperCase());
             Result<PackingArchives> result = packingArchivesService.addPackingArchives(packingArchives);
             return result.getResultPojo();
         } catch (Exception e) {

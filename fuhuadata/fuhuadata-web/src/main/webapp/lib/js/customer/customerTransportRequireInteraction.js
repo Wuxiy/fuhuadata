@@ -17,14 +17,14 @@ $(function () {
             orderData = reconstructionTraData(data); // 将data赋给外部变量，闭包
             renderSelect(orderData,'nameC',name); // 渲染下拉菜单
             resetbillPanel(); // 重置表单
-            screenData({productId:name.val()},orderData,customerTransportRequire); // 根据下拉框的值渲染数据
+            screenData({wareId:name.val()},orderData,customerTransportRequire); // 根据下拉框的值渲染数据
         }
     });
 
     // 下拉框的值改变时渲染数据
     $(document).on('change.screen','#name',function () {
         var obj = {
-            productId:name.val()
+            wareId:name.val()
         };
         resetbillPanel(); // 重置表单
         screenData(obj,orderData,customerTransportRequire);

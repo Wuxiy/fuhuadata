@@ -58,14 +58,26 @@ public class CustomerProductArchivesServiceImpl implements CustomerProductArchiv
     }
 
 	@Override
-	public Result<List<CustomerProductPackagingArchives>> getCustomerProductPackagingArchives() {
+	public Result<List<CustomerProductPackagingArchives>> getCustomerProductPackagingArchives(CustomerProductPackagingArchives cppa) {
     	Result<List<CustomerProductPackagingArchives>> result = new Result<List<CustomerProductPackagingArchives>>();
     	try{
-    		result.addDefaultModel("CustomerProductPackagingArchives",customerProductInfoManager.getCustomerProductPackagingArchives());
+    		result.addDefaultModel("CustomerProductPackagingArchives",customerProductInfoManager.getCustomerProductPackagingArchives(cppa));
 
 		}catch(Exception e){
     		result.setSuccess(false);
     		log.error("获取客户产品包装要求错误",e);
+		}
+		return result;
+	}
+
+	@Override
+	public Result<Integer> countCustomerProductPackagingArchives(CustomerProductPackagingArchives cppa) {
+		Result<Integer> result = new Result<Integer>();
+		try {
+			result.addDefaultModel(customerProductInfoManager.countCustomerProductPackagingArchives(cppa));
+		} catch(Exception e) {
+			result.setSuccess(false);
+			log.error("获取客户产品包装要求数量错误",e);
 		}
 		return result;
 	}

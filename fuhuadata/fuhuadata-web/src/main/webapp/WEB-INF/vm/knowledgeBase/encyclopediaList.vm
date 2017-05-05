@@ -18,14 +18,14 @@
                         </a>
                     #end
                     <h3 class="panel-title">
-                        百科
+                        企业百科
                     </h3>
                 </div>
                 <div class="panel-body clearfix">
                     <!--搜索框开始-->
                     <div class="form-horizontal">
                         <div class="form-group ">
-                            <div class="col-xs-2 pull-right">
+                           #* <div class="col-xs-2 pull-right">
                                 <input id="search" class="form-control" type="search" value="" placeholder="请输入关键词搜素"/>
                             </div>
                             <label class="col-xs-1 control-label pull-left">企业类型</label>
@@ -35,12 +35,26 @@
                                     <option value="1">竟对</option>
                                 </select>
                             </div>
+                            *#
+                               <label class="col-xs-1 control-label pull-left">企业类型</label>
+                               <div class="col-xs-1 pull-left">
+                                   <select class="form-control" id="companyType" >
+                                       <option value="0">客户</option>
+                                       <option value="1">竟对</option>
+                                   </select>
+                               </div>
+                               <div class="col-xs-2 pull-left">
+                                   <input id="search" class="form-control" type="search" value="" placeholder="请输入关键词搜素"/>
+                               </div>
+                               <div class="input-group-btn">
+                                   <button class="btn btn-xs btn-default" type="reset">重置</button>
+                                   <button class="btn btn-xs btn-primary" id="submit" type="button">搜索</button>
+                               </div>
                         </div>
                     </div>
                     <!--搜索框结束-->
                     <!--表格开始-->
-                    <table id="encyclopedia_table"
-                           class="table table-condensed table-bordered table-striped text-center" cellpadding="0">
+                    <table id="encyclopedia_table" class="table table-condensed table-bordered table-striped text-center" cellpadding="0">
                         <thead>
                         <tr>
                             <th class="col-xs-1 text-center">编号</th>
@@ -54,22 +68,9 @@
                             <th class="col-xs-2 text-center">最后编辑时间</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td><a href="encyclopedia_add.html">润丰</a></td>
-                            <td><a href="encyclopedia_add.html">润丰</a></td>
-                            <td>竟对</td>
-                            <td>78%</td>
-                            <td>刘凯洋</td>
-                            <td>2016-10-10</td>
-                            <td>刘凯洋</td>
-                            <td>2016-10-10</td>
-                        </tr>
-                        </tbody>
+                        <tbody id="list"></tbody>
                     </table>
                     <!--表格结束-->
-
                 </div>
             </div>
         </div>
@@ -77,59 +78,167 @@
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        var table = $('#encyclopedia_table').DataTable({
-            "ajax": basePath + '/customerEncyclopedia/queryCustomerEncyclopediaList',
-            "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
-            "lengthChange": false,//是否允许用户自定义显示数量
-            "bPaginate": true, //翻页功能
-            "bFilter": false, //列筛序功能
-            "searching": true,//本地搜索
-            "ordering": true, //排序功能
-            "Info": true,//页脚信息
-            "autoWidth": true,//自动宽度
-            "pagingType": "full_numbers",
-            "columns": [
-                {"data": "encyId"},
-                {"data": "fullName"},
-                {"data": "shortName"},
-                {"data": "companyType"},
-                {"data": "isFull"},
-                {"data": "createUserName"},
-                {"data": "createTime"},
-                {"data": "lastmodifyUserName"},
-                {"data": "modifyTime"}
-            ],
-            "columnDefs": [{
-                targets: "_all",
-                defaultContent: ''
-            }, {
-                "targets": 1,
-                "render": function (data, type, row) {
-                    return '<a href=/customerEncyclopedia/modify?encyId=' + row.encyId + '"target="_blank">' + row.fullName + '</a>';
-                }
-            }, {
-                "targets": 3,
-                "render": function (data, row) {
-                    return ''
-                }
-            }],
-            "language": {
-                "url": basePath + '/lib/dataTables/lang/dataTables.lang.zh',
-                "searchPlaceholder": '关键字'
-            }
+
+    var pagesize = 10; // 分页步长
+    $("#submit").click(function () {
+        search();
+    });
+    search();
+
+    // 搜索列表并渲染
+    function search(){
+        // 获取参数
+        var data = collectArgs();
+
+        getDataList(0,pagesize,rederLiset); // 初始化第一页数据
+
+        // 获取总的条数
+        getListCount(data,function (total) {
+
+            // 渲染分页
+            rederPaging(total,pagesize,function (pageNum,jq) {
+
+                // 获取列表数据
+                getDataList(pageNum,pagesize);
+            })
         })
 
+    }
 
-        //自定义搜索
-        $('#type').on('keyup click', function () {
-            var type = $("#type").val()
-            table.search(type, false, false).draw();
-        });
+    // 收集提交参数
+    function collectArgs() {
+        var obj={
+            companyType:$('#companyType').val(),
+            searchKey:$('#search').val()
+        }
+        return obj;
+    }
 
-        $('#search').on('keyup click', function () {
-            var search = $("#search").val()
-            table.search(search, false, false).draw();
+    // 获取列表数据条目总数
+    function getListCount(data,callback){
+        var total = 0;
+        jQuery.ajax({
+            url:basePath + '/customerEncyclopedia/getCustomerEncyclopediaListByQuery',
+            dataType:'JSON',
+            contentType:'application/json',
+            data:JSON.stringify(data),
+            async:true,
+            type:'POST'
+        }).done(function (res) {
+            total = res.data;
+            callback(total);
         });
-    })
+    }
+
+    // 渲染分页插件
+    function rederPaging(total,pageSize,callback) {
+
+        $("#pagination").pagination(total,{
+            items_per_page : pageSize,
+            num_edge_entries : 3,
+            num_display_entries : 10,
+            callback:callback
+        });
+    }
+
+    // 根据页码获取列表数据
+    function getDataList(pageNum,pageSize,callback) {
+        jQuery.ajax({
+            url:basePath + '/customerEncyclopedia/count',
+            dataType:'json',
+            contentType:'application/json',
+            data:JSON.stringify({
+                companyType:$('#companyType').val(),
+                searchKey:$('#search').val(),
+                startRow:pageNum*pageSize,
+                pageSize:pageSize
+            }),
+            async:true,
+            type:'POST'
+        }).done(function (res) {
+            // 渲染列表
+            rederLiset(res,pageNum);
+        });
+    }
+    // 渲染列表
+    var companyTypeList = ['客户','竞对'];
+    function rederLiset(data,pageNum){
+        var ResultData = data.data,
+                _html = '',
+                count = pageNum*pagesize;
+
+        if(ResultData && ResultData!='' && ResultData!='null') {
+            for (var i = 0; i < ResultData.length; i++) {
+                _html += '<tr>';
+                _html += '<td>'+(++count)+'</td>';
+                _html += '<td><a href='+basePath+'"/customerEncyclopedia/modify?encyId='+ResultData[i].encyId+'">' + (ResultData[i].fullName!=undefined?ResultData[i].fullName:'') + '</a></td>';
+                _html += '<td>' + (ResultData[i].shortName!=undefined?ResultData[i].shortName:'') + '</td>';
+                _html += '<td>' + (ResultData[i].companyType!=undefined?companyTypeList[ResultData[i].companyType]:'') + '</td>';
+
+                _html += '<td lang="zh">' + (ResultData[i].isFull!=undefined?ResultData[i].isFull:'') + '</td>';
+                _html += '<td lang="zh">' + (ResultData[i].createUserName!=undefined?ResultData[i].createUserName:'') + '</td>';
+                _html += '<td>' + (ResultData[i].createTime!=undefined?ResultData[i].createTime:'') + '</td>';
+                _html += '<td lang="zh">' + (ResultData[i].lastmodifyUserName!=undefined?ResultData[i].lastmodifyUserName:'') + '</td>';
+                _html += '<td lang="zh">' + (ResultData[i].modifyTime != undefined ? ResultData[i].modifyTime:'') + '</td>';
+                _html += '</tr>';
+            }
+        $("#list").html(_html);
+    }
+
+
+//    $(document).ready(function () {
+//        var table = $('#encyclopedia_table').DataTable({
+//            "ajax": basePath + '/customerEncyclopedia/queryCustomerEncyclopediaList',
+//            "dom": '<"top"f >rt<"bottom"ilp><"clear">',//dom定位
+//            "lengthChange": false,//是否允许用户自定义显示数量
+//            "bPaginate": true, //翻页功能
+//            "bFilter": false, //列筛序功能
+//            "searching": true,//本地搜索
+//            "ordering": true, //排序功能
+//            "Info": true,//页脚信息
+//            "autoWidth": true,//自动宽度
+//            "pagingType": "full_numbers",
+//            "columns": [
+//                {"data": "encyId"},
+//                {"data": "fullName"},
+//                {"data": "shortName"},
+//                {"data": "companyType"},
+//                {"data": "isFull"},
+//                {"data": "createUserName"},
+//                {"data": "createTime"},
+//                {"data": "lastmodifyUserName"},
+//                {"data": "modifyTime"}
+//            ],
+//            "columnDefs": [{
+//                targets: "_all",
+//                defaultContent: ''
+//            }, {
+//                "targets": 1,
+//                "render": function (data, type, row) {
+//                    return '<a href='+basePath+'/customerEncyclopedia/modify?encyId=' + row.encyId + '"target="_blank">' + (row.fullName?row.fullName:"") + '</a>';
+//                }
+//            }, {
+//                "targets": 3,
+//                "render": function (data, row) {
+//                    return ''
+//                }
+//            }],
+//            "language": {
+//                "url": basePath + '/lib/dataTables/lang/dataTables.lang.zh',
+//                "searchPlaceholder": '关键字'
+//            }
+//        })
+//
+//
+//        //自定义搜索
+//        $('#type').on('keyup click', function () {
+//            var type = $("#type").val()
+//            table.search(type, false, false).draw();
+//        });
+//
+//        $('#search').on('keyup click', function () {
+//            var search = $("#search").val()
+//            table.search(search, false, false).draw();
+//        });
+//    })
 </script>

@@ -21,7 +21,7 @@ public class PreparationProcessCostDaoImpl extends SqlMapClientTemplate implemen
     public static final String GET_BY_QUERY="PREPARATIONPROCESSCOST.GET-BY-QUERY";
 
     @Override
-    public PreparationProcessCost addComponentCost(PreparationProcessCost preparationProcessCost) {
+    public PreparationProcessCost addPreparationProcessCost(PreparationProcessCost preparationProcessCost) {
         preparationProcessCost.setMcostId((Integer) this.insert(ADD,preparationProcessCost));
         return preparationProcessCost;
     }

@@ -18,6 +18,7 @@ public class OrderToNcImpl extends SqlMapClientTemplate implements OrderToNc {
     private static final String GET_CODE_BY_WARE_ID="BUSINESSORDERTONC.getCodeByWareId";
     private static final String GET_BUSINESSORDER_BY_ORDER_ID="BUSINESSORDERTONC.getBusinessOrderByOrderId";
     private static final String GET_ORG_NCID_BY_ORGID="BUSINESSORDERTONC.getOrgNcIdByOrgId";
+    private static final String UPDATE_COOPERATION_TIME="BUSINESSORDERTONC.updateCustCooperationTime";
     @Override
     public void updateOrderStatusByNcOrderId(Map<String,Object> mapv) {
         this.update(UPDATE_STATUS_BY_NCORDERID,mapv);
@@ -42,6 +43,11 @@ public class OrderToNcImpl extends SqlMapClientTemplate implements OrderToNc {
     @Override
     public String getOrgNcIdByOrgId(int orgId) {
         return (String) this.queryForObject(GET_ORG_NCID_BY_ORGID,orgId);
+    }
+
+    @Override
+    public void updateCustCooperationTime(Map<String,Object> mapc) {
+        this.update(UPDATE_COOPERATION_TIME,mapc);
     }
 
 

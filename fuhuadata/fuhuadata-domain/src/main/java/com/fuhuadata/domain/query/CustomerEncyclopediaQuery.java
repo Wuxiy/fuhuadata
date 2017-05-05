@@ -1,6 +1,5 @@
 package com.fuhuadata.domain.query;
 
-import com.fuhuadata.domain.query.PageBase;
 import com.fuhuadata.util.DateJsonDeserializer;
 import com.fuhuadata.util.DateJsonSerializer;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
@@ -14,9 +13,14 @@ import java.util.Date;
  */
 public class CustomerEncyclopediaQuery extends PageBase {
 
+
     private String encyId;//百科编号
 
     private String customerId;//企业id
+
+    private String customerName;
+
+    private String companyType;//企业类型,0客户,1竞对
 
     private String companyInfo;//企业简介
 
@@ -41,6 +45,8 @@ public class CustomerEncyclopediaQuery extends PageBase {
     private Date modifyTime;//最后编辑时间
 
     private String remarks;//备注
+
+    private String searchKey;//搜索内容
 
 
 
@@ -159,5 +165,29 @@ public class CustomerEncyclopediaQuery extends PageBase {
 
     public void setCustomField(String customField) {
         this.customField = customField;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getSearchKey() {
+        return searchKey;
+    }
+
+    public void setSearchKey(String searchKey) {
+        this.searchKey = searchKey;
+    }
+
+    public String getCompanyType() {
+        return companyType;
+    }
+
+    public void setCompanyType(String companyType) {
+        this.companyType = companyType;
     }
 }

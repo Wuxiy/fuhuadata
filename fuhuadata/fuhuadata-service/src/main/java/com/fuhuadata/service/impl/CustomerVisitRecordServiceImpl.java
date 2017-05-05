@@ -1,9 +1,7 @@
 package com.fuhuadata.service.impl;
-import java.security.interfaces.RSAKey;
 import java.util.Arrays;
 import java.util.List;
 
-import com.fuhuadata.dao.RecordLinkmanDao;
 import com.fuhuadata.domain.RecordLinkman;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.RecordLinkmanManager;
@@ -12,11 +10,10 @@ import com.fuhuadata.manager.CustomerVisitRecordManager;
 import com.fuhuadata.domain.CustomerVisitRecord;
 import com.fuhuadata.domain.query.QueryCustomerVisitRecord;
 import javax.annotation.Resource;
-import javax.management.Query;
 
+import com.fuhuadata.vo.CustomerVisitRecordLinkman;
 import com.fuhuadata.vo.CustomerVisitRecordVO;
 import com.fuhuadata.vo.VisitRecordVO;
-import jdk.jfr.events.ExceptionThrownEvent;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -144,18 +141,18 @@ public class CustomerVisitRecordServiceImpl implements CustomerVisitRecordServic
 		return result;	
     }
     	
-    public Result<CustomerVisitRecord> getCustomerVisitRecordById(int visitrecord_id) {
-		Result<CustomerVisitRecord> result = new Result<CustomerVisitRecord>();
-		try {		
-		    CustomerVisitRecord  customerVisitRecord = customerVisitRecordManager.getCustomerVisitRecordById(visitrecord_id);
-		    if(customerVisitRecord == null){
+    public Result<CustomerVisitRecordLinkman> getCustomerVisitRecordById(int visitrecord_id) {
+		Result<CustomerVisitRecordLinkman> result = new Result<CustomerVisitRecordLinkman>();
+		try {
+			CustomerVisitRecordLinkman  customerVisitRecordLinkman = customerVisitRecordManager.getCustomerVisitRecordById(visitrecord_id);
+		    if(customerVisitRecordLinkman == null){
 				result.setSimpleErrorMsg(0, "当前数据不存在，请重试");
 			}else{
-				result.addDefaultModel("CustomerVisitRecord", customerVisitRecord);
+				result.addDefaultModel("CustomerVisitRecord", customerVisitRecordLinkman);
 			}
-			
 		} catch(Exception e) {
 			result.setSuccess(false);
+			log.error("获取客户沟通记录错误",e);
 		}
 		return result;	
     }

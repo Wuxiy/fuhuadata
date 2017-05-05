@@ -61,27 +61,30 @@
                         <div class="panel-body clearfix">
                             <div class="form-horizontal">
                                 <div class="form-group ">
-                                    <label class="col-xs-1 control-label">开始时间<sup class="not-null">*</sup></label>
+                                    <label class="col-xs-2 control-label">开始时间<sup class="not-null">*</sup></label>
                                     <div class="col-xs-4">
                                         <input class="form-control" type="date" id="startTime" />
                                     </div>
-                                    <label class="col-xs-1 control-label col-xs-offset-1">结束时间</label>
+                                    <label class="col-xs-2 control-label">结束时间</label>
                                     <div class="col-xs-4">
                                         <input class="form-control" type="date" id="endTime"/>
                                     </div>
                                 </div>
                                 <div class="form-group ">
-                                    <label class="col-xs-1 control-label">活动地点</label>
+                                    <label class="col-xs-2 control-label">活动地点</label>
                                     <div class="col-xs-4">
                                         <input class="form-control" type="text" id="activityAddress"/>
                                     </div>
-                                    <label class="col-xs-1 control-label col-xs-offset-1">费用(元)<sup class="not-null">*</sup></label>
+                                    <label class="col-xs-2 control-label">费用<sup class="not-null">*</sup></label>
                                     <div class="col-xs-4">
-                                        <input class="form-control" type="text" id="activityExpense"/>
+                                        <div class="input-group">
+                                            <input class="form-control" type="number" min="0" id="activityExpense"/>
+                                            <span class="input-group-addon">元</span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group ">
-                                    <label class="col-xs-1 control-label">活动类型<sup class="not-null">*</sup></label>
+                                    <label class="col-xs-2 control-label">活动类型<sup class="not-null">*</sup></label>
                                     <div class="col-xs-4">
                                         <select class="form-control" name="items" id="activityType">
                                             <option  value="0">远程沟通</option>
@@ -92,30 +95,29 @@
                                             <option  value="5">其他(备注内容)</option>
                                         </select>
                                     </div>
-                                    <div class="col-xs-4 col-xs-offset-1">
-                                        <input class="form-control" type="text" id="activityRemarks" disabled/>
+                                    <div class="col-xs-4">
+                                        <input class="form-control hidden" type="text" id="activityRemarks" placeholder="请输入活动类型" disabled/>
                                     </div>
                                 </div>
                                 <div class="form-group ">
-                                    <label class="col-xs-1 control-label">姓名</label>
-                                    <div class="col-xs-11">
+                                    <label class="col-xs-2 control-label">姓名</label>
+                                    <div class="col-xs-10">
                                         <table class="table table-condensed table-bordered table-striped text-center">
                                             <thead>
                                             <tr>
-                                                <th class="text-center" lang="zh"><input type="checkbox" id="checkAll">是否拜访</th>
-                                                <th class="text-center" lang="zh">联系人</th>
-                                                <th class="text-center" lang="zh">赠送礼物</th>
+                                                <th class="text-center col-xs-2" lang="zh"><input type="checkbox" id="checkAll">是否拜访</th>
+                                                <th class="text-center col-xs-2" lang="zh">联系人</th>
+                                                <th class="text-center col-xs-4" lang="zh">赠送礼物</th>
+                                                <th class="text-center col-xs-4" lang="zh">备注</th>
                                             </tr>
                                             </thead>
-                                            <tbody id="modalContactList">
-
-                                            </tbody>
+                                            <tbody id="modalContactList"></tbody>
                                         </table>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-xs-1 control-label">活动摘要</label>
-                                    <div class="col-xs-11">
+                                    <label class="col-xs-2 control-label">活动摘要</label>
+                                    <div class="col-xs-10">
                                         <textarea class="form-control" rows="4" id="activitySummary"></textarea>
                                     </div>
                                 </div>

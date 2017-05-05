@@ -30,14 +30,6 @@
         </dynamic>
     </sql>
 
-    <sql id="QUERY-COMMON">
-        <dynamic prepend=" WHERE ">
-            <isNotNull prepend=" AND " property="customerId">
-                customer_id=#customerId#
-            </isNotNull>
-        </dynamic>
-    </sql>
-
     <insert id="ADD" parameterClass="CustomerEncyclopedia">
         INSERT INTO
         k_customer_encyclopedia (ency_id, customer_id,
@@ -47,8 +39,8 @@
         develop_his, sell_network)
         VALUES (#encyId#, #customerId#,
         #isFull#,#createUserId#, #createUserName#,
-        #createTime#, #lastmodifyUserId#, #lastmodifyUserName#,
-        #modifyTime#, #customField#, #companyInfo#,
+        now(), #lastmodifyUserId#, #lastmodifyUserName#,
+        now(), #customField#, #companyInfo#,
         #developHis#, #sellNetwork#)
         <selectKey resultClass="java.lang.String" keyProperty="encyId">
             SELECT @@IDENTITY AS ency_id
@@ -64,15 +56,6 @@
                 <isNotNull prepend=", " property="isFull">
                     is_full = #isFull#
                 </isNotNull>
-                <isNotNull prepend=", " property="createUserId">
-                    create_user_id = #createUserId#
-                </isNotNull>
-                <isNotNull prepend=", " property="createUserName">
-                    create_user_name = #createUserName#
-                </isNotNull>
-                <isNotNull prepend=", " property="createTime">
-                    create_time = #createTime#
-                </isNotNull>
                 <isNotNull prepend=", " property="lastmodifyUserId">
                     lastmodify_user_id = #lastmodifyUserId#
                 </isNotNull>
@@ -80,7 +63,7 @@
                     lastmodify_user_name = #lastmodifyUserName#
                 </isNotNull>
                 <isNotNull prepend=", " property="modifyTime">
-                    modify_time = #modifyTime#
+                    modify_time = now()
                 </isNotNull>
                 <isNotNull prepend=", " property="customField">
                     custom_field = #customField#
@@ -141,6 +124,34 @@
     ]]>
     </select>
 
+    <sql id="QUERY-COMMON">
+        <dynamic prepend=" WHERE ">
+            <isNotNull prepend=" AND  " property="companyType">
+               b.company_type = #companyType#
+            </isNotNull>
+            <isNotNull prepend=" OR " property="searchKey">
+                b.full_name like concat('%',#searchKey#,'%')
+            </isNotNull>
+            <isNotNull prepend=" OR " property="searchKey">
+                b.short_name like concat('%',#searchKey#,'%')
+            </isNotNull>
+            <isNotNull prepend=" OR " property="searchKey">
+                a.isFull like concat('%',#searchKey#,'%')
+            </isNotNull>
+            <isNotNull prepend=" OR " property="searchKey">
+                a.createUserName like concat('%',#searchKey#,'%')
+            </isNotNull>
+            <isNotNull prepend=" OR " property="searchKey">
+                a.lastmodifyUserName like concat('%',#searchKey#,'%')
+            </isNotNull>
+            <isNotNull prepend=" OR " property="searchKey">
+                a.createTime like concat('%',#searchKey#,'%')
+            </isNotNull>
+            <isNotNull prepend=" OR " property="searchKey">
+                a.modifyTime like concat('%',#searchKey#,'%')
+            </isNotNull>
+        </dynamic>
+    </sql>
     <select id="GET-BY-QUERY" resultClass="CustomerEncyVO" parameterClass="CustomerEncyclopediaQuery">
         <![CDATA[
         SELECT
@@ -159,6 +170,10 @@
         FROM k_customer_encyclopedia a
         LEFT JOIN customer_base_info b ON a.customer_id=b.customer_id
         ]]>
+        <isParameterPresent>
+            <include refid="QUERY-COMMON"/>
+         order by a.modify_time desc
+        </isParameterPresent>
     </select>
 
     <select id="GET-PAGE" resultMap="CUSTOMERENCYCLOPEDIA-MAP" parameterClass="CustomerEncyclopediaQuery">
@@ -176,7 +191,7 @@
 			SELECT COUNT(ency_id) FROM k_customer_encyclopedia
 		]]>
         <isParameterPresent>
-            <include refid="PAGE-COMMON"/>
+            <include refid="QUERY-COMMON"/>
         </isParameterPresent>
     </select>
 </sqlMap>

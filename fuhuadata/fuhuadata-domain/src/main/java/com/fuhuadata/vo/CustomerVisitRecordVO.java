@@ -3,7 +3,6 @@ package com.fuhuadata.vo;
 import com.fuhuadata.domain.CustomerVisitRecord;
 import com.fuhuadata.domain.RecordLinkman;
 
-import java.util.List;
 
 /**
  * 客户沟通记录新增

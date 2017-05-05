@@ -99,6 +99,10 @@
                         <div class="panel-heading">
                             #if ($shiro.hasPermission("wiki:proc:ele:add"))
                             <div class="btn-group btn-group-xs panel-heading-btn pull-right">
+                                <button class="btn btn-xs btn-danger panel-heading-btn j-delete" type="button" lang="zh">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                    删除
+                                </button>
                                 <a class="btn btn-xs btn-primary panel-heading-btn" href="#costAddmodal" data-toggle="modal">
                                     <span class="glyphicon glyphicon-plus"></span>
                                     新增
@@ -114,11 +118,12 @@
                                 <thead>
                                 <tr>
                                     <th class="text-center col-xs-2 text-middle test1">成分名称</th>
-                                    <th class="text-center col-xs-2 text-middle test1">单耗（kg/T）</th>
+                                    <th class="text-center col-xs-1 text-middle test1">单耗（kg/T）</th>
                                     <th class="text-center col-xs-2 text-middle test1" >单价（元/kg）</th>
                                     <th class="text-center col-xs-2 text-middle test1">价格有效期</th>
                                     <th class="text-center col-xs-2 text-middle test1">适合产品</th>
                                     <th class="text-center col-xs-2 text-middle test1">备注</th>
+                                    <th class="text-center col-xs-1 text-middle test1">删除</th>
                                 </tr>
                                 </thead>
                                 <tbody id="cost1"></tbody>
@@ -132,9 +137,11 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             #if ($shiro.hasPermission("wiki:proc:hok:edit"))
-                            <button id="edit" data-form-btn="edit" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
-                            编辑
-                            </button>
+                                <button id="edit" data-form-btn="edit"
+                                        class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button"
+                                        lang="zh">
+                                    编辑
+                                </button>
                             #end
                             <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden">
                                 <button id="cancel" data-form-btn="cancel" class="btn" lang="zh">取消</button>
@@ -410,7 +417,6 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/processCost.js"></script>
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/scaffolding.js"></script>
 <script type="text/javascript">
@@ -500,11 +506,55 @@
                 success:function(result){
                     alert('添加成功');
                     $('#costAddmodal').modal('hide');
+                    ComponentCost.refreshTable();
                 }
             })
         }
 
     })
+
+    // 成分价格删除
+    $('#cost').find('.j-delete').click(function (e) {
+
+        var deleteIds = [];
+        $('#cost').find('input.j-delete:checked').each(function (idx, item) {
+            var jTr = $(item).closest("tr"),
+                costId = $(item).val(),
+                componentId = jTr.data("componentId");
+
+            deleteIds.push({
+                componentId: componentId,
+                costId: costId
+            });
+        });
+
+        if (deleteIds.length === 0) {
+            alert("请选择需要删除的行");
+            return;
+        }
+
+        if (confirm("确认删除?")) {
+            jQuery.ajax({
+                url: basePath + '/componentCost/deleteByIds',
+                type: 'POST',
+                data: JSON.stringify(deleteIds),
+                dataType: 'json',
+                contentType:"application/json",
+                success: function (result) {
+                    if (result.code === 1) {
+                        alert("删除成功");
+                        ComponentCost.refreshTable();
+                    } else {
+                        alert(result.message);
+                    }
+                },
+                error: function (jqXhr) {
+                    console.log(jqXhr.responseText);
+                    alert("删除失败");
+                }
+            })
+        }
+    });
     
     function getProductComponents() {
         var arr = [];

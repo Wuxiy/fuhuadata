@@ -23,11 +23,13 @@ $(document).ready(function(){
             for(var i=0;i<ResultData.length;i++)
                 ContactsList.innerHTML += '<tr>'+
                     '<td>'+ResultData[i].linkmanId+'</td>'+
-                    '<td><a href="'+basePath+'/customerLinkman/intoCustomerLinkmanInfo?linkmanId='+ResultData[i].linkmanId+'">'+ResultData[i].name+'</a></td>'+
+                    '<td><a href="'+basePath+'/customerLinkman/intoCustomerLinkmanInfo?linkmanId='+ResultData[i].linkmanId+
+                        '&customerType='+$('#customerType').val()+
+                        '&customerId='+$('#customerId').val()+'">'+ResultData[i].name+'</a></td>'+
                     '<td>'+ResultData[i].posts+'</td>'+
                     '<td>'+(ResultData[i].onJob==0?'否':'是')+'</td>'+
                     '<td>'+ResultData[i].responseArea+'</td>'+
-                    '<td>'+(ResultData[i].sex==0?'未知':(ResultData[i].sex==1?'男':'女'))+'</td>'+
+                    '<td>'+(ResultData[i].sex==0?'保密':(ResultData[i].sex==1?'男':'女'))+'</td>'+
                     '<td>'+ResultData[i].nationality+'</td>'+
                     '<td>'+ResultData[i].linkPhone1+'</td>'+
                     '<td>'+ResultData[i].lemail+'</td>'+

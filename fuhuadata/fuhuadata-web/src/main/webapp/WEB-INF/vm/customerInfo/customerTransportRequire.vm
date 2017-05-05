@@ -21,7 +21,7 @@
                             订舱出运要求
                         </h3>
                     </div>
-                    <div class="panel-body panel-edit">
+                    <div id="billPanel" class="panel-body panel-edit">
                         <div class="form-horizontal">
                             <div class="form-group">
                                 <label class="control-label col-xs-2" lang="zh">对船运公司要求</label>
@@ -196,7 +196,7 @@
 <script id="nameC" type="text/html">
     <%if (data.length>0) {%>
     <%for (var i=0;i<data.length;i++){%>
-    <option value="<%=data[i].productId%>"><%=data[i].name%></option>
+    <option value="<%=data[i].wareId%>"><%=data[i].name%></option>
     <%}%>
     <%}%>
 </script>

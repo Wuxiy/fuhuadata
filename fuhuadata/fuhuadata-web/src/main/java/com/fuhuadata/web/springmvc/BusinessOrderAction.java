@@ -89,7 +89,10 @@ public class BusinessOrderAction {
     @ResponseBody
     public ResultPojo getOrderListPageByQuery(@RequestBody QueryBusinessOrder queryBusinessOrder){
         Result<List<QueryBusinessOrder>> result = new Result<List<QueryBusinessOrder>>();
-        queryBusinessOrder.setSalesManId(LoginUtils.getLoginId()+"");
+        //queryBusinessOrder.setSalesManId(LoginUtils.getLoginId()+"");
+        if(queryBusinessOrder.getSalesManId()!=null){
+            queryBusinessOrder.setSalesManId(LoginUtils.getLoginId().toString());
+        }
         try{
             result = businessOrderService.getOrderListPageByQuery(queryBusinessOrder);
         }catch(Exception e){
@@ -226,8 +229,8 @@ public class BusinessOrderAction {
                     businessOrder.setCreateUserName(LoginUtils.getLoginName());
                     businessOrder.setLastmodifyUserId(LoginUtils.getLoginId());
                     businessOrder.setLastmodifyUserName(LoginUtils.getLoginName());
-                    businessOrder.setCreateTime(DateUtil.getDateTime());
-                    businessOrder.setModifyTime(DateUtil.getDateTime());
+                    //businessOrder.setCreateTime(DateUtil.getDateTime());
+                    //businessOrder.setModifyTime(DateUtil.getDateTime());
 
             result = businessOrderService.addBusinessOrder(businessOrder);
         }catch(Exception e){

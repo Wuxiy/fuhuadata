@@ -1,11 +1,6 @@
 package com.fuhuadata.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fuhuadata.util.DateJsonDeserializer;
-import com.fuhuadata.util.DateJsonSerializer;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.math.BigDecimal;
@@ -24,6 +19,9 @@ public class RecordLinkman implements Serializable{
 	
     /**客户联系人ID**/
 	private String linkmanId;
+
+	/**客户联系人姓名**/
+	private String linkmanName;
 	
     /**单人费用，单位元**/
 	private BigDecimal activityExpens;
@@ -50,6 +48,9 @@ public class RecordLinkman implements Serializable{
     /**修改时间**/
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date modifyTime;
+
+	/**备注**/
+	private String remarks;
 	
 	
 	public RecordLinkman() {
@@ -143,5 +144,21 @@ public class RecordLinkman implements Serializable{
 
 	public void setVisitRecordId(Integer visitRecordId) {
 		this.visitRecordId = visitRecordId;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+
+	public String getLinkmanName() {
+		return linkmanName;
+	}
+
+	public void setLinkmanName(String linkmanName) {
+		this.linkmanName = linkmanName;
 	}
 }

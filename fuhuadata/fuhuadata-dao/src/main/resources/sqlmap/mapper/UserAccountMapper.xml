@@ -18,6 +18,7 @@
         <result column="last_modify_time" jdbcType="TIMESTAMP" property="lastModifyTime"/>
         <result column="login_ip" jdbcType="VARCHAR" property="loginIp"/>
         <result column="login_time" jdbcType="TIMESTAMP" property="loginTime"/>
+        <result column="last_password" jdbcType="VARCHAR" property="lastPassword"/>
         <result column="last_login_ip" jdbcType="VARCHAR" property="lastLoginIp"/>
         <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime"/>
         <result column="login_count" jdbcType="INTEGER" property="loginCount"/>
@@ -44,6 +45,12 @@
         ua.pk_org,
         ua.pk_psndoc,
         ua.last_modify_time
+    </sql>
+
+    <sql id="PasswordColumns">
+        <include refid="BaseColumns"/>,
+        ua.login_password,
+        ua.last_password
     </sql>
 
     <!-- 关联查询前缀 user -->
@@ -114,5 +121,12 @@
         <foreach collection="deptIds" item="dept" open="(" close=")" separator=",">
             #{dept}
         </foreach>
+    </select>
+
+    <select id="getByCode" resultMap="BaseResultMap">
+        SELECT
+        <include refid="PasswordColumns"/>
+        <include refid="FromTable"/>
+        WHERE code=#{code}
     </select>
 </mapper>

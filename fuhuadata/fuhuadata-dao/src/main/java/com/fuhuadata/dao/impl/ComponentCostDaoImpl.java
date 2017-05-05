@@ -17,6 +17,7 @@ public class ComponentCostDaoImpl extends SqlMapClientTemplate implements Compon
     public static final String ADD="COMPONENTCOST.ADD";
     public static final String UPDATE="COMPONENTCOST.UPDATE";
     public  static final String DELETE_BY_ID="COMPONENTCOST.DELETE-BY-ID";
+    public  static final String DELETE_BY_IDS="COMPONENTCOST.DELETE-BY-IDS";
     public static final String GET_PAGE="COMPONENTCOST.GET-PAGE";
     public static final String COUNT="COMPONENTCOST.COUNT";
     public static final String GET_BY_ID="COMPONENTCOST.GET-BY-ID";
@@ -45,6 +46,11 @@ public class ComponentCostDaoImpl extends SqlMapClientTemplate implements Compon
     @Override
     public int deleteComponentCostById(int id) {
         return this.delete(DELETE_BY_ID,id);
+    }
+
+    @Override
+    public int deleteComponentByIds(List<Integer> costIds) {
+        return this.delete(DELETE_BY_IDS, costIds);
     }
 
     @Override

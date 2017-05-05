@@ -219,7 +219,7 @@
 <script id="nameC" type="text/html">
     <%if (data.length>0) {%>
     <%for (var i=0;i<data.length;i++){%>
-    <option value="<%=data[i].productId%>"><%=data[i].name%></option>
+    <option value="<%=data[i].wareId%>"><%=data[i].name%></option>
     <%}%>
     <%}%>
 </script>
