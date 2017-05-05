@@ -32,6 +32,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.*;
+import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -260,7 +261,7 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
             //nc长期协议的 协议类型
             nodeValue.put("ctrantypeid",ctrantypeid);
             nodeValue.put("vtrantypecode",vtrantypecode);
-
+            BigDecimal nexchangerate=orderBaseInfo.getNexchangerate();
             if (orderBaseInfo.getNexchangerate()!=null) {
                 nodeValue.put("nexchangerate", "" + orderBaseInfo.getNexchangerate());
             }
@@ -301,6 +302,17 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
             if (orderBaseInfo.getCollectionAgreement()!=null){
                 nodeValue.put("cpaytermid",""+orderBaseInfo.getCollectionAgreement());
             }
+            //crmd订单id
+            if (orderBaseInfo.getOrderId()!=null){
+                nodeValue.put("vdef20",orderBaseInfo.getOrderId());
+            }
+            //是否使用信用险
+            if (orderBaseInfo.getIsCreditRisk()==0){
+                nodeValue.put("vdef7","N");
+            }
+            if (orderBaseInfo.getIsCreditRisk()==1){
+                nodeValue.put("vdef7","Y");
+            }
 
             //设定长期协议的协议状态为生效。
             nodeValue.put("fstatusflag","7");
@@ -333,14 +345,24 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                 }
                 //内部供货单位
                 if (orderProduct.getInternalSupplyId()!=null) {
-                    productMap.put("vbdef5", orderProduct.getInternalSupplyId());
+                    productMap.put("vbdef18", orderProduct.getInternalSupplyId());
                 }
                 if (orderProduct.getMainProductAmount()!=null) {
                     productMap.put("nnum", "" + orderProduct.getMainProductAmount());
+                    //报价数量
+                    productMap.put("nqtunitnum","" + orderProduct.getMainProductAmount());
                 }
+                //报价换算率
+                productMap.put("vqtunitrate","1");
                 if (orderProduct.getContractPrice()!=null) {
                     //销售单价
                     productMap.put("norigprice", "" + orderProduct.getContractPrice());
+                    //本币单价
+                    BigDecimal nqtprice=orderProduct.getContractPrice().multiply(nexchangerate);
+                    productMap.put("nqtprice","" + nqtprice);
+                    //本币金额
+                    BigDecimal nmny= nqtprice.multiply(orderProduct.getMainProductAmount());
+                    productMap.put("nmny",""+nmny);
                     //主本币单价
                     productMap.put("nprice","" + orderProduct.getContractPrice());
                     //主美元单价
@@ -410,6 +432,10 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                 //价格计算类型
                 if (orderProduct.getPriceType()!=null){
                     productMap.put("vbdef19",""+orderProduct.getPriceType());
+                }
+                //crmId
+                if (orderProduct.getId()!=null){
+                    productMap.put("vbdef20",""+orderProduct.getId());
                 }
 
                 for(Map.Entry<String ,String> entry:productMap.entrySet()){
