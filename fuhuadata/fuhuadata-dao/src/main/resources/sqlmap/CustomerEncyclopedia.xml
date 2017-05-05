@@ -126,30 +126,30 @@
 
     <sql id="QUERY-COMMON">
         <dynamic prepend=" WHERE ">
-            <isNotNull prepend=" AND  " property="companyType">
-               b.company_type = #companyType#
-            </isNotNull>
-            <isNotNull prepend=" OR " property="searchKey">
+            <isNotEmpty prepend=" AND  " property="companyType">
+                b.company_type = #companyType#
+            </isNotEmpty>
+            <isNotEmpty prepend=" OR " property="searchKey">
                 b.full_name like concat('%',#searchKey#,'%')
-            </isNotNull>
-            <isNotNull prepend=" OR " property="searchKey">
+            </isNotEmpty>
+            <isNotEmpty prepend=" OR " property="searchKey">
                 b.short_name like concat('%',#searchKey#,'%')
-            </isNotNull>
-            <isNotNull prepend=" OR " property="searchKey">
+            </isNotEmpty>
+            <isNotEmpty prepend=" OR " property="searchKey">
                 a.isFull like concat('%',#searchKey#,'%')
-            </isNotNull>
-            <isNotNull prepend=" OR " property="searchKey">
+            </isNotEmpty>
+            <isNotEmpty prepend=" OR " property="searchKey">
                 a.createUserName like concat('%',#searchKey#,'%')
-            </isNotNull>
-            <isNotNull prepend=" OR " property="searchKey">
+            </isNotEmpty>
+            <isNotEmpty prepend=" OR " property="searchKey">
                 a.lastmodifyUserName like concat('%',#searchKey#,'%')
-            </isNotNull>
-            <isNotNull prepend=" OR " property="searchKey">
+            </isNotEmpty>
+            <isNotEmpty prepend=" OR " property="searchKey">
                 a.createTime like concat('%',#searchKey#,'%')
-            </isNotNull>
-            <isNotNull prepend=" OR " property="searchKey">
+            </isNotEmpty>
+            <isNotEmpty prepend=" OR " property="searchKey">
                 a.modifyTime like concat('%',#searchKey#,'%')
-            </isNotNull>
+            </isNotEmpty>
         </dynamic>
     </sql>
     <select id="GET-BY-QUERY" resultClass="CustomerEncyVO" parameterClass="CustomerEncyclopediaQuery">
@@ -172,7 +172,8 @@
         ]]>
         <isParameterPresent>
             <include refid="QUERY-COMMON"/>
-         order by a.modify_time desc
+            order by a.modify_time desc
+            LIMIT #startRow#,#pageSize#
         </isParameterPresent>
     </select>
 
@@ -188,7 +189,9 @@
 
     <select id="COUNT" resultClass="java.lang.Integer" parameterClass="CustomerEncyclopediaQuery">
         <![CDATA[
-			SELECT COUNT(ency_id) FROM k_customer_encyclopedia
+			SELECT COUNT(a.ency_id)
+			 FROM k_customer_encyclopedia a
+             LEFT JOIN customer_base_info b ON a.customer_id=b.customer_id
 		]]>
         <isParameterPresent>
             <include refid="QUERY-COMMON"/>

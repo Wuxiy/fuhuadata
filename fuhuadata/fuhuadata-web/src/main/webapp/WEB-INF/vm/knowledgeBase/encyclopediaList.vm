@@ -70,6 +70,7 @@
                         </thead>
                         <tbody id="list"></tbody>
                     </table>
+                    <div id="pagination" class="pagination"></div>
                     <!--表格结束-->
                 </div>
             </div>
@@ -118,7 +119,7 @@
     function getListCount(data,callback){
         var total = 0;
         jQuery.ajax({
-            url:basePath + '/customerEncyclopedia/getCustomerEncyclopediaListByQuery',
+            url:basePath + '/customerEncyclopedia/count',
             dataType:'JSON',
             contentType:'application/json',
             data:JSON.stringify(data),
@@ -144,7 +145,7 @@
     // 根据页码获取列表数据
     function getDataList(pageNum,pageSize,callback) {
         jQuery.ajax({
-            url:basePath + '/customerEncyclopedia/count',
+            url:basePath + '/customerEncyclopedia/getCustomerEncyclopediaListByQuery',
             dataType:'json',
             contentType:'application/json',
             data:JSON.stringify({
@@ -170,18 +171,18 @@
         if(ResultData && ResultData!='' && ResultData!='null') {
             for (var i = 0; i < ResultData.length; i++) {
                 _html += '<tr>';
-                _html += '<td>'+(++count)+'</td>';
-                _html += '<td><a href='+basePath+'"/customerEncyclopedia/modify?encyId='+ResultData[i].encyId+'">' + (ResultData[i].fullName!=undefined?ResultData[i].fullName:'') + '</a></td>';
-                _html += '<td>' + (ResultData[i].shortName!=undefined?ResultData[i].shortName:'') + '</td>';
-                _html += '<td>' + (ResultData[i].companyType!=undefined?companyTypeList[ResultData[i].companyType]:'') + '</td>';
-
-                _html += '<td lang="zh">' + (ResultData[i].isFull!=undefined?ResultData[i].isFull:'') + '</td>';
-                _html += '<td lang="zh">' + (ResultData[i].createUserName!=undefined?ResultData[i].createUserName:'') + '</td>';
-                _html += '<td>' + (ResultData[i].createTime!=undefined?ResultData[i].createTime:'') + '</td>';
-                _html += '<td lang="zh">' + (ResultData[i].lastmodifyUserName!=undefined?ResultData[i].lastmodifyUserName:'') + '</td>';
-                _html += '<td lang="zh">' + (ResultData[i].modifyTime != undefined ? ResultData[i].modifyTime:'') + '</td>';
+                _html += '<td>' + (++count) + '</td>';
+                _html += '<td><a href=' + basePath + '"/customerEncyclopedia/modify?encyId=' + ResultData[i].encyId + '">' + (ResultData[i].fullName != undefined ? ResultData[i].fullName : '') + '</a></td>';
+                _html += '<td>' + (ResultData[i].shortName != undefined ? ResultData[i].shortName : '') + '</td>';
+                _html += '<td>' + (ResultData[i].companyType != undefined ? companyTypeList[ResultData[i].companyType] : '') + '</td>';
+                _html += '<td lang="zh">' + (ResultData[i].isFull != undefined ? ResultData[i].isFull : '') + '</td>';
+                _html += '<td lang="zh">' + (ResultData[i].createUserName != undefined ? ResultData[i].createUserName : '') + '</td>';
+                _html += '<td>' + (ResultData[i].createTime != undefined ? ResultData[i].createTime : '') + '</td>';
+                _html += '<td lang="zh">' + (ResultData[i].lastmodifyUserName != undefined ? ResultData[i].lastmodifyUserName : '') + '</td>';
+                _html += '<td lang="zh">' + (ResultData[i].modifyTime != undefined ? ResultData[i].modifyTime : '') + '</td>';
                 _html += '</tr>';
             }
+        }
         $("#list").html(_html);
     }
 
