@@ -159,30 +159,6 @@ $('#openFile').on('change.file',function (e) {
     });
 });
 
-/*function fsubmit(){
-    var data = new FormData($('#form1')[0]);
-    console.log(data);
-    jQuery.ajax({
-        url: basePath+'/upload/uploadFileAll',
-        type: 'POST',
-        data: data,
-        dataType: 'JSON',
-        cache: false,
-        processData: false,
-        contentType: false,
-        success:function (result) {
-            console.log(result);
-            $.each(result.data,function(i,item){
-                console.log(item);
-                $('.filename').eq(i).attr('data-url',item);
-                $('.fileimg').eq(i).attr('src',basePath+"/"+item);
-            })
-
-        }
-    });
-    return false;
-}*/
-
 //图片JSON
 function imgArr(){
     var arr=[];
@@ -208,13 +184,13 @@ function checkboxArr() {
     return JSON.stringify(checkboxarr);
 }
 
-//baocai编辑
+//包材编辑
 $(document).on('click.edit','#edit',function () {
     $('[name="close"]').attr('disabled',false);
     $('.modifyimg').attr('disabled',false);
     $('.imagesbtn').show();
 });
-//baocai信息取消提交
+//包材信息取消提交
 $(document).on('click.cancel','#cancel',function(){
 });
 

@@ -304,7 +304,7 @@
                 <div class="panel-heading">
                     <div class="btn-group btn-group-xs panel-heading-btn pull-right">
                         <button class="btn btn-primary" id="delete" disabled>删除</button>
-                        <button class="btn btn-xs btn-primary" lang="zh" id="Add" disabled>新增</button>
+                        <button class="btn btn-xs btn-primary" target="_Blank" lang="zh" id="Add" disabled>新增</button>
                     </div>
                     <h3 class="panel-title">
                         产品信息

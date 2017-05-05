@@ -103,7 +103,7 @@
                                     <span class="glyphicon glyphicon-trash"></span>
                                     删除
                                 </button>
-                                <a class="btn btn-xs btn-primary panel-heading-btn" href="#costAddmodal" data-toggle="modal">
+                                <a class="btn btn-xs btn-primary panel-heading-btn costAddmodal">
                                     <span class="glyphicon glyphicon-plus"></span>
                                     新增
                                 </a>
@@ -350,7 +350,7 @@
                         <label class="col-lg-2 control-label">适合产品<sup class="not-null">*</sup></label>
                         <div class="col-xs-3">
                             <div class="input-group">
-                                <input class="form-control suitableProductAdd" name="suitableProduct" type="text">
+                                <input class="form-control suitableProductAdd" name="suitableProduct" type="text" disabled>
                                 <div class="input-group-btn">
                                     <button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal">
                                         <span class="glyphicon glyphicon-search"></span>
@@ -361,7 +361,7 @@
                         <label class="col-lg-2 control-label">单耗</label>
                         <div class="col-lg-3">
                             <div class="input-group">
-                                <input class="form-control" type="text" name="consumptionAdd">
+                                <input class="form-control consumptionAdd" type="text" name="consumptionAdd">
                                 <div class="input-group-btn">
                                     <botton class="btn btn-xs btn-primary">(元/kg)</botton>
                                 </div>
@@ -427,6 +427,7 @@
     $(document).on('click','[data-target="#treeModal"]',function (e) {
         selectedPName = $(e.target).parents('.input-group').find('input');
     });
+
     $(document).on('click','a.cNode',function (e) {
         e.preventDefault();
         var a = [];
@@ -468,7 +469,7 @@
 
     $('#addMore').click(function () {
         var btn = $(this);
-        var div = $('<div class="form-group" name="ProductSuitableAdd"><label class="col-lg-2 control-label">适合产品</label><div class="col-xs-3"><div class="input-group"><input class="form-control suitableProductAdd" name="suitableProduct" type="text"><div class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal"><span class="glyphicon glyphicon-search"></span></button></div></div></div><label class="col-lg-2 control-label">单耗</label><div class="col-lg-3"><div class="input-group"><input class="form-control" type="text" name="consumptionAdd"><div class="input-group-btn"><botton class="btn btn-xs btn-primary">(元/kg)</botton></div></div><button type="button" class="close" data-form-btn="del" data-form-target="form-group" style="position: absolute;top:5px;">×</button></div>');
+        var div = $('<div class="form-group" name="ProductSuitableAdd"><label class="col-lg-2 control-label">适合产品</label><div class="col-xs-3"><div class="input-group"><input class="form-control suitableProductAdd" name="suitableProduct" type="text" disabled><div class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal"><span class="glyphicon glyphicon-search"></span></button></div></div></div><label class="col-lg-2 control-label">单耗</label><div class="col-lg-3"><div class="input-group"><input class="form-control" type="text" name="consumptionAdd"><div class="input-group-btn"><botton class="btn btn-xs btn-primary">(元/kg)</botton></div></div><button type="button" class="close" data-form-btn="del" data-form-target="form-group" style="position: absolute;top:5px;">×</button></div>');
         $('#costmore').after(div);
 
     })

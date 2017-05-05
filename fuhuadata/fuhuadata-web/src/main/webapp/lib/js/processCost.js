@@ -27,7 +27,7 @@ var ComponentCost = ComponentCost || {};
                         costHtml = '';
                     for (var i = 0; i < ResultData.length; i++) {
                         costHtml += '<tr data-component-id="' + ResultData[i].componentId + '">' +
-                            '<td><a class="componnentId" data_url="'+basePath+'/componentCost/getComponentCostById?id=' + ResultData[i].componentId + '&&productCategoryId='+ResultData[i].productCategoryId+'">' + ifEmpty(ResultData[i].componentName) + '</a></td>' +
+                            '<td><a class="componnentId" style="cursor: pointer;" data_url="'+basePath+'/componentCost/getComponentCostById?id=' + ResultData[i].componentId + '&&productCategoryId='+ResultData[i].productCategoryId+'">' + ifEmpty(ResultData[i].componentName) + '</a></td>' +
                             '<td>' + ifEmpty(ResultData[i].consumption) + '</td>' +
                             '<td>' + ifEmpty(ResultData[i].unitCost) + '</td>' +
                             '<td>' + ifEmpty(ResultData[i].priceEnd) + '</td>' +
@@ -70,7 +70,7 @@ $(document).ready(function () {
 
                 for (var j = 0; j < ResultData1.length; j++) {
                     Adeexpense1.innerHTML += '<tr>' +
-                        '<td><a class="adEexpense1" data_url="'+basePath+'/preparationProcessCost/getPreparationProcessCostById?id='+ResultData1[j].mcostId+'">' + ResultData1[j].costTerm + '</a></td>' +
+                        '<td><a class="adEexpense1" style="cursor: pointer;" data_url="'+basePath+'/preparationProcessCost/getPreparationProcessCostById?id='+ResultData1[j].mcostId+'">' + ResultData1[j].costTerm + '</a></td>' +
                         '<td>' + ifEmpty(ResultData1[j].unitCost) + '</td>' +
                         '<td>' + ifEmpty(ResultData1[j].priceEnd) + '</td>' +
                         '<td>' + ifEmpty(ResultData1[j].remarks) + '</td>' +
@@ -78,7 +78,7 @@ $(document).ready(function () {
                 }
                 for (var k = 0; k < ResultData2.length; k++) {
                     Adeexpense2.innerHTML += '<tr>' +
-                        '<td><a class="adEexpense2" data_url="'+basePath+'/preparationProcessCost/getPreparationProcessCostById?id='+ResultData2[k].mcostId+'">' + ResultData2[k].processFactory + '</a></td>' +
+                        '<td><a class="adEexpense2" style="cursor: pointer;" data_url="'+basePath+'/preparationProcessCost/getPreparationProcessCostById?id='+ResultData2[k].mcostId+'">' + ResultData2[k].processFactory + '</a></td>' +
                         '<td>' + ifEmpty(ResultData2[k].charges) + '</td>' +
                         '<td>' + ifEmpty(ResultData2[k].profit) + '</td>' +
                         '<td>' + ifEmpty(ResultData2[k].managementFee) + '</td>' +
@@ -114,7 +114,7 @@ $(document).ready(function () {
 
                     for (var j = 0; j < ResultData1.length; j++) {
                         Adeexpense1.innerHTML += '<tr>' +
-                            '<td><a class="adEexpense1" data_url="'+basePath+'/preparationProcessCost/getPreparationProcessCostById?id='+ResultData1[j].mcostId+'">' + ifEmpty(ResultData1[j].costTerm) + '</a></td>' +
+                            '<td><a class="adEexpense1" style="cursor: pointer;" data_url="'+basePath+'/preparationProcessCost/getPreparationProcessCostById?id='+ResultData1[j].mcostId+'">' + ifEmpty(ResultData1[j].costTerm) + '</a></td>' +
                             '<td>' + ifEmpty(ResultData1[j].unitCost) + '</td>' +
                             '<td>' + ifEmpty(ResultData1[j].priceEnd) + '</td>' +
                             '<td>' + ifEmpty(ResultData1[j].remarks) + '</td>' +
@@ -122,7 +122,7 @@ $(document).ready(function () {
                     }
                     for (var k = 0; k < ResultData2.length; k++) {
                         Adeexpense2.innerHTML += '<tr>' +
-                            '<td><a class="adEexpense2" data_url="'+basePath+'/preparationProcessCost/getPreparationProcessCostById?id='+ResultData2[k].mcostId+'">' + ResultData2[k].processFactory + '</a></td>' +
+                            '<td><a class="adEexpense2" style="cursor: pointer;" data_url="'+basePath+'/preparationProcessCost/getPreparationProcessCostById?id='+ResultData2[k].mcostId+'">' + ResultData2[k].processFactory + '</a></td>' +
                             '<td>' + ifEmpty(ResultData2[k].charges) + '</td>' +
                             '<td>' + ifEmpty(ResultData2[k].profit) + '</td>' +
                             '<td>' + ifEmpty(ResultData2[k].managementFee) + '</td>' +
@@ -147,7 +147,7 @@ $(document).ready(function () {
                     var ResultData = eval(result.data);
                     for (var i = 0; i < ResultData.length; i++) {
                         Freight.innerHTML += '<tr>' +
-                            '<td><a class="freight1" data_url="'+basePath+'/freightCost/getFreightCostById?id='+ResultData[i].freightId+'">' + ifEmpty(ResultData[i].processFactory) + '</a></td>' +
+                            '<td><a class="freight1" style="cursor: pointer;" data_url="'+basePath+'/freightCost/getFreightCostById?id='+ResultData[i].freightId+'">' + ifEmpty(ResultData[i].processFactory) + '</a></td>' +
                             '<td>' + ifEmpty(ResultData[i].departureCity) + '</td>' +
                             '<td>' + ifEmpty(ResultData[i].destinationCity) + '</td>' +
                             '<td>' + ifEmpty(ResultData[i].unitCost) + '</td>' +
@@ -198,11 +198,13 @@ $(document).ready(function () {
                 Rate3.innerHTML = '';
                 if(result.data!=undefined){
                     var ResultData = eval(result.data);
+
                     var ResultData1 = new Array();
                     var ResultData2 = new Array();
                     var ResultData3 = new Array();
 
                     for (var i = 0; i < ResultData.length; i++) {
+
                         if (ResultData[i].type == 0) {
                             ResultData1.push(ResultData[i]);
                         } else if (ResultData[i].type == 1) {
@@ -211,10 +213,10 @@ $(document).ready(function () {
                             ResultData3.push(ResultData[i]);
                         }
                     }
-
+                    
                     for (var j = 0; j < ResultData1.length; j++) {
                         Rate1.innerHTML += '<tr>' +
-                            '<td><a class="rate1" data_url="'+basePath+'/Rate/getRateById?id='+ResultData1[j].rateId+'">' + ifEmpty(ResultData1[j].currency) + '</a></td>' +
+                            '<td><a class="rate1" style="cursor: pointer;" data_url="'+basePath+'/Rate/getRateById?id='+ResultData1[j].rateId+'">' + ifEmpty(ResultData1[j].currency) + '</a></td>' +
                             '<td>' + ifEmpty(ResultData1[j].rate) + '</td>' +
                             '<td>' + ifEmpty(ResultData1[j].termofValidity) + '</td>' +
                             '<td>' + ifEmpty(ResultData1[j].remarks) + '</td>' +
@@ -223,16 +225,16 @@ $(document).ready(function () {
 
                     for (var k = 0; k < ResultData2.length; k++) {
                         Rate2.innerHTML += '<tr>' +
-                            '<td><a class="rate2" data_url="'+basePath+'/Rate/getRateById?id='+ResultData2[k].rateId+'">' + ifEmpty(ResultData2[k].kind) + '</a></td>' +
+                            '<td><a class="rate2" style="cursor: pointer;" data_url="'+basePath+'/Rate/getRateById?id='+ResultData2[k].rateId+'">' + ifEmpty(ResultData2[k].kind) + '</a></td>' +
                             '<td>' + ifEmpty(ResultData2[k].grossMargin) + '</td>' +
                             '<td>' + ifEmpty(ResultData2[k].termofValidity) + '</td>' +
                             '<td>' + ifEmpty(ResultData2[k].remarks) + '</td>' +
                             '</tr>';
                     }
 
-                    for (var l = 0; l < ResultData2.length; l++) {
+                    for (var l = 0; l < ResultData3.length; l++) {
                         Rate3.innerHTML += '<tr>' +
-                            '<td><a class="rate3" data_url="'+basePath+'/Rate/getRateById?id='+ResultData3[l].rateId+'">' + ifEmpty(ResultData3[l].other) + '</a></td>' +
+                            '<td><a class="rate3" style="cursor: pointer;" data_url="'+basePath+'/Rate/getRateById?id='+ResultData3[l].rateId+'">' + ifEmpty(ResultData3[l].other) + '</a></td>' +
                             '<td>' + ifEmpty(ResultData3[l].rateValue) + '</td>' +
                             '<td>' + ifEmpty(ResultData3[l].termofValidity) + '</td>' +
                             '<td>' + ifEmpty(ResultData3[l].remarks) + '</td>' +
@@ -246,6 +248,7 @@ $(document).ready(function () {
 
 })
 
+//模态查看详情
 $(document).on("click",".adEexpense1",function(){
     var url = $(this).attr("data_url");
     console.log(url);
@@ -460,7 +463,7 @@ $(document).on("click",".componnentId",function(){
             for(var i=0;i<ProductComponents.length;i++){
                 var Ps = ProductComponents[i];
 
-                var div = $('<div class="form-group" name="ProductSuitableAdd"><label class="col-lg-2 control-label">适合产品</label><div class="col-xs-3"><div class="input-group"><input class="form-control suitableProduct" name="suitableProduct" type="text" data-id="'+Ps.productCategoryId+'" value="'+Ps.categoryFullName+'"><div class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal"><span class="glyphicon glyphicon-search"></span></button></div></div></div><label class="col-lg-2 control-label">单耗</label><div class="col-lg-3"><div class="input-group"><input class="form-control" type="text" name="consumption" value="'+Ps.consumption+'"><div class="input-group-btn"><botton class="btn btn-xs btn-primary">(元/kg)</botton></div></div><button type="button" class="close" data-form-btn="del" data-form-target="form-group" style="position: absolute;top:5px;">×</button></div>');
+                var div = $('<div class="form-group" name="ProductSuitableAdd"><label class="col-lg-2 control-label">适合产品</label><div class="col-xs-3"><div class="input-group"><input class="form-control suitableProduct" name="suitableProduct" type="text" data-id="'+Ps.productCategoryId+'" value="'+Ps.categoryFullName+'" disabled><div class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal"><span class="glyphicon glyphicon-search"></span></button></div></div></div><label class="col-lg-2 control-label">单耗</label><div class="col-lg-3"><div class="input-group"><input class="form-control" type="text" name="consumption" value="'+Ps.consumption+'"><div class="input-group-btn"><botton class="btn btn-xs btn-primary">(元/kg)</botton></div></div><button type="button" class="close" data-form-btn="del" data-form-target="form-group" style="position: absolute;top:5px;">×</button></div>');
                 div.appendTo(test);
             }
             $('#costmodal').modal('show');
@@ -948,3 +951,16 @@ function updateportSurcharge() {
 function ifEmpty(data) {
     return data==undefined?'':data;
 }
+
+//成分价格新增
+$(document).on("click",".costAddmodal",function(){
+    $('#componentNameAdd').val('');
+    $('#unitCostAdd').val('');
+    $('#priceEndAdd').val('');
+    $('#consumptionAdd').val('');
+    $('#remarksAdd').val('');
+    $('.suitableProductAdd').val('');
+
+    $('#costAddmodal').modal('show');
+})
+

@@ -138,8 +138,8 @@
                                                 <span class="input-group-addon">元</span>
                                             </div>
                                         </td>
-                                        <td><label class="control-label" lang="zh">交货时间</label></td>
-                                        <td><input data-control="on" id="deliveryTime" class="form-control isdisabled" type="date" value="" disabled/></td>
+                                        <td><label class="control-label" lang="zh">交货时间</label><sup class="not-null">*</sup></td>
+                                        <td><input data-control="on" id="deliveryTime" class="form-control isdisabled notnull" type="date" value="" disabled/></td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -149,7 +149,7 @@
                                             </label>
                                         </td>
                                         <td>
-                                            <select name="factoryName" id="factoryName" class="form-control">
+                                            <select name="factoryName" id="factoryName" class="form-control notnull">
                                                 <option value="">——请选择——</option>
                                                 #foreach($!info in $!{freightCosts})
                                                     <option value="$!info.freightId">$!info.processFactory</option>
@@ -172,7 +172,7 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input data-control="on" id="capitalInterestPrice" class="form-control typechange isdisabled" value="" disabled>
+                                                <input data-control="on" id="capitalInterestPrice" class="form-control typechange isdisabled notnull" value="" disabled>
                                                 <span class="input-group-addon">原币</span>
                                             </div>
                                         </td>
