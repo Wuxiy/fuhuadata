@@ -11,14 +11,14 @@
                 <div id="productRequire" class="panel panel-default view-HD-lg">
                     <div class="panel-heading">
                         <div class="btn-group panel-heading-btn pull-right">
-                            <a class="btn btn-xs btn-default hidden" onclick="back()" id="addback">返回</a>
+                            <a class="btn btn-xs btn-default hidden" onclick="back()" id="addback" lang="zh">返回</a>
                             <button id="addedit" class="btn btn-xs btn-primary panel-heading-btn pull-right hidden" type="button" lang="zh">
                                 完成
                             </button>
 
                         </div>
                         <div class="btn-group panel-heading-btn pull-right">
-                            <a class="btn btn-xs btn-default hidden" data-view="editHide" onclick="back()" id="back">返回</a>
+                            <a class="btn btn-xs btn-default hidden" data-view="editHide" onclick="back()" id="back" lang="zh">返回</a>
                             <button id="edit" data-btn="edit" data-view="editHide" class="btn btn-xs btn-primary panel-heading-btn pull-right hidden" type="button" lang="zh">
                                 编辑
                             </button>
