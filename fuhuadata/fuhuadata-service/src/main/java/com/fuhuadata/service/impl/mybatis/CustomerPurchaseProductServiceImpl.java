@@ -88,10 +88,13 @@ public class CustomerPurchaseProductServiceImpl extends BaseServiceImpl<Customer
 
     @Override
     public int deleteProducts(List<Integer> productIds) {
+        int result = 0;
 
-        Example example = newExample();
-        example.createCriteria().andIn("id", productIds);
+        for (Integer productId : productIds) {
+            supplierService.deleteSuppliersByProductId(productId);
+            result += delete(productId);
+        }
 
-        return delete(example);
+        return result;
     }
 }
