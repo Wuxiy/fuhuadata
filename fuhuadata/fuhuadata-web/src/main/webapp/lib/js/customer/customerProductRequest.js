@@ -24,7 +24,7 @@ function ProductRequestList(result) {
         for (var i = 0; i < ResultData.length; i++) {
             productRequestList.innerHTML += '<tr>' +
                 '<td>' + (ResultData[i].customerName != undefined ? ResultData[i].customerName : '') + '</td>' +
-                '<td><a href='+basePath+'"/customerProductPacking/intoCustomerProductInfoDetails?id='+ResultData[i].customerProductId+'">' + (ResultData[i].customerProductName != undefined ? ResultData[i].customerProductName : '') + '</a></td>' +
+                '<td><a href='+basePath+'"/customerProductPacking/intoCustomerProductInfoDetails?id='+ResultData[i].customerProductId+'">' + (ResultData[i].customerProductName != undefined ? ResultData[i].customerProductName : '无') + '</a></td>' +
                 '<td>' + (ResultData[i].categorySerialNumber != undefined ? ResultData[i].categorySerialNumber : '') + '</td>' +
                 '<td>' + (ResultData[i].categoryName != undefined ? ResultData[i].categoryName : '') + '</td>' +
                 '<td>' + (ResultData[i].productName != undefined ? ResultData[i].productName : '') + '</td>' +

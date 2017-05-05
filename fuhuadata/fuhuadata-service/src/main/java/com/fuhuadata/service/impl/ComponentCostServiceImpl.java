@@ -26,14 +26,22 @@ public class ComponentCostServiceImpl implements ComponentCostService {
     @Override
     public Result<ComponentCost> addComponentCost(ComponentCost componentCost, List<KProductComponent> KProductComponents) {
         Result<ComponentCost> result = new Result<ComponentCost>();
-        try{
-            result.addDefaultModel(componentCostManager.addComponentCost(componentCost, KProductComponents));
-        }catch (Exception e){
-            result.setSuccess(false);
-            //打印日志
-            log.error("添加成分价格信息错误",e);
-        }
-        return result;
+        //新增成分判断当前是否存在同名成分
+        if(componentCostManager.getComponentCostByComponentName(componentCost.getComponentName())!=null) {
+            result.setMessage("该成分已存在");
+            result.setSuccess(true);
+            return result;
+        } else
+               try {
+                result.addDefaultModel(componentCostManager.addComponentCost(componentCost, KProductComponents));
+            } catch (Exception e) {
+                result.setSuccess(false);
+                //打印日志
+                log.error("添加成分价格信息错误", e);
+            }
+            result.setMessage("添加成功");
+            return result;
+
     }
 
     @Override

@@ -1,7 +1,5 @@
 package com.fuhuadata.web.springmvc;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JavaType;
 import com.fuhuadata.domain.ComponentCost;
 import com.fuhuadata.domain.KProductComponent;
 import com.fuhuadata.domain.query.ComponentCostQuery;
@@ -10,10 +8,7 @@ import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.ComponentCostService;
 import com.fuhuadata.vo.ComponentCostDO;
 import com.fuhuadata.vo.ComponentCostVO;
-import com.fuhuadata.web.common.JsonMapper;
 import com.fuhuadata.web.util.SystemLogAnnotation;
-import com.google.common.collect.Lists;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -36,8 +31,6 @@ public class ComponentCostAction {
     private final static Log log = LogFactory.getLog(ComponentCostAction.class);
     @Resource
     private ComponentCostService componentCostService;
-    private Integer pageSize = 5;
-    private String page = "1";
 
     /**
      * init

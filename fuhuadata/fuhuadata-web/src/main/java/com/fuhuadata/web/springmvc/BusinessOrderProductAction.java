@@ -287,9 +287,9 @@ public class BusinessOrderProductAction {
                 BusinessOrderProduct businessOrderProduct = new BusinessOrderProduct();
                 businessOrderProduct.setId(businessProductRequire.getBusinessProductId());
                 BusinessOrderProduct basic =  businessOrderProductService.getBaiscById(businessProductRequire.getBusinessProductId());
-                Integer priceType = basic.getPriceType();
-                //只有1原药制剂自产类加工，2原药采购制剂加工才有加工费
-                if(priceType==1 || priceType==2){
+                String priceType = basic.getPriceType();
+                //只有02原药制剂自产类加工，04原药采购制剂加工才有加工费
+                if("02".equals(priceType) || "04".equals(priceType)){
                     businessOrderProduct.setProcessCost(businessOrderProductService.calculateProcessCost(businessProductRequire.getBusinessProductId()));
                 }
                 businessOrderProduct.setMinPrice(businessOrderProductService.calculateMinPrice(businessProductRequire.getBusinessProductId()));

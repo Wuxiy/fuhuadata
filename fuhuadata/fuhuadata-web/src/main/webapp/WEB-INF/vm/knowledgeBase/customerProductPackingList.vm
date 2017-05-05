@@ -263,7 +263,7 @@
                 _html += '<tr>';
                 _html += '<td>'+(++count)+'</td>';
                 _html += '<td>' + (ResultData[i].customerName!=undefined?ResultData[i].customerName:'') + '</td>';
-                _html += '<td><a href='+basePath+'"/customerProductPacking/intoCustomerProductInfoDetails?id='+ResultData[i].customerProductId+'">' + (ResultData[i].customerProductName!=undefined?ResultData[i].customerProductName:'') + '</a></td>';
+                _html += '<td><a href='+basePath+'"/customerProductPacking/intoCustomerProductInfoDetails?id='+ResultData[i].customerProductId+'">' + (ResultData[i].customerProductName!=undefined?ResultData[i].customerProductName:'无') + '</a></td>';
                 _html += '<td>' + (ResultData[i].categorySerialNumber!=undefined?ResultData[i].categorySerialNumber:'') + '</td>';
                 _html += '<td lang="zh">' + (ResultData[i].categoryName!=undefined?ResultData[i].categoryName:'') + '</td>';
                 _html += '<td lang="zh">' + (ResultData[i].productName!=undefined?ResultData[i].productName:'') + '</td>';

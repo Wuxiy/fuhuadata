@@ -157,8 +157,11 @@ public class CustomerProductPackingAction {
     public ModelAndView intoCustomerProductInfoDetails(int id){
         Result<CustomerProductPackagingArchives> result = customerProductInfoService.getCustomerProductIds(id);
         CustomerProductPackagingArchives cppa = result.getModel();
-        return new ModelAndView("salesStatistics/productProcCompRequire").addObject("orderId",cppa.getOrderId()).addObject("businessProductId",cppa.getBusinessProductId()).
-                addObject("productRequireId",cppa.getBusinessRequireId()).addObject("edit",2);
+        if(cppa !=null) {
+            return new ModelAndView("salesStatistics/productProcCompRequire").addObject("orderId", cppa.getOrderId()).addObject("businessProductId", cppa.getBusinessProductId()).
+                    addObject("productRequireId", cppa.getBusinessRequireId()).addObject("edit", 2);
+        }
+        else return new ModelAndView("salesStatistics/productProcCompRequire");
     }
 
 

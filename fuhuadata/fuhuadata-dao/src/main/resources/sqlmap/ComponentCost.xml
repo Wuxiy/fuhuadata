@@ -149,6 +149,11 @@
                   select * from k_component_cost where component_id = #id#
         ]]>
     </select>
+    <select id="GET-BY-COMPONENTNAME" resultMap="GET-COMPONENTCOST-MAP" parameterClass="java.lang.String">
+        <![CDATA[
+          select * from k_component_cost where component_name = #componentName#
+        ]]>
+    </select>
 
     <!--根据成分id查找产品成分-->
     <select id="GET-PRODUCTCOMPONENT-BY-COMPONENT-ID" resultMap="ProductComponent-Map" parameterClass="java.lang.Integer">

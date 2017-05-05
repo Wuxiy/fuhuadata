@@ -96,16 +96,16 @@ public class CustomerEncyclopediaManagerImpl implements CustomerEncyclopediaMana
     @Override
     public Result<List<CustomerEncyclopedia>> getCustomerEncyclopediasByPage(CustomerEncyclopediaQuery customerEncyclopediaQuery) {
         Result<List<CustomerEncyclopedia>> result = new Result<List<CustomerEncyclopedia>>();
-        int totalItem = customerEncyclopediaDao.count(customerEncyclopediaQuery);
-        customerEncyclopediaQuery.setTotalItem(totalItem);
-        if(totalItem>0){
-            result.addDefaultModel("CustomerEncyclopedias",customerEncyclopediaDao.getCustomerEncyclopediasByPage(customerEncyclopediaQuery));
-        }else{
-            result.addDefaultModel("CustomerEncyclopedias",new ArrayList<CustomerEncyclopedia>());
-        }
-        result.setPageSize(customerEncyclopediaQuery.getPageSize());
-        result.setIndex(customerEncyclopediaQuery.getIndex());
-        result.setTotalItem(customerEncyclopediaQuery.getTotalItem());
+        //int totalItem = customerEncyclopediaDao.count(customerEncyclopediaQuery);
+        //customerEncyclopediaQuery.setTotalItem(totalItem);
+        //if(totalItem>0){
+        //    result.addDefaultModel("CustomerEncyclopedias",customerEncyclopediaDao.getCustomerEncyclopediasByPage(customerEncyclopediaQuery));
+        //}else{
+        //    result.addDefaultModel("CustomerEncyclopedias",new ArrayList<CustomerEncyclopedia>());
+        //}
+        //result.setPageSize(customerEncyclopediaQuery.getPageSize());
+        //result.setIndex(customerEncyclopediaQuery.getIndex());
+        //result.setTotalItem(customerEncyclopediaQuery.getTotalItem());
         return result;
     }
 

@@ -172,8 +172,8 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
     }
     //更新最低价，加工费
     private void updatePrice(BusinessOrderProduct businessOrderProduct) throws Exception {
-        Integer priceType = businessOrderProductDao.getPriceType(businessOrderProduct.getId());
-        if(priceType!=null &&(priceType==1 || priceType==2)){
+        String priceType = businessOrderProductDao.getPriceType(businessOrderProduct.getId());
+        if(priceType!=null &&("02".equals(priceType) || "04".equals(priceType))){
             //更新加工费
             businessOrderProduct.setProcessCost(businessOrderProductDao.calculateProcessCost(businessOrderProduct.getId()));
         }
@@ -206,21 +206,16 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
     @Override
     public Price getPriceForBusinessProduct(Integer businessProductId) {
         //查询订单产品的价格计算方式
-        int priceType = businessOrderProductDao.getPriceType(businessProductId);
+        String priceType = businessOrderProductDao.getPriceType(businessProductId);
         Price price = null;
-        switch (priceType){
-            case 0:
-                price = getSelfProductionPrice(businessProductId);
-                break;
-            case 1:
-                price = getOuterProcessingPrice(businessProductId);
-                break;
-            case 2:
-                price = getProcurementProcessingPrice(businessProductId);
-                break;
-            case 3:
-                price = getTradePrice(businessProductId);
-                break;
+        if ("01".equals(priceType)) {
+            price = getSelfProductionPrice(businessProductId);
+        }else if("02".equals(priceType)){
+            price = getOuterProcessingPrice(businessProductId);
+        }else if("04".equals(priceType)){
+            price = getProcurementProcessingPrice(businessProductId);
+        }else if("03".equals(priceType)){
+            price = getTradePrice(businessProductId);
         }
         return price;
     }
@@ -531,9 +526,9 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
         }
         //加工费
         BigDecimal processCost = new BigDecimal(0);
-        int priceType = basic.getPriceType();
-        //只有1原药制剂自产类加工，2原药采购制剂加工才有加工费
-        if(priceType==1 || priceType==2){
+        String priceType = basic.getPriceType();
+        //只有02原药制剂自产类加工，04原药采购制剂加工才有加工费
+        if("02".equals(priceType) || "04".equals(priceType)){
             processCost = this.calculateProcessCost(basic.getId());
         }
         //原币对本币汇率

@@ -53,6 +53,13 @@ public interface ComponentCostDao {
     public ComponentCost getComponentCostById(int id);
 
     /**
+     * 避免成分重名
+     * @param componentName
+     * @return
+     */
+    public ComponentCost getComponentCostByComponentName(String componentName);
+
+    /**
      * 根据适用品类获取成分
      * @param productCategoryId
      * @return
