@@ -56,7 +56,7 @@ public class BusinessOrderProduct {
     private BigDecimal convertRate;
 
     /**价格计算类型,01自产类，02原药制剂自产类加工，03贸易类，04原药采购制剂加工，09其他**/
-    private Integer priceType;
+    private String priceType;
 
     /**价委会指导价**/
     private BigDecimal advisePrice;
@@ -393,11 +393,11 @@ public class BusinessOrderProduct {
         this.convertRate = convertRate;
     }
 
-    public Integer getPriceType() {
+    public String getPriceType() {
         return priceType;
     }
 
-    public void setPriceType(Integer priceType) {
+    public void setPriceType(String priceType) {
         this.priceType = priceType;
     }
 

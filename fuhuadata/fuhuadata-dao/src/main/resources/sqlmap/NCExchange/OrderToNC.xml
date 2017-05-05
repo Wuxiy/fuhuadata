@@ -24,7 +24,7 @@
         <result column="sub_product_amount" jdbcType="DECIMAL" property="subProductAmount" />
         <result column="sub_product_unit" jdbcType="INTEGER" property="subProductUnit" />
         <result column="convert_rate" jdbcType="DECIMAL" property="convertRate" />
-        <result column="price_type" jdbcType="INTEGER" property="priceType" />
+        <result column="price_type" jdbcType="VARCHAR" property="priceType" />
         <result column="advise_price" jdbcType="DECIMAL" property="advisePrice" />
         <result column="purchase_price" jdbcType="DECIMAL" property="purchasePrice" />
         <result column="delivery_time" jdbcType="TIMESTAMP" property="deliveryTime" />

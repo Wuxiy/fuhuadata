@@ -89,7 +89,7 @@ public interface BusinessOrderProductDao {
      * @param businessProduct
      * @return
      */
-    int getPriceType(Integer businessProduct);
+    String getPriceType(Integer businessProduct);
 
     /**
      * 计算加工费

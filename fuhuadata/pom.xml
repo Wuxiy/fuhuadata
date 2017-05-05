@@ -291,6 +291,7 @@
                 <exclusions>
                     <exclusion>
                         <groupId>javax.validation</groupId>
+
                         <artifactId>validation-api</artifactId>
                     </exclusion>
                 </exclusions>

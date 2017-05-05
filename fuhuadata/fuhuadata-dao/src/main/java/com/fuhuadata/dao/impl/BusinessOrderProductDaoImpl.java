@@ -115,13 +115,13 @@ public class BusinessOrderProductDaoImpl extends BaseDao<BusinessOrderProduct> i
     }
 
     @Override
-    public int getPriceType(Integer businessProduct) {
+    public String getPriceType(Integer businessProduct) {
         try {
-            return (Integer)sqlMapClient.queryForObject(GET_PRICE_TYPE,businessProduct);
+            return (String)sqlMapClient.queryForObject(GET_PRICE_TYPE,businessProduct);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return -1;
+        return null;
     }
 
     @Override

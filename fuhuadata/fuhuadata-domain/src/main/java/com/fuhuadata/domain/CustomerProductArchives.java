@@ -51,7 +51,7 @@ public class CustomerProductArchives {
 	private BigDecimal convertRate;
 	
     /**价格计算类型,0自产类，1原药制剂自产类加工，2原药采购制剂加工，3贸易类，4其他**/
-	private Integer priceType;
+	private String priceType;
 	
     /**价委会指导价**/
 	private BigDecimal advisePrice;
@@ -412,11 +412,11 @@ public class CustomerProductArchives {
 		this.convertRate = convertRate;
 	}
 	
-	public Integer getPriceType() {
+	public String getPriceType() {
 		return priceType;
 	}
 	
-	public void setPriceType(Integer priceType) {
+	public void setPriceType(String priceType) {
 		this.priceType = priceType;
 	}
 	

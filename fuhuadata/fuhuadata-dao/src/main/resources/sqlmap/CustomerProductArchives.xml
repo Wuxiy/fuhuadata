@@ -16,11 +16,11 @@
 		<result column="customer_product_name" property="customerProductName" jdbcType="VARCHAR" javaType="java.lang.String"/>
 		<result property="brand" column="brand" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="mainProductAmount" column="main_product_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
-		<result property="mainProductUnit" column="main_product_unit" jdbcType="java.lang.String" javaType="java.lang.String" />
+		<result property="mainProductUnit" column="main_product_unit" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="subProductAmount" column="sub_product_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result property="subProductUnit" column="sub_product_unit" jdbcType="INT" javaType="java.lang.Integer" />
 		<result property="convertRate" column="convert_rate" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
-		<result property="priceType" column="price_type" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="priceType" column="price_type" jdbcType="VARCHAR" javaType="java.lang.String" />
 		<result property="advisePrice" column="advise_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result property="purchasePrice" column="purchase_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result property="deliveryTime" column="delivery_time" jdbcType="DATE" javaType="java.lang.String" />
