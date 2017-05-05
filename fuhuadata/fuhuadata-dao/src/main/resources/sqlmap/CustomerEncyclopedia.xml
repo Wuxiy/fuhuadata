@@ -129,26 +129,26 @@
             <isNotEmpty prepend=" AND  " property="companyType">
                 b.company_type = #companyType#
             </isNotEmpty>
-            <isNotEmpty prepend=" OR " property="searchKey">
+            <isNotEmpty prepend=" AND " property="searchKey">
                 b.full_name like concat('%',#searchKey#,'%')
             </isNotEmpty>
             <isNotEmpty prepend=" OR " property="searchKey">
                 b.short_name like concat('%',#searchKey#,'%')
             </isNotEmpty>
             <isNotEmpty prepend=" OR " property="searchKey">
-                a.isFull like concat('%',#searchKey#,'%')
+                a.is_full like concat('%',#searchKey#,'%')
             </isNotEmpty>
             <isNotEmpty prepend=" OR " property="searchKey">
-                a.createUserName like concat('%',#searchKey#,'%')
+                a.create_user_name like concat('%',#searchKey#,'%')
             </isNotEmpty>
             <isNotEmpty prepend=" OR " property="searchKey">
-                a.lastmodifyUserName like concat('%',#searchKey#,'%')
+                a.lastmodify_user_name like concat('%',#searchKey#,'%')
             </isNotEmpty>
             <isNotEmpty prepend=" OR " property="searchKey">
-                a.createTime like concat('%',#searchKey#,'%')
+                a.create_time like concat('%',#searchKey#,'%')
             </isNotEmpty>
             <isNotEmpty prepend=" OR " property="searchKey">
-                a.modifyTime like concat('%',#searchKey#,'%')
+                a.modify_time like concat('%',#searchKey#,'%')
             </isNotEmpty>
         </dynamic>
     </sql>

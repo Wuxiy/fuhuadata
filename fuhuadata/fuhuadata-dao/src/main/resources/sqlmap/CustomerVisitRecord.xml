@@ -239,8 +239,10 @@
 			c.start_time startTime,
 			c.end_time endTime,
 			c.activity_type activityType,
+			c.activity_remarks activityRemarks,
 			c.activity_address activityAddress,
-			c.activity_summary activitySummary
+			c.activity_summary activitySummary,
+			b.remarks
 			FROM
 				record_linkman b
 			LEFT JOIN customer_visit_record c ON b.visit_record_id = c.visitrecord_id

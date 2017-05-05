@@ -22,6 +22,7 @@ public class VisitRecordVO {
     private String activityRemarks;//活动类型备注
     private String activityAddress;//活动地址
     private String activitySummary;//活动摘要
+    private String remarks;//备注
 
     public String getLinkmanId() {
         return linkmanId;
@@ -112,5 +113,13 @@ public class VisitRecordVO {
 
     public void setActivityRemarks(String activityRemarks) {
         this.activityRemarks = activityRemarks;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 }

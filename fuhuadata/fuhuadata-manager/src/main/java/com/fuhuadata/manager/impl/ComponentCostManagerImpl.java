@@ -23,7 +23,6 @@ public class ComponentCostManagerImpl implements ComponentCostManager {
     public ComponentCost addComponentCost(ComponentCost componentCost, List<KProductComponent> KProductComponents) {
        ComponentCost addComponentCost = componentCostDao.addComponentCost(componentCost);
        for(int i = 0;i<KProductComponents.size();i++) {
-           System.out.println(KProductComponents.get(i).getCategoryFullName());
            KProductComponents.get(i).setComponentId(componentCost.getComponentId());
        }
         componentCostDao.addSuitableProduct(KProductComponents);
@@ -59,6 +58,10 @@ public class ComponentCostManagerImpl implements ComponentCostManager {
         List<KProductComponent> productComponents = componentCostDao.getProductComponentByComponentId(id);
         componentCostDO.setkProductComponents(productComponents);
         return componentCostDO;
+    }
+
+    public ComponentCost getComponentCostByComponentName(String componentName){
+        return componentCostDao.getComponentCostByComponentName(componentName);
     }
 
     @Override

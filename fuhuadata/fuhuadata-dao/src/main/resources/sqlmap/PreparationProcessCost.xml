@@ -93,6 +93,7 @@
         ]]>
         <isParameterPresent>
             <include refid="QUERY-COMMON"/>
+            order by type
         </isParameterPresent>
     </select>
 

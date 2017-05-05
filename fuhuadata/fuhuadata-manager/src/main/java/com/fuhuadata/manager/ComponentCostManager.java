@@ -25,6 +25,8 @@ public interface ComponentCostManager {
 
     public ComponentCostDO getComponentCostById(int id);
 
+    public ComponentCost getComponentCostByComponentName(String componentName);
+
     public List<ComponentCost> getComponentCostByQuery(ComponentCostQuery componentCostQuery);
 
     public Result<List<ComponentCost>> getComponentCostsByPage(ComponentCostQuery componentCostQuery);

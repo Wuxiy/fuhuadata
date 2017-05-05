@@ -1,6 +1,8 @@
 /**
  * Created by Loyun on 2017/3/20.
  */
+
+
 $(document).ready(function(){
     getData(basePath + '/customerLinkman/getCustomerLinkmanDetailsById','POST',GetRequest(),customerContactsInfo);
 
@@ -27,9 +29,32 @@ $(document).ready(function(){
     });
 });
 
+function replace(arr1,arr2){
+    switch (arr1){
+        case 0:
+            arr1 ='远程沟通';
+            break;
+        case 1:
+            arr1 = '出差拜访';
+            break;
+        case 2:
+            arr1 = '展会邀请';
+            break;
+        case 3:
+            arr1 = '工厂参观';
+            break;
+        case 4:
+            arr1 = '商务宴请';
+            break;
+        case 5:
+            arr1 = arr2;
+            break;
+    }
+    return arr1;
+}
+
 //详情列表
 function customerContactsInfo(result) {
-    console.log(result);
     var customerLinkman = result.customerLinkman;
     var customerVisitRecords = result.visitRecordVOS;
     var visitRecordsTable = document.getElementById('visitRecordsTable');
@@ -58,10 +83,11 @@ function customerContactsInfo(result) {
         for(var i=0;i<customerVisitRecords.length;i++){
             visitRecordsTable.innerHTML += '<tr><td>'+customerVisitRecords[i].startTime+'</td>'+
                 '<td>'+(customerVisitRecords[i].endTime!=undefined?customerVisitRecords[i].endTime:'')+'</td>'+
-                '<td>'+(customerVisitRecords[i].activityType!=undefined?customerVisitRecords[i].activityType:'')+'</td>'+
+                '<td>' + replace(customerVisitRecords[i].activityType, customerVisitRecords[i].activityRemarks) + '</td>' +
                 '<td>'+(customerVisitRecords[i].activityAddress!=undefined?customerVisitRecords[i].activityAddress:'')+'</td>'+
                 '<td>'+(customerVisitRecords[i].activityGift!=undefined?customerVisitRecords[i].activityGift:'')+'</td>'+
                 '<td>'+(customerVisitRecords[i].activitySummary!=undefined?customerVisitRecords[i].activitySummary:'')+'</td>'+
+                '<td>'+(customerVisitRecords[i].remarks!=undefined?customerVisitRecords[i].remarks:'')+'</td>'+
                 '</tr>';
         }
     }
@@ -90,6 +116,5 @@ function updateContactsInfo() {
         "isDefault":$('#isDefault').val(),
         "remarks":$('#remarks').val()
     };
-    console.log(data);
     return JSON.stringify(data);
 }

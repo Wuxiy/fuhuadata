@@ -11,7 +11,7 @@ import java.util.Date;
  * 客户百科信息
  * Created by intanswer on 2017/1/13.
  */
-public class CustomerEncyclopediaQuery extends PageBase {
+public class CustomerEncyclopediaQuery{
 
 
     private String encyId;//百科编号
@@ -47,6 +47,10 @@ public class CustomerEncyclopediaQuery extends PageBase {
     private String remarks;//备注
 
     private String searchKey;//搜索内容
+
+    private int startRow;
+
+    private int pageSize;
 
 
 
@@ -189,5 +193,21 @@ public class CustomerEncyclopediaQuery extends PageBase {
 
     public void setCompanyType(String companyType) {
         this.companyType = companyType;
+    }
+
+    public int getStartRow() {
+        return startRow;
+    }
+
+    public void setStartRow(int startRow) {
+        this.startRow = startRow;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 }

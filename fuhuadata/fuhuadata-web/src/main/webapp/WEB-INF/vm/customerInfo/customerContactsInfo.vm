@@ -142,6 +142,7 @@
                             <th class="text-center" lang="zh">活动地点</th>
                             <th class="text-center" lang="zh">礼物赠送</th>
                             <th class="text-center" lang="zh">活动摘要</th>
+                            <th class="text-center" lang="zh">备注</th>
                         </tr>
                         </thead>
                         <tbody id="visitRecordsTable"></tbody>

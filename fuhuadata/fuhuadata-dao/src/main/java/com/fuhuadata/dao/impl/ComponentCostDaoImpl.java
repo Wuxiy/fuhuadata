@@ -26,6 +26,7 @@ public class ComponentCostDaoImpl extends SqlMapClientTemplate implements Compon
     public static final String DELETE_PRODUCT_COMPONENT_ID_="COMPONENTCOST.DELETE-PRODUCT-COMPONENT-BY-ID";
     private static final String GET_PRODUCT_COMPONENT_BY_COMPONENT_ID="COMPONENTCOST.GET-PRODUCTCOMPONENT-BY-COMPONENT-ID";
     private static final String GET_COMPONENT_BY_CATEGORY_ID= "COMPONENTCOST.GET-COMPONENT-BY-CATEGORY-ID";
+    private static final String GET_BY_COMPONENTNAME = "COMPONENTCOST.GET-BY-COMPONENTNAME";
     @Override
     public ComponentCost addComponentCost(ComponentCost componentCost) {
         componentCost.setComponentId((Integer)this.insert(ADD,componentCost));
@@ -65,6 +66,9 @@ public class ComponentCostDaoImpl extends SqlMapClientTemplate implements Compon
         return  (ComponentCost) this.queryForObject(GET_BY_ID,id);
     }
 
+    public ComponentCost getComponentCostByComponentName(String componentName){
+        return (ComponentCost) this.queryForObject(GET_BY_COMPONENTNAME,componentName);
+    }
     @Override
     public List<ComponentCost> getComponentCostByCategoryId(int productCategoryId) {
         return this.queryForList(GET_COMPONENT_BY_CATEGORY_ID,productCategoryId);
