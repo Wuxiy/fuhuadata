@@ -71,7 +71,7 @@ public class CustomerEncyclopediaAction {
      * list
      * @return
      */
-    @RequestMapping(value = "/getCustomerEncyclopediaListByQuery",method = RequestMethod.GET)
+    @RequestMapping(value = "/getCustomerEncyclopediaListByQuery",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "list")
     @ResponseBody
     public ResultPojo getCustomerEncyclopediaListByQuery(@RequestBody CustomerEncyclopediaQuery query){
@@ -90,7 +90,7 @@ public class CustomerEncyclopediaAction {
      * list
      * @return
      */
-    @RequestMapping(value = "/count",method = RequestMethod.GET)
+    @RequestMapping(value = "/count",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "count_list")
     @ResponseBody
     public ResultPojo count(@RequestBody CustomerEncyclopediaQuery query){

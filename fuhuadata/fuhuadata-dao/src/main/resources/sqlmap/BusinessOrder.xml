@@ -686,12 +686,15 @@
                 b.maintenance_fee maintenanceFee,
                 a.sales_man_id salesManId,
                 a.sales_man_name salesManName
-            FROM
-                business_order a
-            LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
-            LEFT JOIN sync_contract sc ON sc.pk_longpro = a.nc_order_id
-            LEFT JOIN t_countryzone tc ON tc.`code` = base.countryzone
-            LEFT JOIN (SELECT
+                      FROM
+              customer_base_info base
+              LEFT JOIN t_countryzone tc
+                ON tc.`code` = base.countryzone
+              LEFT JOIN business_order a
+                ON a.customer_id = base.`customer_id`
+              LEFT JOIN sync_contract sc
+                ON sc.pk_longpro = a.nc_order_id
+              LEFT JOIN (SELECT
                 cvr.customer_id,
                 SUM(cvr.activity_expense) maintenance_fee
             FROM
@@ -707,7 +710,7 @@
                 <isNotEmpty prepend=" AND " property="orderBy">
                     order by $orderBy$
                 </isNotEmpty>
-                GROUP BY a.customer_id
+                GROUP BY base.customer_id
                 limit #startRow#,#pageSize#
             </isParameterPresent>
         </isEqual>
@@ -741,20 +744,15 @@
 
     <select id="COUNT-COST-AND-PROFIT" parameterClass="CostAndProfitStatistics" resultClass="java.lang.Integer">
         <![CDATA[
-            SELECT
-                count(*)
-            FROM
-                (
                     SELECT
                         count(*)
                     FROM
-                        business_order a
-                    LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
-                    LEFT JOIN t_countryzone tc ON tc.`code` = base.countryzone
+              customer_base_info base
+              LEFT JOIN t_countryzone tc ON tc.`code` = base.countryzone
+              LEFT JOIN business_order a ON a.customer_id = base.`customer_id`
              ]]>
         <isParameterPresent>
             <include refid="COST-PROFIT-QUERY-COMMON"/>
-            GROUP BY a.customer_id) cu
         </isParameterPresent>
     </select>
 
