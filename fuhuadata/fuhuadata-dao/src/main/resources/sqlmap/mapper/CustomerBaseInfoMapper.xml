@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.CustomerBaseInfoMapper">
+  <resultMap id="BaseResultMap" type="com.fuhuadata.domain.mybatis.CustomerBaseInfo">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="customer_id" jdbcType="INTEGER" property="customerId" />
+    <result column="nc_id" jdbcType="VARCHAR" property="ncId" />
+    <result column="full_name" jdbcType="VARCHAR" property="fullName" />
+    <result column="short_name" jdbcType="VARCHAR" property="shortName" />
+    <result column="company_type" jdbcType="INTEGER" property="companyType" />
+    <result column="customer_area_id" jdbcType="VARCHAR" property="customerAreaId" />
+    <result column="customer_area" jdbcType="VARCHAR" property="customerArea" />
+    <result column="customer_duty_paragraph" jdbcType="VARCHAR" property="customerDutyParagraph" />
+    <result column="sale_organization_id" jdbcType="VARCHAR" property="saleOrganizationId" />
+    <result column="sale_organization_name" jdbcType="VARCHAR" property="saleOrganizationName" />
+    <result column="full_enterprise_nature" jdbcType="VARCHAR" property="fullEnterpriseNature" />
+    <result column="other_enterprise_nature" jdbcType="VARCHAR" property="otherEnterpriseNature" />
+    <result column="registered_funds" jdbcType="VARCHAR" property="registeredFunds" />
+    <result column="registered_address" jdbcType="VARCHAR" property="registeredAddress" />
+    <result column="management_scope" jdbcType="VARCHAR" property="managementScope" />
+    <result column="zhongxinbao_number" jdbcType="VARCHAR" property="zhongxinbaoNumber" />
+    <result column="zhongxinbao_level" jdbcType="INTEGER" property="zhongxinbaoLevel" />
+    <result column="enterprise_phone" jdbcType="VARCHAR" property="enterprisePhone" />
+    <result column="enterprise_email" jdbcType="VARCHAR" property="enterpriseEmail" />
+    <result column="customer_completion" jdbcType="VARCHAR" property="customerCompletion" />
+    <result column="customer_level" jdbcType="VARCHAR" property="customerLevel" />
+    <result column="customer_type" jdbcType="TINYINT" property="customerType" />
+    <result column="opportunity_source" jdbcType="TINYINT" property="opportunitySource" />
+    <result column="other_opportunity" jdbcType="VARCHAR" property="otherOpportunity" />
+    <result column="opportunity_describle" jdbcType="VARCHAR" property="opportunityDescrible" />
+    <result column="has_chi_company" jdbcType="TINYINT" property="hasChiCompany" />
+    <result column="has_chi_purchase" jdbcType="TINYINT" property="hasChiPurchase" />
+    <result column="customer_status" jdbcType="TINYINT" property="customerStatus" />
+    <result column="loss_reason" jdbcType="VARCHAR" property="lossReason" />
+    <result column="qualifications_file_url" jdbcType="VARCHAR" property="qualificationsFileUrl" />
+    <result column="factory_location" jdbcType="VARCHAR" property="factoryLocation" />
+    <result column="major_competitors" jdbcType="VARCHAR" property="majorCompetitors" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
+    <result column="create_user_name" jdbcType="VARCHAR" property="createUserName" />
+    <result column="lastmodify_user_id" jdbcType="INTEGER" property="lastmodifyUserId" />
+    <result column="lastmodify_user_name" jdbcType="VARCHAR" property="lastmodifyUserName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="price_sensitivity" jdbcType="VARCHAR" property="priceSensitivity" />
+    <result column="loyalty" jdbcType="VARCHAR" property="loyalty" />
+    <result column="start_cooperation_time" jdbcType="DATE" property="startCooperationTime" />
+    <result column="cooperation_duration" jdbcType="INTEGER" property="cooperationDuration" />
+    <result column="purchasing_season" jdbcType="VARCHAR" property="purchasingSeason" />
+    <result column="active_period" jdbcType="VARCHAR" property="activePeriod" />
+    <result column="is_fuhua_exclusive" jdbcType="TINYINT" property="isFuhuaExclusive" />
+    <result column="cooperation_remark" jdbcType="VARCHAR" property="cooperationRemark" />
+    <result column="production_line" jdbcType="VARCHAR" property="productionLine" />
+    <result column="timezone" jdbcType="VARCHAR" property="timezone" />
+    <result column="custclass" jdbcType="VARCHAR" property="custclass" />
+    <result column="formatdoc" jdbcType="VARCHAR" property="formatdoc" />
+    <result column="countryzone" jdbcType="VARCHAR" property="countryzone" />
+  </resultMap>
+</mapper>

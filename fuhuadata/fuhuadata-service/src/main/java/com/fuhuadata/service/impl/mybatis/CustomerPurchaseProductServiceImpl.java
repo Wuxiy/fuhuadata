@@ -8,6 +8,7 @@ import com.fuhuadata.service.mybatis.CustomerPurchaseProductService;
 import com.fuhuadata.service.mybatis.CustomerPurchaseSupplierService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -40,8 +41,15 @@ public class CustomerPurchaseProductServiceImpl extends BaseServiceImpl<Customer
         }
 
         Example example = newExample();
-        example.createCriteria().andLike("productName", "%" + query.getProductName() + "%")
-                .andEqualTo("year", query.getYear());
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("customerId", query.getCustomerId());
+
+        if (StringUtils.isNotEmpty(query.getProductName())) {
+            criteria.andLike("productName", "%" + query.getProductName() + "%");
+        }
+        if (StringUtils.isNotEmpty(query.getYear())) {
+            criteria.andEqualTo("year", query.getYear());
+        }
         example.orderBy("create_time asc");
 
         PageHelper.startPage(query.getIndex(), query.getPageSize());
