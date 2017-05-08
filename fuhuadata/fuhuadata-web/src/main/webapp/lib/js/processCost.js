@@ -213,7 +213,7 @@ $(document).ready(function () {
                             ResultData3.push(ResultData[i]);
                         }
                     }
-                    
+
                     for (var j = 0; j < ResultData1.length; j++) {
                         Rate1.innerHTML += '<tr>' +
                             '<td><a class="rate1" style="cursor: pointer;" data_url="'+basePath+'/Rate/getRateById?id='+ResultData1[j].rateId+'">' + ifEmpty(ResultData1[j].currency) + '</a></td>' +
