@@ -5,6 +5,7 @@
     <typeAlias alias="PackingArchives" type="com.fuhuadata.domain.PackingArchives"/>
     <typeAlias alias="PackingArchivesQuery" type="com.fuhuadata.domain.query.PackingArchivesQuery"/>
     <typeAlias alias="PackingRelation" type="com.fuhuadata.domain.PackingRelation"/>
+    <typeAlias alias="RelationPackingArchives" type="com.fuhuadata.vo.RelationPackingArchives"/>
 
     <resultMap id="PACKINGARCHIVES-MAP" class="PackingArchives">
         <result column="packing_id" property="packingId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
@@ -190,9 +191,9 @@
         ]]>
     </delete>
     <!--连接查询包材档案以及关联包材-->
-    <!--<select id="GET-RELATIONPACKING-BY-ID" parameterClass="java.lang.Integer" resultMap="">-->
+    <select id="GET-RELATIONPACKING-BY-ID" parameterClass="java.lang.Integer" resultClass="RelationPackingArchives">
 
-    <!--</select>-->
+    </select>
 
     <update id="UPDATE" parameterClass="PackingArchives">
         UPDATE k_packing_archives

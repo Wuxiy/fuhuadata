@@ -1,17 +1,19 @@
-package com.fuhuadata.domain;
+package com.fuhuadata.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * 包材档案
- * Created by intanswer on 2017/1/19.
+ * 关联包材档案，主材关联包材列表
+ * Created by intanswer on 2017/5/8.
  */
-public class PackingArchives {
+public class RelationPackingArchives {
+
     private Integer packingId;
 
-    private Integer bigCategoryId;//：内包材，外包材，辅材
+    private Integer bigCategoryId;//：2.外包材，3.辅材
 
     private Integer smallCategoryId;//:主材-平桶类
 
@@ -29,10 +31,11 @@ public class PackingArchives {
 
     private String qualityTargetValue;//质量指标数值
 
-    private BigDecimal unitPrice=null;//单价
+    private BigDecimal unitPrice;//单价
 
-    private BigDecimal consumption=null;//单耗
+    private BigDecimal consumption;//档案单耗
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date priceEndDate;//价格有效期  yyyy/mm/dd
 
     private String suitableType;//适用剂型（原药，水剂，颗粒剂）
@@ -41,10 +44,12 @@ public class PackingArchives {
 
     private Integer status;//状态 0:已禁用  1:已启用
 
-    private String associatedPackingId;//关联包材（主材会有关联外包装和辅材）
-
     private String imagePath;//图片路径
 
+    private BigDecimal associatedConsumption;//关联单耗(辅材或外包装单耗)
+
+    /**单耗是否和外包装相等 0:不相等 1：相等**/
+    private int isEqualOuter;
 
     public Integer getPackingId() {
         return packingId;
@@ -54,6 +59,21 @@ public class PackingArchives {
         this.packingId = packingId;
     }
 
+    public Integer getBigCategoryId() {
+        return bigCategoryId;
+    }
+
+    public void setBigCategoryId(Integer bigCategoryId) {
+        this.bigCategoryId = bigCategoryId;
+    }
+
+    public Integer getSmallCategoryId() {
+        return smallCategoryId;
+    }
+
+    public void setSmallCategoryId(Integer smallCategoryId) {
+        this.smallCategoryId = smallCategoryId;
+    }
 
     public String getPackName() {
         return packName;
@@ -111,6 +131,21 @@ public class PackingArchives {
         this.qualityTargetValue = qualityTargetValue;
     }
 
+    public BigDecimal getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(BigDecimal unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public BigDecimal getConsumption() {
+        return consumption;
+    }
+
+    public void setConsumption(BigDecimal consumption) {
+        this.consumption = consumption;
+    }
 
     public Date getPriceEndDate() {
         return priceEndDate;
@@ -136,13 +171,12 @@ public class PackingArchives {
         this.bRemarks = bRemarks;
     }
 
-
-    public String getAssociatedPackingId() {
-        return associatedPackingId;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setAssociatedPackingId(String associatedPackingId) {
-        this.associatedPackingId = associatedPackingId;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public String getImagePath() {
@@ -153,45 +187,19 @@ public class PackingArchives {
         this.imagePath = imagePath;
     }
 
-
-
-    public Integer getStatus() {
-        return status;
+    public BigDecimal getAssociatedConsumption() {
+        return associatedConsumption;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setAssociatedConsumption(BigDecimal associatedConsumption) {
+        this.associatedConsumption = associatedConsumption;
     }
 
-    public BigDecimal getUnitPrice() {
-        return unitPrice;
+    public int getIsEqualOuter() {
+        return isEqualOuter;
     }
 
-    public void setUnitPrice(BigDecimal unitPrice) {
-        this.unitPrice = unitPrice;
-    }
-
-    public BigDecimal getConsumption() {
-        return consumption;
-    }
-
-    public void setConsumption(BigDecimal consumption) {
-        this.consumption = consumption;
-    }
-
-    public Integer getBigCategoryId() {
-        return bigCategoryId;
-    }
-
-    public void setBigCategoryId(Integer bigCategoryId) {
-        this.bigCategoryId = bigCategoryId;
-    }
-
-    public Integer getSmallCategoryId() {
-        return smallCategoryId;
-    }
-
-    public void setSmallCategoryId(Integer smallCategoryId) {
-        this.smallCategoryId = smallCategoryId;
+    public void setIsEqualOuter(int isEqualOuter) {
+        this.isEqualOuter = isEqualOuter;
     }
 }
