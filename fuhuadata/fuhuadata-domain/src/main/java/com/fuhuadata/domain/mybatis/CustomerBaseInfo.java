@@ -1,5 +1,8 @@
 package com.fuhuadata.domain.mybatis;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fuhuadata.domain.json.Views;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -8,6 +11,7 @@ public class CustomerBaseInfo extends BaseEntity<Integer> {
     /**
      * 客户编号
      */
+    @JsonView(Views.Viewable.class)
     @Id
     @Column(name = "customer_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -243,17 +247,20 @@ public class CustomerBaseInfo extends BaseEntity<Integer> {
     /**
      * 价格敏感度
      */
+    @JsonView(Views.Viewable.class)
     @Column(name = "price_sensitivity")
     private String priceSensitivity;
 
     /**
      * 忠诚度
      */
+    @JsonView(Views.Viewable.class)
     private String loyalty;
 
     /**
      * 开始合作时间
      */
+    @JsonView(Views.Viewable.class)
     @Column(name = "start_cooperation_time")
     private Date startCooperationTime;
 
@@ -266,24 +273,28 @@ public class CustomerBaseInfo extends BaseEntity<Integer> {
     /**
      * 采购季节
      */
+    @JsonView(Views.Viewable.class)
     @Column(name = "purchasing_season")
     private String purchasingSeason;
 
     /**
      * 活跃周期
      */
+    @JsonView(Views.Viewable.class)
     @Column(name = "active_period")
     private String activePeriod;
 
     /**
      * 合作紧密度（福华是否独家供应） 0:否 1:是
      */
+    @JsonView(Views.Viewable.class)
     @Column(name = "is_fuhua_exclusive")
     private Byte isFuhuaExclusive;
 
     /**
      * 合作情况备注
      */
+    @JsonView(Views.Viewable.class)
     @Column(name = "cooperation_remark")
     private String cooperationRemark;
 
