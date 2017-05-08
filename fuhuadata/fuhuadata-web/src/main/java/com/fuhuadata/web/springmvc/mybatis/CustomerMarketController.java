@@ -1,13 +1,13 @@
 package com.fuhuadata.web.springmvc.mybatis;
 
 import com.fuhuadata.domain.mybatis.CustomerPurchaseProduct;
+import com.fuhuadata.domain.query.CustomerPurchaseProductInfo;
 import com.fuhuadata.domain.query.QueryCustomerPurchaseProduct;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.mybatis.CustomerPurchaseProductService;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import com.github.pagehelper.PageInfo;
-import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -69,26 +69,32 @@ public class CustomerMarketController extends BaseController<CustomerPurchasePro
 
     /**
      * 保存采购产品和供应商
-     * @param product
+     * @param productInfo
      * @return
      */
     @RequestMapping(value = "/purchase/products", method = RequestMethod.POST)
     @ResponseBody
     @SystemLogAnnotation(module = "customer-market-purchase", methods = "saveOrUpdateProducts")
-    public ResultPojo saveOrUpdatePurchaseProducts(@ModelAttribute CustomerPurchaseProduct product) {
+    public ResultPojo saveOrUpdatePurchaseProducts(@RequestBody CustomerPurchaseProductInfo productInfo) {
 
         Result<Boolean> result = Result.newResult(false);
 
-        purchaseProductService.saveOrUpdatePurchaseProductAndSuppliers(product, Lists.<Integer>newArrayList());
+        purchaseProductService.saveOrUpdatePurchaseProductAndSuppliers(productInfo.getPurchaseProduct(),
+                productInfo.getDeletedSupplierIds());
         result.setSuccess(true);
 
         return result.getResultPojo();
     }
 
+    /**
+     * 采购产品删除
+     * @param productIds
+     * @return
+     */
     @RequestMapping(value = "/purchase/products/delete", method = RequestMethod.POST)
     @ResponseBody
     @SystemLogAnnotation(module = "customer-market-purchase", methods = "deleteProducts")
-    public ResultPojo deletePurchaseProducts(@RequestParam("ids") Integer[] productIds) {
+    public ResultPojo deletePurchaseProducts(@RequestParam("ids[]") Integer[] productIds) {
 
         Result<Boolean> result = Result.newResult(false);
 
@@ -98,4 +104,12 @@ public class CustomerMarketController extends BaseController<CustomerPurchasePro
         return result.getResultPojo();
     }
 
+    @RequestMapping(value = "/coop/{customerId}")
+    @ResponseBody
+    @SystemLogAnnotation(module = "customer-market-coop", methods = "getCoopInfo")
+    public ResultPojo getCoopInfo(@PathVariable("customerId") Integer customerId) {
+
+        // TODO: 5/5/2017 获取合作客户信息
+        return null;
+    }
 }

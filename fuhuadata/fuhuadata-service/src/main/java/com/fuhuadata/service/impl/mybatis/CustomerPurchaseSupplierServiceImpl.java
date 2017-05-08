@@ -22,7 +22,7 @@ public class CustomerPurchaseSupplierServiceImpl extends BaseServiceImpl<Custome
         example.createCriteria().andEqualTo("purchaseId", purchaseId);
         example.orderBy("id ase");
 
-        return listByExample(purchaseId);
+        return listByExample(example);
     }
 
     @Override
