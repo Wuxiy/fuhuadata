@@ -1,7 +1,10 @@
 package com.fuhuadata.domain.mybatis;
 
-import java.util.Date;
+import com.google.common.collect.Lists;
+
 import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 @Table(name = "customer_sale_product")
 public class CustomerSaleProduct extends BaseEntity<Integer> {
@@ -138,6 +141,12 @@ public class CustomerSaleProduct extends BaseEntity<Integer> {
      */
     @Column(name = "modify_time")
     private Date modifyTime;
+
+    /**
+     * 目的国
+     */
+    @Transient
+    private List<CustomerSaleCountry> countries;
 
     /**
      * 获取主键id
@@ -547,5 +556,17 @@ public class CustomerSaleProduct extends BaseEntity<Integer> {
      */
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
+    }
+
+    public List<CustomerSaleCountry> getCountries() {
+        if (countries == null) {
+            return Lists.newArrayList();
+        }
+
+        return countries;
+    }
+
+    public void setCountries(List<CustomerSaleCountry> countries) {
+        this.countries = countries;
     }
 }

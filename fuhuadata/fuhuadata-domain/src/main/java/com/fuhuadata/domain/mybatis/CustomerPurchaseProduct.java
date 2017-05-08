@@ -1,7 +1,8 @@
 package com.fuhuadata.domain.mybatis;
 
-import java.util.Date;
 import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 @Table(name = "customer_purchase_product")
 public class CustomerPurchaseProduct extends BaseEntity<Integer> {
@@ -133,6 +134,9 @@ public class CustomerPurchaseProduct extends BaseEntity<Integer> {
      */
     @Column(name = "modify_time")
     private Date modifyTime;
+
+    @Transient
+    private List<CustomerPurchaseSupplier> suppliers;
 
     /**
      * 获取主键id
@@ -528,5 +532,13 @@ public class CustomerPurchaseProduct extends BaseEntity<Integer> {
      */
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
+    }
+
+    public List<CustomerPurchaseSupplier> getSuppliers() {
+        return suppliers;
+    }
+
+    public void setSuppliers(List<CustomerPurchaseSupplier> suppliers) {
+        this.suppliers = suppliers;
     }
 }
