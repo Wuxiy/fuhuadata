@@ -1,10 +1,14 @@
 package com.fuhuadata.web.springmvc.mybatis;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fuhuadata.domain.json.Views;
+import com.fuhuadata.domain.mybatis.CustomerBaseInfo;
 import com.fuhuadata.domain.mybatis.CustomerPurchaseProduct;
 import com.fuhuadata.domain.query.CustomerPurchaseProductInfo;
 import com.fuhuadata.domain.query.QueryCustomerPurchaseProduct;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
+import com.fuhuadata.service.mybatis.CustomerBaseInfoService;
 import com.fuhuadata.service.mybatis.CustomerPurchaseProductService;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import com.github.pagehelper.PageInfo;
@@ -24,13 +28,21 @@ public class CustomerMarketController extends BaseController<CustomerPurchasePro
 
     private CustomerPurchaseProductService purchaseProductService;
 
+    private CustomerBaseInfoService baseInfoService;
+
     @Autowired
     public void setPurchaseProductService(CustomerPurchaseProductService purchaseProductService) {
         this.purchaseProductService = purchaseProductService;
     }
 
+    @Autowired
+    public void setBaseInfoService(CustomerBaseInfoService baseInfoService) {
+        this.baseInfoService = baseInfoService;
+    }
+
     /**
      * 获取分页采购产品
+     *
      * @param query
      * @return
      */
@@ -41,6 +53,7 @@ public class CustomerMarketController extends BaseController<CustomerPurchasePro
 
         Result<PageInfo<CustomerPurchaseProduct>> result = Result.newResult(false);
 
+        query.setIndex(query.getIndex() + 1);
         PageInfo<CustomerPurchaseProduct> products = purchaseProductService.listProducts(query);
         result.addDefaultModel(products);
         result.setSuccess(true);
@@ -50,6 +63,7 @@ public class CustomerMarketController extends BaseController<CustomerPurchasePro
 
     /**
      * 获取采购产品信息，包括供应商信息
+     *
      * @param productId
      * @return
      */
@@ -69,6 +83,7 @@ public class CustomerMarketController extends BaseController<CustomerPurchasePro
 
     /**
      * 保存采购产品和供应商
+     *
      * @param productInfo
      * @return
      */
@@ -88,6 +103,7 @@ public class CustomerMarketController extends BaseController<CustomerPurchasePro
 
     /**
      * 采购产品删除
+     *
      * @param productIds
      * @return
      */
@@ -104,12 +120,44 @@ public class CustomerMarketController extends BaseController<CustomerPurchasePro
         return result.getResultPojo();
     }
 
+    /**
+     * 合作情况信息获取
+     *
+     * @param customerId
+     * @return
+     */
     @RequestMapping(value = "/coop/{customerId}")
+    @JsonView(Views.Viewable.class)
     @ResponseBody
     @SystemLogAnnotation(module = "customer-market-coop", methods = "getCoopInfo")
     public ResultPojo getCoopInfo(@PathVariable("customerId") Integer customerId) {
 
-        // TODO: 5/5/2017 获取合作客户信息
-        return null;
+        Result<CustomerBaseInfo> baseInfoResult = Result.newResult(false);
+        baseInfoResult.addDefaultModel(baseInfoService.getCoopCustomer(customerId));
+        baseInfoResult.setSuccess(true);
+
+        return baseInfoResult.getResultPojo();
+    }
+
+    /**
+     * 合作情况更新
+     * @param customerId
+     * @param customerBaseInfo
+     * @return
+     */
+    @RequestMapping(value = "/coop/{customerId}", method = RequestMethod.POST)
+    @ResponseBody
+    @SystemLogAnnotation(module = "customer-market-coop", methods = "updateCoopInfo")
+    public ResultPojo updateCoopInfo(@PathVariable("customerId") Integer customerId,
+                                     @JsonView(Views.Editable.class) @RequestBody CustomerBaseInfo customerBaseInfo) {
+
+        Result<Integer> result = Result.newResult(false);
+
+        customerBaseInfo.setCustomerId(customerId);
+        int i = baseInfoService.updateSelective(customerBaseInfo);
+        result.addDefaultModel(i);
+        result.setSuccess(true);
+
+        return result.getResultPojo();
     }
 }

@@ -49,6 +49,12 @@ public class CustomerPurchaseProduct extends BaseEntity<Integer> {
     private String averagePrice;
 
     /**
+     * 主计量单位
+     */
+    @Column(name = "measurement")
+    private String measurement;
+
+    /**
      * 供应商1
      */
     private String supplier1;
@@ -540,5 +546,13 @@ public class CustomerPurchaseProduct extends BaseEntity<Integer> {
 
     public void setSuppliers(List<CustomerPurchaseSupplier> suppliers) {
         this.suppliers = suppliers;
+    }
+
+    public String getMeasurement() {
+        return measurement;
+    }
+
+    public void setMeasurement(String measurement) {
+        this.measurement = measurement;
     }
 }

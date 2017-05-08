@@ -41,6 +41,7 @@ public class CustomerSaleProductController extends BaseController<CustomerSalePr
 
         Result<PageInfo<CustomerSaleProduct>> result = Result.newResult(false);
 
+        query.setIndex(query.getIndex() + 1);
         PageInfo<CustomerSaleProduct> products = saleProductService.listProducts(query);
         result.addDefaultModel(products);
         result.setSuccess(true);
