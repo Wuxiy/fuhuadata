@@ -1,13 +1,13 @@
 package com.fuhuadata.web.springmvc;
 
 import com.fuhuadata.domain.PackingArchives;
+import com.fuhuadata.domain.PackingRelation;
 import com.fuhuadata.domain.query.PackingArchivesQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.BCodeService;
 import com.fuhuadata.service.PackingArchivesService;
 import com.fuhuadata.vo.PackingArchivesVO;
-import com.fuhuadata.util.StringUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -141,7 +143,7 @@ public class PackingArchivesAction {
     /**
      * add relate
      */
-    @RequestMapping(value = "/addRelation", method = RequestMethod.POST)
+  /*  @RequestMapping(value = "/addRelation", method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-packingCost", methods = "addRelation")
     @ResponseBody
     public ResultPojo addRelation(int id, @RequestBody String[] ids) {
@@ -169,6 +171,28 @@ public class PackingArchivesAction {
         }
         return null;
     }
+*/
+
+    /**
+     * add relate
+     */
+    @RequestMapping(value = "/addRelation", method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "knowledgeBase-packingCost", methods = "addRelation")
+    @ResponseBody
+    public ResultPojo addRelation(@RequestBody PackingRelation[] packingRelations) {
+        Result result = new Result();
+        List<PackingRelation> list = new ArrayList<PackingRelation>();
+        if(packingRelations!=null&&packingRelations.length>0){
+            list = Arrays.asList(packingRelations);
+        }
+        try{
+            result = packingArchivesService.batchAddRelationPacking(list);
+            result.setMessage("新增关联成功");
+        }catch (Exception e){
+            result.setSuccess(false);
+        }
+        return result.getResultPojo();
+    }
 
     /**
      * GET BY IDS
@@ -193,7 +217,7 @@ public class PackingArchivesAction {
     /**
      * delete relate
      */
-    @RequestMapping(value = "/deleteRelation", method = RequestMethod.POST)
+  /*  @RequestMapping(value = "/deleteRelation", method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-packingCost", methods = "deleteRelation")
     @ResponseBody
     public ResultPojo deleteRelation(int id, @RequestBody String[] ids) {
@@ -210,11 +234,32 @@ public class PackingArchivesAction {
             log.error("更新主材关联失败", e);
         }
         return null;
+    }*/
+
+    /**
+     *  删除关联
+     * @param ids
+     * @param ids
+     * @return
+     */
+    @RequestMapping(value = "/deleteRelation", method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "knowledgeBase-packingCost", methods = "deleteRelation")
+    @ResponseBody
+    public ResultPojo deleteRelation(String ids) {
+        Result result = new Result();
+        try {
+            if(ids!=null) {
+                result = packingArchivesService.deleteRelationPackingByIds(ids);
+            }
+            return result.getResultPojo();
+        } catch (Exception e) {
+            log.error("删除关联包材错误", e);
+        }
+        return null;
     }
 
     /**
      * 条件查询
-     *
      * @param packingArchivesQuery
      * @return
      */
@@ -240,7 +285,6 @@ public class PackingArchivesAction {
 
     /**
      * 进入详情页
-     *
      * @return
      */
     @RequiresPermissions({"wiki:mate:base:view"})
@@ -252,7 +296,6 @@ public class PackingArchivesAction {
 
     /**
      * 根据id获取详情
-     *
      * @param id
      * @return
      */

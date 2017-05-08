@@ -2,8 +2,10 @@ package com.fuhuadata.manager;
 
 
 import com.fuhuadata.domain.PackingArchives;
+import com.fuhuadata.domain.PackingRelation;
 import com.fuhuadata.domain.query.PackingArchivesQuery;
 import com.fuhuadata.domain.query.Result;
+import com.fuhuadata.vo.RelationPackingArchives;
 
 import java.util.List;
 
@@ -30,6 +32,34 @@ public interface PackingArchivesManager {
     public Result<List<PackingArchives>> getPackingArchivesByPage(PackingArchivesQuery packingArchivesQuery);
 
     public int count(PackingArchivesQuery packingArchivesQuery);
+
+    /**
+     * 批量新增关联包材档案
+     * @param list
+     * @return
+     */
+    public boolean batchAddRelationPacking(List<PackingRelation> list);
+
+    /**
+     * 根据主材id删除全部关联
+     * @param mainPackingId
+     * @return
+     */
+    public boolean deleteRelationPacking(int mainPackingId);
+
+    /**
+     *  根据ids删除关联包材
+     * @param ids
+     * @return
+     */
+    public boolean deleteRelationPackingByIds(String ids);
+
+    /**
+     * 获取关联包材列表档案
+     * @param packingId
+     * @return
+     */
+    public List<RelationPackingArchives> getRelationPackingById(int packingId);
 
 
 }

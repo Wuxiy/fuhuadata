@@ -174,25 +174,56 @@
         </selectKey>
     </insert>
 
-    <insert id="ADD-RELATION" parameterClass="PackingRelation">
+    <update id="BATCH-ADD-RELATION" parameterClass="java.util.List">
         INSERT INTO
         k_packing_realtion (id,main_packing_id,category_id,associated_packing_id,
         consumption,is_equal_outer
         )
-        VALUES (#id#,#mainPackingId#,#categoryId#,#associatedPackingId#,#consumption#,#isEqualOuter#
-        )
-        <selectKey resultClass="int" keyProperty="id">
-            SELECT @@IDENTITY AS id
-        </selectKey>
-    </insert>
+        VALUES
+        <iterate conjunction=",">
+        (#[].id#,#[].mainPackingId#,#[].categoryId#,#[].associatedPackingId#,#[].consumption#,#[].isEqualOuter#)
+        </iterate>
+    </update>
     <delete id="DELETE-RELATION" parameterClass="java.lang.Integer">
         <![CDATA[
             DELETE FROM k_packing_realtion WHERE main_packing_id=#mainPackingId#
         ]]>
     </delete>
+    <delete id="DELETE-RELATION-BY-IDS" parameterClass="java.lang.String">
+        <![CDATA[
+            DELETE FROM k_packing_realtion WHERE id in ($relationIds$)
+        ]]>
+    </delete>
     <!--连接查询包材档案以及关联包材-->
     <select id="GET-RELATIONPACKING-BY-ID" parameterClass="java.lang.Integer" resultClass="RelationPackingArchives">
-
+        <![CDATA[
+        SELECT
+        kpa.`packing_id` packingId,
+        kpa.`big_category_id` bigCategoryId,
+        kpa.`small_category_id` smallCategoryId,
+        kpa.`pack_name` packName,
+        kpa.`size`,
+        kpa.`spec`,
+        kpa.`spec_unit` specUnit,
+        kpa.`quality`,
+        kpa.`quality_index` qualityIndex,
+        kpa.`quality_target_value` qualityTargetValue,
+        kpa.`unit_price` unitPrice,
+        kpa.`consumption`,
+        kpa.`price_end_date` priceEndDate,
+        kpa.`suitable_type` suitableType,
+        kpa.`b_remarks` bRemarks,
+        kpa.`status`,
+        kpa.`image_path` imagePath,
+        kpr.id relationId,
+        kpr.`consumption` AS associatedConsumption,
+        kpr.`is_equal_outer`
+        FROM
+        k_packing_archives kpa
+        LEFT JOIN k_packing_realtion kpr
+        ON kpr.associated_packing_id = kpa.`packing_id`
+        WHERE kpr.main_packing_id = #packingId#
+        ]]>
     </select>
 
     <update id="UPDATE" parameterClass="PackingArchives">

@@ -46,6 +46,8 @@ public class RelationPackingArchives {
 
     private String imagePath;//图片路径
 
+    private int relationId;//关联表主键id
+
     private BigDecimal associatedConsumption;//关联单耗(辅材或外包装单耗)
 
     /**单耗是否和外包装相等 0:不相等 1：相等**/
@@ -201,5 +203,13 @@ public class RelationPackingArchives {
 
     public void setIsEqualOuter(int isEqualOuter) {
         this.isEqualOuter = isEqualOuter;
+    }
+
+    public int getRelationId() {
+        return relationId;
+    }
+
+    public void setRelationId(int relationId) {
+        this.relationId = relationId;
     }
 }
