@@ -184,6 +184,12 @@ public class PackingArchivesAction {
         List<PackingRelation> list = new ArrayList<PackingRelation>();
         if(packingRelations!=null&&packingRelations.length>0){
             list = Arrays.asList(packingRelations);
+            for(PackingRelation packingRelation:packingRelations){
+                //互斥字段，默认为IsEqualOuter=1
+                if(packingRelation.getConsumption()!=null&&packingRelation.getIsEqualOuter()==1){
+                    packingRelation.setConsumption(null);
+                }
+            }
         }
         try{
             result = packingArchivesService.batchAddRelationPacking(list);

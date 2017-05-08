@@ -677,7 +677,7 @@
 				a.customer_product_name like concat('%',#customerProductName#,'%')
 			</isNotEmpty>
 			<isNotEmpty prepend=" AND " property="productName">
-				a.name like concat('%',productName,'%')
+				a.name like concat('%',#productName#,'%')
 			</isNotEmpty>
 			<isNotEmpty prepend=" AND " property="brand">
 				a.brand like concat('%',#brand#,'%')
