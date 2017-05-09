@@ -239,7 +239,7 @@
 //
 // });
 
-var pageSize = 1; // 分页步长
+var pageSize = 5; // 分页步长
 var currentPageCpps = 0; // 采购表格当前页码
 var currentPageCsps = 0; // 销售表格当前页码
 var pdtTreeData = null; // 保存树的数据
@@ -1131,7 +1131,7 @@ function cooUpData() {
     obj.priceSensitivity=$('#priceSensitivity').val();
     obj.loyalty=$('#loyalty').val();
     obj.startCooperationTime=$('#startCooperationTime').val();
-    obj.cooperationDuration=$('#cooperationDuration').val();
+    // obj.cooperationDuration=$('#cooperationDuration').val();
     obj.purchasingSeason=$('#purchasingSeason').val();
     obj.activePeriod=$('#activePeriod').val();
     obj.isFuhuaExclusive=$('#isFuhuaExclusive').val();

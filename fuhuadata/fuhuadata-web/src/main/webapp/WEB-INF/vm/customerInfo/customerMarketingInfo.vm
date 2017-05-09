@@ -182,7 +182,7 @@
                                 <label class="control-label col-xs-2" lang="zh">合作时间</label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input id="cooperationDuration" class="form-control" type="number" value="" disabled />
+                                        <input id="cooperationDuration" class="form-control" type="number" value="" readonly />
                                         <span class="input-group-addon" lang="zh">月</span>
                                     </div>
                                 </div>
