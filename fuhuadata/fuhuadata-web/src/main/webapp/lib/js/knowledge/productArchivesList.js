@@ -316,7 +316,7 @@ CRM.productArchivesList.renderProTreeToAside = function (data) {
         id       = page.asideTree.attr('id'),
         treeObj  = null;
     // console.log(CRM.toArr(data));
-    page.proTreeData = CRM.toArr(data); // 将角色树的数据保存到page对象属性
+    page.proTreeData = CRM.toArr(data); // 将产品树的数据保存到page对象属性
     $.fn.zTree.init(page.asideTree, setting, page.proTreeData);
     // treeObj = $.fn.zTree.getZTreeObj(id);
     // treeObj.expandAll(true); // 默认展开

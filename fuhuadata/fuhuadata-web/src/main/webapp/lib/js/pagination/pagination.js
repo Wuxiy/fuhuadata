@@ -9,21 +9,21 @@
  */
 jQuery.fn.pagination = function(maxentries, opts){
 	opts = jQuery.extend({
-		items_per_page:10,
-		num_display_entries:10,
-		current_page:0,
-		num_edge_entries:0,
-		link_to:"#",
+		items_per_page:10, // 每页显示的条目数
+		num_display_entries:10, // 连续分页主体部分显示的分页条目数
+		current_page:0, // 当前选中的页面
+		num_edge_entries:0, // 两侧显示的首尾分页的条目数
+		link_to:"#", // 分页的链接
 		first_text: "首页",
 		last_text: "尾页",
 		prev_text:"上一页",
 		next_text:"下一页",
 		ellipse_text:"...",
-		prev_show_always:true,
-		next_show_always:true,
+		prev_show_always:true, // 是否显示“前一页”分页按钮
+		next_show_always:true, // 是否显示“下一页”分页按钮
 		callback:function(){return false;}
 	},opts||{});
-	
+
 	return this.each(function() {
 		/**
 		 * Calculate the maximum number of pages
@@ -56,7 +56,8 @@ jQuery.fn.pagination = function(maxentries, opts){
 			var continuePropagation = opts.callback(page_id, panel);
 			if (!continuePropagation) {
 				if (evt.stopPropagation) {
-					evt.stopPropagation();
+                    evt.stopPropagation();
+                    evt.preventDefault(); // 阻止a标签默认行为
 				}
 				else {
 					evt.cancelBubble = true;
@@ -141,17 +142,18 @@ jQuery.fn.pagination = function(maxentries, opts){
 		}
 		/****************** Added ***************/
             /*插入一个文本框，用户输入并回车后进行跳转*/
-			var pagetext = '<input id="pagevalue" size="1" value="'+(current_page+1)+'"type="text">';
-            var toPage='<span><a id="search" href="#">跳转</a></span>';
+			var pagetext = '<input data-id="pagevalue" size="1" value="'+(current_page+1)+'"type="text">';
+            var toPage='<span><a data-id="search" href="#">跳转</a></span>';
 			var total_info='<span>共'+maxentries+'条数据，'+ np +'页</span>';
             $(pagetext).appendTo(panel);
             $(toPage).appendTo(panel);
 			$(total_info).appendTo(panel);
-            $("#search").bind("click",function(evt){
-                var iPageNum = $.trim($("#pagevalue").val()) -1;
+            panel.off("click.skip");
+            panel.on("click.skip", "[data-id='search']", function(evt){
+                var iPageNum = $.trim($('[data-id="pagevalue"]',panel).val()) -1;
                 if(iPageNum<np){pageSelected(iPageNum,evt);}else{alert("超过最大页数");}
             });
-            /****************** Added End ******************/
+            /****************** Added End *******pagination***********/
 		}
 		
 		// Extract current_page from options
@@ -171,7 +173,7 @@ jQuery.fn.pagination = function(maxentries, opts){
 			else {
 				return false;
 			}
-		}
+		};
 		this.nextPage = function(){ 
 			if(current_page < numPages()-1) {
 				pageSelected(current_page+1);
@@ -180,8 +182,8 @@ jQuery.fn.pagination = function(maxentries, opts){
 			else {
 				return false;
 			}
-		}
+		};
 		// When all initialisation is done, draw the links
 		drawLinks();
 	});
-}
+};

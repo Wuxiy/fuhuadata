@@ -11,9 +11,16 @@
                 <!--采购产品表-->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <button id="add_cpps" data-toggle="modal" data-target="#cusPro" class="btn btn-xs btn-primary panel-heading-btn pull-right" lang="zh">
-                            新增
-                        </button>
+                        <div class="btn-group panel-heading-btn pull-right">
+                            <button class="btn btn-xs btn-danger" id="del_cpps" lang="zh">
+                                <span class="glyphicon glyphicon-trash"></span>
+                                删除
+                            </button>
+                            <button class="btn btn-xs btn-primary" id="add_cpps" lang="zh">
+                                <span class="glyphicon glyphicon-plus"></span>
+                                新增
+                            </button>
+                        </div>
                         <h3 class="panel-title" lang="zh">
                             采购产品
                         </h3>
@@ -21,22 +28,69 @@
                     <div class="panel-body">
                         <!--筛选-->
                         <div class="form-horizontal">
-                            <div class="form-group">
-                                <div class="col-xs-2">
-                                    <select id="cpps_year" class="form-control"></select>
+                            <div class="col-xs-5 pull-right">
+                                <div class="form-group">
+                                    <form class="input-group">
+                                        <span class="input-group-addon" lang="zh">产品名称</span>
+                                        <input class="form-control" id="cpps_name" name="productName" type="text">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-xs btn-default" name="searchPdt" type="button" lang="zh">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </div>
+                                        <span class="input-group-addon" lang="zh">采购年份</span>
+                                        <select class="form-control" id="cpps_year" name="year">
+                                            <option value="" selected>全部</option>
+                                        </select>
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-xs btn-default" id="resetCpps" type="reset" lang="zh">重置</button>
+                                        </div>
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-xs btn-primary" id="searchCpps" type="button" lang="zh">搜索</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                         <!--表格-->
-                        <table id="cpps" class="table table-condensed table-bordered table-striped text-center"></table>
+                        <table class="table table-condensed table-bordered table-striped text-center" id="cpps">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" lang="zh">
+                                        <div class="checkbox">
+                                            <label for="checkedAll">
+                                                <input name="checkedAll" type="checkbox">
+                                            </label>
+                                        </div>
+                                    </th>
+                                    <th class="text-center" lang="zh">编号</th>
+                                    <th class="text-center" lang="zh">产品名称</th>
+                                    <th class="text-center" lang="zh">主单位</th>
+                                    <th class="text-center" lang="zh">年需求量</th>
+                                    <th class="text-center" lang="zh">平均单价（美元）</th>
+                                    <th class="text-center" lang="zh">采购年份</th>
+                                    <th class="text-center" lang="zh">查看详情</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <!--分页-->
+                        <div class="pagination" id="cpps_pagination"></div>
                     </div>
                 </div>
                 <!--销售产品表-->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <button id="add_csps" data-toggle="modal" data-target="#cusPro" class="btn btn-xs btn-primary panel-heading-btn pull-right" lang="zh">
-                            新增
-                        </button>
+                        <div class="btn-group panel-heading-btn pull-right">
+                            <button class="btn btn-xs btn-danger" id="del_csps" lang="zh">
+                                <span class="glyphicon glyphicon-trash"></span>
+                                删除
+                            </button>
+                            <button class="btn btn-xs btn-primary" id="add_csps" lang="zh">
+                                <span class="glyphicon glyphicon-plus"></span>
+                                新增
+                            </button>
+                        </div>
                         <h3 class="panel-title" lang="zh">
                             销售产品
                         </h3>
@@ -44,25 +98,70 @@
                     <div class="panel-body">
                         <!--筛选-->
                         <div class="form-horizontal">
-                            <div class="form-group">
-                                <div class="col-xs-2">
-                                    <select id="csps_year" class="form-control"></select>
+                            <div class="col-xs-5 pull-right">
+                                <div class="form-group">
+                                    <form class="input-group">
+                                        <span class="input-group-addon" lang="zh">产品名称</span>
+                                        <input class="form-control" id="csps_name" name="productName" type="text">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-xs btn-default" name="searchPdt" type="button" lang="zh">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </div>
+                                        <span class="input-group-addon" lang="zh">销售年份</span>
+                                        <select class="form-control" id="csps_year" name="year">
+                                            <option value="" selected>全部</option>
+                                        </select>
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-xs btn-default" id="resetCsps" type="reset" lang="zh">重置</button>
+                                        </div>
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-xs btn-primary" id="searchCsps" type="button" lang="zh">搜索</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                         <!--表格-->
-                        <table id="csps" class="table table-condensed table-bordered table-striped text-center"></table>
+                        <table class="table table-condensed table-bordered table-striped text-center" id="csps">
+                            <thead>
+                            <tr>
+                                <th class="text-center" lang="zh">
+                                    <div class="checkbox">
+                                        <label for="checkedAll">
+                                            <input name="checkedAll" type="checkbox">
+                                        </label>
+                                    </div>
+                                </th>
+                                <th class="text-center" lang="zh">编号</th>
+                                <th class="text-center" lang="zh">产品名称</th>
+                                <th class="text-center" lang="zh">主单位</th>
+                                <th class="text-center" lang="zh">年销售量</th>
+                                <th class="text-center" lang="zh">品牌</th>
+                                <th class="text-center" lang="zh">营销手段</th>
+                                <th class="text-center" lang="zh">销售年份</th>
+                                <th class="text-center" lang="zh">查看详情</th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <!--分页-->
+                        <div class="pagination" id="csps_pagination"></div>
                     </div>
                 </div>
                 <!--合作情况-->
-                <div class="panel panel-default panel-edit">
+                <div class="panel panel-default panel-edit" id="cooperation">
                     <div class="panel-heading">
-                        <button data-form-btn="edit" class="btn btn-xs btn-primary panel-heading-btn pull-right" type="button" lang="zh">
+                        <button class="btn btn-xs btn-primary panel-heading-btn pull-right" data-btn="edit" data-view="editHide" type="button" lang="zh">
+                            <span class="glyphicon glyphicon-edit"></span>
                             编辑
                         </button>
-                        <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden">
-                            <button id="cooperation_cl" data-form-btn="cancel" class="btn" lang="zh">取消</button>
-                            <button id="cooperation_up" data-form-btn="save" class="btn btn-primary" lang="zh">保存</button>
+                        <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right">
+                            <button id="cooperation_cl" data-btn="cancel" class="btn btn-default hidden" lang="zh">取消</button>
+                            <button id="cooperation_up" data-btn="save" class="btn btn-primary hidden" lang="zh">
+                                <span class="glyphicon glyphicon-upload"></span>
+                                保存
+                            </button>
                         </div>
                         <h3 class="panel-title" lang="zh">
                             合作情况
@@ -70,34 +169,34 @@
                     </div>
                     <div class="panel-body">
                         <!--表单-->
-                        <div id="cooperation" class="form-horizontal">
+                        <div class="form-horizontal">
                             <div class="form-group">
                                 <label class="control-label col-xs-3" lang="zh">价格敏感度</label>
-                                <div class="col-xs-2"><input id="priceSensitivity" class="form-control" type="text" value="" /></div>
+                                <div class="col-xs-2"><input id="priceSensitivity" class="form-control" type="text" value="" disabled /></div>
                                 <label class="control-label col-xs-2" lang="zh">忠诚度</label>
-                                <div class="col-xs-2"><input id="loyalty" class="form-control" type="text" value="" /></div>
+                                <div class="col-xs-2"><input id="loyalty" class="form-control" type="text" value="" disabled /></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-3" lang="zh">开始合作时间</label>
-                                <div class="col-xs-2"><input id="startCooperationTime" class="form-control" type="date" value="" /></div>
+                                <div class="col-xs-2"><input id="startCooperationTime" class="form-control" type="date" value="" disabled /></div>
                                 <label class="control-label col-xs-2" lang="zh">合作时间</label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input id="cooperationDuration" class="form-control" type="number" value="" />
+                                        <input id="cooperationDuration" class="form-control" type="number" value="" disabled />
                                         <span class="input-group-addon" lang="zh">月</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-3" lang="zh">采购季节</label>
-                                <div class="col-xs-2"><input id="purchasingSeason" class="form-control" type="text" value="" /></div>
+                                <div class="col-xs-2"><input id="purchasingSeason" class="form-control" type="text" value="" disabled /></div>
                                 <label class="control-label col-xs-2" lang="zh">活跃周期</label>
-                                <div class="col-xs-2"><input id="activePeriod" class="form-control" type="text" value="" /></div>
+                                <div class="col-xs-2"><input id="activePeriod" class="form-control" type="text" value="" disabled /></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-3" lang="zh">合作紧密度（福华是否独家供应）</label>
                                 <div class="col-xs-2">
-                                    <select id="isFuhuaExclusive" class="form-control" >
+                                    <select id="isFuhuaExclusive" class="form-control" disabled >
                                         <option value="1" selected lang="zh">是</option>
                                         <option value="0" lang="zh">否</option>
                                     </select>
@@ -105,50 +204,21 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-3" lang="zh">备注</label>
-                                <div class="col-xs-8"><textarea id="cooperationRemark" class="form-control" rows="3" ></textarea></div>
+                                <div class="col-xs-8"><textarea id="cooperationRemark" class="form-control" rows="3" disabled ></textarea></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--批量添加modal-->
-        <div class="modal fade" id="cusPro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+        <!--modal-->
+        <div class="modal fade" id="add_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                            &times;
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-horizontal">
-                            <div class="form-group">
-                                <div class="col-xs-2">
-                                    <select class="form-control" id="year"></select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <table  id="table"class="table table-condensed table-bordered table-striped text-center"></table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="col-xs-2 col-xs-offset-3">
-                            <button id="addMore" data-form-btn="add"  type="button" class="btn btn-block btn-primary" lang="zh">继续添加产品</button>
-                        </div>
-                        <div class="col-xs-2">
-                            <button id="cpps_up" data-form-btn="complete" type="button" class="btn btn-block btn-primary" lang="zh">完成</button>
-                        </div>
-                        <div class="col-xs-2">
-                            <button type="button" class="btn btn-block btn-default" data-dismiss="modal" lang="zh">取消</button>
-                        </div>
-                    </div>
-                </div>
+                <div class="modal-content" id="add_modal_content" ></div>
             </div>
         </div>
+
         <!--树形菜单modal-->
         <div class="modal fade" id="treeModal" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog" style="margin-top: 300px;">
@@ -169,7 +239,7 @@
         </div>
     </div>
 </div>
-##测试
+
 <div class="modal fade" id="errorM" tabindex="-1" role="dialog" data-backdrop="false" aria-hidden="true">
     <div class="modal-dialog" style="width: 370px;margin-top: 168px">
         <div class="modal-content">
@@ -192,12 +262,274 @@
 <input id="customerType" type="hidden" value='$!{customerType}'>
 <input type="hidden" id="fullName" value="$!{fullName}" />
 
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
+## 采购产品新增内容
+<script id="cpps_modal_ct" type="text/html">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            &times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <table class="table table-condensed table-bordered table-striped text-center" id="cpps_pdt_t">
+                        <thead>
+                        <tr>
+                            <th class="col-xs-4 text-center" lang="zh">产品名称</th>
+                            <th class="col-xs-2 text-center" lang="zh">主单位</th>
+                            <th class="col-xs-2 text-center" lang="zh">年需求量</th>
+                            <th class="col-xs-2 text-center" lang="zh">平均单价（美元）</th>
+                            <th class="col-xs-2 text-center" lang="zh">采购年份</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="input-group">
+                                    <input class="form-control" id="cpps_modal_name" name="productName" type="text" readonly>
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-xs btn-default" name="searchPdt" type="button" lang="zh">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><input class="form-control" id="primary_unit" name="primaryUnit" type="text" readonly></td>
+                            <td><input class="form-control" name="annualDemands" type="number" min="0" ></td>
+                            <td><input class="form-control" name="averagePrice" type="number" min="0" step="0.01"></td>
+                            <td><select class="form-control" id="cpps_modal_year" name="year"></select></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-11">
+                    <table class="table table-condensed table-bordered table-striped text-center" id="cpps_spr_t">
+                        <thead>
+                        <tr>
+                            <th class="col-xs-4 text-center" lang="zh">供应商</th>
+                            <th class="col-xs-2 text-center" lang="zh">主单位</th>
+                            <th class="col-xs-2 text-center" lang="zh">年需求量</th>
+                            <th class="col-xs-2 text-center" lang="zh">平均单价（美元）</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr name="supplier">
+                            <td><input class="form-control" name="name" type="text"></td>
+                            <td><input class="form-control" name="primaryUnit" type="text" readonly></td>
+                            <td><input class="form-control" name="amount" type="number"></td>
+                            <td><input class="form-control" name="priceAverage" type="number" step="0.01"></td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="5"><button class="btn btn-block btn-xs btn-default" id="add_spr" lang="zh">添加供应商</button></td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="col-xs-4 col-xs-offset-2">
+            <button class="btn btn-block btn-primary" id="add_more_cpps" type="button" lang="zh">保存并继续添加产品</button>
+        </div>
+        <div class="col-xs-2">
+            <button class="btn btn-block btn-primary" id="cpps_up" type="button" lang="zh">完成</button>
+        </div>
+        <div class="col-xs-2">
+            <button type="button" class="btn btn-block btn-default" data-dismiss="modal" lang="zh">取消</button>
+        </div>
+    </div>
+</script>
+
+## 采购产品添加供应商
+<script id="spr_ct" type="text/html">
+    <tr name="supplier">
+        <td><input class="form-control" name="name" type="text"></td>
+        <td><input class="form-control" name="primaryUnit" type="text" readonly></td>
+        <td><input class="form-control" name="amount" type="number"></td>
+        <td><input class="form-control" name="priceAverage" type="number" step="0.01">
+            <button data-btn="del" type="button" class="close" data-target="tr" style="position: absolute; right: -34px;">
+                <span class="glyphicon glyphicon-remove-sign"></span>
+            </button>
+        </td>
+    </tr>
+</script>
+
+## 采购产品添加供应（百度模板渲染）
+<script id="spr_bt" type="text/html">
+    <%if (data instanceof Array && data.length > 0) {%>
+    <%for (var i=0; i < data.length; i++) {%>
+    <tr name="supplier">
+        <td><input class="form-control" name="name" type="text" data-id="<%=data[i].id%>" value="<%=data[i].name%>"></td>
+        <td><input class="form-control" name="primaryUnit" type="text" value="<%=data[i].measurement%>" readonly></td>
+        <td><input class="form-control" name="amount" type="number" value="<%=data[i].amount%>"></td>
+        <td><input class="form-control" name="priceAverage" type="number" value="<%=data[i].priceAverage%>" step="0.01">
+            <button data-btn="del" type="button" class="close" data-target="tr" style="position: absolute; right: -34px;">
+                <span class="glyphicon glyphicon-remove-sign"></span>
+            </button>
+        </td>
+    </tr>
+    <%}%>
+    <%}%>
+</script>
+
+## 销售产品新增内容
+<script id="csps_modal_ct" type="text/html">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            &times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <table class="table table-condensed table-bordered table-striped text-center" id="csps_pdt_t">
+                        <thead>
+                        <tr>
+                            <th class="col-xs-3 text-center" lang="zh">产品名称</th>
+                            <th class="col-xs-1 text-center" lang="zh">主单位</th>
+                            <th class="col-xs-2 text-center" lang="zh">年销售量</th>
+                            <th class="col-xs-2 text-center" lang="zh">品牌</th>
+                            <th class="col-xs-2 text-center" lang="zh">营销手段</th>
+                            <th class="col-xs-2 text-center" lang="zh">销售年份</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="input-group">
+                                    <input class="form-control" id="csps_modal_name" name="productName" type="text" readonly>
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-xs btn-default" name="searchPdt" type="button" lang="zh">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><input class="form-control" id="primary_unit" name="primaryUnit" type="text" readonly></td>
+                            <td><input class="form-control" name="yearSalesTotal" type="number" min="0" ></td>
+                            <td><input class="form-control" name="brand" type="text"></td>
+                            <td><input class="form-control" name="marketingMethod" type="text"></td>
+                            <td><select class="form-control" id="csps_modal_year" name="year"></select></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-11">
+                    <table class="table table-condensed table-bordered table-striped text-center" id="csps_cty_t">
+                        <thead>
+                        <tr>
+                            <th class="col-xs-4 text-center" lang="zh">销售目的国</th>
+                            <th class="col-xs-2 text-center" lang="zh">主单位</th>
+                            <th class="col-xs-2 text-center" lang="zh">年销售量</th>
+                            <th class="col-xs-2 text-center" lang="zh">所占市场份额</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr name="country">
+                            <td><input class="form-control" name="destinationCountry" type="text"></td>
+                            <td><input class="form-control" name="primaryUnit" type="text" readonly></td>
+                            <td><input class="form-control" name="amount" type="number"></td>
+                            <td>
+                                <div class="input-group">
+                                    <input class="form-control" name="marketShare" type="number" step="0.01">
+                                    <span class="input-group-addon">
+                                        %
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="5"><button class="btn btn-block btn-xs btn-default" id="add_cty" lang="zh">添加销售目的国</button></td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="col-xs-4 col-xs-offset-2">
+            <button class="btn btn-block btn-primary" id="add_more_csps" type="button" lang="zh">保存并继续添加产品</button>
+        </div>
+        <div class="col-xs-2">
+            <button class="btn btn-block btn-primary" id="csps_up" type="button" lang="zh">完成</button>
+        </div>
+        <div class="col-xs-2">
+            <button type="button" class="btn btn-block btn-default" data-dismiss="modal" lang="zh">取消</button>
+        </div>
+    </div>
+</script>
+
+## 销售产品添加目的国
+<script id="cty_ct" type="text/html">
+    <tr name="country">
+        <td><input class="form-control" name="destinationCountry" type="text"></td>
+        <td><input class="form-control" name="primaryUnit" type="text" readonly></td>
+        <td><input class="form-control" name="amount" type="number"></td>
+        <td>
+            <div class="input-group">
+                <input class="form-control" name="marketShare" type="number" step="0.01">
+                <span class="input-group-addon">
+                    %
+                </span>
+            </div>
+            <button data-btn="del" type="button" class="close" data-target="tr" style="position: absolute; right: -34px;">
+                <span class="glyphicon glyphicon-remove-sign"></span>
+            </button>
+        </td>
+    </tr>
+    #*<tr name="supplier">
+        <td><input class="form-control" name="name" type="text"></td>
+        <td><input class="form-control" name="primaryUnit" type="text" readonly></td>
+        <td><input class="form-control" name="amount" type="number"></td>
+        <td><input class="form-control" name="priceAverage" type="number" step="0.01">
+            <button data-btn="del" type="button" class="close" data-target="tr" style="position: absolute; right: -34px;">
+                <span class="glyphicon glyphicon-remove-sign"></span>
+            </button>
+        </td>
+    </tr>*#
+</script>
+
+## 销售产品添加目的国（百度模板渲染）
+<script id="cty_bt" type="text/html">
+    <%if (data instanceof Array && data.length > 0) {%>
+    <%for (var i=0; i < data.length; i++) {%>
+    <tr name="country">
+        <td><input class="form-control" name="destinationCountry" type="text" data-id="<%=data[i].id%>" value="<%=data[i].destinationCountry%>"></td>
+        <td><input class="form-control" name="primaryUnit" type="text" value="<%=data[i].measurement%>" readonly></td>
+        <td><input class="form-control" name="amount" type="number" value="<%=data[i].yearSales%>"></td>
+        <td>
+            <div class="input-group">
+                <input class="form-control" name="marketShare" type="number" value="<%=data[i].marketShare%>" step="0.01">
+                <span class="input-group-addon">
+                    %
+                </span>
+            </div>
+            <button data-btn="del" type="button" class="close" data-target="tr" style="position: absolute; right: -34px;">
+                <span class="glyphicon glyphicon-remove-sign"></span>
+            </button>
+        </td>
+    </tr>
+    <%}%>
+    <%}%>
+</script>
+
+##<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
+##<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 ##<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerMarketingAjax.js"></script>
+##<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerMarketingAjax.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerMarketingInteraction.js"></script>
 
 

@@ -340,7 +340,7 @@
         $("#pagination").pagination(total,{
             items_per_page : pageSize,
             num_edge_entries : 3,
-            num_display_entries : 10,
+            num_display_entries : 5,
             callback:callback
         });
     }
