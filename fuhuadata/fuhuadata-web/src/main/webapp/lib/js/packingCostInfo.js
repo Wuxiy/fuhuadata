@@ -8,6 +8,7 @@
     var url = basePath+'/packingArchives/getPackingArchivesById?id='+id;
 
     var table = $('#packing_relate_table');
+    var modalrelatetable = $('#modal_relate_table');
     var imgGroup = document.getElementById('imgGroup');
 
 
@@ -333,14 +334,13 @@ $('#addrelate').on('click',function(){
         cellcheckboxlist.push($(this).val());
     })
     cellcheckboxlists = cellcheckboxlist.join(',');
-    console.log(cellcheckboxlists);
 
     $('#tree').creatTree(basePath + '/packingCategory/CategoryTree?parentIds=2,3');
-    $('#tree').filtrateData(basePath + '/packingArchives/getPackingArchivesByPId',"modal_relate_table","packingInfoModal");
+    /*$('#tree').filtrateData(basePath + '/packingArchives/getPackingArchivesByPId',"modal_relate_table","packingInfoModal");*/
     jQuery.ajax({
         url:basePath + '/packingArchives/getPackingArchivesByPId',
         type:'POST',
-        data:{id:2}
+        data:{id:0}
     }).done(packingInfoModalList);
 
     /**
@@ -350,32 +350,56 @@ $('#addrelate').on('click',function(){
         var ResultData = data.data;
         var tr;
         if(ResultData!=undefined){
-            var parent = $('#modal_relate_table');
-            parent.html('');
+            modalrelatetable.html('');
             jQuery.each(ResultData,function(n,item){
-                if((','+cellcheckboxlists+",").indexOf(item.packingId)>-1){
-                    tr += '<tr><td><input type="checkbox" value="'+item.packingId+'" data-categoryId="'+item.bigCategoryId+'" name="modal_cellcheckbox" checked/></td>';
+                if(contains(cellcheckboxlist,item.packingId) == true){
+                    tr += '<tr data-categoryId="'+item.bigCategoryId+'" data-smallCategoryId="'+item.smallCategoryId+'"><td><input type="checkbox" value="'+item.packingId+'" data-categoryId="'+item.bigCategoryId+'" data-smallCategoryId="'+item.smallCategoryId+'" name="modal_cellcheckbox" checked/></td>';
                 }else{
-                    tr += '<tr><td><input type="checkbox" value="'+item.packingId+'" data-categoryId="'+item.bigCategoryId+'" name="modal_cellcheckbox"/></td>';
+                    tr += '<tr data-categoryId="'+item.bigCategoryId+'" data-smallCategoryId="'+item.smallCategoryId+'"><td><input type="checkbox" value="'+item.packingId+'" data-categoryId="'+item.bigCategoryId+'" data-smallCategoryId="'+item.smallCategoryId+'" name="modal_cellcheckbox"/></td>';
                 }
                 tr += '<td>'+ifEmpty(item.packingId)+'</td><td>'+ifEmpty(item.packName)+'</td>';
                 tr += '<td>'+ifEmpty(item.spec)+'</td><td>'+ifEmpty(item.size)+'</td>';
                 tr += '<td>'+ifEmpty(item.quality)+'</td><td>'+ifEmpty(item.unitPrice)+'</td>';
                 if((','+cellcheckboxlists+",").indexOf(item.packingId)>-1){
-                    tr += '<td><input class="form-control" value="'+ifEmpty(item.consumption)+'" name="modal_consumption"></td>';
+                    tr += '<td><input class="form-control" value="'+ifEmpty(item.associatedConsumption)+'" name="modal_consumption"></td>';
                 }else{
-                    tr += '<td><input class="form-control" value="'+ifEmpty(item.consumption)+'" name="modal_consumption" disabled></td>';
+                    tr += '<td><input class="form-control" value="'+ifEmpty(item.associatedConsumption)+'" name="modal_consumption" disabled></td>';
                 }
                 tr += '<td class="text-center"><input type="checkbox" name="modal_isEqualOuter" disabled/></td>';
                 tr += '<td>'+(ifEmpty(item.status)==1?'启用':'禁用')+'</td></tr>';
 
             });
-            $(tr).appendTo(parent);
+            $(tr).appendTo(modalrelatetable);
         }
     }
 
     $('#addField').modal('show');
 })
+
+$(document).on('click','li[id]>a',function(e){
+    modalrelatetable.find('tr').hide();
+
+    e.preventDefault();
+    var a = $(e.target);
+    var classid = a.parent('li').attr('id');
+    if(classid == 2||classid == 3){
+        modalrelatetable.find('tr[data-categoryId="'+classid+'"]').show();
+    }else{
+        modalrelatetable.find('tr[data-smallCategoryId="'+classid+'"]').show();
+    }
+
+})
+
+//确认数组
+function contains(arr, obj) {
+    var i = arr.length;
+    while (i--) {
+        if (arr[i] == obj.toString()) {
+            return true;
+        }
+    }
+    return false;
+}
 
 //互斥处理
 $(document).on('change','[name="modal_cellcheckbox"]',function(){

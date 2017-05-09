@@ -117,9 +117,9 @@
                         tr += '<td>'+ifEmpty(item.spec)+'</td><td>'+ifEmpty(item.size)+'</td>';
                         tr += '<td>'+ifEmpty(item.quality)+'</td><td>'+ifEmpty(item.unitPrice)+'</td>';
                         if((','+cellcheckboxlists+",").indexOf(item.packingId)>-1){
-                            tr += '<td><input class="form-control" value="'+ifEmpty(item.consumption)+'" name="modal_consumption"></td>';
+                            tr += '<td><input class="form-control" value="'+ifEmpty(item.associatedConsumption)+'" name="modal_consumption"></td>';
                         }else{
-                            tr += '<td><input class="form-control" value="'+ifEmpty(item.consumption)+'" name="modal_consumption" disabled></td>';
+                            tr += '<td><input class="form-control" value="'+ifEmpty(item.associatedConsumption)+'" name="modal_consumption" disabled></td>';
                         }
                         tr += '<td class="text-center"><input type="checkbox" name="modal_isEqualOuter" disabled/></td>';
                         tr += '<td>'+(ifEmpty(item.status)==1?'启用':'禁用')+'</td></tr>';
