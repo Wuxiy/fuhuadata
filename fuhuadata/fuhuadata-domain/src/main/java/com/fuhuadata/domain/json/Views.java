@@ -12,7 +12,9 @@ package com.fuhuadata.domain.json;
  */
 public class Views {
 
-    public interface Editable {}
+    public interface Summary {}
+
+    public interface Editable extends Summary {}
 
     public interface Viewable extends Editable {}
 
