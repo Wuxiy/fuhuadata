@@ -247,7 +247,7 @@ $('.packingAdd').on('click',function(){
         data:JSON.stringify(data),
         success:function(){
             alert("添加成功");
-            location.reload();
+            window.location.href = basePath + '/packingArchives/packingArchivesList';
         }
     })
 })

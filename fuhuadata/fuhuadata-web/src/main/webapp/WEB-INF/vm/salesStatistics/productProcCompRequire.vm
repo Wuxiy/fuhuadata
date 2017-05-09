@@ -460,6 +460,7 @@
                     }
                     if(productRequire.auxiliaryMaterialIds){
                          auxiliaryMaterialIds = productRequire.auxiliaryMaterialIds;
+                         console.log(auxiliaryMaterialIds);
                     }
                     if(productRequire.mainPackingType!=undefined){
                         $('#mainPackingType').attr('data-id',productRequire.mainPackingId);

@@ -278,7 +278,7 @@
                     }
                     if(documentaryRequire.qualityTestingReport!=undefined&&documentaryRequire.qualityTestingReport == 1){
                         $('#qualityTestingReport').attr('checked',true);
-                        $('#reportCompanyTitle').attr('data-control','on');
+                        $('#reportCompanyTitle').attr('data-control','');
                     }
                     if(documentaryRequire.guaranteeSlip!=undefined&&documentaryRequire.guaranteeSlip == 1){
                         $('#guaranteeSlip').attr('checked',true);

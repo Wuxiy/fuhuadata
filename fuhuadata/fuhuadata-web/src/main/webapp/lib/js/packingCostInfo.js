@@ -5,8 +5,9 @@
     var id = $('#id').val();
     var bid = $('#bid').val();
     var sid = $('#sid').val();
+    var url = basePath+'/packingArchives/getPackingArchivesById?id='+id;
 
-    var table = document.getElementById('packing_relate_table');
+    var table = $('#packing_relate_table');
     var imgGroup = document.getElementById('imgGroup');
 
 
@@ -16,7 +17,6 @@
 
 $(document).ready(function(){
     $('.imagesbtn').hide();
-    var url = basePath+'/packingArchives/getPackingArchivesById?id='+id;
     jQuery.ajax({
         type:'GET',
         url:url,
@@ -58,19 +58,25 @@ $(document).ready(function(){
 
             if(ResultData.nodes){
                 var node = ResultData.nodes;
+                var table_html = '';
                 for(var i=0;i<node.length;i++){
-                    table.innerHTML += '<tr>'+
-                        '<td class="text-center"><input type="checkbox" name="cellcheckbox" value="'+node[i].packingId+'" /></td>'+
-                        '<td class="col-xs-2 text-center text-middle">'+ifEmpty(node[i].packingId)+'</td>'+
-                        '<td class="col-xs-2 text-center text-middle">'+ifEmpty(node[i].packName)+'</td>'+
-                        '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].spec)+'</td>'+
-                        '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].size)+'</td>'+
-                        '<td class="col-xs-2 text-center text-middle">'+ifEmpty(node[i].quality)+'</td>'+
-                        '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].unitPrice)+'</td>'+
-                        '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].consumption)+'</td>'+
-                        '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].status)+'</td>'
-                    '</tr>';
+                    table_html += '<tr><td class="text-center"><input type="checkbox" name="cellcheckbox" value="'+node[i].packingId+'" /></td>';
+                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].packingId)+'</td>';
+                    table_html += '<td class="col-xs-2 text-center text-middle">'+ifEmpty(node[i].packName)+'</td>';
+                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].spec)+'</td>';
+                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].size)+'</td>';
+                    table_html += '<td class="col-xs-2 text-center text-middle">'+ifEmpty(node[i].quality)+'</td>';
+                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].unitPrice)+'</td>';
+                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].associatedConsumption)+'</td>';
+                    if(ifEmpty(node[i].isEqualOuter) == 1){
+                        table_html += '<td class="text-center"><input type="checkbox" name="isEqualOuter" checked/></td>';
+                    }else{
+                        table_html += '<td class="text-center"><input type="checkbox" name="isEqualOuter"/></td>';
+                    }
+                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].status)+'</td></tr>';
+
                 }
+                $(table_html).appendTo(table);
             }
 
             if(ResultData.imagePath){
@@ -318,13 +324,86 @@ $('#delete').on('click',function(){
     }
 })
 
-//添加关联
+//新增关联
+var cellcheckboxlists;//关联id数组
+$('#addrelate').on('click',function(){
+    var cellcheckbox = $('[name="cellcheckbox"]');
+    var cellcheckboxlist = [];
+    cellcheckbox.each(function(){
+        cellcheckboxlist.push($(this).val());
+    })
+    cellcheckboxlists = cellcheckboxlist.join(',');
+    console.log(cellcheckboxlists);
+
+    $('#tree').creatTree(basePath + '/packingCategory/CategoryTree?parentIds=2,3');
+    $('#tree').filtrateData(basePath + '/packingArchives/getPackingArchivesByPId',"modal_relate_table","packingInfoModal");
+    jQuery.ajax({
+        url:basePath + '/packingArchives/getPackingArchivesByPId',
+        type:'POST',
+        data:{id:2}
+    }).done(packingInfoModalList);
+
+    /**
+     *packingInfoModalList
+     */
+    function packingInfoModalList(data){
+        var ResultData = data.data;
+        var tr;
+        if(ResultData!=undefined){
+            var parent = $('#modal_relate_table');
+            parent.html('');
+            jQuery.each(ResultData,function(n,item){
+                if((','+cellcheckboxlists+",").indexOf(item.packingId)>-1){
+                    tr += '<tr><td><input type="checkbox" value="'+item.packingId+'" data-categoryId="'+item.bigCategoryId+'" name="modal_cellcheckbox" checked/></td>';
+                }else{
+                    tr += '<tr><td><input type="checkbox" value="'+item.packingId+'" data-categoryId="'+item.bigCategoryId+'" name="modal_cellcheckbox"/></td>';
+                }
+                tr += '<td>'+ifEmpty(item.packingId)+'</td><td>'+ifEmpty(item.packName)+'</td>';
+                tr += '<td>'+ifEmpty(item.spec)+'</td><td>'+ifEmpty(item.size)+'</td>';
+                tr += '<td>'+ifEmpty(item.quality)+'</td><td>'+ifEmpty(item.unitPrice)+'</td>';
+                if((','+cellcheckboxlists+",").indexOf(item.packingId)>-1){
+                    tr += '<td><input class="form-control" value="'+ifEmpty(item.consumption)+'" name="modal_consumption"></td>';
+                }else{
+                    tr += '<td><input class="form-control" value="'+ifEmpty(item.consumption)+'" name="modal_consumption" disabled></td>';
+                }
+                tr += '<td class="text-center"><input type="checkbox" name="modal_isEqualOuter" disabled/></td>';
+                tr += '<td>'+(ifEmpty(item.status)==1?'启用':'禁用')+'</td></tr>';
+
+            });
+            $(tr).appendTo(parent);
+        }
+    }
+
+    $('#addField').modal('show');
+})
+
+//互斥处理
+$(document).on('change','[name="modal_cellcheckbox"]',function(){
+    if($(this).attr('checked')){
+        $(this).parents('tr').find('td').eq(7).find('input[name="modal_consumption"]').attr('disabled',false);
+        $(this).parents('tr').find('td').eq(8).find('input[name="modal_isEqualOuter"]').attr('disabled',false);
+    }else{
+        $(this).parents('tr').find('td').eq(7).find('input[name="modal_consumption"]').attr('disabled',true);
+        $(this).parents('tr').find('td').eq(8).find('input[name="modal_isEqualOuter"]').attr('disabled',true);
+        $(this).parents('tr').find('td').eq(8).find('input[name="modal_isEqualOuter"]').attr('checked',false);
+    }
+})
+$(document).on('change','[name="modal_isEqualOuter"]',function(){
+    if($(this).attr('checked')){
+        $(this).parents('tr').find('td').eq(7).find('input[name="modal_consumption"]').attr('disabled',true);
+        $(this).parents('tr').find('td').eq(7).find('input[name="modal_consumption"]').val('');
+    }else{
+        $(this).parents('tr').find('td').eq(7).find('input[name="modal_consumption"]').attr('disabled',false);
+    }
+})
+
+//添加关联完成
 $('#finish_relate').on('click',function(){
     var ids = new Array();
     $("input[name='modal_cellcheckbox']:checked").each(function(){
         ids.push($(this).val());
     })
-
+    getdata();
     if(ids.length > 0){
         var msg = "确认要为主材添加这些关联吗？";
         if(confirm(msg)){
@@ -336,11 +415,90 @@ $('#finish_relate').on('click',function(){
                 type:'POST',
                 dataType:"json",
                 contentType:"application/json",
-                data:JSON.stringify(data),
+                data:getdata(),
                 success:function(){
                     alert("添加关联成功！");
                     $('#addField').modal('hide');
-                    location.reload();
+
+                    $('.imagesbtn').hide();
+                    jQuery.ajax({
+                        type:'GET',
+                        url:basePath+'/packingArchives/getPackingArchivesById?id='+id,
+                        success:function(result){
+                            var ResultData = result.data;
+
+                            if(ResultData.pack){
+                                var pack = ResultData.pack;
+                                var arr = pack.suitableType;
+                                var arr2 = arr.split(',');
+                                $.each(arr2,function(index,suitname){
+                                    $("input[name='check']").each(function(){
+                                        if($(this).val() == suitname){
+                                            $(this).attr('checked',true);
+                                        }
+                                    })
+                                })
+                                $('#packName').val(ifEmpty(pack.packName));
+                                $('#spec').val(ifEmpty(pack.spec));
+                                $('#size').val(ifEmpty(pack.size));
+                                $('#quality').val(ifEmpty(pack.quality));
+                                $('#qualityIndex').val(ifEmpty(pack.qualityIndex));
+                                $('#qualityTargetValue').val(ifEmpty(pack.qualityTargetValue));
+                                $('#unitPrice').val(ifEmpty(pack.unitPrice));
+                                $('#consumption').val(ifEmpty(pack.consumption));
+                                $('#priceEndDate').val(ifEmpty(pack.priceEndDate));
+                                $('#status').val(ifEmpty(pack.status));
+                                $('#bRemarks').val(ifEmpty(pack.bRemarks));
+
+                                $('#packpackingId').text(ifEmpty(pack.packingId));
+                                $('#packpackName').text(ifEmpty(pack.packName));
+                                $('#packspec').text(ifEmpty(pack.spec));
+                                $('#packsize').text(ifEmpty(pack.size));
+                                $('#packquality').text(ifEmpty(pack.quality));
+                                $('#packunitPrice').text(ifEmpty(pack.unitPrice));
+                                $('#packconsumption').text(ifEmpty(pack.consumption));
+                                $('#packstatus').text(ifEmpty(pack.status));
+                            }
+
+                            if(ResultData.nodes){
+                                var node = ResultData.nodes;
+                                var table_html = '';
+                                table.html('');
+                                for(var i=0;i<node.length;i++){
+                                    table_html += '<tr><td class="text-center"><input type="checkbox" name="cellcheckbox" value="'+node[i].packingId+'" /></td>';
+                                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].packingId)+'</td>';
+                                    table_html += '<td class="col-xs-2 text-center text-middle">'+ifEmpty(node[i].packName)+'</td>';
+                                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].spec)+'</td>';
+                                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].size)+'</td>';
+                                    table_html += '<td class="col-xs-2 text-center text-middle">'+ifEmpty(node[i].quality)+'</td>';
+                                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].unitPrice)+'</td>';
+                                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].consumption)+'</td>';
+                                    table_html += '<td class="text-center"><input type="checkbox" name="isEqualOuter"/></td>';
+                                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].status)+'</td></tr>';
+
+                                }
+                                $(table_html).appendTo(table);
+                            }
+
+                            if(ResultData.imagePath){
+                                var reData = eval(ResultData.imagePath);
+                                console.log(reData);
+                                for(var j=0;j<reData.length;j++){
+                                    imgGroup.innerHTML += '<div class="col-xs-3">'+
+                                        '<button type="button" class="close" name="close" style="position: absolute;top:3px;left:0;" disabled>×</button>'+
+                                        '<div class="col-xs-12 thumbnail">'+
+                                        '<img style="height: 240px;" data-toggle="modal" data-target="#imgModal" data-name="" src="'+basePath + reData[j].path+'" alt="请点击添加图片" class="imgpath">'+
+                                        '<div class="input-group col-xs-10 col-xs-offset-1" style="padding-top: 5px">'+
+                                        '<input class="form-control text-center filename" data-url="'+reData[j].path+'" style="" value="'+reData[j].name+'" disabled/>'+
+                                        '<div class="input-group-btn"><button data-btn="modification" class="btn btn-xs btn-default modifyimg" type="button" disabled>图片修改</button></div>'+
+                                        '</div>'+
+                                        '</div>'+
+                                        '</div>';
+                                }
+                            }
+
+                        }
+                    });
                     $('a[href="#Packrelate"]').tab('show');
                 }
             })
@@ -349,6 +507,33 @@ $('#finish_relate').on('click',function(){
         alert('还未选择要添加的关联');
     }
 })
+
+//获取数据
+function getdata(){
+    var arr = [];
+    var tr = $('[name="modal_cellcheckbox"]:checked');
+    tr.each(function () {
+        var td = $(this).parents('tr').find('td'),
+            obj = {
+                "mainPackingId":id,
+                "categoryId":td.eq(0).find('input[name="modal_cellcheckbox"]').attr('data-categoryid'),
+                "associatedPackingId":td.eq(0).find('input[name="modal_cellcheckbox"]').val(),
+                "consumption":td.eq(7).find('input[name="modal_consumption"]').val(),
+                "isEqualOuter":checked(td.eq(8).find('input[name="modal_isEqualOuter"]'))
+            };
+        /*if((td.eq(0).attr('data-fid')== undefined){
+
+         }*/
+        arr.push(obj);
+    })
+    console.log(arr);
+    return JSON.stringify(arr);
+}
+//checked选择
+function checked(id) {
+    var i = id.attr('checked')?1 : 0;
+    return i;
+}
 
 function ifEmpty(data) {
     return data==undefined?'':data;
