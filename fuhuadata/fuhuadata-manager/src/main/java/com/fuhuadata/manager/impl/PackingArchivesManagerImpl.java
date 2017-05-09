@@ -95,7 +95,9 @@ public class PackingArchivesManagerImpl implements PackingArchivesManager {
     }
 
     @Override
-    public boolean batchAddRelationPacking(List<PackingRelation> list) {
+    @Transactional
+    public boolean batchAddRelationPacking(int mainPackingId,List<PackingRelation> list) {
+        packingArchivesDao.deleteRelationPacking(mainPackingId);
         return packingArchivesDao.batchAddRelationPacking(list)==list.size()?true:false;
     }
 

@@ -219,10 +219,10 @@ public class PackingArchivesServiceImpl implements PackingArchivesService {
      * @return
      */
     @Override
-    public Result batchAddRelationPacking(List<PackingRelation> list) {
+    public Result batchAddRelationPacking(int mainPackingId,List<PackingRelation> list) {
         Result result = new Result();
         try {
-            result.setSuccess(packingArchivesManager.batchAddRelationPacking(list));
+            result.setSuccess(packingArchivesManager.batchAddRelationPacking(mainPackingId,list));
         } catch (Exception e) {
             result.setSuccess(false);
             // 打印日志

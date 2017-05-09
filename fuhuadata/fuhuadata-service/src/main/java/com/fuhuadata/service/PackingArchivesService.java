@@ -40,7 +40,7 @@ public interface PackingArchivesService {
      * @param list
      * @return
      */
-    public Result batchAddRelationPacking(List<PackingRelation> list);
+    public Result batchAddRelationPacking(int mainPackingId,List<PackingRelation> list);
 
     /**
      * 根据主材id删除全部关联

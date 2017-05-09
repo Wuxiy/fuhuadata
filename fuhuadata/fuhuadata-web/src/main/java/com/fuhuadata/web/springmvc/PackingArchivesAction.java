@@ -9,7 +9,6 @@ import com.fuhuadata.service.BCodeService;
 import com.fuhuadata.service.PackingArchivesService;
 import com.fuhuadata.vo.PackingArchivesVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -181,8 +180,10 @@ public class PackingArchivesAction {
     @ResponseBody
     public ResultPojo addRelation(@RequestBody PackingRelation[] packingRelations) {
         Result result = new Result();
+        int mainPackingId=0;
         List<PackingRelation> list = new ArrayList<PackingRelation>();
         if(packingRelations!=null&&packingRelations.length>0){
+            mainPackingId = packingRelations[0].getMainPackingId();
             list = Arrays.asList(packingRelations);
             for(PackingRelation packingRelation:packingRelations){
                 //互斥字段，默认为IsEqualOuter=1
@@ -192,7 +193,7 @@ public class PackingArchivesAction {
             }
         }
         try{
-            result = packingArchivesService.batchAddRelationPacking(list);
+            result = packingArchivesService.batchAddRelationPacking(mainPackingId,list);
             result.setMessage("新增关联成功");
         }catch (Exception e){
             result.setSuccess(false);

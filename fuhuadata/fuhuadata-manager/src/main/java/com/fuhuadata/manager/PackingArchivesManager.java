@@ -38,7 +38,7 @@ public interface PackingArchivesManager {
      * @param list
      * @return
      */
-    public boolean batchAddRelationPacking(List<PackingRelation> list);
+    public boolean batchAddRelationPacking(int mainPackingId,List<PackingRelation> list);
 
     /**
      * 根据主材id删除全部关联
