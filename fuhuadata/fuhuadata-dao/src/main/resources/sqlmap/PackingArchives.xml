@@ -217,7 +217,7 @@
         kpa.`image_path` imagePath,
         kpr.id relationId,
         kpr.`consumption` AS associatedConsumption,
-        kpr.`is_equal_outer`
+        kpr.`is_equal_outer` isEqualOuter
         FROM
         k_packing_archives kpa
         LEFT JOIN k_packing_realtion kpr
