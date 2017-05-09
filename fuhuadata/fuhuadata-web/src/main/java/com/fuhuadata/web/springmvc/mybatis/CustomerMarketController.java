@@ -49,11 +49,11 @@ public class CustomerMarketController extends BaseController<CustomerPurchasePro
     @RequestMapping(value = "/purchase/products", method = RequestMethod.GET)
     @ResponseBody
     @SystemLogAnnotation(module = "customer-market", methods = "listPurchaseProduct")
-    public ResultPojo listPurchaseProduct(QueryCustomerPurchaseProduct query) {
+    public ResultPojo listPurchaseProduct(QueryCustomerPurchaseProduct query, int index) {
 
         Result<PageInfo<CustomerPurchaseProduct>> result = Result.newResult(false);
 
-        query.setIndex(query.getIndex() + 1);
+        query.setIndex(index + 1);
         PageInfo<CustomerPurchaseProduct> products = purchaseProductService.listProducts(query);
         result.addDefaultModel(products);
         result.setSuccess(true);
@@ -150,7 +150,7 @@ public class CustomerMarketController extends BaseController<CustomerPurchasePro
     @ResponseBody
     @SystemLogAnnotation(module = "customer-market-coop", methods = "updateCoopInfo")
     public ResultPojo updateCoopInfo(@PathVariable("customerId") Integer customerId,
-                                     CustomerBaseInfo customerBaseInfo) {
+                                     @JsonView(Views.Viewable.class) @RequestBody CustomerBaseInfo customerBaseInfo) {
 
         Result<Integer> result = Result.newResult(false);
 
