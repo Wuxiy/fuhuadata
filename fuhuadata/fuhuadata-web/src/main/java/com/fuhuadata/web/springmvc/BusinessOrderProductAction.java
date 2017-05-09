@@ -206,19 +206,19 @@ public class BusinessOrderProductAction {
     public Map<String,Object> getProductRequireInfo(Integer productRequireId){
         Map<String,Object> map = new HashMap<String,Object>();
         //存放外包装数据
-        List<PackingArchives> outer = new ArrayList<PackingArchives>();
+        List<RelationPackingArchives> outer = new ArrayList<RelationPackingArchives>();
         //存放辅材数据
-        List<PackingArchives> auxiliary = new ArrayList<PackingArchives>();
+        List<RelationPackingArchives> auxiliary = new ArrayList<RelationPackingArchives>();
         BusinessProductRequire businessProductRequire = this.businessProductRequireService.getOneByQuery(productRequireId,null);
         map.put("productRequire",businessProductRequire);
         if(businessProductRequire!=null){
             //如果查询到有信息，则需要查询该主材的型号列表和辅材列表便于前端渲染已选型号和辅材外包装
             PackingArchivesVO pao = packingArchivesService.getPackingArchivesById(businessProductRequire.getMainPackingId()).getModel();
             map.put("modelist",pao.getImagePath());
-            List<PackingArchives> allList = pao.getNodes();
+            List<RelationPackingArchives> allList = pao.getNodes();
             if(allList!=null){
                 //由于主材关联的辅材和外包装id集中存在一个字段中，所以allList中既包含辅材也包含外包装在此需做区分
-                for(PackingArchives pa:allList){
+                for(RelationPackingArchives pa:allList){
                     //外包装的id为2
                     if(pa.getBigCategoryId()==2){
                         outer.add(pa);
@@ -243,17 +243,17 @@ public class BusinessOrderProductAction {
     public Map<String,Object> getPackingArchivesInfo(Integer packingArchivesId){
         Map<String,Object> map = new HashMap<String,Object>();
         //存放外包装数据
-        List<PackingArchives> outer = new ArrayList<PackingArchives>();
+        List<RelationPackingArchives> outer = new ArrayList<RelationPackingArchives>();
         //存放辅材数据
-        List<PackingArchives> auxiliary = new ArrayList<PackingArchives>();
+        List<RelationPackingArchives> auxiliary = new ArrayList<RelationPackingArchives>();
         PackingArchivesVO pao = packingArchivesService.getPackingArchivesById(packingArchivesId).getModel();
         map.put("modelist",pao.getImagePath());
         pao.setImagePath(null);
         map.put("main",pao.getPack());
-        List<PackingArchives> allList = pao.getNodes();
+        List<RelationPackingArchives> allList = pao.getNodes();
         if(allList!=null){
             //由于主材关联的辅材和外包装id集中存在一个字段中，所以allList中既包含辅材也包含外包装在此需做区分
-            for(PackingArchives pa:allList){
+            for(RelationPackingArchives pa:allList){
                 //外包装的id为2
                 if(pa.getBigCategoryId()==2){
                     outer.add(pa);

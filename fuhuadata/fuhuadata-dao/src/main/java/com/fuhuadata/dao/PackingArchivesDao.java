@@ -1,7 +1,9 @@
 package com.fuhuadata.dao;
 
 import com.fuhuadata.domain.PackingArchives;
+import com.fuhuadata.domain.PackingRelation;
 import com.fuhuadata.domain.query.PackingArchivesQuery;
+import com.fuhuadata.vo.RelationPackingArchives;
 
 import java.util.List;
 
@@ -69,5 +71,33 @@ public interface PackingArchivesDao {
      * @return
      */
     public int count(PackingArchivesQuery packingArchivesQuery);
+
+    /**
+     * 批量新增关联包材档案
+     * @param list
+     * @return
+     */
+    public int batchAddRelationPacking(List<PackingRelation> list);
+
+    /**
+     * 根据主材id删除全部关联
+     * @param mainPackingId
+     * @return
+     */
+    public int deleteRelationPacking(int mainPackingId);
+
+    /**
+     * 根据关联表主键ids删除关联
+     * @param ids
+     * @return
+     */
+    public int deleteRelationPackingByIds(String ids);
+
+    /**
+     * 获取关联包材列表档案
+     * @param packingId
+     * @return
+     */
+    public List<RelationPackingArchives> getRelationPackingById(int packingId);
 
 }

@@ -704,7 +704,7 @@
              <include refid="COST-AND-PROFIT-INLINE"/>
          </isParameterPresent>
             GROUP BY
-            cvr.customer_id) b ON b.customer_id = a.customer_id
+            cvr.customer_id) b ON b.customer_id = base.customer_id
             <isParameterPresent>
                 <include refid="COST-PROFIT-QUERY-COMMON"/>
                 <isNotEmpty prepend=" AND " property="orderBy">

@@ -11,13 +11,10 @@ import com.fuhuadata.vo.CategoryVO;
 import com.fuhuadata.vo.CustomerBaseInfoLinkman;
 import com.fuhuadata.vo.CustomerBaseInfoVO;
 import com.fuhuadata.vo.DataArchive.Countryzone;
-import com.fuhuadata.vo.DataArchive.Custclass;
 import com.fuhuadata.vo.DataArchive.Formatdoc;
 import com.fuhuadata.vo.DataArchive.Timezone;
-import com.ibatis.sqlmap.client.SqlMapClient;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
-import org.springframework.stereotype.Repository;
 
 /**
  * @author wangbo

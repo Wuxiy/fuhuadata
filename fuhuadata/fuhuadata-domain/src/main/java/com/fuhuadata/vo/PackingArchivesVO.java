@@ -12,7 +12,7 @@ import java.util.List;
 public class PackingArchivesVO {
     private List<ImagePathVO> imagePath;//主材图片
     private PackingArchives pack;//主材
-    private List<PackingArchives> nodes;//关联包材
+    private List<RelationPackingArchives> nodes;//关联包材
 
     public PackingArchives getPack() {
         return pack;
@@ -22,19 +22,19 @@ public class PackingArchivesVO {
         this.pack = pack;
     }
 
-    public List<PackingArchives> getNodes() {
+    public List<RelationPackingArchives> getNodes() {
         return nodes;
     }
 
-    public void setNodes(List<PackingArchives> nodes) {
+    public void setNodes(List<RelationPackingArchives> nodes) {
         this.nodes = nodes;
     }
 
-    public void addNodes(PackingArchives packingArchives){
+    public void addNodes(RelationPackingArchives relationPackingArchives){
         if(this.nodes==null){
-            this.nodes=new ArrayList<PackingArchives>();
+            this.nodes=new ArrayList<RelationPackingArchives>();
         }
-        this.nodes.add(packingArchives);
+        this.nodes.add(relationPackingArchives);
     }
 
     public void addImagePath(ImagePathVO imagePathVO){

@@ -3,11 +3,13 @@ package com.fuhuadata.manager.impl;
 import com.fuhuadata.dao.PackingArchivesDao;
 import com.fuhuadata.dao.PreparationProcessCostDao;
 import com.fuhuadata.domain.PackingArchives;
+import com.fuhuadata.domain.PackingRelation;
 import com.fuhuadata.domain.PreparationProcessCost;
 import com.fuhuadata.domain.query.PackingArchivesQuery;
 import com.fuhuadata.domain.query.PreparationProcessCostQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.PackingArchivesManager;
+import com.fuhuadata.vo.RelationPackingArchives;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -92,6 +94,27 @@ public class PackingArchivesManagerImpl implements PackingArchivesManager {
         return packingArchivesDao.count(packingArchivesQuery);
     }
 
+    @Override
+    public boolean batchAddRelationPacking(List<PackingRelation> list) {
+        return packingArchivesDao.batchAddRelationPacking(list)==list.size()?true:false;
+    }
+
+    @Override
+    public boolean deleteRelationPacking(int mainPackingId) {
+        return packingArchivesDao.deleteRelationPacking(mainPackingId)>=1?true:false;
+    }
+    public boolean deleteRelationPackingByIds(String ids) {
+        String[] str = ids.split(",");
+        int re =  packingArchivesDao.deleteRelationPackingByIds(ids);
+        return re==str.length?true:false;
+    }
+
+
+    @Override
+    public List<RelationPackingArchives> getRelationPackingById(int packingId) {
+        return packingArchivesDao.getRelationPackingById(packingId);
+    }
+
     public PackingArchivesDao getPackingArchivesDao() {
         return packingArchivesDao;
     }
@@ -99,4 +122,5 @@ public class PackingArchivesManagerImpl implements PackingArchivesManager {
     public void setPackingArchivesDao(PackingArchivesDao packingArchivesDao) {
         this.packingArchivesDao = packingArchivesDao;
     }
+
 }
