@@ -141,6 +141,7 @@ public class CustomerMarketController extends BaseController<CustomerPurchasePro
 
     /**
      * 合作情况更新
+     *
      * @param customerId
      * @param customerBaseInfo
      * @return
@@ -149,7 +150,7 @@ public class CustomerMarketController extends BaseController<CustomerPurchasePro
     @ResponseBody
     @SystemLogAnnotation(module = "customer-market-coop", methods = "updateCoopInfo")
     public ResultPojo updateCoopInfo(@PathVariable("customerId") Integer customerId,
-                                     @JsonView(Views.Editable.class) @RequestBody CustomerBaseInfo customerBaseInfo) {
+                                     CustomerBaseInfo customerBaseInfo) {
 
         Result<Integer> result = Result.newResult(false);
 

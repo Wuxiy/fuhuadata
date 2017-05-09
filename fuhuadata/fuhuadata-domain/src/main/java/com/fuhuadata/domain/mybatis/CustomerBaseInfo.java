@@ -86,60 +86,70 @@ public class CustomerBaseInfo extends BaseEntity<Integer> {
     /**
      * 注册资金
      */
+    @JsonView(Views.Internal.class)
     @Column(name = "registered_funds")
     private String registeredFunds;
 
     /**
      * 注册地址
      */
+    @JsonView(Views.Internal.class)
     @Column(name = "registered_address")
     private String registeredAddress;
 
     /**
      * 经营范围
      */
+    @JsonView(Views.Internal.class)
     @Column(name = "management_scope")
     private String managementScope;
 
     /**
      * 中信保编号
      */
+    @JsonView(Views.Internal.class)
     @Column(name = "zhongxinbao_number")
     private String zhongxinbaoNumber;
 
     /**
      * 中信保信用评级,0未知,1:1A,2:2A,3:3A,4:4A
      */
+    @JsonView(Views.Internal.class)
     @Column(name = "zhongxinbao_level")
     private Integer zhongxinbaoLevel;
 
     /**
      * 企业电话
      */
+    @JsonView(Views.Internal.class)
     @Column(name = "enterprise_phone")
     private String enterprisePhone;
 
     /**
      * 企业邮箱
      */
+    @JsonView(Views.Internal.class)
     @Column(name = "enterprise_email")
     private String enterpriseEmail;
 
     /**
      * 企业信息完成度
      */
+    @JsonView(Views.Internal.class)
     @Column(name = "customer_completion")
     private String customerCompletion;
 
     /**
      * 1:战略客户,2:大客户 3:重要客户 4:一般客户 5:风险客户
      */
+    @JsonView(Views.Internal.class)
     @Column(name = "customer_level")
     private String customerLevel;
 
     /**
      * 1:合作 2:潜在 3:流失
      */
+    @JsonView(Views.Viewable.class)
     @Column(name = "customer_type")
     private Byte customerType;
 
@@ -152,12 +162,14 @@ public class CustomerBaseInfo extends BaseEntity<Integer> {
     /**
      * 其他机会来源
      */
+    @JsonView(Views.Internal.class)
     @Column(name = "other_opportunity")
     private String otherOpportunity;
 
     /**
      * 机会描述
      */
+    @JsonView(Views.Internal.class)
     @Column(name = "opportunity_describle")
     private String opportunityDescrible;
 
@@ -211,36 +223,42 @@ public class CustomerBaseInfo extends BaseEntity<Integer> {
     /**
      * 创建者id
      */
+    @JsonView(Views.Internal.class)
     @Column(name = "create_user_id")
     private Integer createUserId;
 
     /**
      * 创建者姓名
      */
+    @JsonView(Views.Internal.class)
     @Column(name = "create_user_name")
     private String createUserName;
 
     /**
      * 上一次修改者id
      */
+    @JsonView(Views.Internal.class)
     @Column(name = "lastmodify_user_id")
     private Integer lastmodifyUserId;
 
     /**
      * 上一次修改者姓名
      */
+    @JsonView(Views.Internal.class)
     @Column(name = "lastmodify_user_name")
     private String lastmodifyUserName;
 
     /**
      * 创建时间
      */
+    @JsonView(Views.Internal.class)
     @Column(name = "create_time")
     private Date createTime;
 
     /**
      * 修改时间
      */
+    @JsonView(Views.Internal.class)
     @Column(name = "modify_time")
     private Date modifyTime;
 

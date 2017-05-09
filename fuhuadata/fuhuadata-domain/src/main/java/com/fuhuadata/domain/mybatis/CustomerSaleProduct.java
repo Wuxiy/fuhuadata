@@ -53,6 +53,12 @@ public class CustomerSaleProduct extends BaseEntity<Integer> {
     private String yearSalesTotal;
 
     /**
+     * 主计量单位
+     */
+    @Column(name = "measurement")
+    private String measurement;
+
+    /**
      * 销售目的国1
      */
     @Column(name = "destination_country1")
@@ -568,5 +574,13 @@ public class CustomerSaleProduct extends BaseEntity<Integer> {
 
     public void setCountries(List<CustomerSaleCountry> countries) {
         this.countries = countries;
+    }
+
+    public String getMeasurement() {
+        return measurement;
+    }
+
+    public void setMeasurement(String measurement) {
+        this.measurement = measurement;
     }
 }
