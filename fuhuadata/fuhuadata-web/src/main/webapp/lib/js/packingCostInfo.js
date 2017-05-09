@@ -301,6 +301,7 @@ $('#delete').on('click',function(){
     $("input[name='cellcheckbox']:checked").each(function(){
         ids.push($(this).val());
     })
+    ids = ids.join(',');
 
     if(ids.length > 0){
         var msg = "确定要删除这些关联吗？";
