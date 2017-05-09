@@ -1,5 +1,6 @@
 package com.fuhuadata.domain.mybatis;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fuhuadata.domain.json.Views;
 
@@ -278,6 +279,7 @@ public class CustomerBaseInfo extends BaseEntity<Integer> {
     /**
      * 开始合作时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @JsonView(Views.Viewable.class)
     @Column(name = "start_cooperation_time")
     private Date startCooperationTime;
