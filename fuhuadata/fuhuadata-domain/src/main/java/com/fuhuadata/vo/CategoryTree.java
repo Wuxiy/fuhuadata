@@ -13,20 +13,12 @@ public class CategoryTree implements Serializable {
     private String cid;
     private String pid;
     private String cname;
-    private int isLeaf;//是否是产品叶子节点，0：不是（此种情况为分类目录） 1：是
     private List<CategoryTree> nodes =new ArrayList<CategoryTree>();
 
     public CategoryTree(){
 
     }
 
-    public int getIsLeaf() {
-        return isLeaf;
-    }
-
-    public void setIsLeaf(int isLeaf) {
-        this.isLeaf = isLeaf;
-    }
 
     public String getCid() {
         return cid;
