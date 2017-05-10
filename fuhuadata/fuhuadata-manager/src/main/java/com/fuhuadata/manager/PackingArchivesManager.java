@@ -61,5 +61,12 @@ public interface PackingArchivesManager {
      */
     public List<RelationPackingArchives> getRelationPackingById(int packingId);
 
+    /**
+     * 获取全部关联包材
+     * @param packingId
+     * @return
+     */
+    public List<RelationPackingArchives> getRelationPackingByPackId(int packingId);
+
 
 }

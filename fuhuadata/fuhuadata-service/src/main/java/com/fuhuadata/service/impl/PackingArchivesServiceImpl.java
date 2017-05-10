@@ -257,6 +257,19 @@ public class PackingArchivesServiceImpl implements PackingArchivesService {
         return result;
     }
 
+    @Override
+    public Result<List<RelationPackingArchives>> getRelationPackingByPackId(int packingId) {
+        Result<List<RelationPackingArchives>> result = new Result<List<RelationPackingArchives>>();
+        try {
+            result.addDefaultModel("RelationPackings", packingArchivesManager.getRelationPackingByPackId(packingId));
+        } catch (Exception e) {
+            result.setSuccess(false);
+            // 打印日志
+            log.error("根据主材id获取关联包材错误",e);
+        }
+        return result;
+    }
+
 
     public PackingArchivesManager getPackingArchivesManager(){
         return this.packingArchivesManager;

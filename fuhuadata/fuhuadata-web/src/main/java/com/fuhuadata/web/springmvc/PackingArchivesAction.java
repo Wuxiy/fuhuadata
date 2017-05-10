@@ -8,6 +8,7 @@ import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.BCodeService;
 import com.fuhuadata.service.PackingArchivesService;
 import com.fuhuadata.vo.PackingArchivesVO;
+import com.fuhuadata.vo.RelationPackingArchives;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -335,6 +336,19 @@ public class PackingArchivesAction {
             return result.getResultPojo();
         } catch (Exception e) {
             log.error("根据PId获取包材成本档案信息错误", e);
+        }
+        return null;
+    }
+
+    @RequestMapping(value = "/getRelationPackingByPackId")
+    @SystemLogAnnotation(module = "knowledgeBase-packingArchives", methods = "getRelationPackingByPackId")
+    @ResponseBody
+    public ResultPojo getRelationPackingByPackId(Integer packId) {
+        try {
+            Result<List<RelationPackingArchives>> result = packingArchivesService.getRelationPackingByPackId(packId);
+            return result.getResultPojo();
+        } catch (Exception e) {
+            log.error("根据主材id获取关联包材全部列表错误", e);
         }
         return null;
     }

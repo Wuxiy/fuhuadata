@@ -29,6 +29,7 @@ public class PackingArchivesDaoImpl extends SqlMapClientTemplate implements Pack
     public static final String DELETE_RELATION = "PACKINGARCHIVES.DELETE-RELATION";
     public static final String GET_RELATION_PACKING_BY_ID = "PACKINGARCHIVES.GET-RELATIONPACKING-BY-ID";
     public static final String DELETE_RELATION_BY_IDS ="PACKINGARCHIVES.DELETE-RELATION-BY-IDS";
+    public static final String GET_RELATIONPACKINGS_BY_PACKID= "PACKINGARCHIVES.GET-RELATIONPACKINGS-BY-PACKID";
     @Override
     public PackingArchives addPackingArchives(PackingArchives packingArchives) {
         packingArchives.setPackingId((Integer) this.insert(ADD,packingArchives));
@@ -99,5 +100,10 @@ public class PackingArchivesDaoImpl extends SqlMapClientTemplate implements Pack
     @Override
     public List<RelationPackingArchives> getRelationPackingById(int packingId) {
         return this.queryForList(GET_RELATION_PACKING_BY_ID,packingId);
+    }
+
+    @Override
+    public List<RelationPackingArchives>   getRelationPackingByPackId(int packingId) {
+        return this.queryForList(GET_RELATIONPACKINGS_BY_PACKID,packingId);
     }
 }
