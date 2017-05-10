@@ -51,7 +51,7 @@ public class RelationPackingArchives {
     private BigDecimal associatedConsumption;//关联单耗(辅材或外包装单耗)
 
     /**单耗是否和外包装相等 0:不相等 1：相等**/
-    private int isEqualOuter;
+    private Integer isEqualOuter;
 
     public Integer getPackingId() {
         return packingId;
@@ -197,13 +197,6 @@ public class RelationPackingArchives {
         this.associatedConsumption = associatedConsumption;
     }
 
-    public int getIsEqualOuter() {
-        return isEqualOuter;
-    }
-
-    public void setIsEqualOuter(int isEqualOuter) {
-        this.isEqualOuter = isEqualOuter;
-    }
 
     public int getRelationId() {
         return relationId;
@@ -211,5 +204,13 @@ public class RelationPackingArchives {
 
     public void setRelationId(int relationId) {
         this.relationId = relationId;
+    }
+
+    public Integer getIsEqualOuter() {
+        return isEqualOuter;
+    }
+
+    public void setIsEqualOuter(Integer isEqualOuter) {
+        this.isEqualOuter = isEqualOuter;
     }
 }

@@ -117,6 +117,16 @@ public class PackingArchivesManagerImpl implements PackingArchivesManager {
         return packingArchivesDao.getRelationPackingById(packingId);
     }
 
+    /**
+     * 包材树获取全部关联包材
+     * @param packingId
+     * @return
+     */
+    @Override
+    public List<RelationPackingArchives> getRelationPackingByPackId(int packingId) {
+        return packingArchivesDao.getRelationPackingByPackId(packingId);
+    }
+
     public PackingArchivesDao getPackingArchivesDao() {
         return packingArchivesDao;
     }

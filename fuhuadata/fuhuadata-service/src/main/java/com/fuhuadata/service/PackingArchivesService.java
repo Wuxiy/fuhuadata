@@ -56,5 +56,12 @@ public interface PackingArchivesService {
      */
     public Result deleteRelationPackingByIds(String ids);
 
+    /**
+     * 包材树获取全部关联包材
+     * @param packingId
+     * @return
+     */
+    public Result<List<RelationPackingArchives>> getRelationPackingByPackId(int packingId);
+
 
 }

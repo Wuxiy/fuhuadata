@@ -225,6 +225,35 @@
         WHERE kpr.main_packing_id = #packingId#
         ]]>
     </select>
+    <!--关联包材外包装和辅材列表-->
+    <select id="GET-RELATIONPACKINGS-BY-PACKID" parameterClass="java.lang.Integer" resultClass="RelationPackingArchives">
+        <![CDATA[
+        SELECT
+        kpa.`packing_id` packingId,
+        kpa.`big_category_id` bigCategoryId,
+        kpa.`small_category_id` smallCategoryId,
+        kpa.`pack_name` packName,
+        kpa.`size`,
+        kpa.`spec`,
+        kpa.`spec_unit` specUnit,
+        kpa.`quality`,
+        kpa.`quality_index` qualityIndex,
+        kpa.`quality_target_value` qualityTargetValue,
+        kpa.`unit_price` unitPrice,
+        kpa.`consumption`,
+        kpa.`price_end_date` priceEndDate,
+        kpa.`suitable_type` suitableType,
+        kpa.`b_remarks` bRemarks,
+        kpa.`status`,
+        kpa.`image_path` imagePath,
+        kpr.`consumption` AS associatedConsumption,
+        kpr.`is_equal_outer` isEqualOuter
+        FROM
+        k_packing_archives kpa
+        LEFT JOIN k_packing_realtion kpr
+        ON kpr.associated_packing_id = kpa.`packing_id` AND kpr.`main_packing_id` = #packingId#
+        ]]>
+    </select>
 
     <update id="UPDATE" parameterClass="PackingArchives">
         UPDATE k_packing_archives

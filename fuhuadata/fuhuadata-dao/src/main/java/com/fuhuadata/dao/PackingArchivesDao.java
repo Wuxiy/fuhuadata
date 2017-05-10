@@ -85,19 +85,24 @@ public interface PackingArchivesDao {
      * @return
      */
     public int deleteRelationPacking(int mainPackingId);
-
     /**
      * 根据关联表主键ids删除关联
      * @param ids
      * @return
      */
     public int deleteRelationPackingByIds(String ids);
-
     /**
      * 获取关联包材列表档案
      * @param packingId
      * @return
      */
     public List<RelationPackingArchives> getRelationPackingById(int packingId);
+
+    /**
+     * 获取关联包材列表全部外包装和辅材
+     * @param packingId
+     * @return
+     */
+    public List<RelationPackingArchives> getRelationPackingByPackId(int packingId);
 
 }
