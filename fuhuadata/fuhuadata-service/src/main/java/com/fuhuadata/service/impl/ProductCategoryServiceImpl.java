@@ -87,7 +87,8 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
             result.addDefaultModel("CategoryTree",getAllNodes(list,0));
         }catch(Exception e){
             result.setSuccess(false);
-            log.error("分层获取产品目录树错误");
+            log.error("分层获取产品目录树错误" +
+                    "");
         }
         return result;
     }
@@ -110,7 +111,6 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
                 if(fourNode ==1) {
                     if (vo.getProductId() != null) {
                         product = new CategoryTree();
-                        product.setIsLeaf(1);
                         product.setCid(vo.getProductId());
                         product.setPid(vo.getSmallId());
                         product.setCname(vo.getProductName());
