@@ -38,21 +38,11 @@
             defaultLang: 'zh'
         });
 
-//        var langType = (language.indexOf('zh')>-1?'zh':'en');
-//        if (sessionStorage.getItem('lang')) { // 本地存有lang属性，直接判断语言类型
-//
-//            window.lang.change(sessionStorage.getItem('lang'));
-//        }else { // 没有lang属性，自动判断语言类型
-//
-//            if (language.indexOf('zh')>-1) {
-//
-//                sessionStorage.setItem('lang','zh');
-//                window.lang.change(sessionStorage.getItem('lang'));
-//            }else {
-//                sessionStorage.setItem('lang','en');
-//                window.lang.change(sessionStorage.getItem('lang'));
-//            }
-//        }
+        function stopFormSubmit(e) {
+            if (e.keyCode===13){
+                e.preventDefault();
+            }
+        }
 
     </script>
 </head>

@@ -2,6 +2,7 @@
     #breadcrumb()
 </div>
 <!--tab内容-->
+
 <div class="dashboard-wrapper">
 	<div class="row">
 		<div class="col-xs-2">
@@ -29,7 +30,7 @@
 						<!--搜索&筛选控件-->
                         <div class="form-horizontal">
                             <div class="col-xs-12">
-                                <form class="form-group">
+                                <form class="form-group" onkeypress="stopFormSubmit(event)">
                                     <div class="input-group">
                                         <span class="input-group-addon" lang="zh">客户全称</span>
                                         <input class="form-control" type="text" id="fullName" value="" />

@@ -48,7 +48,7 @@
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     <!--搜索栏-->
-                                    <form class="input-group">
+                                    <form class="input-group" onkeypress="stopFormSubmit(event)">
                                         <span class="input-group-addon" lang="zh">客户名称</span>
                                         <input class="form-control" id="customerName"/>
                                         <span class="input-group-addon" lang="zh">销售组织</span>
