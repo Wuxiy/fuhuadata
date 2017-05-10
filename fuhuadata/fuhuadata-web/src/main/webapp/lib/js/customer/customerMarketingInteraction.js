@@ -837,6 +837,8 @@ function pdtTreeDblHandler (event, modLeftId, treeNode) {
         }
 
         $('#treeModal').modal('hide');
+    }else {
+        alert('请选择具体的产品！');
     }
     // console.log(/^c_/.test(treeNode.id));
 }
