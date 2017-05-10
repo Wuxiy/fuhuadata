@@ -100,14 +100,6 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-xs-1 control-label" lang="zh">意向产品1</label>
-                            <div class="col-xs-2">
-                                <input  data-control="off" class="form-control" type="text" value="" id="intentionalProduct0" disabled />
-                            </div>
-                            <label class="col-xs-1 control-label" lang="zh">预计采购量1</label>
-                            <div class="col-xs-2">
-                                <input  data-control="off" class="form-control" type="text" value="" id="estimatedPurchase0" disabled />
-                            </div>
                             <label class="col-xs-1 control-label">企业性质</label>
                             <div class="col-xs-5">
                                 <label class="checkbox-inline">
@@ -126,8 +118,18 @@
                                     <input type="checkbox" name="check" class="suitableType cell_edit" id="other" value="5" data-text="其他" disabled> 其他
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input class="form-control" type="text" id="otherEnterpriseNature" value="输入企业性质" disabled/>
+                                    <input class="form-control hidden" type="text" id="otherEnterpriseNature" value="输入企业性质" disabled/>
                                 </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-1 control-label" lang="zh">意向产品1</label>
+                            <div class="col-xs-2">
+                                <input  data-control="off" class="form-control" type="text" value="" id="intentionalProduct0" disabled />
+                            </div>
+                            <label class="col-xs-1 control-label" lang="zh">预计采购量1</label>
+                            <div class="col-xs-2">
+                                <input  data-control="off" class="form-control" type="text" value="" id="estimatedPurchase0" disabled />
                             </div>
                         </div>
                         <div class="form-group">
@@ -420,8 +422,8 @@
                     $('input[name="check"]').each(function(){
                         if($(this).val() == value){
                             $(this).prop('checked',true);
-                            if(value == 4){
-                                $('#otherEnterpriseNature').val(ResultData.otherEnterpriseNature);
+                            if(value == 5){
+                                $('#otherEnterpriseNature').val(ResultData.otherEnterpriseNature).removeClass('hidden');
                             }
                         }
                     })
@@ -493,6 +495,14 @@
             }
             if(ResultData.createTime != undefined){
                 $('#createTime').val(ResultData.createTime);
+            }
+            if(ResultData.failReason) {
+                var _reason = '';
+                _reason += '<label class="col-xs-1 control-label" lang="zh">失败原因</label>';
+                _reason += '<div class="col-xs-2">';
+                _reason += '<input class="form-control" type="text" value="' + ResultData.failReason + '" disabled>';
+                _reason += '</div>';
+                $('#businessState').closest('.form-group').append(_reason);
             }
         }
 
