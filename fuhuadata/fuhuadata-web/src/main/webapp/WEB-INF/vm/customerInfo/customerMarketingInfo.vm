@@ -30,7 +30,7 @@
                         <div class="form-horizontal">
                             <div class="col-xs-5 pull-right">
                                 <div class="form-group">
-                                    <form class="input-group">
+                                    <form class="input-group" onkeypress="stopFormSubmit(event)">
                                         <span class="input-group-addon" lang="zh">产品名称</span>
                                         <input class="form-control" id="cpps_name" name="productName" type="text">
                                         <div class="input-group-btn">
@@ -100,7 +100,7 @@
                         <div class="form-horizontal">
                             <div class="col-xs-5 pull-right">
                                 <div class="form-group">
-                                    <form class="input-group">
+                                    <form class="input-group" onkeypress="stopFormSubmit(event)">
                                         <span class="input-group-addon" lang="zh">产品名称</span>
                                         <input class="form-control" id="csps_name" name="productName" type="text">
                                         <div class="input-group-btn">
@@ -273,7 +273,7 @@
         <div class="form-horizontal">
             <div class="form-group">
                 <div class="col-xs-12">
-                    <table class="table table-condensed table-bordered table-striped text-center" id="cpps_pdt_t">
+                    <table class="table table-condensed table-bordered text-center" id="cpps_pdt_t">
                         <thead>
                         <tr>
                             <th class="col-xs-4 text-center" lang="zh">产品名称</th>
@@ -306,7 +306,7 @@
             </div>
             <div class="form-group">
                 <div class="col-xs-11">
-                    <table class="table table-condensed table-bordered table-striped text-center" id="cpps_spr_t">
+                    <table class="table table-condensed table-bordered text-center" id="cpps_spr_t">
                         <thead>
                         <tr>
                             <th class="col-xs-4 text-center" lang="zh">供应商</th>
@@ -389,7 +389,7 @@
         <div class="form-horizontal">
             <div class="form-group">
                 <div class="col-xs-12">
-                    <table class="table table-condensed table-bordered table-striped text-center" id="csps_pdt_t">
+                    <table class="table table-condensed table-bordered text-center" id="csps_pdt_t">
                         <thead>
                         <tr>
                             <th class="col-xs-3 text-center" lang="zh">产品名称</th>
@@ -424,7 +424,7 @@
             </div>
             <div class="form-group">
                 <div class="col-xs-11">
-                    <table class="table table-condensed table-bordered table-striped text-center" id="csps_cty_t">
+                    <table class="table table-condensed table-bordered text-center" id="csps_cty_t">
                         <thead>
                         <tr>
                             <th class="col-xs-4 text-center" lang="zh">销售目的国</th>
