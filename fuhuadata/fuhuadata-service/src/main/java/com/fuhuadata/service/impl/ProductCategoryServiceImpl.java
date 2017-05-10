@@ -110,6 +110,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
                 if(fourNode ==1) {
                     if (vo.getProductId() != null) {
                         product = new CategoryTree();
+                        product.setIsLeaf(1);
                         product.setCid(vo.getProductId());
                         product.setPid(vo.getSmallId());
                         product.setCname(vo.getProductName());
