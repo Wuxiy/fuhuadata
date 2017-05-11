@@ -14,10 +14,10 @@
     <!-- spring工具类 方便在非spring管理环境中获取bean -->
     <bean id="springUtils" class="com.fuhuadata.service.util.SpringUtils"/>
 
-    <aop:config proxy-target-class="true"/>
+    <aop:aspectj-autoproxy proxy-target-class="true" expose-proxy="true"/>
 
     <!-- 自动扫描,完成bean创建和依赖注入 -->
-    <context:component-scan base-package="com.fuhuadata.**.mybatis">
+    <context:component-scan base-package="com.fuhuadata.**.mybatis, com.fuhuadata.**.oracle, com.fuhuadata.**.datasource">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
         <context:exclude-filter type="annotation"
                                 expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
