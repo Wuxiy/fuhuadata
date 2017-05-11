@@ -340,10 +340,11 @@ public class PackingArchivesAction {
         return null;
     }
 
-    @RequestMapping(value = "/getRelationPackingByPackId")
+    @RequestMapping(value = "/getRelationPackingByPackId",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-packingArchives", methods = "getRelationPackingByPackId")
     @ResponseBody
     public ResultPojo getRelationPackingByPackId(Integer packId) {
+
         try {
             Result<List<RelationPackingArchives>> result = packingArchivesService.getRelationPackingByPackId(packId);
             return result.getResultPojo();

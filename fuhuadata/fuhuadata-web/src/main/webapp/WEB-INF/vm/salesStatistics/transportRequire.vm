@@ -623,11 +623,11 @@
                 /*contentType:"application/json",*/
                 success:function(result){
                     if(result == true){
-                        alert('添加保存成功!');
+                        alert('保存成功!');
                         console.log(result);
                         window.location.href = basePath + '/businessOrder/intoOfferorOrder?orderId=' + orderId;
                     }else{
-                        alert('添加保存失败！');
+                        alert('保存失败！');
                     }
                 }
             })

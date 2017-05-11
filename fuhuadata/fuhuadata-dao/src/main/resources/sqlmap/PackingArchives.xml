@@ -252,6 +252,7 @@
         k_packing_archives kpa
         LEFT JOIN k_packing_realtion kpr
         ON kpr.associated_packing_id = kpa.`packing_id` AND kpr.`main_packing_id` = #packingId#
+        WHERE kpa.big_category_id = 2 OR kpa.big_category_id = 3
         ]]>
     </select>
 

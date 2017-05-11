@@ -454,13 +454,15 @@
                     var productRequire = result.productRequire;
 
                     var auxiliaryMaterialIds = "";
+                    var auxiliaryMaterialIdslist;
                     var outerPackingId = "";
                     if(productRequire.outerPackingId!=undefined){
                          outerPackingId = productRequire.outerPackingId;
                     }
                     if(productRequire.auxiliaryMaterialIds){
                          auxiliaryMaterialIds = productRequire.auxiliaryMaterialIds;
-                         console.log(auxiliaryMaterialIds);
+                         auxiliaryMaterialIdslist = auxiliaryMaterialIds.split(',');
+                         console.log(auxiliaryMaterialIdslist);
                     }
                     if(productRequire.mainPackingType!=undefined){
                         $('#mainPackingType').attr('data-id',productRequire.mainPackingId);
@@ -611,7 +613,7 @@
                     var auxiliary_html;
                     if(auxiliaryData.length!=0){
                         for(var j=0;j<auxiliaryData.length;j++){
-                            if((','+auxiliaryMaterialIds+",").indexOf(auxiliaryData[j].packingId)>-1){
+                            if(contains(auxiliaryMaterialIdslist,auxiliaryData[j].packingId)){
                                 auxiliary_html += '<tr class=""><td><input type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox" name="auxiliarycheckbox" checked/></td>';
                             }else {
                                 auxiliary_html += '<tr class=""><td><input type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox" name="auxiliarycheckbox"/></td>';
@@ -620,7 +622,11 @@
                             auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].spec)+'</td>';
                             auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].size)+'</td>';
                             auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].quality)+'</td>';
-                            auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].consumption)+'</td>';
+                            if(ifEmpty(auxiliaryData[j].isEqualOuter) == 1){
+                                auxiliary_html += '<td class="isEqualOuter">'+ifEmpty(auxiliaryData[j].consumption)+'</td>';
+                            }else{
+                                auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].consumption)+'</td>';
+                            }
                             auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].unitPrice)+'</td></tr>';
 
                         }
@@ -1273,6 +1279,7 @@
                         var modelist = result.modelist;
                         var img_html = '';
                         var _html = '';
+                        var auxiliary_html;
 
                         if(modelist != null || modelist != undefined){
                             for(var k=0;k<modelist.length;k++){
@@ -1306,16 +1313,24 @@
 
                         if(auxiliaryData.length!=0){
                             for(var j=0;j<auxiliaryData.length;j++){
-                                auxiliary.innerHTML += '<tr class="">'+
-                                        '<td><input type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox" name="auxiliarycheckbox"/></td>'+
-                                        '<td>'+ifEmpty(auxiliaryData[j].packName)+'</td>' +
-                                        '<td>'+ifEmpty(auxiliaryData[j].spec)+'</td>'+
-                                        '<td>'+ifEmpty(auxiliaryData[j].size)+'</td>'+
-                                        '<td>'+ifEmpty(auxiliaryData[j].quality)+'</td>'+
-                                        '<td>'+ifEmpty(auxiliaryData[j].consumption)+'</td>'+
-                                        '<td>'+ifEmpty(auxiliaryData[j].unitPrice)+'</td>'+
-                                        '</tr>';
+                                if(contains(auxiliaryMaterialIdslist,auxiliaryData[j].packingId)){
+                                    auxiliary_html += '<tr class=""><td><input type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox" name="auxiliarycheckbox" checked/></td>';
+                                }else {
+                                    auxiliary_html += '<tr class=""><td><input type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox" name="auxiliarycheckbox"/></td>';
+                                }
+                                auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].packName)+'</td>';
+                                auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].spec)+'</td>';
+                                auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].size)+'</td>';
+                                auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].quality)+'</td>';
+                                if(ifEmpty(auxiliaryData[j].isEqualOuter) == 1){
+                                    auxiliary_html += '<td class="isEqualOuter">'+ifEmpty(auxiliaryData[j].consumption)+'</td>';
+                                }else{
+                                    auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].consumption)+'</td>';
+                                }
+                                auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].unitPrice)+'</td></tr>';
+
                             }
+                            $('#auxiliary').append(auxiliary_html);
                         }else{
                             $('#auxiliary').addClass('hidden');
                         }
@@ -1598,4 +1613,22 @@
         return data==undefined?'':data;
     }
 
+    //确认数组
+    function contains(arr, obj) {
+        var i = arr.length;
+        while (i--) {
+            if (arr[i] == obj.toString()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    $(document).on('change','input[name="outercheckbox"]',function(){
+        var val = $(this).parents('tr').find('td').eq(5).text();
+
+        if($(this).attr('checked')){
+            $('.isEqualOuter').text(val);
+        }
+    })
 </script>
