@@ -361,7 +361,7 @@ public class PackingArchivesAction {
     @RequestMapping(value = "/judgeImageModelToUse")
     @SystemLogAnnotation(module = "knowledgeBase-packingArchives", methods = "judgeImageModelToUse")
     @ResponseBody
-    public ResultPojo judgeImageModelToUse(int packId, String name) {
+    public ResultPojo judgeImageModelToUse(int packId,String name) {
         try {
             Result result = new Result();
             result.addDefaultModel("useTotal", 0);
