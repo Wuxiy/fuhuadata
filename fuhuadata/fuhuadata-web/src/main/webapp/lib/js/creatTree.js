@@ -106,11 +106,26 @@
             //渲染包材详情modal列表
             packingInfoModal : function(getData,parent){
                 if(getData!=undefined){
+                    var tr;
                     $.each(getData,function(n,item){
-                        var tr = $('<tr></tr>');
-                        /*console.log(item);*/
-                        $(tr).append('<td><input type="checkbox" value="'+item.packingId+'" name="modal_cellcheckbox"/></td><td>'+ifEmpty(item.packingId)+'</td><td>'+ifEmpty(item.packName)+'</td><td>'+ifEmpty(item.spec)+'</td><td>'+ifEmpty(item.size)+'</td><td>'+ifEmpty(item.quality)+'</td><td>'+ifEmpty(item.unitPrice)+'</td><td>'+ifEmpty(item.consumption)+'</td><td>'+(ifEmpty(item.status)==1?'启用':'禁用')+'</td>').appendTo(parent);
-                    })
+                        if((','+cellcheckboxlists+",").indexOf(item.packingId)>-1){
+                            tr += '<tr><td><input type="checkbox" value="'+item.packingId+'" data-categoryId="'+item.bigCategoryId+'" name="modal_cellcheckbox" checked/></td>';
+                        }else{
+                            tr += '<tr><td><input type="checkbox" value="'+item.packingId+'" data-categoryId="'+item.bigCategoryId+'" name="modal_cellcheckbox"/></td>';
+                        }
+                        tr += '<td>'+ifEmpty(item.packingId)+'</td><td>'+ifEmpty(item.packName)+'</td>';
+                        tr += '<td>'+ifEmpty(item.spec)+'</td><td>'+ifEmpty(item.size)+'</td>';
+                        tr += '<td>'+ifEmpty(item.quality)+'</td><td>'+ifEmpty(item.unitPrice)+'</td>';
+                        if((','+cellcheckboxlists+",").indexOf(item.packingId)>-1){
+                            tr += '<td><input class="form-control" value="'+ifEmpty(item.associatedConsumption)+'" name="modal_consumption"></td>';
+                        }else{
+                            tr += '<td><input class="form-control" value="'+ifEmpty(item.associatedConsumption)+'" name="modal_consumption" disabled></td>';
+                        }
+                        tr += '<td class="text-center"><input type="checkbox" name="modal_isEqualOuter" disabled/></td>';
+                        tr += '<td>'+(ifEmpty(item.status)==1?'启用':'禁用')+'</td></tr>';
+
+                    });
+                    $(tr).appendTo(parent);
                 }
             },
             //渲染标准产品档案

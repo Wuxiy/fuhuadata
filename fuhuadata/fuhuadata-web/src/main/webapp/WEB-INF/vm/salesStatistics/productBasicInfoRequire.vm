@@ -101,8 +101,8 @@
                                         </td>
                                         <td>
                                             <select data-control="on" id="priceType" class="form-control notnull isdisabled" disabled>
-                                                <option value="01" selected>自产类</option>
-                                                <option value="02">原药自产制剂加工类</option>
+                                                <option value="01">自产类</option>
+                                                <option value="02" selected>原药自产制剂加工类</option>
                                                 <option value="04">原药采购制剂加工类</option>
                                                 <option value="03">贸易类</option>
                                                 <option value="09">其他类</option>
@@ -142,27 +142,19 @@
                                         <td><input data-control="on" id="deliveryTime" class="form-control isdisabled notnull" type="date" value="" disabled/></td>
                                     </tr>
                                     <tr>
-                                        <td>
+                                        <td class="fac">
                                             <label class="control-label" lang="zh">
                                                 加工厂
                                                 <sup class="not-null">*</sup>
                                             </label>
                                         </td>
-                                        <td>
-                                            <select name="factoryName" id="factoryName" class="form-control notnull">
+                                        <td class="fac">
+                                            <select name="factoryName" id="factoryName" class="form-control">
                                                 <option value="">——请选择——</option>
                                                 #foreach($!info in $!{freightCosts})
                                                     <option value="$!info.freightId">$!info.processFactory</option>
                                                 #end
                                             </select>
-##                                            <div class="input-group">
-##                                                <input data-control="on" id="factoryName" class="form-control notnull " value="" disabled>
-##                                                <div class="input-group-btn">
-##                                                    <button data-control="on" class="btn btn-xs btn-default isdisabled" id="factory" disabled>
-##                                                        <span class="glyphicon glyphicon-search"></span>
-##                                                    </button>
-##                                                </div>
-##                                            </div>
                                         </td>
                                         <td>
                                             <label class="control-label" lang="zh">
@@ -392,6 +384,11 @@
                     $('#subProductAmount').val(basicInfo.subProductAmount);
                     $('#convertRate').val(basicInfo.convertRate);
                     $('#priceType').val(basicInfo.priceType);
+                    if(basicInfo.priceType == "02"||basicInfo.priceType == "04"){
+                        $('.fac').show();
+                    }else{
+                        $('.fac').hide();
+                    }
                     $('#advisePrice').val(basicInfo.advisePrice);
                     $('#purchasePrice').val(basicInfo.purchasePrice);
                     $('#deliveryTime').val(basicInfo.deliveryTime);
@@ -905,6 +902,15 @@
                 alert("修改成功!");
             }
         })
+    })
+
+    //价格计算类型
+    $('#priceType').change(function(){
+        if($(this).val() == '02'||$(this).val() == '04'){
+            $('.fac').show();
+        }else{
+            $('.fac').hide();
+        }
     })
 
     //费用计算

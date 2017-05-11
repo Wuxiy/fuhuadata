@@ -2,7 +2,9 @@ package com.fuhuadata.dao.impl;
 
 import com.fuhuadata.dao.PackingArchivesDao;
 import com.fuhuadata.domain.PackingArchives;
+import com.fuhuadata.domain.PackingRelation;
 import com.fuhuadata.domain.query.PackingArchivesQuery;
+import com.fuhuadata.vo.RelationPackingArchives;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
 import java.beans.IntrospectionException;
@@ -23,6 +25,11 @@ public class PackingArchivesDaoImpl extends SqlMapClientTemplate implements Pack
     public static final String GET_PAGE = "PACKINGARCHIVES.GET-PAGE";
     public static final String COUNT = "PACKINGARCHIVES.COUNT";
     public static final String GET_BY_IDS = "PACKINGARCHIVES.GET-BY-IDS";
+    public static final String ADD_RELATION="PACKINGARCHIVES.BATCH-ADD-RELATION";
+    public static final String DELETE_RELATION = "PACKINGARCHIVES.DELETE-RELATION";
+    public static final String GET_RELATION_PACKING_BY_ID = "PACKINGARCHIVES.GET-RELATIONPACKING-BY-ID";
+    public static final String DELETE_RELATION_BY_IDS ="PACKINGARCHIVES.DELETE-RELATION-BY-IDS";
+    public static final String GET_RELATIONPACKINGS_BY_PACKID= "PACKINGARCHIVES.GET-RELATIONPACKINGS-BY-PACKID";
     @Override
     public PackingArchives addPackingArchives(PackingArchives packingArchives) {
         packingArchives.setPackingId((Integer) this.insert(ADD,packingArchives));
@@ -73,5 +80,30 @@ public class PackingArchivesDaoImpl extends SqlMapClientTemplate implements Pack
     @Override
     public int count(PackingArchivesQuery packingArchivesQuery) {
         return ((Integer) this.queryForObject(COUNT,packingArchivesQuery)).intValue();
+    }
+
+    @Override
+    public int batchAddRelationPacking(List<PackingRelation> list) {
+        return this.update(ADD_RELATION,list);
+    }
+
+    @Override
+    public int deleteRelationPacking(int mainPackingId) {
+        return this.delete(DELETE_RELATION,mainPackingId);
+    }
+
+    @Override
+    public int deleteRelationPackingByIds(String ids) {
+        return this.delete(DELETE_RELATION_BY_IDS,ids);
+    }
+
+    @Override
+    public List<RelationPackingArchives> getRelationPackingById(int packingId) {
+        return this.queryForList(GET_RELATION_PACKING_BY_ID,packingId);
+    }
+
+    @Override
+    public List<RelationPackingArchives>   getRelationPackingByPackId(int packingId) {
+        return this.queryForList(GET_RELATIONPACKINGS_BY_PACKID,packingId);
     }
 }
