@@ -456,6 +456,10 @@ $('#addrelate').on('click',function(){
                 }
                 if(contains(cellcheckboxlist,item.packingId) == true&&item.isEqualOuter == 1){
                     tr += '<td class="text-center"><input type="checkbox" name="modal_isEqualOuter" checked/></td>';
+                }else if(item.bigCategoryId == 2){
+                    tr += '<td class="text-center"><input type="checkbox" disabled/></td>';
+                }else if(contains(cellcheckboxlist,item.packingId) == true){
+                    tr += '<td class="text-center"><input type="checkbox" name="modal_isEqualOuter"/></td>';
                 }else{
                     tr += '<td class="text-center"><input type="checkbox" name="modal_isEqualOuter" disabled/></td>';
                 }

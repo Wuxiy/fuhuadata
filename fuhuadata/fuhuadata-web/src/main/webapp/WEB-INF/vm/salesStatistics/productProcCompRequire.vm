@@ -153,7 +153,7 @@
                             </tr>
                             </tbody>
                         </table>
-                        <table class="table table-condensed table-bordered table-striped text-right text-center" id="outer">
+                        <table class="table table-condensed table-bordered table-striped text-right text-center">
                             <caption class="text-info text-left">
                                 外包装选择
                             </caption>
@@ -168,27 +168,30 @@
                                 <th class="text-center">单价（元）</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="outer">
+
+                            </tbody>
+                            <tfoot>
                                 <tr id="befond">
-                                    <td colspan="7">
-                                        <div class="form-horizontal">
-                                            <div class="form-group"></div>
-                                            <div class="form-group">
-                                                <label class="control-label col-xs-1">封箱口方式</label>
-                                                <div class="col-xs-2">
-                                                    <input data-control="on" id="sealingStyle" class="form-control isdisabled" type="text" disabled>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-xs-1">其他要求</label>
-                                                <div class="col-xs-6">
-                                                    <textarea data-control="on" id="outerPackingOtherRequire" class="form-control isdisabled" rows="3" disabled></textarea>
-                                                </div>
+                                <td colspan="7">
+                                    <div class="form-horizontal">
+                                        <div class="form-group"></div>
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-1">封箱口方式</label>
+                                            <div class="col-xs-2">
+                                                <input data-control="on" id="sealingStyle" class="form-control isdisabled" type="text" disabled>
                                             </div>
                                         </div>
-                                    </td>
-                                </tr>
-                            </tbody>
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-1">其他要求</label>
+                                            <div class="col-xs-6">
+                                                <textarea data-control="on" id="outerPackingOtherRequire" class="form-control isdisabled" rows="3" disabled></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tfoot>
                         </table>
                         <table class="table table-condensed table-bordered table-striped text-right text-center">
                             <caption class="text-info text-left">
@@ -437,8 +440,8 @@
     var editId = $('#editId').val();
     console.log(editId);
 
-    var auxiliary = document.getElementById('auxiliary');
-    var befond = document.getElementById('befond');
+    var outer = $('#outer');
+    var auxiliary = $('#auxiliary');
 
     var bInfo = new CRM.module.Panel('#productRequire');
     bInfo.startEdit();
@@ -603,11 +606,11 @@
                             _html += '<td class="text-center">'+ifEmpty(outerData[i].spec)+'</td>';
                             _html += '<td class="text-center">'+ifEmpty(outerData[i].size)+'</td>';
                             _html += '<td class="text-center">'+ifEmpty(outerData[i].quality)+'</td>';
-                            _html += '<td class="text-center">'+ifEmpty(outerData[i].consumption)+'</td>';
+                            _html += '<td class="text-center">'+ifEmpty(outerData[i].associatedConsumption)+'</td>';
                             _html += '<td class="text-center">'+ifEmpty(outerData[i].unitPrice)+'</td>';
                             _html += '</tr>';
                         }
-                        $('#befond').before(_html);
+                        $(_html).appendTo(outer);
                     }
 
                     var auxiliary_html;
@@ -623,14 +626,14 @@
                             auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].size)+'</td>';
                             auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].quality)+'</td>';
                             if(ifEmpty(auxiliaryData[j].isEqualOuter) == 1){
-                                auxiliary_html += '<td class="isEqualOuter">'+ifEmpty(auxiliaryData[j].consumption)+'</td>';
+                                auxiliary_html += '<td class="isEqualOuter">'+ifEmpty(auxiliaryData[j].associatedConsumption)+'</td>';
                             }else{
                                 auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].consumption)+'</td>';
                             }
                             auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].unitPrice)+'</td></tr>';
 
                         }
-                        $('#auxiliary').append(auxiliary_html);
+                        $(auxiliary_html).append(auxiliary);
                     }
 
                 }
@@ -662,521 +665,6 @@
             $('#previous').removeClass('hidden');
             $('#down').removeClass('hidden');
         }
-        //根据editId和productRequireId判定页面状态，
-        //editid=1,id!='',列表进入查询详情；editId=1,id=='',列表进入，没有详情；editId=2,id!='',客户页面进入查看；editId!=2,!=1,id='',包材要求新增
-        /*if(editId == 1&&id!=''){
-            $('#edit').removeClass('hidden');
-            $('#back').removeClass('hidden');
-
-            jQuery.ajax({
-                url:basePath + '/businessProduct/getProductRequireInfo?productRequireId=' + id,
-                type:'POST',
-                success:function(result){
-                        var productRequire = result.productRequire;
-                        if(productRequire.mainPackingType!=undefined){
-                            $('#mainPackingType').val(productRequire.mainPackingType);
-                        }
-                        if(productRequire.material!=undefined){
-                            $('#material').val(productRequire.material);
-                        }
-                        if(productRequire.specification!=undefined){
-                            $('#specification').val(productRequire.specification);
-                        }
-                        if(productRequire.price!=undefined){
-                            $('#price').val(productRequire.price);
-                        }
-                        if(productRequire.bottleWeight!=undefined){
-                            $('#bottleWeight').val(productRequire.bottleWeight);
-                        }
-                        if(productRequire.bottleCapColor!=undefined){
-                            $('#bottleCapColor').val(productRequire.bottleCapColor);
-                        }
-                        if(productRequire.bottleBodyColor!=undefined){
-                            $('#bottleBodyColor').val(productRequire.bottleBodyColor);
-                        }
-                        if(productRequire.bottleDiameter!=undefined){
-                            $('#bottleDiameter').val(productRequire.bottleDiameter);
-                        }
-                        if(productRequire.businessCheckNum!=undefined){
-                            $('#businessCheckNum').val(productRequire.businessCheckNum);
-                        }
-                        if(productRequire.bottlePasteRequire!=undefined){
-                            $('#bottlePasteRequire').val(productRequire.bottlePasteRequire);
-                        }
-                        if(productRequire.specialRequire!=undefined){
-                            $('#specialRequire').val(productRequire.specialRequire);
-                        }
-                        if(productRequire.addtionalPrice!=undefined){
-                            $('#addtionalPrice').val(productRequire.addtionalPrice);
-                        }
-                        if(productRequire.sealingStyle!=undefined){
-                            $('#sealingStyle').val(productRequire.sealingStyle);
-                        }
-                        if(productRequire.outerOackingOtherRequire!=undefined){
-                            $('#outerOackingOtherRequire').val(productRequire.outerOackingOtherRequire);
-                        }
-                        if(productRequire.otherRequire!=undefined){
-                            $('#otherRequire').val(productRequire.otherRequire);
-                        }
-                        if(productRequire.otherRequirePrice!=undefined){
-                            $('#otherRequirePrice').val(productRequire.otherRequirePrice);
-                        }
-                        if(productRequire.otherRequireConsumption!=undefined){
-                            $('#otherRequireConsumption').val(productRequire.outerOackingOtherRequire);
-                        }
-                        if(productRequire.bottlePasteRequire!=undefined){
-                            $('#bottlePasteRequire').val(productRequire.bottlePasteRequire);
-                        }
-                        if(productRequire.specialRequire!=undefined){
-                            $('#specialRequire').val(productRequire.specialRequire);
-                        }
-                        if(productRequire.addtionalPrice!=undefined){
-                            $('#addtionalPrice').val(productRequire.addtionalPrice);
-                        }
-                        if(productRequire.sealingStyle!=undefined){
-                            $('#sealingStyle').val(productRequire.sealingStyle);
-                        }
-                        if(productRequire.size!=undefined){
-                            $('#size').val(productRequire.size);
-                        }
-
-                        if(productRequire.imgInfo!=undefined){
-                            var imgInfo = eval(productRequire.imgInfo);
-                            $('img[data-name]').each(function (i,item) {
-                                var thisImg = $(this),
-                                    nameImg = thisImg.data('name');
-                                    btn     = thisImg.parent('td').find('button');
-                                $.each(imgInfo,function (n,one) {
-                                    if (nameImg==one.name){
-                                        thisImg.attr('src',one.imgpath);
-                                        btn.removeClass('hidden');
-                                        return false;
-                                    }else {
-                                        return true;
-                                    }
-                                })
-                            });
-                        }
-
-                    var modelist = eval(result.modelist);
-                    var img_html = '';
-
-                    for(var k=0;k<modelist.length;k++){
-                        img_html +='<div class="col-xs-2">';
-                        img_html +='<a class="thumbnail" >';
-                        img_html +='<img src="'+modelist[k].path+'" alt="通用的占位符缩略图"  style="height: 273px;">';
-                        img_html +='<div class="caption">';
-                        img_html +='<h4 class="text-info ">'+modelist[k].name+'<input style="margin-left: 15px;" type="checkbox" name="modelist" class="btn-link" data-name="'+modelist[k].name+'" data-path="'+modelist[k].path+'" disabled checked></h4>';
-                        img_html +='</div>';
-                        img_html += '</a>';
-                        img_html +='</div>';
-                    }
-                    $('#model').html(img_html);
-
-                    var outerData = result.outer;
-                    var auxiliaryData = result.auxiliary;
-
-                    var _html = '';
-
-                    if(productRequire.hasBodyLogo!=undefined&&productRequire.hasBodyLogo == 1){
-                        $('#hasBodyLogo').attr('checked',true);
-                    }
-                    if(productRequire.hasCapLogo!=undefined&&productRequire.hasCapLogo == 1){
-                        $('#hasCapLogo').attr('checked',true);
-                    }
-                    if(productRequire.hasDangerSign!=undefined&&productRequire.hasDangerSign == 1){
-                        $('#hasDangerSign').attr('checked',true);
-                    }
-                    if(productRequire.hasScaleLine!=undefined&&productRequire.hasScaleLine == 1){
-                        $('#hasScaleLine').attr('checked',true);
-                    }
-                    if(productRequire.hasSprayCode!=undefined&&productRequire.hasSprayCode == 1){
-                        $('#hasSprayCode').attr('checked',true);
-                    }
-
-                    /!*imgInfo.each(function (n,item) {
-                        if(item == '')
-                    })*!/
-
-                    if(outerData.length!=0){
-                        for(var i=0;i<outerData.length;i++){
-                            _html += '<tr class="outerlist">';
-                            _html += '<td class="text-center"><input type="checkbox" value="'+outerData[i].packingId+'" class="outercheckbox" name="outercheckbox"/></td>';
-                            _html += '<td class="text-center">'+outerData[i].packName+'</td>';
-                            _html += '<td class="text-center">'+outerData[i].spec+'</td>';
-                            _html += '<td class="text-center">'+outerData[i].size+'</td>';
-                            _html += '<td class="text-center">'+outerData[i].quality+'</td>';
-                            _html += '<td class="text-center">'+outerData[i].consumption+'</td>';
-                            _html += '<td class="text-center">'+outerData[i].unitPrice+'</td>';
-                            _html += '</tr>';
-                        }
-                        $('#befond').before(_html);
-                    }
-
-                    if(auxiliaryData.length!=0){
-                        for(var j=0;j<auxiliaryData.length;j++){
-                            auxiliary.innerHTML += '<tr class="">'+
-                                    '<td><input type="checkbox" value="'+auxiliaryData[j].packingId+'" class="auxiliarycheckbox" name="auxiliarycheckbox"/></td>'+
-                                    '<td>'+auxiliaryData[j].packName+'</td>' +
-                                    '<td>'+auxiliaryData[j].spec+'</td>'+
-                                    '<td>'+auxiliaryData[j].size+'</td>'+
-                                    '<td>'+auxiliaryData[j].quality+'</td>'+
-                                    '<td>'+auxiliaryData[j].consumption+'</td>'+
-                                    '<td>'+auxiliaryData[j].unitPrice+'</td>'+
-                                    '</tr>';
-                        }
-                    }
-
-                }
-            })
-        }else if(editId == 1&&id == ''){
-            $('#addback').removeClass('hidden');
-            $('#addedit').removeClass('hidden');
-
-            $('[data-target="#packModal"]').attr('disabled',false);
-            $('.isdisabled').attr('disabled',false);
-        }else if(editId == 0&&id == ''){
-            if(id == ''){
-                $('#before').removeClass('hidden');
-                $('#next').removeClass('hidden');
-
-                $('[data-target="#packModal"]').attr('disabled',false);
-                $('.isdisabled').attr('disabled',false);
-            }
-            if(id !=''){
-                $('#before').removeClass('hidden');
-                $('#next').removeClass('hidden');
-
-                $('#edit').removeClass('hidden');
-                $('#back').removeClass('hidden');
-
-                jQuery.ajax({
-                    url:basePath + '/businessProduct/getProductRequireInfo?productRequireId=' + id,
-                    type:'POST',
-                    success:function(result){
-                        var productRequire = result.productRequire;
-                        if(productRequire.mainPackingType!=undefined){
-                            $('#mainPackingType').val(productRequire.mainPackingType);
-                        }
-                        if(productRequire.material!=undefined){
-                            $('#material').val(productRequire.material);
-                        }
-                        if(productRequire.specification!=undefined){
-                            $('#specification').val(productRequire.specification);
-                        }
-                        if(productRequire.price!=undefined){
-                            $('#price').val(productRequire.price);
-                        }
-                        if(productRequire.bottleWeight!=undefined){
-                            $('#bottleWeight').val(productRequire.bottleWeight);
-                        }
-                        if(productRequire.bottleCapColor!=undefined){
-                            $('#bottleCapColor').val(productRequire.bottleCapColor);
-                        }
-                        if(productRequire.bottleBodyColor!=undefined){
-                            $('#bottleBodyColor').val(productRequire.bottleBodyColor);
-                        }
-                        if(productRequire.bottleDiameter!=undefined){
-                            $('#bottleDiameter').val(productRequire.bottleDiameter);
-                        }
-                        if(productRequire.businessCheckNum!=undefined){
-                            $('#businessCheckNum').val(productRequire.businessCheckNum);
-                        }
-                        if(productRequire.bottlePasteRequire!=undefined){
-                            $('#bottlePasteRequire').val(productRequire.bottlePasteRequire);
-                        }
-                        if(productRequire.specialRequire!=undefined){
-                            $('#specialRequire').val(productRequire.specialRequire);
-                        }
-                        if(productRequire.addtionalPrice!=undefined){
-                            $('#addtionalPrice').val(productRequire.addtionalPrice);
-                        }
-                        if(productRequire.sealingStyle!=undefined){
-                            $('#sealingStyle').val(productRequire.sealingStyle);
-                        }
-                        if(productRequire.outerOackingOtherRequire!=undefined){
-                            $('#outerOackingOtherRequire').val(productRequire.outerOackingOtherRequire);
-                        }
-                        if(productRequire.otherRequire!=undefined){
-                            $('#otherRequire').val(productRequire.otherRequire);
-                        }
-                        if(productRequire.otherRequirePrice!=undefined){
-                            $('#otherRequirePrice').val(productRequire.otherRequirePrice);
-                        }
-                        if(productRequire.otherRequireConsumption!=undefined){
-                            $('#otherRequireConsumption').val(productRequire.outerOackingOtherRequire);
-                        }
-                        if(productRequire.bottlePasteRequire!=undefined){
-                            $('#bottlePasteRequire').val(productRequire.bottlePasteRequire);
-                        }
-                        if(productRequire.specialRequire!=undefined){
-                            $('#specialRequire').val(productRequire.specialRequire);
-                        }
-                        if(productRequire.addtionalPrice!=undefined){
-                            $('#addtionalPrice').val(productRequire.addtionalPrice);
-                        }
-                        if(productRequire.sealingStyle!=undefined){
-                            $('#sealingStyle').val(productRequire.sealingStyle);
-                        }
-                        if(productRequire.size!=undefined){
-                            $('#size').val(productRequire.size);
-                        }
-
-                        if(productRequire.imgInfo!=undefined){
-                            var imgInfo = eval(productRequire.imgInfo);
-                            $('img[data-name]').each(function (i,item) {
-                                var thisImg = $(this),
-                                        nameImg = thisImg.data('name');
-                                btn     = thisImg.parent('td').find('button');
-                                $.each(imgInfo,function (n,one) {
-                                    if (nameImg==one.name){
-                                        thisImg.attr('src',one.imgpath);
-                                        btn.removeClass('hidden');
-                                        return false;
-                                    }else {
-                                        return true;
-                                    }
-                                })
-                            });
-                        }
-
-                        var modelist = eval(result.modelist);
-                        var img_html = '';
-
-                        for(var k=0;k<modelist.length;k++){
-                            img_html +='<div class="col-xs-2">';
-                            img_html +='<a class="thumbnail" >';
-                            img_html +='<img src="'+modelist[k].path+'" alt="通用的占位符缩略图"  style="height: 273px;">';
-                            img_html +='<div class="caption">';
-                            img_html +='<h4 class="text-info ">'+modelist[k].name+'<input style="margin-left: 15px;" type="checkbox" name="modelist" class="btn-link" data-name="'+modelist[k].name+'" data-path="'+modelist[k].path+'" disabled checked></h4>';
-                            img_html +='</div>';
-                            img_html += '</a>';
-                            img_html +='</div>';
-                        }
-                        $('#model').html(img_html);
-
-                        var outerData = result.outer;
-                        var auxiliaryData = result.auxiliary;
-
-                        var _html = '';
-
-                        if(productRequire.hasBodyLogo!=undefined&&productRequire.hasBodyLogo == 1){
-                            $('#hasBodyLogo').attr('checked',true);
-                        }
-                        if(productRequire.hasCapLogo!=undefined&&productRequire.hasCapLogo == 1){
-                            $('#hasCapLogo').attr('checked',true);
-                        }
-                        if(productRequire.hasDangerSign!=undefined&&productRequire.hasDangerSign == 1){
-                            $('#hasDangerSign').attr('checked',true);
-                        }
-                        if(productRequire.hasScaleLine!=undefined&&productRequire.hasScaleLine == 1){
-                            $('#hasScaleLine').attr('checked',true);
-                        }
-                        if(productRequire.hasSprayCode!=undefined&&productRequire.hasSprayCode == 1){
-                            $('#hasSprayCode').attr('checked',true);
-                        }
-
-                        /!*imgInfo.each(function (n,item) {
-                            if(item == '')
-                        })*!/
-
-                        if(outerData.length!=0){
-                            for(var i=0;i<outerData.length;i++){
-                                _html += '<tr class="outerlist">';
-                                _html += '<td class="text-center"><input type="checkbox" value="'+outerData[i].packingId+'" class="outercheckbox" name="outercheckbox"/></td>';
-                                _html += '<td class="text-center">'+outerData[i].packName+'</td>';
-                                _html += '<td class="text-center">'+outerData[i].spec+'</td>';
-                                _html += '<td class="text-center">'+outerData[i].size+'</td>';
-                                _html += '<td class="text-center">'+outerData[i].quality+'</td>';
-                                _html += '<td class="text-center">'+outerData[i].consumption+'</td>';
-                                _html += '<td class="text-center">'+outerData[i].unitPrice+'</td>';
-                                _html += '</tr>';
-                            }
-                            $('#befond').before(_html);
-                        }
-
-                        if(auxiliaryData.length!=0){
-                            for(var j=0;j<auxiliaryData.length;j++){
-                                auxiliary.innerHTML += '<tr class="">'+
-                                        '<td><input type="checkbox" value="'+auxiliaryData[j].packingId+'" class="auxiliarycheckbox" name="auxiliarycheckbox"/></td>'+
-                                        '<td>'+auxiliaryData[j].packName+'</td>' +
-                                        '<td>'+auxiliaryData[j].spec+'</td>'+
-                                        '<td>'+auxiliaryData[j].size+'</td>'+
-                                        '<td>'+auxiliaryData[j].quality+'</td>'+
-                                        '<td>'+auxiliaryData[j].consumption+'</td>'+
-                                        '<td>'+auxiliaryData[j].unitPrice+'</td>'+
-                                        '</tr>';
-                            }
-                        }
-
-                    }
-                })
-            }
-
-        }else if(editId == 2&&id!=''){
-            jQuery.ajax({
-                url:basePath + '/businessProduct/getProductRequireInfo?productRequireId=' + id,
-                type:'POST',
-                success:function(result){
-                    var productRequire = result.productRequire;
-                    if(productRequire.mainPackingType!=undefined){
-                        $('#mainPackingType').val(productRequire.mainPackingType);
-                    }
-                    if(productRequire.material!=undefined){
-                        $('#material').val(productRequire.material);
-                    }
-                    if(productRequire.specification!=undefined){
-                        $('#specification').val(productRequire.specification);
-                    }
-                    if(productRequire.price!=undefined){
-                        $('#price').val(productRequire.price);
-                    }
-                    if(productRequire.bottleWeight!=undefined){
-                        $('#bottleWeight').val(productRequire.bottleWeight);
-                    }
-                    if(productRequire.bottleCapColor!=undefined){
-                        $('#bottleCapColor').val(productRequire.bottleCapColor);
-                    }
-                    if(productRequire.bottleBodyColor!=undefined){
-                        $('#bottleBodyColor').val(productRequire.bottleBodyColor);
-                    }
-                    if(productRequire.bottleDiameter!=undefined){
-                        $('#bottleDiameter').val(productRequire.bottleDiameter);
-                    }
-                    if(productRequire.businessCheckNum!=undefined){
-                        $('#businessCheckNum').val(productRequire.businessCheckNum);
-                    }
-                    if(productRequire.bottlePasteRequire!=undefined){
-                        $('#bottlePasteRequire').val(productRequire.bottlePasteRequire);
-                    }
-                    if(productRequire.specialRequire!=undefined){
-                        $('#specialRequire').val(productRequire.specialRequire);
-                    }
-                    if(productRequire.addtionalPrice!=undefined){
-                        $('#addtionalPrice').val(productRequire.addtionalPrice);
-                    }
-                    if(productRequire.sealingStyle!=undefined){
-                        $('#sealingStyle').val(productRequire.sealingStyle);
-                    }
-                    if(productRequire.outerOackingOtherRequire!=undefined){
-                        $('#outerOackingOtherRequire').val(productRequire.outerOackingOtherRequire);
-                    }
-                    if(productRequire.otherRequire!=undefined){
-                        $('#otherRequire').val(productRequire.otherRequire);
-                    }
-                    if(productRequire.otherRequirePrice!=undefined){
-                        $('#otherRequirePrice').val(productRequire.otherRequirePrice);
-                    }
-                    if(productRequire.otherRequireConsumption!=undefined){
-                        $('#otherRequireConsumption').val(productRequire.outerOackingOtherRequire);
-                    }
-                    if(productRequire.bottlePasteRequire!=undefined){
-                        $('#bottlePasteRequire').val(productRequire.bottlePasteRequire);
-                    }
-                    if(productRequire.specialRequire!=undefined){
-                        $('#specialRequire').val(productRequire.specialRequire);
-                    }
-                    if(productRequire.addtionalPrice!=undefined){
-                        $('#addtionalPrice').val(productRequire.addtionalPrice);
-                    }
-                    if(productRequire.sealingStyle!=undefined){
-                        $('#sealingStyle').val(productRequire.sealingStyle);
-                    }
-                    if(productRequire.size!=undefined){
-                        $('#size').val(productRequire.size);
-                    }
-
-                    if(productRequire.imgInfo!=undefined){
-                        var imgInfo = eval(productRequire.imgInfo);
-                        $('img[data-name]').each(function (i,item) {
-                            var thisImg = $(this),
-                                    nameImg = thisImg.data('name');
-                            btn     = thisImg.parent('td').find('button');
-                            $.each(imgInfo,function (n,one) {
-                                if (nameImg==one.name){
-                                    thisImg.attr('src',one.imgpath);
-                                    btn.removeClass('hidden');
-                                    return false;
-                                }else {
-                                    return true;
-                                }
-                            })
-                        });
-                    }
-
-                    var modelist = eval(result.modelist);
-                    var img_html = '';
-
-                    for(var k=0;k<modelist.length;k++){
-                        img_html +='<div class="col-xs-2">';
-                        img_html +='<a class="thumbnail" >';
-                        img_html +='<img src="'+modelist[k].path+'" alt="通用的占位符缩略图"  style="height: 273px;">';
-                        img_html +='<div class="caption">';
-                        img_html +='<h4 class="text-info ">'+modelist[k].name+'<input style="margin-left: 15px;" type="checkbox" name="modelist" class="btn-link" data-name="'+modelist[k].name+'" data-path="'+modelist[k].path+'" disabled checked></h4>';
-                        img_html +='</div>';
-                        img_html += '</a>';
-                        img_html +='</div>';
-                    }
-                    $('#model').html(img_html);
-
-                    var outerData = result.outer;
-                    var auxiliaryData = result.auxiliary;
-
-                    var _html = '';
-
-                    if(productRequire.hasBodyLogo!=undefined&&productRequire.hasBodyLogo == 1){
-                        $('#hasBodyLogo').attr('checked',true);
-                    }
-                    if(productRequire.hasCapLogo!=undefined&&productRequire.hasCapLogo == 1){
-                        $('#hasCapLogo').attr('checked',true);
-                    }
-                    if(productRequire.hasDangerSign!=undefined&&productRequire.hasDangerSign == 1){
-                        $('#hasDangerSign').attr('checked',true);
-                    }
-                    if(productRequire.hasScaleLine!=undefined&&productRequire.hasScaleLine == 1){
-                        $('#hasScaleLine').attr('checked',true);
-                    }
-                    if(productRequire.hasSprayCode!=undefined&&productRequire.hasSprayCode == 1){
-                        $('#hasSprayCode').attr('checked',true);
-                    }
-
-                    /!*imgInfo.each(function (n,item) {
-                        if(item == '')
-                    })*!/
-
-                    if(outerData.length!=0){
-                        for(var i=0;i<outerData.length;i++){
-                            _html += '<tr class="outerlist">';
-                            _html += '<td class="text-center"><input type="checkbox" value="'+outerData[i].packingId+'" class="outercheckbox" name="outercheckbox"/></td>';
-                            _html += '<td class="text-center">'+outerData[i].packName+'</td>';
-                            _html += '<td class="text-center">'+outerData[i].spec+'</td>';
-                            _html += '<td class="text-center">'+outerData[i].size+'</td>';
-                            _html += '<td class="text-center">'+outerData[i].quality+'</td>';
-                            _html += '<td class="text-center">'+outerData[i].consumption+'</td>';
-                            _html += '<td class="text-center">'+outerData[i].unitPrice+'</td>';
-                            _html += '</tr>';
-                        }
-                        $('#befond').before(_html);
-                    }
-
-                    if(auxiliaryData.length!=0){
-                        for(var j=0;j<auxiliaryData.length;j++){
-                            auxiliary.innerHTML += '<tr class="">'+
-                                    '<td><input type="checkbox" value="'+auxiliaryData[j].packingId+'" class="auxiliarycheckbox" name="auxiliarycheckbox"/></td>'+
-                                    '<td>'+auxiliaryData[j].packName+'</td>' +
-                                    '<td>'+auxiliaryData[j].spec+'</td>'+
-                                    '<td>'+auxiliaryData[j].size+'</td>'+
-                                    '<td>'+auxiliaryData[j].quality+'</td>'+
-                                    '<td>'+auxiliaryData[j].consumption+'</td>'+
-                                    '<td>'+auxiliaryData[j].unitPrice+'</td>'+
-                                    '</tr>';
-                        }
-                    }
-
-                }
-            })
-
-        }*/
 
         //渲染主材树
         $('#tree').creatTree(basePath+'/packingCategory/CategoryTree?parentIds=1');
@@ -1297,6 +785,7 @@
 
 
                         if(outerData.length != 0){
+                            outer.html('');
                             for(var i=0;i<outerData.length;i++){
                                 _html += '<tr class="outerlist">';
                                 _html += '<td class="text-center"><input type="checkbox" value="'+ifEmpty(outerData[i].packingId)+'" class="outercheckbox" name="outercheckbox"/></td>';
@@ -1304,33 +793,31 @@
                                 _html += '<td class="text-center">'+ifEmpty(outerData[i].spec)+'</td>';
                                 _html += '<td class="text-center">'+ifEmpty(outerData[i].size)+'</td>';
                                 _html += '<td class="text-center">'+ifEmpty(outerData[i].quality)+'</td>';
-                                _html += '<td class="text-center">'+ifEmpty(outerData[i].consumption)+'</td>';
+                                _html += '<td class="text-center">'+ifEmpty(outerData[i].associatedConsumption)+'</td>';
                                 _html += '<td class="text-center">'+ifEmpty(outerData[i].unitPrice)+'</td>';
                                 _html += '</tr>';
                             }
-                            $('#befond').before(_html);
+                            $(_html).appendTo(outer);
                         }
 
+
                         if(auxiliaryData.length!=0){
+                            auxiliary.html('');
                             for(var j=0;j<auxiliaryData.length;j++){
-                                if(contains(auxiliaryMaterialIdslist,auxiliaryData[j].packingId)){
-                                    auxiliary_html += '<tr class=""><td><input type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox" name="auxiliarycheckbox" checked/></td>';
-                                }else {
-                                    auxiliary_html += '<tr class=""><td><input type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox" name="auxiliarycheckbox"/></td>';
-                                }
+                                auxiliary_html += '<tr class=""><td><input type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox" name="auxiliarycheckbox"/></td>';
                                 auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].packName)+'</td>';
                                 auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].spec)+'</td>';
                                 auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].size)+'</td>';
                                 auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].quality)+'</td>';
                                 if(ifEmpty(auxiliaryData[j].isEqualOuter) == 1){
-                                    auxiliary_html += '<td class="isEqualOuter">'+ifEmpty(auxiliaryData[j].consumption)+'</td>';
+                                    auxiliary_html += '<td class="isEqualOuter">'+ifEmpty(auxiliaryData[j].associatedConsumption)+'</td>';
                                 }else{
                                     auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].consumption)+'</td>';
                                 }
                                 auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].unitPrice)+'</td></tr>';
 
                             }
-                            $('#auxiliary').append(auxiliary_html);
+                            $(auxiliary_html).appendTo(auxiliary);
                         }else{
                             $('#auxiliary').addClass('hidden');
                         }
@@ -1525,15 +1012,10 @@
         return outerPackingId;
     }
 
-    /*function getmodel(){
-        var name = $('input[name="modelist"]:checked').attr('data-name');
-        var path = $('input[name="modelist"]:checked').attr('data-path');
-        var model = {
-            'name':name,
-            'path':path
-        }
-        return model;
-    }*/
+    //主材互斥
+    /*$(document).on('change','input[name="cellcheckbox"]',function(){
+
+    })*/
 
     //获取辅材Id数组
     function getauxiliaryMaterialIds() {
