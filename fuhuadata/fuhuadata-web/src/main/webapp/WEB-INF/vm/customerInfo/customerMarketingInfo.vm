@@ -270,7 +270,7 @@
         </button>
     </div>
     <div class="modal-body">
-        <div class="form-horizontal">
+        <form class="form-horizontal" id="cpps_form">
             <div class="form-group">
                 <div class="col-xs-12">
                     <table class="table table-condensed table-bordered text-center" id="cpps_pdt_t">
@@ -287,7 +287,7 @@
                         <tr>
                             <td>
                                 <div class="input-group">
-                                    <input class="form-control" id="cpps_modal_name" name="productName" type="text" readonly>
+                                    <input class="form-control" id="cpps_modal_name" name="productName" type="text" placeholder="请选择产品" readonly>
                                     <div class="input-group-btn">
                                         <button class="btn btn-xs btn-default" name="searchPdt" type="button" lang="zh">
                                             <span class="glyphicon glyphicon-search"></span>
@@ -296,9 +296,9 @@
                                 </div>
                             </td>
                             <td><input class="form-control" id="primary_unit" name="primaryUnit" type="text" readonly></td>
-                            <td><input class="form-control" name="annualDemands" type="number" min="0" ></td>
-                            <td><input class="form-control" name="averagePrice" type="number" min="0" step="0.01"></td>
-                            <td><select class="form-control" id="cpps_modal_year" name="year"></select></td>
+                            <td><input class="form-control" name="annualDemands" type="number" placeholder="必填" min="0" step="100"></td>
+                            <td><input class="form-control" name="averagePrice" type="number" placeholder="必填" min="0" step="0.5"></td>
+                            <td><select class="form-control" id="cpps_modal_year" name="year" placeholder="必填"></select></td>
                         </tr>
                         </tbody>
                     </table>
@@ -317,21 +317,21 @@
                         </thead>
                         <tbody>
                         <tr name="supplier">
-                            <td><input class="form-control" name="name" type="text"></td>
+                            <td><input class="form-control" name="name" type="text" placeholder="必填"></td>
                             <td><input class="form-control" name="primaryUnit" type="text" readonly></td>
-                            <td><input class="form-control" name="amount" type="number"></td>
-                            <td><input class="form-control" name="priceAverage" type="number" step="0.01"></td>
+                            <td><input class="form-control" name="amount" type="number" placeholder="必填" min="0" step="100"></td>
+                            <td><input class="form-control" name="priceAverage" type="number" placeholder="必填" min="0" step="0.5"></td>
                         </tr>
                         </tbody>
                         <tfoot>
                         <tr>
-                            <td colspan="5"><button class="btn btn-block btn-xs btn-default" id="add_spr" lang="zh">添加供应商</button></td>
+                            <td colspan="5"><button class="btn btn-block btn-xs btn-default" id="add_spr" type="button" lang="zh">添加供应商</button></td>
                         </tr>
                         </tfoot>
                     </table>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
     <div class="modal-footer">
         <div class="col-xs-4 col-xs-offset-2">
@@ -349,10 +349,10 @@
 ## 采购产品添加供应商
 <script id="spr_ct" type="text/html">
     <tr name="supplier">
-        <td><input class="form-control" name="name" type="text"></td>
-        <td><input class="form-control" name="primaryUnit" type="text" readonly></td>
-        <td><input class="form-control" name="amount" type="number"></td>
-        <td><input class="form-control" name="priceAverage" type="number" step="0.01">
+        <td><input class="form-control" name="name" type="text" value="" placeholder="必填"></td>
+        <td><input class="form-control" name="primaryUnit" type="text" value="" readonly></td>
+        <td><input class="form-control" name="amount" type="number" value="" placeholder="必填" min="0" step="100"></td>
+        <td><input class="form-control" name="priceAverage" type="number" value="" placeholder="必填" min="0" step="0.5">
             <button data-btn="del" type="button" class="close" data-target="tr" style="position: absolute; right: -34px;">
                 <span class="glyphicon glyphicon-remove-sign"></span>
             </button>
@@ -365,10 +365,10 @@
     <%if (data instanceof Array && data.length > 0) {%>
     <%for (var i=0; i < data.length; i++) {%>
     <tr name="supplier">
-        <td><input class="form-control" name="name" type="text" data-id="<%=data[i].id%>" value="<%=data[i].name%>"></td>
+        <td><input class="form-control" name="name" type="text" data-id="<%=data[i].id%>" value="<%=data[i].name%>" placeholder="必填"></td>
         <td><input class="form-control" name="primaryUnit" type="text" value="<%=data[i].measurement%>" readonly></td>
-        <td><input class="form-control" name="amount" type="number" value="<%=data[i].amount%>"></td>
-        <td><input class="form-control" name="priceAverage" type="number" value="<%=data[i].priceAverage%>" step="0.01">
+        <td><input class="form-control" name="amount" type="number" value="<%=data[i].amount%>" placeholder="必填" min="0" step="100"></td>
+        <td><input class="form-control" name="priceAverage" type="number" value="<%=data[i].priceAverage%>" placeholder="必填" min="0" step="0.5">
             <button data-btn="del" type="button" class="close" data-target="tr" style="position: absolute; right: -34px;">
                 <span class="glyphicon glyphicon-remove-sign"></span>
             </button>
@@ -386,7 +386,7 @@
         </button>
     </div>
     <div class="modal-body">
-        <div class="form-horizontal">
+        <form class="form-horizontal" id="csps_form">
             <div class="form-group">
                 <div class="col-xs-12">
                     <table class="table table-condensed table-bordered text-center" id="csps_pdt_t">
@@ -404,7 +404,7 @@
                         <tr>
                             <td>
                                 <div class="input-group">
-                                    <input class="form-control" id="csps_modal_name" name="productName" type="text" readonly>
+                                    <input class="form-control" id="csps_modal_name" name="productName" type="text" placeholder="请选择产品" readonly>
                                     <div class="input-group-btn">
                                         <button class="btn btn-xs btn-default" name="searchPdt" type="button" lang="zh">
                                             <span class="glyphicon glyphicon-search"></span>
@@ -413,7 +413,7 @@
                                 </div>
                             </td>
                             <td><input class="form-control" id="primary_unit" name="primaryUnit" type="text" readonly></td>
-                            <td><input class="form-control" name="yearSalesTotal" type="number" min="0" ></td>
+                            <td><input class="form-control" name="yearSalesTotal" type="number" placeholder="必填" min="0" step="100"></td>
                             <td><input class="form-control" name="brand" type="text"></td>
                             <td><input class="form-control" name="marketingMethod" type="text"></td>
                             <td><select class="form-control" id="csps_modal_year" name="year"></select></td>
@@ -437,10 +437,10 @@
                         <tr name="country">
                             <td><input class="form-control" name="destinationCountry" type="text"></td>
                             <td><input class="form-control" name="primaryUnit" type="text" readonly></td>
-                            <td><input class="form-control" name="amount" type="number"></td>
+                            <td><input class="form-control" name="amount" type="number" min="0" step="100"></td>
                             <td>
                                 <div class="input-group">
-                                    <input class="form-control" name="marketShare" type="number" step="0.01">
+                                    <input class="form-control" name="marketShare" type="number"  min="0" step="0.5"">
                                     <span class="input-group-addon">
                                         %
                                     </span>
@@ -450,13 +450,13 @@
                         </tbody>
                         <tfoot>
                         <tr>
-                            <td colspan="5"><button class="btn btn-block btn-xs btn-default" id="add_cty" lang="zh">添加销售目的国</button></td>
+                            <td colspan="5"><button class="btn btn-block btn-xs btn-default" id="add_cty" type="button" lang="zh">添加销售目的国</button></td>
                         </tr>
                         </tfoot>
                     </table>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
     <div class="modal-footer">
         <div class="col-xs-4 col-xs-offset-2">
@@ -525,10 +525,6 @@
     <%}%>
 </script>
 
-##<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
-##<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
-##<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
-##<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerMarketingAjax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerMarketingInteraction.js"></script>
 

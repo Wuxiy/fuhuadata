@@ -449,7 +449,7 @@ CRM.cbInfo.rInitHandler = function () {
 };
 
 // 表单验证配置
-CRM.cbInfo.vDeploy= function () {
+/*CRM.cbInfo.vDeploy= function () {
 
     // 错误信息容器
     $.validator.setDefaults({
@@ -465,10 +465,10 @@ CRM.cbInfo.vDeploy= function () {
             '</div>';
     };
     return em;
-};
+};*/
 
-// 返回对象
-CRM.cbInfo.pVerify = function (em) {
+// 返回验证的表单对象
+CRM.cbInfo.pVerify = function () {
 
     // 配置验证规格和显示消息
     var mainForm=$('#myForm').validate({
@@ -519,8 +519,8 @@ CRM.cbInfo.pVerify = function (em) {
     return mainForm;
 };
 
-// 返回对象
-CRM.cbInfo.mVerify = function (em) {
+// 返回验证的表单对象
+CRM.cbInfo.mVerify = function () {
 
     // 流失原因表单配置
     var rea = $("#rForm").validate({
@@ -619,8 +619,8 @@ $().ready(function() {
 
     // 初始化
     page.init();
-    pForm = page.pVerify(page.vDeploy());
-    mForm = page.mVerify(page.vDeploy());
+    pForm = page.pVerify();
+    mForm = page.mVerify();
 
     // 编辑
     page.edit = $('#edit');
