@@ -19,7 +19,7 @@ import java.util.List;
  * <p>User: wangjie
  * <p>Date: 5/10/2017
  */
-@Service
+@Service("com.fuhuadata.service.impl.mybatis.CurrencyRateServiceImpl")
 public class CurrencyRateServiceImpl extends BaseServiceImpl<CurrencyRate, Integer>
         implements CurrencyRateService {
 

@@ -69,6 +69,18 @@
                 <version>${spring.version}</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>javax.el</groupId>
+                <artifactId>javax.el-api</artifactId>
+                <version>2.2.4</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.web</groupId>
+                <artifactId>javax.el</artifactId>
+                <version>2.2.4</version>
+                <scope>test</scope>
+            </dependency>
 
             <dependency>
                 <groupId>com.fuhua</groupId>
@@ -287,7 +299,6 @@
                 <exclusions>
                     <exclusion>
                         <groupId>javax.validation</groupId>
-
                         <artifactId>validation-api</artifactId>
                     </exclusion>
                 </exclusions>

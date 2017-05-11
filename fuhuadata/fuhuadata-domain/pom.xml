@@ -15,6 +15,12 @@
     <url>http://maven.apache.org</url>
 
     <dependencies>
+        <!-- test -->
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+        </dependency>
+
         <!-- JSON BEGIN -->
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
