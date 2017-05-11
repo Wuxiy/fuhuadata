@@ -646,7 +646,15 @@ function renderAreaTree (data,callback,el) {
         },
         treeObj = null;
     pdtTreeData = CRM.toArr(data);
+    $.each(pdtTreeData,function (i, item) {
 
+        if (/^c_/.test(item.id)) {
+
+            item.isParent = true;
+        }else {
+            item.isParent = false;
+        }
+    });
     $.fn.zTree.init(el, setting, pdtTreeData);
     treeObj = $.fn.zTree.getZTreeObj('tree');
     treeObj.expandNode(treeObj.getNodes()[0],true);
