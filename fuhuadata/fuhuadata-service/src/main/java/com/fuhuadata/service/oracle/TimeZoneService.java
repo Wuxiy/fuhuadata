@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 public class TimeZoneService extends BaseNcSyncService<TimeZone, String, Timezone, String> {
 
     public TimeZoneService() {
+        super();
         this.syncName = "时区";
     }
 

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 public class IncoTermService extends BaseNcSyncService<IncoTerm, String, Incoterm, String> {
 
     public IncoTermService() {
+        super();
         this.syncName = "贸易术语档案";
     }
 

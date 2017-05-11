@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 public class CustClassService extends BaseNcSyncService<CustClass, String, Custclass, String> {
 
     public CustClassService() {
+        super();
         this.syncName = "客户基本分类档案";
     }
 

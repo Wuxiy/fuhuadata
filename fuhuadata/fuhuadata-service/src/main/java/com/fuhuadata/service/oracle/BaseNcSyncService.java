@@ -23,7 +23,7 @@ public class BaseNcSyncService<S extends BaseEntity<SID>, SID extends Serializab
 
     protected final Class<T> targetClass;
 
-    public BaseNcSyncService () {
+    public BaseNcSyncService() {
         this.targetClass = ReflectUtils.findParameterizedType(getClass(), 2);
     }
 
@@ -34,7 +34,7 @@ public class BaseNcSyncService<S extends BaseEntity<SID>, SID extends Serializab
 
     public void ncToCrm() {
         try {
-            logger.info("开始同步", getSyncName());
+            logger.info("[{}]开始同步", getSyncName());
             List<S> ncItems = list();
             List<T> docs = Lists.newArrayList();
 
@@ -45,16 +45,17 @@ public class BaseNcSyncService<S extends BaseEntity<SID>, SID extends Serializab
             }
 
             int i = crmService.saveDocs(docs);
-            logger.info("同步，待插入的记录数：[{}]，插入的记录数：[{}]",
+            logger.info("[{}]同步，待插入的记录数：[{}]，插入的记录数：[{}]",
                     new Object[]{getSyncName(), docs.size(), i});
-            logger.info("同步完成", getSyncName());
+            logger.info("[{}]同步完成", getSyncName());
         } catch (Exception e) {
-            logger.error("失败", getSyncName(), e);
+            logger.error("[{}]失败", getSyncName(), e);
         }
     }
 
     /**
      * 通过 ncdoc 生成 crmDoc
+     *
      * @param ncDoc
      * @return
      * @throws IllegalAccessException
@@ -69,6 +70,7 @@ public class BaseNcSyncService<S extends BaseEntity<SID>, SID extends Serializab
 
     /**
      * 默认什么都不做，子类可覆盖自定义同步字段
+     *
      * @param ncDoc
      * @param crmDoc
      */

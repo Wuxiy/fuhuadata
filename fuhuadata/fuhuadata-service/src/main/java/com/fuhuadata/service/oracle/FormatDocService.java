@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 public class FormatDocService extends BaseNcSyncService<FormatDoc, String, Formatdoc, String> {
 
     public FormatDocService() {
+        super();
         this.syncName = "数据格式";
     }
 

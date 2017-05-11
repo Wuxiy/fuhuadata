@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class CountryZoneService extends BaseNcSyncService<CountryZone, String, Countryzone, String> {
 
     public CountryZoneService() {
+        super();
         this.syncName = "国家地区档案";
     }
 

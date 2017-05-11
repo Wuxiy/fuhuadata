@@ -43,6 +43,9 @@ public class SyncDocFromNc {
         System.out.println("Spring Task Test.");
     }
 
+    /**
+     * 国家地区同步
+     */
     public void syncCountryZone() {
         countryzoneService.ncToCrm();
     }
