@@ -216,7 +216,7 @@
         kpa.`status`,
         kpa.`image_path` imagePath,
         kpr.id relationId,
-        kpr.`consumption` AS associatedConsumption,
+        kpr.`consumption` associatedConsumption,
         kpr.`is_equal_outer` isEqualOuter
         FROM
         k_packing_archives kpa
@@ -252,6 +252,7 @@
         k_packing_archives kpa
         LEFT JOIN k_packing_realtion kpr
         ON kpr.associated_packing_id = kpa.`packing_id` AND kpr.`main_packing_id` = #packingId#
+        WHERE kpa.big_category_id = 2 OR kpa.big_category_id = 3
         ]]>
     </select>
 
@@ -354,6 +355,9 @@
             <isNotEqual property="value" compareValue="0">
                 big_category_id=#id# OR small_category_id=#id# ORDER BY packing_id DESC
             </isNotEqual>
+            <isEqual property="value" compareValue="0">
+                big_category_id=2 OR big_category_id=3 ORDER BY packing_id DESC
+            </isEqual>
         </dynamic>
     </select>
 

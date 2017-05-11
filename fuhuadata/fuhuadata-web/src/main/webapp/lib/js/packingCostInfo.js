@@ -8,11 +8,13 @@
     var url = basePath+'/packingArchives/getPackingArchivesById?id='+id;
 
     var table = $('#packing_relate_table');
+    var modalrelatetable = $('#modal_relate_table');
     var imgGroup = document.getElementById('imgGroup');
 
 
     if(bid != 1){
         $('.relate').hide();
+        $('.danhao').hide();
     }
 
 $(document).ready(function(){
@@ -60,7 +62,7 @@ $(document).ready(function(){
                 var node = ResultData.nodes;
                 var table_html = '';
                 for(var i=0;i<node.length;i++){
-                    table_html += '<tr><td class="text-center"><input type="checkbox" name="cellcheckbox" value="'+node[i].packingId+'" /></td>';
+                    table_html += '<tr><td class="text-center"><input type="checkbox" name="cellcheckbox" data-relationId="'+node[i].relationId+'" value="'+node[i].packingId+'" /></td>';
                     table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].packingId)+'</td>';
                     table_html += '<td class="col-xs-2 text-center text-middle">'+ifEmpty(node[i].packName)+'</td>';
                     table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].spec)+'</td>';
@@ -298,8 +300,9 @@ $('#modal_checkAll').on('click',function(){
 $('#delete').on('click',function(){
     var ids = new Array();
     $("input[name='cellcheckbox']:checked").each(function(){
-        ids.push($(this).val());
+        ids.push($(this).attr('data-relationId'));
     })
+    ids = ids.join(',');
 
     if(ids.length > 0){
         var msg = "确定要删除这些关联吗？";
@@ -312,7 +315,7 @@ $('#delete').on('click',function(){
                 type:'POST',
                 dataType:"json",
                 contentType:"application/json",
-                data:JSON.stringify(data),
+                data:data,
                 success:function(){
                     alert("批量删除成功");
                     location.reload();
@@ -333,14 +336,12 @@ $('#addrelate').on('click',function(){
         cellcheckboxlist.push($(this).val());
     })
     cellcheckboxlists = cellcheckboxlist.join(',');
-    console.log(cellcheckboxlists);
 
     $('#tree').creatTree(basePath + '/packingCategory/CategoryTree?parentIds=2,3');
-    $('#tree').filtrateData(basePath + '/packingArchives/getPackingArchivesByPId',"modal_relate_table","packingInfoModal");
+    /*$('#tree').filtrateData(basePath + '/packingArchives/getPackingArchivesByPId',"modal_relate_table","packingInfoModal");*/
     jQuery.ajax({
-        url:basePath + '/packingArchives/getPackingArchivesByPId',
-        type:'POST',
-        data:{id:2}
+        url:basePath + '/packingArchives/getRelationPackingByPackId?packId='+id,
+        type:'POST'
     }).done(packingInfoModalList);
 
     /**
@@ -350,32 +351,60 @@ $('#addrelate').on('click',function(){
         var ResultData = data.data;
         var tr;
         if(ResultData!=undefined){
-            var parent = $('#modal_relate_table');
-            parent.html('');
+            modalrelatetable.html('');
             jQuery.each(ResultData,function(n,item){
-                if((','+cellcheckboxlists+",").indexOf(item.packingId)>-1){
-                    tr += '<tr><td><input type="checkbox" value="'+item.packingId+'" data-categoryId="'+item.bigCategoryId+'" name="modal_cellcheckbox" checked/></td>';
+                if(contains(cellcheckboxlist,item.packingId) == true){
+                    tr += '<tr data-categoryId="'+item.bigCategoryId+'" data-smallCategoryId="'+item.smallCategoryId+'"><td><input type="checkbox" value="'+item.packingId+'" data-categoryId="'+item.bigCategoryId+'" data-smallCategoryId="'+item.smallCategoryId+'" name="modal_cellcheckbox" checked/></td>';
                 }else{
-                    tr += '<tr><td><input type="checkbox" value="'+item.packingId+'" data-categoryId="'+item.bigCategoryId+'" name="modal_cellcheckbox"/></td>';
+                    tr += '<tr data-categoryId="'+item.bigCategoryId+'" data-smallCategoryId="'+item.smallCategoryId+'"><td><input type="checkbox" value="'+item.packingId+'" data-categoryId="'+item.bigCategoryId+'" data-smallCategoryId="'+item.smallCategoryId+'" name="modal_cellcheckbox"/></td>';
                 }
                 tr += '<td>'+ifEmpty(item.packingId)+'</td><td>'+ifEmpty(item.packName)+'</td>';
                 tr += '<td>'+ifEmpty(item.spec)+'</td><td>'+ifEmpty(item.size)+'</td>';
                 tr += '<td>'+ifEmpty(item.quality)+'</td><td>'+ifEmpty(item.unitPrice)+'</td>';
-                if((','+cellcheckboxlists+",").indexOf(item.packingId)>-1){
-                    tr += '<td><input class="form-control" value="'+ifEmpty(item.consumption)+'" name="modal_consumption"></td>';
+                if(contains(cellcheckboxlist,item.packingId) == true&&ifEmpty(item.isEqualOuter) == 0){
+                    tr += '<td><input class="form-control" value="'+ifEmpty(item.associatedConsumption)+'" name="modal_consumption"></td>';
                 }else{
-                    tr += '<td><input class="form-control" value="'+ifEmpty(item.consumption)+'" name="modal_consumption" disabled></td>';
+                    tr += '<td><input class="form-control" value="'+ifEmpty(item.associatedConsumption)+'" name="modal_consumption" disabled></td>';
                 }
-                tr += '<td class="text-center"><input type="checkbox" name="modal_isEqualOuter" disabled/></td>';
+                if(contains(cellcheckboxlist,item.packingId) == true&&item.isEqualOuter == 1){
+                    tr += '<td class="text-center"><input type="checkbox" name="modal_isEqualOuter" checked/></td>';
+                }else{
+                    tr += '<td class="text-center"><input type="checkbox" name="modal_isEqualOuter" disabled/></td>';
+                }
                 tr += '<td>'+(ifEmpty(item.status)==1?'启用':'禁用')+'</td></tr>';
 
             });
-            $(tr).appendTo(parent);
+            $(tr).appendTo(modalrelatetable);
         }
     }
 
     $('#addField').modal('show');
 })
+
+$(document).on('click','li[id]>a',function(e){
+    modalrelatetable.find('tr').hide();
+
+    e.preventDefault();
+    var a = $(e.target);
+    var classid = a.parent('li').attr('id');
+    if(classid == 2||classid == 3){
+        modalrelatetable.find('tr[data-categoryId="'+classid+'"]').show();
+    }else{
+        modalrelatetable.find('tr[data-smallCategoryId="'+classid+'"]').show();
+    }
+
+})
+
+//确认数组
+function contains(arr, obj) {
+    var i = arr.length;
+    while (i--) {
+        if (arr[i] == obj.toString()) {
+            return true;
+        }
+    }
+    return false;
+}
 
 //互斥处理
 $(document).on('change','[name="modal_cellcheckbox"]',function(){
@@ -408,7 +437,6 @@ $('#finish_relate').on('click',function(){
         var msg = "确认要为主材添加这些关联吗？";
         if(confirm(msg)){
             var url = basePath + '/packingArchives/addRelation?id=' + id;
-            var data = ids;
             console.log(ids);
             jQuery.ajax({
                 url:url,
@@ -473,7 +501,11 @@ $('#finish_relate').on('click',function(){
                                     table_html += '<td class="col-xs-2 text-center text-middle">'+ifEmpty(node[i].quality)+'</td>';
                                     table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].unitPrice)+'</td>';
                                     table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].consumption)+'</td>';
-                                    table_html += '<td class="text-center"><input type="checkbox" name="isEqualOuter"/></td>';
+                                    if(ifEmpty(node[i].isEqualOuter) == 1){
+                                        table_html += '<td class="text-center"><input type="checkbox" name="isEqualOuter" checked/></td>';
+                                    }else{
+                                        table_html += '<td class="text-center"><input type="checkbox" name="isEqualOuter"/></td>';
+                                    }
                                     table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].status)+'</td></tr>';
 
                                 }

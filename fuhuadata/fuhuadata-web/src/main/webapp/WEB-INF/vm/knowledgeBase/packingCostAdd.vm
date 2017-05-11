@@ -151,7 +151,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="btn-group btn-group-xs panel-heading-btn pull-right">
-                            <a class="btn btn-xs btn-primary panel-heading-btn" href="#addField" data-toggle="modal">
+                            <a class="btn btn-xs btn-primary panel-heading-btn" id="addrelate">
                                 <span class="glyphicon glyphicon-plus"></span>
                                 新增关联
                             </a>
@@ -172,6 +172,7 @@
                             <th class="col-xs-2 text-center text-middle">材质</th>
                             <th class="col-xs-1 text-center text-middle">单价（元）</th>
                             <th class="col-xs-1 text-center text-middle">单耗（每千升或每吨）</th>
+                            <th class="col-xs-1 text-center text-middle">是否关联外包材</th>
                             <th class="col-xs-1 text-center text-middle">状态</th>
                         </tr>
                         </thead>
@@ -273,27 +274,6 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/scaffolding.js"></script>
 <script type="text/javascript">
-    $('#tree').creatTree('${request.contextPath}/packingCategory/CategoryTree?parentIds=2,3');
-    $('#tree').filtrateData('${request.contextPath}/packingArchives/getPackingArchivesByPId',"modal_relate_table","packingInfoModal");
-    jQuery.ajax({
-        url:'${request.contextPath}/packingArchives/getPackingArchivesByPId',
-        type:'POST',
-        data:{id:2}
-    }).done(packingInfoModalList);
-
-    /**
-     *packingInfoModalList
-     */
-    function packingInfoModalList(data){
-        var ResultData = data.data;
-        if(ResultData!=undefined){
-            var parent = $('#modal_relate_table');
-            jQuery.each(ResultData,function(n,item){
-                var tr = '<tr><td><input type="checkbox" value="'+item.packingId+'" name="modal_cellcheckbox"/></td><td>'+ifEmpty(item.packingId)+'</td><td>'+ifEmpty(item.packName)+'</td><td>'+ifEmpty(item.spec)+'</td><td>'+ifEmpty(item.size)+'</td><td>'+ifEmpty(item.quality)+'</td><td>'+ifEmpty(item.unitPrice)+'</td><td>'+ifEmpty(item.consumption)+'</td><td>'+(ifEmpty(item.status)==1?'启用':'禁用')+'</td></tr>';
-                $(tr).appendTo(parent);
-            })
-        }
-    }
 
     $('#addimg').click(function(){
         var btn = $(this);
