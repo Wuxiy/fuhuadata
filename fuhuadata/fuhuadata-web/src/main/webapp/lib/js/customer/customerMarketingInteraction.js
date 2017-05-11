@@ -218,7 +218,11 @@ $(function(){
                         }
                         return old + options;
                     });
-                }else if (res.code !== 1 && res.code !== -1) {
+                }
+            }).fail(function (res) {
+
+                if (res.code !== -1) {
+
                     alert(res.message);
                 }
             });
@@ -246,7 +250,11 @@ $(function(){
 
                     // 关闭modal
                     $('#add_modal').modal('hide');
-                }else if (res.code !== 1 && res.code !== -1) {
+                }
+            }).fail(function (res) {
+
+                if (res.code !== -1) {
+
                     alert(res.message);
                 }
             });
@@ -274,7 +282,11 @@ $(function(){
 
                     // 关闭modal
                     $('#add_modal').modal('hide');
-                }else if (res.code !== 1 && res.code !== -1) {
+                }
+            }).fail(function (res) {
+
+                if (res.code !== -1) {
+
                     alert(res.message);
                 }
             });
@@ -463,7 +475,11 @@ $(function(){
                         }
                         return old + options;
                     });
-                }else if (res.code !== 1 && res.code !== -1) {
+                }
+            }).fail(function (res) {
+
+                if (res.code !== -1) {
+
                     alert(res.message);
                 }
             });
@@ -491,7 +507,11 @@ $(function(){
 
                     // 关闭modal
                     $('#add_modal').modal('hide');
-                }else if (res.code !== 1 && res.code !== -1) {
+                }
+            }).fail(function (res) {
+
+                if (res.code !== -1) {
+
                     alert(res.message);
                 }
             });
@@ -519,7 +539,11 @@ $(function(){
 
                     // 关闭modal
                     $('#add_modal').modal('hide');
-                }else if (res.code !== 1 && res.code !== -1) {
+                }
+            }).fail(function (res) {
+
+                if (res.code !== -1) {
+
                     alert(res.message);
                 }
             });
