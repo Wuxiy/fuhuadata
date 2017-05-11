@@ -303,21 +303,15 @@ $('#delete').on('click',function(){
         ids.push($(this).attr('data-relationId'));
     })
     ids = ids.join(',');
-
     if(ids.length > 0){
         var msg = "确定要删除这些关联吗？";
         if(confirm(msg)){
-            var url = basePath + '/packingArchives/deleteRelation?id=' + id;
-            var data = ids;
-
+            var url = basePath + '/packingArchives/deleteRelation?ids='+ ids;
             jQuery.ajax({
                 url:url,
                 type:'POST',
-                dataType:"json",
-                contentType:"application/json",
-                data:data,
                 success:function(result){
-                    if(result == 1){
+                    if(result.code == 1){
                         alert("批量删除成功");
                         $('#addField').modal('hide');
 
