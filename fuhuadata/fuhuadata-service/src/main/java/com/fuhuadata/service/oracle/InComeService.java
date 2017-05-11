@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 public class InComeService extends BaseNcSyncService<InCome, String, Income, String> {
 
     public InComeService() {
+        super();
         this.syncName = "收款协议";
     }
 
