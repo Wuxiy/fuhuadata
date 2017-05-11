@@ -115,18 +115,6 @@
                             </tr>
                             </thead>
                             <tbody id="businessOpportunityList">
-                            <tr>
-                                <td>00001</td>
-                                <td><a href="">草甘膦原药采购</a></td>
-                                <td>NUFARM</td>
-                                <td>战略客户</td>
-                                <td>经销商</td>
-                                <td>客户主要销售草甘膦系列产品，有原药采购需求</td>
-                                <td>门店考察</td>
-                                <td>80</td>
-                                <td>100</td>
-                                <td>正常</td>
-                            </tr>
                             </tbody>
                         </table>
                         <!--分页导航-->

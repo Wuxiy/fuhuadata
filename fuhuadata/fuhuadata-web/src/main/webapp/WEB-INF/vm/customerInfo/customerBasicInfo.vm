@@ -31,10 +31,10 @@
                                 <div class="col-xs-2">
                                     <input id="shortName" data-control="off" disabled name="shortName" class="form-control" type="text" value="" />
                                 </div>
-                                <label for="areaId" class=" control-label col-xs-1" lang="zh">地区分类<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <label for="areaId" class=" control-label col-xs-1" lang="zh">地区分类</label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input id="areaId" data-val="" disabled name="areaId" class="form-control">
+                                        <input class="form-control" id="areaId" name="areaId" data-val="" placeholder="点击搜索按钮选择" readonly>
                                         <div class="input-group-btn">
                                             <button id="aISearch" class="btn btn-xs btn-default" data-control="on" type="button" data-toggle="modal" data-target="#cbtModal"><span class="glyphicon glyphicon-search"></span></button>
                                         </div>
@@ -46,7 +46,7 @@
                                 <div class="col-xs-2">
                                     <input id="zhongxinbaoNumber" data-control="off" disabled name="zhongxinbaoNumber" class="form-control" type="text" value="" />
                                 </div>
-                                <label for="zhongxinbaoLevel" class="control-label col-xs-1" lang="zh">信用评级<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <label for="zhongxinbaoLevel" class="control-label col-xs-1" lang="zh">信用评级</label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
                                         <select id="zhongxinbaoLevel" data-control="off" disabled name="zhongxinbaoLevel" class="form-control">
@@ -61,12 +61,12 @@
                                 </div>
                                 <label for="saleOrganizationName" class="control-label col-xs-1" lang="zh">所属组织<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                        <div class="input-group">
-                                            <input id="saleOrganizationName" name="saleOrganizationName" data-toggle="dropdown" class="form-control dropdown-toggle" disabled type="text" placeholder="点击搜索按钮选择" autocomplete="off"/>
-                                            <div class="input-group-btn">
-                                                <button id="oNSearch" class="btn btn-xs btn-default" data-control="on" type="button" data-toggle="modal" data-target="#cbtModal"><span class="glyphicon glyphicon-search"></span></button>
-                                            </div>
+                                    <div class="input-group">
+                                        <input class="form-control dropdown-toggle" id="saleOrganizationName" name="saleOrganizationName" data-toggle="dropdown" type="text" placeholder="点击搜索按钮选择" readonly/>
+                                        <div class="input-group-btn">
+                                            <button id="oNSearch" class="btn btn-xs btn-default" data-control="on" type="button" data-toggle="modal" data-target="#cbtModal"><span class="glyphicon glyphicon-search"></span></button>
                                         </div>
+                                    </div>
                                 </div>
                                 <label class="col-xs-1 control-label" for="customerDutyParagraph">客户税号</label>
                                 <div class="col-xs-2"><input id="customerDutyParagraph" data-control="on" disabled name="customerDutyParagraph" class="form-control" type="text"></div>
@@ -102,7 +102,7 @@
                             <div class="form-group">
                                 <label for="dataFormat" class="control-label col-xs-1" lang="zh">数据格式<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <select id="dataFormat" data-control="off" disabled name="dataFormat" class="form-control">
+                                    <select class="form-control" id="dataFormat" name="dataFormat" data-control="off" disabled>
                                         #foreach($info in $!{formatdoc})
                                             <option value="$info.code">$info.name</option>
                                         #end
@@ -111,7 +111,7 @@
                                 <label for="customerBasicTypes" class="control-label col-xs-1" lang="zh">客户基本分类<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input id="customerBasicTypes" name="customerBasicTypes" data-toggle="dropdown" class="form-control dropdown-toggle" disabled type="text" placeholder="点击搜索按钮选择" autocomplete="off"/>
+                                        <input class="form-control dropdown-toggle" id="customerBasicTypes" name="customerBasicTypes" data-toggle="dropdown" type="text" placeholder="点击搜索按钮选择" readonly/>
                                         <div class="input-group-btn">
                                             <button id="cbtSearch" class="btn btn-xs btn-default" data-control="on" type="button" data-toggle="modal" data-target="#cbtModal"><span class="glyphicon glyphicon-search"></span></button>
                                         </div>
@@ -120,7 +120,7 @@
                                 <label for="timeZone" class="control-label col-xs-1" lang="zh">时区<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div id="czSearch" class="col-xs-2">
                                     <div class="input-group">
-                                        <input id="timeZone" name="timeZone" placeholder="请在下拉菜单中选择" class="form-control" disabled type="text" autocomplete="off"/>
+                                        <input class="form-control" id="timeZone" name="timeZone" type="text" placeholder="请在下拉菜单中选择" readonly/>
                                         <div class="input-group-btn">
                                             <button id="openTzc" data-control="on" disabled class="btn btn-xs btn-default dropdown" data-toggle="dropdown" type="button"><span class="glyphicon glyphicon-search"></span></button>
                                             <div class="dropdown-menu pull-right" style="width: 196px;padding: 3px 0;">
@@ -133,7 +133,7 @@
                                 <label for="commerceCountry" class="control-label col-xs-1" lang="zh">贸易国别<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div id="ccSearch" class="col-xs-2">
                                     <div class="input-group">
-                                        <input id="commerceCountry" name="commerceCountry" placeholder="请在下拉菜单中选择" class="form-control" disabled type="text" autocomplete="off"/>
+                                        <input class="form-control" id="commerceCountry" name="commerceCountry" type="text" placeholder="请在下拉菜单中选择" readonly/>
                                         <div class="input-group-btn">
                                             <button data-control="on" class="btn btn-xs btn-default dropdown" disabled data-toggle="dropdown" type="button"><span class="glyphicon glyphicon-search"></span></button>
                                             <div class="dropdown-menu pull-right" style="width: 196px;padding: 3px 0;">
@@ -460,7 +460,7 @@
 
 ## 新增页面的返回按钮
 <script id="backBtn" type="text/html">
-    <a href="${request.contextPath}/customerBaseInfo/customerListPageInit?customerType=2" id="backPage" class="btn btn-xs btn-primary panel-heading-btn pull-right">返回</a>
+    <a href="#" id="backPage" class="btn btn-xs btn-primary panel-heading-btn pull-right">返回</a>
 </script>
 
 ## 渲染客户状态表单控件

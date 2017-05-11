@@ -253,12 +253,12 @@
             FROM
                 business_info a
             LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
-            LEFT JOIN customer_linkman b ON b.customer_id = a.customer_id
+            LEFT JOIN customer_linkman b ON b.customer_id = a.customer_id AND b.is_default = 1
             LEFT JOIN customer_enterprise_nature nature ON nature.customer_id = a.customer_id
             LEFT JOIN	t_countryzone tc ON tc.`code` = base.countryzone
             WHERE
                 business_id = #value#
-            AND b.is_default = 1
+
     ]]>
     </select>
 
