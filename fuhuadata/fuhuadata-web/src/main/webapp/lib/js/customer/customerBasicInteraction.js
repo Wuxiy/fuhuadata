@@ -472,58 +472,45 @@ CRM.cbInfo.pVerify = function (em) {
 
     // 配置验证规格和显示消息
     var mainForm=$('#myForm').validate({
-        onfocusout: function(element) {
-            $(element).valid();
-        },
         rules: {
-            fullName: "required",
-            areaId: 'required',
-            "enterpriseNature": {
-                required : true
-            },
-            // enterpriseNature:"required",
-            // enterprisePhone:'digits',
-            // enterpriseEmail:'email',
-            // showFactory: 'required',
-            // showMajorCompetitorsGroup: {
-            //     required: "#aa:checked"
-            // },
-            // customerLevel:'required',
+            fullName: 'required',
+            saleOrganizationName: 'required',
+            enterpriseNature: 'required',
+            dataFormat: 'required',
+            customerBasicTypes: 'required',
+            timeZone: 'required',
+            commerceCountry: 'required',
             opportunitySource:{
                 required:'#showOpportunity:checked'
             },
             opportunityDescrible:{
                 required:'#showOpportunity:checked'
-            }
-
+            },
+            enterpriseEmail:'email'
         },
         messages: {
             fullName: {
                 required:em('必填','top:-29px','right:0')
             },
-            areaId: {
+            saleOrganizationName:{
                 required:em('请选择一个值','top:-29px','right:0')
             },
-            // showFactory: {
-            //     required:em('必填','top:-29px','right:0')
-            // },
-            // showMajorCompetitorsGroup: {
-            //     required:em('必填','top:-29px','right:0')
-            // },
             enterpriseNature:{
                 required:em('请选择一个值','top:-29px','left:-60px')
             },
-            // hasChiCompany:{
-            //     required:em('请选择一个值','top:-29px','right:0')
-            // },
-            // hasChiPurchase:{
-            //     required:em('请选择一个值','top:-29px','right:0')
-            // },
-            // customerLevel:{
-            //     required:em('请选择一个值','top:-29px','right:0')
-            // },
-            // enterprisePhone:em('请输入有效的电话','top:-29px','right:0'),
-            // enterpriseEmail:em('请输入有效的邮箱','top:-29px','right:0'),
+            dataFormat:{
+                required:em('请选择一个值','top:-29px','right:0')
+            },
+            customerBasicTypes:{
+                required:em('请选择一个值','top:-29px','right:0')
+            },
+            timeZone:{
+                required:em('请选择一个值','top:-29px','right:0')
+            },
+            commerceCountry:{
+                required:em('请选择一个值','top:-29px','right:0')
+            },
+            enterpriseEmail:em('请输入有效的邮箱','top:-29px','right:0'),
             opportunitySource:em('请选择一个值','top:-29px','right:0'),
             opportunityDescrible:em('请填写机会描述','top:-29px','right:0')
         }
@@ -716,10 +703,10 @@ $().ready(function() {
     });
 
     // 返回
-    // $('#backPage').on('click.back',function () {
-    //
-    //     window.history.back(-1);
-    // });
+    $('#backPage').on('click.back',function () {
+
+        window.history.back(-1);
+    });
 
     // 重置
     $('#resetB').on('click.reset',function () {
@@ -762,9 +749,9 @@ $().ready(function() {
                 contentType:"application/json",
                 method:'POST',
                 callback:function (data) {
-
-                    self.location = basePath+'/customerBaseInfo/intoCustomerBaseInfoDetails?' +
-                        'customerType=2&customerId='+ data.customerId;
+                    window.history.back(-1);
+                    /*self.location = basePath+'/customerBaseInfo/intoCustomerBaseInfoDetails?' +
+                        'customerType=2&customerId='+ data.customerId;*/
                 }
             });
         }
