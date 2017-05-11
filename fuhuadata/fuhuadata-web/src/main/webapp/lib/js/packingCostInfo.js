@@ -307,15 +307,12 @@ $('#delete').on('click',function(){
     if(ids.length > 0){
         var msg = "确定要删除这些关联吗？";
         if(confirm(msg)){
-            var url = basePath + '/packingArchives/deleteRelation?id=' + id;
-            var data = ids;
+            var url = basePath + '/packingArchives/deleteRelation?id=' + ids;
 
             jQuery.ajax({
                 url:url,
                 type:'POST',
-                dataType:"json",
-                contentType:"application/json",
-                data:data,
+
                 success:function(result){
                     if(result == 1){
                         alert("批量删除成功");
@@ -366,14 +363,14 @@ $('#delete').on('click',function(){
                                     var table_html = '';
                                     table.html('');
                                     for(var i=0;i<node.length;i++){
-                                        table_html += '<tr><td class="text-center"><input type="checkbox" name="cellcheckbox" value="'+node[i].packingId+'" /></td>';
+                                        table_html += '<tr><td class="text-center"><input type="checkbox" name="cellcheckbox" data-relationId="'+node[i].relationId+'" value="'+node[i].packingId+'" /></td>';
                                         table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].packingId)+'</td>';
                                         table_html += '<td class="col-xs-2 text-center text-middle">'+ifEmpty(node[i].packName)+'</td>';
                                         table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].spec)+'</td>';
                                         table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].size)+'</td>';
                                         table_html += '<td class="col-xs-2 text-center text-middle">'+ifEmpty(node[i].quality)+'</td>';
                                         table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].unitPrice)+'</td>';
-                                        table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].consumption)+'</td>';
+                                        table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].associatedConsumption)+'</td>';
                                         if(ifEmpty(node[i].isEqualOuter) == 1){
                                             table_html += '<td class="text-center"><input type="checkbox" name="isEqualOuter" checked/></td>';
                                         }else{
@@ -583,14 +580,14 @@ $('#finish_relate').on('click',function(){
                                 var table_html = '';
                                 table.html('');
                                 for(var i=0;i<node.length;i++){
-                                    table_html += '<tr><td class="text-center"><input type="checkbox" name="cellcheckbox" value="'+node[i].packingId+'" /></td>';
+                                    table_html += '<tr><td class="text-center"><input type="checkbox" name="cellcheckbox" data-relationId="'+node[i].relationId+'" value="'+node[i].packingId+'" /></td>';
                                     table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].packingId)+'</td>';
                                     table_html += '<td class="col-xs-2 text-center text-middle">'+ifEmpty(node[i].packName)+'</td>';
                                     table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].spec)+'</td>';
                                     table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].size)+'</td>';
                                     table_html += '<td class="col-xs-2 text-center text-middle">'+ifEmpty(node[i].quality)+'</td>';
                                     table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].unitPrice)+'</td>';
-                                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].consumption)+'</td>';
+                                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].associatedConsumption)+'</td>';
                                     if(ifEmpty(node[i].isEqualOuter) == 1){
                                         table_html += '<td class="text-center"><input type="checkbox" name="isEqualOuter" checked/></td>';
                                     }else{
