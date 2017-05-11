@@ -220,10 +220,10 @@ $(function(){
                     });
                 }
             }).fail(function (res) {
+                var data = JSON.parse(res.responseText);
+                if (data.code !== -1) {
 
-                if (res.code !== -1) {
-
-                    alert(res.message);
+                    alert(data.message);
                 }
             });
         }
@@ -252,11 +252,11 @@ $(function(){
                     $('#add_modal').modal('hide');
                 }
             }).fail(function (res) {
+                var data = JSON.parse(res.responseText);
+                if (data.code !== -1) {
 
-                if (res.code !== -1) {
-
-                    alert(res.message);
-                }
+                 alert(data.message);
+                 }
             });
         }
     });
@@ -284,10 +284,10 @@ $(function(){
                     $('#add_modal').modal('hide');
                 }
             }).fail(function (res) {
+                var data = JSON.parse(res.responseText);
+                if (data.code !== -1) {
 
-                if (res.code !== -1) {
-
-                    alert(res.message);
+                    alert(data.message);
                 }
             });
         }
@@ -477,10 +477,10 @@ $(function(){
                     });
                 }
             }).fail(function (res) {
+                var data = JSON.parse(res.responseText);
+                if (data.code !== -1) {
 
-                if (res.code !== -1) {
-
-                    alert(res.message);
+                    alert(data.message);
                 }
             });
         }
@@ -509,10 +509,10 @@ $(function(){
                     $('#add_modal').modal('hide');
                 }
             }).fail(function (res) {
+                var data = JSON.parse(res.responseText);
+                if (data.code !== -1) {
 
-                if (res.code !== -1) {
-
-                    alert(res.message);
+                    alert(data.message);
                 }
             });
         }
@@ -541,10 +541,10 @@ $(function(){
                     $('#add_modal').modal('hide');
                 }
             }).fail(function (res) {
+                var data = JSON.parse(res.responseText);
+                if (data.code !== -1) {
 
-                if (res.code !== -1) {
-
-                    alert(res.message);
+                    alert(data.message);
                 }
             });
         }
