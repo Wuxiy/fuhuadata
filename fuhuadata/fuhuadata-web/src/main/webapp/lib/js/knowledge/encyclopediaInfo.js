@@ -57,8 +57,6 @@ CRM.enc.infoInit = function () {
     })
 };
 
-
-
 // 编辑状态，用custoemrId初始化
 CRM.enc.editInitByCus = function () {
     var page = CRM.enc;
@@ -91,7 +89,6 @@ CRM.enc.editInitByEncy = function (id) {
 
 };
 
-
 // 新增初始化
 CRM.enc.addInit = function () {
     var page = CRM.enc;
@@ -121,7 +118,7 @@ CRM.enc.renderInfo = function (data) {
             page.registeredFund.val(data.registeredFunds.split(':')[0]);
         }
     } // 注册资金
-    // page.registeredFund.val(data.registeredFunds); // 注册资金
+    /*page.registeredFund.val(data.registeredFunds); */// 注册资金
     page.registeredAddr.val(data.registeredAddr); // 注册地址
     page.managementScope.val(data.managementScope); // 经营范围
     page.companyInfo.val(data.companyInfo); // 企业简介
@@ -280,19 +277,6 @@ CRM.enc.onEl = function () {
     page.editEl.removeAttr('disabled');
     // CRM.onOrOff(page.editEl,true);
 };
-
-// 是否隐藏其他文本框
-// CRM.enc.isView = function () {
-//     var page = CRM.enc;
-//
-//     if (page.otherEnterpriceNature.val()==='') {
-//
-//         page.otherEnterpriceNature.addClass('hidden');
-//     }else {
-//
-//         page.otherEnterpriceNature.removeClass('hidden');
-//     }
-// };
 
 // 返回当前页面的状态
 CRM.enc.getStatus = function (status) {

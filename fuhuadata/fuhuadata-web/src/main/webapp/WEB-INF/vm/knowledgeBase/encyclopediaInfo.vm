@@ -72,11 +72,11 @@
                         <div class="form-group ">
                             <label class="col-xs-1 control-label">注册资金</label>
                             <div class="col-xs-2">
+##                                <input id="registeredFunds" type="text" disabled class="form-control" />
                                 <div class="input-group">
-                                    <input id="registeredFund" type="text" disabled class="form-control" />
-                                    <span class="input-group-addon">$</span>
+                                    <span id="fundType" class="input-group-addon" lang="zh">美元</span>
+                                    <input id="registeredFunds" data-control="off" disabled name="registeredFunds" class="form-control" min="0" type="number" value="" />
                                 </div>
-
                             </div>
                         </div>
                         <div class="form-group ">

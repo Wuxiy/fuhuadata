@@ -13,12 +13,12 @@ public class CategoryTree implements Serializable {
     private String cid;
     private String pid;
     private String cname;
-
     private List<CategoryTree> nodes =new ArrayList<CategoryTree>();
 
     public CategoryTree(){
 
     }
+
 
     public String getCid() {
         return cid;

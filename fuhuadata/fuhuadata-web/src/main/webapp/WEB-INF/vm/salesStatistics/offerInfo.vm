@@ -22,7 +22,7 @@
                             <button id="edit" data-btn="edit" data-view="editHide" class="btn btn-xs btn-primary hidden" type="button" lang="zh">编辑</button>
                         </div>
                         <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right">
-                            <button id="cancel" data-btn="cancel" data-view="editView" class="btn btn-default hidden" type="button" lang="zh">取消</button>
+                            <button id="cancel" data-btn="cancel" data-view="editView" class="btn btn-default hidden" type="button" lang="zh" onclick="location.reload()">取消</button>
                             <button id="save" data-btn="save" data-view="editView" class="btn btn-primary hidden" type="button" lang="zh">保存</button>
                         </div>
                         <h3 class="panel-title" lang="zh">基本信息</h3>
@@ -54,7 +54,11 @@
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">注册资金</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" type="text" id="registeredFunds" value="" disabled />
+##                                    <input class="form-control" type="text" id="registeredFunds" value="" disabled />
+                                    <div class="input-group">
+                                        <span id="fundType" class="input-group-addon" lang="zh">美元</span>
+                                        <input id="registeredFunds" data-control="off" disabled name="registeredFunds" class="form-control" min="0" type="number" value="" />
+                                    </div>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">企业电话</label>
                                 <div class="col-xs-2">
@@ -190,9 +194,9 @@
                                 <div class="col-xs-2">
                                     <input data-control="on" class="form-control" type="number" step="0.01" id="nusdexchgrate" value="" disabled/>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">原币对本元汇率<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">原币对本币<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input data-control="on" class="form-control" type="number" step="0.01" id="nexchangerate" value="" disabled/>
+                                    <input data-control="on" class="form-control" type="number" step="0.5" id="nexchangerate" value="" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">保险费率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
@@ -225,8 +229,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-xs-1 control-label" lang="zh">销售费用比率<sup data-view="editView" class="not-null hidden">*</sup></label>
+                            <div class="form-group" id="corporation">
+                                #*<label class="col-xs-1 control-label" lang="zh">销售费用比率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
                                         <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="saleRate" value="0.50" disabled/>
@@ -239,7 +243,7 @@
                                         <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="managementRate" value="0.20" disabled/>
                                         <span class="input-group-addon">%</span>
                                     </div>
-                                </div>
+                                </div>*#
                                 <label class="col-xs-1 control-label" lang="zh">信保费率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
@@ -465,19 +469,27 @@
                         if(businessOrder.creditRate!=undefined){$('#creditRate').val(businessOrder.creditRate);} // 信保赔付率
                         if(businessOrder.transportFlag!=undefined){$('#transportFlag').val(businessOrder.transportFlag);} // 是否可转运
                         if(businessOrder.partialShipmentFalg!=undefined){$('#partialShipmentFalg').val(businessOrder.partialShipmentFalg);} // 是否可分批出运
-
+                        isShowCre(businessOrder.isCreditRisk); // 判断是否显示信保相关字段
 
                         var customerBaseInfo = result.data.customerBaseInfo;
                         if(customerBaseInfo.customerId!=undefined){$('#customerId').val(customerBaseInfo.customerId);} // 客户id
                         if(customerBaseInfo.fullName!=undefined){$('#fullName').val(customerBaseInfo.fullName);} // 客户名称
                         if(customerBaseInfo.zhongxinbaoNumber!=undefined){$('#zhongxinbaoNumber').val(customerBaseInfo.zhongxinbaoNumber); }// 中信保编码
-                        if(customerBaseInfo.registeredFunds!=undefined){$('#registeredFunds').val(customerBaseInfo.registeredFunds); }// 注册资金
+                        /*if(customerBaseInfo.registeredFunds!=undefined){$('#registeredFunds').val(customerBaseInfo.registeredFunds); }*/
+                        if (customerBaseInfo.registeredFunds!=undefined) {
+                            if(customerBaseInfo.registeredFunds.split(':').length==2){
+                                $('#fundType').text(customerBaseInfo.registeredFunds.split(':')[0]).data('val',customerBaseInfo.registeredFunds.split(':')[0]);
+                                $('#registeredFunds').val(customerBaseInfo.registeredFunds.split(':')[1]);
+                            }else {
+                                $('#registeredFunds').val(customerBaseInfo.registeredFunds.split(':')[0]);
+                            }
+                        }// 注册资金
                         if(customerBaseInfo.enterprisePhone!=undefined){$('#enterprisePhone').val(customerBaseInfo.enterprisePhone);} // 企业电话
                         if(customerBaseInfo.enterpriseEmail!=undefined){$('#enterpriseEmail').val(customerBaseInfo.enterpriseEmail);}// 企业邮箱
-                        if(customerBaseInfo.enterpriseNature!=undefined){$('[name="check"]').val([customerBaseInfo.enterpriseNature]); }// 企业性质
-                        if(customerBaseInfo.otherEnterpriseNature!=undefined){$('#otherEnterpriseNature').val(customerBaseInfo.otherEnterpriseNature);} // 其他企业性质
+                        /*if(customerBaseInfo.enterpriseNature!=undefined){$('[name="check"]').val([customerBaseInfo.enterpriseNature]); }// 企业性质
+                        if(customerBaseInfo.otherEnterpriseNature!=undefined){$('#otherEnterpriseNature').val(customerBaseInfo.otherEnterpriseNature);} // 其他企业性质*/
 
-                        if(customerBaseInfo.enterpriseNature!=undefined){
+                        /*if(customerBaseInfo.enterpriseNature!=undefined){
                             var enterpriseNature = customerBaseInfo.enterpriseNature.split(',');
 
                             $.each(enterpriseNature,function(index,value){
@@ -490,7 +502,7 @@
                                     }
                                 })
                             });
-                        }
+                        }*/
 
                         businessproduct.innerHTML = '';
                         if(result.data.businessOrderProductLists!=undefined){
@@ -829,7 +841,21 @@
         return false;
     });
 
+    // 信保赔付率为否，则隐藏信保费率和信保赔付率
+    $('#isCreditRisk').change(function () {
+        var v = $(this).val();
+        isShowCre(v);
+    })
 
+    // 是否显示保费率和信保赔付率
+    function isShowCre(v) {
+        if (parseInt(v)===0) {
+            $('#corporation').addClass('hidden');
+            $('input', $('#corporation')).val('');
+        }else {
+            $('#corporation').removeClass('hidden');
+        }
+    }
 
     /**
      * 渲染组织树菜单

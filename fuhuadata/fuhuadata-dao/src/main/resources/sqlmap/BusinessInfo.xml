@@ -233,7 +233,7 @@
     </delete>
 
 
-    <!--商机转化表头客户信息-->
+    <!--商机转化表头客户信息和商机信息-->
     <select id="GET-BY-ID" resultMap="BUSINESSINFOALL-MAP" parameterClass="java.lang.String">
         <![CDATA[
                 SELECT
