@@ -662,8 +662,8 @@ function renderAreaTree (data,callback,el) {
 
 // 产品树添加单击事件
 function pdtTreeDblHandler (event, modLeftId, treeNode) {
-
-    if (!/^c_/.test(treeNode.id)) {
+    /*console.log(treeNode);*/
+    if (treeNode !== null && !/^c_/.test(treeNode.id)) {
 
         currentInput.val(treeNode.name);
 
