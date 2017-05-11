@@ -4,12 +4,15 @@ import com.fuhuadata.dao.mapper.CustomerPurchaseProductMapper;
 import com.fuhuadata.domain.mybatis.CustomerPurchaseProduct;
 import com.fuhuadata.domain.mybatis.CustomerPurchaseSupplier;
 import com.fuhuadata.domain.query.QueryCustomerPurchaseProduct;
+import com.fuhuadata.service.exception.ServiceException;
 import com.fuhuadata.service.mybatis.CustomerPurchaseProductService;
 import com.fuhuadata.service.mybatis.CustomerPurchaseSupplierService;
+import com.fuhuadata.service.util.MessageUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
@@ -81,7 +84,17 @@ public class CustomerPurchaseProductServiceImpl extends BaseServiceImpl<Customer
             return;
         }
 
-        saveOrUpdateSelective(product);// 保存采购产品
+        try {
+            saveOrUpdateSelective(product);// 保存采购产品
+        } catch (RuntimeException e) {
+            if (e instanceof DuplicateKeyException) {
+                throw new ServiceException(
+                        MessageUtils.message("customer.product.purchase.duplicate", product.getYear(), product.getProductName()),
+                        e);
+            } else {
+                throw e;
+            }
+        }
 
         List<CustomerPurchaseSupplier> suppliers = product.getSuppliers();
         for (CustomerPurchaseSupplier supplier : suppliers) {
