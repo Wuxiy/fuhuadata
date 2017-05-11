@@ -72,6 +72,7 @@
                             <th class="text-center" lang="zh">客户类型</th>
                             <th class="text-center" lang="zh">国家</th>
                             <th class="text-center" lang="zh">销售额</th>
+                            <th class="text-center" lang="zh">已回款金额</th>
                             <th class="text-center" lang="zh">毛利润</th>
                             <th class="text-center" lang="zh">营销成本</th>
                             <th class="text-center" lang="zh">净利润</th>
@@ -600,6 +601,7 @@
                 _html += '  <td>'+ResultData[i].country+'</td>';
                 _html += '  <td><a data-toggle="modal" href="#myModal" data-customerid="'+ ResultData[i].customerId +'">'+
                         (ResultData[i].salesAmount==null?0:ResultData[i].salesAmount)+'</a></td>';
+                _html += '  <td>'+(ResultData[i].actualAmountPaid!=undefined?ResultData[i].actualAmountPaid:0)+'</td>';
                 _html += '  <td lang="zh">'+(ResultData[i].grossProfit!=undefined?ResultData[i].grossProfit:0)+'</td>';
                 _html += '  <td><a href="'+basePath+'/customerVisitRecord/intoCustomerMaintenance?customerId='+
                         ResultData[i].customerId +'">' + (ResultData[i].maintenanceFee!=undefined?ResultData[i].maintenanceFee:0) +'</a></td>';
