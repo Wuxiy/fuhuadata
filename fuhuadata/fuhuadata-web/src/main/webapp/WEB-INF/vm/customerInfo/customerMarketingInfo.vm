@@ -278,7 +278,7 @@
                         <tr>
                             <th class="col-xs-4 text-center" lang="zh">产品名称</th>
                             <th class="col-xs-2 text-center" lang="zh">主单位</th>
-                            <th class="col-xs-2 text-center" lang="zh">年需求量</th>
+                            <th class="col-xs-2 text-center" lang="zh">年采购量</th>
                             <th class="col-xs-2 text-center" lang="zh">平均单价（美元）</th>
                             <th class="col-xs-2 text-center" lang="zh">采购年份</th>
                         </tr>
@@ -311,7 +311,7 @@
                         <tr>
                             <th class="col-xs-4 text-center" lang="zh">供应商</th>
                             <th class="col-xs-2 text-center" lang="zh">主单位</th>
-                            <th class="col-xs-2 text-center" lang="zh">年需求量</th>
+                            <th class="col-xs-2 text-center" lang="zh">年采购量</th>
                             <th class="col-xs-2 text-center" lang="zh">平均单价（美元）</th>
                         </tr>
                         </thead>
