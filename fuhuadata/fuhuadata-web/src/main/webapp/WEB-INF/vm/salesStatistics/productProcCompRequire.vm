@@ -31,7 +31,7 @@
                         <h3 class="panel-title" lang="zh">包装要求</h3>
                     </div>
                     <div class="panel-body clearfix">
-                        <table class="table table-condensed table-bordered table-striped text-right">
+                        <table class="table table-condensed table-bordered text-right">
                             <caption class="text-info text-left">
                                 主材选择
                             </caption>
@@ -69,7 +69,7 @@
 
                                 </td>
                             </tr>
-                            <tr>
+                            <tr class="hidden" name="bottlesOfBarrel">
                                 <td>含盖瓶重</td>
                                 <td>
                                     <div class="input-group">
@@ -90,7 +90,7 @@
                                 </td>
 
                             </tr>
-                            <tr>
+                            <tr class="hidden" name="bottlesOfBarrel">
                                 <td>瓶身有LOGO</td>
                                 <td>
                                     <div class="checkbox col-xs-12 text-left">
@@ -112,7 +112,7 @@
                                 <td >商检号</td>
                                 <td><input data-control="on" id="businessCheckNum" class="form-control isdisabled" type="text" value="" disabled/></td>
                             </tr>
-                            <tr>
+                            <tr class="hidden" name="bottlesOfBarrel">
                                 <td>瓶身需要刻度线</td>
                                 <td>
                                     <div class="checkbox col-xs-12 text-left">
@@ -153,7 +153,7 @@
                             </tr>
                             </tbody>
                         </table>
-                        <table class="table table-condensed table-bordered table-striped text-right text-center">
+                        <table class="table table-condensed table-bordered text-right text-center">
                             <caption class="text-info text-left">
                                 外包装选择
                             </caption>
@@ -193,7 +193,7 @@
                             </tr>
                             </tfoot>
                         </table>
-                        <table class="table table-condensed table-bordered table-striped text-right text-center">
+                        <table class="table table-condensed table-bordered text-right text-center">
                             <caption class="text-info text-left">
                                 辅材
                             </caption>
@@ -212,7 +212,7 @@
 
                             </tbody>
                         </table>
-                        <table class="table table-condensed table-bordered table-striped text-right text-center">
+                        <table class="table table-condensed table-bordered text-right text-center">
                             <caption class="text-info text-left">
                                 其他要求
                             </caption>
@@ -245,7 +245,7 @@
                             </tr>
                             </tbody>
                         </table>
-                        <table class="table table-condensed table-bordered table-striped text-center text-center table-v-align-b">
+                        <table class="table table-condensed table-bordered text-center text-center table-v-align-b">
                             <caption class="text-info">图片上传</caption>
                             <tbody id="imgGroup" class="img-group">
                             <tr>
@@ -383,7 +383,7 @@
                     <div class="col-xs-9">
                         <div class="panel panel-default">
                             <div class="panel-body clearfix">
-                                <table class="table table-condensed table-bordered table-striped text-right text-center">
+                                <table class="table table-condensed table-bordered text-right text-center">
                                     <thead>
                                     <tr>
                                         <th class="text-center"></th>
@@ -569,6 +569,12 @@
                         $('#hasSprayCode').attr('checked',true);
                     }
 
+                    // 判断是否显示瓶桶类相关字段
+                    if (/[瓶桶类]/g.test(productRequire.mainPackingType)) {
+                        $('[name="bottlesOfBarrel"]').removeClass('hidden');
+                    }else {
+                        $('[name="bottlesOfBarrel"]').addClass('hidden');
+                    }
 
                     var modelist = eval(result.modelist);
                     var img_html = '';
@@ -741,7 +747,7 @@
         $('#finish').click(function(){
 
             var cellcheckbox = $("input[name='cellcheckbox']:checked").parent('td').parent('tr').find('td');
-            if(cellcheckbox.length<0){
+            if($("input[name='cellcheckbox']:checked").length === 0){
                 alert('请选择主材！');
                 return false;
             }else{
@@ -768,6 +774,18 @@
                         var img_html = '';
                         var _html = '';
                         var auxiliary_html;
+                        var sid = result.main.smallCategoryId;
+
+                        // 如果sid===4，则显示瓶桶类规格要求
+                        if (sid === 4) {
+                            $('[name="bottlesOfBarrel"]').removeClass('hidden');
+                            $('input', $('[name="bottlesOfBarrel"]')).not('[type="checkbox"]').val('');
+                            $('input', $('[name="bottlesOfBarrel"]')).filter('[type="checkbox"]').val([]);
+                        }else {
+                            $('[name="bottlesOfBarrel"]').addClass('hidden');
+                            $('input', $('[name="bottlesOfBarrel"]')).not('[type="checkbox"]').val('');
+                            $('input', $('[name="bottlesOfBarrel"]')).filter('[type="checkbox"]').val([]);
+                        }
 
                         if(modelist != null || modelist != undefined){
                             for(var k=0;k<modelist.length;k++){
@@ -1078,8 +1096,8 @@
             /*contentType:"application/json",*/
             data:Add(),
             success:function (result) {
-                console.log(result);
-                if(result == true){
+//                console.log(result);
+                if(result.success == true){
                     alert('新增成功!');
                 }
             }

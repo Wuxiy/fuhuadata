@@ -229,7 +229,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group" id="corporation">
+                            <div class="form-group hidden" id="corporation">
                                 #*<label class="col-xs-1 control-label" lang="zh">销售费用比率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
@@ -307,8 +307,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="btn-group btn-group-xs panel-heading-btn pull-right">
-                        <button class="btn btn-primary" id="delete" disabled>删除</button>
-                        <button class="btn btn-xs btn-primary" target="_Blank" lang="zh" id="Add" disabled>新增</button>
+                        <button class="btn btn-primary" id="delete" type="button" disabled>删除</button>
+                        <button class="btn btn-xs btn-primary" id="Add" type="button" lang="zh">新增</button>
                     </div>
                     <h3 class="panel-title">
                         产品信息
@@ -425,12 +425,11 @@
     var cupboardTypeList = ['20GP','40GP','20HQ'];
 
     $(document).ready(function(){
+
         if(orderId!=''&&businessId==''){
             $('#back').removeClass('hidden');
             $('#edit').removeClass('hidden');
-
             $('#delete').attr('disabled',false);
-            $('#Add').attr('disabled',false);
 
             //请求数据
             jQuery.ajax({
@@ -534,8 +533,13 @@
         if(businessId != ''){
             $('#addback').removeClass('hidden');
             $('#finish').removeClass('hidden');
-
+            $('#Add').addClass('disabled');
             $('[data-control="on"]').attr('disabled',false);
+
+            // 未点击“保存”时，点击“新增”按钮，提示“请先保存基础信息”
+            $('#Add').filter('.disabled').click(function () {
+                alert('请先保存基础信息!');
+            });
 
             jQuery.ajax({
                 url:basePath + '/businessInfo/getBusinessInfoById?businessId=' + businessId,
@@ -547,7 +551,7 @@
                     $('#customerId').val(businessInfo.customerId); // 客户id
                     $('#fullName').val(businessInfo.customerName); // 客户名称
                     $('#zhongxinbaoNumber').val(businessInfo.zhongxinbaoNumber); // 中信保编码
-                    $('#registeredFunds').val(businessInfo.registeredFunds); // 注册资金
+                    /*$('#registeredFunds').val(businessInfo.registeredFunds);*/ // 注册资金
                     $('#enterprisePhone').val(businessInfo.enterprisePhone); // 企业电话
                     $('#enterpriseEmail').val(businessInfo.enterpriseEmail); // 企业邮箱
                     $('#billToCustomer').val(businessInfo.customerName); // 收票客户
@@ -564,175 +568,183 @@
                             })
                         });
                     }
+
+                    if (businessInfo.registeredFunds!=undefined) {
+                        if(businessInfo.registeredFunds.split(':').length==2){
+                            $('#fundType').text(businessInfo.registeredFunds.split(':')[0]).data('val',businessInfo.registeredFunds.split(':')[0]);
+                            $('#registeredFunds').val(businessInfo.registeredFunds.split(':')[1]);
+                        }else {
+                            $('#registeredFunds').val(businessInfo.registeredFunds.split(':')[0]);
+                        }
+                    } // 注册资金
                 }
             })
         }
 
-    })
+        // 完成
+        $('#finish').click(function(){
+            jQuery.ajax({
+                url: basePath +'/businessOrder/doAddBusinessOrder',
+                type:'POST',
+                contentType:"application/json",
+                data:getAddOrder(),
+                success:function (result) {
+                    var ResultData = result.code;
+                    if(ResultData == 1){
+                        alert('保存成功!');
+                        $('#delete').attr('disabled',false);
+                        $('#Add').removeClass('disabled');
 
-    // 完成
-    $('#finish').click(function(){
-        jQuery.ajax({
-            url: basePath +'/businessOrder/doAddBusinessOrder',
-            type:'POST',
-            contentType:"application/json",
-            data:getAddOrder(),
-            success:function (result) {
-                var ResultData = result.code;
-                if(ResultData == 1){
-                    alert('保存成功!');
-                    $('#delete').attr('disabled',false);
-                    $('#Add').attr('disabled',false);
+                        $('#addback').addClass('hidden');
+                        $('#finish').addClass('hidden');
+                        $('#back').removeClass('hidden');
+                        $('#edit').removeClass('hidden');
+                        location.reload();
+                    }else{
 
-                    $('#addback').addClass('hidden');
-                    $('#finish').addClass('hidden');
-                    $('#back').removeClass('hidden');
-                    $('#edit').removeClass('hidden');
-                }else{
-
-                    alert('保存失败！');
-                    $('#addback').removeClass('hidden');
-                    $('#finish').removeClass('hidden');
-                    $('#back').addClass('hidden');
-                    $('#edit').addClass('hidden');
+                        alert('保存失败！');
+                        $('#addback').removeClass('hidden');
+                        $('#finish').removeClass('hidden');
+                        $('#back').addClass('hidden');
+                        $('#edit').addClass('hidden');
+                    }
                 }
-            }
+            })
+        });
+
+        $('#save').click(function(){
+            /*var isup = true;
+            var typenumber = $('input[type=number]');
+            typenumber.each(function () {
+                var val = $(this).val();
+                if(val == 0){
+                    alert('费率类信息不可为0！');
+                    isup = false;
+                    return false;
+                }
+            });*/
+            jQuery.ajax({
+                url:basePath + '/businessOrder/updateBusinessOrderByOrderId',
+                type:'POST',
+                contentType:"application/json",
+                data:getOrder(),
+                success:function (result) {
+                    alert("修改成功!");
+
+                     /*location.reload();*/
+
+                }
+            })
+        });
+
+        //返回
+        $('#back').click(function(){
+            window.location.href = basePath + '/businessOrder/intoBusinessOffer';
         })
-    });
 
-    $('#save').click(function(){
-        /*var isup = true;
-        var typenumber = $('input[type=number]');
-        typenumber.each(function () {
-            var val = $(this).val();
-            if(val == 0){
-                alert('费率类信息不可为0！');
-                isup = false;
-                return false;
-            }
-        });*/
-        jQuery.ajax({
-            url:basePath + '/businessOrder/updateBusinessOrderByOrderId',
-            type:'POST',
-            contentType:"application/json",
-            data:getOrder(),
-            success:function (result) {
-                alert("修改成功!");
-
-                /* location.reload();*/
-
-            }
+        //新增时返回
+        $('#addedit').click(function(){
+            window.location.href = basePath + '/businessOrder/intoBusinessInfo';
         })
-    });
 
-    //返回
-    $('#back').click(function(){
-        window.location.href = basePath + '/businessOrder/intoBusinessOffer';
-    })
+        //新增获取data
+        function getAddOrder() {
+            var data = {
+                "orderId":$('#orderId').val(), // 订单编号
+                "businessId":$('#businessId').val(), // 商机编号
+                "customerId":$('#customerId').val(), // 客户编号
+                "customerDutyParagraph":$('#customerDutyParagraph').val(), // 客户税号
+                "billToCustomer":$('#billToCustomer').val(), // 收票客户
+                "salesManId":$('#salesManName').data('val'), // 业务员id
+                "salesManName":$('#salesManName').val(), // 业务员name
+                "departmentId":$('#departmentName').data('val'), // 部门id
+                "departmentName":$('#departmentName').val(), // 部门name
 
-    //新增时返回
-    $('#addedit').click(function(){
-        window.location.href = basePath + '/businessOrder/intoBusinessInfo';
-    })
+                "saleOrganizationId":$('#saleOrganizationName').data('val'), // 销售组织id
+                "saleOrganizationName":$('#saleOrganizationName').val(), // 销售组织name
+                "destinationPort":$('#destinationPort').data('val'), // 目的港id
+                "destinationPortName":$('#destinationPort').val(), // 目的港name
+                "shipmentPort":$('#shipmentPort').data('val'), // 起运港id
+                "shipmentPortName":$('#shipmentPort').val(), // 起运港name
+                "collectionAgreement":$('#income').val(), // 收款协议
+                "tradeType":$('#tradeType').val(), // 贸易方式
+                "tradeTerm":$('#incoterm').val(), // 贸易术语
+                "currency":$('#currency').val(), // 币种编码
 
-    //新增获取data
-    function getAddOrder() {
-        var data = {
-            "orderId":$('#orderId').val(), // 订单编号
-            "businessId":$('#businessId').val(), // 商机编号
-            "customerId":$('#customerId').val(), // 客户编号
-            "customerDutyParagraph":$('#customerDutyParagraph').val(), // 客户税号
-            "billToCustomer":$('#billToCustomer').val(), // 收票客户
-            "salesManId":$('#salesManName').data('val'), // 业务员id
-            "salesManName":$('#salesManName').val(), // 业务员name
-            "departmentId":$('#departmentName').data('val'), // 部门id
-            "departmentName":$('#departmentName').val(), // 部门name
+                "tradeCountry":$('#countryzone').data('val'), // 贸易国别id
+                "tradeCountryName":$('#countryzone').val(), // 贸易国别name
+                "isCreditRisk":$('#isCreditRisk').val(), // 是否使用信用险
+                "interestRate":$('#interestRate').val(), // 计息比例
 
-            "saleOrganizationId":$('#saleOrganizationName').data('val'), // 销售组织id
-            "saleOrganizationName":$('#saleOrganizationName').val(), // 销售组织name
-            "destinationPort":$('#destinationPort').data('val'), // 目的港id
-            "destinationPortName":$('#destinationPort').val(), // 目的港name
-            "shipmentPort":$('#shipmentPort').data('val'), // 起运港id
-            "shipmentPortName":$('#shipmentPort').val(), // 起运港name
-            "collectionAgreement":$('#income').val(), // 收款协议
-            "tradeType":$('#tradeType').val(), // 贸易方式
-            "tradeTerm":$('#incoterm').val(), // 贸易术语
-            "currency":$('#currency').val(), // 币种编码
+                "nusdexchgrate":$('#nusdexchgrate').val(), // 原币对美元汇率
+                "nexchangerate":$('#nexchangerate').val(), // 原币对本币汇率
 
-            "tradeCountry":$('#countryzone').data('val'), // 贸易国别id
-            "tradeCountryName":$('#countryzone').val(), // 贸易国别name
-            "isCreditRisk":$('#isCreditRisk').val(), // 是否使用信用险
-            "interestRate":$('#interestRate').val(), // 计息比例
+                "premiumRate":$('#premiumRate').val(), // 保险费率
+                "guaranteeRate":$('#guaranteeRate').val(), // 信保费率
+                "discountRate":$('#discountRate').val(), // 资金利率
+                "lossRate":$('#lossRate').val(), // 汇损费率
+                "saleRate":$('#saleRate').val(), // 销售费率
+                "managementRate":$('#managementRate').val(), // 管理汇率
+                "creditRate":$('#creditRate').val(), // 信保赔付率
+                "transportFlag":$('#transportFlag').val(), // 是否可转运
+                "partialShipmentFalg":$('#partialShipmentFalg').val(), // 是否可分批出运
 
-            "nusdexchgrate":$('#nusdexchgrate').val(), // 原币对美元汇率
-            "nexchangerate":$('#nexchangerate').val(), // 原币对本币汇率
-
-            "premiumRate":$('#premiumRate').val(), // 保险费率
-            "guaranteeRate":$('#guaranteeRate').val(), // 信保费率
-            "discountRate":$('#discountRate').val(), // 资金利率
-            "lossRate":$('#lossRate').val(), // 汇损费率
-            "saleRate":$('#saleRate').val(), // 销售费率
-            "managementRate":$('#managementRate').val(), // 管理汇率
-            "creditRate":$('#creditRate').val(), // 信保赔付率
-            "transportFlag":$('#transportFlag').val(), // 是否可转运
-            "partialShipmentFalg":$('#partialShipmentFalg').val(), // 是否可分批出运
-
-            "createTime": CRM.getTime(),
-            "createUserId": 2,
-            "createUserName":"杨洋",
-            "modifyTime":"2017-03-02 11:44:49",
-            "lastmodifyUserId": 1,
-            "lastmodifyUserName": "胡向阳"
+                "createTime": CRM.getTime(),
+                "createUserId": 2,
+                "createUserName":"杨洋",
+                "modifyTime":"2017-03-02 11:44:49",
+                "lastmodifyUserId": 1,
+                "lastmodifyUserName": "胡向阳"
+            }
+            return JSON.stringify(data);
         }
-        return JSON.stringify(data);
-    }
 
-    //编辑获取data
-    function getOrder() {
-        var businessOrder = {
-            "orderId":$('#orderId').val(), // 订单编号
-            "businessId":$('#businessId').val(), // 商机编号
-            "customerId":$('#customerId').val(), // 客户编号
-            "customerDutyParagraph":$('#customerDutyParagraph').val(), // 客户税号
-            "billToCustomer":$('#billToCustomer').val(), // 收票客户
-            "salesManId":$('#salesManName').data('val'), // 业务员id
-            "salesManName":$('#salesManName').val(), // 业务员name
-            "departmentId":$('#departmentName').data('val'), // 部门id
-            "departmentName":$('#departmentName').val(), // 部门name
+        //编辑获取data
+        function getOrder() {
+            var businessOrder = {
+                "orderId":$('#orderId').val(), // 订单编号
+                "businessId":$('#businessId').val(), // 商机编号
+                "customerId":$('#customerId').val(), // 客户编号
+                "customerDutyParagraph":$('#customerDutyParagraph').val(), // 客户税号
+                "billToCustomer":$('#billToCustomer').val(), // 收票客户
+                "salesManId":$('#salesManName').data('val'), // 业务员id
+                "salesManName":$('#salesManName').val(), // 业务员name
+                "departmentId":$('#departmentName').data('val'), // 部门id
+                "departmentName":$('#departmentName').val(), // 部门name
 
-            "saleOrganizationId":$('#saleOrganizationName').data('val'), // 销售组织id
-            "saleOrganizationName":$('#saleOrganizationName').val(), // 销售组织name
-            "destinationPort":$('#destinationPort').data('val'), // 目的港id
-            "destinationPortName":$('#destinationPort').val(), // 目的港name
-            "shipmentPort":$('#shipmentPort').data('val'), // 起运港id
-            "shipmentPortName":$('#shipmentPort').val(), // 起运港name
-            "collectionAgreement":$('#income').val(), // 收款协议
-            "tradeType":$('#tradeType').val(), // 贸易方式
-            "tradeTerm":$('#incoterm').val(), // 贸易术语
-            "currency":$('#currency').val(), // 币种编码
+                "saleOrganizationId":$('#saleOrganizationName').data('val'), // 销售组织id
+                "saleOrganizationName":$('#saleOrganizationName').val(), // 销售组织name
+                "destinationPort":$('#destinationPort').data('val'), // 目的港id
+                "destinationPortName":$('#destinationPort').val(), // 目的港name
+                "shipmentPort":$('#shipmentPort').data('val'), // 起运港id
+                "shipmentPortName":$('#shipmentPort').val(), // 起运港name
+                "collectionAgreement":$('#income').val(), // 收款协议
+                "tradeType":$('#tradeType').val(), // 贸易方式
+                "tradeTerm":$('#incoterm').val(), // 贸易术语
+                "currency":$('#currency').val(), // 币种编码
 
-            "tradeCountry":$('#countryzone').data('val'), // 贸易国别id
-            "tradeCountryName":$('#countryzone').val(), // 贸易国别name
-            "isCreditRisk":$('#isCreditRisk').val(), // 是否使用信用险
-            "interestRate":$('#interestRate').val(), // 计息比例
+                "tradeCountry":$('#countryzone').data('val'), // 贸易国别id
+                "tradeCountryName":$('#countryzone').val(), // 贸易国别name
+                "isCreditRisk":$('#isCreditRisk').val(), // 是否使用信用险
+                "interestRate":$('#interestRate').val(), // 计息比例
 
-            "nusdexchgrate":$('#nusdexchgrate').val(), // 原币对美元汇率
-            "nexchangerate":$('#nexchangerate').val(), // 原币对本币汇率
+                "nusdexchgrate":$('#nusdexchgrate').val(), // 原币对美元汇率
+                "nexchangerate":$('#nexchangerate').val(), // 原币对本币汇率
 
-            "premiumRate":$('#premiumRate').val(), // 保险费率
-            "guaranteeRate":$('#guaranteeRate').val(), // 信保费率
-            "discountRate":$('#discountRate').val(), // 资金利率
-            "lossRate":$('#lossRate').val(), // 汇损费率
-            "saleRate":$('#saleRate').val(), // 销售费率
-            "managementRate":$('#managementRate').val(), // 管理汇率
-            "creditRate":$('#creditRate').val(), // 信保赔付率
-            "transportFlag":$('#transportFlag').val(), // 是否可转运
-            "partialShipmentFalg":$('#partialShipmentFalg').val(), // 是否可分批出运
-            /*"internalSupplyId":$('#internalSupplyName').data('val'),
-            "internalSupplyName":$('#internalSupplyName').val()*/
+                "premiumRate":$('#premiumRate').val(), // 保险费率
+                "guaranteeRate":$('#guaranteeRate').val(), // 信保费率
+                "discountRate":$('#discountRate').val(), // 资金利率
+                "lossRate":$('#lossRate').val(), // 汇损费率
+                "saleRate":$('#saleRate').val(), // 销售费率
+                "managementRate":$('#managementRate').val(), // 管理汇率
+                "creditRate":$('#creditRate').val(), // 信保赔付率
+                "transportFlag":$('#transportFlag').val(), // 是否可转运
+                "partialShipmentFalg":$('#partialShipmentFalg').val(), // 是否可分批出运
+                /*"internalSupplyId":$('#internalSupplyName').data('val'),
+                "internalSupplyName":$('#internalSupplyName').val()*/
 
-        }
-        //            "internalSupplyName":$('#internalSupplyName').val()
+            }
+            //            "internalSupplyName":$('#internalSupplyName').val()
 //            "currtype":$('#currtype').val(),
 //            "enterpriseNature":getenterpriseNature(),
 //            "registeredFunds":$('#registeredFunds').val(),
@@ -742,431 +754,430 @@
 //            "incoterm":$('#incoterm').val(),
 //            "customerName":$('#customerName').val(),
 //        console.log(businessOrder)
-        console.log(businessOrder);
-        return JSON.stringify(businessOrder);
-    }
+            console.log(businessOrder);
+            return JSON.stringify(businessOrder);
+        }
 
-    //新增产品信息
-    $('#Add').click(function(){
-        var customerId = $('#customerId').val();
-        window.location.href = basePath + '/businessProduct/intoProductBasicInfoRequire?orderId=' + orderId + '&customerId=' + customerId + '&businessProductId=' + businessProductId + '&edit=0';
-    })
+        //新增产品信息
+        $('#Add').not('.disabled').click(function(){
+            var customerId = $('#customerId').val();
+            window.location.href = basePath + '/businessProduct/intoProductBasicInfoRequire?orderId=' + orderId + '&customerId=' + customerId + '&businessProductId=' + businessProductId + '&edit=0';
+        })
 
 
-    // 点击选择销售组织
-    var orgTreeData = null;
-    $('#oNSearch').on('click.renderTree',function () {
-        $('#cbtTree').html('');
-        if (orgTreeData==null) {
-            $.ajax({
-                url:basePath+'/customerBaseInfoOrder/initSaleOrganizationTree',
-                type:'GET'
-            }).done(function (result) {
-                orgTreeData = result.data;
+        // 点击选择销售组织
+        var orgTreeData = null;
+        $('#oNSearch').on('click.renderTree',function () {
+            $('#cbtTree').html('');
+            if (orgTreeData==null) {
+                $.ajax({
+                    url:basePath+'/customerBaseInfoOrder/initSaleOrganizationTree',
+                    type:'GET'
+                }).done(function (result) {
+                    orgTreeData = result.data;
+                    renderTree(orgTreeData);
+                })
+            }else {
                 renderTree(orgTreeData);
-            })
-        }else {
-            renderTree(orgTreeData);
-        }
-        $('#cbtModal').modal('show');
-    });
-
-    //点击选择内部供货单位
-    $('#interSearch').on('click.renderTree',function () {
-        $('#cbtTree').html('');
-        if (orgTreeData==null) {
-            $.ajax({
-                url:basePath+'/customerBaseInfoOrder/initSaleOrganizationTree',
-                type:'GET'
-            }).done(function (result) {
-                orgTreeData = result.data;
-                renderinterTree(orgTreeData);
-            })
-        }else {
-            renderTree(orgTreeData);
-        }
-        $('#cbtModal').modal('show');
-    });
-
-    // 点击选择部门
-    $('#depSearch').on('click.renderTree',function () {
-        var orgId = $('#saleOrganizationName').data('val');
-        $('#cbtTree').html('');
-        if (orgId!='' && orgId!=undefined) {
-            $.ajax({
-                url:basePath+'/sys/dept/tree/org?code='+orgId,
-                type:'GET'
-            }).done(function (result) {
-                renderDepTree(result.data);
-            });
+            }
             $('#cbtModal').modal('show');
-        }else {
-            alert('请先选择一个组织');
-        }
-
-    });
-
-    // 点击选择业务员
-    $('#salSearch').on('click.renderUl',function () {
-        var pid = $('#departmentName').data('val');
-        $('#sm').html('');
-
-        if (pid!='' && pid!=undefined) {
-
-            $.ajax({
-                url:basePath + '/sys/user/dept/users/pojo?code='+pid,
-                type:'GET',
-                contentType:'application/json'
-            }).done(function (data) {
-                if (data.data instanceof Array) {
-
-                    CRM.tplHandler('salC',data.data,$('#sm'));
-                }
-            });
-        }else {
-            alert('请先选择部门！');
-            return false;
-        }
-
-    });
-
-    // 点击下拉菜单，将值添加到业务员文本框
-    $('#sm').on('click.cc','a',function (e) {
-        var elVal = $(e.target).data('val'),
-                txt = $(e.target).text(),
-                tarInput = $('#salesManName');
-
-        tarInput.val(txt);
-        tarInput.data('val',elVal);
-        return false;
-    });
-
-    // 信保赔付率为否，则隐藏信保费率和信保赔付率
-    $('#isCreditRisk').change(function () {
-        var v = $(this).val();
-        isShowCre(v);
-    })
-
-    // 是否显示保费率和信保赔付率
-    function isShowCre(v) {
-        if (parseInt(v)===0) {
-            $('#corporation').addClass('hidden');
-            $('input', $('#corporation')).val('');
-        }else {
-            $('#corporation').removeClass('hidden');
-        }
-    }
-
-    /**
-     * 渲染组织树菜单
-     * @param data
-     */
-    function renderTree(data) {
-
-        var setting = {
-                    data: {
-                        simpleData: {
-                            enable: true
-                        }
-                    },
-                    edit: {
-                        enable: false
-                    },
-                    callback: {
-                        onDblClick: ablclickTree
-                    }
-                },
-                id = $('#cbtTree').attr('id'),
-                treeObj = null,
-
-                treeData = CRM.toArr(data);
-
-        $.fn.zTree.init($('#cbtTree'), setting, treeData);
-        treeObj = $.fn.zTree.getZTreeObj(id);
-        treeObj.expandAll(true); // 默认展开
-    }
-
-    /**
-     * 组织树点击事件
-     * @param event
-     * @param modLeftId
-     * @param treeNode
-     */
-
-    function ablclickTree(event, modLeftId, treeNode) {
-
-        $('#saleOrganizationName').data('val',treeNode.id);
-        $('#saleOrganizationName').val(treeNode.name);
-        $('#cbtModal').modal('hide');
-
-        // 清空部门和业务员
-        $('#departmentName').val('');
-        $('#departmentName').data('val','');
-        $('#salesManName').val('');
-        $('#salesManName').data('val','');
-    }
-
-    /**
-     * 渲染内部供货单位树菜单
-     * @param data
-     */
-    function renderinterTree(data) {
-
-        var setting = {
-                    data: {
-                        simpleData: {
-                            enable: true
-                        }
-                    },
-                    edit: {
-                        enable: false
-                    },
-                    callback: {
-                        onDblClick: interclickTree
-                    }
-                },
-                id = $('#cbtTree').attr('id'),
-                treeObj = null,
-
-                treeData = CRM.toArr(data);
-
-        $.fn.zTree.init($('#cbtTree'), setting, treeData);
-        treeObj = $.fn.zTree.getZTreeObj(id);
-        treeObj.expandAll(true); // 默认展开
-    }
-
-    /**
-     * 内部供货单位树点击事件
-     * @param event
-     * @param modLeftId
-     * @param treeNode
-     */
-
-    function interclickTree(event, modLeftId, treeNode) {
-
-        $('#internalSupplyName').data('val',treeNode.id);
-        $('#internalSupplyName').val(treeNode.name);
-        $('#cbtModal').modal('hide');
-
-        /*// 清空部门和业务员
-        $('#departmentName').val('');
-        $('#departmentName').data('val','');
-        $('#salesManName').val('');
-        $('#salesManName').data('val','');*/
-    }
-
-
-    /**
-     * 渲染部门树菜单
-     * @param data
-     */
-    function renderDepTree(data) {
-        var setting = {
-                    data: {
-                        simpleData: {
-                            enable: false
-                        },
-                        key:{
-                            children:"nodes",
-                            name:"cname"
-                        }
-                    },
-                    edit: {
-                        enable: false
-                    },
-                    callback: {
-                        onDblClick: depClickTree
-                    }
-                },
-                id = $('#cbtTree').attr('id'),
-                treeObj = null;
-
-        $.fn.zTree.init($('#cbtTree'), setting, data);
-        treeObj = $.fn.zTree.getZTreeObj(id);
-        treeObj.expandAll(true); // 默认展开
-    }
-
-    /**
-     * 部门树点击事件
-     * @param event
-     * @param modLeftId
-     * @param treeNode
-     */
-
-    function depClickTree(event, modLeftId, treeNode) {
-
-//        var id = $.fn.zTree.getZTreeObj("cbtTree").getSelectedNodes()[0].code;
-        $('#departmentName').data('val',treeNode.code);
-        $('#departmentName').val(treeNode.cname);
-        $('#cbtModal').modal('hide');
-
-        // 清空业务员
-        $('#salesManName').val('');
-        $('#salesManName').data('val','');
-    }
-//    var IncomeData = null;
-//    selectArchive($('#income'),$('#incomeS'),'/dataArchives/getIncome',IncomeData);//收款协议
-//    var currtypeData = null;
-//    selectArchive($('#currtype'),$('#currtypeS'),'/dataArchives/getCurrtype',currtypeData);//币种
-//    var incotermData = null;
-//    selectArchive($('#incoterm'),$('#incotermS'),'/dataArchives/getIncoterm',incotermData);//贸易术语
-
-    // 贸易国别
-    seacrhSelect($('#countryzoneS'),'/customerBaseInfo/getCountryzone',$('#cz'),$('#countryzone'),'tzC','name');
-
-    // 目的港
-    seacrhSelect($('#destinationPortS'),'/dataArchives/getPortdoc',$('#dp'),$('#destinationPort'),'dpC','vname');
-
-    // 启运港
-    seacrhSelect($('#shipmentPortS'),'/dataArchives/getPortdoc',$('#sp'),$('#shipmentPort'),'dpC','vname');
-
-    function seacrhSelect(sh,url,ul,tarEl,strId,arg) {
-
-        // 搜索框,获取焦点查询所有数据
-        sh.on('focus.cc',function () {
-
-            ul.html('');
-            CRM.ajaxCall({
-                url:basePath + url,
-                type:'POST',
-                contentType:'application/json',
-                data:JSON.stringify({
-                    name:''
-                }),
-                callback:function (data) {
-                    if (data) {
-
-                        CRM.tplHandler(strId,data,ul);
-                    }
-                }
-            });
         });
 
-        // 搜索框，值改变时渲染数据
-        sh.on('input.cc',function () {
+        //点击选择内部供货单位
+        $('#interSearch').on('click.renderTree',function () {
+            $('#cbtTree').html('');
+            if (orgTreeData==null) {
+                $.ajax({
+                    url:basePath+'/customerBaseInfoOrder/initSaleOrganizationTree',
+                    type:'GET'
+                }).done(function (result) {
+                    orgTreeData = result.data;
+                    renderinterTree(orgTreeData);
+                })
+            }else {
+                renderTree(orgTreeData);
+            }
+            $('#cbtModal').modal('show');
+        });
 
-            var obj = {};
-            obj[arg]=$(this).val();
-            ul.html('');
-            CRM.ajaxCall({
-                url:basePath + url,
-                type:'POST',
-                contentType:'application/json',
-                data:JSON.stringify(obj),
-                callback:function (data) {
-                    if (data) {
-                        CRM.tplHandler(strId,data,ul);
+        // 点击选择部门
+        $('#depSearch').on('click.renderTree',function () {
+            var orgId = $('#saleOrganizationName').data('val');
+            $('#cbtTree').html('');
+            if (orgId!='' && orgId!=undefined) {
+                $.ajax({
+                    url:basePath+'/sys/dept/tree/org?code='+orgId,
+                    type:'GET'
+                }).done(function (result) {
+                    renderDepTree(result.data);
+                });
+                $('#cbtModal').modal('show');
+            }else {
+                alert('请先选择一个组织');
+            }
+
+        });
+
+        // 点击选择业务员
+        $('#salSearch').on('click.renderUl',function () {
+            var pid = $('#departmentName').data('val');
+            $('#sm').html('');
+
+            if (pid!='' && pid!=undefined) {
+
+                $.ajax({
+                    url:basePath + '/sys/user/dept/users/pojo?code='+pid,
+                    type:'GET',
+                    contentType:'application/json'
+                }).done(function (data) {
+                    if (data.data instanceof Array) {
+
+                        CRM.tplHandler('salC',data.data,$('#sm'));
                     }
-                }
-            });
+                });
+            }else {
+                alert('请先选择部门！');
+                return false;
+            }
+
         });
-        // 搜索框失去焦点
-        sh.on('blur.cc',function (){
-            sh.val('');
-//            ul.html('');
-        });
-        // 点击下拉菜单，将值添加到文本框
-        ul.on('click.cc','a',function (e) {
+
+        // 点击下拉菜单，将值添加到业务员文本框
+        $('#sm').on('click.cc','a',function (e) {
             var elVal = $(e.target).data('val'),
                     txt = $(e.target).text(),
-                    tarInput = tarEl;
+                    tarInput = $('#salesManName');
 
             tarInput.val(txt);
             tarInput.data('val',elVal);
             return false;
         });
-    }
 
-    // 渲染下拉框
-    function selectArchive(ipt,slt,url,res) {
-        ipt.on('click.edit',function () {
-            $(this).addClass('hidden');
-            if (res==null){
-                $.ajax({
-                    url:basePath + url,
-                    type:'GET'
-                }).done(function (result) {
-                    res = result.data;
-                    renderSelect(res,slt);
-                    if ($(this).data('code')!=''){
-                        slt.val($(this).data('code'));
-                    }
-                    slt.removeClass('hidden');
-//                $('#currencyS').click();
-                });
+        // 信保赔付率为否，则隐藏信保费率和信保赔付率
+        $('#isCreditRisk').change(function () {
+            var v = $(this).val();
+            isShowCre(v);
+        })
+
+        // 是否显示保费率和信保赔付率
+        function isShowCre(v) {
+            if (parseInt(v)===0) {
+                $('#corporation').addClass('hidden');
+                $('input', $('#corporation')).val('');
             }else {
-                slt.removeClass('hidden').val($(this).data('code'));
+                $('#corporation').removeClass('hidden');
             }
-        });
+        }
 
-        slt.on('change.edit',function (e) {
-            var tarItem = $(this),
-                    val = tarItem.val(),
-                    text = tarItem.find('option').filter(':selected').text();
-            ipt.val(text);
-            ipt.data('code',val);
-        });
+        /**
+         * 渲染组织树菜单
+         * @param data
+         */
+        function renderTree(data) {
 
-        slt.on('focusout',function () {
-            slt.addClass('hidden'); // 隐藏
-            ipt.removeClass('hidden'); // 显示
-        })
-    }
+            var setting = {
+                        data: {
+                            simpleData: {
+                                enable: true
+                            }
+                        },
+                        edit: {
+                            enable: false
+                        },
+                        callback: {
+                            onDblClick: ablclickTree
+                        }
+                    },
+                    id = $('#cbtTree').attr('id'),
+                    treeObj = null,
 
-    // 填充下拉框内容
-    function renderSelect(data,el) {
-        var _html = '';
-        $.each(data,function(i,item){
-            _html += '<option value="' + item.code + '">'+ item.name + '</option>';
-        })
-        el.append(_html);
-    }
+                    treeData = CRM.toArr(data);
 
-    //批量删除
-    $('#delete').on('click',function(){
-        var ids = new Array();
-        $("input[name='cellcheckbox']:checked").each(function(){
-            ids.push($(this).val());
-        })
+            $.fn.zTree.init($('#cbtTree'), setting, treeData);
+            treeObj = $.fn.zTree.getZTreeObj(id);
+            treeObj.expandAll(true); // 默认展开
+        }
 
-        if(ids.length > 0){
-            var msg = "确定要删除这些关联吗？";
-            if(confirm(msg)){
-                var data = ids.join(',');
-                var url = basePath + '/businessProduct/deleteAllInfoByIds?businessProductIds=' + data;
-                console.log(data);
-                jQuery.ajax({
-                url: url,
+        /**
+         * 组织树点击事件
+         * @param event
+         * @param modLeftId
+         * @param treeNode
+         */
+
+        function ablclickTree(event, modLeftId, treeNode) {
+
+            $('#saleOrganizationName').data('val',treeNode.id);
+            $('#saleOrganizationName').val(treeNode.name);
+            $('#cbtModal').modal('hide');
+
+            // 清空部门和业务员
+            $('#departmentName').val('');
+            $('#departmentName').data('val','');
+            $('#salesManName').val('');
+            $('#salesManName').data('val','');
+        }
+
+        /**
+         * 渲染内部供货单位树菜单
+         * @param data
+         */
+        function renderinterTree(data) {
+
+            var setting = {
+                        data: {
+                            simpleData: {
+                                enable: true
+                            }
+                        },
+                        edit: {
+                            enable: false
+                        },
+                        callback: {
+                            onDblClick: interclickTree
+                        }
+                    },
+                    id = $('#cbtTree').attr('id'),
+                    treeObj = null,
+
+                    treeData = CRM.toArr(data);
+
+            $.fn.zTree.init($('#cbtTree'), setting, treeData);
+            treeObj = $.fn.zTree.getZTreeObj(id);
+            treeObj.expandAll(true); // 默认展开
+        }
+
+        /**
+         * 内部供货单位树点击事件
+         * @param event
+         * @param modLeftId
+         * @param treeNode
+         */
+
+        function interclickTree(event, modLeftId, treeNode) {
+
+            $('#internalSupplyName').data('val',treeNode.id);
+            $('#internalSupplyName').val(treeNode.name);
+            $('#cbtModal').modal('hide');
+
+            /*// 清空部门和业务员
+            $('#departmentName').val('');
+            $('#departmentName').data('val','');
+            $('#salesManName').val('');
+            $('#salesManName').data('val','');*/
+        }
+
+
+        /**
+         * 渲染部门树菜单
+         * @param data
+         */
+        function renderDepTree(data) {
+            var setting = {
+                        data: {
+                            simpleData: {
+                                enable: false
+                            },
+                            key:{
+                                children:"nodes",
+                                name:"cname"
+                            }
+                        },
+                        edit: {
+                            enable: false
+                        },
+                        callback: {
+                            onDblClick: depClickTree
+                        }
+                    },
+                    id = $('#cbtTree').attr('id'),
+                    treeObj = null;
+
+            $.fn.zTree.init($('#cbtTree'), setting, data);
+            treeObj = $.fn.zTree.getZTreeObj(id);
+            treeObj.expandAll(true); // 默认展开
+        }
+
+        /**
+         * 部门树点击事件
+         * @param event
+         * @param modLeftId
+         * @param treeNode
+         */
+
+        function depClickTree(event, modLeftId, treeNode) {
+
+//        var id = $.fn.zTree.getZTreeObj("cbtTree").getSelectedNodes()[0].code;
+            $('#departmentName').data('val',treeNode.code);
+            $('#departmentName').val(treeNode.cname);
+            $('#cbtModal').modal('hide');
+
+            // 清空业务员
+            $('#salesManName').val('');
+            $('#salesManName').data('val','');
+        }
+
+        // 贸易国别
+        seacrhSelect($('#countryzoneS'),'/customerBaseInfo/getCountryzone',$('#cz'),$('#countryzone'),'tzC','name');
+
+        // 目的港
+        seacrhSelect($('#destinationPortS'),'/dataArchives/getPortdoc',$('#dp'),$('#destinationPort'),'dpC','vname');
+
+        // 启运港
+        seacrhSelect($('#shipmentPortS'),'/dataArchives/getPortdoc',$('#sp'),$('#shipmentPort'),'dpC','vname');
+
+        function seacrhSelect(sh,url,ul,tarEl,strId,arg) {
+
+            // 搜索框,获取焦点查询所有数据
+            sh.on('focus.cc',function () {
+
+                ul.html('');
+                CRM.ajaxCall({
+                    url:basePath + url,
                     type:'POST',
+                    contentType:'application/json',
+                    data:JSON.stringify({
+                        name:''
+                    }),
+                    callback:function (data) {
+                        if (data) {
+
+                            CRM.tplHandler(strId,data,ul);
+                        }
+                    }
+                });
+            });
+
+            // 搜索框，值改变时渲染数据
+            sh.on('input.cc',function () {
+
+                var obj = {};
+                obj[arg]=$(this).val();
+                ul.html('');
+                CRM.ajaxCall({
+                    url:basePath + url,
+                    type:'POST',
+                    contentType:'application/json',
+                    data:JSON.stringify(obj),
+                    callback:function (data) {
+                        if (data) {
+                            CRM.tplHandler(strId,data,ul);
+                        }
+                    }
+                });
+            });
+            // 搜索框失去焦点
+            sh.on('blur.cc',function (){
+                sh.val('');
+//            ul.html('');
+            });
+            // 点击下拉菜单，将值添加到文本框
+            ul.on('click.cc','a',function (e) {
+                var elVal = $(e.target).data('val'),
+                        txt = $(e.target).text(),
+                        tarInput = tarEl;
+
+                tarInput.val(txt);
+                tarInput.data('val',elVal);
+                return false;
+            });
+        }
+
+        // 渲染下拉框
+        function selectArchive(ipt,slt,url,res) {
+            ipt.on('click.edit',function () {
+                $(this).addClass('hidden');
+                if (res==null){
+                    $.ajax({
+                        url:basePath + url,
+                        type:'GET'
+                    }).done(function (result) {
+                        res = result.data;
+                        renderSelect(res,slt);
+                        if ($(this).data('code')!=''){
+                            slt.val($(this).data('code'));
+                        }
+                        slt.removeClass('hidden');
+//                $('#currencyS').click();
+                    });
+                }else {
+                    slt.removeClass('hidden').val($(this).data('code'));
+                }
+            });
+
+            slt.on('change.edit',function (e) {
+                var tarItem = $(this),
+                        val = tarItem.val(),
+                        text = tarItem.find('option').filter(':selected').text();
+                ipt.val(text);
+                ipt.data('code',val);
+            });
+
+            slt.on('focusout',function () {
+                slt.addClass('hidden'); // 隐藏
+                ipt.removeClass('hidden'); // 显示
+            })
+        }
+
+        // 填充下拉框内容
+        function renderSelect(data,el) {
+            var _html = '';
+            $.each(data,function(i,item){
+                _html += '<option value="' + item.code + '">'+ item.name + '</option>';
+            })
+            el.append(_html);
+        }
+
+        //批量删除
+        $('#delete').on('click',function(){
+            var ids = new Array();
+            $("input[name='cellcheckbox']:checked").each(function(){
+                ids.push($(this).val());
+            })
+
+            if(ids.length > 0){
+                var msg = "确定要删除这些关联吗？";
+                if(confirm(msg)){
+                    var data = ids.join(',');
+                    var url = basePath + '/businessProduct/deleteAllInfoByIds?businessProductIds=' + data;
+                    console.log(data);
+                    jQuery.ajax({
+                        url: url,
+                        type:'POST',
 //                    dataType:"json",
 //                    contentType:"application/json",
 //                    data:,
-                    success:function(){
-                        alert("批量删除成功");
-                        location.reload();
-                    }
-                })
+                        success:function(){
+                            alert("批量删除成功");
+                            location.reload();
+                        }
+                    })
+                }
+            }else{
+                alert("还未选择需要删除的关联！");
             }
-        }else{
-            alert("还未选择需要删除的关联！");
+        })
+
+        function ifEmpty(data) {
+            return data==undefined?'':data;
+        }
+
+        $('#back').click(function(){
+//        window.location.href = basePath + '/businessOrder/intoBusinessOffer';
+            window.history.back(-1)
+        })
+
+        function getenterpriseNature() {
+            var arr = [];
+            $('input[name="check"]:checked').each(function(){
+                var val = $(this).val();
+                arr.push(val);
+            })
+            return arr;
         }
     })
-    
-    function ifEmpty(data) {
-        return data==undefined?'':data;
-    }
 
-    $('#back').click(function(){
-//        window.location.href = basePath + '/businessOrder/intoBusinessOffer';
-        window.history.back(-1)
-    })
 
-    function getenterpriseNature() {
-        var arr = [];
-        $('input[name="check"]:checked').each(function(){
-            var val = $(this).val();
-            arr.push(val);
-        })
-        return arr;
-    }
+
+
 </script>

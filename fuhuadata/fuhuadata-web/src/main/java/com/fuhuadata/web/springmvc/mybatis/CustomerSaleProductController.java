@@ -6,12 +6,15 @@ import com.fuhuadata.domain.query.QueryCustomerSaleProduct;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.mybatis.CustomerSaleProductService;
+import com.fuhuadata.web.exception.InvalidRequestException;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Arrays;
 
 /**
@@ -76,7 +79,11 @@ public class CustomerSaleProductController extends BaseController<CustomerSalePr
     @RequestMapping(value = "", method = RequestMethod.POST)
     @ResponseBody
     @SystemLogAnnotation(module = "customer-market-sale", methods = "saveOrUpdateProducts")
-    public ResultPojo saveOrUpdateSaleProducts(@RequestBody CustomerSaleProductInfo productInfo) {
+    public ResultPojo saveOrUpdateSaleProducts(@Valid @RequestBody CustomerSaleProductInfo productInfo, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            throw new InvalidRequestException("请求参数错误", bindingResult);
+        }
 
         Result<Boolean> result = Result.newResult(false);
 
@@ -85,6 +92,12 @@ public class CustomerSaleProductController extends BaseController<CustomerSalePr
         result.setSuccess(true);
 
         return result.getResultPojo();
+    }
+
+    @RequestMapping("/post")
+    @ResponseBody
+    public void testRequestBodyValid(@Valid @RequestBody CustomerSaleProduct saleProduct, BindingResult bindingResult) {
+        throw new InvalidRequestException("请求参数错误", bindingResult);
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)

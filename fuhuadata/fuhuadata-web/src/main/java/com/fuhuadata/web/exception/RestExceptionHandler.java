@@ -48,7 +48,7 @@ public class RestExceptionHandler {
         ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
         errorResponse.setFieldErrors(fieldErrorResponses);
 
-        return handleExceptionInternal(e, errorResponse, null, HttpStatus.UNPROCESSABLE_ENTITY, webRequest);
+        return handleExceptionInternal(e, errorResponse, null, HttpStatus.BAD_REQUEST, webRequest);
     }
 
     @ExceptionHandler({Exception.class})

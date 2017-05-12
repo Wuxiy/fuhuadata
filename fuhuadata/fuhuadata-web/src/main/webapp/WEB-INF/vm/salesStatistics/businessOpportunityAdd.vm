@@ -157,7 +157,7 @@
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">预计截止日期</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" type="date" value="" id="deadline"/>
+                                    <input class="form-control" type="date" value="" id="deadline" name="deadline"/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -265,7 +265,7 @@
 
     $(document).ready(function () {
         // 错误信息容器
-        $.validator.setDefaults({
+        /*$.validator.setDefaults({
             errorElement: 'div'
         });
 
@@ -276,7 +276,7 @@
                 '<div class="tooltip-arrow" style="left: 50%; border-top-color: #ff524f"></div>' +
                 '<div class="tooltip-inner" style="background-color: #ff524f">'+txt+'</div>' +
                 '</div>';
-        };
+        };*/
 
         var validator = $('#myForm').validate({
             onfocusout: function (element) {
