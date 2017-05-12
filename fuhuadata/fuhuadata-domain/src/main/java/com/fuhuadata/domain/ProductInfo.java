@@ -6,7 +6,9 @@ import com.fuhuadata.util.DateJsonSerializer;
 import com.fuhuadata.util.JsonUtils;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.math.BigDecimal;
 
@@ -39,19 +41,23 @@ public class ProductInfo{
 	private String  measurement;
 	
     /**产品浓度含量,和父级名称一起生成名称**/
+    @NotNull
 	private BigDecimal concentration;
 
 	
     /**0无，1异丙胺盐，2铵盐，3钾盐，4二甲铵盐，5其他**/
+    @NotNull
 	private Integer saltType;
 	
     /**其他盐类名称**/
 	private String otherSaltName;
 	
     /**执行标准，-1全部，0国际标准，1国家标准，2行业标准，3福华通达企业标准，4其他**/
+    @NotNull
 	private Integer executeStandard;
 	
     /**执行标准号**/
+    @NotBlank
 	private String executeNumer;
 	
     /**执行标准备注说明**/

@@ -6,6 +6,7 @@ import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.CustomerLinkmanService;
 import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.CustomerLinkmanVO;
+import com.fuhuadata.web.exception.InvalidRequestException;
 import com.fuhuadata.web.util.CustomerUtils;
 import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
@@ -13,13 +14,16 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.wiring.BeanWiringInfoResolver;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -92,7 +96,10 @@ public class CustomerLinkmanAction {
     @RequestMapping(value="add",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "customerInfo-customerContacts",methods = "addCustomerLinkman")
     @ResponseBody
-    public ResultPojo addCustomerLinkmanById(@RequestBody CustomerLinkman customerLinkman){
+    public ResultPojo addCustomerLinkmanById(@RequestBody @Valid CustomerLinkman customerLinkman, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            throw new InvalidRequestException("请求参数错误",bindingResult);
+        }
         Result result = new Result();
         try{
             customerLinkman.setCreateUserId(LoginUtils.getLoginId());
@@ -135,7 +142,10 @@ public class CustomerLinkmanAction {
     @RequestMapping(value="updateById",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "customerInfo-customerContacts",methods = "updateById")
     @ResponseBody
-    public ResultPojo updateCustomerLinkmanById(@RequestBody CustomerLinkman customerLinkman){
+    public ResultPojo updateCustomerLinkmanById(@RequestBody @Valid CustomerLinkman customerLinkman,BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            throw new InvalidRequestException("请求参数错误",bindingResult);
+        }
         Result result = new Result();
         customerLinkman.setLastmodifyUserId(LoginUtils.getLoginId());
         customerLinkman.setLastmodifyUserName(LoginUtils.getLoginName());

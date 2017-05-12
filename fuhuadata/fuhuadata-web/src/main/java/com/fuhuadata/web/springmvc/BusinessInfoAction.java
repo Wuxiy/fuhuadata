@@ -8,18 +8,21 @@ import com.fuhuadata.service.BCodeService;
 import com.fuhuadata.service.BusinessInfoService;
 import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.BusinessInfoVO;
+import com.fuhuadata.web.exception.InvalidRequestException;
 import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -109,7 +112,10 @@ public class BusinessInfoAction {
     @RequestMapping(value="/doAddBusinessInfo",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "doAdd")
     @ResponseBody
-    public ResultPojo doAddBusinessInfo(@RequestBody BusinessInfo businessInfo){
+    public ResultPojo doAddBusinessInfo(@RequestBody @Valid BusinessInfo businessInfo, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            throw new InvalidRequestException("请求参数错误",bindingResult);
+        }
         businessInfo.setCreateUserId(LoginUtils.getLoginId());
         businessInfo.setCreateUserName(LoginUtils.getLoginName());
         businessInfo.setCreateTime(DateUtil.getDateTimeFormat());
@@ -165,7 +171,10 @@ public class BusinessInfoAction {
     @RequestMapping(value="/updateBusinessInfoById",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "update")
     @ResponseBody
-    public ResultPojo updateBusinessInfoById(@RequestBody BusinessInfo  businessInfo){
+    public ResultPojo updateBusinessInfoById(@RequestBody @Valid BusinessInfo  businessInfo,BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            throw new InvalidRequestException("请求参数错误",bindingResult);
+        }
         businessInfo.setLastmodifyUserId(LoginUtils.getLoginId());
         businessInfo.setLastmodifyUserName(LoginUtils.getLoginName());
         businessInfo.setModifyTime(DateUtil.getDateTimeFormat());

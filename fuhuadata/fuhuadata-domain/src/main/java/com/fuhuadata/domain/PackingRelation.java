@@ -1,5 +1,5 @@
 package com.fuhuadata.domain;
-
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 /**
@@ -9,12 +9,15 @@ public class PackingRelation {
     private int id;
 
     /**主材id**/
+    @NotNull
     private int  mainPackingId;
 
     /**1:主材 2:外包装,3:辅材**/
+    @NotNull
     private int categoryId;
 
     /**关联id**/
+    @NotNull
     private int associatedPackingId;
 
     /**辅材或外包装单耗**/

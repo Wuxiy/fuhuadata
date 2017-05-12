@@ -1,6 +1,9 @@
 package com.fuhuadata.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -14,11 +17,13 @@ public class ComponentCost {
 
     private Integer componentId;
 
+    @NotBlank
     private String componentName;//成分名称
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date priceEnd;//价格有效期
 
+    @NotBlank
     private String unitCost;//单价
 
     private String consumption;//单耗

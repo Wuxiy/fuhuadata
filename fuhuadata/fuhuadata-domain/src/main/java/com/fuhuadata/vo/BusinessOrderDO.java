@@ -3,12 +3,15 @@ package com.fuhuadata.vo;
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.BusinessOrderProduct;
 
+import javax.validation.Valid;
+
 
 /**
  *   报价转化订单do
  * Created by intanswer on 2017/4/20.
  */
 public class BusinessOrderDO {
+    @Valid
     private BusinessOrder businessOrder;//订单 表头
 
     private BusinessOrderProduct[] businessOrderProducts;//订单产品

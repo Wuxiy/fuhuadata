@@ -1,7 +1,9 @@
 package com.fuhuadata.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -20,33 +22,46 @@ public class BusinessOrder implements Serializable{
     private String billToCustomer;//收票客户
     private String salesManId;//业务员id
     private String salesManName;//业务员姓名
+    @NotBlank
     private String departmentId;//部门id
     private String departmentName;//部门名称
 
+    @NotBlank
     private String saleOrganizationId;//销售组织id
     private String saleOrganizationName;//销售组织名称
+    @NotBlank
     private String destinationPort;//目的港code
+    @NotBlank
     private String shipmentPort;//起运港code
     private String destinationPortName;//目的港
     private String shipmentPortName;//起运港
+    @NotBlank
     private String collectionAgreement;//收款协议
+    @NotNull
     private Integer tradeType;//贸易方式 0一般贸易，1其他
+    @NotBlank
     private String tradeTerm;//贸易术语
+    @NotBlank
     private String currency;//币种编码
-
+    @NotBlank
     private String tradeCountry;//贸易国别code
     private String tradeCountryName;//贸易国别
+    @NotNull
     private Integer isCreditRisk;//是否使用信用险
-    private BigDecimal interestRate;//计息比例
 
+    @NotNull
+    private BigDecimal interestRate;//计息比例
+    @NotNull
     private BigDecimal nusdexchgrate;//原币对美元汇率
+    @NotBlank
     private BigDecimal nexchangerate;//原币对本币汇率
     private Date lastdelydate;//最迟交货期
-
-
+    @NotBlank
     private BigDecimal premiumRate;//保险费率
     private BigDecimal  guaranteeRate;//信保费率
+    @NotNull
     private BigDecimal discountRate;//资金利率
+    @NotNull
     private BigDecimal lossRate;//汇损费率
     private BigDecimal saleRate;//销售费用率
     private BigDecimal managementRate;//管理费用率

@@ -3,12 +3,15 @@ package com.fuhuadata.vo;
 import com.fuhuadata.domain.CustomerVisitRecord;
 import com.fuhuadata.domain.RecordLinkman;
 
+import javax.validation.Valid;
+
 
 /**
  * 客户沟通记录新增
  * Created by intanswer on 2017/3/22.
  */
 public class CustomerVisitRecordVO {
+    @Valid
     private CustomerVisitRecord customerVisitRecord;
 
     private RecordLinkman[] recordLinkmen;

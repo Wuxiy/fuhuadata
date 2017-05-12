@@ -7,9 +7,11 @@ import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.*;
 import com.fuhuadata.util.JsonUtils;
 import com.fuhuadata.vo.*;
+import com.fuhuadata.web.exception.InvalidRequestException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -142,7 +145,10 @@ public class BusinessOrderProductAction {
      */
     @ResponseBody
     @RequestMapping(value="/saveBaseInfoAndComponents")
-        public ResultPojo saveBaseInfoAndComponents(@RequestBody ProductRequireBase productRequireBase){
+        public ResultPojo saveBaseInfoAndComponents(@RequestBody @Valid ProductRequireBase productRequireBase, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            throw new InvalidRequestException("请求参数错误",bindingResult);
+        }
         Map<String,Object> map = new HashMap<String,Object>();
         BusinessOrderProduct businessOrderProduct = productRequireBase.getBusinessOrderProduct();
         BusinessOrderProductComponent[] businessOrderProductComponents = productRequireBase.getBusinessOrderProductComponents();

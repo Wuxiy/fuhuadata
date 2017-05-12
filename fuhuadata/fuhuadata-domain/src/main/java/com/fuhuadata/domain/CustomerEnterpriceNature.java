@@ -1,5 +1,9 @@
 package com.fuhuadata.domain;
 
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.NotNull;
+
 /**
  * 企业性质
  * Created by intanswer on 2017/3/23.
@@ -8,8 +12,10 @@ public class CustomerEnterpriceNature {
 
     private Integer id;//编号
 
+    @NotNull
     private String customerId;//客户id
 
+    @NotNull
     private Integer nature;//企业性质 1：工厂 2：分销商 3：经销商 4：终端客户 5：其他
 
 

@@ -1,7 +1,9 @@
 package com.fuhuadata.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -13,8 +15,10 @@ public class BusinessInfo {
 
     private String businessId;//商机id
 
+    @NotBlank
     private String customerId;//客户id
 
+    @NotBlank
     private String businessName;//商机名称
 
     private String customerName;//客户名称
@@ -49,6 +53,7 @@ public class BusinessInfo {
     private String lemail;
 
 
+    @NotNull
     private Integer businessFrom;//商机来源，0展会，1门户网站，2农药店考察，3客户介绍，4主动联系，5其他
 
     private Integer businessState;//商机状态

@@ -9,6 +9,7 @@ import com.fuhuadata.service.DataArchivesService;
 import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.CustomerEncyVO;
 import com.fuhuadata.vo.DataArchive.Currtype;
+import com.fuhuadata.web.exception.InvalidRequestException;
 import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
@@ -16,6 +17,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -123,7 +126,10 @@ public class CustomerEncyclopediaAction {
     @RequestMapping(value = "/doAddCustomerEncyclopedia",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "doAdd")
     @ResponseBody
-     public ResultPojo doAddCustomerEncyclopedia(@RequestBody CustomerEncyclopedia customerEncyclopedia){
+     public ResultPojo doAddCustomerEncyclopedia(@RequestBody @Valid  CustomerEncyclopedia customerEncyclopedia, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            throw new InvalidRequestException("请求参数错误",bindingResult);
+        }
         Result<CustomerEncyclopedia> result = new Result<CustomerEncyclopedia>();
         try{
             customerEncyclopedia.setCreateUserId(LoginUtils.getLoginId());
@@ -178,7 +184,10 @@ public class CustomerEncyclopediaAction {
     @RequestMapping(value = "/doModify",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-customerEncyclopedia",methods = "doUpdate")
     @ResponseBody
-    public ResultPojo update(@RequestBody CustomerEncyclopedia customerEncyclopedia){
+    public ResultPojo update(@RequestBody @Valid CustomerEncyclopedia customerEncyclopedia,BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            throw new InvalidRequestException("请求参数错误",bindingResult);
+        }
         customerEncyclopedia.setLastmodifyUserId(LoginUtils.getLoginId());
         customerEncyclopedia.setLastmodifyUserName(LoginUtils.getLoginName());
         customerEncyclopedia.setModifyTime(DateUtil.getDateTimeFormat());
