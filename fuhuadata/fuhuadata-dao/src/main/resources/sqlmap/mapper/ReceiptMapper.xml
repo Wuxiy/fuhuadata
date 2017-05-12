@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.ReceiptMapper">
+  <resultMap id="BaseResultMap" type="com.fuhuadata.domain.mybatis.Receipt">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pk_receipt_b" jdbcType="VARCHAR" property="pkReceiptB" />
+    <result column="cbctid" jdbcType="VARCHAR" property="cbctid" />
+    <result column="cctcurrencyid" jdbcType="VARCHAR" property="cctcurrencyid" />
+    <result column="fclaimstatus" jdbcType="TINYINT" property="fclaimstatus" />
+    <result column="freceipttype" jdbcType="TINYINT" property="freceipttype" />
+    <result column="nclaimmny" jdbcType="DECIMAL" property="nclaimmny" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+</mapper>

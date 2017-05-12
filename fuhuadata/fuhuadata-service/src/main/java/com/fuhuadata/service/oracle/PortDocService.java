@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 public class PortDocService extends BaseNcSyncService<PortDoc, String, Portdoc, String> {
 
     public PortDocService() {
+        super();
         this.syncName = "港口档案";
     }
 

@@ -38,12 +38,29 @@
             defaultLang: 'zh'
         });
 
+        // 阻止表单回车提交
         function stopFormSubmit(e) {
             if (e.keyCode===13){
                 e.preventDefault();
             }
         }
 
+        /**
+         * 表单验证插件，默认配置
+         */
+        // 错误信息容器
+        $.validator.setDefaults({
+            errorElement: 'div'
+        });
+
+        // 错误信息提示工具
+       function em(txt, t, l) {
+            return '<div class="tooltip top in"' +
+                    ' style="'+t+'; '+l+'; display: block; min-width: 50px;">' +
+                    '<div class="tooltip-arrow" style="left: 50%; border-top-color: #ff524f"></div>' +
+                    '<div class="tooltip-inner" style="background-color: #ff524f">'+txt+'</div>' +
+                    '</div>';
+        }
     </script>
 </head>
 <body class="bg-page">

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 public class CurrTypeService extends BaseNcSyncService<CurrType, String, Currtype, String> {
 
     public CurrTypeService() {
+        super();
         this.syncName = "币种档案";
     }
 

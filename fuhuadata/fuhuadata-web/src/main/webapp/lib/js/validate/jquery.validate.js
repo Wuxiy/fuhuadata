@@ -566,12 +566,32 @@ $.extend( $.validator, {
 				}
 
 				// select only the first element for each name, and only those with rules specified
-				if ( this.name in rulesCache || !validator.objectLength( $( this ).rules() ) ) {
+				/*if ( this.name in rulesCache || !validator.objectLength( $( this ).rules() ) ) {
 					return false;
 				}
 
-				rulesCache[ this.name ] = true;
-				return true;
+				rulesCache[ this.name ] = true;*/
+                /*修改内容*/
+                // filter out checkable elements whose name already in cache
+                if ( validator.checkable(this) && this.name in rulesCache ) {
+                    return false;
+                }
+
+				// select this element (non-checkable) if this has the same name as one in cache
+                if ( this.name in rulesCache ) {
+                    if ( !validator.objectLength($(this).rules()) ) {
+                        $(this).rules('add', rulesCache[this.name]);
+                    }
+                    return true;
+                }
+
+				// select only the element with rules specified
+                if ( !validator.objectLength($(this).rules()) ) {
+                    return false;
+                }
+                rulesCache[this.name] = $(this).rules();
+				/*修改内容*/
+                return true;
 			});
 		},
 

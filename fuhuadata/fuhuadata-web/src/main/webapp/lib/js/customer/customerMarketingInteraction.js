@@ -2,250 +2,13 @@
  * Created by huxiangyang on 2017/3/13.
  */
 
-//
-// // 指定文本框
-// var selectedPName = null;
-// var treeData = null;
-// $(function () {
-//
-//     // init();
-//
-//     // 获取数据
-//     CRM.ajaxCall({
-//         url:basePath + '/customerMarketInfo/init',
-//         type:'POST',
-//         data:{
-//             customerId:$('#customerId').val(),
-//             customerType:$('#customerType').val(),
-//             year:new Date().getFullYear()
-//         },
-//         callback:pop
-//     });
-//
-//     // 构造下拉选择框
-//     $('#cpps_year,#csps_year,#year').html(function (n,old) {
-//         old = '<option value="">全部</option>';
-//         var nowDate = new Date();
-//         var nowYear = nowDate.getFullYear();
-//         console.log(typeof nowYear);
-//         var options = '';
-//         for(var i=nowYear;i>=2014;i--){
-//             options += '<option value="'+i+'">'+i+'</option>';
-//         }
-//         return old + options;
-//     }).val(new Date().getFullYear());// 默认为今年
-//
-//     // 筛选客户采购产品
-//     $(document).on('change.year','#cpps_year',function (e) {
-//         var year = $(e.target).val(),
-//             data = {
-//                 year:year,
-//                 customerId:$('#customerId').val(),
-//                 customerType:$('#customerType').val()
-//             };
-//         CRM.ajaxCall({
-//             url:basePath + '/customerMarketInfo/getCPPListByCidAndYear',
-//             type:'POST',
-//             data:data,
-//             callback:cpps
-//         });
-//     });
-//
-//     // 筛选客户销售产品
-//     $(document).on('change.year','#csps_year',function (e) {
-//         var year = $(e.target).val(),
-//             data = {
-//                 year:year,
-//                 customerId:$('#customerId').val(),
-//                 customerType:$('#customerType').val()
-//         };
-//         CRM.ajaxCall({
-//             url:basePath + '/customerMarketInfo/getSaleProductListByCidAndYear',
-//             type:'POST',
-//             data:data,
-//             callback:csps
-//         });
-//     });
-//
-//     // 构造客户采购模态
-//     $(document).on('click.addCpps','#add_cpps',function(){
-//         var comBtn = $('[data-form-btn="complete"]');
-//         $('#year').val($('#cpps_year').val()); // 重新选择year的值
-//         $('#table').html(''); // 清空表格
-//         $('#table').append(cppsTable()); // 重新填充表格
-//         comBtn.attr('id','cpps_up'); // 变更完成按钮
-//     });
-//
-//     // 构造客户销售模态
-//     $(document).on('click.addCsps','#add_csps',function(){
-//         var comBtn = $('[data-form-btn="complete"]');
-//         $('#year').val($('#cpps_year').val()); // 重新选择year的值
-//         $('#table').html(''); // 清空表格
-//         $('#table').append(cspsTable()); // 重新填充表格
-//         comBtn.attr('id','csps_up'); // 变更完成按钮
-//     });
-//
-//     // 继续添加按钮
-//     $(document).on('click.add','#addMore',function(){
-//         var table = $('#table');
-//         var colspanN = table.find('tr').first().find('th').length;
-//         var comBtn = $('[data-form-btn="complete"]');
-//         var tbody;
-//         var delBtn = "";// 删除按钮
-//         delBtn += '<tr>';
-//         delBtn += '<td colspan="'+colspanN+'">';
-//         delBtn += '<button class="btn btn-default btn-xs btn-block" data-form-btn="del" data-form-target="tbody">删除';
-//         delBtn += '</button></td></tr>';
-//         // 判断完成按钮的id
-//         if(comBtn.attr('id')=='cpps_up'){
-//             tbody = cppsTable();// 构造tbody
-//             console.log(delBtn);
-//             $(tbody).append(delBtn).appendTo(table);//插入到表格
-//         }else{
-//             tbody = cspsTable();
-//             $(tbody).append(delBtn).appendTo(table);
-//         }
-//     });
-//
-//     // 客户采购产品批量提交
-//     $(document).on('click.up','#cpps_up',function(e) {
-//         var isUp=true;
-//         var notNull = $(e.target).parents('.modal').find('input[required ]');
-//         notNull.each(function () {
-//             var thisVal = $(this).val();
-//             if(thisVal==''|| thisVal==null){
-//                 $('#errorM').modal('show');
-//                 isUp = false;
-//                 return false;
-//             }
-//         });
-//         if(isUp){
-//             CRM.ajaxCall({
-//                 url:basePath + '/customerMarketInfo/addCPPList',
-//                 type:'POST',
-//                 data:cppsObj(),
-//                 contentType:'application/json',
-//                 callback: function () {
-//                     // 刷新客户采购产品
-//                     CRM.ajaxCall({
-//                         url:basePath + '/customerMarketInfo/getCPPListByCidAndYear',
-//                         type:'POST',
-//                         data:{
-//                             customerId:$('#customerId').val(),
-//                             customerType:$('#customerType').val(),
-//                             year:$('#cpps_year').val($('#year').val()).val()
-//                         },
-//                         callback:cpps
-//                     });
-//                     // 关闭模态
-//                     $('#cusPro').modal('hide');
-//                 }
-//             });
-//         }
-//     });
-//
-//     // 客户销售产品批量提交
-//     $(document).on('click.up','#csps_up',function(e) {
-//         var isUp=true;
-//         var notNull = $(e.target).parents('.modal').find('input[required ]');
-//         notNull.each(function () {
-//             var thisVal = $(this).val();
-//             if(thisVal==''|| thisVal==null){
-//                 $('#errorM').modal('show');
-//                 isUp = false;
-//                 return false;
-//             }
-//         });
-//         if(isUp){
-//             CRM.ajaxCall({
-//                 url:basePath + '/customerMarketInfo/addCSPList',
-//                 type:'POST',
-//                 data:cspsObj(),
-//                 contentType:'application/json',
-//                 callback: function () {
-//                     // 刷新客户销售产品
-//                     CRM.ajaxCall({
-//                         url:basePath + '/customerMarketInfo/getSaleProductListByCidAndYear',
-//                         type:'POST',
-//                         data:{
-//                             customerId:$('#customerId').val(),
-//                             customerType:$('#customerType').val(),
-//                             year:$('#csps_year').val($('#year').val()).val()
-//                         },
-//                         callback:csps
-//                     });
-//
-//                     // 关闭模态
-//                     $('#cusPro').modal('hide');
-//                 }
-//             });
-//         }
-//     });
-//
-//     // 客户合作情况提交
-//     $(document).on('click.up','#cooperation_up',function() {
-//         CRM.ajaxCall({
-//             url:basePath + '/customerMarketInfo/updateCooperationInfo',
-//             type:'POST',
-//             data:cooperationObj(),
-//             contentType:'application/x-www-form-urlencoded; charset=UTF-8',
-//             callback:function () {
-//                 CRM.ajaxCall({
-//                     url:basePath + '/customerMarketInfo/init',
-//                     type:'POST',
-//                     data:{
-//                         customerId:$('#customerId').val(),
-//                         customerType:$('#customerType').val(),
-//                         year:new Date().getFullYear()
-//                     },
-//                     callback:pop
-//                 });
-//             }
-//         });
-//         // upData(basePath+'/customerMarketInfo/updateCooperationInfo','POST',cooperationObj(),'application/x-www-form-urlencoded; charset=UTF-8');
-//     });
-//
-//     //客户合作情况取消
-//     $(document).on('click','#cooperation_cl',function () {
-//         //刷新
-//         CRM.ajaxCall({
-//             url:basePath + '/customerMarketInfo/init',
-//             type:'POST',
-//             data:{
-//                 customerId:$('#customerId').val(),
-//                 customerType:$('#customerType').val(),
-//                 year:new Date().getFullYear()
-//             },
-//             callback:pop
-//         });
-//         // getData(basePath+'/customerMarketInfo/init','POST',GetRequest(),pop);
-//     });
-//
-//
-//     $(document).on('click','button[name="popupMd"]', function (e) {
-//
-//         $('#treeModal').modal('show');
-//         selectedPName = $(e.target).parents('.input-group').find('input');
-//
-//         if (treeData==null) {
-//
-//             CRM.ajaxCall({
-//                 url:basePath + '/productCategory/CategoryTree?fourNode=0',
-//                 type:'GET',
-//                 callback:renderTree
-//             })
-//         }
-//     });
-//
-// });
-
-var pageSize = 5; // 分页步长
-var currentPageCpps = 0; // 采购表格当前页码
-var currentPageCsps = 0; // 销售表格当前页码
-var pdtTreeData = null; // 保存树的数据
-var currentInput = null; // 当前文本框
-var supplierId = []; // 待删除的供应商id
-var countryId = []; // 待删除的目的国id
+var pageSize = 5, // 分页步长
+    currentPageCpps = 0, // 采购表格当前页码
+    currentPageCsps = 0, // 销售表格当前页码
+    pdtTreeData = null, // 保存树的数据
+    currentInput = null, // 当前文本框
+    supplierId = [], // 待删除的供应商id
+    countryId = []; // 待删除的目的国id
 
 $(function(){
 
@@ -424,72 +187,110 @@ $(function(){
     // 点击保存并继续添加产品
     $('#add_modal').on('click', '#add_more_cpps', function () {
 
-        $.ajax({
-            url:basePath + '/customer/market/purchase/products',
-            type:'POST',
-            data:JSON.stringify(cppsUpData()),
-            contentType:'application/json'
-        }).done(function () {
-            alert('添加成功!');
+        if (cppsVerify().form()) {
 
-            // 刷新列表
-            serachCpps();
+            $.ajax({
+                url:basePath + '/customer/market/purchase/products',
+                type:'POST',
+                data:JSON.stringify(cppsUpData()),
+                contentType:'application/json'
+            }).done(function (res) {
 
-            // 渲染modal
-            CRM.insertHtml('#cpps_modal_ct', $('#add_modal_content'));
+                if (res.code === 1) {
 
-            // 渲染年份
-            $('#cpps_modal_year').html(function (n, old) {
+                    alert('添加成功!');
 
-                var nowDate = new Date(),
-                    nowYear = nowDate.getFullYear(),
-                    options = '';
+                    // 刷新列表
+                    serachCpps();
 
-                for(var i=nowYear;i>=2014;i--){
-                    options += '<option value="'+i+'">'+i+'</option>';
+                    // 渲染modal
+                    CRM.insertHtml('#cpps_modal_ct', $('#add_modal_content'));
+
+                    // 渲染年份
+                    $('#cpps_modal_year').html(function (n, old) {
+
+                        var nowDate = new Date(),
+                            nowYear = nowDate.getFullYear(),
+                            options = '';
+
+                        for(var i=nowYear;i>=2014;i--){
+                            options += '<option value="'+i+'">'+i+'</option>';
+                        }
+                        return old + options;
+                    });
                 }
-                return old + options;
-            });
-        });
+            }).fail(function (res) {
+                var data = JSON.parse(res.responseText);
+                if (data.code !== -1) {
 
+                    alert(data.message);
+                }
+            });
+        }
     });
 
     // 点击完成
     $('#add_modal').on('click', '#cpps_up' , function () {
 
-        $.ajax({
-            url:basePath + '/customer/market/purchase/products',
-            type:'POST',
-            data:JSON.stringify(cppsUpData()),
-            contentType:'application/json'
-        }).done(function () {
-            alert('添加成功!');
+        if (cppsVerify().form()) {
 
-            // 刷新列表
-            serachCpps();
+            $.ajax({
+                url:basePath + '/customer/market/purchase/products',
+                type:'POST',
+                data:JSON.stringify(cppsUpData()),
+                contentType:'application/json'
+            }).done(function (res) {
 
-            // 关闭modal
-            $('#add_modal').modal('hide');
-        });
+                if (res.code ===1) {
+
+                    alert('添加成功!');
+
+                    // 刷新列表
+                    serachCpps();
+
+                    // 关闭modal
+                    $('#add_modal').modal('hide');
+                }
+            }).fail(function (res) {
+                var data = JSON.parse(res.responseText);
+                if (data.code !== -1) {
+
+                 alert(data.message);
+                 }
+            });
+        }
     });
 
     // 点击保存
     $('#add_modal').on('click', '#cpps_save' , function () {
 
-        $.ajax({
-            url:basePath + '/customer/market/purchase/products',
-            type:'POST',
-            data:JSON.stringify(cppsUpData()),
-            contentType:'application/json'
-        }).done(function () {
-            alert('更改成功!');
+        if (cppsVerify().form()) {
 
-            // 刷新列表
-            serachCpps();
+            $.ajax({
+                url:basePath + '/customer/market/purchase/products',
+                type:'POST',
+                data:JSON.stringify(cppsUpData()),
+                contentType:'application/json'
+            }).done(function (res) {
 
-            // 关闭modal
-            $('#add_modal').modal('hide');
-        });
+                if (res.code === 1) {
+
+                    alert('更改成功!');
+
+                    // 刷新列表
+                    serachCpps();
+
+                    // 关闭modal
+                    $('#add_modal').modal('hide');
+                }
+            }).fail(function (res) {
+                var data = JSON.parse(res.responseText);
+                if (data.code !== -1) {
+
+                    alert(data.message);
+                }
+            });
+        }
     });
 
     // 点击modal删除
@@ -643,72 +444,111 @@ $(function(){
     // 点击保存并继续添加产品
     $('#add_modal').on('click', '#add_more_csps', function () {
 
-        $.ajax({
-            url:basePath + '/customer/market/sale/products',
-            type:'POST',
-            data:JSON.stringify(cspsUpData()),
-            contentType:'application/json'
-        }).done(function () {
-            alert('添加成功!');
+        if (cspsVerify().form()) {
 
-            // 刷新列表
-            serachCsps();
+            $.ajax({
+                url:basePath + '/customer/market/sale/products',
+                type:'POST',
+                data:JSON.stringify(cspsUpData()),
+                contentType:'application/json'
+            }).done(function (res) {
 
-            // 渲染modal
-            CRM.insertHtml('#csps_modal_ct', $('#add_modal_content'));
+                if (res.code === 1) {
 
-            // 渲染年份
-            $('#csps_modal_year').html(function (n, old) {
+                    alert('添加成功!');
 
-                var nowDate = new Date(),
-                    nowYear = nowDate.getFullYear(),
-                    options = '';
+                    // 刷新列表
+                    serachCsps();
 
-                for(var i=nowYear;i>=2014;i--){
-                    options += '<option value="'+i+'">'+i+'</option>';
+                    // 渲染modal
+                    CRM.insertHtml('#csps_modal_ct', $('#add_modal_content'));
+
+                    // 渲染年份
+                    $('#csps_modal_year').html(function (n, old) {
+
+                        var nowDate = new Date(),
+                            nowYear = nowDate.getFullYear(),
+                            options = '';
+
+                        for(var i=nowYear;i>=2014;i--){
+                            options += '<option value="'+i+'">'+i+'</option>';
+                        }
+                        return old + options;
+                    });
                 }
-                return old + options;
-            });
-        });
+            }).fail(function (res) {
+                var data = JSON.parse(res.responseText);
+                if (data.code !== -1) {
 
+                    alert(data.message);
+                }
+            });
+        }
     });
 
     // 点击完成
     $('#add_modal').on('click', '#csps_up' , function () {
 
-        $.ajax({
-            url:basePath + '/customer/market/sale/products',
-            type:'POST',
-            data:JSON.stringify(cspsUpData()),
-            contentType:'application/json'
-        }).done(function () {
-            alert('添加成功!');
+        if (cspsVerify().form()) {
 
-            // 刷新列表
-            serachCsps();
+            $.ajax({
+                url:basePath + '/customer/market/sale/products',
+                type:'POST',
+                data:JSON.stringify(cspsUpData()),
+                contentType:'application/json'
+            }).done(function (res) {
 
-            // 关闭modal
-            $('#add_modal').modal('hide');
-        });
+                if (res.code === 1) {
+
+                    alert('添加成功!');
+
+                    // 刷新列表
+                    serachCsps();
+
+                    // 关闭modal
+                    $('#add_modal').modal('hide');
+                }
+            }).fail(function (res) {
+                var data = JSON.parse(res.responseText);
+                if (data.code !== -1) {
+
+                    alert(data.message);
+                }
+            });
+        }
+
     });
 
     // 点击保存
     $('#add_modal').on('click', '#csps_save_o' , function () {
 
-        $.ajax({
-            url:basePath + '/customer/market/sale/products',
-            type:'POST',
-            data:JSON.stringify(cspsUpData()),
-            contentType:'application/json'
-        }).done(function () {
-            alert('更改成功!');
+        if (cspsVerify().form()) {
 
-            // 刷新列表
-            serachCsps();
+            $.ajax({
+                url:basePath + '/customer/market/sale/products',
+                type:'POST',
+                data:JSON.stringify(cspsUpData()),
+                contentType:'application/json'
+            }).done(function (res) {
+                if (res.code === 1) {
 
-            // 关闭modal
-            $('#add_modal').modal('hide');
-        });
+                    alert('更改成功!');
+
+                    // 刷新列表
+                    serachCsps();
+
+                    // 关闭modal
+                    $('#add_modal').modal('hide');
+                }
+            }).fail(function (res) {
+                var data = JSON.parse(res.responseText);
+                if (data.code !== -1) {
+
+                    alert(data.message);
+                }
+            });
+        }
+
     });
 
     // 点击modal删除
@@ -806,7 +646,15 @@ function renderAreaTree (data,callback,el) {
         },
         treeObj = null;
     pdtTreeData = CRM.toArr(data);
+    $.each(pdtTreeData,function (i, item) {
 
+        if (/^c_/.test(item.id)) {
+
+            item.isParent = true;
+        }else {
+            item.isParent = false;
+        }
+    });
     $.fn.zTree.init(el, setting, pdtTreeData);
     treeObj = $.fn.zTree.getZTreeObj('tree');
     treeObj.expandNode(treeObj.getNodes()[0],true);
@@ -814,8 +662,8 @@ function renderAreaTree (data,callback,el) {
 
 // 产品树添加单击事件
 function pdtTreeDblHandler (event, modLeftId, treeNode) {
-
-    if (!/^c_/.test(treeNode.id)) {
+    /*console.log(treeNode);*/
+    if (treeNode !== null && !/^c_/.test(treeNode.id)) {
 
         currentInput.val(treeNode.name);
 
@@ -1145,4 +993,53 @@ function cooUpData() {
 // 重置合作情况数据
 function resetCoo() {
     $('input,textarea,select',$('#cooperation')).val('');
+}
+
+// 添加采购产品验证
+function cppsVerify() {
+
+    // 配置验证规格和显示消息
+    var cppsForm=$('#cpps_form').validate({
+        rules: {
+            productName:'required',
+            primaryUnit:'required',
+            annualDemands:'required',
+            averagePrice:'required',
+            year:'required',
+            name:'required',
+            amount:'required',
+            priceAverage:'required'
+
+        },
+        messages: {
+            productName:em('请选择一个值','top:-29px','right:0'),
+            primaryUnit:em('必填','top:-29px','right:0'),
+            annualDemands:em('必填','top:-29px','right:0'),
+            averagePrice:em('必填','top:-29px','right:0'),
+            year:em('必填','top:-29px','right:0'),
+            name:em('必填','top:-29px','right:0'),
+            amount:em('必填','top:-29px','right:0'),
+            priceAverage:em('必填','top:-29px','right:0')
+        }
+    });
+
+    return cppsForm;
+}
+
+// 添加销售产品验证
+function cspsVerify() {
+
+    // 配置验证规格和显示消息
+    var cspsForm=$('#csps_form').validate({
+        rules: {
+            productName:'required',
+            yearSalesTotal:'required'
+        },
+        messages: {
+            productName:em('请选择一个值','top:-29px','right:0'),
+            yearSalesTotal:em('必填','top:-29px','right:0')
+        }
+    });
+
+    return cspsForm;
 }

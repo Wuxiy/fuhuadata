@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.CurrencyRateMapper">
+  <resultMap id="BaseResultMap" type="com.fuhuadata.domain.mybatis.CurrencyRate">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+    <result column="pk_currtype" jdbcType="VARCHAR" property="pkCurrtype" />
+    <result column="curr_name" jdbcType="VARCHAR" property="currName" />
+    <result column="curr_code" jdbcType="VARCHAR" property="currCode" />
+    <result column="to_pk" jdbcType="VARCHAR" property="toPk" />
+    <result column="to_name" jdbcType="VARCHAR" property="toName" />
+    <result column="to_code" jdbcType="VARCHAR" property="toCode" />
+    <result column="rate" jdbcType="DECIMAL" property="rate" />
+    <result column="real_time" jdbcType="TIMESTAMP" property="realTime" />
+    <result column="show_time" jdbcType="TIMESTAMP" property="showTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+</mapper>

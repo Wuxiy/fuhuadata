@@ -49,9 +49,16 @@
         </javaClientGenerator>
 
         <!-- 需要生成实体 Bean 的数据库表 -->
-        <table tableName="customer_base_info" domainObjectName="CustomerBaseInfo">
+        <table tableName="t_receipt" domainObjectName="Receipt">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>
+        <!--<table tableName="t_currency_rate" domainObjectName="CurrencyRate">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>-->
+        <!--<table tableName="customer_base_info" domainObjectName="CustomerBaseInfo">
             <generatedKey column="customer_id" sqlStatement="MySql" identity="true" type="post"/>
-        </table>        <!--<table tableName="customer_purchase_product" domainObjectName="CustomerPurchaseProduct">
+        </table>-->
+        <!--<table tableName="customer_purchase_product" domainObjectName="CustomerPurchaseProduct">
             <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
         </table>
         <table tableName="customer_purchase_supplier" domainObjectName="CustomerPurchaseSupplier">

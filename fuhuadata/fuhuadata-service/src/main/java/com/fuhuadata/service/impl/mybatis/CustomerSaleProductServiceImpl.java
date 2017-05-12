@@ -3,12 +3,15 @@ package com.fuhuadata.service.impl.mybatis;
 import com.fuhuadata.domain.mybatis.CustomerSaleCountry;
 import com.fuhuadata.domain.mybatis.CustomerSaleProduct;
 import com.fuhuadata.domain.query.QueryCustomerSaleProduct;
+import com.fuhuadata.service.exception.ServiceException;
 import com.fuhuadata.service.mybatis.CustomerSaleCountryService;
 import com.fuhuadata.service.mybatis.CustomerSaleProductService;
+import com.fuhuadata.service.util.MessageUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
@@ -75,7 +78,17 @@ public class CustomerSaleProductServiceImpl extends BaseServiceImpl<CustomerSale
             return;
         }
 
-        saveOrUpdateSelective(product);// 保存销售产品
+        try {
+            saveOrUpdateSelective(product);// 保存销售产品
+        } catch (RuntimeException e) {
+            if (e instanceof DuplicateKeyException) {
+                throw new ServiceException(
+                        MessageUtils.message("customer.product.purchase.duplicate", product.getYear(), product.getProductName()),
+                        e);
+            } else {
+                throw e;
+            }
+        }
 
         List<CustomerSaleCountry> countries = product.getCountries();
         for (CustomerSaleCountry country : countries) {

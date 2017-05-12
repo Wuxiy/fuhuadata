@@ -48,14 +48,15 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
+        <table tableName="et_receipt_b" domainObjectName="Receipt"/>
         <!--<table tableName="bd_countryzone" domainObjectName="CountryZone"/>-->
-        <table tableName="bd_incoterm" domainObjectName="Incoterm"/>
+        <!--<table tableName="bd_incoterm" domainObjectName="Incoterm"/>
         <table tableName="ftpub_portdoc" domainObjectName="FtpubPortdoc"/>
         <table tableName="bd_currtype" domainObjectName="Currtype"/>
         <table tableName="bd_custclass" domainObjectName="CustClass"/>
         <table tableName="bd_formatdoc" domainObjectName="Formatdoc"/>
         <table tableName="bd_income" domainObjectName="Income"/>
-        <table tableName="bd_timezone" domainObjectName="TimeZone"/>
+        <table tableName="bd_timezone" domainObjectName="TimeZone"/>-->
 
     </context>
 </generatorConfiguration>
