@@ -149,7 +149,7 @@
                                             </label>
                                         </td>
                                         <td class="fac">
-                                            <select name="factoryName" id="factoryName" class="form-control">
+                                            <select name="factoryName" id="factoryName" class="form-control" data-control="on">
                                                 <option value="">——请选择——</option>
                                                 #foreach($!info in $!{freightCosts})
                                                     <option value="$!info.freightId">$!info.processFactory</option>

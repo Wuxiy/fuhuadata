@@ -360,7 +360,8 @@
     <select id="calculateProcesscost" parameterClass="java.lang.Integer" resultClass="java.math.BigDecimal">
     select sum(ifnull(cost,0)) from (
         <!-- 计算产品成分费用-->
-        SELECT SUM(cost) cost FROM `business_order_product_component` WHERE business_product_id = #value#
+        SELECT SUM(p.cost) cost FROM `business_order_product_component` p,k_component_cost c WHERE business_product_id = #value#
+        and p.component_id=c.component_id and c.component_name != '草甘膦原粉'
         UNION
         <!-- 计算主材费用-->
         SELECT (
