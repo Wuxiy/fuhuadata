@@ -1,7 +1,9 @@
 package com.fuhuadata.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -32,6 +34,7 @@ public class BusinessOrderProduct {
     private String customerId;
 
     /**产品名称**/
+    @NotBlank
     private String name;
 
     /**客户商品名**/
@@ -41,9 +44,11 @@ public class BusinessOrderProduct {
     private String brand;
 
     /**主产品数量**/
+    @NotNull
     private BigDecimal mainProductAmount;
 
     /**主产品单位**/
+    @NotBlank
     private String mainProductUnit;
 
     /**辅产品数量**/
@@ -56,15 +61,19 @@ public class BusinessOrderProduct {
     private BigDecimal convertRate;
 
     /**价格计算类型,01自产类，02原药制剂自产类加工，03贸易类，04原药采购制剂加工，09其他**/
+    @NotBlank
     private String priceType;
 
     /**价委会指导价**/
+    @NotNull
     private BigDecimal advisePrice;
 
     /**采购价格**/
+    @NotNull
     private BigDecimal purchasePrice;
 
     /**交货时间**/
+    @NotBlank
     private String deliveryTime;
 
     /**内运方式**/
@@ -77,6 +86,7 @@ public class BusinessOrderProduct {
     private String factoryId;
 
     /**加工厂名称**/
+    @NotBlank
     private String factoryName;
 
     /**明佣计费方式**/

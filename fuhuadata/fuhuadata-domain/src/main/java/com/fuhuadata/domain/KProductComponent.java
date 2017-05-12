@@ -1,18 +1,26 @@
 package com.fuhuadata.domain;
 
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.NotNull;
+
 /**
  * 成分产品
  * Created by intanswer on 2017/3/31.
  */
 public class KProductComponent {
+
     private Integer id;//主键id
+
 
     private Integer componentId;//成分id
 
     private String consumption;//单耗
 
+    @NotNull
     private Integer productCategoryId;//产品分类id
 
+    @NotBlank
     private String categoryFullName;//产品分类全路径
 
     public Integer getId() {

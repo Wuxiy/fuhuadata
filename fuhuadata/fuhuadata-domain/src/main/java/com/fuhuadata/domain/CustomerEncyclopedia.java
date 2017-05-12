@@ -1,6 +1,7 @@
 package com.fuhuadata.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.NotBlank;
 
 import java.util.Date;
 
@@ -42,6 +43,7 @@ public class CustomerEncyclopedia {
 
         private CustomerEnterpriceNature[] enterpriceNatures;
 
+        @NotBlank
         private String companyInfo;//企业简介
 
         private String isFull;//完整度

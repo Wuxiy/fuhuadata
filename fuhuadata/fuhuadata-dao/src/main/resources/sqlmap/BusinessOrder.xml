@@ -160,7 +160,7 @@
                 a.status = #status#
             </isNotEmpty>
             <isNotEmpty prepend=" AND " property="saleOrganizationId">
-                sale_organization_id = #saleOrganizationId#
+                a.sale_organization_id = #saleOrganizationId#
             </isNotEmpty>
             <isNotEmpty prepend=" AND " property="customerLevel">
                 base.customer_level = #customerLevel#

@@ -1,6 +1,9 @@
 package com.fuhuadata.domain;
 
 
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -9,16 +12,22 @@ import java.util.Date;
  * Created by intanswer on 2017/1/19.
  */
 public class PackingArchives {
+
     private Integer packingId;
 
+    @NotNull
     private Integer bigCategoryId;//：内包材，外包材，辅材
 
+    @NotNull
     private Integer smallCategoryId;//:主材-平桶类
 
+    @NotBlank
     private String packName;//包材名称
+
 
     private String size;//尺寸 格式：150*150*150
 
+    @NotBlank
     private String spec;//规格
 
     private String specUnit;//规格单位 （纸箱-瓶/箱，袋/箱）（瓶桶-L,KG）
@@ -29,12 +38,13 @@ public class PackingArchives {
 
     private String qualityTargetValue;//质量指标数值
 
-    private BigDecimal unitPrice=null;//单价
+    private BigDecimal unitPrice;//单价
 
-    private BigDecimal consumption=null;//单耗
+    private BigDecimal consumption;//单耗
 
     private Date priceEndDate;//价格有效期  yyyy/mm/dd
 
+    @NotBlank
     private String suitableType;//适用剂型（原药，水剂，颗粒剂）
 
     private String bRemarks;//备注

@@ -7,6 +7,7 @@ import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.CustomerSubcompanyInfoService;
 import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.CustomerSubcompanyInfoVO;
+import com.fuhuadata.web.exception.InvalidRequestException;
 import com.fuhuadata.web.util.CustomerUtils;
 import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
@@ -15,12 +16,14 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -100,8 +103,10 @@ public class CustomerSubcompanyInfoAction {
     @RequestMapping(value="/addCustomerSubcompanyInfo",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "customerInfo-CustomerSubcompanyInfo",methods = "doAdd")
     @ResponseBody
-    public ResultPojo addCustomerSubcompanyInfo(@RequestBody CustomerSubcompanyInfoVO customerSubcompanyInfoVO){
-
+    public ResultPojo addCustomerSubcompanyInfo(@RequestBody @Valid CustomerSubcompanyInfoVO customerSubcompanyInfoVO, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            throw new InvalidRequestException("请求参数错误",bindingResult);
+        }
         Result<CustomerSubcompanyInfo> result = new Result<CustomerSubcompanyInfo>();
         CustomerSubcompanyInfo customerSubcompanyInfo = customerSubcompanyInfoVO.getCustomerSubcompanyInfo();
         CustomerEnterpriceNature[] customerEnterpriceNatures = customerSubcompanyInfoVO.getCustomerEnterpriceNatures();
@@ -132,7 +137,10 @@ public class CustomerSubcompanyInfoAction {
     @RequestMapping(value="/updateCustomerSubcompanyInfoById",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "customerInfo-CustomerSubcompanyInfo",methods = "Update")
     @ResponseBody
-    public ResultPojo updateCustomerSubcompanyInfo(@RequestBody CustomerSubcompanyInfoVO customerSubcompanyInfoVO){
+    public ResultPojo updateCustomerSubcompanyInfo(@RequestBody @Valid CustomerSubcompanyInfoVO customerSubcompanyInfoVO,BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            throw new InvalidRequestException("请求参数错误",bindingResult);
+        }
         Result<CustomerSubcompanyInfo> result = new Result<CustomerSubcompanyInfo>();
         List<CustomerEnterpriceNature> list = new ArrayList<CustomerEnterpriceNature>();
         customerSubcompanyInfoVO.getCustomerSubcompanyInfo().setModifyTime(DateUtil.getDateTimeFormat());

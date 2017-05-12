@@ -1,6 +1,9 @@
 package com.fuhuadata.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -13,9 +16,11 @@ public class CustomerLinkman{
 	private String linkmanId;
 	
     /**客户id**/
+    @NotBlank
 	private String customerId;
 	
     /**姓名**/
+    @NotBlank
 	private String name;
 	
     /**联系电话1**/
@@ -34,9 +39,11 @@ public class CustomerLinkman{
 	private String responseArea;
 	
     /**是否在职,0在职，1离职**/
+    @NotNull
 	private Integer onJob;
 	
     /**性别**/
+    @NotBlank
 	private String sex;
 	
     /**生日**/
@@ -61,6 +68,7 @@ public class CustomerLinkman{
 	private String faith;
 	
     /**是否默认，0否，1是，只有一个是默认**/
+    @NotNull
 	private Integer isDefault;
 	
     /**备注**/

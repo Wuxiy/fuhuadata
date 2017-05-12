@@ -10,18 +10,21 @@ import com.fuhuadata.vo.*;
 import com.fuhuadata.vo.DataArchive.Currtype;
 import com.fuhuadata.vo.DataArchive.Income;
 import com.fuhuadata.vo.DataArchive.Incoterm;
+import com.fuhuadata.web.exception.InvalidRequestException;
 import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -189,7 +192,10 @@ public class BusinessOrderAction {
     @RequestMapping(value = "/updateOrderProducts",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "salesStatistics",methods = "updateOrderProducts")
     @ResponseBody
-    public ResultPojo updateOrderProducts(@RequestBody BusinessOrderDO businessOrderDO){
+    public ResultPojo updateOrderProducts(@RequestBody  BusinessOrderDO businessOrderDO){
+        //if(bindingResult.hasErrors()){
+        //    throw new InvalidRequestException("请求参数错误",bindingResult);
+        //}
         Result result = new Result();
        businessOrderDO.getBusinessOrder().setLastmodifyUserId(LoginUtils.getLoginId());
        businessOrderDO.getBusinessOrder().setLastmodifyUserName(LoginUtils.getLoginName());
@@ -219,8 +225,12 @@ public class BusinessOrderAction {
             @RequestMapping(value = "/doAddBusinessOrder",method = RequestMethod.POST)
             @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "addBusinessOrder")
             @ResponseBody
-            public ResultPojo addBusinessOrder(@RequestBody BusinessOrder businessOrder){
+            public ResultPojo addBusinessOrder(@RequestBody @Valid BusinessOrder businessOrder, BindingResult bindingResult){
+                if(bindingResult.hasErrors()){
+                    throw new InvalidRequestException("请求参数错误",bindingResult);
+                }
                 Result<BusinessOrder> result = new Result<BusinessOrder>();
+
                 try{
                     businessOrder.setStatus(0);//新增报价,从商机转化而来，为报价中的状态
 
@@ -250,7 +260,10 @@ public class BusinessOrderAction {
     @RequestMapping(value = "/updateBusinessOrderByOrderId",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "salesStatistics-businessInfo",methods = "updateBusinessOrderByOrderId")
     @ResponseBody
-    public ResultPojo updateBusinessOrderByOrderId(@RequestBody BusinessOrder businessOrder){
+    public ResultPojo updateBusinessOrderByOrderId(@RequestBody @Valid BusinessOrder businessOrder,BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            throw new InvalidRequestException("请求参数错误",bindingResult);
+        }
         businessOrder.setLastmodifyUserId(LoginUtils.getLoginId());
         businessOrder.setLastmodifyUserName(LoginUtils.getLoginName());
         businessOrder.setModifyTime(DateUtil.getDateTime());

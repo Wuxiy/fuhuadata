@@ -8,15 +8,18 @@ import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.ComponentCostService;
 import com.fuhuadata.vo.ComponentCostDO;
 import com.fuhuadata.vo.ComponentCostVO;
+import com.fuhuadata.web.exception.InvalidRequestException;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -78,7 +81,10 @@ public class ComponentCostAction {
     @RequestMapping(value = "/doAddComponentCost", method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-componentCostInfo", methods = "doAdd")
     @ResponseBody
-    public ResultPojo doAddComponentCost(@RequestBody ComponentCostVO componentCostVO) {
+    public ResultPojo doAddComponentCost(@RequestBody @Valid ComponentCostVO componentCostVO, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            throw new InvalidRequestException("请求参数错误",bindingResult);
+        }
         ComponentCost componentCost = componentCostVO.getComponentCost();
         KProductComponent[] KProductComponents = componentCostVO.getkProductComponents();
         Result result = new Result();
@@ -103,7 +109,10 @@ public class ComponentCostAction {
     @RequestMapping(value = "/doModify", method = RequestMethod.POST)
     @ResponseBody
     @SystemLogAnnotation(module = "knowledgeBase-componentCostInfo", methods = "doUpdate")
-    public ResultPojo delete(@RequestBody ComponentCostVO componentCostVO) {
+    public ResultPojo delete(@RequestBody @Valid ComponentCostVO componentCostVO,BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            throw new InvalidRequestException("请求参数错误",bindingResult);
+        }
         ComponentCost componentCost = componentCostVO.getComponentCost();
         KProductComponent[] KProductComponents = componentCostVO.getkProductComponents();
         Result result = new Result();

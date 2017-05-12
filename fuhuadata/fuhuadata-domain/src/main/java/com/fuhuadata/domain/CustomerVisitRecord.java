@@ -3,8 +3,10 @@ package com.fuhuadata.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fuhuadata.util.DateJsonDeserializer;
 import com.fuhuadata.util.DateJsonSerializer;
+import com.sun.istack.internal.NotNull;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.hibernate.validator.constraints.NotBlank;
 
 import java.util.Date;
 import java.math.BigDecimal;
@@ -30,6 +32,7 @@ public class CustomerVisitRecord{
 
     /**开始时间**/
 	@JsonFormat(pattern = "yyyy-MM-dd")
+	@NotBlank
 	private Date startTime;
 	
     /**结束时间**/
@@ -37,6 +40,7 @@ public class CustomerVisitRecord{
 	private Date endTime;
 	
     /**活动类型：0远程沟通，1出差拜访，2展会邀请，3工厂参观，4商务宴请，5其他（备注内容）**/
+    @NotNull
 	private Integer activityType;
 	
     /**活动类型备注**/
@@ -46,6 +50,7 @@ public class CustomerVisitRecord{
 	private String activityAddress;
 	
     /**总的活动费用，单位元**/
+    @NotNull
 	private BigDecimal activityExpense;
 	
     /**拜访对象备注，json格式数据**/

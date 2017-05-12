@@ -9,16 +9,21 @@ import com.fuhuadata.service.BCodeService;
 import com.fuhuadata.service.PackingArchivesService;
 import com.fuhuadata.vo.PackingArchivesVO;
 import com.fuhuadata.vo.RelationPackingArchives;
+import com.fuhuadata.web.exception.InvalidRequestException;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -89,7 +94,10 @@ public class PackingArchivesAction {
     @RequestMapping(value = "/doAddPackingArchives", method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-packingCost", methods = "doAdd")
     @ResponseBody
-    public ResultPojo doAddPackingArchives(@RequestBody PackingArchives packingArchives) {
+    public ResultPojo doAddPackingArchives(@RequestBody @Valid PackingArchives packingArchives, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            throw new InvalidRequestException("请求参数错误",bindingResult);
+        }
         try {
             // 转化规格为大写
             packingArchives.setSpec(packingArchives.getSpec().toUpperCase());
@@ -129,7 +137,10 @@ public class PackingArchivesAction {
     @RequestMapping(value = "/doModify", method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-packingCost", methods = "doUpdate")
     @ResponseBody
-    public ResultPojo doModify(@RequestBody PackingArchives packingArchives) {
+    public ResultPojo doModify(@RequestBody @Valid PackingArchives packingArchives,BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            throw new InvalidRequestException("请求参数错误",bindingResult);
+        }
         try {
             int id = packingArchives.getPackingId();
             Result<PackingArchives> result = packingArchivesService.updatePackingArchivesById(id, packingArchives);
@@ -179,16 +190,17 @@ public class PackingArchivesAction {
     @RequestMapping(value = "/addRelation", method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-packingCost", methods = "addRelation")
     @ResponseBody
-    public ResultPojo addRelation(@RequestBody PackingRelation[] packingRelations) {
+    public ResultPojo addRelation(@RequestBody @Valid List<PackingRelation> packingRelations,BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            throw new InvalidRequestException("请求参数错误",bindingResult);
+        }
         Result result = new Result();
         int mainPackingId=0;
         List<PackingRelation> list = new ArrayList<PackingRelation>();
-        if(packingRelations!=null&&packingRelations.length>0){
-            mainPackingId = packingRelations[0].getMainPackingId();
-            list = Arrays.asList(packingRelations);
-            for(PackingRelation packingRelation:packingRelations){
+        if(packingRelations!=null&&packingRelations.size()>0) {
+            for (PackingRelation packingRelation : packingRelations) {
                 //互斥字段，默认为IsEqualOuter=1
-                if(packingRelation.getConsumption()!=null&&packingRelation.getIsEqualOuter()==1){
+                if (packingRelation.getConsumption() != null && packingRelation.getIsEqualOuter() == 1) {
                     packingRelation.setConsumption(null);
                 }
             }

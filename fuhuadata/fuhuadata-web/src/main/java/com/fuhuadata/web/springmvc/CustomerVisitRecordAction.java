@@ -8,6 +8,7 @@ import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.CustomerVisitRecordLinkman;
 import com.fuhuadata.vo.CustomerVisitRecordVO;
 import com.fuhuadata.vo.VisitRecordVO;
+import com.fuhuadata.web.exception.InvalidRequestException;
 import com.fuhuadata.web.util.CustomerUtils;
 import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
@@ -16,6 +17,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -80,7 +83,10 @@ public class CustomerVisitRecordAction {
     @RequestMapping(value="/addCustomerVisitRecord",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "CustomerInfo-CustomerVisitRecord",methods = "addCustomerVisitRecord")
     @ResponseBody
-    public ResultPojo addCustomerVisitRecord(@RequestBody CustomerVisitRecordVO customerVisitRecordVO){
+    public ResultPojo addCustomerVisitRecord(@RequestBody @Valid CustomerVisitRecordVO customerVisitRecordVO, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            throw new InvalidRequestException("请求参数错误",bindingResult);
+        }
         Result result = new Result();
         customerVisitRecordVO.getCustomerVisitRecord().setCreateUserId(LoginUtils.getLoginId());
         customerVisitRecordVO.getCustomerVisitRecord().setCreateUserName(LoginUtils.getLoginName());

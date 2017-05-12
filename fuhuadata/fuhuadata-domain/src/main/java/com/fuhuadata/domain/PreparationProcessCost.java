@@ -35,7 +35,6 @@ public class PreparationProcessCost {
     public PreparationProcessCost() {
     }
 
-
     public Integer getMcostId() {
         return mcostId;
     }

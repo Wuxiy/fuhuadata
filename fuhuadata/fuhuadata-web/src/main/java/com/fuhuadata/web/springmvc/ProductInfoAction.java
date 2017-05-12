@@ -10,6 +10,7 @@ import com.fuhuadata.service.ProductInfoService;
 import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.ProductInfoDO;
 import com.fuhuadata.vo.ProductInfoVO;
+import com.fuhuadata.web.exception.InvalidRequestException;
 import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import org.apache.commons.logging.Log;
@@ -17,6 +18,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -76,7 +79,10 @@ public class ProductInfoAction {
     @RequestMapping(value="/doAdd",method=RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-productInfo",methods = "doAdd")
     @ResponseBody
-    public ResultPojo doAddProductInfo(@RequestBody ProductInfoDO productInfoDO){
+    public ResultPojo doAddProductInfo(@RequestBody @Valid ProductInfoDO productInfoDO, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            throw new InvalidRequestException("请求参数错误",bindingResult);
+        }
         ProductInfo productInfo = productInfoDO.getProductInfo();
         ProductComponent[] productComponents  = productInfoDO.getProductComponents();
         Result<ProductInfo> result = new Result<ProductInfo>();
@@ -139,7 +145,10 @@ public class ProductInfoAction {
     @RequestMapping(value = "/doModify",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-ProductInfo",methods = "doUpdate")
     @ResponseBody
-    public ResultPojo doModifyProductInfo(@RequestBody ProductInfoDO productInfoDO) {
+    public ResultPojo doModifyProductInfo(@RequestBody @Valid ProductInfoDO productInfoDO,BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            throw new InvalidRequestException("请求参数错误",bindingResult);
+        }
         ProductInfo productInfo = productInfoDO.getProductInfo();
         ProductComponent[] productComponents  = productInfoDO.getProductComponents();
         //基础信息
