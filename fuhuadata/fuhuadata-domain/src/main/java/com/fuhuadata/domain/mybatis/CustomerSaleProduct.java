@@ -1,6 +1,7 @@
 package com.fuhuadata.domain.mybatis;
 
 import com.google.common.collect.Lists;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -24,6 +25,7 @@ public class CustomerSaleProduct extends BaseEntity<Integer> {
     /**
      * 年
      */
+    @NotBlank
     private String year;
 
     @Column(name = "product_id")

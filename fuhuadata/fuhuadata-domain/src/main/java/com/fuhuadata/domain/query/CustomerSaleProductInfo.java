@@ -2,6 +2,7 @@ package com.fuhuadata.domain.query;
 
 import com.fuhuadata.domain.mybatis.CustomerSaleProduct;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -10,6 +11,7 @@ import java.util.List;
  */
 public class CustomerSaleProductInfo {
 
+    @Valid
     private CustomerSaleProduct saleProduct;
 
     private List<Integer> deleteCountryIds;
