@@ -2931,7 +2931,7 @@ select[multiple].form-group-lg .form-control {
 .btn[disabled],
 fieldset[disabled] .btn {
   cursor: text;
-  pointer-events: none;
+  /*pointer-events: none; // 阻止了所有鼠标事件*/
   opacity: 0.65;
   filter: alpha(opacity=65);
   -webkit-box-shadow: none;
