@@ -25,7 +25,8 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         try{
             result.addDefaultModel(productCategoryManager.addProductCategory(productCategory));
         }catch(Exception e){
-            result.setSuccess(false);
+
+
             log.error("添加产品目录树错误",e);
         }
         return result;
