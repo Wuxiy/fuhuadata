@@ -61,8 +61,8 @@
                                     <input type="text" class="form-control cell_edit" id="unitPrice" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label danhao">单耗</label>
-                                <div class="col-xs-3">
-                                    <input type="text" class="form-control cell_edit danhao" id="consumption" disabled/>
+                                <div class="col-xs-3 danhao">
+                                    <input type="text" class="form-control cell_edit " id="consumption" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label">价格有效期</label>
                                 <div class="col-xs-3">
