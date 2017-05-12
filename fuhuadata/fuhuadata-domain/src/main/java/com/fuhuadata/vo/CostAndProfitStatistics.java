@@ -63,6 +63,8 @@ public class CostAndProfitStatistics {
 
     private String salesManName;
 
+    private BigDecimal actualAmountPaid;//已回款金额
+
     public String getAreaId() {
         return areaId;
     }
@@ -293,5 +295,13 @@ public class CostAndProfitStatistics {
 
     public void setSpecification(String specification) {
         this.specification = specification;
+    }
+
+    public BigDecimal getActualAmountPaid() {
+        return actualAmountPaid;
+    }
+
+    public void setActualAmountPaid(BigDecimal actualAmountPaid) {
+        this.actualAmountPaid = actualAmountPaid;
     }
 }

@@ -98,7 +98,7 @@
                 if(getData!=undefined){
                     $.each(getData,function(n,item){
                         var tr = $('<tr></tr>');
-                        $(tr).append('<td><input type="checkbox" value="'+item.packingId+'" name="cellcheckbox"/></td><td>'+ifEmpty(item.packingId)+'</td><td>'+ifEmpty(item.packName)+'</td><td>'+ifEmpty(item.spec)+'</td><td>'+ifEmpty(item.size)+'</td><td>'+ifEmpty(item.quality)+'</td><td>'+ifEmpty(item.unitPrice)+'</td><td>'+(ifEmpty(item.status)==1?'启用':'禁用')+'</td>').appendTo(parent);
+                        $(tr).append('<td><input type="checkbox" class="check" value="'+item.packingId+'" name="cellcheckbox"/></td><td>'+ifEmpty(item.packingId)+'</td><td>'+ifEmpty(item.packName)+'</td><td>'+ifEmpty(item.spec)+'</td><td>'+ifEmpty(item.size)+'</td><td>'+ifEmpty(item.quality)+'</td><td>'+ifEmpty(item.unitPrice)+'</td><td>'+(ifEmpty(item.status)==1?'启用':'禁用')+'</td>').appendTo(parent);
                     })
                 }
 
