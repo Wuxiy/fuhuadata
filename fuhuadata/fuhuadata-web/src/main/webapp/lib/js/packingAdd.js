@@ -2,6 +2,7 @@
  * Created by young on 2017/3/6.
  */
 
+    var id = $('#id').val();
     var img = $("input[name='file']");
 
     var addTbody = document.getElementById('add_tbody');
@@ -9,8 +10,10 @@
     //根据包材类型获取关联包材的展示
     var bid = $('#bid').val();
     console.log(bid);
+
     if(bid != 1){
         $('.relate').hide();
+        $('.danhao').hide();
     }
 
 
@@ -146,47 +149,209 @@ function mergeArray(arr1, arr2){
     return temparray;
 }
 
-//新增添加关联
+//新增关联
+var cellcheckboxlists;//关联id数组
+$('#addrelate').on('click',function(){
+    if(id == ''||id == undefined){
+        alert('请先保存基本信息！');
+        return false;
+    }
+    var cellcheckbox = $('[name="cellcheckbox"]');
+    var cellcheckboxlist = [];
+    cellcheckbox.each(function(){
+        cellcheckboxlist.push($(this).val());
+    })
+    cellcheckboxlists = cellcheckboxlist.join(',');
+
+    $('#tree').creatTree(basePath + '/packingCategory/CategoryTree?parentIds=2,3');
+    /*$('#tree').filtrateData(basePath + '/packingArchives/getPackingArchivesByPId',"modal_relate_table","packingInfoModal");*/
+    jQuery.ajax({
+        url:basePath + '/packingArchives/getPackingArchivesByPId',
+        type:'POST',
+        data:{id:0}
+    }).done(packingInfoModalList);
+
+    /**
+     *packingInfoModalList
+     */
+    function packingInfoModalList(data){
+        var ResultData = data.data;
+        var tr;
+        if(ResultData!=undefined){
+            modalrelatetable.html('');
+            jQuery.each(ResultData,function(n,item){
+                if(contains(cellcheckboxlist,item.packingId) == true){
+                    tr += '<tr data-categoryId="'+item.bigCategoryId+'" data-smallCategoryId="'+item.smallCategoryId+'"><td><input type="checkbox" value="'+item.packingId+'" data-categoryId="'+item.bigCategoryId+'" data-smallCategoryId="'+item.smallCategoryId+'" name="modal_cellcheckbox" checked/></td>';
+                }else{
+                    tr += '<tr data-categoryId="'+item.bigCategoryId+'" data-smallCategoryId="'+item.smallCategoryId+'"><td><input type="checkbox" value="'+item.packingId+'" data-categoryId="'+item.bigCategoryId+'" data-smallCategoryId="'+item.smallCategoryId+'" name="modal_cellcheckbox"/></td>';
+                }
+                tr += '<td>'+ifEmpty(item.packingId)+'</td><td>'+ifEmpty(item.packName)+'</td>';
+                tr += '<td>'+ifEmpty(item.spec)+'</td><td>'+ifEmpty(item.size)+'</td>';
+                tr += '<td>'+ifEmpty(item.quality)+'</td><td>'+ifEmpty(item.unitPrice)+'</td>';
+                if((','+cellcheckboxlists+",").indexOf(item.packingId)>-1){
+                    tr += '<td><input class="form-control" value="'+ifEmpty(item.associatedConsumption)+'" name="modal_consumption"></td>';
+                }else{
+                    tr += '<td><input class="form-control" value="'+ifEmpty(item.associatedConsumption)+'" name="modal_consumption" disabled></td>';
+                }
+                tr += '<td class="text-center"><input type="checkbox" name="modal_isEqualOuter" disabled/></td>';
+                tr += '<td>'+(ifEmpty(item.status)==1?'启用':'禁用')+'</td></tr>';
+
+            });
+            $(tr).appendTo(modalrelatetable);
+        }
+    }
+
+    $('#addField').modal('show');
+})
+
+$(document).on('click','li[id]>a',function(e){
+    modalrelatetable.find('tr').hide();
+
+    e.preventDefault();
+    var a = $(e.target);
+    var classid = a.parent('li').attr('id');
+    if(classid == 2||classid == 3){
+        modalrelatetable.find('tr[data-categoryId="'+classid+'"]').show();
+    }else{
+        modalrelatetable.find('tr[data-smallCategoryId="'+classid+'"]').show();
+    }
+
+})
+
+//确认数组
+function contains(arr, obj) {
+    var i = arr.length;
+    while (i--) {
+        if (arr[i] == obj.toString()) {
+            return true;
+        }
+    }
+    return false;
+}
+
+//互斥处理
+$(document).on('change','[name="modal_cellcheckbox"]',function(){
+    if($(this).attr('checked')){
+        $(this).parents('tr').find('td').eq(7).find('input[name="modal_consumption"]').attr('disabled',false);
+        $(this).parents('tr').find('td').eq(8).find('input[name="modal_isEqualOuter"]').attr('disabled',false);
+    }else{
+        $(this).parents('tr').find('td').eq(7).find('input[name="modal_consumption"]').attr('disabled',true);
+        $(this).parents('tr').find('td').eq(8).find('input[name="modal_isEqualOuter"]').attr('disabled',true);
+        $(this).parents('tr').find('td').eq(8).find('input[name="modal_isEqualOuter"]').attr('checked',false);
+    }
+})
+$(document).on('change','[name="modal_isEqualOuter"]',function(){
+    if($(this).attr('checked')){
+        $(this).parents('tr').find('td').eq(7).find('input[name="modal_consumption"]').attr('disabled',true);
+        $(this).parents('tr').find('td').eq(7).find('input[name="modal_consumption"]').val('');
+    }else{
+        $(this).parents('tr').find('td').eq(7).find('input[name="modal_consumption"]').attr('disabled',false);
+    }
+})
+
+//新增添加关联完成
 $('#add_relate').on('click',function(){
-    var ids1 = new Array();
-    var ids2 = new Array();
     var ids = new Array();
     $("input[name='modal_cellcheckbox']:checked").each(function(){
-        ids1.push($(this).val());
-    });
-    $("input[name='cellcheckbox']").each(function(){
-        ids2.push($(this).val());
-    });
+        ids.push($(this).val());
+    })
 
-    ids = mergeArray(ids1,ids2);
-    console.log(ids);
-    $('#addField').modal('hide');
     if(ids.length > 0){
         var msg = "确认要为主材添加这些关联吗？";
-        if(msg){
-            var url = basePath+'/packingArchives/getByIds';
+        if(confirm(msg)){
+            var url = basePath + '/packingArchives/addRelation?id=' + id;
+            var data = ids;
+            console.log(ids);
             jQuery.ajax({
                 url:url,
                 type:'POST',
                 dataType:"json",
                 contentType:"application/json",
-                data:JSON.stringify(ids),
-                success:function(result){
+                data:getdata(),
+                success:function(){
                     alert("添加关联成功！");
-                    for(var i=0;i<result.data.length;i++){
-                        addTbody.innerHTML += '<tr>'+
-                            '<td class="text-center"><input type="checkbox" name="cellcheckbox" value="'+ifEmpty(result.data[i].packingId)+'" /></td>'+
-                            '<td class="col-xs-2 text-center text-middle">'+ifEmpty(result.data[i].packingId)+'</td>'+
-                            '<td class="col-xs-2 text-center text-middle">'+ifEmpty(result.data[i].packName)+'</td>'+
-                            '<td class="col-xs-1 text-center text-middle">'+ifEmpty(result.data[i].spec)+'</td>'+
-                            '<td class="col-xs-1 text-center text-middle">'+ifEmpty(result.data[i].size)+'</td>'+
-                            '<td class="col-xs-2 text-center text-middle">'+ifEmpty(result.data[i].quality)+'</td>'+
-                            '<td class="col-xs-1 text-center text-middle">'+ifEmpty(result.data[i].unitPrice)+'</td>'+
-                            '<td class="col-xs-1 text-center text-middle">'+ifEmpty(result.data[i].consumption)+'</td>'+
-                            '<td class="col-xs-1 text-center text-middle">'+ifEmpty(result.data[i].status)+'</td>'
-                        '</tr>';
-                    }
+                    $('#addField').modal('hide');
 
+                    $('.imagesbtn').hide();
+                    jQuery.ajax({
+                        type:'GET',
+                        url:basePath+'/packingArchives/getPackingArchivesById?id='+id,
+                        success:function(result){
+                            var ResultData = result.data;
+
+                            if(ResultData.pack){
+                                var pack = ResultData.pack;
+                                var arr = pack.suitableType;
+                                var arr2 = arr.split(',');
+                                $.each(arr2,function(index,suitname){
+                                    $("input[name='check']").each(function(){
+                                        if($(this).val() == suitname){
+                                            $(this).attr('checked',true);
+                                        }
+                                    })
+                                })
+                                $('#packName').val(ifEmpty(pack.packName));
+                                $('#spec').val(ifEmpty(pack.spec));
+                                $('#size').val(ifEmpty(pack.size));
+                                $('#quality').val(ifEmpty(pack.quality));
+                                $('#qualityIndex').val(ifEmpty(pack.qualityIndex));
+                                $('#qualityTargetValue').val(ifEmpty(pack.qualityTargetValue));
+                                $('#unitPrice').val(ifEmpty(pack.unitPrice));
+                                $('#consumption').val(ifEmpty(pack.consumption));
+                                $('#priceEndDate').val(ifEmpty(pack.priceEndDate));
+                                $('#status').val(ifEmpty(pack.status));
+                                $('#bRemarks').val(ifEmpty(pack.bRemarks));
+
+                                $('#packpackingId').text(ifEmpty(pack.packingId));
+                                $('#packpackName').text(ifEmpty(pack.packName));
+                                $('#packspec').text(ifEmpty(pack.spec));
+                                $('#packsize').text(ifEmpty(pack.size));
+                                $('#packquality').text(ifEmpty(pack.quality));
+                                $('#packunitPrice').text(ifEmpty(pack.unitPrice));
+                                $('#packconsumption').text(ifEmpty(pack.consumption));
+                                $('#packstatus').text(ifEmpty(pack.status));
+                            }
+
+                            if(ResultData.nodes){
+                                var node = ResultData.nodes;
+                                var table_html = '';
+                                table.html('');
+                                for(var i=0;i<node.length;i++){
+                                    table_html += '<tr><td class="text-center"><input type="checkbox" name="cellcheckbox" value="'+node[i].packingId+'" /></td>';
+                                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].packingId)+'</td>';
+                                    table_html += '<td class="col-xs-2 text-center text-middle">'+ifEmpty(node[i].packName)+'</td>';
+                                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].spec)+'</td>';
+                                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].size)+'</td>';
+                                    table_html += '<td class="col-xs-2 text-center text-middle">'+ifEmpty(node[i].quality)+'</td>';
+                                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].unitPrice)+'</td>';
+                                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].consumption)+'</td>';
+                                    table_html += '<td class="text-center"><input type="checkbox" name="isEqualOuter"/></td>';
+                                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].status)+'</td></tr>';
+
+                                }
+                                $(table_html).appendTo(table);
+                            }
+
+                            if(ResultData.imagePath){
+                                var reData = eval(ResultData.imagePath);
+                                console.log(reData);
+                                for(var j=0;j<reData.length;j++){
+                                    imgGroup.innerHTML += '<div class="col-xs-3">'+
+                                        '<button type="button" class="close" name="close" style="position: absolute;top:3px;left:0;" disabled>×</button>'+
+                                        '<div class="col-xs-12 thumbnail">'+
+                                        '<img style="height: 240px;" data-toggle="modal" data-target="#imgModal" data-name="" src="'+basePath + reData[j].path+'" alt="请点击添加图片" class="imgpath">'+
+                                        '<div class="input-group col-xs-10 col-xs-offset-1" style="padding-top: 5px">'+
+                                        '<input class="form-control text-center filename" data-url="'+reData[j].path+'" style="" value="'+reData[j].name+'" disabled/>'+
+                                        '<div class="input-group-btn"><button data-btn="modification" class="btn btn-xs btn-default modifyimg" type="button" disabled>图片修改</button></div>'+
+                                        '</div>'+
+                                        '</div>'+
+                                        '</div>';
+                                }
+                            }
+
+                        }
+                    });
+                    $('a[href="#Packrelate"]').tab('show');
                 }
             })
         }
@@ -247,7 +412,7 @@ $('.packingAdd').on('click',function(){
         data:JSON.stringify(data),
         success:function(){
             alert("添加成功");
-            location.reload();
+            window.location.href = basePath + '/packingArchives/packingArchivesList';
         }
     })
 })

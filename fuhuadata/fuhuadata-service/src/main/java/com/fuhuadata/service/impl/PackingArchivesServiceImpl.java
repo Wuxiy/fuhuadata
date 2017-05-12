@@ -1,20 +1,20 @@
 package com.fuhuadata.service.impl;
 
-import com.ctc.wstx.util.StringUtil;
 import com.fuhuadata.domain.PackingArchives;
+import com.fuhuadata.domain.PackingRelation;
 import com.fuhuadata.domain.query.PackingArchivesQuery;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.manager.PackingArchivesManager;
 import com.fuhuadata.service.PackingArchivesService;
 import com.fuhuadata.vo.ImagePathVO;
 import com.fuhuadata.vo.PackingArchivesVO;
+import com.fuhuadata.vo.RelationPackingArchives;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -134,11 +134,13 @@ public class PackingArchivesServiceImpl implements PackingArchivesService {
                     }
 
                 }
-                String ids = packingArchives.getAssociatedPackingId();
+               /* String ids = packingArchives.getAssociatedPackingId();
                 if(ids != null&& ids.length()>0) {
                     packingArchivesVO.setNodes(packingArchivesManager.getPackingArchivesByIds(ids));
-                }
-                result.addDefaultModel("PackingArchives", packingArchivesVO);
+                }*/
+               List<RelationPackingArchives> relationPackingArchives = packingArchivesManager.getRelationPackingById(id);
+               packingArchivesVO.setNodes(relationPackingArchives);
+               result.addDefaultModel("PackingArchives", packingArchivesVO);
             }
         } catch (Exception e) {
             result.setSuccess(false);
@@ -209,6 +211,65 @@ public class PackingArchivesServiceImpl implements PackingArchivesService {
         }
         return result;
     }
+
+
+    /**
+     * 关联包材新增
+     * @param list
+     * @return
+     */
+    @Override
+    public Result batchAddRelationPacking(int mainPackingId,List<PackingRelation> list) {
+        Result result = new Result();
+        try {
+            result.setSuccess(packingArchivesManager.batchAddRelationPacking(mainPackingId,list));
+        } catch (Exception e) {
+            result.setSuccess(false);
+            // 打印日志
+            log.error("新增关联包材信息错误",e);
+        }
+        return result;
+    }
+
+    @Override
+    public Result deleteRelationPacking(int mainPackingId) {
+        Result result = new Result();
+        try {
+            result.setSuccess(packingArchivesManager.deleteRelationPacking(mainPackingId));
+        } catch (Exception e) {
+            result.setSuccess(false);
+            // 打印日志
+            log.error("根据主材id删除关联包材错误",e);
+        }
+        return result;
+    }
+
+    @Override
+    public Result deleteRelationPackingByIds(String ids) {
+        Result result = new Result();
+        try {
+            result.setSuccess(packingArchivesManager.deleteRelationPackingByIds(ids));
+        } catch (Exception e) {
+            result.setSuccess(false);
+            // 打印日志
+            log.error("根据关联表ids删除关联包材错误",e);
+        }
+        return result;
+    }
+
+    @Override
+    public Result<List<RelationPackingArchives>> getRelationPackingByPackId(int packingId) {
+        Result<List<RelationPackingArchives>> result = new Result<List<RelationPackingArchives>>();
+        try {
+            result.addDefaultModel("RelationPackings", packingArchivesManager.getRelationPackingByPackId(packingId));
+        } catch (Exception e) {
+            result.setSuccess(false);
+            // 打印日志
+            log.error("根据主材id获取关联包材错误",e);
+        }
+        return result;
+    }
+
 
     public PackingArchivesManager getPackingArchivesManager(){
         return this.packingArchivesManager;

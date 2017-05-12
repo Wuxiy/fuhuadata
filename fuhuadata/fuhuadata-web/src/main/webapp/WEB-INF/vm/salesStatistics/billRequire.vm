@@ -278,7 +278,7 @@
                     }
                     if(documentaryRequire.qualityTestingReport!=undefined&&documentaryRequire.qualityTestingReport == 1){
                         $('#qualityTestingReport').attr('checked',true);
-                        $('#reportCompanyTitle').attr('data-control','on');
+                        $('#reportCompanyTitle').attr('data-control','');
                     }
                     if(documentaryRequire.guaranteeSlip!=undefined&&documentaryRequire.guaranteeSlip == 1){
                         $('#guaranteeSlip').attr('checked',true);
@@ -715,10 +715,10 @@
                     success:function(result) {
                         console.log(result);
                         if (result == true) {
-                            alert('添加成功！');
+                            alert('保存成功！');
                              window.location.href = basePath + '/businessProduct/intoPackageRequire?businessProductId=' + id + '&orderId=' + orderId + '&customerId=' + customerId + '&productRequireId=' + productRequireId + '&edit=' + editId;
                         } else {
-                            alert('添加失败！');
+                            alert('保存失败！');
                         }
                     }
                 })

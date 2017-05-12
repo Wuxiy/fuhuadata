@@ -683,6 +683,7 @@
                 tc.`name` country,
                 SUM(sc.amount) salesAmount,
                 SUM(sc.gross_profit) grossProfit,
+                SUM(cs.nclaimmny) actualAmountPaid,
                 b.maintenance_fee maintenanceFee,
                 a.sales_man_id salesManId,
                 a.sales_man_name salesManName
@@ -694,6 +695,8 @@
                 ON a.customer_id = base.`customer_id`
               LEFT JOIN sync_contract sc
                 ON sc.pk_longpro = a.nc_order_id
+              LEFT JOIN (SELECT cbctid, SUM(nclaimmny) nclaimmny FROM t_receipt WHERE fclaimstatus=3 GROUP BY cbctid ) cs
+            ON cs.cbctid = sc.`pk_contract`
               LEFT JOIN (SELECT
                 cvr.customer_id,
                 SUM(cvr.activity_expense) maintenance_fee
@@ -704,7 +707,7 @@
              <include refid="COST-AND-PROFIT-INLINE"/>
          </isParameterPresent>
             GROUP BY
-            cvr.customer_id) b ON b.customer_id = a.customer_id
+            cvr.customer_id) b ON b.customer_id = base.customer_id
             <isParameterPresent>
                 <include refid="COST-PROFIT-QUERY-COMMON"/>
                 <isNotEmpty prepend=" AND " property="orderBy">
@@ -725,14 +728,16 @@
 					SUM(ssc.num) salesVolume,
 					SUM(ssc.gross_profit) grossProfit,
 					SUM(ssc.amount) salesAmount,
-					SUM(ssc.gross_rate) grossRate
+					SUM(ssc.gross_rate) grossRate,
+					SUM(cs.nclaimmny) actualAmountPaid
 				FROM
 					sync_sub_contract ssc
 				LEFT JOIN sync_contract sc ON sc.pk_contract = ssc.pk_contract
 				LEFT JOIN product_ware pw ON pw.`code` = ssc.product_code
 				LEFT JOIN product_info pi ON pi.product_id = pw.product_info_id
 				LEFT JOIN business_order bo ON bo.nc_order_id = sc.pk_longpro
-
+				LEFT JOIN (SELECT cbctid, SUM(nclaimmny) nclaimmny FROM t_receipt WHERE fclaimstatus=3 GROUP BY cbctid ) cs
+            ON cs.cbctid = sc.`pk_contract`
 				WHERE
 					bo.customer_id = #customerId#
 				GROUP BY
@@ -784,11 +789,14 @@
             SUM(sc.amount) salesAmount,
             SUM(sc.gross_profit) grossProfit,
             SUM(a.maintenance_fee) maintenanceFee,
-            SUM(a.net_profit) netProfit
+            SUM(a.net_profit) netProfit,
+            SUM(cs.nclaimmny) actualAmountPaid
             FROM
             customer_base_info base
             LEFT JOIN business_order a ON a.customer_id = base.customer_id
             LEFT JOIN sync_contract sc ON sc.pk_longpro = a.nc_order_id
+            LEFT JOIN (SELECT cbctid, SUM(nclaimmny) nclaimmny FROM t_receipt WHERE fclaimstatus=3 GROUP BY cbctid ) cs
+            ON cs.cbctid = sc.`pk_contract`
             <isParameterPresent>
                 <include refid="PROFIT-STATISTICS-QUERY-COMMON"/>
             </isParameterPresent>
@@ -803,12 +811,15 @@
             SUM(sc.amount) salesAmount,
             SUM(sc.gross_profit) grossProfit,
             SUM(a.maintenance_fee) maintenanceFee,
-            SUM(a.net_profit) netProfit
+            SUM(a.net_profit) netProfit,
+            SUM(cs.nclaimmny) actualAmountPaid
             FROM
             customer_base_info base
             LEFT JOIN business_order a ON a.customer_id = base.customer_id
             LEFT JOIN sync_contract sc ON sc.pk_longpro = a.nc_order_id
             LEFT JOIN	t_countryzone tc ON tc.`code` = base.countryzone
+            LEFT JOIN (SELECT cbctid, SUM(nclaimmny) nclaimmny FROM t_receipt WHERE fclaimstatus=3 GROUP BY cbctid ) cs
+            ON cs.cbctid = sc.`pk_contract`
             <isParameterPresent>
                 <include refid="PROFIT-STATISTICS-QUERY-COMMON"/>
             </isParameterPresent>
@@ -830,6 +841,7 @@
             SUM(sc.gross_profit) grossProfit,
             SUM(a.maintenance_fee) maintenanceFee,
             SUM(a.net_profit) netProfit,
+            SUM(cs.nclaimmny) actualAmountPaid,
             a.sales_man_id salesManId,
             a.sales_man_name salesManName
             FROM
@@ -837,6 +849,8 @@
             LEFT JOIN business_order a ON a.customer_id = base.customer_id
             LEFT JOIN sync_contract sc ON sc.pk_longpro = a.nc_order_id
             LEFT JOIN	t_countryzone tc ON tc.`code` = base.countryzone
+            LEFT JOIN (SELECT cbctid, SUM(nclaimmny) nclaimmny FROM t_receipt WHERE fclaimstatus=3 GROUP BY cbctid ) cs
+            ON cs.cbctid = sc.`pk_contract`
             <isParameterPresent>
                 <include refid="PROFIT-STATISTICS-QUERY-COMMON"/>
             </isParameterPresent>
@@ -856,12 +870,15 @@
             SUM(sc.gross_profit) grossProfit,
             SUM(a.maintenance_fee) maintenanceFee,
             SUM(a.net_profit) netProfit,
+            SUM(cs.nclaimmny) actualAmountPaid,
             a.sales_man_id salesManId,
             a.sales_man_name salesManName
             FROM
             business_order a
             LEFT JOIN customer_base_info base ON a.customer_id = base.customer_id
             LEFT JOIN sync_contract sc ON sc.pk_longpro = a.nc_order_id
+            LEFT JOIN (SELECT cbctid, SUM(nclaimmny) nclaimmny FROM t_receipt WHERE fclaimstatus=3 GROUP BY cbctid ) cs
+            ON cs.cbctid = sc.`pk_contract`
             LEFT JOIN	t_countryzone tc ON tc.`code` = base.countryzone
             LEFT JOIN (
             SELECT
@@ -889,6 +906,7 @@
             SUM(ssc.num) salesVolume,
             SUM(ssc.gross_profit) grossProfit,
             SUM(ssc.amount) salesAmount,
+            SUM(cs.nclaimmny) actualAmountPaid,
             SUM(ssc.gross_rate) grossRate
             FROM
             sync_sub_contract ssc
@@ -896,6 +914,8 @@
             LEFT JOIN business_order a ON a.nc_order_id = sc.pk_longpro
             LEFT JOIN product_ware pw ON ssc.product_code = pw.`code`
             LEFT JOIN product_info bi ON bi.product_id = pw.product_info_id
+            LEFT JOIN (SELECT cbctid, SUM(nclaimmny) nclaimmny FROM t_receipt WHERE fclaimstatus=3 GROUP BY cbctid ) cs
+            ON cs.cbctid = sc.`pk_contract`
             <isParameterPresent>
                 <include refid="PROFIT-STATISTICS-QUERY-COMMON"/>
             </isParameterPresent>
@@ -965,16 +985,19 @@
         </isEqual>
 
         <isEqual property="dimension" compareValue="4">
-            SELECT count(*) FROM (SELECT
-            count(*)
+            SELECT
+            COUNT(*)
             FROM
-            business_order_product a
-            LEFT JOIN product_info b ON b.product_id = a.product_id
+            (SELECT
+            COUNT(*)
+            FROM
+            sync_sub_contract ssc
+            LEFT JOIN sync_contract sc ON sc.`pk_contract` = ssc.`pk_contract`
+            LEFT JOIN	business_order a ON a.nc_order_id  = sc. pk_longpro
             <isParameterPresent>
                 <include refid="PROFIT-STATISTICS-QUERY-COMMON"/>
             </isParameterPresent>
-            GROUP BY
-            a.`name`) temp
+            GROUP BY ssc.`product_code`) temp
         </isEqual>
     </select>
 

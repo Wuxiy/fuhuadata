@@ -153,7 +153,7 @@
                             </tr>
                             </tbody>
                         </table>
-                        <table class="table table-condensed table-bordered table-striped text-right text-center" id="outer">
+                        <table class="table table-condensed table-bordered table-striped text-right text-center">
                             <caption class="text-info text-left">
                                 外包装选择
                             </caption>
@@ -168,27 +168,30 @@
                                 <th class="text-center">单价（元）</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="outer">
+
+                            </tbody>
+                            <tfoot>
                                 <tr id="befond">
-                                    <td colspan="7">
-                                        <div class="form-horizontal">
-                                            <div class="form-group"></div>
-                                            <div class="form-group">
-                                                <label class="control-label col-xs-1">封箱口方式</label>
-                                                <div class="col-xs-2">
-                                                    <input data-control="on" id="sealingStyle" class="form-control isdisabled" type="text" disabled>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-xs-1">其他要求</label>
-                                                <div class="col-xs-6">
-                                                    <textarea data-control="on" id="outerPackingOtherRequire" class="form-control isdisabled" rows="3" disabled></textarea>
-                                                </div>
+                                <td colspan="7">
+                                    <div class="form-horizontal">
+                                        <div class="form-group"></div>
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-1">封箱口方式</label>
+                                            <div class="col-xs-2">
+                                                <input data-control="on" id="sealingStyle" class="form-control isdisabled" type="text" disabled>
                                             </div>
                                         </div>
-                                    </td>
-                                </tr>
-                            </tbody>
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-1">其他要求</label>
+                                            <div class="col-xs-6">
+                                                <textarea data-control="on" id="outerPackingOtherRequire" class="form-control isdisabled" rows="3" disabled></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tfoot>
                         </table>
                         <table class="table table-condensed table-bordered table-striped text-right text-center">
                             <caption class="text-info text-left">
@@ -437,8 +440,8 @@
     var editId = $('#editId').val();
     console.log(editId);
 
-    var auxiliary = document.getElementById('auxiliary');
-    var befond = document.getElementById('befond');
+    var outer = $('#outer');
+    var auxiliary = $('#auxiliary');
 
     var bInfo = new CRM.module.Panel('#productRequire');
     bInfo.startEdit();
@@ -454,12 +457,15 @@
                     var productRequire = result.productRequire;
 
                     var auxiliaryMaterialIds = "";
+                    var auxiliaryMaterialIdslist;
                     var outerPackingId = "";
                     if(productRequire.outerPackingId!=undefined){
                          outerPackingId = productRequire.outerPackingId;
                     }
                     if(productRequire.auxiliaryMaterialIds){
                          auxiliaryMaterialIds = productRequire.auxiliaryMaterialIds;
+                         auxiliaryMaterialIdslist = auxiliaryMaterialIds.split(',');
+                         console.log(auxiliaryMaterialIdslist);
                     }
                     if(productRequire.mainPackingType!=undefined){
                         $('#mainPackingType').attr('data-id',productRequire.mainPackingId);
@@ -600,17 +606,17 @@
                             _html += '<td class="text-center">'+ifEmpty(outerData[i].spec)+'</td>';
                             _html += '<td class="text-center">'+ifEmpty(outerData[i].size)+'</td>';
                             _html += '<td class="text-center">'+ifEmpty(outerData[i].quality)+'</td>';
-                            _html += '<td class="text-center">'+ifEmpty(outerData[i].consumption)+'</td>';
+                            _html += '<td class="text-center">'+ifEmpty(outerData[i].associatedConsumption)+'</td>';
                             _html += '<td class="text-center">'+ifEmpty(outerData[i].unitPrice)+'</td>';
                             _html += '</tr>';
                         }
-                        $('#befond').before(_html);
+                        $(_html).appendTo(outer);
                     }
 
                     var auxiliary_html;
                     if(auxiliaryData.length!=0){
                         for(var j=0;j<auxiliaryData.length;j++){
-                            if((','+auxiliaryMaterialIds+",").indexOf(auxiliaryData[j].packingId)>-1){
+                            if(contains(auxiliaryMaterialIdslist,auxiliaryData[j].packingId)){
                                 auxiliary_html += '<tr class=""><td><input type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox" name="auxiliarycheckbox" checked/></td>';
                             }else {
                                 auxiliary_html += '<tr class=""><td><input type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox" name="auxiliarycheckbox"/></td>';
@@ -619,11 +625,15 @@
                             auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].spec)+'</td>';
                             auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].size)+'</td>';
                             auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].quality)+'</td>';
-                            auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].consumption)+'</td>';
+                            if(ifEmpty(auxiliaryData[j].isEqualOuter) == 1){
+                                auxiliary_html += '<td class="isEqualOuter">'+ifEmpty(auxiliaryData[j].associatedConsumption)+'</td>';
+                            }else{
+                                auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].consumption)+'</td>';
+                            }
                             auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].unitPrice)+'</td></tr>';
 
                         }
-                        $('#auxiliary').append(auxiliary_html);
+                        $(auxiliary_html).append(auxiliary);
                     }
 
                 }
@@ -655,7 +665,6 @@
             $('#previous').removeClass('hidden');
             $('#down').removeClass('hidden');
         }
-
 
         //渲染主材树
         $('#tree').creatTree(basePath+'/packingCategory/CategoryTree?parentIds=1');
@@ -758,6 +767,7 @@
                         var modelist = result.modelist;
                         var img_html = '';
                         var _html = '';
+                        var auxiliary_html;
 
                         if(modelist != null || modelist != undefined){
                             for(var k=0;k<modelist.length;k++){
@@ -775,6 +785,7 @@
 
 
                         if(outerData.length != 0){
+                            outer.html('');
                             for(var i=0;i<outerData.length;i++){
                                 _html += '<tr class="outerlist">';
                                 _html += '<td class="text-center"><input type="checkbox" value="'+ifEmpty(outerData[i].packingId)+'" class="outercheckbox" name="outercheckbox"/></td>';
@@ -782,25 +793,31 @@
                                 _html += '<td class="text-center">'+ifEmpty(outerData[i].spec)+'</td>';
                                 _html += '<td class="text-center">'+ifEmpty(outerData[i].size)+'</td>';
                                 _html += '<td class="text-center">'+ifEmpty(outerData[i].quality)+'</td>';
-                                _html += '<td class="text-center">'+ifEmpty(outerData[i].consumption)+'</td>';
+                                _html += '<td class="text-center">'+ifEmpty(outerData[i].associatedConsumption)+'</td>';
                                 _html += '<td class="text-center">'+ifEmpty(outerData[i].unitPrice)+'</td>';
                                 _html += '</tr>';
                             }
-                            $('#befond').before(_html);
+                            $(_html).appendTo(outer);
                         }
 
+
                         if(auxiliaryData.length!=0){
+                            auxiliary.html('');
                             for(var j=0;j<auxiliaryData.length;j++){
-                                auxiliary.innerHTML += '<tr class="">'+
-                                        '<td><input type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox" name="auxiliarycheckbox"/></td>'+
-                                        '<td>'+ifEmpty(auxiliaryData[j].packName)+'</td>' +
-                                        '<td>'+ifEmpty(auxiliaryData[j].spec)+'</td>'+
-                                        '<td>'+ifEmpty(auxiliaryData[j].size)+'</td>'+
-                                        '<td>'+ifEmpty(auxiliaryData[j].quality)+'</td>'+
-                                        '<td>'+ifEmpty(auxiliaryData[j].consumption)+'</td>'+
-                                        '<td>'+ifEmpty(auxiliaryData[j].unitPrice)+'</td>'+
-                                        '</tr>';
+                                auxiliary_html += '<tr class=""><td><input type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox" name="auxiliarycheckbox"/></td>';
+                                auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].packName)+'</td>';
+                                auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].spec)+'</td>';
+                                auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].size)+'</td>';
+                                auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].quality)+'</td>';
+                                if(ifEmpty(auxiliaryData[j].isEqualOuter) == 1){
+                                    auxiliary_html += '<td class="isEqualOuter">'+ifEmpty(auxiliaryData[j].associatedConsumption)+'</td>';
+                                }else{
+                                    auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].consumption)+'</td>';
+                                }
+                                auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].unitPrice)+'</td></tr>';
+
                             }
+                            $(auxiliary_html).appendTo(auxiliary);
                         }else{
                             $('#auxiliary').addClass('hidden');
                         }
@@ -995,15 +1012,10 @@
         return outerPackingId;
     }
 
-    /*function getmodel(){
-        var name = $('input[name="modelist"]:checked').attr('data-name');
-        var path = $('input[name="modelist"]:checked').attr('data-path');
-        var model = {
-            'name':name,
-            'path':path
-        }
-        return model;
-    }*/
+    //主材互斥
+    /*$(document).on('change','input[name="cellcheckbox"]',function(){
+
+    })*/
 
     //获取辅材Id数组
     function getauxiliaryMaterialIds() {
@@ -1083,4 +1095,22 @@
         return data==undefined?'':data;
     }
 
+    //确认数组
+    function contains(arr, obj) {
+        var i = arr.length;
+        while (i--) {
+            if (arr[i] == obj.toString()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    $(document).on('change','input[name="outercheckbox"]',function(){
+        var val = $(this).parents('tr').find('td').eq(5).text();
+
+        if($(this).attr('checked')){
+            $('.isEqualOuter').text(val);
+        }
+    })
 </script>
