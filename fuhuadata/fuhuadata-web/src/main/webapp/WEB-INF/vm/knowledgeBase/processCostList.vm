@@ -21,7 +21,7 @@
 </div>
 <div class="dashboard-wrapper">
     <div class="row">
-        <div class="tab-content col-xs-7">
+        <div class="tab-content col-xs-8">
             <div id="adEexpense" class="tab-pane fade in active">
                     <!--制剂加工费表开始-->
                     <div class="panel panel-default">
@@ -118,9 +118,9 @@
                                 <thead>
                                 <tr>
                                     <th class="text-center col-xs-2 text-middle test1">成分名称</th>
-                                    <th class="text-center col-xs-1 text-middle test1">单耗（kg/T）</th>
+                                    <th class="text-center col-xs-2 text-middle test1">单耗(Kg或L)/(T或kL)</th>
                                     <th class="text-center col-xs-2 text-middle test1" >单价（元/kg）</th>
-                                    <th class="text-center col-xs-2 text-middle test1">价格有效期</th>
+                                    <th class="text-center col-xs-1 text-middle test1">价格有效期</th>
                                     <th class="text-center col-xs-2 text-middle test1">适合产品</th>
                                     <th class="text-center col-xs-2 text-middle test1">备注</th>
                                     <th class="text-center col-xs-1 text-middle test1">删除</th>
