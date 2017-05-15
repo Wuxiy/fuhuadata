@@ -14,12 +14,11 @@
         <result column="create_user_id" property="createUserId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result column="create_user_name" property="createUserName" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="create_time" property="createTime" jdbcType="DATETIME" javaType="java.sql.Timestamp"/>
+        <result column="lastmodify_user_id" property="lastmodifyUserId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+        <result column="lastmodify_user_name" property="lastmodifyUserName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp"/>
         <result column="remarks" property="remarks" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>
-    <sql id="Base_Column_List" >
-        problem_id, product_id, product_type, problem_content, solution, create_user_id,
-        create_user_name, create_time, remarks
-    </sql>
 
     <sql id="PAGE-COMMON">
         <dynamic prepend=" WHERE ">
@@ -40,6 +39,12 @@
             <isNotNull prepend=" AND " property="createUserName">
                 create_user_name =#createUserName#
             </isNotNull>
+            <isNotNull prepend=" AND " property="problemContent">
+                problem_content like concat('%',#problemContent#,'%')
+            </isNotNull>
+            <isNotNull prepend=" AND " property="productId">
+                product_id=#productId#
+            </isNotNull>
         </dynamic>
     </sql>
 
@@ -47,11 +52,13 @@
         INSERT INTO
         k_product_problem(problem_id, product_id, product_type,
         problem_content, solution, create_user_id,
-        create_user_name, create_time, remarks
+        create_user_name, create_time,lastmodify_user_id,
+        lastmodify_user_name, modify_time, remarks
         )
         values (#problemId#, #productId#, #productType#,
         #problemContent#, #solution#, #createUserId#,
-        #createUserName#, #createTime#, #remarks#
+        #createUserName#, #createTime#, #lastmodifyUserId#,
+        #lastmodifyUserName#,now(),#remarks#
         )
         <selectKey resultClass="int" keyProperty="problemId">
             SELECT @@IDENTITY AS　problem_id
@@ -63,6 +70,9 @@
         <dynamic prepend=" SET ">
             <isNotNull prepend=", " property="solution">solution = #solution#</isNotNull>
             <isNotNull prepend=", " property="remarks">remarks = #remarks#</isNotNull>
+            <isNotNull prepend=", " property="lastmodifyUserId">lastmodify_user_id=#lastmodifyUserId#</isNotNull>
+            <isNotNull prepend=", " property="lastmodifyUserName">lastmodify_user_name=#lastmodifyUserName#</isNotNull>
+            <isNotNull prepend=", " property="modify_time">modify_time=now()</isNotNull>
         </dynamic>
         WHERE problem_id = #problemId#
     </update>
@@ -83,9 +93,11 @@
         <![CDATA[
             SELECT * FROM k_product_problem
         ]]>
-        <isNotParameterPresent>
+        <isParameterPresent>
             <include refid="QUERY-COMMON"/>
-        </isNotParameterPresent>
+            order by modify_time desc
+            LIMIT #startRow#,#pageSize#
+        </isParameterPresent>
     </select>
 
     <select id="GET-PAGE" resultMap="PRODUCTPROBLEM-MAP" parameterClass="ProductProblemQuery">
@@ -103,7 +115,7 @@
         SELECT COUNT(*) FROM k_product_problem
         ]]>
         <isParameterPresent>
-            <include refid="PAGE-COMMON"/>
+            <include refid="QUERY-COMMON"/>
         </isParameterPresent>
     </select>
 </sqlMap>

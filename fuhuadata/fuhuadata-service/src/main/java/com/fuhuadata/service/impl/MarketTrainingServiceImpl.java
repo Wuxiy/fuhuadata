@@ -55,7 +55,20 @@ public class MarketTrainingServiceImpl implements MarketTrainingService{
 
     @Override
     public Result getMarketTrainingById(int id) {
-        return null;
+        Result<MarketTraining> result = new Result<MarketTraining>();
+        try {
+            MarketTraining marketTraining = marketTrainingManager.getMarketTrainingById(id);
+            if(marketTraining == null){
+                result.setSimpleErrorMsg(0, "当前营销培训不存在，请重试");
+            }else{
+                result.addDefaultModel("MarketTraining", marketTraining);
+            }
+        } catch (Exception e) {
+            result.setSuccess(false);
+            // 打印日志
+            log.error("根据id获取营销培训信息错误",e);
+        }
+        return result;
     }
 
     @Override

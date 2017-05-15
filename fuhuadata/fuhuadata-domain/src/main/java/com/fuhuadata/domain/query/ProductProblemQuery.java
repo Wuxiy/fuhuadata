@@ -1,7 +1,5 @@
 package com.fuhuadata.domain.query;
 
-import com.fuhuadata.domain.query.PageBase;
-
 import java.sql.Date;
 
 /**

@@ -39,7 +39,7 @@ public class MarketTrainingDaoImpl extends SqlMapClientTemplate implements Marke
     }
 
     @Override
-    public MarketTraining getMarketTrainingById(int id){return (MarketTraining)this.queryForObject(GET_BY_ID,id);};
+    public MarketTraining getMarketTrainingById(int id){return (MarketTraining)this.queryForObject(GET_BY_ID,id);}
 
     @Override
     public List<MarketTraining> getAllMarketTrainings(){return this.queryForList(GET_ALl);}

@@ -9,10 +9,13 @@
         <result column="product_id" property="productId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         <result column="title" property="title" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="product_type" property="productType" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="user_id" property="userId" jdbcType="INTEGER" javaType="java.lang.Integer" />
-        <result column="user_name" property="userName" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        <result column="upload_date" property="uploadDate" jdbcType="DATE" javaType="java.sql.Date" />
-        <result column="download" property="download" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="create_user_id" property="createUserId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+        <result column="create_user_name" property="createUserName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="lastmodify_user_id" property="lastmodifyUserId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+        <result column="lastmodify_user_name" property="lastmodifyUserName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="upload_date" property="uploadDate" jdbcType="DATETIME" javaType="java.sql.Timestamp" />
+        <result property="modifyTime" column="modify_time" jdbcType="DATETIME" javaType="java.sql.Timestamp"/>
+        <result property="attachmentPath" column="attachment_path" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>
     <sql id="PAGE-COMMON">
         <dynamic prepend=" WHERE ">
@@ -38,19 +41,25 @@
     </sql>
     <sql id="QUERY-COMMON">
         <dynamic prepend=" WHERE ">
-            <isNotNull prepend=" AND " property="userId">
-                user_id=#userId#
+            <isNotNull prepend=" AND " property="createUserId">
+                create_user_id=#createUserId#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="productType">
+                product_type = #productType#
+            </isNotNull>
+            <isNotNull prepend=" AND " property="title">
+                title like concat('%',#title#,'%')
             </isNotNull>
         </dynamic>
     </sql>
 
         <insert id="ADD" parameterClass="MarketTraining" >
             insert into k_market_training (tran_id, product_id, title,
-            product_type, user_id, upload_date,user_name,
-            download)
+            product_type, create_user_id, upload_date,create_user_name,lastmodify_user_id,
+            lastmodify_user_name, modify_time,attachment_path)
             values (#tranId#, #productId#, #title#,
-            #productType#, #userId#, #uploadDate#,#userName#,
-            #download#)
+            #productType#, #createUserId#,now(),#createUserName#, #lastmodifyUserId#,
+            #lastmodifyUserName#,now(),#attachmentPath#)
             <selectKey resultClass="int" keyProperty="tranId">
                 SELECT @@IDENTITY AS tran_id
             </selectKey>
@@ -71,14 +80,23 @@
             <isNotNull prepend=", " property="uploadDate">
                 uploadDate = #uploadDate#
             </isNotNull>
-            <isNotNull prepend=", " property="userId">
-                user_id = #userId#
+            <isNotNull prepend=", " property="createUserId">
+               create_user_id = #createUserId#
             </isNotNull>
-            <isNotNull prepend=", " property="userName">
-                user_name = #userName#
+            <isNotNull prepend=", " property="createUserName">
+                create_user_name = #createUserName#
             </isNotNull>
-            <isNotNull prepend=", " property="download">
-                download = #download#
+            <isNotNull prepend=", " property="lastmodifyUserId">
+                lastmodify_user_id = #lastmodifyUserId#
+            </isNotNull>
+            <isNotNull prepend=" , " property="lastmodifyUserName">
+                lastmodify_user_name = #lastmodifyUserName#
+            </isNotNull>
+            <isNotNull prepend=", " property="modifyTime">
+                modify_time = now()
+            </isNotNull>
+            <isNotNull prepend=", " property="attachmentPath">
+                attachment_path = #attachmentPath#
             </isNotNull>
         </dynamic>
     </update>
@@ -101,6 +119,8 @@
         ]]>
         <isParameterPresent>
             <include refid="QUERY-COMMON"/>
+            order by modify_time desc
+            LIMIT #startRow#,#pageSize#
         </isParameterPresent>
     </select>
 
@@ -119,7 +139,7 @@
         SELECT COUNT(*) FROM k_market_training
         ]]>
         <isParameterPresent>
-            <include refid="PAGE-COMMON"/>
+            <include refid="QUERY-COMMON"/>
         </isParameterPresent>
     </select>
 </sqlMap>
