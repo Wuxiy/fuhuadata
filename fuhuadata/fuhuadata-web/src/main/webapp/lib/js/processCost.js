@@ -10,6 +10,7 @@ var Rate1 = document.getElementById("rate1");
 var Rate2 = document.getElementById("rate2");
 var Rate3 = document.getElementById("rate3");
 var modal = document.getElementById("modal");
+var test = $('#test');
 
 var ComponentCost = ComponentCost || {};
 
@@ -445,7 +446,6 @@ $(document).on("click",".freight1",function(){
 
 $(document).on("click",".componnentId",function(){
     var url = $(this).attr("data_url");
-    var test = $('#test');
     test.html('');
     jQuery.ajax({
         type: 'GET',
@@ -783,13 +783,6 @@ $(document).on("click",".updateCost",function(){
             }
         })
     }
-})
-
-$('#infoMore').click(function () {
-    var btn = $(this);
-    var div = $('<div class="form-group" name="ProductSuitableAdd"><label class="col-lg-2 control-label">适合产品</label><div class="col-xs-3"><div class="input-group"><input class="form-control suitableProduct" name="suitableProduct" type="text"><div class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal"><span class="glyphicon glyphicon-search"></span></button></div></div></div><label class="col-lg-2 control-label">单耗</label><div class="col-lg-3"><div class="input-group"><input class="form-control" type="text" name="consumption"><div class="input-group-btn"><botton class="btn btn-xs btn-primary">(元/kg)</botton></div></div><button type="button" class="close" data-form-btn="del" data-form-target="form-group" style="position: absolute;top:5px;">×</button></div>');
-    $('#costInfo').after(div);
-
 })
 
 function ProductComponents() {
