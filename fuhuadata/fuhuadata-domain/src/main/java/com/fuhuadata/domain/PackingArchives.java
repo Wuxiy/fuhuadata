@@ -1,6 +1,7 @@
 package com.fuhuadata.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
@@ -14,19 +15,14 @@ import java.util.Date;
 public class PackingArchives {
 
     private Integer packingId;
-
     @NotNull
     private Integer bigCategoryId;//：内包材，外包材，辅材
-
     @NotNull
     private Integer smallCategoryId;//:主材-平桶类
-
     @NotBlank
     private String packName;//包材名称
 
-
     private String size;//尺寸 格式：150*150*150
-
     @NotBlank
     private String spec;//规格
 
@@ -42,10 +38,11 @@ public class PackingArchives {
 
     private BigDecimal consumption;//单耗
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date priceEndDate;//价格有效期  yyyy/mm/dd
 
     @NotBlank
-    private String suitableType;//适用剂型（原药，水剂，颗粒剂）
+    private String suitableType;//适用剂型（0:原药，1:水剂，2:颗粒剂）
 
     private String bRemarks;//备注
 

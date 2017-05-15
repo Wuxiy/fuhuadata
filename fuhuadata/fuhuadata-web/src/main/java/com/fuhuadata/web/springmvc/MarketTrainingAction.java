@@ -30,8 +30,6 @@ public class MarketTrainingAction {
     private final static Log log= LogFactory.getLog(MarketTrainingAction.class);
     @Resource
     private MarketTrainingService marketTrainingService;
-    private Integer pageSize=10;
-    private String page="1";
 
     /**
      * 营销培训列表
@@ -43,19 +41,39 @@ public class MarketTrainingAction {
     public ModelAndView marketTrainingList(){
         return new ModelAndView("knowledgeBase/marketTrainingList");
     }
-    @RequestMapping(value = "/queryMarketTrainingList",method = RequestMethod.GET)
+
+    @RequestMapping(value = "/queryMarketTrainingList",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "list")
     @ResponseBody
-    public ResultPojo querymarketTrainingList(){
-        MarketTrainingQuery marketTrainingQuery = new MarketTrainingQuery();
+    public ResultPojo querymarketTrainingList(@RequestBody MarketTrainingQuery marketTrainingQuery){
         Result<List<MarketTraining>> result = new Result<List<MarketTraining>>();
         try{
             result=marketTrainingService.getMarketTrainingsByQuery(marketTrainingQuery);
         }catch (Exception e){
+            result.setSuccess(false);
             log.error("获取营销培训列表失败",e);
         }
         return result.getResultPojo();
+    }
 
+
+    /**
+     * count
+     * @param marketTrainingQuery
+     * @return
+     */
+    @RequestMapping(value = "/count",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "count")
+    @ResponseBody
+    public ResultPojo count(@RequestBody MarketTrainingQuery marketTrainingQuery){
+        Result<Integer> result = new Result<Integer>();
+        try{
+            result=marketTrainingService.count(marketTrainingQuery);
+        }catch (Exception e){
+            result.setSuccess(false);
+            log.error("获取营销培训列表总数失败",e);
+        }
+        return result.getResultPojo();
     }
 
     /**
@@ -83,7 +101,6 @@ public class MarketTrainingAction {
         return null;
     }
 
-    @SuppressWarnings("rawtypes")
     @RequestMapping(value = "/delete",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "delete")
     @ResponseBody
@@ -110,12 +127,11 @@ public class MarketTrainingAction {
         try{
             int id=marketTraining.getTranId();
             Result<MarketTraining> result = marketTrainingService.updateMarketTrainingById(id,marketTraining);
+            return result.getResultPojo();
         }catch(Exception e){
             log.error("更新市场营销培训信息失败",e);
         }
         return null;
     }
-
-
 
 }

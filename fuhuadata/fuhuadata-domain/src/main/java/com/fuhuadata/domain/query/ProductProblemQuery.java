@@ -7,7 +7,13 @@ import java.sql.Date;
 /**
  * Created by intanswer on 2017/1/13.
  */
-public class ProductProblemQuery extends PageBase {
+public class ProductProblemQuery{
+
+
+    private int startRow;
+
+    private int pageSize;
+
     private Integer problemId;//问题id
 
     private Integer productId;//产品id
@@ -106,5 +112,21 @@ public class ProductProblemQuery extends PageBase {
 
     public void setSearchKey(String searchKey) {
         this.searchKey = searchKey;
+    }
+
+    public int getStartRow() {
+        return startRow;
+    }
+
+    public void setStartRow(int startRow) {
+        this.startRow = startRow;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 }

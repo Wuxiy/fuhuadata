@@ -1,16 +1,15 @@
 package com.fuhuadata.domain.query;
 
-import com.fuhuadata.domain.query.PageBase;
-
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.Date;
 
 /**
  * 营销培训
  * Created by intanswer on 2017/1/12.
  */
-public class MarketTrainingQuery extends PageBase {
+public class MarketTrainingQuery{
+
+    private int startRow;
+    private int pageSize;
     private Integer tranId;//记录id
 
     private Integer productId;//培训产品id
@@ -100,5 +99,21 @@ public class MarketTrainingQuery extends PageBase {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public int getStartRow() {
+        return startRow;
+    }
+
+    public void setStartRow(int startRow) {
+        this.startRow = startRow;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 }
