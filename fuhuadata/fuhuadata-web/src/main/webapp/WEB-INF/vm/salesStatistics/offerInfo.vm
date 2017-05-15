@@ -141,7 +141,7 @@
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">收款协议<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <select class="form-control" data-control="on" disabled id="income">
+                                    <select class="form-control" disabled id="income">
                                         <option value="">——请选择——</option>
                                         #foreach($!info in $!{income})
                                             <option value="$!info.code">$!info.name</option>
@@ -425,6 +425,14 @@
     var cupboardTypeList = ['20GP','40GP','20HQ'];
 
     $(document).ready(function(){
+
+        $('#edit').click(function () {
+            if ($('#interestRate').val()==='100') {
+                $('#income').attr('disabled', true);
+            }else {
+                $('#income').attr('disabled', false);
+            }
+        });
 
         if(orderId!=''&&businessId==''){
             $('#back').removeClass('hidden');
