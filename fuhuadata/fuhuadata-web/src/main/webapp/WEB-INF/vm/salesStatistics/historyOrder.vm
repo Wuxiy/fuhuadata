@@ -234,7 +234,7 @@
 
 
 
-    var pagesize = 4; // 分页步长
+    var pagesize = 10; // 分页步长
     var areaTreeData = []; // 保存树的数据
     var businessOpportunity = ['工厂','分销商' ,'经销商' ,'终端客户' ,'其他'];
     var areaId = ''; // 地区id

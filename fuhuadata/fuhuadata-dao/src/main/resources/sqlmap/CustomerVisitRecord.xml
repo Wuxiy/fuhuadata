@@ -235,6 +235,7 @@
 				SELECT
 			b.linkman_id linkmanId,
 			c.activity_expense activityExpens,
+
 			b.activity_gift activityGift,
 			c.start_time startTime,
 			c.end_time endTime,

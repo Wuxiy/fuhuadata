@@ -57,7 +57,7 @@
 ##                                    <input class="form-control" type="text" id="registeredFunds" value="" disabled />
                                     <div class="input-group">
                                         <span id="fundType" class="input-group-addon" lang="zh">美元</span>
-                                        <input id="registeredFunds" data-control="off" disabled name="registeredFunds" class="form-control" min="0" type="number" value="" />
+                                        <input id="registeredFunds" disabled name="registeredFunds" class="form-control" min="0" type="number" value="" />
                                     </div>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">企业电话</label>

@@ -113,7 +113,7 @@
                                         <td></td>
                                         <td></td>
                                     </tr>
-                                    <tr>
+                                    <tr class="hidecang">
                                         <td>
                                             <label class="control-label" lang="zh">
                                                 价委会指导价
@@ -122,7 +122,7 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input data-control="on" id="advisePrice" class="form-control notnull isdisabled" value="" disabled>
+                                                <input data-control="on" id="advisePrice" class="form-control notnull isdisabled" value="0" disabled>
                                                 <span class="input-group-addon">元</span>
                                             </div>
                                         </td>
@@ -134,14 +134,14 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input data-control="on" id="purchasePrice" class="form-control notnull" value="0" disabled>
+                                                <input data-control="on" id="purchasePrice" class="form-control notnull isdisabled" value="0" disabled>
                                                 <span class="input-group-addon">元</span>
                                             </div>
                                         </td>
                                         <td><label class="control-label" lang="zh">交货时间</label><sup class="not-null">*</sup></td>
                                         <td><input data-control="on" id="deliveryTime" class="form-control isdisabled notnull" type="date" value="" disabled/></td>
                                     </tr>
-                                    <tr>
+                                    <tr class="hidecang">
                                         <td class="fac">
                                             <label class="control-label" lang="zh">
                                                 加工厂
@@ -149,7 +149,7 @@
                                             </label>
                                         </td>
                                         <td class="fac">
-                                            <select name="factoryName" id="factoryName" class="form-control">
+                                            <select name="factoryName" id="factoryName" class="form-control" data-control="on">
                                                 <option value="">——请选择——</option>
                                                 #foreach($!info in $!{freightCosts})
                                                     <option value="$!info.freightId">$!info.processFactory</option>
@@ -159,12 +159,11 @@
                                         <td>
                                             <label class="control-label" lang="zh">
                                                 资金利息单价
-                                                <sup class="not-null">*</sup>
                                             </label>
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input data-control="on" id="capitalInterestPrice" class="form-control typechange isdisabled notnull" value="" disabled>
+                                                <input data-control="on" id="capitalInterestPrice" class="form-control typechange isdisabled " value="" disabled>
                                                 <span class="input-group-addon">原币</span>
                                             </div>
                                         </td>
@@ -192,7 +191,7 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <tr class="hidecang">
                                         <td><label class="control-label" lang="zh">佣金单价</label></td>
                                         <td>
                                             <div class="input-group">
@@ -203,7 +202,7 @@
                                         <td><label class="control-label" lang="zh">单位耗用比例</label></td>
                                         <td><input data-control="on" id="unitUseRate" class="form-control isdisabled" type="text" value="" disabled/></td>
                                     </tr>
-                                    <tr>
+                                    <tr class="hidecang">
                                         <td><label class="control-label" lang="zh">出口退税方式</label></td>
                                         <td>
                                             <select data-control="on" id="taxType" class="form-control isdisabled" disabled>
@@ -384,10 +383,22 @@
                     $('#subProductAmount').val(basicInfo.subProductAmount);
                     $('#convertRate').val(basicInfo.convertRate);
                     $('#priceType').val(basicInfo.priceType);
-                    if(basicInfo.priceType == "02"||basicInfo.priceType == "04"){
+
+                    //价格计算类型判断
+                    if(basicInfo.priceType == '01'){
+                        $('#purchasePrice').attr('disabled',true);
+                    }else if(basicInfo.priceType == '02'){
+                        $('#purchasePrice').attr('disabled',true);
                         $('.fac').show();
-                    }else{
-                        $('.fac').hide();
+                    }else if(basicInfo.priceType == '04'){
+                        $('#advisePrice').attr('disabled',true);
+                        $('.fac').show();
+                    }else if(basicInfo.priceType == '03'){
+                        $('#advisePrice').attr('disabled',true);
+                    }else if(basicInfo.priceType == '09'){
+                        $('#purchasePrice').attr('disabled',true);
+                        $('#advisePrice').attr('disabled',true);
+                        $('.hidecang').hide();
                     }
                     $('#advisePrice').val(basicInfo.advisePrice);
                     $('#purchasePrice').val(basicInfo.purchasePrice);
@@ -402,25 +413,6 @@
                     $('#capitalInterestPrice').val(basicInfo.capitalInterestPrice);
                     $('#internalSupplyName').val(basicInfo.internalSupplyName);
                     $('#internalSupplyName').data('val',basicInfo.internalSupplyId);
-
-                    switch(basicInfo.priceType){
-                        case 0:
-                            $('#purchasePrice').attr('disabled',true);
-                            break;
-                        case 1:
-                            $('#purchasePrice').attr('disabled',true);
-                            break;
-                        case 2:
-                            $('#advisePrice').attr('disabled',true);
-                            break;
-                        case 3:
-                            $('#advisePrice').attr('disabled',true);
-                            break;
-                        case 4:
-                            $('#purchasePrice').attr('disabled',true);
-                            $('#advisePrice').attr('disabled',true);
-                            break;
-                    }
 
                     if(components.length != 0){
                         $('#cost').removeClass('hidden');
@@ -675,6 +667,8 @@
                                         '<td><input name="remark" data-control="on" class="form-control text-center" type="text" value="'+ifEmpty(components[i].remark)+'" ></td>'+
                                         '</tr>';
                             }
+                        }else {
+                            $('#cost').addClass('hidden');
                         }
                     } else{
                         $('#businessProductId').val(businessProductId);
@@ -736,39 +730,6 @@
 
         $('#treeModal').modal('hide');
     });
-
-    //监听互斥
-    $('#priceType').change(function () {
-        var val = $(this).val();
-        if(val == 0||val == 1){
-            $('#advisePrice').attr('disabled',false);
-            $('#advisePrice').val('');
-            if(val == 0){
-                $('#purchasePrice').attr('disabled',true);
-                $('#purchasePrice').val('0');
-                $('#grossMargin').attr('disabled',true);
-                $('#grossMargin').val('0');
-                $('#taxFree').attr('disabled',true);
-                $('#taxFree').val('0');
-            }else{
-                $('#purchasePrice').attr('disabled',true);
-                $('#purchasePrice').val('0');
-                $('#grossMargin').attr('disabled',false);
-                $('#grossMargin').val('');
-                $('#taxFree').attr('disabled',false);
-                $('#taxFree').val('');
-            }
-        }else{
-            $('#purchasePrice').attr('disabled',false);
-            $('#purchasePrice').val('');
-            $('#advisePrice').attr('disabled',true);
-            $('#advisePrice').val('0');
-            $('#grossMargin').attr('disabled',false);
-            $('#grossMargin').val('');
-            $('#taxFree').attr('disabled',false);
-            $('#taxFree').val('');
-        }
-    })
 
     //新增获取数据function
     function Add() {
@@ -910,6 +871,54 @@
             $('.fac').show();
         }else{
             $('.fac').hide();
+        }
+
+        if($(this).val() == '09'){
+            $('.hidecang').hide();
+        }else{
+            $('.hidecang').show();
+        }
+    })
+
+    //监听互斥
+    $('#priceType').change(function () {
+        var val = $(this).val();
+        if(val == '01'||val == '02'){
+            $('#advisePrice').attr('disabled',false);
+            $('#advisePrice').val('');
+            if(val == '01'){
+                $('#purchasePrice').attr('disabled',true);
+                $('#purchasePrice').val('0');
+                $('#grossMargin').attr('disabled',true);
+                $('#grossMargin').val('0');
+                $('#taxFree').attr('disabled',true);
+                $('#taxFree').val('0');
+            }else{
+                $('#purchasePrice').attr('disabled',true);
+                $('#purchasePrice').val('0');
+                $('#grossMargin').attr('disabled',false);
+                $('#grossMargin').val('');
+                $('#taxFree').attr('disabled',false);
+                $('#taxFree').val('');
+            }
+        }else{
+            $('#purchasePrice').attr('disabled',false);
+            $('#purchasePrice').val('');
+            $('#advisePrice').attr('disabled',true);
+            $('#advisePrice').val('0');
+            $('#grossMargin').attr('disabled',false);
+            $('#grossMargin').val('');
+            $('#taxFree').attr('disabled',false);
+            $('#taxFree').val('');
+        }
+    })
+
+    //出口退税方式
+    $('#taxType').change(function(){
+        if($(this).val() == '3'){
+            $('#taxFree').hide();
+        }else{
+            $('#taxFree').show();
         }
     })
 
