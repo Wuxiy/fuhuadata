@@ -2,12 +2,6 @@ package com.fuhuadata.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fuhuadata.util.DateJsonDeserializer;
-import com.fuhuadata.util.DateJsonSerializer;
-import org.codehaus.jackson.map.JsonSerializer;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-
 import java.util.Date;
 
 /**
@@ -23,14 +17,23 @@ public class MarketTraining {
 
     private String productType;//产品类型
 
-    private Integer userId;//用户id
+    private Integer createUserId;//'创建者id
 
-    private String userName;//用户姓名
+    private String createUserName;//创建者姓名
+
+    private Integer lastmodifyUserId;//上一次修改者id
+
+    private String lastmodifyUserName;//上一次修改者姓名
+
+    private String  attachmentPath;//附件路径
+
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date modifyTime;//修改时间
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date uploadDate;//上传日期
 
-    private String download;//下载操作
 
     public Integer getTranId() {
         return tranId;
@@ -64,17 +67,6 @@ public class MarketTraining {
         this.productType = productType;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public String getUserName(){ return userName; }
-
-    public void setUserName(String userName){ this.userName = userName; }
 
     public Date getUploadDate() {
         return uploadDate;
@@ -84,11 +76,51 @@ public class MarketTraining {
         this.uploadDate = uploadDate;
     }
 
-    public String getDownload() {
-        return download;
+    public Integer getCreateUserId() {
+        return createUserId;
     }
 
-    public void setDownload(String download) {
-        this.download = download ;
+    public void setCreateUserId(Integer createUserId) {
+        this.createUserId = createUserId;
+    }
+
+    public String getCreateUserName() {
+        return createUserName;
+    }
+
+    public void setCreateUserName(String createUserName) {
+        this.createUserName = createUserName;
+    }
+
+    public Integer getLastmodifyUserId() {
+        return lastmodifyUserId;
+    }
+
+    public void setLastmodifyUserId(Integer lastmodifyUserId) {
+        this.lastmodifyUserId = lastmodifyUserId;
+    }
+
+    public String getLastmodifyUserName() {
+        return lastmodifyUserName;
+    }
+
+    public void setLastmodifyUserName(String lastmodifyUserName) {
+        this.lastmodifyUserName = lastmodifyUserName;
+    }
+
+    public String getAttachmentPath() {
+        return attachmentPath;
+    }
+
+    public void setAttachmentPath(String attachmentPath) {
+        this.attachmentPath = attachmentPath;
+    }
+
+    public Date getModifyTime() {
+        return modifyTime;
+    }
+
+    public void setModifyTime(Date modifyTime) {
+        this.modifyTime = modifyTime;
     }
 }

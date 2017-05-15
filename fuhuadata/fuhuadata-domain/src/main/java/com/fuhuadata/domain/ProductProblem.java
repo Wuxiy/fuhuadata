@@ -26,6 +26,16 @@ public class ProductProblem {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;//创建时间
 
+    /**上一次修改者id**/
+    private Integer lastmodifyUserId;
+
+    /**上一次修改者姓名**/
+    private String lastmodifyUserName;
+
+    /**修改时间**/
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date modifyTime;
+
     private String remarks;//备注
 
     public Integer getProblemId() {
@@ -98,5 +108,29 @@ public class ProductProblem {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks ;
+    }
+
+    public Integer getLastmodifyUserId() {
+        return lastmodifyUserId;
+    }
+
+    public void setLastmodifyUserId(Integer lastmodifyUserId) {
+        this.lastmodifyUserId = lastmodifyUserId;
+    }
+
+    public String getLastmodifyUserName() {
+        return lastmodifyUserName;
+    }
+
+    public void setLastmodifyUserName(String lastmodifyUserName) {
+        this.lastmodifyUserName = lastmodifyUserName;
+    }
+
+    public Date getModifyTime() {
+        return modifyTime;
+    }
+
+    public void setModifyTime(Date modifyTime) {
+        this.modifyTime = modifyTime;
     }
 }

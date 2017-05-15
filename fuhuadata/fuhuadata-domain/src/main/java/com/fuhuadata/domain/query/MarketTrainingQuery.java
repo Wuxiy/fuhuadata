@@ -1,16 +1,19 @@
 package com.fuhuadata.domain.query;
 
-import com.fuhuadata.domain.query.PageBase;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.Date;
 
 /**
  * 营销培训
  * Created by intanswer on 2017/1/12.
  */
-public class MarketTrainingQuery extends PageBase {
+public class MarketTrainingQuery{
+
+    private int startRow;
+
+    private int pageSize;
+
     private Integer tranId;//记录id
 
     private Integer productId;//培训产品id
@@ -19,15 +22,20 @@ public class MarketTrainingQuery extends PageBase {
 
     private String productType;//产品类型
 
-    private String userId;//用户id
+    private Integer createUserId;//'创建者id
 
-    private String userName;//用户姓名
+    private String createUserName;//创建者姓名
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp uploadDate;//上传日期
 
-    private String download;//下载操作
-
     private String searchKey;//查询
+
+    private String orderBy;//排序
+
+    private String sortFiled;//排序字段
+
+    private int sortType;//排序方向，0：正序 1：倒序
 
 
     public Integer getTranId() {
@@ -62,13 +70,6 @@ public class MarketTrainingQuery extends PageBase {
         this.productType = productType == null ? null : productType.trim();
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId ;
-    }
 
     public Timestamp getUploadDate() {
         return uploadDate;
@@ -78,13 +79,6 @@ public class MarketTrainingQuery extends PageBase {
         this.uploadDate = uploadDate;
     }
 
-    public String getDownload() {
-        return download;
-    }
-
-    public void setDownload(String download) {
-        this.download = download;
-    }
 
     public String getSearchKey() {
         return searchKey;
@@ -94,11 +88,60 @@ public class MarketTrainingQuery extends PageBase {
         this.searchKey = searchKey;
     }
 
-    public String getUserName() {
-        return userName;
+
+    public int getStartRow() {
+        return startRow;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setStartRow(int startRow) {
+        this.startRow = startRow;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public Integer getCreateUserId() {
+        return createUserId;
+    }
+
+    public void setCreateUserId(Integer createUserId) {
+        this.createUserId = createUserId;
+    }
+
+    public String getCreateUserName() {
+        return createUserName;
+    }
+
+    public void setCreateUserName(String createUserName) {
+        this.createUserName = createUserName;
+    }
+
+    public String getOrderBy() {
+        return orderBy;
+    }
+
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
+    }
+
+    public String getSortFiled() {
+        return sortFiled;
+    }
+
+    public void setSortFiled(String sortFiled) {
+        this.sortFiled = sortFiled;
+    }
+
+    public int getSortType() {
+        return sortType;
+    }
+
+    public void setSortType(int sortType) {
+        this.sortType = sortType;
     }
 }
