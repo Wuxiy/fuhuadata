@@ -484,13 +484,17 @@
                         contentType:"application/json",
                         data:Add(),
                         success:function (result) {
-                            var success = result.data.success;
-                            console.log(result);
-                            if(success == true){
-                                alert('添加成功！');
-                                var editId = 0;
-                                var businessProductId = result.data.businessProductId;
-                                window.location.href = basePath + '/businessProduct/intoProductRequire?businessProductId=' + businessProductId + '&orderId=' + orderId + '&customerId=' + customerId + '&productRequireId=' + productRequireId + '&edit=' + editId;
+                            if(result.code == 1){
+                                var success = result.data.success;
+                                console.log(result);
+                                if(success == true){
+                                    alert('添加成功！');
+                                    var editId = 0;
+                                    var businessProductId = result.data.businessProductId;
+                                    window.location.href = basePath + '/businessProduct/intoProductRequire?businessProductId=' + businessProductId + '&orderId=' + orderId + '&customerId=' + customerId + '&productRequireId=' + productRequireId + '&edit=' + editId;
+                            }else{
+                                    alert('添加失败！');
+                                }
                             }
                         }
                     })
@@ -778,6 +782,7 @@
 
     //add根据产品名称获取产品档案，
     $(document).on('click','a.cNode',function (e) {
+
         e.preventDefault();
         var a = $(e.target);
         var tarEltext = a.text();

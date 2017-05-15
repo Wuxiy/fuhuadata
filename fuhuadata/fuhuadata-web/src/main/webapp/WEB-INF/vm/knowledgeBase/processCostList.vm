@@ -250,6 +250,7 @@
 </div>
 
 <div class="modal fade" id="modal" tabindex="-1"  aria-hidden="true" data-backdrop="static"></div>
+
 <div class="modal fade" id="costmodal" tabindex="-1"  aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog" style="width:800px">
         <div class="modal-content">
@@ -472,6 +473,12 @@
         var div = $('<div class="form-group" name="ProductSuitableAdd"><label class="col-lg-2 control-label">适合产品</label><div class="col-xs-3"><div class="input-group"><input class="form-control suitableProductAdd" name="suitableProduct" type="text" disabled><div class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal"><span class="glyphicon glyphicon-search"></span></button></div></div></div><label class="col-lg-2 control-label">单耗</label><div class="col-lg-3"><div class="input-group"><input class="form-control" type="text" name="consumptionAdd"><div class="input-group-btn"><botton class="btn btn-xs btn-primary">(元/kg)</botton></div></div><button type="button" class="close" data-form-btn="del" data-form-target="form-group" style="position: absolute;top:5px;">×</button></div>');
         $('#costmore').after(div);
 
+    })
+
+    $('#infoMore').click(function () {
+        var btn = $(this);
+        var div = $('<div class="form-group" name="ProductSuitableAdd"><label class="col-lg-2 control-label">适合产品</label><div class="col-xs-3"><div class="input-group"><input class="form-control suitableProduct" name="suitableProduct" type="text"><div class="input-group-btn"><button class="btn btn-xs btn-default" type="button" data-toggle="modal" data-target="#treeModal"><span class="glyphicon glyphicon-search"></span></button></div></div></div><label class="col-lg-2 control-label">单耗</label><div class="col-lg-3"><div class="input-group"><input class="form-control" type="text" name="consumption"><div class="input-group-btn"><botton class="btn btn-xs btn-primary">(元/kg)</botton></div></div><button type="button" class="close" data-form-btn="del" data-form-target="form-group" style="position: absolute;top:5px;">×</button></div>');
+        $(div).appendTo(test);
     })
 
 

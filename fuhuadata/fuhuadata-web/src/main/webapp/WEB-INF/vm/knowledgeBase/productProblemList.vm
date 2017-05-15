@@ -11,7 +11,7 @@
         <div class="panel-heading">
             #if ($shiro.hasPermission("wiki:ques:add"))
                 <button class="btn btn-xs btn-primary panel-heading-btn pull-right" data-toggle="modal"
-                        data-target="#modal" data-backdrop="static" data-keyboard="true">
+                        data-target="#addmodal" data-backdrop="static" data-keyboard="true">
                     <span class="glyphicon glyphicon-plus"></span>
                     新增
                 </button>
@@ -35,9 +35,9 @@
                     <label class="col-xs-1 control-label pull-right">问题内容</label>
                     <div class="col-xs-2 pull-right">
                         <div class="input-group">
-                            <input class="form-control" type="search" value="" placeholder="请输入品类"/>
+                            <input id="productType" class="form-control" type="search" value="" placeholder="请输入品类"/>
                             <span class="input-group-btn">
-                                        <button data-toggle="modal" data-target="#search" class="btn btn-xs btn-default" type="button">
+                                        <button data-toggle="modal" data-target="#Search" class="btn btn-xs btn-default" type="button">
                                             <span class="glyphicon glyphicon-search"></span>
                                         </button>
                                     </span>
@@ -67,8 +67,9 @@
         </div>
     </div>
 </div>
-<!--新增常见问题模态框开始 -->
-<div class="modal fade" id="modal" tabindex="-1"  aria-hidden="true" data-backdrop="static">
+
+<!--新增常见问题模态框 -->
+<div class="modal fade" id="addmodal" tabindex="-1"  aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -79,15 +80,75 @@
             <div class="modal-body ">
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label class="col-xs-2 control-label">问题内容</label>
+                        <label class="col-xs-2 control-label">问题内容<sup class="not-null">*</sup></label>
                         <div class="col-xs-9">
-                            <textarea id="fqlTitle" class="form-control" rows="3" id="problemContent"></textarea>
+                            <textarea class="form-control notnull" rows="3" id="addproblemContent"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-xs-2 control-label">产品名称</label>
+                        <label class="col-xs-2 control-label">品类<sup class="not-null">*</sup></label>
+                        <div class="col-xs-9">
+                            <div class="input-group">
+                                <input id="addproductType" class="form-control" type="search" value="" placeholder="请输入品类"/>
+                                <span class="input-group-btn">
+                                <button data-toggle="modal" class="btn btn-xs btn-default" data-target="#tSearch" type="button">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">解决方案<sup class="not-null">*</sup></label>
+                        <div class="col-xs-9">
+                            <textarea class="form-control notnull" rows="7" id="addsolution"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">备注<sup class="not-null">*</sup></label>
+                        <div class="col-xs-9">
+                            <textarea class="form-control notnull" rows="4" id="addremarks"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-3 col-xs-offset-3">
+                        <a type="button" class="btn btn-primary btn-block" id="add_save">
+                            保存
+                        </a>
+                    </div>
+                    <div class="col-xs-3">
+                        <button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--编辑详情常见问题模态框 -->
+<div class="modal fade" id="infomodal" tabindex="-1"  aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body ">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">问题内容<sup class="not-null">*</sup></label>
+                        <div class="col-xs-9">
+                            <textarea class="form-control notnull" rows="3" id="infoproblemContent"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">产品名称<sup class="not-null">*</sup></label>
                         <div class="col-xs-4">
-                            <select id="fqlType" class="form-control" id="productType">
+                            <select class="form-control" id="infoproductType">
                                 <option value="草甘膦" selected>草甘膦</option>
                                 <option value="草甘膦原药">草甘膦原药</option>
                                 <option value="草甘膦水剂">草甘膦水剂</option>
@@ -96,15 +157,15 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-xs-2 control-label">解决方案</label>
+                        <label class="col-xs-2 control-label">解决方案<sup class="not-null">*</sup></label>
                         <div class="col-xs-9">
-                            <textarea id="fqlContent" class="form-control" rows="7" id="solution"></textarea>
+                            <textarea class="form-control notnull" rows="7" id="infosolution"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-xs-2 control-label">备注</label>
+                        <label class="col-xs-2 control-label">备注<sup class="not-null">*</sup></label>
                         <div class="col-xs-9">
-                            <textarea id="fqlElse" class="form-control" rows="4" id="remarks"></textarea>
+                            <textarea class="form-control notnull" rows="4" id="inforemarks"></textarea>
                         </div>
                     </div>
                 </form>
@@ -112,9 +173,9 @@
             <div class="modal-footer">
                 <div class="row">
                     <div class="col-xs-3 col-xs-offset-3">
-                        <button type="button" class="btn btn-primary btn-block">
+                        <a type="button" class="btn btn-primary btn-block" id="info_save">
                             保存
-                        </button>
+                        </a>
                     </div>
                     <div class="col-xs-3">
                         <button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消
@@ -163,37 +224,92 @@
         </div>
     </div>
 </div>
+<!--树形菜单modal-->
+<div class="modal fade" id="tSearch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content" style="width:400px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body well" style="max-height: 300px; overflow-y: scroll; overflow-x: scroll;">
+                <div id="tree" class="tree">
 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="Search" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content" style="width:400px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body well" style="max-height: 300px; overflow-y: scroll; overflow-x: scroll;">
+                <div id="stree" class="tree">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript">
-    $(document).ready(function(){
-        $("#productproblem_table").dataTable( {
-            "ajax": basePath + '/productProblem/queryProductProblemList',
-            "pagingType":"full_numbers",
-            "lengthMenu":[[5, 10, 15, -1], [5, 10, 15, "All"]],
-            "columns":[
-                {"data":"problemId"},
-                {"data":"problemContent"},
-                {"data":"productType"},
-                {"data":"solution"},
-                {"data":"remarks"}
-            ],
-            "columnDefs":[
-                {
-                    targets: "_all",
-                    defaultContent: ''
-                }/*, {
+    //渲染树
+    $('#tree').creatTree(basePath+'/productCategory/CategoryTreeThree');
+    $('#stree').creatTree(basePath+'/productCategory/CategoryTreeThree');
+    //树节点操作
+    $(document).on('click','#Search.cNode',function(e){
+        e.preventDefault();
+        console.log(e.target);
+        var tarEltext = $(e.target).text();
+        $('#productType').val(tarEltext);
+        $('#Search').modal('hide');
+    })
+
+    $("#productproblem_table").dataTable( {
+        "ajax": basePath + '/productProblem/queryProductProblemList',
+        "pagingType":"full_numbers",
+        "lengthMenu":[[5, 10, 15, -1], [5, 10, 15, "All"]],
+        "columns":[
+            {"data":"problemId"},
+            {"data":"problemContent"},
+            {"data":"productType"},
+            {"data":"solution"},
+            {"data":"remarks"}
+        ],
+        "columnDefs":[
+            {
+                targets: "_all",
+                defaultContent: ''
+            }, {
                     "targets":1,
                     "render":function(data,type,row,meta){
-                        return '<a href="' + data + '" target="_blank">' + row.problemContent+ '</a>';
+                        return '<a data-id="'+row.problemId+'" class="problemId" target="_blank">' + row.problemContent+ '</a>';
                     }
-                }*/
-            ],
-            "language": {
-                "url": basePath + '/lib/dataTables/lang/dataTables.lang.zh',
-                        "searchPlaceholder": '关键字'
-            }
-        });
+                }
+        ],
+        "language": {
+            "url": basePath + '/lib/dataTables/lang/dataTables.lang.zh',
+            "searchPlaceholder": '关键字'
+        }
     });
 
+    $(document).on('click','.problemId',function(){
+        var id = $(this).attr('data-id');
+
+       /* jQuery.ajax({
+            url:basePath + '/productProblem/queryProductProblemListTest?problemId=' + id,
+            type:'post',
+            success:function(result){
+
+            }
+        })*/
+    })
 
 </script>

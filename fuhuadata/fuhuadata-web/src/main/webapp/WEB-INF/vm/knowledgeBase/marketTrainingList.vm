@@ -71,8 +71,74 @@
     </div>
 </div>
 
-<!--添加模态框开始 -->
+<!--新增模态 -->
 <div class="modal fade" id="addTrain" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+     data-keyboard="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body ">
+                <form class="form-horizontal" action="">
+                    <div class="form-group ">
+                        <label class="col-xs-2 control-label">标题</label>
+                        <div class="col-xs-6">
+                            <input class="form-control" type="text" id="title"/>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-xs-2 control-label">产品名称</label>
+                        <div class="col-xs-4">
+                            <select class="form-control">
+                                <option value="" selected>草甘膦</option>
+                                <option value="">草胺膦</option>
+                                <option value="">化工品</option>
+                                <option value="">贸易品</option>
+                                <option value="">其他</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-4">
+                            <select class="form-control">
+                                <option value="" selected>全部</option>
+                                <option value="">草甘膦</option>
+                                <option value="">草甘膦原药</option>
+                                <option value="">草甘膦水剂</option>
+                                <option value="">草甘膦颗粒剂</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-xs-2 control-label" for="inputfile">附件</label>
+                        <div class="col-xs-6">
+                            <input class="form-control" id="inputfile" type="file"/>
+                        </div>
+                        <div class="col-xs-2">
+                            <button type="submit" class="btn btn-xs btn-primary btn-block">上传</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-3 col-xs-offset-3">
+                        <button type="button" class="btn btn-primary btn-block">
+                            完成
+                        </button>
+                    </div>
+                    <div class="col-xs-3">
+                        <button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--详情编辑模态 -->
+<div class="modal fade" id="infoTrain" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
      data-keyboard="true">
     <div class="modal-dialog">
         <div class="modal-content">
