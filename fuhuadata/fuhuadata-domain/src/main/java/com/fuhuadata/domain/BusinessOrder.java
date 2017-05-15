@@ -29,9 +29,7 @@ public class BusinessOrder implements Serializable{
     @NotBlank
     private String saleOrganizationId;//销售组织id
     private String saleOrganizationName;//销售组织名称
-    @NotBlank
     private String destinationPort;//目的港code
-    @NotBlank
     private String shipmentPort;//起运港code
     private String destinationPortName;//目的港
     private String shipmentPortName;//起运港
