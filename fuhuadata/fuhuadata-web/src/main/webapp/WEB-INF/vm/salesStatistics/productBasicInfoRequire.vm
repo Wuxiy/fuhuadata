@@ -40,7 +40,7 @@
                                             <div class="input-group">
                                                 <input id="name" class="form-control notnull" value="" disabled>
                                                 <div class="input-group-btn">
-                                                    <button data-control="on" name="search" data-toggle="modal" data-target="#treeModal" class="btn btn-xs btn-default" disabled>
+                                                    <button class="btn btn-xs btn-default" name="search" data-control="on" data-toggle="modal" data-target="#treeModal" disabled>
                                                         <span class="glyphicon glyphicon-search"></span>
                                                     </button>
                                                 </div>
@@ -283,9 +283,12 @@
                     &times;
                 </button>
             </div>
-            <div class="modal-body well" style="max-height: 300px; overflow-y: scroll; overflow-x: scroll;">
-            ##                        这里插入树形菜单
-                <div id="tree" class="tree"></div>
+            <div class="modal-body">
+                ## 这里插入树形菜单
+                <hr>
+                <div class="zTreeDemoBackground left well" style="height: 300px;overflow-y: scroll;overflow-x: auto">
+                    <ul id="tree" class="ztree"></ul>
+                </div>
             </div>
         </div>
     </div>
@@ -449,8 +452,18 @@
             $('#back').removeClass('hidden');
         }
 
-        //渲染树
-        $('#tree').creatTree(basePath+'/businessProduct/initProductCatetroy');
+        // 点击search btn渲染树
+        $('[name="search"]').on('click', function () {
+
+
+        });
+        /*$('#tree').creatTree(basePath+'/businessProduct/initProductCatetroy');*/
+        $.ajax({
+            url:basePath + '/businessProduct/initProductCatetroy',
+            type:'POST'
+        }).done(function(res){
+            renderPdtTree(res.data, pdtTreeDblHandler, $('#tree'));
+        })
 
         //执行下一步操作，根据edit&add的值选择不同的获取表单数据方法
         $('#next').click(function () {
@@ -560,6 +573,170 @@
         $('#salesManName').data('val','');*/
     }
 
+    /**
+     *
+     */
+    // 渲染产品树
+    function renderPdtTree (data,callback,el) {
+
+        var setting = {
+                    data: {
+                        simpleData: {
+                            enable: true,
+                            idKey: "id",
+                            pIdKey: "pId",
+                            rootPId: 0
+                        }
+                    },
+                    edit: {
+                        enable: false
+                    },
+                    callback: {
+                        onDblClick: callback
+                    }
+                },
+                treeObj = null;
+        pdtTreeData = CRM.toArr(data);
+        $.each(pdtTreeData,function (i, item) {
+
+            if (/^[c_]/.test(item.id)) {
+
+                item.isParent = true;
+            }else {
+                item.isParent = false;
+            }
+        });
+        $.fn.zTree.init(el, setting, pdtTreeData);
+        treeObj = $.fn.zTree.getZTreeObj('tree');
+        treeObj.expandNode(treeObj.getNodes()[0],true);
+    }
+
+    // 产品树添加单击事件
+    function pdtTreeDblHandler (event, modLeftId, treeNode) {
+        console.log(treeNode);
+        if (treeNode !== null && !/^[c_]/.test(treeNode.id)) {
+
+
+            /*var a = $(event.target);
+            var tarEltext = a.text();
+            var ids = a.parent('li').attr('id');*/
+            var ids = treeNode.id;
+            productId = ids.split('_')[0];
+            wareId = ids.split('_')[1];
+
+            $('#name').attr('data-productId',productId);
+            $('#name').attr('data-wareId',wareId);
+            $('#name').val(treeNode.name);
+
+            var data = {
+                'customerId':$('#customerId').val(),
+                'orderId':$('#orderId').val(),
+                'productId':productId,
+                'wareId':wareId,
+                'businessProductId':$('#businessProductId').val()
+            }
+            jQuery.ajax({
+                url:basePath + '/businessProduct/addFromArchives',
+                type:'POST',
+                data:data,
+                success:function (result) {
+                    var businessProductId = result.businessProductId;
+                    var productRequireId = result.productRequireId;
+                    console.log(businessProductId);
+
+                    //若businessProductId=0,则没有档案，执行新增；businessProductId！=0，则获取档案填充
+                    if(businessProductId == 0){
+                        var productWareVo = result.productWareVo;
+                        var components = result.components;
+                        $('#businessProductId').val('');
+
+                        console.log(productWareVo);
+                        $('#customsClearanceName').val(productWareVo.customsClearanceName);
+                        $('#mainProductUnit').val(productWareVo.measurement);
+                        $('#specification').val(productWareVo.specification);
+                        $('#model').val(productWareVo.model);
+                        $('#unitUseRate').val(productWareVo.unitUseRate);
+
+                        if(components.length != 0){
+                            $('#cost').removeClass('hidden');
+                            costtable.innerHTML = '';
+                            for(var i=0;i<components.length;i++){
+                                costtable.innerHTML += '<tr>'+
+                                        '<td data-id="'+components[i].componentId+'" data-fid="'+components[i].id+'">'+ifEmpty(components[i].componentName)+'</td>'+
+                                        '<td><input data-control="on" name="consumption" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].consumption)+'" ></td>'+
+                                        '<td><input data-control="on" name="price" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].price)+'" ></td>'+
+                                        '<td><input name="cost" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].cost)+'" disabled ></td>'+
+                                        '<td><input name="remark" data-control="on" class="form-control text-center" type="text" value="'+ifEmpty(components[i].remark)+'" ></td>'+
+                                        '</tr>';
+                            }
+                        }else {
+                            $('#cost').addClass('hidden');
+                        }
+                    } else{
+                        $('#businessProductId').val(businessProductId);
+                        $('#productRequireId').val(productRequireId);
+                        jQuery.ajax({
+                            url:basePath + '/businessProduct/detailBaseInfo?businessProductId=' + businessProductId,
+                            type:'POST',
+                            success:function(result){
+                                console.log(result);
+                                var basicInfo = result.basicInfo;
+                                var components = result.components;
+
+                                $('#name').val(basicInfo.name);
+                                $('#name').attr('data-productId',basicInfo.productId);
+                                $('#name').attr('data-wareId',basicInfo.wareId);
+                                $('#customsClearanceName').val(basicInfo.customsClearanceName);
+                                $('#customerProductName').val(basicInfo.customerProductName);
+                                $('#specification').val(basicInfo.specification);
+                                $('#model').val(basicInfo.model);
+                                $('#brand').val(basicInfo.brand);
+                                $('#mainProductUnit').val(basicInfo.mainProductUnit);
+                                $('#mainProductAmount').val(basicInfo.mainProductAmount);
+                                $('#subProductUnit').val(basicInfo.subProductUnit);
+                                $('#subProductAmount').val(basicInfo.subProductAmount);
+                                $('#convertRate').val(basicInfo.convertRate);
+                                $('#priceType').val(basicInfo.priceType);
+                                $('#advisePrice').val(basicInfo.advisePrice);
+                                $('#purchasePrice').val(basicInfo.purchasePrice);
+                                $('#deliveryTime').val(basicInfo.deliveryTime);
+                                $('#factoryName').val(basicInfo.factoryName);
+                                $('#grossMargin').val(basicInfo.grossMargin);
+                                $('#commissionPrice').val(basicInfo.commissionPrice);
+                                $('#unitUseRate').val(basicInfo.unitUseRate);
+                                $('#taxType').val(basicInfo.taxType);
+                                $('#taxFree').val(basicInfo.taxFree);
+                                $('#otherCost').val(basicInfo.otherCost);
+                                $('#capitalInterestPrice').val(basicInfo.capitalInterestPrice);
+                                $('#internalSupplyName').val(basicInfo.internalSupplyName);
+                                $('#internalSupplyName').data('val',basicInfo.internalSupplyId);
+
+                                if(components.length!=0){
+                                    $('#cost').removeClass('hidden');
+                                    costtable.innerHTML = '';
+                                    for(var i=0;i<components.length;i++){
+                                        costtable.innerHTML += '<tr>'+
+                                                '<td data-id="'+components[i].componentId+'" data-fid="'+components[i].id+'">'+ifEmpty(components[i].componentName)+'</td>'+
+                                                '<td><input data-control="on" name="consumption" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].consumption)+'" ></td>'+
+                                                '<td><input data-control="on" name="price" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].price)+'" ></td>'+
+                                                '<td><input name="cost" class="form-control notnull text-center" type="text" value="'+ifEmpty(components[i].cost)+'" disabled></td>'+
+                                                '<td><input name="remark" data-control="on" class="form-control text-center" type="text" value="'+ifEmpty(components[i].remark)+'" ></td>'+
+                                                '</tr>';
+                                    }
+                                }
+                            }
+                        })
+                    }
+                }
+            })
+
+            $('#treeModal').modal('hide');
+        }else {
+            alert('请选择具体的产品！');
+        }
+        // console.log(/^c_/.test(treeNode.id));
+    }
+
     //加工厂列表
     $('#factory').click(function(){
         var factoryList = document.getElementById('factoryList');
@@ -588,14 +765,6 @@
         $('input[name="price"]').attr('disabled',true);
         $('input[name="remark"]').attr('disabled',true);
     })
-
-    $(document).on('click','a.fNode',function (e) {
-        e.preventDefault();
-        console.log(e.target);
-        var tarEltext = $(e.target).text();
-        $('#factoryName').val(tarEltext);
-        $('#factoryModal').modal('hide');
-    });
 
     //换算率
     $('#mainProductAmount').change(function () {

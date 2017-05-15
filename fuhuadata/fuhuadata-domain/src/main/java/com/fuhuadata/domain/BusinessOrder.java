@@ -53,10 +53,10 @@ public class BusinessOrder implements Serializable{
     private BigDecimal prepayRate;//预付款比例
     @NotNull
     private BigDecimal nusdexchgrate;//原币对美元汇率
-    @NotBlank
+    @NotNull
     private BigDecimal nexchangerate;//原币对本币汇率
     private Date lastdelydate;//最迟交货期
-    @NotBlank
+    @NotNull
     private BigDecimal premiumRate;//保险费率
     private BigDecimal  guaranteeRate;//信保费率
     @NotNull
