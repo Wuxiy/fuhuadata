@@ -452,11 +452,6 @@
             $('#back').removeClass('hidden');
         }
 
-        // 点击search btn渲染树
-        $('[name="search"]').on('click', function () {
-
-
-        });
         /*$('#tree').creatTree(basePath+'/businessProduct/initProductCatetroy');*/
         $.ajax({
             url:basePath + '/businessProduct/initProductCatetroy',

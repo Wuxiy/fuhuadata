@@ -434,6 +434,13 @@
             }
         });
 
+        $('#save').click(function () {
+            $('#income').attr('disabled', true);
+        });
+        $('#cancel').click(function () {
+            $('#income').attr('disabled', true);
+        });
+
         if(orderId!=''&&businessId==''){
             $('#back').removeClass('hidden');
             $('#edit').removeClass('hidden');
@@ -871,7 +878,7 @@
         function isShowCre(v) {
             if (parseInt(v)===0) {
                 $('#corporation').addClass('hidden');
-                $('input', $('#corporation')).val('');
+                $('input', $('#corporation')).val('0');
             }else {
                 $('#corporation').removeClass('hidden');
             }
