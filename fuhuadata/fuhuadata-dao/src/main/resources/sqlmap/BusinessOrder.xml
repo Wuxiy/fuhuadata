@@ -31,7 +31,7 @@
         <result column="currency" jdbcType="VARCHAR" property="currency" javaType="java.lang.String"/>
 
         <result property="isCreditRisk" column="is_credit_risk" jdbcType="INT" javaType="java.lang.Integer"/>
-        <result property="interestRate" column="interest_rate" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
+        <result property="prepayRate" column="prepay_rate" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 
 
         <result column="nusdexchgrate" jdbcType="DECIMAL" property="nusdexchgrate" javaType="java.math.BigDecimal" nullValue="0"/>
@@ -241,8 +241,8 @@
             <isNotNull prepend=", " property="isCreditRisk">
                 is_credit_risk = #isCreditRisk#
             </isNotNull>
-            <isNotNull prepend=", " property="interestRate">
-                interest_rate = #interestRate#
+            <isNotNull prepend=", " property="prepayRate">
+                prepay_rate = #prepayRate#
             </isNotNull>
             <isNotNull prepend=", " property="departmentName">
                 department_name = #departmentName#
@@ -425,7 +425,7 @@
         loss_rate, sale_rate, management_rate, gross_rate, credit_rate,
         transport_flag, partial_shipment_falg, status, deal_time, deliver_info, express_info, due_time,amount_payable, floor_price, maintenance_fee,
         net_profit, actual_payment_time,actual_amount_paid, unpaid_amount, is_complaint, is_pledge, is_modify_price, claim_amount,create_user_id, create_user_name,
-        lastmodify_user_id, lastmodify_user_name, create_time,modify_time,is_credit_risk,interest_rate,department_name,nusdexchgrate,nexchangerate,lastdelydate,gross_profit)
+        lastmodify_user_id, lastmodify_user_name, create_time,modify_time,is_credit_risk,prepay_rate,department_name,nusdexchgrate,nexchangerate,lastdelydate,gross_profit)
         values (#orderId#, #ncOrderId#, #businessId#, #customerId#,#customerDutyParagraph#,
         #billToCustomer#, #salesManId#,#salesManName#, #departmentId#, #saleOrganizationId#,
         #saleOrganizationName#, #destinationPort#, #shipmentPort#,#destinationPortName#, #shipmentPortName#,#collectionAgreement#, #tradeType#,
@@ -433,7 +433,7 @@
         #lossRate#, #saleRate#, #managementRate#,#grossRate#, #creditRate#,
         #transportFlag#,#partialShipmentFalg#, #status#, #dealTime#, #deliverInfo#,#expressInfo#, #dueTime#, #amountPayable#, #floorPrice#,#maintenanceFee#,
         #netProfit#, #actualPaymentTime#,#actualAmountPaid#, #unpaidAmount#, #isComplaint#, #isPledge#,#isModifyPrice#, #claimAmount#, #createUserId#,#createUserName#, #lastmodifyUserId#, #lastmodifyUserName#,
-        now(), now(), #isCreditRisk#,#interestRate#,#departmentName#,#nusdexchgrate#,#nexchangerate#,#lastdelydate#,#grossProfit#)
+        now(), now(), #isCreditRisk#,#prepayRate#,#departmentName#,#nusdexchgrate#,#nexchangerate#,#lastdelydate#,#grossProfit#)
 
     </insert>
 
@@ -501,7 +501,7 @@
                 modify_time,
                 failure_analysis,
                 is_credit_risk,
-                interest_rate
+                prepay_rate
             FROM
                 business_order
             WHERE

@@ -548,12 +548,13 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
          */
         //收款协议
         Income income = incomeDao.getByCode(order.getCollectionAgreement());
-        //计息比率
-        BigDecimal interestRate = order.getInterestRate();
-        if(interestRate==null){
-            interestRate = new BigDecimal(1);
+        //计息比率 = 1-预付款比例
+        BigDecimal interestRate = null;
+        BigDecimal prepayRate =  order.getPrepayRate();
+        if(prepayRate==null){
+            prepayRate = new BigDecimal(0);
         }
-        interestRate = interestRate.divide(new BigDecimal(100),4,BigDecimal.ROUND_HALF_UP);
+        interestRate =new BigDecimal(1).subtract(prepayRate.divide(new BigDecimal(100),4,BigDecimal.ROUND_HALF_UP));
         //资金利率
         BigDecimal discountRate = order.getDiscountRate();
         if(discountRate==null){

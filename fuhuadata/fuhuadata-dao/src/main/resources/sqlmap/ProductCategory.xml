@@ -98,11 +98,11 @@
 
     <select id="GET-BY-WARE" resultClass="ProductCategoryVO">
         SELECT
-        big.id AS parentId,
+        concat('c_',big.id) AS parentId,
         big.name AS parent,
-        midd.id AS middleId,
+        concat('c_',midd.id) AS middleId,
         midd.name AS middle,
-        small.id AS smallId,
+        concat('c_',small.id) AS smallId,
         small.name AS child,
         CONCAT(p.product_id,'_',pw.`ware_id`) AS productId,
         CONCAT(p.`name`,'-', pw.`specification`) AS productName
