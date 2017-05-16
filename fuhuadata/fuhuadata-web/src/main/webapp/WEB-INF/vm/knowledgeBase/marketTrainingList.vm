@@ -110,7 +110,7 @@
                             <input class="form-control" id="inputfile" type="file"/>
                         </div>
                         <div class="col-xs-2">
-                            <button id="submit" class="btn btn-xs btn-primary btn-block">上传</button>
+                            <button id="submitfile" type="button" class="btn btn-xs btn-primary btn-block">上传</button>
                         </div>
                     </div>
                 </form>
@@ -328,6 +328,30 @@
     function adddata() {
 
     }
+
+    //上传
+    $('#submitfile').click(function(){
+        var fd = new FormData();
+        fd.append("upload", 1);
+        fd.append("upfile", $("#inputfile").get(0).files[0]);
+        fd.append("classifyPath","marketTrain");
+
+        console.log(fd);
+
+        var url = basePath + '/upload/uploadFileAll';
+
+        jQuery.ajax({
+            url:url,
+            type:'POST',
+            data:fd,
+            dataType: 'JSON',
+            processData: false,
+            contentType: false,
+            success:function (result) {
+                console.log(result);
+            }
+        })
+    })
 
     function ifEmpty(data) {
         return data==undefined?'':data;
