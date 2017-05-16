@@ -13,6 +13,7 @@ import javax.annotation.Resource;
 import com.fuhuadata.vo.CustomerVisitRecordLinkman;
 import com.fuhuadata.vo.CustomerVisitRecordVO;
 import com.fuhuadata.vo.VisitRecordVO;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author wangbo
@@ -39,7 +40,21 @@ public class CustomerVisitRecordManagerImpl implements CustomerVisitRecordManage
 	public boolean updateCustomerVisitRecordById(int visitrecord_id, CustomerVisitRecord customerVisitRecord) {
     	return customerVisitRecordDao.updateCustomerVisitRecordById(visitrecord_id, customerVisitRecord) == 1 ? true : false;
     }
-    
+
+	@Override
+	@Transactional
+	public boolean updateCustomerVisitRecord(CustomerVisitRecordVO customerVisitRecordVO) {
+    	RecordLinkman[] recordLinkmans  = customerVisitRecordVO.getRecordLinkmen();
+    	CustomerVisitRecord customerVisitRecord = customerVisitRecordVO.getCustomerVisitRecord();
+
+    	if(recordLinkmans!=null&&recordLinkmans.length>0) {
+			for (int i  = 0;i<recordLinkmans.length;i++) {
+				recordLinkmanDao.updateRecordLinkmanById(recordLinkmans[i].getId(),recordLinkmans[i]);
+			}
+		}
+		return customerVisitRecordDao.updateCustomerVisitRecordById(customerVisitRecord.getVisitrecordId(),customerVisitRecord)==1?true:false;
+	}
+
 	public List<CustomerVisitRecord> getCustomerVisitRecordsByQuery(QueryCustomerVisitRecord queryCustomerVisitRecord) {
 		return customerVisitRecordDao.getCustomerVisitRecordsByQuery(queryCustomerVisitRecord);
 	}

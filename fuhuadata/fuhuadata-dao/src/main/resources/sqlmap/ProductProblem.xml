@@ -33,18 +33,18 @@
 
     <sql id="QUERY-COMMON">
         <dynamic prepend=" WHERE ">
-            <isNotNull prepend=" AND " property="createUserId">
+            <isNotEmpty prepend=" AND " property="createUserId">
                 create_user_id = #createUserId#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="createUserName">
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="createUserName">
                 create_user_name =#createUserName#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="problemContent">
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="problemContent">
                 problem_content like concat('%',#problemContent#,'%')
-            </isNotNull>
-            <isNotNull prepend=" AND " property="productId">
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="productId">
                 product_id=#productId#
-            </isNotNull>
+            </isNotEmpty>
         </dynamic>
     </sql>
 

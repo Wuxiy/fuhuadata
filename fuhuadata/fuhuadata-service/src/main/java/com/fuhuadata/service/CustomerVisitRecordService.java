@@ -35,6 +35,9 @@ public interface CustomerVisitRecordService {
      */
     public Result updateCustomerVisitRecordById(int visitrecord_id, CustomerVisitRecord customerVisitRecord);
 
+
+    public Result updateCustomerVisitRecord(CustomerVisitRecordVO customerVisitRecordVO);
+
     /**
      * 按照主键id 删除 记录
 	 * 返回result，通过result.isSuccess()判断删除是否成功

@@ -103,6 +103,33 @@ public class CustomerVisitRecordAction {
         return result.getResultPojo();
     }
 
+
+
+    /**
+     * add
+     * @param
+     * @return
+     */
+    @RequestMapping(value="/doModify",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "CustomerInfo-CustomerVisitRecord",methods = "addCustomerVisitRecord")
+    @ResponseBody
+    public ResultPojo doModify(@RequestBody CustomerVisitRecordVO customerVisitRecordVO){
+        Result result = new Result();
+        customerVisitRecordVO.getCustomerVisitRecord().setCreateUserId(LoginUtils.getLoginId());
+        customerVisitRecordVO.getCustomerVisitRecord().setCreateUserName(LoginUtils.getLoginName());
+        customerVisitRecordVO.getCustomerVisitRecord().setLastmodifyUserId(LoginUtils.getLoginId());
+        customerVisitRecordVO.getCustomerVisitRecord().setLastmodifyUserName(LoginUtils.getLoginName());
+        customerVisitRecordVO.getCustomerVisitRecord().setModifyTime(DateUtil.getDateTimeFormat());
+        customerVisitRecordVO.getCustomerVisitRecord().setCreateTime(DateUtil.getDateTimeFormat());
+        try{
+            result=customerVisitRecordService.updateCustomerVisitRecord(customerVisitRecordVO);
+        }catch(Exception e){
+            result.setSuccess(false);
+            log.error("新增客户记录错误",e);
+        }
+        return result.getResultPojo();
+    }
+
     /**
      * into customer maintenance
      * @return
