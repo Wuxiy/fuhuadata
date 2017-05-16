@@ -11,7 +11,7 @@
         <div class="panel-heading">
             #if ($shiro.hasPermission("wiki:ques:add"))
                 <button class="btn btn-xs btn-primary panel-heading-btn pull-right" data-toggle="modal"
-                        data-target="#addmodal" data-backdrop="static" data-keyboard="true">
+                        data-target="#addmodal" data-backdrop="static" data-keyboard="true" id="add">
                     <span class="glyphicon glyphicon-plus"></span>
                     新增
                 </button>
@@ -25,17 +25,17 @@
             <div class="form-horizontal">
                 <div class="form-group">
                     <div class="col-xs-1 pull-right">
-                        <button type="button" class="btn btn-block btn-primary btn-xs">
+                        <button type="button" class="btn btn-block btn-primary btn-xs" id="submit">
                             搜索
                         </button>
                     </div>
                     <div class="col-xs-2 pull-right">
-                        <input class="form-control" type="search" value="" placeholder="请输入问题内容"/>
+                        <input id="problemContentsearch" class="form-control" type="search" value="" placeholder="请输入问题内容"/>
                     </div>
                     <label class="col-xs-1 control-label pull-right">问题内容</label>
                     <div class="col-xs-2 pull-right">
                         <div class="input-group">
-                            <input id="productType" class="form-control" type="search" value="" placeholder="请输入品类"/>
+                            <input id="productTypesearch" class="form-control" type="search" value="" placeholder="请输入品类"/>
                             <span class="input-group-btn">
                                         <button data-toggle="modal" data-target="#Search" class="btn btn-xs btn-default" type="button">
                                             <span class="glyphicon glyphicon-search"></span>
@@ -58,9 +58,8 @@
                     <th class="col-xs-2 text-center">备注</th>
                 </tr>
                 </thead>
-
+                <tbody id="list"></tbody>
             </table>
-            <!--表格结束-->
 
         </div>
     </div>
@@ -69,7 +68,7 @@
 </div>
 
 <!--新增常见问题模态框 -->
-<div class="modal fade" id="addmodal" tabindex="-1"  aria-hidden="true" data-backdrop="static">
+<div class="modal fade" id="modal" tabindex="-1"  aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -82,14 +81,14 @@
                     <div class="form-group">
                         <label class="col-xs-2 control-label">问题内容<sup class="not-null">*</sup></label>
                         <div class="col-xs-9">
-                            <textarea class="form-control notnull" rows="3" id="addproblemContent"></textarea>
+                            <textarea class="form-control notnull" rows="3" id="problemContent"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-xs-2 control-label">品类<sup class="not-null">*</sup></label>
                         <div class="col-xs-9">
                             <div class="input-group">
-                                <input id="addproductType" class="form-control" type="search" value="" placeholder="请输入品类"/>
+                                <input id="productType" class="form-control" type="search" value="" placeholder="请输入品类"/>
                                 <span class="input-group-btn">
                                 <button data-toggle="modal" class="btn btn-xs btn-default" data-target="#tSearch" type="button">
                                     <span class="glyphicon glyphicon-search"></span>
@@ -101,13 +100,13 @@
                     <div class="form-group">
                         <label class="col-xs-2 control-label">解决方案<sup class="not-null">*</sup></label>
                         <div class="col-xs-9">
-                            <textarea class="form-control notnull" rows="7" id="addsolution"></textarea>
+                            <textarea class="form-control notnull" rows="7" id="solution"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-xs-2 control-label">备注<sup class="not-null">*</sup></label>
                         <div class="col-xs-9">
-                            <textarea class="form-control notnull" rows="4" id="addremarks"></textarea>
+                            <textarea class="form-control notnull" rows="4" id="remarks"></textarea>
                         </div>
                     </div>
                 </form>
@@ -115,8 +114,8 @@
             <div class="modal-footer">
                 <div class="row">
                     <div class="col-xs-3 col-xs-offset-3">
-                        <a type="button" class="btn btn-primary btn-block" id="add_save">
-                            保存
+                        <a type="button" class="btn btn-primary btn-block" id="finish">
+                            完成
                         </a>
                     </div>
                     <div class="col-xs-3">
@@ -186,44 +185,7 @@
         </div>
     </div>
 </div>
-<!--搜索模态框开始-->
-<div class="modal fade"  id="search" tabindex="-1"  aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog   modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
-            </div>
-            <div class="modal-body ">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="input-group">
-                            <input class="form-control" type="search" />
-                            <span class="input-group-btn">
-							    		<button class="btn btn-xs btn-primary">搜索</button>
-							    	</span>
-                        </div>
-                        <div class="list-group">
-                            <div class="list-group-item collapse" data-toggle="collapse">
-                                除草剂<b class="caret"></b>
-                            </div>
-                            <div class="list-group-item">
-                                杀菌剂<b class="caret"></b>
-                            </div>
-                            <div class="list-group-item">
-                                杀虫剂<b class="caret"></b>
-                            </div>
-                            <div class="list-group-item">
-                                化工品<b class="caret"></b>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 <!--树形菜单modal-->
 <div class="modal fade" id="tSearch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
@@ -272,44 +234,196 @@
         $('#Search').modal('hide');
     })
 
-    $("#productproblem_table").dataTable( {
-        "ajax": basePath + '/productProblem/queryProductProblemList',
-        "pagingType":"full_numbers",
-        "lengthMenu":[[5, 10, 15, -1], [5, 10, 15, "All"]],
-        "columns":[
-            {"data":"problemId"},
-            {"data":"problemContent"},
-            {"data":"productType"},
-            {"data":"solution"},
-            {"data":"remarks"}
-        ],
-        "columnDefs":[
-            {
-                targets: "_all",
-                defaultContent: ''
-            }, {
-                    "targets":1,
-                    "render":function(data,type,row,meta){
-                        return '<a data-id="'+row.problemId+'" class="problemId" target="_blank">' + row.problemContent+ '</a>';
-                    }
-                }
-        ],
-        "language": {
-            "url": basePath + '/lib/dataTables/lang/dataTables.lang.zh',
-            "searchPlaceholder": '关键字'
-        }
+    var pagesize = 10; // 分页步长
+    $("#submit").click(function () {
+        search();
     });
 
-    $(document).on('click','.problemId',function(){
+    search();
+
+    // 搜索列表并渲染
+    function search(){
+        // 获取参数
+        var data = collectArgs();
+        console.log(data);
+        getDataList(0,pagesize,rederLiset); // 初始化第一页数据
+
+        // 获取总的条数
+        getListCount(data,function (total) {
+
+            // 渲染分页
+            rederPaging(total,pagesize,function (pageNum,jq) {
+
+                // 获取列表数据
+                getDataList(pageNum,pagesize);
+            })
+        })
+
+    }
+
+    // 收集提交参数
+    function collectArgs() {
+        var obj={
+            productType:$('#productTypesearch').val(),
+            problemContent:$('#problemContentsearch').val()
+        }
+        return obj;
+    }
+
+    // 获取列表数据条目总数
+    function getListCount(data,callback){
+        var total = 0;
+        jQuery.ajax({
+            url:basePath + '/customerProductPacking/countCustomerProductPackingByPage',
+            dataType:'JSON',
+            contentType:'application/json',
+            data:JSON.stringify(data),
+            async:true,
+            type:'POST'
+        }).done(function (res) {
+            total = res.data;
+            callback(total);
+        });
+    }
+
+    // 渲染分页插件
+    function rederPaging(total,pageSize,callback) {
+
+        $("#pagination").pagination(total,{
+            items_per_page : pageSize,
+            num_edge_entries : 3,
+            num_display_entries : 10,
+            callback:callback
+        });
+    }
+
+    // 根据页码获取列表数据
+    function getDataList(pageNum,pageSize,callback) {
+        jQuery.ajax({
+            url:basePath + '/productProblem/queryProductProblemList',
+            dataType:'json',
+            contentType:'application/json',
+            data:JSON.stringify({
+                productType:$('#productTypesearch').val(),
+                problemContent:$('#problemContentsearch').val(),
+                startRow:pageNum*pageSize,
+                pageSize:pageSize
+            }),
+            async:true,
+            type:'POST'
+        }).done(function (res) {
+
+            // 渲染列表
+            rederLiset(res,pageNum);
+        });
+    }
+    // 渲染列表
+    function rederLiset(data,pageNum){
+
+        var ResultData = data.data,
+                _html = '',
+                count = pageNum*pagesize;
+
+        if(ResultData && ResultData!='' && ResultData!='null') {
+            for (var i = 0; i < ResultData.length; i++) {
+                _html += '<tr>';
+                _html += '<td>'+(++count)+'</td>';
+                _html += '<td><a class="info" data-id="'+ResultData[i].problemId+'">' + ResultData[i].problemContent + '</a></td>';
+                _html += '<td>' + ResultData[i].productType + '</td>';
+                _html += '<td lang="zh">' + ResultData[i].solution + '</td>';
+                _html += '<td lang="zh">' + ifEmpty(ResultData[i].remarks) + '</td>';
+                _html += '</tr>';
+            }
+        }
+        $("#list").html(_html);
+    }
+
+    //详情模态
+    $(document).on('click','.info',function(){
         var id = $(this).attr('data-id');
 
-       /* jQuery.ajax({
-            url:basePath + '/productProblem/queryProductProblemListTest?problemId=' + id,
-            type:'post',
+        $('#finish').attr('data-edit','1');
+        jQuery.ajax({
+            url:basePath + '/productProblem/getById?id=' + id,
             success:function(result){
+                if(result.code == 1){
+                    var ResultData = result.data;
+                    $('#problemContent').val(ResultData.problemContent);
+                    $('#problemContent').attr('data-id',ResultData.problemId)
+                    $('#productType').val(ResultData.productType);
+                    $('#solution').val(ResultData.solution);
+                    $('#remarks').val(ResultData.remarks);
 
+                    $('#modal').modal('show');
+                }else{
+                    alert('查询详情获取失败！');
+                }
             }
-        })*/
+        })
+    })
+    //新增模态
+    $(document).on('click','#add',function(){
+        $('#problemContent').val('');
+        $('#productType').val('');
+        $('#solution').val('');
+        $('#remarks').val('');
+
+        $('#finish').attr('data-edit','0');
+        $('#modal').modal('show');
     })
 
+    //完成操作
+    $('#finish').click(function(){
+        var edit = $(this).attr('data-edit');
+
+        if(edit == 0){
+            var data = adddata();
+
+            jQuery.ajax({
+                url:basePath + '/productProblem/doAddProductProblem',
+                data:data,
+                type:'POST',
+                success:function(result){
+                    if(result.code == 1){
+                        alert('新增成功！');
+                    }else{
+                        alert('新增失败！');
+                    }
+                }
+            })
+        }
+        else if(edit == 1){
+            var data = infodata();
+
+            jQuery.ajax({
+                url:basePath + '/productProblem/doModify',
+                data:data,
+                type:'POST',
+                success:function(result){
+                    if(result.code == 1){
+                        alert('修改成功！');
+                    }else{
+                        alert('修改失败！');
+                    }
+                }
+            })
+        }
+    })
+
+    function adddata() {
+        var data = {
+            'problemContent':$('#problemContent').val(),
+            'id':$('#problemId').val(),
+            'productType':$('#productType').val(),
+            'solution':$('#solution').val(),
+            'remarks':$('#remarks').val(),
+            'productId':$('#productId').val()
+        }
+
+        return JSON.stringify(data);
+    }
+
+    function ifEmpty(data) {
+        return data==undefined?'':data;
+    }
 </script>

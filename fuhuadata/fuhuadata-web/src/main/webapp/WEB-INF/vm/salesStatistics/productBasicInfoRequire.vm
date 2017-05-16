@@ -81,8 +81,8 @@
                                             </label>
                                         </td>
                                         <td><input data-control="on" id="mainProductAmount" class="form-control notnull isdisabled" type="number" value="" disabled/></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td><label class="control-label" lang="zh">交货时间</label><sup class="not-null">*</sup></td>
+                                        <td><input data-control="on" id="deliveryTime" class="form-control isdisabled notnull" type="date" value="" disabled/></td>
                                     </tr>
 ##                                    <tr>
 ##                                        <td><label class="control-label" lang="zh">单位</label></td>
@@ -122,7 +122,7 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input data-control="on" id="advisePrice" class="form-control notnull isdisabled" value="0" disabled>
+                                                <input data-control="on" id="advisePrice" class="form-control isdisabled" value="0" disabled>
                                                 <span class="input-group-addon">元</span>
                                             </div>
                                         </td>
@@ -134,12 +134,11 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input data-control="on" id="purchasePrice" class="form-control notnull isdisabled" value="0" disabled>
+                                                <input data-control="on" id="purchasePrice" class="form-control isdisabled" value="0" disabled>
                                                 <span class="input-group-addon">元</span>
                                             </div>
                                         </td>
-                                        <td><label class="control-label" lang="zh">交货时间</label><sup class="not-null">*</sup></td>
-                                        <td><input data-control="on" id="deliveryTime" class="form-control isdisabled notnull" type="date" value="" disabled/></td>
+
                                     </tr>
                                     <tr class="hidecang">
                                         <td class="fac">
@@ -219,7 +218,7 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input data-control="on" id="taxFree" class="form-control notnull isdisabled" value="" disabled>
+                                                <input data-control="on" id="taxFree" class="form-control isdisabled" value="" disabled>
                                                 <span class="input-group-addon">%</span>
                                             </div>
                                         </td>

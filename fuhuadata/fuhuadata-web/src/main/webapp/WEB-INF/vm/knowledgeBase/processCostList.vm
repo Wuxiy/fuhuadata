@@ -569,6 +569,11 @@
         var obj = {};
         var ProductSuitable =$('#costAddmodal').find('[name="ProductSuitableAdd"]');
         ProductSuitable.each(function () {
+            var categoryFullName = $(this).find('[name=suitableProduct]').val();
+            if(categoryFullName == ''||categoryFullName == null){
+                alert('请填写使用产品！');
+                return false;
+            }
             obj = {
                 "productCategoryId":$(this).find('[name=suitableProduct]').attr('data-id'),
                 "categoryFullName":$(this).find('[name=suitableProduct]').val(),
