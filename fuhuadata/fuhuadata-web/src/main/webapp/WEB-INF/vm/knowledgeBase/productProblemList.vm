@@ -61,7 +61,8 @@
                 </thead>
                 <tbody id="list"></tbody>
             </table>
-
+            <div id="pagination" class="pagination"></div>
+            <!--表格结束-->
         </div>
     </div>
         </div>
@@ -342,6 +343,8 @@
                     url:basePath + '/productProblem/doAddProductProblem',
                     data:adddata(),
                     type:'POST',
+                    dataType:"json",
+                    contentType:"application/json",
                     success:function(result){
                         if(result.code == 1){
                             alert('新增成功！');
@@ -356,6 +359,8 @@
                     url:basePath + '/productProblem/doModify',
                     data:infodata(),
                     type:'POST',
+                    dataType:"json",
+                    contentType:"application/json",
                     success:function(result){
                         if(result.code == 1){
                             alert('修改成功！');
@@ -372,14 +377,13 @@
 
     //删除操作
     $(document).on('click','.delete',function(){
-        var url = basePath + '/productProblem/delete';
         var id = $(this).attr('data-id');
-
+        var url = basePath + '/productProblem/delete?id='+id;
         var msg = '确认删除该产品常见问题？';
         if(confirm(msg)){
             jQuery.ajax({
+                type:'POST',
                 url:url,
-                data:id,
                 success:function (result) {
                     if(result.code == 1){
                         alert('删除成功！');
@@ -405,7 +409,7 @@
     function infodata() {
         var data = {
             'problemContent':$('#problemContent').val(),
-            'id':$('#problemContent').attr('data-id'),
+            'problemId':$('#problemContent').attr('data-id'),
             'productType':$('#productType').val(),
             'solution':$('#solution').val(),
             'remarks':$('#remarks').val(),

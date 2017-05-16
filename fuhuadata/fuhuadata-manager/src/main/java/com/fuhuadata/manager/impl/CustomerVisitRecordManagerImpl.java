@@ -46,7 +46,6 @@ public class CustomerVisitRecordManagerImpl implements CustomerVisitRecordManage
 	public boolean updateCustomerVisitRecord(CustomerVisitRecordVO customerVisitRecordVO) {
     	RecordLinkman[] recordLinkmans  = customerVisitRecordVO.getRecordLinkmen();
     	CustomerVisitRecord customerVisitRecord = customerVisitRecordVO.getCustomerVisitRecord();
-
     	if(recordLinkmans!=null&&recordLinkmans.length>0) {
 			for (int i  = 0;i<recordLinkmans.length;i++) {
 				recordLinkmanDao.updateRecordLinkmanById(recordLinkmans[i].getId(),recordLinkmans[i]);
