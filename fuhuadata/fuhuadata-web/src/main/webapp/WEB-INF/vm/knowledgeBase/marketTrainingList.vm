@@ -279,9 +279,8 @@
                 _html += '<td><a class="delete" data-id="'+ResultData[i].tranId+'">删除</a></td>';
                 _html += '</tr>';
         }
-        $("#list").html(_html);
-
       }
+        $("#list").html(_html);
     }
 
     //新增模态

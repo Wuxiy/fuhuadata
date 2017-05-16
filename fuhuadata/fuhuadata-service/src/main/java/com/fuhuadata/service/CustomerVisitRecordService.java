@@ -7,8 +7,6 @@ import com.fuhuadata.vo.CustomerVisitRecordLinkman;
 import com.fuhuadata.vo.CustomerVisitRecordVO;
 import com.fuhuadata.vo.VisitRecordVO;
 
-import javax.management.Query;
-
 /**
  * @author wangbo
  * @date 2017-01-13 16:22:04

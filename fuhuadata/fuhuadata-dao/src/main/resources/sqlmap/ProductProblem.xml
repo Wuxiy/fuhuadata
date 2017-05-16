@@ -42,8 +42,8 @@
             <isNotEmpty prepend=" AND " property="problemContent">
                 problem_content like concat('%',#problemContent#,'%')
             </isNotEmpty>
-            <isNotEmpty prepend=" AND " property="productId">
-                product_id=#productId#
+            <isNotEmpty prepend=" AND " property="productType">
+                product_type like concat('%',#productType#,'%')
             </isNotEmpty>
         </dynamic>
     </sql>
@@ -72,7 +72,7 @@
             <isNotNull prepend=", " property="remarks">remarks = #remarks#</isNotNull>
             <isNotNull prepend=", " property="lastmodifyUserId">lastmodify_user_id=#lastmodifyUserId#</isNotNull>
             <isNotNull prepend=", " property="lastmodifyUserName">lastmodify_user_name=#lastmodifyUserName#</isNotNull>
-            <isNotNull prepend=", " property="modify_time">modify_time=now()</isNotNull>
+            <isNotNull prepend=", " property="modifyTime">modify_time=now()</isNotNull>
         </dynamic>
         WHERE problem_id = #problemId#
     </update>
