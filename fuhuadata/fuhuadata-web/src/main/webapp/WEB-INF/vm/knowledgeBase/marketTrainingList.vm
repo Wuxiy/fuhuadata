@@ -26,22 +26,22 @@
                     <div class="form-horizontal">
                         <div class="form-group">
                             <div class="col-xs-1 pull-right">
-                                <button type="button" class="btn btn-block btn-primary btn-xs">
-                                    搜索
-                                </button>
+                                <div class="input-group-btn">
+                                    <button class="btn btn-xs btn-default" type="reset">重置</button>
+                                    <button class="btn btn-xs btn-primary" id="submit" type="button">搜索</button>
+                                </div>
                             </div>
                             <div class="col-xs-2 pull-right">
-                                <input class="form-control" type="search" value="" placeholder="请输入标题"/>
+                                <input class="form-control" id="stitle" type="search" value="" placeholder="请输入标题"/>
                             </div>
                             <label class="col-xs-1 control-label pull-right">标题</label>
                             <div class="col-xs-2 pull-right">
                                 <div class="input-group">
-                                    <input class="form-control" type="search" value="" placeholder="请输入品类"/>
+                                    <input class="form-control" id="sproductType" type="search" value="" placeholder="请输入品类"/>
                                     <span class="input-group-btn">
-                                        <button data-toggle="modal" data-target="#search" class="btn btn-xs btn-default"
-                                                type="button">
-                                            <span class="glyphicon glyphicon-search"></span>
-                                        </button>
+                                      <button data-toggle="modal" class="btn btn-xs btn-default" data-target="#tSearch" type="button">
+                                          <span class="glyphicon glyphicon-search"></span>
+                                      </button>
                                     </span>
                                 </div>
                             </div>
@@ -62,9 +62,28 @@
                             <th class="col-xs-1 text-center text-middle">可否下载</th>
                         </tr>
                         </thead>
-
+                        <tbody id="list"></tbody>
                     </table>
+                    <div id="pagination" class="pagination"></div>
                     <!--表格结束-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--modal-->
+<div class="modal fade" id="tSearch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content" style="width:400px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body well" style="max-height: 300px; overflow-y: scroll; overflow-x: scroll;">
+                <div id="tree" class="tree">
+
                 </div>
             </div>
         </div>
@@ -204,8 +223,9 @@
     </div>
 </div>
 
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
+  /*  $(document).ready(function () {
         $("#markettrain_table").dataTable({
             "ajax": basePath + '/marketTraining/queryMarketTrainingList',
             "pagingType": "full_numbers",
@@ -232,5 +252,110 @@
                 "searchPlaceholder": '关键字'
             }
         })
-    })
+    })*/
+
+  var pagesize = 5; // 分页步长
+  $('#tree').creatTree(basePath+'/productCategory/CategoryTreeThree');
+  $("#submit").click(function () {
+      search();
+  });
+  search();
+
+  // 搜索列表并渲染
+  function search(){
+      // 获取参数
+      var data = collectArgs();
+
+      getDataList(0,pagesize,rederLiset); // 初始化第一页数据
+
+      // 获取总的条数
+      getListCount(data,function (total) {
+
+          // 渲染分页
+          rederPaging(total,pagesize,function (pageNum,jq) {
+
+              // 获取列表数据
+              getDataList(pageNum,pagesize);
+          })
+      })
+
+  }
+
+  // 收集提交参数
+  function collectArgs() {
+      var obj={
+          productType:$('#sproductType').val(),
+          title:$('#stitle').val()
+      }
+      return obj;
+  }
+
+  // 获取列表数据条目总数
+  function getListCount(data,callback){
+      var total = 0;
+      jQuery.ajax({
+          url:basePath + '/marketTraining/count',
+          dataType:'JSON',
+          contentType:'application/json',
+          data:JSON.stringify(data),
+          async:true,
+          type:'POST'
+      }).done(function (res) {
+          total = res.data;
+          callback(total);
+      });
+  }
+
+  // 渲染分页插件
+  function rederPaging(total,pageSize,callback) {
+
+      $("#pagination").pagination(total,{
+          items_per_page : pageSize,
+          num_edge_entries : 3,
+          num_display_entries : 10,
+          callback:callback
+      });
+  }
+
+  // 根据页码获取列表数据
+  function getDataList(pageNum,pageSize,callback) {
+      jQuery.ajax({
+          url:basePath + '/marketTraining/queryMarketTrainingList',
+          dataType:'json',
+          contentType:'application/json',
+          data:JSON.stringify({
+              productType:$('#sproductType').val(),
+              title:$('#stitle').val(),
+              startRow:pageNum*pageSize,
+              pageSize:pageSize
+          }),
+          async:true,
+          type:'POST'
+      }).done(function (res) {
+          // 渲染列表
+          rederLiset(res,pageNum);
+      });
+  }
+  // 渲染列表
+  var companyTypeList = ['客户','竞对'];
+  function rederLiset(data,pageNum){
+      var ResultData = data.data,
+              _html = '',
+              count = pageNum*pagesize;
+
+      if(ResultData && ResultData!='' && ResultData!='null') {
+          for (var i = 0; i < ResultData.length; i++) {
+              _html += '<tr>';
+              _html += '<td>' + (++count) + '</td>';
+              _html += '<td>' + (ResultData[i].title != undefined ? ResultData[i].title : '') + '</td>';
+              _html += '<td>' + (ResultData[i].productType != undefined ? ResultData[i].productType : '') + '</td>';
+              _html += '<td lang="zh">' + (ResultData[i].createUserId != undefined ? ResultData[i].createUserId : '') + '</td>';
+              _html += '<td lang="zh">' + (ResultData[i].uploadDate != undefined ? ResultData[i].uploadDate : '') + '</td>';
+              _html += '<td lang="zh">' + '下载' + '</td>';
+      }
+      $("#list").html(_html);
+      _html += '</tr>';
+  }
+  }
+
 </script>
