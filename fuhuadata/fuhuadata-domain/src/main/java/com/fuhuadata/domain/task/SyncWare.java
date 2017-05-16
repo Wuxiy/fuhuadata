@@ -19,6 +19,8 @@ public class SyncWare implements Serializable
     private String customsClearanceName;
     //增值税税率
     private BigDecimal risetaxes;
+    //出口退税率
+    private BigDecimal exportaxesback;
     //规格
     private String specification;
     //型号
@@ -80,6 +82,14 @@ public class SyncWare implements Serializable
 
     public void setRisetaxes(BigDecimal risetaxes) {
         this.risetaxes = risetaxes;
+    }
+
+    public BigDecimal getExportaxesback() {
+        return exportaxesback;
+    }
+
+    public void setExportaxesback(BigDecimal exportaxesback) {
+        this.exportaxesback = exportaxesback;
     }
 
     public String getSpecification() {
