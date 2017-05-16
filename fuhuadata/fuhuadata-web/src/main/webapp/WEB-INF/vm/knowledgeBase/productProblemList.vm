@@ -217,7 +217,7 @@
     function getListCount(data,callback){
         var total = 0;
         jQuery.ajax({
-            url:basePath + '/customerProductPacking/countCustomerProductPackingByPage',
+            url:basePath + '/productProblem/count',
             dataType:'JSON',
             contentType:'application/json',
             data:JSON.stringify(data),

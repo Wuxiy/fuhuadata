@@ -105,9 +105,9 @@
                         </div>
                     </div>
                     <div class="form-group ">
-                        <label class="col-xs-2 control-label" for="inputfile">附件</label>
+                        <label class="col-xs-2 control-label" for="inputfile">附件<sup class="not-null">*</sup></label>
                         <div class="col-xs-6">
-                            <input class="form-control" id="inputfile" type="file"/>
+                            <input class="form-control" id="inputfile" data-path="" type="file"/>
                         </div>
                         <div class="col-xs-2">
                             <button id="submitfile" type="button" class="btn btn-xs btn-primary btn-block">上传</button>
@@ -275,7 +275,7 @@
                 _html += '<td>' + ifEmpty(ResultData[i].productType) + '</td>';
                 _html += '<td lang="zh">' + ifEmpty(ResultData[i].createUserName) + '</td>';
                 _html += '<td lang="zh">' + ifEmpty(ResultData[i].uploadDate) + '</td>';
-                _html += '<td>' + '下载' + '</td>';
+                _html += '<td><a href="${request.contextPath}'+ResultData[i].attachmentPath+'">下载</a></td>';
                 _html += '<td><a class="delete" data-id="'+ResultData[i].tranId+'">删除</a></td>';
                 _html += '</tr>';
         }
@@ -309,9 +309,14 @@
                 return false;
             }
         });
+        if($('#inputfile').attr('data-path') == '' ||$('#inputfile').attr('data-path') == undefined){
+            alert('请上传附件!');
+            isup =false;
+            return false;
+        }
         if(isup){
             jQuery.ajax({
-                url:basePath + '/productProblem/doAddProductProblem',
+                url:basePath + '/marketTraining/doAddMarketTraining',
                 data:adddata(),
                 type:'POST',
                 success:function(result){
@@ -325,15 +330,42 @@
         }
     })
 
-    function adddata() {
+    //删除操作
+    $(document).on('click','.delete',function(){
+        var url = basePath + '/marketTraining/delete';
+        var id = $(this).attr('data-id');
 
+        var msg = '确认删除该产品营销培训吗？';
+        if(confirm(msg)){
+            jQuery.ajax({
+                url:url,
+                data:id,
+                success:function (result) {
+                    if(result.code == 1){
+                        alert('删除成功！');
+                    }else{
+                        alert('删除失败');
+                    }
+                }
+            });
+        }
+    })
+
+    function adddata() {
+        var data = {
+            'title':$('#title').val(),
+            'productType':$('#productType').val(),
+            'productId':$('#productType').attr('data-id'),
+            'attachmentPath':$('#inputfile').attr('data-path')
+        }
+        return JSON.stringify(data);
     }
 
     //上传
     $('#submitfile').click(function(){
         var fd = new FormData();
         fd.append("name", $("#inputfile").val());
-        fd.append("upfile", $("#inputfile")[0].files[0]);
+        fd.append("file", $("#inputfile")[0].files[0]);
         fd.append("classifyPath","marketTrain");
 
         console.log(fd);
@@ -348,7 +380,12 @@
             processData: false,
             contentType: false,
             success:function (result) {
-                console.log(result);
+                if(result.code == 1){
+                    alert('上传成功!');
+                    $('#inputfile').attr('data-path',result.data);
+                }else{
+                    alert('上传失败!');
+                }
             }
         })
     })
