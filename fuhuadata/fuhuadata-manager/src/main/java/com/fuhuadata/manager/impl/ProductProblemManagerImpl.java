@@ -59,14 +59,14 @@ public class ProductProblemManagerImpl implements ProductProblemManager {
     public Result<List<ProductProblem>> getProductProblemsByPage(ProductProblemQuery productProblemQuery) {
         Result<List<ProductProblem>> result = new Result<List<ProductProblem>>();
         int totalItem=productProblemDao.count(productProblemQuery);
-        productProblemQuery.setTotalItem(totalItem);
+      /*  productProblemQuery.setTotalItem(totalItem);
         if(totalItem > 0){
             result.addDefaultModel("ProductProblems",productProblemDao.getProductProblemsByPage(productProblemQuery));
         }else{
             result.addDefaultModel("ProductProblems",productProblemDao.getProductProblemsByPage(productProblemQuery));
         }
         result.setPageSize(productProblemQuery.getPageSize());
-        result.setIndex(productProblemQuery.getIndex());
+        result.setIndex(productProblemQuery.getIndex());*/
         result.setTotalItem(totalItem);
         return result;
     }

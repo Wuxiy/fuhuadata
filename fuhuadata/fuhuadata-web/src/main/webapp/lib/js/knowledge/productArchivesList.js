@@ -280,20 +280,6 @@ CRM.productArchivesList.getPhysicalProperitiesDataHandler = function () {
     return JSON.stringify(arr);
 };
 
-// 侧栏角色树的点击事件
-CRM.productArchivesList.asideTreeOnClick = function(event, modLeftId, treeNode) {
-    var page = CRM.productArchivesList;
-    page.resetPage();
-
-    if (!/^c_/.test(treeNode.id)) {
-        sessionStorage.setItem('productId',treeNode.id);
-        page.renderPage(sessionStorage.getItem('productId'));
-    }
-
-    console.log(/^c_/.test(treeNode.id));
-
-};
-
 // 渲染产品树到侧边栏
 CRM.productArchivesList.renderProTreeToAside = function (data) {
     var page    = CRM.productArchivesList,
@@ -317,6 +303,15 @@ CRM.productArchivesList.renderProTreeToAside = function (data) {
         treeObj  = null;
     // console.log(CRM.toArr(data));
     page.proTreeData = CRM.toArr(data); // 将产品树的数据保存到page对象属性
+    $.each(page.proTreeData, function (i, item) {
+
+        if (/^c_/.test(item.id)) {
+
+            item.isParent = true;
+        }else {
+            item.isParent = false;
+        }
+    });
     $.fn.zTree.init(page.asideTree, setting, page.proTreeData);
     // treeObj = $.fn.zTree.getZTreeObj(id);
     // treeObj.expandAll(true); // 默认展开
@@ -348,6 +343,21 @@ CRM.productArchivesList.init = function () {
     roleManage.startEdit();
     roleManage.startSave();
     roleManage.startCancel();
+
+};
+
+// 侧栏角色树的点击事件
+CRM.productArchivesList.asideTreeOnClick = function(event, modLeftId, treeNode) {
+    var page = CRM.productArchivesList;
+
+    if (!/^c_/.test(treeNode.id)) {
+        page.resetPage();
+        sessionStorage.setItem('productId',treeNode.id);
+        page.renderPage(sessionStorage.getItem('productId'));
+    }else {
+        alert('请选择具体的产品！');
+    }
+    console.log(/^c_/.test(treeNode.id));
 
 };
 

@@ -6,7 +6,6 @@
         <groupId>com.fuhua</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>com.fuhua</groupId>
     <artifactId>fuhuadata-web</artifactId>
     <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
@@ -205,8 +204,10 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>${tomcat.maven.version}</version>
                 <configuration>
+                    <url>${tomcat.deploy.url}</url>
+                    <server>${tomcat.server.name}</server>
+                    <path>${project.build.finalName}</path>
                     <port>8080</port>
-                    <path>/</path>
                     <uriEncoding>UTF-8</uriEncoding>
                     <!-- spring profile  -->
                     <systemProperties>
@@ -219,7 +220,7 @@
                 <!-- war插件 -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.1</version>
+                <version>2.6</version>
                 <configuration>
                     <warName>${project.artifactId}</warName>
                 </configuration>
@@ -240,8 +241,7 @@
     </build>
     <profiles>
         <profile>
-
-            <id>development</id>
+            <id>dev</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -259,6 +259,9 @@
                 <jdsmy.jdbc.username>root</jdsmy.jdbc.username>
                 <jdsmy.jdbc.password>root</jdsmy.jdbc.password>
 
+                <tomcat.deploy.url>http://localhost:8080/manager/text</tomcat.deploy.url>
+                <tomcat.server.name>tomcatServer</tomcat.server.name>
+
                 <!--.......................passport相关开始....................... -->
                 <!-- 前台登录cookie名 -->
                 <fuhua.login.cookie.name>_fuhua_</fuhua.login.cookie.name>
@@ -275,6 +278,14 @@
                 <!-- 登录地址 -->
                 <fuhua.login.address>http://${fuhua.login.domain.name}/login/login.jsp</fuhua.login.address>
                 <!--............................. passport相关结束...................... -->
+            </properties>
+        </profile>
+
+        <profile>
+            <id>test</id>
+            <properties>
+                <tomcat.deplocy.url>http://localhost:8080/manager/text</tomcat.deplocy.url>
+                <tomcat.server.name>tomcatServer</tomcat.server.name>
             </properties>
         </profile>
     </profiles>

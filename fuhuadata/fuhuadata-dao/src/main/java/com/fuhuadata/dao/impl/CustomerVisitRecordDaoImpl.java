@@ -7,7 +7,6 @@ import com.fuhuadata.domain.query.QueryCustomerVisitRecord;
 import com.fuhuadata.vo.VisitRecordVO;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
-import javax.management.Query;
 
 /**
  * @author wangbo

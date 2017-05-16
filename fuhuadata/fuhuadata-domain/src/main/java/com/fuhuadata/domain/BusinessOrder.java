@@ -29,9 +29,7 @@ public class BusinessOrder implements Serializable{
     @NotBlank
     private String saleOrganizationId;//销售组织id
     private String saleOrganizationName;//销售组织名称
-    @NotBlank
     private String destinationPort;//目的港code
-    @NotBlank
     private String shipmentPort;//起运港code
     private String destinationPortName;//目的港
     private String shipmentPortName;//起运港
@@ -50,13 +48,13 @@ public class BusinessOrder implements Serializable{
     private Integer isCreditRisk;//是否使用信用险
 
     @NotNull
-    private BigDecimal interestRate;//计息比例
+    private BigDecimal prepayRate;//预付款比例
     @NotNull
     private BigDecimal nusdexchgrate;//原币对美元汇率
-    @NotBlank
+    @NotNull
     private BigDecimal nexchangerate;//原币对本币汇率
     private Date lastdelydate;//最迟交货期
-    @NotBlank
+    @NotNull
     private BigDecimal premiumRate;//保险费率
     private BigDecimal  guaranteeRate;//信保费率
     @NotNull
@@ -276,12 +274,12 @@ public class BusinessOrder implements Serializable{
         this.isCreditRisk = isCreditRisk;
     }
 
-    public BigDecimal getInterestRate() {
-        return interestRate;
+    public BigDecimal getPrepayRate() {
+        return prepayRate;
     }
 
-    public void setInterestRate(BigDecimal interestRate) {
-        this.interestRate = interestRate;
+    public void setPrepayRate(BigDecimal prepayRate) {
+        this.prepayRate = prepayRate;
     }
 
     public BigDecimal getNusdexchgrate() {

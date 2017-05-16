@@ -192,10 +192,10 @@ public class BusinessOrderAction {
     @RequestMapping(value = "/updateOrderProducts",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "salesStatistics",methods = "updateOrderProducts")
     @ResponseBody
-    public ResultPojo updateOrderProducts(@RequestBody @Valid BusinessOrderDO businessOrderDO,BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
-            throw new InvalidRequestException("请求参数错误",bindingResult);
-        }
+    public ResultPojo updateOrderProducts(@RequestBody  BusinessOrderDO businessOrderDO){
+        //if(bindingResult.hasErrors()){
+        //    throw new InvalidRequestException("请求参数错误",bindingResult);
+        //}
         Result result = new Result();
        businessOrderDO.getBusinessOrder().setLastmodifyUserId(LoginUtils.getLoginId());
        businessOrderDO.getBusinessOrder().setLastmodifyUserName(LoginUtils.getLoginName());

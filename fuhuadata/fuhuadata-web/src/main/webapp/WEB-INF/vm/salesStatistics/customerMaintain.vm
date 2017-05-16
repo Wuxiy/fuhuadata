@@ -170,7 +170,7 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script type="text/javascript">
 
-    var pagesize = 4; // 分页步长
+    var pagesize = 10; // 分页步长
     var areaTreeData = []; // 保存树的数据
     var activityTypeList = ['远程沟通','出差拜访','展会邀请','工厂参观','商务宴请','其他'];
     var areaId = ''; // 地区id

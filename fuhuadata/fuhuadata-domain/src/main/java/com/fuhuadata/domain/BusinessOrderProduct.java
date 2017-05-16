@@ -86,7 +86,6 @@ public class BusinessOrderProduct {
     private String factoryId;
 
     /**加工厂名称**/
-    @NotBlank
     private String factoryName;
 
     /**明佣计费方式**/

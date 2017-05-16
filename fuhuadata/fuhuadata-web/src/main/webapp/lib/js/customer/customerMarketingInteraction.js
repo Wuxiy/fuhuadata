@@ -2,7 +2,7 @@
  * Created by huxiangyang on 2017/3/13.
  */
 
-var pageSize = 5, // 分页步长
+var pageSize = 10, // 分页步长
     currentPageCpps = 0, // 采购表格当前页码
     currentPageCsps = 0, // 销售表格当前页码
     pdtTreeData = null, // 保存树的数据

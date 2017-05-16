@@ -38,7 +38,7 @@
                         <table class="table table-condensed table-bordered table-striped text-right">
                             <tbody>
                             <tr>
-                                <td class="col-xs-4" lang="zh"><label for="">出具海运提单</label></td>
+                                <td class="col-xs-4" lang="zh">出具海运提单</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
                                         <label><input id="oceanBillOfLading" type="checkbox" data-control="on" disabled/></label>
@@ -98,10 +98,10 @@
                                         <label class="checkbox-inline"><input name="coo" type="checkbox" value="1" data-control="on" disabled/>商检局</label>
                                     </div>
                                     <div class="col-xs-10">
-                                        <label class="radio-inline"><input class="contentRadio " name="cooContent" type="radio" value="a" disabled/>FORM A</label>
-                                        <label class="radio-inline"><input class="contentRadio " name="cooContent" type="radio" value="e" disabled/>FORM E</label>
-                                        <label class="radio-inline"><input class="contentRadio " name="cooContent" type="radio" value="p" disabled/>FORM P</label>
-                                        <label class="radio-inline"><input class="contentRadio " name="cooContent" type="radio" value="au" disabled/>FORM AU</label>
+                                        <label class="radio-inline"><input class="contentRadio " name="cooContent" data-control="on" type="radio" value="a" disabled/>FORM A</label>
+                                        <label class="radio-inline"><input class="contentRadio " name="cooContent" data-control="on" type="radio" value="e" disabled/>FORM E</label>
+                                        <label class="radio-inline"><input class="contentRadio " name="cooContent" data-control="on" type="radio" value="p" disabled/>FORM P</label>
+                                        <label class="radio-inline"><input class="contentRadio " name="cooContent" data-control="on" type="radio" value="au" disabled/>FORM AU</label>
                                     </div>
                                     <div class="col-xs-12">
                                         <label class="checkbox-inline" style="padding-top: 3px"><input name="coo" type="checkbox" value="2" data-control="on" disabled/>贸促会</label>
@@ -110,7 +110,7 @@
                                         <label class="checkbox-inline" style="padding-top: 3px"><input name="coo" type="checkbox" value="3"  data-control="on" disabled/>普通</label>
                                     </div>
                                     <div class="col-xs-4">
-                                        <input id="cooContentText" name="cooContent" class="form-control contentText" type="text" placeholder="请输入公司抬头" disabled/>
+                                        <input id="cooContentText" class="form-control contentText" type="text" placeholder="请输入公司抬头" disabled/>
                                     </div>
                                 </td>
                             </tr>
@@ -335,7 +335,16 @@
                             }
                         })
                     }
-                    if(documentaryRequire.cooContent!=undefined){
+
+                    if (documentaryRequire.cooContent) {
+                        if (documentaryRequire.coo === 3) {
+                            $('#cooContentText').val(documentaryRequire.cooContent);
+                        }else if (documentaryRequire.coo === 1) {
+                            $('[name="cooContent"]').val([documentaryRequire.cooContent]);
+                        }
+                    }
+
+                    /*if(documentaryRequire.cooContent!=undefined){
                         var cooContent = documentaryRequire.cooContent;
                         $.each(cooContent,function(index,value){
                             $('.contentRadio').each(function(){
@@ -346,7 +355,7 @@
                                 }
                             })
                         })
-                    }
+                    }*/
                 }
                 if(result.documentaryType!=undefined){
                     $('#documentaryType').val(result.documentaryType);
@@ -732,7 +741,7 @@
             'invoice':checked($('#invoice')),
             'packingList':checked($('#packingList')),
             'qualityTestingReport':checked($('#qualityTestingReport')),
-            'reportCompanyTitle':$('#oceanBillOfLading').val(),
+            'reportCompanyTitle':$('#reportCompanyTitle').val(),
             'guaranteeSlip':checked($('#guaranteeSlip')),
             'coo':getcoo(),
             'cooContent':getcooContent(),
@@ -787,7 +796,7 @@
     function getcooContent() {
         var conContent;
         if($('input[name="coo"]:checked').val() == '1'){
-            conContent = $('input[class="contentRadio"]:checked').val();
+            conContent = $('[name="cooContent"]').filter(':checked').val();
         }else if($('input[name="coo"]:checked').val() == '3'){
             conContent = $('#cooContentText').val();
         }else{
