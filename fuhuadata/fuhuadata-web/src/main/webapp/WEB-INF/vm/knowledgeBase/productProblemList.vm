@@ -35,9 +35,9 @@
                     <label class="col-xs-1 control-label pull-right">问题内容</label>
                     <div class="col-xs-2 pull-right">
                         <div class="input-group">
-                            <input id="productTypesearch" class="form-control" type="search" value="" placeholder="请输入品类"/>
+                            <input id="productTypesearch" class="form-control" type="search" value="1" placeholder="请输入品类"/>
                             <span class="input-group-btn">
-                                        <button data-toggle="modal" data-target="#Search" class="btn btn-xs btn-default" type="button">
+                                        <button data-toggle="modal" data-target="#tSearch" class="btn btn-xs btn-default" id="search" type="button">
                                             <span class="glyphicon glyphicon-search"></span>
                                         </button>
                                     </span>
@@ -55,7 +55,8 @@
                     <th class="col-xs-3 text-center">问题内容</th>
                     <th class="col-xs-1 text-center">产品</th>
                     <th class="col-xs-5 text-center">解决方案</th>
-                    <th class="col-xs-2 text-center">备注</th>
+                    <th class="col-xs-1 text-center">备注</th>
+                    <th class="col-xs-1 text-center">操作</th>
                 </tr>
                 </thead>
                 <tbody id="list"></tbody>
@@ -90,7 +91,7 @@
                             <div class="input-group">
                                 <input id="productType" class="form-control" type="search" value="" placeholder="请输入品类"/>
                                 <span class="input-group-btn">
-                                <button data-toggle="modal" class="btn btn-xs btn-default" data-target="#tSearch" type="button">
+                                <button data-toggle="modal" class="btn btn-xs btn-default" data-target="#tSearch" id="searchmodal" type="button">
                                     <span class="glyphicon glyphicon-search"></span>
                                 </button>
                                 </span>
@@ -127,64 +128,6 @@
         </div>
     </div>
 </div>
-<!--编辑详情常见问题模态框 -->
-<div class="modal fade" id="infomodal" tabindex="-1"  aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
-            </div>
-            <div class="modal-body ">
-                <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label class="col-xs-2 control-label">问题内容<sup class="not-null">*</sup></label>
-                        <div class="col-xs-9">
-                            <textarea class="form-control notnull" rows="3" id="infoproblemContent"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-xs-2 control-label">产品名称<sup class="not-null">*</sup></label>
-                        <div class="col-xs-4">
-                            <select class="form-control" id="infoproductType">
-                                <option value="草甘膦" selected>草甘膦</option>
-                                <option value="草甘膦原药">草甘膦原药</option>
-                                <option value="草甘膦水剂">草甘膦水剂</option>
-                                <option value="草甘膦颗粒剂">草甘膦颗粒剂</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-xs-2 control-label">解决方案<sup class="not-null">*</sup></label>
-                        <div class="col-xs-9">
-                            <textarea class="form-control notnull" rows="7" id="infosolution"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-xs-2 control-label">备注<sup class="not-null">*</sup></label>
-                        <div class="col-xs-9">
-                            <textarea class="form-control notnull" rows="4" id="inforemarks"></textarea>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <div class="row">
-                    <div class="col-xs-3 col-xs-offset-3">
-                        <a type="button" class="btn btn-primary btn-block" id="info_save">
-                            保存
-                        </a>
-                    </div>
-                    <div class="col-xs-3">
-                        <button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!--树形菜单modal-->
 <div class="modal fade" id="tSearch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -203,35 +146,35 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="Search" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content" style="width:400px;">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
-            </div>
-            <div class="modal-body well" style="max-height: 300px; overflow-y: scroll; overflow-x: scroll;">
-                <div id="stree" class="tree">
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript">
+    var inputname;
+
     //渲染树
     $('#tree').creatTree(basePath+'/productCategory/CategoryTreeThree');
-    $('#stree').creatTree(basePath+'/productCategory/CategoryTreeThree');
+    //search操作
+    $('#search').click(function(){
+        inputname = $(this).parent('span').parent('div').find('input[id="productTypesearch"]');
+
+    })
+    $('#searchmodal').click(function(){
+        var smodal = $(this).parent('span').parent('div').find('input[id="productType"]');
+        inputname = smodal;
+    })
     //树节点操作
-    $(document).on('click','#Search.cNode',function(e){
+    $(document).on('click','.cNode',function(e){
         e.preventDefault();
         console.log(e.target);
-        var tarEltext = $(e.target).text();
-        $('#productType').val(tarEltext);
-        $('#Search').modal('hide');
+        var tirEltext = $(e.target).text();
+        var id = $(e.target).parent('li').attr('id').split('_')[1];
+        var secEltext = $(e.target).parent('li').parent('ul').parent('li').find('a:first').text();
+        var firEltext = $(e.target).parent('li').parent('ul').parent('li').parent('ul').parent('li').find('a:first').text();
+        var tarEltext = firEltext + '-' + secEltext + '-' + tirEltext;
+
+        inputname.val(tarEltext);
+        inputname.attr('data-id',id);
+        $('#tSearch').modal('hide');
     })
 
     var pagesize = 10; // 分页步长
@@ -332,6 +275,7 @@
                 _html += '<td>' + ResultData[i].productType + '</td>';
                 _html += '<td lang="zh">' + ResultData[i].solution + '</td>';
                 _html += '<td lang="zh">' + ifEmpty(ResultData[i].remarks) + '</td>';
+                _html += '<td lang="zh"><a class="delete" data-id="'+ResultData[i].problemId+'">删除</a></td>';
                 _html += '</tr>';
             }
         }
@@ -364,6 +308,7 @@
     //新增模态
     $(document).on('click','#add',function(){
         $('#problemContent').val('');
+        $('#problemContent').attr('data-id','');
         $('#productType').val('');
         $('#solution').val('');
         $('#remarks').val('');
@@ -410,14 +355,46 @@
         }
     })
 
+    //删除操作
+    $(document).on('click','.delete',function(){
+        var url = basePath + '/productProblem/delete';
+        var id = $(this).attr('data-id');
+
+        var msg = '确认删除该产品常见问题？';
+        if(confirm(msg)){
+            jQuery.ajax({
+                url:url,
+                data:id,
+                success:function (result) {
+                    if(result.code == 1){
+                        alert('删除成功！');
+                    }else{
+                        alert('删除失败');
+                    }
+                }
+            });
+        }
+    })
+
     function adddata() {
         var data = {
             'problemContent':$('#problemContent').val(),
-            'id':$('#problemId').val(),
             'productType':$('#productType').val(),
             'solution':$('#solution').val(),
             'remarks':$('#remarks').val(),
-            'productId':$('#productId').val()
+            'productId':$('#productType').attr('data-id')
+        }
+
+        return JSON.stringify(data);
+    }
+    function infodata() {
+        var data = {
+            'problemContent':$('#problemContent').val(),
+            'id':$('#problemContent').attr('data-id'),
+            'productType':$('#productType').val(),
+            'solution':$('#solution').val(),
+            'remarks':$('#remarks').val(),
+            'productId':$('#productType').attr('data-id')
         }
 
         return JSON.stringify(data);
