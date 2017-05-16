@@ -89,7 +89,7 @@
                         <label class="col-xs-2 control-label">品类<sup class="not-null">*</sup></label>
                         <div class="col-xs-9">
                             <div class="input-group">
-                                <input id="productType" class="form-control" type="search" value="" placeholder="请输入品类"/>
+                                <input id="productType" class="form-control notnull" type="search" value="" placeholder="请输入品类"/>
                                 <span class="input-group-btn">
                                 <button data-toggle="modal" class="btn btn-xs btn-default" data-target="#tSearch" id="searchmodal" type="button">
                                     <span class="glyphicon glyphicon-search"></span>
@@ -105,9 +105,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-xs-2 control-label">备注<sup class="not-null">*</sup></label>
+                        <label class="col-xs-2 control-label">备注</label>
                         <div class="col-xs-9">
-                            <textarea class="form-control notnull" rows="4" id="remarks"></textarea>
+                            <textarea class="form-control" rows="4" id="remarks"></textarea>
                         </div>
                     </div>
                 </form>
@@ -284,6 +284,12 @@
 
     //详情模态
     $(document).on('click','.info',function(){
+        $('#problemContent').val('');
+        $('#problemContent').attr('data-id','');
+        $('#productType').val('');
+        $('#solution').val('');
+        $('#remarks').val('');
+
         var id = $(this).attr('data-id');
 
         $('#finish').attr('data-edit','1');
@@ -320,39 +326,48 @@
     //完成操作
     $('#finish').click(function(){
         var edit = $(this).attr('data-edit');
-
-        if(edit == 0){
-            var data = adddata();
-
-            jQuery.ajax({
-                url:basePath + '/productProblem/doAddProductProblem',
-                data:data,
-                type:'POST',
-                success:function(result){
-                    if(result.code == 1){
-                        alert('新增成功！');
-                    }else{
-                        alert('新增失败！');
+        var isup = true;
+        var notnull = $('.notnull');
+        notnull.each(function () {
+            var val = $(this).val();
+            if(val == ''||val == null){
+                alert('请完善表单!');
+                isup = false;
+                return false;
+            }
+        });
+        if(isup){
+            if(edit == 0){
+                jQuery.ajax({
+                    url:basePath + '/productProblem/doAddProductProblem',
+                    data:adddata(),
+                    type:'POST',
+                    success:function(result){
+                        if(result.code == 1){
+                            alert('新增成功！');
+                        }else{
+                            alert('新增失败！');
+                        }
                     }
-                }
-            })
-        }
-        else if(edit == 1){
-            var data = infodata();
-
-            jQuery.ajax({
-                url:basePath + '/productProblem/doModify',
-                data:data,
-                type:'POST',
-                success:function(result){
-                    if(result.code == 1){
-                        alert('修改成功！');
-                    }else{
-                        alert('修改失败！');
+                })
+            }
+            else if(edit == 1){
+                jQuery.ajax({
+                    url:basePath + '/productProblem/doModify',
+                    data:infodata(),
+                    type:'POST',
+                    success:function(result){
+                        if(result.code == 1){
+                            alert('修改成功！');
+                        }else{
+                            alert('修改失败！');
+                        }
                     }
-                }
-            })
+                })
+            }
         }
+
+
     })
 
     //删除操作
