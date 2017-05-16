@@ -122,7 +122,7 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input data-control="on" id="advisePrice" class="form-control isdisabled" value="0" disabled>
+                                                <input data-control="on" id="advisePrice" class="form-control notnull isdisabled" value="0" disabled>
                                                 <span class="input-group-addon">元</span>
                                             </div>
                                         </td>
@@ -134,7 +134,7 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input data-control="on" id="purchasePrice" class="form-control isdisabled" value="0" disabled>
+                                                <input data-control="on" id="purchasePrice" class="form-control notnull isdisabled" value="0" disabled>
                                                 <span class="input-group-addon">元</span>
                                             </div>
                                         </td>
@@ -218,7 +218,7 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input data-control="on" id="taxFree" class="form-control isdisabled" value="" disabled>
+                                                <input data-control="on" id="taxFree" class="form-control notnull isdisabled" value="" disabled>
                                                 <span class="input-group-addon">%</span>
                                             </div>
                                         </td>
@@ -879,6 +879,9 @@
 
         if($(this).val() == '09'){
             $('.hidecang').hide();
+            $('#advisePrice').val('0');
+            $('#taxFree').val('0');
+            $('#purchasePrice').val('0');
         }else{
             $('.hidecang').show();
         }
