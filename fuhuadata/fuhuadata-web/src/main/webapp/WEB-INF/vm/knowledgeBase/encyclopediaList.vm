@@ -70,7 +70,7 @@
                         </thead>
                         <tbody id="list"></tbody>
                     </table>
-                    <div id="pagination" class="pagination"></div>
+                    <div id="pagination" class="pagination"></div>  <div id="pagination" class="pagination"></div>
                     <!--表格结束-->
                 </div>
             </div>
