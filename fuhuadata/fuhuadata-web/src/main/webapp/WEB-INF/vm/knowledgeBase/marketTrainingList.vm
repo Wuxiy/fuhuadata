@@ -332,8 +332,8 @@
     //上传
     $('#submitfile').click(function(){
         var fd = new FormData();
-        fd.append("upload", 1);
-        fd.append("upfile", $("#inputfile").get(0).files[0]);
+        fd.append("name", $("#inputfile").val());
+        fd.append("upfile", $("#inputfile")[0].files[0]);
         fd.append("classifyPath","marketTrain");
 
         console.log(fd);
