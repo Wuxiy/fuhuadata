@@ -11,7 +11,7 @@
         <div class="panel-heading">
             #if ($shiro.hasPermission("wiki:ques:add"))
                 <button class="btn btn-xs btn-primary panel-heading-btn pull-right" data-toggle="modal"
-                        data-target="#addmodal" data-backdrop="static" data-keyboard="true" id="add">
+                        data-target="#modal" data-backdrop="static" data-keyboard="true" id="add">
                     <span class="glyphicon glyphicon-plus"></span>
                     新增
                 </button>
@@ -35,12 +35,12 @@
                     <label class="col-xs-1 control-label pull-right">问题内容</label>
                     <div class="col-xs-2 pull-right">
                         <div class="input-group">
-                            <input id="productTypesearch" class="form-control" type="search" value="1" placeholder="请输入品类"/>
+                            <input id="productTypesearch" class="form-control" type="search" value="" placeholder="请输入品类"/>
                             <span class="input-group-btn">
-                                        <button data-toggle="modal" data-target="#tSearch" class="btn btn-xs btn-default" id="search" type="button">
-                                            <span class="glyphicon glyphicon-search"></span>
-                                        </button>
-                                    </span>
+                                <button data-toggle="modal" data-target="#tSearch" class="btn btn-xs btn-default" id="research" type="button">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
                         </div>
                     </div>
                     <label class="col-xs-1 control-label pull-right">品类</label>
@@ -61,7 +61,8 @@
                 </thead>
                 <tbody id="list"></tbody>
             </table>
-
+            <div id="pagination" class="pagination"></div>
+            <!--表格结束-->
         </div>
     </div>
         </div>
@@ -91,7 +92,7 @@
                             <div class="input-group">
                                 <input id="productType" class="form-control notnull" type="search" value="" placeholder="请输入品类"/>
                                 <span class="input-group-btn">
-                                <button data-toggle="modal" class="btn btn-xs btn-default" data-target="#tSearch" id="searchmodal" type="button">
+                                <button data-toggle="modal" class="btn btn-xs btn-default" data-target="#tSearch" id="researchmodal" type="button">
                                     <span class="glyphicon glyphicon-search"></span>
                                 </button>
                                 </span>
@@ -147,18 +148,18 @@
     </div>
 </div>
 
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
+<script type="text/javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript">
     var inputname;
 
     //渲染树
     $('#tree').creatTree(basePath+'/productCategory/CategoryTreeThree');
     //search操作
-    $('#search').click(function(){
+    $('#research').click(function(){
         inputname = $(this).parent('span').parent('div').find('input[id="productTypesearch"]');
 
     })
-    $('#searchmodal').click(function(){
+    $('#researchmodal').click(function(){
         var smodal = $(this).parent('span').parent('div').find('input[id="productType"]');
         inputname = smodal;
     })
@@ -217,7 +218,7 @@
     function getListCount(data,callback){
         var total = 0;
         jQuery.ajax({
-            url:basePath + '/customerProductPacking/countCustomerProductPackingByPage',
+            url:basePath + '/productProblem/count',
             dataType:'JSON',
             contentType:'application/json',
             data:JSON.stringify(data),
@@ -275,7 +276,7 @@
                 _html += '<td>' + ResultData[i].productType + '</td>';
                 _html += '<td lang="zh">' + ResultData[i].solution + '</td>';
                 _html += '<td lang="zh">' + ifEmpty(ResultData[i].remarks) + '</td>';
-                _html += '<td lang="zh"><a class="delete" data-id="'+ResultData[i].problemId+'">删除</a></td>';
+                _html += '<td><a class="delete" data-id="'+ResultData[i].problemId+'">删除</a></td>';
                 _html += '</tr>';
             }
         }
@@ -342,9 +343,12 @@
                     url:basePath + '/productProblem/doAddProductProblem',
                     data:adddata(),
                     type:'POST',
+                    dataType:"json",
+                    contentType:"application/json",
                     success:function(result){
                         if(result.code == 1){
                             alert('新增成功！');
+                            search();
                         }else{
                             alert('新增失败！');
                         }
@@ -356,9 +360,12 @@
                     url:basePath + '/productProblem/doModify',
                     data:infodata(),
                     type:'POST',
+                    dataType:"json",
+                    contentType:"application/json",
                     success:function(result){
                         if(result.code == 1){
                             alert('修改成功！');
+                            search();
                         }else{
                             alert('修改失败！');
                         }
@@ -372,17 +379,17 @@
 
     //删除操作
     $(document).on('click','.delete',function(){
-        var url = basePath + '/productProblem/delete';
         var id = $(this).attr('data-id');
-
+        var url = basePath + '/productProblem/delete?id='+id;
         var msg = '确认删除该产品常见问题？';
         if(confirm(msg)){
             jQuery.ajax({
+                type:'POST',
                 url:url,
-                data:id,
                 success:function (result) {
                     if(result.code == 1){
                         alert('删除成功！');
+                        search();
                     }else{
                         alert('删除失败');
                     }
@@ -405,7 +412,7 @@
     function infodata() {
         var data = {
             'problemContent':$('#problemContent').val(),
-            'id':$('#problemContent').attr('data-id'),
+            'problemId':$('#problemContent').attr('data-id'),
             'productType':$('#productType').val(),
             'solution':$('#solution').val(),
             'remarks':$('#remarks').val(),

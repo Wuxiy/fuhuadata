@@ -49,24 +49,43 @@
 
     <sql id="QUERY-COMMON">
         <dynamic prepend=" WHERE ">
-            <isNotNull prepend=" AND " property="exhibitionName">
-                exhibition_name like concat('%',#exhibitionName#,'%')
+            <isNotNull prepend=" OR " property="searchKey">
+                exhibition_name like concat('%',#searchKey#,'%')
             </isNotNull>
-            <isNotNull prepend=" AND " property="country">
-                country = #country#
+            <isNotNull prepend=" OR " property="searchKey">
+                sponsor like concat('%',#searchKey#,'%')
             </isNotNull>
-            <isNotNull prepend=" AND " property="city">
-                city = #city#
+            <isNotNull prepend=" OR " property="searchKey">
+                organizer like concat('%',#searchKey#,'%')
             </isNotNull>
-            <isNotNull prepend=" AND " property="startDate">
-                start_date = #startDate#
+            <isNotNull prepend=" OR " property="searchKey">
+                country like concat('%',#searchKey#,'%')
             </isNotNull>
-            <isNotNull prepend=" AND " property="finishDate">
-                finish_date = #finishDate#
+            <isNotNull prepend=" OR " property="searchKey">
+                city like concat('%',#searchKey#,'%')
             </isNotNull>
-            <isNotNull prepend=" AND " property="searchKey">
-                name like concat('%',#searchKey#,'%')
+            <isNotNull prepend=" OR " property="searchKey">
+                start_date like concat('%',#searchKey#,'%')
             </isNotNull>
+            <isNotNull prepend=" OR " property="searchKey">
+                finish_date like concat('%',#searchKey#,'%')
+            </isNotNull>
+            <isNotNull prepend=" OR " property="searchKey">
+                finish_date like concat('%',#searchKey#,'%')
+            </isNotNull>
+            <isNotNull prepend=" OR " property="searchKey">
+                exhibition_addr like concat('%',#searchKey#,'%')
+            </isNotNull>
+            <isNotNull prepend=" OR " property="searchKey">
+                exhibition_info like concat('%',#searchKey#,'%')
+            </isNotNull>
+            <isNotNull prepend=" OR " property="searchKey">
+                creator like concat('%',#searchKey#,'%')
+            </isNotNull>
+            <isNotNull prepend=" OR " property="searchKey">
+                create_time like concat('%',#searchKey#,'%')
+            </isNotNull>
+
         </dynamic>
     </sql>
 
@@ -176,6 +195,8 @@
         ]]>
         <isParameterPresent>
             <include refid="QUERY-COMMON"/>
+            order by kei.modify_time desc
+            LIMIT #startRow#,#pageSize#
         </isParameterPresent>
     </select>
 
@@ -225,7 +246,7 @@
         SELECT COUNT(*) FROM k_exhibition_info
         ]]>
         <isParameterPresent>
-            <include refid="PAGE-COMMON"/>
+            <include refid="QUERY-COMMON"/>
         </isParameterPresent>
     </select>
 </sqlMap>
