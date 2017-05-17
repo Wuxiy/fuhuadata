@@ -58,9 +58,9 @@
                         </tr>
                         </thead>
                         <tbody id="list">
-
                         </tbody>
                     </table>
+                    <div id="pagination" class="pagination"></div>
                     <!--表格结束-->
                     <!--分页导航开始-->
                 </div>
@@ -135,8 +135,7 @@
             }, function (result) {
                 if (result.code == 1) {
                     alert("删除成功！");
-                    datatale.row(jtr).remove();
-                    datatale.ajax.reload(null, false);
+                    location.reload();
                 } else {
                     alert("删除失败！");
                 }
@@ -175,7 +174,7 @@
     // 收集提交参数
     function collectArgs() {
         var obj={
-            exhibitionName:$('#sexhibitionName').val()
+            searchKey:$('#sexhibitionName').val()
         }
         return obj;
     }
@@ -214,7 +213,7 @@
             dataType:'json',
             contentType:'application/json',
             data:JSON.stringify({
-                exhibitionName:$('#sexhibitionName').val(),
+                searchKey:$('#sexhibitionName').val(),
                 startRow:pageNum*pageSize,
                 pageSize:pageSize
             }),
@@ -235,7 +234,7 @@
             for (var i = 0; i < ResultData.length; i++) {
                 _html += '<tr>';
                 _html += '<td>' + (++count) + '</td>';
-                _html += '<td>' + ifEmpty(ResultData[i].exhibitionName) + '</td>';
+                _html += '<td><a href=' + basePath + '"/exhibitionInfo/modifyExhibitionInfo?id=' + ResultData[i].exhibitionId + '">' + ifEmpty(ResultData[i].exhibitionName) + '</td>';
                 _html += '<td>' + ifEmpty(ResultData[i].sponsor) + '</td>';
                 _html += '<td>' + ifEmpty(ResultData[i].organizer) + '</td>';
                 _html += '<td>' + ifEmpty(ResultData[i].country) + '</td>';
@@ -253,6 +252,10 @@
             $("#list").html(_html);
 
         }
+    }
+
+    function ifEmpty(data) {
+        return data==undefined?'':data;
     }
 
 </script>

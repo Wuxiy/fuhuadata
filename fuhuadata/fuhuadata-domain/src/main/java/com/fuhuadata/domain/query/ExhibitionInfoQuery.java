@@ -1,16 +1,17 @@
 package com.fuhuadata.domain.query;
 
 
-import java.util.Date;
-
 /**
  * 展会动态信息
  * Created by intanswer on 2017/1/13.
  */
-public class ExhibitionInfoQuery extends PageBase {
+public class ExhibitionInfoQuery{
+
+    private int startRow;
+    private int pageSize;
     private Integer exhibitionId;//展会id
 
-    private String exhibitionName;
+    private String exhibitionName;//展会名称
 
     private String sponsor;//主办方
 
@@ -18,21 +19,6 @@ public class ExhibitionInfoQuery extends PageBase {
 
     private String region;//所属区域
 
-    private String country;
-
-    private String city;
-
-    private Date startDate;
-
-    private Date finishDate;
-
-    private String exhibitionAddr;
-
-    private String exhibitionLink;
-
-    private String creator;
-
-    private Date createTime;
 
     private String exhibitionInfo;//展会介绍
 
@@ -78,69 +64,6 @@ public class ExhibitionInfoQuery extends PageBase {
         this.region = region;
     }
 
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getFinishDate() {
-        return finishDate;
-    }
-
-    public void setFinishDate(Date finishDate) {
-        this.finishDate = finishDate;
-    }
-
-    public String getExhibitionAddr() {
-        return exhibitionAddr;
-    }
-
-    public void setExhibitionAddr(String exhibitionAddr) {
-        this.exhibitionAddr = exhibitionAddr;
-    }
-
-    public String getExhibitionLink() {
-        return exhibitionLink;
-    }
-
-    public void setExhibitionLink(String exhibitionLink) {
-        this.exhibitionLink = exhibitionLink;
-    }
-
-    public String getCreator() {
-        return creator;
-    }
-
-    public void setCreator(String creator) {
-        this.creator = creator;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
 
     public String getExhibitionInfo() {
         return exhibitionInfo;
@@ -156,5 +79,21 @@ public class ExhibitionInfoQuery extends PageBase {
 
     public void setSearchKey(String searchKey) {
         this.searchKey = searchKey;
+    }
+
+    public int getStartRow() {
+        return startRow;
+    }
+
+    public void setStartRow(int startRow) {
+        this.startRow = startRow;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 }
