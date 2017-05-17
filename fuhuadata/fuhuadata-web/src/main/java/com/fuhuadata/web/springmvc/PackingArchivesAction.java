@@ -196,7 +196,6 @@ public class PackingArchivesAction {
         }
         Result result = new Result();
         int mainPackingId=0;
-        List<PackingRelation> list = new ArrayList<PackingRelation>();
         if(packingRelations!=null&&packingRelations.size()>0) {
             for (PackingRelation packingRelation : packingRelations) {
                 //互斥字段，默认为IsEqualOuter=1
@@ -206,7 +205,7 @@ public class PackingArchivesAction {
             }
         }
         try{
-            result = packingArchivesService.batchAddRelationPacking(mainPackingId,list);
+            result = packingArchivesService.batchAddRelationPacking(mainPackingId,packingRelations);
             result.setMessage("新增关联成功");
         }catch (Exception e){
             result.setSuccess(false);
