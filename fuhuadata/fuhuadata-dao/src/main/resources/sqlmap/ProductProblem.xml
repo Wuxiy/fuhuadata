@@ -33,18 +33,18 @@
 
     <sql id="QUERY-COMMON">
         <dynamic prepend=" WHERE ">
-            <isNotNull prepend=" AND " property="createUserId">
+            <isNotEmpty prepend=" AND " property="createUserId">
                 create_user_id = #createUserId#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="createUserName">
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="createUserName">
                 create_user_name =#createUserName#
-            </isNotNull>
-            <isNotNull prepend=" AND " property="problemContent">
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="problemContent">
                 problem_content like concat('%',#problemContent#,'%')
-            </isNotNull>
-            <isNotNull prepend=" AND " property="productId">
-                product_id=#productId#
-            </isNotNull>
+            </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="productType">
+                product_type like concat('%',#productType#,'%')
+            </isNotEmpty>
         </dynamic>
     </sql>
 
@@ -72,7 +72,7 @@
             <isNotNull prepend=", " property="remarks">remarks = #remarks#</isNotNull>
             <isNotNull prepend=", " property="lastmodifyUserId">lastmodify_user_id=#lastmodifyUserId#</isNotNull>
             <isNotNull prepend=", " property="lastmodifyUserName">lastmodify_user_name=#lastmodifyUserName#</isNotNull>
-            <isNotNull prepend=", " property="modify_time">modify_time=now()</isNotNull>
+            <isNotNull prepend=", " property="modifyTime">modify_time=now()</isNotNull>
         </dynamic>
         WHERE problem_id = #problemId#
     </update>
