@@ -348,7 +348,7 @@
                     success:function(result){
                         if(result.code == 1){
                             alert('新增成功！');
-                            location.reload();
+                            search();
                         }else{
                             alert('新增失败！');
                         }
@@ -365,7 +365,7 @@
                     success:function(result){
                         if(result.code == 1){
                             alert('修改成功！');
-                            location.reload();
+                            search();
                         }else{
                             alert('修改失败！');
                         }
@@ -389,7 +389,7 @@
                 success:function (result) {
                     if(result.code == 1){
                         alert('删除成功！');
-                        location.reload();
+                        search();
                     }else{
                         alert('删除失败');
                     }
