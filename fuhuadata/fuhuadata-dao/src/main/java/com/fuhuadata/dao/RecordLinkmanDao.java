@@ -35,7 +35,13 @@ public interface RecordLinkmanDao {
      * @return
      */
     public int deleteRecordLinkmanById(int id);
-    
+
+	/**
+	 *  根据沟通记录id删除所有拜访联系人
+	 * @param visitRecordId
+	 * @return
+	 */
+	public int deleteRecordLinkmanByRecordId(int visitRecordId);
 	 /**
      * 返回数据库所有记录，谨慎使用，最好不用
      * @return

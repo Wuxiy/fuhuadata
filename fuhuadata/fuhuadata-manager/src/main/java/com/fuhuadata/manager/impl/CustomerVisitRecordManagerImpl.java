@@ -1,4 +1,5 @@
 package com.fuhuadata.manager.impl;
+import java.util.Arrays;
 import java.util.List;
 
 import com.fuhuadata.dao.RecordLinkmanDao;
@@ -46,10 +47,13 @@ public class CustomerVisitRecordManagerImpl implements CustomerVisitRecordManage
 	public boolean updateCustomerVisitRecord(CustomerVisitRecordVO customerVisitRecordVO) {
     	RecordLinkman[] recordLinkmans  = customerVisitRecordVO.getRecordLinkmen();
     	CustomerVisitRecord customerVisitRecord = customerVisitRecordVO.getCustomerVisitRecord();
-    	if(recordLinkmans!=null&&recordLinkmans.length>0) {
-			for (int i  = 0;i<recordLinkmans.length;i++) {
-				recordLinkmanDao.updateRecordLinkmanById(recordLinkmans[i].getId(),recordLinkmans[i]);
-			}
+		if(recordLinkmans!=null&&recordLinkmans.length>0){
+    	recordLinkmanDao.deleteRecordLinkmanByRecordId(customerVisitRecord.getVisitrecordId());
+    			List<RecordLinkman> list = Arrays.asList(recordLinkmans);
+    			for(RecordLinkman recordLinkman : list){
+    				recordLinkman.setVisitRecordId(customerVisitRecord.getVisitrecordId());
+				}
+			recordLinkmanDao.addRecordLinkmen(list);
 		}
 		return customerVisitRecordDao.updateCustomerVisitRecordById(customerVisitRecord.getVisitrecordId(),customerVisitRecord)==1?true:false;
 	}

@@ -102,7 +102,6 @@
                 #[].lastmodifyUserId#,#[].lastmodifyUserName#,now(),now(), #[].remarks#)
                 ]]>
 		</iterate>
-
 	</update>
 
 	<update id="UPDATE" parameterClass="RecordLinkman">
@@ -124,6 +123,11 @@
 	<delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
 		<![CDATA[
 			DELETE FROM record_linkman WHERE id=#id#
+		]]>
+	</delete>
+	<delete id="DELETE-BY-VISITID" parameterClass="java.lang.Integer">
+		<![CDATA[
+			DELETE FROM record_linkman WHERE visit_record_id = #visitRecordId#
 		]]>
 	</delete>
 	
