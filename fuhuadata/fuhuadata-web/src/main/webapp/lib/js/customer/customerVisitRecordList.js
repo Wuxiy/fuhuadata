@@ -38,10 +38,11 @@ $(document).ready(function(){
 var id = document.URL.split('?')[1];
 var sid = id.split('=')[1];
 
+var url = basePath + '/customerLinkman/getCustomerLinkmanByCustomerId';
+getData(url,'POST',id,modalContact);
+
 $(document).on('click','#add',function () {
-    console.log(id);
-    var url = basePath + '/customerLinkman/getCustomerLinkmanByCustomerId';
-    getData(url,'POST',id,modalContact);
+    $('#addField').modal('show');
 });
 
 //list
@@ -58,8 +59,9 @@ function visitList(result) {
                 '<td>' + (ResultData[i].activityAddress!=undefined?ResultData[i].activityAddress:'') + '</td>' +
                 '<td>' + (ResultData[i].activityExpens!=undefined?ResultData[i].activityExpens:'') + '</td>' +
                 '<td>' + (ResultData[i].name!=undefined?ResultData[i].name:'') + '</td>' +
-                '<td>' + (ResultData[i].activityGift!=undefined?ResultData[i].activityGift:'') + '</td>' +
+                /*'<td>' + (ResultData[i].activityGift!=undefined?ResultData[i].activityGift:'') + '</td>' +*/
                 '<td>' + (ResultData[i].activitySummary!=undefined?ResultData[i].activitySummary:'') + '</td>' +
+                '<td><a href="#" name="editItem" data-id="' + ResultData[i].visitRecordId + '">查看</a></td>' +
                 '</tr>';
         }
     }
@@ -91,18 +93,19 @@ function replace(arr1,arr2){
 
 //modal list
 function modalContact(result) {
-    var modalContactList = document.getElementById('modalContactList');
+    var modalContactList = $('[name="modalContactList"]');
     var ResultData = result;
+    var _html = '';
     modalContactList.innerHTML = '';
     for(var i=0;i<ResultData.length;i++){
-        modalContactList.innerHTML += '<tr>'+
-                                        '<td><input type="checkbox" name="cellcheckbox"></td>'+
-                                        '<td name="Lname" data-name="'+ ResultData[i].linkmanId +'">'+ ResultData[i].name+'</td>'+
-                                        '<td><input class="form-control" type="text" name="gift" disabled></td>'+
-                                        '<td><input class="form-control" type="text" name="remarks" disabled></td>'+
-                                        '</tr>';
+        _html += '<tr>';
+        _html += '<td><input type="checkbox" name="cellcheckbox" value="'+ ResultData[i].linkmanId +'"></td>';
+        _html += '<td name="Lname" data-name="'+ ResultData[i].linkmanId +'">'+ ResultData[i].name+'</td>';
+        _html += '<td><input class="form-control" type="text" name="gift" disabled></td>';
+        _html += '<td><input class="form-control" type="text" name="remarks" disabled></td>';
+        _html += '</tr>';
     }
-    $('#addField').modal('show');
+    modalContactList.html(_html);
 }
 
 //add function
@@ -138,9 +141,9 @@ function recordLinkman() {
     return arr;
 }
 
-$('#checkAll').on('click',function(){
-    var checkAll = $('#checkAll'),
-        allCheckbox = $("input[name='cellcheckbox']");
+$('[name="checkAll"]').on('click',function(){
+    var checkAll = $(this),
+        allCheckbox = $("input[name='cellcheckbox']",checkAll.closest('table'));
 
     //监听全选框变化
     checkAll.change(function(){
@@ -156,7 +159,7 @@ $('#checkAll').on('click',function(){
             });
         }
     });
-})
+});
 
 $(document).on('change','input[name="cellcheckbox"]',function(){
     if($(this).prop('checked')){
@@ -173,3 +176,95 @@ $(document).on('click','#activityType',function(){
         $('#activityRemarks').attr('disabled',true).addClass('hidden');
     }
 });
+
+// 更新
+$(document).on('click', '#editVisit', function () {
+    $.ajax({
+        url:basePath + '/customerVisitRecord/doModify',
+        data:editVisit($('#editForm')),
+        type:'POST',
+        contentType:'application/json'
+    }).done(function (res) {
+        if(res.code===1){
+            alert('更新成功！');
+        }else {
+            alert('更新失败，请重试！');
+        }
+    });
+});
+
+// 查看详情
+$(document).on('click', '[name="editItem"]', function (e) {
+    e.preventDefault();
+    $('#editField').modal('show');
+    $.ajax({
+        url:basePath + 'getCustomerVisitRecordById',
+        method:'GET',
+        data:{
+            visirecordId:$(this).data('id')
+        }
+    }).done(function (res) {
+        var linkman = res.data.recordLinkmanList,
+            visit = res.data.customerVisitRecord;
+        renderVisitRecord(visit, $('#editForm'));
+        renderLinkman(linkman, $('[name="modalContactList"]',$('#editForm')).find('tr'));
+    })
+});
+
+function renderVisitRecord(data,formObj) {
+    if(data.visitrecordId)$('[name="visitrecordId"]',formObj).val(data.visitrecordId);
+    if(data.startTime)$('[name="startTime"]',formObj).val(data.startTime);
+    if(data.endTime)$('[name="endTime"]',formObj).val(data.endTime);
+    if(data.activityAddress)$('[name="activityAddress"]',formObj).val(data.activityAddress);
+    if(data.activityExpense)$('[name="activityExpense"]',formObj).val(data.activityExpense);
+    if(data.activityType!==undefined)$('[name="activityType"]',formObj).val([data.activityType]);
+    if(data.activitySummary)$('[name="activitySummary"]',formObj).val(data.activitySummary);
+}
+
+function renderLinkman(data,trObj) {
+    trObj.each(function (i, item) {
+        var el = $(this);
+        $.each(data, function(i, item){
+            if(el.find('[name="cellcheckbox"]').val() === item.linkmanId){
+                el.find('[name="cellcheckbox"]').val([item.linkmanId]).data('id', item.id);
+                el.find('[name="gift"]').val(item.activityGift);
+                el.find('[name="remarks"]').val(item.remarks);
+            }else {
+                return true;
+            }
+        })
+    });
+}
+
+function editVisit(formObj) {
+    var data = {
+        "customerVisitRecord":{
+            "customerId":$('#customerId').val(),
+            "visitrecordId":$('[name="visitrecordId"]',formObj).val(),
+            "startTime":$('[name="startTime"]',formObj).val(),
+            "endTime":$('[name="endTime"]',formObj).val(),
+            "activityAddress":$('[name="activityAddress"]',formObj).val(),
+            "activityExpense":$('[name="activityExpense"]',formObj).val(),
+            "activityType":$('[name="activityType"]',formObj).val(),
+            "activityRemarks":$('[name="activityRemarks"]',formObj).val(),
+            "activitySummary":$('[name="activitySummary"]',formObj).val()
+        },
+        "recordLinkmen":recordLinkman()
+    };
+
+    function recordLinkman() {
+        var arr = [];
+        $("input[name='cellcheckbox']:checked", formObj).each(function(){
+            var obj = {
+                "linkmanId":$(this).parents('tr').find('[name="Lname"]').attr('data-name'),
+                "activityGift":$(this).parents('tr').find('[name="gift"]').val(),
+                "remarks":$(this).parents('tr').find('[name="remarks"]').val(),
+                "id":$(this).parents('tr').find('[name="cellcheckbox"]').data('id')
+            };
+            arr.push(obj);
+        });
+        return arr;
+    }
+    return JSON.stringify(data);
+}
+

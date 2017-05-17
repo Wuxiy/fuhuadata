@@ -102,6 +102,7 @@ public class CustomerVisitRecordServiceImpl implements CustomerVisitRecordServic
 		try {
 			result.setSuccess(customerVisitRecordManager.updateCustomerVisitRecord(customerVisitRecordVO));
 		} catch(Exception e) {
+			log.error("更新客户沟通记录错误",e);
 			result.setSuccess(false);
 		}
 		return result;

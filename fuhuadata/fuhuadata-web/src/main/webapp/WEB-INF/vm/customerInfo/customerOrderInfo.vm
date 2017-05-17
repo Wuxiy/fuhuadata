@@ -18,9 +18,9 @@
                     <div class="panel-body">
                         <div class="list-group">
                             <a href="" class="list-group-item active" lang="zh">订单记录</a>
-                            <a href="" class="list-group-item hidden" lang="zh">调价记录</a>
-                            <a href="" class="list-group-item hidden" lang="zh">延付款记录</a>
-                            <a href="" class="list-group-item hidden" lang="zh">合同取消记录</a>
+                            <a href="" class="list-group-item" lang="zh">调价记录</a>
+                            <a href="" class="list-group-item" lang="zh">延付款记录</a>
+                            <a href="" class="list-group-item" lang="zh">合同取消记录</a>
                         </div>
                     </div>
                 </div>
@@ -49,10 +49,10 @@
                                         <span class="input-group-addon" lang="zh">结束日期</span>
                                         <input id="oEndTime" class="form-control" type="date" value="" />
                                         <div class="input-group-btn">
-                                            <button class="btn btn-xs btn-default" type="reset">重置</button>
+                                            <button class="btn btn-xs btn-default" type="reset" accesskey="r">重置</button>
                                         </div>
                                         <div class="input-group-btn">
-                                            <button id="oSubmit" class="btn btn-xs btn-primary" type="button">搜索</button>
+                                            <button id="oSubmit" class="btn btn-xs btn-primary" type="button" accesskey="s">搜索</button>
                                         </div>
                                     </div>
                                 </div>

@@ -88,6 +88,7 @@ function customerContactsInfo(result) {
                 '<td>'+(customerVisitRecords[i].activityGift!=undefined?customerVisitRecords[i].activityGift:'')+'</td>'+
                 '<td>'+(customerVisitRecords[i].activitySummary!=undefined?customerVisitRecords[i].activitySummary:'')+'</td>'+
                 '<td>'+(customerVisitRecords[i].remarks!=undefined?customerVisitRecords[i].remarks:'')+'</td>'+
+                '<td><a href="" name="">编辑</a></td>'+
                 '</tr>';
         }
     }
