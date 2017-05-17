@@ -81,8 +81,8 @@
                                             </label>
                                         </td>
                                         <td><input data-control="on" id="mainProductAmount" class="form-control notnull isdisabled" type="number" value="" disabled/></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td><label class="control-label" lang="zh">交货时间</label><sup class="not-null">*</sup></td>
+                                        <td><input data-control="on" id="deliveryTime" class="form-control isdisabled notnull" type="date" value="" disabled/></td>
                                     </tr>
 ##                                    <tr>
 ##                                        <td><label class="control-label" lang="zh">单位</label></td>
@@ -138,8 +138,7 @@
                                                 <span class="input-group-addon">元</span>
                                             </div>
                                         </td>
-                                        <td><label class="control-label" lang="zh">交货时间</label><sup class="not-null">*</sup></td>
-                                        <td><input data-control="on" id="deliveryTime" class="form-control isdisabled notnull" type="date" value="" disabled/></td>
+
                                     </tr>
                                     <tr class="hidecang">
                                         <td class="fac">
@@ -484,13 +483,17 @@
                         contentType:"application/json",
                         data:Add(),
                         success:function (result) {
-                            var success = result.data.success;
-                            console.log(result);
-                            if(success == true){
-                                alert('添加成功！');
-                                var editId = 0;
-                                var businessProductId = result.data.businessProductId;
-                                window.location.href = basePath + '/businessProduct/intoProductRequire?businessProductId=' + businessProductId + '&orderId=' + orderId + '&customerId=' + customerId + '&productRequireId=' + productRequireId + '&edit=' + editId;
+                            if(result.code == 1){
+                                var success = result.data.success;
+                                console.log(result);
+                                if(success == true){
+                                    alert('添加成功！');
+                                    var editId = 0;
+                                    var businessProductId = result.data.businessProductId;
+                                    window.location.href = basePath + '/businessProduct/intoProductRequire?businessProductId=' + businessProductId + '&orderId=' + orderId + '&customerId=' + customerId + '&productRequireId=' + productRequireId + '&edit=' + editId;
+                            }else{
+                                    alert('添加失败！');
+                                }
                             }
                         }
                     })
@@ -778,6 +781,7 @@
 
     //add根据产品名称获取产品档案，
     $(document).on('click','a.cNode',function (e) {
+
         e.preventDefault();
         var a = $(e.target);
         var tarEltext = a.text();
@@ -1039,6 +1043,9 @@
 
         if($(this).val() == '09'){
             $('.hidecang').hide();
+            $('#advisePrice').val('0');
+            $('#taxFree').val('0');
+            $('#purchasePrice').val('0');
         }else{
             $('.hidecang').show();
         }

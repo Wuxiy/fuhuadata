@@ -277,67 +277,6 @@
         }
         $("#list").html(_html);
     }
-   /* $(document).ready(function() {
-        var table =$('#customer_customer_packaging_table').DataTable( {
-            "ajax":basePath+'/customerProductPacking/queryCustomerProductPackingList',
-            "pagingType":"full_numbers",
-            "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
-            "columns":[
-                {"data":"customerProductId"},
-                {"data":"customerName"},
-                {"data":"customerProductName"},
-                {"data":"categorySerialNumber"},
-                {"data":"categoryName"},
-                {"data":"productName"},
-                {"data":"brand"},
-                {"data":"specification"},
-                {"data":"model"},
-                {"data":"mainUnit"},
-                {"data":"factoryName"},
-                {"data":"factoryId"}
-            ],
-            "columnDefs":[
-                {
-                    "targets": 2,
-                    "render": function(data,type,row,meta){
-                        return '<a href='+basePath+'"/customerProductPacking/intoCustomerProductInfoDetails?id='+row.customerProductId+'"target="_blank">' + row.customerProductName + '</a>';
-                    }
-                },
-                {
-                    "targets": 11,
-                    "visible": false
-                }, {
-                    targets: '_all',
-                    defaultContent: ''
-                }
-            ],
-            "language": {
-                "url": basePath+'/lib/dataTables/lang/dataTables.lang.zh',
-                "searchPlaceholder": '关键字'
-            }
-        } );
-        $(document).on("click","#button",function(){
-
-           var args1 = $("#product_name").val();
-           var args2 = $("#customer_name").val();
-           var args3 = $("#factory_name").val();
-           var args4 = $("#customer_product_name").val();
-           var arag5 = $("#brand").val();
-            table
-                    .column(1)
-                    .search(args2)
-                    .column(2)
-                    .search(args4)
-                    .column(5)
-                    .search(args1)
-                    .column(6)
-                    .search(arag5)
-                    .column(11)
-                    .search(args3)
-                    .draw(false);
-
-        });
-    } );*/
 
 
 </script>

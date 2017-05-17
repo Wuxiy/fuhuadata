@@ -49,7 +49,7 @@ public class ProductProblemAction {
      * 产品问题列表
      * @return
      */
-    @RequestMapping(value = "/queryProductProblemList",method = RequestMethod.GET)
+  /*  @RequestMapping(value = "/queryProductProblemList",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-productProblem",methods = "list")
     @ResponseBody
     public ResultPojo productProblemList(){
@@ -63,18 +63,18 @@ public class ProductProblemAction {
 
         return result.getResultPojo();
     }
-
+*/
     /**
      * 列表-后端分页
      * @return
      */
-    @RequestMapping(value = "/queryProductProblemByQuery",method = RequestMethod.GET)
+    @RequestMapping(value = "/queryProductProblemList",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-productProblem",methods = "list")
     @ResponseBody
     public ResultPojo productProblemList(@RequestBody ProductProblemQuery query){
         Result<List<ProductProblem>> result = new Result<List<ProductProblem>>();
         try{
-            result=productProblemService.getProductProblemsByPage(query);
+            result=productProblemService.getProductProblemByQuery(query);
         }catch(Exception e){
             result.setSuccess(false);
             log.error("获取产品问题列表问题错误",e);
@@ -86,7 +86,7 @@ public class ProductProblemAction {
      * 列表-列表总数
      * @return
      */
-    @RequestMapping(value = "/count",method = RequestMethod.GET)
+    @RequestMapping(value = "/count",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-productProblem",methods = "count")
     @ResponseBody
     public ResultPojo count(@RequestBody ProductProblemQuery query){
@@ -157,6 +157,25 @@ public class ProductProblemAction {
         }
         return null;
     }
+
+    /**
+     * get by id
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/getById",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-productProblem",methods = "doUpdate")
+    @ResponseBody
+    public ResultPojo getById(int id){
+        try{
+            Result<ProductProblem> result = productProblemService.getProductProblemById(id);
+            return result.getResultPojo();
+        }catch(Exception e){
+            log.error("获取产品问题详情错误",e);
+        }
+        return null;
+    }
+
 
 
 

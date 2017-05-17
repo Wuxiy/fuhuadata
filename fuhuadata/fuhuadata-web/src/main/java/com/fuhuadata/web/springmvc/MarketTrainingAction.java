@@ -90,8 +90,8 @@ public class MarketTrainingAction {
     @ResponseBody
     public ResultPojo doAddMarketTraining(@RequestBody MarketTraining marketTraining){
         try{
-            marketTraining.setUserId(LoginUtils.getLoginId());
-            marketTraining.setUserName(LoginUtils.getLoginName());
+            marketTraining.setCreateUserId(LoginUtils.getLoginId());
+            marketTraining.setCreateUserName(LoginUtils.getLoginName());
             marketTraining.setUploadDate(DateUtil.getDateTimeFormat());
             Result<MarketTraining> result = marketTrainingService.addMarketTraining(marketTraining);
             return result.getResultPojo();
@@ -133,5 +133,24 @@ public class MarketTrainingAction {
         }
         return null;
     }
+
+    /**
+     * get by id
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/getById",method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "getById")
+    @ResponseBody
+    public ResultPojo getById(int id){
+        try{
+            Result<MarketTraining> result = marketTrainingService.getMarketTrainingById(id);
+            return result.getResultPojo();
+        }catch(Exception e){
+            log.error("获取营销培训详情错误",e);
+        }
+        return null;
+    }
+
 
 }
