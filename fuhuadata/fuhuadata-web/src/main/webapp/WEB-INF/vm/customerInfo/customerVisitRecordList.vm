@@ -96,7 +96,7 @@
                                         </select>
                                     </div>
                                     <div class="col-xs-4">
-                                        <input class="form-control hidden" type="text" id="activityRemarks" placeholder="请输入活动类型" disabled/>
+                                        <input class="form-control hidden" type="text" name="activityRemarks" id="activityRemarks" placeholder="请输入活动类型"/>
                                     </div>
                                 </div>
                                 <div class="form-group ">
@@ -144,6 +144,7 @@
     </div>
 </div>
 
+## 查看详情modal
 <div class="modal fade" id="editField" tabindex="-1" data-backdrop="static" aria-hidden="true" data-keyboard="true" >
     <div class="modal-dialog" style="width:800px;">
         <div class="modal-content">
@@ -159,32 +160,32 @@
                             <form class="form-horizontal" id="editForm">
                                 <input name="visitrecordId" type="hidden">
                                 <div class="form-group ">
-                                    <label class="col-xs-2 control-label">开始时间<sup class="not-null">*</sup></label>
+                                    <label class="col-xs-2 control-label">开始时间<sup class="not-null hidden" data-view="editView">*</sup></label>
                                     <div class="col-xs-4">
-                                        <input class="form-control" name="startTime" type="date" />
+                                        <input class="form-control" name="startTime" data-control="on" disabled type="date" />
                                     </div>
                                     <label class="col-xs-2 control-label">结束时间</label>
                                     <div class="col-xs-4">
-                                        <input class="form-control" name="endTime" type="date"/>
+                                        <input class="form-control" name="endTime" data-control="on" disabled type="date"/>
                                     </div>
                                 </div>
                                 <div class="form-group ">
                                     <label class="col-xs-2 control-label">活动地点</label>
                                     <div class="col-xs-4">
-                                        <input class="form-control" name="activityAddress" type="text"/>
+                                        <input class="form-control" name="activityAddress" data-control="on" disabled type="text"/>
                                     </div>
-                                    <label class="col-xs-2 control-label">费用<sup class="not-null">*</sup></label>
+                                    <label class="col-xs-2 control-label">费用<sup class="not-null hidden" data-view="editView">*</sup></label>
                                     <div class="col-xs-4">
                                         <div class="input-group">
-                                            <input class="form-control" name="activityExpense" type="number" min="0"/>
+                                            <input class="form-control" name="activityExpense" data-control="on" disabled type="number" min="0"/>
                                             <span class="input-group-addon">元</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group ">
-                                    <label class="col-xs-2 control-label">活动类型<sup class="not-null">*</sup></label>
+                                    <label class="col-xs-2 control-label">活动类型<sup class="not-null hidden" data-view="editView">*</sup></label>
                                     <div class="col-xs-4">
-                                        <select class="form-control" name="activityType">
+                                        <select class="form-control" name="activityType" data-control="on" disabled>
                                             <option  value="0">远程沟通</option>
                                             <option  value="1">出差拜访</option>
                                             <option  value="2">展会邀请</option>
@@ -194,7 +195,7 @@
                                         </select>
                                     </div>
                                     <div class="col-xs-4">
-                                        <input class="form-control hidden" name="activityRemarks" type="text" placeholder="请输入活动类型" disabled/>
+                                        <input class="form-control hidden" name="activityRemarks" data-control="on" disabled type="text" placeholder="请输入活动类型"/>
                                     </div>
                                 </div>
                                 <div class="form-group ">
@@ -203,7 +204,7 @@
                                         <table class="table table-condensed table-bordered table-striped text-center">
                                             <thead>
                                             <tr>
-                                                <th class="text-center col-xs-2" lang="zh"><input name="checkAll" type="checkbox">是否拜访</th>
+                                                <th class="text-center col-xs-2" lang="zh"><input name="checkAll" data-control="on" disabled type="checkbox">是否拜访</th>
                                                 <th class="text-center col-xs-2" lang="zh">联系人</th>
                                                 <th class="text-center col-xs-4" lang="zh">赠送礼物</th>
                                                 <th class="text-center col-xs-4" lang="zh">备注</th>
@@ -214,9 +215,9 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-xs-2 control-label">活动摘要</label>
+                                    <label class="col-xs-2 control-label">活动摘要<sup class="not-null hidden" data-view="editView">*</sup></label>
                                     <div class="col-xs-10">
-                                        <textarea class="form-control" name="activitySummary" rows="4"></textarea>
+                                        <textarea class="form-control" name="activitySummary" data-control="on" disabled rows="4"></textarea>
                                     </div>
                                 </div>
                             </form>
@@ -226,15 +227,22 @@
             </div>
             <div class="modal-footer">
                 <div class="row">
-                    <div class="col-xs-3 col-xs-offset-3">
-                        <a type="button" class="btn btn-primary btn-block" id="editVisit">
-                            完成
-                        </a>
-                    </div>
-                    <div class="col-xs-3">
-                        <button type="button" class="btn btn-default btn-block" data-dismiss="modal">
-                            取消
-                        </button>
+                    <div class="col-xs-12">
+                        <div class="col-xs-3 col-xs-offset-3">
+                            <button class="btn btn-primary btn-block hidden" id="editVisit" data-btn="save" data-view="editView" type="button">
+                                完成
+                            </button>
+                        </div>
+                        <div class="col-xs-3">
+                            <button class="btn btn-default btn-block hidden" data-btn="cancel" data-view="editView" type="button">
+                                取消
+                            </button>
+                        </div>
+                        <div class="col-xs-3 ">
+                            <button type="button" class="btn btn-primary btn-block" data-btn="edit" data-view="editHide">
+                                编辑
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -245,6 +253,7 @@
 <input id="customerType" type="hidden" value='$!{customerType}'>
 ##<input id="fullName" type="hidden" value='$!{fullName}'>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerVisitRecordList.js"></script>
