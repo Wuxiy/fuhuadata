@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.supplier.ProduceFactoryProductMapper">
+  <resultMap id="BaseResultMap" type="com.fuhuadata.domain.supplier.ProduceFactoryProduct">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INT" property="id" />
+    <result column="factory_id" jdbcType="INTEGER" property="factoryId" />
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="cmaterial_id" jdbcType="VARCHAR" property="cmaterialId" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+</mapper>
