@@ -194,3 +194,9 @@
     #end
     </ul>
 #end
+
+#macro(breadcrumb)
+<ul id="location" class="breadcrumb pull-right">
+    <li><span class="glyphicon glyphicon-map-marker"></span></li>
+</ul>
+#end
