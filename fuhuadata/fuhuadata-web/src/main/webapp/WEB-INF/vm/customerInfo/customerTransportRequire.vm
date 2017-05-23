@@ -39,7 +39,7 @@
                                             <td lang="zh">打托（缠膜）</td>
                                             <td class="text-left">
                                                 <div class="col-xs-12">
-                                                    <label class="checkbox-inline"><input name="tray" type="checkbox" disabled value="1"/>免熏蒸托盘</label>
+                                                    <label class="checkbox-inline"><input name="tray" type="checkbox" disabled value="1"/>免熏蒸木质托盘</label>
                                                     <label class="checkbox-inline"><input name="tray" type="checkbox" disabled value="2"/>熏蒸托盘</label>
                                                     <label class="checkbox-inline"><input name="tray" type="checkbox" disabled value="3"/>塑料托盘</label>
                                                     <label class="checkbox-inline"><input name="tray" type="checkbox" disabled value="4"/>订制托盘</label>
@@ -47,7 +47,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td lang="zh">帖唛</td>
+                                            <td lang="zh">贴唛</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
                                                     <label><input id="postLabel" disabled type="checkbox" value="1"/></label>
