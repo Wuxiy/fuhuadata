@@ -1,10 +1,189 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="clearfix content shadow-out">
+    <!--副导航-->
+    <div class="nav-deputy shadow-out clearfix">
+        #factoryTab('基本信息',1)
+        #breadcrumb()
+    </div>
+    <!--表格容器-->
+    <div class="dashboard-wrapper">
+        <div class="row">
+            <div class="col-xs-12">
+                <!--基本信息-->
+                <div class="panel panel-default view-HD-lg" id="panel">
+                    <div class="panel-heading">
+                        <button class="btn btn-xs btn-primary panel-heading-btn pull-right" id="edit" data-view="editHide" type="button" lang="zh">
+                            编辑
+                        </button>
+                        <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden" data-view="editView">
+                            <button class="btn" id="cancel" type="button" lang="zh">取消</button>
+                            <button class="btn btn-primary" id="save" type="button" lang="zh">保存</button>
+                        </div>
+                        <h3 class="panel-title" lang="zh">基本信息</h3>
+                    </div>
+                    <div class="panel-body clearfix">
+                        <form class="form-horizontal" name="factoryInfo">
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="" lang="zh">企业代码</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="" data-control="off" type="text" readonly/>
+                                </div>
+                                <label class="control-label col-xs-1" for="" lang="zh">企业名称<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="" data-control="off" type="text" readonly/>
+                                </div>
+                                <label class="control-label col-xs-1" for="" lang="zh">企业简称</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="" data-control="off" type="text" readonly/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="" lang="zh">企业曾用名1</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="" data-control="off" type="text" readonly/>
+                                </div>
+                                <label class="control-label col-xs-1" for="" lang="zh">注册资金</label>
+                                <div class="col-xs-2">
+                                    <div class="input-group">
+                                        <span class="input-group-addon" data-val="美元" lang="zh">美元</span>
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" data-control="off" type="button" disabled>
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                #foreach($!info in $!{currtype})
+                                                    <li><a data-val="$!info.name" href="#" lang="zh">$!info.name</a></li>
+                                                #end
+                                            </ul>
+                                        </div>
+                                        <input class="form-control" name="" data-control="off" type="text" readonly/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="" lang="zh">注册地址</label>
+                                <div class="col-xs-8">
+                                    <textarea class="form-control" name="" data-control="off" rows="2" readonly></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="" lang="zh">联系人</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="" data-control="off" type="text" readonly/>
+                                </div>
+                                <label class="control-label col-xs-1" for="" lang="zh">联系电话</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="" data-control="off" type="text" readonly/>
+                                </div>
+                                <label class="control-label col-xs-1" for="" lang="zh">邮箱</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="" data-control="off" type="text" readonly/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="" lang="zh">合作时间</label>
+                                <div class="col-xs-2">
+                                    <div class="input-group">
+                                        <input class="form-control" name="" data-control="off" type="text" readonly/>
+                                        <span class="input-group-addon" lang="zh">
+                                            月
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="" lang="zh">生产许可证</label>
+                                <div class="col-xs-3">
+                                    <div class="input-group">
+                                        <input class="form-control" name="" data-control="off" type="text" readonly/>
+                                        <div class="input-group-btn" lang="zh">
+                                            <button class="btn btn-xs btn-primary" type="button" lang="zh">查看</button>
+                                            <button class="btn btn-xs btn-primary" type="button" lang="zh">修改</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="" lang="zh">生产许可证</label>
+                                <div class="col-xs-3">
+                                    <div class="input-group">
+                                        <input class="form-control" name="" data-control="off" type="text" readonly/>
+                                        <div class="input-group-btn" lang="zh">
+                                            <button class="btn btn-xs btn-primary" type="button" lang="zh">查看</button>
+                                            <button class="btn btn-xs btn-primary" type="button" lang="zh">修改</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="" lang="zh">生产许可证</label>
+                                <div class="col-xs-3">
+                                    <div class="input-group">
+                                        <input class="form-control" name="" data-control="off" type="text" readonly/>
+                                        <div class="input-group-btn" lang="zh">
+                                            <button class="btn btn-xs btn-primary" type="button" lang="zh">查看</button>
+                                            <button class="btn btn-xs btn-primary" type="button" lang="zh">修改</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="" lang="zh">备注</label>
+                                <div class="col-xs-8">
+                                    <textarea class="form-control" name="" data-control="off" rows="4" readonly></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="" lang="zh">综合评分</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="" data-control="off" type="text" readonly/>
+                                </div>
+                                <label class="control-label col-xs-1" lang="zh">工厂管理员</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="" data-control="off" type="text" readonly/>
+                                </div>
+                            </div>
+                            <div class="form-group" data-view="editHide">
+                                <label class="control-label col-xs-1" lang="zh">最后编辑人</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="" data-control="off" type="text" readonly/>
+                                </div>
+                                <label class="control-label col-xs-1" lang="zh">编辑时间</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="" data-control="off" type="text" readonly/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-</body>
-</html>
+## 确认提交modal
+<div class="modal fade" id="upModal" data-backdrop="false" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="width: 370px;margin-top: 168px">
+        <div class="modal-content">
+            <div class="modal-body clearfix">
+                <h4 class="text-info text-center">请确认是否提交表单？</h4>
+                <hr>
+                <div class="col-xs-5 col-xs-offset-1"><button class="btn btn-block btn-primary" id="upForm" data-dismiss="modal" type="button">确定</button></div>
+                <div class="col-xs-5"><button class="btn btn-default btn-block" data-dismiss="modal" type="button">取消</button></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var model = {
+        dataUp:{},
+        data:{},
+        jqxhr:$.ajax,
+        successHandler:function () {
+
+        },
+        failureHandler:function () {
+            
+        }
+    }
+</script>
