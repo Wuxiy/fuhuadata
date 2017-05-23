@@ -17,7 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.net.BindException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -29,9 +31,8 @@ import java.util.Map;
 @RequestMapping(value = "/upload/*")
 public class FileController {
     private static final Log log = LogFactory.getLog(FileController.class);
-    private static final String  upoadURI = "images";
     private static final String  DEFAULT_CLASSIFY = "default";
-    private static final String LINUX_BASE = "/usr/local/tomcat8.0/apache-tomcat-8.0.39/webapps/fuhuadata-web";
+    private static final String LINUX_BASE = "/usr/local/tomcat8.0/apache-tomcat-8.0.39/webapps/FileBase";
     @RequestMapping(value = "into",method = RequestMethod.GET)
     public ModelAndView upload(){
         return new ModelAndView("knowledgeBase/uploadFile");
@@ -50,7 +51,9 @@ public class FileController {
         if(StringUtils.isBlank(classifyPath)){
             classifyPath = DEFAULT_CLASSIFY;
         }
-        String path = base + File.separator + upoadURI + File.separator + classifyPath;
+        //日期文件夹
+        String dateDir = new SimpleDateFormat("yyyyMMdd").format(new Date());
+        String path = base  + File.separator + classifyPath + File.separator + dateDir;
         File tempFile=null;
         try {
                 if (!file.isEmpty()) {
@@ -71,7 +74,7 @@ public class FileController {
             log.error("文件上传错误",e);
         }
         ResultPojo  resultPojo= result.getResultPojo();
-        resultPojo.setData(upoadURI + File.separator + classifyPath+File.separator+tempFile.getName());
+        resultPojo.setData( classifyPath+File.separator+dateDir+File.separator+tempFile.getName());
         return resultPojo;
     }
 
@@ -92,7 +95,9 @@ public class FileController {
         if(StringUtils.isBlank(classifyPath)){
             classifyPath = DEFAULT_CLASSIFY;
         }
-        String path = base + File.separator + upoadURI + File.separator + classifyPath;
+        //日期文件夹
+        String dateDir = new SimpleDateFormat("yyyyMMdd").format(new Date());
+        String path = base  + File.separator + classifyPath + File.separator + dateDir;
             if (files != null) {
                 for (MultipartFile file : files) {
                     String fileName = System.currentTimeMillis()+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
@@ -102,7 +107,7 @@ public class FileController {
                     }
                     System.out.println(tempFile);
                     FileCopyUtils.copy(file.getBytes(),tempFile);
-                    fileURIs.add(upoadURI+File.separator+classifyPath+File.separator+tempFile.getName());
+                    fileURIs.add(classifyPath + File.separator + dateDir+File.separator+tempFile.getName());
                 }
             }
             result.addDefaultModel(fileURIs);

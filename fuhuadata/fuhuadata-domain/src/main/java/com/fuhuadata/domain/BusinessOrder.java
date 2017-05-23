@@ -96,7 +96,24 @@ public class BusinessOrder implements Serializable{
     private String lastmodifyUserName;//上一次修改者姓名
     private String createTime;//创建时间
     private String modifyTime;//创建时间
+    private String exchangeTermsDetail;//收汇条款明细
+    private String latestDeliveryTime;//最迟交货时间
 
+    public String getExchangeTermsDetail() {
+        return exchangeTermsDetail;
+    }
+
+    public void setExchangeTermsDetail(String exchangeTermsDetail) {
+        this.exchangeTermsDetail = exchangeTermsDetail;
+    }
+
+    public String getLatestDeliveryTime() {
+        return latestDeliveryTime;
+    }
+
+    public void setLatestDeliveryTime(String latestDeliveryTime) {
+        this.latestDeliveryTime = latestDeliveryTime;
+    }
 
     public String getOrderId() {
         return orderId;

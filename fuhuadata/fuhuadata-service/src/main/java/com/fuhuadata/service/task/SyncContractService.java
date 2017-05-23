@@ -19,15 +19,16 @@ public class SyncContractService {
     private SyncContractDao syncContractDao;
     @Transactional
     public void sync(){
-        try {
-            //从oracle获取数据
-            List<SyncContract> list = syncContractDao.getOracleData();
-            //清除mysql数据
-            syncContractDao.deleteMysqlData();
-            //将oracle数据插入mysql
-            syncContractDao.insertMysqlData(list);
-        } catch (Exception e) {
+            try {
+                //从oracle获取数据
+                List<SyncContract> list = syncContractDao.getOracleData();
+                //清除mysql数据
+                syncContractDao.deleteMysqlData();
+                //将oracle数据插入mysql
+                syncContractDao.insertMysqlData(list);
+            } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 }

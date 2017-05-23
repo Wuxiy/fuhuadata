@@ -21,7 +21,7 @@
     </selectKey>
   </insert>
 
-  <select id="getBcodeByQuery" resultMap="BCodeResultMap" parameterClass="QueryBCode" >
+    <select id="getBcodeByQuery" resultMap="BCodeResultMap" parameterClass="QueryBCode" >
     select id, c_type, need_reset, c_date, current_val, last_modify_time
     from b_code
     where 1=1
