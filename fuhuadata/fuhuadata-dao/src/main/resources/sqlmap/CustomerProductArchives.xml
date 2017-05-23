@@ -39,7 +39,7 @@
 		<result property="miantuiqi" column="miantuiqi" jdbcType="INT" javaType="java.lang.Integer" />
 		<result property="cupboardType" column="cupboard_type" jdbcType="INT" javaType="java.lang.Integer" />
 		<result property="cupboardPerNumber" column="cupboard_per_number" jdbcType="INT" javaType="java.lang.Integer" />
-		<result property="cupboardNumber" column="cupboard_number" jdbcType="INT" javaType="java.lang.Integer" />
+		<result property="cupboardNumber" column="cupboard_number" jdbcType="DECIMAL" javaType="java.lang.Integer" />
 		<result property="oceanFreight" column="ocean_freight" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result property="portSurcharge" column="port_surcharge" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
 		<result property="taxFree" column="tax_free" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>
