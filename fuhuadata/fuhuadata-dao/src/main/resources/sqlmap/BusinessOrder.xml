@@ -418,6 +418,12 @@
             <isNotNull prepend="," property="prepayRate" >
                 prepay_rate = #prepayRate#
             </isNotNull>
+            <isNotEmpty prepend=", " property="exchangeTermsDetail">
+                exchange_terms_detail = #exchangeTermsDetail#
+            </isNotEmpty>
+            <isNotEmpty prepend=", " property="latestDeliveryTime">
+                latest_delivery_time  = #latestDeliveryTime#
+            </isNotEmpty>
         </dynamic>
         where order_id = #orderId#
     </update>
