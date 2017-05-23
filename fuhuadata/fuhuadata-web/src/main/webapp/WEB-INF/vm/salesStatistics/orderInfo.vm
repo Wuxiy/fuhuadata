@@ -275,7 +275,7 @@
                         <th class="text-center" lang="zh">柜型</th>
                         <th class="text-center" lang="zh">柜数</th>
                         <th class="text-center" lang="zh">交货时间</th>
-                        <th class="text-center" lang="zh">最低销售价（元/KG（L)）</th>
+                        <th class="text-center" lang="zh">最低销售价（元/KG(L)）</th>
                         <th class="text-center" lang="zh">单据要求</th>
                         <th class="text-center" lang="zh">订舱出运要求</th>
                         <th class="text-center" lang="zh">是否转化</th>
