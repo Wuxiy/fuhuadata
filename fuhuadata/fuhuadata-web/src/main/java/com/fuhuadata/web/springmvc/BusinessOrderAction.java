@@ -239,8 +239,6 @@ public class BusinessOrderAction {
                     businessOrder.setCreateUserName(LoginUtils.getLoginName());
                     businessOrder.setLastmodifyUserId(LoginUtils.getLoginId());
                     businessOrder.setLastmodifyUserName(LoginUtils.getLoginName());
-                    //businessOrder.setCreateTime(DateUtil.getDateTime());
-                    //businessOrder.setModifyTime(DateUtil.getDateTime());
 
             result = businessOrderService.addBusinessOrder(businessOrder);
         }catch(Exception e){

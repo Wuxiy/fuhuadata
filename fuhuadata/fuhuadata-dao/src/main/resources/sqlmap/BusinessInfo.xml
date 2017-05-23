@@ -298,7 +298,6 @@
         <isNotEmpty prepend=", " property="enterpriseNature">
             (select DISTINCT(customer_id) from customer_enterprise_nature where nature=#enterpriseNature#) nature
         </isNotEmpty>
-
         <isParameterPresent>
             <include refid="PAGE-COMMON"/>
         </isParameterPresent>

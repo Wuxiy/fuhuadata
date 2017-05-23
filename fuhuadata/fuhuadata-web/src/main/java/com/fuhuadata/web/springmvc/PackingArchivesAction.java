@@ -199,6 +199,7 @@ public class PackingArchivesAction {
         if(packingRelations!=null&&packingRelations.size()>0) {
             for (PackingRelation packingRelation : packingRelations) {
                 //互斥字段，默认为IsEqualOuter=1
+                mainPackingId = packingRelation.getMainPackingId();
                 if (packingRelation.getConsumption() != null && packingRelation.getIsEqualOuter() == 1) {
                     packingRelation.setConsumption(null);
                 }
@@ -334,7 +335,6 @@ public class PackingArchivesAction {
 
     /**
      * 根据PId获取目录包材
-     *
      * @param id
      * @return
      */
