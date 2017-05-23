@@ -15,10 +15,8 @@ public class BusinessInfo {
 
     private String businessId;//商机id
 
-    @NotBlank
     private String customerId;//客户id
 
-    @NotBlank
     private String businessName;//商机名称
 
     private String customerName;//客户名称

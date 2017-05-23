@@ -41,6 +41,13 @@ public interface RecordLinkmanManager {
      */
     public boolean deleteRecordLinkmanById(int id);
 
+	/**
+	 *  按照拜访记录id删除拜访联系人记录
+	 * @param visitRecordId
+	 * @return
+	 */
+	public boolean deleteRecordLinkmanByRecordId(int visitRecordId);
+
     /**
      * 返回数据库所有记录，谨慎使用，最好不用
      * @return

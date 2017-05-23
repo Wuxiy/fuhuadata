@@ -175,7 +175,7 @@
 
 						<isNotEmpty prepend=", " property="modifyTime">modify_time=now()</isNotEmpty>
 					</dynamic>
-		WHERE visitrecord_id=#visitrecord_id#
+		WHERE visitrecord_id=#visitrecordId#
 	</update>
 	
 	<delete id="DELETE-BY-ID" parameterClass="java.lang.Integer">
@@ -237,6 +237,7 @@
 			c.activity_expense activityExpens,
 
 			b.activity_gift activityGift,
+			c.visitrecord_id visitRecordId,
 			c.start_time startTime,
 			c.end_time endTime,
 			c.activity_type activityType,

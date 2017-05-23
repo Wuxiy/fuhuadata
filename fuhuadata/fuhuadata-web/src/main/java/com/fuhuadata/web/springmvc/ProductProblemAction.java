@@ -131,7 +131,7 @@ public class ProductProblemAction {
     @ResponseBody
     public ResultPojo doModifyProductProblem(@RequestBody ProductProblem productProblem){
         try{
-            int id = productProblem.getProductId();
+            int id = productProblem.getProblemId();
             Result<ProductProblem> result = productProblemService.updateProductProblemById(id,productProblem);
             return result.getResultPojo();
         }catch(Exception e){

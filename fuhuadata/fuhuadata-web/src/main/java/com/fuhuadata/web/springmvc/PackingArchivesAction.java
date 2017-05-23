@@ -196,17 +196,17 @@ public class PackingArchivesAction {
         }
         Result result = new Result();
         int mainPackingId=0;
-        List<PackingRelation> list = new ArrayList<PackingRelation>();
         if(packingRelations!=null&&packingRelations.size()>0) {
             for (PackingRelation packingRelation : packingRelations) {
                 //互斥字段，默认为IsEqualOuter=1
+                mainPackingId = packingRelation.getMainPackingId();
                 if (packingRelation.getConsumption() != null && packingRelation.getIsEqualOuter() == 1) {
                     packingRelation.setConsumption(null);
                 }
             }
         }
         try{
-            result = packingArchivesService.batchAddRelationPacking(mainPackingId,list);
+            result = packingArchivesService.batchAddRelationPacking(mainPackingId,packingRelations);
             result.setMessage("新增关联成功");
         }catch (Exception e){
             result.setSuccess(false);
@@ -335,7 +335,6 @@ public class PackingArchivesAction {
 
     /**
      * 根据PId获取目录包材
-     *
      * @param id
      * @return
      */

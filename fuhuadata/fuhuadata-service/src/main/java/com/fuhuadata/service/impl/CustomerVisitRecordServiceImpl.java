@@ -95,8 +95,20 @@ public class CustomerVisitRecordServiceImpl implements CustomerVisitRecordServic
 		}
 		return result;
     }
-    
-    public Result deleteCustomerVisitRecordById(int visitrecord_id) {
+
+	@Override
+	public Result updateCustomerVisitRecord(CustomerVisitRecordVO customerVisitRecordVO) {
+		Result result = new Result();
+		try {
+			result.setSuccess(customerVisitRecordManager.updateCustomerVisitRecord(customerVisitRecordVO));
+		} catch(Exception e) {
+			log.error("更新客户沟通记录错误",e);
+			result.setSuccess(false);
+		}
+		return result;
+	}
+
+	public Result deleteCustomerVisitRecordById(int visitrecord_id) {
 		Result result = new Result();
 		try {
 			result.setSuccess(customerVisitRecordManager.deleteCustomerVisitRecordById(visitrecord_id));

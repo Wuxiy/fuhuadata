@@ -727,7 +727,7 @@ $().ready(function() {
     // 点击提交表单
     $('#up').on('click.up',function () {
 
-        if (page.status!='a') {
+        if (page.status!='a') { // 非新增状态提交
 
             CRM.ajaxCall({
                 url:page.EDIT_POST,
@@ -741,7 +741,7 @@ $().ready(function() {
                 }
             });
 
-        }else if (page.status=='a') {
+        }else if (page.status=='a') { // 新增状态提交
 
             CRM.ajaxCall({
                 url:page.ADD_POST,

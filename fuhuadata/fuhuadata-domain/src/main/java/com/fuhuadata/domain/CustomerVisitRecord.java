@@ -32,7 +32,6 @@ public class CustomerVisitRecord{
 
     /**开始时间**/
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	@NotBlank
 	private Date startTime;
 	
     /**结束时间**/

@@ -143,6 +143,7 @@
                             <th class="text-center" lang="zh">礼物赠送</th>
                             <th class="text-center" lang="zh">活动摘要</th>
                             <th class="text-center" lang="zh">备注</th>
+                            <th class="text-center" lang="zh">详情</th>
                         </tr>
                         </thead>
                         <tbody id="visitRecordsTable"></tbody>
@@ -212,13 +213,15 @@
                                         <table class="table table-condensed table-bordered table-striped text-center">
                                             <thead>
                                             <tr>
-                                                <th class="text-center col-xs-2" lang="zh"><input type="checkbox" id="checkAll">是否拜访</th>
+                                                <th class="text-center col-xs-2" lang="zh">
+                                                    <input name="checkAll" id="checkAll" type="checkbox">是否拜访
+                                                </th>
                                                 <th class="text-center col-xs-2" lang="zh">联系人</th>
                                                 <th class="text-center col-xs-4" lang="zh">赠送礼物</th>
                                                 <th class="text-center col-xs-4" lang="zh">备注</th>
                                             </tr>
                                             </thead>
-                                            <tbody id="modalContactList"></tbody>
+                                            <tbody name="modalContactList" id="modalContactList"></tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -251,6 +254,112 @@
     </div>
 </div>
 
+## 查看详情modal
+<div class="modal fade" id="editField" tabindex="-1" data-backdrop="static" aria-hidden="true" data-keyboard="true" >
+    <div class="modal-dialog" style="width:800px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body ">
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body clearfix">
+                            <form class="form-horizontal" id="editForm">
+                                <input name="visitrecordId" type="hidden">
+                                <div class="form-group ">
+                                    <label class="col-xs-2 control-label">开始时间<sup class="not-null hidden" data-view="editView">*</sup></label>
+                                    <div class="col-xs-4">
+                                        <input class="form-control" name="startTime" data-control="on" disabled type="date" />
+                                    </div>
+                                    <label class="col-xs-2 control-label">结束时间</label>
+                                    <div class="col-xs-4">
+                                        <input class="form-control" name="endTime" data-control="on" disabled type="date"/>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="col-xs-2 control-label">活动地点</label>
+                                    <div class="col-xs-4">
+                                        <input class="form-control" name="activityAddress" data-control="on" disabled type="text"/>
+                                    </div>
+                                    <label class="col-xs-2 control-label">费用<sup class="not-null hidden" data-view="editView">*</sup></label>
+                                    <div class="col-xs-4">
+                                        <div class="input-group">
+                                            <input class="form-control" name="activityExpense" data-control="on" disabled type="number" min="0"/>
+                                            <span class="input-group-addon">元</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="col-xs-2 control-label">活动类型<sup class="not-null hidden" data-view="editView">*</sup></label>
+                                    <div class="col-xs-4">
+                                        <select class="form-control" name="activityType" data-control="on" disabled>
+                                            <option  value="0">远程沟通</option>
+                                            <option  value="1">出差拜访</option>
+                                            <option  value="2">展会邀请</option>
+                                            <option  value="3">工厂参观</option>
+                                            <option  value="4">商务宴请</option>
+                                            <option  value="5">其他(备注内容)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <input class="form-control hidden" name="activityRemarks" data-control="on" disabled type="text" placeholder="请输入活动类型"/>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="col-xs-2 control-label">姓名</label>
+                                    <div class="col-xs-10">
+                                        <table class="table table-condensed table-bordered table-striped text-center">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center col-xs-2" lang="zh"><input name="checkAll" data-control="on" disabled type="checkbox">是否拜访</th>
+                                                <th class="text-center col-xs-2" lang="zh">联系人</th>
+                                                <th class="text-center col-xs-4" lang="zh">赠送礼物</th>
+                                                <th class="text-center col-xs-4" lang="zh">备注</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody name="modalContactList"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-2 control-label">活动摘要<sup class="not-null hidden" data-view="editView">*</sup></label>
+                                    <div class="col-xs-10">
+                                        <textarea class="form-control" name="activitySummary" data-control="on" disabled rows="4"></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="col-xs-3 col-xs-offset-3">
+                            <button class="btn btn-primary btn-block hidden" id="editVisit" data-btn="save" data-view="editView" type="button">
+                                完成
+                            </button>
+                        </div>
+                        <div class="col-xs-3">
+                            <button class="btn btn-default btn-block hidden" data-btn="cancel" data-view="editView" type="button">
+                                取消
+                            </button>
+                        </div>
+                        <div class="col-xs-3 ">
+                            <button type="button" class="btn btn-primary btn-block" data-btn="edit" data-view="editHide">
+                                编辑
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <input id="customerId" type="hidden" value='$!{customerId}'>
 <input id="customerType" type="hidden" value='$!{customerType}'>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/common.js"></script>
@@ -258,160 +367,3 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/ajax.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/common.js"></script>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/customer/customerContactsInfo.js"></script>
-<script type="text/javascript">
-    $('#isDefault').change(function(){
-        var newName = $('#name').val();
-        var id = $(this).attr('data-id');
-        var url = basePath + '/customerLinkman/getCustomerLinkmanDefaultByCustomerId?customerId=' + id;
-
-        if($(this).val() == 1){
-            jQuery.ajax({
-                type:"POST",
-                url:url,
-                success:function(result){
-                    var name = result.data.name;
-                    var msg = '当前默认联系人是' + name + '，更改后的联系人为' + newName;
-                    alert(msg);
-                }
-            })
-        }
-    })
-
-    // 新建Panel对象实例，绑定编辑、保存、取消事件
-    var bInfo = new CRM.module.Panel('#basicInfo');
-    bInfo.startEdit();
-    bInfo.startSave();
-    bInfo.startCancel();
-    
-    // 返回
-    $('#back').on('click.back',function () {
-        window.history.back(-1);
-    })
-    
-    // 重置
-    $('#resetBtn').on('click.reset',function () {
-        $('input,textarea',$('#myForm')).val('');
-    })
-
-    // 渲染联系人列表，并默认选中当前联系人
-    $('#add').on('click', function () {
-        $.ajax({
-            url:basePath + '/customerLinkman/getCustomerLinkmanByCustomerId',
-            type:'POST',
-            data:{
-                customerId:$('#customerId').val(),
-                customerType:$('#customerId').val()
-            }
-        }).done(function (res) {
-            var list = res.data,
-                _html = '';
-            $.each(list, function (i, item) {
-                _html += '<tr name="linkmanItem">';
-                _html += '<td><input type="checkbox" name="cellcheckbox" value="' + item.linkmanId + '"></td>';
-                _html += '<td>'+ item.name+'</td>';
-                _html += '<td><input class="form-control" type="text" name="gift" disabled></td>';
-                _html += '<td><input class="form-control" type="text" name="remarks" disabled></td>';
-                _html += '</tr>';
-            })
-            $('#modalContactList').html(_html);
-            $('[name="cellcheckbox"]').each(function () {
-                if ($(this).val()===$('#name').attr('data-id')){
-                    $(this).prop('checked',true).attr('disabled',true);
-                }
-                isUsableText($(this).prop('checked'), $(this));
-            });
-        })
-    });
-
-    // 全选
-    $('#checkAll').on('click', function () {
-        var cellcheckbox = $('input[type="checkbox"]', $('#modalContactList')).not('[disabled]');
-        if ($(this).prop('checked')) {
-            cellcheckbox.prop('checked', true);
-        }else {
-            cellcheckbox.prop('checked', false);
-        }
-        cellcheckbox.each(function () {
-            isUsableText($(this).prop('checked'), $(this));
-        })
-    });
-
-    // 单个checkbox
-    $('#modalContactList').on('click', 'input[type="checkbox"]', function () {
-        var cellcheckbox = $('input[type="checkbox"]', $('#modalContactList')).not('[disabled]');
-        cellcheckbox.each(function () {
-            isUsableText($(this).prop('checked'), $(this));
-        })
-    });
-
-    // 选中其他活动类型，显示备注框
-    $('#activityType').change(function () {
-        if ($(this).val() === "5") {
-            $('#activityRemarks').removeClass('hidden');
-        }else {
-            $('#activityRemarks').val('').addClass('hidden');
-        }
-    })
-
-    // 新增联系人提交
-    $('#addVisit').click(function () {
-
-        if (confirm('确认提交吗？')) {
-            $.ajax({
-                url:basePath + '/customerVisitRecord/addCustomerVisitRecord',
-                data:addVisit(),
-                contentType:'application/json',
-                type:'POST'
-            }).done(function (res) {
-                if (res.code === 1) {
-                    alert('添加成功！');
-                    location.reload();
-                }
-            })
-        }
-    });
-
-    // 是否禁用该联系人的赠送礼物和备注字段
-    function isUsableText(b, el) {
-        if (b) {
-            el.closest('[name="linkmanItem"]').find('[name="gift"],[name="remarks"]').attr('disabled', false);
-        }else{
-            el.closest('[name="linkmanItem"]').find('[name="gift"],[name="remarks"]')
-                    .val('')
-                    .attr('disabled', true);
-        }
-    }
-
-    //add function
-    function addVisit() {
-        var data = {
-            "customerVisitRecord":{
-                "customerId":$('#customerId').val(),
-                "startTime":$('#startTime').val(),
-                "endTime":$('#endTime').val(),
-                "activityAddress":$('#activityAddress').val(),
-                "activityExpense":$('#activityExpense').val(),
-                "activityType":$('#activityType').val(),
-                "activityRemarks":$('#activityRemarks').val(),
-                "activitySummary":$('#activitySummary').val()
-            },
-            "recordLinkmen":recordLinkman()
-        };
-        console.log(data);
-        return JSON.stringify(data);
-    }
-
-    //拜访记录
-    function recordLinkman() {
-        var arr = [];
-        $("input[name='cellcheckbox']:checked").each(function(){
-            var obj = {
-                "linkmanId":$(this).val(),
-                "activityGift":$(this).parents('tr').find('[name="gift"]').val(),
-                "remarks":$(this).parents('tr').find('[name="remarks"]').val()
-            };
-            arr.push(obj);
-        });
-        return arr;
-    }
-</script>

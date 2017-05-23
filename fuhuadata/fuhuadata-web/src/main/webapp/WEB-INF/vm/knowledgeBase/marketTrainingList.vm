@@ -11,8 +11,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     #if ($shiro.hasPermission("wiki:train:add"))
-                        <button class="btn btn-xs btn-primary pull-right panel-heading-btn" href="" data-toggle="modal"
-                                data-target="#addTrain" data-keyboard="true">
+                        <button class="btn btn-xs btn-primary pull-right panel-heading-btn" data-toggle="modal"
+                                data-target="#Train" data-backdrop="static" data-keyboard="true">
                             <span class="glyphicon glyphicon-plus"></span>
                             新增
                         </button>
@@ -37,9 +37,9 @@
                             <label class="col-xs-1 control-label pull-right">标题</label>
                             <div class="col-xs-2 pull-right">
                                 <div class="input-group">
-                                    <input class="form-control" id="sproductType" type="search" value="" placeholder="请输入品类"/>
+                                    <input class="form-control" id="productTypesearch" type="search" value="" placeholder="请输入品类"/>
                                     <span class="input-group-btn">
-                                      <button data-toggle="modal" class="btn btn-xs btn-default" data-target="#tSearch" type="button">
+                                      <button data-toggle="modal" class="btn btn-xs btn-default" data-target="#tSearch" id="search" type="button">
                                           <span class="glyphicon glyphicon-search"></span>
                                       </button>
                                     </span>
@@ -55,11 +55,12 @@
                         <thead>
                         <tr>
                             <th class="col-xs-1 text-center text-middle">编号</th>
-                            <th class="col-xs-4 text-center text-middle">标题</th>
-                            <th class="col-xs-2 text-center text-middle">产品种类</th>
+                            <th class="col-xs-2 text-center text-middle">标题</th>
+                            <th class="col-xs-3 text-center text-middle">产品种类</th>
                             <th class="col-xs-2 text-center text-middle">上传人</th>
                             <th class="col-xs-2 text-center text-middle">上传时间</th>
                             <th class="col-xs-1 text-center text-middle">可否下载</th>
+                            <th class="col-xs-1 text-center text-middle">操作</th>
                         </tr>
                         </thead>
                         <tbody id="list"></tbody>
@@ -72,7 +73,65 @@
     </div>
 </div>
 
-<!--modal-->
+<!--新增模态 -->
+<div class="modal fade" id="Train" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+     data-keyboard="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body ">
+                <form class="form-horizontal" action="">
+                    <div class="form-group ">
+                        <label class="col-xs-2 control-label">标题<sup class="not-null">*</sup></label>
+                        <div class="col-xs-6">
+                            <input id="title" class="form-control notnull" type="text"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">品类<sup class="not-null">*</sup></label>
+                        <div class="col-xs-9">
+                            <div class="input-group">
+                                <input id="productType" class="form-control notnull" type="search" value="" placeholder="请输入品类"/>
+                                <span class="input-group-btn">
+                                <button data-toggle="modal" class="btn btn-xs btn-default" data-target="#tSearch" id="searchmodal" type="button">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-xs-2 control-label" for="inputfile">附件<sup class="not-null">*</sup></label>
+                        <div class="col-xs-6">
+                            <input class="form-control" id="inputfile" data-path="" type="file"/>
+                        </div>
+                        <div class="col-xs-2">
+                            <button id="submitfile" type="button" class="btn btn-xs btn-primary btn-block">上传</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-3 col-xs-offset-3">
+                        <button type="button" class="btn btn-primary btn-block" id="finish">
+                            完成
+                        </button>
+                    </div>
+                    <div class="col-xs-3">
+                        <button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--树形菜单modal-->
 <div class="modal fade" id="tSearch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content" style="width:400px;">
@@ -90,272 +149,249 @@
     </div>
 </div>
 
-<!--新增模态 -->
-<div class="modal fade" id="addTrain" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-     data-keyboard="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
-            </div>
-            <div class="modal-body ">
-                <form class="form-horizontal" action="">
-                    <div class="form-group ">
-                        <label class="col-xs-2 control-label">标题</label>
-                        <div class="col-xs-6">
-                            <input class="form-control" type="text" id="title"/>
-                        </div>
-                    </div>
-                    <div class="form-group ">
-                        <label class="col-xs-2 control-label">产品名称</label>
-                        <div class="col-xs-4">
-                            <select class="form-control">
-                                <option value="" selected>草甘膦</option>
-                                <option value="">草胺膦</option>
-                                <option value="">化工品</option>
-                                <option value="">贸易品</option>
-                                <option value="">其他</option>
-                            </select>
-                        </div>
-                        <div class="col-xs-4">
-                            <select class="form-control">
-                                <option value="" selected>全部</option>
-                                <option value="">草甘膦</option>
-                                <option value="">草甘膦原药</option>
-                                <option value="">草甘膦水剂</option>
-                                <option value="">草甘膦颗粒剂</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group ">
-                        <label class="col-xs-2 control-label" for="inputfile">附件</label>
-                        <div class="col-xs-6">
-                            <input class="form-control" id="inputfile" type="file"/>
-                        </div>
-                        <div class="col-xs-2">
-                            <button type="submit" class="btn btn-xs btn-primary btn-block">上传</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <div class="row">
-                    <div class="col-xs-3 col-xs-offset-3">
-                        <button type="button" class="btn btn-primary btn-block">
-                            完成
-                        </button>
-                    </div>
-                    <div class="col-xs-3">
-                        <button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--详情编辑模态 -->
-<div class="modal fade" id="infoTrain" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-     data-keyboard="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
-            </div>
-            <div class="modal-body ">
-                <form class="form-horizontal" action="">
-                    <div class="form-group ">
-                        <label class="col-xs-2 control-label">标题</label>
-                        <div class="col-xs-6">
-                            <input class="form-control" type="text"/>
-                        </div>
-                    </div>
-                    <div class="form-group ">
-                        <label class="col-xs-2 control-label">产品名称</label>
-                        <div class="col-xs-4">
-                            <select class="form-control">
-                                <option value="" selected>草甘膦</option>
-                                <option value="">草胺膦</option>
-                                <option value="">化工品</option>
-                                <option value="">贸易品</option>
-                                <option value="">其他</option>
-                            </select>
-                        </div>
-                        <div class="col-xs-4">
-                            <select class="form-control">
-                                <option value="" selected>全部</option>
-                                <option value="">草甘膦</option>
-                                <option value="">草甘膦原药</option>
-                                <option value="">草甘膦水剂</option>
-                                <option value="">草甘膦颗粒剂</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group ">
-                        <label class="col-xs-2 control-label" for="inputfile">附件</label>
-                        <div class="col-xs-6">
-                            <input class="form-control" id="inputfile" type="file"/>
-                        </div>
-                        <div class="col-xs-2">
-                            <button type="submit" class="btn btn-xs btn-primary btn-block">上传</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <div class="row">
-                    <div class="col-xs-3 col-xs-offset-3">
-                        <button type="button" class="btn btn-primary btn-block">
-                            完成
-                        </button>
-                    </div>
-                    <div class="col-xs-3">
-                        <button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
 <script type="text/javascript">
-  /*  $(document).ready(function () {
-        $("#markettrain_table").dataTable({
-            "ajax": basePath + '/marketTraining/queryMarketTrainingList',
-            "pagingType": "full_numbers",
-            "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
-            "columns": [
-                {"data": "tranId"},
-                {"data": "title"},
-                {"data": "productType"},
-                {"data": "userName"},
-                {"data": "uploadDate"},
-                {"data": "download"}
-            ],
-            "columnDefs": [{
-                targets: "_all",
-                defaultContent: ''
-            }, {
-                "targets": 5,
-                "render": function (data, type, row, meta) {
-                    return '<a href="' + data + '" target="_blank">' + row.download + '</a>';
-                }
-            }],
-            "language": {
-                "url": basePath + '/lib/dataTables/lang/dataTables.lang.zh',
-                "searchPlaceholder": '关键字'
-            }
-        })
-    })*/
+    var inputname;
 
-  var pagesize = 5; // 分页步长
-  $('#tree').creatTree(basePath+'/productCategory/CategoryTreeThree');
-  $("#submit").click(function () {
-      search();
-  });
-  search();
+    //渲染树
+    $('#tree').creatTree(basePath+'/productCategory/CategoryTreeThree');
+    //search操作
+    $('#search').click(function(){
+        inputname = $(this).parent('span').parent('div').find('input[id="productTypesearch"]');
 
-  // 搜索列表并渲染
-  function search(){
-      // 获取参数
-      var data = collectArgs();
+    })
+    $('#searchmodal').click(function(){
+        var smodal = $(this).parent('span').parent('div').find('input[id="productType"]');
+        inputname = smodal;
+    })
+    //树节点操作
+    $(document).on('click','.cNode',function(e){
+        e.preventDefault();
+        console.log(e.target);
+        var tirEltext = $(e.target).text();
+        var id = $(e.target).parent('li').attr('id').split('_')[1];
+        var secEltext = $(e.target).parent('li').parent('ul').parent('li').find('a:first').text();
+        var firEltext = $(e.target).parent('li').parent('ul').parent('li').parent('ul').parent('li').find('a:first').text();
+        var tarEltext = firEltext + '-' + secEltext + '-' + tirEltext;
 
-      getDataList(0,pagesize,rederLiset); // 初始化第一页数据
+        inputname.val(tarEltext);
+        inputname.attr('data-id',id);
+        $('#tSearch').modal('hide');
+    })
 
-      // 获取总的条数
-      getListCount(data,function (total) {
+    var pagesize = 5; // 分页步长
+    $("#submit").click(function () {
+        search();
+    });
+    search();
 
-          // 渲染分页
-          rederPaging(total,pagesize,function (pageNum,jq) {
+    // 搜索列表并渲染
+    function search(){
+        // 获取参数
+        var data = collectArgs();
+
+        getDataList(0,pagesize,rederLiset); // 初始化第一页数据
+
+        // 获取总的条数
+        getListCount(data,function (total) {
+
+            // 渲染分页
+            rederPaging(total,pagesize,function (pageNum,jq) {
 
               // 获取列表数据
               getDataList(pageNum,pagesize);
-          })
-      })
+            })
+        })
 
-  }
+    }
 
-  // 收集提交参数
-  function collectArgs() {
-      var obj={
-          productType:$('#sproductType').val(),
-          title:$('#stitle').val()
-      }
-      return obj;
-  }
+    // 收集提交参数
+    function collectArgs() {
+        var obj={
+            productType:$('#productTypesearch').val(),
+            title:$('#stitle').val()
+        }
+        return obj;
+    }
 
-  // 获取列表数据条目总数
-  function getListCount(data,callback){
-      var total = 0;
-      jQuery.ajax({
-          url:basePath + '/marketTraining/count',
-          dataType:'JSON',
-          contentType:'application/json',
-          data:JSON.stringify(data),
-          async:true,
-          type:'POST'
-      }).done(function (res) {
-          total = res.data;
-          callback(total);
-      });
-  }
+    // 获取列表数据条目总数
+    function getListCount(data,callback){
+        var total = 0;
+        jQuery.ajax({
+            url:basePath + '/marketTraining/count',
+            dataType:'JSON',
+            contentType:'application/json',
+            data:JSON.stringify(data),
+            async:true,
+            type:'POST'
+        }).done(function (res) {
+            total = res.data;
+            callback(total);
+        });
+    }
 
-  // 渲染分页插件
-  function rederPaging(total,pageSize,callback) {
+    // 渲染分页插件
+    function rederPaging(total,pageSize,callback) {
 
-      $("#pagination").pagination(total,{
-          items_per_page : pageSize,
-          num_edge_entries : 3,
-          num_display_entries : 10,
-          callback:callback
-      });
-  }
+        $("#pagination").pagination(total,{
+            items_per_page : pageSize,
+            num_edge_entries : 3,
+            num_display_entries : 10,
+            callback:callback
+        });
+    }
 
-  // 根据页码获取列表数据
-  function getDataList(pageNum,pageSize,callback) {
-      jQuery.ajax({
-          url:basePath + '/marketTraining/queryMarketTrainingList',
-          dataType:'json',
-          contentType:'application/json',
-          data:JSON.stringify({
-              productType:$('#sproductType').val(),
-              title:$('#stitle').val(),
-              startRow:pageNum*pageSize,
-              pageSize:pageSize
-          }),
-          async:true,
-          type:'POST'
-      }).done(function (res) {
-          // 渲染列表
-          rederLiset(res,pageNum);
-      });
-  }
-  // 渲染列表
-  var companyTypeList = ['客户','竞对'];
-  function rederLiset(data,pageNum){
-      var ResultData = data.data,
+    // 根据页码获取列表数据
+    function getDataList(pageNum,pageSize,callback) {
+        jQuery.ajax({
+            url:basePath + '/marketTraining/queryMarketTrainingList',
+            dataType:'json',
+            contentType:'application/json',
+            data:JSON.stringify({
+                productType:$('#productTypesearch').val(),
+                title:$('#stitle').val(),
+                startRow:pageNum*pageSize,
+                pageSize:pageSize
+            }),
+            async:true,
+            type:'POST'
+        }).done(function (res) {
+            // 渲染列表
+            rederLiset(res,pageNum);
+        });
+    }
+    // 渲染列表
+    var companyTypeList = ['客户','竞对'];
+    function rederLiset(data,pageNum){
+        var ResultData = data.data,
               _html = '',
               count = pageNum*pagesize;
 
-      if(ResultData && ResultData!='' && ResultData!='null') {
-          for (var i = 0; i < ResultData.length; i++) {
-              _html += '<tr>';
-              _html += '<td>' + (++count) + '</td>';
-              _html += '<td>' + (ResultData[i].title != undefined ? ResultData[i].title : '') + '</td>';
-              _html += '<td>' + (ResultData[i].productType != undefined ? ResultData[i].productType : '') + '</td>';
-              _html += '<td lang="zh">' + (ResultData[i].createUserId != undefined ? ResultData[i].createUserId : '') + '</td>';
-              _html += '<td lang="zh">' + (ResultData[i].uploadDate != undefined ? ResultData[i].uploadDate : '') + '</td>';
-              _html += '<td lang="zh">' + '下载' + '</td>';
+        if(ResultData && ResultData!='' && ResultData!='null') {
+            for (var i = 0; i < ResultData.length; i++) {
+                _html += '<tr>';
+                _html += '<td>' + (++count) + '</td>';
+                _html += '<td>' + ifEmpty(ResultData[i].title) + '</td>';
+                _html += '<td>' + ifEmpty(ResultData[i].productType) + '</td>';
+                _html += '<td lang="zh">' + ifEmpty(ResultData[i].createUserName) + '</td>';
+                _html += '<td lang="zh">' + ifEmpty(ResultData[i].uploadDate) + '</td>';
+                _html += '<td><a href="${request.contextPath}'+ResultData[i].attachmentPath+'">下载</a></td>';
+                _html += '<td><a class="delete" data-id="'+ResultData[i].tranId+'">删除</a></td>';
+                _html += '</tr>';
+        }
       }
-      $("#list").html(_html);
-      _html += '</tr>';
-  }
-  }
+        $("#list").html(_html);
+    }
 
+    //新增模态
+    $(document).on('click','#add',function(){
+        $('#problemContent').val('');
+        $('#problemContent').attr('data-id','');
+        $('#productType').val('');
+        $('#solution').val('');
+        $('#remarks').val('');
+
+        $('#finish').attr('data-edit','0');
+        $('#modal').modal('show');
+    })
+
+    //完成操作
+    $('#finish').click(function(){
+        var edit = $(this).attr('data-edit');
+        var isup = true;
+        var notnull = $('.notnull');
+        notnull.each(function () {
+            var val = $(this).val();
+            if(val == ''||val == null){
+                alert('请完善表单!');
+                isup = false;
+                return false;
+            }
+        });
+        if($('#inputfile').attr('data-path') == '' ||$('#inputfile').attr('data-path') == undefined){
+            alert('请上传附件!');
+            isup =false;
+            return false;
+        }
+        if(isup){
+            jQuery.ajax({
+                url:basePath + '/marketTraining/doAddMarketTraining',
+                data:adddata(),
+                type:'POST',
+                success:function(result){
+                    if(result.code == 1){
+                        alert('新增成功！');
+                        search();
+                    }else{
+                        alert('新增失败！');
+                    }
+                }
+            })
+        }
+    })
+
+    //删除操作
+    $(document).on('click','.delete',function(){
+        var url = basePath + '/marketTraining/delete';
+        var id = $(this).attr('data-id');
+
+        var msg = '确认删除该产品营销培训吗？';
+        if(confirm(msg)){
+            jQuery.ajax({
+                url:url,
+                data:id,
+                success:function (result) {
+                    if(result.code == 1){
+                        alert('删除成功！');
+                        search();
+                    }else{
+                        alert('删除失败');
+                    }
+                }
+            });
+        }
+    })
+
+    function adddata() {
+        var data = {
+            'title':$('#title').val(),
+            'productType':$('#productType').val(),
+            'productId':$('#productType').attr('data-id'),
+            'attachmentPath':$('#inputfile').attr('data-path')
+        }
+        return JSON.stringify(data);
+    }
+
+    //上传
+    $('#submitfile').click(function(){
+        var fd = new FormData();
+        fd.append("name", $("#inputfile").val());
+        fd.append("file", $("#inputfile")[0].files[0]);
+        fd.append("classifyPath","marketTrain");
+
+        console.log(fd);
+
+        var url = basePath + '/upload/uploadFileAll';
+
+        jQuery.ajax({
+            url:url,
+            type:'POST',
+            data:fd,
+            dataType: 'JSON',
+            processData: false,
+            contentType: false,
+            success:function (result) {
+                if(result.code == 1){
+                    alert('上传成功!');
+                    $('#inputfile').attr('data-path',result.data);
+                }else{
+                    alert('上传失败!');
+                }
+            }
+        })
+    })
+
+    function ifEmpty(data) {
+        return data==undefined?'':data;
+    }
 </script>

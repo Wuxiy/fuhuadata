@@ -51,14 +51,14 @@ public class ExhibitionInfoManagerImpl extends SqlMapClientTemplate implements E
         Result<List<ExhibitionInfo>> result = new Result<List<ExhibitionInfo>>();
         //统计查询总数
         int totalItem = exhibitionInfoDao.count(exhibitionInfoQuery);
-        exhibitionInfoQuery.setTotalItem(totalItem);
+//        exhibitionInfoQuery.setTotalItem(totalItem);
         if(totalItem > 0){
             result.addDefaultModel("ExhibitionInfos",exhibitionInfoDao.getExhibitionInfosByPage(exhibitionInfoQuery));
         }else{
             result.addDefaultModel("ExhibitionInfos",new ArrayList<ExhibitionInfo>());
         }
         result.setPageSize(exhibitionInfoQuery.getPageSize());
-        result.setIndex(exhibitionInfoQuery.getIndex());
+//        result.setIndex(exhibitionInfoQuery.getIndex());
         result.setTotalItem(totalItem);
         return result;
     }

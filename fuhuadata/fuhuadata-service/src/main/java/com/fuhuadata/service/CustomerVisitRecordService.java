@@ -7,8 +7,6 @@ import com.fuhuadata.vo.CustomerVisitRecordLinkman;
 import com.fuhuadata.vo.CustomerVisitRecordVO;
 import com.fuhuadata.vo.VisitRecordVO;
 
-import javax.management.Query;
-
 /**
  * @author wangbo
  * @date 2017-01-13 16:22:04
@@ -34,6 +32,9 @@ public interface CustomerVisitRecordService {
      * @return
      */
     public Result updateCustomerVisitRecordById(int visitrecord_id, CustomerVisitRecord customerVisitRecord);
+
+
+    public Result updateCustomerVisitRecord(CustomerVisitRecordVO customerVisitRecordVO);
 
     /**
      * 按照主键id 删除 记录

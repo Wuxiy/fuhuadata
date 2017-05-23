@@ -1,8 +1,9 @@
 package com.fuhuadata.manager.impl;
 import java.util.List;
+
+import com.fuhuadata.domain.Freightforwarding;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.QueryFreightforwardingInfo;
-import com.fuhuadata.domain.FreightforwardingInfo;
 import com.fuhuadata.dao.FreightforwardingInfoDao;
 import com.fuhuadata.manager.FreightforwardingInfoManager;
 import javax.annotation.Resource;
@@ -18,15 +19,15 @@ public class FreightforwardingInfoManagerImpl implements FreightforwardingInfoMa
     private FreightforwardingInfoDao freightforwardingInfoDao;
     
 
-    public FreightforwardingInfo addFreightforwardingInfo(FreightforwardingInfo freightforwardingInfo) {
-    	return freightforwardingInfoDao.addFreightforwardingInfo(freightforwardingInfo);
+    public Freightforwarding addFreightforwardingInfo(Freightforwarding freightforwarding) {
+    	return freightforwardingInfoDao.addFreightforwardingInfo(freightforwarding);
     }
     
-    public boolean updateFreightforwardingInfoById(String customer_id, FreightforwardingInfo freightforwardingInfo) {
-    	return freightforwardingInfoDao.updateFreightforwardingInfoById(customer_id, freightforwardingInfo) == 1 ? true : false;
+    public boolean updateFreightforwardingInfoById(String customer_id, Freightforwarding freightforwarding) {
+    	return freightforwardingInfoDao.updateFreightforwardingInfoById(customer_id, freightforwarding) == 1 ? true : false;
     }
     
-	public List<FreightforwardingInfo> getFreightforwardingInfosByQuery(QueryFreightforwardingInfo queryFreightforwardingInfo) {
+	public List<Freightforwarding> getFreightforwardingInfosByQuery(QueryFreightforwardingInfo queryFreightforwardingInfo) {
 		return freightforwardingInfoDao.getFreightforwardingInfosByQuery(queryFreightforwardingInfo);
 	}
 
@@ -35,18 +36,18 @@ public class FreightforwardingInfoManagerImpl implements FreightforwardingInfoMa
     }
     
     
-    public List<FreightforwardingInfo> getAllFreightforwardingInfos() {
+    public List<Freightforwarding> getAllFreightforwardingInfos() {
     	return freightforwardingInfoDao.getAllFreightforwardingInfos();
     }
     	
-    public Result<List<FreightforwardingInfo>> getFreightforwardingInfosByPage(QueryFreightforwardingInfo queryFreightforwardingInfo) {
-		Result<List<FreightforwardingInfo>> result = new Result<List<FreightforwardingInfo>>();
+    public Result<List<Freightforwarding>> getFreightforwardingInfosByPage(QueryFreightforwardingInfo queryFreightforwardingInfo) {
+		Result<List<Freightforwarding>> result = new Result<List<Freightforwarding>>();
 		int totalItem = freightforwardingInfoDao.count(queryFreightforwardingInfo);
 		;
 		if (totalItem > 0) {
 			result.addDefaultModel("FreightforwardingInfos", freightforwardingInfoDao.getFreightforwardingInfosByPage(queryFreightforwardingInfo));		
 		} else {
-			result.addDefaultModel("FreightforwardingInfos", new ArrayList<FreightforwardingInfo>());
+			result.addDefaultModel("FreightforwardingInfos", new ArrayList<Freightforwarding>());
 		}
 		
 		result.setPageSize(queryFreightforwardingInfo.getPageSize());
@@ -57,7 +58,7 @@ public class FreightforwardingInfoManagerImpl implements FreightforwardingInfoMa
     }
     	
     	
-    public FreightforwardingInfo getFreightforwardingInfoById(String customer_id) {
+    public Freightforwarding getFreightforwardingInfoById(String customer_id) {
     	return freightforwardingInfoDao.getFreightforwardingInfoById(customer_id);
     }
     

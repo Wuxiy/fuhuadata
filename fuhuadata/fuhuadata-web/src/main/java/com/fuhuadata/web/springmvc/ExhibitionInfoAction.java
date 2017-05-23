@@ -49,11 +49,10 @@ public class    ExhibitionInfoAction {
 
 
 
-    @RequestMapping(value = "/queryExhibitionInfoList",method = RequestMethod.GET)
+    @RequestMapping(value = "/queryExhibitionInfoList",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "list")
     @ResponseBody
-    public ResultPojo exhibitionInfoList(){
-        ExhibitionInfoQuery exhibitionInfoQuery = new ExhibitionInfoQuery();//封装权限等的查询条件
+    public ResultPojo exhibitionInfoList(@RequestBody ExhibitionInfoQuery exhibitionInfoQuery){
         Result<List<ExhibitionInfo>> result = new Result<List<ExhibitionInfo>>();
         try{
             //加入权限代码，设置查询条件
@@ -64,29 +63,21 @@ public class    ExhibitionInfoAction {
         return result.getResultPojo();
     }
 
-
-    @SuppressWarnings("unused")
-    @RequestMapping(value = "/queryExhibitionInfoTest",method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "query")
+    @RequestMapping(value = "/count",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "count")
     @ResponseBody
-    public ResultPojo queryExhibitionInfoJson(String index,String exhibitionName){
-        ExhibitionInfoQuery exhibitionInfoQuery = new ExhibitionInfoQuery();
-        Result<List<ExhibitionInfo>> result = new Result<List<ExhibitionInfo>>();
+    public ResultPojo count(@RequestBody ExhibitionInfoQuery exhibitionInfoQuery){
+        Result<Integer> result = new Result<Integer>();
         try{
-            exhibitionInfoQuery.setPageSize(pageSize);
-            if(index==null){
-                exhibitionInfoQuery.setIndex(Integer.valueOf(page.trim()));
-            }else{
-                exhibitionInfoQuery.setIndex(Integer.valueOf(index.trim()));
-            }
-            exhibitionInfoQuery.setExhibitionName(exhibitionName);
-            result=exhibitionInfoService.getExhibitionInfosByQuery(exhibitionInfoQuery);
+            //加入权限代码，设置查询条件
+            result=exhibitionInfoService.count(exhibitionInfoQuery);
         }catch (Exception e){
-            log.error("条件查询获取展会信息失败",e);
+            log.error("获取展会动态列表总数错误",e);
         }
-        ResultPojo resultPojo=result.getResultPojo();
-        return resultPojo;
+        return result.getResultPojo();
     }
+
+
 
     @RequestMapping(value="/addExhibitionInfo",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "knowledgeBase-ExhibitionInfo",methods = "add")

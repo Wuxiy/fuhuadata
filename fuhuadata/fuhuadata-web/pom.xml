@@ -206,7 +206,7 @@
                 <configuration>
                     <url>${tomcat.deploy.url}</url>
                     <server>${tomcat.server.name}</server>
-                    <path>${project.build.finalName}</path>
+                    <path>/${project.build.finalName}</path>
                     <port>8080</port>
                     <uriEncoding>UTF-8</uriEncoding>
                     <!-- spring profile  -->
@@ -223,18 +223,6 @@
                 <version>2.6</version>
                 <configuration>
                     <warName>${project.artifactId}</warName>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                    <encoding>UTF-8</encoding>
-                    <verbose>true</verbose>
-                    <fork>true</fork>
-                    <!--<executable>${JAVA8_HOME}</executable>-->
                 </configuration>
             </plugin>
         </plugins>

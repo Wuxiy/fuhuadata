@@ -5,6 +5,7 @@ import com.fuhuadata.domain.query.QueryCustomerVisitRecord;
 import com.fuhuadata.vo.CustomerVisitRecordLinkman;
 import com.fuhuadata.vo.CustomerVisitRecordVO;
 import com.fuhuadata.vo.VisitRecordVO;
+import org.apache.ibatis.javassist.bytecode.annotation.BooleanMemberValue;
 
 
 /**
@@ -29,6 +30,8 @@ public interface CustomerVisitRecordManager {
      * @return
      */
     public boolean updateCustomerVisitRecordById(int visitrecord_id, CustomerVisitRecord customerVisitRecord);
+
+    public boolean updateCustomerVisitRecord(CustomerVisitRecordVO customerVisitRecordVO);
 
     /**
      * 按照主键id 删除 记录

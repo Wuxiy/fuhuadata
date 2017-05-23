@@ -1,8 +1,9 @@
 package com.fuhuadata.service;
 import java.util.List;
+
+import com.fuhuadata.domain.Freightforwarding;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.QueryFreightforwardingInfo;
-import com.fuhuadata.domain.FreightforwardingInfo;
 
 /**
  * @author wangbo
@@ -11,22 +12,22 @@ import com.fuhuadata.domain.FreightforwardingInfo;
 public interface FreightforwardingInfoService {
 
 	/**
-	 * 新增 freightforwardingInfo
+	 * 新增 freightforwarding
 	 * 返回result，通过result.isSuccess()判断服务调用是否成功
-	 * 通过result.getModel()得到新增 freightforwardingInfo
-	 * @param freightforwardingInfo
+	 * 通过result.getModel()得到新增 freightforwarding
+	 * @param freightforwarding
 	 * @return
 	 */
-    public Result<FreightforwardingInfo> addFreightforwardingInfo(FreightforwardingInfo freightforwardingInfo) ;
+    public Result<Freightforwarding> addFreightforwardingInfo(Freightforwarding freightforwarding) ;
  
     /**
-     * 按照主键id更新freightforwardingInfo，请重新new FreightforwardingInfo 的更新对象，设置要更新的字段
+     * 按照主键id更新freightforwardingInfo，请重新new Freightforwarding 的更新对象，设置要更新的字段
 	 * 返回result，通过result.isSuccess()判断更新是否成功
      * @param customer_id
-     * @param freightforwardingInfo
+     * @param freightforwarding
      * @return
      */
-    public Result updateFreightforwardingInfoById(String customer_id, FreightforwardingInfo freightforwardingInfo);
+    public Result updateFreightforwardingInfoById(String customer_id, Freightforwarding freightforwarding);
 
     /**
      * 按照主键id 删除 记录
@@ -43,7 +44,7 @@ public interface FreightforwardingInfoService {
      * @param queryFreightforwardingInfo
      * @return
      */
-    public Result<List<FreightforwardingInfo>> getFreightforwardingInfosByQuery(QueryFreightforwardingInfo queryFreightforwardingInfo);
+    public Result<List<Freightforwarding>> getFreightforwardingInfosByQuery(QueryFreightforwardingInfo queryFreightforwardingInfo);
 
     /**
      * 通过主键id查询FreightforwardingInfo
@@ -52,7 +53,7 @@ public interface FreightforwardingInfoService {
      * @param customer_id
      * @return
      */
-    public Result<FreightforwardingInfo> getFreightforwardingInfoById(String customer_id);
+    public Result<Freightforwarding> getFreightforwardingInfoById(String customer_id);
 
     /**
      * 查询列表，包含分页查询
@@ -65,7 +66,7 @@ public interface FreightforwardingInfoService {
      * @param queryFreightforwardingInfo
      * @return
      */
-    public Result<List<FreightforwardingInfo>> getFreightforwardingInfosByPage(QueryFreightforwardingInfo queryFreightforwardingInfo);
+    public Result<List<Freightforwarding>> getFreightforwardingInfosByPage(QueryFreightforwardingInfo queryFreightforwardingInfo);
 
     /**
      * 查询总数

@@ -6,7 +6,6 @@ import com.fuhuadata.manager.RecordLinkmanManager;
 import com.fuhuadata.domain.query.QueryRecordLinkman;
 import com.fuhuadata.domain.RecordLinkman;
 import javax.annotation.Resource;
-import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 
 /**
@@ -44,9 +43,14 @@ public class RecordLinkmanManagerImpl implements RecordLinkmanManager {
 	public boolean deleteRecordLinkmanById(int id) {
     	return recordLinkmanDao.deleteRecordLinkmanById(id) == 1 ? true : false;
     }
-    
-    
-    public List<RecordLinkman> getAllRecordLinkmans() {
+
+	@Override
+	public boolean deleteRecordLinkmanByRecordId(int visitRecordId) {
+		return recordLinkmanDao.deleteRecordLinkmanByRecordId(visitRecordId)>1 ? true : false;
+	}
+
+
+	public List<RecordLinkman> getAllRecordLinkmans() {
     	return recordLinkmanDao.getAllRecordLinkmans();
     }
     	
