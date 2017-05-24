@@ -243,14 +243,14 @@
                                 <label class="col-xs-1 control-label" lang="zh">信保费率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input data-control="on" class="form-control notnull" min="0" max="100" step="0.01" type="number" id="guaranteeRate" value="0.24" disabled/>
+                                        <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="guaranteeRate" value="0.24" disabled/>
                                         <span class="input-group-addon">%</span>
                                     </div>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">信保赔付率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input data-control="on" class="form-control notnull" min="0" step="0.01" type="number" id="creditRate" value="" disabled/>
+                                        <input data-control="on" class="form-control" min="0" step="0.01" type="number" id="creditRate" value="" disabled/>
                                         <span class="input-group-addon">%</span>
                                     </div>
                                 </div>
