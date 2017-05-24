@@ -477,5 +477,21 @@ CRM.searchTreeId = function (data) {
     return str;
 };
 
+CRM.tools = {};
 
+CRM.tools.mutexCheckbox = function (jqObj) {
+    this.jqObj = jqObj;
+    this.bindEvent();
+};
 
+CRM.tools.mutexCheckbox.prototype.bindEvent = function () {
+    var jqObj = this.jqObj;
+    this.el.on('click', function (e) {
+        this.handler($(this),jqObj);
+    });
+};
+
+CRM.tools.mutexCheckbox.prototype.handler = function (el,jqObj) {
+    jqObj.prop('checked', false);
+    el.prop('checked', true);
+};

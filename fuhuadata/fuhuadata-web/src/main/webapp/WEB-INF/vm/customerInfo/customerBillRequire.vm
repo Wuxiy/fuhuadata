@@ -11,7 +11,7 @@
             #orderRequestNav(1)
             <div class="col-xs-10">
                 <!--单据要求-->
-                <div id="billPanel" class="panel panel-default view-HD-md">
+                <div id="billPanel" class="panel panel-default view-HD-lg">
                     <div class="panel-heading">
                         <div class="input-group panel-heading-btn col-xs-4 pull-right">
                             <span class="input-group-addon" lang="zh">产品种类</span>
@@ -79,7 +79,7 @@
 
                             </tr>
                             <tr>
-                                <td lang="zh">是否出COO</td>
+                                <td lang="zh">是否出具产地证</td>
                                 <td class="text-left">
                                     <div class=" col-xs-2">
                                         <label class="checkbox-inline"><input name="coo" type="checkbox" disabled value="1"/>商检局</label>
@@ -138,26 +138,42 @@
 
                             </tr>
                             <tr>
-                                <td lang="zh">提单是否电放</td>
+                                <td lang="zh">提单签单方式</td>
                                 <td class="form-group text-left">
                                     <div class="checkbox col-xs-2">
-                                        <label><input name="telexRelease" type="checkbox" disabled value="1" /><span lang="zh">直接电放</span></label>
+                                        <label><input name="telexRelease" type="checkbox" value="1" data-control="on" disabled/><span lang="zh">sea waybill</span></label>
                                     </div>
-                                    <div class="checkbox col-xs-3">
-                                        <label><input name="telexRelease" type="checkbox" disabled value="2" /><span lang="zh">正本出后电放</span></label>
+                                    <div class="checkbox col-xs-2">
+                                        <label><input name="telexRelease" type="checkbox" value="2" data-control="on" disabled/><span lang="zh">目的港放单</span></label>
+                                    </div>
+                                    <div class="checkbox col-xs-8">
+                                        <label><input name="telexRelease" type="checkbox" value="3" data-control="on" disabled/><span lang="zh">hbl（货代提单）</span></label>
+                                    </div>
+                                    <div class="checkbox col-xs-2">
+                                        <label style="padding-top: 3px;"><input name="telexRelease" type="checkbox" value="4" data-control="on" disabled/><span lang="zh">obl（海运提单）</span></label>
+                                    </div>
+                                    <div class="checkbox col-xs-2">
+                                        <label style="padding-top: 3px;"><input name="telexRelease" type="checkbox" value="5" data-control="on" disabled/><span lang="zh">直接电放</span></label>
+                                    </div>
+                                    <div class="checkbox col-xs-2">
+                                        <label style="padding-top: 3px;"><input name="telexRelease" type="checkbox" value="6" data-control="on" disabled/><span lang="zh">其他</span></label>
                                     </div>
                                     <div class="col-xs-4"><input id="releaseDestination" class="form-control" disabled type="text" value="" placeholder="输入放单目的港" lang="zh" /></div>
                                 </td>
-
                             </tr>
                             <tr>
-                                <td lang="zh">是否需要银行交单</td>
+                                <td lang="zh">交单方式</td>
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
-                                        <label><input id="bankBill" disabled type="checkbox" value="1"/></label>
+                                        <label><input name="bankBill" disabled type="checkbox" value="1"/>银行交单</label>
+                                    </div>
+                                    <div class="checkbox col-xs-3">
+                                        <label><input name="bankBill" disabled type="checkbox" value="2"/>信用证交单</label>
+                                    </div>
+                                    <div class="checkbox col-xs-3">
+                                        <label><input name="bankBill" disabled type="checkbox" value="3"/>直接寄单</label>
                                     </div>
                                 </td>
-
                             </tr>
                             <tr>
                                 <td lang="zh">是否需要做第三方检测，并出具检测报告</td>
@@ -191,6 +207,22 @@
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
                                         <label><input id="manufacturerCertificate" disabled type="checkbox" value="1"/></label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>是否需要TDS</td>
+                                <td class="text-left">
+                                    <div class="checkbox col-xs-3">
+                                        <label><input id="needTDS" type="checkbox" data-control="on" value="1" disabled/></label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>是否需要Price Certificate</td>
+                                <td class="text-left">
+                                    <div class="checkbox col-xs-3">
+                                        <label><input id="needPriceCertificate" type="checkbox" data-control="on" value="1" disabled/></label>
                                     </div>
                                 </td>
                             </tr>

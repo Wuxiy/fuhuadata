@@ -36,7 +36,7 @@ public class BusinessOrderProductList {
 
     private Integer cupboardPerNumber= null;//整柜数量
 
-    private BigDecimal cupboardNumber=null;//柜数
+    private Integer cupboardNumber=null;//柜数
 
     private Integer cupboardType = null;//柜子规格
 
@@ -126,11 +126,11 @@ public class BusinessOrderProductList {
         this.cupboardPerNumber = cupboardPerNumber;
     }
 
-    public BigDecimal getCupboardNumber() {
+    public Integer getCupboardNumber() {
         return cupboardNumber;
     }
 
-    public void setCupboardNumber(BigDecimal cupboardNumber) {
+    public void setCupboardNumber(Integer cupboardNumber) {
         this.cupboardNumber = cupboardNumber;
     }
 

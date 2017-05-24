@@ -47,9 +47,9 @@ public class DocumentaryVo implements Serializable{
     private Integer importContainerWeightDeclaration;
     //是否需要Manufacturer's Certificate 0：不需要 1：需要
     private Integer manufacturerCertificate;
-    //是否需要TDS
+    //是否需要TDS 0：不需要 1：需要
     private Integer needTDS;
-    //是否需要Price Certificate
+    //是否需要Price Certificate 0：不需要 1：需要
     private Integer needPriceCertificate;
 
     public Integer getOceanBillOfLading() {
