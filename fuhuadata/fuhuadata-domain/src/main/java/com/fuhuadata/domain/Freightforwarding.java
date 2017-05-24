@@ -4,13 +4,26 @@ import java.util.Date;
 import java.math.BigDecimal;
 
 /**
+ *  货代
  * @author wangbo
  * @date 2017-01-16 15:25:40
  */
-public class FreightforwardingInfo{
+public class Freightforwarding {
 
     /**货代id**/
 	private String customerId;
+
+	/**nc货代编码**/
+	private String code;
+
+	/**所属组织**/
+	private String supplierClass;
+
+	/**企业全称**/
+	private String name;
+
+	/**企业简称**/
+	private String shortName;
 	
     /**类型，0常规，1非常规，2自定**/
 	private Integer type;
@@ -20,7 +33,16 @@ public class FreightforwardingInfo{
 	
     /**办公地址**/
 	private String officeAddress;
-	
+
+	/**企业联系电话**/
+	private String tel;
+
+	/**合作时间**/
+	private Date cooperateTime;
+
+	/**注册资金**/
+	private BigDecimal registerFund;
+
     /**联系人**/
 	private String linkMan;
 	
@@ -29,22 +51,28 @@ public class FreightforwardingInfo{
 	
     /**邮箱**/
 	private String email;
+
+	/**注册地址**/
+	private String registerAddr;
 	
     /**运输方式，方式id的json数组**/
 	private String transportationMethods;
 	
     /**货代备注**/
-	private String freightForwardingRemarks;
+	private String remarks;
 	
     /**营业执照**/
 	private String businessLicence;
+
+	/**无船承运业务经营资格登记证 json数据**/
+	private String  NVOCC;
+
+	/**是否进入电子系统1：是 0：否**/
+	private String enterElectronicSystem;
 	
-    /**经营资格登记证**/
+    /**经营资格登记证 json数据**/
 	private String registrationCertificate;
-	
-    /**合作时间**/
-	private Date cooperateTime;
-	
+
     /**综合评分**/
 	private BigDecimal combinedScoring;
 	
@@ -65,9 +93,83 @@ public class FreightforwardingInfo{
 	
     /**修改时间**/
 	private Date modifyTime;
-	
-	
-	public FreightforwardingInfo() {
+
+	/**自定义字段**/
+	private String customField;
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getSupplierClass() {
+		return supplierClass;
+	}
+
+	public void setSupplierClass(String supplierClass) {
+		this.supplierClass = supplierClass;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getShortName() {
+		return shortName;
+	}
+
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
+
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+	public BigDecimal getRegisterFund() {
+		return registerFund;
+	}
+
+	public void setRegisterFund(BigDecimal registerFund) {
+		this.registerFund = registerFund;
+	}
+
+	public String getRegisterAddr() {
+		return registerAddr;
+	}
+
+	public void setRegisterAddr(String registerAddr) {
+		this.registerAddr = registerAddr;
+	}
+
+	public String getNVOCC() {
+		return NVOCC;
+	}
+
+	public void setNVOCC(String NVOCC) {
+		this.NVOCC = NVOCC;
+	}
+
+	public String getEnterElectronicSystem() {
+		return enterElectronicSystem;
+	}
+
+	public void setEnterElectronicSystem(String enterElectronicSystem) {
+		this.enterElectronicSystem = enterElectronicSystem;
+	}
+
+	public Freightforwarding() {
 	}
 	
 	public String getCustomerId() {
@@ -133,14 +235,7 @@ public class FreightforwardingInfo{
 	public void setTransportationMethods(String transportationMethods) {
 		this.transportationMethods = transportationMethods;
 	}
-	
-	public String getFreightForwardingRemarks() {
-		return freightForwardingRemarks;
-	}
-	
-	public void setFreightForwardingRemarks(String freightForwardingRemarks) {
-		this.freightForwardingRemarks = freightForwardingRemarks;
-	}
+
 	
 	public String getBusinessLicence() {
 		return businessLicence;
@@ -221,6 +316,21 @@ public class FreightforwardingInfo{
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
 	}
-	
 
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+
+	public String getCustomField() {
+		return customField;
+	}
+
+	public void setCustomField(String customField) {
+		this.customField = customField;
+	}
 }

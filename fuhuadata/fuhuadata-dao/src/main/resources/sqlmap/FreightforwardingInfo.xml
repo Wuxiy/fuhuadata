@@ -3,7 +3,7 @@
         "http://www.ibatis.com/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="FREIGHTFORWARDINGINFO">
-   	<typeAlias alias="FreightforwardingInfo" type="com.fuhuadata.domain.FreightforwardingInfo"/>
+   	<typeAlias alias="FreightforwardingInfo" type="com.fuhuadata.domain.Freightforwarding"/>
    	<typeAlias alias="QueryFreightforwardingInfo" type="com.fuhuadata.domain.query.QueryFreightforwardingInfo"/>
 	
 	<resultMap id="FREIGHTFORWARDINGINFO-MAP" class="FreightforwardingInfo">

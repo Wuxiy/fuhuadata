@@ -228,22 +228,19 @@
                                         <span class="input-group-addon">%</span>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group hidden" id="corporation">
-                                #*<label class="col-xs-1 control-label" lang="zh">销售费用比率<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <label class="col-xs-1 control-label" for="exchangeTermsDetail" lang="zh">收汇条款明细<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" id="exchangeTermsDetail" data-control="on" type="text" disabled/>
+                                </div>
+                                <label class="col-xs-1 control-label" for="latestDeliveryTime" lang="zh">最迟交货时间<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="saleRate" value="0.50" disabled/>
+                                        <input class="form-control" id="latestDeliveryTime" data-control="on" type="date" disabled/>
                                         <span class="input-group-addon">%</span>
                                     </div>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">管理费用比率<sup data-view="editView" class="not-null hidden">*</sup></label>
-                                <div class="col-xs-2">
-                                    <div class="input-group">
-                                        <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="managementRate" value="0.20" disabled/>
-                                        <span class="input-group-addon">%</span>
-                                    </div>
-                                </div>*#
+                            </div>
+                            <div class="form-group hidden" id="corporation">
                                 <label class="col-xs-1 control-label" lang="zh">信保费率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
@@ -329,7 +326,7 @@
                             <th class="text-center" lang="zh">柜型</th>
                             <th class="text-center" lang="zh">柜数</th>
                             <th class="text-center" lang="zh">交货时间</th>
-                            <th class="text-center" lang="zh">最低销售价（元/KG（L)）</th>
+                            <th class="text-center" lang="zh">最低销售价（元/T(kL)）</th>
                             <th class="text-center" lang="zh">单据要求</th>
                             <th class="text-center" lang="zh">订舱出运要求</th>
                             <th class="text-center" lang="zh">勾选删除项</th>
@@ -483,6 +480,9 @@
                         if(businessOrder.creditRate!=undefined){$('#creditRate').val(businessOrder.creditRate);} // 信保赔付率
                         if(businessOrder.transportFlag!=undefined){$('#transportFlag').val(businessOrder.transportFlag);} // 是否可转运
                         if(businessOrder.partialShipmentFalg!=undefined){$('#partialShipmentFalg').val(businessOrder.partialShipmentFalg);} // 是否可分批出运
+                        if(businessOrder.exchangeTermsDetail!=undefined){$('#exchangeTermsDetail').val(businessOrder.exchangeTermsDetail);} // 收汇条款明细
+                        if(businessOrder.latestDeliveryTime!=undefined){$('#latestDeliveryTime').val(businessOrder.latestDeliveryTime);} // 最迟交货时间
+
                         isShowCre(businessOrder.isCreditRisk); // 判断是否显示信保相关字段
 
                         var customerBaseInfo = result.data.customerBaseInfo;
@@ -703,13 +703,16 @@
                 "creditRate":$('#creditRate').val(), // 信保赔付率
                 "transportFlag":$('#transportFlag').val(), // 是否可转运
                 "partialShipmentFalg":$('#partialShipmentFalg').val(), // 是否可分批出运
+                "exchangeTermsDetail":$('#exchangeTermsDetail').val(), // 收汇条款明细
+                "latestDeliveryTime":$('#latestDeliveryTime').val() // 最迟交货时间
 
-                "createTime": CRM.getTime(),
+
+                /*"createTime": CRM.getTime(),
                 "createUserId": 2,
                 "createUserName":"杨洋",
                 "modifyTime":"2017-03-02 11:44:49",
                 "lastmodifyUserId": 1,
-                "lastmodifyUserName": "胡向阳"
+                "lastmodifyUserName": "胡向阳"*/
             }
             return JSON.stringify(data);
         }
@@ -755,6 +758,8 @@
                 "creditRate":$('#creditRate').val(), // 信保赔付率
                 "transportFlag":$('#transportFlag').val(), // 是否可转运
                 "partialShipmentFalg":$('#partialShipmentFalg').val(), // 是否可分批出运
+                "exchangeTermsDetail":$('#exchangeTermsDetail').val(), // 收汇条款明细
+                "latestDeliveryTime":$('#latestDeliveryTime').val() // 最迟交货时间
                 /*"internalSupplyId":$('#internalSupplyName').data('val'),
                 "internalSupplyName":$('#internalSupplyName').val()*/
 

@@ -1,10 +1,8 @@
 package com.fuhuadata.dao.impl;
 import java.util.List;
 import com.fuhuadata.domain.query.QueryFreightforwardingInfo;
-import com.fuhuadata.domain.FreightforwardingInfo;
+import com.fuhuadata.domain.Freightforwarding;
 import com.fuhuadata.dao.FreightforwardingInfoDao;
-import javax.annotation.Resource;
-import org.springframework.stereotype.Component;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 /**
  * @author wangbo
@@ -22,33 +20,33 @@ public class FreightforwardingInfoDaoImpl extends SqlMapClientTemplate implement
     public static final String GET_PAGE = "FREIGHTFORWARDINGINFO.GET-PAGE";
     public static final String COUNT = "FREIGHTFORWARDINGINFO.COUNT";
     
-    public FreightforwardingInfo addFreightforwardingInfo(FreightforwardingInfo freightforwardingInfo) {
-		freightforwardingInfo.setCustomerId((String) this.insert(ADD, freightforwardingInfo));
-    	return freightforwardingInfo;
+    public Freightforwarding addFreightforwardingInfo(Freightforwarding freightforwarding) {
+		freightforwarding.setCustomerId((String) this.insert(ADD, freightforwarding));
+    	return freightforwarding;
     }
     
-    public int updateFreightforwardingInfoById(String customer_id, FreightforwardingInfo freightforwardingInfo) {
-    	freightforwardingInfo.setCustomerId(customer_id);
-		return this.update(UPDATE, freightforwardingInfo);
+    public int updateFreightforwardingInfoById(String customer_id, Freightforwarding freightforwarding) {
+    	freightforwarding.setCustomerId(customer_id);
+		return this.update(UPDATE, freightforwarding);
     }
     
     public int deleteFreightforwardingInfoById(String customer_id) {
     	return this.update(DELETE_BY_ID, customer_id);
     }
     
-    public List<FreightforwardingInfo> getAllFreightforwardingInfos() {
+    public List<Freightforwarding> getAllFreightforwardingInfos() {
     	return this.queryForList(GET_ALL);
     }
     	
-    public List<FreightforwardingInfo> getFreightforwardingInfosByQuery(QueryFreightforwardingInfo queryFreightforwardingInfo) {
+    public List<Freightforwarding> getFreightforwardingInfosByQuery(QueryFreightforwardingInfo queryFreightforwardingInfo) {
     	return this.queryForList(GET_BY_QUERY, queryFreightforwardingInfo);
     }
     	
-    public FreightforwardingInfo getFreightforwardingInfoById(String customer_id) {
-    	return (FreightforwardingInfo) this.queryForObject(GET_BY_ID, customer_id);
+    public Freightforwarding getFreightforwardingInfoById(String customer_id) {
+    	return (Freightforwarding) this.queryForObject(GET_BY_ID, customer_id);
     }
     
-    public List<FreightforwardingInfo> getFreightforwardingInfosByPage(QueryFreightforwardingInfo queryFreightforwardingInfo) {
+    public List<Freightforwarding> getFreightforwardingInfosByPage(QueryFreightforwardingInfo queryFreightforwardingInfo) {
     	return this.queryForList(GET_PAGE, queryFreightforwardingInfo);
     }
     	

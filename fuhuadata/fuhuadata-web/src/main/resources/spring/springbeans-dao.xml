@@ -24,14 +24,14 @@
 	</bean>
 
 	<bean id="dataSourceOracle" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url" value="jdbc:oracle:thin:@192.168.30.30:1521/orcl"/>
-		<property name="username" value="fh20170506"/>
-		<property name="password" value="1"/>
-		<property name="maxActive" value="100"/>
-		<property name="maxIdle" value="8"/>
-		<property name="minIdle" value="1"/>
-	</bean>
+	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+	<property name="url" value="jdbc:oracle:thin:@192.168.30.30:1521/orcl"/>
+	<property name="username" value="fh20170506"/>
+	<property name="password" value="1"/>
+	<property name="maxActive" value="100"/>
+	<property name="maxIdle" value="8"/>
+	<property name="minIdle" value="1"/>
+</bean>
 
 
 	<!-- iBatis ÅäÖÃ -->
@@ -62,11 +62,11 @@
     </bean>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="multiDataSource"/>
-        <property name="typeAliasesPackage" value="com.fuhuadata.domain.mybatis"/>
-        <property name="mapperLocations" value="classpath:/sqlmap/mapper/**/*.xml"/>
-        <property name="configLocation" value="classpath:/mybatis-config.xml"/>
-    </bean>
+	<property name="dataSource" ref="multiDataSource"/>
+	<property name="typeAliasesPackage" value="com.fuhuadata.domain.mybatis"/>
+	<property name="mapperLocations" value="classpath:/sqlmap/mapper/**/*.xml"/>
+	<property name="configLocation" value="classpath:/mybatis-config.xml"/>
+</bean>
 
     <!-- Í¨ÓÃ mapper ÅäÖÃ -->
     <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
