@@ -418,6 +418,8 @@ $('#delete').on('click',function(){
 //新增关联
 var cellcheckboxlists;//关联id数组
 $('#addrelate').on('click',function(){
+    modalrelatetable.html('');
+
     var cellcheckbox = $('[name="cellcheckbox"]');
     var cellcheckboxlist = [];
     cellcheckbox.each(function(){

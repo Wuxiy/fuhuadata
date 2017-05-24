@@ -153,7 +153,7 @@ function addAnotherName() {
         "customerEnterpriceNatures":checkboxarrAdd()
     };
     console.log(data);
-    return JSON.stringify(data);
+    return JSON.stringify(data);//封装JSON对象
 }
 /*
 function checkboxAddtext(){

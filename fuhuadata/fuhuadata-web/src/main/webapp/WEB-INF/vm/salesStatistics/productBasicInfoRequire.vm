@@ -218,7 +218,7 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input data-control="on" id="taxFree" class="form-control notnull isdisabled" value="" disabled>
+                                                <input data-control="on" id="taxFree" class="form-control notnull isdisabled" value="0" disabled>
                                                 <span class="input-group-addon">%</span>
                                             </div>
                                         </td>
@@ -468,6 +468,10 @@
             }else{
                 var isup = true;
                 var notnull = $('.notnull');
+                console.log($('#taxFree').val());
+
+                console.log($('#purchasePrice').val());
+                console.log($('#advisePrice').val());
                 notnull.each(function () {
                     var val = $(this).val();
                     if(val == ''||val == null){
@@ -1042,10 +1046,10 @@
         }
 
         if($(this).val() == '09'){
-            $('.hidecang').hide();
             $('#advisePrice').val('0');
             $('#taxFree').val('0');
             $('#purchasePrice').val('0');
+            $('.hidecang').hide();
         }else{
             $('.hidecang').show();
         }
@@ -1074,13 +1078,13 @@
             }
         }else{
             $('#purchasePrice').attr('disabled',false);
-            $('#purchasePrice').val('');
+            $('#purchasePrice').val('0');
             $('#advisePrice').attr('disabled',true);
             $('#advisePrice').val('0');
             $('#grossMargin').attr('disabled',false);
             $('#grossMargin').val('');
             $('#taxFree').attr('disabled',false);
-            $('#taxFree').val('');
+            $('#taxFree').val('0');
         }
     })
 
