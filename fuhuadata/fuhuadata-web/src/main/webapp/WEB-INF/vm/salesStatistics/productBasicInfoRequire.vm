@@ -468,10 +468,6 @@
             }else{
                 var isup = true;
                 var notnull = $('.notnull');
-                console.log($('#taxFree').val());
-
-                console.log($('#purchasePrice').val());
-                console.log($('#advisePrice').val());
                 notnull.each(function () {
                     var val = $(this).val();
                     if(val == ''||val == null){

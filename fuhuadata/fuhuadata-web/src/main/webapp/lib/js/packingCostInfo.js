@@ -17,89 +17,96 @@
         $('.danhao').hide();
     }
 
+    //渲染数据和关联包材列表
+    function renderList() {
+        jQuery.ajax({
+            type:'GET',
+            url:url,
+            success:function(result){
+                var ResultData = result.data;
+
+                if(ResultData.pack){
+                    var pack = ResultData.pack;
+                    var arr = pack.suitableType;
+                    var arr2 = arr.split(',');
+                    $.each(arr2,function(index,suitname){
+                        $("input[name='check']").each(function(){
+                            if($(this).val() == suitname){
+                                $(this).attr('checked',true);
+                            }
+                        })
+                    })
+                    $('#packName').val(ifEmpty(pack.packName));
+                    $('#spec').val(ifEmpty(pack.spec));
+                    $('#size').val(ifEmpty(pack.size));
+                    $('#quality').val(ifEmpty(pack.quality));
+                    $('#qualityIndex').val(ifEmpty(pack.qualityIndex));
+                    $('#qualityTargetValue').val(ifEmpty(pack.qualityTargetValue));
+                    $('#unitPrice').val(ifEmpty(pack.unitPrice));
+                    $('#consumption').val(ifEmpty(pack.consumption));
+                    $('#priceEndDate').val(ifEmpty(pack.priceEndDate));
+                    $('#status').val(ifEmpty(pack.status));
+                    $('#bRemarks').val(ifEmpty(pack.bRemarks));
+
+                    $('#packpackingId').text(ifEmpty(pack.packingId));
+                    $('#packpackName').text(ifEmpty(pack.packName));
+                    $('#packspec').text(ifEmpty(pack.spec));
+                    $('#packsize').text(ifEmpty(pack.size));
+                    $('#packquality').text(ifEmpty(pack.quality));
+                    $('#packunitPrice').text(ifEmpty(pack.unitPrice));
+                    $('#packconsumption').text(ifEmpty(pack.consumption));
+                    $('#packstatus').text(ifEmpty(pack.status));
+                }
+
+                if(ResultData.nodes){
+                    var node = ResultData.nodes;
+                    var table_html = '';
+                    for(var i=0;i<node.length;i++){
+                        table_html += '<tr><td class="text-center"><input type="checkbox" name="cellcheckbox" data-relationId="'+node[i].relationId+'" value="'+node[i].packingId+'" /></td>';
+                        table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].packingId)+'</td>';
+                        table_html += '<td class="col-xs-2 text-center text-middle">'+ifEmpty(node[i].packName)+'</td>';
+                        table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].spec)+'</td>';
+                        table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].size)+'</td>';
+                        table_html += '<td class="col-xs-2 text-center text-middle">'+ifEmpty(node[i].quality)+'</td>';
+                        table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].unitPrice)+'</td>';
+                        table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].consumption)+'</td>';
+                        if(ifEmpty(node[i].isEqualOuter) == 1){
+                            table_html += '<td class="text-center"><input type="checkbox" name="isEqualOuter" checked/></td>';
+                        }else if(node[i].bigCategoryId == 2){
+                            table_html += '<td class="text-center"></td>';
+                        }else{
+                            table_html += '<td class="text-center"><input type="checkbox" name="isEqualOuter"/></td>';
+                        }
+                        table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].status)+'</td></tr>';
+
+                    }
+                    $(table_html).appendTo(table);
+                }
+
+                if(ResultData.imagePath){
+                    var reData = eval(ResultData.imagePath);
+                    console.log(reData);
+                    for(var j=0;j<reData.length;j++){
+                        imgGroup.innerHTML += '<div class="col-xs-3">'+
+                            '<button type="button" class="close" name="close" style="position: absolute;top:3px;left:0;" disabled>×</button>'+
+                            '<div class="col-xs-12 thumbnail">'+
+                            '<img style="height: 240px;" data-toggle="modal" data-target="#imgModal" data-name="" src="'+basePath + reData[j].path+'" alt="请点击添加图片" class="imgpath">'+
+                            '<div class="input-group col-xs-10 col-xs-offset-1" style="padding-top: 5px">'+
+                            '<input class="form-control text-center filename" data-url="'+reData[j].path+'" style="" value="'+reData[j].name+'" disabled/>'+
+                            '<div class="input-group-btn"><button data-btn="modification" class="btn btn-xs btn-default modifyimg" type="button" disabled>图片修改</button></div>'+
+                            '</div>'+
+                            '</div>'+
+                            '</div>';
+                    }
+                }
+
+            }
+        })
+    }
+
 $(document).ready(function(){
     $('.imagesbtn').hide();
-    jQuery.ajax({
-        type:'GET',
-        url:url,
-        success:function(result){
-            var ResultData = result.data;
-
-            if(ResultData.pack){
-                var pack = ResultData.pack;
-                var arr = pack.suitableType;
-                var arr2 = arr.split(',');
-                $.each(arr2,function(index,suitname){
-                    $("input[name='check']").each(function(){
-                        if($(this).val() == suitname){
-                            $(this).attr('checked',true);
-                        }
-                    })
-                })
-                $('#packName').val(ifEmpty(pack.packName));
-                $('#spec').val(ifEmpty(pack.spec));
-                $('#size').val(ifEmpty(pack.size));
-                $('#quality').val(ifEmpty(pack.quality));
-                $('#qualityIndex').val(ifEmpty(pack.qualityIndex));
-                $('#qualityTargetValue').val(ifEmpty(pack.qualityTargetValue));
-                $('#unitPrice').val(ifEmpty(pack.unitPrice));
-                $('#consumption').val(ifEmpty(pack.consumption));
-                $('#priceEndDate').val(ifEmpty(pack.priceEndDate));
-                $('#status').val(ifEmpty(pack.status));
-                $('#bRemarks').val(ifEmpty(pack.bRemarks));
-
-                $('#packpackingId').text(ifEmpty(pack.packingId));
-                $('#packpackName').text(ifEmpty(pack.packName));
-                $('#packspec').text(ifEmpty(pack.spec));
-                $('#packsize').text(ifEmpty(pack.size));
-                $('#packquality').text(ifEmpty(pack.quality));
-                $('#packunitPrice').text(ifEmpty(pack.unitPrice));
-                $('#packconsumption').text(ifEmpty(pack.consumption));
-                $('#packstatus').text(ifEmpty(pack.status));
-            }
-
-            if(ResultData.nodes){
-                var node = ResultData.nodes;
-                var table_html = '';
-                for(var i=0;i<node.length;i++){
-                    table_html += '<tr><td class="text-center"><input type="checkbox" name="cellcheckbox" data-relationId="'+node[i].relationId+'" value="'+node[i].packingId+'" /></td>';
-                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].packingId)+'</td>';
-                    table_html += '<td class="col-xs-2 text-center text-middle">'+ifEmpty(node[i].packName)+'</td>';
-                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].spec)+'</td>';
-                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].size)+'</td>';
-                    table_html += '<td class="col-xs-2 text-center text-middle">'+ifEmpty(node[i].quality)+'</td>';
-                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].unitPrice)+'</td>';
-                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].associatedConsumption)+'</td>';
-                    if(ifEmpty(node[i].isEqualOuter) == 1){
-                        table_html += '<td class="text-center"><input type="checkbox" name="isEqualOuter" checked/></td>';
-                    }else{
-                        table_html += '<td class="text-center"><input type="checkbox" name="isEqualOuter"/></td>';
-                    }
-                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].status)+'</td></tr>';
-
-                }
-                $(table_html).appendTo(table);
-            }
-
-            if(ResultData.imagePath){
-                var reData = eval(ResultData.imagePath);
-                console.log(reData);
-                for(var j=0;j<reData.length;j++){
-                    imgGroup.innerHTML += '<div class="col-xs-3">'+
-                        '<button type="button" class="close" name="close" style="position: absolute;top:3px;left:0;" disabled>×</button>'+
-                        '<div class="col-xs-12 thumbnail">'+
-                        '<img style="height: 240px;" data-toggle="modal" data-target="#imgModal" data-name="" src="'+basePath + reData[j].path+'" alt="请点击添加图片" class="imgpath">'+
-                        '<div class="input-group col-xs-10 col-xs-offset-1" style="padding-top: 5px">'+
-                        '<input class="form-control text-center filename" data-url="'+reData[j].path+'" style="" value="'+reData[j].name+'" disabled/>'+
-                        '<div class="input-group-btn"><button data-btn="modification" class="btn btn-xs btn-default modifyimg" type="button" disabled>图片修改</button></div>'+
-                        '</div>'+
-                        '</div>'+
-                        '</div>';
-                }
-            }
-
-        }
-    })
+    renderList();
 })
 
 //图片上传
@@ -318,90 +325,7 @@ $('#delete').on('click',function(){
                         $('#addField').modal('hide');
 
                         $('.imagesbtn').hide();
-                        jQuery.ajax({
-                            type:'GET',
-                            url:basePath+'/packingArchives/getPackingArchivesById?id='+id,
-                            success:function(result){
-                                var ResultData = result.data;
-
-                                if(ResultData.pack){
-                                    var pack = ResultData.pack;
-                                    var arr = pack.suitableType;
-                                    var arr2 = arr.split(',');
-                                    $.each(arr2,function(index,suitname){
-                                        $("input[name='check']").each(function(){
-                                            if($(this).val() == suitname){
-                                                $(this).attr('checked',true);
-                                            }
-                                        })
-                                    })
-                                    $('#packName').val(ifEmpty(pack.packName));
-                                    $('#spec').val(ifEmpty(pack.spec));
-                                    $('#size').val(ifEmpty(pack.size));
-                                    $('#quality').val(ifEmpty(pack.quality));
-                                    $('#qualityIndex').val(ifEmpty(pack.qualityIndex));
-                                    $('#qualityTargetValue').val(ifEmpty(pack.qualityTargetValue));
-                                    $('#unitPrice').val(ifEmpty(pack.unitPrice));
-                                    $('#consumption').val(ifEmpty(pack.consumption));
-                                    $('#priceEndDate').val(ifEmpty(pack.priceEndDate));
-                                    $('#status').val(ifEmpty(pack.status));
-                                    $('#bRemarks').val(ifEmpty(pack.bRemarks));
-
-                                    $('#packpackingId').text(ifEmpty(pack.packingId));
-                                    $('#packpackName').text(ifEmpty(pack.packName));
-                                    $('#packspec').text(ifEmpty(pack.spec));
-                                    $('#packsize').text(ifEmpty(pack.size));
-                                    $('#packquality').text(ifEmpty(pack.quality));
-                                    $('#packunitPrice').text(ifEmpty(pack.unitPrice));
-                                    $('#packconsumption').text(ifEmpty(pack.consumption));
-                                    $('#packstatus').text(ifEmpty(pack.status));
-                                }
-
-                                if(ResultData.nodes){
-                                    var node = ResultData.nodes;
-                                    var table_html = '';
-                                    table.html('');
-                                    for(var i=0;i<node.length;i++){
-                                        table_html += '<tr><td class="text-center"><input type="checkbox" name="cellcheckbox" data-relationId="'+node[i].relationId+'" value="'+node[i].packingId+'" /></td>';
-                                        table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].packingId)+'</td>';
-                                        table_html += '<td class="col-xs-2 text-center text-middle">'+ifEmpty(node[i].packName)+'</td>';
-                                        table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].spec)+'</td>';
-                                        table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].size)+'</td>';
-                                        table_html += '<td class="col-xs-2 text-center text-middle">'+ifEmpty(node[i].quality)+'</td>';
-                                        table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].unitPrice)+'</td>';
-                                        table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].associatedConsumption)+'</td>';
-                                        if(ifEmpty(node[i].isEqualOuter) == 1){
-                                            table_html += '<td class="text-center"><input type="checkbox" name="isEqualOuter" checked/></td>';
-                                        }else{
-                                            table_html += '<td class="text-center"><input type="checkbox" name="isEqualOuter"/></td>';
-                                        }
-                                        table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].status)+'</td></tr>';
-
-                                    }
-                                    $(table_html).appendTo(table);
-                                }else{
-                                    table.html('');
-                                }
-
-                                if(ResultData.imagePath){
-                                    var reData = eval(ResultData.imagePath);
-                                    console.log(reData);
-                                    for(var j=0;j<reData.length;j++){
-                                        imgGroup.innerHTML += '<div class="col-xs-3">'+
-                                            '<button type="button" class="close" name="close" style="position: absolute;top:3px;left:0;" disabled>×</button>'+
-                                            '<div class="col-xs-12 thumbnail">'+
-                                            '<img style="height: 240px;" data-toggle="modal" data-target="#imgModal" data-name="" src="'+basePath + reData[j].path+'" alt="请点击添加图片" class="imgpath">'+
-                                            '<div class="input-group col-xs-10 col-xs-offset-1" style="padding-top: 5px">'+
-                                            '<input class="form-control text-center filename" data-url="'+reData[j].path+'" style="" value="'+reData[j].name+'" disabled/>'+
-                                            '<div class="input-group-btn"><button data-btn="modification" class="btn btn-xs btn-default modifyimg" type="button" disabled>图片修改</button></div>'+
-                                            '</div>'+
-                                            '</div>'+
-                                            '</div>';
-                                    }
-                                }
-
-                            }
-                        });
+                        renderList();
                         $('a[href="#Packrelate"]').tab('show');
                     }
                     else{
@@ -543,88 +467,7 @@ $('#finish_relate').on('click',function(){
                     $('#addField').modal('hide');
 
                     $('.imagesbtn').hide();
-                    jQuery.ajax({
-                        type:'GET',
-                        url:basePath+'/packingArchives/getPackingArchivesById?id='+id,
-                        success:function(result){
-                            var ResultData = result.data;
-
-                            if(ResultData.pack){
-                                var pack = ResultData.pack;
-                                var arr = pack.suitableType;
-                                var arr2 = arr.split(',');
-                                $.each(arr2,function(index,suitname){
-                                    $("input[name='check']").each(function(){
-                                        if($(this).val() == suitname){
-                                            $(this).attr('checked',true);
-                                        }
-                                    })
-                                })
-                                $('#packName').val(ifEmpty(pack.packName));
-                                $('#spec').val(ifEmpty(pack.spec));
-                                $('#size').val(ifEmpty(pack.size));
-                                $('#quality').val(ifEmpty(pack.quality));
-                                $('#qualityIndex').val(ifEmpty(pack.qualityIndex));
-                                $('#qualityTargetValue').val(ifEmpty(pack.qualityTargetValue));
-                                $('#unitPrice').val(ifEmpty(pack.unitPrice));
-                                $('#consumption').val(ifEmpty(pack.consumption));
-                                $('#priceEndDate').val(ifEmpty(pack.priceEndDate));
-                                $('#status').val(ifEmpty(pack.status));
-                                $('#bRemarks').val(ifEmpty(pack.bRemarks));
-
-                                $('#packpackingId').text(ifEmpty(pack.packingId));
-                                $('#packpackName').text(ifEmpty(pack.packName));
-                                $('#packspec').text(ifEmpty(pack.spec));
-                                $('#packsize').text(ifEmpty(pack.size));
-                                $('#packquality').text(ifEmpty(pack.quality));
-                                $('#packunitPrice').text(ifEmpty(pack.unitPrice));
-                                $('#packconsumption').text(ifEmpty(pack.consumption));
-                                $('#packstatus').text(ifEmpty(pack.status));
-                            }
-
-                            if(ResultData.nodes){
-                                var node = ResultData.nodes;
-                                var table_html = '';
-                                table.html('');
-                                for(var i=0;i<node.length;i++){
-                                    table_html += '<tr><td class="text-center"><input type="checkbox" name="cellcheckbox" data-relationId="'+node[i].relationId+'" value="'+node[i].packingId+'" /></td>';
-                                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].packingId)+'</td>';
-                                    table_html += '<td class="col-xs-2 text-center text-middle">'+ifEmpty(node[i].packName)+'</td>';
-                                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].spec)+'</td>';
-                                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].size)+'</td>';
-                                    table_html += '<td class="col-xs-2 text-center text-middle">'+ifEmpty(node[i].quality)+'</td>';
-                                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].unitPrice)+'</td>';
-                                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].associatedConsumption)+'</td>';
-                                    if(ifEmpty(node[i].isEqualOuter) == 1){
-                                        table_html += '<td class="text-center"><input type="checkbox" name="isEqualOuter" checked/></td>';
-                                    }else{
-                                        table_html += '<td class="text-center"><input type="checkbox" name="isEqualOuter"/></td>';
-                                    }
-                                    table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].status)+'</td></tr>';
-
-                                }
-                                $(table_html).appendTo(table);
-                            }
-
-                            if(ResultData.imagePath){
-                                var reData = eval(ResultData.imagePath);
-                                console.log(reData);
-                                for(var j=0;j<reData.length;j++){
-                                    imgGroup.innerHTML += '<div class="col-xs-3">'+
-                                        '<button type="button" class="close" name="close" style="position: absolute;top:3px;left:0;" disabled>×</button>'+
-                                        '<div class="col-xs-12 thumbnail">'+
-                                        '<img style="height: 240px;" data-toggle="modal" data-target="#imgModal" data-name="" src="'+basePath + reData[j].path+'" alt="请点击添加图片" class="imgpath">'+
-                                        '<div class="input-group col-xs-10 col-xs-offset-1" style="padding-top: 5px">'+
-                                        '<input class="form-control text-center filename" data-url="'+reData[j].path+'" style="" value="'+reData[j].name+'" disabled/>'+
-                                        '<div class="input-group-btn"><button data-btn="modification" class="btn btn-xs btn-default modifyimg" type="button" disabled>图片修改</button></div>'+
-                                        '</div>'+
-                                        '</div>'+
-                                        '</div>';
-                                }
-                            }
-
-                        }
-                    });
+                    renderList();
                     $('a[href="#Packrelate"]').tab('show');
                 }
             })
