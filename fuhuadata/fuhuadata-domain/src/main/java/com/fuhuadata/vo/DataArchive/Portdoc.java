@@ -14,6 +14,26 @@ public class Portdoc {
 
     private String vcode;
 
+    private String country;
+
+    private String ecountry;
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getEcountry() {
+        return ecountry;
+    }
+
+    public void setEcountry(String ecountry) {
+        this.ecountry = ecountry;
+    }
+
     public String getPkPortdoc() {
         return pkPortdoc;
     }
