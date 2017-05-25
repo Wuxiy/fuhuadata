@@ -57,7 +57,7 @@
                 <a class="list-group-item" lang="zh" href="${request.contextPath}/businessOrder/intoCostAndProfitStatistics">费用与利润</a>
                 <a class="list-group-item" lang="zh" href="${request.contextPath}/customerVisitRecord/intoCustomerMaintenance">客户维护</a>
                 <a class="list-group-item" lang="zh" href="${request.contextPath}/businessOrder/intoProfitStatistics">利润统计</a>
-                <a class="list-group-item" lang="zh" href="${request.contextPath}/businessOrder/intoHistoryOrder">我的历史订单</a>
+##                <a class="list-group-item" lang="zh" href="${request.contextPath}/businessOrder/intoHistoryOrder">我的历史订单</a>
             </div>
             <a data-toggle="collapse" href="#collapseThree" data-parent="#nav-affix" lang="zh">
                 <span class="glyphicon glyphicon-stats"></span>
