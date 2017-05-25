@@ -174,6 +174,7 @@ public class BusinessOrderProductAction {
                 map.put("productRequireId",businessProductRequire.getId());
             }
             map.put("success",true);
+            pojo.setCode(1);
             map.put("businessProductId",businessProductId);
             map.put("orderId",businessOrderProduct.getOrderId());
         } catch (Exception e) {
