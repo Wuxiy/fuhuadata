@@ -69,11 +69,11 @@
             <isNotNull prepend=", " property="currency">currency = #currency#</isNotNull>
             <isNotNull prepend=", " property="kind">kind = #kind#</isNotNull>
             <isNotNull prepend=", " property="other">other = #other#</isNotNull>
-            <isNotNull prepend=", " property="suitableProduct">rate = #rate#</isNotNull>
+            <isNotNull prepend=", " property="rate">rate = #rate#</isNotNull>
             <isNotNull prepend=", " property="grossMargin">gross_margin = #grossMargin#</isNotNull>
             <isNotNull prepend=", " property="rateValue">rate_value = #rateValue#</isNotNull>
             <isNotNull prepend=", " property="termofValidity">term_of_validity = #termofValidity#</isNotNull>
-            <isNotNull prepend=", " property="remarks">price_end = #remarks#</isNotNull>
+            <isNotNull prepend=", " property="remarks">remarks = #remarks#</isNotNull>
         </dynamic>
         WHERE rate_id = #rateId#
     </update>
@@ -86,7 +86,7 @@
 
     <select id="GET-BY-ID" resultMap="RATE-MAP" parameterClass="java.lang.Integer">
         <![CDATA[
-            SELECT * FROM k_knowledge_rate WHERE rate_id=#rateId#
+            SELECT * FROM k_knowledge_rate WHERE rate_id=#id#
         ]]>
     </select>
 

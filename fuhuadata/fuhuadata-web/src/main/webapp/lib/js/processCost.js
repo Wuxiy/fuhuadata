@@ -467,61 +467,6 @@ $(document).on("click",".componnentId",function(){
                 div.appendTo(test);
             }
             $('#costmodal').modal('show');
-            /*var html = [];
-            html += '<div class="modal-dialog">';
-            html += '<div class="modal-content">';
-            html += '<div class="modal-header">';
-            html += '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';
-            html += '<h2 class="modal-title" >成分价格</h2></div>';
-            html += '<div class="modal-body">';
-            html += '<form class="form-horizontal" action="">';
-            html += '<div class="form-group">';
-            html += '<label class="col-lg-2 control-label">成分名称<sup class="not-null">*</sup></label>';
-            html += '<div class="col-lg-6">';
-            html += '<input class="form-control notnull" type="text" value="'++'" id="componentName">';
-            html += '</div></div>';
-            html += '<div class="form-group">';
-            html += '<label class="col-lg-2 control-label">单价</label>';
-            html += '<div class="col-lg-3">';
-            html += '<div class="input-group">';
-            html += '<input class="form-control" type="text" value="' + ResultData.unitCost + '" id="unitCost">';
-            html += '<div class="input-group-btn">';
-            html += '<botton class="btn btn-xs btn-primary">(元/kg)</botton>';
-            html += '</div></div></div>';
-            html += '<label class="col-lg-2 control-label">价格有效期</label>';
-            html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="date" value="' + ResultData.priceEnd + '" id="priceEnd">';
-            html += '</div></div>';
-            html += '<div class="form-group">';
-            html += '<label class="col-lg-2 control-label">适合产品</label>';
-            html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="text" value="' + ResultData.suitableProduct + '" name="suitableProduct">';
-            html += '</div>';
-            html += '<label class="col-lg-2 control-label">单耗</label>';
-            html += '<div class="col-lg-3">';
-            html += '<div class="input-group">';
-            html += '<input class="form-control" type="text" value="' + ResultData.consumption + '" id="consumption">';
-            html += '<div class="input-group-btn">';
-            html += '<botton class="btn btn-xs btn-primary">(元/kg)</botton></div></div></div></div>';
-            html += '<div class="form-group">';
-            html += '<label class="col-xs-2 control-label">备注</label>';
-            html += '<div class="col-xs-8">';
-            html += '<textarea class="form-control"  rows="4" id="remarks">' + ResultData.remarks + '</textarea>';
-            html += '</div>';
-            html += '</div>';
-            html += '</form>';
-            html += '</div>';
-            html += '<div class="modal-footer">';
-            html += '<div class="row">';
-            html += '<div class="col-xs-2 col-xs-offset-3">';
-            html += '<button type="button" class="btn btn-primary btn-block updateCost" data_url="'+basePath+'/componentCost/doModify?id='+ResultData.componentId+'"> 完成 </button>';
-            html += '</div>';
-            html += '<div class="col-xs-2">';
-            html += '<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
-            html += '</div></div></div></div></div>';
-
-            $('#modal').html(html);
-            $('#modal').modal('show');*/
         }
     })
 })
@@ -534,7 +479,7 @@ $(document).on("click",".rate1",function(){
         type:'GET',
         url:url,
         success: function (result) {
-            var ResuleData = eval(result.data);
+            var ResultData = eval(result.data);
             var html = [];
             html += '<div class="modal-dialog">';
             html += '<div class="modal-content">';
@@ -546,22 +491,22 @@ $(document).on("click",".rate1",function(){
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">币种</label>';
             html += '<div class="col-lg-6">';
-            html += '<input class="form-control" type="text" value="' + ifEmpty(ResuleData.currency) + '" id="currency" disabled>';
+            html += '<input class="form-control" type="text" value="' + ifEmpty(ResultData.currency) + '" id="currency" disabled>';
             html += '</div></div>';
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">汇率</label>';
             html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="text" value="' + ifEmpty(ResuleData.rate) + '" id="rate">';
+            html += '<input class="form-control" type="text" value="' + ifEmpty(ResultData.rate) + '" id="rate">';
             html += '</div>';
             html += '<label class="col-lg-2 control-label">有效期</label>';
             html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="date" value="' + ifEmpty(ResuleData.termofValidity)+ '" id="termofValidity">';
+            html += '<input class="form-control" type="date" value="' + ifEmpty(ResultData.termofValidity)+ '" id="termofValidity">';
             html += '</div>';
             html += '</div>';
             html += '<div class="form-group">';
             html += '<label class="col-xs-2 control-label">备注</label>';
             html += '<div class="col-xs-8">';
-            html += '<textarea class="form-control"  rows="4" id="remarks">' + ifEmpty(ResuleData.remarks) + '</textarea>';
+            html += '<textarea class="form-control"  rows="4" id="remarks">' + ifEmpty(ResultData.remarks) + '</textarea>';
             html += '</div>';
             html += '</div>';
             html += '</form>';
@@ -569,7 +514,7 @@ $(document).on("click",".rate1",function(){
             html += '<div class="modal-footer">';
             html += '<div class="row">';
             html += '<div class="col-xs-3 col-xs-offset-3">';
-            html += '<button type="button" class="btn btn-primary btn-block updaterate1" data_url="'+basePath+'/Rate/doModify?id='+ResuleData.rateId+'" data_type="'+ResultData.type+'"> 完成 </button>';
+            html += '<button type="button" class="btn btn-primary btn-block updaterate1" data_url="'+basePath+'/Rate/doModify?id='+ResultData.rateId+'" data_type="'+ResultData.type+'"> 完成 </button>';
             html += '</div>';
             html += '<div class="col-xs-3">';
             html += '<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
@@ -589,7 +534,7 @@ $(document).on("click",".rate2",function(){
         type:'GET',
         url:url,
         success: function (result) {
-            var ResuleData = eval(result.data);
+            var ResultData = eval(result.data);
             var html = [];
             html += '<div class="modal-dialog">';
             html += '<div class="modal-content">';
@@ -601,22 +546,22 @@ $(document).on("click",".rate2",function(){
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">产品种类</label>';
             html += '<div class="col-lg-6">';
-            html += '<input class="form-control" type="text" value="' + ifEmpty(ResuleData.kind) + '" id="kind" disabled>';
+            html += '<input class="form-control" type="text" value="' + ifEmpty(ResultData.kind) + '" id="kind" disabled>';
             html += '</div></div>';
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">毛利率</label>';
             html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="text" value="' + ifEmpty(ResuleData.grossMargin) + '" id="grossMargin">';
+            html += '<input class="form-control" type="text" value="' + ifEmpty(ResultData.grossMargin) + '" id="grossMargin">';
             html += '</div>';
             html += '<label class="col-lg-2 control-label">有效期</label>';
             html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="text" value="' + ifEmpty(ResuleData. termofValidity)+ '" id="termofValidity">';
+            html += '<input class="form-control" type="date" value="' + ifEmpty(ResultData. termofValidity)+ '" id="termofValidity">';
             html += '</div>';
             html += '</div>';
             html += '<div class="form-group">';
             html += '<label class="col-xs-2 control-label">备注</label>';
             html += '<div class="col-xs-8">';
-            html += '<textarea class="form-control"  rows="4" id="remarks">' + ifEmpty(ResuleData.remarks) + '</textarea>';
+            html += '<textarea class="form-control"  rows="4" id="remarks">' + ifEmpty(ResultData.remarks) + '</textarea>';
             html += '</div>';
             html += '</div>';
             html += '</form>';
@@ -624,7 +569,7 @@ $(document).on("click",".rate2",function(){
             html += '<div class="modal-footer">';
             html += '<div class="row">';
             html += '<div class="col-xs-3 col-xs-offset-3">';
-            html += '<button type="button" class="btn btn-primary btn-block updaterate2" data_url="'+basePath+'/Rate/doModify?id='+ResuleData.rateId+'" data_type="'+ResultData.type+'"> 完成 </button>';
+            html += '<button type="button" class="btn btn-primary btn-block updaterate2" data_url="'+basePath+'/Rate/doModify?id='+ResultData.rateId+'" data_type="'+ResultData.type+'"> 完成 </button>';
             html += '</div>';
             html += '<div class="col-xs-3">';
             html += '<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
@@ -644,7 +589,7 @@ $(document).on("click",".rate3",function(){
         type:'GET',
         url:url,
         success: function (result) {
-            var ResuleData = eval(result.data);
+            var ResultData = eval(result.data);
             var html = [];
             html += '<div class="modal-dialog">';
             html += '<div class="modal-content">';
@@ -656,22 +601,22 @@ $(document).on("click",".rate3",function(){
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">币种</label>';
             html += '<div class="col-lg-6">';
-            html += '<input class="form-control" type="text" value="' + ifEmpty(ResuleData.other) + '" id="other" disabled>';
+            html += '<input class="form-control" type="text" value="' + ifEmpty(ResultData.other) + '" id="other" disabled>';
             html += '</div></div>';
             html += '<div class="form-group">';
             html += '<label class="col-lg-2 control-label">汇率</label>';
             html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="text" value="' + ifEmpty(ResuleData.rateValue) + '" id="rateValue">';
+            html += '<input class="form-control" type="text" value="' + ifEmpty(ResultData.rateValue) + '" id="rateValue">';
             html += '</div>';
             html += '<label class="col-lg-2 control-label">有效期</label>';
             html += '<div class="col-lg-3">';
-            html += '<input class="form-control" type="text" value="' + ifEmpty(ResuleData. termofValidity)+ '" id="termofValidity">';
+            html += '<input class="form-control" type="date" value="' + ifEmpty(ResultData. termofValidity)+ '" id="termofValidity">';
             html += '</div>';
             html += '</div>';
             html += '<div class="form-group">';
             html += '<label class="col-xs-2 control-label">备注</label>';
             html += '<div class="col-xs-8">';
-            html += '<textarea class="form-control"  rows="4" id="remarks">' + ifEmpty(ResuleData.remarks) + '</textarea>';
+            html += '<textarea class="form-control"  rows="4" id="remarks">' + ifEmpty(ResultData.remarks) + '</textarea>';
             html += '</div>';
             html += '</div>';
             html += '</form>';
@@ -679,7 +624,7 @@ $(document).on("click",".rate3",function(){
             html += '<div class="modal-footer">';
             html += '<div class="row">';
             html += '<div class="col-xs-3 col-xs-offset-3">';
-            html += '<button type="button" class="btn btn-primary btn-block updaterate3" data_url="'+basePath+'/Rate/doModify?id='+ResuleData.rateId+'" data_type="'+ResultData.type+'"> 完成 </button>';
+            html += '<button type="button" class="btn btn-primary btn-block updaterate3" data_url="'+basePath+'/Rate/doModify?id='+ResultData.rateId+'" data_type="'+ResultData.type+'"> 完成 </button>';
             html += '</div>';
             html += '<div class="col-xs-3">';
             html += '<button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消 </button>';
@@ -818,10 +763,13 @@ $(document).on("click",".updateFreight",function(){
         contentType:"application/json",
         data:JSON.stringify(data),
         success:function(result){
-            alert('修改成功');
-            $('#modal').modal('hide');
-            $('a[href="#freight"]').click();
-            /*location.reload();*/
+            if(result.code == 1){
+                alert('修改成功');
+                $('#modal').modal('hide');
+                $('a[href="#freight"]').click();
+            }else{
+                alert('修改失败');
+            }
         }
     })
 })
@@ -846,9 +794,13 @@ $(document).on("click",".updaterate1",function(){
         contentType:"application/json",
         data:JSON.stringify(data),
         success:function(result){
-            alert('修改成功');
-            $('#modal').modal('hide');
-            $('a[href="#rate"]').click();
+            if(result.code == 1){
+                alert('修改成功');
+                $('#modal').modal('hide');
+                $('a[href="#rate"]').click();
+            }else{
+                alert('修改失败');
+            }
         }
     })
 })
@@ -900,9 +852,13 @@ $(document).on("click",".updaterate3",function(){
         contentType:"application/json",
         data:JSON.stringify(data),
         success:function(result){
-            alert('修改成功');
-            $('#modal').modal('hide');
-            $('a[href="#rate"]').click();
+            if(result.code == 1){
+                alert('修改成功');
+                $('#modal').modal('hide');
+                $('a[href="#rate"]').click();
+            }else{
+                alert('修改失败');
+            }
         }
     })
 })

@@ -20,7 +20,7 @@ public interface RateService {
      */
 
     public Result<Rate> addRate(Rate rate);
-    public Result updateRate(int id,Rate rate);
+    public Result updateRateById(int id,Rate rate);
     public Result deleteRate(int id);
     public Result<Rate> getRateById(int id);
 

@@ -1,5 +1,6 @@
 package com.fuhuadata.web.springmvc;
 
+import com.fuhuadata.domain.FreightCost;
 import com.fuhuadata.domain.Rate;
 import com.fuhuadata.domain.query.RateQuery;
 import com.fuhuadata.domain.query.Result;
@@ -98,5 +99,22 @@ public class RateAction {
         return null;
     }
 
+    /**
+     * update
+     * @param rate
+     * @return
+     */
+    @RequestMapping(value = "/doModify",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "knowledgeBase-rate",methods = "doUpdate")
+    @ResponseBody
+    public ResultPojo  doModify(int id,@RequestBody Rate rate){
+        try{
+            Result<Rate> result = rateService.updateRateById(id,rate);
+            return result.getResultPojo();
+        }catch(Exception e){
+            log.error("更新费率错误",e);
+        }
+        return null;
+    }
 
 }
