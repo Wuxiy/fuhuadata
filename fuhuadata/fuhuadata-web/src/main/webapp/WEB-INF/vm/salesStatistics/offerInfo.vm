@@ -368,19 +368,19 @@
 
 ## 贸易国别
 <script id="tzC" type="text/html">
-    <%if (data.length>0) {%>
-    <%for (var i=0; i<data.length; i++) {%>
-    <li><a href="#" id="<%=data[i].pkTimezone%>" data-val="<%=data[i].code%>" style="padding-left: 6px"><%=data[i].name%></a></li>
+    <%if (data.list.length>0) {%>
+    <%for (var i=0; i<data.list.length; i++) {%>
+    <li><a href="#" id="<%=data.list[i].pkTimezone%>" data-val="<%=data.list[i].code%>" style="padding-left: 6px"><%=data.list[i].name%></a></li>
     <%}%>
     <%}%>
 </script>
 
 ## 起运港和目的港
 <script id="dpC" type="text/html">
-    <%if (data.length>0) {%>
-    <%for (var i=0; i<data.length; i++) {%>
-    <li><a href="#" data-val="<%=data[i].vcode%>" style="padding-left: 6px"><%=data[i].vname%></a></li>
-    <%}%>
+    <%if (data.list.length>0) {%>
+        <%for (var i=0; i<data.list.length; i++) {%>
+        <li><a href="#" data-val="<%=data.list[i].vcode%>" style="padding-left: 6px"><%if (data.currentLang == 'zh') {%><%=data.list[i].vname%>,<%=data.list[i].country%><%}else{%><%=data.list[i].venname%>,<%=data.list[i].ecountry%><%}%></a></li>
+        <%}%>
     <%}%>
 </script>
 
@@ -1045,9 +1045,11 @@
                         name:''
                     }),
                     callback:function (data) {
+                        var res = {};
                         if (data) {
-
-                            CRM.tplHandler(strId,data,ul);
+                            res.list = data;
+                            res.currentLang = lang.currentLang;
+                            CRM.tplHandler(strId,res,ul);
                         }
                     }
                 });
@@ -1065,8 +1067,11 @@
                     contentType:'application/json',
                     data:JSON.stringify(obj),
                     callback:function (data) {
+                        var res = {};
                         if (data) {
-                            CRM.tplHandler(strId,data,ul);
+                            res.list = data;
+                            res.currentLang = lang.currentLang;
+                            CRM.tplHandler(strId,res,ul);
                         }
                     }
                 });
