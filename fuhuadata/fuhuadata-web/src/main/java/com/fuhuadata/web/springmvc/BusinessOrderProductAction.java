@@ -169,7 +169,8 @@ public class BusinessOrderProductAction {
                 //新增
                 businessProductId = businessOrderProductService.addBusinessOrderProduct(businessOrderProduct,list);
             }
-            BusinessProductRequire businessProductRequire =  businessProductRequireService.getOneByQuery(null,businessProductId);
+            BusinessProductRequire businessProductRequire =  businessProductRequireService.getOneByQuery(null,
+                    businessProductId);
             if(businessProductRequire!=null){
                 map.put("productRequireId",businessProductRequire.getId());
             }
