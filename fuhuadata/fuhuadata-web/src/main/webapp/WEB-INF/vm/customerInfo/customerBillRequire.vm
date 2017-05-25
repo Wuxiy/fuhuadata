@@ -140,19 +140,19 @@
                             <tr>
                                 <td lang="zh">提单签单方式</td>
                                 <td class="form-group text-left">
-                                    <div class="checkbox col-xs-2">
-                                        <label><input name="telexRelease" type="checkbox" value="1" data-control="on" disabled/><span lang="zh">sea waybill</span></label>
+                                    <div class="checkbox col-xs-12">
+                                        <label><input name="telexRelease" type="checkbox" value="1" data-control="on" disabled/><span lang="zh">Sea Waybill</span></label>
                                     </div>
-                                    <div class="checkbox col-xs-2">
-                                        <label><input name="telexRelease" type="checkbox" value="2" data-control="on" disabled/><span lang="zh">目的港放单</span></label>
+                                    <div class="checkbox col-xs-12">
+                                        <label style="padding-top: 3px;"><input name="telexRelease" type="checkbox" value="2" data-control="on" disabled/><span lang="zh">目的港放单</span></label>
                                     </div>
-                                    <div class="checkbox col-xs-8">
-                                        <label><input name="telexRelease" type="checkbox" value="3" data-control="on" disabled/><span lang="zh">hbl（货代提单）</span></label>
+                                    <div class="checkbox col-xs-12">
+                                        <label style="padding-top: 3px;"><input name="telexRelease" type="checkbox" value="3" data-control="on" disabled/><span lang="zh">HBL（货代提单）</span></label>
                                     </div>
-                                    <div class="checkbox col-xs-2">
-                                        <label style="padding-top: 3px;"><input name="telexRelease" type="checkbox" value="4" data-control="on" disabled/><span lang="zh">obl（海运提单）</span></label>
+                                    <div class="checkbox col-xs-12">
+                                        <label style="padding-top: 3px;"><input name="telexRelease" type="checkbox" value="4" data-control="on" disabled/><span lang="zh">OBL（海运提单）</span></label>
                                     </div>
-                                    <div class="checkbox col-xs-2">
+                                    <div class="checkbox col-xs-12">
                                         <label style="padding-top: 3px;"><input name="telexRelease" type="checkbox" value="5" data-control="on" disabled/><span lang="zh">直接电放</span></label>
                                     </div>
                                     <div class="checkbox col-xs-2">
@@ -164,14 +164,14 @@
                             <tr>
                                 <td lang="zh">交单方式</td>
                                 <td class="text-left">
-                                    <div class="checkbox col-xs-3">
+                                    <div class="checkbox col-xs-12">
                                         <label><input name="bankBill" disabled type="checkbox" value="1"/>银行交单</label>
                                     </div>
-                                    <div class="checkbox col-xs-3">
-                                        <label><input name="bankBill" disabled type="checkbox" value="2"/>信用证交单</label>
+                                    <div class="checkbox col-xs-12">
+                                        <label style="padding-top: 3px;"><input name="bankBill" disabled type="checkbox" value="2"/>信用证交单</label>
                                     </div>
-                                    <div class="checkbox col-xs-3">
-                                        <label><input name="bankBill" disabled type="checkbox" value="3"/>直接寄单</label>
+                                    <div class="checkbox col-xs-12">
+                                        <label style="padding-top: 3px;"><input name="bankBill" disabled type="checkbox" value="3"/>直接寄单</label>
                                     </div>
                                 </td>
                             </tr>
