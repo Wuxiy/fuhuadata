@@ -8,4 +8,7 @@ import com.fuhuadata.service.mybatis.BaseService;
  * Created by wuxiy on 2017/5/23.
  */
 public interface FreightForwardingService extends BaseService<FreightForwarding,Integer>{
+
+
+
 }

@@ -3,10 +3,11 @@ import java.util.Date;
 import java.math.BigDecimal;
 
 /**
+ *  货代评分
  * @author wangbo
  * @date 2017-01-16 16:22:49
  */
-public class QueryFreightforwardingScore extends PageBase {
+public class QueryForwardingScore extends PageBase {
 
     /**主键id**/
 	private Integer id;
