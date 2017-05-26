@@ -1064,8 +1064,8 @@
     ]]>
     </select>
 
-    <select id="getSalesmanDeptCode" resultClass="java.lang.String" parameterClass="java.lang.String">
-        select department_id from business_order where order_id = #value#
+    <select id="getSalesmanDeptId" resultClass="java.lang.String" parameterClass="java.lang.String">
+        select d.pk_dept from business_order b,p_dept d where b.department_id = d.code and  order_id = #value#
     </select>
 
 </sqlMap>

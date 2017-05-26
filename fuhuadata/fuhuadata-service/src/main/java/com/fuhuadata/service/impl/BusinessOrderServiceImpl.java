@@ -232,7 +232,7 @@ public class BusinessOrderServiceImpl implements BusinessOrderService {
     }
 
     @Override
-    public String getSalesManDeptCode(String orderId) {
-        return businessOrderDao.getSalesManDeptCode(orderId);
+    public String getSalesManDeptId(String orderId) {
+        return businessOrderDao.getSalesManDeptId(orderId);
     }
 }

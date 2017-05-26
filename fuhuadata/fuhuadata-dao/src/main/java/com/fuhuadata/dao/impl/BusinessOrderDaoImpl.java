@@ -37,7 +37,7 @@ public class BusinessOrderDaoImpl extends SqlMapClientTemplate implements Busine
 
     public static final String GET_BY_BUSINESS_ID="BUSINESSORDER.getByBusinessId";
 
-    public  static final String GET_SALESMAN_DEPT_CODE = "BUSINESSORDER.getSalesmanDeptCode";
+    public  static final String GET_SALESMAN_DEPT_ID = "BUSINESSORDER.getSalesmanDeptId";
     @Override
     public String getOrderIdByBusinessId(String businessId) {
         try {
@@ -49,9 +49,9 @@ public class BusinessOrderDaoImpl extends SqlMapClientTemplate implements Busine
     }
 
     @Override
-    public String getSalesManDeptCode(String orderId) {
+    public String getSalesManDeptId(String orderId) {
         try {
-            return (String)this.queryForObject(GET_SALESMAN_DEPT_CODE,orderId);
+            return (String)this.queryForObject(GET_SALESMAN_DEPT_ID,orderId);
         } catch (DataAccessException e) {
             e.printStackTrace();
         }
