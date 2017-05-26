@@ -470,15 +470,13 @@
         net_profit, actual_payment_time,actual_amount_paid, unpaid_amount, is_complaint, is_pledge, is_modify_price, claim_amount,create_user_id, create_user_name,
         lastmodify_user_id, lastmodify_user_name, create_time,modify_time,is_credit_risk,prepay_rate,department_name,nusdexchgrate,nexchangerate,lastdelydate,gross_profit,
         exchange_terms_detail,latest_delivery_time,merchandiser,merchandiser_name)
-        values (#orderId#, #ncOrderId#, #businessId#, #c
-        ustomerId#,#customerDutyParagraph#,
+        values (#orderId#, #ncOrderId#, #businessId#, #customerId#,#customerDutyParagraph#,
         #billToCustomer#, #salesManId#,#salesManName#, #departmentId#, #saleOrganizationId#,
         #saleOrganizationName#, #destinationPort#, #shipmentPort#,#destinationPortName#, #shipmentPortName#,#collectionAgreement#, #tradeType#,
         #tradeTerm#, #currency#,#tradeCountry#,#tradeCountryName#,#premiumRate#, #guaranteeRate#,#discountRate#,
         #lossRate#, #saleRate#, #managementRate#,#grossRate#, #creditRate#,
         #transportFlag#,#partialShipmentFalg#, #status#, #dealTime#, #deliverInfo#,#expressInfo#, #dueTime#, #amountPayable#, #floorPrice#,#maintenanceFee#,
-        #netProfit#, #actualPaymentTime#,#actualAmountPaid#, #unpaidAmount#, #isComplai
-        nt#, #isPledge#,#isModifyPrice#, #claimAmount#, #createUserId#,#createUserName#, #lastmodifyUserId#, #lastmodifyUserName#,
+        #netProfit#, #actualPaymentTime#,#actualAmountPaid#, #unpaidAmount#, #isComplaint#, #isPledge#,#isModifyPrice#, #claimAmount#, #createUserId#,#createUserName#, #lastmodifyUserId#, #lastmodifyUserName#,
         now(), now(), #isCreditRisk#,#prepayRate#,#departmentName#,#nusdexchgrate#,#nexchangerate#,#lastdelydate#,#grossProfit#,#exchangeTermsDetail#,#latestDeliveryTime#,
         #merchandiser#,#merchandiserName#)
 
