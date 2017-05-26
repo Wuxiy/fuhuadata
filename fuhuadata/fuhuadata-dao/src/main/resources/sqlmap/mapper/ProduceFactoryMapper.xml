@@ -1,46 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fuhuadata.dao.supplier.ProduceFactoryMapper">
-  <resultMap id="BaseResultMap" type="com.fuhuadata.domain.supplier.ProduceFactory">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="pk_supplier" jdbcType="CHAR" property="pkSupplier" />
-    <result column="pk_org" jdbcType="CHAR" property="pkOrg" />
-    <result column="code" jdbcType="VARCHAR" property="code" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="abbr" jdbcType="VARCHAR" property="abbr" />
-    <result column="old_name" jdbcType="VARCHAR" property="oldName" />
-    <result column="registerfund" jdbcType="DECIMAL" property="registerfund" />
-    <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="pk_custbank" jdbcType="CHAR" property="pkCustbank" />
-    <result column="bank" jdbcType="VARCHAR" property="bank" />
-    <result column="bank_class" jdbcType="VARCHAR" property="bankClass" />
-    <result column="currency_code" jdbcType="VARCHAR" property="currencyCode" />
-    <result column="bank_account" jdbcType="VARCHAR" property="bankAccount" />
-    <result column="bank_username" jdbcType="VARCHAR" property="bankUsername" />
-    <result column="pk_suplinkman" jdbcType="CHAR" property="pkSuplinkman" />
-    <result column="link_man" jdbcType="VARCHAR" property="linkMan" />
-    <result column="link_phone" jdbcType="VARCHAR" property="linkPhone" />
-    <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="cooperate_time" jdbcType="TIMESTAMP" property="cooperateTime" />
-    <result column="production_licenses" jdbcType="VARCHAR" property="productionLicenses" />
-    <result column="pesticide_registration" jdbcType="VARCHAR" property="pesticideRegistration" />
-    <result column="discharge_permit" jdbcType="VARCHAR" property="dischargePermit" />
-    <result column="manager_org_code" jdbcType="VARCHAR" property="managerOrgCode" />
-    <result column="manager_org_name" jdbcType="VARCHAR" property="managerOrgName" />
-    <result column="manager_dep_code" jdbcType="VARCHAR" property="managerDepCode" />
-    <result column="manager_dep_name" jdbcType="VARCHAR" property="managerDepName" />
-    <result column="manager_code" jdbcType="VARCHAR" property="managerCode" />
-    <result column="manager" jdbcType="VARCHAR" property="manager" />
-    <result column="score" jdbcType="DECIMAL" property="score" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="create_account" jdbcType="VARCHAR" property="createAccount" />
-    <result column="create_name" jdbcType="VARCHAR" property="createName" />
-    <result column="modify_account" jdbcType="VARCHAR" property="modifyAccount" />
-    <result column="modify_name" jdbcType="VARCHAR" property="modifyName" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
-  </resultMap>
+    <resultMap id="BaseResultMap" type="com.fuhuadata.domain.supplier.ProduceFactory">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="pk_supplier" jdbcType="CHAR" property="pkSupplier"/>
+        <result column="pk_org" jdbcType="CHAR" property="pkOrg"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="abbr" jdbcType="VARCHAR" property="abbr"/>
+        <result column="old_name" jdbcType="VARCHAR" property="oldName"/>
+        <result column="registerfund" jdbcType="DECIMAL" property="registerfund"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="cooperate_time" jdbcType="TIMESTAMP" property="cooperateTime"/>
+        <result column="production_licenses" jdbcType="VARCHAR" property="productionLicenses"/>
+        <result column="pesticide_registration" jdbcType="VARCHAR" property="pesticideRegistration"/>
+        <result column="discharge_permit" jdbcType="VARCHAR" property="dischargePermit"/>
+        <result column="manager_org_code" jdbcType="VARCHAR" property="managerOrgCode"/>
+        <result column="manager_org_name" jdbcType="VARCHAR" property="managerOrgName"/>
+        <result column="manager_dep_code" jdbcType="VARCHAR" property="managerDepCode"/>
+        <result column="manager_dep_name" jdbcType="VARCHAR" property="managerDepName"/>
+        <result column="manager_code" jdbcType="VARCHAR" property="managerCode"/>
+        <result column="manager" jdbcType="VARCHAR" property="manager"/>
+        <result column="score" jdbcType="DECIMAL" property="score"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="create_account" jdbcType="VARCHAR" property="createAccount"/>
+        <result column="create_name" jdbcType="VARCHAR" property="createName"/>
+        <result column="modify_account" jdbcType="VARCHAR" property="modifyAccount"/>
+        <result column="modify_name" jdbcType="VARCHAR" property="modifyName"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+    </resultMap>
+
+    <sql id="BaseColumns">
+        pf.abbr,
+        pf.address,
+        pf.code,
+        pf.cooperate_time,
+        pf.create_account,
+        pf.create_name,
+        pf.create_time,
+        pf.currency_code,
+        pf.discharge_permit,
+        pf.id,
+        pf.manager,
+        pf.manager_code,
+        pf.manager_dep_code,
+        pf.manager_dep_name,
+        pf.manager_org_code,
+        pf.manager_org_name,
+        pf.modify_account,
+        pf.modify_name,
+        pf.modify_time,
+        pf.name,
+        pf.old_name,
+        pf.pesticide_registration,
+        pf.pk_custbank,
+        pf.pk_org,
+        pf.pk_supplier,
+        pf.production_licenses,
+        pf.registerfund,
+        pf.remark,
+        pf.score
+    </sql>
+
+    <!-- s_factory 默认前缀 pf -->
+    <sql id="FromTable">
+        from s_factory pf
+    </sql>
+
+    <select id="listFactories" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumns"/>
+        <include refid="FromTable"/>
+    </select>
 </mapper>

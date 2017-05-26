@@ -3,6 +3,7 @@ package com.fuhuadata.domain.supplier;
 import com.fuhuadata.domain.mybatis.BaseEntity;
 
 import javax.persistence.*;
+import java.beans.IntrospectionException;
 
 @Table(name = "s_factory_product_addr")
 public class ProduceFactoryProductAddr extends BaseEntity<Integer> {
@@ -38,7 +39,7 @@ public class ProduceFactoryProductAddr extends BaseEntity<Integer> {
     /**
      * 产能
      */
-    private byte[] capacity;
+    private String capacity;
 
     /**
      * 获取主键id
@@ -135,7 +136,7 @@ public class ProduceFactoryProductAddr extends BaseEntity<Integer> {
      *
      * @return capacity - 产能
      */
-    public byte[] getCapacity() {
+    public String getCapacity() {
         return capacity;
     }
 
@@ -144,7 +145,11 @@ public class ProduceFactoryProductAddr extends BaseEntity<Integer> {
      *
      * @param capacity 产能
      */
-    public void setCapacity(byte[] capacity) {
+    public void setCapacity(String capacity) {
         this.capacity = capacity;
+    }
+
+    public static void main(String[] args) throws IntrospectionException {
+        printProperties(ProduceFactoryProductAddr.class, "pfpa.");
     }
 }

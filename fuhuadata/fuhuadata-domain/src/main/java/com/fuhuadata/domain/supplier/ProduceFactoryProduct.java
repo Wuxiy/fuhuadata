@@ -3,9 +3,12 @@ package com.fuhuadata.domain.supplier;
 import com.fuhuadata.domain.mybatis.BaseEntity;
 
 import javax.persistence.*;
+import java.beans.IntrospectionException;
+import java.util.List;
 
 @Table(name = "s_factory_product")
 public class ProduceFactoryProduct extends BaseEntity<Integer> {
+
     /**
      * 主键id
      */
@@ -37,9 +40,38 @@ public class ProduceFactoryProduct extends BaseEntity<Integer> {
     private String cmaterialId;
 
     /**
+     * 产品（物料）名称
+     */
+    @Transient
+    private String cmaterialName;
+
+    /**
+     * 规格
+     */
+    @Transient
+    private String specification;
+
+    /**
+     * 总产能
+     */
+    private String capacity;
+
+    /**
+     * 总产能单位
+     */
+    @Column(name = "capacity_unit")
+    private String capacityUnit;
+
+    /**
      * 备注
      */
     private String remark;
+
+    /**
+     * 产品厂址
+     */
+    @Transient
+    private List<ProduceFactoryProductAddr> productAddrs;
 
     /**
      * 获取主键id
@@ -131,6 +163,22 @@ public class ProduceFactoryProduct extends BaseEntity<Integer> {
         this.cmaterialId = cmaterialId == null ? null : cmaterialId.trim();
     }
 
+    public String getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(String capacity) {
+        this.capacity = capacity == null ? null : capacity.trim();
+    }
+
+    public String getCapacityUnit() {
+        return capacityUnit;
+    }
+
+    public void setCapacityUnit(String capacityUnit) {
+        this.capacityUnit = capacityUnit == null ? null : capacityUnit.trim();
+    }
+
     /**
      * 获取备注
      *
@@ -147,5 +195,33 @@ public class ProduceFactoryProduct extends BaseEntity<Integer> {
      */
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    public List<ProduceFactoryProductAddr> getProductAddrs() {
+        return productAddrs;
+    }
+
+    public void setProductAddrs(List<ProduceFactoryProductAddr> productAddrs) {
+        this.productAddrs = productAddrs;
+    }
+
+    public static void main(String[] args) throws IntrospectionException {
+        printProperties(ProduceFactoryProduct.class, "pfp.");
+    }
+
+    public String getSpecification() {
+        return specification;
+    }
+
+    public void setSpecification(String specification) {
+        this.specification = specification;
+    }
+
+    public String getCmaterialName() {
+        return cmaterialName;
+    }
+
+    public void setCmaterialName(String cmaterialName) {
+        this.cmaterialName = cmaterialName;
     }
 }

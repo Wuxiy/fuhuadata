@@ -1,10 +1,15 @@
 package com.fuhuadata.domain.supplier;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fuhuadata.domain.common.BankAccBas;
 import com.fuhuadata.domain.mybatis.BaseEntity;
+import com.fuhuadata.domain.mybatis.supplier.SupplierLinkman;
 
 import javax.persistence.*;
+import java.beans.IntrospectionException;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Table(name = "s_factory")
 public class ProduceFactory extends BaseEntity<Integer> {
@@ -27,6 +32,12 @@ public class ProduceFactory extends BaseEntity<Integer> {
      */
     @Column(name = "pk_org")
     private String pkOrg;
+
+    /**
+     * 组织名称
+     */
+    @Transient
+    private String orgName;
 
     /**
      * 企业代码
@@ -60,66 +71,9 @@ public class ProduceFactory extends BaseEntity<Integer> {
     private String address;
 
     /**
-     * nc 供应商银行账号主键，bd_custbank.pk_custbank
-     */
-    @Column(name = "pk_custbank")
-    private String pkCustbank;
-
-    /**
-     * 开户银行
-     */
-    private String bank;
-
-    /**
-     * 银行类别
-     */
-    @Column(name = "bank_class")
-    private String bankClass;
-
-    /**
-     * 币种
-     */
-    @Column(name = "currency_code")
-    private String currencyCode;
-
-    /**
-     * 银行账号
-     */
-    @Column(name = "bank_account")
-    private String bankAccount;
-
-    /**
-     * 银行户名
-     */
-    @Column(name = "bank_username")
-    private String bankUsername;
-
-    /**
-     * nc 供应商联系人主键, bd_suplinkman.pk_suplinkman
-     */
-    @Column(name = "pk_suplinkman")
-    private String pkSuplinkman;
-
-    /**
-     * 联系人
-     */
-    @Column(name = "link_man")
-    private String linkMan;
-
-    /**
-     * 联系电话
-     */
-    @Column(name = "link_phone")
-    private String linkPhone;
-
-    /**
-     * 邮箱
-     */
-    private String email;
-
-    /**
      * 开始合作时间，第一个订单的时间，后面计算总的合作时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "cooperate_time")
     private Date cooperateTime;
 
@@ -221,6 +175,24 @@ public class ProduceFactory extends BaseEntity<Integer> {
      */
     @Column(name = "modify_time")
     private Date modifyTime;
+
+    /**
+     * 加工厂产品
+     */
+    @Transient
+    private List<ProduceFactoryProduct> products;
+
+    /**
+     * 加工厂关联银行账号
+     */
+    @Transient
+    private List<BankAccBas> banks;
+
+    /**
+     * 加工厂关联联系人
+     */
+    @Transient
+    private List<SupplierLinkman> linkmen;
 
     /**
      * 获取工厂id
@@ -382,186 +354,6 @@ public class ProduceFactory extends BaseEntity<Integer> {
      */
     public void setAddress(String address) {
         this.address = address == null ? null : address.trim();
-    }
-
-    /**
-     * 获取nc 供应商银行账号主键，bd_custbank.pk_custbank
-     *
-     * @return pk_custbank - nc 供应商银行账号主键，bd_custbank.pk_custbank
-     */
-    public String getPkCustbank() {
-        return pkCustbank;
-    }
-
-    /**
-     * 设置nc 供应商银行账号主键，bd_custbank.pk_custbank
-     *
-     * @param pkCustbank nc 供应商银行账号主键，bd_custbank.pk_custbank
-     */
-    public void setPkCustbank(String pkCustbank) {
-        this.pkCustbank = pkCustbank == null ? null : pkCustbank.trim();
-    }
-
-    /**
-     * 获取开户银行
-     *
-     * @return bank - 开户银行
-     */
-    public String getBank() {
-        return bank;
-    }
-
-    /**
-     * 设置开户银行
-     *
-     * @param bank 开户银行
-     */
-    public void setBank(String bank) {
-        this.bank = bank == null ? null : bank.trim();
-    }
-
-    /**
-     * 获取银行类别
-     *
-     * @return bank_class - 银行类别
-     */
-    public String getBankClass() {
-        return bankClass;
-    }
-
-    /**
-     * 设置银行类别
-     *
-     * @param bankClass 银行类别
-     */
-    public void setBankClass(String bankClass) {
-        this.bankClass = bankClass == null ? null : bankClass.trim();
-    }
-
-    /**
-     * 获取币种
-     *
-     * @return currency_code - 币种
-     */
-    public String getCurrencyCode() {
-        return currencyCode;
-    }
-
-    /**
-     * 设置币种
-     *
-     * @param currencyCode 币种
-     */
-    public void setCurrencyCode(String currencyCode) {
-        this.currencyCode = currencyCode == null ? null : currencyCode.trim();
-    }
-
-    /**
-     * 获取银行账号
-     *
-     * @return bank_account - 银行账号
-     */
-    public String getBankAccount() {
-        return bankAccount;
-    }
-
-    /**
-     * 设置银行账号
-     *
-     * @param bankAccount 银行账号
-     */
-    public void setBankAccount(String bankAccount) {
-        this.bankAccount = bankAccount == null ? null : bankAccount.trim();
-    }
-
-    /**
-     * 获取银行户名
-     *
-     * @return bank_username - 银行户名
-     */
-    public String getBankUsername() {
-        return bankUsername;
-    }
-
-    /**
-     * 设置银行户名
-     *
-     * @param bankUsername 银行户名
-     */
-    public void setBankUsername(String bankUsername) {
-        this.bankUsername = bankUsername == null ? null : bankUsername.trim();
-    }
-
-    /**
-     * 获取nc 供应商联系人主键, bd_suplinkman.pk_suplinkman
-     *
-     * @return pk_suplinkman - nc 供应商联系人主键, bd_suplinkman.pk_suplinkman
-     */
-    public String getPkSuplinkman() {
-        return pkSuplinkman;
-    }
-
-    /**
-     * 设置nc 供应商联系人主键, bd_suplinkman.pk_suplinkman
-     *
-     * @param pkSuplinkman nc 供应商联系人主键, bd_suplinkman.pk_suplinkman
-     */
-    public void setPkSuplinkman(String pkSuplinkman) {
-        this.pkSuplinkman = pkSuplinkman == null ? null : pkSuplinkman.trim();
-    }
-
-    /**
-     * 获取联系人
-     *
-     * @return link_man - 联系人
-     */
-    public String getLinkMan() {
-        return linkMan;
-    }
-
-    /**
-     * 设置联系人
-     *
-     * @param linkMan 联系人
-     */
-    public void setLinkMan(String linkMan) {
-        this.linkMan = linkMan == null ? null : linkMan.trim();
-    }
-
-    /**
-     * 获取联系电话
-     *
-     * @return link_phone - 联系电话
-     */
-    public String getLinkPhone() {
-        return linkPhone;
-    }
-
-    /**
-     * 设置联系电话
-     *
-     * @param linkPhone 联系电话
-     */
-    public void setLinkPhone(String linkPhone) {
-        this.linkPhone = linkPhone == null ? null : linkPhone.trim();
-    }
-
-    /**
-     * 获取邮箱
-     *
-     * @return email - 邮箱
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * 设置邮箱
-     *
-     * @param email 邮箱
-     */
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
     }
 
     /**
@@ -857,6 +649,7 @@ public class ProduceFactory extends BaseEntity<Integer> {
      *
      * @return create_time - 创建时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public Date getCreateTime() {
         return createTime;
     }
@@ -875,6 +668,7 @@ public class ProduceFactory extends BaseEntity<Integer> {
      *
      * @return modify_time - 修改时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public Date getModifyTime() {
         return modifyTime;
     }
@@ -886,5 +680,42 @@ public class ProduceFactory extends BaseEntity<Integer> {
      */
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
+    }
+
+    public List<ProduceFactoryProduct> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<ProduceFactoryProduct> products) {
+        this.products = products;
+    }
+
+    public List<BankAccBas> getBanks() {
+        return banks;
+    }
+
+    public void setBanks(List<BankAccBas> banks) {
+        this.banks = banks;
+    }
+
+    public List<SupplierLinkman> getLinkmen() {
+        return linkmen;
+    }
+
+    public void setLinkmen(List<SupplierLinkman> linkmen) {
+        this.linkmen = linkmen;
+    }
+
+    public static void main(String[] args) throws IntrospectionException {
+
+        printProperties(ProduceFactory.class, "pf.");
+    }
+
+    public String getOrgName() {
+        return orgName;
+    }
+
+    public void setOrgName(String orgName) {
+        this.orgName = orgName;
     }
 }
