@@ -52,6 +52,24 @@
         <table tableName="s_supplier_linkman" domainObjectName="SupplierLinkman">
             <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
         </table>
+        <table tableName="t_bankdoc" domainObjectName="BankDoc">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>
+        <table tableName="s_bankaccbas" domainObjectName="BankAccBas">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>
+        <!--<table tableName="s_factory" domainObjectName="ProduceFactory">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>
+        <table tableName="s_factory_product" domainObjectName="ProduceFactoryProduct">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>
+        <table tableName="s_factory_product_addr" domainObjectName="ProduceFactoryProduceAddr">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>-->
+        <!--<table tableName="t_receipt" domainObjectName="Receipt">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>-->
         <!--<table tableName="t_currency_rate" domainObjectName="CurrencyRate">
             <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
         </table>-->

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.BankAccBasMapper">
+
+    <resultMap id="BaseResultMap" type="com.fuhuadata.domain.common.BankAccBas">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="pk_bankaccbas" jdbcType="CHAR" property="pkBankaccbas"/>
+        <result column="customer_id" jdbcType="INTEGER" property="customerId"/>
+        <result column="pk_bankdoc" jdbcType="CHAR" property="pkBankdoc"/>
+        <result column="bankdoc_name" jdbcType="VARCHAR" property="bankDocName"/>
+        <result column="pk_banktype" jdbcType="CHAR" property="pkBanktype"/>
+        <result column="banktype_name" jdbcType="VARCHAR" property="bankTypeName"/>
+        <result column="pk_group" jdbcType="CHAR" property="pkGroup"/>
+        <result column="pk_org" jdbcType="CHAR" property="pkOrg"/>
+        <result column="pk_currtype" jdbcType="CHAR" property="pkCurrtype"/>
+        <result column="currtype_name" jdbcType="VARCHAR" property="currtypeName"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="accname" jdbcType="VARCHAR" property="accname"/>
+        <result column="accnum" jdbcType="VARCHAR" property="accnum"/>
+        <result column="accopendate" jdbcType="TIMESTAMP" property="accopendate"/>
+        <result column="acctype" jdbcType="SMALLINT" property="acctype"/>
+        <result column="accountproperty" jdbcType="SMALLINT" property="accountproperty"/>
+        <result column="accstate" jdbcType="SMALLINT" property="accstate"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="enablestate" jdbcType="SMALLINT" property="enablestate"/>
+        <result column="mnecode" jdbcType="VARCHAR" property="mnecode"/>
+        <result column="creationtime" jdbcType="TIMESTAMP" property="creationtime"/>
+        <result column="creator" jdbcType="VARCHAR" property="creator"/>
+        <result column="modifiedtime" jdbcType="TIMESTAMP" property="modifiedtime"/>
+        <result column="modifier" jdbcType="VARCHAR" property="modifier"/>
+    </resultMap>
+
+    <sql id="BaseColumns">
+        bab.id,
+        bab.pk_bankaccbas,
+        bab.customer_id,
+        bab.pk_bankdoc,
+        bab.pk_banktype,
+        bab.pk_currtype,
+        bab.pk_group,
+        bab.pk_org,
+        bab.name,
+        bab.accname,
+        bab.accnum,
+        bab.accopendate,
+        bab.accountproperty,
+        bab.accstate,
+        bab.acctype,
+        bab.address,
+        bab.enablestate,
+        bab.mnecode,
+        bab.creationtime,
+        bab.creator,
+        bab.modifiedtime,
+        bab.modifier,
+        ct.name currtype_name
+    </sql>
+
+    <sql id="JoinTypeAndDocColumns">
+        bt.name banktype_name,
+        bd.name bankdoc_name
+    </sql>
+
+    <sql id="FromTable">
+        from s_bankaccbas bab
+        left join t_currtype ct on ct.pk_currtype=bab.pk_currtype
+    </sql>
+
+    <sql id="JoinTypeAndDoc">
+        left join t_banktype bt on bt.pk_banktype=bab.pk_banktype
+        left join t_bankdoc bd on bd.pk_bankdoc=bab.pk_bankdoc
+    </sql>
+
+    <select id="listBankAccs" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumns"/>,
+        <include refid="JoinTypeAndDocColumns"/>
+        <include refid="FromTable"/>
+        <include refid="JoinTypeAndDoc"/>
+        where bab.acctype=#{accType} and bab.customer_id=#{customerId}
+    </select>
+
+</mapper>

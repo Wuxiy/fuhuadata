@@ -1,7 +1,7 @@
 package com.fuhuadata.service.mybatis.supplier;
 
-import com.fuhuadata.dao.supplier.ProduceFactoryProduceAddrMapper;
-import com.fuhuadata.domain.supplier.ProduceFactoryProduceAddr;
+import com.fuhuadata.dao.supplier.ProduceFactoryProductAddrMapper;
+import com.fuhuadata.domain.supplier.ProduceFactoryProductAddr;
 import com.fuhuadata.service.impl.mybatis.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
  * <p>Date: 5/23/2017
  */
 @Service
-public class ProduceFactoryProduceAddrServiceImpl extends BaseServiceImpl<ProduceFactoryProduceAddr, Integer>
-        implements ProduceFactoryProduceAddrService {
+public class ProduceFactoryProductAddrServiceImpl extends BaseServiceImpl<ProduceFactoryProductAddr, Integer>
+        implements ProduceFactoryProductAddrService {
 
-    public ProduceFactoryProduceAddrMapper getProduceFactoryProduceAddrMapper() {
-        return (ProduceFactoryProduceAddrMapper) baseMapper;
+    public ProduceFactoryProductAddrMapper getProduceFactoryProduceAddrMapper() {
+        return (ProduceFactoryProductAddrMapper) baseMapper;
     }
 
 

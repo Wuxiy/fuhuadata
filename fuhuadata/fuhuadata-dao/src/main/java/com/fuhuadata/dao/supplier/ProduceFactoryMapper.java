@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ProduceFactoryMapper extends BaseMapper<ProduceFactory, Integer> {
 
-    List<ProduceFactory> listFactories()
+    List<ProduceFactory> listFactories();
 }
