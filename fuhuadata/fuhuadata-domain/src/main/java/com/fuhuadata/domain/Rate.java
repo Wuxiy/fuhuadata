@@ -1,6 +1,6 @@
 package com.fuhuadata.domain;
 
-import com.fuhuadata.domain.query.PageBase;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -27,6 +27,7 @@ public class Rate {
 
     private BigDecimal rateValue;//费率值
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date termofValidity;//有效期
 
     private String remarks;//备注

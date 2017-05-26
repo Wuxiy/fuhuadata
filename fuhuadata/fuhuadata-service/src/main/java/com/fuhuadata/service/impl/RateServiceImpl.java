@@ -32,7 +32,7 @@ public class RateServiceImpl implements RateService{
     }
 
     @Override
-    public Result updateRate(int id, Rate rate) {
+    public Result updateRateById(int id, Rate rate) {
         Result result = new Result();
         try{
             result.setSuccess(rateManager.updateRateById(id,rate));
@@ -59,21 +59,20 @@ public class RateServiceImpl implements RateService{
 
     @Override
     public Result<Rate> getRateById(int id) {
-//        Result<Rate> result = new Result<Rate>();
-//        try {
-//            Rate rate = rateManager.getRateById(id);
-//            if(rate == null){
-//                result.setSimpleErrorMsg(0, "当前用户数据不存在，请重试");
-//            }else{
-//                result.addDefaultModel("UserAccount", userAccount);
-//            }
-//        } catch (Exception e) {
-//            result.setSuccess(false);
-//            // 打印日志
-//            log.error("根据id获取用户信息错误",e);
-//        }
-//        return result;
-        return null;
+        Result<Rate> result = new Result<>();
+        try {
+            Rate rate = rateManager.getRateById(id);
+            if(rate == null){
+                result.setSimpleErrorMsg(0, "当前数据不存在，请重试");
+            }else{
+                result.addDefaultModel("rate", rate);
+            }
+        } catch (Exception e) {
+            result.setSuccess(false);
+            // 打印日志
+            log.error("根据id获取费率信息错误",e);
+        }
+        return result;
     }
 
     @Override

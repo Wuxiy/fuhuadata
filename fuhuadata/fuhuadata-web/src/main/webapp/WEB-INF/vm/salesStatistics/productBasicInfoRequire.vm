@@ -218,7 +218,7 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input data-control="on" id="taxFree" class="form-control notnull isdisabled" value="" disabled>
+                                                <input data-control="on" id="taxFree" class="form-control notnull isdisabled" value="0" disabled>
                                                 <span class="input-group-addon">%</span>
                                             </div>
                                         </td>
@@ -1042,10 +1042,10 @@
         }
 
         if($(this).val() == '09'){
-            $('.hidecang').hide();
             $('#advisePrice').val('0');
             $('#taxFree').val('0');
             $('#purchasePrice').val('0');
+            $('.hidecang').hide();
         }else{
             $('.hidecang').show();
         }
@@ -1074,13 +1074,13 @@
             }
         }else{
             $('#purchasePrice').attr('disabled',false);
-            $('#purchasePrice').val('');
+            $('#purchasePrice').val('0');
             $('#advisePrice').attr('disabled',true);
             $('#advisePrice').val('0');
             $('#grossMargin').attr('disabled',false);
             $('#grossMargin').val('');
             $('#taxFree').attr('disabled',false);
-            $('#taxFree').val('');
+            $('#taxFree').val('0');
         }
     })
 

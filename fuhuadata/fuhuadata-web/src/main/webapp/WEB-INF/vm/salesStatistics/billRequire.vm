@@ -92,7 +92,7 @@
 
                             </tr>
                             <tr>
-                                <td lang="zh">是否出COO</td>
+                                <td lang="zh">是否出具产地证</td>
                                 <td class="text-left">
                                     <div class=" col-xs-2">
                                         <label class="checkbox-inline"><input name="coo" type="checkbox" value="1" data-control="on" disabled/>商检局</label>
@@ -151,26 +151,45 @@
 
                             </tr>
                             <tr>
-                                <td lang="zh">提单是否电放</td>
+                                <td lang="zh">提单签单方式</td>
                                 <td class="form-group text-left">
+                                    <div class="checkbox col-xs-12">
+                                        <label><input name="telexRelease" type="checkbox" value="1" data-control="on" disabled/><span lang="zh">Sea Waybill</span></label>
+                                    </div>
+                                    <div class="checkbox col-xs-12">
+                                        <label style="padding-top: 3px;"><input name="telexRelease" type="checkbox" value="2" data-control="on" disabled/><span lang="zh">目的港放单</span></label>
+                                    </div>
+                                    <div class="checkbox col-xs-12">
+                                        <label style="padding-top: 3px;"><input name="telexRelease" type="checkbox" value="3" data-control="on" disabled/><span lang="zh">HBL（货代提单）</span></label>
+                                    </div>
+                                    <div class="checkbox col-xs-12">
+                                        <label style="padding-top: 3px;"><input name="telexRelease" type="checkbox" value="4" data-control="on" disabled/><span lang="zh">OBL（海运提单）</span></label>
+                                    </div>
+                                    <div class="checkbox col-xs-12">
+                                        <label style="padding-top: 3px;"><input name="telexRelease" type="checkbox" value="5" data-control="on" disabled/><span lang="zh">直接电放</span></label>
+                                    </div>
                                     <div class="checkbox col-xs-2">
-                                        <label><input name="telexRelease" type="checkbox" value="1" data-control="on" disabled/><span lang="zh">直接电放</span></label>
+                                        <label style="padding-top: 3px;"><input name="telexRelease" type="checkbox" value="6" data-control="on" disabled/><span lang="zh">其他</span></label>
                                     </div>
-                                    <div class="checkbox col-xs-3">
-                                        <label><input name="telexRelease" type="checkbox" value="2" data-control="on" disabled/><span lang="zh">正本出后电放</span></label>
-                                    </div>
-                                    <div class="col-xs-4"><input id="releaseDestination" class="form-control" type="text" value="" placeholder="输入放单目的港" lang="zh" disabled/></div>
+                                    <div class="col-xs-4"><input id="releaseDestination" class="form-control" type="text" value="" placeholder="其他提单签单方式" lang="zh" disabled/></div>
                                 </td>
-
                             </tr>
                             <tr>
-                                <td lang="zh">是否需要银行交单</td>
+                                <td lang="zh">交单方式</td>
                                 <td class="text-left">
-                                    <div class="checkbox col-xs-3">
+                                    #*<div class="checkbox col-xs-3">
                                         <label><input id="bankBill" type="checkbox" data-control="on" disabled/></label>
+                                    </div>*#
+                                    <div class="checkbox col-xs-12">
+                                        <label><input name="bankBill" type="checkbox" value="1" data-control="on" disabled/><span lang="zh">银行交单</span></label>
+                                    </div>
+                                    <div class="checkbox col-xs-12">
+                                        <label style="padding-top: 3px;"><input name="bankBill" type="checkbox" value="2" data-control="on" disabled/><span lang="zh">信用证交单</span></label>
+                                    </div>
+                                    <div class="checkbox col-xs-12">
+                                        <label style="padding-top: 3px;"><input name="bankBill" type="checkbox" value="3" data-control="on" disabled/><span lang="zh">直接寄单</span></label>
                                     </div>
                                 </td>
-
                             </tr>
                             <tr>
                                 <td lang="zh">是否需要做第三方检测，并出具检测报告</td>
@@ -204,6 +223,22 @@
                                 <td class="text-left">
                                     <div class="checkbox col-xs-3">
                                         <label><input id="manufacturerCertificate" type="checkbox" data-control="on" disabled/></label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>是否需要TDS</td>
+                                <td class="text-left">
+                                    <div class="checkbox col-xs-3">
+                                        <label><input id="needTDS" type="checkbox" data-control="on" value="1" disabled/></label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>是否需要Price Certificate</td>
+                                <td class="text-left">
+                                    <div class="checkbox col-xs-3">
+                                        <label><input id="needPriceCertificate" type="checkbox" data-control="on" value="1" disabled/></label>
                                     </div>
                                 </td>
                             </tr>
@@ -248,8 +283,10 @@
     var bInfo = new CRM.module.Panel('#billRequiire');
     bInfo.startEdit();
     bInfo.startSave();
-    bInfo.startCancel();
-
+    /*bInfo.startCancel();*/
+    $('#cancel').click(function () {
+       window.location.reload();
+    });
 
     if(id!=''){
         jQuery.ajax({
@@ -261,8 +298,8 @@
                     if(documentaryRequire.reportCompanyTitle!=undefined){
                         $('#reportCompanyTitle').val(documentaryRequire.reportCompanyTitle);
                     }
-                    if(documentaryRequire.releaseDestination!=undefined){
-                        $('#releaseDestination').val(documentaryRequire.releaseDestination);
+                    if(documentaryRequire.otherBillOfLading!=undefined){
+                        $('#releaseDestination').val(documentaryRequire.otherBillOfLading);
                     }
                     if(documentaryRequire.oceanBillOfLading!=undefined&&documentaryRequire.oceanBillOfLading == 1){
                         $('#oceanBillOfLading').attr('checked',true);
@@ -278,7 +315,11 @@
                     }
                     if(documentaryRequire.qualityTestingReport!=undefined&&documentaryRequire.qualityTestingReport == 1){
                         $('#qualityTestingReport').attr('checked',true);
-                        $('#reportCompanyTitle').attr('data-control','');
+                        if($('#qualityTestingReport').prop('checked')){
+                            $('#reportCompanyTitle').attr('data-control','on');
+                        }else {
+                            $('#reportCompanyTitle').removeAttr('data-control');
+                        }
                     }
                     if(documentaryRequire.guaranteeSlip!=undefined&&documentaryRequire.guaranteeSlip == 1){
                         $('#guaranteeSlip').attr('checked',true);
@@ -295,8 +336,8 @@
                     if(documentaryRequire.msds!=undefined&&documentaryRequire.msds == 1){
                         $('#msds').attr('checked',true);
                     }
-                    if(documentaryRequire.bankBill!=undefined&&documentaryRequire.bankBill == 1){
-                        $('#bankBill').attr('checked',true);
+                    if(documentaryRequire.documentPresentation!=undefined){
+                        $('[name="bankBill"]').val([documentaryRequire.documentPresentation]);
                     }
                     if(documentaryRequire.examiningReport!=undefined&&documentaryRequire.examiningReport == 1){
                         $('#examiningReport').attr('checked',true);
@@ -322,7 +363,7 @@
                             }
                         })
                     }
-                    if(documentaryRequire.telexRelease!=undefined){
+                    /*if(documentaryRequire.telexRelease!=undefined){
                         var telexRelease = documentaryRequire.telexRelease;
                         if(telexRelease == 0){
                             $('input[name="telexRelease"]').attr('checked',false);
@@ -334,16 +375,39 @@
                                 $('#releaseDestination').attr('data-control','on');
                             }
                         })
+                    }*/
+
+                    if(documentaryRequire.billOfLading){
+                        $('[name="telexRelease"]').val([documentaryRequire.billOfLading]);
+                        if(documentaryRequire.billOfLading == 6){
+                            $('#releaseDestination').attr('data-control','on');
+                        }else {
+                            $('#releaseDestination').removeAttr('data-control');
+                        }
                     }
 
                     if (documentaryRequire.cooContent) {
                         if (documentaryRequire.coo === 3) {
                             $('#cooContentText').val(documentaryRequire.cooContent);
-                        }else if (documentaryRequire.coo === 1) {
+                            $('#cooContentText').attr('data-control','on');
+                        }else{
+                            $('#cooContentText').removeAttr('data-control');
+                        }
+                        if (documentaryRequire.coo === 1) {
                             $('[name="cooContent"]').val([documentaryRequire.cooContent]);
+                                $('[name="cooContent"]').attr('data-control','on');
+                        }else {
+                            $('[name="cooContent"]').removeAttr('data-control');
                         }
                     }
 
+                    if (documentaryRequire.needTDS) {
+                        $('#needTDS').val([documentaryRequire.needTDS]);
+                    }
+
+                    if (documentaryRequire.needPriceCertificate) {
+                        $('#needPriceCertificate').val([documentaryRequire.needPriceCertificate]);
+                    }
                     /*if(documentaryRequire.cooContent!=undefined){
                         var cooContent = documentaryRequire.cooContent;
                         $.each(cooContent,function(index,value){
@@ -736,26 +800,31 @@
 
     function getdata() {
         var documentaryRequire = {
-            'oceanBillOfLading':checked($('#oceanBillOfLading')),
-            'freightForwardingBill':checked($('#freightForwardingBill')),
-            'invoice':checked($('#invoice')),
-            'packingList':checked($('#packingList')),
-            'qualityTestingReport':checked($('#qualityTestingReport')),
-            'reportCompanyTitle':$('#reportCompanyTitle').val(),
-            'guaranteeSlip':checked($('#guaranteeSlip')),
-            'coo':getcoo(),
-            'cooContent':getcooContent(),
-            'dangerousCertificate':checked($('#dangerousCertificate')),
-            'beneficiaryCertification':checked($('#beneficiaryCertification')),
-            'fumigationCertificate':checked($('#fumigationCertificate')),
-            'msds':checked($('#msds')),
-            'bankBill':checked($('#bankBill')),
-            'examiningReport':checked($('#examiningReport')),
-            'packingDeclaration':checked($('#packingDeclaration')),
-            'importContainerWeightDeclaration':checked($('#importContainerWeightDeclaration')),
-            'manufacturerCertificate':checked($('#manufacturerCertificate')),
-            'releaseDestination':$('#releaseDestination').val(),
-            'telexRelease':gettelexRelease(),
+            'oceanBillOfLading':checked($('#oceanBillOfLading')), // 海运提单
+            'freightForwardingBill':checked($('#freightForwardingBill')), // 货代提单
+            'invoice':checked($('#invoice')), // 是否需要发票
+            'packingList':checked($('#packingList')), // 是否需要箱单
+            'qualityTestingReport':checked($('#qualityTestingReport')), // 质检单
+            'reportCompanyTitle':$('#reportCompanyTitle').val(), // 质检单公司抬头
+            'guaranteeSlip':checked($('#guaranteeSlip')), // 是否需要保单
+            'coo':getcoo(), // 是否出具产地证
+            'cooContent':getcooContent(), // coo具体选项
+            'dangerousCertificate':checked($('#dangerousCertificate')), // 危包证
+            'beneficiaryCertification':checked($('#beneficiaryCertification')), // 受益人证明
+            'fumigationCertificate':checked($('#fumigationCertificate')), // 熏蒸证书
+            'msds':checked($('#msds')), // 是否需要MSDS
+            'billOfLading':gettelexRelease(), // 提单签单方式
+            'otherBillOfLading':$('#releaseDestination').val(), // 其他提单签单方式
+            'documentPresentation':$('[name="bankBill"]').filter(':checked').val(), // 交单方式
+            'examiningReport':checked($('#examiningReport')), // 是否需要做第三方检测
+            'packingDeclaration':checked($('#packingDeclaration')), // 是否需要Packing Declaration
+            'importContainerWeightDeclaration':checked($('#importContainerWeightDeclaration')), // 是否需要IMPORT CONTAINER WEIGHT DECLARATION
+            'manufacturerCertificate':checked($('#manufacturerCertificate')), // 是否需要Manufacturer's Certificate
+            'needTDS':checked($('#needTDS')), // 是否需要TDS
+            'needPriceCertificate':checked($('#needPriceCertificate')) // 是否需要Price Certificate
+            /*'bankBill':checked($('#bankBill')), //
+            'releaseDestination':$('#releaseDestination').val(), //*/
+
         }
         var data = {
             'id':$('#businessProductId').val(),
@@ -808,8 +877,10 @@
 
     //coo互斥
     $(document).on('click','input[name="coo"]',function(){
-        $('input[name="coo"]').removeAttr('checked');
-        $(this).prop('checked',true);
+        if ($(this).prop('checked')) {
+            $('input[name="coo"]').prop('checked',false);
+            $(this).prop('checked',true);
+        }
     })
 
     $('#qualityTestingReport').change(function(){
@@ -822,7 +893,7 @@
     })
 
     $('input[name="telexRelease"]').change(function(){
-        if($(this).attr('checked')){
+        if($(this).filter(':checked').val()==='6'){
             $('#releaseDestination').attr('disabled',false);
         }else{
             $('#releaseDestination').attr('disabled',true);
@@ -834,11 +905,11 @@
         var val = $(this).val();
         if(val == 1){
             $('.contentRadio').attr('disabled',false);
-            $('.contentText').attr('disabled',true);
+            $('.contentText').attr('disabled',true).val('');
         }else if(val == 2){
             $('.contentRadio').attr('disabled',true);
             $('.contentRadio').attr('checked',false);
-            $('.contentText').attr('disabled',true);
+            $('.contentText').attr('disabled',true).val('');
         }else if(val == 3){
             $('.contentRadio').attr('disabled',true);
             $('.contentRadio').attr('checked',false);
@@ -847,9 +918,19 @@
     })
 
     $(document).on('click','input[name="telexRelease"]',function(){
-        $('input[name="telexRelease"]').removeAttr('checked');
-        $(this).prop('checked','checked');
+        if ($(this).prop('checked')) {
+            $('input[name="telexRelease"]').prop('checked',false);
+            $(this).prop('checked',true);
+        }
     })
+
+    $(document).on('click','input[name="bankBill"]',function(){
+        if ($(this).prop('checked')) {
+            $('input[name="bankBill"]').prop('checked',false);
+            $(this).prop('checked',true);
+        }
+    })
+
 
     $('#save').click(function(){
         jQuery.ajax({

@@ -634,12 +634,11 @@
                             if(ifEmpty(auxiliaryData[j].isEqualOuter) == 1){
                                 auxiliary_html += '<td class="isEqualOuter">'+ifEmpty(auxiliaryData[j].associatedConsumption)+'</td>';
                             }else{
-                                auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].consumption)+'</td>';
+                                auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].associatedConsumption)+'</td>';
                             }
                             auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].unitPrice)+'</td></tr>';
-
                         }
-                        $(auxiliary_html).append(auxiliary);
+                        $(auxiliary_html).appendTo(auxiliary);
                     }
 
                 }
@@ -830,12 +829,14 @@
                                 if(ifEmpty(auxiliaryData[j].isEqualOuter) == 1){
                                     auxiliary_html += '<td class="isEqualOuter">'+ifEmpty(auxiliaryData[j].associatedConsumption)+'</td>';
                                 }else{
-                                    auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].consumption)+'</td>';
+                                    auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].associatedConsumption)+'</td>';
                                 }
                                 auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].unitPrice)+'</td></tr>';
 
                             }
+                            console.log(auxiliary_html);
                             $(auxiliary_html).appendTo(auxiliary);
+                            $('#auxiliary').removeClass('hidden');
                         }else{
                             $('#auxiliary').addClass('hidden');
                         }

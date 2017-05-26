@@ -117,7 +117,7 @@ public class QueryCustomerProductArchives extends PageBase {
 	private Integer cupboardPerNumber;
 
 	/**柜数**/
-	private Integer cupboardNumber;
+	private BigDecimal cupboardNumber;
 
 	/**海运费估算**/
 	private BigDecimal oceanFreight;
@@ -566,11 +566,11 @@ public class QueryCustomerProductArchives extends PageBase {
 		this.cupboardPerNumber = cupboardPerNumber;
 	}
 
-	public Integer getCupboardNumber() {
+	public BigDecimal getCupboardNumber() {
 		return cupboardNumber;
 	}
 
-	public void setCupboardNumber(Integer cupboardNumber) {
+	public void setCupboardNumber(BigDecimal cupboardNumber) {
 		this.cupboardNumber = cupboardNumber;
 	}
 

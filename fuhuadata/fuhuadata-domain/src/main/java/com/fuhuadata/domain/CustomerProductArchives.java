@@ -127,7 +127,7 @@ public class CustomerProductArchives {
 	private Integer cupboardPerNumber;
 	
     /**柜数**/
-	private Integer cupboardNumber;
+	private BigDecimal cupboardNumber;
 	
     /**海运费估算**/
 	private BigDecimal oceanFreight;
@@ -603,15 +603,15 @@ public class CustomerProductArchives {
 	public void setCupboardPerNumber(Integer cupboardPerNumber) {
 		this.cupboardPerNumber = cupboardPerNumber;
 	}
-	
-	public Integer getCupboardNumber() {
+
+	public BigDecimal getCupboardNumber() {
 		return cupboardNumber;
 	}
-	
-	public void setCupboardNumber(Integer cupboardNumber) {
+
+	public void setCupboardNumber(BigDecimal cupboardNumber) {
 		this.cupboardNumber = cupboardNumber;
 	}
-	
+
 	public BigDecimal getOceanFreight() {
 		return oceanFreight;
 	}

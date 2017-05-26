@@ -15,7 +15,6 @@
                             <button id="finish" class="btn btn-xs btn-primary panel-heading-btn pull-right hidden" type="button" lang="zh">
                                 完成
                             </button>
-
                         </div>
                         <div class="btn-group panel-heading-btn pull-right">
                             <a class="btn btn-xs btn-default hidden" data-view="editHide" id="back">返回</a>
@@ -77,7 +76,7 @@
                                 <label for="saleOrganizationName" class="control-label col-xs-1" lang="zh">销售组织<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input id="saleOrganizationName" name="saleOrganizationName" data-toggle="dropdown" class="form-control dropdown-toggle" disabled type="text" placeholder="点击搜索按钮选择" autocomplete="off"/>
+                                        <input id="saleOrganizationName" name="saleOrganizationName" data-toggle="dropdown" class="form-control dropdown-toggle notnull" disabled type="text" placeholder="点击搜索按钮选择" autocomplete="off"/>
                                         <div class="input-group-btn">
                                             <button id="oNSearch" class="btn btn-xs btn-default" data-control="on" disabled type="button"><span class="glyphicon glyphicon-search"></span></button>
                                         </div>
@@ -86,7 +85,7 @@
                                 <label class="col-xs-1 control-label" lang="zh">部门<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input id="departmentName" name="departmentName" data-toggle="dropdown" class="form-control dropdown-toggle" disabled type="text" placeholder="点击搜索按钮选择" autocomplete="off"/>
+                                        <input id="departmentName" name="departmentName" data-toggle="dropdown" class="form-control dropdown-toggle notnull" disabled type="text" placeholder="点击搜索按钮选择" autocomplete="off"/>
                                         <div class="input-group-btn">
                                             <button id="depSearch" class="btn btn-xs btn-default" data-control="on" disabled type="button"><span class="glyphicon glyphicon-search"></span></button>
                                         </div>
@@ -95,7 +94,7 @@
                                 <label for="salesManName" class="col-xs-1 control-label" lang="zh">业务员<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input id="salesManName" name="salesManName" placeholder="请在下拉菜单中选择" class="form-control" disabled type="text" autocomplete="off"/>
+                                        <input id="salesManName" name="salesManName" placeholder="请在下拉菜单中选择" class="form-control notnull" disabled type="text" autocomplete="off"/>
                                         <div class="input-group-btn">
                                             <button id="salSearch" data-control="on" disabled class="btn btn-xs btn-default dropdown" data-toggle="dropdown" type="button"><span class="glyphicon glyphicon-search"></span></button>
                                             <div class="dropdown-menu pull-right" style="width: 196px;padding: 3px 0;">
@@ -109,7 +108,7 @@
                                 <label class="col-xs-1 control-label" lang="zh">目的港<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input id="destinationPort" name="destinationPort" placeholder="请在下拉菜单中选择" class="form-control" disabled type="text" autocomplete="off"/>
+                                        <input id="destinationPort" name="destinationPort" placeholder="请在下拉菜单中选择" class="form-control notnull" disabled type="text" autocomplete="off"/>
                                         <div class="input-group-btn">
                                             <button data-control="on" data-control="on" class="btn btn-xs btn-default dropdown" data-toggle="dropdown" type="button" disabled><span class="glyphicon glyphicon-search"></span></button>
                                             <div class="dropdown-menu pull-right" style="width: 196px;padding: 3px 0;">
@@ -122,7 +121,7 @@
                                 <label class="col-xs-1 control-label" lang="zh">起运港<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input id="shipmentPort" name="shipmentPort" placeholder="请在下拉菜单中选择" class="form-control" disabled type="text" autocomplete="off"/>
+                                        <input id="shipmentPort" name="shipmentPort" placeholder="请在下拉菜单中选择" class="form-control notnull" disabled type="text" autocomplete="off"/>
                                         <div class="input-group-btn">
                                             <button data-control="on" disabled class="btn btn-xs btn-default dropdown" data-toggle="dropdown" type="button"><span class="glyphicon glyphicon-search"></span></button>
                                             <div class="dropdown-menu pull-right" style="width: 196px;padding: 3px 0;">
@@ -135,13 +134,13 @@
                                 <label class="col-xs-1 control-label" lang="zh">收款比例<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="interestRate" value="" disabled/>
+                                        <input data-control="on" class="form-control notnull" min="0" max="100" step="0.01" type="number" id="interestRate" value="" disabled/>
                                         <span class="input-group-addon">%</span>
                                     </div>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">收款协议<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <select class="form-control" disabled id="income">
+                                    <select class="form-control notnull" disabled id="income">
                                         <option value="">——请选择——</option>
                                         #foreach($!info in $!{income})
                                             <option value="$!info.code">$!info.name</option>
@@ -152,14 +151,14 @@
                             <div class="form-group">
                                 <label class="col-xs-1 control-label" lang="zh">贸易方式<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <select class="form-control" id="tradeType" data-control="on" disabled>
+                                    <select class="form-control notnull" id="tradeType" data-control="on" disabled>
                                         <option value="0">一般贸易</option>
                                         <option value="1">其他</option>
                                     </select>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">贸易术语<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <select data-control="on" class="form-control" disabled id="incoterm" >
+                                    <select data-control="on" class="form-control notnull" disabled id="incoterm" >
                                         <option value="">——请选择——</option>
                                         #foreach($!info in $!{incoterm})
                                             <option value="$!info.code">$!info.name</option>
@@ -169,7 +168,7 @@
                                 <label class="col-xs-1 control-label" lang="zh">贸易国别<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input id="countryzone" name="countryzone" placeholder="请在下拉菜单中选择" class="form-control" disabled type="text" autocomplete="off"/>
+                                        <input id="countryzone" name="countryzone" placeholder="请在下拉菜单中选择" class="form-control notnull" disabled type="text" autocomplete="off"/>
                                         <div class="input-group-btn">
                                             <button data-control="on" class="btn btn-xs btn-default dropdown" data-toggle="dropdown" type="button" disabled><span class="glyphicon glyphicon-search"></span></button>
                                             <div class="dropdown-menu pull-right" style="width: 196px;padding: 3px 0;">
@@ -182,15 +181,15 @@
                                 <label class="col-xs-1 control-label" lang="zh">是否使用信用险</label>
                                 <div class="col-xs-2">
                                     <select class="form-control" id="isCreditRisk" data-control="on" disabled>
-                                        <option value="0">否</option>
                                         <option value="1">是</option>
+                                        <option value="0">否</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-xs-1 control-label" lang="zh">币种<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <select class="form-control" data-control="on" disabled id="currency">
+                                    <select class="form-control notnull" data-control="on" disabled id="currency">
                                         <option value="">——请选择——</option>
                                         #foreach($!info in $!{currtype})
                                             <option value="$!info.code">$!info.name</option>
@@ -199,16 +198,16 @@
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">原币对美元汇率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input data-control="on" class="form-control" type="number" step="0.01" id="nusdexchgrate" value="" disabled/>
+                                    <input data-control="on" class="form-control notnull" type="number" step="0.01" id="nusdexchgrate" value="" disabled/>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">原币对本币<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <label class="col-xs-1 control-label" lang="zh">原币对本币汇率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input data-control="on" class="form-control" type="number" step="0.5" id="nexchangerate" value="" disabled/>
+                                    <input data-control="on" class="form-control notnull" type="number" step="0.5" id="nexchangerate" value="" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">保险费率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="premiumRate" value="0.03" disabled/>
+                                        <input data-control="on" class="form-control notnull" min="0" max="100" step="0.01" type="number" id="premiumRate" value="0.03" disabled/>
                                         <span class="input-group-addon">%</span>
                                     </div>
                                 </div>
@@ -217,33 +216,27 @@
                                 <label class="col-xs-1 control-label" lang="zh">资金利息利率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="discountRate" value="6" disabled/>
+                                        <input data-control="on" class="form-control notnull" min="0" max="100" step="0.01" type="number" id="discountRate" value="6" disabled/>
                                         <span class="input-group-addon">%</span>
                                     </div>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">汇损费率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="lossRate" value="0" disabled/>
+                                        <input data-control="on" class="form-control notnull" min="0" max="100" step="0.01" type="number" id="lossRate" value="0" disabled/>
                                         <span class="input-group-addon">%</span>
                                     </div>
+                                </div>
+                                <label class="col-xs-1 control-label" for="exchangeTermsDetail" lang="zh">收汇条款明细<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" id="exchangeTermsDetail notnull" data-control="on" type="text" disabled/>
+                                </div>
+                                <label class="col-xs-1 control-label" for="latestDeliveryTime" lang="zh">最迟交货时间<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-2">
+                                    <input class="form-control notnull" id="latestDeliveryTime" data-control="on" type="date" disabled/>
                                 </div>
                             </div>
-                            <div class="form-group hidden" id="corporation">
-                                #*<label class="col-xs-1 control-label" lang="zh">销售费用比率<sup data-view="editView" class="not-null hidden">*</sup></label>
-                                <div class="col-xs-2">
-                                    <div class="input-group">
-                                        <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="saleRate" value="0.50" disabled/>
-                                        <span class="input-group-addon">%</span>
-                                    </div>
-                                </div>
-                                <label class="col-xs-1 control-label" lang="zh">管理费用比率<sup data-view="editView" class="not-null hidden">*</sup></label>
-                                <div class="col-xs-2">
-                                    <div class="input-group">
-                                        <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="managementRate" value="0.20" disabled/>
-                                        <span class="input-group-addon">%</span>
-                                    </div>
-                                </div>*#
+                            <div class="form-group" id="corporation">
                                 <label class="col-xs-1 control-label" lang="zh">信保费率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
@@ -251,27 +244,27 @@
                                         <span class="input-group-addon">%</span>
                                     </div>
                                 </div>
-                                <label class="col-xs-1 control-label" lang="zh">信保赔付率<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                #*<label class="col-xs-1 control-label" lang="zh">信保赔付率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
                                         <input data-control="on" class="form-control" min="0" step="0.01" type="number" id="creditRate" value="" disabled/>
                                         <span class="input-group-addon">%</span>
                                     </div>
-                                </div>
+                                </div>*#
                             </div>
                             <div class="form-group">
                                 <label class="col-xs-1 control-label" lang="zh">是否可转运</label>
                                 <div class="col-xs-2">
                                     <select  class="form-control" id="transportFlag" data-control="on" disabled>
-                                        <option value="0">否</option>
                                         <option value="1">是</option>
+                                        <option value="0">否</option>
                                     </select>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">是否可分批出运</label>
                                 <div class="col-xs-2">
                                     <select class="form-control" id="partialShipmentFalg" data-control="on" disabled>
-                                        <option value="0">否</option>
                                         <option value="1">是</option>
+                                        <option value="0">否</option>
                                     </select>
                                 </div>
                             </div>
@@ -329,7 +322,7 @@
                             <th class="text-center" lang="zh">柜型</th>
                             <th class="text-center" lang="zh">柜数</th>
                             <th class="text-center" lang="zh">交货时间</th>
-                            <th class="text-center" lang="zh">最低销售价（元/KG（L)）</th>
+                            <th class="text-center" lang="zh">最低销售价（元/T(kL)）</th>
                             <th class="text-center" lang="zh">单据要求</th>
                             <th class="text-center" lang="zh">订舱出运要求</th>
                             <th class="text-center" lang="zh">勾选删除项</th>
@@ -375,19 +368,19 @@
 
 ## 贸易国别
 <script id="tzC" type="text/html">
-    <%if (data.length>0) {%>
-    <%for (var i=0; i<data.length; i++) {%>
-    <li><a href="#" id="<%=data[i].pkTimezone%>" data-val="<%=data[i].code%>" style="padding-left: 6px"><%=data[i].name%></a></li>
+    <%if (data.list.length>0) {%>
+    <%for (var i=0; i<data.list.length; i++) {%>
+    <li><a href="#" id="<%=data.list[i].pkTimezone%>" data-val="<%=data.list[i].code%>" style="padding-left: 6px"><%=data.list[i].name%></a></li>
     <%}%>
     <%}%>
 </script>
 
 ## 起运港和目的港
 <script id="dpC" type="text/html">
-    <%if (data.length>0) {%>
-    <%for (var i=0; i<data.length; i++) {%>
-    <li><a href="#" data-val="<%=data[i].vcode%>" style="padding-left: 6px"><%=data[i].vname%></a></li>
-    <%}%>
+    <%if (data.list.length>0) {%>
+        <%for (var i=0; i<data.list.length; i++) {%>
+        <li><a href="#" data-val="<%=data.list[i].vcode%>" style="padding-left: 6px"><%if (data.currentLang == 'zh') {%><%=data.list[i].vname%>,<%=data.list[i].country%><%}else{%><%=data.list[i].venname%>,<%=data.list[i].ecountry%><%}%></a></li>
+        <%}%>
     <%}%>
 </script>
 
@@ -480,9 +473,12 @@
                         if(businessOrder.saleRate!=undefined){$('#saleRate').val(businessOrder.saleRate);} // 销售费率
                         if(businessOrder.managementRate!=undefined){$('#managementRate').val(businessOrder.managementRate);} // 管理汇率
                         if(businessOrder.guaranteeRate!=undefined){$('#guaranteeRate').val(businessOrder.guaranteeRate);} // 信保费率
-                        if(businessOrder.creditRate!=undefined){$('#creditRate').val(businessOrder.creditRate);} // 信保赔付率
+                        /*if(businessOrder.creditRate!=undefined){$('#creditRate').val(businessOrder.creditRate);}*/ // 信保赔付率
                         if(businessOrder.transportFlag!=undefined){$('#transportFlag').val(businessOrder.transportFlag);} // 是否可转运
                         if(businessOrder.partialShipmentFalg!=undefined){$('#partialShipmentFalg').val(businessOrder.partialShipmentFalg);} // 是否可分批出运
+                        if(businessOrder.exchangeTermsDetail!=undefined){$('#exchangeTermsDetail').val(businessOrder.exchangeTermsDetail);} // 收汇条款明细
+                        if(businessOrder.latestDeliveryTime!=undefined){$('#latestDeliveryTime').val(businessOrder.latestDeliveryTime);} // 最迟交货时间
+
                         isShowCre(businessOrder.isCreditRisk); // 判断是否显示信保相关字段
 
                         var customerBaseInfo = result.data.customerBaseInfo;
@@ -500,23 +496,7 @@
                         }// 注册资金
                         if(customerBaseInfo.enterprisePhone!=undefined){$('#enterprisePhone').val(customerBaseInfo.enterprisePhone);} // 企业电话
                         if(customerBaseInfo.enterpriseEmail!=undefined){$('#enterpriseEmail').val(customerBaseInfo.enterpriseEmail);}// 企业邮箱
-                        /*if(customerBaseInfo.enterpriseNature!=undefined){$('[name="check"]').val([customerBaseInfo.enterpriseNature]); }// 企业性质
-                        if(customerBaseInfo.otherEnterpriseNature!=undefined){$('#otherEnterpriseNature').val(customerBaseInfo.otherEnterpriseNature);} // 其他企业性质*/
 
-                        /*if(customerBaseInfo.enterpriseNature!=undefined){
-                            var enterpriseNature = customerBaseInfo.enterpriseNature.split(',');
-
-                            $.each(enterpriseNature,function(index,value){
-                                $("input[name='check']").each(function(){
-                                    if($(this).val() == value){
-                                        $(this).prop('checked',true);
-                                        if(value == 4){
-
-                                        }
-                                    }
-                                })
-                            });
-                        }*/
 
                         businessproduct.innerHTML = '';
                         if(result.data.businessOrderProductLists!=undefined){
@@ -550,6 +530,7 @@
             $('#finish').removeClass('hidden');
             $('#Add').addClass('disabled');
             $('[data-control="on"]').attr('disabled',false);
+            $('sup[data-view="editView"]').removeClass('hidden');
 
             // 未点击“保存”时，点击“新增”按钮，提示“请先保存基础信息”
             $('#Add').filter('.disabled').click(function () {
@@ -598,58 +579,72 @@
 
         // 完成
         $('#finish').click(function(){
-            jQuery.ajax({
-                url: basePath +'/businessOrder/doAddBusinessOrder',
-                type:'POST',
-                contentType:"application/json",
-                data:getAddOrder(),
-                success:function (result) {
-                    var ResultData = result.code;
-                    if(ResultData == 1){
-                        alert('保存成功!');
-                        $('#delete').attr('disabled',false);
-                        $('#Add').removeClass('disabled');
-
-                        $('#addback').addClass('hidden');
-                        $('#finish').addClass('hidden');
-                        $('#back').removeClass('hidden');
-                        $('#edit').removeClass('hidden');
-                        location.reload();
-                    }else{
-
-                        alert('保存失败！');
-                        $('#addback').removeClass('hidden');
-                        $('#finish').removeClass('hidden');
-                        $('#back').addClass('hidden');
-                        $('#edit').addClass('hidden');
-                    }
-                }
-            })
-        });
-
-        $('#save').click(function(){
-            /*var isup = true;
-            var typenumber = $('input[type=number]');
-            typenumber.each(function () {
+            var isup = true;
+            var notnull = $('.notnull');
+            notnull.each(function () {
                 var val = $(this).val();
-                if(val == 0){
-                    alert('费率类信息不可为0！');
+                if(val == ''||val == null){
+                    alert('请完善表单!');
                     isup = false;
                     return false;
                 }
-            });*/
-            jQuery.ajax({
-                url:basePath + '/businessOrder/updateBusinessOrderByOrderId',
-                type:'POST',
-                contentType:"application/json",
-                data:getOrder(),
-                success:function (result) {
-                    alert("修改成功!");
+            });
+            if(isup){
+                jQuery.ajax({
+                    url: basePath +'/businessOrder/doAddBusinessOrder',
+                    type:'POST',
+                    contentType:"application/json",
+                    data:getAddOrder(),
+                    success:function (result) {
+                        var ResultData = result.code;
+                        if(ResultData == 1){
+                            alert('保存成功!');
+                            $('#delete').attr('disabled',false);
+                            $('#Add').removeClass('disabled');
 
-                     /*location.reload();*/
+                            $('#addback').addClass('hidden');
+                            $('#finish').addClass('hidden');
+                            $('#back').removeClass('hidden');
+                            $('#edit').removeClass('hidden');
+                            location.reload();
+                        }else{
 
+                            alert('保存失败！');
+                            $('#addback').removeClass('hidden');
+                            $('#finish').removeClass('hidden');
+                            $('#back').addClass('hidden');
+                            $('#edit').addClass('hidden');
+                        }
+                    }
+                })
+            }
+        });
+
+        $('#save').click(function(){
+            var isup = true;
+            var notnull = $('.notnull');
+            notnull.each(function () {
+                var val = $(this).val();
+                if(val == ''||val == null){
+                    alert('请完善表单!');
+                    isup = false;
+                    return false;
                 }
-            })
+            });
+            if(isup){
+                jQuery.ajax({
+                    url:basePath + '/businessOrder/updateBusinessOrderByOrderId',
+                    type:'POST',
+                    contentType:"application/json",
+                    data:getOrder(),
+                    success:function (result) {
+                        alert("修改成功!");
+
+                        /*location.reload();*/
+
+                    }
+                })
+            }
         });
 
         //返回
@@ -700,16 +695,12 @@
                 "lossRate":$('#lossRate').val(), // 汇损费率
                 "saleRate":$('#saleRate').val(), // 销售费率
                 "managementRate":$('#managementRate').val(), // 管理汇率
-                "creditRate":$('#creditRate').val(), // 信保赔付率
+                /*"creditRate":$('#creditRate').val(),*/ // 信保赔付率
                 "transportFlag":$('#transportFlag').val(), // 是否可转运
                 "partialShipmentFalg":$('#partialShipmentFalg').val(), // 是否可分批出运
+                "exchangeTermsDetail":$('#exchangeTermsDetail').val(), // 收汇条款明细
+                "latestDeliveryTime":$('#latestDeliveryTime').val() // 最迟交货时间
 
-                "createTime": CRM.getTime(),
-                "createUserId": 2,
-                "createUserName":"杨洋",
-                "modifyTime":"2017-03-02 11:44:49",
-                "lastmodifyUserId": 1,
-                "lastmodifyUserName": "胡向阳"
             }
             return JSON.stringify(data);
         }
@@ -752,24 +743,15 @@
                 "lossRate":$('#lossRate').val(), // 汇损费率
                 "saleRate":$('#saleRate').val(), // 销售费率
                 "managementRate":$('#managementRate').val(), // 管理汇率
-                "creditRate":$('#creditRate').val(), // 信保赔付率
+                /*"creditRate":$('#creditRate').val(),*/ // 信保赔付率
                 "transportFlag":$('#transportFlag').val(), // 是否可转运
                 "partialShipmentFalg":$('#partialShipmentFalg').val(), // 是否可分批出运
+                "exchangeTermsDetail":$('#exchangeTermsDetail').val(), // 收汇条款明细
+                "latestDeliveryTime":$('#latestDeliveryTime').val() // 最迟交货时间
                 /*"internalSupplyId":$('#internalSupplyName').data('val'),
                 "internalSupplyName":$('#internalSupplyName').val()*/
 
             }
-            //            "internalSupplyName":$('#internalSupplyName').val()
-//            "currtype":$('#currtype').val(),
-//            "enterpriseNature":getenterpriseNature(),
-//            "registeredFunds":$('#registeredFunds').val(),
-//            "zhongxinbaoNumber":$('#zhongxinbaoNumber').val(),
-//            "linkPhone1":$('#linkPhone1').val(),
-//            "lemail":$('#lemail').val(),
-//            "incoterm":$('#incoterm').val(),
-//            "customerName":$('#customerName').val(),
-//        console.log(businessOrder)
-            console.log(businessOrder);
             return JSON.stringify(businessOrder);
         }
 
@@ -1063,9 +1045,11 @@
                         name:''
                     }),
                     callback:function (data) {
+                        var res = {};
                         if (data) {
-
-                            CRM.tplHandler(strId,data,ul);
+                            res.list = data;
+                            res.currentLang = lang.currentLang;
+                            CRM.tplHandler(strId,res,ul);
                         }
                     }
                 });
@@ -1083,8 +1067,11 @@
                     contentType:'application/json',
                     data:JSON.stringify(obj),
                     callback:function (data) {
+                        var res = {};
                         if (data) {
-                            CRM.tplHandler(strId,data,ul);
+                            res.list = data;
+                            res.currentLang = lang.currentLang;
+                            CRM.tplHandler(strId,res,ul);
                         }
                     }
                 });
@@ -1186,8 +1173,11 @@
         }
 
         $('#back').click(function(){
-//        window.location.href = basePath + '/businessOrder/intoBusinessOffer';
-            window.history.back(-1)
+            window.location.href = basePath + '/businessOrder/intoBusinessOffer';
+        })
+
+        $('#addback').click(function(){
+            window.location.href = basePath + '/businessOrder/intoBusinessOffer';
         })
 
         function getenterpriseNature() {

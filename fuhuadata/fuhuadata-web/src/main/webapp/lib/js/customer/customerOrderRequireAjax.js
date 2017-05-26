@@ -34,29 +34,33 @@ function reconstructionData(data) {
 
                 var d = JSON.parse(item.documentaryRequire);
 
-                if (d.oceanBillOfLading) {obj.oceanBillOfLading=d.oceanBillOfLading}
-                if (d.freightForwardingBill) {obj.freightForwardingBill=d.freightForwardingBill}
-                if (d.invoice) {obj.invoice=d.invoice}
-                if (d.packingList) {obj.packingList=d.packingList}
-                if (d.qualityTestingReport) {obj.qualityTestingReport=d.qualityTestingReport}
+                if (d.oceanBillOfLading) {obj.oceanBillOfLading=d.oceanBillOfLading} // 海运提单
+                if (d.freightForwardingBill) {obj.freightForwardingBill=d.freightForwardingBill} // 货代提单
+                if (d.invoice) {obj.invoice=d.invoice} // 是否需要发票
+                if (d.packingList) {obj.packingList=d.packingList} // 是否需要箱单
+                if (d.qualityTestingReport) {obj.qualityTestingReport=d.qualityTestingReport} //质检单
 
-                if (d.reportCompanyTitle) {obj.reportCompanyTitle=d.reportCompanyTitle}
-                if (d.guaranteeSlip) {obj.guaranteeSlip=d.guaranteeSlip}
-                if (d.coo) {obj.coo=d.coo} //
-                if (d.cooContent) {obj.cooContent=d.cooContent}
-                if (d.dangerousCertificate) {obj.dangerousCertificate=d.dangerousCertificate}
+                if (d.reportCompanyTitle) {obj.reportCompanyTitle=d.reportCompanyTitle} // 质检单公司抬头
+                if (d.guaranteeSlip) {obj.guaranteeSlip=d.guaranteeSlip} // 是否需要保单
+                if (d.coo) {obj.coo=d.coo} // 是否出具产地证
+                if (d.cooContent) {obj.cooContent=d.cooContent} // coo 具体选项
+                if (d.dangerousCertificate) {obj.dangerousCertificate=d.dangerousCertificate} // 危包证
 
-                if (d.beneficiaryCertification) {obj.beneficiaryCertification=d.beneficiaryCertification} //
-                if (d.fumigationCertificate) {obj.fumigationCertificate=d.fumigationCertificate}
-                if (d.msds) {obj.msds=d.msds}
-                if (d.telexRelease) {obj.telexRelease=d.telexRelease}
-                if (d.releaseDestination) {obj.releaseDestination=d.releaseDestination}
+                if (d.beneficiaryCertification) {obj.beneficiaryCertification=d.beneficiaryCertification} // 受益人证明
+                if (d.fumigationCertificate) {obj.fumigationCertificate=d.fumigationCertificate} // 熏蒸证书
+                if (d.msds) {obj.msds=d.msds} // 是否需要MSDS
+                if (d.billOfLading) {obj.telexRelease=d.billOfLading} // 提单签单方式
+                if (d.otherBillOfLading) {obj.releaseDestination=d.otherBillOfLading} // 其他提单签单方式
 
-                if (d.bankBill) {obj.bankBill=d.bankBill} //
-                if (d.examiningReport) {obj.examiningReport=d.examiningReport}
-                if (d.packingDeclaration) {obj.packingDeclaration=d.packingDeclaration}
-                if (d.importContainerWeightDeclaration) {obj.importContainerWeightDeclaration=d.importContainerWeightDeclaration}
-                if (d.manufacturerCertificate) {obj.manufacturerCertificate=d.manufacturerCertificate}
+                if (d.documentPresentation) {obj.bankBill=d.documentPresentation} // 交单方式
+                if (d.examiningReport) {obj.examiningReport=d.examiningReport} // 是否需要做第三方检测
+                if (d.packingDeclaration) {obj.packingDeclaration=d.packingDeclaration} // 是否需要Packing Declaration
+                if (d.importContainerWeightDeclaration) {obj.importContainerWeightDeclaration=d.importContainerWeightDeclaration} // 是否需要IMPORT CONTAINER WEIGHT DECLARATION
+                if (d.manufacturerCertificate) {obj.manufacturerCertificate=d.manufacturerCertificate} // 是否需要Manufacturer's Certificate
+
+                if (d.needTDS) {obj.needTDS=d.needTDS} // 是否需要TDS
+                if (d.needPriceCertificate) {obj.needPriceCertificate=d.needPriceCertificate} // 是否需要Price Certificate
+
             }
 
             arr.push(obj);
@@ -161,13 +165,15 @@ function customerBillRequire(data) {
     if (data.telexRelease) {$('[name="telexRelease"]').val([data.telexRelease]);}
     if (data.releaseDestination && data.telexRelease!='0') {$('#releaseDestination').val(data.releaseDestination);} // 放单目的港 text
 
-    if (data.bankBill) {$('#bankBill').val([data.bankBill]);}
+    if (data.bankBill) {$('[name="bankBill"]').val([data.bankBill]);}
     if (data.examiningReport) {$('#bankBill').val([data.examiningReport]);}
     if (data.packingDeclaration) {$('#bankBill').val([data.packingDeclaration]);}
     if (data.importContainerWeightDeclaration) {$('#bankBill').val([data.importContainerWeightDeclaration]);}
     if (data.bankBill) {$('#manufacturerCertificate').val([data.manufacturerCertificate]);}
 
     if (data.otherDocumentaryRequire) {$('#otherDocumentaryRequire').val(data.otherDocumentaryRequire);} // 其他单据要求 text
+    if (data.needTDS) {$('#needTDS').val([data.needTDS]);} // 是否需要TDS
+    if (data.needPriceCertificate) {$('#needPriceCertificate').val([data.needPriceCertificate]);} // 是否需要Price Certificate
 }
 
 // 渲染产品种类下拉框

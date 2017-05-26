@@ -476,6 +476,3 @@ CRM.searchTreeId = function (data) {
     str = arr.join(',');
     return str;
 };
-
-
-

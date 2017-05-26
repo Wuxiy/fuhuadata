@@ -44,7 +44,7 @@
         <result column="miantuiqi" jdbcType="INTEGER" property="miantuiqi" />
         <result column="cupboard_type" jdbcType="INTEGER" property="cupboardType" />
         <result column="cupboard_per_number" jdbcType="INTEGER" property="cupboardPerNumber" />
-        <result column="cupboard_number" jdbcType="INTEGER" property="cupboardNumber" />
+        <result column="cupboard_number" jdbcType="DECIMAL" property="cupboardNumber" />
         <result column="ocean_freight" jdbcType="DECIMAL" property="oceanFreight" />
         <result column="port_surcharge" jdbcType="DECIMAL" property="portSurcharge" />
         <result column="tax_type" jdbcType="TINYINT" property="taxType" />
