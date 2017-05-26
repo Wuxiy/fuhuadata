@@ -3,7 +3,7 @@ package com.fuhuadata.dao;
 import com.fuhuadata.domain.UserAccount;
 
 /**
- * Created by zhangxiang on 2017/2/8.
+ * Created by wuxiy on 2017/5/23.
  */
 public interface UserDao {
     public UserAccount getUserByAccount(String account);

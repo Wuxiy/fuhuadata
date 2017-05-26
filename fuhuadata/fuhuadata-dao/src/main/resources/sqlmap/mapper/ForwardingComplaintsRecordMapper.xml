@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.supplier.ForwardingComplaintsRecordMapper">
+  <resultMap id="BaseResultMap" type="com.fuhuadata.domain.mybatis.supplier.ForwardingComplaintsRecord">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="complaint_date" jdbcType="DATE" property="complaintDate" />
+    <result column="production_date" jdbcType="DATE" property="productionDate" />
+    <result column="packing" jdbcType="VARCHAR" property="packing" />
+    <result column="country_id" jdbcType="VARCHAR" property="countryId" />
+    <result column="customer_id" jdbcType="VARCHAR" property="customerId" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="damaged_quantity" jdbcType="INTEGER" property="damagedQuantity" />
+    <result column="problem" jdbcType="VARCHAR" property="problem" />
+    <result column="USD" jdbcType="DECIMAL" property="usd" />
+    <result column="problem_handling" jdbcType="VARCHAR" property="problemHandling" />
+    <result column="agent" jdbcType="VARCHAR" property="agent" />
+    <result column="groups" jdbcType="VARCHAR" property="groups" />
+    <result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
+    <result column="create_user_name" jdbcType="VARCHAR" property="createUserName" />
+    <result column="lastmodify_user_id" jdbcType="INTEGER" property="lastmodifyUserId" />
+    <result column="lastmodify_user_name" jdbcType="VARCHAR" property="lastmodifyUserName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+</mapper>
