@@ -13,6 +13,8 @@ public interface BusinessOrderDao {
 
 
     String getOrderIdByBusinessId(String businessId);
+    //获取业务员部门code
+    String getSalesManDeptCode(String orderId);
     /**
      * add
      * @param businessOrder

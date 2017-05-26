@@ -181,8 +181,14 @@ public class BusinessOrderAction {
         Result<List<Incoterm>> rincoterm = dataArchivesService.getIncoterm();
         //币种
         Result<List<Currtype>> rcurrtype = dataArchivesService.getCurrtype();
-        return new ModelAndView("salesStatistics/orderConversion").addObject("orderId",orderId).addObject("businessOrderProduct",result.getModel())
-                .addObject("income",rincome.getModel()).addObject("incoterm",rincoterm.getModel()).addObject("currtype",rcurrtype.getModel());
+        //业务员部门
+        String deptCode = businessOrderService.getSalesManDeptCode(orderId);
+        return new ModelAndView("salesStatistics/orderConversion").addObject("orderId",orderId)
+                .addObject("businessOrderProduct",result.getModel())
+                .addObject("income",rincome.getModel())
+                .addObject("incoterm",rincoterm.getModel())
+                .addObject("currtype",rcurrtype.getModel())
+                .addObject("deptCode",deptCode);
     }
 
     /**
