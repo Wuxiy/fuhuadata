@@ -1,5 +1,7 @@
 package com.fuhuadata.domain.supplier;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fuhuadata.domain.mybatis.BaseEntity;
 
 import javax.persistence.*;
@@ -149,7 +151,11 @@ public class ProduceFactoryProductAddr extends BaseEntity<Integer> {
         this.capacity = capacity;
     }
 
-    public static void main(String[] args) throws IntrospectionException {
-        printProperties(ProduceFactoryProductAddr.class, "pfpa.");
+    public static void main(String[] args) throws IntrospectionException, JsonProcessingException {
+//        printProperties(ProduceFactoryProductAddr.class, "pfpa.");
+
+        ProduceFactoryProductAddr addr = new ProduceFactoryProductAddr();
+        ObjectMapper mapper = new ObjectMapper();
+        System.out.println(mapper.writeValueAsString(addr));
     }
 }

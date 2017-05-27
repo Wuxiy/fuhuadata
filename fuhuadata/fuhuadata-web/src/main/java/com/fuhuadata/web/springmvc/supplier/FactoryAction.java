@@ -10,6 +10,7 @@ import com.fuhuadata.service.mybatis.supplier.ProduceFactoryService;
 import com.fuhuadata.web.springmvc.mybatis.BaseController;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -131,7 +132,9 @@ public class FactoryAction extends BaseController<ProduceFactory, Integer> {
     }
 
     @RequestMapping(value = "{factoryId}/vm", method = RequestMethod.GET)
-    public String baseInfo(@PathVariable("factoryId") String id) {
+    public String baseInfo(@PathVariable("factoryId") String id, Model model) {
+
+        model.addAttribute("factoryId", id);
         return "supplierInformation/factoryBasic";
     }
 

@@ -1,5 +1,9 @@
 package com.fuhuadata.domain.supplier;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fuhuadata.domain.mybatis.BaseEntity;
 
 import javax.persistence.*;
@@ -205,10 +209,6 @@ public class ProduceFactoryProduct extends BaseEntity<Integer> {
         this.productAddrs = productAddrs;
     }
 
-    public static void main(String[] args) throws IntrospectionException {
-        printProperties(ProduceFactoryProduct.class, "pfp.");
-    }
-
     public String getSpecification() {
         return specification;
     }
@@ -224,4 +224,16 @@ public class ProduceFactoryProduct extends BaseEntity<Integer> {
     public void setCmaterialName(String cmaterialName) {
         this.cmaterialName = cmaterialName;
     }
+
+    public static void main(String[] args) throws IntrospectionException, JsonProcessingException {
+//        printProperties(ProduceFactoryProduct.class, "pfp.");
+
+        ProduceFactoryProduct product = new ProduceFactoryProduct();
+        System.out.println(JSON.toJSONString(product, SerializerFeature.WriteMapNullValue));
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String s = objectMapper.writeValueAsString(product);
+        System.out.println(s);
+    }
+
 }
