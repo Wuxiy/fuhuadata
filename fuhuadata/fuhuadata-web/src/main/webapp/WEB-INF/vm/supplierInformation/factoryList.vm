@@ -45,14 +45,57 @@
 
     $(function(){
 
-        // 搜索按钮绑定事件
+        var table = {
+            pageSize:10,
+            pageNum:0,
+            pagination:$('#pagination'),
+            data:{
+                url:basePath + '',
+                dataType:'json',
+                data:{
+                    customerType:$("#customerType").val(),
+                    areaId:areaId,
+                    fullName:$("#fullName").val(),
+                    enterpriseNature:$("#enterpriseNature").val(),
+                    zhongxinbaoLevel:$("#zhongxinbaoLevel").val(),
+                    customerLevel:$("#customerLevel").val(),
+                    customerStatus:$("#customerStatus").val(),
+                    startRow:this.pageNum*this.pageSize,
+                    pageSize:this.pageSize
+                },
+                async:true,
+                type:'POST'
+            },
+            setPagination:{
+                items_per_page : this.pageSize,
+                num_edge_entries : 3,
+                num_display_entries : 5,
+                callback:function () {
+
+                }
+            }
+            init:function () {
+                $.ajax(this.data).done(function(){
+
+                })
+            },
+
+            renderList:function () {
+
+            },
+            renderPagination:function (total) {
+                this.pagination.pagination(total,this.setPagination);
+            }
+        }
+
+        /*// 搜索按钮绑定事件
         $("#submit").click(function(){
 
             serach();
         });
 
         // 初始化分页插件并渲染第一页数据
-        serach();
+        serach();*/
 
     });
 
