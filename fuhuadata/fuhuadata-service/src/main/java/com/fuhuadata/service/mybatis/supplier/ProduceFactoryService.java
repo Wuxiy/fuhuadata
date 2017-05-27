@@ -1,6 +1,7 @@
 package com.fuhuadata.service.mybatis.supplier;
 
 import com.fuhuadata.domain.common.BankAccBas;
+import com.fuhuadata.domain.mybatis.supplier.SupplierLinkman;
 import com.fuhuadata.domain.supplier.ProduceFactory;
 import com.fuhuadata.domain.supplier.ProduceFactoryInfo;
 import com.fuhuadata.domain.supplier.ProduceFactoryQuery;
@@ -18,6 +19,8 @@ public interface ProduceFactoryService extends BaseService<ProduceFactory, Integ
     PageInfo<ProduceFactory> listFactories(ProduceFactoryQuery query);
 
     List<BankAccBas> listBankAccOfFactory(Integer factoryId);
+
+    List<SupplierLinkman> listLinkmenOfFactory(Integer factoryId);
 
     ProduceFactory getFactory(Integer factoryId);
 
