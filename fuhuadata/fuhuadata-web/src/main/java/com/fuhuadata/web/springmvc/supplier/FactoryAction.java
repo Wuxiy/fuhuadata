@@ -1,6 +1,7 @@
 package com.fuhuadata.web.springmvc.supplier;
 
 import com.fuhuadata.domain.common.BankAccBas;
+import com.fuhuadata.domain.mybatis.supplier.SupplierLinkman;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.domain.supplier.ProduceFactory;
@@ -82,6 +83,24 @@ public class FactoryAction extends BaseController<ProduceFactory, Integer> {
         Result<List<BankAccBas>> result = Result.newResult(false);
 
         List<BankAccBas> banks = factoryService.listBankAccOfFactory(factoryId);
+        result.addDefaultModel(banks);
+        result.setSuccess(true);
+
+        return result.getResultPojo();
+    }
+
+    /**
+     * 加工厂联系人
+     * @param factoryId
+     * @return
+     */
+    @RequestMapping(value = "{factoryId}/linkmen", method = RequestMethod.GET)
+    @ResponseBody
+    public ResultPojo listFactoryLinkmen(@PathVariable Integer factoryId) {
+
+        Result<List<SupplierLinkman>> result = Result.newResult(false);
+
+        List<SupplierLinkman> banks = factoryService.listLinkmenOfFactory(factoryId);
         result.addDefaultModel(banks);
         result.setSuccess(true);
 
