@@ -1,10 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="nav-deputy shadow-out clearfix">
+    #factoryTab('产品信息',1)
+    #breadcrumb()
+</div>
+<div class="dashboard-wrapper">
+    <div class="row">
+        <div class="col-xs-12 view-HD-lg">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" lang="zh">产品信息</h3>
+                </div>
+                <div class="panel-body clearfix">
+                    <!--表格-->
+                    <table class="table text-center table-condensed table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th class="text-center" lang="zh">编号</th>
+                            <th class="text-center" lang="zh">产品品类</th>
+                            <th class="text-center" lang="zh">总产能（吨/年）</th>
+                            <th class="text-center" lang="zh">产品质量</th>
+                            <th class="text-center" lang="zh">厂址1</th>
+                            <th class="text-center" lang="zh">产能1（吨/年）</th>
+                            <th class="text-center" lang="zh">厂址2</th>
+                            <th class="text-center" lang="zh">产能2（吨/年）</th>
+                            <th class="text-center" lang="zh">备注</th>
+                        </tr>
+                        </thead>
+                        <tbody id="factory_product">
+                        </tbody>
+                    </table>
+                    <div class="pagination" id="pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-</body>
-</html>
