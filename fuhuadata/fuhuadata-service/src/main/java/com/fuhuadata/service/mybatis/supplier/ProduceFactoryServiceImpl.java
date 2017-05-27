@@ -96,6 +96,7 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
 
     @Override
     public ProduceFactory updateFactory(ProduceFactoryInfo factoryInfo) {
+
         if (factoryInfo == null || factoryInfo.getFactory() == null) {
             return null;
         }
@@ -109,7 +110,11 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
             bank.setCustomerId(factory.getId());
         });
 
+        // 保存、更新银行账号
         bankAccService.saveOrUpdateBanks(banks);
-        return null;
+
+        // 删除银行账号
+        bankAccService.deleteBanks(factoryInfo.getDeletedBankIds());
+        return factory;
     }
 }

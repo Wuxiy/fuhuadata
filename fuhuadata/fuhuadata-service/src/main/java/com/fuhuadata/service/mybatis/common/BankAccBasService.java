@@ -11,6 +11,12 @@ import java.util.List;
  */
 public interface BankAccBasService extends BaseService<BankAccBas, Integer> {
 
+    /**
+     * 获取银行账号
+     * @param accType 账户类型
+     * @param customerId
+     * @return
+     */
     List<BankAccBas> listBankAccs(short accType, Integer customerId);
 
     /**

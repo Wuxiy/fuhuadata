@@ -3,6 +3,7 @@ package com.fuhuadata.service.mybatis.common;
 import com.fuhuadata.dao.mapper.BankAccBasMapper;
 import com.fuhuadata.domain.common.BankAccBas;
 import com.fuhuadata.service.impl.mybatis.BaseServiceImpl;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
@@ -33,8 +34,12 @@ public class BankAccBasServiceImpl extends BaseServiceImpl<BankAccBas, Integer>
 
     @Override
     public int deleteBanks(List<Integer> bankIds) {
-        Example example = newExample();
 
+        if (CollectionUtils.isEmpty(bankIds)) {
+            return 0;
+        }
+
+        Example example = newExample();
         example.createCriteria().andIn("id", bankIds);
 
         return delete(example);
