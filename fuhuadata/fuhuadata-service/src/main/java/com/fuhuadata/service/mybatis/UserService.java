@@ -8,6 +8,7 @@ import com.fuhuadata.vo.MixNodeVO;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * <p>User: wangjie
@@ -61,6 +62,15 @@ public interface UserService extends BaseService<UserAccount, Integer> {
     List<Integer> listUserIdsByDeptIds(List<String> deptIds);
 
     UserAccount getUserByLoginName(String loginName);
+
+    /**
+     * 根据 code 获取用户
+     * @param loginName
+     * @return
+     */
+    Optional<UserAccount> getUserOptByLoginName(String loginName);
+
+    Optional<UserAccount> getUserOptById(Integer userId);
 
     UserAccount login(String loginName, String password);
 
