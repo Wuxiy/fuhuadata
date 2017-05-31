@@ -70,7 +70,7 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
     @RequestMapping(value = "intoForwardingInfo", method = RequestMethod.GET)
     @SystemLogAnnotation(module = "supplier-forwarding",methods = "init")
     public String intoForwardingInfo() {
-        return "supplier/forwardingBasic";
+        return "/supplier/forwardingBasic";
     }
     /**
      * 货代详情

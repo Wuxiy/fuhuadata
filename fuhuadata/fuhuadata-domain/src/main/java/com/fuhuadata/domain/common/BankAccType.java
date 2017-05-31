@@ -6,7 +6,7 @@ package com.fuhuadata.domain.common;
  */
 public enum BankAccType {
 
-    Factory((short) 0, "加工厂");
+    Factory((short) 0, "加工厂"),Forwarding((short)1, "货代"), Warehouse((short)2, "仓库");
 
     public final short key;
 
