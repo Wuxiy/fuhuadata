@@ -62,6 +62,16 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
         return result.getResultPojo();
     }
 
+
+    /**
+     * 进入仓库详情
+     * @return
+     */
+    @RequestMapping(value = "/intoWarehouseInfo", method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "supplier-warehouse",methods = "intoWarehouseInfo")
+    public String intoWarehouseInfo() {
+        return "supplier/warehouseInfo";
+    }
     /**
      * 仓库详情
      * @return
