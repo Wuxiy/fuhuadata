@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.BankDocMapper">
+  <resultMap id="BaseResultMap" type="com.fuhuadata.domain.doc.BankDoc">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pk_bankdoc" jdbcType="CHAR" property="pkBankdoc" />
+    <result column="pk_banktype" jdbcType="VARCHAR" property="pkBanktype" />
+    <result column="pk_combine" jdbcType="VARCHAR" property="pkCombine" />
+    <result column="pk_country" jdbcType="VARCHAR" property="pkCountry" />
+    <result column="pk_fatherbank" jdbcType="VARCHAR" property="pkFatherbank" />
+    <result column="pk_fundorg" jdbcType="VARCHAR" property="pkFundorg" />
+    <result column="pk_group" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="pk_org" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="pk_workcalendar" jdbcType="VARCHAR" property="pkWorkcalendar" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="shortname" jdbcType="VARCHAR" property="shortname" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="innercode" jdbcType="VARCHAR" property="innercode" />
+    <result column="mnecode" jdbcType="VARCHAR" property="mnecode" />
+    <result column="enablestate" jdbcType="DECIMAL" property="enablestate" />
+    <result column="pcombinename" jdbcType="VARCHAR" property="pcombinename" />
+    <result column="pcombinenum" jdbcType="VARCHAR" property="pcombinenum" />
+    <result column="creationtime" jdbcType="TIMESTAMP" property="creationtime" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="modifiedtime" jdbcType="TIMESTAMP" property="modifiedtime" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+  </resultMap>
+</mapper>

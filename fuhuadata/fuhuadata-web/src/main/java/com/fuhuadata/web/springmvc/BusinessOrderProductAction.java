@@ -169,11 +169,13 @@ public class BusinessOrderProductAction {
                 //新增
                 businessProductId = businessOrderProductService.addBusinessOrderProduct(businessOrderProduct,list);
             }
-            BusinessProductRequire businessProductRequire =  businessProductRequireService.getOneByQuery(null,businessProductId);
+            BusinessProductRequire businessProductRequire =  businessProductRequireService.getOneByQuery(null,
+                    businessProductId);
             if(businessProductRequire!=null){
                 map.put("productRequireId",businessProductRequire.getId());
             }
             map.put("success",true);
+            pojo.setCode(1);
             map.put("businessProductId",businessProductId);
             map.put("orderId",businessOrderProduct.getOrderId());
         } catch (Exception e) {

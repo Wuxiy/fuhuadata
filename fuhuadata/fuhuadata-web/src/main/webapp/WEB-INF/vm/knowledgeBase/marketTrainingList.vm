@@ -366,8 +366,8 @@
     $('#submitfile').click(function(){
         var fd = new FormData();
         fd.append("name", $("#inputfile").val());
-        fd.append("file", $("#inputfile")[0].files[0]);
-        fd.append("classifyPath","marketTrain");
+        fd.append("file", $("#inputfile")[0].files[0]);//获取文件对象
+        fd.append("classifyPath","marketTrain");//若为第一次上传，创建markettrain文件夹；之后上传则传入该文件夹
 
         console.log(fd);
 

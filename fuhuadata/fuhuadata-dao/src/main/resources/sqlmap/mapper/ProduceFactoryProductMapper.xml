@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.supplier.ProduceFactoryProductMapper">
+
+    <resultMap id="BaseResultMap" type="com.fuhuadata.domain.supplier.ProduceFactoryProduct">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="factory_id" jdbcType="INTEGER" property="factoryId"/>
+        <result column="category_id" jdbcType="INTEGER" property="categoryId"/>
+        <result column="category" jdbcType="VARCHAR" property="category"/>
+        <result column="cmaterial_id" jdbcType="VARCHAR" property="cmaterialId"/>
+        <result column="capacity" jdbcType="VARCHAR" property="capacity"/>
+        <result column="capacity_unit" jdbcType="VARCHAR" property="capacityUnit"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    </resultMap>
+
+    <!-- 获取加工厂产品关联地址 -->
+    <resultMap id="ProductAddrMap" type="com.fuhuadata.domain.supplier.ProduceFactoryProduct"
+               extends="BaseResultMap">
+        <collection property="productAddrs" ofType="com.fuhuadata.domain.supplier.ProduceFactoryProductAddr"
+                    column="{productId=id}"
+                    select="com.fuhuadata.dao.supplier.ProduceFactoryProductAddrMapper.listProductAddrs"/>
+    </resultMap>
+
+    <sql id="BaseColumns">
+        pfp.id,
+        pfp.factory_id,
+        pfp.category,
+        pfp.category_id,
+        pfp.cmaterial_id,
+        pi.name cmaterial_name,
+        pw.specification specification,
+        pfp.capacity,
+        pfp.capacity_unit,
+        pfp.remark
+    </sql>
+
+    <sql id="FromTable">
+        from s_factory_product pfp
+        left join product_ware pw on pw.nc_id=pfp.cmaterial_id
+        left join product_info pi on pi.product_id=pw.product_info_id
+    </sql>
+
+    <select id="listFactoryProducts" resultMap="ProductAddrMap">
+        select
+        <include refid="BaseColumns"/>
+        <include refid="FromTable"/>
+        where pfp.factory_id=#{factoryId}
+    </select>
+
+    <select id="getById" resultMap="ProductAddrMap">
+        select
+        <include refid="BaseColumns"/>
+        <include refid="FromTable"/>
+        where pfp.id=#{productId}
+    </select>
+</mapper>

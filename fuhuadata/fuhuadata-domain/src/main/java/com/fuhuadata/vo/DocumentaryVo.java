@@ -21,7 +21,7 @@ public class DocumentaryVo implements Serializable{
     private String reportCompanyTitle;
     //是否需要保单  0：不需要 1：需要
     private Integer guaranteeSlip;
-    //coo 类型  1：商检局 2：贸促会 3：普通
+    //是否出具产地证 类型  1：商检局 2：贸促会 3：普通
     private Integer coo;
     //coo 具体选项
     private String cooContent;
@@ -33,12 +33,12 @@ public class DocumentaryVo implements Serializable{
     private Integer fumigationCertificate;
     //是否需要MSDS 0：不需要 1：需要
     private Integer msds;
-    //提单是否电放 1:直接电放 2:正本出后电放
-    private Integer telexRelease;
-    //放单目的港
-    private String releaseDestination;
-    //是否需要银行交单 0：不需要 1：需要
-    private Integer bankBill;
+    //提单签单方式 1:sea waybill 2:目的港放单 3:hbl（货代提单）4:obl（海运提单）5:直接电放6:其他
+    private Integer billOfLading;
+    //其他提单签单方式
+    private String otherBillOfLading;
+    //交单方式 0：不需要 1银行交单，2信用证交单，3直接寄单
+    private Integer documentPresentation;
     //是否需要做第三方检测，并出具检测报告 0：不需要 1：需要
     private Integer examiningReport;
     //是否需要Packing Declaration   0：不需要 1：需要
@@ -47,6 +47,10 @@ public class DocumentaryVo implements Serializable{
     private Integer importContainerWeightDeclaration;
     //是否需要Manufacturer's Certificate 0：不需要 1：需要
     private Integer manufacturerCertificate;
+    //是否需要TDS 0：不需要 1：需要
+    private Integer needTDS;
+    //是否需要Price Certificate 0：不需要 1：需要
+    private Integer needPriceCertificate;
 
     public Integer getOceanBillOfLading() {
         return oceanBillOfLading;
@@ -152,28 +156,28 @@ public class DocumentaryVo implements Serializable{
         this.msds = msds;
     }
 
-    public Integer getTelexRelease() {
-        return telexRelease;
+    public Integer getBillOfLading() {
+        return billOfLading;
     }
 
-    public void setTelexRelease(Integer telexRelease) {
-        this.telexRelease = telexRelease;
+    public void setBillOfLading(Integer billOfLading) {
+        this.billOfLading = billOfLading;
     }
 
-    public String getReleaseDestination() {
-        return releaseDestination;
+    public String getOtherBillOfLading() {
+        return otherBillOfLading;
     }
 
-    public void setReleaseDestination(String releaseDestination) {
-        this.releaseDestination = releaseDestination;
+    public void setOtherBillOfLading(String otherBillOfLading) {
+        this.otherBillOfLading = otherBillOfLading;
     }
 
-    public Integer getBankBill() {
-        return bankBill;
+    public Integer getDocumentPresentation() {
+        return documentPresentation;
     }
 
-    public void setBankBill(Integer bankBill) {
-        this.bankBill = bankBill;
+    public void setDocumentPresentation(Integer documentPresentation) {
+        this.documentPresentation = documentPresentation;
     }
 
     public Integer getExaminingReport() {
@@ -206,5 +210,21 @@ public class DocumentaryVo implements Serializable{
 
     public void setManufacturerCertificate(Integer manufacturerCertificate) {
         this.manufacturerCertificate = manufacturerCertificate;
+    }
+
+    public Integer getNeedTDS() {
+        return needTDS;
+    }
+
+    public void setNeedTDS(Integer needTDS) {
+        this.needTDS = needTDS;
+    }
+
+    public Integer getNeedPriceCertificate() {
+        return needPriceCertificate;
+    }
+
+    public void setNeedPriceCertificate(Integer needPriceCertificate) {
+        this.needPriceCertificate = needPriceCertificate;
     }
 }

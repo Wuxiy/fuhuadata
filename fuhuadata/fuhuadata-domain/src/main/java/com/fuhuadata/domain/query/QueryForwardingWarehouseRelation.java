@@ -4,7 +4,7 @@ package com.fuhuadata.domain.query;
  * @author wangbo
  * @date 2017-01-17 14:24:28
  */
-public class QueryFreightforwardingWarehouseRelation extends PageBase {
+public class QueryForwardingWarehouseRelation extends PageBase {
 
     /****/
 	private Integer id;

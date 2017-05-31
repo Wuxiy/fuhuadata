@@ -43,7 +43,7 @@
                                             <td lang="zh">打托（缠膜）</td>
                                             <td class="text-left">
                                                 <div class="col-xs-12">
-                                                    <label class="checkbox-inline"><input name="fullyClose" type="checkbox" value="1" data-control="on" disabled/>免熏蒸托盘</label>
+                                                    <label class="checkbox-inline"><input name="fullyClose" type="checkbox" value="1" data-control="on" disabled/>免熏蒸木质托盘</label>
                                                     <label class="checkbox-inline"><input name="fullyClose" type="checkbox" value="2" data-control="on" disabled/>熏蒸托盘</label>
                                                     <label class="checkbox-inline"><input name="fullyClose" type="checkbox" value="3" data-control="on" disabled/>塑料托盘</label>
                                                     <label class="checkbox-inline"><input name="fullyClose" type="checkbox" value="4" data-control="on" disabled/>订制托盘</label>
@@ -51,7 +51,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td lang="zh">帖唛</td>
+                                            <td lang="zh">贴唛</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
                                                     <label><input id="postLabel" type="checkbox" data-control="on" disabled/></label>
@@ -178,14 +178,14 @@
                                     <label class="control-label col-xs-2"><span lang="zh">免箱期</span></label>
                                     <div class="col-xs-2">
                                         <div class="input-group">
-                                            <input id="mianxiangqi" class="form-control isdisabled" type="text" value="" data-control="on" disabled/>
+                                            <input id="mianxiangqi" class="form-control isdisabled" type="number" value="" data-control="on" disabled/>
                                             <span class="input-group-addon">天</span>
                                         </div>
                                     </div>
                                     <label class="control-label col-xs-2"><span lang="zh">免堆期</span></label>
                                     <div class="col-xs-2">
                                         <div class="input-group">
-                                            <input id="miantuiqi" class="form-control isdisabled" type="text" value="" data-control="on" disabled/>
+                                            <input id="miantuiqi" class="form-control isdisabled" type="number" value="" data-control="on" disabled/>
                                             <span class="input-group-addon">天</span>
                                         </div>
                                     </div>
@@ -196,30 +196,30 @@
                                         <select class="form-control isdisabled" name="" id="cupboardType" data-control="on" disabled>
                                             <option value="0">20GP</option>
                                             <option value="1">40GP</option>
-                                            <option value="2">20HQ</option>
+                                            <option value="2">40HQ</option>
                                         </select>
                                     </div>
-                                    <label class="control-label col-xs-2"><span lang="zh">整柜数</span></label>
+                                    #*<label class="control-label col-xs-2"><span lang="zh">整柜数</span></label>
                                     <div class="col-xs-2">
                                         <input id="cupboardPerNumber" class="form-control isdisabled" type="text" value="" data-control="on" disabled/>
-                                    </div>
+                                    </div>*#
                                     <label class="control-label col-xs-2"><span lang="zh">柜数</span></label>
                                     <div class="col-xs-2">
-                                        <input id="cupboardNumber" class="form-control isdisabled" type="text" value="" data-control="on" disabled/>
+                                        <input id="cupboardNumber" class="form-control isdisabled" type="number" step="0.1" value="" data-control="on" disabled/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-xs-2"><span lang="zh">海运费单价</span></label>
                                     <div class="col-xs-2">
                                         <div class="input-group">
-                                            <input id="oceanFreight" class="form-control isdisabled" type="text" value="" data-control="on" disabled/>
+                                            <input id="oceanFreight" class="form-control isdisabled" type="number" value="" data-control="on" disabled/>
                                             <span class="input-group-addon">美元</span>
                                         </div>
                                     </div>
                                     <label class="control-label col-xs-2"><span lang="zh">港杂费单价</span></label>
                                     <div class="col-xs-2">
                                         <div class="input-group">
-                                            <input id="portSurcharge" class="form-control isdisabled" type="text" value="" data-control="on" disabled/>
+                                            <input id="portSurcharge" class="form-control isdisabled" type="number" value="" data-control="on" disabled/>
                                             <span class="input-group-addon">美元</span>
                                         </div>
                                     </div>

@@ -22,7 +22,7 @@ public class RateManagerImpl implements RateManager{
 
     @Override
     public Rate getRateById(int id) {
-        return null;
+        return rateDao.getRateById(id);
     }
 
     @Override
