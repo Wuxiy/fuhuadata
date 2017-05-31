@@ -12,11 +12,16 @@ import com.fuhuadata.domain.supplier.ProduceFactoryQuery;
 import com.fuhuadata.service.impl.mybatis.BaseServiceImpl;
 import com.fuhuadata.service.mybatis.OrganizationService;
 import com.fuhuadata.service.mybatis.common.BankAccBasService;
+import com.fuhuadata.service.util.LoginUtils;
+import com.fuhuadata.util.TimeUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,6 +64,8 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
         PageHelper.startPage(query.getIndex(), query.getPageSize());
         List<ProduceFactory> factories = getFactoryMapper().listFactories();
 
+        factories.forEach(this::fillFactory);
+
         return new PageInfo<>(factories);
     }
 
@@ -78,6 +85,14 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
     public ProduceFactory getFactory(Integer factoryId) {
 
         ProduceFactory factory = get(factoryId);
+        fillFactory(factory);
+
+        return factory;
+    }
+
+    private void fillFactory(ProduceFactory factory) {
+
+        // 设置组织名称
         Optional.ofNullable(factory).ifPresent(factoryConsumer -> {
             String orgName = Optional.ofNullable(organizationService.getByNcId(factoryConsumer.getPkOrg()))
                     .map(Organization::getName)
@@ -85,7 +100,15 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
             factoryConsumer.setOrgName(orgName);
         });
 
-        return factory;
+        // 设置合作时间（月份）
+        Date cooperateTime = factory.getCooperateTime();
+        Optional.ofNullable(cooperateTime).ifPresent(date -> {
+            LocalDate localDate = TimeUtils.dateToLocalDate(date);
+            LocalDate now = LocalDate.now();
+
+            long between = ChronoUnit.MONTHS.between(localDate, now);
+            factory.setCoopMonths((int) between);
+        });
     }
 
     @Override
@@ -95,6 +118,9 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
         }
 
         ProduceFactory factory = factoryInfo.getFactory();
+        factory.setCreateAccount(LoginUtils.getLoginAccount());
+        factory.setCreateName(LoginUtils.getLoginName());
+        fillLoginInfo(factory);
         save(factory);
 
         Integer factoryId = factory.getId();
@@ -105,6 +131,11 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
         return factory;
     }
 
+    private void fillLoginInfo(ProduceFactory factory) {
+        factory.setModifyAccount(LoginUtils.getLoginAccount());
+        factory.setModifyName(LoginUtils.getLoginName());
+    }
+
     @Override
     public ProduceFactory updateFactory(ProduceFactoryInfo factoryInfo) {
 
@@ -113,6 +144,7 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
         }
 
         ProduceFactory factory = factoryInfo.getFactory();
+        fillLoginInfo(factory);
         updateSelective(factory);
 
         Integer factoryId = factory.getId();
