@@ -1,10 +1,8 @@
 package com.fuhuadata.domain.mybatis.supplier;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fuhuadata.domain.mybatis.BaseEntity;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import javax.persistence.*;
 
 /**
@@ -13,112 +11,209 @@ import javax.persistence.*;
 @Table(name = "s_warehouse_info")
 public class WarehouseInfo extends BaseEntity<Integer>{
     /**
-     * 仓库id
+     * crm主键
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     /**
-     * nc仓库编码
+     * 仓库主键
      */
+    @Column(name = "PK_STORDOC")
+    private String pkStordoc;
+
+    /**
+     * 仓库编码
+     */
+    @Column(name = "CODE")
     private String code;
+
+    /**
+     * 创建时间
+     */
+    @Column(name = "CREATIONTIME")
+    private String creationtime;
+
+    /**
+     * 创建人
+     */
+    @Column(name = "CREATOR")
+    private String creator;
+
+    /**
+     * 货位管理
+     */
+    @Column(name = "CSFLAG")
+    private String csflag;
+
+    /**
+     * 分布式
+     */
+    @Column(name = "DATAORIGINFLAG")
+    private Double dataoriginflag;
+
+    /**
+     * 福华仓库类型(自定义档案)
+     */
+    @Column(name = "DEF1")
+    private String def1;
+
+    /**
+     * 仓库管理类型(自定义档案)
+     */
+    @Column(name = "DEF2")
+    private String def2;
+
+    /**
+     * 启用状态
+     */
+    @Column(name = "ENABLESTATE")
+    private Double enablestate;
+
+    /**
+     * 废品库
+     */
+    @Column(name = "GUBFLAG")
+    private String gubflag;
+
+    /**
+     * 代储仓
+     */
+    @Column(name = "ISAGENTSTORE")
+    private String isagentstore;
+
+    /**
+     * 影响可用量
+     */
+    @Column(name = "ISATPAFFECTED")
+    private String isatpaffected;
+
+    /**
+     * 进行存货成本计算
+     */
+    @Column(name = "ISCALCULATEDINVCOST")
+    private String iscalculatedinvcost;
+
+    /**
+     * 委外仓
+     */
+    @Column(name = "ISCOMMISSIONOUT")
+    private String iscommissionout;
+
+    /**
+     * 直运仓
+     */
+    @Column(name = "ISDIRECTSTORE")
+    private String isdirectstore;
+
+    /**
+     * 可预留
+     */
+    @Column(name = "ISOBLIGATE")
+    private String isobligate;
+
+    /**
+     * 适用零售
+     */
+    @Column(name = "ISRETAIL")
+    private String isretail;
+
+    /**
+     * 门店仓库
+     */
+    @Column(name = "ISSHOPSTORE")
+    private String isshopstore;
+
+    /**
+     * 在途仓
+     */
+    @Column(name = "ISSTOREONTHEWAY")
+    private String isstoreontheway;
+
+    /**
+     * 备注
+     */
+    @Column(name = "MEMO")
+    private String memo;
+
+    /**
+     * 最后修改时间
+     */
+    @Column(name = "MODIFIEDTIME")
+    private String modifiedtime;
+
+    /**
+     * 最后修改人
+     */
+    @Column(name = "MODIFIER")
+    private String modifier;
+
+    /**
+     * 计划可用
+     */
+    @Column(name = "MRPFLAG")
+    private String mrpflag;
+
+    /**
+     * 加工商
+     */
+    @Column(name = "OPERATESUPPLIER")
+    private String operatesupplier;
+
+    /**
+     * 电话号码
+     */
+    @Column(name = "PHONE")
+    private String phone;
+
+    /**
+     * 所属地点
+     */
+    @Column(name = "PK_ADDRESS")
+    private String pkAddress;
 
     /**
      * 所属组织
      */
-    @Column(name = "pk_org")
+    @Column(name = "PK_GROUP")
+    private String pkGroup;
+
+    /**
+     * 所属库存组织
+     */
+    @Column(name = "PK_ORG")
     private String pkOrg;
 
     /**
-     * 企业全称
+     * 负责人
      */
-    private String name;
+    @Column(name = "PRINCIPALCODE")
+    private String principalcode;
 
     /**
-     * 企业简称
+     * 生产仓库
      */
-    @Column(name = "short_name")
-    private String shortName;
-
-    /**
-     * 类型，0常规，1非常规，2自定
-     */
-    private Integer type;
-
-    /**
-     * 社会信用代码
-     */
-    @Column(name = "credit_code")
-    private String creditCode;
-
-    /**
-     * 注册资金
-     */
-    @Column(name = "register_fund")
-    private BigDecimal registerFund;
-
-    /**
-     * 办公地址
-     */
-    @Column(name = "office_address")
-    private String officeAddress;
-
-    /**
-     * 企业联系电话
-     */
-    private String phone;
-
-    /**
-     * 联系人
-     */
-    @Column(name = "link_man")
-    private String linkMan;
-
-    /**
-     * 联系电话
-     */
-    @Column(name = "link_phone")
-    private String linkPhone;
-
-    /**
-     * 注册地址
-     */
-    @Column(name = "register_addr")
-    private String registerAddr;
-
-    /**
-     * 邮箱
-     */
-    private String email;
-
-    /**
-     * 仓库面积
-     */
-    @Column(name = "warehouse_area")
-    private String warehouseArea;
-
-    /**
-     * 是否危险，0否，1是
-     */
-    @Column(name = "is_dangers")
-    private Integer isDangers;
-
-    /**
-     * 是否内装进港，0否，1是
-     */
-    @Column(name = "is_Inside_entrance")
-    private Integer isInsideEntrance;
+    @Column(name = "PROFLAG")
+    private String proflag;
 
     /**
      * 仓库地址
      */
+    @Column(name = "STORADDR")
     private String storaddr;
 
     /**
-     * 仓库备注
+     * 保税仓
      */
-    private String memo;
+    @Column(name = "ISKPTAXSTORE")
+    private String iskptaxstore;
+
+    /**
+     * 仓库名称
+     */
+    @Column(name = "NAME")
+    private String name;
 
     /**
      * 综合评分
@@ -127,353 +222,591 @@ public class WarehouseInfo extends BaseEntity<Integer>{
     private BigDecimal combinedScoring;
 
     /**
-     * 创建者id
+     * 是否危险品仓库 是否危险，0否，1是
      */
-    @Column(name = "create_user_id")
-    private Integer createUserId;
+    @Column(name = "is_dangers")
+    private Integer isDangers;
 
     /**
-     * 创建者姓名
+     * 是否内装进港，0否，1是
      */
-    @Column(name = "create_user_name")
-    private String createUserName;
+    @Column(name = "is_inside_entrance")
+    private Integer isInsideEntrance;
 
     /**
-     * 上一次修改者id
+     * 启用状态 0：否  1：是
      */
-    @Column(name = "lastmodify_user_id")
-    private Integer lastmodifyUserId;
+    @Column(name = "enabled_state")
+    private Integer enabledState;
 
     /**
-     * 上一次修改者姓名
+     * 社会信用代码
      */
-    @Column(name = "lastmodify_user_name")
-    private String lastmodifyUserName;
+    @Column(name = "credit_code")
+    private String creditCode;
 
     /**
-     * 创建时间
-     */
-    @Column(name = "create_time")
-    @JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss")
-    private Date createTime;
-
-    /**
-     * 修改时间
-     */
-    @Column(name = "modify_time")
-    @JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss")
-    private Date modifyTime;
-
-    /**
-     * 获取仓库id
+     * 获取crm主键
      *
-     * @return id - 仓库id
+     * @return id - crm主键
      */
     public Integer getId() {
         return id;
     }
 
     /**
-     * 设置仓库id
+     * 设置crm主键
      *
-     * @param id 仓库id
+     * @param id crm主键
      */
     public void setId(Integer id) {
         this.id = id;
     }
 
     /**
-     * 获取nc仓库编码
+     * 获取仓库主键
      *
-     * @return code - nc仓库编码
+     * @return PK_STORDOC - 仓库主键
+     */
+    public String getPkStordoc() {
+        return pkStordoc;
+    }
+
+    /**
+     * 设置仓库主键
+     *
+     * @param pkStordoc 仓库主键
+     */
+    public void setPkStordoc(String pkStordoc) {
+        this.pkStordoc = pkStordoc == null ? null : pkStordoc.trim();
+    }
+
+    /**
+     * 获取仓库编码
+     *
+     * @return CODE - 仓库编码
      */
     public String getCode() {
         return code;
     }
 
     /**
-     * 设置nc仓库编码
+     * 设置仓库编码
      *
-     * @param code nc仓库编码
+     * @param code 仓库编码
      */
     public void setCode(String code) {
         this.code = code == null ? null : code.trim();
     }
 
     /**
-     * 获取所属组织
+     * 获取创建时间
      *
-     * @return pk_org - 所属组织
+     * @return CREATIONTIME - 创建时间
      */
-    public String getPkOrg() {
-        return pkOrg;
+    public String getCreationtime() {
+        return creationtime;
     }
 
     /**
-     * 设置所属组织
+     * 设置创建时间
      *
-     * @param pkOrg 所属组织
+     * @param creationtime 创建时间
      */
-    public void setPkOrg(String pkOrg) {
-        this.pkOrg = pkOrg == null ? null : pkOrg.trim();
+    public void setCreationtime(String creationtime) {
+        this.creationtime = creationtime == null ? null : creationtime.trim();
     }
 
     /**
-     * 获取企业全称
+     * 获取创建人
      *
-     * @return name - 企业全称
+     * @return CREATOR - 创建人
      */
-    public String getName() {
-        return name;
+    public String getCreator() {
+        return creator;
     }
 
     /**
-     * 设置企业全称
+     * 设置创建人
      *
-     * @param name 企业全称
+     * @param creator 创建人
      */
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setCreator(String creator) {
+        this.creator = creator == null ? null : creator.trim();
     }
 
     /**
-     * 获取企业简称
+     * 获取货位管理
      *
-     * @return short_name - 企业简称
+     * @return CSFLAG - 货位管理
      */
-    public String getShortName() {
-        return shortName;
+    public String getCsflag() {
+        return csflag;
     }
 
     /**
-     * 设置企业简称
+     * 设置货位管理
      *
-     * @param shortName 企业简称
+     * @param csflag 货位管理
      */
-    public void setShortName(String shortName) {
-        this.shortName = shortName == null ? null : shortName.trim();
+    public void setCsflag(String csflag) {
+        this.csflag = csflag == null ? null : csflag.trim();
     }
 
     /**
-     * 获取类型，0常规，1非常规，2自定
+     * 获取分布式
      *
-     * @return type - 类型，0常规，1非常规，2自定
+     * @return DATAORIGINFLAG - 分布式
      */
-    public Integer getType() {
-        return type;
+    public Double getDataoriginflag() {
+        return dataoriginflag;
     }
 
     /**
-     * 设置类型，0常规，1非常规，2自定
+     * 设置分布式
      *
-     * @param type 类型，0常规，1非常规，2自定
+     * @param dataoriginflag 分布式
      */
-    public void setType(Integer type) {
-        this.type = type;
+    public void setDataoriginflag(Double dataoriginflag) {
+        this.dataoriginflag = dataoriginflag;
     }
 
     /**
-     * 获取社会信用代码
+     * 获取福华仓库类型(自定义档案)
      *
-     * @return credit_code - 社会信用代码
+     * @return DEF1 - 福华仓库类型(自定义档案)
      */
-    public String getCreditCode() {
-        return creditCode;
+    public String getDef1() {
+        return def1;
     }
 
     /**
-     * 设置社会信用代码
+     * 设置福华仓库类型(自定义档案)
      *
-     * @param creditCode 社会信用代码
+     * @param def1 福华仓库类型(自定义档案)
      */
-    public void setCreditCode(String creditCode) {
-        this.creditCode = creditCode == null ? null : creditCode.trim();
+    public void setDef1(String def1) {
+        this.def1 = def1 == null ? null : def1.trim();
     }
 
     /**
-     * 获取注册资金
+     * 获取仓库管理类型(自定义档案)
      *
-     * @return register_fund - 注册资金
+     * @return DEF2 - 仓库管理类型(自定义档案)
      */
-    public BigDecimal getRegisterFund() {
-        return registerFund;
+    public String getDef2() {
+        return def2;
     }
 
     /**
-     * 设置注册资金
+     * 设置仓库管理类型(自定义档案)
      *
-     * @param registerFund 注册资金
+     * @param def2 仓库管理类型(自定义档案)
      */
-    public void setRegisterFund(BigDecimal registerFund) {
-        this.registerFund = registerFund;
+    public void setDef2(String def2) {
+        this.def2 = def2 == null ? null : def2.trim();
     }
 
     /**
-     * 获取办公地址
+     * 获取启用状态
      *
-     * @return office_address - 办公地址
+     * @return ENABLESTATE - 启用状态
      */
-    public String getOfficeAddress() {
-        return officeAddress;
+    public Double getEnablestate() {
+        return enablestate;
     }
 
     /**
-     * 设置办公地址
+     * 设置启用状态
      *
-     * @param officeAddress 办公地址
+     * @param enablestate 启用状态
      */
-    public void setOfficeAddress(String officeAddress) {
-        this.officeAddress = officeAddress == null ? null : officeAddress.trim();
+    public void setEnablestate(Double enablestate) {
+        this.enablestate = enablestate;
     }
 
     /**
-     * 获取企业联系电话
+     * 获取废品库
      *
-     * @return phone - 企业联系电话
+     * @return GUBFLAG - 废品库
+     */
+    public String getGubflag() {
+        return gubflag;
+    }
+
+    /**
+     * 设置废品库
+     *
+     * @param gubflag 废品库
+     */
+    public void setGubflag(String gubflag) {
+        this.gubflag = gubflag == null ? null : gubflag.trim();
+    }
+
+    /**
+     * 获取代储仓
+     *
+     * @return ISAGENTSTORE - 代储仓
+     */
+    public String getIsagentstore() {
+        return isagentstore;
+    }
+
+    /**
+     * 设置代储仓
+     *
+     * @param isagentstore 代储仓
+     */
+    public void setIsagentstore(String isagentstore) {
+        this.isagentstore = isagentstore == null ? null : isagentstore.trim();
+    }
+
+    /**
+     * 获取影响可用量
+     *
+     * @return ISATPAFFECTED - 影响可用量
+     */
+    public String getIsatpaffected() {
+        return isatpaffected;
+    }
+
+    /**
+     * 设置影响可用量
+     *
+     * @param isatpaffected 影响可用量
+     */
+    public void setIsatpaffected(String isatpaffected) {
+        this.isatpaffected = isatpaffected == null ? null : isatpaffected.trim();
+    }
+
+    /**
+     * 获取进行存货成本计算
+     *
+     * @return ISCALCULATEDINVCOST - 进行存货成本计算
+     */
+    public String getIscalculatedinvcost() {
+        return iscalculatedinvcost;
+    }
+
+    /**
+     * 设置进行存货成本计算
+     *
+     * @param iscalculatedinvcost 进行存货成本计算
+     */
+    public void setIscalculatedinvcost(String iscalculatedinvcost) {
+        this.iscalculatedinvcost = iscalculatedinvcost == null ? null : iscalculatedinvcost.trim();
+    }
+
+    /**
+     * 获取委外仓
+     *
+     * @return ISCOMMISSIONOUT - 委外仓
+     */
+    public String getIscommissionout() {
+        return iscommissionout;
+    }
+
+    /**
+     * 设置委外仓
+     *
+     * @param iscommissionout 委外仓
+     */
+    public void setIscommissionout(String iscommissionout) {
+        this.iscommissionout = iscommissionout == null ? null : iscommissionout.trim();
+    }
+
+    /**
+     * 获取直运仓
+     *
+     * @return ISDIRECTSTORE - 直运仓
+     */
+    public String getIsdirectstore() {
+        return isdirectstore;
+    }
+
+    /**
+     * 设置直运仓
+     *
+     * @param isdirectstore 直运仓
+     */
+    public void setIsdirectstore(String isdirectstore) {
+        this.isdirectstore = isdirectstore == null ? null : isdirectstore.trim();
+    }
+
+    /**
+     * 获取可预留
+     *
+     * @return ISOBLIGATE - 可预留
+     */
+    public String getIsobligate() {
+        return isobligate;
+    }
+
+    /**
+     * 设置可预留
+     *
+     * @param isobligate 可预留
+     */
+    public void setIsobligate(String isobligate) {
+        this.isobligate = isobligate == null ? null : isobligate.trim();
+    }
+
+    /**
+     * 获取适用零售
+     *
+     * @return ISRETAIL - 适用零售
+     */
+    public String getIsretail() {
+        return isretail;
+    }
+
+    /**
+     * 设置适用零售
+     *
+     * @param isretail 适用零售
+     */
+    public void setIsretail(String isretail) {
+        this.isretail = isretail == null ? null : isretail.trim();
+    }
+
+    /**
+     * 获取门店仓库
+     *
+     * @return ISSHOPSTORE - 门店仓库
+     */
+    public String getIsshopstore() {
+        return isshopstore;
+    }
+
+    /**
+     * 设置门店仓库
+     *
+     * @param isshopstore 门店仓库
+     */
+    public void setIsshopstore(String isshopstore) {
+        this.isshopstore = isshopstore == null ? null : isshopstore.trim();
+    }
+
+    /**
+     * 获取在途仓
+     *
+     * @return ISSTOREONTHEWAY - 在途仓
+     */
+    public String getIsstoreontheway() {
+        return isstoreontheway;
+    }
+
+    /**
+     * 设置在途仓
+     *
+     * @param isstoreontheway 在途仓
+     */
+    public void setIsstoreontheway(String isstoreontheway) {
+        this.isstoreontheway = isstoreontheway == null ? null : isstoreontheway.trim();
+    }
+
+    /**
+     * 获取备注
+     *
+     * @return MEMO - 备注
+     */
+    public String getMemo() {
+        return memo;
+    }
+
+    /**
+     * 设置备注
+     *
+     * @param memo 备注
+     */
+    public void setMemo(String memo) {
+        this.memo = memo == null ? null : memo.trim();
+    }
+
+    /**
+     * 获取最后修改时间
+     *
+     * @return MODIFIEDTIME - 最后修改时间
+     */
+    public String getModifiedtime() {
+        return modifiedtime;
+    }
+
+    /**
+     * 设置最后修改时间
+     *
+     * @param modifiedtime 最后修改时间
+     */
+    public void setModifiedtime(String modifiedtime) {
+        this.modifiedtime = modifiedtime == null ? null : modifiedtime.trim();
+    }
+
+    /**
+     * 获取最后修改人
+     *
+     * @return MODIFIER - 最后修改人
+     */
+    public String getModifier() {
+        return modifier;
+    }
+
+    /**
+     * 设置最后修改人
+     *
+     * @param modifier 最后修改人
+     */
+    public void setModifier(String modifier) {
+        this.modifier = modifier == null ? null : modifier.trim();
+    }
+
+    /**
+     * 获取计划可用
+     *
+     * @return MRPFLAG - 计划可用
+     */
+    public String getMrpflag() {
+        return mrpflag;
+    }
+
+    /**
+     * 设置计划可用
+     *
+     * @param mrpflag 计划可用
+     */
+    public void setMrpflag(String mrpflag) {
+        this.mrpflag = mrpflag == null ? null : mrpflag.trim();
+    }
+
+    /**
+     * 获取加工商
+     *
+     * @return OPERATESUPPLIER - 加工商
+     */
+    public String getOperatesupplier() {
+        return operatesupplier;
+    }
+
+    /**
+     * 设置加工商
+     *
+     * @param operatesupplier 加工商
+     */
+    public void setOperatesupplier(String operatesupplier) {
+        this.operatesupplier = operatesupplier == null ? null : operatesupplier.trim();
+    }
+
+    /**
+     * 获取电话号码
+     *
+     * @return PHONE - 电话号码
      */
     public String getPhone() {
         return phone;
     }
 
     /**
-     * 设置企业联系电话
+     * 设置电话号码
      *
-     * @param phone 企业联系电话
+     * @param phone 电话号码
      */
     public void setPhone(String phone) {
         this.phone = phone == null ? null : phone.trim();
     }
 
     /**
-     * 获取联系人
+     * 获取所属地点
      *
-     * @return link_man - 联系人
+     * @return PK_ADDRESS - 所属地点
      */
-    public String getLinkMan() {
-        return linkMan;
+    public String getPkAddress() {
+        return pkAddress;
     }
 
     /**
-     * 设置联系人
+     * 设置所属地点
      *
-     * @param linkMan 联系人
+     * @param pkAddress 所属地点
      */
-    public void setLinkMan(String linkMan) {
-        this.linkMan = linkMan == null ? null : linkMan.trim();
+    public void setPkAddress(String pkAddress) {
+        this.pkAddress = pkAddress == null ? null : pkAddress.trim();
     }
 
     /**
-     * 获取联系电话
+     * 获取所属组织
      *
-     * @return link_phone - 联系电话
+     * @return PK_GROUP - 所属组织
      */
-    public String getLinkPhone() {
-        return linkPhone;
+    public String getPkGroup() {
+        return pkGroup;
     }
 
     /**
-     * 设置联系电话
+     * 设置所属组织
      *
-     * @param linkPhone 联系电话
+     * @param pkGroup 所属组织
      */
-    public void setLinkPhone(String linkPhone) {
-        this.linkPhone = linkPhone == null ? null : linkPhone.trim();
+    public void setPkGroup(String pkGroup) {
+        this.pkGroup = pkGroup == null ? null : pkGroup.trim();
     }
 
     /**
-     * 获取注册地址
+     * 获取所属库存组织
      *
-     * @return register_addr - 注册地址
+     * @return PK_ORG - 所属库存组织
      */
-    public String getRegisterAddr() {
-        return registerAddr;
+    public String getPkOrg() {
+        return pkOrg;
     }
 
     /**
-     * 设置注册地址
+     * 设置所属库存组织
      *
-     * @param registerAddr 注册地址
+     * @param pkOrg 所属库存组织
      */
-    public void setRegisterAddr(String registerAddr) {
-        this.registerAddr = registerAddr == null ? null : registerAddr.trim();
+    public void setPkOrg(String pkOrg) {
+        this.pkOrg = pkOrg == null ? null : pkOrg.trim();
     }
 
     /**
-     * 获取邮箱
+     * 获取负责人
      *
-     * @return email - 邮箱
+     * @return PRINCIPALCODE - 负责人
      */
-    public String getEmail() {
-        return email;
+    public String getPrincipalcode() {
+        return principalcode;
     }
 
     /**
-     * 设置邮箱
+     * 设置负责人
      *
-     * @param email 邮箱
+     * @param principalcode 负责人
      */
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
+    public void setPrincipalcode(String principalcode) {
+        this.principalcode = principalcode == null ? null : principalcode.trim();
     }
 
     /**
-     * 获取仓库面积
+     * 获取生产仓库
      *
-     * @return warehouse_area - 仓库面积
+     * @return PROFLAG - 生产仓库
      */
-    public String getWarehouseArea() {
-        return warehouseArea;
+    public String getProflag() {
+        return proflag;
     }
 
     /**
-     * 设置仓库面积
+     * 设置生产仓库
      *
-     * @param warehouseArea 仓库面积
+     * @param proflag 生产仓库
      */
-    public void setWarehouseArea(String warehouseArea) {
-        this.warehouseArea = warehouseArea == null ? null : warehouseArea.trim();
-    }
-
-    /**
-     * 获取是否危险，0否，1是
-     *
-     * @return is_dangers - 是否危险，0否，1是
-     */
-    public Integer getIsDangers() {
-        return isDangers;
-    }
-
-    /**
-     * 设置是否危险，0否，1是
-     *
-     * @param isDangers 是否危险，0否，1是
-     */
-    public void setIsDangers(Integer isDangers) {
-        this.isDangers = isDangers;
-    }
-
-    /**
-     * 获取是否内装进港，0否，1是
-     *
-     * @return is_Inside_entrance - 是否内装进港，0否，1是
-     */
-    public Integer getIsInsideEntrance() {
-        return isInsideEntrance;
-    }
-
-    /**
-     * 设置是否内装进港，0否，1是
-     *
-     * @param isInsideEntrance 是否内装进港，0否，1是
-     */
-    public void setIsInsideEntrance(Integer isInsideEntrance) {
-        this.isInsideEntrance = isInsideEntrance;
+    public void setProflag(String proflag) {
+        this.proflag = proflag == null ? null : proflag.trim();
     }
 
     /**
      * 获取仓库地址
      *
-     * @return storaddr - 仓库地址
+     * @return STORADDR - 仓库地址
      */
     public String getStoraddr() {
         return storaddr;
@@ -489,21 +822,39 @@ public class WarehouseInfo extends BaseEntity<Integer>{
     }
 
     /**
-     * 获取仓库备注
+     * 获取保税仓
      *
-     * @return memo - 仓库备注
+     * @return ISKPTAXSTORE - 保税仓
      */
-    public String getMemo() {
-        return memo;
+    public String getIskptaxstore() {
+        return iskptaxstore;
     }
 
     /**
-     * 设置仓库备注
+     * 设置保税仓
      *
-     * @param memo 仓库备注
+     * @param iskptaxstore 保税仓
      */
-    public void setMemo(String memo) {
-        this.memo = memo == null ? null : memo.trim();
+    public void setIskptaxstore(String iskptaxstore) {
+        this.iskptaxstore = iskptaxstore == null ? null : iskptaxstore.trim();
+    }
+
+    /**
+     * 获取仓库名称
+     *
+     * @return NAME - 仓库名称
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * 设置仓库名称
+     *
+     * @param name 仓库名称
+     */
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
     /**
@@ -525,110 +876,74 @@ public class WarehouseInfo extends BaseEntity<Integer>{
     }
 
     /**
-     * 获取创建者id
+     * 获取是否危险品仓库 是否危险，0否，1是
      *
-     * @return create_user_id - 创建者id
+     * @return is_dangers - 是否危险品仓库 是否危险，0否，1是
      */
-    public Integer getCreateUserId() {
-        return createUserId;
+    public Integer getIsDangers() {
+        return isDangers;
     }
 
     /**
-     * 设置创建者id
+     * 设置是否危险品仓库 是否危险，0否，1是
      *
-     * @param createUserId 创建者id
+     * @param isDangers 是否危险品仓库 是否危险，0否，1是
      */
-    public void setCreateUserId(Integer createUserId) {
-        this.createUserId = createUserId;
+    public void setIsDangers(Integer isDangers) {
+        this.isDangers = isDangers;
     }
 
     /**
-     * 获取创建者姓名
+     * 获取是否内装进港，0否，1是
      *
-     * @return create_user_name - 创建者姓名
+     * @return is_inside_entrance - 是否内装进港，0否，1是
      */
-    public String getCreateUserName() {
-        return createUserName;
+    public Integer getIsInsideEntrance() {
+        return isInsideEntrance;
     }
 
     /**
-     * 设置创建者姓名
+     * 设置是否内装进港，0否，1是
      *
-     * @param createUserName 创建者姓名
+     * @param isInsideEntrance 是否内装进港，0否，1是
      */
-    public void setCreateUserName(String createUserName) {
-        this.createUserName = createUserName == null ? null : createUserName.trim();
+    public void setIsInsideEntrance(Integer isInsideEntrance) {
+        this.isInsideEntrance = isInsideEntrance;
     }
 
     /**
-     * 获取上一次修改者id
+     * 获取启用状态 0：否  1：是
      *
-     * @return lastmodify_user_id - 上一次修改者id
+     * @return enabled_state - 启用状态 0：否  1：是
      */
-    public Integer getLastmodifyUserId() {
-        return lastmodifyUserId;
+    public Integer getEnabledState() {
+        return enabledState;
     }
 
     /**
-     * 设置上一次修改者id
+     * 设置启用状态 0：否  1：是
      *
-     * @param lastmodifyUserId 上一次修改者id
+     * @param enabledState 启用状态 0：否  1：是
      */
-    public void setLastmodifyUserId(Integer lastmodifyUserId) {
-        this.lastmodifyUserId = lastmodifyUserId;
+    public void setEnabledState(Integer enabledState) {
+        this.enabledState = enabledState;
     }
 
     /**
-     * 获取上一次修改者姓名
+     * 获取社会信用代码
      *
-     * @return lastmodify_user_name - 上一次修改者姓名
+     * @return credit_code - 社会信用代码
      */
-    public String getLastmodifyUserName() {
-        return lastmodifyUserName;
+    public String getCreditCode() {
+        return creditCode;
     }
 
     /**
-     * 设置上一次修改者姓名
+     * 设置社会信用代码
      *
-     * @param lastmodifyUserName 上一次修改者姓名
+     * @param creditCode 社会信用代码
      */
-    public void setLastmodifyUserName(String lastmodifyUserName) {
-        this.lastmodifyUserName = lastmodifyUserName == null ? null : lastmodifyUserName.trim();
-    }
-
-    /**
-     * 获取创建时间
-     *
-     * @return create_time - 创建时间
-     */
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    /**
-     * 设置创建时间
-     *
-     * @param createTime 创建时间
-     */
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    /**
-     * 获取修改时间
-     *
-     * @return modify_time - 修改时间
-     */
-    public Date getModifyTime() {
-        return modifyTime;
-    }
-
-    /**
-     * 设置修改时间
-     *
-     * @param modifyTime 修改时间
-     */
-    public void setModifyTime(Date modifyTime) {
-        this.modifyTime = modifyTime;
+    public void setCreditCode(String creditCode) {
+        this.creditCode = creditCode == null ? null : creditCode.trim();
     }
 }
