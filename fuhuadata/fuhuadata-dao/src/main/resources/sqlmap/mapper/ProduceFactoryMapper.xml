@@ -32,6 +32,7 @@
         <result column="modify_name" jdbcType="VARCHAR" property="modifyName"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+        <result column="product_names" jdbcType="VARCHAR" property="productNames"/>
     </resultMap>
 
     <sql id="BaseColumns">
@@ -73,7 +74,10 @@
 
     <select id="listFactories" resultMap="BaseResultMap">
         select
-        <include refid="BaseColumns"/>
+        <include refid="BaseColumns"/>,
+        (SELECT GROUP_CONCAT(pi.`name` SEPARATOR '、')
+        <include refid="com.fuhuadata.dao.supplier.ProduceFactoryProductMapper.FromTable"/>
+        GROUP BY pfp.factory_id) product_names
         <include refid="FromTable"/>
     </select>
 </mapper>

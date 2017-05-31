@@ -39,7 +39,7 @@
 
     <sql id="FromTable">
         from s_factory_product pfp
-        left join product_ware pw on pw.nc_id=pfp.cmaterial_id
+        left join product_ware pw on pw.ware_id=pfp.cmaterial_id
         left join product_info pi on pi.product_id=pw.product_info_id
     </sql>
 
