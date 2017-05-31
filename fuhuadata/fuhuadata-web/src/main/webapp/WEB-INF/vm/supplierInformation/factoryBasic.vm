@@ -542,6 +542,15 @@
                 url:basePath+'/bank/type',
                 type:'GET'
             },
+            init:function () {
+              $.ajax(bankLinkage.firstParam).done(function (res) {
+
+                  if (res.code === 1) {
+
+                      bankLinkage.firstSelect.html(bankLinkage.renderFirst(res.data));
+                  }
+              })
+            },
             renderFirst:function (list) {
                 var tpl = '';
                 $.each(list, function (i, item) {
