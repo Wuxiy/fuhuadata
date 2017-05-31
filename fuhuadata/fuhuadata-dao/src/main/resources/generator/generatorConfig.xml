@@ -49,7 +49,7 @@
         </javaClientGenerator>
 
         <!-- 需要生成实体 Bean 的数据库表 -->
-        <table tableName="s_supplier_linkman" domainObjectName="SupplierLinkman">
+        <table tableName="s_warehouse_info" domainObjectName="WarehouseInfo">
             <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
         </table>
         <table tableName="t_bankdoc" domainObjectName="BankDoc">
