@@ -78,6 +78,12 @@ public class ProduceFactory extends BaseEntity<Integer> {
     private Date cooperateTime;
 
     /**
+     * 合作时间（月份）
+     */
+    @Transient
+    private Integer coopMonths;
+
+    /**
      * 生产许可证
      */
     @Column(name = "production_licenses")
@@ -181,6 +187,12 @@ public class ProduceFactory extends BaseEntity<Integer> {
      */
     @Transient
     private List<ProduceFactoryProduct> products;
+
+    /**
+     * 加工厂产品名称
+     */
+    @Transient
+    private String productNames;
 
     /**
      * 加工厂关联银行账号
@@ -717,5 +729,21 @@ public class ProduceFactory extends BaseEntity<Integer> {
 
     public void setOrgName(String orgName) {
         this.orgName = orgName;
+    }
+
+    public String getProductNames() {
+        return productNames;
+    }
+
+    public void setProductNames(String productNames) {
+        this.productNames = productNames;
+    }
+
+    public Integer getCoopMonths() {
+        return coopMonths;
+    }
+
+    public void setCoopMonths(Integer coopMonths) {
+        this.coopMonths = coopMonths;
     }
 }

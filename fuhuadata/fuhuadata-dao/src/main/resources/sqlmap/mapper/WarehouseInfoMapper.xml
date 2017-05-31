@@ -10,34 +10,16 @@
     <result column="CODE" jdbcType="VARCHAR" property="code" />
     <result column="CREATIONTIME" jdbcType="VARCHAR" property="creationtime" />
     <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
-    <result column="CSFLAG" jdbcType="VARCHAR" property="csflag" />
     <result column="DATAORIGINFLAG" jdbcType="DOUBLE" property="dataoriginflag" />
-    <result column="DEF1" jdbcType="VARCHAR" property="def1" />
-    <result column="DEF2" jdbcType="VARCHAR" property="def2" />
-    <result column="ENABLESTATE" jdbcType="DOUBLE" property="enablestate" />
-    <result column="GUBFLAG" jdbcType="VARCHAR" property="gubflag" />
-    <result column="ISAGENTSTORE" jdbcType="VARCHAR" property="isagentstore" />
-    <result column="ISATPAFFECTED" jdbcType="VARCHAR" property="isatpaffected" />
-    <result column="ISCALCULATEDINVCOST" jdbcType="VARCHAR" property="iscalculatedinvcost" />
-    <result column="ISCOMMISSIONOUT" jdbcType="VARCHAR" property="iscommissionout" />
-    <result column="ISDIRECTSTORE" jdbcType="VARCHAR" property="isdirectstore" />
-    <result column="ISOBLIGATE" jdbcType="VARCHAR" property="isobligate" />
-    <result column="ISRETAIL" jdbcType="VARCHAR" property="isretail" />
-    <result column="ISSHOPSTORE" jdbcType="VARCHAR" property="isshopstore" />
-    <result column="ISSTOREONTHEWAY" jdbcType="VARCHAR" property="isstoreontheway" />
     <result column="MEMO" jdbcType="VARCHAR" property="memo" />
     <result column="MODIFIEDTIME" jdbcType="VARCHAR" property="modifiedtime" />
     <result column="MODIFIER" jdbcType="VARCHAR" property="modifier" />
-    <result column="MRPFLAG" jdbcType="VARCHAR" property="mrpflag" />
-    <result column="OPERATESUPPLIER" jdbcType="VARCHAR" property="operatesupplier" />
     <result column="PHONE" jdbcType="VARCHAR" property="phone" />
     <result column="PK_ADDRESS" jdbcType="VARCHAR" property="pkAddress" />
     <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
     <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
     <result column="PRINCIPALCODE" jdbcType="VARCHAR" property="principalcode" />
-    <result column="PROFLAG" jdbcType="VARCHAR" property="proflag" />
     <result column="STORADDR" jdbcType="VARCHAR" property="storaddr" />
-    <result column="ISKPTAXSTORE" jdbcType="VARCHAR" property="iskptaxstore" />
     <result column="NAME" jdbcType="VARCHAR" property="name" />
     <result column="combined_scoring" jdbcType="DECIMAL" property="combinedScoring" />
     <result column="is_dangers" jdbcType="INTEGER" property="isDangers" />
@@ -52,7 +34,6 @@
             SELECT
         swi.`CODE`,
         swi.`NAME`,
-        swi.`DEF1`,
         swi.`STORADDR`,
         swi.`is_dangers`,
         swi.`is_inside_entrance`,

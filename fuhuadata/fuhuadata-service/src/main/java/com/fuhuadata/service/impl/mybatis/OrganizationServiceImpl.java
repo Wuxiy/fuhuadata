@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * <p>User: wangjie
@@ -63,6 +64,12 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization, Integ
     }
 
     @Override
+    public Optional<Organization> getOptByNcId(String ncId) {
+
+        return Optional.ofNullable(getByNcId(ncId));
+    }
+
+    @Override
     public Organization getByCode(String code) {
         Example example = new Example(Organization.class);
         example.createCriteria().andEqualTo("code", code);
@@ -73,6 +80,12 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization, Integ
         }
 
         return null;
+    }
+
+    @Override
+    public Optional<Organization> getOptByCode(String code) {
+
+        return Optional.ofNullable(getByCode(code));
     }
 
     private MixNodeVO convertToNode(Organization org) {

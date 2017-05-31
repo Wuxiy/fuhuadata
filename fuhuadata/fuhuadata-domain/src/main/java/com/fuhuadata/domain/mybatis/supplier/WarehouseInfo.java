@@ -41,11 +41,6 @@ public class WarehouseInfo extends BaseEntity<Integer>{
     @Column(name = "CREATOR")
     private String creator;
 
-    /**
-     * 货位管理
-     */
-    @Column(name = "CSFLAG")
-    private String csflag;
 
     /**
      * 分布式
@@ -53,83 +48,83 @@ public class WarehouseInfo extends BaseEntity<Integer>{
     @Column(name = "DATAORIGINFLAG")
     private Double dataoriginflag;
 
-    /**
-     * 福华仓库类型(自定义档案)
-     */
-    @Column(name = "DEF1")
-    private String def1;
-
-    /**
-     * 仓库管理类型(自定义档案)
-     */
-    @Column(name = "DEF2")
-    private String def2;
-
-    /**
-     * 启用状态
-     */
-    @Column(name = "ENABLESTATE")
-    private Double enablestate;
-
-    /**
-     * 废品库
-     */
-    @Column(name = "GUBFLAG")
-    private String gubflag;
-
-    /**
-     * 代储仓
-     */
-    @Column(name = "ISAGENTSTORE")
-    private String isagentstore;
-
-    /**
-     * 影响可用量
-     */
-    @Column(name = "ISATPAFFECTED")
-    private String isatpaffected;
-
-    /**
-     * 进行存货成本计算
-     */
-    @Column(name = "ISCALCULATEDINVCOST")
-    private String iscalculatedinvcost;
-
-    /**
-     * 委外仓
-     */
-    @Column(name = "ISCOMMISSIONOUT")
-    private String iscommissionout;
-
-    /**
-     * 直运仓
-     */
-    @Column(name = "ISDIRECTSTORE")
-    private String isdirectstore;
-
-    /**
-     * 可预留
-     */
-    @Column(name = "ISOBLIGATE")
-    private String isobligate;
-
-    /**
-     * 适用零售
-     */
-    @Column(name = "ISRETAIL")
-    private String isretail;
-
-    /**
-     * 门店仓库
-     */
-    @Column(name = "ISSHOPSTORE")
-    private String isshopstore;
-
-    /**
-     * 在途仓
-     */
-    @Column(name = "ISSTOREONTHEWAY")
-    private String isstoreontheway;
+//    /**
+//     * 福华仓库类型(自定义档案)
+//     */
+//    @Column(name = "DEF1")
+//    private String def1;
+//
+//    /**
+//     * 仓库管理类型(自定义档案)
+//     */
+//    @Column(name = "DEF2")
+//    private String def2;
+//
+//    /**
+//     * 启用状态
+//     */
+//    @Column(name = "ENABLESTATE")
+//    private Double enablestate;
+//
+//    /**
+//     * 废品库
+//     */
+//    @Column(name = "GUBFLAG")
+//    private String gubflag;
+//
+//    /**
+//     * 代储仓
+//     */
+//    @Column(name = "ISAGENTSTORE")
+//    private String isagentstore;
+//
+//    /**
+//     * 影响可用量
+//     */
+//    @Column(name = "ISATPAFFECTED")
+//    private String isatpaffected;
+//
+//    /**
+//     * 进行存货成本计算
+//     */
+//    @Column(name = "ISCALCULATEDINVCOST")
+//    private String iscalculatedinvcost;
+//
+//    /**
+//     * 委外仓
+//     */
+//    @Column(name = "ISCOMMISSIONOUT")
+//    private String iscommissionout;
+//
+//    /**
+//     * 直运仓
+//     */
+//    @Column(name = "ISDIRECTSTORE")
+//    private String isdirectstore;
+//
+//    /**
+//     * 可预留
+//     */
+//    @Column(name = "ISOBLIGATE")
+//    private String isobligate;
+//
+//    /**
+//     * 适用零售
+//     */
+//    @Column(name = "ISRETAIL")
+//    private String isretail;
+//
+//    /**
+//     * 门店仓库
+//     */
+//    @Column(name = "ISSHOPSTORE")
+//    private String isshopstore;
+//
+//    /**
+//     * 在途仓
+//     */
+//    @Column(name = "ISSTOREONTHEWAY")
+//    private String isstoreontheway;
 
     /**
      * 备注
@@ -149,17 +144,17 @@ public class WarehouseInfo extends BaseEntity<Integer>{
     @Column(name = "MODIFIER")
     private String modifier;
 
-    /**
-     * 计划可用
-     */
-    @Column(name = "MRPFLAG")
-    private String mrpflag;
-
-    /**
-     * 加工商
-     */
-    @Column(name = "OPERATESUPPLIER")
-    private String operatesupplier;
+//    /**
+//     * 计划可用
+//     */
+//    @Column(name = "MRPFLAG")
+//    private String mrpflag;
+//
+//    /**
+//     * 加工商
+//     */
+//    @Column(name = "OPERATESUPPLIER")
+//    private String operatesupplier;
 
     /**
      * 电话号码
@@ -191,11 +186,11 @@ public class WarehouseInfo extends BaseEntity<Integer>{
     @Column(name = "PRINCIPALCODE")
     private String principalcode;
 
-    /**
-     * 生产仓库
-     */
-    @Column(name = "PROFLAG")
-    private String proflag;
+//    /**
+//     * 生产仓库
+//     */
+//    @Column(name = "PROFLAG")
+//    private String proflag;
 
     /**
      * 仓库地址
@@ -203,11 +198,11 @@ public class WarehouseInfo extends BaseEntity<Integer>{
     @Column(name = "STORADDR")
     private String storaddr;
 
-    /**
-     * 保税仓
-     */
-    @Column(name = "ISKPTAXSTORE")
-    private String iskptaxstore;
+//    /**
+//     * 保税仓
+//     */
+//    @Column(name = "ISKPTAXSTORE")
+//    private String iskptaxstore;
 
     /**
      * 仓库名称
@@ -335,23 +330,6 @@ public class WarehouseInfo extends BaseEntity<Integer>{
         this.creator = creator == null ? null : creator.trim();
     }
 
-    /**
-     * 获取货位管理
-     *
-     * @return CSFLAG - 货位管理
-     */
-    public String getCsflag() {
-        return csflag;
-    }
-
-    /**
-     * 设置货位管理
-     *
-     * @param csflag 货位管理
-     */
-    public void setCsflag(String csflag) {
-        this.csflag = csflag == null ? null : csflag.trim();
-    }
 
     /**
      * 获取分布式
@@ -371,239 +349,8 @@ public class WarehouseInfo extends BaseEntity<Integer>{
         this.dataoriginflag = dataoriginflag;
     }
 
-    /**
-     * 获取福华仓库类型(自定义档案)
-     *
-     * @return DEF1 - 福华仓库类型(自定义档案)
-     */
-    public String getDef1() {
-        return def1;
-    }
 
-    /**
-     * 设置福华仓库类型(自定义档案)
-     *
-     * @param def1 福华仓库类型(自定义档案)
-     */
-    public void setDef1(String def1) {
-        this.def1 = def1 == null ? null : def1.trim();
-    }
 
-    /**
-     * 获取仓库管理类型(自定义档案)
-     *
-     * @return DEF2 - 仓库管理类型(自定义档案)
-     */
-    public String getDef2() {
-        return def2;
-    }
-
-    /**
-     * 设置仓库管理类型(自定义档案)
-     *
-     * @param def2 仓库管理类型(自定义档案)
-     */
-    public void setDef2(String def2) {
-        this.def2 = def2 == null ? null : def2.trim();
-    }
-
-    /**
-     * 获取启用状态
-     *
-     * @return ENABLESTATE - 启用状态
-     */
-    public Double getEnablestate() {
-        return enablestate;
-    }
-
-    /**
-     * 设置启用状态
-     *
-     * @param enablestate 启用状态
-     */
-    public void setEnablestate(Double enablestate) {
-        this.enablestate = enablestate;
-    }
-
-    /**
-     * 获取废品库
-     *
-     * @return GUBFLAG - 废品库
-     */
-    public String getGubflag() {
-        return gubflag;
-    }
-
-    /**
-     * 设置废品库
-     *
-     * @param gubflag 废品库
-     */
-    public void setGubflag(String gubflag) {
-        this.gubflag = gubflag == null ? null : gubflag.trim();
-    }
-
-    /**
-     * 获取代储仓
-     *
-     * @return ISAGENTSTORE - 代储仓
-     */
-    public String getIsagentstore() {
-        return isagentstore;
-    }
-
-    /**
-     * 设置代储仓
-     *
-     * @param isagentstore 代储仓
-     */
-    public void setIsagentstore(String isagentstore) {
-        this.isagentstore = isagentstore == null ? null : isagentstore.trim();
-    }
-
-    /**
-     * 获取影响可用量
-     *
-     * @return ISATPAFFECTED - 影响可用量
-     */
-    public String getIsatpaffected() {
-        return isatpaffected;
-    }
-
-    /**
-     * 设置影响可用量
-     *
-     * @param isatpaffected 影响可用量
-     */
-    public void setIsatpaffected(String isatpaffected) {
-        this.isatpaffected = isatpaffected == null ? null : isatpaffected.trim();
-    }
-
-    /**
-     * 获取进行存货成本计算
-     *
-     * @return ISCALCULATEDINVCOST - 进行存货成本计算
-     */
-    public String getIscalculatedinvcost() {
-        return iscalculatedinvcost;
-    }
-
-    /**
-     * 设置进行存货成本计算
-     *
-     * @param iscalculatedinvcost 进行存货成本计算
-     */
-    public void setIscalculatedinvcost(String iscalculatedinvcost) {
-        this.iscalculatedinvcost = iscalculatedinvcost == null ? null : iscalculatedinvcost.trim();
-    }
-
-    /**
-     * 获取委外仓
-     *
-     * @return ISCOMMISSIONOUT - 委外仓
-     */
-    public String getIscommissionout() {
-        return iscommissionout;
-    }
-
-    /**
-     * 设置委外仓
-     *
-     * @param iscommissionout 委外仓
-     */
-    public void setIscommissionout(String iscommissionout) {
-        this.iscommissionout = iscommissionout == null ? null : iscommissionout.trim();
-    }
-
-    /**
-     * 获取直运仓
-     *
-     * @return ISDIRECTSTORE - 直运仓
-     */
-    public String getIsdirectstore() {
-        return isdirectstore;
-    }
-
-    /**
-     * 设置直运仓
-     *
-     * @param isdirectstore 直运仓
-     */
-    public void setIsdirectstore(String isdirectstore) {
-        this.isdirectstore = isdirectstore == null ? null : isdirectstore.trim();
-    }
-
-    /**
-     * 获取可预留
-     *
-     * @return ISOBLIGATE - 可预留
-     */
-    public String getIsobligate() {
-        return isobligate;
-    }
-
-    /**
-     * 设置可预留
-     *
-     * @param isobligate 可预留
-     */
-    public void setIsobligate(String isobligate) {
-        this.isobligate = isobligate == null ? null : isobligate.trim();
-    }
-
-    /**
-     * 获取适用零售
-     *
-     * @return ISRETAIL - 适用零售
-     */
-    public String getIsretail() {
-        return isretail;
-    }
-
-    /**
-     * 设置适用零售
-     *
-     * @param isretail 适用零售
-     */
-    public void setIsretail(String isretail) {
-        this.isretail = isretail == null ? null : isretail.trim();
-    }
-
-    /**
-     * 获取门店仓库
-     *
-     * @return ISSHOPSTORE - 门店仓库
-     */
-    public String getIsshopstore() {
-        return isshopstore;
-    }
-
-    /**
-     * 设置门店仓库
-     *
-     * @param isshopstore 门店仓库
-     */
-    public void setIsshopstore(String isshopstore) {
-        this.isshopstore = isshopstore == null ? null : isshopstore.trim();
-    }
-
-    /**
-     * 获取在途仓
-     *
-     * @return ISSTOREONTHEWAY - 在途仓
-     */
-    public String getIsstoreontheway() {
-        return isstoreontheway;
-    }
-
-    /**
-     * 设置在途仓
-     *
-     * @param isstoreontheway 在途仓
-     */
-    public void setIsstoreontheway(String isstoreontheway) {
-        this.isstoreontheway = isstoreontheway == null ? null : isstoreontheway.trim();
-    }
 
     /**
      * 获取备注
@@ -657,42 +404,6 @@ public class WarehouseInfo extends BaseEntity<Integer>{
      */
     public void setModifier(String modifier) {
         this.modifier = modifier == null ? null : modifier.trim();
-    }
-
-    /**
-     * 获取计划可用
-     *
-     * @return MRPFLAG - 计划可用
-     */
-    public String getMrpflag() {
-        return mrpflag;
-    }
-
-    /**
-     * 设置计划可用
-     *
-     * @param mrpflag 计划可用
-     */
-    public void setMrpflag(String mrpflag) {
-        this.mrpflag = mrpflag == null ? null : mrpflag.trim();
-    }
-
-    /**
-     * 获取加工商
-     *
-     * @return OPERATESUPPLIER - 加工商
-     */
-    public String getOperatesupplier() {
-        return operatesupplier;
-    }
-
-    /**
-     * 设置加工商
-     *
-     * @param operatesupplier 加工商
-     */
-    public void setOperatesupplier(String operatesupplier) {
-        this.operatesupplier = operatesupplier == null ? null : operatesupplier.trim();
     }
 
     /**
@@ -786,24 +497,6 @@ public class WarehouseInfo extends BaseEntity<Integer>{
     }
 
     /**
-     * 获取生产仓库
-     *
-     * @return PROFLAG - 生产仓库
-     */
-    public String getProflag() {
-        return proflag;
-    }
-
-    /**
-     * 设置生产仓库
-     *
-     * @param proflag 生产仓库
-     */
-    public void setProflag(String proflag) {
-        this.proflag = proflag == null ? null : proflag.trim();
-    }
-
-    /**
      * 获取仓库地址
      *
      * @return STORADDR - 仓库地址
@@ -821,23 +514,6 @@ public class WarehouseInfo extends BaseEntity<Integer>{
         this.storaddr = storaddr == null ? null : storaddr.trim();
     }
 
-    /**
-     * 获取保税仓
-     *
-     * @return ISKPTAXSTORE - 保税仓
-     */
-    public String getIskptaxstore() {
-        return iskptaxstore;
-    }
-
-    /**
-     * 设置保税仓
-     *
-     * @param iskptaxstore 保税仓
-     */
-    public void setIskptaxstore(String iskptaxstore) {
-        this.iskptaxstore = iskptaxstore == null ? null : iskptaxstore.trim();
-    }
 
     /**
      * 获取仓库名称

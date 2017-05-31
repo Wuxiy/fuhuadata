@@ -5,7 +5,6 @@ import com.fuhuadata.dao.mapper.UserAccountMapper;
 import com.fuhuadata.domain.mybatis.Dept;
 import com.fuhuadata.domain.mybatis.Principal;
 import com.fuhuadata.domain.mybatis.UserAccount;
-import com.fuhuadata.service.exception.ServiceException;
 import com.fuhuadata.service.exception.UserNotExistsException;
 import com.fuhuadata.service.exception.UserPasswordNotMatchException;
 import com.fuhuadata.service.mybatis.DeptService;
@@ -21,7 +20,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tk.mybatis.mapper.entity.Example;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
@@ -219,6 +217,18 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
 
         // loginName 就是 code
         return getUserMapper().getByCode(loginName);
+    }
+
+    @Override
+    public Optional<UserAccount> getUserOptByLoginName(String loginName) {
+
+        return Optional.ofNullable(getUserByLoginName(loginName));
+    }
+
+    @Override
+    public Optional<UserAccount> getUserOptById(Integer userId) {
+
+        return Optional.ofNullable(get(userId));
     }
 
     @Override

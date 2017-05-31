@@ -1,6 +1,7 @@
 package com.fuhuadata.domain.mybatis.supplier;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fuhuadata.domain.common.BankAccBas;
 import com.fuhuadata.domain.mybatis.BaseEntity;
 
 import java.math.BigDecimal;
@@ -194,6 +195,12 @@ public class FreightForwarding extends BaseEntity<Integer>{
      */
     @Transient
     private List<SupplierLinkman> linkmen;
+
+    /**
+     * 银行账户
+     */
+    @Transient
+    private List<BankAccBas> bankAccBass;
 
     /**
      * 仓库名称
@@ -735,5 +742,13 @@ public class FreightForwarding extends BaseEntity<Integer>{
 
     public void setStartCooperateTime(Date startCooperateTime) {
         this.startCooperateTime = startCooperateTime;
+    }
+
+    public List<BankAccBas> getBankAccBass() {
+        return bankAccBass;
+    }
+
+    public void setBankAccBass(List<BankAccBas> bankAccBass) {
+        this.bankAccBass = bankAccBass;
     }
 }
