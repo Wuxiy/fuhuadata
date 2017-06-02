@@ -12,7 +12,7 @@
        where m.dr = 0
          and cl.pk_marbasclass = m.pk_marbasclass
          and m.def8 = 'Y'
-         AND m.pk_marbasclass IN (SELECT pk_marbasclass FROM bd_marbasclass
+         AND m.pk_marbasclass IN (SELECT pk_marbasclass FROM fhdba.bd_marbasclass
                                     WHERE CODE IN (10699,10701,10702,10703,10704,10705,10706,11201,
                                             11202,11203,11204,11205,11299,11301,11302)
                                   )
@@ -55,7 +55,7 @@
         and cl.pk_marbasclass = m.pk_marbasclass
         and gb.startdate &lt;= to_char(sysdate, 'yyyy-mm-dd hh24:mi:ss')
         and gb.enddate &gt; to_char(sysdate, 'yyyy-mm-dd hh24:mi:ss')
-        AND m.pk_marbasclass IN (SELECT pk_marbasclass FROM bd_marbasclass
+        AND m.pk_marbasclass IN (SELECT pk_marbasclass FROM fhdba.bd_marbasclass
         WHERE CODE IN (10699,10701,10702,10703,10704,10705,10706,11201,
         11202,11203,11204,11205,11299,11301,11302)
         )
