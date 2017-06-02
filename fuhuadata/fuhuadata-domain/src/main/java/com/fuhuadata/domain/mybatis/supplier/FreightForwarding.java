@@ -149,8 +149,8 @@ public class FreightForwarding extends BaseEntity<Integer>{
     /**
      * 创建者id
      */
-    @Column(name = "create_user_id")
-    private Integer createUserId;
+    @Column(name = "creator")
+    private Integer creator;
 
     /**
      * 创建者姓名
@@ -161,28 +161,26 @@ public class FreightForwarding extends BaseEntity<Integer>{
     /**
      * 上一次修改者id
      */
-    @Column(name = "lastmodify_user_id")
-    private Integer lastmodifyUserId;
-
+    @Column(name = "modifier")
+    private Integer modifier;
     /**
      * 上一次修改者姓名
      */
     @Column(name = "lastmodify_user_name")
     private String lastmodifyUserName;
-
     /**
      * 创建时间
      */
-    @Column(name = "create_time")
+    @Column(name = "creationtime")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date createTime;
+    private Date creationtime;
 
     /**
      * 修改时间
      */
-    @Column(name = "modify_time")
+    @Column(name = "modifiedtime")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date modifyTime;
+    private Date modifiedtime;
 
     /**
      * 自定义字段
@@ -586,23 +584,6 @@ public class FreightForwarding extends BaseEntity<Integer>{
         this.combinedScoring = combinedScoring;
     }
 
-    /**
-     * 获取创建者id
-     *
-     * @return create_user_id - 创建者id
-     */
-    public Integer getCreateUserId() {
-        return createUserId;
-    }
-
-    /**
-     * 设置创建者id
-     *
-     * @param createUserId 创建者id
-     */
-    public void setCreateUserId(Integer createUserId) {
-        this.createUserId = createUserId;
-    }
 
     /**
      * 获取创建者姓名
@@ -622,23 +603,7 @@ public class FreightForwarding extends BaseEntity<Integer>{
         this.createUserName = createUserName == null ? null : createUserName.trim();
     }
 
-    /**
-     * 获取上一次修改者id
-     *
-     * @return lastmodify_user_id - 上一次修改者id
-     */
-    public Integer getLastmodifyUserId() {
-        return lastmodifyUserId;
-    }
 
-    /**
-     * 设置上一次修改者id
-     *
-     * @param lastmodifyUserId 上一次修改者id
-     */
-    public void setLastmodifyUserId(Integer lastmodifyUserId) {
-        this.lastmodifyUserId = lastmodifyUserId;
-    }
 
     /**
      * 获取上一次修改者姓名
@@ -658,41 +623,6 @@ public class FreightForwarding extends BaseEntity<Integer>{
         this.lastmodifyUserName = lastmodifyUserName == null ? null : lastmodifyUserName.trim();
     }
 
-    /**
-     * 获取创建时间
-     *
-     * @return create_time - 创建时间
-     */
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    /**
-     * 设置创建时间
-     *
-     * @param createTime 创建时间
-     */
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    /**
-     * 获取修改时间
-     *
-     * @return modify_time - 修改时间
-     */
-    public Date getModifyTime() {
-        return modifyTime;
-    }
-
-    /**
-     * 设置修改时间
-     *
-     * @param modifyTime 修改时间
-     */
-    public void setModifyTime(Date modifyTime) {
-        this.modifyTime = modifyTime;
-    }
 
     /**
      * 获取自定义字段
@@ -750,5 +680,37 @@ public class FreightForwarding extends BaseEntity<Integer>{
 
     public void setBankAccBass(List<BankAccBas> bankAccBass) {
         this.bankAccBass = bankAccBass;
+    }
+
+    public Date getModifiedtime() {
+        return modifiedtime;
+    }
+
+    public void setModifiedtime(Date modifiedtime) {
+        this.modifiedtime = modifiedtime;
+    }
+
+    public Date getCreationtime() {
+        return creationtime;
+    }
+
+    public void setCreationtime(Date creationtime) {
+        this.creationtime = creationtime;
+    }
+
+    public Integer getModifier() {
+        return modifier;
+    }
+
+    public void setModifier(Integer modifier) {
+        this.modifier = modifier;
+    }
+
+    public Integer getCreator() {
+        return creator;
+    }
+
+    public void setCreator(Integer creator) {
+        this.creator = creator;
     }
 }

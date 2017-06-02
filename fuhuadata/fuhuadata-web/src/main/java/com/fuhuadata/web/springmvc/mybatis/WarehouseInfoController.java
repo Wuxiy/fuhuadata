@@ -14,10 +14,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 
 /** 仓库
@@ -85,6 +82,24 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
             result.addDefaultModel("warehouseInfo",warehouseInfoService.get(id));
         }catch(Exception e){
             log.error("根据仓库id获取仓库详情",e);
+            result.setMessage(e.getMessage());
+            result.setSuccess(false);
+        }
+        return result.getResultPojo();
+    }
+    /**
+     * 更新仓库详情
+     * @return
+     */
+    @RequestMapping(value = "/updateWarehouseInfo", method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "supplier-warehouse",methods = "updateWarehouseInfo")
+    @ResponseBody
+    public ResultPojo updateWarehouseInfo(@RequestBody WarehouseInfo warehouseInfo){
+        Result<Integer> result = new Result<>();
+        try{
+            result.addDefaultModel("warehouseInfo",warehouseInfoService.updateSelective(warehouseInfo));
+        }catch(Exception e){
+            log.error("更新仓库信息出错",e);
             result.setMessage(e.getMessage());
             result.setSuccess(false);
         }
