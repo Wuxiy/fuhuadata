@@ -14,4 +14,5 @@ public interface CurrtypeService extends BaseSyncService<Currtype, String> {
      * @return
      */
     Currtype getByCode(String code);
+
 }
