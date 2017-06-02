@@ -32,7 +32,7 @@
                                 </div>
                                 <label class="control-label col-xs-1" for="orgName" lang="zh">所属组织<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <div class="input-group" id="orgName">
+                                    <div class="input-group" id="org_name">
                                         <input class="form-control" name="orgName" type="text" disabled>
                                         <div class="input-group-btn">
                                             <button class="btn btn-xs btn-default" data-control="editOn" type="button" disabled>
@@ -69,7 +69,7 @@
                                     <textarea class="form-control" name="address" data-control="editOn" rows="2" disabled></textarea>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" id="time">
                                 <label class="control-label col-xs-1" for="cooperateTime" lang="zh">开始合作时间</label>
                                 <div class="col-xs-2">
                                     <input class="form-control" name="cooperateTime" data-control="editOn" type="date" disabled/>
@@ -85,11 +85,11 @@
                             <div class="form-group">
                                 <label class="control-label col-xs-1" for="productionLicenses" lang="zh">生产许可证<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-3">
-                                    <div class="input-group">
-                                        <input class="form-control" name="productionLicenses" data-control="editOn" type="text" disabled/>
+                                    <div class="input-group" id="production_licenses">
+                                        <input class="form-control" name="productionLicenses" type="text" disabled/>
                                         <div class="input-group-btn" lang="zh">
-                                            <button class="btn btn-xs btn-primary hidden" data-view="editView" type="button" lang="zh">修改</button>
-                                            <button class="btn btn-xs btn-primary" type="button" lang="zh">查看</button>
+                                            <button class="btn btn-xs btn-primary hidden" name="edit" data-view="editView" type="button" lang="zh">编辑</button>
+                                            <button class="btn btn-xs btn-primary" name="show" type="button" lang="zh">查看</button>
                                         </div>
                                     </div>
                                 </div>
@@ -97,11 +97,11 @@
                             <div class="form-group">
                                 <label class="control-label col-xs-1" for="pesticideRegistration" lang="zh">农药登记证<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-3">
-                                    <div class="input-group">
-                                        <input class="form-control" name="pesticideRegistration" data-control="editOn" type="text" disabled/>
+                                    <div class="input-group" id="pesticide_registration">
+                                        <input class="form-control" name="pesticideRegistration" type="text" disabled/>
                                         <div class="input-group-btn" lang="zh">
-                                            <button class="btn btn-xs btn-primary hidden" data-view="editView" type="button" lang="zh">修改</button>
-                                            <button class="btn btn-xs btn-primary" type="button" lang="zh">查看</button>
+                                            <button class="btn btn-xs btn-primary hidden" name="edit" data-view="editView" type="button" lang="zh">编辑</button>
+                                            <button class="btn btn-xs btn-primary" name="show" type="button" lang="zh">查看</button>
                                         </div>
                                     </div>
                                 </div>
@@ -109,11 +109,11 @@
                             <div class="form-group">
                                 <label class="control-label col-xs-1" for="dischargePermit" lang="zh">排污许可证<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-3">
-                                    <div class="input-group">
-                                        <input class="form-control" name="dischargePermit" data-control="editOn" type="text" disabled/>
+                                    <div class="input-group" id="discharge_permit">
+                                        <input class="form-control" name="dischargePermit" type="text" disabled/>
                                         <div class="input-group-btn" lang="zh">
-                                            <button class="btn btn-xs btn-primary hidden" data-view="editView" type="button" lang="zh">修改</button>
-                                            <button class="btn btn-xs btn-primary" type="button" lang="zh">查看</button>
+                                            <button class="btn btn-xs btn-primary hidden" name="edit" data-view="editView" type="button" lang="zh">编辑</button>
+                                            <button class="btn btn-xs btn-primary" name="show" type="button" lang="zh">查看</button>
                                         </div>
                                     </div>
                                 </div>
@@ -140,7 +140,7 @@
                             <div class="form-group">
                                 <label class="control-label col-xs-1" for="managerOrgName" lang="zh">管理员组织<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <div class="input-group" id="managerOrgName">
+                                    <div class="input-group" id="manager_org">
                                         <input class="form-control" name="managerOrgName" type="text" disabled>
                                         <div class="input-group-btn">
                                             <button class="btn btn-xs btn-default" data-control="editOn" type="button" disabled>
@@ -151,7 +151,7 @@
                                 </div>
                                 <label class="control-label col-xs-1" for="managerDepName" lang="zh">管理员部门<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <div class="input-group" id="managerDepName">
+                                    <div class="input-group" id="manager_dep">
                                         <input class="form-control" name="managerDepName" type="text" disabled>
                                         <div class="input-group-btn">
                                             <button class="btn btn-xs btn-default" data-control="editOn" type="button" disabled>
@@ -165,9 +165,12 @@
                                     <div class="input-group" id="manager">
                                         <input class="form-control" name="manager" type="text" disabled>
                                         <div class="input-group-btn">
-                                            <button class="btn btn-xs btn-default" data-control="editOn" type="button" disabled>
+                                            <button class="btn btn-xs btn-default dropdown" data-control="editOn" data-toggle="dropdown" type="button" disabled>
                                                 <span class="glyphicon glyphicon-search"></span>
                                             </button>
+                                            <div class="dropdown-menu pull-right" style="width: 196px;padding: 3px 0;">
+                                                <ul name="selectContainer" style="list-style: none;margin-bottom: 0;padding: 0;width: 100%;max-height: 200px;overflow-y: auto;"></ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -203,10 +206,10 @@
                             <div class="form-group">
                                 <label class="control-label col-xs-1" for="contacts" lang="zh">联系人</label>
                                 <div class="col-xs-8">
-                                    <table class="table text-center table-condensed table-bordered table-striped" id="contact_table">
+                                    <table class="table text-center table-condensed table-bordered table-hover" id="contact_table">
                                         <caption class="hidden text-right" data-view="editView">
-                                            <button class="btn-link" data-control="editOn" type="button" disabled>新增</button>
-                                            <button class="btn-link" data-control="editOn" type="button" disabled>删除</button>
+                                            <button class="btn-link" name="addBtn" data-control="editOn" type="button" disabled>新增</button>
+                                            <button class="btn-link" name="delBtn" data-control="editOn" type="button" disabled>删除</button>
                                         </caption>
                                         <thead>
                                         <tr>
@@ -361,7 +364,74 @@
     </div>
 </div>
 
+## 图片上传modal
+<div class="modal fade" id="set_img" data-backdrop="true" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body clearfix">
+                <form class="form-horizontal well" name="imgForm" enctype="multipart/form-data" style="margin-bottom: 0;">
+                    <input name="setImg" type="file">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-4 col-xs-offset-2">
+                        <button class="btn btn-xs btn-block btn-default" data-dismiss="modal" type="button" lang="zh">取消</button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button class="btn btn-xs btn-block btn-primary" name="save" type="button" lang="zh">上传</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+## 图片展示modal
+<div class="modal fade" id="show_img" tabindex="-1"  aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body clearfix">
+                <div class="thumbnail">
+                    <img name="showImg" src="" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+## 树形菜单modal
+<div class="modal fade in" id="tree_modal" tabindex="-1" role="dialog" data-backdrop="false" aria-hidden="true" >
+    <div class="modal-dialog" style="width: 400px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body">
+                <hr>
+                <div class="zTreeDemoBackground left well" style="height: 300px;overflow-y: scroll;overflow-x: auto">
+                    <ul id="org_tree" class="ztree"></ul>
+                    <ul id="dep_tree" class="ztree"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <input id="factoryId" type="hidden" value="$!{factoryId}">
+<script type="text/javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script>
     $(function () {
         // 加工厂id
@@ -491,7 +561,6 @@
                 bankModal.modal.modal('show');
             }
         };
-        bankTable.init();
 
         // 银行账户modal组件
         var bankModal = {
@@ -637,7 +706,6 @@
                 });
             }
         };
-        bankLinkage.init();
 
         // 联系人table组件
         var contactTable = {
@@ -658,10 +726,10 @@
             item:null,
             init:function () {
                 this.refresh();
-                this.addEvent('click.checkedAll', '[name="checkedAll"]', this.checkedAllHandler);
-                this.addEvent('click.delItem', '[name="delBtn"]', this.deleteHandler);
-                this.addEvent('click.dtlBtn', '[name="dtlBtn"]', this.showModalHandler);
-                this.addEvent('click.addBtn', '[name="addBtn"]', this.addHandler);
+                this.addEvent('click.checkedAll', '[name="checkedAll"]', this.checkedAllHandler); // 全选
+                this.addEvent('click.delItem', '[name="delBtn"]', this.deleteHandler); // 删除
+                this.addEvent('click.dtlBtn', '[name="dtlBtn"]', this.showModalHandler); // 详情
+                this.addEvent('click.addBtn', '[name="addBtn"]', this.addHandler); // 新增
             },
             refresh:function () {
                 contactTable.empty();
@@ -670,7 +738,7 @@
 
                     if (res.code!==1) return;
 
-                    contactTable.data = res.data;
+                    contactTable.data = res.data || [];
                     contactTable.ectype = $.extend(true, [], contactTable.data); // 深拷贝一份数据对象的副本
                     container.html(contactTable.render(contactTable.data));
                 });
@@ -679,6 +747,9 @@
                 this.container.html('');
             },
             render:function (list) {
+
+                if (!(list instanceof Array) || list.length===0) return '<tr><td colspan="4">暂无数据</td></tr>';
+
                 var tpl = '';
                 $.each(list, function(i, item){
                     tpl +=
@@ -750,15 +821,16 @@
             },
             showModalHandler:function (e) {
                 e.preventDefault();
-                var i = $(this).closest('tr').index();
-                bankTable.item = bankTable.data[i]; // 取得列表中的当前项
+                var i = $(this).closest('tr').index(); // 取得当前项的下标
+                contactTable.item = contactTable.data[i]; // 取得数组中的当前项
+                contactModal.empty(); // 对联系人modal执行以下操作，清空>渲染>显示
+                contactModal.render(contactTable.item);
                 contactModal.modal.modal('show');
-                contactModal.init(bankTable.item);
             },
             addHandler:function () {
-                bankTable.item = null; // 用来判断bankModal的保存操作是执行新增，还是编辑
-                bankModal.init();
-                bankModal.modal.modal('show');
+                contactTable.item = null; // 用来判断contactModal的保存操作是执行新增，还是编辑
+                contactModal.empty();
+                contactModal.modal.modal('show');
             }
         };
 
@@ -800,22 +872,18 @@
 
                 if (!confirm('确定要保存吗？')) return;
 
-                var isAdd = (contactTable.item === null);
+                var isAdd = (contactTable.item === null); // 判断是新增还是编辑
 
                 if (isAdd) contactTable.item = {};
 
-                contactTable.item.accnum = $('[name="accnum"]', bankModal.form).val();
-                contactTable.item.accname = $('[name="accname"]', bankModal.form).val();
-                contactTable.item.pkCountry = $('[name="currtypeName"]', bankModal.form).val();
-                contactTable.item.currtypeName = $('[name="currtypeName"]', bankModal.form).find('option').filter(':selected').text().trim();
-                contactTable.item.pkBankdoc = $('[name="pkBankdoc"]', bankModal.form).val();
-                contactTable.item.bankDocName = $('[name="pkBankdoc"]', bankModal.form).find('option').filter(':selected').text().trim();
-                contactTable.item.pkBanktype = $('[name="pkBanktype"]', bankModal.form).val();
-                contactTable.item.bankTypeName = $('[name="pkBanktype"]', bankModal.form).find('option').filter(':selected').text().trim();contactTable
-                if (isAdd) bankTable.data.push(bankTable.item);
+                contactTable.item.name = $('[name="name"]', contactModal.form).val();
+                contactTable.item.phone = $('[name="phone"]', contactModal.form).val();
+                contactTable.item.email = $('[name="email"]', contactModal.form).val();
 
-                bankTable.container.html(bankTable.render(bankTable.data)); // 刷新列表
-                bankModal.modal.modal('hide');
+                if (isAdd) contactTable.data.push(contactTable.item);
+
+                contactTable.container.html(contactTable.render(contactTable.data)); // 刷新列表
+                contactModal.modal.modal('hide');
                 basicPanel.editForm();
             }
         };
@@ -872,6 +940,9 @@
                     name:'cooperateTime'
                 },
                 {
+                    name:'coopMonths'
+                },
+                {
                     name:'productionLicenses'
                 },
                 {
@@ -882,6 +953,9 @@
                 },
                 {
                     name:'remark'
+                },
+                {
+                    name:'supstate'
                 },
                 {
                     name:'score',
@@ -910,7 +984,7 @@
             ],
             init:function (item) {
 
-                if (this.id!=='') { // 如果有id初始化为查看状态，并获取数据
+                if (id!=='') { // 如果有id初始化为查看状态，并获取数据
 
                     this.viewForm();
                     $.ajax(this.paramGet).done(function (res) {
@@ -994,9 +1068,11 @@
                 if (!confirm('确定取消保存吗？')) return;
                 basicPanel.data = $.extend(true, {}, basicPanel.ectype); // 重置data数据
                 bankTable.data = $.extend(true, [], bankTable.ectype);
+                contactTable.data = $.extend(true, [], contactTable.ectype);
                 basicPanel.empty();
                 basicPanel.render(basicPanel.data); // 重新渲染
                 bankTable.container.html(bankTable.render(bankTable.data)); // 刷新列表
+                contactTable.container.html(contactTable.render(contactTable.data)); // 刷新列表
                 basicPanel.viewForm();
             },
             saveHandler:function () {
@@ -1016,7 +1092,7 @@
 
                 }
             },
-            getData:function () {
+            /*getData:function () {
                 $.each(basicPanel.formConfig, function (i, item) {
 
                     if (item.type==='normal' || typeof item.type==='undefined') {
@@ -1031,9 +1107,9 @@
                         }
                     }
                 })
-            },
+            },*/
             putData:function () {
-
+                basicPanel.paramPut.data = basicPanel.data;
                 $.ajax(basicPanel.paramPut).done(function (res) {
 
                     if (res.code===1) {
@@ -1045,7 +1121,305 @@
 
             }
         };
+
+        // 树形菜单modal组件
+        var treeModal = {
+            modal:$('#tree_modal'),
+            inputGroups:$('#org_name, #manager_org, #manager_dep'), // 关联的input控件
+            searchBtn:'button',
+            theId:null,
+            orgContainer:$('#org_tree'),
+            depContainer:$('#dep_tree'),
+            init:function () {
+                this.addEvent('click.popmodal', this.searchBtn, this.popHandler);
+
+                $.ajax({
+                    url:basePath+'/customerBaseInfoOrder/initSaleOrganizationTree',
+                    type:'GET'
+                }).done(function (res) {
+                    treeModal.orgInit(res.data);
+                });
+            },
+            addEvent:function (eType, el, handler) {
+                this.inputGroups.off(eType).on(eType, el, handler);
+            },
+            orgInit:function (data) {
+                var ablclickTree = function (event, modLeftId, treeNode) {
+
+                        if (treeModal.theId==='org_name'){
+
+                            basicPanel.data.pkOrg = treeNode.cid;
+                            basicPanel.data.orgName = treeNode.cname;
+                            basicPanel.render(basicPanel.data);
+                        }else if(treeModal.theId==='manager_org') {
+
+                            if (basicPanel.data.managerOrgCode!==treeNode.id) { // 判断选择的id是否和以前的一致
+
+                                basicPanel.data.managerOrgCode = treeNode.cid;
+                                basicPanel.data.managerOrgName = treeNode.cname;
+                                basicPanel.data.managerDepCode = '';
+                                basicPanel.data.managerDepName = '';
+                                basicPanel.data.managerCode = '';
+                                basicPanel.data.manager = '';
+                                basicPanel.render(basicPanel.data);
+                            }
+
+                        }
+
+                        treeModal.modal.modal('hide');
+                        treeModal.theId = null;
+                    },
+                    setting =
+                    {
+                        data: {
+                            simpleData: {
+                                enable: false
+                            },
+                            key:{
+                                children:"nodes",
+                                name:"cname"
+                            }
+                        },
+                        callback: {
+                            onDblClick: ablclickTree
+                        }
+                    },
+                    treeObj;
+                $.fn.zTree.init(treeModal.orgContainer, setting, data);
+                treeObj = $.fn.zTree.getZTreeObj(treeModal.orgContainer.attr('id'));
+                treeObj.expandAll(true); // 默认展开
+            },
+            depInit:function (data) {
+                var ablclickTree = function (event, modLeftId, treeNode) {
+
+                            if (basicPanel.data.managerDepCode!==treeNode.id) {
+
+                                basicPanel.data.managerDepCode = treeNode.code;
+                                basicPanel.data.managerDepName = treeNode.cname;
+                                basicPanel.data.managerCode = '';
+                                basicPanel.data.manager = '';
+                                basicPanel.render(basicPanel.data);
+                            }
+                            treeModal.modal.modal('hide');
+                            treeModal.theId = null;
+                        },
+                        setting =
+                        {
+                            data:{
+                                simpleData: {
+                                    enable: false,
+                                },
+                                key:{
+                                    children:"nodes",
+                                    name:"cname"
+                                }
+                            },
+                            callback: {
+                                onDblClick: ablclickTree
+                            }
+                        },
+                        treeObj;
+                $.fn.zTree.init(treeModal.depContainer, setting, data);
+                treeObj = $.fn.zTree.getZTreeObj(treeModal.depContainer.attr('id'));
+                treeObj.expandAll(true); // 默认展开
+            },
+            popHandler:function () {
+                treeModal.theId = $(this).closest('.input-group').attr('id'); // 取得当前组件的id
+
+                if (treeModal.theId==='org_name'||treeModal.theId==='manager_org') {
+
+                    treeModal.orgContainer.removeClass('hidden');
+                    treeModal.depContainer.addClass('hidden');
+                    treeModal.modal.modal('show');
+                }else if(treeModal.theId==='manager_dep') {
+
+                    treeModal.depContainer.html('');
+
+                    if (basicPanel.data.managerOrgCode) {
+
+                        $.ajax({
+                            url:basePath+'/sys/dept/tree/org',
+                            type:'GET',
+                            data:{
+                                code:basicPanel.data.managerOrgCode
+                            }
+                        }).done(function (res) {
+                            treeModal.depInit(res.data);
+                        });
+
+                        treeModal.orgContainer.addClass('hidden');
+                        treeModal.depContainer.removeClass('hidden');
+                        treeModal.modal.modal('show');
+                    }else {
+                        alert('请先选择管理员组织！');
+                    }
+                }
+            }
+        };
+
+        // 下拉选择框组件
+        var searchSelect = {
+            select:$('#manager'),
+            searchBtn:'button',
+            container:$('ul','#manager'),
+            options:'a',
+            init:function () {
+                this.addEvent('click.pop', this.searchBtn, this.searchHandler);
+                this.addEvent('click.select', this.options, this.selectHandler);
+            },
+            addEvent:function (eType, el, handler) {
+                this.select.off(eType).on(eType, el, handler);
+            },
+            searchHandler:function () {
+                searchSelect.container.html('');
+
+                if (basicPanel.data.managerDepCode) {
+
+                    $.ajax({
+                        url:basePath+'/sys/user/dept/users/pojo',
+                        type:'GET',
+                        data:{
+                            code:basicPanel.data.managerDepCode
+                        }
+                    }).done(function (res) {
+
+                        if (res.code===1) {
+
+                           var tpl = searchSelect.render(res.data);
+                            searchSelect.container.html(tpl);
+                        }
+                    })
+                }else {
+                    alert('请先选择组织和部门！');
+                }
+
+            },
+            selectHandler:function (e) {
+                e.preventDefault();
+
+                if ($(this).data('id') && basicPanel.data.managerCode!==$(this).data('id')) {
+
+                    basicPanel.data.managerCode = $(this).data('id').trim();
+                    basicPanel.data.manager = $(this).data('name').trim();
+                    basicPanel.render(basicPanel.data);
+                }
+                searchSelect.searchBtn.dropdown('toggle');
+            },
+            render:function (list) {
+
+                if (!(list instanceof Array) || list.length===0) return '<li><a href="#" style="padding-left: 6px">暂无数据</a></li>';
+
+                var tpl = '';
+                $.each(list, function (i, item) {
+                    tpl += '<li><a href="#" data-id="'+item.code+'" data-name="'+item.cname+'" style="padding-left: 6px">'+item.cname+'</a></li>';
+                });
+                return tpl;
+            }
+        };
+
+        // 图片路径展示组件
+        var imgGroup = {
+            inputGroups:$('#production_licenses,#pesticide_registration,#discharge_permit'),
+            modal:$('#show_img'),
+            editBtn:'[name="edit"]',
+            showBtn:'[name="show"]',
+            container:$('[name="showImg"]','#show_img'),
+            thePath:null,
+            theName:null,
+            init:function () {
+                this.addEvent('click.show', this.showBtn, this.showHandler); // 点击展示图片
+                this.addEvent('click.edit', this.editBtn, this.editHandler); // 点击弹出编辑modal
+            },
+            addEvent:function (eType, el, handler) {
+                this.inputGroups.off(eType).on(eType, el, handler);
+            },
+            showHandler:function () {
+                imgGroup.thePath = $(this).closest('.input-group').find('input').val();
+                if (imgGroup.thePath) {
+
+                    imgGroup.container.attr('src',basePath+imgGroup.thePath);
+                    imgGroup.modal.modal('show');
+                }else {
+                    alert('当前没有图片，请添加！');
+                }
+            },
+            editHandler:function () {
+                imgGroup.theName = $(this).closest('.input-group').find('input').attr('name');
+                upImgModal.form[0].reset();
+                upImgModal.modal.modal('show');
+            }
+        };
+
+        // 图片上传组件
+        var upImgModal = {
+            modal:$('#set_img'),
+            form:$('[name="imgForm"]','#set_img'),
+            save:'[name="save"]',
+            fileInput:$('[name="setImg"]','#set_img'),
+            init:function () {
+                this.addEvent('click.save', this.save, this.saveHandler);
+            },
+            addEvent:function (eType, el, handler) {
+                this.modal.off(eType).on(eType, el, handler);
+            },
+            saveHandler:function () {
+                if (!upImgModal.fileInput.val()) return alert('请选择图片！');
+                var img = new FormData(upImgModal.form[0]);
+                /*img.append("classifyPath","oederRequire");*/
+                $.ajax({
+                    url:basePath+'/upload/uploadFileAll',
+                    type:'POST',
+                    data:img,
+                    dataType:'JSON',
+                    cache:false,
+                    processData:false,
+                    contentType:false
+                }).done(function (res) {
+
+                    if (res.code===1) {
+
+                        basicPanel.data[imgGroup.theName] = res.data[0];
+                        basicPanel.render(basicPanel.data);
+                    }
+                });
+                upImgModal.modal.modal('hide');
+            }
+        };
+
+        // 时间联动组件
+        var timeLinkage = {
+            group:$('#time'),
+            start:'[name="cooperateTime"]',
+            init:function () {
+                this.addEvent('change.calculate', this.start, this.calculateHandler);
+            },
+            addEvent:function (eType, el, handler) {
+                this.group.off(eType).on(eType, el, handler);
+            },
+            calculateHandler:function () {
+                var nowDate = new Date(),
+                    nowYear = nowDate.getFullYear(),
+                    nowMonth = nowDate.getMonth(),
+                    oldData = new Date($(this).val()),
+                    oldYear = oldData.getFullYear(),
+                    oldMonth = oldData.getMonth(),
+                    res = (nowYear-oldYear)*12+(nowMonth-oldMonth);
+                basicPanel.data.coopMonths = res?res:0;
+                basicPanel.data.cooperateTime = $(this).val();
+                basicPanel.render(basicPanel.data);
+            }
+        };
+
+        bankTable.init();
+        bankLinkage.init();
+        contactModal.init();
+        contactTable.init();
         basicPanel.init();
+        treeModal.init();
+        searchSelect.init();
+        imgGroup.init();
+        upImgModal.init();
+        timeLinkage.init();
     });
 
 </script>

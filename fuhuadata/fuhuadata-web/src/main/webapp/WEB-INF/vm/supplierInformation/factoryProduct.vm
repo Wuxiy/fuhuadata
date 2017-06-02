@@ -1,5 +1,5 @@
 <div class="nav-deputy shadow-out clearfix">
-    #factoryTab('产品信息',1)
+    #factoryTab('产品信息',$!{factoryId})
     #breadcrumb()
 </div>
 <div class="dashboard-wrapper">
