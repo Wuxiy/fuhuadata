@@ -27,7 +27,6 @@
                         <div class="form-group">
                             <div class="col-xs-1 pull-right">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-xs btn-default" type="reset">重置</button>
                                     <button class="btn btn-xs btn-primary" id="submit" type="button">搜索</button>
                                 </div>
                             </div>
@@ -70,59 +69,6 @@
 </div>
 
 <script type="text/javascript">
-    /*$(document).ready(function () {
-
-        var datatale = $('#exhibition_table').DataTable({
-
-            "ajax": basePath + '/exhibitionInfo/queryExhibitionInfoList',
-            "pagingType": "full_numbers",
-            "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
-            "columns": [
-                {"data": "exhibitionId"},
-                {"data": "exhibitionName"},
-                {"data": "sponsor"},
-                {"data": "organizer"},
-                {"data": "country"},
-                {"data": "city"},
-                {"data": "startDate"},
-                {"data": "finishDate"},
-                {"data": "exhibitionAddr"},
-                {"data": "exhibitionInfo"},
-                {"data": "exhibitionLink"},
-                {"data": "creator"},
-                {"data": "createTime"},
-                {
-                    data: 'exhibitionId',
-                    render: function (data, type, row, meta) {
-                        var delBtn = '<a href="#" class="j-delete" data-id="' + data + '">删除</a>';
-                        return delBtn;
-                    }
-                }
-            ],
-            "columnDefs": [{
-                targets: '_all',
-                defaultContent: ''
-            }, {
-                "targets": 10,
-                "render": function (data, type, row, meta) {
-                    return '<a href="' + data + '" target="_blank">' + data + '</a>';
-                }
-            }, {
-                "targets": 1,
-                "render": function (data, type, row, meta) {
-                    return '<a href="${request.contextPath}/exhibitionInfo/modifyExhibitionInfo?id=' + row.exhibitionId + '" target="_self">' + data + '</a>';
-                }
-            }],
-            "language": {
-                "url": basePath + '/lib/dataTables/lang/dataTables.lang.zh',
-                "searchPlaceholder": '关键字'
-            }
-        });
-
-
-
-    });*/
-    // 删除
     $(document).on('click', '.delete', function (e) {
         var jbtn = $(e.target),
                 jtr = jbtn.closest('tr'),
@@ -226,31 +172,36 @@
     }
     // 渲染列表
     function rederLiset(data,pageNum){
-        var ResultData = data.data,
-                _html = '',
-                count = pageNum*pagesize;
+        if(data.code == 1){
+            var ResultData = data.data,
+                    _html = '',
+                    count = pageNum*pagesize;
 
-        if(ResultData && ResultData!='' && ResultData!='null') {
-            for (var i = 0; i < ResultData.length; i++) {
-                _html += '<tr>';
-                _html += '<td>' + (++count) + '</td>';
-                _html += '<td><a href=' + basePath + '"/exhibitionInfo/modifyExhibitionInfo?id=' + ResultData[i].exhibitionId + '">' + ifEmpty(ResultData[i].exhibitionName) + '</td>';
-                _html += '<td>' + ifEmpty(ResultData[i].sponsor) + '</td>';
-                _html += '<td>' + ifEmpty(ResultData[i].organizer) + '</td>';
-                _html += '<td>' + ifEmpty(ResultData[i].country) + '</td>';
-                _html += '<td>' + ifEmpty(ResultData[i].city) + '</td>';
-                _html += '<td>' + ifEmpty(ResultData[i].startDate) + '</td>';
-                _html += '<td>' + ifEmpty(ResultData[i].finishDate) + '</td>';
-                _html += '<td>' + ifEmpty(ResultData[i].exhibitionAddr) + '</td>';
-                _html += '<td>' + ifEmpty(ResultData[i].exhibitionInfo) + '</td>';
-                _html += '<td><a href="'+ifEmpty(ResultData[i].exhibitionLink)+'"></a></td>';
-                _html += '<td>' + ifEmpty(ResultData[i].creator) + '</td>';
-                _html += '<td>' + ifEmpty(ResultData[i].createTime) + '</td>';
-                _html += '<td><a class="delete" data-id="'+ResultData[i].exhibitionId+'">删除</a></td>';
-                _html += '</tr>';
+            if(ResultData && ResultData!='' && ResultData!='null') {
+                for (var i = 0; i < ResultData.length; i++) {
+                    _html += '<tr>';
+                    _html += '<td>' + (++count) + '</td>';
+                    _html += '<td><a href=' + basePath + '"/exhibitionInfo/modifyExhibitionInfo?id=' + ResultData[i].exhibitionId + '">' + ifEmpty(ResultData[i].exhibitionName) + '</td>';
+                    _html += '<td>' + ifEmpty(ResultData[i].sponsor) + '</td>';
+                    _html += '<td>' + ifEmpty(ResultData[i].organizer) + '</td>';
+                    _html += '<td>' + ifEmpty(ResultData[i].country) + '</td>';
+                    _html += '<td>' + ifEmpty(ResultData[i].city) + '</td>';
+                    _html += '<td>' + ifEmpty(ResultData[i].startDate) + '</td>';
+                    _html += '<td>' + ifEmpty(ResultData[i].finishDate) + '</td>';
+                    _html += '<td>' + ifEmpty(ResultData[i].exhibitionAddr) + '</td>';
+                    _html += '<td>' + ifEmpty(ResultData[i].exhibitionInfo) + '</td>';
+                    _html += '<td><a href="'+ifEmpty(ResultData[i].exhibitionLink)+'"></a></td>';
+                    _html += '<td>' + ifEmpty(ResultData[i].creator) + '</td>';
+                    _html += '<td>' + ifEmpty(ResultData[i].createTime) + '</td>';
+                    _html += '<td><a class="delete" data-id="'+ResultData[i].exhibitionId+'">删除</a></td>';
+                    _html += '</tr>';
+                }
+                $("#list").html(_html);
+
             }
-            $("#list").html(_html);
-
+        }
+        else{
+            $("#list").html('<tr><td colspan="6">暂无数据</td></tr>');
         }
     }
 
