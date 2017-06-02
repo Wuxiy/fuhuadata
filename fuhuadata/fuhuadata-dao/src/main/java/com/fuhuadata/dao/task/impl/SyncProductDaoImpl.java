@@ -20,58 +20,32 @@ public class SyncProductDaoImpl implements SyncProductDao {
     @Autowired
     private SqlMapClient sqlMapClient;
     @Override
-    public List<SyncProduct> getProductListFormOracle() {
-        try {
+    public List<SyncProduct> getProductListFormOracle()throws Exception {
             return sqlMapClientOracle.queryForList("SyncProduct.getProductListFormOracle");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     @Override
-    public void updateProductInMysql(List<SyncProduct> plist) {
-        try {
+    public void modifyProductInMysql(List<SyncProduct> plist)throws Exception {
             sqlMapClient.insert("SyncProduct.updateProductInMysql",plist);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
-    public List<SyncWare> getWareListFormOracle() {
-        try {
+    public List<SyncWare> getWareListFormOracle()throws Exception {
             return sqlMapClientOracle.queryForList("SyncProduct.getWareListFormOracle");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     @Override
-    public void updateWareInMysql(List<SyncWare> plist) {
-        try {
-            sqlMapClient.insert("SyncProduct.updateWareInMysql",plist);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void modifyWareInMysql(List<SyncWare> plist)throws Exception {
+        sqlMapClient.insert("SyncProduct.updateWareInMysql",plist);
     }
 
     @Override
-    public void fixProductInMysql() {
-        try {
+    public void fixProductInMysql() throws Exception{
             sqlMapClient.update("SyncProduct.fixProductInMysql");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
-    public void fixWareInMysql() {
-        try {
+    public void fixWareInMysql()throws Exception {
             sqlMapClient.update("SyncProduct.fixWareInMysql");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 }

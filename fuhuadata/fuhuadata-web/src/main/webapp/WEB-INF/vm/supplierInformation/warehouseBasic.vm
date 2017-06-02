@@ -1,0 +1,164 @@
+
+<div class="clearfix content shadow-out">
+    <!--副导航-->
+    <div class="nav-deputy shadow-out clearfix">
+        #forwarderNav(1)
+        #breadcrumb()
+    </div>
+    <!--表格容器-->
+    <div class="dashboard-wrapper">
+        <div class="row">
+            <div class="col-xs-12">
+                <!--基本信息-->
+                <div class="panel panel-default view-HD-lg" id="panel">
+                    <div class="panel-heading">
+                        <button class="btn btn-xs btn-primary panel-heading-btn pull-right" id="edit" data-view="editHide" type="button" lang="zh">
+                            编辑
+                        </button>
+                        <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden" data-view="editView">
+                            <button class="btn" id="cancel" type="button" lang="zh">取消</button>
+                            <button class="btn btn-primary" id="save" type="button" lang="zh">保存</button>
+                        </div>
+                        <h3 class="panel-title" lang="zh">基本信息</h3>
+                    </div>
+                    <div class="panel-body clearfix">
+                        <form class="form-horizontal" name="factoryInfo">
+                            <div class="hidden">
+                                <input name="id" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" lang="zh">仓库编码</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" id="code" data-control="off" type="text" disabled/>
+                                </div>
+                                <label class="control-label col-xs-1" lang="zh">企业全称<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" id="name" data-control="off" type="text" disabled/>
+                                </div>
+                                <label class="control-label col-xs-1"lang="zh">所属库存组织<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" id="pkOrg" data-control="off" type="text" disabled/>
+                                </div>
+                                <label class="control-label col-xs-1" for="supprop" lang="zh">类型<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-2">
+                                    <select class="form-control" id="supprop" data-control="off" disabled>
+                                        <option value="0">常规</option>
+                                        <option value="1">非常规</option>
+                                        <option value="2">自定</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" lang="zh">社会信用代码<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" id="creditCode" data-control="off" type="text" disabled/>
+                                </div>
+                                <label class="control-label col-xs-1" lang="zh">所属地点</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" id="pkAddress" data-control="off" type="text" disabled/>
+                                </div>
+                                <label class="control-label col-xs-1" lang="zh">负责人<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" id="principalcode" data-control="off" type="text" disabled/>
+                                </div>
+                                <label class="control-label col-xs-1" lang="zh">联系电话<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" id="phone" data-control="off" type="text" disabled/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" lang="zh">仓储面积</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" id="registerfund" data-control="off" type="text" disabled/>
+                                </div>
+                                <label class="control-label col-xs-1" for="supprop" lang="zh">是否危险品仓库<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-2">
+                                    <select class="form-control" id="isDangers" data-control="off" disabled>
+                                        <option value="0">否</option>
+                                        <option value="1">是</option>
+                                    </select>
+                                </div>
+                                <label class="control-label col-xs-1" for="supprop" lang="zh">是否做内装进港<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-2">
+                                    <select class="form-control" id="isInsideEntrance" data-control="off" disabled>
+                                        <option value="0">否</option>
+                                        <option value="1">是</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" lang="zh">仓库地址</label>
+                                <div class="col-xs-8">
+                                    <textarea class="form-control" id="storaddr" data-control="off" rows="2" disabled></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" lang="zh">备注</label>
+                                <div class="col-xs-8">
+                                    <textarea class="form-control" id="memo" data-control="off" rows="2" disabled></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" lang="zh">综合评分</label>
+                                <div class="col-xs-2">
+                                    <div class="input-group">
+                                        <input class="form-control" id="combinedScoring" data-control="off" type="text" disabled/>
+                                        <span class="input-group-addon"><a href="#" target="_blank">查看明细</a></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" data-view="editHide">
+                                <label class="control-label col-xs-1" lang="zh">创建人</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" id="createUserName" type="text" disabled/>
+                                </div>
+                                <label class="control-label col-xs-1" lang="zh">创建时间</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" id="createTime" type="text" disabled/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" language="JavaScript">
+    $(document).ready(function(){
+        jQuery.ajax({
+            url:basePath + '/supplier/warehouse/warehouseInfo?id=1',
+            type:'GET'
+        }).done(function(result){
+            if(result.code == 1){
+                var Resultdata = result.data
+                render(Resultdata);
+            }
+        })
+    })
+
+    function render(data){
+        console.log(data);
+        $('#code').val(data.code);//仓库编码
+        $('#pkOrg').val(data.pkOrg);//所属库存组织
+        $('#name').val(data.name);//所属库存组织
+        $('#supprop').val(data.supprop);// 类型
+
+        $('#creditCode').val(data.creditCode);// 社会信用代码
+        $('#pkAddress').val(data.pkAddress);//所属地点
+        $('#principalcode').val(data.principalcode);//负责人
+        $('#phone').val(data.phone);//电话号码
+
+        /*$('#registerfund').val(data.registerfund);*///仓储面积
+        $('#isDangers').val(data.isDangers);//是否危险品仓库
+        $('#isInsideEntrance').val(data.isInsideEntrance);//是否内装进港
+
+        $('#storaddr').val(data.storaddr);//仓库地址
+        $('#memo').val(data.memo);//仓库备注
+
+        $('#combinedScoring').val(data.combinedScoring);//综合评分
+        $('#createUserName').val(data.createUserName);//创建者姓名
+        $('#createTime').val(data.createTime);//创建时间
+    }
+</script>
