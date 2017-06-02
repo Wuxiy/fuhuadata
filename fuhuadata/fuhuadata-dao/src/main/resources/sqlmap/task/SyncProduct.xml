@@ -5,9 +5,93 @@
   <typeAlias alias="SyncWare" type="com.fuhuadata.domain.task.SyncWare"/>
 
   <select id="getProductListFormOracle" resultClass="SyncProduct">
-
+      select cl.code ncCategoryId, m.name, mea.name measurement
+        from fhdba.bd_material_v m
+        left join fhdba.bd_measdoc mea
+          on m.pk_measdoc = mea.pk_measdoc, fhdba.bd_marbasclass cl
+       where m.dr = 0
+         and cl.pk_marbasclass = m.pk_marbasclass
+         and m.def8 = 'Y'
+         AND m.pk_marbasclass IN (SELECT pk_marbasclass FROM bd_marbasclass
+                                    WHERE CODE IN (10699,10701,10702,10703,10704,10705,10706,11201,
+                                            11202,11203,11204,11205,11299,11301,11302)
+                                  )
+      group by m.name,cl.code, mea.name
   </select>
 
+  <update id="updateProductInMysql" parameterClass="java.util.List">
+    INSERT INTO product_info (nc_category_id,name,measurement) VALUES
+    <iterate  conjunction=",">
+      (#list[].ncCategoryId#, #list[].name#,#list[].measurement# )
+    </iterate>
+    ON DUPLICATE KEY UPDATE nc_category_id=VALUES(nc_category_id),measurement = VALUES(measurement)
+  </update>
+
+  <select id="getWareListFormOracle" resultClass="SyncWare">
+    select
+          m.pk_material     ncId,
+          m.code,
+          m.name            productName,
+          bg.code           customsClearanceId,
+          bg.name           customsClearanceName,
+          gb.risetaxes,
+          gb.exportaxesback ,
+          mea.name          measurement,
+          m.materialspec    specification,
+          m.materialtype    model,
+          m.dr,
+          case when m.def14='~' then '1.0000' else   m.def14 end        unitUseRate
+    from fhdba.bd_material_v m
+    left join fhdba.bd_material_v bg
+    on m.def17 = bg.pk_material
+    left join fhdba.bd_measdoc mea
+    on m.pk_measdoc = mea.pk_measdoc
+    inner join fhdba.bd_goodscode gh
+    on m.pk_goodscode = gh.pk_goodscode
+    inner join fhdba.bd_goodstaxes gb
+    on gb.pk_goodscode = gh.pk_goodscode, fhdba.bd_marbasclass cl
+    where gb.dr = 0
+        and gh.dr = 0
+        and cl.pk_marbasclass = m.pk_marbasclass
+        and gb.startdate &lt;= to_char(sysdate, 'yyyy-mm-dd hh24:mi:ss')
+        and gb.enddate &gt; to_char(sysdate, 'yyyy-mm-dd hh24:mi:ss')
+        AND m.pk_marbasclass IN (SELECT pk_marbasclass FROM bd_marbasclass
+        WHERE CODE IN (10699,10701,10702,10703,10704,10705,10706,11201,
+        11202,11203,11204,11205,11299,11301,11302)
+        )
+        and m.def8 = 'Y'
+  </select>
+
+  <update id="updateWareInMysql" parameterClass="java.util.List">
+      insert into product_ware(nc_id,product_name,code,customs_clearance_id,customs_clearance_name,
+      risetaxes,exportaxesback,specification,model,unit_use_rate,dr)
+      VALUES
+    <iterate  conjunction=",">
+      (#list[].ncId#, #list[].productName#, #list[].code#,#list[].customsClearanceId#,#list[].customsClearanceName# ,#list[].risetaxes#,#list[].exportaxesback#,#list[].specification#
+      ,#list[].model#,#list[].unitUseRate#,#list[].dr#)
+    </iterate>
+    ON DUPLICATE KEY UPDATE
+      nc_id=VALUES(nc_id),
+      product_name = VALUES (product_name),
+      code = VALUES(code),
+      customs_clearance_id = VALUES(customs_clearance_id),
+      customs_clearance_name = VALUES(customs_clearance_name),
+      risetaxes = VALUES(risetaxes),
+      exportaxesback = VALUES(exportaxesback),
+      specification = VALUES(specification),
+      model = VALUES(model),
+      unit_use_rate = VALUES(unit_use_rate),
+      dr = VALUES (dr)
+  </update>
+
+  <update id="fixProductInMysql">
+    update product_info p,product_category s,product_category m,product_category b
+    set p.small_category_id = s.id,p.mid_category_id = m.id,p.big_category_id = b.id,p.category_name = s.name
+    where p.nc_category_id = s.id and s.parent_id = m.id and m.parent_id = b.id
+  </update>
 
 
+  <update id="fixWareInMysql">
+    update  product_ware w,product_info p set  w.product_info_id = p.product_id where w.product_name = p.name
+  </update>
 </sqlMap>

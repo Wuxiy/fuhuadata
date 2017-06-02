@@ -12,9 +12,11 @@
     <task:annotation-driven scheduler="scheduler" executor="executor" proxy-target-class="true"/>
 
     <task:scheduled-tasks scheduler="scheduler">
-        <task:scheduled ref="syncDocFromNc" method="autoTest" cron="10 1/1 * * * ?"/>
+        <task:scheduled ref="syncDocFromNc" method="autoTest" cron="0 1/1 * * * ?"/>
         <task:scheduled ref="syncContract" method="sync" cron="0 0 0 * * ?"/>
         <task:scheduled ref="syncSubContract" method="sync" cron="0 10 0 * * ?"/>
+        <task:scheduled ref="syncProduct" method="sync" cron="0 20 0 * * ?"/>
+
     </task:scheduled-tasks>
 
 
