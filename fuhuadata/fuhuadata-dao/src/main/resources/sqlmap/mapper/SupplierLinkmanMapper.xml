@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.supplier.SupplierLinkmanMapper">
+  <resultMap id="BaseResultMap" type="com.fuhuadata.domain.mybatis.supplier.SupplierLinkman">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pk_linkman" jdbcType="VARCHAR" property="pkLinkman" />
+    <result column="supplier_type" jdbcType="INTEGER" property="supplierType" />
+    <result column="suppier_id" jdbcType="INTEGER" property="suppierId" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="cell" jdbcType="VARCHAR" property="cell" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="vjob" jdbcType="VARCHAR" property="vjob" />
+    <result column="isdefault" jdbcType="INTEGER" property="isdefault" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="birthday" jdbcType="VARCHAR" property="birthday" />
+    <result column="tax" jdbcType="VARCHAR" property="tax" />
+    <result column="postcode" jdbcType="VARCHAR" property="postcode" />
+    <result column="meno" jdbcType="VARCHAR" property="meno" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="create_user_name" jdbcType="VARCHAR" property="createUserName" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+    <result column="lastmodify_user_name" jdbcType="VARCHAR" property="lastmodifyUserName" />
+    <result column="creationtime" jdbcType="TIMESTAMP" property="creationtime" />
+    <result column="modifiedtime" jdbcType="TIMESTAMP" property="modifiedtime" />
+  </resultMap>
+</mapper>

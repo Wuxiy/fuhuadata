@@ -382,8 +382,8 @@ $(document).ready(function(){
                     '<td>'+(customerVisitRecords[i].endTime!=undefined?customerVisitRecords[i].endTime:'')+'</td>'+
                     '<td>' + replace(customerVisitRecords[i].activityType, customerVisitRecords[i].activityRemarks) + '</td>' +
                     '<td>'+(customerVisitRecords[i].activityAddress!=undefined?customerVisitRecords[i].activityAddress:'')+'</td>'+
-                    '<td>'+(customerVisitRecords[i].activityGift!=undefined?customerVisitRecords[i].activityGift:'')+'</td>'+
                     '<td>'+(customerVisitRecords[i].activitySummary!=undefined?customerVisitRecords[i].activitySummary:'')+'</td>'+
+                    '<td>'+(customerVisitRecords[i].activityGift!=undefined?customerVisitRecords[i].activityGift:'')+'</td>'+
                     '<td>'+(customerVisitRecords[i].remarks!=undefined?customerVisitRecords[i].remarks:'')+'</td>'+
                     '<td><a href="#" name="editItem" data-id="'+ customerVisitRecords[i].visitRecordId +'">查看</a></td>'+
                     '</tr>';

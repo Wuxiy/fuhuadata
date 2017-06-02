@@ -44,6 +44,25 @@ public class  QueryBusinessOrder {
     private int sortType;//排序方向，0：正序 1：倒序
     //订单状态  订单状态：-2：报价失败，-1：订单取消  0：报价中 1：已转化成订单 2：数据已上报到NC，3：已签约
     private Integer status;
+    private String merchandiser;//跟单员pk
+    private String merchandiserName;//跟单员name
+
+    public String getMerchandiser() {
+        return merchandiser;
+    }
+
+    public void setMerchandiser(String merchandiser) {
+        this.merchandiser = merchandiser;
+    }
+
+    public String getMerchandiserName() {
+        return merchandiserName;
+    }
+
+    public void setMerchandiserName(String merchandiserName) {
+        this.merchandiserName = merchandiserName;
+    }
+
     public String getCustomerId() {
         return customerId;
     }

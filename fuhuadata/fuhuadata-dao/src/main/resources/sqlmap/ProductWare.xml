@@ -116,7 +116,8 @@
             w.specification,
             w.`model`,
             p.measurement,
-            w.unit_use_rate  unitUseRate
+            w.unit_use_rate  unitUseRate,
+            w.exportaxesback
         FROM
             product_ware w,
             product_info p

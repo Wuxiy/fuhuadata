@@ -77,6 +77,8 @@
         <result column="failure_analysis" jdbcType="VARCHAR" property="failureAnalysis" javaType="java.lang.String"/>
         <result column="exchange_terms_detail" jdbcType="VARCHAR" property="exchangeTermsDetail" javaType="java.lang.String"/>
         <result column="latest_delivery_time" jdbcType="DATE" property="latestDeliveryTime" javaType="java.lang.String"/>
+        <result column="merchandiser" jdbcType="VARCHAR" property="merchandiser" javaType="java.lang.String"/>
+        <result column="merchandiser_name" jdbcType="VARCHAR" property="merchandiserName" javaType="java.lang.String"/>
 
     </resultMap>
 
@@ -119,6 +121,12 @@
             <isNotEmpty prepend="and" property="areaId">
                 base.customer_area_id in ($areaId$)
             </isNotEmpty>
+            <isNotEmpty prepend="and" property="merchandiser">
+                base.merchandiser = #merchandiser#
+            </isNotEmpty>
+            <isNotEmpty prepend="and" property="merchandiserName">
+                base.merchandiser_name = #merchandiserName#
+            </isNotEmpty>
         </dynamic>
     </sql>
 
@@ -141,6 +149,12 @@
                 <![CDATA[
                      deal_time  >=  #startTime#
                 ]]>
+            </isNotEmpty>
+            <isNotEmpty prepend="and" property="merchandiser">
+                base.merchandiser = #merchandiser#
+            </isNotEmpty>
+            <isNotEmpty prepend="and" property="merchandiserName">
+                base.merchandiser_name = #merchandiserName#
             </isNotEmpty>
         </dynamic>
     </sql>
@@ -196,7 +210,12 @@
                      deal_time  <=  #endTime#
                 ]]>
             </isNotEmpty>
-
+            <isNotEmpty prepend="and" property="merchandiser">
+                base.merchandiser = #merchandiser#
+            </isNotEmpty>
+            <isNotEmpty prepend="and" property="merchandiserName">
+                base.merchandiser_name = #merchandiserName#
+            </isNotEmpty>
         </dynamic>
     </sql>
 
@@ -234,6 +253,12 @@
             </isNotNull>
             <isNotEmpty prepend=" AND " property="orderBy">
                 order by $orderBy$
+            </isNotEmpty>
+            <isNotEmpty prepend="and" property="merchandiser">
+                base.merchandiser = #merchandiser#
+            </isNotEmpty>
+            <isNotEmpty prepend="and" property="merchandiserName">
+                base.merchandiser_name = #merchandiserName#
             </isNotEmpty>
         </dynamic>
     </sql>
@@ -424,6 +449,12 @@
             <isNotEmpty prepend=", " property="latestDeliveryTime">
                 latest_delivery_time  = #latestDeliveryTime#
             </isNotEmpty>
+            <isNotEmpty prepend="," property="merchandiser">
+                merchandiser = #merchandiser#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="merchandiserName">
+                merchandiser_name = #merchandiserName#
+            </isNotEmpty>
         </dynamic>
         where order_id = #orderId#
     </update>
@@ -438,7 +469,7 @@
         transport_flag, partial_shipment_falg, status, deal_time, deliver_info, express_info, due_time,amount_payable, floor_price, maintenance_fee,
         net_profit, actual_payment_time,actual_amount_paid, unpaid_amount, is_complaint, is_pledge, is_modify_price, claim_amount,create_user_id, create_user_name,
         lastmodify_user_id, lastmodify_user_name, create_time,modify_time,is_credit_risk,prepay_rate,department_name,nusdexchgrate,nexchangerate,lastdelydate,gross_profit,
-        exchange_terms_detail,latest_delivery_time)
+        exchange_terms_detail,latest_delivery_time,merchandiser,merchandiser_name)
         values (#orderId#, #ncOrderId#, #businessId#, #customerId#,#customerDutyParagraph#,
         #billToCustomer#, #salesManId#,#salesManName#, #departmentId#, #saleOrganizationId#,
         #saleOrganizationName#, #destinationPort#, #shipmentPort#,#destinationPortName#, #shipmentPortName#,#collectionAgreement#, #tradeType#,
@@ -446,7 +477,8 @@
         #lossRate#, #saleRate#, #managementRate#,#grossRate#, #creditRate#,
         #transportFlag#,#partialShipmentFalg#, #status#, #dealTime#, #deliverInfo#,#expressInfo#, #dueTime#, #amountPayable#, #floorPrice#,#maintenanceFee#,
         #netProfit#, #actualPaymentTime#,#actualAmountPaid#, #unpaidAmount#, #isComplaint#, #isPledge#,#isModifyPrice#, #claimAmount#, #createUserId#,#createUserName#, #lastmodifyUserId#, #lastmodifyUserName#,
-        now(), now(), #isCreditRisk#,#prepayRate#,#departmentName#,#nusdexchgrate#,#nexchangerate#,#lastdelydate#,#grossProfit#,#exchangeTermsDetail#,#latestDeliveryTime#)
+        now(), now(), #isCreditRisk#,#prepayRate#,#departmentName#,#nusdexchgrate#,#nexchangerate#,#lastdelydate#,#grossProfit#,#exchangeTermsDetail#,#latestDeliveryTime#,
+        #merchandiser#,#merchandiserName#)
 
     </insert>
 
@@ -516,7 +548,9 @@
                 is_credit_risk,
                 prepay_rate,
                 exchange_terms_detail,
-                latest_delivery_time
+                latest_delivery_time,
+                merchandiser,
+                merchandiser_name
             FROM
                 business_order
             WHERE
@@ -1026,6 +1060,10 @@
             WHERE
                 business_id = #value#
     ]]>
+    </select>
+
+    <select id="getSalesmanDeptId" resultClass="java.lang.String" parameterClass="java.lang.String">
+        select d.pk_dept from business_order b,p_dept d where b.department_id = d.code and  order_id = #value#
     </select>
 
 </sqlMap>

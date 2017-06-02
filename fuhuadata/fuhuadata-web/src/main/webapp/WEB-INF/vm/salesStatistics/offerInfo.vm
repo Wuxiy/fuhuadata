@@ -134,7 +134,7 @@
                                 <label class="col-xs-1 control-label" lang="zh">收款比例<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input data-control="on" class="form-control notnull" min="0" max="100" step="0.01" type="number" id="interestRate" value="" disabled/>
+                                        <input data-control="on" class="form-control notnull" min="0" max="100" step="0.5" type="number" id="interestRate" value="" disabled/>
                                         <span class="input-group-addon">%</span>
                                     </div>
                                 </div>
@@ -198,7 +198,7 @@
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">原币对美元汇率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input data-control="on" class="form-control notnull" type="number" step="0.01" id="nusdexchgrate" value="" disabled/>
+                                    <input data-control="on" class="form-control notnull" type="number" step="0.5" id="nusdexchgrate" value="" disabled/>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">原币对本币汇率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
@@ -207,7 +207,7 @@
                                 <label class="col-xs-1 control-label" lang="zh">保险费率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input data-control="on" class="form-control notnull" min="0" max="100" step="0.01" type="number" id="premiumRate" value="0.03" disabled/>
+                                        <input data-control="on" class="form-control notnull" min="0" max="100" step="0.5" type="number" id="premiumRate" value="0.03" disabled/>
                                         <span class="input-group-addon">%</span>
                                     </div>
                                 </div>
@@ -216,14 +216,14 @@
                                 <label class="col-xs-1 control-label" lang="zh">资金利息利率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input data-control="on" class="form-control notnull" min="0" max="100" step="0.01" type="number" id="discountRate" value="6" disabled/>
+                                        <input data-control="on" class="form-control notnull" min="0" max="100" step="0.5" type="number" id="discountRate" value="6" disabled/>
                                         <span class="input-group-addon">%</span>
                                     </div>
                                 </div>
                                 <label class="col-xs-1 control-label" lang="zh">汇损费率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input data-control="on" class="form-control notnull" min="0" max="100" step="0.01" type="number" id="lossRate" value="0" disabled/>
+                                        <input data-control="on" class="form-control notnull" min="0" max="100" step="0.5" type="number" id="lossRate" value="0" disabled/>
                                         <span class="input-group-addon">%</span>
                                     </div>
                                 </div>
@@ -240,7 +240,7 @@
                                 <label class="col-xs-1 control-label" lang="zh">信保费率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input data-control="on" class="form-control" min="0" max="100" step="0.01" type="number" id="guaranteeRate" value="0.24" disabled/>
+                                        <input data-control="on" class="form-control" min="0" max="100" step="0.5" type="number" id="guaranteeRate" value="0.24" disabled/>
                                         <span class="input-group-addon">%</span>
                                     </div>
                                 </div>
@@ -368,19 +368,19 @@
 
 ## 贸易国别
 <script id="tzC" type="text/html">
-    <%if (data.length>0) {%>
-    <%for (var i=0; i<data.length; i++) {%>
-    <li><a href="#" id="<%=data[i].pkTimezone%>" data-val="<%=data[i].code%>" style="padding-left: 6px"><%=data[i].name%></a></li>
+    <%if (data.list.length>0) {%>
+    <%for (var i=0; i<data.list.length; i++) {%>
+    <li><a href="#" id="<%=data.list[i].pkTimezone%>" data-val="<%=data.list[i].code%>" style="padding-left: 6px"><%=data.list[i].name%></a></li>
     <%}%>
     <%}%>
 </script>
 
 ## 起运港和目的港
 <script id="dpC" type="text/html">
-    <%if (data.length>0) {%>
-    <%for (var i=0; i<data.length; i++) {%>
-    <li><a href="#" data-val="<%=data[i].vcode%>" style="padding-left: 6px"><%=data[i].vname%></a></li>
-    <%}%>
+    <%if (data.list.length>0) {%>
+        <%for (var i=0; i<data.list.length; i++) {%>
+        <li><a href="#" data-val="<%=data.list[i].vcode%>" style="padding-left: 6px"><%if (data.currentLang == 'zh') {%><%=data.list[i].vname%>,<%=data.list[i].country%><%}else{%><%=data.list[i].venname%>,<%=data.list[i].ecountry%><%}%></a></li>
+        <%}%>
     <%}%>
 </script>
 
@@ -1045,9 +1045,11 @@
                         name:''
                     }),
                     callback:function (data) {
+                        var res = {};
                         if (data) {
-
-                            CRM.tplHandler(strId,data,ul);
+                            res.list = data;
+                            res.currentLang = lang.currentLang;
+                            CRM.tplHandler(strId,res,ul);
                         }
                     }
                 });
@@ -1065,8 +1067,11 @@
                     contentType:'application/json',
                     data:JSON.stringify(obj),
                     callback:function (data) {
+                        var res = {};
                         if (data) {
-                            CRM.tplHandler(strId,data,ul);
+                            res.list = data;
+                            res.currentLang = lang.currentLang;
+                            CRM.tplHandler(strId,res,ul);
                         }
                     }
                 });

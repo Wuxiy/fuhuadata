@@ -32,6 +32,8 @@
         <result column="vname" property="vname" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="venname" property="venname" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="vcode" property="vcode" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="country" property="country" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="ecountry" property="ecountry" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>
     
     
