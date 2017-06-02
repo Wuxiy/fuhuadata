@@ -28,7 +28,7 @@
                             <div class="form-group">
                                 <label class="control-label col-xs-1" for="code" lang="zh">企业代码</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" name="code" data-control="editOn" type="text" disabled/>
+                                    <input class="form-control" name="code" type="text" disabled/>
                                 </div>
                                 <label class="control-label col-xs-1" for="orgName" lang="zh">所属组织<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
@@ -43,30 +43,30 @@
                                 </div>
                                 <label class="control-label col-xs-1" for="name" lang="zh">企业名称<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" name="name" data-control="editOn" type="text" disabled/>
+                                    <input class="form-control" name="name" data-bind="localData" data-control="editOn" type="text" disabled/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-1" for="abbr" lang="zh">企业简称</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" name="abbr" data-control="editOn" type="text" disabled/>
+                                    <input class="form-control" name="abbr" data-bind="localData" data-control="editOn" type="text" disabled/>
                                 </div>
                                 <label class="control-label col-xs-1" for="oldName" lang="zh">企业曾用名</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" name="oldName" data-control="editOn" type="text" disabled/>
+                                    <input class="form-control" name="oldName" data-bind="localData" data-control="editOn" type="text" disabled/>
                                 </div>
                                 <label class="control-label col-xs-1" for="registerfund" lang="zh">注册资金</label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input class="form-control" name="registerfund" data-control="editOn" type="text" disabled/>
-                                        <span class="input-group-addon" data-val="美元" lang="zh">万元</span>
+                                        <input class="form-control" name="registerfund" data-bind="localData" data-control="editOn" type="number" min="0" disabled/>
+                                        <span class="input-group-addon"  data-val="美元" lang="zh">万元</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-1" for="address" lang="zh">注册地址</label>
                                 <div class="col-xs-8">
-                                    <textarea class="form-control" name="address" data-control="editOn" rows="2" disabled></textarea>
+                                    <textarea class="form-control" name="address" data-bind="localData" data-control="editOn" rows="2" disabled></textarea>
                                 </div>
                             </div>
                             <div class="form-group" id="time">
@@ -121,20 +121,20 @@
                             <div class="form-group">
                                 <label class="control-label col-xs-1" for="remark" lang="zh">备注</label>
                                 <div class="col-xs-8">
-                                    <textarea class="form-control" name="remark" data-control="editOn" rows="4" disabled></textarea>
+                                    <textarea class="form-control" name="remark" data-bind="localData" data-control="editOn" rows="4" disabled></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-1" for="supstate">状态<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <select class="form-control" name="supstate" data-control="editOn" disabled>
+                                    <select class="form-control" name="supstate" data-bind="localData" data-control="editOn" disabled>
                                         <option value="1">启用</option>
                                         <option value="0">禁用</option>
                                     </select>
                                 </div>
                                 <label class="control-label col-xs-1" for="score" lang="zh">综合评分</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" name="score" data-control="editOn" type="text" disabled/>
+                                    <input class="form-control" name="score" data-bind="localData" data-control="editOn" type="number" disabled/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -899,6 +899,7 @@
             editHide:'[data-view="editHide"]',
             editOn:'[data-control="editOn"]',
             editOff:'[data-control="editOff"]',
+            bindEl:'[data-bind="localData"]',
             paramGet:{
                 url:basePath+'/supplier/factories/'+id,
                 type:'GET'
@@ -908,7 +909,12 @@
                 type:'PUT',
                 contentType:'application/json;charset=UTF-8'
             },
-            data:null,
+            paramPost:{
+                url:basePath+'/supplier/factories',
+                type:'POST',
+                contentType:'application/json;charset=UTF-8'
+            },
+            data:{},
             ectype:null,
             formConfig:[
                 {
@@ -997,14 +1003,15 @@
                         }
 
                     });
-                    this.addEvent('click.edit', '[name="edit"]', this.editHandler);
+                    this.addEvent('click.edit', this.editBtn, this.editHandler);
                 }else { // 或者初始化为新增状态
 
                     this.editForm();
                 }
 
-                this.addEvent('click.cancel', '[name="cancel"]', this.cancelHandler);
-                this.addEvent('click.save', '[name="save"]', this.saveHandler);
+                this.addEvent('click.cancel', this.cancelBtn, this.cancelHandler);
+                this.addEvent('click.save', this.saveBtn, this.saveHandler);
+                this.addEvent('change.putLocalData', this.bindEl, this.putLocalData);
             },
             render:function (data) {
                 /*{
@@ -1079,7 +1086,7 @@
 
                 if (!confirm('确定要保存吗？')) return;
                 basicPanel.viewForm();
-                basicPanel.getData();
+
                 basicPanel.data.banks = bankTable.data;
                 basicPanel.data.deletedBankIds = bankTable.argsIds;
                 basicPanel.paramPut.data = JSON.stringify(basicPanel.data);
@@ -1089,8 +1096,14 @@
                     basicPanel.putData();
                 }else {
 
-
+                    basicPanel.postData();
                 }
+            },
+            putLocalData:function () {
+                var name = $(this).attr('name'),
+                    val = $(this).val();
+                basicPanel.data[name] = val;
+                basicPanel.render(basicPanel.data);
             },
             /*getData:function () {
                 $.each(basicPanel.formConfig, function (i, item) {
@@ -1109,7 +1122,11 @@
                 })
             },*/
             putData:function () {
-                basicPanel.paramPut.data = basicPanel.data;
+                basicPanel.data.banks = bankTable.data;
+                basicPanel.data.linkmen = contactTable.data;
+                basicPanel.data.deletedBankIds = bankTable.argsIds;
+                basicPanel.data.deletedLinkmanIds = contactTable.argsIds;
+                basicPanel.paramPut.data = JSON.stringify({factory:basicPanel.data});
                 $.ajax(basicPanel.paramPut).done(function (res) {
 
                     if (res.code===1) {
@@ -1118,7 +1135,15 @@
                 })
             },
             postData:function () {
+                basicPanel.data.banks = bankTable.data;
+                basicPanel.data.linkmen = contactTable.data;
+                basicPanel.paramPut.data = JSON.stringify({factory:basicPanel.data});
+                $.ajax(basicPanel.paramPost).done(function (res) {
 
+                    if (res.code===1) {
+                        alert('更新成功！');
+                    }
+                })
             }
         };
 
@@ -1303,7 +1328,7 @@
                     basicPanel.data.manager = $(this).data('name').trim();
                     basicPanel.render(basicPanel.data);
                 }
-                searchSelect.searchBtn.dropdown('toggle');
+                /*searchSelect.searchBtn.dropdown('toggle');*/
             },
             render:function (list) {
 
