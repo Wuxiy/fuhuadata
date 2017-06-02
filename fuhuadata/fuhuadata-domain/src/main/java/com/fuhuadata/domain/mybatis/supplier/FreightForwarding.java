@@ -86,6 +86,7 @@ public class FreightForwarding extends BaseEntity<Integer>{
      * 联系人
      */
     @Transient
+    @Column(name = "link_man")
     private String linkMan;
 
     /**
