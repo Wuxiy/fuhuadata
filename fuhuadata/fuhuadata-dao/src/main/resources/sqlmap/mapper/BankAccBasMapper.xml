@@ -66,12 +66,12 @@
 
     <sql id="FromTable">
         from s_bankaccbas bab
-        left join t_currtype ct on ct.pk_currtype=bab.pk_currtype
+        left join t_currtype ct on ct.code=bab.pk_currtype
     </sql>
 
     <sql id="JoinTypeAndDoc">
-        left join t_banktype bt on bt.pk_banktype=bab.pk_banktype
-        left join t_bankdoc bd on bd.pk_bankdoc=bab.pk_bankdoc
+        left join t_banktype bt on bt.code=bab.pk_banktype
+        left join t_bankdoc bd on bd.code=bab.pk_bankdoc
     </sql>
 
     <select id="listBankAccs" resultMap="BaseResultMap">
