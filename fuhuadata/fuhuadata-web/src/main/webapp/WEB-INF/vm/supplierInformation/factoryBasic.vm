@@ -451,18 +451,20 @@
                 url:basePath+'/supplier/factories/'+id+'/banks',
                 type:'GET'
             },
-            data:null, // 请求的数据对象
+            data:[], // 请求的数据对象
             ectype:null, // 数据对象副本
             item:null,
             init:function () {
-                this.refresh();
+                this.empty();
+                if (id!=='') {
+                    this.refresh();
+                }
                 this.addEvent('click.checkedAll', '[name="checkedAll"]', this.checkedAllHandler);
                 this.addEvent('click.delItem', '[name="delBtn"]', this.deleteHandler);
                 this.addEvent('click.dtlBtn', '[name="dtlBtn"]', this.showModalHandler);
                 this.addEvent('click.addBtn', '[name="addBtn"]', this.addHandler);
             },
             refresh:function () {
-                bankTable.empty();
                 var container = this.container;
                 $.ajax(this.param).done(function (res) {
 
@@ -721,18 +723,23 @@
             },
             argsIds:[], // 删除的项目的id
             argsIndex:[], // 删除的对象在数组中的下标
-            data:null, // 请求的数据对象
+            data:[], // 请求的数据对象
             ectype:null, // 数据对象副本
             item:null,
             init:function () {
-                this.refresh();
+                this.empty();
+
+                if (id!=='') {
+
+                    this.refresh();
+                }
+
                 this.addEvent('click.checkedAll', '[name="checkedAll"]', this.checkedAllHandler); // 全选
                 this.addEvent('click.delItem', '[name="delBtn"]', this.deleteHandler); // 删除
                 this.addEvent('click.dtlBtn', '[name="dtlBtn"]', this.showModalHandler); // 详情
                 this.addEvent('click.addBtn', '[name="addBtn"]', this.addHandler); // 新增
             },
             refresh:function () {
-                contactTable.empty();
                 var container = this.container;
                 $.ajax(this.param).done(function (res) {
 
@@ -1105,22 +1112,6 @@
                 basicPanel.data[name] = val;
                 basicPanel.render(basicPanel.data);
             },
-            /*getData:function () {
-                $.each(basicPanel.formConfig, function (i, item) {
-
-                    if (item.type==='normal' || typeof item.type==='undefined') {
-
-                        if (typeof item.place==='object') {
-                            basicPanel.data[item.name] = $('[name="'+item.name+'"]', basicPanel.form).val().trim();
-                            basicPanel.data[item.place.field] = $('[name="'+item.name+'"]', basicPanel.form).data(item.place.name);
-
-                        }else {
-
-                            basicPanel.data[item.name] = $('[name="'+item.name+'"]', basicPanel.form).val().trim();
-                        }
-                    }
-                })
-            },*/
             putData:function () {
                 basicPanel.data.banks = bankTable.data;
                 basicPanel.data.linkmen = contactTable.data;
@@ -1141,7 +1132,8 @@
                 $.ajax(basicPanel.paramPost).done(function (res) {
 
                     if (res.code===1) {
-                        alert('更新成功！');
+                        alert('新增成功！');
+                        window.open(basicPanel + '/supplier/factories/vm');
                     }
                 })
             }
