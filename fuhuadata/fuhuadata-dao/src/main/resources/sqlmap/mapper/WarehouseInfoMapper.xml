@@ -26,6 +26,8 @@
     <result column="is_inside_entrance" jdbcType="INTEGER" property="isInsideEntrance" />
     <result column="enabled_state" jdbcType="INTEGER" property="enabledState" />
     <result column="credit_code" jdbcType="VARCHAR" property="creditCode" />
+      <result column="supprop" jdbcType="INTEGER" property="supprop"/>
+      <result column="storage_area" jdbcType="DECIMAL" property="storageArea"/>
   </resultMap>
 
 

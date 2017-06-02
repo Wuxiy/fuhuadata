@@ -241,6 +241,17 @@ public class WarehouseInfo extends BaseEntity<Integer>{
     private String creditCode;
 
     /**
+     * 类型，0常规，1非常规，2自定
+     */
+    @Column(name = "supprop")
+    private Integer supprop;
+
+    /**
+     * 仓储面积
+     */
+    @Column(name="storage_area")
+    private BigDecimal storageArea;
+    /**
      * 获取crm主键
      *
      * @return id - crm主键
@@ -621,5 +632,21 @@ public class WarehouseInfo extends BaseEntity<Integer>{
      */
     public void setCreditCode(String creditCode) {
         this.creditCode = creditCode == null ? null : creditCode.trim();
+    }
+
+    public Integer getSupprop() {
+        return supprop;
+    }
+
+    public void setSupprop(Integer supprop) {
+        this.supprop = supprop;
+    }
+
+    public BigDecimal getStorageArea() {
+        return storageArea;
+    }
+
+    public void setStorageArea(BigDecimal storageArea) {
+        this.storageArea = storageArea;
     }
 }

@@ -9,11 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.springframework.web.bind.annotation.*;
 
 
 /**
@@ -72,6 +68,7 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
     public String intoForwardingInfo() {
         return "/supplier/forwardingBasic";
     }
+
     /**
      * 货代详情
      * @return
@@ -90,6 +87,26 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
         }
         return result.getResultPojo();
     }
+
+    /**
+     * 更新货代
+     * @return
+     */
+    @RequestMapping(value = "updateForwardingInfo", method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "supplier-forwarding",methods = "updateForwardingInfo")
+    @ResponseBody
+    public ResultPojo updateForwardingInfo(@RequestBody FreightForwarding freightForwarding){
+        Result<Integer> result = new Result<>();
+        try{
+            result.addDefaultModel("forwardingInfo",freightForwardingService.updateSelective(freightForwarding));
+        }catch(Exception e){
+            log.error("更新货代详情出错",e);
+            result.setMessage(e.getMessage());
+            result.setSuccess(false);
+        }
+        return result.getResultPojo();
+    }
+
 
     /**
      * 关联仓库列表
@@ -167,6 +184,10 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
         }
         return result.getResultPojo();
     }
+
+
+
+
 
 
 
