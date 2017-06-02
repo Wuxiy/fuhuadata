@@ -24,6 +24,7 @@
         <result column="manager_dep_name" jdbcType="VARCHAR" property="managerDepName"/>
         <result column="manager_code" jdbcType="VARCHAR" property="managerCode"/>
         <result column="manager" jdbcType="VARCHAR" property="manager"/>
+        <result column="supstate" jdbcType="INTEGER" property="supstate"/>
         <result column="score" jdbcType="DECIMAL" property="score"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="create_account" jdbcType="VARCHAR" property="createAccount"/>
