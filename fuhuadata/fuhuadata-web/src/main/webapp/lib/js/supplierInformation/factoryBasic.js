@@ -49,6 +49,9 @@ $(function () {
             this.container.html('');
         },
         render:function (list) {
+
+            if (!(list instanceof Array) || list.length===0) return '<tr><td colspan="6">暂无数据</td></tr>';
+
             var tpl = '';
             $.each(list, function(i, item){
                 tpl +=
@@ -217,17 +220,11 @@ $(function () {
             bankModal.editForm();
         },
         cancelHandler:function () {
-
-            if (confirm('确定取消保存吗？')) {
-
-                bankModal.modal.modal('hide');
-            }
+            bankModal.modal.modal('hide');
         },
         saveHandler:function () {
 
             if (!bankModal.verify.form()) return;
-
-            if (!confirm('确定要保存吗？')) return;
 
             var isAdd = (bankTable.item === null);
 
@@ -235,7 +232,7 @@ $(function () {
 
             bankTable.item.accnum = $('[name="accnum"]', bankModal.form).val();
             bankTable.item.accname = $('[name="accname"]', bankModal.form).val();
-            bankTable.item.pkCountry = $('[name="currtypeName"]', bankModal.form).val();
+            bankTable.item.pkCurrtype = $('[name="currtypeName"]', bankModal.form).val();
             bankTable.item.currtypeName = $('[name="currtypeName"]', bankModal.form).find('option').filter(':selected').text().trim();
             bankTable.item.pkBankdoc = $('[name="pkBankdoc"]', bankModal.form).val();
             bankTable.item.bankDocName = $('[name="pkBankdoc"]', bankModal.form).find('option').filter(':selected').text().trim();
@@ -278,14 +275,14 @@ $(function () {
         renderFirst:function (list) {
             var tpl = '';
             $.each(list, function (i, item) {
-                tpl += '<option value="' + item.pkBanktype + '" title="' + item.pkBanktype + '">' + item.name + '</option>';
+                tpl += '<option value="' + item.code + '" title="' + item.code + '">' + item.name + '</option>';
             });
             return tpl;
         },
         renderSecond:function (list) {
             var tpl = '';
             $.each(list, function (i, item) {
-                tpl += '<option value="' + item.pkBankdoc + '" title="' + item.pkBankdoc + '">' + item.name + '</option>';
+                tpl += '<option value="' + item.code + '" title="' + item.code + '">' + item.name + '</option>';
             });
             return tpl;
         },
@@ -298,7 +295,7 @@ $(function () {
         },
         firstChangeHandler:function () {
             bankLinkage.secondParam.data = {
-                pkBanktype:$('#bank_first').val()
+                bankTypeCode:$('#bank_first').val()
             };
             bankLinkage.resetSecond();
             $.ajax(bankLinkage.secondParam).done(function (res) {
@@ -485,17 +482,11 @@ $(function () {
             this.modal.off(eType).on(eType, el, handler);
         },
         cancelHandler:function () {
-
-            if (confirm('确定取消保存吗？')) {
-
-                contactModal.modal.modal('hide');
-            }
+            contactModal.modal.modal('hide');
         },
         saveHandler:function () {
 
             if (!contactModal.verify.form()) return;
-
-            if (!confirm('确定要保存吗？')) return;
 
             var isAdd = (contactTable.item === null); // 判断是新增还是编辑
 
@@ -761,6 +752,7 @@ $(function () {
                     basicPanel.render(basicPanel.data); // 重新渲染
                     bankTable.container.html(bankTable.render(bankTable.data)); // 刷新列表
                     contactTable.container.html(contactTable.render(contactTable.data)); // 刷新列表
+                    basicPanel.verify.form();
                     basicPanel.viewForm();
 
                 }else {
@@ -1160,7 +1152,7 @@ $(function () {
         render:function (list) {
             var tpl = '';
             $.each(list, function (i, item) {
-                tpl += '<option value="' + item.id + '" title="' + item.id + '">' + item.name + '</option>';
+                tpl += '<option value="' + item.code + '" title="' + item.code + '">' + item.name + '</option>';
             });
             return tpl;
         }
