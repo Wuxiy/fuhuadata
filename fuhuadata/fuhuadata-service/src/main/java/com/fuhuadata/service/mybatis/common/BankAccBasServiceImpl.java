@@ -52,7 +52,7 @@ public class BankAccBasServiceImpl extends BaseServiceImpl<BankAccBas, Integer>
             if (bank.getId() != null) {
                 updateSelective(bank);
             } else {
-                save(bank);
+                saveSelective(bank);
             }
         });
 
