@@ -1,7 +1,9 @@
 <div class="clearfix content shadow-out">
     <!--副导航-->
     <div class="nav-deputy shadow-out clearfix">
-        #factoryTab('基本信息',$!{factoryId})
+        #if($!{factoryId})
+            #factoryTab('基本信息',$!{factoryId})
+        #end
         #breadcrumb()
     </div>
     <!--表格容器-->
@@ -11,78 +13,70 @@
                 <!--基本信息-->
                 <div class="panel panel-default view-HD-lg" id="panel">
                     <div class="panel-heading">
-                        <button class="btn btn-xs btn-primary panel-heading-btn pull-right" id="edit" data-view="editHide" type="button" lang="zh">
+                        <button class="btn btn-xs btn-primary panel-heading-btn pull-right" name="edit" data-view="editHide" type="button" lang="zh">
                             编辑
                         </button>
                         <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden" data-view="editView">
-                            <button class="btn" id="cancel" type="button" lang="zh">取消</button>
-                            <button class="btn btn-primary" id="save" type="button" lang="zh">保存</button>
+                            <button class="btn btn-default" name="cancel" type="button" lang="zh">取消</button>
+                            <button class="btn btn-primary" name="save" type="button" lang="zh">保存</button>
                         </div>
                         <h3 class="panel-title" lang="zh">基本信息</h3>
                     </div>
                     <div class="panel-body clearfix">
-                        <form class="form-horizontal" name="factoryInfo">
-                            <div class="hidden">
-                                <input name="id" type="text">
-                            </div>
+                        <form class="form-horizontal" id="factory_info">
                             <div class="form-group">
                                 <label class="control-label col-xs-1" for="code" lang="zh">企业代码</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" name="code" data-control="off" type="text" disabled/>
+                                    <input class="form-control" name="code" type="text" disabled/>
                                 </div>
-                                <label class="control-label col-xs-1" for="pkOrg" lang="zh">所属组织<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <label class="control-label col-xs-1" for="orgName" lang="zh">所属组织<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <select class="form-control" name="pkOrg" data-control="off" disabled>
-
-                                    </select>
+                                    <div class="input-group" id="org_name">
+                                        <input class="form-control" name="orgName" data-control="editOn" type="text" disabled readonly>
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-xs btn-default" data-control="editOn" type="button" disabled>
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <label class="control-label col-xs-1" for="name" lang="zh">企业名称<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" name="name" data-control="off" type="text" disabled/>
+                                    <input class="form-control" name="name" data-bind="localData" data-control="editOn" type="text" disabled/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-1" for="abbr" lang="zh">企业简称</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" name="abbr" data-control="off" type="text" disabled/>
+                                    <input class="form-control" name="abbr" data-bind="localData" data-control="editOn" type="text" disabled/>
                                 </div>
-                                <label class="control-label col-xs-1" for="oldName" lang="zh">企业曾用名1</label>
+                                <label class="control-label col-xs-1" for="oldName" lang="zh">企业曾用名</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" name="oldName" data-control="off" type="text" disabled/>
+                                    <input class="form-control" name="oldName" data-bind="localData" data-control="editOn" type="text" disabled/>
                                 </div>
                                 <label class="control-label col-xs-1" for="registerfund" lang="zh">注册资金</label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        #*<div class="input-group-btn">
-                                            <button class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" data-control="off" type="button" disabled>
-                                                <span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                #foreach($!info in $!{currtype})
-                                                    <li><a data-val="$!info.name" href="#" lang="zh">$!info.name</a></li>
-                                                #end
-                                            </ul>
-                                        </div>*#
-                                        <input class="form-control" name="registerfund" data-control="off" type="text" disabled/>
-                                        <span class="input-group-addon" data-val="美元" lang="zh">万元</span>
+                                        <input class="form-control" name="registerfund" data-bind="localData" data-control="editOn" type="number" min="0" disabled/>
+                                        <span class="input-group-addon"  data-val="美元" lang="zh">万元</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-1" for="address" lang="zh">注册地址</label>
                                 <div class="col-xs-8">
-                                    <textarea class="form-control" name="address" data-control="off" rows="2" disabled></textarea>
+                                    <textarea class="form-control" name="address" data-bind="localData" data-control="editOn" rows="2" disabled></textarea>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" id="time">
                                 <label class="control-label col-xs-1" for="cooperateTime" lang="zh">开始合作时间</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" name="cooperateTime" data-control="off" type="date" disabled/>
+                                    <input class="form-control" name="cooperateTime" data-control="editOn" type="date" disabled/>
                                 </div>
-                                <label class="control-label col-xs-1" for="" lang="zh">合作时间</label>
+                                <label class="control-label col-xs-1" for="coopMonths" lang="zh">合作时间</label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input class="form-control" name="" type="text" disabled/>
+                                        <input class="form-control" name="coopMonths" type="text" disabled/>
                                         <span class="input-group-addon" lang="zh">月</span>
                                     </div>
                                 </div>
@@ -90,11 +84,11 @@
                             <div class="form-group">
                                 <label class="control-label col-xs-1" for="productionLicenses" lang="zh">生产许可证<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-3">
-                                    <div class="input-group">
-                                        <input class="form-control" name="productionLicenses" data-control="off" type="text" disabled/>
+                                    <div class="input-group" id="production_licenses">
+                                        <input class="form-control" name="productionLicenses" data-control="editOn" type="text" disabled readonly/>
                                         <div class="input-group-btn" lang="zh">
-                                            <button class="btn btn-xs btn-primary hidden" data-view="editView" type="button" lang="zh">修改</button>
-                                            <button class="btn btn-xs btn-primary" type="button" lang="zh">查看</button>
+                                            <button class="btn btn-xs btn-primary hidden" name="edit" data-view="editView" type="button" lang="zh">编辑</button>
+                                            <button class="btn btn-xs btn-primary" name="show" type="button" lang="zh">查看</button>
                                         </div>
                                     </div>
                                 </div>
@@ -102,11 +96,11 @@
                             <div class="form-group">
                                 <label class="control-label col-xs-1" for="pesticideRegistration" lang="zh">农药登记证<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-3">
-                                    <div class="input-group">
-                                        <input class="form-control" name="pesticideRegistration" data-control="off" type="text" disabled/>
+                                    <div class="input-group" id="pesticide_registration">
+                                        <input class="form-control" name="pesticideRegistration" data-control="editOn" type="text" disabled readonly/>
                                         <div class="input-group-btn" lang="zh">
-                                            <button class="btn btn-xs btn-primary hidden" data-view="editView" type="button" lang="zh">修改</button>
-                                            <button class="btn btn-xs btn-primary" type="button" lang="zh">查看</button>
+                                            <button class="btn btn-xs btn-primary hidden" name="edit" data-view="editView" type="button" lang="zh">编辑</button>
+                                            <button class="btn btn-xs btn-primary" name="show" type="button" lang="zh">查看</button>
                                         </div>
                                     </div>
                                 </div>
@@ -114,11 +108,11 @@
                             <div class="form-group">
                                 <label class="control-label col-xs-1" for="dischargePermit" lang="zh">排污许可证<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-3">
-                                    <div class="input-group">
-                                        <input class="form-control" name="dischargePermit" data-control="off" type="text" disabled/>
+                                    <div class="input-group" id="discharge_permit">
+                                        <input class="form-control" name="dischargePermit" data-control="editOn" type="text" disabled readonly/>
                                         <div class="input-group-btn" lang="zh">
-                                            <button class="btn btn-xs btn-primary hidden" data-view="editView" type="button" lang="zh">修改</button>
-                                            <button class="btn btn-xs btn-primary" type="button" lang="zh">查看</button>
+                                            <button class="btn btn-xs btn-primary hidden" name="edit" data-view="editView" type="button" lang="zh">编辑</button>
+                                            <button class="btn btn-xs btn-primary" name="show" type="button" lang="zh">查看</button>
                                         </div>
                                     </div>
                                 </div>
@@ -126,53 +120,71 @@
                             <div class="form-group">
                                 <label class="control-label col-xs-1" for="remark" lang="zh">备注</label>
                                 <div class="col-xs-8">
-                                    <textarea class="form-control" name="remark" data-control="off" rows="4" disabled></textarea>
+                                    <textarea class="form-control" name="remark" data-bind="localData" data-control="editOn" rows="4" disabled></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-xs-1" for="">状态<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <label class="control-label col-xs-1" for="supstate">状态<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <select class="form-control" name="" data-control="off" disabled>
-                                        <option value="1">启用</option>
-                                        <option value="0">禁用</option>
+                                    <select class="form-control" name="supstate" data-bind="localData" data-control="editOn" disabled>
+                                        <option value="1">核准</option>
+                                        <option value="0">潜在</option>
                                     </select>
                                 </div>
                                 <label class="control-label col-xs-1" for="score" lang="zh">综合评分</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" name="score" data-control="off" type="text" disabled/>
+                                    <input class="form-control" name="score" data-bind="localData" data-control="editOn" type="number" min="0" disabled/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-xs-1" for="managerOrg" lang="zh">管理员组织<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <label class="control-label col-xs-1" for="managerOrgName" lang="zh">管理员组织<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <select class="form-control" name="managerOrg" data-control="off" disabled>
-
-                                    </select>
+                                    <div class="input-group" id="manager_org">
+                                        <input class="form-control" name="managerOrgName" data-control="editOn" type="text" disabled readonly>
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-xs btn-default" data-control="editOn" type="button" disabled>
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <label class="control-label col-xs-1" for="managerDep" lang="zh">管理员部门<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <label class="control-label col-xs-1" for="managerDepName" lang="zh">管理员部门<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <select class="form-control" name="managerDep" data-control="off" disabled>
-
-                                    </select>
+                                    <div class="input-group" id="manager_dep">
+                                        <input class="form-control" name="managerDepName" data-control="editOn" type="text" placeholder="请先选择组织" disabled readonly>
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-xs btn-default" data-control="editOn" type="button" disabled>
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <label class="control-label col-xs-1" for="manager" lang="zh">工厂管理员<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <select class="form-control" name="manager" data-control="off" disabled>
-
-                                    </select>
+                                    <div class="input-group" id="manager">
+                                        <input class="form-control" name="manager" data-control="editOn" type="text" placeholder="请先选择部门" disabled readonly>
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-xs btn-default dropdown" data-control="editOn" data-toggle="dropdown" type="button" disabled>
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                            <div class="dropdown-menu pull-right" style="width: 196px;padding: 3px 0;">
+                                                <ul name="selectContainer" style="list-style: none;margin-bottom: 0;padding: 0;width: 100%;max-height: 200px;overflow-y: auto;"></ul>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-1" for="banks" lang="zh">银行账户</label>
                                 <div class="col-xs-8">
-                                    <table class="table text-center table-condensed table-bordered" id="bank_table">
-                                        <caption class=" text-right"  data-view="editView">
-                                            <button class="btn-link" name="addBtn" data-view="editView" type="button">新增</button>
-                                            <button class="btn-link" name="delBtn" data-view="editView" type="button">删除</button>
+                                    <table class="table text-center table-condensed table-bordered table-hover" id="bank_table">
+                                        <caption class="hidden text-right" data-view="editView">
+                                            <button class="btn-link" name="addBtn" data-control="editOn" type="button" disabled>新增</button>
+                                            <button class="btn-link" name="delBtn" data-control="editOn" type="button" disabled>删除</button>
                                         </caption>
                                         <thead>
                                         <tr>
-                                            <th class="text-center col-xs-1" lang="zh">
+                                            <th class="hidden text-center col-xs-1" data-view="editView">
                                                 <div class="checkbox">
                                                     <label for="checkedAll">
                                                         <input name="checkedAll" type="checkbox">
@@ -193,14 +205,14 @@
                             <div class="form-group">
                                 <label class="control-label col-xs-1" for="contacts" lang="zh">联系人</label>
                                 <div class="col-xs-8">
-                                    <table class="table text-center table-condensed table-bordered table-striped" id="contact_table">
-                                        <caption class="hidden text-right"  data-view="editView">
-                                            <button class="btn-link" data-control="off" type="button">新增</button>
-                                            <button class="btn-link" data-control="off" type="button">删除</button>
+                                    <table class="table text-center table-condensed table-bordered table-hover" id="contact_table">
+                                        <caption class="hidden text-right" data-view="editView">
+                                            <button class="btn-link" name="addBtn" data-control="editOn" type="button" disabled>新增</button>
+                                            <button class="btn-link" name="delBtn" data-control="editOn" type="button" disabled>删除</button>
                                         </caption>
                                         <thead>
                                         <tr>
-                                            <th class="text-center" lang="zh">
+                                            <th class="hidden text-center col-xs-1" data-view="editView">
                                                 <div class="checkbox">
                                                     <label for="checkedAll">
                                                         <input name="checkedAll" type="checkbox">
@@ -221,7 +233,7 @@
                                 <div class="col-xs-2">
                                     <input class="form-control" name="modifyName" type="text" disabled/>
                                 </div>
-                                <label class="control-label col-xs-1" for="modifyTime" lang="zh">编辑时间</label>
+                                <label class="control-label col-xs-1" for="modifyTime" lang="zh">最后编辑时间</label>
                                 <div class="col-xs-2">
                                     <input class="form-control" name="modifyTime" type="text" disabled/>
                                 </div>
@@ -233,21 +245,6 @@
         </div>
     </div>
 </div>
-
-## 确认提交modal
-<div class="modal fade" id="upModal" data-backdrop="false" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" style="width: 370px;margin-top: 168px">
-        <div class="modal-content">
-            <div class="modal-body clearfix">
-                <h4 class="text-info text-center">请确认是否提交表单？</h4>
-                <hr>
-                <div class="col-xs-5 col-xs-offset-1"><button class="btn btn-block btn-primary" id="upForm" data-dismiss="modal" type="button">确定</button></div>
-                <div class="col-xs-5"><button class="btn btn-default btn-block" data-dismiss="modal" type="button">取消</button></div>
-            </div>
-        </div>
-    </div>
-</div>
-
 ## 银行详情modal
 <div class="modal fade" id="bank_modal" data-backdrop="true" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
@@ -272,22 +269,18 @@
                     <div class="form-group">
                         <label class="control-label col-xs-2" for="currtypeName">币种<sup data-view="editView" class="not-null hidden">*</sup></label>
                         <div class="col-xs-4">
-                            <select class="form-control" name="currtypeName" data-control="editOn" id="">
-                                <option value="">——选择币种——</option>
-                            </select>
+                            <select class="form-control" name="currtypeName" data-control="editOn" id="currtype_name"></select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-xs-2" for="pkBanktype">银行类别<sup data-view="editView" class="not-null hidden">*</sup></label>
                         <div class="col-xs-4">
-                            <select class="form-control" name="pkBanktype" data-control="editOn" id="bank_first">
-                                <option value="" title="请先选择开户银行">——请先选择开户银行——</option>
-                            </select>
+                            <select class="form-control" name="pkBanktype" data-control="editOn" id="bank_first"></select>
                         </div>
                         <label class="control-label col-xs-2" for="pkBankdoc">开户银行<sup data-view="editView" class="not-null hidden">*</sup></label>
                         <div class="col-xs-4">
                             <select class="form-control" name="pkBankdoc" data-control="editOn" id="bank_second">
-                                <option value="" title="选择开户银行">——选择开户银行——</option>
+                                <option value="" title="请先选择银行类别">——请先选择银行类别——</option>
                             </select>
                         </div>
                     </div>
@@ -295,12 +288,18 @@
             </div>
             <div class="modal-footer">
                 <div class="row">
-                    <div class="col-xs-4 pull-right hidden" data-view="editView">
+                    <div class="hidden col-xs-4 col-xs-offset-2" data-view="editView">
+                        <button class="btn btn-xs btn-block btn-default" name="cancel" type="button" lang="zh">取消</button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button class="btn btn-xs btn-block btn-primary" name="save" type="button" lang="zh">保存</button>
+                    </div>
+                    #*<div class="col-xs-4 pull-right hidden" data-view="editView">
                         <div class="btn-group btn-block">
                             <button class="btn btn-xs btn-default col-xs-6" name="cancel" type="button" lang="zh">取消</button>
                             <button class="btn btn-xs btn-primary col-xs-6" name="save" type="button" lang="zh">保存</button>
                         </div>
-                    </div>
+                    </div>*#
                     <div class="col-xs-2 pull-right" data-view="editHide">
                         <button class="btn btn-xs btn-block btn-primary" name="edit" type="button" lang="zh">编辑</button>
                     </div>
@@ -309,486 +308,112 @@
         </div>
     </div>
 </div>
-
+## 联系人modal
+<div class="modal fade" id="contact_modal" data-backdrop="true" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body clearfix">
+                <form class="form-horizontal well" id="contact_form" style="margin-bottom: 0;">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4" for="name">姓名<sup class="not-null">*</sup></label>
+                        <div class="col-xs-8">
+                            <input class="form-control" name="name" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-4" for="phone">联系电话</label>
+                        <div class="col-xs-8">
+                            <input class="form-control" name="phone" type="tel">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-4" for="email">邮箱</label>
+                        <div class="col-xs-8">
+                            <input class="form-control" name="email" type="email">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-4 col-xs-offset-2">
+                        <button class="btn btn-xs btn-block btn-default" name="cancel" type="button" lang="zh">取消</button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button class="btn btn-xs btn-block btn-primary" name="save" type="button" lang="zh">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+## 图片上传modal
+<div class="modal fade" id="set_img" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body clearfix">
+                <form class="form-horizontal well" name="imgForm" enctype="multipart/form-data" style="margin-bottom: 0;">
+                    <input name="file" type="file">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-4 col-xs-offset-2">
+                        <button class="btn btn-xs btn-block btn-default" data-dismiss="modal" type="button" lang="zh">取消</button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button class="btn btn-xs btn-block btn-primary" name="save" type="button" lang="zh">上传</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+## 图片展示modal
+<div class="modal fade" id="show_img" tabindex="-1" aria-hidden="true" >
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body clearfix">
+                <div class="thumbnail">
+                    <img name="showImg" src="" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+## 树形菜单modal
+<div class="modal fade in" id="tree_modal" tabindex="-1" role="dialog" data-backdrop="false" aria-hidden="true" >
+    <div class="modal-dialog" style="width: 400px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body">
+                <hr>
+                <div class="zTreeDemoBackground left well" style="height: 300px;overflow-y: scroll;overflow-x: auto">
+                    <ul id="org_tree" class="ztree"></ul>
+                    <ul id="dep_tree" class="ztree"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <input id="factoryId" type="hidden" value="$!{factoryId}">
-<script>
-    $(function () {
-        // 银行账户table组件
-        var backTable = {
-            id:$('#factoryId').val(),
-            table:$('#bank_table'),
-            addBtn:'[name="addBtn"]',
-            delBtn:'[name="delBtn"]',
-            dtlBtn:'[name="dtlBtn"]',
-            chkAllBtn:$('[name="checkedAll"]', $('#bank_table')),
-            container:$('[name="banks"]', $('#bank_table')),
-            delIds:[],
-            param:{
-                url:basePath+'/supplier/factories/2/banks',
-                type:'GET'
-            },
-            data:null,
-            item:{},
-            theRow:null,
-            init:function () {
-                this.refresh();
-                this.addEvent('click.checkedAll', '[name="checkedAll"]', this.checkedAllHandler);
-                this.addEvent('click.delItem', '[name="delBtn"]', this.deleteHandler);
-                this.addEvent('click.dtlBtn', '[name="dtlBtn"]', this.showModalHandler);
-                this.addEvent('click.addBtn', '[name="addBtn"]', this.addHandler);
-            },
-            refresh:function () {
-                backTable.empty();
-                var container = this.container;
-                $.ajax(this.param).done(function (res) {
-
-                    if (res.code===1) {
-
-                        backTable.data = res.data;
-                        container.html(backTable.render(backTable.data));
-                    }else {
-                        container.html('<tr><td colspan="6">暂无数据</td></tr>');
-                    }
-                });
-            },
-            empty:function () {
-                this.container.html('');
-            },
-            render:function (list) {
-                var tpl = '';
-                $.each(list, function(i, item){
-                    tpl +=
-                            '<tr>' +
-                            '<td><div class="checkbox"><label for="checkedOne">' +
-                            '<input name="checkedOne" type="checkbox" value="'+backTable.hasField(item.id)+'">' +
-                            '</label></div></td>'+
-                            '<td><a href="#" name="dtlBtn" title="'+backTable.hasField(item.accnum)+'">'+backTable.hasField(item.accnum)+'</a></td>'+
-                            '<td title="'+backTable.hasField(item.accname)+'">'+backTable.hasField(item.accname)+'</td>'+
-                            '<td title="'+backTable.hasField(item.pkBankdoc)+'">'+backTable.hasField(item.bankDocName)+'</td>'+
-                            '<td title="'+backTable.hasField(item.pkBanktype)+'">'+backTable.hasField(item.bankTypeName)+'</td>'+
-                            '<td title="'+backTable.hasField(item.pkCurrtype)+'">'+backTable.hasField(item.currtypeName)+'</td>'+
-                            '</tr>';
-                });
-                return tpl;
-            },
-            hasField:function (field) {
-
-                if (field===null||field===undefined){
-                    return '';
-                }else {
-                    return field;
-                }
-            },
-            addEvent:function (eType, el, handler) {
-                this.table.off(eType).on(eType, el, handler);
-            },
-            checkedAllHandler:function () { // 全选
-
-                if (backTable.chkAllBtn.prop('checked')) {
-
-                    backTable.container.find('input').prop('checked', true);
-                }else {
-                    backTable.container.find('input').prop('checked', false);
-                }
-            },
-            deleteHandler:function () { // 删除
-                var el = backTable.container.find('input').filter(':checked');
-
-                if (el.length>0) {
-
-                    if (!confirm('确定要删除这些项吗？')) return;
-
-                    el.each(function () {
-                        if ($(this).val()==='') return true;
-                        backTable.delIds.push($(this).val());
-                    }).closest('tr').remove();
-                }else {
-                    alert('请选择要删除的项！');
-                }
-
-            },
-            showModalHandler:function (e) {
-                e.preventDefault();
-                var id = parseInt($(this).closest('tr').find('input').val());
-                backTable.theRow = $(this).closest('tr');
-
-                if (id !== NaN) {// 有id的时候编辑
-
-                    backTable.item = backTable.searchItem(id);
-                }else {// 无id的时候编辑
-
-                    backTable.item.accnum = backTable.theRow.find('a').attr('title');
-                    backTable.item.accname = backTable.theRow.find('td').eq(2).attr('title');
-                    backTable.item.currtypeName = backTable.theRow.find('td').eq(-1).attr('title');
-                    backTable.item.pkBankdoc = backTable.theRow.find('td').eq(-3).attr('title');
-                    backTable.item.pkBanktype = backTable.theRow.find('td').eq(-2).attr('title');
-                }
-                backModal.modal.modal('show');
-                backModal.init(backTable.item);
-            },
-            addHandler:function () {
-                backTable.theRow = null;
-                backModal.init();
-                backModal.modal.modal('show');
-            },
-            searchItem:function (id) {
-
-                if (backTable.data===null) return;
-
-                var item = null;
-                $.each(backTable.data, function (i, obj) {
-
-                    if (obj.id===id) {
-
-                        item = obj;
-                        return false;
-                    }else {
-                        return true;
-                    }
-                });
-                return item;
-            }
-        };
-        backTable.init();
-
-        // 银行账户modal组件
-        var backModal = {
-            modal:$('#bank_modal'),
-            form:$('#back_form'),
-            editBtn:'[name="edit"]',
-            saveBtn:'[name="save"]',
-            cancelBtn:'[name="cancel"]',
-            editView:'[data-view="editView"]',
-            editHide:'[data-view="editHide"]',
-            editOn:'[data-control="editOn"]',
-            editOff:'[data-control="editOff"]',
-            init:function (item) {
-                backModal.empty();
-
-                if (item!==undefined && item!==null) {
-
-                    backModal.viewForm();
-                    backModal.render(item);
-                    this.addEvent('click.edit', '[name="edit"]', this.editHandler);
-                }else {
-                    backModal.editForm();
-                }
-                this.addEvent('click.cancel', '[name="cancel"]', this.cancelHandler);
-                this.addEvent('click.save', '[name="save"]', this.saveHandler);
-            },
-            render:function (data) {
-                $('[name="accnum"]', backModal.form).val(data.accnum).attr('title', data.accnum);
-                $('[name="accname"]', backModal.form).val(data.accname).attr('title', data.accname);
-                $('[name="currtypeName"]', backModal.form).val(data.currtypeName).attr('title', data.currtypeName);
-                $('[name="pkBankdoc"]', backModal.form).val(data.pkBankdoc).attr('title', data.pkBankdoc);
-                $('[name="pkBanktype"]', backModal.form).val(data.pkBanktype).attr('title', data.pkBanktype);
-            },
-            empty:function () {
-                backModal.form[0].reset();
-            },
-            editForm:function () {
-                $(backModal.editOn, backModal.form).attr('disabled', false);
-                $(backModal.editOff, backModal.form).attr('disabled', true);
-                $(backModal.editView, backModal.modal).removeClass('hidden');
-                $(backModal.editHide, backModal.modal).addClass('hidden');
-            },
-            viewForm:function () {
-                $(backModal.editOn, backModal.form).attr('disabled', true);
-                $(backModal.editOff, backModal.form).attr('disabled', false);
-                $(backModal.editView, backModal.modal).addClass('hidden');
-                $(backModal.editHide, backModal.modal).removeClass('hidden');
-            },
-            addEvent:function (eType, el, handler) {
-                this.modal.off(eType).on(eType, el, handler);
-            },
-            editHandler:function () {
-                backModal.editForm();
-            },
-            cancelHandler:function () {
-
-                if (confirm('确定取消保存吗？')) {
-
-                    backModal.modal.modal('hide');
-                }
-            },
-            saveHandler:function () {
-
-                if (!confirm('确定要保存吗？')) return;
-
-                var list = [];
-                backTable.item.accnum = $('[name="accnum"]', backModal.form).val();
-                backTable.item.accname = $('[name="accname"]', backModal.form).val();
-                backTable.item.currtypeName = $('[name="currtypeName"]', backModal.form).val();
-                backTable.item.pkBankdoc = $('[name="pkBankdoc"]', backModal.form).val();
-                backTable.item.pkBanktype = $('[name="pkBanktype"]', backModal.form).val();
-                list.push(backTable.item);
-
-                if (backTable.theRow === null) {
-
-                    backTable.table.append(backTable.render(list));
-                }else {
-                    backTable.theRow.replaceWith(backTable.render(list));
-                }
-                backModal.modal.modal('hide');
-            }
-        };
-
-
-        // 银行联动选择框
-        var bankLinkage = {
-            firstSelect:$('#bank_first'),
-            secondSelect:$('#bank_second'),
-            firstParam:{
-                url:basePath+'/bank/type',
-                type:'GET'
-            },
-            init:function () {
-              $.ajax(bankLinkage.firstParam).done(function (res) {
-
-                  if (res.code === 1) {
-
-                      bankLinkage.firstSelect.html(bankLinkage.renderFirst(res.data));
-                  }
-              })
-            },
-            renderFirst:function (list) {
-                var tpl = '';
-                $.each(list, function (i, item) {
-                    tpl = '<option value="' + item.pkBanktype + '" title="' + item.name + '">' + item.name + '</option>';
-                });
-                return tpl;
-            },
-            renderSecond:function (list) {
-                var tpl = '';
-                $.each(list, function (i, item) {
-                    tpl = '<option value="' + item.pkBankdoc + '" title="' + item.name + '">' + item.name + '</option>';
-                });
-                return tpl;
-            },
-
-        }
-
-        // 联系人table组件
-        /*var contactTable = {
-            id:$('#factoryId').val(),
-            table:$('#contact_table'),
-            addBtn:'[name="addBtn"]',
-            delBtn:'[name="delBtn"]',
-            dtlBtn:'[name="dtlBtn"]',
-            chkAllBtn:$('[name="checkedAll"]', $('#contact_table')),
-            container:$('[name="contacts"]', $('#contact_table')),
-            delIds:[],
-            param:{
-                url:basePath+'/supplier/factories/2/banks',
-                type:'GET'
-            },
-            data:null,
-            item:{},
-            theRow:null,
-            init:function () {
-                this.refresh();
-                this.addEvent('click.checkedAll', '[name="checkedAll"]', this.checkedAllHandler);
-                this.addEvent('click.delItem', '[name="delBtn"]', this.deleteHandler);
-                this.addEvent('click.dtlBtn', '[name="dtlBtn"]', this.showModalHandler);
-                this.addEvent('click.addBtn', '[name="addBtn"]', this.addHandler);
-            },
-            refresh:function () {
-                backTable.empty();
-                var container = this.container;
-                $.ajax(this.param).done(function (res) {
-
-                    if (res.code===1) {
-
-                        backTable.data = res.data;
-                        container.html(backTable.render(backTable.data));
-                    }else {
-                        container.html('<tr><td colspan="6">暂无数据</td></tr>');
-                    }
-                });
-            },
-            empty:function () {
-                this.container.html('');
-            },
-            render:function (list) {
-                var tpl = '';
-                $.each(list, function(i, item){
-                    tpl +=
-                            '<tr>' +
-                            '<td><div class="checkbox"><label for="checkedOne">' +
-                            '<input name="checkedOne" type="checkbox" value="'+backTable.hasField(item.id)+'">' +
-                            '</label></div></td>'+
-                            '<td><a href="#" name="dtlBtn" title="'+backTable.hasField(item.accnum)+'">'+backTable.hasField(item.accnum)+'</a></td>'+
-                            '<td title="'+backTable.hasField(item.accname)+'">'+backTable.hasField(item.accname)+'</td>'+
-                            '<td title="'+backTable.hasField(item.pkBankdoc)+'">'+backTable.hasField(item.pkBankdoc)+'</td>'+
-                            '<td title="'+backTable.hasField(item.pkBanktype)+'">'+backTable.hasField(item.pkBanktype)+'</td>'+
-                            '<td title="'+backTable.hasField(item.currtypeName)+'">'+backTable.hasField(item.currtypeName)+'</td>'+
-                            '</tr>';
-                });
-                return tpl;
-            },
-            hasField:function (field) {
-
-                if (field===null||field===undefined){
-                    return '';
-                }else {
-                    return field;
-                }
-            },
-            addEvent:function (eType, el, handler) {
-                this.table.off(eType).on(eType, el, handler);
-            },
-            checkedAllHandler:function () { // 全选
-
-                if (backTable.chkAllBtn.prop('checked')) {
-
-                    backTable.container.find('input').prop('checked', true);
-                }else {
-                    backTable.container.find('input').prop('checked', false);
-                }
-            },
-            deleteHandler:function () { // 删除
-                var el = backTable.container.find('input').filter(':checked');
-
-                if (el.length>0) {
-
-                    if (!confirm('确定要删除这些项吗？')) return;
-
-                    el.each(function () {
-                        if ($(this).val()==='') return true;
-                        backTable.delIds.push($(this).val());
-                    }).closest('tr').remove();
-                }else {
-                    alert('请选择要删除的项！');
-                }
-
-            },
-            showModalHandler:function (e) {
-                e.preventDefault();
-                var id = parseInt($(this).closest('tr').find('input').val());
-                backTable.theRow = $(this).closest('tr');
-
-                if (id !== NaN) {// 有id的时候编辑
-
-                    backTable.item = backTable.searchItem(id);
-                }else {// 无id的时候编辑
-
-                    backTable.item.accnum = backTable.theRow.find('a').attr('title');
-                    backTable.item.accname = backTable.theRow.find('td').eq(2).attr('title');
-                    backTable.item.currtypeName = backTable.theRow.find('td').eq(-1).attr('title');
-                    backTable.item.pkBankdoc = backTable.theRow.find('td').eq(-3).attr('title');
-                    backTable.item.pkBanktype = backTable.theRow.find('td').eq(-2).attr('title');
-                }
-                backModal.modal.modal('show');
-                backModal.init(backTable.item);
-            },
-            addHandler:function () {
-                backTable.theRow = null;
-                backModal.init();
-                backModal.modal.modal('show');
-            },
-            searchItem:function (id) {
-
-                if (backTable.data===null) return;
-
-                var item = null;
-                $.each(backTable.data, function (i, obj) {
-
-                    if (obj.id===id) {
-
-                        item = obj;
-                        return false;
-                    }else {
-                        return true;
-                    }
-                });
-                return item;
-            }
-        };
-        contactTable.init();
-
-        // 联系人modal组件
-        var contactModal = {
-            modal:$('#bank_modal'),
-            form:$('#back_form'),
-            editBtn:'[name="edit"]',
-            saveBtn:'[name="save"]',
-            cancelBtn:'[name="cancel"]',
-            editView:'[data-view="editView"]',
-            editHide:'[data-view="editHide"]',
-            editOn:'[data-control="editOn"]',
-            editOff:'[data-control="editOff"]',
-            init:function (item) {
-                backModal.empty();
-
-                if (item!==undefined && item!==null) {
-
-                    backModal.viewForm();
-                    backModal.render(item);
-                    this.addEvent('click.edit', '[name="edit"]', this.editHandler);
-                }else {
-                    backModal.editForm();
-                }
-                this.addEvent('click.cancel', '[name="cancel"]', this.cancelHandler);
-                this.addEvent('click.save', '[name="save"]', this.saveHandler);
-            },
-            render:function (data) {
-                $('[name="accnum"]', backModal.form).val(data.accnum).attr('title', data.accnum);
-                $('[name="accname"]', backModal.form).val(data.accname).attr('title', data.accname);
-                $('[name="currtypeName"]', backModal.form).val(data.currtypeName).attr('title', data.currtypeName);
-                $('[name="pkBankdoc"]', backModal.form).val(data.pkBankdoc).attr('title', data.pkBankdoc);
-                $('[name="pkBanktype"]', backModal.form).val(data.pkBanktype).attr('title', data.pkBanktype);
-            },
-            empty:function () {
-                backModal.form[0].reset();
-            },
-            editForm:function () {
-                $(backModal.editOn, backModal.form).attr('disabled', false);
-                $(backModal.editOff, backModal.form).attr('disabled', true);
-                $(backModal.editView, backModal.modal).removeClass('hidden');
-                $(backModal.editHide, backModal.modal).addClass('hidden');
-            },
-            viewForm:function () {
-                $(backModal.editOn, backModal.form).attr('disabled', true);
-                $(backModal.editOff, backModal.form).attr('disabled', false);
-                $(backModal.editView, backModal.modal).addClass('hidden');
-                $(backModal.editHide, backModal.modal).removeClass('hidden');
-            },
-            addEvent:function (eType, el, handler) {
-                this.modal.off(eType).on(eType, el, handler);
-            },
-            editHandler:function () {
-                backModal.editForm();
-            },
-            cancelHandler:function () {
-
-                if (confirm('确定取消保存吗？')) {
-
-                    backModal.modal.modal('hide');
-                }
-            },
-            saveHandler:function () {
-
-                if (!confirm('确定要保存吗？')) return;
-
-                var list = [];
-                backTable.item.accnum = $('[name="accnum"]', backModal.form).val();
-                backTable.item.accname = $('[name="accname"]', backModal.form).val();
-                backTable.item.currtypeName = $('[name="currtypeName"]', backModal.form).val();
-                backTable.item.pkBankdoc = $('[name="pkBankdoc"]', backModal.form).val();
-                backTable.item.pkBanktype = $('[name="pkBanktype"]', backModal.form).val();
-                list.push(backTable.item);
-
-                if (backTable.theRow === null) {
-
-                    backTable.table.append(backTable.render(list));
-                }else {
-                    backTable.theRow.replaceWith(backTable.render(list));
-                }
-                backModal.modal.modal('hide');
-            }
-        };*/
-
-
-    });
-
-</script>
+<script src="${request.contextPath}/lib/js/supplierInformation/factoryBasic.js"></script>

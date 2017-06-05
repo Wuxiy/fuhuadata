@@ -137,6 +137,11 @@ public class ProduceFactory extends BaseEntity<Integer> {
     private String manager;
 
     /**
+     * 供应商状态, 0=潜在，1=核准
+     */
+    private Integer supstate;
+
+    /**
      * 综合评分
      */
     private BigDecimal score;
@@ -745,5 +750,13 @@ public class ProduceFactory extends BaseEntity<Integer> {
 
     public void setCoopMonths(Integer coopMonths) {
         this.coopMonths = coopMonths;
+    }
+
+    public Integer getSupstate() {
+        return supstate;
+    }
+
+    public void setSupstate(Integer supstate) {
+        this.supstate = supstate;
     }
 }
