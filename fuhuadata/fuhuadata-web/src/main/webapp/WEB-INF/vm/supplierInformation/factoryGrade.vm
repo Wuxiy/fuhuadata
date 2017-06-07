@@ -20,7 +20,9 @@
                             <th class="text-center" lang="zh">备注</th>
                         </tr>
                         </thead>
-                        <tbody id="grade_list"></tbody>
+                        <tbody id="grade_list">
+
+                        </tbody>
                     </table>
                     <div id="pagination" class="pagination"></div>
                 </div>
