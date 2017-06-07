@@ -195,6 +195,26 @@
     </ul>
 #end
 
+## 货代tab页
+#macro(freightTab $selected $id)
+    #set($tabs = [
+    {'name':'基本信息','path':'','postfix':'/vm'},
+    {'name':'仓库信息','path':'','postfix':'/products/vm'},
+    {'name':'竞标记录','path':'','postfix':'/order/vm'},
+    {'name':'订单记录','path':'','postfix':'/complaint/vm'},
+    {'name':'投诉记录','path':'','postfix':'/delivery/delay/vm'}
+    ])
+<ul id="saleNav" class="nav nav-tabs pull-left">
+    #foreach($item in $tabs)
+        <li
+            #if($selected==$item.name)
+                    class="active"
+            #end
+        ><a href="$!{request.contextPath}$!{item.path}$!{id}$!{item.postfix}" lang="zh">$!{item.name}</a></li>
+    #end
+</ul>
+#end
+
 #*
 #macro(breadcrumb)
 <ul id="location" class="breadcrumb pull-right">

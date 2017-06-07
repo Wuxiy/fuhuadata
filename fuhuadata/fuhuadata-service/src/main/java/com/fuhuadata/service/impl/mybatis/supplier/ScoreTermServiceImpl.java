@@ -1,3 +1,4 @@
+/*
 package com.fuhuadata.service.impl.mybatis.supplier;
 
 import com.fuhuadata.dao.mapper.supplier.ScoreTermMapper;
@@ -7,9 +8,11 @@ import com.fuhuadata.service.mybatis.supplier.ScoreTermService;
 
 import java.util.List;
 
+*/
 /**
  * Created by wuxiy on 2017/6/2.
- */
+ *//*
+
 public class ScoreTermServiceImpl extends BaseServiceImpl<ScoreTerm,Integer> implements ScoreTermService{
 
     private ScoreTermMapper getScoreTermMapper(){
@@ -21,3 +24,4 @@ public class ScoreTermServiceImpl extends BaseServiceImpl<ScoreTerm,Integer> imp
         return getScoreTermMapper().evaluationIndexItem(type);
     }
 }
+*/
