@@ -93,7 +93,7 @@
             }
         });
         $(function () {
-            
+
             // 判断会话是否过期，会话过期则跳转登录页面
             $(document).ajaxSuccess(function (e, jqXhr, ajaxOpts, data) {
                 if (jqXhr.responseText) {

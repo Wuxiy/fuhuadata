@@ -174,3 +174,30 @@
         ><a href="${request.contextPath}/businessOrder/intoBusinessOrder/" lang="zh">订单</a></li>
     </ul>
 #end
+
+## 加工厂tab页
+#macro(factoryTab $selected $id)
+    #set($tabs = [
+    {'name':'基本信息','path':'/supplier/factories/','postfix':'/vm'},
+    {'name':'产品信息','path':'/supplier/factories/','postfix':'/products/vm'},
+    {'name':'订单记录','path':'/supplier/factory/order/','postfix':'/order/vm'},
+    {'name':'投诉记录','path':'/supplier/factory/complaint/','postfix':'/complaint/vm'},
+    {'name':'延期交货记录','path':'/supplier/factory/delivery/delay/','postfix':'/delivery/delay/vm'}
+    ])
+    <ul id="saleNav" class="nav nav-tabs pull-left">
+    #foreach($item in $tabs)
+        <li
+        #if($selected==$item.name)
+            class="active"
+        #end
+        ><a href="$!{request.contextPath}$!{item.path}$!{id}$!{item.postfix}" lang="zh">$!{item.name}</a></li>
+    #end
+    </ul>
+#end
+
+#*
+#macro(breadcrumb)
+<ul id="location" class="breadcrumb pull-right">
+    <li><span class="glyphicon glyphicon-map-marker"></span></li>
+</ul>
+#end*#
