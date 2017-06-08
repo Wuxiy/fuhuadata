@@ -3,6 +3,7 @@ package com.fuhuadata.web.springmvc.mybatis;
 import com.fuhuadata.domain.mybatis.supplier.*;
 import com.fuhuadata.domain.query.*;
 import com.fuhuadata.service.mybatis.supplier.*;
+import com.fuhuadata.vo.Supplier.ScoreTermsVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.logging.Log;
@@ -10,6 +11,8 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 /**
@@ -35,6 +38,9 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
 
     @Autowired
     private ForwardingComplaintsRecordService forwardingComplaintsRecordService;
+
+    @Autowired
+    private ScoreTermService scoreTermService;
 
 
     @RequestMapping(value = "init", method = RequestMethod.GET)
@@ -179,6 +185,24 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
             result.addDefaultModel(list);
         }catch(Exception e){
             log.error("获取投诉记录列表出错",e);
+            result.setMessage(e.getMessage());
+            result.setSuccess(false);
+        }
+        return result.getResultPojo();
+    }
+
+    /**
+     * 评分项及分值
+     */
+    @RequestMapping(value = "/evaluationIndexItem", method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "supplier-forwarding",methods = "evaluationIndexItem")
+    @ResponseBody
+    public ResultPojo evaluationIndexItem(Integer type){
+        Result<List<ScoreTermsVO>> result = new Result<>();
+        try{
+            result.addDefaultModel("evaluationIndexItem",scoreTermService.evaluationIndexItem(type));
+        }catch(Exception e){
+            log.error("获取评分项及分值选项",e);
             result.setMessage(e.getMessage());
             result.setSuccess(false);
         }
