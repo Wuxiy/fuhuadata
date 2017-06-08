@@ -231,4 +231,8 @@ public class BusinessOrderServiceImpl implements BusinessOrderService {
         return result;
     }
 
+    @Override
+    public String getSalesManDeptId(String orderId) {
+        return businessOrderDao.getSalesManDeptId(orderId);
+    }
 }

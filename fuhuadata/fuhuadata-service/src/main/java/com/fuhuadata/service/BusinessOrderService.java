@@ -115,4 +115,11 @@ public interface BusinessOrderService {
      */
     public Result updateBusinessOrderAndProduct(BusinessOrderDO businessOrderDO);
 
+    /**
+     * 获取订单业务员的部门pk
+     * @param orderId
+     * @return
+     */
+    public String getSalesManDeptId(String orderId);
+
 }

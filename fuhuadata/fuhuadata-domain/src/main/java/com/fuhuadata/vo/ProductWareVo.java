@@ -24,6 +24,16 @@ public class ProductWareVo implements Serializable{
     private String measurement;
     //单位耗用比例
     private BigDecimal unitUseRate;
+    //出口退税率
+    private BigDecimal exportaxesback;
+
+    public BigDecimal getExportaxesback() {
+        return exportaxesback;
+    }
+
+    public void setExportaxesback(BigDecimal exportaxesback) {
+        this.exportaxesback = exportaxesback;
+    }
 
     public BigDecimal getUnitUseRate() {
         return unitUseRate;
