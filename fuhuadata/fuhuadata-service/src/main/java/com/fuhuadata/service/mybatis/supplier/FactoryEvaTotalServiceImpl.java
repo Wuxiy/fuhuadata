@@ -65,14 +65,13 @@ public class FactoryEvaTotalServiceImpl extends BaseServiceImpl<FactoryEvaTotal,
 
         Integer orderId = evaTotal.getOrderId();
 
-        getOptByOrderId(orderId).ifPresent(oldTotal -> {
+        Integer totalId = getOptByOrderId(orderId).map(FactoryEvaTotal::getId).orElse(null);
 
-            evaTotal.setId(oldTotal.getId());
+        evaTotal.setId(totalId);
 
-            saveOrUpdateSelective(evaTotal);// 更新概览信息
+        saveOrUpdateSelective(evaTotal);// 更新概览信息
 
-            evaItemService.saveOrUpdate(orderId, evaTotal.getItems());// 更新评分明细
-        });
+        evaItemService.saveOrUpdate(orderId, evaTotal.getItems());// 更新评分明细
 
         return evaTotal;
     }
