@@ -2,7 +2,7 @@
 <div class="clearfix content shadow-out">
     <!--副导航-->
     <div class="nav-deputy shadow-out clearfix">
-        #forwarderNav(1)
+        #warehouseNav(1)
         #breadcrumb()
     </div>
     <!--表格容器-->
@@ -124,6 +124,8 @@
         </div>
     </div>
 </div>
+
+<input id="" type="hidden" value="$!{}">
 
 <script type="text/javascript" language="JavaScript">
     $(document).ready(function(){
