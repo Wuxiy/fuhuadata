@@ -12,21 +12,17 @@
                 <div class="panel-body clearfix">
                     <!--表格-->
                     <table class="table text-center table-condensed table-bordered table-striped">
-                        <caption class="text-right" lang="zh">金额单位：万元</caption>
                         <thead>
                         <tr>
-                            <th class="text-center" lang="zh">企业编号</th>
-                            <th class="text-center" lang="zh">企业全称</th>
-                            <th class="text-center" lang="zh">企业简称</th>
-                            <th class="text-center" lang="zh">加工产品</th>
-                            <th class="text-center" lang="zh">开始合作时间</th>
-                            <th class="text-center" lang="zh">合作时间（月）</th>
-                            <th class="text-center" lang="zh">综合评分</th>
-                            <th class="text-center" lang="zh">工厂管理员</th>
+                            <th class="text-center" lang="zh">指标</th>
+                            <th class="text-center" lang="zh">总分</th>
+                            <th class="text-center" lang="zh">评分</th>
                             <th class="text-center" lang="zh">备注</th>
                         </tr>
                         </thead>
-                        <tbody id="factory_list"></tbody>
+                        <tbody id="grade_list">
+
+                        </tbody>
                     </table>
                     <div id="pagination" class="pagination"></div>
                 </div>

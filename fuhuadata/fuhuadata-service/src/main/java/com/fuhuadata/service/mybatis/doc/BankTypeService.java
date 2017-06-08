@@ -4,6 +4,7 @@ import com.fuhuadata.domain.doc.BankType;
 import com.fuhuadata.service.mybatis.BaseService;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * <p>User: wangjie
@@ -17,4 +18,8 @@ public interface BankTypeService extends BaseService<BankType, Integer> {
      * @return
      */
     List<BankType> listBankTypes(BankType query);
+
+    BankType getByCode(String code);
+
+    Optional<BankType> getOptByCode(String code);
 }

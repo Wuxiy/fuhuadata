@@ -94,7 +94,7 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
 
         // 设置组织名称
         Optional.ofNullable(factory).ifPresent(factoryConsumer -> {
-            String orgName = Optional.ofNullable(organizationService.getByNcId(factoryConsumer.getPkOrg()))
+            String orgName = Optional.ofNullable(organizationService.getByCode(factoryConsumer.getPkOrg()))
                     .map(Organization::getName)
                     .orElse(null);
             factoryConsumer.setOrgName(orgName);
@@ -121,7 +121,7 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
         factory.setCreateAccount(LoginUtils.getLoginAccount());
         factory.setCreateName(LoginUtils.getLoginName());
         fillLoginInfo(factory);
-        save(factory);
+        saveSelective(factory);
 
         Integer factoryId = factory.getId();
 
