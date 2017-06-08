@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+    <cache:annotation-driven cache-manager="cacheManager"/>
+
+    <bean id="cacheManager" class="org.springframework.cache.jcache.JCacheCacheManager">
+        <property name="cacheManager" ref="jCacheManager"/>
+    </bean>
+
+    <bean id="guavaCacheFromSpec" class="com.google.common.cache.CacheBuilder"
+          factory-method="from">
+        <constructor-arg value=""/>
+    </bean>
+
+    <bean id="areaGuavaCache" factory-bean="guavaCacheFromSpec" factory-method="build"/>
+
+    <bean id="jCacheManager" class="org.springframework.cache.jcache.JCacheManagerFactoryBean">
+        <property name="cacheManagerUri" value="classpath:ehcache/ehcache-jsr107.xml"/>
+    </bean>
+</beans>

@@ -59,5 +59,12 @@ public interface DeptService extends BaseService<Dept, Integer> {
      */
     List<Dept> listDepts(Integer orgId);
 
-    Dept getDeptByCode(String code);
+    Dept getByCode(String code);
+
+    /**
+     * 根据 ncId 获取部门
+     * @param pkOrg
+     * @return
+     */
+    Dept getByNcId(String pkOrg);
 }

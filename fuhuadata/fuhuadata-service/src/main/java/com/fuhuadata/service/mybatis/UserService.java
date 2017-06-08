@@ -76,5 +76,5 @@ public interface UserService extends BaseService<UserAccount, Integer> {
 
     void updateUserLoginInfo(Principal principal, HttpServletRequest request);
 
-    void changePassword(Integer userId, String password);
+    UserAccount changePassword(Integer userId, String password);
 }

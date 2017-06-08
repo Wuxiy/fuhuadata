@@ -8,10 +8,7 @@ import com.fuhuadata.service.mybatis.UserService;
 import com.fuhuadata.vo.MixNodeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -83,5 +80,12 @@ public class UserController extends BaseController<UserAccount, Integer> {
         result.addDefaultModel(userService.getUserTreeByRoleId(roleId));
 
         return result.getResultPojo();
+    }
+
+    @RequestMapping(value = "/username/{code}", method = RequestMethod.GET)
+    @ResponseBody
+    public UserAccount getUserByUsername(@PathVariable String code) {
+
+        return userService.getUserByLoginName(code);
     }
 }

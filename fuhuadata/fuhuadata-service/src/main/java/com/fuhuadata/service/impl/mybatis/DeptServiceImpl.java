@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +33,9 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept, Integer> implements D
 
     @Autowired
     private OrganizationService orgService;
+
+    @Resource
+    private UserTreeCache userTreeCache;
 
     @PostConstruct
     public void refreshOrgAndDeptCache() {
@@ -84,7 +88,7 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept, Integer> implements D
         for (Dept dept : depts) {
             MixNodeVO nodeVO = convertToNode(dept);
 
-            UserTreeCache.put(nodeVO.getCid(), nodeVO);
+            userTreeCache.put(nodeVO.getCid(), nodeVO);
 
             nodes.add(nodeVO);
         }
@@ -153,7 +157,7 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept, Integer> implements D
     }
 
     @Override
-    public Dept getDeptByCode(String code) {
+    public Dept getByCode(String code) {
         Example example = new Example(Dept.class);
         example.createCriteria().andEqualTo("code", code);
 
@@ -163,6 +167,19 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept, Integer> implements D
         }
 
         return null;
+    }
+
+    @Override
+    public Dept getByNcId(String pkDept) {
+
+        if (StringUtils.isEmpty(pkDept)) {
+            return null;
+        }
+
+        Dept dept = newEntity();
+        dept.setPkDept(pkDept);
+
+        return this.get(dept);
     }
 
     private MixNodeVO convertToNode(Dept dept) {

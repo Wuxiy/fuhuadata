@@ -64,6 +64,16 @@
             <artifactId>spring-aspects</artifactId>
         </dependency>
 
+        <!-- cache 相关 -->
+        <dependency>
+            <groupId>org.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.cache</groupId>
+            <artifactId>cache-api</artifactId>
+        </dependency>
+
         <!--  <dependency>
               <groupId>org.springframework</groupId>
               <artifactId>spring</artifactId>
