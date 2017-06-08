@@ -176,6 +176,52 @@
     </div>
 </div>
 
+## 图片上传modal
+<div class="modal fade" id="set_img" data-backdrop="true" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body clearfix">
+                <form class="form-horizontal well" name="imgForm" enctype="multipart/form-data" style="margin-bottom: 0;">
+                    <input name="setImg" type="file">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-4 col-xs-offset-2">
+                        <button class="btn btn-xs btn-block btn-default" data-dismiss="modal" type="button" lang="zh">取消</button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button class="btn btn-xs btn-block btn-primary" name="save" type="button" lang="zh">上传</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+## 图片展示modal
+<div class="modal fade" id="show_img" tabindex="-1"  aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body clearfix">
+                <div class="thumbnail">
+                    <img name="showImg" src="" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript" language="JavaScript">
     $(document).ready(function(){
         jQuery.ajax({
@@ -227,4 +273,73 @@
             })
         });
     }
+
+    // 图片路径展示组件
+    var imgGroup = {
+        inputGroups:$('#businessLicence,#nvocc),
+        modal:$('#show_img'),
+        editBtn:'[name="edit"]',
+        showBtn:'[name="show"]',
+        container:$('[name="showImg"]','#show_img'),
+        thePath:null,
+        theName:null,
+        init:function () {
+            this.addEvent('click.show', this.showBtn, this.showHandler); // 点击展示图片
+            this.addEvent('click.edit', this.editBtn, this.editHandler); // 点击弹出编辑modal
+        },
+        addEvent:function (eType, el, handler) {
+            this.inputGroups.off(eType).on(eType, el, handler);
+        },
+        showHandler:function () {
+            imgGroup.thePath = $(this).closest('.input-group').find('input').val();
+            if (imgGroup.thePath) {
+
+                imgGroup.container.attr('src',basePath+imgGroup.thePath);
+                imgGroup.modal.modal('show');
+            }else {
+                alert('当前没有图片，请添加！');
+            }
+        },
+        editHandler:function () {
+            imgGroup.theName = $(this).closest('.input-group').find('input').attr('name');
+            upImgModal.form[0].reset();
+            upImgModal.modal.modal('show');
+        }
+    };
+
+    // 图片上传组件
+    var upImgModal = {
+        modal:$('#set_img'),
+        form:$('[name="imgForm"]','#set_img'),
+        save:'[name="save"]',
+        fileInput:$('[name="setImg"]','#set_img'),
+        init:function () {
+            this.addEvent('click.save', this.save, this.saveHandler);
+        },
+        addEvent:function (eType, el, handler) {
+            this.modal.off(eType).on(eType, el, handler);
+        },
+        saveHandler:function () {
+            if (!upImgModal.fileInput.val()) return alert('请选择图片！');
+            var img = new FormData(upImgModal.form[0]);
+            /*img.append("classifyPath","oederRequire");*/
+            $.ajax({
+                url:basePath+'/upload/uploadFileAll',
+                type:'POST',
+                data:img,
+                dataType:'JSON',
+                cache:false,
+                processData:false,
+                contentType:false
+            }).done(function (res) {
+
+                if (res.code===1) {
+
+                    basicPanel.data[imgGroup.theName] = res.data[0];
+                    basicPanel.render(basicPanel.data);
+                }
+            });
+            upImgModal.modal.modal('hide');
+        }
+    };
 </script>
