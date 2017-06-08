@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +23,9 @@ import java.util.Optional;
 @Service("com.fuhuadata.service.impl.mybatis.OrganizationServiceImpl")
 public class OrganizationServiceImpl extends BaseServiceImpl<Organization, Integer>
         implements OrganizationService {
+
+    @Resource
+    private UserTreeCache userTreeCache;
 
     @Override
     public List<OrganizationVO> listOrgTree() {
@@ -38,8 +42,8 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization, Integ
         for (Organization org : orgs) {
             MixNodeVO nodeVO = convertToNode(org);
 
-            UserTreeCache.put(nodeVO.getCid(), nodeVO);// 添加到缓存
-            UserTreeCache.put(nodeVO.getNcId(), nodeVO);
+            userTreeCache.put(nodeVO.getCid(), nodeVO);// 添加到缓存
+            userTreeCache.put(nodeVO.getNcId(), nodeVO);
 
             nodes.add(nodeVO);
         }

@@ -48,6 +48,7 @@
     <import resource="spring/springbeans-dao.xml"/>
     <import resource="spring/springbeans-manager.xml"/>
     <import resource="spring/springbeans-service.xml"/>
+    <import resource="spring-config-cache.xml"/>
     <import resource="spring-config-shiro.xml"/>
     <import resource="spring-config-task.xml"/>
 </beans>
