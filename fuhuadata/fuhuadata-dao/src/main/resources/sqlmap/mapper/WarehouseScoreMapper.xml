@@ -6,7 +6,7 @@
       WARNING - @mbg.generated
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="customer_id" jdbcType="VARCHAR" property="customerId" />
+    <result column="warehouse_id" jdbcType="INTEGER" property="warehouseId" />
     <result column="month_time" jdbcType="VARCHAR" property="monthTime" />
     <result column="time_score" jdbcType="DECIMAL" property="timeScore" />
     <result column="accuracy_score" jdbcType="DECIMAL" property="accuracyScore" />

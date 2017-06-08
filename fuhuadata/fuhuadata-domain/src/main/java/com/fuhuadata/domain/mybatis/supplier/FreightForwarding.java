@@ -1,10 +1,12 @@
 package com.fuhuadata.domain.mybatis.supplier;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fuhuadata.domain.common.BankAccBas;
 import com.fuhuadata.domain.mybatis.BaseEntity;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -66,7 +68,14 @@ public class FreightForwarding extends BaseEntity<Integer>{
      * 合作时间
      */
     @Column(name = "cooperate_time")
-    private Date cooperateTime;
+    private Integer cooperateTime;
+
+    /**
+     * 开始合作时间
+     */
+    @Column(name = "start_cooperate_time")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date startCooperateTime;
 
     /**
      * 注册资金
@@ -74,26 +83,22 @@ public class FreightForwarding extends BaseEntity<Integer>{
     private BigDecimal registerfund;
 
     /**
-     * nc 供应商联系人主键, bd_suplinkman.pk_suplinkman
-     */
-    @Column(name = "pk_suplinkman")
-    private String pkSuplinkman;
-
-    /**
      * 联系人
      */
+    @Transient
     @Column(name = "link_man")
     private String linkMan;
 
     /**
      * 联系电话
      */
-    @Column(name = "link_phone")
+    @Transient
     private String linkPhone;
 
     /**
      * 邮箱
      */
+    @Transient
     private String email;
 
     /**
@@ -145,8 +150,8 @@ public class FreightForwarding extends BaseEntity<Integer>{
     /**
      * 创建者id
      */
-    @Column(name = "create_user_id")
-    private Integer createUserId;
+    @Column(name = "creator")
+    private Integer creator;
 
     /**
      * 创建者姓名
@@ -157,34 +162,50 @@ public class FreightForwarding extends BaseEntity<Integer>{
     /**
      * 上一次修改者id
      */
-    @Column(name = "lastmodify_user_id")
-    private Integer lastmodifyUserId;
-
+    @Column(name = "modifier")
+    private Integer modifier;
     /**
      * 上一次修改者姓名
      */
     @Column(name = "lastmodify_user_name")
     private String lastmodifyUserName;
-
     /**
      * 创建时间
      */
-    @Column(name = "create_time")
+    @Column(name = "creationtime")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date createTime;
+    private Date creationtime;
 
     /**
      * 修改时间
      */
-    @Column(name = "modify_time")
+    @Column(name = "modifiedtime")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date modifyTime;
+    private Date modifiedtime;
 
     /**
      * 自定义字段
      */
     @Column(name = "custom_field")
     private String customField;
+
+    /**
+     * 详情联系人
+     */
+    @Transient
+    private List<SupplierLinkman> linkmen;
+
+    /**
+     * 银行账户
+     */
+    @Transient
+    private List<BankAccBas> bankAccBass;
+
+    /**
+     * 仓库名称
+     */
+    @Transient
+    private String warehouseName;
 
     /**
      * 获取货代id
@@ -349,24 +370,6 @@ public class FreightForwarding extends BaseEntity<Integer>{
     }
 
     /**
-     * 获取合作时间
-     *
-     * @return cooperate_time - 合作时间
-     */
-    public Date getCooperateTime() {
-        return cooperateTime;
-    }
-
-    /**
-     * 设置合作时间
-     *
-     * @param cooperateTime 合作时间
-     */
-    public void setCooperateTime(Date cooperateTime) {
-        this.cooperateTime = cooperateTime;
-    }
-
-    /**
      * 获取注册资金
      *
      * @return registerfund - 注册资金
@@ -382,24 +385,6 @@ public class FreightForwarding extends BaseEntity<Integer>{
      */
     public void setRegisterfund(BigDecimal registerfund) {
         this.registerfund = registerfund;
-    }
-
-    /**
-     * 获取nc 供应商联系人主键, bd_suplinkman.pk_suplinkman
-     *
-     * @return pk_suplinkman - nc 供应商联系人主键, bd_suplinkman.pk_suplinkman
-     */
-    public String getPkSuplinkman() {
-        return pkSuplinkman;
-    }
-
-    /**
-     * 设置nc 供应商联系人主键, bd_suplinkman.pk_suplinkman
-     *
-     * @param pkSuplinkman nc 供应商联系人主键, bd_suplinkman.pk_suplinkman
-     */
-    public void setPkSuplinkman(String pkSuplinkman) {
-        this.pkSuplinkman = pkSuplinkman == null ? null : pkSuplinkman.trim();
     }
 
     /**
@@ -600,23 +585,6 @@ public class FreightForwarding extends BaseEntity<Integer>{
         this.combinedScoring = combinedScoring;
     }
 
-    /**
-     * 获取创建者id
-     *
-     * @return create_user_id - 创建者id
-     */
-    public Integer getCreateUserId() {
-        return createUserId;
-    }
-
-    /**
-     * 设置创建者id
-     *
-     * @param createUserId 创建者id
-     */
-    public void setCreateUserId(Integer createUserId) {
-        this.createUserId = createUserId;
-    }
 
     /**
      * 获取创建者姓名
@@ -636,23 +604,7 @@ public class FreightForwarding extends BaseEntity<Integer>{
         this.createUserName = createUserName == null ? null : createUserName.trim();
     }
 
-    /**
-     * 获取上一次修改者id
-     *
-     * @return lastmodify_user_id - 上一次修改者id
-     */
-    public Integer getLastmodifyUserId() {
-        return lastmodifyUserId;
-    }
 
-    /**
-     * 设置上一次修改者id
-     *
-     * @param lastmodifyUserId 上一次修改者id
-     */
-    public void setLastmodifyUserId(Integer lastmodifyUserId) {
-        this.lastmodifyUserId = lastmodifyUserId;
-    }
 
     /**
      * 获取上一次修改者姓名
@@ -672,41 +624,6 @@ public class FreightForwarding extends BaseEntity<Integer>{
         this.lastmodifyUserName = lastmodifyUserName == null ? null : lastmodifyUserName.trim();
     }
 
-    /**
-     * 获取创建时间
-     *
-     * @return create_time - 创建时间
-     */
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    /**
-     * 设置创建时间
-     *
-     * @param createTime 创建时间
-     */
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    /**
-     * 获取修改时间
-     *
-     * @return modify_time - 修改时间
-     */
-    public Date getModifyTime() {
-        return modifyTime;
-    }
-
-    /**
-     * 设置修改时间
-     *
-     * @param modifyTime 修改时间
-     */
-    public void setModifyTime(Date modifyTime) {
-        this.modifyTime = modifyTime;
-    }
 
     /**
      * 获取自定义字段
@@ -724,5 +641,77 @@ public class FreightForwarding extends BaseEntity<Integer>{
      */
     public void setCustomField(String customField) {
         this.customField = customField == null ? null : customField.trim();
+    }
+
+    public List<SupplierLinkman> getLinkmen() {
+        return linkmen;
+    }
+
+    public void setLinkmen(List<SupplierLinkman> linkmen) {
+        this.linkmen = linkmen;
+    }
+
+    public String getWarehouseName() {
+        return warehouseName;
+    }
+
+    public void setWarehouseName(String warehouseName) {
+        this.warehouseName = warehouseName;
+    }
+
+    public Integer getCooperateTime() {
+        return cooperateTime;
+    }
+
+    public void setCooperateTime(Integer cooperateTime) {
+        this.cooperateTime = cooperateTime;
+    }
+
+    public Date getStartCooperateTime() {
+        return startCooperateTime;
+    }
+
+    public void setStartCooperateTime(Date startCooperateTime) {
+        this.startCooperateTime = startCooperateTime;
+    }
+
+    public List<BankAccBas> getBankAccBass() {
+        return bankAccBass;
+    }
+
+    public void setBankAccBass(List<BankAccBas> bankAccBass) {
+        this.bankAccBass = bankAccBass;
+    }
+
+    public Date getModifiedtime() {
+        return modifiedtime;
+    }
+
+    public void setModifiedtime(Date modifiedtime) {
+        this.modifiedtime = modifiedtime;
+    }
+
+    public Date getCreationtime() {
+        return creationtime;
+    }
+
+    public void setCreationtime(Date creationtime) {
+        this.creationtime = creationtime;
+    }
+
+    public Integer getModifier() {
+        return modifier;
+    }
+
+    public void setModifier(Integer modifier) {
+        this.modifier = modifier;
+    }
+
+    public Integer getCreator() {
+        return creator;
+    }
+
+    public void setCreator(Integer creator) {
+        this.creator = creator;
     }
 }

@@ -21,9 +21,8 @@ public class WarehouseScore extends BaseEntity<Integer>{
     /**
      * 仓库id
      */
-    @Column(name = "customer_id")
-    private String customerId;
-
+    @Column(name = "warehouse_id")
+    private Integer warehouseId;
     /**
      * 月份时间
      */
@@ -153,24 +152,6 @@ public class WarehouseScore extends BaseEntity<Integer>{
      */
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    /**
-     * 获取仓库id
-     *
-     * @return customer_id - 仓库id
-     */
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    /**
-     * 设置仓库id
-     *
-     * @param customerId 仓库id
-     */
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId == null ? null : customerId.trim();
     }
 
     /**
@@ -513,5 +494,13 @@ public class WarehouseScore extends BaseEntity<Integer>{
      */
     public void setEvaluationDetails(String evaluationDetails) {
         this.evaluationDetails = evaluationDetails == null ? null : evaluationDetails.trim();
+    }
+
+    public Integer getWarehouseId() {
+        return warehouseId;
+    }
+
+    public void setWarehouseId(Integer warehouseId) {
+        this.warehouseId = warehouseId;
     }
 }

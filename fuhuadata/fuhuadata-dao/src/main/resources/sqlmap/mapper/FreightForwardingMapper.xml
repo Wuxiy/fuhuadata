@@ -5,7 +5,7 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="id" jdbcType="VARCHAR" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="code" jdbcType="VARCHAR" property="code" />
     <result column="pk_supplierclass" jdbcType="VARCHAR" property="pkSupplierclass" />
     <result column="name" jdbcType="VARCHAR" property="name" />
@@ -14,12 +14,9 @@
     <result column="credit_code" jdbcType="VARCHAR" property="creditCode" />
     <result column="office_address" jdbcType="VARCHAR" property="officeAddress" />
     <result column="tel1" jdbcType="VARCHAR" property="tel1" />
-    <result column="cooperate_time" jdbcType="TIMESTAMP" property="cooperateTime" />
+    <result column="cooperate_time" jdbcType="INTEGER" property="cooperateTime" />
+      <result column="start_cooperate_time" jdbcType="DATE" property="startCooperateTime"/>
     <result column="registerfund" jdbcType="DECIMAL" property="registerfund" />
-    <result column="pk_suplinkman" jdbcType="VARCHAR" property="pkSuplinkman" />
-    <result column="link_man" jdbcType="VARCHAR" property="linkMan" />
-    <result column="link_phone" jdbcType="VARCHAR" property="linkPhone" />
-    <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="corpaddress" jdbcType="VARCHAR" property="corpaddress" />
     <result column="transportation_methods" jdbcType="VARCHAR" property="transportationMethods" />
     <result column="memo" jdbcType="VARCHAR" property="memo" />
@@ -28,12 +25,47 @@
     <result column="NVOCC" jdbcType="VARCHAR" property="nvocc" />
     <result column="enter_electronic_system" jdbcType="INTEGER" property="enterElectronicSystem" />
     <result column="combined_scoring" jdbcType="DECIMAL" property="combinedScoring" />
-    <result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
+    <result column="creator" jdbcType="INTEGER" property="creator" />
     <result column="create_user_name" jdbcType="VARCHAR" property="createUserName" />
-    <result column="lastmodify_user_id" jdbcType="INTEGER" property="lastmodifyUserId" />
+    <result column="modifier" jdbcType="INTEGER" property="modifier" />
     <result column="lastmodify_user_name" jdbcType="VARCHAR" property="lastmodifyUserName" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="creationtime" jdbcType="TIMESTAMP" property="creationtime" />
+    <result column="modifiedtime" jdbcType="TIMESTAMP" property="modifiedtime" />
     <result column="custom_field" jdbcType="VARCHAR" property="customField" />
   </resultMap>
+
+    <!--获取货代列表-->
+  <select id="getForwardingList" resultType="com.fuhuadata.domain.mybatis.supplier.FreightForwarding">
+          SELECT
+        sff.id,
+        sff.`name`,
+        sff.`shortname`,
+        sff.`supprop`,
+        sff.`transportation_methods`,
+        sff.`start_cooperate_time`,
+        sff.`cooperate_time`,
+        sff.`combined_scoring`,
+        sff.`memo`,
+        ss.`phone` AS link_phone,
+        ss.`name` AS link_man
+      FROM
+        s_freight_forwarding sff
+        LEFT JOIN s_supplier_linkman ss ON ss.`suppier_id` = sff.`id` AND ss.`supplier_type` = 1 AND ss.`isdefault` = 1
+        ORDER BY sff.`cooperate_time` DESC
+  </select>
+
+    <!--仓库合作货代-->
+    <select id="getForwardingListByWarehouseId" resultType="com.fuhuadata.domain.mybatis.supplier.FreightForwarding">
+                        SELECT
+                ssf.`name`,
+                swi.`NAME` warehouseName
+                FROM
+                s_freight_forwarding ssf
+                LEFT JOIN s_forwarding_warehouse_relation sfwr ON sfwr.`freightforwarding_id` = ssf.`id`
+                LEFT JOIN s_warehouse_info swi ON swi.`id` = sfwr.`warehouse_id`
+               WHERE sfwr.`warehouse_id` = #{warehouseId}
+               ORDER BY ssf.modify_time DESC
+    </select>
+
+
 </mapper>

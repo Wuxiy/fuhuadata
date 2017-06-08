@@ -19,7 +19,7 @@ public class ForwardingOrderRecord extends BaseEntity<Integer>{
      * 仓库id
      */
     @Column(name = "warehouse_id")
-    private String warehouseId;
+    private Integer warehouseId;
 
     /**
      * 竞标记录id
@@ -139,7 +139,7 @@ public class ForwardingOrderRecord extends BaseEntity<Integer>{
      *
      * @return warehouse_id - 仓库id
      */
-    public String getWarehouseId() {
+    public Integer getWarehouseId() {
         return warehouseId;
     }
 
@@ -148,8 +148,8 @@ public class ForwardingOrderRecord extends BaseEntity<Integer>{
      *
      * @param warehouseId 仓库id
      */
-    public void setWarehouseId(String warehouseId) {
-        this.warehouseId = warehouseId == null ? null : warehouseId.trim();
+    public void setWarehouseId(Integer warehouseId) {
+        this.warehouseId = warehouseId;
     }
 
     /**
