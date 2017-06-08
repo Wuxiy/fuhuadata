@@ -19,7 +19,6 @@ public class  CategoryTree implements Serializable {
 
     }
 
-
     public String getCid() {
         return cid;
     }
