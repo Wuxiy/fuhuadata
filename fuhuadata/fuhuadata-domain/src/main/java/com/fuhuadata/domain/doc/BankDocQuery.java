@@ -10,6 +10,8 @@ public class BankDocQuery extends PageBase {
 
     private String pkBanktype;
 
+    private String bankTypeCode;
+
     private String name;
 
     public String getPkBanktype() {
@@ -26,5 +28,13 @@ public class BankDocQuery extends PageBase {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getBankTypeCode() {
+        return bankTypeCode;
+    }
+
+    public void setBankTypeCode(String bankTypeCode) {
+        this.bankTypeCode = bankTypeCode;
     }
 }

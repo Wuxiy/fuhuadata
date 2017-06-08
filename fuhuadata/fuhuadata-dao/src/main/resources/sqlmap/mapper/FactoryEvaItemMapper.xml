@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.supplier.FactoryEvaItemMapper">
+    <resultMap id="BaseResultMap" type="com.fuhuadata.domain.supplier.FactoryEvaItem">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="target_name" jdbcType="VARCHAR" property="targetName"/>
+        <result column="score" jdbcType="SMALLINT" property="score"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="index" jdbcType="SMALLINT" property="index"/>
+        <result column="eva_score" jdbcType="SMALLINT" property="evaScore"/>
+        <result column="eva_remark" jdbcType="VARCHAR" property="evaRemark"/>
+    </resultMap>
+
+    <sql id="BaseColumns">
+        fei.id,
+        fei.target_name,
+        fei.score,
+        fei.remark,
+        fei.index
+    </sql>
+
+    <sql id="FromTable">
+        from s_factory_eva_item fei
+    </sql>
+
+    <select id="listItemAndScoreByOrderId" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumns"/>,
+        fes.score eva_score,
+        fes.remark eva_remark
+        <include refid="FromTable"/>
+        left join s_factory_eva_score fes on fes.item_id=fei.id and fes.order_id=#{orderId}
+    </select>
+
+</mapper>

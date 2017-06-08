@@ -40,6 +40,8 @@
         left join product_category mid
         on mid.`parent_id` = big.id
         left join product_category small
+
+
         on small.parent_id = mid.`id`
         where big.`parent_id`=0
         ]]>

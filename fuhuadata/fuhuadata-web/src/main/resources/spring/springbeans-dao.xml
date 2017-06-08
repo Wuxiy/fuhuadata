@@ -8,45 +8,45 @@
           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
        default-autowire="byName">
 
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-          destroy-method="close">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url"
-                  value="jdbc:mysql://192.168.30.120:3306/fuhuadata?useUnicode=true&amp;characterEncoding=UTF8&amp;zeroDateTimeBehavior=convertToNull"/>
-        <property name="username" value="root"/>
-        <property name="password" value="root"/>
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://192.168.30.120:3306/fuhuadata?useUnicode=true&amp;characterEncoding=UTF8&amp;zeroDateTimeBehavior=convertToNull" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
 
-        <property name="maxActive" value="30"/>
-        <property name="initialSize" value="1"/>
-        <property name="timeBetweenEvictionRunsMillis" value="290000"/>
-        <property name="minEvictableIdleTimeMillis" value="290000"/>
-        <property name="numTestsPerEvictionRun" value="20"/>
-    </bean>
+		<property name="maxActive" value="30" />
+		<property name="initialSize" value="1" />
+		<property name="timeBetweenEvictionRunsMillis" value="290000" />
+		<property name="minEvictableIdleTimeMillis" value="290000" />
+		<property name="numTestsPerEvictionRun" value="20" />
+	</bean>
 
-    <bean id="dataSourceOracle" class="org.apache.commons.dbcp.BasicDataSource">
-        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-        <property name="url" value="jdbc:oracle:thin:@192.168.30.30:1521/orcl"/>
-        <property name="username" value="fh20170506"/>
-        <property name="password" value="1"/>
-        <property name="maxActive" value="100"/>
-        <property name="maxIdle" value="8"/>
-        <property name="minIdle" value="1"/>
-    </bean>
+	<bean id="dataSourceOracle" class="org.apache.commons.dbcp.BasicDataSource">
+	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+	<property name="url" value="jdbc:oracle:thin:@192.168.30.12:1521/FHDB"/>
+	<property name="username" value="crm_readonly"/>
+	<property name="password" value="1"/>
+	<property name="maxActive" value="100"/>
+	<property name="maxIdle" value="8"/>
+	<property name="minIdle" value="1"/>
+</bean>
 
 
-    <!-- iBatis 配置 -->
-    <bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
-        <property name="configLocation" value="classpath:sqlmap-config.xml"/>
-        <property name="useTransactionAwareDataSource" value="true"/>
-    </bean>
-    <bean id="sqlMapClientOracle" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
-        <property name="configLocation" value="classpath:sqlmap-config.xml"/>
-        <property name="dataSource" ref="dataSourceOracle"/>
-    </bean>
+	<!-- iBatis 配置 -->
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation" value="classpath:sqlmap-config.xml" />
+		<property name="useTransactionAwareDataSource" value="true" />
+	</bean>
+	<bean id="sqlMapClientOracle" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation" value="classpath:sqlmap-config.xml" />
+		<property name="dataSource" ref="dataSourceOracle" />
+	</bean>
 
-    <bean id="sqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
-        <property name="sqlMapClient" ref="sqlMapClient"/>
-    </bean>
+	<bean id="sqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
 
     <!-- MyBatis begin -->
     <!-- 多数据源配置 -->
@@ -62,11 +62,11 @@
     </bean>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="multiDataSource"/>
-        <property name="typeAliasesPackage" value="com.fuhuadata.domain.mybatis"/>
-        <property name="mapperLocations" value="classpath:/sqlmap/mapper/**/*.xml"/>
-        <property name="configLocation" value="classpath:/mybatis-config.xml"/>
-    </bean>
+	<property name="dataSource" ref="multiDataSource"/>
+	<property name="typeAliasesPackage" value="com.fuhuadata.domain.mybatis"/>
+	<property name="mapperLocations" value="classpath:/sqlmap/mapper/**/*.xml"/>
+	<property name="configLocation" value="classpath:/mybatis-config.xml"/>
+</bean>
 
     <!-- 通用 mapper 配置 -->
     <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
@@ -84,19 +84,18 @@
 
     <!-- 批量操作 sqlSession, 可安全的在 dao 文件中共享 -->
     <bean id="sqlSessionBatch" class="org.mybatis.spring.SqlSessionTemplate">
-        <constructor-arg index="0" ref="sqlSessionFactory"/>
-        <constructor-arg index="1" value="BATCH"/>
+        <constructor-arg index="0" ref="sqlSessionFactory" />
+        <constructor-arg index="1" value="BATCH" />
     </bean>
 
-    <!-- 事务配置 -->
-    <bean id="transactionManager"
-          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
+	<!-- 事务配置 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
 
     <!-- spring  事务管理-->
     <tx:annotation-driven transaction-manager="transactionManager"/>
-
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
             <tx:method name="save*" propagation="REQUIRED"/>
@@ -118,39 +117,39 @@
         <aop:advisor id="txAdvisor" advice-ref="txAdvice" pointcut-ref="txPointcut" order="2"/>
     </aop:config>
 
-    <bean id="userAccountDao" class="com.fuhuadata.dao.impl.UserAccountDaoImpl"/>
-    <bean id="systemLogDao" class="com.fuhuadata.dao.impl.SystemLogDaoImpl"/>
-    <bean id="marketTrainingDao" class="com.fuhuadata.dao.impl.MarketTrainingDaoImpl"/>
-    <bean id="exhibitionInfoDao" class="com.fuhuadata.dao.impl.ExhibitionInfoDaoImpl"/>
-    <bean id="productProblemDao" class="com.fuhuadata.dao.impl.ProductProblemDaoImpl"/>
-    <bean id="customerEncyclopediaDao" class="com.fuhuadata.dao.impl.CustomerEncyclopediaDaoImpl"/>
-    <bean id="componentCostDao" class="com.fuhuadata.dao.impl.ComponentCostDaoImpl"/>
-    <bean id="freightCostDao" class="com.fuhuadata.dao.impl.FreightCostDaoImpl"/>
-    <bean id="rateDao" class="com.fuhuadata.dao.impl.RateDaoImpl"/>
-    <bean id="industryDataDao" class="com.fuhuadata.dao.impl.IndustryDataDaoImpl"/>
-    <bean id="packingArchivesDao" class="com.fuhuadata.dao.impl.PackingArchivesDaoImpl"/>
-    <bean id="portChargesCostDao" class="com.fuhuadata.dao.impl.PortChargesCostDaoImpl"/>
-    <bean id="preparationProcessCostDao" class="com.fuhuadata.dao.impl.PreparationProcessCostDaoImpl"/>
-    <bean id="saleCustomerDao" class="com.fuhuadata.dao.impl.SaleCustomerDaoImpl"/>
-    <bean id="customerParentDao" class="com.fuhuadata.dao.impl.CustomerBaseInfoDaoImpl"/>
-    <bean id="userDao" class="com.fuhuadata.dao.impl.UserDaoImpl"/>
-    <bean id="productInfoDao" class="com.fuhuadata.dao.impl.ProductInfoDaoImpl"/>
-    <bean id="productCategoryDao" class="com.fuhuadata.dao.impl.ProductCategoryDaoImpl"/>
-    <bean id="packingCategoryDao" class="com.fuhuadata.dao.impl.PackingCategoryDaoImpl"/>
-    <bean id="productWareDao" class="com.fuhuadata.dao.impl.ProductWareDaoImpl"/>
-    <bean id="customerProductInfoDao" class="com.fuhuadata.dao.impl.CustomerProductArchivesDaoImpl"/>
-    <bean id="customerMakeProductDao" class="com.fuhuadata.dao.impl.CustomerMakeProductDaoImpl"/>
-    <bean id="linkmanDao" class="com.fuhuadata.dao.impl.CustomerLinkmanDaoImpl"/>
-    <bean id="customerPurchaseProductDao" class="com.fuhuadata.dao.impl.CustomerPurchaseProductDaoImpl"/>
-    <bean id="customerSaleProductDao" class="com.fuhuadata.dao.impl.CustomerSaleProductDaoImpl"/>
-    <bean id="recordLinkmanDao" class="com.fuhuadata.dao.impl.RecordLinkmanDaoImpl"/>
-    <bean id="customerLinkmanDao" class="com.fuhuadata.dao.impl.CustomerLinkmanDaoImpl"/>
-    <bean id="customerVisitRecordDao" class="com.fuhuadata.dao.impl.CustomerVisitRecordDaoImpl"/>
-    <bean id="customerSubcompanyInfoDao" class="com.fuhuadata.dao.impl.CustomerSubcompanyInfoDaoImpl"/>
-    <bean id="businessInfoDao" class="com.fuhuadata.dao.impl.BusinessInfoDaoImpl"/>
-    <bean id="businessRecordDao" class="com.fuhuadata.dao.impl.BusinessRecordDaoImpl"/>
-    <bean id="businessOrderDao" class="com.fuhuadata.dao.impl.BusinessOrderDaoImpl"/>
-    <bean id="contractDao" class="com.fuhuadata.dao.impl.ContractDaoImpl"/>
-    <bean id="dataArchivesDao" class="com.fuhuadata.dao.impl.DataArchivesDaoImpl"/>
-    <bean id="orderToNc" class="com.fuhuadata.dao.impl.NCExchange.OrderToNcImpl"/>
+	<bean id="userAccountDao" class="com.fuhuadata.dao.impl.UserAccountDaoImpl" />
+	<bean id="systemLogDao" class="com.fuhuadata.dao.impl.SystemLogDaoImpl"/>
+	<bean id="marketTrainingDao" class="com.fuhuadata.dao.impl.MarketTrainingDaoImpl"/>
+	<bean id="exhibitionInfoDao" class="com.fuhuadata.dao.impl.ExhibitionInfoDaoImpl"/>
+	<bean id="productProblemDao" class="com.fuhuadata.dao.impl.ProductProblemDaoImpl"/>
+	<bean id="customerEncyclopediaDao" class="com.fuhuadata.dao.impl.CustomerEncyclopediaDaoImpl"/>
+	<bean id ="componentCostDao" class="com.fuhuadata.dao.impl.ComponentCostDaoImpl"/>
+	<bean id="freightCostDao" class="com.fuhuadata.dao.impl.FreightCostDaoImpl"/>
+	<bean id="rateDao" class="com.fuhuadata.dao.impl.RateDaoImpl"/>
+	<bean id = "industryDataDao" class="com.fuhuadata.dao.impl.IndustryDataDaoImpl"/>
+	<bean id = "packingArchivesDao" class="com.fuhuadata.dao.impl.PackingArchivesDaoImpl"/>
+	<bean id = "portChargesCostDao" class="com.fuhuadata.dao.impl.PortChargesCostDaoImpl"/>
+	<bean id = "preparationProcessCostDao" class="com.fuhuadata.dao.impl.PreparationProcessCostDaoImpl"/>
+	<bean id="saleCustomerDao" class="com.fuhuadata.dao.impl.SaleCustomerDaoImpl"/>
+	<bean id="customerParentDao" class="com.fuhuadata.dao.impl.CustomerBaseInfoDaoImpl"/>
+	<bean id="userDao" class="com.fuhuadata.dao.impl.UserDaoImpl"/>
+	<bean id="productInfoDao" class="com.fuhuadata.dao.impl.ProductInfoDaoImpl"/>
+	<bean id="productCategoryDao" class="com.fuhuadata.dao.impl.ProductCategoryDaoImpl"/>
+	<bean id="packingCategoryDao" class="com.fuhuadata.dao.impl.PackingCategoryDaoImpl"/>
+	<bean id="productWareDao" class="com.fuhuadata.dao.impl.ProductWareDaoImpl"/>
+	<bean id="customerProductInfoDao" class="com.fuhuadata.dao.impl.CustomerProductArchivesDaoImpl"/>
+	<bean id="customerMakeProductDao" class="com.fuhuadata.dao.impl.CustomerMakeProductDaoImpl"/>
+	<bean id="linkmanDao" class="com.fuhuadata.dao.impl.CustomerLinkmanDaoImpl"/>
+	<bean id="customerPurchaseProductDao" class="com.fuhuadata.dao.impl.CustomerPurchaseProductDaoImpl"/>
+	<bean id="customerSaleProductDao" class="com.fuhuadata.dao.impl.CustomerSaleProductDaoImpl"/>
+	<bean id="recordLinkmanDao" class="com.fuhuadata.dao.impl.RecordLinkmanDaoImpl"/>
+	<bean id="customerLinkmanDao" class="com.fuhuadata.dao.impl.CustomerLinkmanDaoImpl"/>
+	<bean id="customerVisitRecordDao" class="com.fuhuadata.dao.impl.CustomerVisitRecordDaoImpl"/>
+	<bean id="customerSubcompanyInfoDao" class="com.fuhuadata.dao.impl.CustomerSubcompanyInfoDaoImpl"/>
+	<bean id="businessInfoDao" class="com.fuhuadata.dao.impl.BusinessInfoDaoImpl"/>
+	<bean id="businessRecordDao" class="com.fuhuadata.dao.impl.BusinessRecordDaoImpl"/>
+	<bean id="businessOrderDao" class="com.fuhuadata.dao.impl.BusinessOrderDaoImpl"/>
+	<bean id="contractDao" class="com.fuhuadata.dao.impl.ContractDaoImpl"/>
+	<bean id="dataArchivesDao" class="com.fuhuadata.dao.impl.DataArchivesDaoImpl"/>
+	<bean id="orderToNc" class="com.fuhuadata.dao.impl.NCExchange.OrderToNcImpl"/>
 </beans>
