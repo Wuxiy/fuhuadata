@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
+import com.fuhuadata.service.mybatis.UserService;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -48,8 +48,8 @@ public class BusinessOrderAction {
 
     @Autowired
     private DataArchivesService dataArchivesService;
-
-
+    @Autowired
+    private UserService userService;
     @RequiresPermissions({"sale:flow:offer:view"})
     @RequestMapping("/intoBusinessOffer")
     @SystemLogAnnotation(module = "salesStatistics-businessOrder",methods = "intoOffer")
@@ -181,8 +181,15 @@ public class BusinessOrderAction {
         Result<List<Incoterm>> rincoterm = dataArchivesService.getIncoterm();
         //币种
         Result<List<Currtype>> rcurrtype = dataArchivesService.getCurrtype();
-        return new ModelAndView("salesStatistics/orderConversion").addObject("orderId",orderId).addObject("businessOrderProduct",result.getModel())
-                .addObject("income",rincome.getModel()).addObject("incoterm",rincoterm.getModel()).addObject("currtype",rcurrtype.getModel());
+        //业务员部门
+        String deptId = businessOrderService.getSalesManDeptId(orderId);
+        List<MixNodeVO> merchandiserList =  userService.listUserNodesByDept(deptId);
+        return new ModelAndView("salesStatistics/orderConversion").addObject("orderId",orderId)
+                .addObject("businessOrderProduct",result.getModel())
+                .addObject("income",rincome.getModel())
+                .addObject("incoterm",rincoterm.getModel())
+                .addObject("currtype",rcurrtype.getModel())
+                .addObject("merchandiserList",merchandiserList);
     }
 
     /**

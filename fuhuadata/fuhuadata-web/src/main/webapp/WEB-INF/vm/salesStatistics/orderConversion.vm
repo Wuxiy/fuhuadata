@@ -7,7 +7,6 @@
     <div class="dashboard-wrapper">
         <div class="row">
             <div class="col-xs-12 view-HD-lg">
-                <!--加工成分-->
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title" lang="zh">订单转化</h3>
@@ -18,6 +17,15 @@
                                 <label class="col-xs-1 control-label" lang="zh">订单编号</label>
                                 <div class="col-xs-3">
                                     <input data-val="$!{businessOrderProduct.businessOrderProducts}" class="form-control" type="text" id="orderId" value="$!{orderId}" disabled />
+                                </div>
+                                <label class="col-xs-1 control-label" for="merchandiser">跟单员<sup class="not-null">*</sup></label>
+                                <div class="col-xs-2">
+                                    <select class="form-control" name="merchandiser" id="merchandiser">
+                                        <option value="">——请选择跟单员——</option>
+                                        #foreach($item in $!{merchandiserList})
+                                            <option value="$!{item.code}" data-name="$!{item.cname}">$!{item.cname}</option>
+                                        #end
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -62,6 +70,25 @@
                 </div>
                 <div class="col-xs-2">
                     <button class="btn btn-block btn-default" type="reset">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+## 职员树形菜单
+<div class="modal fade in" id="staff_modal" tabindex="-1" role="dialog" data-backdrop="false" aria-hidden="true">
+    <div class="modal-dialog" style="width: 400px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body">
+                <hr>
+                <div class="zTreeDemoBackground left well" style="height: 300px;overflow-y: scroll;overflow-x: auto">
+                    <ul id="staff_tree" class="ztree"></ul>
                 </div>
             </div>
         </div>
@@ -115,6 +142,18 @@ $(document).ready(function(){
             btn.attr('disabled',false);
         })
     });
+
+    // 点击搜索跟单员
+    /*var staffTree = {
+        isData:false,
+        set:{
+
+        },
+        creatTree:function () {
+            $.fn.zTree.init(this.el, this.set, this)
+        },
+
+    };*/
 })
 
 
@@ -123,6 +162,8 @@ $(document).ready(function(){
     function upData() {
         var obj = {
             businessOrder : {
+                merchandiser:$('#merchandiser').val(),
+                merchandiserName:$('#merchandiser').find('option').filter(':selected').data('name'),
                 orderId : $('#orderId').val(),
                 floorPrice : $('#floorPrice').data('val')==''?0:$('#totalPrice').data('val'),
                 amountPayable:$('#totalPrice').data('val')==''?0:$('#totalPrice').data('val'),

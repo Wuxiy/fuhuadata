@@ -98,6 +98,24 @@ public class BusinessOrder implements Serializable{
     private String modifyTime;//创建时间
     private String exchangeTermsDetail;//收汇条款明细
     private String latestDeliveryTime;//最迟交货时间
+    private String merchandiser;//跟单员pk
+    private String merchandiserName;//跟单员name
+
+    public String getMerchandiser() {
+        return merchandiser;
+    }
+
+    public void setMerchandiser(String merchandiser) {
+        this.merchandiser = merchandiser;
+    }
+
+    public String getMerchandiserName() {
+        return merchandiserName;
+    }
+
+    public void setMerchandiserName(String merchandiserName) {
+        this.merchandiserName = merchandiserName;
+    }
 
     public String getExchangeTermsDetail() {
         return exchangeTermsDetail;

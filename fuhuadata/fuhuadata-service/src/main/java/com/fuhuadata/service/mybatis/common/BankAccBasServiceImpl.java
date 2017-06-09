@@ -48,6 +48,10 @@ public class BankAccBasServiceImpl extends BaseServiceImpl<BankAccBas, Integer>
     @Override
     public int saveOrUpdateBanks(List<BankAccBas> banks) {
 
+        if (CollectionUtils.isEmpty(banks)) {
+            return 0;
+        }
+
         banks.forEach(bank -> {
             if (bank.getId() != null) {
                 updateSelective(bank);
