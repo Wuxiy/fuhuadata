@@ -1,5 +1,6 @@
 package com.fuhuadata.domain.mybatis.supplier;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fuhuadata.domain.mybatis.BaseEntity;
 
 import java.math.BigDecimal;
@@ -81,6 +82,7 @@ public class ForwardingScore extends BaseEntity<Integer> {
      * 评价时间
      */
     @Column(name = "evaluate_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date evaluateTime;
 
     /**
@@ -123,12 +125,14 @@ public class ForwardingScore extends BaseEntity<Integer> {
      * 创建时间
      */
     @Column(name = "create_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     /**
      * 修改时间
      */
     @Column(name = "modify_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date modifyTime;
 
     /**

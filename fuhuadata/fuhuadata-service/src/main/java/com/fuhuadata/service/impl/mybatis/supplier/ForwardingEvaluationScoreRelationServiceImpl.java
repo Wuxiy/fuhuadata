@@ -21,4 +21,13 @@ public class ForwardingEvaluationScoreRelationServiceImpl extends BaseServiceImp
         criteria.andEqualTo("forwardingScoreId",scoreId);
         return listByExample(example);
     }
+
+    @Override
+    public Integer deleteByScoreId(Integer scoreId) {
+        if(scoreId ==null) return null;
+        Example example = newExample();
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("forwardingScoreId",scoreId);
+        return delete(example);
+    }
 }

@@ -12,7 +12,7 @@ public class ScoreVO<T,E> {
     /**月度评分**/
     private T score ;
     /**评分项详情**/
-    private List<E> List;
+    private List<E> list;
 
     public T getScore() {
         return score;
@@ -22,11 +22,11 @@ public class ScoreVO<T,E> {
         this.score = score;
     }
 
-    public java.util.List<E> getList() {
-        return List;
+    public List<E> getList() {
+        return list;
     }
 
-    public void setList(java.util.List<E> list) {
-        List = list;
+    public void setList(List<E> list) {
+        this.list = list;
     }
 }

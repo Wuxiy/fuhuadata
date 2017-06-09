@@ -35,7 +35,7 @@
   </resultMap>
 
     <!--获取货代列表-->
-  <select id="getForwardingList" resultType="com.fuhuadata.domain.mybatis.supplier.FreightForwarding">
+  <select id="getForwardingList"  resultType="com.fuhuadata.domain.mybatis.supplier.FreightForwarding">
           SELECT
         sff.id,
         sff.`name`,
@@ -55,7 +55,7 @@
   </select>
 
     <!--仓库合作货代-->
-    <select id="getForwardingListByWarehouseId" resultType="com.fuhuadata.domain.mybatis.supplier.FreightForwarding">
+    <select id="getForwardingListByWarehouseId" parameterType="java.lang.Integer" resultType="com.fuhuadata.domain.mybatis.supplier.FreightForwarding">
                         SELECT
                 ssf.`name`,
                 swi.`NAME` warehouseName
@@ -64,8 +64,7 @@
                 LEFT JOIN s_forwarding_warehouse_relation sfwr ON sfwr.`freightforwarding_id` = ssf.`id`
                 LEFT JOIN s_warehouse_info swi ON swi.`id` = sfwr.`warehouse_id`
                WHERE sfwr.`warehouse_id` = #{warehouseId}
-               ORDER BY ssf.modify_time DESC
+               ORDER BY ssf.modifiedtime DESC
     </select>
-
 
 </mapper>

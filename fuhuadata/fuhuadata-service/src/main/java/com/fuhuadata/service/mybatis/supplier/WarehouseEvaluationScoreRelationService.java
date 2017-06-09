@@ -17,5 +17,12 @@ public interface WarehouseEvaluationScoreRelationService extends BaseService<War
      */
     List<WarehouseEvaluationScoreRelation> listByScoreId(Integer scoreId);
 
+    /**
+     * 根据scoreId删除评分详情
+     * @param scoreId
+     * @return
+     */
+    Integer deleteByScoreId(Integer scoreId);
+
 
 }

@@ -1,16 +1,9 @@
 package com.fuhuadata.web.springmvc.mybatis;
 
-import com.fuhuadata.domain.mybatis.supplier.FreightForwarding;
-import com.fuhuadata.domain.mybatis.supplier.WarehouseEvaluationScoreRelation;
-import com.fuhuadata.domain.mybatis.supplier.WarehouseInfo;
-import com.fuhuadata.domain.mybatis.supplier.WarehouseScore;
-import com.fuhuadata.domain.query.QueryFreightforwarding;
-import com.fuhuadata.domain.query.QueryWarehouseInfo;
-import com.fuhuadata.domain.query.Result;
-import com.fuhuadata.domain.query.ResultPojo;
-import com.fuhuadata.service.mybatis.supplier.FreightForwardingService;
-import com.fuhuadata.service.mybatis.supplier.WarehouseInfoService;
-import com.fuhuadata.service.mybatis.supplier.WarehouseScoreService;
+import com.fuhuadata.domain.mybatis.supplier.*;
+import com.fuhuadata.domain.query.*;
+import com.fuhuadata.service.mybatis.supplier.*;
+import com.fuhuadata.vo.Supplier.ScoreInfoVO;
 import com.fuhuadata.vo.Supplier.ScoreVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import com.github.pagehelper.PageInfo;
@@ -19,6 +12,8 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 /** 仓库
@@ -39,6 +34,12 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
 
     @Autowired
     private WarehouseScoreService warehouseScoreService;
+
+    @Autowired
+    private WarehouseEvaluationScoreRelationService warehouseEvaluationScoreRelationService;
+
+    @Autowired
+    private ScoreTermService scoreTermService;
 
     @RequestMapping(value = "/init", method = RequestMethod.GET)
     @SystemLogAnnotation(module = "supplier-warehouse",methods = "init")
@@ -133,6 +134,30 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
     }
 
     /**
+     * 仓库评分项及分值
+     */
+    @RequestMapping(value = "/evaluationIndexItem", method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "supplier-warehouse",methods = "evaluationIndexItem")
+    @ResponseBody
+    public ResultPojo evaluationIndexItem(Integer scoreId){
+        Result<ScoreInfoVO<WarehouseEvaluationScoreRelation>> result = new Result<>();
+        ScoreInfoVO<WarehouseEvaluationScoreRelation> scoreInfoVO = new ScoreInfoVO<>();
+        try{
+            scoreInfoVO.setTerms(scoreTermService.evaluationIndexItem(2));
+            List<WarehouseEvaluationScoreRelation> scoreList = warehouseEvaluationScoreRelationService.listByScoreId(scoreId);
+            if(scoreList!=null&&scoreList.size()>0) {
+                scoreInfoVO.setScoreList(scoreList);
+            }
+            result.addDefaultModel("score",scoreInfoVO);
+        }catch(Exception e){
+            log.error("获取评分项详情失败",e);
+            result.setMessage(e.getMessage());
+            result.setSuccess(false);
+        }
+        return result.getResultPojo();
+    }
+
+    /**
      * 保存评分项
      */
     @RequestMapping(value = "/saveScore", method = RequestMethod.POST)
@@ -141,6 +166,24 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
     public ResultPojo saveScore(@RequestBody ScoreVO<WarehouseScore,WarehouseEvaluationScoreRelation> scoreVO){
         Result<Integer> result = new Result();
         result.addDefaultModel(warehouseScoreService.saveScore(scoreVO));
+        return result.getResultPojo();
+    }
+
+    /**
+     * 获取月度评价表
+     */
+    @RequestMapping(value = "/ScoreListOfMonth", method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "supplier-warehouse",methods = "ScoreListOfMonth")
+    @ResponseBody
+    public ResultPojo ScoreListOfMonth(QueryWarehouseScore query){
+        Result<PageInfo<WarehouseScore>> result = new Result();
+        try{
+            result.addDefaultModel("scoreList",warehouseScoreService.getWarehouseScoreList(query));
+        }catch (Exception e){
+            log.error("仓库月度评价表获取失败");
+            result.setMessage(e.getMessage());
+            result.setSuccess(false);
+        }
         return result.getResultPojo();
     }
 

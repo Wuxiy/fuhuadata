@@ -13,7 +13,7 @@ import java.util.List;
  * Created by wuxiy on 2017/6/2.
  */
 
-public interface ScoreTermService extends BaseService<ScoreTerm, Integer> {
+public interface ScoreTermService extends BaseService<ScoreTerm,Integer> {
 
     /**
      * 获取评分项和评分值

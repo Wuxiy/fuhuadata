@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fuhuadata.dao.mapper.WarehouseInfoMapper">
+<mapper namespace="com.fuhuadata.dao.mapper.supplier.WarehouseInfoMapper">
   <resultMap id="BaseResultMap" type="com.fuhuadata.domain.mybatis.supplier.WarehouseInfo">
     <!--
       WARNING - @mbg.generated
@@ -32,7 +32,7 @@
 
 
   <!--获取货代关联仓库-->
-  <select id="getListByForwardingId" resultType="com.fuhuadata.domain.mybatis.supplier.WarehouseInfo">
+  <select id="getListByForwardingId" parameterType="java.lang.Integer" resultType="com.fuhuadata.domain.mybatis.supplier.WarehouseInfo">
             SELECT
         swi.`CODE`,
         swi.`NAME`,

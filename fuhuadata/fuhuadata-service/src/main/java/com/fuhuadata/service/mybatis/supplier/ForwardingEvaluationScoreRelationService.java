@@ -16,4 +16,6 @@ public interface ForwardingEvaluationScoreRelationService extends BaseService<Fo
      * @return
      */
     List<ForwardingEvaluationScoreRelation> listByScoreId(Integer scoreId);
+
+    Integer deleteByScoreId(Integer scoreId);
 }

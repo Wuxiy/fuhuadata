@@ -3,7 +3,7 @@ package com.fuhuadata.web.springmvc.mybatis;
 import com.fuhuadata.domain.mybatis.supplier.*;
 import com.fuhuadata.domain.query.*;
 import com.fuhuadata.service.mybatis.supplier.*;
-import com.fuhuadata.vo.Supplier.ScoreTermsVO;
+import com.fuhuadata.vo.Supplier.ScoreInfoVO;
 import com.fuhuadata.vo.Supplier.ScoreVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import com.github.pagehelper.PageInfo;
@@ -45,6 +45,9 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
 
     @Autowired
     private ForwardingScoreService forwardingScoreService;
+
+    @Autowired
+    private ForwardingEvaluationScoreRelationService forwardingEvaluationScoreRelationService;
 
 
     @RequestMapping(value = "init", method = RequestMethod.GET)
@@ -196,15 +199,21 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
     }
 
     /**
-     * 评分项及分值
+     * 货代评分项及分值
      */
     @RequestMapping(value = "/evaluationIndexItem", method = RequestMethod.GET)
     @SystemLogAnnotation(module = "supplier-forwarding",methods = "evaluationIndexItem")
     @ResponseBody
-    public ResultPojo evaluationIndexItem(Integer type){
-        Result<List<ScoreTermsVO>> result = new Result<>();
+    public ResultPojo evaluationIndexItem(Integer scoreId){
+        Result<ScoreInfoVO<ForwardingEvaluationScoreRelation>> result = new Result<>();
+        ScoreInfoVO<ForwardingEvaluationScoreRelation> scoreInfoVO = new ScoreInfoVO<>();
         try{
-            result.addDefaultModel("evaluationIndexItem",scoreTermService.evaluationIndexItem(type));
+          scoreInfoVO.setTerms(scoreTermService.evaluationIndexItem(1));
+          List<ForwardingEvaluationScoreRelation> scoreList = forwardingEvaluationScoreRelationService.listByScoreId(scoreId);
+          if(scoreList!=null&&scoreList.size()>0) {
+              scoreInfoVO.setScoreList(scoreList);
+          }
+          result.addDefaultModel("score",scoreInfoVO);
         }catch(Exception e){
             log.error("获取评分项及分值选项",e);
             result.setMessage(e.getMessage());
@@ -221,9 +230,36 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
     @ResponseBody
     public ResultPojo saveScore(@RequestBody ScoreVO<ForwardingScore,ForwardingEvaluationScoreRelation> scoreVO){
         Result<Integer> result = new Result();
-        result.addDefaultModel(forwardingScoreService.saveScore(scoreVO));
+        try{
+            result.addDefaultModel(forwardingScoreService.saveScore(scoreVO));
+        }catch(Exception e){
+            log.error("保存货代评分失败");
+            result.setMessage(e.getMessage());
+            result.setSuccess(false);
+        }
+
         return result.getResultPojo();
     }
+
+    /**
+     * 获取月度评价表
+     */
+    @RequestMapping(value = "/ScoreListOfMonth", method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "supplier-forwarding",methods = "ScoreListOfMonth")
+    @ResponseBody
+    public ResultPojo ScoreListOfMonth(QueryForwardingScore query){
+        Result<PageInfo<ForwardingScore>> result = new Result();
+        try{
+            result.addDefaultModel("scoreList",forwardingScoreService.getForwardingScoreList(query));
+        }catch (Exception e){
+            log.error("货代月度评价表获取失败");
+            result.setMessage(e.getMessage());
+            result.setSuccess(false);
+        }
+        return result.getResultPojo();
+    }
+
+
 
 
 }
