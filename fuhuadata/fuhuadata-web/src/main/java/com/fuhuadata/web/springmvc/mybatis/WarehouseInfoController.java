@@ -41,10 +41,20 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
     @Autowired
     private ScoreTermService scoreTermService;
 
-    @RequestMapping(value = "/init", method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "supplier-warehouse",methods = "init")
-    public String intoForwarding() {
-        return "supplier/warehouseInfoList";
+    @RequestMapping(value = "/intoWarehouseInfoList", method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "supplier-warehouse",methods = "intoWarehouseInfoList")
+    public String intoWarehouseInfoList() {
+        return "supplierInformation/warehouseInfoList";
+    }
+
+    /**
+     * 进入仓库详情
+     * @return
+     */
+    @RequestMapping(value = "/intoWarehouseBasic", method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "supplier-warehouse",methods = "intoWarehouseInfo")
+    public String intoWarehouseInfo() {
+        return "supplierInformation/warehouseBasic";
     }
 
     /**
@@ -67,16 +77,6 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
         return result.getResultPojo();
     }
 
-
-    /**
-     * 进入仓库详情
-     * @return
-     */
-    @RequestMapping(value = "/intoWarehouseInfo", method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "supplier-warehouse",methods = "intoWarehouseInfo")
-    public String intoWarehouseInfo() {
-        return "supplier/warehouseInfo";
-    }
     /**
      * 仓库详情
      * @return

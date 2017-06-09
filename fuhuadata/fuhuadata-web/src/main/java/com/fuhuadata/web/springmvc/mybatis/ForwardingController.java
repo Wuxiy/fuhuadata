@@ -50,12 +50,34 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
     private ForwardingEvaluationScoreRelationService forwardingEvaluationScoreRelationService;
 
 
-    @RequestMapping(value = "init", method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "supplier-forwarding",methods = "init")
-    public String intoForwarding() {
-        return "supplier/forwardingList";
+    @RequestMapping(value = "intoForwardingList", method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "supplier-forwarding",methods = "intoForwardingList")
+    public String intForwardingList() {
+        return "supplierInformation/forwardingList";
     }
 
+    @RequestMapping(value = "intoForwardingBasic", method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "supplier-forwarding",methods = "intoForwardingBasic")
+    public String intoForwardingInfo() {
+        return "supplierInformation/forwardingBasic";
+    }
+    @RequestMapping(value = "intoForwardingWarehouse", method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "supplier-forwarding",methods = "init")
+    public String intoForwardingWarehouse() {
+        return "supplierInformation/forwardingWarehouse";
+    }
+
+    @RequestMapping(value = "intoForwardingGradeList", method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "supplier-forwarding",methods = "intoForwardingGradeList")
+    public String intoForwardingGradeList() {
+        return "supplierInformation/forwardingGradeList";
+    }
+
+    @RequestMapping(value = "intoForwardingGradeDetails", method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "supplier-forwarding",methods = "init")
+    public String intoForwardingGradeDetails() {
+        return "supplierInformation/forwardingGradeDetails";
+    }
     /**
      * 货代列表
      * @return
@@ -76,11 +98,7 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
         return result.getResultPojo();
     }
 
-    @RequestMapping(value = "intoForwardingInfo", method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "supplier-forwarding",methods = "init")
-    public String intoForwardingInfo() {
-        return "/supplier/forwardingBasic";
-    }
+
 
     /**
      * 货代详情
@@ -121,11 +139,7 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
     }
 
 
-    @RequestMapping(value = "intoWarehouseList", method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "supplier-forwarding",methods = "init")
-    public String intoWarehouseList() {
-        return "/supplier/forwardingWarehouse";
-    }
+
     /**
      * 关联仓库列表
      * @return
