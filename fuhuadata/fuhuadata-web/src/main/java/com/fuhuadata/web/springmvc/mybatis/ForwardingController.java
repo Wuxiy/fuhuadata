@@ -121,6 +121,11 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
     }
 
 
+    @RequestMapping(value = "intoWarehouseList", method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "supplier-forwarding",methods = "init")
+    public String intoWarehouseList() {
+        return "/supplier/forwardingWarehouse";
+    }
     /**
      * 关联仓库列表
      * @return
