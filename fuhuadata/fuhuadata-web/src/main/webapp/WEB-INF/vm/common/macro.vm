@@ -220,7 +220,7 @@
     </ul>
 #end
 
-## 货代tab页
+## 仓库tab页
 #macro(freightTab $selected $id)
     #set($tabs = [
     {'name':'基本信息','path':'','postfix':'/vm'},
