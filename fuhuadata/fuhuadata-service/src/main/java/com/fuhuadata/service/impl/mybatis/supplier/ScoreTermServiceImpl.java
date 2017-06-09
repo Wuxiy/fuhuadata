@@ -10,7 +10,7 @@ import com.fuhuadata.vo.Supplier.ScoreTermsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.ArrayList;`
 import java.util.List;
 /**
  * Created by wuxiy on 2017/6/2.
