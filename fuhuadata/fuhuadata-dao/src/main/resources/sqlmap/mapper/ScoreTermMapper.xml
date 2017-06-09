@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.supplier.ScoreTermMapper">
+  <resultMap id="BaseResultMap" type="com.fuhuadata.domain.mybatis.supplier.ScoreTerm">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="first_level_index" jdbcType="VARCHAR" property="firstLevelIndex" />
+    <result column="two_level_index" jdbcType="VARCHAR" property="twoLevelIndex" />
+    <result column="three_level_index" jdbcType="VARCHAR" property="threeLevelIndex" />
+    <result column="item_order" jdbcType="INTEGER" property="itemOrder"/>
+    <result column="item_full_marks" jdbcType="DECIMAL" property="itemFullMarks" />
+  </resultMap>
+  
+  <select id="ScoreItemThree"  parameterType="java.lang.Integer" resultType="com.fuhuadata.domain.mybatis.supplier.ScoreTerm">
+               SELECT
+      DISTINCT sst.`three_level_index`,
+      sst.`two_level_index`,
+      sst.`id`,
+      sst.`item_full_marks`,sst.`item_order`
+      FROM s_score_term sst
+      WHERE sst.`type` = #{type}
+  </select>
+
+    <select id="ScoreItemTwo" parameterType="java.lang.Integer" resultType="com.fuhuadata.domain.mybatis.supplier.ScoreTerm">
+        SELECT
+      DISTINCT sst.`two_level_index`,
+      sst.`first_level_index`
+      FROM s_score_term sst
+      WHERE sst.`type` = #{type}
+    </select>
+
+    <select id="ScoreItemFirst" parameterType="java.lang.Integer" resultType="com.fuhuadata.domain.mybatis.supplier.ScoreTerm">
+     SELECT
+          DISTINCT sst.`first_level_index`
+          FROM s_score_term sst
+          WHERE sst.`type` = #{type}
+    </select>
+
+
+
+</mapper>
