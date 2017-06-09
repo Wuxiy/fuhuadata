@@ -5,7 +5,10 @@ import com.google.common.base.CaseFormat;
 import java.beans.*;
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * <p>User: wangjie
@@ -28,11 +31,11 @@ public abstract class BaseEntity<ID extends Serializable> implements Serializabl
 
         PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
 
-        Stream<String> ignore = Stream.of("class");// 排除的属性
+        List<String> ignores = Stream.of("class").collect(toList());// 排除的属性
 
         Arrays.stream(propertyDescriptors)
                 .map(FeatureDescriptor::getName)
-                .filter(name -> ignore.noneMatch(s -> s.equals(name)))
+                .filter(name -> ignores.stream().noneMatch(s -> s.equals(name)))
                 .forEach(name ->
                         System.out.println(prefix + CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, name) + ","));
     }
