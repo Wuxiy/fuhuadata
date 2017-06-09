@@ -15,7 +15,6 @@ public class CustomerSubcompanyInfo{
 	private Integer customerSubId;
 	
     /**客户id**/
-    @NotBlank
 	private String customerId;
 	
     /**企业全称**/

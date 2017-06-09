@@ -175,6 +175,31 @@
     </ul>
 #end
 
+#macro(warehouseNav $num)
+<ul id="warehouseNav" class="nav nav-tabs pull-left">
+    <li
+        #if($num == 1)
+                class="active"
+        #end
+    ><a href="" lang="zh">基本信息</a></li>
+    <li
+        #if($num == 2)
+                class="active"
+        #end
+    ><a href="" lang="zh">合作货代</a></li>
+    <li
+        #if($num == 3)
+                class="active"
+        #end
+    ><a href="" lang="zh">订单记录</a></li>
+    <li
+        #if($num == 4)
+                class="active"
+        #end
+    ><a href="" lang="zh">投诉记录</a></li>
+</ul>
+#end
+
 ## 加工厂tab页
 #macro(factoryTab $selected $id)
     #set($tabs = [

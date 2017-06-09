@@ -3,6 +3,7 @@ package com.fuhuadata.service.mybatis.supplier;
 
 import com.fuhuadata.domain.mybatis.supplier.ScoreTerm;
 import com.fuhuadata.service.mybatis.BaseService;
+import com.fuhuadata.vo.Supplier.ScoreTermsVO;
 
 import java.util.List;
 
@@ -14,6 +15,11 @@ import java.util.List;
 
 public interface ScoreTermService extends BaseService<ScoreTerm, Integer> {
 
-    List<ScoreTerm> evaluationIndexItem(Integer type);
+    /**
+     * 获取评分项和评分值
+     * @param type
+     * @return
+     */
+    List<ScoreTermsVO> evaluationIndexItem(Integer type);
 }
 */
