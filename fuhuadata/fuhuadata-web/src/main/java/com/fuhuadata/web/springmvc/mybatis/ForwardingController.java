@@ -4,6 +4,7 @@ import com.fuhuadata.domain.mybatis.supplier.*;
 import com.fuhuadata.domain.query.*;
 import com.fuhuadata.service.mybatis.supplier.*;
 import com.fuhuadata.vo.Supplier.ScoreTermsVO;
+import com.fuhuadata.vo.Supplier.ScoreVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.logging.Log;
@@ -41,6 +42,9 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
 
     @Autowired
     private ScoreTermService scoreTermService;
+
+    @Autowired
+    private ForwardingScoreService forwardingScoreService;
 
 
     @RequestMapping(value = "init", method = RequestMethod.GET)
@@ -209,11 +213,17 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
         return result.getResultPojo();
     }
 
-
-
-
-
-
+    /**
+     * 保存评分项
+     */
+    @RequestMapping(value = "/saveScore", method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "supplier-forwarding",methods = "saveScore")
+    @ResponseBody
+    public ResultPojo saveScore(@RequestBody ScoreVO<ForwardingScore,ForwardingEvaluationScoreRelation> scoreVO){
+        Result<Integer> result = new Result();
+        result.addDefaultModel(forwardingScoreService.saveScore(scoreVO));
+        return result.getResultPojo();
+    }
 
 
 }

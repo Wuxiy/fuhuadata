@@ -1,13 +1,17 @@
 package com.fuhuadata.web.springmvc.mybatis;
 
 import com.fuhuadata.domain.mybatis.supplier.FreightForwarding;
+import com.fuhuadata.domain.mybatis.supplier.WarehouseEvaluationScoreRelation;
 import com.fuhuadata.domain.mybatis.supplier.WarehouseInfo;
+import com.fuhuadata.domain.mybatis.supplier.WarehouseScore;
 import com.fuhuadata.domain.query.QueryFreightforwarding;
 import com.fuhuadata.domain.query.QueryWarehouseInfo;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.mybatis.supplier.FreightForwardingService;
 import com.fuhuadata.service.mybatis.supplier.WarehouseInfoService;
+import com.fuhuadata.service.mybatis.supplier.WarehouseScoreService;
+import com.fuhuadata.vo.Supplier.ScoreVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.logging.Log;
@@ -32,6 +36,9 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
 
     @Autowired
     private FreightForwardingService freightForwardingService;
+
+    @Autowired
+    private WarehouseScoreService warehouseScoreService;
 
     @RequestMapping(value = "/init", method = RequestMethod.GET)
     @SystemLogAnnotation(module = "supplier-warehouse",methods = "init")
@@ -125,7 +132,17 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
         return result.getResultPojo();
     }
 
-    
+    /**
+     * 保存评分项
+     */
+    @RequestMapping(value = "/saveScore", method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "supplier-warehouse",methods = "saveScore")
+    @ResponseBody
+    public ResultPojo saveScore(@RequestBody ScoreVO<WarehouseScore,WarehouseEvaluationScoreRelation> scoreVO){
+        Result<Integer> result = new Result();
+        result.addDefaultModel(warehouseScoreService.saveScore(scoreVO));
+        return result.getResultPojo();
+    }
 
 
 }
