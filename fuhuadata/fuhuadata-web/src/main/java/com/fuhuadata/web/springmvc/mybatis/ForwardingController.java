@@ -12,6 +12,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -58,8 +59,8 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
 
     @RequestMapping(value = "intoForwardingBasic", method = RequestMethod.GET)
     @SystemLogAnnotation(module = "supplier-forwarding",methods = "intoForwardingBasic")
-    public String intoForwardingInfo() {
-        return "supplierInformation/forwardingBasic";
+    public ModelAndView intoForwardingInfo(int id) {
+        return new ModelAndView("supplierInformation/forwardingBasic").addObject("forwardingId",id);
     }
     @RequestMapping(value = "intoForwardingWarehouse", method = RequestMethod.GET)
     @SystemLogAnnotation(module = "supplier-forwarding",methods = "init")

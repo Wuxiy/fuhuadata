@@ -3,7 +3,6 @@ package com.fuhuadata.service.impl.mybatis.supplier;
 import com.fuhuadata.dao.mapper.supplier.FreightForwardingMapper;
 import com.fuhuadata.domain.common.BankAccBas;
 import com.fuhuadata.domain.common.BankAccType;
-import com.fuhuadata.domain.doc.BankDoc;
 import com.fuhuadata.domain.mybatis.supplier.FreightForwarding;
 import com.fuhuadata.domain.mybatis.supplier.LinkmanType;
 import com.fuhuadata.domain.mybatis.supplier.SupplierLinkman;
@@ -17,7 +16,6 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

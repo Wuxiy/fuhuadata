@@ -7,7 +7,9 @@ import java.util.List;
  * Created by wuxiy on 2017/6/9.
  */
 public class ScoreInfoVO<T> {
+    /**评分分值**/
     private List<T> scoreList;
+    /**评分项**/
     private List<ScoreTermsVO> terms;
 
 
