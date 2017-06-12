@@ -89,6 +89,7 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
     public ResultPojo forwardingList(QueryFreightforwarding query){
         Result<PageInfo<FreightForwarding>> result = new Result<>();
         try{
+            System.out.println(query.getIndex());
             PageInfo<FreightForwarding> forwardings  = freightForwardingService.getForwardingList(query);
             result.addDefaultModel("forwardingList",forwardings);
         }catch(Exception e){

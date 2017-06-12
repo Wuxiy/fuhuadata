@@ -21,7 +21,7 @@ $(function(){
                         contentType:'application/json',
                         data:{
                             pageSize:table.pageSize,
-                            startRow:(pageNum*table.pageSize)
+                            index:pageNum+1
                         },
                         async:true,
                         type:'GET'
@@ -42,7 +42,7 @@ $(function(){
                     contentType:'application/json',
                     data:{
                         pageSize:table.pageSize,
-                        startRow:0
+                        index:1
                     },
                     async:true,
                     type:'GET'
