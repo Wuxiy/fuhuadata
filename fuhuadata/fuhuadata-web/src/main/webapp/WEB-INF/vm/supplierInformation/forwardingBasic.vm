@@ -1,9 +1,9 @@
 <div class="clearfix content shadow-out">
     <!--副导航-->
     <div class="nav-deputy shadow-out clearfix">
-        #if($!{factoryId})
+        #*#if($!{factoryId})
             #factoryTab('基本信息',$!{factoryId})
-        #end
+        #end*#
         #breadcrumb()
     </div>
     <!--表格容器-->
@@ -25,14 +25,14 @@
                     <div class="panel-body clearfix">
                         <form class="form-horizontal" id="factory_info">
                             <div class="form-group">
-                                <label class="control-label col-xs-1" for="code" lang="zh">企业代码</label>
+                                <label class="control-label col-xs-1" for="code" lang="zh">货代代码</label>
                                 <div class="col-xs-2">
                                     <input class="form-control" name="code" type="text" disabled/>
                                 </div>
-                                <label class="control-label col-xs-1" for="orgName" lang="zh">所属组织<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <label class="control-label col-xs-1" for="pkSupplierclass" lang="zh">所属组织<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group" id="org_name">
-                                        <input class="form-control" name="orgName" data-control="editOn" type="text" disabled readonly>
+                                        <input class="form-control" name="pkSupplierclass" data-control="editOn" type="text" disabled readonly>
                                         <div class="input-group-btn">
                                             <button class="btn btn-xs btn-default" data-control="editOn" type="button" disabled>
                                                 <span class="glyphicon glyphicon-search"></span>
@@ -40,20 +40,26 @@
                                         </div>
                                     </div>
                                 </div>
-                                <label class="control-label col-xs-1" for="name" lang="zh">企业名称<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <label class="control-label col-xs-1" for="name" lang="zh">企业全称<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <input class="form-control" name="name" data-bind="localData" data-control="editOn" type="text" disabled/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-xs-1" for="abbr" lang="zh">企业简称</label>
+                                <label class="control-label col-xs-1" for="shortname" lang="zh">企业简称<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" name="abbr" data-bind="localData" data-control="editOn" type="text" disabled/>
+                                    <input class="form-control" name="shortname" data-bind="localData" data-control="editOn" type="text" disabled/>
                                 </div>
-                                <label class="control-label col-xs-1" for="oldName" lang="zh">企业曾用名</label>
+                                <label class="control-label col-xs-1" for="supprop" lang="zh">类型</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" name="oldName" data-bind="localData" data-control="editOn" type="text" disabled/>
+                                    <input class="form-control" name="supprop" data-control="editOn" type="text" disabled/>
                                 </div>
+                                <label class="control-label col-xs-1" for="creditCode" lang="zh">社会用信用代码</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="creditCode" data-bind="localData" data-control="editOn" type="text" disabled/>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="control-label col-xs-1" for="registerfund" lang="zh">注册资金</label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
@@ -61,40 +67,84 @@
                                         <span class="input-group-addon"  data-val="美元" lang="zh">万元</span>
                                     </div>
                                 </div>
+                                <label class="control-label col-xs-1" for="officeAddress" lang="zh">办公地址</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="officeAddress" type="text" disabled/>
+                                </div>
+                                <label class="control-label col-xs-1" for="tel1" lang="zh">联系电话</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="tel1" data-control="editOn" type="tel" disabled/>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-xs-1" for="address" lang="zh">注册地址</label>
+                                <label class="control-label col-xs-1" for="corpaddress" lang="zh">注册地址</label>
                                 <div class="col-xs-8">
-                                    <textarea class="form-control" name="address" data-bind="localData" data-control="editOn" rows="2" disabled></textarea>
+                                    <textarea class="form-control" name="corpaddress" data-control="editOn" rows="2" disabled></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" lang="zh">运输方式<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-5">
+                                    <label class="checkbox-inline">
+                                        <input name="transportationMethods" data-control="editOn" value="0" type="checkbox" disabled>
+                                        <span lang="zh">汽运</span>
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input name="transportationMethods" data-control="editOn" value="1" type="checkbox" disabled>
+                                        <span lang="zh">船运</span>
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input name="transportationMethods" data-control="editOn" value="2" type="checkbox" disabled>
+                                        <span lang="zh">铁路</span>
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input name="transportationMethods" data-control="editOn" value="3" type="checkbox" disabled>
+                                        <span lang="zh">航空</span>
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input name="transportationMethods" data-control="editOn" value="4" type="checkbox" disabled>
+                                        <span lang="zh">其他</span>
+                                    </label>
+                                    <span class="form-inline">
+                                        <input class="form-inline form-control hidden" name="" data-control="editOn" style="position:absolute;left:355px;" type="text" placeholder="请输入运输方式">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="remark" lang="zh">备注</label>
+                                <div class="col-xs-8">
+                                    <textarea class="form-control" name="remark" data-bind="localData" data-control="editOn" rows="4" disabled></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="name" lang="zh">联系人<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="name" data-bind="localData" data-control="editOn" type="text" disabled/>
+                                </div>
+                                <label class="control-label col-xs-1" for="abbr" lang="zh">联系电话</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="abbr" data-bind="localData" data-control="editOn" type="tel" disabled/>
+                                </div>
+                                <label class="control-label col-xs-1" for="oldName" lang="zh">邮箱</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="oldName" data-bind="localData" data-control="editOn" type="email" disabled/>
                                 </div>
                             </div>
                             <div class="form-group" id="time">
-                                <label class="control-label col-xs-1" for="cooperateTime" lang="zh">开始合作时间</label>
+                                <label class="control-label col-xs-1" for="startCooperateTime" lang="zh">开始合作时间</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" name="cooperateTime" data-control="editOn" type="date" disabled/>
+                                    <input class="form-control" name="startCooperateTime" data-control="editOn" type="date" disabled/>
                                 </div>
-                                <label class="control-label col-xs-1" for="coopMonths" lang="zh">合作时间</label>
+                                <label class="control-label col-xs-1" for="cooperateTime" lang="zh">合作时间</label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input class="form-control" name="coopMonths" type="text" disabled/>
+                                        <input class="form-control" name="cooperateTime" type="text" disabled/>
                                         <span class="input-group-addon" lang="zh">月</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-xs-1" for="productionLicenses" lang="zh">生产许可证<sup data-view="editView" class="not-null hidden">*</sup></label>
-                                <div class="col-xs-3">
-                                    <div class="input-group" id="production_licenses">
-                                        <input class="form-control" name="productionLicenses" data-control="editOn" type="text" disabled readonly/>
-                                        <div class="input-group-btn" lang="zh">
-                                            <button class="btn btn-xs btn-primary hidden" name="edit" data-view="editView" type="button" lang="zh">编辑</button>
-                                            <button class="btn btn-xs btn-primary" name="show" type="button" lang="zh">查看</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-xs-1" for="pesticideRegistration" lang="zh">农药登记证<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <label class="control-label col-xs-1" for="pesticideRegistration" lang="zh">营业执照<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-3">
                                     <div class="input-group" id="pesticide_registration">
                                         <input class="form-control" name="pesticideRegistration" data-control="editOn" type="text" disabled readonly/>
@@ -106,7 +156,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-xs-1" for="dischargePermit" lang="zh">排污许可证<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <label class="control-label col-xs-1" for="dischargePermit" lang="zh">无船承运业务经营资格登记证<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-3">
                                     <div class="input-group" id="discharge_permit">
                                         <input class="form-control" name="dischargePermit" data-control="editOn" type="text" disabled readonly/>
@@ -118,114 +168,9 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-xs-1" for="remark" lang="zh">备注</label>
-                                <div class="col-xs-8">
-                                    <textarea class="form-control" name="remark" data-bind="localData" data-control="editOn" rows="4" disabled></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-xs-1" for="supstate">状态<sup data-view="editView" class="not-null hidden">*</sup></label>
-                                <div class="col-xs-2">
-                                    <select class="form-control" name="supstate" data-bind="localData" data-control="editOn" disabled>
-                                        <option value="1">核准</option>
-                                        <option value="0">潜在</option>
-                                    </select>
-                                </div>
                                 <label class="control-label col-xs-1" for="score" lang="zh">综合评分</label>
                                 <div class="col-xs-2">
                                     <input class="form-control" name="score" data-bind="localData" data-control="editOn" type="number" min="0" disabled/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-xs-1" for="managerOrgName" lang="zh">管理员组织<sup data-view="editView" class="not-null hidden">*</sup></label>
-                                <div class="col-xs-2">
-                                    <div class="input-group" id="manager_org">
-                                        <input class="form-control" name="managerOrgName" data-control="editOn" type="text" disabled readonly>
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-xs btn-default" data-control="editOn" type="button" disabled>
-                                                <span class="glyphicon glyphicon-search"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <label class="control-label col-xs-1" for="managerDepName" lang="zh">管理员部门<sup data-view="editView" class="not-null hidden">*</sup></label>
-                                <div class="col-xs-2">
-                                    <div class="input-group" id="manager_dep">
-                                        <input class="form-control" name="managerDepName" data-control="editOn" type="text" placeholder="请先选择组织" disabled readonly>
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-xs btn-default" data-control="editOn" type="button" disabled>
-                                                <span class="glyphicon glyphicon-search"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <label class="control-label col-xs-1" for="manager" lang="zh">工厂管理员<sup data-view="editView" class="not-null hidden">*</sup></label>
-                                <div class="col-xs-2">
-                                    <div class="input-group" id="manager">
-                                        <input class="form-control" name="manager" data-control="editOn" type="text" placeholder="请先选择部门" disabled readonly>
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-xs btn-default dropdown" data-control="editOn" data-toggle="dropdown" type="button" disabled>
-                                                <span class="glyphicon glyphicon-search"></span>
-                                            </button>
-                                            <div class="dropdown-menu pull-right" style="width: 196px;padding: 3px 0;">
-                                                <ul name="selectContainer" style="list-style: none;margin-bottom: 0;padding: 0;width: 100%;max-height: 200px;overflow-y: auto;"></ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-xs-1" for="banks" lang="zh">银行账户</label>
-                                <div class="col-xs-8">
-                                    <table class="table text-center table-condensed table-bordered table-hover" id="bank_table">
-                                        <caption class="hidden text-right" data-view="editView">
-                                            <button class="btn-link" name="addBtn" data-control="editOn" type="button" disabled>新增</button>
-                                            <button class="btn-link" name="delBtn" data-control="editOn" type="button" disabled>删除</button>
-                                        </caption>
-                                        <thead>
-                                        <tr>
-                                            <th class="hidden text-center col-xs-1" data-view="editView">
-                                                <div class="checkbox">
-                                                    <label for="checkedAll">
-                                                        <input name="checkedAll" type="checkbox">
-                                                    </label>
-                                                </div>
-                                            </th>
-                                            <th class="text-center" lang="zh">账号</th>
-                                            <th class="text-center" lang="zh">户名</th>
-                                            <th class="text-center" lang="zh">开户银行</th>
-                                            <th class="text-center" lang="zh">银行类别</th>
-                                            <th class="text-center" lang="zh">币种</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody name="banks"></tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-xs-1" for="contacts" lang="zh">联系人</label>
-                                <div class="col-xs-8">
-                                    <table class="table text-center table-condensed table-bordered table-hover" id="contact_table">
-                                        <caption class="hidden text-right" data-view="editView">
-                                            <button class="btn-link" name="addBtn" data-control="editOn" type="button" disabled>新增</button>
-                                            <button class="btn-link" name="delBtn" data-control="editOn" type="button" disabled>删除</button>
-                                        </caption>
-                                        <thead>
-                                        <tr>
-                                            <th class="hidden text-center col-xs-1" data-view="editView">
-                                                <div class="checkbox">
-                                                    <label for="checkedAll">
-                                                        <input name="checkedAll" type="checkbox">
-                                                    </label>
-                                                </div>
-                                            </th>
-                                            <th class="text-center col-xs-3" lang="zh">姓名</th>
-                                            <th class="text-center col-xs-4" lang="zh">联系电话</th>
-                                            <th class="text-center col-xs-4" lang="zh">邮箱</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody name="contacts"></tbody>
-                                    </table>
                                 </div>
                             </div>
                             <div class="form-group" data-view="editHide">
