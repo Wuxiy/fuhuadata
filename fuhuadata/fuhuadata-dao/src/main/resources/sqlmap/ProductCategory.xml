@@ -40,6 +40,8 @@
         left join product_category mid
         on mid.`parent_id` = big.id
         left join product_category small
+
+
         on small.parent_id = mid.`id`
         where big.`parent_id`=0
         ]]>
@@ -114,7 +116,7 @@
         ON small.parent_id = midd.`id`
         LEFT JOIN product_info p
         ON p.small_category_id=small.id
-        LEFT JOIN product_ware pw ON p.`product_id` = pw.`product_info_id`
+        LEFT JOIN product_ware pw ON p.`product_id` = pw.`product_info_id` and pw.dr=0
         WHERE big.`parent_id`=0
     </select>
 

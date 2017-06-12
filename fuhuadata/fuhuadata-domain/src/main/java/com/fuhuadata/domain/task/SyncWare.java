@@ -11,8 +11,10 @@ public class SyncWare implements Serializable
 {
     private Integer wareId;
     private Integer productInfoId;
+    private String productName;
     private String ncId;
     private String code;
+    private Integer dr;//0：正常 1：删除或禁用
     //报关产品编码
     private String customsClearanceId;
     //customs_clearance_name
@@ -27,6 +29,14 @@ public class SyncWare implements Serializable
     private String model;
     //单位耗用比例
     private BigDecimal unitUseRate;
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
 
     public Integer getWareId() {
         return wareId;
@@ -114,5 +124,13 @@ public class SyncWare implements Serializable
 
     public void setUnitUseRate(BigDecimal unitUseRate) {
         this.unitUseRate = unitUseRate;
+    }
+
+    public Integer getDr() {
+        return dr;
+    }
+
+    public void setDr(Integer dr) {
+        this.dr = dr;
     }
 }
