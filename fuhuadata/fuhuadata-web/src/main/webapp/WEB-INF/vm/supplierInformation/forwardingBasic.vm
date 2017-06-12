@@ -42,13 +42,13 @@
                                 </div>
                                 <label class="control-label col-xs-1" for="name" lang="zh">企业全称<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" name="name" data-bind="localData" data-control="editOn" type="text" disabled/>
+                                    <input class="form-control" name="name"  data-control="editOn" type="text" disabled/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-1" for="shortname" lang="zh">企业简称<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" name="shortname" data-bind="localData" data-control="editOn" type="text" disabled/>
+                                    <input class="form-control" name="shortname" data-control="editOn" type="text" disabled/>
                                 </div>
                                 <label class="control-label col-xs-1" for="supprop" lang="zh">类型</label>
                                 <div class="col-xs-2">
@@ -56,14 +56,14 @@
                                 </div>
                                 <label class="control-label col-xs-1" for="creditCode" lang="zh">社会用信用代码</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" name="creditCode" data-bind="localData" data-control="editOn" type="text" disabled/>
+                                    <input class="form-control" name="creditCode"  data-control="editOn" type="text" disabled/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-xs-1" for="registerfund" lang="zh">注册资金</label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input class="form-control" name="registerfund" data-bind="localData" data-control="editOn" type="number" min="0" disabled/>
+                                        <input class="form-control" name="registerfund"  data-control="editOn" type="number" min="0" disabled/>
                                         <span class="input-group-addon"  data-val="美元" lang="zh">万元</span>
                                     </div>
                                 </div>
@@ -105,31 +105,33 @@
                                         <input name="transportationMethods" data-control="editOn" value="4" type="checkbox" disabled>
                                         <span lang="zh">其他</span>
                                     </label>
-                                    <span class="form-inline">
+                                    #*<span class="form-inline">
                                         <input class="form-inline form-control hidden" name="" data-control="editOn" style="position:absolute;left:355px;" type="text" placeholder="请输入运输方式">
-                                    </span>
+                                    </span>*#
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-xs-1" for="remark" lang="zh">备注</label>
+                                <label class="control-label col-xs-1" for="memo" lang="zh">备注</label>
                                 <div class="col-xs-8">
-                                    <textarea class="form-control" name="remark" data-bind="localData" data-control="editOn" rows="4" disabled></textarea>
+                                    <textarea class="form-control" name="memo"  data-control="editOn" rows="4" disabled></textarea>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-xs-1" for="name" lang="zh">联系人<sup data-view="editView" class="not-null hidden">*</sup></label>
-                                <div class="col-xs-2">
-                                    <input class="form-control" name="name" data-bind="localData" data-control="editOn" type="text" disabled/>
+                            <fieldset id="linkmens">
+                                <div class="form-group" name="linkmen">
+                                    <label class="control-label col-xs-1" for="name" lang="zh">联系人<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                    <div class="col-xs-2">
+                                        <input class="form-control" name="name"  data-control="editOn" type="text" disabled/>
+                                    </div>
+                                    <label class="control-label col-xs-1" for="pkLinkman" lang="zh">联系电话</label>
+                                    <div class="col-xs-2">
+                                        <input class="form-control" name="pkLinkman"  data-control="editOn" type="tel" disabled/>
+                                    </div>
+                                    <label class="control-label col-xs-1" for="email" lang="zh">邮箱</label>
+                                    <div class="col-xs-2">
+                                        <input class="form-control" name="email "  data-control="editOn" type="email" disabled/>
+                                    </div>
                                 </div>
-                                <label class="control-label col-xs-1" for="abbr" lang="zh">联系电话</label>
-                                <div class="col-xs-2">
-                                    <input class="form-control" name="abbr" data-bind="localData" data-control="editOn" type="tel" disabled/>
-                                </div>
-                                <label class="control-label col-xs-1" for="oldName" lang="zh">邮箱</label>
-                                <div class="col-xs-2">
-                                    <input class="form-control" name="oldName" data-bind="localData" data-control="editOn" type="email" disabled/>
-                                </div>
-                            </div>
+                            </fieldset>
                             <div class="form-group" id="time">
                                 <label class="control-label col-xs-1" for="startCooperateTime" lang="zh">开始合作时间</label>
                                 <div class="col-xs-2">
@@ -144,10 +146,10 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-xs-1" for="pesticideRegistration" lang="zh">营业执照<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <label class="control-label col-xs-1" for="businessLicence" lang="zh">营业执照<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-3">
-                                    <div class="input-group" id="pesticide_registration">
-                                        <input class="form-control" name="pesticideRegistration" data-control="editOn" type="text" disabled readonly/>
+                                    <div class="input-group" id="business_licence">
+                                        <input class="form-control" name="businessLicence" data-control="editOn" type="text" disabled readonly/>
                                         <div class="input-group-btn" lang="zh">
                                             <button class="btn btn-xs btn-primary hidden" name="edit" data-view="editView" type="button" lang="zh">编辑</button>
                                             <button class="btn btn-xs btn-primary" name="show" type="button" lang="zh">查看</button>
@@ -156,10 +158,10 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-xs-1" for="dischargePermit" lang="zh">无船承运业务经营资格登记证<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <label class="control-label col-xs-1" for="nvocc" lang="zh">无船承运业务经营资格登记证<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-3">
-                                    <div class="input-group" id="discharge_permit">
-                                        <input class="form-control" name="dischargePermit" data-control="editOn" type="text" disabled readonly/>
+                                    <div class="input-group" id="nvocc">
+                                        <input class="form-control" name="nvocc" data-control="editOn" type="text" disabled readonly/>
                                         <div class="input-group-btn" lang="zh">
                                             <button class="btn btn-xs btn-primary hidden" name="edit" data-view="editView" type="button" lang="zh">编辑</button>
                                             <button class="btn btn-xs btn-primary" name="show" type="button" lang="zh">查看</button>
@@ -168,85 +170,22 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-xs-1" for="score" lang="zh">综合评分</label>
+                                <label class="control-label col-xs-1" for="combinedScoring" lang="zh">综合评分</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" name="score" data-bind="localData" data-control="editOn" type="number" min="0" disabled/>
+                                    <input class="form-control" name="combinedScoring"  data-control="editOn" type="number" min="0" disabled/>
                                 </div>
                             </div>
                             <div class="form-group" data-view="editHide">
-                                <label class="control-label col-xs-1" for="modifyName" lang="zh">最后编辑人</label>
+                                <label class="control-label col-xs-1" for="lastmodifyUserName" lang="zh">最后编辑人</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" name="modifyName" type="text" disabled/>
+                                    <input class="form-control" name="lastmodifyUserName" type="text" disabled/>
                                 </div>
-                                <label class="control-label col-xs-1" for="modifyTime" lang="zh">最后编辑时间</label>
+                                <label class="control-label col-xs-1" for="modifiedtime" lang="zh">最后编辑时间</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" name="modifyTime" type="text" disabled/>
+                                    <input class="form-control" name="modifiedtime" type="text" disabled/>
                                 </div>
                             </div>
                         </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-## 银行详情modal
-<div class="modal fade" id="bank_modal" data-backdrop="true" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    ×
-                </button>
-            </div>
-            <div class="modal-body clearfix">
-                <form class="form-horizontal well" id="back_form" style="margin-bottom: 0;">
-                    <div class="form-group">
-                        <label class="control-label col-xs-2" for="accnum">银行账号<sup data-view="editView" class="not-null hidden">*</sup></label>
-                        <div class="col-xs-4">
-                            <input class="form-control" name="accnum" data-control="editOn" type="text">
-                        </div>
-                        <label class="control-label col-xs-2" for="accname">银行户名<sup data-view="editView" class="not-null hidden">*</sup></label>
-                        <div class="col-xs-4">
-                            <input class="form-control" name="accname" data-control="editOn" type="text">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-xs-2" for="currtypeName">币种<sup data-view="editView" class="not-null hidden">*</sup></label>
-                        <div class="col-xs-4">
-                            <select class="form-control" name="currtypeName" data-control="editOn" id="currtype_name"></select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-xs-2" for="pkBanktype">银行类别<sup data-view="editView" class="not-null hidden">*</sup></label>
-                        <div class="col-xs-4">
-                            <select class="form-control" name="pkBanktype" data-control="editOn" id="bank_first"></select>
-                        </div>
-                        <label class="control-label col-xs-2" for="pkBankdoc">开户银行<sup data-view="editView" class="not-null hidden">*</sup></label>
-                        <div class="col-xs-4">
-                            <select class="form-control" name="pkBankdoc" data-control="editOn" id="bank_second">
-                                <option value="" title="请先选择银行类别">——请先选择银行类别——</option>
-                            </select>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <div class="row">
-                    <div class="hidden col-xs-4 col-xs-offset-2" data-view="editView">
-                        <button class="btn btn-xs btn-block btn-default" name="cancel" type="button" lang="zh">取消</button>
-                    </div>
-                    <div class="col-xs-4">
-                        <button class="btn btn-xs btn-block btn-primary" name="save" type="button" lang="zh">保存</button>
-                    </div>
-                    #*<div class="col-xs-4 pull-right hidden" data-view="editView">
-                        <div class="btn-group btn-block">
-                            <button class="btn btn-xs btn-default col-xs-6" name="cancel" type="button" lang="zh">取消</button>
-                            <button class="btn btn-xs btn-primary col-xs-6" name="save" type="button" lang="zh">保存</button>
-                        </div>
-                    </div>*#
-                    <div class="col-xs-2 pull-right" data-view="editHide">
-                        <button class="btn btn-xs btn-block btn-primary" name="edit" type="button" lang="zh">编辑</button>
                     </div>
                 </div>
             </div>
