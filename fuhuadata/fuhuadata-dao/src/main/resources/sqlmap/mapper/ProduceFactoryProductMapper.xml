@@ -11,6 +11,7 @@
         <result column="category_id" jdbcType="INTEGER" property="categoryId"/>
         <result column="category" jdbcType="VARCHAR" property="category"/>
         <result column="cmaterial_id" jdbcType="VARCHAR" property="cmaterialId"/>
+        <result column="quality" jdbcType="TINYINT" property="quality"/>
         <result column="capacity" jdbcType="VARCHAR" property="capacity"/>
         <result column="capacity_unit" jdbcType="VARCHAR" property="capacityUnit"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
@@ -31,6 +32,7 @@
         pfp.category_id,
         pfp.cmaterial_id,
         pi.name cmaterial_name,
+        pfp.quality,
         pw.specification specification,
         pfp.capacity,
         pfp.capacity_unit,
