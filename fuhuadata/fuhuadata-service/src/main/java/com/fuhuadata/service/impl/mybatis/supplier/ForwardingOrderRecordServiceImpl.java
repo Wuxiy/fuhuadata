@@ -33,6 +33,9 @@ public class ForwardingOrderRecordServiceImpl extends BaseServiceImpl<Forwarding
         if(query.getWarehouseId()!=null){
             criteria.andEqualTo("warehouseId",query.getWarehouseId());
         }
+        if(query.getWarehouseName()!=null){
+            criteria.andLike("warehouseName","%"+query.getWarehouseName()+"%");
+        }
         if(StringUtils.isNotEmpty(query.getExportContractNumber())){
             criteria.andLike("exportContractNumber","%"+query.getExportContractNumber()+"%");
         }

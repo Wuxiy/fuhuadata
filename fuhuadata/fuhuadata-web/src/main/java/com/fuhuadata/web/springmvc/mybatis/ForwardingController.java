@@ -184,8 +184,8 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
     /**
      * 订单记录list
      */
-    @RequestMapping(value = "/forwardingOrderRecordList", method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "supplier-forwarding",methods = "forwardingOrderRecordList")
+    @RequestMapping(value = "/orderRecordList", method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "supplier-forwarding",methods = "orderRecordList")
     @ResponseBody
     public ResultPojo forwardingOrderRecordList(QueryForwardingOrderRecord query){
         Result<PageInfo<ForwardingOrderRecord>> result = new Result<>();

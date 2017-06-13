@@ -22,6 +22,4 @@ public interface FreightForwardingService extends BaseService<FreightForwarding,
      * @return
      */
     PageInfo<FreightForwarding> getForwardingListByWarehouseId(QueryFreightforwarding query);
-
-
 }
