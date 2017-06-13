@@ -30,7 +30,7 @@
         pfp.factory_id,
         pfp.category,
         pfp.category_id,
-        pfp.cmaterial_id,
+        pw.ware_id cmaterial_id,
         pi.name cmaterial_name,
         pfp.quality,
         pw.specification specification,
