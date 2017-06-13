@@ -1,4 +1,5 @@
 <div class="nav-deputy shadow-out clearfix">
+    #forwardingWarehouse(1,$!{forwardingId})
     #breadcrumb()
 </div>
 <div class="dashboard-wrapper">

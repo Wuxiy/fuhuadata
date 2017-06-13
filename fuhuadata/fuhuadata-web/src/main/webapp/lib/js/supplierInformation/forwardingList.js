@@ -7,7 +7,7 @@ $(function(){
         tms=['汽运','船运','铁路','航空','其他'],
         table = {
             total:0,
-            pageSize:1,
+            pageSize:3,
             pageNum:0,
             pagination:$('#pagination'),
             container:$('#forwarding_list'),

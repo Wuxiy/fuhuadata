@@ -1,6 +1,6 @@
 <div class="clearfix content shadow-out">
     <div class="nav-deputy shadow-out clearfix">
-        #forwardingTab(2)
+        #forwardingTab(2,$!{forwardingId})
         #breadcrumb()
     </div>
     <!--表格容器-->
