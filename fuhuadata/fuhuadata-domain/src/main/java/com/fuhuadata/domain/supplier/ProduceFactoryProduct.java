@@ -52,7 +52,6 @@ public class ProduceFactoryProduct extends BaseEntity<Integer> {
     /**
      * 质量
      */
-    @Transient
     private Byte quality;
 
     /**
