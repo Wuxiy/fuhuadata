@@ -76,7 +76,7 @@
                         <div class="col-xs-3">
                             <select class="form-control" id="quality">
                                 <option value="0">好</option>
-                                <option value="1">一般</option>
+                                <option value="1" selected>一般</option>
                                 <option value="2">差</option>
                             </select>
                         </div>
@@ -159,6 +159,7 @@
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script type="text/javascript">
     var id = $('#factoryId').val();
+    var qualityList = ["好","一般","差"];
 
     $(document).ready(function(){
         render();
@@ -186,9 +187,13 @@
         for(var i=0;i<data.length;i++){
             _html += '<tr>';
             _html += '<td>'+ifEmpty(data[i].id)+'</td>';
-            _html += '<td><a class="info" data-categoryId="'+data[i].categoryId+'" data-cmaterialId="'+data[i].cmaterialId+'" data-id="'+data[i].id+'" data-category="'+data[i].category+'" data-category="'+data[i].cmaterialName+'" style="cursor:pointer;">'+data[i].category+'-'+data[i].cmaterialName+'</a></td>';
+            _html += '<td><a class="info" data-categoryId="'+data[i].categoryId+'" data-cmaterialId="'+data[i].cmaterialId+'" data-id="'+data[i].id+'" data-category="'+data[i].category+'" data-cmaterialName="'+data[i].cmaterialName+'" data-specification="'+data[i].specification+'" style="cursor:pointer;">'+data[i].category+'-'+data[i].cmaterialName+'-'+data[i].specification+'</a></td>';
             _html += '<td>'+ifEmpty(data[i].capacity)+'</td>';
-            _html += '<td>'+ifEmpty(data[i].quality)+'</td>';
+            if(data[i].quality!=undefined){
+                _html += '<td data-quality="'+ifEmpty(data[i].quality)+'">'+qualityList[data[i].quality]+'</td>';
+            }else{
+                _html +='<td></td>';
+            }
             if(data[i].productAddrs!=undefined){
                 if(data[i].productAddrs[0]!=undefined){
                     _html +='<td data-id="'+ifEmpty(data[i].productAddrs[0].id)+'">'+ifEmpty(data[i].productAddrs[0].addr)+'</td>';
@@ -225,7 +230,8 @@
         $('#name').attr('data-cmaterialId',ids.split('_')[1]);
         $('#name').attr('data-categoryId',fids.split('_')[1]);
         $('#name').attr('data-category',ftarEltext);
-        $('#name').attr('data-cmaterialName',tarEltext);
+        $('#name').attr('data-cmaterialName',tarEltext.split('-')[0]);
+        $('#name').attr('data-specification',tarEltext.split('-')[1]);
         $('#name').val(ftarEltext+'-'+tarEltext);
 
         $('#treeModal').modal('hide');
@@ -239,6 +245,7 @@
         var categoryId = $(this).attr('data-categoryId');//父id
         var category = $(this).attr('data-category');
         var cmaterialName = $(this).attr('data-cmaterialName');
+        var specification = $(this).attr('data-specification');
         var pid = $(this).attr('data-id');//产品id
 
         $('#name').val(tr.eq(1).text());
@@ -247,8 +254,9 @@
         $('#name').attr('data-cmaterialId',cmaterialId);
         $('#name').attr('data-category',category);
         $('#name').attr('data-cmaterialName',cmaterialName);
+        $('#name').attr('data-specification',specification);
         $('#capacity').val(tr.eq(2).text());
-        $('#quality').val(tr.eq(3).text());
+        $('#quality').val(tr.eq(3).attr('data-quality'));
         $('#addr1').attr('data-id',tr.eq(4).attr('data-id'));
         $('#addr1').val(tr.eq(4).text());
         $('#capacity1').val(tr.eq(5).text());
@@ -270,13 +278,14 @@
         $('#name').attr('data-cmaterialId','');
         $('#name').attr('data-category','');
         $('#name').attr('data-cmaterialName','');
+        $('#name').attr('data-specification','');
         $('#capacity').val('');
         $('#quality').val('');
         $('#addr1').val('');
         $('#addr1').attr('data-id','');
         $('#capacity1').val('');
         $('#addr2').val('');
-        $('#addr2').val('data-id','');
+        $('#addr2').attr('data-id','');
         $('#capacity2').val('');
         $('#remark').val('');
 
@@ -347,11 +356,13 @@
             cmaterialId:$('#name').attr('data-cmaterialId'),
             category:$('#name').attr('data-category'),
             cmaterialName:$('#name').attr('data-cmaterialName'),
+            specification:$('#name').attr('data-specification'),
             quality:$('#quality').val(),
             capacity:$('#capacity').val(),
             remark:$('#remark').val(),
             productAddrs:getAddrs()
         }
+        console.log(data);
         return JSON.stringify(data);
     }
 
