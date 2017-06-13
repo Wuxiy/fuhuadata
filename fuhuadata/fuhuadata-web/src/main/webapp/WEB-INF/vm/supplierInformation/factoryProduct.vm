@@ -74,7 +74,11 @@
                         </div>
                         <label class="col-lg-2 control-label">产品质量</label>
                         <div class="col-xs-3">
-                            <input class="form-control" id="quality" type="text">
+                            <select class="form-control" id="quality">
+                                <option value="0">好</option>
+                                <option value="1">一般</option>
+                                <option value="2">差</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group productAddrs">
@@ -186,15 +190,20 @@
             _html += '<td>'+ifEmpty(data[i].capacity)+'</td>';
             _html += '<td>'+ifEmpty(data[i].quality)+'</td>';
             if(data[i].productAddrs!=undefined){
-                _html +='<td>'+ifEmpty(data[i].productAddrs[0].addr)+'</td>';
-                _html +='<td>'+ifEmpty(data[i].productAddrs[0].capacity)+'</td>';
-                _html +='<td>'+ifEmpty(data[i].productAddrs[1].addr)+'</td>';
-                _html +='<td>'+ifEmpty(data[i].productAddrs[1].capacity)+'</td>';
-            }else{
-                _html +='<td></td>';
-                _html +='<td></td>';
-                _html +='<td></td>';
-                _html +='<td></td>';
+                if(data[i].productAddrs[0]!=undefined){
+                    _html +='<td data-id="'+ifEmpty(data[i].productAddrs[0].id)+'">'+ifEmpty(data[i].productAddrs[0].addr)+'</td>';
+                    _html +='<td>'+ifEmpty(data[i].productAddrs[0].capacity)+'</td>';
+                }else{
+                    _html +='<td></td>';
+                    _html +='<td></td>';
+                }
+                if(data[i].productAddrs[1]!=undefined){
+                    _html +='<td data-id="'+ifEmpty(data[i].productAddrs[1].id)+'">'+ifEmpty(data[i].productAddrs[1].addr)+'</td>';
+                    _html +='<td>'+ifEmpty(data[i].productAddrs[1].capacity)+'</td>';
+                }else{
+                    _html +='<td></td>';
+                    _html +='<td></td>';
+                }
             }
             _html +='<td>'+ifEmpty(data[i].remark)+'</td>';
             _html +='</tr>';
@@ -240,13 +249,16 @@
         $('#name').attr('data-cmaterialName',cmaterialName);
         $('#capacity').val(tr.eq(2).text());
         $('#quality').val(tr.eq(3).text());
+        $('#addr1').attr('data-id',tr.eq(4).attr('data-id'));
         $('#addr1').val(tr.eq(4).text());
         $('#capacity1').val(tr.eq(5).text());
         $('#addr2').val(tr.eq(6).text());
+        $('#addr2').attr('data-id',tr.eq(6).attr('data-id'));
         $('#capacity2').val(tr.eq(7).text());
         $('#remark').val(tr.eq(8).text());
 
         $('#finish').attr('data-edit','1');
+        $('#finish').attr('data-id',pid);
         $('#modal').modal('show');
     })
 
@@ -261,17 +273,21 @@
         $('#capacity').val('');
         $('#quality').val('');
         $('#addr1').val('');
+        $('#addr1').attr('data-id','');
         $('#capacity1').val('');
         $('#addr2').val('');
+        $('#addr2').val('data-id','');
         $('#capacity2').val('');
-        $('#remarks').val('');
+        $('#remark').val('');
 
+        $('#finish').attr('data-id','');
         $('#finish').attr('data-edit','0');
         $('#modal').modal('show');
     })
 
     //完成操作
     $('#finish').click(function(){
+        var pid = $(this).attr('data-id');
         var edit = $(this).attr('data-edit');
         var isup = true;
         var notnull = $('.notnull');
@@ -287,13 +303,14 @@
             if(edit == 0){
                 jQuery.ajax({
                     url:basePath + '/supplier/factories/' + id + '/products',
-                    data:adddata(),
+                    data:getdata(),
                     type:'POST',
                     dataType:"json",
                     contentType:"application/json",
                     success:function(result){
                         if(result.code == 1){
                             alert('新增成功！');
+                            $('#modal').modal('hide');
                             render();
                         }else{
                             alert('新增失败！');
@@ -303,14 +320,15 @@
             }
             else if(edit == 1){
                 jQuery.ajax({
-                    url:basePath + '/supplier/factories/' + id + '/products',
-                    data:infodata(),
-                    type:'POST',
+                    url:basePath + '/supplier/factories/' + id + '/products/' + pid,
+                    data:getdata(),
+                    type:'PUT',
                     dataType:"json",
                     contentType:"application/json",
                     success:function(result){
                         if(result.code == 1){
                             alert('修改成功！');
+                            $('#modal').modal('hide');
                             render();
                         }else{
                             alert('修改失败！');
@@ -322,33 +340,15 @@
 
     })
 
-    //更新
-    function infodata() {
+    //获取数据
+    function getdata() {
         var data = {
-            id:$('#name').attr('data-id'),
-            factoryId:id,
             categoryId:$('#name').attr('data-categoryId'),
             cmaterialId:$('#name').attr('data-cmaterialId'),
             category:$('#name').attr('data-category'),
             cmaterialName:$('#name').attr('data-cmaterialName'),
             quality:$('#quality').val(),
-            capacity:$('#capacity'),
-            remark:$('#remark').val(),
-            productAddrs:getAddrs()
-        }
-        return JSON.stringify(data);
-    }
-
-    //新增
-    function adddata() {
-        var data = {
-            factoryId:id,
-            categoryId:$('#name').attr('data-categoryId'),
-            cmaterialId:$('#name').attr('data-cmaterialId'),
-            category:$('#name').attr('data-category'),
-            cmaterialName:$('#name').attr('data-cmaterialName'),
-            quality:$('#quality').val(),
-            capacity:$('#capacity'),
+            capacity:$('#capacity').val(),
             remark:$('#remark').val(),
             productAddrs:getAddrs()
         }
@@ -359,15 +359,17 @@
     function getAddrs(){
         var data = [
             {
+                "id":$('#addr1').attr('data-id'),
                 "addr":$('#addr1').val(),
                 "capacity":$('#capacity1').val()
             },
             {
+                "id":$('#addr2').attr('data-id'),
                 "addr":$('#addr2').val(),
                 "capacity":$('#capacity2').val()
             }
         ]
-        return JSON.stringify(data);
+        return data;
     }
 
     function ifEmpty(data){

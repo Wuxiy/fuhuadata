@@ -1,6 +1,7 @@
 package com.fuhuadata.service.mybatis.common;
 
 import com.fuhuadata.domain.common.BankAccBas;
+import com.fuhuadata.domain.common.BankAccType;
 import com.fuhuadata.service.mybatis.BaseService;
 
 import java.util.List;
@@ -18,6 +19,13 @@ public interface BankAccBasService extends BaseService<BankAccBas, Integer> {
      * @return
      */
     List<BankAccBas> listBankAccs(short accType, Integer customerId);
+
+    /**
+     * 获取银行账号
+     * @param accType 银行账号类别
+     * @return
+     */
+    List<BankAccBas> listBankAccs(BankAccType accType);
 
     /**
      * 批量删除银行账号

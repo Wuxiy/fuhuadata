@@ -12,6 +12,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -41,10 +42,10 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
     @Autowired
     private ScoreTermService scoreTermService;
 
-    @RequestMapping(value = "/intoWarehouseInfoList", method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "supplier-warehouse",methods = "intoWarehouseInfoList")
+    @RequestMapping(value = "/intoWarehouseList", method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "supplier-warehouse",methods = "intoWarehouseList")
     public String intoWarehouseInfoList() {
-        return "supplierInformation/warehouseInfoList";
+        return "supplierInformation/warehouseList";
     }
 
     /**
@@ -53,9 +54,37 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
      */
     @RequestMapping(value = "/intoWarehouseBasic", method = RequestMethod.GET)
     @SystemLogAnnotation(module = "supplier-warehouse",methods = "intoWarehouseInfo")
-    public String intoWarehouseInfo() {
-        return "supplierInformation/warehouseBasic";
+    public ModelAndView intoWarehouseBasic(Integer id) {
+        return new ModelAndView("supplierInformation/warehouseBasic").addObject("id",id);
     }
+    /**
+     * 进入仓库合作货代列表
+     * @return
+     */
+    @RequestMapping(value = "/intoWarehouseopperation", method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "supplier-warehouse",methods = "intoWarehouseopperation")
+    public String intoWarehouseopperation() {
+        return "supplierInformation/warehouseopperation";
+    }
+    /**
+     * 进入仓库订单记录
+     * @return
+     */
+    @RequestMapping(value = "/intoWarehouseOrder", method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "supplier-warehouse",methods = "intoWarehouseOrder")
+    public String intoWarehouseOrder() {
+        return "supplierInformation/warehouseOrder";
+    }
+    /**
+     * 进入仓库投诉记录
+     * @return
+     */
+    @RequestMapping(value = "/intoWarehouseComplaints", method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "supplier-warehouse",methods = "intoWarehouseComplaints")
+    public String intoWarehouseComplaints() {
+        return "supplierInformation/warehouseComplaints";
+    }
+
 
     /**
      * 仓库列表
