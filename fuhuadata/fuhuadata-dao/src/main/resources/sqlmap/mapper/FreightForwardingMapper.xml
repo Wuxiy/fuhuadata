@@ -51,7 +51,7 @@
       FROM
         s_freight_forwarding sff
         LEFT JOIN s_supplier_linkman ss ON ss.`suppier_id` = sff.`id` AND ss.`supplier_type` = 1 AND ss.`isdefault` = 1
-        ORDER BY sff.`cooperate_time` DESC
+        ORDER BY sff.`creationtime` DESC
   </select>
 
     <!--仓库合作货代-->
