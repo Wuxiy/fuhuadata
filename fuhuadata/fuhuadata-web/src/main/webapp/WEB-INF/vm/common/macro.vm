@@ -258,9 +258,9 @@
 ## 货代tab页
 #macro(forwardingTab $selected $id)
     #set($tabs = [
-    {'name':'基本信息','path':''},
-    {'name':'仓库信息','path':''},
-    {'name':'订单记录','path':''}
+    {'name':'基本信息','path':'/supplier/forwarding/intoForwardingBasic?id='},
+    {'name':'仓库信息','path':'/supplier/forwarding/intoForwardingWarehouse?id='},
+    {'name':'订单记录','path':'/supplier/forwarding/intoForwardingOrder?id='}
     ])
 <ul id="saleNav" class="nav nav-tabs pull-left">
     #foreach($item in $tabs)

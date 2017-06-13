@@ -3,8 +3,10 @@ package com.fuhuadata.web.springmvc.mybatis;
 import com.fuhuadata.domain.mybatis.supplier.*;
 import com.fuhuadata.domain.query.*;
 import com.fuhuadata.service.mybatis.supplier.*;
+import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.Supplier.ScoreInfoVO;
 import com.fuhuadata.vo.Supplier.ScoreVO;
+import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.logging.Log;
@@ -134,6 +136,8 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
     public ResultPojo updateWarehouseInfo(@RequestBody WarehouseInfo warehouseInfo){
         Result<Integer> result = new Result<>();
         try{
+            warehouseInfo.setModifiedtime(DateUtil.getDateTime());
+            warehouseInfo.setModifier(LoginUtils.getLoginName());
             result.addDefaultModel("warehouseInfo",warehouseInfoService.updateSelective(warehouseInfo));
         }catch(Exception e){
             log.error("更新仓库信息出错",e);
@@ -194,7 +198,14 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
     @ResponseBody
     public ResultPojo saveScore(@RequestBody ScoreVO<WarehouseScore,WarehouseEvaluationScoreRelation> scoreVO){
         Result<Integer> result = new Result();
-        result.addDefaultModel(warehouseScoreService.saveScore(scoreVO));
+        try{
+            result.addDefaultModel(warehouseScoreService.saveScore(scoreVO));
+        }catch(Exception e){
+            log.error("保存仓库评分出错");
+            result.setMessage(e.getMessage());
+            result.setSuccess(false);
+        }
+
         return result.getResultPojo();
     }
 
