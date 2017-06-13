@@ -200,15 +200,32 @@
 </ul>
 #end
 
+## 货代仓库列表切换
+#macro(forwardingWarehouse $selected)
+    #set($tabs = [
+    {'name':'货代信息','path':'/supplier/forwarding/intoForwardingList'},
+    {'name':'仓库信息','path':''}
+    ])
+<ul id="saleNav" class="nav nav-tabs pull-left">
+    #foreach($item in $tabs)
+        <li
+            #if($selected==$item.name)
+                    class="active"
+            #end
+        ><a href="$!{request.contextPath}$!{item.path}" lang="zh">$!{item.name}</a></li>
+    #end
+</ul>
+#end
+
 ## 加工厂tab页
 #macro(factoryTab $selected $id)
     #set($tabs = [
     {'name':'基本信息','path':'/supplier/factories/','postfix':'/vm'},
     {'name':'产品信息','path':'/supplier/factories/','postfix':'/products/vm'},
-    {'name':'订单记录','path':'/supplier/factory/order/','postfix':'/order/vm'},
-    {'name':'投诉记录','path':'/supplier/factory/complaint/','postfix':'/complaint/vm'},
-    {'name':'延期交货记录','path':'/supplier/factory/delivery/delay/','postfix':'/delivery/delay/vm'}
+    {'name':'订单记录','path':'/supplier/factories/','postfix':'/order/vm'}
     ])
+#*{'name':'投诉记录','path':'/supplier/factories/','postfix':'/complaint/vm'},
+{'name':'延期交货记录','path':'/supplier/factories/','postfix':'/delivery/delay/vm'}*#
     <ul id="saleNav" class="nav nav-tabs pull-left">
     #foreach($item in $tabs)
         <li
@@ -223,11 +240,11 @@
 ## 仓库tab页
 #macro(freightTab $selected $id)
     #set($tabs = [
-    {'name':'基本信息','path':'','postfix':'/vm'},
-    {'name':'仓库信息','path':'','postfix':'/products/vm'},
-    {'name':'竞标记录','path':'','postfix':'/order/vm'},
-    {'name':'订单记录','path':'','postfix':'/complaint/vm'},
-    {'name':'投诉记录','path':'','postfix':'/delivery/delay/vm'}
+    {'name':'基本信息','path':''},
+    {'name':'仓库信息','path':''},
+    {'name':'竞标记录','path':''},
+    {'name':'订单记录','path':''},
+    {'name':'投诉记录','path':''}
     ])
 <ul id="saleNav" class="nav nav-tabs pull-left">
     #foreach($item in $tabs)

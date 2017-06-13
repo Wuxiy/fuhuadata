@@ -27,10 +27,16 @@ public class FreightForwarding extends BaseEntity<Integer>{
     private String code;
 
     /**
-     * 所属组织
+     * 基本分类
      */
     @Column(name = "pk_supplierclass")
     private String pkSupplierclass;
+
+    /**
+     * 所属组织
+     */
+    @Column(name="pk_org")
+    private String pkOrg;
 
     /**
      * 企业全称
@@ -713,5 +719,13 @@ public class FreightForwarding extends BaseEntity<Integer>{
 
     public void setCreator(Integer creator) {
         this.creator = creator;
+    }
+
+    public String getPkOrg() {
+        return pkOrg;
+    }
+
+    public void setPkOrg(String pkOrg) {
+        this.pkOrg = pkOrg;
     }
 }

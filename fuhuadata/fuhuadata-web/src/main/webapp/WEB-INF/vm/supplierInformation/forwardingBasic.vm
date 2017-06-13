@@ -172,7 +172,12 @@
                             <div class="form-group">
                                 <label class="control-label col-xs-1" for="combinedScoring" lang="zh">综合评分</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" name="combinedScoring"  data-control="editOn" type="number" min="0" disabled/>
+                                    <div class="input-group">
+                                        <input class="form-control" name="combinedScoring" type="number" min="0" disabled/>
+                                        <div class="input-group-btn">
+                                            <a class="btn btn-xs btn-primary" href="#" lang="zh">查看</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group" data-view="editHide">
@@ -299,5 +304,5 @@
         </div>
     </div>
 </div>
-<input id="factoryId" type="hidden" value="$!{factoryId}">
-<script src="${request.contextPath}/lib/js/supplierInformation/factoryBasic.js"></script>
+<input id="forwardingId" type="hidden" value="$!{forwardingId}">
+<script src="${request.contextPath}/lib/js/supplierInformation/forwardingBasic.js"></script>
