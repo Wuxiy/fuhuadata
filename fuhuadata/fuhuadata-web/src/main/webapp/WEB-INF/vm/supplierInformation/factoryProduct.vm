@@ -75,9 +75,9 @@
                         <label class="col-lg-2 control-label">产品质量</label>
                         <div class="col-xs-3">
                             <select class="form-control" id="quality">
-                                <option value="0"></option>
-                                <option value="1"></option>
-                                <option value="2"></option>
+                                <option value="0">好</option>
+                                <option value="1">一般</option>
+                                <option value="2">差</option>
                             </select>
                         </div>
                     </div>
