@@ -1,0 +1,37 @@
+<div class="nav-deputy shadow-out clearfix">
+    #breadcrumb()
+</div>
+<div class="dashboard-wrapper">
+    <div class="row">
+        <div class="col-xs-12 view-HD-lg">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" lang="zh">仓库信息</h3>
+                </div>
+                <div class="panel-body clearfix">
+                    <!--表格-->
+                    <table class="table text-center table-condensed table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th class="text-center" lang="zh">仓库编号</th>
+                            <th class="text-center" lang="zh">企业全称</th>
+                            <th class="text-center" lang="zh">企业简称</th>
+                            <th class="text-center" lang="zh">类型</th>
+                            <th class="text-center" lang="zh">仓库地址</th>
+                            <th class="text-center" lang="zh">仓储面积(亩)</th>
+                            <th class="text-center" lang="zh">是否危险品仓库</th>
+                            <th class="text-center" lang="zh">是否做内装运港</th>
+                            <th class="text-center" lang="zh">综合评分</th>
+                            <th class="text-center" lang="zh">备注</th>
+                        </tr>
+                        </thead>
+                        <tbody id="forwarding_list"></tbody>
+                    </table>
+                    <div id="pagination" class="pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/supplierInformation/warehouseList.js"></script>
