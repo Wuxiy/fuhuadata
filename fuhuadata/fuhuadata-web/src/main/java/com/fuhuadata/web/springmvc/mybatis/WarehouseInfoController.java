@@ -9,6 +9,7 @@ import com.fuhuadata.vo.Supplier.ScoreVO;
 import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import com.github.pagehelper.PageInfo;
+import com.sun.javafx.sg.prism.NGShape;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,16 +58,16 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
     @RequestMapping(value = "/intoWarehouseBasic", method = RequestMethod.GET)
     @SystemLogAnnotation(module = "supplier-warehouse",methods = "intoWarehouseInfo")
     public ModelAndView intoWarehouseBasic(Integer id) {
-        return new ModelAndView("supplierInformation/warehouseBasic").addObject("id",id);
+        return new ModelAndView("supplierInformation/warehouseBasic").addObject("warehouseId",id);
     }
     /**
      * 进入仓库合作货代列表
      * @return
      */
-    @RequestMapping(value = "/intoWarehouseopperation", method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "supplier-warehouse",methods = "intoWarehouseopperation")
-    public String intoWarehouseopperation() {
-        return "supplierInformation/warehouseopperation";
+    @RequestMapping(value = "/intoWarehouseOpperation", method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "supplier-warehouse",methods = "intoWarehouseOpperation")
+    public ModelAndView intoWarehouseopperation(int id) {
+        return new ModelAndView("supplierInformation/warehouseOpperation").addObject("warehouseId",id);
     }
     /**
      * 进入仓库订单记录
@@ -74,8 +75,8 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
      */
     @RequestMapping(value = "/intoWarehouseOrder", method = RequestMethod.GET)
     @SystemLogAnnotation(module = "supplier-warehouse",methods = "intoWarehouseOrder")
-    public String intoWarehouseOrder() {
-        return "supplierInformation/warehouseOrder";
+    public ModelAndView intoWarehouseOrder(int id) {
+        return new ModelAndView("supplierInformation/warehouseOrder").addObject("warehouseId",id);
     }
     /**
      * 进入仓库投诉记录
@@ -83,8 +84,8 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
      */
     @RequestMapping(value = "/intoWarehouseComplaints", method = RequestMethod.GET)
     @SystemLogAnnotation(module = "supplier-warehouse",methods = "intoWarehouseComplaints")
-    public String intoWarehouseComplaints() {
-        return "supplierInformation/warehouseComplaints";
+    public ModelAndView intoWarehouseComplaints(int id) {
+        return new ModelAndView("supplierInformation/warehouseComplaints").addObject("warehouseId",id);
     }
 
 
