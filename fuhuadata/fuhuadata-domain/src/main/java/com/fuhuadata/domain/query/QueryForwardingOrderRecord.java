@@ -10,7 +10,6 @@ public class QueryForwardingOrderRecord extends PageBase {
      * 货代物流id
      */
     private Integer freightforwardingId;
-
     /**
      * 仓库id
      */
