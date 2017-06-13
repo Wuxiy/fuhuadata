@@ -242,9 +242,7 @@
     #set($tabs = [
     {'name':'基本信息','path':''},
     {'name':'仓库信息','path':''},
-    {'name':'竞标记录','path':''},
-    {'name':'订单记录','path':''},
-    {'name':'投诉记录','path':''}
+    {'name':'竞标记录','path':''}
     ])
 <ul id="saleNav" class="nav nav-tabs pull-left">
     #foreach($item in $tabs)
@@ -253,6 +251,24 @@
                     class="active"
             #end
         ><a href="$!{request.contextPath}$!{item.path}$!{id}$!{item.postfix}" lang="zh">$!{item.name}</a></li>
+    #end
+</ul>
+#end
+
+## 货代tab页
+#macro(forwardingTab $selected $id)
+    #set($tabs = [
+    {'name':'基本信息','path':''},
+    {'name':'仓库信息','path':''},
+    {'name':'订单记录','path':''}
+    ])
+<ul id="saleNav" class="nav nav-tabs pull-left">
+    #foreach($item in $tabs)
+        <li
+            #if($selected==$item.name)
+                    class="active"
+            #end
+        ><a href="$!{request.contextPath}$!{item.path}$!{id}" lang="zh">$!{item.name}</a></li>
     #end
 </ul>
 #end
