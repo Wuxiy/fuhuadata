@@ -175,21 +175,46 @@
     </ul>
 #end
 
-## 货代仓库列表tab页
-#macro(warehouseNav $selected)
+#macro(warehouseNav $num)
+<ul id="warehouseNav" class="nav nav-tabs pull-left">
+    <li
+        #if($num == 1)
+                class="active"
+        #end
+    ><a href="" lang="zh">基本信息</a></li>
+    <li
+        #if($num == 2)
+                class="active"
+        #end
+    ><a href="" lang="zh">合作货代</a></li>
+    <li
+        #if($num == 3)
+                class="active"
+        #end
+    ><a href="" lang="zh">订单记录</a></li>
+    <li
+        #if($num == 4)
+                class="active"
+        #end
+    ><a href="" lang="zh">投诉记录</a></li>
+</ul>
+#end
+
+## 货代仓库列表切换
+#macro(forwardingWarehouse $selected)
     #set($tabs = [
     {'name':'货代信息','path':'/supplier/forwarding/intoForwardingList'},
-    {'name':'仓库信息','path':'/supplier/warehouse/warehouseList'}
+    {'name':'仓库信息','path':''}
     ])
-    <ul id="saleNav" class="nav nav-tabs pull-left">
-        #foreach($item in $tabs)
-            <li
-                #if($selected==$item.name)
-                        class="active"
-                #end
-            ><a href="$!{request.contextPath}$!{item.path}" lang="zh">$!{item.name}</a></li>
-        #end
-    </ul>
+<ul id="saleNav" class="nav nav-tabs pull-left">
+    #foreach($item in $tabs)
+        <li
+            #if($selected==$item.name)
+                    class="active"
+            #end
+        ><a href="$!{request.contextPath}$!{item.path}" lang="zh">$!{item.name}</a></li>
+    #end
+</ul>
 #end
 
 ## 加工厂tab页
