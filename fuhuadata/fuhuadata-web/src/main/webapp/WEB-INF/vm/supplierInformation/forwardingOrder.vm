@@ -1,6 +1,6 @@
 <div class="clearfix content shadow-out">
     <div class="nav-deputy shadow-out clearfix">
-        #forwardingTab(2,$!{forwardingId})
+        #forwardingTab(3,$!{forwardingId})
         #breadcrumb()
     </div>
     <!--表格容器-->
@@ -9,24 +9,24 @@
             <div class="col-xs-12 view-HD-lg">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title" lang="zh">仓库信息</h3>
+                        <h3 class="panel-title" lang="zh">订单记录</h3>
                     </div>
                     <div class="panel-body clearfix">
                         <table class="table table-bordered table-condensed text-center table-striped">
                             <thead>
                             <tr>
-                                <th class="text-center col-xs-1 text-middle">仓库编号</th>
-                                <th class="text-center col-xs-2 text-middle">企业全称</th>
-                                <th class="text-center col-xs-1 text-middle">类型</th>
-                                <th class="text-center col-xs-1 text-middle">仓库地址</th>
-                                <th class="text-center col-xs-1 text-middle">仓储面积</th>
-                                <th class="text-center col-xs-1 text-middle">是否危险品仓库</th>
-                                <th class="text-center col-xs-1 text-middle">是否做内装进港</th>
-                                <th class="text-center col-xs-1 text-middle">综合评分</th>
+                                <th class="text-center col-xs-1 text-middle">编号</th>
+                                <th class="text-center col-xs-1 text-middle">进仓编号</th>
+                                <th class="text-center col-xs-2 text-middle">仓库名称</th>
+                                <th class="text-center col-xs-2 text-middle">货代名称</th>
+                                <th class="text-center col-xs-1 text-middle">对应外销合同号</th>
+                                <th class="text-center col-xs-1 text-middle">是否危险品</th>
+                                <th class="text-center col-xs-1 text-middle">出运金额(元)</th>
+                                <th class="text-center col-xs-1 text-middle">出运数量</th>
                                 <th class="text-center col-xs-1 text-middle">备注</th>
                             </tr>
                             </thead>
-                            <tbody id="warehouse_list"></tbody>
+                            <tbody id="order_list"></tbody>
                         </table>
                         <div id="pagination" class="pagination"></div>
                     </div>
@@ -39,19 +39,18 @@
 <script type="text/javascript" language="JavaScript">
 
     $(function(){
-        var supprops=['常规','非常规','自定'],
                 table = {
                     total:0,
                     pageSize:1,
                     pageNum:0,
                     pagination:$('#pagination'),
-                    container:$('#warehouse_list'),
+                    container:$('#order_list'),
                     setPagination:{
                         num_edge_entries:3,
                         num_display_entries:5,
                         callback:function (pageNum,jq) {
                             $.ajax({
-                                url:basePath + '/supplier/forwarding/warehouseList',
+                                url:basePath + '/supplier/forwarding/orderRecordList',
                                 dataType:'json',
                                 contentType:'application/json',
                                 data:{
@@ -73,7 +72,7 @@
                     },
                     init:function () {
                         $.ajax({
-                            url:basePath + '/supplier/forwarding/warehouseList',
+                            url:basePath + '/supplier/forwarding/orderRecordList',
                             dataType:'json',
                             contentType:'application/json',
                             data:{
@@ -100,14 +99,14 @@
                         $.each(list, function(i, item){
                             tpl +=
                                     '<tr>' +
-                                    '<td>'+table.hasField(item.code)+'</td>'+
-                                    '<td><a href="'+basePath+'/supplier/forwarding/intoWarehouseBasic?id='+table.hasField(item.id)+'">'+table.hasField(item.name)+'</a></td>'+
-                                    '<td>'+supprops[table.hasField(item.supprop)]+'</td>'+
-                                    '<td>'+table.hasField(item.storaddr)+'</td>'+
-                                    '<td>'+table.hasField(item.storageArea)+'</td>'+
+                                    '<td>'+table.hasField(item.id)+'</td>'+
+                                    '<td>'+table.hasField(item.entryCode)+'</td>'+
+                                    '<td>'+table.hasField(item.warehouseName)+'</td>'+
+                                    '<td>'+table.hasField(item.forwardingName)+'</td>'+
+                                    '<td><a href="'+basePath+'">'+table.hasField(item.exportContractNumber)+'</a></td>'+
                                     '<td>'+table.hasField(item.isDangers)+'</td>'+
-                                    '<td>'+table.hasField(item.isInsideEntrance)+'</td>'+
-                                    '<td>'+table.hasField(item.combinedScoring)+'</td>'+
+                                    '<td>'+table.hasField(item.shipmentAmount)+'</td>'+
+                                    '<td>'+table.hasField(item.shipmentQuantity)+'</td>'+
                                     '<td>'+table.hasField(item.memo)+'</td>'+
                                     '</tr>';
                         });

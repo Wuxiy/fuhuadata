@@ -1,0 +1,146 @@
+<div class="nav-deputy shadow-out clearfix">
+    #factoryTab('订单记录',$!{factoryId})
+    #breadcrumb()
+</div>
+<div class="dashboard-wrapper">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="pull-right panel-heading-btn btn-group">
+                        <a class="btn btn-xs btn-default btn-primary active" href="" lang="zh">采购合同</a>
+                        <a class="btn btn-xs btn-default btn-primary" href="" lang="zh">原药合同</a>
+                    </div>
+                    <h3 class="panel-title" lang="zh">产品信息</h3>
+                </div>
+                <div class="panel-body clearfix">
+                    <!--表格-->
+                    <form class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon" lang="zh">原药合同号</span>
+                            <input class="form-control" name="" type="text">
+                            <span class="input-group-addon">采购合同时间</span>
+                            <span class="input-group-addon" lang="zh">开始时间</span>
+                            <input class="form-control" name="" type="date">
+                            <span class="input-group-addon" lang="zh">结束时间</span>
+                            <input class="form-control" name="" type="date">
+                            <div class="input-group-btn">
+                                <button class="btn btn-xs btn-default" type="reset" accesskey="r">重置</button>
+                            </div>
+                            <div class="input-group-btn">
+                                <button class="btn btn-xs btn-primary" type="button" accesskey="s">搜索</button>
+                            </div>
+                        </div>
+                    </form>
+                    <table class="table text-center table-condensed table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th class="text-center" lang="zh">编号</th>
+                            <th class="text-center" lang="zh">原药合同号</th>
+                            <th class="text-center" lang="zh">原药消耗量（kg）</th>
+                            <th class="text-center" lang="zh">原药单价（元）</th>
+                            <th class="text-center" lang="zh">原药总价（元）</th>
+                            <th class="text-center" lang="zh">原药合同时间</th>
+                            <th class="text-center" lang="zh">备注</th>
+                        </tr>
+                        </thead>
+                        <tbody id="order_content"></tbody>
+                    </table>
+                    <div class="pagination" id="pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        var table = {
+                total:0,
+                pageSize:1,
+                pageNum:0,
+                pagination:$('#pagination'),
+                container:$('#order_content'),
+                setPagination:{
+                    num_edge_entries:3,
+                    num_display_entries:5,
+                    callback:function (pageNum,jq) {
+                        $.ajax({
+                            url:basePath + '',
+                            dataType:'json',
+                            contentType:'application/json',
+                            data:{
+                                pageSize:table.pageSize,
+                                startRow:pageNum*table.pageSize
+                            },
+                            async:true,
+                            type:'GET'
+                        }).done(function(res){
+
+                            if (res.code===1) { // 请求是否成功
+
+                                table.renderList(res.data.list);
+                            }
+                        });
+
+                    }
+                },
+                init:function () {
+                    $.ajax({
+                        url:basePath + '',
+                        dataType:'json',
+                        contentType:'application/json',
+                        data:{
+                            pageSize:table.pageSize,
+                            startRow:0
+                        },
+                        async:true,
+                        type:'GET'
+                    }).done(function (res) {
+                        if (res.code===1) { // 请求是否成功
+
+                            if(!table.total){ // 是否需要渲染分页
+
+                                table.total = res.data.total;
+                                table.renderPagination();
+                            }
+                            table.renderList(res.data.list);
+                        }
+                    });
+
+                },
+                renderList:function (list, count) {
+                    var tpl = '';
+                    $.each(list, function(i, item){
+                        tpl +=
+                                '<tr>' +
+                                '<td>'+table.hasField(item.code)+'</td>'+
+                                '<td><a href="'+basePath+'/supplier/forwarding/intoForwardingBasic?id='+table.hasField(item.id)+'">'+table.hasField(item.name)+'</a></td>'+
+                                '<td>'+table.hasField(item.shortname)+'</td>'+
+                                '<td>'+table.hasField(item.startCooperateTime)+'</td>'+
+                                '<td>'+table.hasField(item.cooperateTime)+'</td>'+
+                                '<td>'+table.hasField(item.combinedScoring)+'</td>'+
+                                '<td>'+table.hasField()+'</td>'+
+                                '<td>'+table.hasField()+'</td>'+
+                                '<td>'+table.hasField()+'</td>'+
+                                '</tr>';
+                    });
+                    this.container.html(tpl);
+                },
+                renderPagination:function () {
+                    this.setPagination.items_per_page = this.pageSize;
+                    this.pagination.pagination(this.total,this.setPagination);
+                },
+                hasField:function (field) {
+
+                    if (field===null||field===undefined){
+                        return '';
+                    }else {
+                        return field;
+                    }
+                }
+            };
+        table.init();
+    })();
+
+</script>

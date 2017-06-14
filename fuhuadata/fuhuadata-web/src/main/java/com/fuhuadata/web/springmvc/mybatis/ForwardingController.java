@@ -3,6 +3,7 @@ package com.fuhuadata.web.springmvc.mybatis;
 import com.fuhuadata.domain.mybatis.supplier.*;
 import com.fuhuadata.domain.query.*;
 import com.fuhuadata.service.mybatis.supplier.*;
+import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.Supplier.ScoreInfoVO;
 import com.fuhuadata.vo.Supplier.ScoreVO;
 import com.fuhuadata.web.util.SystemLogAnnotation;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -64,20 +66,26 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
     }
     @RequestMapping(value = "intoForwardingWarehouse", method = RequestMethod.GET)
     @SystemLogAnnotation(module = "supplier-forwarding",methods = "init")
-    public String intoForwardingWarehouse() {
-        return "supplierInformation/forwardingWarehouse";
+    public ModelAndView intoForwardingWarehouse(int id) {
+        return new ModelAndView("supplierInformation/forwardingWarehouse").addObject("forwardingId",id);
     }
 
     @RequestMapping(value = "intoForwardingGradeList", method = RequestMethod.GET)
     @SystemLogAnnotation(module = "supplier-forwarding",methods = "intoForwardingGradeList")
-    public String intoForwardingGradeList() {
-        return "supplierInformation/forwardingGradeList";
+    public ModelAndView intoForwardingGradeList(int id) {
+        return new ModelAndView("supplierInformation/forwardingGradeList").addObject("forwardingId",id);
     }
 
     @RequestMapping(value = "intoForwardingGradeDetails", method = RequestMethod.GET)
     @SystemLogAnnotation(module = "supplier-forwarding",methods = "init")
-    public String intoForwardingGradeDetails() {
-        return "supplierInformation/forwardingGradeDetails";
+    public ModelAndView intoForwardingGradeDetails(int scoreId){
+        return new ModelAndView("supplierInformation/forwardingGradeDetails").addObject("4",scoreId);
+    }
+
+    @RequestMapping(value = "intoForwardingOrder", method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "supplier-forwarding",methods = "intoForwardingOrder")
+    public ModelAndView intoForwardingOrder(int id) {
+        return new ModelAndView("supplierInformation/forwardingOrder").addObject("forwardingId",id);
     }
     /**
      * 货代列表
@@ -99,8 +107,6 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
         }
         return result.getResultPojo();
     }
-
-
 
     /**
      * 货代详情
@@ -131,6 +137,8 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
     public ResultPojo updateForwardingInfo(@RequestBody FreightForwarding freightForwarding){
         Result<Integer> result = new Result<>();
         try{
+            freightForwarding.setModifier(LoginUtils.getLoginId());
+            freightForwarding.setModifiedtime(new Date());
             result.addDefaultModel("forwardingInfo",freightForwardingService.updateSelective(freightForwarding));
         }catch(Exception e){
             log.error("更新货代详情出错",e);
@@ -139,8 +147,6 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
         }
         return result.getResultPojo();
     }
-
-
 
     /**
      * 关联仓库列表
@@ -265,10 +271,10 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
     /**
      * 获取月度评价表
      */
-    @RequestMapping(value = "/ScoreListOfMonth", method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "supplier-forwarding",methods = "ScoreListOfMonth")
+    @RequestMapping(value = "/scoreListOfMonth", method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "supplier-forwarding",methods = "scoreListOfMonth")
     @ResponseBody
-    public ResultPojo ScoreListOfMonth(QueryForwardingScore query){
+    public ResultPojo scoreListOfMonth(QueryForwardingScore query){
         Result<PageInfo<ForwardingScore>> result = new Result();
         try{
             result.addDefaultModel("scoreList",forwardingScoreService.getForwardingScoreList(query));

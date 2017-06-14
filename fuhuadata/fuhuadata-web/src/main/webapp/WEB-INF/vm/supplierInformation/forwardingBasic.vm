@@ -4,6 +4,7 @@
         #*#if($!{factoryId})
             #factoryTab('基本信息',$!{factoryId})
         #end*#
+        #forwardingTab(1,$!{forwardingId})
         #breadcrumb()
     </div>
     <!--表格容器-->

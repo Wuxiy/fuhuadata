@@ -28,14 +28,16 @@ public class ForwardingBidRecordServiceImpl extends BaseServiceImpl<ForwardingBi
             criteria.andLike("purchasePlanCode","%"+query.getPurchasePlanCode()+"%");
         }
         if(StringUtils.isNotEmpty(query.getEntryName())){
-            criteria.andLike("EntryName","%"+query.getEntryName()+"%");
+            criteria.andLike("entryName","%"+query.getEntryName()+"%");
         }
         if(query.getIsBid()!=null){
             criteria.andEqualTo("isBid",query.getIsBid());
         }
+        //是否恶意竞标
         if(query.getMaliciousBid()!=null){
             criteria.andEqualTo("maliciousBid",query.getMaliciousBid());
         }
+
         if(query.getIsModifyPrice()!=null){
             criteria.andEqualTo("isModifyPrice",query.getIsModifyPrice());
         }

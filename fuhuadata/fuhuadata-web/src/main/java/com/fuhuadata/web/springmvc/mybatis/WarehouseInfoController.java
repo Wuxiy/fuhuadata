@@ -3,10 +3,13 @@ package com.fuhuadata.web.springmvc.mybatis;
 import com.fuhuadata.domain.mybatis.supplier.*;
 import com.fuhuadata.domain.query.*;
 import com.fuhuadata.service.mybatis.supplier.*;
+import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.Supplier.ScoreInfoVO;
 import com.fuhuadata.vo.Supplier.ScoreVO;
+import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import com.github.pagehelper.PageInfo;
+import com.sun.javafx.sg.prism.NGShape;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,16 +58,16 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
     @RequestMapping(value = "/intoWarehouseBasic", method = RequestMethod.GET)
     @SystemLogAnnotation(module = "supplier-warehouse",methods = "intoWarehouseInfo")
     public ModelAndView intoWarehouseBasic(Integer id) {
-        return new ModelAndView("supplierInformation/warehouseBasic").addObject("id",id);
+        return new ModelAndView("supplierInformation/warehouseBasic").addObject("warehouseId",id);
     }
     /**
      * 进入仓库合作货代列表
      * @return
      */
-    @RequestMapping(value = "/intoWarehouseopperation", method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "supplier-warehouse",methods = "intoWarehouseopperation")
-    public String intoWarehouseopperation() {
-        return "supplierInformation/warehouseopperation";
+    @RequestMapping(value = "/intoWarehouseOpperation", method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "supplier-warehouse",methods = "intoWarehouseOpperation")
+    public ModelAndView intoWarehouseopperation(int id) {
+        return new ModelAndView("supplierInformation/warehouseOpperation").addObject("warehouseId",id);
     }
     /**
      * 进入仓库订单记录
@@ -72,8 +75,8 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
      */
     @RequestMapping(value = "/intoWarehouseOrder", method = RequestMethod.GET)
     @SystemLogAnnotation(module = "supplier-warehouse",methods = "intoWarehouseOrder")
-    public String intoWarehouseOrder() {
-        return "supplierInformation/warehouseOrder";
+    public ModelAndView intoWarehouseOrder(int id) {
+        return new ModelAndView("supplierInformation/warehouseOrder").addObject("warehouseId",id);
     }
     /**
      * 进入仓库投诉记录
@@ -81,8 +84,8 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
      */
     @RequestMapping(value = "/intoWarehouseComplaints", method = RequestMethod.GET)
     @SystemLogAnnotation(module = "supplier-warehouse",methods = "intoWarehouseComplaints")
-    public String intoWarehouseComplaints() {
-        return "supplierInformation/warehouseComplaints";
+    public ModelAndView intoWarehouseComplaints(int id) {
+        return new ModelAndView("supplierInformation/warehouseComplaints").addObject("warehouseId",id);
     }
 
 
@@ -134,6 +137,8 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
     public ResultPojo updateWarehouseInfo(@RequestBody WarehouseInfo warehouseInfo){
         Result<Integer> result = new Result<>();
         try{
+            warehouseInfo.setModifiedtime(DateUtil.getDateTime());
+            warehouseInfo.setModifier(LoginUtils.getLoginName());
             result.addDefaultModel("warehouseInfo",warehouseInfoService.updateSelective(warehouseInfo));
         }catch(Exception e){
             log.error("更新仓库信息出错",e);
@@ -194,7 +199,14 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
     @ResponseBody
     public ResultPojo saveScore(@RequestBody ScoreVO<WarehouseScore,WarehouseEvaluationScoreRelation> scoreVO){
         Result<Integer> result = new Result();
-        result.addDefaultModel(warehouseScoreService.saveScore(scoreVO));
+        try{
+            result.addDefaultModel(warehouseScoreService.saveScore(scoreVO));
+        }catch(Exception e){
+            log.error("保存仓库评分出错");
+            result.setMessage(e.getMessage());
+            result.setSuccess(false);
+        }
+
         return result.getResultPojo();
     }
 
