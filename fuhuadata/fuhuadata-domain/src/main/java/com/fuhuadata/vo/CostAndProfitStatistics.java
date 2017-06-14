@@ -65,6 +65,12 @@ public class CostAndProfitStatistics {
 
     private BigDecimal actualAmountPaid;//已回款金额
 
+    /**跟单员pk**/
+    private String merchandiser;
+
+    /**跟单员name**/
+    private String merchandiserName;
+
     public String getAreaId() {
         return areaId;
     }
@@ -303,5 +309,21 @@ public class CostAndProfitStatistics {
 
     public void setActualAmountPaid(BigDecimal actualAmountPaid) {
         this.actualAmountPaid = actualAmountPaid;
+    }
+
+    public String getMerchandiser() {
+        return merchandiser;
+    }
+
+    public void setMerchandiser(String merchandiser) {
+        this.merchandiser = merchandiser;
+    }
+
+    public String getMerchandiserName() {
+        return merchandiserName;
+    }
+
+    public void setMerchandiserName(String merchandiserName) {
+        this.merchandiserName = merchandiserName;
     }
 }

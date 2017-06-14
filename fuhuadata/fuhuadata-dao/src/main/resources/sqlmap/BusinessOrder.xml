@@ -810,7 +810,6 @@
         </isParameterPresent>
     </select>
 
-
     <sql id="PROFIT-STATISTICS-QUERY-COMMON">
         <dynamic prepend=" WHERE ">
             <isNotEmpty prepend=" AND " property="customerAreaId">

@@ -9,7 +9,6 @@ import com.fuhuadata.vo.Supplier.ScoreVO;
 import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import com.github.pagehelper.PageInfo;
-import com.sun.javafx.sg.prism.NGShape;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,6 @@ import java.util.List;
 public class WarehouseInfoController extends BaseController<WarehouseInfo,Integer>{
 
     private final static Log log  = LogFactory.getLog(WarehouseInfoController.class);
-
 
     @Autowired
     private WarehouseInfoService warehouseInfoService;
