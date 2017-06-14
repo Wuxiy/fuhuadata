@@ -11,16 +11,16 @@ import java.util.List;
 public interface SyncProductDao {
 
     //从oracle查询产品列表
-    List<SyncProduct> getProductListFormOracle();
+    List<SyncProduct> getProductListFormOracle()throws Exception;
     //更新mysql中的产品数据
-    void updateProductInMysql(List<SyncProduct> plist);
+    void modifyProductInMysql(List<SyncProduct> plist)throws Exception;
     //从oracle查询产品（带规格）列表
-    List<SyncWare> getWareListFormOracle();
+    List<SyncWare> getWareListFormOracle()throws Exception;
     //更新mysql中的产品（带规格）数据
-    void updateWareInMysql(List<SyncWare> plist);
-    //在mysql中不全产品信息
-    void fixProductInMysql();
+    void modifyWareInMysql(List<SyncWare> plist)throws Exception;
+    //在mysql中补全产品信息
+    void fixProductInMysql()throws Exception;
     //在mysql中补全产品规格信息
-    void fixWareInMysql();
+    void fixWareInMysql()throws Exception;
 
 }

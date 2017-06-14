@@ -1,0 +1,156 @@
+<div class="clearfix content shadow-out">
+    <div class="nav-deputy shadow-out clearfix">
+        #forwarderWarehouseNav(1)
+        #breadcrumb()
+    </div>
+    <!--表格容器-->
+    <div class="dashboard-wrapper">
+        <div class="row">
+            <div class="col-xs-12 view-HD-lg">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" lang="zh">货代列表</h3>
+                    </div>
+                    <div class="panel-body clearfix">
+                        <table class="table table-bordered table-condensed text-center table-striped">
+                            <thead>
+                            <tr>
+                                <th class="text-center col-xs-1 text-middle">货代编号</th>
+                                <th class="text-center col-xs-2 text-middle">企业全称</th>
+                                <th class="text-center col-xs-1 text-middle">企业简称</th>
+                                <th class="text-center col-xs-1 text-middle">类型</th>
+                                <th class="text-center col-xs-1 text-middle">运输方式</th>
+                                <th class="text-center col-xs-1 text-middle">开始合作时间</th>
+                                <th class="text-center col-xs-1 text-middle">合作时间(月)</th>
+                                <th class="text-center col-xs-1 text-middle">综合评分</th>
+                                <th class="text-center col-xs-1 text-middle">联系人</th>
+                                <th class="text-center col-xs-1 text-middle">联系电话</th>
+                                <th class="text-center col-xs-1 text-middle">备注</th>
+                            </tr>
+                            </thead>
+                            <tbody id="forwarderList"></tbody>
+                        </table>
+                        <div id="pagination" class="pagination"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" language="JavaScript">
+    var pagesize = 5; // 分页步长
+    search();
+
+    // 搜索列表并渲染
+    function search(){
+
+        getDataList(0,pagesize,rederLiset); // 初始化第一页数据
+
+        // 获取总的条数
+        getListCount(function (total) {
+
+            // 渲染分页
+            rederPaging(total,pagesize,function (pageNum,jq) {
+
+                // 获取列表数据
+                getDataList(pageNum,pagesize);
+            })
+        })
+
+    }
+
+    // 收集提交参数
+    function collectArgs() {
+        var obj={
+            searchKey:$('#sexhibitionName').val()
+        }
+        return obj;
+    }
+
+    // 获取列表数据条目总数
+    function getListCount(callback){
+        var total = 0;
+        jQuery.ajax({
+            url:basePath + '//count',
+            dataType:'JSON',
+            contentType:'application/json',
+            async:true,
+            type:'POST'
+        }).done(function (res) {
+            total = res.data;
+            callback(total);
+        });
+    }
+
+    // 渲染分页插件
+    function rederPaging(total,pageSize,callback) {
+
+        $("#pagination").pagination(total,{
+            items_per_page : pageSize,
+            num_edge_entries : 3,
+            num_display_entries : 10,
+            callback:callback
+        });
+    }
+
+    // 根据页码获取列表数据
+    function getDataList(pageNum,pageSize,callback) {
+        jQuery.ajax({
+            url:basePath + '/supplier/forwarding/forwardingList',
+            dataType:'json',
+            contentType:'application/json',
+            data:JSON.stringify({
+                searchKey:$('#sexhibitionName').val(),
+                startRow:pageNum*pageSize,
+                pageSize:pageSize
+            }),
+            async:true,
+            type:'POST'
+        }).done(function (res) {
+            // 渲染列表
+            rederLiset(res,pageNum);
+        });
+    }
+    // 渲染列表
+    function rederLiset(data,pageNum){
+        if(data.code == 1){
+            var ResultData = data.data,
+                    _html = '',
+                    count = pageNum*pagesize;
+
+            if(ResultData && ResultData!='' && ResultData!='null') {
+                for (var i = 0; i < ResultData.length; i++) {
+                    _html += '<tr>';
+                    _html += '<td>' + (++count) + '</td>';
+                    _html += '<td><a href=' + basePath + '"/exhibitionInfo/modifyExhibitionInfo?id=' + ResultData[i].exhibitionId + '">' + ifEmpty(ResultData[i].exhibitionName) + '</td>';
+                    _html += '<td>' + ifEmpty(ResultData[i].sponsor) + '</td>';
+                    _html += '<td>' + ifEmpty(ResultData[i].organizer) + '</td>';
+                    _html += '<td>' + ifEmpty(ResultData[i].country) + '</td>';
+                    _html += '<td>' + ifEmpty(ResultData[i].city) + '</td>';
+                    _html += '<td>' + ifEmpty(ResultData[i].startDate) + '</td>';
+                    _html += '<td>' + ifEmpty(ResultData[i].finishDate) + '</td>';
+                    _html += '<td>' + ifEmpty(ResultData[i].exhibitionAddr) + '</td>';
+                    _html += '<td>' + ifEmpty(ResultData[i].exhibitionInfo) + '</td>';
+                    _html += '<td><a href="'+ifEmpty(ResultData[i].exhibitionLink)+'"></a></td>';
+                    _html += '<td>' + ifEmpty(ResultData[i].creator) + '</td>';
+                    _html += '<td>' + ifEmpty(ResultData[i].createTime) + '</td>';
+                    _html += '<td><a class="delete" data-id="'+ResultData[i].exhibitionId+'">删除</a></td>';
+                    _html += '</tr>';
+                }
+                $("#forwarderList").html(_html);
+
+            }
+        }
+        else{
+            $("#forwarderList").html('<tr><td colspan="6">暂无数据</td></tr>');
+        }
+    }
+
+    function ifEmpty(data) {
+        return data==undefined?'':data;
+    }
+</script>
+
+
+

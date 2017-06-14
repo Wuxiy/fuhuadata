@@ -1,10 +1,419 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<div class="clearfix content shadow-out">
+    <!--副导航-->
+    <div class="nav-deputy shadow-out clearfix">
+        #if($!{factoryId})
+            #factoryTab('基本信息',$!{factoryId})
+        #end
+        #breadcrumb()
+    </div>
+    <!--表格容器-->
+    <div class="dashboard-wrapper">
+        <div class="row">
+            <div class="col-xs-12">
+                <!--基本信息-->
+                <div class="panel panel-default view-HD-lg" id="panel">
+                    <div class="panel-heading">
+                        <button class="btn btn-xs btn-primary panel-heading-btn pull-right" name="edit" data-view="editHide" type="button" lang="zh">
+                            编辑
+                        </button>
+                        <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden" data-view="editView">
+                            <button class="btn btn-default" name="cancel" type="button" lang="zh">取消</button>
+                            <button class="btn btn-primary" name="save" type="button" lang="zh">保存</button>
+                        </div>
+                        <h3 class="panel-title" lang="zh">基本信息</h3>
+                    </div>
+                    <div class="panel-body clearfix">
+                        <form class="form-horizontal" id="factory_info">
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="code" lang="zh">企业代码</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="code" type="text" disabled/>
+                                </div>
+                                <label class="control-label col-xs-1" for="orgName" lang="zh">所属组织<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-2">
+                                    <div class="input-group" id="org_name">
+                                        <input class="form-control" name="orgName" data-control="editOn" type="text" disabled readonly>
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-xs btn-default" data-control="editOn" type="button" disabled>
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label class="control-label col-xs-1" for="name" lang="zh">企业名称<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="name" data-bind="localData" data-control="editOn" type="text" disabled/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="abbr" lang="zh">企业简称</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="abbr" data-bind="localData" data-control="editOn" type="text" disabled/>
+                                </div>
+                                <label class="control-label col-xs-1" for="oldName" lang="zh">企业曾用名</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="oldName" data-bind="localData" data-control="editOn" type="text" disabled/>
+                                </div>
+                                <label class="control-label col-xs-1" for="registerfund" lang="zh">注册资金</label>
+                                <div class="col-xs-2">
+                                    <div class="input-group">
+                                        <input class="form-control" name="registerfund" data-bind="localData" data-control="editOn" type="number" min="0" disabled/>
+                                        <span class="input-group-addon"  data-val="美元" lang="zh">万元</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="address" lang="zh">注册地址</label>
+                                <div class="col-xs-8">
+                                    <textarea class="form-control" name="address" data-bind="localData" data-control="editOn" rows="2" disabled></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group" id="time">
+                                <label class="control-label col-xs-1" for="cooperateTime" lang="zh">开始合作时间</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="cooperateTime" data-control="editOn" type="date" disabled/>
+                                </div>
+                                <label class="control-label col-xs-1" for="coopMonths" lang="zh">合作时间</label>
+                                <div class="col-xs-2">
+                                    <div class="input-group">
+                                        <input class="form-control" name="coopMonths" type="text" disabled/>
+                                        <span class="input-group-addon" lang="zh">月</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="productionLicenses" lang="zh">生产许可证<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-3">
+                                    <div class="input-group" id="production_licenses">
+                                        <input class="form-control" name="productionLicenses" data-control="editOn" type="text" disabled readonly/>
+                                        <div class="input-group-btn" lang="zh">
+                                            <button class="btn btn-xs btn-primary hidden" name="edit" data-view="editView" type="button" lang="zh">编辑</button>
+                                            <button class="btn btn-xs btn-primary" name="show" type="button" lang="zh">查看</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="pesticideRegistration" lang="zh">农药登记证<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-3">
+                                    <div class="input-group" id="pesticide_registration">
+                                        <input class="form-control" name="pesticideRegistration" data-control="editOn" type="text" disabled readonly/>
+                                        <div class="input-group-btn" lang="zh">
+                                            <button class="btn btn-xs btn-primary hidden" name="edit" data-view="editView" type="button" lang="zh">编辑</button>
+                                            <button class="btn btn-xs btn-primary" name="show" type="button" lang="zh">查看</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="dischargePermit" lang="zh">排污许可证<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-3">
+                                    <div class="input-group" id="discharge_permit">
+                                        <input class="form-control" name="dischargePermit" data-control="editOn" type="text" disabled readonly/>
+                                        <div class="input-group-btn" lang="zh">
+                                            <button class="btn btn-xs btn-primary hidden" name="edit" data-view="editView" type="button" lang="zh">编辑</button>
+                                            <button class="btn btn-xs btn-primary" name="show" type="button" lang="zh">查看</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="remark" lang="zh">备注</label>
+                                <div class="col-xs-8">
+                                    <textarea class="form-control" name="remark" data-bind="localData" data-control="editOn" rows="4" disabled></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="supstate">状态<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-2">
+                                    <select class="form-control" name="supstate" data-bind="localData" data-control="editOn" disabled>
+                                        <option value="1">核准</option>
+                                        <option value="0">潜在</option>
+                                    </select>
+                                </div>
+                                <label class="control-label col-xs-1" for="score" lang="zh">综合评分</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="score" data-bind="localData" data-control="editOn" type="number" min="0" disabled/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="managerOrgName" lang="zh">管理员组织<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-2">
+                                    <div class="input-group" id="manager_org">
+                                        <input class="form-control" name="managerOrgName" data-control="editOn" type="text" disabled readonly>
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-xs btn-default" data-control="editOn" type="button" disabled>
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label class="control-label col-xs-1" for="managerDepName" lang="zh">管理员部门<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-2">
+                                    <div class="input-group" id="manager_dep">
+                                        <input class="form-control" name="managerDepName" data-control="editOn" type="text" placeholder="请先选择组织" disabled readonly>
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-xs btn-default" data-control="editOn" type="button" disabled>
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label class="control-label col-xs-1" for="manager" lang="zh">工厂管理员<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-2">
+                                    <div class="input-group" id="manager">
+                                        <input class="form-control" name="manager" data-control="editOn" type="text" placeholder="请先选择部门" disabled readonly>
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-xs btn-default dropdown" data-control="editOn" data-toggle="dropdown" type="button" disabled>
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                            <div class="dropdown-menu pull-right" style="width: 196px;padding: 3px 0;">
+                                                <ul name="selectContainer" style="list-style: none;margin-bottom: 0;padding: 0;width: 100%;max-height: 200px;overflow-y: auto;"></ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="banks" lang="zh">银行账户</label>
+                                <div class="col-xs-8">
+                                    <table class="table text-center table-condensed table-bordered table-hover" id="bank_table">
+                                        <caption class="hidden text-right" data-view="editView">
+                                            <button class="btn-link" name="addBtn" data-control="editOn" type="button" disabled>新增</button>
+                                            <button class="btn-link" name="delBtn" data-control="editOn" type="button" disabled>删除</button>
+                                        </caption>
+                                        <thead>
+                                        <tr>
+                                            <th class="hidden text-center col-xs-1" data-view="editView">
+                                                <div class="checkbox">
+                                                    <label for="checkedAll">
+                                                        <input name="checkedAll" type="checkbox">
+                                                    </label>
+                                                </div>
+                                            </th>
+                                            <th class="text-center" lang="zh">账号</th>
+                                            <th class="text-center" lang="zh">户名</th>
+                                            <th class="text-center" lang="zh">开户银行</th>
+                                            <th class="text-center" lang="zh">银行类别</th>
+                                            <th class="text-center" lang="zh">币种</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody name="banks"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="contacts" lang="zh">联系人</label>
+                                <div class="col-xs-8">
+                                    <table class="table text-center table-condensed table-bordered table-hover" id="contact_table">
+                                        <caption class="hidden text-right" data-view="editView">
+                                            <button class="btn-link" name="addBtn" data-control="editOn" type="button" disabled>新增</button>
+                                            <button class="btn-link" name="delBtn" data-control="editOn" type="button" disabled>删除</button>
+                                        </caption>
+                                        <thead>
+                                        <tr>
+                                            <th class="hidden text-center col-xs-1" data-view="editView">
+                                                <div class="checkbox">
+                                                    <label for="checkedAll">
+                                                        <input name="checkedAll" type="checkbox">
+                                                    </label>
+                                                </div>
+                                            </th>
+                                            <th class="text-center col-xs-3" lang="zh">姓名</th>
+                                            <th class="text-center col-xs-4" lang="zh">联系电话</th>
+                                            <th class="text-center col-xs-4" lang="zh">邮箱</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody name="contacts"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="form-group" data-view="editHide">
+                                <label class="control-label col-xs-1" for="modifyName" lang="zh">最后编辑人</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="modifyName" type="text" disabled/>
+                                </div>
+                                <label class="control-label col-xs-1" for="modifyTime" lang="zh">最后编辑时间</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="modifyTime" type="text" disabled/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+## 银行详情modal
+<div class="modal fade" id="bank_modal" data-backdrop="true" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body clearfix">
+                <form class="form-horizontal well" id="back_form" style="margin-bottom: 0;">
+                    <div class="form-group">
+                        <label class="control-label col-xs-2" for="accnum">银行账号<sup data-view="editView" class="not-null hidden">*</sup></label>
+                        <div class="col-xs-4">
+                            <input class="form-control" name="accnum" data-control="editOn" type="text">
+                        </div>
+                        <label class="control-label col-xs-2" for="accname">银行户名<sup data-view="editView" class="not-null hidden">*</sup></label>
+                        <div class="col-xs-4">
+                            <input class="form-control" name="accname" data-control="editOn" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-2" for="currtypeName">币种<sup data-view="editView" class="not-null hidden">*</sup></label>
+                        <div class="col-xs-4">
+                            <select class="form-control" name="currtypeName" data-control="editOn" id="currtype_name"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-2" for="pkBanktype">银行类别<sup data-view="editView" class="not-null hidden">*</sup></label>
+                        <div class="col-xs-4">
+                            <select class="form-control" name="pkBanktype" data-control="editOn" id="bank_first"></select>
+                        </div>
+                        <label class="control-label col-xs-2" for="pkBankdoc">开户银行<sup data-view="editView" class="not-null hidden">*</sup></label>
+                        <div class="col-xs-4">
+                            <select class="form-control" name="pkBankdoc" data-control="editOn" id="bank_second">
+                                <option value="" title="请先选择银行类别">——请先选择银行类别——</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="hidden col-xs-4 col-xs-offset-2" data-view="editView">
+                        <button class="btn btn-xs btn-block btn-default" name="cancel" type="button" lang="zh">取消</button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button class="btn btn-xs btn-block btn-primary" name="save" type="button" lang="zh">保存</button>
+                    </div>
+                    #*<div class="col-xs-4 pull-right hidden" data-view="editView">
+                        <div class="btn-group btn-block">
+                            <button class="btn btn-xs btn-default col-xs-6" name="cancel" type="button" lang="zh">取消</button>
+                            <button class="btn btn-xs btn-primary col-xs-6" name="save" type="button" lang="zh">保存</button>
+                        </div>
+                    </div>*#
+                    <div class="col-xs-2 pull-right" data-view="editHide">
+                        <button class="btn btn-xs btn-block btn-primary" name="edit" type="button" lang="zh">编辑</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+## 联系人modal
+<div class="modal fade" id="contact_modal" data-backdrop="true" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body clearfix">
+                <form class="form-horizontal well" id="contact_form" style="margin-bottom: 0;">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4" for="name">姓名<sup class="not-null">*</sup></label>
+                        <div class="col-xs-8">
+                            <input class="form-control" name="name" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-4" for="phone">联系电话</label>
+                        <div class="col-xs-8">
+                            <input class="form-control" name="phone" type="tel">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-4" for="email">邮箱</label>
+                        <div class="col-xs-8">
+                            <input class="form-control" name="email" type="email">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-4 col-xs-offset-2">
+                        <button class="btn btn-xs btn-block btn-default" name="cancel" type="button" lang="zh">取消</button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button class="btn btn-xs btn-block btn-primary" name="save" type="button" lang="zh">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+## 图片上传modal
+<div class="modal fade" id="set_img" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body clearfix">
+                <form class="form-horizontal well" name="imgForm" enctype="multipart/form-data" style="margin-bottom: 0;">
+                    <input name="file" type="file">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-4 col-xs-offset-2">
+                        <button class="btn btn-xs btn-block btn-default" data-dismiss="modal" type="button" lang="zh">取消</button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button class="btn btn-xs btn-block btn-primary" name="save" type="button" lang="zh">上传</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+## 图片展示modal
+<div class="modal fade" id="show_img" tabindex="-1" aria-hidden="true" >
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body clearfix">
+                <div class="thumbnail">
+                    <img name="showImg" src="" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+## 树形菜单modal
+<div class="modal fade in" id="tree_modal" tabindex="-1" role="dialog" data-backdrop="false" aria-hidden="true" >
+    <div class="modal-dialog" style="width: 400px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body">
+                <hr>
+                <div class="zTreeDemoBackground left well" style="height: 300px;overflow-y: scroll;overflow-x: auto">
+                    <ul id="org_tree" class="ztree"></ul>
+                    <ul id="dep_tree" class="ztree"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input id="factoryId" type="hidden" value="$!{factoryId}">
+<script src="${request.contextPath}/lib/js/supplierInformation/factoryBasic.js"></script>

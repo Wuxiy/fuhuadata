@@ -6,6 +6,7 @@ import tk.mybatis.mapper.entity.Example;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * <p>User: wangjie
@@ -16,7 +17,11 @@ public interface BaseService<E extends BaseEntity<ID>, ID extends Serializable> 
 
     E get(ID id);
 
+    Optional<E> getOpt(ID id);
+
     E get(E entity);
+
+    Optional<E> getOpt(E entity);
 
     List<E> list(E entity);
 

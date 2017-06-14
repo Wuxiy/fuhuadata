@@ -5,6 +5,7 @@ import com.fuhuadata.vo.MixNodeVO;
 import com.fuhuadata.vo.OrganizationVO;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * <p>User: wangjie
@@ -38,9 +39,23 @@ public interface OrganizationService extends BaseService<Organization, Integer> 
     Organization getByNcId(String ncId);
 
     /**
+     * 根据 ncId 获取组织
+     * @param ncId
+     * @return
+     */
+    Optional<Organization> getOptByNcId(String ncId);
+
+    /**
      * 根据 code 获取组织
      * @param code
      * @return
      */
     Organization getByCode(String code);
+
+    /**
+     * 根据 code 获取组织
+     * @param code
+     * @return
+     */
+    Optional<Organization> getOptByCode(String code);
 }
