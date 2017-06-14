@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.business.BusinessBuyContractProductMapper">
+    <resultMap id="BaseResultMap" type="com.fuhuadata.domain.business.BusinessBuyContractProduct">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="pk_buy_contract" jdbcType="CHAR" property="pkBuyContract"/>
+        <result column="pk_material" jdbcType="VARCHAR" property="pkMaterial"/>
+        <result column="material_name" jdbcType="VARCHAR" property="materialName"/>
+        <result column="specification" jdbcType="VARCHAR" property="specification"/>
+        <result column="cunit" jdbcType="VARCHAR" property="cunit"/>
+        <result column="nnum" jdbcType="DECIMAL" property="nnum"/>
+        <result column="price" jdbcType="DECIMAL" property="price"/>
+        <result column="total_price" jdbcType="DECIMAL" property="totalPrice"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="export_ct_client_name" jdbcType="VARCHAR" property="exportCtClientName"/>
+        <result column="export_ct_code" jdbcType="VARCHAR" property="exportCtCode"/>
+        <result column="export_ct_pk" jdbcType="VARCHAR" property="exportCtPk"/>
+    </resultMap>
+
+    <sql id="BaseColumns">
+        bcp.id,
+        bcp.pk_buy_contract,
+        bcp.pk_material,
+        pi.name material_name,
+        pw.specification specification,
+        bcp.cunit,
+        bcp.nnum,
+        bcp.price,
+        bcp.total_price,
+        bcp.remark,
+        bcp.export_ct_client_name,
+        bcp.export_ct_code,
+        bcp.export_ct_pk
+    </sql>
+
+    <sql id="FromTable">
+        from business_buy_contract_product bcp
+        left join product_ware pw on pw.nc_id=bcp.pk_material
+        left join product_info pi on pi.product_id=pw.product_info_id
+    </sql>
+
+    <select id="listProducts" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumns"/>
+        <include refid="FromTable"/>
+        where pk_buy_contract=#{pkContract}
+    </select>
+
+</mapper>

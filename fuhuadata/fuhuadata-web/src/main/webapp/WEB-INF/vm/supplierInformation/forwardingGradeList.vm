@@ -1,0 +1,133 @@
+<div class="clearfix content shadow-out">
+    <div class="nav-deputy shadow-out clearfix">
+        #forwardingTab(3)
+        #breadcrumb()
+    </div>
+    <!--表格容器-->
+    <div class="dashboard-wrapper">
+        <div class="row">
+            <div class="col-xs-12 view-HD-lg">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" lang="zh">评分记录</h3>
+                    </div>
+                    <div class="panel-body clearfix">
+                        <table class="table table-bordered table-condensed text-center table-striped">
+                            <thead>
+                            <tr>
+                                <th class="text-center col-xs-1 text-middle">时间</th>
+                                <th class="text-center col-xs-1 text-middle">客服得分</th>
+                                <th class="text-center col-xs-2 text-middle">价格得分</th>
+                                <th class="text-center col-xs-2 text-middle">仓储得分</th>
+                                <th class="text-center col-xs-1 text-middle">投诉反馈得分</th>
+                                <th class="text-center col-xs-1 text-middle">评价总分</th>
+                                <th class="text-center col-xs-1 text-middle">评价人</th>
+                                <th class="text-center col-xs-1 text-middle">评价时间</th>
+                                <th class="text-center col-xs-1 text-middle">备注</th>
+                            </tr>
+                            </thead>
+                            <tbody id="score_list"></tbody>
+                        </table>
+                        <div id="pagination" class="pagination"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" language="JavaScript">
+
+    $(function(){
+        table = {
+            total:0,
+            pageSize:1,
+            pageNum:0,
+            pagination:$('#pagination'),
+            container:$('#score_list'),
+            setPagination:{
+                num_edge_entries:3,
+                num_display_entries:5,
+                callback:function (pageNum,jq) {
+                    $.ajax({
+                        url:basePath + '/supplier/forwarding/scoreListOfMonth',
+                        dataType:'json',
+                        contentType:'application/json',
+                        data:{
+                            forwardingId:1,
+                            pageSize:table.pageSize,
+                            index:pageNum+1
+                        },
+                        async:true,
+                        type:'GET'
+                    }).done(function(res){
+
+                        if (res.code===1) { // 请求是否成功
+
+                            table.renderList(res.data.list);
+                        }
+                    });
+
+                }
+            },
+            init:function () {
+                $.ajax({
+                    url:basePath + '/supplier/forwarding/scoreListOfMonth',
+                    dataType:'json',
+                    contentType:'application/json',
+                    data:{
+                        forwardingId:1,
+                        pageSize:table.pageSize,
+                        index:1
+                    },
+                    async:true,
+                    type:'GET'
+                }).done(function (res) {
+                    if (res.code===1) { // 请求是否成功
+
+                        if(!table.total){ // 是否需要渲染分页
+
+                            table.total = res.data.total;
+                            table.renderPagination();
+                        }
+                        table.renderList(res.data.list);
+                    }
+                });
+            },
+            renderList:function (list) {
+                var tpl = '';
+                $.each(list, function(i, item){
+                    tpl +=
+                            '<tr>' +
+                            '<td>'+table.hasField(item.monthTime)+'</td>'+
+                            '<td>'+table.hasField(item.serviceScore)+'</td>'+
+                            '<td>'+table.hasField(item.priceScore)+'</td>'+
+                            '<td>'+table.hasField(item.warehouseScore)+'</td>'+
+                            '<td>'+table.hasField(item.complaintsScore)+'</td>'+
+                            '<td><a href="'+basePath+'/supplier/forwarding/?id=">'+table.hasField(item.totalScore)+'</a></td>'+
+                            '<td>'+table.hasField(item.evaluateUserName)+'</td>'+
+                            '<td>'+table.hasField(item.evaluateTime)+'</td>'+
+                            '<td>'+table.hasField(item.memo)+'</td>'+
+                            '</tr>';
+                });
+                this.container.html(tpl);
+            },
+            renderPagination:function () {
+                this.setPagination.items_per_page = this.pageSize;
+                this.pagination.pagination(this.total,this.setPagination);
+            },
+            hasField:function (field) {
+
+                if (field===null||field===undefined){
+                    return '';
+                }else {
+                    return field;
+                }
+            }
+        };
+        table.init();
+    });
+</script>
+
+
+

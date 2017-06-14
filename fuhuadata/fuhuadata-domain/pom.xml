@@ -6,7 +6,6 @@
         <groupId>com.fuhua</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>com.fuhua</groupId>
     <artifactId>fuhuadata-domain</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>

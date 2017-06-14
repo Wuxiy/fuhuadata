@@ -6,14 +6,15 @@
       WARNING - @mbg.generated
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="freightforwarding_id" jdbcType="VARCHAR" property="freightforwardingId" />
-    <result column="warehouse_id" jdbcType="VARCHAR" property="warehouseId" />
+    <result column="freightforwarding_id" jdbcType="INTEGER" property="freightforwardingId" />
+    <result column="warehouse_id" jdbcType="INTEGER" property="warehouseId" />
     <result column="purchase_plan_code" jdbcType="VARCHAR" property="purchasePlanCode" />
     <result column="entry_name" jdbcType="VARCHAR" property="entryName" />
     <result column="bid_price" jdbcType="DECIMAL" property="bidPrice" />
     <result column="lowest_bid_price" jdbcType="DECIMAL" property="lowestBidPrice" />
     <result column="is_bid" jdbcType="INTEGER" property="isBid" />
     <result column="is_modify_price" jdbcType="INTEGER" property="isModifyPrice" />
+    <result column="malicious_bid" jdbcType="INTEGER" property="maliciousBid"/>
     <result column="remarks" jdbcType="VARCHAR" property="remarks" />
     <result column="evaluate_time" jdbcType="TIMESTAMP" property="evaluateTime" />
     <result column="create_user_id" jdbcType="INTEGER" property="createUserId" />

@@ -13,6 +13,7 @@ import tk.mybatis.mapper.entity.Example;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * <p>User: wangjie
@@ -49,8 +50,18 @@ public abstract class BaseServiceImpl<E extends BaseEntity<ID>, ID extends Seria
         return baseMapper.selectByPrimaryKey(id);
     }
 
+    @Override
+    public Optional<E> getOpt(ID id) {
+        return Optional.ofNullable(get(id));
+    }
+
     public E get(E entity) {
         return baseMapper.selectOne(entity);
+    }
+
+    @Override
+    public Optional<E> getOpt(E entity) {
+        return Optional.ofNullable(get(entity));
     }
 
     public List<E> list(E entity) {

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.supplier.WarehouseEvaluationScoreRelationMapper">
+  <resultMap id="BaseResultMap" type="com.fuhuadata.domain.mybatis.supplier.WarehouseEvaluationScoreRelation">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="warehouse_score_id" jdbcType="INTEGER" property="warehouseScoreId" />
+    <!--<result column="score_item_id" jdbcType="INTEGER" property="scoreItemId" />-->
+    <result column="evaluation_value_id" jdbcType="INTEGER" property="evaluationValueId" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="score" jdbcType="DECIMAL" property="score" />
+  </resultMap>
+</mapper>

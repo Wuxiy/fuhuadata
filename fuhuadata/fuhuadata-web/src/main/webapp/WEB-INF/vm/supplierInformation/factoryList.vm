@@ -1,10 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="nav-deputy shadow-out clearfix">
+    #breadcrumb()
+</div>
+<div class="dashboard-wrapper">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a class="pull-right panel-heading-btn btn btn-xs btn-primary" href="${request.contextPath}/supplier/factories/add/vm">新增</a>
+                    <h3 class="panel-title" lang="zh">加工厂列表</h3>
+                </div>
+                <div class="panel-body clearfix">
+                    <!--表格-->
+                    <table class="table text-center table-condensed table-bordered table-striped">
+                        <caption class="text-right" lang="zh">金额单位：万元</caption>
+                        <thead>
+                        <tr>
+                            <th class="text-center" lang="zh">编号</th>
+                            <th class="text-center" lang="zh">企业编号</th>
+                            <th class="text-center" lang="zh">企业全称</th>
+                            <th class="text-center" lang="zh">企业简称</th>
+                            <th class="text-center" lang="zh">加工产品</th>
+                            <th class="text-center" lang="zh">开始合作时间</th>
+                            <th class="text-center" lang="zh">合作时间（月）</th>
+                            <th class="text-center" lang="zh">综合评分</th>
+                            <th class="text-center" lang="zh">工厂管理员</th>
+                            <th class="text-center" lang="zh">备注</th>
+                        </tr>
+                        </thead>
+                        <tbody id="factory_list"></tbody>
+                    </table>
+                    <div id="pagination" class="pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-</body>
-</html>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/supplierInformation/factoryList.js"></script>

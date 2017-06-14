@@ -55,10 +55,6 @@ public class CustomerInfoToNCImpl implements CustomerInfoToNC{
          String xmlName= customerInfoToXML(customerBaseInfo);
         String ncid=null;
         try {
-            //InputStream inputS = new FileInputStream("fuhuadata-manager/src/main/resource/ncInfo.properties");
-            //Properties properties = new Properties();
-            //properties.load(inputS);
-            //String ncurl = properties.getProperty("ncurl");
 
             // 获取Servlet连接并设置请求的方法
             URL realURL = new URL(ncUrl);

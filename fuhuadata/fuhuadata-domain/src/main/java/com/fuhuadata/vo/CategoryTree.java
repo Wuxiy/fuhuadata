@@ -8,7 +8,7 @@ import java.util.List;
  * json_tree
  * Created by intanswer on 2017/2/24.
  */
-public class CategoryTree implements Serializable {
+public class  CategoryTree implements Serializable {
 
     private String cid;
     private String pid;
@@ -18,7 +18,6 @@ public class CategoryTree implements Serializable {
     public CategoryTree(){
 
     }
-
 
     public String getCid() {
         return cid;

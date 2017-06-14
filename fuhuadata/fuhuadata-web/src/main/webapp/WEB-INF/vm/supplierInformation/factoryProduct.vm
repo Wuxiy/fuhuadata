@@ -1,10 +1,393 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="nav-deputy shadow-out clearfix">
+    #factoryTab('产品信息',$!{factoryId})
+    #breadcrumb()
+</div>
+<div class="dashboard-wrapper">
+    <div class="row">
+        <div class="col-xs-12 view-HD-lg">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <button class="btn btn-xs btn-primary panel-heading-btn pull-right" data-toggle="modal"
+                            data-target="#modal" data-backdrop="static" data-keyboard="true" id="add">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        新增
+                    </button>
+                    <h3 class="panel-title" lang="zh">产品信息</h3>
+                </div>
+                <div class="panel-body clearfix">
+                    <!--表格-->
+                    <table class="table text-center table-condensed table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th class="text-center" lang="zh">编号</th>
+                            <th class="text-center" lang="zh">产品</th>
+                            <th class="text-center" lang="zh">总产能（吨/年）</th>
+                            <th class="text-center" lang="zh">产品质量</th>
+                            <th class="text-center" lang="zh">厂址1</th>
+                            <th class="text-center" lang="zh">产能1（吨/年）</th>
+                            <th class="text-center" lang="zh">厂址2</th>
+                            <th class="text-center" lang="zh">产能2（吨/年）</th>
+                            <th class="text-center" lang="zh">备注</th>
+                        </tr>
+                        </thead>
+                        <tbody id="productList"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-</body>
-</html>
+<!--加工厂产品信息模态框 -->
+<div class="modal fade" id="modal" tabindex="-1"  aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog" style="width:800px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body ">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">产品<sup class="not-null">*</sup></label>
+                        <div class="col-xs-8">
+                            <div class="input-group">
+                                <input class="form-control suitableProductAdd" id="name" type="text" disabled>
+                                <span class="input-group-btn">
+                                <button data-toggle="modal" class="btn btn-xs btn-default" data-target="#treeModal" id="researchmodal" type="button">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">总产能</label>
+                        <div class="col-lg-3">
+                            <div class="input-group">
+                                <input class="form-control consumptionAdd" type="text" id="capacity">
+                                <div class="input-group-btn">
+                                    <botton class="btn btn-xs btn-primary">(吨/年)</botton>
+                                </div>
+                            </div>
+                        </div>
+                        <label class="col-lg-2 control-label">产品质量</label>
+                        <div class="col-xs-3">
+                            <select class="form-control" id="quality">
+                                <option value="0">好</option>
+                                <option value="1" selected>一般</option>
+                                <option value="2">差</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group productAddrs">
+                        <label class="col-lg-2 control-label">厂址1</label>
+                        <div class="col-xs-3">
+                            <input class="form-control" id="addr1" type="text">
+                        </div>
+                        <label class="col-lg-2 control-label">产能1</label>
+                        <div class="col-lg-3">
+                            <div class="input-group">
+                                <input class="form-control consumptionAdd" type="text" id="capacity1">
+                                <div class="input-group-btn">
+                                    <botton class="btn btn-xs btn-primary">(吨/年)</botton>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group productAddrs">
+                        <label class="col-lg-2 control-label">厂址2</label>
+                        <div class="col-xs-3">
+                            <input class="form-control" id="addr2" type="text">
+                        </div>
+                        <label class="col-lg-2 control-label">产能2</label>
+                        <div class="col-lg-3">
+                            <div class="input-group">
+                                <input class="form-control consumptionAdd" type="text" id="capacity2">
+                                <div class="input-group-btn">
+                                    <botton class="btn btn-xs btn-primary">(吨/年)</botton>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">备注</label>
+                        <div class="col-xs-8">
+                            <textarea class="form-control" rows="4" id="remark"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-3 col-xs-offset-3">
+                        <a type="button" class="btn btn-primary btn-block" id="finish">
+                            完成
+                        </a>
+                    </div>
+                    <div class="col-xs-3">
+                        <button type="button" class="btn btn-default btn-block" data-dismiss="modal">取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--树形菜单modal-->
+<div class="modal fade" id="treeModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 200px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body well" style="max-height: 300px; overflow-y: scroll; overflow-x: scroll;">
+            ##                        这里插入树形菜单
+                <div id="tree" class="tree"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input id="factoryId" type="hidden" value="$!{factoryId}">
+
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/creatTree.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
+<script type="text/javascript">
+    var id = $('#factoryId').val();
+    var qualityList = ["好","一般","差"];
+
+    $(document).ready(function(){
+        render();
+
+        $('#tree').creatFCTree(basePath+'/businessProduct/initProductCatetroy');
+    })
+
+    function render(){
+        jQuery.ajax({
+            url:basePath + '/supplier/factories/' + id + '/products',
+            type:'GET'
+        }).done(function(result){
+            if(result.code == 1){
+                if(result.data.length > 0){
+                    $('#productList').html(renderData(result.data));
+                }else{
+                    $('#productList').html('<tr><td class="text-center" lang="zh">暂无数据!</td></tr>');
+                }
+            }
+        })
+    }
+
+    function renderData(data){
+        var _html = '';
+        for(var i=0;i<data.length;i++){
+            _html += '<tr>';
+            _html += '<td>'+ifEmpty(data[i].id)+'</td>';
+            _html += '<td><a class="info" data-categoryId="'+data[i].categoryId+'" data-cmaterialId="'+data[i].cmaterialId+'" data-id="'+data[i].id+'" data-category="'+data[i].category+'" data-cmaterialName="'+data[i].cmaterialName+'" data-specification="'+data[i].specification+'" style="cursor:pointer;">'+data[i].category+'-'+data[i].cmaterialName+'-'+data[i].specification+'</a></td>';
+            _html += '<td>'+ifEmpty(data[i].capacity)+'</td>';
+            if(data[i].quality!=undefined){
+                _html += '<td data-quality="'+ifEmpty(data[i].quality)+'">'+qualityList[data[i].quality]+'</td>';
+            }else{
+                _html +='<td></td>';
+            }
+            if(data[i].productAddrs!=undefined){
+                if(data[i].productAddrs[0]!=undefined){
+                    _html +='<td data-id="'+ifEmpty(data[i].productAddrs[0].id)+'">'+ifEmpty(data[i].productAddrs[0].addr)+'</td>';
+                    _html +='<td>'+ifEmpty(data[i].productAddrs[0].capacity)+'</td>';
+                }else{
+                    _html +='<td></td>';
+                    _html +='<td></td>';
+                }
+                if(data[i].productAddrs[1]!=undefined){
+                    _html +='<td data-id="'+ifEmpty(data[i].productAddrs[1].id)+'">'+ifEmpty(data[i].productAddrs[1].addr)+'</td>';
+                    _html +='<td>'+ifEmpty(data[i].productAddrs[1].capacity)+'</td>';
+                }else{
+                    _html +='<td></td>';
+                    _html +='<td></td>';
+                }
+            }
+            _html +='<td>'+ifEmpty(data[i].remark)+'</td>';
+            _html +='</tr>';
+        }
+        return _html;
+    }
+
+    //产品树点击事件
+    $(document).on('click','a.cNode',function(e){
+        e.preventDefault();
+        var a = $(e.target);
+        var fa = a.parent('li').parent('ul');
+
+        var tarEltext = a.text();
+        var ftarEltext = fa.parent('li').find('a:first').text();
+        var ids = a.parent('li').attr('id');
+        var fids = fa.attr('id');
+
+        $('#name').attr('data-cmaterialId',ids.split('_')[1]);
+        $('#name').attr('data-categoryId',fids.split('_')[1]);
+        $('#name').attr('data-category',ftarEltext);
+        $('#name').attr('data-cmaterialName',tarEltext.split('-')[0]);
+        $('#name').attr('data-specification',tarEltext.split('-')[1]);
+        $('#name').val(ftarEltext+'-'+tarEltext);
+
+        $('#treeModal').modal('hide');
+    })
+
+    //详情模态
+    $(document).on('click','.info',function(){
+        var tr = $(this).parents('tr').find('td');
+
+        var cmaterialId = $(this).attr('data-cmaterialId');//规格id
+        var categoryId = $(this).attr('data-categoryId');//父id
+        var category = $(this).attr('data-category');
+        var cmaterialName = $(this).attr('data-cmaterialName');
+        var specification = $(this).attr('data-specification');
+        var pid = $(this).attr('data-id');//产品id
+
+        $('#name').val(tr.eq(1).text());
+        $('#name').attr('data-id',pid);
+        $('#name').attr('data-categoryId',categoryId);
+        $('#name').attr('data-cmaterialId',cmaterialId);
+        $('#name').attr('data-category',category);
+        $('#name').attr('data-cmaterialName',cmaterialName);
+        $('#name').attr('data-specification',specification);
+        $('#capacity').val(tr.eq(2).text());
+        $('#quality').val(tr.eq(3).attr('data-quality'));
+        $('#addr1').attr('data-id',tr.eq(4).attr('data-id'));
+        $('#addr1').val(tr.eq(4).text());
+        $('#capacity1').val(tr.eq(5).text());
+        $('#addr2').val(tr.eq(6).text());
+        $('#addr2').attr('data-id',tr.eq(6).attr('data-id'));
+        $('#capacity2').val(tr.eq(7).text());
+        $('#remark').val(tr.eq(8).text());
+
+        $('#finish').attr('data-edit','1');
+        $('#finish').attr('data-id',pid);
+        $('#modal').modal('show');
+    })
+
+    //新增模态
+    $(document).on('click','#add',function(){
+        $('#name').val('');
+        $('#name').attr('data-id','');
+        $('#name').attr('data-categoryId','');
+        $('#name').attr('data-cmaterialId','');
+        $('#name').attr('data-category','');
+        $('#name').attr('data-cmaterialName','');
+        $('#name').attr('data-specification','');
+        $('#capacity').val('');
+        $('#quality').val('');
+        $('#addr1').val('');
+        $('#addr1').attr('data-id','');
+        $('#capacity1').val('');
+        $('#addr2').val('');
+        $('#addr2').attr('data-id','');
+        $('#capacity2').val('');
+        $('#remark').val('');
+
+        $('#finish').attr('data-id','');
+        $('#finish').attr('data-edit','0');
+        $('#modal').modal('show');
+    })
+
+    //完成操作
+    $('#finish').click(function(){
+        var pid = $(this).attr('data-id');
+        var edit = $(this).attr('data-edit');
+        var isup = true;
+        var notnull = $('.notnull');
+        notnull.each(function () {
+            var val = $(this).val();
+            if(val == ''||val == null){
+                alert('请完善表单!');
+                isup = false;
+                return false;
+            }
+        });
+        if(isup){
+            if(edit == 0){
+                jQuery.ajax({
+                    url:basePath + '/supplier/factories/' + id + '/products',
+                    data:getdata(),
+                    type:'POST',
+                    dataType:"json",
+                    contentType:"application/json",
+                    success:function(result){
+                        if(result.code == 1){
+                            alert('新增成功！');
+                            $('#modal').modal('hide');
+                            render();
+                        }else{
+                            alert('新增失败！');
+                        }
+                    }
+                })
+            }
+            else if(edit == 1){
+                jQuery.ajax({
+                    url:basePath + '/supplier/factories/' + id + '/products/' + pid,
+                    data:getdata(),
+                    type:'PUT',
+                    dataType:"json",
+                    contentType:"application/json",
+                    success:function(result){
+                        if(result.code == 1){
+                            alert('修改成功！');
+                            $('#modal').modal('hide');
+                            render();
+                        }else{
+                            alert('修改失败！');
+                        }
+                    }
+                })
+            }
+        }
+
+    })
+
+    //获取数据
+    function getdata() {
+        var data = {
+            categoryId:$('#name').attr('data-categoryId'),
+            cmaterialId:$('#name').attr('data-cmaterialId'),
+            category:$('#name').attr('data-category'),
+            cmaterialName:$('#name').attr('data-cmaterialName'),
+            specification:$('#name').attr('data-specification'),
+            quality:$('#quality').val(),
+            capacity:$('#capacity').val(),
+            remark:$('#remark').val(),
+            productAddrs:getAddrs()
+        }
+        console.log(data);
+        return JSON.stringify(data);
+    }
+
+    //厂址&产能
+    function getAddrs(){
+        var data = [
+            {
+                "id":$('#addr1').attr('data-id'),
+                "addr":$('#addr1').val(),
+                "capacity":$('#capacity1').val()
+            },
+            {
+                "id":$('#addr2').attr('data-id'),
+                "addr":$('#addr2').val(),
+                "capacity":$('#capacity2').val()
+            }
+        ]
+        return data;
+    }
+
+    function ifEmpty(data){
+        if (data===null||data===undefined){
+            return '';
+        }else {
+            return data;
+        }
+    }
+</script>

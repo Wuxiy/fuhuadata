@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.BankTypeMapper">
+  <resultMap id="BaseResultMap" type="com.fuhuadata.domain.doc.BankType">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pk_banktype" jdbcType="CHAR" property="pkBanktype" />
+    <result column="pk_group" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="pk_org" jdbcType="CHAR" property="pkOrg" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="name2" jdbcType="VARCHAR" property="name2" />
+    <result column="name3" jdbcType="VARCHAR" property="name3" />
+    <result column="name4" jdbcType="VARCHAR" property="name4" />
+    <result column="name5" jdbcType="VARCHAR" property="name5" />
+    <result column="name6" jdbcType="VARCHAR" property="name6" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="mnecode" jdbcType="VARCHAR" property="mnecode" />
+    <result column="creation_time" jdbcType="TIMESTAMP" property="creationTime" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="modified_time" jdbcType="TIMESTAMP" property="modifiedTime" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+  </resultMap>
+</mapper>

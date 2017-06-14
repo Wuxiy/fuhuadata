@@ -6,30 +6,44 @@
       WARNING - @mbg.generated
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="code" jdbcType="VARCHAR" property="code" />
-    <result column="pk_org" jdbcType="VARCHAR" property="pkOrg" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="short_name" jdbcType="VARCHAR" property="shortName" />
-    <result column="type" jdbcType="INTEGER" property="type" />
-    <result column="credit_code" jdbcType="VARCHAR" property="creditCode" />
-    <result column="register_fund" jdbcType="DECIMAL" property="registerFund" />
-    <result column="office_address" jdbcType="VARCHAR" property="officeAddress" />
-    <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="link_man" jdbcType="VARCHAR" property="linkMan" />
-    <result column="link_phone" jdbcType="VARCHAR" property="linkPhone" />
-    <result column="register_addr" jdbcType="VARCHAR" property="registerAddr" />
-    <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="warehouse_area" jdbcType="VARCHAR" property="warehouseArea" />
-    <result column="is_dangers" jdbcType="INTEGER" property="isDangers" />
-    <result column="is_Inside_entrance" jdbcType="INTEGER" property="isInsideEntrance" />
-    <result column="storaddr" jdbcType="VARCHAR" property="storaddr" />
-    <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="PK_STORDOC" jdbcType="VARCHAR" property="pkStordoc" />
+    <result column="CODE" jdbcType="VARCHAR" property="code" />
+    <result column="CREATIONTIME" jdbcType="VARCHAR" property="creationtime" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="DATAORIGINFLAG" jdbcType="DOUBLE" property="dataoriginflag" />
+    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
+    <result column="MODIFIEDTIME" jdbcType="VARCHAR" property="modifiedtime" />
+    <result column="MODIFIER" jdbcType="VARCHAR" property="modifier" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="PK_ADDRESS" jdbcType="VARCHAR" property="pkAddress" />
+    <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="PRINCIPALCODE" jdbcType="VARCHAR" property="principalcode" />
+    <result column="STORADDR" jdbcType="VARCHAR" property="storaddr" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
     <result column="combined_scoring" jdbcType="DECIMAL" property="combinedScoring" />
-    <result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
-    <result column="create_user_name" jdbcType="VARCHAR" property="createUserName" />
-    <result column="lastmodify_user_id" jdbcType="INTEGER" property="lastmodifyUserId" />
-    <result column="lastmodify_user_name" jdbcType="VARCHAR" property="lastmodifyUserName" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="is_dangers" jdbcType="INTEGER" property="isDangers" />
+    <result column="is_inside_entrance" jdbcType="INTEGER" property="isInsideEntrance" />
+    <result column="enabled_state" jdbcType="INTEGER" property="enabledState" />
+    <result column="credit_code" jdbcType="VARCHAR" property="creditCode" />
+      <result column="supprop" jdbcType="INTEGER" property="supprop"/>
+      <result column="storage_area" jdbcType="DECIMAL" property="storageArea"/>
   </resultMap>
+
+
+  <!--获取货代关联仓库-->
+  <select id="getListByForwardingId" parameterType="java.lang.Integer" resultType="com.fuhuadata.domain.mybatis.supplier.WarehouseInfo">
+            SELECT
+        swi.`CODE`,
+        swi.`NAME`,
+        swi.`STORADDR`,
+        swi.`is_dangers`,
+        swi.`is_inside_entrance`,
+        swi.`combined_scoring`,
+        swi.`MEMO`
+        FROM s_warehouse_info swi
+        LEFT JOIN s_forwarding_warehouse_relation sfwr ON sfwr.`warehouse_id` = swi.`id`
+        WHERE sfwr.`freightforwarding_id` = #{forwardingId}
+  </select>
+
 </mapper>

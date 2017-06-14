@@ -19,7 +19,7 @@ public class ForwardingOrderRecord extends BaseEntity<Integer>{
      * 仓库id
      */
     @Column(name = "warehouse_id")
-    private String warehouseId;
+    private Integer warehouseId;
 
     /**
      * 竞标记录id
@@ -55,7 +55,7 @@ public class ForwardingOrderRecord extends BaseEntity<Integer>{
      * 是否危险品
      */
     @Column(name = "is_dangers")
-    private BigDecimal isDangers;
+    private Integer isDangers;
 
     /**
      * 出运金额
@@ -139,7 +139,7 @@ public class ForwardingOrderRecord extends BaseEntity<Integer>{
      *
      * @return warehouse_id - 仓库id
      */
-    public String getWarehouseId() {
+    public Integer getWarehouseId() {
         return warehouseId;
     }
 
@@ -148,8 +148,8 @@ public class ForwardingOrderRecord extends BaseEntity<Integer>{
      *
      * @param warehouseId 仓库id
      */
-    public void setWarehouseId(String warehouseId) {
-        this.warehouseId = warehouseId == null ? null : warehouseId.trim();
+    public void setWarehouseId(Integer warehouseId) {
+        this.warehouseId = warehouseId;
     }
 
     /**
@@ -242,23 +242,6 @@ public class ForwardingOrderRecord extends BaseEntity<Integer>{
         this.exportContractNumber = exportContractNumber == null ? null : exportContractNumber.trim();
     }
 
-    /**
-     * 获取是否危险品
-     *
-     * @return is_dangers - 是否危险品
-     */
-    public BigDecimal getIsDangers() {
-        return isDangers;
-    }
-
-    /**
-     * 设置是否危险品
-     *
-     * @param isDangers 是否危险品
-     */
-    public void setIsDangers(BigDecimal isDangers) {
-        this.isDangers = isDangers;
-    }
 
     /**
      * 获取出运金额
@@ -438,5 +421,13 @@ public class ForwardingOrderRecord extends BaseEntity<Integer>{
      */
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
+    }
+
+    public Integer getIsDangers() {
+        return isDangers;
+    }
+
+    public void setIsDangers(Integer isDangers) {
+        this.isDangers = isDangers;
     }
 }
