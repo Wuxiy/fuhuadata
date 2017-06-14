@@ -50,6 +50,11 @@ public class ProduceFactoryProduct extends BaseEntity<Integer> {
     private String cmaterialName;
 
     /**
+     * 质量
+     */
+    private Byte quality;
+
+    /**
      * 规格
      */
     @Transient
@@ -236,4 +241,11 @@ public class ProduceFactoryProduct extends BaseEntity<Integer> {
         System.out.println(s);
     }
 
+    public Byte getQuality() {
+        return quality;
+    }
+
+    public void setQuality(Byte quality) {
+        this.quality = quality;
+    }
 }
