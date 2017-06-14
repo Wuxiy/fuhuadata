@@ -167,6 +167,24 @@ public class FactoryAction extends BaseController<ProduceFactory, Integer> {
         return "supplierInformation/factoryOrder";
     }
 
+    // 采购合同
+    @RequestMapping(value = "/{factoryId}/buy/contracts/vm")
+    public String buyContracts(@PathVariable String factoryId, Model model) {
+
+        model.addAttribute("factoryId", factoryId);
+
+        return "supplierInformation/factoryOrder";
+    }
+
+    // 原药合同
+    @RequestMapping(value = "/{factoryId}/orgi/contracts/vm")
+    public String listOrgiContracts(@PathVariable String factoryId, Model model) {
+
+        model.addAttribute("factoryId", factoryId);
+
+        return "supplierInformation/factoryACOrder";
+    }
+
     @RequestMapping(value = "/{factoryId}/complaint/vm")
     public String complaint(@PathVariable("factoryId") String factoryId) {
         return "supplierInformation/factoryComplaint";

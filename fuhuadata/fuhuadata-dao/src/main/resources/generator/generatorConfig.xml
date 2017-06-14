@@ -49,7 +49,19 @@
         </javaClientGenerator>
 
         <!-- 需要生成实体 Bean 的数据库表 -->
-        <table tableName="s_forwarding_evaluation_score_relation" domainObjectName="ForwardingEvaluationScoreRelation">
+        <table tableName="product_category" domainObjectName="ProductCategory" alias="pc">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>
+        <!--<table tableName="business_buy_contract" domainObjectName="BusinessBuyContract">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>
+        <table tableName="business_buy_contract_product" domainObjectName="BusinessBuyContractProduct">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>
+        <table tableName="bussiness_orgi_contract" domainObjectName="BusinessOrgiContract">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>-->
+        <!--<table tableName="s_forwarding_evaluation_score_relation" domainObjectName="ForwardingEvaluationScoreRelation">
             <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
         </table>
         <table tableName="s_score_term" domainObjectName="ScoreTerm">
@@ -60,7 +72,7 @@
         </table>
         <table tableName="s_warehouse_evaluation_score_relation" domainObjectName="WarehouseEvaluationScoreRelation">
             <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
-        </table>
+        </table>-->
         <!--<table tableName="s_factory" domainObjectName="ProduceFactory">
             <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
         </table>

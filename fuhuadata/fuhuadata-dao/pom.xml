@@ -6,7 +6,6 @@
         <groupId>com.fuhua</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>com.fuhua</groupId>
     <artifactId>fuhuadata-dao</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -139,6 +138,7 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
         </dependency>
+
     </dependencies>
 
     <build>
