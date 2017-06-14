@@ -174,3 +174,109 @@
         ><a href="${request.contextPath}/businessOrder/intoBusinessOrder/" lang="zh">订单</a></li>
     </ul>
 #end
+
+#macro(warehouseNav $num)
+<ul id="warehouseNav" class="nav nav-tabs pull-left">
+    <li
+        #if($num == 1)
+                class="active"
+        #end
+    ><a href="" lang="zh">基本信息</a></li>
+    <li
+        #if($num == 2)
+                class="active"
+        #end
+    ><a href="" lang="zh">合作货代</a></li>
+    <li
+        #if($num == 3)
+                class="active"
+        #end
+    ><a href="" lang="zh">订单记录</a></li>
+    <li
+        #if($num == 4)
+                class="active"
+        #end
+    ><a href="" lang="zh">投诉记录</a></li>
+</ul>
+#end
+
+## 货代仓库列表切换
+#macro(forwardingWarehouse $selected)
+    #set($tabs = [
+    {'name':'货代信息','path':'/supplier/forwarding/intoForwardingList'},
+    {'name':'仓库信息','path':'/supplier/warehouse/intoWarehouseList'}
+    ])
+<ul id="saleNav" class="nav nav-tabs pull-left">
+    #foreach($item in $tabs)
+        <li
+            #if($selected==$item.name)
+                    class="active"
+            #end
+        ><a href="$!{request.contextPath}$!{item.path}" lang="zh">$!{item.name}</a></li>
+    #end
+</ul>
+#end
+
+## 加工厂tab页
+#macro(factoryTab $selected $id)
+    #set($tabs = [
+    {'name':'基本信息','path':'/supplier/factories/','postfix':'/vm'},
+    {'name':'产品信息','path':'/supplier/factories/','postfix':'/products/vm'},
+    {'name':'订单记录','path':'/supplier/factories/','postfix':'/order/vm'}
+    ])
+#*{'name':'投诉记录','path':'/supplier/factories/','postfix':'/complaint/vm'},
+{'name':'延期交货记录','path':'/supplier/factories/','postfix':'/delivery/delay/vm'}*#
+    <ul id="saleNav" class="nav nav-tabs pull-left">
+    #foreach($item in $tabs)
+        <li
+        #if($selected==$item.name)
+            class="active"
+        #end
+        ><a href="$!{request.contextPath}$!{item.path}$!{id}$!{item.postfix}" lang="zh">$!{item.name}</a></li>
+    #end
+    </ul>
+#end
+
+## 仓库tab页
+#macro(warehouseTab $selected $id)
+    #set($tabs = [
+    {'name':'基本信息','path':'/supplier/warehouse/intoWarehouseBasic?id='},
+    {'name':'合作货代','path':'/supplier/warehouse/intoWarehouseOpperation?id='},
+    {'name':'订单记录','path':'/supplier/warehouse/intoWarehouseOrder?id='},
+    {'name':'投诉记录','path':'/supplier/warehouse/intoWarehouseComplaints?id='}
+    ])
+<ul id="saleNav" class="nav nav-tabs pull-left">
+    #foreach($item in $tabs)
+        <li
+            #if($selected==$item.name)
+                    class="active"
+            #end
+        ><a href="$!{request.contextPath}$!{item.path}$!{id}$!{item.postfix}" lang="zh">$!{item.name}</a></li>
+    #end
+</ul>
+#end
+
+## 货代tab页
+#macro(forwardingTab $selected $id)
+    #set($tabs = [
+    {'name':'基本信息','path':'/supplier/forwarding/intoForwardingBasic?id='},
+    {'name':'仓库信息','path':'/supplier/forwarding/intoForwardingWarehouse?id='},
+    {'name':'订单记录','path':'/supplier/forwarding/intoForwardingOrder?id='}
+    ])
+<ul id="saleNav" class="nav nav-tabs pull-left">
+    #foreach($item in $tabs)
+        <li
+            #if($selected==$item.name)
+                    class="active"
+            #end
+        ><a href="$!{request.contextPath}$!{item.path}$!{id}" lang="zh">$!{item.name}</a></li>
+    #end
+</ul>
+#end
+
+#*
+#macro(breadcrumb)
+<ul id="location" class="breadcrumb pull-right">
+    <li><span class="glyphicon glyphicon-map-marker"></span></li>
+</ul>
+#end*#
