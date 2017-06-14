@@ -6,13 +6,13 @@
       WARNING - @mbg.generated
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="warehouse_id" jdbcType="VARCHAR" property="warehouseId" />
+    <result column="warehouse_id" jdbcType="INTEGER" property="warehouseId" />
     <result column="bid_id" jdbcType="INTEGER" property="bidId" />
     <result column="warehouse_name" jdbcType="VARCHAR" property="warehouseName" />
     <result column="entry_code" jdbcType="VARCHAR" property="entryCode" />
     <result column="forwarding_name" jdbcType="VARCHAR" property="forwardingName" />
     <result column="export_contract_number" jdbcType="VARCHAR" property="exportContractNumber" />
-    <result column="is_dangers" jdbcType="DECIMAL" property="isDangers" />
+    <result column="is_dangers" jdbcType="INTEGER" property="isDangers" />
     <result column="shipment_amount" jdbcType="DECIMAL" property="shipmentAmount" />
     <result column="shipment_quantity" jdbcType="DECIMAL" property="shipmentQuantity" />
     <result column="remarks" jdbcType="VARCHAR" property="remarks" />

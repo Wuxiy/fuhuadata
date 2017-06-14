@@ -3,6 +3,7 @@ package com.fuhuadata.service.mybatis.supplier;
 import com.fuhuadata.dao.supplier.ProduceFactoryProductMapper;
 import com.fuhuadata.domain.supplier.ProduceFactoryProduct;
 import com.fuhuadata.domain.supplier.ProduceFactoryProductAddr;
+import com.fuhuadata.manager.ProductWareManager;
 import com.fuhuadata.service.impl.mybatis.BaseServiceImpl;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,9 @@ public class ProduceFactoryProductServiceImpl extends BaseServiceImpl<ProduceFac
     }
 
     private ProduceFactoryProductAddrService productAddrService;
+
+    @Resource
+    private ProductWareManager productWareManager;
 
     @Resource
     public void setProductAddrService(ProduceFactoryProductAddrService addrService) {
@@ -59,6 +63,8 @@ public class ProduceFactoryProductServiceImpl extends BaseServiceImpl<ProduceFac
             return null;
         }
 
+        setProductWareCode(product);
+
         saveSelective(product);
 
         saveOrUpdateAddrs(product);
@@ -72,6 +78,8 @@ public class ProduceFactoryProductServiceImpl extends BaseServiceImpl<ProduceFac
         if (null == product) {
             return null;
         }
+
+        setProductWareCode(product);
 
         updateSelective(product);
 
@@ -96,6 +104,14 @@ public class ProduceFactoryProductServiceImpl extends BaseServiceImpl<ProduceFac
                 .andIn("id", productIds);
 
         delete(example);
+    }
+
+    private void setProductWareCode(ProduceFactoryProduct product) {
+
+        Optional.ofNullable(product)
+                .map(ProduceFactoryProduct::getCmaterialId)
+                .map(wareId -> productWareManager.getProductWareById(Integer.valueOf(wareId)))
+                .ifPresent(productWare -> product.setCmaterialId(productWare.getCode()));
     }
 
     private void saveOrUpdateAddrs(ProduceFactoryProduct product) {

@@ -32,7 +32,7 @@ public class FactoryEvaluateAction extends BaseController<FactoryEvaTotal, Integ
         model.addAttribute("orderId", orderId);
         model.addAttribute("evaItems", evaItemService.listItemAndScoreByOrderId(orderId));
 
-        return "";
+        return "supplierInformation/factoryGrade";
     }
 
     /**

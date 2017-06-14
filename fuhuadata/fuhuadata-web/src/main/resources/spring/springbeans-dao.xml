@@ -62,11 +62,11 @@
     </bean>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-	<property name="dataSource" ref="multiDataSource"/>
-	<property name="typeAliasesPackage" value="com.fuhuadata.domain.mybatis"/>
-	<property name="mapperLocations" value="classpath:/sqlmap/mapper/**/*.xml"/>
-	<property name="configLocation" value="classpath:/mybatis-config.xml"/>
-</bean>
+        <property name="dataSource" ref="multiDataSource"/>
+        <property name="typeAliasesPackage" value="com.fuhuadata.domain.mybatis"/>
+        <property name="mapperLocations" value="classpath:/sqlmap/mapper/**/*.xml"/>
+        <property name="configLocation" value="classpath:/mybatis-config.xml"/>
+    </bean>
 
     <!-- 通用 mapper 配置 -->
     <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
@@ -84,15 +84,15 @@
 
     <!-- 批量操作 sqlSession, 可安全的在 dao 文件中共享 -->
     <bean id="sqlSessionBatch" class="org.mybatis.spring.SqlSessionTemplate">
-        <constructor-arg index="0" ref="sqlSessionFactory" />
-        <constructor-arg index="1" value="BATCH" />
+        <constructor-arg index="0" ref="sqlSessionFactory"/>
+        <constructor-arg index="1" value="BATCH"/>
     </bean>
 
-	<!-- 事务配置 -->
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource"/>
-	</bean>
+    <!-- 事务配置 -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="multiDataSource"/>
+    </bean>
 
     <!-- spring  事务管理-->
     <tx:annotation-driven transaction-manager="transactionManager"/>

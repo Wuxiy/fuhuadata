@@ -1,0 +1,155 @@
+<div class="nav-deputy shadow-out clearfix">
+    #warehouseNav(4)
+    #breadcrumb()
+</div>
+<div class="dashboard-wrapper">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" lang="zh">投诉记录</h3>
+                </div>
+                <div class="panel-body clearfix">
+                    <!--表格-->
+                    <table class="table text-center table-condensed table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th class="text-center" lang="zh">编号</th>
+                            <th class="text-center" lang="zh">货代合同号</th>
+                            <th class="text-center" lang="zh">进仓编号</th>
+                            <th class="text-center" lang="zh">进仓数量</th>
+                            <th class="text-center" lang="zh">投诉日期</th>
+                            <th class="text-center" lang="zh">生产日期</th>
+                            <th class="text-center" lang="zh">包装</th>
+                            <th class="text-center" lang="zh">国家</th>
+                            <th class="text-center" lang="zh">客户</th>
+                            <th class="text-center" lang="zh">客户名称</th>
+                            <th class="text-center" lang="zh">受损数量</th>
+                            <th class="text-center" lang="zh">问题</th>
+                            <th class="text-center" lang="zh">赔偿损失金额(USD)</th>
+                            <th class="text-center" lang="zh">问题处理情况</th>
+                            <th class="text-center" lang="zh">经办人</th>
+                            <th class="text-center" lang="zh">组别</th>
+                        </tr>
+                        </thead>
+                        <tbody id="complaintsList">
+                        </tbody>
+                    </table>
+                    <div class="pagination" id="pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input id="" type="hidden" value="$!{}">
+
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
+<script type="text/javascript">
+
+    $(function(){
+        var table = {
+            pageSize:10,
+            pageNum:0,
+            pagination:$('#pagination'),
+            container:$('#complaintsList'),
+            /*data:{
+                url:basePath + '/supplier/factories',
+                dataType:'json',
+                data:{
+                    pageSize:table.pageSize,
+                    startRow:(table.pageNum*table.pageSize)
+                },
+                async:true,
+                type:'POST'
+            },*/
+            setPagination:{
+                items_per_page:10,
+                num_edge_entries:3,
+                num_display_entries:5,
+                callback:function (pageNum,jq) {
+                    $.ajax({
+                        url:basePath + '',
+                        dataType:'json',
+                        contentType:'application/json',
+                        data:{
+                            pageSize:table.pageSize,
+                            startRow:(pageNum*table.pageSize)
+                        },
+                        async:true,
+                        type:'GET'
+                    }).done(function(res){
+
+                        if (res.code===1) { // 请求是否成功
+
+                            table.renderList(res.data.list);
+                        }
+                    });
+
+                }
+            },
+            init:function () {
+                $.ajax({
+                    url:basePath + '',
+                    dataType:'json',
+                    contentType:'application/json',
+                    data:{
+                        pageSize:table.pageSize,
+                        startRow:0
+                    },
+                    async:true,
+                    type:'GET'
+                }).done(function (res) {
+                    if (res.code===1) { // 请求是否成功
+
+                        if(!table.total){ // 是否需要渲染分页
+
+                            table.total = res.data.total;
+                            table.renderPagination();
+                        }
+                        table.renderList(res.data.list);
+                    }
+                });
+            },
+            renderList:function (list) {
+                var tpl = '';
+                $.each(list, function(i, item){
+                    tpl +=
+                            '<tr>' +
+                            '<td></td>'+
+                            '<td></td>'+
+                            '<td></td>'+
+                            '<td></td>'+
+                            '<td></td>'+
+                            '<td></td>'+
+                            '<td></td>'+
+                            '<td></td>'+
+                            '<td></td>'+
+                            '<td></td>'+
+                            '<td></td>'+
+                            '<td></td>'+
+                            '<td></td>'+
+                            '<td></td>'+
+                            '<td></td>'+
+                            '<td></td>'+
+                            '</tr>';
+                });
+                this.container.html(tpl);
+            },
+            renderPagination:function () {
+                this.pagination.pagination(this.total,this.setPagination);
+            },
+            hasField:function (field) {
+
+                if (field===null||field===undefined){
+                    return '';
+                }else {
+                    return field;
+                }
+            }
+        };
+
+        table.init();
+
+    });
+</script>

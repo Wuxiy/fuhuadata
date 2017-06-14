@@ -1,12 +1,11 @@
 package com.fuhuadata.domain.mybatis.supplier;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fuhuadata.domain.mybatis.BaseEntity;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.*;
-
-
 /**
  *   货代竞标记录
  */
@@ -23,13 +22,13 @@ public class ForwardingBidRecord extends BaseEntity<Integer>{
      * 货代id
      */
     @Column(name = "freightforwarding_id")
-    private String freightforwardingId;
+    private Integer freightforwardingId;
 
     /**
      * 仓库id
      */
     @Column(name = "warehouse_id")
-    private String warehouseId;
+    private Integer warehouseId;
 
     /**
      * 采购方案编号
@@ -68,6 +67,12 @@ public class ForwardingBidRecord extends BaseEntity<Integer>{
     private Integer isModifyPrice;
 
     /**
+     * 是否恶意竞标
+     */
+    @Column(name = "malicious_bid")
+    private Integer maliciousBid;
+
+    /**
      * 备注
      */
     private String remarks;
@@ -76,6 +81,7 @@ public class ForwardingBidRecord extends BaseEntity<Integer>{
      * 评价时间
      */
     @Column(name = "evaluate_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date evaluateTime;
 
     /**
@@ -106,12 +112,14 @@ public class ForwardingBidRecord extends BaseEntity<Integer>{
      * 创建时间
      */
     @Column(name = "create_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     /**
      * 修改时间
      */
     @Column(name = "modify_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date modifyTime;
 
     /**
@@ -132,41 +140,7 @@ public class ForwardingBidRecord extends BaseEntity<Integer>{
         this.id = id;
     }
 
-    /**
-     * 获取货代id
-     *
-     * @return freightforwarding_id - 货代id
-     */
-    public String getFreightforwardingId() {
-        return freightforwardingId;
-    }
 
-    /**
-     * 设置货代id
-     *
-     * @param freightforwardingId 货代id
-     */
-    public void setFreightforwardingId(String freightforwardingId) {
-        this.freightforwardingId = freightforwardingId == null ? null : freightforwardingId.trim();
-    }
-
-    /**
-     * 获取仓库id
-     *
-     * @return warehouse_id - 仓库id
-     */
-    public String getWarehouseId() {
-        return warehouseId;
-    }
-
-    /**
-     * 设置仓库id
-     *
-     * @param warehouseId 仓库id
-     */
-    public void setWarehouseId(String warehouseId) {
-        this.warehouseId = warehouseId == null ? null : warehouseId.trim();
-    }
 
     /**
      * 获取采购方案编号
@@ -418,5 +392,29 @@ public class ForwardingBidRecord extends BaseEntity<Integer>{
      */
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
+    }
+
+    public Integer getMaliciousBid() {
+        return maliciousBid;
+    }
+
+    public void setMaliciousBid(Integer maliciousBid) {
+        this.maliciousBid = maliciousBid;
+    }
+
+    public Integer getFreightforwardingId() {
+        return freightforwardingId;
+    }
+
+    public void setFreightforwardingId(Integer freightforwardingId) {
+        this.freightforwardingId = freightforwardingId;
+    }
+
+    public Integer getWarehouseId() {
+        return warehouseId;
+    }
+
+    public void setWarehouseId(Integer warehouseId) {
+        this.warehouseId = warehouseId;
     }
 }

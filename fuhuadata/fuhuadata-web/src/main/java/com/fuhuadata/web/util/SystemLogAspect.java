@@ -1,8 +1,6 @@
 package com.fuhuadata.web.util;
 
 import java.lang.reflect.Method;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -10,8 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import com.fuhuadata.domain.SystemLog;
 import com.fuhuadata.service.SystemLogService;
 import com.fuhuadata.service.util.LoginUtils;
-import com.fuhuadata.web.util.SystemLogAnnotation;
-import com.mysql.jdbc.log.LogUtils;
 import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;

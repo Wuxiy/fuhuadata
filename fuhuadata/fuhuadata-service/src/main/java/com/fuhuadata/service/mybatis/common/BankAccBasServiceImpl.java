@@ -2,6 +2,7 @@ package com.fuhuadata.service.mybatis.common;
 
 import com.fuhuadata.dao.mapper.BankAccBasMapper;
 import com.fuhuadata.domain.common.BankAccBas;
+import com.fuhuadata.domain.common.BankAccType;
 import com.fuhuadata.service.impl.mybatis.BaseServiceImpl;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,15 @@ public class BankAccBasServiceImpl extends BaseServiceImpl<BankAccBas, Integer>
         }
 
         return getBankAccMapper().listBankAccs(accType, customerId);
+    }
+
+    @Override
+    public List<BankAccBas> listBankAccs(BankAccType accType) {
+
+        Example example = newExample();
+        example.createCriteria().andEqualTo("acctype", accType.key);
+
+        return listByExample(example);
     }
 
     @Override

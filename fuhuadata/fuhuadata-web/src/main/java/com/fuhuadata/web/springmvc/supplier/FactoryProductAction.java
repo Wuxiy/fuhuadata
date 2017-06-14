@@ -73,6 +73,7 @@ public class FactoryProductAction extends BaseController<ProduceFactoryProduct, 
         Result<ProduceFactoryProduct> result = Result.newResult(false);
 
         product.setFactoryId(factoryId);
+        product.setId(productId);
 
         product = productService.updateProduct(product);
         result.addDefaultModel(product);

@@ -4,131 +4,64 @@
 <div class="dashboard-wrapper">
     <div class="row">
         <div class="col-xs-12 view-HD-lg">
-            <div class="panel panel-default">
+            <div class="panel panel-default" id="container">
                 <div class="panel-heading">
-                    <a class="pull-right panel-heading-btn btn btn-xs btn-primary" href="${request.contextPath}/supplier/factories/add/vm">新增</a>
-                    <h3 class="panel-title" lang="zh">加工厂列表</h3>
+                    <button class="panel-heading-btn pull-right btn btn-xs btn-primary hidden" name="edit" type="button">
+                        <span class="glyphicon glyphicon-edit"></span>
+                        编辑
+                    </button>
+                    <h3 class="panel-title" lang="zh">订单评价</h3>
                 </div>
                 <div class="panel-body clearfix">
-                    <!--表格-->
-                    <table class="table text-center table-condensed table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <th class="text-center" lang="zh">指标</th>
-                            <th class="text-center" lang="zh">总分</th>
-                            <th class="text-center" lang="zh">评分</th>
-                            <th class="text-center" lang="zh">备注</th>
-                        </tr>
-                        </thead>
-                        <tbody id="grade_list"></tbody>
-                    </table>
-                    <div id="pagination" class="pagination"></div>
+                    <form class="form-horizontal" id="order_grade">
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <!--表格-->
+                                <table class="table text-center table-condensed table-bordered table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center col-xs-6" lang="zh">指标</th>
+                                        <th class="text-center col-xs-2" lang="zh">总分</th>
+                                        <th class="text-center col-xs-2" lang="zh">评分</th>
+                                        <th class="text-center col-xs-2" lang="zh">备注</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="grade_list">
+                                        #foreach($item in $evaItems)
+                                        <tr name="$!{item.id}">
+                                            <td lang="zh">$!{item.targetName}</td>
+                                            <td name="maxScore">$!{item.score}</td>
+                                            <td><input class="form-control" name="evaScore" data-edit="on" type="number" min="0" max="$!{item.score}" disabled></td>
+                                            <td><input class="form-control" name="evaRemark" data-edit="on" type="text" disabled></td>
+                                        </tr>
+                                        #end
+                                        <tr>
+                                            <td class="text-danger" lang="zh">综合得分</td>
+                                            <td class="text-danger" name="totalScore" colspan="3"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-1 control-label" for="remark" lang="zh">备注</label>
+                            <div class="col-xs-11">
+                                <textarea class="form-control" name="remark" data-edit="on" rows="4" disabled></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group hidden" data-view="editView">
+                            <div class="col-xs-2 col-xs-offset-4">
+                                <button class="btn btn-block btn-default" name="cancel" type="button" lang="zh">取消</button>
+                            </div>
+                            <div class="col-xs-2">
+                                <button class="btn btn-block btn-primary" name="save" type="button" lang="zh">保存</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
-<script type="text/javascript">
-
-    $(function(){
-        var table = {
-            pageSize:10,
-            pageNum:0,
-            pagination:$('#pagination'),
-            container:$('#factory_list'),
-            /*data:{
-                url:basePath + '/supplier/factories',
-                dataType:'json',
-                data:{
-                    pageSize:table.pageSize,
-                    startRow:(table.pageNum*table.pageSize)
-                },
-                async:true,
-                type:'POST'
-            },*/
-            setPagination:{
-                items_per_page:10,
-                num_edge_entries:3,
-                num_display_entries:5,
-                callback:function (pageNum,jq) {
-                    $.ajax({
-                        url:basePath + '/supplier/factories',
-                        dataType:'json',
-                        contentType:'application/json',
-                        data:{
-                            pageSize:table.pageSize,
-                            startRow:(pageNum*table.pageSize)
-                        },
-                        async:true,
-                        type:'GET'
-                    }).done(function(res){
-
-                        if (res.code===1) { // 请求是否成功
-
-                            table.renderList(res.data.list);
-                        }
-                    });
-
-                }
-            },
-            init:function () {
-                $.ajax({
-                    url:basePath + '/supplier/factories',
-                    dataType:'json',
-                    contentType:'application/json',
-                    data:{
-                        pageSize:table.pageSize,
-                        startRow:0
-                    },
-                    async:true,
-                    type:'GET'
-                }).done(function (res) {
-                    if (res.code===1) { // 请求是否成功
-
-                        if(!table.total){ // 是否需要渲染分页
-
-                            table.total = res.data.total;
-                            table.renderPagination();
-                        }
-                        table.renderList(res.data.list);
-                    }
-                });
-            },
-            renderList:function (list) {
-                var tpl = '';
-                $.each(list, function(i, item){
-                    tpl +=
-                        '<tr>' +
-                        '<td>'+table.hasField(item.code)+'</td>'+
-                        '<td><a href="'+basePath+'/supplier/factories/'+table.hasField(item.id)+'/vm">'+table.hasField(item.name)+'</a></td>'+
-                        '<td>'+table.hasField(item.abbr)+'</td>'+
-                        '<td></td>'+
-                        '<td>'+table.hasField(item.cooperateTime)+'</td>'+
-                        '<td></td>'+
-                        '<td>'+table.hasField(item.score)+'</td>'+
-                        '<td>'+table.hasField(item.manager)+'</td>'+
-                        '<td>'+table.hasField(item.remark)+'</td>'+
-                        '</tr>';
-                });
-                this.container.html(tpl);
-            },
-            renderPagination:function () {
-                this.pagination.pagination(this.total,this.setPagination);
-            },
-            hasField:function (field) {
-
-                if (field===null||field===undefined){
-                    return '';
-                }else {
-                    return field;
-                }
-            }
-        };
-
-        table.init();
-
-    });
-</script>
+<input id="orderId" type="hidden" value="$!{orderId}">
+<script src="${request.contextPath}/lib/js/supplierInformation/factoryGrade.js"></script>
