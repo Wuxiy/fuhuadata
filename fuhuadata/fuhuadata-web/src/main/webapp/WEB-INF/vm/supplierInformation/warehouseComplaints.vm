@@ -1,5 +1,5 @@
 <div class="nav-deputy shadow-out clearfix">
-    #warehouseNav(4)
+    #warehouseTab('投诉记录',$!{warehouseId})
     #breadcrumb()
 </div>
 <div class="dashboard-wrapper">
@@ -42,10 +42,11 @@
     </div>
 </div>
 
-<input id="" type="hidden" value="$!{}">
+<input id="warehouseId" type="hidden" value="$!{warehouseId}">
 
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
 <script type="text/javascript">
+    var id = $('#warehouseId').val();
 
     $(function(){
         var table = {
