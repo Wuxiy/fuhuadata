@@ -1,5 +1,4 @@
 <div class="nav-deputy shadow-out clearfix">
-    #forwardingWarehouse(1,$!{forwardingId})
     #breadcrumb()
 </div>
 <div class="dashboard-wrapper">
@@ -14,6 +13,7 @@
                     <table class="table text-center table-condensed table-bordered table-striped">
                         <thead>
                         <tr>
+                            <th class="text-center" lang="zh">编号</th>
                             <th class="text-center" lang="zh">货代编号</th>
                             <th class="text-center" lang="zh">企业全称</th>
                             <th class="text-center" lang="zh">企业简称</th>

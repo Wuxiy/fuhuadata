@@ -3,7 +3,7 @@
 </div>
 <div class="dashboard-wrapper">
     <div class="row">
-        <div class="col-xs-12 view-HD-lg">
+        <div class="col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <a class="pull-right panel-heading-btn btn btn-xs btn-primary" href="${request.contextPath}/supplier/factories/add/vm">新增</a>
@@ -15,6 +15,7 @@
                         <caption class="text-right" lang="zh">金额单位：万元</caption>
                         <thead>
                         <tr>
+                            <th class="text-center" lang="zh">编号</th>
                             <th class="text-center" lang="zh">企业编号</th>
                             <th class="text-center" lang="zh">企业全称</th>
                             <th class="text-center" lang="zh">企业简称</th>

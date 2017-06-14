@@ -26,7 +26,7 @@ $(function(){
 
                     if (res.code===1) { // 请求是否成功
 
-                        table.renderList(res.data.list);
+                        table.renderList(res.data.list, (res.data.pageNum-1)*res.data.pageSize);
                     }
                 });
 
@@ -51,26 +51,35 @@ $(function(){
                         table.total = res.data.total;
                         table.renderPagination();
                     }
-                    table.renderList(res.data.list);
+                    table.renderList(res.data.list, (res.data.pageNum-1)*res.data.pageSize);
                 }
             });
         },
-        renderList:function (list) {
-            var tpl = '';
-            $.each(list, function(i, item){
-                tpl +=
-                    '<tr>' +
-                    '<td>'+table.hasField(item.code)+'</td>'+
-                    '<td><a href="'+basePath+'/supplier/factories/'+table.hasField(item.id)+'/vm">'+table.hasField(item.name)+'</a></td>'+
-                    '<td>'+table.hasField(item.abbr)+'</td>'+
-                    '<td></td>'+
-                    '<td>'+table.hasField(item.cooperateTime)+'</td>'+
-                    '<td></td>'+
-                    '<td>'+table.hasField(item.score)+'</td>'+
-                    '<td>'+table.hasField(item.manager)+'</td>'+
-                    '<td>'+table.hasField(item.remark)+'</td>'+
-                    '</tr>';
-            });
+        renderList:function (list, count) {
+            var tpl = '',
+                count = count;
+
+            if (Array.isArray(list)) {
+
+                $.each(list, function(i, item){
+                    tpl +=
+                        '<tr>' +
+                        '<td>'+(++count)+'</td>'+
+                        '<td>'+table.hasField(item.code)+'</td>'+
+                        '<td><a href="'+basePath+'/supplier/factories/'+table.hasField(item.id)+'/vm">'+table.hasField(item.name)+'</a></td>'+
+                        '<td>'+table.hasField(item.abbr)+'</td>'+
+                        '<td></td>'+
+                        '<td>'+table.hasField(item.cooperateTime)+'</td>'+
+                        '<td></td>'+
+                        '<td>'+table.hasField(item.score)+'</td>'+
+                        '<td>'+table.hasField(item.manager)+'</td>'+
+                        '<td>'+table.hasField(item.remark)+'</td>'+
+                        '</tr>';
+                });
+            }else {
+
+                tpl += '<tr><td colspan="10">暂无数据</td></tr>';
+            }
             this.container.html(tpl);
         },
         renderPagination:function () {

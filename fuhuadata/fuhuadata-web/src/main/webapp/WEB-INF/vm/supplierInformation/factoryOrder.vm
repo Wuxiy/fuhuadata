@@ -51,6 +51,7 @@
                             <th class="text-center" lang="zh">合同名称</th>
                             <th class="text-center" lang="zh">采购合同时间</th>
                             <th class="text-center" lang="zh">交货时间</th>
+                            <th class="text-center" lang="zh">币种</th>
                             <th class="text-center" lang="zh">总数量</th>
                             <th class="text-center" lang="zh">价税合计</th>
                             <th class="text-center" lang="zh">备注</th>
@@ -80,11 +81,14 @@
                 <table class="table text-center table-condensed table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th class="text-center" lang="zh">产品名称</th>
-                        <th class="text-center" lang="zh">规格</th>
-                        <th class="text-center" lang="zh">外销客户</th>
+                        <th class="text-center" lang="zh">编号</th>
+                        <th class="text-center" lang="zh">物料编码</th>
+                        <th class="text-center" lang="zh">单位</th>
+                        <th class="text-center" lang="zh">主数量</th>
+                        <th class="text-center" lang="zh">单价</th>
+                        <th class="text-center" lang="zh">总价</th>
+                        <th class="text-center" lang="zh">外销客户名称</th>
                         <th class="text-center" lang="zh">外销合同号</th>
-                        <th class="text-center" lang="zh">数量</th>
                         <th class="text-center" lang="zh">备注</th>
                     </tr>
                     </thead>
@@ -94,10 +98,11 @@
         </div>
     </div>
 </div>
-
+<input id="cvendor_id" type="hidden" value="$!{factoryId}"> ## 供应商id
 <script>
     (function () {
-        var table = {
+        var cvendorId = $('#cvendor_id').val(),
+                table = {
                     total:0,
                     pageSize:1,
                     pageNum:0,
@@ -108,10 +113,11 @@
                         num_display_entries:5,
                         callback:function (pageNum,jq) {
                             $.ajax({
-                                url:basePath + '/supplier/forwarding/forwardingList',
+                                url:basePath + '/biz/buy/contracts',
                                 dataType:'json',
                                 contentType:'application/json',
                                 data:{
+                                    cvendorid:cvendorId,
                                     pageSize:table.pageSize,
                                     index:pageNum+1
                                 },
@@ -129,10 +135,11 @@
                     thisRow:'',
                     init:function () {
                         $.ajax({
-                            url:basePath + '/supplier/forwarding/forwardingList',
+                            url:basePath + '/biz/buy/contracts',
                             dataType:'json',
                             contentType:'application/json',
                             data:{
+                                cvendorid:cvendorId,
                                 pageSize:table.pageSize,
                                 index:1
                             },
@@ -141,7 +148,7 @@
                         }).done(function (res) {
                             if (res.code===1) { // 请求是否成功
 
-                                if(!table.total){ // 是否需要渲染分页
+                                if(table.total!==res.data.total){ // 是否需要渲染分页
 
                                     table.total = res.data.total;
                                     table.renderPagination();
@@ -155,23 +162,25 @@
                     renderList:function (list, count) {
                         var tpl = '',
                             count = count;
-                        if () {
-
+                        if (Array.isArray(list)) {
+                            $.each(list, function(i, item){
+                                tpl +=
+                                    '<tr>' +
+                                    '<td>'+(++count)+'</td>'+
+                                    '<td><a data-id="'+item.pkCtPu+'" href="#">'+table.hasField(item.vbillcode)+'</a></td>'+
+                                    '<td>'+table.hasField(item.ctname)+'</td>'+
+                                    '<td>'+table.hasField(item.subscribedate)+'</td>'+
+                                    '<td>'+table.hasField(item.actualinvalidate)+'</td>'+
+                                    '<td>'+table.hasField(item.totalNumber)+'</td>'+
+                                    '<td>'+table.hasField(item.ntotalorigmny)+'</td>'+
+                                    '<td>'+table.hasField(item.remark)+'</td>'+
+                                    '<td>'+table.hasField()+'</td>'+
+                                    '<td>'+table.hasField()+'</td>'+
+                                    '</tr>';
+                            });
+                        }else {
+                            tpl += '<tr><td colspan="9">暂无数据</td></tr>'
                         }
-                        $.each(list, function(i, item){
-                            tpl +=
-                                '<tr>' +
-                                '<td>'+(++count)+'</td>'+
-                                '<td><a href="'+basePath+'/supplier/forwarding/intoForwardingBasic?id='+table.hasField(item.id)+'">'+table.hasField(item.vbillcode)+'</a></td>'+
-                                '<td>'+table.hasField(item.ctname)+'</td>'+
-                                '<td>'+table.hasField(item.subscribedate)+'</td>'+
-                                '<td>'+table.hasField(item.actualinvalidate)+'</td>'+
-                                '<td>'+table.hasField(item.totalNumber)+'</td>'+
-                                '<td>'+table.hasField(item.ntotalorigmny)+'</td>'+
-                                '<td>'+table.hasField(item.remark)+'</td>'+
-                                '<td>'+table.hasField()+'</td>'+
-                                '</tr>';
-                        });
                         this.container.html(tpl);
                     },
                     renderPagination:function () {
@@ -202,7 +211,7 @@
                 modal = {
                     dom:$('#details_modal'),
                     container:$('#order_details'),
-                    init:function () {
+                    init:function (id) {
                         var self = this;
                         $.ajax({
                             url:basePath + '',
@@ -225,20 +234,26 @@
                     },
                     renderList:function (list) {
                         var tpl = '';
-                        $.each(list, function(i, item){
-                            tpl +=
-                                    '<tr>' +
-                                    '<td>'+table.hasField(item.code)+'</td>'+
-                                    '<td><a href="'+basePath+'/supplier/forwarding/intoForwardingBasic?id='+table.hasField(item.id)+'">'+table.hasField(item.name)+'</a></td>'+
-                                    '<td>'+table.hasField(item.shortname)+'</td>'+
-                                    '<td>'+table.hasField(item.startCooperateTime)+'</td>'+
-                                    '<td>'+table.hasField(item.cooperateTime)+'</td>'+
-                                    '<td>'+table.hasField(item.combinedScoring)+'</td>'+
-                                    '<td>'+table.hasField()+'</td>'+
-                                    '<td>'+table.hasField()+'</td>'+
-                                    '<td>'+table.hasField()+'</td>'+
-                                    '</tr>';
-                        });
+
+                        if (Array.isArray(list)) {
+
+                            $.each(list, function(i, item){
+                                tpl +=
+                                        '<tr>' +
+                                        '<td>'+(i+1)+'</td>'+
+                                        '<td><a href="#">'+table.hasField(item.pkMaterial)+'</a></td>'+
+                                        '<td>'+table.hasField(item.cunit)+'</td>'+
+                                        '<td>'+table.hasField(item.nnum)+'</td>'+
+                                        '<td>'+table.hasField(item.price)+'</td>'+
+                                        '<td>'+table.hasField(item.totalPrice)+'</td>'+
+                                        '<td>'+table.hasField(item.exportCtClientName)+'</td>'+
+                                        '<td><a href="'+basePath+table.hasField(item.exportCtPk)+'">'+table.hasField(item.exportCtCode)+'</a></td>'+
+                                        '<td>'+table.hasField(item.remark)+'</td>'+
+                                        '</tr>';
+                            });
+                        }else {
+                            tpl += '<tr><td colspan="9">暂无数据</td></tr>';
+                        }
                         this.container.html(tpl);
                     }
                 }

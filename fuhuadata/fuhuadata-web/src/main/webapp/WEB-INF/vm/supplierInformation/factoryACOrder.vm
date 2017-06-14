@@ -87,7 +87,7 @@
                 },
                 init:function () {
                     $.ajax({
-                        url:basePath + '/supplier/forwarding/forwardingList',
+                        url:basePath + '',
                         dataType:'json',
                         contentType:'application/json',
                         data:{
@@ -109,7 +109,7 @@
                     });
 
                 },
-                renderList:function (list) {
+                renderList:function (list, count) {
                     var tpl = '';
                     $.each(list, function(i, item){
                         tpl +=
