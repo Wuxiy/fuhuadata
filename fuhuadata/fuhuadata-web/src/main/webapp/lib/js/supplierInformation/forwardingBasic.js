@@ -19,6 +19,7 @@ $(function () {
         editOn:'[data-control="editOn"]',
         editOff:'[data-control="editOff"]',
         bindEl:'[data-bind="localData"]',
+        checkbox:'[name="transportationMethods"]',
         paramGet:{
             url:basePath+'/supplier/forwarding/forwardingInfo',
             data:{
@@ -26,19 +27,20 @@ $(function () {
             },
             type:'GET'
         },
+        paramPut:{
+            url:basePath+'/supplier/forwarding/updateForwardingInfo',
+            type:'POST',
+            contentType:'application/json;charset=UTF-8'
+        },
         data:{},
         ectype:null,
         formConfig:[
             {
                 name:'code'
             },
-            /*{
-                name:'pkSupplierclass',
-                place:{
-                    name:'id',
-                    field:'pkSupplierclass'
-                }
-            },*/
+            {
+                name:'pkSupplierclass'
+            },
             {
                 name:'name'
             },
@@ -81,6 +83,12 @@ $(function () {
                 place:'linkmens'
             },
             {
+                name:'startCooperateTime'
+            },
+            {
+                name:'cooperateTime'
+            },
+            {
                 name:'businessLicence'
             },
             {
@@ -96,7 +104,7 @@ $(function () {
                 name:'modifiedtime'
             }
         ],
-        verify:(function () {
+        /*verify:(function () {
             return $('#factory_info').validate({
                 rules: {
                     orgName: 'required',
@@ -139,7 +147,7 @@ $(function () {
                     }
                 }
             });
-        })(),
+        })(),*/
         init:function (item) {
 
             this.viewForm();
@@ -157,6 +165,7 @@ $(function () {
             this.addEvent('click.cancel', this.cancelBtn, this.cancelHandler);
             this.addEvent('click.save', this.saveBtn, this.saveHandler);
             this.addEvent('change.putLocalData', this.bindEl, this.putLocalData);
+            this.addEvent('click.checkbox', this.checkbox, this.putCheckHandler);
         },
         render:function (data) {
             /*{
@@ -256,13 +265,8 @@ $(function () {
                 if (id!=='') {
 
                     basicPanel.data = $.extend(true, {}, basicPanel.ectype); // 重置data数据
-                    bankTable.data = $.extend(true, [], bankTable.ectype);
-                    contactTable.data = $.extend(true, [], contactTable.ectype);
                     basicPanel.empty();
                     basicPanel.render(basicPanel.data); // 重新渲染
-                    bankTable.container.html(bankTable.render(bankTable.data)); // 刷新列表
-                    contactTable.container.html(contactTable.render(contactTable.data)); // 刷新列表
-                    basicPanel.verify.form();
                     basicPanel.viewForm();
 
                 }else {
@@ -273,22 +277,12 @@ $(function () {
         },
         saveHandler:function () {
 
-            if (!basicPanel.isPass()) return;
+            /*if (!basicPanel.isPass()) return;*/
 
             if (!confirm('确定要保存吗？')) return;
 
-            basicPanel.data.banks = bankTable.data;
-            basicPanel.data.deletedBankIds = bankTable.argsIds;
-            basicPanel.paramPut.data = JSON.stringify(basicPanel.data);
-
-            if (id!=='') { // 更新
-
-                basicPanel.putData();
-                basicPanel.viewForm();
-            }else {
-
-                basicPanel.postData();
-            }
+            basicPanel.putData();
+            basicPanel.viewForm();
         },
         putLocalData:function () {
             var name = $(this).attr('name'),
@@ -296,15 +290,23 @@ $(function () {
             basicPanel.data[name] = val;
             basicPanel.render(basicPanel.data);
         },
+        putCheckHandler:function () {
+            var name = $(this).attr('name'),
+                val = $(this).val(),
+                arr = basicPanel.data[name].split(','),
+                hasVal = $(this).prop('checked');
+            console.log(hasVal);
+
+            if (hasVal) {
+                arr.push(val);
+            }else {
+                arr.splice(arr.indexOf(val), 1);
+            }
+
+            basicPanel.data[name]=arr.join(",");
+        },
         putData:function () {
-            basicPanel.data.banks = bankTable.data;
-            basicPanel.data.linkmen = contactTable.data;
-            basicPanel.paramPut.data = JSON.stringify(
-                {
-                    factory:basicPanel.data,
-                    deletedBankIds:bankTable.argsIds,
-                    deletedLinkmanIds:contactTable.argsIds
-                });
+            basicPanel.paramPut.data = JSON.stringify(basicPanel.data);
             $.ajax(basicPanel.paramPut).done(function (res) {
 
                 if (res.code===1) {
@@ -321,35 +323,12 @@ $(function () {
                         }
 
                     });
-                    bankTable.refresh();
-                    contactTable.refresh();
-                    bankTable.argsIds = [];
-                    contactTable.argsIds = [];
                 }
             })
         },
-        postData:function () {
-            basicPanel.data.banks = bankTable.data;
-            basicPanel.data.linkmen = contactTable.data;
-            basicPanel.paramPost.data = JSON.stringify({factory:basicPanel.data});
-            $.ajax(basicPanel.paramPost).done(function (res) {
-
-                if (res.code===1) {
-                    alert('新增成功！');
-
-                    if (confirm('是否留在当前页面？')) {
-
-                        self.location = basePath+'/supplier/factories/'+res.data.id+'/vm';
-                    }else {
-
-                        self.location = basePath+'/supplier/factories/vm';
-                    }
-                }
-            })
-        },
-        isPass:function () {
+        /*isPass:function () {
             return basicPanel.verify.form();
-        }
+        }*/
     };
 
     // 图片路径展示组件
@@ -424,7 +403,7 @@ $(function () {
     // 时间联动组件
     var timeLinkage = {
         group:$('#time'),
-        start:'[name="cooperateTime"]',
+        start:'[name="startCooperateTime"]',
         init:function () {
             this.addEvent('change.calculate', this.start, this.calculateHandler);
         },
@@ -442,12 +421,24 @@ $(function () {
                 oldDay = oldDate.getDate(),
                 res = (nowYear-oldYear)*12+(nowMonth-oldMonth);
             res = parseInt(oldDay)<=parseInt(nowDay)?res:res-1;
-            basicPanel.data.coopMonths = res?res:0;
-            basicPanel.data.cooperateTime = $(this).val();
+            basicPanel.data.cooperateTime = (res&&res>0)?res:0;
+            basicPanel.data.startCooperateTime = $(this).val();
             basicPanel.render(basicPanel.data);
         }
     };
 
+    // 自定义字段
+    var addCustomField = {
+        addBtn:$('#add_customField'),
+        container:$('#customFields'),
+        tpl:'<>',
+        init:function () {
+
+        },
+        clickHandler:function () {
+
+        }
+    };
 
     basicPanel.init();
     imgGroup.init();
