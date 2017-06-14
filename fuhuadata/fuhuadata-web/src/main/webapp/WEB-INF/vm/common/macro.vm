@@ -204,7 +204,7 @@
 #macro(forwardingWarehouse $selected)
     #set($tabs = [
     {'name':'货代信息','path':'/supplier/forwarding/intoForwardingList'},
-    {'name':'仓库信息','path':''}
+    {'name':'仓库信息','path':'/supplier/warehouse/intoWarehouseList'}
     ])
 <ul id="saleNav" class="nav nav-tabs pull-left">
     #foreach($item in $tabs)

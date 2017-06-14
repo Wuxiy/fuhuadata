@@ -1,4 +1,5 @@
 <div class="nav-deputy shadow-out clearfix">
+    #forwardingWarehouse('仓库信息')
     #breadcrumb()
 </div>
 <div class="dashboard-wrapper">
@@ -25,7 +26,7 @@
                             <th class="text-center" lang="zh">备注</th>
                         </tr>
                         </thead>
-                        <tbody id="forwarding_list"></tbody>
+                        <tbody id="warehouselist"></tbody>
                     </table>
                     <div id="pagination" class="pagination"></div>
                 </div>
@@ -34,4 +35,101 @@
     </div>
 </div>
 
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/supplierInformation/warehouseList.js"></script>
+<script type="text/javascript" language="JavaScript">
+    $(function(){
+        var suppropsList=['常规','非常规','自定'],
+                isDangersList=['否','是'],
+                isInsideEntranceList=['否','是'],
+                table = {
+                    total:0,
+                    pageSize:5,
+                    pageNum:0,
+                    pagination:$('#pagination'),
+                    container:$('#warehouselist'),
+                    setPagination:{
+                        num_edge_entries:3,
+                        num_display_entries:5,
+                        callback:function (pageNum,jq) {
+                            $.ajax({
+                                url:basePath + '/supplier/warehouse/warehouseList',
+                                dataType:'json',
+                                contentType:'application/json',
+                                data:{
+                                    pageSize:table.pageSize,
+                                    index:pageNum+1
+                                },
+                                async:true,
+                                type:'GET'
+                            }).done(function(res){
+
+                                if (res.code===1) { // 请求是否成功
+
+                                    table.renderList(res.data.list);
+                                }
+                            });
+
+                        }
+                    },
+                    init:function () {
+                        $.ajax({
+                            url:basePath + '/supplier/warehouse/warehouseList',
+                            dataType:'json',
+                            contentType:'application/json',
+                            data:{
+                                pageSize:table.pageSize,
+                                index:1
+                            },
+                            async:true,
+                            type:'GET'
+                        }).done(function (res) {
+                            if (res.code===1) { // 请求是否成功
+
+                                if(!table.total){ // 是否需要渲染分页
+
+                                    table.total = res.data.total;
+                                    table.renderPagination();
+                                }
+                                table.renderList(res.data.list);
+                            }
+                        });
+                    },
+                    renderList:function (list) {
+                        var tpl = '';
+                        if(list.length>0){
+                            $.each(list, function(i, item){
+                                tpl +=
+                                        '<tr>' +
+                                        '<td>'+table.hasField(item.code)+'</td>'+
+                                        '<td><a href="'+basePath+'/supplier/warehouse/intoWarehouseBasic?id='+table.hasField(item.id)+'">'+table.hasField(item.name)+'</a></td>'+
+                                        '<td>'+table.hasField(item.shortname)+'</td>'+
+                                        '<td>'+suppropsList[table.hasField(item.supprop)]+'</td>'+
+                                        '<td>'+table.hasField(item.storaddr)+'</td>'+
+                                        '<td>'+table.hasField(item.storageArea)+'</td>'+
+                                        '<td>'+isDangersList[table.hasField(item.isDangers)]+'</td>'+
+                                        '<td>'+isInsideEntranceList[table.hasField(item.isInsideEntrance)]+'</td>'+
+                                        '<td>'+table.hasField(item.combinedScoring)+'</td>'+
+                                        '<td>'+table.hasField(item.memo)+'</td>'+
+                                        '</tr>';
+                            });
+                        }else{
+                            tpl += '<tr><td colspan="12">暂无数据</td></tr>';
+                        }
+                        this.container.html(tpl);
+                    },
+                    renderPagination:function () {
+                        this.setPagination.items_per_page = this.pageSize;
+                        this.pagination.pagination(this.total,this.setPagination);
+                    },
+                    hasField:function (field) {
+
+                        if (field===null||field===undefined){
+                            return '';
+                        }else {
+                            return field;
+                        }
+                    }
+                };
+        table.init();
+    });
+
+</script>

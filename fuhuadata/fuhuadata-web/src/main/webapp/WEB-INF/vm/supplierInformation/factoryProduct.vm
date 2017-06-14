@@ -184,34 +184,36 @@
 
     function renderData(data){
         var _html = '';
-        for(var i=0;i<data.length;i++){
-            _html += '<tr>';
-            _html += '<td>'+ifEmpty(data[i].id)+'</td>';
-            _html += '<td><a class="info" data-categoryId="'+data[i].categoryId+'" data-cmaterialId="'+data[i].cmaterialId+'" data-id="'+data[i].id+'" data-category="'+data[i].category+'" data-cmaterialName="'+data[i].cmaterialName+'" data-specification="'+data[i].specification+'" style="cursor:pointer;">'+data[i].category+'-'+data[i].cmaterialName+'-'+data[i].specification+'</a></td>';
-            _html += '<td>'+ifEmpty(data[i].capacity)+'</td>';
-            if(data[i].quality!=undefined){
-                _html += '<td data-quality="'+ifEmpty(data[i].quality)+'">'+qualityList[data[i].quality]+'</td>';
-            }else{
-                _html +='<td></td>';
-            }
-            if(data[i].productAddrs!=undefined){
-                if(data[i].productAddrs[0]!=undefined){
-                    _html +='<td data-id="'+ifEmpty(data[i].productAddrs[0].id)+'">'+ifEmpty(data[i].productAddrs[0].addr)+'</td>';
-                    _html +='<td>'+ifEmpty(data[i].productAddrs[0].capacity)+'</td>';
+        if(data.length>0){
+            for(var i=0;i<data.length;i++){
+                _html += '<tr>';
+                _html += '<td>'+ifEmpty(data[i].id)+'</td>';
+                _html += '<td><a class="info" data-categoryId="'+data[i].categoryId+'" data-cmaterialId="'+data[i].cmaterialId+'" data-id="'+data[i].id+'" data-category="'+data[i].category+'" data-cmaterialName="'+data[i].cmaterialName+'" data-specification="'+data[i].specification+'" style="cursor:pointer;">'+data[i].category+'-'+data[i].cmaterialName+'-'+data[i].specification+'</a></td>';
+                _html += '<td>'+ifEmpty(data[i].capacity)+'</td>';
+                if(data[i].quality!=undefined){
+                    _html += '<td data-quality="'+ifEmpty(data[i].quality)+'">'+qualityList[data[i].quality]+'</td>';
                 }else{
                     _html +='<td></td>';
-                    _html +='<td></td>';
                 }
-                if(data[i].productAddrs[1]!=undefined){
-                    _html +='<td data-id="'+ifEmpty(data[i].productAddrs[1].id)+'">'+ifEmpty(data[i].productAddrs[1].addr)+'</td>';
-                    _html +='<td>'+ifEmpty(data[i].productAddrs[1].capacity)+'</td>';
-                }else{
-                    _html +='<td></td>';
-                    _html +='<td></td>';
+                if(data[i].productAddrs!=undefined){
+                    if(data[i].productAddrs[0]!=undefined){
+                        _html +='<td data-id="'+ifEmpty(data[i].productAddrs[0].id)+'">'+ifEmpty(data[i].productAddrs[0].addr)+'</td>';
+                        _html +='<td>'+ifEmpty(data[i].productAddrs[0].capacity)+'</td>';
+                    }else{
+                        _html +='<td></td>';
+                        _html +='<td></td>';
+                    }
+                    if(data[i].productAddrs[1]!=undefined){
+                        _html +='<td data-id="'+ifEmpty(data[i].productAddrs[1].id)+'">'+ifEmpty(data[i].productAddrs[1].addr)+'</td>';
+                        _html +='<td>'+ifEmpty(data[i].productAddrs[1].capacity)+'</td>';
+                    }else{
+                        _html +='<td></td>';
+                        _html +='<td></td>';
+                    }
                 }
+                _html +='<td>'+ifEmpty(data[i].remark)+'</td>';
+                _html +='</tr>';
             }
-            _html +='<td>'+ifEmpty(data[i].remark)+'</td>';
-            _html +='</tr>';
         }
         return _html;
     }

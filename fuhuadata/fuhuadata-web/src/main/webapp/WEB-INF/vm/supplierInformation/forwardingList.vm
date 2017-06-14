@@ -1,4 +1,5 @@
 <div class="nav-deputy shadow-out clearfix">
+    #forwardingWarehouse('货代信息')
     #breadcrumb()
 </div>
 <div class="dashboard-wrapper">
