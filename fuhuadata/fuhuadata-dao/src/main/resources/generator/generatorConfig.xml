@@ -19,6 +19,7 @@
         <plugin type="${mapper.plugin}">
             <property name="mappers" value="${mapper.Mapper}"/>
         </plugin>
+        <plugin type="com.fuhuadata.mybatis.generator.plugins.ColumnsPlugin"/>
 
         <!-- 数据库连接信息 -->
         <jdbcConnection driverClass="${jdbc.driverClass}"

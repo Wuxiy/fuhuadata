@@ -168,6 +168,11 @@
                         <artifactId>mapper</artifactId>
                         <version>${mapper.version}</version>
                     </dependency>
+                    <dependency>
+                        <groupId>com.fuhuadata</groupId>
+                        <artifactId>fuhuadata-mybatis-generator</artifactId>
+                        <version>1.5-SNAPSHOT</version>
+                    </dependency>
                 </dependencies>
             </plugin>
         </plugins>
