@@ -49,4 +49,10 @@ Config 2.0/" "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
 	<sqlMap resource="sqlmap/BusinessProductRequireArchives.xml"/>
 
 	<sqlMap resource="sqlmap/NCExchange/OrderToNC.xml"/>
+
+	<sqlMap resource="sqlmap/task/SyncProduct.xml"/>
+	<sqlMap resource="sqlmap/task/SyncContract.xml"/>
+	<sqlMap resource="sqlmap/task/SyncSubContract.xml"/>
+	<sqlMap resource="sqlmap/NCExchange/FactoryToNC.xml"/>
+	<sqlMap resource="sqlmap/task/SyncFreightForwarding"/>
 </sqlMapConfig>

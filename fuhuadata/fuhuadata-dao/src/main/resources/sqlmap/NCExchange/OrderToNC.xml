@@ -86,7 +86,6 @@
         <result column="currency" jdbcType="VARCHAR" property="currency" javaType="java.lang.String"/>
 
         <result property="isCreditRisk" column="is_credit_risk" jdbcType="INT" javaType="java.lang.Integer"/>
-        <result property="interestRate" column="interest_rate" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
 
 
         <result column="nusdexchgrate" jdbcType="DECIMAL" property="nusdexchgrate" javaType="java.math.BigDecimal"/>
