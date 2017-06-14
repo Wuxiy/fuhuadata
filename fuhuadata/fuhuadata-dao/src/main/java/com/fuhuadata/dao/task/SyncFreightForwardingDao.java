@@ -16,5 +16,5 @@ public interface SyncFreightForwardingDao {
     List<FreightForwarding> getOrcalData() throws Exception;
     List<BankAccBas> getOraclBankAcc() throws Exception;
     List<SupplierLinkman> getOraclLinkMan() throws Exception;
-    List<WarehouseInfo> getOraclWareHouse() throws Exception;
+
 }

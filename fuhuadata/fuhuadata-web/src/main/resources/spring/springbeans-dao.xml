@@ -153,4 +153,5 @@
     <bean id="dataArchivesDao" class="com.fuhuadata.dao.impl.DataArchivesDaoImpl"/>
     <bean id="orderToNc" class="com.fuhuadata.dao.impl.NCExchange.OrderToNcImpl"/>
     <bean id="factoryToNc" class="com.fuhuadata.dao.impl.NCExchange.FactoryToNcImpl"/>
+    <bean id="syncFreightForwardingDao" class="com.fuhuadata.dao.task.impl.SyncFreightForwardingDaoImpl"/>
 </beans>
