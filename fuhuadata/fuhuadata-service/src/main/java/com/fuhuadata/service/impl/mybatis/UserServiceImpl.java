@@ -12,7 +12,6 @@ import com.fuhuadata.service.mybatis.PasswordService;
 import com.fuhuadata.service.mybatis.UserRoleService;
 import com.fuhuadata.service.mybatis.UserService;
 import com.fuhuadata.service.util.IpUtils;
-import com.fuhuadata.service.util.UserTreeCache;
 import com.fuhuadata.vo.MixNodeVO;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -24,7 +23,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
@@ -42,9 +40,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
     private PasswordService passwordService;
 
     private DeptService deptService;
-
-    @Resource
-    private UserTreeCache userTreeCache;
 
     @Autowired
     public void setUserRoleService(UserRoleService userRoleService) {
@@ -147,7 +142,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
         HashSet<String> rootIds = Sets.newHashSet();
 
         for (String deptId : deptIds) {
-            MixNodeVO nodeVO = userTreeCache.get(deptId);
+            MixNodeVO nodeVO = deptService.getMixNodeByNcId(deptId);
 
             while (nodeVO != null) {
 
@@ -171,7 +166,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
                 if (pNode != null) {
                     pNode.addChildNode(nodeVO);
                 } else {
-                    pNode = userTreeCache.get(pid);
+                    pNode = deptService.getOrgOrDepPNode(pid);
                     if (pNode != null) {
                         pNode.addChildNode(nodeVO);
                         lookup.put(pNode.getCid(), pNode);
