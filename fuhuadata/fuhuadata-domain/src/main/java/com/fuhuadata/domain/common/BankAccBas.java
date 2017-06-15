@@ -117,6 +117,11 @@ public class BankAccBas extends BaseEntity<Integer> {
     private Short accstate;
 
     /**
+     * 删除状态：0=删除，1=正常
+     */
+    private Integer deletedStatus;
+
+    /**
      * 所在地
      */
     private String address;
@@ -563,5 +568,13 @@ public class BankAccBas extends BaseEntity<Integer> {
 
     public static void main(String[] args) throws IntrospectionException {
         printProperties(BankAccBas.class, "bab.");
+    }
+
+    public Integer getDeletedStatus() {
+        return deletedStatus;
+    }
+
+    public void setDeletedStatus(Integer deletedStatus) {
+        this.deletedStatus = deletedStatus;
     }
 }

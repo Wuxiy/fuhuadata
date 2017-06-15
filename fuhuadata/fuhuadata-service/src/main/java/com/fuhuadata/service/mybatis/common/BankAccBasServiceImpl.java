@@ -43,23 +43,29 @@ public class BankAccBasServiceImpl extends BaseServiceImpl<BankAccBas, Integer>
     }
 
     @Override
-    public int deleteBanks(List<Integer> bankIds) {
+    public List<BankAccBas> deleteBanks(List<Integer> bankIds) {
 
         if (CollectionUtils.isEmpty(bankIds)) {
-            return 0;
+            return Collections.emptyList();
         }
 
         Example example = newExample();
         example.createCriteria().andIn("id", bankIds);
 
-        return delete(example);
+        List<BankAccBas> banks = listByExample(example);
+        banks.forEach((entity) -> {
+            delete(entity);
+            entity.setDeletedStatus(0);
+        });
+
+        return banks;
     }
 
     @Override
-    public int saveOrUpdateBanks(List<BankAccBas> banks) {
+    public List<BankAccBas> saveOrUpdateBanks(List<BankAccBas> banks) {
 
         if (CollectionUtils.isEmpty(banks)) {
-            return 0;
+            return Collections.emptyList();
         }
 
         banks.forEach(bank -> {
@@ -70,6 +76,6 @@ public class BankAccBasServiceImpl extends BaseServiceImpl<BankAccBas, Integer>
             }
         });
 
-        return banks.size();
+        return banks;
     }
 }

@@ -2,8 +2,8 @@ package com.fuhuadata.domain.mybatis.supplier;
 
 import com.fuhuadata.domain.mybatis.BaseEntity;
 
-import java.util.Date;
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * 供应商联系人
@@ -94,6 +94,11 @@ public class SupplierLinkman extends BaseEntity<Integer>{
      * 其他备注信息
      */
     private String meno;
+
+    /**
+     * 删除状态：0=删除
+     */
+    private Integer deletedStatus;
 
     /**
      * 创建者id
@@ -521,5 +526,13 @@ public class SupplierLinkman extends BaseEntity<Integer>{
      */
     public void setModifiedtime(Date modifiedtime) {
         this.modifiedtime = modifiedtime;
+    }
+
+    public Integer getDeletedStatus() {
+        return deletedStatus;
+    }
+
+    public void setDeletedStatus(Integer deletedStatus) {
+        this.deletedStatus = deletedStatus;
     }
 }

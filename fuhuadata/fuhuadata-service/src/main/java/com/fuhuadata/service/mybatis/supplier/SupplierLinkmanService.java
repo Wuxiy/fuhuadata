@@ -32,7 +32,7 @@ public interface SupplierLinkmanService extends BaseService<SupplierLinkman, Int
      * @param linkmen
      * @return
      */
-    int saveOrUpdateLinkmen(List<SupplierLinkman> linkmen);
+    List<SupplierLinkman> saveOrUpdateLinkmen(List<SupplierLinkman> linkmen);
 
     /**
      * 删除联系人
@@ -40,5 +40,5 @@ public interface SupplierLinkmanService extends BaseService<SupplierLinkman, Int
      * @param manIds
      * @return
      */
-    int deleteLinkmen(LinkmanType type, List<Integer> manIds);
+    List<SupplierLinkman> deleteLinkmen(LinkmanType type, List<Integer> manIds);
 }

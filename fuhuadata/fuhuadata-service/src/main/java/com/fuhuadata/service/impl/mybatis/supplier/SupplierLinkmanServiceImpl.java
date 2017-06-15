@@ -44,22 +44,22 @@ public class SupplierLinkmanServiceImpl extends BaseServiceImpl<SupplierLinkman,
     }
 
     @Override
-    public int saveOrUpdateLinkmen(List<SupplierLinkman> linkmen) {
+    public List<SupplierLinkman> saveOrUpdateLinkmen(List<SupplierLinkman> linkmen) {
 
         if (CollectionUtils.isEmpty(linkmen)) {
-            return 0;
+            return Collections.emptyList();
         }
 
         linkmen.forEach(this::saveOrUpdateSelective);
 
-        return linkmen.size();
+        return linkmen;
     }
 
     @Override
-    public int deleteLinkmen(LinkmanType type, List<Integer> manIds) {
+    public List<SupplierLinkman> deleteLinkmen(LinkmanType type, List<Integer> manIds) {
 
         if (CollectionUtils.isEmpty(manIds)) {
-            return 0;
+            return Collections.emptyList();
         }
 
         Example example = newExample();
@@ -67,6 +67,12 @@ public class SupplierLinkmanServiceImpl extends BaseServiceImpl<SupplierLinkman,
                 .andEqualTo("supplierType", type.key)
                 .andIn("id", manIds);
 
-        return delete(example);
+        List<SupplierLinkman> linkmen = listByExample(example);
+        linkmen.forEach(linkMan -> {
+            delete(linkMan);
+            linkMan.setDeletedStatus(0);
+        });
+
+        return linkmen;
     }
 }
