@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SyncFreightForwarding" >
+  <typeAlias alias="freightForwarding" type="com.fuhuadata.domain.mybatis.supplier.FreightForwarding"/>
+    <typeAlias alias="linkMan" type="com.fuhuadata.domain.mybatis.supplier.SupplierLinkman"/>
+    <typeAlias alias="bankAccBas" type="com.fuhuadata.domain.common.BankAccBas"/>
+    <typeAlias alias="warehouse" type="com.fuhuadata.domain.mybatis.supplier.WarehouseInfo"/>
+  <select id="getOracleData" resultClass="freightforwarding">
+      SELECT
+              s.code as code,
+              o.code as pkSupplierclass,
+              s.name as name,
+              s.shortname as shortname,
+              s.tel1 as tel1,
+              s.registerfund as registerfund,
+              s.email as email,
+              s.memo as memo
+      FROM
+              bd_supplier s,
+              org_orgs o
+      WHERE
+              s.pk_supplierclass =(SELECT pk_supplierclass FROM bd_supplierclass WHERE code='1801')
+              AND s.dr = 0
+              AND o.pk_org=s.pk_org
+      GROUP BY
+              s.code
+  </select>
+  <select id="getBankAcc" resultClass="bankAccBas">
+      SELECT
+                b.pk_bankaccbas AS pkBankaccbas,
+                b.accname,
+                b.accnum,
+                b.accopendate,
+                1 AS acctype,
+                b.accountproperty AS accountproperty,
+                b.accstate AS accstate,
+                b.enablestate AS enablestate,
+                b.mnecode AS mnecode,
+                bc.code AS pkBankdoc,
+                be.code AS pkBanktype,
+                bk.pk_cust AS customerId
+      FROM
+                bd_bankaccbas b
+                JOIN bd_custbank bk ON bk.pk_bankaccbas=b.pk_bankaccbas
+              join bd_bankdoc bc on bc.pk_bankdoc=b.pk_bankdoc
+              join bd_banktype be on be.pk_banktype=b.pk_banktype
+      where
+                b.pk_bankaccbas IN (SELECT pk_bankaccbas FROM bd_custbank WHERE pk_cust IN (SELECT pk_supplier FROM bd_supplier WHERE pk_supplierclass in (SELECT pk_supplierclass FROM bd_supplierclass WHERE code='1801')));
+
+  </select>
+    <select id="getLinkMan" resultClass="linkMan">
+        SELECT
+                b.pk_linkman AS pkLinkman,
+                1 AS supplierType,
+                b.code,
+                b.name AS name,
+                b.cell AS cell,
+                b.email AS email,
+                b.phone AS phone,
+                b.vjob AS vjob,
+                b.address AS address,
+                b.birthday AS birthday,
+                b.fax AS tax,
+                b.postcode AS postcode,
+                b.memo AS meno,
+                bl.pk_supplier AS suppierId
+        FROM
+                bd_linkman b
+                JOIN bd_suplinkman bl ON bl.pk_linkman=b.pk_linkman
+        WHERE
+                b.pk_linkman IN (SELECT pk_linkman FROM bd_suplinkman WHERE pk_supplier IN (SELECT pk_supplier FROM bd_supplier WHERE pk_supplierclass in (SELECT pk_supplierclass FROM bd_supplierclass WHERE code='1801')));
+    </select>
+    <select id="getWarehouse" resultClass="warehouse">
+
+    </select>
+</sqlMap>

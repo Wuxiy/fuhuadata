@@ -2,7 +2,7 @@
 <div class="clearfix content shadow-out">
     <!--副导航-->
     <div class="nav-deputy shadow-out clearfix">
-        #warehouseNav(1)
+        #warehouseTab('基本信息',$!{warehouseId})
         #breadcrumb()
     </div>
     <!--表格容器-->
@@ -12,12 +12,12 @@
                 <!--基本信息-->
                 <div class="panel panel-default view-HD-lg" id="panel">
                     <div class="panel-heading">
-                        <button class="btn btn-xs btn-primary panel-heading-btn pull-right" id="edit" data-view="editHide" type="button" lang="zh">
+                        <button class="btn btn-xs btn-primary panel-heading-btn pull-right" name="edit" data-view="editHide" type="button" lang="zh">
                             编辑
                         </button>
                         <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden" data-view="editView">
-                            <button class="btn" id="cancel" type="button" lang="zh">取消</button>
-                            <button class="btn btn-primary" id="save" type="button" lang="zh">保存</button>
+                            <button class="btn btn-default" name="cancel" type="button" lang="zh">取消</button>
+                            <button class="btn btn-primary" name="save" type="button" lang="zh">保存</button>
                         </div>
                         <h3 class="panel-title" lang="zh">基本信息</h3>
                     </div>
@@ -27,7 +27,7 @@
                                 <input name="id" type="text">
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-xs-1" lang="zh">仓库编码</label>
+                                <label class="control-label col-xs-1" lang="zh">仓库编号</label>
                                 <div class="col-xs-2">
                                     <input class="form-control" id="code" data-control="off" type="text" disabled/>
                                 </div>
@@ -69,7 +69,7 @@
                             <div class="form-group">
                                 <label class="control-label col-xs-1" lang="zh">仓储面积</label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" id="registerfund" data-control="off" type="text" disabled/>
+                                    <input class="form-control" id="storageArea" data-control="off" type="text" disabled/>
                                 </div>
                                 <label class="control-label col-xs-1" for="supprop" lang="zh">是否危险品仓库<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
@@ -125,12 +125,14 @@
     </div>
 </div>
 
-<input id="" type="hidden" value="$!{}">
+<input id="warehouseId" type="hidden" value="$!{warehouseId}">
 
 <script type="text/javascript" language="JavaScript">
+    var id = $('#warehouseId').val();
+
     $(document).ready(function(){
         jQuery.ajax({
-            url:basePath + '/supplier/warehouse/warehouseInfo?id=1',
+            url:basePath + '/supplier/warehouse/warehouseInfo?id=' + id,
             type:'GET'
         }).done(function(result){
             if(result.code == 1){
@@ -141,10 +143,9 @@
     })
 
     function render(data){
-        console.log(data);
         $('#code').val(data.code);//仓库编码
         $('#pkOrg').val(data.pkOrg);//所属库存组织
-        $('#name').val(data.name);//所属库存组织
+        $('#name').val(data.name);//企业全称
         $('#supprop').val(data.supprop);// 类型
 
         $('#creditCode').val(data.creditCode);// 社会信用代码
@@ -152,7 +153,7 @@
         $('#principalcode').val(data.principalcode);//负责人
         $('#phone').val(data.phone);//电话号码
 
-        /*$('#registerfund').val(data.registerfund);*///仓储面积
+        $('#storageArea').val(data.storageArea);//仓储面积
         $('#isDangers').val(data.isDangers);//是否危险品仓库
         $('#isInsideEntrance').val(data.isInsideEntrance);//是否内装进港
 
@@ -163,4 +164,6 @@
         $('#createUserName').val(data.createUserName);//创建者姓名
         $('#createTime').val(data.createTime);//创建时间
     }
+
+
 </script>

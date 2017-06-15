@@ -36,6 +36,14 @@ public class SupplierLinkmanServiceImpl extends BaseServiceImpl<SupplierLinkman,
     }
 
     @Override
+    public List<SupplierLinkman> listLinkmen(LinkmanType type) {
+        Example example=newExample();
+        example.createCriteria().andEqualTo("supplierType",type.key);
+
+        return null;
+    }
+
+    @Override
     public int saveOrUpdateLinkmen(List<SupplierLinkman> linkmen) {
 
         if (CollectionUtils.isEmpty(linkmen)) {

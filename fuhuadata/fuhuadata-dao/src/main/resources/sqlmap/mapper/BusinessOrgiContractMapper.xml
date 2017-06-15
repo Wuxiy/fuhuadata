@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.business.BusinessOrgiContractMapper">
+    <resultMap id="BaseResultMap" type="com.fuhuadata.domain.business.BusinessOrgiContract">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="pk_ct_sale" jdbcType="VARCHAR" property="pkCtSale"/>
+        <result column="contract_code" jdbcType="VARCHAR" property="contractCode"/>
+        <result column="main_num" jdbcType="DECIMAL" property="mainNum"/>
+        <result column="price" jdbcType="DECIMAL" property="price"/>
+        <result column="total_price" jdbcType="DECIMAL" property="totalPrice"/>
+        <result column="actualvalidate" jdbcType="TIMESTAMP" property="actualvalidate"/>
+        <result column="actualinvalidate" jdbcType="TIMESTAMP" property="actualinvalidate"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="cvendorid" jdbcType="VARCHAR" property="cvendorid"/>
+    </resultMap>
+
+    <sql id="BaseColumns">
+        boc.id,
+        boc.pk_ct_sale,
+        boc.contract_code,
+        boc.main_num,
+        boc.price,
+        boc.total_price,
+        boc.actualvalidate,
+        boc.actualinvalidate,
+        boc.remark,
+        boc.cvendorid
+    </sql>
+
+    <sql id="FromTable">
+        from bussiness_orgi_contract boc
+    </sql>
+
+    <select id="listContracts" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumns"/>
+        <include refid="FromTable"/>
+        <where>
+            <if test="cvendorid != null and cvendorid != ''">
+                boc.cvendorid=#{cvendorid}
+            </if>
+        </where>
+    </select>
+
+</mapper>
