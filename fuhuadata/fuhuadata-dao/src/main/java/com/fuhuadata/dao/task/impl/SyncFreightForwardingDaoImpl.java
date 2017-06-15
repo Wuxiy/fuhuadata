@@ -31,8 +31,5 @@ public class SyncFreightForwardingDaoImpl implements SyncFreightForwardingDao {
         return sqlMapClientOracle.queryForList("SyncFreightForwarding.getLinkMan");
     }
 
-    @Override
-    public List<WarehouseInfo> getOraclWareHouse() throws Exception {
-        return sqlMapClientOracle.queryForList("SyncFreightForwarding.getWarehouse");
-    }
+
 }

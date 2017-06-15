@@ -70,7 +70,5 @@
         WHERE
                 b.pk_linkman IN (SELECT pk_linkman FROM bd_suplinkman WHERE pk_supplier IN (SELECT pk_supplier FROM bd_supplier WHERE pk_supplierclass in (SELECT pk_supplierclass FROM bd_supplierclass WHERE code='1801')));
     </select>
-    <select id="getWarehouse" resultClass="warehouse">
 
-    </select>
 </sqlMap>

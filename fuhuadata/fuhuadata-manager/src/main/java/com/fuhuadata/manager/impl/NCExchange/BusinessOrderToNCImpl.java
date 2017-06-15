@@ -135,7 +135,7 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
             /***************从输入流取得Doc***************/
             InputStream inputStream = connection.getInputStream();
 
-            InputStreamReader isr = new InputStreamReader(inputStream);
+            InputStreamReader isr = new InputStreamReader(inputStream,"UTF-8");
             BufferedReader bufreader = new BufferedReader(isr);
             String xmlString = "";
             int c;
