@@ -20,8 +20,8 @@
     <!-- 组织，部门 -->
     <cache alias="sys-orgDepCache" uses-template="normal">
         <key-type>java.lang.Object</key-type>
-        <value-type copier="com.fuhuadata.cache.ehcache.MixNodeVoCopier">java.lang.Object</value-type>
-        <heap unit="entries">500</heap>
+        <value-type copier="com.fuhuadata.cache.ehcache.PlainJavaObjectCopier">java.lang.Object</value-type>
+        <heap unit="entries">1000</heap>
     </cache>
 
     <cache-template name="normal">

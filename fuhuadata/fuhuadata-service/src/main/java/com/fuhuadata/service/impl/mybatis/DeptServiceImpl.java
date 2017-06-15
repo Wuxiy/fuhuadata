@@ -7,22 +7,22 @@ import com.fuhuadata.domain.plugin.NodeRoot;
 import com.fuhuadata.domain.plugin.TreeRoot;
 import com.fuhuadata.service.mybatis.DeptService;
 import com.fuhuadata.service.mybatis.OrganizationService;
-import com.fuhuadata.service.util.UserTreeCache;
 import com.fuhuadata.vo.MixNodeVO;
-import com.google.common.base.Function;
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.aop.framework.AopContext;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * <p>User: wangjie
@@ -31,16 +31,11 @@ import java.util.Map;
 @Service
 public class DeptServiceImpl extends BaseServiceImpl<Dept, Integer> implements DeptService {
 
-    @Autowired
+    @Resource
     private OrganizationService orgService;
 
-    @Resource
-    private UserTreeCache userTreeCache;
-
-    @PostConstruct
-    public void refreshOrgAndDeptCache() {
-        orgService.listOrgNodes();
-        listDeptNodes();
+    private DeptService getCurrentProxy() {
+        return (DeptService) AopContext.currentProxy();
     }
 
     @Override
@@ -82,18 +77,11 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept, Integer> implements D
 
     @Override
     public List<MixNodeVO> listDeptNodes() {
-        List<MixNodeVO> nodes = Lists.newArrayList();
-        List<Dept> depts = list();
+        List<Dept> depts = getCurrentProxy().list();
 
-        for (Dept dept : depts) {
-            MixNodeVO nodeVO = convertToNode(dept);
-
-            userTreeCache.put(nodeVO.getCid(), nodeVO);
-
-            nodes.add(nodeVO);
-        }
-
-        return nodes;
+        return depts.stream()
+                .map(this::convertToNode)
+                .collect(toList());
     }
 
     @Override
@@ -117,21 +105,13 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept, Integer> implements D
 
         List<Dept> depts = listDepts(org.getNcId());
 
-        List<MixNodeVO> nodes = Lists.transform(depts, new Function<Dept, MixNodeVO>() {
-            @Override
-            public MixNodeVO apply(Dept input) {
-                MixNodeVO node = convertToNode(input);
-                node.setIsParent(false);
-                return node;
-            }
+        List<MixNodeVO> nodes = Lists.transform(depts, input -> {
+            MixNodeVO node = convertToNode(input);
+            node.setIsParent(false);
+            return node;
         });
 
-        return convertToTree(nodes, new TreeRoot<MixNodeVO, String>() {
-            @Override
-            public boolean isRoot(MixNodeVO node) {
-                return Objects.equal(node.getPid(), org.getNcId());
-            }
-        });
+        return convertToTree(nodes, node -> Objects.equal(node.getPid(), org.getNcId()));
     }
 
     @Override
@@ -179,10 +159,50 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept, Integer> implements D
         Dept dept = newEntity();
         dept.setPkDept(pkDept);
 
-        return this.get(dept);
+        return getCurrentProxy().get(dept);
     }
 
-    private MixNodeVO convertToNode(Dept dept) {
+    @Override
+    public Optional<Dept> getOptByNcId(String pkDep) {
+
+        return Optional.ofNullable(getCurrentProxy().getByNcId(pkDep));
+    }
+
+    @Override
+    public MixNodeVO getMixNodeByNcId(String pkOrg) {
+
+        Dept dept = getCurrentProxy().getByNcId(pkOrg);
+        if (dept == null) {
+            return null;
+        }
+
+        return convertToNode(dept);
+    }
+
+    @Override
+    public MixNodeVO getOrgOrDepPNode(String pid) {
+
+        if (StringUtils.isEmpty(pid)) {
+            return null;
+        }
+
+        // 是否是组织节点
+        MixNodeVO pNode = orgService.getOptByNcId(pid)
+                .map(orgService::convertToNode)
+                .orElse(null);
+
+        // 如果在组织节点中未找到，则在部门节点中找
+        if (pNode == null) {
+            pNode = getCurrentProxy().getOptByNcId(pid)
+                        .map(this::convertToNode)
+                        .orElse(null);
+        }
+
+        return pNode;
+    }
+
+    @Override
+    public MixNodeVO convertToNode(Dept dept) {
 
         MixNodeVO nodeVO = new MixNodeVO(NodeType.DEPT.key);
 
