@@ -4,6 +4,7 @@ import com.fuhuadata.dao.mapper.BankAccBasMapper;
 import com.fuhuadata.domain.common.BankAccBas;
 import com.fuhuadata.domain.common.BankAccType;
 import com.fuhuadata.service.impl.mybatis.BaseServiceImpl;
+import com.google.common.collect.Lists;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -68,14 +69,18 @@ public class BankAccBasServiceImpl extends BaseServiceImpl<BankAccBas, Integer>
             return Collections.emptyList();
         }
 
+        List<BankAccBas> bdBanks = Lists.newArrayList();
+
         banks.forEach(bank -> {
             if (bank.getId() != null) {
                 updateSelective(bank);
             } else {
                 saveSelective(bank);
             }
+
+            bdBanks.add(get(bank));
         });
 
-        return banks;
+        return bdBanks;
     }
 }

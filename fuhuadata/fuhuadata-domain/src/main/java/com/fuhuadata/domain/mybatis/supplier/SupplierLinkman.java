@@ -32,8 +32,8 @@ public class SupplierLinkman extends BaseEntity<Integer>{
     /**
      * 供应商id
      */
-    @Column(name = "suppier_id")
-    private Integer suppierId;
+    @Column(name = "supplier_id")
+    private Integer supplierId;
 
     /**
      * 联系人编码
@@ -98,6 +98,7 @@ public class SupplierLinkman extends BaseEntity<Integer>{
     /**
      * 删除状态：0=删除
      */
+    @Transient
     private Integer deletedStatus;
 
     /**
@@ -191,17 +192,17 @@ public class SupplierLinkman extends BaseEntity<Integer>{
      *
      * @return suppier_id - 供应商id
      */
-    public Integer getSuppierId() {
-        return suppierId;
+    public Integer getSupplierId() {
+        return supplierId;
     }
 
     /**
      * 设置供应商id
      *
-     * @param suppierId 供应商id
+     * @param supplierId 供应商id
      */
-    public void setSuppierId(Integer suppierId) {
-        this.suppierId = suppierId;
+    public void setSupplierId(Integer supplierId) {
+        this.supplierId = supplierId;
     }
 
     /**

@@ -119,6 +119,7 @@ public class BankAccBas extends BaseEntity<Integer> {
     /**
      * 删除状态：0=删除，1=正常
      */
+    @Transient
     private Integer deletedStatus;
 
     /**

@@ -127,6 +127,9 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
         fillLoginInfo(factory);
         saveSelective(factory);
 
+        factory = get(factory);
+        factoryInfo.setFactory(factory);
+
         return handleBanksAndLinkmenAndToNc(factoryInfo);
     }
 
@@ -165,8 +168,11 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
 
         ProduceFactory factory = factoryInfo.getFactory();
         fillLoginInfo(factory);
-        updateSelective(factory);
 
+        updateSelective(factory);
+        factory = get(factory);
+
+        factoryInfo.setFactory(factory);
         return handleBanksAndLinkmenAndToNc(factoryInfo);
     }
 
@@ -204,7 +210,7 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
 
         Optional.ofNullable(linkmen).ifPresent(linkmans -> linkmans.forEach(linkman -> {
             linkman.setSupplierType(LinkmanType.Factory.key);
-            linkman.setSuppierId(factoryId);
+            linkman.setSupplierId(factoryId);
         }));
 
         // 保存、更新联系人

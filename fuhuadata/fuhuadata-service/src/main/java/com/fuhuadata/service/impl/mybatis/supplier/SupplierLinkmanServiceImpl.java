@@ -4,6 +4,7 @@ import com.fuhuadata.domain.mybatis.supplier.LinkmanType;
 import com.fuhuadata.domain.mybatis.supplier.SupplierLinkman;
 import com.fuhuadata.service.impl.mybatis.BaseServiceImpl;
 import com.fuhuadata.service.mybatis.supplier.SupplierLinkmanService;
+import com.google.common.collect.Lists;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -29,7 +30,7 @@ public class SupplierLinkmanServiceImpl extends BaseServiceImpl<SupplierLinkman,
         Example example = newExample();
         example.createCriteria()
                 .andEqualTo("supplierType", type.key)
-                .andEqualTo("suppierId", supplierId);
+                .andEqualTo("supplierId", supplierId);
 
 
         return listByExample(example);
@@ -50,9 +51,14 @@ public class SupplierLinkmanServiceImpl extends BaseServiceImpl<SupplierLinkman,
             return Collections.emptyList();
         }
 
-        linkmen.forEach(this::saveOrUpdateSelective);
+        List<SupplierLinkman> bdMen = Lists.newArrayList();
 
-        return linkmen;
+        linkmen.forEach((entity) -> {
+            saveOrUpdateSelective(entity);
+            bdMen.add(get(entity));
+        });
+
+        return bdMen;
     }
 
     @Override
