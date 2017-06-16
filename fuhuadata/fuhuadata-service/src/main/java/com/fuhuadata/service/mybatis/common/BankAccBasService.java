@@ -32,12 +32,12 @@ public interface BankAccBasService extends BaseService<BankAccBas, Integer> {
      * @param bankIds
      * @return
      */
-    int deleteBanks(List<Integer> bankIds);
+    List<BankAccBas> deleteBanks(List<Integer> bankIds);
 
     /**
      * 新增 or 更新银行账号
      * @param banks
      * @return
      */
-    int saveOrUpdateBanks(List<BankAccBas> banks);
+    List<BankAccBas> saveOrUpdateBanks(List<BankAccBas> banks);
 }

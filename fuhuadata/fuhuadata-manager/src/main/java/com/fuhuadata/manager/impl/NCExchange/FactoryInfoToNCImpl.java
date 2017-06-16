@@ -176,9 +176,6 @@ public class FactoryInfoToNCImpl implements FactoryInfoToNC {
             if (bankAcc.getAccountproperty()!=null){
                 nodeValue.put("accountproperty",""+bankAcc.getAccountproperty());
             }
-            if (bankAcc.getAccstate()!=null){
-                nodeValue.put("accstate",""+bankAcc.getAccstate());
-            }
             if (bankAcc.getEnablestate()!=null){
                 nodeValue.put("enablestate",""+bankAcc.getEnablestate());
             }
@@ -190,6 +187,9 @@ public class FactoryInfoToNCImpl implements FactoryInfoToNC {
             }
             if (bankAcc.getPkOrg()!=null){
                 nodeValue.put("pk_org",bankAcc.getPkOrg());
+            }
+            if(bankAcc.getDeletedStatus()!=null && bankAcc.getDeletedStatus()==0){
+                nodeValue.put("accstate","3");
             }
             for(Map.Entry<String ,String> entry:nodeValue.entrySet()){
                 Element ele=document.createElement(entry.getKey());
@@ -276,61 +276,63 @@ public class FactoryInfoToNCImpl implements FactoryInfoToNC {
             Element suplinkman=document.createElement("suplinkman");
             billhead.appendChild(suplinkman);
             for (SupplierLinkman supplierLinkman:factoryInfo.getLinkmen()){
-                Element item=document.createElement("item");
-                suplinkman.appendChild(item);
-                if (supplierLinkman.getPkLinkman()!=null){
-                    Element pk_linkman=document.createElement("pk_linkman");
-                    item.appendChild(pk_linkman);
-                }
-                Element isdefault=document.createElement("isdefault");
-                isdefault.appendChild(document.createTextNode(supplierLinkman.getIsdefault()==0?"N":"Y"));
-                item.appendChild(isdefault);
-                Element linkmanvo=document.createElement("linkmanvo");
-                item.appendChild(linkmanvo);
-                if (supplierLinkman.getCode()!=null){
-                    Element code=document.createElement("code");
-                    code.appendChild(document.createTextNode(supplierLinkman.getCode()));
-                    linkmanvo.appendChild(code);
-                }
-                if (supplierLinkman.getName()!=null){
-                    Element name=document.createElement("name");
-                    name.appendChild(document.createTextNode(supplierLinkman.getName()));
-                    linkmanvo.appendChild(name);
-                }
-                if (supplierLinkman.getCell()!=null){
-                    Element cell=document.createElement("cell");
-                    cell.appendChild(document.createTextNode(supplierLinkman.getCell()));
-                    linkmanvo.appendChild(cell);
-                }
-                if (supplierLinkman.getEmail()!=null){
-                    Element email=document.createElement("email");
-                    email.appendChild(document.createTextNode(supplierLinkman.getEmail()));
-                    linkmanvo.appendChild(email);
-                }
-                if (supplierLinkman.getPhone()!=null){
-                    Element phone=document.createElement("phone");
-                    phone.appendChild(document.createTextNode(supplierLinkman.getPhone()));
-                    linkmanvo.appendChild(phone);
-                }
-                if (supplierLinkman.getBirthday()!=null){
-                    Element birthday=document.createElement("birthday");
-                    birthday.appendChild(document.createTextNode(supplierLinkman.getBirthday()));
-                    linkmanvo.appendChild(birthday);
-                }
-                if (supplierLinkman.getAddress()!=null){
-                    Element address=document.createElement("address");
-                    address.appendChild(document.createTextNode(supplierLinkman.getAddress()));
-                    linkmanvo.appendChild(address);
-                }
-                if (supplierLinkman.getPostcode()!=null){
-                    Element postcode=document.createElement("postcode");
-                    postcode.appendChild(document.createTextNode(supplierLinkman.getPostcode()));
-                    linkmanvo.appendChild(postcode);
-                }
-                if (supplierLinkman.getMeno()!=null){
-                    Element memo=document.createElement("memo");
-                    memo.appendChild(document.createTextNode(supplierLinkman.getMeno()));
-                    linkmanvo.appendChild(memo);
+                if (supplierLinkman.getDeletedStatus()==null) {
+                    Element item = document.createElement("item");
+                    suplinkman.appendChild(item);
+                    if (supplierLinkman.getPkLinkman() != null) {
+                        Element pk_linkman = document.createElement("pk_linkman");
+                        item.appendChild(pk_linkman);
+                    }
+                    Element isdefault = document.createElement("isdefault");
+                    isdefault.appendChild(document.createTextNode(supplierLinkman.getIsdefault() == 0 ? "N" : "Y"));
+                    item.appendChild(isdefault);
+                    Element linkmanvo = document.createElement("linkmanvo");
+                    item.appendChild(linkmanvo);
+                    if (supplierLinkman.getCode() != null) {
+                        Element code = document.createElement("code");
+                        code.appendChild(document.createTextNode(supplierLinkman.getCode()));
+                        linkmanvo.appendChild(code);
+                    }
+                    if (supplierLinkman.getName() != null) {
+                        Element name = document.createElement("name");
+                        name.appendChild(document.createTextNode(supplierLinkman.getName()));
+                        linkmanvo.appendChild(name);
+                    }
+                    if (supplierLinkman.getCell() != null) {
+                        Element cell = document.createElement("cell");
+                        cell.appendChild(document.createTextNode(supplierLinkman.getCell()));
+                        linkmanvo.appendChild(cell);
+                    }
+                    if (supplierLinkman.getEmail() != null) {
+                        Element email = document.createElement("email");
+                        email.appendChild(document.createTextNode(supplierLinkman.getEmail()));
+                        linkmanvo.appendChild(email);
+                    }
+                    if (supplierLinkman.getPhone() != null) {
+                        Element phone = document.createElement("phone");
+                        phone.appendChild(document.createTextNode(supplierLinkman.getPhone()));
+                        linkmanvo.appendChild(phone);
+                    }
+                    if (supplierLinkman.getBirthday() != null) {
+                        Element birthday = document.createElement("birthday");
+                        birthday.appendChild(document.createTextNode(supplierLinkman.getBirthday()));
+                        linkmanvo.appendChild(birthday);
+                    }
+                    if (supplierLinkman.getAddress() != null) {
+                        Element address = document.createElement("address");
+                        address.appendChild(document.createTextNode(supplierLinkman.getAddress()));
+                        linkmanvo.appendChild(address);
+                    }
+                    if (supplierLinkman.getPostcode() != null) {
+                        Element postcode = document.createElement("postcode");
+                        postcode.appendChild(document.createTextNode(supplierLinkman.getPostcode()));
+                        linkmanvo.appendChild(postcode);
+                    }
+                    if (supplierLinkman.getMeno() != null) {
+                        Element memo = document.createElement("memo");
+                        memo.appendChild(document.createTextNode(supplierLinkman.getMeno()));
+                        linkmanvo.appendChild(memo);
+                    }
                 }
             }
             xmlName=getXmlName(""+factoryInfo.getId(),"factory");

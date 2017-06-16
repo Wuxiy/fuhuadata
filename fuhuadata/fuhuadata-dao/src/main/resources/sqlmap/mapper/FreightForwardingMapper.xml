@@ -51,7 +51,7 @@
         ss.`name` AS link_man
       FROM
         s_freight_forwarding sff
-        LEFT JOIN s_supplier_linkman ss ON ss.`suppier_id` = sff.`id` AND ss.`supplier_type` = 1 AND ss.`isdefault` = 1
+        LEFT JOIN s_supplier_linkman ss ON ss.`supplier_id` = sff.`id` AND ss.`supplier_type` = 1 AND ss.`isdefault` = 1
         ORDER BY sff.`creationtime` DESC
   </select>
 

@@ -4,6 +4,7 @@ import com.fuhuadata.dao.mapper.BankAccBasMapper;
 import com.fuhuadata.domain.common.BankAccBas;
 import com.fuhuadata.domain.common.BankAccType;
 import com.fuhuadata.service.impl.mybatis.BaseServiceImpl;
+import com.google.common.collect.Lists;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -43,24 +44,32 @@ public class BankAccBasServiceImpl extends BaseServiceImpl<BankAccBas, Integer>
     }
 
     @Override
-    public int deleteBanks(List<Integer> bankIds) {
+    public List<BankAccBas> deleteBanks(List<Integer> bankIds) {
 
         if (CollectionUtils.isEmpty(bankIds)) {
-            return 0;
+            return Collections.emptyList();
         }
 
         Example example = newExample();
         example.createCriteria().andIn("id", bankIds);
 
-        return delete(example);
+        List<BankAccBas> banks = listByExample(example);
+        banks.forEach((entity) -> {
+            delete(entity);
+            entity.setDeletedStatus(0);
+        });
+
+        return banks;
     }
 
     @Override
-    public int saveOrUpdateBanks(List<BankAccBas> banks) {
+    public List<BankAccBas> saveOrUpdateBanks(List<BankAccBas> banks) {
 
         if (CollectionUtils.isEmpty(banks)) {
-            return 0;
+            return Collections.emptyList();
         }
+
+        List<BankAccBas> bdBanks = Lists.newArrayList();
 
         banks.forEach(bank -> {
             if (bank.getId() != null) {
@@ -68,8 +77,10 @@ public class BankAccBasServiceImpl extends BaseServiceImpl<BankAccBas, Integer>
             } else {
                 saveSelective(bank);
             }
+
+            bdBanks.add(get(bank));
         });
 
-        return banks.size();
+        return bdBanks;
     }
 }

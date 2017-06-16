@@ -4,6 +4,7 @@ import com.fuhuadata.domain.mybatis.supplier.LinkmanType;
 import com.fuhuadata.domain.mybatis.supplier.SupplierLinkman;
 import com.fuhuadata.service.impl.mybatis.BaseServiceImpl;
 import com.fuhuadata.service.mybatis.supplier.SupplierLinkmanService;
+import com.google.common.collect.Lists;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -29,7 +30,7 @@ public class SupplierLinkmanServiceImpl extends BaseServiceImpl<SupplierLinkman,
         Example example = newExample();
         example.createCriteria()
                 .andEqualTo("supplierType", type.key)
-                .andEqualTo("suppierId", supplierId);
+                .andEqualTo("supplierId", supplierId);
 
 
         return listByExample(example);
@@ -44,22 +45,27 @@ public class SupplierLinkmanServiceImpl extends BaseServiceImpl<SupplierLinkman,
     }
 
     @Override
-    public int saveOrUpdateLinkmen(List<SupplierLinkman> linkmen) {
+    public List<SupplierLinkman> saveOrUpdateLinkmen(List<SupplierLinkman> linkmen) {
 
         if (CollectionUtils.isEmpty(linkmen)) {
-            return 0;
+            return Collections.emptyList();
         }
 
-        linkmen.forEach(this::saveOrUpdateSelective);
+        List<SupplierLinkman> bdMen = Lists.newArrayList();
 
-        return linkmen.size();
+        linkmen.forEach((entity) -> {
+            saveOrUpdateSelective(entity);
+            bdMen.add(get(entity));
+        });
+
+        return bdMen;
     }
 
     @Override
-    public int deleteLinkmen(LinkmanType type, List<Integer> manIds) {
+    public List<SupplierLinkman> deleteLinkmen(LinkmanType type, List<Integer> manIds) {
 
         if (CollectionUtils.isEmpty(manIds)) {
-            return 0;
+            return Collections.emptyList();
         }
 
         Example example = newExample();
@@ -67,6 +73,12 @@ public class SupplierLinkmanServiceImpl extends BaseServiceImpl<SupplierLinkman,
                 .andEqualTo("supplierType", type.key)
                 .andIn("id", manIds);
 
-        return delete(example);
+        List<SupplierLinkman> linkmen = listByExample(example);
+        linkmen.forEach(linkMan -> {
+            delete(linkMan);
+            linkMan.setDeletedStatus(0);
+        });
+
+        return linkmen;
     }
 }

@@ -8,7 +8,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="pk_linkman" jdbcType="VARCHAR" property="pkLinkman" />
     <result column="supplier_type" jdbcType="INTEGER" property="supplierType" />
-    <result column="suppier_id" jdbcType="INTEGER" property="suppierId" />
+    <result column="supplier_id" jdbcType="INTEGER" property="supplierId" />
     <result column="code" jdbcType="VARCHAR" property="code" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="cell" jdbcType="VARCHAR" property="cell" />

@@ -63,7 +63,7 @@
                 b.fax AS tax,
                 b.postcode AS postcode,
                 b.memo AS meno,
-                bl.pk_supplier AS suppierId
+                bl.pk_supplier AS supplierId
         FROM
                 bd_linkman b
                 JOIN bd_suplinkman bl ON bl.pk_linkman=b.pk_linkman

@@ -9,6 +9,7 @@ import com.fuhuadata.domain.mybatis.supplier.SupplierLinkman;
 import com.fuhuadata.domain.supplier.ProduceFactory;
 import com.fuhuadata.domain.supplier.ProduceFactoryInfo;
 import com.fuhuadata.domain.supplier.ProduceFactoryQuery;
+import com.fuhuadata.manager.NCExchange.FactoryInfoToNC;
 import com.fuhuadata.service.impl.mybatis.BaseServiceImpl;
 import com.fuhuadata.service.mybatis.OrganizationService;
 import com.fuhuadata.service.mybatis.common.BankAccBasService;
@@ -38,6 +39,9 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
     private OrganizationService organizationService;
 
     private SupplierLinkmanService linkmanService;
+
+    @Resource
+    private FactoryInfoToNC factoryInfoToNC;
 
     private ProduceFactoryMapper getFactoryMapper() {
         return (ProduceFactoryMapper) baseMapper;
@@ -123,11 +127,30 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
         fillLoginInfo(factory);
         saveSelective(factory);
 
+        factory = get(factory);
+        factoryInfo.setFactory(factory);
+
+        return handleBanksAndLinkmenAndToNc(factoryInfo);
+    }
+
+    private ProduceFactory handleBanksAndLinkmenAndToNc(ProduceFactoryInfo factoryInfo) {
+
+        ProduceFactory factory = factoryInfo.getFactory();
+
         Integer factoryId = factory.getId();
 
-        saveOrUpdateBanks(factoryId, factory.getBanks(), factoryInfo.getDeletedBankIds());
+        // 包含新增和删除的银行账户，删除的银行账户通过 deletedStatus 标识
+        List<BankAccBas> banks = saveOrUpdateBanks(factoryId, factory.getBanks(), factoryInfo.getDeletedBankIds());
 
-        saveOrUpdateLinkmen(factoryId, factory.getLinkmen(), factoryInfo.getDeletedLinkmanIds());
+        // 包含新增和删除的联系人，删除的联系人通过 deletedStatus 标识
+        List<SupplierLinkman> linkmen = saveOrUpdateLinkmen(factoryId, factory.getLinkmen(), factoryInfo.getDeletedLinkmanIds());
+
+        factory.setBanks(banks);
+        factory.setLinkmen(linkmen);
+
+        // 同步到 NC
+        factoryInfoToNC.sendFactoryInfo(factory);
+
         return factory;
     }
 
@@ -145,14 +168,12 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
 
         ProduceFactory factory = factoryInfo.getFactory();
         fillLoginInfo(factory);
+
         updateSelective(factory);
+        factory = get(factory);
 
-        Integer factoryId = factory.getId();
-
-        saveOrUpdateBanks(factoryId, factory.getBanks(), factoryInfo.getDeletedBankIds());
-
-        saveOrUpdateLinkmen(factoryId, factory.getLinkmen(), factoryInfo.getDeletedLinkmanIds());
-        return factory;
+        factoryInfo.setFactory(factory);
+        return handleBanksAndLinkmenAndToNc(factoryInfo);
     }
 
     /**
@@ -161,7 +182,7 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
      * @param banks 新增、更新的银行账号
      * @param deletedIds 待删除的银行账号
      */
-    private void saveOrUpdateBanks(Integer factoryId, List<BankAccBas> banks, List<Integer> deletedIds) {
+    private List<BankAccBas> saveOrUpdateBanks(Integer factoryId, List<BankAccBas> banks, List<Integer> deletedIds) {
 
         Optional.ofNullable(banks).ifPresent(bankAccs -> bankAccs.forEach(bank -> {
             bank.setAcctype(BankAccType.Factory.key);
@@ -169,10 +190,14 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
         }));
 
         // 保存、更新银行账号
-        bankAccService.saveOrUpdateBanks(banks);
+        banks = bankAccService.saveOrUpdateBanks(banks);
 
         // 删除银行账号
-        bankAccService.deleteBanks(deletedIds);
+        List<BankAccBas> deleteBanks = bankAccService.deleteBanks(deletedIds);
+
+        banks.addAll(deleteBanks);
+
+        return banks;
     }
 
     /**
@@ -181,17 +206,21 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
      * @param linkmen 新增、更新的联系人
      * @param deleteIds 待删除的联系人
      */
-    private void saveOrUpdateLinkmen(Integer factoryId, List<SupplierLinkman> linkmen, List<Integer> deleteIds) {
+    private List<SupplierLinkman> saveOrUpdateLinkmen(Integer factoryId, List<SupplierLinkman> linkmen, List<Integer> deleteIds) {
 
         Optional.ofNullable(linkmen).ifPresent(linkmans -> linkmans.forEach(linkman -> {
             linkman.setSupplierType(LinkmanType.Factory.key);
-            linkman.setSuppierId(factoryId);
+            linkman.setSupplierId(factoryId);
         }));
 
         // 保存、更新联系人
-        linkmanService.saveOrUpdateLinkmen(linkmen);
+        linkmen = linkmanService.saveOrUpdateLinkmen(linkmen);
 
         // 删除联系人
-        linkmanService.deleteLinkmen(LinkmanType.Factory, deleteIds);
+        List<SupplierLinkman> deleteLinkmen = linkmanService.deleteLinkmen(LinkmanType.Factory, deleteIds);
+
+        linkmen.addAll(deleteLinkmen);
+
+        return linkmen;
     }
 }

@@ -8,6 +8,7 @@ import com.fuhuadata.service.util.UserTreeCache;
 import com.fuhuadata.vo.MixNodeVO;
 import com.fuhuadata.vo.OrganizationVO;
 import com.google.common.collect.Lists;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
@@ -71,6 +72,16 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization, Integ
 
     @Override
     public Organization getByCode(String code) {
+
+        Organization group = getGroup();
+
+        if (StringUtils.isEmpty(code)) {
+            return null;
+        } else if (group.getCode().equals(code)) {
+
+            return group;
+        }
+
         Example example = new Example(Organization.class);
         example.createCriteria().andEqualTo("code", code);
 
@@ -80,6 +91,13 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization, Integ
         }
 
         return null;
+    }
+
+    private Organization getGroup() {
+        Organization organization = new Organization();
+        organization.setCode("0001");
+        organization.setName("福华集团");
+        return organization;
     }
 
     @Override
