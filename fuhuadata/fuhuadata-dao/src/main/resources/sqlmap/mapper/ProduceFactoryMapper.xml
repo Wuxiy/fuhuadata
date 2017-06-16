@@ -78,6 +78,7 @@
         <include refid="BaseColumns"/>,
         (SELECT GROUP_CONCAT(pi.`name` SEPARATOR '、')
         <include refid="com.fuhuadata.dao.supplier.ProduceFactoryProductMapper.FromTable"/>
+        where pfp.factory_id=pf.id
         GROUP BY pfp.factory_id) product_names
         <include refid="FromTable"/>
     </select>
