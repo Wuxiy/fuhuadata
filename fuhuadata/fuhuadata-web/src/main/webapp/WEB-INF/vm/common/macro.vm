@@ -222,7 +222,7 @@
     #set($tabs = [
     {'name':'基本信息','path':'/supplier/factories/','postfix':'/vm'},
     {'name':'产品信息','path':'/supplier/factories/','postfix':'/products/vm'},
-    {'name':'订单记录','path':'/supplier/factories/','postfix':'/order/vm'}
+    {'name':'订单记录','path':'/supplier/factories/','postfix':'/buy/contracts/vm'}
     ])
 #*{'name':'投诉记录','path':'/supplier/factories/','postfix':'/complaint/vm'},
 {'name':'延期交货记录','path':'/supplier/factories/','postfix':'/delivery/delay/vm'}*#

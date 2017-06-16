@@ -1,5 +1,5 @@
 <div class="nav-deputy shadow-out clearfix">
-    #factoryTab('订单记录',$!{factoryId})
+    #factoryTab('订单记录',$!{factory.id})
     #breadcrumb()
 </div>
 <div class="dashboard-wrapper">
@@ -98,7 +98,7 @@
         </div>
     </div>
 </div>
-<input id="cvendor_id" type="hidden" value="$!{factoryId}"> ## 供应商id
+<input id="cvendor_id" type="hidden" value="$!{factory.pkSupplier}"> ## 供应商id
 <script>
     (function () {
         var cvendorId = $('#cvendor_id').val(),

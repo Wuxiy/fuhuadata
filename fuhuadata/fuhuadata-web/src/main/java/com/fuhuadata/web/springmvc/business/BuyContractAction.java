@@ -8,6 +8,7 @@ import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.mybatis.business.BusinessBuyContractProductService;
 import com.fuhuadata.service.mybatis.business.BusinessBuyContractService;
 import com.fuhuadata.web.springmvc.mybatis.BaseController;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,10 +36,10 @@ public class BuyContractAction extends BaseController<BusinessBuyContract, Integ
     @ResponseBody
     public ResultPojo listContracts(BusinessBuyContractQuery query) {
 
-        Result<List<BusinessBuyContract>> result = Result.newResult(false);
+        Result<PageInfo<BusinessBuyContract>> result = Result.newResult(false);
 
         List<BusinessBuyContract> contracts = buyContractService.listContrats(query);
-        result.addDefaultModel(contracts);
+        result.addDefaultModel(new PageInfo<>(contracts));
         result.setSuccess(true);
 
         return result.getResultPojo();
