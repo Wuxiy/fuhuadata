@@ -4,6 +4,7 @@ import com.fuhuadata.dao.mapper.business.BusinessBuyContractMapper;
 import com.fuhuadata.domain.business.BusinessBuyContract;
 import com.fuhuadata.domain.business.BusinessBuyContractQuery;
 import com.fuhuadata.service.impl.mybatis.BaseServiceImpl;
+import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class BusinessBuyContractServiceImpl extends BaseServiceImpl<BusinessBuyC
     @Override
     public List<BusinessBuyContract> listContrats(BusinessBuyContractQuery query) {
 
+        PageHelper.startPage(query.getIndex(), query.getPageSize());
         return getBuyContractMapper().listContracts(query);
     }
 }
