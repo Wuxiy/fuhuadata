@@ -1,0 +1,124 @@
+<div class="nav-deputy shadow-out clearfix">
+    #warehouseTab('合作货代',$!{warehouseId})
+    #breadcrumb()
+</div>
+<div class="dashboard-wrapper">
+    <div class="row">
+        <div class="col-xs-12 view-HD-lg">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" lang="zh">合作货代</h3>
+                </div>
+                <div class="panel-body clearfix">
+                    <!--表格-->
+                    <table class="table text-center table-condensed table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th class="text-center" lang="zh">编号</th>
+                            <th class="text-center" lang="zh">仓库名称</th>
+                            <th class="text-center" lang="zh">货代名称</th>
+                        </tr>
+                        </thead>
+                        <tbody id="orderList">
+                        </tbody>
+                    </table>
+                    <div class="pagination" id="pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input id="warehouseId" type="hidden" value="$!{warehouseId}">
+
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>
+<script type="text/javascript">
+    var id = $('#warehouseId').val();
+
+    $(function(){
+        var table = {
+                    total:0,
+                    pageSize:5,
+                    pageNum:0,
+                    pagination:$('#pagination'),
+                    container:$('#orderList'),
+                    setPagination:{
+                        num_edge_entries:3,
+                        num_display_entries:5,
+                        callback:function (pageNum,jq) {
+                            $.ajax({
+                                url:basePath + '/supplier/warehouse/forwardingList?warehouseId=' + id,
+                                dataType:'json',
+                                contentType:'application/json',
+                                data:{
+                                    pageSize:table.pageSize,
+                                    index:pageNum+1
+                                },
+                                async:true,
+                                type:'GET'
+                            }).done(function(res){
+
+                                if (res.code===1) { // 请求是否成功
+
+                                    table.renderList(res.data.list);
+                                }
+                            });
+
+                        }
+                    },
+                    init:function () {
+                        $.ajax({
+                            url:basePath + '/supplier/warehouse/forwardingList?warehouseId=' + id,
+                            dataType:'json',
+                            contentType:'application/json',
+                            data:{
+                                pageSize:table.pageSize,
+                                index:1
+                            },
+                            async:true,
+                            type:'GET'
+                        }).done(function (res) {
+                            if (res.code===1) { // 请求是否成功
+
+                                if(!table.total){ // 是否需要渲染分页
+
+                                    table.total = res.data.total;
+                                    table.renderPagination();
+                                }
+                                table.renderList(res.data.list);
+                            }
+                        });
+                    },
+                    renderList:function (list) {
+                        var tpl = '';
+                        var count = 0;
+                        if(list.length>0){
+                            $.each(list, function(i, item){
+                                tpl +=
+                                        '<tr>' +
+                                        '<td>'+(++count)+'</td>'+
+                                        '<td>'+table.hasField(item.warehouseName)+'</td>'+
+                                        '<td>'+table.hasField(item.name)+'</td>'+
+                                        '</tr>';
+                            });
+                        }else{
+                            tpl += '<tr><td colspan="12">暂无数据</td></tr>';
+                        }
+                        this.container.html(tpl);
+                    },
+                    renderPagination:function () {
+                        this.setPagination.items_per_page = this.pageSize;
+                        this.pagination.pagination(this.total,this.setPagination);
+                    },
+                    hasField:function (field) {
+
+                        if (field===null||field===undefined){
+                            return '';
+                        }else {
+                            return field;
+                        }
+                    }
+                };
+        table.init();
+    });
+</script>

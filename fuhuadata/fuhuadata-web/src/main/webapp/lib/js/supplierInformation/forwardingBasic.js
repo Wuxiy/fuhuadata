@@ -430,13 +430,28 @@ $(function () {
     // 自定义字段
     var addCustomField = {
         addBtn:$('#add_customField'),
-        container:$('#customFields'),
-        tpl:'<>',
+        con:'[name="customField"]',
+        tar:$('#customFields'),
+        tpl:$('#custom_field').html(),
         init:function () {
-
+            var self = this;
+            self.addBtn.on('click', self.clickHandler)
         },
         clickHandler:function () {
+            addCustomField.tar.append(addCustomField.tpl);
+        }
+    };
 
+    // 删除控件
+    var delBtn = {
+        name:'delBtn',
+        init:function () {
+            var self = this;
+            document.on('click.del', '[data-name="'+self.name+'"]', self.handler);
+        },
+        handler:function () {
+            var tar = $(this).data('tar');
+            $(this).closest(tar).remove();
         }
     };
 
@@ -444,4 +459,5 @@ $(function () {
     imgGroup.init();
     upImgModal.init();
     timeLinkage.init();
+    addCustomField.init();
 });

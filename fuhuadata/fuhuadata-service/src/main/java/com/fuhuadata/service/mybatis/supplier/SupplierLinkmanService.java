@@ -21,6 +21,13 @@ public interface SupplierLinkmanService extends BaseService<SupplierLinkman, Int
     List<SupplierLinkman> listLinkmen(LinkmanType type, Integer supplierId);
 
     /**
+     * 获取供应商联系人
+     * @param type
+     * @return
+     */
+    List<SupplierLinkman> listLinkmen(LinkmanType type);
+
+    /**
      * 保存或更新联系人
      * @param linkmen
      * @return

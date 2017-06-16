@@ -7,14 +7,11 @@ import com.fuhuadata.dao.NCExchange.OrderToNc;
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.BusinessOrderProduct;
 import com.fuhuadata.domain.CustomerBaseInfo;
-import com.fuhuadata.domain.query.QueryBusinessOrderProduct;
 import com.fuhuadata.manager.NCExchange.BusinessOrderToNC;
 import com.fuhuadata.manager.NCExchange.CustomerInfoToNC;
-import com.fuhuadata.vo.CustomerBaseInfoVO;
+import com.fuhuadata.manager.NCExchange.PDFTempletToPDF;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.aspectj.weaver.loadtime.Agent;
-import org.dom4j.*;
 import org.dom4j.DocumentHelper;
 import org.dom4j.io.DocumentSource;
 import org.jdom.input.SAXBuilder;
@@ -23,6 +20,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
 import javax.servlet.ServletContext;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -36,7 +35,10 @@ import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by zhangxiang on 2017/4/10.
@@ -62,7 +64,8 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
     private String vtrantypecode;
     @Autowired
     ServletContext servletContext;
-
+    @Autowired
+    private PDFTempletToPDF pDFTempletToPDF;
     /**
      * 返回值为"1"则NC转换成功
      * @param orderId
@@ -70,11 +73,14 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
      */
     @Override
     public String sendBusinessOrder(String orderId,List<Integer> orderProductsId) {
-
+        //pdf导入nc长期协议调用接口需要的参数字段
+        String creatorCode="";
+        String pPath="";
         /*
         将订单实体转换成xml。
          */
             BusinessOrder orderBaseInfo = orderToNc.getBusinessOrderByOrderId(orderId);
+            creatorCode=orderBaseInfo.getSalesManId();
             String customerId=orderBaseInfo.getCustomerId();
             CustomerBaseInfo customerBaseInfo=customerBaseInfoDao.getCustomerBaseInfoById(customerId);
             int customerType=customerBaseInfo.getCustomerType();
@@ -84,13 +90,15 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                 ncid=customerInfoToNC.sendCustomerInfo(customerBaseInfo);
             }
             String xmlName=null;
+        List<BusinessOrderProduct> orderProducts=null;
             if (orderProductsId.size()!=0) {
-                List<BusinessOrderProduct> orderProducts = orderToNc.getOrderProductsById(orderProductsId);
+                orderProducts = orderToNc.getOrderProductsById(orderProductsId);
                 xmlName = businessOrderToXML(orderBaseInfo, orderProducts, ncid);
             }else {
                 log.error("-----没有订单产品无法提交NC-----");
                 return "";
             }
+
         /*
         将xml文件传送到nc端
          */
@@ -113,7 +121,6 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
             connection.setRequestProperty("Content-type", "text/xml");
             connection.setRequestMethod("POST");
 
-
             File file = new File(xmlName);
             BufferedOutputStream out = new BufferedOutputStream(connection.getOutputStream());
             BufferedInputStream input = new BufferedInputStream(new FileInputStream(file));
@@ -128,7 +135,7 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
             /***************从输入流取得Doc***************/
             InputStream inputStream = connection.getInputStream();
 
-            InputStreamReader isr = new InputStreamReader(inputStream);
+            InputStreamReader isr = new InputStreamReader(inputStream,"UTF-8");
             BufferedReader bufreader = new BufferedReader(isr);
             String xmlString = "";
             int c;
@@ -155,7 +162,7 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
             //设置日期格式
             String a = servletContext.getRealPath("/");
             SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddHHmmss");
-            String resFile =a + fmt.format(new Date()) + ".xml";
+            String resFile =a +"lib/NCBackFile/"+orderBaseInfo.getSalesManId()+ fmt.format(new Date()) + ".xml";
             StreamResult result = new StreamResult(new File(resFile));
             transformer.transform(source, result);
             System.out.println("======生成回执文件成功=======");
@@ -189,6 +196,11 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                     orderBaseInfo.setStatus(2);
                     orderBaseInfo.setNcOrderId(pk_order);
                     businessOrderDao.updateBusinessOrderByOrderId(orderBaseInfo);
+                    //生成pdf附件
+                    pPath=pk_order;
+                    String pdfPath= pDFTempletToPDF.PDFTempletToPDFmanager(orderProducts);
+                    //将pdf附件导入nc长期协议表
+                    pdfSendToNC(pdfPath,creatorCode,pPath);
                 } else {
                     log.error("出現未知错误");
                 }
@@ -256,6 +268,9 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                 //本位币
                 nodeValue.put("ccurrencyid","" + orderBaseInfo.getCurrency());
                 nodeValue.put("cusdcurrencyid","" + orderBaseInfo.getCurrency());
+            }
+            if (orderBaseInfo.getLastdelydate()!=null){
+                nodeValue.put("vdef6",orderBaseInfo.getLastdelydate().toString());
             }
 
             //nc长期协议的 协议类型
@@ -457,7 +472,7 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
             // 要保证你的文本输出后格式不乱码，打印对象需指定打印格式，以标记此文本支持的格式
 
             String a = servletContext.getRealPath("/");
-            xmlName=a+"order"+orderBaseInfo.getOrderId()+System.currentTimeMillis()+".xml";
+            xmlName=a+"lib/NCBackFile/"+"order"+orderBaseInfo.getOrderId()+System.currentTimeMillis()+".xml";
             PrintWriter pw = new PrintWriter(xmlName, "utf-8");
             // 充当转换结果的持有者，可以为 XML、纯文本、HTML 或某些其他格式的标记
             StreamResult result = new StreamResult(pw);
@@ -469,11 +484,41 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
         return xmlName;
     }
 
+    private String pdfSendToNC(String pdfPath,String creatorCode,String pPath ) throws IOException {
+        String filename=pdfPath.substring(pdfPath.lastIndexOf("\\")+1);
+        File file=new File(pdfPath);long filelength= file.length();
+        DataHandler dataHandler=new DataHandler(new FileDataSource(file));
+        byte[] bytes=getBytes(pdfPath);
+        com.fuhuadata.manager.impl.NCExchange.services.M5715FileManagerWsPortType service=new com.fuhuadata.manager.impl.NCExchange.services.M5715FileManagerWs().getM5715FileManagerWsSOAP11PortHttp();
+        String wsResult= service.crmExchangeFileToNC(bytes,filename,filelength,creatorCode,pPath);
+        return wsResult;
+    }
     public void setNcUrl(String ncUrl) {
         this.ncUrl = ncUrl;
     }
     public String getNcUrl(){
         return this.ncUrl;
+    }
+    private byte[] getBytes(String filePath){
+         byte[] buffer = null;
+         try {
+             File file = new File(filePath);
+             FileInputStream fis = new FileInputStream(file);
+             ByteArrayOutputStream bos = new ByteArrayOutputStream(1000);
+             byte[] b = new byte[1000];
+             int n;
+             while ((n = fis.read(b)) != -1) {
+                     bos.write(b, 0, n);
+                 }
+             fis.close();
+             bos.close();
+             buffer = bos.toByteArray();
+        } catch (FileNotFoundException e) {
+           e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return buffer;
     }
 
 }

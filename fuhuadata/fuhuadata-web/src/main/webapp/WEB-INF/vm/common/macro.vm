@@ -238,11 +238,12 @@
 #end
 
 ## 仓库tab页
-#macro(freightTab $selected $id)
+#macro(warehouseTab $selected $id)
     #set($tabs = [
-    {'name':'基本信息','path':''},
-    {'name':'仓库信息','path':''},
-    {'name':'竞标记录','path':''}
+    {'name':'基本信息','path':'/supplier/warehouse/intoWarehouseBasic?id='},
+    {'name':'合作货代','path':'/supplier/warehouse/intoWarehouseOpperation?id='},
+    {'name':'订单记录','path':'/supplier/warehouse/intoWarehouseOrder?id='},
+    {'name':'投诉记录','path':'/supplier/warehouse/intoWarehouseComplaints?id='}
     ])
 <ul id="saleNav" class="nav nav-tabs pull-left">
     #foreach($item in $tabs)

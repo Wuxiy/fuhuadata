@@ -43,4 +43,7 @@
 	<bean id="customerInfoToNC" class="com.fuhuadata.manager.impl.NCExchange.CustomerInfoToNCImpl">
 		<!--<property name="ncUrl" value="${ncurl}"/>-->
 	</bean>
+	<bean id="pDFTempletToPDF" class="com.fuhuadata.manager.impl.NCExchange.PDFTempletToPDFImpl"/>
+	<bean id="factoryInfoToNC" class="com.fuhuadata.manager.impl.NCExchange.FactoryInfoToNCImpl"/>
+	<bean id="factoryProductToNC" class="com.fuhuadata.manager.impl.NCExchange.FactoryProductToNCImpl"/>
 </beans>

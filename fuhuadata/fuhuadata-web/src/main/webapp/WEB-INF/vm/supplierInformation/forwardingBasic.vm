@@ -107,9 +107,9 @@
                             </div>
                             <fieldset id="customFields"></fieldset>
                             <div class="form-group hidden" data-view="editView">
-                                <div class="col-xs-1 col-xs-offset-1">
+                                <div class="col-xs-2 col-xs-offset-1">
                                     <button class="btn-link" id="add_customField" type="button" lang="zh">
-                                        <span class="glyphicon glyphicon-plus"></span>添加字段
+                                        <span class="glyphicon glyphicon-plus"></span>添加自定义字段
                                     </button>
                                 </div>
                             </div>
@@ -163,7 +163,7 @@
                                     <div class="input-group">
                                         <input class="form-control" name="combinedScoring" type="number" min="0" disabled/>
                                         <div class="input-group-btn">
-                                            <a class="btn btn-xs btn-primary" href="#" lang="zh">查看明细</a>
+                                            <a class="btn btn-xs btn-primary" href="${request.contextPath}/supplier/forwarding/intoForwardingGradeList?id=$!{forwardingId}" lang="zh">查看明细</a>
                                         </div>
                                     </div>
                                 </div>
@@ -229,5 +229,19 @@
         </div>
     </div>
 </div>
+## 自定义字段模板
+<script id="custom_field" type="text/html">
+    <div class="form-group" name="customField" style="position: relative">
+        <label class="col-xs-1">
+            <input class="form-control" name="name" type="text" placeholder="请输入标题">
+        </label>
+        <div class="col-xs-8">
+            <textarea class="form-control" name="value" rows="4" placeholder="请输入内容"></textarea>
+        </div>
+        <button class="pull-left close" data-name="delBtn" data-target=".form-group" type="button" style="position:absolute;top:34%;">
+            <span class="glyphicon glyphicon-remove-sign"></span>
+        </button>
+    </div>
+</script>
 <input id="forwardingId" type="hidden" value="$!{forwardingId}">
 <script src="${request.contextPath}/lib/js/supplierInformation/forwardingBasic.js"></script>
