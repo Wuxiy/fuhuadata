@@ -1,6 +1,5 @@
 <div class="clearfix content shadow-out">
     <div class="nav-deputy shadow-out clearfix">
-        #forwardingTab(3)
         #breadcrumb()
     </div>
     <!--表格容器-->
@@ -97,6 +96,16 @@
             renderList:function (list) {
                 var tpl = '';
                 $.each(list, function(i, item){
+                    var td;
+                    switch (typeof item.id){
+                        case 'number':
+                            td = '<td><a href="'+basePath+'/supplier/forwarding/intoForwardingGradeDetails/?scoreId='+
+                            table.hasField(item.id)+'">'+table.hasField(item.totalScore)+'</a></td>';
+                            break;
+                        case 'undefined':
+                            td = '<td>无订单</td>';
+                            break;
+                    }
                     tpl +=
                             '<tr>' +
                             '<td>'+table.hasField(item.monthTime)+'</td>'+
@@ -104,7 +113,7 @@
                             '<td>'+table.hasField(item.priceScore)+'</td>'+
                             '<td>'+table.hasField(item.warehouseScore)+'</td>'+
                             '<td>'+table.hasField(item.complaintsScore)+'</td>'+
-                            '<td><a href="'+basePath+'/supplier/forwarding/?id=">'+table.hasField(item.totalScore)+'</a></td>'+
+                            td+
                             '<td>'+table.hasField(item.evaluateUserName)+'</td>'+
                             '<td>'+table.hasField(item.evaluateTime)+'</td>'+
                             '<td>'+table.hasField(item.memo)+'</td>'+

@@ -202,22 +202,25 @@ $(function () {
 
                     if (Array.isArray(arr)) {
 
-                        $.each(data[n], function (j, o) {
-                            _html += '<div class="form-group" name="'+n+'">';
-                            $.each(arr, function (k, key) {
+                        if (data[n]) {
 
-                                _html +=
-                                    '<label class="control-label col-xs-1" for="'+key+'" lang="zh">'
-                                    +item.field[key].split(',')[0]+
-                                    '</label>'+
-                                    '<div class="col-xs-2">' +
-                                    '<input class="form-control" name="'+key+'"' +
-                                    'type="'+item.field[key].split(',')[1]+'" value="'+o[key]+'" disabled>'+
-                                    '</div>';
+                            $.each(data[n], function (j, o) {
+                                _html += '<div class="form-group" name="'+n+'">';
+                                $.each(arr, function (k, key) {
+
+                                    _html +=
+                                        '<label class="control-label col-xs-1" for="'+key+'" lang="zh">'
+                                        +item.field[key].split(',')[0]+
+                                        '</label>'+
+                                        '<div class="col-xs-2">' +
+                                        '<input class="form-control" name="'+key+'"' +
+                                        'type="'+item.field[key].split(',')[1]+'" value="'+o[key]+'" disabled>'+
+                                        '</div>';
+                                });
+                                _html += '</div>';
                             });
-                            _html += '</div>';
-                        });
-                        p.html(_html);
+                            p.html(_html);
+                        }
                     }
 
                 }else if (item.type==='checkbox') {

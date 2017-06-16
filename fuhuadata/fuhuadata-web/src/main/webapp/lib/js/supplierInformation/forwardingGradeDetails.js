@@ -7,20 +7,6 @@ $(function(){
         panel = {
             panelDom:'#container',
             eidtBtn:'[name="edit"]',
-            init:function (id) {
-
-                if (id+'') { // 如果有id进入编辑状态
-
-                    var bindEl = this.eidtBtn,
-                        handler = this.toEditHandler;
-                    this.toShowHandler();
-                    this.addEvent('click.edit', bindEl, handler);
-
-                }else {
-
-                    this.toEditHandler();
-                }
-            },
             toShowHandler:function () { // 展示状态
                 var hide = form.editViews,
                     show = form.editHides,
@@ -28,8 +14,8 @@ $(function(){
                     OFF = form.editON;
                 hide.addClass('hidden');
                 show.removeClass('hidden');
-                ON.attr('disabled', false);
-                OFF.attr('disabled', true);
+                $(ON,'#container').attr('disabled', false);
+                $(OFF,'#container').attr('disabled', true);
             },
             toEditHandler:function () { // 编辑状态
                 var hide = form.editHides,
@@ -38,33 +24,28 @@ $(function(){
                     OFF = form.editOFF;
                 hide.addClass('hidden');
                 show.removeClass('hidden');
-                ON.attr('disabled', false);
-                OFF.attr('disabled', true);
-            },
-            addEvent:function (eType, el, handler) {
-                $(this.panelDom).off(eType).on(eType, el, handler);
-            },
+                $(ON,'#container').attr('disabled', false);
+                $(OFF,'#container').attr('disabled', true);
+            }
         },
         form = {
             formDom:'#order_grade',
             body:'#grade_list',
-            scores:'[name="evaScore"]',
-            remarks:'[name="evaRemark"]',
-            remark:'[name="remark"]',
+            remarks:'[name^="remark"]',
             saveBtn:'[name="save"]',
             cancelBtn:'[name="cancel"]',
+            radios:'[type="radio"]',
             totalScore:$('[name="totalScore"]', '#order_grade'),
             editViews:$('[data-view="editView"]', '#container'), // 编辑状态显示的dom
             editHides:$('[data-view="editHide"]', '#container'), // 编辑状态隐藏的dom
-            editON:$('[data-edit="on"]', '#container'), // 编辑状态启用的控件
-            editOFF:$('[data-edit="off"]', '#container'), // 编辑状态禁用的控件
-            data:{},
+            editON:'[data-edit="on"]', // 编辑状态启用的控件
+            editOFF:'[data-edit="off"]', // 编辑状态禁用的控件
+            data:[],
             ectype:null,
             init:function () {
                 var self = this;
-
                 $.ajax({
-                    url:basePath+'/supplier/forwarding/evaluationIndexItem?scoreId=1',
+                    url:basePath+'/supplier/forwarding/evaluationIndexItem?scoreId=2',
                     dataType:'json',
                     contentType:'application/json',
                     type:'GET'
@@ -72,35 +53,21 @@ $(function(){
 
                     if (res.code===1) {
 
-                        if (res.data) {
+                        self.renderTable(res.data.terms); // 渲染table Dom结构
+
+                        if (res.data.scoreList) {
 
                             self.data = res.data.scoreList;
                             self.ectype = $.extend(true, [], self.data); // 深拷贝一份数据对象的副本
-                            self.renderTable(res.data.terms); // 渲染table Dom结构
                             self.renderData(self.data); // 为table渲染数据
+                            panel.toShowHandler();
                         }else {
-
-                            self.data.id = '';
-                            self.data.totalScore = 0;
-                            self.data.remark = '';
-                            self.data.items = [];
-                            $(self.body).find('tr[name]').each(function (i, item) {
-                                var o = {
-                                    id:parseInt($(this).attr('name')),
-                                    score:parseInt($(this).find('[name="maxScore"]').text().trim()),
-                                    evaScore:0,
-                                    evaRemark:''
-                                };
-                                self.data.items.push(o);
-                            });
-                            self.render(self.data);
                             self.addEvent('click.cancel', self.cancelBtn, self.cancelHandler);
                             self.addEvent('click.save', self.saveBtn, self.saveHandler);
-                            self.addEvent('input.calculate', self.scores, self.calculateHandler);
-                            self.addEvent('change.upData', self.remarks+','+self.remark, self.upDataHandler);
+                            self.addEvent('click.calculate', self.radios, self.calculateHandler);
+                            self.addEvent('change.calculate', self.remarks, self.upDataHandler);
+                            panel.toEditHandler();
                         }
-
-                        panel.init(self.data.id);
                     }
                 });
             },
@@ -112,8 +79,9 @@ $(function(){
                     tr='',
                     lev = 0,
                     rows = 0,
-                    thisRow = '';
-                function cir(arr) {
+                    thisRow = '',
+                    part = '',
+                    cir = function (arr) {
                     lev++; // 标志当前循环的层级
                     $.each(arr, function (i, item) {
                         var level = lev;
@@ -123,6 +91,7 @@ $(function(){
                                 tr += '<tr>';
                                 tr += '<td rowspan="'+thisRow+'">' + item.itemName + '</td>';
                                 rows = 0;
+                                part = 'part'+i; // 标记，代表属于哪一部分
                                 cir(item.nodes);
                                 break;
                             case 2:
@@ -140,13 +109,13 @@ $(function(){
                                     theItem = o.evaluationItemId;
                                     tr +=
                                         '<label class="radio-inline">' +
-                                        '<input name="'+theItem+'" type="radio" value="'+o.value+'">'+
+                                        '<input name="'+theItem+'" data-edit="on" type="radio" value="'+o.value+'" disabled>'+
                                         o.optionName+
                                         '</label>';
                                 });
                                 tr += '</td>' +
-                                    '<td><input class="form-control" name="remark'+theItem+'" type="text"></td>' +
-                                    '<td class="text-info" name="score'+theItem+'"></td></tr>';
+                                    '<td><input class="form-control" name="remark'+theItem+'" data-edit="on" type="text" disabled></td>' +
+                                    '<td class="text-info" name="score'+theItem+'" data-name="'+part+'"></td></tr>';
                                 break;
                         }
                     });
@@ -156,7 +125,7 @@ $(function(){
 
                         tr = tr.replace(thisRow,rows);
                     }
-                }
+                };
                 cir(data);
                 $('#factory_list').html(tr);
             },
@@ -164,16 +133,18 @@ $(function(){
 
                 if (!Array.isArray(list)) return;
 
+                var total = 0;
                 $.each(list, function (i, item) {
-                    $('[name="'+item.evaluationValueId+'"]').val([item.score]);
-                    $('[name="remark'+item.evaluationValueId+'"]').val(item.remarks);
-                    $('[name="score'+item.evaluationValueId+'"]').text(item.score);
+                    $('[name="'+item.evaluationValueId+'"]')
+                        .val([form.hasField(item.score)])
+                        .data('index',i);
+                    $('[name="remark'+item.evaluationValueId+'"]')
+                        .val(form.hasField(item.remarks));
+                    $('[name="score'+item.evaluationValueId+'"]')
+                        .text(form.hasField(item.score));
+                    total += item.score;
                 });
-                /*"id": 1,
-                    "forwardingScoreId": 1,
-                    "evaluationValueId": 1,
-                    "remarks": "备注",
-                    "score": 6*/
+                form.totalScore.text(total);
             },
             hasField:function (field) {
 
@@ -189,23 +160,37 @@ $(function(){
             cancelHandler:function () {
                 /*form.render(form.ectype);
                  panel.toShowHandler();*/
-
+                location.href = basePath+'/supplier/forwarding/intoForwardingGradeList?id=1'
             },
             saveHandler:function () {
 
                 if (confirm('确定要保存吗？保存过后将不能修改。')) {
 
+                    var data = {
+                        score:{},
+                        list:form.data
+                    };
+                    data.score.serviceScore = form.addNumber('[data-name="part1"]');
+                    data.score.priceScore = form.addNumber('[data-name="part2"]');
+                    data.score.warehouseScore = form.addNumber('[data-name="part3"]');
+                    data.score.complaintsScore = form.addNumber('[data-name="part4"]');
+                    data.score.totalScore = data.score.serviceScore + data.score.priceScore + data.score.warehouseScore + data.score.complaintsScore;
+                    data.score.forwardingId = 1;
+                    data.score.monthTime = "2016-12";
+                    data.score.id = 2;
+                    /*console.log(data);*/
                     $.ajax({
-                        url:basePath+'/factory/eva/'+orderId,
-                        type:'PUT',
-                        data:JSON.stringify(form.data),
+                        url:basePath+'/supplier/forwarding/saveScore',
+                        type:'POST',
+                        data:JSON.stringify(data),
                         contentType:'application/json'
                     }).done(function (res) {
 
                         if (res.code===1) {
 
                             alert('评价成功！');
-                            form.init();
+                            /*form.init();*/
+                            location.href = basePath+'/supplier/forwarding/intoForwardingGradeList?id=1'
                         }
                     })
                 }
@@ -213,64 +198,57 @@ $(function(){
             },
             calculateHandler:function () {
 
-                var id = parseInt($(this).closest('tr').attr('name')),
-                    val = $(this).val(),
-                    isRender = false;
-                form.data.totalScore = 0;
+                var name = $(this).attr('name'),
+                    val = parseInt($('[name="'+name+'"]',form.formDom).filter(':checked').val()),
+                    i = $('[name="'+name+'"]',form.formDom).data('index'), // 与form.data数组的下标相对应，如果没有则为undefined
+                    cb = function () {
+                        form.renderData(form.data);
+                    };
+                if (typeof i==='number') {
 
-                $.each(form.data.items, function (i, item) {
+                    if (val===form.data[i].score) return; // 如果点击的值和当前值相等则返回
 
-
-                    val = parseInt(val===''?0:val);
-
-                    if (item.id===id && item.evaScore!==val) {
-
-                        if (item.score>=val && val>=0) {
-
-                            item.evaScore=val;
-                            isRender = true;
-                        }else {
-
-                            alert('请输入有效值0~'+item.score+'！');
-                            isRender = true;
-                        }
-                    }
-
-                    // 重新计算综合得分
-                    form.data.totalScore += parseInt(item.evaScore);
-                    return true;
-                });
-
-                if (isRender) {
-
-                    form.render(form.data);
-                }
-            },
-            upDataHandler:function () {
-
-                var id = parseInt($(this).closest('tr').attr('name')===undefined?-1:$(this).closest('tr').attr('name')),
-                    val = $(this).val();
-                val = val.trim();
-
-                if (id!==-1) {
-
-                    $.each(form.data.items, function (i, item) {
-
-                        if (item.id===id && item.evaRemark!==val) {
-
-                            item.evaRemark=val;
-                            return false;
-                        }else {
-
-                            return true;
-                        }
-                    });
+                    form.data[i].score = val;
+                    cb(); // 重新渲染数据
                 }else {
 
-                    form.data.remark=val;
+                    var obj = {
+                        score:val,
+                        evaluationValueId:parseInt(name),
+                    };
+                    i = form.data.push(obj)-1;
+                    $('[name="'+name+'"]',form.formDom).data('index',i);
+                    cb();
+                }
+                /*console.log(form.data);*/
+            },
+            upDataHandler:function () {
+                var val = $(this).val().trim(),
+                    str = $(this).attr('name'),
+                    j = str.search(/\d/),
+                    name = str.slice(j), // 取得对应radio的name
+                    i = $('[name="'+name+'"]',form.formDom).data('index');
+
+                if (typeof i==='number') {
+
+                    form.data[i].remarks = val;
+                }else {
+
+                    var obj = {
+                        remarks:val,
+                        evaluationValueId:parseInt(name),
+                    };
+                    i = form.data.push(obj)-1;
+                    $('[name="'+name+'"]',form.formDom).data('index',i);
                 }
 
-                /*form.render(form.data);*/
+            },
+            addNumber:function (els) {
+                var n = 0;
+                $(els).each(function () {
+                    n+=parseInt(($(this).text()?$(this).text():0));
+                });
+                return n;
             }
         };
     form.init();
