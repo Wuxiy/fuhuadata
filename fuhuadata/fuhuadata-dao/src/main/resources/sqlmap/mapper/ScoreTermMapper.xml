@@ -39,6 +39,14 @@
           WHERE sst.`type` = #{type}
     </select>
 
+    <select id="WarehouseScoreItem" resultType="com.fuhuadata.domain.mybatis.supplier.ScoreTerm">
+        SELECT
+          DISTINCT sst.`first_level_index`,
+          sst.id,sst.item_full_marks,sst.`item_order`
+          FROM s_score_term sst
+          WHERE sst.`type` = 2
+    </select>
+
 
 
 </mapper>

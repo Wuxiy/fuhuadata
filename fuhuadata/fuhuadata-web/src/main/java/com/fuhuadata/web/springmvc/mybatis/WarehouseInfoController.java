@@ -185,7 +185,7 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
         Result<ScoreInfoVO<WarehouseEvaluationScoreRelation>> result = new Result<>();
         ScoreInfoVO<WarehouseEvaluationScoreRelation> scoreInfoVO = new ScoreInfoVO<>();
         try{
-            scoreInfoVO.setTerms(scoreTermService.evaluationIndexItem(2));
+            scoreInfoVO.setTerms(scoreTermService.warehouseScoreItemIndex());
             List<WarehouseEvaluationScoreRelation> scoreList = warehouseEvaluationScoreRelationService.listByScoreId(scoreId);
             if(scoreList!=null&&scoreList.size()>0) {
                 scoreInfoVO.setScoreList(scoreList);

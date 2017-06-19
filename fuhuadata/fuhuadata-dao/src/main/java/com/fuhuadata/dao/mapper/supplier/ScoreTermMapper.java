@@ -9,5 +9,5 @@ public interface ScoreTermMapper extends BaseMapper<ScoreTerm,Integer> {
     List<ScoreTerm> ScoreItemThree(Integer type);
     List<ScoreTerm> ScoreItemTwo(Integer type);
     List<ScoreTerm> ScoreItemFirst(Integer type);
-
+    List<ScoreTerm> WarehouseScoreItem();
 }

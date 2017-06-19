@@ -25,6 +25,11 @@ public class ScoreTermServiceImpl extends BaseServiceImpl<ScoreTerm,Integer> imp
     @Autowired
     private EvaluationValueService evaluationValueService;
 
+    /**
+     * 货代评分
+     * @param type
+     * @return
+     */
     @Override
     public List<ScoreTermsVO> evaluationIndexItem(Integer type) {
         List<ScoreTerm> scoreTermsThree = getScoreTermMapper().ScoreItemThree(type);
@@ -74,6 +79,34 @@ public class ScoreTermServiceImpl extends BaseServiceImpl<ScoreTerm,Integer> imp
             listf.add(scoreTermsVO);
         }
         return listf;
+    }
+
+
+    /**
+     * 仓库评分
+     * @param
+     * @return
+     */
+    @Override
+    public List<ScoreTermsVO> warehouseScoreItemIndex() {
+        List<ScoreTerm> warehouseScoreItem = getScoreTermMapper().WarehouseScoreItem();
+        List<EvaluationValue> valueList = evaluationValueService.ListEvaluetionValueByType(2);
+        List<ScoreTermsVO> list = new ArrayList<>();
+        //首层分值
+        for(ScoreTerm scoreTerm:warehouseScoreItem) {
+            ScoreTermsVO scoreTermsVO = new ScoreTermsVO();
+            scoreTermsVO.setItemName(scoreTerm.getFirstLevelIndex());
+            scoreTermsVO.setItemId(scoreTerm.getId());
+            scoreTermsVO.setItemOrder(scoreTerm.getItemOrder());
+            scoreTermsVO.setItemFullMarks(scoreTerm.getItemFullMarks());
+            for(EvaluationValue evaluationValue : valueList){
+                if(evaluationValue.getEvaluationItemId()==scoreTerm.getId()){
+                    scoreTermsVO.addValues(evaluationValue);
+                }
+            }
+            list.add(scoreTermsVO);
+        }
+        return list;
     }
 
 }

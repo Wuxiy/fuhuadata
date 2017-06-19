@@ -1,6 +1,7 @@
 package com.fuhuadata.vo.Supplier;
 
 import com.fuhuadata.domain.mybatis.supplier.EvaluationValue;
+import com.fuhuadata.domain.mybatis.supplier.WarehouseEvaluationScoreRelation;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
