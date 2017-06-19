@@ -43,19 +43,24 @@ public class ForwardingScoreServiceImpl extends BaseServiceImpl<ForwardingScore,
     public int saveScore(ScoreVO<ForwardingScore, ForwardingEvaluationScoreRelation> scoreVO) {
         Integer scoreId=null;
         //保存月度表
-        if(scoreVO.getScore()!=null&&scoreVO.getScore().getId()!=null){
-            scoreVO.getScore().setLastmodifyUserId(LoginUtils.getLoginId());
-            scoreVO.getScore().setLastmodifyUserName(LoginUtils.getLoginName());
-            scoreVO.getScore().setEvaluateTime(new Date());
-            scoreVO.getScore().setModifyTime(new Date());
+        ForwardingScore score = scoreVO.getScore();
+        if(score==null){
+            scoreVO.getScore().setTotalScore(score.getWarehouseScore().add(score.getComplaintsScore().add(score.getPriceScore()).add(score.getServiceScore())));
+        }
+        if(score!=null&&score.getId()!=null){
+            score.setLastmodifyUserId(LoginUtils.getLoginId());
+            score.setLastmodifyUserName(LoginUtils.getLoginName());
+            score.setEvaluateTime(new Date());
+            score.setModifyTime(new Date());
             updateSelective(scoreVO.getScore());
-            scoreId = scoreVO.getScore().getId();
-        }else if(scoreVO.getScore()!=null&&scoreVO.getScore().getId()==null){
-            scoreVO.getScore().setCreateUserId(LoginUtils.getLoginId());
-            scoreVO.getScore().setCreateUserName(LoginUtils.getLoginName());
-            scoreVO.getScore().setLastmodifyUserId(LoginUtils.getLoginId());
-            scoreVO.getScore().setLastmodifyUserName(LoginUtils.getLoginName());
-            scoreId = saveSelective(scoreVO.getScore());
+            scoreId = score.getId();
+        }else if(score!=null&&score.getId()==null){
+            score.setCreateUserId(LoginUtils.getLoginId());
+            score.setCreateUserName(LoginUtils.getLoginName());
+            score.setLastmodifyUserId(LoginUtils.getLoginId());
+            score.setLastmodifyUserName(LoginUtils.getLoginName());
+
+            scoreId = saveSelective(score);
         }
         //评分详情制月度表id
         for(ForwardingEvaluationScoreRelation fesr : scoreVO.getList()){

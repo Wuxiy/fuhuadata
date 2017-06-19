@@ -43,6 +43,9 @@ public class WarehouseScoreServiceImpl extends BaseServiceImpl<WarehouseScore,In
     @Transient
     public int saveScore(ScoreVO<WarehouseScore, WarehouseEvaluationScoreRelation> scoreVO) {
         Integer scoreId=null;
+        if(scoreVO.getScore().getTotalScore()==null){
+            scoreVO.getScore().setTotalScore(scoreVO.getScore().getWarehouseScore().add(scoreVO.getScore().getAccuracyScore()).add(scoreVO.getScore().getCheckStockScore().add(scoreVO.getScore().getPackageScore().add(scoreVO.getScore().getTimeScore()))));
+        }
         if(scoreVO.getScore()!=null&&scoreVO.getScore().getId()!=null){
             scoreVO.getScore().setLastmodifyUserId(LoginUtils.getLoginId());
             scoreVO.getScore().setLastmodifyUserName(LoginUtils.getLoginName());

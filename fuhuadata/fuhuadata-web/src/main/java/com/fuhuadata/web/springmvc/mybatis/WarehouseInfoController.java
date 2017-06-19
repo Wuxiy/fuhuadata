@@ -73,8 +73,8 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
      */
     @RequestMapping(value = "/intoWarehouseGrade", method = RequestMethod.GET)
     @SystemLogAnnotation(module = "supplier-warehouse",methods = "intoWarehouseGrade")
-    public ModelAndView intoWarehouseGrade(int scoreId,int warehouseId) {
-        return new ModelAndView("supplierInformation/warehouseGrade").addObject("warehouseId",warehouseId).addObject("scoreId",scoreId);
+    public ModelAndView intoWarehouseGrade(int warehouseId) {
+        return new ModelAndView("supplierInformation/warehouseGrade").addObject("warehouseId",warehouseId);
     }
 
     /**
