@@ -22,6 +22,16 @@ public class SyncContract implements Serializable {
     private BigDecimal grossProfit;
     //同步时间
     private String syncTime;
+    //外销合同号
+    private String billcode;
+
+    public String getBillcode() {
+        return billcode;
+    }
+
+    public void setBillcode(String billcode) {
+        this.billcode = billcode;
+    }
 
     public Integer getId() {
         return id;
