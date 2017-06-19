@@ -68,6 +68,16 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
         return new ModelAndView("supplierInformation/warehouseOpperation").addObject("warehouseId",id);
     }
     /**
+     * 进入仓库月度评分
+     * @return
+     */
+    @RequestMapping(value = "/intoWarehouseGrade", method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "supplier-warehouse",methods = "intoWarehouseGrade")
+    public ModelAndView intoWarehouseGrade(int scoreId,int warehouseId) {
+        return new ModelAndView("supplierInformation/warehouseGrade").addObject("warehouseId",warehouseId).addObject("scoreId",scoreId);
+    }
+
+    /**
      * 进入仓库订单记录
      * @return
      */
