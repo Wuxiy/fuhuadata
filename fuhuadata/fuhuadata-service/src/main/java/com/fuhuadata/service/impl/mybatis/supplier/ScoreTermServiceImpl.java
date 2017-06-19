@@ -3,9 +3,11 @@ package com.fuhuadata.service.impl.mybatis.supplier;
 import com.fuhuadata.dao.mapper.supplier.ScoreTermMapper;
 import com.fuhuadata.domain.mybatis.supplier.EvaluationValue;
 import com.fuhuadata.domain.mybatis.supplier.ScoreTerm;
+import com.fuhuadata.domain.mybatis.supplier.WarehouseEvaluationScoreRelation;
 import com.fuhuadata.service.impl.mybatis.BaseServiceImpl;
 import com.fuhuadata.service.mybatis.supplier.EvaluationValueService;
 import com.fuhuadata.service.mybatis.supplier.ScoreTermService;
+import com.fuhuadata.service.mybatis.supplier.WarehouseEvaluationScoreRelationService;
 import com.fuhuadata.vo.Supplier.ScoreTermsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,9 @@ public class ScoreTermServiceImpl extends BaseServiceImpl<ScoreTerm,Integer> imp
 
     @Autowired
     private EvaluationValueService evaluationValueService;
+
+    @Autowired
+    private WarehouseEvaluationScoreRelationService warehouseEvaluationScoreRelationService;
 
     /**
      * 货代评分
@@ -88,9 +93,10 @@ public class ScoreTermServiceImpl extends BaseServiceImpl<ScoreTerm,Integer> imp
      * @return
      */
     @Override
-    public List<ScoreTermsVO> warehouseScoreItemIndex() {
+    public List<ScoreTermsVO> warehouseScoreItemIndex(int scoreId) {
         List<ScoreTerm> warehouseScoreItem = getScoreTermMapper().WarehouseScoreItem();
         List<EvaluationValue> valueList = evaluationValueService.ListEvaluetionValueByType(2);
+        List<WarehouseEvaluationScoreRelation> scoreList = warehouseEvaluationScoreRelationService.listByScoreId(scoreId);
         List<ScoreTermsVO> list = new ArrayList<>();
         //首层分值
         for(ScoreTerm scoreTerm:warehouseScoreItem) {
@@ -100,6 +106,13 @@ public class ScoreTermServiceImpl extends BaseServiceImpl<ScoreTerm,Integer> imp
             scoreTermsVO.setItemOrder(scoreTerm.getItemOrder());
             scoreTermsVO.setItemFullMarks(scoreTerm.getItemFullMarks());
             for(EvaluationValue evaluationValue : valueList){
+                if(scoreList!=null&&scoreList.size()>0){
+                    for(WarehouseEvaluationScoreRelation warehouseEvaluationScoreRelation:scoreList){
+                        if(warehouseEvaluationScoreRelation.getEvaluationValueId()==evaluationValue.getId()){
+                            evaluationValue.setWarehouseEvaluationScoreRelation(warehouseEvaluationScoreRelation);
+                        }
+                    }
+                }
                 if(evaluationValue.getEvaluationItemId()==scoreTerm.getId()){
                     scoreTermsVO.addValues(evaluationValue);
                 }

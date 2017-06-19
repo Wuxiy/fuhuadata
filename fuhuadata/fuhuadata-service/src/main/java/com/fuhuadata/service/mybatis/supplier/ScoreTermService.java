@@ -22,5 +22,5 @@ public interface ScoreTermService extends BaseService<ScoreTerm,Integer> {
      */
     List<ScoreTermsVO> evaluationIndexItem(Integer type);
 
-    List<ScoreTermsVO> warehouseScoreItemIndex();
+    List<ScoreTermsVO> warehouseScoreItemIndex(int scoreId);
 }

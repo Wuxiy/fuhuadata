@@ -31,6 +31,12 @@ public class EvaluationValue extends BaseEntity<Integer> {
     private BigDecimal value;
 
     /**
+     * 仓库评分详情
+     */
+    @Transient
+    private WarehouseEvaluationScoreRelation warehouseEvaluationScoreRelation;
+
+    /**
      * @return id
      */
     public Integer getId() {
@@ -106,5 +112,13 @@ public class EvaluationValue extends BaseEntity<Integer> {
      */
     public void setValue(BigDecimal value) {
         this.value = value;
+    }
+
+    public WarehouseEvaluationScoreRelation getWarehouseEvaluationScoreRelation() {
+        return warehouseEvaluationScoreRelation;
+    }
+
+    public void setWarehouseEvaluationScoreRelation(WarehouseEvaluationScoreRelation warehouseEvaluationScoreRelation) {
+        this.warehouseEvaluationScoreRelation = warehouseEvaluationScoreRelation;
     }
 }

@@ -240,6 +240,8 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
           if(scoreList!=null&&scoreList.size()>0) {
               scoreInfoVO.setScoreList(scoreList);
           }
+            ForwardingScore forwardingScore = forwardingScoreService.get(scoreId);
+          scoreInfoVO.setForwardingScore(forwardingScore);
           result.addDefaultModel("score",scoreInfoVO);
         }catch(Exception e){
             log.error("获取评分项及分值选项",e);

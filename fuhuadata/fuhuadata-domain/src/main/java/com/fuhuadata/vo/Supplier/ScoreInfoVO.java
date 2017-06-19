@@ -1,5 +1,7 @@
 package com.fuhuadata.vo.Supplier;
 
+import com.fuhuadata.domain.mybatis.supplier.ForwardingScore;
+
 import java.util.List;
 
 /**
@@ -11,6 +13,8 @@ public class ScoreInfoVO<T> {
     private List<T> scoreList;
     /**评分项**/
     private List<ScoreTermsVO> terms;
+    /**评分总情**/
+    private ForwardingScore forwardingScore;
 
 
     public List<T> getScoreList() {
@@ -27,5 +31,13 @@ public class ScoreInfoVO<T> {
 
     public void setTerms(List<ScoreTermsVO> terms) {
         this.terms = terms;
+    }
+
+    public ForwardingScore getForwardingScore() {
+        return forwardingScore;
+    }
+
+    public void setForwardingScore(ForwardingScore forwardingScore) {
+        this.forwardingScore = forwardingScore;
     }
 }
