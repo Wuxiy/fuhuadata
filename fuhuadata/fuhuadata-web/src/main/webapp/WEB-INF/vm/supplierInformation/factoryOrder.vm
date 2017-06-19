@@ -1,10 +1,262 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="nav-deputy shadow-out clearfix">
+    #factoryTab('订单记录',$!{factoryId})
+    #breadcrumb()
+</div>
+<div class="dashboard-wrapper">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="pull-right panel-heading-btn btn-group">
+                        <a class="btn btn-xs btn-default btn-primary active" href="" lang="zh">采购合同</a>
+                        <a class="btn btn-xs btn-default btn-primary" href="" lang="zh">原药合同</a>
+                    </div>
+                    <h3 class="panel-title" lang="zh">产品信息</h3>
+                </div>
+                <div class="panel-body clearfix">
+                    <!--表格-->
+                    <form class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon" lang="zh">外销合同号</span>
+                            <input class="form-control" name="" type="text">
+                            <span class="input-group-addon" lang="zh">采购合同号</span>
+                            <input class="form-control" name="" type="text">
+                            <span class="input-group-addon" lang="zh">原粉合同号</span>
+                            <input class="form-control" name="" type="text">
+                            <span class="input-group-addon" lang="zh">外销客户</span>
+                            <input class="form-control" name="" type="text">
+                            <span class="input-group-addon">日期</span>
+                            <select class="form-control" name="">
+                                <option value="">——选择日期类型——</option>
+                                <option value="">采购合同时间</option>
+                                <option value="">交货时间</option>
+                            </select>
+                            <span class="input-group-addon" lang="zh">开始时间</span>
+                            <input class="form-control" name="" type="date">
+                            <span class="input-group-addon" lang="zh">结束时间</span>
+                            <input class="form-control" name="" type="date">
+                            <div class="input-group-btn">
+                                <button class="btn btn-xs btn-default" type="reset" accesskey="r">重置</button>
+                            </div>
+                            <div class="input-group-btn">
+                                <button class="btn btn-xs btn-primary" type="button" accesskey="s">搜索</button>
+                            </div>
+                        </div>
+                    </form>
+                    <table class="table text-center table-condensed table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th class="text-center" lang="zh">编号</th>
+                            <th class="text-center" lang="zh">采购合同号</th>
+                            <th class="text-center" lang="zh">合同名称</th>
+                            <th class="text-center" lang="zh">采购合同时间</th>
+                            <th class="text-center" lang="zh">交货时间</th>
+                            <th class="text-center" lang="zh">币种</th>
+                            <th class="text-center" lang="zh">总数量</th>
+                            <th class="text-center" lang="zh">价税合计</th>
+                            <th class="text-center" lang="zh">备注</th>
+                            <th class="text-center" lang="zh">服务评价</th>
+                        </tr>
+                        </thead>
+                        <tbody id="order_content">
+                        </tbody>
+                    </table>
+                    <div class="pagination" id="pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+## 详情modal
+<div class="modal fade in" id="details_modal" tabindex="-1" role="dialog" data-backdrop="false" aria-hidden="true" >
+    <div class="modal-dialog" style="width: 400px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body">
+                <hr>
+                <table class="table text-center table-condensed table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th class="text-center" lang="zh">编号</th>
+                        <th class="text-center" lang="zh">物料编码</th>
+                        <th class="text-center" lang="zh">单位</th>
+                        <th class="text-center" lang="zh">主数量</th>
+                        <th class="text-center" lang="zh">单价</th>
+                        <th class="text-center" lang="zh">总价</th>
+                        <th class="text-center" lang="zh">外销客户名称</th>
+                        <th class="text-center" lang="zh">外销合同号</th>
+                        <th class="text-center" lang="zh">备注</th>
+                    </tr>
+                    </thead>
+                    <tbody id="order_details"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<input id="cvendor_id" type="hidden" value="$!{factoryId}"> ## 供应商id
+<script>
+    (function () {
+        var cvendorId = $('#cvendor_id').val(),
+                table = {
+                    total:0,
+                    pageSize:1,
+                    pageNum:0,
+                    pagination:$('#pagination'),
+                    container:$('#order_content'),
+                    setPagination:{
+                        num_edge_entries:3,
+                        num_display_entries:5,
+                        callback:function (pageNum,jq) {
+                            $.ajax({
+                                url:basePath + '/biz/buy/contracts',
+                                dataType:'json',
+                                contentType:'application/json',
+                                data:{
+                                    cvendorid:cvendorId,
+                                    pageSize:table.pageSize,
+                                    index:pageNum+1
+                                },
+                                async:true,
+                                type:'GET'
+                            }).done(function(res){
 
-</body>
-</html>
+                                if (res.code===1) { // 请求是否成功
+
+                                    table.renderList(res.data.list, (res.data.pageNum-1)*res.data.pageSize);
+                                }
+                            });
+                        }
+                    },
+                    thisRow:'',
+                    init:function () {
+                        $.ajax({
+                            url:basePath + '/biz/buy/contracts',
+                            dataType:'json',
+                            contentType:'application/json',
+                            data:{
+                                cvendorid:cvendorId,
+                                pageSize:table.pageSize,
+                                index:1
+                            },
+                            async:true,
+                            type:'GET'
+                        }).done(function (res) {
+                            if (res.code===1) { // 请求是否成功
+
+                                if(table.total!==res.data.total){ // 是否需要渲染分页
+
+                                    table.total = res.data.total;
+                                    table.renderPagination();
+                                }
+                                table.renderList(res.data.list, (res.data.pageNum-1)*res.data.pageSize);
+                            }
+                        });
+
+                        this.container.on('click.show', 'a[name]', this.clickHandler);
+                    },
+                    renderList:function (list, count) {
+                        var tpl = '',
+                            count = count;
+                        if (Array.isArray(list)) {
+                            $.each(list, function(i, item){
+                                tpl +=
+                                    '<tr>' +
+                                    '<td>'+(++count)+'</td>'+
+                                    '<td><a data-id="'+item.pkCtPu+'" href="#">'+table.hasField(item.vbillcode)+'</a></td>'+
+                                    '<td>'+table.hasField(item.ctname)+'</td>'+
+                                    '<td>'+table.hasField(item.subscribedate)+'</td>'+
+                                    '<td>'+table.hasField(item.actualinvalidate)+'</td>'+
+                                    '<td>'+table.hasField(item.totalNumber)+'</td>'+
+                                    '<td>'+table.hasField(item.ntotalorigmny)+'</td>'+
+                                    '<td>'+table.hasField(item.remark)+'</td>'+
+                                    '<td>'+table.hasField()+'</td>'+
+                                    '<td>'+table.hasField()+'</td>'+
+                                    '</tr>';
+                            });
+                        }else {
+                            tpl += '<tr><td colspan="9">暂无数据</td></tr>'
+                        }
+                        this.container.html(tpl);
+                    },
+                    renderPagination:function () {
+                        this.setPagination.items_per_page = this.pageSize;
+                        this.pagination.pagination(this.total,this.setPagination);
+                    },
+                    hasField:function (field) {
+
+                        if (field===null||field===undefined){
+                            return '';
+                        }else {
+                            return field;
+                        }
+                    },
+                    clickHandler:function (e) {
+                        var id=$(this).data('id');
+
+                        if (table.thisRow!=id) {
+
+                            table.thisRow = $(this).data('id');
+                            modal.init();
+                        }else {
+
+                            modal.dom.modal('show');
+                        }
+                    }
+                },
+                modal = {
+                    dom:$('#details_modal'),
+                    container:$('#order_details'),
+                    init:function (id) {
+                        var self = this;
+                        $.ajax({
+                            url:basePath + '',
+                            dataType:'json',
+                            contentType:'application/json',
+                            data:{
+
+                            },
+                            type:'GET'
+                        }).done(function (res) {
+                            if (res.code===1) { // 请求是否成功
+
+                                if(res.data.list){
+                                    self.renderList(res.data.list);
+                                    self.dom.modal('show');
+                                }
+
+                            }
+                        });
+                    },
+                    renderList:function (list) {
+                        var tpl = '';
+
+                        if (Array.isArray(list)) {
+
+                            $.each(list, function(i, item){
+                                tpl +=
+                                        '<tr>' +
+                                        '<td>'+(i+1)+'</td>'+
+                                        '<td><a href="#">'+table.hasField(item.pkMaterial)+'</a></td>'+
+                                        '<td>'+table.hasField(item.cunit)+'</td>'+
+                                        '<td>'+table.hasField(item.nnum)+'</td>'+
+                                        '<td>'+table.hasField(item.price)+'</td>'+
+                                        '<td>'+table.hasField(item.totalPrice)+'</td>'+
+                                        '<td>'+table.hasField(item.exportCtClientName)+'</td>'+
+                                        '<td><a href="'+basePath+table.hasField(item.exportCtPk)+'">'+table.hasField(item.exportCtCode)+'</a></td>'+
+                                        '<td>'+table.hasField(item.remark)+'</td>'+
+                                        '</tr>';
+                            });
+                        }else {
+                            tpl += '<tr><td colspan="9">暂无数据</td></tr>';
+                        }
+                        this.container.html(tpl);
+                    }
+                }
+        table.init();
+    })();
+</script>

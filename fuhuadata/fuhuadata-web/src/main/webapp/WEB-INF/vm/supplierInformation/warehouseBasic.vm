@@ -2,7 +2,7 @@
 <div class="clearfix content shadow-out">
     <!--副导航-->
     <div class="nav-deputy shadow-out clearfix">
-        #forwarderNav(1)
+        #warehouseTab('基本信息',$!{warehouseId})
         #breadcrumb()
     </div>
     <!--表格容器-->
@@ -12,12 +12,12 @@
                 <!--基本信息-->
                 <div class="panel panel-default view-HD-lg" id="panel">
                     <div class="panel-heading">
-                        <button class="btn btn-xs btn-primary panel-heading-btn pull-right" id="edit" data-view="editHide" type="button" lang="zh">
+                        <button class="btn btn-xs btn-primary panel-heading-btn pull-right" name="edit" data-view="editHide" type="button" lang="zh" id="edit">
                             编辑
                         </button>
-                        <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden" data-view="editView">
-                            <button class="btn" id="cancel" type="button" lang="zh">取消</button>
-                            <button class="btn btn-primary" id="save" type="button" lang="zh">保存</button>
+                        <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right">
+                            <button class="btn btn-default hidden" name="cancel" type="button" lang="zh" id="cancel">取消</button>
+                            <button class="btn btn-primary hidden" name="save" type="button" lang="zh" id="save">保存</button>
                         </div>
                         <h3 class="panel-title" lang="zh">基本信息</h3>
                     </div>
@@ -27,7 +27,7 @@
                                 <input name="id" type="text">
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-xs-1" lang="zh">仓库编码</label>
+                                <label class="control-label col-xs-1" lang="zh">仓库编号</label>
                                 <div class="col-xs-2">
                                     <input class="form-control" id="code" data-control="off" type="text" disabled/>
                                 </div>
@@ -67,29 +67,29 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-xs-1" lang="zh">仓储面积</label>
+                                <label class="control-label col-xs-1" lang="zh">仓储面积<sup class="not-null">*</sup></label>
                                 <div class="col-xs-2">
-                                    <input class="form-control" id="registerfund" data-control="off" type="text" disabled/>
+                                    <input class="form-control notnull" id="storageArea" data-control="off" type="text" disabled/>
                                 </div>
-                                <label class="control-label col-xs-1" for="supprop" lang="zh">是否危险品仓库<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <label class="control-label col-xs-1" for="supprop" lang="zh">是否危险品仓库<sup class="not-null">*</sup></label>
                                 <div class="col-xs-2">
-                                    <select class="form-control" id="isDangers" data-control="off" disabled>
+                                    <select class="form-control notnull" id="isDangers" data-control="off" disabled>
                                         <option value="0">否</option>
                                         <option value="1">是</option>
                                     </select>
                                 </div>
-                                <label class="control-label col-xs-1" for="supprop" lang="zh">是否做内装进港<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <label class="control-label col-xs-1" for="supprop" lang="zh">是否做内装进港<sup class="not-null">*</sup></label>
                                 <div class="col-xs-2">
-                                    <select class="form-control" id="isInsideEntrance" data-control="off" disabled>
+                                    <select class="form-control notnull" id="isInsideEntrance" data-control="off" disabled>
                                         <option value="0">否</option>
                                         <option value="1">是</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-xs-1" lang="zh">仓库地址</label>
+                                <label class="control-label col-xs-1" lang="zh">仓库地址<sup class="not-null">*</sup></label>
                                 <div class="col-xs-8">
-                                    <textarea class="form-control" id="storaddr" data-control="off" rows="2" disabled></textarea>
+                                    <textarea class="form-control notnull" id="storaddr" data-control="off" rows="2" disabled></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -125,10 +125,18 @@
     </div>
 </div>
 
+<input id="warehouseId" type="hidden" value="$!{warehouseId}">
+
 <script type="text/javascript" language="JavaScript">
+    var id = $('#warehouseId').val();
+
     $(document).ready(function(){
+        getBasic();
+    })
+
+    function getBasic(){
         jQuery.ajax({
-            url:basePath + '/supplier/warehouse/warehouseInfo?id=1',
+            url:basePath + '/supplier/warehouse/warehouseInfo?id=' + id,
             type:'GET'
         }).done(function(result){
             if(result.code == 1){
@@ -136,13 +144,12 @@
                 render(Resultdata);
             }
         })
-    })
+    }
 
     function render(data){
-        console.log(data);
         $('#code').val(data.code);//仓库编码
         $('#pkOrg').val(data.pkOrg);//所属库存组织
-        $('#name').val(data.name);//所属库存组织
+        $('#name').val(data.name);//企业全称
         $('#supprop').val(data.supprop);// 类型
 
         $('#creditCode').val(data.creditCode);// 社会信用代码
@@ -150,7 +157,7 @@
         $('#principalcode').val(data.principalcode);//负责人
         $('#phone').val(data.phone);//电话号码
 
-        /*$('#registerfund').val(data.registerfund);*///仓储面积
+        $('#storageArea').val(data.storageArea);//仓储面积
         $('#isDangers').val(data.isDangers);//是否危险品仓库
         $('#isInsideEntrance').val(data.isInsideEntrance);//是否内装进港
 
@@ -160,5 +167,77 @@
         $('#combinedScoring').val(data.combinedScoring);//综合评分
         $('#createUserName').val(data.createUserName);//创建者姓名
         $('#createTime').val(data.createTime);//创建时间
+    }
+
+    $('#edit').click(function(){
+        $(this).addClass('hidden');
+        $('#cancel').removeClass('hidden');
+        $('#save').removeClass('hidden');
+
+        $('.notnull').attr('disabled',false);
+    })
+
+    $('#cancel').click(function(){
+        var msg = '确定取消保存吗？';
+
+        if(confirm(msg)){
+            $(this).addClass('hidden');
+            $('#edit').removeClass('hidden');
+            $('#save').addClass('hidden');
+
+            $('.notnull').attr('disabled',true);
+        }
+
+    })
+
+    $('#save').click(function(){
+        var isup = true;
+        var msg = '确定保存吗？';
+
+        var notnull = $('.notnull');
+        notnull.each(function () {
+            var val = $(this).val();
+            if(val == ''||val == null){
+                alert('请完善表单!');
+                return false;
+            }
+        });
+
+        if(isup){
+            if(confirm(msg)){
+                jQuery.ajax({
+                    url:basePath + '/supplier/warehouse/updateWarehouseInfo',
+                    type:'POST',
+                    contentType:"application/json",
+                    data:getdata()
+                }).done(function(result){
+                    console.log(result);
+                    if(result.code == 1){
+                        alert('保存成功！');
+                        getBasic();
+
+                    }else{
+                        alert('保存失败！');
+                    }
+                })
+            }
+            $(this).addClass('hidden');
+            $('#edit').removeClass('hidden');
+            $('#cancel').addClass('hidden');
+
+            $('.notnull').attr('disabled',true);
+        }
+
+    })
+
+    function getdata(){
+        var data = {
+            id:id,
+            isDangers:$('#isDangers').val(),
+            isInsideEntrance:$('#isInsideEntrance').val(),
+            supprop:$('#supprop').val(),
+            storageArea:$('#storageArea').val()
+        }
+        return JSON.stringify(data);
     }
 </script>

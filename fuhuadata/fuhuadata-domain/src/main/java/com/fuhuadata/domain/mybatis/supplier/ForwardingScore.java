@@ -1,5 +1,6 @@
 package com.fuhuadata.domain.mybatis.supplier;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fuhuadata.domain.mybatis.BaseEntity;
 
 import java.math.BigDecimal;
@@ -21,8 +22,8 @@ public class ForwardingScore extends BaseEntity<Integer> {
     /**
      * 货代id
      */
-    @Column(name = "freight_info_id")
-    private Integer freightInfoId;
+    @Column(name = "freightforwarding_id")
+    private Integer forwardingId;
 
     /**
      * 月份时间
@@ -81,6 +82,7 @@ public class ForwardingScore extends BaseEntity<Integer> {
      * 评价时间
      */
     @Column(name = "evaluate_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date evaluateTime;
 
     /**
@@ -123,12 +125,14 @@ public class ForwardingScore extends BaseEntity<Integer> {
      * 创建时间
      */
     @Column(name = "create_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     /**
      * 修改时间
      */
     @Column(name = "modify_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date modifyTime;
 
     /**
@@ -149,23 +153,6 @@ public class ForwardingScore extends BaseEntity<Integer> {
         this.id = id;
     }
 
-    /**
-     * 获取货代id
-     *
-     * @return freight_info_id - 货代id
-     */
-    public Integer getFreightInfoId() {
-        return freightInfoId;
-    }
-
-    /**
-     * 设置货代id
-     *
-     * @param freightInfoId 货代id
-     */
-    public void setFreightInfoId(Integer freightInfoId) {
-        this.freightInfoId = freightInfoId;
-    }
 
     /**
      * 获取月份时间
@@ -489,5 +476,13 @@ public class ForwardingScore extends BaseEntity<Integer> {
      */
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
+    }
+
+    public Integer getForwardingId() {
+        return forwardingId;
+    }
+
+    public void setForwardingId(Integer forwardingId) {
+        this.forwardingId = forwardingId;
     }
 }

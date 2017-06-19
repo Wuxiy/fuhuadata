@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.supplier.ProduceFactoryProductAddrMapper">
+
+    <resultMap id="BaseResultMap" type="com.fuhuadata.domain.supplier.ProduceFactoryProductAddr">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="product_id" jdbcType="INTEGER" property="productId"/>
+        <result column="addr" jdbcType="VARCHAR" property="addr"/>
+        <result column="capacity" jdbcType="VARCHAR" property="capacity"/>
+        <result column="capacity_unit" jdbcType="VARCHAR" property="capacityUnit"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    </resultMap>
+
+    <!-- s_factory_product_addr 缩写 pfpa -->
+    <sql id="BaseColumns">
+        pfpa.addr,
+        pfpa.capacity,
+        pfpa.capacity_unit,
+        pfpa.id,
+        pfpa.product_id,
+        pfpa.remark
+    </sql>
+
+    <sql id="FromTable">
+        from s_factory_product_addr pfpa
+    </sql>
+
+    <select id="listProductAddrs" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumns"/>
+        <include refid="FromTable"/>
+        where pfpa.product_id=#{productId}
+    </select>
+
+</mapper>

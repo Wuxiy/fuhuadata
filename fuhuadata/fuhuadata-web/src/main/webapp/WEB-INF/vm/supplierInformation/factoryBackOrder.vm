@@ -1,10 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="nav-deputy shadow-out clearfix">
+    #factoryTab('延期交货记录',1)
+    #breadcrumb()
+</div>
+<div class="dashboard-wrapper">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" lang="zh">延期交货记录</h3>
+                </div>
+                <div class="panel-body clearfix">
+                    <!--表格-->
+                    <form class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon" lang="zh">采购合同号</span>
+                            <input class="form-control" name="" type="text">
+                            <span class="input-group-addon" lang="zh">延期交货原因</span>
+                            <input class="form-control" name="" type="text">
+                            <span class="input-group-addon" lang="zh">处理结果</span>
+                            <input class="form-control" name="" type="text">
+                            <span class="input-group-addon" lang="zh">外销客户</span>
+                            <input class="form-control" name="" type="text">
+                            <span class="input-group-addon">日期</span>
+                            <select class="form-control" name="">
+                                <option value="">——选择日期类型——</option>
+                                <option value="">应交货时间</option>
+                                <option value="">实际交货时间</option>
+                            </select>
+                            <span class="input-group-addon" lang="zh">开始时间</span>
+                            <input class="form-control" name="" type="date">
+                            <span class="input-group-addon" lang="zh">结束时间</span>
+                            <input class="form-control" name="" type="date">
+                            <div class="input-group-btn">
+                                <button class="btn btn-xs btn-default" type="reset" accesskey="r">重置</button>
+                            </div>
+                            <div class="input-group-btn">
+                                <button class="btn btn-xs btn-primary" type="button" accesskey="s">搜索</button>
+                            </div>
+                        </div>
+                    </form>
+                    <table class="table text-center table-condensed table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th class="text-center" lang="zh">编号</th>
+                            <th class="text-center" lang="zh">采购合同号</th>
+                            <th class="text-center" lang="zh">合同金额(万元)</th>
+                            <th class="text-center" lang="zh">应交货日期</th>
+                            <th class="text-center" lang="zh">实际交货日期</th>
+                            <th class="text-center" lang="zh">延期交货（天）</th>
+                            <th class="text-center" lang="zh">延期交货原因</th>
+                            <th class="text-center" lang="zh">处理结果</th>
+                            <th class="text-center" lang="zh">经办人</th>
+                            <th class="text-center" lang="zh">组别</th>
+                        </tr>
+                        </thead>
+                        <tbody id="factory_back_order">
+                        </tbody>
+                    </table>
+                    <div class="pagination" id="pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-</body>
-</html>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/commons/commons.js"></script>

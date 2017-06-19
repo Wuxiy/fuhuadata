@@ -204,6 +204,7 @@ $(document).on('click','#otherAdd',function(){
 function updateInfo() {
     var data = {
         "customerSubcompanyInfo":{
+            "customerId":$('#customerId').val(),
             "customerSubId":$('#fullName').attr('data-id'),
             "fullName":$('#fullName').val(),
             "shortName":$('#shortName').val(),

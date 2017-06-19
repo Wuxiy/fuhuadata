@@ -1,0 +1,40 @@
+<div class="nav-deputy shadow-out clearfix">
+    #forwardingWarehouse('货代信息')
+    #breadcrumb()
+</div>
+<div class="dashboard-wrapper">
+    <div class="row">
+        <div class="col-xs-12 view-HD-lg">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" lang="zh">货代信息</h3>
+                </div>
+                <div class="panel-body clearfix">
+                    <!--表格-->
+                    <table class="table text-center table-condensed table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th class="text-center" lang="zh">编号</th>
+                            <th class="text-center" lang="zh">货代编号</th>
+                            <th class="text-center" lang="zh">企业全称</th>
+                            <th class="text-center" lang="zh">企业简称</th>
+                            <th class="text-center" lang="zh">类型</th>
+                            <th class="text-center" lang="zh">运输方式</th>
+                            <th class="text-center" lang="zh">开始合作时间</th>
+                            <th class="text-center" lang="zh">合作时间（月）</th>
+                            <th class="text-center" lang="zh">综合评分</th>
+                            <th class="text-center" lang="zh">联系人</th>
+                            <th class="text-center" lang="zh">联系电话</th>
+                            <th class="text-center" lang="zh">备注</th>
+                        </tr>
+                        </thead>
+                        <tbody id="forwarding_list"></tbody>
+                    </table>
+                    <div id="pagination" class="pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/supplierInformation/forwardingList.js"></script>

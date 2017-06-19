@@ -26,6 +26,48 @@
             }
         }
     };
+    $.fn.creatFCTree = function(url) {
+        var tree = this;
+        tree.html('');
+        var treeRoot = $('<ul class="tree-root"></ul>');
+        $.ajax({
+            url:url,
+            type:'GET',
+            async:false    //这里是同步请求
+        }).done(function(result){
+            creatFCBranch(result.data,treeRoot);
+            tree.append(treeRoot);
+        });
+        function creatFCBranch(getData,parent){
+            if(getData instanceof Array && getData.length>0){
+                var data = getData[0].nodes[1].nodes;
+                data.splice(1,1);
+                data.splice(2,3);
+                $.each(data,function(n,item){
+                    var li = $('<li id="'+item.cid+'"></li>');
+                    if( item.nodes!=null && item.nodes.length > 0) {
+                        $(li).append('<span class="branch-node" data-toggle="collapse" data-target="#t'+item.cid+'"></span><a><span class="leaf"></span>'+item.cname+'</a>').append('<ul id="t'+item.cid+'" class="tree-branch collapse in"></ul>').appendTo(parent);
+                        creatFCTBranch(item.nodes, $(li).children("ul.tree-branch"));
+                    }else{
+                        $(li).append('<span class="branch"></span><a class="cNode"><span class="leaf"></span>'+item.cname+'</a>').appendTo(parent);
+                    }
+                })
+            }
+        }
+        function creatFCTBranch(getData,parent){
+            if(getData instanceof Array && getData.length>0){
+                $.each(getData,function(n,item){
+                    var li = $('<li id="'+item.cid+'"></li>');
+                    if( item.nodes!=null && item.nodes.length > 0) {
+                        $(li).append('<span class="branch-node" data-toggle="collapse" data-target="#t'+item.cid+'"></span><a><span class="leaf"></span>'+item.cname+'</a>').append('<ul id="t'+item.cid+'" class="tree-branch collapse in"></ul>').appendTo(parent);
+                        creatBranch(item.nodes, $(li).children("ul.tree-branch"));
+                    }else{
+                        $(li).append('<span class="branch"></span><a class="cNode"><span class="leaf"></span>'+item.cname+'</a>').appendTo(parent);
+                    }
+                })
+            }
+        }
+    };
     $.fn.bindClickForCusArea = function(obj){
         //给树形菜单添加点击事件
         this.on('click','li[id]>a',function(e){

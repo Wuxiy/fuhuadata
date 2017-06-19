@@ -440,6 +440,7 @@
             $('button[name="search"]').attr('disabled',false);
             $('[data-target="on"]').removeClass('disabled');
             $('.isdisabled').attr('disabled',false);
+            $('#purchasePrice').attr('disabled',true);
         }
 
         if(editId == 1){

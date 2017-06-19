@@ -1,0 +1,247 @@
+<div class="clearfix content shadow-out">
+    <!--副导航-->
+    <div class="nav-deputy shadow-out clearfix">
+        #forwardingTab('基本信息',$!{forwardingId})
+        #breadcrumb()
+    </div>
+    <!--表格容器-->
+    <div class="dashboard-wrapper">
+        <div class="row">
+            <div class="col-xs-12">
+                <!--基本信息-->
+                <div class="panel panel-default view-HD-lg" id="panel">
+                    <div class="panel-heading">
+                        <button class="btn btn-xs btn-primary panel-heading-btn pull-right" name="edit" data-view="editHide" type="button" lang="zh">
+                            编辑
+                        </button>
+                        <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden" data-view="editView">
+                            <button class="btn btn-default" name="cancel" type="button" lang="zh">取消</button>
+                            <button class="btn btn-primary" name="save" type="button" lang="zh">保存</button>
+                        </div>
+                        <h3 class="panel-title" lang="zh">基本信息</h3>
+                    </div>
+                    <div class="panel-body clearfix">
+                        <form class="form-horizontal" id="factory_info">
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="code" lang="zh">货代代码</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="code" type="text" disabled/>
+                                </div>
+                                <label class="control-label col-xs-1" for="pkSupplierclass" lang="zh">所属组织</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="pkSupplierclass" type="text" disabled>
+                                </div>
+                                <label class="control-label col-xs-1" for="name" lang="zh">企业全称</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="name" type="text" disabled/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="shortname" lang="zh">企业简称</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="shortname" type="text" disabled/>
+                                </div>
+                                <label class="control-label col-xs-1" for="supprop" lang="zh">类型</label>
+                                <div class="col-xs-2">
+                                    <select class="form-control" name="supprop" disabled>
+                                        <option value="0" lang="zh">常规</option>
+                                        <option value="1" lang="zh">非常规</option>
+                                        <option value="2" lang="zh">自定</option>
+                                    </select>
+                                </div>
+                                <label class="control-label col-xs-1" for="creditCode" lang="zh">社会用信用代码</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="creditCode" data-control="editOn" data-bind="localData" type="text" disabled/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="registerfund" lang="zh">注册资金</label>
+                                <div class="col-xs-2">
+                                    <div class="input-group">
+                                        <input class="form-control" name="registerfund" type="number" min="0" disabled/>
+                                        <span class="input-group-addon"  data-val="美元" lang="zh">万元</span>
+                                    </div>
+                                </div>
+                                <label class="control-label col-xs-1" for="officeAddress" lang="zh">办公地址</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="officeAddress" type="text" disabled/>
+                                </div>
+                                <label class="control-label col-xs-1" for="tel1" lang="zh">联系电话</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="tel1" type="tel" disabled/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="corpaddress" lang="zh">注册地址</label>
+                                <div class="col-xs-8">
+                                    <textarea class="form-control" name="corpaddress" rows="2" disabled></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" lang="zh">运输方式<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-5">
+                                    <label class="checkbox-inline">
+                                        <input name="transportationMethods" data-control="editOn" value="0" type="checkbox" disabled>
+                                        <span lang="zh">汽运</span>
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input name="transportationMethods" data-control="editOn" value="1" type="checkbox" disabled>
+                                        <span lang="zh">船运</span>
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input name="transportationMethods" data-control="editOn" value="2" type="checkbox" disabled>
+                                        <span lang="zh">铁路</span>
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input name="transportationMethods" data-control="editOn" value="3" type="checkbox" disabled>
+                                        <span lang="zh">航空</span>
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input name="transportationMethods" data-control="editOn" value="4" type="checkbox" disabled>
+                                        <span lang="zh">其他</span>
+                                    </label>
+                                    #*<span class="form-inline">
+                                        <input class="form-inline form-control hidden" name="" data-control="editOn" style="position:absolute;left:355px;" type="text" placeholder="请输入运输方式">
+                                    </span>*#
+                                </div>
+                            </div>
+                            <fieldset id="customFields"></fieldset>
+                            <div class="form-group hidden" data-view="editView">
+                                <div class="col-xs-2 col-xs-offset-1">
+                                    <button class="btn-link" id="add_customField" type="button" lang="zh">
+                                        <span class="glyphicon glyphicon-plus"></span>添加自定义字段
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="memo" lang="zh">备注</label>
+                                <div class="col-xs-8">
+                                    <textarea class="form-control" name="memo" rows="4" disabled></textarea>
+                                </div>
+                            </div>
+                            <fieldset id="linkmens"></fieldset>
+                            <div class="form-group" id="time">
+                                <label class="control-label col-xs-1" for="startCooperateTime" lang="zh">开始合作时间</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="startCooperateTime" data-control="editOn" type="date" disabled/>
+                                </div>
+                                <label class="control-label col-xs-1" for="cooperateTime" lang="zh">合作时间</label>
+                                <div class="col-xs-2">
+                                    <div class="input-group">
+                                        <input class="form-control" name="cooperateTime" type="text" disabled/>
+                                        <span class="input-group-addon" lang="zh">月</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="businessLicence" lang="zh">营业执照<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-3">
+                                    <div class="input-group" id="business_licence">
+                                        <input class="form-control" name="businessLicence" data-control="editOn" type="text" disabled readonly/>
+                                        <div class="input-group-btn" lang="zh">
+                                            <button class="btn btn-xs btn-primary hidden" name="edit" data-view="editView" type="button" lang="zh">编辑</button>
+                                            <button class="btn btn-xs btn-primary" name="show" type="button" lang="zh">查看</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="nvocc" lang="zh">无船承运业务经营资格登记证<sup data-view="editView" class="not-null hidden">*</sup></label>
+                                <div class="col-xs-3">
+                                    <div class="input-group" id="nvocc">
+                                        <input class="form-control" name="nvocc" data-control="editOn" type="text" disabled readonly/>
+                                        <div class="input-group-btn" lang="zh">
+                                            <button class="btn btn-xs btn-primary hidden" name="edit" data-view="editView" type="button" lang="zh">编辑</button>
+                                            <button class="btn btn-xs btn-primary" name="show" type="button" lang="zh">查看</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="combinedScoring" lang="zh">综合评分</label>
+                                <div class="col-xs-2">
+                                    <div class="input-group">
+                                        <input class="form-control" name="combinedScoring" type="number" min="0" disabled/>
+                                        <div class="input-group-btn">
+                                            <a class="btn btn-xs btn-primary" href="#" lang="zh">查看明细</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" data-view="editHide">
+                                <label class="control-label col-xs-1" for="lastmodifyUserName" lang="zh">最后编辑人</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="lastmodifyUserName" type="text" disabled/>
+                                </div>
+                                <label class="control-label col-xs-1" for="modifiedtime" lang="zh">最后编辑时间</label>
+                                <div class="col-xs-2">
+                                    <input class="form-control" name="modifiedtime" type="text" disabled/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+## 图片上传modal
+<div class="modal fade" id="set_img" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+            </div>
+            <div class="modal-body clearfix">
+                <form class="form-horizontal well" name="imgForm" enctype="multipart/form-data" style="margin-bottom: 0;">
+                    <input name="file" type="file">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-4 col-xs-offset-2">
+                        <button class="btn btn-xs btn-block btn-default" data-dismiss="modal" type="button" lang="zh">取消</button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button class="btn btn-xs btn-block btn-primary" name="save" type="button" lang="zh">上传</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+## 图片展示modal
+<div class="modal fade" id="show_img" tabindex="-1" aria-hidden="true" >
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body clearfix">
+                <div class="thumbnail">
+                    <img name="showImg" src="" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+## 自定义字段模板
+<script id="custom_field" type="text/html">
+    <div class="form-group" name="customField" style="position: relative">
+        <label class="col-xs-1">
+            <input class="form-control" name="name" type="text" placeholder="请输入标题">
+        </label>
+        <div class="col-xs-8">
+            <textarea class="form-control" name="value" rows="4" placeholder="请输入内容"></textarea>
+        </div>
+        <button class="pull-left close" data-name="delBtn" data-target=".form-group" type="button" style="position:absolute;top:34%;">
+            <span class="glyphicon glyphicon-remove-sign"></span>
+        </button>
+    </div>
+</script>
+<input id="forwardingId" type="hidden" value="$!{forwardingId}">
+<script src="${request.contextPath}/lib/js/supplierInformation/forwardingBasic.js"></script>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.business.BusinessBuyContractMapper">
+    <resultMap id="BaseResultMap" type="com.fuhuadata.domain.business.BusinessBuyContract">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="pk_ct_pu" jdbcType="CHAR" property="pkCtPu"/>
+        <result column="ctname" jdbcType="VARCHAR" property="ctname"/>
+        <result column="vbillcode" jdbcType="VARCHAR" property="vbillcode"/>
+        <result column="total_number" jdbcType="DECIMAL" property="totalNumber"/>
+        <result column="ntotalorigmny" jdbcType="DECIMAL" property="ntotalorigmny"/>
+        <result column="ccurrencyid" jdbcType="VARCHAR" property="ccurrencyid"/>
+        <result column="corigcurrencyid" jdbcType="VARCHAR" property="corigcurrencyid"/>
+        <result column="subscribedate" jdbcType="TIMESTAMP" property="subscribedate"/>
+        <result column="valdate" jdbcType="TIMESTAMP" property="valdate"/>
+        <result column="invallidate" jdbcType="TIMESTAMP" property="invallidate"/>
+        <result column="actualvalidate" jdbcType="TIMESTAMP" property="actualvalidate"/>
+        <result column="actualinvalidate" jdbcType="TIMESTAMP" property="actualinvalidate"/>
+        <result column="cvendorid" jdbcType="VARCHAR" property="cvendorid"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    </resultMap>
+
+    <sql id="BaseColumns">
+        bbc.id,
+        bbc.pk_ct_pu,
+        bbc.ctname,
+        bbc.vbillcode,
+        bbc.total_number,
+        bbc.ntotalorigmny,
+        bbc.ccurrencyid,
+        bbc.corigcurrencyid,
+        bbc.subscribedate,
+        bbc.valdate,
+        bbc.invallidate,
+        bbc.actualvalidate,
+        bbc.actualinvalidate,
+        bbc.cvendorid,
+        bbc.remark
+    </sql>
+
+    <sql id="FromTable">
+        from business_buy_contract bbc
+    </sql>
+
+    <select id="listContracts" resultType="com.fuhuadata.domain.business.BusinessBuyContract">
+        select
+        <include refid="BaseColumns"/>
+        <include refid="FromTable"/>
+        where
+        <where>
+            <if test="cvendorid != null and cvendorid != ''">
+                bbc.cvendorid=${cvendorid}
+            </if>
+        </where>
+    </select>
+
+</mapper>

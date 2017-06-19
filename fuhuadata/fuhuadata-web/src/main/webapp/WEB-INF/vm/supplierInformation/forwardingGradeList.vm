@@ -1,0 +1,67 @@
+<div class="nav-deputy shadow-out clearfix">
+    #breadcrumb()
+</div>
+<div class="dashboard-wrapper">
+    <div class="row">
+        <div class="col-xs-12 view-HD-lg">
+            <div class="panel panel-default" id="container">
+                <div class="panel-heading">
+                    <button class="panel-heading-btn pull-right btn btn-xs btn-primary hidden" name="edit" type="button">
+                        <span class="glyphicon glyphicon-edit"></span>
+                        编辑
+                    </button>
+                    <h3 class="panel-title" lang="zh">订单评价</h3>
+                </div>
+                <div class="panel-body clearfix">
+                    <form class="form-horizontal" id="order_grade">
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <!--表格-->
+                                <table class="table text-center table-condensed table-bordered table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center col-xs-6" lang="zh">指标</th>
+                                        <th class="text-center col-xs-2" lang="zh">总分</th>
+                                        <th class="text-center col-xs-2" lang="zh">评分</th>
+                                        <th class="text-center col-xs-2" lang="zh">备注</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="grade_list">
+                                        #foreach($item in $evaItems)
+                                        <tr name="$!{item.id}">
+                                            <td lang="zh">$!{item.targetName}</td>
+                                            <td name="maxScore">$!{item.score}</td>
+                                            <td><input class="form-control" name="evaScore" data-edit="on" type="number" min="0" max="$!{item.score}" disabled></td>
+                                            <td><input class="form-control" name="evaRemark" data-edit="on" type="text" disabled></td>
+                                        </tr>
+                                        #end
+                                        <tr>
+                                            <td class="text-danger" lang="zh">综合得分</td>
+                                            <td class="text-danger" name="totalScore" colspan="3"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-1 control-label" for="remark" lang="zh">备注</label>
+                            <div class="col-xs-11">
+                                <textarea class="form-control" name="remark" data-edit="on" rows="4" disabled></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group hidden" data-view="editView">
+                            <div class="col-xs-2 col-xs-offset-4">
+                                <button class="btn btn-block btn-default" name="cancel" type="button" lang="zh">取消</button>
+                            </div>
+                            <div class="col-xs-2">
+                                <button class="btn btn-block btn-primary" name="save" type="button" lang="zh">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input id="orderId" type="hidden" value="$!{orderId}">
+<script src="${request.contextPath}/lib/js/supplierInformation/factoryGrade.js"></script>

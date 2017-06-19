@@ -62,11 +62,11 @@
     </bean>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-	<property name="dataSource" ref="multiDataSource"/>
-	<property name="typeAliasesPackage" value="com.fuhuadata.domain.mybatis"/>
-	<property name="mapperLocations" value="classpath:/sqlmap/mapper/**/*.xml"/>
-	<property name="configLocation" value="classpath:/mybatis-config.xml"/>
-</bean>
+        <property name="dataSource" ref="multiDataSource"/>
+        <property name="typeAliasesPackage" value="com.fuhuadata.domain.mybatis"/>
+        <property name="mapperLocations" value="classpath:/sqlmap/mapper/**/*.xml"/>
+        <property name="configLocation" value="classpath:/mybatis-config.xml"/>
+    </bean>
 
     <!-- 通用 mapper 配置 -->
     <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
@@ -84,15 +84,15 @@
 
     <!-- 批量操作 sqlSession, 可安全的在 dao 文件中共享 -->
     <bean id="sqlSessionBatch" class="org.mybatis.spring.SqlSessionTemplate">
-        <constructor-arg index="0" ref="sqlSessionFactory" />
-        <constructor-arg index="1" value="BATCH" />
+        <constructor-arg index="0" ref="sqlSessionFactory"/>
+        <constructor-arg index="1" value="BATCH"/>
     </bean>
 
-	<!-- 事务配置 -->
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource"/>
-	</bean>
+    <!-- 事务配置 -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="multiDataSource"/>
+    </bean>
 
     <!-- spring  事务管理-->
     <tx:annotation-driven transaction-manager="transactionManager"/>
@@ -117,39 +117,41 @@
         <aop:advisor id="txAdvisor" advice-ref="txAdvice" pointcut-ref="txPointcut" order="2"/>
     </aop:config>
 
-	<bean id="userAccountDao" class="com.fuhuadata.dao.impl.UserAccountDaoImpl" />
-	<bean id="systemLogDao" class="com.fuhuadata.dao.impl.SystemLogDaoImpl"/>
-	<bean id="marketTrainingDao" class="com.fuhuadata.dao.impl.MarketTrainingDaoImpl"/>
-	<bean id="exhibitionInfoDao" class="com.fuhuadata.dao.impl.ExhibitionInfoDaoImpl"/>
-	<bean id="productProblemDao" class="com.fuhuadata.dao.impl.ProductProblemDaoImpl"/>
-	<bean id="customerEncyclopediaDao" class="com.fuhuadata.dao.impl.CustomerEncyclopediaDaoImpl"/>
-	<bean id ="componentCostDao" class="com.fuhuadata.dao.impl.ComponentCostDaoImpl"/>
-	<bean id="freightCostDao" class="com.fuhuadata.dao.impl.FreightCostDaoImpl"/>
-	<bean id="rateDao" class="com.fuhuadata.dao.impl.RateDaoImpl"/>
-	<bean id = "industryDataDao" class="com.fuhuadata.dao.impl.IndustryDataDaoImpl"/>
-	<bean id = "packingArchivesDao" class="com.fuhuadata.dao.impl.PackingArchivesDaoImpl"/>
-	<bean id = "portChargesCostDao" class="com.fuhuadata.dao.impl.PortChargesCostDaoImpl"/>
-	<bean id = "preparationProcessCostDao" class="com.fuhuadata.dao.impl.PreparationProcessCostDaoImpl"/>
-	<bean id="saleCustomerDao" class="com.fuhuadata.dao.impl.SaleCustomerDaoImpl"/>
-	<bean id="customerParentDao" class="com.fuhuadata.dao.impl.CustomerBaseInfoDaoImpl"/>
-	<bean id="userDao" class="com.fuhuadata.dao.impl.UserDaoImpl"/>
-	<bean id="productInfoDao" class="com.fuhuadata.dao.impl.ProductInfoDaoImpl"/>
-	<bean id="productCategoryDao" class="com.fuhuadata.dao.impl.ProductCategoryDaoImpl"/>
-	<bean id="packingCategoryDao" class="com.fuhuadata.dao.impl.PackingCategoryDaoImpl"/>
-	<bean id="productWareDao" class="com.fuhuadata.dao.impl.ProductWareDaoImpl"/>
-	<bean id="customerProductInfoDao" class="com.fuhuadata.dao.impl.CustomerProductArchivesDaoImpl"/>
-	<bean id="customerMakeProductDao" class="com.fuhuadata.dao.impl.CustomerMakeProductDaoImpl"/>
-	<bean id="linkmanDao" class="com.fuhuadata.dao.impl.CustomerLinkmanDaoImpl"/>
-	<bean id="customerPurchaseProductDao" class="com.fuhuadata.dao.impl.CustomerPurchaseProductDaoImpl"/>
-	<bean id="customerSaleProductDao" class="com.fuhuadata.dao.impl.CustomerSaleProductDaoImpl"/>
-	<bean id="recordLinkmanDao" class="com.fuhuadata.dao.impl.RecordLinkmanDaoImpl"/>
-	<bean id="customerLinkmanDao" class="com.fuhuadata.dao.impl.CustomerLinkmanDaoImpl"/>
-	<bean id="customerVisitRecordDao" class="com.fuhuadata.dao.impl.CustomerVisitRecordDaoImpl"/>
-	<bean id="customerSubcompanyInfoDao" class="com.fuhuadata.dao.impl.CustomerSubcompanyInfoDaoImpl"/>
-	<bean id="businessInfoDao" class="com.fuhuadata.dao.impl.BusinessInfoDaoImpl"/>
-	<bean id="businessRecordDao" class="com.fuhuadata.dao.impl.BusinessRecordDaoImpl"/>
-	<bean id="businessOrderDao" class="com.fuhuadata.dao.impl.BusinessOrderDaoImpl"/>
-	<bean id="contractDao" class="com.fuhuadata.dao.impl.ContractDaoImpl"/>
-	<bean id="dataArchivesDao" class="com.fuhuadata.dao.impl.DataArchivesDaoImpl"/>
-	<bean id="orderToNc" class="com.fuhuadata.dao.impl.NCExchange.OrderToNcImpl"/>
+    <bean id="userAccountDao" class="com.fuhuadata.dao.impl.UserAccountDaoImpl"/>
+    <bean id="systemLogDao" class="com.fuhuadata.dao.impl.SystemLogDaoImpl"/>
+    <bean id="marketTrainingDao" class="com.fuhuadata.dao.impl.MarketTrainingDaoImpl"/>
+    <bean id="exhibitionInfoDao" class="com.fuhuadata.dao.impl.ExhibitionInfoDaoImpl"/>
+    <bean id="productProblemDao" class="com.fuhuadata.dao.impl.ProductProblemDaoImpl"/>
+    <bean id="customerEncyclopediaDao" class="com.fuhuadata.dao.impl.CustomerEncyclopediaDaoImpl"/>
+    <bean id="componentCostDao" class="com.fuhuadata.dao.impl.ComponentCostDaoImpl"/>
+    <bean id="freightCostDao" class="com.fuhuadata.dao.impl.FreightCostDaoImpl"/>
+    <bean id="rateDao" class="com.fuhuadata.dao.impl.RateDaoImpl"/>
+    <bean id="industryDataDao" class="com.fuhuadata.dao.impl.IndustryDataDaoImpl"/>
+    <bean id="packingArchivesDao" class="com.fuhuadata.dao.impl.PackingArchivesDaoImpl"/>
+    <bean id="portChargesCostDao" class="com.fuhuadata.dao.impl.PortChargesCostDaoImpl"/>
+    <bean id="preparationProcessCostDao" class="com.fuhuadata.dao.impl.PreparationProcessCostDaoImpl"/>
+    <bean id="saleCustomerDao" class="com.fuhuadata.dao.impl.SaleCustomerDaoImpl"/>
+    <bean id="customerParentDao" class="com.fuhuadata.dao.impl.CustomerBaseInfoDaoImpl"/>
+    <bean id="userDao" class="com.fuhuadata.dao.impl.UserDaoImpl"/>
+    <bean id="productInfoDao" class="com.fuhuadata.dao.impl.ProductInfoDaoImpl"/>
+    <bean id="productCategoryDao" class="com.fuhuadata.dao.impl.ProductCategoryDaoImpl"/>
+    <bean id="packingCategoryDao" class="com.fuhuadata.dao.impl.PackingCategoryDaoImpl"/>
+    <bean id="productWareDao" class="com.fuhuadata.dao.impl.ProductWareDaoImpl"/>
+    <bean id="customerProductInfoDao" class="com.fuhuadata.dao.impl.CustomerProductArchivesDaoImpl"/>
+    <bean id="customerMakeProductDao" class="com.fuhuadata.dao.impl.CustomerMakeProductDaoImpl"/>
+    <bean id="linkmanDao" class="com.fuhuadata.dao.impl.CustomerLinkmanDaoImpl"/>
+    <bean id="customerPurchaseProductDao" class="com.fuhuadata.dao.impl.CustomerPurchaseProductDaoImpl"/>
+    <bean id="customerSaleProductDao" class="com.fuhuadata.dao.impl.CustomerSaleProductDaoImpl"/>
+    <bean id="recordLinkmanDao" class="com.fuhuadata.dao.impl.RecordLinkmanDaoImpl"/>
+    <bean id="customerLinkmanDao" class="com.fuhuadata.dao.impl.CustomerLinkmanDaoImpl"/>
+    <bean id="customerVisitRecordDao" class="com.fuhuadata.dao.impl.CustomerVisitRecordDaoImpl"/>
+    <bean id="customerSubcompanyInfoDao" class="com.fuhuadata.dao.impl.CustomerSubcompanyInfoDaoImpl"/>
+    <bean id="businessInfoDao" class="com.fuhuadata.dao.impl.BusinessInfoDaoImpl"/>
+    <bean id="businessRecordDao" class="com.fuhuadata.dao.impl.BusinessRecordDaoImpl"/>
+    <bean id="businessOrderDao" class="com.fuhuadata.dao.impl.BusinessOrderDaoImpl"/>
+    <bean id="contractDao" class="com.fuhuadata.dao.impl.ContractDaoImpl"/>
+    <bean id="dataArchivesDao" class="com.fuhuadata.dao.impl.DataArchivesDaoImpl"/>
+    <bean id="orderToNc" class="com.fuhuadata.dao.impl.NCExchange.OrderToNcImpl"/>
+    <bean id="factoryToNc" class="com.fuhuadata.dao.impl.NCExchange.FactoryToNcImpl"/>
+    <bean id="syncFreightForwardingDao" class="com.fuhuadata.dao.task.impl.SyncFreightForwardingDaoImpl"/>
 </beans>

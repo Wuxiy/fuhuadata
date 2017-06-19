@@ -36,7 +36,7 @@ public class AreaClController extends BaseController<AreaCl, String> {
      */
     @RequestMapping(value = "foreign", method = RequestMethod.GET)
     @ResponseBody
-    public ResultPojo getAllForeignAreaTreeNodes() {
+    public ResultPojo getAllForeignAreaTreeNodes(){
         Result<List<AreaClVo>> result = Result.newResult(false);
 
         result.addDefaultModel(areaClService.getAreaTreeNodes());

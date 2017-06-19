@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+xmlns:jaxws="http://java.sun.com/xml/ns/jaxws"
+jaxb:version="2.0"
+xmlns:ns0="http://et.itf.nc/M5715FileManagerWs"
+targetNamespace="http://et.itf.nc/M5715FileManagerWs">
+
+<jaxws:bindings>
+	<jaxws:package name="nc.itf.et"/>
+</jaxws:bindings>
+
+<wsdl:types>
+   <xsd:schema xmlns:ns="http://et.itf.nc/M5715FileManagerWs"
+			attributeFormDefault="unqualified"
+			elementFormDefault="unqualified"
+			targetNamespace="http://et.itf.nc/M5715FileManagerWs" jaxb:version="2.0">
+	<xsd:annotation>
+    	<xsd:appinfo>
+   			<jaxb:schemaBindings>
+    			<jaxb:package name="nc.itf.et"/>
+    		</jaxb:schemaBindings>
+   		</xsd:appinfo>
+   	</xsd:annotation>
+	<xsd:element name="crmExchangeFileToNC">
+         <xsd:complexType>
+            <xsd:sequence>
+				<xsd:element name="byteItem"  minOccurs="0" nillable="true" type="xsd:base64Binary"/>
+				<xsd:element name="string"  minOccurs="0" nillable="true" type="xsd:string"/>
+				<xsd:element name="long"  minOccurs="0" nillable="true" type="xsd:long"/>
+				<xsd:element name="string1"  minOccurs="0" nillable="true" type="xsd:string"/>
+				<xsd:element name="string2"  minOccurs="0" nillable="true" type="xsd:string"/>
+             </xsd:sequence>  
+         </xsd:complexType>
+     </xsd:element>
+	<xsd:element name="crmExchangeFileToNCResponse">
+         <xsd:complexType>
+            <xsd:sequence>
+				<xsd:element name="return"  minOccurs="0" nillable="true" type="xsd:string"/>
+             </xsd:sequence>  
+         </xsd:complexType>
+     </xsd:element>
+   </xsd:schema>
+</wsdl:types>
+    <wsdl:message name="crmExchangeFileToNCRequest">
+        <wsdl:part name="parameters"  element="ns0:crmExchangeFileToNC"/>
+    </wsdl:message>
+    <wsdl:message name="crmExchangeFileToNCResponse">
+        <wsdl:part name="parameters"  element="ns0:crmExchangeFileToNCResponse"/>
+    </wsdl:message>
+
+    <wsdl:portType name="M5715FileManagerWsPortType">
+        <wsdl:operation name="crmExchangeFileToNC">
+            <wsdl:input message="ns0:crmExchangeFileToNCRequest" wsaw:Action="urn:crmExchangeFileToNC"/>
+            <wsdl:output message="ns0:crmExchangeFileToNCResponse" wsaw:Action="urn:crmExchangeFileToNCResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    
+    
+    <wsdl:binding name="M5715FileManagerWsSOAP11Binding" type="ns0:M5715FileManagerWsPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="crmExchangeFileToNC">
+            <soap:operation soapAction="urn:crmExchangeFileToNC" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="M5715FileManagerWs">
+        <wsdl:port name="M5715FileManagerWsSOAP11port_http" binding="ns0:M5715FileManagerWsSOAP11Binding">
+            <soap:address location="http://192.168.30.30:8200/uapws/service/nc.itf.et.M5715FileManagerWs"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

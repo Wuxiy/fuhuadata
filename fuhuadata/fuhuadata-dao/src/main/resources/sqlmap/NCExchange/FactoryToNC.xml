@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="FactoryToNc">
+
+    <update id="UPDATE-PKFACTORY" parameterClass="java.util.HashMap">
+        update s_factory
+        <dynamic prepend="set">
+            <isNotNull prepend="," property="pk_supplier">
+                pk_supplier=#pk_supplier#
+            </isNotNull>
+            where id=#id#
+        </dynamic>
+    </update>
+    <update id="UPDATE-PKBANKACCBAS" parameterClass="java.util.HashMap">
+        update s_factory
+        <dynamic prepend="set">
+            <isNotNull prepend="," property="pk_bankaccbas">
+                pk_supplier=#pk_supplier#
+            </isNotNull>
+            where id=#id#
+        </dynamic>
+    </update>
+    <select id="GET_PKSUPPLIER_BY_ID" parameterClass="int" resultClass="java.lang.String">
+        select pk_supplier from s_factory where id=#id#
+    </select>
+
+
+</sqlMap>
