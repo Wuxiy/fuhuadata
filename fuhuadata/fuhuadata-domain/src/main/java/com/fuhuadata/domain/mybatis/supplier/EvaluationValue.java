@@ -31,11 +31,6 @@ public class EvaluationValue extends BaseEntity<Integer> {
     private BigDecimal value;
 
     /**
-     * 关联分值
-     */
-    private BigDecimal multiValue;
-
-    /**
      * @return id
      */
     public Integer getId() {
@@ -111,13 +106,5 @@ public class EvaluationValue extends BaseEntity<Integer> {
      */
     public void setValue(BigDecimal value) {
         this.value = value;
-    }
-
-    public BigDecimal getMultiValue() {
-        return multiValue;
-    }
-
-    public void setMultiValue(BigDecimal multiValue) {
-        this.multiValue = multiValue;
     }
 }

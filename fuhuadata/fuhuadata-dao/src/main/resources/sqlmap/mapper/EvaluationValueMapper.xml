@@ -10,7 +10,6 @@
     <result column="evaluation_item_id" jdbcType="INTEGER" property="evaluationItemId" />
     <result column="option_name" jdbcType="VARCHAR" property="optionName" />
     <result column="value" jdbcType="DECIMAL" property="value" />
-    <result column="value" jdbcType="DECIMAL" property="value"/>
   </resultMap>
 
 </mapper>
