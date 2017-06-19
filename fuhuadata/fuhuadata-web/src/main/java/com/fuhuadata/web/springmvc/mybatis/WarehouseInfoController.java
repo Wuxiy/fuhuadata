@@ -211,8 +211,8 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
     /**
      * 获取月度评价表
      */
-    @RequestMapping(value = "/ScoreListOfMonth", method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "supplier-warehouse",methods = "ScoreListOfMonth")
+    @RequestMapping(value = "/scoreListOfMonth", method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "supplier-warehouse",methods = "scoreListOfMonth")
     @ResponseBody
     public ResultPojo ScoreListOfMonth(QueryWarehouseScore query){
         Result<PageInfo<WarehouseScore>> result = new Result();

@@ -812,9 +812,6 @@
 
     <sql id="PROFIT-STATISTICS-QUERY-COMMON">
         <dynamic prepend=" WHERE ">
-            <isNotEmpty prepend=" AND " property="customerAreaId">
-                base.customer_area_id  = #customerAreaId#
-            </isNotEmpty>
             <isNotEmpty prepend=" AND " property="startTime">
                 <![CDATA[
                      a.deal_time  >=  #startTime#
@@ -854,25 +851,23 @@
         </isEqual>
         <isEqual property="dimension" compareValue="1">
             SELECT
-            tc.`name` country,
-            base.customer_area customerArea,
+            tp.country,
             SUM(sc.amount) salesAmount,
             SUM(sc.gross_profit) grossProfit,
             SUM(a.maintenance_fee) maintenanceFee,
             SUM(a.net_profit) netProfit,
             SUM(cs.nclaimmny) actualAmountPaid
             FROM
-            customer_base_info base
-            LEFT JOIN business_order a ON a.customer_id = base.customer_id
+            business_order a
             LEFT JOIN sync_contract sc ON sc.pk_longpro = a.nc_order_id
-            LEFT JOIN	t_countryzone tc ON tc.`code` = base.countryzone
+            LEFT JOIN t_portdoc tp ON tp.vcode = a.destination_port
             LEFT JOIN (SELECT cbctid, SUM(nclaimmny) nclaimmny FROM t_receipt WHERE fclaimstatus=3 GROUP BY cbctid ) cs
             ON cs.cbctid = sc.`pk_contract`
             <isParameterPresent>
                 <include refid="PROFIT-STATISTICS-QUERY-COMMON"/>
             </isParameterPresent>
             GROUP BY
-            base.countryzone
+            a.destination_port
             ORDER BY
             netProfit DESC
             <isNotEmpty property="startRow">

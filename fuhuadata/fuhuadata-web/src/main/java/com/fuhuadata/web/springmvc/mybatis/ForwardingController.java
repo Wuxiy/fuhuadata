@@ -78,7 +78,7 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
 
     @RequestMapping(value = "intoForwardingGradeDetails", method = RequestMethod.GET)
     @SystemLogAnnotation(module = "supplier-forwarding",methods = "init")
-    public ModelAndView intoForwardingGradeDetails(int scoreId){
+    public ModelAndView intoForwardingGradeDetails(int scoreId,int forwardingId){
         return new ModelAndView("supplierInformation/forwardingGradeDetails").addObject("4",scoreId);
     }
 
