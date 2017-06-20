@@ -13,7 +13,7 @@
                     </div>
                     <div class="panel-body clearfix">
                         <div class="form-horizontal">
-                            <div class="form-group ">
+                            <form class="form-group" id="o_form">
                                 <label class="col-xs-1 control-label" lang="zh">订单编号</label>
                                 <div class="col-xs-3">
                                     <input data-val="$!{businessOrderProduct.businessOrderProducts}" class="form-control" type="text" id="orderId" value="$!{orderId}" disabled />
@@ -27,7 +27,7 @@
                                         #end
                                     </select>
                                 </div>
-                            </div>
+                            </form>
                             <div class="form-group">
                                 <div class="panel-body clearfix col-xs-offset-1">
                                     <table class="table table-condensed table-bordered table-striped text-center">
@@ -116,7 +116,21 @@ $(document).ready(function(){
     var orderId = $('#orderId').val();
     var conversiontable = $('#conversiontable').val();
 
+    var formObj = $('#o_form').validate({
+        rules: {
+            merchandiser: 'required'
+        },
+        messages: {
+            merchandiser:{
+                required:em('必填','top:-29px','right:0')
+            }
+        }
+    });
+
     $('#finish').click(function(){
+
+        if (!formObj.form()) return;
+
         var btn = $(this).add('#reset');
         btn.attr('disabled',true);
         jQuery.ajax({

@@ -128,11 +128,11 @@
                     class="active"
             #end
         ><a href="${request.contextPath}/customerBaseInfoOrderRequire/billRequireEntrance?customerType=$!{customerType}&customerId=$!{customerId}" lang="zh" >订单默认要求</a></li>
-        <li
+        #*<li
             #if($num == 9)
                     class="active"
             #end
-        ><a href="" lang="zh" >关联数据</a></li>
+        ><a href="" lang="zh" >关联数据</a></li>*#
     </ul>
     #end
 #end
