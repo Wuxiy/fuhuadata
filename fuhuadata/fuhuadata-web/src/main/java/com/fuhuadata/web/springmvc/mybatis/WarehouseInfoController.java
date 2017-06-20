@@ -182,10 +182,11 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
     @SystemLogAnnotation(module = "supplier-warehouse",methods = "evaluationIndexItem")
     @ResponseBody
     public ResultPojo evaluationIndexItem(Integer scoreId){
-        Result<ScoreInfoVO<WarehouseEvaluationScoreRelation>> result = new Result<>();
-        ScoreInfoVO<WarehouseEvaluationScoreRelation> scoreInfoVO = new ScoreInfoVO<>();
+        Result<ScoreInfoVO<WarehouseEvaluationScoreRelation,WarehouseScore>> result = new Result<>();
+        ScoreInfoVO<WarehouseEvaluationScoreRelation,WarehouseScore> scoreInfoVO = new ScoreInfoVO<>();
         try{
             scoreInfoVO.setTerms(scoreTermService.warehouseScoreItemIndex(scoreId));
+            scoreInfoVO.setTotalScore(warehouseScoreService.get(scoreId));
             result.addDefaultModel("score",scoreInfoVO);
         }catch(Exception e){
             log.error("获取评分项详情失败",e);

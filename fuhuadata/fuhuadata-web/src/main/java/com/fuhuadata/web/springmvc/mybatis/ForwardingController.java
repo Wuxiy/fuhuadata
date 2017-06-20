@@ -232,8 +232,8 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
     @SystemLogAnnotation(module = "supplier-forwarding",methods = "evaluationIndexItem")
     @ResponseBody
     public ResultPojo evaluationIndexItem(Integer scoreId){
-        Result<ScoreInfoVO<ForwardingEvaluationScoreRelation>> result = new Result<>();
-        ScoreInfoVO<ForwardingEvaluationScoreRelation> scoreInfoVO = new ScoreInfoVO<>();
+        Result<ScoreInfoVO<ForwardingEvaluationScoreRelation,ForwardingScore>> result = new Result<>();
+        ScoreInfoVO<ForwardingEvaluationScoreRelation,ForwardingScore> scoreInfoVO = new ScoreInfoVO<>();
         try{
           scoreInfoVO.setTerms(scoreTermService.evaluationIndexItem(1));
           List<ForwardingEvaluationScoreRelation> scoreList = forwardingEvaluationScoreRelationService.listByScoreId(scoreId);
@@ -241,7 +241,7 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
               scoreInfoVO.setScoreList(scoreList);
           }
             ForwardingScore forwardingScore = forwardingScoreService.get(scoreId);
-          scoreInfoVO.setForwardingScore(forwardingScore);
+          scoreInfoVO.setTotalScore(forwardingScore);
           result.addDefaultModel("score",scoreInfoVO);
         }catch(Exception e){
             log.error("获取评分项及分值选项",e);
