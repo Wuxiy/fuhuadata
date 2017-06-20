@@ -179,6 +179,9 @@
             <isNotEmpty prepend=" AND " property="saleOrganizationId">
                 a.sale_organization_id = #saleOrganizationId#
             </isNotEmpty>
+            <isNotEmpty prepend=" AND " property="saleOrganizationName">
+                a.sale_organization_name like concat('%',#saleOrganizationName,'%')
+            </isNotEmpty>
             <isNotEmpty prepend=" AND " property="customerLevel">
                 base.customer_level = #customerLevel#
             </isNotEmpty>
@@ -631,11 +634,13 @@
         a.is_modify_price isModifyPrice,
         a.net_profit netProfit,
         a.`status` status,
-        a.deal_time dealTime
+        a.deal_time dealTime,
+        sc.billcode
         FROM
         business_order a
         LEFT JOIN customer_base_info base ON base.customer_id = a.customer_id
         LEFT JOIN t_countryzone tc ON tc.`code` = base.countryzone
+        LEFT JOIN sync_contract sc ON sc.pk_longpro = a.nc_order_id
         <isNotEmpty prepend=", " property="enterpriseNature">
             (select * from customer_enterprise_nature where nature=#enterpriseNature#) nature
         </isNotEmpty>

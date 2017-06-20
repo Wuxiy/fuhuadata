@@ -58,7 +58,7 @@ public class WarehouseScoreServiceImpl extends BaseServiceImpl<WarehouseScore,In
             scoreVO.getScore().setCreateUserName(LoginUtils.getLoginName());
             scoreVO.getScore().setLastmodifyUserId(LoginUtils.getLoginId());
             scoreVO.getScore().setLastmodifyUserName(LoginUtils.getLoginName());
-            scoreId = updateSelective(scoreVO.getScore());
+            scoreId = saveOrUpdateSelective(scoreVO.getScore());
         }
         //评分详情月度表id
         for(WarehouseEvaluationScoreRelation wesr : scoreVO.getList()){
@@ -80,6 +80,7 @@ public class WarehouseScoreServiceImpl extends BaseServiceImpl<WarehouseScore,In
                 monthTime = year+"-"+m;
             }
             warehouseScoreSel.setMonthTime(monthTime);
+            warehouseScoreSel.setWarehouseId(scoreVO.getScore().getWarehouseId());
             save(warehouseScoreSel);
         }
         return warehouseEvaluationScoreRelationService.saveList(scoreVO.getList());

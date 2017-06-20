@@ -502,7 +502,7 @@ $(function(){
                 _html += '<td><a href="'+basePath+'/businessInfo/intoBusinessOpportunityInfo?businessId='+ResultData[i].businessId+'">' + (ResultData[i].businessId!=undefined?ResultData[i].businessId:'') + '</a></td>';
                 _html += '<td>' + (ResultData[i].saleOrganizationName!=undefined?ResultData[i].saleOrganizationName:'') + '</td>';
                 _html += '<td lang="zh">' + (ResultData[i].ncOrderId!=undefined?ResultData[i].ncOrderId:'') + '</td>';
-                _html += '<td lang="zh">' + (ResultData[i].ncOrderId!=undefined?ResultData[i].ncOrderId:'') + '</td>';
+                _html += '<td lang="zh">' + (ResultData[i].billcode!=undefined?ResultData[i].billcode:'') + '</td>';
                 _html += '<td lang="zh">' + (ResultData[i].customerName!=undefined?ResultData[i].customerName:'') + '</td>';
                 _html += '<td>' + (ResultData[i].country!=undefined?ResultData[i].country:'') + '</td>';
                 _html += '<td>' + (ResultData[i].floorPrice!=undefined?ResultData[i].floorPrice:'') + '</td>';

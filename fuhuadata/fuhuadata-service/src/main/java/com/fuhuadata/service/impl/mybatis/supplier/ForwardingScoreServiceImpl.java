@@ -59,7 +59,7 @@ public class ForwardingScoreServiceImpl extends BaseServiceImpl<ForwardingScore,
             score.setLastmodifyUserId(LoginUtils.getLoginId());
             score.setLastmodifyUserName(LoginUtils.getLoginName());
 
-            scoreId = updateSelective(score);
+            scoreId = saveOrUpdateSelective(score);
         }
         //评分详情制月度表id
         for(ForwardingEvaluationScoreRelation fesr : scoreVO.getList()){
@@ -81,6 +81,7 @@ public class ForwardingScoreServiceImpl extends BaseServiceImpl<ForwardingScore,
                 monthTime = year+"-"+m;
             }
             forwardingScoreSel.setMonthTime(monthTime);
+            forwardingScoreSel.setForwardingId(score.getForwardingId());
             save(forwardingScoreSel);
         }
         return forwardingEvaluationScoreRelationService.saveList(scoreVO.getList());
