@@ -34,12 +34,12 @@
                                 </table>
                             </div>
                         </div>
-                        #*<div class="form-group">
-                            <label class="col-xs-1 control-label" for="remark" lang="zh">备注</label>
+                        <div class="form-group">
+                            <label class="col-xs-1 control-label" for="primaryRemark" lang="zh">备注</label>
                             <div class="col-xs-11">
-                                <textarea class="form-control" name="remark" data-edit="on" rows="4" disabled></textarea>
+                                <textarea class="form-control" name="primaryRemark" data-edit="on" rows="4" disabled></textarea>
                             </div>
-                        </div>*#
+                        </div>
                         <div class="form-group hidden" data-view="editView">
                             <div class="col-xs-2 col-xs-offset-4">
                                 <button class="btn btn-block btn-default" name="cancel" type="button" lang="zh">取消</button>
@@ -54,6 +54,6 @@
         </div>
     </div>
 </div>
-<input id="orderId" type="hidden" value="$!{orderId}">
+<input id="scoreId" type="hidden" value="$!{scoreId}">
 <input id="forwardingId" type="hidden" value="$!{forwardingId}">
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/supplierInformation/forwardingGradeDetails.js"></script>
