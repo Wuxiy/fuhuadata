@@ -16,9 +16,9 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 import javax.servlet.ServletContext;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
@@ -57,7 +57,7 @@ public class PDFTempletToPDFImpl implements PDFTempletToPDF {
         String a=servletContext.getRealPath("/");
         try {
             String path = null;
-            PdfReader reader=new PdfReader(a+"lib\\orderRequireTemplet.pdf");
+            PdfReader reader=new PdfReader(a+"lib" + File.separator + "orderRequireTemplet.pdf");
             ByteArrayOutputStream bos=new ByteArrayOutputStream();
             PdfStamper ps=new PdfStamper(reader,bos);
             AcroFields s=ps.getAcroFields();

@@ -472,6 +472,10 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
             // 要保证你的文本输出后格式不乱码，打印对象需指定打印格式，以标记此文本支持的格式
 
             String a = servletContext.getRealPath("/");
+            File dir=new File(a+"lib/NCBackFile/");
+            if (!dir.exists()){
+                dir.mkdirs();
+            }
             xmlName=a+"lib/NCBackFile/"+"order"+orderBaseInfo.getOrderId()+System.currentTimeMillis()+".xml";
             PrintWriter pw = new PrintWriter(xmlName, "utf-8");
             // 充当转换结果的持有者，可以为 XML、纯文本、HTML 或某些其他格式的标记

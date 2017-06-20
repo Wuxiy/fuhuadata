@@ -9,7 +9,8 @@
               c.pk_contract as pkContract,
               p.ntotalorigmny as amount,
               p.vdef37 as grossProfit,
-              1 as type
+              1 as type,
+              p.vdef2 billcode
       FROM
               et_contract_b c,
               et_contract p
@@ -35,7 +36,8 @@
               c.pk_contract as pkContract,
               p.ntotalorigmny as amount,
               p.vdef37 as grossProfit,
-              2 as type
+              2 as type,
+              p.vbillcode billcode
       FROM
               ent_contract_b c,
               ent_contract p

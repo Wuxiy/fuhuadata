@@ -38,8 +38,8 @@
     </div>
 </div>
 
-<div class="modal fade" id="costmodal" tabindex="-1"  aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog" style="width:800px">
+<div class="modal fade" id="grademodal" tabindex="-1"  aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog" style="width:700px">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -47,31 +47,50 @@
                 </button>
             </div>
             <div class="modal-body">
-                <table class="table text-center table-condensed table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th class="text-center" lang="zh">评价指标</th>
-                        <th class="text-center" lang="zh">评价</th>
-                        <th class="text-center" lang="zh">备注</th>
-                        <th class="text-center" lang="zh">得分</th>
-                    </tr>
-                    </thead>
-                    <tbody id="gradeList"></tbody>
-                    <tfoot>
-                    <tr>
-                        <td class="text-center" lang="zh" id="score">综合评分</td>
-                    </tr>
-                    </tfoot>
-                </table>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="panel panel-default" id="container">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" lang="zh">仓库服务评分</h3>
+                            </div>
+                            <div class="panel-body clearfix">
+                                <form class="form-horizontal" id="order_grade">
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <!--表格-->
+                                            <table class="table text-center table-condensed table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <th class="text-center" lang="zh">评价指标</th>
+                                                    <th class="text-center" lang="zh">评价</th>
+                                                    <th class="text-center" lang="zh">备注</th>
+                                                    <th class="text-center" lang="zh">得分</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="gradeList"></tbody>
+                                                <tfoot>
+                                                <tr>
+                                                    <td class="text-danger" colspan="3" lang="zh">综合得分</td>
+                                                    <td class="text-danger" name="totalScore"></td>
+                                                </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <div class="row">
-                    <div class="col-xs-2">
+                    <div class="col-xs-3 col-xs-offset-3">
                         <a type="button" class="btn btn-primary btn-block updateCost" id="finish">
                             完成
                         </a>
                     </div>
-                    <div class="col-xs-2">
+                    <div class="col-xs-3">
                         <button type="button" class="btn btn-default btn-block" data-dismiss="modal">
                             取消
                         </button>
@@ -82,7 +101,11 @@
     </div>
 </div>
 
+<input id="warehouseId" type="hidden" value="$!{warehouseId}">
+
 <script type="text/javascript" language="JavaScript">
+    var id = $('#warehouseId').val();
+
     $(function(){
         var table = {
                     total:0,
@@ -95,12 +118,13 @@
                         num_display_entries:5,
                         callback:function (pageNum,jq) {
                             $.ajax({
-                                url:basePath + '/supplier/warehouse/',
+                                url:basePath + '/supplier/warehouse/scoreListOfMonth',
                                 dataType:'json',
                                 contentType:'application/json',
                                 data:{
                                     pageSize:table.pageSize,
-                                    index:pageNum+1
+                                    index:pageNum+1,
+                                    warehouseId:id
                                 },
                                 async:true,
                                 type:'GET'
@@ -116,12 +140,13 @@
                     },
                     init:function () {
                         $.ajax({
-                            url:basePath + '/supplier/warehouse/',
+                            url:basePath + '/supplier/warehouse/scoreListOfMonth',
                             dataType:'json',
                             contentType:'application/json',
                             data:{
                                 pageSize:table.pageSize,
-                                index:1
+                                index:1,
+                                warehouseId:id
                             },
                             async:true,
                             type:'GET'
@@ -143,17 +168,17 @@
                             $.each(list, function(i, item){
                                 tpl +=
                                         '<tr>' +
-                                        '<td>'+table.hasField(item.code)+'</td>'+
-                                        '<td>'+table.hasField(item.code)+'</td>'+
-                                        '<td>'+table.hasField(item.shortname)+'</td>'+
-                                        '<td>'+suppropsList[table.hasField(item.supprop)]+'</td>'+
-                                        '<td>'+table.hasField(item.storaddr)+'</td>'+
-                                        '<td>'+table.hasField(item.storageArea)+'</td>'+
-                                        '<td>'+isDangersList[table.hasField(item.isDangers)]+'</td>'+
-                                        '<td><a class="gradeinfo" data-id="">'+isInsideEntranceList[table.hasField(item.isInsideEntrance)]+'</a></td>'+
-                                        '<td>'+table.hasField(item.combinedScoring)+'</td>'+
-                                        '<td>'+table.hasField(item.memo)+'</td>'+
-                                        '<td>'+table.hasField(item.memo)+'</td>'+
+                                        '<td>'+table.hasField(item.monthTime)+'</td>'+
+                                        '<td>'+table.hasField(item.timeScore)+'</td>'+
+                                        '<td>'+table.hasField(item.accuracyScore)+'</td>'+
+                                        '<td>'+table.hasField(item.storageScore)+'</td>'+
+                                        '<td>'+table.hasField(item.warehouseScore)+'</td>'+
+                                        '<td>'+table.hasField(item.packageScore)+'</td>'+
+                                        '<td>'+table.hasField(item.checkStockScore)+'</td>'+
+                                        '<td><a class="gradeinfo" data-id="'+item.id+'">'+table.hasField(item.totalScore)+'</a></td>'+
+                                        '<td>'+table.hasField(item.evaluateUserName)+'</td>'+
+                                        '<td>'+table.hasField(item.evaluateTime)+'</td>'+
+                                        '<td>'+table.hasField(item.remarks)+'</td>'+
                                         '</tr>';
                             });
                         }else{
@@ -178,10 +203,22 @@
     });
 
     $(document).on('click','.gradeinfo',function(){
-        var id = $(this).attr('data-id');
+        var scoreId = $(this).attr('data-id');
 
         jQuery.ajax({
+            url:basePath + '/supplier/warehouse/evaluationIndexItem?scoreId=1',
+            dataType:'json',
+            contentType:'application/json',
+            type:'GET',
+        }).done(function(result){
+            if(result.code == 1){
+                renderTable(res.data.terms);
+            }
         })
     })
+
+    function renderTable(data){
+
+    }
 
 </script>
