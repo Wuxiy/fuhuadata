@@ -78,6 +78,7 @@ CRM.cbInfo.timezone             = $('#timeZone'); // 时区
 CRM.cbInfo.countryzone          = $('#commerceCountry'); // 贸易国别
 CRM.cbInfo.customerDutyParagraph= $('#customerDutyParagraph'); // 客户税号
 CRM.cbInfo.saleOrganizationName = $('#saleOrganizationName'); // 所属组织
+CRM.cbInfo.lastmodifyUserName = $('#lastmodifyUserName'); // 最后修改人
 
 // 收集数据
 CRM.cbInfo.collectData = function () {
@@ -279,6 +280,7 @@ CRM.cbInfo.renderForm = function(data){
     if (data.remark) { page.remark.val(data.remark);}
     if (data.factoryLocation) { page.factoryLocation.val(data.factoryLocation);}
     if (data.managementScope) { page.managementScope.val(data.managementScope);}
+    if (data.lastmodifyUserName) { page.lastmodifyUserName.val(data.lastmodifyUserName);}
 
     // 新加字段
     if (data.formatdoc) { page.formatdoc.val(data.formatdoc);} // 数据格式
