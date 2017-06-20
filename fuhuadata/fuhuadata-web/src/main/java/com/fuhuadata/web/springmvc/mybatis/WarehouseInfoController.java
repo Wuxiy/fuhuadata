@@ -16,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
 
 
 /** 仓库
@@ -37,8 +36,6 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
     @Autowired
     private WarehouseScoreService warehouseScoreService;
 
-    @Autowired
-    private WarehouseEvaluationScoreRelationService warehouseEvaluationScoreRelationService;
 
     @Autowired
     private ScoreTermService scoreTermService;
@@ -205,7 +202,7 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
     public ResultPojo saveScore(@RequestBody ScoreVO<WarehouseScore,WarehouseEvaluationScoreRelation> scoreVO){
         Result<Integer> result = new Result();
         try{
-            result.addDefaultModel(warehouseScoreService.saveScore(scoreVO));
+            result.addDefaultModel(warehouseScoreService.saveScore(scoreVO,DateUtil.getMonth(),DateUtil.getYear()));
         }catch(Exception e){
             log.error("保存仓库评分出错");
             result.setMessage(e.getMessage());

@@ -41,7 +41,7 @@ public class WarehouseScoreServiceImpl extends BaseServiceImpl<WarehouseScore,In
 
     @Override
     @Transient
-    public int saveScore(ScoreVO<WarehouseScore, WarehouseEvaluationScoreRelation> scoreVO) {
+    public int saveScore(ScoreVO<WarehouseScore, WarehouseEvaluationScoreRelation> scoreVO,String month,String year) {
         Integer scoreId=null;
         if(scoreVO.getScore().getTotalScore()==null){
             scoreVO.getScore().setTotalScore(scoreVO.getScore().getWarehouseScore().add(scoreVO.getScore().getAccuracyScore()).add(scoreVO.getScore().getCheckStockScore().add(scoreVO.getScore().getPackageScore().add(scoreVO.getScore().getTimeScore()))));
@@ -58,13 +58,30 @@ public class WarehouseScoreServiceImpl extends BaseServiceImpl<WarehouseScore,In
             scoreVO.getScore().setCreateUserName(LoginUtils.getLoginName());
             scoreVO.getScore().setLastmodifyUserId(LoginUtils.getLoginId());
             scoreVO.getScore().setLastmodifyUserName(LoginUtils.getLoginName());
-            scoreId = saveSelective(scoreVO.getScore());
+            scoreId = updateSelective(scoreVO.getScore());
         }
         //评分详情月度表id
         for(WarehouseEvaluationScoreRelation wesr : scoreVO.getList()){
             wesr.setWarehouseScoreId(scoreId);
         }
         warehouseEvaluationScoreRelationService.deleteByScoreId(scoreId);
+        //新增下个月评价时间记录
+        String monthTime = year+"-"+month;
+        WarehouseScore warehouseScoreSel = new WarehouseScore();
+        warehouseScoreSel.setMonthTime(monthTime);
+        WarehouseScore warehouseScoreRes = get(warehouseScoreSel);
+        if(warehouseScoreRes==null){
+            if(month.equals("12")){
+                int y= Integer.parseInt(year)+1;
+                monthTime = y+"-"+"1";
+            }
+            else  {
+                int m = Integer.parseInt(month);
+                monthTime = year+"-"+m;
+            }
+            warehouseScoreSel.setMonthTime(monthTime);
+            save(warehouseScoreSel);
+        }
         return warehouseEvaluationScoreRelationService.saveList(scoreVO.getList());
     }
 }

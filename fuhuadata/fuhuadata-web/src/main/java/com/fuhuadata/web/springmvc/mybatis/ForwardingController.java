@@ -6,6 +6,7 @@ import com.fuhuadata.service.mybatis.supplier.*;
 import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.Supplier.ScoreInfoVO;
 import com.fuhuadata.vo.Supplier.ScoreVO;
+import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.logging.Log;
@@ -260,7 +261,7 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
     public ResultPojo saveScore(@RequestBody ScoreVO<ForwardingScore,ForwardingEvaluationScoreRelation> scoreVO){
         Result<Integer> result = new Result();
         try{
-            result.addDefaultModel(forwardingScoreService.saveScore(scoreVO));
+            result.addDefaultModel(forwardingScoreService.saveScore(scoreVO,DateUtil.getYear(),DateUtil.getMonth()));
         }catch(Exception e){
             log.error("保存货代评分失败");
             result.setMessage(e.getMessage());
