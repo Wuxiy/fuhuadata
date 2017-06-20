@@ -41,7 +41,7 @@ public class ForwardingBidRecordServiceImpl extends BaseServiceImpl<ForwardingBi
         if(query.getIsModifyPrice()!=null){
             criteria.andEqualTo("isModifyPrice",query.getIsModifyPrice());
         }
-        example.orderBy("create_time desc");
+        example.orderBy("createTime").desc();
         PageHelper.startPage(query.getIndex(),query.getPageSize());
         List<ForwardingBidRecord> list = listByExample(example);
         return new PageInfo<>(list);

@@ -40,7 +40,7 @@
     $(function(){
         table = {
             total:0,
-            pageSize:1,
+            pageSize:5,
             pageNum:0,
             pagination:$('#pagination'),
             container:$('#score_list'),

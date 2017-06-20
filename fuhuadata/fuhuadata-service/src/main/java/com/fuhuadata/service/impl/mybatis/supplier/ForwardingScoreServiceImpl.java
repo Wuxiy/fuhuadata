@@ -1,6 +1,5 @@
 package com.fuhuadata.service.impl.mybatis.supplier;
 
-import com.fuhuadata.domain.json.Views;
 import com.fuhuadata.domain.mybatis.supplier.ForwardingEvaluationScoreRelation;
 import com.fuhuadata.domain.mybatis.supplier.ForwardingScore;
 import com.fuhuadata.domain.query.QueryForwardingScore;
@@ -32,7 +31,7 @@ public class ForwardingScoreServiceImpl extends BaseServiceImpl<ForwardingScore,
         if(query == null) return null;
         Example example = newExample();
         Example.Criteria criteria = example.createCriteria().andEqualTo("forwardingId", query.getForwardingId());
-        example.orderBy("month_time desc");
+        example.orderBy("monthTime").desc();
         PageHelper.startPage(query.getIndex(),query.getPageSize());
         List<ForwardingScore> list = listByExample(example);
         return new PageInfo<>(list);
