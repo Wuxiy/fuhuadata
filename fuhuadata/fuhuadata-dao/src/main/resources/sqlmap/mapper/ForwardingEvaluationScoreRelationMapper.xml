@@ -12,6 +12,6 @@
     <result column="remarks" jdbcType="VARCHAR" property="remarks" />
     <result column="score" jdbcType="DECIMAL" property="score" />
     <result column="multi_value" jdbcType="DECIMAL" property="multiValue"/>
-    <result column="evaluation_item_id" jdbcType="DECIMAL" property="evaluationItemId"/>
+    <result column="evaluation_item_id" jdbcType="INTEGER" property="evaluationItemId"/>
   </resultMap>
 </mapper>
