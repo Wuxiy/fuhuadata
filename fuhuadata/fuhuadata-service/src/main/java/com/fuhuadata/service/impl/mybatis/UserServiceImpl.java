@@ -12,13 +12,15 @@ import com.fuhuadata.service.mybatis.PasswordService;
 import com.fuhuadata.service.mybatis.UserRoleService;
 import com.fuhuadata.service.mybatis.UserService;
 import com.fuhuadata.service.util.IpUtils;
-import com.fuhuadata.service.util.UserTreeCache;
 import com.fuhuadata.vo.MixNodeVO;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +30,7 @@ import java.util.*;
  * <p>User: wangjie
  * <p>Date: 4/12/2017
  */
+@CacheConfig(cacheNames = "sys-userCache")
 @Service
 public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
         implements UserService {
@@ -80,7 +83,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
 
     @Override
     public List<MixNodeVO> getUserNodesByDeptCode(String deptCode) {
-        Dept dept = deptService.getDeptByCode(deptCode);
+        Dept dept = deptService.getByCode(deptCode);
         return getUserNodesByDept(dept);
     }
 
@@ -139,7 +142,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
         HashSet<String> rootIds = Sets.newHashSet();
 
         for (String deptId : deptIds) {
-            MixNodeVO nodeVO = MixNodeVO.cloneNode(UserTreeCache.get(deptId));
+            MixNodeVO nodeVO = deptService.getMixNodeByNcId(deptId);
 
             while (nodeVO != null) {
 
@@ -163,7 +166,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
                 if (pNode != null) {
                     pNode.addChildNode(nodeVO);
                 } else {
-                    pNode = MixNodeVO.cloneNode(UserTreeCache.get(pid));
+                    pNode = deptService.getOrgOrDepPNode(pid);
                     if (pNode != null) {
                         pNode.addChildNode(nodeVO);
                         lookup.put(pNode.getCid(), pNode);
@@ -209,6 +212,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
         return node;
     }
 
+    @Cacheable(key = "'username-' + #loginName")
     @Override
     public UserAccount getUserByLoginName(String loginName) {
         if (StringUtils.isEmpty(loginName)) {
@@ -222,7 +226,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
     @Override
     public Optional<UserAccount> getUserOptByLoginName(String loginName) {
 
-        return Optional.ofNullable(getUserByLoginName(loginName));
+        return Optional.ofNullable(((UserService) AopContext.currentProxy()).getUserByLoginName(loginName));
     }
 
     @Override
@@ -255,6 +259,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
         return user;
     }
 
+    @CacheEvict(key = "'username-' + #principal.loginName")
     @Override
     public void updateUserLoginInfo(Principal principal, HttpServletRequest request) {
         Integer id = principal.getId();
@@ -270,10 +275,11 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
         update(userAccount);
     }
 
+    @CacheEvict(key = "'username-' + #result.loginName")
     @Override
-    public void changePassword(Integer userId, String password) {
+    public UserAccount changePassword(Integer userId, String password) {
         if (userId == null || StringUtils.isBlank(password)) {
-            return;
+            return null;
         }
 
         UserAccount userAccount = get(userId);
@@ -282,6 +288,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
             userAccount.setLoginPassword(password);
             update(userAccount);
         }
+
+        return userAccount;
     }
 
 }

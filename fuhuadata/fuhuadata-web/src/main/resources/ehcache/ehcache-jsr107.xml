@@ -1,0 +1,32 @@
+<config
+        xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+        xmlns='http://www.ehcache.org/v3'
+        xmlns:jsr107='http://www.ehcache.org/v3/jsr107'
+        xsi:schemaLocation="
+        http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.0.xsd
+        http://www.ehcache.org/v3/jsr107 http://www.ehcache.org/schema/ehcache-107-ext-3.0.xsd">
+
+    <service>
+        <jsr107:defaults enable-management="true" enable-statistics="true"/>
+    </service>
+
+    <persistence directory="${java.io.tmpdir}"/>
+
+    <!-- 用户 -->
+    <cache alias="sys-userCache" uses-template="normal">
+        <heap unit="entries">1000</heap>
+    </cache>
+
+    <!-- 组织，部门 -->
+    <cache alias="sys-orgDepCache" uses-template="normal">
+        <key-type>java.lang.Object</key-type>
+        <value-type copier="com.fuhuadata.cache.ehcache.PlainJavaObjectCopier">java.lang.Object</value-type>
+        <heap unit="entries">1000</heap>
+    </cache>
+
+    <cache-template name="normal">
+        <key-type>java.lang.Object</key-type>
+        <value-type>java.lang.Object</value-type>
+    </cache-template>
+
+</config>

@@ -105,7 +105,7 @@ public class Dept extends BaseEntity<Integer> implements Treeable<String> {
 
     @Override
     public void setParentId(String parentId) {
-        throw new UnsupportedOperationException();
+
     }
 
     @Override
