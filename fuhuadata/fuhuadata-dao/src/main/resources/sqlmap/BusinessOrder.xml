@@ -180,7 +180,7 @@
                 a.sale_organization_id = #saleOrganizationId#
             </isNotEmpty>
             <isNotEmpty prepend=" AND " property="saleOrganizationName">
-                a.sale_organization_name like concat('%',#saleOrganizationName#,'%')
+                a.sale_organization_name like concat('%',#saleOrganizationName#`,'%')
             </isNotEmpty>
             <isNotEmpty prepend=" AND " property="customerLevel">
                 base.customer_level = #customerLevel#

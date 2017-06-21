@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 
 
 /** 仓库
@@ -35,6 +36,8 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
 
     @Autowired
     private WarehouseScoreService warehouseScoreService;
+    @Autowired
+    private WarehouseEvaluationScoreRelationService warehouseEvaluationScoreRelationService;
 
 
     @Autowired
@@ -183,6 +186,10 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
         ScoreInfoVO<WarehouseEvaluationScoreRelation,WarehouseScore> scoreInfoVO = new ScoreInfoVO<>();
         try{
             scoreInfoVO.setTerms(scoreTermService.warehouseScoreItemIndex(scoreId));
+            List<WarehouseEvaluationScoreRelation> scoreList = warehouseEvaluationScoreRelationService.listByScoreId(scoreId);
+            if(scoreList!=null&&scoreList.size()>0){
+                scoreInfoVO.setScoreList(scoreList);
+            }
             scoreInfoVO.setTotalScore(warehouseScoreService.get(scoreId));
             result.addDefaultModel("score",scoreInfoVO);
         }catch(Exception e){
