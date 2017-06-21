@@ -39,7 +39,7 @@
 </div>
 
 <div class="modal fade" id="grademodal" tabindex="-1"  aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog" style="width:700px">
+    <div class="modal-dialog" style="width:800px">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -166,6 +166,16 @@
                         var tpl = '';
                         if(list.length>0){
                             $.each(list, function(i, item){
+                                var td;
+                                switch (typeof item.id){
+                                    case 'number':
+                                        td = '<td><a href="'+basePath+'/supplier/warehouse/intoWarehouseGradeDetails/?scoreId='+
+                                                table.hasField(item.id)+'&warehouseId='+id+'">'+table.hasField(item.totalScore)+'</a></td>';
+                                        break;
+                                    case 'undefined':
+                                        td = '<td>无订单</td>';
+                                        break;
+                                }
                                 tpl +=
                                         '<tr>' +
                                         '<td>'+table.hasField(item.monthTime)+'</td>'+
@@ -175,7 +185,7 @@
                                         '<td>'+table.hasField(item.warehouseScore)+'</td>'+
                                         '<td>'+table.hasField(item.packageScore)+'</td>'+
                                         '<td>'+table.hasField(item.checkStockScore)+'</td>'+
-                                        '<td><a class="gradeinfo" data-id="'+item.id+'">'+table.hasField(item.totalScore)+'</a></td>'+
+                                        td+
                                         '<td>'+table.hasField(item.evaluateUserName)+'</td>'+
                                         '<td>'+table.hasField(item.evaluateTime)+'</td>'+
                                         '<td>'+table.hasField(item.remarks)+'</td>'+
@@ -202,7 +212,7 @@
         table.init();
     });
 
-    $(document).on('click','.gradeinfo',function(){
+    /*$(document).on('click','.gradeinfo',function(){
         var scoreId = $(this).attr('data-id');
 
         jQuery.ajax({
@@ -212,13 +222,77 @@
             type:'GET',
         }).done(function(result){
             if(result.code == 1){
-                renderTable(res.data.terms);
+                $('#gradeList').html(renderTable(result.data.terms));
             }
         })
-    })
 
-    function renderTable(data){
+        $('#grademodal').modal('show');
+    })*/
 
-    }
+    /*function renderTable(data){
+        var tr = '';
+        var tb = '';
+
+        console.log(data);
+        /!*for(var i=0;i<data.length;i++){
+            tr += '<tr>';
+            tr += '<td>'+data[i].itemName+'</td>';
+            tr += '<td>';
+            for(var j=0;j<data[i].values.length;j++){
+                if(data[i].values[j].warehouseEvaluationScoreRelation!=undefined){
+                    tr +=
+                            '<label class="radio-inline">' +
+                            '<input name="'+data[i].values[j].evaluationItemId+'" data-edit="on" type="radio" value="'+data[i].values[j].value+'" disabled checked>'+
+                            data[i].values[j].optionName+
+                            '</label>';
+                    tr += '</td>' +
+                            '<td><input class="form-control" name="remark'+data[i].values[j].warehouseEvaluationScoreRelation.remarks+'" data-edit="on" type="text" disabled></td>' +
+                            '<td class="text-info" name="score'+data[i].values[j].warehouseEvaluationScoreRelation.score+'" data-name=""></td></tr>';
+                }else{
+                    tr +=
+                            '<label class="radio-inline">' +
+                            '<input name="'+data[i].values[j].evaluationItemId+'" data-edit="on" type="radio" value="'+data[i].values[j].value+'" disabled>'+
+                            data[i].values[j].optionName+
+                            '</label>';
+                    tr +=
+                            '</td><td></td><td></td></tr>'
+                }
+            }
+
+        }*!/
+        $.each(data,function(i,item){
+            tr += '<tr>';
+            tr += '<td>'+item.itemName+'</td>';
+            tr += '<td>';
+            $.each(item.values, function (j, o) {
+                if(o.warehouseEvaluationScoreRelation){
+                    tr +=
+                            '<label class="radio-inline">' +
+                            '<input name="'+o.evaluationItemId+'" data-edit="on" type="radio" value="'+o.value+'" disabled checked>'+
+                            o.optionName+
+                            '</label>';
+                    tb +=
+                            '</td>' +
+                            '<td><input class="form-control" name="remark'+o.warehouseEvaluationScoreRelation.remarks+'" data-edit="on" type="text" disabled></td>' +
+                            '<td class="text-info" name="score'+o.warehouseEvaluationScoreRelation.score+'" data-name=""></td></tr>';
+                }else {
+
+
+                    tr +=
+                            '<label class="radio-inline">' +
+                            '<input name="'+o.evaluationItemId+'" data-edit="on" type="radio" value="'+o.value+'" disabled>'+
+                            o.optionName+
+                            '</label>';
+                    tb +=
+                            '</td><td></td><td></td></tr>';
+                }
+            })
+            tr +=
+                    '</td>' +
+                    '<td><input class="form-control" name="remark" data-edit="on" type="text" disabled></td>' +
+                    '<td class="text-info" name="score" data-name=""></td></tr>';
+        })
+        return tr;
+    }*/
 
 </script>

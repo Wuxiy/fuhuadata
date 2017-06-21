@@ -1,0 +1,324 @@
+<div class="nav-deputy shadow-out clearfix">
+    #breadcrumb()
+</div>
+<div class="dashboard-wrapper">
+    <div class="row">
+        <div class="col-xs-8">
+            <div class="panel panel-default" id="container">
+                <div class="panel-heading">
+                    <h3 class="panel-title" lang="zh">仓库服务评分</h3>
+                </div>
+                <div class="panel-body clearfix">
+                    <form class="form-horizontal" id="warehouse_grade">
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <!--表格-->
+                                <table class="table text-center table-condensed table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center" lang="zh">评价指标</th>
+                                        <th class="text-center" lang="zh">评价</th>
+                                        <th class="text-center col-xs-2" lang="zh">备注</th>
+                                        <th class="text-center col-xs-1" lang="zh">得分</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="grade_list"></tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <td class="text-danger" colspan="3" lang="zh">综合得分</td>
+                                        <td class="text-danger" name="totalScore"></td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group hidden" data-view="editView">
+                            <div class="col-xs-2 col-xs-offset-4">
+                                <button class="btn btn-block btn-default" name="cancel" type="button" lang="zh">取消</button>
+                            </div>
+                            <div class="col-xs-2">
+                                <button class="btn btn-block btn-primary" name="save" type="button" lang="zh">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input id="scoreId" type="hidden" value="$!{scoreId}">
+<input id="forwardingId" type="hidden" value="$!{warehouseId}">
+
+<script type="text/javascript" language="JavaScript">
+    $(function(){
+        var scoreId = $('#scoreId').val(),
+                warehouseId = $('#forwardingId').val(),
+                panel = {
+                    panelDom:'#container',
+                    eidtBtn:'[name="edit"]',
+                    toShowHandler:function () { // 展示状态
+                        var hide = form.editViews,
+                                show = form.editHides,
+                                ON = form.editOFF,
+                                OFF = form.editON;
+                        hide.addClass('hidden');
+                        show.removeClass('hidden');
+                        $(ON,'#container').attr('disabled', false);
+                        $(OFF,'#container').attr('disabled', true);
+                    },
+                    toEditHandler:function () { // 编辑状态
+                        var hide = form.editHides,
+                                show = form.editViews,
+                                ON = form.editON,
+                                OFF = form.editOFF;
+                        hide.addClass('hidden');
+                        show.removeClass('hidden');
+                        $(ON,'#container').attr('disabled', false);
+                        $(OFF,'#container').attr('disabled', true);
+                    }
+                },
+                form = {
+                    formDom:'#order_grade',
+                    body:'#grade_list',
+                    remarks:'[name^="remark"]',
+                    saveBtn:'[name="save"]',
+                    cancelBtn:'[name="cancel"]',
+                    radios:'[type="radio"]',
+                    totalScore:$('[name="totalScore"]', '#warehouse_grade'),
+                    editViews:$('[data-view="editView"]', '#container'), // 编辑状态显示的dom
+                    editHides:$('[data-view="editHide"]', '#container'), // 编辑状态隐藏的dom
+                    editON:'[data-edit="on"]', // 编辑状态启用的控件
+                    editOFF:'[data-edit="off"]', // 编辑状态禁用的控件
+                    verify:(function () {
+                        return $('#warehouse_grade').validate({
+                            errorPlacement: function(error, element) {
+                                $( element )
+                                        .closest( "td" )
+                                        .append( error );
+                            },
+                            rules: {
+                                '24': 'required',
+                                '25': 'required',
+                                '26': 'required',
+                                '27': 'required',
+                                '28': 'required',
+                                '29': 'required',
+                                '34': 'required'
+                            },
+                            messages: {
+                                '24': {
+                                    required:em('请选择一个值','top:-29px','left:0')
+                                },
+                                '25': {
+                                    required:em('请选择一个值','top:-29px','left:0')
+                                },
+                                '26': {
+                                    required:em('请选择一个值','top:-29px','left:0')
+                                },
+                                '27': {
+                                    required:em('请选择一个值','top:-29px','left:0')
+                                },
+                                '28': {
+                                    required:em('请选择一个值','top:-29px','left:0')
+                                },
+                                '29': {
+                                    required:em('请选择一个值','top:-29px','left:0')
+                                },
+                                '34': {
+                                    required:em('请选择一个值','top:-29px','left:0')
+                                }
+                            }
+                        });
+                    })(),
+                    data:[],
+                    init:function () {
+                        var self = this;
+                        $.ajax({
+                            url:basePath+'/supplier/warehouse/evaluationIndexItem?scoreId='+scoreId,
+                            dataType:'json',
+                            contentType:'application/json',
+                            type:'GET'
+                        }).done(function (res) {
+
+                            if (res.code===1) {
+
+                                self.renderTable(res.data.terms); // 渲染table Dom结构
+
+                                if (res.data.scoreList) {
+
+                                    self.data = res.data.scoreList;
+                                    self.renderData(self.data); // 为table渲染数据
+                                    panel.toShowHandler();
+                                }else {
+                                    self.addEvent('click.cancel', self.cancelBtn, self.cancelHandler);
+                                    self.addEvent('click.save', self.saveBtn, self.saveHandler);
+                                    self.addEvent('click.calculate', self.radios, self.calculateHandler);
+                                    self.addEvent('change.calculate', self.remarks, self.upDataHandler);
+                                    panel.toEditHandler();
+                                }
+                            }
+                        });
+                    },
+                    renderTable:function (data) { // 渲染表格
+
+                        if (!data) return;
+                        var tr = '';
+                        var part = '';
+
+                        $.each(data,function(i,item){
+                            part = 'part' + (i + 1);
+                            tr += '<tr>';
+                            tr += '<td>'+item.itemName+'</td>';
+                            tr += '<td>';
+                            $.each(item.values, function (j, o) {
+                                    tr +=
+                                            '<label class="radio-inline">' +
+                                            '<input name="'+o.evaluationItemId+'" data-edit="on" type="radio" value="'+o.value+'" disabled>'+
+                                            o.optionName+
+                                            '</label>';
+                            })
+                            tr +=
+                                    '</td>' +
+                                    '<td><input class="form-control" name="remark'+item.itemId+'" data-edit="on" type="text" disabled></td>' +
+                                    '<td class="text-info" name="score'+item.itemId+'" data-name="'+part+'"></td></tr>';
+                        })
+                        $('#grade_list').html(tr);
+                    },
+                    renderData:function (list) {
+
+                        if (!Array.isArray(list)) return;
+
+                        var total = 0,
+                                isCalculate=true,
+                                multiValue=6,
+                                theScore;
+                        $.each(list, function (i, item) {
+                            var theItem = item.evaluationItemId;
+
+                            $('[name="'+theItem+'"]')
+                                    .val([form.hasField(item.score)]);
+                            $('[name="remark'+theItem+'"]')
+                                    .val(form.hasField(item.remarks)); // 备注
+                            $('[name="score'+theItem+'"]')
+                                    .text(form.hasField(item.score)); // 得分
+
+                            total += (typeof item.score==='number'?item.score:0);
+
+                        });
+                        form.totalScore.text(total);
+                    },
+                    hasField:function (field) {
+
+                        if (field===null||field===undefined){
+                            return '';
+                        }else {
+                            return field;
+                        }
+                    },
+                    addEvent:function (eType, el, handler) {
+                        $(this.formDom).off(eType).on(eType, el, handler);
+                    },
+                    cancelHandler:function () {
+                        /*form.render(form.ectype);
+                         panel.toShowHandler();*/
+                        location.href = basePath+'supplier/warehouse/intoWarehouseGrade?warehouseId=' + warehouseId;
+                    },
+                    saveHandler:function () {
+
+                        if (!form.isPass()) return;
+
+                        if (confirm('确定要保存吗？保存过后将不能修改。')) {
+
+                            var data = {
+                                score:{},
+                                list:form.data
+                            };
+                            data.score.timeScore = form.addNumber('[data-name="part1"]');//报表及时性评分
+                            data.score.accuracyScore = form.addNumber('[data-name="part2"]');//报表准确性
+                            data.score.storageScore = form.addNumber('[data-name="part3"]') + form.addNumber('[data-name="part7"]');//入库
+                            data.score.warehouseScore = form.addNumber('[data-name="part4"]');//仓储
+                            data.score.packageScore = form.addNumber('[data-name="part5"]');//盘库
+                            data.score.checkStockScore = form.addNumber('[data-name="part6"]');//换包装
+                            data.score.totalScore = data.score.timeScore + data.score.accuracyScore + data.score.storageScore + data.score.warehouseScore + data.score.packageScore + data.score.checkStockScore;
+                            data.score.warehouseId = warehouseId;
+                            /*console.log(data);*/
+                            $.ajax({
+                                url:basePath+'/supplier/warehouse/saveScore',
+                                type:'POST',
+                                data:JSON.stringify(data),
+                                contentType:'application/json'
+                            }).done(function (res) {
+
+                                if (res.code===1) {
+
+                                    alert('评价成功！');
+                                    /*form.init();*/
+                                    location.href = basePath+'supplier/warehouse/intoWarehouseGrade?warehouseId=' + warehouseId;
+                                }
+                            })
+                        }
+
+                    },
+                    calculateHandler:function () {
+
+                        var name = $(this).attr('name'),
+                                val = parseFloat($('[name="'+name+'"]',form.formDom).filter(':checked').val()),
+                                i = $('[name="'+name+'"]',form.formDom).data('index'), // 与form.data数组的下标相对应，如果没有则为undefined
+                                cb = function () {
+                                    form.renderData(form.data);
+                                };
+
+                        if (typeof i==='number') {
+
+                            if (val===form.data[i].score) return; // 如果点击的值和当前值相等则返回
+
+                            form.data[i].score = val;
+
+                            cb(); // 重新渲染数据
+                        }else {
+
+                            var obj = {
+                                score:val,
+                                evaluationItemId:parseInt(name),
+                            };
+                            i = form.data.push(obj)-1;
+                            $('[name="'+name+'"]',form.formDom).data('index',i);
+                            cb();
+                        }
+                        /*console.log(form.data);*/
+                    },
+                    upDataHandler:function () {
+                        var val = $(this).val().trim(),
+                                str = $(this).attr('name'),
+                                j = str.search(/\d/),
+                                name = str.slice(j), // 取得对应radio的name
+                                i = $('[name="'+name+'"]',form.formDom).data('index');
+
+                        if (typeof i==='number') {
+
+                            form.data[i].remarks = val;
+                        }else {
+
+                            var obj = {
+                                remarks:val,
+                                evaluationItemId:parseInt(name),
+                            };
+                            i = form.data.push(obj)-1;
+                            $('[name="'+name+'"]',form.formDom).data('index',i);
+                        }
+
+                    },
+                    addNumber:function (els) {
+                        var n = 0;
+                        n = parseInt(($(els).text()?$(els).text():0));
+                        return n;
+                    },
+                    isPass:function () { // 验证
+                        return form.verify.form();
+                    }
+                };
+        form.init();
+    });
+</script>
+
