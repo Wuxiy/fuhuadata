@@ -1,7 +1,5 @@
 package com.fuhuadata.vo.Supplier;
 
-import com.fuhuadata.domain.mybatis.supplier.ForwardingScore;
-
 import java.util.List;
 
 /**

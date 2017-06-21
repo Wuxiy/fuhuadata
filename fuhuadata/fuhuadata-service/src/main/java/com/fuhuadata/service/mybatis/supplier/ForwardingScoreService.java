@@ -16,5 +16,5 @@ public interface ForwardingScoreService extends BaseService<ForwardingScore,Inte
 
     PageInfo<ForwardingScore> getForwardingScoreList(QueryForwardingScore query);
 
-    int saveScore(ScoreVO<ForwardingScore,ForwardingEvaluationScoreRelation> scoreVO);
+    int saveScore(ScoreVO<ForwardingScore,ForwardingEvaluationScoreRelation> scoreVO,String year,String month);
 }

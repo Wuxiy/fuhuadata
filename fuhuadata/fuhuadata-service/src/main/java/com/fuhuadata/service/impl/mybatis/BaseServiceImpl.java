@@ -115,7 +115,6 @@ public abstract class BaseServiceImpl<E extends BaseEntity<ID>, ID extends Seria
         } else {
             return saveSelective(entity);
         }
-
     }
 
     public int update(E entity) {

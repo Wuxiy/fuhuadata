@@ -101,6 +101,8 @@ public class BusinessOrder implements Serializable{
     private String merchandiser;//跟单员pk
     private String merchandiserName;//跟单员name
 
+    private String billcode;//外销合同号
+
     public String getMerchandiser() {
         return merchandiser;
     }
@@ -619,5 +621,13 @@ public class BusinessOrder implements Serializable{
 
     public void setTradeCountryName(String tradeCountryName) {
         this.tradeCountryName = tradeCountryName;
+    }
+
+    public String getBillcode() {
+        return billcode;
+    }
+
+    public void setBillcode(String billcode) {
+        this.billcode = billcode;
     }
 }

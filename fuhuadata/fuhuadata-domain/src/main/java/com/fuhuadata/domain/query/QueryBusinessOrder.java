@@ -46,6 +46,8 @@ public class  QueryBusinessOrder {
     private Integer status;
     private String merchandiser;//跟单员pk
     private String merchandiserName;//跟单员name
+    //外销合同号
+    private String billcode;
 
     public String getMerchandiser() {
         return merchandiser;
@@ -298,5 +300,13 @@ public class  QueryBusinessOrder {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getBillcode() {
+        return billcode;
+    }
+
+    public void setBillcode(String billcode) {
+        this.billcode = billcode;
     }
 }

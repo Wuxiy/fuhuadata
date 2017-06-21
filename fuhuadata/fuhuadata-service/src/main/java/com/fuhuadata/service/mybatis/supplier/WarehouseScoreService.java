@@ -19,5 +19,5 @@ public interface WarehouseScoreService extends BaseService<WarehouseScore,Intege
      * @param scoreVO
      * @return
      */
-    int saveScore(ScoreVO<WarehouseScore,WarehouseEvaluationScoreRelation> scoreVO);
+    int saveScore(ScoreVO<WarehouseScore,WarehouseEvaluationScoreRelation> scoreVO,String year,String month);
 }

@@ -3,7 +3,8 @@
  */
 
 $(function(){
-    var orderId = $('#orderId').val(),
+    var scoreId = $('#scoreId').val(),
+        forwardingId = $('#forwardingId').val(),
         panel = {
             panelDom:'#container',
             eidtBtn:'[name="edit"]',
@@ -40,12 +41,119 @@ $(function(){
             editHides:$('[data-view="editHide"]', '#container'), // 编辑状态隐藏的dom
             editON:'[data-edit="on"]', // 编辑状态启用的控件
             editOFF:'[data-edit="off"]', // 编辑状态禁用的控件
+            verify:(function () {
+                return $('#order_grade').validate({
+                    errorPlacement: function(error, element) {
+                        $( element )
+                            .closest( "td" )
+                            .append( error );
+                    },
+                    rules: {
+                        '1': 'required',
+                        '2': 'required',
+                        '3': 'required',
+                        '4': 'required',
+                        '5': 'required',
+                        '6': 'required',
+                        '7': 'required',
+                        '8': 'required',
+                        '9': 'required',
+                        '10': 'required',
+                        '11': 'required',
+                        '12': 'required',
+                        '13': 'required',
+                        '14': 'required',
+                        '15': 'required',
+                        '16': 'required',
+                        '17': 'required',
+                        '18': 'required',
+                        '19': 'required',
+                        '20': 'required',
+                        '21': 'required',
+                        '22': 'required',
+                        '23': {
+                            'required':'#rel:checked'
+                        }
+                    },
+                    messages: {
+                        '1': {
+                            required:em('请选择一个值','top:-29px','left:0')
+                        },
+                        '2': {
+                            required:em('请选择一个值','top:-29px','left:0')
+                        },
+                        '3': {
+                            required:em('请选择一个值','top:-29px','left:0')
+                        },
+                        '4': {
+                            required:em('请选择一个值','top:-29px','left:0')
+                        },
+                        '5': {
+                            required:em('请选择一个值','top:-29px','left:0')
+                        },
+                        '6': {
+                            required:em('请选择一个值','top:-29px','left:0')
+                        },
+                        '7': {
+                            required:em('请选择一个值','top:-29px','left:0')
+                        },
+                        '8': {
+                            required:em('请选择一个值','top:-29px','left:0')
+                        },
+                        '9': {
+                            required:em('请选择一个值','top:-29px','left:0')
+                        },
+                        '10': {
+                            required:em('请选择一个值','top:-29px','left:0')
+                        },
+                        '11': {
+                            required:em('请选择一个值','top:-29px','left:0')
+                        },
+                        '12': {
+                            required:em('请选择一个值','top:-29px','left:0')
+                        },
+                        '13': {
+                            required:em('请选择一个值','top:-29px','left:0')
+                        },
+                        '14': {
+                            required:em('请选择一个值','top:-29px','left:0')
+                        },
+                        '15': {
+                            required:em('请选择一个值','top:-29px','left:0')
+                        },
+                        '16': {
+                            required:em('请选择一个值','top:-29px','left:0')
+                        },
+                        '17': {
+                            required:em('请选择一个值','top:-29px','left:0')
+                        },
+                        '18': {
+                            required:em('请选择一个值','top:-29px','left:0')
+                        },
+                        '19': {
+                            required:em('请选择一个值','top:-29px','left:0')
+                        },
+                        '20': {
+                            required:em('请选择一个值','top:-29px','left:0')
+                        },
+                        '21': {
+                            required:em('请选择一个值','top:-29px','left:0')
+                        },
+                        '22': {
+                            required:em('请选择一个值','top:-29px','left:0')
+                        },
+                        '23': {
+                            required:em('请选择一个值','top:-29px','left:0')
+                        }
+                    }
+                });
+            })(),
             data:[],
             ectype:null,
             init:function () {
                 var self = this;
                 $.ajax({
-                    url:basePath+'/supplier/forwarding/evaluationIndexItem?scoreId=2',
+                    url:basePath+'/supplier/forwarding/evaluationIndexItem?scoreId='+scoreId,
                     dataType:'json',
                     contentType:'application/json',
                     type:'GET'
@@ -60,7 +168,13 @@ $(function(){
                             self.data = res.data.scoreList;
                             self.ectype = $.extend(true, [], self.data); // 深拷贝一份数据对象的副本
                             self.renderData(self.data); // 为table渲染数据
+                            self.renderObj(res.data.forwardingScore);
                             panel.toShowHandler();
+                            /*self.addEvent('click.cancel', self.cancelBtn, self.cancelHandler);
+                            self.addEvent('click.save', self.saveBtn, self.saveHandler);
+                            self.addEvent('click.calculate', self.radios, self.calculateHandler);
+                            self.addEvent('change.calculate', self.remarks, self.upDataHandler);
+                            panel.toEditHandler();*/
                         }else {
                             self.addEvent('click.cancel', self.cancelBtn, self.cancelHandler);
                             self.addEvent('click.save', self.saveBtn, self.saveHandler);
@@ -89,14 +203,14 @@ $(function(){
                             case 1:
                                 thisRow = 'level'+level+'_'+(++i);
                                 tr += '<tr>';
-                                tr += '<td rowspan="'+thisRow+'">' + item.itemName + '</td>';
+                                tr += '<td rowspan="'+thisRow+'">'+item.itemName+'</td>';
                                 rows = 0;
                                 part = 'part'+i; // 标记，代表属于哪一部分
                                 cir(item.nodes);
                                 break;
                             case 2:
                                 if (i>0) tr += '<tr>';
-                                tr += '<td rowspan="'+item.nodes.length+'">' + item.itemName + '</td>';
+                                tr += '<td rowspan="'+item.nodes.length+'">'+item.itemName+'</td>';
                                 rows += item.nodes.length;
                                 cir(item.nodes);
                                 break;
@@ -114,8 +228,20 @@ $(function(){
                                         '</label>';
                                 });
                                 tr += '</td>' +
-                                    '<td><input class="form-control" name="remark'+theItem+'" data-edit="on" type="text" disabled></td>' +
-                                    '<td class="text-info" name="score'+theItem+'" data-name="'+part+'"></td></tr>';
+                                    '<td><input class="form-control" name="remark'+theItem+'" data-edit="on" type="text" disabled></td>';
+                                    switch (theItem) {
+                                        case 8:
+                                            tr += '<td class="text-info" name="score'+theItem+'" data-name="'+part+'" rowspan="4"></td></tr>';
+                                        break;
+                                        case 9:
+                                            break;
+                                        case 10:
+                                            break;
+                                        case 11:
+                                            break;
+                                        default:
+                                            tr += '<td class="text-info" name="score'+theItem+'" data-name="'+part+'"></td></tr>';
+                                    }
                                 break;
                         }
                     });
@@ -128,23 +254,82 @@ $(function(){
                 };
                 cir(data);
                 $('#factory_list').html(tr);
+                $('[name="22"]', form.formDom).eq(1).attr('id','rel');
             },
             renderData:function (list) {
 
                 if (!Array.isArray(list)) return;
 
-                var total = 0;
+                var total = 0,
+                    isCalculate=true,
+                    multiValue=6,
+                    theScore;
                 $.each(list, function (i, item) {
-                    $('[name="'+item.evaluationValueId+'"]')
+                    var theItem = item.evaluationItemId;
+
+                    $('[name="'+theItem+'"]')
                         .val([form.hasField(item.score)])
-                        .data('index',i);
-                    $('[name="remark'+item.evaluationValueId+'"]')
-                        .val(form.hasField(item.remarks));
-                    $('[name="score'+item.evaluationValueId+'"]')
-                        .text(form.hasField(item.score));
-                    total += item.score;
+                        .data('index',i); // 单选按钮
+                    $('[name="remark'+theItem+'"]')
+                        .val(form.hasField(item.remarks)); // 备注
+                    switch (theItem) {
+                        case 8:
+                        case 9:
+                        case 10:
+                        case 11:
+                            if (!item.score) { // 8 9 10 11执行同一个函数
+                                isCalculate = false;
+                            }
+                            /*console.log(isCalculate);*/
+                            break;
+                        case 23:
+                            break;
+                        case 22:
+                            theScore=item.score;
+                        default:
+                            $('[name="score'+theItem+'"]')
+                                .text(form.hasField(item.score)); // 得分
+                            total += (typeof item.score==='number'?item.score:0);
+                    }
+
                 });
+                var a = $('[name="8"]').data('index');
+
+                if (typeof a==='number') {
+
+                    var res = multiValue*(isCalculate?1:0);
+                    $('[name="score8"]')
+                        .text(form.hasField(res)); // 得分
+                    total += res;
+                }
+                var i = $('[name="23"]').data('index');
+
+                if (theScore===0) { // 有投诉记录时，启用整改评价
+
+                    if (typeof i === 'number') {
+                        var b =typeof form.data[i].score==='number'?form.data[i].score:0;
+                        $('[name="score23').text(form.hasField(b));
+                        total += b;
+                    }
+                    $('[name="23"]').attr('disabled', false);
+                    $('[name="remark23"]').attr('disabled', false);
+                }else {
+                    if (typeof i === 'number') {
+                        form.data[i].score=0;
+                        form.data[i].remarks='';
+                    }
+                    $('[name="23"]').attr('disabled', true).prop('checked', false);
+                    $('[name="remark23"]').attr('disabled', true).val('');
+                    $('[name="score23').text('')
+                }
                 form.totalScore.text(total);
+            },
+            renderObj:function (o) {
+
+                if (!!o) {
+
+                    $('[name="primaryRemark"]', form.formDom).val(o.remarks);
+                }
             },
             hasField:function (field) {
 
@@ -164,6 +349,8 @@ $(function(){
             },
             saveHandler:function () {
 
+                if (!form.isPass()) return;
+
                 if (confirm('确定要保存吗？保存过后将不能修改。')) {
 
                     var data = {
@@ -172,12 +359,13 @@ $(function(){
                     };
                     data.score.serviceScore = form.addNumber('[data-name="part1"]');
                     data.score.priceScore = form.addNumber('[data-name="part2"]');
+                    /*console.log(data.score.serviceScore);*/
                     data.score.warehouseScore = form.addNumber('[data-name="part3"]');
                     data.score.complaintsScore = form.addNumber('[data-name="part4"]');
                     data.score.totalScore = data.score.serviceScore + data.score.priceScore + data.score.warehouseScore + data.score.complaintsScore;
-                    data.score.forwardingId = 1;
-                    data.score.monthTime = "2016-12";
-                    data.score.id = 2;
+                    data.score.remarks = $('[name="primaryRemark"]',form.formDom).val();
+                    data.score.forwardingId = forwardingId;
+                    data.score.id = scoreId;
                     /*console.log(data);*/
                     $.ajax({
                         url:basePath+'/supplier/forwarding/saveScore',
@@ -199,22 +387,24 @@ $(function(){
             calculateHandler:function () {
 
                 var name = $(this).attr('name'),
-                    val = parseInt($('[name="'+name+'"]',form.formDom).filter(':checked').val()),
+                    val = parseFloat($('[name="'+name+'"]',form.formDom).filter(':checked').val()),
                     i = $('[name="'+name+'"]',form.formDom).data('index'), // 与form.data数组的下标相对应，如果没有则为undefined
                     cb = function () {
                         form.renderData(form.data);
                     };
+
                 if (typeof i==='number') {
 
                     if (val===form.data[i].score) return; // 如果点击的值和当前值相等则返回
 
                     form.data[i].score = val;
+
                     cb(); // 重新渲染数据
                 }else {
 
                     var obj = {
                         score:val,
-                        evaluationValueId:parseInt(name),
+                        evaluationItemId:parseInt(name),
                     };
                     i = form.data.push(obj)-1;
                     $('[name="'+name+'"]',form.formDom).data('index',i);
@@ -236,7 +426,7 @@ $(function(){
 
                     var obj = {
                         remarks:val,
-                        evaluationValueId:parseInt(name),
+                        evaluationItemId:parseInt(name),
                     };
                     i = form.data.push(obj)-1;
                     $('[name="'+name+'"]',form.formDom).data('index',i);
@@ -249,6 +439,9 @@ $(function(){
                     n+=parseInt(($(this).text()?$(this).text():0));
                 });
                 return n;
+            },
+            isPass:function () { // 验证
+                return form.verify.form();
             }
         };
     form.init();
