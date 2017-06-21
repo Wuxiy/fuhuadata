@@ -102,7 +102,7 @@
                         switch (typeof item.id){
                             case 'number':
                                 td = '<td><a href="'+basePath+'/supplier/forwarding/intoForwardingGradeDetails/?scoreId='+
-                                table.hasField(item.id)+'&forwardingId='+id+'">'+table.hasField(item.totalScore)+'</a></td>';
+                                table.hasField(item.id)+'&forwardingId='+id+'">'+(typeof item.totalScore==='number'?item.totalScore:'去评价')+'</a></td>';
                                 break;
                             case 'undefined':
                                 td = '<td>无订单</td>';
