@@ -66,7 +66,7 @@
 </div>
 ## 详情modal
 <div class="modal fade in" id="details_modal" tabindex="-1" role="dialog" data-backdrop="false" aria-hidden="true" >
-    <div class="modal-dialog" style="width: 400px">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -101,7 +101,7 @@
         var cvendorId = $('#cvendor_id').val(),
                 table = {
                     total:0,
-                    pageSize:1,
+                    pageSize:10,
                     pageNum:0,
                     pagination:$('#pagination'),
                     container:$('#order_content'),
@@ -164,15 +164,17 @@
                                 tpl +=
                                     '<tr>' +
                                     '<td>'+(++count)+'</td>'+
-                                    '<td><a data-id="'+item.pkCtPu+'" href="#">'+table.hasField(item.vbillcode)+'</a></td>'+
+                                    '<td><a name="popModal" data-id="'+item.pkCtPu+'" href="#">'+table.hasField(item.vbillcode)+'</a></td>'+
                                     '<td>'+table.hasField(item.ctname)+'</td>'+
-                                    '<td>'+table.hasField(item.subscribedate)+'</td>'+
+                                    '<td>'+table.transformDateHandler(table.hasField(item.subscribedate))+'</td>'+
                                     '<td>'+table.hasField(item.actualinvalidate)+'</td>'+
+                                    '<td>'+table.hasField()+'</td>'+
                                     '<td>'+table.hasField(item.totalNumber)+'</td>'+
                                     '<td>'+table.hasField(item.ntotalorigmny)+'</td>'+
                                     '<td>'+table.hasField(item.remark)+'</td>'+
-                                    '<td>'+table.hasField()+'</td>'+
-                                    '<td>'+table.hasField()+'</td>'+
+                                    '<td><a href="'+basePath+'/factory/eva/'+item.id+'/vm">'+
+                                    (typeof item.totalScore==='number'?item.totalScore:'去评价')+
+                                    '</td></a>'
                                     '</tr>';
                             });
                         }else {
@@ -184,6 +186,21 @@
                         this.setPagination.items_per_page = this.pageSize;
                         this.pagination.pagination(this.total,this.setPagination);
                     },
+                    transformDateHandler:function (time) {
+                        var time = new Date(time),
+                            year = time.getFullYear(),
+                            month = parseInt(time.getMonth())+1,
+                            day = time.getDate(),
+                            hours = parseInt(time.getHours()),
+                            minutes = parseInt(time.getMinutes()),
+                            seconds = parseInt(time.getSeconds()),
+                            newTime;
+                        return newTime = year+'-'+
+                                (month.toString().length===1?'0'+month:month)+'-'+
+                                (day.toString().length===1?'0'+day:day)+' '+
+                                (hours.toString().length===1?'0'+hours:hours)+':'+
+                                (minutes.toString().length===1?'0'+minutes:minutes)
+                    },
                     hasField:function (field) {
 
                         if (field===null||field===undefined){
@@ -193,16 +210,16 @@
                         }
                     },
                     clickHandler:function (e) {
+                        e.preventDefault();
                         var id=$(this).data('id');
 
                         if (table.thisRow!=id) {
 
                             table.thisRow = $(this).data('id');
-                            modal.init();
-                        }else {
-
-                            modal.dom.modal('show');
+                            modal.init(table.thisRow);
                         }
+
+                        modal.dom.modal('show');
                     }
                 },
                 modal = {
@@ -211,7 +228,7 @@
                     init:function (id) {
                         var self = this;
                         $.ajax({
-                            url:basePath + '',
+                            url:basePath + '/biz/buy/contracts/'+id+'/products',
                             dataType:'json',
                             contentType:'application/json',
                             data:{
@@ -219,13 +236,9 @@
                             },
                             type:'GET'
                         }).done(function (res) {
-                            if (res.code===1) { // 请求是否成功
-
-                                if(res.data.list){
-                                    self.renderList(res.data.list);
-                                    self.dom.modal('show');
-                                }
-
+                            if (res.code===1&&res.data) { // 请求是否成功
+                                self.renderList(res.data.list);
+                                self.dom.modal('show');
                             }
                         });
                     },

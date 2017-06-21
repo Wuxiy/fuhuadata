@@ -107,7 +107,6 @@
                                 table.renderList(res.data.list);
                             }
                         });
-
                     },
                     renderList:function (list, count) {
                         var tpl = '';
@@ -138,6 +137,9 @@
                         this.setPagination.items_per_page = this.pageSize;
                         this.pagination.pagination(this.total,this.setPagination);
                     },
+                    addEvent:function (eType, el, handler) {
+                        this.container.off(eType).on(eType, el, handler);
+                    },
                     hasField:function (field) {
 
                         if (field===null||field===undefined){
@@ -149,5 +151,4 @@
                 };
         table.init();
     })();
-
 </script>
