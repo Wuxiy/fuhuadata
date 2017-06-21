@@ -7,10 +7,7 @@
         <div class="col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <div class="pull-right panel-heading-btn btn-group">
-                        <a class="btn btn-xs btn-default btn-primary active" href="" lang="zh">采购合同</a>
-                        <a class="btn btn-xs btn-default btn-primary" href="" lang="zh">原药合同</a>
-                    </div>
+                    #orderTypeTab('采购合同',$!{factory.id})
                     <h3 class="panel-title" lang="zh">产品信息</h3>
                 </div>
                 <div class="panel-body clearfix">
@@ -179,7 +176,7 @@
                                     '</tr>';
                             });
                         }else {
-                            tpl += '<tr><td colspan="9">暂无数据</td></tr>'
+                            tpl += '<tr><td colspan="10">暂无数据</td></tr>'
                         }
                         this.container.html(tpl);
                     },
