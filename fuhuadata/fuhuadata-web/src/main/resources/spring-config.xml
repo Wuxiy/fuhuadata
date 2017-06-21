@@ -42,6 +42,16 @@
         <property name="validationMessageSource" ref="messageSource"/>
     </bean>
 
+    <!-- 类型转换及数据格式化 -->
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean"/>
+
+    <!-- 设置 Excel 转换的 conversionService -->
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="staticMethod"
+                  value="com.fuhuadata.service.common.poi.ExcelToList.setConversionService"/>
+        <property name="arguments" ref="conversionService"/>
+    </bean>
+
     <!-- 启动spring注解,当自动扫描启动后,该配置可以去掉-->
     <context:annotation-config />
 

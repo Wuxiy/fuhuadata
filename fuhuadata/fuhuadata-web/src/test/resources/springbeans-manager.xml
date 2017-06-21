@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="GBK"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+
+       default-autowire="byName">
+
+	<bean id="userAccountManager" class="com.fuhuadata.manager.impl.UserAccountManagerImpl"/>
+	<bean id="systemLogManager" class="com.fuhuadata.manager.impl.SystemLogManagerImpl"/>
+	<bean id="marketTrainingManager" class="com.fuhuadata.manager.impl.MarketTrainingManagerImpl"/>
+	<bean id="exhibitionInfoManager" class="com.fuhuadata.manager.impl.ExhibitionInfoManagerImpl"/>
+	<bean id="customerEncyclopediaManager" class="com.fuhuadata.manager.impl.CustomerEncyclopediaManagerImpl"/>
+	<bean id="productProblemManager" class="com.fuhuadata.manager.impl.ProductProblemManagerImpl"/>
+	<bean id ="componentCostManager" class="com.fuhuadata.manager.impl.ComponentCostManagerImpl"/>
+	<bean id="freightCostManager" class="com.fuhuadata.manager.impl.FreightCostManagerImpl"/>
+	<bean id="rateManager" class="com.fuhuadata.manager.impl.RateManagerImpl"/>
+	<bean id = "industryDataManager" class="com.fuhuadata.manager.impl.IndustryDataManagerImpl"/>
+	<bean id = "packingArchivesManager" class="com.fuhuadata.manager.impl.PackingArchivesManagerImpl"/>
+	<bean id = "portChargesCostManager" class="com.fuhuadata.manager.impl.PortChargesCostManagerImpl"/>
+	<bean id = "preparationProcessCostManager" class="com.fuhuadata.manager.impl.PreparationProcessCostManagerImpl"/>
+	<bean id="saleCustomerManager" class="com.fuhuadata.manager.impl.SaleCustomerManagerImpl"/>
+	<bean id="customerBaseInfoManager" class="com.fuhuadata.manager.impl.CustomerBaseInfoManagerImpl"/>
+	<bean id="userManager" class="com.fuhuadata.manager.impl.UserManagerImpl"/>
+	<bean id="productInfoManager" class="com.fuhuadata.manager.impl.ProductInfoManagerImpl"/>
+	<bean id="productCategoryManager" class="com.fuhuadata.manager.impl.ProductCategoryManagerImpl"/>
+	<bean id="packingCategoryManager" class="com.fuhuadata.manager.impl.PackingCategoryManagerImpl"/>
+	<bean id="productWareManager" class="com.fuhuadata.manager.impl.ProductWareManagerImpl"/>
+	<bean id="customerProductInfoManager" class="com.fuhuadata.manager.impl.CustomerProductArchivesManagerImpl"/>
+	<bean id="customerMakeProductManager" class="com.fuhuadata.manager.impl.CustomerMakeProductManagerImpl"/>
+	<bean id="customerLinkmanManager" class="com.fuhuadata.manager.impl.CustomerLinkmanManagerImpl"/>
+	<bean id="customerPurchaseProductManager" class="com.fuhuadata.manager.impl.CustomerPurchaseProductManagerImpl"/>
+	<bean id="customerSaleProductManager" class="com.fuhuadata.manager.impl.CustomerSaleProductManagerImpl"/>
+	<bean id="recordLinkmanManager" class="com.fuhuadata.manager.impl.RecordLinkmanManagerImpl"/>
+	<bean id="customerVisitRecordManager" class="com.fuhuadata.manager.impl.CustomerVisitRecordManagerImpl"/>
+	<bean id="customerSubcompanyInfoManager" class="com.fuhuadata.manager.impl.CustomerSubcompanyInfoManagerImpl"/>
+	<bean id="businessInfoManager" class="com.fuhuadata.manager.impl.BusinessInfoManagerImpl"/>
+	<bean id="businessRecordManager" class="com.fuhuadata.manager.impl.BusinessRecordManagerImpl"/>
+	<bean id="businessOrderManager" class="com.fuhuadata.manager.impl.BusinessOrderManagerImpl"/>
+	<bean id="contractManager" class="com.fuhuadata.manager.impl.ContractManagerImpl"/>
+	<!--<bean id="businessOrderToNC" class="com.fuhuadata.manager.impl.NCExchange.BusinessOrderToNCImpl"/>-->
+	<!--<bean id="pDFTempletToPDF" class="com.fuhuadata.manager.impl.NCExchange.PDFTempletToPDFImpl"/>-->
+	<!--<bean id="factoryInfoToNC" class="com.fuhuadata.manager.impl.NCExchange.FactoryInfoToNCImpl"/>-->
+	<!--<bean id="factoryProductToNC" class="com.fuhuadata.manager.impl.NCExchange.FactoryProductToNCImpl"/>-->
+</beans>
