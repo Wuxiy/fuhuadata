@@ -57,7 +57,7 @@ CRM.systemRoleManage.delete = $('#delete');// 删除角色
 
 // 表单控件
 CRM.systemRoleManage.roleId = $('#roleId');
-CRM.systemRoleManage.orgId = $('#orgId');
+CRM.systemRoleManage.orgCode = $('#orgCode');
 CRM.systemRoleManage.orgName = $('#orgName');
 CRM.systemRoleManage.parentId = $('#parentId');
 CRM.systemRoleManage.parentName = $('#parentName');
@@ -159,7 +159,7 @@ CRM.systemRoleManage.renderData = function (res) {
     var page = CRM.systemRoleManage;
     if (res !== null) {
         page.roleId.val(res.roleId);
-        page.orgId.val(res.orgId);
+        page.orgCode.val(res.orgCode);
         page.orgName.val(res.orgName);
         page.parentId.val(res.parentId);
         page.parentName.val(res.parentName);
@@ -173,7 +173,7 @@ CRM.systemRoleManage.renderData = function (res) {
 CRM.systemRoleManage.collectData = function () {
     var page = CRM.systemRoleManage,
         obj = {
-            orgId: page.orgId.val(),
+            orgCode: page.orgCode.val(),
             parentId: page.parentId.val(),
             enable: page.enable.val(),
             name: page.name.val()
@@ -228,7 +228,7 @@ CRM.systemRoleManage.asideTreeOnClick = function (event, modLeftId, treeNode) {
 CRM.systemRoleManage.fModOrgTreeOnDbClick = function (event, modLeftId, treeNode) {
     var page = CRM.systemRoleManage;
     page.orgName.val(treeNode.name);
-    page.orgId.val(treeNode.id);
+    page.orgCode.val(treeNode.id);
     page.fModCnt.find('button.close').click(); // 关闭模态
 };
 

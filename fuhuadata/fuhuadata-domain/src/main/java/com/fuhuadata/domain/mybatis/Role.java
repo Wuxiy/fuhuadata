@@ -21,8 +21,8 @@ public class Role extends BaseEntity<Integer> implements Treeable<Integer> {
     /**
      * 组织id
      */
-    @Column(name = "org_id")
-    private Integer orgId;
+    @Column(name = "org_code")
+    private String orgCode;
 
     /**
      * 组织名称
@@ -99,17 +99,17 @@ public class Role extends BaseEntity<Integer> implements Treeable<Integer> {
      *
      * @return org_id - 组织id
      */
-    public Integer getOrgId() {
-        return orgId;
+    public String getOrgCode() {
+        return orgCode;
     }
 
     /**
      * 设置组织id
      *
-     * @param orgId 组织id
+     * @param orgCode 组织id
      */
-    public void setOrgId(Integer orgId) {
-        this.orgId = orgId;
+    public void setOrgCode(String orgCode) {
+        this.orgCode = orgCode;
     }
 
     /**

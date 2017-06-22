@@ -321,7 +321,7 @@
         </div>
     </div>
 </div>
-<input id="orgId" type="hidden">
+<input id="orgCode" type="hidden">
 <input id="parentId" type="hidden">
 <input id="userId" type="hidden">
 
