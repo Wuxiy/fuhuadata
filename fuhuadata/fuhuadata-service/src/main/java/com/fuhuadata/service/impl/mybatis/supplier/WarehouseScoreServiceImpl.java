@@ -73,11 +73,15 @@ public class WarehouseScoreServiceImpl extends BaseServiceImpl<WarehouseScore,In
         }
         warehouseEvaluationScoreRelationService.deleteByScoreId(scoreId);
         //新增下个月评价时间记录
-        String monthTime = year+"-"+month;
+        int monthd = Integer.parseInt(month);
+        String monthTime = year+"-"+monthd;
         WarehouseScore warehouseScoreSel = new WarehouseScore();
         warehouseScoreSel.setMonthTime(monthTime);
-        WarehouseScore warehouseScoreRes = get(warehouseScoreSel);
-        if(warehouseScoreRes==null){
+        Example example = newExample();
+        Example.Criteria criteria = example.createCriteria().andEqualTo("monthTime",monthTime);
+        criteria.andEqualTo("warehouseId",scoreVO.getScore().getWarehouseId());
+        List<WarehouseScore> list = listByExample(example);
+        if(list==null||list.size()==0){
             if(month.equals("12")){
                 int y= Integer.parseInt(year)+1;
                 monthTime = y+"-"+"1";

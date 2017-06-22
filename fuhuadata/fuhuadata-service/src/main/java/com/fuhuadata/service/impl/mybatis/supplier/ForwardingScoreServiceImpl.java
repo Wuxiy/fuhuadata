@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.persistence.Transient;
+import javax.swing.*;
 import java.util.Date;
 import java.util.List;
 /**
@@ -76,11 +77,15 @@ public class ForwardingScoreServiceImpl extends BaseServiceImpl<ForwardingScore,
         }
         forwardingEvaluationScoreRelationService.deleteByScoreId(scoreId);
         //新增下个月评价时间记录
-        String monthTime = year+"-"+month;
+        int monthd = Integer.parseInt(month);
+        String monthTime = year+"-"+monthd;
         ForwardingScore forwardingScoreSel = new ForwardingScore();
         forwardingScoreSel.setMonthTime(monthTime);
-        ForwardingScore forwardingScoreSelRes = get(forwardingScoreSel);
-        if(forwardingScoreSelRes==null){
+        Example example = newExample();
+        Example.Criteria criteria = example.createCriteria().andEqualTo("monthTime",monthTime);
+        criteria.andEqualTo("forwardingId",scoreVO.getScore().getForwardingId());
+        List<ForwardingScore> list = listByExample(example);
+        if(list==null||list.size()==0){
             if(month.equals("12")){
                 int y= Integer.parseInt(year)+1;
                 monthTime = y+"-"+"1";
