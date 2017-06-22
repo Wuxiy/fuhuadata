@@ -163,17 +163,19 @@
                         });
                     },
                     renderList:function (list) {
+                        console.log(list);
                         var tpl = '';
-                        if(list.length>0){
+                        if(list){
                             $.each(list, function(i, item){
                                 var td;
-                                switch (typeof item.id){
+                                switch (typeof item.totalScore){
                                     case 'number':
                                         td = '<td><a href="'+basePath+'/supplier/warehouse/intoWarehouseGradeDetails/?scoreId='+
                                                 table.hasField(item.id)+'&warehouseId='+id+'">'+table.hasField(item.totalScore)+'</a></td>';
                                         break;
                                     case 'undefined':
-                                        td = '<td>无订单</td>';
+                                        td = '<td><a href="'+basePath+'/supplier/warehouse/intoWarehouseGradeDetails/?scoreId='+
+                                                table.hasField(item.id)+'&warehouseId='+id+'">去评价</a></td>';
                                         break;
                                 }
                                 tpl +=

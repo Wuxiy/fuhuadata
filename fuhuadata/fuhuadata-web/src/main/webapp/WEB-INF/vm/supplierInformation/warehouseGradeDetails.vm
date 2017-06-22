@@ -79,7 +79,7 @@
                     }
                 },
                 form = {
-                    formDom:'#order_grade',
+                    formDom:'#warehouse_grade',
                     body:'#grade_list',
                     remarks:'[name^="remark"]',
                     saveBtn:'[name="save"]',
@@ -255,13 +255,14 @@
                                     alert('评价成功！');
                                     /*form.init();*/
                                     location.href = basePath+'supplier/warehouse/intoWarehouseGrade?warehouseId=' + warehouseId;
+                                }else {
+                                    alert('评价失败！');
                                 }
                             })
                         }
 
                     },
                     calculateHandler:function () {
-
                         var name = $(this).attr('name'),
                                 val = parseFloat($('[name="'+name+'"]',form.formDom).filter(':checked').val()),
                                 i = $('[name="'+name+'"]',form.formDom).data('index'), // 与form.data数组的下标相对应，如果没有则为undefined
