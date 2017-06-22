@@ -220,9 +220,10 @@
                         $(this.formDom).off(eType).on(eType, el, handler);
                     },
                     cancelHandler:function () {
-                        /*form.render(form.ectype);
-                         panel.toShowHandler();*/
-                        location.href = basePath+'supplier/warehouse/intoWarehouseGrade?warehouseId=' + warehouseId;
+                        var msg = '确定取消保存并返回上一个页面吗？';
+                        if(confirm(msg)){
+                            location.href = basePath+'/supplier/warehouse/intoWarehouseGrade?warehouseId=' + warehouseId;
+                        }
                     },
                     saveHandler:function () {
 
@@ -255,7 +256,7 @@
 
                                     alert('评价成功！');
                                     /*form.init();*/
-                                    location.href = basePath+'supplier/warehouse/intoWarehouseGrade?warehouseId=' + warehouseId;
+                                    location.href = basePath+'/supplier/warehouse/intoWarehouseGrade?warehouseId=' + warehouseId;
                                 }else {
                                     alert('评价失败！');
                                 }
