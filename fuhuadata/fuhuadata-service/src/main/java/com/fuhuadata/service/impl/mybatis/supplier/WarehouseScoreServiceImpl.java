@@ -1,10 +1,13 @@
 package com.fuhuadata.service.impl.mybatis.supplier;
 
+import com.fuhuadata.dao.mapper.supplier.WarehouseScoreMapper;
 import com.fuhuadata.domain.mybatis.supplier.WarehouseEvaluationScoreRelation;
+import com.fuhuadata.domain.mybatis.supplier.WarehouseInfo;
 import com.fuhuadata.domain.mybatis.supplier.WarehouseScore;
 import com.fuhuadata.domain.query.QueryWarehouseScore;
 import com.fuhuadata.service.impl.mybatis.BaseServiceImpl;
 import com.fuhuadata.service.mybatis.supplier.WarehouseEvaluationScoreRelationService;
+import com.fuhuadata.service.mybatis.supplier.WarehouseInfoService;
 import com.fuhuadata.service.mybatis.supplier.WarehouseScoreService;
 import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.Supplier.ScoreVO;
@@ -25,9 +28,13 @@ import java.util.List;
 @Service
 public class WarehouseScoreServiceImpl extends BaseServiceImpl<WarehouseScore,Integer>
         implements WarehouseScoreService {
-
+    private WarehouseScoreMapper getWarehouseScoreMapper(){
+        return (WarehouseScoreMapper) baseMapper;
+    }
     @Autowired
      private  WarehouseEvaluationScoreRelationService warehouseEvaluationScoreRelationService;
+    @Autowired
+    private WarehouseInfoService warehouseInfoService;
     @Override
     public PageInfo<WarehouseScore> getWarehouseScoreList(QueryWarehouseScore query) {
         if(query == null) return null;
@@ -83,6 +90,12 @@ public class WarehouseScoreServiceImpl extends BaseServiceImpl<WarehouseScore,In
             warehouseScoreSel.setWarehouseId(scoreVO.getScore().getWarehouseId());
             save(warehouseScoreSel);
         }
+        //更新仓库综合评分
+        int warehouseId = scoreVO.getScore().getWarehouseId();
+        WarehouseInfo warehouseInfo = new WarehouseInfo();
+        warehouseInfo.setId(warehouseId);
+        warehouseInfo.setCombinedScoring(getWarehouseScoreMapper().getCombinedScoringByWarehouseId(warehouseId));
+        warehouseInfoService.updateSelective(warehouseInfo);
         return warehouseEvaluationScoreRelationService.saveList(scoreVO.getList());
     }
 }

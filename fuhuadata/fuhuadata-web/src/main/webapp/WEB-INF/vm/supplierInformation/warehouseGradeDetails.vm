@@ -234,6 +234,7 @@
                                 score:{},
                                 list:form.data
                             };
+                            data.score.id=scoreId;
                             data.score.timeScore = form.addNumber('[data-name="part1"]');//报表及时性评分
                             data.score.accuracyScore = form.addNumber('[data-name="part2"]');//报表准确性
                             data.score.storageScore = form.addNumber('[data-name="part3"]') + form.addNumber('[data-name="part7"]');//入库

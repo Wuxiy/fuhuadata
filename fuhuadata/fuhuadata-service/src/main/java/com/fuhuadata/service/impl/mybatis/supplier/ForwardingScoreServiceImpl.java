@@ -1,11 +1,14 @@
 package com.fuhuadata.service.impl.mybatis.supplier;
 
+import com.fuhuadata.dao.mapper.supplier.ForwardingScoreMapper;
 import com.fuhuadata.domain.mybatis.supplier.ForwardingEvaluationScoreRelation;
 import com.fuhuadata.domain.mybatis.supplier.ForwardingScore;
+import com.fuhuadata.domain.mybatis.supplier.FreightForwarding;
 import com.fuhuadata.domain.query.QueryForwardingScore;
 import com.fuhuadata.service.impl.mybatis.BaseServiceImpl;
 import com.fuhuadata.service.mybatis.supplier.ForwardingEvaluationScoreRelationService;
 import com.fuhuadata.service.mybatis.supplier.ForwardingScoreService;
+import com.fuhuadata.service.mybatis.supplier.FreightForwardingService;
 import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.Supplier.ScoreVO;
 import com.github.pagehelper.PageHelper;
@@ -24,8 +27,14 @@ import java.util.List;
 @Service
 public class ForwardingScoreServiceImpl extends BaseServiceImpl<ForwardingScore,Integer>
         implements ForwardingScoreService{
+    private ForwardingScoreMapper getForwardingScoreMapper(){
+        return (ForwardingScoreMapper)baseMapper;
+    }
     @Autowired
     private ForwardingEvaluationScoreRelationService forwardingEvaluationScoreRelationService;
+
+    @Autowired
+    private FreightForwardingService freightForwardingService;
     @Override
     public PageInfo<ForwardingScore> getForwardingScoreList(QueryForwardingScore query) {
         if(query == null) return null;
@@ -84,6 +93,12 @@ public class ForwardingScoreServiceImpl extends BaseServiceImpl<ForwardingScore,
             forwardingScoreSel.setForwardingId(score.getForwardingId());
             save(forwardingScoreSel);
         }
+        //更新基本信息的综合评分字段
+        int forwardingId = scoreVO.getScore().getForwardingId();
+        FreightForwarding freightForwarding = new FreightForwarding();
+        freightForwarding.setId(forwardingId);
+        freightForwarding.setCombinedScoring(getForwardingScoreMapper().getCombinedScoringByForwardingId(forwardingId));
+        freightForwardingService.updateSelective(freightForwarding);
         return forwardingEvaluationScoreRelationService.saveList(scoreVO.getList());
     }
 

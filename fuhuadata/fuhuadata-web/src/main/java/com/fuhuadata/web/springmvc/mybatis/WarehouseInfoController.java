@@ -224,7 +224,6 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
             result.setMessage(e.getMessage());
             result.setSuccess(false);
         }
-
         return result.getResultPojo();
     }
 
