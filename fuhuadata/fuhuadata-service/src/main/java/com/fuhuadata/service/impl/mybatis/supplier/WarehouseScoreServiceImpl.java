@@ -56,6 +56,10 @@ public class WarehouseScoreServiceImpl extends BaseServiceImpl<WarehouseScore,In
         if(scoreVO.getScore()!=null&&scoreVO.getScore().getId()!=null){
             scoreVO.getScore().setLastmodifyUserId(LoginUtils.getLoginId());
             scoreVO.getScore().setLastmodifyUserName(LoginUtils.getLoginName());
+            scoreVO.getScore().setCreateUserId(LoginUtils.getLoginId());
+            scoreVO.getScore().setCreateUserName(LoginUtils.getLoginName());
+            scoreVO.getScore().setEvaluateUserId(LoginUtils.getLoginId());
+            scoreVO.getScore().setEvaluateUserName(LoginUtils.getLoginName());
             scoreVO.getScore().setEvaluateTime(new Date());
             scoreVO.getScore().setModifyTime(new Date());
             updateSelective(scoreVO.getScore());

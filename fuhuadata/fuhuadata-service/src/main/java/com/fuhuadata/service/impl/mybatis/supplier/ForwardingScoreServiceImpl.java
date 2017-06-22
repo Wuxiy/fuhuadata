@@ -54,6 +54,10 @@ public class ForwardingScoreServiceImpl extends BaseServiceImpl<ForwardingScore,
         //保存月度表
         ForwardingScore score = scoreVO.getScore();
         if(score!=null&&score.getId()!=null){
+            score.setCreateUserId(LoginUtils.getLoginId());
+            score.setCreateUserName(LoginUtils.getLoginName());
+            score.setEvaluateUserId(LoginUtils.getLoginId());
+            score.setEvaluateUserName(LoginUtils.getLoginName());
             score.setLastmodifyUserId(LoginUtils.getLoginId());
             score.setLastmodifyUserName(LoginUtils.getLoginName());
             score.setEvaluateTime(new Date());
@@ -66,6 +70,8 @@ public class ForwardingScoreServiceImpl extends BaseServiceImpl<ForwardingScore,
         }else if(score!=null&&score.getId()==null){
             score.setCreateUserId(LoginUtils.getLoginId());
             score.setCreateUserName(LoginUtils.getLoginName());
+            score.setEvaluateUserId(LoginUtils.getLoginId());
+            score.setEvaluateUserName(LoginUtils.getLoginName());
             score.setLastmodifyUserId(LoginUtils.getLoginId());
             score.setLastmodifyUserName(LoginUtils.getLoginName());
 
