@@ -32,6 +32,12 @@
                                 </table>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-xs-1 control-label" for="primaryRemark" lang="zh">备注</label>
+                            <div class="col-xs-11">
+                                <textarea class="form-control" name="primaryRemark" data-edit="on" rows="4" disabled></textarea>
+                            </div>
+                        </div>
                         <div class="form-group hidden" data-view="editView">
                             <div class="col-xs-2 col-xs-offset-4">
                                 <button class="btn btn-block btn-default" name="cancel" type="button" lang="zh">取消</button>
@@ -149,6 +155,7 @@
 
                                     self.data = res.data.scoreList;
                                     self.renderData(self.data); // 为table渲染数据
+                                    self.renderObj(res.data.remarks);
                                     panel.toShowHandler();
                                 }else {
                                     self.addEvent('click.cancel', self.cancelBtn, self.cancelHandler);
@@ -208,6 +215,13 @@
                         });
                         form.totalScore.text(total);
                     },
+                    renderObj:function (o) {
+
+                        if (!!o) {
+
+                            $('[name="primaryRemark"]', form.formDom).val(o.remarks);
+                        }
+                    },
                     hasField:function (field) {
 
                         if (field===null||field===undefined){
@@ -244,6 +258,7 @@
                             data.score.checkStockScore = form.addNumber('[data-name="part6"]');//换包装
                             data.score.totalScore = data.score.timeScore + data.score.accuracyScore + data.score.storageScore + data.score.warehouseScore + data.score.packageScore + data.score.checkStockScore;
                             data.score.warehouseId = warehouseId;
+                            data.score.remarks = $('[name="primaryRemark"]',form.formDom).val();
                             /*console.log(data);*/
                             $.ajax({
                                 url:basePath+'/supplier/warehouse/saveScore',
