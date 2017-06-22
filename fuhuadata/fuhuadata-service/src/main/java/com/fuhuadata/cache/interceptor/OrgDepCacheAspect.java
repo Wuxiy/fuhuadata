@@ -176,9 +176,9 @@ public class OrgDepCacheAspect extends BaseCacheAspect {
             if (isIdKey) {
                 dep = get(key);
             } else {
-                Object orgId = get(key);
-                if (orgId != null) {
-                    String idKey = orgIdKey(String.valueOf(orgId));
+                Object depId = get(key);
+                if (depId != null) {
+                    String idKey = depIdKey(String.valueOf(depId));
                     dep = get(idKey);
                 }
             }

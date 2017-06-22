@@ -72,6 +72,11 @@ public class UserController extends BaseController<UserAccount, Integer> {
         return result.getResultPojo();
     }
 
+    /**
+     * 根据角色id获取已授权组织部门用户树
+     * @param roleId
+     * @return
+     */
     @RequestMapping(value = "/role/depts/tree", method = RequestMethod.GET)
     @ResponseBody
     public ResultPojo getRoleTree(@RequestParam("roleId") Integer roleId) {

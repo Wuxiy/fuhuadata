@@ -12,6 +12,7 @@ import com.fuhuadata.service.mybatis.PasswordService;
 import com.fuhuadata.service.mybatis.UserRoleService;
 import com.fuhuadata.service.mybatis.UserService;
 import com.fuhuadata.service.util.IpUtils;
+import com.fuhuadata.vo.BaseTreeVo;
 import com.fuhuadata.vo.MixNodeVO;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -164,7 +165,11 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
                 String pid = nodeVO.getPid();
                 MixNodeVO pNode = lookup.get(pid);
                 if (pNode != null) {
-                    pNode.addChildNode(nodeVO);
+                    List<BaseTreeVo<String>> children = pNode.getNodes();
+                    // 如果子节点中未找到该节点，则添加
+                    if (children == null || children.stream().map(BaseTreeVo::getCid).noneMatch(cid::equals)) {
+                        pNode.addChildNode(nodeVO);
+                    }
                 } else {
                     pNode = deptService.getOrgOrDepPNode(pid);
                     if (pNode != null) {
