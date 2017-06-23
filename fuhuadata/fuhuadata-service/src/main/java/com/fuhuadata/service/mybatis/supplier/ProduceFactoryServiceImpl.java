@@ -149,7 +149,8 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
         factory.setLinkmen(linkmen);
 
         // 同步到 NC
-        factoryInfoToNC.sendFactoryInfo(factory);
+        // TODO 同步到NC
+//        factoryInfoToNC.sendFactoryInfo(factory);
 
         return factory;
     }
