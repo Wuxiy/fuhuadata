@@ -34,6 +34,7 @@
   <!--获取货代关联仓库-->
   <select id="getListByForwardingId" parameterType="java.lang.Integer" resultType="com.fuhuadata.domain.mybatis.supplier.WarehouseInfo">
             SELECT
+        swi.id,
         swi.`CODE`,
         swi.`NAME`,
         swi.`STORADDR`,
