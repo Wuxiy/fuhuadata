@@ -58,6 +58,18 @@ $(function(){
             editHides:$('[data-view="editHide"]', '#container'), // 编辑状态隐藏的dom
             editON:$('[data-edit="on"]', '#container'), // 编辑状态启用的控件
             editOFF:$('[data-edit="off"]', '#container'), // 编辑状态禁用的控件
+            verify:(function () {
+                return $('#order_grade').validate({
+                    rules: {
+                        evaScore: 'required'
+                    },
+                    messages: {
+                        evaScore:{
+                            required:em('必填','top:-29px','right:0')
+                        }
+                    }
+                });
+            })(),
             data:{},
             ectype:null,
             init:function () {
@@ -129,11 +141,17 @@ $(function(){
                 $(this.formDom).off(eType).on(eType, el, handler);
             },
             cancelHandler:function () {
-                /*form.render(form.ectype);
-                 panel.toShowHandler();*/
+                if (history.length>1) {
 
+                    history.back(-1);
+                }else {
+
+                    window.close();
+                }
             },
             saveHandler:function () {
+
+                if (!form.isPass()) return;
 
                 if (confirm('确定要保存吗？保存过后将不能修改。')) {
 
@@ -147,7 +165,8 @@ $(function(){
                         if (res.code===1) {
 
                             alert('评价成功！');
-                            form.init();
+                           /* form.init();*/
+                           form.cancelHandler();
                         }
                     })
                 }
@@ -213,6 +232,9 @@ $(function(){
                 }
 
                 /*form.render(form.data);*/
+            },
+            isPass:function () {
+                return form.verify.form();
             }
         };
     form.init();
