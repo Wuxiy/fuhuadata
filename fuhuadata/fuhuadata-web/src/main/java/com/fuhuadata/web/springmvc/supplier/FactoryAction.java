@@ -184,10 +184,10 @@ public class FactoryAction extends BaseController<ProduceFactory, Integer> {
     @RequestMapping(value = "/buy/contracts", method = RequestMethod.GET)
     @ResponseBody
     public ResultPojo buyContracts(BusinessBuyContractQuery query) {
-        Result<List<FactoryOrder>> result = Result.newResult(false);
+        Result<PageInfo<FactoryOrder>> result = Result.newResult(false);
 
         List<FactoryOrder> factoryOrders = factoryService.listFactoryOrders(query);
-        result.addDefaultModel(factoryOrders);
+        result.addDefaultModel(new PageInfo<>(factoryOrders));
         result.setSuccess(true);
 
         return result.getResultPojo();
