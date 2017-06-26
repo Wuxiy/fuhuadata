@@ -8,7 +8,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     #orderTypeTab('采购合同',$!{factory.id})
-                    <h3 class="panel-title" lang="zh">订单记录</h3>
+                    <h3 class="panel-title" lang="zh">订单信息</h3>
                 </div>
                 <div class="panel-body clearfix">
                     <!--表格-->
@@ -110,7 +110,7 @@
                         num_display_entries:5,
                         callback:function (pageNum,jq) {
                             $.ajax({
-                                url:basePath + '/biz/buy/contracts',
+                                url:basePath + '/supplier/factories/buy/contracts',
                                 dataType:'json',
                                 contentType:'application/json',
                                 data:{
@@ -173,7 +173,7 @@
                                     '<td>'+table.hasField(item.ntotalorigmny)+'</td>'+
                                     '<td>'+table.hasField(item.remark)+'</td>'+
                                     '<td><a href="'+basePath+'/factory/eva/'+item.id+'/vm">'+
-                                    (typeof item.totalScore==='number'?item.totalScore:'去评价')+
+                                    (typeof item.totalNumber==='number'?item.totalNumber:'去评价')+
                                     '</td></a>'
                                     '</tr>';
                             });

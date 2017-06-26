@@ -8,7 +8,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     #orderTypeTab('原药合同',$!{factory.id})
-                    <h3 class="panel-title" lang="zh">产品信息</h3>
+                    <h3 class="panel-title" lang="zh">订单信息</h3>
                 </div>
                 <div class="panel-body clearfix">
                     <!--表格-->
