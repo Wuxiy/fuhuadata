@@ -44,7 +44,7 @@
         from business_buy_contract bbc
     </sql>
 
-    <select id="listContracts" resultType="com.fuhuadata.domain.business.BusinessBuyContract">
+    <select id="listContracts" resultMap="BaseResultMap">
         select
         <include refid="BaseColumns"/>
         <include refid="FromTable"/>

@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fuhuadata.dao.mapper.FactoryEvaTotalMapper">
-  <resultMap id="BaseResultMap" type="com.fuhuadata.domain.supplier.FactoryEvaTotal">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="order_id" jdbcType="INTEGER" property="orderId" />
-    <result column="total_score" jdbcType="SMALLINT" property="totalScore" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-  </resultMap>
+    <resultMap id="BaseResultMap" type="com.fuhuadata.domain.supplier.FactoryEvaTotal">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="order_id" jdbcType="INTEGER" property="orderId"/>
+        <result column="total_score" jdbcType="SMALLINT" property="totalScore"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    </resultMap>
+
+    <select id="getTotalScoreByPkSupplier" resultType="java.lang.Double">
+        SELECT SUM(total_score)/COUNT(total_score)
+        FROM s_factory_eva_total fet
+        INNER JOIN business_buy_contract bbc ON bbc.`id`=fet.`order_id`
+        WHERE bbc.cvendorid=#{pkSupplier}
+    </select>
+
 </mapper>

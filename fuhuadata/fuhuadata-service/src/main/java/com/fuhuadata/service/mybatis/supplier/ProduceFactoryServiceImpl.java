@@ -1,11 +1,13 @@
 package com.fuhuadata.service.mybatis.supplier;
 
 import com.fuhuadata.dao.supplier.ProduceFactoryMapper;
+import com.fuhuadata.domain.business.BusinessBuyContractQuery;
 import com.fuhuadata.domain.common.BankAccBas;
 import com.fuhuadata.domain.common.BankAccType;
 import com.fuhuadata.domain.mybatis.Organization;
 import com.fuhuadata.domain.mybatis.supplier.LinkmanType;
 import com.fuhuadata.domain.mybatis.supplier.SupplierLinkman;
+import com.fuhuadata.domain.supplier.FactoryOrder;
 import com.fuhuadata.domain.supplier.ProduceFactory;
 import com.fuhuadata.domain.supplier.ProduceFactoryInfo;
 import com.fuhuadata.domain.supplier.ProduceFactoryQuery;
@@ -17,9 +19,11 @@ import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.util.TimeUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
@@ -127,8 +131,11 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
         fillLoginInfo(factory);
         saveSelective(factory);
 
-        factory = get(factory);
-        factoryInfo.setFactory(factory);
+        // 取出更新后的加工厂
+        ProduceFactory newFactory = get(factory);
+        newFactory.setBanks(factory.getBanks());
+        newFactory.setLinkmen(factory.getLinkmen());
+        factoryInfo.setFactory(newFactory);
 
         return handleBanksAndLinkmenAndToNc(factoryInfo);
     }
@@ -158,6 +165,7 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
     private void fillLoginInfo(ProduceFactory factory) {
         factory.setModifyAccount(LoginUtils.getLoginAccount());
         factory.setModifyName(LoginUtils.getLoginName());
+        factory.setModifyTime(new Date());
     }
 
     @Override
@@ -171,16 +179,54 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
         fillLoginInfo(factory);
 
         updateSelective(factory);
-        factory = get(factory);
+        ProduceFactory newFactory = get(factory);
+        newFactory.setBanks(factory.getBanks());
+        newFactory.setLinkmen(factory.getLinkmen());
+        factoryInfo.setFactory(newFactory);
 
-        factoryInfo.setFactory(factory);
         return handleBanksAndLinkmenAndToNc(factoryInfo);
+    }
+
+    @Override
+    public Optional<ProduceFactory> getOptFactoryByPk(String pkSupplier) {
+
+        if (StringUtils.isEmpty(pkSupplier)) {
+            return Optional.empty();
+        }
+
+        ProduceFactory factory = newEntity();
+        factory.setPkSupplier(pkSupplier);
+
+        return this.getOpt(factory);
+    }
+
+    @Override
+    public void updateFactoryEvaScore(String pkSupplier, Double totalScore) {
+
+        if (StringUtils.isEmpty(pkSupplier) || totalScore == null) {
+            throw new IllegalArgumentException("pkSupplier or totalScore can't be null");
+        }
+
+        this.getOptFactoryByPk(pkSupplier).ifPresent(factory -> {
+            factory.setScore(new BigDecimal(totalScore));
+            fillLoginInfo(factory);
+
+            update(factory);
+        });
+    }
+
+    @Override
+    public List<FactoryOrder> listFactoryOrders(BusinessBuyContractQuery query) {
+
+        PageHelper.startPage(query.getIndex(), query.getPageSize());
+        return getFactoryMapper().listFactoryOrders(query);
     }
 
     /**
      * 保存、更新、删除银行账号
+     *
      * @param factoryId
-     * @param banks 新增、更新的银行账号
+     * @param banks      新增、更新的银行账号
      * @param deletedIds 待删除的银行账号
      */
     private List<BankAccBas> saveOrUpdateBanks(Integer factoryId, List<BankAccBas> banks, List<Integer> deletedIds) {
@@ -203,8 +249,9 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
 
     /**
      * 保存、更新、删除联系人
+     *
      * @param factoryId
-     * @param linkmen 新增、更新的联系人
+     * @param linkmen   新增、更新的联系人
      * @param deleteIds 待删除的联系人
      */
     private List<SupplierLinkman> saveOrUpdateLinkmen(Integer factoryId, List<SupplierLinkman> linkmen, List<Integer> deleteIds) {

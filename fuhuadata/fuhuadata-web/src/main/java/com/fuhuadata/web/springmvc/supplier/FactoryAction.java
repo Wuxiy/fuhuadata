@@ -1,9 +1,11 @@
 package com.fuhuadata.web.springmvc.supplier;
 
+import com.fuhuadata.domain.business.BusinessBuyContractQuery;
 import com.fuhuadata.domain.common.BankAccBas;
 import com.fuhuadata.domain.mybatis.supplier.SupplierLinkman;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
+import com.fuhuadata.domain.supplier.FactoryOrder;
 import com.fuhuadata.domain.supplier.ProduceFactory;
 import com.fuhuadata.domain.supplier.ProduceFactoryInfo;
 import com.fuhuadata.domain.supplier.ProduceFactoryQuery;
@@ -169,13 +171,26 @@ public class FactoryAction extends BaseController<ProduceFactory, Integer> {
 
     // 采购合同
     @RequestMapping(value = "/{factoryId}/buy/contracts/vm")
-    public String buyContracts(@PathVariable Integer factoryId, Model model) {
+    public String buyContractsVm(@PathVariable Integer factoryId, Model model) {
 
         ProduceFactory factory = factoryService.getFactory(factoryId);
 
         model.addAttribute("factory", factory);
 
         return "supplierInformation/factoryOrder";
+    }
+
+    // 采购合同列表
+    @RequestMapping(value = "/buy/contracts", method = RequestMethod.GET)
+    @ResponseBody
+    public ResultPojo buyContracts(BusinessBuyContractQuery query) {
+        Result<List<FactoryOrder>> result = Result.newResult(false);
+
+        List<FactoryOrder> factoryOrders = factoryService.listFactoryOrders(query);
+        result.addDefaultModel(factoryOrders);
+        result.setSuccess(true);
+
+        return result.getResultPojo();
     }
 
     // 原药合同
