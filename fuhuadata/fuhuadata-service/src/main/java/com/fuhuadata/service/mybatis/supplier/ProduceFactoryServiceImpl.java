@@ -259,6 +259,7 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
         Optional.ofNullable(linkmen).ifPresent(linkmans -> linkmans.forEach(linkman -> {
             linkman.setSupplierType(LinkmanType.Factory.key);
             linkman.setSupplierId(factoryId);
+            linkman.setIsdefault(0);
         }));
 
         // 保存、更新联系人
