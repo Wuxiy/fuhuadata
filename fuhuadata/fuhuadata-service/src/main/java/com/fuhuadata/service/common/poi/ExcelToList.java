@@ -88,7 +88,7 @@ public class ExcelToList<T> {
             }
 
             lastRowNum = sheet.getLastRowNum();
-            for (int rowNum = 1; rowNum < lastRowNum; rowNum++) {
+            for (int rowNum = 1; rowNum <= lastRowNum; rowNum++) {
                 row = sheet.getRow(rowNum);
                 this.rowToEntityList(row);
             }

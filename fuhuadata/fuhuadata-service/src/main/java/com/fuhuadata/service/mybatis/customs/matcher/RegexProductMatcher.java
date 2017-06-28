@@ -90,9 +90,6 @@ public class RegexProductMatcher implements ProductMatcher {
             productId = matchRule.getProductId();
         }
 
-        logger.debug("ProductName: [{}], Specification: [{}] = ProductId: [{}]",
-                new Object[]{productName, specification, productId});
-
         return productId;
     }
 

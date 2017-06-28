@@ -9,7 +9,10 @@ import com.fuhuadata.service.mybatis.customs.CustomsDataService;
 import com.fuhuadata.web.springmvc.mybatis.BaseController;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -56,7 +59,7 @@ public class CustomsDataAction extends BaseController<CustomsData, Long> {
 
     @RequestMapping(value = "country", method = RequestMethod.GET)
     @ResponseBody
-    public ResultPojo countryStatistics(@RequestBody CustomsDataQuery query) {
+    public ResultPojo countryStatistics(CustomsDataQuery query) {
 
         Result<List<PieData>> result = Result.newResult(false);
 
