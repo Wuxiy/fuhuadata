@@ -27,7 +27,7 @@ public class CustomsDataServiceIT extends BaseIT {
         File file = new File(large07ExcelPath);
 
         long startTime = System.currentTimeMillis();
-        customsDataService.importCustomsData(new FileInputStream(file));
+        customsDataService.importCustomsData(null, null, new FileInputStream(file));
         long endTime = System.currentTimeMillis();
 
         System.out.println("Excel导入：" + (endTime - startTime) + "ms");

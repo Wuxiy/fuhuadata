@@ -234,6 +234,12 @@
             <if test="categoryType != null and 'product' == categoryType">
                 and cd.product_id=#{categoryId}
             </if>
+            <if test="startDate != null">
+                and cd.cdate >= #{startDate}
+            </if>
+            <if test="endDate != null">
+                and cd.cdate &lt; #{endDate}
+            </if>
         </where>
         group by cd.`dest_country_id`
     </select>

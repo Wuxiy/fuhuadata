@@ -6,6 +6,7 @@ import com.fuhuadata.domain.echarts.PieData;
 import com.fuhuadata.service.mybatis.BaseService;
 
 import java.io.InputStream;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -16,9 +17,11 @@ public interface CustomsDataService extends BaseService<CustomsData, Long> {
 
     /**
      * 导入 Excel
+     * @param startDate
+     * @param endDate
      * @param inputStream
      */
-    void importCustomsData(InputStream inputStream);
+    void importCustomsData(LocalDate startDate, LocalDate endDate, InputStream inputStream);
 
     /**
      * 更新导入海关数据的国家id
