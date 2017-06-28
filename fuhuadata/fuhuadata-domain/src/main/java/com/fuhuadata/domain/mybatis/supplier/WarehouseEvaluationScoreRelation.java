@@ -36,6 +36,12 @@ public class WarehouseEvaluationScoreRelation extends BaseEntity<Integer> {
     private Integer evaluationValueId;
 
     /**
+     * 评价项每行id
+     */
+    @Column(name = "evaluation_item_id")
+    private Integer evaluationItemId;
+
+    /**
      * 备注
      */
     private String remarks;
@@ -133,5 +139,13 @@ public class WarehouseEvaluationScoreRelation extends BaseEntity<Integer> {
      */
     public void setScore(BigDecimal score) {
         this.score = score;
+    }
+
+    public Integer getEvaluationItemId() {
+        return evaluationItemId;
+    }
+
+    public void setEvaluationItemId(Integer evaluationItemId) {
+        this.evaluationItemId = evaluationItemId;
     }
 }

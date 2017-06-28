@@ -28,7 +28,7 @@ public class WarehouseInfoServiceImpl extends BaseServiceImpl<WarehouseInfo,Inte
     public PageInfo<WarehouseInfo> listWarehouses(QueryWarehouseInfo query) {
         if(query == null) return null;
         Example example = newExample();
-        example.orderBy("CREATIONTIME desc");
+        example.orderBy("CREATIONTIME").desc();
         PageHelper.startPage(query.getIndex(),query.getPageSize());
         List<WarehouseInfo> warehouseInfos = listByExample(example);
         return new PageInfo<>(warehouseInfos);

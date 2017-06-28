@@ -46,6 +46,19 @@ public class ForwardingEvaluationScoreRelation extends BaseEntity<Integer> {
     private BigDecimal score;
 
     /**
+     * 关联分值(针对操作规范)
+     */
+    @Column(name = "multi_value")
+    private BigDecimal multiValue;
+
+
+    /**
+     * 评价项id（每一行）
+     */
+    @Column(name = "evaluation_item_id")
+    private Integer evaluationItemId;
+
+    /**
      * 获取关联表主键
      *
      * @return id - 关联表主键
@@ -133,5 +146,21 @@ public class ForwardingEvaluationScoreRelation extends BaseEntity<Integer> {
      */
     public void setScore(BigDecimal score) {
         this.score = score;
+    }
+
+    public BigDecimal getMultiValue() {
+        return multiValue;
+    }
+
+    public void setMultiValue(BigDecimal multiValue) {
+        this.multiValue = multiValue;
+    }
+
+    public Integer getEvaluationItemId() {
+        return evaluationItemId;
+    }
+
+    public void setEvaluationItemId(Integer evaluationItemId) {
+        this.evaluationItemId = evaluationItemId;
     }
 }

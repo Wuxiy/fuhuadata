@@ -12,6 +12,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import static java.util.stream.Collectors.toList;
+
 /**
  * <p>User: wangjie
  * <p>Date: 3/29/2017
@@ -33,7 +35,14 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRole, Integer> impl
         if (roleId == null) {
             throw new IllegalArgumentException("roleId 不能为空");
         }
-        saveList(users);
+
+        // 去掉已经存在的关联用户id
+        Set<Integer> linkUserIds = listUserIds(roleId);
+        List<UserRole> userRoles = users.stream()
+                .filter(userRole -> !linkUserIds.contains(userRole.getUserId()))
+                .collect(toList());
+
+        saveList(userRoles);
     }
 
     @Override
@@ -54,6 +63,12 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRole, Integer> impl
     public Set<Integer> getRoleIds(Integer userId) {
         List<Integer> roleIdList = getUserRoleMapper().listRoleIdsByUserId(userId);
         return Sets.newHashSet(roleIdList);
+    }
+
+    @Override
+    public Set<Integer> listUserIds(Integer roleId) {
+        List<Integer> userIds = getUserRoleMapper().listUserIdsByRoleId(roleId);
+        return Sets.newHashSet(userIds);
     }
 
     @Override

@@ -45,7 +45,7 @@ public class ForwardingComplaintsRecordServiceImpl extends BaseServiceImpl<Forwa
         if(query.getComplaintDateStart()!=null){
             criteria.andGreaterThanOrEqualTo("complaintDate",query.getComplaintDateStart());
         }
-        example.orderBy("create_time desc");
+        example.orderBy("createTime").desc();
         PageHelper.startPage(query.getIndex(),query.getPageSize());
         List<ForwardingComplaintsRecord> list = listByExample(example);
         return new PageInfo<>(list);

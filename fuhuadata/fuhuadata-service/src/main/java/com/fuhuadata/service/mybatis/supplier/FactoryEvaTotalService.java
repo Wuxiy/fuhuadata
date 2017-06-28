@@ -33,4 +33,11 @@ public interface FactoryEvaTotalService extends BaseService<FactoryEvaTotal, Int
      * @return
      */
     FactoryEvaTotal saveOrUpdate(FactoryEvaTotal evaTotal);
+
+    /**
+     * 获取某个供应商订单的综合评价
+     * @param pkSupplier
+     * @return
+     */
+    Double getTotalScoreByPkSupplier(String pkSupplier);
 }

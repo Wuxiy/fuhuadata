@@ -27,4 +27,8 @@
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
     <result column="evaluation_details" jdbcType="LONGVARCHAR" property="evaluationDetails" />
   </resultMap>
+
+  <select id="getCombinedScoringByWarehouseId" parameterType="java.lang.Integer" resultType="java.math.BigDecimal">
+    SELECT SUM(total_score)/COUNT(*) FROM s_warehouse_score WHERE warehouse_id = #{warehouseId} AND total_score IS NOT NULL
+  </select>
 </mapper>

@@ -9,7 +9,6 @@ import com.fuhuadata.vo.Supplier.ScoreVO;
 import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import com.github.pagehelper.PageInfo;
-import com.sun.javafx.sg.prism.NGShape;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,6 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
 
     private final static Log log  = LogFactory.getLog(WarehouseInfoController.class);
 
-
     @Autowired
     private WarehouseInfoService warehouseInfoService;
 
@@ -38,9 +36,9 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
 
     @Autowired
     private WarehouseScoreService warehouseScoreService;
-
     @Autowired
     private WarehouseEvaluationScoreRelationService warehouseEvaluationScoreRelationService;
+
 
     @Autowired
     private ScoreTermService scoreTermService;
@@ -69,6 +67,25 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
     public ModelAndView intoWarehouseopperation(int id) {
         return new ModelAndView("supplierInformation/warehouseOpperation").addObject("warehouseId",id);
     }
+    /**
+     * 进入仓库月度评分
+     * @return
+     */
+    @RequestMapping(value = "/intoWarehouseGrade", method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "supplier-warehouse",methods = "intoWarehouseGrade")
+    public ModelAndView intoWarehouseGrade(int warehouseId) {
+        return new ModelAndView("supplierInformation/warehouseGrade").addObject("warehouseId",warehouseId);
+    }
+    /**
+     * 进入仓库月度评分详情
+     * @return
+     */
+    @RequestMapping(value = "/intoWarehouseGradeDetails", method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "supplier-warehouse",methods = "intoWarehouseGradeDetails")
+    public ModelAndView intoWarehouseGradeDetails(int warehouseId,int scoreId) {
+        return new ModelAndView("supplierInformation/warehouseGradeDetails").addObject("warehouseId",warehouseId).addObject("scoreId",scoreId);
+    }
+
     /**
      * 进入仓库订单记录
      * @return
@@ -174,14 +191,15 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
     @SystemLogAnnotation(module = "supplier-warehouse",methods = "evaluationIndexItem")
     @ResponseBody
     public ResultPojo evaluationIndexItem(Integer scoreId){
-        Result<ScoreInfoVO<WarehouseEvaluationScoreRelation>> result = new Result<>();
-        ScoreInfoVO<WarehouseEvaluationScoreRelation> scoreInfoVO = new ScoreInfoVO<>();
+        Result<ScoreInfoVO<WarehouseEvaluationScoreRelation,WarehouseScore>> result = new Result<>();
+        ScoreInfoVO<WarehouseEvaluationScoreRelation,WarehouseScore> scoreInfoVO = new ScoreInfoVO<>();
         try{
-            scoreInfoVO.setTerms(scoreTermService.evaluationIndexItem(2));
+            scoreInfoVO.setTerms(scoreTermService.warehouseScoreItemIndex(scoreId));
             List<WarehouseEvaluationScoreRelation> scoreList = warehouseEvaluationScoreRelationService.listByScoreId(scoreId);
-            if(scoreList!=null&&scoreList.size()>0) {
+            if(scoreList!=null&&scoreList.size()>0){
                 scoreInfoVO.setScoreList(scoreList);
             }
+            scoreInfoVO.setTotalScore(warehouseScoreService.get(scoreId));
             result.addDefaultModel("score",scoreInfoVO);
         }catch(Exception e){
             log.error("获取评分项详情失败",e);
@@ -200,21 +218,20 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
     public ResultPojo saveScore(@RequestBody ScoreVO<WarehouseScore,WarehouseEvaluationScoreRelation> scoreVO){
         Result<Integer> result = new Result();
         try{
-            result.addDefaultModel(warehouseScoreService.saveScore(scoreVO));
+            result.addDefaultModel(warehouseScoreService.saveScore(scoreVO,DateUtil.getMonth(),DateUtil.getYear()));
         }catch(Exception e){
             log.error("保存仓库评分出错");
             result.setMessage(e.getMessage());
             result.setSuccess(false);
         }
-
         return result.getResultPojo();
     }
 
     /**
      * 获取月度评价表
      */
-    @RequestMapping(value = "/ScoreListOfMonth", method = RequestMethod.GET)
-    @SystemLogAnnotation(module = "supplier-warehouse",methods = "ScoreListOfMonth")
+    @RequestMapping(value = "/scoreListOfMonth", method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "supplier-warehouse",methods = "scoreListOfMonth")
     @ResponseBody
     public ResultPojo ScoreListOfMonth(QueryWarehouseScore query){
         Result<PageInfo<WarehouseScore>> result = new Result();

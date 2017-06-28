@@ -42,7 +42,7 @@ public class ForwardingOrderRecordServiceImpl extends BaseServiceImpl<Forwarding
         if(StringUtils.isNotEmpty(query.getEntryCode())){
             criteria.andLike("entryCode","%"+query.getEntryCode()+"%");
         }
-        example.orderBy("create_time desc");
+        example.orderBy("createTime").desc();
         PageHelper.startPage(query.getIndex(),query.getPageSize());
         List<ForwardingOrderRecord> list = listByExample(example);
         return new PageInfo<>(list);

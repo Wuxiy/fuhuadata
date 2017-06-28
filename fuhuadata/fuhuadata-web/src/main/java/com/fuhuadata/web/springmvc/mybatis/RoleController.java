@@ -8,11 +8,11 @@ import com.fuhuadata.service.mybatis.UserRoleService;
 import com.fuhuadata.service.mybatis.UserService;
 import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.web.util.SystemLogAnnotation;
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +26,9 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * <p>User: wangjie
@@ -55,7 +58,7 @@ public class RoleController extends BaseTreeableController<Role, Integer> {
         this.userService = userService;
     }
 
-//    @RequiresPermissions("sys:role:view")
+    @RequiresPermissions("sys:role:view")
     @RequestMapping(value = {"", "init"}, method = RequestMethod.GET)
     public String mian() {
         return "system/systemRoleManage";
@@ -80,24 +83,18 @@ public class RoleController extends BaseTreeableController<Role, Integer> {
     public ResultPojo saveUsersOfRole(UserRole userRoleOri, @RequestParam("userIds") String userIds,
                                       @RequestParam(value = "deptIds", required = false) String deptIds) {
 
-        /*if (permissionList != null) {
+        if (permissionList != null) {
             permissionList.assertHasEditPermission();
-        }*/
+        }
 
         Result<Boolean> result = Result.newResult(false);
         List<UserRole> userRoles = Lists.newArrayList();
         Set<Integer> userIdsSet = Sets.newHashSet();
 
-        if (StringUtils.isNotBlank(userIds)) {
+        if (StringUtils.isNotBlank(userIds)) {// 关联的用户id
 
             String[] userIdsArr = StringUtils.split(userIds, ",");
-            List<Integer> userIdsIter =
-                    Lists.transform(Arrays.asList(userIdsArr), new Function<String, Integer>() {
-                        @Override
-                        public Integer apply(String input) {
-                            return Integer.valueOf(input);
-                        }
-                    });
+            List<Integer> userIdsIter = Stream.of(userIdsArr).map(Integer::valueOf).collect(toList());
 
             userIdsSet.addAll(userIdsIter);
         }
@@ -138,13 +135,9 @@ public class RoleController extends BaseTreeableController<Role, Integer> {
     public ResultPojo deleteUsersOfRole(@RequestParam("roleId") Integer roleId,
                                         @RequestParam("userIds") String userIdsStr) {
 
-        List<Integer> userIds = Lists.transform(Arrays.asList(StringUtils.split(userIdsStr, ",")),
-                new Function<String, Integer>() {
-                    @Override
-                    public Integer apply(String input) {
-                        return Integer.valueOf(input);
-                    }
-                });
+        List<Integer> userIds = Stream.of(StringUtils.split(userIdsStr, ","))
+                .map(Integer::valueOf)
+                .collect(toList());
 
         int deleted = userRoleService.deleteUserRoles(roleId, userIds);
 

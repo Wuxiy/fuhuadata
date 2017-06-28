@@ -6,7 +6,7 @@
           WARNING - @mbg.generated
         -->
         <id column="role_id" jdbcType="INTEGER" property="roleId"/>
-        <result column="org_id" jdbcType="INTEGER" property="orgId"/>
+        <result column="org_code" jdbcType="INTEGER" property="orgCode"/>
         <result column="org_name" jdbcType="VARCHAR" property="orgName"/>
         <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
         <result column="parent_name" jdbcType="VARCHAR" property="parentName"/>
@@ -24,7 +24,7 @@
 
     <sql id="roleColumns">
         r.role_id,
-        r.org_id,
+        r.org_code,
         o.name org_name,
         r.parent_id,
         p.role_name parent_name,
@@ -36,7 +36,7 @@
 
     <sql id="PrefixColumns">
         r.role_id ro_role_id,
-        r.org_id ro_org_id,
+        r.org_code ro_org_code,
         o.name ro_org_name,
         r.parent_id ro_parent_id,
         p.role_name ro_parent_name,
@@ -48,7 +48,7 @@
 
     <sql id="roleJoins">
         LEFT JOIN p_role p ON p.role_id=r.parent_id
-        INNER JOIN p_organization o ON o.org_id = r.org_id
+        INNER JOIN p_organization o ON o.code = r.org_code
     </sql>
 
     <sql id="userJoin">

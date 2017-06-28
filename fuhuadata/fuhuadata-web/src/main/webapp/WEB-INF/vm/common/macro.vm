@@ -128,11 +128,11 @@
                     class="active"
             #end
         ><a href="${request.contextPath}/customerBaseInfoOrderRequire/billRequireEntrance?customerType=$!{customerType}&customerId=$!{customerId}" lang="zh" >订单默认要求</a></li>
-        <li
+        #*<li
             #if($num == 9)
                     class="active"
             #end
-        ><a href="" lang="zh" >关联数据</a></li>
+        ><a href="" lang="zh" >关联数据</a></li>*#
     </ul>
     #end
 #end
@@ -222,7 +222,7 @@
     #set($tabs = [
     {'name':'基本信息','path':'/supplier/factories/','postfix':'/vm'},
     {'name':'产品信息','path':'/supplier/factories/','postfix':'/products/vm'},
-    {'name':'订单记录','path':'/supplier/factories/','postfix':'/order/vm'}
+    {'name':'订单记录','path':'/supplier/factories/','postfix':'/buy/contracts/vm'}
     ])
 #*{'name':'投诉记录','path':'/supplier/factories/','postfix':'/complaint/vm'},
 {'name':'延期交货记录','path':'/supplier/factories/','postfix':'/delivery/delay/vm'}*#
@@ -274,9 +274,28 @@
 </ul>
 #end
 
-#*
-#macro(breadcrumb)
+#*#macro(breadcrumb)
 <ul id="location" class="breadcrumb pull-right">
     <li><span class="glyphicon glyphicon-map-marker"></span></li>
 </ul>
 #end*#
+
+## 加工厂原药和采购
+#macro(orderTypeTab $selected $id)
+    #set($tabs = [
+    {'name':'采购合同','path':'/supplier/factories/','postfix':'/buy/contracts/vm'},
+    {'name':'原药合同','path':'/supplier/factories/','postfix':'/orgi/contracts/vm'}
+    ])
+<div class="pull-right panel-heading-btn btn-group">
+    #foreach($item in $tabs)
+        <a
+            class="btn btn-xs btn-default btn-primary
+            #if($selected==$item.name)
+                active
+            #end
+            "
+            href="$!{request.contextPath}$!{item.path}$!{id}$!{item.postfix}" lang="zh">$!{item.name}
+        </a>
+    #end
+</div>
+#end

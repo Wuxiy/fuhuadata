@@ -163,7 +163,7 @@
                                     <div class="input-group">
                                         <input class="form-control" name="combinedScoring" type="number" min="0" disabled/>
                                         <div class="input-group-btn">
-                                            <a class="btn btn-xs btn-primary" href="#" lang="zh">查看明细</a>
+                                            <a class="btn btn-xs btn-primary" href="${request.contextPath}/supplier/forwarding/intoForwardingGradeList?id=$!{forwardingId}" lang="zh">查看明细</a>
                                         </div>
                                     </div>
                                 </div>

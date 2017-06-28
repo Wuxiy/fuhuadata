@@ -26,4 +26,7 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
   </resultMap>
+  <select id="getCombinedScoringByForwardingId" parameterType="java.lang.Integer" resultType="java.math.BigDecimal">
+    SELECT SUM(total_score)/COUNT(*) FROM s_forwarding_score WHERE freightforwarding_id = #{forwardingId} AND total_score IS NOT NULL
+  </select>
 </mapper>

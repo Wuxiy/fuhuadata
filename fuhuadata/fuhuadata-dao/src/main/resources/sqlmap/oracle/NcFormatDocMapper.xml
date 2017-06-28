@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fuhuadata.dao.oracle.IncoTermMapper">
-  <resultMap id="BaseResultMap" type="com.fuhuadata.domain.oracle.IncoTerm">
+<mapper namespace="com.fuhuadata.dao.oracle.NcFormatDocMapper">
+  <resultMap id="BaseResultMap" type="com.fuhuadata.domain.oracle.FormatDoc">
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="PK_INCOTERM" jdbcType="CHAR" property="pkIncoterm" />
+    <id column="PK_FORMATDOC" jdbcType="CHAR" property="pkFormatdoc" />
     <result column="CODE" jdbcType="VARCHAR" property="code" />
     <result column="CREATIONTIME" jdbcType="CHAR" property="creationtime" />
     <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
     <result column="DATAORIGINFLAG" jdbcType="DECIMAL" property="dataoriginflag" />
-    <result column="DATATYPE" jdbcType="DECIMAL" property="datatype" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
     <result column="DR" jdbcType="DECIMAL" property="dr" />
-    <result column="FACTORYSHIP" jdbcType="CHAR" property="factoryship" />
+    <result column="EXP_ADDRESS" jdbcType="VARCHAR" property="expAddress" />
+    <result column="EXP_CURRENCY" jdbcType="VARCHAR" property="expCurrency" />
+    <result column="EXP_DATE" jdbcType="VARCHAR" property="expDate" />
+    <result column="EXP_NUMBER" jdbcType="VARCHAR" property="expNumber" />
+    <result column="EXP_TIME" jdbcType="VARCHAR" property="expTime" />
+    <result column="FORMATDEF" jdbcType="VARCHAR" property="formatdef" />
+    <result column="IS_DEFAULT" jdbcType="CHAR" property="isDefault" />
     <result column="MODIFIEDTIME" jdbcType="CHAR" property="modifiedtime" />
     <result column="MODIFIER" jdbcType="VARCHAR" property="modifier" />
     <result column="NAME" jdbcType="VARCHAR" property="name" />
@@ -21,10 +27,7 @@
     <result column="NAME4" jdbcType="VARCHAR" property="name4" />
     <result column="NAME5" jdbcType="VARCHAR" property="name5" />
     <result column="NAME6" jdbcType="VARCHAR" property="name6" />
-    <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
     <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
     <result column="TS" jdbcType="CHAR" property="ts" />
-    <result column="ISINCLUFARE" jdbcType="CHAR" property="isinclufare" />
-    <result column="ISINCLUPREM" jdbcType="CHAR" property="isincluprem" />
   </resultMap>
 </mapper>

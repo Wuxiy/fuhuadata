@@ -6,6 +6,7 @@ import com.fuhuadata.service.mybatis.supplier.*;
 import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.Supplier.ScoreInfoVO;
 import com.fuhuadata.vo.Supplier.ScoreVO;
+import com.fuhuadata.web.util.DateUtil;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.logging.Log;
@@ -78,8 +79,8 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
 
     @RequestMapping(value = "intoForwardingGradeDetails", method = RequestMethod.GET)
     @SystemLogAnnotation(module = "supplier-forwarding",methods = "init")
-    public ModelAndView intoForwardingGradeDetails(int scoreId){
-        return new ModelAndView("supplierInformation/forwardingGradeDetails").addObject("4",scoreId);
+    public ModelAndView intoForwardingGradeDetails(int scoreId,int forwardingId){
+        return new ModelAndView("supplierInformation/forwardingGradeDetails").addObject("scoreId",scoreId).addObject("forwardingId",forwardingId);
     }
 
     @RequestMapping(value = "intoForwardingOrder", method = RequestMethod.GET)
@@ -232,14 +233,16 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
     @SystemLogAnnotation(module = "supplier-forwarding",methods = "evaluationIndexItem")
     @ResponseBody
     public ResultPojo evaluationIndexItem(Integer scoreId){
-        Result<ScoreInfoVO<ForwardingEvaluationScoreRelation>> result = new Result<>();
-        ScoreInfoVO<ForwardingEvaluationScoreRelation> scoreInfoVO = new ScoreInfoVO<>();
+        Result<ScoreInfoVO<ForwardingEvaluationScoreRelation,ForwardingScore>> result = new Result<>();
+        ScoreInfoVO<ForwardingEvaluationScoreRelation,ForwardingScore> scoreInfoVO = new ScoreInfoVO<>();
         try{
           scoreInfoVO.setTerms(scoreTermService.evaluationIndexItem(1));
           List<ForwardingEvaluationScoreRelation> scoreList = forwardingEvaluationScoreRelationService.listByScoreId(scoreId);
           if(scoreList!=null&&scoreList.size()>0) {
               scoreInfoVO.setScoreList(scoreList);
           }
+            ForwardingScore forwardingScore = forwardingScoreService.get(scoreId);
+          scoreInfoVO.setTotalScore(forwardingScore);
           result.addDefaultModel("score",scoreInfoVO);
         }catch(Exception e){
             log.error("获取评分项及分值选项",e);
@@ -258,7 +261,7 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
     public ResultPojo saveScore(@RequestBody ScoreVO<ForwardingScore,ForwardingEvaluationScoreRelation> scoreVO){
         Result<Integer> result = new Result();
         try{
-            result.addDefaultModel(forwardingScoreService.saveScore(scoreVO));
+            result.addDefaultModel(forwardingScoreService.saveScore(scoreVO,DateUtil.getYear(),DateUtil.getMonth()));
         }catch(Exception e){
             log.error("保存货代评分失败");
             result.setMessage(e.getMessage());

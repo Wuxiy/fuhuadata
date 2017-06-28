@@ -8,10 +8,7 @@ import com.fuhuadata.service.mybatis.UserService;
 import com.fuhuadata.vo.MixNodeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -75,6 +72,11 @@ public class UserController extends BaseController<UserAccount, Integer> {
         return result.getResultPojo();
     }
 
+    /**
+     * 根据角色id获取已授权组织部门用户树
+     * @param roleId
+     * @return
+     */
     @RequestMapping(value = "/role/depts/tree", method = RequestMethod.GET)
     @ResponseBody
     public ResultPojo getRoleTree(@RequestParam("roleId") Integer roleId) {
@@ -83,5 +85,12 @@ public class UserController extends BaseController<UserAccount, Integer> {
         result.addDefaultModel(userService.getUserTreeByRoleId(roleId));
 
         return result.getResultPojo();
+    }
+
+    @RequestMapping(value = "/username/{code}", method = RequestMethod.GET)
+    @ResponseBody
+    public UserAccount getUserByUsername(@PathVariable String code) {
+
+        return userService.getUserByLoginName(code);
     }
 }

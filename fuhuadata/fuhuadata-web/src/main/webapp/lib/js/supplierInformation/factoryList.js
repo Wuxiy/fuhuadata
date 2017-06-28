@@ -4,7 +4,7 @@
 
 $(function(){
     var table = {
-        pageSize:1,
+        pageSize:10,
         pageNum:0,
         pagination:$('#pagination'),
         container:$('#factory_list'),

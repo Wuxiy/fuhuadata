@@ -9,4 +9,5 @@ import java.util.List;
 public interface BusinessBuyContractMapper extends BaseMapper<BusinessBuyContract, Integer> {
 
     List<BusinessBuyContract> listContracts(BusinessBuyContractQuery query);
+
 }

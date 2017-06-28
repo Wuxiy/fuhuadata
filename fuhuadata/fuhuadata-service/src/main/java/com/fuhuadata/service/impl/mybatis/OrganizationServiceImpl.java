@@ -4,9 +4,9 @@ import com.fuhuadata.constant.NodeType;
 import com.fuhuadata.domain.mybatis.Organization;
 import com.fuhuadata.domain.plugin.OrganizationTrees;
 import com.fuhuadata.service.mybatis.OrganizationService;
-import com.fuhuadata.service.util.UserTreeCache;
 import com.fuhuadata.vo.MixNodeVO;
 import com.fuhuadata.vo.OrganizationVO;
+import org.springframework.aop.framework.AopContext;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -14,6 +14,8 @@ import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 import java.util.Optional;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * <p>User: wangjie
@@ -25,30 +27,23 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization, Integ
 
     @Override
     public List<OrganizationVO> listOrgTree() {
-        List<Organization> orgs = list();
+        List<Organization> orgs = ((OrganizationService) AopContext.currentProxy()).list();
 
         return new OrganizationTrees(orgs).convertToTreeList();
     }
 
     @Override
     public List<MixNodeVO> listOrgNodes() {
-        List<Organization> orgs = list();
-        List<MixNodeVO> nodes = Lists.newArrayList();
+        List<Organization> orgs = ((OrganizationService) AopContext.currentProxy()).list();
 
-        for (Organization org : orgs) {
-            MixNodeVO nodeVO = convertToNode(org);
-
-            UserTreeCache.put(nodeVO.getCid(), nodeVO);// 添加到缓存
-            UserTreeCache.put(nodeVO.getNcId(), nodeVO);
-
-            nodes.add(nodeVO);
-        }
-        return nodes;
+        return orgs.stream()
+                .map(this::convertToNode)
+                .collect(toList());
     }
 
     @Override
     public List<Organization> listOrgs() {
-        return list();
+        return ((OrganizationService) AopContext.currentProxy()).list();
     }
 
     @Override
@@ -67,7 +62,7 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization, Integ
     @Override
     public Optional<Organization> getOptByNcId(String ncId) {
 
-        return Optional.ofNullable(getByNcId(ncId));
+        return Optional.ofNullable(((OrganizationService) AopContext.currentProxy()).getByNcId(ncId));
     }
 
     @Override
@@ -103,10 +98,11 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization, Integ
     @Override
     public Optional<Organization> getOptByCode(String code) {
 
-        return Optional.ofNullable(getByCode(code));
+        return Optional.ofNullable(((OrganizationService) AopContext.currentProxy()).getByCode(code));
     }
 
-    private MixNodeVO convertToNode(Organization org) {
+    @Override
+    public MixNodeVO convertToNode(Organization org) {
 
         MixNodeVO nodeVO = new MixNodeVO(NodeType.ORG.key);
 

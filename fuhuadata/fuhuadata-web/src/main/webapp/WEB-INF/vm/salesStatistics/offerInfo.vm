@@ -216,7 +216,7 @@
                                 <label class="col-xs-1 control-label" lang="zh">资金利息利率<sup data-view="editView" class="not-null hidden">*</sup></label>
                                 <div class="col-xs-2">
                                     <div class="input-group">
-                                        <input data-control="on" class="form-control notnull" min="0" max="100" step="0.5" type="number" id="discountRate" name="discountRate" value="6" disabled/>
+                                        <input data-control="on" class="form-control notnull" min="0" max="100" step="0.5" type="number" id="discountRate" name="discountRate" value="5.2" disabled/>
                                         <span class="input-group-addon">%</span>
                                     </div>
                                 </div>

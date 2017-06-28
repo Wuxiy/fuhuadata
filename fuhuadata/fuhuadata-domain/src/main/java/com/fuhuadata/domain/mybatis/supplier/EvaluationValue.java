@@ -30,6 +30,7 @@ public class EvaluationValue extends BaseEntity<Integer> {
 
     private BigDecimal value;
 
+
     /**
      * @return id
      */
@@ -107,4 +108,5 @@ public class EvaluationValue extends BaseEntity<Integer> {
     public void setValue(BigDecimal value) {
         this.value = value;
     }
+
 }

@@ -5,6 +5,7 @@ import com.fuhuadata.domain.mybatis.Organization;
 import com.fuhuadata.vo.MixNodeVO;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * <p>User: wangjie
@@ -59,5 +60,35 @@ public interface DeptService extends BaseService<Dept, Integer> {
      */
     List<Dept> listDepts(Integer orgId);
 
-    Dept getDeptByCode(String code);
+    Dept getByCode(String code);
+
+    /**
+     * 根据 ncId 获取部门
+     * @param pkDep
+     * @return
+     */
+    Dept getByNcId(String pkDep);
+
+    Optional<Dept> getOptByNcId(String pkDep);
+
+    /**
+     * 获取部门 MixNodeVo
+     * @param pkDep
+     * @return
+     */
+    MixNodeVO getMixNodeByNcId(String pkDep);
+
+    /**
+     * 组织，部门树根据 pid 获取上级节点，可能为部门 pk 也可能为组织 code
+     * @param pid
+     * @return
+     */
+    MixNodeVO getOrgOrDepPNode(String pid);
+
+    /**
+     * 将部门转换为组织部门树节点
+     * @param dept
+     * @return
+     */
+    MixNodeVO convertToNode(Dept dept);
 }

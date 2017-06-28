@@ -2,8 +2,10 @@ package com.fuhuadata.web.exception;
 
 import com.fuhuadata.service.util.MessageUtils;
 import com.fuhuadata.web.exception.entity.ErrorResponse;
+import com.fuhuadata.web.exception.entity.ExceptionResponse;
 import com.fuhuadata.web.exception.entity.FieldErrorResponse;
 import com.google.common.collect.Lists;
+import org.apache.shiro.authz.UnauthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
@@ -13,7 +15,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
 import java.util.List;
@@ -49,6 +54,22 @@ public class RestExceptionHandler {
         errorResponse.setFieldErrors(fieldErrorResponses);
 
         return handleExceptionInternal(e, errorResponse, null, HttpStatus.BAD_REQUEST, webRequest);
+    }
+
+    /**
+     * 没有权限 异常
+     * <p/>
+     */
+    @ExceptionHandler({UnauthorizedException.class})
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ModelAndView processUnauthenticatedException(NativeWebRequest request, UnauthorizedException e) {
+        ExceptionResponse exceptionResponse = ExceptionResponse.from(e);
+
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("error", exceptionResponse);
+        mv.setViewName("common/exception");
+
+        return mv;
     }
 
     @ExceptionHandler({Exception.class})

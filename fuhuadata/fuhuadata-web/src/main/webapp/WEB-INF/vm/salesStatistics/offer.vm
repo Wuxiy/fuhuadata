@@ -536,7 +536,7 @@
                 areaId:areaId,
                 orderId:$('#orderId').val(),
                 customerName:$('#customerName').val(),
-                orderStatus:$('#businessState').val(),
+                status:$('#orderStatus').val(),
                 customerLevel:$('#customerLevel').val(),
                 enterpriseNature:$('#enterpriseNature').val(),
                 startRow:pageNum*pageSize,

@@ -47,6 +47,13 @@ public interface UserRoleService extends BaseService<UserRole, Integer> {
     Set<Integer> getRoleIds(Integer userId);
 
     /**
+     * 获取角色关联用户ids
+     * @param roleId
+     * @return 去重后的用户ids
+     */
+    Set<Integer> listUserIds(Integer roleId);
+
+    /**
      * 删除角色关联用户
      * @param roleId
      */

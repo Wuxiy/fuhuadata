@@ -167,7 +167,7 @@
     <tr>
         <th class="text-center">编号</th>
         <th class="text-center">国家</th>
-        <th class="text-center">地区分类</th>
+##        <th class="text-center">地区分类</th>
         <th class="text-center">销售额</th>
         <th class="text-center">已回款金额</th>
         <th class="text-center">毛利润</th>
@@ -358,7 +358,7 @@
                             _html += '<tr>';
                             _html += '	<td>' + (++count) + '</td>';
                             _html += '	<td>' + ResultData[i].country + '</td>';
-                            _html += '  <td>' + ResultData[i].customerArea + '</td>';
+//                            _html += '  <td>' + ResultData[i].customerArea + '</td>';
                             _html += '  <td lang="zh">' + (ResultData[i].salesAmount!=undefined?ResultData[i].salesAmount:0)+ '</td>';
                             _html += '  <td lang="zh">'+(ResultData[i].actualAmountPaid!=undefined?ResultData[i].actualAmountPaid:0)+'</td>';
                             _html += '  <td lang="zh">' +  (ResultData[i].grossProfit!=undefined?ResultData[i].grossProfit:0) + '</td>';
