@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.customs.CustomsProductMapper">
+  <resultMap id="BaseResultMap" type="com.fuhuadata.domain.customs.CustomsProduct">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="cp_id" jdbcType="INTEGER" property="id" />
+    <result column="cp_name" jdbcType="VARCHAR" property="name" />
+    <result column="cp_type_id" jdbcType="INTEGER" property="typeId" />
+  </resultMap>
+  
+  <sql id="BaseColumns">
+    cp.id as cp.id, 
+    cp.name as cp.name, 
+    cp.type_id as cp.type_id
+  </sql>
+</mapper>

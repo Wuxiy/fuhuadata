@@ -50,7 +50,22 @@
         </javaClientGenerator>
 
         <!-- 需要生成实体 Bean 的数据库表 -->
-        <table tableName="customs_data" domainObjectName="CustomsData" alias="cd">
+        <!--<table tableName="customs_product_type" domainObjectName="CustomsProductType" alias="cpt">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>
+        <table tableName="customs_product_rule" domainObjectName="CustomsProductRule" alias="cpr">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>
+        <table tableName="customs_product" domainObjectName="CustomsProduct" alias="cp">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>
+        <table tableName="customs_company" domainObjectName="CustomsCompany" alias="ccp">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>
+        <table tableName="customs_country" domainObjectName="CustomsCountry" alias="cct">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
+        </table>-->
+        <table tableName="customs_data" domainObjectName="CustomsData">
             <generatedKey column="id" sqlStatement="MySql" identity="true" type="post"/>
         </table>
         <!--<table tableName="product_category" domainObjectName="ProductCategory" alias="pc">

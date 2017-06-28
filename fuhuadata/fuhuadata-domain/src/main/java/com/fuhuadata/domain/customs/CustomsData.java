@@ -53,6 +53,12 @@ public class CustomsData extends BaseEntity<Long> {
     private String originDestCountry;
 
     /**
+     * 目的国id
+     */
+    @Column(name = "dest_country_id")
+    private Integer destCountryId;
+
+    /**
      * 所属大洲
      */
     private String continent;
@@ -62,6 +68,12 @@ public class CustomsData extends BaseEntity<Long> {
      */
     @Column(name = "declare_company")
     private String declareCompany;
+
+    /**
+     * 公司id
+     */
+    @Column(name = "company_id")
+    private Integer companyId;
 
     /**
      * 货主单位
@@ -92,6 +104,12 @@ public class CustomsData extends BaseEntity<Long> {
      */
     @Column(name = "customs_code")
     private String customsCode;
+
+    /**
+     * 产品id
+     */
+    @Column(name = "product_id")
+    private Integer productId;
 
     /**
      * 产品名称
@@ -1025,5 +1043,29 @@ public class CustomsData extends BaseEntity<Long> {
      */
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Integer getDestCountryId() {
+        return destCountryId;
+    }
+
+    public void setDestCountryId(Integer destCountryId) {
+        this.destCountryId = destCountryId;
+    }
+
+    public Integer getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
+    }
+
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 }

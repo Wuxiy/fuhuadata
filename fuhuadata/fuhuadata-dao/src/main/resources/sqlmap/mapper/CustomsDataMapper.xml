@@ -1,99 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fuhuadata.dao.mapper.CustomsDataMapper">
+<mapper namespace="com.fuhuadata.dao.mapper.customs.CustomsDataMapper">
     <resultMap id="BaseResultMap" type="com.fuhuadata.domain.customs.CustomsData">
         <!--
           WARNING - @mbg.generated
         -->
-        <id column="cd_id" jdbcType="BIGINT" property="id"/>
-        <result column="cd_cdate" jdbcType="DATE" property="cdate"/>
-        <result column="cd_type" jdbcType="BIT" property="type"/>
-        <result column="cd_customs_org" jdbcType="VARCHAR" property="customsOrg"/>
-        <result column="cd_customs_area" jdbcType="VARCHAR" property="customsArea"/>
-        <result column="cd_port" jdbcType="VARCHAR" property="port"/>
-        <result column="cd_transit_country" jdbcType="VARCHAR" property="transitCountry"/>
-        <result column="cd_origin_dest_country" jdbcType="VARCHAR" property="originDestCountry"/>
-        <result column="cd_continent" jdbcType="VARCHAR" property="continent"/>
-        <result column="cd_declare_company" jdbcType="VARCHAR" property="declareCompany"/>
-        <result column="cd_shipper_company" jdbcType="VARCHAR" property="shipperCompany"/>
-        <result column="cd_operation_company" jdbcType="VARCHAR" property="operationCompany"/>
-        <result column="cd_operation_com_code" jdbcType="VARCHAR" property="operationComCode"/>
-        <result column="cd_product_market_location" jdbcType="VARCHAR" property="productMarketLocation"/>
-        <result column="cd_customs_code" jdbcType="VARCHAR" property="customsCode"/>
-        <result column="cd_product_name" jdbcType="VARCHAR" property="productName"/>
-        <result column="cd_specifications" jdbcType="VARCHAR" property="specifications"/>
-        <result column="cd_deal_method" jdbcType="VARCHAR" property="dealMethod"/>
-        <result column="cd_declare_price" jdbcType="DECIMAL" property="declarePrice"/>
-        <result column="cd_price_unit" jdbcType="VARCHAR" property="priceUnit"/>
-        <result column="cd_declare_num" jdbcType="DECIMAL" property="declareNum"/>
-        <result column="cd_declare_num_unit" jdbcType="VARCHAR" property="declareNumUnit"/>
-        <result column="cd_total_price" jdbcType="DECIMAL" property="totalPrice"/>
-        <result column="cd_legal_num" jdbcType="DECIMAL" property="legalNum"/>
-        <result column="cd_legal_unit" jdbcType="VARCHAR" property="legalUnit"/>
-        <result column="cd_dollar_price" jdbcType="DECIMAL" property="dollarPrice"/>
-        <result column="cd_dollar_total" jdbcType="DECIMAL" property="dollarTotal"/>
-        <result column="cd_dollar_crrency" jdbcType="VARCHAR" property="dollarCrrency"/>
-        <result column="cd_gross_weight" jdbcType="DECIMAL" property="grossWeight"/>
-        <result column="cd_net_weight" jdbcType="DECIMAL" property="netWeight"/>
-        <result column="cd_weight_unit" jdbcType="VARCHAR" property="weightUnit"/>
-        <result column="cd_trade_mode" jdbcType="VARCHAR" property="tradeMode"/>
-        <result column="cd_transport_mode" jdbcType="VARCHAR" property="transportMode"/>
-        <result column="cd_number_of_packages" jdbcType="DECIMAL" property="numberOfPackages"/>
-        <result column="cd_packing_type" jdbcType="VARCHAR" property="packingType"/>
-        <result column="cd_enterprise_nature" jdbcType="VARCHAR" property="enterpriseNature"/>
-        <result column="cd_address" jdbcType="VARCHAR" property="address"/>
-        <result column="cd_telephone_number" jdbcType="VARCHAR" property="telephoneNumber"/>
-        <result column="cd_fax" jdbcType="VARCHAR" property="fax"/>
-        <result column="cd_post_code" jdbcType="VARCHAR" property="postCode"/>
-        <result column="cd_email" jdbcType="VARCHAR" property="email"/>
-        <result column="cd_contact_man" jdbcType="VARCHAR" property="contactMan"/>
-        <result column="cd_create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="cdate" jdbcType="DATE" property="cdate"/>
+        <result column="type" jdbcType="BIT" property="type"/>
+        <result column="customs_org" jdbcType="VARCHAR" property="customsOrg"/>
+        <result column="customs_area" jdbcType="VARCHAR" property="customsArea"/>
+        <result column="port" jdbcType="VARCHAR" property="port"/>
+        <result column="transit_country" jdbcType="VARCHAR" property="transitCountry"/>
+        <result column="dest_country_id" jdbcType="INTEGER" property="destCountryId"/>
+        <result column="origin_dest_country" jdbcType="VARCHAR" property="originDestCountry"/>
+        <result column="continent" jdbcType="VARCHAR" property="continent"/>
+        <result column="company_id" jdbcType="INTEGER" property="companyId"/>
+        <result column="declare_company" jdbcType="VARCHAR" property="declareCompany"/>
+        <result column="shipper_company" jdbcType="VARCHAR" property="shipperCompany"/>
+        <result column="operation_company" jdbcType="VARCHAR" property="operationCompany"/>
+        <result column="operation_com_code" jdbcType="VARCHAR" property="operationComCode"/>
+        <result column="product_market_location" jdbcType="VARCHAR" property="productMarketLocation"/>
+        <result column="customs_code" jdbcType="VARCHAR" property="customsCode"/>
+        <result column="product_id" jdbcType="INTEGER" property="productId"/>
+        <result column="product_name" jdbcType="VARCHAR" property="productName"/>
+        <result column="specifications" jdbcType="VARCHAR" property="specifications"/>
+        <result column="deal_method" jdbcType="VARCHAR" property="dealMethod"/>
+        <result column="declare_price" jdbcType="DECIMAL" property="declarePrice"/>
+        <result column="price_unit" jdbcType="VARCHAR" property="priceUnit"/>
+        <result column="declare_num" jdbcType="DECIMAL" property="declareNum"/>
+        <result column="declare_num_unit" jdbcType="VARCHAR" property="declareNumUnit"/>
+        <result column="total_price" jdbcType="DECIMAL" property="totalPrice"/>
+        <result column="legal_num" jdbcType="DECIMAL" property="legalNum"/>
+        <result column="legal_unit" jdbcType="VARCHAR" property="legalUnit"/>
+        <result column="dollar_price" jdbcType="DECIMAL" property="dollarPrice"/>
+        <result column="dollar_total" jdbcType="DECIMAL" property="dollarTotal"/>
+        <result column="dollar_crrency" jdbcType="VARCHAR" property="dollarCrrency"/>
+        <result column="gross_weight" jdbcType="DECIMAL" property="grossWeight"/>
+        <result column="net_weight" jdbcType="DECIMAL" property="netWeight"/>
+        <result column="weight_unit" jdbcType="VARCHAR" property="weightUnit"/>
+        <result column="trade_mode" jdbcType="VARCHAR" property="tradeMode"/>
+        <result column="transport_mode" jdbcType="VARCHAR" property="transportMode"/>
+        <result column="number_of_packages" jdbcType="DECIMAL" property="numberOfPackages"/>
+        <result column="packing_type" jdbcType="VARCHAR" property="packingType"/>
+        <result column="enterprise_nature" jdbcType="VARCHAR" property="enterpriseNature"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="telephone_number" jdbcType="VARCHAR" property="telephoneNumber"/>
+        <result column="fax" jdbcType="VARCHAR" property="fax"/>
+        <result column="post_code" jdbcType="VARCHAR" property="postCode"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="contact_man" jdbcType="VARCHAR" property="contactMan"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
     </resultMap>
 
     <sql id="BaseColumns">
-        cd.id as cd.id,
-        cd.cdate as cd.cdate,
-        cd.type as cd.type,
-        cd.customs_org as cd.customs_org,
-        cd.customs_area as cd.customs_area,
-        cd.port as cd.port,
-        cd.transit_country as cd.transit_country,
-        cd.origin_dest_country as cd.origin_dest_country,
-        cd.continent as cd.continent,
-        cd.declare_company as cd.declare_company,
-        cd.shipper_company as cd.shipper_company,
-        cd.operation_company as cd.operation_company,
-        cd.operation_com_code as cd.operation_com_code,
-        cd.product_market_location as cd.product_market_location,
-        cd.customs_code as cd.customs_code,
-        cd.product_name as cd.product_name,
-        cd.specifications as cd.specifications,
-        cd.deal_method as cd.deal_method,
-        cd.declare_price as cd.declare_price,
-        cd.price_unit as cd.price_unit,
-        cd.declare_num as cd.declare_num,
-        cd.declare_num_unit as cd.declare_num_unit,
-        cd.total_price as cd.total_price,
-        cd.legal_num as cd.legal_num,
-        cd.legal_unit as cd.legal_unit,
-        cd.dollar_price as cd.dollar_price,
-        cd.dollar_total as cd.dollar_total,
-        cd.dollar_crrency as cd.dollar_crrency,
-        cd.gross_weight as cd.gross_weight,
-        cd.net_weight as cd.net_weight,
-        cd.weight_unit as cd.weight_unit,
-        cd.trade_mode as cd.trade_mode,
-        cd.transport_mode as cd.transport_mode,
-        cd.number_of_packages as cd.number_of_packages,
-        cd.packing_type as cd.packing_type,
-        cd.enterprise_nature as cd.enterprise_nature,
-        cd.address as cd.address,
-        cd.telephone_number as cd.telephone_number,
-        cd.fax as cd.fax,
-        cd.post_code as cd.post_code,
-        cd.email as cd.email,
-        cd.contact_man as cd.contact_man,
-        cd.create_time as cd.create_time
+        cd.id,
+        cd.cdate,
+        cd.type,
+        cd.customs_org,
+        cd.customs_area,
+        cd.port,
+        cd.transit_country,
+        cd.dest_country_id,
+        cd.origin_dest_country,
+        cd.continent,
+        cd.company_id,
+        cd.declare_company,
+        cd.shipper_company,
+        cd.operation_company,
+        cd.operation_com_code,
+        cd.product_market_location,
+        cd.customs_code,
+        cd.product_id,
+        cd.product_name,
+        cd.specifications,
+        cd.deal_method,
+        cd.declare_price,
+        cd.price_unit,
+        cd.declare_num,
+        cd.declare_num_unit,
+        cd.total_price,
+        cd.legal_num,
+        cd.legal_unit,
+        cd.dollar_price,
+        cd.dollar_total,
+        cd.dollar_crrency,
+        cd.gross_weight,
+        cd.net_weight,
+        cd.weight_unit,
+        cd.trade_mode,
+        cd.transport_mode,
+        cd.number_of_packages,
+        cd.packing_type,
+        cd.enterprise_nature,
+        cd.address,
+        cd.telephone_number,
+        cd.fax,
+        cd.post_code,
+        cd.email,
+        cd.contact_man,
+        cd.create_time
+    </sql>
+
+    <sql id="FromTable">
+        from customs_data cd
     </sql>
 
     <insert id="saveCustomsData">
@@ -104,14 +114,17 @@
         `customs_area`,
         `port`,
         `transit_country`,
+        `dest_country_id`,
         `origin_dest_country`,
         `continent`,
         `declare_company`,
+        `company_id`,
         `shipper_company`,
         `operation_company`,
         `operation_com_code`,
         `product_market_location`,
         `customs_code`,
+        `product_id`,
         `product_name`,
         `specifications`,
         `deal_method`,
@@ -148,14 +161,17 @@
         #{customsArea},
         #{port},
         #{transitCountry},
+        #{destCountryId},
         #{originDestCountry},
         #{continent},
         #{declareCompany},
+        #{companyId},
         #{shipperCompany},
         #{operationCompany},
         #{operationComCode},
         #{productMarketLocation},
         #{customsCode},
+        #{productId},
         #{productName},
         #{specifications},
         #{dealMethod},
@@ -185,4 +201,41 @@
         #{contactMan}
         )
     </insert>
+
+    <!-- 更新海关数据目的国id，默认Others的id=33 -->
+    <update id="updateCustomsCountryId">
+        update customs_data cd set cd.dest_country_id=(ifnull((select cct.id from customs_country cct where
+        cct.alias=cd.origin_dest_country), 33))
+    </update>
+
+    <!-- 更新海关数据公司id，默认others的id=2 -->
+    <update id="updateCustomsCompany">
+        update customs_data cd set cd.company_id=(ifnull((select ccp.pid from customs_company ccp where
+        ccp.name=cd.shipper_company), 2))
+    </update>
+
+    <select id="listCustomsData" resultType="com.fuhuadata.domain.customs.CustomsData" >
+
+    </select>
+
+    <select id="listCustomsStatistics" resultType="com.fuhuadata.domain.echarts.PieData">
+        select
+        cd.`dest_country_id` as id,
+        cd.`origin_dest_country` as name,
+        sum(cd.#{statType}) as value
+        <include refid="FromTable"/>
+        <if test="categoryType != null and 'type' == categoryType">
+            inner join customs_product cp on cp.`id`=cd.`product_id`
+        </if>
+        <where>
+            <if test="categoryType != null and 'type' == categoryType">
+                and cp.`type_id`=#{categoryId}
+            </if>
+            <if test="categoryType != null and 'product' == categoryType">
+                and cd.product_id=#{categoryId}
+            </if>
+        </where>
+        group by cd.`dest_country_id`
+    </select>
+
 </mapper>

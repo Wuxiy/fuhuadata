@@ -1,16 +1,22 @@
 package com.fuhuadata.service.mybatis.customs;
 
-import com.fuhuadata.dao.mapper.CustomsDataMapper;
+import com.fuhuadata.dao.mapper.customs.CustomsDataMapper;
 import com.fuhuadata.domain.customs.CustomesDataTypePropertyEditor;
 import com.fuhuadata.domain.customs.CustomsData;
+import com.fuhuadata.domain.customs.CustomsDataQuery;
+import com.fuhuadata.domain.customs.CustomsProductRule;
+import com.fuhuadata.domain.echarts.PieData;
 import com.fuhuadata.service.common.poi.ExcelToList;
 import com.fuhuadata.service.exception.ServiceException;
 import com.fuhuadata.service.impl.mybatis.BaseServiceImpl;
+import com.fuhuadata.service.mybatis.customs.exception.DuplicateProductMatchException;
+import com.fuhuadata.service.mybatis.customs.matcher.RegexProductMatcher;
 import com.google.common.collect.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.beans.PropertyEditor;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,9 +43,44 @@ public class CustomsDataServiceImpl extends BaseServiceImpl<CustomsData, Long>
         return this.sqlSessionBatch.getMapper(CustomsDataMapper.class);
     }
 
+    @Resource
+    private CustomsProductRuleService productRuleService;
+
     @Override
     public void importCustomsData(InputStream inputStream) {
 
+        LinkedHashMap<String, String> fieldMap = getCustomsDataFiledMap();
+
+        Map<String, PropertyEditor> propertyEditorMap = new HashMap<>();
+        propertyEditorMap.put("type", new CustomesDataTypePropertyEditor());
+
+        ExcelToList<CustomsData> excelToList;
+        try {
+            excelToList = new ExcelToList<>(inputStream, CustomsData.class, fieldMap, propertyEditorMap);
+        } catch (Exception e) {
+            try {
+                inputStream.close();
+            } catch (IOException e1) {
+                throw new ServiceException("上传流关闭失败", e1);
+            }
+            throw new ServiceException("Excel 导入失败", e);
+        }
+
+        long startTime = System.currentTimeMillis();
+        List<CustomsData> customsDatas = excelToList.covertToList();
+        long endTime = System.currentTimeMillis();
+        logger.info("Excel转换时间：" + (endTime - startTime) + " ms");
+
+        startTime = System.currentTimeMillis();
+        saveCustomsDatas(customsDatas);// 保存海关数据到数据库
+        endTime = System.currentTimeMillis();
+        logger.info("海关数据插入数据库时间：" + (endTime - startTime) + "ms");
+
+        updateCustomsCountryId();
+        updateCustomsCompanyId();
+    }
+
+    private LinkedHashMap<String, String> getCustomsDataFiledMap() {
         LinkedHashMap<String, String> fieldMap = Maps.newLinkedHashMap();
         fieldMap.put("日期", "cdate");
         fieldMap.put("进出口", "type");
@@ -82,32 +123,28 @@ public class CustomsDataServiceImpl extends BaseServiceImpl<CustomsData, Long>
         fieldMap.put("邮编", "postCode");
         fieldMap.put("邮箱", "email");
         fieldMap.put("联系人", "contactMan");
+        return fieldMap;
+    }
 
-        Map<String, PropertyEditor> propertyEditorMap = new HashMap<>();
-        propertyEditorMap.put("type", new CustomesDataTypePropertyEditor());
+    private void saveCustomsDatas(List<CustomsData> customsDatas) {
 
-        ExcelToList<CustomsData> excelToList;
-        try {
-            excelToList = new ExcelToList<>(inputStream, CustomsData.class, fieldMap, propertyEditorMap);
-        } catch (Exception e) {
-            try {
-                inputStream.close();
-            } catch (IOException e1) {
-                throw new ServiceException("上传流关闭失败", e1);
-            }
-            throw new ServiceException("Excel 导入失败", e);
-        }
-
-        long startTime = System.currentTimeMillis();
-
-        List<CustomsData> customsDatas = excelToList.covertToList();
-
-        long endTime = System.currentTimeMillis();
-        logger.info("Excel转换时间：" + (endTime - startTime) + " ms");
+        List<CustomsProductRule> rules = productRuleService.listProductRules();
+        RegexProductMatcher matcher = new RegexProductMatcher(rules);
 
         int count = 0;
+        CustomsDataMapper batchCustomsMapper = getBatchCustomsMapper();
         for (CustomsData entity : customsDatas) {
-            getBatchCustomsMapper().saveCustomsData(entity);
+
+            try {
+                handleCustomsData(entity);// 设置目的国id和公司id
+                Integer productId = matcher.matchProductId(entity.getProductName(), entity.getSpecifications());
+                entity.setProductId(productId != null ? productId : 0);// 未匹配的产品，productId设置为0
+            } catch (DuplicateProductMatchException e) {
+                logger.error(e.getMessage(), e);
+                entity.setProductId(100);
+            }
+
+            batchCustomsMapper.saveCustomsData(entity);
             count++;
 
             if (count % BATCH_SIZE == 0) {
@@ -115,6 +152,30 @@ public class CustomsDataServiceImpl extends BaseServiceImpl<CustomsData, Long>
             }
         }
 
+        logger.error("产品规则匹配重复的海关数据：[{}]", matcher.duplicateData.toJSONString());
+
         sqlSessionBatch.flushStatements();
+    }
+
+    private void handleCustomsData(CustomsData entity) {
+        entity.setDestCountryId(33);// 目的国默认 Others
+        entity.setCompanyId(2);// 公司默认 Others
+    }
+
+    @Override
+    public int updateCustomsCountryId() {
+
+        return getBatchCustomsMapper().updateCustomsCountryId();
+    }
+
+    @Override
+    public int updateCustomsCompanyId() {
+
+        return getBatchCustomsMapper().updateCustomsCompany();
+    }
+
+    @Override
+    public List<PieData> listCustomsData(CustomsDataQuery query) {
+        return null;
     }
 }

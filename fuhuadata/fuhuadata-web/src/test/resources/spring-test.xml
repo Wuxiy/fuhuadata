@@ -46,4 +46,6 @@
 
     <import resource="springbeans-dao.xml"/>
     <!--<import resource="springbeans-manager.xml"/>-->
+
+    <bean class="com.fuhuadata.service.mybatis.customs.CustomsProductRuleServiceImpl"/>
 </beans>

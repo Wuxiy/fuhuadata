@@ -24,7 +24,7 @@ public class CustomsDataServiceIT extends BaseIT {
         String excelPath = "C:\\Users\\user\\Desktop\\customs_data_less.xls";
         String largeExcelPath = "C:\\Users\\user\\Desktop\\海关数据-四川福华-草甘膦-1501-1512汇总数据分析.xls";
         String large07ExcelPath = "C:\\Users\\user\\Desktop\\海关数据-四川福华-草甘膦-1501-1512汇总数据分析.xlsx";
-        File file = new File(largeExcelPath);
+        File file = new File(large07ExcelPath);
 
         long startTime = System.currentTimeMillis();
         customsDataService.importCustomsData(new FileInputStream(file));
