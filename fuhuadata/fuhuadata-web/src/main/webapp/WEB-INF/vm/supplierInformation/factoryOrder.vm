@@ -132,7 +132,7 @@
                     thisRow:'',
                     init:function () {
                         $.ajax({
-                            url:basePath + '/biz/buy/contracts',
+                            url:basePath + '/supplier/factories/buy/contracts',
                             dataType:'json',
                             contentType:'application/json',
                             data:{
