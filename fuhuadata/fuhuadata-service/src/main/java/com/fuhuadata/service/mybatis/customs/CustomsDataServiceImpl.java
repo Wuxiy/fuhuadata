@@ -20,6 +20,7 @@ import javax.annotation.Resource;
 import java.beans.PropertyEditor;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -47,8 +48,21 @@ public class CustomsDataServiceImpl extends BaseServiceImpl<CustomsData, Long>
     private CustomsProductRuleService productRuleService;
 
     @Override
-    public void importCustomsData(InputStream inputStream) {
+    public void importCustomsData(LocalDate startDate, LocalDate endDate, InputStream inputStream) {
 
+        List<CustomsData> customsDatas = excelToCustomsList(inputStream);
+
+        // 保存海关数据到数据库
+        long startTime = System.currentTimeMillis();
+        saveCustomsDatas(customsDatas);
+        long endTime = System.currentTimeMillis();
+        logger.info("海关数据插入数据库时间：" + (endTime - startTime) + "ms");
+
+        updateCustomsCountryId();
+        updateCustomsCompanyId();
+    }
+
+    private List<CustomsData> excelToCustomsList(InputStream inputStream) {
         LinkedHashMap<String, String> fieldMap = getCustomsDataFiledMap();
 
         Map<String, PropertyEditor> propertyEditorMap = new HashMap<>();
@@ -71,13 +85,7 @@ public class CustomsDataServiceImpl extends BaseServiceImpl<CustomsData, Long>
         long endTime = System.currentTimeMillis();
         logger.info("Excel转换时间：" + (endTime - startTime) + " ms");
 
-        startTime = System.currentTimeMillis();
-        saveCustomsDatas(customsDatas);// 保存海关数据到数据库
-        endTime = System.currentTimeMillis();
-        logger.info("海关数据插入数据库时间：" + (endTime - startTime) + "ms");
-
-        updateCustomsCountryId();
-        updateCustomsCompanyId();
+        return customsDatas;
     }
 
     private LinkedHashMap<String, String> getCustomsDataFiledMap() {
