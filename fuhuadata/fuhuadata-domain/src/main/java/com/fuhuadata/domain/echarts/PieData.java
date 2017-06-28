@@ -10,7 +10,7 @@ public class PieData {
 
     private String name;
 
-    private Integer value;
+    private Double value;
 
     public String getName() {
         return name;
@@ -20,11 +20,11 @@ public class PieData {
         this.name = name;
     }
 
-    public Integer getValue() {
+    public Double getValue() {
         return value;
     }
 
-    public void setValue(Integer value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 

@@ -1,6 +1,8 @@
 package com.fuhua.customs.service;
 
 import com.fuhua.test.BaseIT;
+import com.fuhuadata.domain.customs.CustomsDataQuery;
+import com.fuhuadata.domain.echarts.PieData;
 import com.fuhuadata.service.mybatis.customs.CustomsDataService;
 import org.junit.Test;
 
@@ -8,6 +10,9 @@ import javax.annotation.Resource;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.List;
 
 /**
  * <p>User: wangjie
@@ -31,5 +36,18 @@ public class CustomsDataServiceIT extends BaseIT {
         long endTime = System.currentTimeMillis();
 
         System.out.println("Excel导入：" + (endTime - startTime) + "ms");
+    }
+
+    @Test
+    public void testListCountryStatistics() {
+
+        CustomsDataQuery query = new CustomsDataQuery();
+        query.setStartDate(LocalDate.of(2015, Month.JANUARY, 1));
+        query.setEndDate(LocalDate.of(2015, Month.JANUARY, 1));
+        query.setStatType("dollar_total");
+        query.setCategoryType("type");
+        query.setCategoryId(1);
+
+        List<PieData> pieDatas = customsDataService.listCustomsData(query);
     }
 }

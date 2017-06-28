@@ -214,6 +214,11 @@
         ccp.name=cd.shipper_company), 2))
     </update>
 
+    <delete id="deleteCustomsDataBetweenDate">
+        delete from customs_data
+        where cdate >= #{startDate} and cdate &lt; #{endDate}
+    </delete>
+
     <select id="listCustomsData" resultType="com.fuhuadata.domain.customs.CustomsData" >
 
     </select>
@@ -222,7 +227,15 @@
         select
         cd.`dest_country_id` as id,
         cd.`origin_dest_country` as name,
-        sum(cd.#{statType}) as value
+        <if test="statType == 'dollar_total'">
+            sum(cd.dollar_total) as value
+        </if>
+        <if test="statType == 'dollar_price'">
+            sum(cd.dollar_price) as value
+        </if>
+        <if test="statType == 'legal_num'">
+            sum(cd.legal_num) as value
+        </if>
         <include refid="FromTable"/>
         <if test="categoryType != null and 'type' == categoryType">
             inner join customs_product cp on cp.`id`=cd.`product_id`

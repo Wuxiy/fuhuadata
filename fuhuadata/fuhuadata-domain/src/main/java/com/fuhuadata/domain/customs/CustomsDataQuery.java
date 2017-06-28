@@ -1,6 +1,10 @@
 package com.fuhuadata.domain.customs;
 
+import com.alibaba.fastjson.JSON;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 
 /**
@@ -9,8 +13,10 @@ import java.util.List;
  */
 public class CustomsDataQuery {
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate startDate;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate endDate;
 
     private List<Integer> destCountryIds;
@@ -67,5 +73,17 @@ public class CustomsDataQuery {
 
     public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public static void main(String[] args) {
+
+        CustomsDataQuery query = new CustomsDataQuery();
+        query.setStartDate(LocalDate.of(2015, Month.JANUARY, 1));
+        query.setEndDate(LocalDate.of(2015, Month.JANUARY, 1));
+        query.setStatType("dollar_total");
+        query.setCategoryType("type");
+        query.setCategoryId(1);
+
+        System.out.println(JSON.toJSONString(query));
     }
 }

@@ -52,6 +52,9 @@ public class CustomsDataServiceImpl extends BaseServiceImpl<CustomsData, Long>
 
         List<CustomsData> customsDatas = excelToCustomsList(inputStream);
 
+        // 删除数据库已存在的海关数据
+        endDate = endDate.plusDays(1);
+        getBatchCustomsMapper().deleteCustomsDataBetweenDate(startDate, endDate);
         // 保存海关数据到数据库
         long startTime = System.currentTimeMillis();
         saveCustomsDatas(customsDatas);
@@ -184,6 +187,11 @@ public class CustomsDataServiceImpl extends BaseServiceImpl<CustomsData, Long>
 
     @Override
     public List<PieData> listCustomsData(CustomsDataQuery query) {
-        return null;
+
+        if (query.getEndDate() != null) {
+            query.setEndDate(query.getEndDate().plusDays(1));
+        }
+
+        return getCustomsDataMapper().listCustomsStatistics(query);
     }
 }
