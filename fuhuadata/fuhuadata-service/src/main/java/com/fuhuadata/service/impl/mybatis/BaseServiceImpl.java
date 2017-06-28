@@ -48,6 +48,11 @@ public abstract class BaseServiceImpl<E extends BaseEntity<ID>, ID extends Seria
         this.entityClass = ReflectUtils.findParameterizedType(getClass(), 0);
     }
 
+    // 获取batch mapper
+    public BaseMapper<E, ID> getMapperBatch() {
+        return (BaseMapper<E, ID>) sqlSessionBatch.getMapper(MybatisUtils.getMapperInterface(baseMapper));
+    }
+
     public E get(ID id) {
         return baseMapper.selectByPrimaryKey(id);
     }
