@@ -14,6 +14,7 @@ import org.w3c.dom.Element;
 import javax.servlet.ServletContext;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -67,9 +68,9 @@ public class FactoryInfoToNCImpl implements FactoryInfoToNC {
                 Map<String,Object> mapc=new HashMap<String, Object>();
                 mapc.put("pk_supplier",pk_factory);
                 mapc.put("id",factoryInfo.getId());
-                factoryToNc.updatePkFactory(mapc);
+                //factoryToNc.updatePkFactory(mapc);
                 for (BankAccBas bankAccBas:factoryInfo.getBanks()){
-                    sendSupBankacc(bankAccBas);
+                    sendSupBankacc(bankAccBas,pk_factory);
                 }
             }else {
                 log.error("读回写文件出错");
@@ -85,9 +86,9 @@ public class FactoryInfoToNCImpl implements FactoryInfoToNC {
      * 将加工厂银行账户信息发送nc
      * @param bankAcc
      */
-    private void sendSupBankacc(BankAccBas bankAcc){
+    private void sendSupBankacc(BankAccBas bankAcc,String pk_factory){
         String resFile=getRefFile(""+bankAcc.getId(),"bankBackFile");
-        String bankXmlName= bankAccToXML(bankAcc);
+        String bankXmlName= bankAccToXML(bankAcc,pk_factory);
         org.jdom.Element root=null;
         try {
             root=NcExchangeToolUtil.xmlSendNcTool(bankXmlName,resFile);
@@ -112,6 +113,7 @@ public class FactoryInfoToNCImpl implements FactoryInfoToNC {
                 Map<String,Object> mapc=new HashMap<String, Object>();
                 mapc.put("pk_bankaccbas",pk_bankaccbas);
                 mapc.put("id",bankAcc.getId());
+                factoryToNc.updatePkBankaccbas(mapc);
             }else {
                 log.error("读回写文件出错");
             }
@@ -125,7 +127,7 @@ public class FactoryInfoToNCImpl implements FactoryInfoToNC {
      * @param bankAcc
      * @return
      */
-    private String bankAccToXML(BankAccBas bankAcc){
+    private String bankAccToXML(BankAccBas bankAcc,String pk_factory){
         String bankXmlName="";
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -170,9 +172,9 @@ public class FactoryInfoToNCImpl implements FactoryInfoToNC {
             if (bankAcc.getAccnum()!=null){
                 nodeValue.put("accnum",bankAcc.getAccnum());
             }
-            if (bankAcc.getAccopendate()!=null){
-                nodeValue.put("accopendate",bankAcc.getAccopendate().toString());
-            }
+            //if (bankAcc.getAccopendate()!=null){
+            //    nodeValue.put("accopendate",bankAcc.getAccopendate().toString());
+            //}
             if (bankAcc.getAccountproperty()!=null){
                 nodeValue.put("accountproperty",""+bankAcc.getAccountproperty());
             }
@@ -186,11 +188,14 @@ public class FactoryInfoToNCImpl implements FactoryInfoToNC {
                 nodeValue.put("pk_banktype",bankAcc.getPkBanktype());
             }
             if (bankAcc.getPkOrg()!=null){
-                nodeValue.put("pk_org",bankAcc.getPkOrg());
+                nodeValue.put("pk_org","0001");
             }
             if(bankAcc.getDeletedStatus()!=null && bankAcc.getDeletedStatus()==0){
                 nodeValue.put("accstate","3");
+            }else{
+                nodeValue.put("accstate","0");
             }
+            nodeValue.put("accountproperty","0");
             for(Map.Entry<String ,String> entry:nodeValue.entrySet()){
                 Element ele=document.createElement(entry.getKey());
                 ele.appendChild(document.createTextNode(entry.getValue()));
@@ -199,7 +204,13 @@ public class FactoryInfoToNCImpl implements FactoryInfoToNC {
             Element custbankVO=document.createElement("custbankVO");
             billhead.appendChild(custbankVO);
             Element pk_cust=document.createElement("pk_cust");
-            pk_cust.appendChild(document.createTextNode(""+factoryToNc.getPkSupplierById(bankAcc.getCustomerId()) ));
+            pk_cust.appendChild(document.createTextNode(""+pk_factory));
+            custbankVO.appendChild(pk_cust);
+            if (bankAcc.getPkBankaccbas()!=null){
+                Element pk_custbank=document.createElement("pk_custbank");
+                pk_custbank.appendChild(document.createTextNode(bankAcc.getPkBankaccbas()));
+                custbankVO.appendChild(pk_custbank);
+            }
             bankXmlName=getXmlName(""+bankAcc.getId(),"bankAcc");
             NcExchangeToolUtil.documentTreeToXML(document,bankXmlName);
         } catch (Exception e) {
@@ -283,6 +294,8 @@ public class FactoryInfoToNCImpl implements FactoryInfoToNC {
                         Element pk_linkman = document.createElement("pk_linkman");
                         item.appendChild(pk_linkman);
                     }
+                    Element pk_linkman=document.createElement("pk_linkman");
+                    item.appendChild(pk_linkman);
                     Element isdefault = document.createElement("isdefault");
                     isdefault.appendChild(document.createTextNode(supplierLinkman.getIsdefault() == 0 ? "N" : "Y"));
                     item.appendChild(isdefault);
@@ -313,11 +326,11 @@ public class FactoryInfoToNCImpl implements FactoryInfoToNC {
                         phone.appendChild(document.createTextNode(supplierLinkman.getPhone()));
                         linkmanvo.appendChild(phone);
                     }
-                    if (supplierLinkman.getBirthday() != null) {
-                        Element birthday = document.createElement("birthday");
-                        birthday.appendChild(document.createTextNode(supplierLinkman.getBirthday()));
-                        linkmanvo.appendChild(birthday);
-                    }
+                    //if (supplierLinkman.getBirthday() != null) {
+                    //    Element birthday = document.createElement("birthday");
+                    //    birthday.appendChild(document.createTextNode(supplierLinkman.getBirthday()));
+                    //    linkmanvo.appendChild(birthday);
+                    //}
                     if (supplierLinkman.getAddress() != null) {
                         Element address = document.createElement("address");
                         address.appendChild(document.createTextNode(supplierLinkman.getAddress()));
@@ -345,11 +358,19 @@ public class FactoryInfoToNCImpl implements FactoryInfoToNC {
     }
     private String getXmlName(String id,String xmlType){
         String a = servletContext.getRealPath("/");
+        File dir=new File(a+"lib/NCBackFile/");
+        if (!dir.exists()){
+            dir.mkdirs();
+        }
         String xmlName=a+"lib/NCBackFile/"+xmlType+id+System.currentTimeMillis()+".xml";
         return xmlName;
     }
     private String getRefFile(String id,String xmlType){
         String a = servletContext.getRealPath("/");
+        File dir=new File(a+"lib/NCBackFile/");
+        if (!dir.exists()){
+            dir.mkdirs();
+        }
         SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddHHmmss");
         String resFile =a +"lib/NCBackFile/"+xmlType+id+ fmt.format(new Date()) + ".xml";
         return resFile;

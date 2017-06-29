@@ -70,5 +70,26 @@
         WHERE
                 b.pk_linkman IN (SELECT pk_linkman FROM bd_suplinkman WHERE pk_supplier IN (SELECT pk_supplier FROM bd_supplier WHERE pk_supplierclass in (SELECT pk_supplierclass FROM bd_supplierclass WHERE code='1801')));
     </select>
+    <select id="getStorDoc" resultClass="warehouse">
+        SELECT
+              s.pk_stordoc as pk_stordoc,
+              s.code as code,
+              s.dataoriginflag as dataoriginflag,
+              s.memo as memo,
+              s.phone as phone,
+              a.name as pk_address,
+              g.name as pk_group,
+              org.name as pk_org,
+              s.principalcode as principalcode,
+              ar.detailinfo as storaddr,
+              s.name as name,
+              s.enablestate as enable_state
+        FROM
+              bd_stordoc s
+              LEFT JOIN bd_addressdoc a on a.pk_addressdoc=s.pk_address
+              JOIN org_group g on g.pk_group=s.pk_group
+              JOIN org_stockorg org ON org.pk_stockorg=s.pk_org
+              LEFT JOIN bd_address ar ON ar.pk_address=s.storaddr;
 
+    </select>
 </sqlMap>

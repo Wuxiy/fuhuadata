@@ -6,11 +6,13 @@ import com.fuhuadata.domain.common.BankAccType;
 import com.fuhuadata.domain.mybatis.supplier.FreightForwarding;
 import com.fuhuadata.domain.mybatis.supplier.LinkmanType;
 import com.fuhuadata.domain.mybatis.supplier.SupplierLinkman;
+import com.fuhuadata.domain.mybatis.supplier.WarehouseInfo;
 import com.fuhuadata.service.mybatis.BaseService;
 import com.fuhuadata.service.mybatis.common.BankAccBasService;
 import com.fuhuadata.service.mybatis.common.BankAccBasServiceImpl;
 import com.fuhuadata.service.mybatis.supplier.FreightForwardingService;
 import com.fuhuadata.service.mybatis.supplier.SupplierLinkmanService;
+import com.fuhuadata.service.mybatis.supplier.WarehouseInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,6 +34,8 @@ public class SyncFreightForwardingService {
     private BankAccBasService bankAccBasService;
     @Autowired
     private SupplierLinkmanService supplierLinkmanService;
+    @Autowired
+    private WarehouseInfoService warehouseInfoService;
 
     @Transactional
     public void sync(){
@@ -48,6 +52,7 @@ public class SyncFreightForwardingService {
             }
             syncBankacc();
             syncLinkMan();
+            syncStorDoc();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -86,5 +91,20 @@ public class SyncFreightForwardingService {
         }
 
     }
-
+    private void syncStorDoc(){
+        try {
+            List<WarehouseInfo> list=syncFreightForwardingDao.getStorDoc();
+            List<WarehouseInfo> oldList=warehouseInfoService.list();
+            Map<String ,WarehouseInfo> map=list.stream().collect(Collectors.toMap(WarehouseInfo::getCode,(p)->p));
+            for (WarehouseInfo warehouseInfo:oldList){
+                int oid=warehouseInfo.getId();
+                map.get(warehouseInfo.getCode()).setId(oid);
+            }
+            for (WarehouseInfo a:list){
+                warehouseInfoService.saveOrUpdateSelective(a);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }

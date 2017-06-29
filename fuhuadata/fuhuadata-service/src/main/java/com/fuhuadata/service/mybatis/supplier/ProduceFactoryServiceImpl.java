@@ -157,7 +157,7 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
 
         // 同步到 NC
         // TODO 同步到NC
-//        factoryInfoToNC.sendFactoryInfo(factory);
+        factoryInfoToNC.sendFactoryInfo(factory);
 
         return factory;
     }

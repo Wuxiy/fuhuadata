@@ -17,6 +17,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Properties;
 
 /**
  * 生成xml文件并发送nc的工具类
@@ -24,11 +25,15 @@ import java.util.Date;
  */
 public class NcExchangeToolUtil {
 
-    @Value("${ncurl}")
     private static String ncUrl;
 
-    private static HttpURLConnection connection=null;
-    static{
+    private static HttpURLConnection connection;
+
+    public static void setNcUrl(String p){
+        NcExchangeToolUtil.ncUrl=p;
+
+    }
+    private static void setConnection() {
         URL realURL = null;
         try {
             realURL = new URL(ncUrl);
@@ -48,6 +53,7 @@ public class NcExchangeToolUtil {
      * @return
      */
     public static Element xmlSendNcTool(String xmlName, String resFile) throws Exception {
+        setConnection();
         org.jdom.Element root=null;
         try {
             File file = new File(xmlName);
@@ -64,7 +70,7 @@ public class NcExchangeToolUtil {
             /***************从输入流取得Doc***************/
             InputStream inputStream = connection.getInputStream();
 
-            InputStreamReader isr = new InputStreamReader(inputStream);
+            InputStreamReader isr = new InputStreamReader(inputStream,"UTF-8");
             BufferedReader bufreader = new BufferedReader(isr);
             String xmlString = "";
             int c;
@@ -101,7 +107,9 @@ public class NcExchangeToolUtil {
             e.printStackTrace();
             throw e;
         }finally {
-            connection.disconnect();
+            if (connection!=null){
+                connection.disconnect();
+            }
         }
         return root;
     }
