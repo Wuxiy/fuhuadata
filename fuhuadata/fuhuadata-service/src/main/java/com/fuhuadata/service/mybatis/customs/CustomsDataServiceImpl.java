@@ -15,8 +15,10 @@ import com.google.common.collect.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.Resource;
+import javax.validation.constraints.NotNull;
 import java.beans.PropertyEditor;
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,6 +33,7 @@ import java.util.Map;
  * <p>Date: 6/20/2017
  */
 @Service
+@Validated
 public class CustomsDataServiceImpl extends BaseServiceImpl<CustomsData, Long>
         implements CustomsDataService {
 
@@ -48,7 +51,11 @@ public class CustomsDataServiceImpl extends BaseServiceImpl<CustomsData, Long>
     private CustomsProductRuleService productRuleService;
 
     @Override
-    public void importCustomsData(LocalDate startDate, LocalDate endDate, InputStream inputStream) {
+    public void importCustomsData(@NotNull LocalDate startDate, @NotNull LocalDate endDate, @NotNull InputStream inputStream) {
+
+        if (inputStream == null || startDate == null || endDate == null) {
+            return;
+        }
 
         List<CustomsData> customsDatas = excelToCustomsList(inputStream);
 

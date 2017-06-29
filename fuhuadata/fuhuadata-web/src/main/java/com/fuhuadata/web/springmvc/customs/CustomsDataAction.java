@@ -6,9 +6,12 @@ import com.fuhuadata.domain.echarts.PieData;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.mybatis.customs.CustomsDataService;
+import com.fuhuadata.web.exception.InvalidRequestException;
 import com.fuhuadata.web.springmvc.mybatis.BaseController;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
@@ -25,6 +30,7 @@ import java.util.List;
  * <p>Date: 6/28/2017
  */
 @RequestMapping("/customs/data")
+@Validated
 @Controller
 public class CustomsDataAction extends BaseController<CustomsData, Long> {
 
@@ -38,11 +44,15 @@ public class CustomsDataAction extends BaseController<CustomsData, Long> {
 
     @RequestMapping(value = "excel", method = RequestMethod.POST)
     @ResponseBody
-    public ResultPojo importExcelData(@RequestParam("excel") MultipartFile excel,
-                                      @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-                                      @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+    public ResultPojo importExcelData(@NotNull @RequestParam("excel") MultipartFile excel,
+                                      @NotNull @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                                      @NotNull @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
 
         Result<String> result = Result.newResult(false);
+
+/*        if (excel == null || startDate == null || endDate == null) {
+            throw new InvalidRequestException("Bad Request");
+        }*/
 
         try {
             // 导入海关数据
@@ -59,7 +69,11 @@ public class CustomsDataAction extends BaseController<CustomsData, Long> {
 
     @RequestMapping(value = "country", method = RequestMethod.GET)
     @ResponseBody
-    public ResultPojo countryStatistics(CustomsDataQuery query) {
+    public ResultPojo countryStatistics(@Valid CustomsDataQuery query, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            throw new InvalidRequestException("Bad Request", bindingResult);
+        }
 
         Result<List<PieData>> result = Result.newResult(false);
 

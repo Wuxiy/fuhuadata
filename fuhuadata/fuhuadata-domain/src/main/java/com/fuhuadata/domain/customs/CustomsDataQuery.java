@@ -1,8 +1,10 @@
 package com.fuhuadata.domain.customs;
 
 import com.alibaba.fastjson.JSON;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
@@ -21,10 +23,13 @@ public class CustomsDataQuery {
 
     private List<Integer> destCountryIds;
 
+    @NotBlank
     private String statType;
 
+    @NotBlank
     private String categoryType;
 
+    @NotNull
     private Integer categoryId;
 
     public LocalDate getStartDate() {

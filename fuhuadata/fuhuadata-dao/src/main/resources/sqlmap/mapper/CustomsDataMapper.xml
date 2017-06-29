@@ -225,8 +225,8 @@
 
     <select id="listCustomsStatistics" resultType="com.fuhuadata.domain.echarts.PieData">
         select
-        cd.`dest_country_id` as id,
-        cd.`origin_dest_country` as name,
+        cct.id as id,
+        cct.name as name,
         <if test="statType == 'dollar_total'">
             sum(cd.dollar_total) as value
         </if>
@@ -237,6 +237,7 @@
             sum(cd.legal_num) as value
         </if>
         <include refid="FromTable"/>
+        inner join customs_country cct on cct.id=cd.dest_country_id
         <if test="categoryType != null and 'type' == categoryType">
             inner join customs_product cp on cp.`id`=cd.`product_id`
         </if>
