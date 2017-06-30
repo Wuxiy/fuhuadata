@@ -10,9 +10,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>anonymous complex typeµÄ Java Àà¡£
+ * <p>anonymous complex typeçš„ Java ç±»ã€‚
  * 
- * <p>ÒÔÏÂÄ£Ê½Æ¬¶ÎÖ¸¶¨°üº¬ÔÚ´ËÀàÖĞµÄÔ¤ÆÚÄÚÈİ¡£
+ * <p>ä»¥ä¸‹æ¨¡å¼ç‰‡æ®µæŒ‡å®šåŒ…å«åœ¨æ­¤ç±»ä¸­çš„é¢„æœŸå†…å®¹ã€‚
  * 
  * <pre>
  * &lt;complexType>
@@ -55,7 +55,7 @@ public class CrmExchangeFileToNC {
     protected JAXBElement<String> string2;
 
     /**
-     * »ñÈ¡byteItemÊôĞÔµÄÖµ¡£
+     * è·å–byteItemå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -67,7 +67,7 @@ public class CrmExchangeFileToNC {
     }
 
     /**
-     * ÉèÖÃbyteItemÊôĞÔµÄÖµ¡£
+     * è®¾ç½®byteItemå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -79,7 +79,7 @@ public class CrmExchangeFileToNC {
     }
 
     /**
-     * »ñÈ¡stringÊôĞÔµÄÖµ¡£
+     * è·å–stringå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -91,7 +91,7 @@ public class CrmExchangeFileToNC {
     }
 
     /**
-     * ÉèÖÃstringÊôĞÔµÄÖµ¡£
+     * è®¾ç½®stringå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -103,7 +103,7 @@ public class CrmExchangeFileToNC {
     }
 
     /**
-     * »ñÈ¡longÊôĞÔµÄÖµ¡£
+     * è·å–longå±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -115,7 +115,7 @@ public class CrmExchangeFileToNC {
     }
 
     /**
-     * ÉèÖÃlongÊôĞÔµÄÖµ¡£
+     * è®¾ç½®longå±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -127,7 +127,7 @@ public class CrmExchangeFileToNC {
     }
 
     /**
-     * »ñÈ¡string1ÊôĞÔµÄÖµ¡£
+     * è·å–string1å±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -139,7 +139,7 @@ public class CrmExchangeFileToNC {
     }
 
     /**
-     * ÉèÖÃstring1ÊôĞÔµÄÖµ¡£
+     * è®¾ç½®string1å±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
@@ -151,7 +151,7 @@ public class CrmExchangeFileToNC {
     }
 
     /**
-     * »ñÈ¡string2ÊôĞÔµÄÖµ¡£
+     * è·å–string2å±æ€§çš„å€¼ã€‚
      * 
      * @return
      *     possible object is
@@ -163,7 +163,7 @@ public class CrmExchangeFileToNC {
     }
 
     /**
-     * ÉèÖÃstring2ÊôĞÔµÄÖµ¡£
+     * è®¾ç½®string2å±æ€§çš„å€¼ã€‚
      * 
      * @param value
      *     allowed object is
