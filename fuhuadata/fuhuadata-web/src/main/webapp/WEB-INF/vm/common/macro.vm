@@ -299,3 +299,46 @@
     #end
 </div>
 #end
+
+
+
+## 可折叠导航栏
+## items is Array
+#*
+    item = {
+        id:(String),
+        title:(String),
+        nodes:[{name:(String)url:(String)}]
+    }
+*#
+## defaultSelected = {id:(String),node:(String)}
+#macro(collapseNav $items $defaultSelected)
+    <div class="panel-group" id="accordion">
+    #foreach($item in $items)
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#$!{item.id}" lang="zh">$!{item.title}</a>
+                </h4>
+            </div>
+            <div id="$!{item.id}" class="panel-collapse collapse
+             #if($!{item.id}==$!{defaultSelected.id})
+                in
+            #end
+             ">
+                <div class="panel-body">
+                    <div class="list-group">
+                        #foreach($node in $item.nodes)
+                            <a href="${request.contextPath}$!{node.url}" class="list-group-item
+                            #if($!{node.name}==$!{defaultSelected.node} && $!{item.id}==$!{defaultSelected.id})
+                                active
+                            #end
+                        " lang="zh">$!{node.name}</a>
+                        #end
+                    </div>
+                </div>
+            </div>
+        </div>
+    #end
+    </div>
+#end
