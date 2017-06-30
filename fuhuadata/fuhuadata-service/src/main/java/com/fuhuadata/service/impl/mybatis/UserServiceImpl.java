@@ -224,20 +224,39 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
             return null;
         }
 
-        // loginName 就是 code
-        return getUserMapper().getByCode(loginName);
+        return getUserMapper().getByLoginName(loginName);
     }
 
     @Override
     public Optional<UserAccount> getUserOptByLoginName(String loginName) {
 
-        return Optional.ofNullable(((UserService) AopContext.currentProxy()).getUserByLoginName(loginName));
+        return Optional.ofNullable(getProxyUserService().getUserByLoginName(loginName));
+    }
+
+    private UserService getProxyUserService() {
+        return (UserService) AopContext.currentProxy();
     }
 
     @Override
     public Optional<UserAccount> getUserOptById(Integer userId) {
 
         return Optional.ofNullable(get(userId));
+    }
+
+    @Override
+    public UserAccount getUserByCode(String code) {
+
+        if (StringUtils.isEmpty(code)) {
+            return null;
+        }
+
+        return getUserMapper().getByCode(code);
+    }
+
+    @Override
+    public Optional<UserAccount> getUserOptByCode(String code) {
+
+        return Optional.ofNullable(getProxyUserService().getUserByCode(code));
     }
 
     @Override
@@ -253,7 +272,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
         }
 
         // 获取当前代理对象，为了走切面
-        UserAccount user = ((UserService) AopContext.currentProxy()).getUserByLoginName(loginName);
+        UserAccount user = getProxyUserService().getUserByLoginName(loginName);
 
         if (user == null) {
             throw new UserNotExistsException("用户不存在");

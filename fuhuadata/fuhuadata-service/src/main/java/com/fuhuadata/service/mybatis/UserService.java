@@ -64,13 +64,22 @@ public interface UserService extends BaseService<UserAccount, Integer> {
     UserAccount getUserByLoginName(String loginName);
 
     /**
-     * 根据 code 获取用户
+     * 根据 loginName 获取用户
      * @param loginName
      * @return
      */
     Optional<UserAccount> getUserOptByLoginName(String loginName);
 
     Optional<UserAccount> getUserOptById(Integer userId);
+
+    /**
+     * 根据 code 获取用户
+     * @param code
+     * @return
+     */
+    UserAccount getUserByCode(String code);
+
+    Optional<UserAccount> getUserOptByCode(String code);
 
     UserAccount login(String loginName, String password);
 

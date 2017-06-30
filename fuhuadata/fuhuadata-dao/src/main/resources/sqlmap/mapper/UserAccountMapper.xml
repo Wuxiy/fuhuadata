@@ -129,4 +129,11 @@
         <include refid="FromTable"/>
         WHERE code=#{code}
     </select>
+
+    <select id="getByLoginName" resultMap="BaseResultMap">
+        SELECT
+        <include refid="PasswordColumns"/>
+        <include refid="FromTable"/>
+        WHERE login_name=#{loginName}
+    </select>
 </mapper>
