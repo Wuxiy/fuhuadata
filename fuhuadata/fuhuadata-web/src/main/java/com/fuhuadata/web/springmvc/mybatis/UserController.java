@@ -91,6 +91,6 @@ public class UserController extends BaseController<UserAccount, Integer> {
     @ResponseBody
     public UserAccount getUserByUsername(@PathVariable String code) {
 
-        return userService.getUserByLoginName(code);
+        return userService.getUserByCode(code);
     }
 }
