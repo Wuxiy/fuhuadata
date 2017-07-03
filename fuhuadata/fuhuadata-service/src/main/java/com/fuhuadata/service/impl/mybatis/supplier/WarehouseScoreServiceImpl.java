@@ -1,10 +1,13 @@
 package com.fuhuadata.service.impl.mybatis.supplier;
 
+import com.fuhuadata.dao.mapper.supplier.WarehouseScoreMapper;
 import com.fuhuadata.domain.mybatis.supplier.WarehouseEvaluationScoreRelation;
+import com.fuhuadata.domain.mybatis.supplier.WarehouseInfo;
 import com.fuhuadata.domain.mybatis.supplier.WarehouseScore;
 import com.fuhuadata.domain.query.QueryWarehouseScore;
 import com.fuhuadata.service.impl.mybatis.BaseServiceImpl;
 import com.fuhuadata.service.mybatis.supplier.WarehouseEvaluationScoreRelationService;
+import com.fuhuadata.service.mybatis.supplier.WarehouseInfoService;
 import com.fuhuadata.service.mybatis.supplier.WarehouseScoreService;
 import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.Supplier.ScoreVO;
@@ -25,9 +28,13 @@ import java.util.List;
 @Service
 public class WarehouseScoreServiceImpl extends BaseServiceImpl<WarehouseScore,Integer>
         implements WarehouseScoreService {
-
+    private WarehouseScoreMapper getWarehouseScoreMapper(){
+        return (WarehouseScoreMapper) baseMapper;
+    }
     @Autowired
      private  WarehouseEvaluationScoreRelationService warehouseEvaluationScoreRelationService;
+    @Autowired
+    private WarehouseInfoService warehouseInfoService;
     @Override
     public PageInfo<WarehouseScore> getWarehouseScoreList(QueryWarehouseScore query) {
         if(query == null) return null;
@@ -49,6 +56,10 @@ public class WarehouseScoreServiceImpl extends BaseServiceImpl<WarehouseScore,In
         if(scoreVO.getScore()!=null&&scoreVO.getScore().getId()!=null){
             scoreVO.getScore().setLastmodifyUserId(LoginUtils.getLoginId());
             scoreVO.getScore().setLastmodifyUserName(LoginUtils.getLoginName());
+            scoreVO.getScore().setCreateUserId(LoginUtils.getLoginId());
+            scoreVO.getScore().setCreateUserName(LoginUtils.getLoginName());
+            scoreVO.getScore().setEvaluateUserId(LoginUtils.getLoginId());
+            scoreVO.getScore().setEvaluateUserName(LoginUtils.getLoginName());
             scoreVO.getScore().setEvaluateTime(new Date());
             scoreVO.getScore().setModifyTime(new Date());
             updateSelective(scoreVO.getScore());
@@ -66,11 +77,15 @@ public class WarehouseScoreServiceImpl extends BaseServiceImpl<WarehouseScore,In
         }
         warehouseEvaluationScoreRelationService.deleteByScoreId(scoreId);
         //新增下个月评价时间记录
-        String monthTime = year+"-"+month;
+        int monthd = Integer.parseInt(month);
+        String monthTime = year+"-"+monthd;
         WarehouseScore warehouseScoreSel = new WarehouseScore();
         warehouseScoreSel.setMonthTime(monthTime);
-        WarehouseScore warehouseScoreRes = get(warehouseScoreSel);
-        if(warehouseScoreRes==null){
+        Example example = newExample();
+        Example.Criteria criteria = example.createCriteria().andEqualTo("monthTime",monthTime);
+        criteria.andEqualTo("warehouseId",scoreVO.getScore().getWarehouseId());
+        List<WarehouseScore> list = listByExample(example);
+        if(list==null||list.size()==0){
             if(month.equals("12")){
                 int y= Integer.parseInt(year)+1;
                 monthTime = y+"-"+"1";
@@ -83,6 +98,12 @@ public class WarehouseScoreServiceImpl extends BaseServiceImpl<WarehouseScore,In
             warehouseScoreSel.setWarehouseId(scoreVO.getScore().getWarehouseId());
             save(warehouseScoreSel);
         }
+        //更新仓库综合评分
+        int warehouseId = scoreVO.getScore().getWarehouseId();
+        WarehouseInfo warehouseInfo = new WarehouseInfo();
+        warehouseInfo.setId(warehouseId);
+        warehouseInfo.setCombinedScoring(getWarehouseScoreMapper().getCombinedScoringByWarehouseId(warehouseId));
+        warehouseInfoService.updateSelective(warehouseInfo);
         return warehouseEvaluationScoreRelationService.saveList(scoreVO.getList());
     }
 }

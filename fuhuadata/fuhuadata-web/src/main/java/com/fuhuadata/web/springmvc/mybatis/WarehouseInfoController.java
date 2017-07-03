@@ -76,6 +76,15 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
     public ModelAndView intoWarehouseGrade(int warehouseId) {
         return new ModelAndView("supplierInformation/warehouseGrade").addObject("warehouseId",warehouseId);
     }
+    /**
+     * 进入仓库月度评分详情
+     * @return
+     */
+    @RequestMapping(value = "/intoWarehouseGradeDetails", method = RequestMethod.GET)
+    @SystemLogAnnotation(module = "supplier-warehouse",methods = "intoWarehouseGradeDetails")
+    public ModelAndView intoWarehouseGradeDetails(int warehouseId,int scoreId) {
+        return new ModelAndView("supplierInformation/warehouseGradeDetails").addObject("warehouseId",warehouseId).addObject("scoreId",scoreId);
+    }
 
     /**
      * 进入仓库订单记录
@@ -215,7 +224,6 @@ public class WarehouseInfoController extends BaseController<WarehouseInfo,Intege
             result.setMessage(e.getMessage());
             result.setSuccess(false);
         }
-
         return result.getResultPojo();
     }
 

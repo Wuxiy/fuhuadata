@@ -103,7 +103,7 @@
                                 <div class="col-xs-2">
                                     <div class="input-group">
                                         <input class="form-control" id="combinedScoring" data-control="off" type="text" disabled/>
-                                        <span class="input-group-addon"><a href="#" target="_blank">查看明细</a></span>
+                                        <span class="input-group-addon"><a href="${request.contextPath}/supplier/warehouse/intoWarehouseGrade?warehouseId=$!{warehouseId}" target="_blank">查看明细</a></span>
                                     </div>
                                 </div>
                             </div>

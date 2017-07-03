@@ -1,11 +1,14 @@
 package com.fuhuadata.service.impl.mybatis.supplier;
 
+import com.fuhuadata.dao.mapper.supplier.ForwardingScoreMapper;
 import com.fuhuadata.domain.mybatis.supplier.ForwardingEvaluationScoreRelation;
 import com.fuhuadata.domain.mybatis.supplier.ForwardingScore;
+import com.fuhuadata.domain.mybatis.supplier.FreightForwarding;
 import com.fuhuadata.domain.query.QueryForwardingScore;
 import com.fuhuadata.service.impl.mybatis.BaseServiceImpl;
 import com.fuhuadata.service.mybatis.supplier.ForwardingEvaluationScoreRelationService;
 import com.fuhuadata.service.mybatis.supplier.ForwardingScoreService;
+import com.fuhuadata.service.mybatis.supplier.FreightForwardingService;
 import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.Supplier.ScoreVO;
 import com.github.pagehelper.PageHelper;
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.persistence.Transient;
+import javax.swing.*;
 import java.util.Date;
 import java.util.List;
 /**
@@ -24,8 +28,14 @@ import java.util.List;
 @Service
 public class ForwardingScoreServiceImpl extends BaseServiceImpl<ForwardingScore,Integer>
         implements ForwardingScoreService{
+    private ForwardingScoreMapper getForwardingScoreMapper(){
+        return (ForwardingScoreMapper)baseMapper;
+    }
     @Autowired
     private ForwardingEvaluationScoreRelationService forwardingEvaluationScoreRelationService;
+
+    @Autowired
+    private FreightForwardingService freightForwardingService;
     @Override
     public PageInfo<ForwardingScore> getForwardingScoreList(QueryForwardingScore query) {
         if(query == null) return null;
@@ -44,6 +54,10 @@ public class ForwardingScoreServiceImpl extends BaseServiceImpl<ForwardingScore,
         //保存月度表
         ForwardingScore score = scoreVO.getScore();
         if(score!=null&&score.getId()!=null){
+            score.setCreateUserId(LoginUtils.getLoginId());
+            score.setCreateUserName(LoginUtils.getLoginName());
+            score.setEvaluateUserId(LoginUtils.getLoginId());
+            score.setEvaluateUserName(LoginUtils.getLoginName());
             score.setLastmodifyUserId(LoginUtils.getLoginId());
             score.setLastmodifyUserName(LoginUtils.getLoginName());
             score.setEvaluateTime(new Date());
@@ -56,6 +70,8 @@ public class ForwardingScoreServiceImpl extends BaseServiceImpl<ForwardingScore,
         }else if(score!=null&&score.getId()==null){
             score.setCreateUserId(LoginUtils.getLoginId());
             score.setCreateUserName(LoginUtils.getLoginName());
+            score.setEvaluateUserId(LoginUtils.getLoginId());
+            score.setEvaluateUserName(LoginUtils.getLoginName());
             score.setLastmodifyUserId(LoginUtils.getLoginId());
             score.setLastmodifyUserName(LoginUtils.getLoginName());
 
@@ -67,11 +83,15 @@ public class ForwardingScoreServiceImpl extends BaseServiceImpl<ForwardingScore,
         }
         forwardingEvaluationScoreRelationService.deleteByScoreId(scoreId);
         //新增下个月评价时间记录
-        String monthTime = year+"-"+month;
+        int monthd = Integer.parseInt(month);
+        String monthTime = year+"-"+monthd;
         ForwardingScore forwardingScoreSel = new ForwardingScore();
         forwardingScoreSel.setMonthTime(monthTime);
-        ForwardingScore forwardingScoreSelRes = get(forwardingScoreSel);
-        if(forwardingScoreSelRes==null){
+        Example example = newExample();
+        Example.Criteria criteria = example.createCriteria().andEqualTo("monthTime",monthTime);
+        criteria.andEqualTo("forwardingId",scoreVO.getScore().getForwardingId());
+        List<ForwardingScore> list = listByExample(example);
+        if(list==null||list.size()==0){
             if(month.equals("12")){
                 int y= Integer.parseInt(year)+1;
                 monthTime = y+"-"+"1";
@@ -84,6 +104,12 @@ public class ForwardingScoreServiceImpl extends BaseServiceImpl<ForwardingScore,
             forwardingScoreSel.setForwardingId(score.getForwardingId());
             save(forwardingScoreSel);
         }
+        //更新基本信息的综合评分字段
+        int forwardingId = scoreVO.getScore().getForwardingId();
+        FreightForwarding freightForwarding = new FreightForwarding();
+        freightForwarding.setId(forwardingId);
+        freightForwarding.setCombinedScoring(getForwardingScoreMapper().getCombinedScoringByForwardingId(forwardingId));
+        freightForwardingService.updateSelective(freightForwarding);
         return forwardingEvaluationScoreRelationService.saveList(scoreVO.getList());
     }
 
