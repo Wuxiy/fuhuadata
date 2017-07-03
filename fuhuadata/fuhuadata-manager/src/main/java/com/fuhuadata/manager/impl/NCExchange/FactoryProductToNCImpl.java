@@ -90,6 +90,12 @@ public class FactoryProductToNCImpl implements FactoryProductToNC {
             pk_supplier.appendChild(document.createTextNode(factoryToNc.getPkSupplierById(factoryProducts.get(0).getFactoryId())));
             billhead.appendChild(pk_supplier);
 
+            Element pk_supplierext_q=document.createElement("pk_supplierext_q");
+            billhead.appendChild(pk_supplierext_q);
+            Element pk_supplierext_i=document.createElement("pk_supplierext_i");
+            billhead.appendChild(pk_supplierext_i);
+            Element pk_supplierext_a=document.createElement("pk_supplierext_a");
+            billhead.appendChild(pk_supplierext_a);
             Element pk_supplierext_p=document.createElement("pk_supplierext_p");
             billhead.appendChild(pk_supplierext_p);
             for (ProduceFactoryProduct factoryProduct:factoryProducts){

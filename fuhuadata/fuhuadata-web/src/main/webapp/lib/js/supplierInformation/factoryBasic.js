@@ -40,7 +40,7 @@ $(function () {
 
                 if (res.code!==1) return;
 
-                bankTable.data = res.data;
+                bankTable.data = res.data?res.data:[];
                 bankTable.ectype = $.extend(true, [], bankTable.data); // 深拷贝一份数据对象的副本
                 container.html(bankTable.render(bankTable.data));
             });
@@ -193,10 +193,10 @@ $(function () {
         render:function (data) {
             $('[name="accnum"]', bankModal.form).val(data.accnum); // 银行账号
             $('[name="accname"]', bankModal.form).val(data.accname); // 银行户名
-            $('[name="currtypeName"]', bankModal.form).val(data.pkCountry); // 币种
+            $('[name="currtypeName"]', bankModal.form).val(data.pkCurrtype); // 币种
             $('[name="pkBanktype"]', bankModal.form).val(data.pkBanktype); // 银行类别
-            bankLinkage.firstChangeHandler(); // 根据银行类别渲染开户银行
-            $('[name="pkBankdoc"]', bankModal.form).val(data.pkBankdoc); // 开户银行
+            bankLinkage.firstChangeHandler(data.pkBankdoc); // 根据银行类别渲染开户银行
+            /*$('[name="pkBankdoc"]', bankModal.form).val(data.pkBankdoc); // 开户银行*/
         },
         empty:function () {
             bankModal.form[0].reset();
@@ -263,6 +263,7 @@ $(function () {
             type:'GET',
         },
         init:function () {
+            var self = this;
             $.ajax(bankLinkage.firstParam).done(function (res) {
 
                 if (res.code === 1 && res.data instanceof Array) {
@@ -270,7 +271,9 @@ $(function () {
                     bankLinkage.firstSelect.html(bankLinkage.renderFirst(res.data));
                 }
             });
-            bankLinkage.addEvent('change.firstSelect', this.firstChangeHandler);
+            bankLinkage.addEvent('change.firstSelect', function (e) {
+                self.firstChangeHandler()
+            });
         },
         renderFirst:function (list) {
             var tpl = '';
@@ -293,7 +296,7 @@ $(function () {
         addEvent:function (eType, handler) {
             this.firstSelect.off(eType).on(eType, handler);
         },
-        firstChangeHandler:function () {
+        firstChangeHandler:function (val) {
             bankLinkage.secondParam.data = {
                 bankTypeCode:$('#bank_first').val()
             };
@@ -303,6 +306,7 @@ $(function () {
                 if (res.code === 1 && res.data instanceof Array) {
 
                     bankLinkage.secondSelect.html(bankLinkage.renderSecond(res.data));
+                    if (val) $('[name="pkBankdoc"]', bankModal.form).val(val);
                 }else {
                     bankLinkage.secondSelect.html('<option value="">暂无数据</option>');
                 }

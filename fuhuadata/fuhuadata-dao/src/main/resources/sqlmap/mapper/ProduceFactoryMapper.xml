@@ -82,4 +82,22 @@
         GROUP BY pfp.factory_id) product_names
         <include refid="FromTable"/>
     </select>
+
+    <resultMap id="OrderResultMap" type="com.fuhuadata.domain.supplier.FactoryOrder"
+               extends="com.fuhuadata.dao.mapper.business.BusinessBuyContractMapper.BaseResultMap">
+        <result column="total_score" jdbcType="SMALLINT" property="totalScore"/>
+    </resultMap>
+
+    <select id="listFactoryOrders" resultType="com.fuhuadata.domain.supplier.FactoryOrder">
+        select
+        <include refid="com.fuhuadata.dao.mapper.business.BusinessBuyContractMapper.BaseColumns"/>,
+        fet.total_score
+        <include refid="com.fuhuadata.dao.mapper.business.BusinessBuyContractMapper.FromTable"/>
+        left join s_factory_eva_total fet on fet.order_id=bbc.id
+        <where>
+            <if test="cvendorid != null and cvendorid != ''">
+                bbc.cvendorid='${cvendorid}'
+            </if>
+        </where>
+    </select>
 </mapper>

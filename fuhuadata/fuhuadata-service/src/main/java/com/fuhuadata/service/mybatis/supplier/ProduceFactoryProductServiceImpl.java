@@ -5,7 +5,9 @@ import com.fuhuadata.domain.supplier.ProduceFactoryProduct;
 import com.fuhuadata.domain.supplier.ProduceFactoryProductAddr;
 import com.fuhuadata.manager.NCExchange.FactoryProductToNC;
 import com.fuhuadata.manager.ProductWareManager;
+import com.fuhuadata.service.exception.ServiceException;
 import com.fuhuadata.service.impl.mybatis.BaseServiceImpl;
+import com.google.common.collect.Lists;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -81,11 +83,11 @@ public class ProduceFactoryProductServiceImpl extends BaseServiceImpl<ProduceFac
 
     private void productsToNc(ProduceFactoryProduct bdProduct) {
         // TODO 同步到NC
-        /*try {
+        try {
             factoryProductToNC.sendFactoryProduct(Lists.newArrayList(bdProduct));
         } catch (Exception e) {
             throw new ServiceException("加工厂产品同步NC出错", e);
-        }*/
+        }
     }
 
     @Override

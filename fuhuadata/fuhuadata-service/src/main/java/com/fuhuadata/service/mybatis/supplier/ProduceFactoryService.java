@@ -1,7 +1,9 @@
 package com.fuhuadata.service.mybatis.supplier;
 
+import com.fuhuadata.domain.business.BusinessBuyContractQuery;
 import com.fuhuadata.domain.common.BankAccBas;
 import com.fuhuadata.domain.mybatis.supplier.SupplierLinkman;
+import com.fuhuadata.domain.supplier.FactoryOrder;
 import com.fuhuadata.domain.supplier.ProduceFactory;
 import com.fuhuadata.domain.supplier.ProduceFactoryInfo;
 import com.fuhuadata.domain.supplier.ProduceFactoryQuery;
@@ -9,6 +11,7 @@ import com.fuhuadata.service.mybatis.BaseService;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * <p>User: wangjie
@@ -27,4 +30,10 @@ public interface ProduceFactoryService extends BaseService<ProduceFactory, Integ
     ProduceFactory saveFactory(ProduceFactoryInfo factoryInfo);
 
     ProduceFactory updateFactory(ProduceFactoryInfo factoryInfo);
+
+    Optional<ProduceFactory> getOptFactoryByPk(String pkSupplier);
+
+    void updateFactoryEvaScore(String pkSupplier, Double totalScore);
+
+    List<FactoryOrder> listFactoryOrders(BusinessBuyContractQuery query);
 }

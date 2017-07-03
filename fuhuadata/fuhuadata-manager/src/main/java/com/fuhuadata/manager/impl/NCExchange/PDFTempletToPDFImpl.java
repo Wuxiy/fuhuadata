@@ -261,6 +261,10 @@ public class PDFTempletToPDFImpl implements PDFTempletToPDF {
             ps.close();
             long time=System.currentTimeMillis();
             filename="pdfFIle"+time+".pdf";
+            File dir=new File(a+"lib/pdfFile/");
+            if (!dir.exists()){
+                dir.mkdirs();
+            }
             pdfPath=a+"lib\\pdfFile\\"+filename;
             FileOutputStream fos=new FileOutputStream(pdfPath);
             fos.write(bos.toByteArray());
