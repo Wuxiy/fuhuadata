@@ -105,21 +105,53 @@
                                     </span>*#
                                 </div>
                             </div>
-                            <fieldset id="customFields"></fieldset>
+                            #*<fieldset id="customFields"></fieldset>
                             <div class="form-group hidden" data-view="editView">
                                 <div class="col-xs-2 col-xs-offset-1">
                                     <button class="btn-link" id="add_customField" type="button" lang="zh">
                                         <span class="glyphicon glyphicon-plus"></span>添加自定义字段
                                     </button>
                                 </div>
-                            </div>
+                            </div>*#
                             <div class="form-group">
                                 <label class="control-label col-xs-1" for="memo" lang="zh">备注</label>
                                 <div class="col-xs-8">
                                     <textarea class="form-control" name="memo" rows="4" disabled></textarea>
                                 </div>
                             </div>
-                            <fieldset id="linkmens"></fieldset>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="banks" lang="zh">银行账户</label>
+                                <div class="col-xs-8">
+                                    <table class="table text-center table-condensed table-bordered table-hover" id="bank_table">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center" lang="zh">账号</th>
+                                            <th class="text-center" lang="zh">户名</th>
+                                            <th class="text-center" lang="zh">开户银行</th>
+                                            <th class="text-center" lang="zh">银行类别</th>
+                                            <th class="text-center" lang="zh">币种</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody name="banks"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-1" for="contacts" lang="zh">联系人</label>
+                                <div class="col-xs-8">
+                                    <table class="table text-center table-condensed table-bordered table-hover" id="contact_table">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center col-xs-3" lang="zh">姓名</th>
+                                            <th class="text-center col-xs-4" lang="zh">联系电话</th>
+                                            <th class="text-center col-xs-4" lang="zh">邮箱</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody name="contacts"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            #*<fieldset id="linkmens"></fieldset>*#
                             <div class="form-group" id="time">
                                 <label class="control-label col-xs-1" for="startCooperateTime" lang="zh">开始合作时间</label>
                                 <div class="col-xs-2">

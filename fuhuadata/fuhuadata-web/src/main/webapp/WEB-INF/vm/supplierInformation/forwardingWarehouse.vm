@@ -101,7 +101,7 @@
                             tpl +=
                                     '<tr>' +
                                     '<td>'+table.hasField(item.code)+'</td>'+
-                                    '<td><a href="'+basePath+'/supplier/forwarding/intoWarehouseBasic?id='+table.hasField(item.id)+'">'+table.hasField(item.name)+'</a></td>'+
+                                    '<td><a href="'+basePath+'/supplier/warehouse/intoWarehouseBasic?id='+table.hasField(item.id)+'">'+table.hasField(item.name)+'</a></td>'+
                                     '<td>'+supprops[table.hasField(item.supprop)]+'</td>'+
                                     '<td>'+table.hasField(item.storaddr)+'</td>'+
                                     '<td>'+table.hasField(item.storageArea)+'</td>'+

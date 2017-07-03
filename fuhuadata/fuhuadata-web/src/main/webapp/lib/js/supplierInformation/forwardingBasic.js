@@ -73,14 +73,26 @@ $(function () {
                 name:'memo'
             },
             {
+                name:'bankAccBass',
+                type:'list',
+                field:{
+                    accnum:'accnum',
+                    accname:'accname',
+                    bankDocName:'bankDocName',
+                    bankTypeName:'bankTypeName',
+                    currtypeName:'currtypeName'
+                },
+                place:"#bank_table [name=\'banks\']"
+            },
+            {
                 name:'linkmen',
                 type:'list',
                 field:{
-                    name:'联系人,text',
-                    phone:'联系电话,tel',
-                    email:'邮箱,email'
+                    name:'name',
+                    phone:'phone',
+                    email:'email'
                 },
-                place:'linkmens'
+                place:"#contact_table [name=\'contacts\']"
             },
             {
                 name:'startCooperateTime'
@@ -104,50 +116,26 @@ $(function () {
                 name:'modifiedtime'
             }
         ],
-        /*verify:(function () {
+        verify:(function () {
             return $('#factory_info').validate({
                 rules: {
-                    orgName: 'required',
-                    name: 'required',
-                    productionLicenses: 'required',
-                    pesticideRegistration: 'required',
-                    dischargePermit: 'required',
-                    supstate: 'required',
-                    managerOrgName: 'required',
-                    managerDepName: 'required',
-                    manager: 'required'
+                    transportationMethods: 'required',
+                    businessLicence: 'required',
+                    nvocc: 'required',
                 },
                 messages: {
-                    orgName: {
-                        required:em('必填','top:-29px','right:0')
+                    transportationMethods: {
+                        required:em('请至少选择一个','top:-29px','left:-93px')
                     },
-                    name:{
-                        required:em('必填','top:-29px','right:0')
+                    businessLicence:{
+                        required:em('请添加图片','top:-29px','left:-93px')
                     },
-                    productionLicenses:{
-                        required:em('请添加图片','top:-29px','right:80px')
-                    },
-                    pesticideRegistration:{
-                        required:em('请添加图片','top:-29px','right:80px')
-                    },
-                    dischargePermit:{
-                        required:em('请添加图片','top:-29px','right:80px')
-                    },
-                    supstate:{
-                        required:em('请选择一个值','top:-29px','right:0')
-                    },
-                    managerOrgName:{
-                        required:em('请选择一个值','top:-29px','right:0')
-                    },
-                    managerDepName:{
-                        required:em('请选择一个值','top:-29px','right:0')
-                    },
-                    manager:{
-                        required:em('请选择一个值','top:-29px','right:0')
+                    nvocc:{
+                        required:em('请添加图片','top:-29px','left:-93px')
                     }
                 }
             });
-        })(),*/
+        })(),
         init:function (item) {
 
             this.viewForm();
@@ -196,28 +184,28 @@ $(function () {
                 }else if (item.type==='list') {
 
                     var arr = Object.keys(item.field), // 取的fied中的字段名称
-                        p = $('#'+item.place), // 渲染位置
-                        n = item.name,
+                        p = $(item.place), // 渲染位置
+                        n = item.name, // 匹配data中的字段
                         _html = '';
 
                     if (Array.isArray(arr)) {
 
                         if (data[n]) {
 
-                            $.each(data[n], function (j, o) {
-                                _html += '<div class="form-group" name="'+n+'">';
-                                $.each(arr, function (k, key) {
+                            $.each(data[n], function (i, o) {
+                                _html += '<tr>';
 
-                                    _html +=
-                                        '<label class="control-label col-xs-1" for="'+key+'" lang="zh">'
-                                        +item.field[key].split(',')[0]+
-                                        '</label>'+
-                                        '<div class="col-xs-2">' +
-                                        '<input class="form-control" name="'+key+'"' +
-                                        'type="'+item.field[key].split(',')[1]+'" value="'+o[key]+'" disabled>'+
-                                        '</div>';
-                                });
-                                _html += '</div>';
+                                if (data[n].length=0) {
+
+                                    _html += '<td colspan="'+arr.length+'">暂无数据</td>';
+                                }else {
+
+                                    $.each(arr, function (j, key) {
+                                        _html += '<td>'+o[key]+'</td>';
+                                    });
+                                }
+
+                                _html += '</tr>';
                             });
                             p.html(_html);
                         }
@@ -280,7 +268,7 @@ $(function () {
         },
         saveHandler:function () {
 
-            /*if (!basicPanel.isPass()) return;*/
+            if (!basicPanel.isPass()) return;
 
             if (!confirm('确定要保存吗？')) return;
 
@@ -298,7 +286,7 @@ $(function () {
                 val = $(this).val(),
                 arr = basicPanel.data[name].split(','),
                 hasVal = $(this).prop('checked');
-            console.log(hasVal);
+            // console.log(hasVal);
 
             if (hasVal) {
                 arr.push(val);
@@ -329,9 +317,9 @@ $(function () {
                 }
             })
         },
-        /*isPass:function () {
+        isPass:function () {
             return basicPanel.verify.form();
-        }*/
+        }
     };
 
     // 图片路径展示组件
