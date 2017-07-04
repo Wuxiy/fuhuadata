@@ -1,10 +1,7 @@
 package com.fuhuadata.service.mybatis.customs;
 
 import com.fuhuadata.dao.mapper.customs.CustomsDataMapper;
-import com.fuhuadata.domain.customs.CustomesDataTypePropertyEditor;
-import com.fuhuadata.domain.customs.CustomsData;
-import com.fuhuadata.domain.customs.CustomsDataQuery;
-import com.fuhuadata.domain.customs.CustomsProductRule;
+import com.fuhuadata.domain.customs.*;
 import com.fuhuadata.domain.echarts.PieData;
 import com.fuhuadata.service.common.poi.ExcelToList;
 import com.fuhuadata.service.exception.ServiceException;
@@ -23,10 +20,11 @@ import java.beans.PropertyEditor;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.function.Function;
+
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
 
 /**
  * <p>User: wangjie
@@ -49,6 +47,12 @@ public class CustomsDataServiceImpl extends BaseServiceImpl<CustomsData, Long>
 
     @Resource
     private CustomsProductRuleService productRuleService;
+
+    @Resource
+    private CustomsCountryService countryService;
+
+    @Resource
+    private CustomsCompanyService companyService;
 
     @Override
     public void importCustomsData(@NotNull LocalDate startDate, @NotNull LocalDate endDate, @NotNull InputStream inputStream) {
@@ -199,6 +203,56 @@ public class CustomsDataServiceImpl extends BaseServiceImpl<CustomsData, Long>
             query.setEndDate(query.getEndDate().plusDays(1));
         }
 
-        return getCustomsDataMapper().listCustomsStatistics(query);
+        if (StatCategory.COUNTRY == query.getStatCategory()) {
+            return listCountryPieData(query);
+        } else if (StatCategory.COMPANY == query.getStatCategory()) {
+            List<PieData> pieData = getCustomsDataMapper().listCompanyCustomsStatistics(query);
+            return listCompanyPieData(pieData);
+        }
+
+        return Collections.emptyList();
+    }
+
+    private List<PieData> listCountryPieData(CustomsDataQuery query) {
+
+        List<PieData> countryData = getCustomsDataMapper().listCountryCustomsStatistics(query);
+        Map<Integer, PieData> countryDataMap = countryData.stream()
+                .collect(toMap(PieData::getId, Function.identity()));
+
+        return countryService.listCountries()
+                .stream()
+                .map(country -> {
+                    PieData pieData = null;
+
+                    if (countryDataMap.get(country.getId()) != null) {
+                        pieData = countryDataMap.get(country.getId());
+                    } else {
+                        pieData = new PieData(country.getId(), country.getName(), 0.0);
+                    }
+
+                    return pieData;
+                })
+                .collect(toList());
+    }
+
+    private List<PieData> listCompanyPieData(List<PieData> companyData) {
+
+        Map<Integer, PieData> pieMap = companyData.stream()
+                .collect(toMap(PieData::getId, Function.identity()));
+
+        return companyService.listTopCompanies()
+                .stream()
+                .map(company -> {
+                    PieData pieData = null;
+
+                    if (pieMap.get(company.getId()) != null) {
+                        pieData = pieMap.get(company.getId());
+                    } else {
+                        pieData = new PieData(company.getId(), company.getName(), 0.0);
+                    }
+
+                    return pieData;
+                })
+                .collect(toList());
     }
 }

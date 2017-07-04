@@ -2,6 +2,7 @@ package com.fuhuadata.web.springmvc.customs;
 
 import com.fuhuadata.domain.customs.CustomsData;
 import com.fuhuadata.domain.customs.CustomsDataQuery;
+import com.fuhuadata.domain.customs.StatCategory;
 import com.fuhuadata.domain.echarts.PieData;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -69,7 +69,7 @@ public class CustomsDataAction extends BaseController<CustomsData, Long> {
 
     @RequestMapping(value = "country", method = RequestMethod.GET)
     @ResponseBody
-    public ResultPojo countryStatistics(@Valid CustomsDataQuery query, BindingResult bindingResult) {
+    public ResultPojo countryStatistics(@Validated CustomsDataQuery query, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             throw new InvalidRequestException("Bad Request", bindingResult);
@@ -77,8 +77,27 @@ public class CustomsDataAction extends BaseController<CustomsData, Long> {
 
         Result<List<PieData>> result = Result.newResult(false);
 
+        query.setStatCategory(StatCategory.COUNTRY);
         List<PieData> pieDatas = customsDataService.listCustomsData(query);
         result.addDefaultModel(pieDatas);
+        result.setSuccess(true);
+
+        return result.getResultPojo();
+    }
+
+    @RequestMapping(value = "company", method = RequestMethod.GET)
+    @ResponseBody
+    public ResultPojo companyStatistics(@Validated CustomsDataQuery query, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            throw new InvalidRequestException("Bad Request", bindingResult);
+        }
+
+        Result<List<PieData>> result = Result.newResult(false);
+
+        query.setStatCategory(StatCategory.COMPANY);
+        List<PieData> pieData = customsDataService.listCustomsData(query);
+        result.addDefaultModel(pieData);
         result.setSuccess(true);
 
         return result.getResultPojo();

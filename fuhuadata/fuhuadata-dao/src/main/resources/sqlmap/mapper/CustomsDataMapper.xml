@@ -223,10 +223,7 @@
 
     </select>
 
-    <select id="listCustomsStatistics" resultType="com.fuhuadata.domain.echarts.PieData">
-        select
-        cct.id as id,
-        cct.name as name,
+    <sql id="statTypeSelect">
         <if test="statType == 'dollar_total'">
             sum(cd.dollar_total) as value
         </if>
@@ -236,26 +233,53 @@
         <if test="statType == 'legal_num'">
             sum(cd.legal_num) as value
         </if>
+    </sql>
+
+    <sql id="statisticWhere">
+        <if test="categoryType != null and 'type' == categoryType">
+            and cp.`type_id`=#{categoryId}
+        </if>
+        <if test="categoryType != null and 'product' == categoryType">
+            and cd.product_id=#{categoryId}
+        </if>
+        <if test="startDate != null">
+            and cd.cdate >= #{startDate}
+        </if>
+        <if test="endDate != null">
+            and cd.cdate &lt; #{endDate}
+        </if>
+    </sql>
+
+    <select id="listCountryCustomsStatistics" resultType="com.fuhuadata.domain.echarts.PieData">
+        select
+        cct.id as id,
+        cct.name as name,
+        <include refid="statTypeSelect"/>
         <include refid="FromTable"/>
         inner join customs_country cct on cct.id=cd.dest_country_id
         <if test="categoryType != null and 'type' == categoryType">
             inner join customs_product cp on cp.`id`=cd.`product_id`
         </if>
         <where>
-            <if test="categoryType != null and 'type' == categoryType">
-                and cp.`type_id`=#{categoryId}
-            </if>
-            <if test="categoryType != null and 'product' == categoryType">
-                and cd.product_id=#{categoryId}
-            </if>
-            <if test="startDate != null">
-                and cd.cdate >= #{startDate}
-            </if>
-            <if test="endDate != null">
-                and cd.cdate &lt; #{endDate}
-            </if>
+            <include refid="statisticWhere"/>
         </where>
         group by cd.`dest_country_id`
+    </select>
+
+    <select id="listCompanyCustomsStatistics" resultType="com.fuhuadata.domain.echarts.PieData">
+        select
+        ccp.id as id,
+        ccp.name as name,
+        <include refid="statTypeSelect"/>
+        <include refid="FromTable"/>
+        inner join customs_company ccp on ccp.id=cd.company_id
+        <if test="categoryType != null and 'type' == categoryType">
+            inner join customs_product cp on cp.`id`=cd.`product_id`
+        </if>
+        <where>
+            <include refid="statisticWhere"/>
+        </where>
+        group by cd.`company_id`
     </select>
 
 </mapper>

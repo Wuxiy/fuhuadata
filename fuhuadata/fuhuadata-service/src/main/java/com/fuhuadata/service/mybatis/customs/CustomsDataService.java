@@ -35,5 +35,11 @@ public interface CustomsDataService extends BaseService<CustomsData, Long> {
      */
     int updateCustomsCompanyId();
 
+    /**
+     * 获取海关数据分析结果，出口国家分析 or 出口企业分析
+     * @param query
+     * @return
+     */
     List<PieData> listCustomsData(CustomsDataQuery query);
+
 }

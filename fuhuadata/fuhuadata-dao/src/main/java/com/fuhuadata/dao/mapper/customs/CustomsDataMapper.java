@@ -23,7 +23,19 @@ public interface CustomsDataMapper extends BaseMapper<CustomsData, Long> {
 
     List<CustomsData> listCustomsData();
 
-    List<PieData> listCustomsStatistics(CustomsDataQuery query);
+    /**
+     * 出口国家海关数据分析
+     * @param query
+     * @return
+     */
+    List<PieData> listCountryCustomsStatistics(CustomsDataQuery query);
+
+    /**
+     * 出口企业海关数据饼图分析
+     * @param query
+     * @return
+     */
+    List<PieData> listCompanyCustomsStatistics(CustomsDataQuery query);
 
     /**
      * 删除指定日期内的海关数据

@@ -12,4 +12,6 @@ import java.util.List;
 public interface CustomsCompanyService extends BaseService<CustomsCompany, Integer> {
 
     List<CustomsCompany> listBatch();
+
+    List<CustomsCompany> listTopCompanies();
 }

@@ -23,14 +23,25 @@ public class CustomsDataQuery {
 
     private List<Integer> destCountryIds;
 
+    /**
+     * 美元总价、美元单价、法定数量
+     */
     @NotBlank
     private String statType;
 
+    /**
+     * 类型或产品
+     */
     @NotBlank
     private String categoryType;
 
     @NotNull
     private Integer categoryId;
+
+    /**
+     * 出口国家、出口企业
+     */
+    private StatCategory statCategory;
 
     public LocalDate getStartDate() {
         return startDate;
@@ -90,5 +101,13 @@ public class CustomsDataQuery {
         query.setCategoryId(1);
 
         System.out.println(JSON.toJSONString(query));
+    }
+
+    public StatCategory getStatCategory() {
+        return statCategory;
+    }
+
+    public void setStatCategory(StatCategory statCategory) {
+        this.statCategory = statCategory;
     }
 }

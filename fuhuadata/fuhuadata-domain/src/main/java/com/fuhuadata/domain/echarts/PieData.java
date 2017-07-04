@@ -12,6 +12,15 @@ public class PieData {
 
     private Double value;
 
+    public PieData() {
+    }
+
+    public PieData(Integer id, String name, Double value) {
+        this.id = id;
+        this.name = name;
+        this.value = value;
+    }
+
     public String getName() {
         return name;
     }
