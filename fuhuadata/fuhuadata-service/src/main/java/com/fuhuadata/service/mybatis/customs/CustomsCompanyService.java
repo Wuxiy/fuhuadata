@@ -14,4 +14,6 @@ public interface CustomsCompanyService extends BaseService<CustomsCompany, Integ
     List<CustomsCompany> listBatch();
 
     List<CustomsCompany> listTopCompanies();
+
+    List<CustomsCompany> listCompanies(List<Integer> companyIds);
 }

@@ -12,4 +12,6 @@ import java.util.List;
 public interface CustomsCountryService extends BaseService<CustomsCountry, Integer> {
 
     List<CustomsCountry> listCountries();
+
+    List<CustomsCountry> listCountries(List<Integer> countryIds);
 }

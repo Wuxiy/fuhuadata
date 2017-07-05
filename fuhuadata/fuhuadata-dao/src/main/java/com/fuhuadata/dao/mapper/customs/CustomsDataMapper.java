@@ -1,6 +1,7 @@
 package com.fuhuadata.dao.mapper.customs;
 
 import com.fuhuadata.dao.mapper.BaseMapper;
+import com.fuhuadata.domain.customs.BarData;
 import com.fuhuadata.domain.customs.CustomsData;
 import com.fuhuadata.domain.customs.CustomsDataQuery;
 import com.fuhuadata.domain.echarts.PieData;
@@ -45,4 +46,18 @@ public interface CustomsDataMapper extends BaseMapper<CustomsData, Long> {
      */
     int deleteCustomsDataBetweenDate(@Param("startDate") LocalDate startDate,
                                      @Param("endDate") LocalDate endDate);
+
+    /**
+     * 出口国家柱状图数据
+     * @param query
+     * @return
+     */
+    List<BarData> listCountryBarData(CustomsDataQuery query);
+
+    /**
+     * 出口企业柱状图数据
+     * @param query
+     * @return
+     */
+    List<BarData> listCompanyBarData(CustomsDataQuery query);
 }

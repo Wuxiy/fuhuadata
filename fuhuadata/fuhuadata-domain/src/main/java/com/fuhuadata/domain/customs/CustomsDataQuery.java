@@ -1,6 +1,7 @@
 package com.fuhuadata.domain.customs;
 
 import com.alibaba.fastjson.JSON;
+import com.fuhuadata.domain.validation.groups.GroupOne;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -10,18 +11,25 @@ import java.time.Month;
 import java.util.List;
 
 /**
+ * GroupOne:柱状图必须有按年份 or 按月份
  * <p>User: wangjie
  * <p>Date: 6/27/2017
  */
 public class CustomsDataQuery {
 
+    @NotNull(groups = GroupOne.class)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate startDate;
 
+    @NotNull(groups = GroupOne.class)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate endDate;
 
-    private List<Integer> destCountryIds;
+    /**
+     * 出口国家、出口企业ids
+     */
+    @NotNull(groups = GroupOne.class)
+    private List<Integer> statIds;
 
     /**
      * 美元总价、美元单价、法定数量
@@ -37,6 +45,12 @@ public class CustomsDataQuery {
 
     @NotNull
     private Integer categoryId;
+
+    /**
+     * year=按年份，month=按月份
+     */
+    @NotNull(groups = GroupOne.class)
+    private String timeType;
 
     /**
      * 出口国家、出口企业
@@ -59,12 +73,12 @@ public class CustomsDataQuery {
         this.endDate = endDate;
     }
 
-    public List<Integer> getDestCountryIds() {
-        return destCountryIds;
+    public List<Integer> getStatIds() {
+        return statIds;
     }
 
-    public void setDestCountryIds(List<Integer> destCountryIds) {
-        this.destCountryIds = destCountryIds;
+    public void setStatIds(List<Integer> statIds) {
+        this.statIds = statIds;
     }
 
     public String getStatType() {
@@ -91,6 +105,14 @@ public class CustomsDataQuery {
         this.categoryId = categoryId;
     }
 
+    public StatCategory getStatCategory() {
+        return statCategory;
+    }
+
+    public void setStatCategory(StatCategory statCategory) {
+        this.statCategory = statCategory;
+    }
+
     public static void main(String[] args) {
 
         CustomsDataQuery query = new CustomsDataQuery();
@@ -103,11 +125,11 @@ public class CustomsDataQuery {
         System.out.println(JSON.toJSONString(query));
     }
 
-    public StatCategory getStatCategory() {
-        return statCategory;
+    public String getTimeType() {
+        return timeType;
     }
 
-    public void setStatCategory(StatCategory statCategory) {
-        this.statCategory = statCategory;
+    public void setTimeType(String timeType) {
+        this.timeType = timeType;
     }
 }

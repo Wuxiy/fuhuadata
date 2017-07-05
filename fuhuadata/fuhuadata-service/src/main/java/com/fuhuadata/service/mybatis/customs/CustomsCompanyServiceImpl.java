@@ -40,6 +40,15 @@ public class CustomsCompanyServiceImpl extends BaseServiceImpl<CustomsCompany, I
         Example example = newExample();
         example.createCriteria().andEqualTo("pid", 0);
 
-        return listByExample(example);
+        return this.listByExample(example);
+    }
+
+    @Override
+    public List<CustomsCompany> listCompanies(List<Integer> companyIds) {
+
+        Example example = newExample();
+        example.createCriteria().andIn("id", companyIds);
+
+        return this.listByExample(example);
     }
 }

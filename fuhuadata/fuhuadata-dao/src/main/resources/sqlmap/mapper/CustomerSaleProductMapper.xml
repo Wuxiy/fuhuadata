@@ -7,7 +7,7 @@
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="customer_id" jdbcType="INTEGER" property="customerId" />
-    <result column="year" jdbcType="VARCHAR" property="year" />
+    <result column="year" jdbcType="VARCHAR" property="yearFlag" />
     <result column="product_id" jdbcType="VARCHAR" property="productId" />
     <result column="product_name" jdbcType="VARCHAR" property="productName" />
     <result column="brand" jdbcType="VARCHAR" property="brand" />

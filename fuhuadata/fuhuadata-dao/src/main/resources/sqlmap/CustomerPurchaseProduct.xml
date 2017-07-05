@@ -9,7 +9,7 @@
 	<resultMap id="CUSTOMERPURCHASEPRODUCT-MAP" class="CustomerPurchaseProduct">
 					<result property="id" column="id" jdbcType="INT" javaType="java.lang.Integer" />
 								<result property="customerId" column="customer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
-								<result property="year" column="year" jdbcType="VARCHAR" javaType="java.lang.String" />
+								<result property="year" column="yearFlag" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="productId" column="product_id" jdbcType="INT" javaType="java.lang.Integer" />
 								<result property="productName" column="product_name" jdbcType="VARCHAR" javaType="java.lang.String" />
 								<result property="annualDemands" column="annual_demands" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -40,7 +40,7 @@
 			customer_id = #customerId#
 		</isNotNull>
 				<isNotNull prepend=" AND " property="year">
-			year = #year#
+			year = #yearFlag#
 		</isNotNull>
 				<isNotNull prepend=" AND " property="productId">
 			product_id = #productId#
@@ -111,7 +111,7 @@
 			customer_id = #customerId#
 		</isNotNull>
 				<isNotNull prepend=" AND " property="year">
-			year = #year#
+			year = #yearFlag#
 		</isNotNull>
 				<isNotNull prepend=" AND " property="productId">
 			product_id = #productId#
@@ -187,7 +187,7 @@
 		<dynamic prepend=" SET ">
 						<isNotEmpty prepend=", " property="id">id=#id#</isNotEmpty>
 						<isNotEmpty prepend=", " property="customerId">customer_id=#customerId#</isNotEmpty>
-						<isNotEmpty prepend=", " property="year">year=#year#</isNotEmpty>
+						<isNotEmpty prepend=", " property="year">yearFlag=#yearFlag#</isNotEmpty>
 						<isNotEmpty prepend=", " property="productId">product_id=#productId#</isNotEmpty>
 						<isNotEmpty prepend=", " property="productName">product_name=#productName#</isNotEmpty>
 						<isNotEmpty prepend=", " property="annualDemands">annual_demands=#annualDemands#</isNotEmpty>

@@ -5,6 +5,7 @@ import com.fuhuadata.domain.customs.CustomsCountry;
 import com.fuhuadata.service.impl.mybatis.BaseServiceImpl;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -28,5 +29,14 @@ public class CustomsCountryServiceImpl extends BaseServiceImpl<CustomsCountry, I
     public List<CustomsCountry> listCountries() {
 
         return getCurrentProxy().list();
+    }
+
+    @Override
+    public List<CustomsCountry> listCountries(List<Integer> countryIds) {
+
+        Example example = newExample();
+        example.createCriteria().andIn("id", countryIds);
+
+        return getCurrentProxy().listByExample(example);
     }
 }

@@ -282,4 +282,58 @@
         group by cd.`company_id`
     </select>
 
+    <select id="listCountryBarData" resultType="com.fuhuadata.domain.customs.BarData">
+        SELECT
+        cd.`dest_country_id` AS id,
+        YEAR(cd.`cdate`) year_flag,
+        <if test="timeType == 'month'">
+            MONTH(cd.`cdate`) month_flag,
+        </if>
+        <include refid="statTypeSelect"/>
+        <include refid="FromTable"/>
+        <if test="categoryType != null and 'type' == categoryType">
+            inner join customs_product cp on cp.`id`=cd.`product_id`
+        </if>
+        <where>
+            <include refid="statisticWhere"/>
+            <if test="statIds != null and !statIds.isEmpty()">
+                and cd.dest_country_id in
+                <foreach collection="statIds" item="statId" open="(" close=")" separator=",">
+                    #{statId}
+                </foreach>
+            </if>
+        </where>
+        GROUP BY cd.`dest_country_id`, year_flag
+        <if test="timeType == 'month'">
+            , month_flag
+        </if>
+    </select>
+
+    <select id="listCompanyBarData" resultType="com.fuhuadata.domain.customs.BarData">
+        SELECT
+        cd.`company_id` AS id,
+        YEAR(cd.`cdate`) year_flag,
+        <if test="timeType == 'month'">
+            MONTH(cd.`cdate`) month_flag,
+        </if>
+        <include refid="statTypeSelect"/>
+        <include refid="FromTable"/>
+        <if test="categoryType != null and 'type' == categoryType">
+            inner join customs_product cp on cp.`id`=cd.`product_id`
+        </if>
+        <where>
+            <include refid="statisticWhere"/>
+            <if test="statIds != null and !statIds.isEmpty()">
+                and cd.company_id in
+                <foreach collection="statIds" item="statId" open="(" close=")" separator=",">
+                    #{statId}
+                </foreach>
+            </if>
+        </where>
+        GROUP BY cd.`company_id`, year_flag
+        <if test="timeType == 'month'">
+            , month_flag
+        </if>
+    </select>
+
 </mapper>

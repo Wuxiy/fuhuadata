@@ -8,6 +8,7 @@ import com.fuhuadata.service.exception.ServiceException;
 import com.fuhuadata.service.impl.mybatis.BaseServiceImpl;
 import com.fuhuadata.service.mybatis.customs.exception.DuplicateProductMatchException;
 import com.fuhuadata.service.mybatis.customs.matcher.RegexProductMatcher;
+import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -204,7 +205,8 @@ public class CustomsDataServiceImpl extends BaseServiceImpl<CustomsData, Long>
         }
 
         if (StatCategory.COUNTRY == query.getStatCategory()) {
-            return listCountryPieData(query);
+            List<PieData> pieData = getCustomsDataMapper().listCountryCustomsStatistics(query);
+            return listCountryPieData(pieData);
         } else if (StatCategory.COMPANY == query.getStatCategory()) {
             List<PieData> pieData = getCustomsDataMapper().listCompanyCustomsStatistics(query);
             return listCompanyPieData(pieData);
@@ -213,9 +215,78 @@ public class CustomsDataServiceImpl extends BaseServiceImpl<CustomsData, Long>
         return Collections.emptyList();
     }
 
-    private List<PieData> listCountryPieData(CustomsDataQuery query) {
+    @Override
+    public BarResult getCountryBarData(CustomsDataQuery query) {
 
-        List<PieData> countryData = getCustomsDataMapper().listCountryCustomsStatistics(query);
+        List<BarData> barData = getCustomsDataMapper().listCountryBarData(query);
+
+        List<Integer> countryIds = query.getStatIds();
+        List<CustomsCountry> countries = countryService.listCountries(countryIds);
+        List<String> countryNames = countries.stream()
+                .map(CustomsCountry::getName)
+                .collect(toList());
+        Map<Integer, String> idMapName = countries.stream()
+                .collect(toMap(CustomsCountry::getId, CustomsCountry::getName));
+
+        return getBarResult(query, barData, countryNames, idMapName);
+    }
+
+    @Override
+    public BarResult getCompanyBarData(CustomsDataQuery query) {
+
+        List<BarData> barData = getCustomsDataMapper().listCompanyBarData(query);
+
+        List<Integer> companyIds = query.getStatIds();
+        List<CustomsCompany> companies = companyService.listCompanies(companyIds);
+        List<String> companyNames = companies.stream()
+                .map(CustomsCompany::getName)
+                .collect(toList());
+        Map<Integer, String> idToName = companies.stream()
+                .collect(toMap(CustomsCompany::getId, CustomsCompany::getName));
+
+        return getBarResult(query, barData, companyNames, idToName);
+    }
+
+    private BarResult getBarResult(CustomsDataQuery query, List<BarData> barData, List<String> countryNames, Map<Integer, String> idMapName) {
+        String timeType = query.getTimeType();
+        LocalDate startDate = query.getStartDate();
+        LocalDate endDate = query.getEndDate();
+
+        Function<BarData, String> meterName = null;
+        List<BarMeter> meters = null;
+        if ("year".equals(timeType)) {
+
+            meters = BarMeter.listMetersOfYear(startDate, endDate);
+            meterName = (BarData record) -> BarMeter.getMeterName(record.getYearFlag());
+
+        } else if ("month".equals(timeType)) {
+
+            meters = BarMeter.listMeterOfMonth(startDate, endDate);// 获取两个日期之间的间隔月份
+            meterName = (BarData record) -> BarMeter.getMeterName(record.getYearFlag(), record.getMonthFlag());
+        }
+
+        if (meterName == null || meters == null) {
+            return null;
+        }
+
+        List<String> categoryNames = meters.stream()
+                .map(BarMeter::getName)
+                .collect(toList());
+
+        BarResult barResult = new BarResult();
+        barResult.setLegends(countryNames);// 设置标签
+        barResult.setCategories(categoryNames);// 设置分类
+        ListMultimap<String, Double> barOrgiData = barResult.initData();// 根据标签、分类初始化数据
+
+        for (BarData record : barData) {
+            barOrgiData.get(idMapName.get(record.getId()))
+                    .set(categoryNames.indexOf(meterName.apply(record)), record.getValue());
+        }
+        return barResult;
+    }
+
+    private List<PieData> listCountryPieData(List<PieData> countryData) {
+
         Map<Integer, PieData> countryDataMap = countryData.stream()
                 .collect(toMap(PieData::getId, Function.identity()));
 

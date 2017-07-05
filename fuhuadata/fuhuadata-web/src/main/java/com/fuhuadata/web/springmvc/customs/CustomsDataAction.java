@@ -1,11 +1,13 @@
 package com.fuhuadata.web.springmvc.customs;
 
+import com.fuhuadata.domain.customs.BarResult;
 import com.fuhuadata.domain.customs.CustomsData;
 import com.fuhuadata.domain.customs.CustomsDataQuery;
 import com.fuhuadata.domain.customs.StatCategory;
 import com.fuhuadata.domain.echarts.PieData;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
+import com.fuhuadata.domain.validation.groups.GroupOne;
 import com.fuhuadata.service.mybatis.customs.CustomsDataService;
 import com.fuhuadata.web.exception.InvalidRequestException;
 import com.fuhuadata.web.springmvc.mybatis.BaseController;
@@ -21,9 +23,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
+import javax.validation.groups.Default;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+
+import static java.time.temporal.TemporalAdjusters.firstDayOfMonth;
+import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
 
 /**
  * <p>User: wangjie
@@ -85,6 +91,12 @@ public class CustomsDataAction extends BaseController<CustomsData, Long> {
         return result.getResultPojo();
     }
 
+    /**
+     * 出口公司饼图数据
+     * @param query
+     * @param bindingResult
+     * @return
+     */
     @RequestMapping(value = "company", method = RequestMethod.GET)
     @ResponseBody
     public ResultPojo companyStatistics(@Validated CustomsDataQuery query, BindingResult bindingResult) {
@@ -98,6 +110,66 @@ public class CustomsDataAction extends BaseController<CustomsData, Long> {
         query.setStatCategory(StatCategory.COMPANY);
         List<PieData> pieData = customsDataService.listCustomsData(query);
         result.addDefaultModel(pieData);
+        result.setSuccess(true);
+
+        return result.getResultPojo();
+    }
+
+    /**
+     * 出口国家柱状图数据
+     * @param query
+     * @param bindingResult
+     * @return
+     */
+    @RequestMapping(value = "/bar/country", method = RequestMethod.GET)
+    @ResponseBody
+    public ResultPojo countryBarStatistic(@Validated({Default.class, GroupOne.class}) CustomsDataQuery query,
+                                          BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            throw new InvalidRequestException("Bad Request", bindingResult);
+        }
+
+        Result<BarResult> result = Result.newResult(false);
+
+        // 设置开始日期为月份的第一天
+        query.setStartDate(query.getStartDate().with(firstDayOfMonth()));
+        // 设置结束日期为月份的最后一天
+        query.setEndDate(query.getEndDate().with(lastDayOfMonth()));
+        query.setStatCategory(StatCategory.COUNTRY);
+
+        BarResult companyBarData = customsDataService.getCountryBarData(query);
+        result.addDefaultModel(companyBarData);
+        result.setSuccess(true);
+
+        return result.getResultPojo();
+    }
+
+    /**
+     * 出口公司柱状图数据
+     * @param query
+     * @param bindingResult
+     * @return
+     */
+    @RequestMapping(value = "/bar/company", method = RequestMethod.GET)
+    @ResponseBody
+    public ResultPojo companyBarStatistic(@Validated({Default.class, GroupOne.class}) CustomsDataQuery query,
+                                          BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            throw new InvalidRequestException("Bad Request", bindingResult);
+        }
+
+        Result<BarResult> result = Result.newResult(false);
+
+        // 设置开始日期为月份的第一天
+        query.setStartDate(query.getStartDate().with(firstDayOfMonth()));
+        // 设置结束日期为月份的最后一天
+        query.setEndDate(query.getEndDate().with(lastDayOfMonth()));
+        query.setStatCategory(StatCategory.COMPANY);
+
+        BarResult companyBarData = customsDataService.getCompanyBarData(query);
+        result.addDefaultModel(companyBarData);
         result.setSuccess(true);
 
         return result.getResultPojo();
