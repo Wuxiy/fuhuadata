@@ -48,6 +48,28 @@ public class CustomsDataAction extends BaseController<CustomsData, Long> {
         return "industryData/countryPie";
     }
 
+    @RequestMapping(value = "/pie/company/vm", method = RequestMethod.GET)
+    public String companyPie() {
+        return "industryData/companyPie";
+    }
+
+    @RequestMapping(value = "/bar/countries/vm", method = RequestMethod.GET)
+    public String countryBar() {
+        return "industryData/countryTendency";
+    }
+
+    // 出口企业趋势图
+    @RequestMapping(value = "/bar/companies/vm", method = RequestMethod.GET)
+    public String companyBar() {
+        return "industryData/companyTendency";
+    }
+
+    // 出口国家同比图
+    @RequestMapping(value = "/compare/companies/vm", method = RequestMethod.GET)
+    public String countryCompare() {
+        return "industryData/countryCompared";
+    }
+
     @RequestMapping(value = "excel", method = RequestMethod.POST)
     @ResponseBody
     public ResultPojo importExcelData(@NotNull @RequestParam("excel") MultipartFile excel,
@@ -56,9 +78,9 @@ public class CustomsDataAction extends BaseController<CustomsData, Long> {
 
         Result<String> result = Result.newResult(false);
 
-/*        if (excel == null || startDate == null || endDate == null) {
+        if (excel == null || startDate == null || endDate == null) {
             throw new InvalidRequestException("Bad Request");
-        }*/
+        }
 
         try {
             // 导入海关数据
