@@ -72,6 +72,15 @@
                                         </select>
                                     </div>*#
                                     <div class="col-xs-2">
+                                        <select class="selectpicker form-control" name="countries"
+                                                multiple data-am-selected data-live-search="true"
+                                                data-size="5" data-actions-box="true"
+                                                data-selected-text-format="count>3"
+                                                title="Countries"
+                                                data-live-search-placeholder="Search Country">
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-2">
                                         <select class="form-control" name="statType">
                                             <option value="legal_num" lang="zh">法定数量</option>
                                             <option value="dollar_price" lang="zh">美元单价</option>

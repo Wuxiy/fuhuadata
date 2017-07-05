@@ -317,7 +317,8 @@
                 legend: {
                     orient: 'vertical',
                     left: 'left',
-                    data: [] // ajax获取
+                    data: [], // ajax获取
+                    selected: {} // 配置默认选中项
                 },
                 series : [
                     {
@@ -335,8 +336,11 @@
                     }
                 ]
             },
+            // defaultSelected:[],
+            // onceRender:true,
             init:function () {
-                var self = this;
+                var self = this,
+                    arr = [];
                 if (self.option.legend.data.length>0) {
 
                     self.render();
@@ -354,15 +358,45 @@
                             if (item.name) {
 
                                 self.option.legend.data.push(item.name);
+                                if (i<5) {
+                                    /*self.defaultSelected.push({
+                                        type: 'legendSelect',
+                                        // 图例名称
+                                        name: item.name
+                                    });
+                                    */
+                                    self.option.legend.selected[item.name] = true;
+                                    arr.push(item.name);
+                                }else {
+                                    /*self.defaultSelected.push({
+                                        type: 'legendUnSelect',
+                                        // 图例名称
+                                        name: item.name
+                                    });*/
+                                    self.option.legend.selected[item.name] = false;
+                                }
                             }else {
 
                                 return true;
                             }
                         });
+                        // console.log(self.option.legend.selected);
                         self.render();
+                        selectpicker.render(res.data);
+                        $(selectpicker.target,selectpicker.parent).selectpicker('val',arr);
                     });
                 }
 
+                // 监听实例的legendselectchanged事件
+                self.insChart.on('legendselectchanged',function (params) {
+                    // console.log(params);
+                    var arr = Object.keys(params.selected);
+                    arr = arr.filter(function (item) {
+                            return params.selected[item];
+                        });
+                    $(selectpicker.target,selectpicker.parent).selectpicker('val',arr);
+                    self.option.legend.selected=params;
+                })
             },
             render:function () {
                 var self = this;
@@ -379,7 +413,7 @@
                     if (res.data) {
 
                         self.option.series[0].data = res.data.map(function(item){
-                            var o = {}
+                            var o = {};
                             this.forEach(function(_item){
 
                                 if(_item.name===item.name) {
@@ -393,21 +427,77 @@
 //                        console.log(o);
                             return o;
                         },self.stateBindColor);
-//                    console.log(self.option);
+                        // console.log(self.option);
                         self.insChart.setOption(self.option);
-                        self.insChart.hideLoading();
+                        /*if (self.onceRender) {
+                            $.each(self.defaultSelected,function (i, item) {
+                                myChart.insChart.dispatchAction(item);
+                            });
+                            self.onceRender=false;
+                        }*/
                     }else {
 
                         alert('暂无数据，请选择其他项！');
                         self.option.series[0].data = [];
                         self.insChart.setOption(self.option);
-                        self.insChart.hideLoading();
                     }
+                    self.insChart.hideLoading();
                 });
+            }
+        },
+        selectpicker = {
+            parent:'#search_data',
+            target:'[name="countries"]',
+            init:function () {
+                var self = this;
+                $(self.target,self.parent).on('hidden.bs.select',function () {
+                    // 对echarts实例进行操作
+                    myChart.insChart.showLoading();
+                    var arr = $(this).selectpicker('val'),
+                        otherArr = myChart.option.legend.data;
+                    arr = otherArr.map(function (item,i,arr) {
+
+                        if (this.indexOf(item)===-1) {
+
+                            return {
+                                type: 'legendUnSelect',
+                                // 图例名称
+                                name: item
+                            }
+                        }else {
+
+                            return {
+                                type: 'legendSelect',
+                                // 图例名称
+                                name: item
+                            }
+                        }
+                    },arr||[]);
+                    $.each(arr,function (i, item) {
+                        myChart.insChart.dispatchAction(item);
+                    });
+                    myChart.insChart.hideLoading();
+                })
+            },
+            render:function (list) {
+
+                if (Array.isArray(list)) {
+                    var self = this,
+                        _html = '';
+                    $.each(list,function (i,item) {
+                        _html += '<option value="'+item.name+'">'+item.name+'</option>';
+                    });
+
+                    $(self.target,self.parent)
+                        .selectpicker('setStyle', 'btn-xs', 'add')
+                        .html(_html)
+                        .selectpicker('refresh');
+                }
             }
         };
     subDropdownList.init();
     supDropdownList.init();
     otherInput.init();
     upExcelBtn.init();
+    selectpicker.init();
 })();

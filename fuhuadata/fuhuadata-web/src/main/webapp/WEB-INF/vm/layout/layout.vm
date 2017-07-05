@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/css/fileinput.css" />
     <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/js/pagination/pagination.css" />
+    <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/js/select/css/bootstrap-select.css" />
+
 
     <script src="${request.contextPath}/lib/js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
     <script src="${request.contextPath}/lib/js/jquery-migrate-1.4.1.min.js" type="text/javascript" charset="utf-8"></script>
@@ -28,6 +30,7 @@
     <script src="${request.contextPath}/lib/js/jquery-lang.js" type="text/javascript" charset="utf-8"></script>
     <script src="${request.contextPath}/lib/js/langpack/nonDynamic.js" type="text/javascript" charset="utf-8"></script>
     <script src="${request.contextPath}/lib/js/jedate.js" type="text/javascript" charset="utf-8"></script>
+    <script src="${request.contextPath}/lib/js/select/js/bootstrap-select.js" type="text/javascript" charset="utf-8"></script>
 ##    <script src="${request.contextPath}/lib/js/datetime.js" type="text/javascript" charset="utf-8"></script>
 
     <script type="text/javascript">
