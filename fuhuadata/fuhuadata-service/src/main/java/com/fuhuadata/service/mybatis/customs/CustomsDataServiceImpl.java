@@ -9,6 +9,7 @@ import com.fuhuadata.service.impl.mybatis.BaseServiceImpl;
 import com.fuhuadata.service.mybatis.customs.exception.DuplicateProductMatchException;
 import com.fuhuadata.service.mybatis.customs.matcher.RegexProductMatcher;
 import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,8 +23,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
+import static java.time.temporal.TemporalAdjusters.firstDayOfMonth;
+import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
@@ -245,6 +249,51 @@ public class CustomsDataServiceImpl extends BaseServiceImpl<CustomsData, Long>
                 .collect(toMap(CustomsCompany::getId, CustomsCompany::getName));
 
         return getBarResult(query, barData, companyNames, idToName);
+    }
+
+    @Override
+    public BarResult getCountryCompareData(CompareQuery query) {
+
+        LocalDate startDate = query.getStartDate();
+        query.setFirstStartDate(startDate.with(firstDayOfMonth()));
+        query.setFirstEndDate(startDate.with(lastDayOfMonth()));
+        query.setStartDate(null);
+
+        LocalDate endDate = query.getEndDate();
+        query.setSecondStartDate(endDate.with(firstDayOfMonth()));
+        query.setSecondEndDate(endDate.with(lastDayOfMonth()));
+        query.setEndDate(null);
+
+        // 数据库数据
+        List<BarData> barData = getCustomsDataMapper().listCountryCompareData(query);
+
+        // 获取同比图分类
+        List<Integer> countryIds = query.getStatIds();
+        List<CustomsCountry> countries = countryService.listCountries(countryIds);
+        Map<Integer, String> countryIdToName = countries.stream()
+                .collect(toMap(CustomsCountry::getId, CustomsCountry::getName));
+        List<String> categories = countries.stream()
+                .map(CustomsCountry::getName)
+                .collect(toList());
+
+        BiFunction<Integer, Integer, String> nameFunction = (year, month) -> year + "-" + month;
+
+        // 获取同比图标识，这里是对比的两个月份 yyyy-MM
+        List<String> legends = Lists.newArrayList();
+        legends.add(nameFunction.apply(startDate.getYear(), startDate.getMonthValue()));
+        legends.add(nameFunction.apply(endDate.getYear(), endDate.getMonthValue()));
+
+        BarResult barResult = new BarResult();
+        barResult.setCategories(categories);
+        barResult.setLegends(legends);
+        ListMultimap<String, Double> barOriginalData = barResult.initData();
+
+        for (BarData record : barData) {
+            barOriginalData.get(nameFunction.apply(record.getYearFlag(), record.getMonthFlag()))
+                    .set(categories.indexOf(countryIdToName.get(record.getId())), record.getValue());
+        }
+
+        return barResult;
     }
 
     private BarResult getBarResult(CustomsDataQuery query, List<BarData> barData, List<String> countryNames, Map<Integer, String> idMapName) {

@@ -2,6 +2,7 @@ package com.fuhuadata.dao.mapper.customs;
 
 import com.fuhuadata.dao.mapper.BaseMapper;
 import com.fuhuadata.domain.customs.BarData;
+import com.fuhuadata.domain.customs.CompareQuery;
 import com.fuhuadata.domain.customs.CustomsData;
 import com.fuhuadata.domain.customs.CustomsDataQuery;
 import com.fuhuadata.domain.echarts.PieData;
@@ -60,4 +61,11 @@ public interface CustomsDataMapper extends BaseMapper<CustomsData, Long> {
      * @return
      */
     List<BarData> listCompanyBarData(CustomsDataQuery query);
+
+    /**
+     * 出口国家同比图数据
+     * @param query
+     * @return
+     */
+    List<BarData> listCountryCompareData(CompareQuery query);
 }

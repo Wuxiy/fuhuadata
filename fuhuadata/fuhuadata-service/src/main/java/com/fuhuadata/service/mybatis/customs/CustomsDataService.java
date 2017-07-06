@@ -1,6 +1,7 @@
 package com.fuhuadata.service.mybatis.customs;
 
 import com.fuhuadata.domain.customs.BarResult;
+import com.fuhuadata.domain.customs.CompareQuery;
 import com.fuhuadata.domain.customs.CustomsData;
 import com.fuhuadata.domain.customs.CustomsDataQuery;
 import com.fuhuadata.domain.echarts.PieData;
@@ -56,4 +57,11 @@ public interface CustomsDataService extends BaseService<CustomsData, Long> {
      * @return
      */
     BarResult getCompanyBarData(CustomsDataQuery query);
+
+    /**
+     * 出口国家同比图数据
+     * @param query
+     * @return
+     */
+    BarResult getCountryCompareData(CompareQuery query);
 }

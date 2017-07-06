@@ -1,9 +1,6 @@
 package com.fuhuadata.web.springmvc.customs;
 
-import com.fuhuadata.domain.customs.BarResult;
-import com.fuhuadata.domain.customs.CustomsData;
-import com.fuhuadata.domain.customs.CustomsDataQuery;
-import com.fuhuadata.domain.customs.StatCategory;
+import com.fuhuadata.domain.customs.*;
 import com.fuhuadata.domain.echarts.PieData;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
@@ -192,6 +189,33 @@ public class CustomsDataAction extends BaseController<CustomsData, Long> {
 
         BarResult companyBarData = customsDataService.getCompanyBarData(query);
         result.addDefaultModel(companyBarData);
+        result.setSuccess(true);
+
+        return result.getResultPojo();
+    }
+
+    /**
+     * 同比图-出口国家分析
+     * @param query
+     * @param bindingResult
+     * @return
+     */
+    @RequestMapping(value = "/compare/country", method = RequestMethod.GET)
+    @ResponseBody
+    public ResultPojo countryCompareStatistic(@Validated({Default.class, GroupOne.class}) CompareQuery query,
+                                              BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            throw new InvalidRequestException("Bad Request", bindingResult);
+        }
+
+        Result<BarResult> result = Result.newResult(false);
+
+        query.setTimeType("month");
+        query.setStatCategory(StatCategory.COUNTRY);
+
+        BarResult countryCompareData = customsDataService.getCountryCompareData(query);
+        result.addDefaultModel(countryCompareData);
         result.setSuccess(true);
 
         return result.getResultPojo();
