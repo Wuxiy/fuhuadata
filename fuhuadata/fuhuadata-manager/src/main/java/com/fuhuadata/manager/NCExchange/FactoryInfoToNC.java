@@ -2,9 +2,12 @@ package com.fuhuadata.manager.NCExchange;
 
 import com.fuhuadata.domain.supplier.ProduceFactory;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by zhangxiang on 2017/5/27.
  */
 public interface FactoryInfoToNC {
-    String sendFactoryInfo(ProduceFactory factoryInfo);
+    Map<String,HashMap> sendFactoryInfo(ProduceFactory factoryInfo);
 }

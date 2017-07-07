@@ -142,7 +142,12 @@
          <artifactId>json-lib</artifactId>
          <classifier>jdk15</classifier>
      </dependency>
-
+    <!--zxing二维码测试-->
+     <dependency>
+         <groupId>com.google.zxing</groupId>
+         <artifactId>core</artifactId>
+         <version>3.3.0</version>
+     </dependency>
 
  </dependencies>
 
