@@ -83,4 +83,14 @@ public class BankAccBasServiceImpl extends BaseServiceImpl<BankAccBas, Integer>
 
         return bdBanks;
     }
+
+    @Override
+    public BankAccBas updateBankPk(Integer bankId, String pkBank) {
+
+        BankAccBas bank = this.get(bankId);
+        bank.setPkBankaccbas(pkBank);
+        this.update(bank);
+
+        return bank;
+    }
 }

@@ -98,6 +98,19 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
         return factory;
     }
 
+    @Override
+    public ProduceFactory getFactoryInfo(Integer factoryId) {
+
+        ProduceFactory factory = this.getFactory(factoryId);
+        List<BankAccBas> bankAccBas = bankAccService.listBankAccs(BankAccType.Factory.key, factoryId);
+        List<SupplierLinkman> linkmen = linkmanService.listLinkmen(LinkmanType.Factory, factoryId);
+
+        factory.setBanks(bankAccBas);
+        factory.setLinkmen(linkmen);
+
+        return factory;
+    }
+
     private void fillFactory(ProduceFactory factory) {
 
         // 设置组织名称
@@ -156,7 +169,6 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
         factory.setLinkmen(linkmen);
 
         // 同步到 NC
-        // TODO 同步到NC
         factoryInfoToNC.sendFactoryInfo(factory);
 
         return factory;
@@ -220,6 +232,28 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
 
         PageHelper.startPage(query.getIndex(), query.getPageSize());
         return getFactoryMapper().listFactoryOrders(query);
+    }
+
+    @Override
+    public ProduceFactory deleteFactoryInfo(Integer factoryId) {
+
+        ProduceFactory factoryInfo = this.getFactoryInfo(factoryId);
+        factoryInfo.getBanks()
+                .forEach(bankAccService::delete);
+        factoryInfo.getLinkmen()
+                .forEach(linkmanService::delete);
+
+        return factoryInfo;
+    }
+
+    @Override
+    public ProduceFactory updateFactoryPk(Integer factoryId, String pkFactory) {
+
+        ProduceFactory factory = this.get(factoryId);
+        factory.setPkSupplier(pkFactory);
+        this.update(factory);
+
+        return factory;
     }
 
     /**

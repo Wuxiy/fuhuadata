@@ -9,9 +9,12 @@ import com.fuhuadata.domain.supplier.FactoryOrder;
 import com.fuhuadata.domain.supplier.ProduceFactory;
 import com.fuhuadata.domain.supplier.ProduceFactoryInfo;
 import com.fuhuadata.domain.supplier.ProduceFactoryQuery;
+import com.fuhuadata.manager.NCExchange.FactoryInfoToNC;
 import com.fuhuadata.service.mybatis.supplier.ProduceFactoryService;
 import com.fuhuadata.web.springmvc.mybatis.BaseController;
 import com.github.pagehelper.PageInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,12 +31,17 @@ import java.util.List;
 @Controller
 public class FactoryAction extends BaseController<ProduceFactory, Integer> {
 
+    Logger logger = LoggerFactory.getLogger(getClass());
+
     private ProduceFactoryService factoryService;
 
     @Resource
     public void setFactoryService(ProduceFactoryService factoryService) {
         this.factoryService = factoryService;
     }
+
+    @Resource
+    private FactoryInfoToNC factoryInfoToNC;
 
     /**
      * 加工厂列表
@@ -142,8 +150,13 @@ public class FactoryAction extends BaseController<ProduceFactory, Integer> {
      */
     @RequestMapping(value = "/{factoryId}", method = RequestMethod.PUT)
     @ResponseBody
-    public ResultPojo updateFactory(@PathVariable String factoryId, @RequestBody ProduceFactoryInfo factoryInfo) {
+    public ResultPojo updateFactory(@PathVariable Integer factoryId, @RequestBody ProduceFactoryInfo factoryInfo) {
         Result<ProduceFactory> result = Result.newResult(false);
+
+        if (factoryId == null) {
+            result.setMessage("记录未找到");
+            return result.getResultPojo();
+        }
 
         ProduceFactory factory = factoryService.updateFactory(factoryInfo);
         result.addDefaultModel(factory);

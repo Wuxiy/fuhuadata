@@ -80,6 +80,8 @@
                     <tr>
                         <th class="text-center" lang="zh">编号</th>
                         <th class="text-center" lang="zh">物料编码</th>
+                        <th class="text-center" lang="zh">物料名称</th>
+                        <th class="text-center" lang="zh">物料规格</th>
                         <th class="text-center" lang="zh">单位</th>
                         <th class="text-center" lang="zh">主数量</th>
                         <th class="text-center" lang="zh">单价</th>
@@ -173,7 +175,7 @@
                                     '<td>'+table.hasField(item.ntotalorigmny)+'</td>'+
                                     '<td>'+table.hasField(item.remark)+'</td>'+
                                     '<td><a href="'+basePath+'/factory/eva/'+item.id+'/vm">'+
-                                    (typeof item.totalNumber==='number'?item.totalNumber:'去评价')+
+                                    (typeof item.totalScore==='number'?item.totalScore:'去评价')+
                                     '</td></a>'
                                     '</tr>';
                             });
@@ -237,7 +239,7 @@
                             type:'GET'
                         }).done(function (res) {
                             if (res.code===1&&res.data) { // 请求是否成功
-                                self.renderList(res.data.list);
+                                self.renderList(res.data);
                                 self.dom.modal('show');
                             }
                         });
@@ -252,6 +254,8 @@
                                         '<tr>' +
                                         '<td>'+(i+1)+'</td>'+
                                         '<td><a href="#">'+table.hasField(item.pkMaterial)+'</a></td>'+
+                                        '<td>'+table.hasField(item.materialName)+'</td>'+
+                                        '<td>'+table.hasField(item.specification)+'</td>'+
                                         '<td>'+table.hasField(item.cunit)+'</td>'+
                                         '<td>'+table.hasField(item.nnum)+'</td>'+
                                         '<td>'+table.hasField(item.price)+'</td>'+
