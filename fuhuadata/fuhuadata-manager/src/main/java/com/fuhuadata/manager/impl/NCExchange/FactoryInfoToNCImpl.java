@@ -41,10 +41,11 @@ public class FactoryInfoToNCImpl implements FactoryInfoToNC {
      * @return
      */
     @Override
-    public String sendFactoryInfo(ProduceFactory factoryInfo)  {
+    public Map<String,HashMap> sendFactoryInfo(ProduceFactory factoryInfo)  {
         String resFile= getRefFile(""+factoryInfo.getId(),"factoryBackFile");
         factoryInfoToXML(factoryInfo);
         org.jdom.Element root=null;
+        Map<String,HashMap> mapMap=new HashMap<String, HashMap>();
         try {
             root=NcExchangeToolUtil.xmlSendNcTool(xmlName,resFile);
         } catch (Exception e) {
@@ -65,13 +66,15 @@ public class FactoryInfoToNCImpl implements FactoryInfoToNC {
             }else if (resSuc.equals("Y")){
                 log.info("导入nc成功");
                 //将nc回传的pk_factory写入crm中
-                Map<String,Object> mapc=new HashMap<String, Object>();
-                mapc.put("pk_supplier",pk_factory);
-                mapc.put("id",factoryInfo.getId());
-                //factoryToNc.updatePkFactory(mapc);
+                Map<Integer,Object> mapc=new HashMap<Integer, Object>();
+                mapc.put(factoryInfo.getId(),pk_factory);
+                mapMap.put("factory", (HashMap) mapc);
+                Map<Integer,Object> mapPk=new HashMap<Integer, Object>();
                 for (BankAccBas bankAccBas:factoryInfo.getBanks()){
-                    sendSupBankacc(bankAccBas,pk_factory);
+                    Map<String,Object> map= sendSupBankacc(bankAccBas,pk_factory);
+                    mapPk.put((Integer) map.get("id"),map.get("pk_bankaccbas"));
                 }
+                mapMap.put("bankacc", (HashMap) mapPk);
             }else {
                 log.error("读回写文件出错");
             }
@@ -79,17 +82,18 @@ public class FactoryInfoToNCImpl implements FactoryInfoToNC {
             log.error("未找到回执文件的successful属性");
         }
 
-        return resultCode;
+        return mapMap;
     }
 
     /**
      * 将加工厂银行账户信息发送nc
      * @param bankAcc
      */
-    private void sendSupBankacc(BankAccBas bankAcc,String pk_factory){
+    private Map<String, Object> sendSupBankacc(BankAccBas bankAcc,String pk_factory){
         String resFile=getRefFile(""+bankAcc.getId(),"bankBackFile");
         String bankXmlName= bankAccToXML(bankAcc,pk_factory);
         org.jdom.Element root=null;
+        Map<String,Object> mapc=new HashMap<String, Object>();
         try {
             root=NcExchangeToolUtil.xmlSendNcTool(bankXmlName,resFile);
         } catch (Exception e) {
@@ -110,16 +114,16 @@ public class FactoryInfoToNCImpl implements FactoryInfoToNC {
             }else if (resSuc.equals("Y")){
                 log.info("导入nc成功");
                 //将nc回传的pk_bankaccbas写入crm中
-                Map<String,Object> mapc=new HashMap<String, Object>();
+
                 mapc.put("pk_bankaccbas",pk_bankaccbas);
                 mapc.put("id",bankAcc.getId());
-                factoryToNc.updatePkBankaccbas(mapc);
             }else {
                 log.error("读回写文件出错");
             }
         }else {
             log.error("未找到回执文件的successful属性");
         }
+        return mapc;
     }
 
     /**

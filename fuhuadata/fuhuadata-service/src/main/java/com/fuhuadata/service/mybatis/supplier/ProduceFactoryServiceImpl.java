@@ -26,9 +26,7 @@ import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * <p>User: wangjie
@@ -169,8 +167,17 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
         factory.setLinkmen(linkmen);
 
         // 同步到 NC
-        factoryInfoToNC.sendFactoryInfo(factory);
-
+        Map<String,HashMap> mapMap=factoryInfoToNC.sendFactoryInfo(factory);
+        Map<Integer,String> factoryPK=mapMap.get("factory");
+        if (factoryPK!=null){
+            this.updateFactoryPk(factoryId,factoryPK.get(factoryId));
+        }
+        Map<Integer,String> bankaccPK=mapMap.get("bankacc");
+        if (bankaccPK!=null){
+            for (Integer id:bankaccPK.keySet()){
+                bankAccService.updateBankPk(id,bankaccPK.get(id));
+            }
+        }
         return factory;
     }
 
@@ -272,6 +279,7 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
 
         // 保存、更新银行账号
         banks = bankAccService.saveOrUpdateBanks(banks);
+        banks = new ArrayList<>(banks);
 
         // 删除银行账号
         List<BankAccBas> deleteBanks = bankAccService.deleteBanks(deletedIds);
