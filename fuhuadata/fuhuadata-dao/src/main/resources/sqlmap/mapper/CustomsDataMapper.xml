@@ -228,7 +228,7 @@
             sum(cd.dollar_total) as value
         </if>
         <if test="statType == 'dollar_price'">
-            sum(cd.dollar_price) as value
+            sum(cd.dollar_price)/count(*) as value
         </if>
         <if test="statType == 'legal_num'">
             sum(cd.legal_num) as value
