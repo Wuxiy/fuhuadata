@@ -13,10 +13,10 @@
         </dynamic>
     </update>
     <update id="UPDATE-PKBANKACCBAS" parameterClass="java.util.HashMap">
-        update s_factory
+        update s_bankaccbas
         <dynamic prepend="set">
             <isNotNull prepend="," property="pk_bankaccbas">
-                pk_supplier=#pk_supplier#
+                pk_bankaccbas=#pk_bankaccbas#
             </isNotNull>
             where id=#id#
         </dynamic>

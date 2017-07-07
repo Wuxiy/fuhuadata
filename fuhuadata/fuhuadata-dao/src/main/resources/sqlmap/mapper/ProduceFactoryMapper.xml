@@ -88,7 +88,7 @@
         <result column="total_score" jdbcType="SMALLINT" property="totalScore"/>
     </resultMap>
 
-    <select id="listFactoryOrders" resultType="com.fuhuadata.domain.supplier.FactoryOrder">
+    <select id="listFactoryOrders" resultMap="OrderResultMap">
         select
         <include refid="com.fuhuadata.dao.mapper.business.BusinessBuyContractMapper.BaseColumns"/>,
         fet.total_score
