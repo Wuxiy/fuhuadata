@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/css/fileinput.css" />
     <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/js/pagination/pagination.css" />
     <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/js/select/css/bootstrap-select.css" />
+    <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/js/daterangepicker/daterangepicker.css" />
 
 
     <script src="${request.contextPath}/lib/js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
@@ -31,6 +32,8 @@
     <script src="${request.contextPath}/lib/js/langpack/nonDynamic.js" type="text/javascript" charset="utf-8"></script>
     <script src="${request.contextPath}/lib/js/jedate.js" type="text/javascript" charset="utf-8"></script>
     <script src="${request.contextPath}/lib/js/select/js/bootstrap-select.js" type="text/javascript" charset="utf-8"></script>
+    <script src="${request.contextPath}/lib/js/daterangepicker/moment.js" type="text/javascript" charset="utf-8"></script>
+    <script src="${request.contextPath}/lib/js/daterangepicker/daterangepicker.js" type="text/javascript" charset="utf-8"></script>
 ##    <script src="${request.contextPath}/lib/js/datetime.js" type="text/javascript" charset="utf-8"></script>
 
     <script type="text/javascript">

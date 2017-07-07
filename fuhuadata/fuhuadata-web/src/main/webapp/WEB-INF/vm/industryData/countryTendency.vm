@@ -13,7 +13,7 @@
                 'url':'/customs/data'
             },{
                 'name':'出口企业分析',
-                'url':'/customs/data/company'
+                'url':'/customs/data/pie/company/vm'
             }]
             },
             {
@@ -21,10 +21,10 @@
                 'title':'趋势图',
                 'nodes':[{
                 'name':'出口国家分析',
-                'url':'/customs/data'
+                'url':'/customs/data/bar/countries/vm'
             },{
                 'name':'出口企业分析',
-                'url':'/customs/data'
+                'url':'/customs/data/bar/companies/vm'
             }]
             },
             {
@@ -32,13 +32,13 @@
                 'title':'同比图',
                 'nodes':[{
                 'name':'出口国家分析',
-                'url':'/customs/data'
+                'url':'/customs/data/compare/companies/vm'
             }]
             }])
             #set($defaut = {
-            'id':'c_one',
+            'id':'c_two',
             'node':'出口国家分析'
-        })
+            })
             #collapseNav($items $defaut)
         </div>
         <div class="col-xs-10 tab-content">
@@ -49,19 +49,22 @@
                          btn-primary" type="button" lang="zh"
                                 data-target="#uploadFile" data-toggle="modal"
                         >导入表格</button>
-                        <h3 class="panel-title" lang="zh">出口企业分析</h3>
+                        <h3 class="panel-title" lang="zh">出口国家分析</h3>
                     </div>
                     <div class="panel-body clearfix">
                         <!--搜索&筛选控件-->
                         <div class="form-horizontal">
                             <div class="col-xs-12">
                                 <form class="form-group" id="search_data" onkeypress="stopFormSubmit(event)">
-                                    <div class="col-xs-2">
-                                        <input class="form-control" name="startDate" type="date">
+                                    <div class="col-xs-1">
+                                        <select class="form-control" name="timeType">
+                                            <option value="month" lang="zh">按月份</option>
+                                            <option value="year" lang="zh">按年份</option>
+                                        </select>
                                     </div>
-                                    <span class="pull-left">——</span>
                                     <div class="col-xs-2">
-                                        <input class="form-control" name="endDate" type="date">
+                                        <input class="form-control" name="daterange" type="text">
+                                        <i class="glyphicon glyphicon-calendar icon-calendar"></i>
                                     </div>
                                     <div class="col-xs-2">
                                         <select class="selectpicker form-control" name="countries"
@@ -72,10 +75,10 @@
                                                 data-live-search-placeholder="Search Country">
                                         </select>
                                     </div>
-                                    <div class="col-xs-2">
+                                    <div class="col-xs-1">
                                         <select class="form-control" name="statType">
                                             <option value="legal_num" lang="zh">法定数量</option>
-                                            <option value="dollar_price" lang="zh">美元单价</option>
+##                                            <option value="dollar_price" lang="zh">美元单价</option>
                                             <option value="dollar_total" lang="zh">美元总价</option>
                                         </select>
                                     </div>
@@ -87,6 +90,9 @@
                                     </div>
                                     <div class="col-xs-2">
                                         <select class="form-control" name="categoryId"></select>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <label class="checkbox"><input name="unitPrice" type="checkbox" value="dollar_price">美元单价</label>
                                     </div>
                                 </form>
                             </div>
@@ -143,4 +149,4 @@
     </div>
 </div>
 <script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/echarts/echarts.js"></script>
-<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/industryData/companyPie.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/industryData/countryTendency.js"></script>

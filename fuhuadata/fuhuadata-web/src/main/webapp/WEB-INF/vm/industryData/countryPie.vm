@@ -13,7 +13,7 @@
                     'url':'/customs/data'
                 },{
                     'name':'出口企业分析',
-                    'url':'/customs/data'
+                    'url':'/customs/data/pie/company/vm'
                 }]
             },
             {
@@ -21,10 +21,10 @@
                 'title':'趋势图',
                 'nodes':[{
                     'name':'出口国家分析',
-                    'url':'/customs/data'
+                    'url':'/customs/data/bar/countries/vm'
                 },{
                     'name':'出口企业分析',
-                    'url':'/customs/data'
+                    'url':'/customs/data/bar/companies/vm'
                 }]
             },
             {
@@ -32,7 +32,7 @@
                 'title':'同比图',
                 'nodes':[{
                     'name':'出口国家分析',
-                    'url':'/customs/data'
+                    'url':'/customs/data/compare/companies/vm'
                 }]
             }])
             #set($defaut = {

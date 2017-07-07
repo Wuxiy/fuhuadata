@@ -1,38 +1,43 @@
 /**
- * Created by Huxiangyang on 2017/6/30.
+ * Created by Huxiangyang on 2017/7/5.
  */
 
 (function () {
     var form = {
             child:[
-                $('[name="startDate"]','#search_data'),
-                $('[name="endDate"]','#search_data'),
+                $('[name="timeType"]','#search_data'),
+                $('[name="daterange"]','#search_data'),
+                $('[name="countries"]','#search_data'),
                 $('[name="statType"]','#search_data'),
                 $('[name="categoryType"]','#search_data'),
                 $('[name="categoryId"]','#search_data')
             ],
             data:{},
-            oldData:{},
             getData:function () {
                 var self = this,
+                    arr = self.child[1].val().split(' - '),
                     data = {
-                        startDate:self.child[0].val(),
-                        endDate:self.child[1].val(),
-                        statType:self.child[2].val(),
-                        categoryType:self.child[3].val(),
-                        categoryId:self.child[4].val()
+                        timeType:self.child[0].val(),
+                        startDate:arr[0],
+                        endDate:arr[1],
+                        statIds:self.child[2].selectpicker('val'),
+                        statType:self.child[3].val(),
+                        categoryType:self.child[4].val(),
+                        categoryId:self.child[5].val()
                     };
-                self.oldData = $.extend(true, {}, self.data); // 深拷贝
+
+                if (Array.isArray(data.statIds)) data.statIds=data.statIds.join(',');
+
+                if (data.startDate.length<5) {
+
+                    data.startDate = data.startDate + '-01-01';
+                    data.endDate = data.endDate + '-01-01';
+                }else {
+
+                    data.startDate = data.startDate + '-01';
+                    data.endDate = data.endDate + '-01';
+                }
                 self.data = data;
-            },
-            resetChild:function () {
-                var self = this;
-                self.child[0].val(self.oldData.startDate);
-                self.child[1].val(self.oldData.endDate);
-                self.child[2].val(self.oldData.statType);
-                self.child[3].val(self.oldData.categoryType);
-                self.child[4].val(self.oldData.categoryId);
-                self.data = $.extend(true, {}, self.oldData);
             }
         },
         subDropdownList = {
@@ -97,7 +102,7 @@
         },
         otherInput = {
             parent:'#search_data',
-            target:'[name="statType"],[name="startDate"],[name="endDate"]',
+            target:'[name="statType"]',
             init:function () {
                 this.addEvent();
             },
@@ -304,40 +309,64 @@
                 }
             ],
             insChart:echarts.init(document.getElementById('main')),
-            option:{
-                /*title : {
-                 text: '',
-                 subtext: '？？？',
-                 x:'center'
-                 },*/
-                tooltip : {
-                    trigger: 'item',
-                    formatter: "{b} : {c} ({d}%)"
-                },
-                legend: {
-                    orient: 'vertical',
-                    left: 'left',
-                    data: [], // ajax获取
-                    selected: {} // 配置默认选中项
-                },
-                series : [
-                    {
-                        name: '访问来源',
-                        type: 'pie',
-                        radius : '70%',
-                        center: ['50%', '50%'],
-                        itemStyle: {
-                            emphasis: {
-                                shadowBlur: 10,
-                                shadowOffsetX: 0,
-                                shadowColor: 'rgba(0, 0, 0, 0.5)'
-                            }
+            option: {
+                /*tooltip : {
+                    trigger: 'axis',
+                    axisPointer : {
+                        type : 'shadow'
+                    }
+                },*/
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross',
+                        crossStyle: {
+                            color: '#999'
                         }
                     }
-                ]
+                },
+                toolbox: {
+                    feature: {
+                        restore: {show: true},
+                        saveAsImage: {show: true}
+                    }
+                },
+                legend: {
+                    data: [] // ajax获取
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis:  {
+                    type: 'category',
+                    data: [], // ajax获取
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                yAxis: [
+                    {
+                        type: 'value',
+                        name: '数量',
+                        axisLabel: {
+                            formatter: '{value} '
+                        }
+                    },
+                    {
+                        type: 'value',
+                        name: '单价',
+                        axisLabel: {
+                            formatter: '{value} $'
+                        }
+                    }
+                ],
+                series: [
+
+                ] // ajax获取
             },
-            // defaultSelected:[],
-            // onceRender:true,
             init:function () {
                 var self = this,
                     arr = [];
@@ -353,57 +382,60 @@
 
                         if (!(res.code===1&&res.data)) return;
 
-                        $.each(res.data, function (i, item) {
+                        /*$.each(res.data, function (i, item) {
 
                             if (item.name) {
 
                                 self.option.legend.data.push(item.name);
                                 if (i<5) {
-                                    /*self.defaultSelected.push({
-                                        type: 'legendSelect',
-                                        // 图例名称
-                                        name: item.name
-                                    });
-                                    */
+
                                     self.option.legend.selected[item.name] = true;
                                     arr.push(item.name);
                                 }else {
-                                    /*self.defaultSelected.push({
-                                        type: 'legendUnSelect',
-                                        // 图例名称
-                                        name: item.name
-                                    });*/
+
                                     self.option.legend.selected[item.name] = false;
                                 }
                             }else {
 
                                 return true;
                             }
-                        });
+                        });*/
                         // console.log(self.option.legend.selected);
-                        self.render();
+                        /*self.render();
                         selectpicker.render(res.data);
+                        $(selectpicker.target,selectpicker.parent).selectpicker('val',arr);*/
+
+                        // 国家多选框
+                        selectpicker.render(res.data);
+                        $.each(res.data,function (i, item) {
+                            if (i<5) {
+                                arr.push(item.id);
+                            }else {
+                                return true;
+                            }
+                        });
                         $(selectpicker.target,selectpicker.parent).selectpicker('val',arr);
+                        self.render();
                     });
                 }
 
                 // 监听实例的legendselectchanged事件
-                self.insChart.on('legendselectchanged',function (params) {
+                /*self.insChart.on('legendselectchanged',function (params) {
                     // console.log(params);
                     var arr = Object.keys(params.selected);
                     arr = arr.filter(function (item) {
-                            return params.selected[item];
-                        });
+                        return params.selected[item];
+                    });
                     $(selectpicker.target,selectpicker.parent).selectpicker('val',arr);
                     self.option.legend.selected=params;
-                })
+                })*/
             },
             render:function () {
                 var self = this;
                 form.getData();
                 self.insChart.showLoading();
                 $.ajax({
-                    url:basePath+'/customs/data/country',
+                    url:basePath+'/customs/data/bar/country',
                     type:'GET',
                     data:form.data
                 }).done(function (res) {
@@ -411,37 +443,84 @@
                     if (!(res.code===1)) return;
 
                     if (res.data) {
-
-                        self.option.series[0].data = res.data.map(function(item){
+                        var data = res.data.data,
+                            leg = res.data.legends,
+                            x = res.data.categories;
+                        self.option.series = leg.map(function(item){
                             var o = {};
                             this.forEach(function(_item){
 
-                                if(_item.name===item.name) {
-                                    o.name = item.name;
-                                    o.value = item.value;
+                                if(_item.name===item) {
+                                    o.name = _item.name;
+                                    o.data = data[_item.name];
+                                    o.type = 'bar';
+                                    o.stack = '数量';
                                     o.itemStyle = o.itemStyle || {};
                                     o.itemStyle.normal = o.itemStyle.normal || {};
                                     o.itemStyle.normal.color = _item.color;
                                 }
                             });
-//                        console.log(o);
+                        // console.log(o);
                             return o;
                         },self.stateBindColor);
+                        if (form.data.statType==='dollar_total'){
+                            self.option.yAxis[0].name='总价';
+                        }else {
+                            self.option.yAxis[0].name='数量';
+                        }
+                        self.option.legend.data = leg;
+                        self.option.xAxis.data = x;
                         // console.log(self.option);
-                        self.insChart.setOption(self.option);
-                        /*if (self.onceRender) {
-                            $.each(self.defaultSelected,function (i, item) {
-                                myChart.insChart.dispatchAction(item);
+
+                        if (uPriceCheckedBox.isChecked()){ // 获取折线图数据
+
+                            var otherData = $.extend(true, {}, form.data);
+                            otherData.statType = uPriceCheckedBox.val;
+                            $.ajax({
+                                url:basePath+'/customs/data/bar/country',
+                                type:'GET',
+                                data:otherData
+                            }).done(function (res) {
+
+                                if (!(res.code===1)) return;
+
+                                if (res.data) {
+                                    var data = res.data.data,
+                                        labels=[],
+                                        arr;
+                                    arr = leg.map(function(item){
+                                        var o = {};
+                                        this.forEach(function(_item){
+
+                                            if(_item.name===item) {
+                                                labels.push(_item.name+' U/P');
+                                                o.name = _item.name+' U/P';
+                                                o.data = data[_item.name];
+                                                o.type = 'line';
+                                                o.stack = '单价';
+                                                o.yAxisIndex=1;
+                                               /* o.itemStyle = o.itemStyle || {};
+                                                o.itemStyle.normal = o.itemStyle.normal || {};
+                                                o.itemStyle.normal.color = _item.color;*/
+                                            }
+                                        });
+                                        // console.log(o);
+                                        return o;
+                                    },self.stateBindColor);
+                                    self.option.series = self.option.series.concat(arr);
+                                    self.option.legend.data = self.option.legend.data.concat(labels);
+                                    self.insChart.setOption(self.option, true);
+                                    self.insChart.hideLoading();
+                                }
                             });
-                            self.onceRender=false;
-                        }*/
+                        }else {
+                            self.insChart.setOption(self.option, true);
+                            self.insChart.hideLoading();
+                        }
                     }else {
 
                         alert('暂无数据，请选择其他项！');
-                        self.option.series[0].data = [];
-                        self.insChart.setOption(self.option);
                     }
-                    self.insChart.hideLoading();
                 });
             }
         },
@@ -451,32 +530,7 @@
             init:function () {
                 var self = this;
                 $(self.target,self.parent).on('hidden.bs.select',function () {
-                    // 对echarts实例进行操作
-                    myChart.insChart.showLoading();
-                    var arr = $(this).selectpicker('val'),
-                        otherArr = myChart.option.legend.data;
-                    arr = otherArr.map(function (item,i,arr) {
-
-                        if (this.indexOf(item)===-1) {
-
-                            return {
-                                type: 'legendUnSelect',
-                                // 图例名称
-                                name: item
-                            }
-                        }else {
-
-                            return {
-                                type: 'legendSelect',
-                                // 图例名称
-                                name: item
-                            }
-                        }
-                    },arr||[]);
-                    $.each(arr,function (i, item) {
-                        myChart.insChart.dispatchAction(item);
-                    });
-                    myChart.insChart.hideLoading();
+                    myChart.init();
                 })
             },
             render:function (list) {
@@ -485,7 +539,7 @@
                     var self = this,
                         _html = '';
                     $.each(list,function (i,item) {
-                        _html += '<option value="'+item.name+'">'+item.name+'</option>';
+                        _html += '<option value="'+item.id+'">'+item.name+'</option>';
                     });
 
                     $(self.target,self.parent)
@@ -494,10 +548,118 @@
                         .selectpicker('refresh');
                 }
             }
+        },
+        calendar={
+            parent:'#search_data',
+            target:'[name="daterange"]',
+            icon:'.icon-calendar',
+            params:function (timeType) {
+                var o,
+                    newDate = new Date(),
+                    year = newDate.getFullYear(),
+                    month = newDate.getMonth()+1,
+                    calculateStart = {
+                      year:function () {
+                          var _year = year-2;
+                          return _year+'';
+                      },
+                      month:function () {
+                          var _month,_year;
+
+                          if (1<=month<=10) {
+
+                              _year = year-1;
+                              _month = 11-month;
+
+                          }else if (month===11) {
+
+                              _year = year-1;
+                              _month = 12;
+
+                          }else if (month===12) {
+
+                              _year = year;
+                              _month = month-11;
+                          }
+
+                          return _year+'-'+_month;
+                      }
+                    };
+                if (timeType==='month') {
+                    o = {
+                        showDropdowns: true,
+                        autoApply: true,
+                        startDate: calculateStart.month(),
+                        endDate: year+'-'+(month.toString().length===1?'0'+month:month),
+                        locale: {
+                            format: 'YYYY-MM'
+                        }
+                    };
+
+                }else if(timeType==='year') {
+
+                    o = {
+                        showDropdowns: true,
+                        autoApply: true,
+                        startDate: calculateStart.year(),
+                        endDate: year+'',
+                        locale: {
+                            format: 'YYYY'
+                        }
+                    };
+                }
+                return o;
+            },
+            init:function () {
+                var self = this;
+                $(self.target, self.parent).daterangepicker(self.params('month'))
+                    .on('hide.daterangepicker',function () {
+                        self.cb();
+                    });
+                $(self.icon, self.parent).on('click',function () {
+                    $(this).parent().find('input').click();
+                });
+            },
+            cb:function () {
+                myChart.init();
+            }
+        },
+        timeType = {
+            parent:'#search_data',
+            target:'[name="timeType"]',
+            init:function () {
+                var self = this;
+                $(self.target, self.parent).on('change.timeType', function () {
+                    var val = $(this).val();
+                    $(calendar.target, self.parent).daterangepicker(calendar.params(val))
+                        .on('hide.daterangepicker',function () {
+                            calendar.cb();
+                        });
+                    myChart.init();
+                });
+            }
+        },
+        uPriceCheckedBox={
+            parent:'#search_data',
+            target:'[name="unitPrice"]',
+            val:$('[name="unitPrice"]','#search_data').val(),
+            isChecked:function () {
+              var self = this;
+              return $(self.target, self.parent).prop('checked');
+            },
+            init:function () {
+                var self = this;
+                $(self.target, self.parent).on('change',function () {
+                    myChart.init();
+                })
+            }
         };
+    selectpicker.init();
+    calendar.init();
     subDropdownList.init();
     supDropdownList.init();
     otherInput.init();
     upExcelBtn.init();
-    selectpicker.init();
+    timeType.init();
+    uPriceCheckedBox.init();
 })();

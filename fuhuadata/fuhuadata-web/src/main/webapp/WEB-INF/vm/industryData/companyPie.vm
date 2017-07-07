@@ -13,7 +13,7 @@
                 'url':'/customs/data'
             },{
                 'name':'出口企业分析',
-                'url':'/customs/data/company'
+                'url':'/customs/data/pie/company/vm'
             }]
             },
             {
@@ -21,10 +21,10 @@
                 'title':'趋势图',
                 'nodes':[{
                 'name':'出口国家分析',
-                'url':'/customs/data'
+                'url':'/customs/data/bar/countries/vm'
             },{
                 'name':'出口企业分析',
-                'url':'/customs/data'
+                'url':'/customs/data/bar/companies/vm'
             }]
             },
             {
@@ -32,12 +32,12 @@
                 'title':'同比图',
                 'nodes':[{
                 'name':'出口国家分析',
-                'url':'/customs/data'
+                'url':'/customs/data/compare/companies/vm'
             }]
             }])
             #set($defaut = {
             'id':'c_one',
-            'node':'出口国家分析'
+            'node':'出口企业分析'
         })
             #collapseNav($items $defaut)
         </div>
@@ -68,8 +68,8 @@
                                                 multiple data-am-selected data-live-search="true"
                                                 data-size="5" data-actions-box="true"
                                                 data-selected-text-format="count>3"
-                                                title="Countries"
-                                                data-live-search-placeholder="Search Country">
+                                                title="Companies"
+                                                data-live-search-placeholder="Search Company">
                                         </select>
                                     </div>
                                     <div class="col-xs-2">
