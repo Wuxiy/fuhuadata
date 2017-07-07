@@ -293,6 +293,11 @@
                     trigger: 'item',
                     formatter: "{b} : {c} ({d}%)"
                 },
+                toolbox: {
+                    feature: {
+                        saveAsImage: {show: true}
+                    }
+                },
                 legend: {
                     orient: 'vertical',
                     left: 'left',

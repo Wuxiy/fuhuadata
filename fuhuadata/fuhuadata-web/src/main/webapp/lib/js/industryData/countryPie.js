@@ -305,14 +305,14 @@
             ],
             insChart:echarts.init(document.getElementById('main')),
             option:{
-                /*title : {
-                 text: '',
-                 subtext: '？？？',
-                 x:'center'
-                 },*/
                 tooltip : {
                     trigger: 'item',
                     formatter: "{b} : {c} ({d}%)"
+                },
+                toolbox: {
+                    feature: {
+                        saveAsImage: {show: true}
+                    }
                 },
                 legend: {
                     orient: 'vertical',
