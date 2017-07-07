@@ -497,7 +497,6 @@
                                                 o.name = _item.name+' U/P';
                                                 o.data = data[_item.name];
                                                 o.type = 'line';
-                                                o.stack = '单价';
                                                 o.yAxisIndex=1;
                                                /* o.itemStyle = o.itemStyle || {};
                                                 o.itemStyle.normal = o.itemStyle.normal || {};
