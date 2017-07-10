@@ -38,6 +38,7 @@ public class CustomsCompanyServiceImpl extends BaseServiceImpl<CustomsCompany, I
     public List<CustomsCompany> listTopCompanies() {
 
         Example example = newExample();
+        example.setOrderByClause("weight asc");
         example.createCriteria().andEqualTo("pid", 0);
 
         return this.listByExample(example);
@@ -47,6 +48,7 @@ public class CustomsCompanyServiceImpl extends BaseServiceImpl<CustomsCompany, I
     public List<CustomsCompany> listCompanies(List<Integer> companyIds) {
 
         Example example = newExample();
+        example.setOrderByClause("weight asc");
         example.createCriteria().andIn("id", companyIds);
 
         return this.listByExample(example);

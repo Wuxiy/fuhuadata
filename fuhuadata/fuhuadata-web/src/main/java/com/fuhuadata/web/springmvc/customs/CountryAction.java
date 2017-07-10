@@ -30,7 +30,7 @@ public class CountryAction extends BaseController<CustomsCountry, Integer> {
 
         Result<List<CustomsCountry>> result = Result.newResult(false);
 
-        List<CustomsCountry> countries = countryService.list();
+        List<CustomsCountry> countries = countryService.listCountries();
         result.addDefaultModel(countries);
         result.setSuccess(true);
 

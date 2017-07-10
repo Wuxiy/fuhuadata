@@ -247,6 +247,12 @@
                 <artifactId>pagehelper</artifactId>
                 <version>${pagehelper.version}</version>
             </dependency>
+            <!-- flyway 数据库版本控制 -->
+            <dependency>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-core</artifactId>
+                <version>4.2.0</version>
+            </dependency>
 
             <!-- spring begin -->
             <!-- spring需要的jar包 -->

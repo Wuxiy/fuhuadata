@@ -28,13 +28,17 @@ public class CustomsCountryServiceImpl extends BaseServiceImpl<CustomsCountry, I
     @Override
     public List<CustomsCountry> listCountries() {
 
-        return getCurrentProxy().list();
+        Example example = newExample();
+        example.setOrderByClause("weight asc");
+
+        return getCurrentProxy().listByExample(example);
     }
 
     @Override
     public List<CustomsCountry> listCountries(List<Integer> countryIds) {
 
         Example example = newExample();
+        example.setOrderByClause("weight asc");
         example.createCriteria().andIn("id", countryIds);
 
         return getCurrentProxy().listByExample(example);

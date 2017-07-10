@@ -24,6 +24,11 @@ public class CustomsCompany extends BaseEntity<Integer> {
     private Integer pid;
 
     /**
+     * 权重
+     */
+    private Integer weight;
+
+    /**
      * @return id
      */
     public Integer getId() {
@@ -71,5 +76,13 @@ public class CustomsCompany extends BaseEntity<Integer> {
      */
     public void setPid(Integer pid) {
         this.pid = pid;
+    }
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
     }
 }

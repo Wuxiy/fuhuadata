@@ -264,6 +264,7 @@
             <include refid="statisticWhere"/>
         </where>
         group by cd.`dest_country_id`
+        order by cct.weight
     </select>
 
     <select id="listCompanyCustomsStatistics" resultType="com.fuhuadata.domain.echarts.PieData">
@@ -280,6 +281,7 @@
             <include refid="statisticWhere"/>
         </where>
         group by cd.`company_id`
+        order by ccp.weight
     </select>
 
     <select id="listCountryBarData" resultType="com.fuhuadata.domain.customs.BarData">
