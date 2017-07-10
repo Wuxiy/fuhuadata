@@ -395,7 +395,7 @@ $(function () {
 
                 if (res.code===1) {
 
-                    basicPanel.data[imgGroup.theName] = (basePath==""?("\\"+basePath):basePath)+"\\"+res.data[0];
+                    basicPanel.data[imgGroup.theName] = res.data[0];
                     basicPanel.render(basicPanel.data);
                 }
             });
