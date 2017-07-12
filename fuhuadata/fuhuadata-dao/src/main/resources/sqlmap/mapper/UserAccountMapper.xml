@@ -76,7 +76,7 @@
         INNER JOIN p_job jo ON jo.psncode=ua.code
     </sql>
     <sql id="LeftJoinAreas">
-        LEFT JOIN p_user_area us_ar ON us_ar.user_id=ua.id
+        LEFT JOIN p_user_area us_ar ON us_ar.user_code=ua.code
         LEFT JOIN t_areacl ac ON ac.pk_areacl=us_ar.area_id
     </sql>
 
@@ -107,8 +107,7 @@
     <select id="listDeptIdsOfUserByRoleId" resultType="java.lang.String">
         SELECT jo.pk_dept
         FROM p_user_role ur
-        INNER JOIN p_user_account ua ON ua.id=ur.user_id
-        INNER JOIN p_job jo ON ua.code=jo.psncode
+        INNER JOIN p_job jo ON jo.psncode=ur.user_code
         WHERE ur.role_id=#{roleId}
     </select>
 

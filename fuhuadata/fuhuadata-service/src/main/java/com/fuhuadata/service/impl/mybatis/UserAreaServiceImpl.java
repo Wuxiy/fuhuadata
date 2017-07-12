@@ -26,8 +26,8 @@ public class UserAreaServiceImpl extends BaseServiceImpl<UserArea, Integer>
     }
 
     @Override
-    public int saveUserArea(Integer userId, List<String> areaIds) {
-        if (userId == null || areaIds.size() == 0) {
+    public int saveUserArea(String userCode, List<String> areaIds) {
+        if (userCode == null || areaIds.size() == 0) {
             return 0;
         }
 
@@ -35,20 +35,20 @@ public class UserAreaServiceImpl extends BaseServiceImpl<UserArea, Integer>
         for (String areaId : areaIds) {
 
             UserArea userArea = new UserArea();
-            userArea.setUserId(userId);
+            userArea.setUserCode(userCode);
             userArea.setAreaId(areaId);
 
             userAreas.add(userArea);
         }
 
-        deleteAreaByUserId(userId);
+        deleteAreaByUserId(userCode);
         return saveList(userAreas);
     }
 
     @Override
-    public int deleteAreaByUserId(Integer userId) {
+    public int deleteAreaByUserId(String userCode) {
         Example example = new Example(UserArea.class);
-        example.createCriteria().andEqualTo("userId", userId);
+        example.createCriteria().andEqualTo("userCode", userCode);
 
         return delete(example);
     }

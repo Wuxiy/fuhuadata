@@ -46,16 +46,16 @@ public class AreaClController extends BaseController<AreaCl, String> {
 
     /**
      * 获取用户地区树
-     * @param userId
+     * @param userCode
      * @return
      */
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     @ResponseBody
     @SystemLogAnnotation(module = "sys-area", methods = "getAreaNodeByUserId")
-    public ResultPojo getAreaCodeNodesArrayOfUser(@RequestParam("userId") Integer userId) {
+    public ResultPojo getAreaCodeNodesArrayOfUser(@RequestParam("userId") String userCode) {
         Result<List<AreaClVo>> result = Result.newResult(false);
 
-        result.addDefaultModel(areaClService.getAreaTreeByUserId(userId));
+        result.addDefaultModel(areaClService.getAreaTreeByUserCode(userCode));
         result.setSuccess(true);
         return result.getResultPojo();
     }

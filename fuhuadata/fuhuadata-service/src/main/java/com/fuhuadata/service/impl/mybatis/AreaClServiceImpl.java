@@ -66,8 +66,8 @@ public class AreaClServiceImpl extends BaseTreeableServiceImpl<AreaCl, String>
     }
 
     @Override
-    public List<AreaClVo> getAreaTreeByUserId(Integer userId) {
-        List<AreaCl> areaChildNodes = getAreasByUserId(userId);// 用户关联地区的叶子节点
+    public List<AreaClVo> getAreaTreeByUserCode(String userCode) {
+        List<AreaCl> areaChildNodes = getAreasByUserCode(userCode);// 用户关联地区的叶子节点
         List<AreaCl> allNodes = getAncestorOfNodes(areaChildNodes);// 叶子节点和其所有祖先，完整的树节点
 
         return Lists.transform(allNodes, new Function<AreaCl, AreaClVo>() {
@@ -79,22 +79,22 @@ public class AreaClServiceImpl extends BaseTreeableServiceImpl<AreaCl, String>
     }
 
     @Override
-    public List<AreaCl> getAreasByUserId(Integer userId) {
-        if (userId == null) {
+    public List<AreaCl> getAreasByUserCode(String userCode) {
+        if (userCode == null) {
             return Collections.emptyList();
         }
 
-        return getAreaClMapper().listAreasByUserId(userId);
+        return getAreaClMapper().listAreasByUserCode(userCode);
     }
 
     @Override
-    public List<AreaClVo> getAreaNodesByUserId(Integer userId) {
-        if (userId == null) {
+    public List<AreaClVo> getAreaNodesByUserCode(String userCode) {
+        if (userCode == null) {
             return Collections.emptyList();
         }
 
         List<AreaClVo> nodes = Lists.newArrayList();
-        List<AreaCl> areas = getAreasByUserId(userId);
+        List<AreaCl> areas = getAreasByUserCode(userCode);
         for (AreaCl areaCl : areas) {
             nodes.add(AreaClVo.from(areaCl));
         }

@@ -6,6 +6,7 @@ import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.domain.query.ResultPojo;
 import com.fuhuadata.service.mybatis.UserRoleService;
 import com.fuhuadata.service.mybatis.UserService;
+import com.fuhuadata.service.mybatis.user.JobService;
 import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.web.util.SystemLogAnnotation;
 import com.google.common.collect.Lists;
@@ -22,13 +23,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Stream;
-
-import static java.util.stream.Collectors.toList;
 
 /**
  * <p>User: wangjie
@@ -43,6 +42,9 @@ public class RoleController extends BaseTreeableController<Role, Integer> {
     private UserRoleService userRoleService;
 
     private UserService userService;
+
+    @Resource
+    private JobService jobService;
 
     public RoleController() {
         setResourceIdentity("sys:role");
@@ -80,7 +82,7 @@ public class RoleController extends BaseTreeableController<Role, Integer> {
     @RequestMapping(value = "users", method = RequestMethod.POST)
     @ResponseBody
     @SystemLogAnnotation(module = "sys-role", methods = "saveUsersOfRole")
-    public ResultPojo saveUsersOfRole(UserRole userRoleOri, @RequestParam("userIds") String userIds,
+    public ResultPojo saveUsersOfRole(UserRole userRoleOri, @RequestParam("userCodes") String userCodes,
                                       @RequestParam(value = "deptIds", required = false) String deptIds) {
 
         if (permissionList != null) {
@@ -89,27 +91,26 @@ public class RoleController extends BaseTreeableController<Role, Integer> {
 
         Result<Boolean> result = Result.newResult(false);
         List<UserRole> userRoles = Lists.newArrayList();
-        Set<Integer> userIdsSet = Sets.newHashSet();
+        Set<String> userCodesSet = Sets.newHashSet();
 
-        if (StringUtils.isNotBlank(userIds)) {// 关联的用户id
+        if (StringUtils.isNotBlank(userCodes)) {// 关联的用户code
 
-            String[] userIdsArr = StringUtils.split(userIds, ",");
-            List<Integer> userIdsIter = Stream.of(userIdsArr).map(Integer::valueOf).collect(toList());
+            String[] userCodesArr = StringUtils.split(userCodes, ",");
 
-            userIdsSet.addAll(userIdsIter);
+            userCodesSet.addAll(Arrays.asList(userCodesArr));
         }
 
         if (StringUtils.isNotBlank(deptIds)) {
-            List<Integer> userIdsOfDept =
-                    userService.listUserIdsByDeptIds(Arrays.asList(StringUtils.split(deptIds, ",")));
-            userIdsSet.addAll(userIdsOfDept);
+            Set<String> userCodesByDeptPk =
+                    jobService.listUserCodeByDeptPks(Arrays.asList(StringUtils.split(deptIds, ",")));
+            userCodesSet.addAll(userCodesByDeptPk);
         }
 
-        if (userIdsSet.size() > 0 && userRoleOri != null) {
+        if (userCodesSet.size() > 0 && userRoleOri != null) {
             try {
-                for (Integer userId : userIdsSet) {
+                for (String userCode : userCodesSet) {
                     UserRole userRole = (UserRole) BeanUtils.cloneBean(userRoleOri);
-                    userRole.setUserId(userId);
+                    userRole.setUserCode(userCode);
                     userRole.setAuthUserId(LoginUtils.getLoginId());
                     userRole.setAuthUserName(LoginUtils.getLoginName());
                     userRole.setAuthTime(new Date());
@@ -133,13 +134,11 @@ public class RoleController extends BaseTreeableController<Role, Integer> {
     @RequestMapping(value = "/users/delete", method = RequestMethod.POST)
     @ResponseBody
     public ResultPojo deleteUsersOfRole(@RequestParam("roleId") Integer roleId,
-                                        @RequestParam("userIds") String userIdsStr) {
+                                        @RequestParam("userCodes") String userCodesStr) {
 
-        List<Integer> userIds = Stream.of(StringUtils.split(userIdsStr, ","))
-                .map(Integer::valueOf)
-                .collect(toList());
+        List<String> userCodes = Arrays.asList(StringUtils.split(userCodesStr, ","));
 
-        int deleted = userRoleService.deleteUserRoles(roleId, userIds);
+        int deleted = userRoleService.deleteUserRoles(roleId, userCodes);
 
         Result<Integer> result = Result.newResult(true);
         result.addDefaultModel(deleted);

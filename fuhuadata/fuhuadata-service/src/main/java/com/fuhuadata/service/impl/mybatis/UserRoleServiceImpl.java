@@ -37,9 +37,9 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRole, Integer> impl
         }
 
         // 去掉已经存在的关联用户id
-        Set<Integer> linkUserIds = listUserIds(roleId);
+        Set<String> linkUserCodes = listUserCodes(roleId);
         List<UserRole> userRoles = users.stream()
-                .filter(userRole -> !linkUserIds.contains(userRole.getUserId()))
+                .filter(userRole -> !linkUserCodes.contains(userRole.getUserCode()))
                 .collect(toList());
 
         saveList(userRoles);
@@ -60,15 +60,15 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRole, Integer> impl
     }
 
     @Override
-    public Set<Integer> getRoleIds(Integer userId) {
-        List<Integer> roleIdList = getUserRoleMapper().listRoleIdsByUserId(userId);
+    public Set<Integer> getRoleIds(String userCode) {
+        List<Integer> roleIdList = getUserRoleMapper().listRoleIdsByUserCode(userCode);
         return Sets.newHashSet(roleIdList);
     }
 
     @Override
-    public Set<Integer> listUserIds(Integer roleId) {
-        List<Integer> userIds = getUserRoleMapper().listUserIdsByRoleId(roleId);
-        return Sets.newHashSet(userIds);
+    public Set<String> listUserCodes(Integer roleId) {
+        List<String> userCodes = getUserRoleMapper().listUserCodesByRoleId(roleId);
+        return Sets.newHashSet(userCodes);
     }
 
     @Override
@@ -88,14 +88,15 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRole, Integer> impl
     }
 
     @Override
-    public int deleteUserRoles(Integer roleId, List<Integer> userIds) {
-        if (roleId == null || userIds == null || userIds.size() == 0) {
+    public int deleteUserRoles(Integer roleId, List<String> userCodes) {
+
+        if (roleId == null || userCodes == null || userCodes.size() == 0) {
             return 0;
         }
 
         Example example = new Example(UserRole.class);
         example.createCriteria().andEqualTo("roleId", roleId)
-                .andIn("userId", userIds);
+                .andIn("userCode", userCodes);
 
         return delete(example);
     }

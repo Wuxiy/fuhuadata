@@ -12,12 +12,12 @@ public interface UserRoleMapper extends BaseMapper<UserRole, Integer> {
 
     List<UserAccount> listUserAccountsByRoleId(@Param("roleId") Integer roleId);
 
-    List<Integer> listRoleIdsByUserId(@Param("userId") Integer userId);
+    List<Integer> listRoleIdsByUserCode(@Param("userCode") String userCode);
 
     /**
      * 根据角色id获取关联用户id
      * @param roleId
      * @return
      */
-    List<Integer> listUserIdsByRoleId(@Param("roleId") Integer roleId);
+    List<String> listUserCodesByRoleId(@Param("roleId") Integer roleId);
 }

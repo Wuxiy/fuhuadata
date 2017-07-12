@@ -136,11 +136,11 @@ public class MenuServiceImpl extends BaseTreeableServiceImpl<Menu, Integer>
     }
 
     @Override
-    public Set<String> getStringPermissions(Integer userId) {
+    public Set<String> getStringPermissions(String userCode) {
         Set<String> permissions = Sets.newHashSet();
         Map<Integer, MenuTreeVo> tree = Maps.newHashMap();
 
-        Set<Integer> roleIds = userRoleService.getRoleIds(userId);
+        Set<Integer> roleIds = userRoleService.getRoleIds(userCode);
         for (Integer roleId : roleIds) {
             List<Menu> menus = listMenuPermissions(roleId);
             addMenusToMenuTree(tree, menus);

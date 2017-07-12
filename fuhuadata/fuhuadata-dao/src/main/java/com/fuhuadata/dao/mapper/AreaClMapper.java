@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface AreaClMapper extends BaseMapper<AreaCl, String> {
 
-    List<AreaCl> listAreasByUserId(@Param("userId") Integer userId);
+    List<AreaCl> listAreasByUserCode(@Param("userCode") String userCode);
 
     List<AreaCl> listForeignAreas();
 }

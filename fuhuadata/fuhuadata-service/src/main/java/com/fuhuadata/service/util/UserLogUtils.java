@@ -21,11 +21,13 @@ public class UserLogUtils {
 
         Integer id = principal.getId();
         String loginName = principal.getLoginName();
+        String username = principal.getName();
         String ipAddr = IpUtils.getIpAddr(request);
         String userAgent = request.getHeader("User-Agent");
 
         UserLoginLog loginLog = new UserLoginLog();
         loginLog.setLoginCode(loginName);
+        loginLog.setUsername(username);
         loginLog.setHost(ipAddr);
         loginLog.setUserAgent(userAgent);
         loginLog.setLoginTime(new Date());

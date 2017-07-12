@@ -18,6 +18,12 @@ public class UserArea extends BaseEntity<Integer> {
     private Integer userId;
 
     /**
+     * 用户code
+     */
+    @Column(name = "user_code")
+    private String userCode;
+
+    /**
      * 地区id
      */
     @Column(name = "area_id")
@@ -89,5 +95,13 @@ public class UserArea extends BaseEntity<Integer> {
 
     public void setAreaName(String areaName) {
         this.areaName = areaName;
+    }
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
     }
 }

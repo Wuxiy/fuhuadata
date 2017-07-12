@@ -34,10 +34,10 @@ public class UserAreaController extends BaseController<UserArea, Integer> {
     @RequestMapping(value = "save", method = RequestMethod.POST)
     @SystemLogAnnotation(module = "sys-user", methods = "saveAreaForUser")
     @ResponseBody
-    public ResultPojo saveAreasForUser(@RequestParam("userId") Integer userId,
+    public ResultPojo saveAreasForUser(@RequestParam("userId") String userCode,
                                        @RequestParam("areaIds") String areaIdsStr) {
         List<String> areaIds = Arrays.asList(StringUtils.split(areaIdsStr, ","));
-        int count = userAreaService.saveUserArea(userId, areaIds);
+        int count = userAreaService.saveUserArea(userCode, areaIds);
 
         Result<Integer> result = Result.newResult(true);
         result.addDefaultModel(count);
