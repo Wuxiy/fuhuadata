@@ -55,6 +55,7 @@ public class FactoryProductToNCImpl implements FactoryProductToNC {
         if (null!=resSuc){
             if (resSuc.equals("N")){
                 log.error("导入nc失败");
+                throw new Exception("导入nc失败");
             }else if (resSuc.equals("Y")){
                 log.info("导入nc成功");
                 //将nc回传的pk_supplierext写入crm
@@ -67,7 +68,7 @@ public class FactoryProductToNCImpl implements FactoryProductToNC {
 
     }
 
-    private String factoryProductToXMl(List<ProduceFactoryProduct> factoryProducts){
+    private String factoryProductToXMl(List<ProduceFactoryProduct> factoryProducts) throws Exception {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -129,6 +130,7 @@ public class FactoryProductToNCImpl implements FactoryProductToNC {
         }catch (Exception e){
             log.error("生成xml出错",e);
             e.printStackTrace();
+            throw e;
         }
         return xmlName;
     }

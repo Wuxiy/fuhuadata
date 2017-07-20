@@ -72,7 +72,7 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
      * @return
      */
     @Override
-    public String sendBusinessOrder(String orderId,List<Integer> orderProductsId) {
+    public String sendBusinessOrder(String orderId,List<Integer> orderProductsId) throws Exception {
         //pdf导入nc长期协议调用接口需要的参数字段
         String creatorCode="";
         String pPath="";
@@ -90,13 +90,13 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                 ncid=customerInfoToNC.sendCustomerInfo(customerBaseInfo);
             }
             String xmlName=null;
-        List<BusinessOrderProduct> orderProducts=null;
+            List<BusinessOrderProduct> orderProducts=null;
             if (orderProductsId.size()!=0) {
                 orderProducts = orderToNc.getOrderProductsById(orderProductsId);
                 xmlName = businessOrderToXML(orderBaseInfo, orderProducts, ncid);
             }else {
                 log.error("-----没有订单产品无法提交NC-----");
-                return "";
+                throw new Exception("没有订单产品无法提交nc");
             }
 
         /*
@@ -190,6 +190,7 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
             if (null != resSuc) {
                 if (resSuc.equals("N")) {
                     log.info("导入nc失败");
+                    throw new Exception("导入nc失败");
                 } else if (resSuc.equals("Y")) {
                     log.info("导入nc成功");
                     //修改状态
@@ -213,7 +214,7 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
 
         return resultCode;
     }
-    private String businessOrderToXML(BusinessOrder orderBaseInfo, List<BusinessOrderProduct> orderProducts,String ncid){
+    private String businessOrderToXML(BusinessOrder orderBaseInfo, List<BusinessOrderProduct> orderProducts,String ncid) throws Exception {
         String xmlName=null;
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -484,6 +485,7 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
 
         }catch (Exception e){
             log.error("转换xml文件失败",e);
+            throw e;
         }
         return xmlName;
     }

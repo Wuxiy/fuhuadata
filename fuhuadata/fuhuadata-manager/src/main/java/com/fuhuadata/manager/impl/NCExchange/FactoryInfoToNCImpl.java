@@ -7,6 +7,7 @@ import com.fuhuadata.domain.supplier.ProduceFactory;
 import com.fuhuadata.manager.NCExchange.FactoryInfoToNC;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.cxf.BusException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -41,7 +42,7 @@ public class FactoryInfoToNCImpl implements FactoryInfoToNC {
      * @return
      */
     @Override
-    public Map<String,HashMap> sendFactoryInfo(ProduceFactory factoryInfo)  {
+    public Map<String,HashMap> sendFactoryInfo(ProduceFactory factoryInfo) throws Exception {
         String resFile= getRefFile(""+factoryInfo.getId(),"factoryBackFile");
         factoryInfoToXML(factoryInfo);
         org.jdom.Element root=null;
@@ -51,6 +52,7 @@ public class FactoryInfoToNCImpl implements FactoryInfoToNC {
         } catch (Exception e) {
             e.printStackTrace();
             log.error("发送nc失败",e);
+            throw e;
         }
         String resSuc = root.getAttributeValue("successful");
         List<org.jdom.Element> list = root.getChildren();
@@ -63,6 +65,7 @@ public class FactoryInfoToNCImpl implements FactoryInfoToNC {
         if (null!=resSuc){
             if (resSuc.equals("N")){
                 log.error("导入nc失败");
+                throw new Exception("导入nc失败");
             }else if (resSuc.equals("Y")){
                 log.info("导入nc成功");
                 //将nc回传的pk_factory写入crm中
@@ -71,7 +74,13 @@ public class FactoryInfoToNCImpl implements FactoryInfoToNC {
                 mapMap.put("factory", (HashMap) mapc);
                 Map<Integer,Object> mapPk=new HashMap<Integer, Object>();
                 for (BankAccBas bankAccBas:factoryInfo.getBanks()){
-                    Map<String,Object> map= sendSupBankacc(bankAccBas,pk_factory);
+                    Map<String,Object> map= null;
+                    try {
+                        map = sendSupBankacc(bankAccBas,pk_factory);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        throw e;
+                    }
                     mapPk.put((Integer) map.get("id"),map.get("pk_bankaccbas"));
                 }
                 mapMap.put("bankacc", (HashMap) mapPk);
@@ -89,7 +98,7 @@ public class FactoryInfoToNCImpl implements FactoryInfoToNC {
      * 将加工厂银行账户信息发送nc
      * @param bankAcc
      */
-    private Map<String, Object> sendSupBankacc(BankAccBas bankAcc,String pk_factory){
+    private Map<String, Object> sendSupBankacc(BankAccBas bankAcc,String pk_factory) throws Exception {
         String resFile=getRefFile(""+bankAcc.getId(),"bankBackFile");
         String bankXmlName= bankAccToXML(bankAcc,pk_factory);
         org.jdom.Element root=null;
@@ -99,6 +108,7 @@ public class FactoryInfoToNCImpl implements FactoryInfoToNC {
         } catch (Exception e) {
             e.printStackTrace();
             log.error("发送nc失败",e);
+            throw new Exception("发送nc失败",e);
         }
         String resSuc = root.getAttributeValue("successful");
         List<org.jdom.Element> list = root.getChildren();
@@ -111,6 +121,7 @@ public class FactoryInfoToNCImpl implements FactoryInfoToNC {
         if (null!=resSuc){
             if (resSuc.equals("N")){
                 log.error("导入nc失败");
+                throw new Exception("导入nc失败");
             }else if (resSuc.equals("Y")){
                 log.info("导入nc成功");
                 //将nc回传的pk_bankaccbas写入crm中

@@ -9,5 +9,5 @@ import java.util.Map;
  * Created by zhangxiang on 2017/5/27.
  */
 public interface FactoryInfoToNC {
-    Map<String,HashMap> sendFactoryInfo(ProduceFactory factoryInfo);
+    Map<String,HashMap> sendFactoryInfo(ProduceFactory factoryInfo) throws Exception;
 }
