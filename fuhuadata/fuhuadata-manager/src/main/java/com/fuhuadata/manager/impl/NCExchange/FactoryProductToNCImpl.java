@@ -32,11 +32,12 @@ public class FactoryProductToNCImpl implements FactoryProductToNC {
     private String xmlName;
     private String realPath;
     @Override
-    public void sendFactoryProduct(List<ProduceFactoryProduct> factoryProducts) throws Exception {
+    public Map sendFactoryProduct(List<ProduceFactoryProduct> factoryProducts) throws Exception {
         realPath = servletContext.getRealPath("/");
         factoryProductToXMl(factoryProducts);
         String resFile=NcExchangeToolUtil.getRefFile(realPath,""+factoryProducts.get(0).getFactoryId(),"factoryProductBackFile");
         org.jdom.Element root=null;
+        Map<Integer,String> pkMap=new HashMap<Integer, String>();
         try {
             root=NcExchangeToolUtil.xmlSendNcTool(xmlName,resFile);
         } catch (Exception e) {
@@ -59,13 +60,14 @@ public class FactoryProductToNCImpl implements FactoryProductToNC {
             }else if (resSuc.equals("Y")){
                 log.info("导入nc成功");
                 //将nc回传的pk_supplierext写入crm
+                pkMap.put(factoryProducts.get(0).getId(),pk_supplierext);
             }else {
                 log.error("读回写文件出错");
             }
         }else {
             log.error("未找到回执文件的successful属性");
         }
-
+        return pkMap;
     }
 
     private String factoryProductToXMl(List<ProduceFactoryProduct> factoryProducts) throws Exception {
