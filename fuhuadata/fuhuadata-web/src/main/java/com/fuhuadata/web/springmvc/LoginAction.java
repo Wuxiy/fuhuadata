@@ -62,8 +62,8 @@ public class LoginAction {
 
     @RequestMapping("/permissions")
     @ResponseBody
-    public Set<String> getPermissions(@RequestParam Integer userId) {
-        return menuService.getStringPermissions(userId);
+    public Set<String> getPermissions(@RequestParam String userCode) {
+        return menuService.getStringPermissions(userCode);
     }
 
     @RequestMapping("/exception")

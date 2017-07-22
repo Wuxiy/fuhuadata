@@ -655,7 +655,7 @@
                         $('#specification').val(productWareVo.specification);
                         $('#model').val(productWareVo.model);
                         $('#unitUseRate').val(productWareVo.unitUseRate);
-                        $('#taxFree').val(productWareVo.taxFree);
+                        $('#taxFree').val(productWareVo.exportaxesback);
 
                         if(components.length != 0){
                             $('#cost').removeClass('hidden');

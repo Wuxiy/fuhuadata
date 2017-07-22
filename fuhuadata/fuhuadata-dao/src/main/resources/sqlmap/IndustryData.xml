@@ -7,7 +7,7 @@
     
     <resultMap id="INDUSTRYDATA-MAP" class="IndustryData">
         <result column="id" property="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-        <result column="year" property="year" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="year" property="yearFlag" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="business_name" property="businessName" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="export_continent" property="exportContinent" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="export_gross" property="exportGross" jdbcType="INTEGER" javaType="java.lang.Integer"/>
@@ -15,7 +15,7 @@
         <result property="exportShare" column="export_share" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="export_country" property="exportCountry" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result column="average" property="average" jdbcType="REAL" javaType="java.lang.Float"/>
-        <result column="month" property="month" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="month" property="monthFlag" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </resultMap>
 
     <sql id="PAGE-COMMON">
@@ -24,7 +24,7 @@
                 id = #id#
             </isNotNull>
             <isNotNull prepend=" AND " property="year" >
-                year = #year#
+                year = #yearFlag#
             </isNotNull>
             <isNotNull prepend=" AND " property="exportContinent">
                 export_continent = #exportContinent#
@@ -45,7 +45,7 @@
                 average = #average#
             </isNotNull>
             <isNotNull prepend=" AND " property="month">
-                month= #month#
+                month= #monthFlag#
             </isNotNull>
             <isNotNull prepend=" AND " property="exportShare">
                 export_share = #exportShare#
@@ -79,7 +79,7 @@
         UPDATE d_industry_data
         <dynamic prepend=" SET ">
             <isNotNull prepend=", " property="year" >
-                year = #year#
+                year = #yearFlag#
             </isNotNull>
             <isNotNull prepend=", " property="exportContinent">
                 export_continent = #exportContinent#
@@ -100,7 +100,7 @@
                 average = #average#
             </isNotNull>
             <isNotNull prepend=", " property="month">
-                month= #month#
+                month= #monthFlag#
             </isNotNull>
             <isNotNull prepend=", " property="exportShare">
                 export_share = #exportShare#

@@ -132,7 +132,9 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
         for (MixNodeVO userNode : userNodes) {
             String deptId = userNode.getPid();
             MixNodeVO deptNode = lookup.get(deptId);
-            deptNode.addChildNode(userNode);
+            if (deptNode != null) {
+                deptNode.addChildNode(userNode);
+            }
         }
         return roots;
     }

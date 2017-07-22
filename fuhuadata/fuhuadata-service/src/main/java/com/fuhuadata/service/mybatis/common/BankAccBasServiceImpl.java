@@ -9,6 +9,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class BankAccBasServiceImpl extends BaseServiceImpl<BankAccBas, Integer>
             entity.setDeletedStatus(0);
         });
 
-        return banks;
+        return new ArrayList<>(banks);
     }
 
     @Override
@@ -81,6 +82,16 @@ public class BankAccBasServiceImpl extends BaseServiceImpl<BankAccBas, Integer>
             bdBanks.add(get(bank));
         });
 
-        return bdBanks;
+        return new ArrayList<>(bdBanks);
+    }
+
+    @Override
+    public BankAccBas updateBankPk(Integer bankId, String pkBank) {
+
+        BankAccBas bank = this.get(bankId);
+        bank.setPkBankaccbas(pkBank);
+        this.update(bank);
+
+        return bank;
     }
 }

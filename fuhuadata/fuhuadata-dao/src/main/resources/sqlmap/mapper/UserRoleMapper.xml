@@ -9,6 +9,7 @@
         <result column="user_id" jdbcType="INTEGER" property="userId"/>
         <result column="user_name" jdbcType="VARCHAR" property="userName"/>
         <result column="role_id" jdbcType="INTEGER" property="roleId"/>
+        <result column="user_code" jdbcType="VARCHAR" property="userCode"/>
         <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime"/>
         <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
         <result column="auth_user_id" jdbcType="INTEGER" property="authUserId"/>
@@ -17,14 +18,14 @@
     </resultMap>
 
     <resultMap id="UserExtendMap" type="com.fuhuadata.domain.mybatis.UserRole" extends="BaseResultMap">
-        <association property="user" column="user_id" columnPrefix="user_"
+        <association property="user" column="user_code" columnPrefix="user_"
                      resultMap="com.fuhuadata.dao.mapper.UserAccountMapper.UserAreasMap"/>
     </resultMap>
 
     <!-- p_user_role 缩写 ur -->
     <sql id="BaseColumns">
         ur.id,
-        ur.user_id,
+        ur.user_code,
         ur.role_id,
         ur.begin_time,
         ur.end_time,
@@ -35,7 +36,7 @@
 
     <sql id="PrefixColumns">
         ur.id ur_id,
-        ur.user_id ur_user_id,
+        ur.user_code ur_user_code,
         ur.role_id ur_role_id,
         ur.begin_time ur_begin_time,
         ur.end_time ur_end_time,
@@ -49,11 +50,11 @@
     </sql>
 
     <sql id="RoleUserJoin">
-        LEFT JOIN p_user_account ua ON ua.id=ur.user_id
+        LEFT JOIN p_user_account ua ON ua.code=ur.user_code
     </sql>
 
     <sql id="UserRoleJoinUser">
-        INNER JOIN p_user_account ua ON ua.id=ur.user_id
+        INNER JOIN p_user_account ua ON ua.code=ur.user_code
     </sql>
 
     <select id="listUsersOfRole" resultMap="UserExtendMap">
@@ -81,16 +82,16 @@
         WHERE ur.role_id=#{roleId}
     </select>
 
-    <select id="listRoleIdsByUserId" resultType="java.lang.Integer">
+    <select id="listRoleIdsByUserCode" resultType="java.lang.Integer">
         SELECT
         ur.role_id
         <include refid="FromUserRole"/>
-        WHERE ur.user_id=#{userId}
+        WHERE ur.user_code=#{userCode}
     </select>
 
-    <select id="listUserIdsByRoleId" resultType="java.lang.Integer">
+    <select id="listUserCodesByRoleId" resultType="java.lang.String">
         SELECT
-        ur.user_id
+        ur.user_code
         <include refid="FromUserRole"/>
         WHERE ur.role_id=#{roleId}
     </select>

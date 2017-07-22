@@ -32,7 +32,8 @@ import java.util.Map;
 public class FileController {
     private static final Log log = LogFactory.getLog(FileController.class);
     private static final String  DEFAULT_CLASSIFY = "default";
-    private static final String LINUX_BASE = "/usr/local/tomcat8.0/apache-tomcat-8.0.39/webapps/FileBase";
+    private static final String SOURCE_DOMAIN = "fileBase";
+    private static final String LINUX_BASE = "/usr/local/tomcat8.0/apache-tomcat-8.0.39/webapps/"+SOURCE_DOMAIN;
     @RequestMapping(value = "into",method = RequestMethod.GET)
     public ModelAndView upload(){
         return new ModelAndView("knowledgeBase/uploadFile");
@@ -74,7 +75,12 @@ public class FileController {
             log.error("文件上传错误",e);
         }
         ResultPojo  resultPojo= result.getResultPojo();
-        resultPojo.setData( classifyPath+File.separator+dateDir+File.separator+tempFile.getName());
+        String os = System.getProperty("os.name");
+        if(os.toLowerCase().startsWith("win")){
+            resultPojo.setData(tempFile.getPath());
+        }else{
+            resultPojo.setData(SOURCE_DOMAIN + File.separator + classifyPath+File.separator+dateDir+File.separator+tempFile.getName());
+        }
         return resultPojo;
     }
 
@@ -107,7 +113,12 @@ public class FileController {
                     }
                     System.out.println(tempFile);
                     FileCopyUtils.copy(file.getBytes(),tempFile);
-                    fileURIs.add(classifyPath + File.separator + dateDir+File.separator+tempFile.getName());
+                    String os = System.getProperty("os.name");
+                    if(os.toLowerCase().startsWith("win")){
+                        fileURIs.add("../"+SOURCE_DOMAIN + File.separator + classifyPath + File.separator + dateDir+File.separator+tempFile.getName());
+                    }else{
+                        fileURIs.add("../../"+SOURCE_DOMAIN + File.separator + classifyPath + File.separator + dateDir+File.separator+tempFile.getName());
+                    }
                 }
             }
             result.addDefaultModel(fileURIs);
@@ -118,7 +129,11 @@ public class FileController {
         String os = System.getProperty("os.name");
         String path = null;
         if(os.toLowerCase().startsWith("win")){
-            path = request.getSession().getServletContext().getRealPath("");
+            path = request.getSession().getServletContext().getRealPath("/")+File.separator+SOURCE_DOMAIN;
+            File tmp = new File(path);
+            if(!tmp.exists()){
+                tmp.mkdir();
+            }
         }else{
             path = LINUX_BASE ;
         }

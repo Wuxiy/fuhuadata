@@ -22,6 +22,8 @@ import java.util.Optional;
 public abstract class BaseServiceImpl<E extends BaseEntity<ID>, ID extends Serializable>
         implements BaseService<E, ID> {
 
+    public final static int BATCH_SIZE = 1000;
+
     protected BaseMapper<E, ID> baseMapper;
 
     protected SqlSession sqlSessionBatch;
@@ -44,6 +46,11 @@ public abstract class BaseServiceImpl<E extends BaseEntity<ID>, ID extends Seria
 
     public BaseServiceImpl() {
         this.entityClass = ReflectUtils.findParameterizedType(getClass(), 0);
+    }
+
+    // 获取batch mapper
+    public BaseMapper<E, ID> getMapperBatch() {
+        return (BaseMapper<E, ID>) sqlSessionBatch.getMapper(MybatisUtils.getMapperInterface(baseMapper));
     }
 
     public E get(ID id) {
@@ -93,13 +100,22 @@ public abstract class BaseServiceImpl<E extends BaseEntity<ID>, ID extends Seria
 
     public List<ID> saveBatch(List<E> entices) {
         List<ID> ids = Lists.newArrayList();
+        int count = 0;
 
         BaseMapper<E, ID> mapperBatch =
                 (BaseMapper<E, ID>) sqlSessionBatch.getMapper(MybatisUtils.getMapperInterface(baseMapper));
         for (E entity : entices) {
             mapperBatch.insert(entity);
             ids.add(entity.getId());
+            count++;
+
+            if (count % BATCH_SIZE == 0) {
+                sqlSessionBatch.flushStatements();
+                count = 0;
+            }
         }
+
+        sqlSessionBatch.flushStatements();
         return ids;
     }
 

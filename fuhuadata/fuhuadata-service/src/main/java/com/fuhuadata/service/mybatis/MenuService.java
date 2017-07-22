@@ -66,6 +66,6 @@ public interface MenuService extends BaseTreeableService<Menu, Integer> {
      */
     String findActualResourceIdentity(MenuTreeVo menuNode, Map<Integer, MenuTreeVo> trees);
 
-    Set<String> getStringPermissions(Integer userId);
+    Set<String> getStringPermissions(String userCode);
 
 }

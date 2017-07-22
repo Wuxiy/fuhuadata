@@ -67,7 +67,7 @@
         </li>
         <li class="shadow-in" title="行业数据">
             <div id="collapseFour" class="list-group collapse">
-                <a class="list-group-item" href="#"  lang="zh">市场数据</a>
+                <a class="list-group-item" href="${request.contextPath}/customs/data"  lang="zh">市场数据</a>
             </div>
             <a data-toggle="collapse" href="#collapseFour" data-parent="#nav-affix" lang="zh">
                 <span class="glyphicon glyphicon-list-alt"></span>
@@ -112,7 +112,7 @@
                 <a class="list-group-item" href="${rc.contextPath}/sys/menu" lang="zh">菜单管理</a>
 
             </div>
-            <a data-toggle="collapse" href="#collapseSeven" data-parent="#accordion" lang="zh">
+            <a data-toggle="collapse" href="#collapseSeven" data-parent="#nav-affix" lang="zh">
                 <span class="glyphicon glyphicon-cog"></span>
                 系统管理
                 <b class="caret"></b>

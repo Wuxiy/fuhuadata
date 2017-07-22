@@ -37,10 +37,10 @@ public class UserRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         Principal principal = (Principal) principals.getPrimaryPrincipal();
-        Integer userId = principal.getId();
+        String userCode = principal.getCode();
 
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        authorizationInfo.setStringPermissions(menuService.getStringPermissions(userId));
+        authorizationInfo.setStringPermissions(menuService.getStringPermissions(userCode));
         return authorizationInfo;
     }
 

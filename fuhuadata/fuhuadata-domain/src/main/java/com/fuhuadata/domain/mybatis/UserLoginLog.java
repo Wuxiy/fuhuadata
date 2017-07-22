@@ -19,6 +19,12 @@ public class UserLoginLog extends BaseEntity<Integer> {
     private String loginCode;
 
     /**
+     * 登录人姓名
+     */
+    @Column(name = "username")
+    private String username;
+
+    /**
      * 用户主机地址
      */
     private String host;
@@ -147,5 +153,13 @@ public class UserLoginLog extends BaseEntity<Integer> {
      */
     public void setLoginTime(Date loginTime) {
         this.loginTime = loginTime;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

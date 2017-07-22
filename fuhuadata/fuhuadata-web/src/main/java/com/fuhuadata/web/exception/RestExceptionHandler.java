@@ -43,11 +43,13 @@ public class RestExceptionHandler {
 
         List<FieldErrorResponse> fieldErrorResponses = Lists.newArrayList();
 
-        List<FieldError> fieldErrors = e.getErrors().getFieldErrors();
-        for (FieldError fieldError : fieldErrors) {
-            FieldErrorResponse fieldErrorResponse = FieldErrorResponse.from(fieldError);
-            fieldErrorResponse.setMessage(MessageUtils.message(fieldError));
-            fieldErrorResponses.add(fieldErrorResponse);
+        if (e.getErrors() != null) {
+            List<FieldError> fieldErrors = e.getErrors().getFieldErrors();
+            for (FieldError fieldError : fieldErrors) {
+                FieldErrorResponse fieldErrorResponse = FieldErrorResponse.from(fieldError);
+                fieldErrorResponse.setMessage(MessageUtils.message(fieldError));
+                fieldErrorResponses.add(fieldErrorResponse);
+            }
         }
 
         ErrorResponse errorResponse = new ErrorResponse(e.getMessage());

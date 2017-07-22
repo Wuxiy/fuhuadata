@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.customs.CustomsDataMapper">
+    <resultMap id="BaseResultMap" type="com.fuhuadata.domain.customs.CustomsData">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="cdate" jdbcType="DATE" property="cdate"/>
+        <result column="type" jdbcType="BIT" property="type"/>
+        <result column="customs_org" jdbcType="VARCHAR" property="customsOrg"/>
+        <result column="customs_area" jdbcType="VARCHAR" property="customsArea"/>
+        <result column="port" jdbcType="VARCHAR" property="port"/>
+        <result column="transit_country" jdbcType="VARCHAR" property="transitCountry"/>
+        <result column="dest_country_id" jdbcType="INTEGER" property="destCountryId"/>
+        <result column="origin_dest_country" jdbcType="VARCHAR" property="originDestCountry"/>
+        <result column="continent" jdbcType="VARCHAR" property="continent"/>
+        <result column="company_id" jdbcType="INTEGER" property="companyId"/>
+        <result column="declare_company" jdbcType="VARCHAR" property="declareCompany"/>
+        <result column="shipper_company" jdbcType="VARCHAR" property="shipperCompany"/>
+        <result column="operation_company" jdbcType="VARCHAR" property="operationCompany"/>
+        <result column="operation_com_code" jdbcType="VARCHAR" property="operationComCode"/>
+        <result column="product_market_location" jdbcType="VARCHAR" property="productMarketLocation"/>
+        <result column="customs_code" jdbcType="VARCHAR" property="customsCode"/>
+        <result column="product_id" jdbcType="INTEGER" property="productId"/>
+        <result column="product_name" jdbcType="VARCHAR" property="productName"/>
+        <result column="specifications" jdbcType="VARCHAR" property="specifications"/>
+        <result column="deal_method" jdbcType="VARCHAR" property="dealMethod"/>
+        <result column="declare_price" jdbcType="DECIMAL" property="declarePrice"/>
+        <result column="price_unit" jdbcType="VARCHAR" property="priceUnit"/>
+        <result column="declare_num" jdbcType="DECIMAL" property="declareNum"/>
+        <result column="declare_num_unit" jdbcType="VARCHAR" property="declareNumUnit"/>
+        <result column="total_price" jdbcType="DECIMAL" property="totalPrice"/>
+        <result column="legal_num" jdbcType="DECIMAL" property="legalNum"/>
+        <result column="legal_unit" jdbcType="VARCHAR" property="legalUnit"/>
+        <result column="dollar_price" jdbcType="DECIMAL" property="dollarPrice"/>
+        <result column="dollar_total" jdbcType="DECIMAL" property="dollarTotal"/>
+        <result column="dollar_crrency" jdbcType="VARCHAR" property="dollarCrrency"/>
+        <result column="gross_weight" jdbcType="DECIMAL" property="grossWeight"/>
+        <result column="net_weight" jdbcType="DECIMAL" property="netWeight"/>
+        <result column="weight_unit" jdbcType="VARCHAR" property="weightUnit"/>
+        <result column="trade_mode" jdbcType="VARCHAR" property="tradeMode"/>
+        <result column="transport_mode" jdbcType="VARCHAR" property="transportMode"/>
+        <result column="number_of_packages" jdbcType="DECIMAL" property="numberOfPackages"/>
+        <result column="packing_type" jdbcType="VARCHAR" property="packingType"/>
+        <result column="enterprise_nature" jdbcType="VARCHAR" property="enterpriseNature"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="telephone_number" jdbcType="VARCHAR" property="telephoneNumber"/>
+        <result column="fax" jdbcType="VARCHAR" property="fax"/>
+        <result column="post_code" jdbcType="VARCHAR" property="postCode"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="contact_man" jdbcType="VARCHAR" property="contactMan"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+
+    <sql id="BaseColumns">
+        cd.id,
+        cd.cdate,
+        cd.type,
+        cd.customs_org,
+        cd.customs_area,
+        cd.port,
+        cd.transit_country,
+        cd.dest_country_id,
+        cd.origin_dest_country,
+        cd.continent,
+        cd.company_id,
+        cd.declare_company,
+        cd.shipper_company,
+        cd.operation_company,
+        cd.operation_com_code,
+        cd.product_market_location,
+        cd.customs_code,
+        cd.product_id,
+        cd.product_name,
+        cd.specifications,
+        cd.deal_method,
+        cd.declare_price,
+        cd.price_unit,
+        cd.declare_num,
+        cd.declare_num_unit,
+        cd.total_price,
+        cd.legal_num,
+        cd.legal_unit,
+        cd.dollar_price,
+        cd.dollar_total,
+        cd.dollar_crrency,
+        cd.gross_weight,
+        cd.net_weight,
+        cd.weight_unit,
+        cd.trade_mode,
+        cd.transport_mode,
+        cd.number_of_packages,
+        cd.packing_type,
+        cd.enterprise_nature,
+        cd.address,
+        cd.telephone_number,
+        cd.fax,
+        cd.post_code,
+        cd.email,
+        cd.contact_man,
+        cd.create_time
+    </sql>
+
+    <sql id="FromTable">
+        from customs_data cd
+    </sql>
+
+    <insert id="saveCustomsData">
+        INSERT INTO `fuhuadata`.`customs_data` (
+        `cdate`,
+        `type`,
+        `customs_org`,
+        `customs_area`,
+        `port`,
+        `transit_country`,
+        `dest_country_id`,
+        `origin_dest_country`,
+        `continent`,
+        `declare_company`,
+        `company_id`,
+        `shipper_company`,
+        `operation_company`,
+        `operation_com_code`,
+        `product_market_location`,
+        `customs_code`,
+        `product_id`,
+        `product_name`,
+        `specifications`,
+        `deal_method`,
+        `declare_price`,
+        `price_unit`,
+        `declare_num`,
+        `declare_num_unit`,
+        `total_price`,
+        `legal_num`,
+        `legal_unit`,
+        `dollar_price`,
+        `dollar_total`,
+        `dollar_crrency`,
+        `gross_weight`,
+        `net_weight`,
+        `weight_unit`,
+        `trade_mode`,
+        `transport_mode`,
+        `number_of_packages`,
+        `packing_type`,
+        `enterprise_nature`,
+        `address`,
+        `telephone_number`,
+        `fax`,
+        `post_code`,
+        `email`,
+        `contact_man`
+        )
+        VALUES
+        (
+        #{cdate},
+        #{type},
+        #{customsOrg},
+        #{customsArea},
+        #{port},
+        #{transitCountry},
+        #{destCountryId},
+        #{originDestCountry},
+        #{continent},
+        #{declareCompany},
+        #{companyId},
+        #{shipperCompany},
+        #{operationCompany},
+        #{operationComCode},
+        #{productMarketLocation},
+        #{customsCode},
+        #{productId},
+        #{productName},
+        #{specifications},
+        #{dealMethod},
+        #{declarePrice},
+        #{priceUnit},
+        #{declareNum},
+        #{declareNumUnit},
+        #{totalPrice},
+        #{legalNum},
+        #{legalUnit},
+        #{dollarPrice},
+        #{dollarTotal},
+        #{dollarCrrency},
+        #{grossWeight},
+        #{netWeight},
+        #{weightUnit},
+        #{tradeMode},
+        #{transportMode},
+        #{numberOfPackages},
+        #{packingType},
+        #{enterpriseNature},
+        #{address},
+        #{telephoneNumber},
+        #{fax},
+        #{postCode},
+        #{email},
+        #{contactMan}
+        )
+    </insert>
+
+    <!-- 更新海关数据目的国id，默认Others的id=33 -->
+    <update id="updateCustomsCountryId">
+        update customs_data cd set cd.dest_country_id=(ifnull((select cct.id from customs_country cct where
+        cct.alias=cd.origin_dest_country), 33))
+    </update>
+
+    <!-- 更新海关数据公司id，默认others的id=2 -->
+    <update id="updateCustomsCompany">
+        update customs_data cd set cd.company_id=(ifnull((select ccp.pid from customs_company ccp where
+        ccp.name=cd.shipper_company), 2))
+    </update>
+
+    <delete id="deleteCustomsDataBetweenDate">
+        delete from customs_data
+        where cdate >= #{startDate} and cdate &lt; #{endDate}
+    </delete>
+
+    <select id="listCustomsData" resultType="com.fuhuadata.domain.customs.CustomsData" >
+
+    </select>
+
+    <sql id="statTypeSelect">
+        <if test="statType == 'dollar_total'">
+            sum(cd.dollar_total) as value
+        </if>
+        <if test="statType == 'dollar_price'">
+            sum(cd.dollar_price)/count(*) as value
+        </if>
+        <if test="statType == 'legal_num'">
+            sum(cd.legal_num) as value
+        </if>
+    </sql>
+
+    <sql id="statisticWhere">
+        <if test="categoryType != null and 'type' == categoryType">
+            and cp.`type_id`=#{categoryId}
+        </if>
+        <if test="categoryType != null and 'product' == categoryType">
+            and cd.product_id=#{categoryId}
+        </if>
+        <if test="startDate != null">
+            and cd.cdate >= #{startDate}
+        </if>
+        <if test="endDate != null">
+            and cd.cdate &lt; #{endDate}
+        </if>
+    </sql>
+
+    <select id="listCountryCustomsStatistics" resultType="com.fuhuadata.domain.echarts.PieData">
+        select
+        cct.id as id,
+        cct.name as name,
+        <include refid="statTypeSelect"/>
+        <include refid="FromTable"/>
+        inner join customs_country cct on cct.id=cd.dest_country_id
+        <if test="categoryType != null and 'type' == categoryType">
+            inner join customs_product cp on cp.`id`=cd.`product_id`
+        </if>
+        <where>
+            <include refid="statisticWhere"/>
+        </where>
+        group by cd.`dest_country_id`
+        order by cct.weight
+    </select>
+
+    <select id="listCompanyCustomsStatistics" resultType="com.fuhuadata.domain.echarts.PieData">
+        select
+        ccp.id as id,
+        ccp.name as name,
+        <include refid="statTypeSelect"/>
+        <include refid="FromTable"/>
+        inner join customs_company ccp on ccp.id=cd.company_id
+        <if test="categoryType != null and 'type' == categoryType">
+            inner join customs_product cp on cp.`id`=cd.`product_id`
+        </if>
+        <where>
+            <include refid="statisticWhere"/>
+        </where>
+        group by cd.`company_id`
+        order by ccp.weight
+    </select>
+
+    <select id="listCountryBarData" resultType="com.fuhuadata.domain.customs.BarData">
+        SELECT
+        cd.`dest_country_id` AS id,
+        YEAR(cd.`cdate`) year_flag,
+        <if test="timeType == 'month'">
+            MONTH(cd.`cdate`) month_flag,
+        </if>
+        <include refid="statTypeSelect"/>
+        <include refid="FromTable"/>
+        <if test="categoryType != null and 'type' == categoryType">
+            inner join customs_product cp on cp.`id`=cd.`product_id`
+        </if>
+        <where>
+            <include refid="statisticWhere"/>
+            <if test="statIds != null and !statIds.isEmpty()">
+                and cd.dest_country_id in
+                <foreach collection="statIds" item="statId" open="(" close=")" separator=",">
+                    #{statId}
+                </foreach>
+            </if>
+        </where>
+        GROUP BY cd.`dest_country_id`, year_flag
+        <if test="timeType == 'month'">
+            , month_flag
+        </if>
+    </select>
+
+    <select id="listCompanyBarData" resultType="com.fuhuadata.domain.customs.BarData">
+        SELECT
+        cd.`company_id` AS id,
+        YEAR(cd.`cdate`) year_flag,
+        <if test="timeType == 'month'">
+            MONTH(cd.`cdate`) month_flag,
+        </if>
+        <include refid="statTypeSelect"/>
+        <include refid="FromTable"/>
+        <if test="categoryType != null and 'type' == categoryType">
+            inner join customs_product cp on cp.`id`=cd.`product_id`
+        </if>
+        <where>
+            <include refid="statisticWhere"/>
+            <if test="statIds != null and !statIds.isEmpty()">
+                and cd.company_id in
+                <foreach collection="statIds" item="statId" open="(" close=")" separator=",">
+                    #{statId}
+                </foreach>
+            </if>
+        </where>
+        GROUP BY cd.`company_id`, year_flag
+        <if test="timeType == 'month'">
+            , month_flag
+        </if>
+    </select>
+
+    <select id="listCountryCompareData" resultType="com.fuhuadata.domain.customs.BarData">
+        SELECT
+        cd.`dest_country_id` AS id,
+        YEAR(cd.`cdate`) year_flag,
+        <if test="timeType == 'month'">
+            MONTH(cd.`cdate`) month_flag,
+        </if>
+        <include refid="statTypeSelect"/>
+        <include refid="FromTable"/>
+        <if test="categoryType != null and 'type' == categoryType">
+            inner join customs_product cp on cp.`id`=cd.`product_id`
+        </if>
+        <where>
+            <include refid="statisticWhere"/>
+            <if test="statIds != null and !statIds.isEmpty()">
+                and cd.dest_country_id in
+                <foreach collection="statIds" item="statId" open="(" close=")" separator=",">
+                    #{statId}
+                </foreach>
+            </if>
+            AND (
+            (
+            cd.`cdate` >= #{firstStartDate}
+            AND cd.`cdate` &lt;= #{firstEndDate}
+            )
+            OR (
+            cd.`cdate` >= #{secondStartDate}
+            AND cd.`cdate` &lt;= #{secondEndDate}
+            )
+            )
+        </where>
+        GROUP BY cd.`dest_country_id`, year_flag
+        <if test="timeType == 'month'">
+            , month_flag
+        </if>
+    </select>
+
+</mapper>

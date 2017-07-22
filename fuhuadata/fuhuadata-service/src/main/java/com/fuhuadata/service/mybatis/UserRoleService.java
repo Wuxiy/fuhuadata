@@ -41,17 +41,17 @@ public interface UserRoleService extends BaseService<UserRole, Integer> {
 
     /**
      * 获取用户关联角色id
-     * @param userId
+     * @param userCode
      * @return
      */
-    Set<Integer> getRoleIds(Integer userId);
+    Set<Integer> getRoleIds(String userCode);
 
     /**
-     * 获取角色关联用户ids
+     * 获取角色关联用户codes
      * @param roleId
-     * @return 去重后的用户ids
+     * @return 去重后的用户codes
      */
-    Set<Integer> listUserIds(Integer roleId);
+    Set<String> listUserCodes(Integer roleId);
 
     /**
      * 删除角色关联用户
@@ -68,8 +68,8 @@ public interface UserRoleService extends BaseService<UserRole, Integer> {
     /**
      * 删除角色下关联的用户
      * @param roleId
-     * @param userIds 删除的用户id
+     * @param userCodes 删除的用户id
      * @return
      */
-    int deleteUserRoles(Integer roleId, List<Integer> userIds);
+    int deleteUserRoles(Integer roleId, List<String> userCodes);
 }

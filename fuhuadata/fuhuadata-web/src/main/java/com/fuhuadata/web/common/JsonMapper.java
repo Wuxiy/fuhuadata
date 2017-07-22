@@ -11,6 +11,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.fasterxml.jackson.datatype.guava.GuavaModule;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringEscapeUtils;
@@ -36,6 +40,14 @@ public class JsonMapper extends ObjectMapper {
     }
 
     public JsonMapper(Include include) {
+        // 注册java8 ParameterNamesModule
+        this.registerModule(new ParameterNamesModule());
+        // 注册java8 optional类型module
+        this.registerModule(new Jdk8Module());
+        // 注册java8 datetime(jsr310) module
+        this.registerModule(new JavaTimeModule());
+        // 注册google guava module
+        this.registerModule(new GuavaModule());
         // 设置输出时包含属性的风格
         if (include != null) {
             this.setSerializationInclusion(include);

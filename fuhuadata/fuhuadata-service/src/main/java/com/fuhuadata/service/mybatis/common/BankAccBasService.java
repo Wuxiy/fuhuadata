@@ -40,4 +40,12 @@ public interface BankAccBasService extends BaseService<BankAccBas, Integer> {
      * @return
      */
     List<BankAccBas> saveOrUpdateBanks(List<BankAccBas> banks);
+
+    /**
+     * 更新银行
+     * @param bankId
+     * @param pkBank
+     * @return
+     */
+    BankAccBas updateBankPk(Integer bankId, String pkBank);
 }

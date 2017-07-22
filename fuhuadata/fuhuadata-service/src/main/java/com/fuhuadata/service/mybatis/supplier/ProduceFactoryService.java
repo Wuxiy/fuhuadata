@@ -27,6 +27,13 @@ public interface ProduceFactoryService extends BaseService<ProduceFactory, Integ
 
     ProduceFactory getFactory(Integer factoryId);
 
+    /**
+     * 获取 factoryInfo，包括银行账号和联系人
+     * @param factoryId
+     * @return
+     */
+    ProduceFactory getFactoryInfo(Integer factoryId);
+
     ProduceFactory saveFactory(ProduceFactoryInfo factoryInfo);
 
     ProduceFactory updateFactory(ProduceFactoryInfo factoryInfo);
@@ -36,4 +43,13 @@ public interface ProduceFactoryService extends BaseService<ProduceFactory, Integ
     void updateFactoryEvaScore(String pkSupplier, Double totalScore);
 
     List<FactoryOrder> listFactoryOrders(BusinessBuyContractQuery query);
+
+    /**
+     * 删除 factoryInfo，包括银行账号和联系人
+     * @param factoryId
+     * @return
+     */
+    ProduceFactory deleteFactoryInfo(Integer factoryId);
+
+    ProduceFactory updateFactoryPk(Integer factoryId, String pkFactory);
 }

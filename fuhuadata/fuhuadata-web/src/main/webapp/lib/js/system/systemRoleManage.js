@@ -279,7 +279,7 @@ CRM.systemRoleManage.returnUserTableData = function (data) {
     $.each(data, function (i, item) {
         var obj = {
             id: item.id,
-            userId: item.userId,
+            userId: item.userCode,
             name: item.userName,
             beginTime: item.beginTime ? item.beginTime.split(/\s/)[0] : '',
             endTime: item.endTime ? item.endTime.split(/\s/)[0] : '',
@@ -963,7 +963,7 @@ $(function () {
         });
     }
 
-    function addUsersForRole(userIds, deptIds) {
+    function addUsersForRole(userCodes, deptIds) {
         var page = CRM.systemRoleManage,
             roleId = page.roleId.val();
 
@@ -972,7 +972,7 @@ $(function () {
             type: 'POST',
             data: {
                 roleId: roleId,
-                userIds: userIds.join(","),
+                userCodes: userCodes.join(","),
                 deptIds: deptIds.join(",")
             },
             callback: function (data) {
@@ -982,7 +982,7 @@ $(function () {
     }
 
     // 角色取消关联用户
-    function deleteUsersForRole(userIds) {
+    function deleteUsersForRole(userCodes) {
         var page = CRM.systemRoleManage,
             roleId = page.roleId.val();
 
@@ -991,7 +991,7 @@ $(function () {
             type: 'POST',
             data: {
                 roleId: roleId,
-                userIds: userIds.join(",")
+                userCodes: userCodes.join(",")
             },
             callback: function (data) {
                 refreshUserTree(roleId);
@@ -1006,19 +1006,19 @@ $(function () {
             leftTree = $.fn.zTree.getZTreeObj(page.sModL.attr('id')),
             checkedNodes = leftTree.getCheckedNodes();
 
-        var userIds = [],
+        var userCodes = [],
             deptIds = [];
 
         $.each(checkedNodes, function (idx, item) {
             console.log(item);
             if (item.type === 3) {
-                userIds.push(item.cid);
+                userCodes.push(item.code);
             } else if (item.type === 2 && !item.zAsync) {
                 deptIds.push(item.cid);
             }
         });
 
-        addUsersForRole(userIds, deptIds);
+        addUsersForRole(userCodes, deptIds);
     });
 
     // 用户删除节点
@@ -1028,14 +1028,14 @@ $(function () {
             rightTree = $.fn.zTree.getZTreeObj(page.sModR.attr('id')),
             checkedNodes = rightTree.getCheckedNodes();
 
-        var userIds = [];
+        var userCodes = [];
         $.each(checkedNodes, function (idx, item) {
             if (item.type === 3) {
-                userIds.push(item.cid);
+                userCodes.push(item.code);
             }
         });
 
-        deleteUsersForRole(userIds);
+        deleteUsersForRole(userCodes);
     });
 
     $('#multiple').on('click.user.save', '#saveUser', function (e) {

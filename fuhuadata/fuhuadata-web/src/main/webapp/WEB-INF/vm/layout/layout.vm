@@ -9,6 +9,9 @@
     <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/css/fileinput.css" />
     <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/js/pagination/pagination.css" />
+    <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/js/select/css/bootstrap-select.css" />
+    <link rel="stylesheet" type="text/css" href="${request.contextPath}/lib/js/daterangepicker/daterangepicker.css" />
+
 
     <script src="${request.contextPath}/lib/js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
     <script src="${request.contextPath}/lib/js/jquery-migrate-1.4.1.min.js" type="text/javascript" charset="utf-8"></script>
@@ -28,6 +31,9 @@
     <script src="${request.contextPath}/lib/js/jquery-lang.js" type="text/javascript" charset="utf-8"></script>
     <script src="${request.contextPath}/lib/js/langpack/nonDynamic.js" type="text/javascript" charset="utf-8"></script>
     <script src="${request.contextPath}/lib/js/jedate.js" type="text/javascript" charset="utf-8"></script>
+    <script src="${request.contextPath}/lib/js/select/js/bootstrap-select.js" type="text/javascript" charset="utf-8"></script>
+    <script src="${request.contextPath}/lib/js/daterangepicker/moment.js" type="text/javascript" charset="utf-8"></script>
+    <script src="${request.contextPath}/lib/js/daterangepicker/daterangepicker.js" type="text/javascript" charset="utf-8"></script>
 ##    <script src="${request.contextPath}/lib/js/datetime.js" type="text/javascript" charset="utf-8"></script>
 
     <script type="text/javascript">
@@ -67,22 +73,39 @@
     #if ($!nolayout)
         $screen_content
     #else
-    <div class="container-fluid">
-
-      <!--头部-->
-        #parse("layout/header.vm")
-
-      <!--主要内容-->
-      <div class="clearfix content shadow-out">
-
-        <!--容器-->
-          $screen_content
-      </div>
+    <!--隔离图层-->
+    <div class="hidden" id="masking" style="position: fixed;top:0;bottom:0;left:0;right:0;background-color: rgba(0,0,0,.5);z-index: 9999999">
+        <div style="margin: 25% auto;text-align: center;color: #fff;font-size: 20px">
+            <img src="/lib/img/svg/tail-spin.svg" alt="loading">
+            <p name="describe">Loading...</p>
+        </div>
     </div>
-
-    <!--脚部-->
+    <script>
+        var masking = {
+            target:'masking',
+            showLoading:function (text) {
+                var self = this;
+                $('#'+self.target)
+                        .removeClass('hidden')
+                        .find('[name="describe"]').text(text?text:'Loading...');
+            },
+            hideLoading:function () {
+                var self = this;
+                $('#'+self.target).addClass('hidden');
+            }
+        };
+    </script>
+    <!--头部-->
+    <div class="container-fluid">
+        <!--头部-->
+        #parse("layout/header.vm")
+        <div class="clearfix content shadow-out">
+            <!--主要内容-->
+            $screen_content
+        </div>
+    </div>
+        <!--脚部-->
         #parse('layout/footer.vm')
-
     <script>
         $(document).on('click.close.nav.open', 'body', function (e) {
             var thisEl = e.target;

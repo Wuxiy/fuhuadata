@@ -15,24 +15,24 @@ public interface AreaClService extends BaseTreeableService<AreaCl, String> {
 
     /**
      * 获取用户关联地区树
-     * @param userId
+     * @param userCode
      * @return
      */
-    List<AreaClVo> getAreaTreeByUserId(Integer userId);
+    List<AreaClVo> getAreaTreeByUserCode(String userCode);
 
     /**
      * 获取用户关联地区 id
-     * @param userId
+     * @param userCode
      * @return
      */
-    List<AreaCl> getAreasByUserId(Integer userId);
+    List<AreaCl> getAreasByUserCode(String userCode);
 
     /**
      *
-     * @param userId
+     * @param userCode
      * @return
      */
-    List<AreaClVo> getAreaNodesByUserId(Integer userId);
+    List<AreaClVo> getAreaNodesByUserCode(String userCode);
 
     /**
      * 获取子节点的所有祖先节点

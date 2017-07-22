@@ -33,12 +33,12 @@
         INNER JOIN p_user_area us_ar ON us_ar.area_id=ac.pk_areacl
     </sql>
 
-    <select id="listAreasByUserId" resultMap="BaseResultMap">
+    <select id="listAreasByUserCode" resultMap="BaseResultMap">
         SELECT
         <include refid="BaseColumns"/>
         <include refid="FromTable"/>
         <include refid="InnerJoinUserArea"/>
-        WHERE us_ar.user_id=#{userId}
+        WHERE us_ar.user_code=#{userCode}
     </select>
 
     <select id="listForeignAreas" resultMap="BaseResultMap">

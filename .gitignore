@@ -1,12 +1,2 @@
-
-.DS_Store
-*/.DS_Store
-fuhuadata/.classpath
-fuhuadata/.*
-fuhuadata/.idea/
-*.iml
-fuhuadata/target/
-target/
+# Created by .ignore support plugin (hsz.mobi)
 .idea/
-
-rebel.xml

@@ -48,7 +48,7 @@
 
     <sql id="roleJoins">
         LEFT JOIN p_role p ON p.role_id=r.parent_id
-        INNER JOIN p_organization o ON o.code = r.org_code
+        LEFT JOIN p_organization o ON o.code = r.org_code
     </sql>
 
     <sql id="userJoin">

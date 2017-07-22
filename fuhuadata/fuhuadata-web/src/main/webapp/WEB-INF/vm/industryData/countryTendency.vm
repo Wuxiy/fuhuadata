@@ -1,0 +1,152 @@
+<div class="nav-deputy shadow-out clearfix">
+    #breadcrumb()
+</div>
+<div class="dashboard-wrapper">
+    <div class="row">
+        <div class="col-xs-2">
+            #set($items = [
+            {
+                'id':'c_one',
+                'title':'占比图',
+                'nodes':[{
+                'name':'出口国家分析',
+                'url':'/customs/data'
+            },{
+                'name':'出口企业分析',
+                'url':'/customs/data/pie/company/vm'
+            }]
+            },
+            {
+                'id':'c_two',
+                'title':'趋势图',
+                'nodes':[{
+                'name':'出口国家分析',
+                'url':'/customs/data/bar/countries/vm'
+            },{
+                'name':'出口企业分析',
+                'url':'/customs/data/bar/companies/vm'
+            }]
+            },
+            {
+                'id':'c_three',
+                'title':'同比图',
+                'nodes':[{
+                'name':'出口国家分析',
+                'url':'/customs/data/compare/companies/vm'
+            }]
+            }])
+            #set($defaut = {
+            'id':'c_two',
+            'node':'出口国家分析'
+            })
+            #collapseNav($items $defaut)
+        </div>
+        <div class="col-xs-10 tab-content">
+            <div id="cooperative" class="tab-pane fade in active">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <button class="panel-handing-btn pull-right btn btn-xs
+                         btn-primary" type="button" lang="zh"
+                                data-target="#uploadFile" data-toggle="modal"
+                        >导入表格</button>
+                        <h3 class="panel-title" lang="zh">出口国家分析</h3>
+                    </div>
+                    <div class="panel-body clearfix">
+                        <!--搜索&筛选控件-->
+                        <div class="form-horizontal">
+                            <div class="col-xs-12">
+                                <form class="form-group" id="search_data" onkeypress="stopFormSubmit(event)">
+                                    <div class="col-xs-1">
+                                        <select class="form-control" name="timeType">
+                                            <option value="month" lang="zh">按月份</option>
+                                            <option value="year" lang="zh">按年份</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <input class="form-control" name="daterange" type="text">
+                                        <i class="glyphicon glyphicon-calendar icon-calendar"></i>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <select class="selectpicker form-control" name="countries"
+                                                multiple data-am-selected data-live-search="true"
+                                                data-size="5" data-actions-box="true"
+                                                data-selected-text-format="count>3"
+                                                title="Countries"
+                                                data-live-search-placeholder="Search Country">
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <select class="form-control" name="statType">
+                                            <option value="legal_num" lang="zh">法定数量</option>
+##                                            <option value="dollar_price" lang="zh">美元单价</option>
+                                            <option value="dollar_total" lang="zh">美元总价</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <select class="form-control" name="categoryType">
+                                            <option value="type" lang="zh">按类型</option>
+                                            <option value="product" lang="zh">按产品</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <select class="form-control" name="categoryId"></select>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <label class="checkbox"><input name="unitPrice" type="checkbox" value="dollar_price">美元单价</label>
+                                    </div>
+                                </form>
+                            </div>
+                            <div id="main" class="col-xs-12" style="height: 700px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--上传模态框-->
+<div class="modal fade" id="uploadFile" tabindex="-1"  aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--表单-->
+                <form class="form-horizontal well" id="customsForm" enctype="multipart/form-data" style="margin-bottom: 0;">
+                    <div class="form-group">
+                        <label class="col-xs-12" for="">选择海关数据所属时间:</label>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <input class="form-control" name="startDate" type="date">
+                        </div>
+                        <div class="col-xs-6">
+                            <input class="form-control" name="endDate" type="date">
+                        </div>
+                    </div>
+                    <div class="form-group"></div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input name="excel" type="file">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-4 col-xs-offset-2">
+                        <button class="btn btn-block btn-default" data-dismiss="modal" type="button" lang="zh">取消</button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button class="btn btn-block btn-primary" name="save" type="button" lang="zh">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/echarts/echarts.js"></script>
+<script type="text/javascript" language="javascript" src="${request.contextPath}/lib/js/industryData/countryTendency.js"></script>

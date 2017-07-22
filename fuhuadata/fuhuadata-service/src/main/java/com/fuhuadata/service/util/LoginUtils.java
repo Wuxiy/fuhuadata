@@ -43,6 +43,14 @@ public class LoginUtils {
     }
 
     /**
+     * 获取登录用户code
+     * @return
+     */
+    public static String getLoginCode() {
+        return getPrincipal().getCode();
+    }
+
+    /**
      * 获取登录用户名称
      * @return
      */

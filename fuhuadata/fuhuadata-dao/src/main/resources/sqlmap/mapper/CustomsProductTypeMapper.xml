@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.customs.CustomsProductTypeMapper">
+  <resultMap id="BaseResultMap" type="com.fuhuadata.domain.customs.CustomsProductType">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="cpt_id" jdbcType="INTEGER" property="id" />
+    <result column="cpt_name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  
+  <sql id="BaseColumns">
+    cpt.id as cpt.id, 
+    cpt.name as cpt.name
+  </sql>
+</mapper>

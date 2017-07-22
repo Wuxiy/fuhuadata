@@ -26,6 +26,12 @@ public class UserRole extends BaseEntity<Integer> {
     @Column(name = "user_id")
     private Integer userId;
 
+    /**
+     * 用户code
+     */
+    @Column(name = "user_code")
+    private String userCode;
+
     @Transient
     private UserAccount user;
 
@@ -245,5 +251,13 @@ public class UserRole extends BaseEntity<Integer> {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
     }
 }

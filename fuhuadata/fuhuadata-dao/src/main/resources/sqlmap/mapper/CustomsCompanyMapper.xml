@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.dao.mapper.customs.CustomsCompanyMapper">
+    <resultMap id="BaseResultMap" type="com.fuhuadata.domain.customs.CustomsCompany">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="ccp_id" jdbcType="INTEGER" property="id"/>
+        <result column="ccp_name" jdbcType="VARCHAR" property="name"/>
+        <result column="ccp_pid" jdbcType="INTEGER" property="pid"/>
+        <result column="weight" jdbcType="INTEGER" property="weight"/>
+    </resultMap>
+
+    <sql id="BaseColumns">
+        ccp.id as id,
+        ccp.name as name,
+        ccp.pid as pid,
+        ccp.weight as weight
+    </sql>
+</mapper>
