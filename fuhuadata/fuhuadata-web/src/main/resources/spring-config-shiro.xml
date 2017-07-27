@@ -3,7 +3,6 @@
        xmlns:util="http://www.springframework.org/schema/util"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
     <!-- Ehcache cache manager -->
@@ -104,6 +103,12 @@
         <property name="passwordChangeUrl" value="${shiro.user.password.url}"/>
     </bean>
 
+    <!-- 外勤系统验证登录过滤器 -->
+    <bean id="outworkerAuthenticationFilter" class="com.fuhuadata.shiro.web.filter.api.OutworkerSystemJwtFilter">
+        <property name="apiWhiteUrls" value="#{'${outworker.api.whiteUrls}'.split(',')}"/>
+        <property name="loginUrl" value="${outworker.api.loginUrl}"/>
+    </bean>
+
     <!-- Shiro的Web过滤器 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
@@ -113,10 +118,12 @@
                 <entry key="authc" value-ref="formAuthenticationFilter"/>
                 <entry key="logout" value-ref="logoutFilter"/>
                 <entry key="password" value-ref="changePasswordFilter"/>
+                <entry key="api" value-ref="outworkerAuthenticationFilter"/>
             </util:map>
         </property>
         <property name="filterChainDefinitions">
             <value>
+                /outworker/** = api
                 /lib/** = anon
                 /fileBase/** = anon
                 /order/status = anon

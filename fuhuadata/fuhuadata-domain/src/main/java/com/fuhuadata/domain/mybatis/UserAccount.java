@@ -1,6 +1,7 @@
 package com.fuhuadata.domain.mybatis;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -25,6 +26,13 @@ public class UserAccount extends BaseEntity<Integer> {
     private Integer id;
 
     /**
+     * 用户类型：1=外销用户，2=内销用户
+     */
+    @JsonIgnore
+    @Column(name = "user_type")
+    private Short userType;
+
+    /**
      * 登录名
      */
     @Column(name = "login_name")
@@ -33,6 +41,7 @@ public class UserAccount extends BaseEntity<Integer> {
     /**
      * 密码
      */
+    @JsonIgnore
     @Column(name = "login_password")
     private String loginPassword;
 
@@ -82,6 +91,7 @@ public class UserAccount extends BaseEntity<Integer> {
     @Column(name = "last_modify_time")
     private Date lastModifyTime;
 
+    @JsonIgnore
     @Column(name = "last_password")
     private String lastPassword;
 
@@ -389,5 +399,13 @@ public class UserAccount extends BaseEntity<Integer> {
 
     public void setLastPassword(String lastPassword) {
         this.lastPassword = lastPassword;
+    }
+
+    public Short getUserType() {
+        return userType;
+    }
+
+    public void setUserType(Short userType) {
+        this.userType = userType;
     }
 }

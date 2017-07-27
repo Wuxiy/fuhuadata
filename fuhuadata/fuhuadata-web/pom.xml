@@ -157,6 +157,11 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
         </dependency>
+        <!-- jwt -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+        </dependency>
 
         <!--<dependency>
             <groupId>javax.ws.rs</groupId>
@@ -234,45 +239,26 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <fuhua.log.level>DEBUG</fuhua.log.level>
-                <system.log.path>w:/fuhualog</system.log.path>
-                <fuhua.log.additivity>true</fuhua.log.additivity>
-                <fuhua.struts.devMode>true</fuhua.struts.devMode>
-                <fuhua.domain.name>data.fuhua.com</fuhua.domain.name>
-                <jdsmy.jdbc.datasource.type>dbcp</jdsmy.jdbc.datasource.type>
-                <jdsmy.jdbc.driver>com.mysql.jdbc.Driver</jdsmy.jdbc.driver>
-                <jdsmy.jdbc.url>
-                    <![CDATA[jdbc:mysql://192.168.30.120:3306/fuhuadata?useUnicode=true&amp;characterEncoding=UTF8]]>
-                </jdsmy.jdbc.url>
-                <jdsmy.jdbc.username>root</jdsmy.jdbc.username>
-                <jdsmy.jdbc.password>root</jdsmy.jdbc.password>
-
+                <!-- tomcat 部署地址 -->
                 <tomcat.deploy.url>http://localhost:8080/manager/text</tomcat.deploy.url>
                 <tomcat.server.name>tomcatServer</tomcat.server.name>
-
-                <!--.......................passport相关开始....................... -->
-                <!-- 前台登录cookie名 -->
-                <fuhua.login.cookie.name>_fuhua_</fuhua.login.cookie.name>
-                <!-- 前台登录cookie域名 -->
-                <fuhua.login.cookie.domain>data.fuhua.com</fuhua.login.cookie.domain>
-                <!-- 前台cookie密钥 -->
-                <fuhua.cookie.key>xLyhSVcQGix62o+t2fjZyx+bC+zQZCl2</fuhua.cookie.key>
-                <!-- 超时时间 -->
-                <fuhua.session.timeout>3600</fuhua.session.timeout>
-                <!-- 解密密钥 -->
-                <fuhua.passport.login.auth.key>8B6697227CBCA902B1A0925D40FAA00B353F2DF4359D2099
-                </fuhua.passport.login.auth.key>
-                <fuhua.login.domain.name>passport.fuhua.com</fuhua.login.domain.name>
-                <!-- 登录地址 -->
-                <fuhua.login.address>http://${fuhua.login.domain.name}/login/login.jsp</fuhua.login.address>
-                <!--............................. passport相关结束...................... -->
             </properties>
         </profile>
 
         <profile>
             <id>test</id>
             <properties>
-                <tomcat.deplocy.url>http://localhost:8080/manager/text</tomcat.deplocy.url>
+                <!-- tomcat 部署地址 -->
+                <tomcat.deploy.url>http://localhost:8080/manager/text</tomcat.deploy.url>
+                <tomcat.server.name>tomcatServer</tomcat.server.name>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>production</id>
+            <properties>
+                <!-- tomcat 部署地址 -->
+                <tomcat.deploy.url>http://localhost:8080/manager/text</tomcat.deploy.url>
                 <tomcat.server.name>tomcatServer</tomcat.server.name>
             </properties>
         </profile>

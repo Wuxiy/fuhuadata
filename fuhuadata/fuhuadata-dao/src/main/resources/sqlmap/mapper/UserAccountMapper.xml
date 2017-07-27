@@ -6,6 +6,7 @@
           WARNING - @mbg.generated
         -->
         <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_type" jdbcType="TINYINT" property="userType"/>
         <result column="login_name" jdbcType="VARCHAR" property="loginName"/>
         <result column="login_password" jdbcType="VARCHAR" property="loginPassword"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
@@ -36,6 +37,7 @@
     <!-- p_user_account 缩写 ua -->
     <sql id="BaseColumns">
         ua.id,
+        ua.user_type,
         ua.login_name,
         ua.name,
         ua.mobile,
@@ -56,6 +58,7 @@
     <!-- 关联查询前缀 user -->
     <sql id="PrefixColumns">
         ua.id user_id,
+        ua.user_type user_user_type,
         ua.login_name user_login_name,
         ua.login_password user_login_password,
         ua.name user_name,

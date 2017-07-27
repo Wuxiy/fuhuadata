@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuhuadata.homesales.user.dao.AreaMapper">
+  <resultMap id="BaseResultMap" type="com.fuhuadata.homesales.user.domain.Area">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="parent_ids" jdbcType="VARCHAR" property="parentIds" />
+    <result column="weight" jdbcType="INTEGER" property="weight" />
+  </resultMap>
+  
+  <sql id="BaseColumns">
+    id, 
+    name, 
+    parent_id, 
+    parent_ids, 
+    weight
+  </sql>
+</mapper>

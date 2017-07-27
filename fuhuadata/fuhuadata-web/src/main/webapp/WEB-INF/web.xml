@@ -16,10 +16,12 @@
     <!-- spring config -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>
-            classpath:spring-config.xml
-        </param-value>
+		<param-value>classpath:spring-config.xml</param-value>
 	</context-param>
+    <context-param>
+        <param-name>spring.profiles.default</param-name>
+        <param-value>production</param-value>
+    </context-param>
 	
 	<!-- 过滤编码方式，防止乱码 -->  
 	<filter>

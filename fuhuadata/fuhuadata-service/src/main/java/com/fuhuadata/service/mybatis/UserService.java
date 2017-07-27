@@ -24,6 +24,13 @@ public interface UserService extends BaseService<UserAccount, Integer> {
     List<UserAccount> listUserByDept(String deptId);
 
     /**
+     * 根据codes获取用户
+     * @param codes
+     * @return
+     */
+    List<UserAccount> listUserByUserCodes(List<String> codes);
+
+    /**
      * 获取某部门下的用户
      * @param deptId
      * @return
