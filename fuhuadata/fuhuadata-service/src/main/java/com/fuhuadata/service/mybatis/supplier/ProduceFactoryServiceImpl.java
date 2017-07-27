@@ -12,6 +12,7 @@ import com.fuhuadata.domain.supplier.ProduceFactory;
 import com.fuhuadata.domain.supplier.ProduceFactoryInfo;
 import com.fuhuadata.domain.supplier.ProduceFactoryQuery;
 import com.fuhuadata.manager.NCExchange.FactoryInfoToNC;
+import com.fuhuadata.service.exception.ServiceException;
 import com.fuhuadata.service.impl.mybatis.BaseServiceImpl;
 import com.fuhuadata.service.mybatis.OrganizationService;
 import com.fuhuadata.service.mybatis.common.BankAccBasService;
@@ -167,7 +168,13 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
         factory.setLinkmen(linkmen);
 
         // 同步到 NC
-        Map<String,HashMap> mapMap=factoryInfoToNC.sendFactoryInfo(factory);
+        Map<String,HashMap> mapMap= null;
+        try {
+            mapMap = factoryInfoToNC.sendFactoryInfo(factory);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ServiceException("nc同步失败", e);
+        }
         Map<Integer,String> factoryPK=mapMap.get("factory");
         if (factoryPK!=null){
             this.updateFactoryPk(factoryId,factoryPK.get(factoryId));

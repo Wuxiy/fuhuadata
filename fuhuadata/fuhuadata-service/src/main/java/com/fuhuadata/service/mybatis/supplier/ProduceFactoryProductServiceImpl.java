@@ -15,6 +15,7 @@ import tk.mybatis.mapper.entity.Example;
 import javax.annotation.Resource;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -84,7 +85,7 @@ public class ProduceFactoryProductServiceImpl extends BaseServiceImpl<ProduceFac
     private void productsToNc(ProduceFactoryProduct bdProduct) {
         // TODO 同步到NC
         try {
-            factoryProductToNC.sendFactoryProduct(Lists.newArrayList(bdProduct));
+            Map<Integer,String> pkMap=factoryProductToNC.sendFactoryProduct(Lists.newArrayList(bdProduct));
         } catch (Exception e) {
             throw new ServiceException("加工厂产品同步NC出错", e);
         }
