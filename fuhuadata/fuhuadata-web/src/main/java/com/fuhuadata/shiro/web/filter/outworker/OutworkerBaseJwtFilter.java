@@ -1,6 +1,5 @@
-package com.fuhuadata.shiro.web.filter.api;
+package com.fuhuadata.shiro.web.filter.outworker;
 
-import com.alibaba.fastjson.JSON;
 import com.fuhuadata.domain.query.Result;
 import com.fuhuadata.outworker.jwt.JwtService;
 import io.jsonwebtoken.Claims;
@@ -11,16 +10,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.AntPathMatcher;
-import org.springframework.util.MimeTypeUtils;
 import org.springframework.util.PathMatcher;
 
-import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +24,7 @@ import java.util.List;
  * <p>User: wangjie
  * <p>Date: 7/24/2017
  */
-public class OutworkerSystemJwtFilter extends AccessControlFilter {
+public class OutworkerBaseJwtFilter extends AccessControlFilter {
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -40,8 +36,7 @@ public class OutworkerSystemJwtFilter extends AccessControlFilter {
 
     private List<String> apiWhiteUrls = new ArrayList<>();
 
-    @Resource
-    private JwtService jwtService;
+    private JwtService appJwtService;
 
     public String getTokenHeaderName() {
         return tokenHeaderName;
@@ -57,6 +52,10 @@ public class OutworkerSystemJwtFilter extends AccessControlFilter {
 
     public void setApiWhiteUrls(List<String> apiWhiteUrls) {
         this.apiWhiteUrls = apiWhiteUrls;
+    }
+
+    public void setAppJwtService(JwtService appJwtService) {
+        this.appJwtService = appJwtService;
     }
 
     @Override
@@ -101,7 +100,7 @@ public class OutworkerSystemJwtFilter extends AccessControlFilter {
         // 存在 jwt token，验证其合法性
         Claims claimsJws;
         try {
-            claimsJws = jwtService.parseJwt(jwt);
+            claimsJws = appJwtService.parseJwt(jwt);
         } catch (Exception e) {// 解析失败
             logger.error("jwt解析失败,登录失败", e);
             Result<String> result = Result.newResult(false);
@@ -111,28 +110,26 @@ public class OutworkerSystemJwtFilter extends AccessControlFilter {
             return false;
         }
 
-        return true;
+        return onLoginSuccess(claimsJws, httpRequest, httpResponse);
+    }
 
+    protected boolean onLoginSuccess(Claims claims, HttpServletRequest request,
+                                     HttpServletResponse response) {
+        return true;
     }
 
     private void writeAsJson(HttpServletResponse response, HttpStatus httpStatus, Object result) {
 
         try {
-            response.setCharacterEncoding("utf-8");
-            response.setContentType(MimeTypeUtils.APPLICATION_JSON_VALUE);
-            response.setStatus(httpStatus.value());
-            PrintWriter writer = response.getWriter();
-            writer.print(JSON.toJSONString(result));
-            writer.flush();
+            com.fuhuadata.web.util.WebUtils.writeStatusResponse(response, httpStatus, result);
         } catch (IOException e) {
+            logger.error("写入 response 失败", e);
             throw new RuntimeException(e);
         }
-
     }
 
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
         return false;
     }
-
 }

@@ -86,6 +86,13 @@ public interface UserService extends BaseService<UserAccount, Integer> {
      */
     UserAccount getUserByCode(String code);
 
+    /**
+     * 根据 refresh_token 获取用户
+     * @param refreshToken
+     * @return
+     */
+    UserAccount getUserByRefreshToken(String refreshToken);
+
     Optional<UserAccount> getUserOptByCode(String code);
 
     UserAccount login(String loginName, String password);

@@ -16,12 +16,27 @@ public class User extends UserAccount {
      */
     private Integer userPosition;
 
+    /**
+     * 用户accessToken
+     */
+    private String accessToken;
+
+    private String refreshtoken;
+
     public Integer getUserPosition() {
         return userPosition;
     }
 
     public void setUserPosition(Integer userPosition) {
         this.userPosition = userPosition;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 
     public static User of(UserAccount userAccount) {
@@ -34,5 +49,13 @@ public class User extends UserAccount {
         }
 
         return user;
+    }
+
+    public String getRefreshtoken() {
+        return refreshtoken;
+    }
+
+    public void setRefreshtoken(String refreshtoken) {
+        this.refreshtoken = refreshtoken;
     }
 }

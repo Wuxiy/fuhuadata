@@ -128,6 +128,13 @@ public class UserAccount extends BaseEntity<Integer> {
     private Integer loginCount;
 
     /**
+     * refresh token
+     */
+    @JsonIgnore
+    @Column(name = "refresh_token")
+    private String refreshToken;
+
+    /**
      * 地区
      */
     @Transient
@@ -407,5 +414,13 @@ public class UserAccount extends BaseEntity<Integer> {
 
     public void setUserType(Short userType) {
         this.userType = userType;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(String refreshtoken) {
+        this.refreshToken = refreshtoken;
     }
 }

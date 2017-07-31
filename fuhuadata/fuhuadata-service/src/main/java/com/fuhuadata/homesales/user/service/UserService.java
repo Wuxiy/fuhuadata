@@ -41,4 +41,10 @@ public interface UserService {
      * @return
      */
     boolean isLead(User user);
+
+    /**
+     * 设置 user 是否是领导
+     * @param user
+     */
+    void setLeader(User user);
 }

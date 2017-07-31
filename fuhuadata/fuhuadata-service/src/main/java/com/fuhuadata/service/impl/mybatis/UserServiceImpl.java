@@ -270,6 +270,19 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
     }
 
     @Override
+    public UserAccount getUserByRefreshToken(String refreshToken) {
+
+        if (StringUtils.isEmpty(refreshToken)) {
+            return null;
+        }
+
+        UserAccount userAccount = newEntity();
+        userAccount.setRefreshToken(refreshToken);
+
+        return getProxyUserService().get(userAccount);
+    }
+
+    @Override
     public Optional<UserAccount> getUserOptByCode(String code) {
 
         return Optional.ofNullable(getProxyUserService().getUserByCode(code));

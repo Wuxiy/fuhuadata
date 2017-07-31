@@ -122,4 +122,17 @@ public class UserServiceImpl implements UserService {
 
         return false;
     }
+
+    @Override
+    public void setLeader(User user) {
+
+        // 设置是否是领导
+        if (user != null) {
+            if (isLead(user)) {
+                user.setUserPosition(1);
+            } else {
+                user.setUserPosition(2);
+            }
+        }
+    }
 }

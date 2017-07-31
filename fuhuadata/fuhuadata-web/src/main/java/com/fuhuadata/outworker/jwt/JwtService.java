@@ -5,8 +5,6 @@ import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.crypto.SecretKey;
@@ -22,13 +20,19 @@ import java.util.Date;
  * <p>User: wangjie
  * <p>Date: 7/24/2017
  */
-@Component
 public class JwtService {
 
-    @Value("${outworker.api.jwt.secret}")
     private String secret;
 
     private SecretKey secretKey = null;
+
+    public void setSecret(String secret) {
+        this.secret = secret;
+    }
+
+    public String getSecret() {
+        return secret;
+    }
 
     public SecretKey generateKey() {
 

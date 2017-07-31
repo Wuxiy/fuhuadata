@@ -104,9 +104,17 @@
     </bean>
 
     <!-- 外勤系统验证登录过滤器 -->
-    <bean id="outworkerAuthenticationFilter" class="com.fuhuadata.shiro.web.filter.api.OutworkerSystemJwtFilter">
+    <bean id="outworkerApiAuthFilter" class="com.fuhuadata.shiro.web.filter.outworker.OutworkerApiJwtFilter">
         <property name="apiWhiteUrls" value="#{'${outworker.api.whiteUrls}'.split(',')}"/>
+        <property name="appJwtService" ref="apiJwtService"/>
         <property name="loginUrl" value="${outworker.api.loginUrl}"/>
+    </bean>
+
+    <!-- 外勤系统用户登录验证过滤器 -->
+    <bean id="outworkerUserAuthFilter" class="com.fuhuadata.shiro.web.filter.outworker.OutworkerUserJwtFilter">
+        <property name="apiWhiteUrls" value="#{'${outworker.user.whiteUrls}'.split(',')}"/>
+        <property name="appJwtService" ref="userJwtService"/>
+        <property name="loginUrl" value="${outworker.user.loginUrl}"/>
     </bean>
 
     <!-- Shiro的Web过滤器 -->
@@ -118,12 +126,12 @@
                 <entry key="authc" value-ref="formAuthenticationFilter"/>
                 <entry key="logout" value-ref="logoutFilter"/>
                 <entry key="password" value-ref="changePasswordFilter"/>
-                <entry key="api" value-ref="outworkerAuthenticationFilter"/>
+                <entry key="api" value-ref="outworkerApiAuthFilter"/>
+                <entry key="user" value-ref="outworkerUserAuthFilter"/>
             </util:map>
         </property>
         <property name="filterChainDefinitions">
             <value>
-                /outworker/** = api
                 /lib/** = anon
                 /fileBase/** = anon
                 /order/status = anon
@@ -131,6 +139,9 @@
                 /logout = logout
                 /login = authc
                 /password = authc
+                /outworker/user/refresh-token = anon
+                /outworker/api/** = api
+                /outworker/user/** = user
                 /** = authc,password
             </value>
         </property>

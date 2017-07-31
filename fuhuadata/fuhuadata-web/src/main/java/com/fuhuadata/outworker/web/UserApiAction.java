@@ -7,16 +7,20 @@ import com.fuhuadata.homesales.user.domain.User;
 import com.fuhuadata.homesales.user.service.AreaService;
 import com.fuhuadata.homesales.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
  * <p>User: wangjie
  * <p>Date: 7/26/2017
  */
-@RequestMapping("/outworker/user")
+@RequestMapping("/outworker")
 @RestController
 public class UserApiAction {
 
@@ -26,7 +30,7 @@ public class UserApiAction {
     @Resource
     AreaService areaService;
 
-    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/{userId}", method = RequestMethod.GET)
     public ResultPojo getUser(@PathVariable String userId) {
 
         Result<User> result = Result.newResult(false);
@@ -46,14 +50,14 @@ public class UserApiAction {
 
     /**
      * 获取下属
-     * @param userId
      * @return
      */
-    @RequestMapping(value = "/subordinates")
-    public ResultPojo listSubordinates(@RequestParam String userId) {
+    @RequestMapping(value = "/user/subordinates")
+    public ResultPojo listSubordinates(HttpServletRequest request) {
 
         Result<List<User>> result = Result.newResult(false);
 
+        String userId = (String) request.getAttribute("userId");
         List<User> subordinates = userService.listSubordinates(userId);
 
         result.setSuccess(true);
@@ -64,14 +68,14 @@ public class UserApiAction {
 
     /**
      * 获取管辖地区
-     * @param userId
      * @return
      */
-    @RequestMapping(value = "/areas")
-    public ResultPojo listAreasOfUser(@RequestParam String userId) {
+    @RequestMapping(value = "/user/areas")
+    public ResultPojo listAreasOfUser(HttpServletRequest request) {
 
         Result<List<Area>> result = Result.newResult(false);
 
+        String userId = (String) request.getAttribute("userId");
         List<Area> areas = areaService.listMngAreasByUserId(userId);
 
         result.setSuccess(true);

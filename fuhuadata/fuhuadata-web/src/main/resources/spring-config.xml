@@ -21,6 +21,8 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
         <context:exclude-filter type="annotation"
                                 expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+        <context:exclude-filter type="annotation"
+                                expression="org.springframework.web.bind.annotation.RestController"/>
     </context:component-scan>
 
     <!-- 国际化的消息资源文件（本系统中主要用于显示/错误消息定制） -->
