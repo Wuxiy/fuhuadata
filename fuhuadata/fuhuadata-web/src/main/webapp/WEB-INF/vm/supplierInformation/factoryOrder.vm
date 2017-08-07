@@ -198,7 +198,7 @@
                             seconds = parseInt(time.getSeconds()),
                             newTime;
                         return newTime = year+'-'+
-                                (month.toString().length===1?'0'+monthFlag:monthFlag)+'-'+
+                                (month.toString().length===1?'0'+month:month)+'-'+
                                 (day.toString().length===1?'0'+day:day)+' '+
                                 (hours.toString().length===1?'0'+hours:hours)+':'+
                                 (minutes.toString().length===1?'0'+minutes:minutes)
