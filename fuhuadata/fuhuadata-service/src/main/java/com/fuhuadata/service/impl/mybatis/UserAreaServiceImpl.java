@@ -4,11 +4,15 @@ import com.fuhuadata.domain.mybatis.UserArea;
 import com.fuhuadata.service.mybatis.AreaClService;
 import com.fuhuadata.service.mybatis.UserAreaService;
 import com.google.common.collect.Lists;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Collections;
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * <p>User: wangjie
@@ -51,5 +55,37 @@ public class UserAreaServiceImpl extends BaseServiceImpl<UserArea, Integer>
         example.createCriteria().andEqualTo("userCode", userCode);
 
         return delete(example);
+    }
+
+    @Override
+    public List<String> listAreaIdsByUserId(String userId) {
+
+        if (StringUtils.isEmpty(userId)) {
+            return Collections.emptyList();
+        }
+
+        Example example = newExample();
+        example.createCriteria().andEqualTo("userCode", userId);
+
+        List<UserArea> userAreas = this.listByExample(example);
+        return userAreas.stream()
+                .map(UserArea::getAreaId)
+                .collect(toList());
+    }
+
+    @Override
+    public List<String> listUserIdsByAreaId(String areaId) {
+
+        if (StringUtils.isEmpty(areaId)) {
+            return Collections.emptyList();
+        }
+
+        Example example = newExample();
+        example.createCriteria().andEqualTo("areaId", areaId);
+        List<UserArea> userAreas = this.listByExample(example);
+
+        return userAreas.stream()
+                .map(UserArea::getUserCode)
+                .collect(toList());
     }
 }

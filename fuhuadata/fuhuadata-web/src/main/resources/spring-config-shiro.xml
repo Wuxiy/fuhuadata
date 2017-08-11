@@ -3,7 +3,6 @@
        xmlns:util="http://www.springframework.org/schema/util"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
     <!-- Ehcache cache manager -->
@@ -104,6 +103,20 @@
         <property name="passwordChangeUrl" value="${shiro.user.password.url}"/>
     </bean>
 
+    <!-- 外勤系统验证登录过滤器 -->
+    <bean id="outworkerApiAuthFilter" class="com.fuhuadata.shiro.web.filter.outworker.OutworkerApiJwtFilter">
+        <property name="apiWhiteUrls" value="#{'${outworker.api.whiteUrls}'.split(',')}"/>
+        <property name="appJwtService" ref="apiJwtService"/>
+        <property name="loginUrl" value="${outworker.api.loginUrl}"/>
+    </bean>
+
+    <!-- 外勤系统用户登录验证过滤器 -->
+    <bean id="outworkerUserAuthFilter" class="com.fuhuadata.shiro.web.filter.outworker.OutworkerUserJwtFilter">
+        <property name="apiWhiteUrls" value="#{'${outworker.user.whiteUrls}'.split(',')}"/>
+        <property name="appJwtService" ref="userJwtService"/>
+        <property name="loginUrl" value="${outworker.user.loginUrl}"/>
+    </bean>
+
     <!-- Shiro的Web过滤器 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
@@ -113,6 +126,8 @@
                 <entry key="authc" value-ref="formAuthenticationFilter"/>
                 <entry key="logout" value-ref="logoutFilter"/>
                 <entry key="password" value-ref="changePasswordFilter"/>
+                <entry key="api" value-ref="outworkerApiAuthFilter"/>
+                <entry key="user" value-ref="outworkerUserAuthFilter"/>
             </util:map>
         </property>
         <property name="filterChainDefinitions">
@@ -124,6 +139,9 @@
                 /logout = logout
                 /login = authc
                 /password = authc
+                /outworker/user/refresh-token = anon
+                /outworker/api/** = api
+                /outworker/user/** = user
                 /** = authc,password
             </value>
         </property>
