@@ -175,4 +175,13 @@ public class StringUtil {
             return str2;
         }
     }
+
+    /**
+     * 生成 uuid，替换掉短横线
+     * @return
+     */
+    public static String uuidWithoutLine() {
+
+        return UUID.randomUUID().toString().replaceAll("-", "");
+    }
 }
