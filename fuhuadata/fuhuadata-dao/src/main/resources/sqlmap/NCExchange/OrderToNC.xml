@@ -23,7 +23,7 @@
         <result column="main_product_unit" jdbcType="VARCHAR" property="mainProductUnit" />
         <result column="sub_product_amount" jdbcType="DECIMAL" property="subProductAmount" />
         <result column="sub_product_unit" jdbcType="INTEGER" property="subProductUnit" />
-        <result column="convert_rate" jdbcType="DECIMAL" property="convertRate" />
+        <result column="convert_rate" jdbcType="DECIMAL" property="convertRate" javaType="java.math.BigDecimal"/>
         <result column="price_type" jdbcType="VARCHAR" property="priceType" />
         <result column="advise_price" jdbcType="DECIMAL" property="advisePrice" />
         <result column="purchase_price" jdbcType="DECIMAL" property="purchasePrice" />
@@ -129,8 +129,15 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" javaType="java.lang.String"/>
         <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" javaType="java.lang.String"/>
         <result column="failure_analysis" jdbcType="VARCHAR" property="failureAnalysis" javaType="java.lang.String"/>
+        <result column="latest_delivery_time" jdbcType="TIMESTAMP" property="latestDeliveryTime" javaType="java.lang.String"/>
+        <result column="exchange_terms_detail" jdbcType="TIMESTAMP" property="exchangeTermsDetail" javaType="java.lang.String"/>
+        <result column="merchandiser" jdbcType="VARCHAR" property="merchandiser" javaType="java.lang.String"/>
     </resultMap>
-
+    <resultMap id="PRODUCTWARE" class="com.fuhuadata.domain.ProductWare">
+        <result column="code" jdbcType="VARCHAR" property="code" javaType="java.lang.String"/>
+        <result column="customs_clearance_id" jdbcType="VARCHAR" property="customsClearanceId" javaType="java.lang.String"/>
+        <result column="risetaxes" jdbcType="DECIMAL" property="risetaxes" javaType="java.math.BigDecimal"/>
+    </resultMap>
 
     <select id="getOrderProductsById" parameterClass="java.util.List" resultMap="BusinessOrderProductResultMap">
         select
@@ -148,8 +155,8 @@
             where nc_order_id=#ncOrderId#
         </dynamic>
     </update>
-    <select id="getCodeByWareId" parameterClass="java.lang.Integer" resultClass="java.lang.String">
-        select code from product_ware where ware_id=#wareId#
+    <select id="getCodeByWareId" parameterClass="java.lang.Integer" resultMap="PRODUCTWARE">
+        select code,customs_clearance_id,risetaxes from product_ware where ware_id=#wareId#
     </select>
 
     <select id="getBusinessOrderByOrderId" parameterClass="java.lang.String" resultMap="BUSINESSORDER-MAP">

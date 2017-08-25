@@ -192,7 +192,7 @@ public class PDFTempletToPDFImpl implements PDFTempletToPDF {
                 s.setField("mianXiangQi",orderProduct.getMianxiangqi()==null?"":(""+orderProduct.getMianxiangqi()));
                 s.setField("mianTuiQi",""+orderProduct.getMiantuiqi()==null?"":(""+orderProduct.getMiantuiqi()));
                 s.setField("cupboardType",""+orderProduct.getCupboardType()==null?"":""+orderProduct.getCupboardType());
-                s.setField("cupboardPerNumber",""+orderProduct.getCupboardPerNumber()==null?"":""+orderProduct.getCupboardPerNumber());
+                //s.setField("cupboardPerNumber",""+orderProduct.getCupboardPerNumber()==null?"":""+orderProduct.getCupboardPerNumber());
                 s.setField("cupboardNumber",""+orderProduct.getCupboardNumber()==null?"":""+orderProduct.getCupboardNumber());
                 if (orderProduct.getPackageRequire()!=null){
                     JSONObject jsonPr=JSONObject.fromObject(orderProduct.getPackageRequire());

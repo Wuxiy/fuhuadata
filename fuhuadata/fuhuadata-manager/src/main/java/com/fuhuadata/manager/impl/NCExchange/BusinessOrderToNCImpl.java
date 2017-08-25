@@ -7,6 +7,7 @@ import com.fuhuadata.dao.NCExchange.OrderToNc;
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.BusinessOrderProduct;
 import com.fuhuadata.domain.CustomerBaseInfo;
+import com.fuhuadata.domain.ProductWare;
 import com.fuhuadata.manager.NCExchange.BusinessOrderToNC;
 import com.fuhuadata.manager.NCExchange.CustomerInfoToNC;
 import com.fuhuadata.manager.NCExchange.PDFTempletToPDF;
@@ -329,6 +330,18 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
             if (orderBaseInfo.getIsCreditRisk()==1){
                 nodeValue.put("vdef7","Y");
             }
+            //最迟交货期
+            if(orderBaseInfo.getLatestDeliveryTime()!=null){
+                nodeValue.put("vdef6",""+orderBaseInfo.getLatestDeliveryTime());
+            }
+            //收汇条款明细
+            if (orderBaseInfo.getExchangeTermsDetail()!=null){
+                nodeValue.put("vdef13",""+orderBaseInfo.getExchangeTermsDetail());
+            }
+            //跟单员
+            if (orderBaseInfo.getMerchandiser()!=null){
+                nodeValue.put("vdef8",orderBaseInfo.getMerchandiser());
+            }
 
             //设定长期协议的协议状态为生效。
             nodeValue.put("fstatusflag","7");
@@ -354,10 +367,18 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                 productMap.put("crowno",""+i);i++;
                 //根据crm的物料id查询product_ware表里的nc物料code
                 int wareId=orderProduct.getWareId();
-                String materialCode=orderToNc.getCodeByWareId(wareId);
-                if(materialCode!=null){
-                    productMap.put("cmaterialvid",""+materialCode);
-                    productMap.put("vbdef17",""+materialCode);
+                ProductWare productWare=orderToNc.getCodeByWareId(wareId);
+                if(productWare!=null){
+                    productMap.put("cmaterialvid",""+productWare.getCode());
+                   // productMap.put("vbdef17",""+materialCode);
+                }
+                //报关物料id
+                if(productWare.getCustomsClearanceId()!=null){
+                    productMap.put("vbdef17",""+productWare.getCustomsClearanceId());
+                }
+                //增值税税率
+                if (productWare.getRisetaxes()!=null){
+                    productMap.put("vbdef16",""+productWare.getRisetaxes());
                 }
                 //内部供货单位
                 if (orderProduct.getInternalSupplyId()!=null) {
@@ -443,7 +464,7 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                 }
                 //交货时间
                 if (orderProduct.getDeliveryTime()!=null){
-                    productMap.put("vbdef2",orderProduct.getDeliveryTime());
+                    productMap.put("vbdef2",""+orderProduct.getDeliveryTime());
                 }
                 //价格计算类型
                 if (orderProduct.getPriceType()!=null){

@@ -3,6 +3,7 @@ package com.fuhuadata.dao.impl.NCExchange;
 import com.fuhuadata.dao.NCExchange.OrderToNc;
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.BusinessOrderProduct;
+import com.fuhuadata.domain.ProductWare;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
 import java.util.List;
@@ -30,8 +31,8 @@ public class OrderToNcImpl extends SqlMapClientTemplate implements OrderToNc {
     }
 
     @Override
-    public String getCodeByWareId(int wareId) {
-        return (String) this.queryForObject(GET_CODE_BY_WARE_ID,wareId);
+    public ProductWare getCodeByWareId(int wareId) {
+        return  (ProductWare)this.queryForObject(GET_CODE_BY_WARE_ID,wareId);
     }
 
     @Override
