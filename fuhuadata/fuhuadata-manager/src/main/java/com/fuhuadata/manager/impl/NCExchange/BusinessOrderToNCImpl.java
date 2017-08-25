@@ -409,8 +409,8 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                     productMap.put("vbdef13", "" + orderProduct.getCommissionPrice());
                 }
                 //单耗
-                if (orderProduct.getConvertRate()!=null) {
-                    productMap.put("vbdef7", "" + orderProduct.getConvertRate());
+                if (orderProduct.getUnitUseRate()!=null) {
+                    productMap.put("vbdef7", "" + orderProduct.getUnitUseRate());
                 }
                 //采购单价
                 if (orderProduct.getPurchasePrice()!=null) {
@@ -444,7 +444,7 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                 if (orderProduct.getTaxType()!=null) {
                     if(orderProduct.getTaxType()==1){
                         productMap.put("vbdef15", "10");
-                    }if(orderProduct.getTaxType()==2){
+                    }else if(orderProduct.getTaxType()==2){
                         productMap.put("vbdef15", "20");
                     }else {
                         productMap.put("vbdef15", "30");

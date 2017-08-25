@@ -353,7 +353,7 @@
         WHERE bop.id IN ($businessProductIds$)
     </delete>
 
-    <select id="getPriceType" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+    <select id="getPriceType" parameterClass="java.lang.Integer" resultClass="java.lang.String">
         select price_type from business_order_product where id=#businessProductId#
     </select>
 
@@ -370,12 +370,12 @@
             FROM `business_product_require` r, k_packing_archives k
             WHERE r.business_product_id = #value# and r.main_packing_id = k.packing_id
             UNION
-            <!-- 计算不和外包装单耗不相同的辅材费用-->
+            <!-- 计算和外包装单耗不相同的辅材费用-->
             SELECT ifnull(SUM(k.unit_price*p.consumption),0) from k_packing_realtion p,business_product_require r,k_packing_archives k where r.business_product_id=#value# and p.main_packing_id = r.main_packing_id and is_equal_outer = 0
             and k.packing_id in(ifnull(r.auxiliary_material_ids,0)) and k.packing_id = p.associated_packing_id
 
             UNION
-            <!-- 计算不和外包装单耗相同的辅材费用-->
+            <!-- 计算和外包装单耗相同的辅材费用-->
             SELECT
             ifnull(SUM(k.unit_price *
             (select k.consumption from k_packing_realtion k,business_product_require r

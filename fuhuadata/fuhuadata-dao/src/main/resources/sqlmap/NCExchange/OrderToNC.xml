@@ -60,7 +60,7 @@
         <result column="lastmodify_user_name" jdbcType="VARCHAR" property="lastmodifyUserName" />
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
         <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
-        <result column="unit_use_rate" jdbcType="DECIMAL" property="unitUseRate"/>
+        <result column="unit_use_rate" jdbcType="DECIMAL" property="unitUseRate" javaType="java.math.BigDecimal"/>
         <result column="capital_interest_price" jdbcType="DECIMAL" property="capitalInterestPrice"/>
     </resultMap>
 
