@@ -405,41 +405,23 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                     //主美元单价
                     productMap.put("nusdprice",""+orderProduct.getContractPrice().multiply(orderBaseInfo.getNusdexchgrate()));
                 }
-                if (orderProduct.getCommissionPrice()!=null) {
-                    productMap.put("vbdef13", "" + orderProduct.getCommissionPrice());
-                }
+                productMap.put("vbdef13", (orderProduct.getCommissionPrice()==null?0:orderProduct.getCommissionPrice())+"");
                 //单耗
-                if (orderProduct.getUnitUseRate()!=null) {
-                    productMap.put("vbdef7", "" + orderProduct.getUnitUseRate());
-                }
+                    productMap.put("vbdef7",  (orderProduct.getUnitUseRate()==null?0:orderProduct.getUnitUseRate())+"");
                 //采购单价
-                if (orderProduct.getPurchasePrice()!=null) {
-                    productMap.put("vbdef8", "" + orderProduct.getPurchasePrice());
-                }
+                    productMap.put("vbdef8", (orderProduct.getPurchasePrice()==null?0:orderProduct.getPurchasePrice())+"");
                 //海运单价
-                if (orderProduct.getOceanFreight()!=null) {
-                    productMap.put("vbdef11", "" + orderProduct.getOceanFreight());
-                }
+                    productMap.put("vbdef11", (orderProduct.getOceanFreight()==null?0:orderProduct.getOceanFreight())+"");
                 //港杂单价
-                if (orderProduct.getPortSurcharge()!=null) {
-                    productMap.put("vbdef12", "" + orderProduct.getPortSurcharge());
-                }
+                    productMap.put("vbdef12", (orderProduct.getPortSurcharge()==null?0:orderProduct.getPortSurcharge())+"");
                 //原药基准价
-                if (orderProduct.getAdvisePrice()!=null) {
-                    productMap.put("vbdef9", "" + orderProduct.getAdvisePrice());
-                }
+                    productMap.put("vbdef9", (orderProduct.getAdvisePrice()==null?0:orderProduct.getAdvisePrice())+"");
                 //毛利率
-                if (orderProduct.getGrossMargin()!=null) {
-                    productMap.put("vbdef12", "" + orderProduct.getGrossMargin());
-                }
+                    productMap.put("vbdef12",  (orderProduct.getGrossMargin()==null?0:orderProduct.getGrossMargin())+"");
                 //加工费单价
-                if (orderProduct.getProcessCost()!=null) {
-                    productMap.put("vbdef10", "" + orderProduct.getProcessCost());
-                }
+                    productMap.put("vbdef10", (orderProduct.getProcessCost()==null?0:orderProduct.getProcessCost())+"");
                 //其他费用单价
-                if (orderProduct.getOtherCost()!=null) {
-                    productMap.put("vbdef14", "" + orderProduct.getOtherCost());
-                }
+                    productMap.put("vbdef14",  (orderProduct.getOtherCost()==null?0:orderProduct.getOtherCost())+"");
                 //退税计算方式
                 if (orderProduct.getTaxType()!=null) {
                     if(orderProduct.getTaxType()==1){
@@ -451,16 +433,17 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                     }
                 }
                 //退税率
-                if (orderProduct.getTaxFree()!=null) {
-                    productMap.put("vbdef3", "" + orderProduct.getTaxFree());
-                }
+                    productMap.put("vbdef3", (orderProduct.getTaxFree()==null?0:orderProduct.getTaxFree())+"");
                 //货柜数
-                if (orderProduct.getCupboardNumber()!=null) {
-                    productMap.put("vbdef4", "" + orderProduct.getCupboardNumber());
-                }
+                    productMap.put("vbdef4", (orderProduct.getCupboardNumber()==null?0:orderProduct.getCupboardNumber())+"");
                 //货柜类型
                 if (orderProduct.getCupboardType()!=null) {
-                    productMap.put("cpackingid", "" + orderProduct.getCupboardType());
+                    if(orderProduct.getCupboardType()==0){
+                        productMap.put("vbdef6", "02");
+                    }else {
+                        productMap.put("vbdef6","01");
+                    }
+
                 }
                 //交货时间
                 if (orderProduct.getDeliveryTime()!=null){
