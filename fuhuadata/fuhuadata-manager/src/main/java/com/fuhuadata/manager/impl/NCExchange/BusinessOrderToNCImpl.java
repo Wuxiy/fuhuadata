@@ -342,6 +342,8 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
             if (orderBaseInfo.getMerchandiser()!=null){
                 nodeValue.put("vdef8",orderBaseInfo.getMerchandiser());
             }
+            //保险费率
+            nodeValue.put("vdef9",(orderBaseInfo.getPremiumRate()==null?0:orderBaseInfo.getPremiumRate())+"");
 
             //设定长期协议的协议状态为生效。
             nodeValue.put("fstatusflag","7");
