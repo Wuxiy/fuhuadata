@@ -453,7 +453,18 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                 }
                 //价格计算类型
                 if (orderProduct.getPriceType()!=null){
-                    productMap.put("vbdef19",""+orderProduct.getPriceType());
+                    String pt=orderProduct.getPriceType();
+                    if (pt.equals("01")){
+                        productMap.put("vbdef19","自产类");
+                    }else if (pt.equals("02")){
+                        productMap.put("vbdef19","加工类");
+                    }else if (pt.equals("03")){
+                        productMap.put("vbdef19","贸易类");
+                    }else if (pt.equals("04")){
+                        productMap.put("vbdef19","采购加工类");
+                    }else if (pt.equals("09")){
+                        productMap.put("vbdef19","其他类");
+                    }
                 }
                 //crmId
                 if (orderProduct.getId()!=null){
