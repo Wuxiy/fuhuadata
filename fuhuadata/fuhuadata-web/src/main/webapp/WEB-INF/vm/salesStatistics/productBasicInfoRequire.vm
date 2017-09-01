@@ -405,7 +405,7 @@
                     $('#advisePrice').val(basicInfo.advisePrice);
                     $('#purchasePrice').val(basicInfo.purchasePrice);
                     $('#deliveryTime').val(basicInfo.deliveryTime);
-                    $('#factoryName').val(basicInfo.factoryName);
+                    $('#factoryName').val(basicInfo.factoryId);
                     $('#grossMargin').val(basicInfo.grossMargin);
                     $('#commissionPrice').val(basicInfo.commissionPrice);
                     $('#unitUseRate').val(basicInfo.unitUseRate);
@@ -446,10 +446,12 @@
         if(editId == 1){
             $('#edit').removeClass('hidden');
             $('#back').removeClass('hidden');
+            $('#factoryName').attr('disabled',true);
         }
 
         if(editId == 2){
             $('#back').removeClass('hidden');
+            $('#factoryName').attr('disabled',true);
         }
 
         /*$('#tree').creatTree(basePath+'/businessProduct/initProductCatetroy');*/
@@ -924,7 +926,8 @@
                 'convertRate':$('#convertRate').val(),
                 'advisePrice':$('#advisePrice').val(),
                 'purchasePrice':$('#purchasePrice').val(),
-                'factoryName':$('#factoryName').val(),
+                'factoryId':$('#factoryName').val(),
+                'factoryName':$('#factoryName').find('option:selected').text(),
                 'grossMargin':$('#grossMargin').val(),
                 'capitalInterestPrice':$('#capitalInterestPrice').val(),
                 'commissionPrice':$('#commissionPrice').val(),

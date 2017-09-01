@@ -46,7 +46,7 @@
                 big_category_id=#bigCategoryId#
             </isNotNull>
             <isNotNull prepend=" AND " property="smallCategoryId">
-                small_cate_id=#smallCategoryId#
+                small_category_id=#smallCategoryId#
             </isNotNull>
             <isNotNull prepend=" AND " property="packName">
                 pack_name=#packName#
@@ -104,7 +104,7 @@
                 big_category_id=#bigCategoryId#
             </isNotNull>
             <isNotNull prepend=" AND " property="smallCategoryId">
-                small_cate_id=#smallCategoryId#
+                small_category_id=#smallCategoryId#
             </isNotNull>
             <isNotNull prepend=" AND " property="packName">
                 pack_name=#packName#
@@ -263,7 +263,7 @@
                 big_category_id=#bigCategoryId#
             </isNotNull>
             <isNotNull prepend=", " property="smallCategoryId">
-                small_cate_id=#smallCategoryId#
+                small_category_id=#smallCategoryId#
             </isNotNull>
             <isNotNull prepend=", " property="packName">
                 pack_name=#packName#

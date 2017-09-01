@@ -2,6 +2,7 @@ package com.fuhuadata.dao.NCExchange;
 
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.BusinessOrderProduct;
+import com.fuhuadata.domain.ProductWare;
 
 import java.util.List;
 import java.util.Map;
@@ -16,7 +17,7 @@ public interface OrderToNc {
      */
     void updateOrderStatusByNcOrderId(Map<String,Object> mapv);
     List<BusinessOrderProduct> getOrderProductsById(List<Integer> orderProductsId);
-    String getCodeByWareId(int wareId);
+    ProductWare getCodeByWareId(int wareId);
     BusinessOrder getBusinessOrderByOrderId(String orderId);
     String getOrgNcIdByOrgId(int orgId);
 

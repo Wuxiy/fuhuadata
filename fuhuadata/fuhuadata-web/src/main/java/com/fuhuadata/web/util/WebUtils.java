@@ -4,10 +4,12 @@ import com.alibaba.fastjson.JSON;
 import com.fuhuadata.constant.Consts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -35,6 +37,25 @@ public class WebUtils {
         try {
             response.setCharacterEncoding(Consts.ENCODING);
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+
+            out = response.getWriter();
+            out.write(JSON.toJSONString(result));
+        } finally {
+            if (out != null) {
+                out.flush();
+                out.close();
+            }
+        }
+    }
+
+    public static void writeStatusResponse(HttpServletResponse response, HttpStatus status, Object result)
+            throws IOException {
+
+        PrintWriter out = null;
+        try {
+            response.setCharacterEncoding(Consts.ENCODING);
+            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+            response.setStatus(status.value());
 
             out = response.getWriter();
             out.write(JSON.toJSONString(result));

@@ -34,4 +34,11 @@
 	<bean id="businessOrderService" class="com.fuhuadata.service.impl.BusinessOrderServiceImpl"/>
 	<bean id="contractService" class="com.fuhuadata.service.impl.ContractServiceImpl"/>
 	<bean id="dataArchivesService" class="com.fuhuadata.service.impl.DataArchivesServiceImpl"/>
+
+    <bean id="apiJwtService" class="com.fuhuadata.outworker.jwt.JwtService">
+        <property name="secret" value="${outworker.api.jwt.secret}"/>
+    </bean>
+    <bean id="userJwtService" class="com.fuhuadata.outworker.jwt.JwtService">
+        <property name="secret" value="${outworker.user.jwt.secret}"/>
+    </bean>
 </beans>

@@ -7,6 +7,7 @@ import com.fuhuadata.dao.NCExchange.OrderToNc;
 import com.fuhuadata.domain.BusinessOrder;
 import com.fuhuadata.domain.BusinessOrderProduct;
 import com.fuhuadata.domain.CustomerBaseInfo;
+import com.fuhuadata.domain.ProductWare;
 import com.fuhuadata.manager.NCExchange.BusinessOrderToNC;
 import com.fuhuadata.manager.NCExchange.CustomerInfoToNC;
 import com.fuhuadata.manager.NCExchange.PDFTempletToPDF;
@@ -329,6 +330,20 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
             if (orderBaseInfo.getIsCreditRisk()==1){
                 nodeValue.put("vdef7","Y");
             }
+            //最迟交货期
+            if(orderBaseInfo.getLatestDeliveryTime()!=null){
+                nodeValue.put("vdef6",""+orderBaseInfo.getLatestDeliveryTime());
+            }
+            //收汇条款明细
+            if (orderBaseInfo.getExchangeTermsDetail()!=null){
+                nodeValue.put("vdef13",""+orderBaseInfo.getExchangeTermsDetail());
+            }
+            //跟单员
+            if (orderBaseInfo.getMerchandiser()!=null){
+                nodeValue.put("vdef8",orderBaseInfo.getMerchandiser());
+            }
+            //保险费率
+            nodeValue.put("vdef9",(orderBaseInfo.getPremiumRate()==null?0:orderBaseInfo.getPremiumRate())+"");
 
             //设定长期协议的协议状态为生效。
             nodeValue.put("fstatusflag","7");
@@ -354,10 +369,18 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                 productMap.put("crowno",""+i);i++;
                 //根据crm的物料id查询product_ware表里的nc物料code
                 int wareId=orderProduct.getWareId();
-                String materialCode=orderToNc.getCodeByWareId(wareId);
-                if(materialCode!=null){
-                    productMap.put("cmaterialvid",""+materialCode);
-                    productMap.put("vbdef17",""+materialCode);
+                ProductWare productWare=orderToNc.getCodeByWareId(wareId);
+                if(productWare!=null){
+                    productMap.put("cmaterialvid",""+productWare.getCode());
+                   // productMap.put("vbdef17",""+materialCode);
+                }
+                //报关物料id
+                if(productWare.getCustomsClearanceId()!=null){
+                    productMap.put("vbdef17",""+productWare.getCustomsClearanceId());
+                }
+                //增值税税率
+                if (productWare.getRisetaxes()!=null){
+                    productMap.put("vbdef16",""+productWare.getRisetaxes());
                 }
                 //内部供货单位
                 if (orderProduct.getInternalSupplyId()!=null) {
@@ -384,70 +407,64 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                     //主美元单价
                     productMap.put("nusdprice",""+orderProduct.getContractPrice().multiply(orderBaseInfo.getNusdexchgrate()));
                 }
-                if (orderProduct.getCommissionPrice()!=null) {
-                    productMap.put("vbdef13", "" + orderProduct.getCommissionPrice());
-                }
+                productMap.put("vbdef13", (orderProduct.getCommissionPrice()==null?0:orderProduct.getCommissionPrice())+"");
                 //单耗
-                if (orderProduct.getConvertRate()!=null) {
-                    productMap.put("vbdef7", "" + orderProduct.getConvertRate());
-                }
+                    productMap.put("vbdef7",  (orderProduct.getUnitUseRate()==null?0:orderProduct.getUnitUseRate())+"");
                 //采购单价
-                if (orderProduct.getPurchasePrice()!=null) {
-                    productMap.put("vbdef8", "" + orderProduct.getPurchasePrice());
-                }
+                    productMap.put("vbdef8", (orderProduct.getPurchasePrice()==null?0:orderProduct.getPurchasePrice())+"");
                 //海运单价
-                if (orderProduct.getOceanFreight()!=null) {
-                    productMap.put("vbdef11", "" + orderProduct.getOceanFreight());
-                }
+                    productMap.put("vbdef11", (orderProduct.getOceanFreight()==null?0:orderProduct.getOceanFreight())+"");
                 //港杂单价
-                if (orderProduct.getPortSurcharge()!=null) {
-                    productMap.put("vbdef12", "" + orderProduct.getPortSurcharge());
-                }
+                    productMap.put("vbdef12", (orderProduct.getPortSurcharge()==null?0:orderProduct.getPortSurcharge())+"");
                 //原药基准价
-                if (orderProduct.getAdvisePrice()!=null) {
-                    productMap.put("vbdef9", "" + orderProduct.getAdvisePrice());
-                }
+                    productMap.put("vbdef9", (orderProduct.getAdvisePrice()==null?0:orderProduct.getAdvisePrice())+"");
                 //毛利率
-                if (orderProduct.getGrossMargin()!=null) {
-                    productMap.put("vbdef12", "" + orderProduct.getGrossMargin());
-                }
+                    productMap.put("vbdef12",  (orderProduct.getGrossMargin()==null?0:orderProduct.getGrossMargin())+"");
                 //加工费单价
-                if (orderProduct.getProcessCost()!=null) {
-                    productMap.put("vbdef10", "" + orderProduct.getProcessCost());
-                }
+                    productMap.put("vbdef10", (orderProduct.getProcessCost()==null?0:orderProduct.getProcessCost())+"");
                 //其他费用单价
-                if (orderProduct.getOtherCost()!=null) {
-                    productMap.put("vbdef14", "" + orderProduct.getOtherCost());
-                }
+                    productMap.put("vbdef14",  (orderProduct.getOtherCost()==null?0:orderProduct.getOtherCost())+"");
                 //退税计算方式
                 if (orderProduct.getTaxType()!=null) {
                     if(orderProduct.getTaxType()==1){
                         productMap.put("vbdef15", "10");
-                    }if(orderProduct.getTaxType()==2){
+                    }else if(orderProduct.getTaxType()==2){
                         productMap.put("vbdef15", "20");
                     }else {
                         productMap.put("vbdef15", "30");
                     }
                 }
                 //退税率
-                if (orderProduct.getTaxFree()!=null) {
-                    productMap.put("vbdef3", "" + orderProduct.getTaxFree());
-                }
+                    productMap.put("vbdef3", (orderProduct.getTaxFree()==null?0:orderProduct.getTaxFree())+"");
                 //货柜数
-                if (orderProduct.getCupboardNumber()!=null) {
-                    productMap.put("vbdef4", "" + orderProduct.getCupboardNumber());
-                }
+                    productMap.put("vbdef4", (orderProduct.getCupboardNumber()==null?0:orderProduct.getCupboardNumber())+"");
                 //货柜类型
                 if (orderProduct.getCupboardType()!=null) {
-                    productMap.put("cpackingid", "" + orderProduct.getCupboardType());
+                    if(orderProduct.getCupboardType()==0){
+                        productMap.put("vbdef6", "02");
+                    }else {
+                        productMap.put("vbdef6","01");
+                    }
+
                 }
                 //交货时间
                 if (orderProduct.getDeliveryTime()!=null){
-                    productMap.put("vbdef2",orderProduct.getDeliveryTime());
+                    productMap.put("vbdef2",""+orderProduct.getDeliveryTime());
                 }
                 //价格计算类型
                 if (orderProduct.getPriceType()!=null){
-                    productMap.put("vbdef19",""+orderProduct.getPriceType());
+                    String pt=orderProduct.getPriceType();
+                    if (pt.equals("01")){
+                        productMap.put("vbdef19","自产类");
+                    }else if (pt.equals("02")){
+                        productMap.put("vbdef19","加工类");
+                    }else if (pt.equals("03")){
+                        productMap.put("vbdef19","贸易类");
+                    }else if (pt.equals("04")){
+                        productMap.put("vbdef19","采购加工类");
+                    }else if (pt.equals("09")){
+                        productMap.put("vbdef19","其他类");
+                    }
                 }
                 //crmId
                 if (orderProduct.getId()!=null){
