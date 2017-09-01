@@ -69,7 +69,7 @@
                         table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].size)+'</td>';
                         table_html += '<td class="col-xs-2 text-center text-middle">'+ifEmpty(node[i].quality)+'</td>';
                         table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].unitPrice)+'</td>';
-                        table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].consumption)+'</td>';
+                        table_html += '<td class="col-xs-1 text-center text-middle">'+ifEmpty(node[i].associatedConsumption)+'</td>';
                         if(ifEmpty(node[i].isEqualOuter) == 1){
                             table_html += '<td class="text-center"><input type="checkbox" name="isEqualOuter" checked/></td>';
                         }else if(node[i].bigCategoryId == 2){
