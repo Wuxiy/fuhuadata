@@ -201,7 +201,7 @@
                 var pTbody = $('[name="processingComponents"]');
                 var iThead = $('<thead><tr><th class="text-center col-xs-4" lang="zh">指标</th><th class="text-center col-xs-4" lang="zh">值</th><th class="text-center col-xs-4" lang="zh">备注</th></tr></thead>');
                 var iTfoot = $('<tfoot class="editView hidden"><tr><td colspan="3"><button id="addIndexItem" data-form-btn="add" class="btn btn-xs btn-link hidden" type="button" lang="zh">继续添加</button></td></tr></tfoot>');
-                var pThead = $('<thead><tr><th class="text-center col-xs-4" lang="zh">原料</th><th class="text-center col-xs-4" lang="zh">单耗（kg/KL）</th><th class="text-center col-xs-4" lang="zh">备注</th></tr></thead>');
+                var pThead = $('<thead><tr><th class="text-center col-xs-4" lang="zh">原料</th><th class="text-center col-xs-4" lang="zh">单耗（kg/L）</th><th class="text-center col-xs-4" lang="zh">备注</th></tr></thead>');
                 var pTfoot = $('<tfoot class="editView hidden"><tr><td colspan="3"><button id="addProItem" data-form-btn="add" class="btn btn-xs btn-link hidden" type="button" lang="zh">继续添加</button></td></tr></tfoot>');
 
                 wTbody.add(iTbody).add(pTbody).html('');

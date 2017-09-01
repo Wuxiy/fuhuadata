@@ -186,7 +186,7 @@
         <tr>
             <th class="text-center col-xs-3" data-view="editView" lang="zh">是否需要</th>
             <th class="text-center col-xs-3" lang="zh">原料</th>
-            <th class="text-center col-xs-3" lang="zh">单耗(kg/KL)</th>
+            <th class="text-center col-xs-3" lang="zh">单耗(kg/L)</th>
             <th class="text-center col-xs-3" lang="zh">备注</th>
         </tr>
         </thead>

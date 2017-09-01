@@ -77,7 +77,7 @@
                                     <thead>
                                     <tr>
                                         <th class="text-center">原料</th>
-                                        <th class="text-center">单耗（kg/KL）</th>
+                                        <th class="text-center">单耗（kg/L）</th>
                                         <th class="text-center">单价（元/kg）</th>
                                         <th class="text-center">费用（元/KL）</th>
                                     </tr>
