@@ -517,7 +517,7 @@
                         $('#otherRequirePrice').val(productRequire.otherRequirePrice);
                     }
                     if(productRequire.otherRequireConsumption!=undefined){
-                        $('#otherRequireConsumption').val(productRequire.outerOackingOtherRequire);
+                        $('#otherRequireConsumption').val(productRequire.otherRequireConsumption);
                     }
                     if(productRequire.bottlePasteRequire!=undefined){
                         $('#bottlePasteRequire').val(productRequire.bottlePasteRequire);
