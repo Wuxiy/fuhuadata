@@ -228,6 +228,8 @@ $(document).on('click.cancel','#cancel',function(){
         var url = basePath+'/packingArchives/doModify';
         var data = {
             "packingId":jQuery('#id').val(),
+            "bigCategoryId":jQuery('#bid').val(),
+            "smallCategoryId":jQuery('#sid').val(),
             "packName": jQuery('#packName').val(),
             "spec": jQuery('#spec').val(),
             "size": jQuery('#size').val(),
