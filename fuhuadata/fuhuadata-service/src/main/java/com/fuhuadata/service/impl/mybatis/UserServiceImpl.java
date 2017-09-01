@@ -23,6 +23,7 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
@@ -68,6 +69,19 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
         }
 
         return getUserMapper().listUserByDeptId(deptId);
+    }
+
+    @Override
+    public List<UserAccount> listUserByUserCodes(List<String> codes) {
+
+        if (codes == null || codes.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        Example example = newExample();
+        example.createCriteria().andIn("code", codes);
+
+        return this.listByExample(example);
     }
 
     @Override
@@ -253,6 +267,19 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
         }
 
         return getUserMapper().getByCode(code);
+    }
+
+    @Override
+    public UserAccount getUserByRefreshToken(String refreshToken) {
+
+        if (StringUtils.isEmpty(refreshToken)) {
+            return null;
+        }
+
+        UserAccount userAccount = newEntity();
+        userAccount.setRefreshToken(refreshToken);
+
+        return getProxyUserService().get(userAccount);
     }
 
     @Override

@@ -15,7 +15,7 @@
         <task:scheduled ref="syncDocFromNc" method="autoTest" cron="0 1/1 * * * ?"/>
         <task:scheduled ref="syncContract" method="sync" cron="0 0 0 * * ?"/>
         <task:scheduled ref="syncSubContract" method="sync" cron="0 10 0 * * ?"/>
-        <task:scheduled ref="syncProduct" method="sync" cron="0 34 15 * * ?"/>
+        <task:scheduled ref="syncProduct" method="sync" initial-delay="5000" fixed-delay="3600000"/>
         <task:scheduled ref="syncFreightForwarding" method="sync" cron="0 30 0 * * ?"/>
     </task:scheduled-tasks>
 

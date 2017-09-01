@@ -172,7 +172,9 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
     }
     //更新最低价，加工费
     private void updatePrice(BusinessOrderProduct businessOrderProduct) throws Exception {
-        String priceType = businessOrderProductDao.getPriceType(businessOrderProduct.getId());
+        String priceType =businessOrderProduct.getPriceType()!=null ?
+                businessOrderProduct.getPriceType() :
+                businessOrderProductDao.getPriceType(businessOrderProduct.getId());
         if(priceType!=null &&("02".equals(priceType) || "04".equals(priceType))){
             //更新加工费
             businessOrderProduct.setProcessCost(businessOrderProductDao.calculateProcessCost(businessOrderProduct.getId()));

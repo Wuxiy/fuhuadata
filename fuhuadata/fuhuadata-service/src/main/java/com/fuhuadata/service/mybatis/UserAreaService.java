@@ -18,4 +18,19 @@ public interface UserAreaService extends BaseService<UserArea, Integer> {
     int saveUserArea(String userId, List<String> areaIds);
 
     int deleteAreaByUserId(String userCode);
+
+    /**
+     * 获取用户关联地区ids
+     * @param userId
+     * @return
+     */
+    List<String> listAreaIdsByUserId(String userId);
+
+    /**
+     * 获取地区关联用户ids
+     * @param areaId
+     * @return
+     */
+    List<String> listUserIdsByAreaId(String areaId);
+
 }

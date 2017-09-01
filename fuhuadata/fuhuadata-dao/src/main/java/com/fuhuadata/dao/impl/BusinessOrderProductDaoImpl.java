@@ -127,7 +127,8 @@ public class BusinessOrderProductDaoImpl extends BaseDao<BusinessOrderProduct> i
     @Override
     public BigDecimal calculateProcessCost(Integer businessProdcutId) {
         try {
-            return (BigDecimal)sqlMapClient.queryForObject(CALCULATE_PROCESS_COST,businessProdcutId);
+            BigDecimal sys= (BigDecimal)sqlMapClient.queryForObject(CALCULATE_PROCESS_COST,businessProdcutId);
+            return sys==null?new BigDecimal(0):sys;
         } catch (SQLException e) {
             e.printStackTrace();
         }
