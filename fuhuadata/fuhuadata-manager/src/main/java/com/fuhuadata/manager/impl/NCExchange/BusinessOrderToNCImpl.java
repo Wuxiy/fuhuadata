@@ -238,6 +238,8 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
             /*
             订单基本信息转换 表头xml
              */
+
+
             Element pk_group=document.createElement("pk_group");
             pk_group.appendChild(document.createTextNode("0001"));
             billhead.appendChild(pk_group);
@@ -266,10 +268,12 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                 nodeValue.put("cdeptid","" + orderBaseInfo.getDepartmentId());
             }
             if (orderBaseInfo.getCurrency()!=null) {
+                //币种
                 nodeValue.put("corigcurrencyid", "" + orderBaseInfo.getCurrency());
-                //本位币
-                nodeValue.put("ccurrencyid","" + orderBaseInfo.getCurrency());
-                nodeValue.put("cusdcurrencyid","" + orderBaseInfo.getCurrency());
+                //本位币：人民币
+                nodeValue.put("ccurrencyid","CNY");
+                //统计币种：美元
+                nodeValue.put("cusdcurrencyid","USD");
             }
             if (orderBaseInfo.getLastdelydate()!=null){
                 nodeValue.put("vdef6",orderBaseInfo.getLastdelydate().toString());
@@ -358,6 +362,28 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
              */
             Element pk_longpro_set=document.createElement("pk_longpro_set");
             billhead.appendChild(pk_longpro_set);
+            if (orderBaseInfo.getPrepayRate()!=null) {
+                int j=orderBaseInfo.getPrepayRate().compareTo(BigDecimal.valueOf(100.0))<0?2:1;
+                for (int i=0;i<j;i++){
+                    Element item = document.createElement("item");
+                    pk_longpro_set.appendChild(item);
+                    Map<String, String> set = new HashMap<String, String>();
+                    set.put("crowno",i+1+"");
+                    set.put("ishoworder",i+1+"");
+                    set.put("naccrate",(i==1?(new BigDecimal(100)).subtract(orderBaseInfo.getPrepayRate()):orderBaseInfo.getPrepayRate())+"");
+                    set.put("bprepayment",i==1?"N":"Y");
+                    set.put("cincomeperiod","STST013");
+                    set.put("ieffectdateadddate",""+0);
+                    //账期天数
+                    set.put("ipaymentday",(CollectionAgreement.valueOf(orderBaseInfo.getCollectionAgreement()).value)+"");
+                    set.put("bdeposit",i==1?"Y":"N");
+                    for (Map.Entry<String,String> entry:set.entrySet()){
+                        Element ele=document.createElement(entry.getKey());
+                        ele.appendChild(document.createTextNode(entry.getValue()));
+                        item.appendChild(ele);
+                    }
+                }
+            }
             Element pk_longpro_b=document.createElement("pk_longpro_b");
             billhead.appendChild(pk_longpro_b);
 
@@ -419,7 +445,7 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                 //原药基准价
                     productMap.put("vbdef9", (orderProduct.getAdvisePrice()==null?0:orderProduct.getAdvisePrice())+"");
                 //毛利率
-                    productMap.put("vbdef12",  (orderProduct.getGrossMargin()==null?0:orderProduct.getGrossMargin())+"");
+                //   productMap.put("vbdef12",  (orderProduct.getGrossMargin()==null?0:orderProduct.getGrossMargin())+"");
                 //加工费单价
                     productMap.put("vbdef10", (orderProduct.getProcessCost()==null?0:orderProduct.getProcessCost())+"");
                 //其他费用单价
@@ -544,4 +570,18 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
         return buffer;
     }
 
+    /**
+     * 账期协议天数枚举类
+     */
+    public enum CollectionAgreement{
+        W02(0),W03(30),W04(60),W05(90),W06(105),W07(120),
+            W08(150),W09(180),W10(240),W11(300),W01(0);
+        private int value;
+        CollectionAgreement(int i) {
+            this.value=i;
+        }
+        private int getValue(){
+            return value;
+        }
+    }
 }

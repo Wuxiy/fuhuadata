@@ -132,6 +132,7 @@
         <result column="latest_delivery_time" jdbcType="TIMESTAMP" property="latestDeliveryTime" javaType="java.lang.String"/>
         <result column="exchange_terms_detail" jdbcType="TIMESTAMP" property="exchangeTermsDetail" javaType="java.lang.String"/>
         <result column="merchandiser" jdbcType="VARCHAR" property="merchandiser" javaType="java.lang.String"/>
+        <result column="prepay_rate" jdbcType="DECIMAL" property="prepayRate" javaType="java.math.BigDecimal"/>
     </resultMap>
     <resultMap id="PRODUCTWARE" class="com.fuhuadata.domain.ProductWare">
         <result column="code" jdbcType="VARCHAR" property="code" javaType="java.lang.String"/>
