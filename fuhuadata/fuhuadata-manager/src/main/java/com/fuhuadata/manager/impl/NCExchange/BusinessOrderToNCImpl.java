@@ -33,6 +33,8 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -430,7 +432,7 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                     BigDecimal nqtusdprice=orderProduct.getContractPrice().multiply(nusdexchgrate);
                     productMap.put("nqtusdprice",""+nqtusdprice);
                     //本币金额
-                    BigDecimal nmny= nqtprice.multiply(orderProduct.getMainProductAmount());
+                    BigDecimal nmny= nqtprice.multiply(orderProduct.getMainProductAmount(),new MathContext(2, RoundingMode.UP));
                     productMap.put("nmny",""+nmny);
                     //主本币单价
                     productMap.put("nprice","" + orderProduct.getContractPrice());
