@@ -283,6 +283,7 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
             nodeValue.put("ctrantypeid",ctrantypeid);
             nodeValue.put("vtrantypecode",vtrantypecode);
             BigDecimal nexchangerate=orderBaseInfo.getNexchangerate();
+            BigDecimal nusdexchgrate=orderBaseInfo.getNusdexchgrate();
             if (orderBaseInfo.getNexchangerate()!=null) {
                 nodeValue.put("nexchangerate", "" + orderBaseInfo.getNexchangerate());
             }
@@ -420,11 +421,14 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                 //报价换算率
                 productMap.put("vqtunitrate","1");
                 if (orderProduct.getContractPrice()!=null) {
-                    //销售单价
+                    //销售单价(主单价)
                     productMap.put("norigprice", "" + orderProduct.getContractPrice());
                     //本币单价
                     BigDecimal nqtprice=orderProduct.getContractPrice().multiply(nexchangerate);
                     productMap.put("nqtprice","" + nqtprice);
+                    //nqtusdprice美币单价
+                    BigDecimal nqtusdprice=orderProduct.getContractPrice().multiply(nusdexchgrate);
+                    productMap.put("nqtusdprice",""+nqtusdprice);
                     //本币金额
                     BigDecimal nmny= nqtprice.multiply(orderProduct.getMainProductAmount());
                     productMap.put("nmny",""+nmny);
