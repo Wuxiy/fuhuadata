@@ -161,10 +161,10 @@ public class BusinessOrderProductAction {
         try {
             //修改
             if(businessProductId!=null && businessProductId>0){
-                //修改基本信息
-                businessOrderProductService.updateBusinessOrderProduct(businessOrderProduct);
                 //修改成分及费用信息
                 businessOrderProductComponentService.updateProductComponent(list);
+                //修改基本信息
+                businessOrderProductService.updateBusinessOrderProduct(businessOrderProduct);
             }else{
                 //新增
                 businessProductId = businessOrderProductService.addBusinessOrderProduct(businessOrderProduct,list);
