@@ -292,26 +292,7 @@
         </div>
     </div>
 </div>
-<!--加工厂modal-->
-##<div class="modal fade" id="factoryModal" tabindex="-1" role="dialog" aria-hidden="true">
-##    <div class="modal-dialog" style="margin-top: 200px; width: 300px;">
-##        <div class="modal-content">
-##            <div class="modal-header">
-##                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-##                    &times;
-##                </button>
-##            </div>
-##
-##            <div class="modal-body well" style="max-height: 300px;overflow-y: scroll; overflow-x: scroll;">
-##                <div class="form-group">
-##                    <ul class="list-group" id="factoryList">
-##
-##                    </ul>
-##                </div>
-##            </div>
-##        </div>
-##    </div>
-##</div>
+
 <div class="modal fade in" id="cbtModal" tabindex="-1" role="dialog" data-backdrop="false" aria-hidden="true">
     <div class="modal-dialog" style="width: 400px">
         <div class="modal-content">
@@ -359,7 +340,10 @@
     bInfo.startEdit();
     bInfo.startSave();
     bInfo.startCancel();
-
+    var costInfo = new CRM.module.Panel("#costtable");
+    costInfo.startEdit();
+    costInfo.startSave();
+    costInfo.startCancel();
 
     //editId=1,businessProductId!='',列表进入查看详情；editId=0,新增;eidtId=2，客户信息进入查看
     $(document).ready(function(){
@@ -1033,6 +1017,9 @@
             data:Add(),
             success:function (result) {
                 console.log(result);
+                $('input[name="consumption"]').attr('disabled',true);
+                $('input[name="price"]').attr('disabled',true);
+                $('input[name="remark"]').attr('disabled',true);
                 alert("修改成功!");
             }
         })
