@@ -990,7 +990,7 @@
             'id':$('#productRequireId').val(),
             /*'productRequireId':$('#productRequireId').val(),*/
             'businessProductId':$('#businessProductId').val(),
-            'mainPackingId':$('#mainPackingId').attr('data-id'),
+            'mainPackingId':$('#mainPackingType').attr('data-id'),
             'mainPackingType':$('#mainPackingType').val(),
             'material':$('#material').val(),
             'specification':$('#specification').val(),
