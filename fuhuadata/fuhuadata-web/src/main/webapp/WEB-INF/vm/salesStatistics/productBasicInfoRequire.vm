@@ -986,7 +986,7 @@
         tr.each(function () {
             var td = $(this).find('td'),
             obj = {
-                "id":(td.eq(0).attr('data-fid') == undefined?'':td.eq(0).attr('data-fid')),
+                "id":td.eq(0).attr('data-fid') == "undefined"?'':td.eq(0).attr('data-fid'),
                 "productId":$('#name').attr('data-productId'),
                 "wareId":$('#name').attr('data-wareId'),
                 "componentId":td.eq(0).attr('data-id'),
@@ -1002,6 +1002,7 @@
             arr.push(obj);
         })
         return arr;
+        console.log(arr);
     }
 
     function ifEmpty(data) {
