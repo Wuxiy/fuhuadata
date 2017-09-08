@@ -632,7 +632,9 @@
                             auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].size)+'</td>';
                             auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].quality)+'</td>';
                             if(ifEmpty(auxiliaryData[j].isEqualOuter) == 1){
-                                auxiliary_html += '<td class="isEqualOuter">'+ifEmpty(auxiliaryData[j].associatedConsumption)+'</td>';
+//                                auxiliary_html += '<td class="isEqualOuter">'+ifEmpty(auxiliaryData[j].associatedConsumption)+'</td>';
+                                auxiliary_html += '<td class="isEqualOuter">'+getSelectedOuter(outerData, productRequire.outerPackingId)['associatedConsumption']+'</td>';
+
                             }else{
                                 auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].associatedConsumption)+'</td>';
                             }
@@ -1123,6 +1125,27 @@
             }
         }
         return false;
+    }
+
+    // 获取选中的外包材
+    function getSelectedOuter(arr, id){
+
+        var theItem = '';
+        if (Array.isArray(arr)&&arr.length>0) {
+
+            $.each(arr, function (i, item) {
+
+                if(item.packingId === id) {
+
+                    theItem = item;
+                    return false;
+                }else {
+
+                    return true;
+                }
+            });
+        }
+        return theItem;
     }
 
     $(document).on('change','input[name="outercheckbox"]',function(){
