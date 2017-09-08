@@ -1118,13 +1118,18 @@
 
     //确认数组
     function contains(arr, obj) {
-        var i = arr.length;
-        while (i--) {
-            if (arr[i] == obj.toString()) {
-                return true;
+
+        if (Array.isArray(arr)) {
+            var i = arr.length;
+            while (i--) {
+                if (arr[i] == obj.toString()) {
+                    return true;
+                }
             }
+            return false;
+        }else {
+            return false;
         }
-        return false;
     }
 
     // 获取选中的外包材
