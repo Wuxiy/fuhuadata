@@ -372,7 +372,7 @@
             UNION
             <!-- 计算和外包装单耗不相同的辅材费用-->
             SELECT ifnull(SUM(k.unit_price*p.consumption),0) from k_packing_realtion p,business_product_require r,k_packing_archives k where r.business_product_id=#value# and p.main_packing_id = r.main_packing_id and is_equal_outer = 0
-            and k.packing_id in(ifnull(r.auxiliary_material_ids,0)) and k.packing_id = p.associated_packing_id
+            AND  CONCAT(',', r.auxiliary_material_ids, ',') LIKE  CONCAT('%,', k.packing_id, ',%') and k.packing_id = p.associated_packing_id
 
             UNION
             <!-- 计算和外包装单耗相同的辅材费用-->
@@ -383,7 +383,7 @@
             and k.associated_packing_id in(ifnull(r.auxiliary_material_ids,0)) and k.category_id=2)
             ),0)
             from k_packing_realtion p,business_product_require r,k_packing_archives k where r.business_product_id=#value# and p.main_packing_id = r.main_packing_id and is_equal_outer = 1
-            and k.packing_id in(ifnull(r.auxiliary_material_ids,0)) and k.packing_id = p.associated_packing_id
+            AND  CONCAT(',', r.auxiliary_material_ids, ',') LIKE  CONCAT('%,', k.packing_id, ',%') and k.packing_id = p.associated_packing_id
 
             UNION
             <!-- 计算运费-->
