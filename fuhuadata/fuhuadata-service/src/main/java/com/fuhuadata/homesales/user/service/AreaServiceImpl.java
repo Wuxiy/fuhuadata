@@ -52,7 +52,10 @@ public class AreaServiceImpl extends BaseTreeableServiceImpl<Area, Integer> impl
         List<Area> areas = Lists.newArrayList();
         List<String> areaIds = userAreaService.listAreaIdsByUserId(userId);
 
-        areaIds.forEach(areaId -> areas.addAll(listAllChildren(areaId)));
+        areaIds.forEach(areaId -> {
+          areas.add(this.get(Integer.valueOf(areaId)));
+          areas.addAll(listAllChildren(areaId));
+        });
 
         return areas;
     }
