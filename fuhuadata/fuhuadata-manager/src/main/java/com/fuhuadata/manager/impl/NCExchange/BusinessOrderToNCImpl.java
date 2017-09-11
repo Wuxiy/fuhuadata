@@ -308,9 +308,11 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
             if (orderBaseInfo.getGuaranteeRate()!=null) {
                 nodeValue.put("vdef12", "" + orderBaseInfo.getGuaranteeRate());
             }
-            if (orderBaseInfo.getCreditRate()!=null) {
-                nodeValue.put("vdef2", "" + orderBaseInfo.getCreditRate());
-            }
+            //if (orderBaseInfo.getCreditRate()!=null) {
+            //    nodeValue.put("vdef2", "" + orderBaseInfo.getCreditRate());
+            //}
+            //信保赔付率，nc默认为100
+            nodeValue.put("vdef2", "" +100);
             if (orderBaseInfo.getDiscountRate()!=null) {
                 nodeValue.put("vdef11", "" + orderBaseInfo.getDiscountRate());
             }
