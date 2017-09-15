@@ -413,12 +413,12 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                 int wareId=orderProduct.getWareId();
                 ProductWare productWare=orderToNc.getCodeByWareId(wareId);
                 if(productWare!=null){
-                    productMap.put("cmaterialvid",""+productWare.getCode());
+                    productMap.put("vbdef17",""+productWare.getCode());
                    // productMap.put("vbdef17",""+materialCode);
                 }
                 //报关物料id
                 if(productWare.getCustomsClearanceId()!=null){
-                    productMap.put("vbdef17",""+productWare.getCustomsClearanceId());
+                    productMap.put("cmaterialvid",""+productWare.getCustomsClearanceId());
                 }
                 //增值税税率
                 if (productWare.getRisetaxes()!=null){
