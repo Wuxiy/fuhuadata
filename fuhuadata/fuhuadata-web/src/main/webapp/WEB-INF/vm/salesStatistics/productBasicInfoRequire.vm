@@ -335,6 +335,7 @@
     var productId = '';
     var wareId = '';
     var costtable = document.getElementById('costtable');
+    var remarkTax = '';
 
     var bInfo = new CRM.module.Panel('#basicInfo');
     bInfo.startEdit();
@@ -686,7 +687,7 @@
                                 $('#advisePrice').val(basicInfo.advisePrice);
                                 $('#purchasePrice').val(basicInfo.purchasePrice);
                                 $('#deliveryTime').val(basicInfo.deliveryTime);
-                                $('#factoryName').val(basicInfo.factoryName);
+                                $('#factoryName').val(basicInfo.factoryId);
                                 $('#grossMargin').val(basicInfo.grossMargin);
                                 $('#commissionPrice').val(basicInfo.commissionPrice);
                                 $('#unitUseRate').val(basicInfo.unitUseRate);
@@ -696,6 +697,9 @@
                                 $('#capitalInterestPrice').val(basicInfo.capitalInterestPrice);
                                 $('#internalSupplyName').val(basicInfo.internalSupplyName);
                                 $('#internalSupplyName').data('val',basicInfo.internalSupplyId);
+
+                                //退税状态量
+                                remarkTax = basicInfo.taxFree;
 
                                 if(components.length!=0){
                                     $('#cost').removeClass('hidden');
@@ -854,7 +858,7 @@
                             $('#advisePrice').val(basicInfo.advisePrice);
                             $('#purchasePrice').val(basicInfo.purchasePrice);
                             $('#deliveryTime').val(basicInfo.deliveryTime);
-                            $('#factoryName').val(basicInfo.factoryName);
+                            $('#factoryName').val(basicInfo.factoryId);
                             $('#grossMargin').val(basicInfo.grossMargin);
                             $('#commissionPrice').val(basicInfo.commissionPrice);
                             $('#unitUseRate').val(basicInfo.unitUseRate);
@@ -1073,7 +1077,7 @@
             $('#grossMargin').attr('disabled',false);
             $('#grossMargin').val('');
             $('#taxFree').attr('disabled',false);
-            $('#taxFree').val('0');
+            $('#taxFree').val(remarkTax);
         }
     })
 

@@ -907,11 +907,16 @@
     });
 
     //外包材checkbox设置单选
-    $(document).on('click','.outercheckbox',function(){
-        $('.outercheckbox').removeAttr('checked');
-        $('.outercheckbox').removeClass('active');
-        $(this).attr('checked',true);
-        $(this).addClass('active');
+    $(document).on('change','.outercheckbox',function(){
+        if(!$(this).prop('checked')){
+            $('.outercheckbox').removeAttr('checked');
+            $('.outercheckbox').removeClass('active');
+        }else {
+            $('.outercheckbox').removeAttr('checked');
+            $('.outercheckbox').removeClass('active');
+            $(this).prop('checked','checked');
+            $(this).addClass('active');
+        }
     })
 
     //模态主材checkbox设置单选
