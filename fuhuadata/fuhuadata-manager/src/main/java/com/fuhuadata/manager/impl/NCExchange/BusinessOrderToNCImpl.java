@@ -353,7 +353,18 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
             }
             //保险费率
             nodeValue.put("vdef9",(orderBaseInfo.getPremiumRate()==null?0:orderBaseInfo.getPremiumRate())+"");
-
+            //可转船
+            if (orderBaseInfo.getTransportFlag()==0){
+                nodeValue.put("vdef14","N");
+            }else {
+                nodeValue.put("vdef14","Y");
+            }
+            //可分批
+            if (orderBaseInfo.getPartialShipmentFalg()==0){
+                nodeValue.put("vdef15","N");
+            }else if (orderBaseInfo.getPartialShipmentFalg()==1){
+                nodeValue.put("vdef15","Y");
+            }
             //设定长期协议的协议状态为生效。
             nodeValue.put("fstatusflag","7");
             nodeValue.put("fpfstatusflag","1");
@@ -499,6 +510,9 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                     }else if (pt.equals("09")){
                         productMap.put("vbdef19","其他类");
                     }
+                }
+                if(orderProduct.getCapitalInterestPrice()!=null){
+                    productMap.put("vbdef5",""+orderProduct.getCapitalInterestPrice());
                 }
                 //crmId
                 if (orderProduct.getId()!=null){
