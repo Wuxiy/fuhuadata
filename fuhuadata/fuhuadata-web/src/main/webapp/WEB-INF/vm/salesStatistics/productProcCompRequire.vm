@@ -603,11 +603,20 @@
                     if(outerData.length!=0){
                         for(var i=0;i<outerData.length;i++){
                             _html += '<tr class="outerlist">';
-                            if(outerData[i].packingId == outerPackingId){
-                                _html += '<td class="text-center"><input data-control="on"type="checkbox" value="'+ifEmpty(outerData[i].packingId)+'" class="outercheckbox" name="outercheckbox isdisabled" checked disabled/></td>';
-                            }else{
-                                _html += '<td class="text-center"><input data-control="on" type="checkbox" value="'+ifEmpty(outerData[i].packingId)+'" class="outercheckbox" name="outercheckbox isdisabled" disabled/></td>';
+                            if(editId == 0){
+                                if(outerData[i].packingId == outerPackingId){
+                                    _html += '<td class="text-center"><input data-control="on"type="checkbox" value="'+ifEmpty(outerData[i].packingId)+'" class="outercheckbox isdisabled" name="outercheckbox" checked/></td>';
+                                }else{
+                                    _html += '<td class="text-center"><input data-control="on" type="checkbox" value="'+ifEmpty(outerData[i].packingId)+'" class="outercheckbox isdisabled" name="outercheckbox"/></td>';
+                                }
+                            }else {
+                                if(outerData[i].packingId == outerPackingId){
+                                    _html += '<td class="text-center"><input data-control="on"type="checkbox" value="'+ifEmpty(outerData[i].packingId)+'" class="outercheckbox isdisabled" name="outercheckbox" checked disabled/></td>';
+                                }else{
+                                    _html += '<td class="text-center"><input data-control="on" type="checkbox" value="'+ifEmpty(outerData[i].packingId)+'" class="outercheckbox isdisabled" name="outercheckbox" disabled/></td>';
+                                }
                             }
+
                             _html += '<td class="text-center">'+ifEmpty(outerData[i].packName)+'</td>';
                             _html += '<td class="text-center">'+ifEmpty(outerData[i].spec)+'</td>';
                             _html += '<td class="text-center">'+ifEmpty(outerData[i].size)+'</td>';
