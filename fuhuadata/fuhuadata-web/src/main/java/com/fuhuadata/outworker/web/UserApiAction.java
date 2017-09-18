@@ -7,10 +7,7 @@ import com.fuhuadata.homesales.user.domain.User;
 import com.fuhuadata.homesales.user.service.AreaService;
 import com.fuhuadata.homesales.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -80,6 +77,28 @@ public class UserApiAction {
 
         result.setSuccess(true);
         result.addDefaultModel(areas);
+
+        return result.getResultPojo();
+    }
+
+    /**
+     * 修改密码
+     * @param request
+     * @param oldPwd
+     * @param newPwd
+     * @return
+     */
+    @RequestMapping(value = "/user/password", method = RequestMethod.POST)
+    public ResultPojo changePassword(HttpServletRequest request, @RequestParam String oldPwd,
+                                     @RequestParam String newPwd) {
+
+        Result<Boolean> result = Result.newResult(false);
+
+        String userId = (String) request.getAttribute("userId");
+        userService.changePassword(userId, oldPwd, newPwd);
+
+        result.setSuccess(true);
+        result.addDefaultModel(true);
 
         return result.getResultPojo();
     }
