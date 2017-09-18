@@ -144,10 +144,10 @@
                                             <td lang="zh">是否需要监装</td>
                                             <td class="text-left">
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input name="inspectionOfLoading" type="checkbox" value="0" data-control="on" disabled/>商检</label>
+                                                    <label><input name="inspectionOfLoading" type="checkbox" value="1" data-control="on" disabled/>商检</label>
                                                 </div>
                                                 <div class="checkbox col-xs-3">
-                                                    <label><input name="inspectionOfLoading" type="checkbox" value="1" data-control="on" disabled/>法检</label>
+                                                    <label><input name="inspectionOfLoading" type="checkbox" value="2" data-control="on" disabled/>法检</label>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <input id="inspectionInstitution" type="text" class="form-control isdisabled" placeholder="输入机构名称" disabled/>
@@ -637,13 +637,17 @@
 
 
     //监听互斥
-    $(document).on('click','input[name="fullyClose"]',function(){
-        $('input[name="fullyClose"]').removeAttr('checked');
-        $(this).prop('checked',true);
+    $(document).on('change','input[name="fullyClose"]',function(){
+        if($(this).prop('checked')){
+            $('input[name="fullyClose"]').removeAttr('checked');
+            $(this).prop('checked',true);
+        }
     })
-    $(document).on('click','input[name="inspectionOfStorage"]',function(){
-        $('input[name="inspectionOfLoading"]').removeAttr('checked');
-        $(this).prop('checked',true);
+    $(document).on('change','input[name="inspectionOfStorage"]',function(){
+        if($(this).prop('checked')){
+            $('input[name="inspectionOfLoading"]').removeAttr('checked');
+            $(this).prop('checked',true);
+        }
     })
 
     //checked选择
@@ -688,14 +692,14 @@
 
     //互斥
     $(document).on('click','input[name="inspectionOfLoading"]',function(){
-        $('input[name="inspectionOfLoading"]').removeAttr('checked');
-        $(this).prop('checked',true);
+        if($(this).prop('checked')){
+            $('input[name="inspectionOfLoading"]').removeAttr('checked');
+            $(this).prop('checked',true);
+        }
     })
     $('input[name="inspectionOfLoading"]').change(function(){
         if($(this).attr('checked')){
             $('#inspectionInstitution').attr('disabled',false);
-        }else{
-            $('#inspectionInstitution').attr('disabled',true);
             $('#inspectionInstitution').attr('value','');
         }
     })

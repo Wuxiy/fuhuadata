@@ -894,26 +894,33 @@
 
     $('input[name="telexRelease"]').change(function(){
         if($(this).filter(':checked').val()==='6'){
-            $('#releaseDestination').attr('disabled',false);
+            $('#releaseDestination').prop('disabled',false);
         }else{
-            $('#releaseDestination').attr('disabled',true);
-            $('#releaseDestination').attr('value','');
+            $('#releaseDestination').prop('disabled',true);
+            $('#releaseDestination').prop('value','');
         }
     })
 
     $('input[name="coo"]').change(function(){
         var val = $(this).val();
+        console.log(val);
         if(val == 1){
-            $('.contentRadio').attr('disabled',false);
-            $('.contentText').attr('disabled',true).val('');
+            $('.contentRadio').prop('disabled',false);
+            $('.contentText').prop('disabled',true).val('');
         }else if(val == 2){
-            $('.contentRadio').attr('disabled',true);
-            $('.contentRadio').attr('checked',false);
-            $('.contentText').attr('disabled',true).val('');
+            $('.contentRadio').prop('disabled',true);
+            $('.contentRadio').prop('checked',false);
+            $('.contentText').prop('disabled',true).val('');
         }else if(val == 3){
-            $('.contentRadio').attr('disabled',true);
-            $('.contentRadio').attr('checked',false);
-            $('.contentText').attr('disabled',false);
+            $('.contentRadio').prop('disabled',true);
+            $('.contentRadio').prop('checked',false);
+            $('.contentText').prop('disabled',false);
+        }
+
+        if(!$(this).prop('checked')){
+            $('.contentRadio').prop('disabled',true);
+            $('.contentRadio').prop('checked',false);
+            $('.contentText').prop('disabled',true).val('');
         }
     })
 
