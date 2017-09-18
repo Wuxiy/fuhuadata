@@ -518,6 +518,10 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
                 if (orderProduct.getId()!=null){
                     productMap.put("vbdef20",""+orderProduct.getId());
                 }
+                //客户商品名
+                if(orderProduct.getCustomerProductName()!=null){
+                    productMap.put("vbdef1",orderProduct.getCustomerProductName());
+                }
 
                 for(Map.Entry<String ,String> entry:productMap.entrySet()){
                     String a=entry.getKey();
