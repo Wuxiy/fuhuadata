@@ -626,16 +626,27 @@
                             _html += '</tr>';
                         }
                         $(_html).appendTo(outer);
+                    }else{
+                        $("#outer").html('<tr><td colspan="7">暂无数据</td></tr>');
                     }
 
                     var auxiliary_html;
                     if(auxiliaryData.length!=0){
                         for(var j=0;j<auxiliaryData.length;j++){
-                            if(contains(auxiliaryMaterialIdslist,auxiliaryData[j].packingId)){
-                                auxiliary_html += '<tr class=""><td><input data-control="on" type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox isdisabled" name="auxiliarycheckbox" checked disabled/></td>';
-                            }else {
-                                auxiliary_html += '<tr class=""><td><input data-control="on" type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox isdisabled" name="auxiliarycheckbox" disabled/></td>';
+                            if(editId == 0){
+                                if(contains(auxiliaryMaterialIdslist,auxiliaryData[j].packingId)){
+                                    auxiliary_html += '<tr class=""><td><input data-control="on" type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox isdisabled" name="auxiliarycheckbox" checked/></td>';
+                                }else {
+                                    auxiliary_html += '<tr class=""><td><input data-control="on" type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox isdisabled" name="auxiliarycheckbox"/></td>';
+                                }
+                            }else{
+                                if(contains(auxiliaryMaterialIdslist,auxiliaryData[j].packingId)){
+                                    auxiliary_html += '<tr class=""><td><input data-control="on" type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox isdisabled" name="auxiliarycheckbox" checked disabled/></td>';
+                                }else {
+                                    auxiliary_html += '<tr class=""><td><input data-control="on" type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox isdisabled" name="auxiliarycheckbox" disabled/></td>';
+                                }
                             }
+
                             auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].packName)+'</td>';
                             auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].spec)+'</td>';
                             auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].size)+'</td>';
@@ -650,6 +661,8 @@
                             auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].unitPrice)+'</td></tr>';
                         }
                         $(auxiliary_html).appendTo(auxiliary);
+                    }else{
+                        $("#auxiliary").html('<tr><td colspan="7">暂无数据</td></tr>');
                     }
 
                 }
@@ -826,6 +839,8 @@
                                 _html += '</tr>';
                             }
                             $(_html).appendTo(outer);
+                        }else{
+                            $("#outer").html('<tr><td colspan="7">暂无数据</td></tr>');
                         }
 
 
@@ -847,9 +862,9 @@
                             }
                             console.log(auxiliary_html);
                             $(auxiliary_html).appendTo(auxiliary);
-                            $('#auxiliary').removeClass('hidden');
+                            //$('#auxiliary').removeClass('hidden');
                         }else{
-                            $('#auxiliary').addClass('hidden');
+                            $("#auxiliary").html('<tr><td colspan="7">暂无数据</td></tr>');
                         }
                     }
                 })
@@ -917,7 +932,10 @@
 
     //外包材checkbox设置单选
     $(document).on('change','.outercheckbox',function(){
-        if($(this).prop('checked')){
+        if(!$(this).prop('checked')){
+            $('.outercheckbox').removeAttr('checked');
+            $('.outercheckbox').removeClass('active');
+        }else{
             $('.outercheckbox').removeAttr('checked');
             $('.outercheckbox').removeClass('active');
             $(this).prop('checked','checked');
