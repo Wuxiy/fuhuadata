@@ -932,7 +932,10 @@
 
     //外包材checkbox设置单选
     $(document).on('change','.outercheckbox',function(){
-        if($(this).prop('checked')){
+        if(!$(this).prop('checked')){
+            $('.outercheckbox').removeAttr('checked');
+            $('.outercheckbox').removeClass('active');
+        }else{
             $('.outercheckbox').removeAttr('checked');
             $('.outercheckbox').removeClass('active');
             $(this).prop('checked','checked');
