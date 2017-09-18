@@ -5,6 +5,7 @@ import com.fuhuadata.dao.mapper.UserAccountMapper;
 import com.fuhuadata.domain.mybatis.Dept;
 import com.fuhuadata.domain.mybatis.Principal;
 import com.fuhuadata.domain.mybatis.UserAccount;
+import com.fuhuadata.service.exception.ServiceException;
 import com.fuhuadata.service.exception.UserNotExistsException;
 import com.fuhuadata.service.exception.UserPasswordNotMatchException;
 import com.fuhuadata.service.mybatis.DeptService;
@@ -344,5 +345,32 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
 
         return userAccount;
     }
+
+    @CacheEvict(key = "'username-' + #result.loginName")
+    @Override
+    public UserAccount changePassword(Integer userId, String oldPwd, String newPwd) {
+
+        if (userId == null || StringUtils.isBlank(oldPwd) || StringUtils.isBlank(newPwd)) {
+            throw new IllegalArgumentException("userId [" + userId + "], oldPwd ["
+                    + oldPwd + "], newPwd [" + newPwd + "], 参数不能为空");
+        }
+
+        UserAccount userAccount = get(userId);
+        if (userAccount == null) {
+            throw new UserNotExistsException("用户[" + userId + "]不存在");
+        }
+
+        String loginPassword = userAccount.getLoginPassword();
+        if (!oldPwd.equals(loginPassword)) {
+            throw new ServiceException("旧密码错误");
+        }
+
+        userAccount.setLastPassword(loginPassword);
+        userAccount.setLoginPassword(newPwd);
+        updateSelective(userAccount);
+
+        return userAccount;
+    }
+
 
 }

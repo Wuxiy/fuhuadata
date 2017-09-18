@@ -100,4 +100,13 @@ public interface UserService extends BaseService<UserAccount, Integer> {
     void updateUserLoginInfo(Principal principal, HttpServletRequest request);
 
     UserAccount changePassword(Integer userId, String password);
+
+    /**
+     * 修改密码
+     * @param userId
+     * @param oldPwd 原始密码
+     * @param newPwd 新密码
+     * @return
+     */
+    UserAccount changePassword(Integer userId, String oldPwd, String newPwd);
 }

@@ -47,4 +47,13 @@ public interface UserService {
      * @param user
      */
     void setLeader(User user);
+
+    /**
+     * 修改密码
+     * @param userId
+     * @param oldPwd 旧密码
+     * @param newPwd 新密码
+     * @return
+     */
+    boolean changePassword(String userId, String oldPwd, String newPwd);
 }

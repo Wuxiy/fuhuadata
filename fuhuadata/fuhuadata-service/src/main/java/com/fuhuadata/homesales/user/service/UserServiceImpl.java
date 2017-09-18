@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import static java.util.stream.Collectors.toList;
 
@@ -134,5 +135,14 @@ public class UserServiceImpl implements UserService {
                 user.setUserPosition(2);
             }
         }
+    }
+
+    @Override
+    public boolean changePassword(String userId, String oldPwd, String newPwd) {
+
+        Objects.requireNonNull(userId);
+        userService.changePassword(Integer.valueOf(userId), oldPwd, newPwd);
+
+        return true;
     }
 }
