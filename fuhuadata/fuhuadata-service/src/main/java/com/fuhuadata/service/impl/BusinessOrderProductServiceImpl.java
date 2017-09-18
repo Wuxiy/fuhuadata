@@ -47,7 +47,6 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
             businessOrderProduct.setLastmodifyUserName(LoginUtils.getLoginName());
             businessOrderProduct.setLastmodifyUserId(LoginUtils.getLoginId());
             int businessProductId = businessOrderProductDao.insertBaseInfo(businessOrderProduct);
-            System.out.println("1111111111111新增商机产品返回ID"+businessProductId);
             for(BusinessOrderProductComponent bopc:businessOrderProductComponents){
                 bopc.setBusinessProductId(businessProductId);
                 bopc.setWareId(businessOrderProduct.getWareId());
@@ -121,7 +120,7 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
             Map<String,Object> param_map = new HashMap<String,Object>();
             param_map.put("businessProductId",new_businessProductId);
             param_map.put("businessProductArchivesId",business_product_archives_id);
-            businessOrderProductComponentDao.insertFromArchives(param_map);
+            /*businessOrderProductComponentDao.insertFromArchives(param_map);*/
             //3.复制包装要求
             BusinessProductRequire businessProductRequire = new BusinessProductRequire();
             map.put("productRequireId", businessProductRequireDao.insertFromArchives(param_map));

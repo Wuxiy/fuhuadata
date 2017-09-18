@@ -117,6 +117,10 @@
         </selectKey>
   </insert>
 
+    <select id="getArchiveIdByBusinessProductId" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+        select ifnull(archive_product_id,0) from business_order_product where id=#value#
+    </select>
+
     <insert id="addArchives" parameterClass="java.util.HashMap" >
         insert into business_order_product_component_archives (business_product_id, product_id,ware_id, component_id,
         consumption, price, cost, remark)
@@ -173,5 +177,12 @@
         where  id=#id#
 
     </update>
+
+    <delete id="deleteOrderProductComponent" parameterClass="java.util.HashMap">
+        DELETE  FROM
+        <isEqual property="type" compareValue="1">business_order_product_component</isEqual>
+        <isEqual property="type" compareValue="-1">business_order_product_component_archives</isEqual>
+        where business_product_id=#businessProductId# and ware_id = #wareId#
+    </delete>
 
 </sqlMap>

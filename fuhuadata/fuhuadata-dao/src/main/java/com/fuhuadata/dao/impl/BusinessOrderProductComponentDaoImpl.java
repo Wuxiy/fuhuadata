@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +24,7 @@ public class BusinessOrderProductComponentDaoImpl extends BaseDao<BusinessOrderP
     private static final String GET_BY_PRODUCT_ID = "BusinessOrderProductComponent.getListByProductId";
     private static final String ADD_ARCHIVES = "BusinessOrderProductComponent.addArchives";
     private static final String UPDATE_ARCHIVES = "BusinessOrderProductComponent.updateArchives";
+    private static final String DELETE_ORDER_PRODUCT_COMPONENT = "BusinessOrderProductComponent.deleteOrderProductComponent";
     @Autowired
     private SqlMapClientTemplate sqlMapClientTemplate;
     @Override
@@ -49,6 +51,13 @@ public class BusinessOrderProductComponentDaoImpl extends BaseDao<BusinessOrderP
     public List<BusinessOrderProductComponent> getProductComponentsByProductId(int productId) {
         return sqlMapClientTemplate.queryForList(GET_BY_PRODUCT_ID,productId);
     }
+    public void deleteOrderProductComponent(int type,int businessProductId,int wareId){
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("businessProductId",businessProductId);
+        map.put("wareId",wareId);
+        map.put("type",type);
+        sqlMapClientTemplate.delete(DELETE_ORDER_PRODUCT_COMPONENT,map);
+    }
 
     @Override
     public boolean updateProductComponent(List<BusinessOrderProductComponent> businessOrderProductComponents) {
@@ -63,5 +72,13 @@ public class BusinessOrderProductComponentDaoImpl extends BaseDao<BusinessOrderP
     @Override
     public int updateArchives(Integer businessProductId) {
         return sqlMapClientTemplate.update(UPDATE_ARCHIVES,businessProductId);
+    }
+    public  int getArchiveIdByBusinessProductId(int businessProductId){
+        try {
+            return (Integer) sqlMapClientTemplate.queryForObject("BusinessOrderProductComponent.getArchiveIdByBusinessProductId",businessProductId);
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

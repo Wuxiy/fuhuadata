@@ -8,6 +8,7 @@ import com.fuhuadata.service.BusinessOrderProductComponentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,9 +45,20 @@ public class BusinessOrderProductComponentServiceImpl implements BusinessOrderPr
         if(businessOrderProductComponents.size()==0){
             return false;
         }
+        int businessProductId = businessOrderProductComponents.get(0).getBusinessProductId();
+        int wareId = businessOrderProductComponents.get(0).getWareId();
+        //先删除，再新增
+        businessOrderProductComponentDao.deleteOrderProductComponent(1,businessProductId,wareId);
+        businessOrderProductComponentDao.insertProductComponent(businessOrderProductComponents);
         boolean flag = businessOrderProductComponentDao.updateProductComponent(businessOrderProductComponents);
         //修改档案，必须在修改订单产品成分之后执行
-        businessOrderProductComponentDao.updateArchives(businessOrderProductComponents.get(0).getBusinessProductId());
+        businessOrderProductComponentDao.deleteOrderProductComponent(-1,businessProductId,wareId);
+        //查询订单产品档案id
+        int achiveId = businessOrderProductComponentDao.getArchiveIdByBusinessProductId(businessProductId);
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("businessProductArchivesId",achiveId);
+        map.put("businessProductId",businessProductId);
+        businessOrderProductComponentDao.addArchives(map);
         return flag;
     }
 

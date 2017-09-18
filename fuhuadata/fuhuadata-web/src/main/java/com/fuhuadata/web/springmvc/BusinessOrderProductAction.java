@@ -96,8 +96,13 @@ public class BusinessOrderProductAction {
     public Map<String,Object> detailBaseInfo(Integer businessProductId){
         Map<String,Object> map = new HashMap<String,Object>();
         //查询订单产品基本信息
-        map.put("basicInfo",this.businessOrderProductService.getBaiscById(businessProductId));
-        map.put("components",this.businessOrderProductComponentService.getProductComponentsByBusinessProductId(businessProductId));
+        BusinessOrderProduct businessOrderProduct = this.businessOrderProductService.getBaiscById(businessProductId);
+        map.put("basicInfo",businessOrderProduct);
+        List<BusinessOrderProductComponent> components =  this.businessOrderProductComponentService.getProductComponentsByBusinessProductId(businessProductId);
+        if(components.size()==0){
+            components = businessOrderProductComponentService.getProductComponentsByProductId(businessOrderProduct.getProductId());
+        }
+        map.put("components",components);
         return map;
     }
 
@@ -133,6 +138,11 @@ public class BusinessOrderProductAction {
                 //查询产品成分信息
                 map.put("components",businessOrderProductComponentService.getProductComponentsByProductId(productId));
             }
+            /*从档案新增的数据不复制产品成品及费用（因为产品成分可能修改），所以这里需要查询产品成分及费用*/
+            /*ProductWareVo productWareVo = productWareService.getProductWareVo(productId,wareId);
+            map.put("productWareVo",productWareVo);
+            //查询产品成分信息
+            map.put("components",businessOrderProductComponentService.getProductComponentsByProductId(productId));*/
         } catch (Exception e) {
             log.error("添加订单产品-从档案复制新增失败，原因:"+e.getMessage());
         }

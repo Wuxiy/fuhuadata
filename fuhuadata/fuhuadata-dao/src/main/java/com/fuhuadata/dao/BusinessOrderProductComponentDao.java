@@ -58,4 +58,14 @@ public interface BusinessOrderProductComponentDao {
      */
     int updateArchives(Integer businessProductId);
 
+    /**
+     * 删除此订单或档案产品成分
+     * @param type 1 删除当前订单的数据， -1 删除档案数据
+     * @param businessProductId
+     * @param wareId
+     */
+    public void deleteOrderProductComponent(int type,int businessProductId,int wareId);
+
+    int getArchiveIdByBusinessProductId(int businessProductId);
+
 }
