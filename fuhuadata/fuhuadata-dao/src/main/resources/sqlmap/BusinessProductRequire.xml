@@ -111,6 +111,13 @@
   <update id="update" parameterClass="BusinessProductRequire" >
     update business_product_require
     <dynamic prepend="set" >
+      <isNotNull prepend="," property="outerPackingId" >
+        outer_packing_id = #outerPackingId#
+      </isNotNull>
+      <isNull prepend="," property="outerPackingId" >
+        outer_packing_id=0
+      </isNull>
+
       <isNotNull prepend="," property="mainPackingId" >
         main_packing_id = #mainPackingId#
       </isNotNull>
@@ -171,7 +178,7 @@
       <isNotNull prepend="," property="addtionalPrice" >
         addtional_price = #addtionalPrice#
       </isNotNull>
-        outer_packing_id = #outerPackingId#
+
       <isNotNull prepend="," property="sealingStyle" >
         sealing_style = #sealingStyle#
       </isNotNull>
