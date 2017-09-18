@@ -171,9 +171,7 @@
       <isNotNull prepend="," property="addtionalPrice" >
         addtional_price = #addtionalPrice#
       </isNotNull>
-      <isNotNull prepend="," property="outerPackingId" >
         outer_packing_id = #outerPackingId#
-      </isNotNull>
       <isNotNull prepend="," property="sealingStyle" >
         sealing_style = #sealingStyle#
       </isNotNull>

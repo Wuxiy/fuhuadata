@@ -1034,8 +1034,11 @@
     //获取外包材ID
     function getouterPackingId() {
         var outerPackingId = $('.active').val();
-        console.log(outerPackingId);
-        return outerPackingId;
+        if(outerPackingId == undefined||outerPackingId == null){
+            return "";
+        }else {
+            return outerPackingId;
+        }
     }
 
     //主材互斥
