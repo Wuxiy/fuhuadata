@@ -380,19 +380,22 @@ public class BusinessOrderToNCImpl implements BusinessOrderToNC{
             billhead.appendChild(pk_longpro_set);
             if (orderBaseInfo.getPrepayRate()!=null) {
                 int j=orderBaseInfo.getPrepayRate().compareTo(BigDecimal.valueOf(100.0))<0?2:1;
+                if (orderBaseInfo.getPrepayRate().doubleValue()==new Double(0) || orderBaseInfo.getPrepayRate().doubleValue()==new Double(100)){
+                    j=1;
+                }
                 for (int i=0;i<j;i++){
                     Element item = document.createElement("item");
                     pk_longpro_set.appendChild(item);
                     Map<String, String> set = new HashMap<String, String>();
                     set.put("crowno",i+1+"");
                     set.put("ishoworder",i+1+"");
-                    set.put("naccrate",(i==1?(new BigDecimal(100)).subtract(orderBaseInfo.getPrepayRate()):orderBaseInfo.getPrepayRate())+"");
-                    set.put("bprepayment",i==1?"N":"Y");
+                    set.put("naccrate",(i==1?(new BigDecimal(100)).subtract(orderBaseInfo.getPrepayRate()):(j==1 ? new BigDecimal(100):orderBaseInfo.getPrepayRate()))+"");
+                    set.put("bprepayment",i==1?"N":(orderBaseInfo.getPrepayRate().doubleValue()==new Double(0)?"N":"Y"));
                     set.put("cincomeperiod","STST013");
                     set.put("ieffectdateadddate",""+0);
                     //账期天数
                     set.put("ipaymentday",(CollectionAgreement.valueOf(orderBaseInfo.getCollectionAgreement()).value)+"");
-                    set.put("bdeposit",i==1?"Y":"N");
+                    set.put("bdeposit",i==1?"Y":(orderBaseInfo.getPrepayRate().doubleValue()==new Double(0)?"Y":"N"));
                     for (Map.Entry<String,String> entry:set.entrySet()){
                         Element ele=document.createElement(entry.getKey());
                         ele.appendChild(document.createTextNode(entry.getValue()));
