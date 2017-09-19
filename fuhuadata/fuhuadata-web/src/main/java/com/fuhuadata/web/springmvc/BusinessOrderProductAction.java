@@ -166,6 +166,7 @@ public class BusinessOrderProductAction {
         ResultPojo pojo = new ResultPojo();
         List<BusinessOrderProductComponent> list = new ArrayList<BusinessOrderProductComponent>();
         for(BusinessOrderProductComponent bopc:businessOrderProductComponents){
+            bopc.setBusinessProductId(businessProductId);
             list.add(bopc);
         }
         try {
