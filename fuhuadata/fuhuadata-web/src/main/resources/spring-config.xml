@@ -8,7 +8,7 @@
             http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <context:property-placeholder ignore-unresolvable="true"
-                                  location="classpath:resources.properties, classpath*:ncInfo.properties"/>
+                                  location="classpath:resources.properties"/>
 
     <!-- spring工具类 方便在非spring管理环境中获取bean -->
     <bean id="springUtils" class="com.fuhuadata.service.util.SpringUtils"/>

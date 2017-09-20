@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="GBK"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	   xmlns:context="http://www.springframework.org/schema/context"
-	   xmlns:util="http://www.springframework.org/schema/util"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
 
-	   default-autowire="byName">
+       default-autowire="byName">
 
 	<bean id="userAccountManager" class="com.fuhuadata.manager.impl.UserAccountManagerImpl"/>
 	<bean id="systemLogManager" class="com.fuhuadata.manager.impl.SystemLogManagerImpl"/>
@@ -48,12 +45,11 @@
 	<bean id="factoryInfoToNC" class="com.fuhuadata.manager.impl.NCExchange.FactoryInfoToNCImpl"/>
 	<bean id="factoryProductToNC" class="com.fuhuadata.manager.impl.NCExchange.FactoryProductToNCImpl"/>
 
-	<util:properties id="ncConfig" location="classpath*:ncInfo.properties"/>
 	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
 		<property name="staticMethod" value="com.fuhuadata.manager.impl.NCExchange.NcExchangeToolUtil.setNcUrl"/>
 		<property name="arguments">
 			<list>
-				<value>#{ncConfig.ncurl}</value>
+				<value>${ncurl}</value>
 			</list>
 		</property>
 	</bean>
