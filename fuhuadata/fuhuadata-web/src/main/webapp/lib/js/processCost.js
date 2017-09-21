@@ -674,7 +674,8 @@ $(document).on("click",".updateadEexpense2",function(){
         "charges":$('#charges').val(),
         "profit":$('#profit').val(),
         "managementFee":$('#managementFee').val(),
-        "tax":$('#tax').val()
+        "tax":$('#tax').val(),
+        "totalCost":$('#totalCost').val()
     }
     console.log(data);
 
