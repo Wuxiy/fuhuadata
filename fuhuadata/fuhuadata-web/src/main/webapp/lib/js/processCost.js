@@ -27,20 +27,21 @@ var ComponentCost = ComponentCost || {};
                     var ResultData = result.data,
                         costHtml = '';
                     for (var i = 0; i < ResultData.length; i++) {
-                        costHtml += '<tr data-component-id="' + ResultData[i].componentId + '">' +
-                            '<td><a class="componnentId" style="cursor: pointer;" data_url="'+basePath+'/componentCost/getComponentCostById?id=' + ResultData[i].componentId + '&&productCategoryId='+ResultData[i].productCategoryId+'">' + ifEmpty(ResultData[i].componentName) + '</a></td>' +
-                            '<td>' + ifEmpty(ResultData[i].consumption) + '</td>' +
-                            '<td>' + ifEmpty(ResultData[i].unitCost) + '</td>' +
-                            '<td>' + ifEmpty(ResultData[i].priceEnd) + '</td>' +
-                            '<td>' + ifEmpty(ResultData[i].suitableProduct) + '</td>' +
-                            '<td>' + ifEmpty(ResultData[i].remarks) + '</td>' +
-                            '<td>' +
-                            '<div class="checkbox">' +
-                            '<label><input type="checkbox" value="' + ResultData[i].costId + '" class="j-delete"></label>' +
-                            '</div>' +
-                            '</td>' +
-                            '</tr>';
-
+                        if(ResultData[i].componentName){
+                            costHtml += '<tr data-component-id="' + ResultData[i].componentId + '">' +
+                                '<td><a class="componnentId" style="cursor: pointer;" data_url="'+basePath+'/componentCost/getComponentCostById?id=' + ResultData[i].componentId + '&&productCategoryId='+ResultData[i].productCategoryId+'">' + ifEmpty(ResultData[i].componentName) + '</a></td>' +
+                                '<td>' + ifEmpty(ResultData[i].consumption) + '</td>' +
+                                '<td>' + ifEmpty(ResultData[i].unitCost) + '</td>' +
+                                '<td>' + ifEmpty(ResultData[i].priceEnd) + '</td>' +
+                                '<td>' + ifEmpty(ResultData[i].suitableProduct) + '</td>' +
+                                '<td>' + ifEmpty(ResultData[i].remarks) + '</td>' +
+                                '<td>' +
+                                '<div class="checkbox">' +
+                                '<label><input type="checkbox" value="' + ResultData[i].costId + '" class="j-delete"></label>' +
+                                '</div>' +
+                                '</td>' +
+                                '</tr>';
+                        }
                         $('#cost1').html(costHtml);
                     }
                 }
@@ -70,12 +71,14 @@ $(document).ready(function () {
                 }
 
                 for (var j = 0; j < ResultData1.length; j++) {
-                    Adeexpense1.innerHTML += '<tr>' +
-                        '<td><a class="adEexpense1" style="cursor: pointer;" data_url="'+basePath+'/preparationProcessCost/getPreparationProcessCostById?id='+ResultData1[j].mcostId+'">' + ResultData1[j].costTerm + '</a></td>' +
-                        '<td>' + ifEmpty(ResultData1[j].unitCost) + '</td>' +
-                        '<td>' + ifEmpty(ResultData1[j].priceEnd) + '</td>' +
-                        '<td>' + ifEmpty(ResultData1[j].remarks) + '</td>' +
-                        '</tr>';
+                    if(ResultData1[j].costTerm){
+                        Adeexpense1.innerHTML += '<tr>' +
+                            '<td><a class="adEexpense1" style="cursor: pointer;" data_url="'+basePath+'/preparationProcessCost/getPreparationProcessCostById?id='+ResultData1[j].mcostId+'">' + ResultData1[j].costTerm + '</a></td>' +
+                            '<td>' + ifEmpty(ResultData1[j].unitCost) + '</td>' +
+                            '<td>' + ifEmpty(ResultData1[j].priceEnd) + '</td>' +
+                            '<td>' + ifEmpty(ResultData1[j].remarks) + '</td>' +
+                            '</tr>';
+                    }
                 }
                 for (var k = 0; k < ResultData2.length; k++) {
                     Adeexpense2.innerHTML += '<tr>' +
@@ -114,12 +117,14 @@ $(document).ready(function () {
                     }
 
                     for (var j = 0; j < ResultData1.length; j++) {
-                        Adeexpense1.innerHTML += '<tr>' +
-                            '<td><a class="adEexpense1" style="cursor: pointer;" data_url="'+basePath+'/preparationProcessCost/getPreparationProcessCostById?id='+ResultData1[j].mcostId+'">' + ifEmpty(ResultData1[j].costTerm) + '</a></td>' +
-                            '<td>' + ifEmpty(ResultData1[j].unitCost) + '</td>' +
-                            '<td>' + ifEmpty(ResultData1[j].priceEnd) + '</td>' +
-                            '<td>' + ifEmpty(ResultData1[j].remarks) + '</td>' +
-                            '</tr>';
+                        if(ResultData1[j].costTerm){
+                            Adeexpense1.innerHTML += '<tr>' +
+                                '<td><a class="adEexpense1" style="cursor: pointer;" data_url="'+basePath+'/preparationProcessCost/getPreparationProcessCostById?id='+ResultData1[j].mcostId+'">' + ResultData1[j].costTerm + '</a></td>' +
+                                '<td>' + ifEmpty(ResultData1[j].unitCost) + '</td>' +
+                                '<td>' + ifEmpty(ResultData1[j].priceEnd) + '</td>' +
+                                '<td>' + ifEmpty(ResultData1[j].remarks) + '</td>' +
+                                '</tr>';
+                        }
                     }
                     for (var k = 0; k < ResultData2.length; k++) {
                         Adeexpense2.innerHTML += '<tr>' +
@@ -334,13 +339,13 @@ $(document).on("click",".adEexpense2",function(){
             html +='<label class="col-lg-2 control-label">水、电、气费</label>';
             html +='<div class="col-lg-3">';
             html +='<div class="input-group">';
-            html +='<input class="form-control" type="text" value="'+ifEmpty(ResultData.charges)+'" id="charges">';
+            html +='<input class="form-control total" type="text" value="'+ifEmpty(ResultData.charges)+'" id="charges">';
             html +='<div class="input-group-btn">';
             html +='<botton class="btn btn-xs btn-primary">(元/吨)</botton></div></div></div>';
             html +='<label class="col-lg-2 control-label">利润</label>';
             html +='<div class="col-lg-3">';
             html +='<div class="input-group">';
-            html +='<input class="form-control" type="text" value="'+ifEmpty(ResultData.profit)+'" id="profit">';
+            html +='<input class="form-control total" type="text" value="'+ifEmpty(ResultData.profit)+'" id="profit">';
             html +='<div class="input-group-btn">';
             html +='<botton class="btn btn-xs btn-primary">(元/吨)</botton>';
             html +='</div></div></div></div>';
@@ -348,13 +353,13 @@ $(document).on("click",".adEexpense2",function(){
             html +='<label class="col-lg-2 control-label">管理费</label>';
             html +='<div class="col-lg-3">';
             html +='<div class="input-group">';
-            html +='<input class="form-control" type="text" value="'+ifEmpty(ResultData.managementFee)+'" id="managementFee">';
+            html +='<input class="form-control total" type="text" value="'+ifEmpty(ResultData.managementFee)+'" id="managementFee">';
             html +='<div class="input-group-btn">';
             html +='<botton class="btn btn-xs btn-primary">(元/吨)</botton></div></div></div>';
             html +='<label class="col-lg-2 control-label">税金</label>';
             html +='<div class="col-lg-3">';
             html +='<div class="input-group">';
-            html +='<input class="form-control" type="text" value="'+ifEmpty(ResultData.tax)+'" id="tax">';
+            html +='<input class="form-control total" type="text" value="'+ifEmpty(ResultData.tax)+'" id="tax">';
             html +='<div class="input-group-btn">';
             html +='<botton class="btn btn-xs btn-primary">(元/吨)</botton>';
             html +='</div></div></div></div>';
@@ -914,3 +919,16 @@ $(document).on("click",".costAddmodal",function(){
     $('#costAddmodal').modal('show');
 })
 
+//成分价格费用合计
+function gettotalCost() {
+
+}
+
+$(document).on('change','.total',function () {
+    var text = $('.total');
+    var total = 0;
+    for(var i = 0;i < text.length;i ++){
+        total += parseInt(text[i].value);
+    }
+    $('#totalCost').val(total);
+})
