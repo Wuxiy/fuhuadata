@@ -23,7 +23,7 @@ public class PackingArchives {
     private String packName;//包材名称
 
     private String size;//尺寸 格式：150*150*150
-    @NotBlank
+
     private String spec;//规格
 
     private String specUnit;//规格单位 （纸箱-瓶/箱，袋/箱）（瓶桶-L,KG）
