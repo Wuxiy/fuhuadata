@@ -351,13 +351,13 @@ public class UserServiceImpl extends BaseServiceImpl<UserAccount, Integer>
     public UserAccount changePassword(Integer userId, String oldPwd, String newPwd) {
 
         if (userId == null || StringUtils.isBlank(oldPwd) || StringUtils.isBlank(newPwd)) {
-            throw new IllegalArgumentException("userId [" + userId + "], oldPwd ["
+            throw new ServiceException("userId [" + userId + "], oldPwd ["
                     + oldPwd + "], newPwd [" + newPwd + "], 参数不能为空");
         }
 
         UserAccount userAccount = get(userId);
         if (userAccount == null) {
-            throw new UserNotExistsException("用户[" + userId + "]不存在");
+            throw new ServiceException("用户[" + userId + "]不存在");
         }
 
         String loginPassword = userAccount.getLoginPassword();
