@@ -605,7 +605,7 @@
                             _html += '<tr class="outerlist">';
                             if(editId == 0){
                                 if(outerData[i].packingId == outerPackingId){
-                                    _html += '<td class="text-center"><input data-control="on"type="checkbox" value="'+ifEmpty(outerData[i].packingId)+'" class="outercheckbox isdisabled" name="outercheckbox" checked/></td>';
+                                    _html += '<td class="text-center"><input data-control="on" type="checkbox" value="'+ifEmpty(outerData[i].packingId)+'" class="outercheckbox isdisabled" name="outercheckbox" checked/></td>';
                                 }else{
                                     _html += '<td class="text-center"><input data-control="on" type="checkbox" value="'+ifEmpty(outerData[i].packingId)+'" class="outercheckbox isdisabled" name="outercheckbox"/></td>';
                                 }
@@ -635,15 +635,31 @@
                         for(var j=0;j<auxiliaryData.length;j++){
                             if(editId == 0){
                                 if(contains(auxiliaryMaterialIdslist,auxiliaryData[j].packingId)){
-                                    auxiliary_html += '<tr class=""><td><input type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox isdisabled" name="auxiliarycheckbox" checked/></td>';
+                                    if(ifEmpty(auxiliaryData[j].isEqualOuter) == 1){
+                                        auxiliary_html += '<tr class=""><td><input data-control="on" type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox isdisabled outandaux" name="auxiliarycheckbox" checked/></td>';
+                                    }else{
+                                        auxiliary_html += '<tr class=""><td><input data-control="on" type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox isdisabled" name="auxiliarycheckbox" checked/></td>';
+                                    }
                                 }else {
-                                    auxiliary_html += '<tr class=""><td><input type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox isdisabled" name="auxiliarycheckbox"/></td>';
+                                    if(ifEmpty(auxiliaryData[j].isEqualOuter) == 1){
+                                        auxiliary_html += '<tr class=""><td><input data-control="on" type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox isdisabled outandaux" name="auxiliarycheckbox"/></td>';
+                                    }else {
+                                        auxiliary_html += '<tr class=""><td><input data-control="on" type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox isdisabled" name="auxiliarycheckbox"/></td>';
+                                    }
                                 }
                             }else{
                                 if(contains(auxiliaryMaterialIdslist,auxiliaryData[j].packingId)){
-                                    auxiliary_html += '<tr class=""><td><input type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox isdisabled" name="auxiliarycheckbox" checked disabled/></td>';
+                                    if(ifEmpty(auxiliaryData[j].isEqualOuter) == 1){
+                                        auxiliary_html += '<tr class=""><td><input data-control="on" type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox isdisabled outandaux" name="auxiliarycheckbox" checked disabled/></td>';
+                                    }else {
+                                        auxiliary_html += '<tr class=""><td><input data-control="on" type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox isdisabled" name="auxiliarycheckbox" checked disabled/></td>';
+                                    }
                                 }else {
-                                    auxiliary_html += '<tr class=""><td><input type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox isdisabled" name="auxiliarycheckbox" disabled/></td>';
+                                    if(ifEmpty(auxiliaryData[j].isEqualOuter) == 1){
+                                        auxiliary_html += '<tr class=""><td><input data-control="on" type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox isdisabled outandaux" name="auxiliarycheckbox" disabled/></td>';
+                                    }else{
+                                        auxiliary_html += '<tr class=""><td><input data-control="on" type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox isdisabled" name="auxiliarycheckbox" disabled/></td>';
+                                    }
                                 }
                             }
 
@@ -846,7 +862,11 @@
                         if(auxiliaryData.length!=0){
                             auxiliary.html('');
                             for(var j=0;j<auxiliaryData.length;j++){
-                                auxiliary_html += '<tr class=""><td><input type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox" name="auxiliarycheckbox" disabled/></td>';
+                                if(ifEmpty(auxiliaryData[j].isEqualOuter) == 1){
+                                    auxiliary_html += '<tr class=""><td><input data-control="on" type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox outandaux" name="auxiliarycheckbox" disabled/></td>';
+                                }else {
+                                    auxiliary_html += '<tr class=""><td><input data-control="on" type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox" name="auxiliarycheckbox"/></td>';
+                                }
                                 auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].packName)+'</td>';
                                 auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].spec)+'</td>';
                                 auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].size)+'</td>';
@@ -953,13 +973,14 @@
         if(!$(this).prop('checked')){
             $('.outercheckbox').removeAttr('checked');
             $('.outercheckbox').removeClass('active');
-            $('.auxiliarycheckbox').attr('disabled',true);
+            $('.outandaux').attr('disabled',true);
+            $('.outandaux').prop('checked',false);
         }else{
             $('.outercheckbox').removeAttr('checked');
             $('.outercheckbox').removeClass('active');
             $(this).prop('checked','checked');
             $(this).addClass('active');
-            $('.auxiliarycheckbox').attr('disabled',false);
+            $('.outandaux').attr('disabled',false);
         }
     })
 
