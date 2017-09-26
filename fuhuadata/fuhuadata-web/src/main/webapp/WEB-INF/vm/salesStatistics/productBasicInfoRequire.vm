@@ -201,8 +201,13 @@
                                                 <span class="input-group-addon">原币</span>
                                             </div>
                                         </td>
-                                        <td><label class="control-label" lang="zh">单位耗用比例</label></td>
-                                        <td><input data-control="on" id="unitUseRate" class="form-control isdisabled" type="text" value="" disabled/></td>
+                                        <td>
+                                            <label class="control-label" lang="zh">
+                                                单位耗用比例
+                                                <sup class="not-null">*</sup>
+                                            </label>
+                                        </td>
+                                        <td><input data-control="on" id="unitUseRate" class="form-control notnull isdisabled" type="text" value="" disabled/></td>
                                         <td></td>
                                         <td></td>
                                     </tr>
