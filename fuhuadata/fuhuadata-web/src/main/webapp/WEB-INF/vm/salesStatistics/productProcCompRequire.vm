@@ -828,7 +828,7 @@
                             outer.html('');
                             for(var i=0;i<outerData.length;i++){
                                 _html += '<tr class="outerlist">';
-                                _html += '<td class="text-center"><input type="checkbox" value="'+ifEmpty(outerData[i].packingId)+'" class="outercheckbox" name="outercheckbox"/></td>';
+                                _html += '<td class="text-center"><input type="checkbox" value="'+ifEmpty(outerData[i].packingId)+'" class="outercheckbox" name="outercheckbox" /></td>';
                                 _html += '<td class="text-center">'+ifEmpty(outerData[i].packName)+'</td>';
                                 _html += '<td class="text-center">'+ifEmpty(outerData[i].spec)+'</td>';
                                 _html += '<td class="text-center">'+ifEmpty(outerData[i].size)+'</td>';
@@ -846,7 +846,7 @@
                         if(auxiliaryData.length!=0){
                             auxiliary.html('');
                             for(var j=0;j<auxiliaryData.length;j++){
-                                auxiliary_html += '<tr class=""><td><input type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox" name="auxiliarycheckbox"/></td>';
+                                auxiliary_html += '<tr class=""><td><input type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox" name="auxiliarycheckbox" disabled/></td>';
                                 auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].packName)+'</td>';
                                 auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].spec)+'</td>';
                                 auxiliary_html += '<td>'+ifEmpty(auxiliaryData[j].size)+'</td>';
@@ -939,19 +939,6 @@
 
     });
 
-    //外包材checkbox设置单选
-    $(document).on('change','.outercheckbox',function(){
-        if(!$(this).prop('checked')){
-            $('.outercheckbox').removeAttr('checked');
-            $('.outercheckbox').removeClass('active');
-        }else{
-            $('.outercheckbox').removeAttr('checked');
-            $('.outercheckbox').removeClass('active');
-            $(this).prop('checked','checked');
-            $(this).addClass('active');
-        }
-    })
-
     //模态主材checkbox设置单选
     $(document).on('click','.check',function(){
         $('.check').removeAttr('checked');
@@ -959,6 +946,24 @@
         $(this).prop('checked','checked');
         $(this).addClass('active');
     })
+
+
+    //外包材checkbox设置单选
+    $(document).on('change','.outercheckbox',function(){
+        if(!$(this).prop('checked')){
+            $('.outercheckbox').removeAttr('checked');
+            $('.outercheckbox').removeClass('active');
+            $('.auxiliarycheckbox').attr('disabled',true);
+        }else{
+            $('.outercheckbox').removeAttr('checked');
+            $('.outercheckbox').removeClass('active');
+            $(this).prop('checked','checked');
+            $(this).addClass('active');
+            $('.auxiliarycheckbox').attr('disabled',false);
+        }
+    })
+
+
 
     //checked判定
     function checked(id) {
