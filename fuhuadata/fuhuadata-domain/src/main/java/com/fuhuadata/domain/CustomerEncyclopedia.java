@@ -43,7 +43,6 @@ public class CustomerEncyclopedia {
 
         private CustomerEnterpriceNature[] enterpriceNatures;
 
-        @NotBlank
         private String companyInfo;//企业简介
 
         private String isFull;//完整度
