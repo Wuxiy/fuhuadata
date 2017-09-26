@@ -40,6 +40,7 @@ public class BusinessOrderProductDaoImpl extends BaseDao<BusinessOrderProduct> i
     private static final String CALCULATE_PROCESS_COST = "BUSINESSORDERPRODUCT.calculateProcesscost";
 
     private static final String GET_ORDER_PRODUCT_LIST="BUSINESSORDERPRODUCT.GET-ORDER-PRODUCT-LIST";
+    private static final String IUPDATE_BASIC = "BUSINESSORDERPRODUCT.updateBasic";
     public int insertBaseInfo(BusinessOrderProduct businessOrderProduct) throws Exception{
         return (Integer)sqlMapClient.insert(INSERT_STMT,businessOrderProduct);
     }
@@ -51,6 +52,9 @@ public class BusinessOrderProductDaoImpl extends BaseDao<BusinessOrderProduct> i
 
     public int updateBusinessOrderProduct(BusinessOrderProduct businessOrderProduct)throws Exception {
         return sqlMapClient.update(IUPDATE_STMT,businessOrderProduct);
+    }
+    public int updateBusinessOrderProduct_basic(BusinessOrderProduct businessOrderProduct)throws Exception {
+        return sqlMapClient.update(IUPDATE_BASIC,businessOrderProduct);
     }
 
     public List<BusinessOrderProduct> getList(QueryBusinessOrderProduct queryBusinessOrderProduct) {

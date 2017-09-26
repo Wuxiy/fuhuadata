@@ -179,6 +179,183 @@
             <isNotEmpty prepend="," property="unitUseRate">
                 unit_use_rate = #unitUseRate#
             </isNotEmpty>
+
+            <isNotEmpty prepend="," property="capitalInterestPrice">
+                capital_interest_price = #capitalInterestPrice#
+            </isNotEmpty>
+
+            <isNotEmpty prepend="," property="archiveProductId">
+                archive_product_id = #archiveProductId#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="productId">
+                product_id = #productId#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="wareId">
+                ware_id = #wareId#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="customsClearanceId">
+                customs_clearance_id = #customsClearanceId#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="customsClearanceName">
+                customs_clearance_name = #customsClearanceName#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="customerId">
+                customer_id = #customerId#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="name">
+                name = #name#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="customerProductName">
+                customer_product_name = #customerProductName#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="brand">
+                brand = #brand#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="mainProductAmount">
+                main_product_amount = #mainProductAmount#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="mainProductUnit">
+                main_product_unit = #mainProductUnit#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="subProductAmount">
+                sub_product_amount = #subProductAmount#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="subProductUnit">
+                sub_product_unit = #subProductUnit#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="convertRate">
+                convert_rate = #convertRate#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="priceType">
+                price_type = #priceType#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="advisePrice">
+                advise_price = #advisePrice#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="purchasePrice">
+                purchase_price = #purchasePrice#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="deliveryTime">
+                delivery_time = #deliveryTime#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="internalTransportMode">
+                Internal_transport_mode = #internalTransportMode#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="internalTransportPrice">
+                Internal_transport_price = #internalTransportPrice#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="factoryId">
+                factory_id = #factoryId#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="factoryName">
+                factory_name = #factoryName#
+            </isNotEmpty>
+
+            <isNotEmpty prepend="," property="commissionPrice">
+                commission_price = #commissionPrice#
+            </isNotEmpty>
+
+            <isNotEmpty prepend="," property="documentaryType">
+                documentary_type = #documentaryType#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="documentaryRequire">
+                documentary_require = #documentaryRequire#
+            </isNotEmpty>
+
+            <isNotEmpty prepend="," property="internalSupplyId">
+                internal_Supply_Id = #internalSupplyId#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="internalSupplyName">
+                internal_Supply_name = #internalSupplyName#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="otherDocumentaryRequire">
+                other_documentary_require = #otherDocumentaryRequire#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="shippingAgentRequire">
+                shipping_agent_require = #shippingAgentRequire#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="packageRequire">
+                package_require = #packageRequire#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="goodsType">
+                goods_type = #goodsType#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="mianxiangqi">
+                mianxiangqi = #mianxiangqi#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="miantuiqi">
+                miantuiqi = #miantuiqi#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="cupboardType">
+                cupboard_type = #cupboardType#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="cupboardPerNumber">
+                cupboard_per_number = #cupboardPerNumber#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="cupboardNumber">
+                cupboard_number = #cupboardNumber#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="oceanFreight">
+                ocean_freight = #oceanFreight#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="portSurcharge">
+                port_surcharge = #portSurcharge#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="taxType">
+                tax_type = #taxType#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="taxFree">
+                tax_free = #taxFree#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="grossMargin">
+                gross_margin = #grossMargin#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="processCost">
+                process_cost = #processCost#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="otherCost">
+                other_cost = #otherCost#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="minPrice">
+                min_price = #minPrice#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="contractPrice">
+                contract_price = #contractPrice#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="transformState">
+                transform_state = #transformState#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="createUserId">
+                create_user_id = #createUserId#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="createUserName">
+                create_user_name = #createUserName#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="lastmodifyUserId">
+                lastmodify_user_id = #lastmodifyUserId#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="lastmodifyUserName">
+                lastmodify_user_name = #lastmodifyUserName#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="createTime">
+                create_time = #createTime#
+            </isNotEmpty>
+            <isNotEmpty prepend="," property="modifyTime">
+                modify_time = #modifyTime#
+            </isNotEmpty>
+        </dynamic>
+        where id = #id#
+    </update>
+    <update id="updateBasic" parameterClass="BusinessOrderProduct">
+        update business_order_product
+        <dynamic prepend="set">
+            <isNotEmpty prepend="," property="orderId">
+                order_id = #orderId#
+            </isNotEmpty>
+
+            <isNotEmpty prepend="," property="unitUseRate">
+                unit_use_rate = #unitUseRate#
+            </isNotEmpty>
             <isNull prepend="," property="unitUseRate">
                 unit_use_rate = #unitUseRate#
             </isNull>

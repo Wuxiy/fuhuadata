@@ -163,7 +163,12 @@ public class BusinessOrderProductServiceImpl implements BusinessOrderProductServ
 
     @Override
     public int updateBusinessOrderProduct(BusinessOrderProduct businessOrderProduct) throws Exception {
-        int effect_num =  businessOrderProductDao.updateBusinessOrderProduct(businessOrderProduct);
+        int effect_num;
+        if (businessOrderProduct.getOrderId()!=null){
+            effect_num= businessOrderProductDao.updateBusinessOrderProduct_basic(businessOrderProduct);
+        }else {
+            effect_num = businessOrderProductDao.updateBusinessOrderProduct(businessOrderProduct);
+        }
         updatePrice(businessOrderProduct);
         //更新档案数据
         customerProductArchivesDao.updateArchives(businessOrderProduct.getId());

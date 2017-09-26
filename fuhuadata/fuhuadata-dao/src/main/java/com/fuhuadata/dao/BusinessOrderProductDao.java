@@ -36,6 +36,13 @@ public interface BusinessOrderProductDao {
     int updateBusinessOrderProduct(BusinessOrderProduct businessOrderProduct) throws Exception;
 
     /**
+     * 只提供更新产品基本信息时更新接口
+     * @param businessOrderProduct
+     * @return
+     * @throws Exception
+     */
+    int updateBusinessOrderProduct_basic(BusinessOrderProduct businessOrderProduct) throws Exception;
+    /**
      * 获取符合条件的所有条目
      * @param queryBusinessOrderProduct
      * @return

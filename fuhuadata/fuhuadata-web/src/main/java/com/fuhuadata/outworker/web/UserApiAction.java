@@ -6,6 +6,9 @@ import com.fuhuadata.homesales.user.domain.Area;
 import com.fuhuadata.homesales.user.domain.User;
 import com.fuhuadata.homesales.user.service.AreaService;
 import com.fuhuadata.homesales.user.service.UserService;
+import com.fuhuadata.service.exception.ServiceException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +23,8 @@ import java.util.List;
 @RequestMapping("/outworker")
 @RestController
 public class UserApiAction {
+
+    Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     UserService userService;
@@ -94,11 +99,18 @@ public class UserApiAction {
 
         Result<Boolean> result = Result.newResult(false);
 
-        String userId = (String) request.getAttribute("userId");
-        userService.changePassword(userId, oldPwd, newPwd);
+        try {
+            String userId = (String) request.getAttribute("userId");
+            userService.changePassword(userId, oldPwd, newPwd);
 
-        result.setSuccess(true);
-        result.addDefaultModel(true);
+            result.setSuccess(true);
+            result.addDefaultModel(true);
+            result.setMessage("修改密码成功");
+        } catch (ServiceException e) {
+            logger.error(e.getMessage(), e);
+            result.setSuccess(false);
+            result.setMessage(e.getMessage());
+        }
 
         return result.getResultPojo();
     }
