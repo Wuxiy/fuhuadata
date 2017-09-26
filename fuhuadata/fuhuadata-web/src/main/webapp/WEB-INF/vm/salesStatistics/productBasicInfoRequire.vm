@@ -38,7 +38,7 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input id="name" class="form-control notnull" value="" disabled>
+                                                <input id="name" class="form-control notnull reserttable" value="" disabled>
                                                 <div class="input-group-btn">
                                                     <button class="btn btn-xs btn-default" name="search" data-control="on" data-toggle="modal" data-target="#treeModal" disabled>
                                                         <span class="glyphicon glyphicon-search"></span>
@@ -48,10 +48,10 @@
                                         </td>
                                         <td class="col-xs-2"><label class="control-label" lang="zh">报关产品名称</label></td>
                                         <td>
-                                            <input id="customsClearanceName" class="form-control" value="" disabled>
+                                            <input id="customsClearanceName" class="form-control reserttable" value="" disabled>
                                         </td>
                                         <td class="col-xs-2"><label class="control-label" lang="zh">客户商品名</label></td>
-                                        <td><input data-control="on" id="customerProductName" class="form-control isdisabled" type="text" value="" disabled/></td>
+                                        <td><input data-control="on" id="customerProductName" class="form-control isdisabled reserttable" type="text" value="" disabled/></td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -60,11 +60,11 @@
                                                 <sup class="not-null">*</sup>
                                             </label>
                                         </td>
-                                        <td><input id="specification" class="form-control notnull" type="text" value="" disabled/></td>
+                                        <td><input id="specification" class="form-control notnull reserttable" type="text" value="" disabled/></td>
                                         <td><label class="control-label" lang="zh">型号</label></td>
-                                        <td><input id="model" class="form-control" type="text" value="" disabled/></td>
+                                        <td><input id="model" class="form-control reserttable" type="text" value="" disabled/></td>
                                         <td><label class="control-label" lang="zh">品牌</label></td>
-                                        <td><input data-control="on" id="brand" class="form-control isdisabled" type="text" value="" disabled/></td>
+                                        <td><input data-control="on" id="brand" class="form-control reserttable isdisabled" type="text" value="" disabled/></td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -73,16 +73,16 @@
                                                 <sup class="not-null">*</sup>
                                             </label>
                                         </td>
-                                        <td><input id="mainProductUnit" class="form-control notnull" type="text" value="" disabled/></td>
+                                        <td><input id="mainProductUnit" class="form-control notnull reserttable" type="text" value="" disabled/></td>
                                         <td>
                                             <label class="control-label" lang="zh">
                                                 主数量
                                                 <sup class="not-null">*</sup>
                                             </label>
                                         </td>
-                                        <td><input data-control="on" id="mainProductAmount" class="form-control notnull isdisabled" type="number" value="" disabled/></td>
+                                        <td><input data-control="on" id="mainProductAmount" class="form-control notnull isdisabled reserttable" type="number" value="" disabled/></td>
                                         <td><label class="control-label" lang="zh">交货时间</label><sup class="not-null">*</sup></td>
-                                        <td><input data-control="on" id="deliveryTime" class="form-control isdisabled notnull" type="date" value="" disabled/></td>
+                                        <td><input data-control="on" id="deliveryTime" class="form-control isdisabled notnull reserttable" type="date" value="" disabled/></td>
                                     </tr>
 ##                                    <tr>
 ##                                        <td><label class="control-label" lang="zh">单位</label></td>
@@ -100,7 +100,7 @@
                                             </label>
                                         </td>
                                         <td>
-                                            <select data-control="on" id="priceType" class="form-control notnull isdisabled" disabled>
+                                            <select data-control="on" id="priceType" class="form-control notnull isdisabled reserttable" disabled>
                                                 <option value="01">自产类</option>
                                                 <option value="02" selected>原药自产制剂加工类</option>
                                                 <option value="04">原药采购制剂加工类</option>
@@ -122,7 +122,7 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input data-control="on" id="advisePrice" class="form-control notnull isdisabled" value="0" disabled>
+                                                <input data-control="on" id="advisePrice" class="form-control notnull reserttable isdisabled" value="0" disabled>
                                                 <span class="input-group-addon">元</span>
                                             </div>
                                         </td>
@@ -134,7 +134,7 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input data-control="on" id="purchasePrice" class="form-control notnull isdisabled" value="0" disabled>
+                                                <input data-control="on" id="purchasePrice" class="form-control notnull reserttable isdisabled" value="0" disabled>
                                                 <span class="input-group-addon">元</span>
                                             </div>
                                         </td>
@@ -149,7 +149,7 @@
                                             </label>
                                         </td>
                                         <td class="fac">
-                                            <select name="factoryName" id="factoryName" class="form-control" data-control="on">
+                                            <select name="factoryName" id="factoryName" class="form-control reserttable" data-control="on">
                                                 <option value="">——请选择——</option>
                                                 #foreach($!info in $!{freightCosts})
                                                     <option value="$!info.freightId">$!info.processFactory</option>
@@ -163,7 +163,7 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input data-control="on" id="capitalInterestPrice" class="form-control typechange isdisabled " value="" disabled>
+                                                <input data-control="on" id="capitalInterestPrice" class="form-control typechange isdisabled  reserttable" value="" disabled>
                                                 <span class="input-group-addon">原币</span>
                                             </div>
                                         </td>
@@ -197,7 +197,7 @@
                                         <td><label class="control-label" lang="zh">佣金单价</label></td>
                                         <td>
                                             <div class="input-group">
-                                                <input data-control="on" id="commissionPrice" class="form-control isdisabled" type="text" value="" disabled/>
+                                                <input data-control="on" id="commissionPrice" class="form-control isdisabled reserttable" type="text" value="" disabled/>
                                                 <span class="input-group-addon">原币</span>
                                             </div>
                                         </td>
@@ -207,14 +207,14 @@
                                                 <sup class="not-null">*</sup>
                                             </label>
                                         </td>
-                                        <td><input data-control="on" id="unitUseRate" class="form-control notnull isdisabled" type="text" value="" disabled/></td>
+                                        <td><input data-control="on" id="unitUseRate" class="form-control notnull isdisabled reserttable" type="text" value="" disabled/></td>
                                         <td></td>
                                         <td></td>
                                     </tr>
                                     <tr class="hidecang">
                                         <td><label class="control-label" lang="zh">出口退税方式</label></td>
                                         <td>
-                                            <select data-control="on" id="taxType" class="form-control isdisabled" disabled>
+                                            <select data-control="on" id="taxType" class="form-control isdisabled reserttable" disabled>
                                                 <option value="1">按销售价退税</option>
                                                 <option value="2">按采购价退税</option>
                                                 <option value="3">不退税</option>
@@ -228,14 +228,14 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input data-control="on" id="taxFree" class="form-control notnull isdisabled" value="0" disabled>
+                                                <input data-control="on" id="taxFree" class="form-control notnull isdisabled reserttable" value="0" disabled>
                                                 <span class="input-group-addon">%</span>
                                             </div>
                                         </td>
                                         <td><label class="control-label" lang="zh">其他费用单价</label></td>
                                         <td>
                                             <div class="input-group">
-                                                <input data-control="on" id="otherCost" class="form-control isdisabled" type="text" value="" disabled/>
+                                                <input data-control="on" id="otherCost" class="form-control isdisabled reserttable" type="text" value="" disabled/>
                                                 <span class="input-group-addon">原币</span>
                                             </div>
                                         </td>
@@ -1151,5 +1151,10 @@
     //返回function
     $('#back').click(function(){
         window.location.href = basePath + '/businessOrder/intoOfferorOrder?orderId=' + orderId;
+    })
+
+    //重置取消
+    $('#resert').click(function(){
+        $('.reserttable').val('');
     })
 </script>
