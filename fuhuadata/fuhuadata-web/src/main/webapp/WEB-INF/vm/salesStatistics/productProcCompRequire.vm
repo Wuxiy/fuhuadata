@@ -635,15 +635,15 @@
                         for(var j=0;j<auxiliaryData.length;j++){
                             if(editId == 0){
                                 if(contains(auxiliaryMaterialIdslist,auxiliaryData[j].packingId)){
-                                    auxiliary_html += '<tr class=""><td><input data-control="on" type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox isdisabled" name="auxiliarycheckbox" checked/></td>';
+                                    auxiliary_html += '<tr class=""><td><input type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox isdisabled" name="auxiliarycheckbox" checked/></td>';
                                 }else {
-                                    auxiliary_html += '<tr class=""><td><input data-control="on" type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox isdisabled" name="auxiliarycheckbox"/></td>';
+                                    auxiliary_html += '<tr class=""><td><input type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox isdisabled" name="auxiliarycheckbox"/></td>';
                                 }
                             }else{
                                 if(contains(auxiliaryMaterialIdslist,auxiliaryData[j].packingId)){
-                                    auxiliary_html += '<tr class=""><td><input data-control="on" type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox isdisabled" name="auxiliarycheckbox" checked disabled/></td>';
+                                    auxiliary_html += '<tr class=""><td><input type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox isdisabled" name="auxiliarycheckbox" checked disabled/></td>';
                                 }else {
-                                    auxiliary_html += '<tr class=""><td><input data-control="on" type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox isdisabled" name="auxiliarycheckbox" disabled/></td>';
+                                    auxiliary_html += '<tr class=""><td><input type="checkbox" value="'+ifEmpty(auxiliaryData[j].packingId)+'" class="auxiliarycheckbox isdisabled" name="auxiliarycheckbox" disabled/></td>';
                                 }
                             }
 
