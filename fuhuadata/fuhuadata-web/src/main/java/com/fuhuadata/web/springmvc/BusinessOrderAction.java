@@ -182,8 +182,9 @@ public class BusinessOrderAction {
         //币种
         Result<List<Currtype>> rcurrtype = dataArchivesService.getCurrtype();
         //业务员部门
-        String deptId = businessOrderService.getSalesManDeptId(orderId);
-        List<MixNodeVO> merchandiserList =  userService.listUserNodesByDept(deptId);
+        //String deptId = businessOrderService.getSalesManDeptId(orderId);
+        //跟单员不限制组织
+        List<MixNodeVO> merchandiserList =  userService.listUserNodesByDept("1001D210000000004NT0");
         return new ModelAndView("salesStatistics/orderConversion").addObject("orderId",orderId)
                 .addObject("businessOrderProduct",result.getModel())
                 .addObject("income",rincome.getModel())
