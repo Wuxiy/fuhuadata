@@ -356,9 +356,6 @@
             <isNotEmpty prepend="," property="unitUseRate">
                 unit_use_rate = #unitUseRate#
             </isNotEmpty>
-            <isNull prepend="," property="unitUseRate">
-                unit_use_rate = #unitUseRate#
-            </isNull>
 
             <isNotEmpty prepend="," property="capitalInterestPrice">
                 capital_interest_price = #capitalInterestPrice#
