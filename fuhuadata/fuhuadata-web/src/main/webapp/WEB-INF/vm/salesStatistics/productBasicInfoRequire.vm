@@ -347,14 +347,23 @@
     var costtable = document.getElementById('costtable');
     var remarkTax = '';
 
-    var bInfo = new CRM.module.Panel('#basicInfo');
+    var pbrInputs = {
+        editView : $(CRM.el.EDIT_VIEW),
+        editHide : $(CRM.el.EDIT_HIDE),
+        elOff    : $(CRM.el.OFF_CONTROL)
+    };
+    console.log(pbrInputs);
+    /*var bInfo = new CRM.module.Panel('#basicInfo');
     bInfo.startEdit();
     bInfo.startSave();
     bInfo.startCancel();
     var costInfo = new CRM.module.Panel("#costtable");
     costInfo.startEdit();
     costInfo.startSave();
-    costInfo.startCancel();
+    costInfo.startCancel();*/
+
+    // CRM.showOrHide(view, hide, isE);
+    // CRM.onOrOff(off, isE);
 
     //editId=1,businessProductId!='',列表进入查看详情；editId=0,新增;eidtId=2，客户信息进入查看
     $(document).ready(function(){
@@ -790,12 +799,15 @@
         $('input[name="consumption"]').attr('disabled',false);
         $('input[name="price"]').attr('disabled',false);
         $('input[name="remark"]').attr('disabled',false);
+        CRM.showOrHide(pbrInputs.editView, pbrInputs.editHide, true);
+        CRM.onOrOff(pbrInputs.elOff, true);
     })
 
     $(document).on('click','#cancel',function(){
         $('input[name="consumption"]').attr('disabled',true);
         $('input[name="price"]').attr('disabled',true);
         $('input[name="remark"]').attr('disabled',true);
+        location.reload();
     })
 
     //换算率
@@ -1078,6 +1090,8 @@
                     $('input[name="consumption"]').attr('disabled',true);
                     $('input[name="price"]').attr('disabled',true);
                     $('input[name="remark"]').attr('disabled',true);
+                    CRM.showOrHide(pbrInputs.editView, pbrInputs.editHide, false);
+                    CRM.onOrOff(pbrInputs.elOff, false);
                     alert("修改成功!");
                 }
             })

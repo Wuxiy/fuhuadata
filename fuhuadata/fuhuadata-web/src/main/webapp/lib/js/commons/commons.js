@@ -93,7 +93,7 @@ CRM.insertHtml = function (id,tar) {
 };
 
 //是否禁用
-CRM.onOrOff = function (el,isOn) {
+CRM.onOrOff = function (el,isOn) { // true 启用， false 禁用
 
     if (el!=null) {
 
