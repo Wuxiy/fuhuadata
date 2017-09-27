@@ -320,7 +320,6 @@
                             <th class="text-center" lang="zh">品牌</th>
                             <th class="text-center" lang="zh">包装规格</th>
                             <th class="text-center" lang="zh">产品数量</th>
-                            <th class="text-center" lang="zh">整柜数量</th>
                             <th class="text-center" lang="zh">柜型</th>
                             <th class="text-center" lang="zh">柜数</th>
                             <th class="text-center" lang="zh">交货时间</th>
@@ -511,7 +510,6 @@
                                         '<td>'+ifEmpty(businessOrderProductLists[i].brand)+'</td>'+
                                         '<td><a href="'+basePath+'/businessProduct/intoProductRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&orderId='+businessOrderProductLists[i].orderId+'&productRequireId='+ifEmpty(businessOrderProductLists[i].productRequireId)+'&edit=1'+'">'+ifEmpty(businessOrderProductLists[i].specification)+'</a></td>'+
                                         '<td>'+ifEmpty(businessOrderProductLists[i].mainProductAmount)+'</td>'+
-                                        '<td>'+ifEmpty(businessOrderProductLists[i].cupboardPerNumber)+'</td>'+
                                         '<td>'+cupboardTypeList[ifEmpty(businessOrderProductLists[i].cupboardType)]+'</td>'+
                                         '<td>'+ifEmpty(businessOrderProductLists[i].cupboardNumber)+'</td>'+
                                         '<td>'+ifEmpty(businessOrderProductLists[i].deliveryTime)+'</td>'+
