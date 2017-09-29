@@ -609,8 +609,8 @@
         <result property="specification" column="specification" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="model" column="model" jdbcType="VARCHAR" javaType="java.lang.String"/>
         <result property="mainProductAmount" column="main_product_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
-        <result property="cupboardPerNumber" column="cupboard_number" jdbcType="INT" javaType="java.lang.Integer" nullValue="0"/>
-        <result property="cupboardNumber" column="cupboard_per_number" jdbcType="INT" javaType="java.lang.Integer" nullValue="0"/>
+        <result property="cupboardPerNumber" column="cupboard_per_number" jdbcType="INT" javaType="java.lang.Integer" nullValue="0"/>
+        <result property="cupboardNumber" column="cupboard_number" jdbcType="INT" javaType="java.lang.Integer" nullValue="0"/>
         <result property="cupboardType" column="cupboard_type" jdbcType="INT" javaType="java.lang.Integer" nullValue="0"/>
         <result property="deliveryTime" column="delivery_time" jdbcType="DATETIME" javaType="java.sql.Timestamp"/>
         <result property="minPrice" column="min_price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" nullValue="0"/>

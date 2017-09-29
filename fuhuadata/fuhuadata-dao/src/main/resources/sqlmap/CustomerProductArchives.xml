@@ -806,7 +806,8 @@
 		from
 				customer_product_archives
 		where
-		customer_id=#customerId#
+			customer_id=#customerId#
+		group by product_id,ware_id
 	</select>
 
 	<!--进入客户产品要求详情页所需ids 参数为客户产品档案id-->

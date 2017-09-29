@@ -69,7 +69,7 @@
                     <a class="btn btn-block btn-primary" id="finish">转化</a>
                 </div>
                 <div class="col-xs-2">
-                    <button class="btn btn-block btn-default" type="reset">取消</button>
+                    <button name="backBtn" class="btn btn-block btn-default" type="button">取消</button>
                 </div>
             </div>
         </div>
@@ -219,4 +219,8 @@ $(document).ready(function(){
         $('#floorPrice').text(floorPrice.toFixed(2));
         $('#floorPrice').data('val',floorPrice.toFixed(2));
     }
+
+    $('[name="backBtn"]').click(function () {
+        history.back();
+    })
 </script>
