@@ -483,6 +483,7 @@
 
 
     $('#costAdd').click(function(){
+        var isup = true;
         var componentName = $('#componentNameAdd').val();
         var unitCost = $('#unitCostAdd').val();
         var CategoryFullNames = [];
@@ -490,11 +491,13 @@
             var d = $(this).find('[name=suitableProduct]').val();
             CategoryFullNames.push(d);
         })
-        if(componentName == ''||unitCost == ''||CategoryFullNames == ''){
+        if(componentName == ''||unitCost == ''||CategoryFullNames == ''||componentName == null||unitCost == null){
             console.log(CategoryFullNames);
             alert("请完善表单！");
+            isup = false;
             return false;
-        }else {
+        }
+        if(isup){
             var data = {
                 "componentCost":{
                     "componentName":$('#componentNameAdd').val(),
