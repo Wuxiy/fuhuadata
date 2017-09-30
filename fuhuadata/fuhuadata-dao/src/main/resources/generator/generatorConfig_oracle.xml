@@ -48,7 +48,7 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="et_receipt_b" domainObjectName="Receipt"/>
+        <table tableName="et_receipt" domainObjectName="Receipt"/>
         <!--<table tableName="bd_countryzone" domainObjectName="CountryZone"/>-->
         <!--<table tableName="bd_incoterm" domainObjectName="Incoterm"/>
         <table tableName="ftpub_portdoc" domainObjectName="FtpubPortdoc"/>

@@ -7,80 +7,116 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.math.BigDecimal;
 
-@Table(name = "ET_RECEIPT_B")
+@Table(name = "ET_RECEIPT")
 public class ReCeipt extends BaseEntity<String> {
     @Id
-    @Column(name = "PK_RECEIPT_B")
-    private String pkReceiptB;
+    @Column(name = "PK_RECEIPT")
+    private String pkReceipt;
 
-    @Column(name = "BCOLLECT")
-    private String bcollect;
+    @Column(name = "APPROVER")
+    private String approver;
 
-    @Column(name = "CBCTID")
-    private String cbctid;
+    @Column(name = "BCLAIMEND")
+    private String bclaimend;
 
-    @Column(name = "CCTCURRENCYID")
-    private String cctcurrencyid;
+    @Column(name = "BHASRECBILL")
+    private String bhasrecbill;
 
-    @Column(name = "CDEPTID")
-    private String cdeptid;
+    @Column(name = "BILLMAKER")
+    private String billmaker;
 
-    @Column(name = "CDEPTVID")
-    private String cdeptvid;
+    @Column(name = "CCTID")
+    private String cctid;
 
-    @Column(name = "CDTID")
-    private String cdtid;
+    @Column(name = "CCURRENCYID")
+    private String ccurrencyid;
 
-    @Column(name = "CEMPLOYEEID")
-    private String cemployeeid;
+    @Column(name = "CCUSTBANKACCID")
+    private String ccustbankaccid;
 
-    @Column(name = "CMATERIALID")
-    private String cmaterialid;
+    @Column(name = "CCUSTBANKACCODE")
+    private String ccustbankaccode;
 
-    @Column(name = "CMATERIALVID")
-    private String cmaterialvid;
+    @Column(name = "CCUSTBANKID")
+    private String ccustbankid;
 
-    @Column(name = "CPAYPLANID")
-    private String cpayplanid;
+    @Column(name = "CCUSTOMERID")
+    private String ccustomerid;
 
-    @Column(name = "CROWNO")
-    private String crowno;
+    @Column(name = "CLCID")
+    private String clcid;
 
-    @Column(name = "CSALEORGID")
-    private String csaleorgid;
+    @Column(name = "CORIGCURRENCYID")
+    private String corigcurrencyid;
 
-    @Column(name = "CSALEORGVID")
-    private String csaleorgvid;
+    @Column(name = "CREATIONTIME")
+    private String creationtime;
+
+    @Column(name = "CREATOR")
+    private String creator;
+
+    @Column(name = "CTRANTYPEID")
+    private String ctrantypeid;
+
+    @Column(name = "CUSDCURRENCYID")
+    private String cusdcurrencyid;
 
     @Column(name = "DBILLDATE")
     private String dbilldate;
 
+    @Column(name = "DMAKEDATE")
+    private String dmakedate;
+
     @Column(name = "DR")
     private Long dr;
 
-    @Column(name = "FCLAIMSTATUS")
-    private BigDecimal fclaimstatus;
+    @Column(name = "FBUSITYPE")
+    private BigDecimal fbusitype;
 
-    @Column(name = "FRECEIPTTYPE")
-    private BigDecimal freceipttype;
+    @Column(name = "FPFSTATUSFLAG")
+    private BigDecimal fpfstatusflag;
 
-    @Column(name = "NARORIGMNY")
-    private BigDecimal narorigmny;
+    @Column(name = "FSTATUSFLAG")
+    private BigDecimal fstatusflag;
 
-    @Column(name = "NCLAIMCTMNY")
-    private BigDecimal nclaimctmny;
+    @Column(name = "MODIFIEDTIME")
+    private String modifiedtime;
 
-    @Column(name = "NCLAIMMNY")
-    private BigDecimal nclaimmny;
+    @Column(name = "MODIFIER")
+    private String modifier;
 
-    @Column(name = "NCLAIMORIGMNY")
-    private BigDecimal nclaimorigmny;
+    @Column(name = "NEXCHANGERATE")
+    private BigDecimal nexchangerate;
 
-    @Column(name = "NCLAIMUSDMNY")
-    private BigDecimal nclaimusdmny;
+    @Column(name = "NFRGNMNY")
+    private BigDecimal nfrgnmny;
 
-    @Column(name = "NCTEXCHANGERATE")
-    private BigDecimal nctexchangerate;
+    @Column(name = "NFRGNORIGMNY")
+    private BigDecimal nfrgnorigmny;
+
+    @Column(name = "NHOMEMNY")
+    private BigDecimal nhomemny;
+
+    @Column(name = "NRECEIPTMNY")
+    private BigDecimal nreceiptmny;
+
+    @Column(name = "NRECEIPTORIGMNY")
+    private BigDecimal nreceiptorigmny;
+
+    @Column(name = "NRECEIPTUSDMNY")
+    private BigDecimal nreceiptusdmny;
+
+    @Column(name = "NTOTALMNY")
+    private BigDecimal ntotalmny;
+
+    @Column(name = "NTOTALORIGMNY")
+    private BigDecimal ntotalorigmny;
+
+    @Column(name = "NTOTALUSDMNY")
+    private BigDecimal ntotalusdmny;
+
+    @Column(name = "NUSDEXCHGRATE")
+    private BigDecimal nusdexchgrate;
 
     @Column(name = "PK_GROUP")
     private String pkGroup;
@@ -88,275 +124,329 @@ public class ReCeipt extends BaseEntity<String> {
     @Column(name = "PK_ORG")
     private String pkOrg;
 
-    @Column(name = "PK_RECEIPT")
-    private String pkReceipt;
+    @Column(name = "PK_ORG_V")
+    private String pkOrgV;
+
+    @Column(name = "TAUDITTIME")
+    private String taudittime;
 
     @Column(name = "TS")
     private String ts;
 
-    @Column(name = "VBCTCODE")
-    private String vbctcode;
+    @Column(name = "VBILLCODE")
+    private String vbillcode;
 
-    @Column(name = "VBDEF1")
-    private String vbdef1;
+    @Column(name = "VCTCODE")
+    private String vctcode;
 
-    @Column(name = "VBDEF10")
-    private String vbdef10;
+    @Column(name = "VCTTYPE")
+    private String vcttype;
 
-    @Column(name = "VBDEF11")
-    private String vbdef11;
+    @Column(name = "VDEF1")
+    private String vdef1;
 
-    @Column(name = "VBDEF12")
-    private String vbdef12;
+    @Column(name = "VDEF10")
+    private String vdef10;
 
-    @Column(name = "VBDEF13")
-    private String vbdef13;
+    @Column(name = "VDEF11")
+    private String vdef11;
 
-    @Column(name = "VBDEF14")
-    private String vbdef14;
+    @Column(name = "VDEF12")
+    private String vdef12;
 
-    @Column(name = "VBDEF15")
-    private String vbdef15;
+    @Column(name = "VDEF13")
+    private String vdef13;
 
-    @Column(name = "VBDEF16")
-    private String vbdef16;
+    @Column(name = "VDEF14")
+    private String vdef14;
 
-    @Column(name = "VBDEF17")
-    private String vbdef17;
+    @Column(name = "VDEF15")
+    private String vdef15;
 
-    @Column(name = "VBDEF18")
-    private String vbdef18;
+    @Column(name = "VDEF16")
+    private String vdef16;
 
-    @Column(name = "VBDEF19")
-    private String vbdef19;
+    @Column(name = "VDEF17")
+    private String vdef17;
 
-    @Column(name = "VBDEF2")
-    private String vbdef2;
+    @Column(name = "VDEF18")
+    private String vdef18;
 
-    @Column(name = "VBDEF20")
-    private String vbdef20;
+    @Column(name = "VDEF19")
+    private String vdef19;
 
-    @Column(name = "VBDEF3")
-    private String vbdef3;
+    @Column(name = "VDEF2")
+    private String vdef2;
 
-    @Column(name = "VBDEF4")
-    private String vbdef4;
+    @Column(name = "VDEF20")
+    private String vdef20;
 
-    @Column(name = "VBDEF5")
-    private String vbdef5;
+    @Column(name = "VDEF3")
+    private String vdef3;
 
-    @Column(name = "VBDEF6")
-    private String vbdef6;
+    @Column(name = "VDEF4")
+    private String vdef4;
 
-    @Column(name = "VBDEF7")
-    private String vbdef7;
+    @Column(name = "VDEF5")
+    private String vdef5;
 
-    @Column(name = "VBDEF8")
-    private String vbdef8;
+    @Column(name = "VDEF6")
+    private String vdef6;
 
-    @Column(name = "VBDEF9")
-    private String vbdef9;
+    @Column(name = "VDEF7")
+    private String vdef7;
 
-    @Column(name = "VDTCODE")
-    private String vdtcode;
+    @Column(name = "VDEF8")
+    private String vdef8;
 
-    @Column(name = "VPAYPLANROWNO")
-    private String vpayplanrowno;
+    @Column(name = "VDEF9")
+    private String vdef9;
+
+    @Column(name = "VDTTYPE")
+    private String vdttype;
+
+    @Column(name = "VLCCODE")
+    private String vlccode;
+
+    @Column(name = "VTRANTYPECODE")
+    private String vtrantypecode;
 
     /**
-     * @return PK_RECEIPT_B
+     * @return PK_RECEIPT
      */
-    public String getPkReceiptB() {
-        return pkReceiptB;
+    public String getPkReceipt() {
+        return pkReceipt;
     }
 
     /**
-     * @param pkReceiptB
+     * @param pkReceipt
      */
-    public void setPkReceiptB(String pkReceiptB) {
-        this.pkReceiptB = pkReceiptB == null ? null : pkReceiptB.trim();
+    public void setPkReceipt(String pkReceipt) {
+        this.pkReceipt = pkReceipt == null ? null : pkReceipt.trim();
     }
 
     /**
-     * @return BCOLLECT
+     * @return APPROVER
      */
-    public String getBcollect() {
-        return bcollect;
+    public String getApprover() {
+        return approver;
     }
 
     /**
-     * @param bcollect
+     * @param approver
      */
-    public void setBcollect(String bcollect) {
-        this.bcollect = bcollect == null ? null : bcollect.trim();
+    public void setApprover(String approver) {
+        this.approver = approver == null ? null : approver.trim();
     }
 
     /**
-     * @return CBCTID
+     * @return BCLAIMEND
      */
-    public String getCbctid() {
-        return cbctid;
+    public String getBclaimend() {
+        return bclaimend;
     }
 
     /**
-     * @param cbctid
+     * @param bclaimend
      */
-    public void setCbctid(String cbctid) {
-        this.cbctid = cbctid == null ? null : cbctid.trim();
+    public void setBclaimend(String bclaimend) {
+        this.bclaimend = bclaimend == null ? null : bclaimend.trim();
     }
 
     /**
-     * @return CCTCURRENCYID
+     * @return BHASRECBILL
      */
-    public String getCctcurrencyid() {
-        return cctcurrencyid;
+    public String getBhasrecbill() {
+        return bhasrecbill;
     }
 
     /**
-     * @param cctcurrencyid
+     * @param bhasrecbill
      */
-    public void setCctcurrencyid(String cctcurrencyid) {
-        this.cctcurrencyid = cctcurrencyid == null ? null : cctcurrencyid.trim();
+    public void setBhasrecbill(String bhasrecbill) {
+        this.bhasrecbill = bhasrecbill == null ? null : bhasrecbill.trim();
     }
 
     /**
-     * @return CDEPTID
+     * @return BILLMAKER
      */
-    public String getCdeptid() {
-        return cdeptid;
+    public String getBillmaker() {
+        return billmaker;
     }
 
     /**
-     * @param cdeptid
+     * @param billmaker
      */
-    public void setCdeptid(String cdeptid) {
-        this.cdeptid = cdeptid == null ? null : cdeptid.trim();
+    public void setBillmaker(String billmaker) {
+        this.billmaker = billmaker == null ? null : billmaker.trim();
     }
 
     /**
-     * @return CDEPTVID
+     * @return CCTID
      */
-    public String getCdeptvid() {
-        return cdeptvid;
+    public String getCctid() {
+        return cctid;
     }
 
     /**
-     * @param cdeptvid
+     * @param cctid
      */
-    public void setCdeptvid(String cdeptvid) {
-        this.cdeptvid = cdeptvid == null ? null : cdeptvid.trim();
+    public void setCctid(String cctid) {
+        this.cctid = cctid == null ? null : cctid.trim();
     }
 
     /**
-     * @return CDTID
+     * @return CCURRENCYID
      */
-    public String getCdtid() {
-        return cdtid;
+    public String getCcurrencyid() {
+        return ccurrencyid;
     }
 
     /**
-     * @param cdtid
+     * @param ccurrencyid
      */
-    public void setCdtid(String cdtid) {
-        this.cdtid = cdtid == null ? null : cdtid.trim();
+    public void setCcurrencyid(String ccurrencyid) {
+        this.ccurrencyid = ccurrencyid == null ? null : ccurrencyid.trim();
     }
 
     /**
-     * @return CEMPLOYEEID
+     * @return CCUSTBANKACCID
      */
-    public String getCemployeeid() {
-        return cemployeeid;
+    public String getCcustbankaccid() {
+        return ccustbankaccid;
     }
 
     /**
-     * @param cemployeeid
+     * @param ccustbankaccid
      */
-    public void setCemployeeid(String cemployeeid) {
-        this.cemployeeid = cemployeeid == null ? null : cemployeeid.trim();
+    public void setCcustbankaccid(String ccustbankaccid) {
+        this.ccustbankaccid = ccustbankaccid == null ? null : ccustbankaccid.trim();
     }
 
     /**
-     * @return CMATERIALID
+     * @return CCUSTBANKACCODE
      */
-    public String getCmaterialid() {
-        return cmaterialid;
+    public String getCcustbankaccode() {
+        return ccustbankaccode;
     }
 
     /**
-     * @param cmaterialid
+     * @param ccustbankaccode
      */
-    public void setCmaterialid(String cmaterialid) {
-        this.cmaterialid = cmaterialid == null ? null : cmaterialid.trim();
+    public void setCcustbankaccode(String ccustbankaccode) {
+        this.ccustbankaccode = ccustbankaccode == null ? null : ccustbankaccode.trim();
     }
 
     /**
-     * @return CMATERIALVID
+     * @return CCUSTBANKID
      */
-    public String getCmaterialvid() {
-        return cmaterialvid;
+    public String getCcustbankid() {
+        return ccustbankid;
     }
 
     /**
-     * @param cmaterialvid
+     * @param ccustbankid
      */
-    public void setCmaterialvid(String cmaterialvid) {
-        this.cmaterialvid = cmaterialvid == null ? null : cmaterialvid.trim();
+    public void setCcustbankid(String ccustbankid) {
+        this.ccustbankid = ccustbankid == null ? null : ccustbankid.trim();
     }
 
     /**
-     * @return CPAYPLANID
+     * @return CCUSTOMERID
      */
-    public String getCpayplanid() {
-        return cpayplanid;
+    public String getCcustomerid() {
+        return ccustomerid;
     }
 
     /**
-     * @param cpayplanid
+     * @param ccustomerid
      */
-    public void setCpayplanid(String cpayplanid) {
-        this.cpayplanid = cpayplanid == null ? null : cpayplanid.trim();
+    public void setCcustomerid(String ccustomerid) {
+        this.ccustomerid = ccustomerid == null ? null : ccustomerid.trim();
     }
 
     /**
-     * @return CROWNO
+     * @return CLCID
      */
-    public String getCrowno() {
-        return crowno;
+    public String getClcid() {
+        return clcid;
     }
 
     /**
-     * @param crowno
+     * @param clcid
      */
-    public void setCrowno(String crowno) {
-        this.crowno = crowno == null ? null : crowno.trim();
+    public void setClcid(String clcid) {
+        this.clcid = clcid == null ? null : clcid.trim();
     }
 
     /**
-     * @return CSALEORGID
+     * @return CORIGCURRENCYID
      */
-    public String getCsaleorgid() {
-        return csaleorgid;
+    public String getCorigcurrencyid() {
+        return corigcurrencyid;
     }
 
     /**
-     * @param csaleorgid
+     * @param corigcurrencyid
      */
-    public void setCsaleorgid(String csaleorgid) {
-        this.csaleorgid = csaleorgid == null ? null : csaleorgid.trim();
+    public void setCorigcurrencyid(String corigcurrencyid) {
+        this.corigcurrencyid = corigcurrencyid == null ? null : corigcurrencyid.trim();
     }
 
     /**
-     * @return CSALEORGVID
+     * @return CREATIONTIME
      */
-    public String getCsaleorgvid() {
-        return csaleorgvid;
+    public String getCreationtime() {
+        return creationtime;
     }
 
     /**
-     * @param csaleorgvid
+     * @param creationtime
      */
-    public void setCsaleorgvid(String csaleorgvid) {
-        this.csaleorgvid = csaleorgvid == null ? null : csaleorgvid.trim();
+    public void setCreationtime(String creationtime) {
+        this.creationtime = creationtime == null ? null : creationtime.trim();
+    }
+
+    /**
+     * @return CREATOR
+     */
+    public String getCreator() {
+        return creator;
+    }
+
+    /**
+     * @param creator
+     */
+    public void setCreator(String creator) {
+        this.creator = creator == null ? null : creator.trim();
+    }
+
+    /**
+     * @return CTRANTYPEID
+     */
+    public String getCtrantypeid() {
+        return ctrantypeid;
+    }
+
+    /**
+     * @param ctrantypeid
+     */
+    public void setCtrantypeid(String ctrantypeid) {
+        this.ctrantypeid = ctrantypeid == null ? null : ctrantypeid.trim();
+    }
+
+    /**
+     * @return CUSDCURRENCYID
+     */
+    public String getCusdcurrencyid() {
+        return cusdcurrencyid;
+    }
+
+    /**
+     * @param cusdcurrencyid
+     */
+    public void setCusdcurrencyid(String cusdcurrencyid) {
+        this.cusdcurrencyid = cusdcurrencyid == null ? null : cusdcurrencyid.trim();
     }
 
     /**
@@ -374,6 +464,20 @@ public class ReCeipt extends BaseEntity<String> {
     }
 
     /**
+     * @return DMAKEDATE
+     */
+    public String getDmakedate() {
+        return dmakedate;
+    }
+
+    /**
+     * @param dmakedate
+     */
+    public void setDmakedate(String dmakedate) {
+        this.dmakedate = dmakedate == null ? null : dmakedate.trim();
+    }
+
+    /**
      * @return DR
      */
     public Long getDr() {
@@ -388,115 +492,227 @@ public class ReCeipt extends BaseEntity<String> {
     }
 
     /**
-     * @return FCLAIMSTATUS
+     * @return FBUSITYPE
      */
-    public BigDecimal getFclaimstatus() {
-        return fclaimstatus;
+    public BigDecimal getFbusitype() {
+        return fbusitype;
     }
 
     /**
-     * @param fclaimstatus
+     * @param fbusitype
      */
-    public void setFclaimstatus(BigDecimal fclaimstatus) {
-        this.fclaimstatus = fclaimstatus;
+    public void setFbusitype(BigDecimal fbusitype) {
+        this.fbusitype = fbusitype;
     }
 
     /**
-     * @return FRECEIPTTYPE
+     * @return FPFSTATUSFLAG
      */
-    public BigDecimal getFreceipttype() {
-        return freceipttype;
+    public BigDecimal getFpfstatusflag() {
+        return fpfstatusflag;
     }
 
     /**
-     * @param freceipttype
+     * @param fpfstatusflag
      */
-    public void setFreceipttype(BigDecimal freceipttype) {
-        this.freceipttype = freceipttype;
+    public void setFpfstatusflag(BigDecimal fpfstatusflag) {
+        this.fpfstatusflag = fpfstatusflag;
     }
 
     /**
-     * @return NARORIGMNY
+     * @return FSTATUSFLAG
      */
-    public BigDecimal getNarorigmny() {
-        return narorigmny;
+    public BigDecimal getFstatusflag() {
+        return fstatusflag;
     }
 
     /**
-     * @param narorigmny
+     * @param fstatusflag
      */
-    public void setNarorigmny(BigDecimal narorigmny) {
-        this.narorigmny = narorigmny;
+    public void setFstatusflag(BigDecimal fstatusflag) {
+        this.fstatusflag = fstatusflag;
     }
 
     /**
-     * @return NCLAIMCTMNY
+     * @return MODIFIEDTIME
      */
-    public BigDecimal getNclaimctmny() {
-        return nclaimctmny;
+    public String getModifiedtime() {
+        return modifiedtime;
     }
 
     /**
-     * @param nclaimctmny
+     * @param modifiedtime
      */
-    public void setNclaimctmny(BigDecimal nclaimctmny) {
-        this.nclaimctmny = nclaimctmny;
+    public void setModifiedtime(String modifiedtime) {
+        this.modifiedtime = modifiedtime == null ? null : modifiedtime.trim();
     }
 
     /**
-     * @return NCLAIMMNY
+     * @return MODIFIER
      */
-    public BigDecimal getNclaimmny() {
-        return nclaimmny;
+    public String getModifier() {
+        return modifier;
     }
 
     /**
-     * @param nclaimmny
+     * @param modifier
      */
-    public void setNclaimmny(BigDecimal nclaimmny) {
-        this.nclaimmny = nclaimmny;
+    public void setModifier(String modifier) {
+        this.modifier = modifier == null ? null : modifier.trim();
     }
 
     /**
-     * @return NCLAIMORIGMNY
+     * @return NEXCHANGERATE
      */
-    public BigDecimal getNclaimorigmny() {
-        return nclaimorigmny;
+    public BigDecimal getNexchangerate() {
+        return nexchangerate;
     }
 
     /**
-     * @param nclaimorigmny
+     * @param nexchangerate
      */
-    public void setNclaimorigmny(BigDecimal nclaimorigmny) {
-        this.nclaimorigmny = nclaimorigmny;
+    public void setNexchangerate(BigDecimal nexchangerate) {
+        this.nexchangerate = nexchangerate;
     }
 
     /**
-     * @return NCLAIMUSDMNY
+     * @return NFRGNMNY
      */
-    public BigDecimal getNclaimusdmny() {
-        return nclaimusdmny;
+    public BigDecimal getNfrgnmny() {
+        return nfrgnmny;
     }
 
     /**
-     * @param nclaimusdmny
+     * @param nfrgnmny
      */
-    public void setNclaimusdmny(BigDecimal nclaimusdmny) {
-        this.nclaimusdmny = nclaimusdmny;
+    public void setNfrgnmny(BigDecimal nfrgnmny) {
+        this.nfrgnmny = nfrgnmny;
     }
 
     /**
-     * @return NCTEXCHANGERATE
+     * @return NFRGNORIGMNY
      */
-    public BigDecimal getNctexchangerate() {
-        return nctexchangerate;
+    public BigDecimal getNfrgnorigmny() {
+        return nfrgnorigmny;
     }
 
     /**
-     * @param nctexchangerate
+     * @param nfrgnorigmny
      */
-    public void setNctexchangerate(BigDecimal nctexchangerate) {
-        this.nctexchangerate = nctexchangerate;
+    public void setNfrgnorigmny(BigDecimal nfrgnorigmny) {
+        this.nfrgnorigmny = nfrgnorigmny;
+    }
+
+    /**
+     * @return NHOMEMNY
+     */
+    public BigDecimal getNhomemny() {
+        return nhomemny;
+    }
+
+    /**
+     * @param nhomemny
+     */
+    public void setNhomemny(BigDecimal nhomemny) {
+        this.nhomemny = nhomemny;
+    }
+
+    /**
+     * @return NRECEIPTMNY
+     */
+    public BigDecimal getNreceiptmny() {
+        return nreceiptmny;
+    }
+
+    /**
+     * @param nreceiptmny
+     */
+    public void setNreceiptmny(BigDecimal nreceiptmny) {
+        this.nreceiptmny = nreceiptmny;
+    }
+
+    /**
+     * @return NRECEIPTORIGMNY
+     */
+    public BigDecimal getNreceiptorigmny() {
+        return nreceiptorigmny;
+    }
+
+    /**
+     * @param nreceiptorigmny
+     */
+    public void setNreceiptorigmny(BigDecimal nreceiptorigmny) {
+        this.nreceiptorigmny = nreceiptorigmny;
+    }
+
+    /**
+     * @return NRECEIPTUSDMNY
+     */
+    public BigDecimal getNreceiptusdmny() {
+        return nreceiptusdmny;
+    }
+
+    /**
+     * @param nreceiptusdmny
+     */
+    public void setNreceiptusdmny(BigDecimal nreceiptusdmny) {
+        this.nreceiptusdmny = nreceiptusdmny;
+    }
+
+    /**
+     * @return NTOTALMNY
+     */
+    public BigDecimal getNtotalmny() {
+        return ntotalmny;
+    }
+
+    /**
+     * @param ntotalmny
+     */
+    public void setNtotalmny(BigDecimal ntotalmny) {
+        this.ntotalmny = ntotalmny;
+    }
+
+    /**
+     * @return NTOTALORIGMNY
+     */
+    public BigDecimal getNtotalorigmny() {
+        return ntotalorigmny;
+    }
+
+    /**
+     * @param ntotalorigmny
+     */
+    public void setNtotalorigmny(BigDecimal ntotalorigmny) {
+        this.ntotalorigmny = ntotalorigmny;
+    }
+
+    /**
+     * @return NTOTALUSDMNY
+     */
+    public BigDecimal getNtotalusdmny() {
+        return ntotalusdmny;
+    }
+
+    /**
+     * @param ntotalusdmny
+     */
+    public void setNtotalusdmny(BigDecimal ntotalusdmny) {
+        this.ntotalusdmny = ntotalusdmny;
+    }
+
+    /**
+     * @return NUSDEXCHGRATE
+     */
+    public BigDecimal getNusdexchgrate() {
+        return nusdexchgrate;
+    }
+
+    /**
+     * @param nusdexchgrate
+     */
+    public void setNusdexchgrate(BigDecimal nusdexchgrate) {
+        this.nusdexchgrate = nusdexchgrate;
     }
 
     /**
@@ -528,17 +744,31 @@ public class ReCeipt extends BaseEntity<String> {
     }
 
     /**
-     * @return PK_RECEIPT
+     * @return PK_ORG_V
      */
-    public String getPkReceipt() {
-        return pkReceipt;
+    public String getPkOrgV() {
+        return pkOrgV;
     }
 
     /**
-     * @param pkReceipt
+     * @param pkOrgV
      */
-    public void setPkReceipt(String pkReceipt) {
-        this.pkReceipt = pkReceipt == null ? null : pkReceipt.trim();
+    public void setPkOrgV(String pkOrgV) {
+        this.pkOrgV = pkOrgV == null ? null : pkOrgV.trim();
+    }
+
+    /**
+     * @return TAUDITTIME
+     */
+    public String getTaudittime() {
+        return taudittime;
+    }
+
+    /**
+     * @param taudittime
+     */
+    public void setTaudittime(String taudittime) {
+        this.taudittime = taudittime == null ? null : taudittime.trim();
     }
 
     /**
@@ -556,334 +786,376 @@ public class ReCeipt extends BaseEntity<String> {
     }
 
     /**
-     * @return VBCTCODE
+     * @return VBILLCODE
      */
-    public String getVbctcode() {
-        return vbctcode;
+    public String getVbillcode() {
+        return vbillcode;
     }
 
     /**
-     * @param vbctcode
+     * @param vbillcode
      */
-    public void setVbctcode(String vbctcode) {
-        this.vbctcode = vbctcode == null ? null : vbctcode.trim();
+    public void setVbillcode(String vbillcode) {
+        this.vbillcode = vbillcode == null ? null : vbillcode.trim();
     }
 
     /**
-     * @return VBDEF1
+     * @return VCTCODE
      */
-    public String getVbdef1() {
-        return vbdef1;
+    public String getVctcode() {
+        return vctcode;
     }
 
     /**
-     * @param vbdef1
+     * @param vctcode
      */
-    public void setVbdef1(String vbdef1) {
-        this.vbdef1 = vbdef1 == null ? null : vbdef1.trim();
+    public void setVctcode(String vctcode) {
+        this.vctcode = vctcode == null ? null : vctcode.trim();
     }
 
     /**
-     * @return VBDEF10
+     * @return VCTTYPE
      */
-    public String getVbdef10() {
-        return vbdef10;
+    public String getVcttype() {
+        return vcttype;
     }
 
     /**
-     * @param vbdef10
+     * @param vcttype
      */
-    public void setVbdef10(String vbdef10) {
-        this.vbdef10 = vbdef10 == null ? null : vbdef10.trim();
+    public void setVcttype(String vcttype) {
+        this.vcttype = vcttype == null ? null : vcttype.trim();
     }
 
     /**
-     * @return VBDEF11
+     * @return VDEF1
      */
-    public String getVbdef11() {
-        return vbdef11;
+    public String getVdef1() {
+        return vdef1;
     }
 
     /**
-     * @param vbdef11
+     * @param vdef1
      */
-    public void setVbdef11(String vbdef11) {
-        this.vbdef11 = vbdef11 == null ? null : vbdef11.trim();
+    public void setVdef1(String vdef1) {
+        this.vdef1 = vdef1 == null ? null : vdef1.trim();
     }
 
     /**
-     * @return VBDEF12
+     * @return VDEF10
      */
-    public String getVbdef12() {
-        return vbdef12;
+    public String getVdef10() {
+        return vdef10;
     }
 
     /**
-     * @param vbdef12
+     * @param vdef10
      */
-    public void setVbdef12(String vbdef12) {
-        this.vbdef12 = vbdef12 == null ? null : vbdef12.trim();
+    public void setVdef10(String vdef10) {
+        this.vdef10 = vdef10 == null ? null : vdef10.trim();
     }
 
     /**
-     * @return VBDEF13
+     * @return VDEF11
      */
-    public String getVbdef13() {
-        return vbdef13;
+    public String getVdef11() {
+        return vdef11;
     }
 
     /**
-     * @param vbdef13
+     * @param vdef11
      */
-    public void setVbdef13(String vbdef13) {
-        this.vbdef13 = vbdef13 == null ? null : vbdef13.trim();
+    public void setVdef11(String vdef11) {
+        this.vdef11 = vdef11 == null ? null : vdef11.trim();
     }
 
     /**
-     * @return VBDEF14
+     * @return VDEF12
      */
-    public String getVbdef14() {
-        return vbdef14;
+    public String getVdef12() {
+        return vdef12;
     }
 
     /**
-     * @param vbdef14
+     * @param vdef12
      */
-    public void setVbdef14(String vbdef14) {
-        this.vbdef14 = vbdef14 == null ? null : vbdef14.trim();
+    public void setVdef12(String vdef12) {
+        this.vdef12 = vdef12 == null ? null : vdef12.trim();
     }
 
     /**
-     * @return VBDEF15
+     * @return VDEF13
      */
-    public String getVbdef15() {
-        return vbdef15;
+    public String getVdef13() {
+        return vdef13;
     }
 
     /**
-     * @param vbdef15
+     * @param vdef13
      */
-    public void setVbdef15(String vbdef15) {
-        this.vbdef15 = vbdef15 == null ? null : vbdef15.trim();
+    public void setVdef13(String vdef13) {
+        this.vdef13 = vdef13 == null ? null : vdef13.trim();
     }
 
     /**
-     * @return VBDEF16
+     * @return VDEF14
      */
-    public String getVbdef16() {
-        return vbdef16;
+    public String getVdef14() {
+        return vdef14;
     }
 
     /**
-     * @param vbdef16
+     * @param vdef14
      */
-    public void setVbdef16(String vbdef16) {
-        this.vbdef16 = vbdef16 == null ? null : vbdef16.trim();
+    public void setVdef14(String vdef14) {
+        this.vdef14 = vdef14 == null ? null : vdef14.trim();
     }
 
     /**
-     * @return VBDEF17
+     * @return VDEF15
      */
-    public String getVbdef17() {
-        return vbdef17;
+    public String getVdef15() {
+        return vdef15;
     }
 
     /**
-     * @param vbdef17
+     * @param vdef15
      */
-    public void setVbdef17(String vbdef17) {
-        this.vbdef17 = vbdef17 == null ? null : vbdef17.trim();
+    public void setVdef15(String vdef15) {
+        this.vdef15 = vdef15 == null ? null : vdef15.trim();
     }
 
     /**
-     * @return VBDEF18
+     * @return VDEF16
      */
-    public String getVbdef18() {
-        return vbdef18;
+    public String getVdef16() {
+        return vdef16;
     }
 
     /**
-     * @param vbdef18
+     * @param vdef16
      */
-    public void setVbdef18(String vbdef18) {
-        this.vbdef18 = vbdef18 == null ? null : vbdef18.trim();
+    public void setVdef16(String vdef16) {
+        this.vdef16 = vdef16 == null ? null : vdef16.trim();
     }
 
     /**
-     * @return VBDEF19
+     * @return VDEF17
      */
-    public String getVbdef19() {
-        return vbdef19;
+    public String getVdef17() {
+        return vdef17;
     }
 
     /**
-     * @param vbdef19
+     * @param vdef17
      */
-    public void setVbdef19(String vbdef19) {
-        this.vbdef19 = vbdef19 == null ? null : vbdef19.trim();
+    public void setVdef17(String vdef17) {
+        this.vdef17 = vdef17 == null ? null : vdef17.trim();
     }
 
     /**
-     * @return VBDEF2
+     * @return VDEF18
      */
-    public String getVbdef2() {
-        return vbdef2;
+    public String getVdef18() {
+        return vdef18;
     }
 
     /**
-     * @param vbdef2
+     * @param vdef18
      */
-    public void setVbdef2(String vbdef2) {
-        this.vbdef2 = vbdef2 == null ? null : vbdef2.trim();
+    public void setVdef18(String vdef18) {
+        this.vdef18 = vdef18 == null ? null : vdef18.trim();
     }
 
     /**
-     * @return VBDEF20
+     * @return VDEF19
      */
-    public String getVbdef20() {
-        return vbdef20;
+    public String getVdef19() {
+        return vdef19;
     }
 
     /**
-     * @param vbdef20
+     * @param vdef19
      */
-    public void setVbdef20(String vbdef20) {
-        this.vbdef20 = vbdef20 == null ? null : vbdef20.trim();
+    public void setVdef19(String vdef19) {
+        this.vdef19 = vdef19 == null ? null : vdef19.trim();
     }
 
     /**
-     * @return VBDEF3
+     * @return VDEF2
      */
-    public String getVbdef3() {
-        return vbdef3;
+    public String getVdef2() {
+        return vdef2;
     }
 
     /**
-     * @param vbdef3
+     * @param vdef2
      */
-    public void setVbdef3(String vbdef3) {
-        this.vbdef3 = vbdef3 == null ? null : vbdef3.trim();
+    public void setVdef2(String vdef2) {
+        this.vdef2 = vdef2 == null ? null : vdef2.trim();
     }
 
     /**
-     * @return VBDEF4
+     * @return VDEF20
      */
-    public String getVbdef4() {
-        return vbdef4;
+    public String getVdef20() {
+        return vdef20;
     }
 
     /**
-     * @param vbdef4
+     * @param vdef20
      */
-    public void setVbdef4(String vbdef4) {
-        this.vbdef4 = vbdef4 == null ? null : vbdef4.trim();
+    public void setVdef20(String vdef20) {
+        this.vdef20 = vdef20 == null ? null : vdef20.trim();
     }
 
     /**
-     * @return VBDEF5
+     * @return VDEF3
      */
-    public String getVbdef5() {
-        return vbdef5;
+    public String getVdef3() {
+        return vdef3;
     }
 
     /**
-     * @param vbdef5
+     * @param vdef3
      */
-    public void setVbdef5(String vbdef5) {
-        this.vbdef5 = vbdef5 == null ? null : vbdef5.trim();
+    public void setVdef3(String vdef3) {
+        this.vdef3 = vdef3 == null ? null : vdef3.trim();
     }
 
     /**
-     * @return VBDEF6
+     * @return VDEF4
      */
-    public String getVbdef6() {
-        return vbdef6;
+    public String getVdef4() {
+        return vdef4;
     }
 
     /**
-     * @param vbdef6
+     * @param vdef4
      */
-    public void setVbdef6(String vbdef6) {
-        this.vbdef6 = vbdef6 == null ? null : vbdef6.trim();
+    public void setVdef4(String vdef4) {
+        this.vdef4 = vdef4 == null ? null : vdef4.trim();
     }
 
     /**
-     * @return VBDEF7
+     * @return VDEF5
      */
-    public String getVbdef7() {
-        return vbdef7;
+    public String getVdef5() {
+        return vdef5;
     }
 
     /**
-     * @param vbdef7
+     * @param vdef5
      */
-    public void setVbdef7(String vbdef7) {
-        this.vbdef7 = vbdef7 == null ? null : vbdef7.trim();
+    public void setVdef5(String vdef5) {
+        this.vdef5 = vdef5 == null ? null : vdef5.trim();
     }
 
     /**
-     * @return VBDEF8
+     * @return VDEF6
      */
-    public String getVbdef8() {
-        return vbdef8;
+    public String getVdef6() {
+        return vdef6;
     }
 
     /**
-     * @param vbdef8
+     * @param vdef6
      */
-    public void setVbdef8(String vbdef8) {
-        this.vbdef8 = vbdef8 == null ? null : vbdef8.trim();
+    public void setVdef6(String vdef6) {
+        this.vdef6 = vdef6 == null ? null : vdef6.trim();
     }
 
     /**
-     * @return VBDEF9
+     * @return VDEF7
      */
-    public String getVbdef9() {
-        return vbdef9;
+    public String getVdef7() {
+        return vdef7;
     }
 
     /**
-     * @param vbdef9
+     * @param vdef7
      */
-    public void setVbdef9(String vbdef9) {
-        this.vbdef9 = vbdef9 == null ? null : vbdef9.trim();
+    public void setVdef7(String vdef7) {
+        this.vdef7 = vdef7 == null ? null : vdef7.trim();
     }
 
     /**
-     * @return VDTCODE
+     * @return VDEF8
      */
-    public String getVdtcode() {
-        return vdtcode;
+    public String getVdef8() {
+        return vdef8;
     }
 
     /**
-     * @param vdtcode
+     * @param vdef8
      */
-    public void setVdtcode(String vdtcode) {
-        this.vdtcode = vdtcode == null ? null : vdtcode.trim();
+    public void setVdef8(String vdef8) {
+        this.vdef8 = vdef8 == null ? null : vdef8.trim();
     }
 
     /**
-     * @return VPAYPLANROWNO
+     * @return VDEF9
      */
-    public String getVpayplanrowno() {
-        return vpayplanrowno;
+    public String getVdef9() {
+        return vdef9;
     }
 
     /**
-     * @param vpayplanrowno
+     * @param vdef9
      */
-    public void setVpayplanrowno(String vpayplanrowno) {
-        this.vpayplanrowno = vpayplanrowno == null ? null : vpayplanrowno.trim();
+    public void setVdef9(String vdef9) {
+        this.vdef9 = vdef9 == null ? null : vdef9.trim();
+    }
+
+    /**
+     * @return VDTTYPE
+     */
+    public String getVdttype() {
+        return vdttype;
+    }
+
+    /**
+     * @param vdttype
+     */
+    public void setVdttype(String vdttype) {
+        this.vdttype = vdttype == null ? null : vdttype.trim();
+    }
+
+    /**
+     * @return VLCCODE
+     */
+    public String getVlccode() {
+        return vlccode;
+    }
+
+    /**
+     * @param vlccode
+     */
+    public void setVlccode(String vlccode) {
+        this.vlccode = vlccode == null ? null : vlccode.trim();
+    }
+
+    /**
+     * @return VTRANTYPECODE
+     */
+    public String getVtrantypecode() {
+        return vtrantypecode;
+    }
+
+    /**
+     * @param vtrantypecode
+     */
+    public void setVtrantypecode(String vtrantypecode) {
+        this.vtrantypecode = vtrantypecode == null ? null : vtrantypecode.trim();
     }
 
     @Override
     public void setId(String s) {
-        this.pkReceiptB = s;
+        this.pkReceipt=s;
     }
 
     @Override
     public String getId() {
-        return this.pkReceiptB;
+        return this.pkReceipt;
     }
 }

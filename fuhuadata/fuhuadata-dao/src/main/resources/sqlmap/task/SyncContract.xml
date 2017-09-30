@@ -5,56 +5,42 @@
 
   <select id="getOracleData" resultClass="syncContract">
           SELECT
-              cfirstid as pkLongpro,
-              c.pk_contract as pkContract,
+              (select cfirstid from fhdba.et_contract_b where pk_contract=p.pk_contract and rownum=1) as pkLongpro,
+              p.pk_contract as pkContract,
               p.ntotalorigmny as amount,
               p.vdef37 as grossProfit,
               1 as type,
               p.vdef2 billcode
       FROM
-              et_contract_b c,
-              et_contract p
+              fhdba.et_contract p
+
       WHERE
-              c.pk_contract = p.pk_contract
-              AND cfirstid != '~'
-              AND c.dr = 0
+              p.pk_contract in (select c.pk_contract from fhdba.et_contract_b c where c.cfirstid!='~')
               AND p.dr = 0
               AND p. fpfstatusflag =1
               AND p.frevisestatusflag =-1
               AND p.fstatusflag =8
-              AND p.ctrantypeid ='5715'
-      GROUP BY
-              c.pk_contract,
-              cfirstid,
-              ntotalorigmny,
-              p.vdef37
+              AND p.ctrantypeid ='1001D2100000001X2A1S'
 
       UNION ALL
 
       SELECT
-              cfirstid as pkLongpro,
-              c.pk_contract as pkContract,
+             (select cfirstid from fhdba.ent_contract_b where pk_contract=p.pk_contract and rownum=1) as pkLongpro,
+              p.pk_contract as pkContract,
               p.ntotalorigmny as amount,
               p.vdef37 as grossProfit,
               2 as type,
               p.vbillcode billcode
       FROM
-              ent_contract_b c,
-              ent_contract p
+
+              fhdba.ent_contract p
       WHERE
-              c.pk_contract = p.pk_contract
-              AND cfirstid != '~'
-              AND c.dr = 0
+              p.pk_contract in (select c.pk_contract from fhdba.ent_contract_b c where c.cfirstid!='~')
               AND p.dr = 0
               AND p. fpfstatusflag =1
               AND p.frevisestatusflag =-1
               AND p.fstatusflag =8
-              AND p.ctrantypeid ='5715'
-      GROUP BY
-              c.pk_contract,
-              cfirstid,
-              ntotalorigmny,
-              p.vdef37
+              AND p.ctrantypeid ='1001D2100000001X2A2Y'
   </select>
 
   <delete id="deleteMysqlData">
