@@ -1,60 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fuhuadata.dao.oracle.NcReCeiptMapper">
+<mapper namespace="com.fuhuadata.dao.oracle.ReceiptMapper">
   <resultMap id="BaseResultMap" type="com.fuhuadata.domain.oracle.ReCeipt">
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="PK_RECEIPT_B" jdbcType="CHAR" property="pkReceiptB" />
-    <result column="BCOLLECT" jdbcType="CHAR" property="bcollect" />
-    <result column="CBCTID" jdbcType="CHAR" property="cbctid" />
-    <result column="CCTCURRENCYID" jdbcType="VARCHAR" property="cctcurrencyid" />
-    <result column="CDEPTID" jdbcType="VARCHAR" property="cdeptid" />
-    <result column="CDEPTVID" jdbcType="VARCHAR" property="cdeptvid" />
-    <result column="CDTID" jdbcType="CHAR" property="cdtid" />
-    <result column="CEMPLOYEEID" jdbcType="VARCHAR" property="cemployeeid" />
-    <result column="CMATERIALID" jdbcType="VARCHAR" property="cmaterialid" />
-    <result column="CMATERIALVID" jdbcType="VARCHAR" property="cmaterialvid" />
-    <result column="CPAYPLANID" jdbcType="CHAR" property="cpayplanid" />
-    <result column="CROWNO" jdbcType="VARCHAR" property="crowno" />
-    <result column="CSALEORGID" jdbcType="VARCHAR" property="csaleorgid" />
-    <result column="CSALEORGVID" jdbcType="VARCHAR" property="csaleorgvid" />
+    <id column="PK_RECEIPT" jdbcType="CHAR" property="pkReceipt" />
+    <result column="APPROVER" jdbcType="VARCHAR" property="approver" />
+    <result column="BCLAIMEND" jdbcType="CHAR" property="bclaimend" />
+    <result column="BHASRECBILL" jdbcType="CHAR" property="bhasrecbill" />
+    <result column="BILLMAKER" jdbcType="VARCHAR" property="billmaker" />
+    <result column="CCTID" jdbcType="CHAR" property="cctid" />
+    <result column="CCURRENCYID" jdbcType="VARCHAR" property="ccurrencyid" />
+    <result column="CCUSTBANKACCID" jdbcType="VARCHAR" property="ccustbankaccid" />
+    <result column="CCUSTBANKACCODE" jdbcType="VARCHAR" property="ccustbankaccode" />
+    <result column="CCUSTBANKID" jdbcType="VARCHAR" property="ccustbankid" />
+    <result column="CCUSTOMERID" jdbcType="VARCHAR" property="ccustomerid" />
+    <result column="CLCID" jdbcType="CHAR" property="clcid" />
+    <result column="CORIGCURRENCYID" jdbcType="VARCHAR" property="corigcurrencyid" />
+    <result column="CREATIONTIME" jdbcType="CHAR" property="creationtime" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="CTRANTYPEID" jdbcType="VARCHAR" property="ctrantypeid" />
+    <result column="CUSDCURRENCYID" jdbcType="VARCHAR" property="cusdcurrencyid" />
     <result column="DBILLDATE" jdbcType="CHAR" property="dbilldate" />
+    <result column="DMAKEDATE" jdbcType="CHAR" property="dmakedate" />
     <result column="DR" jdbcType="DECIMAL" property="dr" />
-    <result column="FCLAIMSTATUS" jdbcType="DECIMAL" property="fclaimstatus" />
-    <result column="FRECEIPTTYPE" jdbcType="DECIMAL" property="freceipttype" />
-    <result column="NARORIGMNY" jdbcType="DECIMAL" property="narorigmny" />
-    <result column="NCLAIMCTMNY" jdbcType="DECIMAL" property="nclaimctmny" />
-    <result column="NCLAIMMNY" jdbcType="DECIMAL" property="nclaimmny" />
-    <result column="NCLAIMORIGMNY" jdbcType="DECIMAL" property="nclaimorigmny" />
-    <result column="NCLAIMUSDMNY" jdbcType="DECIMAL" property="nclaimusdmny" />
-    <result column="NCTEXCHANGERATE" jdbcType="DECIMAL" property="nctexchangerate" />
+    <result column="FBUSITYPE" jdbcType="DECIMAL" property="fbusitype" />
+    <result column="FPFSTATUSFLAG" jdbcType="DECIMAL" property="fpfstatusflag" />
+    <result column="FSTATUSFLAG" jdbcType="DECIMAL" property="fstatusflag" />
+    <result column="MODIFIEDTIME" jdbcType="CHAR" property="modifiedtime" />
+    <result column="MODIFIER" jdbcType="VARCHAR" property="modifier" />
+    <result column="NEXCHANGERATE" jdbcType="DECIMAL" property="nexchangerate" />
+    <result column="NFRGNMNY" jdbcType="DECIMAL" property="nfrgnmny" />
+    <result column="NFRGNORIGMNY" jdbcType="DECIMAL" property="nfrgnorigmny" />
+    <result column="NHOMEMNY" jdbcType="DECIMAL" property="nhomemny" />
+    <result column="NRECEIPTMNY" jdbcType="DECIMAL" property="nreceiptmny" />
+    <result column="NRECEIPTORIGMNY" jdbcType="DECIMAL" property="nreceiptorigmny" />
+    <result column="NRECEIPTUSDMNY" jdbcType="DECIMAL" property="nreceiptusdmny" />
+    <result column="NTOTALMNY" jdbcType="DECIMAL" property="ntotalmny" />
+    <result column="NTOTALORIGMNY" jdbcType="DECIMAL" property="ntotalorigmny" />
+    <result column="NTOTALUSDMNY" jdbcType="DECIMAL" property="ntotalusdmny" />
+    <result column="NUSDEXCHGRATE" jdbcType="DECIMAL" property="nusdexchgrate" />
     <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
     <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
-    <result column="PK_RECEIPT" jdbcType="CHAR" property="pkReceipt" />
+    <result column="PK_ORG_V" jdbcType="VARCHAR" property="pkOrgV" />
+    <result column="TAUDITTIME" jdbcType="CHAR" property="taudittime" />
     <result column="TS" jdbcType="CHAR" property="ts" />
-    <result column="VBCTCODE" jdbcType="VARCHAR" property="vbctcode" />
-    <result column="VBDEF1" jdbcType="VARCHAR" property="vbdef1" />
-    <result column="VBDEF10" jdbcType="VARCHAR" property="vbdef10" />
-    <result column="VBDEF11" jdbcType="VARCHAR" property="vbdef11" />
-    <result column="VBDEF12" jdbcType="VARCHAR" property="vbdef12" />
-    <result column="VBDEF13" jdbcType="VARCHAR" property="vbdef13" />
-    <result column="VBDEF14" jdbcType="VARCHAR" property="vbdef14" />
-    <result column="VBDEF15" jdbcType="VARCHAR" property="vbdef15" />
-    <result column="VBDEF16" jdbcType="VARCHAR" property="vbdef16" />
-    <result column="VBDEF17" jdbcType="VARCHAR" property="vbdef17" />
-    <result column="VBDEF18" jdbcType="VARCHAR" property="vbdef18" />
-    <result column="VBDEF19" jdbcType="VARCHAR" property="vbdef19" />
-    <result column="VBDEF2" jdbcType="VARCHAR" property="vbdef2" />
-    <result column="VBDEF20" jdbcType="VARCHAR" property="vbdef20" />
-    <result column="VBDEF3" jdbcType="VARCHAR" property="vbdef3" />
-    <result column="VBDEF4" jdbcType="VARCHAR" property="vbdef4" />
-    <result column="VBDEF5" jdbcType="VARCHAR" property="vbdef5" />
-    <result column="VBDEF6" jdbcType="VARCHAR" property="vbdef6" />
-    <result column="VBDEF7" jdbcType="VARCHAR" property="vbdef7" />
-    <result column="VBDEF8" jdbcType="VARCHAR" property="vbdef8" />
-    <result column="VBDEF9" jdbcType="VARCHAR" property="vbdef9" />
-    <result column="VDTCODE" jdbcType="VARCHAR" property="vdtcode" />
-    <result column="VPAYPLANROWNO" jdbcType="VARCHAR" property="vpayplanrowno" />
+    <result column="VBILLCODE" jdbcType="VARCHAR" property="vbillcode" />
+    <result column="VCTCODE" jdbcType="VARCHAR" property="vctcode" />
+    <result column="VCTTYPE" jdbcType="VARCHAR" property="vcttype" />
+    <result column="VDEF1" jdbcType="VARCHAR" property="vdef1" />
+    <result column="VDEF10" jdbcType="VARCHAR" property="vdef10" />
+    <result column="VDEF11" jdbcType="VARCHAR" property="vdef11" />
+    <result column="VDEF12" jdbcType="VARCHAR" property="vdef12" />
+    <result column="VDEF13" jdbcType="VARCHAR" property="vdef13" />
+    <result column="VDEF14" jdbcType="VARCHAR" property="vdef14" />
+    <result column="VDEF15" jdbcType="VARCHAR" property="vdef15" />
+    <result column="VDEF16" jdbcType="VARCHAR" property="vdef16" />
+    <result column="VDEF17" jdbcType="VARCHAR" property="vdef17" />
+    <result column="VDEF18" jdbcType="VARCHAR" property="vdef18" />
+    <result column="VDEF19" jdbcType="VARCHAR" property="vdef19" />
+    <result column="VDEF2" jdbcType="VARCHAR" property="vdef2" />
+    <result column="VDEF20" jdbcType="VARCHAR" property="vdef20" />
+    <result column="VDEF3" jdbcType="VARCHAR" property="vdef3" />
+    <result column="VDEF4" jdbcType="VARCHAR" property="vdef4" />
+    <result column="VDEF5" jdbcType="VARCHAR" property="vdef5" />
+    <result column="VDEF6" jdbcType="VARCHAR" property="vdef6" />
+    <result column="VDEF7" jdbcType="VARCHAR" property="vdef7" />
+    <result column="VDEF8" jdbcType="VARCHAR" property="vdef8" />
+    <result column="VDEF9" jdbcType="VARCHAR" property="vdef9" />
+    <result column="VDTTYPE" jdbcType="VARCHAR" property="vdttype" />
+    <result column="VLCCODE" jdbcType="VARCHAR" property="vlccode" />
+    <result column="VTRANTYPECODE" jdbcType="VARCHAR" property="vtrantypecode" />
   </resultMap>
 </mapper>
