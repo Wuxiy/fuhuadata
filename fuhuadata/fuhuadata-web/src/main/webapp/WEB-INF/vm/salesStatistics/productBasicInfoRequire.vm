@@ -257,7 +257,7 @@
                             <thead>
                             <tr>
                                 <th class="text-center col-xs-3" lang="zh">原料<sup class="not-null">*</sup></th>
-                                <th class="text-center col-xs-2" lang="zh">单耗(kg/L)<sup class="not-null">*</sup></th>
+                                <th class="text-center col-xs-2" lang="zh">单耗(kg/T)<sup class="not-null">*</sup></th>
                                 <th class="text-center col-xs-2" lang="zh">单价（元/kg）<sup class="not-null">*</sup></th>
                                 <th class="text-center col-xs-2" lang="zh">费用（元/KL）<sup class="not-null">*</sup></th>
                                 <th class="text-center col-xs-3" lang="zh">备注</th>
