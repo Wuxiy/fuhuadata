@@ -150,7 +150,7 @@
                                         </td>
                                         <td class="fac">
                                             <select name="factoryName" id="factoryName" class="form-control reserttable" data-control="on">
-                                                <option value="">——请选择——</option>
+                                                <option value=""></option>
                                                 #foreach($!info in $!{freightCosts})
                                                     <option value="$!info.freightId">$!info.processFactory</option>
                                                 #end
@@ -393,6 +393,7 @@
                     //价格计算类型判断
                     if(basicInfo.priceType == '01'){
                         $('#purchasePrice').attr('disabled',true);
+                        $('.fac').hide();
                     }else if(basicInfo.priceType == '02'){
                         $('#purchasePrice').attr('disabled',true);
                         $('.fac').show();
@@ -469,6 +470,7 @@
         //执行下一步操作，根据edit&add的值选择不同的获取表单数据方法
         $('#next').click(function () {
             var businessProductId = $('#businessProductId').val();
+            Add();
             if(businessProductId != ''){
                 productRequireIdAdd = $('#productRequireId').val();
                 console.log($('#productRequireId').val());
@@ -748,6 +750,24 @@
                                 $('#capitalInterestPrice').val(basicInfo.capitalInterestPrice);
                                 $('#internalSupplyName').val(basicInfo.internalSupplyName);
                                 $('#internalSupplyName').data('val',basicInfo.internalSupplyId);
+
+                                //价格计算类型判断
+                                if(basicInfo.priceType == '01'){
+                                    $('#purchasePrice').attr('disabled',true);
+                                    $('.fac').hide();
+                                }else if(basicInfo.priceType == '02'){
+                                    $('#purchasePrice').attr('disabled',true);
+                                    $('.fac').show();
+                                }else if(basicInfo.priceType == '04'){
+                                    $('#advisePrice').attr('disabled',true);
+                                    $('.fac').show();
+                                }else if(basicInfo.priceType == '03'){
+                                    $('#advisePrice').attr('disabled',true);
+                                }else if(basicInfo.priceType == '09'){
+                                    $('#purchasePrice').attr('disabled',true);
+                                    $('#advisePrice').attr('disabled',true);
+                                    $('.hidecang').hide();
+                                }
 
                                 //退税状态量
                                 remarkTax = basicInfo.taxFree;
