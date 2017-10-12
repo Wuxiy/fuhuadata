@@ -402,6 +402,7 @@
                         $('.fac').show();
                     }else if(basicInfo.priceType == '03'){
                         $('#advisePrice').attr('disabled',true);
+                        $('.fac').hide();
                     }else if(basicInfo.priceType == '09'){
                         $('#purchasePrice').attr('disabled',true);
                         $('#advisePrice').attr('disabled',true);
@@ -763,6 +764,7 @@
                                     $('.fac').show();
                                 }else if(basicInfo.priceType == '03'){
                                     $('#advisePrice').attr('disabled',true);
+                                    $('.fac').hide();
                                 }else if(basicInfo.priceType == '09'){
                                     $('#purchasePrice').attr('disabled',true);
                                     $('#advisePrice').attr('disabled',true);
