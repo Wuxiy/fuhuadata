@@ -66,10 +66,10 @@
                     </div>
                 </div>
                 <div class="col-xs-2 col-xs-offset-4">
-                    <a class="btn btn-block btn-primary" id="finish">转化</a>
+                    <button type="button" class="btn btn-block btn-primary" id="finish">转化</button>
                 </div>
                 <div class="col-xs-2">
-                    <button name="backBtn" class="btn btn-block btn-default" type="button">取消</button>
+                    <button name="backBtn" class="btn btn-block btn-default" type="button" id="cancel">取消</button>
                 </div>
             </div>
         </div>
@@ -130,21 +130,16 @@ $(document).ready(function(){
     $('#finish').click(function(){
 
         if (!formObj.form()) return;
-
-        var btn = $(this).add('#reset');
-        btn.attr('disabled',true);
+        var btn1 = $(this);
+        var btn2 = $('#cancel');
+        btn1.attr('disabled',true).text('转化中...');
+        btn2.attr('disabled',true);
         jQuery.ajax({
             url:basePath + '/businessOrder/updateOrderProducts',
             type:'POST',
             dataType:'JSON',
             contentType:"application/json",
             data:JSON.stringify(upData()),
-//            contentType:"application/json",
-//            success:function(result){
-//                alert('转化成功');
-//                console.log(result);
-//                window.history.back(-1);
-//            }
         }).done(function (result) {
 
             alert('转化成功');
@@ -153,7 +148,8 @@ $(document).ready(function(){
         }).fail(function () {
 
             alert('转化失败，请重试！！');
-            btn.attr('disabled',false);
+            btn1.attr('disabled',false).text('转化');
+            btn2.attr('disabled',true);
         })
     });
 
