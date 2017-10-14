@@ -207,6 +207,26 @@ public class CustomerInfoToNCImpl implements CustomerInfoToNC{
             if (customerBaseInfo.getCustomerAreaId()!=null) {
                 nodeValue.put("pk_areacl", customerBaseInfo.getCustomerAreaId());
             }
+            //注册资金
+            if (customerBaseInfo.getRegisteredFunds()!=null){
+                nodeValue.put("registerfund",customerBaseInfo.getRegisteredFunds()+"");
+            }
+            //企业电话
+            if (customerBaseInfo.getEnterprisePhone()!=null){
+                nodeValue.put("tel1",customerBaseInfo.getEnterprisePhone());
+            }
+            //企业邮箱
+            if (customerBaseInfo.getEnterpriseEmail()!=null){
+                nodeValue.put("email",customerBaseInfo.getEnterpriseEmail());
+            }
+            //中信保编码
+            if (customerBaseInfo.getZhongxinbaoNumber()!=null){
+                nodeValue.put("def20",customerBaseInfo.getZhongxinbaoNumber());
+            }
+            //中信保评级
+            if (customerBaseInfo.getZhongxinbaoLevel()!=null){
+                nodeValue.put("def24",customerBaseInfo.getZhongxinbaoLevel()+"");
+            }
             //nodeValue.put("","");
 
             for(Map.Entry<String ,String> entry:nodeValue.entrySet()){
