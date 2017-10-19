@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.math.BigDecimal;
 
-@Table(name = "FTPUB_PORTDOC")
+
 public class PortDoc extends BaseEntity<String> {
     @Id
     @Column(name = "PK_PORTDOC")
@@ -129,6 +129,25 @@ public class PortDoc extends BaseEntity<String> {
 
     @Column(name = "VNOTE")
     private String vnote;
+
+    private String country;
+    private String ecountry;
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getEcountry() {
+        return ecountry;
+    }
+
+    public void setEcountry(String ecountry) {
+        this.ecountry = ecountry;
+    }
 
     /**
      * @return PK_PORTDOC

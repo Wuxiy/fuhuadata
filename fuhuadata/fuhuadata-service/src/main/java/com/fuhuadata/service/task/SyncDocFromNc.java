@@ -43,7 +43,15 @@ public class SyncDocFromNc {
     ReCeiptService reCeiptService;
 
     public void autoTest() {
-        System.out.println("Spring Task Test.");
+        syncCountryZone();
+        syncCurrtype();
+        syncCustclass();
+        syncIncoterm();
+        syncPortdoc();
+        syncFormatDoc();
+        syncIncome();
+        syncTimezone();
+        //syncReceipt();
     }
 
     /**
@@ -92,7 +100,7 @@ public class SyncDocFromNc {
      * 收款协议同步
      */
     public void syncIncome() {
-        incotermService.ncToCrm();
+        incomeService.ncToCrm();
     }
 
     /**

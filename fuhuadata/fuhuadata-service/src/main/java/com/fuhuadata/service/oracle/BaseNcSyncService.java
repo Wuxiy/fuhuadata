@@ -35,7 +35,7 @@ public class BaseNcSyncService<S extends BaseEntity<SID>, SID extends Serializab
     public void ncToCrm() {
         try {
             logger.info("[{}]开始同步", getSyncName());
-            List<S> ncItems = list();
+            List<S> ncItems = getNcDocs();
             List<T> docs = Lists.newArrayList();
 
             for (S ncDoc : ncItems) {
@@ -51,6 +51,10 @@ public class BaseNcSyncService<S extends BaseEntity<SID>, SID extends Serializab
         } catch (Exception e) {
             logger.error("[{}]失败", getSyncName(), e);
         }
+    }
+
+    protected List<S> getNcDocs() {
+        return list();
     }
 
     /**
