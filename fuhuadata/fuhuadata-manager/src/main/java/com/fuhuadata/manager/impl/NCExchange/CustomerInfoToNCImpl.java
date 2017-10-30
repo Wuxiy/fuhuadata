@@ -177,7 +177,7 @@ public class CustomerInfoToNCImpl implements CustomerInfoToNC{
 
             if (customerBaseInfo.getSaleOrganizationId()!=null) {
                 //String ncId=orderToNc.getOrgNcIdByOrgId();
-                nodeValue.put("pk_org", customerBaseInfo.getSaleOrganizationId());
+                nodeValue.put("pk_org","0001");
             }
             if (customerBaseInfo.getFullName()!=null) {
                 nodeValue.put("name", customerBaseInfo.getFullName());
