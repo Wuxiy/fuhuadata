@@ -5,6 +5,7 @@
     <typeAlias alias="linkMan" type="com.fuhuadata.domain.mybatis.supplier.SupplierLinkman"/>
     <typeAlias alias="bankAccBas" type="com.fuhuadata.domain.common.BankAccBas"/>
     <typeAlias alias="warehouse" type="com.fuhuadata.domain.mybatis.supplier.WarehouseInfo"/>
+    <typeAlias alias="customer" type="com.fuhuadata.domain.mybatis.CustomerBaseInfo"/>
   <select id="getOracleData" resultClass="freightforwarding">
       SELECT
               s.code as code,
@@ -14,7 +15,8 @@
               s.tel1 as tel1,
               s.registerfund as registerfund,
               s.email as email,
-              s.memo as memo
+              s.memo as memo,
+              0 AS supprop
       FROM
               bd_supplier s,
               org_orgs o
@@ -22,7 +24,7 @@
               s.pk_supplierclass =(SELECT pk_supplierclass FROM bd_supplierclass WHERE code='1801')
               AND s.dr = 0
               AND o.pk_org=s.pk_org
-      GROUP BY
+      ORDER BY
               s.code
   </select>
   <select id="getBankAcc" resultClass="bankAccBas">
@@ -38,14 +40,15 @@
                 b.mnecode AS mnecode,
                 bc.code AS pkBankdoc,
                 be.code AS pkBanktype,
-                bk.pk_cust AS customerId
+                bs.code AS customerId
       FROM
                 bd_bankaccbas b
                 JOIN bd_custbank bk ON bk.pk_bankaccbas=b.pk_bankaccbas
+                JOIN bd_supplier bs ON bs.pk_supplier=bk.pk_cust
               join bd_bankdoc bc on bc.pk_bankdoc=b.pk_bankdoc
               join bd_banktype be on be.pk_banktype=b.pk_banktype
       where
-                b.pk_bankaccbas IN (SELECT pk_bankaccbas FROM bd_custbank WHERE pk_cust IN (SELECT pk_supplier FROM bd_supplier WHERE pk_supplierclass in (SELECT pk_supplierclass FROM bd_supplierclass WHERE code='1801')));
+                b.pk_bankaccbas IN (SELECT pk_bankaccbas FROM bd_custbank WHERE pk_cust IN (SELECT pk_supplier FROM bd_supplier WHERE pk_supplierclass in (SELECT pk_supplierclass FROM bd_supplierclass WHERE code='1801')))
 
   </select>
     <select id="getLinkMan" resultClass="linkMan">
@@ -68,28 +71,64 @@
                 bd_linkman b
                 JOIN bd_suplinkman bl ON bl.pk_linkman=b.pk_linkman
         WHERE
-                b.pk_linkman IN (SELECT pk_linkman FROM bd_suplinkman WHERE pk_supplier IN (SELECT pk_supplier FROM bd_supplier WHERE pk_supplierclass in (SELECT pk_supplierclass FROM bd_supplierclass WHERE code='1801')));
+                b.pk_linkman IN (SELECT pk_linkman FROM bd_suplinkman WHERE pk_supplier IN (SELECT pk_supplier FROM bd_supplier WHERE pk_supplierclass in (SELECT pk_supplierclass FROM bd_supplierclass WHERE code='1801')))
     </select>
     <select id="getStorDoc" resultClass="warehouse">
         SELECT
-              s.pk_stordoc as pk_stordoc,
+              s.pk_stordoc as pkStordoc,
               s.code as code,
               s.dataoriginflag as dataoriginflag,
               s.memo as memo,
               s.phone as phone,
-              a.name as pk_address,
-              g.name as pk_group,
-              org.name as pk_org,
+              a.name as pkAddress,
+              g.name as pkGroup,
+              org.name as pkOrg,
               s.principalcode as principalcode,
               ar.detailinfo as storaddr,
               s.name as name,
-              s.enablestate as enable_state
+              s.enablestate as enableState
         FROM
               bd_stordoc s
               LEFT JOIN bd_addressdoc a on a.pk_addressdoc=s.pk_address
               JOIN org_group g on g.pk_group=s.pk_group
               JOIN org_stockorg org ON org.pk_stockorg=s.pk_org
-              LEFT JOIN bd_address ar ON ar.pk_address=s.storaddr;
+              LEFT JOIN bd_address ar ON ar.pk_address=s.storaddr
 
+    </select>
+    <select id="getCustomerBaseInfo" resultClass="customer">
+            select
+                c.pk_customer as ncId,
+                c.name as fullName,
+                c.shortname as shortName,
+                a.code  as customerAreaId,
+                a.name as customerArea,
+                cz.code as countryZone,
+                case when c.taxpayerid='~' then '' end  customerDutyParagraph,
+                org.code as sale_organizationId,
+                org.name as sale_organizationName,
+                c. registerfund as registeredFunds,
+                c.def20 as zhongxinbaoNumber,
+                case when c.tel1='' then (case when c.tel2='' then c.tel3 else c.tel2 end ) end enterprisePhone,
+                 c.email as enterpriseEmail,
+                 t.code as timezone,
+                 cc.code as custclass,
+                  f.code   as formatdoc,
+                  u.user_name as createUserName,
+                  u.user_name as lastmodifyUserName,
+                  1 customerType,
+                  1 customerStatus,
+                  4 customerLevel,
+                  0 companyType
+                 from
+                  bd_customer c
+                 left join bd_areacl a on c. pk_areacl  = a.pk_areacl
+                  left join bd_countryzone cz on  c.pk_country = cz.pk_country
+                left join org_orgs org on org.pk_org = c.pk_financeorg
+                left join  bd_timezone t on t.pk_timezone  = c.pk_timezone
+                left join  bd_custclass cc on  cc.pk_custclass =c.pk_custclass
+                left join  bd_formatdoc f on f.pk_formatdoc = c.pk_format
+                left join  sm_user u on  u.cuserid = c.modifier
+                 where
+                   c.pk_custclass  in('1001D210000000005TE6','1001D210000000005TE7','1001D210000000005TE5')
     </select>
 </sqlMap>

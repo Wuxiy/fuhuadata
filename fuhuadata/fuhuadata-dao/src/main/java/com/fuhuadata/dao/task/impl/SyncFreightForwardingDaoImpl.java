@@ -2,6 +2,7 @@ package com.fuhuadata.dao.task.impl;
 
 import com.fuhuadata.dao.task.SyncFreightForwardingDao;
 import com.fuhuadata.domain.common.BankAccBas;
+import com.fuhuadata.domain.mybatis.CustomerBaseInfo;
 import com.fuhuadata.domain.mybatis.supplier.FreightForwarding;
 import com.fuhuadata.domain.mybatis.supplier.SupplierLinkman;
 import com.fuhuadata.domain.mybatis.supplier.WarehouseInfo;
@@ -34,6 +35,11 @@ public class SyncFreightForwardingDaoImpl implements SyncFreightForwardingDao {
     @Override
     public List<WarehouseInfo> getStorDoc() throws Exception {
         return sqlMapClientOracle.queryForList("SyncFreightForwarding.getStorDoc");
+    }
+
+    @Override
+    public List<CustomerBaseInfo> getCustomerBaseInfo() throws Exception {
+        return sqlMapClientOracle.queryForList("SyncFreightForwarding.getCustomerBaseInfo");
     }
 
 
