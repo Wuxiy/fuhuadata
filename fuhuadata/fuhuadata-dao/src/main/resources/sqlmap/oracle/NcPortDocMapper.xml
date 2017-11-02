@@ -45,5 +45,13 @@
     <result column="VNAME5" jdbcType="VARCHAR" property="vname5" />
     <result column="VNAME6" jdbcType="VARCHAR" property="vname6" />
     <result column="VNOTE" jdbcType="VARCHAR" property="vnote" />
+    <result column="COUNTRY" jdbcType="VARCHAR" property="country"/>
+    <result column="ECOUNTRY" jdbcType="VARCHAR" property="ecountry"/>
   </resultMap>
+  <select id="getPortDoc" resultMap="BaseResultMap">
+      SELECT f.pk_portdoc,f.vname,f.venname,f.vcode,b.name as country,b.ename as ecountry
+        FROM  ftpub_portdoc f join bd_countryzone b on f.cdistrictid=b.pk_country
+        where  enablestate =2
+  </select>
+
 </mapper>

@@ -73,6 +73,7 @@
             <list>
                 <value>classpath:sqlmap/mapper/**.xml</value>
                 <value>classpath:sqlmap/homesales/**.xml</value>
+                <value>classpath:sqlmap/oracle/**.xml</value>
             </list>
         </property>
         <property name="configLocation" value="classpath:/mybatis-config.xml"/>

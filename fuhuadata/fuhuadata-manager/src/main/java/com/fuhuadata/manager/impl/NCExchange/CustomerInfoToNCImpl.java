@@ -177,7 +177,7 @@ public class CustomerInfoToNCImpl implements CustomerInfoToNC{
 
             if (customerBaseInfo.getSaleOrganizationId()!=null) {
                 //String ncId=orderToNc.getOrgNcIdByOrgId();
-                nodeValue.put("pk_org", customerBaseInfo.getSaleOrganizationId());
+                nodeValue.put("pk_org","0001");
             }
             if (customerBaseInfo.getFullName()!=null) {
                 nodeValue.put("name", customerBaseInfo.getFullName());
@@ -206,6 +206,26 @@ public class CustomerInfoToNCImpl implements CustomerInfoToNC{
             //地区分类
             if (customerBaseInfo.getCustomerAreaId()!=null) {
                 nodeValue.put("pk_areacl", customerBaseInfo.getCustomerAreaId());
+            }
+            //注册资金
+            if (customerBaseInfo.getRegisteredFunds()!=null){
+                nodeValue.put("registerfund",customerBaseInfo.getRegisteredFunds()+"");
+            }
+            //企业电话
+            if (customerBaseInfo.getEnterprisePhone()!=null){
+                nodeValue.put("tel1",customerBaseInfo.getEnterprisePhone());
+            }
+            //企业邮箱
+            if (customerBaseInfo.getEnterpriseEmail()!=null){
+                nodeValue.put("email",customerBaseInfo.getEnterpriseEmail());
+            }
+            //中信保编码
+            if (customerBaseInfo.getZhongxinbaoNumber()!=null){
+                nodeValue.put("def20",customerBaseInfo.getZhongxinbaoNumber());
+            }
+            //中信保评级
+            if (customerBaseInfo.getZhongxinbaoLevel()!=null){
+                nodeValue.put("def24",customerBaseInfo.getZhongxinbaoLevel()+"");
             }
             //nodeValue.put("","");
 

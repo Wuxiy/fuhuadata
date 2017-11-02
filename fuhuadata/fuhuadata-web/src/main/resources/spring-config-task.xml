@@ -12,10 +12,10 @@
     <task:annotation-driven scheduler="scheduler" executor="executor" proxy-target-class="true"/>
 
     <task:scheduled-tasks scheduler="scheduler">
-        <task:scheduled ref="syncDocFromNc" method="autoTest" cron="0 1/1 * * * ?"/>
-        <task:scheduled ref="syncContract" method="sync" initial-delay="5000" fixed-delay="3600000"/>
-        <task:scheduled ref="syncSubContract" method="sync" initial-delay="5000" fixed-delay="3600000"/>
-        <task:scheduled ref="syncProduct" method="sync" initial-delay="5000" fixed-delay="3600000"/>
+        <task:scheduled ref="syncDocFromNc" method="autoTest" cron="0 30 0 * * ?"/>
+        <task:scheduled ref="syncContract" method="sync"  cron="0 30 0 * * ?"/>
+        <task:scheduled ref="syncSubContract" method="sync"  cron="0 30 0 * * ?"/>
+        <task:scheduled ref="syncProduct" method="sync"  cron="0 30 0 * * ?"/>
         <task:scheduled ref="syncFreightForwarding" method="sync" cron="0 30 0 * * ?"/>
     </task:scheduled-tasks>
 

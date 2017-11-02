@@ -1,6 +1,7 @@
 package com.fuhuadata.dao.task;
 
 import com.fuhuadata.domain.common.BankAccBas;
+import com.fuhuadata.domain.mybatis.CustomerBaseInfo;
 import com.fuhuadata.domain.mybatis.supplier.FreightForwarding;
 import com.fuhuadata.domain.mybatis.supplier.SupplierLinkman;
 import com.fuhuadata.domain.mybatis.supplier.WarehouseInfo;
@@ -17,5 +18,5 @@ public interface SyncFreightForwardingDao {
     List<BankAccBas> getOraclBankAcc() throws Exception;
     List<SupplierLinkman> getOraclLinkMan() throws Exception;
     List<WarehouseInfo> getStorDoc() throws Exception;
-
+    List<CustomerBaseInfo> getCustomerBaseInfo() throws Exception;
 }
