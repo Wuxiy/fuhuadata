@@ -276,11 +276,24 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-2 col-xs-offset-2"><a class="btn btn-block btn-default hidden" type="button" id="resert">重置取消</a></div>
-            <div class="col-xs-2 col-xs-offset-1"><a class="btn btn-block btn-primary hidden" type="button" id="next">下一步</a></div>
-            <div class="col-xs-2 col-xs-offset-2"><a class="btn btn-block btn-default hidden" type="button" id="previous">上一步</a></div>
-            <div class="col-xs-2 col-xs-offset-1"><a class="btn btn-block btn-primary hidden" type="button" id="down">下一步</a></div>
+
         </div>
+        <div class="col-xs-12 view-HD-lg">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-xs-2 col-xs-offset-3"><a class="btn btn-block btn-default hidden" type="button" id="resert">重置取消</a></div>
+                    <div class="col-xs-2 col-xs-offset-2"><a class="btn btn-block btn-primary hidden" type="button" id="next">下一步</a></div>
+                    <div class="col-xs-2 col-xs-offset-3"><a class="btn btn-block btn-default hidden" type="button" id="previous">上一步</a></div>
+                    <div class="col-xs-2 col-xs-offset-2"><a class="btn btn-block btn-primary hidden" type="button" id="down">下一步</a></div>
+                    <div class="col-xs-2 pull-right"><a class="btn btn-block btn-primary hidden" type="button" id="orderback">返回</a></div>
+                </div>
+            </form>
+        </div>
+        #*<div class="col-xs-2 col-xs-offset-2"><a class="btn btn-block btn-default hidden" type="button" id="resert">重置取消</a></div>
+        <div class="col-xs-2 col-xs-offset-1"><a class="btn btn-block btn-primary hidden" type="button" id="next">下一步</a></div>
+        <div class="col-xs-2 col-xs-offset-2"><a class="btn btn-block btn-default hidden" type="button" id="previous">上一步</a></div>
+        <div class="col-xs-2 col-xs-offset-1"><a class="btn btn-block btn-primary hidden" type="button" id="down">下一步</a></div>
+        <div class="col-xs-2 pull-right"><a class="btn btn-block btn-primary hidden" type="button" id="orderback">返回</a></div>*#
     </div>
 </div>
 <!--树形菜单modal-->
@@ -456,7 +469,7 @@
         }
 
         if(editId == 2){
-            $('#back').removeClass('hidden');
+            $('#orderback').removeClass('hidden');
             $('#factoryName').attr('disabled',true);
         }
 
@@ -1199,6 +1212,11 @@
     //返回function
     $('#back').click(function(){
         window.location.href = basePath + '/businessOrder/intoOfferorOrder?orderId=' + orderId;
+    })
+
+    //edit=2返回function
+    $('#orderback').click(function(){
+        window.location.href = basePath + '/businessOrder/intoOrder?orderId=' + orderId;
     })
 
     //重置取消

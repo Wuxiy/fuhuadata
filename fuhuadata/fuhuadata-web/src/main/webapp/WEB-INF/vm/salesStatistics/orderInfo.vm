@@ -288,9 +288,7 @@
         <div class="col-xs-12 view-HD-lg">
             <form class="form-horizontal">
                 <div class="form-group">
-                    <div class="col-xs-2 pull-right">
-                        <a class="btn btn-block btn-primary" id="back">返回</a>
-                    </div>
+                    <div class="col-xs-2 pull-right"><a class="btn btn-block btn-primary" id="back">返回</a></div>
                 </div>
             </form>
         </div>
@@ -387,18 +385,18 @@
                         for(var i=0;i<businessOrderProductLists.length;i++){
                             businessproduct.innerHTML += '<tr>'+
                                     '<td>'+ifEmpty(businessOrderProductLists[i].productCode)+'</td>'+
-                                    '<td><a href="'+basePath+'/businessProduct/intoProductBasicInfoRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&edit=1'+'">'+ifEmpty(businessOrderProductLists[i].productName)+'</a></td>'+
+                                    '<td><a href="'+basePath+'/businessProduct/intoProductBasicInfoRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&edit=2'+'">'+ifEmpty(businessOrderProductLists[i].productName)+'</a></td>'+
                                     '<td>'+ifEmpty(businessOrderProductLists[i].categoryName)+'</td>'+
                                     '<td>'+ifEmpty(businessOrderProductLists[i].brand)+'</td>'+
-                                    '<td><a href="'+basePath+'/businessProduct/intoProductRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&productRequireId='+ifEmpty(businessOrderProductLists[i].productRequireId)+'&&edit=1'+'">'+ifEmpty(businessOrderProductLists[i].specification)+'</a></td>'+
+                                    '<td><a href="'+basePath+'/businessProduct/intoProductRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&productRequireId='+ifEmpty(businessOrderProductLists[i].productRequireId)+'&&edit=2'+'">'+ifEmpty(businessOrderProductLists[i].specification)+'</a></td>'+
                                     '<td>'+ifEmpty(businessOrderProductLists[i].mainProductAmount)+'</td>'+
                                     '<td>'+cupboardTypeList[ifEmpty(businessOrderProductLists[i].cupboardType)]+'</td>'+
                                     '<td>'+ifEmpty(businessOrderProductLists[i].cupboardNumber)+'</td>'+
                                     '<td>'+ifEmpty(businessOrderProductLists[i].deliveryTime)+'</td>'+
                                     '<td>'+ifEmpty(businessOrderProductLists[i].minPrice)+'</td>'+
 
-                                    '<td><a href="'+basePath+'/businessProduct/intoDocumentary?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&edit=1'+'">查看</a></td>'+
-                                    '<td><a href="'+basePath+'/businessProduct/intoPackageRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&edit=1'+'">查看</a></td>'+
+                                    '<td><a href="'+basePath+'/businessProduct/intoDocumentary?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&edit=2'+'">查看</a></td>'+
+                                    '<td><a href="'+basePath+'/businessProduct/intoPackageRequire?businessProductId='+businessOrderProductLists[i].businessProductId+'&&orderId='+businessOrderProductLists[i].orderId+'&&edit=2'+'">查看</a></td>'+
                                     '<td>'+(businessOrderProductLists[i].transformState==0?'否':'是')+'</td>'+
                                     '<td>'+ifEmpty(businessOrderProductLists[i].contractPrice)+'</td>'+
                                     '</tr>';

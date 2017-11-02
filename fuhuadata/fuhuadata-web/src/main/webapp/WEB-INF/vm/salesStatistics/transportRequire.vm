@@ -6,7 +6,7 @@
     <!--表格容器-->
     <div class="dashboard-wrapper">
         <div class="row">
-            <div class="col-xs-10">
+            <div class="col-xs-12">
                 <!--订舱出运要求-->
                 <div id="transport" class="panel panel-default view-HD-lg">
                     <div class="panel-heading">
@@ -229,10 +229,15 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-2 col-xs-offset-2"><a class="btn btn-block btn-default hidden" type="button" id="before">上一步</a></div>
-            <div class="col-xs-2 col-xs-offset-1"><a class="btn btn-block btn-primary hidden" type="button" id="next">下一步</a></div>
-            <div class="col-xs-2 col-xs-offset-2"><a class="btn btn-block btn-default hidden" type="button" id="previous">上一步</a></div>
-            <div class="col-xs-2 col-xs-offset-1"><a class="btn btn-block btn-primary hidden" type="button" id="down">下一步</a></div>
+        </div>
+        <div class="col-xs-12 view-HD-lg">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-xs-2 col-xs-offset-3"><a class="btn btn-block btn-default hidden" type="button" id="before">上一步</a></div>
+                    <div class="col-xs-2 col-xs-offset-2"><a class="btn btn-block btn-primary hidden" type="button" id="next">下一步</a></div>
+                    <div class="col-xs-2 pull-right"><a class="btn btn-block btn-primary hidden" type="button" id="orderback">返回</a></div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -383,8 +388,7 @@
         }
 
         if(editId == 2){
-            $('#previous').removeClass('hidden');
-            $('#down').removeClass('hidden');
+            $('#orderback').removeClass('hidden');
         }
 
         /*if(editId == 1&&id!=''){
@@ -735,6 +739,10 @@
 
     $('#back').click(function(){
         window.location.href = basePath + '/businessOrder/intoOfferorOrder?orderId=' + orderId;
+    })
+
+    $('#orderback').click(function(){
+        window.location.href = basePath + '/businessOrder/intoOrder?orderId=' + orderId;
     })
 
     $('#before').click(function(){
