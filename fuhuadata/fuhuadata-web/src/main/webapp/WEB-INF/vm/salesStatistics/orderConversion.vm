@@ -34,9 +34,9 @@
                                         <thead>
                                         <tr>
                                             <th class="text-center col-xs-6" lang="zh">商机产品</th>
-                                            <th class="text-center col-xs-2" lang="zh">最低销售价（元）</th>
+                                            <th class="text-center col-xs-2" lang="zh">最低销售价</th>
                                             <th class="text-center col-xs-2" lang="zh">是否转化</th>
-                                            <th class="text-center col-xs-2" lang="zh">合同单价（元）</th>
+                                            <th class="text-center col-xs-2" lang="zh">合同单价</th>
                                         </tr>
                                         </thead>
                                         <tbody id="conversiontable">
