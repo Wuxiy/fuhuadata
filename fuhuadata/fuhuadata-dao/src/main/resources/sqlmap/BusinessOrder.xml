@@ -851,7 +851,7 @@
                 <include refid="PROFIT-STATISTICS-QUERY-COMMON"/>
             </isParameterPresent>
             GROUP BY base.customer_area_id
-            ORDER BY netProfit DESC
+            ORDER BY grossProfit DESC
             limit #startRow#,#pageSize#
         </isEqual>
         <isEqual property="dimension" compareValue="1">
@@ -874,7 +874,7 @@
             GROUP BY
             a.destination_port
             ORDER BY
-            netProfit DESC
+            grossProfit DESC
             <isNotEmpty property="startRow">
                 limit #startRow#,#pageSize#
             </isNotEmpty>
@@ -905,7 +905,7 @@
             GROUP BY
             base.customer_id
             ORDER BY
-            netProfit DESC
+            grossProfit DESC
             limit #startRow#,#pageSize#
         </isEqual>
         <isEqual property="dimension" compareValue="3">
@@ -943,7 +943,7 @@
             GROUP BY
             a.sales_man_id
             ORDER BY
-            netProfit DESC
+            grossProfit DESC
             limit #startRow#,#pageSize#
         </isEqual>
 
@@ -970,7 +970,7 @@
             GROUP BY
             bi.`name`
             ORDER BY
-            grossRate DESC
+            grossProfit DESC
             limit #startRow#,#pageSize#
         </isEqual>
     </select>

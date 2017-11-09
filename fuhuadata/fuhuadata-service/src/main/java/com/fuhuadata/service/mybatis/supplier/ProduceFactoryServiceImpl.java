@@ -168,23 +168,23 @@ public class ProduceFactoryServiceImpl extends BaseServiceImpl<ProduceFactory, I
         factory.setLinkmen(linkmen);
 
         // 同步到 NC
-        Map<String,HashMap> mapMap= null;
-        try {
-            mapMap = factoryInfoToNC.sendFactoryInfo(factory);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new ServiceException("nc同步失败", e);
-        }
-        Map<Integer,String> factoryPK=mapMap.get("factory");
-        if (factoryPK!=null){
-            this.updateFactoryPk(factoryId,factoryPK.get(factoryId));
-        }
-        Map<Integer,String> bankaccPK=mapMap.get("bankacc");
-        if (bankaccPK!=null){
-            for (Integer id:bankaccPK.keySet()){
-                bankAccService.updateBankPk(id,bankaccPK.get(id));
-            }
-        }
+//        Map<String,HashMap> mapMap= null;
+//        try {
+//            mapMap = factoryInfoToNC.sendFactoryInfo(factory);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            throw new ServiceException("nc同步失败", e);
+//        }
+//        Map<Integer,String> factoryPK=mapMap.get("factory");
+//        if (factoryPK!=null){
+//            this.updateFactoryPk(factoryId,factoryPK.get(factoryId));
+//        }
+//        Map<Integer,String> bankaccPK=mapMap.get("bankacc");
+//        if (bankaccPK!=null){
+//            for (Integer id:bankaccPK.keySet()){
+//                bankAccService.updateBankPk(id,bankaccPK.get(id));
+//            }
+//        }
         return factory;
     }
 

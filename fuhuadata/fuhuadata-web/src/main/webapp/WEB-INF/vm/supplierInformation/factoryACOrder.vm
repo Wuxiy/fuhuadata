@@ -104,7 +104,7 @@
                                     /*table.total = res.data.total;
                                     table.renderPagination();*/
                                 }
-                                table.renderList(res.data.list);
+                                table.renderList(res.data);
                             }
                         });
                     },
@@ -116,13 +116,11 @@
                             $.each(list, function(i, item){
                                 tpl +=
                                         '<tr>' +
-                                        '<td>'+table.hasField(item.code)+'</td>'+
-                                        '<td><a href="'+basePath+'/supplier/forwarding/intoForwardingBasic?id='+table.hasField(item.id)+'">'+table.hasField(item.name)+'</a></td>'+
-                                        '<td>'+table.hasField(item.shortname)+'</td>'+
-                                        '<td>'+table.hasField(item.startCooperateTime)+'</td>'+
-                                        '<td>'+table.hasField(item.cooperateTime)+'</td>'+
-                                        '<td>'+table.hasField(item.combinedScoring)+'</td>'+
+                                        '<td>'+table.hasField(item.id)+'</td>'+
+                                        '<td>'+table.hasField(item.contractCode)+'</td>'+
+                                        '<td>'+table.hasField(item.mainNum)+'</td>'+
                                         '<td>'+table.hasField()+'</td>'+
+                                        '<td>'+table.hasField(item.totalPrice)+'</td>'+
                                         '<td>'+table.hasField()+'</td>'+
                                         '<td>'+table.hasField()+'</td>'+
                                         '</tr>';
