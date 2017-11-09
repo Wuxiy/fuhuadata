@@ -511,21 +511,8 @@
                         month:function () {
                             var _month,_year;
 
-                            if (1<=month<=10) {
-
-                                _year = year-1;
-                                _month = 11-month;
-
-                            }else if (month===11) {
-
-                                _year = year-1;
-                                _month = 12;
-
-                            }else if (month===12) {
-
-                                _year = year;
-                                _month = month-11;
-                            }
+                            _year = year-1;
+                            _month = month;
 
                             return _year+'-'+_month;
                         }

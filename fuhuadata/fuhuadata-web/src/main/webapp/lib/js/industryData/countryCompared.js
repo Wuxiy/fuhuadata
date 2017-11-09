@@ -376,21 +376,8 @@
                         month:function () {
                             var _month,_year;
 
-                            if (1<=month<=10) {
-
-                                _year = year-1;
-                                _month = month;
-
-                            }else if (month===11) {
-
-                                _year = year-1;
-                                _month = month;
-
-                            }else if (month===12) {
-
-                                _year = year;
-                                _month = month;
-                            }
+                            _year = year-1;
+                            _month = month;
 
                             return _year+'-'+_month;
                         }
@@ -449,6 +436,7 @@
                 })
             }
         };
+
     selectpicker.init();
     calendar.init();
     subDropdownList.init();
