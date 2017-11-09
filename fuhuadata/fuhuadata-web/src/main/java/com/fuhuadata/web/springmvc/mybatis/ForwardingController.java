@@ -155,11 +155,11 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
 
     @RequestMapping(value = "addForwardingWarehouseRelation",method = RequestMethod.POST)
     @SystemLogAnnotation(module = "supplier-forwarding",methods = "addForwardingWarehouseRelation")
-    public ResultPojo addForwardingWarehouseRelation(@RequestParam("forwardingId") Integer forwardingId, @RequestParam("warehouseId") Integer warehouseId){
+    public ResultPojo addForwardingWarehouseRelation(@RequestBody String forwardingId, @RequestBody String warehouseId){
         Result<Integer> result = new Result<>();
         ForwardingWarehouseRelation forwardingWarehouseRelation=new ForwardingWarehouseRelation();
-        forwardingWarehouseRelation.setWarehouseId(forwardingId.toString());
-        forwardingWarehouseRelation.setFreightforwardingId(warehouseId.toString());
+        forwardingWarehouseRelation.setWarehouseId(forwardingId);
+        forwardingWarehouseRelation.setFreightforwardingId(warehouseId);
         try {
             forwardingWarehouseRelationService.save(forwardingWarehouseRelation);
             result.setSuccess(true);

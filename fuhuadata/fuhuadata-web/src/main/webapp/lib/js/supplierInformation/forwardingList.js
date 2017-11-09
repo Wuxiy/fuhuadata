@@ -71,17 +71,21 @@ $(function(){
                             '<td>'+table.hasField(item.code)+'</td>'+
                             '<td><a href="'+basePath+'/supplier/forwarding/intoForwardingBasic?id='+table.hasField(item.id)+'">'+table.hasField(item.name)+'</a></td>'+
                             '<td>'+table.hasField(item.shortname)+'</td>'+
-                            '<td>'+supprops[table.hasField(item.supprop)]+'</td>'+
-                            '<td>'+tms.filter(function (e,i) {
-                                return this.indexOf(i+'')!==-1;
-                            },item.transportationMethods.split(',')).join('、')+'</td>'+
-                            '<td>'+table.hasField(item.startCooperateTime)+'</td>'+
-                            '<td>'+table.hasField(item.cooperateTime)+'</td>'+
-                            '<td>'+table.hasField(item.combinedScoring)+'</td>'+
-                            '<td>'+table.hasField()+'</td>'+
-                            '<td>'+table.hasField()+'</td>'+
-                            '<td>'+table.hasField()+'</td>'+
-                            '</tr>';
+                            '<td>'+supprops[table.hasField(item.supprop)]+'</td>';
+                        if(!!item.transportationMethods) {
+                            tpl+='<td>'+tms.filter(function (e,i) {
+                                    return this.indexOf(i+'')!==-1;
+                                },item.transportationMethods.split(',')).join('、')+'</td>';
+                        }else {
+                            tpl+='<td></td>>';
+                        }
+                        tpl+= '<td>'+table.hasField(item.startCooperateTime)+'</td>'+
+                                '<td>'+table.hasField(item.cooperateTime)+'</td>'+
+                                '<td>'+table.hasField(item.combinedScoring)+'</td>'+
+                                '<td>'+table.hasField()+'</td>'+
+                                '<td>'+table.hasField()+'</td>'+
+                                '<td>'+table.hasField()+'</td>'+
+                                '</tr>';
                     });
                 }else {
 
