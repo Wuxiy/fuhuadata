@@ -22,35 +22,33 @@
               AND c.dr = 0
               AND p.dr = 0
               AND p.fpfstatusflag = 1
-              AND p.frevisestatusflag = - 1
+              AND p.frevisestatusflag =-1
               AND p.fstatusflag = 8
-              AND p.ctrantypeid = '5715'
-              and c.frowstatusflag = 8
-
+              AND p.ctrantypeid = '1001D2100000001X2A1S'
+              and c.frowstatusflag = 0
         union all
-
         select
-               c.cmaterialvid as productCode,
-              c.pk_contract_b as pkContractB,
-              c.pk_contract as pkContract,
-              c.norigmny as amount,
-              c.nnum as num,
-              c.vbdef36 as grossProfit,
-              c.vbdef30 as grossRate,
+               nc.cmaterialvid as productCode,
+              nc.pk_contract_b as pkContractB,
+              nc.pk_contract as pkContract,
+              nc.norigmny as amount,
+              nc.nnum as num,
+              nc.vbdef36 as grossProfit,
+              nc.vbdef30 as grossRate,
               2 as type
         from
-              ent_contract_b c,
-              ent_contract p
+              ent_contract_b nc,
+              ent_contract np
         where
-              c.pk_contract = p.pk_contract
-              AND cfirstid != '~'
-              AND c.dr = 0
-              AND p.dr = 0
-              AND p.fpfstatusflag = 1
-              AND p.frevisestatusflag = - 1
-              AND p.fstatusflag = 8
-              AND p.ctrantypeid = '5715'
-              and c.frowstatusflag = 8
+              nc.pk_contract = np.pk_contract
+              AND nc.vfirstcode != '~'
+              AND nc.dr = 0
+              AND np.dr = 0
+              AND np.fpfstatusflag = 1
+              AND np.frevisestatusflag =-1
+              AND np.fstatusflag = 8
+              AND np.ctrantypeid = '1001D2100000001X2A2Y'
+              and nc.frowstatusflag =0
   </select>
 
   <delete id="deleteMysqlData">

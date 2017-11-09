@@ -7,12 +7,12 @@ $(function(){
         tms=['汽运','船运','铁路','航空','其他'],
         table = {
             total:0,
-            pageSize:3,
+            pageSize:10,
             pageNum:0,
             pagination:$('#pagination'),
             container:$('#forwarding_list'),
             setPagination:{
-                num_edge_entries:3,
+                num_edge_entries:5,
                 num_display_entries:5,
                 callback:function (pageNum,jq) {
                     $.ajax({

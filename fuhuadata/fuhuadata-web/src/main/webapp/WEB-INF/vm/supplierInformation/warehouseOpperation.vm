@@ -38,7 +38,7 @@
     $(function(){
         var table = {
                     total:0,
-                    pageSize:5,
+                    pageSize:10,
                     pageNum:0,
                     pagination:$('#pagination'),
                     container:$('#orderList'),

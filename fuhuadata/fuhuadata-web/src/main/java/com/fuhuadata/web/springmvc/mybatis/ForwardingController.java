@@ -2,6 +2,7 @@ package com.fuhuadata.web.springmvc.mybatis;
 
 import com.fuhuadata.domain.mybatis.supplier.*;
 import com.fuhuadata.domain.query.*;
+import com.fuhuadata.service.impl.mybatis.supplier.ForwardingWarehouseRelationServiceImpl;
 import com.fuhuadata.service.mybatis.supplier.*;
 import com.fuhuadata.service.util.LoginUtils;
 import com.fuhuadata.vo.Supplier.ScoreInfoVO;
@@ -52,6 +53,9 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
 
     @Autowired
     private ForwardingEvaluationScoreRelationService forwardingEvaluationScoreRelationService;
+
+    @Autowired
+    private ForwardingWarehouseRelationServiceImpl forwardingWarehouseRelationService;
 
 
     @RequestMapping(value = "intoForwardingList", method = RequestMethod.GET)
@@ -145,6 +149,25 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
             log.error("更新货代详情出错",e);
             result.setMessage(e.getMessage());
             result.setSuccess(false);
+        }
+        return result.getResultPojo();
+    }
+
+    @RequestMapping(value = "addForwardingWarehouseRelation",method = RequestMethod.POST)
+    @SystemLogAnnotation(module = "supplier-forwarding",methods = "addForwardingWarehouseRelation")
+    public ResultPojo addForwardingWarehouseRelation(@RequestParam("forwardingId") Integer forwardingId, @RequestParam("warehouseId") Integer warehouseId){
+        Result<Integer> result = new Result<>();
+        ForwardingWarehouseRelation forwardingWarehouseRelation=new ForwardingWarehouseRelation();
+        forwardingWarehouseRelation.setWarehouseId(forwardingId.toString());
+        forwardingWarehouseRelation.setFreightforwardingId(warehouseId.toString());
+        try {
+            forwardingWarehouseRelationService.save(forwardingWarehouseRelation);
+            result.setSuccess(true);
+            result.setMessage("货代关联仓库成功");
+        }catch (Exception e){
+            log.error("新增货代仓库关联出错",e);
+            result.setSuccess(false);
+            result.setMessage(e.getMessage());
         }
         return result.getResultPojo();
     }

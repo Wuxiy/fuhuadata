@@ -55,7 +55,7 @@
         var cvendorId = $('#cvendor_id').val(),
                 table = {
                     total:0,
-                    pageSize:1,
+                    pageSize:10,
                     pageNum:0,
                     pagination:$('#pagination'),
                     container:$('#order_content'),
