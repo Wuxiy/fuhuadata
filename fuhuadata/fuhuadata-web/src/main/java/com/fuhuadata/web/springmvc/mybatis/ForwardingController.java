@@ -153,6 +153,12 @@ public class ForwardingController extends BaseController<FreightForwarding,Integ
         return result.getResultPojo();
     }
 
+    /**
+     * 货代添加关联仓库
+     * @param forwardingId
+     * @param warehouseId
+     * @return
+     */
     @RequestMapping(value = "addForwardingWarehouseRelation",method = RequestMethod.GET)
     @SystemLogAnnotation(module = "supplier-forwarding",methods = "addForwardingWarehouseRelation")
     @ResponseBody
