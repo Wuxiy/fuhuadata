@@ -101,13 +101,25 @@
                                         '<tr>' +
                                         '<td>'+table.hasField(item.code)+'</td>'+
                                         '<td><a href="'+basePath+'/supplier/warehouse/intoWarehouseBasic?id='+table.hasField(item.id)+'">'+table.hasField(item.name)+'</a></td>'+
-                                        '<td>'+table.hasField(item.shortname)+'</td>'+
-                                        '<td>'+suppropsList[table.hasField(item.supprop)]+'</td>'+
-                                        '<td>'+table.hasField(item.storaddr)+'</td>'+
-                                        '<td>'+table.hasField(item.storageArea)+'</td>'+
-                                        '<td>'+isDangersList[table.hasField(item.isDangers)]+'</td>'+
-                                        '<td>'+isInsideEntranceList[table.hasField(item.isInsideEntrance)]+'</td>'+
-                                        '<td>'+table.hasField(item.combinedScoring)+'</td>'+
+                                        '<td>'+table.hasField(item.shortname)+'</td>';
+                                if (!!item.supprop) {
+                                    tpl += '<td>'+suppropsList[table.hasField(item.supprop)]+'</td>';
+                                }else {
+                                    tpl += '<td></td>';
+                                }
+                                tpl += '<td>'+table.hasField(item.storaddr)+'</td>'+
+                                        '<td>'+table.hasField(item.storageArea)+'</td>';
+                                if (!!item.isDangers) {
+                                    tpl += '<td>'+isDangersList[table.hasField(item.isDangers)]+'</td>';
+                                }else {
+                                    tpl += '<td></td>';
+                                }
+                                if (!!item.isInsideEntrance) {
+                                    tpl += '<td>'+isInsideEntranceList[table.hasField(item.isInsideEntrance)]+'</td>';
+                                }else {
+                                    tpl += '<td></td>';
+                                }
+                                tpl += '<td>'+table.hasField(item.combinedScoring)+'</td>'+
                                         '<td>'+table.hasField(item.memo)+'</td>'+
                                         '</tr>';
                             });

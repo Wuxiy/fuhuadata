@@ -85,7 +85,7 @@
                 <a class="list-group-item" lang="zh" href="${request.contextPath}/knowledgeBase/processCostList">加工成本参考</a>
                 <a class="list-group-item" lang="zh" href="${request.contextPath}/customerEncyclopedia/customerEncyclopediaList">企业百科</a>
                 <a class="list-group-item" lang="zh" href="${request.contextPath}/exhibitionInfo/exhibitionInfoList">展会动态</a>
-                <a class="list-group-item" lang="zh" href="">其他</a>
+##                <a class="list-group-item" lang="zh" href="">其他</a>
             </div>
             <a data-toggle="collapse" href="#collapseFive" data-parent="#nav-affix" lang="zh">
                 <span class="glyphicon glyphicon-book"></span>
@@ -93,18 +93,18 @@
                 <b class="caret"></b>
             </a>
         </li>
-        <li class="shadow-in" title="决策支持" >
-            <div id="collapseSix" class="list-group collapse">
-                <a class="list-group-item" lang="zh" href="#">销售数据</a>
-                <a class="list-group-item" lang="zh" href="#">成本费用</a>
-                <a class="list-group-item" lang="zh" href="#">数据库</a>
-            </div>
-            <a data-toggle="collapse" href="#collapseSix" data-parent="#nav-affix" lang="zh">
-                <span class="glyphicon glyphicon-pencil"></span>
-                决策支持
-                <b class="caret"></b>
-            </a>
-        </li>
+##        <li class="shadow-in" title="决策支持" >
+##            <div id="collapseSix" class="list-group collapse">
+##                <a class="list-group-item" lang="zh" href="#">销售数据</a>
+##                <a class="list-group-item" lang="zh" href="#">成本费用</a>
+##                <a class="list-group-item" lang="zh" href="#">数据库</a>
+##            </div>
+##            <a data-toggle="collapse" href="#collapseSix" data-parent="#nav-affix" lang="zh">
+##                <span class="glyphicon glyphicon-pencil"></span>
+##                决策支持
+##                <b class="caret"></b>
+##            </a>
+##        </li>
         <li class="shadow-in">
             <div id="collapseSeven" class="list-group collapse">
                 <a class="list-group-item" href="#" lang="zh">数据字典维护</a>
