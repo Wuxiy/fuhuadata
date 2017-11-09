@@ -236,7 +236,8 @@
             isDangers:$('#isDangers').val(),
             isInsideEntrance:$('#isInsideEntrance').val(),
             supprop:$('#supprop').val(),
-            storageArea:$('#storageArea').val()
+            storageArea:$('#storageArea').val(),
+            storaddr:$('#storaddr').val()
         }
         return JSON.stringify(data);
     }
