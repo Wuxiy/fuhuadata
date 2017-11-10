@@ -11,9 +11,11 @@
                 <!--基本信息-->
                 <div class="panel panel-default view-HD-lg" id="panel">
                     <div class="panel-heading">
+                        #if ($shiro.hasPermission("supplier:agent:edit"))
                         <button class="btn btn-xs btn-primary panel-heading-btn pull-right" name="edit" data-view="editHide" type="button" lang="zh">
                             编辑
                         </button>
+                        #end
                         <div class="but-group btn-group btn-group-xs panel-heading-btn pull-right hidden" data-view="editView">
                             <button class="btn btn-default" name="cancel" type="button" lang="zh">取消</button>
                             <button class="btn btn-primary" name="save" type="button" lang="zh">保存</button>

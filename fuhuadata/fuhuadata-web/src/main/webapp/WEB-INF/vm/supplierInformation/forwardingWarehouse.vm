@@ -9,9 +9,11 @@
             <div class="col-xs-12 view-HD-lg">
                 <div class="panel panel-default">
                     <div class="panel-heading">
+                        #if ($shiro.hasPermission("supplier:plant:edit"))
                         <button class="btn btn-xs btn-primary panel-heading-btn pull-right" data-toggle="modal" data-target="#modal" type="button" lang="zh">
                             添加关联仓库
                         </button>
+                        #end
                         <h3 class="panel-title" lang="zh">仓库信息</h3>
                     </div>
                     <div class="panel-body clearfix">
